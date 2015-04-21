@@ -70,11 +70,25 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="Climsoft.designer.vb">
+      <DependentUpon>Climsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Climsoft.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="formElement.vb" />
+    <Compile Include="FormLaunchPad.designer.vb">
+      <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLaunchPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formStation.vb" />
+    <Compile Include="formSynopRA1.vb" />
+    <Compile Include="LoginForm1.designer.vb">
+      <DependentUpon>LoginForm1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -92,8 +106,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="mysql_climsoft_db_v4DataSet.Designer.vb" />
+    <Compile Include="mysql_climsoft_db_v4DataSet1.Designer.vb" />
+    <Compile Include="mysql_climsoft_db_v4DataSet2.Designer.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Climsoft.resx">
+      <DependentUpon>Climsoft.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLaunchPad.resx">
+      <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm1.resx">
+      <DependentUpon>LoginForm1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
