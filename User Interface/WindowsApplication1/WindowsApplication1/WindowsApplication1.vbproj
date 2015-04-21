@@ -61,10 +61,15 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,6 +97,12 @@
       <DependentUpon>Climsoft.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmStation.Designer.vb">
+      <DependentUpon>frmStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmStation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LoginForm1.Designer.vb">
       <DependentUpon>LoginForm1.vb</DependentUpon>
     </Compile>
@@ -113,10 +124,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="mysql_climsoft_db_v4StationDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mysql_climsoft_db_v4StationDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Climsoft.resx">
       <DependentUpon>Climsoft.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStation.resx">
+      <DependentUpon>frmStation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm1.resx">
       <DependentUpon>LoginForm1.vb</DependentUpon>
@@ -139,6 +158,17 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="mysql_climsoft_db_v4StationDataSet.xsc">
+      <DependentUpon>mysql_climsoft_db_v4StationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="mysql_climsoft_db_v4StationDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>mysql_climsoft_db_v4StationDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mysql_climsoft_db_v4StationDataSet.xss">
+      <DependentUpon>mysql_climsoft_db_v4StationDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

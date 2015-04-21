@@ -46,10 +46,15 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -85,6 +90,12 @@
     </Compile>
     <Compile Include="formStation.vb" />
     <Compile Include="formSynopRA1.vb" />
+    <Compile Include="frmElement.Designer.vb">
+      <DependentUpon>frmElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LoginForm1.designer.vb">
       <DependentUpon>LoginForm1.vb</DependentUpon>
     </Compile>
@@ -109,6 +120,16 @@
     <Compile Include="mysql_climsoft_db_v4DataSet.Designer.vb" />
     <Compile Include="mysql_climsoft_db_v4DataSet1.Designer.vb" />
     <Compile Include="mysql_climsoft_db_v4DataSet2.Designer.vb" />
+    <Compile Include="mysql_climsoft_db_v4DataSet3.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mysql_climsoft_db_v4DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="mysql_climsoft_db_v4DataSet4.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mysql_climsoft_db_v4DataSet4.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Climsoft.resx">
@@ -116,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLaunchPad.resx">
       <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElement.resx">
+      <DependentUpon>frmElement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm1.resx">
       <DependentUpon>LoginForm1.vb</DependentUpon>
@@ -138,6 +162,28 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="mysql_climsoft_db_v4DataSet3.xsc">
+      <DependentUpon>mysql_climsoft_db_v4DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>mysql_climsoft_db_v4DataSet3.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet3.xss">
+      <DependentUpon>mysql_climsoft_db_v4DataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet4.xsc">
+      <DependentUpon>mysql_climsoft_db_v4DataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>mysql_climsoft_db_v4DataSet4.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet4.xss">
+      <DependentUpon>mysql_climsoft_db_v4DataSet4.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
