@@ -1,0 +1,4 @@
+﻿
+Class MySqlConnection
+
+End Class
