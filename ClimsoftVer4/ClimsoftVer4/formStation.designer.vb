@@ -183,7 +183,7 @@ Partial Class formStation
         'DrainageBasinLabel
         '
         DrainageBasinLabel.AutoSize = True
-        DrainageBasinLabel.Location = New System.Drawing.Point(500, 124)
+        DrainageBasinLabel.Location = New System.Drawing.Point(528, 124)
         DrainageBasinLabel.Name = "DrainageBasinLabel"
         DrainageBasinLabel.Size = New System.Drawing.Size(82, 13)
         DrainageBasinLabel.TabIndex = 25
