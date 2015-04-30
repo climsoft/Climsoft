@@ -81,10 +81,10 @@
     <Compile Include="Climsoft.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Child1.Designer.vb">
-      <DependentUpon>Child1.vb</DependentUpon>
+    <Compile Include="frmchild2.Designer.vb">
+      <DependentUpon>frmchild2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Child1.vb">
+    <Compile Include="frmchild2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmdataentry.Designer.vb">
@@ -97,6 +97,12 @@
       <DependentUpon>frmGeneralForm.vb</DependentUpon>
     </Compile>
     <Compile Include="frmGeneralForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.Designer.vb">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.designer.vb">
@@ -125,14 +131,17 @@
     <EmbeddedResource Include="Climsoft.resx">
       <DependentUpon>Climsoft.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Child1.resx">
-      <DependentUpon>Child1.vb</DependentUpon>
+    <EmbeddedResource Include="frmchild2.resx">
+      <DependentUpon>frmchild2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmdataentry.resx">
       <DependentUpon>frmdataentry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneralForm.resx">
       <DependentUpon>frmGeneralForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>

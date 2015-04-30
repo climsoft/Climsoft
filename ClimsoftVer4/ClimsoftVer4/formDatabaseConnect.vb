@@ -37,8 +37,8 @@
             '  da.Fill(ds, "station")
             ' conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
-
-            FormLaunchPad.Show()
+            frmMainMenu.Show()
+            'FormLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try

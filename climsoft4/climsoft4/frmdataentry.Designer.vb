@@ -25,10 +25,10 @@ Partial Class frmKeyEntry
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -45,7 +45,7 @@ Partial Class frmKeyEntry
         Me.ListView1.Location = New System.Drawing.Point(0, 28)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.RightToLeftLayout = True
-        Me.ListView1.Size = New System.Drawing.Size(704, 325)
+        Me.ListView1.Size = New System.Drawing.Size(704, 322)
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -66,36 +66,37 @@ Partial Class frmKeyEntry
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
-        'EditToolStripMenuItem
-        '
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "Edit"
-        '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(89, 6)
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(152, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(92, 22)
         Me.ToolStripMenuItem3.Text = "--"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(92, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(60, 20)
+        Me.EditToolStripMenuItem.Text = "Edit List"
         '
         'frmKeyEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(717, 356)
+        Me.ClientSize = New System.Drawing.Size(717, 353)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmKeyEntry"
         Me.Text = "Data Key Entry Forms"

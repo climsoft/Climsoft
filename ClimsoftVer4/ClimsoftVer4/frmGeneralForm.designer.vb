@@ -24,6 +24,7 @@ Partial Class frmGeneralForm
     Private Sub InitializeComponent()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
+        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.SuspendLayout()
         '
         'cmdHelp
@@ -44,6 +45,10 @@ Partial Class frmGeneralForm
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
+        'HelpProvider1
+        '
+        Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
+        '
         'frmGeneralForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -51,11 +56,15 @@ Partial Class frmGeneralForm
         Me.ClientSize = New System.Drawing.Size(784, 561)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdHelp)
+        Me.HelpProvider1.SetHelpKeyword(Me, "Chapter 1")
+        Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.Name = "frmGeneralForm"
+        Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "frmGeneralForm"
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
     Friend WithEvents cmdClose As System.Windows.Forms.Button
+    Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
 End Class
