@@ -39,7 +39,7 @@ Partial Class formDatabaseConnect
         Me.ServerIP.Location = New System.Drawing.Point(160, 26)
         Me.ServerIP.Name = "ServerIP"
         Me.ServerIP.Size = New System.Drawing.Size(162, 20)
-        Me.ServerIP.TabIndex = 0
+        Me.ServerIP.TabIndex = 7
         Me.ServerIP.Text = "localhost"
         '
         'Label1
@@ -56,7 +56,7 @@ Partial Class formDatabaseConnect
         Me.userName.Location = New System.Drawing.Point(160, 114)
         Me.userName.Name = "userName"
         Me.userName.Size = New System.Drawing.Size(162, 20)
-        Me.userName.TabIndex = 2
+        Me.userName.TabIndex = 0
         '
         'Label2
         '
@@ -82,7 +82,7 @@ Partial Class formDatabaseConnect
         Me.passWord.Name = "passWord"
         Me.passWord.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.passWord.Size = New System.Drawing.Size(162, 20)
-        Me.passWord.TabIndex = 3
+        Me.passWord.TabIndex = 1
         '
         'Label3
         '
@@ -107,7 +107,7 @@ Partial Class formDatabaseConnect
         Me.databaseName.Location = New System.Drawing.Point(160, 72)
         Me.databaseName.Name = "databaseName"
         Me.databaseName.Size = New System.Drawing.Size(161, 20)
-        Me.databaseName.TabIndex = 1
+        Me.databaseName.TabIndex = 8
         Me.databaseName.Text = "mysql_climsoft_db_v4"
         '
         'Label4
