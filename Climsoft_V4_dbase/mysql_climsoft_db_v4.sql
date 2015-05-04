@@ -1,6 +1,6 @@
 # NOTE: This script is for creating primary tables for the Climsoft V4 database in MySQL version 5.6 
 # When editing the script, please note use of appropriate quotes symbol for enclosing database name, table names and field names 
-# in MySQL version 5.6 i.e. [`] and not [']
+# in MySQL version 5.6 i.e. [`] and not ['] 
 
 # Detailed explanation about the data model are contained in the application documentation
 # Addition of extra fields for local use is best done by using SQL commands on the MySQL Command Line Prompt
