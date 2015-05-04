@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE DATABASE  IF NOT EXISTS `mysql_climsoft_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `mysql_climsoft_db_v4`;
 -- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
@@ -5,6 +6,11 @@ USE `mysql_climsoft_db_v4`;
 -- Host: 127.0.0.1    Database: mysql_climsoft_db_v4
 -- ------------------------------------------------------
 -- Server version	5.0.51b-community-nt
+=======
+# NOTE: This script is for creating primary tables for the Climsoft V4 database in MySQL version 5.6 
+# When editing the script, please note use of appropriate quotes symbol for enclosing database name, table names and field names 
+# in MySQL version 5.6 i.e. [`] and not ['] 
+>>>>>>> master
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
