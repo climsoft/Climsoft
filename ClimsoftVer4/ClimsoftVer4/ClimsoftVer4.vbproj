@@ -85,11 +85,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="ClassHelp.vb" />
-=======
     <Compile Include="clsRInterface.vb" />
->>>>>>> master
     <Compile Include="formElement.designer.vb">
       <DependentUpon>formElement.vb</DependentUpon>
     </Compile>
