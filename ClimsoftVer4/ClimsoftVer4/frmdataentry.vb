@@ -73,17 +73,14 @@
             End If
         Next
        
-
         ' MsgBox("You Pressed Me")
     End Sub
 
-  
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HelpProvider1.GetHelpKeyword(Me))
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Help.ShowHelp(Me, HelpProvider1.HelpNamespace, HelpNavigator.TopicId, Me.HelpProvider1.GetHelpKeyword(Me))
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

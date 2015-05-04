@@ -29,8 +29,10 @@ Partial Class frmGeneralForm
         '
         'cmdHelp
         '
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdHelp, System.Windows.Forms.HelpNavigator.Topic)
         Me.cmdHelp.Location = New System.Drawing.Point(691, 526)
         Me.cmdHelp.Name = "cmdHelp"
+        Me.HelpProvider1.SetShowHelp(Me.cmdHelp, True)
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 0
         Me.cmdHelp.Text = "Help"
@@ -56,8 +58,10 @@ Partial Class frmGeneralForm
         Me.ClientSize = New System.Drawing.Size(784, 561)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdHelp)
-        Me.HelpProvider1.SetHelpKeyword(Me, "Chapter 1")
+        Me.HelpButton = True
+        Me.HelpProvider1.SetHelpKeyword(Me, "aboutclimsoft4.htm")
         Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
+        Me.HelpProvider1.SetHelpString(Me, "Topic 1")
         Me.Name = "frmGeneralForm"
         Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "frmGeneralForm"
