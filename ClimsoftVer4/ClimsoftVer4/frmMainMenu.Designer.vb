@@ -79,7 +79,6 @@ Partial Class frmMainMenu
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdkeyentry = New System.Windows.Forms.Button()
-        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.MenuStrip2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -650,10 +649,6 @@ Partial Class frmMainMenu
         Me.cmdkeyentry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdkeyentry.UseVisualStyleBackColor = True
         '
-        'HelpProvider1
-        '
-        Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
-        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -661,11 +656,8 @@ Partial Class frmMainMenu
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip2)
-        Me.HelpProvider1.SetHelpKeyword(Me, "Chapter 1")
-        Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.IsMdiContainer = True
         Me.Name = "frmMainMenu"
-        Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "Main Menu"
         Me.Controls.SetChildIndex(Me.MenuStrip2, 0)
         Me.Controls.SetChildIndex(Me.ToolStrip1, 0)
@@ -739,6 +731,5 @@ Partial Class frmMainMenu
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdkeyentry As System.Windows.Forms.Button
-    Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
 
 End Class
