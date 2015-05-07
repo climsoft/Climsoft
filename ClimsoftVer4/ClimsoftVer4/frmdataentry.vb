@@ -11,10 +11,10 @@
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-
+        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
         'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
+        MyConnectionString = LoginForm.txtusrpwd.Text
         ListView1.Columns.Add("Form Name", 150, HorizontalAlignment.Left)
         ListView1.Columns.Add("Form Details", 600, HorizontalAlignment.Left)
 
@@ -81,6 +81,14 @@
     End Sub
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
+
+    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
     End Sub
 End Class
