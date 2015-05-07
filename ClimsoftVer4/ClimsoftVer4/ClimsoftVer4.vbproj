@@ -75,6 +75,13 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formDatabaseConnect.designer.vb">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDatabaseConnect.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formElement.designer.vb">
       <DependentUpon>formElement.vb</DependentUpon>
     </Compile>
@@ -99,35 +106,10 @@
     <Compile Include="formSynopRA1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formDatabaseConnect.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formDatabaseConnect.Designer.vb">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAction.designer.vb">
+    <Compile Include="frmAction.Designer.vb">
       <DependentUpon>frmAction.vb</DependentUpon>
     </Compile>
     <Compile Include="frmAction.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmdataentry.Designer.vb">
-      <DependentUpon>frmdataentry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmdataentry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGeneralForm.designer.vb">
-      <DependentUpon>frmGeneralForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmGeneralForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainMenu.Designer.vb">
-      <DependentUpon>frmMainMenu.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -147,6 +129,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formDatabaseConnect.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
     </EmbeddedResource>
@@ -159,20 +144,8 @@
     <EmbeddedResource Include="formSynopRA1.resx">
       <DependentUpon>formSynopRA1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDatabaseConnect.resx">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmAction.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmdataentry.resx">
-      <DependentUpon>frmdataentry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneralForm.resx">
-      <DependentUpon>frmGeneralForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMenu.resx">
-      <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -182,7 +155,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
