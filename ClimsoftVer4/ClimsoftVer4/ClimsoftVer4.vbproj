@@ -86,9 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassHelp.vb" />
-<<<<<<< HEAD
-    <Compile Include="clsRInterface.vb" />
-=======
     <Compile Include="clsProducts.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formDbUtilities.Designer.vb">
@@ -97,7 +94,6 @@
     <Compile Include="formDbUtilities.vb">
       <SubType>Form</SubType>
     </Compile>
->>>>>>> Revised_Project_File_08052015
     <Compile Include="formElement.designer.vb">
       <DependentUpon>formElement.vb</DependentUpon>
     </Compile>
@@ -170,12 +166,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <EmbeddedResource Include="formDbUtilities.resx">
       <DependentUpon>formDbUtilities.vb</DependentUpon>
     </EmbeddedResource>
->>>>>>> Revised_Project_File_08052015
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
     </EmbeddedResource>
