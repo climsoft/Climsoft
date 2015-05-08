@@ -30,7 +30,7 @@ Partial Class frmAction
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(681, 517)
+        Me.cmdHelp.Location = New System.Drawing.Point(574, 324)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 0
@@ -39,7 +39,7 @@ Partial Class frmAction
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(519, 517)
+        Me.cmdCancel.Location = New System.Drawing.Point(412, 324)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 1
@@ -48,7 +48,7 @@ Partial Class frmAction
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(438, 517)
+        Me.cmdOk.Location = New System.Drawing.Point(331, 324)
         Me.cmdOk.Name = "cmdOk"
         Me.cmdOk.Size = New System.Drawing.Size(75, 23)
         Me.cmdOk.TabIndex = 2
@@ -57,7 +57,7 @@ Partial Class frmAction
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(600, 517)
+        Me.cmdApply.Location = New System.Drawing.Point(493, 324)
         Me.cmdApply.Name = "cmdApply"
         Me.cmdApply.Size = New System.Drawing.Size(75, 23)
         Me.cmdApply.TabIndex = 3
@@ -68,7 +68,7 @@ Partial Class frmAction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.ClientSize = New System.Drawing.Size(677, 368)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)

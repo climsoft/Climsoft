@@ -1,44 +1,19 @@
 ﻿Public Class formDatabaseConnect
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
-    Dim usrName As String
-    Dim usrPwd As String
-    Dim dbServer As String
-    Dim dbName As String
-    'Dim inc As Integer
-    'Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-    ' Dim ds As New DataSet
-    'Dim sql As String
-    'Dim maxRows As Integer
-
+    
 
     Private Sub btnDatabaseConnect_Click(sender As Object, e As EventArgs) Handles btnDatabaseConnect.Click
-
-        usrName = userName.Text
-        usrPwd = passWord.Text
-        dbServer = ServerIP.Text
-        dbName = databaseName.Text
-        ' myConnectionString = "server=127.0.0.1;" _
-        '          & "uid=root;" _
-        '          & "pwd=admin;" _
-        '         & "database=mysql_climsoft_db_v4;"
-        myConnectionString = "server=" & dbServer & ";" _
-                & "uid=" & usrName & ";" _
-                & "pwd=" & usrPwd & ";" _
-                & "database=" & dbName & ";"
+       
+        myConnectionString = txtDbParameters.Text & "uid=" & userName.Text & ";pwd=" & passWord.Text & ";"
+        
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()
 
-            MsgBox("Connection Successful !", MsgBoxStyle.Information)
-
-            '  sql = "SELECT * FROM station"
-            ' da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            '  da.Fill(ds, "station")
-            ' conn.Close()
-            ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
-            frmMainMenu.Show()
-            'FormLaunchPad.Show()
+            ' MsgBox("Connection Successful !", MsgBoxStyle.Information)
+            Me.Hide()
+            FormLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
@@ -60,6 +35,8 @@
     End Sub
 
     Private Sub frmTest_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'inc = -1
+        Dim configFilename As String = "c:\config\dbconfig.inf"
+        Dim objTextReader As New System.IO.StreamReader(configFilename)
+        txtDbParameters.Text = objTextReader.ReadLine
     End Sub
 End Class

@@ -1,1 +1,1 @@
-USE mysql_main_climsoft_db_v4;LOAD DATA INFILE 'climsoft_v4_elements.csv' IGNORE INTO TABLE obsElement FIELDS TERMINATED BY ',' (elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementType);
+USE mysql_climsoft_db_v4;LOAD DATA INFILE 'climsoft_v4_element_information.csv' IGNORE INTO TABLE obsElement FIELDS TERMINATED BY ',' (elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementType);
