@@ -55,6 +55,14 @@ Partial Class formStation
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
+        Me.btnMoveLast = New System.Windows.Forms.Button()
+        Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnMovePrevious = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
         StationIdLabel = New System.Windows.Forms.Label()
         StationNameLabel = New System.Windows.Forms.Label()
         LatitudeLabel = New System.Windows.Forms.Label()
@@ -183,7 +191,7 @@ Partial Class formStation
         'DrainageBasinLabel
         '
         DrainageBasinLabel.AutoSize = True
-        DrainageBasinLabel.Location = New System.Drawing.Point(528, 124)
+        DrainageBasinLabel.Location = New System.Drawing.Point(500, 124)
         DrainageBasinLabel.Name = "DrainageBasinLabel"
         DrainageBasinLabel.Size = New System.Drawing.Size(82, 13)
         DrainageBasinLabel.TabIndex = 25
@@ -213,42 +221,42 @@ Partial Class formStation
         Me.StationIdTextBox.Location = New System.Drawing.Point(141, 34)
         Me.StationIdTextBox.Name = "StationIdTextBox"
         Me.StationIdTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.StationIdTextBox.TabIndex = 2
+        Me.StationIdTextBox.TabIndex = 0
         '
         'StationNameTextBox
         '
         Me.StationNameTextBox.Location = New System.Drawing.Point(368, 37)
         Me.StationNameTextBox.Name = "StationNameTextBox"
         Me.StationNameTextBox.Size = New System.Drawing.Size(175, 20)
-        Me.StationNameTextBox.TabIndex = 4
+        Me.StationNameTextBox.TabIndex = 1
         '
         'LatitudeTextBox
         '
         Me.LatitudeTextBox.Location = New System.Drawing.Point(141, 81)
         Me.LatitudeTextBox.Name = "LatitudeTextBox"
         Me.LatitudeTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.LatitudeTextBox.TabIndex = 6
+        Me.LatitudeTextBox.TabIndex = 3
         '
         'LongitudeTextBox
         '
         Me.LongitudeTextBox.Location = New System.Drawing.Point(368, 81)
         Me.LongitudeTextBox.Name = "LongitudeTextBox"
         Me.LongitudeTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.LongitudeTextBox.TabIndex = 8
+        Me.LongitudeTextBox.TabIndex = 4
         '
         'ElevationTextBox
         '
         Me.ElevationTextBox.Location = New System.Drawing.Point(616, 84)
         Me.ElevationTextBox.Name = "ElevationTextBox"
         Me.ElevationTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.ElevationTextBox.TabIndex = 10
+        Me.ElevationTextBox.TabIndex = 5
         '
         'GeoLocationMethodTextBox
         '
         Me.GeoLocationMethodTextBox.Location = New System.Drawing.Point(141, 255)
         Me.GeoLocationMethodTextBox.Name = "GeoLocationMethodTextBox"
         Me.GeoLocationMethodTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.GeoLocationMethodTextBox.TabIndex = 12
+        Me.GeoLocationMethodTextBox.TabIndex = 13
         '
         'GeoLocationAccuracyTextBox
         '
@@ -259,63 +267,64 @@ Partial Class formStation
         '
         'OpeningDatetimeDateTimePicker
         '
+        Me.OpeningDatetimeDateTimePicker.CustomFormat = """MM dd yyyy hh mm ss"""
         Me.OpeningDatetimeDateTimePicker.Location = New System.Drawing.Point(368, 166)
         Me.OpeningDatetimeDateTimePicker.Name = "OpeningDatetimeDateTimePicker"
         Me.OpeningDatetimeDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.OpeningDatetimeDateTimePicker.TabIndex = 16
+        Me.OpeningDatetimeDateTimePicker.TabIndex = 10
         '
         'ClosingDatetimeDateTimePicker
         '
         Me.ClosingDatetimeDateTimePicker.Location = New System.Drawing.Point(368, 206)
         Me.ClosingDatetimeDateTimePicker.Name = "ClosingDatetimeDateTimePicker"
         Me.ClosingDatetimeDateTimePicker.Size = New System.Drawing.Size(200, 20)
-        Me.ClosingDatetimeDateTimePicker.TabIndex = 18
+        Me.ClosingDatetimeDateTimePicker.TabIndex = 12
         '
         'CountryTextBox
         '
         Me.CountryTextBox.Location = New System.Drawing.Point(616, 40)
         Me.CountryTextBox.Name = "CountryTextBox"
         Me.CountryTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.CountryTextBox.TabIndex = 20
+        Me.CountryTextBox.TabIndex = 2
         '
         'AuthorityTextBox
         '
         Me.AuthorityTextBox.Location = New System.Drawing.Point(141, 121)
         Me.AuthorityTextBox.Name = "AuthorityTextBox"
         Me.AuthorityTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.AuthorityTextBox.TabIndex = 22
+        Me.AuthorityTextBox.TabIndex = 6
         '
         'AdminRegionTextBox
         '
         Me.AdminRegionTextBox.Location = New System.Drawing.Point(368, 124)
         Me.AdminRegionTextBox.Name = "AdminRegionTextBox"
         Me.AdminRegionTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.AdminRegionTextBox.TabIndex = 24
+        Me.AdminRegionTextBox.TabIndex = 7
         '
         'DrainageBasinTextBox
         '
         Me.DrainageBasinTextBox.Location = New System.Drawing.Point(616, 121)
         Me.DrainageBasinTextBox.Name = "DrainageBasinTextBox"
         Me.DrainageBasinTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.DrainageBasinTextBox.TabIndex = 26
+        Me.DrainageBasinTextBox.TabIndex = 8
         '
         'CptSelectionTextBox
         '
         Me.CptSelectionTextBox.Location = New System.Drawing.Point(141, 210)
         Me.CptSelectionTextBox.Name = "CptSelectionTextBox"
         Me.CptSelectionTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.CptSelectionTextBox.TabIndex = 30
+        Me.CptSelectionTextBox.TabIndex = 11
         '
         'StationOperationalTextBox
         '
         Me.StationOperationalTextBox.Location = New System.Drawing.Point(141, 170)
         Me.StationOperationalTextBox.Name = "StationOperationalTextBox"
         Me.StationOperationalTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.StationOperationalTextBox.TabIndex = 32
+        Me.StationOperationalTextBox.TabIndex = 9
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(441, 367)
+        Me.btnClose.Location = New System.Drawing.Point(566, 365)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 33
@@ -324,11 +333,11 @@ Partial Class formStation
         '
         'btnMoveNext
         '
-        Me.btnMoveNext.Location = New System.Drawing.Point(293, 367)
+        Me.btnMoveNext.Location = New System.Drawing.Point(485, 326)
         Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(75, 23)
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 34
-        Me.btnMoveNext.Text = "Move Next"
+        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
@@ -338,11 +347,93 @@ Partial Class formStation
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 35
         '
+        'btnMoveLast
+        '
+        Me.btnMoveLast.Location = New System.Drawing.Point(529, 326)
+        Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(31, 23)
+        Me.btnMoveLast.TabIndex = 36
+        Me.btnMoveLast.Text = ">>|"
+        Me.btnMoveLast.UseVisualStyleBackColor = True
+        '
+        'btnMoveFirst
+        '
+        Me.btnMoveFirst.Location = New System.Drawing.Point(239, 326)
+        Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 37
+        Me.btnMoveFirst.Text = "|<<"
+        Me.btnMoveFirst.UseVisualStyleBackColor = True
+        '
+        'btnMovePrevious
+        '
+        Me.btnMovePrevious.Location = New System.Drawing.Point(286, 326)
+        Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.TabIndex = 38
+        Me.btnMovePrevious.Text = "<<"
+        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(404, 365)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 39
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(323, 365)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 40
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(242, 365)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 41
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnCommit
+        '
+        Me.btnCommit.Enabled = False
+        Me.btnCommit.Location = New System.Drawing.Point(161, 365)
+        Me.btnCommit.Name = "btnCommit"
+        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.TabIndex = 42
+        Me.btnCommit.Text = "Commit"
+        Me.btnCommit.UseVisualStyleBackColor = True
+        '
+        'btnClear
+        '
+        Me.btnClear.Enabled = False
+        Me.btnClear.Location = New System.Drawing.Point(485, 365)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 43
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
         'formStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(779, 421)
+        Me.ClientSize = New System.Drawing.Size(809, 421)
+        Me.Controls.Add(Me.btnClear)
+        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnAddNew)
+        Me.Controls.Add(Me.btnUpdate)
+        Me.Controls.Add(Me.btnMovePrevious)
+        Me.Controls.Add(Me.btnMoveFirst)
+        Me.Controls.Add(Me.btnMoveLast)
         Me.Controls.Add(Me.recNumberTextBox)
         Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
@@ -401,4 +492,12 @@ Partial Class formStation
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnMoveNext As System.Windows.Forms.Button
     Friend WithEvents recNumberTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents btnMoveLast As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevious As System.Windows.Forms.Button
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents btnAddNew As System.Windows.Forms.Button
+    Friend WithEvents btnDelete As System.Windows.Forms.Button
+    Friend WithEvents btnCommit As System.Windows.Forms.Button
+    Friend WithEvents btnClear As System.Windows.Forms.Button
 End Class
