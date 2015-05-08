@@ -47,24 +47,14 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamicInterop">
-      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\MySQL\MySQL Connector Net 6.9.5\Assemblies\v4.5\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="RDotNet">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="RDotNet.NativeLibrary">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -86,18 +76,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassHelp.vb" />
-<<<<<<< HEAD
-    <Compile Include="clsRInterface.vb" />
-=======
     <Compile Include="clsProducts.vb" />
-    <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formDbUtilities.Designer.vb">
       <DependentUpon>formDbUtilities.vb</DependentUpon>
     </Compile>
     <Compile Include="formDbUtilities.vb">
+    <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formDatabaseConnect.designer.vb">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDatabaseConnect.vb">
       <SubType>Form</SubType>
     </Compile>
->>>>>>> Revised_Project_File_08052015
     <Compile Include="formElement.designer.vb">
       <DependentUpon>formElement.vb</DependentUpon>
     </Compile>
@@ -108,6 +98,18 @@
       <DependentUpon>FormLaunchPad.vb</DependentUpon>
     </Compile>
     <Compile Include="FormLaunchPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProducts.Designer.vb">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.Designer.vb">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formStation.designer.vb">
@@ -122,14 +124,7 @@
     <Compile Include="formSynopRA1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formDatabaseConnect.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="formDatabaseConnect.Designer.vb">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAction.designer.vb">
+    <Compile Include="frmAction.Designer.vb">
       <DependentUpon>frmAction.vb</DependentUpon>
     </Compile>
     <Compile Include="frmAction.vb">
@@ -153,6 +148,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LoginForm.Designer.vb">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -168,28 +169,36 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SplashScreen.Designer.vb">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <EmbeddedResource Include="formDbUtilities.resx">
       <DependentUpon>formDbUtilities.vb</DependentUpon>
+    <EmbeddedResource Include="formDatabaseConnect.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
     </EmbeddedResource>
->>>>>>> Revised_Project_File_08052015
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLaunchPad.resx">
       <DependentUpon>FormLaunchPad.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formProducts.resx">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelectCriteria.resx">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formStation.resx">
       <DependentUpon>formStation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formSynopRA1.resx">
       <DependentUpon>formSynopRA1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDatabaseConnect.resx">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAction.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
@@ -203,11 +212,17 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -223,7 +238,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Resources\MySql.Data.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
