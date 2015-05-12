@@ -131,6 +131,16 @@ Partial Class formSynopRA1
         Me.Val_Elem174TextBox = New System.Windows.Forms.TextBox()
         Me.Val_Elem046TextBox = New System.Windows.Forms.TextBox()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnMovePrevious = New System.Windows.Forms.Button()
+        Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnMoveLast = New System.Windows.Forms.Button()
+        Me.recNumberTextBox = New System.Windows.Forms.TextBox()
+        Me.btnMoveNext = New System.Windows.Forms.Button()
         StationIdLabel = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         MmLabel = New System.Windows.Forms.Label()
@@ -1053,18 +1063,118 @@ Partial Class formSynopRA1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(622, 556)
+        Me.btnClose.Location = New System.Drawing.Point(529, 595)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 109
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnClear
+        '
+        Me.btnClear.Enabled = False
+        Me.btnClear.Location = New System.Drawing.Point(446, 595)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 129
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnCommit
+        '
+        Me.btnCommit.Enabled = False
+        Me.btnCommit.Location = New System.Drawing.Point(122, 595)
+        Me.btnCommit.Name = "btnCommit"
+        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.TabIndex = 128
+        Me.btnCommit.Text = "Commit"
+        Me.btnCommit.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(203, 595)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 127
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(284, 595)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 126
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(365, 595)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 125
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnMovePrevious
+        '
+        Me.btnMovePrevious.Location = New System.Drawing.Point(247, 556)
+        Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.TabIndex = 124
+        Me.btnMovePrevious.Text = "<<"
+        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        '
+        'btnMoveFirst
+        '
+        Me.btnMoveFirst.Location = New System.Drawing.Point(200, 556)
+        Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 123
+        Me.btnMoveFirst.Text = "|<<"
+        Me.btnMoveFirst.UseVisualStyleBackColor = True
+        '
+        'btnMoveLast
+        '
+        Me.btnMoveLast.Location = New System.Drawing.Point(490, 556)
+        Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(31, 23)
+        Me.btnMoveLast.TabIndex = 122
+        Me.btnMoveLast.Text = ">>|"
+        Me.btnMoveLast.UseVisualStyleBackColor = True
+        '
+        'recNumberTextBox
+        '
+        Me.recNumberTextBox.Location = New System.Drawing.Point(299, 558)
+        Me.recNumberTextBox.Name = "recNumberTextBox"
+        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
+        Me.recNumberTextBox.TabIndex = 121
+        '
+        'btnMoveNext
+        '
+        Me.btnMoveNext.Location = New System.Drawing.Point(446, 556)
+        Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.TabIndex = 120
+        Me.btnMoveNext.Text = ">>"
+        Me.btnMoveNext.UseVisualStyleBackColor = True
+        '
         'formSynopRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(789, 594)
+        Me.ClientSize = New System.Drawing.Size(789, 632)
+        Me.Controls.Add(Me.btnClear)
+        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnAddNew)
+        Me.Controls.Add(Me.btnUpdate)
+        Me.Controls.Add(Me.btnMovePrevious)
+        Me.Controls.Add(Me.btnMoveFirst)
+        Me.Controls.Add(Me.btnMoveLast)
+        Me.Controls.Add(Me.recNumberTextBox)
+        Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Val_Elem046Label)
         Me.Controls.Add(Me.Val_Elem046TextBox)
@@ -1236,5 +1346,15 @@ Partial Class formSynopRA1
     Friend WithEvents Val_Elem174TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Val_Elem046TextBox As System.Windows.Forms.TextBox
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents btnClear As System.Windows.Forms.Button
+    Friend WithEvents btnCommit As System.Windows.Forms.Button
+    Friend WithEvents btnDelete As System.Windows.Forms.Button
+    Friend WithEvents btnAddNew As System.Windows.Forms.Button
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevious As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLast As System.Windows.Forms.Button
+    Friend WithEvents recNumberTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents btnMoveNext As System.Windows.Forms.Button
 
 End Class
