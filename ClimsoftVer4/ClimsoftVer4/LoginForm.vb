@@ -11,12 +11,11 @@
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
         ConfigFile()
-        frmMainMenu.Show()
-        Me.Hide()
+        'frmMainMenu.Show()
+        'Me.Hide()
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
-
         Me.Close()
     End Sub
 
@@ -24,8 +23,8 @@
         Try
             ' Create an instance of StreamReader to read from a file. 
             ' Then open the configuration file
-
-            Using sr As New System.IO.StreamReader(Application.StartupPath & "\config.inf")
+            'MsgBox(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
+            Using sr As New System.IO.StreamReader(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
                 Dim line As String
                 Dim connectstr As String
 
@@ -40,6 +39,10 @@
                 conn.ConnectionString = connectstr 'line
                 conn.Open()
                 sr.Close()
+
+                ' Open Main Dialog Form
+                frmMainMenu.Show()
+                Me.Hide()
             End Using
         Catch e As Exception
             MsgBox("Login failure")
