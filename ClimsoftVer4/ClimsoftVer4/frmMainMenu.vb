@@ -12,7 +12,8 @@
         End
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
+        'formProductsSelectCriteria.Show()
         FormLaunchPad.Show()
     End Sub
 
@@ -34,11 +35,13 @@
         formDbUtilities.Show()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        formProductsSelectCriteria.Show()
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles cmdProducts.Click
+        frmProducts.Show()
     End Sub
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
+
 End Class

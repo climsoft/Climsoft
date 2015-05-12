@@ -11,7 +11,7 @@
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4;"
         'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
         MyConnectionString = LoginForm.txtusrpwd.Text
@@ -73,7 +73,7 @@
             End If
         Next
        
-        ' MsgBox("You Pressed Me")
+
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click

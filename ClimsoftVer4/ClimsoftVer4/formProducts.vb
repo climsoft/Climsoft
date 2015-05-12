@@ -9,8 +9,8 @@
     Dim kounts As Integer
     Dim SelectedProduct
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-
+        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+        MyConnectionString = LoginForm.txtusrpwd.Text
         Try
             conn.ConnectionString = MyConnectionString
             conn.Open()
@@ -68,6 +68,7 @@
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstvProducts.Click
         Dim prtyp As New ClassHelp
+        'Dim formcaption As String
 
         For i = 0 To lstvProducts.Items.Count - 1
             If (lstvProducts.Items(i).Selected) Then
@@ -76,10 +77,14 @@
             End If
         Next
 
-        ' MsgBox(prtyp.ProductType)
         formProductsSelectCriteria.lblProductType.Text = prtyp.ProductType
+
+        'formcaption = ""
+        'formcaption = formProductsSelectCriteria.Text & " For " & prtyp.ProductType
+        'formProductsSelectCriteria.Text = formcaption
+        'MsgBox(prtyp.ProductType)
+
         formProductsSelectCriteria.Show()
-        ' MsgBox(SelectedProduct)
 
     End Sub
 
