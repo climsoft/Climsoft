@@ -170,7 +170,7 @@
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim stnlist, elmlist, sdate, edate, sql, sql1, sql0 As String
-        'MsgBox(lblProductType.Text)
+        MsgBox(lblProductType.Text)
 
         ' Get the stations list
         stnlist = ""
@@ -197,10 +197,15 @@
         sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & ":" & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
         edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & ":" & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
+        ' Contrust a SQL statement for creating a query for the selected data product
+
         'sql0 = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
         Select Case Me.lblProductType.Text
             Case "WindRose"
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+            Case "Hourly"
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime," & "SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM " & "(SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & " '111' OR describedBy = '112'" & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
@@ -262,6 +267,14 @@ Err:
     End Sub
 
     Private Sub prgrbProducts_Click(sender As Object, e As EventArgs) Handles prgrbProducts.Click
+
+    End Sub
+
+    Private Sub lstvStations_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvStations.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub lstvElements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvElements.SelectedIndexChanged
 
     End Sub
 End Class
