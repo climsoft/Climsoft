@@ -24,7 +24,8 @@
         Try
             ' Create an instance of StreamReader to read from a file. 
             ' Then open the configuration file
-            Using sr As New System.IO.StreamReader(Application.StartupPath & "\config1.inf")
+
+            Using sr As New System.IO.StreamReader(Application.StartupPath & "\config.inf")
                 Dim line As String
                 Dim connectstr As String
 
@@ -33,6 +34,7 @@
 
                 ' Contruct the connection string using the output the file
                 connectstr = line & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";"
+
                 'MsgBox(connectstr)
                 txtusrpwd.Text = connectstr
                 conn.ConnectionString = connectstr 'line

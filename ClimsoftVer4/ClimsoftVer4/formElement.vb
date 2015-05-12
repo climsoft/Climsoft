@@ -15,7 +15,7 @@
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementId")
+        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("code")
         AbbreviationTextBox.Text = ds.Tables("obselement").Rows(inc).Item("abbreviation")
         ElementNameTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementname")
         DescriptionTextBox.Text = ds.Tables("obselement").Rows(inc).Item("description")
@@ -40,23 +40,24 @@
 
         'Set the record index counter to the first row
         inc = 0
-
-        myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
+        ' The following line was commented because the login for was changed from that designed by Albert to one designed by Samuel
+        'myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
+        myConnectionString = LoginForm.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()
 
-            Sql = "SELECT * FROM obselement"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            sql = "SELECT * FROM obselement"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "obselement")
             conn.Close()
-            
+
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
         maxRows = ds.Tables("obselement").Rows.Count
 
-        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementId")
+        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("code")
         AbbreviationTextBox.Text = ds.Tables("obselement").Rows(inc).Item("abbreviation")
         ElementNameTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementname")
         DescriptionTextBox.Text = ds.Tables("obselement").Rows(inc).Item("description")

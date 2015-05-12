@@ -47,7 +47,8 @@
         'Set the record index counter to the first row
         inc = 0
        
-        myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
+        'myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
+        myConnectionString = LoginForm.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()

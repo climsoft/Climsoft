@@ -35,7 +35,9 @@
     End Sub
 
     Private Sub frmTest_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim configFilename As String = "c:\config\dbconfig.inf"
+        'Dim configFilename As String = "c:\config\dbconfig.inf"
+        Dim configFilename As String = Application.StartupPath & "\config.inf"
+        'MsgBox(configFilename)
         Dim objTextReader As New System.IO.StreamReader(configFilename)
         txtDbParameters.Text = objTextReader.ReadLine
     End Sub

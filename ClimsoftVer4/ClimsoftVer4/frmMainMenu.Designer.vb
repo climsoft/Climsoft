@@ -71,9 +71,9 @@ Partial Class frmMainMenu
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.cmdMetadata = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.cmdProducts = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -363,9 +363,9 @@ Partial Class frmMainMenu
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Button8)
         Me.Panel1.Controls.Add(Me.Button7)
-        Me.Panel1.Controls.Add(Me.Button6)
+        Me.Panel1.Controls.Add(Me.cmdMetadata)
         Me.Panel1.Controls.Add(Me.Button5)
-        Me.Panel1.Controls.Add(Me.Button4)
+        Me.Panel1.Controls.Add(Me.cmdProducts)
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.Button2)
@@ -513,23 +513,23 @@ Partial Class frmMainMenu
         Me.Button7.UseCompatibleTextRendering = True
         Me.Button7.UseVisualStyleBackColor = True
         '
-        'Button6
+        'cmdMetadata
         '
-        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
-        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button6.FlatAppearance.BorderSize = 4
-        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.ForeColor = System.Drawing.Color.Red
-        Me.Button6.Location = New System.Drawing.Point(9, 323)
-        Me.Button6.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Padding = New System.Windows.Forms.Padding(5)
-        Me.Button6.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Button6.Size = New System.Drawing.Size(83, 47)
-        Me.Button6.TabIndex = 23
-        Me.Button6.Text = "Metadata"
-        Me.Button6.UseCompatibleTextRendering = True
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.cmdMetadata.BackgroundImage = CType(resources.GetObject("cmdMetadata.BackgroundImage"), System.Drawing.Image)
+        Me.cmdMetadata.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdMetadata.FlatAppearance.BorderSize = 4
+        Me.cmdMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdMetadata.ForeColor = System.Drawing.Color.Red
+        Me.cmdMetadata.Location = New System.Drawing.Point(9, 323)
+        Me.cmdMetadata.Margin = New System.Windows.Forms.Padding(0)
+        Me.cmdMetadata.Name = "cmdMetadata"
+        Me.cmdMetadata.Padding = New System.Windows.Forms.Padding(5)
+        Me.cmdMetadata.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.cmdMetadata.Size = New System.Drawing.Size(83, 47)
+        Me.cmdMetadata.TabIndex = 23
+        Me.cmdMetadata.Text = "Metadata"
+        Me.cmdMetadata.UseCompatibleTextRendering = True
+        Me.cmdMetadata.UseVisualStyleBackColor = True
         '
         'Button5
         '
@@ -549,23 +549,23 @@ Partial Class frmMainMenu
         Me.Button5.UseCompatibleTextRendering = True
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'Button4
+        'cmdProducts
         '
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button4.FlatAppearance.BorderSize = 4
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.Color.Red
-        Me.Button4.Location = New System.Drawing.Point(9, 227)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Padding = New System.Windows.Forms.Padding(5)
-        Me.Button4.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Button4.Size = New System.Drawing.Size(83, 47)
-        Me.Button4.TabIndex = 21
-        Me.Button4.Text = "Products"
-        Me.Button4.UseCompatibleTextRendering = True
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.cmdProducts.BackgroundImage = CType(resources.GetObject("cmdProducts.BackgroundImage"), System.Drawing.Image)
+        Me.cmdProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdProducts.FlatAppearance.BorderSize = 4
+        Me.cmdProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdProducts.ForeColor = System.Drawing.Color.Red
+        Me.cmdProducts.Location = New System.Drawing.Point(9, 227)
+        Me.cmdProducts.Margin = New System.Windows.Forms.Padding(0)
+        Me.cmdProducts.Name = "cmdProducts"
+        Me.cmdProducts.Padding = New System.Windows.Forms.Padding(5)
+        Me.cmdProducts.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.cmdProducts.Size = New System.Drawing.Size(83, 47)
+        Me.cmdProducts.TabIndex = 21
+        Me.cmdProducts.Text = "Products"
+        Me.cmdProducts.UseCompatibleTextRendering = True
+        Me.cmdProducts.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -723,9 +723,9 @@ Partial Class frmMainMenu
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents cmdMetadata As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents cmdProducts As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
