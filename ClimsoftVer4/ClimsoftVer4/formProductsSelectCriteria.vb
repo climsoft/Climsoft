@@ -169,7 +169,7 @@
 
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Dim stnlist, elmlist, sdate, edate, sql, sql1, sql0 As String
+        Dim stnlist, elmlist, sdate, edate, sql As String
         MsgBox(lblProductType.Text)
 
         ' Get the stations list
