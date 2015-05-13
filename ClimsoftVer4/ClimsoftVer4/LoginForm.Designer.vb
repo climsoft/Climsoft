@@ -103,7 +103,7 @@ Partial Class LoginForm
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(197, 127)
+        Me.txtusrpwd.Location = New System.Drawing.Point(197, 44)
         Me.txtusrpwd.Name = "txtusrpwd"
         Me.txtusrpwd.Size = New System.Drawing.Size(177, 20)
         Me.txtusrpwd.TabIndex = 6
@@ -116,7 +116,6 @@ Partial Class LoginForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(401, 192)
-        Me.Controls.Add(Me.txtusrpwd)
         Me.Controls.Add(Me.Cancel)
         Me.Controls.Add(Me.OK)
         Me.Controls.Add(Me.txtPassword)
@@ -124,6 +123,7 @@ Partial Class LoginForm
         Me.Controls.Add(Me.PasswordLabel)
         Me.Controls.Add(Me.UsernameLabel)
         Me.Controls.Add(Me.LogoPictureBox)
+        Me.Controls.Add(Me.txtusrpwd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False

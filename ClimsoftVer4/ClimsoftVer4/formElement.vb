@@ -15,7 +15,7 @@
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("code")
+        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementId")
         AbbreviationTextBox.Text = ds.Tables("obselement").Rows(inc).Item("abbreviation")
         ElementNameTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementname")
         DescriptionTextBox.Text = ds.Tables("obselement").Rows(inc).Item("description")
@@ -57,7 +57,7 @@
         End Try
         maxRows = ds.Tables("obselement").Rows.Count
 
-        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("code")
+        CodeTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementId")
         AbbreviationTextBox.Text = ds.Tables("obselement").Rows(inc).Item("abbreviation")
         ElementNameTextBox.Text = ds.Tables("obselement").Rows(inc).Item("elementname")
         DescriptionTextBox.Text = ds.Tables("obselement").Rows(inc).Item("description")
