@@ -62,7 +62,7 @@
             conn.ConnectionString = MyConnectionString
             conn.Open()
 
-            sql = "SELECT * FROM station"
+            sql = "SELECT * FROM station ORDER BY stationName"
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "station")
@@ -81,7 +81,7 @@
         Next
 
         ds.Clear()
-        sql = "SELECT * FROM obselement"
+        sql = "SELECT * FROM obselement ORDER BY description"
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "obselement")
@@ -136,7 +136,7 @@
         lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
         'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
-        sql = "SELECT code, description FROM obselement WHERE description=""" & prod & """"
+        sql = "SELECT elementId, description FROM obselement WHERE description=""" & prod & """"
                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "obselement")
@@ -146,7 +146,7 @@
         Dim itm = New ListViewItem
 
         For kount = 0 To maxRows - 1 Step 1
-            str(0) = ds.Tables("obselement").Rows(kount).Item("code")
+            str(0) = ds.Tables("obselement").Rows(kount).Item("elementId")
             str(1) = ds.Tables("obselement").Rows(kount).Item("description")
             itm = New ListViewItem(str)
             lstvElements.Items.Add(itm)
@@ -169,7 +169,8 @@
 
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Dim stnlist, elmlist, sdate, edate, sql As String
+        Dim stnlist, elmlist, elmcolmn, sdate, edate, sql As String
+        Dim flds As Integer
         MsgBox(lblProductType.Text)
 
         ' Get the stations list
@@ -186,16 +187,23 @@
 
         ' Get the Elements list
         elmlist = ""
+        elmcolmn = ""
+
         If lstvElements.Items.Count > 0 Then
             elmlist = "'" & lstvElements.Items(0).Text & "'" '""""
+            elmcolmn = " SUM(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+
             For i = 1 To lstvElements.Items.Count - 1
                 ' MsgBox(lstvElements.Items(i).Text)
                 elmlist = elmlist & " OR  " & "'" & lstvElements.Items(i).Text & "'"  ' """ & lstvElements.Items(i).Text & """"
+                elmcolmn = elmcolmn & ", SUM(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
             Next
         End If
 
-        sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & ":" & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-        edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & ":" & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+
+
+        sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+        edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
         ' Contrust a SQL statement for creating a query for the selected data product
 
@@ -203,30 +211,70 @@
         Select Case Me.lblProductType.Text
             Case "WindRose"
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                WindRoseData(sql)
             Case "Hourly"
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime," & "SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM " & "(SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & " '111' OR describedBy = '112'" & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+            Case "Daily"
+                ' Elements for the columns
+
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                'MsgBox(sql)
+                DataProducts(sql)
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
         End Select
 
-        WindRoseData(sql)
+
     End Sub
     Sub WindRoseData(sql As String)
         On Error GoTo Err
         'MsgBox(sql)
+        Dim clmnstr As String
+
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "observationfinal")
         maxRows = ds.Tables("observationfinal").Rows.Count
+
         MsgBox("Data For Wind Rose Plot; Records Extracted= " & maxRows)
+
+        ' Contruct coulumn headers
+        clmnstr = ""
 
         With ds.Tables("observationfinal") ' First 5 rows
             For i = 0 To 5
                 MsgBox(.Rows(i).Item("StationId") & " " & .Rows(i).Item("obsDatetime") & " " & .Rows(i).Item("111") & " " & .Rows(i).Item("112"))
             Next
         End With
+        formWindRose.Show()
+        Exit Sub
+Err:
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+
+    Sub DataProducts(sql As String)
+        On Error GoTo Err
+        Dim flds1, flds2, flds3 As String
+        ' MsgBox(sql)
+
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "observationfinal")
+
+        maxRows = ds.Tables("observationfinal").Rows.Count
+        MsgBox("Records = " & maxRows)
+        flds1 = """" & lstvElements.Items(0).Text & """"
+        flds2 = """" & lstvElements.Items(1).Text & """"
+        flds3 = """" & lstvElements.Items(2).Text & """"
+
+        MsgBox(flds3 & " " & flds2 & " " & flds1)
+        MsgBox(ds.Tables("observationfinal").Rows(0).Item(flds1) & " " & ds.Tables("observationfinal").Rows(0).Item(flds2) & " " & ds.Tables("observationfinal").Rows(0).Item(flds3))
+
+        'frmDataOutpt.Show()
         Exit Sub
 Err:
         If Err.Number = 13 Or Err.Number = 5 Then Resume Next
@@ -276,5 +324,21 @@ Err:
 
     Private Sub lstvElements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvElements.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub lblProductType_Click(sender As Object, e As EventArgs) Handles lblProductType.Click
+
+    End Sub
+
+    Private Sub lblProductType_ClientSizeChanged(sender As Object, e As EventArgs) Handles lblProductType.ClientSizeChanged
+
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class

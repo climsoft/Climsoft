@@ -32,17 +32,6 @@ Partial Class formProductsSelectCriteria
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
         Me.cmdDelStation = New System.Windows.Forms.Button()
         Me.cmdDelElement = New System.Windows.Forms.Button()
@@ -54,12 +43,12 @@ Partial Class formProductsSelectCriteria
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.pnlPeriod = New System.Windows.Forms.Panel()
-        Me.txtMinuteEnd = New System.Windows.Forms.TextBox()
-        Me.txtMinuteStart = New System.Windows.Forms.TextBox()
+        Me.txtMinuteEnd = New System.Windows.Forms.ComboBox()
+        Me.txtMinuteStart = New System.Windows.Forms.ComboBox()
+        Me.txtHourEnd = New System.Windows.Forms.ComboBox()
+        Me.txtHourStart = New System.Windows.Forms.ComboBox()
         Me.txtSminute = New System.Windows.Forms.Label()
-        Me.txtHourEnd = New System.Windows.Forms.TextBox()
         Me.lblHourEnd = New System.Windows.Forms.Label()
-        Me.txtHourStart = New System.Windows.Forms.TextBox()
         Me.lblHourBegin = New System.Windows.Forms.Label()
         Me.dateTo = New System.Windows.Forms.DateTimePicker()
         Me.lblTo = New System.Windows.Forms.Label()
@@ -89,12 +78,16 @@ Partial Class formProductsSelectCriteria
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.prgrbProducts = New System.Windows.Forms.ToolStripProgressBar()
+        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.MenuStrip1.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
         Me.pnlPeriod.SuspendLayout()
         Me.pnlStation.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -102,7 +95,7 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(910, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(893, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -154,97 +147,6 @@ Partial Class formProductsSelectCriteria
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.HelpToolStripButton})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(910, 25)
-        Me.ToolStrip1.TabIndex = 1
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'NewToolStripButton
-        '
-        Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.NewToolStripButton.Image = CType(resources.GetObject("NewToolStripButton.Image"), System.Drawing.Image)
-        Me.NewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.NewToolStripButton.Name = "NewToolStripButton"
-        Me.NewToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.NewToolStripButton.Text = "&New"
-        '
-        'OpenToolStripButton
-        '
-        Me.OpenToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.OpenToolStripButton.Image = CType(resources.GetObject("OpenToolStripButton.Image"), System.Drawing.Image)
-        Me.OpenToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OpenToolStripButton.Name = "OpenToolStripButton"
-        Me.OpenToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.OpenToolStripButton.Text = "&Open"
-        '
-        'SaveToolStripButton
-        '
-        Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton.Image = CType(resources.GetObject("SaveToolStripButton.Image"), System.Drawing.Image)
-        Me.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SaveToolStripButton.Name = "SaveToolStripButton"
-        Me.SaveToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.SaveToolStripButton.Text = "&Save"
-        '
-        'PrintToolStripButton
-        '
-        Me.PrintToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PrintToolStripButton.Image = CType(resources.GetObject("PrintToolStripButton.Image"), System.Drawing.Image)
-        Me.PrintToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.PrintToolStripButton.Name = "PrintToolStripButton"
-        Me.PrintToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.PrintToolStripButton.Text = "&Print"
-        '
-        'toolStripSeparator
-        '
-        Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'CutToolStripButton
-        '
-        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CutToolStripButton.Image = CType(resources.GetObject("CutToolStripButton.Image"), System.Drawing.Image)
-        Me.CutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CutToolStripButton.Name = "CutToolStripButton"
-        Me.CutToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.CutToolStripButton.Text = "C&ut"
-        '
-        'CopyToolStripButton
-        '
-        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.CopyToolStripButton.Image = CType(resources.GetObject("CopyToolStripButton.Image"), System.Drawing.Image)
-        Me.CopyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        Me.CopyToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.CopyToolStripButton.Text = "&Copy"
-        '
-        'PasteToolStripButton
-        '
-        Me.PasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.PasteToolStripButton.Image = CType(resources.GetObject("PasteToolStripButton.Image"), System.Drawing.Image)
-        Me.PasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.PasteToolStripButton.Name = "PasteToolStripButton"
-        Me.PasteToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.PasteToolStripButton.Text = "&Paste"
-        '
-        'toolStripSeparator1
-        '
-        Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'HelpToolStripButton
-        '
-        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
-        Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
-        Me.HelpToolStripButton.Text = "He&lp"
-        '
         'pnlStationsElements
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
@@ -264,9 +166,9 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.chksatation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
-        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 62)
+        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(898, 382)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
         Me.pnlStationsElements.TabIndex = 4
         '
         'cmdDelStation
@@ -290,15 +192,17 @@ Partial Class formProductsSelectCriteria
         'lblProductType
         '
         Me.lblProductType.AutoSize = True
-        Me.lblProductType.Location = New System.Drawing.Point(572, 11)
+        Me.lblProductType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProductType.Location = New System.Drawing.Point(254, 7)
         Me.lblProductType.Name = "lblProductType"
-        Me.lblProductType.Size = New System.Drawing.Size(0, 13)
+        Me.lblProductType.Size = New System.Drawing.Size(31, 15)
         Me.lblProductType.TabIndex = 20
+        Me.lblProductType.Text = "      "
         '
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(542, 163)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(542, 182)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -314,10 +218,10 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(270, 40)
+        Me.lstvElements.Location = New System.Drawing.Point(270, 57)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(266, 308)
+        Me.lstvElements.Size = New System.Drawing.Size(266, 291)
         Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
@@ -331,10 +235,10 @@ Partial Class formProductsSelectCriteria
         Me.lstvStations.HideSelection = False
         Me.lstvStations.HoverSelection = True
         Me.lstvStations.LabelEdit = True
-        Me.lstvStations.Location = New System.Drawing.Point(5, 38)
+        Me.lstvStations.Location = New System.Drawing.Point(5, 57)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(257, 308)
+        Me.lstvStations.Size = New System.Drawing.Size(257, 289)
         Me.lstvStations.TabIndex = 17
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
@@ -342,9 +246,9 @@ Partial Class formProductsSelectCriteria
         'lblProducts
         '
         Me.lblProducts.AutoSize = True
-        Me.lblProducts.BackColor = System.Drawing.SystemColors.Control
+        Me.lblProducts.BackColor = System.Drawing.SystemColors.ControlLight
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProducts.Location = New System.Drawing.Point(753, 8)
+        Me.lblProducts.Location = New System.Drawing.Point(874, 57)
         Me.lblProducts.Name = "lblProducts"
         Me.lblProducts.Size = New System.Drawing.Size(17, 16)
         Me.lblProducts.TabIndex = 8
@@ -353,7 +257,7 @@ Partial Class formProductsSelectCriteria
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(273, 24)
+        Me.lblElement.Location = New System.Drawing.Point(268, 34)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(78, 13)
         Me.lblElement.TabIndex = 9
@@ -362,7 +266,7 @@ Partial Class formProductsSelectCriteria
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(9, 22)
+        Me.lblStation.Location = New System.Drawing.Point(10, 34)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(73, 13)
         Me.lblStation.TabIndex = 8
@@ -373,72 +277,78 @@ Partial Class formProductsSelectCriteria
         Me.pnlPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPeriod.Controls.Add(Me.txtMinuteEnd)
         Me.pnlPeriod.Controls.Add(Me.txtMinuteStart)
-        Me.pnlPeriod.Controls.Add(Me.txtSminute)
         Me.pnlPeriod.Controls.Add(Me.txtHourEnd)
-        Me.pnlPeriod.Controls.Add(Me.lblHourEnd)
         Me.pnlPeriod.Controls.Add(Me.txtHourStart)
+        Me.pnlPeriod.Controls.Add(Me.txtSminute)
+        Me.pnlPeriod.Controls.Add(Me.lblHourEnd)
         Me.pnlPeriod.Controls.Add(Me.lblHourBegin)
         Me.pnlPeriod.Controls.Add(Me.dateTo)
         Me.pnlPeriod.Controls.Add(Me.lblTo)
         Me.pnlPeriod.Controls.Add(Me.dateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
-        Me.pnlPeriod.Location = New System.Drawing.Point(542, 40)
+        Me.pnlPeriod.Location = New System.Drawing.Point(542, 61)
         Me.pnlPeriod.Name = "pnlPeriod"
-        Me.pnlPeriod.Size = New System.Drawing.Size(330, 104)
+        Me.pnlPeriod.Size = New System.Drawing.Size(330, 97)
         Me.pnlPeriod.TabIndex = 7
         '
         'txtMinuteEnd
         '
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(274, 68)
+        Me.txtMinuteEnd.FormattingEnabled = True
+        Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(279, 67)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
-        Me.txtMinuteEnd.Size = New System.Drawing.Size(29, 20)
-        Me.txtMinuteEnd.TabIndex = 11
+        Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteEnd.TabIndex = 15
         Me.txtMinuteEnd.Text = "00"
         '
         'txtMinuteStart
         '
-        Me.txtMinuteStart.Location = New System.Drawing.Point(274, 33)
+        Me.txtMinuteStart.FormattingEnabled = True
+        Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
+        Me.txtMinuteStart.Location = New System.Drawing.Point(279, 33)
         Me.txtMinuteStart.Name = "txtMinuteStart"
-        Me.txtMinuteStart.Size = New System.Drawing.Size(29, 20)
-        Me.txtMinuteStart.TabIndex = 10
+        Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteStart.TabIndex = 14
         Me.txtMinuteStart.Text = "00"
+        '
+        'txtHourEnd
+        '
+        Me.txtHourEnd.FormattingEnabled = True
+        Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
+        Me.txtHourEnd.Name = "txtHourEnd"
+        Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourEnd.TabIndex = 13
+        Me.txtHourEnd.Text = "23"
+        '
+        'txtHourStart
+        '
+        Me.txtHourStart.FormattingEnabled = True
+        Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtHourStart.Location = New System.Drawing.Point(233, 34)
+        Me.txtHourStart.Name = "txtHourStart"
+        Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourStart.TabIndex = 12
+        Me.txtHourStart.Text = "00"
         '
         'txtSminute
         '
         Me.txtSminute.AutoSize = True
-        Me.txtSminute.Location = New System.Drawing.Point(269, 18)
+        Me.txtSminute.Location = New System.Drawing.Point(280, 18)
         Me.txtSminute.Name = "txtSminute"
         Me.txtSminute.Size = New System.Drawing.Size(39, 13)
         Me.txtSminute.TabIndex = 9
         Me.txtSminute.Text = "Minute"
         '
-        'txtHourEnd
-        '
-        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
-        Me.txtHourEnd.Name = "txtHourEnd"
-        Me.txtHourEnd.Size = New System.Drawing.Size(35, 20)
-        Me.txtHourEnd.TabIndex = 8
-        Me.txtHourEnd.Text = "06"
-        Me.txtHourEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'lblHourEnd
         '
         Me.lblHourEnd.AutoSize = True
-        Me.lblHourEnd.Location = New System.Drawing.Point(230, 18)
+        Me.lblHourEnd.Location = New System.Drawing.Point(236, 18)
         Me.lblHourEnd.Name = "lblHourEnd"
         Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
         Me.lblHourEnd.TabIndex = 7
         Me.lblHourEnd.Text = "Hour"
-        '
-        'txtHourStart
-        '
-        Me.txtHourStart.Location = New System.Drawing.Point(233, 33)
-        Me.txtHourStart.Name = "txtHourStart"
-        Me.txtHourStart.Size = New System.Drawing.Size(35, 20)
-        Me.txtHourStart.TabIndex = 6
-        Me.txtHourStart.Text = "06"
-        Me.txtHourStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblHourBegin
         '
@@ -510,7 +420,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(542, 218)
+        Me.pnlStation.Location = New System.Drawing.Point(542, 212)
         Me.pnlStation.Name = "pnlStation"
         Me.pnlStation.Size = New System.Drawing.Size(330, 152)
         Me.pnlStation.TabIndex = 6
@@ -667,7 +577,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.cmbElement.FormattingEnabled = True
         Me.cmbElement.ItemHeight = 13
-        Me.cmbElement.Location = New System.Drawing.Point(351, 19)
+        Me.cmbElement.Location = New System.Drawing.Point(352, 30)
         Me.cmbElement.Name = "cmbElement"
         Me.cmbElement.Size = New System.Drawing.Size(182, 21)
         Me.cmbElement.TabIndex = 3
@@ -676,7 +586,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(82, 17)
+        Me.cmbstation.Location = New System.Drawing.Point(84, 30)
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(178, 21)
         Me.cmbstation.TabIndex = 1
@@ -685,9 +595,9 @@ Partial Class formProductsSelectCriteria
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1, Me.prgrbProducts})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 447)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 450)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(910, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(893, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -712,11 +622,39 @@ Partial Class formProductsSelectCriteria
         Me.prgrbProducts.Name = "prgrbProducts"
         Me.prgrbProducts.Size = New System.Drawing.Size(100, 22)
         '
+        'toolStripSeparator
+        '
+        Me.toolStripSeparator.Name = "toolStripSeparator"
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'toolStripSeparator1
+        '
+        Me.toolStripSeparator1.Name = "toolStripSeparator1"
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'HelpToolStripButton
+        '
+        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
+        Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.HelpToolStripButton.Name = "HelpToolStripButton"
+        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.HelpToolStripButton.Text = "He&lp"
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator, Me.toolStripSeparator1, Me.HelpToolStripButton})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip1.TabIndex = 1
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
         'formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(910, 472)
+        Me.ClientSize = New System.Drawing.Size(893, 475)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
@@ -726,8 +664,6 @@ Partial Class formProductsSelectCriteria
         Me.Text = "Data Selection"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.pnlStationsElements.ResumeLayout(False)
         Me.pnlStationsElements.PerformLayout()
         Me.pnlPeriod.ResumeLayout(False)
@@ -736,12 +672,13 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents pnlStationsElements As System.Windows.Forms.Panel
     Friend WithEvents cmbElement As System.Windows.Forms.ComboBox
     Friend WithEvents cmbstation As System.Windows.Forms.ComboBox
@@ -752,16 +689,6 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NewToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents OpenToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents SaveToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents PrintToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents toolStripSeparator As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents CutToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents CopyToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents PasteToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents chkelement As System.Windows.Forms.CheckBox
     Friend WithEvents chksatation As System.Windows.Forms.CheckBox
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
@@ -797,13 +724,17 @@ Partial Class formProductsSelectCriteria
     Public WithEvents lstvElements As System.Windows.Forms.ListView
     Friend WithEvents chkAdvancedSelection As System.Windows.Forms.CheckBox
     Friend WithEvents lblProductType As System.Windows.Forms.Label
-    Friend WithEvents txtHourEnd As System.Windows.Forms.TextBox
     Friend WithEvents lblHourEnd As System.Windows.Forms.Label
-    Friend WithEvents txtHourStart As System.Windows.Forms.TextBox
     Friend WithEvents lblHourBegin As System.Windows.Forms.Label
     Friend WithEvents cmdDelStation As System.Windows.Forms.Button
     Friend WithEvents cmdDelElement As System.Windows.Forms.Button
-    Friend WithEvents txtMinuteEnd As System.Windows.Forms.TextBox
-    Friend WithEvents txtMinuteStart As System.Windows.Forms.TextBox
     Friend WithEvents txtSminute As System.Windows.Forms.Label
+    Friend WithEvents toolStripSeparator As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents txtHourStart As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMinuteStart As System.Windows.Forms.ComboBox
+    Friend WithEvents txtHourEnd As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMinuteEnd As System.Windows.Forms.ComboBox
 End Class
