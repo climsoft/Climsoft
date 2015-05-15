@@ -61,7 +61,8 @@
     Private Sub ListView1_DoubleClick(sender As Object, e As EventArgs) Handles ListView1.DoubleClick
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
-                MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                formSynopRA1.Show()
             End If
         Next
     End Sub
@@ -69,7 +70,8 @@
     Private Sub ListView1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ListView1.KeyPress
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
-                MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                formSynopRA1.Show()
             End If
         Next
        

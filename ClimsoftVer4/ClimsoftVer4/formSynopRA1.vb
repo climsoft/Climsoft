@@ -15,58 +15,61 @@
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = StationIdTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = YyyyTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = MmTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = DdTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = HhTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106") = Val_Elem106TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107") = Val_Elem107TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400") = Val_Elem400TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem814") = Val_Elem814TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem399") = Val_Elem399TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem301") = Val_Elem106TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem196") = Val_Elem196TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem301") = Val_Elem301TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem101") = Val_Elem101TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem102") = Val_Elem102TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem103") = Val_Elem103TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem105") = Val_Elem105TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem176") = Val_Elem176TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem110") = Val_Elem110TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem114") = Val_Elem114TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem112") = Val_Elem112TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem111") = Val_Elem111TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem167") = Val_Elem167TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem197") = Val_Elem197TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem193") = Val_Elem193TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem115") = Val_Elem115TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem177") = Val_Elem177TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem178") = Val_Elem178TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem179") = Val_Elem179TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem116") = Val_Elem116TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem118") = Val_Elem118TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem123") = Val_Elem123TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem120") = Val_Elem120TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem121") = Val_Elem121TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem122") = Val_Elem122TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem127") = Val_Elem127TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem124") = Val_Elem124TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem125") = Val_Elem125TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem126") = Val_Elem126TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem131") = Val_Elem131TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem128") = Val_Elem128TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem129") = Val_Elem129TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem130") = Val_Elem130TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem002") = Val_Elem002TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem003") = Val_Elem003TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem099") = Val_Elem099TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem018") = Val_Elem018TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem084") = Val_Elem084TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem132") = Val_Elem132TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem005") = Val_Elem005TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem174") = Val_Elem174TextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem046") = Val_Elem046TextBox.Text
+        StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+        YyyyTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
+        MmTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+        DdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+        HhTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+        Val_Elem106TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106")
+        Val_Elem107TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107")
+        Val_Elem400TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400")
+        Val_Elem814TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem814")
+        Val_Elem399TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem399")
+        Val_Elem106TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem301")
+        Val_Elem196TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem196")
+        Val_Elem301TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem301")
+        Val_Elem101TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem101")
+        Val_Elem102TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem102")
+        Val_Elem103TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem103")
+        Val_Elem105TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem105")
+        Val_Elem176TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem176")
+        Val_Elem110TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem110")
+        Val_Elem114TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem114")
+        Val_Elem112TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem112")
+        Val_Elem111TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem111")
+        Val_Elem167TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem167")
+        Val_Elem197TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem197")
+        Val_Elem193TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem193")
+        Val_Elem115TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem115")
+        Val_Elem177TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem177")
+        Val_Elem178TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem178")
+        Val_Elem179TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem179")
+        Val_Elem116TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem116")
+        Val_Elem118TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem118")
+        Val_Elem123TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem123")
+        Val_Elem120TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem120")
+        Val_Elem121TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem121")
+        Val_Elem122TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem122")
+        Val_Elem127TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem127")
+        Val_Elem124TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem124")
+        Val_Elem125TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem125")
+        Val_Elem126TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem126")
+        Val_Elem131TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem131")
+        Val_Elem128TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem128")
+        Val_Elem129TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem129")
+        Val_Elem130TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem130")
+        Val_Elem002TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem002")
+        Val_Elem003TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem003")
+        Val_Elem099TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem099")
+        Val_Elem018TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem018")
+        Val_Elem084TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem084")
+        Val_Elem132TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem132")
+        Val_Elem005TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem005")
+        Val_Elem174TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem174")
+        Val_Elem046TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem046")
+        Val_Elem117TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117")
+        Val_Elem119TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119")
+        Val_Elem180TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180")
         displayRecordNumber()
     End Sub
     Public Sub displayRecordNumber()
@@ -181,6 +184,9 @@
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem005") = Val_Elem005TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem174") = Val_Elem174TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem046") = Val_Elem046TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117") = Val_Elem117TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119") = Val_Elem119TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180") = Val_Elem180TextBox.Text
 
         'The data adapter is used to update the record in the data source table
         da.Update(ds, "form_synoptic_2_RA1")
@@ -357,6 +363,10 @@
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem005") = Val_Elem005TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem174") = Val_Elem174TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem046") = Val_Elem046TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Val_Elem117") = Val_Elem117TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119") = Val_Elem119TextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180") = Val_Elem180TextBox.Text
+
         'Add a new record to the data source table
         ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
         da.Update(ds, "form_synoptic_2_RA1")
@@ -407,7 +417,7 @@
         'Set the record index counter to the first row
         inc = 0
 
-        myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
+        myConnectionString = LoginForm.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()
@@ -478,6 +488,9 @@
         Val_Elem005TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem005")
         Val_Elem174TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem174")
         Val_Elem046TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem046")
+        Val_Elem117TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117")
+        Val_Elem119TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119")
+        Val_Elem180TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180")
 
         displayRecordNumber()
 

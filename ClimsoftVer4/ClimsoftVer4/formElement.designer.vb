@@ -209,7 +209,7 @@ Partial Class formElement
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(427, 321)
+        Me.btnClose.Location = New System.Drawing.Point(438, 319)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 19
@@ -219,7 +219,7 @@ Partial Class formElement
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(346, 321)
+        Me.btnClear.Location = New System.Drawing.Point(357, 319)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 53
@@ -229,16 +229,16 @@ Partial Class formElement
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(22, 321)
+        Me.btnCommit.Location = New System.Drawing.Point(110, 319)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 52
-        Me.btnCommit.Text = "Commit"
+        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(103, 321)
+        Me.btnDelete.Location = New System.Drawing.Point(272, 319)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 51
@@ -247,7 +247,7 @@ Partial Class formElement
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(184, 321)
+        Me.btnAddNew.Location = New System.Drawing.Point(29, 319)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 50
@@ -256,7 +256,7 @@ Partial Class formElement
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(265, 321)
+        Me.btnUpdate.Location = New System.Drawing.Point(191, 319)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 49
@@ -265,7 +265,8 @@ Partial Class formElement
         '
         'btnMovePrevious
         '
-        Me.btnMovePrevious.Location = New System.Drawing.Point(209, 281)
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(195, 281)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 48
@@ -274,7 +275,8 @@ Partial Class formElement
         '
         'btnMoveFirst
         '
-        Me.btnMoveFirst.Location = New System.Drawing.Point(162, 281)
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(148, 281)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 47
@@ -283,23 +285,25 @@ Partial Class formElement
         '
         'btnMoveLast
         '
-        Me.btnMoveLast.Location = New System.Drawing.Point(452, 281)
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(438, 281)
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(31, 23)
+        Me.btnMoveLast.Size = New System.Drawing.Size(35, 23)
         Me.btnMoveLast.TabIndex = 46
         Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(261, 283)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(247, 283)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 45
         '
         'btnMoveNext
         '
-        Me.btnMoveNext.Location = New System.Drawing.Point(408, 281)
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(394, 281)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 44
@@ -308,7 +312,7 @@ Partial Class formElement
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(508, 321)
+        Me.btnHelp.Location = New System.Drawing.Point(519, 319)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 54
@@ -319,7 +323,7 @@ Partial Class formElement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(597, 363)
+        Me.ClientSize = New System.Drawing.Size(613, 363)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)

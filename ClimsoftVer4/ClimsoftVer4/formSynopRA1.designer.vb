@@ -141,6 +141,7 @@ Partial Class formSynopRA1
         Me.btnMoveLast = New System.Windows.Forms.Button()
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
+        Me.btnHelp = New System.Windows.Forms.Button()
         StationIdLabel = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         MmLabel = New System.Windows.Forms.Label()
@@ -200,7 +201,7 @@ Partial Class formSynopRA1
         'StationIdLabel
         '
         StationIdLabel.AutoSize = True
-        StationIdLabel.Location = New System.Drawing.Point(52, 45)
+        StationIdLabel.Location = New System.Drawing.Point(52, 35)
         StationIdLabel.Name = "StationIdLabel"
         StationIdLabel.Size = New System.Drawing.Size(53, 13)
         StationIdLabel.TabIndex = 1
@@ -209,7 +210,7 @@ Partial Class formSynopRA1
         'YyyyLabel
         '
         YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(245, 45)
+        YyyyLabel.Location = New System.Drawing.Point(245, 35)
         YyyyLabel.Name = "YyyyLabel"
         YyyyLabel.Size = New System.Drawing.Size(30, 13)
         YyyyLabel.TabIndex = 3
@@ -218,7 +219,7 @@ Partial Class formSynopRA1
         'MmLabel
         '
         MmLabel.AutoSize = True
-        MmLabel.Location = New System.Drawing.Point(367, 45)
+        MmLabel.Location = New System.Drawing.Point(367, 35)
         MmLabel.Name = "MmLabel"
         MmLabel.Size = New System.Drawing.Size(26, 13)
         MmLabel.TabIndex = 5
@@ -227,7 +228,7 @@ Partial Class formSynopRA1
         'DdLabel
         '
         DdLabel.AutoSize = True
-        DdLabel.Location = New System.Drawing.Point(462, 45)
+        DdLabel.Location = New System.Drawing.Point(462, 35)
         DdLabel.Name = "DdLabel"
         DdLabel.Size = New System.Drawing.Size(22, 13)
         DdLabel.TabIndex = 7
@@ -236,7 +237,7 @@ Partial Class formSynopRA1
         'HhLabel
         '
         HhLabel.AutoSize = True
-        HhLabel.Location = New System.Drawing.Point(542, 45)
+        HhLabel.Location = New System.Drawing.Point(542, 35)
         HhLabel.Name = "HhLabel"
         HhLabel.Size = New System.Drawing.Size(22, 13)
         HhLabel.TabIndex = 9
@@ -245,7 +246,7 @@ Partial Class formSynopRA1
         'Val_Elem106Label
         '
         Val_Elem106Label.AutoSize = True
-        Val_Elem106Label.Location = New System.Drawing.Point(37, 92)
+        Val_Elem106Label.Location = New System.Drawing.Point(37, 82)
         Val_Elem106Label.Name = "Val_Elem106Label"
         Val_Elem106Label.Size = New System.Drawing.Size(42, 13)
         Val_Elem106Label.TabIndex = 11
@@ -254,7 +255,7 @@ Partial Class formSynopRA1
         'Val_Elem107Label
         '
         Val_Elem107Label.AutoSize = True
-        Val_Elem107Label.Location = New System.Drawing.Point(37, 118)
+        Val_Elem107Label.Location = New System.Drawing.Point(37, 108)
         Val_Elem107Label.Name = "Val_Elem107Label"
         Val_Elem107Label.Size = New System.Drawing.Size(57, 13)
         Val_Elem107Label.TabIndex = 13
@@ -263,7 +264,7 @@ Partial Class formSynopRA1
         'Val_Elem400Label
         '
         Val_Elem400Label.AutoSize = True
-        Val_Elem400Label.Location = New System.Drawing.Point(37, 144)
+        Val_Elem400Label.Location = New System.Drawing.Point(37, 134)
         Val_Elem400Label.Name = "Val_Elem400Label"
         Val_Elem400Label.Size = New System.Drawing.Size(80, 13)
         Val_Elem400Label.TabIndex = 15
@@ -272,7 +273,7 @@ Partial Class formSynopRA1
         'Val_Elem814Label
         '
         Val_Elem814Label.AutoSize = True
-        Val_Elem814Label.Location = New System.Drawing.Point(37, 170)
+        Val_Elem814Label.Location = New System.Drawing.Point(37, 160)
         Val_Elem814Label.Name = "Val_Elem814Label"
         Val_Elem814Label.Size = New System.Drawing.Size(68, 13)
         Val_Elem814Label.TabIndex = 17
@@ -281,7 +282,7 @@ Partial Class formSynopRA1
         'Val_Elem399Label
         '
         Val_Elem399Label.AutoSize = True
-        Val_Elem399Label.Location = New System.Drawing.Point(37, 196)
+        Val_Elem399Label.Location = New System.Drawing.Point(37, 186)
         Val_Elem399Label.Name = "Val_Elem399Label"
         Val_Elem399Label.Size = New System.Drawing.Size(86, 13)
         Val_Elem399Label.TabIndex = 19
@@ -290,7 +291,7 @@ Partial Class formSynopRA1
         'Val_Elem301Label
         '
         Val_Elem301Label.AutoSize = True
-        Val_Elem301Label.Location = New System.Drawing.Point(37, 222)
+        Val_Elem301Label.Location = New System.Drawing.Point(37, 212)
         Val_Elem301Label.Name = "Val_Elem301Label"
         Val_Elem301Label.Size = New System.Drawing.Size(70, 13)
         Val_Elem301Label.TabIndex = 21
@@ -299,7 +300,7 @@ Partial Class formSynopRA1
         'Val_Elem196Label
         '
         Val_Elem196Label.AutoSize = True
-        Val_Elem196Label.Location = New System.Drawing.Point(37, 248)
+        Val_Elem196Label.Location = New System.Drawing.Point(37, 238)
         Val_Elem196Label.Name = "Val_Elem196Label"
         Val_Elem196Label.Size = New System.Drawing.Size(67, 13)
         Val_Elem196Label.TabIndex = 23
@@ -308,7 +309,7 @@ Partial Class formSynopRA1
         'Val_Elem101Label
         '
         Val_Elem101Label.AutoSize = True
-        Val_Elem101Label.Location = New System.Drawing.Point(37, 274)
+        Val_Elem101Label.Location = New System.Drawing.Point(37, 264)
         Val_Elem101Label.Name = "Val_Elem101Label"
         Val_Elem101Label.Size = New System.Drawing.Size(43, 13)
         Val_Elem101Label.TabIndex = 25
@@ -317,7 +318,7 @@ Partial Class formSynopRA1
         'Val_Elem102Label
         '
         Val_Elem102Label.AutoSize = True
-        Val_Elem102Label.Location = New System.Drawing.Point(37, 300)
+        Val_Elem102Label.Location = New System.Drawing.Point(37, 290)
         Val_Elem102Label.Name = "Val_Elem102Label"
         Val_Elem102Label.Size = New System.Drawing.Size(47, 13)
         Val_Elem102Label.TabIndex = 27
@@ -326,7 +327,7 @@ Partial Class formSynopRA1
         'Val_Elem103Label
         '
         Val_Elem103Label.AutoSize = True
-        Val_Elem103Label.Location = New System.Drawing.Point(37, 326)
+        Val_Elem103Label.Location = New System.Drawing.Point(37, 316)
         Val_Elem103Label.Name = "Val_Elem103Label"
         Val_Elem103Label.Size = New System.Drawing.Size(52, 13)
         Val_Elem103Label.TabIndex = 29
@@ -335,7 +336,7 @@ Partial Class formSynopRA1
         'Val_Elem105Label
         '
         Val_Elem105Label.AutoSize = True
-        Val_Elem105Label.Location = New System.Drawing.Point(37, 352)
+        Val_Elem105Label.Location = New System.Drawing.Point(37, 342)
         Val_Elem105Label.Name = "Val_Elem105Label"
         Val_Elem105Label.Size = New System.Drawing.Size(23, 13)
         Val_Elem105Label.TabIndex = 31
@@ -344,7 +345,7 @@ Partial Class formSynopRA1
         'Val_Elem176Label
         '
         Val_Elem176Label.AutoSize = True
-        Val_Elem176Label.Location = New System.Drawing.Point(37, 378)
+        Val_Elem176Label.Location = New System.Drawing.Point(37, 368)
         Val_Elem176Label.Name = "Val_Elem176Label"
         Val_Elem176Label.Size = New System.Drawing.Size(74, 13)
         Val_Elem176Label.TabIndex = 33
@@ -353,7 +354,7 @@ Partial Class formSynopRA1
         'Val_Elem110Label
         '
         Val_Elem110Label.AutoSize = True
-        Val_Elem110Label.Location = New System.Drawing.Point(37, 404)
+        Val_Elem110Label.Location = New System.Drawing.Point(37, 394)
         Val_Elem110Label.Name = "Val_Elem110Label"
         Val_Elem110Label.Size = New System.Drawing.Size(43, 13)
         Val_Elem110Label.TabIndex = 35
@@ -362,7 +363,7 @@ Partial Class formSynopRA1
         'Val_Elem114Label
         '
         Val_Elem114Label.AutoSize = True
-        Val_Elem114Label.Location = New System.Drawing.Point(37, 430)
+        Val_Elem114Label.Location = New System.Drawing.Point(37, 420)
         Val_Elem114Label.Name = "Val_Elem114Label"
         Val_Elem114Label.Size = New System.Drawing.Size(70, 13)
         Val_Elem114Label.TabIndex = 37
@@ -371,7 +372,7 @@ Partial Class formSynopRA1
         'Val_Elem112Label
         '
         Val_Elem112Label.AutoSize = True
-        Val_Elem112Label.Location = New System.Drawing.Point(37, 456)
+        Val_Elem112Label.Location = New System.Drawing.Point(37, 446)
         Val_Elem112Label.Name = "Val_Elem112Label"
         Val_Elem112Label.Size = New System.Drawing.Size(74, 13)
         Val_Elem112Label.TabIndex = 39
@@ -380,7 +381,7 @@ Partial Class formSynopRA1
         'Val_Elem111Label
         '
         Val_Elem111Label.AutoSize = True
-        Val_Elem111Label.Location = New System.Drawing.Point(37, 482)
+        Val_Elem111Label.Location = New System.Drawing.Point(37, 472)
         Val_Elem111Label.Name = "Val_Elem111Label"
         Val_Elem111Label.Size = New System.Drawing.Size(63, 13)
         Val_Elem111Label.TabIndex = 41
@@ -389,7 +390,7 @@ Partial Class formSynopRA1
         'Val_Elem167Label
         '
         Val_Elem167Label.AutoSize = True
-        Val_Elem167Label.Location = New System.Drawing.Point(309, 92)
+        Val_Elem167Label.Location = New System.Drawing.Point(309, 82)
         Val_Elem167Label.Name = "Val_Elem167Label"
         Val_Elem167Label.Size = New System.Drawing.Size(59, 13)
         Val_Elem167Label.TabIndex = 43
@@ -398,7 +399,7 @@ Partial Class formSynopRA1
         'Val_Elem197Label
         '
         Val_Elem197Label.AutoSize = True
-        Val_Elem197Label.Location = New System.Drawing.Point(309, 118)
+        Val_Elem197Label.Location = New System.Drawing.Point(309, 108)
         Val_Elem197Label.Name = "Val_Elem197Label"
         Val_Elem197Label.Size = New System.Drawing.Size(50, 13)
         Val_Elem197Label.TabIndex = 45
@@ -407,7 +408,7 @@ Partial Class formSynopRA1
         'Val_Elem193Label
         '
         Val_Elem193Label.AutoSize = True
-        Val_Elem193Label.Location = New System.Drawing.Point(309, 144)
+        Val_Elem193Label.Location = New System.Drawing.Point(309, 134)
         Val_Elem193Label.Name = "Val_Elem193Label"
         Val_Elem193Label.Size = New System.Drawing.Size(50, 13)
         Val_Elem193Label.TabIndex = 47
@@ -416,7 +417,7 @@ Partial Class formSynopRA1
         'Val_Elem115Label
         '
         Val_Elem115Label.AutoSize = True
-        Val_Elem115Label.Location = New System.Drawing.Point(309, 170)
+        Val_Elem115Label.Location = New System.Drawing.Point(309, 160)
         Val_Elem115Label.Name = "Val_Elem115Label"
         Val_Elem115Label.Size = New System.Drawing.Size(41, 13)
         Val_Elem115Label.TabIndex = 49
@@ -425,7 +426,7 @@ Partial Class formSynopRA1
         'Val_Elem177Label
         '
         Val_Elem177Label.AutoSize = True
-        Val_Elem177Label.Location = New System.Drawing.Point(309, 196)
+        Val_Elem177Label.Location = New System.Drawing.Point(309, 186)
         Val_Elem177Label.Name = "Val_Elem177Label"
         Val_Elem177Label.Size = New System.Drawing.Size(21, 13)
         Val_Elem177Label.TabIndex = 51
@@ -434,7 +435,7 @@ Partial Class formSynopRA1
         'Val_Elem178Label
         '
         Val_Elem178Label.AutoSize = True
-        Val_Elem178Label.Location = New System.Drawing.Point(309, 222)
+        Val_Elem178Label.Location = New System.Drawing.Point(309, 212)
         Val_Elem178Label.Name = "Val_Elem178Label"
         Val_Elem178Label.Size = New System.Drawing.Size(16, 13)
         Val_Elem178Label.TabIndex = 53
@@ -443,7 +444,7 @@ Partial Class formSynopRA1
         'Val_Elem179Label
         '
         Val_Elem179Label.AutoSize = True
-        Val_Elem179Label.Location = New System.Drawing.Point(309, 248)
+        Val_Elem179Label.Location = New System.Drawing.Point(309, 238)
         Val_Elem179Label.Name = "Val_Elem179Label"
         Val_Elem179Label.Size = New System.Drawing.Size(22, 13)
         Val_Elem179Label.TabIndex = 55
@@ -452,7 +453,7 @@ Partial Class formSynopRA1
         'Val_Elem180Label
         '
         Val_Elem180Label.AutoSize = True
-        Val_Elem180Label.Location = New System.Drawing.Point(309, 274)
+        Val_Elem180Label.Location = New System.Drawing.Point(309, 264)
         Val_Elem180Label.Name = "Val_Elem180Label"
         Val_Elem180Label.Size = New System.Drawing.Size(22, 13)
         Val_Elem180Label.TabIndex = 57
@@ -461,7 +462,7 @@ Partial Class formSynopRA1
         'Val_Elem119Label
         '
         Val_Elem119Label.AutoSize = True
-        Val_Elem119Label.Location = New System.Drawing.Point(309, 300)
+        Val_Elem119Label.Location = New System.Drawing.Point(309, 290)
         Val_Elem119Label.Name = "Val_Elem119Label"
         Val_Elem119Label.Size = New System.Drawing.Size(47, 13)
         Val_Elem119Label.TabIndex = 59
@@ -470,7 +471,7 @@ Partial Class formSynopRA1
         'Val_Elem116Label
         '
         Val_Elem116Label.AutoSize = True
-        Val_Elem116Label.Location = New System.Drawing.Point(309, 326)
+        Val_Elem116Label.Location = New System.Drawing.Point(309, 316)
         Val_Elem116Label.Name = "Val_Elem116Label"
         Val_Elem116Label.Size = New System.Drawing.Size(21, 13)
         Val_Elem116Label.TabIndex = 61
@@ -479,7 +480,7 @@ Partial Class formSynopRA1
         'Val_Elem117Label
         '
         Val_Elem117Label.AutoSize = True
-        Val_Elem117Label.Location = New System.Drawing.Point(309, 352)
+        Val_Elem117Label.Location = New System.Drawing.Point(309, 342)
         Val_Elem117Label.Name = "Val_Elem117Label"
         Val_Elem117Label.Size = New System.Drawing.Size(20, 13)
         Val_Elem117Label.TabIndex = 63
@@ -488,7 +489,7 @@ Partial Class formSynopRA1
         'Val_Elem118Label
         '
         Val_Elem118Label.AutoSize = True
-        Val_Elem118Label.Location = New System.Drawing.Point(309, 378)
+        Val_Elem118Label.Location = New System.Drawing.Point(309, 368)
         Val_Elem118Label.Name = "Val_Elem118Label"
         Val_Elem118Label.Size = New System.Drawing.Size(39, 13)
         Val_Elem118Label.TabIndex = 65
@@ -497,7 +498,7 @@ Partial Class formSynopRA1
         'Val_Elem123Label
         '
         Val_Elem123Label.AutoSize = True
-        Val_Elem123Label.Location = New System.Drawing.Point(309, 404)
+        Val_Elem123Label.Location = New System.Drawing.Point(309, 394)
         Val_Elem123Label.Name = "Val_Elem123Label"
         Val_Elem123Label.Size = New System.Drawing.Size(47, 13)
         Val_Elem123Label.TabIndex = 67
@@ -506,7 +507,7 @@ Partial Class formSynopRA1
         'Val_Elem120Label
         '
         Val_Elem120Label.AutoSize = True
-        Val_Elem120Label.Location = New System.Drawing.Point(309, 430)
+        Val_Elem120Label.Location = New System.Drawing.Point(309, 420)
         Val_Elem120Label.Name = "Val_Elem120Label"
         Val_Elem120Label.Size = New System.Drawing.Size(21, 13)
         Val_Elem120Label.TabIndex = 69
@@ -515,7 +516,7 @@ Partial Class formSynopRA1
         'Val_Elem121Label
         '
         Val_Elem121Label.AutoSize = True
-        Val_Elem121Label.Location = New System.Drawing.Point(309, 456)
+        Val_Elem121Label.Location = New System.Drawing.Point(309, 446)
         Val_Elem121Label.Name = "Val_Elem121Label"
         Val_Elem121Label.Size = New System.Drawing.Size(20, 13)
         Val_Elem121Label.TabIndex = 71
@@ -524,7 +525,7 @@ Partial Class formSynopRA1
         'Val_Elem122Label
         '
         Val_Elem122Label.AutoSize = True
-        Val_Elem122Label.Location = New System.Drawing.Point(309, 482)
+        Val_Elem122Label.Location = New System.Drawing.Point(309, 472)
         Val_Elem122Label.Name = "Val_Elem122Label"
         Val_Elem122Label.Size = New System.Drawing.Size(39, 13)
         Val_Elem122Label.TabIndex = 73
@@ -533,7 +534,7 @@ Partial Class formSynopRA1
         'Val_Elem127Label
         '
         Val_Elem127Label.AutoSize = True
-        Val_Elem127Label.Location = New System.Drawing.Point(547, 92)
+        Val_Elem127Label.Location = New System.Drawing.Point(547, 82)
         Val_Elem127Label.Name = "Val_Elem127Label"
         Val_Elem127Label.Size = New System.Drawing.Size(47, 13)
         Val_Elem127Label.TabIndex = 75
@@ -542,7 +543,7 @@ Partial Class formSynopRA1
         'Val_Elem124Label
         '
         Val_Elem124Label.AutoSize = True
-        Val_Elem124Label.Location = New System.Drawing.Point(547, 118)
+        Val_Elem124Label.Location = New System.Drawing.Point(547, 108)
         Val_Elem124Label.Name = "Val_Elem124Label"
         Val_Elem124Label.Size = New System.Drawing.Size(21, 13)
         Val_Elem124Label.TabIndex = 77
@@ -551,7 +552,7 @@ Partial Class formSynopRA1
         'Val_Elem125Label
         '
         Val_Elem125Label.AutoSize = True
-        Val_Elem125Label.Location = New System.Drawing.Point(547, 144)
+        Val_Elem125Label.Location = New System.Drawing.Point(547, 134)
         Val_Elem125Label.Name = "Val_Elem125Label"
         Val_Elem125Label.Size = New System.Drawing.Size(20, 13)
         Val_Elem125Label.TabIndex = 79
@@ -560,7 +561,7 @@ Partial Class formSynopRA1
         'Val_Elem126Label
         '
         Val_Elem126Label.AutoSize = True
-        Val_Elem126Label.Location = New System.Drawing.Point(547, 170)
+        Val_Elem126Label.Location = New System.Drawing.Point(547, 160)
         Val_Elem126Label.Name = "Val_Elem126Label"
         Val_Elem126Label.Size = New System.Drawing.Size(39, 13)
         Val_Elem126Label.TabIndex = 81
@@ -569,7 +570,7 @@ Partial Class formSynopRA1
         'Val_Elem131Label
         '
         Val_Elem131Label.AutoSize = True
-        Val_Elem131Label.Location = New System.Drawing.Point(547, 196)
+        Val_Elem131Label.Location = New System.Drawing.Point(547, 186)
         Val_Elem131Label.Name = "Val_Elem131Label"
         Val_Elem131Label.Size = New System.Drawing.Size(47, 13)
         Val_Elem131Label.TabIndex = 83
@@ -578,7 +579,7 @@ Partial Class formSynopRA1
         'Val_Elem128Label
         '
         Val_Elem128Label.AutoSize = True
-        Val_Elem128Label.Location = New System.Drawing.Point(547, 222)
+        Val_Elem128Label.Location = New System.Drawing.Point(547, 212)
         Val_Elem128Label.Name = "Val_Elem128Label"
         Val_Elem128Label.Size = New System.Drawing.Size(21, 13)
         Val_Elem128Label.TabIndex = 85
@@ -587,7 +588,7 @@ Partial Class formSynopRA1
         'Val_Elem129Label
         '
         Val_Elem129Label.AutoSize = True
-        Val_Elem129Label.Location = New System.Drawing.Point(547, 248)
+        Val_Elem129Label.Location = New System.Drawing.Point(547, 238)
         Val_Elem129Label.Name = "Val_Elem129Label"
         Val_Elem129Label.Size = New System.Drawing.Size(20, 13)
         Val_Elem129Label.TabIndex = 87
@@ -596,7 +597,7 @@ Partial Class formSynopRA1
         'Val_Elem130Label
         '
         Val_Elem130Label.AutoSize = True
-        Val_Elem130Label.Location = New System.Drawing.Point(547, 274)
+        Val_Elem130Label.Location = New System.Drawing.Point(547, 264)
         Val_Elem130Label.Name = "Val_Elem130Label"
         Val_Elem130Label.Size = New System.Drawing.Size(37, 13)
         Val_Elem130Label.TabIndex = 89
@@ -605,7 +606,7 @@ Partial Class formSynopRA1
         'Val_Elem002Label
         '
         Val_Elem002Label.AutoSize = True
-        Val_Elem002Label.Location = New System.Drawing.Point(547, 300)
+        Val_Elem002Label.Location = New System.Drawing.Point(547, 290)
         Val_Elem002Label.Name = "Val_Elem002Label"
         Val_Elem002Label.Size = New System.Drawing.Size(33, 13)
         Val_Elem002Label.TabIndex = 91
@@ -614,7 +615,7 @@ Partial Class formSynopRA1
         'Val_Elem003Label
         '
         Val_Elem003Label.AutoSize = True
-        Val_Elem003Label.Location = New System.Drawing.Point(547, 326)
+        Val_Elem003Label.Location = New System.Drawing.Point(547, 316)
         Val_Elem003Label.Name = "Val_Elem003Label"
         Val_Elem003Label.Size = New System.Drawing.Size(30, 13)
         Val_Elem003Label.TabIndex = 93
@@ -623,7 +624,7 @@ Partial Class formSynopRA1
         'Val_Elem099Label
         '
         Val_Elem099Label.AutoSize = True
-        Val_Elem099Label.Location = New System.Drawing.Point(547, 352)
+        Val_Elem099Label.Location = New System.Drawing.Point(547, 342)
         Val_Elem099Label.Name = "Val_Elem099Label"
         Val_Elem099Label.Size = New System.Drawing.Size(31, 13)
         Val_Elem099Label.TabIndex = 95
@@ -632,7 +633,7 @@ Partial Class formSynopRA1
         'Val_Elem018Label
         '
         Val_Elem018Label.AutoSize = True
-        Val_Elem018Label.Location = New System.Drawing.Point(547, 378)
+        Val_Elem018Label.Location = New System.Drawing.Point(547, 368)
         Val_Elem018Label.Name = "Val_Elem018Label"
         Val_Elem018Label.Size = New System.Drawing.Size(64, 13)
         Val_Elem018Label.TabIndex = 97
@@ -641,7 +642,7 @@ Partial Class formSynopRA1
         'Val_Elem084Label
         '
         Val_Elem084Label.AutoSize = True
-        Val_Elem084Label.Location = New System.Drawing.Point(547, 404)
+        Val_Elem084Label.Location = New System.Drawing.Point(547, 394)
         Val_Elem084Label.Name = "Val_Elem084Label"
         Val_Elem084Label.Size = New System.Drawing.Size(54, 13)
         Val_Elem084Label.TabIndex = 99
@@ -650,7 +651,7 @@ Partial Class formSynopRA1
         'Val_Elem132Label
         '
         Val_Elem132Label.AutoSize = True
-        Val_Elem132Label.Location = New System.Drawing.Point(547, 430)
+        Val_Elem132Label.Location = New System.Drawing.Point(547, 420)
         Val_Elem132Label.Name = "Val_Elem132Label"
         Val_Elem132Label.Size = New System.Drawing.Size(48, 13)
         Val_Elem132Label.TabIndex = 101
@@ -659,7 +660,7 @@ Partial Class formSynopRA1
         'Val_Elem005Label
         '
         Val_Elem005Label.AutoSize = True
-        Val_Elem005Label.Location = New System.Drawing.Point(547, 456)
+        Val_Elem005Label.Location = New System.Drawing.Point(547, 446)
         Val_Elem005Label.Name = "Val_Elem005Label"
         Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
         Val_Elem005Label.TabIndex = 103
@@ -668,7 +669,7 @@ Partial Class formSynopRA1
         'Val_Elem174Label
         '
         Val_Elem174Label.AutoSize = True
-        Val_Elem174Label.Location = New System.Drawing.Point(547, 482)
+        Val_Elem174Label.Location = New System.Drawing.Point(547, 472)
         Val_Elem174Label.Name = "Val_Elem174Label"
         Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
         Val_Elem174Label.TabIndex = 105
@@ -677,7 +678,7 @@ Partial Class formSynopRA1
         'Val_Elem046Label
         '
         Val_Elem046Label.AutoSize = True
-        Val_Elem046Label.Location = New System.Drawing.Point(547, 511)
+        Val_Elem046Label.Location = New System.Drawing.Point(547, 501)
         Val_Elem046Label.Name = "Val_Elem046Label"
         Val_Elem046Label.Size = New System.Drawing.Size(52, 13)
         Val_Elem046Label.TabIndex = 107
@@ -685,385 +686,385 @@ Partial Class formSynopRA1
         '
         'StationIdTextBox
         '
-        Me.StationIdTextBox.Location = New System.Drawing.Point(111, 42)
+        Me.StationIdTextBox.Location = New System.Drawing.Point(111, 32)
         Me.StationIdTextBox.Name = "StationIdTextBox"
         Me.StationIdTextBox.Size = New System.Drawing.Size(100, 20)
         Me.StationIdTextBox.TabIndex = 2
         '
         'YyyyTextBox
         '
-        Me.YyyyTextBox.Location = New System.Drawing.Point(281, 42)
+        Me.YyyyTextBox.Location = New System.Drawing.Point(281, 32)
         Me.YyyyTextBox.Name = "YyyyTextBox"
         Me.YyyyTextBox.Size = New System.Drawing.Size(57, 20)
         Me.YyyyTextBox.TabIndex = 4
         '
         'MmTextBox
         '
-        Me.MmTextBox.Location = New System.Drawing.Point(399, 42)
+        Me.MmTextBox.Location = New System.Drawing.Point(399, 32)
         Me.MmTextBox.Name = "MmTextBox"
         Me.MmTextBox.Size = New System.Drawing.Size(43, 20)
         Me.MmTextBox.TabIndex = 6
         '
         'DdTextBox
         '
-        Me.DdTextBox.Location = New System.Drawing.Point(490, 42)
+        Me.DdTextBox.Location = New System.Drawing.Point(490, 32)
         Me.DdTextBox.Name = "DdTextBox"
         Me.DdTextBox.Size = New System.Drawing.Size(30, 20)
         Me.DdTextBox.TabIndex = 8
         '
         'HhTextBox
         '
-        Me.HhTextBox.Location = New System.Drawing.Point(570, 42)
+        Me.HhTextBox.Location = New System.Drawing.Point(570, 32)
         Me.HhTextBox.Name = "HhTextBox"
         Me.HhTextBox.Size = New System.Drawing.Size(46, 20)
         Me.HhTextBox.TabIndex = 10
         '
         'Val_Elem106TextBox
         '
-        Me.Val_Elem106TextBox.Location = New System.Drawing.Point(129, 89)
+        Me.Val_Elem106TextBox.Location = New System.Drawing.Point(129, 79)
         Me.Val_Elem106TextBox.Name = "Val_Elem106TextBox"
         Me.Val_Elem106TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem106TextBox.TabIndex = 12
         '
         'Val_Elem107TextBox
         '
-        Me.Val_Elem107TextBox.Location = New System.Drawing.Point(129, 115)
+        Me.Val_Elem107TextBox.Location = New System.Drawing.Point(129, 105)
         Me.Val_Elem107TextBox.Name = "Val_Elem107TextBox"
         Me.Val_Elem107TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem107TextBox.TabIndex = 14
         '
         'Val_Elem400TextBox
         '
-        Me.Val_Elem400TextBox.Location = New System.Drawing.Point(129, 141)
+        Me.Val_Elem400TextBox.Location = New System.Drawing.Point(129, 131)
         Me.Val_Elem400TextBox.Name = "Val_Elem400TextBox"
         Me.Val_Elem400TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem400TextBox.TabIndex = 16
         '
         'Val_Elem814TextBox
         '
-        Me.Val_Elem814TextBox.Location = New System.Drawing.Point(129, 167)
+        Me.Val_Elem814TextBox.Location = New System.Drawing.Point(129, 157)
         Me.Val_Elem814TextBox.Name = "Val_Elem814TextBox"
         Me.Val_Elem814TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem814TextBox.TabIndex = 18
         '
         'Val_Elem399TextBox
         '
-        Me.Val_Elem399TextBox.Location = New System.Drawing.Point(129, 193)
+        Me.Val_Elem399TextBox.Location = New System.Drawing.Point(129, 183)
         Me.Val_Elem399TextBox.Name = "Val_Elem399TextBox"
         Me.Val_Elem399TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem399TextBox.TabIndex = 20
         '
         'Val_Elem301TextBox
         '
-        Me.Val_Elem301TextBox.Location = New System.Drawing.Point(129, 219)
+        Me.Val_Elem301TextBox.Location = New System.Drawing.Point(129, 209)
         Me.Val_Elem301TextBox.Name = "Val_Elem301TextBox"
         Me.Val_Elem301TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem301TextBox.TabIndex = 22
         '
         'Val_Elem196TextBox
         '
-        Me.Val_Elem196TextBox.Location = New System.Drawing.Point(129, 245)
+        Me.Val_Elem196TextBox.Location = New System.Drawing.Point(129, 235)
         Me.Val_Elem196TextBox.Name = "Val_Elem196TextBox"
         Me.Val_Elem196TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem196TextBox.TabIndex = 24
         '
         'Val_Elem101TextBox
         '
-        Me.Val_Elem101TextBox.Location = New System.Drawing.Point(129, 271)
+        Me.Val_Elem101TextBox.Location = New System.Drawing.Point(129, 261)
         Me.Val_Elem101TextBox.Name = "Val_Elem101TextBox"
         Me.Val_Elem101TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem101TextBox.TabIndex = 26
         '
         'Val_Elem102TextBox
         '
-        Me.Val_Elem102TextBox.Location = New System.Drawing.Point(129, 297)
+        Me.Val_Elem102TextBox.Location = New System.Drawing.Point(129, 287)
         Me.Val_Elem102TextBox.Name = "Val_Elem102TextBox"
         Me.Val_Elem102TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem102TextBox.TabIndex = 28
         '
         'Val_Elem103TextBox
         '
-        Me.Val_Elem103TextBox.Location = New System.Drawing.Point(129, 323)
+        Me.Val_Elem103TextBox.Location = New System.Drawing.Point(129, 313)
         Me.Val_Elem103TextBox.Name = "Val_Elem103TextBox"
         Me.Val_Elem103TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem103TextBox.TabIndex = 30
         '
         'Val_Elem105TextBox
         '
-        Me.Val_Elem105TextBox.Location = New System.Drawing.Point(129, 349)
+        Me.Val_Elem105TextBox.Location = New System.Drawing.Point(129, 339)
         Me.Val_Elem105TextBox.Name = "Val_Elem105TextBox"
         Me.Val_Elem105TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem105TextBox.TabIndex = 32
         '
         'Val_Elem176TextBox
         '
-        Me.Val_Elem176TextBox.Location = New System.Drawing.Point(129, 375)
+        Me.Val_Elem176TextBox.Location = New System.Drawing.Point(129, 365)
         Me.Val_Elem176TextBox.Name = "Val_Elem176TextBox"
         Me.Val_Elem176TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem176TextBox.TabIndex = 34
         '
         'Val_Elem110TextBox
         '
-        Me.Val_Elem110TextBox.Location = New System.Drawing.Point(129, 401)
+        Me.Val_Elem110TextBox.Location = New System.Drawing.Point(129, 391)
         Me.Val_Elem110TextBox.Name = "Val_Elem110TextBox"
         Me.Val_Elem110TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem110TextBox.TabIndex = 36
         '
         'Val_Elem114TextBox
         '
-        Me.Val_Elem114TextBox.Location = New System.Drawing.Point(129, 427)
+        Me.Val_Elem114TextBox.Location = New System.Drawing.Point(129, 417)
         Me.Val_Elem114TextBox.Name = "Val_Elem114TextBox"
         Me.Val_Elem114TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem114TextBox.TabIndex = 38
         '
         'Val_Elem112TextBox
         '
-        Me.Val_Elem112TextBox.Location = New System.Drawing.Point(129, 453)
+        Me.Val_Elem112TextBox.Location = New System.Drawing.Point(129, 443)
         Me.Val_Elem112TextBox.Name = "Val_Elem112TextBox"
         Me.Val_Elem112TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem112TextBox.TabIndex = 40
         '
         'Val_Elem111TextBox
         '
-        Me.Val_Elem111TextBox.Location = New System.Drawing.Point(129, 479)
+        Me.Val_Elem111TextBox.Location = New System.Drawing.Point(129, 469)
         Me.Val_Elem111TextBox.Name = "Val_Elem111TextBox"
         Me.Val_Elem111TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem111TextBox.TabIndex = 42
         '
         'Val_Elem167TextBox
         '
-        Me.Val_Elem167TextBox.Location = New System.Drawing.Point(384, 89)
+        Me.Val_Elem167TextBox.Location = New System.Drawing.Point(384, 79)
         Me.Val_Elem167TextBox.Name = "Val_Elem167TextBox"
         Me.Val_Elem167TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem167TextBox.TabIndex = 44
         '
         'Val_Elem197TextBox
         '
-        Me.Val_Elem197TextBox.Location = New System.Drawing.Point(384, 115)
+        Me.Val_Elem197TextBox.Location = New System.Drawing.Point(384, 105)
         Me.Val_Elem197TextBox.Name = "Val_Elem197TextBox"
         Me.Val_Elem197TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem197TextBox.TabIndex = 46
         '
         'Val_Elem193TextBox
         '
-        Me.Val_Elem193TextBox.Location = New System.Drawing.Point(384, 141)
+        Me.Val_Elem193TextBox.Location = New System.Drawing.Point(384, 131)
         Me.Val_Elem193TextBox.Name = "Val_Elem193TextBox"
         Me.Val_Elem193TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem193TextBox.TabIndex = 48
         '
         'Val_Elem115TextBox
         '
-        Me.Val_Elem115TextBox.Location = New System.Drawing.Point(384, 167)
+        Me.Val_Elem115TextBox.Location = New System.Drawing.Point(384, 157)
         Me.Val_Elem115TextBox.Name = "Val_Elem115TextBox"
         Me.Val_Elem115TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem115TextBox.TabIndex = 50
         '
         'Val_Elem177TextBox
         '
-        Me.Val_Elem177TextBox.Location = New System.Drawing.Point(384, 193)
+        Me.Val_Elem177TextBox.Location = New System.Drawing.Point(384, 183)
         Me.Val_Elem177TextBox.Name = "Val_Elem177TextBox"
         Me.Val_Elem177TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem177TextBox.TabIndex = 52
         '
         'Val_Elem178TextBox
         '
-        Me.Val_Elem178TextBox.Location = New System.Drawing.Point(384, 219)
+        Me.Val_Elem178TextBox.Location = New System.Drawing.Point(384, 209)
         Me.Val_Elem178TextBox.Name = "Val_Elem178TextBox"
         Me.Val_Elem178TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem178TextBox.TabIndex = 54
         '
         'Val_Elem179TextBox
         '
-        Me.Val_Elem179TextBox.Location = New System.Drawing.Point(384, 245)
+        Me.Val_Elem179TextBox.Location = New System.Drawing.Point(384, 235)
         Me.Val_Elem179TextBox.Name = "Val_Elem179TextBox"
         Me.Val_Elem179TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem179TextBox.TabIndex = 56
         '
         'Val_Elem180TextBox
         '
-        Me.Val_Elem180TextBox.Location = New System.Drawing.Point(384, 271)
+        Me.Val_Elem180TextBox.Location = New System.Drawing.Point(384, 261)
         Me.Val_Elem180TextBox.Name = "Val_Elem180TextBox"
         Me.Val_Elem180TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem180TextBox.TabIndex = 58
         '
         'Val_Elem119TextBox
         '
-        Me.Val_Elem119TextBox.Location = New System.Drawing.Point(384, 297)
+        Me.Val_Elem119TextBox.Location = New System.Drawing.Point(384, 287)
         Me.Val_Elem119TextBox.Name = "Val_Elem119TextBox"
         Me.Val_Elem119TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem119TextBox.TabIndex = 60
         '
         'Val_Elem116TextBox
         '
-        Me.Val_Elem116TextBox.Location = New System.Drawing.Point(384, 323)
+        Me.Val_Elem116TextBox.Location = New System.Drawing.Point(384, 313)
         Me.Val_Elem116TextBox.Name = "Val_Elem116TextBox"
         Me.Val_Elem116TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem116TextBox.TabIndex = 62
         '
         'Val_Elem117TextBox
         '
-        Me.Val_Elem117TextBox.Location = New System.Drawing.Point(384, 349)
+        Me.Val_Elem117TextBox.Location = New System.Drawing.Point(384, 339)
         Me.Val_Elem117TextBox.Name = "Val_Elem117TextBox"
         Me.Val_Elem117TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem117TextBox.TabIndex = 64
         '
         'Val_Elem118TextBox
         '
-        Me.Val_Elem118TextBox.Location = New System.Drawing.Point(384, 375)
+        Me.Val_Elem118TextBox.Location = New System.Drawing.Point(384, 365)
         Me.Val_Elem118TextBox.Name = "Val_Elem118TextBox"
         Me.Val_Elem118TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem118TextBox.TabIndex = 66
         '
         'Val_Elem123TextBox
         '
-        Me.Val_Elem123TextBox.Location = New System.Drawing.Point(384, 401)
+        Me.Val_Elem123TextBox.Location = New System.Drawing.Point(384, 391)
         Me.Val_Elem123TextBox.Name = "Val_Elem123TextBox"
         Me.Val_Elem123TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem123TextBox.TabIndex = 68
         '
         'Val_Elem120TextBox
         '
-        Me.Val_Elem120TextBox.Location = New System.Drawing.Point(384, 427)
+        Me.Val_Elem120TextBox.Location = New System.Drawing.Point(384, 417)
         Me.Val_Elem120TextBox.Name = "Val_Elem120TextBox"
         Me.Val_Elem120TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem120TextBox.TabIndex = 70
         '
         'Val_Elem121TextBox
         '
-        Me.Val_Elem121TextBox.Location = New System.Drawing.Point(384, 453)
+        Me.Val_Elem121TextBox.Location = New System.Drawing.Point(384, 443)
         Me.Val_Elem121TextBox.Name = "Val_Elem121TextBox"
         Me.Val_Elem121TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem121TextBox.TabIndex = 72
         '
         'Val_Elem122TextBox
         '
-        Me.Val_Elem122TextBox.Location = New System.Drawing.Point(384, 479)
+        Me.Val_Elem122TextBox.Location = New System.Drawing.Point(384, 469)
         Me.Val_Elem122TextBox.Name = "Val_Elem122TextBox"
         Me.Val_Elem122TextBox.Size = New System.Drawing.Size(50, 20)
         Me.Val_Elem122TextBox.TabIndex = 74
         '
         'Val_Elem127TextBox
         '
-        Me.Val_Elem127TextBox.Location = New System.Drawing.Point(622, 89)
+        Me.Val_Elem127TextBox.Location = New System.Drawing.Point(622, 79)
         Me.Val_Elem127TextBox.Name = "Val_Elem127TextBox"
         Me.Val_Elem127TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem127TextBox.TabIndex = 76
         '
         'Val_Elem124TextBox
         '
-        Me.Val_Elem124TextBox.Location = New System.Drawing.Point(622, 115)
+        Me.Val_Elem124TextBox.Location = New System.Drawing.Point(622, 105)
         Me.Val_Elem124TextBox.Name = "Val_Elem124TextBox"
         Me.Val_Elem124TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem124TextBox.TabIndex = 78
         '
         'Val_Elem125TextBox
         '
-        Me.Val_Elem125TextBox.Location = New System.Drawing.Point(622, 141)
+        Me.Val_Elem125TextBox.Location = New System.Drawing.Point(622, 131)
         Me.Val_Elem125TextBox.Name = "Val_Elem125TextBox"
         Me.Val_Elem125TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem125TextBox.TabIndex = 80
         '
         'Val_Elem126TextBox
         '
-        Me.Val_Elem126TextBox.Location = New System.Drawing.Point(622, 167)
+        Me.Val_Elem126TextBox.Location = New System.Drawing.Point(622, 157)
         Me.Val_Elem126TextBox.Name = "Val_Elem126TextBox"
         Me.Val_Elem126TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem126TextBox.TabIndex = 82
         '
         'Val_Elem131TextBox
         '
-        Me.Val_Elem131TextBox.Location = New System.Drawing.Point(622, 193)
+        Me.Val_Elem131TextBox.Location = New System.Drawing.Point(622, 183)
         Me.Val_Elem131TextBox.Name = "Val_Elem131TextBox"
         Me.Val_Elem131TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem131TextBox.TabIndex = 84
         '
         'Val_Elem128TextBox
         '
-        Me.Val_Elem128TextBox.Location = New System.Drawing.Point(622, 219)
+        Me.Val_Elem128TextBox.Location = New System.Drawing.Point(622, 209)
         Me.Val_Elem128TextBox.Name = "Val_Elem128TextBox"
         Me.Val_Elem128TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem128TextBox.TabIndex = 86
         '
         'Val_Elem129TextBox
         '
-        Me.Val_Elem129TextBox.Location = New System.Drawing.Point(622, 245)
+        Me.Val_Elem129TextBox.Location = New System.Drawing.Point(622, 235)
         Me.Val_Elem129TextBox.Name = "Val_Elem129TextBox"
         Me.Val_Elem129TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem129TextBox.TabIndex = 88
         '
         'Val_Elem130TextBox
         '
-        Me.Val_Elem130TextBox.Location = New System.Drawing.Point(622, 271)
+        Me.Val_Elem130TextBox.Location = New System.Drawing.Point(622, 261)
         Me.Val_Elem130TextBox.Name = "Val_Elem130TextBox"
         Me.Val_Elem130TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem130TextBox.TabIndex = 90
         '
         'Val_Elem002TextBox
         '
-        Me.Val_Elem002TextBox.Location = New System.Drawing.Point(622, 297)
+        Me.Val_Elem002TextBox.Location = New System.Drawing.Point(622, 287)
         Me.Val_Elem002TextBox.Name = "Val_Elem002TextBox"
         Me.Val_Elem002TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem002TextBox.TabIndex = 92
         '
         'Val_Elem003TextBox
         '
-        Me.Val_Elem003TextBox.Location = New System.Drawing.Point(622, 323)
+        Me.Val_Elem003TextBox.Location = New System.Drawing.Point(622, 313)
         Me.Val_Elem003TextBox.Name = "Val_Elem003TextBox"
         Me.Val_Elem003TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem003TextBox.TabIndex = 94
         '
         'Val_Elem099TextBox
         '
-        Me.Val_Elem099TextBox.Location = New System.Drawing.Point(622, 349)
+        Me.Val_Elem099TextBox.Location = New System.Drawing.Point(622, 339)
         Me.Val_Elem099TextBox.Name = "Val_Elem099TextBox"
         Me.Val_Elem099TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem099TextBox.TabIndex = 96
         '
         'Val_Elem018TextBox
         '
-        Me.Val_Elem018TextBox.Location = New System.Drawing.Point(622, 375)
+        Me.Val_Elem018TextBox.Location = New System.Drawing.Point(622, 365)
         Me.Val_Elem018TextBox.Name = "Val_Elem018TextBox"
         Me.Val_Elem018TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem018TextBox.TabIndex = 98
         '
         'Val_Elem084TextBox
         '
-        Me.Val_Elem084TextBox.Location = New System.Drawing.Point(622, 401)
+        Me.Val_Elem084TextBox.Location = New System.Drawing.Point(622, 391)
         Me.Val_Elem084TextBox.Name = "Val_Elem084TextBox"
         Me.Val_Elem084TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem084TextBox.TabIndex = 100
         '
         'Val_Elem132TextBox
         '
-        Me.Val_Elem132TextBox.Location = New System.Drawing.Point(622, 427)
+        Me.Val_Elem132TextBox.Location = New System.Drawing.Point(622, 417)
         Me.Val_Elem132TextBox.Name = "Val_Elem132TextBox"
         Me.Val_Elem132TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem132TextBox.TabIndex = 102
         '
         'Val_Elem005TextBox
         '
-        Me.Val_Elem005TextBox.Location = New System.Drawing.Point(622, 453)
+        Me.Val_Elem005TextBox.Location = New System.Drawing.Point(622, 443)
         Me.Val_Elem005TextBox.Name = "Val_Elem005TextBox"
         Me.Val_Elem005TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem005TextBox.TabIndex = 104
         '
         'Val_Elem174TextBox
         '
-        Me.Val_Elem174TextBox.Location = New System.Drawing.Point(622, 479)
+        Me.Val_Elem174TextBox.Location = New System.Drawing.Point(622, 469)
         Me.Val_Elem174TextBox.Name = "Val_Elem174TextBox"
         Me.Val_Elem174TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem174TextBox.TabIndex = 106
         '
         'Val_Elem046TextBox
         '
-        Me.Val_Elem046TextBox.Location = New System.Drawing.Point(622, 508)
+        Me.Val_Elem046TextBox.Location = New System.Drawing.Point(622, 498)
         Me.Val_Elem046TextBox.Name = "Val_Elem046TextBox"
         Me.Val_Elem046TextBox.Size = New System.Drawing.Size(48, 20)
         Me.Val_Elem046TextBox.TabIndex = 108
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(529, 595)
+        Me.btnClose.Location = New System.Drawing.Point(480, 587)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 109
@@ -1073,7 +1074,7 @@ Partial Class formSynopRA1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(446, 595)
+        Me.btnClear.Location = New System.Drawing.Point(399, 587)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 129
@@ -1083,16 +1084,16 @@ Partial Class formSynopRA1
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(122, 595)
+        Me.btnCommit.Location = New System.Drawing.Point(151, 587)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 128
-        Me.btnCommit.Text = "Commit"
+        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(203, 595)
+        Me.btnDelete.Location = New System.Drawing.Point(318, 587)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 127
@@ -1101,7 +1102,7 @@ Partial Class formSynopRA1
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(284, 595)
+        Me.btnAddNew.Location = New System.Drawing.Point(69, 587)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 126
@@ -1110,7 +1111,7 @@ Partial Class formSynopRA1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(365, 595)
+        Me.btnUpdate.Location = New System.Drawing.Point(232, 587)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 125
@@ -1119,7 +1120,8 @@ Partial Class formSynopRA1
         '
         'btnMovePrevious
         '
-        Me.btnMovePrevious.Location = New System.Drawing.Point(247, 556)
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(247, 546)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 124
@@ -1128,7 +1130,8 @@ Partial Class formSynopRA1
         '
         'btnMoveFirst
         '
-        Me.btnMoveFirst.Location = New System.Drawing.Point(200, 556)
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(200, 546)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 123
@@ -1137,34 +1140,46 @@ Partial Class formSynopRA1
         '
         'btnMoveLast
         '
-        Me.btnMoveLast.Location = New System.Drawing.Point(490, 556)
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(490, 546)
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(31, 23)
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 122
         Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(299, 558)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(299, 548)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 121
         '
         'btnMoveNext
         '
-        Me.btnMoveNext.Location = New System.Drawing.Point(446, 556)
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(446, 546)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 120
         Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
+        'btnHelp
+        '
+        Me.btnHelp.Location = New System.Drawing.Point(562, 586)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.TabIndex = 130
+        Me.btnHelp.Text = "Help"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
         'formSynopRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(789, 632)
+        Me.ClientSize = New System.Drawing.Size(740, 632)
+        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
         Me.Controls.Add(Me.btnDelete)
@@ -1356,5 +1371,6 @@ Partial Class formSynopRA1
     Friend WithEvents btnMoveLast As System.Windows.Forms.Button
     Friend WithEvents recNumberTextBox As System.Windows.Forms.TextBox
     Friend WithEvents btnMoveNext As System.Windows.Forms.Button
+    Friend WithEvents btnHelp As System.Windows.Forms.Button
 
 End Class
