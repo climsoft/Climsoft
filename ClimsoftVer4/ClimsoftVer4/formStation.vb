@@ -145,9 +145,9 @@
         ds.Tables("station").Rows(inc).Item("stationName") = StationNameTextBox.Text
         'ds.Tables("station").Rows(inc).Item("latitude") = StationNameTextBox.Text
         'ds.Tables("station").Rows(inc).Item("longitude") = StationNameTextBox.Text
-        ds.Tables("station").Rows(inc).Item("country") = StationNameTextBox.Text
-        ds.Tables("station").Rows(inc).Item("authority") = StationNameTextBox.Text
-        ds.Tables("station").Rows(inc).Item("drainagebasin") = StationNameTextBox.Text
+        ds.Tables("station").Rows(inc).Item("country") = CountryTextBox.Text
+        ds.Tables("station").Rows(inc).Item("authority") = AuthorityTextBox.Text
+        ds.Tables("station").Rows(inc).Item("drainagebasin") = DrainageBasinTextBox.Text
         'ds.Tables("station").Rows(inc).Item("geolocationAccuracy") = GeoLocationAccuracyTextBox.Text
         'ds.Tables("station").Rows(inc).Item("geolocationMethod") = GeoLocationMethodTextBox.Text
 
