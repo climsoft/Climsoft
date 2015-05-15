@@ -124,6 +124,12 @@
     <Compile Include="formProductsSelectCriteria.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formQC.Designer.vb">
+      <DependentUpon>formQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formQC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formStation.designer.vb">
       <DependentUpon>formStation.vb</DependentUpon>
     </Compile>
@@ -143,6 +149,12 @@
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formWindRose.Designer.vb">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formWindRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAction.designer.vb">
       <DependentUpon>frmAction.vb</DependentUpon>
     </Compile>
@@ -153,6 +165,12 @@
       <DependentUpon>frmdataentry.vb</DependentUpon>
     </Compile>
     <Compile Include="frmdataentry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataOutpt.Designer.vb">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataOutpt.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGeneralForm.designer.vb">
@@ -218,6 +236,9 @@
     <EmbeddedResource Include="formProductsSelectCriteria.resx">
       <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formQC.resx">
+      <DependentUpon>formQC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formStation.resx">
       <DependentUpon>formStation.vb</DependentUpon>
     </EmbeddedResource>
@@ -227,11 +248,17 @@
     <EmbeddedResource Include="formDatabaseConnect.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formWindRose.resx">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAction.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmdataentry.resx">
       <DependentUpon>frmdataentry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataOutpt.resx">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneralForm.resx">
       <DependentUpon>frmGeneralForm.vb</DependentUpon>

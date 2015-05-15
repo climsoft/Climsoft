@@ -26,6 +26,7 @@ Partial Class frmAction
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.cmdApply = New System.Windows.Forms.Button()
+        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.SuspendLayout()
         '
         'cmdHelp
@@ -82,4 +83,5 @@ Partial Class frmAction
     Friend WithEvents cmdCancel As System.Windows.Forms.Button
     Friend WithEvents cmdOk As System.Windows.Forms.Button
     Friend WithEvents cmdApply As System.Windows.Forms.Button
+    Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
 End Class
