@@ -11,6 +11,7 @@
     Dim sql As String
     Dim maxRows As Integer
     Private Sub navigateRecords()
+        On Error GoTo Err
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
@@ -27,6 +28,9 @@
 
         'display record number
         displayRecordNumber()
+        Exit Sub
+Err:
+        If Err.Number = 13 Then Resume Next
     End Sub
     Public Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox

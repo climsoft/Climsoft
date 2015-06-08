@@ -39,9 +39,8 @@
                 conn.ConnectionString = connectstr 'line
                 conn.Open()
                 sr.Close()
-
-                ' Open Main Dialog Form
-                frmMainMenu.Show()
+                ' Load Splash screen
+                SplashScreen.Show()
                 Me.Hide()
             End Using
         Catch e As Exception
