@@ -86,7 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassHelp.vb" />
+    <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsProducts.vb" />
+    <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formDbUtilities.Designer.vb">
       <DependentUpon>formDbUtilities.vb</DependentUpon>

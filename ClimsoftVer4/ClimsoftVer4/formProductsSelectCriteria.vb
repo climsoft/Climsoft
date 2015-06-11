@@ -171,7 +171,6 @@
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim stnlist, elmlist, elmcolmn, sdate, edate, sql As String
         Dim flds As Integer
-        MsgBox(lblProductType.Text)
 
         ' Get the stations list
         stnlist = ""
@@ -222,6 +221,12 @@
                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
                 'MsgBox(sql)
                 DataProducts(sql)
+            Case "CPT"
+                Dim myInterface As New clsRInterface()
+                myInterface.productCDTExample()
+            Case "Histograms"
+                Dim myInterface As New clsRInterface()
+                myInterface.productHistogramExample()
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
