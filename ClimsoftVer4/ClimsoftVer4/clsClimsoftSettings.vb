@@ -1,12 +1,19 @@
 ﻿Imports System.IO
 
+Public Class GlobalVariables
+    Public Shared cultureInfo As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CurrentCulture
+    ' The language can be changed from the detected language by using:
+    ' cultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("de-DE")
+    Public Shared projectAssembly = GetType(frmMainMenu).Assembly
+    Public Shared languageResourceManager As New System.Resources.ResourceManager("ClimsoftVer4.language", projectAssembly)
+    Public Shared lang As Func(Of String, String) = Function(x As String) languageResourceManager.GetString(x, cultureInfo)
+End Class
 
 Public Class clsClimsoftSettings
     ' Each running instance of CLIMSOFT will have a single instance of clsClimsoftSettings
     Dim rPath As String
     Dim systemPath As String = System.Environment.GetEnvironmentVariable("PATH")
     Dim R_HOME As String = "C:\Program Files\R\R-3.2.0"  ' Default location of R home directory (only used if R_HOME environment variable is not set)
-
 
     Sub rEnvironmentSetUp()
         ' Setup system environment variables.
