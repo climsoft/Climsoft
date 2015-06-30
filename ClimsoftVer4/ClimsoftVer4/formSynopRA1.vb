@@ -17,9 +17,14 @@
 
         StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
         YyyyTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-        MmTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-        DdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-        HhTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+        cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+        cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+        cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+
+        'MmTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+        'DdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+        'HhTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+        'Display observation values in coressponding textboxes
         Val_Elem106TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106")
         Val_Elem107TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107")
         Val_Elem400TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400")
@@ -70,6 +75,58 @@
         Val_Elem117TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117")
         Val_Elem119TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119")
         Val_Elem180TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180")
+        'Display flag values in corresponding textboxes
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106")) Then txtFlag106.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107")) Then txtFlag107.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400")) Then txtFlag400.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814")) Then txtFlag814.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399")) Then txtFlag399.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")) Then txtFlag106.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196")) Then txtFlag196.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")) Then txtFlag301.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101")) Then txtFlag101.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102")) Then txtFlag102.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103")) Then txtFlag103.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105")) Then txtFlag105.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176")) Then txtFlag176.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110")) Then txtFlag110.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114")) Then txtFlag114.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112")) Then txtFlag112.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111")) Then txtFlag111.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167")) Then txtFlag167.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197")) Then txtFlag197.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197")
+        'If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193")) Then txtFlag193.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115")) Then txtFlag115.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177")) Then txtFlag177.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178")) Then txtFlag178.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179")) Then txtFlag179.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116")) Then txtFlag116.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118")) Then txtFlag118.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123")) Then txtFlag123.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120")) Then txtFlag120.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121")) Then txtFlag121.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122")) Then txtFlag122.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127")) Then txtFlag127.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124")) Then txtFlag124.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125")) Then txtFlag125.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126")) Then txtFlag126.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131")) Then txtFlag131.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128")) Then txtFlag128.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129")) Then txtFlag129.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130")) Then txtFlag130.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002")) Then txtFlag002.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003")) Then txtFlag003.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099")) Then txtFlag099.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018")) Then txtFlag018.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084")) Then txtFlag084.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132")) Then txtFlag132.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005")) Then txtFlag005.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174")) Then txtFlag174.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046")) Then txtFlag046.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117")) Then txtFlag117.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119")) Then txtFlag119.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180")) Then txtFlag180.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180")
+
         displayRecordNumber()
     End Sub
     Public Sub displayRecordNumber()
@@ -134,9 +191,14 @@
         Dim recUpdate As New dataEntryGlobalRoutines
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = StationIdTextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = YyyyTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = MmTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = DdTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = HhTextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
+
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = MmTextBox.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = DdTextBox.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = HhTextBox.Text
+        'Update textboxes for observation values
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106") = Val_Elem106TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107") = Val_Elem107TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400") = Val_Elem400TextBox.Text
@@ -187,6 +249,57 @@
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117") = Val_Elem117TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119") = Val_Elem119TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180") = Val_Elem180TextBox.Text
+        'Update texboxes for observation flags
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106") = txtFlag106.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107") = txtFlag107.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400") = txtFlag400.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814") = txtFlag814.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399") = txtFlag399.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301") = txtFlag106.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196") = txtFlag196.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301") = txtFlag301.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101") = txtFlag101.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102") = txtFlag102.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103") = txtFlag103.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105") = txtFlag105.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176") = txtFlag176.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110") = txtFlag110.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114") = txtFlag114.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112") = txtFlag112.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111") = txtFlag111.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167") = txtFlag167.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197") = txtFlag197.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193") = txtFlag193.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115") = txtFlag115.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177") = txtFlag177.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178") = txtFlag178.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179") = txtFlag179.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116") = txtFlag116.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118") = txtFlag118.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123") = txtFlag123.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120") = txtFlag120.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121") = txtFlag121.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122") = txtFlag122.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127") = txtFlag127.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124") = txtFlag124.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125") = txtFlag125.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126") = txtFlag126.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131") = txtFlag131.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128") = txtFlag128.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129") = txtFlag129.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130") = txtFlag130.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002") = txtFlag002.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003") = txtFlag003.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099") = txtFlag099.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018") = txtFlag018.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084") = txtFlag084.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132") = txtFlag132.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005") = txtFlag005.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174") = txtFlag174.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046") = txtFlag046.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117") = txtFlag117.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119") = txtFlag119.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180") = txtFlag180.Text
 
         'The data adapter is used to update the record in the data source table
         da.Update(ds, "form_synoptic_2_RA1")
@@ -217,9 +330,15 @@
         btnCommit.Enabled = True
         StationIdTextBox.Clear()
         YyyyTextBox.Clear()
-        MmTextBox.Clear()
-        DdTextBox.Clear()
-        HhTextBox.Clear()
+        cboMonth.Text = ""
+        cboDay.Text = ""
+        cboHour.Text = ""
+
+        'MmTextBox.Clear()
+        'DdTextBox.Clear()
+        'HhTextBox.Clear()
+
+        'Clear textboxes for observation values
         Val_Elem106TextBox.Clear()
         Val_Elem107TextBox.Clear()
         Val_Elem400TextBox.Clear()
@@ -237,7 +356,7 @@
         Val_Elem112TextBox.Clear()
         Val_Elem111TextBox.Clear()
         Val_Elem167TextBox.Clear()
-        Val_Elem107TextBox.Clear()
+        ' Val_Elem107TextBox.Clear()
         Val_Elem197TextBox.Clear()
         Val_Elem193TextBox.Clear()
         Val_Elem115TextBox.Clear()
@@ -270,8 +389,57 @@
         Val_Elem005TextBox.Clear()
         Val_Elem174TextBox.Clear()
         Val_Elem046TextBox.Clear()
-
-
+        'Clear texboxes for observation flags
+        txtFlag106.Clear()
+        txtFlag107.Clear()
+        txtFlag400.Clear()
+        txtFlag814.Clear()
+        txtFlag399.Clear()
+        txtFlag301.Clear()
+        txtFlag196.Clear()
+        txtFlag101.Clear()
+        txtFlag102.Clear()
+        txtFlag103.Clear()
+        txtFlag105.Clear()
+        txtFlag176.Clear()
+        txtFlag110.Clear()
+        txtFlag114.Clear()
+        txtFlag112.Clear()
+        txtFlag111.Clear()
+        txtflag167.Clear()
+        'Val_Elem107TextBox.Clear()
+        txtFlag197.Clear()
+        txtFlag193.Clear()
+        txtFlag115.Clear()
+        txtFlag177.Clear()
+        txtFlag178.Clear()
+        txtFlag179.Clear()
+        txtFlag180.Clear()
+        txtFlag119.Clear()
+        txtFlag116.Clear()
+        txtFlag117.Clear()
+        txtFlag118.Clear()
+        txtFlag123.Clear()
+        txtFlag120.Clear()
+        txtFlag121.Clear()
+        txtFlag122.Clear()
+        txtFlag127.Clear()
+        txtFlag124.Clear()
+        txtFlag125.Clear()
+        txtFlag126.Clear()
+        txtFlag131.Clear()
+        txtFlag128.Clear()
+        txtFlag129.Clear()
+        txtFlag130.Clear()
+        txtFlag002.Clear()
+        txtFlag003.Clear()
+        txtFlag099.Clear()
+        txtFlag018.Clear()
+        txtFlag084.Clear()
+        txtFlag132.Clear()
+        txtFlag005.Clear()
+        txtFlag174.Clear()
+        txtFlag046.Clear()
         'Set record index to last record
         inc = maxRows - 1
 
@@ -313,9 +481,14 @@
         dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = StationIdTextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = YyyyTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = MmTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = DdTextBox.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = HhTextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
+
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = MmTextBox.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = DdTextBox.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = HhTextBox.Text
+        'Commit observation values to database
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106") = Val_Elem106TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107") = Val_Elem107TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400") = Val_Elem400TextBox.Text
@@ -366,7 +539,57 @@
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Val_Elem117") = Val_Elem117TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119") = Val_Elem119TextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180") = Val_Elem180TextBox.Text
-
+        'Commit observation flags to database
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106") = txtFlag106.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107") = txtFlag107.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400") = txtFlag400.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814") = txtFlag814.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399") = txtFlag399.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301") = txtFlag301.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196") = txtFlag196.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301") = txtFlag301.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101") = txtFlag101.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102") = txtFlag102.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103") = txtFlag103.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105") = txtFlag105.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176") = txtflag176.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110") = txtFlag110.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114") = txtFlag114.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112") = txtFlag112.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111") = txtFlag111.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167") = txtFlag167.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197") = txtFlag197.Text
+        'ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193") = txtFlag193.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115") = txtFlag115.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177") = txtFlag177.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178") = txtFlag178.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179") = txtFlag179.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116") = txtFlag116.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118") = txtFlag118.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123") = txtFlag123.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120") = txtFlag120.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121") = txtFlag121.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122") = txtFlag122.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127") = txtFlag127.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124") = txtFlag124.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125") = txtFlag125.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126") = txtFlag126.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131") = txtFlag131.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128") = txtFlag128.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129") = txtFlag129.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130") = txtFlag130.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002") = txtFlag002.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003") = txtFlag003.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099") = txtFlag099.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018") = txtFlag018.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084") = txtFlag084.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132") = txtFlag132.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005") = txtFlag005.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174") = txtFlag174.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046") = txtFlag046.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117") = txtFlag117.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119") = txtFlag119.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180") = txtFlag180.Text
         'Add a new record to the data source table
         ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
         da.Update(ds, "form_synoptic_2_RA1")
@@ -438,9 +661,15 @@
         maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
         StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
         YyyyTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-        MmTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-        DdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-        HhTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+        cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+        cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+        cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+
+        'MmTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+        'DdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+        'HhTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+
+        'Initialize textboxes for observation values
         Val_Elem106TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem106")
         Val_Elem107TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem107")
         Val_Elem400TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem400")
@@ -491,8 +720,79 @@
         Val_Elem117TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem117")
         Val_Elem119TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem119")
         Val_Elem180TextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("val_elem180")
+        'Initialize textboxes for observation flags
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106")) Then txtFlag106.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag106")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107")) Then txtFlag107.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag107")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400")) Then txtFlag400.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag400")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814")) Then txtFlag814.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag814")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399")) Then txtFlag399.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag399")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")) Then txtFlag106.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196")) Then txtFlag196.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag196")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")) Then txtFlag301.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag301")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101")) Then txtFlag101.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag101")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102")) Then txtFlag102.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103")) Then txtFlag103.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105")) Then txtFlag105.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176")) Then txtFlag176.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110")) Then txtFlag110.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114")) Then txtFlag114.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112")) Then txtFlag112.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111")) Then txtFlag111.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag111")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167")) Then txtFlag167.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag167")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197")) Then txtFlag197.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag197")
+        'If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193")) Then txtFlag193.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag193")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115")) Then txtFlag115.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag115")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177")) Then txtFlag177.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag177")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178")) Then txtFlag178.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag178")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179")) Then txtFlag179.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag179")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116")) Then txtFlag116.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag116")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118")) Then txtFlag118.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag118")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123")) Then txtFlag123.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag123")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120")) Then txtFlag120.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag120")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121")) Then txtFlag121.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag121")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122")) Then txtFlag122.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag122")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127")) Then txtFlag127.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag127")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124")) Then txtFlag124.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag124")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125")) Then txtFlag125.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag125")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126")) Then txtFlag126.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag126")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131")) Then txtFlag131.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag131")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128")) Then txtFlag128.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag128")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129")) Then txtFlag129.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag129")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130")) Then txtFlag130.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag130")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002")) Then txtFlag002.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag002")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003")) Then txtFlag003.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag003")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099")) Then txtFlag099.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag099")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018")) Then txtFlag018.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag018")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084")) Then txtFlag084.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag084")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132")) Then txtFlag132.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag132")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005")) Then txtFlag005.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag005")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174")) Then txtFlag174.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag174")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046")) Then txtFlag046.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag046")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117")) Then txtFlag117.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag117")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119")) Then txtFlag119.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag119")
+        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180")) Then txtFlag180.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag180")
 
         displayRecordNumber()
 
+    End Sub
+
+   
+    Private Sub YyyyTextBox_LostFocus(sender As Object, e As EventArgs) Handles YyyyTextBox.LostFocus
+        If Not IsNumeric(YyyyTextBox.Text) Then
+            YyyyTextBox.BackColor = Color.Red
+            MsgBox("Number expected", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub cboMonth_LostFocus(sender As Object, e As EventArgs) Handles cboMonth.LostFocus
+        If cboMonth.Text > 12 Then
+            cboMonth.BackColor = Color.Red
+            MsgBox("Month of or range !", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub Val_Elem106TextBox_LostFocus(sender As Object, e As EventArgs) Handles Val_Elem106TextBox.LostFocus
+        txtFlag106.Text = Strings.Right(Val_Elem106TextBox.Text, 1)
+        Val_Elem106TextBox.Text = Strings.Left(Val_Elem106TextBox.Text, Len(Val_Elem106TextBox.Text) - 1)
     End Sub
 End Class
