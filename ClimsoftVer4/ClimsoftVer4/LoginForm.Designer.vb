@@ -39,6 +39,8 @@ Partial Class LoginForm
         Me.OK = New System.Windows.Forms.Button()
         Me.Cancel = New System.Windows.Forms.Button()
         Me.txtusrpwd = New System.Windows.Forms.TextBox()
+        Me.cmbDatabases = New System.Windows.Forms.ComboBox()
+        Me.lblDbdetails = New System.Windows.Forms.Label()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -48,13 +50,14 @@ Partial Class LoginForm
         Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
         Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
         Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(168, 194)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(178, 224)
+        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
         '
         'UsernameLabel
         '
-        Me.UsernameLabel.Location = New System.Drawing.Point(172, 24)
+        Me.UsernameLabel.Location = New System.Drawing.Point(192, 19)
         Me.UsernameLabel.Name = "UsernameLabel"
         Me.UsernameLabel.Size = New System.Drawing.Size(220, 23)
         Me.UsernameLabel.TabIndex = 0
@@ -63,7 +66,7 @@ Partial Class LoginForm
         '
         'PasswordLabel
         '
-        Me.PasswordLabel.Location = New System.Drawing.Point(172, 81)
+        Me.PasswordLabel.Location = New System.Drawing.Point(192, 76)
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(220, 23)
         Me.PasswordLabel.TabIndex = 2
@@ -72,14 +75,14 @@ Partial Class LoginForm
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(174, 44)
+        Me.txtUsername.Location = New System.Drawing.Point(194, 39)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(174, 101)
+        Me.txtPassword.Location = New System.Drawing.Point(194, 96)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
@@ -87,7 +90,7 @@ Partial Class LoginForm
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(197, 161)
+        Me.OK.Location = New System.Drawing.Point(204, 187)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(94, 23)
         Me.OK.TabIndex = 4
@@ -96,7 +99,7 @@ Partial Class LoginForm
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(300, 161)
+        Me.Cancel.Location = New System.Drawing.Point(307, 187)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(94, 23)
         Me.Cancel.TabIndex = 5
@@ -104,11 +107,31 @@ Partial Class LoginForm
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(197, 44)
+        Me.txtusrpwd.Location = New System.Drawing.Point(197, 40)
         Me.txtusrpwd.Name = "txtusrpwd"
         Me.txtusrpwd.Size = New System.Drawing.Size(177, 20)
         Me.txtusrpwd.TabIndex = 6
         Me.txtusrpwd.Visible = False
+        '
+        'cmbDatabases
+        '
+        Me.cmbDatabases.BackColor = System.Drawing.SystemColors.Menu
+        Me.cmbDatabases.FormattingEnabled = True
+        Me.cmbDatabases.Location = New System.Drawing.Point(194, 143)
+        Me.cmbDatabases.Name = "cmbDatabases"
+        Me.cmbDatabases.Size = New System.Drawing.Size(333, 21)
+        Me.cmbDatabases.TabIndex = 7
+        Me.cmbDatabases.Visible = False
+        '
+        'lblDbdetails
+        '
+        Me.lblDbdetails.AutoSize = True
+        Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
+        Me.lblDbdetails.Location = New System.Drawing.Point(192, 129)
+        Me.lblDbdetails.Name = "lblDbdetails"
+        Me.lblDbdetails.Size = New System.Drawing.Size(142, 13)
+        Me.lblDbdetails.TabIndex = 8
+        Me.lblDbdetails.Text = "Show Database Details........"
         '
         'LoginForm
         '
@@ -116,7 +139,9 @@ Partial Class LoginForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(401, 192)
+        Me.ClientSize = New System.Drawing.Size(539, 222)
+        Me.Controls.Add(Me.lblDbdetails)
+        Me.Controls.Add(Me.cmbDatabases)
         Me.Controls.Add(Me.Cancel)
         Me.Controls.Add(Me.OK)
         Me.Controls.Add(Me.txtPassword)
@@ -138,5 +163,7 @@ Partial Class LoginForm
 
     End Sub
     Friend WithEvents txtusrpwd As System.Windows.Forms.TextBox
+    Friend WithEvents cmbDatabases As System.Windows.Forms.ComboBox
+    Friend WithEvents lblDbdetails As System.Windows.Forms.Label
 
 End Class

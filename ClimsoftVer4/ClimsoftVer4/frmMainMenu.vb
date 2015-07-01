@@ -1,6 +1,6 @@
 ﻿Public Class frmMainMenu
  
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
         End
     End Sub
 
@@ -27,7 +27,7 @@
     End Sub
 
     
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs)
 
     End Sub
 
@@ -44,4 +44,7 @@
     End Sub
 
 
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+        End
+    End Sub
 End Class
