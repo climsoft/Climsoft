@@ -44,7 +44,6 @@ Partial Class SplashScreen
         lblWait.Size = New System.Drawing.Size(122, 19)
         lblWait.TabIndex = 7
         lblWait.Text = "Please Wait.........."
-        AddHandler lblWait.Click, AddressOf Me.lblwait_Click
         '
         'MainLayoutPanel
         '

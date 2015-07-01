@@ -50,11 +50,14 @@
         Next
         ' MsgBox(ListView1.Items.Count)
         'MsgBox((ListView1.Height - 46) / ListView1.Items.Count)
+
         ListView1.Height = 46 + 23 * (ListView1.Items.Count - 1)
 
+        ' Get and list the database name
+        lblDb.Text = Mid(LoginForm.cmbDatabases.Items.Item(0), 1, Len(LoginForm.cmbDatabases.Items.Item(0)) - 1)
     End Sub
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 
@@ -68,17 +71,18 @@
     End Sub
 
     Private Sub ListView1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ListView1.KeyPress
+
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
                 'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
                 formSynopRA1.Show()
             End If
         Next
-       
+
 
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HelpProvider1.GetHelpKeyword(Me))
     End Sub
 
@@ -86,11 +90,26 @@
 
     End Sub
 
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs)
 
     End Sub
 
     Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
+    End Sub
+
+
+
+    Private Sub ToolStripLabel1_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+        For kount = 0 To ListView1.Items.Count - 1
+            If ListView1.Items(kount).Selected = True Then
+                MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                formSynopRA1.Show()
+            End If
+        Next
     End Sub
 End Class

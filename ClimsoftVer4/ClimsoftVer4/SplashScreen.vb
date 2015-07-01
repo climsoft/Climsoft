@@ -1,5 +1,10 @@
 ﻿Public NotInheritable Class SplashScreen
     Public DelayPeriod As Integer = 0
+
+    Private Sub SplashScreen_Click(sender As Object, e As EventArgs) Handles Me.Click
+        frmMainMenu.Show()
+        Me.Hide()
+    End Sub
     'TODO: This form can easily be set as the splash screen for the application by going to the "Application" tab
     '  of the Project Designer ("Properties" under the "Project" menu).
 
@@ -39,7 +44,7 @@
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         DelayPeriod = DelayPeriod + 1
         'lblTimer.Text = DelayPeriod
-        If DelayPeriod = 60 Then ' Delay for some Seconds
+        If DelayPeriod = 20 Then ' Delay for some Seconds
             Timer1.Stop()
             frmMainMenu.Show()
             Me.Hide()
@@ -47,10 +52,6 @@
 
     End Sub
 
-
-    Private Sub lblwait_Click(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub MainLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles MainLayoutPanel.Paint
 
