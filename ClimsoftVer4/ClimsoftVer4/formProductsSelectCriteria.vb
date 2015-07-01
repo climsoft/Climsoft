@@ -222,6 +222,12 @@
                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
                 'MsgBox(sql)
                 DataProducts(sql)
+            Case "CPT"
+                Dim myInterface As New clsRInterface()
+                myInterface.productCDTExample()
+            Case "Histograms"
+                Dim myInterface As New clsRInterface()
+                myInterface.productHistogramExample()
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub

@@ -16,6 +16,8 @@
         Me.Close()
     End Sub
     Private Sub navigateRecords()
+        On Error GoTo Err
+
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
@@ -36,6 +38,9 @@
         'CptSelectionTextBox.Text = ds.Tables("station").Rows(inc).Item("cptselection")
         'StationOperationalTextBox.Text = ds.Tables("station").Rows(inc).Item("stationoperational")
         displayRecordNumber()
+        Exit Sub
+Err:
+        If Err.Number = 13 Then Resume Next
     End Sub
     Public Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
@@ -43,28 +48,28 @@
     End Sub
    
     Private Sub formStation_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        On Error GoTo Err
         'Set the record index counter to the first row
         inc = 0
        
         'myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
         myConnectionString = LoginForm.txtusrpwd.Text
-        Try
-            conn.ConnectionString = myConnectionString
-            conn.Open()
+        'Try
+        conn.ConnectionString = myConnectionString
+        conn.Open()
 
-            'MsgBox("Connection Successful !", MsgBoxStyle.Information)
+        'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
-            sql = "SELECT * FROM station"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            da.Fill(ds, "station")
-            conn.Close()
-            ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
+        sql = "SELECT * FROM station"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "station")
+        conn.Close()
+        ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
-            'FormLaunchPad.Show()
-        Catch ex As MySql.Data.MySqlClient.MySqlException
-            MessageBox.Show(ex.Message)
-        End Try
+        'FormLaunchPad.Show()
+        ' Catch ex As MySql.Data.MySqlClient.MySqlException
+        'MessageBox.Show(ex.Message)
+        'End Try
         maxRows = ds.Tables("station").Rows.Count
 
         'OpeningDatetimeDateTimePicker.CustomFormat = "yyyy-mm-dd hh:mm"
@@ -75,6 +80,8 @@
         LatitudeTextBox.Text = ds.Tables("station").Rows(inc).Item("latitude")
         LongitudeTextBox.Text = ds.Tables("station").Rows(inc).Item("longitude")
         ElevationTextBox.Text = ds.Tables("station").Rows(inc).Item("elevation")
+
+
         ' OpeningDatetimeDateTimePicker.Text = ds.Tables("station").Rows(inc).Item("openingdatetime")
         ' ClosingDatetimeDateTimePicker.Text = ds.Tables("station").Rows(inc).Item("closingdatetime")
         'AuthorityTextBox.Text = ds.Tables("station").Rows(inc).Item("authority")
@@ -86,7 +93,9 @@
         'StationOperationalTextBox.Text = ds.Tables("station").Rows(inc).Item("stationoperational")
         'recNumberTextBox.Text = "Record 1 of " & maxRows
         displayRecordNumber()
-
+        Exit Sub
+Err:
+        If Err.Number = 13 Then Resume Next
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
