@@ -43,8 +43,24 @@
 
     End Sub
 
-
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
         End
+    End Sub
+
+    Private Sub KeyEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyEntryToolStripMenuItem.Click
+        frmKeyEntry.Show()
+    End Sub
+
+    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProductsToolStripMenuItem.Click
+        frmProducts.Show()
+    End Sub
+
+
+    Private Sub cmdQC_Click(sender As Object, e As EventArgs) Handles cmdQC.Click
+        frmQC.Show()
+    End Sub
+
+    Private Sub QCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QCToolStripMenuItem.Click
+        frmQC.Show()
     End Sub
 End Class

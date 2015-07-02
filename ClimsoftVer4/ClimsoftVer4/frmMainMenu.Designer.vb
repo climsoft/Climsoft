@@ -57,7 +57,7 @@ Partial Class frmMainMenu
         Me.cmdMetadata = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.cmdProducts = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.cmdQC = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -222,7 +222,7 @@ Partial Class frmMainMenu
         Me.Panel1.Controls.Add(Me.cmdMetadata)
         Me.Panel1.Controls.Add(Me.Button5)
         Me.Panel1.Controls.Add(Me.cmdProducts)
-        Me.Panel1.Controls.Add(Me.Button3)
+        Me.Panel1.Controls.Add(Me.cmdQC)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -419,22 +419,22 @@ Partial Class frmMainMenu
         Me.cmdProducts.UseCompatibleTextRendering = True
         Me.cmdProducts.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdQC
         '
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button3.FlatAppearance.BorderSize = 4
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.Red
-        Me.Button3.Location = New System.Drawing.Point(9, 179)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(0)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Padding = New System.Windows.Forms.Padding(5)
-        Me.Button3.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Button3.Size = New System.Drawing.Size(83, 47)
-        Me.Button3.TabIndex = 20
-        Me.Button3.UseCompatibleTextRendering = True
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.cmdQC.BackgroundImage = CType(resources.GetObject("cmdQC.BackgroundImage"), System.Drawing.Image)
+        Me.cmdQC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdQC.FlatAppearance.BorderSize = 4
+        Me.cmdQC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdQC.ForeColor = System.Drawing.Color.Red
+        Me.cmdQC.Location = New System.Drawing.Point(9, 179)
+        Me.cmdQC.Margin = New System.Windows.Forms.Padding(0)
+        Me.cmdQC.Name = "cmdQC"
+        Me.cmdQC.Padding = New System.Windows.Forms.Padding(5)
+        Me.cmdQC.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.cmdQC.Size = New System.Drawing.Size(83, 47)
+        Me.cmdQC.TabIndex = 20
+        Me.cmdQC.UseCompatibleTextRendering = True
+        Me.cmdQC.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -553,7 +553,7 @@ Partial Class frmMainMenu
     Friend WithEvents cmdMetadata As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents cmdProducts As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents cmdQC As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
