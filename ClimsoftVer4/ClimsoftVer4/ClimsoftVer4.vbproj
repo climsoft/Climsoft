@@ -90,6 +90,24 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formClimat.Designer.vb">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formClimat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily1.Designer.vb">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily2.Designer.vb">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formDbUtilities.Designer.vb">
       <DependentUpon>formDbUtilities.vb</DependentUpon>
     </Compile>
@@ -102,10 +120,22 @@
     <Compile Include="formElement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formHourly.Designer.vb">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLaunchPad.designer.vb">
       <DependentUpon>FormLaunchPad.vb</DependentUpon>
     </Compile>
     <Compile Include="FormLaunchPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMonthly.Designer.vb">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMonthly.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formProducts.Designer.vb">
@@ -126,12 +156,6 @@
     <Compile Include="formProductsSelectCriteria.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formQC.Designer.vb">
-      <DependentUpon>formQC.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formQC.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="formStation.designer.vb">
       <DependentUpon>formStation.vb</DependentUpon>
     </Compile>
@@ -149,6 +173,18 @@
     </Compile>
     <Compile Include="formDatabaseConnect.Designer.vb">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynoptic1.Designer.vb">
+      <DependentUpon>formSynoptic1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynoptic1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUpperAir.Designer.vb">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formUpperAir.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formWindRose.Designer.vb">
@@ -187,6 +223,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmQC.Designer.vb">
+      <DependentUpon>frmQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LoginForm.Designer.vb">
       <DependentUpon>LoginForm.vb</DependentUpon>
     </Compile>
@@ -220,14 +262,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formClimat.resx">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily1.resx">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily2.resx">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formDbUtilities.resx">
       <DependentUpon>formDbUtilities.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formHourly.resx">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormLaunchPad.resx">
       <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMonthly.resx">
+      <DependentUpon>formMonthly.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formProducts.resx">
       <DependentUpon>formProducts.vb</DependentUpon>
@@ -238,9 +295,6 @@
     <EmbeddedResource Include="formProductsSelectCriteria.resx">
       <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formQC.resx">
-      <DependentUpon>formQC.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formStation.resx">
       <DependentUpon>formStation.vb</DependentUpon>
     </EmbeddedResource>
@@ -249,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDatabaseConnect.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUpperAir.resx">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formWindRose.resx">
       <DependentUpon>formWindRose.vb</DependentUpon>
@@ -268,6 +325,9 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQC.resx">
+      <DependentUpon>frmQC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +342,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application1.Designer.vb</LastGenOutput>
