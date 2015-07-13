@@ -87,7 +87,8 @@
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         line = sr.ReadLine()
         cmbDatabases.Items.Add(line)
-
+        
+        cmbDatabases.Text = cmbDatabases.Items.Item(0)
     End Sub
 
 
@@ -95,16 +96,16 @@
         If lblDbdetails.Text = "Show Database Details........" Then
             cmbDatabases.Visible = True
             lblDbdetails.Text = "Hide Database Details........"
-            cmbDatabases.SelectedText = line
         Else
             cmbDatabases.Visible = False
             lblDbdetails.Text = "Show Database Details........"
         End If
     End Sub
 
-    Private Sub cmbDatabases_MouseHover(sender As Object, e As EventArgs) Handles cmbDatabases.MouseHover
+    Private Sub cmbDatabases_Click(sender As Object, e As EventArgs) Handles cmbDatabases.Click
 
     End Sub
+
 
     Private Sub cmbDatabases_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatabases.SelectedIndexChanged
 
