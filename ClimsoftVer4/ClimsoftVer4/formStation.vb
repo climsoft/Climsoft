@@ -1,4 +1,20 @@
-﻿Public Class formStation
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formStation
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -46,12 +62,12 @@ Err:
         'Display the record number in the data navigation Textbox
         recNumberTextBox.Text = "Record " & inc + 1 & " of " & maxRows
     End Sub
-   
+
     Private Sub formStation_Load(sender As Object, e As EventArgs) Handles Me.Load
         On Error GoTo Err
         'Set the record index counter to the first row
         inc = 0
-       
+
         'myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
         myConnectionString = LoginForm.txtusrpwd.Text
         'Try

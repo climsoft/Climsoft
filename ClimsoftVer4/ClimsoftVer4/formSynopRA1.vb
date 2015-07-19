@@ -1,4 +1,20 @@
-﻿Public Class formSynopRA1
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formSynopRA1
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -406,7 +422,7 @@
         txtFlag114.Clear()
         txtFlag112.Clear()
         txtFlag111.Clear()
-        txtflag167.Clear()
+        txtFlag167.Clear()
         'Val_Elem107TextBox.Clear()
         txtFlag197.Clear()
         txtFlag193.Clear()
@@ -552,7 +568,7 @@
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag102") = txtFlag102.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag103") = txtFlag103.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag105") = txtFlag105.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176") = txtflag176.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag176") = txtFlag176.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag110") = txtFlag110.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag114") = txtFlag114.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("Flag112") = txtFlag112.Text
@@ -776,7 +792,7 @@
 
     End Sub
 
-   
+
     Private Sub YyyyTextBox_LostFocus(sender As Object, e As EventArgs) Handles YyyyTextBox.LostFocus
         If Not IsNumeric(YyyyTextBox.Text) Then
             YyyyTextBox.BackColor = Color.Red

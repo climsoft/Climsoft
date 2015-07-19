@@ -1,4 +1,20 @@
-﻿Public Class formProductsSelectCriteria
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formProductsSelectCriteria
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
@@ -82,10 +98,10 @@
 
         ds.Clear()
         sql = "SELECT * FROM obselement ORDER BY description"
-            'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "obselement")
-            ' conn.Close()
+        ' conn.Close()
 
         maxRows = ds.Tables("obselement").Rows.Count
         'MsgBox(maxRows)
@@ -137,7 +153,7 @@
 
         'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
         sql = "SELECT elementId, description FROM obselement WHERE description=""" & prod & """"
-               da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "obselement")
 
