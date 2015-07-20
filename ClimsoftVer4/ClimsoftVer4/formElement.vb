@@ -62,7 +62,7 @@ Err:
         inc = 0
         ' The following line was commented because the login for was changed from that designed by Albert to one designed by Samuel
         'myConnectionString = formDatabaseConnect.txtDbParameters.Text & "uid=" & formDatabaseConnect.userName.Text & ";pwd=" & formDatabaseConnect.passWord.Text & ";"
-        myConnectionString = LoginForm.txtusrpwd.Text
+        myConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()

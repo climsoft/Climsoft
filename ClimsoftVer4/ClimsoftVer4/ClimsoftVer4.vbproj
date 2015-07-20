@@ -85,7 +85,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassHelp.vb" />
+    <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
@@ -108,10 +108,10 @@
     <Compile Include="formDaily2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formDbUtilities.Designer.vb">
-      <DependentUpon>formDbUtilities.vb</DependentUpon>
+    <Compile Include="frmDBUtilities.Designer.vb">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </Compile>
-    <Compile Include="formDbUtilities.vb">
+    <Compile Include="frmDBUtilities.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formElement.designer.vb">
@@ -126,10 +126,10 @@
     <Compile Include="formHourly.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLaunchPad.designer.vb">
-      <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    <Compile Include="frmLaunchPad.designer.vb">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormLaunchPad.vb">
+    <Compile Include="frmLaunchPad.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formMonthly.Designer.vb">
@@ -199,10 +199,10 @@
     <Compile Include="frmAction.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmdataentry.Designer.vb">
-      <DependentUpon>frmdataentry.vb</DependentUpon>
+    <Compile Include="frmDataEntry.Designer.vb">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmdataentry.vb">
+    <Compile Include="frmDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDataOutpt.Designer.vb">
@@ -211,10 +211,10 @@
     <Compile Include="frmDataOutpt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGeneralForm.designer.vb">
-      <DependentUpon>frmGeneralForm.vb</DependentUpon>
+    <Compile Include="frmGeneral.designer.vb">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmGeneralForm.vb">
+    <Compile Include="frmGeneral.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMainMenu.Designer.vb">
@@ -229,10 +229,10 @@
     <Compile Include="frmQC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.vb">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.vb">
+    <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\Application1.Designer.vb">
@@ -254,10 +254,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SplashScreen.Designer.vb">
-      <DependentUpon>SplashScreen.vb</DependentUpon>
+    <Compile Include="frmSplashScreen.Designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen.vb">
+    <Compile Include="frmSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -271,8 +271,8 @@
     <EmbeddedResource Include="formDaily2.resx">
       <DependentUpon>formDaily2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDbUtilities.resx">
-      <DependentUpon>formDbUtilities.vb</DependentUpon>
+    <EmbeddedResource Include="frmDBUtilities.resx">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
@@ -280,8 +280,8 @@
     <EmbeddedResource Include="formHourly.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLaunchPad.resx">
-      <DependentUpon>FormLaunchPad.vb</DependentUpon>
+    <EmbeddedResource Include="frmLaunchPad.resx">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMonthly.resx">
       <DependentUpon>formMonthly.vb</DependentUpon>
@@ -313,14 +313,14 @@
     <EmbeddedResource Include="frmAction.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmdataentry.resx">
-      <DependentUpon>frmdataentry.vb</DependentUpon>
+    <EmbeddedResource Include="frmDataEntry.resx">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneralForm.resx">
-      <DependentUpon>frmGeneralForm.vb</DependentUpon>
+    <EmbeddedResource Include="frmGeneral.resx">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
@@ -328,8 +328,8 @@
     <EmbeddedResource Include="frmQC.resx">
       <DependentUpon>frmQC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.vb</DependentUpon>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -339,8 +339,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\language.de.resx" />
     <EmbeddedResource Include="Resources\language.resx" />
-    <EmbeddedResource Include="SplashScreen.resx">
-      <DependentUpon>SplashScreen.vb</DependentUpon>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

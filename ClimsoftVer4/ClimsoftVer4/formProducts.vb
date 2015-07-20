@@ -26,7 +26,7 @@ Public Class frmProducts
     Dim SelectedProduct
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-        MyConnectionString = LoginForm.txtusrpwd.Text
+        MyConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = MyConnectionString
             conn.Open()
@@ -83,7 +83,7 @@ Public Class frmProducts
     End Sub
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstvProducts.Click
-        Dim prtyp As New ClassHelp
+        Dim prtyp As New clsHelp
         'Dim formcaption As String
 
         For i = 0 To lstvProducts.Items.Count - 1

@@ -73,7 +73,7 @@ Public Class formProductsSelectCriteria
 
     Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
-        MyConnectionString = LoginForm.txtusrpwd.Text
+        MyConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = MyConnectionString
             conn.Open()

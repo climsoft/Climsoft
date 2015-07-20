@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class FormLaunchPad
+Public Class frmLaunchPad
 
     Private Sub btnStationInformation_Click(sender As Object, e As EventArgs) Handles btnStationInformation.Click
         formStation.Show()

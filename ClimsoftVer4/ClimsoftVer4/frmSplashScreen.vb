@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public NotInheritable Class SplashScreen
+Public NotInheritable Class frmSplashScreen
     Public DelayPeriod As Integer = 0
 
     Private Sub SplashScreen_Click(sender As Object, e As EventArgs) Handles Me.Click

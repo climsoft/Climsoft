@@ -29,7 +29,7 @@ Public Class formDatabaseConnect
 
             ' MsgBox("Connection Successful !", MsgBoxStyle.Information)
             Me.Hide()
-            FormLaunchPad.Show()
+            frmLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try

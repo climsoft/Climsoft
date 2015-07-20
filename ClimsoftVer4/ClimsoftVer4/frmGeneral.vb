@@ -14,8 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class frmGeneralForm
-    Public HTMLHelp As New ClassHelp
+Public Class frmGeneral
+    Public HTMLHelp As New clsHelp
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()

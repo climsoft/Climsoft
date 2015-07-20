@@ -17,7 +17,7 @@
 'Imports ClimsoftVer4.GlobalVariables
 Public Class frmQC
 
-    Public HTMLHelp As New ClassHelp
+    Public HTMLHelp As New clsHelp
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
     End Sub
