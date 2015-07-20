@@ -30,7 +30,7 @@ Public Class frmKeyEntry
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4;"
         'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
-        MyConnectionString = LoginForm.txtusrpwd.Text
+        MyConnectionString = frmLogin.txtusrpwd.Text
         ListView1.Columns.Add("Form Name", 150, HorizontalAlignment.Left)
         ListView1.Columns.Add("Form Details", 600, HorizontalAlignment.Left)
 
@@ -70,7 +70,7 @@ Public Class frmKeyEntry
         ListView1.Height = 46 + 23 * (ListView1.Items.Count - 1)
 
         ' Get and list the database name
-        lblDb.Text = Mid(LoginForm.cmbDatabases.Items.Item(0), 1, Len(LoginForm.cmbDatabases.Items.Item(0)) - 1)
+        lblDb.Text = Mid(frmLogin.cmbDatabases.Items.Item(0), 1, Len(frmLogin.cmbDatabases.Items.Item(0)) - 1)
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)

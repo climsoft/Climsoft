@@ -656,7 +656,7 @@ Public Class formSynopRA1
         'Set the record index counter to the first row
         inc = 0
 
-        myConnectionString = LoginForm.txtusrpwd.Text
+        myConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
             conn.Open()

@@ -16,71 +16,98 @@
 
 Public Class frmMainMenu
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        End
-    End Sub
-
-    Private Sub cmdkeyentry_Click(sender As Object, e As EventArgs) Handles cmdkeyentry.Click
-        frmKeyEntry.Show()
-    End Sub
-
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        End
-    End Sub
-
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
-        'formProductsSelectCriteria.Show()
-        FormLaunchPad.Show()
-    End Sub
-
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' LoginForm.Hide
         HTMLHelp.HelpPage = "welcome.htm"
     End Sub
 
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
+
+    ' Methods for icons in main panel.
+
+    Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
+        frmKeyEntry.ShowDialog()
     End Sub
 
-
-    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs)
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        formDbUtilities.Show()
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles cmdProducts.Click
-        frmProducts.Show()
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub cmdPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdPaperArchive.Click
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+    Private Sub cmdDataTransfer_Click(sender As Object, e As EventArgs) Handles cmdDataTransfer.Click
+        frmDBUtilities.ShowDialog()
+    End Sub
+
+    Private Sub cmdQC_Click(sender As Object, e As EventArgs) Handles cmdQC.Click
+        frmQC.ShowDialog()
+    End Sub
+
+    Private Sub cmdProducts_Click(sender As Object, e As EventArgs) Handles cmdProducts.Click
+        frmProducts.ShowDialog()
+    End Sub
+
+    Private Sub cmdUserManagement_Click(sender As Object, e As EventArgs) Handles cmdUserManagement.Click
+
+    End Sub
+
+    Private Sub cmdMetadata_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
+        frmLaunchPad.ShowDialog()
+    End Sub
+
+    Private Sub cmdSettingsAWS_Click(sender As Object, e As EventArgs) Handles cmdSettingsAWS.Click
+
+    End Sub
+
+    Private Sub cmdRedCloseButton_Click(sender As Object, e As EventArgs) Handles cmdRedCloseButton.Click
         End
     End Sub
 
-    Private Sub KeyEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles KeyEntryToolStripMenuItem.Click
-        frmKeyEntry.Show()
+
+    ' Methods for menu items.
+
+    ' Input Menu items
+    Private Sub mnuInputKeyEntry_Click(sender As Object, e As EventArgs) Handles mnuInputKeyEntry.Click
+        frmKeyEntry.ShowDialog()
     End Sub
 
-    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProductsToolStripMenuItem.Click
-        frmProducts.Show()
+    Private Sub mnuInputPaperArchive_Click(sender As Object, e As EventArgs) Handles mnuInputPaperArchive.Click
+
     End Sub
 
+    ' Accessories Menu items
+    Private Sub mnuAccessoriesDewPointRH_Click(sender As Object, e As EventArgs) Handles mnuAccessoriesDewPointRH.Click
 
-    Private Sub cmdQC_Click(sender As Object, e As EventArgs) Handles cmdQC.Click
-        frmQC.Show()
     End Sub
 
-    Private Sub QCToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles QCToolStripMenuItem.Click
-        frmQC.Show()
+    Private Sub mnuAccessoriesXMLOutput_Click(sender As Object, e As EventArgs) Handles mnuAccessoriesXMLOutput.Click
+
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        frmAction.Show()
+    ' QC Menu items
+    Private Sub mnuQC_Click(sender As Object, e As EventArgs) Handles mnuQC.Click
+        frmQC.ShowDialog()
     End Sub
+
+    ' Products menu items
+    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProducts.Click
+        frmProducts.ShowDialog()
+    End Sub
+
+    ' Administration Menu items (currently not implemeted)
+
+    ' Tools Menu Items
+    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
+
+    End Sub
+
+    Private Sub mnuToolsModifyForms_Click(sender As Object, e As EventArgs) Handles mnuToolsModifyForms.Click
+
+    End Sub
+
+    ' Help Menu Items
+    Private Sub mnuHelpContents_Click(sender As Object, e As EventArgs) Handles mnuHelpContents.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
+    End Sub
+
+    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
+
+    End Sub
+
 End Class

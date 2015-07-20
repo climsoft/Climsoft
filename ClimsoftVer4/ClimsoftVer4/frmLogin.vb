@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class LoginForm
+Public Class frmLogin
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim line As String
 
@@ -70,7 +70,7 @@ Public Class LoginForm
             caption = Mid(line, 1, Len(line) - 11)
 
             frmMainMenu.Text = frmMainMenu.Text & "          ...           " & caption
-            SplashScreen.Show()
+            frmSplashScreen.Show()
             Me.Hide()
             ' End Using
         Catch e As Exception
