@@ -13,24 +13,100 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 Imports System.IO
 
-Public Class GlobalVariables
-    Public Shared cultureInfo As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CurrentCulture
-    ' The language can be changed from the detected language by using:
-    ' cultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("de-DE")
-    Public Shared projectAssembly = GetType(frmMainMenu).Assembly
-    Public Shared languageResourceManager As New System.Resources.ResourceManager("ClimsoftVer4.language", projectAssembly)
-    Public Shared lang As Func(Of String, String) = Function(x As String) languageResourceManager.GetString(x, cultureInfo)
+
+Public Class Translations
+    Public Shared Function translate(tag As String) As String
+        ' Note: if the tag is not found in Resources then Nothing will be returned
+        Return My.Resources.ResourceManager.GetObject(tag)
+    End Function
+
+    Public Shared Sub translateEach(controls As Control.ControlCollection)
+        ' Given a ControlCollection, attempt to translate the Text property of each control
+        Dim formControl As Control
+        Dim originalTag As String
+        Dim translatedString As String
+
+        For Each formControl In controls
+            If (TypeOf formControl Is Panel) Then
+                ' Recursively translate all controls inside the panel
+                translateEach(formControl.Controls)
+            ElseIf (TypeOf formControl Is MenuStrip) Then
+                ' Translate all MenuItems inside the MenuStrip
+                translateMenu(formControl)
+            ElseIf (TypeOf formControl Is TextBox OrElse TypeOf formControl Is Button OrElse TypeOf formControl Is Label) Then
+                originalTag = formControl.Tag
+                If (originalTag IsNot Nothing) Then
+                    translatedString = My.Resources.ResourceManager.GetObject(originalTag)
+                    If (translatedString IsNot Nothing) Then
+                        formControl.Text = translatedString
+                    End If
+                End If
+            End If
+        Next formControl
+    End Sub
+
+    Public Shared Sub autoTranslate(frm As Form)
+        Dim translatedString As String
+
+        ' Attempt to translate the form's title if it has a tag
+        If frm.Tag IsNot Nothing Then
+            translatedString = My.Resources.ResourceManager.GetObject(frm.Tag)
+            If (translatedString IsNot Nothing) Then
+                frm.Text = translatedString
+            End If
+        End If
+        ' Translate all controls in object
+        translateEach(frm.Controls)
+    End Sub
+
+    ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
+    Public Shared Sub translateMenu(menuControl As MenuStrip)
+        Dim item As ToolStripMenuItem
+        Dim originalTag As String
+        Dim translatedString As String
+
+        For Each item In menuControl.Items
+            ' process this item, then recursively process any sub items
+            If item.HasDropDownItems Then
+                translateSubMenu(item.DropDownItems)
+            End If
+            originalTag = item.Tag
+            If (originalTag IsNot Nothing) Then
+                translatedString = My.Resources.ResourceManager.GetObject(originalTag)
+                If (translatedString IsNot Nothing) Then
+                    item.Text = translatedString
+                End If
+            End If
+        Next item
+    End Sub
+
+    ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
+    Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
+        Dim item As ToolStripMenuItem
+        Dim originalTag As String
+        Dim translatedString As String
+
+        For Each item In subMenuControl
+            ' process this item, then recursively process any sub items
+            originalTag = item.Tag
+            If (originalTag IsNot Nothing) Then
+                translatedString = My.Resources.ResourceManager.GetObject(originalTag)
+                If (translatedString IsNot Nothing) Then
+                    item.Text = translatedString
+                End If
+            End If
+        Next item
+    End Sub
+
 End Class
 
 Public Class clsClimsoftSettings
     ' Each running instance of CLIMSOFT will have a single instance of clsClimsoftSettings
     Dim rPath As String
     Dim systemPath As String = System.Environment.GetEnvironmentVariable("PATH")
-    Dim R_HOME As String = "C:\Program Files\R\R-3.2.0"  ' Default location of R home directory (only used if R_HOME environment variable is not set)
+    Dim R_HOME As String = "C:\Program Files\R\R-3.2.1"  ' Default location of R home directory (only used if R_HOME environment variable is not set)
 
     Sub rEnvironmentSetUp()
         ' Setup system environment variables.

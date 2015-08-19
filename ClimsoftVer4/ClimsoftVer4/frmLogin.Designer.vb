@@ -1,10 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-<Global.System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726")> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726")>
 Partial Class frmLogin
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -28,7 +28,7 @@ Partial Class frmLogin
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
@@ -61,7 +61,8 @@ Partial Class frmLogin
         Me.UsernameLabel.Name = "UsernameLabel"
         Me.UsernameLabel.Size = New System.Drawing.Size(220, 23)
         Me.UsernameLabel.TabIndex = 0
-        Me.UsernameLabel.Text = "&User name"
+        Me.UsernameLabel.Tag = "Username"
+        Me.UsernameLabel.Text = "&Username"
         Me.UsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'PasswordLabel
@@ -70,6 +71,7 @@ Partial Class frmLogin
         Me.PasswordLabel.Name = "PasswordLabel"
         Me.PasswordLabel.Size = New System.Drawing.Size(220, 23)
         Me.PasswordLabel.TabIndex = 2
+        Me.PasswordLabel.Tag = "Password"
         Me.PasswordLabel.Text = "&Password"
         Me.PasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -79,6 +81,7 @@ Partial Class frmLogin
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
+        Me.txtUsername.Tag = ""
         '
         'txtPassword
         '
@@ -87,6 +90,7 @@ Partial Class frmLogin
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
         Me.txtPassword.TabIndex = 3
+        Me.txtPassword.Tag = ""
         '
         'OK
         '
@@ -94,6 +98,7 @@ Partial Class frmLogin
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(94, 23)
         Me.OK.TabIndex = 4
+        Me.OK.Tag = "OK"
         Me.OK.Text = "&OK"
         '
         'Cancel
@@ -103,6 +108,7 @@ Partial Class frmLogin
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(94, 23)
         Me.Cancel.TabIndex = 5
+        Me.Cancel.Tag = "Cancel"
         Me.Cancel.Text = "&Cancel"
         '
         'txtusrpwd
@@ -131,9 +137,10 @@ Partial Class frmLogin
         Me.lblDbdetails.Name = "lblDbdetails"
         Me.lblDbdetails.Size = New System.Drawing.Size(142, 13)
         Me.lblDbdetails.TabIndex = 8
+        Me.lblDbdetails.Tag = "Show_Database_Details"
         Me.lblDbdetails.Text = "Show Database Details........"
         '
-        'LoginForm
+        'frmLogin
         '
         Me.AcceptButton = Me.OK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -153,10 +160,11 @@ Partial Class frmLogin
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "LoginForm"
+        Me.Name = "frmLogin"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Login to CLIMSOFT"
+        Me.Tag = "Login"
+        Me.Text = "Login"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -165,5 +173,4 @@ Partial Class frmLogin
     Friend WithEvents txtusrpwd As System.Windows.Forms.TextBox
     Friend WithEvents cmbDatabases As System.Windows.Forms.ComboBox
     Friend WithEvents lblDbdetails As System.Windows.Forms.Label
-
 End Class

@@ -43,6 +43,7 @@ Partial Class frmSplashScreen
         lblWait.Name = "lblWait"
         lblWait.Size = New System.Drawing.Size(122, 19)
         lblWait.TabIndex = 7
+        lblWait.Tag = "Please_Wait"
         lblWait.Text = "Please Wait.........."
         '
         'MainLayoutPanel
@@ -102,10 +103,11 @@ Partial Class frmSplashScreen
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(286, 20)
         Me.lblDescription.TabIndex = 1
+        Me.lblDescription.Tag = "Climate_Data_Management_System"
         Me.lblDescription.Text = "Climate Data Management System"
         Me.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'SplashScreen
+        'frmSplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -116,7 +118,7 @@ Partial Class frmSplashScreen
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "SplashScreen"
+        Me.Name = "frmSplashScreen"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)

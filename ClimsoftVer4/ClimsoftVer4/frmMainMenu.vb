@@ -13,13 +13,15 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports ClimsoftVer4.Translations
+
 
 Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         HTMLHelp.HelpPage = "welcome.htm"
     End Sub
-
 
     ' Methods for icons in main panel.
 
@@ -90,7 +92,8 @@ Public Class frmMainMenu
         frmProducts.ShowDialog()
     End Sub
 
-    ' Administration Menu items (currently not implemeted)
+    ' Administration Menu items
+    ' (currently not implemeted)
 
     ' Tools Menu Items
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
@@ -99,6 +102,12 @@ Public Class frmMainMenu
 
     Private Sub mnuToolsModifyForms_Click(sender As Object, e As EventArgs) Handles mnuToolsModifyForms.Click
 
+    End Sub
+
+    Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
+        frmLanguage.ShowDialog()
+        ' When dialog is closed - update language in this window (will any other windows also be open?)
+        autoTranslate(Me)
     End Sub
 
     ' Help Menu Items

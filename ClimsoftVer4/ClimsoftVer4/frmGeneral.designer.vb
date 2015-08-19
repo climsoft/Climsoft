@@ -35,6 +35,7 @@ Partial Class frmGeneral
         Me.HelpProvider1.SetShowHelp(Me.cmdHelp, True)
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 0
+        Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
@@ -44,6 +45,7 @@ Partial Class frmGeneral
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(75, 23)
         Me.cmdClose.TabIndex = 1
+        Me.cmdClose.Tag = "Close"
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
@@ -51,7 +53,7 @@ Partial Class frmGeneral
         '
         Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
-        'frmGeneralForm
+        'frmGeneral
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -62,7 +64,7 @@ Partial Class frmGeneral
         Me.HelpProvider1.SetHelpKeyword(Me, "aboutclimsoft4.htm")
         Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider1.SetHelpString(Me, "Topic 1")
-        Me.Name = "frmGeneralForm"
+        Me.Name = "frmGeneral"
         Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "frmGeneralForm"
         Me.ResumeLayout(False)

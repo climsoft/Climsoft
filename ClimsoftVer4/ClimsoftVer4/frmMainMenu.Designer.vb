@@ -38,6 +38,7 @@ Partial Class frmMainMenu
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelectLanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,19 +83,23 @@ Partial Class frmMainMenu
         '
         Me.mnuInput.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInputKeyEntry, Me.mnuInputPaperArchive})
         Me.mnuInput.Name = "mnuInput"
+        Me.mnuInput.ShortcutKeyDisplayString = ""
         Me.mnuInput.Size = New System.Drawing.Size(54, 23)
-        Me.mnuInput.Text = "&Input"
+        Me.mnuInput.Tag = "Input"
+        Me.mnuInput.Text = "Input"
         '
         'mnuInputKeyEntry
         '
         Me.mnuInputKeyEntry.Name = "mnuInputKeyEntry"
         Me.mnuInputKeyEntry.Size = New System.Drawing.Size(162, 24)
+        Me.mnuInputKeyEntry.Tag = "Key_Entry"
         Me.mnuInputKeyEntry.Text = "Key Entry"
         '
         'mnuInputPaperArchive
         '
         Me.mnuInputPaperArchive.Name = "mnuInputPaperArchive"
         Me.mnuInputPaperArchive.Size = New System.Drawing.Size(162, 24)
+        Me.mnuInputPaperArchive.Tag = "Paper_Archive"
         Me.mnuInputPaperArchive.Text = "Paper Archive"
         '
         'mnuAccessories
@@ -102,49 +107,57 @@ Partial Class frmMainMenu
         Me.mnuAccessories.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAccessoriesDewPointRH, Me.mnuAccessoriesXMLOutput})
         Me.mnuAccessories.Name = "mnuAccessories"
         Me.mnuAccessories.Size = New System.Drawing.Size(90, 23)
-        Me.mnuAccessories.Text = "&Accessories"
+        Me.mnuAccessories.Tag = "Accessories"
+        Me.mnuAccessories.Text = "Accessories"
         '
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
         Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
         Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
         'mnuQC
         '
         Me.mnuQC.Name = "mnuQC"
         Me.mnuQC.Size = New System.Drawing.Size(41, 23)
-        Me.mnuQC.Text = "&QC"
+        Me.mnuQC.Tag = "QC"
+        Me.mnuQC.Text = "QC"
         '
         'mnuProducts
         '
         Me.mnuProducts.Name = "mnuProducts"
         Me.mnuProducts.Size = New System.Drawing.Size(75, 23)
-        Me.mnuProducts.Text = "&Products"
+        Me.mnuProducts.Tag = "Products"
+        Me.mnuProducts.Text = "Products"
         '
         'mnuAdministration
         '
         Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
-        Me.mnuAdministration.Text = "A&dministration"
+        Me.mnuAdministration.Tag = "Administration"
+        Me.mnuAdministration.Text = "Administration"
         '
         'UserAdminToolStripMenuItem
         '
         Me.UserAdminToolStripMenuItem.Name = "UserAdminToolStripMenuItem"
         Me.UserAdminToolStripMenuItem.Size = New System.Drawing.Size(216, 24)
+        Me.UserAdminToolStripMenuItem.Tag = "User_Admin"
         Me.UserAdminToolStripMenuItem.Text = "User Admin"
         '
         'MetadataToolStripMenuItem
         '
         Me.MetadataToolStripMenuItem.Name = "MetadataToolStripMenuItem"
         Me.MetadataToolStripMenuItem.Size = New System.Drawing.Size(216, 24)
+        Me.MetadataToolStripMenuItem.Tag = "Metadata"
         Me.MetadataToolStripMenuItem.Text = "Metadata"
         '
         'PasswordToolStripMenuItem
@@ -157,51 +170,66 @@ Partial Class frmMainMenu
         '
         Me.DataFormsToolStripMenuItem.Name = "DataFormsToolStripMenuItem"
         Me.DataFormsToolStripMenuItem.Size = New System.Drawing.Size(216, 24)
+        Me.DataFormsToolStripMenuItem.Tag = "Data_Forms"
         Me.DataFormsToolStripMenuItem.Text = "Data Forms"
         '
         'UpdateElementsToolStripMenuItem
         '
         Me.UpdateElementsToolStripMenuItem.Name = "UpdateElementsToolStripMenuItem"
         Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(216, 24)
+        Me.UpdateElementsToolStripMenuItem.Tag = "Update_Element_Limits"
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
-        Me.mnuTools.Text = "&Tools"
+        Me.mnuTools.Tag = "Tools"
+        Me.mnuTools.Text = "Tools"
         '
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(163, 24)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsOptions.Tag = "Options"
         Me.mnuToolsOptions.Text = "Options"
         '
         'mnuToolsModifyForms
         '
         Me.mnuToolsModifyForms.Name = "mnuToolsModifyForms"
-        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(163, 24)
+        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
+        '
+        'SelectLanguageToolStripMenuItem
+        '
+        Me.SelectLanguageToolStripMenuItem.Name = "SelectLanguageToolStripMenuItem"
+        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
+        Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
         '
         'mnuHelp
         '
         Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelpContents, Me.mnuHelpAbout})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(49, 23)
-        Me.mnuHelp.Text = "&Help"
+        Me.mnuHelp.Tag = "Help"
+        Me.mnuHelp.Text = "Help"
         '
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(197, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(197, 24)
-        Me.mnuHelpAbout.Text = "About CLIMSOFT 4"
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpAbout.Tag = "About"
+        Me.mnuHelpAbout.Text = "About"
         '
         'Panel1
         '
@@ -240,6 +268,7 @@ Partial Class frmMainMenu
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 16)
         Me.Label5.TabIndex = 36
+        Me.Label5.Tag = "Close"
         Me.Label5.Text = "Close CLIMSOFT"
         '
         'Label11
@@ -262,6 +291,7 @@ Partial Class frmMainMenu
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(176, 16)
         Me.Label9.TabIndex = 33
+        Me.Label9.Tag = "AWS_Real_Time_Processing"
         Me.Label9.Text = "AWS Real Time Processing"
         '
         'Label8
@@ -272,6 +302,7 @@ Partial Class frmMainMenu
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(133, 16)
         Me.Label8.TabIndex = 32
+        Me.Label8.Tag = "Metadata_Information"
         Me.Label8.Text = "Metadata Information"
         '
         'Label7
@@ -282,6 +313,7 @@ Partial Class frmMainMenu
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(131, 16)
         Me.Label7.TabIndex = 31
+        Me.Label7.Tag = "Users_Administration"
         Me.Label7.Text = "Users Administration"
         '
         'Label6
@@ -292,6 +324,7 @@ Partial Class frmMainMenu
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(141, 16)
         Me.Label6.TabIndex = 30
+        Me.Label6.Tag = "Climate_Data_Products"
         Me.Label6.Text = "Climate Data Products"
         '
         'Label4
@@ -302,6 +335,7 @@ Partial Class frmMainMenu
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 16)
         Me.Label4.TabIndex = 28
+        Me.Label4.Tag = "Quality_Control_Checks"
         Me.Label4.Text = "Quality Control Checks"
         '
         'Label3
@@ -312,6 +346,7 @@ Partial Class frmMainMenu
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(159, 16)
         Me.Label3.TabIndex = 27
+        Me.Label3.Tag = "Data_Transfer_Operations"
         Me.Label3.Text = "Data Transfer Operations"
         '
         'Label2
@@ -322,6 +357,7 @@ Partial Class frmMainMenu
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(134, 16)
         Me.Label2.TabIndex = 26
+        Me.Label2.Tag = "Archive_Paper_Image"
         Me.Label2.Text = "Archive Paper Image"
         '
         'cmdRedCloseButton
@@ -467,6 +503,7 @@ Partial Class frmMainMenu
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 16)
         Me.Label1.TabIndex = 4
+        Me.Label1.Tag = "Data_Entry"
         Me.Label1.Text = "Data Entry"
         '
         'cmdKeyEntry
@@ -495,6 +532,7 @@ Partial Class frmMainMenu
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.IsMdiContainer = True
         Me.Name = "frmMainMenu"
+        Me.Tag = "Main_Menu"
         Me.Text = "Main Menu"
         Me.Controls.SetChildIndex(Me.MenuStrip2, 0)
         Me.Controls.SetChildIndex(Me.Panel1, 0)
@@ -547,5 +585,5 @@ Partial Class frmMainMenu
     Friend WithEvents cmdPaperArchive As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
-
+    Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
 End Class

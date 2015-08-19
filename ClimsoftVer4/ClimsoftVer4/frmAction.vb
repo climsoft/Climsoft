@@ -13,8 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports ClimsoftVer4.Translations
 
-Imports ClimsoftVer4.GlobalVariables
 
 Public Class frmAction
     Public HTMLHelp As New clsHelp
@@ -23,10 +23,7 @@ Public Class frmAction
     End Sub
 
     Private Sub frmAction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cmdOk.Text = lang("OK")
-        cmdCancel.Text = lang("Cancel")
-        cmdApply.Text = lang("Apply")
-        cmdHelp.Text = lang("Help")
+        autoTranslate(Me)
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
