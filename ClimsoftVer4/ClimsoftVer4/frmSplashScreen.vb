@@ -13,6 +13,8 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports ClimsoftVer4.Translations
+
 
 Public NotInheritable Class frmSplashScreen
     Public DelayPeriod As Integer = 0
@@ -26,6 +28,7 @@ Public NotInheritable Class frmSplashScreen
 
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        autoTranslate(Me)
         'Set up the dialog text at runtime according to the application's assembly information.  
 
         'TODO: Customize the application's assembly information in the "Application" pane of the project 
@@ -62,14 +65,18 @@ Public NotInheritable Class frmSplashScreen
         'lblTimer.Text = DelayPeriod
         If DelayPeriod = 20 Then ' Delay for some Seconds
             Timer1.Stop()
-            frmMainMenu.Show()
             Me.Hide()
+            frmMainMenu.Show()
         End If
 
     End Sub
 
 
     Private Sub MainLayoutPanel_Paint(sender As Object, e As PaintEventArgs) Handles MainLayoutPanel.Paint
+
+    End Sub
+
+    Private Sub lblDescription_Click(sender As Object, e As EventArgs) Handles lblDescription.Click
 
     End Sub
 End Class

@@ -13,12 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports ClimsoftVer4.Translations
+
 
 Public Class frmLogin
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim line As String
 
-    Dim sr As New System.IO.StreamReader(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
+    Dim sr As IO.StreamReader
 
 
     ' TODO: Insert code to perform custom authentication using the provided username and password 
@@ -101,6 +103,21 @@ Public Class frmLogin
     End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ' If the user's machine is set to an alternative language then this alternative will be used if available
+        autoTranslate(Me)
+
+        Try
+            sr = New IO.StreamReader("config.inf")
+        Catch ex As Exception
+            If TypeOf ex Is System.IO.FileNotFoundException Then
+                ' TODO: Log warning: "A required CLIMSOFT configuration file is missing. " & ex.Message
+                ' Try to recover by using the default settings:
+                ' My.MySettings.Default.defaultDatabase
+            Else
+                Throw
+            End If
+        End Try
+
         line = sr.ReadLine()
         cmbDatabases.Items.Add(line)
 

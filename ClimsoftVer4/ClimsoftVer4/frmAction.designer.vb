@@ -22,6 +22,7 @@ Partial Class frmAction
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAction))
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
@@ -31,51 +32,61 @@ Partial Class frmAction
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(574, 324)
+        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.HelpProvider1.SetHelpKeyword(Me.cmdHelp, resources.GetString("cmdHelp.HelpKeyword"))
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdHelp, CType(resources.GetObject("cmdHelp.HelpNavigator"), System.Windows.Forms.HelpNavigator))
+        Me.HelpProvider1.SetHelpString(Me.cmdHelp, resources.GetString("cmdHelp.HelpString"))
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
-        Me.cmdHelp.TabIndex = 0
-        Me.cmdHelp.Text = "Help"
+        Me.HelpProvider1.SetShowHelp(Me.cmdHelp, CType(resources.GetObject("cmdHelp.ShowHelp"), Boolean))
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(412, 324)
+        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
+        Me.HelpProvider1.SetHelpKeyword(Me.cmdCancel, resources.GetString("cmdCancel.HelpKeyword"))
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdCancel, CType(resources.GetObject("cmdCancel.HelpNavigator"), System.Windows.Forms.HelpNavigator))
+        Me.HelpProvider1.SetHelpString(Me.cmdCancel, resources.GetString("cmdCancel.HelpString"))
         Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 1
-        Me.cmdCancel.Text = "Cancel"
+        Me.HelpProvider1.SetShowHelp(Me.cmdCancel, CType(resources.GetObject("cmdCancel.ShowHelp"), Boolean))
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdOk
         '
-        Me.cmdOk.Location = New System.Drawing.Point(331, 324)
+        resources.ApplyResources(Me.cmdOk, "cmdOk")
+        Me.HelpProvider1.SetHelpKeyword(Me.cmdOk, resources.GetString("cmdOk.HelpKeyword"))
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdOk, CType(resources.GetObject("cmdOk.HelpNavigator"), System.Windows.Forms.HelpNavigator))
+        Me.HelpProvider1.SetHelpString(Me.cmdOk, resources.GetString("cmdOk.HelpString"))
         Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOk.TabIndex = 2
-        Me.cmdOk.Text = "OK"
+        Me.HelpProvider1.SetShowHelp(Me.cmdOk, CType(resources.GetObject("cmdOk.ShowHelp"), Boolean))
         Me.cmdOk.UseVisualStyleBackColor = True
         '
         'cmdApply
         '
-        Me.cmdApply.Location = New System.Drawing.Point(493, 324)
+        resources.ApplyResources(Me.cmdApply, "cmdApply")
+        Me.HelpProvider1.SetHelpKeyword(Me.cmdApply, resources.GetString("cmdApply.HelpKeyword"))
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdApply, CType(resources.GetObject("cmdApply.HelpNavigator"), System.Windows.Forms.HelpNavigator))
+        Me.HelpProvider1.SetHelpString(Me.cmdApply, resources.GetString("cmdApply.HelpString"))
         Me.cmdApply.Name = "cmdApply"
-        Me.cmdApply.Size = New System.Drawing.Size(75, 23)
-        Me.cmdApply.TabIndex = 3
-        Me.cmdApply.Text = "Apply"
+        Me.HelpProvider1.SetShowHelp(Me.cmdApply, CType(resources.GetObject("cmdApply.ShowHelp"), Boolean))
         Me.cmdApply.UseVisualStyleBackColor = True
+        '
+        'HelpProvider1
+        '
+        resources.ApplyResources(Me.HelpProvider1, "HelpProvider1")
         '
         'frmAction
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(663, 368)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
+        Me.HelpProvider1.SetHelpKeyword(Me, resources.GetString("$this.HelpKeyword"))
+        Me.HelpProvider1.SetHelpNavigator(Me, CType(resources.GetObject("$this.HelpNavigator"), System.Windows.Forms.HelpNavigator))
+        Me.HelpProvider1.SetHelpString(Me, resources.GetString("$this.HelpString"))
         Me.Name = "frmAction"
-        Me.Text = "Form Action"
+        Me.HelpProvider1.SetShowHelp(Me, CType(resources.GetObject("$this.ShowHelp"), Boolean))
         Me.ResumeLayout(False)
 
     End Sub
