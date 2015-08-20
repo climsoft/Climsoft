@@ -90,6 +90,12 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formAWSRealTime.Designer.vb">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAWSRealTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formClimat.Designer.vb">
       <DependentUpon>formClimat.vb</DependentUpon>
     </Compile>
@@ -106,6 +112,12 @@
       <DependentUpon>formDaily2.vb</DependentUpon>
     </Compile>
     <Compile Include="formDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPaperArchive.Designer.vb">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDBUtilities.Designer.vb">
@@ -262,6 +274,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formAWSRealTime.resx">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formClimat.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily2.resx">
       <DependentUpon>formDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPaperArchive.resx">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
