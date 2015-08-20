@@ -31,7 +31,7 @@ Public Class formSynopRA1
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+        cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
         YyyyTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
         cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
         cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
@@ -205,7 +205,7 @@ Public Class formSynopRA1
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = StationIdTextBox.Text
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.ValueMember
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = YyyyTextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
@@ -344,7 +344,7 @@ Public Class formSynopRA1
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
-        StationIdTextBox.Clear()
+        cboStation.Text = ""
         YyyyTextBox.Clear()
         cboMonth.Text = ""
         cboDay.Text = ""
@@ -498,8 +498,8 @@ Public Class formSynopRA1
         dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
         'Add a new record to the data source table
         ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
-        'Commit observation header inforamtion to database
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = StationIdTextBox.Text
+        'Commit observation header information to database
+        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = YyyyTextBox.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
         ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
@@ -679,12 +679,30 @@ Public Class formSynopRA1
 
         maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
 
+        '--------------------------------
+        'Fill combobox for station identifier with station list from station table
+        Dim ds1 As New DataSet
+        Dim sql1 As String
+        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        sql1 = "SELECT stationId,stationName FROM station"
+        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+
+        da1.Fill(ds1, "station")
+
+        With cboStation
+            .DataSource = ds1.Tables("station")
+            .DisplayMember = "stationName"
+            .ValueMember = "stationId"
+            .SelectedIndex = 0
+        End With
+        '--------------------------------
         'MessageBox.Show("number of rows = " & maxRows)
 
         If maxRows > 0 Then
 
 
-            StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+            'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+            cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
             YyyyTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
             cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
             cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
@@ -879,5 +897,10 @@ Public Class formSynopRA1
             Val_Elem101TextBox.BackColor = Color.White
             Val_Elem102TextBox.BackColor = Color.White
         End If
+    End Sub
+
+    Private Sub cboStation_LostFocus(sender As Object, e As EventArgs) Handles cboStation.LostFocus
+        'stationIdTextBox.Text = cboStation.SelectedValue
+
     End Sub
 End Class

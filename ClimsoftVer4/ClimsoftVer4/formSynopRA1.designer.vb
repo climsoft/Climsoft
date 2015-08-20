@@ -22,7 +22,6 @@ Partial Class formSynopRA1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim StationIdLabel As System.Windows.Forms.Label
         Dim YyyyLabel As System.Windows.Forms.Label
         Dim Val_Elem106Label As System.Windows.Forms.Label
         Dim Val_Elem107Label As System.Windows.Forms.Label
@@ -73,7 +72,6 @@ Partial Class formSynopRA1
         Dim Val_Elem005Label As System.Windows.Forms.Label
         Dim Val_Elem174Label As System.Windows.Forms.Label
         Dim Val_Elem046Label As System.Windows.Forms.Label
-        Me.StationIdTextBox = New System.Windows.Forms.TextBox()
         Me.YyyyTextBox = New System.Windows.Forms.TextBox()
         Me.Val_Elem106TextBox = New System.Windows.Forms.TextBox()
         Me.Val_Elem107TextBox = New System.Windows.Forms.TextBox()
@@ -191,7 +189,8 @@ Partial Class formSynopRA1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        StationIdLabel = New System.Windows.Forms.Label()
+        Me.cboStation = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         Val_Elem106Label = New System.Windows.Forms.Label()
         Val_Elem107Label = New System.Windows.Forms.Label()
@@ -244,19 +243,10 @@ Partial Class formSynopRA1
         Val_Elem046Label = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'StationIdLabel
-        '
-        StationIdLabel.AutoSize = True
-        StationIdLabel.Location = New System.Drawing.Point(52, 35)
-        StationIdLabel.Name = "StationIdLabel"
-        StationIdLabel.Size = New System.Drawing.Size(53, 13)
-        StationIdLabel.TabIndex = 1
-        StationIdLabel.Text = "station Id:"
-        '
         'YyyyLabel
         '
         YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(245, 35)
+        YyyyLabel.Location = New System.Drawing.Point(314, 34)
         YyyyLabel.Name = "YyyyLabel"
         YyyyLabel.Size = New System.Drawing.Size(32, 13)
         YyyyLabel.TabIndex = 3
@@ -697,22 +687,15 @@ Partial Class formSynopRA1
         'Val_Elem046Label
         '
         Val_Elem046Label.AutoSize = True
-        Val_Elem046Label.Location = New System.Drawing.Point(552, 498)
+        Val_Elem046Label.Location = New System.Drawing.Point(547, 498)
         Val_Elem046Label.Name = "Val_Elem046Label"
         Val_Elem046Label.Size = New System.Drawing.Size(52, 13)
         Val_Elem046Label.TabIndex = 107
         Val_Elem046Label.Text = "Insolation"
         '
-        'StationIdTextBox
-        '
-        Me.StationIdTextBox.Location = New System.Drawing.Point(111, 32)
-        Me.StationIdTextBox.Name = "StationIdTextBox"
-        Me.StationIdTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.StationIdTextBox.TabIndex = 0
-        '
         'YyyyTextBox
         '
-        Me.YyyyTextBox.Location = New System.Drawing.Point(281, 32)
+        Me.YyyyTextBox.Location = New System.Drawing.Point(350, 31)
         Me.YyyyTextBox.Name = "YyyyTextBox"
         Me.YyyyTextBox.Size = New System.Drawing.Size(57, 20)
         Me.YyyyTextBox.TabIndex = 1
@@ -1568,7 +1551,7 @@ Partial Class formSynopRA1
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", ""})
-        Me.cboHour.Location = New System.Drawing.Point(647, 32)
+        Me.cboHour.Location = New System.Drawing.Point(660, 32)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
@@ -1577,7 +1560,7 @@ Partial Class formSynopRA1
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(547, 31)
+        Me.cboDay.Location = New System.Drawing.Point(560, 31)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
         Me.cboDay.TabIndex = 3
@@ -1586,7 +1569,7 @@ Partial Class formSynopRA1
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(433, 31)
+        Me.cboMonth.Location = New System.Drawing.Point(472, 31)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 2
@@ -1594,7 +1577,7 @@ Partial Class formSynopRA1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(387, 35)
+        Me.Label1.Location = New System.Drawing.Point(426, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(40, 13)
         Me.Label1.TabIndex = 183
@@ -1603,7 +1586,7 @@ Partial Class formSynopRA1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(512, 35)
+        Me.Label2.Location = New System.Drawing.Point(525, 35)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(29, 13)
         Me.Label2.TabIndex = 184
@@ -1612,17 +1595,36 @@ Partial Class formSynopRA1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(608, 35)
+        Me.Label3.Location = New System.Drawing.Point(621, 35)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(33, 13)
         Me.Label3.TabIndex = 185
         Me.Label3.Text = "Hour:"
+        '
+        'cboStation
+        '
+        Me.cboStation.FormattingEnabled = True
+        Me.cboStation.Location = New System.Drawing.Point(110, 31)
+        Me.cboStation.Name = "cboStation"
+        Me.cboStation.Size = New System.Drawing.Size(183, 21)
+        Me.cboStation.TabIndex = 0
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(40, 33)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(40, 13)
+        Me.Label4.TabIndex = 204
+        Me.Label4.Text = "Station"
         '
         'formSynopRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(740, 632)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.cboStation)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -1790,8 +1792,6 @@ Partial Class formSynopRA1
         Me.Controls.Add(Me.Val_Elem106TextBox)
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.YyyyTextBox)
-        Me.Controls.Add(StationIdLabel)
-        Me.Controls.Add(Me.StationIdTextBox)
         Me.MaximizeBox = False
         Me.Name = "formSynopRA1"
         Me.Text = "Synoptic Data For Many Elements RA 1"
@@ -1799,7 +1799,6 @@ Partial Class formSynopRA1
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents StationIdTextBox As System.Windows.Forms.TextBox
     Friend WithEvents YyyyTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Val_Elem106TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Val_Elem107TextBox As System.Windows.Forms.TextBox
@@ -1917,5 +1916,7 @@ Partial Class formSynopRA1
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents cboStation As System.Windows.Forms.ComboBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class
