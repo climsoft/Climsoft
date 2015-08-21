@@ -257,7 +257,7 @@ Partial Class frmMainMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(527, 521)
+        Me.Panel1.Size = New System.Drawing.Size(560, 521)
         Me.Panel1.TabIndex = 10
         '
         'Label5

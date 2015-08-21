@@ -30,7 +30,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdPaperArchive.Click
-
+        formPaperArchive.Show()
     End Sub
 
     Private Sub cmdDataTransfer_Click(sender As Object, e As EventArgs) Handles cmdDataTransfer.Click
@@ -46,7 +46,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdUserManagement_Click(sender As Object, e As EventArgs) Handles cmdUserManagement.Click
-
+        frmUsers.Show()
     End Sub
 
     Private Sub cmdMetadata_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
@@ -54,7 +54,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdSettingsAWS_Click(sender As Object, e As EventArgs) Handles cmdSettingsAWS.Click
-
+        formAWSRealTime.Show()
     End Sub
 
     Private Sub cmdRedCloseButton_Click(sender As Object, e As EventArgs) Handles cmdRedCloseButton.Click
