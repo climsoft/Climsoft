@@ -37,7 +37,7 @@
         pnlServers.Visible = False
         pnlSites.Visible = False
         pnlDataStructures.Visible = False
-        pnlMessagesEncoding.Visible = False
+        pnlMsgEncoding.Visible = False
         Me.Text = topic
         pnl.Visible = True
         pnl.Dock = DockStyle.Right
@@ -49,10 +49,11 @@
 
     Private Sub cmdDataStructures_Click(sender As Object, e As EventArgs) Handles cmdDataStructures.Click
         ShowPanel(pnlDataStructures, "Data Structures Settings")
+
     End Sub
 
     Private Sub cmdMessages_Click(sender As Object, e As EventArgs) Handles cmdMessages.Click
-        ShowPanel(pnlMessagesEncoding, "Message Coding Settings")
+        ShowPanel(pnlMsgEncoding, "Message Coding Settings")
     End Sub
 
     Private Sub ProgressBar1_Click(sender As Object, e As EventArgs) Handles ProgressBar1.Click

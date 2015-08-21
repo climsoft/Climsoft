@@ -44,7 +44,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdUserManagement_Click(sender As Object, e As EventArgs) Handles cmdUserManagement.Click
-
+        frmUsers.Show()
     End Sub
 
     Private Sub cmdMetadata_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
