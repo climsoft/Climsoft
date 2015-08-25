@@ -256,4 +256,118 @@
   <data name="Select_Language" xml:space="preserve">
     <value>Select Language</value>
   </data>
+  <data name="Attach_Uncoded_Data" xml:space="preserve">
+    <value>Attach Uncoded Data</value>
+  </data>
+  <data name="BBB" xml:space="preserve">
+    <value>BBB</value>
+  </data>
+  <data name="BFR_Master_Table_Version_Number" xml:space="preserve">
+    <value>BUFR Master Table Version Number</value>
+  </data>
+  <data name="Character_Message" xml:space="preserve">
+    <value>Character Message</value>
+  </data>
+  <data name="Close1" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Coded_Output" xml:space="preserve">
+    <value>Coded Output</value>
+  </data>
+  <data name="Crex_Editions_Number" xml:space="preserve">
+    <value>Crex Editions Number</value>
+  </data>
+  <data name="Crex_Table_Version_Number" xml:space="preserve">
+    <value>Crex Table Version Number </value>
+  </data>
+  <data name="Data_Category" xml:space="preserve">
+    <value>Data Category</value>
+  </data>
+  <data name="Data_Category_Sub_Category" xml:space="preserve">
+    <value>Data Category Sub Category</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Encode" xml:space="preserve">
+    <value>Encode</value>
+  </data>
+  <data name="Evaporation" xml:space="preserve">
+    <value>Evaporation</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="Help1" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hour </value>
+  </data>
+  <data name="Include_Check_Digit" xml:space="preserve">
+    <value>Include Check Digit</value>
+  </data>
+  <data name="Mail_Applications" xml:space="preserve">
+    <value>Mail Applications</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Minute</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Number_Of_Subsets" xml:space="preserve">
+    <value>Number of Subsets</value>
+  </data>
+  <data name="Originating_Generating_Center" xml:space="preserve">
+    <value>Originating/Generating Center</value>
+  </data>
+  <data name="Originating_Generating_sub_Center" xml:space="preserve">
+    <value>Originating/Generating Sub Center</value>
+  </data>
+  <data name="Precipitation" xml:space="preserve">
+    <value>Precipitation</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Pressure </value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Sending_Options" xml:space="preserve">
+    <value>Sending Options</value>
+  </data>
+  <data name="Sequence_Number" xml:space="preserve">
+    <value>Sequence Number </value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings </value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject </value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature </value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="View_Import_Export" xml:space="preserve">
+    <value>View/Import/Export</value>
+  </data>
+  <data name="Visibility" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="Wind" xml:space="preserve">
+    <value>Wind</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
 </root>
