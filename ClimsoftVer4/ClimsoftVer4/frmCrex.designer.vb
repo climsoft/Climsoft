@@ -574,14 +574,14 @@ Partial Class frmCrex
         '
         'txtWind
         '
-        Me.txtWind.Location = New System.Drawing.Point(122, 119)
+        Me.txtWind.Location = New System.Drawing.Point(122, 111)
         Me.txtWind.Name = "txtWind"
         Me.txtWind.Size = New System.Drawing.Size(39, 20)
         Me.txtWind.TabIndex = 2
         '
         'txtPrecipitation
         '
-        Me.txtPrecipitation.Location = New System.Drawing.Point(122, 93)
+        Me.txtPrecipitation.Location = New System.Drawing.Point(122, 88)
         Me.txtPrecipitation.Name = "txtPrecipitation"
         Me.txtPrecipitation.Size = New System.Drawing.Size(39, 20)
         Me.txtPrecipitation.TabIndex = 2
@@ -599,7 +599,7 @@ Partial Class frmCrex
         '
         'txtVisibility
         '
-        Me.txtVisibility.Location = New System.Drawing.Point(122, 70)
+        Me.txtVisibility.Location = New System.Drawing.Point(122, 65)
         Me.txtVisibility.Name = "txtVisibility"
         Me.txtVisibility.Size = New System.Drawing.Size(39, 20)
         Me.txtVisibility.TabIndex = 2
@@ -617,7 +617,7 @@ Partial Class frmCrex
         '
         'txtTemperature
         '
-        Me.txtTemperature.Location = New System.Drawing.Point(122, 47)
+        Me.txtTemperature.Location = New System.Drawing.Point(122, 43)
         Me.txtTemperature.Name = "txtTemperature"
         Me.txtTemperature.Size = New System.Drawing.Size(39, 20)
         Me.txtTemperature.TabIndex = 2
@@ -635,7 +635,7 @@ Partial Class frmCrex
         '
         'txtPressure
         '
-        Me.txtPressure.Location = New System.Drawing.Point(122, 25)
+        Me.txtPressure.Location = New System.Drawing.Point(122, 21)
         Me.txtPressure.Name = "txtPressure"
         Me.txtPressure.Size = New System.Drawing.Size(39, 20)
         Me.txtPressure.TabIndex = 2
