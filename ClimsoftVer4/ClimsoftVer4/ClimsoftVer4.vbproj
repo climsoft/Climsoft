@@ -130,6 +130,12 @@
     <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCrex.designer.vb">
+      <DependentUpon>frmCrex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrex.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDBUtilities.Designer.vb">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </Compile>
@@ -416,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAction.fr.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrex.resx">
+      <DependentUpon>frmCrex.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataEntry.de.resx">
       <DependentUpon>frmDataEntry.vb</DependentUpon>
