@@ -15,5 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class frmBUFR
+    Private Sub frmBUFR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    End Sub
 End Class

@@ -23,13 +23,13 @@ Partial Class frmBUFR
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtCharacterMessage = New System.Windows.Forms.TextBox()
-        Me.lblWindInsrumentType = New System.Windows.Forms.Label()
-        Me.txtWindInstrumentTypes = New System.Windows.Forms.TextBox()
+        Me.lblInsrumentTypeWind = New System.Windows.Forms.Label()
+        Me.txtInstrumentTypesWind = New System.Windows.Forms.TextBox()
         Me.lblEvaporation = New System.Windows.Forms.Label()
         Me.txtEvaporation = New System.Windows.Forms.TextBox()
-        Me.lblWind = New System.Windows.Forms.Label()
+        Me.lblSensorHeightWind = New System.Windows.Forms.Label()
         Me.lblPrecipitation = New System.Windows.Forms.Label()
-        Me.txtWind = New System.Windows.Forms.TextBox()
+        Me.txtSensorHeightWind = New System.Windows.Forms.TextBox()
         Me.txtPrecipitation = New System.Windows.Forms.TextBox()
         Me.lblVisibility = New System.Windows.Forms.Label()
         Me.txtVisibility = New System.Windows.Forms.TextBox()
@@ -145,29 +145,29 @@ Partial Class frmBUFR
         '
         'txtCharacterMessage
         '
-        Me.txtCharacterMessage.Location = New System.Drawing.Point(3, 14)
+        Me.txtCharacterMessage.Location = New System.Drawing.Point(3, 15)
         Me.txtCharacterMessage.Multiline = True
         Me.txtCharacterMessage.Name = "txtCharacterMessage"
         Me.txtCharacterMessage.Size = New System.Drawing.Size(601, 79)
         Me.txtCharacterMessage.TabIndex = 0
         '
-        'lblWindInsrumentType
+        'lblInsrumentTypeWind
         '
-        Me.lblWindInsrumentType.AutoSize = True
-        Me.lblWindInsrumentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWindInsrumentType.Location = New System.Drawing.Point(3, 70)
-        Me.lblWindInsrumentType.Name = "lblWindInsrumentType"
-        Me.lblWindInsrumentType.Size = New System.Drawing.Size(32, 13)
-        Me.lblWindInsrumentType.TabIndex = 1
-        Me.lblWindInsrumentType.Tag = "Wind"
-        Me.lblWindInsrumentType.Text = "Wind"
+        Me.lblInsrumentTypeWind.AutoSize = True
+        Me.lblInsrumentTypeWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInsrumentTypeWind.Location = New System.Drawing.Point(3, 70)
+        Me.lblInsrumentTypeWind.Name = "lblInsrumentTypeWind"
+        Me.lblInsrumentTypeWind.Size = New System.Drawing.Size(32, 13)
+        Me.lblInsrumentTypeWind.TabIndex = 1
+        Me.lblInsrumentTypeWind.Tag = "Wind"
+        Me.lblInsrumentTypeWind.Text = "Wind"
         '
-        'txtWindInstrumentTypes
+        'txtInstrumentTypesWind
         '
-        Me.txtWindInstrumentTypes.Location = New System.Drawing.Point(103, 70)
-        Me.txtWindInstrumentTypes.Name = "txtWindInstrumentTypes"
-        Me.txtWindInstrumentTypes.Size = New System.Drawing.Size(39, 20)
-        Me.txtWindInstrumentTypes.TabIndex = 2
+        Me.txtInstrumentTypesWind.Location = New System.Drawing.Point(103, 70)
+        Me.txtInstrumentTypesWind.Name = "txtInstrumentTypesWind"
+        Me.txtInstrumentTypesWind.Size = New System.Drawing.Size(39, 20)
+        Me.txtInstrumentTypesWind.TabIndex = 2
         '
         'lblEvaporation
         '
@@ -187,16 +187,16 @@ Partial Class frmBUFR
         Me.txtEvaporation.Size = New System.Drawing.Size(39, 20)
         Me.txtEvaporation.TabIndex = 2
         '
-        'lblWind
+        'lblSensorHeightWind
         '
-        Me.lblWind.AutoSize = True
-        Me.lblWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWind.Location = New System.Drawing.Point(2, 111)
-        Me.lblWind.Name = "lblWind"
-        Me.lblWind.Size = New System.Drawing.Size(32, 13)
-        Me.lblWind.TabIndex = 1
-        Me.lblWind.Tag = "Wind"
-        Me.lblWind.Text = "Wind"
+        Me.lblSensorHeightWind.AutoSize = True
+        Me.lblSensorHeightWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSensorHeightWind.Location = New System.Drawing.Point(2, 111)
+        Me.lblSensorHeightWind.Name = "lblSensorHeightWind"
+        Me.lblSensorHeightWind.Size = New System.Drawing.Size(32, 13)
+        Me.lblSensorHeightWind.TabIndex = 1
+        Me.lblSensorHeightWind.Tag = "Wind"
+        Me.lblSensorHeightWind.Text = "Wind"
         '
         'lblPrecipitation
         '
@@ -209,12 +209,12 @@ Partial Class frmBUFR
         Me.lblPrecipitation.Tag = "Precipitation"
         Me.lblPrecipitation.Text = "Precipatation"
         '
-        'txtWind
+        'txtSensorHeightWind
         '
-        Me.txtWind.Location = New System.Drawing.Point(134, 108)
-        Me.txtWind.Name = "txtWind"
-        Me.txtWind.Size = New System.Drawing.Size(39, 20)
-        Me.txtWind.TabIndex = 2
+        Me.txtSensorHeightWind.Location = New System.Drawing.Point(134, 108)
+        Me.txtSensorHeightWind.Name = "txtSensorHeightWind"
+        Me.txtSensorHeightWind.Size = New System.Drawing.Size(39, 20)
+        Me.txtSensorHeightWind.TabIndex = 2
         '
         'txtPrecipitation
         '
@@ -254,7 +254,7 @@ Partial Class frmBUFR
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(563, 640)
+        Me.cmdHelp.Location = New System.Drawing.Point(560, 648)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
         Me.cmdHelp.TabIndex = 17
@@ -264,7 +264,7 @@ Partial Class frmBUFR
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(387, 640)
+        Me.cmdReset.Location = New System.Drawing.Point(394, 648)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(75, 23)
         Me.cmdReset.TabIndex = 18
@@ -274,9 +274,9 @@ Partial Class frmBUFR
         '
         'cmdViewImportExport
         '
-        Me.cmdViewImportExport.Location = New System.Drawing.Point(273, 633)
+        Me.cmdViewImportExport.Location = New System.Drawing.Point(275, 648)
         Me.cmdViewImportExport.Name = "cmdViewImportExport"
-        Me.cmdViewImportExport.Size = New System.Drawing.Size(111, 34)
+        Me.cmdViewImportExport.Size = New System.Drawing.Size(111, 23)
         Me.cmdViewImportExport.TabIndex = 19
         Me.cmdViewImportExport.Tag = "View_Import_Export"
         Me.cmdViewImportExport.Text = "View/Import/Export"
@@ -284,7 +284,7 @@ Partial Class frmBUFR
         '
         'cmdEncode
         '
-        Me.cmdEncode.Location = New System.Drawing.Point(192, 640)
+        Me.cmdEncode.Location = New System.Drawing.Point(192, 648)
         Me.cmdEncode.Name = "cmdEncode"
         Me.cmdEncode.Size = New System.Drawing.Size(75, 23)
         Me.cmdEncode.TabIndex = 20
@@ -299,7 +299,7 @@ Partial Class frmBUFR
         Me.grpCharacterMessage.Controls.Add(Me.VScrollBar1)
         Me.grpCharacterMessage.Controls.Add(Me.txtCharacterMessage)
         Me.grpCharacterMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCharacterMessage.Location = New System.Drawing.Point(49, 399)
+        Me.grpCharacterMessage.Location = New System.Drawing.Point(49, 407)
         Me.grpCharacterMessage.Name = "grpCharacterMessage"
         Me.grpCharacterMessage.Size = New System.Drawing.Size(629, 235)
         Me.grpCharacterMessage.TabIndex = 16
@@ -509,12 +509,12 @@ Partial Class frmBUFR
         '
         'grpInstrumentTypes
         '
-        Me.grpInstrumentTypes.Controls.Add(Me.lblWindInsrumentType)
-        Me.grpInstrumentTypes.Controls.Add(Me.txtWindInstrumentTypes)
+        Me.grpInstrumentTypes.Controls.Add(Me.lblInsrumentTypeWind)
+        Me.grpInstrumentTypes.Controls.Add(Me.txtInstrumentTypesWind)
         Me.grpInstrumentTypes.Controls.Add(Me.lblEvaporation)
         Me.grpInstrumentTypes.Controls.Add(Me.txtEvaporation)
         Me.grpInstrumentTypes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpInstrumentTypes.Location = New System.Drawing.Point(513, 142)
+        Me.grpInstrumentTypes.Location = New System.Drawing.Point(513, 144)
         Me.grpInstrumentTypes.Name = "grpInstrumentTypes"
         Me.grpInstrumentTypes.Size = New System.Drawing.Size(165, 132)
         Me.grpInstrumentTypes.TabIndex = 9
@@ -708,7 +708,7 @@ Partial Class frmBUFR
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(40, 13)
         Me.lblStation.TabIndex = 1
-        Me.lblStation.Tag = "lblStation"
+        Me.lblStation.Tag = "Station"
         Me.lblStation.Text = "Station"
         '
         'cboStation
@@ -812,7 +812,7 @@ Partial Class frmBUFR
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(473, 640)
+        Me.cmdClose.Location = New System.Drawing.Point(477, 648)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(75, 23)
         Me.cmdClose.TabIndex = 21
@@ -839,9 +839,9 @@ Partial Class frmBUFR
         '
         'grpSensorsHeightFromGroundM
         '
-        Me.grpSensorsHeightFromGroundM.Controls.Add(Me.lblWind)
+        Me.grpSensorsHeightFromGroundM.Controls.Add(Me.lblSensorHeightWind)
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.lblPrecipitation)
-        Me.grpSensorsHeightFromGroundM.Controls.Add(Me.txtWind)
+        Me.grpSensorsHeightFromGroundM.Controls.Add(Me.txtSensorHeightWind)
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.txtPrecipitation)
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.lblVisibility)
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.txtVisibility)
@@ -850,12 +850,13 @@ Partial Class frmBUFR
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.lblPressure)
         Me.grpSensorsHeightFromGroundM.Controls.Add(Me.txtPressure)
         Me.grpSensorsHeightFromGroundM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSensorsHeightFromGroundM.Location = New System.Drawing.Point(306, 142)
+        Me.grpSensorsHeightFromGroundM.Location = New System.Drawing.Point(289, 144)
         Me.grpSensorsHeightFromGroundM.Name = "grpSensorsHeightFromGroundM"
-        Me.grpSensorsHeightFromGroundM.Size = New System.Drawing.Size(201, 137)
+        Me.grpSensorsHeightFromGroundM.Size = New System.Drawing.Size(218, 137)
         Me.grpSensorsHeightFromGroundM.TabIndex = 11
         Me.grpSensorsHeightFromGroundM.TabStop = False
-        Me.grpSensorsHeightFromGroundM.Text = "Sensors Height From Ground(M)"
+        Me.grpSensorsHeightFromGroundM.Tag = "Sensors_Height_From_Ground_M"
+        Me.grpSensorsHeightFromGroundM.Text = "Sensors Height From Ground (M)"
         '
         'txtPressure
         '
@@ -1005,7 +1006,7 @@ Partial Class frmBUFR
         Me.grpIndicators.Controls.Add(Me.Label44)
         Me.grpIndicators.Controls.Add(Me.Label49)
         Me.grpIndicators.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpIndicators.Location = New System.Drawing.Point(49, 142)
+        Me.grpIndicators.Location = New System.Drawing.Point(49, 143)
         Me.grpIndicators.Name = "grpIndicators"
         Me.grpIndicators.Size = New System.Drawing.Size(229, 260)
         Me.grpIndicators.TabIndex = 12
@@ -1112,10 +1113,10 @@ Partial Class frmBUFR
         Me.lblNumberOfSubsets.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNumberOfSubsets.Location = New System.Drawing.Point(2, 241)
         Me.lblNumberOfSubsets.Name = "lblNumberOfSubsets"
-        Me.lblNumberOfSubsets.Size = New System.Drawing.Size(100, 13)
+        Me.lblNumberOfSubsets.Size = New System.Drawing.Size(97, 13)
         Me.lblNumberOfSubsets.TabIndex = 10
         Me.lblNumberOfSubsets.Tag = "Number_Of_Subsets"
-        Me.lblNumberOfSubsets.Text = " Number of Subsets"
+        Me.lblNumberOfSubsets.Text = "Number of Subsets"
         '
         'txtNumberOfSubsets
         '
@@ -1215,9 +1216,9 @@ Partial Class frmBUFR
         'grpBinaryMessage
         '
         Me.grpBinaryMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpBinaryMessage.Location = New System.Drawing.Point(306, 309)
+        Me.grpBinaryMessage.Location = New System.Drawing.Point(289, 309)
         Me.grpBinaryMessage.Name = "grpBinaryMessage"
-        Me.grpBinaryMessage.Size = New System.Drawing.Size(372, 64)
+        Me.grpBinaryMessage.Size = New System.Drawing.Size(389, 64)
         Me.grpBinaryMessage.TabIndex = 22
         Me.grpBinaryMessage.TabStop = False
         Me.grpBinaryMessage.Tag = "Binary_Message"
@@ -1227,7 +1228,7 @@ Partial Class frmBUFR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 582)
+        Me.ClientSize = New System.Drawing.Size(984, 677)
         Me.Controls.Add(Me.lblLocalTableVersionNumber)
         Me.Controls.Add(Me.txtLocalTablesVersionNumber)
         Me.Controls.Add(Me.lblCodedOutput)
@@ -1271,13 +1272,13 @@ Partial Class frmBUFR
     End Sub
 
     Friend WithEvents txtCharacterMessage As TextBox
-    Friend WithEvents lblWindInsrumentType As Label
-    Friend WithEvents txtWindInstrumentTypes As TextBox
+    Friend WithEvents lblInsrumentTypeWind As Label
+    Friend WithEvents txtInstrumentTypesWind As TextBox
     Friend WithEvents lblEvaporation As Label
     Friend WithEvents txtEvaporation As TextBox
-    Friend WithEvents lblWind As Label
+    Friend WithEvents lblSensorHeightWind As Label
     Friend WithEvents lblPrecipitation As Label
-    Friend WithEvents txtWind As TextBox
+    Friend WithEvents txtSensorHeightWind As TextBox
     Friend WithEvents txtPrecipitation As TextBox
     Friend WithEvents lblVisibility As Label
     Friend WithEvents txtVisibility As TextBox

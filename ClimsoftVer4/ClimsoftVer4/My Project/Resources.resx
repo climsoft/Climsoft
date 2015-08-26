@@ -262,7 +262,7 @@
   <data name="BBB" xml:space="preserve">
     <value>BBB</value>
   </data>
-  <data name="BFR_Master_Table_Version_Number" xml:space="preserve">
+  <data name="BUFR_Master_Table_Version_Number" xml:space="preserve">
     <value>BUFR Master Table Version Number</value>
   </data>
   <data name="Character_Message" xml:space="preserve">
@@ -369,5 +369,50 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>
+  </data>
+  <data name="Binary_Message" xml:space="preserve">
+    <value>Binary Message</value>
+  </data>
+  <data name="BUFR_edition_Number" xml:space="preserve">
+    <value>BUFR edition Number</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FTP" xml:space="preserve">
+    <value>FTP</value>
+  </data>
+  <data name="Indicators" xml:space="preserve">
+    <value>Indicators</value>
+  </data>
+  <data name="Instrument_Types" xml:space="preserve">
+    <value>Instrument Types</value>
+  </data>
+  <data name="International_Data_Sub_Category" xml:space="preserve">
+    <value>International Data Sub-Category</value>
+  </data>
+  <data name="Local_Data_Sub_Cateory" xml:space="preserve">
+    <value>Local Data Sub-Category</value>
+  </data>
+  <data name="Masters_Table_Version_Number" xml:space="preserve">
+    <value>Masters Table Version Number</value>
+  </data>
+  <data name="Optional_Sequence_Inclusion" xml:space="preserve">
+    <value>Optional Sequence Inclusion</value>
+  </data>
+  <data name="Originating_Generating_Centre" xml:space="preserve">
+    <value>Originating/Generating Centre</value>
+  </data>
+  <data name="Originating_Generating_SubCentre" xml:space="preserve">
+    <value>Originating/Generating Sub-Centre</value>
+  </data>
+  <data name="Sensors_Height_From_Ground_M" xml:space="preserve">
+    <value>Sensors Height From Ground (M)</value>
+  </data>
+  <data name="Table_Version_Number" xml:space="preserve">
+    <value>Local Tables Version Number</value>
+  </data>
+  <data name="Update_Sequence_Number" xml:space="preserve">
+    <value>Update Sequence Number</value>
   </data>
 </root>
