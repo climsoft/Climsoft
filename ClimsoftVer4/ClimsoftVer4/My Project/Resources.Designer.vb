@@ -173,11 +173,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Binary Message.
+        '''</summary>
+        Public ReadOnly Property Binary_Message() As String
+            Get
+                Return ResourceManager.GetString("Binary_Message", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to BUFR edition Number.
+        '''</summary>
+        Public ReadOnly Property BUFR_edition_Number() As String
+            Get
+                Return ResourceManager.GetString("BUFR_edition_Number", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to BUFR Master Table Version Number.
         '''</summary>
-        Public ReadOnly Property BFR_Master_Table_Version_Number() As String
+        Public ReadOnly Property BUFR_Master_Table_Version_Number() As String
             Get
-                Return ResourceManager.GetString("BFR_Master_Table_Version_Number", resourceCulture)
+                Return ResourceManager.GetString("BUFR_Master_Table_Version_Number", resourceCulture)
             End Get
         End Property
         
@@ -345,6 +363,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Email.
+        '''</summary>
+        Public ReadOnly Property Email() As String
+            Get
+                Return ResourceManager.GetString("Email", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Encode.
         '''</summary>
         Public ReadOnly Property Encode() As String
@@ -359,6 +386,15 @@ Namespace My.Resources
         Public ReadOnly Property Evaporation() As String
             Get
                 Return ResourceManager.GetString("Evaporation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to FTP.
+        '''</summary>
+        Public ReadOnly Property FTP() As String
+            Get
+                Return ResourceManager.GetString("FTP", resourceCulture)
             End Get
         End Property
         
@@ -426,6 +462,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Indicators.
+        '''</summary>
+        Public ReadOnly Property Indicators() As String
+            Get
+                Return ResourceManager.GetString("Indicators", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Input.
         '''</summary>
         Public ReadOnly Property Input() As String
@@ -435,11 +480,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Instrument Types.
+        '''</summary>
+        Public ReadOnly Property Instrument_Types() As String
+            Get
+                Return ResourceManager.GetString("Instrument_Types", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to International Data Sub-Category.
+        '''</summary>
+        Public ReadOnly Property International_Data_Sub_Category() As String
+            Get
+                Return ResourceManager.GetString("International_Data_Sub_Category", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Key Entry.
         '''</summary>
         Public ReadOnly Property Key_Entry() As String
             Get
                 Return ResourceManager.GetString("Key_Entry", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Local Data Sub-Category.
+        '''</summary>
+        Public ReadOnly Property Local_Data_Sub_Cateory() As String
+            Get
+                Return ResourceManager.GetString("Local_Data_Sub_Cateory", resourceCulture)
             End Get
         End Property
         
@@ -467,6 +539,15 @@ Namespace My.Resources
         Public ReadOnly Property Main_Menu() As String
             Get
                 Return ResourceManager.GetString("Main_Menu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Masters Table Version Number.
+        '''</summary>
+        Public ReadOnly Property Masters_Table_Version_Number() As String
+            Get
+                Return ResourceManager.GetString("Masters_Table_Version_Number", resourceCulture)
             End Get
         End Property
         
@@ -544,6 +625,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Optional Sequence Inclusion.
+        '''</summary>
+        Public ReadOnly Property Optional_Sequence_Inclusion() As String
+            Get
+                Return ResourceManager.GetString("Optional_Sequence_Inclusion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Options.
         '''</summary>
         Public ReadOnly Property Options() As String
@@ -562,11 +652,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Originating/Generating Centre.
+        '''</summary>
+        Public ReadOnly Property Originating_Generating_Centre() As String
+            Get
+                Return ResourceManager.GetString("Originating_Generating_Centre", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Originating/Generating Sub Center.
         '''</summary>
         Public ReadOnly Property Originating_Generating_sub_Center() As String
             Get
                 Return ResourceManager.GetString("Originating_Generating_sub_Center", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Originating/Generating Sub-Centre.
+        '''</summary>
+        Public ReadOnly Property Originating_Generating_SubCentre() As String
+            Get
+                Return ResourceManager.GetString("Originating_Generating_SubCentre", resourceCulture)
             End Get
         End Property
         
@@ -670,6 +778,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Sensors Height From Ground (M).
+        '''</summary>
+        Public ReadOnly Property Sensors_Height_From_Ground_M() As String
+            Get
+                Return ResourceManager.GetString("Sensors_Height_From_Ground_M", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Sequence Number .
         '''</summary>
         Public ReadOnly Property Sequence_Number() As String
@@ -715,6 +832,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Local Tables Version Number.
+        '''</summary>
+        Public ReadOnly Property Table_Version_Number() As String
+            Get
+                Return ResourceManager.GetString("Table_Version_Number", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Temperature .
         '''</summary>
         Public ReadOnly Property Temperature() As String
@@ -747,6 +873,15 @@ Namespace My.Resources
         Public ReadOnly Property Update_Element_Limits() As String
             Get
                 Return ResourceManager.GetString("Update_Element_Limits", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Update Sequence Number.
+        '''</summary>
+        Public ReadOnly Property Update_Sequence_Number() As String
+            Get
+                Return ResourceManager.GetString("Update_Sequence_Number", resourceCulture)
             End Get
         End Property
         
