@@ -19,4 +19,12 @@ Public Class frmCrex
     Private Sub frmCrex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub btnEncode_Click(sender As Object, e As EventArgs) Handles btnEncode.Click
+
+    End Sub
+
+    Private Sub txtOriginatingGeneratingCenter_TextChanged(sender As Object, e As EventArgs) Handles txtOriginatingGeneratingCenter.TextChanged
+
+    End Sub
 End Class

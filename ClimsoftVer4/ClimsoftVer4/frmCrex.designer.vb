@@ -45,27 +45,27 @@ Partial Class frmCrex
         Me.cboStation = New System.Windows.Forms.ComboBox()
         Me.grpIndicators = New System.Windows.Forms.GroupBox()
         Me.lblNumberSequence = New System.Windows.Forms.Label()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.lblOriginatingGeneratingsubCenter = New System.Windows.Forms.Label()
-        Me.OriginatingGeneratingsubCenter = New System.Windows.Forms.TextBox()
+        Me.txtSequenceNumber = New System.Windows.Forms.TextBox()
+        Me.lblOriginatingGeneratingSubCenter = New System.Windows.Forms.Label()
+        Me.txtOriginatingGeneratingsubCenter = New System.Windows.Forms.TextBox()
         Me.lblOriginatingGeneratingCenter = New System.Windows.Forms.Label()
         Me.txtOriginatingGeneratingCenter = New System.Windows.Forms.TextBox()
         Me.lblDataCategorySubCategory = New System.Windows.Forms.Label()
         Me.txtDataCategorySubCategory = New System.Windows.Forms.TextBox()
         Me.lblDataCategory = New System.Windows.Forms.Label()
         Me.txtDataCategory = New System.Windows.Forms.TextBox()
-        Me.lblLocalTableversionNumber = New System.Windows.Forms.Label()
+        Me.lblLocalTableVersionNumber = New System.Windows.Forms.Label()
         Me.txtLocalTableversionNumber = New System.Windows.Forms.TextBox()
-        Me.lblBFRMasterTableVersionNumber = New System.Windows.Forms.Label()
-        Me.txtBFRMasterTableVersionNumber = New System.Windows.Forms.TextBox()
+        Me.lblBUFRMasterTableVersionNumber = New System.Windows.Forms.Label()
+        Me.txtBUFRMasterTableVersionNumber = New System.Windows.Forms.TextBox()
         Me.lblCrexTableVersionNumber = New System.Windows.Forms.Label()
-        Me.txtCrexTableVersionNumber = New System.Windows.Forms.TextBox()
+        Me.txtCREXTableVersionNumber = New System.Windows.Forms.TextBox()
         Me.lblCrexEditionsNumber = New System.Windows.Forms.Label()
-        Me.txtCrexEditionsNumber = New System.Windows.Forms.TextBox()
+        Me.txtCREXEditionsNumber = New System.Windows.Forms.TextBox()
         Me.txtNumberOfSubsets = New System.Windows.Forms.TextBox()
         Me.lblNumberOfSubsets = New System.Windows.Forms.Label()
         Me.grpSensorsHeightFromGround = New System.Windows.Forms.GroupBox()
-        Me.lblWind = New System.Windows.Forms.Label()
+        Me.lblSensorsheightFromGroundWind = New System.Windows.Forms.Label()
         Me.lblPrecipitation = New System.Windows.Forms.Label()
         Me.txtWind = New System.Windows.Forms.TextBox()
         Me.txtPrecipitation = New System.Windows.Forms.TextBox()
@@ -76,12 +76,11 @@ Partial Class frmCrex
         Me.lblPressure = New System.Windows.Forms.Label()
         Me.txtPressure = New System.Windows.Forms.TextBox()
         Me.grpInstrumentTypes = New System.Windows.Forms.GroupBox()
-        Me.lblWindIT = New System.Windows.Forms.Label()
-        Me.txtWind1 = New System.Windows.Forms.TextBox()
+        Me.lblInstrumentTypesWind = New System.Windows.Forms.Label()
+        Me.txtInstrumentTypesWind = New System.Windows.Forms.TextBox()
         Me.lblEvaporation = New System.Windows.Forms.Label()
         Me.txtEvaporation = New System.Windows.Forms.TextBox()
         Me.lblCodedOutput = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
         Me.grpCharacterMessage = New System.Windows.Forms.GroupBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
@@ -97,14 +96,14 @@ Partial Class frmCrex
         Me.lblMailApplications = New System.Windows.Forms.Label()
         Me.chkAttachUncodedData = New System.Windows.Forms.CheckBox()
         Me.grpSendingOptions = New System.Windows.Forms.GroupBox()
-        Me.Label34 = New System.Windows.Forms.Label()
+        Me.lblFTP = New System.Windows.Forms.Label()
         Me.rbFTP = New System.Windows.Forms.RadioButton()
         Me.lblEmail = New System.Windows.Forms.Label()
         Me.rbEmail = New System.Windows.Forms.RadioButton()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.txtCharacterMessage = New System.Windows.Forms.TextBox()
         Me.btnEncode = New System.Windows.Forms.Button()
-        Me.btnViewIE = New System.Windows.Forms.Button()
+        Me.btnViewImportExport = New System.Windows.Forms.Button()
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
@@ -325,23 +324,23 @@ Partial Class frmCrex
         'grpIndicators
         '
         Me.grpIndicators.Controls.Add(Me.lblNumberSequence)
-        Me.grpIndicators.Controls.Add(Me.TextBox15)
-        Me.grpIndicators.Controls.Add(Me.lblOriginatingGeneratingsubCenter)
-        Me.grpIndicators.Controls.Add(Me.OriginatingGeneratingsubCenter)
+        Me.grpIndicators.Controls.Add(Me.txtSequenceNumber)
+        Me.grpIndicators.Controls.Add(Me.lblOriginatingGeneratingSubCenter)
+        Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingsubCenter)
         Me.grpIndicators.Controls.Add(Me.lblOriginatingGeneratingCenter)
         Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingCenter)
         Me.grpIndicators.Controls.Add(Me.lblDataCategorySubCategory)
         Me.grpIndicators.Controls.Add(Me.txtDataCategorySubCategory)
         Me.grpIndicators.Controls.Add(Me.lblDataCategory)
         Me.grpIndicators.Controls.Add(Me.txtDataCategory)
-        Me.grpIndicators.Controls.Add(Me.lblLocalTableversionNumber)
+        Me.grpIndicators.Controls.Add(Me.lblLocalTableVersionNumber)
         Me.grpIndicators.Controls.Add(Me.txtLocalTableversionNumber)
-        Me.grpIndicators.Controls.Add(Me.lblBFRMasterTableVersionNumber)
-        Me.grpIndicators.Controls.Add(Me.txtBFRMasterTableVersionNumber)
+        Me.grpIndicators.Controls.Add(Me.lblBUFRMasterTableVersionNumber)
+        Me.grpIndicators.Controls.Add(Me.txtBUFRMasterTableVersionNumber)
         Me.grpIndicators.Controls.Add(Me.lblCrexTableVersionNumber)
-        Me.grpIndicators.Controls.Add(Me.txtCrexTableVersionNumber)
+        Me.grpIndicators.Controls.Add(Me.txtCREXTableVersionNumber)
         Me.grpIndicators.Controls.Add(Me.lblCrexEditionsNumber)
-        Me.grpIndicators.Controls.Add(Me.txtCrexEditionsNumber)
+        Me.grpIndicators.Controls.Add(Me.txtCREXEditionsNumber)
         Me.grpIndicators.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpIndicators.Location = New System.Drawing.Point(29, 147)
         Me.grpIndicators.Name = "grpIndicators"
@@ -361,30 +360,30 @@ Partial Class frmCrex
         Me.lblNumberSequence.Tag = "Number_Sequence"
         Me.lblNumberSequence.Text = "Sequence Number"
         '
-        'TextBox15
+        'txtSequenceNumber
         '
-        Me.TextBox15.Location = New System.Drawing.Point(184, 200)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(39, 20)
-        Me.TextBox15.TabIndex = 2
+        Me.txtSequenceNumber.Location = New System.Drawing.Point(184, 200)
+        Me.txtSequenceNumber.Name = "txtSequenceNumber"
+        Me.txtSequenceNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtSequenceNumber.TabIndex = 2
         '
-        'lblOriginatingGeneratingsubCenter
+        'lblOriginatingGeneratingSubCenter
         '
-        Me.lblOriginatingGeneratingsubCenter.AutoSize = True
-        Me.lblOriginatingGeneratingsubCenter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOriginatingGeneratingsubCenter.Location = New System.Drawing.Point(1, 184)
-        Me.lblOriginatingGeneratingsubCenter.Name = "lblOriginatingGeneratingsubCenter"
-        Me.lblOriginatingGeneratingsubCenter.Size = New System.Drawing.Size(170, 13)
-        Me.lblOriginatingGeneratingsubCenter.TabIndex = 1
-        Me.lblOriginatingGeneratingsubCenter.Tag = "Originating_Generating_sub_Center"
-        Me.lblOriginatingGeneratingsubCenter.Text = "Originating/Generating Sub Center"
+        Me.lblOriginatingGeneratingSubCenter.AutoSize = True
+        Me.lblOriginatingGeneratingSubCenter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblOriginatingGeneratingSubCenter.Location = New System.Drawing.Point(1, 184)
+        Me.lblOriginatingGeneratingSubCenter.Name = "lblOriginatingGeneratingSubCenter"
+        Me.lblOriginatingGeneratingSubCenter.Size = New System.Drawing.Size(170, 13)
+        Me.lblOriginatingGeneratingSubCenter.TabIndex = 1
+        Me.lblOriginatingGeneratingSubCenter.Tag = "Originating_Generating_Sub_Center"
+        Me.lblOriginatingGeneratingSubCenter.Text = "Originating/Generating Sub Center"
         '
-        'OriginatingGeneratingsubCenter
+        'txtOriginatingGeneratingsubCenter
         '
-        Me.OriginatingGeneratingsubCenter.Location = New System.Drawing.Point(184, 178)
-        Me.OriginatingGeneratingsubCenter.Name = "OriginatingGeneratingsubCenter"
-        Me.OriginatingGeneratingsubCenter.Size = New System.Drawing.Size(39, 20)
-        Me.OriginatingGeneratingsubCenter.TabIndex = 2
+        Me.txtOriginatingGeneratingsubCenter.Location = New System.Drawing.Point(184, 178)
+        Me.txtOriginatingGeneratingsubCenter.Name = "txtOriginatingGeneratingsubCenter"
+        Me.txtOriginatingGeneratingsubCenter.Size = New System.Drawing.Size(39, 20)
+        Me.txtOriginatingGeneratingsubCenter.TabIndex = 2
         '
         'lblOriginatingGeneratingCenter
         '
@@ -440,16 +439,16 @@ Partial Class frmCrex
         Me.txtDataCategory.Size = New System.Drawing.Size(39, 20)
         Me.txtDataCategory.TabIndex = 2
         '
-        'lblLocalTableversionNumber
+        'lblLocalTableVersionNumber
         '
-        Me.lblLocalTableversionNumber.AutoSize = True
-        Me.lblLocalTableversionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLocalTableversionNumber.Location = New System.Drawing.Point(1, 90)
-        Me.lblLocalTableversionNumber.Name = "lblLocalTableversionNumber"
-        Me.lblLocalTableversionNumber.Size = New System.Drawing.Size(137, 13)
-        Me.lblLocalTableversionNumber.TabIndex = 1
-        Me.lblLocalTableversionNumber.Tag = "Local_Table_version_Number"
-        Me.lblLocalTableversionNumber.Text = "Local table Version Number"
+        Me.lblLocalTableVersionNumber.AutoSize = True
+        Me.lblLocalTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLocalTableVersionNumber.Location = New System.Drawing.Point(1, 90)
+        Me.lblLocalTableVersionNumber.Name = "lblLocalTableVersionNumber"
+        Me.lblLocalTableVersionNumber.Size = New System.Drawing.Size(137, 13)
+        Me.lblLocalTableVersionNumber.TabIndex = 1
+        Me.lblLocalTableVersionNumber.Tag = "Local_Table_Version_Number"
+        Me.lblLocalTableVersionNumber.Text = "Local table Version Number"
         '
         'txtLocalTableversionNumber
         '
@@ -458,23 +457,24 @@ Partial Class frmCrex
         Me.txtLocalTableversionNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtLocalTableversionNumber.TabIndex = 2
         '
-        'lblBFRMasterTableVersionNumber
+        'lblBUFRMasterTableVersionNumber
         '
-        Me.lblBFRMasterTableVersionNumber.AutoSize = True
-        Me.lblBFRMasterTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBFRMasterTableVersionNumber.Location = New System.Drawing.Point(1, 69)
-        Me.lblBFRMasterTableVersionNumber.Name = "lblBFRMasterTableVersionNumber"
-        Me.lblBFRMasterTableVersionNumber.Size = New System.Drawing.Size(179, 13)
-        Me.lblBFRMasterTableVersionNumber.TabIndex = 1
-        Me.lblBFRMasterTableVersionNumber.Tag = "BFR_Master_Table_Version_Number"
-        Me.lblBFRMasterTableVersionNumber.Text = "BUFR Master Table Version Number"
+        Me.lblBUFRMasterTableVersionNumber.AutoSize = True
+        Me.lblBUFRMasterTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBUFRMasterTableVersionNumber.Location = New System.Drawing.Point(1, 69)
+        Me.lblBUFRMasterTableVersionNumber.Name = "lblBUFRMasterTableVersionNumber"
+        Me.lblBUFRMasterTableVersionNumber.Size = New System.Drawing.Size(179, 13)
+        Me.lblBUFRMasterTableVersionNumber.TabIndex = 1
+        Me.lblBUFRMasterTableVersionNumber.Tag = "BUFR_Master_Table_Version_Number"
+        Me.lblBUFRMasterTableVersionNumber.Text = "BUFR Master Table Version Number"
         '
-        'txtBFRMasterTableVersionNumber
+        'txtBUFRMasterTableVersionNumber
         '
-        Me.txtBFRMasterTableVersionNumber.Location = New System.Drawing.Point(184, 65)
-        Me.txtBFRMasterTableVersionNumber.Name = "txtBFRMasterTableVersionNumber"
-        Me.txtBFRMasterTableVersionNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtBFRMasterTableVersionNumber.TabIndex = 2
+        Me.txtBUFRMasterTableVersionNumber.Location = New System.Drawing.Point(184, 65)
+        Me.txtBUFRMasterTableVersionNumber.Name = "txtBUFRMasterTableVersionNumber"
+        Me.txtBUFRMasterTableVersionNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtBUFRMasterTableVersionNumber.TabIndex = 2
+        Me.txtBUFRMasterTableVersionNumber.Tag = ""
         '
         'lblCrexTableVersionNumber
         '
@@ -482,17 +482,17 @@ Partial Class frmCrex
         Me.lblCrexTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCrexTableVersionNumber.Location = New System.Drawing.Point(1, 47)
         Me.lblCrexTableVersionNumber.Name = "lblCrexTableVersionNumber"
-        Me.lblCrexTableVersionNumber.Size = New System.Drawing.Size(136, 13)
+        Me.lblCrexTableVersionNumber.Size = New System.Drawing.Size(144, 13)
         Me.lblCrexTableVersionNumber.TabIndex = 1
         Me.lblCrexTableVersionNumber.Tag = "Crex_Table_Version_Number"
-        Me.lblCrexTableVersionNumber.Text = "Crex Table Version Number"
+        Me.lblCrexTableVersionNumber.Text = "CREX Table Version Number"
         '
-        'txtCrexTableVersionNumber
+        'txtCREXTableVersionNumber
         '
-        Me.txtCrexTableVersionNumber.Location = New System.Drawing.Point(184, 43)
-        Me.txtCrexTableVersionNumber.Name = "txtCrexTableVersionNumber"
-        Me.txtCrexTableVersionNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtCrexTableVersionNumber.TabIndex = 2
+        Me.txtCREXTableVersionNumber.Location = New System.Drawing.Point(184, 43)
+        Me.txtCREXTableVersionNumber.Name = "txtCREXTableVersionNumber"
+        Me.txtCREXTableVersionNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtCREXTableVersionNumber.TabIndex = 2
         '
         'lblCrexEditionsNumber
         '
@@ -500,17 +500,17 @@ Partial Class frmCrex
         Me.lblCrexEditionsNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCrexEditionsNumber.Location = New System.Drawing.Point(1, 26)
         Me.lblCrexEditionsNumber.Name = "lblCrexEditionsNumber"
-        Me.lblCrexEditionsNumber.Size = New System.Drawing.Size(108, 13)
+        Me.lblCrexEditionsNumber.Size = New System.Drawing.Size(116, 13)
         Me.lblCrexEditionsNumber.TabIndex = 1
-        Me.lblCrexEditionsNumber.Tag = "Crex_Editions_Number"
-        Me.lblCrexEditionsNumber.Text = "Crex Editions Number"
+        Me.lblCrexEditionsNumber.Tag = "CREX_Editions_Number"
+        Me.lblCrexEditionsNumber.Text = "CREX Editions Number"
         '
-        'txtCrexEditionsNumber
+        'txtCREXEditionsNumber
         '
-        Me.txtCrexEditionsNumber.Location = New System.Drawing.Point(184, 21)
-        Me.txtCrexEditionsNumber.Name = "txtCrexEditionsNumber"
-        Me.txtCrexEditionsNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtCrexEditionsNumber.TabIndex = 2
+        Me.txtCREXEditionsNumber.Location = New System.Drawing.Point(184, 21)
+        Me.txtCREXEditionsNumber.Name = "txtCREXEditionsNumber"
+        Me.txtCREXEditionsNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtCREXEditionsNumber.TabIndex = 2
         '
         'txtNumberOfSubsets
         '
@@ -531,7 +531,7 @@ Partial Class frmCrex
         '
         'grpSensorsHeightFromGround
         '
-        Me.grpSensorsHeightFromGround.Controls.Add(Me.lblWind)
+        Me.grpSensorsHeightFromGround.Controls.Add(Me.lblSensorsheightFromGroundWind)
         Me.grpSensorsHeightFromGround.Controls.Add(Me.lblPrecipitation)
         Me.grpSensorsHeightFromGround.Controls.Add(Me.txtWind)
         Me.grpSensorsHeightFromGround.Controls.Add(Me.txtPrecipitation)
@@ -550,16 +550,16 @@ Partial Class frmCrex
         Me.grpSensorsHeightFromGround.Tag = "Sensors_Height_From_Ground"
         Me.grpSensorsHeightFromGround.Text = "Sensors Height From Ground(M)"
         '
-        'lblWind
+        'lblSensorsheightFromGroundWind
         '
-        Me.lblWind.AutoSize = True
-        Me.lblWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWind.Location = New System.Drawing.Point(5, 113)
-        Me.lblWind.Name = "lblWind"
-        Me.lblWind.Size = New System.Drawing.Size(32, 13)
-        Me.lblWind.TabIndex = 1
-        Me.lblWind.Tag = "Wind"
-        Me.lblWind.Text = "Wind"
+        Me.lblSensorsheightFromGroundWind.AutoSize = True
+        Me.lblSensorsheightFromGroundWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSensorsheightFromGroundWind.Location = New System.Drawing.Point(5, 113)
+        Me.lblSensorsheightFromGroundWind.Name = "lblSensorsheightFromGroundWind"
+        Me.lblSensorsheightFromGroundWind.Size = New System.Drawing.Size(32, 13)
+        Me.lblSensorsheightFromGroundWind.TabIndex = 1
+        Me.lblSensorsheightFromGroundWind.Tag = "Wind"
+        Me.lblSensorsheightFromGroundWind.Text = "Wind"
         '
         'lblPrecipitation
         '
@@ -642,8 +642,8 @@ Partial Class frmCrex
         '
         'grpInstrumentTypes
         '
-        Me.grpInstrumentTypes.Controls.Add(Me.lblWindIT)
-        Me.grpInstrumentTypes.Controls.Add(Me.txtWind1)
+        Me.grpInstrumentTypes.Controls.Add(Me.lblInstrumentTypesWind)
+        Me.grpInstrumentTypes.Controls.Add(Me.txtInstrumentTypesWind)
         Me.grpInstrumentTypes.Controls.Add(Me.lblEvaporation)
         Me.grpInstrumentTypes.Controls.Add(Me.txtEvaporation)
         Me.grpInstrumentTypes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -655,23 +655,23 @@ Partial Class frmCrex
         Me.grpInstrumentTypes.Tag = "Instrument_Types"
         Me.grpInstrumentTypes.Text = "Instrument Types"
         '
-        'lblWindIT
+        'lblInstrumentTypesWind
         '
-        Me.lblWindIT.AutoSize = True
-        Me.lblWindIT.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWindIT.Location = New System.Drawing.Point(5, 47)
-        Me.lblWindIT.Name = "lblWindIT"
-        Me.lblWindIT.Size = New System.Drawing.Size(32, 13)
-        Me.lblWindIT.TabIndex = 1
-        Me.lblWindIT.Tag = "Wind"
-        Me.lblWindIT.Text = "Wind"
+        Me.lblInstrumentTypesWind.AutoSize = True
+        Me.lblInstrumentTypesWind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstrumentTypesWind.Location = New System.Drawing.Point(5, 47)
+        Me.lblInstrumentTypesWind.Name = "lblInstrumentTypesWind"
+        Me.lblInstrumentTypesWind.Size = New System.Drawing.Size(32, 13)
+        Me.lblInstrumentTypesWind.TabIndex = 1
+        Me.lblInstrumentTypesWind.Tag = "Wind"
+        Me.lblInstrumentTypesWind.Text = "Wind"
         '
-        'txtWind1
+        'txtInstrumentTypesWind
         '
-        Me.txtWind1.Location = New System.Drawing.Point(102, 49)
-        Me.txtWind1.Name = "txtWind1"
-        Me.txtWind1.Size = New System.Drawing.Size(39, 20)
-        Me.txtWind1.TabIndex = 2
+        Me.txtInstrumentTypesWind.Location = New System.Drawing.Point(102, 49)
+        Me.txtInstrumentTypesWind.Name = "txtInstrumentTypesWind"
+        Me.txtInstrumentTypesWind.Size = New System.Drawing.Size(39, 20)
+        Me.txtInstrumentTypesWind.TabIndex = 2
         '
         'lblEvaporation
         '
@@ -700,15 +700,6 @@ Partial Class frmCrex
         Me.lblCodedOutput.TabIndex = 3
         Me.lblCodedOutput.Tag = "Coded_Output"
         Me.lblCodedOutput.Text = "Coded Output"
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(379, 362)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(149, 13)
-        Me.Label30.TabIndex = 4
-        Me.Label30.Text = "Coded    Output  will  Go  here"
         '
         'grpCharacterMessage
         '
@@ -863,7 +854,7 @@ Partial Class frmCrex
         '
         'grpSendingOptions
         '
-        Me.grpSendingOptions.Controls.Add(Me.Label34)
+        Me.grpSendingOptions.Controls.Add(Me.lblFTP)
         Me.grpSendingOptions.Controls.Add(Me.rbFTP)
         Me.grpSendingOptions.Controls.Add(Me.lblEmail)
         Me.grpSendingOptions.Controls.Add(Me.rbEmail)
@@ -876,15 +867,16 @@ Partial Class frmCrex
         Me.grpSendingOptions.Tag = "Sending_Options"
         Me.grpSendingOptions.Text = "Sending Options"
         '
-        'Label34
+        'lblFTP
         '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(49, 47)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(27, 13)
-        Me.Label34.TabIndex = 1
-        Me.Label34.Text = "FTP"
+        Me.lblFTP.AutoSize = True
+        Me.lblFTP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFTP.Location = New System.Drawing.Point(49, 47)
+        Me.lblFTP.Name = "lblFTP"
+        Me.lblFTP.Size = New System.Drawing.Size(27, 13)
+        Me.lblFTP.TabIndex = 1
+        Me.lblFTP.Tag = "FTP"
+        Me.lblFTP.Text = "FTP"
         '
         'rbFTP
         '
@@ -944,15 +936,15 @@ Partial Class frmCrex
         Me.btnEncode.Text = "Encode"
         Me.btnEncode.UseVisualStyleBackColor = True
         '
-        'btnViewIE
+        'btnViewImportExport
         '
-        Me.btnViewIE.Location = New System.Drawing.Point(250, 664)
-        Me.btnViewIE.Name = "btnViewIE"
-        Me.btnViewIE.Size = New System.Drawing.Size(153, 23)
-        Me.btnViewIE.TabIndex = 6
-        Me.btnViewIE.Tag = "View_Import_Export"
-        Me.btnViewIE.Text = "View/Import/Export"
-        Me.btnViewIE.UseVisualStyleBackColor = True
+        Me.btnViewImportExport.Location = New System.Drawing.Point(250, 664)
+        Me.btnViewImportExport.Name = "btnViewImportExport"
+        Me.btnViewImportExport.Size = New System.Drawing.Size(153, 23)
+        Me.btnViewImportExport.TabIndex = 6
+        Me.btnViewImportExport.Tag = "View_Import_Export"
+        Me.btnViewImportExport.Text = "View/Import/Export"
+        Me.btnViewImportExport.UseVisualStyleBackColor = True
         '
         'btnReset
         '
@@ -992,10 +984,9 @@ Partial Class frmCrex
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnReset)
-        Me.Controls.Add(Me.btnViewIE)
+        Me.Controls.Add(Me.btnViewImportExport)
         Me.Controls.Add(Me.btnEncode)
         Me.Controls.Add(Me.grpCharacterMessage)
-        Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.lblCodedOutput)
         Me.Controls.Add(Me.lblNumberOfSubsets)
         Me.Controls.Add(Me.txtNumberOfSubsets)
@@ -1049,28 +1040,28 @@ Partial Class frmCrex
     Friend WithEvents lblIncludeCheckDigit As Label
     Friend WithEvents chkIncludeCheckDigit As CheckBox
     Friend WithEvents grpIndicators As GroupBox
-    Friend WithEvents lblOriginatingGeneratingsubCenter As Label
-    Friend WithEvents OriginatingGeneratingsubCenter As TextBox
+    Friend WithEvents lblOriginatingGeneratingSubCenter As Label
+    Friend WithEvents txtOriginatingGeneratingsubCenter As TextBox
     Friend WithEvents lblOriginatingGeneratingCenter As Label
     Friend WithEvents txtOriginatingGeneratingCenter As TextBox
     Friend WithEvents lblDataCategorySubCategory As Label
     Friend WithEvents txtDataCategorySubCategory As TextBox
     Friend WithEvents lblDataCategory As Label
     Friend WithEvents txtDataCategory As TextBox
-    Friend WithEvents lblLocalTableversionNumber As Label
+    Friend WithEvents lblLocalTableVersionNumber As Label
     Friend WithEvents txtLocalTableversionNumber As TextBox
-    Friend WithEvents lblBFRMasterTableVersionNumber As Label
-    Friend WithEvents txtBFRMasterTableVersionNumber As TextBox
+    Friend WithEvents lblBUFRMasterTableVersionNumber As Label
+    Friend WithEvents txtBUFRMasterTableVersionNumber As TextBox
     Friend WithEvents lblCrexTableVersionNumber As Label
-    Friend WithEvents txtCrexTableVersionNumber As TextBox
+    Friend WithEvents txtCREXTableVersionNumber As TextBox
     Friend WithEvents lblCrexEditionsNumber As Label
-    Friend WithEvents txtCrexEditionsNumber As TextBox
+    Friend WithEvents txtCREXEditionsNumber As TextBox
     Friend WithEvents lblNumberSequence As Label
-    Friend WithEvents TextBox15 As TextBox
+    Friend WithEvents txtSequenceNumber As TextBox
     Friend WithEvents txtNumberOfSubsets As TextBox
     Friend WithEvents lblNumberOfSubsets As Label
     Friend WithEvents grpSensorsHeightFromGround As GroupBox
-    Friend WithEvents lblWind As Label
+    Friend WithEvents lblSensorsheightFromGroundWind As Label
     Friend WithEvents lblPrecipitation As Label
     Friend WithEvents txtWind As TextBox
     Friend WithEvents txtPrecipitation As TextBox
@@ -1081,19 +1072,18 @@ Partial Class frmCrex
     Friend WithEvents lblPressure As Label
     Friend WithEvents txtPressure As TextBox
     Friend WithEvents grpInstrumentTypes As GroupBox
-    Friend WithEvents lblWindIT As Label
-    Friend WithEvents txtWind1 As TextBox
+    Friend WithEvents lblInstrumentTypesWind As Label
+    Friend WithEvents txtInstrumentTypesWind As TextBox
     Friend WithEvents lblEvaporation As Label
     Friend WithEvents txtEvaporation As TextBox
     Friend WithEvents lblCodedOutput As Label
-    Friend WithEvents Label30 As Label
     Friend WithEvents grpCharacterMessage As GroupBox
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents txtCharacterMessage As TextBox
     Friend WithEvents grpSendingOptions As GroupBox
     Friend WithEvents lblEmail As Label
     Friend WithEvents rbEmail As RadioButton
-    Friend WithEvents Label34 As Label
+    Friend WithEvents lblFTP As Label
     Friend WithEvents rbFTP As RadioButton
     Friend WithEvents GroupBox8 As GroupBox
     Friend WithEvents GroupBox9 As GroupBox
@@ -1109,7 +1099,7 @@ Partial Class frmCrex
     Friend WithEvents Label37 As Label
     Friend WithEvents lblMailApplications As Label
     Friend WithEvents btnEncode As Button
-    Friend WithEvents btnViewIE As Button
+    Friend WithEvents btnViewImportExport As Button
     Friend WithEvents btnReset As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents cmdHelp As Button
