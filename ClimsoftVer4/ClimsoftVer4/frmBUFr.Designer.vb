@@ -121,7 +121,7 @@ Partial Class frmBUFR
         Me.lblNumberOfSubsets = New System.Windows.Forms.Label()
         Me.txtNumberOfSubsets = New System.Windows.Forms.TextBox()
         Me.txtUpdateSequenceNumber = New System.Windows.Forms.TextBox()
-        Me.Label45 = New System.Windows.Forms.Label()
+        Me.lblUpdateSequenceNumber = New System.Windows.Forms.Label()
         Me.lblOriginatingGeneratingSubCentre = New System.Windows.Forms.Label()
         Me.txtOriginatingGeneratingSubCentre = New System.Windows.Forms.TextBox()
         Me.lblOriginatingOriginatingCentre = New System.Windows.Forms.Label()
@@ -131,7 +131,6 @@ Partial Class frmBUFR
         Me.Label44 = New System.Windows.Forms.Label()
         Me.Label49 = New System.Windows.Forms.Label()
         Me.grpBinaryMessage = New System.Windows.Forms.GroupBox()
-        Me.Label30 = New System.Windows.Forms.Label()
         Me.grpCharacterMessage.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
@@ -996,7 +995,7 @@ Partial Class frmBUFR
         Me.grpIndicators.Controls.Add(Me.lblNumberOfSubsets)
         Me.grpIndicators.Controls.Add(Me.txtNumberOfSubsets)
         Me.grpIndicators.Controls.Add(Me.txtUpdateSequenceNumber)
-        Me.grpIndicators.Controls.Add(Me.Label45)
+        Me.grpIndicators.Controls.Add(Me.lblUpdateSequenceNumber)
         Me.grpIndicators.Controls.Add(Me.lblOriginatingGeneratingSubCentre)
         Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingSubCentre)
         Me.grpIndicators.Controls.Add(Me.lblOriginatingOriginatingCentre)
@@ -1132,16 +1131,16 @@ Partial Class frmBUFR
         Me.txtUpdateSequenceNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtUpdateSequenceNumber.TabIndex = 2
         '
-        'Label45
+        'lblUpdateSequenceNumber
         '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(2, 79)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(134, 13)
-        Me.Label45.TabIndex = 1
-        Me.Label45.Tag = "Update_Sequence_Number"
-        Me.Label45.Text = "Update Sequence Number"
+        Me.lblUpdateSequenceNumber.AutoSize = True
+        Me.lblUpdateSequenceNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUpdateSequenceNumber.Location = New System.Drawing.Point(2, 79)
+        Me.lblUpdateSequenceNumber.Name = "lblUpdateSequenceNumber"
+        Me.lblUpdateSequenceNumber.Size = New System.Drawing.Size(134, 13)
+        Me.lblUpdateSequenceNumber.TabIndex = 1
+        Me.lblUpdateSequenceNumber.Tag = "Update_Sequence_Number"
+        Me.lblUpdateSequenceNumber.Text = "Update Sequence Number"
         '
         'lblOriginatingGeneratingSubCentre
         '
@@ -1224,23 +1223,13 @@ Partial Class frmBUFR
         Me.grpBinaryMessage.Tag = "Binary_Message"
         Me.grpBinaryMessage.Text = "Binary Message"
         '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(470, 383)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(130, 13)
-        Me.Label30.TabIndex = 23
-        Me.Label30.Text = "coded Output will go Here"
-        '
         'frmBUFR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 701)
+        Me.ClientSize = New System.Drawing.Size(984, 582)
         Me.Controls.Add(Me.lblLocalTableVersionNumber)
         Me.Controls.Add(Me.txtLocalTablesVersionNumber)
-        Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.lblCodedOutput)
         Me.Controls.Add(Me.grpBinaryMessage)
         Me.Controls.Add(Me.cmdHelp)
@@ -1378,7 +1367,7 @@ Partial Class frmBUFR
     Friend WithEvents Label44 As Label
     Friend WithEvents txtUpdateSequenceNumber As TextBox
     Friend WithEvents Label49 As Label
-    Friend WithEvents Label45 As Label
+    Friend WithEvents lblUpdateSequenceNumber As Label
     Friend WithEvents lblOriginatingGeneratingSubCentre As Label
     Friend WithEvents txtOriginatingGeneratingSubCentre As TextBox
     Friend WithEvents lblOriginatingOriginatingCentre As Label
@@ -1389,6 +1378,5 @@ Partial Class frmBUFR
     Friend WithEvents lblNumberOfSubsets As Label
     Friend WithEvents txtNumberOfSubsets As TextBox
     Friend WithEvents grpBinaryMessage As GroupBox
-    Friend WithEvents Label30 As Label
     Friend WithEvents lblTemplate As Label
 End Class
