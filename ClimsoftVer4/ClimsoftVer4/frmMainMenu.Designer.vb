@@ -270,6 +270,7 @@ Partial Class frmMainMenu
         Me.Label5.TabIndex = 36
         Me.Label5.Tag = "Close"
         Me.Label5.Text = "Close CLIMSOFT"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label11
         '
