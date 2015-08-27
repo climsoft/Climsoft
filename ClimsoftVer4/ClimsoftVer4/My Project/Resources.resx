@@ -256,4 +256,10 @@
   <data name="Select_Language" xml:space="preserve">
     <value>Select Language</value>
   </data>
+  <data name="Close_CLIMSOFT" xml:space="preserve">
+    <value>Close CLIMSOFT</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
 </root>

@@ -200,6 +200,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Close CLIMSOFT.
+        '''</summary>
+        Public ReadOnly Property Close_CLIMSOFT() As String
+            Get
+                Return ResourceManager.GetString("Close_CLIMSOFT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Public ReadOnly Property COIN() As System.Drawing.Bitmap
@@ -477,6 +486,15 @@ Namespace My.Resources
         Public ReadOnly Property Version() As String
             Get
                 Return ResourceManager.GetString("Version", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Welcome.
+        '''</summary>
+        Public ReadOnly Property Welcome() As String
+            Get
+                Return ResourceManager.GetString("Welcome", resourceCulture)
             End Get
         End Property
     End Module
