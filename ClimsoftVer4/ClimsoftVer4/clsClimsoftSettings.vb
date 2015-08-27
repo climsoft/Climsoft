@@ -106,7 +106,8 @@ Public Class clsClimsoftSettings
     ' Each running instance of CLIMSOFT will have a single instance of clsClimsoftSettings
     Dim rPath As String
     Dim systemPath As String = System.Environment.GetEnvironmentVariable("PATH")
-    Dim R_HOME As String = "C:\Program Files\R\R-3.2.1"  ' Default location of R home directory (only used if R_HOME environment variable is not set)
+    ' Default location of R home directory (only used if R_HOME environment variable is not set)
+    Dim R_HOME As String = My.Settings.defaultRLocation
 
     Sub rEnvironmentSetUp()
         ' Setup system environment variables.
