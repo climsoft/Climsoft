@@ -156,9 +156,6 @@
   <data name="BBB" xml:space="preserve">
     <value>BBB</value>
   </data>
-  <data name="BFR_Master_Table_Version_Number" xml:space="preserve">
-    <value>Numéro de Version de tableau de maître BUFR</value>
-  </data>
   <data name="Character_Message" xml:space="preserve">
     <value>Message du caractère</value>
   </data>

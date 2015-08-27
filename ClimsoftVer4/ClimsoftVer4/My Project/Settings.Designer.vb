@@ -62,6 +62,15 @@ Namespace My
                 Return CType(Me("defaultDatabase"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Program Files\R\R-3.2.1")>  _
+        Public ReadOnly Property defaultRLocation() As String
+            Get
+                Return CType(Me("defaultRLocation"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 
