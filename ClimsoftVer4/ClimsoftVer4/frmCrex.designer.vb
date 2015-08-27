@@ -22,6 +22,7 @@ Partial Class frmCrex
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkIncludeCheckDigit = New System.Windows.Forms.CheckBox()
         Me.cboTemplate = New System.Windows.Forms.ComboBox()
@@ -38,7 +39,6 @@ Partial Class frmCrex
         Me.lblTemplate = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblBBB = New System.Windows.Forms.Label()
-        Me.lblIncludeCheckDigit = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -107,6 +107,9 @@ Partial Class frmCrex
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.Mysql_climsoft_db_v4DataSet = New ClimsoftVer4.mysql_climsoft_db_v4DataSet()
+        Me.Mysqlclimsoftdbv4DataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.GroupBox1.SuspendLayout()
         Me.grpIndicators.SuspendLayout()
         Me.grpSensorsHeightFromGround.SuspendLayout()
@@ -116,6 +119,8 @@ Partial Class frmCrex
         Me.GroupBox9.SuspendLayout()
         Me.grpMailApplications.SuspendLayout()
         Me.grpSendingOptions.SuspendLayout()
+        CType(Me.Mysql_climsoft_db_v4DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Mysqlclimsoftdbv4DataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -135,7 +140,6 @@ Partial Class frmCrex
         Me.GroupBox1.Controls.Add(Me.lblTemplate)
         Me.GroupBox1.Controls.Add(Me.lblMonth)
         Me.GroupBox1.Controls.Add(Me.lblBBB)
-        Me.GroupBox1.Controls.Add(Me.lblIncludeCheckDigit)
         Me.GroupBox1.Controls.Add(Me.lblHeader)
         Me.GroupBox1.Controls.Add(Me.lblYear)
         Me.GroupBox1.Controls.Add(Me.lblStation)
@@ -151,8 +155,9 @@ Partial Class frmCrex
         Me.chkIncludeCheckDigit.AutoSize = True
         Me.chkIncludeCheckDigit.Location = New System.Drawing.Point(315, 110)
         Me.chkIncludeCheckDigit.Name = "chkIncludeCheckDigit"
-        Me.chkIncludeCheckDigit.Size = New System.Drawing.Size(15, 14)
+        Me.chkIncludeCheckDigit.Size = New System.Drawing.Size(119, 17)
         Me.chkIncludeCheckDigit.TabIndex = 4
+        Me.chkIncludeCheckDigit.Text = "Include Check Digit"
         Me.chkIncludeCheckDigit.UseVisualStyleBackColor = True
         '
         'cboTemplate
@@ -272,16 +277,6 @@ Partial Class frmCrex
         Me.lblBBB.TabIndex = 1
         Me.lblBBB.Tag = "BBB"
         Me.lblBBB.Text = "BBB"
-        '
-        'lblIncludeCheckDigit
-        '
-        Me.lblIncludeCheckDigit.AutoSize = True
-        Me.lblIncludeCheckDigit.Location = New System.Drawing.Point(336, 105)
-        Me.lblIncludeCheckDigit.Name = "lblIncludeCheckDigit"
-        Me.lblIncludeCheckDigit.Size = New System.Drawing.Size(100, 13)
-        Me.lblIncludeCheckDigit.TabIndex = 1
-        Me.lblIncludeCheckDigit.Tag = "Include_Check_Digit"
-        Me.lblIncludeCheckDigit.Text = "Include Check Digit"
         '
         'lblHeader
         '
@@ -976,6 +971,24 @@ Partial Class frmCrex
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'Mysql_climsoft_db_v4DataSet
+        '
+        Me.Mysql_climsoft_db_v4DataSet.DataSetName = "mysql_climsoft_db_v4DataSet"
+        Me.Mysql_climsoft_db_v4DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'Mysqlclimsoftdbv4DataSetBindingSource
+        '
+        Me.Mysqlclimsoftdbv4DataSetBindingSource.DataSource = Me.Mysql_climsoft_db_v4DataSet
+        Me.Mysqlclimsoftdbv4DataSetBindingSource.Position = 0
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(747, 24)
+        Me.MenuStrip1.TabIndex = 7
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
         'frmCrex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -994,6 +1007,8 @@ Partial Class frmCrex
         Me.Controls.Add(Me.grpSensorsHeightFromGround)
         Me.Controls.Add(Me.grpIndicators)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "frmCrex"
         Me.Text = "CREX Synop"
         Me.GroupBox1.ResumeLayout(False)
@@ -1013,6 +1028,8 @@ Partial Class frmCrex
         Me.grpMailApplications.PerformLayout()
         Me.grpSendingOptions.ResumeLayout(False)
         Me.grpSendingOptions.PerformLayout()
+        CType(Me.Mysql_climsoft_db_v4DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Mysqlclimsoftdbv4DataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1037,7 +1054,6 @@ Partial Class frmCrex
     Friend WithEvents txtHeader As TextBox
     Friend WithEvents lblTemplate As Label
     Friend WithEvents lblBBB As Label
-    Friend WithEvents lblIncludeCheckDigit As Label
     Friend WithEvents chkIncludeCheckDigit As CheckBox
     Friend WithEvents grpIndicators As GroupBox
     Friend WithEvents lblOriginatingGeneratingSubCenter As Label
@@ -1103,4 +1119,7 @@ Partial Class frmCrex
     Friend WithEvents btnReset As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents cmdHelp As Button
+    Friend WithEvents Mysqlclimsoftdbv4DataSetBindingSource As BindingSource
+    Friend WithEvents Mysql_climsoft_db_v4DataSet As mysql_climsoft_db_v4DataSet
+    Friend WithEvents MenuStrip1 As MenuStrip
 End Class

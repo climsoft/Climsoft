@@ -62,6 +62,16 @@ Namespace My
                 Return CType(Me("defaultDatabase"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;password=P@55w0rd;database=mysql_climsoft_db_v4")>  _
+        Public ReadOnly Property mysql_climsoft_db_v4ConnectionString() As String
+            Get
+                Return CType(Me("mysql_climsoft_db_v4ConnectionString"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

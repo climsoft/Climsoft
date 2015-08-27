@@ -310,6 +310,11 @@
     <Compile Include="frmSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="mysql_climsoft_db_v4DataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mysql_climsoft_db_v4DataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="formClimat.de.resx">
@@ -588,6 +593,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="mysql_climsoft_db_v4DataSet.xsc">
+      <DependentUpon>mysql_climsoft_db_v4DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>mysql_climsoft_db_v4DataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mysql_climsoft_db_v4DataSet.xss">
+      <DependentUpon>mysql_climsoft_db_v4DataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Resources\MySql.Data.dll" />
   </ItemGroup>
