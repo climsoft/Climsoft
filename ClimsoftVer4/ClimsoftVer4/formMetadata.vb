@@ -182,6 +182,7 @@
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
+
         dsNewRow = ds.Tables("station").NewRow
         dsNewRow.Item("stationId") = txtstationId.Text
         dsNewRow.Item("stationName") = txtStationName.Text
@@ -473,6 +474,10 @@ Err:
 
     End Sub
     Private Sub txtNav2_TextChanged(sender As Object, e As EventArgs) Handles txtNav2.TextChanged
+
+    End Sub
+
+    Private Sub cmdAddStElement_Click(sender As Object, e As EventArgs) Handles cmdAddStElement.Click
 
     End Sub
 End Class
