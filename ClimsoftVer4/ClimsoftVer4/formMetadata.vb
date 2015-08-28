@@ -480,4 +480,8 @@ Err:
     Private Sub cmdAddStElement_Click(sender As Object, e As EventArgs) Handles cmdAddStElement.Click
 
     End Sub
+
+    Private Sub cmdAddNew_Click(sender As Object, e As EventArgs) Handles cmdAddNew.Click
+
+    End Sub
 End Class
