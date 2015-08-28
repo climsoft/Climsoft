@@ -118,20 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="cmdFolder.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdImageFile.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAIAAADZrBkAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAOBJREFUOE9jOH/tKRkIuzaN1JkMnl3uDZvQxOEIu7ajF2/j14mirWvtGd6gfqBq
+        vAAADrwBlbxySQAAAOBJREFUOE9jOH/tKRkIuzaN1JkMnl3uDZvQxOEIu7ajF2/j14mirWvtGd6gfqBq
         ZJQ3+zCyGghC0QbUAzR+y8mbQDaQAdQDtBPIvrw4Gg2haAOqm7H1IpAB0QN34emzd5ERujZk2+AITQ8Q
         oWsDWgXxG4SLphqO0LWhITTVcIRF25UViWiKMBG6tqvLk4BCWBHQuFtnD2DRdu7ak9s7W5GVoqHrm2ux
         aLtw/dmDi7uQ1WGi2yc3YHHkuatPrq/LR1aHhq6tysCm7dqT+8cXI6vDRLf2TgaSKNqIR/TUdu0pACWu
         2YBZsaogAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="cmdImageFile.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdFolder.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAIAAADZrBkAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAAAOBJREFUOE9jOH/tKRkIuzaN1JkMnl3uDZvQxOEIu7ajF2/j14mirWvtGd6gfqBq
+        vAAADrwBlbxySQAAAOBJREFUOE9jOH/tKRkIuzaN1JkMnl3uDZvQxOEIu7ajF2/j14mirWvtGd6gfqBq
         ZJQ3+zCyGghC0QbUAzR+y8mbQDaQAdQDtBPIvrw4Gg2haAOqm7H1IpAB0QN34emzd5ERujZk2+AITQ8Q
         oWsDWgXxG4SLphqO0LWhITTVcIRF25UViWiKMBG6tqvLk4BCWBHQuFtnD2DRdu7ak9s7W5GVoqHrm2ux
         aLtw/dmDi7uQ1WGi2yc3YHHkuatPrq/LR1aHhq6tysCm7dqT+8cXI6vDRLf2TgaSKNqIR/TUdu0pACWu
@@ -141,7 +141,13 @@
   <metadata name="MenuPaperArchive.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="folderPaperArchive.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>172, 17</value>
+  </metadata>
+  <metadata name="OpenFilePaperArchive.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>327, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>37</value>
   </metadata>
 </root>
