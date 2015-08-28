@@ -192,21 +192,8 @@ Partial Class formAWSRealTime
         Me.cmbStation = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlServers = New System.Windows.Forms.Panel()
-        Me.pnlBaseStation = New System.Windows.Forms.Panel()
-        Me.cmdBstDelete = New System.Windows.Forms.Button()
-        Me.cmdBstUpdate = New System.Windows.Forms.Button()
-        Me.cmdBstAddNew = New System.Windows.Forms.Button()
-        Me.txtbaseStationPWConfirm = New System.Windows.Forms.TextBox()
-        Me.txtbaseStationPW = New System.Windows.Forms.TextBox()
-        Me.txtBaseStationUser = New System.Windows.Forms.TextBox()
-        Me.txtBaseStationFolder = New System.Windows.Forms.TextBox()
-        Me.txtBaseStationAddress = New System.Windows.Forms.TextBox()
-        Me.lblConfirmInputPW = New System.Windows.Forms.Label()
-        Me.lblInputPW = New System.Windows.Forms.Label()
-        Me.lblInputUser = New System.Windows.Forms.Label()
-        Me.lblFTPFolder = New System.Windows.Forms.Label()
-        Me.lblBaseStationFTP = New System.Windows.Forms.Label()
         Me.pnlMSS = New System.Windows.Forms.Panel()
+        Me.lblMsgSwitch = New System.Windows.Forms.Label()
         Me.cmdMSSDelete = New System.Windows.Forms.Button()
         Me.cmdMSSUpdate = New System.Windows.Forms.Button()
         Me.cmdMSSAddNew = New System.Windows.Forms.Button()
@@ -220,11 +207,24 @@ Partial Class formAWSRealTime
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.pnlBaseStation = New System.Windows.Forms.Panel()
+        Me.lblbaseStation = New System.Windows.Forms.Label()
+        Me.cmdBstDelete = New System.Windows.Forms.Button()
+        Me.cmdBstUpdate = New System.Windows.Forms.Button()
+        Me.cmdBstAddNew = New System.Windows.Forms.Button()
+        Me.txtbaseStationPWConfirm = New System.Windows.Forms.TextBox()
+        Me.txtbaseStationPW = New System.Windows.Forms.TextBox()
+        Me.txtBaseStationUser = New System.Windows.Forms.TextBox()
+        Me.txtBaseStationFolder = New System.Windows.Forms.TextBox()
+        Me.txtBaseStationAddress = New System.Windows.Forms.TextBox()
+        Me.lblConfirmInputPW = New System.Windows.Forms.Label()
+        Me.lblInputPW = New System.Windows.Forms.Label()
+        Me.lblInputUser = New System.Windows.Forms.Label()
+        Me.lblFTPFolder = New System.Windows.Forms.Label()
+        Me.lblBaseStationFTP = New System.Windows.Forms.Label()
         Me.lblServerSettings = New System.Windows.Forms.Label()
         Me.cmdMSS = New System.Windows.Forms.Button()
         Me.cmdBaseStation = New System.Windows.Forms.Button()
-        Me.lblbaseStation = New System.Windows.Forms.Label()
-        Me.lblMsgSwitch = New System.Windows.Forms.Label()
         Me.pnlControl.SuspendLayout()
         Me.pnlProcessing.SuspendLayout()
         Me.pnlProcessSettings.SuspendLayout()
@@ -251,8 +251,8 @@ Partial Class formAWSRealTime
         Me.pnlSites.SuspendLayout()
         Me.grpSiteDetails.SuspendLayout()
         Me.pnlServers.SuspendLayout()
-        Me.pnlBaseStation.SuspendLayout()
         Me.pnlMSS.SuspendLayout()
+        Me.pnlBaseStation.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlControl
@@ -344,9 +344,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.pnlErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
-        Me.pnlProcessing.Location = New System.Drawing.Point(194, 447)
+        Me.pnlProcessing.Location = New System.Drawing.Point(194, 449)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(736, 115)
+        Me.pnlProcessing.Size = New System.Drawing.Size(736, 113)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -837,9 +837,9 @@ Partial Class formAWSRealTime
         Me.lblInformation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInformation.Location = New System.Drawing.Point(149, 0)
         Me.lblInformation.Name = "lblInformation"
-        Me.lblInformation.Size = New System.Drawing.Size(151, 15)
+        Me.lblInformation.Size = New System.Drawing.Size(155, 15)
         Me.lblInformation.TabIndex = 0
-        Me.lblInformation.Text = "Processinf Information"
+        Me.lblInformation.Text = "Processing Information"
         '
         'pnlDataStructures
         '
@@ -1931,136 +1931,6 @@ Partial Class formAWSRealTime
         Me.pnlServers.TabIndex = 2
         Me.pnlServers.Visible = False
         '
-        'pnlBaseStation
-        '
-        Me.pnlBaseStation.BackColor = System.Drawing.Color.PapayaWhip
-        Me.pnlBaseStation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlBaseStation.Controls.Add(Me.lblbaseStation)
-        Me.pnlBaseStation.Controls.Add(Me.cmdBstDelete)
-        Me.pnlBaseStation.Controls.Add(Me.cmdBstUpdate)
-        Me.pnlBaseStation.Controls.Add(Me.cmdBstAddNew)
-        Me.pnlBaseStation.Controls.Add(Me.txtbaseStationPWConfirm)
-        Me.pnlBaseStation.Controls.Add(Me.txtbaseStationPW)
-        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationUser)
-        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationFolder)
-        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationAddress)
-        Me.pnlBaseStation.Controls.Add(Me.lblConfirmInputPW)
-        Me.pnlBaseStation.Controls.Add(Me.lblInputPW)
-        Me.pnlBaseStation.Controls.Add(Me.lblInputUser)
-        Me.pnlBaseStation.Controls.Add(Me.lblFTPFolder)
-        Me.pnlBaseStation.Controls.Add(Me.lblBaseStationFTP)
-        Me.pnlBaseStation.Location = New System.Drawing.Point(84, 129)
-        Me.pnlBaseStation.Name = "pnlBaseStation"
-        Me.pnlBaseStation.Size = New System.Drawing.Size(477, 250)
-        Me.pnlBaseStation.TabIndex = 4
-        '
-        'cmdBstDelete
-        '
-        Me.cmdBstDelete.Location = New System.Drawing.Point(306, 206)
-        Me.cmdBstDelete.Name = "cmdBstDelete"
-        Me.cmdBstDelete.Size = New System.Drawing.Size(62, 21)
-        Me.cmdBstDelete.TabIndex = 12
-        Me.cmdBstDelete.Text = "Delete"
-        Me.cmdBstDelete.UseVisualStyleBackColor = True
-        '
-        'cmdBstUpdate
-        '
-        Me.cmdBstUpdate.Location = New System.Drawing.Point(215, 206)
-        Me.cmdBstUpdate.Name = "cmdBstUpdate"
-        Me.cmdBstUpdate.Size = New System.Drawing.Size(62, 21)
-        Me.cmdBstUpdate.TabIndex = 11
-        Me.cmdBstUpdate.Text = "Update"
-        Me.cmdBstUpdate.UseVisualStyleBackColor = True
-        '
-        'cmdBstAddNew
-        '
-        Me.cmdBstAddNew.Location = New System.Drawing.Point(124, 206)
-        Me.cmdBstAddNew.Name = "cmdBstAddNew"
-        Me.cmdBstAddNew.Size = New System.Drawing.Size(62, 21)
-        Me.cmdBstAddNew.TabIndex = 10
-        Me.cmdBstAddNew.Text = "AddNew"
-        Me.cmdBstAddNew.UseVisualStyleBackColor = True
-        '
-        'txtbaseStationPWConfirm
-        '
-        Me.txtbaseStationPWConfirm.Location = New System.Drawing.Point(145, 165)
-        Me.txtbaseStationPWConfirm.Name = "txtbaseStationPWConfirm"
-        Me.txtbaseStationPWConfirm.Size = New System.Drawing.Size(215, 20)
-        Me.txtbaseStationPWConfirm.TabIndex = 9
-        '
-        'txtbaseStationPW
-        '
-        Me.txtbaseStationPW.Location = New System.Drawing.Point(145, 132)
-        Me.txtbaseStationPW.Name = "txtbaseStationPW"
-        Me.txtbaseStationPW.Size = New System.Drawing.Size(215, 20)
-        Me.txtbaseStationPW.TabIndex = 8
-        '
-        'txtBaseStationUser
-        '
-        Me.txtBaseStationUser.Location = New System.Drawing.Point(145, 99)
-        Me.txtBaseStationUser.Name = "txtBaseStationUser"
-        Me.txtBaseStationUser.Size = New System.Drawing.Size(215, 20)
-        Me.txtBaseStationUser.TabIndex = 7
-        '
-        'txtBaseStationFolder
-        '
-        Me.txtBaseStationFolder.Location = New System.Drawing.Point(145, 66)
-        Me.txtBaseStationFolder.Name = "txtBaseStationFolder"
-        Me.txtBaseStationFolder.Size = New System.Drawing.Size(215, 20)
-        Me.txtBaseStationFolder.TabIndex = 6
-        '
-        'txtBaseStationAddress
-        '
-        Me.txtBaseStationAddress.Location = New System.Drawing.Point(145, 33)
-        Me.txtBaseStationAddress.Name = "txtBaseStationAddress"
-        Me.txtBaseStationAddress.Size = New System.Drawing.Size(215, 20)
-        Me.txtBaseStationAddress.TabIndex = 5
-        '
-        'lblConfirmInputPW
-        '
-        Me.lblConfirmInputPW.AutoSize = True
-        Me.lblConfirmInputPW.Location = New System.Drawing.Point(49, 164)
-        Me.lblConfirmInputPW.Name = "lblConfirmInputPW"
-        Me.lblConfirmInputPW.Size = New System.Drawing.Size(91, 13)
-        Me.lblConfirmInputPW.TabIndex = 4
-        Me.lblConfirmInputPW.Text = "Confirm Password"
-        '
-        'lblInputPW
-        '
-        Me.lblInputPW.AutoSize = True
-        Me.lblInputPW.Location = New System.Drawing.Point(49, 132)
-        Me.lblInputPW.Name = "lblInputPW"
-        Me.lblInputPW.Size = New System.Drawing.Size(56, 13)
-        Me.lblInputPW.TabIndex = 3
-        Me.lblInputPW.Text = "PassWord"
-        '
-        'lblInputUser
-        '
-        Me.lblInputUser.AutoSize = True
-        Me.lblInputUser.Location = New System.Drawing.Point(49, 100)
-        Me.lblInputUser.Name = "lblInputUser"
-        Me.lblInputUser.Size = New System.Drawing.Size(60, 13)
-        Me.lblInputUser.TabIndex = 2
-        Me.lblInputUser.Text = "User Name"
-        '
-        'lblFTPFolder
-        '
-        Me.lblFTPFolder.AutoSize = True
-        Me.lblFTPFolder.Location = New System.Drawing.Point(49, 68)
-        Me.lblFTPFolder.Name = "lblFTPFolder"
-        Me.lblFTPFolder.Size = New System.Drawing.Size(63, 13)
-        Me.lblFTPFolder.TabIndex = 1
-        Me.lblFTPFolder.Text = "Input Folder"
-        '
-        'lblBaseStationFTP
-        '
-        Me.lblBaseStationFTP.AutoSize = True
-        Me.lblBaseStationFTP.Location = New System.Drawing.Point(49, 36)
-        Me.lblBaseStationFTP.Name = "lblBaseStationFTP"
-        Me.lblBaseStationFTP.Size = New System.Drawing.Size(68, 13)
-        Me.lblBaseStationFTP.TabIndex = 0
-        Me.lblBaseStationFTP.Text = "FTP Address"
-        '
         'pnlMSS
         '
         Me.pnlMSS.BackColor = System.Drawing.Color.BlanchedAlmond
@@ -2083,6 +1953,16 @@ Partial Class formAWSRealTime
         Me.pnlMSS.Name = "pnlMSS"
         Me.pnlMSS.Size = New System.Drawing.Size(474, 250)
         Me.pnlMSS.TabIndex = 3
+        '
+        'lblMsgSwitch
+        '
+        Me.lblMsgSwitch.AutoSize = True
+        Me.lblMsgSwitch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMsgSwitch.Location = New System.Drawing.Point(202, 10)
+        Me.lblMsgSwitch.Name = "lblMsgSwitch"
+        Me.lblMsgSwitch.Size = New System.Drawing.Size(99, 13)
+        Me.lblMsgSwitch.TabIndex = 13
+        Me.lblMsgSwitch.Text = "Message Switch"
         '
         'cmdMSSDelete
         '
@@ -2191,6 +2071,146 @@ Partial Class formAWSRealTime
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "FTP Address"
         '
+        'pnlBaseStation
+        '
+        Me.pnlBaseStation.BackColor = System.Drawing.Color.PapayaWhip
+        Me.pnlBaseStation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlBaseStation.Controls.Add(Me.lblbaseStation)
+        Me.pnlBaseStation.Controls.Add(Me.cmdBstDelete)
+        Me.pnlBaseStation.Controls.Add(Me.cmdBstUpdate)
+        Me.pnlBaseStation.Controls.Add(Me.cmdBstAddNew)
+        Me.pnlBaseStation.Controls.Add(Me.txtbaseStationPWConfirm)
+        Me.pnlBaseStation.Controls.Add(Me.txtbaseStationPW)
+        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationUser)
+        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationFolder)
+        Me.pnlBaseStation.Controls.Add(Me.txtBaseStationAddress)
+        Me.pnlBaseStation.Controls.Add(Me.lblConfirmInputPW)
+        Me.pnlBaseStation.Controls.Add(Me.lblInputPW)
+        Me.pnlBaseStation.Controls.Add(Me.lblInputUser)
+        Me.pnlBaseStation.Controls.Add(Me.lblFTPFolder)
+        Me.pnlBaseStation.Controls.Add(Me.lblBaseStationFTP)
+        Me.pnlBaseStation.Location = New System.Drawing.Point(84, 129)
+        Me.pnlBaseStation.Name = "pnlBaseStation"
+        Me.pnlBaseStation.Size = New System.Drawing.Size(477, 250)
+        Me.pnlBaseStation.TabIndex = 4
+        '
+        'lblbaseStation
+        '
+        Me.lblbaseStation.AutoSize = True
+        Me.lblbaseStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblbaseStation.Location = New System.Drawing.Point(192, 10)
+        Me.lblbaseStation.Name = "lblbaseStation"
+        Me.lblbaseStation.Size = New System.Drawing.Size(79, 13)
+        Me.lblbaseStation.TabIndex = 13
+        Me.lblbaseStation.Text = "Base Station"
+        '
+        'cmdBstDelete
+        '
+        Me.cmdBstDelete.Location = New System.Drawing.Point(306, 206)
+        Me.cmdBstDelete.Name = "cmdBstDelete"
+        Me.cmdBstDelete.Size = New System.Drawing.Size(62, 21)
+        Me.cmdBstDelete.TabIndex = 12
+        Me.cmdBstDelete.Text = "Delete"
+        Me.cmdBstDelete.UseVisualStyleBackColor = True
+        '
+        'cmdBstUpdate
+        '
+        Me.cmdBstUpdate.Location = New System.Drawing.Point(215, 206)
+        Me.cmdBstUpdate.Name = "cmdBstUpdate"
+        Me.cmdBstUpdate.Size = New System.Drawing.Size(62, 21)
+        Me.cmdBstUpdate.TabIndex = 11
+        Me.cmdBstUpdate.Text = "Update"
+        Me.cmdBstUpdate.UseVisualStyleBackColor = True
+        '
+        'cmdBstAddNew
+        '
+        Me.cmdBstAddNew.Location = New System.Drawing.Point(124, 206)
+        Me.cmdBstAddNew.Name = "cmdBstAddNew"
+        Me.cmdBstAddNew.Size = New System.Drawing.Size(62, 21)
+        Me.cmdBstAddNew.TabIndex = 10
+        Me.cmdBstAddNew.Text = "AddNew"
+        Me.cmdBstAddNew.UseVisualStyleBackColor = True
+        '
+        'txtbaseStationPWConfirm
+        '
+        Me.txtbaseStationPWConfirm.Location = New System.Drawing.Point(145, 165)
+        Me.txtbaseStationPWConfirm.Name = "txtbaseStationPWConfirm"
+        Me.txtbaseStationPWConfirm.Size = New System.Drawing.Size(215, 20)
+        Me.txtbaseStationPWConfirm.TabIndex = 9
+        '
+        'txtbaseStationPW
+        '
+        Me.txtbaseStationPW.Location = New System.Drawing.Point(145, 132)
+        Me.txtbaseStationPW.Name = "txtbaseStationPW"
+        Me.txtbaseStationPW.Size = New System.Drawing.Size(215, 20)
+        Me.txtbaseStationPW.TabIndex = 8
+        '
+        'txtBaseStationUser
+        '
+        Me.txtBaseStationUser.Location = New System.Drawing.Point(145, 99)
+        Me.txtBaseStationUser.Name = "txtBaseStationUser"
+        Me.txtBaseStationUser.Size = New System.Drawing.Size(215, 20)
+        Me.txtBaseStationUser.TabIndex = 7
+        '
+        'txtBaseStationFolder
+        '
+        Me.txtBaseStationFolder.Location = New System.Drawing.Point(145, 66)
+        Me.txtBaseStationFolder.Name = "txtBaseStationFolder"
+        Me.txtBaseStationFolder.Size = New System.Drawing.Size(215, 20)
+        Me.txtBaseStationFolder.TabIndex = 6
+        '
+        'txtBaseStationAddress
+        '
+        Me.txtBaseStationAddress.Location = New System.Drawing.Point(145, 33)
+        Me.txtBaseStationAddress.Name = "txtBaseStationAddress"
+        Me.txtBaseStationAddress.Size = New System.Drawing.Size(215, 20)
+        Me.txtBaseStationAddress.TabIndex = 5
+        '
+        'lblConfirmInputPW
+        '
+        Me.lblConfirmInputPW.AutoSize = True
+        Me.lblConfirmInputPW.Location = New System.Drawing.Point(49, 164)
+        Me.lblConfirmInputPW.Name = "lblConfirmInputPW"
+        Me.lblConfirmInputPW.Size = New System.Drawing.Size(91, 13)
+        Me.lblConfirmInputPW.TabIndex = 4
+        Me.lblConfirmInputPW.Text = "Confirm Password"
+        '
+        'lblInputPW
+        '
+        Me.lblInputPW.AutoSize = True
+        Me.lblInputPW.Location = New System.Drawing.Point(49, 132)
+        Me.lblInputPW.Name = "lblInputPW"
+        Me.lblInputPW.Size = New System.Drawing.Size(56, 13)
+        Me.lblInputPW.TabIndex = 3
+        Me.lblInputPW.Text = "PassWord"
+        '
+        'lblInputUser
+        '
+        Me.lblInputUser.AutoSize = True
+        Me.lblInputUser.Location = New System.Drawing.Point(49, 100)
+        Me.lblInputUser.Name = "lblInputUser"
+        Me.lblInputUser.Size = New System.Drawing.Size(60, 13)
+        Me.lblInputUser.TabIndex = 2
+        Me.lblInputUser.Text = "User Name"
+        '
+        'lblFTPFolder
+        '
+        Me.lblFTPFolder.AutoSize = True
+        Me.lblFTPFolder.Location = New System.Drawing.Point(49, 68)
+        Me.lblFTPFolder.Name = "lblFTPFolder"
+        Me.lblFTPFolder.Size = New System.Drawing.Size(63, 13)
+        Me.lblFTPFolder.TabIndex = 1
+        Me.lblFTPFolder.Text = "Input Folder"
+        '
+        'lblBaseStationFTP
+        '
+        Me.lblBaseStationFTP.AutoSize = True
+        Me.lblBaseStationFTP.Location = New System.Drawing.Point(49, 36)
+        Me.lblBaseStationFTP.Name = "lblBaseStationFTP"
+        Me.lblBaseStationFTP.Size = New System.Drawing.Size(68, 13)
+        Me.lblBaseStationFTP.TabIndex = 0
+        Me.lblBaseStationFTP.Text = "FTP Address"
+        '
         'lblServerSettings
         '
         Me.lblServerSettings.AutoSize = True
@@ -2220,26 +2240,6 @@ Partial Class formAWSRealTime
         Me.cmdBaseStation.TabIndex = 0
         Me.cmdBaseStation.Text = "Base Station"
         Me.cmdBaseStation.UseVisualStyleBackColor = True
-        '
-        'lblbaseStation
-        '
-        Me.lblbaseStation.AutoSize = True
-        Me.lblbaseStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblbaseStation.Location = New System.Drawing.Point(192, 10)
-        Me.lblbaseStation.Name = "lblbaseStation"
-        Me.lblbaseStation.Size = New System.Drawing.Size(79, 13)
-        Me.lblbaseStation.TabIndex = 13
-        Me.lblbaseStation.Text = "Base Station"
-        '
-        'lblMsgSwitch
-        '
-        Me.lblMsgSwitch.AutoSize = True
-        Me.lblMsgSwitch.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMsgSwitch.Location = New System.Drawing.Point(202, 10)
-        Me.lblMsgSwitch.Name = "lblMsgSwitch"
-        Me.lblMsgSwitch.Size = New System.Drawing.Size(99, 13)
-        Me.lblMsgSwitch.TabIndex = 13
-        Me.lblMsgSwitch.Text = "Message Switch"
         '
         'formAWSRealTime
         '
@@ -2296,10 +2296,10 @@ Partial Class formAWSRealTime
         Me.grpSiteDetails.PerformLayout()
         Me.pnlServers.ResumeLayout(False)
         Me.pnlServers.PerformLayout()
-        Me.pnlBaseStation.ResumeLayout(False)
-        Me.pnlBaseStation.PerformLayout()
         Me.pnlMSS.ResumeLayout(False)
         Me.pnlMSS.PerformLayout()
+        Me.pnlBaseStation.ResumeLayout(False)
+        Me.pnlBaseStation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

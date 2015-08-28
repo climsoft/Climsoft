@@ -113,14 +113,14 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
@@ -184,7 +184,7 @@ Partial Class frmMainMenu
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
@@ -268,7 +268,7 @@ Partial Class frmMainMenu
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 16)
         Me.Label5.TabIndex = 36
-        Me.Label5.Tag = "Close"
+        Me.Label5.Tag = "Close_CLIMSOFT"
         Me.Label5.Text = "Close CLIMSOFT"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -281,6 +281,7 @@ Partial Class frmMainMenu
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(108, 25)
         Me.Label11.TabIndex = 35
+        Me.Label11.Tag = "Welcome"
         Me.Label11.Text = "Welcome"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '

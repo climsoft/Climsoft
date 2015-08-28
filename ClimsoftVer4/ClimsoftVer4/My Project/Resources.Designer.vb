@@ -254,6 +254,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Close CLIMSOFT.
+        '''</summary>
+        Public ReadOnly Property Close_CLIMSOFT() As String
+            Get
+                Return ResourceManager.GetString("Close_CLIMSOFT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Close.
         '''</summary>
         Public ReadOnly Property Close1() As String
@@ -936,6 +945,15 @@ Namespace My.Resources
         Public ReadOnly Property Visibility() As String
             Get
                 Return ResourceManager.GetString("Visibility", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Welcome.
+        '''</summary>
+        Public ReadOnly Property Welcome() As String
+            Get
+                Return ResourceManager.GetString("Welcome", resourceCulture)
             End Get
         End Property
         
