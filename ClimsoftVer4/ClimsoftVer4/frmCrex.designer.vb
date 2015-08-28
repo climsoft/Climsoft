@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmCrex
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmCrex
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkIncludeCheckDigit = New System.Windows.Forms.CheckBox()
@@ -38,7 +38,6 @@ Partial Class frmCrex
         Me.lblTemplate = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblBBB = New System.Windows.Forms.Label()
-        Me.lblIncludeCheckDigit = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -135,7 +134,6 @@ Partial Class frmCrex
         Me.GroupBox1.Controls.Add(Me.lblTemplate)
         Me.GroupBox1.Controls.Add(Me.lblMonth)
         Me.GroupBox1.Controls.Add(Me.lblBBB)
-        Me.GroupBox1.Controls.Add(Me.lblIncludeCheckDigit)
         Me.GroupBox1.Controls.Add(Me.lblHeader)
         Me.GroupBox1.Controls.Add(Me.lblYear)
         Me.GroupBox1.Controls.Add(Me.lblStation)
@@ -151,8 +149,9 @@ Partial Class frmCrex
         Me.chkIncludeCheckDigit.AutoSize = True
         Me.chkIncludeCheckDigit.Location = New System.Drawing.Point(315, 110)
         Me.chkIncludeCheckDigit.Name = "chkIncludeCheckDigit"
-        Me.chkIncludeCheckDigit.Size = New System.Drawing.Size(15, 14)
+        Me.chkIncludeCheckDigit.Size = New System.Drawing.Size(119, 17)
         Me.chkIncludeCheckDigit.TabIndex = 4
+        Me.chkIncludeCheckDigit.Text = "Include Check Digit"
         Me.chkIncludeCheckDigit.UseVisualStyleBackColor = True
         '
         'cboTemplate
@@ -272,16 +271,6 @@ Partial Class frmCrex
         Me.lblBBB.TabIndex = 1
         Me.lblBBB.Tag = "BBB"
         Me.lblBBB.Text = "BBB"
-        '
-        'lblIncludeCheckDigit
-        '
-        Me.lblIncludeCheckDigit.AutoSize = True
-        Me.lblIncludeCheckDigit.Location = New System.Drawing.Point(336, 105)
-        Me.lblIncludeCheckDigit.Name = "lblIncludeCheckDigit"
-        Me.lblIncludeCheckDigit.Size = New System.Drawing.Size(100, 13)
-        Me.lblIncludeCheckDigit.TabIndex = 1
-        Me.lblIncludeCheckDigit.Tag = "Include_Check_Digit"
-        Me.lblIncludeCheckDigit.Text = "Include Check Digit"
         '
         'lblHeader
         '
@@ -1037,7 +1026,6 @@ Partial Class frmCrex
     Friend WithEvents txtHeader As TextBox
     Friend WithEvents lblTemplate As Label
     Friend WithEvents lblBBB As Label
-    Friend WithEvents lblIncludeCheckDigit As Label
     Friend WithEvents chkIncludeCheckDigit As CheckBox
     Friend WithEvents grpIndicators As GroupBox
     Friend WithEvents lblOriginatingGeneratingSubCenter As Label

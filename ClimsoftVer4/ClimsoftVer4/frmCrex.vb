@@ -15,16 +15,36 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports MySql.Data.MySqlClient
 Public Class frmCrex
+
     Private Sub frmCrex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim connectionPath As String = My.Settings.defaultDatabase
+        Dim sqlConnection As MySqlConnection
+        Dim command As MySqlCommand
+        Dim READER As MySqlDataReader
+        Dim Query As String
 
+        Try
+            MsgBox(connectionPath)
+            sqlConnection = New MySqlConnection() 'new instance of mysqlconnection
+            sqlConnection.ConnectionString = connectionPath
+            sqlConnection.Open()
+
+            Query = "SELECT * FROM station ORDER BY stationName"
+            command = New MySqlCommand(Query, sqlConnection)
+            READER = command.ExecuteReader
+
+            While READER.Read
+                Dim stationid = READER.GetString("stationName")
+                cboStation.Items.Add(stationid)
+            End While
+            sqlConnection.Close()
+
+        Catch ex As MySqlException
+            MsgBox(ex.Message)
+
+        End Try
     End Sub
 
-    Private Sub btnEncode_Click(sender As Object, e As EventArgs) Handles btnEncode.Click
-
-    End Sub
-
-    Private Sub txtOriginatingGeneratingCenter_TextChanged(sender As Object, e As EventArgs) Handles txtOriginatingGeneratingCenter.TextChanged
-
-    End Sub
 End Class
