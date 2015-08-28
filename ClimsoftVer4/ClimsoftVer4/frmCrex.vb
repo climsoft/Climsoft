@@ -19,23 +19,24 @@ Imports MySql.Data.MySqlClient
 Public Class frmCrex
 
     Private Sub frmCrex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim connectionPath As String = "Server=localhost; User Id=root; Password=P@55w0rd; Database=mysql_climsoft_db_v4"
-        Dim sqlConnection As MySqlConnection = New MySqlConnection
+        Dim connectionPath As String = My.Settings.defaultDatabase
+        Dim sqlConnection As MySqlConnection
         Dim command As MySqlCommand
-
-        sqlConnection = New MySqlConnection() 'new instance of mysqlconnection
-        sqlConnection.ConnectionString = connectionPath
-        Dim insertCommand As New MySqlCommand
         Dim READER As MySqlDataReader
+        Dim Query As String
+
         Try
+            MsgBox(connectionPath)
+            sqlConnection = New MySqlConnection() 'new instance of mysqlconnection
+            sqlConnection.ConnectionString = connectionPath
             sqlConnection.Open()
-            Dim Querry As String
-            Querry = "select * from station"
-            command = New MySqlCommand(Querry, sqlConnection)
+
+            Query = "SELECT * FROM station ORDER BY stationName"
+            command = New MySqlCommand(Query, sqlConnection)
             READER = command.ExecuteReader
 
             While READER.Read
-                Dim stationid = READER.GetString("stationId")
+                Dim stationid = READER.GetString("stationName")
                 cboStation.Items.Add(stationid)
             End While
             sqlConnection.Close()
@@ -46,15 +47,4 @@ Public Class frmCrex
         End Try
     End Sub
 
-    Private Sub btnEncode_Click(sender As Object, e As EventArgs) Handles btnEncode.Click
-
-    End Sub
-
-    Private Sub txtOriginatingGeneratingCenter_TextChanged(sender As Object, e As EventArgs) Handles txtOriginatingGeneratingCenter.TextChanged
-
-    End Sub
-
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
-
-    End Sub
 End Class
