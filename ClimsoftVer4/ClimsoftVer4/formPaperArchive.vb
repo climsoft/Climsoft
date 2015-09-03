@@ -90,7 +90,11 @@
     Private Sub cmdArchive_Click(sender As Object, e As EventArgs) Handles cmdArchive.Click
         Dim imgFile As String
         On Error GoTo err
-        'UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(0).Text)
+
+        'Craete the images folder if it does not exist
+        If Not IO.Directory.Exists("c:\images") Then
+            IO.Directory.CreateDirectory("c:\images")
+        End If
 
         For i = 0 To lstvFiles.Items.Count - 1
             imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
@@ -144,7 +148,8 @@ err:
                 datetim = yy & "/" & mm & "/" & dd & " " & hh & ":00:00"
                 'MsgBox(datetim)
                 If IsDate(datetim) Then
-                    ArchiveRecord(stn, frm, yy, mm, dd, hh, imgfile)
+                    'ArchiveRecord(stn, frm, yy, mm, dd, hh, imgfile)
+                    ArchiveRecord(stn, frm, datetim, imgfile)
                 Else
                     MsgBox("Incorrect Datetime Structure")
                 End If
@@ -158,25 +163,35 @@ err:
 
     End Sub
 
-    Sub ArchiveRecord(stn As String, frm As String, yr As Integer, mn As Integer, dy As Integer, hr As Integer, img As String)
+    Sub ArchiveRecord(stn As String, frm As String, frmdatetime As Date, img As String)
         On Error GoTo Err
         'On Error Resume Next
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
 
-        'MsgBox(stn)
-        'Dim recCommit As New dataEntryGlobalRoutines
+        'sql = "SELECT * FROM paperarchive"
+        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        'da.Fill(ds, "paperarchive")
 
+        'MsgBox(ds.Tables("paperarchive").Rows.Count)
+        'MsgBox(stn & " " & frm & " " & frmdatetime & " " & img)
+
+        'MsgBox(stn)
+
+        Dim recCommit As New dataEntryGlobalRoutines
         dsNewRow = ds.Tables("paperarchive").NewRow
 
         dsNewRow.Item("belongsTo") = stn
-        dsNewRow.Item("code") = frm
-        dsNewRow.Item("description") = frm & " From " & stn
-        dsNewRow.Item("year") = yr
-        dsNewRow.Item("month") = mn
-        dsNewRow.Item("day") = dy
-        dsNewRow.Item("hour") = hr
+        dsNewRow.Item("formDatetime") = frmdatetime
         dsNewRow.Item("image") = img
+        dsNewRow.Item("classifiedInto") = frm
+
+        'dsNewRow.Item("year") = yr
+        'dsNewRow.Item("month") = mn
+        'dsNewRow.Item("day") = dy
+        'dsNewRow.Item("hour") = hr
+        'dsNewRow.Item("image") = img
 
         'Add a new record to the data source table
         ds.Tables("paperarchive").Rows.Add(dsNewRow)
@@ -194,41 +209,46 @@ Err:
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()
 
-        sql = "SELECT * FROM paperarchive"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        da.Fill(ds, "paperarchive")
+        'sql = "SELECT * FROM paperarchive"
+        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        'da.Fill(ds, "paperarchive")
 
         FillList(txtStationArchive, "station", "stationId")
         FillList(txtStation, "station", "stationId")
-    End Sub
-
-    Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
-        Dim stn, frm, img As String
-        Dim yr, mn, dy, hr, num, mxrows As Integer
+        FillList(txtForm, "paperarchivedefinition", "formId")
+        FillList(txtFormId, "paperarchivedefinition", "formId")
 
         sql = "SELECT * FROM paperarchive"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         da.Fill(ds, "paperarchive")
 
-        mxrows = ds.Tables("paperarchive").Rows.Count
-
-        For num = 0 To mxrows
-            stn = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
-            frm = ds.Tables("paperarchive").Rows(num).Item("code")
-            yr = ds.Tables("paperarchive").Rows(num).Item("year")
-            mn = ds.Tables("paperarchive").Rows(num).Item("month")
-            dy = ds.Tables("paperarchive").Rows(num).Item("day")
-            hr = ds.Tables("paperarchive").Rows(num).Item("hour")
-            hr = ds.Tables("paperarchive").Rows(num).Item("hour")
-            img = ds.Tables("paperarchive").Rows(num).Item("image")
-            If stn = txtStation.Text And frm = txtForm.Text And yr = txtYY.Text And mn = txtMM.Text And dy = txtDD.Text And hr = txtHH.Text Then
-                ShowImage(img)
-                Exit For
-            End If
-        Next
-
-
     End Sub
+
+    '    Private Sub cmdView_Click(sender As Object, e As EventArgs)
+    '        On Error GoTo Err
+    '        Dim stn, frm, imgfl, img As String
+    '        Dim num, mxrows As Integer
+
+    '        imgfl = txtStation.Text & "-" & txtForm.Text & "-" & txtYY.Text & Format(Val(txtMM.Text), "00") & Format(Val(txtDD.Text), "00") & Format(Val(txtHH.Text), "00")
+    '        mxrows = ds.Tables("paperarchive").Rows.Count
+
+    '        For num = 0 To mxrows
+    '            stn = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
+    '            frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
+    '            img = ds.Tables("paperarchive").Rows(num).Item("image")
+    '            If InStr(img, imgfl) > 0 Then
+    '                ShowImage(img)
+    '                Exit For
+    '            End If
+    '        Next
+    '        Exit Sub
+    'Err:
+    '        If Err.Number = 9 Then
+    '            MsgBox("No Archived Image found")
+    '            Exit Sub
+    '        End If
+    '        MsgBox(Err.Number & ": " & Err.Description)
+    '    End Sub
     Sub ShowImage(img As String)
         System.Diagnostics.Process.Start(img)
     End Sub
@@ -256,20 +276,20 @@ Err:
     End Sub
 
 
-    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles cmdArchiveUnstructure.Click
-    '    MsgBox(Format(Val(txtMonth.Text), "00"))
-    '    'MsgBox(Format(txtDay.Text)        
-    '    'MsgBox(Format(txtHour.Text, "00"))
-    'End Sub
-
     Private Sub cmdArchiveUnstructure_Click(sender As Object, e As EventArgs) Handles cmdArchiveUnstructure.Click
         Dim dir, ext As String
         Dim fld, xt As Integer
         Dim stn, frm, y, m, d, h As String
+        Dim frmdatetime As Date
+
+        On Error GoTo Err
+        'Craete the images folder if it does not exist
+        If Not IO.Directory.Exists("c:\images") Then
+            IO.Directory.CreateDirectory("c:\images")
+        End If
 
         Dir = IO.Directory.GetParent(txtImageFile.Text).FullName
         fld = Len(Dir)
-        'MsgBox(Mid(txtImageFile.Text, fld + 2, Len(txtImageFile.Text) - fld + 1))
         xt = InStr(txtImageFile.Text, ".")
         ext = Mid(txtImageFile.Text, xt + 1, Len(txtImageFile.Text) - 1)
 
@@ -277,21 +297,23 @@ Err:
             & Format(Val(txtDay.Text), "00") & Format(Val(txtHour.Text), "00") & "." & ext
 
         stn = txtStationArchive.Text
-        frm = txtStationArchive.Text
-        y = Format(Val(txtYear.Text), "00")
+        frm = txtFormId.Text
+
+        y = txtYear.Text
         m = Format(Val(txtDay.Text), "00")
         d = Format(Val(txtMonth.Text), "00")
         h = Format(Val(txtHour.Text), "00")
+        frmdatetime = y & "-" & m & "-" & d & " " & h & ":00:00"
 
-        'MsgBox(stn)
-
-        IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
-        ArchiveRecord(stn, frm, y, m, d, h, "c:\images\" & FileNm)
-
-        'UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(i).Text)
-
-        'MsgBox(Format(txtDay.Text)        
-        'MsgBox(Format(txtHour.Text, "00"))
+        If IsDate(frmdatetime) Then
+            IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
+            ArchiveRecord(stn, frm, frmdatetime, "c:\images\" & FileNm)
+        Else
+            MsgBox("Can't Archive Image. Invalid Datetime value")
+        End If
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
     End Sub
     Sub FillList(ByRef lst As ComboBox, tbl As String, idxfld As String)
         Dim dstn As New DataSet
@@ -304,5 +326,101 @@ Err:
         For i = 0 To dstn.Tables(tbl).Rows.Count - 1
             lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
         Next
+    End Sub
+
+    Private Sub tabImageArchives_Click(sender As Object, e As EventArgs) Handles tabImageArchives.Click
+
+        If tabImageArchives.SelectedIndex = 2 Then
+
+            sql = "SELECT * FROM  paperarchive"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da.Fill(ds, "paperarchive")
+
+            rec = 0
+            Kount = ds.Tables("paperarchive").Rows.Count
+
+            ViewImage(rec)
+
+        End If
+
+    End Sub
+
+    Private Sub txtDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDay.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub TabViewArchive_Click(sender As Object, e As EventArgs) Handles TabViewArchive.Click
+
+    End Sub
+
+
+    Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
+        On Error GoTo Err
+        Dim stn, frm, imgfl, img As String
+        Dim num, mxrows As Integer
+
+        imgfl = txtStation.Text & "-" & txtForm.Text & "-" & txtYY.Text & Format(Val(txtMM.Text), "00") & Format(Val(txtDD.Text), "00") & Format(Val(txtHH.Text), "00")
+        mxrows = ds.Tables("paperarchive").Rows.Count
+
+        For num = 0 To mxrows
+            stn = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
+            frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
+            img = ds.Tables("paperarchive").Rows(num).Item("image")
+            If InStr(img, imgfl) > 0 Then
+                ShowImage(img)
+                Exit For
+            End If
+        Next
+        Exit Sub
+Err:
+        If Err.Number = 9 Then
+            MsgBox("No Archived Image found")
+            Exit Sub
+        End If
+        MsgBox(Err.Number & ": " & Err.Description)
+    End Sub
+
+    Private Sub cmdleft_Click(sender As Object, e As EventArgs) Handles cmdleft.Click
+
+        If rec > 0 Then
+            rec = rec - 1
+            ViewImage(rec)
+        End If
+    End Sub
+    Sub ViewImage(num As Integer)
+        On Error GoTo Err
+
+        txtStation.Text = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
+        txtForm.Text = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
+        txtYY.Text = Year(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+        txtMM.Text = Month(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+        txtDD.Text = Strings.Left(ds.Tables("paperarchive").Rows(num).Item("formDatetime"), 2)
+        txtHH.Text = Hour(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+
+        txtRec.Text = rec + 1 & " of " & Kount
+        Exit Sub
+Err:
+        MsgBox(Err.Number & ": " & Err.Description)
+    End Sub
+
+    Private Sub cmdright_Click(sender As Object, e As EventArgs) Handles cmdright.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            ViewImage(rec)
+        End If
+    End Sub
+
+    Private Sub cmdfirst_Click(sender As Object, e As EventArgs) Handles cmdfirst.Click
+        rec = 0
+        ViewImage(rec)
+    End Sub
+
+    Private Sub cmdlast_Click(sender As Object, e As EventArgs) Handles cmdlast.Click
+        rec = Kount - 1
+        ViewImage(rec)
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+
     End Sub
 End Class

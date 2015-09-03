@@ -32,6 +32,7 @@
         'MsgBox(ds.Tables("station").Rows.Count)
 
     End Sub
+
     Sub SetDataSet(tbl As String)
         Dim sql As String
         sql = "SELECT * FROM " & tbl
@@ -90,6 +91,10 @@
                 SetDataSet("physicalfeature")
                 rec = 0
                 'populateFeatureForm("physicalfeature", rec, Kount)
+            Case 8 ' Physical Feature
+                SetDataSet("paperarchivedefinition")
+                rec = 0
+                'populateFeatureForm("physicalfeature", rec, Kount)
         End Select
     End Sub
 
@@ -101,7 +106,7 @@
 
     End Sub
 
-  
+
     Sub populateForm(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
         txtstationId.Text = ds.Tables(frm).Rows(num).Item("stationId")
@@ -481,7 +486,28 @@ Err:
 
     End Sub
 
-    Private Sub cmdAddNew_Click(sender As Object, e As EventArgs) Handles cmdAddNew.Click
 
+    Private Sub cmdAddArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdAddArchiveDef.Click
+        On Error GoTo Err
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+
+        dsNewRow = ds.Tables("paperarchivedefinition").NewRow
+
+        dsNewRow.Item("formId") = txtFormId.Text
+        dsNewRow.Item("description") = txtFormDescription.Text
+        ds.Tables("paperarchivedefinition").Rows.Add(dsNewRow)
+        da.Update(ds, "paperarchivedefinition")
+        ' Clear Text boxes
+        txtFormId.Text = ""
+        txtFormDescription.Text = ""
+        Exit Sub
+Err:
+        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 End Class
