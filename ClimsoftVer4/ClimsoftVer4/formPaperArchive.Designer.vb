@@ -38,9 +38,8 @@ Partial Class formPaperArchive
         Me.txtSelectedFolder = New System.Windows.Forms.TextBox()
         Me.tabUnstructured = New System.Windows.Forms.TabPage()
         Me.pnlUnstructuredNames = New System.Windows.Forms.Panel()
+        Me.txtFormId = New System.Windows.Forms.ComboBox()
         Me.txtYear = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.cmdArchiveUnstructure = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.cmdImageFile = New System.Windows.Forms.Button()
@@ -55,15 +54,23 @@ Partial Class formPaperArchive
         Me.txtDay = New System.Windows.Forms.ComboBox()
         Me.txtMonth = New System.Windows.Forms.ComboBox()
         Me.txtStationArchive = New System.Windows.Forms.ComboBox()
-        Me.txtFormId = New System.Windows.Forms.TextBox()
         Me.lblStationId = New System.Windows.Forms.Label()
         Me.TabViewArchive = New System.Windows.Forms.TabPage()
         Me.grpImage = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdleft = New System.Windows.Forms.Button()
+        Me.cmdfirst = New System.Windows.Forms.Button()
+        Me.cmdlast = New System.Windows.Forms.Button()
+        Me.cmdright = New System.Windows.Forms.Button()
+        Me.txtRec = New System.Windows.Forms.TextBox()
+        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
         Me.cmdView = New System.Windows.Forms.Button()
-        Me.txtHH = New System.Windows.Forms.TextBox()
-        Me.txtDD = New System.Windows.Forms.TextBox()
-        Me.txtMM = New System.Windows.Forms.TextBox()
+        Me.cmdDeleteArchiveDef = New System.Windows.Forms.Button()
+        Me.cmdUpdateArchiveDef = New System.Windows.Forms.Button()
         Me.txtYY = New System.Windows.Forms.TextBox()
+        Me.txtHH = New System.Windows.Forms.ComboBox()
+        Me.txtDD = New System.Windows.Forms.ComboBox()
+        Me.txtMM = New System.Windows.Forms.ComboBox()
         Me.txtForm = New System.Windows.Forms.ComboBox()
         Me.txtStation = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -85,6 +92,8 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.SuspendLayout()
         Me.TabViewArchive.SuspendLayout()
         Me.grpImage.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox18.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -93,7 +102,7 @@ Partial Class formPaperArchive
         Me.tabImageArchives.Controls.Add(Me.tabStructured)
         Me.tabImageArchives.Controls.Add(Me.tabUnstructured)
         Me.tabImageArchives.Controls.Add(Me.TabViewArchive)
-        Me.tabImageArchives.Location = New System.Drawing.Point(10, 27)
+        Me.tabImageArchives.Location = New System.Drawing.Point(9, 27)
         Me.tabImageArchives.Name = "tabImageArchives"
         Me.tabImageArchives.SelectedIndex = 0
         Me.tabImageArchives.Size = New System.Drawing.Size(660, 477)
@@ -252,9 +261,8 @@ Partial Class formPaperArchive
         'pnlUnstructuredNames
         '
         Me.pnlUnstructuredNames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlUnstructuredNames.Controls.Add(Me.txtFormId)
         Me.pnlUnstructuredNames.Controls.Add(Me.txtYear)
-        Me.pnlUnstructuredNames.Controls.Add(Me.Button3)
-        Me.pnlUnstructuredNames.Controls.Add(Me.Button2)
         Me.pnlUnstructuredNames.Controls.Add(Me.cmdArchiveUnstructure)
         Me.pnlUnstructuredNames.Controls.Add(Me.CheckBox1)
         Me.pnlUnstructuredNames.Controls.Add(Me.cmdImageFile)
@@ -269,12 +277,19 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.Controls.Add(Me.txtDay)
         Me.pnlUnstructuredNames.Controls.Add(Me.txtMonth)
         Me.pnlUnstructuredNames.Controls.Add(Me.txtStationArchive)
-        Me.pnlUnstructuredNames.Controls.Add(Me.txtFormId)
         Me.pnlUnstructuredNames.Controls.Add(Me.lblStationId)
         Me.pnlUnstructuredNames.Location = New System.Drawing.Point(43, 66)
         Me.pnlUnstructuredNames.Name = "pnlUnstructuredNames"
         Me.pnlUnstructuredNames.Size = New System.Drawing.Size(564, 302)
         Me.pnlUnstructuredNames.TabIndex = 0
+        '
+        'txtFormId
+        '
+        Me.txtFormId.FormattingEnabled = True
+        Me.txtFormId.Location = New System.Drawing.Point(401, 22)
+        Me.txtFormId.Name = "txtFormId"
+        Me.txtFormId.Size = New System.Drawing.Size(148, 21)
+        Me.txtFormId.TabIndex = 20
         '
         'txtYear
         '
@@ -283,27 +298,9 @@ Partial Class formPaperArchive
         Me.txtYear.Size = New System.Drawing.Size(41, 20)
         Me.txtYear.TabIndex = 19
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(386, 254)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(88, 25)
-        Me.Button3.TabIndex = 18
-        Me.Button3.Text = "Delete"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(230, 254)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(88, 25)
-        Me.Button2.TabIndex = 17
-        Me.Button2.Text = "Update"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'cmdArchiveUnstructure
         '
-        Me.cmdArchiveUnstructure.Location = New System.Drawing.Point(74, 254)
+        Me.cmdArchiveUnstructure.Location = New System.Drawing.Point(265, 259)
         Me.cmdArchiveUnstructure.Name = "cmdArchiveUnstructure"
         Me.cmdArchiveUnstructure.Size = New System.Drawing.Size(88, 25)
         Me.cmdArchiveUnstructure.TabIndex = 16
@@ -359,6 +356,7 @@ Partial Class formPaperArchive
         'txtHour
         '
         Me.txtHour.FormattingEnabled = True
+        Me.txtHour.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.txtHour.Location = New System.Drawing.Point(67, 157)
         Me.txtHour.Name = "txtHour"
         Me.txtHour.Size = New System.Drawing.Size(41, 21)
@@ -404,6 +402,7 @@ Partial Class formPaperArchive
         'txtDay
         '
         Me.txtDay.FormattingEnabled = True
+        Me.txtDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
         Me.txtDay.Location = New System.Drawing.Point(67, 123)
         Me.txtDay.Name = "txtDay"
         Me.txtDay.Size = New System.Drawing.Size(41, 21)
@@ -412,6 +411,7 @@ Partial Class formPaperArchive
         'txtMonth
         '
         Me.txtMonth.FormattingEnabled = True
+        Me.txtMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         Me.txtMonth.Location = New System.Drawing.Point(67, 89)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(41, 21)
@@ -424,13 +424,6 @@ Partial Class formPaperArchive
         Me.txtStationArchive.Name = "txtStationArchive"
         Me.txtStationArchive.Size = New System.Drawing.Size(210, 21)
         Me.txtStationArchive.TabIndex = 2
-        '
-        'txtFormId
-        '
-        Me.txtFormId.Location = New System.Drawing.Point(400, 22)
-        Me.txtFormId.Name = "txtFormId"
-        Me.txtFormId.Size = New System.Drawing.Size(149, 20)
-        Me.txtFormId.TabIndex = 1
         '
         'lblStationId
         '
@@ -449,16 +442,17 @@ Partial Class formPaperArchive
         Me.TabViewArchive.Padding = New System.Windows.Forms.Padding(3)
         Me.TabViewArchive.Size = New System.Drawing.Size(652, 451)
         Me.TabViewArchive.TabIndex = 2
-        Me.TabViewArchive.Text = "View Archived Image"
+        Me.TabViewArchive.Text = "Archived Images"
         Me.TabViewArchive.UseVisualStyleBackColor = True
         '
         'grpImage
         '
-        Me.grpImage.Controls.Add(Me.cmdView)
+        Me.grpImage.Controls.Add(Me.GroupBox1)
+        Me.grpImage.Controls.Add(Me.GroupBox18)
+        Me.grpImage.Controls.Add(Me.txtYY)
         Me.grpImage.Controls.Add(Me.txtHH)
         Me.grpImage.Controls.Add(Me.txtDD)
         Me.grpImage.Controls.Add(Me.txtMM)
-        Me.grpImage.Controls.Add(Me.txtYY)
         Me.grpImage.Controls.Add(Me.txtForm)
         Me.grpImage.Controls.Add(Me.txtStation)
         Me.grpImage.Controls.Add(Me.Label8)
@@ -467,70 +461,168 @@ Partial Class formPaperArchive
         Me.grpImage.Controls.Add(Me.Label4)
         Me.grpImage.Controls.Add(Me.Label3)
         Me.grpImage.Controls.Add(Me.Label2)
-        Me.grpImage.Location = New System.Drawing.Point(65, 71)
+        Me.grpImage.Location = New System.Drawing.Point(69, 57)
         Me.grpImage.Name = "grpImage"
-        Me.grpImage.Size = New System.Drawing.Size(527, 267)
+        Me.grpImage.Size = New System.Drawing.Size(499, 332)
         Me.grpImage.TabIndex = 0
         Me.grpImage.TabStop = False
         Me.grpImage.Text = "Image Details"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.cmdleft)
+        Me.GroupBox1.Controls.Add(Me.cmdfirst)
+        Me.GroupBox1.Controls.Add(Me.cmdlast)
+        Me.GroupBox1.Controls.Add(Me.cmdright)
+        Me.GroupBox1.Controls.Add(Me.txtRec)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 259)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(493, 36)
+        Me.GroupBox1.TabIndex = 70
+        Me.GroupBox1.TabStop = False
+        '
+        'cmdleft
+        '
+        Me.cmdleft.BackgroundImage = CType(resources.GetObject("cmdleft.BackgroundImage"), System.Drawing.Image)
+        Me.cmdleft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdleft.Location = New System.Drawing.Point(34, 6)
+        Me.cmdleft.Name = "cmdleft"
+        Me.cmdleft.Size = New System.Drawing.Size(36, 24)
+        Me.cmdleft.TabIndex = 4
+        Me.cmdleft.UseVisualStyleBackColor = True
+        '
+        'cmdfirst
+        '
+        Me.cmdfirst.BackgroundImage = CType(resources.GetObject("cmdfirst.BackgroundImage"), System.Drawing.Image)
+        Me.cmdfirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdfirst.Location = New System.Drawing.Point(0, 6)
+        Me.cmdfirst.Name = "cmdfirst"
+        Me.cmdfirst.Size = New System.Drawing.Size(35, 24)
+        Me.cmdfirst.TabIndex = 3
+        Me.cmdfirst.UseVisualStyleBackColor = True
+        '
+        'cmdlast
+        '
+        Me.cmdlast.BackgroundImage = CType(resources.GetObject("cmdlast.BackgroundImage"), System.Drawing.Image)
+        Me.cmdlast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdlast.Location = New System.Drawing.Point(456, 6)
+        Me.cmdlast.Name = "cmdlast"
+        Me.cmdlast.Size = New System.Drawing.Size(36, 24)
+        Me.cmdlast.TabIndex = 2
+        Me.cmdlast.UseVisualStyleBackColor = True
+        '
+        'cmdright
+        '
+        Me.cmdright.BackgroundImage = CType(resources.GetObject("cmdright.BackgroundImage"), System.Drawing.Image)
+        Me.cmdright.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.cmdright.Location = New System.Drawing.Point(421, 6)
+        Me.cmdright.Name = "cmdright"
+        Me.cmdright.Size = New System.Drawing.Size(36, 24)
+        Me.cmdright.TabIndex = 1
+        Me.cmdright.UseVisualStyleBackColor = True
+        '
+        'txtRec
+        '
+        Me.txtRec.Location = New System.Drawing.Point(70, 8)
+        Me.txtRec.Name = "txtRec"
+        Me.txtRec.Size = New System.Drawing.Size(351, 20)
+        Me.txtRec.TabIndex = 0
+        Me.txtRec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'GroupBox18
+        '
+        Me.GroupBox18.Controls.Add(Me.cmdView)
+        Me.GroupBox18.Controls.Add(Me.cmdDeleteArchiveDef)
+        Me.GroupBox18.Controls.Add(Me.cmdUpdateArchiveDef)
+        Me.GroupBox18.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox18.Location = New System.Drawing.Point(3, 295)
+        Me.GroupBox18.Name = "GroupBox18"
+        Me.GroupBox18.Size = New System.Drawing.Size(493, 34)
+        Me.GroupBox18.TabIndex = 69
+        Me.GroupBox18.TabStop = False
+        '
         'cmdView
         '
-        Me.cmdView.Location = New System.Drawing.Point(204, 213)
+        Me.cmdView.Location = New System.Drawing.Point(91, 6)
         Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(92, 33)
-        Me.cmdView.TabIndex = 12
+        Me.cmdView.Size = New System.Drawing.Size(81, 25)
+        Me.cmdView.TabIndex = 43
         Me.cmdView.Text = "View Image"
         Me.cmdView.UseVisualStyleBackColor = True
         '
-        'txtHH
+        'cmdDeleteArchiveDef
         '
-        Me.txtHH.Location = New System.Drawing.Point(93, 189)
-        Me.txtHH.Name = "txtHH"
-        Me.txtHH.Size = New System.Drawing.Size(43, 20)
-        Me.txtHH.TabIndex = 11
+        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(358, 6)
+        Me.cmdDeleteArchiveDef.Name = "cmdDeleteArchiveDef"
+        Me.cmdDeleteArchiveDef.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteArchiveDef.TabIndex = 42
+        Me.cmdDeleteArchiveDef.Text = "Delete"
+        Me.cmdDeleteArchiveDef.UseVisualStyleBackColor = True
         '
-        'txtDD
+        'cmdUpdateArchiveDef
         '
-        Me.txtDD.Location = New System.Drawing.Point(93, 159)
-        Me.txtDD.Name = "txtDD"
-        Me.txtDD.Size = New System.Drawing.Size(43, 20)
-        Me.txtDD.TabIndex = 10
-        '
-        'txtMM
-        '
-        Me.txtMM.Location = New System.Drawing.Point(93, 129)
-        Me.txtMM.Name = "txtMM"
-        Me.txtMM.Size = New System.Drawing.Size(43, 20)
-        Me.txtMM.TabIndex = 9
+        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(230, 6)
+        Me.cmdUpdateArchiveDef.Name = "cmdUpdateArchiveDef"
+        Me.cmdUpdateArchiveDef.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateArchiveDef.TabIndex = 41
+        Me.cmdUpdateArchiveDef.Text = "Update"
+        Me.cmdUpdateArchiveDef.UseVisualStyleBackColor = True
         '
         'txtYY
         '
-        Me.txtYY.Location = New System.Drawing.Point(93, 99)
+        Me.txtYY.Location = New System.Drawing.Point(157, 104)
         Me.txtYY.Name = "txtYY"
-        Me.txtYY.Size = New System.Drawing.Size(43, 20)
-        Me.txtYY.TabIndex = 8
+        Me.txtYY.Size = New System.Drawing.Size(41, 20)
+        Me.txtYY.TabIndex = 20
+        '
+        'txtHH
+        '
+        Me.txtHH.FormattingEnabled = True
+        Me.txtHH.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtHH.Location = New System.Drawing.Point(157, 194)
+        Me.txtHH.Name = "txtHH"
+        Me.txtHH.Size = New System.Drawing.Size(41, 21)
+        Me.txtHH.TabIndex = 16
+        '
+        'txtDD
+        '
+        Me.txtDD.FormattingEnabled = True
+        Me.txtDD.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtDD.Location = New System.Drawing.Point(157, 164)
+        Me.txtDD.Name = "txtDD"
+        Me.txtDD.Size = New System.Drawing.Size(41, 21)
+        Me.txtDD.TabIndex = 15
+        '
+        'txtMM
+        '
+        Me.txtMM.FormattingEnabled = True
+        Me.txtMM.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.txtMM.Location = New System.Drawing.Point(157, 134)
+        Me.txtMM.Name = "txtMM"
+        Me.txtMM.Size = New System.Drawing.Size(41, 21)
+        Me.txtMM.TabIndex = 14
         '
         'txtForm
         '
         Me.txtForm.FormattingEnabled = True
-        Me.txtForm.Location = New System.Drawing.Point(93, 70)
+        Me.txtForm.Location = New System.Drawing.Point(157, 75)
         Me.txtForm.Name = "txtForm"
-        Me.txtForm.Size = New System.Drawing.Size(242, 21)
+        Me.txtForm.Size = New System.Drawing.Size(176, 21)
         Me.txtForm.TabIndex = 7
         '
         'txtStation
         '
         Me.txtStation.FormattingEnabled = True
-        Me.txtStation.Location = New System.Drawing.Point(93, 37)
+        Me.txtStation.Location = New System.Drawing.Point(157, 42)
         Me.txtStation.Name = "txtStation"
-        Me.txtStation.Size = New System.Drawing.Size(242, 21)
+        Me.txtStation.Size = New System.Drawing.Size(176, 21)
         Me.txtStation.TabIndex = 6
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(25, 193)
+        Me.Label8.Location = New System.Drawing.Point(89, 198)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(30, 13)
         Me.Label8.TabIndex = 5
@@ -539,7 +631,7 @@ Partial Class formPaperArchive
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(25, 163)
+        Me.Label7.Location = New System.Drawing.Point(89, 168)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(26, 13)
         Me.Label7.TabIndex = 4
@@ -548,7 +640,7 @@ Partial Class formPaperArchive
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(25, 133)
+        Me.Label6.Location = New System.Drawing.Point(89, 138)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 3
@@ -557,7 +649,7 @@ Partial Class formPaperArchive
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(25, 103)
+        Me.Label4.Location = New System.Drawing.Point(89, 108)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(29, 13)
         Me.Label4.TabIndex = 2
@@ -566,7 +658,7 @@ Partial Class formPaperArchive
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 74)
+        Me.Label3.Location = New System.Drawing.Point(89, 79)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(41, 13)
         Me.Label3.TabIndex = 1
@@ -575,7 +667,7 @@ Partial Class formPaperArchive
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(25, 41)
+        Me.Label2.Location = New System.Drawing.Point(89, 46)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 0
@@ -627,6 +719,9 @@ Partial Class formPaperArchive
         Me.TabViewArchive.ResumeLayout(False)
         Me.grpImage.ResumeLayout(False)
         Me.grpImage.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox18.ResumeLayout(False)
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
         Me.ResumeLayout(False)
@@ -653,22 +748,14 @@ Partial Class formPaperArchive
     Friend WithEvents txtDay As System.Windows.Forms.ComboBox
     Friend WithEvents txtMonth As System.Windows.Forms.ComboBox
     Friend WithEvents txtStationArchive As System.Windows.Forms.ComboBox
-    Friend WithEvents txtFormId As System.Windows.Forms.TextBox
     Friend WithEvents lblStationId As System.Windows.Forms.Label
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents MenuPaperArchive As System.Windows.Forms.MenuStrip
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents cmdArchiveUnstructure As System.Windows.Forms.Button
     Friend WithEvents TabViewArchive As System.Windows.Forms.TabPage
     Friend WithEvents grpImage As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdView As System.Windows.Forms.Button
-    Friend WithEvents txtHH As System.Windows.Forms.TextBox
-    Friend WithEvents txtDD As System.Windows.Forms.TextBox
-    Friend WithEvents txtMM As System.Windows.Forms.TextBox
-    Friend WithEvents txtYY As System.Windows.Forms.TextBox
     Friend WithEvents txtForm As System.Windows.Forms.ComboBox
     Friend WithEvents txtStation As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
@@ -687,4 +774,19 @@ Partial Class formPaperArchive
     Friend WithEvents lblStnFormyyyymmddhh As System.Windows.Forms.Label
     Friend WithEvents lblFileStructure As System.Windows.Forms.Label
     Friend WithEvents OpenFilePaperArchive As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents txtFormId As System.Windows.Forms.ComboBox
+    Friend WithEvents txtYY As System.Windows.Forms.TextBox
+    Friend WithEvents txtHH As System.Windows.Forms.ComboBox
+    Friend WithEvents txtDD As System.Windows.Forms.ComboBox
+    Friend WithEvents txtMM As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox18 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmdDeleteArchiveDef As System.Windows.Forms.Button
+    Friend WithEvents cmdUpdateArchiveDef As System.Windows.Forms.Button
+    Friend WithEvents cmdView As System.Windows.Forms.Button
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmdleft As System.Windows.Forms.Button
+    Friend WithEvents cmdfirst As System.Windows.Forms.Button
+    Friend WithEvents cmdlast As System.Windows.Forms.Button
+    Friend WithEvents cmdright As System.Windows.Forms.Button
+    Friend WithEvents txtRec As System.Windows.Forms.TextBox
 End Class

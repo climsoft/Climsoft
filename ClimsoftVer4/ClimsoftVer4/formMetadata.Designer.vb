@@ -283,6 +283,23 @@ Partial Class formMetadata
         Me.lblFeatureClass = New System.Windows.Forms.Label()
         Me.lblFeatureBdate = New System.Windows.Forms.Label()
         Me.lblFeatureEdate = New System.Windows.Forms.Label()
+        Me.TabPaperArchive = New System.Windows.Forms.TabPage()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
+        Me.cmdDeleteArchiveDef = New System.Windows.Forms.Button()
+        Me.cmdUpdateArchiveDef = New System.Windows.Forms.Button()
+        Me.cmdAddArchiveDef = New System.Windows.Forms.Button()
+        Me.GroupBox19 = New System.Windows.Forms.GroupBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtFormDescription = New System.Windows.Forms.TextBox()
+        Me.txtFormId = New System.Windows.Forms.TextBox()
+        Me.lbldescri = New System.Windows.Forms.Label()
+        Me.lblFormId = New System.Windows.Forms.Label()
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -321,6 +338,10 @@ Partial Class formMetadata
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPaperArchive.SuspendLayout()
+        Me.GroupBox17.SuspendLayout()
+        Me.GroupBox18.SuspendLayout()
+        Me.GroupBox19.SuspendLayout()
         Me.MenuMetadata.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -335,7 +356,8 @@ Partial Class formMetadata
         Me.TabMetadata.Controls.Add(Me.TabStationQualifier)
         Me.TabMetadata.Controls.Add(Me.TabScheduleClass)
         Me.TabMetadata.Controls.Add(Me.TabPhysicalFeature)
-        Me.TabMetadata.Location = New System.Drawing.Point(3, 27)
+        Me.TabMetadata.Controls.Add(Me.TabPaperArchive)
+        Me.TabMetadata.Location = New System.Drawing.Point(0, 27)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
         Me.TabMetadata.Size = New System.Drawing.Size(749, 476)
@@ -2856,6 +2878,176 @@ Partial Class formMetadata
         Me.lblFeatureEdate.TabIndex = 36
         Me.lblFeatureEdate.Text = "Begin Date"
         '
+        'TabPaperArchive
+        '
+        Me.TabPaperArchive.Controls.Add(Me.Label7)
+        Me.TabPaperArchive.Controls.Add(Me.GroupBox17)
+        Me.TabPaperArchive.Location = New System.Drawing.Point(4, 22)
+        Me.TabPaperArchive.Name = "TabPaperArchive"
+        Me.TabPaperArchive.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPaperArchive.Size = New System.Drawing.Size(741, 450)
+        Me.TabPaperArchive.TabIndex = 8
+        Me.TabPaperArchive.Text = "Paper Archive"
+        Me.TabPaperArchive.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(289, 45)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(175, 16)
+        Me.Label7.TabIndex = 11
+        Me.Label7.Text = "Paper Archive Definition"
+        '
+        'GroupBox17
+        '
+        Me.GroupBox17.Controls.Add(Me.GroupBox18)
+        Me.GroupBox17.Controls.Add(Me.GroupBox19)
+        Me.GroupBox17.Controls.Add(Me.txtFormDescription)
+        Me.GroupBox17.Controls.Add(Me.txtFormId)
+        Me.GroupBox17.Controls.Add(Me.lbldescri)
+        Me.GroupBox17.Controls.Add(Me.lblFormId)
+        Me.GroupBox17.Location = New System.Drawing.Point(101, 79)
+        Me.GroupBox17.Name = "GroupBox17"
+        Me.GroupBox17.Size = New System.Drawing.Size(525, 263)
+        Me.GroupBox17.TabIndex = 10
+        Me.GroupBox17.TabStop = False
+        Me.GroupBox17.Text = "Definitions"
+        '
+        'GroupBox18
+        '
+        Me.GroupBox18.Controls.Add(Me.cmdDeleteArchiveDef)
+        Me.GroupBox18.Controls.Add(Me.cmdUpdateArchiveDef)
+        Me.GroupBox18.Controls.Add(Me.cmdAddArchiveDef)
+        Me.GroupBox18.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox18.Location = New System.Drawing.Point(3, 193)
+        Me.GroupBox18.Name = "GroupBox18"
+        Me.GroupBox18.Size = New System.Drawing.Size(519, 34)
+        Me.GroupBox18.TabIndex = 63
+        Me.GroupBox18.TabStop = False
+        '
+        'cmdDeleteArchiveDef
+        '
+        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(356, 6)
+        Me.cmdDeleteArchiveDef.Name = "cmdDeleteArchiveDef"
+        Me.cmdDeleteArchiveDef.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteArchiveDef.TabIndex = 42
+        Me.cmdDeleteArchiveDef.Text = "Delete"
+        Me.cmdDeleteArchiveDef.UseVisualStyleBackColor = True
+        '
+        'cmdUpdateArchiveDef
+        '
+        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(211, 6)
+        Me.cmdUpdateArchiveDef.Name = "cmdUpdateArchiveDef"
+        Me.cmdUpdateArchiveDef.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateArchiveDef.TabIndex = 41
+        Me.cmdUpdateArchiveDef.Text = "Update"
+        Me.cmdUpdateArchiveDef.UseVisualStyleBackColor = True
+        '
+        'cmdAddArchiveDef
+        '
+        Me.cmdAddArchiveDef.Location = New System.Drawing.Point(66, 6)
+        Me.cmdAddArchiveDef.Name = "cmdAddArchiveDef"
+        Me.cmdAddArchiveDef.Size = New System.Drawing.Size(81, 25)
+        Me.cmdAddArchiveDef.TabIndex = 40
+        Me.cmdAddArchiveDef.Text = "AddNew"
+        Me.cmdAddArchiveDef.UseVisualStyleBackColor = True
+        '
+        'GroupBox19
+        '
+        Me.GroupBox19.Controls.Add(Me.Button7)
+        Me.GroupBox19.Controls.Add(Me.Button8)
+        Me.GroupBox19.Controls.Add(Me.Button9)
+        Me.GroupBox19.Controls.Add(Me.Button10)
+        Me.GroupBox19.Controls.Add(Me.TextBox1)
+        Me.GroupBox19.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox19.Location = New System.Drawing.Point(3, 227)
+        Me.GroupBox19.Name = "GroupBox19"
+        Me.GroupBox19.Size = New System.Drawing.Size(519, 33)
+        Me.GroupBox19.TabIndex = 62
+        Me.GroupBox19.TabStop = False
+        '
+        'Button7
+        '
+        Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(39, 10)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(40, 23)
+        Me.Button7.TabIndex = 50
+        Me.Button7.Text = "<"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(1, 10)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(40, 23)
+        Me.Button8.TabIndex = 49
+        Me.Button8.Text = "|<"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button9.Location = New System.Drawing.Point(479, 10)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(40, 23)
+        Me.Button9.TabIndex = 48
+        Me.Button9.Text = ">|"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button10.Location = New System.Drawing.Point(441, 10)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(40, 23)
+        Me.Button10.TabIndex = 47
+        Me.Button10.Text = ">"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(77, 11)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(365, 20)
+        Me.TextBox1.TabIndex = 46
+        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtFormDescription
+        '
+        Me.txtFormDescription.Location = New System.Drawing.Point(204, 116)
+        Me.txtFormDescription.Name = "txtFormDescription"
+        Me.txtFormDescription.Size = New System.Drawing.Size(154, 20)
+        Me.txtFormDescription.TabIndex = 18
+        '
+        'txtFormId
+        '
+        Me.txtFormId.Location = New System.Drawing.Point(204, 75)
+        Me.txtFormId.Name = "txtFormId"
+        Me.txtFormId.Size = New System.Drawing.Size(152, 20)
+        Me.txtFormId.TabIndex = 14
+        '
+        'lbldescri
+        '
+        Me.lbldescri.AutoSize = True
+        Me.lbldescri.Location = New System.Drawing.Point(140, 120)
+        Me.lbldescri.Name = "lbldescri"
+        Me.lbldescri.Size = New System.Drawing.Size(60, 13)
+        Me.lbldescri.TabIndex = 11
+        Me.lbldescri.Text = "Description"
+        '
+        'lblFormId
+        '
+        Me.lblFormId.AutoSize = True
+        Me.lblFormId.Location = New System.Drawing.Point(140, 79)
+        Me.lblFormId.Name = "lblFormId"
+        Me.lblFormId.Size = New System.Drawing.Size(44, 13)
+        Me.lblFormId.TabIndex = 0
+        Me.lblFormId.Text = "Form ID"
+        '
         'MenuMetadata
         '
         Me.MenuMetadata.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.HelpToolStripMenuItem})
@@ -2947,6 +3139,13 @@ Partial Class formMetadata
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPaperArchive.ResumeLayout(False)
+        Me.TabPaperArchive.PerformLayout()
+        Me.GroupBox17.ResumeLayout(False)
+        Me.GroupBox17.PerformLayout()
+        Me.GroupBox18.ResumeLayout(False)
+        Me.GroupBox19.ResumeLayout(False)
+        Me.GroupBox19.PerformLayout()
         Me.MenuMetadata.ResumeLayout(False)
         Me.MenuMetadata.PerformLayout()
         Me.ResumeLayout(False)
@@ -3217,4 +3416,21 @@ Partial Class formMetadata
     Friend WithEvents cmdLast6 As System.Windows.Forms.Button
     Friend WithEvents cmdNext6 As System.Windows.Forms.Button
     Friend WithEvents txtNav6 As System.Windows.Forms.TextBox
+    Friend WithEvents TabPaperArchive As System.Windows.Forms.TabPage
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox17 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox18 As System.Windows.Forms.GroupBox
+    Friend WithEvents cmdDeleteArchiveDef As System.Windows.Forms.Button
+    Friend WithEvents cmdUpdateArchiveDef As System.Windows.Forms.Button
+    Friend WithEvents cmdAddArchiveDef As System.Windows.Forms.Button
+    Friend WithEvents GroupBox19 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFormDescription As System.Windows.Forms.TextBox
+    Friend WithEvents lbldescri As System.Windows.Forms.Label
+    Friend WithEvents txtFormId As System.Windows.Forms.TextBox
+    Friend WithEvents lblFormId As System.Windows.Forms.Label
 End Class
