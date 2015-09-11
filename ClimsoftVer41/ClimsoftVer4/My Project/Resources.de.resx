@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="addNew1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MySql_Data" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MySql.Data.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="COIN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\COIN.GIF;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Bewerben</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Benutzer:</value>
+  </data>
+  <data name="Climate_Data_Management_System" xml:space="preserve">
+    <value>Klima-Daten-Management-System</value>
+  </data>
+  <data name="Hide_Database_Details" xml:space="preserve">
+    <value>Datenbankdetails ausblenden</value>
+  </data>
+  <data name="Show_Database_Details" xml:space="preserve">
+    <value>Datenbankdetails anzeigen</value>
+  </data>
+  <data name="Please_Wait" xml:space="preserve">
+    <value>Bitte warten Sie</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Zubehör</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Verwaltung</value>
+  </data>
+  <data name="Archive_Paper_Image" xml:space="preserve">
+    <value>Archiv-Papierbild</value>
+  </data>
+  <data name="AWS_Real_Time_Processing" xml:space="preserve">
+    <value>AWS-Echtzeit-Verarbeitung</value>
+  </data>
+  <data name="Climate_Data_Products" xml:space="preserve">
+    <value>Klima-Daten-Produkte</value>
+  </data>
+  <data name="Data_Entry" xml:space="preserve">
+    <value>Daten eingeben</value>
+  </data>
+  <data name="Data_Transfer_Operations" xml:space="preserve">
+    <value>Datenübermittlungen</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Einsatz</value>
+  </data>
+  <data name="Metadata_Information" xml:space="preserve">
+    <value>Metadaten-Informationen</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Produkte</value>
+  </data>
+  <data name="Quality_Control_Checks" xml:space="preserve">
+    <value>Qualitätskontrolle-Prüfungen</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Users_Administration" xml:space="preserve">
+    <value>Benutzeradministration</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schluss</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Calculation_of_dew_Point_and_RH" xml:space="preserve">
+    <value>Berechnung von Taupunkt und RH</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+  <data name="Data_Forms" xml:space="preserve">
+    <value>Datenformulare</value>
+  </data>
+  <data name="Generate_XML_Output" xml:space="preserve">
+    <value>Generieren der XML-Ausgabe</value>
+  </data>
+  <data name="Key_Entry" xml:space="preserve">
+    <value>Key-Eingabe</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Metadaten</value>
+  </data>
+  <data name="Modify_Forms" xml:space="preserve">
+    <value>Ändern von Formen</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="Paper_Archive" xml:space="preserve">
+    <value>Papier-Archiv</value>
+  </data>
+  <data name="Update_Element_Limits" xml:space="preserve">
+    <value>Update-Element-Grenzwerte</value>
+  </data>
+  <data name="User_Admin" xml:space="preserve">
+    <value>Benutzeradministration</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>Sprache auswählen</value>
+  </data>
+  <data name="Main_Menu" xml:space="preserve">
+    <value>Hauptmenü</value>
+  </data>
+  <data name="Attach_Uncoded_Data" xml:space="preserve">
+    <value>Unverschlüsselter Daten anfügen</value>
+  </data>
+  <data name="BBB" xml:space="preserve">
+    <value>BBB</value>
+  </data>
+  <data name="Character_Message" xml:space="preserve">
+    <value>Charakter-Nachricht</value>
+  </data>
+  <data name="Close1" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Coded_Output" xml:space="preserve">
+    <value>Codierten Ausgabe</value>
+  </data>
+  <data name="Crex_Editions_Number" xml:space="preserve">
+    <value>Crex-Editions-Reihe</value>
+  </data>
+  <data name="Crex_Table_Version_Number" xml:space="preserve">
+    <value>Crex-Tabelle-Versionsnummer </value>
+  </data>
+  <data name="Data_Category" xml:space="preserve">
+    <value>Daten-Kategorie</value>
+  </data>
+  <data name="Data_Category_Sub_Category" xml:space="preserve">
+    <value>Daten Kategorie Sub Kategorie</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Encode" xml:space="preserve">
+    <value>Codieren</value>
+  </data>
+  <data name="Evaporation" xml:space="preserve">
+    <value>Verdampfung</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="Help1" xml:space="preserve">
+    <value>?</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Stunde </value>
+  </data>
+  <data name="Include_Check_Digit" xml:space="preserve">
+    <value>Prüfziffer enthalten</value>
+  </data>
+  <data name="Mail_Applications" xml:space="preserve">
+    <value>E-Mail-Programme</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Minute</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>MONAT</value>
+  </data>
+  <data name="Number_Of_Subsets" xml:space="preserve">
+    <value>Anzahl der Teilmengen</value>
+  </data>
+  <data name="Originating_Generating_Center" xml:space="preserve">
+    <value>Center mit Ursprung/generieren</value>
+  </data>
+  <data name="Originating_Generating_sub_Center" xml:space="preserve">
+    <value>Sub-Center mit Ursprung/generieren</value>
+  </data>
+  <data name="Precipitation" xml:space="preserve">
+    <value>Niederschlag</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Druck </value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Neu starten</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Versenden</value>
+  </data>
+  <data name="Sending_Options" xml:space="preserve">
+    <value>Sendeoptionen</value>
+  </data>
+  <data name="Sequence_Number" xml:space="preserve">
+    <value>Sequenznummer </value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen </value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>Bahnhof</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Betreff </value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperatur </value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>template</value>
+  </data>
+  <data name="View_Import_Export" xml:space="preserve">
+    <value>Ansicht/Import/Export</value>
+  </data>
+  <data name="Visibility" xml:space="preserve">
+    <value>Sichtbarkeit</value>
+  </data>
+  <data name="Wind" xml:space="preserve">
+    <value>Verwehen</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>JAHR</value>
+  </data>
+</root>
