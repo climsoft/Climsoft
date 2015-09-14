@@ -154,6 +154,19 @@
 
         If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows - 1 '"Record 1 of " & maxRows
     End Sub
+    Sub populatePaperArchiveDefinition(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+
+        txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
+        txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
+        txtImstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
+        txtScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
+        txtHeight.Text = ds.Tables(frm).Rows(num).Item("height")
+        txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
+        txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
+
+        If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows - 1 '"Record 1 of " & maxRows
+    End Sub
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         rec = 0
         populateForm("station", rec, Kount)
@@ -509,5 +522,67 @@ Err:
         Exit Sub
 Err:
         MsgBox(Err.Number & " : " & Err.Description)
+    End Sub
+
+    Private Sub cmdDeleteArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdDeleteArchiveDef.Click
+        If DeleteRecord("paperarchive efinition", rec) Then
+
+        End If
+    End Sub
+
+    Private Sub cmdViewStation_Click(sender As Object, e As EventArgs) Handles cmdViewStation.Click
+
+        RecordsView("station")
+
+    End Sub
+    Sub RecordsView(tbl As String)
+
+        Dim dstn As New DataSet
+        Dim sql As String
+        sql = "SELECT * FROM  " & tbl
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        dstn.Clear()
+
+        da.Fill(dstn, tbl)
+        formDataView.Show()
+        formDataView.DataGridView.DataSource = dstn
+        formDataView.DataGridView.DataMember = tbl
+        formDataView.DataGridView.Refresh()
+
+        formDataView.DataGridView.Dock = DockStyle.Top
+
+    End Sub
+
+
+    Private Sub cmdViewElements_Click(sender As Object, e As EventArgs) Handles cmdViewElements.Click
+        RecordsView("obselement")
+    End Sub
+
+    Private Sub cmdViewStElement_Click(sender As Object, e As EventArgs) Handles cmdViewStElement.Click
+        RecordsView("stationelement")
+    End Sub
+
+    Private Sub cmdViewInstrument_Click(sender As Object, e As EventArgs) Handles cmdViewInstrument.Click
+        RecordsView("instrument")
+    End Sub
+
+    Private Sub cmdViewHistory_Click(sender As Object, e As EventArgs) Handles cmdViewHistory.Click
+        RecordsView("stationlocationhistory")
+    End Sub
+
+    Private Sub cmdDeleteView_Click(sender As Object, e As EventArgs) Handles cmdDeleteView.Click
+        RecordsView("stationqualifier")
+    End Sub
+
+    Private Sub cmdViewScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdViewScheduleClass.Click
+        RecordsView("obsscheduleclass")
+    End Sub
+
+    Private Sub cmdViewFeature_Click(sender As Object, e As EventArgs) Handles cmdViewFeature.Click
+        RecordsView("physicalfeature")
+    End Sub
+
+    Private Sub cmdViewPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdViewPaperArchive.Click
+        RecordsView("paperarchivedefinition")
     End Sub
 End Class

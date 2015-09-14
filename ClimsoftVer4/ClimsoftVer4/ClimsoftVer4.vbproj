@@ -118,6 +118,12 @@
     <Compile Include="formDaily2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formDataView.Designer.vb">
+      <DependentUpon>formDataView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDataView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formMetadata.Designer.vb">
       <DependentUpon>formMetadata.vb</DependentUpon>
     </Compile>
@@ -353,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDatabaseConnect.fr.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDataView.resx">
+      <DependentUpon>formDataView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formElement.de.resx">
       <DependentUpon>formElement.vb</DependentUpon>
