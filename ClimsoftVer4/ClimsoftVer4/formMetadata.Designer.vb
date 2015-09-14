@@ -22,14 +22,16 @@ Partial Class formMetadata
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formMetadata))
         Me.TabMetadata = New System.Windows.Forms.TabControl()
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmdImport = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdView = New System.Windows.Forms.Button()
+        Me.cmdViewStation = New System.Windows.Forms.Button()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdAddNew = New System.Windows.Forms.Button()
@@ -303,6 +305,7 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdViewPaperArchive = New System.Windows.Forms.Button()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -357,10 +360,10 @@ Partial Class formMetadata
         Me.TabMetadata.Controls.Add(Me.TabScheduleClass)
         Me.TabMetadata.Controls.Add(Me.TabPhysicalFeature)
         Me.TabMetadata.Controls.Add(Me.TabPaperArchive)
-        Me.TabMetadata.Location = New System.Drawing.Point(0, 27)
+        Me.TabMetadata.Location = New System.Drawing.Point(3, 27)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
-        Me.TabMetadata.Size = New System.Drawing.Size(749, 476)
+        Me.TabMetadata.Size = New System.Drawing.Size(748, 476)
         Me.TabMetadata.TabIndex = 0
         '
         'TabStation
@@ -370,7 +373,7 @@ Partial Class formMetadata
         Me.TabStation.Location = New System.Drawing.Point(4, 22)
         Me.TabStation.Name = "TabStation"
         Me.TabStation.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStation.Size = New System.Drawing.Size(741, 450)
+        Me.TabStation.Size = New System.Drawing.Size(740, 450)
         Me.TabStation.TabIndex = 0
         Me.TabStation.Text = "Station"
         Me.TabStation.UseVisualStyleBackColor = True
@@ -438,8 +441,9 @@ Partial Class formMetadata
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Panel2.Controls.Add(Me.cmdImport)
         Me.Panel2.Controls.Add(Me.cmdClear)
-        Me.Panel2.Controls.Add(Me.cmdView)
+        Me.Panel2.Controls.Add(Me.cmdViewStation)
         Me.Panel2.Controls.Add(Me.cmdDelete)
         Me.Panel2.Controls.Add(Me.cmdUpdate)
         Me.Panel2.Controls.Add(Me.cmdAddNew)
@@ -449,27 +453,36 @@ Partial Class formMetadata
         Me.Panel2.Size = New System.Drawing.Size(698, 25)
         Me.Panel2.TabIndex = 37
         '
+        'cmdImport
+        '
+        Me.cmdImport.Location = New System.Drawing.Point(578, -1)
+        Me.cmdImport.Name = "cmdImport"
+        Me.cmdImport.Size = New System.Drawing.Size(81, 27)
+        Me.cmdImport.TabIndex = 37
+        Me.cmdImport.Text = "Import"
+        Me.cmdImport.UseVisualStyleBackColor = True
+        '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(324, 1)
+        Me.cmdClear.Location = New System.Drawing.Point(251, 1)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(81, 27)
         Me.cmdClear.TabIndex = 36
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'cmdView
+        'cmdViewStation
         '
-        Me.cmdView.Location = New System.Drawing.Point(550, -1)
-        Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(81, 27)
-        Me.cmdView.TabIndex = 35
-        Me.cmdView.Text = "View"
-        Me.cmdView.UseVisualStyleBackColor = True
+        Me.cmdViewStation.Location = New System.Drawing.Point(469, -1)
+        Me.cmdViewStation.Name = "cmdViewStation"
+        Me.cmdViewStation.Size = New System.Drawing.Size(81, 27)
+        Me.cmdViewStation.TabIndex = 35
+        Me.cmdViewStation.Text = "View"
+        Me.cmdViewStation.UseVisualStyleBackColor = True
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(441, -1)
+        Me.cmdDelete.Location = New System.Drawing.Point(360, -1)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(81, 27)
         Me.cmdDelete.TabIndex = 34
@@ -478,7 +491,7 @@ Partial Class formMetadata
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(215, -1)
+        Me.cmdUpdate.Location = New System.Drawing.Point(142, -1)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(81, 27)
         Me.cmdUpdate.TabIndex = 33
@@ -487,7 +500,7 @@ Partial Class formMetadata
         '
         'cmdAddNew
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(106, -1)
+        Me.cmdAddNew.Location = New System.Drawing.Point(33, -1)
         Me.cmdAddNew.Name = "cmdAddNew"
         Me.cmdAddNew.Size = New System.Drawing.Size(81, 27)
         Me.cmdAddNew.TabIndex = 32
@@ -511,50 +524,54 @@ Partial Class formMetadata
         '
         'btnMovePrevious
         '
+        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMovePrevious.Location = New System.Drawing.Point(38, -1)
         Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
         Me.btnMovePrevious.TabIndex = 43
-        Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
         'btnMoveFirst
         '
+        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMoveFirst.Location = New System.Drawing.Point(-1, -1)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 42
-        Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
         'btnMoveLast
         '
+        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMoveLast.Location = New System.Drawing.Point(667, -1)
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(32, 23)
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 41
-        Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'txtRecNumber
         '
-        Me.txtRecNumber.Location = New System.Drawing.Point(84, 0)
+        Me.txtRecNumber.Location = New System.Drawing.Point(78, 0)
         Me.txtRecNumber.Name = "txtRecNumber"
-        Me.txtRecNumber.Size = New System.Drawing.Size(546, 20)
+        Me.txtRecNumber.Size = New System.Drawing.Size(555, 20)
         Me.txtRecNumber.TabIndex = 40
         Me.txtRecNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnMoveNext
         '
+        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMoveNext.Location = New System.Drawing.Point(632, -1)
         Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveNext.TabIndex = 39
-        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'txtClosingDate
@@ -781,7 +798,7 @@ Partial Class formMetadata
         Me.TabElement.Location = New System.Drawing.Point(4, 22)
         Me.TabElement.Name = "TabElement"
         Me.TabElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabElement.Size = New System.Drawing.Size(741, 450)
+        Me.TabElement.Size = New System.Drawing.Size(740, 450)
         Me.TabElement.TabIndex = 1
         Me.TabElement.Text = "Element"
         Me.TabElement.UseVisualStyleBackColor = True
@@ -890,42 +907,46 @@ Partial Class formMetadata
         '
         'cmdPrevoius
         '
+        Me.cmdPrevoius.BackgroundImage = CType(resources.GetObject("cmdPrevoius.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrevoius.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrevoius.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrevoius.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrevoius.Name = "cmdPrevoius"
         Me.cmdPrevoius.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrevoius.TabIndex = 50
-        Me.cmdPrevoius.Text = "<"
         Me.cmdPrevoius.UseVisualStyleBackColor = True
         '
         'cmdFirstRecord
         '
+        Me.cmdFirstRecord.BackgroundImage = CType(resources.GetObject("cmdFirstRecord.BackgroundImage"), System.Drawing.Image)
+        Me.cmdFirstRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirstRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdFirstRecord.Location = New System.Drawing.Point(1, 10)
         Me.cmdFirstRecord.Name = "cmdFirstRecord"
         Me.cmdFirstRecord.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirstRecord.TabIndex = 49
-        Me.cmdFirstRecord.Text = "|<"
         Me.cmdFirstRecord.UseVisualStyleBackColor = True
         '
         'cmdLastRecord
         '
+        Me.cmdLastRecord.BackgroundImage = CType(resources.GetObject("cmdLastRecord.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLastRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLastRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLastRecord.Location = New System.Drawing.Point(541, 10)
         Me.cmdLastRecord.Name = "cmdLastRecord"
         Me.cmdLastRecord.Size = New System.Drawing.Size(40, 23)
         Me.cmdLastRecord.TabIndex = 48
-        Me.cmdLastRecord.Text = ">|"
         Me.cmdLastRecord.UseVisualStyleBackColor = True
         '
         'Button4
         '
+        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.Location = New System.Drawing.Point(505, 10)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(40, 23)
         Me.Button4.TabIndex = 47
-        Me.Button4.Text = ">"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'txtElementNavigator
@@ -1099,7 +1120,7 @@ Partial Class formMetadata
         Me.TabStationElement.Location = New System.Drawing.Point(4, 22)
         Me.TabStationElement.Name = "TabStationElement"
         Me.TabStationElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationElement.Size = New System.Drawing.Size(741, 450)
+        Me.TabStationElement.Size = New System.Drawing.Size(740, 450)
         Me.TabStationElement.TabIndex = 2
         Me.TabStationElement.Text = "Station Element"
         Me.TabStationElement.UseVisualStyleBackColor = True
@@ -1214,42 +1235,46 @@ Partial Class formMetadata
         '
         'cmdPrev1
         '
+        Me.cmdPrev1.BackgroundImage = CType(resources.GetObject("cmdPrev1.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrev1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrev1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrev1.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrev1.Name = "cmdPrev1"
         Me.cmdPrev1.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrev1.TabIndex = 50
-        Me.cmdPrev1.Text = "<"
         Me.cmdPrev1.UseVisualStyleBackColor = True
         '
         'cmdfiratRec1
         '
+        Me.cmdfiratRec1.BackgroundImage = CType(resources.GetObject("cmdfiratRec1.BackgroundImage"), System.Drawing.Image)
+        Me.cmdfiratRec1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdfiratRec1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdfiratRec1.Location = New System.Drawing.Point(1, 10)
         Me.cmdfiratRec1.Name = "cmdfiratRec1"
         Me.cmdfiratRec1.Size = New System.Drawing.Size(40, 23)
         Me.cmdfiratRec1.TabIndex = 49
-        Me.cmdfiratRec1.Text = "|<"
         Me.cmdfiratRec1.UseVisualStyleBackColor = True
         '
         'cmdLast1
         '
+        Me.cmdLast1.BackgroundImage = CType(resources.GetObject("cmdLast1.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast1.Location = New System.Drawing.Point(541, 10)
         Me.cmdLast1.Name = "cmdLast1"
         Me.cmdLast1.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast1.TabIndex = 48
-        Me.cmdLast1.Text = ">|"
         Me.cmdLast1.UseVisualStyleBackColor = True
         '
         'cmdNext1
         '
+        Me.cmdNext1.BackgroundImage = CType(resources.GetObject("cmdNext1.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext1.Location = New System.Drawing.Point(505, 10)
         Me.cmdNext1.Name = "cmdNext1"
         Me.cmdNext1.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext1.TabIndex = 47
-        Me.cmdNext1.Text = ">"
         Me.cmdNext1.UseVisualStyleBackColor = True
         '
         'txtNavigator1
@@ -1382,7 +1407,7 @@ Partial Class formMetadata
         Me.TabInstrument.Location = New System.Drawing.Point(4, 22)
         Me.TabInstrument.Name = "TabInstrument"
         Me.TabInstrument.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInstrument.Size = New System.Drawing.Size(741, 450)
+        Me.TabInstrument.Size = New System.Drawing.Size(740, 450)
         Me.TabInstrument.TabIndex = 3
         Me.TabInstrument.Text = "Instrument"
         Me.TabInstrument.UseVisualStyleBackColor = True
@@ -1499,49 +1524,53 @@ Partial Class formMetadata
         '
         'cmdPrev2
         '
+        Me.cmdPrev2.BackgroundImage = CType(resources.GetObject("cmdPrev2.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrev2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrev2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrev2.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrev2.Name = "cmdPrev2"
         Me.cmdPrev2.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrev2.TabIndex = 50
-        Me.cmdPrev2.Text = "<"
         Me.cmdPrev2.UseVisualStyleBackColor = True
         '
         'cmdFirst1
         '
+        Me.cmdFirst1.BackgroundImage = CType(resources.GetObject("cmdFirst1.BackgroundImage"), System.Drawing.Image)
+        Me.cmdFirst1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirst1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdFirst1.Location = New System.Drawing.Point(1, 10)
         Me.cmdFirst1.Name = "cmdFirst1"
         Me.cmdFirst1.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirst1.TabIndex = 49
-        Me.cmdFirst1.Text = "|<"
         Me.cmdFirst1.UseVisualStyleBackColor = True
         '
         'cmdLast2
         '
+        Me.cmdLast2.BackgroundImage = CType(resources.GetObject("cmdLast2.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast2.Location = New System.Drawing.Point(686, 10)
         Me.cmdLast2.Name = "cmdLast2"
         Me.cmdLast2.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast2.TabIndex = 48
-        Me.cmdLast2.Text = ">|"
         Me.cmdLast2.UseVisualStyleBackColor = True
         '
         'cmdNext2
         '
+        Me.cmdNext2.BackgroundImage = CType(resources.GetObject("cmdNext2.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext2.Location = New System.Drawing.Point(650, 10)
         Me.cmdNext2.Name = "cmdNext2"
         Me.cmdNext2.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext2.TabIndex = 47
-        Me.cmdNext2.Text = ">"
         Me.cmdNext2.UseVisualStyleBackColor = True
         '
         'txtNavigator2
         '
         Me.txtNavigator2.Location = New System.Drawing.Point(76, 11)
         Me.txtNavigator2.Name = "txtNavigator2"
-        Me.txtNavigator2.Size = New System.Drawing.Size(574, 20)
+        Me.txtNavigator2.Size = New System.Drawing.Size(575, 20)
         Me.txtNavigator2.TabIndex = 46
         Me.txtNavigator2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1774,7 +1803,7 @@ Partial Class formMetadata
         Me.TabStationLocationHistory.Location = New System.Drawing.Point(4, 22)
         Me.TabStationLocationHistory.Name = "TabStationLocationHistory"
         Me.TabStationLocationHistory.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationLocationHistory.Size = New System.Drawing.Size(741, 450)
+        Me.TabStationLocationHistory.Size = New System.Drawing.Size(740, 450)
         Me.TabStationLocationHistory.TabIndex = 4
         Me.TabStationLocationHistory.Text = "Station Location History"
         Me.TabStationLocationHistory.UseVisualStyleBackColor = True
@@ -1889,49 +1918,53 @@ Partial Class formMetadata
         '
         'cmdprev3
         '
+        Me.cmdprev3.BackgroundImage = CType(resources.GetObject("cmdprev3.BackgroundImage"), System.Drawing.Image)
+        Me.cmdprev3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdprev3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdprev3.Location = New System.Drawing.Point(39, 10)
         Me.cmdprev3.Name = "cmdprev3"
         Me.cmdprev3.Size = New System.Drawing.Size(40, 23)
         Me.cmdprev3.TabIndex = 50
-        Me.cmdprev3.Text = "<"
         Me.cmdprev3.UseVisualStyleBackColor = True
         '
         'cmdfirst3
         '
+        Me.cmdfirst3.BackgroundImage = CType(resources.GetObject("cmdfirst3.BackgroundImage"), System.Drawing.Image)
+        Me.cmdfirst3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdfirst3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdfirst3.Location = New System.Drawing.Point(1, 10)
         Me.cmdfirst3.Name = "cmdfirst3"
         Me.cmdfirst3.Size = New System.Drawing.Size(40, 23)
         Me.cmdfirst3.TabIndex = 49
-        Me.cmdfirst3.Text = "|<"
         Me.cmdfirst3.UseVisualStyleBackColor = True
         '
         'cmdLast3
         '
+        Me.cmdLast3.BackgroundImage = CType(resources.GetObject("cmdLast3.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast3.Location = New System.Drawing.Point(589, 10)
         Me.cmdLast3.Name = "cmdLast3"
         Me.cmdLast3.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast3.TabIndex = 48
-        Me.cmdLast3.Text = ">|"
         Me.cmdLast3.UseVisualStyleBackColor = True
         '
         'cmdNext3
         '
+        Me.cmdNext3.BackgroundImage = CType(resources.GetObject("cmdNext3.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext3.Location = New System.Drawing.Point(553, 10)
         Me.cmdNext3.Name = "cmdNext3"
         Me.cmdNext3.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext3.TabIndex = 47
-        Me.cmdNext3.Text = ">"
         Me.cmdNext3.UseVisualStyleBackColor = True
         '
         'txtNav2
         '
-        Me.txtNav2.Location = New System.Drawing.Point(76, 11)
+        Me.txtNav2.Location = New System.Drawing.Point(77, 11)
         Me.txtNav2.Name = "txtNav2"
-        Me.txtNav2.Size = New System.Drawing.Size(480, 20)
+        Me.txtNav2.Size = New System.Drawing.Size(477, 20)
         Me.txtNav2.TabIndex = 46
         Me.txtNav2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -2146,7 +2179,7 @@ Partial Class formMetadata
         Me.TabStationQualifier.Location = New System.Drawing.Point(4, 22)
         Me.TabStationQualifier.Name = "TabStationQualifier"
         Me.TabStationQualifier.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationQualifier.Size = New System.Drawing.Size(741, 450)
+        Me.TabStationQualifier.Size = New System.Drawing.Size(740, 450)
         Me.TabStationQualifier.TabIndex = 5
         Me.TabStationQualifier.Text = "Station Qualifier"
         Me.TabStationQualifier.UseVisualStyleBackColor = True
@@ -2259,42 +2292,46 @@ Partial Class formMetadata
         '
         'cmdPrev4
         '
+        Me.cmdPrev4.BackgroundImage = CType(resources.GetObject("cmdPrev4.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrev4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrev4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrev4.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrev4.Name = "cmdPrev4"
         Me.cmdPrev4.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrev4.TabIndex = 50
-        Me.cmdPrev4.Text = "<"
         Me.cmdPrev4.UseVisualStyleBackColor = True
         '
         'cmdFirst4
         '
+        Me.cmdFirst4.BackgroundImage = CType(resources.GetObject("cmdFirst4.BackgroundImage"), System.Drawing.Image)
+        Me.cmdFirst4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirst4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdFirst4.Location = New System.Drawing.Point(1, 10)
         Me.cmdFirst4.Name = "cmdFirst4"
         Me.cmdFirst4.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirst4.TabIndex = 49
-        Me.cmdFirst4.Text = "|<"
         Me.cmdFirst4.UseVisualStyleBackColor = True
         '
         'cmdLast4
         '
+        Me.cmdLast4.BackgroundImage = CType(resources.GetObject("cmdLast4.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast4.Location = New System.Drawing.Point(556, 10)
         Me.cmdLast4.Name = "cmdLast4"
         Me.cmdLast4.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast4.TabIndex = 48
-        Me.cmdLast4.Text = ">|"
         Me.cmdLast4.UseVisualStyleBackColor = True
         '
         'cmdNext4
         '
+        Me.cmdNext4.BackgroundImage = CType(resources.GetObject("cmdNext4.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext4.Location = New System.Drawing.Point(520, 10)
         Me.cmdNext4.Name = "cmdNext4"
         Me.cmdNext4.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext4.TabIndex = 47
-        Me.cmdNext4.Text = ">"
         Me.cmdNext4.UseVisualStyleBackColor = True
         '
         'txtNav4
@@ -2409,7 +2446,7 @@ Partial Class formMetadata
         Me.TabScheduleClass.Location = New System.Drawing.Point(4, 22)
         Me.TabScheduleClass.Name = "TabScheduleClass"
         Me.TabScheduleClass.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabScheduleClass.Size = New System.Drawing.Size(741, 450)
+        Me.TabScheduleClass.Size = New System.Drawing.Size(740, 450)
         Me.TabScheduleClass.TabIndex = 6
         Me.TabScheduleClass.Text = "Schedule Class"
         Me.TabScheduleClass.UseVisualStyleBackColor = True
@@ -2516,42 +2553,46 @@ Partial Class formMetadata
         '
         'cmdPrev5
         '
+        Me.cmdPrev5.BackgroundImage = CType(resources.GetObject("cmdPrev5.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrev5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrev5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrev5.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrev5.Name = "cmdPrev5"
         Me.cmdPrev5.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrev5.TabIndex = 50
-        Me.cmdPrev5.Text = "<"
         Me.cmdPrev5.UseVisualStyleBackColor = True
         '
         'cmdFirst5
         '
+        Me.cmdFirst5.BackgroundImage = CType(resources.GetObject("cmdFirst5.BackgroundImage"), System.Drawing.Image)
+        Me.cmdFirst5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirst5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdFirst5.Location = New System.Drawing.Point(1, 10)
         Me.cmdFirst5.Name = "cmdFirst5"
         Me.cmdFirst5.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirst5.TabIndex = 49
-        Me.cmdFirst5.Text = "|<"
         Me.cmdFirst5.UseVisualStyleBackColor = True
         '
         'cmdLast5
         '
+        Me.cmdLast5.BackgroundImage = CType(resources.GetObject("cmdLast5.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast5.Location = New System.Drawing.Point(479, 10)
         Me.cmdLast5.Name = "cmdLast5"
         Me.cmdLast5.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast5.TabIndex = 48
-        Me.cmdLast5.Text = ">|"
         Me.cmdLast5.UseVisualStyleBackColor = True
         '
         'cmdNext5
         '
+        Me.cmdNext5.BackgroundImage = CType(resources.GetObject("cmdNext5.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext5.Location = New System.Drawing.Point(441, 10)
         Me.cmdNext5.Name = "cmdNext5"
         Me.cmdNext5.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext5.TabIndex = 47
-        Me.cmdNext5.Text = ">"
         Me.cmdNext5.UseVisualStyleBackColor = True
         '
         'txtNav5
@@ -2618,7 +2659,7 @@ Partial Class formMetadata
         Me.TabPhysicalFeature.Location = New System.Drawing.Point(4, 22)
         Me.TabPhysicalFeature.Name = "TabPhysicalFeature"
         Me.TabPhysicalFeature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPhysicalFeature.Size = New System.Drawing.Size(741, 450)
+        Me.TabPhysicalFeature.Size = New System.Drawing.Size(740, 450)
         Me.TabPhysicalFeature.TabIndex = 7
         Me.TabPhysicalFeature.Text = "Physical Feature"
         Me.TabPhysicalFeature.UseVisualStyleBackColor = True
@@ -2740,42 +2781,46 @@ Partial Class formMetadata
         '
         'cmdPrev6
         '
+        Me.cmdPrev6.BackgroundImage = CType(resources.GetObject("cmdPrev6.BackgroundImage"), System.Drawing.Image)
+        Me.cmdPrev6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrev6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPrev6.Location = New System.Drawing.Point(39, 10)
         Me.cmdPrev6.Name = "cmdPrev6"
         Me.cmdPrev6.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrev6.TabIndex = 50
-        Me.cmdPrev6.Text = "<"
         Me.cmdPrev6.UseVisualStyleBackColor = True
         '
         'cmdFirst6
         '
+        Me.cmdFirst6.BackgroundImage = CType(resources.GetObject("cmdFirst6.BackgroundImage"), System.Drawing.Image)
+        Me.cmdFirst6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirst6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdFirst6.Location = New System.Drawing.Point(1, 10)
         Me.cmdFirst6.Name = "cmdFirst6"
         Me.cmdFirst6.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirst6.TabIndex = 49
-        Me.cmdFirst6.Text = "|<"
         Me.cmdFirst6.UseVisualStyleBackColor = True
         '
         'cmdLast6
         '
+        Me.cmdLast6.BackgroundImage = CType(resources.GetObject("cmdLast6.BackgroundImage"), System.Drawing.Image)
+        Me.cmdLast6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLast6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdLast6.Location = New System.Drawing.Point(531, 10)
         Me.cmdLast6.Name = "cmdLast6"
         Me.cmdLast6.Size = New System.Drawing.Size(40, 23)
         Me.cmdLast6.TabIndex = 48
-        Me.cmdLast6.Text = ">|"
         Me.cmdLast6.UseVisualStyleBackColor = True
         '
         'cmdNext6
         '
+        Me.cmdNext6.BackgroundImage = CType(resources.GetObject("cmdNext6.BackgroundImage"), System.Drawing.Image)
+        Me.cmdNext6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdNext6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdNext6.Location = New System.Drawing.Point(495, 10)
         Me.cmdNext6.Name = "cmdNext6"
         Me.cmdNext6.Size = New System.Drawing.Size(40, 23)
         Me.cmdNext6.TabIndex = 47
-        Me.cmdNext6.Text = ">"
         Me.cmdNext6.UseVisualStyleBackColor = True
         '
         'txtNav6
@@ -2885,7 +2930,7 @@ Partial Class formMetadata
         Me.TabPaperArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabPaperArchive.Name = "TabPaperArchive"
         Me.TabPaperArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPaperArchive.Size = New System.Drawing.Size(741, 450)
+        Me.TabPaperArchive.Size = New System.Drawing.Size(740, 450)
         Me.TabPaperArchive.TabIndex = 8
         Me.TabPaperArchive.Text = "Paper Archive"
         Me.TabPaperArchive.UseVisualStyleBackColor = True
@@ -2917,6 +2962,7 @@ Partial Class formMetadata
         '
         'GroupBox18
         '
+        Me.GroupBox18.Controls.Add(Me.cmdViewPaperArchive)
         Me.GroupBox18.Controls.Add(Me.cmdDeleteArchiveDef)
         Me.GroupBox18.Controls.Add(Me.cmdUpdateArchiveDef)
         Me.GroupBox18.Controls.Add(Me.cmdAddArchiveDef)
@@ -2929,7 +2975,7 @@ Partial Class formMetadata
         '
         'cmdDeleteArchiveDef
         '
-        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(356, 6)
+        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(275, 6)
         Me.cmdDeleteArchiveDef.Name = "cmdDeleteArchiveDef"
         Me.cmdDeleteArchiveDef.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteArchiveDef.TabIndex = 42
@@ -2938,7 +2984,7 @@ Partial Class formMetadata
         '
         'cmdUpdateArchiveDef
         '
-        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(211, 6)
+        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(153, 6)
         Me.cmdUpdateArchiveDef.Name = "cmdUpdateArchiveDef"
         Me.cmdUpdateArchiveDef.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateArchiveDef.TabIndex = 41
@@ -2947,7 +2993,7 @@ Partial Class formMetadata
         '
         'cmdAddArchiveDef
         '
-        Me.cmdAddArchiveDef.Location = New System.Drawing.Point(66, 6)
+        Me.cmdAddArchiveDef.Location = New System.Drawing.Point(31, 6)
         Me.cmdAddArchiveDef.Name = "cmdAddArchiveDef"
         Me.cmdAddArchiveDef.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddArchiveDef.TabIndex = 40
@@ -2970,42 +3016,46 @@ Partial Class formMetadata
         '
         'Button7
         '
+        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
+        Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button7.Location = New System.Drawing.Point(39, 10)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(40, 23)
         Me.Button7.TabIndex = 50
-        Me.Button7.Text = "<"
         Me.Button7.UseVisualStyleBackColor = True
         '
         'Button8
         '
+        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
+        Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button8.Location = New System.Drawing.Point(1, 10)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(40, 23)
         Me.Button8.TabIndex = 49
-        Me.Button8.Text = "|<"
         Me.Button8.UseVisualStyleBackColor = True
         '
         'Button9
         '
+        Me.Button9.BackgroundImage = CType(resources.GetObject("Button9.BackgroundImage"), System.Drawing.Image)
+        Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button9.Location = New System.Drawing.Point(479, 10)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(40, 23)
         Me.Button9.TabIndex = 48
-        Me.Button9.Text = ">|"
         Me.Button9.UseVisualStyleBackColor = True
         '
         'Button10
         '
+        Me.Button10.BackgroundImage = CType(resources.GetObject("Button10.BackgroundImage"), System.Drawing.Image)
+        Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button10.Location = New System.Drawing.Point(441, 10)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(40, 23)
         Me.Button10.TabIndex = 47
-        Me.Button10.Text = ">"
         Me.Button10.UseVisualStyleBackColor = True
         '
         'TextBox1
@@ -3068,6 +3118,15 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
+        '
+        'cmdViewPaperArchive
+        '
+        Me.cmdViewPaperArchive.Location = New System.Drawing.Point(397, 6)
+        Me.cmdViewPaperArchive.Name = "cmdViewPaperArchive"
+        Me.cmdViewPaperArchive.Size = New System.Drawing.Size(81, 25)
+        Me.cmdViewPaperArchive.TabIndex = 43
+        Me.cmdViewPaperArchive.Text = "View"
+        Me.cmdViewPaperArchive.UseVisualStyleBackColor = True
         '
         'formMetadata
         '
@@ -3320,7 +3379,7 @@ Partial Class formMetadata
     Friend WithEvents txtOpenDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents cmdView As System.Windows.Forms.Button
+    Friend WithEvents cmdViewStation As System.Windows.Forms.Button
     Friend WithEvents cmdDelete As System.Windows.Forms.Button
     Friend WithEvents cmdUpdate As System.Windows.Forms.Button
     Friend WithEvents cmdAddNew As System.Windows.Forms.Button
@@ -3433,4 +3492,6 @@ Partial Class formMetadata
     Friend WithEvents lbldescri As System.Windows.Forms.Label
     Friend WithEvents txtFormId As System.Windows.Forms.TextBox
     Friend WithEvents lblFormId As System.Windows.Forms.Label
+    Friend WithEvents cmdImport As System.Windows.Forms.Button
+    Friend WithEvents cmdViewPaperArchive As System.Windows.Forms.Button
 End Class
