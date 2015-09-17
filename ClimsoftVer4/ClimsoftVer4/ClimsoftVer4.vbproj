@@ -124,6 +124,12 @@
     <Compile Include="formDataView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formImports.Designer.vb">
+      <DependentUpon>formImports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formImports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formMetadata.Designer.vb">
       <DependentUpon>formMetadata.vb</DependentUpon>
     </Compile>
@@ -374,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formHourly.fr.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formImports.resx">
+      <DependentUpon>formImports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMetadata.resx">
       <DependentUpon>formMetadata.vb</DependentUpon>

@@ -109,6 +109,7 @@
 
     Sub populateForm(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
+
         txtstationId.Text = ds.Tables(frm).Rows(num).Item("stationId")
         txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
@@ -188,7 +189,7 @@
 
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
 
-        rec = Kount - 1
+        rec = Kount - 2
         populateForm("station", rec, Kount)
     End Sub
 
@@ -361,7 +362,7 @@ Err:
     End Sub
 
     Private Sub cmdLastRecord_Click(sender As Object, e As EventArgs) Handles cmdLastRecord.Click
-        rec = Kount - 1
+        rec = Kount - 2
         populateElementMetadata("obselement", rec, Kount)
     End Sub
 
@@ -584,5 +585,118 @@ Err:
 
     Private Sub cmdViewPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdViewPaperArchive.Click
         RecordsView("paperarchivedefinition")
+    End Sub
+
+    Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        'On Error GoTo err
+        'Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser("C:\Climsoft Project\Climsoft V4\Data\stations.txt")
+        '    MyReader.TextFieldType = FileIO.FieldType.Delimited
+        '    MyReader.SetDelimiters(",")
+        '    Dim num As Integer = 1
+        '    Dim lin As Integer
+        '    Dim currentRow As String()
+        '    Dim currentField As String
+        '    Dim row As String()
+
+        '    ' Define the Data GridView Columns
+        '    formImports.DataGridView1.ColumnCount = 2
+        '    formImports.DataGridView1.Columns(0).Name = "Import Field No"
+        '    formImports.DataGridView1.Columns(1).Name = "Import Field Name"
+
+        '    ' Populate the Data GridView with column headers from the import station text file
+
+        '    lin = MyReader.LineNumber()
+        '    currentRow = MyReader.ReadFields()
+
+        '    If lin = 1 Then ' The header row
+        '        For Each currentField In currentRow
+        '            row = New String() {num, currentField}
+        '            formImports.DataGridView1.Rows.Add(row)
+        '            num = num + 1
+        '        Next
+        '    End If
+
+        '    'Do While MyReader.EndOfData = False
+        '    '    lin = MyReader.LineNumber()
+        '    '    currentRow = MyReader.ReadFields()
+        '    '    For Each currentField In currentRow
+        '    '        If lin = 1 Then ' The header row
+        '    '            row = New String() {num, currentField}
+        '    '            formImports.DataGridView1.Rows.Add(row)
+        '    '            num = num + 1
+        '    '        Else
+        '    '            ' Transfer Data
+        '    '        End If
+
+        '    '    Next
+        '    'Loop
+
+        '    'End Using
+
+        '    ' Populate the Data GridView with column headers from the db station table
+        '    SetDataSet("station")
+        '    Dim maxfields As Integer
+        '    maxfields = ds.Tables("station").Columns.Count
+
+        '    ' Define the new column
+        '    Dim cmb As New DataGridViewComboBoxColumn()
+        '    cmb.HeaderText = "Select Fields"
+        '    cmb.Name = "cmb"
+        '    cmb.MaxDropDownItems = maxfields
+
+        '    ' Add ComboList and populate it
+        '    cmb.Items.Add("")
+        '    For i = 0 To maxfields - 1
+        '        cmb.Items.Add(ds.Tables("station").Columns(i).ColumnName)
+        '    Next
+        '    formImports.DataGridView1.Columns.Add(cmb)
+        '    formImports.DataGridView1.Refresh()
+
+
+
+        formImports.Show()
+        'End Using
+        'For i = 0 To maxfields - 2
+        '    MsgBox(formDataView.DataGridView.Rows(i).Cells(0).Value & " " & formDataView.DataGridView.Rows(i).Cells(1).Value & " " & formDataView.DataGridView.Rows(i).Cells(2).Value)
+        'Next
+
+
+
+        Exit Sub
+Err:
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+
+    Sub DataGridColumns()
+        formDataView.DataGridView.ColumnCount = 2
+        formDataView.DataGridView.Columns(0).Name = "No"
+        formDataView.DataGridView.Columns(1).Name = "Import Fields"
+        'formDataView.DataGridView.Columns(2).Name = "Product_Price"
+
+        Dim row As String() = New String() {"1", "StationId"}
+        formDataView.DataGridView.Rows.Add(row)
+        row = New String() {"2", "StationName"}
+        formDataView.DataGridView.Rows.Add(row)
+        row = New String() {"3", "Country"}
+        formDataView.DataGridView.Rows.Add(row)
+        row = New String() {"4", "District"}
+        formDataView.DataGridView.Rows.Add(row)
+
+        'Dim cmb As New DataGridViewComboBoxColumn()
+        'cmb.HeaderText = "Db Fields"
+        'cmb.Name = "cmb"
+        'cmb.MaxDropDownItems = 4
+        'cmb.Items.Add("id")
+        'cmb.Items.Add("name")
+        'cmb.Items.Add("country")
+        'cmb.Items.Add("district")
+        'formDataView.DataGridView.Columns.Add(cmb)
+        formDataView.DataGridView.Refresh()
+        formDataView.Show()
+    End Sub
+
+    Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles cmdLast1.Click
+
     End Sub
 End Class
