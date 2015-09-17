@@ -289,6 +289,7 @@ Partial Class formMetadata
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
+        Me.cmdViewPaperArchive = New System.Windows.Forms.Button()
         Me.cmdDeleteArchiveDef = New System.Windows.Forms.Button()
         Me.cmdUpdateArchiveDef = New System.Windows.Forms.Button()
         Me.cmdAddArchiveDef = New System.Windows.Forms.Button()
@@ -305,7 +306,6 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdViewPaperArchive = New System.Windows.Forms.Button()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -549,7 +549,7 @@ Partial Class formMetadata
         Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
         Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(667, -1)
+        Me.btnMoveLast.Location = New System.Drawing.Point(655, -1)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 41
@@ -568,7 +568,7 @@ Partial Class formMetadata
         Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
         Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(632, -1)
+        Me.btnMoveNext.Location = New System.Drawing.Point(620, -1)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveNext.TabIndex = 39
@@ -2973,6 +2973,15 @@ Partial Class formMetadata
         Me.GroupBox18.TabIndex = 63
         Me.GroupBox18.TabStop = False
         '
+        'cmdViewPaperArchive
+        '
+        Me.cmdViewPaperArchive.Location = New System.Drawing.Point(397, 6)
+        Me.cmdViewPaperArchive.Name = "cmdViewPaperArchive"
+        Me.cmdViewPaperArchive.Size = New System.Drawing.Size(81, 25)
+        Me.cmdViewPaperArchive.TabIndex = 43
+        Me.cmdViewPaperArchive.Text = "View"
+        Me.cmdViewPaperArchive.UseVisualStyleBackColor = True
+        '
         'cmdDeleteArchiveDef
         '
         Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(275, 6)
@@ -3118,15 +3127,6 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
-        '
-        'cmdViewPaperArchive
-        '
-        Me.cmdViewPaperArchive.Location = New System.Drawing.Point(397, 6)
-        Me.cmdViewPaperArchive.Name = "cmdViewPaperArchive"
-        Me.cmdViewPaperArchive.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewPaperArchive.TabIndex = 43
-        Me.cmdViewPaperArchive.Text = "View"
-        Me.cmdViewPaperArchive.UseVisualStyleBackColor = True
         '
         'formMetadata
         '
