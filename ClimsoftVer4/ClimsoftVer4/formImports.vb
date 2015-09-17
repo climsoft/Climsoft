@@ -311,4 +311,38 @@ Err:
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         DataGridView1.Rows.Clear()
     End Sub
+
+    Private Sub cmdACCESS_Click(sender As Object, e As EventArgs) Handles cmdACCESS.Click
+        OpenFileImport.Filter = "ACCESS Files|*.mdb;*.accdb"
+        OpenFileImport.Title = "Open IACCESSFile"
+        OpenFileImport.ShowDialog()
+
+        ImportFile = OpenFileImport.FileName
+        txtACCESS.Text = ImportFile
+        DataGridView1.Rows.Clear()
+    End Sub
+
+    Private Sub cmdCLIMSOFT3_Click(sender As Object, e As EventArgs) Handles cmdCLIMSOFT3.Click
+        OpenFileImport.Filter = "CLIMSOFT Database Files|*.mdb"
+        OpenFileImport.Title = "Open CLIMSOFT Temporary File"
+        OpenFileImport.ShowDialog()
+
+        ImportFile = OpenFileImport.FileName
+        txtCLIMSOFT3.Text = ImportFile
+        DataGridView1.Rows.Clear()
+    End Sub
+
+    Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cmdEXCEL_Click(sender As Object, e As EventArgs) Handles cmdEXCEL.Click
+        OpenFileImport.Filter = "EXCEL Files|*.xls;*.xlsx"
+        OpenFileImport.Title = "Open EXCEL File"
+        OpenFileImport.ShowDialog()
+
+        ImportFile = OpenFileImport.FileName
+        txtEXCEL.Text = ImportFile
+        DataGridView1.Rows.Clear()
+    End Sub
 End Class
