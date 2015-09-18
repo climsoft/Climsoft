@@ -31,40 +31,5 @@ Public Class dataEntryGlobalRoutines
     Public Sub messageBoxCommit()
         MsgBox("New record added to database table!", MsgBoxStyle.Information)
     End Sub
-    Public Function getFlagTexboxSuffix(ByVal strVal As String, ByRef ctl As Control) As String
-        'Locates the texbox for the flag corresponding to the value texbox
-        Dim obsValColIndex As Integer, flagColIndex As Integer
-        Dim flagTextBoxSuffix As String
-        'flagTextBoxSuffix = ""
-        'Get observation value column index from texbox name. For form_synoptic_2_ra1 table, the names of texboxes for observation values
-        ' have a suffix similar to the suffix of the name of the corresponding value field in the data table. The same applies to the suffixes
-        'for flag texbox names. In both cases the suffixes have three digits, with trailing zeros where the numeric value of the 
-        'suffix is less than 100.  And for this particular form the numeric value of the suffix gives the column index in the data table.
-        obsValColIndex = Val(Strings.Right(ctl.Name, 3))
-        'Get flag column index from observation value index. For form_synoptic_2_ra1 table,the difference between a flag column
-        ' and the column of the associated flag is 49. 
-        'To make this function applicable to other key-entry forms, further development work should get this figure from the data_forms table.
-        flagColIndex = obsValColIndex + 49
-        flagTextBoxSuffix = flagColIndex
-        If Strings.Len(flagTextBoxSuffix) = 1 Then
-            flagTextBoxSuffix = "00" & flagTextBoxSuffix
-        ElseIf Strings.Len(flagTextBoxSuffix) = 2 Then
-            flagTextBoxSuffix = "0" & flagTextBoxSuffix
-        End If
 
-        getFlagTexboxSuffix = flagTextBoxSuffix
-
-    End Function
-
-    Public Function checkIsNumeric(ByVal strVal As String, ctl As Control) As Boolean
-        If IsNumeric(strVal) Then
-            checkIsNumeric = True
-            ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
-        Else
-            checkIsNumeric = False
-            ctl.BackColor = Color.Red
-            MsgBox("Number expected!", MsgBoxStyle.Critical)
-        End If
-    End Function
 End Class
