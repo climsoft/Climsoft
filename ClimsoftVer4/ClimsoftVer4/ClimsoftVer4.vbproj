@@ -136,6 +136,12 @@
     <Compile Include="formMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formOptions.Designer.vb">
+      <DependentUpon>formOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formPaperArchive.Designer.vb">
       <DependentUpon>formPaperArchive.vb</DependentUpon>
     </Compile>
@@ -392,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMonthly.fr.resx">
       <DependentUpon>formMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formOptions.resx">
+      <DependentUpon>formOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formProducts.de.resx">
       <DependentUpon>formProducts.vb</DependentUpon>
