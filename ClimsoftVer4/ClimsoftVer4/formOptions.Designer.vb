@@ -24,7 +24,7 @@ Partial Class formOptions
     Private Sub InitializeComponent()
         Me.TabOptions = New System.Windows.Forms.TabControl()
         Me.tabDataEntry = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpBoxEntryMode = New System.Windows.Forms.GroupBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
@@ -33,19 +33,17 @@ Partial Class formOptions
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.tabdatabase = New System.Windows.Forms.TabPage()
+        Me.grpBoxdb = New System.Windows.Forms.GroupBox()
+        Me.cmdChangePassword = New System.Windows.Forms.Button()
+        Me.lblDelimiter = New System.Windows.Forms.Label()
+        Me.txtDelimiter = New System.Windows.Forms.TextBox()
         Me.tabMessageHeaders = New System.Windows.Forms.TabPage()
-        Me.tabObservations = New System.Windows.Forms.TabPage()
-        Me.groupBoxCommands = New System.Windows.Forms.GroupBox()
-        Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.cmdClose = New System.Windows.Forms.Button()
-        Me.cmdApply = New System.Windows.Forms.Button()
-        Me.cmdOk = New System.Windows.Forms.Button()
-        Me.dataGridViewMsgHeaders = New System.Windows.Forms.DataGridView()
-        Me.CodeType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MainHour = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OthorHours = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblCrexEditionsNumber = New System.Windows.Forms.Label()
+        Me.txtCREXEditionNumber = New System.Windows.Forms.TextBox()
+        Me.lblLocalTableVersionNumber = New System.Windows.Forms.Label()
+        Me.txtLocalTableversionNumber = New System.Windows.Forms.TextBox()
+        Me.lblInternationalDataSubCategory = New System.Windows.Forms.Label()
         Me.chkOptionalSequenceInclusion = New System.Windows.Forms.CheckBox()
         Me.lblMastersTableVersionNumber = New System.Windows.Forms.Label()
         Me.txtMasterTableVersionNumber = New System.Windows.Forms.TextBox()
@@ -57,40 +55,42 @@ Partial Class formOptions
         Me.lblOptionalSequenceInclusion = New System.Windows.Forms.Label()
         Me.lblGeneratingSubCentre = New System.Windows.Forms.Label()
         Me.txtGeneratingSubCentre = New System.Windows.Forms.TextBox()
+        Me.lblCrexTableVersionNumber = New System.Windows.Forms.Label()
         Me.lblOriginatingCentre = New System.Windows.Forms.Label()
+        Me.txtCREXTableVersionNumber = New System.Windows.Forms.TextBox()
         Me.txtGeneratingCentre = New System.Windows.Forms.TextBox()
         Me.lblBUFREditionNumber = New System.Windows.Forms.Label()
         Me.txtBUFREditionNumber = New System.Windows.Forms.TextBox()
-        Me.lblInternationalDataSubCategory = New System.Windows.Forms.Label()
-        Me.lblCrexTableVersionNumber = New System.Windows.Forms.Label()
-        Me.txtCREXTableVersionNumber = New System.Windows.Forms.TextBox()
-        Me.lblLocalTableVersionNumber = New System.Windows.Forms.Label()
-        Me.txtLocalTableversionNumber = New System.Windows.Forms.TextBox()
-        Me.lblCrexEditionsNumber = New System.Windows.Forms.Label()
-        Me.txtCREXEditionNumber = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dataGridViewMsgHeaders = New System.Windows.Forms.DataGridView()
+        Me.CodeType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MainHour = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OthorHours = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tabObservations = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.lblObsTime = New System.Windows.Forms.Label()
-        Me.lblStandardPressureLevel = New System.Windows.Forms.Label()
-        Me.lblMSLPressureElevation = New System.Windows.Forms.Label()
-        Me.txtObsTime = New System.Windows.Forms.TextBox()
-        Me.txtStandardPressureLevel = New System.Windows.Forms.TextBox()
         Me.txtMSLElevation = New System.Windows.Forms.TextBox()
-        Me.grpBoxdb = New System.Windows.Forms.GroupBox()
-        Me.cmdChangePassword = New System.Windows.Forms.Button()
-        Me.lblDelimiter = New System.Windows.Forms.Label()
-        Me.txtDelimiter = New System.Windows.Forms.TextBox()
+        Me.txtStandardPressureLevel = New System.Windows.Forms.TextBox()
+        Me.txtObsTime = New System.Windows.Forms.TextBox()
+        Me.lblMSLPressureElevation = New System.Windows.Forms.Label()
+        Me.lblStandardPressureLevel = New System.Windows.Forms.Label()
+        Me.lblObsTime = New System.Windows.Forms.Label()
+        Me.groupBoxCommands = New System.Windows.Forms.GroupBox()
+        Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.cmdClose = New System.Windows.Forms.Button()
+        Me.cmdApply = New System.Windows.Forms.Button()
+        Me.cmdOk = New System.Windows.Forms.Button()
         Me.TabOptions.SuspendLayout()
         Me.tabDataEntry.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpBoxEntryMode.SuspendLayout()
         Me.groupEntryForms.SuspendLayout()
         Me.tabdatabase.SuspendLayout()
-        Me.tabMessageHeaders.SuspendLayout()
-        Me.tabObservations.SuspendLayout()
-        Me.groupBoxCommands.SuspendLayout()
-        CType(Me.dataGridViewMsgHeaders, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.grpBoxdb.SuspendLayout()
+        Me.tabMessageHeaders.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.dataGridViewMsgHeaders, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabObservations.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.groupBoxCommands.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabOptions
@@ -109,7 +109,7 @@ Partial Class formOptions
         '
         Me.tabDataEntry.BackColor = System.Drawing.Color.OldLace
         Me.tabDataEntry.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.tabDataEntry.Controls.Add(Me.GroupBox1)
+        Me.tabDataEntry.Controls.Add(Me.grpBoxEntryMode)
         Me.tabDataEntry.Controls.Add(Me.groupEntryForms)
         Me.tabDataEntry.Location = New System.Drawing.Point(4, 22)
         Me.tabDataEntry.Name = "tabDataEntry"
@@ -118,18 +118,18 @@ Partial Class formOptions
         Me.tabDataEntry.TabIndex = 0
         Me.tabDataEntry.Text = "Data Entry"
         '
-        'GroupBox1
+        'grpBoxEntryMode
         '
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Controls.Add(Me.RadioButton1)
-        Me.GroupBox1.Location = New System.Drawing.Point(288, 37)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(356, 245)
-        Me.GroupBox1.TabIndex = 1
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Data Key Entry Mode"
+        Me.grpBoxEntryMode.Controls.Add(Me.ComboBox1)
+        Me.grpBoxEntryMode.Controls.Add(Me.Label1)
+        Me.grpBoxEntryMode.Controls.Add(Me.RadioButton2)
+        Me.grpBoxEntryMode.Controls.Add(Me.RadioButton1)
+        Me.grpBoxEntryMode.Location = New System.Drawing.Point(288, 37)
+        Me.grpBoxEntryMode.Name = "grpBoxEntryMode"
+        Me.grpBoxEntryMode.Size = New System.Drawing.Size(356, 245)
+        Me.grpBoxEntryMode.TabIndex = 1
+        Me.grpBoxEntryMode.TabStop = False
+        Me.grpBoxEntryMode.Text = "Data Key Entry Mode"
         '
         'ComboBox1
         '
@@ -213,6 +213,48 @@ Partial Class formOptions
         Me.tabdatabase.TabIndex = 1
         Me.tabdatabase.Text = "Databases"
         '
+        'grpBoxdb
+        '
+        Me.grpBoxdb.Controls.Add(Me.cmdChangePassword)
+        Me.grpBoxdb.Controls.Add(Me.lblDelimiter)
+        Me.grpBoxdb.Controls.Add(Me.txtDelimiter)
+        Me.grpBoxdb.Location = New System.Drawing.Point(106, 56)
+        Me.grpBoxdb.Name = "grpBoxdb"
+        Me.grpBoxdb.Size = New System.Drawing.Size(439, 210)
+        Me.grpBoxdb.TabIndex = 3
+        Me.grpBoxdb.TabStop = False
+        '
+        'cmdChangePassword
+        '
+        Me.cmdChangePassword.AutoEllipsis = True
+        Me.cmdChangePassword.FlatAppearance.BorderColor = System.Drawing.Color.Red
+        Me.cmdChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cmdChangePassword.Location = New System.Drawing.Point(67, 93)
+        Me.cmdChangePassword.Name = "cmdChangePassword"
+        Me.cmdChangePassword.Size = New System.Drawing.Size(181, 35)
+        Me.cmdChangePassword.TabIndex = 5
+        Me.cmdChangePassword.Text = "Change Password"
+        Me.cmdChangePassword.UseVisualStyleBackColor = True
+        '
+        'lblDelimiter
+        '
+        Me.lblDelimiter.AutoSize = True
+        Me.lblDelimiter.Location = New System.Drawing.Point(64, 52)
+        Me.lblDelimiter.Name = "lblDelimiter"
+        Me.lblDelimiter.Size = New System.Drawing.Size(184, 13)
+        Me.lblDelimiter.TabIndex = 4
+        Me.lblDelimiter.Text = "Delimiter character for text output files"
+        '
+        'txtDelimiter
+        '
+        Me.txtDelimiter.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDelimiter.Location = New System.Drawing.Point(254, 48)
+        Me.txtDelimiter.Name = "txtDelimiter"
+        Me.txtDelimiter.Size = New System.Drawing.Size(26, 21)
+        Me.txtDelimiter.TabIndex = 3
+        Me.txtDelimiter.Text = ","
+        Me.txtDelimiter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'tabMessageHeaders
         '
         Me.tabMessageHeaders.BackColor = System.Drawing.Color.AntiqueWhite
@@ -226,101 +268,6 @@ Partial Class formOptions
         Me.tabMessageHeaders.Size = New System.Drawing.Size(665, 333)
         Me.tabMessageHeaders.TabIndex = 2
         Me.tabMessageHeaders.Text = "Message Encoding"
-        '
-        'tabObservations
-        '
-        Me.tabObservations.BackColor = System.Drawing.Color.LemonChiffon
-        Me.tabObservations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.tabObservations.Controls.Add(Me.GroupBox3)
-        Me.tabObservations.Location = New System.Drawing.Point(4, 22)
-        Me.tabObservations.Name = "tabObservations"
-        Me.tabObservations.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabObservations.Size = New System.Drawing.Size(665, 333)
-        Me.tabObservations.TabIndex = 3
-        Me.tabObservations.Text = "Observations"
-        '
-        'groupBoxCommands
-        '
-        Me.groupBoxCommands.Controls.Add(Me.cmdHelp)
-        Me.groupBoxCommands.Controls.Add(Me.cmdClose)
-        Me.groupBoxCommands.Controls.Add(Me.cmdApply)
-        Me.groupBoxCommands.Controls.Add(Me.cmdOk)
-        Me.groupBoxCommands.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.groupBoxCommands.Location = New System.Drawing.Point(0, 392)
-        Me.groupBoxCommands.Name = "groupBoxCommands"
-        Me.groupBoxCommands.Size = New System.Drawing.Size(702, 35)
-        Me.groupBoxCommands.TabIndex = 1
-        Me.groupBoxCommands.TabStop = False
-        '
-        'cmdHelp
-        '
-        Me.cmdHelp.Location = New System.Drawing.Point(528, 9)
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(66, 25)
-        Me.cmdHelp.TabIndex = 3
-        Me.cmdHelp.Text = "Help"
-        Me.cmdHelp.UseVisualStyleBackColor = True
-        '
-        'cmdClose
-        '
-        Me.cmdClose.Location = New System.Drawing.Point(394, 9)
-        Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(66, 25)
-        Me.cmdClose.TabIndex = 2
-        Me.cmdClose.Text = "Close"
-        Me.cmdClose.UseVisualStyleBackColor = True
-        '
-        'cmdApply
-        '
-        Me.cmdApply.Location = New System.Drawing.Point(260, 9)
-        Me.cmdApply.Name = "cmdApply"
-        Me.cmdApply.Size = New System.Drawing.Size(66, 25)
-        Me.cmdApply.TabIndex = 1
-        Me.cmdApply.Text = "Apply"
-        Me.cmdApply.UseVisualStyleBackColor = True
-        '
-        'cmdOk
-        '
-        Me.cmdOk.Location = New System.Drawing.Point(126, 9)
-        Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(66, 25)
-        Me.cmdOk.TabIndex = 0
-        Me.cmdOk.Text = "OK"
-        Me.cmdOk.UseVisualStyleBackColor = True
-        '
-        'dataGridViewMsgHeaders
-        '
-        Me.dataGridViewMsgHeaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dataGridViewMsgHeaders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeType, Me.MainHour, Me.OthorHours})
-        Me.dataGridViewMsgHeaders.Location = New System.Drawing.Point(15, 32)
-        Me.dataGridViewMsgHeaders.Name = "dataGridViewMsgHeaders"
-        Me.dataGridViewMsgHeaders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
-        Me.dataGridViewMsgHeaders.Size = New System.Drawing.Size(345, 273)
-        Me.dataGridViewMsgHeaders.TabIndex = 0
-        '
-        'CodeType
-        '
-        Me.CodeType.HeaderText = "Code Type"
-        Me.CodeType.Name = "CodeType"
-        '
-        'MainHour
-        '
-        Me.MainHour.HeaderText = "Main Hour"
-        Me.MainHour.Name = "MainHour"
-        '
-        'OthorHours
-        '
-        Me.OthorHours.HeaderText = "Other Hours"
-        Me.OthorHours.Name = "OthorHours"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(132, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(93, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Message Headers"
         '
         'GroupBox2
         '
@@ -354,6 +301,52 @@ Partial Class formOptions
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Section I Indicators"
+        '
+        'lblCrexEditionsNumber
+        '
+        Me.lblCrexEditionsNumber.AutoSize = True
+        Me.lblCrexEditionsNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCrexEditionsNumber.Location = New System.Drawing.Point(8, 214)
+        Me.lblCrexEditionsNumber.Name = "lblCrexEditionsNumber"
+        Me.lblCrexEditionsNumber.Size = New System.Drawing.Size(116, 13)
+        Me.lblCrexEditionsNumber.TabIndex = 37
+        Me.lblCrexEditionsNumber.Tag = "crex_Editions_Number"
+        Me.lblCrexEditionsNumber.Text = "CREX Editions Number"
+        '
+        'txtCREXEditionNumber
+        '
+        Me.txtCREXEditionNumber.Location = New System.Drawing.Point(213, 210)
+        Me.txtCREXEditionNumber.Name = "txtCREXEditionNumber"
+        Me.txtCREXEditionNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtCREXEditionNumber.TabIndex = 38
+        '
+        'lblLocalTableVersionNumber
+        '
+        Me.lblLocalTableVersionNumber.AutoSize = True
+        Me.lblLocalTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLocalTableVersionNumber.Location = New System.Drawing.Point(8, 46)
+        Me.lblLocalTableVersionNumber.Name = "lblLocalTableVersionNumber"
+        Me.lblLocalTableVersionNumber.Size = New System.Drawing.Size(137, 13)
+        Me.lblLocalTableVersionNumber.TabIndex = 33
+        Me.lblLocalTableVersionNumber.Tag = "Local_Table_Version_Number"
+        Me.lblLocalTableVersionNumber.Text = "Local table Version Number"
+        '
+        'txtLocalTableversionNumber
+        '
+        Me.txtLocalTableversionNumber.Location = New System.Drawing.Point(212, 42)
+        Me.txtLocalTableversionNumber.Name = "txtLocalTableversionNumber"
+        Me.txtLocalTableversionNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtLocalTableversionNumber.TabIndex = 34
+        '
+        'lblInternationalDataSubCategory
+        '
+        Me.lblInternationalDataSubCategory.AutoSize = True
+        Me.lblInternationalDataSubCategory.Location = New System.Drawing.Point(8, 142)
+        Me.lblInternationalDataSubCategory.Name = "lblInternationalDataSubCategory"
+        Me.lblInternationalDataSubCategory.Size = New System.Drawing.Size(158, 13)
+        Me.lblInternationalDataSubCategory.TabIndex = 32
+        Me.lblInternationalDataSubCategory.Tag = "International-Data-Sub-Category"
+        Me.lblInternationalDataSubCategory.Text = "International Data Sub-Category"
         '
         'chkOptionalSequenceInclusion
         '
@@ -455,6 +448,17 @@ Partial Class formOptions
         Me.txtGeneratingSubCentre.Size = New System.Drawing.Size(39, 20)
         Me.txtGeneratingSubCentre.TabIndex = 24
         '
+        'lblCrexTableVersionNumber
+        '
+        Me.lblCrexTableVersionNumber.AutoSize = True
+        Me.lblCrexTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCrexTableVersionNumber.Location = New System.Drawing.Point(8, 238)
+        Me.lblCrexTableVersionNumber.Name = "lblCrexTableVersionNumber"
+        Me.lblCrexTableVersionNumber.Size = New System.Drawing.Size(144, 13)
+        Me.lblCrexTableVersionNumber.TabIndex = 4
+        Me.lblCrexTableVersionNumber.Tag = "Crex_Table_Version_Number"
+        Me.lblCrexTableVersionNumber.Text = "CREX Table Version Number"
+        '
         'lblOriginatingCentre
         '
         Me.lblOriginatingCentre.AutoSize = True
@@ -465,6 +469,13 @@ Partial Class formOptions
         Me.lblOriginatingCentre.TabIndex = 17
         Me.lblOriginatingCentre.Tag = "Generating_Centre"
         Me.lblOriginatingCentre.Text = "Generating Centre"
+        '
+        'txtCREXTableVersionNumber
+        '
+        Me.txtCREXTableVersionNumber.Location = New System.Drawing.Point(212, 234)
+        Me.txtCREXTableVersionNumber.Name = "txtCREXTableVersionNumber"
+        Me.txtCREXTableVersionNumber.Size = New System.Drawing.Size(39, 20)
+        Me.txtCREXTableVersionNumber.TabIndex = 18
         '
         'txtGeneratingCentre
         '
@@ -491,69 +502,51 @@ Partial Class formOptions
         Me.txtBUFREditionNumber.Size = New System.Drawing.Size(39, 20)
         Me.txtBUFREditionNumber.TabIndex = 26
         '
-        'lblInternationalDataSubCategory
+        'Label2
         '
-        Me.lblInternationalDataSubCategory.AutoSize = True
-        Me.lblInternationalDataSubCategory.Location = New System.Drawing.Point(8, 142)
-        Me.lblInternationalDataSubCategory.Name = "lblInternationalDataSubCategory"
-        Me.lblInternationalDataSubCategory.Size = New System.Drawing.Size(158, 13)
-        Me.lblInternationalDataSubCategory.TabIndex = 32
-        Me.lblInternationalDataSubCategory.Tag = "International-Data-Sub-Category"
-        Me.lblInternationalDataSubCategory.Text = "International Data Sub-Category"
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(132, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(93, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Message Headers"
         '
-        'lblCrexTableVersionNumber
+        'dataGridViewMsgHeaders
         '
-        Me.lblCrexTableVersionNumber.AutoSize = True
-        Me.lblCrexTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCrexTableVersionNumber.Location = New System.Drawing.Point(8, 238)
-        Me.lblCrexTableVersionNumber.Name = "lblCrexTableVersionNumber"
-        Me.lblCrexTableVersionNumber.Size = New System.Drawing.Size(144, 13)
-        Me.lblCrexTableVersionNumber.TabIndex = 4
-        Me.lblCrexTableVersionNumber.Tag = "Crex_Table_Version_Number"
-        Me.lblCrexTableVersionNumber.Text = "CREX Table Version Number"
+        Me.dataGridViewMsgHeaders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridViewMsgHeaders.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CodeType, Me.MainHour, Me.OthorHours})
+        Me.dataGridViewMsgHeaders.Location = New System.Drawing.Point(15, 32)
+        Me.dataGridViewMsgHeaders.Name = "dataGridViewMsgHeaders"
+        Me.dataGridViewMsgHeaders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.dataGridViewMsgHeaders.Size = New System.Drawing.Size(345, 273)
+        Me.dataGridViewMsgHeaders.TabIndex = 0
         '
-        'txtCREXTableVersionNumber
+        'CodeType
         '
-        Me.txtCREXTableVersionNumber.Location = New System.Drawing.Point(212, 234)
-        Me.txtCREXTableVersionNumber.Name = "txtCREXTableVersionNumber"
-        Me.txtCREXTableVersionNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtCREXTableVersionNumber.TabIndex = 18
+        Me.CodeType.HeaderText = "Code Type"
+        Me.CodeType.Name = "CodeType"
         '
-        'lblLocalTableVersionNumber
+        'MainHour
         '
-        Me.lblLocalTableVersionNumber.AutoSize = True
-        Me.lblLocalTableVersionNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLocalTableVersionNumber.Location = New System.Drawing.Point(8, 46)
-        Me.lblLocalTableVersionNumber.Name = "lblLocalTableVersionNumber"
-        Me.lblLocalTableVersionNumber.Size = New System.Drawing.Size(137, 13)
-        Me.lblLocalTableVersionNumber.TabIndex = 33
-        Me.lblLocalTableVersionNumber.Tag = "Local_Table_Version_Number"
-        Me.lblLocalTableVersionNumber.Text = "Local table Version Number"
+        Me.MainHour.HeaderText = "Main Hour"
+        Me.MainHour.Name = "MainHour"
         '
-        'txtLocalTableversionNumber
+        'OthorHours
         '
-        Me.txtLocalTableversionNumber.Location = New System.Drawing.Point(212, 42)
-        Me.txtLocalTableversionNumber.Name = "txtLocalTableversionNumber"
-        Me.txtLocalTableversionNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtLocalTableversionNumber.TabIndex = 34
+        Me.OthorHours.HeaderText = "Other Hours"
+        Me.OthorHours.Name = "OthorHours"
         '
-        'lblCrexEditionsNumber
+        'tabObservations
         '
-        Me.lblCrexEditionsNumber.AutoSize = True
-        Me.lblCrexEditionsNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCrexEditionsNumber.Location = New System.Drawing.Point(8, 214)
-        Me.lblCrexEditionsNumber.Name = "lblCrexEditionsNumber"
-        Me.lblCrexEditionsNumber.Size = New System.Drawing.Size(116, 13)
-        Me.lblCrexEditionsNumber.TabIndex = 37
-        Me.lblCrexEditionsNumber.Tag = "crex_Editions_Number"
-        Me.lblCrexEditionsNumber.Text = "CREX Editions Number"
-        '
-        'txtCREXEditionNumber
-        '
-        Me.txtCREXEditionNumber.Location = New System.Drawing.Point(213, 210)
-        Me.txtCREXEditionNumber.Name = "txtCREXEditionNumber"
-        Me.txtCREXEditionNumber.Size = New System.Drawing.Size(39, 20)
-        Me.txtCREXEditionNumber.TabIndex = 38
+        Me.tabObservations.BackColor = System.Drawing.Color.LemonChiffon
+        Me.tabObservations.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.tabObservations.Controls.Add(Me.GroupBox3)
+        Me.tabObservations.Location = New System.Drawing.Point(4, 22)
+        Me.tabObservations.Name = "tabObservations"
+        Me.tabObservations.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabObservations.Size = New System.Drawing.Size(665, 333)
+        Me.tabObservations.TabIndex = 3
+        Me.tabObservations.Text = "Observations"
         '
         'GroupBox3
         '
@@ -569,41 +562,14 @@ Partial Class formOptions
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         '
-        'lblObsTime
+        'txtMSLElevation
         '
-        Me.lblObsTime.AutoSize = True
-        Me.lblObsTime.Location = New System.Drawing.Point(62, 47)
-        Me.lblObsTime.Name = "lblObsTime"
-        Me.lblObsTime.Size = New System.Drawing.Size(116, 13)
-        Me.lblObsTime.TabIndex = 0
-        Me.lblObsTime.Text = "Daily Observation Time"
-        '
-        'lblStandardPressureLevel
-        '
-        Me.lblStandardPressureLevel.AutoSize = True
-        Me.lblStandardPressureLevel.Location = New System.Drawing.Point(62, 98)
-        Me.lblStandardPressureLevel.Name = "lblStandardPressureLevel"
-        Me.lblStandardPressureLevel.Size = New System.Drawing.Size(123, 13)
-        Me.lblStandardPressureLevel.TabIndex = 1
-        Me.lblStandardPressureLevel.Text = "Standard Pressure Level"
-        '
-        'lblMSLPressureElevation
-        '
-        Me.lblMSLPressureElevation.AutoSize = True
-        Me.lblMSLPressureElevation.Location = New System.Drawing.Point(62, 149)
-        Me.lblMSLPressureElevation.Name = "lblMSLPressureElevation"
-        Me.lblMSLPressureElevation.Size = New System.Drawing.Size(159, 13)
-        Me.lblMSLPressureElevation.TabIndex = 2
-        Me.lblMSLPressureElevation.Text = "MSL Pressre threshold elevation"
-        '
-        'txtObsTime
-        '
-        Me.txtObsTime.Location = New System.Drawing.Point(240, 43)
-        Me.txtObsTime.Name = "txtObsTime"
-        Me.txtObsTime.Size = New System.Drawing.Size(53, 20)
-        Me.txtObsTime.TabIndex = 3
-        Me.txtObsTime.Text = "06:00"
-        Me.txtObsTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtMSLElevation.Location = New System.Drawing.Point(240, 145)
+        Me.txtMSLElevation.Name = "txtMSLElevation"
+        Me.txtMSLElevation.Size = New System.Drawing.Size(53, 20)
+        Me.txtMSLElevation.TabIndex = 5
+        Me.txtMSLElevation.Text = "500"
+        Me.txtMSLElevation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtStandardPressureLevel
         '
@@ -614,56 +580,90 @@ Partial Class formOptions
         Me.txtStandardPressureLevel.Text = "850"
         Me.txtStandardPressureLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtMSLElevation
+        'txtObsTime
         '
-        Me.txtMSLElevation.Location = New System.Drawing.Point(240, 145)
-        Me.txtMSLElevation.Name = "txtMSLElevation"
-        Me.txtMSLElevation.Size = New System.Drawing.Size(53, 20)
-        Me.txtMSLElevation.TabIndex = 5
-        Me.txtMSLElevation.Text = "500"
-        Me.txtMSLElevation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtObsTime.Location = New System.Drawing.Point(240, 43)
+        Me.txtObsTime.Name = "txtObsTime"
+        Me.txtObsTime.Size = New System.Drawing.Size(53, 20)
+        Me.txtObsTime.TabIndex = 3
+        Me.txtObsTime.Text = "06:00"
+        Me.txtObsTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'grpBoxdb
+        'lblMSLPressureElevation
         '
-        Me.grpBoxdb.Controls.Add(Me.cmdChangePassword)
-        Me.grpBoxdb.Controls.Add(Me.lblDelimiter)
-        Me.grpBoxdb.Controls.Add(Me.txtDelimiter)
-        Me.grpBoxdb.Location = New System.Drawing.Point(106, 56)
-        Me.grpBoxdb.Name = "grpBoxdb"
-        Me.grpBoxdb.Size = New System.Drawing.Size(439, 210)
-        Me.grpBoxdb.TabIndex = 3
-        Me.grpBoxdb.TabStop = False
+        Me.lblMSLPressureElevation.AutoSize = True
+        Me.lblMSLPressureElevation.Location = New System.Drawing.Point(62, 149)
+        Me.lblMSLPressureElevation.Name = "lblMSLPressureElevation"
+        Me.lblMSLPressureElevation.Size = New System.Drawing.Size(159, 13)
+        Me.lblMSLPressureElevation.TabIndex = 2
+        Me.lblMSLPressureElevation.Text = "MSL Pressre threshold elevation"
         '
-        'cmdChangePassword
+        'lblStandardPressureLevel
         '
-        Me.cmdChangePassword.AutoEllipsis = True
-        Me.cmdChangePassword.FlatAppearance.BorderColor = System.Drawing.Color.Red
-        Me.cmdChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cmdChangePassword.Location = New System.Drawing.Point(67, 93)
-        Me.cmdChangePassword.Name = "cmdChangePassword"
-        Me.cmdChangePassword.Size = New System.Drawing.Size(181, 35)
-        Me.cmdChangePassword.TabIndex = 5
-        Me.cmdChangePassword.Text = "Change Password"
-        Me.cmdChangePassword.UseVisualStyleBackColor = True
+        Me.lblStandardPressureLevel.AutoSize = True
+        Me.lblStandardPressureLevel.Location = New System.Drawing.Point(62, 98)
+        Me.lblStandardPressureLevel.Name = "lblStandardPressureLevel"
+        Me.lblStandardPressureLevel.Size = New System.Drawing.Size(123, 13)
+        Me.lblStandardPressureLevel.TabIndex = 1
+        Me.lblStandardPressureLevel.Text = "Standard Pressure Level"
         '
-        'lblDelimiter
+        'lblObsTime
         '
-        Me.lblDelimiter.AutoSize = True
-        Me.lblDelimiter.Location = New System.Drawing.Point(64, 52)
-        Me.lblDelimiter.Name = "lblDelimiter"
-        Me.lblDelimiter.Size = New System.Drawing.Size(184, 13)
-        Me.lblDelimiter.TabIndex = 4
-        Me.lblDelimiter.Text = "Delimiter character for text output files"
+        Me.lblObsTime.AutoSize = True
+        Me.lblObsTime.Location = New System.Drawing.Point(62, 47)
+        Me.lblObsTime.Name = "lblObsTime"
+        Me.lblObsTime.Size = New System.Drawing.Size(116, 13)
+        Me.lblObsTime.TabIndex = 0
+        Me.lblObsTime.Text = "Daily Observation Time"
         '
-        'txtDelimiter
+        'groupBoxCommands
         '
-        Me.txtDelimiter.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDelimiter.Location = New System.Drawing.Point(254, 48)
-        Me.txtDelimiter.Name = "txtDelimiter"
-        Me.txtDelimiter.Size = New System.Drawing.Size(26, 21)
-        Me.txtDelimiter.TabIndex = 3
-        Me.txtDelimiter.Text = ","
-        Me.txtDelimiter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.groupBoxCommands.Controls.Add(Me.cmdHelp)
+        Me.groupBoxCommands.Controls.Add(Me.cmdClose)
+        Me.groupBoxCommands.Controls.Add(Me.cmdApply)
+        Me.groupBoxCommands.Controls.Add(Me.cmdOk)
+        Me.groupBoxCommands.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.groupBoxCommands.Location = New System.Drawing.Point(0, 392)
+        Me.groupBoxCommands.Name = "groupBoxCommands"
+        Me.groupBoxCommands.Size = New System.Drawing.Size(702, 35)
+        Me.groupBoxCommands.TabIndex = 1
+        Me.groupBoxCommands.TabStop = False
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(528, 9)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(66, 25)
+        Me.cmdHelp.TabIndex = 3
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'cmdClose
+        '
+        Me.cmdClose.Location = New System.Drawing.Point(394, 9)
+        Me.cmdClose.Name = "cmdClose"
+        Me.cmdClose.Size = New System.Drawing.Size(66, 25)
+        Me.cmdClose.TabIndex = 2
+        Me.cmdClose.Text = "Close"
+        Me.cmdClose.UseVisualStyleBackColor = True
+        '
+        'cmdApply
+        '
+        Me.cmdApply.Location = New System.Drawing.Point(260, 9)
+        Me.cmdApply.Name = "cmdApply"
+        Me.cmdApply.Size = New System.Drawing.Size(66, 25)
+        Me.cmdApply.TabIndex = 1
+        Me.cmdApply.Text = "Apply"
+        Me.cmdApply.UseVisualStyleBackColor = True
+        '
+        'cmdOk
+        '
+        Me.cmdOk.Location = New System.Drawing.Point(126, 9)
+        Me.cmdOk.Name = "cmdOk"
+        Me.cmdOk.Size = New System.Drawing.Size(66, 25)
+        Me.cmdOk.TabIndex = 0
+        Me.cmdOk.Text = "OK"
+        Me.cmdOk.UseVisualStyleBackColor = True
         '
         'formOptions
         '
@@ -676,22 +676,22 @@ Partial Class formOptions
         Me.Text = "Form Options"
         Me.TabOptions.ResumeLayout(False)
         Me.tabDataEntry.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpBoxEntryMode.ResumeLayout(False)
+        Me.grpBoxEntryMode.PerformLayout()
         Me.groupEntryForms.ResumeLayout(False)
         Me.groupEntryForms.PerformLayout()
         Me.tabdatabase.ResumeLayout(False)
-        Me.tabMessageHeaders.ResumeLayout(False)
-        Me.tabMessageHeaders.PerformLayout()
-        Me.tabObservations.ResumeLayout(False)
-        Me.groupBoxCommands.ResumeLayout(False)
-        CType(Me.dataGridViewMsgHeaders, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.grpBoxdb.ResumeLayout(False)
         Me.grpBoxdb.PerformLayout()
+        Me.tabMessageHeaders.ResumeLayout(False)
+        Me.tabMessageHeaders.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        CType(Me.dataGridViewMsgHeaders, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabObservations.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.groupBoxCommands.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -705,7 +705,7 @@ Partial Class formOptions
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmdApply As System.Windows.Forms.Button
     Friend WithEvents cmdOk As System.Windows.Forms.Button
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpBoxEntryMode As System.Windows.Forms.GroupBox
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
