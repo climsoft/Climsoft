@@ -75,7 +75,7 @@ Public Class dataEntryGlobalRoutines
         Tp_Fahrenheit = -1 * (Math.Log([Ea] / 6.1078) * 219.522 + 307.004) / (Math.Log([Ea] / 6.1078) * 0.556 - 9.59539)
         Tp_Celcius = 5 / 9 * ([Tp_Fahrenheit] - 32)
         
-        '*please note that Td in this case is Temperature drybulb,Tw wetbulb and Tp is dewpoint temperature
+        '* Td in this case is Temperature drybulb,Tw wetbulb and Tp is dewpoint temperature
         'E is saturation vapour pressure(s.v.p.), hence Ed is s.v.p. over drybulb and Ew s.v.p. over wetbulb, Ea actual s.v.p.
 
         Tp_Celcius = Math.Round(Tp_Celcius, 0)
@@ -92,16 +92,26 @@ Public Class dataEntryGlobalRoutines
         RH = Math.Round((svp1 / svp2) * 100, 0)
         calculateRH = RH
     End Function
-    ''Public Function calculateGeopotential() As String
-    ''    Dim geoPotential As String
-    ''    Add formula for calculating geopotential
-    ''    calculateGeopotential = geoPotential
-    ''End Function
-    ''Public Function calculateMSLppp() As String
-    ''    Dim MSLppp As String
-    ''    Add formula for calculating MSLppp
-    ''    calculateMSLppp = MSLppp
-    ''End Function
+    Public Function calculateGeopotential(ppp As String, dryBulb As String, elevation As String, gpmStdLevel As String) As String
+        Dim geoPotential As String, g As VariantType, R As VariantType, gamma As VariantType, K As VariantType
+        '0.0065 is dry adiabatic lapse rate
+        '9.80665 is acceleration due to gravity
+        '287.04 is universal gas constant
+        '273.15 is zero Kelvin
+        gamma = 0.0065
+        g = 9.80665
+        R = 287.04
+        K = dryBulb + 273.15
+        geoPotential = Math.Round((elevation + (R / g) * Math.Log(ppp / gpmStdLevel) * (K + ((gamma / 2) * elevation))) / (1 + (R / g) * Math.Log(ppp / gpmStdLevel) * (gamma / 2)))
+        calculateGeopotential = geoPotential
+    End Function
+    Public Function calculateMSLppp(ppp As String, dryBulb As String, elevation As String) As String
+        Dim MSLppp As VariantType
+       
+        MSLppp = (ppp * (1 - 0.0065 * elevation / (dryBulb + 0.0065 * elevation + 273.15)) ^ -5.257) * 10
+        '0.0065 is dry adiabatic lapse rate
+        calculateMSLppp = MSLppp
+    End Function
     Public Function checkIsNumeric(ByVal strVal As String, ctl As Control) As Boolean
         If IsNumeric(strVal) Then
             checkIsNumeric = True
@@ -110,7 +120,118 @@ Public Class dataEntryGlobalRoutines
         Else
             checkIsNumeric = False
             ctl.BackColor = Color.Red
-            MsgBox("Number expected!", MsgBoxStyle.Critical)
+            MsgBox("Number expected!", MsgBoxStyle.Critical)        
+        End If
+    End Function
+    Public Function checkLowerLimit(ctl As Control, ByVal obsVal As String, ByVal valLowerLimit As String) As Boolean
+        If Val(valLowerLimit) <= Val(obsVal) Then
+            checkLowerLimit = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkLowerLimit = False
+            ctl.BackColor = Color.Cyan
+            MsgBox("Value lower than lowerlimit of: " & valLowerLimit, MsgBoxStyle.Exclamation)
+        End If
+    End Function
+    Public Function checkUpperLimit(ctl As Control, ByVal obsVal As String, ByVal valUpperLimit As String) As Boolean
+        If Val(obsVal) <= Val(valUpperLimit) Then
+            checkUpperLimit = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkUpperLimit = False
+            ctl.BackColor = Color.Cyan
+            MsgBox("Value higher than upperlimit of: " & valUpperLimit, MsgBoxStyle.Exclamation)
+        End If
+    End Function
+    Public Function checkValidHour(ByVal strVal As String, ctl As Control) As Boolean
+        If Val(strVal) >= 0 And Val(strVal) <= 23 Then
+            checkValidHour = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkValidHour = False
+            ctl.BackColor = Color.Red
+            MsgBox("Invalid Hour!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkValidDay(ByVal strVal As String, ctl As Control) As Boolean
+        If Val(strVal) >= 1 And Val(strVal) <= 31 Then
+            checkValidDay = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkValidDay = False
+            ctl.BackColor = Color.Red
+            MsgBox("Invalid Day!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkValidMonth(ByVal strVal As String, ctl As Control) As Boolean
+        If Val(strVal) >= 1 And Val(strVal) <= 12 Then
+            checkValidMonth = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkValidMonth = False
+            ctl.BackColor = Color.Red
+            MsgBox("Invalid month!", MsgBoxStyle.Critical)
+        End If
+    End Function
+   
+    Public Function checkValidYear(ByVal strVal As String, ctl As Control) As Boolean
+        If Val(strVal) >= 1000 And Val(strVal) <= 9999 Then
+            checkValidYear = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkValidYear = False
+            ctl.BackColor = Color.Red
+            MsgBox("Invalid Year! Year must be between 1000 and 9999", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkValidDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
+        If IsDate(dd & "/" & mm & "/" & yyyy) Then
+            checkValidDate = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkValidDate = False
+            ctl.BackColor = Color.Red
+            MsgBox("Invalid Date!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkFutureDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
+        If DateValue(dd & "/" & mm & "/" & yyyy) <= Now() Then
+            checkFutureDate = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkFutureDate = False
+            ctl.BackColor = Color.Red
+            MsgBox("Dates greater than today not accepted!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkExists(ByVal itemFound As Boolean, ctl As Control) As Boolean
+        If itemFound = True Then
+            checkExists = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkExists = False
+            ctl.BackColor = Color.Red
+            MsgBox("Item not found!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkPositiveValue(ByVal strVal As String, ctl As Control) As Boolean
+        If Val(strVal) >= 0 Then
+            checkPositiveValue = True
+            ctl.BackColor = Color.White
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        Else
+            checkPositiveValue = False
+            ctl.BackColor = Color.Red
+            MsgBox("Negative value not accepted!", MsgBoxStyle.Critical)
         End If
     End Function
 End Class
