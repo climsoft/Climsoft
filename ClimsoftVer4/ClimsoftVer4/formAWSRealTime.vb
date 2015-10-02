@@ -16,7 +16,7 @@
         'pnlDataStructures.Visible = False
         'pnlMessagesEncoding.Visible = False
         'Me.Text = "Process Settings"
-
+        pnlcontrol.Dock = DockStyle.Left
         ShowPanel(pnlProcessing, "Process Settings")
     End Sub
 
@@ -27,10 +27,11 @@
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()
+        ShowPanel(pnlProcessing, "Process Settings")
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
-        'pnlServers.Dock = DockStyle.Right
+        'pnlServers.Dock = DockStyle.Top
         'pnlServers.Visible = True
         'pnlProcessing.Visible = False
         'Me.Text = "Servers Settings"
@@ -50,11 +51,17 @@
         pnlMsgEncoding.Visible = False
         Me.Text = topic
         pnl.Visible = True
-        pnl.Dock = DockStyle.Right
+        pnl.Dock = DockStyle.Left
+
     End Sub
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click
         ShowPanel(pnlSites, "Site Settings")
+        SetDataSet("aws_sites")
+        rec = 0
+
+        PopulateForm("sites", txtSitesNavigator, rec)
+
     End Sub
 
     Private Sub cmdDataStructures_Click(sender As Object, e As EventArgs) Handles cmdDataStructures.Click
@@ -164,6 +171,14 @@ Err:
                 txtmssFTPMode.Text = ds.Tables("aws_mss").Rows(num).Item("ftpMode")
                 txtmssUser.Text = ds.Tables("aws_mss").Rows(num).Item("userName")
                 txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
+
+            Case "sites"
+                txtStation.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
+                txtInFile.Text = ds.Tables("aws_sites").Rows(num).Item("InputFile")
+                txtDataStructure.Text = ds.Tables("aws_sites").Rows(num).Item("DataStructure")
+                txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
+                txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
+                chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
         End Select
 
 
@@ -412,5 +427,13 @@ Err:
     Private Sub cmdmssLast_Click(sender As Object, e As EventArgs) Handles cmdmssLast.Click
         rec = Kount - 1
         PopulateForm("mss", txtmssNavigator, rec)
+    End Sub
+
+    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint
+
+    End Sub
+
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
+
     End Sub
 End Class
