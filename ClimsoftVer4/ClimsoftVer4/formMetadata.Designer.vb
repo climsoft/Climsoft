@@ -360,7 +360,7 @@ Partial Class formMetadata
         Me.TabMetadata.Controls.Add(Me.TabScheduleClass)
         Me.TabMetadata.Controls.Add(Me.TabPhysicalFeature)
         Me.TabMetadata.Controls.Add(Me.TabPaperArchive)
-        Me.TabMetadata.Location = New System.Drawing.Point(3, 27)
+        Me.TabMetadata.Location = New System.Drawing.Point(0, 27)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
         Me.TabMetadata.Size = New System.Drawing.Size(748, 476)
