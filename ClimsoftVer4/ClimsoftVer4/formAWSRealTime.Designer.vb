@@ -80,12 +80,12 @@ Partial Class formAWSRealTime
         Me.lblInputData = New System.Windows.Forms.Label()
         Me.lblInformation = New System.Windows.Forms.Label()
         Me.pnlDataStructures = New System.Windows.Forms.Panel()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.grpStructures1 = New System.Windows.Forms.GroupBox()
+        Me.grpStructures = New System.Windows.Forms.GroupBox()
+        Me.txtDelimiter = New System.Windows.Forms.ComboBox()
+        Me.txtQualifier = New System.Windows.Forms.TextBox()
+        Me.txtHeaders = New System.Windows.Forms.TextBox()
+        Me.txtStrName = New System.Windows.Forms.TextBox()
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdCreate = New System.Windows.Forms.Button()
@@ -93,9 +93,7 @@ Partial Class formAWSRealTime
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStrName = New System.Windows.Forms.Label()
-        Me.optNew = New System.Windows.Forms.RadioButton()
         Me.cmbExistingStructures = New System.Windows.Forms.ComboBox()
-        Me.optExistingStructure = New System.Windows.Forms.RadioButton()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.pnlServers = New System.Windows.Forms.Panel()
@@ -231,6 +229,16 @@ Partial Class formAWSRealTime
         Me.lblMsgHeader = New System.Windows.Forms.Label()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdViewUpdate = New System.Windows.Forms.Button()
+        Me.cmdDel = New System.Windows.Forms.Button()
+        Me.cmdUpdateSites = New System.Windows.Forms.Button()
+        Me.cmdAdd = New System.Windows.Forms.Button()
+        Me.btnMovePrevious = New System.Windows.Forms.Button()
+        Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnMoveLast = New System.Windows.Forms.Button()
+        Me.txtSitesNavigator = New System.Windows.Forms.TextBox()
+        Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtIP = New System.Windows.Forms.ComboBox()
         Me.txtDataStructure = New System.Windows.Forms.ComboBox()
@@ -243,15 +251,8 @@ Partial Class formAWSRealTime
         Me.lblInfile = New System.Windows.Forms.Label()
         Me.txtStation = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.btnMovePrevious = New System.Windows.Forms.Button()
-        Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnMoveLast = New System.Windows.Forms.Button()
-        Me.txtSitesNavigator = New System.Windows.Forms.TextBox()
-        Me.btnMoveNext = New System.Windows.Forms.Button()
-        Me.cmdViewUpdate = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.lblStructure = New System.Windows.Forms.Label()
+        Me.lblRecords = New System.Windows.Forms.Label()
         Me.pnlControl.SuspendLayout()
         Me.pnlProcessing.SuspendLayout()
         Me.pnlProcessSettings.SuspendLayout()
@@ -260,8 +261,8 @@ Partial Class formAWSRealTime
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlDataStructures.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.grpStructures1.SuspendLayout()
+        Me.grpStructures.SuspendLayout()
         Me.grpElements.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlServers.SuspendLayout()
@@ -873,78 +874,80 @@ Partial Class formAWSRealTime
         '
         Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlDataStructures.Controls.Add(Me.GroupBox2)
+        Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Controls.Add(Me.grpElements)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(200, 13)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(193, 15)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(736, 435)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(736, 521)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
-        'GroupBox2
+        'grpStructures1
         '
-        Me.GroupBox2.Controls.Add(Me.GroupBox3)
-        Me.GroupBox2.Controls.Add(Me.optNew)
-        Me.GroupBox2.Controls.Add(Me.cmbExistingStructures)
-        Me.GroupBox2.Controls.Add(Me.optExistingStructure)
-        Me.GroupBox2.Location = New System.Drawing.Point(226, 47)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(327, 219)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Data Structures"
+        Me.grpStructures1.Controls.Add(Me.lblStructure)
+        Me.grpStructures1.Controls.Add(Me.grpStructures)
+        Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
+        Me.grpStructures1.Location = New System.Drawing.Point(220, 16)
+        Me.grpStructures1.Name = "grpStructures1"
+        Me.grpStructures1.Size = New System.Drawing.Size(327, 234)
+        Me.grpStructures1.TabIndex = 1
+        Me.grpStructures1.TabStop = False
+        Me.grpStructures1.Text = "Data Structures"
         '
-        'GroupBox3
+        'grpStructures
         '
-        Me.GroupBox3.Controls.Add(Me.TextBox10)
-        Me.GroupBox3.Controls.Add(Me.TextBox9)
-        Me.GroupBox3.Controls.Add(Me.TextBox8)
-        Me.GroupBox3.Controls.Add(Me.TextBox7)
-        Me.GroupBox3.Controls.Add(Me.cmdDelete)
-        Me.GroupBox3.Controls.Add(Me.cmdUpdate)
-        Me.GroupBox3.Controls.Add(Me.cmdCreate)
-        Me.GroupBox3.Controls.Add(Me.Label21)
-        Me.GroupBox3.Controls.Add(Me.Label20)
-        Me.GroupBox3.Controls.Add(Me.Label19)
-        Me.GroupBox3.Controls.Add(Me.lblStrName)
-        Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 65)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(296, 145)
-        Me.GroupBox3.TabIndex = 7
-        Me.GroupBox3.TabStop = False
+        Me.grpStructures.Controls.Add(Me.lblRecords)
+        Me.grpStructures.Controls.Add(Me.txtDelimiter)
+        Me.grpStructures.Controls.Add(Me.txtQualifier)
+        Me.grpStructures.Controls.Add(Me.txtHeaders)
+        Me.grpStructures.Controls.Add(Me.txtStrName)
+        Me.grpStructures.Controls.Add(Me.cmdDelete)
+        Me.grpStructures.Controls.Add(Me.cmdUpdate)
+        Me.grpStructures.Controls.Add(Me.cmdCreate)
+        Me.grpStructures.Controls.Add(Me.Label21)
+        Me.grpStructures.Controls.Add(Me.Label20)
+        Me.grpStructures.Controls.Add(Me.Label19)
+        Me.grpStructures.Controls.Add(Me.lblStrName)
+        Me.grpStructures.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.grpStructures.Location = New System.Drawing.Point(13, 65)
+        Me.grpStructures.Name = "grpStructures"
+        Me.grpStructures.Size = New System.Drawing.Size(296, 157)
+        Me.grpStructures.TabIndex = 7
+        Me.grpStructures.TabStop = False
         '
-        'TextBox10
+        'txtDelimiter
         '
-        Me.TextBox10.Location = New System.Drawing.Point(119, 74)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(135, 20)
-        Me.TextBox10.TabIndex = 17
+        Me.txtDelimiter.FormattingEnabled = True
+        Me.txtDelimiter.Items.AddRange(New Object() {"Comma", "Tab", "Space"})
+        Me.txtDelimiter.Location = New System.Drawing.Point(119, 31)
+        Me.txtDelimiter.Name = "txtDelimiter"
+        Me.txtDelimiter.Size = New System.Drawing.Size(135, 21)
+        Me.txtDelimiter.TabIndex = 18
         '
-        'TextBox9
+        'txtQualifier
         '
-        Me.TextBox9.Location = New System.Drawing.Point(119, 53)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(136, 20)
-        Me.TextBox9.TabIndex = 16
+        Me.txtQualifier.Location = New System.Drawing.Point(119, 72)
+        Me.txtQualifier.Name = "txtQualifier"
+        Me.txtQualifier.Size = New System.Drawing.Size(135, 20)
+        Me.txtQualifier.TabIndex = 17
         '
-        'TextBox8
+        'txtHeaders
         '
-        Me.TextBox8.Location = New System.Drawing.Point(119, 32)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(136, 20)
-        Me.TextBox8.TabIndex = 15
+        Me.txtHeaders.Location = New System.Drawing.Point(119, 52)
+        Me.txtHeaders.Name = "txtHeaders"
+        Me.txtHeaders.Size = New System.Drawing.Size(135, 20)
+        Me.txtHeaders.TabIndex = 16
         '
-        'TextBox7
+        'txtStrName
         '
-        Me.TextBox7.Location = New System.Drawing.Point(119, 11)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(136, 20)
-        Me.TextBox7.TabIndex = 14
+        Me.txtStrName.Location = New System.Drawing.Point(119, 11)
+        Me.txtStrName.Name = "txtStrName"
+        Me.txtStrName.Size = New System.Drawing.Size(135, 20)
+        Me.txtStrName.TabIndex = 14
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(200, 110)
+        Me.cmdDelete.Location = New System.Drawing.Point(200, 128)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(62, 23)
         Me.cmdDelete.TabIndex = 13
@@ -953,7 +956,7 @@ Partial Class formAWSRealTime
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(117, 110)
+        Me.cmdUpdate.Location = New System.Drawing.Point(117, 128)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(62, 23)
         Me.cmdUpdate.TabIndex = 12
@@ -962,7 +965,7 @@ Partial Class formAWSRealTime
         '
         'cmdCreate
         '
-        Me.cmdCreate.Location = New System.Drawing.Point(34, 110)
+        Me.cmdCreate.Location = New System.Drawing.Point(34, 128)
         Me.cmdCreate.Name = "cmdCreate"
         Me.cmdCreate.Size = New System.Drawing.Size(62, 23)
         Me.cmdCreate.TabIndex = 11
@@ -1006,44 +1009,20 @@ Partial Class formAWSRealTime
         Me.lblStrName.TabIndex = 7
         Me.lblStrName.Text = "Structure Name"
         '
-        'optNew
-        '
-        Me.optNew.AutoSize = True
-        Me.optNew.Location = New System.Drawing.Point(6, 45)
-        Me.optNew.Name = "optNew"
-        Me.optNew.Size = New System.Drawing.Size(47, 17)
-        Me.optNew.TabIndex = 2
-        Me.optNew.TabStop = True
-        Me.optNew.Text = "New"
-        Me.optNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.optNew.UseVisualStyleBackColor = True
-        '
         'cmbExistingStructures
         '
         Me.cmbExistingStructures.FormattingEnabled = True
-        Me.cmbExistingStructures.Location = New System.Drawing.Point(73, 22)
+        Me.cmbExistingStructures.Location = New System.Drawing.Point(132, 25)
         Me.cmbExistingStructures.Name = "cmbExistingStructures"
-        Me.cmbExistingStructures.Size = New System.Drawing.Size(189, 21)
+        Me.cmbExistingStructures.Size = New System.Drawing.Size(130, 21)
         Me.cmbExistingStructures.TabIndex = 1
-        '
-        'optExistingStructure
-        '
-        Me.optExistingStructure.AutoSize = True
-        Me.optExistingStructure.Location = New System.Drawing.Point(6, 22)
-        Me.optExistingStructure.Name = "optExistingStructure"
-        Me.optExistingStructure.Size = New System.Drawing.Size(61, 17)
-        Me.optExistingStructure.TabIndex = 0
-        Me.optExistingStructure.TabStop = True
-        Me.optExistingStructure.Text = "Existing"
-        Me.optExistingStructure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.optExistingStructure.UseVisualStyleBackColor = True
         '
         'grpElements
         '
         Me.grpElements.Controls.Add(Me.DataGridView1)
-        Me.grpElements.Location = New System.Drawing.Point(8, 274)
+        Me.grpElements.Location = New System.Drawing.Point(9, 251)
         Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(716, 271)
+        Me.grpElements.Size = New System.Drawing.Size(716, 259)
         Me.grpElements.TabIndex = 0
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements View/Update"
@@ -1055,7 +1034,7 @@ Partial Class formAWSRealTime
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(8, 17)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(702, 244)
+        Me.DataGridView1.Size = New System.Drawing.Size(701, 235)
         Me.DataGridView1.TabIndex = 0
         '
         'pnlServers
@@ -2041,9 +2020,9 @@ Partial Class formAWSRealTime
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(119, 47)
+        Me.ComboBox2.Location = New System.Drawing.Point(102, 47)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(167, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(184, 21)
         Me.ComboBox2.TabIndex = 3
         '
         'Label23
@@ -2328,18 +2307,19 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.GroupBox11)
-        Me.pnlSites.Location = New System.Drawing.Point(196, 83)
+        Me.pnlSites.Location = New System.Drawing.Point(198, 166)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(734, 419)
+        Me.pnlSites.Size = New System.Drawing.Size(734, 417)
         Me.pnlSites.TabIndex = 3
         '
         'GroupBox11
         '
+        Me.GroupBox11.Controls.Add(Me.cmdClear)
         Me.GroupBox11.Controls.Add(Me.cmdViewUpdate)
-        Me.GroupBox11.Controls.Add(Me.Button4)
-        Me.GroupBox11.Controls.Add(Me.Button3)
-        Me.GroupBox11.Controls.Add(Me.Button2)
+        Me.GroupBox11.Controls.Add(Me.cmdDel)
+        Me.GroupBox11.Controls.Add(Me.cmdUpdateSites)
+        Me.GroupBox11.Controls.Add(Me.cmdAdd)
         Me.GroupBox11.Controls.Add(Me.btnMovePrevious)
         Me.GroupBox11.Controls.Add(Me.btnMoveFirst)
         Me.GroupBox11.Controls.Add(Me.btnMoveLast)
@@ -2357,16 +2337,113 @@ Partial Class formAWSRealTime
         Me.GroupBox11.Controls.Add(Me.lblInfile)
         Me.GroupBox11.Controls.Add(Me.txtStation)
         Me.GroupBox11.Controls.Add(Me.Label15)
-        Me.GroupBox11.Location = New System.Drawing.Point(11, 40)
+        Me.GroupBox11.Location = New System.Drawing.Point(9, 38)
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(708, 376)
         Me.GroupBox11.TabIndex = 67
         Me.GroupBox11.TabStop = False
         '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(332, 310)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(68, 29)
+        Me.cmdClear.TabIndex = 88
+        Me.cmdClear.Text = "Reset"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdViewUpdate
+        '
+        Me.cmdViewUpdate.Location = New System.Drawing.Point(508, 310)
+        Me.cmdViewUpdate.Name = "cmdViewUpdate"
+        Me.cmdViewUpdate.Size = New System.Drawing.Size(88, 29)
+        Me.cmdViewUpdate.TabIndex = 87
+        Me.cmdViewUpdate.Text = "View/Update"
+        Me.cmdViewUpdate.UseVisualStyleBackColor = True
+        '
+        'cmdDel
+        '
+        Me.cmdDel.Location = New System.Drawing.Point(420, 310)
+        Me.cmdDel.Name = "cmdDel"
+        Me.cmdDel.Size = New System.Drawing.Size(68, 29)
+        Me.cmdDel.TabIndex = 86
+        Me.cmdDel.Text = "Delete"
+        Me.cmdDel.UseVisualStyleBackColor = True
+        '
+        'cmdUpdateSites
+        '
+        Me.cmdUpdateSites.Location = New System.Drawing.Point(244, 310)
+        Me.cmdUpdateSites.Name = "cmdUpdateSites"
+        Me.cmdUpdateSites.Size = New System.Drawing.Size(68, 29)
+        Me.cmdUpdateSites.TabIndex = 85
+        Me.cmdUpdateSites.Text = "Update"
+        Me.cmdUpdateSites.UseVisualStyleBackColor = True
+        '
+        'cmdAdd
+        '
+        Me.cmdAdd.Location = New System.Drawing.Point(156, 310)
+        Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(68, 29)
+        Me.cmdAdd.TabIndex = 84
+        Me.cmdAdd.Text = "AddNew"
+        Me.cmdAdd.UseVisualStyleBackColor = True
+        '
+        'btnMovePrevious
+        '
+        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(47, 346)
+        Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
+        Me.btnMovePrevious.TabIndex = 83
+        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        '
+        'btnMoveFirst
+        '
+        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(9, 346)
+        Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 82
+        Me.btnMoveFirst.UseVisualStyleBackColor = True
+        '
+        'btnMoveLast
+        '
+        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(658, 346)
+        Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLast.TabIndex = 81
+        Me.btnMoveLast.UseVisualStyleBackColor = True
+        '
+        'txtSitesNavigator
+        '
+        Me.txtSitesNavigator.Location = New System.Drawing.Point(87, 347)
+        Me.txtSitesNavigator.Name = "txtSitesNavigator"
+        Me.txtSitesNavigator.Size = New System.Drawing.Size(536, 20)
+        Me.txtSitesNavigator.TabIndex = 80
+        Me.txtSitesNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btnMoveNext
+        '
+        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(623, 346)
+        Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveNext.TabIndex = 79
+        Me.btnMoveNext.UseVisualStyleBackColor = True
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(84, 247)
+        Me.Label4.Location = New System.Drawing.Point(84, 246)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(61, 13)
         Me.Label4.TabIndex = 78
@@ -2471,93 +2548,23 @@ Partial Class formAWSRealTime
         Me.Label15.TabIndex = 67
         Me.Label15.Text = "Site Name/ID"
         '
-        'btnMovePrevious
+        'lblStructure
         '
-        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
-        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(47, 346)
-        Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
-        Me.btnMovePrevious.TabIndex = 83
-        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        Me.lblStructure.AutoSize = True
+        Me.lblStructure.Location = New System.Drawing.Point(22, 29)
+        Me.lblStructure.Name = "lblStructure"
+        Me.lblStructure.Size = New System.Drawing.Size(107, 13)
+        Me.lblStructure.TabIndex = 8
+        Me.lblStructure.Text = "Select Data structure"
         '
-        'btnMoveFirst
+        'lblRecords
         '
-        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(9, 346)
-        Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 82
-        Me.btnMoveFirst.UseVisualStyleBackColor = True
-        '
-        'btnMoveLast
-        '
-        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(658, 346)
-        Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveLast.TabIndex = 81
-        Me.btnMoveLast.UseVisualStyleBackColor = True
-        '
-        'txtSitesNavigator
-        '
-        Me.txtSitesNavigator.Location = New System.Drawing.Point(87, 347)
-        Me.txtSitesNavigator.Name = "txtSitesNavigator"
-        Me.txtSitesNavigator.Size = New System.Drawing.Size(536, 20)
-        Me.txtSitesNavigator.TabIndex = 80
-        Me.txtSitesNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnMoveNext
-        '
-        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(623, 346)
-        Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveNext.TabIndex = 79
-        Me.btnMoveNext.UseVisualStyleBackColor = True
-        '
-        'cmdViewUpdate
-        '
-        Me.cmdViewUpdate.Location = New System.Drawing.Point(461, 310)
-        Me.cmdViewUpdate.Name = "cmdViewUpdate"
-        Me.cmdViewUpdate.Size = New System.Drawing.Size(88, 29)
-        Me.cmdViewUpdate.TabIndex = 87
-        Me.cmdViewUpdate.Text = "View/Update"
-        Me.cmdViewUpdate.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(369, 310)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(68, 29)
-        Me.Button4.TabIndex = 86
-        Me.Button4.Text = "Delete"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(277, 310)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(68, 29)
-        Me.Button3.TabIndex = 85
-        Me.Button3.Text = "Update"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(185, 310)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(68, 29)
-        Me.Button2.TabIndex = 84
-        Me.Button2.Text = "AddNew"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.lblRecords.AutoSize = True
+        Me.lblRecords.Location = New System.Drawing.Point(168, 98)
+        Me.lblRecords.Name = "lblRecords"
+        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
+        Me.lblRecords.TabIndex = 20
+        Me.lblRecords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'formAWSRealTime
         '
@@ -2586,10 +2593,10 @@ Partial Class formAWSRealTime
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.pnlDataStructures.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.grpStructures1.ResumeLayout(False)
+        Me.grpStructures1.PerformLayout()
+        Me.grpStructures.ResumeLayout(False)
+        Me.grpStructures.PerformLayout()
         Me.grpElements.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlServers.ResumeLayout(False)
@@ -2702,12 +2709,11 @@ Partial Class formAWSRealTime
     Friend WithEvents lblInputUser As System.Windows.Forms.Label
     Friend WithEvents lblFTPFolder As System.Windows.Forms.Label
     Friend WithEvents lblBaseStationFTP As System.Windows.Forms.Label
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents grpStructures1 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpStructures As System.Windows.Forms.GroupBox
+    Friend WithEvents txtQualifier As System.Windows.Forms.TextBox
+    Friend WithEvents txtHeaders As System.Windows.Forms.TextBox
+    Friend WithEvents txtStrName As System.Windows.Forms.TextBox
     Friend WithEvents cmdDelete As System.Windows.Forms.Button
     Friend WithEvents cmdUpdate As System.Windows.Forms.Button
     Friend WithEvents cmdCreate As System.Windows.Forms.Button
@@ -2715,9 +2721,7 @@ Partial Class formAWSRealTime
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents lblStrName As System.Windows.Forms.Label
-    Friend WithEvents optNew As System.Windows.Forms.RadioButton
     Friend WithEvents cmbExistingStructures As System.Windows.Forms.ComboBox
-    Friend WithEvents optExistingStructure As System.Windows.Forms.RadioButton
     Friend WithEvents grpElements As System.Windows.Forms.GroupBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents grpSensors As System.Windows.Forms.GroupBox
@@ -2852,7 +2856,11 @@ Partial Class formAWSRealTime
     Friend WithEvents txtSitesNavigator As System.Windows.Forms.TextBox
     Friend WithEvents btnMoveNext As System.Windows.Forms.Button
     Friend WithEvents cmdViewUpdate As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents cmdDel As System.Windows.Forms.Button
+    Friend WithEvents cmdUpdateSites As System.Windows.Forms.Button
+    Friend WithEvents cmdAdd As System.Windows.Forms.Button
+    Friend WithEvents cmdClear As System.Windows.Forms.Button
+    Friend WithEvents txtDelimiter As System.Windows.Forms.ComboBox
+    Friend WithEvents lblStructure As System.Windows.Forms.Label
+    Friend WithEvents lblRecords As System.Windows.Forms.Label
 End Class

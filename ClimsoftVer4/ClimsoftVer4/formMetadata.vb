@@ -699,4 +699,8 @@ Err:
     Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles cmdLast1.Click
 
     End Sub
+
+    Private Sub TabStationElement_Click(sender As Object, e As EventArgs) Handles TabStationElement.Click
+
+    End Sub
 End Class
