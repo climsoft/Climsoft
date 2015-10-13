@@ -545,6 +545,7 @@ Err:
         dstn.Clear()
 
         da.Fill(dstn, tbl)
+
         formDataView.Show()
         formDataView.DataGridView.DataSource = dstn
         formDataView.DataGridView.DataMember = tbl
