@@ -22,6 +22,7 @@ Partial Class formAWSRealTime
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formAWSRealTime))
         Me.pnlControl = New System.Windows.Forms.Panel()
         Me.cmdMessages = New System.Windows.Forms.Button()
@@ -31,23 +32,25 @@ Partial Class formAWSRealTime
         Me.cmdServers = New System.Windows.Forms.Button()
         Me.cmdProcess = New System.Windows.Forms.Button()
         Me.pnlProcessing = New System.Windows.Forms.Panel()
+        Me.list_errors = New System.Windows.Forms.ListBox()
+        Me.Ltime = New System.Windows.Forms.Label()
         Me.pnlProcessSettings = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.cmdSave = New System.Windows.Forms.Button()
+        Me.chkDeleteFile = New System.Windows.Forms.CheckBox()
+        Me.txtTimeout = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtPeriod = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.txtOffset = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.txtInterval = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.optStop = New System.Windows.Forms.RadioButton()
+        Me.optStart = New System.Windows.Forms.RadioButton()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtNxtProcess = New System.Windows.Forms.TextBox()
         Me.txtNextProcess = New System.Windows.Forms.Label()
         Me.txtLastProcess = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -60,7 +63,6 @@ Partial Class formAWSRealTime
         Me.lblDatetime = New System.Windows.Forms.Label()
         Me.lblSatus = New System.Windows.Forms.Label()
         Me.lblErrors = New System.Windows.Forms.Label()
-        Me.pnlErrors = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -79,9 +81,13 @@ Partial Class formAWSRealTime
         Me.lblSever = New System.Windows.Forms.Label()
         Me.lblInputData = New System.Windows.Forms.Label()
         Me.lblInformation = New System.Windows.Forms.Label()
+        Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.pnlDataStructures = New System.Windows.Forms.Panel()
         Me.grpStructures1 = New System.Windows.Forms.GroupBox()
+        Me.lblStructure = New System.Windows.Forms.Label()
         Me.grpStructures = New System.Windows.Forms.GroupBox()
+        Me.lblRecords = New System.Windows.Forms.Label()
         Me.txtDelimiter = New System.Windows.Forms.ComboBox()
         Me.txtQualifier = New System.Windows.Forms.TextBox()
         Me.txtHeaders = New System.Windows.Forms.TextBox()
@@ -94,8 +100,6 @@ Partial Class formAWSRealTime
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStrName = New System.Windows.Forms.Label()
         Me.cmbExistingStructures = New System.Windows.Forms.ComboBox()
-        Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.pnlServers = New System.Windows.Forms.Panel()
         Me.pnlBaseStation = New System.Windows.Forms.Panel()
         Me.cmdRefresh = New System.Windows.Forms.Button()
@@ -251,8 +255,8 @@ Partial Class formAWSRealTime
         Me.lblInfile = New System.Windows.Forms.Label()
         Me.txtStation = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.lblStructure = New System.Windows.Forms.Label()
-        Me.lblRecords = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.pnlControl.SuspendLayout()
         Me.pnlProcessing.SuspendLayout()
         Me.pnlProcessSettings.SuspendLayout()
@@ -260,11 +264,11 @@ Partial Class formAWSRealTime
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.grpElements.SuspendLayout()
+        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDataStructures.SuspendLayout()
         Me.grpStructures1.SuspendLayout()
         Me.grpStructures.SuspendLayout()
-        Me.grpElements.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlServers.SuspendLayout()
         Me.pnlBaseStation.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -297,7 +301,7 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 542)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 583)
         Me.pnlControl.TabIndex = 0
         '
         'cmdMessages
@@ -369,34 +373,54 @@ Partial Class formAWSRealTime
         '
         Me.pnlProcessing.BackColor = System.Drawing.Color.MistyRose
         Me.pnlProcessing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlProcessing.Controls.Add(Me.list_errors)
+        Me.pnlProcessing.Controls.Add(Me.Ltime)
         Me.pnlProcessing.Controls.Add(Me.pnlProcessSettings)
         Me.pnlProcessing.Controls.Add(Me.Panel4)
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
-        Me.pnlProcessing.Controls.Add(Me.pnlErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
-        Me.pnlProcessing.Location = New System.Drawing.Point(200, 124)
+        Me.pnlProcessing.Controls.Add(Me.grpElements)
+        Me.pnlProcessing.Location = New System.Drawing.Point(200, 16)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(719, 91)
+        Me.pnlProcessing.Size = New System.Drawing.Size(719, 557)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
+        '
+        'list_errors
+        '
+        Me.list_errors.FormattingEnabled = True
+        Me.list_errors.Location = New System.Drawing.Point(11, 450)
+        Me.list_errors.Name = "list_errors"
+        Me.list_errors.Size = New System.Drawing.Size(688, 95)
+        Me.list_errors.TabIndex = 8
+        '
+        'Ltime
+        '
+        Me.Ltime.AutoSize = True
+        Me.Ltime.BackColor = System.Drawing.Color.SeaShell
+        Me.Ltime.Location = New System.Drawing.Point(165, 541)
+        Me.Ltime.Name = "Ltime"
+        Me.Ltime.Size = New System.Drawing.Size(16, 13)
+        Me.Ltime.TabIndex = 7
+        Me.Ltime.Text = "   "
         '
         'pnlProcessSettings
         '
         Me.pnlProcessSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlProcessSettings.Controls.Add(Me.Label9)
-        Me.pnlProcessSettings.Controls.Add(Me.Button1)
-        Me.pnlProcessSettings.Controls.Add(Me.CheckBox1)
-        Me.pnlProcessSettings.Controls.Add(Me.TextBox2)
+        Me.pnlProcessSettings.Controls.Add(Me.cmdSave)
+        Me.pnlProcessSettings.Controls.Add(Me.chkDeleteFile)
+        Me.pnlProcessSettings.Controls.Add(Me.txtTimeout)
         Me.pnlProcessSettings.Controls.Add(Me.Label10)
         Me.pnlProcessSettings.Controls.Add(Me.Label11)
-        Me.pnlProcessSettings.Controls.Add(Me.TextBox4)
+        Me.pnlProcessSettings.Controls.Add(Me.txtPeriod)
         Me.pnlProcessSettings.Controls.Add(Me.Label12)
-        Me.pnlProcessSettings.Controls.Add(Me.TextBox5)
+        Me.pnlProcessSettings.Controls.Add(Me.txtOffset)
         Me.pnlProcessSettings.Controls.Add(Me.Label13)
-        Me.pnlProcessSettings.Controls.Add(Me.TextBox6)
+        Me.pnlProcessSettings.Controls.Add(Me.txtInterval)
         Me.pnlProcessSettings.Controls.Add(Me.Label14)
-        Me.pnlProcessSettings.Controls.Add(Me.RadioButton1)
-        Me.pnlProcessSettings.Controls.Add(Me.RadioButton2)
+        Me.pnlProcessSettings.Controls.Add(Me.optStop)
+        Me.pnlProcessSettings.Controls.Add(Me.optStart)
         Me.pnlProcessSettings.Location = New System.Drawing.Point(50, 14)
         Me.pnlProcessSettings.Name = "pnlProcessSettings"
         Me.pnlProcessSettings.Size = New System.Drawing.Size(620, 131)
@@ -412,38 +436,37 @@ Partial Class formAWSRealTime
         Me.Label9.TabIndex = 13
         Me.Label9.Text = "Settings"
         '
-        'Button1
+        'cmdSave
         '
-        Me.Button1.Location = New System.Drawing.Point(437, 90)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(86, 24)
-        Me.Button1.TabIndex = 12
-        Me.Button1.Text = "Save Changes"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.cmdSave.Location = New System.Drawing.Point(510, 93)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(86, 24)
+        Me.cmdSave.TabIndex = 12
+        Me.cmdSave.Text = "Save Changes"
+        Me.cmdSave.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkDeleteFile
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(244, 94)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(183, 17)
-        Me.CheckBox1.TabIndex = 11
-        Me.CheckBox1.Text = "Delete Input File After Processing"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkDeleteFile.AutoSize = True
+        Me.chkDeleteFile.Location = New System.Drawing.Point(237, 93)
+        Me.chkDeleteFile.Name = "chkDeleteFile"
+        Me.chkDeleteFile.Size = New System.Drawing.Size(183, 17)
+        Me.chkDeleteFile.TabIndex = 11
+        Me.chkDeleteFile.Text = "Delete Input File After Processing"
+        Me.chkDeleteFile.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'txtTimeout
         '
-        Me.TextBox2.Location = New System.Drawing.Point(195, 92)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox2.TabIndex = 10
-        Me.TextBox2.Text = "20"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtTimeout.Location = New System.Drawing.Point(182, 88)
+        Me.txtTimeout.Name = "txtTimeout"
+        Me.txtTimeout.Size = New System.Drawing.Size(33, 20)
+        Me.txtTimeout.TabIndex = 10
+        Me.txtTimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(61, 96)
+        Me.Label10.Location = New System.Drawing.Point(48, 94)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(124, 13)
         Me.Label10.TabIndex = 9
@@ -452,92 +475,89 @@ Partial Class formAWSRealTime
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(472, 62)
+        Me.Label11.Location = New System.Drawing.Point(507, 62)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(44, 13)
+        Me.Label11.Size = New System.Drawing.Size(30, 13)
         Me.Label11.TabIndex = 8
-        Me.Label11.Text = "Minutes"
+        Me.Label11.Text = "Hour"
         '
-        'TextBox4
+        'txtPeriod
         '
-        Me.TextBox4.Location = New System.Drawing.Point(438, 58)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox4.TabIndex = 7
-        Me.TextBox4.Text = "1"
-        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPeriod.Location = New System.Drawing.Point(473, 58)
+        Me.txtPeriod.Name = "txtPeriod"
+        Me.txtPeriod.Size = New System.Drawing.Size(33, 20)
+        Me.txtPeriod.TabIndex = 7
+        Me.txtPeriod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(367, 62)
+        Me.Label12.Location = New System.Drawing.Point(402, 62)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 13)
         Me.Label12.TabIndex = 6
         Me.Label12.Text = "Retrieve Last"
         '
-        'TextBox5
+        'txtOffset
         '
-        Me.TextBox5.Location = New System.Drawing.Point(317, 58)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox5.TabIndex = 5
-        Me.TextBox5.Text = "10"
-        Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtOffset.Location = New System.Drawing.Point(344, 58)
+        Me.txtOffset.Name = "txtOffset"
+        Me.txtOffset.Size = New System.Drawing.Size(33, 20)
+        Me.txtOffset.TabIndex = 5
+        Me.txtOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(240, 62)
+        Me.Label13.Location = New System.Drawing.Point(234, 62)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(80, 13)
+        Me.Label13.Size = New System.Drawing.Size(107, 13)
         Me.Label13.TabIndex = 4
-        Me.Label13.Text = "Delay (Minutes)"
+        Me.Label13.Text = "Hour Offset (Minutes)"
         '
-        'TextBox6
+        'txtInterval
         '
-        Me.TextBox6.Location = New System.Drawing.Point(195, 62)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox6.TabIndex = 3
-        Me.TextBox6.Text = "60"
-        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtInterval.Location = New System.Drawing.Point(182, 58)
+        Me.txtInterval.Name = "txtInterval"
+        Me.txtInterval.Size = New System.Drawing.Size(33, 20)
+        Me.txtInterval.TabIndex = 3
+        Me.txtInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(61, 62)
+        Me.Label14.Location = New System.Drawing.Point(48, 62)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(133, 13)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Retrieval Interval (Minutes)"
         '
-        'RadioButton1
+        'optStop
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(134, 26)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(47, 17)
-        Me.RadioButton1.TabIndex = 1
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Stop"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.optStop.AutoSize = True
+        Me.optStop.Location = New System.Drawing.Point(121, 26)
+        Me.optStop.Name = "optStop"
+        Me.optStop.Size = New System.Drawing.Size(47, 17)
+        Me.optStop.TabIndex = 1
+        Me.optStop.TabStop = True
+        Me.optStop.Text = "Stop"
+        Me.optStop.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'optStart
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(60, 26)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(59, 17)
-        Me.RadioButton2.TabIndex = 0
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Restart"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.optStart.AutoSize = True
+        Me.optStart.Location = New System.Drawing.Point(47, 26)
+        Me.optStart.Name = "optStart"
+        Me.optStart.Size = New System.Drawing.Size(59, 17)
+        Me.optStart.TabIndex = 0
+        Me.optStart.TabStop = True
+        Me.optStart.Text = "Restart"
+        Me.optStart.UseVisualStyleBackColor = True
         '
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.TextBox3)
+        Me.Panel4.Controls.Add(Me.txtNxtProcess)
         Me.Panel4.Controls.Add(Me.txtNextProcess)
         Me.Panel4.Controls.Add(Me.txtLastProcess)
         Me.Panel4.Controls.Add(Me.Label1)
@@ -549,25 +569,25 @@ Partial Class formAWSRealTime
         Me.Panel4.Controls.Add(Me.txtDateTime)
         Me.Panel4.Controls.Add(Me.lblDatetime)
         Me.Panel4.Controls.Add(Me.lblSatus)
-        Me.Panel4.Location = New System.Drawing.Point(450, 163)
+        Me.Panel4.Location = New System.Drawing.Point(419, 163)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(220, 268)
+        Me.Panel4.Size = New System.Drawing.Size(280, 268)
         Me.Panel4.TabIndex = 4
         '
-        'TextBox3
+        'txtNxtProcess
         '
-        Me.TextBox3.BackColor = System.Drawing.Color.MistyRose
-        Me.TextBox3.Enabled = False
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(119, 113)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox3.TabIndex = 19
+        Me.txtNxtProcess.BackColor = System.Drawing.Color.MistyRose
+        Me.txtNxtProcess.Enabled = False
+        Me.txtNxtProcess.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNxtProcess.Location = New System.Drawing.Point(136, 113)
+        Me.txtNxtProcess.Name = "txtNxtProcess"
+        Me.txtNxtProcess.Size = New System.Drawing.Size(139, 20)
+        Me.txtNxtProcess.TabIndex = 19
         '
         'txtNextProcess
         '
         Me.txtNextProcess.AutoSize = True
-        Me.txtNextProcess.Location = New System.Drawing.Point(122, 97)
+        Me.txtNextProcess.Location = New System.Drawing.Point(158, 99)
         Me.txtNextProcess.Name = "txtNextProcess"
         Me.txtNextProcess.Size = New System.Drawing.Size(84, 13)
         Me.txtNextProcess.TabIndex = 18
@@ -580,7 +600,7 @@ Partial Class formAWSRealTime
         Me.txtLastProcess.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLastProcess.Location = New System.Drawing.Point(6, 113)
         Me.txtLastProcess.Name = "txtLastProcess"
-        Me.txtLastProcess.Size = New System.Drawing.Size(90, 20)
+        Me.txtLastProcess.Size = New System.Drawing.Size(124, 20)
         Me.txtLastProcess.TabIndex = 17
         '
         'Label1
@@ -606,7 +626,7 @@ Partial Class formAWSRealTime
         Me.lblGMTsign.BackColor = System.Drawing.Color.MistyRose
         Me.lblGMTsign.Enabled = False
         Me.lblGMTsign.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGMTsign.Location = New System.Drawing.Point(161, 56)
+        Me.lblGMTsign.Location = New System.Drawing.Point(198, 56)
         Me.lblGMTsign.Name = "lblGMTsign"
         Me.lblGMTsign.Size = New System.Drawing.Size(32, 20)
         Me.lblGMTsign.TabIndex = 14
@@ -616,7 +636,7 @@ Partial Class formAWSRealTime
         'lblGMT
         '
         Me.lblGMT.AutoSize = True
-        Me.lblGMT.Location = New System.Drawing.Point(143, 40)
+        Me.lblGMT.Location = New System.Drawing.Point(180, 40)
         Me.lblGMT.Name = "lblGMT"
         Me.lblGMT.Size = New System.Drawing.Size(67, 13)
         Me.lblGMT.TabIndex = 13
@@ -649,7 +669,7 @@ Partial Class formAWSRealTime
         Me.txtDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDateTime.Location = New System.Drawing.Point(6, 56)
         Me.txtDateTime.Name = "txtDateTime"
-        Me.txtDateTime.Size = New System.Drawing.Size(128, 20)
+        Me.txtDateTime.Size = New System.Drawing.Size(157, 20)
         Me.txtDateTime.TabIndex = 8
         '
         'lblDatetime
@@ -680,24 +700,15 @@ Partial Class formAWSRealTime
         Me.lblErrors.TabIndex = 3
         Me.lblErrors.Text = "Error Messages"
         '
-        'pnlErrors
-        '
-        Me.pnlErrors.BackColor = System.Drawing.Color.SeaShell
-        Me.pnlErrors.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlErrors.Location = New System.Drawing.Point(51, 447)
-        Me.pnlErrors.Name = "pnlErrors"
-        Me.pnlErrors.Size = New System.Drawing.Size(618, 90)
-        Me.pnlErrors.TabIndex = 2
-        '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.lblInformation)
-        Me.Panel1.Location = New System.Drawing.Point(50, 162)
+        Me.Panel1.Location = New System.Drawing.Point(13, 162)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(396, 269)
+        Me.Panel1.Size = New System.Drawing.Size(402, 269)
         Me.Panel1.TabIndex = 1
         '
         'Panel3
@@ -808,7 +819,7 @@ Partial Class formAWSRealTime
         '
         Me.lstInputFiles.BackColor = System.Drawing.Color.SeaShell
         Me.lstInputFiles.FormattingEnabled = True
-        Me.lstInputFiles.Location = New System.Drawing.Point(3, 104)
+        Me.lstInputFiles.Location = New System.Drawing.Point(6, 106)
         Me.lstInputFiles.MultiColumn = True
         Me.lstInputFiles.Name = "lstInputFiles"
         Me.lstInputFiles.Size = New System.Drawing.Size(176, 134)
@@ -870,13 +881,31 @@ Partial Class formAWSRealTime
         Me.lblInformation.TabIndex = 0
         Me.lblInformation.Text = "Processinf Information"
         '
+        'grpElements
+        '
+        Me.grpElements.Controls.Add(Me.DataGridViewStructures)
+        Me.grpElements.Location = New System.Drawing.Point(50, 333)
+        Me.grpElements.Name = "grpElements"
+        Me.grpElements.Size = New System.Drawing.Size(690, 42)
+        Me.grpElements.TabIndex = 0
+        Me.grpElements.TabStop = False
+        Me.grpElements.Text = "Elements View/Update"
+        '
+        'DataGridViewStructures
+        '
+        Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewStructures.Location = New System.Drawing.Point(666, 23)
+        Me.DataGridViewStructures.Name = "DataGridViewStructures"
+        Me.DataGridViewStructures.Size = New System.Drawing.Size(10, 229)
+        Me.DataGridViewStructures.TabIndex = 1
+        '
         'pnlDataStructures
         '
         Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        Me.pnlDataStructures.Controls.Add(Me.grpElements)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(193, 15)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(225, 12)
         Me.pnlDataStructures.Name = "pnlDataStructures"
         Me.pnlDataStructures.Size = New System.Drawing.Size(736, 521)
         Me.pnlDataStructures.TabIndex = 5
@@ -887,12 +916,21 @@ Partial Class formAWSRealTime
         Me.grpStructures1.Controls.Add(Me.lblStructure)
         Me.grpStructures1.Controls.Add(Me.grpStructures)
         Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
-        Me.grpStructures1.Location = New System.Drawing.Point(220, 16)
+        Me.grpStructures1.Location = New System.Drawing.Point(188, 149)
         Me.grpStructures1.Name = "grpStructures1"
         Me.grpStructures1.Size = New System.Drawing.Size(327, 234)
         Me.grpStructures1.TabIndex = 1
         Me.grpStructures1.TabStop = False
         Me.grpStructures1.Text = "Data Structures"
+        '
+        'lblStructure
+        '
+        Me.lblStructure.AutoSize = True
+        Me.lblStructure.Location = New System.Drawing.Point(22, 29)
+        Me.lblStructure.Name = "lblStructure"
+        Me.lblStructure.Size = New System.Drawing.Size(107, 13)
+        Me.lblStructure.TabIndex = 8
+        Me.lblStructure.Text = "Select Data structure"
         '
         'grpStructures
         '
@@ -914,6 +952,15 @@ Partial Class formAWSRealTime
         Me.grpStructures.Size = New System.Drawing.Size(296, 157)
         Me.grpStructures.TabIndex = 7
         Me.grpStructures.TabStop = False
+        '
+        'lblRecords
+        '
+        Me.lblRecords.AutoSize = True
+        Me.lblRecords.Location = New System.Drawing.Point(168, 98)
+        Me.lblRecords.Name = "lblRecords"
+        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
+        Me.lblRecords.TabIndex = 20
+        Me.lblRecords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtDelimiter
         '
@@ -1016,26 +1063,6 @@ Partial Class formAWSRealTime
         Me.cmbExistingStructures.Name = "cmbExistingStructures"
         Me.cmbExistingStructures.Size = New System.Drawing.Size(130, 21)
         Me.cmbExistingStructures.TabIndex = 1
-        '
-        'grpElements
-        '
-        Me.grpElements.Controls.Add(Me.DataGridView1)
-        Me.grpElements.Location = New System.Drawing.Point(9, 251)
-        Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(716, 259)
-        Me.grpElements.TabIndex = 0
-        Me.grpElements.TabStop = False
-        Me.grpElements.Text = "Elements View/Update"
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToOrderColumns = True
-        Me.DataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(8, 17)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(701, 235)
-        Me.DataGridView1.TabIndex = 0
         '
         'pnlServers
         '
@@ -2307,7 +2334,7 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.GroupBox11)
-        Me.pnlSites.Location = New System.Drawing.Point(198, 166)
+        Me.pnlSites.Location = New System.Drawing.Point(210, 22)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.pnlSites.Size = New System.Drawing.Size(734, 417)
@@ -2548,33 +2575,22 @@ Partial Class formAWSRealTime
         Me.Label15.TabIndex = 67
         Me.Label15.Text = "Site Name/ID"
         '
-        'lblStructure
+        'Timer1
         '
-        Me.lblStructure.AutoSize = True
-        Me.lblStructure.Location = New System.Drawing.Point(22, 29)
-        Me.lblStructure.Name = "lblStructure"
-        Me.lblStructure.Size = New System.Drawing.Size(107, 13)
-        Me.lblStructure.TabIndex = 8
-        Me.lblStructure.Text = "Select Data structure"
+        Me.Timer1.Interval = 1000
         '
-        'lblRecords
+        'Timer2
         '
-        Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(168, 98)
-        Me.lblRecords.Name = "lblRecords"
-        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
-        Me.lblRecords.TabIndex = 20
-        Me.lblRecords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(931, 542)
+        Me.ClientSize = New System.Drawing.Size(931, 583)
+        Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlMsgEncoding)
-        Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlControl)
         Me.Name = "formAWSRealTime"
@@ -2592,13 +2608,13 @@ Partial Class formAWSRealTime
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.grpElements.ResumeLayout(False)
+        CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlDataStructures.ResumeLayout(False)
         Me.grpStructures1.ResumeLayout(False)
         Me.grpStructures1.PerformLayout()
         Me.grpStructures.ResumeLayout(False)
         Me.grpStructures.PerformLayout()
-        Me.grpElements.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlServers.ResumeLayout(False)
         Me.pnlServers.PerformLayout()
         Me.pnlBaseStation.ResumeLayout(False)
@@ -2643,7 +2659,6 @@ Partial Class formAWSRealTime
     Friend WithEvents cmdMessages As System.Windows.Forms.Button
     Friend WithEvents cmdDataStructures As System.Windows.Forms.Button
     Friend WithEvents lblErrors As System.Windows.Forms.Label
-    Friend WithEvents pnlErrors As System.Windows.Forms.Panel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents pnlOutput As System.Windows.Forms.Label
@@ -2671,7 +2686,7 @@ Partial Class formAWSRealTime
     Friend WithEvents txtDateTime As System.Windows.Forms.TextBox
     Friend WithEvents lblDatetime As System.Windows.Forms.Label
     Friend WithEvents lblSatus As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtNxtProcess As System.Windows.Forms.TextBox
     Friend WithEvents txtNextProcess As System.Windows.Forms.Label
     Friend WithEvents txtLastProcess As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -2723,7 +2738,6 @@ Partial Class formAWSRealTime
     Friend WithEvents lblStrName As System.Windows.Forms.Label
     Friend WithEvents cmbExistingStructures As System.Windows.Forms.ComboBox
     Friend WithEvents grpElements As System.Windows.Forms.GroupBox
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents grpSensors As System.Windows.Forms.GroupBox
     Friend WithEvents txtWind As System.Windows.Forms.TextBox
     Friend WithEvents txtRainfall As System.Windows.Forms.TextBox
@@ -2802,19 +2816,19 @@ Partial Class formAWSRealTime
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents pnlProcessSettings As System.Windows.Forms.Panel
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents cmdSave As System.Windows.Forms.Button
+    Friend WithEvents chkDeleteFile As System.Windows.Forms.CheckBox
+    Friend WithEvents txtTimeout As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtPeriod As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtOffset As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents txtInterval As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+    Friend WithEvents optStop As System.Windows.Forms.RadioButton
+    Friend WithEvents optStart As System.Windows.Forms.RadioButton
     Friend WithEvents lblMsgSwitch As System.Windows.Forms.Label
     Friend WithEvents lblbaseStation As System.Windows.Forms.Label
     Friend WithEvents lblFtpTransferMode As System.Windows.Forms.Label
@@ -2863,4 +2877,9 @@ Partial Class formAWSRealTime
     Friend WithEvents txtDelimiter As System.Windows.Forms.ComboBox
     Friend WithEvents lblStructure As System.Windows.Forms.Label
     Friend WithEvents lblRecords As System.Windows.Forms.Label
+    Friend WithEvents DataGridViewStructures As System.Windows.Forms.DataGridView
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Ltime As System.Windows.Forms.Label
+    Friend WithEvents Timer2 As System.Windows.Forms.Timer
+    Friend WithEvents list_errors As System.Windows.Forms.ListBox
 End Class
