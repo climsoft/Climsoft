@@ -75,9 +75,9 @@ Partial Class formAWSRealTime
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lblInputFiles = New System.Windows.Forms.Label()
         Me.lstInputFiles = New System.Windows.Forms.ListBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtInputfolder = New System.Windows.Forms.TextBox()
         Me.lblInputFolder = New System.Windows.Forms.Label()
-        Me.txtServer = New System.Windows.Forms.TextBox()
+        Me.txtInputServer = New System.Windows.Forms.TextBox()
         Me.lblSever = New System.Windows.Forms.Label()
         Me.lblInputData = New System.Windows.Forms.Label()
         Me.lblInformation = New System.Windows.Forms.Label()
@@ -617,7 +617,7 @@ Partial Class formAWSRealTime
         Me.ProgressBar1.BackColor = System.Drawing.Color.SeaShell
         Me.ProgressBar1.Location = New System.Drawing.Point(3, 215)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(206, 20)
+        Me.ProgressBar1.Size = New System.Drawing.Size(272, 20)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 15
         '
@@ -649,7 +649,7 @@ Partial Class formAWSRealTime
         Me.txtStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStatus.Location = New System.Drawing.Point(6, 165)
         Me.txtStatus.Name = "txtStatus"
-        Me.txtStatus.Size = New System.Drawing.Size(206, 20)
+        Me.txtStatus.Size = New System.Drawing.Size(269, 20)
         Me.txtStatus.TabIndex = 10
         Me.txtStatus.Text = "Stopped"
         '
@@ -796,9 +796,9 @@ Partial Class formAWSRealTime
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.lblInputFiles)
         Me.Panel2.Controls.Add(Me.lstInputFiles)
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtInputfolder)
         Me.Panel2.Controls.Add(Me.lblInputFolder)
-        Me.Panel2.Controls.Add(Me.txtServer)
+        Me.Panel2.Controls.Add(Me.txtInputServer)
         Me.Panel2.Controls.Add(Me.lblSever)
         Me.Panel2.Controls.Add(Me.lblInputData)
         Me.Panel2.Location = New System.Drawing.Point(3, 22)
@@ -819,20 +819,20 @@ Partial Class formAWSRealTime
         '
         Me.lstInputFiles.BackColor = System.Drawing.Color.SeaShell
         Me.lstInputFiles.FormattingEnabled = True
-        Me.lstInputFiles.Location = New System.Drawing.Point(6, 106)
+        Me.lstInputFiles.Location = New System.Drawing.Point(6, 104)
         Me.lstInputFiles.MultiColumn = True
         Me.lstInputFiles.Name = "lstInputFiles"
         Me.lstInputFiles.Size = New System.Drawing.Size(176, 134)
         Me.lstInputFiles.TabIndex = 6
         '
-        'TextBox1
+        'txtInputfolder
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.MistyRose
-        Me.TextBox1.Enabled = False
-        Me.TextBox1.Location = New System.Drawing.Point(70, 59)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(109, 20)
-        Me.TextBox1.TabIndex = 5
+        Me.txtInputfolder.BackColor = System.Drawing.Color.MistyRose
+        Me.txtInputfolder.Enabled = False
+        Me.txtInputfolder.Location = New System.Drawing.Point(70, 59)
+        Me.txtInputfolder.Name = "txtInputfolder"
+        Me.txtInputfolder.Size = New System.Drawing.Size(109, 20)
+        Me.txtInputfolder.TabIndex = 5
         '
         'lblInputFolder
         '
@@ -843,14 +843,14 @@ Partial Class formAWSRealTime
         Me.lblInputFolder.TabIndex = 4
         Me.lblInputFolder.Text = "Folder"
         '
-        'txtServer
+        'txtInputServer
         '
-        Me.txtServer.BackColor = System.Drawing.Color.MistyRose
-        Me.txtServer.Enabled = False
-        Me.txtServer.Location = New System.Drawing.Point(70, 30)
-        Me.txtServer.Name = "txtServer"
-        Me.txtServer.Size = New System.Drawing.Size(109, 20)
-        Me.txtServer.TabIndex = 3
+        Me.txtInputServer.BackColor = System.Drawing.Color.MistyRose
+        Me.txtInputServer.Enabled = False
+        Me.txtInputServer.Location = New System.Drawing.Point(70, 30)
+        Me.txtInputServer.Name = "txtInputServer"
+        Me.txtInputServer.Size = New System.Drawing.Size(109, 20)
+        Me.txtInputServer.TabIndex = 3
         '
         'lblSever
         '
@@ -884,9 +884,9 @@ Partial Class formAWSRealTime
         'grpElements
         '
         Me.grpElements.Controls.Add(Me.DataGridViewStructures)
-        Me.grpElements.Location = New System.Drawing.Point(50, 333)
+        Me.grpElements.Location = New System.Drawing.Point(19, 333)
         Me.grpElements.Name = "grpElements"
-        Me.grpElements.Size = New System.Drawing.Size(690, 42)
+        Me.grpElements.Size = New System.Drawing.Size(680, 42)
         Me.grpElements.TabIndex = 0
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements View/Update"
@@ -895,7 +895,7 @@ Partial Class formAWSRealTime
         '
         Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
         Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewStructures.Location = New System.Drawing.Point(666, 23)
+        Me.DataGridViewStructures.Location = New System.Drawing.Point(665, 23)
         Me.DataGridViewStructures.Name = "DataGridViewStructures"
         Me.DataGridViewStructures.Size = New System.Drawing.Size(10, 229)
         Me.DataGridViewStructures.TabIndex = 1
@@ -905,9 +905,9 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(225, 12)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(200, 12)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(736, 521)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(730, 521)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -2665,9 +2665,9 @@ Partial Class formAWSRealTime
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents lblInputData As System.Windows.Forms.Label
     Friend WithEvents lblInformation As System.Windows.Forms.Label
-    Friend WithEvents txtServer As System.Windows.Forms.TextBox
+    Friend WithEvents txtInputServer As System.Windows.Forms.TextBox
     Friend WithEvents lblSever As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtInputfolder As System.Windows.Forms.TextBox
     Friend WithEvents lblInputFolder As System.Windows.Forms.Label
     Friend WithEvents lblInputFiles As System.Windows.Forms.Label
     Friend WithEvents lstInputFiles As System.Windows.Forms.ListBox
