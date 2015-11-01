@@ -1,6 +1,4 @@
 ﻿Imports System.IO
-Imports System.Net
-
 Public Class formAWSRealTime
 
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
@@ -11,22 +9,6 @@ Public Class formAWSRealTime
     Dim rec As Integer
     Dim Kount As Integer
     Dim recEdit As New dataEntryGlobalRoutines
-    Dim Desc_Bits As String
-    Dim BUFR_Subsets_Data As String
-    Dim Bufr_Subst As Integer
-    Dim dr, fl As String
-    Dim ftp_host As String
-    Dim txtinputfile As String
-
-    Dim nat_id As String
-    Dim wmo_id As String
-    Dim stn_name As String
-    Dim lat As String
-    Dim lon As String
-    Dim elv As String
-    Dim BUFR_header As String
-    Dim msg_header As String
-
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
         'pnlProcessing.Visible = True
@@ -51,9 +33,8 @@ Public Class formAWSRealTime
         dbconn.Open()
         ShowPanel(pnlProcessing, "Process Settings")
         load_PressingParameters("txtlFill")
-        'Timer1.Start()
-        'Timer2.Start()
-
+        Timer1.Start()
+        Timer2.Start()
     End Sub
 
     Private Sub cmdServers_Click(sender As Object, e As EventArgs) Handles cmdServers.Click
@@ -180,20 +161,7 @@ Err:
 Err:
         MsgBox(Err.Description)
     End Sub
-    Function GetDataSet(tabl As String, sql As String) As DataSet
-        On Error GoTo Err
-        Dim s As New DataSet
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        s.Clear()
-        da.Fill(s, tabl)
-
-        GetDataSet = s
-        Exit Function
-Err:
-        Log_Errors(Err.Description)
-        'MsgBox(Err.Description)
-    End Function
     Sub PopulateForm(pnl As String, navbar As TextBox, num As Integer)
         On Error Resume Next
         Dim navs As String
@@ -782,32 +750,32 @@ Err:
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        '        On Error GoTo Err
+        On Error GoTo Err
 
-        '        Ltime.Text = Now
+        Ltime.Text = Now
 
-        '        ' Set the next encoding time
-        '        If Len(txtLastProcess.Text) = 0 Then
-        '            txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
-        '            optStart.Checked = True
-        '        End If
+        ' Set the next encoding time
+        If Len(txtLastProcess.Text) = 0 Then
+            txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
+            optStart.Checked = True
+        End If
 
-        '        If optStart.Checked = True Then
-        '            'If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
+        If optStart.Checked = True Then
+            '  If DateDiff("n", Ltime, txtdate1) = 0 Then 'Or DateValue(txtdate1) <= DateValue(txttime) Then
+            If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
 
-        '            Start_Process()
+                'Start_Process()
+            End If
+        End If
 
-        '            'End If
-        '        End If
-
-        '        Exit Sub
-        'Err:
-        '        If Err.Number = 13 Then
-        '            Resume Next
-        '        Else
-        '            Log_Errors(Err.Number & ":" & Err.Description)
-        '            'Log_Errors "Err.description"  'MsgBox Err.Number & ":" & Err.description
-        '        End If
+        Exit Sub
+Err:
+        If Err.Number = 13 Then
+            Resume Next
+        Else
+            Log_Errors(Err.Number & ":" & Err.Description)
+            'Log_Errors "Err.description"  'MsgBox Err.Number & ":" & Err.description
+        End If
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
@@ -846,7 +814,6 @@ Err:
         list_errors.Items.Add(txtDateTime.Text & "  " & Err.Description)
         list_errors.Refresh()
     End Sub
-
     Sub Start_Process()
         ' Refresh input text boxes and list boxes
         txtLastProcess.Text = ""
@@ -857,200 +824,204 @@ Err:
         lstInputFiles.Items.Clear()
         lstOutputFiles.Items.Clear()
 
-        process_input_data()
+        'process_input_data()
         'Next_Encoding_Time()
     End Sub
-
     Sub process_input_data()
         On Error GoTo Err
         Dim datestring As String
         Dim Tlag As Integer
         Dim aws_input_file As String
         Dim aws_input_file_flds As String
+        '        Dim rs As dao.Recordset
+        '        Dim inrs As dao.Recordset
+        '        Dim awsrs As dao.Recordset
         Dim infile As String
         Dim delmtr As String
-        Dim delimiter_ascii As String
+        Dim delimiter_ascii As Object
         Dim hdrows As Integer
         Dim fldsrow As Integer
         Dim txtqlfr As String
         Dim flg As String
-        Dim rs As New DataSet
-        Dim rss As New DataSet
-        Dim dt As DateTime
-        Dim fls As String
-        Dim aws_data As String
-        Dim siz As Integer
-        Dim strRec As Integer
-        Dim AWSsite As String
-        Dim chr As String
+        Dim dt As Date
 
-        '  Locate and processs aws input data files
+        '        ' Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
-
-        ' Compute the Template descriptor to Bianry form
-        If Not Compute_Descriptors(Desc_Bits) Then Exit Sub
-
-        Bufr_Subst = 0
-        BUFR_Subsets_Data = ""
-
-        'Get full path for the Subsets Output file file
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
-
-        FileOpen(1, fl, OpenMode.Output)
-
-        'WriteLine(1, "Testing")
-        FileClose(1)
-
-        ' Open the data set for the AWS sites and stations
-        SetDataSet("aws_sites")
-
-
-        With ds.Tables("aws_sites")
-            For i = 0 To Kount - 1
-                If Len(.Rows(i).Item("InputFile")) <> 0 And .Rows(i).Item("OperationalStatus") = 1 Then
-                    ' Get station data details
-                    nat_id = .Rows(i).Item("SiteID")
-                    msg_header = .Rows(i).Item("aws_msg")
-                    flg = ""
-                    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag")
-                    'End If
-                    AWSsite = .Rows(i).Item("DataStructure")
-                    Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
-
-                    ftp_host = .Rows(i).Item("awsServerIp")
-
-
-                    ' Compute Delimiter ascii value
-
-                    Select Case delmtr
-                        Case "tab"
-                            delimiter_ascii = 9
-                        Case "comma"
-                            delimiter_ascii = 44
-                        Case "space"
-                            delimiter_ascii = 32
-                        Case "semicolon"
-                            delimiter_ascii = 59
-                        Case Else
-                            delimiter_ascii = Asc(delmtr)
-                    End Select
-
-                    infile = .Rows(i).Item("InputFile")
-
-                    txtStatus.Text = "Seeking input data - " & infile
-                    txtStatus.Refresh()
-
-                    If Not FTP_Call(infile, "get") Then
-                        Log_Errors("Can't retrieve data from input file " & infile)
-                        'list_errors.Refresh()
-                        'GoTo Continues
-                    End If
-
-                    'Log_Errors(rs.Tables(.Rows(i).Item("DataStructure")).Rows(0).Item("Element_Abbreviation"))
-                    'Log_Errors(infile
-                End If
-            Next
-        End With
-
-        FileClose(1)
-
-
-        ' Assign a variable to an input file with header rows
-        aws_input_file = txtinputfile
-
-        ' Assign a variable to an output file without header rows
-        aws_input_file_flds = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+        'Me.Cursor = Cursors.Default
 
 
 
-        FileOpen(10, aws_input_file, OpenMode.Input)
-        FileOpen(11, aws_input_file_flds, OpenMode.Output)
+        '        inrs = db.OpenRecordset("aws_stations")
 
-        ' Skip header Records if present
+        '        ' Compute BUFR descriptors from the AWS Template
+        '        If Not Compute_Descriptors(Desc_Bits) Then Exit Sub
 
-        'Retrieve header rows from station parameters
-        If Val(hdrows) > 0 Then
-            For i = 0 To Val(hdrows) - 1
-                aws_data = LineInput(10)
-            Next
-        End If
+        '        With inrs
+        '            .MoveFirst()
 
-        ' Output the data rows
-        Do While EOF(10) = False
-            aws_data = LineInput(10)
-            PrintLine(11, aws_data)
-        Loop
+        '            Bufr_Subst = 0
+        '            BUFR_Subsets_Data = ""
 
-        FileClose(10)
-        FileClose(11)
+        '            'Close #30
+        '            ' Delete file for subsets data if it exist
+        '            If fso.FileExists(fso.GetParentFolderName(App.Path) & "\data\bufr_subsets.csv") Then fso.DeleteFile(fso.GetParentFolderName(App.Path) & "\data\bufr_subsets.csv")
+
+        ' Open fso.GetParentFolderName(App.Path) & "\data\bufr_subsets.csv" For Output As #30
+
+        '            Do While .EOF = False
+        '                If Len(.Fields("input_file")) <> 0 And .Fields("selected") = True Then
+        '                    ' Get station data details
+        '                    flg = ""
+        '                    If Not IsNull(.Fields("Flag")) Then flg = .Fields("Flag")
+
+        '  Get_Station_Settings .Fields("data_structure"), delmtr, hdrows, txtqlfr, rs
+
+        '                    '  Get FTP address for the base station server and its data transfer command
+        '                    ftp_host = .Fields("aws_server")
+
+        '                    ' Update processing Interface
+        '                    txtstructure = .Fields("data_structure")
+        '                    txtstructure.Refresh()
+        '                    txtheaderows = hdrows
+        '                    txtheaderows.Refresh()
+        '                    txtQualifier = txtqlfr
+        '                    txtQualifier.Refresh()
+
+        '                    ' Compute Delimiter ascii value
+        '                    Select Case delmtr
+        '                        Case "tab"
+        '                            delimiter_ascii = 9
+        '                            Optdelimiter(1).value = True
+        '                        Case "comma"
+        '                            delimiter_ascii = 44
+        '                            Optdelimiter(0).value = True
+        '                        Case "space"
+        '                            delimiter_ascii = 32
+        '                            Optdelimiter(2).value = True
+        '                        Case "semicolon"
+        '                            delimiter_ascii = 59
+        '                            Optdelimiter(3).value = True
+        '     Case Default
+        '                            delimiter_ascii = Chr(delmtr)
+        '                            otherdelimiter = delmtr
+        '                            otherdelimiter.Refresh()
+        '                    End Select
+        '                    '  MsgBox delmtr & " " & hdrows & " " & fldsrow & " " & txtqlfr
+        '                    '  GoTo Continues
+
+        '                    '  If Len(.Fields("input_file")) <> 0 And .Fields("selected") = True Then
+        '                    infile = .Fields("input_file")
+
+        '                    '  get the input data file from aws server if it exist
+        '                    Process_Status "Seeking input data - " & infile
+
+        '                    '     ' Refresh form
+        '                    '     frm_realtime.Refresh
+
+        '                    If Not FTP_Call(infile, "get") Then
+        '                        Log_Errors("Can't retrieve data from input file " & infile)
+        '                        list_errors.Refresh()
+        '                        GoTo Continues
+        '                    End If
+
+        '                    ' Assign a variable to an input file with header rows
+        '                    aws_input_file = txtinputfile
+
+        '                    ' Assign a variable to an output file without header rows
+        '                    aws_input_file_flds = fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+
+        '    Open aws_input_file For Input As #10
+        '    Open aws_input_file_flds For Output As #11
+
+        '                    ' Skip header Records if present
+
+        '                    'Retrieve header rows from station parameters
+        '                    If Val(hdrows) > 0 Then
+        '                        For i = 0 To Val(hdrows) - 1
+        '       Line Input #10, C$
+        '                        Next
+        '                    End If
+
+        '                    ' Output the data rows
+        '                    Do While EOF(10) = False
+        '      Line Input #10, C$
+        '                        '      MsgBox C$ & "-" & Asc(Right(C$, 1))
+        '      Print #11, C$
+        '                    Loop
+        '    Close #10
+        '    Close #11
 
 
-        ' Open the output populated text file as an input file for the database
-        FileOpen(11, aws_input_file_flds, OpenMode.Input)
+        '                    ' Open the output populated text file as an input file for the database
+        '      Open aws_input_file_flds For Input As #11
 
-        ' Update the database and process the data one record at a time
-        Dim datastring As String
-        Dim endline As Boolean
+        '                    ' Update the database and process the data one record at a time
+        '                    Dim datastring As String
+        '                    Dim endline As Boolean
 
-        Do While EOF(11) = False
 
-            aws_data = LineInput(11)
-            siz = Len(aws_data)
-            datastring = ""
-            endline = False
-            strRec = 0
+        '                    Do While EOF(11) = False
 
-            For i = 1 To siz
-                chr = Mid(aws_data, i, 1) ' Single character of the data line
+        '     Line Input #11, C$
+        '                        siz = Len(C$)
+        '                        datastring = ""
+        '                        endline = False
+        '                        '     Tblrefresh rs
+        '                        rs.MoveFirst()
 
-                ' When the end of line is reached
-                If i = siz Then
-                    If chr <> txtqlfr Then datastring = datastring & chr ' Get the last data value on the line by appending the last character
-                    endline = True
-                End If
+        '                        For i = 1 To siz
+        '                            If Asc(Mid(C$, i, 1)) = 10 Then
+        '                                '         Tblrefresh rs
+        '                                Process_SubRecord(rs, inrs, datastring)
+        '                                endline = True
+        '                            End If
+        '                            If Asc(Mid(C$, i, 1)) <> delimiter_ascii And i < siz Then
+        '                                If Mid(C$, i, 1) <> txtqlfr Then
+        '                                    '             If Mid(C$, i, 1) = "T" Then  ' In case of ISO806 Data format
+        '                                    '               datastring = datastring & " "
+        '                                    '              Else
+        '                                    If Not endline Then
+        '                                        datastring = datastring & Mid(C$, i, 1)
+        '                                    Else
+        '                                        endline = False
+        '                                    End If
+        '                                    '             End If
+        '                                End If
+        '                            Else
+        '                                If Not endline Then 'Len(datastring) > 0 Then
+        '                                    If Asc(Mid(C$, i, 1)) <> delimiter_ascii Then datastring = datastring & Mid(C$, i, 1) ' The last data value before the Newline character
+        '                                    rs.Edit()
+        '                                    If InStr(datastring, flg) = 0 Or flg = "" Then
+        '                                        rs.Fields("obsv") = datastring
+        '                                        '             qc_limits rs.Fields("obsv"), rs
+        '                                    Else
+        '                                        rs.Fields("obsv") = Null
+        '                                    End If
+        '                                    rs.Update()
+        '                                    rs.MoveNext()
+        '                                End If
+        '                                '         MsgBox datastring
+        '                                datastring = ""
+        '                                '         Exit For
+        '                                '         endline = False
+        '                            End If
 
-                ' Process the data value when the delimiter character is encountered or end of line reached
-                If Asc(Mid(aws_data, i, 1)) = delimiter_ascii Or endline = True Then
-                    AwsRecord_Update(datastring, strRec, flg, AWSsite)
-                    strRec = strRec + 1
-                    datastring = ""
-                Else
-                    If chr <> txtqlfr And i < siz Then
-                        datastring = datastring & chr ' Accumulate the characters into a data string but skip text qualifier
-                        endline = False
-                    End If
+        '                        Next
 
-                End If
+        '                        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
 
-            Next
+        '                        datestring = TimeStamp(rs)
+        '                        If IsDate(datestring) Then dt = datestring
 
-            ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+        '                        If Val(txtlag) = 999 Then
+        '                            Process_Input_Record(rs, inrs, datestring) ' Process the entire input file irespective of time difference
+        '                        Else
+        '                            If DateDiff("h", datestring, txttime) <= Val(txtlag - 1) Then Process_Input_Record(rs, inrs, datestring)
+        '                            '        If Val(Now() - dt) <= (Val(txtlag)) / 24 Then Process_Input_Record rs, inrs, datestring ' Extract Data for at least the last 1 Hour
+        '                        End If
 
-            datestring = ds.Tables(AWSsite).Rows(0).Item("obsv")
-
-            'Sametimes Date and Time values are separately in the 1st and 2nd fields respectively. In such cases they are combined
-            If Len(datestring) < 12 Then
-                datestring = datastring & " " & ds.Tables(AWSsite).Rows(1).Item("obsv")
-            End If
-
-            'datestring = TimeStamp(rs)
-            If Not IsDate(datestring) Then
-                Log_Errors(datestring)
-            End If
-
-            Process_Input_Record(AWSsite, datestring)
-            'Log_Errors(datestring)
-
-            'If Val(txtPeriod.Text) = 999 Then
-            '    Process_Input_Record(datestring) ' Process the entire input file irespective of time difference
-            'Else
-            '    If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then Process_Input_Record(datestring)
-            '    ''        If Val(Now() - dt) <= (Val(txtlag)) / 24 Then Process_Input_Record rs, inrs, datestring ' Extract Data for at least the last 1 Hour
-            'End If
-
-        Loop
-        FileClose(11)
-        '  Close #11
+        '                    Loop
+        '   Close #11
 
         '                    ' Delete input file from base station server if so selected
         '                    If del_input.value = 1 Then
@@ -1134,11 +1105,11 @@ Err:
         'Close #31
 
         Me.Cursor = Cursors.Default
-        Exit Sub
+        '        Exit Sub
 
 Err:
         If Err.Number = 62 Then
-            'Log_Errors("Can't retrieve data from " & infile)
+            Log_Errors("Can't retrieve data from " & infile)
             list_errors.Refresh()
             '    GoTo Continues
             Resume Next
@@ -1153,775 +1124,4 @@ Err:
     Sub Next_Encoding_Time()
 
     End Sub
-    Function Compute_Descriptors(ByRef Desc_Bits As String) As Boolean
-        Compute_Descriptors = True
-        On Error GoTo Err
-        Dim octetts As Integer
-        Dim descript As String
-        Dim Seq_Desc As String
-        Dim kount As Integer
-        Dim f As String
-        Dim X As String
-        Dim Y As String
-        Dim sql As String
-        Dim dr As New DataSet
-        Dim maxrecs As Integer
-        Dim descrfil As String
-        Dim C1 As String
-
-        sql = "use mysql_climsoft_db_v4; SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
-              "FROM TM_307091 WHERE (((Sequence_Descriptor1) Is Not Null)) ORDER BY Rec;"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        dr.Clear()
-        da.Fill(dr, "tm_307091")
-
-        maxrecs = dr.Tables("tm_307091").Rows.Count
-        Seq_Desc = ""
-        descrfil = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\descriptors.txt"
-        Dim DscriptorFile As System.IO.TextWriter = New StreamWriter(descrfil)
-
-        For i = 0 To maxrecs - 1
-            If Len(dr.Tables("tm_307091").Rows(i).Item("Sequence_Descriptor1")) <> 0 Then
-                Seq_Desc = Seq_Desc & dr.Tables("tm_307091").Rows(i).Item("Bufr_Template")
-            End If
-        Next
-
-        octetts = Len(Seq_Desc)
-        'MsgBox(octetts & " " & Seq_Desc)
-        Desc_Bits = ""
-        C1 = ""
-        For kount = 1 To octetts Step 6 ' 1 Descriptor has 6 octets
-            C1 = Mid(Seq_Desc, kount, 6)
-            ' Perform binary conversion
-            f = Decimal_Binary(Strings.Left(C1, 1), 2)
-            X = Decimal_Binary(Strings.Mid(C1, 2, 2), 6)
-            Y = Decimal_Binary(Strings.Mid(C1, 4, 3), 8)
-
-            Desc_Bits = Desc_Bits & f & X & Y
-        Next
-        DscriptorFile.WriteLine(C1 & "," & f & X & Y)
-        DscriptorFile.Close()
-        Exit Function
-Err:
-
-        Compute_Descriptors = False
-        Log_Errors(Err.Description)
-    End Function
-    Function Decimal_Binary(DecN As Integer, bts As Integer) As String
-        On Error Resume Next
-        Dim r As Integer
-        Dim s As Integer
-        Dim num As Integer
-
-        Decimal_Binary = "0"
-
-        For num = 2 To bts
-            Decimal_Binary = Decimal_Binary & "0"
-        Next num
-
-        s = 0
-        Do While DecN > 0
-            r = DecN Mod 2
-            Mid(Decimal_Binary, bts - s, 1) = r
-            If r = 1 Then
-                DecN = DecN / 2 - 0.5
-            Else
-                DecN = DecN / 2
-            End If
-            s = s + 1
-        Loop
-        Exit Function
-    End Function
-
-    Sub Get_Station_Settings(struc As String, ByRef delmtr As String, ByRef hdrows As Integer, ByRef txtqlfr As String, ByRef rs As DataSet)
-        Dim rss As DataSet
-        Dim sql As String
-        Dim tot As Integer
-        On Error GoTo Err
-        sql = "SELECT * FROM aws_structures"
-        rss = GetDataSet("aws_structures", sql)
-        tot = rss.Tables("aws_structures").Rows.Count
-
-        With rss.Tables("aws_structures")
-            For i = 0 To tot - 1
-
-                If .Rows(i).Item("strName") = struc Then
-                    delmtr = .Rows(i).Item("data_delimiter")
-                    hdrows = .Rows(i).Item("hdrRows")
-                    'msg_header = .Rows(i).Item("aws_msg")
-                    If IsDBNull(.Rows(i).Item("txtQualifier")) Then
-                        txtqlfr = ""
-                    Else
-                        txtqlfr = .Rows(i).Item("txtQualifier")
-                    End If
-                    sql = "use mysql_climsoft_db_v4; SELECT * FROM " & struc & " order by Cols;"
-
-                    rs = GetDataSet(struc, sql)
-                    Exit For
-                End If
-            Next
-        End With
-        Exit Sub
-Err:
-        Log_Errors(Err.Number & ":" & Err.Description)
-    End Sub
-    Function FTP_Call(ftpfile As String, ftpmethod As String) As Boolean
-        FTP_Call = True
-        On Error GoTo Err
-        Dim ftpscript As String
-        Dim ftpbatch As String
-        Dim Drive1 As String
-        Dim local_folder As String
-        Dim out_folder As String
-
-
-        Dim usr As String
-        Dim pwd As String
-        Dim flder As String
-        Dim ftpmode As String
-
-        Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd)
-        FileClose(1)
-        local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-        Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
-        ftpscript = local_folder & "\ftp_aws.txt"
-        FileOpen(1, ftpscript, OpenMode.Output)
-
-        Select Case ftpmethod
-            Case "get"
-
-                txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
-
-                If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
-
-                If ftpmode = "ftp" Then
-                    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                    Print(1, usr & Chr(13) & Chr(10))
-                    Print(1, pwd & Chr(13) & Chr(10))
-                    Print(1, "cd " & flder & Chr(13) & Chr(10))
-                    Print(1, "asc" & Chr(13) & Chr(10))
-
-                End If
-                Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                Print(1, "bye" & Chr(13) & Chr(10))
-            Case "put"
-                If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
-                If ftpmode = "ftp" Then
-                    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                    Print(1, usr & Chr(13) & Chr(10))
-                    Print(1, pwd & Chr(13) & Chr(10))
-                    Print(1, "cd " & flder & Chr(13) & Chr(10))
-                    Print(1, "bin" & Chr(13) & Chr(10))
-                End If
-                Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                Print(1, "bye" & Chr(13) & Chr(10))
-        End Select
-        FileClose(1)
-
-        '        ' Create batch file to execute FTP script
-        ftpbatch = local_folder & "\ftp_tdcf.bat"
-       
-        FileOpen(1, ftpbatch, OpenMode.Output)
-
-        Print(1, "echo off" & Chr(13) & Chr(10))
-        Print(1, Drive1 & Chr(13) & Chr(10))
-        Print(1, "CD " & local_folder & Chr(13) & Chr(10))
-        If ftpmethod = "get" Then
-            If ftpmode = "ftp" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "psftp" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
-        Else
-            If ftpmode = "ftp" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "psftp" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
-        End If
-
-        Print(1, "echo on" & Chr(13) & Chr(10))
-        Print(1, "EXIT" & Chr(13) & Chr(10))
-        FileClose(1)
-
-
-        ' Execute the batch file to transfer the aws data file from aws server to a local folder
-        Shell(ftpbatch, vbMinimizedNoFocus)
-
-        If ftpmethod = "get" Then
-            ' Cause some delay to allow ftp file transfer before the processing starts.
-            Dim Cdate1 As Date
-            Dim tot As Integer
-            Dim timeout As Integer
-
-            Cdate1 = Now() '& " " & Time
-            tot = 0
-            timeout = CLng(txtTimeout.Text)
-            With ProgressBar1
-                .Visible = True
-                .Maximum = timeout ' 60
-                Do While tot < timeout
-                    tot = DateDiff("s", Cdate1, Now())
-                    .Value = tot
-                Loop
-                .Visible = False
-            End With
-
-            txtInputServer.Text = ftp_host
-            txtInputfolder.Text = flder
-
-            ' List the input file
-            lstInputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
-            lstInputFiles.Refresh()
-            txtInputServer.Refresh()
-
-        Else
-            txtOutputServer.Text = ftp_host
-            txtOutputFolder.Text = flder
-
-            ' List the processed output file
-            lstOutputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
-            txtOutputServer.Refresh()
-            txtOutputFolder.Refresh()
-            lstOutputFiles.Refresh()
-        End If
-
-
-        If System.IO.Path.GetFileName(ftpfile).Length = 0 Then Exit Function
-
-        'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
-        Exit Function
-Err:
-        Log_Errors(Err.Description)
-        FTP_Call = False
-    End Function
-
-    Sub Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String)
-        On Error GoTo Err
-        Dim sql As String
-        Dim rf As New DataSet
-        Dim num As Integer
-
-
-        Select Case ftpmethod
-            Case "get"
-                sql = "SELECT * FROM aws_basestation"
-                rf = GetDataSet("aws_basestation", sql)
-
-                num = rf.Tables("aws_basestation").Rows.Count
-
-                For i = 0 To num - 1
-                    With rf.Tables("aws_basestation")
-                        If aws_ftp = .Rows(i).Item("ftpId") Then
-                            flder = .Rows(i).Item("inputFolder")
-                            ftpmode = .Rows(i).Item("ftpMode")
-                            usr = .Rows(i).Item("userName")
-                            pwd = .Rows(i).Item("password")
-                            Exit For
-                        End If
-                    End With
-                Next
-            Case "put"
-                sql = "SELECT * FROM aws_mss"
-                rf = GetDataSet("aws_mss", sql)
-                num = rf.Tables("aws_mss").Rows.Count
-
-                For i = 0 To num - 1
-                    With rf.Tables("aws_mss")
-                        If aws_ftp = .Rows(i).Item("ftpId") Then
-                            flder = .Rows(i).Item("outputFolder")
-                            ftpmode = .Rows(i).Item("ftpMode")
-                            usr = .Rows(i).Item("userName")
-                            pwd = .Rows(i).Item("password")
-                            Exit For
-                        End If
-                    End With
-                Next
-        End Select
-
-        'rss = db.OpenRecordset("aws_sever_settings")
-
-        'With rss
-        '.MoveFirst()
-        'Do While .EOF = False
-        '    If .Fields("aws_ftp") = aws_ftp Then
-        '        in_usr = .Fields("aws_user")
-        '        in_pwd = .Fields("aws_password")
-        '        in_folder = .Fields("aws_folder")
-        '        aws_comm = LCase(.Fields("aws_transfer_mode"))
-        '        mss_ftp = .Fields("mss_ftp")
-        '        out_usr = .Fields("mss_user")
-        '        out_pwd = .Fields("mss_password")
-        '        out_folder = .Fields("mss_folder")
-        '        mss_comm = LCase(.Fields("mss_transfer_mode"))
-        '        Exit Do
-        '    End If
-        '    .MoveNext()
-        'Loop
-        'End With
-        Exit Sub
-
-Err:
-        Log_Errors(Err.Description)
-    End Sub
-
-    Sub Process_Input_Record(aws_rs As String, datestring As String)
-
-        On Error GoTo Err
-
-        SetDataSet("station")
-        With ds.Tables("station")
-            For i = 0 To ds.Tables("station").Rows.Count - 1
-                If .Rows(i).Item("stationId") = nat_id Then
-                    '    wmo_id = .Fields("wmo_id")
-                    stn_name = .Rows(i).Item("stationName")
-                    lat = .Rows(i).Item("latitude")
-                    lon = .Rows(i).Item("longitude")
-                    elv = .Rows(i).Item("elevation")
-                    Exit For
-                End If
-            Next
-        End With
-        'Log_Errors(nat_id & " " & stn_name & " " & lat & " " & lon & " " & elv)
-
-
-        Process_Status(" Input file found - Extracting data")
-
-        ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
-        update_main_db(aws_rs, datestring, nat_id)
-
-        If Val(txtPeriod.Text) = 999 Then Exit Sub ' No processing of messages if entire file processing is selected
-
-        If IsDate(datestring) Then
-            ' Process the messages for transmission at the scheduled time
-
-            update_tbltemplate(aws_rs, datestring)
-        End If
-        txtLastProcess.Text = datestring
-            ' End If
-            Exit Sub
-Err:
-            'If Err.Number = 94 Then Resume Next
-            'MsgBox "Processing input record"
-            Log_Errors(Err.Description)
-    End Sub
-
-    Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
-        On Error GoTo Err
-        Dim dts As Date
-        Dim recUpdate As New dataEntryGlobalRoutines
-
-        SetDataSet(aws_struc)
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-
-        If InStr(datastring, flg) > 0 Or Len(flg) = 0 Then
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
-        Else
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
-        End If
-
-        da.Update(ds, aws_struc)
-
-        Exit Sub
-Err:
-        Log_Errors(Err.Number & " " & Err.Description)
-    End Sub
-
-    Sub Process_SubRecord(datastring As String, rec As Integer, flg As String, aws_struc As String)
-        On Error GoTo Err
-        Dim dts As Date
-        Dim recUpdate As New dataEntryGlobalRoutines
-
-
-        'MsgBox(datastring & " " & rec & " " & aws_struc & " " & flg)
-        SetDataSet(aws_struc)
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-
-        'ds.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
-
-        If InStr(datastring, flg) > 0 Or Len(flg) = 0 Then
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
-        Else
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
-        End If
-
-
-        da.Update(ds, aws_struc)
-
-        'recUpdate.messageBoxRecordedUpdated()
-
-
-        'datestrings = TimeStamp(rs)
-        'dts = datestrings
-
-        'If Val(txtlag) = 999 Then
-        '    Process_Input_Record(rs, inrs, datestrings) ' Process the entire input file irespective of time difference
-        'Else
-        '    If DateDiff("h", datestrings, txttime) <= Val(txtlag) Then Process_Input_Record(rs, inrs, datestrings)
-        'End If
-
-        'datastring = ""
-        'rs.MoveFirst()
-        '    Tblrefresh rs
-        Exit Sub
-Err:
-        Log_Errors(Err.Number & " " & Err.Description)
-    End Sub
-    Function TimeStamp(rs As DataSet) As String
-        On Error GoTo Err
-        Dim Date_Time As Date
-        TimeStamp = ""
-        ' Get Date and Time values
-        'Where Date and Time are in seperate fields
-
-        'With rs
-        '    rs.MoveFirst()
-
-        '    Do While .EOF = False
-        '        If .Fields("Element_Abbreviation") = "Date/time" Then
-        '            TimeStamp = .Fields("obsv")
-        '            '   txtdate = TimeStamp
-        '            '   txtdate.Refresh
-        '            Exit Do
-        '        End If
-
-        '        ' Get the date value where date and time are in separate fields
-        '        If .Fields("Element_Abbreviation") = "Date" Then
-        '            Date_Time = .Fields("obsv") ' Date_Time & " " & .Fields("obsv")
-        '        End If
-
-        '        ' Get the time value and compute the DateTime string where date and time are in separate fields
-        '        If .Fields("Element_Abbreviation") = "Time" Then
-        '            TimeStamp = Date_Time & " " & .Fields("obsv")
-        '            Exit Do
-        '        End If
-
-        '        .MoveNext()
-        '    Loop
-
-        'End With
-        Exit Function
-Err:
-
-        Log_Errors(" Invalid Observation DateTime value")
-
-    End Function
-
-    Private Sub optStart_CheckedChanged(sender As Object, e As EventArgs) Handles optStart.CheckedChanged
-        'If optStart.Checked = True Then Start_Process()
-    End Sub
-
-    Private Sub optStart_Click(sender As Object, e As EventArgs) Handles optStart.Click
-        If optStart.Checked = True Then Start_Process()
-    End Sub
-    Sub Process_Status(msg As String)
-        On Error GoTo Err
-
-        txtStatus.Text = msg
-        txtstatus.Refresh()
-
-        Exit Sub
-Err:
-        Log_Errors(Err.Description)
-        ' list_errors.AddItem txttime & " " & Err.description
-    End Sub
-
-    Sub update_main_db(rs_aws As String, datestr As String, stn As String)
-        On Error GoTo Err
-
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-        Dim dsdb As New DataSet
-        Dim sql As String
-        Dim obs As String
-        Dim mysqldate As String
-
-
-        cmd.Connection = dbconn
-        SetDataSet(rs_aws)
-
-        ' Construct datetime string from DateTime data value that conforms to Mysql datetime format
-        mysqldate = DateAndTime.Year(datestr) & "/" & DateAndTime.Month(datestr) & "/" & DateAndTime.Day(datestr) & " " & DateAndTime.Hour(datestr) & ":" & DateAndTime.Minute(datestr) & ":" & DateAndTime.Second(datestr)
-
-        With ds.Tables(rs_aws)
-            Process_Status("Updating Climsoft database with AWS data")
-            For i = 0 To .Rows.Count - 1
-                If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) Then
-                    obs = .Rows(i).Item("obsv")
-                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
-                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
-
-                    sql = "use mysql_climsoft_db_v4; INSERT INTO observationinitial " & _
-                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
-                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
-
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-
-                End If
-
-            Next
-        End With
-
-        '' Update QC values
-        'Dim aws_qc As dao.Recordset
-        'Dim qc_err As Boolean
-        'qc_err = False
-        'Set aws_qc = maindb.OpenRecordset("aws_qc_limits_check_output")
-        '.MoveFirst
-        'Do While .EOF = False
-        ' If Not IsNull(.Fields("obsv")) Then
-        '   ' Check for lower limit exceeding
-        '   If Not IsNull(.Fields("lower_limit")) Then
-        '      If Val(.Fields("lower_limit")) > Val(.Fields("obsv")) Then
-        '       ' Update Lower limt QC values
-        '       qc_err = True
-        '       aws_qc.addnew
-        '       aws_qc!val_limit_diff = Val(.Fields("obsv")) - Val(.Fields("lower_limit"))
-        '       aws_qc!limit_type = "Lower_Limit"
-        '      End If
-        '   End If
-        '  'Check for upper limit exceeding
-        '    If Not IsNull(.Fields("upper_limit")) Then
-        '      If Val(.Fields("lower_limit")) < Val(.Fields("obsv")) Then
-        '       ' Update upper limt QC values
-        '       aws_qc.addnew
-        '       qc_err = True
-        '       aws_qc.addnew
-        '       aws_qc!val_limit_diff = Val(.Fields("obsv")) - Val(.Fields("upper_limit"))
-        '       aws_qc!limit_type = "Upper_Limit"
-        '      End If
-        '   End If
-        ' End If
-        ' If qc_err = True Then ' Update if QC exists
-        '   aws_qc!obsv_value = .Fields("obsv")
-        '   aws_qc!obsv_level = "surface"
-        '   aws_qc.update
-        ' End If
-        '
-        '.MoveNext
-        'Loop
-        '
-        'End With
-        Exit Sub
-Err:
-        'If Err.Number = 3421 Then Exit Sub
-        'If Err.Number = 3022 Then Resume Next
-        'If Err.Number = 3146 Then Resume Next
-        If Err.Number = 5 Then Resume Next
-        Log_Errors(Err.Number & ":" & Err.Description)
-    End Sub
-
-    Sub update_tbltemplate(aws_struct As String, Date_Time As String)
-
-        On Error GoTo Err
-
-        Dim trs As DataSet
-        Dim sql As String
-        Dim yy, mm, dd, hh, min, ss As String
-        Dim Seq_Desc As String
-        Dim tt_aws As String
-        Dim obsv As String
-        Dim InitValue As String
-        Dim BufrSection4 As String
-        Dim hdr As String
-
-        tt_aws = txtTemplate.Text
-        sql = "SELECT * FROM " & tt_aws & " ORDER BY Rec"
-        trs = GetDataSet(tt_aws, sql)
-
-        '    With trs
-        '        '  .MoveFirst
-        yy = DateAndTime.Year(Date_Time)
-        mm = DateAndTime.Month(Date_Time)
-        dd = DateAndTime.Day(Date_Time)
-        hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
-        min = DateAndTime.Minute(Date_Time)
-        ss = DateAndTime.Second(Date_Time)
-        wmo_id = 63999
-
-        BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
-
-        Process_Status("Updating TDCF Template with observations ")
-
-        'Initialize with missing values
-
-        Seq_Desc = ""
-
-        With trs.Tables(tt_aws)
-
-            For i = 0 To .Rows.Count - 1
-                ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
-                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
-
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-                Dim recUpdate As New dataEntryGlobalRoutines
-
-                If Strings.Left(.Rows(i).Item("Bufr_Element"), 1) = 0 And .Rows(i).Item("Bufr_Element") <> "031000" And .Rows(i).Item("Bufr_Element") <> "004025" Then ' Element Descriptors only but not Delayed factor. It is preset
-                    InitValue = "1"
-                    For j = 2 To Val(.Rows(i).Item("Bufr_DataWidth_Bits"))
-                        InitValue = InitValue & "1"
-                    Next j
-                    .Rows(i).Item("Bufr_Data") = InitValue
-
-                End If
-                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
-
-                If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
-                If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
-                If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
-                If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
-                If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
-                If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
-
-                If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
-                If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
-                If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
-                If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
-                If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
-
-                'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
-                da.Update(trs, tt_aws)
-
-            Next i
-        End With
-
-        ' Initialize Code and Flag Tables
-        Initialize_CodeFlag(trs, tt_aws)
-
-        '    ' Update Template with AWS observation values
-        '    '     sql = "UPDATE " & txttemplate & " INNER JOIN " & aws_table & " ON " & txttemplate & ".Bufr_Element =" & aws_table & ".bufr SET " & txttemplate & ".Observation =" & aws_table & ".obsv;"
-        '    sql = "UPDATE " & txttemplate & " INNER JOIN qry_aws ON " & txttemplate & ".Bufr_Element =qry_aws.Bufr_Element SET " & txttemplate & ".Observation =qry_aws.obsv;"
-
-        '    If clicom.query_exist("qry_aws_templ_update", dbase_path) Then db.QueryDefs.Delete "qry_aws_templ_update"
-        '    qry = db.CreateQueryDef("qry_aws_templ_update", sql)
-        '    qry.Execute()
-
-        '    ' Update Template with Replicated Values
-        '    Replicate_SoilTemp trs
-        '    Replicate_MaxGust trs
-
-        '    ' Encode observations in the template into TDCF-BUFR
-        '    TDCF_Encode()
-
-        '    ' Compose data for BUFR Section 4 - Data Section
-        '    sql = "SELECT TM_307091.order, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " & _
-        '          "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.order;"
-
-        '    BufrSection4 = ""
-        '    If Not AWS_Bufr_Section4(sql, BufrSection4) Then
-        '        Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
-        '    Else
-        '        ' Update Subset Number
-        '        Bufr_Subst = Bufr_Subst + 1
-        '        ' Append Data in Section 4 with the data computed from current subset
-        '        BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
-        '        ' Output substet binary data
-        'Write #30, Date_Time, BufrSection4
-        '    End If
-
-        '    ' ' Compose the complete AWS BUFR message
-        '    '
-        '    ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
-
-        '    Exit Sub
-Err:
-
-        Log_Errors(Err.Description)
-
-        ' list_errors.AddItem txttime & "  " & Err.description
-        ' MsgBox Err.Number & ": " & Err.description
-    End Sub
-
-    Function Compute_Header(hdr As String, hh As String) As String
-
-        Select Case Val(hh) Mod 6
-            Case 0
-                Mid$(hdr, 3) = "M"
-                Mid$(hdr, 5) = "0"
-                Mid$(hdr, 6) = "1"
-            Case 3
-                Mid$(hdr, 3) = "I"
-                Mid$(hdr, 5) = "2"
-                Mid$(hdr, 6) = "0"
-            Case Else
-                Mid$(hdr, 3) = "N"
-                Mid$(hdr, 5) = "4"
-                Mid$(hdr, 6) = "0"
-        End Select
-        Compute_Header = hdr
-    End Function
-
-    Function Initialize_CodeFlag(cfrs As DataSet, tt_aws As String) As String
-        On Error GoTo Err
-
-        Dim bitstream As String
-
-        Dim flgrs As New DataSet
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-        
-        flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
-        Initialize_CodeFlag = ""
-        cmd.Connection = dbconn
-
-        ' Initialize with missing values
-        With cfrs.Tables(txtTemplate.Text)
-            For i = 0 To .Rows.Count - 1
-
-                bitstream = ""
-                If .Rows(i).Item("Bufr_Unit") = "Flag table" Then
-                    bitstream = ""
-                    For j = 1 To .Rows(i).Item("Bufr_DataWidth_Bits")
-                        bitstream = bitstream & "1"
-                    Next
-
-                End If
-
-                If .Rows(i).Item("Bufr_Unit") = "Code table" Then
-
-                    For k = 0 To flgrs.Tables("flagtable").Rows.Count - 1
-                        If IsDBNull(flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor")) Then Exit For
-                        If flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor") = .Rows(i).Item("Bufr_Element") Then
-                            bitstream = Decimal_Binary(flgrs.Tables("flagtable").Rows(k).Item("Missing"), .Rows(i).Item("Bufr_DataWidth_Bits"))
-                            Exit For
-                        End If
-
-                    Next
-                End If
-
-                If Len(bitstream) <> 0 Then
-                    sql = "Update " & tt_aws & " SET Bufr_Data = " & bitstream & " where Rec = " & i + 1 & ";"
-                    cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
-                End If
-
-
-            Next
-        End With
-
-        '' Initialize with code figures and flags of site values
-        'Dim C_sql As String
-        'Dim F_sql As String
-        'Dim qry As QueryDef
-
-        'C_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Observation = [Code_Flag].[Bufr_Value] WHERE (((TM_307091.Bufr_Unit)=""code table""));"
-        'F_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Bufr_Data = [Code_Flag].[Bufr_Value] WHERE (((TM_307091.Bufr_Unit)=""Flag table"") AND ((Code_Flag.Bufr_Value) Is Not Null Or (Code_Flag.Bufr_Value)<>""""));"
-
-        '' Code figures
-        'If clicom.query_exist("qry_update_CodeFigures", dbase_path) Then db.QueryDefs.Delete "qry_update_CodeFigures"
-        'qry = db.CreateQueryDef("qry_update_CodeFigures", C_sql)
-        'qry.Execute()
-
-        '' Flags
-        'If clicom.query_exist("qry_update_Flags", dbase_path) Then db.QueryDefs.Delete "qry_update_Flags"
-        'qry = db.CreateQueryDef("qry_update_Flags", F_sql)
-        'qry.Execute()
-
-        Exit Function
-Err:
-        Log_Errors(Err.Number & " " & Err.Description)
-        ' MsgBox Err.Number & ": " & Err.description
-    End Function
-
-End Class
-
-Public Class FTP
-
-    Dim ftpserver As FtpStatusCode
-
 End Class
