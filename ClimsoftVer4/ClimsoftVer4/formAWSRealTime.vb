@@ -24,6 +24,8 @@ Public Class formAWSRealTime
     Dim lat As String
     Dim lon As String
     Dim elv As String
+    Dim BUFR_header As String
+    Dim msg_header As String
 
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
@@ -908,6 +910,7 @@ Err:
                 If Len(.Rows(i).Item("InputFile")) <> 0 And .Rows(i).Item("OperationalStatus") = 1 Then
                     ' Get station data details
                     nat_id = .Rows(i).Item("SiteID")
+                    msg_header = .Rows(i).Item("aws_msg")
                     flg = ""
                     If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag")
                     'End If
@@ -915,6 +918,7 @@ Err:
                     Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
 
                     ftp_host = .Rows(i).Item("awsServerIp")
+
 
                     ' Compute Delimiter ascii value
 
@@ -1244,6 +1248,7 @@ Err:
                 If .Rows(i).Item("strName") = struc Then
                     delmtr = .Rows(i).Item("data_delimiter")
                     hdrows = .Rows(i).Item("hdrRows")
+                    'msg_header = .Rows(i).Item("aws_msg")
                     If IsDBNull(.Rows(i).Item("txtQualifier")) Then
                         txtqlfr = ""
                     Else
@@ -1479,50 +1484,20 @@ Err:
         ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
         update_main_db(aws_rs, datestring, nat_id)
 
-        'If Val(txtlag) = 999 Then Exit Sub ' No processing of messages if entire file processing is selected
-        ''
-        ' ''    min = Minute(datestring)
-        ''
-        ''   ' Process data according to the set time interval
-        ''
-        ' ''    If Val(min) Mod Val(txtinterval) = 0 Then
+        If Val(txtPeriod.Text) = 999 Then Exit Sub ' No processing of messages if entire file processing is selected
 
-        '' Process any record whose datetime value is within the specified minutes interval
+        If IsDate(datestring) Then
+            ' Process the messages for transmission at the scheduled time
 
-        '' The following code was commented to allow processing of observations for all minutes interval within the hour
-        '' If Val(Minute(datestring)) Mod Val(txtinterval) = 0 Then
-
-        ''    ' The following code was commented to allow processing of observations for all minutes interval within the hour
-        ''    If Abs(Val(txtoffset) - Val(DateDiff("n", datestring, txtdate1))) <= 15 Then
-
-        '' Display the TimeStamp for the data to be processed
-
-        ' ''      Tlag = Val(DateDiff("h", Ltime, datestring)) * -1
-
-        ''      Tlag = Val(DateDiff("h", datestring, Ltime))
-
-        ''      If Val(txtlag) >= Tlag And IsDate(datestring) Then
-        'If IsDate(datestring) Then
-        '    'txtdate = datestring
-        '    'txtdate.Refresh
-
-        '    ' Process the messages for transmission at the scheduled time
-        '    Dim ph As Integer
-
-        '    ' ph = Int(hour(datestring))
-
-        '    ' The source code below can be commented if processlng of TDCF is found not necessary but the Climsoft database updating goes on
-        '    '    If ph Mod 3 = Int(GMT_Diff) Then update_tbltemplate rs, datestring
-
-        '    update_tbltemplate(rs, datestring)
-        'End If
-        'txtdate = datestring
-        '' End If
-        Exit Sub
+            update_tbltemplate(aws_rs, datestring)
+        End If
+        txtLastProcess.Text = datestring
+            ' End If
+            Exit Sub
 Err:
-        'If Err.Number = 94 Then Resume Next
-        'MsgBox "Processing input record"
-        Log_Errors(Err.Description)
+            'If Err.Number = 94 Then Resume Next
+            'MsgBox "Processing input record"
+            Log_Errors(Err.Description)
     End Sub
 
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
@@ -1653,18 +1628,27 @@ Err:
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
         Dim dsdb As New DataSet
         Dim sql As String
-        
+        Dim obs As String
+        Dim mysqldate As String
+
+
         cmd.Connection = dbconn
         SetDataSet(rs_aws)
 
-        With ds.Tables(rs_aws)
+        ' Construct datetime string from DateTime data value that conforms to Mysql datetime format
+        mysqldate = DateAndTime.Year(datestr) & "/" & DateAndTime.Month(datestr) & "/" & DateAndTime.Day(datestr) & " " & DateAndTime.Hour(datestr) & ":" & DateAndTime.Minute(datestr) & ":" & DateAndTime.Second(datestr)
 
+        With ds.Tables(rs_aws)
+            Process_Status("Updating Climsoft database with AWS data")
             For i = 0 To .Rows.Count - 1
                 If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) Then
+                    obs = .Rows(i).Item("obsv")
+                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
+                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
 
                     sql = "use mysql_climsoft_db_v4; INSERT INTO observationinitial " & _
                         "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
-                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & datestr & "','surface','" & .Rows(i).Item("obsv") & "';"
+                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
 
                     cmd.CommandText = sql
                     cmd.ExecuteNonQuery()
@@ -1673,30 +1657,6 @@ Err:
 
             Next
         End With
-
-        'With rs_aws
-        '    .MoveFirst()
-        '    Do While .EOF = False
-        '        'Process_Status "Updating Climsoft database with AWS data"
-        '        If Not IsNull(.Fields("Climsoft_Element")) Then ' And Not IsNull(.Fields("obsv")) Then
-        '            main_obsv.AddNew()
-        '            main_obsv!recorded_at = dtstr
-        '            main_obsv!recorded_from = stn
-        '            main_obsv!described_by = .Fields("Climsoft_Element")
-        '            main_obsv!made_at = "surface"
-        '            main_obsv!acquisition_type = 4
-        '            main_obsv!qc_status = 0
-        '            If .Fields("obsv") = "" Or IsNull(.Fields("obsv")) Then 'Missing Value
-        '                main_obsv!flag = "M"
-        '            Else
-        '                main_obsv!obs_value = Val(.Fields("obsv")) ' Round(Val(.Fields("obsv")) / Val(element_scale(.Fields("climsoft"), maindb)), 0)
-        '                If Not IsNull(.Fields("lower_limit")) And Not IsNull(.Fields("upper_limit")) Then If QC_Limit_Err(.Fields("lower_limit"), .Fields("upper_limit"), .Fields("obsv")) Then main_obsv!flag = "D"
-        '            End If
-        '            main_obsv.Update()
-        '        End If
-        '        .MoveNext()
-        '    Loop
-        'End With
 
         '' Update QC values
         'Dim aws_qc As dao.Recordset
@@ -1740,15 +1700,223 @@ Err:
         'End With
         Exit Sub
 Err:
-        'MsgBox dtstr & " " & Err.Number & ":" & Err.description
-        'If Err.Number = 3155 Then MsgBox dtstr & " " & stn & " " & rs_aws.Fields("climsoft") & " " & rs_aws.Fields("obsv")
         'If Err.Number = 3421 Then Exit Sub
         'If Err.Number = 3022 Then Resume Next
         'If Err.Number = 3146 Then Resume Next
+        If Err.Number = 5 Then Resume Next
         Log_Errors(Err.Number & ":" & Err.Description)
-        'list_errors.AddItem txttime & "  " & Err.description
-        'MsgBox Err.Number & " " & Err.description
     End Sub
+
+    Sub update_tbltemplate(aws_struct As String, Date_Time As String)
+
+        On Error GoTo Err
+
+        Dim trs As DataSet
+        Dim sql As String
+        Dim yy, mm, dd, hh, min, ss As String
+        Dim Seq_Desc As String
+        Dim tt_aws As String
+        Dim obsv As String
+        Dim InitValue As String
+        Dim BufrSection4 As String
+        Dim hdr As String
+
+        tt_aws = txtTemplate.Text
+        sql = "SELECT * FROM " & tt_aws & " ORDER BY Rec"
+        trs = GetDataSet(tt_aws, sql)
+
+        '    With trs
+        '        '  .MoveFirst
+        yy = DateAndTime.Year(Date_Time)
+        mm = DateAndTime.Month(Date_Time)
+        dd = DateAndTime.Day(Date_Time)
+        hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
+        min = DateAndTime.Minute(Date_Time)
+        ss = DateAndTime.Second(Date_Time)
+        wmo_id = 63999
+
+        BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
+
+        Process_Status("Updating TDCF Template with observations ")
+
+        'Initialize with missing values
+
+        Seq_Desc = ""
+
+        With trs.Tables(tt_aws)
+
+            For i = 0 To .Rows.Count - 1
+                ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
+                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                Dim recUpdate As New dataEntryGlobalRoutines
+
+                If Strings.Left(.Rows(i).Item("Bufr_Element"), 1) = 0 And .Rows(i).Item("Bufr_Element") <> "031000" And .Rows(i).Item("Bufr_Element") <> "004025" Then ' Element Descriptors only but not Delayed factor. It is preset
+                    InitValue = "1"
+                    For j = 2 To Val(.Rows(i).Item("Bufr_DataWidth_Bits"))
+                        InitValue = InitValue & "1"
+                    Next j
+                    .Rows(i).Item("Bufr_Data") = InitValue
+
+                End If
+                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+                If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
+                If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
+                If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
+                If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
+                If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
+                If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
+
+                If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
+                If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
+                If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
+                If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
+                If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
+
+                'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
+                da.Update(trs, tt_aws)
+
+            Next i
+        End With
+
+        ' Initialize Code and Flag Tables
+        Initialize_CodeFlag(trs, tt_aws)
+
+        '    ' Update Template with AWS observation values
+        '    '     sql = "UPDATE " & txttemplate & " INNER JOIN " & aws_table & " ON " & txttemplate & ".Bufr_Element =" & aws_table & ".bufr SET " & txttemplate & ".Observation =" & aws_table & ".obsv;"
+        '    sql = "UPDATE " & txttemplate & " INNER JOIN qry_aws ON " & txttemplate & ".Bufr_Element =qry_aws.Bufr_Element SET " & txttemplate & ".Observation =qry_aws.obsv;"
+
+        '    If clicom.query_exist("qry_aws_templ_update", dbase_path) Then db.QueryDefs.Delete "qry_aws_templ_update"
+        '    qry = db.CreateQueryDef("qry_aws_templ_update", sql)
+        '    qry.Execute()
+
+        '    ' Update Template with Replicated Values
+        '    Replicate_SoilTemp trs
+        '    Replicate_MaxGust trs
+
+        '    ' Encode observations in the template into TDCF-BUFR
+        '    TDCF_Encode()
+
+        '    ' Compose data for BUFR Section 4 - Data Section
+        '    sql = "SELECT TM_307091.order, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " & _
+        '          "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.order;"
+
+        '    BufrSection4 = ""
+        '    If Not AWS_Bufr_Section4(sql, BufrSection4) Then
+        '        Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
+        '    Else
+        '        ' Update Subset Number
+        '        Bufr_Subst = Bufr_Subst + 1
+        '        ' Append Data in Section 4 with the data computed from current subset
+        '        BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+        '        ' Output substet binary data
+        'Write #30, Date_Time, BufrSection4
+        '    End If
+
+        '    ' ' Compose the complete AWS BUFR message
+        '    '
+        '    ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
+
+        '    Exit Sub
+Err:
+
+        Log_Errors(Err.Description)
+
+        ' list_errors.AddItem txttime & "  " & Err.description
+        ' MsgBox Err.Number & ": " & Err.description
+    End Sub
+
+    Function Compute_Header(hdr As String, hh As String) As String
+
+        Select Case Val(hh) Mod 6
+            Case 0
+                Mid$(hdr, 3) = "M"
+                Mid$(hdr, 5) = "0"
+                Mid$(hdr, 6) = "1"
+            Case 3
+                Mid$(hdr, 3) = "I"
+                Mid$(hdr, 5) = "2"
+                Mid$(hdr, 6) = "0"
+            Case Else
+                Mid$(hdr, 3) = "N"
+                Mid$(hdr, 5) = "4"
+                Mid$(hdr, 6) = "0"
+        End Select
+        Compute_Header = hdr
+    End Function
+
+    Function Initialize_CodeFlag(cfrs As DataSet, tt_aws As String) As String
+        On Error GoTo Err
+
+        Dim bitstream As String
+
+        Dim flgrs As New DataSet
+        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        
+        flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
+        Initialize_CodeFlag = ""
+        cmd.Connection = dbconn
+
+        ' Initialize with missing values
+        With cfrs.Tables(txtTemplate.Text)
+            For i = 0 To .Rows.Count - 1
+
+                bitstream = ""
+                If .Rows(i).Item("Bufr_Unit") = "Flag table" Then
+                    bitstream = ""
+                    For j = 1 To .Rows(i).Item("Bufr_DataWidth_Bits")
+                        bitstream = bitstream & "1"
+                    Next
+
+                End If
+
+                If .Rows(i).Item("Bufr_Unit") = "Code table" Then
+
+                    For k = 0 To flgrs.Tables("flagtable").Rows.Count - 1
+                        If IsDBNull(flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor")) Then Exit For
+                        If flgrs.Tables("flagtable").Rows(k).Item("Bufr_Descriptor") = .Rows(i).Item("Bufr_Element") Then
+                            bitstream = Decimal_Binary(flgrs.Tables("flagtable").Rows(k).Item("Missing"), .Rows(i).Item("Bufr_DataWidth_Bits"))
+                            Exit For
+                        End If
+
+                    Next
+                End If
+
+                If Len(bitstream) <> 0 Then
+                    sql = "Update " & tt_aws & " SET Bufr_Data = " & bitstream & " where Rec = " & i + 1 & ";"
+                    cmd.CommandText = sql
+                    cmd.ExecuteNonQuery()
+                End If
+
+
+            Next
+        End With
+
+        '' Initialize with code figures and flags of site values
+        'Dim C_sql As String
+        'Dim F_sql As String
+        'Dim qry As QueryDef
+
+        'C_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Observation = [Code_Flag].[Bufr_Value] WHERE (((TM_307091.Bufr_Unit)=""code table""));"
+        'F_sql = "UPDATE Code_Flag INNER JOIN TM_307091 ON Code_Flag.FXY = TM_307091.Bufr_Element SET TM_307091.Bufr_Data = [Code_Flag].[Bufr_Value] WHERE (((TM_307091.Bufr_Unit)=""Flag table"") AND ((Code_Flag.Bufr_Value) Is Not Null Or (Code_Flag.Bufr_Value)<>""""));"
+
+        '' Code figures
+        'If clicom.query_exist("qry_update_CodeFigures", dbase_path) Then db.QueryDefs.Delete "qry_update_CodeFigures"
+        'qry = db.CreateQueryDef("qry_update_CodeFigures", C_sql)
+        'qry.Execute()
+
+        '' Flags
+        'If clicom.query_exist("qry_update_Flags", dbase_path) Then db.QueryDefs.Delete "qry_update_Flags"
+        'qry = db.CreateQueryDef("qry_update_Flags", F_sql)
+        'qry.Execute()
+
+        Exit Function
+Err:
+        Log_Errors(Err.Number & " " & Err.Description)
+        ' MsgBox Err.Number & ": " & Err.description
+    End Function
 
 End Class
 
