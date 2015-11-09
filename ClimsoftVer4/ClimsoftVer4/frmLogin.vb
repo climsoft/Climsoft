@@ -41,6 +41,11 @@ Public Class frmLogin
         Me.Close()
     End Sub
 
+    '''<summary>
+    ''' Create an instance of StreamReader to read from a file. 
+    '''Then open the configuration file
+    '''</summar>
+    ''' 
     Sub ConfigFile()
         Try
             ' Create an instance of StreamReader to read from a file. 
