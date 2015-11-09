@@ -18,7 +18,7 @@ Imports ClimsoftVer4.Translations
 
 Public Class frmLogin
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim line As String
+    Dim line As String 'le modif
 
     Dim sr As IO.StreamReader
 
