@@ -77,7 +77,7 @@ Partial Class frmLogin
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(194, 39)
+        Me.txtUsername.Location = New System.Drawing.Point(204, 12)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
