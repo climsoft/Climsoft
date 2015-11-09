@@ -18,7 +18,7 @@ Imports ClimsoftVer4.Translations
 
 Public Class frmLogin
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim line As String
+    Dim line As String 'le modif
 
     Dim sr As IO.StreamReader
 
@@ -141,6 +141,10 @@ Public Class frmLogin
 
 
     Private Sub cmbDatabases_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatabases.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub UsernameLabel_Click(sender As Object, e As EventArgs) Handles UsernameLabel.Click
 
     End Sub
 End Class
