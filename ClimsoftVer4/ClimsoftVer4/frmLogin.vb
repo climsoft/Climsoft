@@ -36,6 +36,8 @@ Public Class frmLogin
         'frmMainMenu.Show()
         'Me.Hide()
     End Sub
+    ' Create an instance of StreamReader to read from a file. 
+    ' Then open the configuration file
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
         Me.Close()
@@ -43,8 +45,7 @@ Public Class frmLogin
 
     Sub ConfigFile()
         Try
-            ' Create an instance of StreamReader to read from a file. 
-            ' Then open the configuration file
+
             'MsgBox(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
             'Using sr As New System.IO.StreamReader(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
 
@@ -135,12 +136,5 @@ Public Class frmLogin
         End If
     End Sub
 
-    Private Sub cmbDatabases_Click(sender As Object, e As EventArgs) Handles cmbDatabases.Click
 
-    End Sub
-
-
-    Private Sub cmbDatabases_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatabases.SelectedIndexChanged
-
-    End Sub
 End Class
