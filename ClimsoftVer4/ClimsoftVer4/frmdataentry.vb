@@ -128,5 +128,4 @@ Public Class frmKeyEntry
             End If
         Next
     End Sub
-
 End Class

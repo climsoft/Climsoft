@@ -12,7 +12,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cmdRedCloseButton.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdRedCloseButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAABGdBTUEAALGPC/xhBQAAXldJREFUeF7t
         vQvYZFdZ55tO90RCMAQIuejEDCaPooFAIunxPDNHz3HkPGfOiDOiMsqoMzIzzsh4Q0bEO6DYCUnUGUYc
@@ -420,7 +420,7 @@
         lrGMZSxjGctYxjKWsYxlLGOZ33LCCf8/iShore/pWI4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="cmdSettingsAWS.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdSettingsAWS.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEASABIAAD/4QCCRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAAB
         AAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAAB
@@ -1756,7 +1756,7 @@
         igAooooAKKKKACiiigD/2Q==
 </value>
   </data>
-  <data name="cmdMetadata.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdMetadata.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAgEAbgBuAAD/7gAOQWRvYmUAZAAAAAAB/+EiekV4aWYAAE1NACoAAAAIAAcBEgAD
         AAAAAQABAAABGgAFAAAAAQAAAGIBGwAFAAAAAQAAAGoBKAADAAAAAQACAAABMQACAAAAHAAAAHIBMgAC
@@ -3432,7 +3432,7 @@
         H1efCnKvHj+7+3ir/9k=
 </value>
   </data>
-  <data name="cmdUserManagement.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdUserManagement.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAkGBxAPEBASEhISFhAQFRAUFxcVFRUVGBEVFBYWGBQUFRQY
         HSggGBolJxQVITEhJikrLi4vGCAzODMsNygtLiv/2wBDAQoKCg4NDhsQEBosJSAlLCw0LC80LCwsLS0v
@@ -3552,7 +3552,7 @@
         gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIP/2Q==
 </value>
   </data>
-  <data name="cmdProducts.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdProducts.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhVwJaAYEAAP///wAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEBAAAh+QQAAAAAACwAAAAAVwJa
         AQAI3gABCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBj
@@ -3636,7 +3636,7 @@
         38CjtPv9v4httfaJ33GN4DqYsub9oePH39N91hK+4RwR3uEe/uEgHuIiPuIkXuKeHBAAOw==
 </value>
   </data>
-  <data name="cmdQC.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdQC.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAApoAAAIbCAIAAADEgqnVAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAANseSURBVHhe7L2HexRHtv+tf+h3d/dutr1re9drnLAN
@@ -4577,7 +4577,7 @@
         PmAEUOeJiPLYpPrmBVQzUSSybE786v8AMwGF4iKJNVUAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="cmdDataTransfer.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdDataTransfer.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAEzNJREFUeF7tnAlUVGeWx53p6eme7jndZ5aTnF7mzEwANSBuuOACRSGKMS5RY3pi
@@ -4665,7 +4665,7 @@
         9pO91zZgwP8Bf38uiq3Z8nIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="cmdPaperArchive.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdPaperArchive.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAgEAAAAAAAD/7gAOQWRvYmUAZAAAAAAB/9sAQwABAQEBAQEBAQEBAQEBAQEBAQEB
         AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMD/9sAQwEBAQEBAQECAQEC
@@ -7074,7 +7074,7 @@
         v/8Ajv8A/Z6M4/8Acy6PJI6x/wC5l0eSR//Z
 </value>
   </data>
-  <data name="cmdKeyEntry.BackgroundImage" xml:space="preserve" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="cmdKeyEntry.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAAAAAAAD/2wBDAAkGBxIPEBAPEBAQERAPEBAWFRUREhIPEBIYFRUWFxQVFxUY
         HCghGBslGxYVLTUhJikrMy8uGCAzOD8sOSgtLiv/2wBDAQoKCgwNDhoQEBUsJSAlLSwsLzAsLCwrKy8s
@@ -7142,10 +7142,10 @@
         AAAAHVgAcxEgAOpygAOx0AAAAAAAAAA5R2AA6s5iAByAAAAAAAD/2Q==
 </value>
   </data>
-  <metadata name="MenuStrip2.TrayLocation" xml:space="preserve" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="MenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>150, 16</value>
   </metadata>
-  <metadata name="$this.TrayHeight" xml:space="preserve" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>43</value>
   </metadata>
 </root>
