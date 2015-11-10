@@ -493,11 +493,11 @@ Err:
         PopulateForm("mss", txtmssNavigator, rec)
     End Sub
 
-    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint
+    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint, Panel6.Paint
 
     End Sub
 
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles grpStructures1.Enter
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles grpStructures1.Enter, GroupBox2.Enter
 
     End Sub
 
@@ -626,7 +626,7 @@ Err:
         Next
     End Sub
 
-    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged
+    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged, ComboBox3.SelectedIndexChanged
         On Error GoTo Err
         SetDataSet("aws_structures")
 
@@ -647,7 +647,7 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
+    Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click, Button3.Click
         On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
@@ -702,7 +702,7 @@ Err:
         MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
-    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click, Button2.Click
         'MsgBox(Strings.Right(txtRecNo.Text, 1))
         Dim recs As Integer
         recs = Int(Strings.Right(lblRecords.Text, 1)) - 1
@@ -710,7 +710,7 @@ Err:
         FillList(cmbExistingStructures, "aws_structures", "strName")
     End Sub
 
-    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click, Button1.Click
         DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, 1)) - 1)
         FillList(cmbExistingStructures, "aws_structures", "strName")
     End Sub
@@ -792,32 +792,35 @@ Err:
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        '        On Error GoTo Err
+        On Error GoTo Err
 
-        '        Ltime.Text = Now
 
-        '        ' Set the next encoding time
-        '        If Len(txtLastProcess.Text) = 0 Then
-        '            txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
-        '            optStart.Checked = True
-        '        End If
+        Ltime.Text = Now
+        txtDateTime.Text = Ltime.Text
 
-        '        If optStart.Checked = True Then
-        '            'If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
+        ' Set the next encoding time
+        If Len(txtNxtProcess.Text) = 0 Then
+            'MsgBox(0)
+            txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
+            optStart.Checked = True
+        End If
 
-        '            Start_Process()
+        If optStart.Checked = True Then
+            'Log_Errors(DateDiff("n", txtDateTime.Text, txtNxtProcess.Text))
+            If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
+                Start_Process()
+            End If
+        End If
 
-        '            'End If
-        '        End If
-
-        '        Exit Sub
-        'Err:
-        '        If Err.Number = 13 Then
-        '            Resume Next
-        '        Else
-        '            Log_Errors(Err.Number & ":" & Err.Description)
-        '            'Log_Errors "Err.description"  'MsgBox Err.Number & ":" & Err.description
-        '        End If
+        Exit Sub
+Err:
+        Log_Errors(Err.Description)
+        If Err.Number = 13 Then
+            Resume Next
+        Else
+            Log_Errors(Err.Number & ":" & Err.Description)
+            'Log_Errors "Err.description"  'MsgBox Err.Number & ":" & Err.description
+        End If
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
@@ -868,7 +871,7 @@ Err:
         lstOutputFiles.Items.Clear()
 
         process_input_data()
-        'Next_Encoding_Time()
+        Next_Encoding_Time()
     End Sub
 
     Sub process_input_data()
@@ -1040,37 +1043,43 @@ Err:
                             End If
 
                         Next
-
-                        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
-
-                        datestring = ds.Tables(AWSsite).Rows(0).Item("obsv")
-
-                        'Sametimes Date and Time values are separately in the 1st and 2nd fields respectively. In such cases they are combined
-                        If Len(datestring) < 12 Then
-                            datestring = datastring & " " & ds.Tables(AWSsite).Rows(1).Item("obsv")
-                        End If
-
-                        'datestring = TimeStamp(rs)
-                        If Not IsDate(datestring) Then
-                            Log_Errors(datestring)
-                        End If
-
-
-                        'Log_Errors(datestring)
-                        'Process_Input_Record(AWSsite, datestring)
-                        If Val(txtPeriod.Text) = 999 Then
-                            Process_Input_Record(AWSsite, datestring)
-                            '    Process_Input_Record(datestring) ' Process the entire input file irespective of time difference
-                        Else
-                            Process_Input_Record(AWSsite, datestring)
-                            'If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
-                            'MsgBox(9)
-                            'MsgBox(i)
-                            'MsgBox(.Rows(i).Item("InputFile"))
-                            'MsgBox(99)
-                        End If
-
                     Loop
+                    ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+
+                    datestring = ds.Tables(AWSsite).Rows(0).Item("obsv")
+
+                    'Sametimes Date and Time values are separately in the 1st and 2nd fields respectively. In such cases they are combined
+                    If Len(datestring) < 12 Then
+                        datestring = datastring & " " & ds.Tables(AWSsite).Rows(1).Item("obsv")
+                    End If
+
+                    'datestring = TimeStamp(rs)
+                    If Not IsDate(datestring) Then
+                        Log_Errors(datestring)
+                    End If
+
+
+                    'Log_Errors(datestring)
+                    'Process_Input_Record(AWSsite, datestring)
+                    If Val(txtPeriod.Text) = 999 Then
+                        Process_Input_Record(AWSsite, datestring)
+                        '    Process_Input_Record(datestring) ' Process the entire input file irespective of time difference
+                    Else
+                        'Process_Input_Record(AWSsite, datestring)
+                        'Log_Errors(DateDiff("h", datestring, txtDateTime.Text) & "<= " & Val(txtPeriod.Text - 1))
+                        If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+
+                            Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                        End If
+                    End If
+
+                    'MsgBox(9)
+                    'MsgBox(i)
+                    'MsgBox(.Rows(i).Item("InputFile"))
+                    'MsgBox(99)
+                    'End If
+
+                    'Loop
 
                     FileClose(11)
                     '  Close #11
@@ -1110,7 +1119,7 @@ Continues:
         Dim subst As String
 
         ' Load the subsets records from an output file into arrays
-        kount = 0
+        Kount = 0
         Do While EOF(30) = False
             Input(30, dts(Kount))
             Input(30, subs(Kount))
@@ -1152,12 +1161,12 @@ Continues:
         End If
 
         FileClose(31)
-
+        FileClose(30)
         Me.Cursor = Cursors.Default
         Exit Sub
 
 Err:
-        'MsgBox(Err.Description)
+        'MsgBox(Err.Number & " " & Err.Description)
         'If Err.Number = 9 Then Resume Next
         ''MsgBox(datt & " " & datestring)
         If Err.Number = 62 Or Err.Number = 9 Then
@@ -1175,9 +1184,9 @@ Err:
         FileClose(30)
         FileClose(31)
     End Sub
-    Sub Next_Encoding_Time()
+    'Sub Next_Encoding_Time()
 
-    End Sub
+    'End Sub
     Function Compute_Descriptors(ByRef Desc_Bits As String) As Boolean
         Compute_Descriptors = True
         On Error GoTo Err
@@ -1358,7 +1367,7 @@ Err:
 
         '        ' Create batch file to execute FTP script
         ftpbatch = local_folder & "\ftp_tdcf.bat"
-       
+
         FileOpen(1, ftpbatch, OpenMode.Output)
 
         Print(1, "echo off" & Chr(13) & Chr(10))
@@ -1530,12 +1539,12 @@ Err:
             update_tbltemplate(aws_rs, datestring)
         End If
         txtLastProcess.Text = datestring
-            ' End If
-            Exit Sub
+        ' End If
+        Exit Sub
 Err:
-            'If Err.Number = 94 Then Resume Next
-            'MsgBox "Processing input record"
-            Log_Errors(Err.Description)
+        'If Err.Number = 94 Then Resume Next
+        'MsgBox "Processing input record"
+        Log_Errors(Err.Description)
     End Sub
 
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
@@ -1645,12 +1654,13 @@ Err:
 
     Private Sub optStart_Click(sender As Object, e As EventArgs) Handles optStart.Click
         If optStart.Checked = True Then Start_Process()
+
     End Sub
     Sub Process_Status(msg As String)
         On Error GoTo Err
 
         txtStatus.Text = msg
-        txtstatus.Refresh()
+        txtStatus.Refresh()
 
         Exit Sub
 Err:
@@ -1662,7 +1672,7 @@ Err:
         On Error GoTo Err
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        
+
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
         Dim dsdb As New DataSet
         Dim sql As String
@@ -1684,7 +1694,7 @@ Err:
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
 
-                    sql = "use mysql_climsoft_db_v4; INSERT INTO observationinitial " & _
+                    sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
                         "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
                         "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
 
@@ -1895,7 +1905,7 @@ Err:
 
         Dim flgrs As New DataSet
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-        
+
         flgrs = GetDataSet("flagtable", "SELECT * FROM flagtable")
         Initialize_CodeFlag = ""
         cmd.Connection = dbconn
@@ -1994,7 +2004,7 @@ Err:
                 If Not IsDBNull(.Rows(i).Item("Bufr_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
                     'Log_Errors(.Rows(i).Item("Bufr_Element") & " " & .Rows(i).Item("obsv"))
                     If .Rows(i).Item("Bufr_Element") = "012130" Then
-                          Temps(Rep) = .Rows(i).Item("obsv")
+                        Temps(Rep) = .Rows(i).Item("obsv")
                         If InStr(.Rows(i).Item("element_name"), "10") <> 0 Then levels(Rep) = "0.1"
                         If InStr(.Rows(i).Item("element_name"), "20") <> 0 Then levels(Rep) = "0.2"
                         If InStr(.Rows(i).Item("element_name"), "30") <> 0 Then levels(Rep) = "0.3"
@@ -2158,7 +2168,7 @@ Err:
         'trs = GetDataSet(txtTemplate.Text, sql)
 
         With trs.Tables(tt_aws)
- 
+
             For i = 0 To .Rows.Count - 1
                 RecNo = .Rows(i).Item("Rec")
                 If Not IsDBNull(.Rows(i).Item("Observation")) Then
@@ -2732,7 +2742,34 @@ Err:
         Binary_Decimal = False
     End Function
 
+    Function Next_Encoding_Time() As Boolean
+        Next_Encoding_Time = True
+        On Error GoTo Err
+        Dim mnt As Integer
+        Dim ss As Integer
 
+        txtNxtProcess.Text = Ltime.Text
+        txtNxtProcess.Text = DateAdd("h", 1, txtNxtProcess.Text)
+
+        mnt = CInt(DateAndTime.Minute(txtNxtProcess.Text))
+        ss = CInt(DateAndTime.Second(txtNxtProcess.Text))
+        mnt = -1 * mnt
+        ss = -1 * ss
+
+        txtNxtProcess.Text = DateAdd("n", mnt, txtNxtProcess.Text)
+        txtNxtProcess.Text = DateAdd("s", ss, txtNxtProcess.Text)
+
+        txtNxtProcess.Text = DateAdd("n", CLng(txtOffset.Text), txtNxtProcess.Text)
+
+        Process_Status("Next Encoding Time -" & txtNxtProcess.Text)
+        'Process_Status("Next Encoding Time -" & Strings.Left(txtNxtProcess.Text, Len(txtNxtProcess.Text) - 3))
+        Exit Function
+Err:
+        Next_Encoding_Time = False
+        Log_Errors(Err.Description)
+        ' list_errors.AddItem txttime & " " & Err.description
+        ' MsgBox Err.description
+    End Function
 End Class
 
 Public Class FTP
