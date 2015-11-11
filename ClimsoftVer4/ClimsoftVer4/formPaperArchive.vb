@@ -89,24 +89,26 @@
 
     Private Sub cmdArchive_Click(sender As Object, e As EventArgs) Handles cmdArchive.Click
         Dim imgFile As String
-        On Error GoTo err
+        Try
 
-        'Craete the images folder if it does not exist
-        If Not IO.Directory.Exists("c:\images") Then
-            IO.Directory.CreateDirectory("c:\images")
-        End If
-
-        For i = 0 To lstvFiles.Items.Count - 1
-            imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
-            If lstvFiles.Items(i).Checked Then
-                IO.File.Copy(imgFile, "c:\images\" & lstvFiles.Items(i).Text, True)
-                UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(i).Text)
+            'Craete the images folder if it does not exist
+            If Not IO.Directory.Exists("c:\images") Then
+                IO.Directory.CreateDirectory("c:\images")
             End If
-        Next
-        MsgBox("Archiving Completed")
-        Exit Sub
-err:
-        MsgBox(Err.Description)
+
+            For i = 0 To lstvFiles.Items.Count - 1
+                imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
+                If lstvFiles.Items(i).Checked Then
+                    IO.File.Copy(imgFile, "c:\images\" & lstvFiles.Items(i).Text, True)
+                    UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(i).Text)
+                End If
+            Next
+            MsgBox("Archiving Completed")
+        Catch ex As Exception
+            ' MsgBox("the connection to the database failed ")
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
     Sub UpdateArchive(FilePth As String, FileNm As String)
         Dim siz, count, i As Integer
