@@ -30,21 +30,27 @@
     '    ListFiles(fld)
     'End Sub
     Sub ListFiles(flds As String)
-        ' Declare and assign folder variables
-        Dim f1 As New IO.DirectoryInfo(flds)
-        Dim d1 As IO.FileInfo() = f1.GetFiles()
-        Dim da1 As IO.FileInfo
-        Dim fls As String
 
-        lstvFiles.Columns.Add("Files", 500, HorizontalAlignment.Left)
-        'list the names of all files in the specified directory
-        For Each da1 In d1
-            fls = da1.Name
-            'listImages.Items.Add(da1)
-            lstvFiles.Items.Add(fls)
-        Next
+        Try
+            ' Declare and assign folder variables
+            Dim f1 As New IO.DirectoryInfo(flds)
+            Dim d1 As IO.FileInfo() = f1.GetFiles()
+            Dim da1 As IO.FileInfo
+            Dim fls As String
 
-        FilesListSatus(True)
+            lstvFiles.Columns.Add("Files", 500, HorizontalAlignment.Left)
+            'list the names of all files in the specified directory
+            For Each da1 In d1
+                fls = da1.Name
+                'listImages.Items.Add(da1)
+                lstvFiles.Items.Add(fls)
+            Next
+
+            FilesListSatus(True)
+        Catch ex As Exception
+            ' MsgBox("the connection to the database failed ")
+            MsgBox(ex.Message)
+        End Try
         'chkFiles.Text = "Unselect All"
         'To filter search change f1.GetFiles() to di.GetFiles(“.extionsion”)
     End Sub
