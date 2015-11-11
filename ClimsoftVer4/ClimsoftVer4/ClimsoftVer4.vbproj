@@ -334,6 +334,7 @@
     <Compile Include="frmSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Common.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="formClimat.de.resx">

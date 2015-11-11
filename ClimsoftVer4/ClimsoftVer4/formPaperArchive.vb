@@ -251,7 +251,8 @@ Err:
     '        MsgBox(Err.Number & ": " & Err.Description)
     '    End Sub
     Sub ShowImage(img As String)
-        System.Diagnostics.Process.Start(img)
+        'System.Diagnostics.Process.Start(img)
+        CommonModules.ViewFile(img)
     End Sub
 
     Private Sub cmdImageFile_Click(sender As Object, e As EventArgs) Handles cmdImageFile.Click

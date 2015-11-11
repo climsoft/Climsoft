@@ -223,6 +223,11 @@
         ClearStationForm()
         Exit Sub
 Err:
+        If Err.Number = 5 Then
+            MsgBox("Invalid Entries; Check values")
+            Exit Sub
+        End If
+
         MsgBox(Err.Number & " : " & Err.Description)
     End Sub
     Sub ClearStationForm()
@@ -407,6 +412,10 @@ Err:
         ClearElementForm()
         Exit Sub
 Err:
+        If Err.Number = 5 Then
+            MsgBox("Invalid Entries; Check values")
+            Exit Sub
+        End If
         MsgBox(Err.Number & " : " & Err.Description)
 
     End Sub
@@ -439,7 +448,8 @@ Err:
         Exit Sub
 
 Err:
-        MsgBox(Err.Description)
+
+        MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
 
