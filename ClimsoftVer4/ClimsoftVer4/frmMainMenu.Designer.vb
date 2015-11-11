@@ -43,6 +43,7 @@ Partial Class frmMainMenu
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmdRProducts = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -234,6 +235,7 @@ Partial Class frmMainMenu
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Linen
+        Me.Panel1.Controls.Add(Me.cmdRProducts)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label9)
@@ -259,6 +261,15 @@ Partial Class frmMainMenu
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(560, 521)
         Me.Panel1.TabIndex = 10
+        '
+        'cmdRProducts
+        '
+        Me.cmdRProducts.Location = New System.Drawing.Point(462, 245)
+        Me.cmdRProducts.Name = "cmdRProducts"
+        Me.cmdRProducts.Size = New System.Drawing.Size(30, 76)
+        Me.cmdRProducts.TabIndex = 37
+        Me.cmdRProducts.Text = "R"
+        Me.cmdRProducts.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -440,7 +451,7 @@ Partial Class frmMainMenu
         Me.cmdProducts.Name = "cmdProducts"
         Me.cmdProducts.Padding = New System.Windows.Forms.Padding(5)
         Me.cmdProducts.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdProducts.Size = New System.Drawing.Size(126, 76)
+        Me.cmdProducts.Size = New System.Drawing.Size(99, 76)
         Me.cmdProducts.TabIndex = 21
         Me.cmdProducts.UseCompatibleTextRendering = True
         Me.cmdProducts.UseVisualStyleBackColor = True
@@ -587,4 +598,5 @@ Partial Class frmMainMenu
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cmdRProducts As Button
 End Class

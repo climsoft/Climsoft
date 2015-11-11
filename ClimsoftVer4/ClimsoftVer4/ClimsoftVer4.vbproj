@@ -160,6 +160,12 @@
     <Compile Include="frmCrex.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDataSelector.Designer.vb">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDBUtilities.Designer.vb">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </Compile>
@@ -479,6 +485,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.fr.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.de.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.fr.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.de.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>

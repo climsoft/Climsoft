@@ -120,4 +120,7 @@ Public Class frmMainMenu
 
     End Sub
 
+    Private Sub cmdRProducts_Click(sender As Object, e As EventArgs) Handles cmdRProducts.Click
+        frmDataSelector.ShowDialog()
+    End Sub
 End Class
