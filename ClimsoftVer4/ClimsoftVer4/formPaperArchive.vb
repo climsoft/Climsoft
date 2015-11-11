@@ -319,14 +319,20 @@ Err:
     Sub FillList(ByRef lst As ComboBox, tbl As String, idxfld As String)
         Dim dstn As New DataSet
         Dim sql As String
+
+        On Error GoTo Err
+
         sql = "SELECT * FROM  " & tbl
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        dstn.Clear()
-        da.Fill(dstn, tbl)
+            dstn.Clear()
+            da.Fill(dstn, tbl)
 
-        For i = 0 To dstn.Tables(tbl).Rows.Count - 1
-            lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
-        Next
+            For i = 0 To dstn.Tables(tbl).Rows.Count - 1
+                lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
+            Next
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
     End Sub
 
     Private Sub tabImageArchives_Click(sender As Object, e As EventArgs) Handles tabImageArchives.Click

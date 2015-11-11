@@ -94,6 +94,12 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
     </Compile>
@@ -297,6 +303,24 @@
       <DependentUpon>frmUsers.vb</DependentUpon>
     </Compile>
     <Compile Include="frmUsers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_daily_many_elements_sek.Designer.vb">
+      <DependentUpon>frm_daily_many_elements_sek.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_daily_many_elements_sek.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_princ_dailyEntries_sek.Designer.vb">
+      <DependentUpon>frm_princ_dailyEntries_sek.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_princ_dailyEntries_sek.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_synop_auto_sek.Designer.vb">
+      <DependentUpon>frm_synop_auto_sek.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frm_synop_auto_sek.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\Application1.Designer.vb">
@@ -593,6 +617,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.fr.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_daily_many_elements_sek.de.resx">
+      <DependentUpon>frm_daily_many_elements_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_daily_many_elements_sek.fr.resx">
+      <DependentUpon>frm_daily_many_elements_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_daily_many_elements_sek.resx">
+      <DependentUpon>frm_daily_many_elements_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_princ_dailyEntries_sek.de.resx">
+      <DependentUpon>frm_princ_dailyEntries_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_princ_dailyEntries_sek.fr.resx">
+      <DependentUpon>frm_princ_dailyEntries_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_princ_dailyEntries_sek.resx">
+      <DependentUpon>frm_princ_dailyEntries_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_synop_auto_sek.de.resx">
+      <DependentUpon>frm_synop_auto_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_synop_auto_sek.fr.resx">
+      <DependentUpon>frm_synop_auto_sek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_synop_auto_sek.resx">
+      <DependentUpon>frm_synop_auto_sek.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -35,10 +35,15 @@
 
     Sub SetDataSet(tbl As String)
         Dim sql As String
-        sql = "SELECT * FROM " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        da.Fill(ds, tbl)
-        Kount = ds.Tables(tbl).Rows.Count
+        Try
+            sql = "SELECT * FROM " & tbl
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da.Fill(ds, tbl)
+            Kount = ds.Tables(tbl).Rows.Count
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
