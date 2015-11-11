@@ -493,11 +493,11 @@ Err:
         PopulateForm("mss", txtmssNavigator, rec)
     End Sub
 
-    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint, Panel6.Paint
+    Private Sub pnlDataStructures_Paint(sender As Object, e As PaintEventArgs) Handles pnlDataStructures.Paint
 
     End Sub
 
-    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles grpStructures1.Enter, GroupBox2.Enter
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles grpStructures1.Enter
 
     End Sub
 
@@ -626,7 +626,7 @@ Err:
         Next
     End Sub
 
-    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged, ComboBox3.SelectedIndexChanged
+    Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged
         On Error GoTo Err
         SetDataSet("aws_structures")
 
@@ -647,31 +647,41 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
-    Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click, Button3.Click
+    Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
         On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim str As New DataSet
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
-
-        dsNewRow = ds.Tables("aws_structures").NewRow
-        dsNewRow.Item("strName") = txtStrName.Text
-        dsNewRow.Item("data_delimiter") = txtDelimiter.Text
-        dsNewRow.Item("hdrRows") = txtHeaders.Text
-        dsNewRow.Item("txtQualifier") = txtQualifier.Text
-
-        'Add a new record to the data source table
-        ds.Tables("aws_structures").Rows.Add(dsNewRow)
-        da.Update(ds, "aws_structures")
-
-        recEdit.messageBoxCommit()
-
-        ' Create a table for the new structure
         Dim sql0 As String
         Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+
+        'str = GetDataSet("aws_structures", "Select * from aws_structures")
+
+        'dsNewRow = str.Tables("aws_structures").NewRow
+        'dsNewRow.Item("strName") = txtStrName.Text
+        'dsNewRow.Item("data_delimiter") = txtDelimiter.Text
+        'dsNewRow.Item("hdrRows") = txtHeaders.Text
+        'dsNewRow.Item("txtQualifier") = txtQualifier.Text
+
+        ''Add a new record to the data source table
+        'str.Tables("aws_structures").Rows.Add(dsNewRow)
+        'da.Update(str, "aws_structures")
+
+        'recEdit.messageBoxCommit()
+
+        comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+        sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+        comm.ExecuteNonQuery()   ' Execute the query
+
+
+        '' Create a table for the new structure
+
         Dim tbl As String = txtStrName.Text
 
         sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
@@ -689,7 +699,7 @@ Err:
                 "UNIQUE KEY `identification` (`No`) " & _
              ");"
         'MsgBox(sql0)
-        comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+
         comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
         comm.ExecuteNonQuery()   ' Execute the query
 
@@ -697,12 +707,13 @@ Err:
 
         DataGridFill(txtStrName.Text)
         FillList(cmbExistingStructures, "aws_structures", "strName")
+        cmbExistingStructures.Refresh()
         Exit Sub
 Err:
         MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
-    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click, Button2.Click
+    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         'MsgBox(Strings.Right(txtRecNo.Text, 1))
         Dim recs As Integer
         recs = Int(Strings.Right(lblRecords.Text, 1)) - 1
@@ -710,7 +721,7 @@ Err:
         FillList(cmbExistingStructures, "aws_structures", "strName")
     End Sub
 
-    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click, Button1.Click
+    Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, 1)) - 1)
         FillList(cmbExistingStructures, "aws_structures", "strName")
     End Sub
