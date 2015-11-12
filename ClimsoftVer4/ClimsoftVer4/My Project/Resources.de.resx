@@ -261,4 +261,52 @@
   <data name="Year" xml:space="preserve">
     <value>JAHR</value>
   </data>
+  <data name="BUFR_Master_Table_Version_Number" xml:space="preserve">
+    <value>BUFR Master Tabelle Versionsnummer</value>
+  </data>
+  <data name="Binary_Message" xml:space="preserve">
+    <value>Binäre Nachricht</value>
+  </data>
+  <data name="BUFR_edition_Number" xml:space="preserve">
+    <value>BUFR Ausgabe Nummer</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="FTP" xml:space="preserve">
+    <value>FTP</value>
+  </data>
+  <data name="Indicators" xml:space="preserve">
+    <value>Indikatoren</value>
+  </data>
+  <data name="Instrument_Types" xml:space="preserve">
+    <value>Instrument-Typen</value>
+  </data>
+  <data name="International_Data_Sub_Category" xml:space="preserve">
+    <value>Internationale Daten Unterkategorie</value>
+  </data>
+  <data name="Local_Data_Sub_Cateory" xml:space="preserve">
+    <value>Lokale Daten Unterkategorie</value>
+  </data>
+  <data name="Masters_Table_Version_Number" xml:space="preserve">
+    <value>Meister-Tabelle-Versionsnummer</value>
+  </data>
+  <data name="Optional_Sequence_Inclusion" xml:space="preserve">
+    <value>Optionale Folge Aufnahme</value>
+  </data>
+  <data name="Originating_Generating_Centre" xml:space="preserve">
+    <value>Zentrum mit Ursprung/generieren</value>
+  </data>
+  <data name="Originating_Generating_SubCentre" xml:space="preserve">
+    <value>Mit Ursprung und Generieren von Sub-Zentrum</value>
+  </data>
+  <data name="Sensors_Height_From_Ground_M" xml:space="preserve">
+    <value>Sensoren-Höhe vom Boden (M)</value>
+  </data>
+  <data name="Table_Version_Number" xml:space="preserve">
+    <value>Lokale Tabellen-Versionsnummer</value>
+  </data>
+  <data name="Update_Sequence_Number" xml:space="preserve">
+    <value>Aktualisierungssequenznummer</value>
+  </data>
 </root>

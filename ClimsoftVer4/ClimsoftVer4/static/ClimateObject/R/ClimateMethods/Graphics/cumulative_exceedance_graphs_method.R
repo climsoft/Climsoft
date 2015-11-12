@@ -1,17 +1,44 @@
 # CUMULATIVE GRAPH and EXCEEDANCE GRAPH
 #' @title plot cumulative and exceedance graphs
 #' @name cumulative_exceedance_graphs
-#' @author Fanuel 2015 (AMI)
+#' @author Fanuel and Steve 2015 (AMI)
 
 #' @description \code{cumulative_exceedance_graphs} 
 #' Enables plotting cumulative and exceedance graphs given a climate object
-
+#' @param data_list 	A list containing stations for analysis, the years or periods to be analysed and the required variables from the data. 
+#' If blank, the system will choose all data appropriate for the analysis.
+#' @param interest_var The variable of interest to be plotted.
+#' @param cumulative_graph A logical indicating whether cumulative graph should be plotted. 
+#' Cumulative graph is produced when it is TRUE. Otherwise an exceedance graph is produced. 
+#' @param legend_bty  The type of box to be drawn around the legend.
+#' @param Percent   A logical indicating whether the calculated values should be in percent or not.
+#' @param Color	 The legend color.
+#' @param Main   The title of the plot.
+#' @param Xlabel The X axis label.
+#' @param Ylabel The Y axis label.
+#' @param line_type	The type of plot to be drawn. 
+#' @param legend_position The position of the legend.
+#' @param legend_label	The label of the legend. This is needed when interest_var>1
+#' @param station_name  A logical indicating whether the name of the station should be included in the title of the plot.
+#' @param Plot_window  	A logical indicating whether the plots per station should be on the same plot window.
+#' @param Gpar  	Used to arrange figures in n rows and m columns when plot_window is TRUE.
+#' @param grid_sq	A logical indicating whether a grid should be included in the plot.
+#' @param grid_sq A logical indicating whether an nx by ny rectangular grid should be added to an existing plot.
+#' @param nx,ny  	Dimension of the rectangular grid.
+#' @param Lwd   	The width of the grid lines.
+#' @param box.lty  par("lty")	grid line type.
+#' 
+#' @examples
+#' ClimateObj <- climate( data_tables = list( data ), data_time_periods = list("yearly") )
+#' # where "data" is a data.frame containing the desired data to be plotted.
+#' climateObj$cumulative_exceedance_graphs()
+#' 
 #' @return cumulative graph or exceedance graph. the default is cumulative graph
 
 
 climate$methods(cumulative_exceedance_graphs = function(data_list=list(),interest_var = "Total Rain",cumulative_graph =TRUE, legend_bty="n",
                                                         color=rainbow(12),percent=TRUE, main="", xlabel="",ylabel="",line_type="o",
-                                                        convert=TRUE, data_period_label=yearly_label, legend_position="center",
+                                                        data_period_label=yearly_label, legend_position="center",
                                                         legend_label=c("plot1","plot2"),station_name=TRUE, plot_window=FALSE,gpar=par(mfrow=c(2,4)),
                                                         grid_sq=TRUE, nx=5, ny=nx,lwd=2,pch=21,box.lty=par("lty"))
 {  
@@ -22,9 +49,7 @@ climate$methods(cumulative_exceedance_graphs = function(data_list=list(),interes
   data_list=add_to_data_info_required_variable_list(data_list, interest_var) 
   
   data_list=add_to_data_info_time_period(data_list, data_period_label)
-  
-  data_list=c(data_list,convert_data=convert)
-  
+ 
   climate_data_objs_list = get_climate_data_objects(data_list)
   
   for(data_obj in climate_data_objs_list) {
@@ -94,7 +119,7 @@ climate$methods(cumulative_exceedance_graphs = function(data_list=list(),interes
             main="cumulative graph"
           }
           if (xlabel==""){
-            xlabel= "Variable of interest"
+            xlabel= interest_var
           }
           #====Plotting the cumulative================================================
           if (percent ==TRUE){

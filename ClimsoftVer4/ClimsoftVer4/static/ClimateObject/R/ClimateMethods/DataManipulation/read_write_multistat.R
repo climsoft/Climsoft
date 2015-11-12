@@ -20,11 +20,22 @@
 #'------------------------------------------------------------------------------------------------
 #'------------------------------------------------------------------------------------------------
 
-read_write_multistat<-function( filename="", format= "csv"){
+read_write_multistat<-function( path_to_file="",filename=as.list(), format= "csv"){
+                    if(!is.null(path_to_file)){
+                      setwd(path_to_file)
                       f<-list.files()  
                       f<-as.data.frame(f)
                       f<-f[1]
                       nf<-noquote(tools::file_path_sans_ext(f$f))
+                      
+                    }else if(!is.null(filename)){
+                        fname_list<-lapply(tk_choose_files(caption=""), list)
+                           for(fname in fname_list){
+                                tmp_name<-noquote(basename(as.character(fname)))
+                             
+                           }
+                        #file_list<-lapply(tk_choose_files(caption=""), read.table(header=T))
+                      }
                       mv<-paste(nf,'<-','read.', format, '("',f$f, '", header=T)' , sep='')
                       write.table(noquote(mv), file=as.character(filename), quote=F, row.names=F, sep=",")
                       filen<-noquote(paste(paste(nf,'=', nf),"",collapse=","))

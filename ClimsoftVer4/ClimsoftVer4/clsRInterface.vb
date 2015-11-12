@@ -118,6 +118,21 @@ Public Class clsRInterface
 
     End Sub
 
+    Public Sub createClimateObjectFromSQL(strSQL As String)
+
+        Dim message As String()
+        Try
+            ' The ClimateObject codebase contains a SourcingScript that is used access the ClimateObject via R.Net
+            message = engine.Evaluate("source('" & climateObjectPath & "R/SourcingScript.R')").AsCharacter().ToArray()
+            engine.Evaluate("library(RMySQL)")
+            message = engine.Evaluate("ClimateCOfromSQL(" & Chr(34) & strSQL & Chr(34) & ")").AsCharacter().ToArray()
+            'engine.Evaluate("CO<- climate$new()")
+            'message = engine.Evaluate("CO$import_sqldata(" & strSQL & ")").AsCharacter().ToArray()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+    End Sub
 
     Public Function genericDataFrame(ds As DataSet, dataFrameName As String) As Integer ' RDotNet.DataFrame
         ' This method is currently incomplete and is not being used.
