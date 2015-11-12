@@ -287,6 +287,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmProductsClimateObj.Designer.vb">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductsClimateObj.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQC.Designer.vb">
       <DependentUpon>frmQC.vb</DependentUpon>
     </Compile>
@@ -590,6 +596,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.de.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.fr.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQC.de.resx">
       <DependentUpon>frmQC.vb</DependentUpon>

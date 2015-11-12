@@ -150,12 +150,13 @@ Public Class frmDataSelector
         sql = String.Format("SELECT * FROM observationfinal {0}", where)
         'MsgBox(sql)
 
-        Try
-            rInterface.engine.Evaluate("require(tcltk)")
-            rInterface.engine.Evaluate(String.Format("msgBox <- tkmessageBox(message=""{0}"")", sql))
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
+        'Try
+        rInterface.createClimateObjectFromSQL(sql)
+        '    rInterface.engine.Evaluate("CO$plot_missing_values_rain()")
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
+        frmProductsClimateObj.ShowDialog()
+        Me.Close()
     End Sub
 End Class

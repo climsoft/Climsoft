@@ -27,10 +27,10 @@ climate$methods(plot_yearly_rain_count = function (data_list=list(), col1="blue"
     }
     year_col = data_obj$getvname(year_label)
     
-    interset_var_col = data_obj$getvname ("Total Rain") 
+    interset_var_col = data_obj$getvname ("Number of Rainy Days") 
     
     if(missing(ylab)){
-      ylab = data_obj$getvname(var_label)
+      ylab = "Number of Rainy Days"
     }    
     curr_data_list = data_obj$get_data_for_analysis(data_list)
     if (plot_window){   
@@ -38,7 +38,7 @@ climate$methods(plot_yearly_rain_count = function (data_list=list(), col1="blue"
     } 
     # loop for plotting 
     for( curr_data in curr_data_list ) { 
-      plot_yearly_summary <- plot( curr_data[[year_col]], curr_data[[interset_var_col]],type=type,pch=pch,xlab=xlab, col=col1,ylim= c(ylim, max(curr_data[[interset_var_col]], na.rm=na.rm)),
+      plot_yearly_summary <- plot( as.integer(curr_data[[year_col]]), curr_data[[interset_var_col]],type=type,pch=pch,xlab=xlab, col=col1,ylim= c(ylim, max(curr_data[[interset_var_col]], na.rm=na.rm)),
                                    xlim = c( min(curr_data[[year_col]], na.rm=na.rm), max( curr_data[[year_col]], na.rm=na.rm)),
                                    ylab=ylab, main= c( data_name, main_title))
       if (grid){

@@ -7,96 +7,109 @@
 #' @description \code{Display daily data in tables }
 #' Display daily data in tables for any variable 
 #'  
-#' @param data_list list. 
-#' 
-#' @param variable.type character. Type of variable to be displayed.It is for each year. 
-#  
+#' @param data_list list. this is a list containing stations for analysis, the years or periods to be analyzed and the required variables from the data 
+#' @param Print_tables Logical,if true, the method print the table in the console
+#' @param Row.names Logical, if FALSE the row names attributed to the dataframe are removed
+#' @param Na.rm Logical, if true remove the missing value
+#' @param Variable  This is the variable to be displayed
+#' @param Threshold The least amount of rainfall for which a day is considered rainy
+#' @param Month_list The three-letter abbreviations for the English month names
+#' @param Day_display Column name showing the day of the month
+#'   
 #' @examples
 #' ClimateObj <- climate( data_tables = list( data ), date_formats = list( "%m/%d/%Y" ) )
 #' Default dateformats: "%Y/%m/%d"
 #' # where "data" is a data.frame containing the desired variable to be displayed.
 #' climateObj$display_daily()
 #' @return It returns tables list
-
-climate$methods(display_daily = function(data_list = list(), print_tables = FALSE, row.names = FALSE, na.rm = TRUE, variable = rain_label, threshold = 0.85, months_list = month.abb, day_display = "Day"){
+#TODO allow any monthly summaries to be added
+climate$methods(display_daily = function(data_list = list(), print_tables = FALSE, month_summaries,  
+                                         na.rm = FALSE, variable, threshold = 0.85, months_list = month.abb, day_display = "Day", decimal_places = 2, 
+                                         summary_names = rep("",month_summaries)) {
     
   #required variable
-  data_list = add_to_data_info_required_variable_list(data_list, list(variable))
+  data_list = add_to_data_info_required_variable_list(data_list, variable)
   # data time period is daily
   data_list = add_to_data_info_time_period( data_list, daily_label )
   rettables=list()
   climate_data_objs = get_climate_data_objects( data_list )
   
+  if(length(summary_names) != length(month_summaries)) stop("summary_names must be the same length as month_summaries")
+  
+  out = c()
   for( data_obj in climate_data_objs ) {
     
-    curr_threshold = data_obj$get_meta(threshold_label,threshold)
+    curr_threshold = data_obj$get_meta(threshold_label,missing(threshold),threshold)
     
     #get required variable name
-    interest_var = data_obj$getvname( variable )
+    interest_var = data_obj$getvname(variable)
     
     # must add these columns if not present for displaying
     if( !(data_obj$is_present( year_label ) && data_obj$is_present( month_label ) && data_obj$is_present( day_label )) ) {
       data_obj$add_year_month_day_cols()
     }
-    year_col = data_obj$getvname( year_label )
+    if( !(data_obj$is_present(season_label)) ) data_obj$add_doy_col()
+    
+    season_col = data_obj$getvname( season_label )
     month_col = data_obj$getvname( month_label )
     day_col = data_obj$getvname( day_label )
     
     # access data for analysis
     curr_data_list = data_obj$get_data_for_analysis( data_list )
-    
     for( curr_data in curr_data_list ) {
+
       # initialize tables as a list
       tables = list()
-      tables_2 = list()
-      tables_12 = list()
-      # Split curr_data into single data frames for each year
-      # It returns a list of data.frames, splited by year 
-      # This is much faster (6x faster when checked) than subsetting
-      # Split is not always appropriate but it is in this case
-      years_split <- split( curr_data, list( as.factor( curr_data[[year_col]] ) ) )
+      tables_summary = list()
+      tables_merged = list()
+      
+      factor_col = factor(curr_data[[season_col]], levels = unique(curr_data[[season_col]]), ordered = TRUE)
+      # Split curr_data into a list of data frames - one for each season
+      seasons_split <- split( curr_data, factor_col)
       # counter used in the loop
       i = 1
-      j = 1
-      k = 1
       # loop through the splited data frames 
-      for ( single_year in years_split ) {
+      for ( single_season in seasons_split ) {
         # produce table with data
-        tables[[i]] <- dcast( single_year, single_year[[ day_col ]] ~ single_year[[ month_col ]], value.var = interest_var)
-        # Added day_display and months_list as extra arguments so it is more flexible
+        tables[[i]] <- dcast( single_season, single_season[[ day_col ]] ~ single_season[[ month_col ]], value.var = interest_var)
+        
+        # Name the columns of the table
         end = length( colnames( tables[[i]] ) )
         names( tables[[i]] )[ 1 ] <- day_display
         colnames( tables[[i]] )[2:end] <- months_list[1:end-1]
+
+        #Rounding
+        tables[[i]][2:end] = round(tables[[i]][2:end], decimal_places)
         
-        #create quick function to count number of obs larger than a certain value which can be run in an apply
-        largerthan <- function(x,val){
-          length(na.omit(x[x>val]))
+        if(!missing(month_summaries)) {
+          binded_summaries = list()
+          for(single_summary in month_summaries) {
+            binded_summaries[[length(binded_summaries)+1]] = format(apply(tables[[i]][,-1],2,single_summary, threshold = curr_threshold, na.rm = na.rm), decimal_places)
+          }
+          tables_summary[[i]] = do.call(rbind,binded_summaries)
+          tables_summary[[i]] <- cbind(c(summary_names), tables_summary[[i]])
+          
+          # Making dataframe for second table
+          tables_summary[[i]] <- data.frame(tables_summary[[i]])
+        
+          #add dimnames for the first column.
+          colnames(tables_summary[[i]])[1] <- ("Day")
+          
+          # merge the tables
+          tables_merged[[i]] <- rbind(tables[[i]], tables_summary[[i]])
         }
-        #produce second table with summary stats
-        tables_2[[j]] <- rbind(colSums(tables[[j]][,-1], na.rm = na.rm), apply(tables[[j]][,-1],2, max, na.rm = na.rm), apply(tables[[j]][,-1],2,largerthan, val = curr_threshold))
-        # add dimnames
-        tables_2[[j]] <- cbind(c("Total","Maximum","Number>0.85"), tables_2[[j]])
-        # Making dataframe for second table
-        tables_2[[j]] <- data.frame(tables_2[[j]])
-        #add dimnames for the first column.
-        colnames(tables_2[[j]])[1] <- ("Day")
-        # merge the tables
-        tables_12[[k]] <- rbind(tables[[i]], tables_2[[j]])
+        else tables_merged[[i]] <- tables[[i]]
         i = i + 1
-        j = j + 1 
-        k = k + 1
-                
       }
-      # The names of years_split is the list of years as strings.
-      # These are better labels than numbers so they can be identified better
-      names( tables_12 ) <- names( years_split )
-      rettables[[data_obj$get_station_data(curr_data, station_label)]] = tables_12  
+      # Use the years to name each table.
+      names( tables_merged ) <- names( seasons_split )
+      # Use the station name to name the list of all years
+      rettables[[data_obj$get_station_data(curr_data, station_label)]] = tables_merged  
+      
+      # Only print if requested
+      if (print_tables) print(tables_merged)
     }
-    # Only print if requested
-    if (print_tables) {print( tables_12, row.names = row.names) }
-        
-    # Always return the tables list because If we don't return and don't print then the method does nothing!    
-    return( tables_12 )
-    }  
+  }
+  return(rettables)
 }
 )
