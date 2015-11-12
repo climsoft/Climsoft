@@ -98,7 +98,7 @@ Public Class frmMainMenu
 
     ' Tools Menu Items
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
-
+        formOptions.Show()
     End Sub
 
     Private Sub mnuToolsModifyForms_Click(sender As Object, e As EventArgs) Handles mnuToolsModifyForms.Click
