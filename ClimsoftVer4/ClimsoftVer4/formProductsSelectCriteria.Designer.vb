@@ -33,6 +33,10 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
+        Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.optTotal = New System.Windows.Forms.RadioButton()
+        Me.optMean = New System.Windows.Forms.RadioButton()
+        Me.lblSummary = New System.Windows.Forms.Label()
         Me.cmdDelStation = New System.Windows.Forms.Button()
         Me.cmdDelElement = New System.Windows.Forms.Button()
         Me.lblProductType = New System.Windows.Forms.Label()
@@ -84,6 +88,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
+        Me.pnlSummary.SuspendLayout()
         Me.pnlPeriod.SuspendLayout()
         Me.pnlStation.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
@@ -151,6 +156,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlStationsElements.Controls.Add(Me.pnlSummary)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelStation)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelElement)
         Me.pnlStationsElements.Controls.Add(Me.lblProductType)
@@ -170,6 +176,50 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
         Me.pnlStationsElements.TabIndex = 4
+        '
+        'pnlSummary
+        '
+        Me.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlSummary.Controls.Add(Me.optTotal)
+        Me.pnlSummary.Controls.Add(Me.optMean)
+        Me.pnlSummary.Controls.Add(Me.lblSummary)
+        Me.pnlSummary.Location = New System.Drawing.Point(541, 7)
+        Me.pnlSummary.Name = "pnlSummary"
+        Me.pnlSummary.Size = New System.Drawing.Size(329, 48)
+        Me.pnlSummary.TabIndex = 23
+        '
+        'optTotal
+        '
+        Me.optTotal.AutoSize = True
+        Me.optTotal.Location = New System.Drawing.Point(205, 26)
+        Me.optTotal.Name = "optTotal"
+        Me.optTotal.Size = New System.Drawing.Size(49, 17)
+        Me.optTotal.TabIndex = 2
+        Me.optTotal.Text = "Total"
+        Me.optTotal.UseVisualStyleBackColor = True
+        '
+        'optMean
+        '
+        Me.optMean.AutoSize = True
+        Me.optMean.Checked = True
+        Me.optMean.Location = New System.Drawing.Point(104, 26)
+        Me.optMean.Name = "optMean"
+        Me.optMean.Size = New System.Drawing.Size(52, 17)
+        Me.optMean.TabIndex = 1
+        Me.optMean.TabStop = True
+        Me.optMean.Text = "Mean"
+        Me.optMean.UseVisualStyleBackColor = True
+        '
+        'lblSummary
+        '
+        Me.lblSummary.AutoSize = True
+        Me.lblSummary.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSummary.Location = New System.Drawing.Point(0, 0)
+        Me.lblSummary.Name = "lblSummary"
+        Me.lblSummary.Size = New System.Drawing.Size(89, 13)
+        Me.lblSummary.TabIndex = 0
+        Me.lblSummary.Text = "Summary Type"
         '
         'cmdDelStation
         '
@@ -666,6 +716,8 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.PerformLayout()
         Me.pnlStationsElements.ResumeLayout(False)
         Me.pnlStationsElements.PerformLayout()
+        Me.pnlSummary.ResumeLayout(False)
+        Me.pnlSummary.PerformLayout()
         Me.pnlPeriod.ResumeLayout(False)
         Me.pnlPeriod.PerformLayout()
         Me.pnlStation.ResumeLayout(False)
@@ -737,4 +789,8 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents txtMinuteStart As System.Windows.Forms.ComboBox
     Friend WithEvents txtHourEnd As System.Windows.Forms.ComboBox
     Friend WithEvents txtMinuteEnd As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlSummary As System.Windows.Forms.Panel
+    Friend WithEvents optTotal As System.Windows.Forms.RadioButton
+    Friend WithEvents optMean As System.Windows.Forms.RadioButton
+    Friend WithEvents lblSummary As System.Windows.Forms.Label
 End Class

@@ -35,7 +35,6 @@ Public Class frmLogin
         ConfigFile()
         'frmMainMenu.Show()
         'Me.Hide()
-        regDataInit()
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
@@ -79,12 +78,6 @@ Public Class frmLogin
         Catch e As Exception
             MsgBox("Login failure")
         End Try
-    End Sub
-    Sub regDataInit()
-        'Set SQL string for populating "regData" dataset
-        regSQL = "SELECT keyName,keyValue FROM regKeys"     '
-        daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
-        daReg.Fill(dsReg, "regData")
     End Sub
 
     ' End Module
