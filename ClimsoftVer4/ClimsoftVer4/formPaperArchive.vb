@@ -103,7 +103,6 @@
                 UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(i).Text)
             End If
         Next
-        MsgBox("Archiving Completed")
         Exit Sub
 err:
         MsgBox(Err.Description)
@@ -251,8 +250,7 @@ Err:
     '        MsgBox(Err.Number & ": " & Err.Description)
     '    End Sub
     Sub ShowImage(img As String)
-        'System.Diagnostics.Process.Start(img)
-        CommonModules.ViewFile(img)
+        System.Diagnostics.Process.Start(img)
     End Sub
 
     Private Sub cmdImageFile_Click(sender As Object, e As EventArgs) Handles cmdImageFile.Click
@@ -425,6 +423,4 @@ Err:
     Private Sub Button2_Click(sender As Object, e As EventArgs)
 
     End Sub
-
-
 End Class
