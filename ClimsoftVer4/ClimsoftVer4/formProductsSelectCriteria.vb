@@ -219,6 +219,13 @@ Public Class formProductsSelectCriteria
         sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
         edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
+        Dim SummaryType As String
+
+        If pnlSummary.Enabled And optTotal.Checked Then
+            SummaryType = "Sum(obsValue) AS Total"
+        Else
+            SummaryType = "Avg(obsValue) AS Mean"
+        End If
         ' Contrust a SQL statement for creating a query for the selected data product
 
         'sql0 = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
@@ -248,17 +255,15 @@ Public Class formProductsSelectCriteria
                 Dim myInterface As New clsRInterface()
                 myInterface.productHistogramExample()
             Case "Monthly"
-                'sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, Year(obsDatetime) AS yy, Month(obsDatetime) AS mm, Avg(observationfinal.obsValue) AS Mean FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime), Month(obsDatetime) " & _
-                '       "HAVING (((describedBy)='2' Or (describedBy)='3') and recordedFrom='67774010');"
-                'sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, Year(obsDatetime) AS yy, Month(obsDatetime) AS mm, Avg(obsValue) AS Mean FROM observationfinal " & _
-                '      "GROUP BY recordedFrom, describedBy, Year(obsDatetime), Month(obsDatetime) " & _
-                '      "HAVING ((recordedFrom='67991020' Or '67774010') AND (describedBy='2' Or '3') AND (obsDatetime Between '1961-01-01 6:0:0' And '2010-12-31 6:0:0'));"
-
-                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, Month(obsDatetime) AS mm, Avg(obsValue) AS Mean FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime), Month(obsDatetime) " & _
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, Month(obsDatetime) AS mm, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime), Month(obsDatetime) " & _
                       "HAVING ((recordedFrom = " & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
 
+                SummaryProducts(sql, lblProductType.Text)
+            Case "Annual"
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime) " & _
+                       "HAVING ((recordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
 
-                MonthlyProducts(sql, lblProductType.Text)
+                SummaryProducts(sql, lblProductType.Text)
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
@@ -273,6 +278,7 @@ Public Class formProductsSelectCriteria
 
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        ds.Clear()
         da.Fill(ds, "observationfinal")
         maxRows = ds.Tables("observationfinal").Rows.Count
 
@@ -350,7 +356,7 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
-    Sub MonthlyProducts(sql As String, typ As String)
+    Sub SummaryProducts(sql As String, typ As String)
         On Error GoTo Err
         Dim flds1, flds2, flds3 As String
         Dim fl As String
@@ -367,7 +373,7 @@ Err:
         Write(11, "Station")
         Write(11, "Element")
         Write(11, "Year")
-        Write(11, "Month")
+        If typ = "Monthly" Then Write(11, "Month")
         Write(11, "Value")
         'If typ = "Hourly" Then Write(11, "Hour")
 
@@ -442,31 +448,21 @@ Err:
         lstvElements.Clear()
     End Sub
 
-    Private Sub prgrbProducts_Click(sender As Object, e As EventArgs) Handles prgrbProducts.Click
-
-    End Sub
-
-    Private Sub lstvStations_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvStations.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub lstvElements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvElements.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub lblProductType_Click(sender As Object, e As EventArgs) Handles lblProductType.Click
-
-    End Sub
-
-    Private Sub lblProductType_ClientSizeChanged(sender As Object, e As EventArgs) Handles lblProductType.ClientSizeChanged
-
-    End Sub
-
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
-
-    End Sub
+    
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
+    End Sub
+
+    Private Sub lblProductType_TextChanged(sender As Object, e As EventArgs) Handles lblProductType.TextChanged
+
+        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
+            optMean.Enabled = True
+            optTotal.Enabled = True
+        Else
+            optMean.Enabled = False
+            optTotal.Enabled = False
+        End If
+
     End Sub
 End Class

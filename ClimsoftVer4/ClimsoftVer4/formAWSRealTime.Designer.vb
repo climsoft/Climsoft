@@ -111,30 +111,6 @@ Partial Class formAWSRealTime
         Me.Label78 = New System.Windows.Forms.Label()
         Me.list_errors = New System.Windows.Forms.ListBox()
         Me.Ltime = New System.Windows.Forms.Label()
-        Me.pnlSites = New System.Windows.Forms.Panel()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdViewUpdate = New System.Windows.Forms.Button()
-        Me.cmdDel = New System.Windows.Forms.Button()
-        Me.cmdUpdateSites = New System.Windows.Forms.Button()
-        Me.cmdAdd = New System.Windows.Forms.Button()
-        Me.btnMovePrevious = New System.Windows.Forms.Button()
-        Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnMoveLast = New System.Windows.Forms.Button()
-        Me.txtSitesNavigator = New System.Windows.Forms.TextBox()
-        Me.btnMoveNext = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtIP = New System.Windows.Forms.ComboBox()
-        Me.txtDataStructure = New System.Windows.Forms.ComboBox()
-        Me.txtFlag = New System.Windows.Forms.TextBox()
-        Me.chkOperational = New System.Windows.Forms.CheckBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtInFile = New System.Windows.Forms.TextBox()
-        Me.lblInfile = New System.Windows.Forms.Label()
-        Me.txtStation = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlProcessSettings = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmdSave = New System.Windows.Forms.Button()
@@ -183,6 +159,30 @@ Partial Class formAWSRealTime
         Me.lblInputData = New System.Windows.Forms.Label()
         Me.lblInformation = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.pnlSites = New System.Windows.Forms.Panel()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdViewUpdate = New System.Windows.Forms.Button()
+        Me.cmdDel = New System.Windows.Forms.Button()
+        Me.cmdUpdateSites = New System.Windows.Forms.Button()
+        Me.cmdAdd = New System.Windows.Forms.Button()
+        Me.btnMovePrevious = New System.Windows.Forms.Button()
+        Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnMoveLast = New System.Windows.Forms.Button()
+        Me.txtSitesNavigator = New System.Windows.Forms.TextBox()
+        Me.btnMoveNext = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtIP = New System.Windows.Forms.ComboBox()
+        Me.txtDataStructure = New System.Windows.Forms.ComboBox()
+        Me.txtFlag = New System.Windows.Forms.TextBox()
+        Me.chkOperational = New System.Windows.Forms.CheckBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtInFile = New System.Windows.Forms.TextBox()
+        Me.lblInfile = New System.Windows.Forms.Label()
+        Me.txtStation = New System.Windows.Forms.ComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlDataStructures = New System.Windows.Forms.Panel()
         Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
         Me.grpStructures1 = New System.Windows.Forms.GroupBox()
@@ -347,13 +347,13 @@ Partial Class formAWSRealTime
         CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
-        Me.pnlSites.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
         Me.pnlProcessSettings.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.pnlSites.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.pnlDataStructures.SuspendLayout()
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStructures1.SuspendLayout()
@@ -470,7 +470,7 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         Me.pnlProcessing.Location = New System.Drawing.Point(200, 0)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(719, 336)
+        Me.pnlProcessing.Size = New System.Drawing.Size(719, 138)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -1229,253 +1229,6 @@ Partial Class formAWSRealTime
         Me.Ltime.TabIndex = 7
         Me.Ltime.Text = "   "
         '
-        'pnlSites
-        '
-        Me.pnlSites.AllowDrop = True
-        Me.pnlSites.AutoSize = True
-        Me.pnlSites.BackColor = System.Drawing.Color.Linen
-        Me.pnlSites.Controls.Add(Me.GroupBox11)
-        Me.pnlSites.Location = New System.Drawing.Point(197, 126)
-        Me.pnlSites.Name = "pnlSites"
-        Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(726, 417)
-        Me.pnlSites.TabIndex = 3
-        '
-        'GroupBox11
-        '
-        Me.GroupBox11.Controls.Add(Me.cmdClear)
-        Me.GroupBox11.Controls.Add(Me.cmdViewUpdate)
-        Me.GroupBox11.Controls.Add(Me.cmdDel)
-        Me.GroupBox11.Controls.Add(Me.cmdUpdateSites)
-        Me.GroupBox11.Controls.Add(Me.cmdAdd)
-        Me.GroupBox11.Controls.Add(Me.btnMovePrevious)
-        Me.GroupBox11.Controls.Add(Me.btnMoveFirst)
-        Me.GroupBox11.Controls.Add(Me.btnMoveLast)
-        Me.GroupBox11.Controls.Add(Me.txtSitesNavigator)
-        Me.GroupBox11.Controls.Add(Me.btnMoveNext)
-        Me.GroupBox11.Controls.Add(Me.Label4)
-        Me.GroupBox11.Controls.Add(Me.txtIP)
-        Me.GroupBox11.Controls.Add(Me.txtDataStructure)
-        Me.GroupBox11.Controls.Add(Me.txtFlag)
-        Me.GroupBox11.Controls.Add(Me.chkOperational)
-        Me.GroupBox11.Controls.Add(Me.Label18)
-        Me.GroupBox11.Controls.Add(Me.Label17)
-        Me.GroupBox11.Controls.Add(Me.Label16)
-        Me.GroupBox11.Controls.Add(Me.txtInFile)
-        Me.GroupBox11.Controls.Add(Me.lblInfile)
-        Me.GroupBox11.Controls.Add(Me.txtStation)
-        Me.GroupBox11.Controls.Add(Me.Label15)
-        Me.GroupBox11.Location = New System.Drawing.Point(9, 70)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(709, 344)
-        Me.GroupBox11.TabIndex = 67
-        Me.GroupBox11.TabStop = False
-        '
-        'cmdClear
-        '
-        Me.cmdClear.Location = New System.Drawing.Point(332, 310)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(68, 29)
-        Me.cmdClear.TabIndex = 88
-        Me.cmdClear.Text = "Reset"
-        Me.cmdClear.UseVisualStyleBackColor = True
-        '
-        'cmdViewUpdate
-        '
-        Me.cmdViewUpdate.Location = New System.Drawing.Point(508, 310)
-        Me.cmdViewUpdate.Name = "cmdViewUpdate"
-        Me.cmdViewUpdate.Size = New System.Drawing.Size(88, 29)
-        Me.cmdViewUpdate.TabIndex = 87
-        Me.cmdViewUpdate.Text = "View/Update"
-        Me.cmdViewUpdate.UseVisualStyleBackColor = True
-        '
-        'cmdDel
-        '
-        Me.cmdDel.Location = New System.Drawing.Point(420, 310)
-        Me.cmdDel.Name = "cmdDel"
-        Me.cmdDel.Size = New System.Drawing.Size(68, 29)
-        Me.cmdDel.TabIndex = 86
-        Me.cmdDel.Text = "Delete"
-        Me.cmdDel.UseVisualStyleBackColor = True
-        '
-        'cmdUpdateSites
-        '
-        Me.cmdUpdateSites.Location = New System.Drawing.Point(244, 310)
-        Me.cmdUpdateSites.Name = "cmdUpdateSites"
-        Me.cmdUpdateSites.Size = New System.Drawing.Size(68, 29)
-        Me.cmdUpdateSites.TabIndex = 85
-        Me.cmdUpdateSites.Text = "Update"
-        Me.cmdUpdateSites.UseVisualStyleBackColor = True
-        '
-        'cmdAdd
-        '
-        Me.cmdAdd.Location = New System.Drawing.Point(156, 310)
-        Me.cmdAdd.Name = "cmdAdd"
-        Me.cmdAdd.Size = New System.Drawing.Size(68, 29)
-        Me.cmdAdd.TabIndex = 84
-        Me.cmdAdd.Text = "AddNew"
-        Me.cmdAdd.UseVisualStyleBackColor = True
-        '
-        'btnMovePrevious
-        '
-        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
-        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(47, 346)
-        Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
-        Me.btnMovePrevious.TabIndex = 83
-        Me.btnMovePrevious.UseVisualStyleBackColor = True
-        '
-        'btnMoveFirst
-        '
-        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(9, 346)
-        Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 82
-        Me.btnMoveFirst.UseVisualStyleBackColor = True
-        '
-        'btnMoveLast
-        '
-        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(658, 346)
-        Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveLast.TabIndex = 81
-        Me.btnMoveLast.UseVisualStyleBackColor = True
-        '
-        'txtSitesNavigator
-        '
-        Me.txtSitesNavigator.Location = New System.Drawing.Point(87, 347)
-        Me.txtSitesNavigator.Name = "txtSitesNavigator"
-        Me.txtSitesNavigator.Size = New System.Drawing.Size(536, 20)
-        Me.txtSitesNavigator.TabIndex = 80
-        Me.txtSitesNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'btnMoveNext
-        '
-        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(623, 346)
-        Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveNext.TabIndex = 79
-        Me.btnMoveNext.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(84, 246)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(61, 13)
-        Me.Label4.TabIndex = 78
-        Me.Label4.Text = "Operational"
-        '
-        'txtIP
-        '
-        Me.txtIP.FormattingEnabled = True
-        Me.txtIP.Location = New System.Drawing.Point(180, 205)
-        Me.txtIP.Name = "txtIP"
-        Me.txtIP.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtIP.Size = New System.Drawing.Size(135, 21)
-        Me.txtIP.TabIndex = 77
-        '
-        'txtDataStructure
-        '
-        Me.txtDataStructure.FormattingEnabled = True
-        Me.txtDataStructure.Location = New System.Drawing.Point(181, 140)
-        Me.txtDataStructure.Name = "txtDataStructure"
-        Me.txtDataStructure.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtDataStructure.Size = New System.Drawing.Size(135, 21)
-        Me.txtDataStructure.TabIndex = 76
-        '
-        'txtFlag
-        '
-        Me.txtFlag.Location = New System.Drawing.Point(181, 173)
-        Me.txtFlag.Name = "txtFlag"
-        Me.txtFlag.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtFlag.Size = New System.Drawing.Size(135, 20)
-        Me.txtFlag.TabIndex = 75
-        '
-        'chkOperational
-        '
-        Me.chkOperational.AutoSize = True
-        Me.chkOperational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.chkOperational.Location = New System.Drawing.Point(180, 245)
-        Me.chkOperational.Name = "chkOperational"
-        Me.chkOperational.Size = New System.Drawing.Size(15, 14)
-        Me.chkOperational.TabIndex = 74
-        Me.chkOperational.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.chkOperational.UseVisualStyleBackColor = True
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(84, 209)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(79, 13)
-        Me.Label18.TabIndex = 73
-        Me.Label18.Text = "AWS Server IP"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(84, 177)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(91, 13)
-        Me.Label17.TabIndex = 72
-        Me.Label17.Text = "Missing Data Flag"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(84, 144)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(73, 13)
-        Me.Label16.TabIndex = 71
-        Me.Label16.Text = "Data Strucure"
-        '
-        'txtInFile
-        '
-        Me.txtInFile.Location = New System.Drawing.Point(180, 108)
-        Me.txtInFile.Name = "txtInFile"
-        Me.txtInFile.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtInFile.Size = New System.Drawing.Size(281, 20)
-        Me.txtInFile.TabIndex = 70
-        '
-        'lblInfile
-        '
-        Me.lblInfile.AutoSize = True
-        Me.lblInfile.Location = New System.Drawing.Point(84, 112)
-        Me.lblInfile.Name = "lblInfile"
-        Me.lblInfile.Size = New System.Drawing.Size(73, 13)
-        Me.lblInfile.TabIndex = 69
-        Me.lblInfile.Text = "Input Data file"
-        '
-        'txtStation
-        '
-        Me.txtStation.FormattingEnabled = True
-        Me.txtStation.Location = New System.Drawing.Point(181, 75)
-        Me.txtStation.Name = "txtStation"
-        Me.txtStation.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.txtStation.Size = New System.Drawing.Size(280, 21)
-        Me.txtStation.TabIndex = 68
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(84, 79)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(72, 13)
-        Me.Label15.TabIndex = 67
-        Me.Label15.Text = "Site Name/ID"
-        '
         'pnlProcessSettings
         '
         Me.pnlProcessSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -1962,15 +1715,262 @@ Partial Class formAWSRealTime
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements View/Update"
         '
+        'pnlSites
+        '
+        Me.pnlSites.AllowDrop = True
+        Me.pnlSites.AutoSize = True
+        Me.pnlSites.BackColor = System.Drawing.Color.Linen
+        Me.pnlSites.Controls.Add(Me.GroupBox11)
+        Me.pnlSites.Location = New System.Drawing.Point(198, 308)
+        Me.pnlSites.Name = "pnlSites"
+        Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.pnlSites.Size = New System.Drawing.Size(726, 417)
+        Me.pnlSites.TabIndex = 3
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.cmdClear)
+        Me.GroupBox11.Controls.Add(Me.cmdViewUpdate)
+        Me.GroupBox11.Controls.Add(Me.cmdDel)
+        Me.GroupBox11.Controls.Add(Me.cmdUpdateSites)
+        Me.GroupBox11.Controls.Add(Me.cmdAdd)
+        Me.GroupBox11.Controls.Add(Me.btnMovePrevious)
+        Me.GroupBox11.Controls.Add(Me.btnMoveFirst)
+        Me.GroupBox11.Controls.Add(Me.btnMoveLast)
+        Me.GroupBox11.Controls.Add(Me.txtSitesNavigator)
+        Me.GroupBox11.Controls.Add(Me.btnMoveNext)
+        Me.GroupBox11.Controls.Add(Me.Label4)
+        Me.GroupBox11.Controls.Add(Me.txtIP)
+        Me.GroupBox11.Controls.Add(Me.txtDataStructure)
+        Me.GroupBox11.Controls.Add(Me.txtFlag)
+        Me.GroupBox11.Controls.Add(Me.chkOperational)
+        Me.GroupBox11.Controls.Add(Me.Label18)
+        Me.GroupBox11.Controls.Add(Me.Label17)
+        Me.GroupBox11.Controls.Add(Me.Label16)
+        Me.GroupBox11.Controls.Add(Me.txtInFile)
+        Me.GroupBox11.Controls.Add(Me.lblInfile)
+        Me.GroupBox11.Controls.Add(Me.txtStation)
+        Me.GroupBox11.Controls.Add(Me.Label15)
+        Me.GroupBox11.Location = New System.Drawing.Point(9, 70)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(709, 344)
+        Me.GroupBox11.TabIndex = 67
+        Me.GroupBox11.TabStop = False
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(332, 310)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(68, 29)
+        Me.cmdClear.TabIndex = 88
+        Me.cmdClear.Text = "Reset"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdViewUpdate
+        '
+        Me.cmdViewUpdate.Location = New System.Drawing.Point(508, 310)
+        Me.cmdViewUpdate.Name = "cmdViewUpdate"
+        Me.cmdViewUpdate.Size = New System.Drawing.Size(88, 29)
+        Me.cmdViewUpdate.TabIndex = 87
+        Me.cmdViewUpdate.Text = "View/Update"
+        Me.cmdViewUpdate.UseVisualStyleBackColor = True
+        '
+        'cmdDel
+        '
+        Me.cmdDel.Location = New System.Drawing.Point(420, 310)
+        Me.cmdDel.Name = "cmdDel"
+        Me.cmdDel.Size = New System.Drawing.Size(68, 29)
+        Me.cmdDel.TabIndex = 86
+        Me.cmdDel.Text = "Delete"
+        Me.cmdDel.UseVisualStyleBackColor = True
+        '
+        'cmdUpdateSites
+        '
+        Me.cmdUpdateSites.Location = New System.Drawing.Point(244, 310)
+        Me.cmdUpdateSites.Name = "cmdUpdateSites"
+        Me.cmdUpdateSites.Size = New System.Drawing.Size(68, 29)
+        Me.cmdUpdateSites.TabIndex = 85
+        Me.cmdUpdateSites.Text = "Update"
+        Me.cmdUpdateSites.UseVisualStyleBackColor = True
+        '
+        'cmdAdd
+        '
+        Me.cmdAdd.Location = New System.Drawing.Point(156, 310)
+        Me.cmdAdd.Name = "cmdAdd"
+        Me.cmdAdd.Size = New System.Drawing.Size(68, 29)
+        Me.cmdAdd.TabIndex = 84
+        Me.cmdAdd.Text = "AddNew"
+        Me.cmdAdd.UseVisualStyleBackColor = True
+        '
+        'btnMovePrevious
+        '
+        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(47, 346)
+        Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
+        Me.btnMovePrevious.TabIndex = 83
+        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        '
+        'btnMoveFirst
+        '
+        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(9, 346)
+        Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 82
+        Me.btnMoveFirst.UseVisualStyleBackColor = True
+        '
+        'btnMoveLast
+        '
+        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(658, 346)
+        Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLast.TabIndex = 81
+        Me.btnMoveLast.UseVisualStyleBackColor = True
+        '
+        'txtSitesNavigator
+        '
+        Me.txtSitesNavigator.Location = New System.Drawing.Point(87, 347)
+        Me.txtSitesNavigator.Name = "txtSitesNavigator"
+        Me.txtSitesNavigator.Size = New System.Drawing.Size(536, 20)
+        Me.txtSitesNavigator.TabIndex = 80
+        Me.txtSitesNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'btnMoveNext
+        '
+        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(623, 346)
+        Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveNext.TabIndex = 79
+        Me.btnMoveNext.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(84, 246)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(61, 13)
+        Me.Label4.TabIndex = 78
+        Me.Label4.Text = "Operational"
+        '
+        'txtIP
+        '
+        Me.txtIP.FormattingEnabled = True
+        Me.txtIP.Location = New System.Drawing.Point(180, 205)
+        Me.txtIP.Name = "txtIP"
+        Me.txtIP.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtIP.Size = New System.Drawing.Size(135, 21)
+        Me.txtIP.TabIndex = 77
+        '
+        'txtDataStructure
+        '
+        Me.txtDataStructure.FormattingEnabled = True
+        Me.txtDataStructure.Location = New System.Drawing.Point(181, 140)
+        Me.txtDataStructure.Name = "txtDataStructure"
+        Me.txtDataStructure.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtDataStructure.Size = New System.Drawing.Size(135, 21)
+        Me.txtDataStructure.TabIndex = 76
+        '
+        'txtFlag
+        '
+        Me.txtFlag.Location = New System.Drawing.Point(181, 173)
+        Me.txtFlag.Name = "txtFlag"
+        Me.txtFlag.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtFlag.Size = New System.Drawing.Size(135, 20)
+        Me.txtFlag.TabIndex = 75
+        '
+        'chkOperational
+        '
+        Me.chkOperational.AutoSize = True
+        Me.chkOperational.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkOperational.Location = New System.Drawing.Point(180, 245)
+        Me.chkOperational.Name = "chkOperational"
+        Me.chkOperational.Size = New System.Drawing.Size(15, 14)
+        Me.chkOperational.TabIndex = 74
+        Me.chkOperational.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.chkOperational.UseVisualStyleBackColor = True
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(84, 209)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(79, 13)
+        Me.Label18.TabIndex = 73
+        Me.Label18.Text = "AWS Server IP"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(84, 177)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(91, 13)
+        Me.Label17.TabIndex = 72
+        Me.Label17.Text = "Missing Data Flag"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(84, 144)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(73, 13)
+        Me.Label16.TabIndex = 71
+        Me.Label16.Text = "Data Strucure"
+        '
+        'txtInFile
+        '
+        Me.txtInFile.Location = New System.Drawing.Point(180, 108)
+        Me.txtInFile.Name = "txtInFile"
+        Me.txtInFile.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtInFile.Size = New System.Drawing.Size(281, 20)
+        Me.txtInFile.TabIndex = 70
+        '
+        'lblInfile
+        '
+        Me.lblInfile.AutoSize = True
+        Me.lblInfile.Location = New System.Drawing.Point(84, 112)
+        Me.lblInfile.Name = "lblInfile"
+        Me.lblInfile.Size = New System.Drawing.Size(73, 13)
+        Me.lblInfile.TabIndex = 69
+        Me.lblInfile.Text = "Input Data file"
+        '
+        'txtStation
+        '
+        Me.txtStation.FormattingEnabled = True
+        Me.txtStation.Location = New System.Drawing.Point(181, 75)
+        Me.txtStation.Name = "txtStation"
+        Me.txtStation.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtStation.Size = New System.Drawing.Size(280, 21)
+        Me.txtStation.TabIndex = 68
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(84, 79)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(72, 13)
+        Me.Label15.TabIndex = 67
+        Me.Label15.Text = "Site Name/ID"
+        '
         'pnlDataStructures
         '
         Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(200, 430)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(200, 203)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(727, 35)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(720, 35)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -2146,9 +2146,9 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
         Me.pnlServers.Controls.Add(Me.pnlMSS)
-        Me.pnlServers.Location = New System.Drawing.Point(207, 263)
+        Me.pnlServers.Location = New System.Drawing.Point(196, 145)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(691, 56)
+        Me.pnlServers.Size = New System.Drawing.Size(724, 44)
         Me.pnlServers.TabIndex = 2
         '
         'pnlBaseStation
@@ -2690,9 +2690,9 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
         Me.pnlMsgEncoding.Controls.Add(Me.lblMaster)
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
-        Me.pnlMsgEncoding.Location = New System.Drawing.Point(204, 481)
+        Me.pnlMsgEncoding.Location = New System.Drawing.Point(200, 250)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(726, 48)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(720, 48)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
@@ -3424,6 +3424,7 @@ Partial Class formAWSRealTime
         '
         'Timer2
         '
+        Me.Timer2.Enabled = True
         '
         'formAWSRealTime
         '
@@ -3458,9 +3459,6 @@ Partial Class formAWSRealTime
         Me.GroupBox18.PerformLayout()
         Me.GroupBox19.ResumeLayout(False)
         Me.GroupBox19.PerformLayout()
-        Me.pnlSites.ResumeLayout(False)
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
         Me.pnlProcessSettings.ResumeLayout(False)
         Me.pnlProcessSettings.PerformLayout()
         Me.Panel4.ResumeLayout(False)
@@ -3471,6 +3469,9 @@ Partial Class formAWSRealTime
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.pnlSites.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.pnlDataStructures.ResumeLayout(False)
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStructures1.ResumeLayout(False)
