@@ -35,15 +35,10 @@
 
     Sub SetDataSet(tbl As String)
         Dim sql As String
-        Try
-            sql = "SELECT * FROM " & tbl
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-            da.Fill(ds, tbl)
-            Kount = ds.Tables(tbl).Rows.Count
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
+        sql = "SELECT * FROM " & tbl
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da.Fill(ds, tbl)
+        Kount = ds.Tables(tbl).Rows.Count
     End Sub
 
     Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
@@ -228,11 +223,6 @@
         ClearStationForm()
         Exit Sub
 Err:
-        If Err.Number = 5 Then
-            MsgBox("Invalid Entries; Check values")
-            Exit Sub
-        End If
-
         MsgBox(Err.Number & " : " & Err.Description)
     End Sub
     Sub ClearStationForm()
@@ -417,10 +407,6 @@ Err:
         ClearElementForm()
         Exit Sub
 Err:
-        If Err.Number = 5 Then
-            MsgBox("Invalid Entries; Check values")
-            Exit Sub
-        End If
         MsgBox(Err.Number & " : " & Err.Description)
 
     End Sub
@@ -453,8 +439,7 @@ Err:
         Exit Sub
 
 Err:
-
-        MsgBox(Err.Number & " " & Err.Description)
+        MsgBox(Err.Description)
 
     End Sub
 
@@ -560,7 +545,6 @@ Err:
         dstn.Clear()
 
         da.Fill(dstn, tbl)
-
         formDataView.Show()
         formDataView.DataGridView.DataSource = dstn
         formDataView.DataGridView.DataMember = tbl
@@ -713,10 +697,6 @@ Err:
     End Sub
 
     Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles cmdLast1.Click
-
-    End Sub
-
-    Private Sub TabStationElement_Click(sender As Object, e As EventArgs) Handles TabStationElement.Click
 
     End Sub
 End Class
