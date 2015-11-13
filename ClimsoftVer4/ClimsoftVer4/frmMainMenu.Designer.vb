@@ -343,12 +343,12 @@ Partial Class frmMainMenu
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(22, 215)
+        Me.Label3.Location = New System.Drawing.Point(40, 215)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(159, 16)
+        Me.Label3.Size = New System.Drawing.Size(114, 16)
         Me.Label3.TabIndex = 27
         Me.Label3.Tag = "Data_Transfer_Operations"
-        Me.Label3.Text = "Data Transfer Operations"
+        Me.Label3.Text = "Database Utilities"
         '
         'Label2
         '
