@@ -139,6 +139,7 @@ Partial Class frmLogin
         Me.lblDbdetails.TabIndex = 8
         Me.lblDbdetails.Tag = "Show_Database_Details"
         Me.lblDbdetails.Text = "Show Database Details........"
+        Me.lblDbdetails.Visible = False
         '
         'frmLogin
         '

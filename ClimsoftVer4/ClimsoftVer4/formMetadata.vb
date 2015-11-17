@@ -35,10 +35,15 @@
 
     Sub SetDataSet(tbl As String)
         Dim sql As String
-        sql = "SELECT * FROM " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        da.Fill(ds, tbl)
-        Kount = ds.Tables(tbl).Rows.Count
+        Try
+            sql = "SELECT * FROM " & tbl
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da.Fill(ds, tbl)
+            Kount = ds.Tables(tbl).Rows.Count
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
     Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
@@ -223,6 +228,11 @@
         ClearStationForm()
         Exit Sub
 Err:
+        If Err.Number = 5 Then
+            MsgBox("Invalid Entries; Check values")
+            Exit Sub
+        End If
+
         MsgBox(Err.Number & " : " & Err.Description)
     End Sub
     Sub ClearStationForm()
@@ -407,6 +417,10 @@ Err:
         ClearElementForm()
         Exit Sub
 Err:
+        If Err.Number = 5 Then
+            MsgBox("Invalid Entries; Check values")
+            Exit Sub
+        End If
         MsgBox(Err.Number & " : " & Err.Description)
 
     End Sub
@@ -439,7 +453,8 @@ Err:
         Exit Sub
 
 Err:
-        MsgBox(Err.Description)
+
+        MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
 
