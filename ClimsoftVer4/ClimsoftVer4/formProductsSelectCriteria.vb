@@ -186,8 +186,18 @@ Public Class formProductsSelectCriteria
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim stnlist, elmlist, elmcolmn, sdate, edate, sql As String
+        Dim SumAvg, SummaryType As String
         'Dim flds As Integer
         'MsgBox(lblProductType.Text)
+
+
+        If pnlSummary.Enabled And optTotal.Checked Then
+            SummaryType = "Sum(obsValue) AS Total"
+            SumAvg = "SUM"
+        Else
+            SummaryType = "Avg(obsValue) AS Mean"
+            SumAvg = "AVG"
+        End If
 
         ' Get the stations list
         stnlist = ""
@@ -199,18 +209,20 @@ Public Class formProductsSelectCriteria
             Next
         End If
 
-
+        ' Get the Element list
         elmlist = ""
         elmcolmn = ""
 
         If lstvElements.Items.Count > 0 Then
             elmlist = "'" & lstvElements.Items(0).Text & "'" '""""
-            elmcolmn = " SUM(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+            elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+            'elmcolmn = " AVG(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
 
             For i = 1 To lstvElements.Items.Count - 1
                 ' MsgBox(lstvElements.Items(i).Text)
                 elmlist = elmlist & " OR  describedBy = " & "'" & lstvElements.Items(i).Text & "'"  ' """ & lstvElements.Items(i).Text & """"
-                elmcolmn = elmcolmn & ", SUM(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
+                'elmcolmn = elmcolmn & ", AVG(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
+                elmcolmn = elmcolmn & ", " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
             Next
         End If
 
@@ -219,13 +231,7 @@ Public Class formProductsSelectCriteria
         sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
         edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
-        Dim SummaryType As String
 
-        If pnlSummary.Enabled And optTotal.Checked Then
-            SummaryType = "Sum(obsValue) AS Total"
-        Else
-            SummaryType = "Avg(obsValue) AS Mean"
-        End If
         ' Contrust a SQL statement for creating a query for the selected data product
 
         'sql0 = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
@@ -246,7 +252,7 @@ Public Class formProductsSelectCriteria
 
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,obsDatetime," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
-                'MsgBox(sql)
+
                 DataProducts(sql, lblProductType.Text)
             Case "CPT"
                 Dim myInterface As New clsRInterface()
@@ -258,11 +264,20 @@ Public Class formProductsSelectCriteria
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, Month(obsDatetime) AS mm, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime), Month(obsDatetime) " & _
                       "HAVING ((recordedFrom = " & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
 
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,year(obsDatetime) as YY,month(obsDatetime) as MM," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,YY, MM;"
+
+                SummaryProducts(sql, lblProductType.Text)
+            Case "Dekadal"
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,year(obsDatetime) as YY,month(obsDatetime) as MM, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, " & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YY, MM,DEKAD;"
                 SummaryProducts(sql, lblProductType.Text)
             Case "Annual"
-                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime) " & _
-                       "HAVING ((recordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
+                'sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime) " & _
+                '       "HAVING ((recordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
 
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,year(obsDatetime) as YY," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' And '" & edate & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,YY;"
                 SummaryProducts(sql, lblProductType.Text)
             Case Else
                 MsgBox("No Product Selected")
@@ -333,7 +348,8 @@ Err:
                     Write(11, DateAndTime.Day(ds.Tables("observationfinal").Rows(k).Item(i)))
                     If typ = "Hourly" Then Write(11, DateAndTime.Hour(ds.Tables("observationfinal").Rows(k).Item(i)))
                 Else
-                    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                    ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
+                    FormattedOutput(11, k, i)
                 End If
 
             Next
@@ -344,12 +360,7 @@ Err:
         flds1 = """" & lstvElements.Items(0).Text & """"
         flds2 = """" & lstvElements.Items(1).Text & """"
         flds3 = """" & lstvElements.Items(2).Text & """"
-        'MsgBox(flds1)
-        'MsgBox(ds.Tables("observationfinal").Rows(2).Item("obsValue"))
-        'MsgBox(2)
-        'MsgBox(flds3 & " " & flds2 & " " & flds1)
-        'MsgBox(ds.Tables("observationfinal").Rows(0).Item(flds1) & " " & ds.Tables("observationfinal").Rows(0).Item(flds2) & " " & ds.Tables("observationfinal").Rows(0).Item(flds3))
-
+ 
         Exit Sub
 Err:
         If Err.Number = 13 Or Err.Number = 5 Then Resume Next
@@ -371,44 +382,48 @@ Err:
 
         FileOpen(11, fl, OpenMode.Output)
         Write(11, "Station")
-        Write(11, "Element")
+        'Write(11, "Element")
         Write(11, "Year")
-        If typ = "Monthly" Then Write(11, "Month")
-        Write(11, "Value")
-        'If typ = "Hourly" Then Write(11, "Hour")
+        Select Case typ
+            Case "Daily"
+                Write(11, "Day")
+            Case "Monthly"
+                Write(11, "Month")
+            Case "Dekadal"
+                Write(11, "Month")
+                Write(11, "Dekad")
+            Case "Pentad"
+                Write(11, "Month")
+                Write(11, "Pentad")
+        End Select
 
-        'For j = 0 To lstvElements.Items.Count - 1
-        '    Write(11, lstvElements.Items(j).Text)
-        'Next
+        'If typ = "Monthly" Then Write(11, "Month")
+        'Write(11, "Value")
+        ''If typ = "Hourly" Then Write(11, "Hour")
+
+        For j = 0 To lstvElements.Items.Count - 1
+            Write(11, lstvElements.Items(j).Text)
+        Next
+
         PrintLine(11)
+
         For k = 0 To maxRows - 1
 
             For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                'If i = 1 Then ' Output Datatime data
-                '    Write(11, DateAndTime.Year(ds.Tables("observationfinal").Rows(k).Item(i)))
-                '    Write(11, DateAndTime.Month(ds.Tables("observationfinal").Rows(k).Item(i)))
-                '    Write(11, DateAndTime.Day(ds.Tables("observationfinal").Rows(k).Item(i)))
-                '    If typ = "Hourly" Then Write(11, DateAndTime.Hour(ds.Tables("observationfinal").Rows(k).Item(i)))
-                'Else
-                '    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
-                'End If
-                If i <> 2 Then Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
+                FormattedOutput(11, k, i)
             Next
             PrintLine(11)
         Next
 
         FileClose(11)
+
         CommonModules.ViewFile(fl)
 
         flds1 = """" & lstvElements.Items(0).Text & """"
         flds2 = """" & lstvElements.Items(1).Text & """"
         flds3 = """" & lstvElements.Items(2).Text & """"
-        'MsgBox(flds1)
-        'MsgBox(ds.Tables("observationfinal").Rows(2).Item("obsValue"))
-        'MsgBox(2)
-        'MsgBox(flds3 & " " & flds2 & " " & flds1)
-        'MsgBox(ds.Tables("observationfinal").Rows(0).Item(flds1) & " " & ds.Tables("observationfinal").Rows(0).Item(flds2) & " " & ds.Tables("observationfinal").Rows(0).Item(flds3))
-
+  
         Exit Sub
 Err:
         'MsgBox(Err.Description)
@@ -416,6 +431,69 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+
+    Sub MonthlyProducts(sql As String, typ As String)
+        On Error GoTo Err
+        Dim flds1, flds2, flds3 As String
+        Dim fl As String
+        'MsgBox(sql)
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+
+        ds.Clear()
+        da.Fill(ds, "observationfinal")
+
+        maxRows = ds.Tables("observationfinal").Rows.Count
+        'MsgBox(maxRows)
+
+        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+        FileOpen(11, fl, OpenMode.Output)
+        Write(11, "Station")
+        Write(11, "Year")
+        Write(11, "Month")
+
+        For j = 0 To lstvElements.Items.Count - 1
+            Write(11, lstvElements.Items(j).Text)
+        Next
+        PrintLine(11)
+
+        For k = 0 To maxRows - 1
+
+            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                'If i = 1 Then ' Output Datatime data
+                '    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                '    Write(11, DateAndTime.Month(ds.Tables("observationfinal").Rows(k).Item(i)))
+                '    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                'End If
+
+            Next
+            PrintLine(11)
+        Next
+        MsgBox(3)
+        FileClose(11)
+        CommonModules.ViewFile(fl)
+        flds1 = """" & lstvElements.Items(0).Text & """"
+        flds2 = """" & lstvElements.Items(1).Text & """"
+        flds3 = """" & lstvElements.Items(2).Text & """"
+
+        Exit Sub
+Err:
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+    Sub FormattedOutput(fp As Integer, rw As Long, col As Integer)
+
+        If InStr(ds.Tables("observationfinal").Rows(rw).Item(col), "NULL") <> 0 Then 'Missing Values to represented as blanks
+            Write(fp, "")
+        ElseIf InStr(ds.Tables("observationfinal").Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to rounded to 2 decimal places
+            Write(fp, Format(ds.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
+        Else
+            Write(fp, ds.Tables("observationfinal").Rows(rw).Item(col))
+        End If
+    End Sub
+
     Private Sub cmdDelStation_Click(sender As Object, e As EventArgs) Handles cmdDelStation.Click
         For i = 0 To lstvStations.Items.Count - 1
             If lstvStations.Items(i).Selected Then
@@ -448,7 +526,7 @@ Err:
         lstvElements.Clear()
     End Sub
 
-    
+
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
