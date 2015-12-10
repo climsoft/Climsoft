@@ -22,6 +22,7 @@ Partial Class frmDBUtilities
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDBUtilities))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,7 +59,7 @@ Partial Class frmDBUtilities
         '
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
         Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
-        Me.ImportToolStripMenuItem.Text = "Update"
+        Me.ImportToolStripMenuItem.Text = "Upload"
         '
         'GenerateValuesToolStripMenuItem
         '
@@ -107,8 +108,7 @@ Partial Class frmDBUtilities
         '
         'Button1
         '
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Button1.Location = New System.Drawing.Point(0, 0)
+        Me.Button1.Location = New System.Drawing.Point(305, 0)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(67, 27)
         Me.Button1.TabIndex = 1
@@ -165,7 +165,7 @@ Partial Class frmDBUtilities
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
         Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 25)
         '
-        'formDbUtilities
+        'frmDBUtilities
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -176,10 +176,11 @@ Partial Class frmDBUtilities
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "formDbUtilities"
+        Me.Name = "frmDBUtilities"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Database Utilities"
