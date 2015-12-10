@@ -468,9 +468,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(200, 0)
+        Me.pnlProcessing.Location = New System.Drawing.Point(196, 0)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(719, 123)
+        Me.pnlProcessing.Size = New System.Drawing.Size(734, 138)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -1721,10 +1721,10 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.GroupBox11)
-        Me.pnlSites.Location = New System.Drawing.Point(198, 308)
+        Me.pnlSites.Location = New System.Drawing.Point(196, 308)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(726, 417)
+        Me.pnlSites.Size = New System.Drawing.Size(734, 417)
         Me.pnlSites.TabIndex = 3
         '
         'GroupBox11
@@ -1968,9 +1968,9 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(200, 203)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(196, 203)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(720, 35)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 35)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -2148,7 +2148,7 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.pnlMSS)
         Me.pnlServers.Location = New System.Drawing.Point(196, 145)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(724, 44)
+        Me.pnlServers.Size = New System.Drawing.Size(734, 44)
         Me.pnlServers.TabIndex = 2
         '
         'pnlBaseStation
@@ -2690,9 +2690,9 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
         Me.pnlMsgEncoding.Controls.Add(Me.lblMaster)
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
-        Me.pnlMsgEncoding.Location = New System.Drawing.Point(200, 250)
+        Me.pnlMsgEncoding.Location = New System.Drawing.Point(196, 250)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(720, 48)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 48)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
