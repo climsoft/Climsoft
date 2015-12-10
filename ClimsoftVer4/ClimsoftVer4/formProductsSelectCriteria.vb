@@ -261,9 +261,14 @@ Public Class formProductsSelectCriteria
                 SummaryProducts(sql, lblProductType.Text)
             Case "Annual"
                 sql = "use mysql_climsoft_db_v4; SELECT recordedFrom, describedBy, obsDatetime, Year(obsDatetime) AS yy, " & SummaryType & " FROM observationfinal GROUP BY recordedFrom, describedBy, Year(obsDatetime) " & _
-                       "HAVING ((recordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & edate & "'));"
+                       "HAVING ((recordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") AND (obsDatetime Between '" & sdate & "' And '" & sdate & "'));"
 
                 SummaryProducts(sql, lblProductType.Text)
+            Case "Means"
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationId,month(obsDatetime) as MM," & SummaryType & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                      "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & sdate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, MM;"
+            Case "Extremes"
+
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
