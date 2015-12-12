@@ -112,8 +112,14 @@ Public Class frmKeyEntry
                 formDaily1.Show()
             Case "form_daily2"
                 formDaily2.Show()
-            Case "form_Synoptic1"
-                formSynoptic1.Show()
+            Case "form_hourly"
+                formHourly.Show()
+            Case "form_monthly"
+                formMonthly.Show()
+            Case "form_upperair1"
+                formUpperAir.Show()
+                'Case "form_synoptic1"
+                'formSynoptic1.Show()
         End Select
     End Sub
 
