@@ -120,4 +120,7 @@ Public Class frmMainMenu
 
     End Sub
 
+    Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
+
+    End Sub
 End Class
