@@ -42,6 +42,7 @@ Public Class frmKeyEntry
 
             sql = "SELECT * FROM data_forms"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
             da.Fill(ds, "data_forms")
             conn.Close()
             'MsgBox("Dataset Field !", MsgBoxStyle.Information)
@@ -54,7 +55,7 @@ Public Class frmKeyEntry
 
         Dim str(2) As String
         Dim itm As ListViewItem
-
+        ListView1.Items.Clear()
         For kount = 0 To maxRows - 1 Step 1
             'MsgBox(ds.Tables("data_forms").Rows(kount).Item("selected"))
             If ds.Tables("data_forms").Rows(kount).Item("selected") = 1 Then
@@ -71,6 +72,8 @@ Public Class frmKeyEntry
 
         ' Get and list the database name
         lblDb.Text = Mid(frmLogin.cmbDatabases.Items.Item(0), 1, Len(frmLogin.cmbDatabases.Items.Item(0)) - 1)
+
+
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -80,8 +83,9 @@ Public Class frmKeyEntry
     Private Sub ListView1_DoubleClick(sender As Object, e As EventArgs) Handles ListView1.DoubleClick
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
-                MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
-                formSynopRA1.Show()
+                'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                'formSynopRA1.Show()
+                Open_Form(ListView1.Items(kount).Text)
             End If
         Next
     End Sub
@@ -91,11 +95,26 @@ Public Class frmKeyEntry
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
                 'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
-                formSynopRA1.Show()
+
+                Open_Form(ListView1.Items(kount).Text)
+
             End If
         Next
 
+    End Sub
 
+    Sub Open_Form(frm As String)
+        'MsgBox("Form " & frm & " Selected")
+        Select Case frm
+            Case "form_synoptic2_TDCF"
+                formSynopRA1.Show()
+            Case "form_daily1"
+                formDaily1.Show()
+            Case "form_daily2"
+                formDaily2.Show()
+            Case "form_Synoptic1"
+                formSynoptic1.Show()
+        End Select
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -121,10 +140,11 @@ Public Class frmKeyEntry
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
+
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
-                MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
-                formSynopRA1.Show()
+                'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
+                Open_Form(ListView1.Items(kount).Text)
             End If
         Next
     End Sub
