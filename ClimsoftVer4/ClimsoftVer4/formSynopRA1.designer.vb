@@ -1628,16 +1628,16 @@ Partial Class formSynopRA1
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(276, 600)
+        Me.txtSequencer.Location = New System.Drawing.Point(300, 591)
         Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
         Me.txtSequencer.TabIndex = 205
         Me.txtSequencer.Text = "seq_month_day_synoptime"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(211, 603)
+        Me.Label5.Location = New System.Drawing.Point(235, 594)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 206

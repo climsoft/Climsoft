@@ -904,6 +904,7 @@ Public Class formSynopRA1
         For n = 0 To maxRows - 1
             'Display progress of data transfer
             frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 53
                 stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
@@ -928,20 +929,25 @@ Public Class formSynopRA1
                 Next ctl
                 'Generate SQL string for inserting data into observationinitial table
                 If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
                         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                         & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
+
+                    ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                    ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                    ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
 
                     ' Create the Command for executing query and set its properties
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                     Try
-
+                        'Execute query
                         objCmd.ExecuteNonQuery()
-
-                    Catch ex As MySql.Data.MySqlClient.MySqlException
-                        MessageBox.Show(ex.Message & " : " & Err.Number)
-                        'MessageBox.Show(Err.Number)
+                        'Catch ex As MySql.Data.MySqlClient.MySqlException
+                        '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                    Catch ex As Exception
+                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                        MsgBox(ex.Message)
                     End Try
                 End If
                 'Move to next observation value in current record of the dataset
@@ -1021,15 +1027,22 @@ Public Class formSynopRA1
             acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
 
             'Generate SQL string for inserting data into observationinitial table
-            strSQL = "INSERT INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+            strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
                 "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
                 qcStatus & "," & acquisitionType & ")"
 
             ' Create the Command for executing query and set its properties
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
-            'Execute query
-            objCmd.ExecuteNonQuery()
+            Try
+                'Execute query
+                objCmd.ExecuteNonQuery()
+                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                '    'Ignore expected error i.e. error of Duplicates in MySqlException
+            Catch ex As Exception
+                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                MsgBox(ex.Message)
+            End Try
 
             'Move to next record in dataset
         Next n

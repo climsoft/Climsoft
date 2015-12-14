@@ -87,7 +87,7 @@
             i = 4
             'Display progress of data transfer
             frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-
+            frmDataTransferProgress.txtDataTransferProgress.Refresh()
             stnId = ds.Tables("clicomDaily").Rows(n).Item(1)
             elemCode = ds.Tables("clicomDaily").Rows(n).Item(2)
             obsLevel = "surface"
@@ -117,14 +117,26 @@
                 If IsNumeric(obsVal) Then obsVal = Int((obsVal / valScale) + 0.5)
                 If Not IsDBNull(ds.Tables("clicomDaily").Rows(n).Item(i)) Then obsFlag = ds.Tables("clicomDaily").Rows(n).Item(i)
                 'Generate SQL string for inserting data into observationinitial table
-                sql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                sql = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
                     qcStatus & "," & acquisitionType & ")"
+
+                ' ''sql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                ' ''   "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                ' ''   qcStatus & "," & acquisitionType & ")" & "ON DUPLICATE KEY UPDATE obsValue=" & obsVal 
+
                 If IsDate(obsDate) And Val(obsVal) > 0 Then
                     ' Create the Command for executing query and set its properties
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                    'Execute query
-                    objCmd.ExecuteNonQuery()
+                    Try
+                        'Execute query
+                        objCmd.ExecuteNonQuery()
+                        ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                        'Ignore expected error i.e. error of Duplicates in MySqlException
+                    Catch ex As Exception
+                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                        MsgBox(ex.Message)
+                    End Try
                 End If
                 'Move to next record in dataset
 
