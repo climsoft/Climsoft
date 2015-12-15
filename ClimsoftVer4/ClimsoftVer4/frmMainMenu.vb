@@ -23,9 +23,9 @@ Public Class frmMainMenu
         HTMLHelp.HelpPage = "welcome.htm"
     End Sub
 
-    ' Methods for icons in main panel.
 
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
+        ' The icon has been changed
         frmKeyEntry.ShowDialog()
     End Sub
 
