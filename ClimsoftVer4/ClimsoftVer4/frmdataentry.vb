@@ -94,8 +94,6 @@ Public Class frmKeyEntry
 
         For kount = 0 To ListView1.Items.Count - 1
             If ListView1.Items(kount).Selected = True Then
-                'MsgBox("Form " & ListView1.Items(kount).Text & " Selected")
-
                 Open_Form(ListView1.Items(kount).Text)
 
             End If
@@ -104,7 +102,7 @@ Public Class frmKeyEntry
     End Sub
 
     Sub Open_Form(frm As String)
-        'MsgBox("Form " & frm & " Selected")
+
         Select Case frm
             Case "form_synoptic2_TDCF"
                 formSynopRA1.Show()
@@ -118,8 +116,8 @@ Public Class frmKeyEntry
                 formMonthly.Show()
             Case "form_upperair1"
                 formUpperAir.Show()
-            Case "form_hourlywind"
-                formHourlyWind.Show()
+                'Case "form_hourlywind"
+                '    formHourlyWind.Show()
         End Select
     End Sub
 
