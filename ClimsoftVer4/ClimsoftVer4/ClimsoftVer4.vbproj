@@ -124,12 +124,6 @@
     <Compile Include="formDataView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formHourlyWind.Designer.vb">
-      <DependentUpon>formHourlyWind.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formHourlyWind.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="formImports.Designer.vb">
       <DependentUpon>formImports.vb</DependentUpon>
     </Compile>
@@ -164,6 +158,12 @@
       <DependentUpon>frmCrex.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCrex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataForms.Designer.vb">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataForms.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDBUtilities.Designer.vb">
@@ -394,9 +394,6 @@
     <EmbeddedResource Include="formHourly.fr.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formHourlyWind.resx">
-      <DependentUpon>formHourlyWind.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formImports.resx">
       <DependentUpon>formImports.vb</DependentUpon>
     </EmbeddedResource>
@@ -483,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataEntry.fr.resx">
       <DependentUpon>frmDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataForms.resx">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.de.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
