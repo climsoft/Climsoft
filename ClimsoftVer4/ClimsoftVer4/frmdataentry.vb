@@ -116,8 +116,7 @@ Public Class frmKeyEntry
                 formMonthly.Show()
             Case "form_upperair1"
                 formUpperAir.Show()
-                'Case "form_hourlywind"
-                '    formHourlyWind.Show()
+                ' Form HourlyWind not Installed
         End Select
     End Sub
 
