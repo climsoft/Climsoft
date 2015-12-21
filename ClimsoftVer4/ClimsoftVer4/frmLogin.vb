@@ -35,7 +35,7 @@ Public Class frmLogin
         ConfigFile()
         'frmMainMenu.Show()
         'Me.Hide()
-        regDataInit()
+        'regDataInit()
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click
@@ -76,6 +76,7 @@ Public Class frmLogin
             frmSplashScreen.Show()
             Me.Hide()
             ' End Using
+            regDataInit()
         Catch e As Exception
             MsgBox("Login failure")
         End Try
