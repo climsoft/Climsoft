@@ -168,7 +168,7 @@ Partial Class formHourly
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 379
-        Me.txtSequencer.Text = "seq_element_month_day"
+        Me.txtSequencer.Text = "seq_month_day_element"
         '
         'Label4
         '

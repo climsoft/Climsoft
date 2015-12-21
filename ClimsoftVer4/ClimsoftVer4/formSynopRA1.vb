@@ -413,93 +413,122 @@ Public Class formSynopRA1
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
-        'to undo the AddNew button process before the recorded can be committed to the datasource table linked to the DataSet.
-        'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
-        'disabled until the AddNew button is clicked
+        Dim n As Integer, ctl As Control
+        n = 0
+        For Each ctl In Me.Controls
+            'Check if some observation values have been entered
+            If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
+        Next ctl
 
-        btnAddNew.Enabled = True
-        btnCommit.Enabled = False
-        btnDelete.Enabled = True
-        btnUpdate.Enabled = True
-        btnMoveFirst.Enabled = True
-        btnMoveLast.Enabled = True
-        btnMoveNext.Enabled = True
-        btnMovePrevious.Enabled = True
+        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+        'carry out the next actions, otherwise bring up message showing that there is insufficient data
+        If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 _
+            And Strings.Len(cboHour.Text) > 0 Then
 
-        'Set Record position index to first record
-        inc = 0
+            'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
+            'to undo the AddNew button process before the recorded can be committed to the datasource table linked to the DataSet.
+            'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
+            'disabled until the AddNew button is clicked
 
-        'Call subroutine for record navigation
-        navigateRecords()
+            btnAddNew.Enabled = True
+            btnCommit.Enabled = False
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+            btnMoveFirst.Enabled = True
+            btnMoveLast.Enabled = True
+            btnMoveNext.Enabled = True
+            btnMovePrevious.Enabled = True
+
+            'Set Record position index to first record
+            inc = 0
+
+            'Call subroutine for record navigation
+            navigateRecords()
+        Else
+            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
+        End If
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
-        'must be declared for the Update method to work.
-        Dim m As Integer
-        Dim ctl As Control
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim dsNewRow As DataRow
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recCommit As New dataEntryGlobalRoutines
-        'Try
-        dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
-        'Add a new record to the data source table
-        ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
-        'Commit observation header information to database
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
+        Dim n As Integer, ctl As Control
+        n = 0
+        For Each ctl In Me.Controls
+            'Check if some observation values have been entered
+            If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
+        Next ctl
 
-        ' txtSignature.Text = frmLogin.txtUser.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+        'carry out the next actions, otherwise bring up message showing that there is insufficient data
+        If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 _
+            And Strings.Len(cboHour.Text) > 0 Then
 
-        'Commit observation values to database
-        'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To 53
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
+            'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+            'must be declared for the Update method to work.
+            Dim m As Integer
+            'Dim ctl As Control
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim dsNewRow As DataRow
+            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+            Dim recCommit As New dataEntryGlobalRoutines
+            'Try
+            dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
+            'Add a new record to the data source table
+            ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
+            'Commit observation header information to database
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = txtYear.Text
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
 
-        'Commit observation flags to database
-        'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = 54 To 102
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
+            ' txtSignature.Text = frmLogin.txtUser.Text
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
-        da.Update(ds, "form_synoptic_2_RA1")
+            'Commit observation values to database
+            'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+            For m = 5 To 53
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
 
-        'Display message for successful record commit to table
-        recCommit.messageBoxCommit()
+            'Commit observation flags to database
+            'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
+            For m = 54 To 102
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
 
-        btnAddNew.Enabled = True
-        btnClear.Enabled = False
-        btnCommit.Enabled = False
-        btnDelete.Enabled = True
-        btnUpdate.Enabled = True
-        btnMoveFirst.Enabled = True
-        btnMoveLast.Enabled = True
-        btnMoveNext.Enabled = True
-        btnMovePrevious.Enabled = True
-        maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
-        inc = maxRows - 1
+            da.Update(ds, "form_synoptic_2_RA1")
 
-        'Call subroutine for record navigation
-        navigateRecords()
-        ''Catch ex As Exception
-        ''    MessageBox.Show(ex.Message)
-        ''End Try
+            'Display message for successful record commit to table
+            recCommit.messageBoxCommit()
 
+            btnAddNew.Enabled = True
+            btnClear.Enabled = False
+            btnCommit.Enabled = False
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+            btnMoveFirst.Enabled = True
+            btnMoveLast.Enabled = True
+            btnMoveNext.Enabled = True
+            btnMovePrevious.Enabled = True
+            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+            inc = maxRows - 1
+
+            'Call subroutine for record navigation
+            navigateRecords()
+            ''Catch ex As Exception
+            ''    MessageBox.Show(ex.Message)
+            ''End Try
+        Else
+            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
+        End If
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -526,13 +555,14 @@ Public Class formSynopRA1
 
     Private Sub formSynopRA1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim objKeyPress As New dataEntryGlobalRoutines
-        Dim obsVal As String, obsFlag As String, ctrl As Control, flagtextBoxSuffix As String
+        Dim obsVal As String, obsFlag As String, ctrl As Control, flagtextBoxSuffix As String, flagIndexDiff As Integer
         ' Dim obsValColIndex As Integer, flagColIndex As Integer
 
         'Initialize string variables
         obsVal = ""
         obsFlag = ""
         flagtextBoxSuffix = ""
+        flagIndexDiff = 49
 
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
@@ -554,7 +584,7 @@ Public Class formSynopRA1
                 For Each ctrl In Me.Controls
                     'Loop through all controls on form
                     'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
-                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl) Then
+                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
                         ctrl.Text = obsFlag
                     End If
                 Next ctrl
@@ -738,7 +768,17 @@ Public Class formSynopRA1
             displayRecordNumber()
         Else
             'If this is the first record
+            btnAddNew.Enabled = False
             btnCommit.Enabled = True
+            btnUpdate.Enabled = False
+            btnDelete.Enabled = False
+            btnClear.Enabled = True
+            btnMoveFirst.Enabled = False
+            btnMoveNext.Enabled = False
+            btnMovePrevious.Enabled = False
+            btnMoveLast.Enabled = False
+
+            recNumberTextBox.Text = "Record 1 of 1"
         End If
 
     End Sub
