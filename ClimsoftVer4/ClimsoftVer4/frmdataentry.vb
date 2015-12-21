@@ -104,7 +104,7 @@ Public Class frmKeyEntry
     Sub Open_Form(frm As String)
 
         Select Case frm
-            Case "form_synoptic2_TDCF"
+            Case "form_synoptic_2_ra1"
                 formSynopRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()

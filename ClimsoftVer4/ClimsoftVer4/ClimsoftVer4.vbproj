@@ -166,6 +166,12 @@
     <Compile Include="frmCrex.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDataTransferProgress.Designer.vb">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataTransferProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDBUtilities.Designer.vb">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </Compile>
@@ -182,6 +188,12 @@
       <DependentUpon>formHourly.vb</DependentUpon>
     </Compile>
     <Compile Include="formHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportCSV.Designer.vb">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportCSV.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLanguage.Designer.vb">
@@ -490,6 +502,9 @@
     <EmbeddedResource Include="frmDataOutpt.fr.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDataTransferProgress.resx">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.de.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </EmbeddedResource>
@@ -513,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.fr.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportCSV.resx">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLanguage.de.resx">
       <DependentUpon>frmLanguage.vb</DependentUpon>
