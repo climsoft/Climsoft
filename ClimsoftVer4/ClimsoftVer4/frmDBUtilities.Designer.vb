@@ -33,17 +33,22 @@ Partial Class frmDBUtilities
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ListViewDbUtil = New System.Windows.Forms.ListView()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Dbtpanel2 = New System.Windows.Forms.Panel()
         Me.ProgressBarDb = New System.Windows.Forms.ProgressBar()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.Dbtpanel1 = New System.Windows.Forms.Panel()
+        Me.ListViewDbUtil = New System.Windows.Forms.ListView()
+        Me.grpbxUpload = New System.Windows.Forms.GroupBox()
+        Me.cmdUpload = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.Dbtpanel2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        Me.Dbtpanel1.SuspendLayout()
+        Me.grpbxUpload.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -51,7 +56,7 @@ Partial Class frmDBUtilities
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(727, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(852, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -101,9 +106,9 @@ Partial Class frmDBUtilities
         '
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 332)
+        Me.Panel1.Location = New System.Drawing.Point(0, 396)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(727, 27)
+        Me.Panel1.Size = New System.Drawing.Size(852, 27)
         Me.Panel1.TabIndex = 3
         '
         'Button1
@@ -114,30 +119,22 @@ Partial Class frmDBUtilities
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "OK"
         '
-        'ListViewDbUtil
+        'Dbtpanel2
         '
-        Me.ListViewDbUtil.Location = New System.Drawing.Point(0, 52)
-        Me.ListViewDbUtil.Name = "ListViewDbUtil"
-        Me.ListViewDbUtil.Size = New System.Drawing.Size(333, 274)
-        Me.ListViewDbUtil.TabIndex = 4
-        Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
-        '
-        'Panel2
-        '
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.ProgressBarDb)
-        Me.Panel2.Location = New System.Drawing.Point(350, 52)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(2)
-        Me.Panel2.Size = New System.Drawing.Size(363, 273)
-        Me.Panel2.TabIndex = 5
+        Me.Dbtpanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Dbtpanel2.Controls.Add(Me.ProgressBarDb)
+        Me.Dbtpanel2.Location = New System.Drawing.Point(444, 52)
+        Me.Dbtpanel2.Name = "Dbtpanel2"
+        Me.Dbtpanel2.Padding = New System.Windows.Forms.Padding(2)
+        Me.Dbtpanel2.Size = New System.Drawing.Size(396, 338)
+        Me.Dbtpanel2.TabIndex = 5
         '
         'ProgressBarDb
         '
         Me.ProgressBarDb.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ProgressBarDb.Location = New System.Drawing.Point(2, 246)
+        Me.ProgressBarDb.Location = New System.Drawing.Point(2, 311)
         Me.ProgressBarDb.Name = "ProgressBarDb"
-        Me.ProgressBarDb.Size = New System.Drawing.Size(355, 21)
+        Me.ProgressBarDb.Size = New System.Drawing.Size(388, 21)
         Me.ProgressBarDb.TabIndex = 0
         '
         'OpenFileDialog1
@@ -149,7 +146,7 @@ Partial Class frmDBUtilities
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripComboBox1})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(727, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(852, 25)
         Me.ToolStrip1.TabIndex = 6
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -165,14 +162,60 @@ Partial Class frmDBUtilities
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
         Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 25)
         '
+        'Dbtpanel1
+        '
+        Me.Dbtpanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Dbtpanel1.Controls.Add(Me.grpbxUpload)
+        Me.Dbtpanel1.Controls.Add(Me.ListViewDbUtil)
+        Me.Dbtpanel1.Location = New System.Drawing.Point(12, 52)
+        Me.Dbtpanel1.Name = "Dbtpanel1"
+        Me.Dbtpanel1.Padding = New System.Windows.Forms.Padding(2)
+        Me.Dbtpanel1.Size = New System.Drawing.Size(426, 338)
+        Me.Dbtpanel1.TabIndex = 7
+        '
+        'ListViewDbUtil
+        '
+        Me.ListViewDbUtil.AllowColumnReorder = True
+        Me.ListViewDbUtil.AllowDrop = True
+        Me.ListViewDbUtil.CheckBoxes = True
+        Me.ListViewDbUtil.GridLines = True
+        Me.ListViewDbUtil.LabelEdit = True
+        Me.ListViewDbUtil.Location = New System.Drawing.Point(5, 5)
+        Me.ListViewDbUtil.Name = "ListViewDbUtil"
+        Me.ListViewDbUtil.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListViewDbUtil.Size = New System.Drawing.Size(412, 305)
+        Me.ListViewDbUtil.TabIndex = 5
+        Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
+        Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
+        Me.ListViewDbUtil.Visible = False
+        '
+        'grpbxUpload
+        '
+        Me.grpbxUpload.Controls.Add(Me.cmdUpload)
+        Me.grpbxUpload.Location = New System.Drawing.Point(2, 311)
+        Me.grpbxUpload.Name = "grpbxUpload"
+        Me.grpbxUpload.Size = New System.Drawing.Size(421, 24)
+        Me.grpbxUpload.TabIndex = 7
+        Me.grpbxUpload.TabStop = False
+        '
+        'cmdUpload
+        '
+        Me.cmdUpload.Location = New System.Drawing.Point(167, 6)
+        Me.cmdUpload.Name = "cmdUpload"
+        Me.cmdUpload.Size = New System.Drawing.Size(87, 19)
+        Me.cmdUpload.TabIndex = 7
+        Me.cmdUpload.Text = "Start Upload"
+        Me.cmdUpload.UseVisualStyleBackColor = True
+        Me.cmdUpload.Visible = False
+        '
         'frmDBUtilities
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(727, 359)
+        Me.ClientSize = New System.Drawing.Size(852, 423)
+        Me.Controls.Add(Me.Dbtpanel1)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.ListViewDbUtil)
+        Me.Controls.Add(Me.Dbtpanel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -187,9 +230,11 @@ Partial Class frmDBUtilities
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
+        Me.Dbtpanel2.ResumeLayout(False)
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.Dbtpanel1.ResumeLayout(False)
+        Me.grpbxUpload.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -197,19 +242,22 @@ Partial Class frmDBUtilities
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents ListViewDbUtil As System.Windows.Forms.ListView
     Friend WithEvents ImportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GenerateValuesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExternalDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BackupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RestoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Dbtpanel2 As System.Windows.Forms.Panel
     Friend WithEvents ProgressBarDb As System.Windows.Forms.ProgressBar
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripComboBox1 As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents Dbtpanel1 As System.Windows.Forms.Panel
+    Public WithEvents ListViewDbUtil As System.Windows.Forms.ListView
+    Friend WithEvents grpbxUpload As System.Windows.Forms.GroupBox
+    Friend WithEvents cmdUpload As System.Windows.Forms.Button
 
 End Class
