@@ -59,15 +59,7 @@ Public Class formSynopRA1
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        '--------------------------
-        Dim stn As String
-        'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-        cboStation.SelectedValue = stn
-        '--------------------------
-        'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
-        'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
-        ' cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+        cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
         txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
         cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
         cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
@@ -458,140 +450,17 @@ Public Class formSynopRA1
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        Dim n As Integer, ctl As Control, msgTxtInsufficientData As String
+        Dim n As Integer, ctl As Control
         n = 0
         For Each ctl In Me.Controls
             'Check if some observation values have been entered
             If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
         Next ctl
 
-        'Check if header information is complete. If the header information is complete and there is at least one obs value then,
+        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
         If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 _
             And Strings.Len(cboHour.Text) > 0 Then
-
-            '-----------------------------------------
-            'Carry out QC checks before saving data
-            Dim objKeyPress As New dataEntryGlobalRoutines
-
-            'Check item exists
-            For Each ctl In Me.Controls
-                If ctl.Name = "cboStation" Then
-                    If Not objKeyPress.checkExists(True, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check for numeric
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboDay" Or ctl.Name = "cboHour" _
-                    Or (Strings.Left(ctl.Name, 6) = "txtVal" And Strings.Len(ctl.Text)) > 0 Then
-                    If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid year
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "txtYear" Then
-                    If Not objKeyPress.checkValidYear(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid month
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboMonth" Then
-                    If Not objKeyPress.checkValidMonth(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid day
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboDay" Then
-                    If Not objKeyPress.checkValidDay(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check valid hour
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If ctl.Name = "cboHour" Then
-                    If Not objKeyPress.checkValidHour(obsValue, ctl) Then
-                        ctl.Focus()
-                    End If
-                End If
-            Next ctl
-
-            'Check future date
-            If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
-                cboDay.Focus()
-            End If
-
-            'Check limits
-            'Dim elemCode As Integer
-            For Each ctl In Me.Controls
-                obsValue = ctl.Text
-                If Strings.Left(ctl.Name, 6) = "txtVal" Then
-
-
-                    elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
-
-                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                    dsValueLimits.Clear()
-                    'Add row for element code associated with active control
-                    daValueLimits.Fill(dsValueLimits, "obselement")
-
-                    'Get element upper limit
-                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                    Else
-                        valUpperLimit = ""
-                    End If
-
-                    'Get element lower limit
-                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                    Else
-                        valLowerLimit = ""
-                    End If
-
-                    'Check upper limit
-                    If ctl.Text <> "" And valUpperLimit <> "" Then
-                        If Not objKeyPress.checkUpperLimit(ctl, obsValue, valUpperLimit) Then
-                            ctl.Focus()
-                        End If
-                    End If
-
-                    'Check lower limit
-                    If ctl.Text <> "" And valLowerLimit <> "" Then
-                        If Not objKeyPress.checkLowerLimit(ctl, obsValue, valLowerLimit) Then
-                            ctl.Focus()
-                        End If
-                    End If
-
-                End If
-            Next ctl
-
-            '---------------------------------------
-            'Confirm if you want to continue and save data from key-entry form to database table
-            Dim msgTxtContinue As String
-            msgTxtContinue = "Do you want to continue and commit to database table?"
-            If MsgBox(msgTxtContinue, MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
 
             'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
             'must be declared for the Update method to work.
@@ -658,8 +527,7 @@ Public Class formSynopRA1
             ''    MessageBox.Show(ex.Message)
             ''End Try
         Else
-            msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
-            MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
+            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
         End If
     End Sub
 
@@ -946,17 +814,17 @@ Public Class formSynopRA1
     End Sub
 
     Private Sub Val_Elem003TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem003Field046.LostFocus
-        ''If Val(txtVal_Elem003Field046.Text) > Val(txtVal_Elem002Field045.Text) Then
-        ''    txtVal_Elem002Field045.BackColor = Color.Cyan
-        ''    txtVal_Elem003Field046.BackColor = Color.Cyan
-        ''    txtVal_Elem003Field046.Focus()
-        ''    tabNext = False
-        ''    MsgBox("Tmax must be greater or equal to Tmin!", MsgBoxStyle.Exclamation)
-        ''Else
-        ''    txtVal_Elem002Field045.BackColor = Color.White
-        ''    txtVal_Elem003Field046.BackColor = Color.White
-        ''    tabNext = True
-        ''End If
+        If Val(txtVal_Elem003Field046.Text) > Val(txtVal_Elem002Field045.Text) Then
+            txtVal_Elem002Field045.BackColor = Color.Cyan
+            txtVal_Elem003Field046.BackColor = Color.Cyan
+            txtVal_Elem003Field046.Focus()
+            tabNext = False
+            MsgBox("Tmax must be greater or equal to Tmin!", MsgBoxStyle.Exclamation)
+        Else
+            txtVal_Elem002Field045.BackColor = Color.White
+            txtVal_Elem003Field046.BackColor = Color.White
+            tabNext = True
+        End If
     End Sub
 
 
@@ -1226,9 +1094,5 @@ Public Class formSynopRA1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         frmImportCSV.Show()
-    End Sub
-
-    Private Sub txtVal_Elem002Field045_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem002Field045.LostFocus
-
     End Sub
 End Class

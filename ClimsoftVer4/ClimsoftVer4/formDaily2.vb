@@ -518,7 +518,7 @@ Public Class formDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        Dim n As Integer, ctl As Control, msgTxtInsufficientData As String
+        Dim n As Integer, ctl As Control
         n = 0
         For Each ctl In Me.Controls
             'Check if some observation values have been entered
@@ -545,8 +545,7 @@ Public Class formDaily2
             'Check for numeric
             For Each ctl In Me.Controls
                 obsValue = ctl.Text
-                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboHour" Or (Strings.Left(ctl.Name, 6) = "txtVal" _
-                   And Strings.Len(ctl.Text)) > 0 Then
+                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboHour" Or Strings.Left(ctl.Name, 6) = "txtVal" Then
                     If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
                         ctl.Focus()
                     End If
@@ -720,8 +719,7 @@ Public Class formDaily2
             ''    MessageBox.Show(ex.Message)
             ''End Try
         Else
-            msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
-            MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
+            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
         End If
     End Sub
 
