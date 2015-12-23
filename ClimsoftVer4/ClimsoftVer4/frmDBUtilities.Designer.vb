@@ -40,9 +40,9 @@ Partial Class frmDBUtilities
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
         Me.Dbtpanel1 = New System.Windows.Forms.Panel()
-        Me.ListViewDbUtil = New System.Windows.Forms.ListView()
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
+        Me.ListViewDbUtil = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Dbtpanel2.SuspendLayout()
@@ -173,22 +173,6 @@ Partial Class frmDBUtilities
         Me.Dbtpanel1.Size = New System.Drawing.Size(426, 338)
         Me.Dbtpanel1.TabIndex = 7
         '
-        'ListViewDbUtil
-        '
-        Me.ListViewDbUtil.AllowColumnReorder = True
-        Me.ListViewDbUtil.AllowDrop = True
-        Me.ListViewDbUtil.CheckBoxes = True
-        Me.ListViewDbUtil.GridLines = True
-        Me.ListViewDbUtil.LabelEdit = True
-        Me.ListViewDbUtil.Location = New System.Drawing.Point(5, 5)
-        Me.ListViewDbUtil.Name = "ListViewDbUtil"
-        Me.ListViewDbUtil.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListViewDbUtil.Size = New System.Drawing.Size(412, 305)
-        Me.ListViewDbUtil.TabIndex = 5
-        Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
-        Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
-        Me.ListViewDbUtil.Visible = False
-        '
         'grpbxUpload
         '
         Me.grpbxUpload.Controls.Add(Me.cmdUpload)
@@ -207,6 +191,22 @@ Partial Class frmDBUtilities
         Me.cmdUpload.Text = "Start Upload"
         Me.cmdUpload.UseVisualStyleBackColor = True
         Me.cmdUpload.Visible = False
+        '
+        'ListViewDbUtil
+        '
+        Me.ListViewDbUtil.AllowColumnReorder = True
+        Me.ListViewDbUtil.AllowDrop = True
+        Me.ListViewDbUtil.CheckBoxes = True
+        Me.ListViewDbUtil.GridLines = True
+        Me.ListViewDbUtil.LabelEdit = True
+        Me.ListViewDbUtil.Location = New System.Drawing.Point(5, 5)
+        Me.ListViewDbUtil.Name = "ListViewDbUtil"
+        Me.ListViewDbUtil.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListViewDbUtil.Size = New System.Drawing.Size(412, 305)
+        Me.ListViewDbUtil.TabIndex = 5
+        Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
+        Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
+        Me.ListViewDbUtil.Visible = False
         '
         'frmDBUtilities
         '
