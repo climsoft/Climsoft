@@ -258,7 +258,7 @@ Public Class formDaily2
         sql1 = "SELECT stationId,stationName FROM station"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obsElement"
+        sql3 = "SELECT elementID,elementName FROM obsElement WHERE elementid BETWEEN 1 and 99"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
@@ -467,7 +467,7 @@ Public Class formDaily2
         j = cboElement.SelectedValue
 
         For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("element_code") = j Then
+            If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = j Then
                 If (k + 1) <= seqRecCount Then
                     cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("element_code")
                 Else
@@ -518,7 +518,7 @@ Public Class formDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        Dim n As Integer, ctl As Control
+        Dim n As Integer, ctl As Control, msgTxtInsufficientData As String
         n = 0
         For Each ctl In Me.Controls
             'Check if some observation values have been entered
@@ -545,7 +545,8 @@ Public Class formDaily2
             'Check for numeric
             For Each ctl In Me.Controls
                 obsValue = ctl.Text
-                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboHour" Or Strings.Left(ctl.Name, 6) = "txtVal" Then
+                If ctl.Name = "txtYear" Or ctl.Name = "cboMonth" Or ctl.Name = "cboHour" Or (Strings.Left(ctl.Name, 6) = "txtVal" _
+                   And Strings.Len(ctl.Text)) > 0 Then
                     If Not objKeyPress.checkIsNumeric(obsValue, Me.ActiveControl) Then
                         ctl.Focus()
                     End If
@@ -719,7 +720,8 @@ Public Class formDaily2
             ''    MessageBox.Show(ex.Message)
             ''End Try
         Else
-            MsgBox("Incomplete header information and insufficient observation data!", MsgBoxStyle.Exclamation)
+            msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
+            MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
         End If
     End Sub
 

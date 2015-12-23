@@ -85,6 +85,15 @@ Partial Class formMonthly
         YyyyLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
+        'YyyyLabel
+        '
+        YyyyLabel.AutoSize = True
+        YyyyLabel.Location = New System.Drawing.Point(558, 20)
+        YyyyLabel.Name = "YyyyLabel"
+        YyyyLabel.Size = New System.Drawing.Size(32, 13)
+        YyyyLabel.TabIndex = 472
+        YyyyLabel.Text = "Year:"
+        '
         'Label34
         '
         Me.Label34.AutoSize = True
@@ -282,77 +291,77 @@ Partial Class formMonthly
         Me.txtVal_12Field014.Location = New System.Drawing.Point(271, 401)
         Me.txtVal_12Field014.Name = "txtVal_12Field014"
         Me.txtVal_12Field014.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_12Field014.TabIndex = 506
+        Me.txtVal_12Field014.TabIndex = 14
         '
         'txtVal_11Field013
         '
         Me.txtVal_11Field013.Location = New System.Drawing.Point(271, 375)
         Me.txtVal_11Field013.Name = "txtVal_11Field013"
         Me.txtVal_11Field013.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_11Field013.TabIndex = 505
+        Me.txtVal_11Field013.TabIndex = 13
         '
         'txtVal_10Field012
         '
         Me.txtVal_10Field012.Location = New System.Drawing.Point(271, 349)
         Me.txtVal_10Field012.Name = "txtVal_10Field012"
         Me.txtVal_10Field012.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_10Field012.TabIndex = 504
+        Me.txtVal_10Field012.TabIndex = 12
         '
         'txtVal_09Field011
         '
         Me.txtVal_09Field011.Location = New System.Drawing.Point(271, 323)
         Me.txtVal_09Field011.Name = "txtVal_09Field011"
         Me.txtVal_09Field011.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_09Field011.TabIndex = 503
+        Me.txtVal_09Field011.TabIndex = 11
         '
         'txtVal_08Field010
         '
         Me.txtVal_08Field010.Location = New System.Drawing.Point(271, 297)
         Me.txtVal_08Field010.Name = "txtVal_08Field010"
         Me.txtVal_08Field010.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_08Field010.TabIndex = 502
+        Me.txtVal_08Field010.TabIndex = 10
         '
         'txtVal_07Field009
         '
         Me.txtVal_07Field009.Location = New System.Drawing.Point(271, 271)
         Me.txtVal_07Field009.Name = "txtVal_07Field009"
         Me.txtVal_07Field009.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_07Field009.TabIndex = 501
+        Me.txtVal_07Field009.TabIndex = 9
         '
         'txtVal_06Field008
         '
         Me.txtVal_06Field008.Location = New System.Drawing.Point(271, 245)
         Me.txtVal_06Field008.Name = "txtVal_06Field008"
         Me.txtVal_06Field008.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_06Field008.TabIndex = 500
+        Me.txtVal_06Field008.TabIndex = 8
         '
         'txtVal_05Field007
         '
         Me.txtVal_05Field007.Location = New System.Drawing.Point(271, 219)
         Me.txtVal_05Field007.Name = "txtVal_05Field007"
         Me.txtVal_05Field007.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_05Field007.TabIndex = 499
+        Me.txtVal_05Field007.TabIndex = 7
         '
         'txtVal_04Field006
         '
         Me.txtVal_04Field006.Location = New System.Drawing.Point(271, 193)
         Me.txtVal_04Field006.Name = "txtVal_04Field006"
         Me.txtVal_04Field006.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_04Field006.TabIndex = 498
+        Me.txtVal_04Field006.TabIndex = 6
         '
         'txtVal_03Field005
         '
         Me.txtVal_03Field005.Location = New System.Drawing.Point(271, 167)
         Me.txtVal_03Field005.Name = "txtVal_03Field005"
         Me.txtVal_03Field005.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_03Field005.TabIndex = 497
+        Me.txtVal_03Field005.TabIndex = 5
         '
         'txtVal_02Field004
         '
         Me.txtVal_02Field004.Location = New System.Drawing.Point(271, 141)
         Me.txtVal_02Field004.Name = "txtVal_02Field004"
         Me.txtVal_02Field004.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_02Field004.TabIndex = 496
+        Me.txtVal_02Field004.TabIndex = 4
         '
         'Label7
         '
@@ -387,14 +396,14 @@ Partial Class formMonthly
         Me.cboElement.Location = New System.Drawing.Point(311, 36)
         Me.cboElement.Name = "cboElement"
         Me.cboElement.Size = New System.Drawing.Size(216, 21)
-        Me.cboElement.TabIndex = 492
+        Me.cboElement.TabIndex = 1
         '
         'txtVal_01Field003
         '
         Me.txtVal_01Field003.Location = New System.Drawing.Point(271, 115)
         Me.txtVal_01Field003.Name = "txtVal_01Field003"
         Me.txtVal_01Field003.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_01Field003.TabIndex = 491
+        Me.txtVal_01Field003.TabIndex = 3
         '
         'btnUpload
         '
@@ -438,7 +447,7 @@ Partial Class formMonthly
         Me.cboStation.Location = New System.Drawing.Point(75, 36)
         Me.cboStation.Name = "cboStation"
         Me.cboStation.Size = New System.Drawing.Size(202, 21)
-        Me.cboStation.TabIndex = 468
+        Me.cboStation.TabIndex = 0
         '
         'btnHelp
         '
@@ -465,7 +474,7 @@ Partial Class formMonthly
         Me.btnCommit.Location = New System.Drawing.Point(123, 488)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 474
+        Me.btnCommit.TabIndex = 15
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -552,21 +561,12 @@ Partial Class formMonthly
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'YyyyLabel
-        '
-        YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(558, 20)
-        YyyyLabel.Name = "YyyyLabel"
-        YyyyLabel.Size = New System.Drawing.Size(32, 13)
-        YyyyLabel.TabIndex = 472
-        YyyyLabel.Text = "Year:"
-        '
         'txtYear
         '
         Me.txtYear.Location = New System.Drawing.Point(557, 36)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
-        Me.txtYear.TabIndex = 469
+        Me.txtYear.TabIndex = 2
         '
         'Label1
         '
@@ -642,6 +642,7 @@ Partial Class formMonthly
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
+        Me.KeyPreview = True
         Me.Name = "formMonthly"
         Me.Text = "Monthly Data"
         Me.ResumeLayout(False)
