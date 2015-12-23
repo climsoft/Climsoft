@@ -53,56 +53,56 @@ Partial Class formHourlyWind
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtFlag23Field052 = New System.Windows.Forms.TextBox()
-        Me.txtFlag22Field051 = New System.Windows.Forms.TextBox()
-        Me.txtFlag21Field050 = New System.Windows.Forms.TextBox()
-        Me.txtFlag20Field049 = New System.Windows.Forms.TextBox()
-        Me.txtFlag19Field048 = New System.Windows.Forms.TextBox()
-        Me.txtFlag18Field047 = New System.Windows.Forms.TextBox()
-        Me.txtFlag17Field046 = New System.Windows.Forms.TextBox()
-        Me.txtFlag16Field045 = New System.Windows.Forms.TextBox()
-        Me.txtFlag15Field044 = New System.Windows.Forms.TextBox()
-        Me.txtFlag14Field043 = New System.Windows.Forms.TextBox()
-        Me.txtFlag13Field042 = New System.Windows.Forms.TextBox()
-        Me.txtFlag12Field041 = New System.Windows.Forms.TextBox()
-        Me.txtFlag11Field040 = New System.Windows.Forms.TextBox()
-        Me.txtFlag10Field039 = New System.Windows.Forms.TextBox()
-        Me.txtFlag09Field038 = New System.Windows.Forms.TextBox()
-        Me.txtFlag08Field037 = New System.Windows.Forms.TextBox()
-        Me.txtFlag07Field036 = New System.Windows.Forms.TextBox()
-        Me.txtFlag06Field035 = New System.Windows.Forms.TextBox()
-        Me.txtFlag05Field034 = New System.Windows.Forms.TextBox()
-        Me.txtFlag04Field033 = New System.Windows.Forms.TextBox()
-        Me.txtFlag03Field032 = New System.Windows.Forms.TextBox()
-        Me.txtFlag02Field031 = New System.Windows.Forms.TextBox()
-        Me.txtFlag01Field030 = New System.Windows.Forms.TextBox()
-        Me.txtFlag00Field029 = New System.Windows.Forms.TextBox()
-        Me.txtVal_23Field028 = New System.Windows.Forms.TextBox()
-        Me.txtVal_22Field027 = New System.Windows.Forms.TextBox()
-        Me.txtVal_21Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_20Field025 = New System.Windows.Forms.TextBox()
-        Me.txtVal_19Field024 = New System.Windows.Forms.TextBox()
-        Me.txtVal_18Field023 = New System.Windows.Forms.TextBox()
-        Me.txtVal_17Field022 = New System.Windows.Forms.TextBox()
-        Me.txtVal_16Field021 = New System.Windows.Forms.TextBox()
-        Me.txtVal_15Field020 = New System.Windows.Forms.TextBox()
-        Me.txtVal_14Field019 = New System.Windows.Forms.TextBox()
-        Me.txtVal_13Field018 = New System.Windows.Forms.TextBox()
-        Me.txtVal_12Field017 = New System.Windows.Forms.TextBox()
-        Me.txtVal_11Field016 = New System.Windows.Forms.TextBox()
-        Me.txtVal_10Field015 = New System.Windows.Forms.TextBox()
-        Me.txtVal_09Field014 = New System.Windows.Forms.TextBox()
-        Me.txtVal_08Field013 = New System.Windows.Forms.TextBox()
-        Me.txtVal_07Field012 = New System.Windows.Forms.TextBox()
-        Me.txtVal_06Field011 = New System.Windows.Forms.TextBox()
-        Me.txtVal_05Field010 = New System.Windows.Forms.TextBox()
-        Me.txtVal_04Field009 = New System.Windows.Forms.TextBox()
-        Me.txtVal_03Field008 = New System.Windows.Forms.TextBox()
-        Me.txtVal_02Field007 = New System.Windows.Forms.TextBox()
-        Me.txtVal_01Field006 = New System.Windows.Forms.TextBox()
+        Me.txtFlag23Field051 = New System.Windows.Forms.TextBox()
+        Me.txtFlag22Field050 = New System.Windows.Forms.TextBox()
+        Me.txtFlag21Field049 = New System.Windows.Forms.TextBox()
+        Me.txtFlag20Field048 = New System.Windows.Forms.TextBox()
+        Me.txtFlag19Field047 = New System.Windows.Forms.TextBox()
+        Me.txtFlag18Field046 = New System.Windows.Forms.TextBox()
+        Me.txtFlag17Field045 = New System.Windows.Forms.TextBox()
+        Me.txtFlag16Field044 = New System.Windows.Forms.TextBox()
+        Me.txtFlag15Field043 = New System.Windows.Forms.TextBox()
+        Me.txtFlag14Field042 = New System.Windows.Forms.TextBox()
+        Me.txtFlag13Field041 = New System.Windows.Forms.TextBox()
+        Me.txtFlag12Field040 = New System.Windows.Forms.TextBox()
+        Me.txtDD11Field015 = New System.Windows.Forms.TextBox()
+        Me.txtDD10Field014 = New System.Windows.Forms.TextBox()
+        Me.txtDD09Field013 = New System.Windows.Forms.TextBox()
+        Me.txtDD08Field012 = New System.Windows.Forms.TextBox()
+        Me.txtDD07Field011 = New System.Windows.Forms.TextBox()
+        Me.txtDD06Field010 = New System.Windows.Forms.TextBox()
+        Me.txtDD05Field009 = New System.Windows.Forms.TextBox()
+        Me.txtDD04Field008 = New System.Windows.Forms.TextBox()
+        Me.txtDD03Field007 = New System.Windows.Forms.TextBox()
+        Me.txtDD02Field006 = New System.Windows.Forms.TextBox()
+        Me.txtDD01Field005 = New System.Windows.Forms.TextBox()
+        Me.txtDD00Field004 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff23 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff22 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff21 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff20 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff19 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff18 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff17 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff16 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff15 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff14 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff13 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff12 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff11 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff10 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff09 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff08 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff07 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff06 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff05 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff04 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff03 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff02 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff01 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtVal_00Field005 = New System.Windows.Forms.TextBox()
+        Me.txt_ddff00 = New System.Windows.Forms.TextBox()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
@@ -129,54 +129,54 @@ Partial Class formHourlyWind
         Me.Label36 = New System.Windows.Forms.Label()
         Me.txtDirectionDigits = New System.Windows.Forms.TextBox()
         Me.txtSpeedDigits = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
-        Me.TextBox20 = New System.Windows.Forms.TextBox()
-        Me.TextBox21 = New System.Windows.Forms.TextBox()
-        Me.TextBox22 = New System.Windows.Forms.TextBox()
-        Me.TextBox23 = New System.Windows.Forms.TextBox()
-        Me.TextBox24 = New System.Windows.Forms.TextBox()
-        Me.TextBox25 = New System.Windows.Forms.TextBox()
-        Me.TextBox26 = New System.Windows.Forms.TextBox()
-        Me.TextBox27 = New System.Windows.Forms.TextBox()
-        Me.TextBox28 = New System.Windows.Forms.TextBox()
-        Me.TextBox29 = New System.Windows.Forms.TextBox()
-        Me.TextBox30 = New System.Windows.Forms.TextBox()
-        Me.TextBox31 = New System.Windows.Forms.TextBox()
-        Me.TextBox32 = New System.Windows.Forms.TextBox()
-        Me.TextBox33 = New System.Windows.Forms.TextBox()
-        Me.TextBox34 = New System.Windows.Forms.TextBox()
-        Me.TextBox35 = New System.Windows.Forms.TextBox()
-        Me.TextBox36 = New System.Windows.Forms.TextBox()
-        Me.TextBox37 = New System.Windows.Forms.TextBox()
-        Me.TextBox38 = New System.Windows.Forms.TextBox()
-        Me.TextBox39 = New System.Windows.Forms.TextBox()
-        Me.TextBox40 = New System.Windows.Forms.TextBox()
-        Me.TextBox41 = New System.Windows.Forms.TextBox()
-        Me.TextBox42 = New System.Windows.Forms.TextBox()
-        Me.TextBox43 = New System.Windows.Forms.TextBox()
-        Me.TextBox44 = New System.Windows.Forms.TextBox()
-        Me.TextBox45 = New System.Windows.Forms.TextBox()
-        Me.TextBox46 = New System.Windows.Forms.TextBox()
-        Me.TextBox47 = New System.Windows.Forms.TextBox()
-        Me.TextBox48 = New System.Windows.Forms.TextBox()
-        Me.TextBox49 = New System.Windows.Forms.TextBox()
-        Me.TextBox50 = New System.Windows.Forms.TextBox()
+        Me.txtFlag11Field039 = New System.Windows.Forms.TextBox()
+        Me.txtFlag10Field038 = New System.Windows.Forms.TextBox()
+        Me.txtFlag09Field037 = New System.Windows.Forms.TextBox()
+        Me.txtFlag08Field036 = New System.Windows.Forms.TextBox()
+        Me.txtFlag07Field035 = New System.Windows.Forms.TextBox()
+        Me.txtFlag06Field034 = New System.Windows.Forms.TextBox()
+        Me.txtFlag05Field033 = New System.Windows.Forms.TextBox()
+        Me.txtFlag04Field032 = New System.Windows.Forms.TextBox()
+        Me.txtFlag03Field031 = New System.Windows.Forms.TextBox()
+        Me.txtFlag02Field030 = New System.Windows.Forms.TextBox()
+        Me.txtFlag01Field029 = New System.Windows.Forms.TextBox()
+        Me.txtFlag00Field028 = New System.Windows.Forms.TextBox()
+        Me.txtFF11Field063 = New System.Windows.Forms.TextBox()
+        Me.txtFF10Field062 = New System.Windows.Forms.TextBox()
+        Me.txtFF09Field061 = New System.Windows.Forms.TextBox()
+        Me.txtFF08Field060 = New System.Windows.Forms.TextBox()
+        Me.txtFF07Field059 = New System.Windows.Forms.TextBox()
+        Me.txtFF06Field058 = New System.Windows.Forms.TextBox()
+        Me.txtFF05Field057 = New System.Windows.Forms.TextBox()
+        Me.txtFF04Field056 = New System.Windows.Forms.TextBox()
+        Me.txtFF03Field055 = New System.Windows.Forms.TextBox()
+        Me.txtFF02Field054 = New System.Windows.Forms.TextBox()
+        Me.txtFF01Field053 = New System.Windows.Forms.TextBox()
+        Me.txtFF00Field052 = New System.Windows.Forms.TextBox()
+        Me.txtFF23Field075 = New System.Windows.Forms.TextBox()
+        Me.txtFF22Field074 = New System.Windows.Forms.TextBox()
+        Me.txtFF21Field073 = New System.Windows.Forms.TextBox()
+        Me.txtFF20Field072 = New System.Windows.Forms.TextBox()
+        Me.txtFF19Field071 = New System.Windows.Forms.TextBox()
+        Me.txtFF18Field070 = New System.Windows.Forms.TextBox()
+        Me.txtFF17Field069 = New System.Windows.Forms.TextBox()
+        Me.txtFF16Field068 = New System.Windows.Forms.TextBox()
+        Me.txtFF15Field067 = New System.Windows.Forms.TextBox()
+        Me.txtFF14Field066 = New System.Windows.Forms.TextBox()
+        Me.txtFF13Field065 = New System.Windows.Forms.TextBox()
+        Me.txtFF12Field064 = New System.Windows.Forms.TextBox()
+        Me.txtDD23Field027 = New System.Windows.Forms.TextBox()
+        Me.txtDD22Field026 = New System.Windows.Forms.TextBox()
+        Me.txtDD21Field025 = New System.Windows.Forms.TextBox()
+        Me.txtDD20Field024 = New System.Windows.Forms.TextBox()
+        Me.txtDD19Field023 = New System.Windows.Forms.TextBox()
+        Me.txtDD18Field022 = New System.Windows.Forms.TextBox()
+        Me.txtDD17Field021 = New System.Windows.Forms.TextBox()
+        Me.txtDD16Field020 = New System.Windows.Forms.TextBox()
+        Me.txtDD15Field019 = New System.Windows.Forms.TextBox()
+        Me.txtDD14Field018 = New System.Windows.Forms.TextBox()
+        Me.txtDD13Field017 = New System.Windows.Forms.TextBox()
+        Me.txtDD12Field016 = New System.Windows.Forms.TextBox()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Label40 = New System.Windows.Forms.Label()
@@ -208,7 +208,7 @@ Partial Class formHourlyWind
         Me.txtTotal.Location = New System.Drawing.Point(553, 416)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.Size = New System.Drawing.Size(49, 20)
-        Me.txtTotal.TabIndex = 575
+        Me.txtTotal.TabIndex = 28
         '
         'btnHourSelection
         '
@@ -217,7 +217,7 @@ Partial Class formHourlyWind
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 571
-        Me.btnHourSelection.Text = "Select synoptic hours only"
+        Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'Label35
@@ -463,334 +463,334 @@ Partial Class formHourlyWind
         Me.Label8.TabIndex = 543
         Me.Label8.Text = "00"
         '
-        'txtFlag23Field052
+        'txtFlag23Field051
         '
-        Me.txtFlag23Field052.Location = New System.Drawing.Point(520, 415)
-        Me.txtFlag23Field052.Name = "txtFlag23Field052"
-        Me.txtFlag23Field052.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag23Field052.TabIndex = 542
+        Me.txtFlag23Field051.Location = New System.Drawing.Point(520, 415)
+        Me.txtFlag23Field051.Name = "txtFlag23Field051"
+        Me.txtFlag23Field051.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag23Field051.TabIndex = 542
         '
-        'txtFlag22Field051
+        'txtFlag22Field050
         '
-        Me.txtFlag22Field051.Location = New System.Drawing.Point(520, 389)
-        Me.txtFlag22Field051.Name = "txtFlag22Field051"
-        Me.txtFlag22Field051.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag22Field051.TabIndex = 541
+        Me.txtFlag22Field050.Location = New System.Drawing.Point(520, 389)
+        Me.txtFlag22Field050.Name = "txtFlag22Field050"
+        Me.txtFlag22Field050.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag22Field050.TabIndex = 541
         '
-        'txtFlag21Field050
+        'txtFlag21Field049
         '
-        Me.txtFlag21Field050.Location = New System.Drawing.Point(520, 363)
-        Me.txtFlag21Field050.Name = "txtFlag21Field050"
-        Me.txtFlag21Field050.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag21Field050.TabIndex = 540
+        Me.txtFlag21Field049.Location = New System.Drawing.Point(520, 363)
+        Me.txtFlag21Field049.Name = "txtFlag21Field049"
+        Me.txtFlag21Field049.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag21Field049.TabIndex = 540
         '
-        'txtFlag20Field049
+        'txtFlag20Field048
         '
-        Me.txtFlag20Field049.Location = New System.Drawing.Point(520, 337)
-        Me.txtFlag20Field049.Name = "txtFlag20Field049"
-        Me.txtFlag20Field049.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag20Field049.TabIndex = 539
+        Me.txtFlag20Field048.Location = New System.Drawing.Point(520, 337)
+        Me.txtFlag20Field048.Name = "txtFlag20Field048"
+        Me.txtFlag20Field048.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag20Field048.TabIndex = 539
         '
-        'txtFlag19Field048
+        'txtFlag19Field047
         '
-        Me.txtFlag19Field048.Location = New System.Drawing.Point(520, 311)
-        Me.txtFlag19Field048.Name = "txtFlag19Field048"
-        Me.txtFlag19Field048.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag19Field048.TabIndex = 538
+        Me.txtFlag19Field047.Location = New System.Drawing.Point(520, 311)
+        Me.txtFlag19Field047.Name = "txtFlag19Field047"
+        Me.txtFlag19Field047.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag19Field047.TabIndex = 538
         '
-        'txtFlag18Field047
+        'txtFlag18Field046
         '
-        Me.txtFlag18Field047.Location = New System.Drawing.Point(520, 285)
-        Me.txtFlag18Field047.Name = "txtFlag18Field047"
-        Me.txtFlag18Field047.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag18Field047.TabIndex = 537
+        Me.txtFlag18Field046.Location = New System.Drawing.Point(520, 285)
+        Me.txtFlag18Field046.Name = "txtFlag18Field046"
+        Me.txtFlag18Field046.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag18Field046.TabIndex = 537
         '
-        'txtFlag17Field046
+        'txtFlag17Field045
         '
-        Me.txtFlag17Field046.Location = New System.Drawing.Point(520, 259)
-        Me.txtFlag17Field046.Name = "txtFlag17Field046"
-        Me.txtFlag17Field046.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag17Field046.TabIndex = 536
+        Me.txtFlag17Field045.Location = New System.Drawing.Point(520, 259)
+        Me.txtFlag17Field045.Name = "txtFlag17Field045"
+        Me.txtFlag17Field045.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag17Field045.TabIndex = 536
         '
-        'txtFlag16Field045
+        'txtFlag16Field044
         '
-        Me.txtFlag16Field045.Location = New System.Drawing.Point(520, 233)
-        Me.txtFlag16Field045.Name = "txtFlag16Field045"
-        Me.txtFlag16Field045.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag16Field045.TabIndex = 535
+        Me.txtFlag16Field044.Location = New System.Drawing.Point(520, 233)
+        Me.txtFlag16Field044.Name = "txtFlag16Field044"
+        Me.txtFlag16Field044.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag16Field044.TabIndex = 535
         '
-        'txtFlag15Field044
+        'txtFlag15Field043
         '
-        Me.txtFlag15Field044.Location = New System.Drawing.Point(520, 207)
-        Me.txtFlag15Field044.Name = "txtFlag15Field044"
-        Me.txtFlag15Field044.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag15Field044.TabIndex = 534
+        Me.txtFlag15Field043.Location = New System.Drawing.Point(520, 207)
+        Me.txtFlag15Field043.Name = "txtFlag15Field043"
+        Me.txtFlag15Field043.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag15Field043.TabIndex = 534
         '
-        'txtFlag14Field043
+        'txtFlag14Field042
         '
-        Me.txtFlag14Field043.Location = New System.Drawing.Point(520, 181)
-        Me.txtFlag14Field043.Name = "txtFlag14Field043"
-        Me.txtFlag14Field043.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag14Field043.TabIndex = 533
+        Me.txtFlag14Field042.Location = New System.Drawing.Point(520, 181)
+        Me.txtFlag14Field042.Name = "txtFlag14Field042"
+        Me.txtFlag14Field042.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag14Field042.TabIndex = 533
         '
-        'txtFlag13Field042
+        'txtFlag13Field041
         '
-        Me.txtFlag13Field042.Location = New System.Drawing.Point(520, 155)
-        Me.txtFlag13Field042.Name = "txtFlag13Field042"
-        Me.txtFlag13Field042.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag13Field042.TabIndex = 532
+        Me.txtFlag13Field041.Location = New System.Drawing.Point(520, 155)
+        Me.txtFlag13Field041.Name = "txtFlag13Field041"
+        Me.txtFlag13Field041.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag13Field041.TabIndex = 532
         '
-        'txtFlag12Field041
+        'txtFlag12Field040
         '
-        Me.txtFlag12Field041.Location = New System.Drawing.Point(520, 129)
-        Me.txtFlag12Field041.Name = "txtFlag12Field041"
-        Me.txtFlag12Field041.Size = New System.Drawing.Size(27, 20)
-        Me.txtFlag12Field041.TabIndex = 531
+        Me.txtFlag12Field040.Location = New System.Drawing.Point(520, 129)
+        Me.txtFlag12Field040.Name = "txtFlag12Field040"
+        Me.txtFlag12Field040.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag12Field040.TabIndex = 531
         '
-        'txtFlag11Field040
+        'txtDD11Field015
         '
-        Me.txtFlag11Field040.Location = New System.Drawing.Point(164, 415)
-        Me.txtFlag11Field040.Name = "txtFlag11Field040"
-        Me.txtFlag11Field040.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag11Field040.TabIndex = 530
+        Me.txtDD11Field015.Location = New System.Drawing.Point(164, 415)
+        Me.txtDD11Field015.Name = "txtDD11Field015"
+        Me.txtDD11Field015.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD11Field015.TabIndex = 530
         '
-        'txtFlag10Field039
+        'txtDD10Field014
         '
-        Me.txtFlag10Field039.Location = New System.Drawing.Point(164, 389)
-        Me.txtFlag10Field039.Name = "txtFlag10Field039"
-        Me.txtFlag10Field039.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag10Field039.TabIndex = 529
+        Me.txtDD10Field014.Location = New System.Drawing.Point(164, 389)
+        Me.txtDD10Field014.Name = "txtDD10Field014"
+        Me.txtDD10Field014.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD10Field014.TabIndex = 529
         '
-        'txtFlag09Field038
+        'txtDD09Field013
         '
-        Me.txtFlag09Field038.Location = New System.Drawing.Point(164, 363)
-        Me.txtFlag09Field038.Name = "txtFlag09Field038"
-        Me.txtFlag09Field038.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag09Field038.TabIndex = 528
+        Me.txtDD09Field013.Location = New System.Drawing.Point(164, 363)
+        Me.txtDD09Field013.Name = "txtDD09Field013"
+        Me.txtDD09Field013.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD09Field013.TabIndex = 528
         '
-        'txtFlag08Field037
+        'txtDD08Field012
         '
-        Me.txtFlag08Field037.Location = New System.Drawing.Point(164, 337)
-        Me.txtFlag08Field037.Name = "txtFlag08Field037"
-        Me.txtFlag08Field037.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag08Field037.TabIndex = 527
+        Me.txtDD08Field012.Location = New System.Drawing.Point(164, 337)
+        Me.txtDD08Field012.Name = "txtDD08Field012"
+        Me.txtDD08Field012.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD08Field012.TabIndex = 527
         '
-        'txtFlag07Field036
+        'txtDD07Field011
         '
-        Me.txtFlag07Field036.Location = New System.Drawing.Point(164, 311)
-        Me.txtFlag07Field036.Name = "txtFlag07Field036"
-        Me.txtFlag07Field036.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag07Field036.TabIndex = 526
+        Me.txtDD07Field011.Location = New System.Drawing.Point(164, 311)
+        Me.txtDD07Field011.Name = "txtDD07Field011"
+        Me.txtDD07Field011.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD07Field011.TabIndex = 526
         '
-        'txtFlag06Field035
+        'txtDD06Field010
         '
-        Me.txtFlag06Field035.Location = New System.Drawing.Point(164, 285)
-        Me.txtFlag06Field035.Name = "txtFlag06Field035"
-        Me.txtFlag06Field035.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag06Field035.TabIndex = 525
+        Me.txtDD06Field010.Location = New System.Drawing.Point(164, 285)
+        Me.txtDD06Field010.Name = "txtDD06Field010"
+        Me.txtDD06Field010.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD06Field010.TabIndex = 525
         '
-        'txtFlag05Field034
+        'txtDD05Field009
         '
-        Me.txtFlag05Field034.Location = New System.Drawing.Point(164, 259)
-        Me.txtFlag05Field034.Name = "txtFlag05Field034"
-        Me.txtFlag05Field034.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag05Field034.TabIndex = 524
+        Me.txtDD05Field009.Location = New System.Drawing.Point(164, 259)
+        Me.txtDD05Field009.Name = "txtDD05Field009"
+        Me.txtDD05Field009.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD05Field009.TabIndex = 524
         '
-        'txtFlag04Field033
+        'txtDD04Field008
         '
-        Me.txtFlag04Field033.Location = New System.Drawing.Point(164, 233)
-        Me.txtFlag04Field033.Name = "txtFlag04Field033"
-        Me.txtFlag04Field033.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag04Field033.TabIndex = 523
+        Me.txtDD04Field008.Location = New System.Drawing.Point(164, 233)
+        Me.txtDD04Field008.Name = "txtDD04Field008"
+        Me.txtDD04Field008.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD04Field008.TabIndex = 523
         '
-        'txtFlag03Field032
+        'txtDD03Field007
         '
-        Me.txtFlag03Field032.Location = New System.Drawing.Point(164, 207)
-        Me.txtFlag03Field032.Name = "txtFlag03Field032"
-        Me.txtFlag03Field032.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag03Field032.TabIndex = 522
+        Me.txtDD03Field007.Location = New System.Drawing.Point(164, 207)
+        Me.txtDD03Field007.Name = "txtDD03Field007"
+        Me.txtDD03Field007.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD03Field007.TabIndex = 522
         '
-        'txtFlag02Field031
+        'txtDD02Field006
         '
-        Me.txtFlag02Field031.Location = New System.Drawing.Point(164, 181)
-        Me.txtFlag02Field031.Name = "txtFlag02Field031"
-        Me.txtFlag02Field031.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag02Field031.TabIndex = 521
+        Me.txtDD02Field006.Location = New System.Drawing.Point(164, 181)
+        Me.txtDD02Field006.Name = "txtDD02Field006"
+        Me.txtDD02Field006.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD02Field006.TabIndex = 521
         '
-        'txtFlag01Field030
+        'txtDD01Field005
         '
-        Me.txtFlag01Field030.Location = New System.Drawing.Point(164, 155)
-        Me.txtFlag01Field030.Name = "txtFlag01Field030"
-        Me.txtFlag01Field030.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag01Field030.TabIndex = 520
+        Me.txtDD01Field005.Location = New System.Drawing.Point(164, 155)
+        Me.txtDD01Field005.Name = "txtDD01Field005"
+        Me.txtDD01Field005.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD01Field005.TabIndex = 520
         '
-        'txtFlag00Field029
+        'txtDD00Field004
         '
-        Me.txtFlag00Field029.Location = New System.Drawing.Point(164, 128)
-        Me.txtFlag00Field029.Name = "txtFlag00Field029"
-        Me.txtFlag00Field029.Size = New System.Drawing.Size(33, 20)
-        Me.txtFlag00Field029.TabIndex = 519
+        Me.txtDD00Field004.Location = New System.Drawing.Point(164, 128)
+        Me.txtDD00Field004.Name = "txtDD00Field004"
+        Me.txtDD00Field004.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD00Field004.TabIndex = 519
         '
-        'txtVal_23Field028
+        'txt_ddff23
         '
-        Me.txtVal_23Field028.Location = New System.Drawing.Point(370, 415)
-        Me.txtVal_23Field028.Name = "txtVal_23Field028"
-        Me.txtVal_23Field028.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_23Field028.TabIndex = 518
+        Me.txt_ddff23.Location = New System.Drawing.Point(370, 415)
+        Me.txt_ddff23.Name = "txt_ddff23"
+        Me.txt_ddff23.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff23.TabIndex = 27
         '
-        'txtVal_22Field027
+        'txt_ddff22
         '
-        Me.txtVal_22Field027.Location = New System.Drawing.Point(370, 389)
-        Me.txtVal_22Field027.Name = "txtVal_22Field027"
-        Me.txtVal_22Field027.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_22Field027.TabIndex = 517
+        Me.txt_ddff22.Location = New System.Drawing.Point(370, 389)
+        Me.txt_ddff22.Name = "txt_ddff22"
+        Me.txt_ddff22.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff22.TabIndex = 26
         '
-        'txtVal_21Field026
+        'txt_ddff21
         '
-        Me.txtVal_21Field026.Location = New System.Drawing.Point(370, 363)
-        Me.txtVal_21Field026.Name = "txtVal_21Field026"
-        Me.txtVal_21Field026.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_21Field026.TabIndex = 516
+        Me.txt_ddff21.Location = New System.Drawing.Point(370, 363)
+        Me.txt_ddff21.Name = "txt_ddff21"
+        Me.txt_ddff21.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff21.TabIndex = 25
         '
-        'txtVal_20Field025
+        'txt_ddff20
         '
-        Me.txtVal_20Field025.Location = New System.Drawing.Point(370, 337)
-        Me.txtVal_20Field025.Name = "txtVal_20Field025"
-        Me.txtVal_20Field025.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_20Field025.TabIndex = 515
+        Me.txt_ddff20.Location = New System.Drawing.Point(370, 337)
+        Me.txt_ddff20.Name = "txt_ddff20"
+        Me.txt_ddff20.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff20.TabIndex = 24
         '
-        'txtVal_19Field024
+        'txt_ddff19
         '
-        Me.txtVal_19Field024.Location = New System.Drawing.Point(370, 311)
-        Me.txtVal_19Field024.Name = "txtVal_19Field024"
-        Me.txtVal_19Field024.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_19Field024.TabIndex = 514
+        Me.txt_ddff19.Location = New System.Drawing.Point(370, 311)
+        Me.txt_ddff19.Name = "txt_ddff19"
+        Me.txt_ddff19.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff19.TabIndex = 23
         '
-        'txtVal_18Field023
+        'txt_ddff18
         '
-        Me.txtVal_18Field023.Location = New System.Drawing.Point(370, 285)
-        Me.txtVal_18Field023.Name = "txtVal_18Field023"
-        Me.txtVal_18Field023.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_18Field023.TabIndex = 513
+        Me.txt_ddff18.Location = New System.Drawing.Point(370, 285)
+        Me.txt_ddff18.Name = "txt_ddff18"
+        Me.txt_ddff18.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff18.TabIndex = 22
         '
-        'txtVal_17Field022
+        'txt_ddff17
         '
-        Me.txtVal_17Field022.Location = New System.Drawing.Point(369, 259)
-        Me.txtVal_17Field022.Name = "txtVal_17Field022"
-        Me.txtVal_17Field022.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_17Field022.TabIndex = 512
+        Me.txt_ddff17.Location = New System.Drawing.Point(369, 259)
+        Me.txt_ddff17.Name = "txt_ddff17"
+        Me.txt_ddff17.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff17.TabIndex = 21
         '
-        'txtVal_16Field021
+        'txt_ddff16
         '
-        Me.txtVal_16Field021.Location = New System.Drawing.Point(369, 233)
-        Me.txtVal_16Field021.Name = "txtVal_16Field021"
-        Me.txtVal_16Field021.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_16Field021.TabIndex = 511
+        Me.txt_ddff16.Location = New System.Drawing.Point(369, 233)
+        Me.txt_ddff16.Name = "txt_ddff16"
+        Me.txt_ddff16.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff16.TabIndex = 20
         '
-        'txtVal_15Field020
+        'txt_ddff15
         '
-        Me.txtVal_15Field020.Location = New System.Drawing.Point(370, 207)
-        Me.txtVal_15Field020.Name = "txtVal_15Field020"
-        Me.txtVal_15Field020.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_15Field020.TabIndex = 510
+        Me.txt_ddff15.Location = New System.Drawing.Point(370, 207)
+        Me.txt_ddff15.Name = "txt_ddff15"
+        Me.txt_ddff15.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff15.TabIndex = 19
         '
-        'txtVal_14Field019
+        'txt_ddff14
         '
-        Me.txtVal_14Field019.Location = New System.Drawing.Point(370, 181)
-        Me.txtVal_14Field019.Name = "txtVal_14Field019"
-        Me.txtVal_14Field019.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_14Field019.TabIndex = 509
+        Me.txt_ddff14.Location = New System.Drawing.Point(370, 181)
+        Me.txt_ddff14.Name = "txt_ddff14"
+        Me.txt_ddff14.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff14.TabIndex = 18
         '
-        'txtVal_13Field018
+        'txt_ddff13
         '
-        Me.txtVal_13Field018.Location = New System.Drawing.Point(369, 155)
-        Me.txtVal_13Field018.Name = "txtVal_13Field018"
-        Me.txtVal_13Field018.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_13Field018.TabIndex = 508
+        Me.txt_ddff13.Location = New System.Drawing.Point(369, 155)
+        Me.txt_ddff13.Name = "txt_ddff13"
+        Me.txt_ddff13.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff13.TabIndex = 17
         '
-        'txtVal_12Field017
+        'txt_ddff12
         '
-        Me.txtVal_12Field017.Location = New System.Drawing.Point(370, 129)
-        Me.txtVal_12Field017.Name = "txtVal_12Field017"
-        Me.txtVal_12Field017.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_12Field017.TabIndex = 507
+        Me.txt_ddff12.Location = New System.Drawing.Point(370, 129)
+        Me.txt_ddff12.Name = "txt_ddff12"
+        Me.txt_ddff12.Size = New System.Drawing.Size(68, 20)
+        Me.txt_ddff12.TabIndex = 16
         '
-        'txtVal_11Field016
+        'txt_ddff11
         '
-        Me.txtVal_11Field016.Location = New System.Drawing.Point(101, 415)
-        Me.txtVal_11Field016.Name = "txtVal_11Field016"
-        Me.txtVal_11Field016.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_11Field016.TabIndex = 506
+        Me.txt_ddff11.Location = New System.Drawing.Point(101, 415)
+        Me.txt_ddff11.Name = "txt_ddff11"
+        Me.txt_ddff11.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff11.TabIndex = 15
         '
-        'txtVal_10Field015
+        'txt_ddff10
         '
-        Me.txtVal_10Field015.Location = New System.Drawing.Point(101, 389)
-        Me.txtVal_10Field015.Name = "txtVal_10Field015"
-        Me.txtVal_10Field015.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_10Field015.TabIndex = 505
+        Me.txt_ddff10.Location = New System.Drawing.Point(101, 389)
+        Me.txt_ddff10.Name = "txt_ddff10"
+        Me.txt_ddff10.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff10.TabIndex = 14
         '
-        'txtVal_09Field014
+        'txt_ddff09
         '
-        Me.txtVal_09Field014.Location = New System.Drawing.Point(101, 363)
-        Me.txtVal_09Field014.Name = "txtVal_09Field014"
-        Me.txtVal_09Field014.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_09Field014.TabIndex = 504
+        Me.txt_ddff09.Location = New System.Drawing.Point(101, 363)
+        Me.txt_ddff09.Name = "txt_ddff09"
+        Me.txt_ddff09.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff09.TabIndex = 13
         '
-        'txtVal_08Field013
+        'txt_ddff08
         '
-        Me.txtVal_08Field013.Location = New System.Drawing.Point(101, 337)
-        Me.txtVal_08Field013.Name = "txtVal_08Field013"
-        Me.txtVal_08Field013.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_08Field013.TabIndex = 503
+        Me.txt_ddff08.Location = New System.Drawing.Point(101, 337)
+        Me.txt_ddff08.Name = "txt_ddff08"
+        Me.txt_ddff08.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff08.TabIndex = 12
         '
-        'txtVal_07Field012
+        'txt_ddff07
         '
-        Me.txtVal_07Field012.Location = New System.Drawing.Point(101, 311)
-        Me.txtVal_07Field012.Name = "txtVal_07Field012"
-        Me.txtVal_07Field012.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_07Field012.TabIndex = 502
+        Me.txt_ddff07.Location = New System.Drawing.Point(101, 311)
+        Me.txt_ddff07.Name = "txt_ddff07"
+        Me.txt_ddff07.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff07.TabIndex = 11
         '
-        'txtVal_06Field011
+        'txt_ddff06
         '
-        Me.txtVal_06Field011.Location = New System.Drawing.Point(101, 285)
-        Me.txtVal_06Field011.Name = "txtVal_06Field011"
-        Me.txtVal_06Field011.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_06Field011.TabIndex = 501
+        Me.txt_ddff06.Location = New System.Drawing.Point(101, 285)
+        Me.txt_ddff06.Name = "txt_ddff06"
+        Me.txt_ddff06.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff06.TabIndex = 10
         '
-        'txtVal_05Field010
+        'txt_ddff05
         '
-        Me.txtVal_05Field010.Location = New System.Drawing.Point(101, 259)
-        Me.txtVal_05Field010.Name = "txtVal_05Field010"
-        Me.txtVal_05Field010.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_05Field010.TabIndex = 500
+        Me.txt_ddff05.Location = New System.Drawing.Point(101, 259)
+        Me.txt_ddff05.Name = "txt_ddff05"
+        Me.txt_ddff05.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff05.TabIndex = 9
         '
-        'txtVal_04Field009
+        'txt_ddff04
         '
-        Me.txtVal_04Field009.Location = New System.Drawing.Point(101, 233)
-        Me.txtVal_04Field009.Name = "txtVal_04Field009"
-        Me.txtVal_04Field009.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_04Field009.TabIndex = 499
+        Me.txt_ddff04.Location = New System.Drawing.Point(101, 233)
+        Me.txt_ddff04.Name = "txt_ddff04"
+        Me.txt_ddff04.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff04.TabIndex = 8
         '
-        'txtVal_03Field008
+        'txt_ddff03
         '
-        Me.txtVal_03Field008.Location = New System.Drawing.Point(101, 207)
-        Me.txtVal_03Field008.Name = "txtVal_03Field008"
-        Me.txtVal_03Field008.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_03Field008.TabIndex = 498
+        Me.txt_ddff03.Location = New System.Drawing.Point(101, 207)
+        Me.txt_ddff03.Name = "txt_ddff03"
+        Me.txt_ddff03.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff03.TabIndex = 7
         '
-        'txtVal_02Field007
+        'txt_ddff02
         '
-        Me.txtVal_02Field007.Location = New System.Drawing.Point(101, 181)
-        Me.txtVal_02Field007.Name = "txtVal_02Field007"
-        Me.txtVal_02Field007.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_02Field007.TabIndex = 497
+        Me.txt_ddff02.Location = New System.Drawing.Point(101, 181)
+        Me.txt_ddff02.Name = "txt_ddff02"
+        Me.txt_ddff02.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff02.TabIndex = 6
         '
-        'txtVal_01Field006
+        'txt_ddff01
         '
-        Me.txtVal_01Field006.Location = New System.Drawing.Point(101, 155)
-        Me.txtVal_01Field006.Name = "txtVal_01Field006"
-        Me.txtVal_01Field006.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_01Field006.TabIndex = 496
+        Me.txt_ddff01.Location = New System.Drawing.Point(101, 155)
+        Me.txt_ddff01.Name = "txt_ddff01"
+        Me.txt_ddff01.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff01.TabIndex = 5
         '
         'Label7
         '
@@ -810,12 +810,12 @@ Partial Class formHourlyWind
         Me.Label6.TabIndex = 494
         Me.Label6.Text = "Hour"
         '
-        'txtVal_00Field005
+        'txt_ddff00
         '
-        Me.txtVal_00Field005.Location = New System.Drawing.Point(101, 129)
-        Me.txtVal_00Field005.Name = "txtVal_00Field005"
-        Me.txtVal_00Field005.Size = New System.Drawing.Size(57, 20)
-        Me.txtVal_00Field005.TabIndex = 491
+        Me.txt_ddff00.Location = New System.Drawing.Point(101, 129)
+        Me.txt_ddff00.Name = "txt_ddff00"
+        Me.txt_ddff00.Size = New System.Drawing.Size(57, 20)
+        Me.txt_ddff00.TabIndex = 4
         '
         'btnUpload
         '
@@ -859,7 +859,7 @@ Partial Class formHourlyWind
         Me.cboStation.Location = New System.Drawing.Point(61, 31)
         Me.cboStation.Name = "cboStation"
         Me.cboStation.Size = New System.Drawing.Size(202, 21)
-        Me.cboStation.TabIndex = 468
+        Me.cboStation.TabIndex = 0
         '
         'Label2
         '
@@ -886,7 +886,7 @@ Partial Class formHourlyWind
         Me.cboMonth.Location = New System.Drawing.Point(417, 31)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
-        Me.cboMonth.TabIndex = 470
+        Me.cboMonth.TabIndex = 2
         '
         'cboDay
         '
@@ -895,7 +895,7 @@ Partial Class formHourlyWind
         Me.cboDay.Location = New System.Drawing.Point(543, 32)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
-        Me.cboDay.TabIndex = 471
+        Me.cboDay.TabIndex = 3
         '
         'btnHelp
         '
@@ -922,7 +922,7 @@ Partial Class formHourlyWind
         Me.btnCommit.Location = New System.Drawing.Point(109, 505)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 474
+        Me.btnCommit.TabIndex = 29
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -1014,7 +1014,7 @@ Partial Class formHourlyWind
         Me.txtYear.Location = New System.Drawing.Point(303, 32)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
-        Me.txtYear.TabIndex = 469
+        Me.txtYear.TabIndex = 1
         '
         'Label3
         '
@@ -1038,353 +1038,357 @@ Partial Class formHourlyWind
         '
         'txtDirectionDigits
         '
+        Me.txtDirectionDigits.Enabled = False
         Me.txtDirectionDigits.Location = New System.Drawing.Point(382, 75)
         Me.txtDirectionDigits.Name = "txtDirectionDigits"
         Me.txtDirectionDigits.Size = New System.Drawing.Size(29, 20)
         Me.txtDirectionDigits.TabIndex = 579
+        Me.txtDirectionDigits.Text = "2"
         '
         'txtSpeedDigits
         '
+        Me.txtSpeedDigits.Enabled = False
         Me.txtSpeedDigits.Location = New System.Drawing.Point(553, 75)
         Me.txtSpeedDigits.Name = "txtSpeedDigits"
         Me.txtSpeedDigits.Size = New System.Drawing.Size(29, 20)
         Me.txtSpeedDigits.TabIndex = 580
+        Me.txtSpeedDigits.Text = "2"
         '
-        'TextBox4
+        'txtFlag11Field039
         '
-        Me.TextBox4.Location = New System.Drawing.Point(242, 415)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox4.TabIndex = 593
+        Me.txtFlag11Field039.Location = New System.Drawing.Point(242, 415)
+        Me.txtFlag11Field039.Name = "txtFlag11Field039"
+        Me.txtFlag11Field039.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag11Field039.TabIndex = 593
         '
-        'TextBox5
+        'txtFlag10Field038
         '
-        Me.TextBox5.Location = New System.Drawing.Point(242, 389)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox5.TabIndex = 592
+        Me.txtFlag10Field038.Location = New System.Drawing.Point(242, 389)
+        Me.txtFlag10Field038.Name = "txtFlag10Field038"
+        Me.txtFlag10Field038.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag10Field038.TabIndex = 592
         '
-        'TextBox6
+        'txtFlag09Field037
         '
-        Me.TextBox6.Location = New System.Drawing.Point(242, 363)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox6.TabIndex = 591
+        Me.txtFlag09Field037.Location = New System.Drawing.Point(242, 363)
+        Me.txtFlag09Field037.Name = "txtFlag09Field037"
+        Me.txtFlag09Field037.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag09Field037.TabIndex = 591
         '
-        'TextBox7
+        'txtFlag08Field036
         '
-        Me.TextBox7.Location = New System.Drawing.Point(242, 337)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox7.TabIndex = 590
+        Me.txtFlag08Field036.Location = New System.Drawing.Point(242, 337)
+        Me.txtFlag08Field036.Name = "txtFlag08Field036"
+        Me.txtFlag08Field036.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag08Field036.TabIndex = 590
         '
-        'TextBox8
+        'txtFlag07Field035
         '
-        Me.TextBox8.Location = New System.Drawing.Point(242, 311)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox8.TabIndex = 589
+        Me.txtFlag07Field035.Location = New System.Drawing.Point(242, 311)
+        Me.txtFlag07Field035.Name = "txtFlag07Field035"
+        Me.txtFlag07Field035.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag07Field035.TabIndex = 589
         '
-        'TextBox9
+        'txtFlag06Field034
         '
-        Me.TextBox9.Location = New System.Drawing.Point(242, 285)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox9.TabIndex = 588
+        Me.txtFlag06Field034.Location = New System.Drawing.Point(242, 285)
+        Me.txtFlag06Field034.Name = "txtFlag06Field034"
+        Me.txtFlag06Field034.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag06Field034.TabIndex = 588
         '
-        'TextBox10
+        'txtFlag05Field033
         '
-        Me.TextBox10.Location = New System.Drawing.Point(242, 259)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox10.TabIndex = 587
+        Me.txtFlag05Field033.Location = New System.Drawing.Point(242, 259)
+        Me.txtFlag05Field033.Name = "txtFlag05Field033"
+        Me.txtFlag05Field033.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag05Field033.TabIndex = 587
         '
-        'TextBox11
+        'txtFlag04Field032
         '
-        Me.TextBox11.Location = New System.Drawing.Point(242, 233)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox11.TabIndex = 586
+        Me.txtFlag04Field032.Location = New System.Drawing.Point(242, 233)
+        Me.txtFlag04Field032.Name = "txtFlag04Field032"
+        Me.txtFlag04Field032.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag04Field032.TabIndex = 586
         '
-        'TextBox12
+        'txtFlag03Field031
         '
-        Me.TextBox12.Location = New System.Drawing.Point(242, 207)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox12.TabIndex = 585
+        Me.txtFlag03Field031.Location = New System.Drawing.Point(242, 207)
+        Me.txtFlag03Field031.Name = "txtFlag03Field031"
+        Me.txtFlag03Field031.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag03Field031.TabIndex = 585
         '
-        'TextBox13
+        'txtFlag02Field030
         '
-        Me.TextBox13.Location = New System.Drawing.Point(242, 181)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox13.TabIndex = 584
+        Me.txtFlag02Field030.Location = New System.Drawing.Point(242, 181)
+        Me.txtFlag02Field030.Name = "txtFlag02Field030"
+        Me.txtFlag02Field030.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag02Field030.TabIndex = 584
         '
-        'TextBox14
+        'txtFlag01Field029
         '
-        Me.TextBox14.Location = New System.Drawing.Point(242, 155)
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox14.TabIndex = 583
+        Me.txtFlag01Field029.Location = New System.Drawing.Point(242, 155)
+        Me.txtFlag01Field029.Name = "txtFlag01Field029"
+        Me.txtFlag01Field029.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag01Field029.TabIndex = 583
         '
-        'TextBox15
+        'txtFlag00Field028
         '
-        Me.TextBox15.Location = New System.Drawing.Point(242, 129)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(27, 20)
-        Me.TextBox15.TabIndex = 582
+        Me.txtFlag00Field028.Location = New System.Drawing.Point(242, 129)
+        Me.txtFlag00Field028.Name = "txtFlag00Field028"
+        Me.txtFlag00Field028.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag00Field028.TabIndex = 582
         '
-        'TextBox3
+        'txtFF11Field063
         '
-        Me.TextBox3.Location = New System.Drawing.Point(203, 416)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox3.TabIndex = 605
+        Me.txtFF11Field063.Location = New System.Drawing.Point(203, 416)
+        Me.txtFF11Field063.Name = "txtFF11Field063"
+        Me.txtFF11Field063.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF11Field063.TabIndex = 605
         '
-        'TextBox16
+        'txtFF10Field062
         '
-        Me.TextBox16.Location = New System.Drawing.Point(203, 390)
-        Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox16.TabIndex = 604
+        Me.txtFF10Field062.Location = New System.Drawing.Point(203, 390)
+        Me.txtFF10Field062.Name = "txtFF10Field062"
+        Me.txtFF10Field062.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF10Field062.TabIndex = 604
         '
-        'TextBox17
+        'txtFF09Field061
         '
-        Me.TextBox17.Location = New System.Drawing.Point(203, 364)
-        Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox17.TabIndex = 603
+        Me.txtFF09Field061.Location = New System.Drawing.Point(203, 364)
+        Me.txtFF09Field061.Name = "txtFF09Field061"
+        Me.txtFF09Field061.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF09Field061.TabIndex = 603
         '
-        'TextBox18
+        'txtFF08Field060
         '
-        Me.TextBox18.Location = New System.Drawing.Point(203, 338)
-        Me.TextBox18.Name = "TextBox18"
-        Me.TextBox18.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox18.TabIndex = 602
+        Me.txtFF08Field060.Location = New System.Drawing.Point(203, 338)
+        Me.txtFF08Field060.Name = "txtFF08Field060"
+        Me.txtFF08Field060.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF08Field060.TabIndex = 602
         '
-        'TextBox19
+        'txtFF07Field059
         '
-        Me.TextBox19.Location = New System.Drawing.Point(203, 312)
-        Me.TextBox19.Name = "TextBox19"
-        Me.TextBox19.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox19.TabIndex = 601
+        Me.txtFF07Field059.Location = New System.Drawing.Point(203, 312)
+        Me.txtFF07Field059.Name = "txtFF07Field059"
+        Me.txtFF07Field059.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF07Field059.TabIndex = 601
         '
-        'TextBox20
+        'txtFF06Field058
         '
-        Me.TextBox20.Location = New System.Drawing.Point(203, 286)
-        Me.TextBox20.Name = "TextBox20"
-        Me.TextBox20.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox20.TabIndex = 600
+        Me.txtFF06Field058.Location = New System.Drawing.Point(203, 286)
+        Me.txtFF06Field058.Name = "txtFF06Field058"
+        Me.txtFF06Field058.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF06Field058.TabIndex = 600
         '
-        'TextBox21
+        'txtFF05Field057
         '
-        Me.TextBox21.Location = New System.Drawing.Point(203, 260)
-        Me.TextBox21.Name = "TextBox21"
-        Me.TextBox21.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox21.TabIndex = 599
+        Me.txtFF05Field057.Location = New System.Drawing.Point(203, 260)
+        Me.txtFF05Field057.Name = "txtFF05Field057"
+        Me.txtFF05Field057.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF05Field057.TabIndex = 599
         '
-        'TextBox22
+        'txtFF04Field056
         '
-        Me.TextBox22.Location = New System.Drawing.Point(203, 234)
-        Me.TextBox22.Name = "TextBox22"
-        Me.TextBox22.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox22.TabIndex = 598
+        Me.txtFF04Field056.Location = New System.Drawing.Point(203, 234)
+        Me.txtFF04Field056.Name = "txtFF04Field056"
+        Me.txtFF04Field056.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF04Field056.TabIndex = 598
         '
-        'TextBox23
+        'txtFF03Field055
         '
-        Me.TextBox23.Location = New System.Drawing.Point(203, 208)
-        Me.TextBox23.Name = "TextBox23"
-        Me.TextBox23.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox23.TabIndex = 597
+        Me.txtFF03Field055.Location = New System.Drawing.Point(203, 208)
+        Me.txtFF03Field055.Name = "txtFF03Field055"
+        Me.txtFF03Field055.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF03Field055.TabIndex = 597
         '
-        'TextBox24
+        'txtFF02Field054
         '
-        Me.TextBox24.Location = New System.Drawing.Point(203, 182)
-        Me.TextBox24.Name = "TextBox24"
-        Me.TextBox24.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox24.TabIndex = 596
+        Me.txtFF02Field054.Location = New System.Drawing.Point(203, 182)
+        Me.txtFF02Field054.Name = "txtFF02Field054"
+        Me.txtFF02Field054.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF02Field054.TabIndex = 596
         '
-        'TextBox25
+        'txtFF01Field053
         '
-        Me.TextBox25.Location = New System.Drawing.Point(203, 156)
-        Me.TextBox25.Name = "TextBox25"
-        Me.TextBox25.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox25.TabIndex = 595
+        Me.txtFF01Field053.Location = New System.Drawing.Point(203, 156)
+        Me.txtFF01Field053.Name = "txtFF01Field053"
+        Me.txtFF01Field053.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF01Field053.TabIndex = 595
         '
-        'TextBox26
+        'txtFF00Field052
         '
-        Me.TextBox26.Location = New System.Drawing.Point(203, 129)
-        Me.TextBox26.Name = "TextBox26"
-        Me.TextBox26.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox26.TabIndex = 594
+        Me.txtFF00Field052.Location = New System.Drawing.Point(203, 129)
+        Me.txtFF00Field052.Name = "txtFF00Field052"
+        Me.txtFF00Field052.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF00Field052.TabIndex = 594
         '
-        'TextBox27
+        'txtFF23Field075
         '
-        Me.TextBox27.Location = New System.Drawing.Point(483, 416)
-        Me.TextBox27.Name = "TextBox27"
-        Me.TextBox27.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox27.TabIndex = 629
+        Me.txtFF23Field075.Location = New System.Drawing.Point(483, 416)
+        Me.txtFF23Field075.Name = "txtFF23Field075"
+        Me.txtFF23Field075.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF23Field075.TabIndex = 629
         '
-        'TextBox28
+        'txtFF22Field074
         '
-        Me.TextBox28.Location = New System.Drawing.Point(483, 390)
-        Me.TextBox28.Name = "TextBox28"
-        Me.TextBox28.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox28.TabIndex = 628
+        Me.txtFF22Field074.Location = New System.Drawing.Point(483, 390)
+        Me.txtFF22Field074.Name = "txtFF22Field074"
+        Me.txtFF22Field074.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF22Field074.TabIndex = 628
         '
-        'TextBox29
+        'txtFF21Field073
         '
-        Me.TextBox29.Location = New System.Drawing.Point(483, 364)
-        Me.TextBox29.Name = "TextBox29"
-        Me.TextBox29.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox29.TabIndex = 627
+        Me.txtFF21Field073.Location = New System.Drawing.Point(483, 364)
+        Me.txtFF21Field073.Name = "txtFF21Field073"
+        Me.txtFF21Field073.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF21Field073.TabIndex = 627
         '
-        'TextBox30
+        'txtFF20Field072
         '
-        Me.TextBox30.Location = New System.Drawing.Point(483, 338)
-        Me.TextBox30.Name = "TextBox30"
-        Me.TextBox30.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox30.TabIndex = 626
+        Me.txtFF20Field072.Location = New System.Drawing.Point(483, 338)
+        Me.txtFF20Field072.Name = "txtFF20Field072"
+        Me.txtFF20Field072.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF20Field072.TabIndex = 626
         '
-        'TextBox31
+        'txtFF19Field071
         '
-        Me.TextBox31.Location = New System.Drawing.Point(483, 312)
-        Me.TextBox31.Name = "TextBox31"
-        Me.TextBox31.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox31.TabIndex = 625
+        Me.txtFF19Field071.Location = New System.Drawing.Point(483, 312)
+        Me.txtFF19Field071.Name = "txtFF19Field071"
+        Me.txtFF19Field071.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF19Field071.TabIndex = 625
         '
-        'TextBox32
+        'txtFF18Field070
         '
-        Me.TextBox32.Location = New System.Drawing.Point(483, 286)
-        Me.TextBox32.Name = "TextBox32"
-        Me.TextBox32.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox32.TabIndex = 624
+        Me.txtFF18Field070.Location = New System.Drawing.Point(483, 286)
+        Me.txtFF18Field070.Name = "txtFF18Field070"
+        Me.txtFF18Field070.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF18Field070.TabIndex = 624
         '
-        'TextBox33
+        'txtFF17Field069
         '
-        Me.TextBox33.Location = New System.Drawing.Point(483, 260)
-        Me.TextBox33.Name = "TextBox33"
-        Me.TextBox33.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox33.TabIndex = 623
+        Me.txtFF17Field069.Location = New System.Drawing.Point(483, 260)
+        Me.txtFF17Field069.Name = "txtFF17Field069"
+        Me.txtFF17Field069.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF17Field069.TabIndex = 623
         '
-        'TextBox34
+        'txtFF16Field068
         '
-        Me.TextBox34.Location = New System.Drawing.Point(483, 234)
-        Me.TextBox34.Name = "TextBox34"
-        Me.TextBox34.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox34.TabIndex = 622
+        Me.txtFF16Field068.Location = New System.Drawing.Point(483, 234)
+        Me.txtFF16Field068.Name = "txtFF16Field068"
+        Me.txtFF16Field068.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF16Field068.TabIndex = 622
         '
-        'TextBox35
+        'txtFF15Field067
         '
-        Me.TextBox35.Location = New System.Drawing.Point(483, 208)
-        Me.TextBox35.Name = "TextBox35"
-        Me.TextBox35.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox35.TabIndex = 621
+        Me.txtFF15Field067.Location = New System.Drawing.Point(483, 208)
+        Me.txtFF15Field067.Name = "txtFF15Field067"
+        Me.txtFF15Field067.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF15Field067.TabIndex = 621
         '
-        'TextBox36
+        'txtFF14Field066
         '
-        Me.TextBox36.Location = New System.Drawing.Point(483, 182)
-        Me.TextBox36.Name = "TextBox36"
-        Me.TextBox36.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox36.TabIndex = 620
+        Me.txtFF14Field066.Location = New System.Drawing.Point(483, 182)
+        Me.txtFF14Field066.Name = "txtFF14Field066"
+        Me.txtFF14Field066.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF14Field066.TabIndex = 620
         '
-        'TextBox37
+        'txtFF13Field065
         '
-        Me.TextBox37.Location = New System.Drawing.Point(483, 156)
-        Me.TextBox37.Name = "TextBox37"
-        Me.TextBox37.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox37.TabIndex = 619
+        Me.txtFF13Field065.Location = New System.Drawing.Point(483, 156)
+        Me.txtFF13Field065.Name = "txtFF13Field065"
+        Me.txtFF13Field065.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF13Field065.TabIndex = 619
         '
-        'TextBox38
+        'txtFF12Field064
         '
-        Me.TextBox38.Location = New System.Drawing.Point(483, 129)
-        Me.TextBox38.Name = "TextBox38"
-        Me.TextBox38.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox38.TabIndex = 618
+        Me.txtFF12Field064.Location = New System.Drawing.Point(483, 129)
+        Me.txtFF12Field064.Name = "txtFF12Field064"
+        Me.txtFF12Field064.Size = New System.Drawing.Size(33, 20)
+        Me.txtFF12Field064.TabIndex = 618
         '
-        'TextBox39
+        'txtDD23Field027
         '
-        Me.TextBox39.Location = New System.Drawing.Point(444, 415)
-        Me.TextBox39.Name = "TextBox39"
-        Me.TextBox39.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox39.TabIndex = 617
+        Me.txtDD23Field027.Location = New System.Drawing.Point(444, 415)
+        Me.txtDD23Field027.Name = "txtDD23Field027"
+        Me.txtDD23Field027.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD23Field027.TabIndex = 617
         '
-        'TextBox40
+        'txtDD22Field026
         '
-        Me.TextBox40.Location = New System.Drawing.Point(444, 389)
-        Me.TextBox40.Name = "TextBox40"
-        Me.TextBox40.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox40.TabIndex = 616
+        Me.txtDD22Field026.Location = New System.Drawing.Point(444, 389)
+        Me.txtDD22Field026.Name = "txtDD22Field026"
+        Me.txtDD22Field026.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD22Field026.TabIndex = 616
         '
-        'TextBox41
+        'txtDD21Field025
         '
-        Me.TextBox41.Location = New System.Drawing.Point(444, 363)
-        Me.TextBox41.Name = "TextBox41"
-        Me.TextBox41.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox41.TabIndex = 615
+        Me.txtDD21Field025.Location = New System.Drawing.Point(444, 363)
+        Me.txtDD21Field025.Name = "txtDD21Field025"
+        Me.txtDD21Field025.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD21Field025.TabIndex = 615
         '
-        'TextBox42
+        'txtDD20Field024
         '
-        Me.TextBox42.Location = New System.Drawing.Point(444, 337)
-        Me.TextBox42.Name = "TextBox42"
-        Me.TextBox42.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox42.TabIndex = 614
+        Me.txtDD20Field024.Location = New System.Drawing.Point(444, 337)
+        Me.txtDD20Field024.Name = "txtDD20Field024"
+        Me.txtDD20Field024.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD20Field024.TabIndex = 614
         '
-        'TextBox43
+        'txtDD19Field023
         '
-        Me.TextBox43.Location = New System.Drawing.Point(444, 311)
-        Me.TextBox43.Name = "TextBox43"
-        Me.TextBox43.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox43.TabIndex = 613
+        Me.txtDD19Field023.Location = New System.Drawing.Point(444, 311)
+        Me.txtDD19Field023.Name = "txtDD19Field023"
+        Me.txtDD19Field023.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD19Field023.TabIndex = 613
         '
-        'TextBox44
+        'txtDD18Field022
         '
-        Me.TextBox44.Location = New System.Drawing.Point(444, 285)
-        Me.TextBox44.Name = "TextBox44"
-        Me.TextBox44.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox44.TabIndex = 612
+        Me.txtDD18Field022.Location = New System.Drawing.Point(444, 285)
+        Me.txtDD18Field022.Name = "txtDD18Field022"
+        Me.txtDD18Field022.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD18Field022.TabIndex = 612
         '
-        'TextBox45
+        'txtDD17Field021
         '
-        Me.TextBox45.Location = New System.Drawing.Point(444, 259)
-        Me.TextBox45.Name = "TextBox45"
-        Me.TextBox45.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox45.TabIndex = 611
+        Me.txtDD17Field021.Location = New System.Drawing.Point(444, 259)
+        Me.txtDD17Field021.Name = "txtDD17Field021"
+        Me.txtDD17Field021.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD17Field021.TabIndex = 611
         '
-        'TextBox46
+        'txtDD16Field020
         '
-        Me.TextBox46.Location = New System.Drawing.Point(444, 233)
-        Me.TextBox46.Name = "TextBox46"
-        Me.TextBox46.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox46.TabIndex = 610
+        Me.txtDD16Field020.Location = New System.Drawing.Point(444, 233)
+        Me.txtDD16Field020.Name = "txtDD16Field020"
+        Me.txtDD16Field020.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD16Field020.TabIndex = 610
         '
-        'TextBox47
+        'txtDD15Field019
         '
-        Me.TextBox47.Location = New System.Drawing.Point(444, 207)
-        Me.TextBox47.Name = "TextBox47"
-        Me.TextBox47.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox47.TabIndex = 609
+        Me.txtDD15Field019.Location = New System.Drawing.Point(444, 207)
+        Me.txtDD15Field019.Name = "txtDD15Field019"
+        Me.txtDD15Field019.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD15Field019.TabIndex = 609
         '
-        'TextBox48
+        'txtDD14Field018
         '
-        Me.TextBox48.Location = New System.Drawing.Point(444, 181)
-        Me.TextBox48.Name = "TextBox48"
-        Me.TextBox48.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox48.TabIndex = 608
+        Me.txtDD14Field018.Location = New System.Drawing.Point(444, 181)
+        Me.txtDD14Field018.Name = "txtDD14Field018"
+        Me.txtDD14Field018.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD14Field018.TabIndex = 608
         '
-        'TextBox49
+        'txtDD13Field017
         '
-        Me.TextBox49.Location = New System.Drawing.Point(444, 155)
-        Me.TextBox49.Name = "TextBox49"
-        Me.TextBox49.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox49.TabIndex = 607
+        Me.txtDD13Field017.Location = New System.Drawing.Point(444, 155)
+        Me.txtDD13Field017.Name = "txtDD13Field017"
+        Me.txtDD13Field017.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD13Field017.TabIndex = 607
         '
-        'TextBox50
+        'txtDD12Field016
         '
-        Me.TextBox50.Location = New System.Drawing.Point(444, 128)
-        Me.TextBox50.Name = "TextBox50"
-        Me.TextBox50.Size = New System.Drawing.Size(33, 20)
-        Me.TextBox50.TabIndex = 606
+        Me.txtDD12Field016.Location = New System.Drawing.Point(444, 128)
+        Me.txtDD12Field016.Name = "txtDD12Field016"
+        Me.txtDD12Field016.Size = New System.Drawing.Size(33, 20)
+        Me.txtDD12Field016.TabIndex = 606
         '
         'Label38
         '
@@ -1441,54 +1445,54 @@ Partial Class formHourlyWind
         Me.Controls.Add(Me.Label40)
         Me.Controls.Add(Me.Label39)
         Me.Controls.Add(Me.Label38)
-        Me.Controls.Add(Me.TextBox27)
-        Me.Controls.Add(Me.TextBox28)
-        Me.Controls.Add(Me.TextBox29)
-        Me.Controls.Add(Me.TextBox30)
-        Me.Controls.Add(Me.TextBox31)
-        Me.Controls.Add(Me.TextBox32)
-        Me.Controls.Add(Me.TextBox33)
-        Me.Controls.Add(Me.TextBox34)
-        Me.Controls.Add(Me.TextBox35)
-        Me.Controls.Add(Me.TextBox36)
-        Me.Controls.Add(Me.TextBox37)
-        Me.Controls.Add(Me.TextBox38)
-        Me.Controls.Add(Me.TextBox39)
-        Me.Controls.Add(Me.TextBox40)
-        Me.Controls.Add(Me.TextBox41)
-        Me.Controls.Add(Me.TextBox42)
-        Me.Controls.Add(Me.TextBox43)
-        Me.Controls.Add(Me.TextBox44)
-        Me.Controls.Add(Me.TextBox45)
-        Me.Controls.Add(Me.TextBox46)
-        Me.Controls.Add(Me.TextBox47)
-        Me.Controls.Add(Me.TextBox48)
-        Me.Controls.Add(Me.TextBox49)
-        Me.Controls.Add(Me.TextBox50)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox16)
-        Me.Controls.Add(Me.TextBox17)
-        Me.Controls.Add(Me.TextBox18)
-        Me.Controls.Add(Me.TextBox19)
-        Me.Controls.Add(Me.TextBox20)
-        Me.Controls.Add(Me.TextBox21)
-        Me.Controls.Add(Me.TextBox22)
-        Me.Controls.Add(Me.TextBox23)
-        Me.Controls.Add(Me.TextBox24)
-        Me.Controls.Add(Me.TextBox25)
-        Me.Controls.Add(Me.TextBox26)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox5)
-        Me.Controls.Add(Me.TextBox6)
-        Me.Controls.Add(Me.TextBox7)
-        Me.Controls.Add(Me.TextBox8)
-        Me.Controls.Add(Me.TextBox9)
-        Me.Controls.Add(Me.TextBox10)
-        Me.Controls.Add(Me.TextBox11)
-        Me.Controls.Add(Me.TextBox12)
-        Me.Controls.Add(Me.TextBox13)
-        Me.Controls.Add(Me.TextBox14)
-        Me.Controls.Add(Me.TextBox15)
+        Me.Controls.Add(Me.txtFF23Field075)
+        Me.Controls.Add(Me.txtFF22Field074)
+        Me.Controls.Add(Me.txtFF21Field073)
+        Me.Controls.Add(Me.txtFF20Field072)
+        Me.Controls.Add(Me.txtFF19Field071)
+        Me.Controls.Add(Me.txtFF18Field070)
+        Me.Controls.Add(Me.txtFF17Field069)
+        Me.Controls.Add(Me.txtFF16Field068)
+        Me.Controls.Add(Me.txtFF15Field067)
+        Me.Controls.Add(Me.txtFF14Field066)
+        Me.Controls.Add(Me.txtFF13Field065)
+        Me.Controls.Add(Me.txtFF12Field064)
+        Me.Controls.Add(Me.txtDD23Field027)
+        Me.Controls.Add(Me.txtDD22Field026)
+        Me.Controls.Add(Me.txtDD21Field025)
+        Me.Controls.Add(Me.txtDD20Field024)
+        Me.Controls.Add(Me.txtDD19Field023)
+        Me.Controls.Add(Me.txtDD18Field022)
+        Me.Controls.Add(Me.txtDD17Field021)
+        Me.Controls.Add(Me.txtDD16Field020)
+        Me.Controls.Add(Me.txtDD15Field019)
+        Me.Controls.Add(Me.txtDD14Field018)
+        Me.Controls.Add(Me.txtDD13Field017)
+        Me.Controls.Add(Me.txtDD12Field016)
+        Me.Controls.Add(Me.txtFF11Field063)
+        Me.Controls.Add(Me.txtFF10Field062)
+        Me.Controls.Add(Me.txtFF09Field061)
+        Me.Controls.Add(Me.txtFF08Field060)
+        Me.Controls.Add(Me.txtFF07Field059)
+        Me.Controls.Add(Me.txtFF06Field058)
+        Me.Controls.Add(Me.txtFF05Field057)
+        Me.Controls.Add(Me.txtFF04Field056)
+        Me.Controls.Add(Me.txtFF03Field055)
+        Me.Controls.Add(Me.txtFF02Field054)
+        Me.Controls.Add(Me.txtFF01Field053)
+        Me.Controls.Add(Me.txtFF00Field052)
+        Me.Controls.Add(Me.txtFlag11Field039)
+        Me.Controls.Add(Me.txtFlag10Field038)
+        Me.Controls.Add(Me.txtFlag09Field037)
+        Me.Controls.Add(Me.txtFlag08Field036)
+        Me.Controls.Add(Me.txtFlag07Field035)
+        Me.Controls.Add(Me.txtFlag06Field034)
+        Me.Controls.Add(Me.txtFlag05Field033)
+        Me.Controls.Add(Me.txtFlag04Field032)
+        Me.Controls.Add(Me.txtFlag03Field031)
+        Me.Controls.Add(Me.txtFlag02Field030)
+        Me.Controls.Add(Me.txtFlag01Field029)
+        Me.Controls.Add(Me.txtFlag00Field028)
         Me.Controls.Add(Me.txtSpeedDigits)
         Me.Controls.Add(Me.txtDirectionDigits)
         Me.Controls.Add(Me.Label36)
@@ -1523,56 +1527,56 @@ Partial Class formHourlyWind
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.txtFlag23Field052)
-        Me.Controls.Add(Me.txtFlag22Field051)
-        Me.Controls.Add(Me.txtFlag21Field050)
-        Me.Controls.Add(Me.txtFlag20Field049)
-        Me.Controls.Add(Me.txtFlag19Field048)
-        Me.Controls.Add(Me.txtFlag18Field047)
-        Me.Controls.Add(Me.txtFlag17Field046)
-        Me.Controls.Add(Me.txtFlag16Field045)
-        Me.Controls.Add(Me.txtFlag15Field044)
-        Me.Controls.Add(Me.txtFlag14Field043)
-        Me.Controls.Add(Me.txtFlag13Field042)
-        Me.Controls.Add(Me.txtFlag12Field041)
-        Me.Controls.Add(Me.txtFlag11Field040)
-        Me.Controls.Add(Me.txtFlag10Field039)
-        Me.Controls.Add(Me.txtFlag09Field038)
-        Me.Controls.Add(Me.txtFlag08Field037)
-        Me.Controls.Add(Me.txtFlag07Field036)
-        Me.Controls.Add(Me.txtFlag06Field035)
-        Me.Controls.Add(Me.txtFlag05Field034)
-        Me.Controls.Add(Me.txtFlag04Field033)
-        Me.Controls.Add(Me.txtFlag03Field032)
-        Me.Controls.Add(Me.txtFlag02Field031)
-        Me.Controls.Add(Me.txtFlag01Field030)
-        Me.Controls.Add(Me.txtFlag00Field029)
-        Me.Controls.Add(Me.txtVal_23Field028)
-        Me.Controls.Add(Me.txtVal_22Field027)
-        Me.Controls.Add(Me.txtVal_21Field026)
-        Me.Controls.Add(Me.txtVal_20Field025)
-        Me.Controls.Add(Me.txtVal_19Field024)
-        Me.Controls.Add(Me.txtVal_18Field023)
-        Me.Controls.Add(Me.txtVal_17Field022)
-        Me.Controls.Add(Me.txtVal_16Field021)
-        Me.Controls.Add(Me.txtVal_15Field020)
-        Me.Controls.Add(Me.txtVal_14Field019)
-        Me.Controls.Add(Me.txtVal_13Field018)
-        Me.Controls.Add(Me.txtVal_12Field017)
-        Me.Controls.Add(Me.txtVal_11Field016)
-        Me.Controls.Add(Me.txtVal_10Field015)
-        Me.Controls.Add(Me.txtVal_09Field014)
-        Me.Controls.Add(Me.txtVal_08Field013)
-        Me.Controls.Add(Me.txtVal_07Field012)
-        Me.Controls.Add(Me.txtVal_06Field011)
-        Me.Controls.Add(Me.txtVal_05Field010)
-        Me.Controls.Add(Me.txtVal_04Field009)
-        Me.Controls.Add(Me.txtVal_03Field008)
-        Me.Controls.Add(Me.txtVal_02Field007)
-        Me.Controls.Add(Me.txtVal_01Field006)
+        Me.Controls.Add(Me.txtFlag23Field051)
+        Me.Controls.Add(Me.txtFlag22Field050)
+        Me.Controls.Add(Me.txtFlag21Field049)
+        Me.Controls.Add(Me.txtFlag20Field048)
+        Me.Controls.Add(Me.txtFlag19Field047)
+        Me.Controls.Add(Me.txtFlag18Field046)
+        Me.Controls.Add(Me.txtFlag17Field045)
+        Me.Controls.Add(Me.txtFlag16Field044)
+        Me.Controls.Add(Me.txtFlag15Field043)
+        Me.Controls.Add(Me.txtFlag14Field042)
+        Me.Controls.Add(Me.txtFlag13Field041)
+        Me.Controls.Add(Me.txtFlag12Field040)
+        Me.Controls.Add(Me.txtDD11Field015)
+        Me.Controls.Add(Me.txtDD10Field014)
+        Me.Controls.Add(Me.txtDD09Field013)
+        Me.Controls.Add(Me.txtDD08Field012)
+        Me.Controls.Add(Me.txtDD07Field011)
+        Me.Controls.Add(Me.txtDD06Field010)
+        Me.Controls.Add(Me.txtDD05Field009)
+        Me.Controls.Add(Me.txtDD04Field008)
+        Me.Controls.Add(Me.txtDD03Field007)
+        Me.Controls.Add(Me.txtDD02Field006)
+        Me.Controls.Add(Me.txtDD01Field005)
+        Me.Controls.Add(Me.txtDD00Field004)
+        Me.Controls.Add(Me.txt_ddff23)
+        Me.Controls.Add(Me.txt_ddff22)
+        Me.Controls.Add(Me.txt_ddff21)
+        Me.Controls.Add(Me.txt_ddff20)
+        Me.Controls.Add(Me.txt_ddff19)
+        Me.Controls.Add(Me.txt_ddff18)
+        Me.Controls.Add(Me.txt_ddff17)
+        Me.Controls.Add(Me.txt_ddff16)
+        Me.Controls.Add(Me.txt_ddff15)
+        Me.Controls.Add(Me.txt_ddff14)
+        Me.Controls.Add(Me.txt_ddff13)
+        Me.Controls.Add(Me.txt_ddff12)
+        Me.Controls.Add(Me.txt_ddff11)
+        Me.Controls.Add(Me.txt_ddff10)
+        Me.Controls.Add(Me.txt_ddff09)
+        Me.Controls.Add(Me.txt_ddff08)
+        Me.Controls.Add(Me.txt_ddff07)
+        Me.Controls.Add(Me.txt_ddff06)
+        Me.Controls.Add(Me.txt_ddff05)
+        Me.Controls.Add(Me.txt_ddff04)
+        Me.Controls.Add(Me.txt_ddff03)
+        Me.Controls.Add(Me.txt_ddff02)
+        Me.Controls.Add(Me.txt_ddff01)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.txtVal_00Field005)
+        Me.Controls.Add(Me.txt_ddff00)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtSequencer)
@@ -1596,6 +1600,7 @@ Partial Class formHourlyWind
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
+        Me.KeyPreview = True
         Me.Name = "formHourlyWind"
         Me.Text = "Hourly wind data"
         Me.ResumeLayout(False)
@@ -1632,56 +1637,56 @@ Partial Class formHourlyWind
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtFlag23Field052 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag22Field051 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag21Field050 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag20Field049 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag19Field048 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag18Field047 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag17Field046 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag16Field045 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag15Field044 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag14Field043 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag13Field042 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag12Field041 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag11Field040 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag10Field039 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag09Field038 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag08Field037 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag07Field036 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag06Field035 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag05Field034 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag04Field033 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag03Field032 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag02Field031 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag01Field030 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag00Field029 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_23Field028 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_22Field027 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_21Field026 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_20Field025 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_19Field024 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_18Field023 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_17Field022 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_16Field021 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_15Field020 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_14Field019 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_13Field018 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_12Field017 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_11Field016 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_10Field015 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_09Field014 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_08Field013 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_07Field012 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_06Field011 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_05Field010 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_04Field009 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_03Field008 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_02Field007 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_01Field006 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag23Field051 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag22Field050 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag21Field049 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag20Field048 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag19Field047 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag18Field046 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag17Field045 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag16Field044 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag15Field043 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag14Field042 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag13Field041 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag12Field040 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD11Field015 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD10Field014 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD09Field013 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD08Field012 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD07Field011 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD06Field010 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD05Field009 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD04Field008 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD03Field007 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD02Field006 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD01Field005 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD00Field004 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff23 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff22 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff21 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff20 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff19 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff18 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff17 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff16 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff15 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff14 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff13 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff12 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff11 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff10 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff09 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff08 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff07 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff06 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff05 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff04 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff03 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff02 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff01 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents txtVal_00Field005 As System.Windows.Forms.TextBox
+    Friend WithEvents txt_ddff00 As System.Windows.Forms.TextBox
     Friend WithEvents btnUpload As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtSequencer As System.Windows.Forms.TextBox
@@ -1708,54 +1713,54 @@ Partial Class formHourlyWind
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents txtDirectionDigits As System.Windows.Forms.TextBox
     Friend WithEvents txtSpeedDigits As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox14 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox15 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox16 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox17 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox18 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox19 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox20 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox21 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox22 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox23 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox24 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox25 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox26 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox27 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox28 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox29 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox30 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox31 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox32 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox34 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox35 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox36 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox37 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox38 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox39 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox40 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox41 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox42 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox43 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox44 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox45 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox46 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox47 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox48 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox49 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox50 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag11Field039 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag10Field038 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag09Field037 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag08Field036 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag07Field035 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag06Field034 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag05Field033 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag04Field032 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag03Field031 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag02Field030 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag01Field029 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag00Field028 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF11Field063 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF10Field062 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF09Field061 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF08Field060 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF07Field059 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF06Field058 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF05Field057 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF04Field056 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF03Field055 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF02Field054 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF01Field053 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF00Field052 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF23Field075 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF22Field074 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF21Field073 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF20Field072 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF19Field071 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF18Field070 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF17Field069 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF16Field068 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF15Field067 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF14Field066 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF13Field065 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFF12Field064 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD23Field027 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD22Field026 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD21Field025 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD20Field024 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD19Field023 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD18Field022 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD17Field021 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD16Field020 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD15Field019 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD14Field018 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD13Field017 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDD12Field016 As System.Windows.Forms.TextBox
     Friend WithEvents Label38 As System.Windows.Forms.Label
     Friend WithEvents Label39 As System.Windows.Forms.Label
     Friend WithEvents Label40 As System.Windows.Forms.Label

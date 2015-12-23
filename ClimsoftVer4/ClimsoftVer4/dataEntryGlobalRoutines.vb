@@ -300,4 +300,18 @@ Public Class dataEntryGlobalRoutines
             checkTminRequired = False
         End If
     End Function
+    Public Function checkWidthddff(strVal As String, ctl As Control, widthDD As String, widthFF As String, msgTxt As String) As Boolean
+        If Strings.Len(strVal) = Val(widthDD) + Val(widthFF) Then
+            checkWidthddff = True
+            ctl.BackColor = Color.White
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
+        Else
+            checkWidthddff = False
+            ctl.BackColor = Color.Cyan
+            ctl.Focus()
+            tabNext = False
+            MsgBox(msgTxt, MsgBoxStyle.Exclamation)
+        End If
+    End Function
 End Class

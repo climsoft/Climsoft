@@ -258,7 +258,7 @@ Public Class formDaily2
         sql1 = "SELECT stationId,stationName FROM station"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obsElement"
+        sql3 = "SELECT elementID,elementName FROM obsElement WHERE elementid BETWEEN 1 and 99"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
@@ -467,7 +467,7 @@ Public Class formDaily2
         j = cboElement.SelectedValue
 
         For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("element_code") = j Then
+            If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = j Then
                 If (k + 1) <= seqRecCount Then
                     cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("element_code")
                 Else

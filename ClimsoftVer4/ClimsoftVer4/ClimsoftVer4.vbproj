@@ -124,7 +124,7 @@
     <Compile Include="formDataView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formHourlyWind.Designer.vb">
+    <Compile Include="formHourlyWind.designer.vb">
       <DependentUpon>formHourlyWind.vb</DependentUpon>
     </Compile>
     <Compile Include="formHourlyWind.vb">

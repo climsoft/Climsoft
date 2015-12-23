@@ -185,7 +185,7 @@ Partial Class formHourly
         Me.cboStation.Location = New System.Drawing.Point(71, 35)
         Me.cboStation.Name = "cboStation"
         Me.cboStation.Size = New System.Drawing.Size(202, 21)
-        Me.cboStation.TabIndex = 210
+        Me.cboStation.TabIndex = 0
         '
         'Label2
         '
@@ -212,7 +212,7 @@ Partial Class formHourly
         Me.cboMonth.Location = New System.Drawing.Point(188, 80)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
-        Me.cboMonth.TabIndex = 212
+        Me.cboMonth.TabIndex = 3
         '
         'cboDay
         '
@@ -221,7 +221,7 @@ Partial Class formHourly
         Me.cboDay.Location = New System.Drawing.Point(314, 81)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
-        Me.cboDay.TabIndex = 213
+        Me.cboDay.TabIndex = 4
         '
         'btnHelp
         '
@@ -248,7 +248,7 @@ Partial Class formHourly
         Me.btnCommit.Location = New System.Drawing.Point(119, 548)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 266
+        Me.btnCommit.TabIndex = 30
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -340,14 +340,14 @@ Partial Class formHourly
         Me.txtYear.Location = New System.Drawing.Point(74, 81)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
-        Me.txtYear.TabIndex = 211
+        Me.txtYear.TabIndex = 2
         '
         'txtVal_00Field005
         '
         Me.txtVal_00Field005.Location = New System.Drawing.Point(111, 172)
         Me.txtVal_00Field005.Name = "txtVal_00Field005"
         Me.txtVal_00Field005.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_00Field005.TabIndex = 382
+        Me.txtVal_00Field005.TabIndex = 5
         '
         'cboElement
         '
@@ -355,7 +355,7 @@ Partial Class formHourly
         Me.cboElement.Location = New System.Drawing.Point(394, 35)
         Me.cboElement.Name = "cboElement"
         Me.cboElement.Size = New System.Drawing.Size(216, 21)
-        Me.cboElement.TabIndex = 383
+        Me.cboElement.TabIndex = 1
         '
         'Label3
         '
@@ -389,161 +389,161 @@ Partial Class formHourly
         Me.txtVal_01Field006.Location = New System.Drawing.Point(111, 198)
         Me.txtVal_01Field006.Name = "txtVal_01Field006"
         Me.txtVal_01Field006.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_01Field006.TabIndex = 387
+        Me.txtVal_01Field006.TabIndex = 6
         '
         'txtVal_02Field007
         '
         Me.txtVal_02Field007.Location = New System.Drawing.Point(111, 224)
         Me.txtVal_02Field007.Name = "txtVal_02Field007"
         Me.txtVal_02Field007.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_02Field007.TabIndex = 388
+        Me.txtVal_02Field007.TabIndex = 7
         '
         'txtVal_03Field008
         '
         Me.txtVal_03Field008.Location = New System.Drawing.Point(111, 250)
         Me.txtVal_03Field008.Name = "txtVal_03Field008"
         Me.txtVal_03Field008.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_03Field008.TabIndex = 389
+        Me.txtVal_03Field008.TabIndex = 8
         '
         'txtVal_04Field009
         '
         Me.txtVal_04Field009.Location = New System.Drawing.Point(111, 276)
         Me.txtVal_04Field009.Name = "txtVal_04Field009"
         Me.txtVal_04Field009.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_04Field009.TabIndex = 390
+        Me.txtVal_04Field009.TabIndex = 9
         '
         'txtVal_05Field010
         '
         Me.txtVal_05Field010.Location = New System.Drawing.Point(111, 302)
         Me.txtVal_05Field010.Name = "txtVal_05Field010"
         Me.txtVal_05Field010.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_05Field010.TabIndex = 391
+        Me.txtVal_05Field010.TabIndex = 10
         '
         'txtVal_06Field011
         '
         Me.txtVal_06Field011.Location = New System.Drawing.Point(111, 328)
         Me.txtVal_06Field011.Name = "txtVal_06Field011"
         Me.txtVal_06Field011.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_06Field011.TabIndex = 392
+        Me.txtVal_06Field011.TabIndex = 11
         '
         'txtVal_07Field012
         '
         Me.txtVal_07Field012.Location = New System.Drawing.Point(111, 354)
         Me.txtVal_07Field012.Name = "txtVal_07Field012"
         Me.txtVal_07Field012.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_07Field012.TabIndex = 393
+        Me.txtVal_07Field012.TabIndex = 12
         '
         'txtVal_08Field013
         '
         Me.txtVal_08Field013.Location = New System.Drawing.Point(111, 380)
         Me.txtVal_08Field013.Name = "txtVal_08Field013"
         Me.txtVal_08Field013.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_08Field013.TabIndex = 394
+        Me.txtVal_08Field013.TabIndex = 13
         '
         'txtVal_09Field014
         '
         Me.txtVal_09Field014.Location = New System.Drawing.Point(111, 406)
         Me.txtVal_09Field014.Name = "txtVal_09Field014"
         Me.txtVal_09Field014.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_09Field014.TabIndex = 395
+        Me.txtVal_09Field014.TabIndex = 14
         '
         'txtVal_10Field015
         '
         Me.txtVal_10Field015.Location = New System.Drawing.Point(111, 432)
         Me.txtVal_10Field015.Name = "txtVal_10Field015"
         Me.txtVal_10Field015.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_10Field015.TabIndex = 396
+        Me.txtVal_10Field015.TabIndex = 15
         '
         'txtVal_11Field016
         '
         Me.txtVal_11Field016.Location = New System.Drawing.Point(111, 458)
         Me.txtVal_11Field016.Name = "txtVal_11Field016"
         Me.txtVal_11Field016.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_11Field016.TabIndex = 397
+        Me.txtVal_11Field016.TabIndex = 16
         '
         'txtVal_12Field017
         '
         Me.txtVal_12Field017.Location = New System.Drawing.Point(380, 172)
         Me.txtVal_12Field017.Name = "txtVal_12Field017"
         Me.txtVal_12Field017.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_12Field017.TabIndex = 398
+        Me.txtVal_12Field017.TabIndex = 17
         '
         'txtVal_13Field018
         '
         Me.txtVal_13Field018.Location = New System.Drawing.Point(379, 198)
         Me.txtVal_13Field018.Name = "txtVal_13Field018"
         Me.txtVal_13Field018.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_13Field018.TabIndex = 399
+        Me.txtVal_13Field018.TabIndex = 18
         '
         'txtVal_14Field019
         '
         Me.txtVal_14Field019.Location = New System.Drawing.Point(380, 224)
         Me.txtVal_14Field019.Name = "txtVal_14Field019"
         Me.txtVal_14Field019.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_14Field019.TabIndex = 400
+        Me.txtVal_14Field019.TabIndex = 19
         '
         'txtVal_15Field020
         '
         Me.txtVal_15Field020.Location = New System.Drawing.Point(380, 250)
         Me.txtVal_15Field020.Name = "txtVal_15Field020"
         Me.txtVal_15Field020.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_15Field020.TabIndex = 401
+        Me.txtVal_15Field020.TabIndex = 20
         '
         'txtVal_16Field021
         '
         Me.txtVal_16Field021.Location = New System.Drawing.Point(379, 276)
         Me.txtVal_16Field021.Name = "txtVal_16Field021"
         Me.txtVal_16Field021.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_16Field021.TabIndex = 402
+        Me.txtVal_16Field021.TabIndex = 21
         '
         'txtVal_17Field022
         '
         Me.txtVal_17Field022.Location = New System.Drawing.Point(379, 302)
         Me.txtVal_17Field022.Name = "txtVal_17Field022"
         Me.txtVal_17Field022.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_17Field022.TabIndex = 403
+        Me.txtVal_17Field022.TabIndex = 22
         '
         'txtVal_18Field023
         '
         Me.txtVal_18Field023.Location = New System.Drawing.Point(380, 328)
         Me.txtVal_18Field023.Name = "txtVal_18Field023"
         Me.txtVal_18Field023.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_18Field023.TabIndex = 404
+        Me.txtVal_18Field023.TabIndex = 23
         '
         'txtVal_19Field024
         '
         Me.txtVal_19Field024.Location = New System.Drawing.Point(380, 354)
         Me.txtVal_19Field024.Name = "txtVal_19Field024"
         Me.txtVal_19Field024.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_19Field024.TabIndex = 405
+        Me.txtVal_19Field024.TabIndex = 24
         '
         'txtVal_20Field025
         '
         Me.txtVal_20Field025.Location = New System.Drawing.Point(380, 380)
         Me.txtVal_20Field025.Name = "txtVal_20Field025"
         Me.txtVal_20Field025.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_20Field025.TabIndex = 406
+        Me.txtVal_20Field025.TabIndex = 25
         '
         'txtVal_21Field026
         '
         Me.txtVal_21Field026.Location = New System.Drawing.Point(380, 406)
         Me.txtVal_21Field026.Name = "txtVal_21Field026"
         Me.txtVal_21Field026.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_21Field026.TabIndex = 407
+        Me.txtVal_21Field026.TabIndex = 26
         '
         'txtVal_22Field027
         '
         Me.txtVal_22Field027.Location = New System.Drawing.Point(380, 432)
         Me.txtVal_22Field027.Name = "txtVal_22Field027"
         Me.txtVal_22Field027.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_22Field027.TabIndex = 408
+        Me.txtVal_22Field027.TabIndex = 27
         '
         'txtVal_23Field028
         '
         Me.txtVal_23Field028.Location = New System.Drawing.Point(380, 458)
         Me.txtVal_23Field028.Name = "txtVal_23Field028"
         Me.txtVal_23Field028.Size = New System.Drawing.Size(68, 20)
-        Me.txtVal_23Field028.TabIndex = 409
+        Me.txtVal_23Field028.TabIndex = 28
         '
         'txtFlag00Field029
         '
@@ -972,7 +972,7 @@ Partial Class formHourly
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 462
-        Me.btnHourSelection.Text = "Select synoptic hours only"
+        Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
         'btnAssignSameValue
@@ -1007,7 +1007,7 @@ Partial Class formHourly
         Me.txtTotal.Location = New System.Drawing.Point(514, 458)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.Size = New System.Drawing.Size(68, 20)
-        Me.txtTotal.TabIndex = 466
+        Me.txtTotal.TabIndex = 29
         '
         'Label37
         '
@@ -1132,6 +1132,7 @@ Partial Class formHourly
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
+        Me.KeyPreview = True
         Me.Name = "formHourly"
         Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
