@@ -32,6 +32,7 @@ Partial Class frmQC
         Me.pnlQcStandard = New System.Windows.Forms.Panel()
         Me.lblPnl = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.optAbsoluteLimits = New System.Windows.Forms.RadioButton()
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.SuspendLayout()
@@ -93,6 +94,7 @@ Partial Class frmQC
         'pnlQcStandard
         '
         Me.pnlQcStandard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlQcStandard.Controls.Add(Me.optAbsoluteLimits)
         Me.pnlQcStandard.Controls.Add(Me.lblPnl)
         Me.pnlQcStandard.Location = New System.Drawing.Point(26, 40)
         Me.pnlQcStandard.Name = "pnlQcStandard"
@@ -115,6 +117,17 @@ Partial Class frmQC
         Me.MenuStrip1.Size = New System.Drawing.Size(669, 24)
         Me.MenuStrip1.TabIndex = 10
         Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'optAbsoluteLimits
+        '
+        Me.optAbsoluteLimits.AutoSize = True
+        Me.optAbsoluteLimits.Location = New System.Drawing.Point(22, 27)
+        Me.optAbsoluteLimits.Name = "optAbsoluteLimits"
+        Me.optAbsoluteLimits.Size = New System.Drawing.Size(129, 17)
+        Me.optAbsoluteLimits.TabIndex = 1
+        Me.optAbsoluteLimits.TabStop = True
+        Me.optAbsoluteLimits.Text = "Absolute limits checks"
+        Me.optAbsoluteLimits.UseVisualStyleBackColor = True
         '
         'frmQC
         '
@@ -148,4 +161,5 @@ Partial Class frmQC
     Friend WithEvents pnlQcStandard As System.Windows.Forms.Panel
     Friend WithEvents lblPnl As System.Windows.Forms.Label
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents optAbsoluteLimits As System.Windows.Forms.RadioButton
 End Class

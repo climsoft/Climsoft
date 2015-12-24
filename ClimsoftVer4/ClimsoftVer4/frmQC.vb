@@ -34,7 +34,9 @@ Public Class frmQC
     End Sub
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-
+        If optAbsoluteLimits.Checked = True Then
+            frmQCdatesSelection.Show()
+        End If
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click

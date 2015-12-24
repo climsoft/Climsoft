@@ -22,7 +22,7 @@ Partial Class formHourlyWind
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim YyyyLabel As System.Windows.Forms.Label
+        Me.YyyyLabel = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.btnHourSelection = New System.Windows.Forms.Button()
@@ -182,17 +182,16 @@ Partial Class formHourlyWind
         Me.Label40 = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
-        YyyyLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'YyyyLabel
         '
-        YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(304, 16)
-        YyyyLabel.Name = "YyyyLabel"
-        YyyyLabel.Size = New System.Drawing.Size(32, 13)
-        YyyyLabel.TabIndex = 472
-        YyyyLabel.Text = "Year:"
+        Me.YyyyLabel.AutoSize = True
+        Me.YyyyLabel.Location = New System.Drawing.Point(304, 16)
+        Me.YyyyLabel.Name = "YyyyLabel"
+        Me.YyyyLabel.Size = New System.Drawing.Size(32, 13)
+        Me.YyyyLabel.TabIndex = 472
+        Me.YyyyLabel.Text = "Year:"
         '
         'Label37
         '
@@ -1598,7 +1597,7 @@ Partial Class formHourlyWind
         Me.Controls.Add(Me.recNumberTextBox)
         Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(YyyyLabel)
+        Me.Controls.Add(Me.YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.Name = "formHourlyWind"
@@ -1766,4 +1765,5 @@ Partial Class formHourlyWind
     Friend WithEvents Label40 As System.Windows.Forms.Label
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents YyyyLabel As System.Windows.Forms.Label
 End Class
