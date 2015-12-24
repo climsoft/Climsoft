@@ -284,8 +284,8 @@ Public Class formMonthly
         'Initialize header information for data-entry form
 
         If maxRows > 0 Then
-            'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+            'StationIdTextBox.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
+            'cboStation.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
             cboStation.SelectedValue = ds.Tables("form_monthly").Rows(inc).Item("stationId")
 
             txtYear.Text = ds.Tables("form_monthly").Rows(inc).Item("yyyy")
@@ -700,4 +700,83 @@ Public Class formMonthly
     End Sub
 
    
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmDataTransferProgress.Show()
+
+        'Upload data to observationInitial table
+        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
+            dd As String, hh As String, ctl As Control, capturedBy As String
+        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
+            qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
+
+        myConnectionString = frmLogin.txtusrpwd.Text
+
+        conn.ConnectionString = myConnectionString
+        conn.Open()
+        '
+        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+        maxRows = ds.Tables("form_monthly").Rows.Count
+        qcStatus = 0
+        acquisitionType = 1
+        obsLevel = "surface"
+        obsVal = ""
+        obsFlag = ""
+        dataForm = "form_monthly"
+
+        'Loop through all records in dataset
+        For n = 0 To maxRows - 1
+            'Display progress of data transfer
+            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            'Loop through all observation fields adding observation records to observationInitial table
+            For m = 3 To 14
+                stnId = ds.Tables("form_monthly").Rows(n).Item("stationId")
+                elemCode = ds.Tables("form_monthly").Rows(n).Item("elementId")
+                yyyy = ds.Tables("form_monthly").Rows(n).Item("yyyy")
+                mm = m - 2
+                dd = 1
+                hh = 6
+                capturedBy = ds.Tables("form_monthly").Rows(n).Item("signature")
+                If Val(mm) < 10 Then mm = "0" & mm
+                If Val(dd) < 10 Then dd = "0" & dd
+                If Val(hh) < 10 Then hh = "0" & hh
+
+                obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+
+                If Not IsDBNull(ds.Tables("form_monthly").Rows(n).Item(m)) Then obsVal = ds.Tables("form_monthly").Rows(n).Item(m)
+                If Not IsDBNull(ds.Tables("form_monthly").Rows(n).Item(m + 12)) Then obsFlag = ds.Tables("form_monthly").Rows(n).Item(m + 12)
+
+                'Generate SQL string for inserting data into observationinitial table
+                If Strings.Len(obsVal) > 0 Then
+                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                        "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
+                        & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
+
+                    ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                    ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                    ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+                    ' Create the Command for executing query and set its properties
+                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                    Try
+                        'Execute query
+                        objCmd.ExecuteNonQuery()
+                        'Catch ex As MySql.Data.MySqlClient.MySqlException
+                        '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                    Catch ex As Exception
+                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+                'Move to next observation value in current record of the dataset
+            Next m
+            'Move to next record in dataset
+        Next n
+        conn.Close()
+        frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+        frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+
+    End Sub
 End Class
