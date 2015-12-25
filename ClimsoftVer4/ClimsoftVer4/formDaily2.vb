@@ -469,9 +469,9 @@ Public Class formDaily2
         For k = 0 To seqRecCount - 1
             If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = j Then
                 If (k + 1) <= seqRecCount Then
-                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("element_code")
+                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
                 Else
-                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("element_code")
+                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
                 End If
             End If
         Next k
