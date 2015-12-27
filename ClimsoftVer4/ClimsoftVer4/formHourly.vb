@@ -864,7 +864,7 @@ Public Class formHourly
 
         'Upload data to observationInitial table
         Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
-            dd As String, hh As String, ctl As Control, capturedBy As String
+            dd As String, hh As String, capturedBy As String
         Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
 

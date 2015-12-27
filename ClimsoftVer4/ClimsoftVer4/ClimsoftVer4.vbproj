@@ -317,6 +317,18 @@
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmQCdatesSelection.Designer.vb">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQCdatesSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUsers.Designer.vb">
       <DependentUpon>frmUsers.vb</DependentUpon>
     </Compile>
@@ -411,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formHourly.fr.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourlyWind.resx">
+      <DependentUpon>formHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formImports.resx">
       <DependentUpon>formImports.vb</DependentUpon>
@@ -622,11 +637,17 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQCdatesSelection.resx">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.de.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.fr.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
