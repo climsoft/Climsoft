@@ -1,11 +1,29 @@
-﻿Public Class frmImportCSV
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2015
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class frmImportCSV
     Dim strFolderPath As String, strFileName As String, rec As Integer
     Dim sql As String
     Dim ds As New DataSet()
     Dim da As OleDb.OleDbDataAdapter
+    Dim fd As OpenFileDialog = New OpenFileDialog()
+    Dim strDataFile As String, strSchemaFile As String, strClicomDataFolder As String
 
     Private Sub frmImportCSV_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        strClicomDataFolder = dsReg.Tables("regData").Rows(9).Item("keyValue")
         ''Dim strConnString As String
         ''strFolderPath = txtFolderName.Text
         ''strFileName = txtFileName.Text
@@ -39,9 +57,26 @@
         Dim maxRows As Integer, stnId As String, elemCode As String, yyyymm As String, obsDate As String, obsDay As String, obsHour As String, _
             obsLevel As String, obsVal As String, obsFlag As String, qcStatus As Integer, acquisitionType As Integer, n As Integer, _
             m As Integer, j As Integer, i As Integer
-        strFolderPath = txtFolderName.Text
-        strFileName = txtFileName.Text
-        strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strFolderPath & ";Extended Properties=Text;"
+        'strFolderPath = txtFolderName.Text
+        'strFileName = txtFileName.Text
+
+        'strDataFile = System.IO.Path.GetFileName(txtDataFile.Text)
+        ' strSchemaFile = System.IO.Path.GetFileName(txtSchemaFile.Text)
+        ' strFolderPath = System.IO.Path.GetDirectoryName(txtDataFile.Text)
+
+        strDataFile = strClicomDataFolder & "\clicom_daily.csv"
+        strSchemaFile = strClicomDataFolder & "\schema.ini"
+
+        'Copy Data file to CLICOM folder and rename the files to [clicom_daily.csv] and [schema.ini] and overwrite existing file
+        My.Computer.FileSystem.CopyFile(txtDataFile.Text, strDataFile, True)
+
+        'Copy schema file to CLICOM folder and rename the files to [schema.ini] and [schema.ini] and overwrite existing file
+        My.Computer.FileSystem.CopyFile(txtSchemaFile.Text, strSchemaFile, True)
+
+        '   MsgBox("Files copied successfully!")
+
+        'strFolderPath = System.IO.Path.GetDirectoryName(txtQCReportOriginal.Text)
+        strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strClicomDataFolder & ";Extended Properties=Text;"
         Dim conn1 As New OleDb.OleDbConnection
         'rec = -1
 
@@ -49,7 +84,7 @@
         conn1.ConnectionString = strConnString
         conn1.Open()
 
-        sql = "SELECT * FROM [" & strFileName & "]"
+        sql = "SELECT * FROM [" & "clicom_daily.csv" & "]"
 
         da = New OleDb.OleDbDataAdapter(sql, conn1)
         da.Fill(ds, "clicomDaily")
@@ -145,6 +180,42 @@
         conn.Close()
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+    End Sub
+
+    Private Sub btnBrowseDataFile_Click(sender As Object, e As EventArgs) Handles btnBrowseDataFile.Click
+        '
+        fd.Title = "Open File Dialog"
+        fd.InitialDirectory = "C\*.*"
+        'fd.InitialDirectory = dsReg.Tables("regData").Rows(7).Item("keyValue")
+        fd.Filter = "CSV files (*.csv)|*.csv|CSV files (*.csv)|*.csv"
+        fd.FilterIndex = 2
+        fd.RestoreDirectory = True
+        '
+        If fd.ShowDialog() = DialogResult.OK Then
+            txtDataFile.Text = fd.FileName
+            strDataFile = txtDataFile.Text
+        End If
+    End Sub
+
+    Private Sub btnBrowseSchemaFile_Click(sender As Object, e As EventArgs) Handles btnBrowseSchemaFile.Click
+        '
+        fd.Title = "Open File Dialog"
+        fd.InitialDirectory = "C:\*.*"
+        'fd.InitialDirectory = dsReg.Tables("regData").Rows(7).Item("keyValue")
+        fd.Filter = "Schema files (*.ini)|*.ini|Schema files (*.ini)|*.ini"
+        fd.FilterIndex = 2
+        fd.RestoreDirectory = True
+        '
+        If fd.ShowDialog() = DialogResult.OK Then
+            txtSchemaFile.Text = fd.FileName
+            strSchemaFile = txtSchemaFile.Text
+        End If
+    End Sub
+
+    Private Sub txtSchemaFile_TextChanged(sender As Object, e As EventArgs) Handles txtSchemaFile.TextChanged
+        If Strings.Right(txtSchemaFile.Text, 4) = ".ini" And Strings.Right(txtDataFile.Text, 4) = ".csv" Then
+            btnOK.Enabled = True
+        End If
     End Sub
 End Class
 

@@ -323,6 +323,12 @@
     <Compile Include="frmQCdatesSelection.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUsers.Designer.vb">
       <DependentUpon>frmUsers.vb</DependentUpon>
     </Compile>
@@ -639,6 +645,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.fr.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -25,8 +25,12 @@ Partial Class frmDBUtilities
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDBUtilities))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObsInitialToFinalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExternalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CLICOMDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NOAAGTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,9 +66,16 @@ Partial Class frmDBUtilities
         '
         'ImportToolStripMenuItem
         '
+        Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObsInitialToFinalToolStripMenuItem})
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
         Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.ImportToolStripMenuItem.Text = "Upload"
+        '
+        'ObsInitialToFinalToolStripMenuItem
+        '
+        Me.ObsInitialToFinalToolStripMenuItem.Name = "ObsInitialToFinalToolStripMenuItem"
+        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ObsInitialToFinalToolStripMenuItem.Text = "Obs Initial to Final"
         '
         'GenerateValuesToolStripMenuItem
         '
@@ -74,9 +85,28 @@ Partial Class frmDBUtilities
         '
         'ExternalDataToolStripMenuItem
         '
+        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
         Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
+        '
+        'CLICOMDailyToolStripMenuItem
+        '
+        Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM Daily"
+        '
+        'AWSToolStripMenuItem
+        '
+        Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.AWSToolStripMenuItem.Text = "AWS "
+        '
+        'NOAAGTSToolStripMenuItem
+        '
+        Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'BackupToolStripMenuItem
         '
@@ -259,5 +289,9 @@ Partial Class frmDBUtilities
     Public WithEvents ListViewDbUtil As System.Windows.Forms.ListView
     Friend WithEvents grpbxUpload As System.Windows.Forms.GroupBox
     Friend WithEvents cmdUpload As System.Windows.Forms.Button
+    Friend WithEvents CLICOMDailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ObsInitialToFinalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NOAAGTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
