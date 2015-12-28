@@ -93,19 +93,19 @@ Partial Class frmDBUtilities
         'CLICOMDailyToolStripMenuItem
         '
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
-        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM Daily"
         '
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AWSToolStripMenuItem.Text = "AWS "
         '
         'NOAAGTSToolStripMenuItem
         '
         Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
-        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'BackupToolStripMenuItem

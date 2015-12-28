@@ -192,4 +192,8 @@ Public Class frmDBUtilities
     Private Sub ObsInitialToFinalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ObsInitialToFinalToolStripMenuItem.Click
         frmUploadToObsFinal.Show()
     End Sub
+
+    Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
+        frmImportAWS.Show()
+    End Sub
 End Class
