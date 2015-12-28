@@ -63,6 +63,7 @@ Partial Class frmDataTransferProgress
         Me.Controls.Add(Me.lblDataTransferProgress)
         Me.Controls.Add(Me.txtDataTransferProgress)
         Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmDataTransferProgress"
         Me.Text = "Data Transfer Progress"
         Me.ResumeLayout(False)

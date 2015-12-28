@@ -43,4 +43,7 @@ Public Class frmQC
 
     End Sub
 
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        frmUpdateDBfromQCReport.Show()
+    End Sub
 End Class
