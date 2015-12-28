@@ -1132,7 +1132,7 @@ Public Class formSynopRA1
 
     End Sub
 
-    Private Sub btnUploadToMain_Click(sender As Object, e As EventArgs) Handles btnUploadToMain.Click
+    Private Sub btnUploadToMain_Click(sender As Object, e As EventArgs)
         'Open form for displaying data transfer progress
         frmDataTransferProgress.Show()
 
@@ -1224,7 +1224,7 @@ Public Class formSynopRA1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         frmImportCSV.Show()
     End Sub
 
