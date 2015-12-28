@@ -329,6 +329,12 @@
     <Compile Include="frmUpdateDBfromQCReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUploadToObsFinal.Designer.vb">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUsers.Designer.vb">
       <DependentUpon>frmUsers.vb</DependentUpon>
     </Compile>
@@ -648,6 +654,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUploadToObsFinal.resx">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
