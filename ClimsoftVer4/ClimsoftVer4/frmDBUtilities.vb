@@ -196,4 +196,8 @@ Public Class frmDBUtilities
     Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
         frmImportAWS.Show()
     End Sub
+
+    Private Sub NOAAGTSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NOAAGTSToolStripMenuItem.Click
+        frmGTSNOAA.Show()
+    End Sub
 End Class
