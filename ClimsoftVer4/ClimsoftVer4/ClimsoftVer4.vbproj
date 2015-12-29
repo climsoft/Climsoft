@@ -196,6 +196,12 @@
     <Compile Include="formHourly.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmGTSNOAA.Designer.vb">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGTSNOAA.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmImportAWS.Designer.vb">
       <DependentUpon>frmImportAWS.vb</DependentUpon>
     </Compile>
@@ -561,6 +567,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.fr.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGTSNOAA.resx">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportAWS.resx">
       <DependentUpon>frmImportAWS.vb</DependentUpon>
