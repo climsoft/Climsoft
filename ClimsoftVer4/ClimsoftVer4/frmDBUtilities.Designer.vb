@@ -47,7 +47,6 @@ Partial Class frmDBUtilities
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
         Me.ListViewDbUtil = New System.Windows.Forms.ListView()
-        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Dbtpanel2.SuspendLayout()
@@ -94,19 +93,19 @@ Partial Class frmDBUtilities
         'CLICOMDailyToolStripMenuItem
         '
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
-        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM Daily"
         '
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.AWSToolStripMenuItem.Text = "AWS "
         '
         'NOAAGTSToolStripMenuItem
         '
         Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
-        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(148, 22)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'BackupToolStripMenuItem
@@ -207,13 +206,11 @@ Partial Class frmDBUtilities
         'grpbxUpload
         '
         Me.grpbxUpload.Controls.Add(Me.cmdUpload)
-        Me.grpbxUpload.Controls.Add(Me.ListView1)
         Me.grpbxUpload.Location = New System.Drawing.Point(2, 311)
         Me.grpbxUpload.Name = "grpbxUpload"
         Me.grpbxUpload.Size = New System.Drawing.Size(421, 24)
         Me.grpbxUpload.TabIndex = 7
         Me.grpbxUpload.TabStop = False
-        Me.grpbxUpload.Visible = False
         '
         'cmdUpload
         '
@@ -240,22 +237,6 @@ Partial Class frmDBUtilities
         Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
         Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
         Me.ListViewDbUtil.Visible = False
-        '
-        'ListView1
-        '
-        Me.ListView1.AllowColumnReorder = True
-        Me.ListView1.AllowDrop = True
-        Me.ListView1.CheckBoxes = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.LabelEdit = True
-        Me.ListView1.Location = New System.Drawing.Point(0, -313)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListView1.Size = New System.Drawing.Size(412, 305)
-        Me.ListView1.TabIndex = 5
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        Me.ListView1.Visible = False
         '
         'frmDBUtilities
         '
@@ -312,6 +293,5 @@ Partial Class frmDBUtilities
     Friend WithEvents ObsInitialToFinalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NOAAGTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ListView1 As System.Windows.Forms.ListView
 
 End Class
