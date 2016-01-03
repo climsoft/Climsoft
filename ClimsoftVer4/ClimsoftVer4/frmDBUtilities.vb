@@ -193,11 +193,11 @@ Public Class frmDBUtilities
         frmUploadToObsFinal.Show()
     End Sub
 
-    Private Sub ExternalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExternalDataToolStripMenuItem.Click
-
+    Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
+        frmImportAWS.Show()
     End Sub
 
-    Private Sub GenerateValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateValuesToolStripMenuItem.Click
-
+    Private Sub NOAAGTSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NOAAGTSToolStripMenuItem.Click
+        frmGTSNOAA.Show()
     End Sub
 End Class
