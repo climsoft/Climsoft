@@ -154,6 +154,12 @@
     <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBackupRestore.Designer.vb">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackupRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBUFr.Designer.vb">
       <DependentUpon>frmBUFR.vb</DependentUpon>
     </Compile>
@@ -170,6 +176,12 @@
       <DependentUpon>frmDataForms.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDataForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataMigration.Designer.vb">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataMigration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDataTransferProgress.Designer.vb">
@@ -502,6 +514,9 @@
     <EmbeddedResource Include="frmAction.fr.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBackupRestore.resx">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBUFr.de.resx">
       <DependentUpon>frmBUFR.vb</DependentUpon>
     </EmbeddedResource>
@@ -522,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataForms.resx">
       <DependentUpon>frmDataForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataMigration.resx">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.de.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
