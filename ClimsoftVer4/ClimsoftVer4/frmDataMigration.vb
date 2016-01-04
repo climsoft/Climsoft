@@ -162,4 +162,9 @@ Err:
             Mysql_FilePath = Mysql_FilePath & fchar
         Next
     End Function
+
+    Private Sub frmDataMigration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtV4db.Text = frmDBUtilities.Current_db
+        txtEyear.Text = DateAndTime.Year(Now())
+    End Sub
 End Class

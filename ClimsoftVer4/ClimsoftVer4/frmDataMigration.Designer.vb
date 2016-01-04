@@ -108,7 +108,7 @@ Partial Class frmDataMigration
         'lblV4
         '
         Me.lblV4.AutoSize = True
-        Me.lblV4.Location = New System.Drawing.Point(297, 41)
+        Me.lblV4.Location = New System.Drawing.Point(306, 41)
         Me.lblV4.Name = "lblV4"
         Me.lblV4.Size = New System.Drawing.Size(35, 13)
         Me.lblV4.TabIndex = 6
@@ -116,11 +116,11 @@ Partial Class frmDataMigration
         '
         'txtV4db
         '
-        Me.txtV4db.Location = New System.Drawing.Point(334, 37)
+        Me.txtV4db.Location = New System.Drawing.Point(345, 37)
         Me.txtV4db.Name = "txtV4db"
-        Me.txtV4db.Size = New System.Drawing.Size(215, 20)
+        Me.txtV4db.Size = New System.Drawing.Size(185, 20)
         Me.txtV4db.TabIndex = 1
-        Me.txtV4db.Text = "mysql_climsoft_db_v4"
+        Me.txtV4db.Text = "maria_climsoft_db_v4"
         '
         'txtV3db
         '

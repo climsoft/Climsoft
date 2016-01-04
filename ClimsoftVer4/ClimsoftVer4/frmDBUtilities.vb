@@ -23,6 +23,7 @@ Public Class frmDBUtilities
     'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     'Dim MyConnectionString As String
     'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    'Public Curr_db As String
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
@@ -41,7 +42,7 @@ Public Class frmDBUtilities
 
     End Sub
 
-    Private Sub ToolStripComboBox1_Click(sender As Object, e As EventArgs) Handles ToolStripComboBox1.Click
+    Private Sub ToolStripComboBox1_Click(sender As Object, e As EventArgs) Handles cmbDb.Click
 
     End Sub
 
@@ -263,4 +264,13 @@ Public Class frmDBUtilities
         frmBackupRestore.Text = "Restore Backup File"
         frmBackupRestore.Show()
     End Sub
+
+    Function Current_db() As String
+        ' Extract the current database name from the db login string
+        Dim k As Integer = InStr(frmLogin.txtusrpwd.Text, ";port") - InStr(frmLogin.txtusrpwd.Text, "database") - (Len("database") + 1)
+        Current_db = Strings.Mid(frmLogin.txtusrpwd.Text, InStr(frmLogin.txtusrpwd.Text, "database") + (Len("database") + 1), k)
+    End Function
+
+
+
 End Class
