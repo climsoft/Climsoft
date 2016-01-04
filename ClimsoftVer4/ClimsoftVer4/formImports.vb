@@ -286,7 +286,7 @@ Err:
         End Using
         Exit Sub
 Err:
-        'If Err.Number = 5 Then Resume
+        'If Err.Number = 5 Then Resume Next
         MsgBox(Err.Number & " " & Err.Description)
     End Sub
 

@@ -17,12 +17,12 @@
 Imports System.Windows.Forms
 
 Public Class frmDBUtilities
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim ds As New DataSet
-    Dim sql As String
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim MyConnectionString As String
-    Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+    'Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+    'Dim ds As New DataSet
+    'Dim sql As String
+    'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    'Dim MyConnectionString As String
+    'Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
@@ -199,5 +199,68 @@ Public Class frmDBUtilities
 
     Private Sub NOAAGTSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NOAAGTSToolStripMenuItem.Click
         frmGTSNOAA.Show()
+    End Sub
+
+    Private Sub CLIMSOFTV3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CLIMSOFTV3ToolStripMenuItem.Click
+        frmDataMigration.Show()
+        '        On Error GoTo Err
+        '        Dim sql_obsv, dbstr, svrstr, prtusrpwd, myconnectstr, tmpbkpfile, bkpfile, fchar As String
+        '        Dim Cmd As MySql.Data.MySqlClient.MySqlCommand
+
+        '        ' Export CLIMSOFT 4 Mysql db to text (CSV) backup
+        '        dbstr = "mysql_main_climsoft_database_v3"
+
+        '        ' Get a string for the full path for backup file and restructure it according the mysql path formart
+        '        tmpbkpfile = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup.csv"
+
+        '        If System.IO.File.Exists(tmpbkpfile) Then System.IO.File.Delete(tmpbkpfile)
+        '        bkpfile = ""
+        '        For i = 1 To Len(tmpbkpfile)
+        '            fchar = Strings.Mid(tmpbkpfile, i, 1)
+        '            If fchar = "\" Then fchar = "/"
+        '            bkpfile = bkpfile & fchar
+        '        Next
+
+        '        'MsgBox(bkpfile)
+
+        '        sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status,qc_type_log,acquisition_type,data_form,captured_by,mark from observation where recorded_from=67774010 into outfile '" & bkpfile & "' fields terminated by ',';"
+
+        '        conn.ConnectionString = frmLogin.txtusrpwd.Text
+        '        conn.Open()
+
+        '        Cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+
+        '        'Execute query for making a V3 db backup
+        '        Cmd.ExecuteNonQuery()
+        '        MsgBox("CLIMSOFT V3 backup created")
+
+        '        ' Import from CLIMSOFT V3 backup file to CLIMSOFT V4 db
+        '        dbstr = "mysql_climsoft_db_v4"
+        '        sql_obsv = "use " & dbstr & "; LOAD DATA INFILE '" & bkpfile & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark);"
+
+        '        'Execute query for migrating data to V4 db
+        '        Cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+        '        Cmd.ExecuteNonQuery()
+
+        '        MsgBox("CLIMSOFT V3 migration completed")
+        '        conn.Close()
+        '        Exit Sub
+        'Err:
+        '        MsgBox(Err.Description)
+    End Sub
+
+    Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub BackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupToolStripMenuItem.Click
+        frmBackupRestore.Text = "Backup to Text File"
+        frmBackupRestore.Show()
+
+    End Sub
+
+    Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
+        frmBackupRestore.Text = "Restore Backup File"
+        frmBackupRestore.Show()
     End Sub
 End Class
