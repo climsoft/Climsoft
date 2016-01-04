@@ -43,7 +43,7 @@ Partial Class frmDBUtilities
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.cmbDb = New System.Windows.Forms.ToolStripComboBox()
         Me.Dbtpanel1 = New System.Windows.Forms.Panel()
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
@@ -181,7 +181,7 @@ Partial Class frmDBUtilities
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripComboBox1})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(852, 25)
@@ -194,11 +194,11 @@ Partial Class frmDBUtilities
         Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 22)
         Me.ToolStripLabel1.Text = "Database"
         '
-        'ToolStripComboBox1
+        'cmbDb
         '
-        Me.ToolStripComboBox1.Items.AddRange(New Object() {"Initial", "Final"})
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 25)
+        Me.cmbDb.Items.AddRange(New Object() {"Initial", "Final"})
+        Me.cmbDb.Name = "cmbDb"
+        Me.cmbDb.Size = New System.Drawing.Size(121, 25)
         '
         'Dbtpanel1
         '
@@ -310,7 +310,7 @@ Partial Class frmDBUtilities
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents ToolStripComboBox1 As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents cmbDb As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents Dbtpanel1 As System.Windows.Forms.Panel
     Public WithEvents ListViewDbUtil As System.Windows.Forms.ListView
     Friend WithEvents grpbxUpload As System.Windows.Forms.GroupBox

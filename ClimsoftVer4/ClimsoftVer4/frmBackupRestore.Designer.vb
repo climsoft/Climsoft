@@ -90,7 +90,7 @@ Partial Class frmBackupRestore
         '
         'txtFile
         '
-        Me.txtFile.Location = New System.Drawing.Point(119, 88)
+        Me.txtFile.Location = New System.Drawing.Point(127, 87)
         Me.txtFile.Name = "txtFile"
         Me.txtFile.Size = New System.Drawing.Size(403, 20)
         Me.txtFile.TabIndex = 2
@@ -99,7 +99,7 @@ Partial Class frmBackupRestore
         '
         Me.cmdCSV.BackgroundImage = CType(resources.GetObject("cmdCSV.BackgroundImage"), System.Drawing.Image)
         Me.cmdCSV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCSV.Location = New System.Drawing.Point(521, 84)
+        Me.cmdCSV.Location = New System.Drawing.Point(529, 83)
         Me.cmdCSV.Name = "cmdCSV"
         Me.cmdCSV.Size = New System.Drawing.Size(36, 29)
         Me.cmdCSV.TabIndex = 7
@@ -146,19 +146,19 @@ Partial Class frmBackupRestore
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(39, 40)
+        Me.Label1.Location = New System.Drawing.Point(34, 43)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(81, 13)
+        Me.Label1.Size = New System.Drawing.Size(88, 13)
         Me.Label1.TabIndex = 13
-        Me.Label1.Text = "Mysql database"
+        Me.Label1.Text = "Current database"
         '
         'txtDb
         '
-        Me.txtDb.Location = New System.Drawing.Point(119, 40)
+        Me.txtDb.Location = New System.Drawing.Point(127, 40)
         Me.txtDb.Name = "txtDb"
         Me.txtDb.Size = New System.Drawing.Size(153, 20)
         Me.txtDb.TabIndex = 14
-        Me.txtDb.Text = "mysql_climsoft_db_v4"
+        Me.txtDb.Text = "maria_climsoft_db_v4"
         '
         'frmBackupRestore
         '
