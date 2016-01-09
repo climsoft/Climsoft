@@ -100,7 +100,7 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(893, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(976, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -172,9 +172,9 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.chksatation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
-        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
+        Me.pnlStationsElements.Location = New System.Drawing.Point(12, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(976, 395)
         Me.pnlStationsElements.TabIndex = 4
         '
         'pnlSummary
@@ -183,7 +183,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        Me.pnlSummary.Location = New System.Drawing.Point(541, 7)
+        Me.pnlSummary.Location = New System.Drawing.Point(623, 7)
         Me.pnlSummary.Name = "pnlSummary"
         Me.pnlSummary.Size = New System.Drawing.Size(329, 48)
         Me.pnlSummary.TabIndex = 23
@@ -232,7 +232,7 @@ Partial Class formProductsSelectCriteria
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(354, 348)
+        Me.cmdDelElement.Location = New System.Drawing.Point(382, 348)
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(143, 27)
         Me.cmdDelElement.TabIndex = 21
@@ -252,7 +252,7 @@ Partial Class formProductsSelectCriteria
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(542, 182)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(624, 182)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -271,7 +271,7 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.Location = New System.Drawing.Point(270, 57)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(266, 291)
+        Me.lstvElements.Size = New System.Drawing.Size(332, 291)
         Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
@@ -337,7 +337,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlPeriod.Controls.Add(Me.dateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
-        Me.pnlPeriod.Location = New System.Drawing.Point(542, 61)
+        Me.pnlPeriod.Location = New System.Drawing.Point(624, 61)
         Me.pnlPeriod.Name = "pnlPeriod"
         Me.pnlPeriod.Size = New System.Drawing.Size(330, 97)
         Me.pnlPeriod.TabIndex = 7
@@ -470,7 +470,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(542, 212)
+        Me.pnlStation.Location = New System.Drawing.Point(624, 212)
         Me.pnlStation.Name = "pnlStation"
         Me.pnlStation.Size = New System.Drawing.Size(330, 152)
         Me.pnlStation.TabIndex = 6
@@ -629,7 +629,7 @@ Partial Class formProductsSelectCriteria
         Me.cmbElement.ItemHeight = 13
         Me.cmbElement.Location = New System.Drawing.Point(352, 30)
         Me.cmbElement.Name = "cmbElement"
-        Me.cmbElement.Size = New System.Drawing.Size(182, 21)
+        Me.cmbElement.Size = New System.Drawing.Size(250, 21)
         Me.cmbElement.TabIndex = 3
         '
         'cmbstation
@@ -647,7 +647,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1, Me.prgrbProducts})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 450)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(976, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -696,7 +696,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator, Me.toolStripSeparator1, Me.HelpToolStripButton})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(976, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -704,7 +704,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(893, 475)
+        Me.ClientSize = New System.Drawing.Size(976, 475)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
