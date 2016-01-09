@@ -218,9 +218,14 @@ Err:
         elmlist = ""
         elmcolmn = ""
 
+        'codes = lstvElements.Items(elems).SubItems(0).Text
+        'abbrev = lstvElements.Items(elems).SubItems(1).Text
+
         If lstvElements.Items.Count > 0 Then
             elmlist = "'" & lstvElements.Items(0).Text & "'" '""""
+            'elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
             elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+
             'elmcolmn = " AVG(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
 
             For i = 1 To lstvElements.Items.Count - 1
@@ -303,7 +308,11 @@ Err:
                       "HAVING ((recordedFrom= " & stnlist & ") AND (describedBy=" & elmlist & "));"
                 SummaryProducts(sql, "Extremes")
             Case "GeoCLIM"
-                  GeoCLIMProducts(stnlist, sdate, edate)
+                GeoCLIMProducts(stnlist, sdate, edate)
+            Case "Inventory"
+                sql = "use mysql_climsoft_db_v4; SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                InventoryProducts(sql, "Inventory")
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
@@ -564,6 +573,7 @@ Err:
 
             FileOpen(11, fl, OpenMode.Output)
 
+            ' Write the lement headers as abbreviation
             For kount = 0 To ds.Tables("observationfinal").Columns.Count - 1
                 Write(11, ds.Tables("observationfinal").Columns.Item(kount).ColumnName)
             Next
@@ -592,7 +602,79 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+    Sub InventoryProducts(sql As String, typ As String)
+        On Error GoTo Err
+        Dim flds1, flds2, flds3 As String
+        Dim fl As String
 
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        ds.Clear()
+        da.Fill(ds, "observationfinal")
+
+        maxRows = ds.Tables("observationfinal").Rows.Count
+
+        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+        FileOpen(11, fl, OpenMode.Output)
+
+        ' Write Column Headers
+        Write(11, "Station")
+        Write(11, "Lat")
+        Write(11, "Lon")
+        Write(11, "Elev")
+
+        Write(11, "Year")
+        Write(11, "Month")
+        Write(11, "Day")
+        Write(11, "Hour")
+       
+
+        ' Column headers from table field names
+        For j = 0 To lstvElements.Items.Count - 1
+            Write(11, lstvElements.Items(j).SubItems(1).Text)
+        Next
+
+
+        ' End header row
+        PrintLine(11)
+
+        For k = 0 To maxRows - 1
+
+            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                ' Write the row headers befor the Invetory descriptors
+                If i < 8 Then
+                    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                Else
+                    If InStr(ds.Tables("observationfinal").Rows(k).Item(i), "NULL") <> 0 Then 'Missing Values to represented as blanks
+                        Write(11, "")
+                    Else
+                        Write(11, "X")
+                    End If
+
+                End If
+
+
+
+            Next
+            ' New line for another record
+            PrintLine(11)
+        Next
+
+        FileClose(11)
+
+        CommonModules.ViewFile(fl)
+
+        flds1 = """" & lstvElements.Items(0).Text & """"
+        flds2 = """" & lstvElements.Items(1).Text & """"
+        flds3 = """" & lstvElements.Items(2).Text & """"
+
+        Exit Sub
+Err:
+        'MsgBox(Err.Description)
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
 
 
     Sub FormattedOutput(fp As Integer, rw As Long, col As Integer)
@@ -656,7 +738,5 @@ Err:
 
     End Sub
 
-    Private Sub prgrbProducts_Click(sender As Object, e As EventArgs) Handles prgrbProducts.Click
 
-    End Sub
 End Class
