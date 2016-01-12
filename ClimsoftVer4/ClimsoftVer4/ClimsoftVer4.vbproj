@@ -166,6 +166,12 @@
     <Compile Include="frmBUFR.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmCPTSeason.Designer.vb">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCPTSeason.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCrex.designer.vb">
       <DependentUpon>frmCrex.vb</DependentUpon>
     </Compile>
@@ -537,6 +543,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBUFr.resx">
       <DependentUpon>frmBUFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCPTSeason.resx">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCrex.resx">
       <DependentUpon>frmCrex.vb</DependentUpon>
