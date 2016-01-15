@@ -32,7 +32,7 @@ Public Class formProductsSelectCriteria
     'Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     '    Dim prtyp As New clsProducts
 
-    '    MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+    '    MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mariadb_climsoft_db_v4"
 
     '    'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
