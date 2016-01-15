@@ -206,7 +206,7 @@ Module TemporaryInterfaceCode
 
         Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim MyConnectionString As String = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+        Dim MyConnectionString As String = "server=127.0.0.1; uid=root; pwd=admin; database=mariadb_climsoft_db_v4"
         Try
             conn.ConnectionString = MyConnectionString
             conn.Open()
