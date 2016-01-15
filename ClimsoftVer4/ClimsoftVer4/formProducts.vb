@@ -26,7 +26,7 @@ Public Class frmProducts
     Dim SelectedProduct
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mariadb_climsoft_db_v4"
         MyConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = MyConnectionString
