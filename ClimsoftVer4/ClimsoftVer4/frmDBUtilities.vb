@@ -236,7 +236,7 @@ Public Class frmDBUtilities
         '        MsgBox("CLIMSOFT V3 backup created")
 
         '        ' Import from CLIMSOFT V3 backup file to CLIMSOFT V4 db
-        '        dbstr = "mariadb_climsoft_db_v4"
+        '        dbstr = "mysql_climsoft_db_v4"
         '        sql_obsv = "use " & dbstr & "; LOAD DATA INFILE '" & bkpfile & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark);"
 
         '        'Execute query for migrating data to V4 db

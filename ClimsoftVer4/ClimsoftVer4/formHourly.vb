@@ -937,4 +937,8 @@ Public Class formHourly
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
 
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+
+    End Sub
 End Class
