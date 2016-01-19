@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="defaultDatabase" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">server=127.0.0.1;database=mariadb_climsoft_db_v4;port=3306;</Value>
+      <Value Profile="(Default)">server=127.0.0.1;database=mysql_climsoft_db_v4;port=3306;</Value>
     </Setting>
     <Setting Name="defaultRLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Program Files\R\R-3.2.1</Value>

@@ -92,7 +92,7 @@ Public Class frmLogin
     Function Server_db_port(svrdbstr As String) As String
         Dim Ssvr, Esvr, Sdb, Edb As Integer
         Dim svrstr, dbstr As String
-        ' server=127.0.0.1;database=mariadb_climsoft_db_v4;port=3306;
+        ' server=127.0.0.1;database=mysql_climsoft_db_v4;port=3306;
         Ssvr = 8
         Esvr = InStr(svrdbstr, ";database=")
         Sdb = Esvr + 10
