@@ -608,29 +608,55 @@ Err:
             ' Write the column names as column headers
             For kount = 0 To ds.Tables("observationfinal").Columns.Count - 1
                 Write(11, ds.Tables("observationfinal").Columns.Item(kount).ColumnName)
-                    Next
+            Next
 
 
             PrintLine(11)
 
-            For k = 0 To 365 'maxRows - 1
+            For k = 0 To maxRows - 1
 
                 For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                    If k = 365 And i > 1 And Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then ' Last day of Non Leap Year
-                        Write(11, "9998")
-                    ElseIf IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value
-                        Write(11, "-999")
-                    Else
-                        Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
-                    End If
-                 Next
+                    If k < 59 Then
+                        If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value before 29th Feb
+                            Write(11, "-999")
+                        Else
+                            Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value before 29th Feb
+                        End If
 
+                    ElseIf k = 59 Then ' 29th Feb
+                        If i > 1 And Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then ' Non Leap Year
+                            Write(11, "9988")
+                        ElseIf IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value 29th Feb of Leap Year
+                            Write(11, "-999")
+                        Else
+                            Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value for 29th Feb of Leap Year
+                        End If
+
+                    ElseIf k > 59 Then ' Non Leap Year after 29th Feb
+                        If i > 1 And Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then
+                            If IsDBNull(ds.Tables("observationfinal").Rows(k - 1).Item(i)) Then ' Missing Data value in Non Leap Year
+                                Write(11, "-999")
+                            Else
+                                Write(11, ds.Tables("observationfinal").Rows(k - 1).Item(i)) ' Data value in Non Leap Year after 28th Feb
+                            End If
+                        Else
+                            If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value in Leap Year
+                                Write(11, "-999")
+                            Else
+                                Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value in Leap Year after 29th Feb
+                            End If
+                        End If
+                    End If
+
+                Next
                 PrintLine(11)
             Next
 
-            FileClose(11)
-            CommonModules.ViewFile(fl)
         Next
+
+        FileClose(11)
+        CommonModules.ViewFile(fl)
+        'Next
 
         Exit Sub
 Err:
