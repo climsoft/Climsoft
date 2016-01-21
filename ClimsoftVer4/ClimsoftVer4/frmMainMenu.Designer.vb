@@ -39,7 +39,6 @@ Partial Class frmMainMenu
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectLanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GenerlSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -183,7 +182,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
@@ -192,29 +191,23 @@ Partial Class frmMainMenu
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(178, 24)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(177, 24)
         Me.mnuToolsOptions.Tag = "Options"
         Me.mnuToolsOptions.Text = "Options"
         '
         'mnuToolsModifyForms
         '
         Me.mnuToolsModifyForms.Name = "mnuToolsModifyForms"
-        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(178, 24)
+        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(177, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
         '
         'SelectLanguageToolStripMenuItem
         '
         Me.SelectLanguageToolStripMenuItem.Name = "SelectLanguageToolStripMenuItem"
-        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(178, 24)
+        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
         Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
         Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
-        '
-        'GenerlSettingsToolStripMenuItem
-        '
-        Me.GenerlSettingsToolStripMenuItem.Name = "GenerlSettingsToolStripMenuItem"
-        Me.GenerlSettingsToolStripMenuItem.Size = New System.Drawing.Size(178, 24)
-        Me.GenerlSettingsToolStripMenuItem.Text = "General Settings"
         '
         'mnuHelp
         '
@@ -596,5 +589,4 @@ Partial Class frmMainMenu
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents GenerlSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
