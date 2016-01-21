@@ -757,9 +757,6 @@ Err:
                     End If
 
                 End If
-
-
-
             Next
             ' New line for another record
             PrintLine(11)
