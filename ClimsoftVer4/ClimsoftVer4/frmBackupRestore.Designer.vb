@@ -158,7 +158,7 @@ Partial Class frmBackupRestore
         Me.txtDb.Name = "txtDb"
         Me.txtDb.Size = New System.Drawing.Size(153, 20)
         Me.txtDb.TabIndex = 14
-        Me.txtDb.Text = "maria_climsoft_db_v4"
+        Me.txtDb.Text = "mariadb_climsoft_db_v4"
         '
         'frmBackupRestore
         '

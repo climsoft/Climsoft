@@ -127,8 +127,4 @@ Public Class frmMainMenu
     Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
         frmDataForms.Show()
     End Sub
-
-    Private Sub GenerlSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerlSettingsToolStripMenuItem.Click
-        frmGeneralSettings.Show()
-    End Sub
 End Class

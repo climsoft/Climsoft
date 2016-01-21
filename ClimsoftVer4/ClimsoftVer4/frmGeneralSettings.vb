@@ -305,8 +305,4 @@ Public Class frmGeneralSettings
             navigateRecords()
        
     End Sub
-
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented!", MsgBoxStyle.Information)
-    End Sub
 End Class

@@ -120,7 +120,7 @@ Partial Class frmDataMigration
         Me.txtV4db.Name = "txtV4db"
         Me.txtV4db.Size = New System.Drawing.Size(185, 20)
         Me.txtV4db.TabIndex = 1
-        Me.txtV4db.Text = "maria_climsoft_db_v4"
+        Me.txtV4db.Text = "mariadb_climsoft_db_v4"
         '
         'txtV3db
         '

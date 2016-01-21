@@ -23,7 +23,7 @@ Public Class frmProductsSelect
     Dim MyConnectionString As String
     Dim kounts As Integer
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+        MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mariadb_climsoft_db_v4"
 
         Try
             conn.ConnectionString = MyConnectionString

@@ -27,7 +27,7 @@ Public Class frmKeyEntry
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4;"
+        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mariadb_climsoft_db_v4;"
         'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
         MyConnectionString = frmLogin.txtusrpwd.Text
