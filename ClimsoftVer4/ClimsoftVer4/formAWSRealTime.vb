@@ -675,7 +675,7 @@ Err:
         'recEdit.messageBoxCommit()
 
         comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
-        sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+        sql0 = "INSERT INTO `mariadb_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
         comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
         comm.ExecuteNonQuery()   ' Execute the query
 
@@ -684,7 +684,7 @@ Err:
 
         Dim tbl As String = txtStrName.Text
 
-        sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
+        sql0 = "CREATE TABLE `mariadb_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
                "( " & _
                 "`No` INT NOT NULL, " & _
                 "`Element_abbreviation` TEXT NOT NULL, " & _
@@ -1214,7 +1214,7 @@ Err:
         Dim descrfil As String
         Dim C1 As String
 
-        sql = "use mysql_climsoft_db_v4; SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
+        sql = "use mariadb_climsoft_db_v4; SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
               "FROM TM_307091 WHERE (((Sequence_Descriptor1) Is Not Null)) ORDER BY Rec;"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dr.Clear()
@@ -1311,7 +1311,7 @@ Err:
                     Else
                         txtqlfr = .Rows(i).Item("txtQualifier")
                     End If
-                    sql = "use mysql_climsoft_db_v4; SELECT * FROM " & struc & " order by Cols;"
+                    sql = "use mariadb_climsoft_db_v4; SELECT * FROM " & struc & " order by Cols;"
 
                     rs = GetDataSet(struc, sql)
                     Exit For
@@ -1705,7 +1705,7 @@ Err:
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
 
-                    sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
+                    sql = "use mariadb_climsoft_db_v4; INSERT INTO observationfinal " & _
                         "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
                         "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
 
