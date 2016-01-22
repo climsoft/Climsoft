@@ -131,4 +131,20 @@ Public Class frmMainMenu
     Private Sub GenerlSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerlSettingsToolStripMenuItem.Click
         frmGeneralSettings.Show()
     End Sub
+
+    Private Sub SequencerConfigurationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SequencerConfigurationToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
+        frmElementSequencerHourly.Show()
+    End Sub
+
+    Private Sub FormHourlyTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormHourlyTimeSelectionToolStripMenuItem.Click
+        frmHourlyTimeSelection.Show()
+    End Sub
+
+    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
+        frmElementSequencerDaily.Show()
+    End Sub
 End Class
