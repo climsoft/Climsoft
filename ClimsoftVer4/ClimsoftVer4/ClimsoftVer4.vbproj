@@ -94,12 +94,6 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
-    <Compile Include="formAWSRealTime.Designer.vb">
-      <DependentUpon>formAWSRealTime.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formAWSRealTime.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="formClimat.Designer.vb">
       <DependentUpon>formClimat.vb</DependentUpon>
     </Compile>
@@ -118,6 +112,7 @@
     <Compile Include="formDaily2.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="formDataView.Designer.vb">
       <DependentUpon>formDataView.vb</DependentUpon>
     </Compile>
@@ -190,6 +185,7 @@
     <Compile Include="frmDataTransferProgress.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="frmDBUtilities.Designer.vb">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </Compile>
@@ -365,6 +361,7 @@
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="frmQCdatesSelection.Designer.vb">
       <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
     </Compile>
@@ -391,6 +388,7 @@
     <Compile Include="frmUsers.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="My Project\Application1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -435,9 +433,6 @@
     <EmbeddedResource Include="formClimat.fr.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formAWSRealTime.resx">
-      <DependentUpon>formAWSRealTime.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formClimat.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
@@ -480,6 +475,7 @@
     <EmbeddedResource Include="formHourly.fr.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="formHourlyWind.resx">
       <DependentUpon>formHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
@@ -489,6 +485,7 @@
     <EmbeddedResource Include="formMetadata.resx">
       <DependentUpon>formMetadata.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="formMonthly.de.resx">
       <DependentUpon>formMonthly.vb</DependentUpon>
     </EmbeddedResource>
@@ -593,9 +590,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.fr.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formPaperArchive.resx">
-      <DependentUpon>formPaperArchive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
@@ -743,9 +737,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.fr.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUsers.resx">
-      <DependentUpon>frmUsers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
