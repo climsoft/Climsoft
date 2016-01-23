@@ -31,7 +31,6 @@ Public Class dataEntryGlobalRoutines
     Public Sub messageBoxCommit()
         MsgBox("New record added to database table!", MsgBoxStyle.Information)
     End Sub
-
     Public Function getFlagTexboxSuffix(ByVal strVal As String, ByRef ctl As Control, flagIndexDiff As Integer) As String
         'Locates the texbox for the flag corresponding to the value texbox
         Dim obsValColIndex As Integer, flagColIndex As Integer
@@ -115,12 +114,10 @@ Public Class dataEntryGlobalRoutines
         '0.0065 is dry adiabatic lapse rate
         calculateMSLppp = MSLppp
     End Function
-
     Public Function checkIsNumeric(ByVal strVal As String, ctl As Control) As Boolean
         If IsNumeric(strVal) Then
             checkIsNumeric = True
             ctl.BackColor = Color.White
-
             ' My.Computer.Keyboard.SendKeys("{TAB}")
             tabNext = True
         Else

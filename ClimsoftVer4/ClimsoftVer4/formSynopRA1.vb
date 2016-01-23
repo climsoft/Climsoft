@@ -59,8 +59,6 @@ Public Class formSynopRA1
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-
         '--------------------------
         Dim stn As String
         'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
@@ -70,7 +68,6 @@ Public Class formSynopRA1
         'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
         'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
         ' cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-
         txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
         cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
         cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
@@ -218,13 +215,6 @@ Public Class formSynopRA1
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
-
-        cboStation.Text = ""
-        txtYear.Clear()
-        cboMonth.Text = ""
-        cboDay.Text = ""
-        cboHour.Text = ""
-
         'cboStation.Text = ""
         'Dim stnIdentifier As String
 
@@ -332,72 +322,11 @@ Public Class formSynopRA1
         ' ''daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
         ' ''daReg.Fill(dsReg, "regData")
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'The "btnClear" when clicked is meant to clear the form of any new data entered after clicking the Addnew button or in other words 
-        'to undo the AddNew button process before the recorded can be committed to the datasource table linked to the DataSet.
-        'So all the buttons that were disabled after the AddNew button was clicked should be enabled back again and the Commit button
-        'disabled until the AddNew button is clicked
-
-        btnAddNew.Enabled = True
-        btnCommit.Enabled = False
-        btnDelete.Enabled = True
-        btnUpdate.Enabled = True
-        btnMoveFirst.Enabled = True
-        btnMoveLast.Enabled = True
-        btnMoveNext.Enabled = True
-        btnMovePrevious.Enabled = True
-
-        'Set Record position index to first record
-        inc = 0
-
         '----------------------------------------
 
         txtVal_Elem301Field010.Text = dsReg.Tables("regData").Rows(0).Item("keyValue")
 
-
         Dim tmaxHour1 As String, tmaxHour2 As String, gminStartMonth As String, gminEndMonth As String
-
-    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
-        'must be declared for the Update method to work.
-        Dim m As Integer
-        Dim ctl As Control
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim dsNewRow As DataRow
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recCommit As New dataEntryGlobalRoutines
-
-        dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
-        'Add a new record to the data source table
-        ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
-        'Commit observation header information to database
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
-
-        'Commit observation values to database
-        'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To 53
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
-
-        'Commit observation flags to database
-        'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = 54 To 102
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
-
-        da.Update(ds, "form_synoptic_2_RA1")
 
         'Get first hour for reading tmax
         tmaxHour1 = dsReg.Tables("regData").Rows(1).Item("keyValue")
@@ -758,16 +687,13 @@ Public Class formSynopRA1
 
     Private Sub formSynopRA1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim objKeyPress As New dataEntryGlobalRoutines
-
         Dim obsVal As String, obsFlag As String, ctrl As Control, flagtextBoxSuffix As String, flagIndexDiff As Integer
-
         ' Dim obsValColIndex As Integer, flagColIndex As Integer
 
         'Initialize string variables
         obsVal = ""
         obsFlag = ""
         flagtextBoxSuffix = ""
- 
         flagIndexDiff = 49
 
         'If {ENTER} key is pressed
@@ -791,20 +717,12 @@ Public Class formSynopRA1
                     'Loop through all controls on form
                     'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
                     If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-
                         ctrl.Text = obsFlag
                     End If
                 Next ctrl
 
                 'Check that numeric value has been entered for observation value
                 objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
-
-            Else
-                'Jump to the next texbox
-                My.Computer.Keyboard.SendKeys("{TAB}")
-            End If
-        End If
-
 
                 ''Get the element limits
 
@@ -980,7 +898,6 @@ Public Class formSynopRA1
             Next m
 
             displayRecordNumber()
-
         Else
             'If this is the first record
             btnAddNew.Enabled = False
@@ -994,16 +911,12 @@ Public Class formSynopRA1
             btnMoveLast.Enabled = False
 
             recNumberTextBox.Text = "Record 1 of 1"
-
         End If
 
     End Sub
 
 
     Private Sub txtYear_LostFocus(sender As Object, e As EventArgs) Handles txtYear.LostFocus
-
-
-    Private Sub Val_Elem106TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem106Field005.LostFocus
 
         ''Dim numericValueCheck As New dataEntryGlobalRoutines
         ' ''Check value is numeric
@@ -1033,24 +946,6 @@ Public Class formSynopRA1
     End Sub
 
     Private Sub Val_Elem003TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem003Field046.LostFocus
-
-        If Val(txtVal_Elem003Field046.Text) > Val(txtVal_Elem002Field045.Text) Then
-            txtVal_Elem002Field045.BackColor = Color.Cyan
-            txtVal_Elem003Field046.BackColor = Color.Cyan
-            MsgBox("Tmax must be greater or equal to Tmin!", MsgBoxStyle.Exclamation)
-        Else
-            txtVal_Elem002Field045.BackColor = Color.White
-            txtVal_Elem003Field046.BackColor = Color.White
-        End If
-    End Sub
-
-    Private Sub Val_Elem005TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem005Field051.LostFocus
-        If Val(txtVal_Elem005Field051.Text) < 0 Then
-            txtVal_Elem005Field051.BackColor = Color.Red
-            MsgBox("Precipitation must be greater or equal to zero!", MsgBoxStyle.Critical)
-        Else
-            txtVal_Elem005Field051.BackColor = Color.White
-
         ''If Val(txtVal_Elem003Field046.Text) > Val(txtVal_Elem002Field045.Text) Then
         ''    txtVal_Elem002Field045.BackColor = Color.Cyan
         ''    txtVal_Elem003Field046.BackColor = Color.Cyan
@@ -1114,24 +1009,6 @@ Public Class formSynopRA1
 
     End Sub
 
-    Private Sub Val_Elem112TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem112Field019.LostFocus
-        If Val(txtVal_Elem112Field019.Text) > 360 Then
-            txtVal_Elem112Field019.BackColor = Color.Red
-            MsgBox("Wind direction must be less or equal to 360", MsgBoxStyle.Critical)
-        Else
-            txtVal_Elem112Field019.BackColor = Color.White
-        End If
-    End Sub
-
-    Private Sub Val_Elem102TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem102Field013.LostFocus
-        If Val(txtVal_Elem102Field013.Text) > Val(txtVal_Elem101Field012.Text) Then
-            txtVal_Elem101Field012.BackColor = Color.Cyan
-            txtVal_Elem102Field013.BackColor = Color.Cyan
-            MsgBox("Drybulb must be greater or equal to Wetbulb!", MsgBoxStyle.Exclamation)
-        Else
-            txtVal_Elem101Field012.BackColor = Color.White
-            txtVal_Elem102Field013.BackColor = Color.White
-        End If
 
     Private Sub txtVal_Elem103Field014_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem103Field014.LostFocus
         Dim RH As New dataEntryGlobalRoutines
@@ -1349,18 +1226,9 @@ Public Class formSynopRA1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         frmImportCSV.Show()
-
     End Sub
 
     Private Sub txtVal_Elem002Field045_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem002Field045.LostFocus
-
-    End Sub
-
-    Private Sub cboDay_LostFocus(sender As Object, e As EventArgs) Handles cboDay.LostFocus
-
-    End Sub
-
-    Private Sub cboHour_LostFocus(sender As Object, e As EventArgs) Handles cboHour.LostFocus
 
     End Sub
 End Class
