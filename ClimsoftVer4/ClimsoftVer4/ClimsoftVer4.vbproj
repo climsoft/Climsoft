@@ -166,12 +166,6 @@
     <Compile Include="frmBUFR.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCPTSeason.Designer.vb">
-      <DependentUpon>frmCPTSeason.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmCPTSeason.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmCrex.designer.vb">
       <DependentUpon>frmCrex.vb</DependentUpon>
     </Compile>
@@ -214,10 +208,34 @@
     <Compile Include="formHourly.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmElementSequencer.Designer.vb">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.Designer.vb">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneralSettings.Designer.vb">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneralSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGTSNOAA.Designer.vb">
       <DependentUpon>frmGTSNOAA.vb</DependentUpon>
     </Compile>
     <Compile Include="frmGTSNOAA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.Designer.vb">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImportAWS.Designer.vb">
@@ -544,9 +562,6 @@
     <EmbeddedResource Include="frmBUFr.resx">
       <DependentUpon>frmBUFR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCPTSeason.resx">
-      <DependentUpon>frmCPTSeason.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmCrex.resx">
       <DependentUpon>frmCrex.vb</DependentUpon>
     </EmbeddedResource>
@@ -589,14 +604,26 @@
     <EmbeddedResource Include="formHourly.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencer.resx">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencerDaily.resx">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.de.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.fr.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneralSettings.resx">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGTSNOAA.resx">
       <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHourlyTimeSelection.resx">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportAWS.resx">
       <DependentUpon>frmImportAWS.vb</DependentUpon>
