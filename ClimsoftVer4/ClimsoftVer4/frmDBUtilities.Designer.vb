@@ -25,8 +25,13 @@ Partial Class frmDBUtilities
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDBUtilities))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObsInitialToFinalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExternalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CLICOMDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NOAAGTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CLIMSOFTV3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -38,10 +43,11 @@ Partial Class frmDBUtilities
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
+        Me.cmbDb = New System.Windows.Forms.ToolStripComboBox()
         Me.Dbtpanel1 = New System.Windows.Forms.Panel()
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
+        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ListViewDbUtil = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -62,9 +68,16 @@ Partial Class frmDBUtilities
         '
         'ImportToolStripMenuItem
         '
+        Me.ImportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObsInitialToFinalToolStripMenuItem})
         Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
         Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(57, 20)
         Me.ImportToolStripMenuItem.Text = "Upload"
+        '
+        'ObsInitialToFinalToolStripMenuItem
+        '
+        Me.ObsInitialToFinalToolStripMenuItem.Name = "ObsInitialToFinalToolStripMenuItem"
+        Me.ObsInitialToFinalToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ObsInitialToFinalToolStripMenuItem.Text = "Obs Initial to Final"
         '
         'GenerateValuesToolStripMenuItem
         '
@@ -74,9 +87,34 @@ Partial Class frmDBUtilities
         '
         'ExternalDataToolStripMenuItem
         '
+        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
         Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
+        '
+        'CLICOMDailyToolStripMenuItem
+        '
+        Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM Daily"
+        '
+        'AWSToolStripMenuItem
+        '
+        Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.AWSToolStripMenuItem.Text = "AWS "
+        '
+        'NOAAGTSToolStripMenuItem
+        '
+        Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
+        '
+        'CLIMSOFTV3ToolStripMenuItem
+        '
+        Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
+        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLIMSOFTV3ToolStripMenuItem.Text = "Data Migration"
         '
         'BackupToolStripMenuItem
         '
@@ -143,7 +181,7 @@ Partial Class frmDBUtilities
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripComboBox1})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(852, 25)
@@ -156,11 +194,11 @@ Partial Class frmDBUtilities
         Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 22)
         Me.ToolStripLabel1.Text = "Database"
         '
-        'ToolStripComboBox1
+        'cmbDb
         '
-        Me.ToolStripComboBox1.Items.AddRange(New Object() {"Initial", "Final"})
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 25)
+        Me.cmbDb.Items.AddRange(New Object() {"Initial", "Final"})
+        Me.cmbDb.Name = "cmbDb"
+        Me.cmbDb.Size = New System.Drawing.Size(121, 25)
         '
         'Dbtpanel1
         '
@@ -176,11 +214,13 @@ Partial Class frmDBUtilities
         'grpbxUpload
         '
         Me.grpbxUpload.Controls.Add(Me.cmdUpload)
+        Me.grpbxUpload.Controls.Add(Me.ListView1)
         Me.grpbxUpload.Location = New System.Drawing.Point(2, 311)
         Me.grpbxUpload.Name = "grpbxUpload"
         Me.grpbxUpload.Size = New System.Drawing.Size(421, 24)
         Me.grpbxUpload.TabIndex = 7
         Me.grpbxUpload.TabStop = False
+        Me.grpbxUpload.Visible = False
         '
         'cmdUpload
         '
@@ -192,6 +232,22 @@ Partial Class frmDBUtilities
         Me.cmdUpload.UseVisualStyleBackColor = True
         Me.cmdUpload.Visible = False
         '
+        'ListView1
+        '
+        Me.ListView1.AllowColumnReorder = True
+        Me.ListView1.AllowDrop = True
+        Me.ListView1.CheckBoxes = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.LabelEdit = True
+        Me.ListView1.Location = New System.Drawing.Point(0, -313)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListView1.Size = New System.Drawing.Size(412, 305)
+        Me.ListView1.TabIndex = 5
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.ListView1.Visible = False
+        '
         'ListViewDbUtil
         '
         Me.ListViewDbUtil.AllowColumnReorder = True
@@ -202,7 +258,7 @@ Partial Class frmDBUtilities
         Me.ListViewDbUtil.Location = New System.Drawing.Point(5, 5)
         Me.ListViewDbUtil.Name = "ListViewDbUtil"
         Me.ListViewDbUtil.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListViewDbUtil.Size = New System.Drawing.Size(412, 305)
+        Me.ListViewDbUtil.Size = New System.Drawing.Size(412, 230)
         Me.ListViewDbUtil.TabIndex = 5
         Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
         Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
@@ -254,10 +310,16 @@ Partial Class frmDBUtilities
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents ToolStripComboBox1 As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents cmbDb As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents Dbtpanel1 As System.Windows.Forms.Panel
     Public WithEvents ListViewDbUtil As System.Windows.Forms.ListView
     Friend WithEvents grpbxUpload As System.Windows.Forms.GroupBox
     Friend WithEvents cmdUpload As System.Windows.Forms.Button
+    Friend WithEvents CLICOMDailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ObsInitialToFinalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NOAAGTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents CLIMSOFTV3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -154,6 +154,12 @@
     <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBackupRestore.Designer.vb">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackupRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmBUFr.Designer.vb">
       <DependentUpon>frmBUFR.vb</DependentUpon>
     </Compile>
@@ -170,6 +176,12 @@
       <DependentUpon>frmDataForms.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDataForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataMigration.Designer.vb">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataMigration.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDataTransferProgress.Designer.vb">
@@ -194,6 +206,42 @@
       <DependentUpon>formHourly.vb</DependentUpon>
     </Compile>
     <Compile Include="formHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencer.Designer.vb">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.Designer.vb">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneralSettings.Designer.vb">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneralSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGTSNOAA.Designer.vb">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGTSNOAA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.Designer.vb">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportAWS.Designer.vb">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportAWS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImportCSV.Designer.vb">
@@ -329,6 +377,14 @@
     <Compile Include="frmUpdateDBfromQCReport.vb">
       <SubType>Form</SubType>
     </Compile>
+
+    <Compile Include="frmUploadToObsFinal.Designer.vb">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+
     <Compile Include="frmUsers.Designer.vb">
       <DependentUpon>frmUsers.vb</DependentUpon>
     </Compile>
@@ -496,6 +552,9 @@
     <EmbeddedResource Include="frmAction.fr.resx">
       <DependentUpon>frmAction.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBackupRestore.resx">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmBUFr.de.resx">
       <DependentUpon>frmBUFR.vb</DependentUpon>
     </EmbeddedResource>
@@ -516,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataForms.resx">
       <DependentUpon>frmDataForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataMigration.resx">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.de.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
@@ -544,11 +606,29 @@
     <EmbeddedResource Include="formHourly.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencer.resx">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencerDaily.resx">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.de.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGeneral.fr.resx">
       <DependentUpon>frmGeneral.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneralSettings.resx">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGTSNOAA.resx">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHourlyTimeSelection.resx">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportAWS.resx">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportCSV.resx">
       <DependentUpon>frmImportCSV.vb</DependentUpon>
@@ -649,6 +729,11 @@
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Include="frmUploadToObsFinal.resx">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </EmbeddedResource>
+
     <EmbeddedResource Include="My Project\Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.vb</LastGenOutput>

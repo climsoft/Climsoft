@@ -194,8 +194,6 @@ Partial Class formSynopRA1
         Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnUpload = New System.Windows.Forms.Button()
-        Me.btnUploadToMain = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         YyyyLabel = New System.Windows.Forms.Label()
         Val_Elem106Label = New System.Windows.Forms.Label()
         Val_Elem107Label = New System.Windows.Forms.Label()
@@ -1653,31 +1651,11 @@ Partial Class formSynopRA1
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
-        'btnUploadToMain
-        '
-        Me.btnUploadToMain.Location = New System.Drawing.Point(38, 588)
-        Me.btnUploadToMain.Name = "btnUploadToMain"
-        Me.btnUploadToMain.Size = New System.Drawing.Size(155, 23)
-        Me.btnUploadToMain.TabIndex = 208
-        Me.btnUploadToMain.Text = "Upload from Initial to Final"
-        Me.btnUploadToMain.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(46, 517)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 209
-        Me.Button1.Text = "Import CSV"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'formSynopRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(740, 632)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.btnUploadToMain)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtSequencer)
@@ -1980,7 +1958,5 @@ Partial Class formSynopRA1
     Friend WithEvents txtSequencer As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btnUpload As System.Windows.Forms.Button
-    Friend WithEvents btnUploadToMain As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

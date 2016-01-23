@@ -39,6 +39,11 @@ Partial Class frmMainMenu
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectLanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerlSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SequencerConfigurationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FormHourlyTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -182,7 +187,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
@@ -191,23 +196,54 @@ Partial Class frmMainMenu
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsOptions.Tag = "Options"
         Me.mnuToolsOptions.Text = "Options"
         '
         'mnuToolsModifyForms
         '
         Me.mnuToolsModifyForms.Name = "mnuToolsModifyForms"
-        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
         '
         'SelectLanguageToolStripMenuItem
         '
         Me.SelectLanguageToolStripMenuItem.Name = "SelectLanguageToolStripMenuItem"
-        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
         Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
+        '
+        'GenerlSettingsToolStripMenuItem
+        '
+        Me.GenerlSettingsToolStripMenuItem.Name = "GenerlSettingsToolStripMenuItem"
+        Me.GenerlSettingsToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.GenerlSettingsToolStripMenuItem.Text = "General Settings"
+        '
+        'SequencerConfigurationToolStripMenuItem
+        '
+        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem})
+        Me.SequencerConfigurationToolStripMenuItem.Name = "SequencerConfigurationToolStripMenuItem"
+        Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.SequencerConfigurationToolStripMenuItem.Text = "Sequencer Configuration"
+        '
+        'HourlyToolStripMenuItem
+        '
+        Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
+        Me.HourlyToolStripMenuItem.Text = "Daily"
+        '
+        'DailyToolStripMenuItem
+        '
+        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
+        Me.DailyToolStripMenuItem.Text = "Hourly"
+        '
+        'FormHourlyTimeSelectionToolStripMenuItem
+        '
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Name = "FormHourlyTimeSelectionToolStripMenuItem"
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Text = "FormHourly Time Selection"
         '
         'mnuHelp
         '
@@ -589,4 +625,9 @@ Partial Class frmMainMenu
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GenerlSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SequencerConfigurationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HourlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
