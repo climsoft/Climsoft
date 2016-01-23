@@ -219,7 +219,7 @@ Partial Class frmProducts
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 410)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 429)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Size = New System.Drawing.Size(515, 25)
         Me.ToolStrip2.TabIndex = 16
@@ -249,7 +249,7 @@ Partial Class frmProducts
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 49)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(455, 361)
+        Me.Panel1.Size = New System.Drawing.Size(503, 380)
         Me.Panel1.TabIndex = 17
         '
         'cmbProductsCategory
@@ -283,7 +283,7 @@ Partial Class frmProducts
         Me.lstvProducts.Location = New System.Drawing.Point(21, 41)
         Me.lstvProducts.Name = "lstvProducts"
         Me.lstvProducts.RightToLeftLayout = True
-        Me.lstvProducts.Size = New System.Drawing.Size(384, 320)
+        Me.lstvProducts.Size = New System.Drawing.Size(461, 320)
         Me.lstvProducts.TabIndex = 16
         Me.lstvProducts.UseCompatibleStateImageBehavior = False
         Me.lstvProducts.View = System.Windows.Forms.View.Details
@@ -292,7 +292,7 @@ Partial Class frmProducts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 435)
+        Me.ClientSize = New System.Drawing.Size(515, 454)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.lblProducts)
