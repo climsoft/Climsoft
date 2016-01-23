@@ -23,7 +23,7 @@ Imports System.Threading.Tasks
 
 Public Class clsRInterface
     ' R interface class. Each instance of the class has its own REngine instance
-    Dim climateObjectPath As String = "C:/ClimateObject/" ' Location of ClimateObject library
+    Dim climateObjectPath As String = "static/ClimateObject/" ' Location of ClimateObject library
     Dim engine As REngine
 
 

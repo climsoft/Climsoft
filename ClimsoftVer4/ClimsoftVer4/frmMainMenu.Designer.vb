@@ -39,6 +39,11 @@ Partial Class frmMainMenu
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
         Me.SelectLanguageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerlSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SequencerConfigurationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FormHourlyTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -75,7 +80,7 @@ Partial Class frmMainMenu
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.ShowItemToolTips = True
-        Me.MenuStrip2.Size = New System.Drawing.Size(784, 27)
+        Me.MenuStrip2.Size = New System.Drawing.Size(756, 27)
         Me.MenuStrip2.TabIndex = 7
         Me.MenuStrip2.Text = "MenuStrip2"
         '
@@ -182,7 +187,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsOptions, Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
@@ -191,23 +196,54 @@ Partial Class frmMainMenu
         'mnuToolsOptions
         '
         Me.mnuToolsOptions.Name = "mnuToolsOptions"
-        Me.mnuToolsOptions.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsOptions.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsOptions.Tag = "Options"
         Me.mnuToolsOptions.Text = "Options"
         '
         'mnuToolsModifyForms
         '
         Me.mnuToolsModifyForms.Name = "mnuToolsModifyForms"
-        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(177, 24)
+        Me.mnuToolsModifyForms.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
         '
         'SelectLanguageToolStripMenuItem
         '
         Me.SelectLanguageToolStripMenuItem.Name = "SelectLanguageToolStripMenuItem"
-        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(177, 24)
+        Me.SelectLanguageToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.SelectLanguageToolStripMenuItem.Tag = "Select_Language"
         Me.SelectLanguageToolStripMenuItem.Text = "Select Language"
+        '
+        'GenerlSettingsToolStripMenuItem
+        '
+        Me.GenerlSettingsToolStripMenuItem.Name = "GenerlSettingsToolStripMenuItem"
+        Me.GenerlSettingsToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.GenerlSettingsToolStripMenuItem.Text = "General Settings"
+        '
+        'SequencerConfigurationToolStripMenuItem
+        '
+        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem})
+        Me.SequencerConfigurationToolStripMenuItem.Name = "SequencerConfigurationToolStripMenuItem"
+        Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.SequencerConfigurationToolStripMenuItem.Text = "Sequencer Configuration"
+        '
+        'HourlyToolStripMenuItem
+        '
+        Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
+        Me.HourlyToolStripMenuItem.Text = "Daily"
+        '
+        'DailyToolStripMenuItem
+        '
+        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
+        Me.DailyToolStripMenuItem.Text = "Hourly"
+        '
+        'FormHourlyTimeSelectionToolStripMenuItem
+        '
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Name = "FormHourlyTimeSelectionToolStripMenuItem"
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.FormHourlyTimeSelectionToolStripMenuItem.Text = "FormHourly Time Selection"
         '
         'mnuHelp
         '
@@ -257,26 +293,29 @@ Partial Class frmMainMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(527, 521)
+
+        Me.Panel1.Size = New System.Drawing.Size(756, 521)
+
         Me.Panel1.TabIndex = 10
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(208, 488)
+        Me.Label5.Location = New System.Drawing.Point(340, 451)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(112, 16)
+        Me.Label5.Size = New System.Drawing.Size(43, 16)
         Me.Label5.TabIndex = 36
         Me.Label5.Tag = "Close"
-        Me.Label5.Text = "Close CLIMSOFT"
+        Me.Label5.Text = "Close"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(207, 5)
+        Me.Label11.Location = New System.Drawing.Point(284, 6)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(108, 25)
         Me.Label11.TabIndex = 35
@@ -287,7 +326,7 @@ Partial Class frmMainMenu
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(12, 434)
+        Me.Label9.Location = New System.Drawing.Point(62, 435)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(176, 16)
         Me.Label9.TabIndex = 33
@@ -298,7 +337,7 @@ Partial Class frmMainMenu
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(359, 429)
+        Me.Label8.Location = New System.Drawing.Point(507, 430)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(133, 16)
         Me.Label8.TabIndex = 32
@@ -309,7 +348,7 @@ Partial Class frmMainMenu
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(32, 322)
+        Me.Label7.Location = New System.Drawing.Point(85, 323)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(131, 16)
         Me.Label7.TabIndex = 31
@@ -320,7 +359,7 @@ Partial Class frmMainMenu
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(351, 321)
+        Me.Label6.Location = New System.Drawing.Point(503, 322)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(141, 16)
         Me.Label6.TabIndex = 30
@@ -331,7 +370,7 @@ Partial Class frmMainMenu
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(357, 215)
+        Me.Label4.Location = New System.Drawing.Point(503, 216)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 16)
         Me.Label4.TabIndex = 28
@@ -342,18 +381,18 @@ Partial Class frmMainMenu
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(22, 215)
+        Me.Label3.Location = New System.Drawing.Point(105, 218)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(159, 16)
+        Me.Label3.Size = New System.Drawing.Size(90, 16)
         Me.Label3.TabIndex = 27
-        Me.Label3.Tag = "Data_Transfer_Operations"
-        Me.Label3.Text = "Data Transfer Operations"
+        Me.Label3.Tag = "Data_Transfer"
+        Me.Label3.Text = "Data Transfer"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(358, 102)
+        Me.Label2.Location = New System.Drawing.Point(508, 103)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(134, 16)
         Me.Label2.TabIndex = 26
@@ -366,7 +405,7 @@ Partial Class frmMainMenu
         Me.cmdRedCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdRedCloseButton.FlatAppearance.BorderSize = 4
         Me.cmdRedCloseButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRedCloseButton.Location = New System.Drawing.Point(224, 429)
+        Me.cmdRedCloseButton.Location = New System.Drawing.Point(320, 392)
         Me.cmdRedCloseButton.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdRedCloseButton.Name = "cmdRedCloseButton"
         Me.cmdRedCloseButton.Padding = New System.Windows.Forms.Padding(5)
@@ -383,7 +422,7 @@ Partial Class frmMainMenu
         Me.cmdSettingsAWS.FlatAppearance.BorderSize = 4
         Me.cmdSettingsAWS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdSettingsAWS.ForeColor = System.Drawing.Color.Red
-        Me.cmdSettingsAWS.Location = New System.Drawing.Point(35, 358)
+        Me.cmdSettingsAWS.Location = New System.Drawing.Point(87, 359)
         Me.cmdSettingsAWS.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdSettingsAWS.Name = "cmdSettingsAWS"
         Me.cmdSettingsAWS.Padding = New System.Windows.Forms.Padding(5)
@@ -400,7 +439,7 @@ Partial Class frmMainMenu
         Me.cmdMetadata.FlatAppearance.BorderSize = 4
         Me.cmdMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdMetadata.ForeColor = System.Drawing.Color.Red
-        Me.cmdMetadata.Location = New System.Drawing.Point(360, 353)
+        Me.cmdMetadata.Location = New System.Drawing.Point(510, 354)
         Me.cmdMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdMetadata.Name = "cmdMetadata"
         Me.cmdMetadata.Padding = New System.Windows.Forms.Padding(5)
@@ -417,7 +456,7 @@ Partial Class frmMainMenu
         Me.cmdUserManagement.FlatAppearance.BorderSize = 4
         Me.cmdUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdUserManagement.ForeColor = System.Drawing.Color.Red
-        Me.cmdUserManagement.Location = New System.Drawing.Point(35, 246)
+        Me.cmdUserManagement.Location = New System.Drawing.Point(87, 247)
         Me.cmdUserManagement.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdUserManagement.Name = "cmdUserManagement"
         Me.cmdUserManagement.Padding = New System.Windows.Forms.Padding(5)
@@ -434,7 +473,7 @@ Partial Class frmMainMenu
         Me.cmdProducts.FlatAppearance.BorderSize = 4
         Me.cmdProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdProducts.ForeColor = System.Drawing.Color.Red
-        Me.cmdProducts.Location = New System.Drawing.Point(360, 245)
+        Me.cmdProducts.Location = New System.Drawing.Point(510, 246)
         Me.cmdProducts.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdProducts.Name = "cmdProducts"
         Me.cmdProducts.Padding = New System.Windows.Forms.Padding(5)
@@ -451,7 +490,7 @@ Partial Class frmMainMenu
         Me.cmdQC.FlatAppearance.BorderSize = 4
         Me.cmdQC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdQC.ForeColor = System.Drawing.Color.Red
-        Me.cmdQC.Location = New System.Drawing.Point(361, 141)
+        Me.cmdQC.Location = New System.Drawing.Point(511, 142)
         Me.cmdQC.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdQC.Name = "cmdQC"
         Me.cmdQC.Padding = New System.Windows.Forms.Padding(5)
@@ -468,7 +507,7 @@ Partial Class frmMainMenu
         Me.cmdDataTransfer.FlatAppearance.BorderSize = 4
         Me.cmdDataTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdDataTransfer.ForeColor = System.Drawing.Color.Red
-        Me.cmdDataTransfer.Location = New System.Drawing.Point(35, 141)
+        Me.cmdDataTransfer.Location = New System.Drawing.Point(87, 142)
         Me.cmdDataTransfer.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdDataTransfer.Name = "cmdDataTransfer"
         Me.cmdDataTransfer.Padding = New System.Windows.Forms.Padding(5)
@@ -485,7 +524,7 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive.FlatAppearance.BorderSize = 4
         Me.cmdPaperArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdPaperArchive.ForeColor = System.Drawing.Color.Red
-        Me.cmdPaperArchive.Location = New System.Drawing.Point(361, 26)
+        Me.cmdPaperArchive.Location = New System.Drawing.Point(511, 27)
         Me.cmdPaperArchive.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdPaperArchive.Name = "cmdPaperArchive"
         Me.cmdPaperArchive.Padding = New System.Windows.Forms.Padding(5)
@@ -499,7 +538,7 @@ Partial Class frmMainMenu
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(70, 111)
+        Me.Label1.Location = New System.Drawing.Point(115, 112)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 16)
         Me.Label1.TabIndex = 4
@@ -515,7 +554,7 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cmdKeyEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdKeyEntry.ForeColor = System.Drawing.Color.Red
-        Me.cmdKeyEntry.Location = New System.Drawing.Point(35, 35)
+        Me.cmdKeyEntry.Location = New System.Drawing.Point(87, 36)
         Me.cmdKeyEntry.Name = "cmdKeyEntry"
         Me.cmdKeyEntry.Size = New System.Drawing.Size(126, 76)
         Me.cmdKeyEntry.TabIndex = 3
@@ -526,10 +565,12 @@ Partial Class frmMainMenu
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(784, 548)
+        Me.ClientSize = New System.Drawing.Size(756, 548)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.IsMdiContainer = True
         Me.Name = "frmMainMenu"
         Me.Tag = "Main_Menu"
@@ -586,4 +627,9 @@ Partial Class frmMainMenu
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents GenerlSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SequencerConfigurationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HourlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

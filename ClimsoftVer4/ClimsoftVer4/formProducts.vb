@@ -25,6 +25,7 @@ Public Class frmProducts
     Dim kounts As Integer
     Dim SelectedProduct
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
         MyConnectionString = frmLogin.txtusrpwd.Text
         Try
@@ -48,6 +49,8 @@ Public Class frmProducts
             cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
 
         Next
+        Exit Sub
+
     End Sub
 
     Private Sub cmbProductsCategory_Click(sender As Object, e As EventArgs) Handles cmbProductsCategory.Click

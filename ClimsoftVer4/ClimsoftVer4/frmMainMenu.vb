@@ -23,9 +23,9 @@ Public Class frmMainMenu
         HTMLHelp.HelpPage = "welcome.htm"
     End Sub
 
-    ' Methods for icons in main panel.
 
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
+        ' The icon has been changed
         frmKeyEntry.ShowDialog()
     End Sub
 
@@ -97,7 +97,7 @@ Public Class frmMainMenu
 
     ' Tools Menu Items
     Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
-
+        formOptions.Show()
     End Sub
 
     Private Sub mnuToolsModifyForms_Click(sender As Object, e As EventArgs) Handles mnuToolsModifyForms.Click
@@ -119,4 +119,31 @@ Public Class frmMainMenu
 
     End Sub
 
+    Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
+
+    End Sub
+
+    Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
+        frmDataForms.Show()
+    End Sub
+
+    Private Sub GenerlSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerlSettingsToolStripMenuItem.Click
+        frmGeneralSettings.Show()
+    End Sub
+
+    Private Sub SequencerConfigurationToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SequencerConfigurationToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
+        frmElementSequencerHourly.Show()
+    End Sub
+
+    Private Sub FormHourlyTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormHourlyTimeSelectionToolStripMenuItem.Click
+        frmHourlyTimeSelection.Show()
+    End Sub
+
+    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
+        frmElementSequencerDaily.Show()
+    End Sub
 End Class

@@ -33,9 +33,6 @@ Partial Class frmAction
         'cmdHelp
         '
         resources.ApplyResources(Me.cmdHelp, "cmdHelp")
-        Me.HelpProvider1.SetHelpKeyword(Me.cmdHelp, resources.GetString("cmdHelp.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me.cmdHelp, CType(resources.GetObject("cmdHelp.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me.cmdHelp, resources.GetString("cmdHelp.HelpString"))
         Me.cmdHelp.Name = "cmdHelp"
         Me.HelpProvider1.SetShowHelp(Me.cmdHelp, CType(resources.GetObject("cmdHelp.ShowHelp"), Boolean))
         Me.cmdHelp.UseVisualStyleBackColor = True
@@ -43,9 +40,6 @@ Partial Class frmAction
         'cmdCancel
         '
         resources.ApplyResources(Me.cmdCancel, "cmdCancel")
-        Me.HelpProvider1.SetHelpKeyword(Me.cmdCancel, resources.GetString("cmdCancel.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me.cmdCancel, CType(resources.GetObject("cmdCancel.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me.cmdCancel, resources.GetString("cmdCancel.HelpString"))
         Me.cmdCancel.Name = "cmdCancel"
         Me.HelpProvider1.SetShowHelp(Me.cmdCancel, CType(resources.GetObject("cmdCancel.ShowHelp"), Boolean))
         Me.cmdCancel.UseVisualStyleBackColor = True
@@ -53,9 +47,6 @@ Partial Class frmAction
         'cmdOk
         '
         resources.ApplyResources(Me.cmdOk, "cmdOk")
-        Me.HelpProvider1.SetHelpKeyword(Me.cmdOk, resources.GetString("cmdOk.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me.cmdOk, CType(resources.GetObject("cmdOk.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me.cmdOk, resources.GetString("cmdOk.HelpString"))
         Me.cmdOk.Name = "cmdOk"
         Me.HelpProvider1.SetShowHelp(Me.cmdOk, CType(resources.GetObject("cmdOk.ShowHelp"), Boolean))
         Me.cmdOk.UseVisualStyleBackColor = True
@@ -63,16 +54,9 @@ Partial Class frmAction
         'cmdApply
         '
         resources.ApplyResources(Me.cmdApply, "cmdApply")
-        Me.HelpProvider1.SetHelpKeyword(Me.cmdApply, resources.GetString("cmdApply.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me.cmdApply, CType(resources.GetObject("cmdApply.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me.cmdApply, resources.GetString("cmdApply.HelpString"))
         Me.cmdApply.Name = "cmdApply"
         Me.HelpProvider1.SetShowHelp(Me.cmdApply, CType(resources.GetObject("cmdApply.ShowHelp"), Boolean))
         Me.cmdApply.UseVisualStyleBackColor = True
-        '
-        'HelpProvider1
-        '
-        resources.ApplyResources(Me.HelpProvider1, "HelpProvider1")
         '
         'frmAction
         '
@@ -82,9 +66,6 @@ Partial Class frmAction
         Me.Controls.Add(Me.cmdOk)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
-        Me.HelpProvider1.SetHelpKeyword(Me, resources.GetString("$this.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me, CType(resources.GetObject("$this.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me, resources.GetString("$this.HelpString"))
         Me.Name = "frmAction"
         Me.HelpProvider1.SetShowHelp(Me, CType(resources.GetObject("$this.ShowHelp"), Boolean))
         Me.ResumeLayout(False)
