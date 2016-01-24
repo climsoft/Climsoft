@@ -62,7 +62,9 @@ Public Class frmLogin
 
             If cmbDatabases.Text <> "" Then line = cmbDatabases.Text ' Change the connection string to the selected database
 
-            connectstr = line & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";"
+            'Added Convert Zero Datetime=True" to connection string to resolve error message _
+            '"Unable to convert MySQL date/time value to System.DateTime ASM 20160124"
+            connectstr = line & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";Convert Zero Datetime=True"
 
             'MsgBox(connectstr)
             txtusrpwd.Text = connectstr
