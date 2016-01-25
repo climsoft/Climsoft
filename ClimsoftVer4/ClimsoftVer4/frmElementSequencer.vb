@@ -6,6 +6,7 @@
 
 
     Private Sub frmElementSequencer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        On Error GoTo Err
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         sql = "select * from seq_element"
@@ -13,6 +14,9 @@
         da.Fill(ds, "seqElement")
         Me.DataGridView1.DataSource = ds.Tables(0)
         'Me.DataGridView1.
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

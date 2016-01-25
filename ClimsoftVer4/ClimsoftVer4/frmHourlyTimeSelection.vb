@@ -5,7 +5,7 @@
     Dim sql As String
 
     Private Sub frmHourlyTimeSelection_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-       
+        On Error GoTo Err
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         sql = "select * from form_hourly_time_selection"
@@ -13,6 +13,9 @@
         da.Fill(ds, "hourlyTimeSelection")
         Me.DataGridView1.DataSource = ds.Tables(0)
         'Me.DataGridView1.
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

@@ -256,7 +256,9 @@ Public Class formProductsSelectCriteria
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                  "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
+
                 DataProducts(sql, lblProductType.Text)
+
 
             Case "Histograms"
                 Dim myInterface As New clsRInterface()
@@ -290,6 +292,7 @@ Public Class formProductsSelectCriteria
             Case "Extremes"
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, describedBy as Code, min(obsValue) AS Lowest, Max(obsValue) AS Highest FROM station INNER JOIN observationfinal ON stationId = recordedFrom GROUP BY recordedFrom, describedBy " & _
                       "HAVING ((recordedFrom= " & stnlist & ") AND (describedBy=" & elmlist & "));"
+
                 DataProducts(sql, lblProductType.Text)
 
             Case "GeoCLIM"
@@ -310,6 +313,9 @@ Public Class formProductsSelectCriteria
                 InstatProduct(sdate, edate, lblProductType.Text)
             Case "Rclimdex"
                 RclimdexProducts(sdate, edate, lblProductType.Text)
+
+                SummaryProducts(sql, "Extremes")
+
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
@@ -397,6 +403,7 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+
     Sub GeoCLIMProducts(stns As String, sdate As String, edate As String)
 
         On Error GoTo Err
@@ -713,6 +720,403 @@ Err:
     Sub InventoryProducts(sql As String, typ As String)
 
         On Error GoTo Err
+
+    Sub SummaryProducts(sql As String, typ As String)
+        ' On Error GoTo Err
+
+        Dim flds1, flds2, flds3 As String
+        Dim fl As String
+
+
+            End If
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
+
+            maxRows = ds.Tables("observationfinal").Rows.Count
+            ' Create a file for each type of observation element
+            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\GEOCLM-" & abbrev & ".csv"
+
+            FileOpen(11, fl, OpenMode.Output)
+
+            ' Write the lement headers as abbreviation
+            For kount = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                Write(11, ds.Tables("observationfinal").Columns.Item(kount).ColumnName)
+            Next
+
+            PrintLine(11)
+
+            For k = 0 To maxRows - 1
+
+                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
+                        Write(11, "-999")
+                    Else
+                        Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                    End If
+                Next
+                PrintLine(11)
+            Next
+
+            FileClose(11)
+            CommonModules.ViewFile(fl)
+        Next
+
+        Exit Sub
+Err:
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+    'Sub SummaryProducts(sql As String, typ As String)
+    '    On Error GoTo Err
+    '    Dim flds1, flds2, flds3 As String
+    '    Dim fl As String
+
+    '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '    ds.Clear()
+    '    da.Fill(ds, "observationfinal")
+
+    '    maxRows = ds.Tables("observationfinal").Rows.Count
+
+    '    fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+    '    FileOpen(11, fl, OpenMode.Output)
+
+    '    ' Write Column Headers
+    '    Write(11, "Station")
+    '    Write(11, "Lat")
+    '    Write(11, "Lon")
+    '    Write(11, "Elev")
+    '    Select Case typ
+    '        Case "Hourly"
+    '            Write(11, "Year")
+    '            Write(11, "Month")
+    '            Write(11, "Day")
+    '            Write(11, "Hour")
+    '        Case "Daily"
+    '            Write(11, "Year")
+    '            Write(11, "Month")
+    '            Write(11, "Day")
+    '        Case "Monthly"
+    '            Write(11, "Year")
+    '            Write(11, "Month")
+    '        Case "Annual"
+    '            Write(11, "Year")
+    '        Case "Dekadal"
+    '            Write(11, "Year")
+    '            Write(11, "Month")
+    '            Write(11, "Dekad")
+    '        Case "Pentad"
+    '            Write(11, "Year")
+    '            Write(11, "Month")
+    '            Write(11, "Pentad")
+    '        Case "Means"
+    '            Write(11, "Month")
+    '        Case "Extremes"
+    '            Write(11, "Code")
+    '            Write(11, "Lowest")
+    '            Write(11, "Highest")
+    '    End Select
+
+    '    ' Column headers from table field names
+    '    For j = 0 To lstvElements.Items.Count - 1
+    '        If typ <> "Extremes" Then Write(11, lstvElements.Items(j).Text)
+    '    Next
+
+    '    ' End header row
+    '    PrintLine(11)
+
+    '    For k = 0 To maxRows - 1
+
+    '        For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+    '            ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
+    '            FormattedOutput(11, k, i)
+    '        Next
+    '        ' New line for another record
+    '        PrintLine(11)
+
+
+    '        For l = 0 To maxRows - 1
+
+    '            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+    '                ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
+    '                If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
+    '                    Print(11, "-999.0" & Chr(9))
+    '                Else
+    '                    If i = 0 Then 'Year has no decimal point
+    '                        Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & Chr(9))
+    '                    Else
+    '                        Print(11, String.Format("{0:0.0}", Val(ds.Tables("observationfinal").Rows(l).Item(i))) & Chr(9))
+    '                    End If
+    '                End If
+
+    '            Next
+    '            ' New line for another record
+    '            PrintLine(11)
+    '        Next
+
+
+    '        FileClose(11)
+    '        CommonModules.ViewFile(f1)
+    '        'MsgBox(st & " " & ed)
+    '    Next
+
+    'End Sub
+    Sub CPTProducts(st As String, ed As String)
+        Dim stnscolmn, f1, sql1, stn As String
+        Dim dstn As New DataSet
+        'frmCPTSeason.Hide()
+
+
+        If pnlSummary.Enabled And optTotal.Checked Then
+            SummaryType = "Sum(obsValue) AS Total"
+            SumAvg = "SUM"
+        Else
+            SummaryType = "Avg(obsValue) AS Mean"
+            SumAvg = "AVG"
+        End If
+
+        ' Process CPT value for each selected Element
+        For k = 0 To lstvElements.Items.Count - 1
+            ' Get the stations list
+            stnlist = ""
+            If lstvStations.Items.Count > 0 Then
+                stnlist = "'" & lstvStations.Items(0).Text & "'"
+                stnscolmn = " " & SumAvg & "(IF(RecordedFrom = '" & lstvStations.Items(0).Text & "', value, NULL)) AS '" & lstvStations.Items(0).Text & "'"
+                For i = 1 To lstvStations.Items.Count - 1
+                    '  MsgBox(lstvStations.Items(i).Text)
+                    stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
+                    stnscolmn = stnscolmn & ", " & SumAvg & "(IF(RecordedFrom = '" & lstvStations.Items(i).Text & "', value, NULL)) AS '" & lstvStations.Items(i).Text & "'"
+                Next
+            End If
+
+            ' Get start date and end date
+
+            sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+            edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+
+            sql = "use mariadb_climsoft_db_v4; SELECT year(obsDatetime) as YY," & stnscolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & lstvElements.Items(k).Text & ") and (year(obsDatetime) between '" & DateAndTime.Year(sdate) & "' And '" & DateAndTime.Year(edate) & "') and (month(obsDatetime) between '" & st & "' And '" & ed & "') ORDER BY year(obsDatetime)) t GROUP BY YY;"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+
+            da.Fill(ds, "observationfinal")
+
+            maxRows = ds.Tables("observationfinal").Rows.Count
+
+            f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\CPT-" & lstvElements.Items(k).SubItems(1).Text & "-" & MonthName(Int(st), True) & "-" & MonthName(Int(ed), True) & ".txt"  'data_products.csv"
+
+            FileOpen(11, f1, OpenMode.Output)
+
+            ' Get station locations 
+            sql1 = "SELECT * FROM station"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            dstn.Clear()
+            da.Fill(dstn, "station")
+
+            ' Output Station Ids
+            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                If i = 0 Then
+                    Print(11, "STN" & Chr(9))
+                Else
+                    Print(11, ds.Tables("observationfinal").Columns(i).ColumnName & Chr(9))
+                End If
+            Next
+            PrintLine(11)
+
+            ' Output Latitudes
+            Print(11, "LAT" & Chr(9))
+            For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
+                stn = ds.Tables("observationfinal").Columns(i).ColumnName
+                For n = 0 To dstn.Tables("station").Rows.Count - 1
+                    If dstn.Tables("station").Rows(n).Item(0) = stn Then
+                        Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(2))) & Chr(9))
+                        Exit For
+                    End If
+                Next
+            Next
+            PrintLine(11)
+
+
+            ' Output Latitudes
+            Print(11, "LON" & Chr(9))
+            For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
+                stn = ds.Tables("observationfinal").Columns(i).ColumnName
+                For n = 0 To dstn.Tables("station").Rows.Count - 1
+                    If dstn.Tables("station").Rows(n).Item(0) = stn Then
+                        Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(3))) & Chr(9))
+                        Exit For
+                    End If
+                Next
+            Next
+            PrintLine(11)
+
+            For l = 0 To maxRows - 1
+
+                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
+                    If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
+                        Print(11, "-999.0" & Chr(9))
+                    Else
+                        If i = 0 Then 'Year has no decimal point
+                            Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & Chr(9))
+                        Else
+                            Print(11, String.Format("{0:0.0}", Val(ds.Tables("observationfinal").Rows(l).Item(i))) & Chr(9))
+                        End If
+                    End If
+
+                Next
+                ' New line for another record
+                PrintLine(11)
+            Next
+
+
+            FileClose(11)
+            CommonModules.ViewFile(f1)
+            'MsgBox(st & " " & ed)
+        Next
+
+    End Sub
+    Sub InstatProduct(dt1 As String, dt2 As String, typ As String)
+        On Error GoTo Err
+        Dim yrcolmn, sql, abbrev, stns, codes, fl As String
+        Dim kount, stn, elems, yr As Integer
+
+        yrcolmn = " AVG(IF(year(obsDatetime) = '" & Int(DateAndTime.Year(dt1)) & "', value, NULL)) AS '" & Int(DateAndTime.Year(dt1)) & "'"
+
+        For i = Int(DateAndTime.Year(dt1)) + 1 To Int(DateAndTime.Year(dt2))
+            yrcolmn = yrcolmn & ", " & "AVG(IF(year(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+        Next
+
+        For stn = 0 To lstvStations.Items.Count - 1
+            stns = lstvStations.Items(stn).SubItems(0).Text
+            For elems = 0 To lstvElements.Items.Count - 1
+                codes = lstvElements.Items(elems).SubItems(0).Text
+                abbrev = lstvElements.Items(elems).SubItems(1).Text
+
+                sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay," & yrcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '" & stns & "') AND (describedBy ='" & codes & "') and (obsDatetime between '" & dt1 & "' and '" & dt2 & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
+
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+
+                ds.Clear()
+                da.Fill(ds, "observationfinal")
+
+                ' Get the total records
+                maxRows = ds.Tables("observationfinal").Rows.Count
+                If maxRows = 0 Then
+                    MsgBox("No Data Found for " & abbrev & " for " & stns)
+                    Exit For
+                End If
+                ' Create a file for each type of observation element
+                fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Instat_" & lstvStations.Items(stn).SubItems(0).Text & "_" & abbrev & ".csv"
+
+                FileOpen(11, fl, OpenMode.Output)
+
+                ' Write the column names as column headers
+                For kount = 2 To ds.Tables("observationfinal").Columns.Count - 1
+                    Write(11, "Y" & ds.Tables("observationfinal").Columns.Item(kount).ColumnName)
+                Next
+
+
+                PrintLine(11)
+
+                For k = 0 To maxRows - 1
+                    For i = 2 To ds.Tables("observationfinal").Columns.Count - 1
+                        If k < 59 Then
+                            If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value before 29th Feb
+                                Write(11, "-999")
+                            Else
+                                Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value before 29th Feb
+                            End If
+                        ElseIf k = 59 Then ' 29th Feb
+                            'If i > 1 And Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then ' Non Leap Year
+                            If Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then ' Non Leap Year
+                                Write(11, "9988")
+                            ElseIf IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value 29th Feb of Leap Year
+                                Write(11, "-999")
+                            Else
+                                Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value for 29th Feb of Leap Year
+                            End If
+
+                        ElseIf k > 59 Then ' Non Leap Year after 29th Feb
+                            If Val(ds.Tables("observationfinal").Columns.Item(i).ColumnName) Mod 4 > 0 Then
+                                If IsDBNull(ds.Tables("observationfinal").Rows(k - 1).Item(i)) Then ' Missing Data value in Non Leap Year
+                                    Write(11, "-999")
+                                Else
+                                    Write(11, ds.Tables("observationfinal").Rows(k - 1).Item(i)) ' Data value in Non Leap Year after 28th Feb
+                                End If
+                            Else
+                                If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then ' Missing Data value in Leap Year
+                                    Write(11, "-999")
+                                Else
+                                    Write(11, ds.Tables("observationfinal").Rows(k).Item(i)) ' Data value in Leap Year after 29th Feb
+                                End If
+                            End If
+                        End If
+                    Next
+                    PrintLine(11)
+                Next
+                FileClose(11)
+                CommonModules.ViewFile(fl)
+            Next
+        Next
+
+
+        'Next
+
+        Exit Sub
+Err:
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+
+    Sub RclimdexProducts(sd As String, ed As String, typ As String)
+        Dim f1 As String
+        Dim stns As Integer
+
+        For stns = 0 To lstvStations.Items.Count - 1
+            sql = "use mariadb_climsoft_db_v4; SELECT year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,SUM(IF(describedBy = '5', value, NULL)) AS 'Precip', SUM(IF(describedBy ='2', value, NULL)) AS 'Tmax', SUM(IF(describedBy ='3', value, NULL)) AS 'Tmin' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '" & lstvStations.Items(stns).SubItems(0).Text & "') AND (describedBy ='5' OR describedBy ='2' OR describedBy ='3') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY YY,MM,DD;"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+
+            da.Fill(ds, "observationfinal")
+
+            maxRows = ds.Tables("observationfinal").Rows.Count
+
+            f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & lstvStations.Items(stns).SubItems(0).Text & "_Rclimdex.txt"  'data_products.csv"
+
+            FileOpen(11, f1, OpenMode.Output)
+
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
+
+            For k = 0 To maxRows - 1
+                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
+                        Print(11, "-99.9" & Chr(9))
+                    Else
+                        Print(11, ds.Tables("observationfinal").Rows(k).Item(i) & Chr(9))
+                    End If
+                Next
+                PrintLine(11)
+            Next
+            FileClose(11)
+            CommonModules.ViewFile(f1)
+        Next
+    End Sub
+
+    Sub InventoryProducts(sql As String, typ As String)
+
+        On Error GoTo Err
         Dim flds1, flds2, flds3 As String
         Dim fl As String
 
@@ -763,6 +1167,7 @@ Err:
             Next
             ' New line for another record
             PrintLine(11)
+
         Next
 
         FileClose(11)
