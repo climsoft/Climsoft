@@ -256,7 +256,12 @@ Public Class formProductsSelectCriteria
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                  "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
+<<<<<<< HEAD
                 DataProducts(sql, lblProductType.Text)
+=======
+                sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+>>>>>>> master
 
             Case "Histograms"
                 Dim myInterface As New clsRInterface()
@@ -290,6 +295,7 @@ Public Class formProductsSelectCriteria
             Case "Extremes"
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, describedBy as Code, min(obsValue) AS Lowest, Max(obsValue) AS Highest FROM station INNER JOIN observationfinal ON stationId = recordedFrom GROUP BY recordedFrom, describedBy " & _
                       "HAVING ((recordedFrom= " & stnlist & ") AND (describedBy=" & elmlist & "));"
+<<<<<<< HEAD
                 DataProducts(sql, lblProductType.Text)
 
             Case "GeoCLIM"
@@ -310,6 +316,9 @@ Public Class formProductsSelectCriteria
                 InstatProduct(sdate, edate, lblProductType.Text)
             Case "Rclimdex"
                 RclimdexProducts(sdate, edate, lblProductType.Text)
+=======
+                SummaryProducts(sql, "Extremes")
+>>>>>>> master
             Case Else
                 MsgBox("No Product Selected")
                 Exit Sub
@@ -397,6 +406,7 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+<<<<<<< HEAD
     Sub GeoCLIMProducts(stns As String, sdate As String, edate As String)
 
         On Error GoTo Err
@@ -418,6 +428,12 @@ Err:
                        "AVG(IF(month(obsDatetime) = '1', value, NULL)) AS 'Jan', AVG(IF(month(obsDatetime) ='2', value, NULL)) AS 'Feb', AVG(IF(month(obsDatetime) ='3', value, NULL)) As Mar, AVG(IF(month(obsDatetime) ='4', value, NULL)) AS 'Apr', AVG(IF(month(obsDatetime) ='5', value, NULL)) As 'May', AVG(IF(month(obsDatetime) ='6', value, NULL)) As 'Jun', AVG(IF(month(obsDatetime) ='7', value, NULL)) As 'Jul', AVG(IF(month(obsDatetime) ='8', value, NULL)) As 'Aug', AVG(IF(month(obsDatetime) ='9', value, NULL)) As 'Sep', AVG(IF(month(obsDatetime) ='10', value, NULL)) As 'Oct' , AVG(IF(month(obsDatetime) ='11', value, NULL)) As 'Nov', AVG(IF(month(obsDatetime) ='12', value, NULL)) As 'Dec' " & _
                        "FROM (SELECT country, stationName, authority,latitude,longitude,elevation,recordedFrom, describedBy, obsDatetime, obsValue value FROM " & _
                        "station INNER JOIN observationfinal ON stationId = recordedFrom WHERE (RecordedFrom = " & stns & ") AND (describedBy ='" & codes & "') and (year(obsDatetime) between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY ID, Year;"
+=======
+    Sub SummaryProducts(sql As String, typ As String)
+        ' On Error GoTo Err
+        Dim flds1, flds2, flds3 As String
+        Dim fl As String
+>>>>>>> master
 
             End If
 
@@ -632,6 +648,7 @@ Err:
                 Next
             Next
             PrintLine(11)
+<<<<<<< HEAD
 
             ' Output Latitudes
             Print(11, "LON" & Chr(9))
@@ -857,6 +874,8 @@ Err:
             Next
             ' New line for another record
             PrintLine(11)
+=======
+>>>>>>> master
         Next
 
         FileClose(11)
@@ -876,7 +895,6 @@ Err:
     End Sub
 
     Sub MonthlyProducts(sql As String, typ As String)
-
         On Error GoTo Err
         Dim flds1, flds2, flds3 As String
         Dim fl As String
@@ -986,16 +1004,9 @@ Err:
             optTotal.Enabled = False
         End If
 
-        If lblProductType.Text = "Rclimdex" Then
-            cmbElement.Enabled = False
-        Else
-            cmbElement.Enabled = True
-        End If
     End Sub
-
 
     Private Sub prgrbProducts_Click(sender As Object, e As EventArgs) Handles prgrbProducts.Click
 
     End Sub
-
 End Class
