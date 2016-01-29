@@ -144,32 +144,36 @@ Public Class formProductsSelectCriteria
             lstvStations.Items.Add(itm)
         Next
     End Sub
-
     Private Sub cmbElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbElement.SelectedIndexChanged
         Dim prod As String
-
+        On Error GoTo Err
         prod = cmbElement.Text
         ' MsgBox(prod)
         lstvElements.Columns.Clear()
         lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
+        lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
         lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
         'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
-        sql = "SELECT elementId, description FROM obselement WHERE description=""" & prod & """"
+        sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "obselement")
 
         maxRows = (ds.Tables("obselement").Rows.Count)
-        Dim str(2) As String
+        Dim str(3) As String
         Dim itm = New ListViewItem
 
         For kount = 0 To maxRows - 1 Step 1
             str(0) = ds.Tables("obselement").Rows(kount).Item("elementId")
-            str(1) = ds.Tables("obselement").Rows(kount).Item("description")
+            str(1) = ds.Tables("obselement").Rows(kount).Item("abbreviation")
+            str(2) = ds.Tables("obselement").Rows(kount).Item("description")
             itm = New ListViewItem(str)
             lstvElements.Items.Add(itm)
         Next
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
     End Sub
 
     Private Sub chkAdvancedSelection_CheckedChanged(sender As Object, e As EventArgs) Handles chkAdvancedSelection.CheckedChanged
@@ -192,7 +196,14 @@ Public Class formProductsSelectCriteria
         'Dim SumAvg, SummaryType As String
         'Dim flds As Integer
         'MsgBox(lblProductType.Text)
+        Dim ProductsPath As String
 
+        ' Define the products application path
+        ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
+        If Not IO.Directory.Exists(ProductsPath) Then
+            IO.Directory.CreateDirectory(ProductsPath)
+        End If
 
         If pnlSummary.Enabled And optTotal.Checked Then
             SummaryType = "Sum(obsValue) AS Total"
@@ -244,7 +255,8 @@ Public Class formProductsSelectCriteria
         Select Case Me.lblProductType.Text
             Case "WindRose"
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationID,describedBy as Code, obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
-                WindRoseData(sql)
+                'WindRoseData(sql)
+                WRPlot(stnlist, sdate, edate)
             Case "Hourly"
 
                 sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
@@ -344,44 +356,93 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
-
-    Sub DataProducts(sql As String, typ As String)
+    Sub WRPlot(stns As String, sdt As String, edt As String)
         On Error GoTo Err
-        Dim flds1, flds2, flds3 As String
-        Dim fl As String
-        'MsgBox(sql)
+        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath As String
+        Dim pro As Integer
+        Dim ox As Object
+
+        ' Locate the installation path for the windrose plot application
+        If GetWRplotPath(WrplotAppPath) Then
+            'MsgBox(WrplotAppPath)
+            WrplotAPP = WrplotAppPath & "WRPLOT_View.exe"
+        Else
+            MsgBox("WRPlot Application not found")
+            Exit Sub
+        End If
+
+        ' SQL statement for the selecting data for windrose plotting
+        sql = "use mariadb_climsoft_db_v4; SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,SUM(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
+
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "observationfinal")
 
         maxRows = ds.Tables("observationfinal").Rows.Count
-        'MsgBox(maxRows)
+        If maxRows = 0 Then
+            MsgBox("No wind speed and direction data found")
+            Exit Sub
+        End If
+
+        ' Create output file
+        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Wrose.txt"
+
+        FileOpen(11, fl, OpenMode.Output)
+
+        ' Output output format description
+        Print(11, "LAKES FORMAT")
+        PrintLine(11)
+
+        ' Output data values
+        For k = 0 To maxRows - 1
+            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                Print(11, Int(ds.Tables("observationfinal").Rows(k).Item(i)) & Chr(9))
+            Next
+            PrintLine(11)
+        Next
+        FileClose(11)
+
+
+        'WRpro = "C:\Program Files (x86)\Lakes\WRPLOT View\WRPLOT_View.exe " & Chr(34) & "C:\Climsoft Project\Climsoft V4\Climsoft\ClimsoftVer4\ClimsoftVer4\bin\Debug\data\Wrose.txt" & Chr(34)
+
+        WRpro = WrplotAPP & " " & Chr(34) & fl & Chr(34)
+        'MsgBox(WRpro)
+        Shell(WRpro, AppWinStyle.MaximizedFocus)
+        
+        Exit Sub
+Err:
+        'If Err.Number = 5 Then On Error Resume Next
+        MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Sub DataProducts(sql As String, typ As String)
+        On Error GoTo Err
+        Dim flds1, flds2, flds3 As String
+        Dim fl As String
+
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        ds.Clear()
+        da.Fill(ds, "observationfinal")
+
+        maxRows = ds.Tables("observationfinal").Rows.Count
+
+        ' Create output file
         fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
-        Write(11, "Station")
-        Write(11, "Year")
-        Write(11, "Month")
-        Write(11, "Day")
-        If typ = "Hourly" Then Write(11, "Hour")
 
-        For j = 0 To lstvElements.Items.Count - 1
-            Write(11, lstvElements.Items(j).Text)
+        ' Output the column headers
+        For j = 0 To ds.Tables("observationfinal").Columns.Count - 1
+            Write(11, ds.Tables("observationfinal").Columns(j).ColumnName)
+
         Next
+
         PrintLine(11)
+
+        ' Output data values
         For k = 0 To maxRows - 1
-
             For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                If i = 1 Then ' Output Datatime data
-                    Write(11, DateAndTime.Year(ds.Tables("observationfinal").Rows(k).Item(i)))
-                    Write(11, DateAndTime.Month(ds.Tables("observationfinal").Rows(k).Item(i)))
-                    Write(11, DateAndTime.Day(ds.Tables("observationfinal").Rows(k).Item(i)))
-                    If typ = "Hourly" Then Write(11, DateAndTime.Hour(ds.Tables("observationfinal").Rows(k).Item(i)))
-                Else
-                    ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
-                    FormattedOutput(11, k, i)
-                End If
-
+                FormattedOutput(11, k, i)
             Next
             PrintLine(11)
         Next
@@ -397,6 +458,7 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
+
     Sub GeoCLIMProducts(stns As String, sdate As String, edate As String)
 
         On Error GoTo Err
@@ -892,7 +954,7 @@ Err:
             optTotal.Enabled = False
         End If
 
-        If lblProductType.Text = "Rclimdex" Then
+        If lblProductType.Text = "Rclimdex" Or lblProductType.Text = "WindRose" Then
             cmbElement.Enabled = False
         Else
             cmbElement.Enabled = True
