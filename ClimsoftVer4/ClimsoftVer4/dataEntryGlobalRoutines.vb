@@ -31,10 +31,11 @@ Public Class dataEntryGlobalRoutines
     Public Sub messageBoxCommit()
         MsgBox("New record added to database table!", MsgBoxStyle.Information)
     End Sub
-    Public Function getFlagTexboxSuffix(ByVal strVal As String, ByRef ctl As Control) As String
+    Public Function getFlagTexboxSuffix(ByVal strVal As String, ByRef ctl As Control, flagIndexDiff As Integer) As String
         'Locates the texbox for the flag corresponding to the value texbox
         Dim obsValColIndex As Integer, flagColIndex As Integer
         Dim flagTextBoxSuffix As String
+
         'flagTextBoxSuffix = ""
         'Get observation value column index from texbox name. For form_synoptic_2_ra1 table, the names of texboxes for observation values
         ' have a suffix similar to the suffix of the name of the corresponding value field in the data table. The same applies to the suffixes
@@ -44,7 +45,8 @@ Public Class dataEntryGlobalRoutines
         'Get flag column index from observation value index. For form_synoptic_2_ra1 table,the difference between a flag column
         ' and the column of the associated flag is 49. 
         'To make this function applicable to other key-entry forms, further development work should get this figure from the data_forms table.
-        flagColIndex = obsValColIndex + 49
+        flagColIndex = obsValColIndex + flagIndexDiff
+        'flagColIndex = obsValColIndex + 49
         flagTextBoxSuffix = flagColIndex
         If Strings.Len(flagTextBoxSuffix) = 1 Then
             flagTextBoxSuffix = "00" & flagTextBoxSuffix
@@ -116,10 +118,13 @@ Public Class dataEntryGlobalRoutines
         If IsNumeric(strVal) Then
             checkIsNumeric = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkIsNumeric = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Number expected!", MsgBoxStyle.Critical)        
         End If
     End Function
@@ -127,10 +132,13 @@ Public Class dataEntryGlobalRoutines
         If Val(valLowerLimit) <= Val(obsVal) Then
             checkLowerLimit = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkLowerLimit = False
             ctl.BackColor = Color.Cyan
+            ctl.Focus()
+            tabNext = False
             MsgBox("Value lower than lowerlimit of: " & valLowerLimit, MsgBoxStyle.Exclamation)
         End If
     End Function
@@ -138,21 +146,27 @@ Public Class dataEntryGlobalRoutines
         If Val(obsVal) <= Val(valUpperLimit) Then
             checkUpperLimit = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkUpperLimit = False
             ctl.BackColor = Color.Cyan
+            ctl.Focus()
+            tabNext = False
             MsgBox("Value higher than upperlimit of: " & valUpperLimit, MsgBoxStyle.Exclamation)
         End If
     End Function
     Public Function checkValidHour(ByVal strVal As String, ctl As Control) As Boolean
-        If Val(strVal) >= 0 And Val(strVal) <= 23 Then
+        If Val(strVal) >= 0 And Val(strVal) <= 23 And IsNumeric(strVal) Then
             checkValidHour = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkValidHour = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Invalid Hour!", MsgBoxStyle.Critical)
         End If
     End Function
@@ -160,21 +174,27 @@ Public Class dataEntryGlobalRoutines
         If Val(strVal) >= 1 And Val(strVal) <= 31 Then
             checkValidDay = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkValidDay = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Invalid Day!", MsgBoxStyle.Critical)
         End If
     End Function
     Public Function checkValidMonth(ByVal strVal As String, ctl As Control) As Boolean
-        If Val(strVal) >= 1 And Val(strVal) <= 12 Then
+        If Val(strVal) >= 1 And Val(strVal) <= 12 And IsNumeric(strVal) Then
             checkValidMonth = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkValidMonth = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Invalid month!", MsgBoxStyle.Critical)
         End If
     End Function
@@ -183,10 +203,14 @@ Public Class dataEntryGlobalRoutines
         If Val(strVal) >= 1000 And Val(strVal) <= 9999 Then
             checkValidYear = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
+            tabNext = False
             checkValidYear = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+
             MsgBox("Invalid Year! Year must be between 1000 and 9999", MsgBoxStyle.Critical)
         End If
     End Function
@@ -194,10 +218,13 @@ Public Class dataEntryGlobalRoutines
         If IsDate(dd & "/" & mm & "/" & yyyy) Then
             checkValidDate = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkValidDate = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Invalid Date!", MsgBoxStyle.Critical)
         End If
     End Function
@@ -205,10 +232,13 @@ Public Class dataEntryGlobalRoutines
         If DateValue(dd & "/" & mm & "/" & yyyy) <= Now() Then
             checkFutureDate = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkFutureDate = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Dates greater than today not accepted!", MsgBoxStyle.Critical)
         End If
     End Function
@@ -216,10 +246,13 @@ Public Class dataEntryGlobalRoutines
         If itemFound = True Then
             checkExists = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            ' My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkExists = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Item not found!", MsgBoxStyle.Critical)
         End If
     End Function
@@ -227,11 +260,58 @@ Public Class dataEntryGlobalRoutines
         If Val(strVal) >= 0 Then
             checkPositiveValue = True
             ctl.BackColor = Color.White
-            My.Computer.Keyboard.SendKeys("{TAB}")
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
         Else
             checkPositiveValue = False
             ctl.BackColor = Color.Red
+            ctl.Focus()
+            tabNext = False
             MsgBox("Negative value not accepted!", MsgBoxStyle.Critical)
+        End If
+    End Function
+    Public Function checkIsLeapYear(ByVal yyyy As String) As Boolean
+        If Val(yyyy) - Int(Val(yyyy) / 4) * 4 > 0 Then
+            'Not leap year
+            checkIsLeapYear = False
+        Else
+            'Leap year
+            checkIsLeapYear = True
+        End If
+    End Function
+    Public Function checkGminRequired(mm As String, ByVal gminStartMonth As String, gminEndMonth As String, ByVal gminHr As String) As Boolean
+        If Val(mm) >= gminStartMonth And Val(mm) < gminEndMonth And Val(gminHr) = 6 Then
+            checkGminRequired = True
+        Else
+            checkGminRequired = False
+        End If
+    End Function
+    Public Function checkTmaxRequired(ByVal hh As String, tmaxHr1 As String, tmaxHr2 As String) As Boolean
+        If Val(hh) = tmaxHr1 Or Val(hh) = tmaxHr2 Then
+            checkTmaxRequired = True
+        Else
+            checkTmaxRequired = False
+        End If
+    End Function
+    Public Function checkTminRequired(ByVal hh As String, tminHr As String) As Boolean
+        If Val(hh) = tminHr Then
+            checkTminRequired = True
+        Else
+            checkTminRequired = False
+        End If
+    End Function
+    Public Function checkWidthddff(strVal As String, ctl As Control, widthDD As String, widthFF As String, msgTxt As String) As Boolean
+        If Strings.Len(strVal) = Val(widthDD) + Val(widthFF) Then
+            checkWidthddff = True
+            ctl.BackColor = Color.White
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            tabNext = True
+        Else
+            checkWidthddff = False
+            ctl.BackColor = Color.Cyan
+            ctl.Focus()
+            tabNext = False
+            MsgBox(msgTxt, MsgBoxStyle.Exclamation)
         End If
     End Function
 End Class
