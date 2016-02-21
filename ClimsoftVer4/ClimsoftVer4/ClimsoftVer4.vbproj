@@ -359,6 +359,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMsg.Designer.vb">
+      <DependentUpon>frmMsg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMsg.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQC.Designer.vb">
       <DependentUpon>frmQC.vb</DependentUpon>
     </Compile>
@@ -711,6 +717,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMsg.resx">
+      <DependentUpon>frmMsg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQC.de.resx">
       <DependentUpon>frmQC.vb</DependentUpon>
