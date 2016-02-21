@@ -80,7 +80,7 @@ Public Class frmLogin
             ' End Using
             regDataInit()
         Catch e As Exception
-            MsgBox("Login failure")
+            Msg("Login failure", e.Message)
         End Try
     End Sub
     Sub regDataInit()
