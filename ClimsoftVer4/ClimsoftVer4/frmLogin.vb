@@ -1,5 +1,5 @@
 ﻿' CLIMSOFT - Climate Database Management System
-' Copyright (C) 2015
+' Copyright (C) 2016
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ Public Class frmLogin
             ' End Using
             regDataInit()
         Catch e As Exception
-            MsgBox("Login failure")
+            Msg("Login failure", e.Message)
         End Try
     End Sub
     Sub regDataInit()
