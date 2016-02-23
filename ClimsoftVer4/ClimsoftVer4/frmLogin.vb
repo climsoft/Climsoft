@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports ClimsoftVer4.Translations
 
 
 Public Class frmLogin
@@ -113,9 +112,6 @@ Public Class frmLogin
     End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ' If the user's machine is set to an alternative language then this alternative will be used if available
-        autoTranslate(Me)
-
         Try
             sr = New IO.StreamReader("config.inf")
         Catch ex As Exception
