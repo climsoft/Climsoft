@@ -3148,4 +3148,247 @@
         AOADAAA=
 </value>
   </data>
+  <data name="ObsInitialToFinalToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>169, 22</value>
+  </data>
+  <data name="ObsInitialToFinalToolStripMenuItem.Text" xml:space="preserve">
+    <value>Obs initiale finale</value>
+  </data>
+  <data name="ImportToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>57, 20</value>
+  </data>
+  <data name="ImportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="GenerateValuesToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>102, 20</value>
+  </data>
+  <data name="GenerateValuesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Générer des valeurs</value>
+  </data>
+  <data name="CLICOMDailyToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="CLICOMDailyToolStripMenuItem.Text" xml:space="preserve">
+    <value>CLICOM tous les jours</value>
+  </data>
+  <data name="AWSToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="AWSToolStripMenuItem.Text" xml:space="preserve">
+    <value>AWS </value>
+  </data>
+  <data name="NOAAGTSToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="NOAAGTSToolStripMenuItem.Text" xml:space="preserve">
+    <value>NOAA GTS</value>
+  </data>
+  <data name="CLIMSOFTV3ToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="CLIMSOFTV3ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Migration des données</value>
+  </data>
+  <data name="ExternalDataToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>87, 20</value>
+  </data>
+  <data name="ExternalDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>Données externes</value>
+  </data>
+  <data name="BackupToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="BackupToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sauvegarde</value>
+  </data>
+  <data name="RestoreToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="RestoreToolStripMenuItem.Text" xml:space="preserve">
+    <value>Restaurer</value>
+  </data>
+  <data name="OptionsToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="MenuStrip1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="MenuStrip1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>852, 24</value>
+  </data>
+  <data name="MenuStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="MenuStrip1.Text" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="Button1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>305, 0</value>
+  </data>
+  <data name="Button1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 27</value>
+  </data>
+  <data name="Button1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Panel1.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Panel1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 396</value>
+  </data>
+  <data name="Panel1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>852, 27</value>
+  </data>
+  <data name="Panel1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ProgressBarDb.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="ProgressBarDb.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>2, 311</value>
+  </data>
+  <data name="ProgressBarDb.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>388, 21</value>
+  </data>
+  <data name="ProgressBarDb.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Dbtpanel2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>444, 52</value>
+  </data>
+  <data name="Dbtpanel2.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="Dbtpanel2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>396, 338</value>
+  </data>
+  <data name="Dbtpanel2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ToolStripLabel1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 22</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Base de données</value>
+  </data>
+  <data name="cmbDb.Items" xml:space="preserve">
+    <value>Initial</value>
+  </data>
+  <data name="cmbDb.Items1" xml:space="preserve">
+    <value>Final</value>
+  </data>
+  <data name="cmbDb.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 25</value>
+  </data>
+  <data name="ToolStrip1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="ToolStrip1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>852, 25</value>
+  </data>
+  <data name="ToolStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ToolStrip1.Text" xml:space="preserve">
+    <value>ToolStrip1</value>
+  </data>
+  <data name="cmdUpload.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>167, 6</value>
+  </data>
+  <data name="cmdUpload.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="cmdUpload.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdUpload.Text" xml:space="preserve">
+    <value>Démarrer le téléchargement</value>
+  </data>
+  <data name="cmdUpload.Visible" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ListView1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, -313</value>
+  </data>
+  <data name="ListView1.RightToLeft" xml:space="preserve" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="ListView1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>412, 305</value>
+  </data>
+  <data name="ListView1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ListView1.Visible" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="grpbxUpload.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>2, 311</value>
+  </data>
+  <data name="grpbxUpload.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>421, 24</value>
+  </data>
+  <data name="grpbxUpload.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpbxUpload.Visible" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ListViewDbUtil.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="ListViewDbUtil.RightToLeft" xml:space="preserve" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="ListViewDbUtil.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>412, 230</value>
+  </data>
+  <data name="ListViewDbUtil.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ListViewDbUtil.Visible" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Dbtpanel1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 52</value>
+  </data>
+  <data name="Dbtpanel1.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="Dbtpanel1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>426, 338</value>
+  </data>
+  <data name="Dbtpanel1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>852, 423</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Utilitaires de base de données</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
