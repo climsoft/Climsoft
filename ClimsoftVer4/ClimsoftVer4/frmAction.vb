@@ -13,17 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports ClimsoftVer4.Translations
 
 
 Public Class frmAction
     Public HTMLHelp As New clsHelp
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
-    End Sub
-
-    Private Sub frmAction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
