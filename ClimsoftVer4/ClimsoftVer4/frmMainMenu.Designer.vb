@@ -67,6 +67,8 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.StandardProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RProductsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -126,6 +128,7 @@ Partial Class frmMainMenu
         '
         'mnuProducts
         '
+        Me.mnuProducts.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StandardProductsToolStripMenuItem, Me.RProductsToolStripMenuItem})
         Me.mnuProducts.Name = "mnuProducts"
         resources.ApplyResources(Me.mnuProducts, "mnuProducts")
         Me.mnuProducts.Tag = "Products"
@@ -401,6 +404,16 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.Name = "cmdKeyEntry"
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'StandardProductsToolStripMenuItem
+        '
+        Me.StandardProductsToolStripMenuItem.Name = "StandardProductsToolStripMenuItem"
+        resources.ApplyResources(Me.StandardProductsToolStripMenuItem, "StandardProductsToolStripMenuItem")
+        '
+        'RProductsToolStripMenuItem
+        '
+        Me.RProductsToolStripMenuItem.Name = "RProductsToolStripMenuItem"
+        resources.ApplyResources(Me.RProductsToolStripMenuItem, "RProductsToolStripMenuItem")
+        '
         'frmMainMenu
         '
         resources.ApplyResources(Me, "$this")
@@ -467,4 +480,6 @@ Partial Class frmMainMenu
     Friend WithEvents HourlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StandardProductsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RProductsToolStripMenuItem As ToolStripMenuItem
 End Class
