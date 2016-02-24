@@ -22,15 +22,14 @@ Partial Class formClimat
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formClimat))
         Me.SuspendLayout()
         '
         'formClimat
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 631)
         Me.Name = "formClimat"
-        Me.Text = "Data for monthly CLIMAT Report"
         Me.ResumeLayout(False)
 
     End Sub

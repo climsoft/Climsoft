@@ -180,7 +180,7 @@
     <value>True</value>
   </data>
   <data name="chkFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 378</value>
+    <value>136, 380</value>
   </data>
   <data name="chkFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
@@ -212,8 +212,12 @@
   <data name="cmdArchive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdArchive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdArchive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 5</value>
+    <value>302, 9</value>
   </data>
   <data name="cmdArchive.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 25</value>
@@ -236,7 +240,6 @@
   <data name="&gt;&gt;cmdArchive.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="grpComands.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -262,7 +265,7 @@
     <value>3</value>
   </data>
   <data name="lstvFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 96</value>
+    <value>136, 98</value>
   </data>
   <data name="lstvFiles.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -299,7 +302,7 @@
     <value>Stretch</value>
   </data>
   <data name="cmdFolder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>492, 52</value>
+    <value>524, 52</value>
   </data>
   <data name="cmdFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 26</value>
@@ -323,7 +326,7 @@
     <value>True</value>
   </data>
   <data name="lblImageFiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 81</value>
+    <value>302, 83</value>
   </data>
   <data name="lblImageFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -374,7 +377,7 @@
     <value>7</value>
   </data>
   <data name="txtSelectedFolder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 55</value>
+    <value>136, 55</value>
   </data>
   <data name="txtSelectedFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 20</value>

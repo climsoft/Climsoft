@@ -3170,7 +3170,7 @@
     <value>153, 22</value>
   </data>
   <data name="CLICOMDailyToolStripMenuItem.Text" xml:space="preserve">
-    <value>CLICOM tous les jours</value>
+    <value>CLICOM journalière</value>
   </data>
   <data name="AWSToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
