@@ -169,6 +169,18 @@
   <data name="mnuQC.Text" xml:space="preserve">
     <value>QC</value>
   </data>
+  <data name="StandardProductsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 24</value>
+  </data>
+  <data name="StandardProductsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Standard Products</value>
+  </data>
+  <data name="RProductsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 24</value>
+  </data>
+  <data name="RProductsToolStripMenuItem.Text" xml:space="preserve">
+    <value>R Products</value>
+  </data>
   <data name="mnuProducts.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
@@ -8294,6 +8306,18 @@
     <value>mnuHelpAbout</value>
   </data>
   <data name="&gt;&gt;mnuHelpAbout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StandardProductsToolStripMenuItem.Name" xml:space="preserve">
+    <value>StandardProductsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;StandardProductsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RProductsToolStripMenuItem.Name" xml:space="preserve">
+    <value>RProductsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;RProductsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

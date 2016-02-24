@@ -190,6 +190,12 @@
     <Compile Include="frmDataMigration.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDataSelector.Designer.vb">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDataTransferProgress.Designer.vb">
       <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
     </Compile>
@@ -363,6 +369,12 @@
       <DependentUpon>frmMsg.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMsg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductsClimateObj.Designer.vb">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductsClimateObj.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmQC.Designer.vb">
@@ -670,6 +682,15 @@
     <EmbeddedResource Include="frmDataOutpt.fr.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.de.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.fr.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataSelector.resx">
+      <DependentUpon>frmDataSelector.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDataTransferProgress.de.resx">
       <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
     </EmbeddedResource>
@@ -846,6 +867,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMsg.resx">
       <DependentUpon>frmMsg.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.de.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.fr.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductsClimateObj.resx">
+      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQC.de.resx">
       <DependentUpon>frmQC.vb</DependentUpon>

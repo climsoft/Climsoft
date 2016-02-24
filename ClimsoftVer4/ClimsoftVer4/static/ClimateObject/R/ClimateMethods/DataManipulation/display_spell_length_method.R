@@ -38,14 +38,16 @@ climate$methods(display_spell_length = function(data_list = list(), col_name = "
       data_obj$add_year_month_day_cols()
     }
     
-    year_col = data_obj$getvname(year_label)
+    if( !(data_obj$is_present(season_label)) ) data_obj$add_doy_col()
+    
+    season_col = data_obj$getvname( season_label )
     month_col = data_obj$getvname(month_label)
     day_col = data_obj$getvname(day_label)
     
     curr_data_list = data_obj$get_data_for_analysis(data_list)
     
     for( curr_data in curr_data_list ) {
-      
+      factor_col = factor(curr_data[[season_col]], levels = unique(curr_data[[season_col]]), ordered = TRUE)
       for (k in 1:length(curr_data[[spell_length_col]])){
         if (is.na(curr_data[[spell_length_col]][[k]])){
           curr_data[[spell_length_col]][[k]]="m" 
@@ -53,7 +55,7 @@ climate$methods(display_spell_length = function(data_list = list(), col_name = "
       }
 
       tables = list()
-      years_split <- split(curr_data, list(as.factor(curr_data[[year_col]])))
+      years_split <- split(curr_data, factor_col)
       
       # initialize the counter
       i = 1

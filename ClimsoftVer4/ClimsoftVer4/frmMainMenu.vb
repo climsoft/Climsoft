@@ -87,8 +87,12 @@ Public Class frmMainMenu
     End Sub
 
     ' Products menu items
-    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProducts.Click
+    Private Sub StandardProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StandardProductsToolStripMenuItem.Click
         frmProducts.ShowDialog()
+    End Sub
+
+    Private Sub RProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RProductsToolStripMenuItem.Click
+        frmDataSelector.ShowDialog()
     End Sub
 
     ' Administration Menu items
@@ -144,4 +148,5 @@ Public Class frmMainMenu
     Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
         frmElementSequencerDaily.Show()
     End Sub
+
 End Class
