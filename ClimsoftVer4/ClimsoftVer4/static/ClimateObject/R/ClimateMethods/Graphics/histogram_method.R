@@ -1,8 +1,10 @@
 ##############################################################################
-# TIMESERIES
-#' @title Get timeseries from the Climsoft data
-#' @name timeseries
+# HISTOGRAM
+#' @title Get histogram from the Climsoft data
+#' @name histogram
 #' @author Rafael Posada 2015 (SASSCAL/DWD)
+#' @param data_list this is a list containing stations for analysis, 
+#' the years or periods to be analyzed and the required variables from the data.
 #' @description 
 #' Allows plotting the data in a timeseries plot.
 #'  

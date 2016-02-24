@@ -1,4 +1,4 @@
-climate$methods(Boxplot = function(data_list= list(), fill_col="blue",interest_var,factor=month_label,
+climate$methods(boxplot_method = function(data_list= list(), fill_col="blue",interest_var,factor=month_label,
                                    whisker_col="red", convert=TRUE,data_period_label=daily_label,
                                    title="Rain Amount boxplot",whisklty=1,xlab="Months",
                                    ylab=interest_var,horizontal=FALSE){
