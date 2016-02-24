@@ -22,6 +22,7 @@ Partial Class frmMsg
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMsg))
         Me.rtfDetails = New System.Windows.Forms.RichTextBox()
         Me.rtfMessage = New System.Windows.Forms.RichTextBox()
         Me.cmdDetails = New System.Windows.Forms.Button()
@@ -33,58 +34,41 @@ Partial Class frmMsg
         'rtfDetails
         '
         Me.rtfDetails.BackColor = System.Drawing.SystemColors.Window
-        Me.rtfDetails.Location = New System.Drawing.Point(12, 135)
+        resources.ApplyResources(Me.rtfDetails, "rtfDetails")
         Me.rtfDetails.Name = "rtfDetails"
         Me.rtfDetails.ReadOnly = True
-        Me.rtfDetails.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-        Me.rtfDetails.Size = New System.Drawing.Size(323, 128)
-        Me.rtfDetails.TabIndex = 13
-        Me.rtfDetails.Text = ""
         '
         'rtfMessage
         '
         Me.rtfMessage.BackColor = System.Drawing.SystemColors.Control
         Me.rtfMessage.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.rtfMessage.Location = New System.Drawing.Point(85, 12)
+        resources.ApplyResources(Me.rtfMessage, "rtfMessage")
         Me.rtfMessage.Name = "rtfMessage"
         Me.rtfMessage.ReadOnly = True
-        Me.rtfMessage.Size = New System.Drawing.Size(250, 86)
-        Me.rtfMessage.TabIndex = 12
-        Me.rtfMessage.Text = ""
         '
         'cmdDetails
         '
-        Me.cmdDetails.Location = New System.Drawing.Point(12, 104)
+        resources.ApplyResources(Me.cmdDetails, "cmdDetails")
         Me.cmdDetails.Name = "cmdDetails"
-        Me.cmdDetails.Size = New System.Drawing.Size(88, 23)
-        Me.cmdDetails.TabIndex = 11
-        Me.cmdDetails.Text = "Details"
         Me.cmdDetails.UseVisualStyleBackColor = True
         '
         'picIcon
         '
         Me.picIcon.BackColor = System.Drawing.Color.Transparent
-        Me.picIcon.Location = New System.Drawing.Point(12, 12)
+        resources.ApplyResources(Me.picIcon, "picIcon")
         Me.picIcon.Name = "picIcon"
-        Me.picIcon.Size = New System.Drawing.Size(55, 50)
-        Me.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.picIcon.TabIndex = 10
         Me.picIcon.TabStop = False
         '
         'cmdOK
         '
-        Me.cmdOK.Location = New System.Drawing.Point(260, 104)
+        resources.ApplyResources(Me.cmdOK, "cmdOK")
         Me.cmdOK.Name = "cmdOK"
-        Me.cmdOK.Size = New System.Drawing.Size(75, 23)
-        Me.cmdOK.TabIndex = 14
-        Me.cmdOK.Text = "OK"
         Me.cmdOK.UseVisualStyleBackColor = True
         '
         'frmMsg
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(347, 273)
         Me.Controls.Add(Me.cmdOK)
         Me.Controls.Add(Me.rtfDetails)
         Me.Controls.Add(Me.rtfMessage)

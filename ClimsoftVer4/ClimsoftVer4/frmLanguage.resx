@@ -117,4 +117,132 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cboLanguage.Items" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="cboLanguage.Items1" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="cboLanguage.Items2" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cboLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 52</value>
+  </data>
+  <data name="cboLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cboLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cboLanguage.Name" xml:space="preserve">
+    <value>cboLanguage</value>
+  </data>
+  <data name="&gt;&gt;cboLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboLanguage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 55</value>
+  </data>
+  <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblLanguage.Text" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
+  <data name="lblLanguage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Name" xml:space="preserve">
+    <value>lblLanguage</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 185</value>
+  </data>
+  <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="cmdCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdCancel.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="&gt;&gt;cmdCancel.Name" xml:space="preserve">
+    <value>cmdCancel</value>
+  </data>
+  <data name="&gt;&gt;cmdCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cmdOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>328, 185</value>
+  </data>
+  <data name="cmdOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 23</value>
+  </data>
+  <data name="cmdOK.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cmdOK.Text" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="&gt;&gt;cmdOK.Name" xml:space="preserve">
+    <value>cmdOK</value>
+  </data>
+  <data name="&gt;&gt;cmdOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>537, 220</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmLanguage</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

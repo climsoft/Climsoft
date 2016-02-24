@@ -117,4 +117,339 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtBeginYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 40</value>
+  </data>
+  <data name="txtBeginYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtBeginYear.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtBeginYear.Name" xml:space="preserve">
+    <value>txtBeginYear</value>
+  </data>
+  <data name="&gt;&gt;txtBeginYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtBeginYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtBeginYear.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="txtEndYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 80</value>
+  </data>
+  <data name="txtEndYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="txtEndYear.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtEndYear.Name" xml:space="preserve">
+    <value>txtEndYear</value>
+  </data>
+  <data name="&gt;&gt;txtEndYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtEndYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtEndYear.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="txtBeginMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 120</value>
+  </data>
+  <data name="txtBeginMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="txtBeginMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;txtBeginMonth.Name" xml:space="preserve">
+    <value>txtBeginMonth</value>
+  </data>
+  <data name="&gt;&gt;txtBeginMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtBeginMonth.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtBeginMonth.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txtEndMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 160</value>
+  </data>
+  <data name="txtEndMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="txtEndMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtEndMonth.Name" xml:space="preserve">
+    <value>txtEndMonth</value>
+  </data>
+  <data name="&gt;&gt;txtEndMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtEndMonth.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtEndMonth.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblBeginYear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBeginYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 43</value>
+  </data>
+  <data name="lblBeginYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblBeginYear.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblBeginYear.Text" xml:space="preserve">
+    <value>Begin Year:</value>
+  </data>
+  <data name="&gt;&gt;lblBeginYear.Name" xml:space="preserve">
+    <value>lblBeginYear</value>
+  </data>
+  <data name="&gt;&gt;lblBeginYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBeginYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblBeginYear.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblEndYear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEndYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 80</value>
+  </data>
+  <data name="lblEndYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblEndYear.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblEndYear.Text" xml:space="preserve">
+    <value>End Year:</value>
+  </data>
+  <data name="&gt;&gt;lblEndYear.Name" xml:space="preserve">
+    <value>lblEndYear</value>
+  </data>
+  <data name="&gt;&gt;lblEndYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblEndYear.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblBeginMonth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBeginMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 120</value>
+  </data>
+  <data name="lblBeginMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblBeginMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblBeginMonth.Text" xml:space="preserve">
+    <value>Begin Month:</value>
+  </data>
+  <data name="&gt;&gt;lblBeginMonth.Name" xml:space="preserve">
+    <value>lblBeginMonth</value>
+  </data>
+  <data name="&gt;&gt;lblBeginMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBeginMonth.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblBeginMonth.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblEndMonth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEndMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 160</value>
+  </data>
+  <data name="lblEndMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblEndMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblEndMonth.Text" xml:space="preserve">
+    <value>End Month</value>
+  </data>
+  <data name="&gt;&gt;lblEndMonth.Name" xml:space="preserve">
+    <value>lblEndMonth</value>
+  </data>
+  <data name="&gt;&gt;lblEndMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEndMonth.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblEndMonth.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 195</value>
+  </data>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 195</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 195</value>
+  </data>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Name" xml:space="preserve">
+    <value>btnHelp</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblQCtype.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblQCtype.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 9</value>
+  </data>
+  <data name="lblQCtype.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
+  </data>
+  <data name="lblQCtype.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblQCtype.Text" xml:space="preserve">
+    <value>Type of QC checks</value>
+  </data>
+  <data name="&gt;&gt;lblQCtype.Name" xml:space="preserve">
+    <value>lblQCtype</value>
+  </data>
+  <data name="&gt;&gt;lblQCtype.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblQCtype.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblQCtype.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblProcessingStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblProcessingStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 225</value>
+  </data>
+  <data name="lblProcessingStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblProcessingStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;lblProcessingStatus.Name" xml:space="preserve">
+    <value>lblProcessingStatus</value>
+  </data>
+  <data name="&gt;&gt;lblProcessingStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblProcessingStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblProcessingStatus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>350, 251</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Specify range of dates for QC</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frmQCdatesSelection</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

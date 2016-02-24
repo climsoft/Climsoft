@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 220</value>
+    <value>423, 220</value>
   </data>
   <data name="cmdClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 24</value>
@@ -147,7 +147,7 @@
     <value>True</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 157</value>
+    <value>44, 161</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -174,7 +174,7 @@
     <value>True</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 122</value>
+    <value>44, 126</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
@@ -201,7 +201,7 @@
     <value>True</value>
   </data>
   <data name="lblPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 122</value>
+    <value>44, 126</value>
   </data>
   <data name="lblPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
@@ -228,7 +228,7 @@
     <value>True</value>
   </data>
   <data name="lblUserType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 87</value>
+    <value>44, 91</value>
   </data>
   <data name="lblUserType.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -255,7 +255,7 @@
     <value>True</value>
   </data>
   <data name="lblUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 51</value>
+    <value>43, 55</value>
   </data>
   <data name="lblUserName.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -279,7 +279,7 @@
     <value>5</value>
   </data>
   <data name="cmdView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 220</value>
+    <value>339, 220</value>
   </data>
   <data name="cmdView.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 24</value>
@@ -303,7 +303,7 @@
     <value>6</value>
   </data>
   <data name="cmdDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 220</value>
+    <value>255, 220</value>
   </data>
   <data name="cmdDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 24</value>
@@ -327,10 +327,10 @@
     <value>7</value>
   </data>
   <data name="cmdUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 220</value>
+    <value>137, 220</value>
   </data>
   <data name="cmdUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 24</value>
+    <value>100, 24</value>
   </data>
   <data name="cmdUpdate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -351,16 +351,16 @@
     <value>8</value>
   </data>
   <data name="cmdAddNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 220</value>
+    <value>47, 221</value>
   </data>
   <data name="cmdAddNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 24</value>
+    <value>73, 24</value>
   </data>
   <data name="cmdAddNew.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="cmdAddNew.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddNew.Name" xml:space="preserve">
     <value>cmdAddNew</value>

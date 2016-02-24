@@ -23,6 +23,7 @@ Partial Class formElement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim CodeLabel As System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formElement))
         Dim AbbreviationLabel As System.Windows.Forms.Label
         Dim ElementNameLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
@@ -65,265 +66,169 @@ Partial Class formElement
         '
         'CodeLabel
         '
-        CodeLabel.AutoSize = True
-        CodeLabel.Location = New System.Drawing.Point(83, 40)
+        resources.ApplyResources(CodeLabel, "CodeLabel")
         CodeLabel.Name = "CodeLabel"
-        CodeLabel.Size = New System.Drawing.Size(62, 13)
-        CodeLabel.TabIndex = 1
-        CodeLabel.Text = "Element ID:"
         '
         'AbbreviationLabel
         '
-        AbbreviationLabel.AutoSize = True
-        AbbreviationLabel.Location = New System.Drawing.Point(297, 43)
+        resources.ApplyResources(AbbreviationLabel, "AbbreviationLabel")
         AbbreviationLabel.Name = "AbbreviationLabel"
-        AbbreviationLabel.Size = New System.Drawing.Size(69, 13)
-        AbbreviationLabel.TabIndex = 3
-        AbbreviationLabel.Text = "Abbreviation:"
         '
         'ElementNameLabel
         '
-        ElementNameLabel.AutoSize = True
-        ElementNameLabel.Location = New System.Drawing.Point(82, 81)
+        resources.ApplyResources(ElementNameLabel, "ElementNameLabel")
         ElementNameLabel.Name = "ElementNameLabel"
-        ElementNameLabel.Size = New System.Drawing.Size(79, 13)
-        ElementNameLabel.TabIndex = 5
-        ElementNameLabel.Text = "Element Name:"
         '
         'DescriptionLabel
         '
-        DescriptionLabel.AutoSize = True
-        DescriptionLabel.Location = New System.Drawing.Point(83, 121)
+        resources.ApplyResources(DescriptionLabel, "DescriptionLabel")
         DescriptionLabel.Name = "DescriptionLabel"
-        DescriptionLabel.Size = New System.Drawing.Size(63, 13)
-        DescriptionLabel.TabIndex = 7
-        DescriptionLabel.Text = "Description:"
         '
         'ElementScaleLabel
         '
-        ElementScaleLabel.AutoSize = True
-        ElementScaleLabel.Location = New System.Drawing.Point(297, 205)
+        resources.ApplyResources(ElementScaleLabel, "ElementScaleLabel")
         ElementScaleLabel.Name = "ElementScaleLabel"
-        ElementScaleLabel.Size = New System.Drawing.Size(78, 13)
-        ElementScaleLabel.TabIndex = 9
-        ElementScaleLabel.Text = "Element Scale:"
         '
         'UpperLimitLabel
         '
-        UpperLimitLabel.AutoSize = True
-        UpperLimitLabel.Location = New System.Drawing.Point(296, 161)
+        resources.ApplyResources(UpperLimitLabel, "UpperLimitLabel")
         UpperLimitLabel.Name = "UpperLimitLabel"
-        UpperLimitLabel.Size = New System.Drawing.Size(63, 13)
-        UpperLimitLabel.TabIndex = 11
-        UpperLimitLabel.Text = "Upper Limit:"
         '
         'LowerLimitLabel
         '
-        LowerLimitLabel.AutoSize = True
-        LowerLimitLabel.Location = New System.Drawing.Point(82, 161)
+        resources.ApplyResources(LowerLimitLabel, "LowerLimitLabel")
         LowerLimitLabel.Name = "LowerLimitLabel"
-        LowerLimitLabel.Size = New System.Drawing.Size(63, 13)
-        LowerLimitLabel.TabIndex = 13
-        LowerLimitLabel.Text = "Lower Limit:"
         '
         'UnitsLabel
         '
-        UnitsLabel.AutoSize = True
-        UnitsLabel.Location = New System.Drawing.Point(83, 205)
+        resources.ApplyResources(UnitsLabel, "UnitsLabel")
         UnitsLabel.Name = "UnitsLabel"
-        UnitsLabel.Size = New System.Drawing.Size(34, 13)
-        UnitsLabel.TabIndex = 15
-        UnitsLabel.Text = "Units:"
         '
         'ElementtypeLabel
         '
-        ElementtypeLabel.AutoSize = True
-        ElementtypeLabel.Location = New System.Drawing.Point(83, 241)
+        resources.ApplyResources(ElementtypeLabel, "ElementtypeLabel")
         ElementtypeLabel.Name = "ElementtypeLabel"
-        ElementtypeLabel.Size = New System.Drawing.Size(75, 13)
-        ElementtypeLabel.TabIndex = 17
-        ElementtypeLabel.Text = "Element Type:"
         '
         'CodeTextBox
         '
-        Me.CodeTextBox.Location = New System.Drawing.Point(166, 37)
+        resources.ApplyResources(Me.CodeTextBox, "CodeTextBox")
         Me.CodeTextBox.Name = "CodeTextBox"
-        Me.CodeTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.CodeTextBox.TabIndex = 2
         '
         'AbbreviationTextBox
         '
-        Me.AbbreviationTextBox.Location = New System.Drawing.Point(380, 40)
+        resources.ApplyResources(Me.AbbreviationTextBox, "AbbreviationTextBox")
         Me.AbbreviationTextBox.Name = "AbbreviationTextBox"
-        Me.AbbreviationTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.AbbreviationTextBox.TabIndex = 4
         '
         'ElementNameTextBox
         '
-        Me.ElementNameTextBox.Location = New System.Drawing.Point(166, 78)
+        resources.ApplyResources(Me.ElementNameTextBox, "ElementNameTextBox")
         Me.ElementNameTextBox.Name = "ElementNameTextBox"
-        Me.ElementNameTextBox.Size = New System.Drawing.Size(314, 20)
-        Me.ElementNameTextBox.TabIndex = 6
         '
         'DescriptionTextBox
         '
-        Me.DescriptionTextBox.Location = New System.Drawing.Point(166, 118)
+        resources.ApplyResources(Me.DescriptionTextBox, "DescriptionTextBox")
         Me.DescriptionTextBox.Name = "DescriptionTextBox"
-        Me.DescriptionTextBox.Size = New System.Drawing.Size(314, 20)
-        Me.DescriptionTextBox.TabIndex = 8
         '
         'ElementScaleTextBox
         '
-        Me.ElementScaleTextBox.Location = New System.Drawing.Point(380, 202)
+        resources.ApplyResources(Me.ElementScaleTextBox, "ElementScaleTextBox")
         Me.ElementScaleTextBox.Name = "ElementScaleTextBox"
-        Me.ElementScaleTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.ElementScaleTextBox.TabIndex = 10
         '
         'UpperLimitTextBox
         '
-        Me.UpperLimitTextBox.Location = New System.Drawing.Point(380, 158)
+        resources.ApplyResources(Me.UpperLimitTextBox, "UpperLimitTextBox")
         Me.UpperLimitTextBox.Name = "UpperLimitTextBox"
-        Me.UpperLimitTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.UpperLimitTextBox.TabIndex = 12
         '
         'LowerLimitTextBox
         '
-        Me.LowerLimitTextBox.Location = New System.Drawing.Point(166, 158)
+        resources.ApplyResources(Me.LowerLimitTextBox, "LowerLimitTextBox")
         Me.LowerLimitTextBox.Name = "LowerLimitTextBox"
-        Me.LowerLimitTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.LowerLimitTextBox.TabIndex = 14
         '
         'UnitsTextBox
         '
-        Me.UnitsTextBox.Location = New System.Drawing.Point(166, 202)
+        resources.ApplyResources(Me.UnitsTextBox, "UnitsTextBox")
         Me.UnitsTextBox.Name = "UnitsTextBox"
-        Me.UnitsTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.UnitsTextBox.TabIndex = 16
         '
         'ElementtypeTextBox
         '
-        Me.ElementtypeTextBox.Location = New System.Drawing.Point(166, 238)
+        resources.ApplyResources(Me.ElementtypeTextBox, "ElementtypeTextBox")
         Me.ElementtypeTextBox.Name = "ElementtypeTextBox"
-        Me.ElementtypeTextBox.Size = New System.Drawing.Size(100, 20)
-        Me.ElementtypeTextBox.TabIndex = 18
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(438, 319)
+        resources.ApplyResources(Me.btnClose, "btnClose")
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 19
-        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(357, 319)
+        resources.ApplyResources(Me.btnClear, "btnClear")
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 53
-        Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnCommit
         '
-        Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(110, 319)
+        resources.ApplyResources(Me.btnCommit, "btnCommit")
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 52
-        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(272, 319)
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 51
-        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(29, 319)
+        resources.ApplyResources(Me.btnAddNew, "btnAddNew")
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 50
-        Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(191, 319)
+        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 49
-        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnMovePrevious
         '
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(195, 281)
+        resources.ApplyResources(Me.btnMovePrevious, "btnMovePrevious")
         Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
-        Me.btnMovePrevious.TabIndex = 48
-        Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
         'btnMoveFirst
         '
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(148, 281)
+        resources.ApplyResources(Me.btnMoveFirst, "btnMoveFirst")
         Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 47
-        Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
         'btnMoveLast
         '
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(438, 281)
+        resources.ApplyResources(Me.btnMoveLast, "btnMoveLast")
         Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(35, 23)
-        Me.btnMoveLast.TabIndex = 46
-        Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(247, 283)
+        resources.ApplyResources(Me.recNumberTextBox, "recNumberTextBox")
         Me.recNumberTextBox.Name = "recNumberTextBox"
-        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
-        Me.recNumberTextBox.TabIndex = 45
         '
         'btnMoveNext
         '
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(394, 281)
+        resources.ApplyResources(Me.btnMoveNext, "btnMoveNext")
         Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
-        Me.btnMoveNext.TabIndex = 44
-        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(519, 319)
+        resources.ApplyResources(Me.btnHelp, "btnHelp")
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 54
-        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'formElement
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(613, 363)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
@@ -356,7 +261,6 @@ Partial Class formElement
         Me.Controls.Add(Me.CodeTextBox)
         Me.MaximizeBox = False
         Me.Name = "formElement"
-        Me.Text = "Element Information"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

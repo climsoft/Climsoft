@@ -22,7 +22,7 @@
     <value>75, 23</value>
   </data>
   <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
-    <value>663, 368</value>
+    <value>650, 368</value>
   </data>
   <data name="cmdOk.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -82,7 +82,7 @@
     <value>574, 324</value>
   </data>
   <data name="cmdApply.Text" xml:space="preserve">
-    <value>S'appliquent</value>
+    <value>Appliquer</value>
   </data>
   <metadata name="HelpProvider1.TrayLocation" xml:space="preserve" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

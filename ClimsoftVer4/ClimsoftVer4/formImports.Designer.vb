@@ -54,10 +54,8 @@ Partial Class formImports
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.Snow
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(377, 31)
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(380, 390)
-        Me.DataGridView1.TabIndex = 0
         '
         'Panel1
         '
@@ -66,57 +64,38 @@ Partial Class formImports
         Me.Panel1.Controls.Add(Me.cmdClose)
         Me.Panel1.Controls.Add(Me.cmdProcess)
         Me.Panel1.Controls.Add(Me.cmdStart)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 428)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(760, 34)
-        Me.Panel1.TabIndex = 4
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(312, 2)
+        resources.ApplyResources(Me.cmdReset, "cmdReset")
         Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(80, 33)
-        Me.cmdReset.TabIndex = 8
-        Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmHelp
         '
-        Me.cmHelp.Location = New System.Drawing.Point(560, 2)
+        resources.ApplyResources(Me.cmHelp, "cmHelp")
         Me.cmHelp.Name = "cmHelp"
-        Me.cmHelp.Size = New System.Drawing.Size(80, 33)
-        Me.cmHelp.TabIndex = 7
-        Me.cmHelp.Text = "Help"
         Me.cmHelp.UseVisualStyleBackColor = True
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(436, 2)
+        resources.ApplyResources(Me.cmdClose, "cmdClose")
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(80, 33)
-        Me.cmdClose.TabIndex = 6
-        Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdProcess
         '
-        Me.cmdProcess.Location = New System.Drawing.Point(188, 2)
+        resources.ApplyResources(Me.cmdProcess, "cmdProcess")
         Me.cmdProcess.Name = "cmdProcess"
-        Me.cmdProcess.Size = New System.Drawing.Size(80, 33)
-        Me.cmdProcess.TabIndex = 5
-        Me.cmdProcess.Text = "Import"
         Me.cmdProcess.UseVisualStyleBackColor = True
         '
         'cmdStart
         '
-        Me.cmdStart.Location = New System.Drawing.Point(64, 2)
+        resources.ApplyResources(Me.cmdStart, "cmdStart")
         Me.cmdStart.Name = "cmdStart"
-        Me.cmdStart.Size = New System.Drawing.Size(80, 33)
-        Me.cmdStart.TabIndex = 4
-        Me.cmdStart.Text = "Open File"
         Me.cmdStart.UseVisualStyleBackColor = True
-        Me.cmdStart.Visible = False
         '
         'GroupBox1
         '
@@ -132,124 +111,80 @@ Partial Class formImports
         Me.GroupBox1.Controls.Add(Me.optACCESS)
         Me.GroupBox1.Controls.Add(Me.optEXCEL)
         Me.GroupBox1.Controls.Add(Me.optCSV)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 31)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(367, 390)
-        Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Import Types"
         '
         'cmdACCESS
         '
-        Me.cmdACCESS.BackgroundImage = CType(resources.GetObject("cmdACCESS.BackgroundImage"), System.Drawing.Image)
-        Me.cmdACCESS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdACCESS.Location = New System.Drawing.Point(326, 173)
+        resources.ApplyResources(Me.cmdACCESS, "cmdACCESS")
         Me.cmdACCESS.Name = "cmdACCESS"
-        Me.cmdACCESS.Size = New System.Drawing.Size(36, 29)
-        Me.cmdACCESS.TabIndex = 11
         Me.cmdACCESS.UseVisualStyleBackColor = True
         '
         'txtACCESS
         '
-        Me.txtACCESS.Location = New System.Drawing.Point(106, 177)
+        resources.ApplyResources(Me.txtACCESS, "txtACCESS")
         Me.txtACCESS.Name = "txtACCESS"
-        Me.txtACCESS.Size = New System.Drawing.Size(221, 20)
-        Me.txtACCESS.TabIndex = 10
         '
         'cmdEXCEL
         '
-        Me.cmdEXCEL.BackgroundImage = CType(resources.GetObject("cmdEXCEL.BackgroundImage"), System.Drawing.Image)
-        Me.cmdEXCEL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdEXCEL.Location = New System.Drawing.Point(326, 137)
+        resources.ApplyResources(Me.cmdEXCEL, "cmdEXCEL")
         Me.cmdEXCEL.Name = "cmdEXCEL"
-        Me.cmdEXCEL.Size = New System.Drawing.Size(36, 29)
-        Me.cmdEXCEL.TabIndex = 9
         Me.cmdEXCEL.UseVisualStyleBackColor = True
         '
         'txtEXCEL
         '
-        Me.txtEXCEL.Location = New System.Drawing.Point(106, 141)
+        resources.ApplyResources(Me.txtEXCEL, "txtEXCEL")
         Me.txtEXCEL.Name = "txtEXCEL"
-        Me.txtEXCEL.Size = New System.Drawing.Size(221, 20)
-        Me.txtEXCEL.TabIndex = 8
         '
         'cmdCLIMSOFT3
         '
-        Me.cmdCLIMSOFT3.BackgroundImage = CType(resources.GetObject("cmdCLIMSOFT3.BackgroundImage"), System.Drawing.Image)
-        Me.cmdCLIMSOFT3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCLIMSOFT3.Location = New System.Drawing.Point(326, 98)
+        resources.ApplyResources(Me.cmdCLIMSOFT3, "cmdCLIMSOFT3")
         Me.cmdCLIMSOFT3.Name = "cmdCLIMSOFT3"
-        Me.cmdCLIMSOFT3.Size = New System.Drawing.Size(36, 29)
-        Me.cmdCLIMSOFT3.TabIndex = 7
         Me.cmdCLIMSOFT3.UseVisualStyleBackColor = True
         '
         'txtCLIMSOFT3
         '
-        Me.txtCLIMSOFT3.Location = New System.Drawing.Point(106, 102)
+        resources.ApplyResources(Me.txtCLIMSOFT3, "txtCLIMSOFT3")
         Me.txtCLIMSOFT3.Name = "txtCLIMSOFT3"
-        Me.txtCLIMSOFT3.Size = New System.Drawing.Size(221, 20)
-        Me.txtCLIMSOFT3.TabIndex = 6
         '
         'cmdCSV
         '
-        Me.cmdCSV.BackgroundImage = CType(resources.GetObject("cmdCSV.BackgroundImage"), System.Drawing.Image)
-        Me.cmdCSV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdCSV.Location = New System.Drawing.Point(326, 63)
+        resources.ApplyResources(Me.cmdCSV, "cmdCSV")
         Me.cmdCSV.Name = "cmdCSV"
-        Me.cmdCSV.Size = New System.Drawing.Size(36, 29)
-        Me.cmdCSV.TabIndex = 5
         Me.cmdCSV.UseVisualStyleBackColor = True
         '
         'txtCSV
         '
-        Me.txtCSV.Location = New System.Drawing.Point(106, 67)
+        resources.ApplyResources(Me.txtCSV, "txtCSV")
         Me.txtCSV.Name = "txtCSV"
-        Me.txtCSV.Size = New System.Drawing.Size(221, 20)
-        Me.txtCSV.TabIndex = 4
         '
         'optCLIMSOFT3
         '
-        Me.optCLIMSOFT3.AutoSize = True
-        Me.optCLIMSOFT3.Location = New System.Drawing.Point(14, 105)
+        resources.ApplyResources(Me.optCLIMSOFT3, "optCLIMSOFT3")
         Me.optCLIMSOFT3.Name = "optCLIMSOFT3"
-        Me.optCLIMSOFT3.Size = New System.Drawing.Size(94, 17)
-        Me.optCLIMSOFT3.TabIndex = 3
         Me.optCLIMSOFT3.TabStop = True
-        Me.optCLIMSOFT3.Text = "CLIMSOFT V3"
         Me.optCLIMSOFT3.UseVisualStyleBackColor = True
         '
         'optACCESS
         '
-        Me.optACCESS.AutoSize = True
-        Me.optACCESS.Location = New System.Drawing.Point(13, 177)
+        resources.ApplyResources(Me.optACCESS, "optACCESS")
         Me.optACCESS.Name = "optACCESS"
-        Me.optACCESS.Size = New System.Drawing.Size(67, 17)
-        Me.optACCESS.TabIndex = 2
         Me.optACCESS.TabStop = True
-        Me.optACCESS.Text = "ACCESS"
         Me.optACCESS.UseVisualStyleBackColor = True
         '
         'optEXCEL
         '
-        Me.optEXCEL.AutoSize = True
-        Me.optEXCEL.Location = New System.Drawing.Point(13, 141)
+        resources.ApplyResources(Me.optEXCEL, "optEXCEL")
         Me.optEXCEL.Name = "optEXCEL"
-        Me.optEXCEL.Size = New System.Drawing.Size(59, 17)
-        Me.optEXCEL.TabIndex = 1
         Me.optEXCEL.TabStop = True
-        Me.optEXCEL.Text = "EXCEL"
         Me.optEXCEL.UseVisualStyleBackColor = True
         '
         'optCSV
         '
-        Me.optCSV.AutoSize = True
-        Me.optCSV.Location = New System.Drawing.Point(13, 69)
+        resources.ApplyResources(Me.optCSV, "optCSV")
         Me.optCSV.Name = "optCSV"
-        Me.optCSV.Size = New System.Drawing.Size(95, 17)
-        Me.optCSV.TabIndex = 0
         Me.optCSV.TabStop = True
-        Me.optCSV.Text = "Text File (CSV)"
         Me.optCSV.UseVisualStyleBackColor = True
         '
         'OpenFileImport
@@ -258,14 +193,12 @@ Partial Class formImports
         '
         'formImports
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(760, 462)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Name = "formImports"
-        Me.Text = "Metadata Imports"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)

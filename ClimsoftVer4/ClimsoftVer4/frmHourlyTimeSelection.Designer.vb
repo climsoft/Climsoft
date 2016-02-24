@@ -34,52 +34,37 @@ Partial Class frmHourlyTimeSelection
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(51, 94)
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(273, 223)
-        Me.DataGridView1.TabIndex = 0
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(230, 334)
+        resources.ApplyResources(Me.btnHelp, "btnHelp")
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 7
-        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(62, 334)
+        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 6
-        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(146, 334)
+        resources.ApplyResources(Me.btnClose, "btnClose")
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 5
-        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'lblHourlyTimeSelection
         '
         Me.lblHourlyTimeSelection.ForeColor = System.Drawing.Color.Red
-        Me.lblHourlyTimeSelection.Location = New System.Drawing.Point(48, 13)
+        resources.ApplyResources(Me.lblHourlyTimeSelection, "lblHourlyTimeSelection")
         Me.lblHourlyTimeSelection.Name = "lblHourlyTimeSelection"
-        Me.lblHourlyTimeSelection.Size = New System.Drawing.Size(283, 55)
-        Me.lblHourlyTimeSelection.TabIndex = 8
-        Me.lblHourlyTimeSelection.Text = resources.GetString("lblHourlyTimeSelection.Text")
         '
         'frmHourlyTimeSelection
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(374, 370)
         Me.Controls.Add(Me.lblHourlyTimeSelection)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnUpdate)
@@ -88,7 +73,6 @@ Partial Class frmHourlyTimeSelection
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmHourlyTimeSelection"
-        Me.Text = "Time Selection for FormHourly"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

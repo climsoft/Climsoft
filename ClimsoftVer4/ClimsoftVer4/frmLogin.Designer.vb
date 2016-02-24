@@ -46,108 +46,72 @@ Partial Class frmLogin
         '
         'LogoPictureBox
         '
-        Me.LogoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
-        Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.LogoPictureBox, "LogoPictureBox")
         Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(178, 224)
-        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
         '
         'UsernameLabel
         '
-        Me.UsernameLabel.Location = New System.Drawing.Point(192, 19)
+        resources.ApplyResources(Me.UsernameLabel, "UsernameLabel")
         Me.UsernameLabel.Name = "UsernameLabel"
-        Me.UsernameLabel.Size = New System.Drawing.Size(220, 23)
-        Me.UsernameLabel.TabIndex = 0
         Me.UsernameLabel.Tag = "Username"
-        Me.UsernameLabel.Text = "&Username"
-        Me.UsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'PasswordLabel
         '
-        Me.PasswordLabel.Location = New System.Drawing.Point(192, 76)
+        resources.ApplyResources(Me.PasswordLabel, "PasswordLabel")
         Me.PasswordLabel.Name = "PasswordLabel"
-        Me.PasswordLabel.Size = New System.Drawing.Size(220, 23)
-        Me.PasswordLabel.TabIndex = 2
         Me.PasswordLabel.Tag = "Password"
-        Me.PasswordLabel.Text = "&Password"
-        Me.PasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(194, 39)
+        resources.ApplyResources(Me.txtUsername, "txtUsername")
         Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(220, 20)
-        Me.txtUsername.TabIndex = 1
         Me.txtUsername.Tag = ""
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(194, 96)
+        resources.ApplyResources(Me.txtPassword, "txtPassword")
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(220, 20)
-        Me.txtPassword.TabIndex = 3
         Me.txtPassword.Tag = ""
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(204, 187)
+        resources.ApplyResources(Me.OK, "OK")
         Me.OK.Name = "OK"
-        Me.OK.Size = New System.Drawing.Size(94, 23)
-        Me.OK.TabIndex = 4
         Me.OK.Tag = "OK"
-        Me.OK.Text = "&OK"
         '
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(307, 187)
+        resources.ApplyResources(Me.Cancel, "Cancel")
         Me.Cancel.Name = "Cancel"
-        Me.Cancel.Size = New System.Drawing.Size(94, 23)
-        Me.Cancel.TabIndex = 5
         Me.Cancel.Tag = "Cancel"
-        Me.Cancel.Text = "&Cancel"
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(197, 40)
+        resources.ApplyResources(Me.txtusrpwd, "txtusrpwd")
         Me.txtusrpwd.Name = "txtusrpwd"
-        Me.txtusrpwd.Size = New System.Drawing.Size(177, 20)
-        Me.txtusrpwd.TabIndex = 6
-        Me.txtusrpwd.Visible = False
         '
         'cmbDatabases
         '
         Me.cmbDatabases.BackColor = System.Drawing.SystemColors.Menu
         Me.cmbDatabases.FormattingEnabled = True
-        Me.cmbDatabases.Location = New System.Drawing.Point(194, 143)
+        resources.ApplyResources(Me.cmbDatabases, "cmbDatabases")
         Me.cmbDatabases.Name = "cmbDatabases"
-        Me.cmbDatabases.Size = New System.Drawing.Size(333, 21)
-        Me.cmbDatabases.TabIndex = 7
-        Me.cmbDatabases.Visible = False
         '
         'lblDbdetails
         '
-        Me.lblDbdetails.AutoSize = True
+        resources.ApplyResources(Me.lblDbdetails, "lblDbdetails")
         Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
-        Me.lblDbdetails.Location = New System.Drawing.Point(192, 129)
         Me.lblDbdetails.Name = "lblDbdetails"
-        Me.lblDbdetails.Size = New System.Drawing.Size(142, 13)
-        Me.lblDbdetails.TabIndex = 8
         Me.lblDbdetails.Tag = "Show_Database_Details"
-        Me.lblDbdetails.Text = "Show Database Details........"
-        Me.lblDbdetails.Visible = False
         '
         'frmLogin
         '
         Me.AcceptButton = Me.OK
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(539, 222)
         Me.Controls.Add(Me.lblDbdetails)
         Me.Controls.Add(Me.cmbDatabases)
         Me.Controls.Add(Me.Cancel)
@@ -163,9 +127,7 @@ Partial Class frmLogin
         Me.MinimizeBox = False
         Me.Name = "frmLogin"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Login"
-        Me.Text = "Login"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

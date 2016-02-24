@@ -153,7 +153,7 @@
     <value>True</value>
   </data>
   <data name="txtStationOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 46</value>
+    <value>519, 46</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="txtStationOperation.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -310,7 +310,7 @@
     <value>32</value>
   </data>
   <data name="cmdAddNew.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddNew.Name" xml:space="preserve">
     <value>cmdAddNew</value>
@@ -694,7 +694,7 @@
     <value>2</value>
   </data>
   <data name="txtClosingDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 243</value>
+    <value>127, 243</value>
   </data>
   <data name="txtClosingDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 20</value>
@@ -715,7 +715,7 @@
     <value>3</value>
   </data>
   <data name="txtOpenDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 215</value>
+    <value>127, 215</value>
   </data>
   <data name="txtOpenDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 20</value>
@@ -736,7 +736,7 @@
     <value>4</value>
   </data>
   <data name="txtgeoAccuracy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 180</value>
+    <value>519, 180</value>
   </data>
   <data name="txtgeoAccuracy.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
@@ -757,7 +757,7 @@
     <value>5</value>
   </data>
   <data name="txtgeoMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 152</value>
+    <value>519, 152</value>
   </data>
   <data name="txtgeoMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
@@ -778,7 +778,7 @@
     <value>6</value>
   </data>
   <data name="txtElevation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 124</value>
+    <value>519, 124</value>
   </data>
   <data name="txtElevation.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
@@ -799,7 +799,7 @@
     <value>7</value>
   </data>
   <data name="txtLongitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 96</value>
+    <value>519, 96</value>
   </data>
   <data name="txtLongitude.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
@@ -820,7 +820,7 @@
     <value>8</value>
   </data>
   <data name="txtLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>513, 68</value>
+    <value>519, 68</value>
   </data>
   <data name="txtLatitude.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
@@ -841,7 +841,7 @@
     <value>9</value>
   </data>
   <data name="txtDrainageBasin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 183</value>
+    <value>128, 183</value>
   </data>
   <data name="txtDrainageBasin.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
@@ -862,7 +862,7 @@
     <value>10</value>
   </data>
   <data name="txtAdminRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 155</value>
+    <value>127, 155</value>
   </data>
   <data name="txtAdminRegion.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
@@ -883,7 +883,7 @@
     <value>11</value>
   </data>
   <data name="txtAuthority.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 127</value>
+    <value>127, 127</value>
   </data>
   <data name="txtAuthority.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
@@ -904,7 +904,7 @@
     <value>12</value>
   </data>
   <data name="txtCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 99</value>
+    <value>127, 99</value>
   </data>
   <data name="txtCountry.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -925,7 +925,7 @@
     <value>13</value>
   </data>
   <data name="txtStationName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 71</value>
+    <value>127, 71</value>
   </data>
   <data name="txtStationName.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 20</value>
@@ -946,7 +946,7 @@
     <value>14</value>
   </data>
   <data name="txtstationId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 43</value>
+    <value>127, 43</value>
   </data>
   <data name="txtstationId.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 20</value>
@@ -1501,7 +1501,7 @@
     <value>32</value>
   </data>
   <data name="cmdAddElement.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddElement.Name" xml:space="preserve">
     <value>cmdAddElement</value>
@@ -1897,7 +1897,7 @@
     <value>AWS</value>
   </data>
   <data name="txtType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 245</value>
+    <value>211, 246</value>
   </data>
   <data name="txtType.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -1918,7 +1918,7 @@
     <value>2</value>
   </data>
   <data name="txtUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 218</value>
+    <value>211, 219</value>
   </data>
   <data name="txtUnit.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -1939,7 +1939,7 @@
     <value>3</value>
   </data>
   <data name="txtLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 191</value>
+    <value>211, 192</value>
   </data>
   <data name="txtLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -1960,7 +1960,7 @@
     <value>4</value>
   </data>
   <data name="txtUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 164</value>
+    <value>211, 165</value>
   </data>
   <data name="txtUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -1981,7 +1981,7 @@
     <value>5</value>
   </data>
   <data name="txtScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 137</value>
+    <value>210, 138</value>
   </data>
   <data name="txtScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -2002,7 +2002,7 @@
     <value>6</value>
   </data>
   <data name="txtDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 110</value>
+    <value>210, 111</value>
   </data>
   <data name="txtDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 20</value>
@@ -2023,7 +2023,7 @@
     <value>7</value>
   </data>
   <data name="txtName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 83</value>
+    <value>210, 84</value>
   </data>
   <data name="txtName.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -2044,7 +2044,7 @@
     <value>8</value>
   </data>
   <data name="txtAbbreviation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 56</value>
+    <value>210, 57</value>
   </data>
   <data name="txtAbbreviation.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 20</value>
@@ -2065,7 +2065,7 @@
     <value>9</value>
   </data>
   <data name="txtId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 29</value>
+    <value>210, 30</value>
   </data>
   <data name="txtId.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 20</value>
@@ -2545,7 +2545,7 @@
     <value>32</value>
   </data>
   <data name="cmdAddStElement.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddStElement.Name" xml:space="preserve">
     <value>cmdAddStElement</value>
@@ -2929,7 +2929,7 @@
     <value>1</value>
   </data>
   <data name="txtImstrument.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 106</value>
+    <value>257, 103</value>
   </data>
   <data name="txtImstrument.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 21</value>
@@ -2950,7 +2950,7 @@
     <value>2</value>
   </data>
   <data name="txtElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 74</value>
+    <value>257, 71</value>
   </data>
   <data name="txtElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 21</value>
@@ -2971,7 +2971,7 @@
     <value>3</value>
   </data>
   <data name="txtStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 42</value>
+    <value>256, 39</value>
   </data>
   <data name="txtStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 21</value>
@@ -2992,7 +2992,7 @@
     <value>4</value>
   </data>
   <data name="txtEndate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 231</value>
+    <value>257, 228</value>
   </data>
   <data name="txtEndate.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 20</value>
@@ -3013,7 +3013,7 @@
     <value>5</value>
   </data>
   <data name="txtBeginDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 200</value>
+    <value>257, 197</value>
   </data>
   <data name="txtBeginDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 20</value>
@@ -3034,7 +3034,7 @@
     <value>6</value>
   </data>
   <data name="txtHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 169</value>
+    <value>246, 165</value>
   </data>
   <data name="txtHeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -3055,7 +3055,7 @@
     <value>7</value>
   </data>
   <data name="txtScheduleClass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 138</value>
+    <value>258, 135</value>
   </data>
   <data name="txtScheduleClass.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 20</value>
@@ -3421,7 +3421,7 @@
     <value>32</value>
   </data>
   <data name="cmdAddInstrument.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddInstrument.Name" xml:space="preserve">
     <value>cmdAddInstrument</value>
@@ -3853,7 +3853,7 @@
     <value>3</value>
   </data>
   <data name="txtInstrHeight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 319</value>
+    <value>207, 320</value>
   </data>
   <data name="txtInstrHeight.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -3874,7 +3874,7 @@
     <value>4</value>
   </data>
   <data name="txtDeinstallDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 292</value>
+    <value>208, 293</value>
   </data>
   <data name="txtDeinstallDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -3895,7 +3895,7 @@
     <value>5</value>
   </data>
   <data name="txtInstallDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 265</value>
+    <value>208, 266</value>
   </data>
   <data name="txtInstallDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -4009,7 +4009,7 @@
     <value>AWS</value>
   </data>
   <data name="txtInstrStn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 102</value>
+    <value>207, 103</value>
   </data>
   <data name="txtInstrStn.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 21</value>
@@ -4030,7 +4030,7 @@
     <value>10</value>
   </data>
   <data name="txtUncertainity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 238</value>
+    <value>208, 239</value>
   </data>
   <data name="txtUncertainity.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -4051,7 +4051,7 @@
     <value>11</value>
   </data>
   <data name="txtManufacturer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 211</value>
+    <value>208, 212</value>
   </data>
   <data name="txtManufacturer.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
@@ -4072,7 +4072,7 @@
     <value>12</value>
   </data>
   <data name="txtModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 184</value>
+    <value>208, 185</value>
   </data>
   <data name="txtModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
@@ -4093,7 +4093,7 @@
     <value>13</value>
   </data>
   <data name="txtInstrScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 157</value>
+    <value>207, 158</value>
   </data>
   <data name="txtInstrScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -4114,7 +4114,7 @@
     <value>14</value>
   </data>
   <data name="txtSerial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 130</value>
+    <value>207, 131</value>
   </data>
   <data name="txtSerial.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -4135,7 +4135,7 @@
     <value>15</value>
   </data>
   <data name="txtAbbrev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 75</value>
+    <value>207, 76</value>
   </data>
   <data name="txtAbbrev.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -4156,7 +4156,7 @@
     <value>16</value>
   </data>
   <data name="txtInstName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 48</value>
+    <value>207, 49</value>
   </data>
   <data name="txtInstName.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -4177,7 +4177,7 @@
     <value>17</value>
   </data>
   <data name="txtInstrumentId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 21</value>
+    <value>207, 22</value>
   </data>
   <data name="txtInstrumentId.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -4603,7 +4603,7 @@
     <value>40</value>
   </data>
   <data name="cmdAddHistory.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddHistory.Name" xml:space="preserve">
     <value>cmdAddHistory</value>
@@ -5011,7 +5011,7 @@
     <value>1</value>
   </data>
   <data name="txtDrgBasin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 319</value>
+    <value>292, 317</value>
   </data>
   <data name="txtDrgBasin.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -5032,7 +5032,7 @@
     <value>2</value>
   </data>
   <data name="txtClosDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 157</value>
+    <value>292, 155</value>
   </data>
   <data name="txtClosDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5053,7 +5053,7 @@
     <value>3</value>
   </data>
   <data name="txtOpDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 130</value>
+    <value>292, 128</value>
   </data>
   <data name="txtOpDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5167,7 +5167,7 @@
     <value>AWS</value>
   </data>
   <data name="txtlocStn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 21</value>
+    <value>292, 19</value>
   </data>
   <data name="txtlocStn.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 21</value>
@@ -5188,7 +5188,7 @@
     <value>8</value>
   </data>
   <data name="txtElev.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 238</value>
+    <value>293, 236</value>
   </data>
   <data name="txtElev.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -5209,7 +5209,7 @@
     <value>9</value>
   </data>
   <data name="txtLon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 211</value>
+    <value>292, 209</value>
   </data>
   <data name="txtLon.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
@@ -5230,7 +5230,7 @@
     <value>10</value>
   </data>
   <data name="txtLat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 184</value>
+    <value>292, 182</value>
   </data>
   <data name="txtLat.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
@@ -5251,7 +5251,7 @@
     <value>11</value>
   </data>
   <data name="txtAdmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 292</value>
+    <value>292, 290</value>
   </data>
   <data name="txtAdmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -5272,7 +5272,7 @@
     <value>12</value>
   </data>
   <data name="txtAuth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 265</value>
+    <value>292, 263</value>
   </data>
   <data name="txtAuth.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5293,7 +5293,7 @@
     <value>13</value>
   </data>
   <data name="txtMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 76</value>
+    <value>292, 74</value>
   </data>
   <data name="txtMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5314,7 +5314,7 @@
     <value>14</value>
   </data>
   <data name="txtStnType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 49</value>
+    <value>292, 47</value>
   </data>
   <data name="txtStnType.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5335,7 +5335,7 @@
     <value>15</value>
   </data>
   <data name="txtAccuracy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 103</value>
+    <value>292, 101</value>
   </data>
   <data name="txtAccuracy.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -5791,7 +5791,7 @@
     <value>40</value>
   </data>
   <data name="cmdAddQualier.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddQualier.Name" xml:space="preserve">
     <value>cmdAddQualier</value>
@@ -6199,7 +6199,7 @@
     <value>1</value>
   </data>
   <data name="txtEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 146</value>
+    <value>277, 147</value>
   </data>
   <data name="txtEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -6247,7 +6247,7 @@
     <value>3</value>
   </data>
   <data name="txtQualifierStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 71</value>
+    <value>277, 72</value>
   </data>
   <data name="txtQualifierStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -6268,7 +6268,7 @@
     <value>4</value>
   </data>
   <data name="txtBDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 109</value>
+    <value>275, 110</value>
   </data>
   <data name="txtBDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -6289,7 +6289,7 @@
     <value>5</value>
   </data>
   <data name="txtNetwork.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 220</value>
+    <value>277, 221</value>
   </data>
   <data name="txtNetwork.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -6310,7 +6310,7 @@
     <value>6</value>
   </data>
   <data name="txtTZone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 183</value>
+    <value>277, 184</value>
   </data>
   <data name="txtTZone.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 20</value>
@@ -6331,7 +6331,7 @@
     <value>7</value>
   </data>
   <data name="txtqualifier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 34</value>
+    <value>277, 35</value>
   </data>
   <data name="txtqualifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
@@ -6649,7 +6649,7 @@
     <value>40</value>
   </data>
   <data name="cmdAddScheduleClass.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddScheduleClass.Name" xml:space="preserve">
     <value>cmdAddScheduleClass</value>
@@ -7084,7 +7084,7 @@
     <value>2</value>
   </data>
   <data name="txtClassStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 112</value>
+    <value>240, 109</value>
   </data>
   <data name="txtClassStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -7105,7 +7105,7 @@
     <value>3</value>
   </data>
   <data name="txtClassDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 155</value>
+    <value>240, 152</value>
   </data>
   <data name="txtClassDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -7126,7 +7126,7 @@
     <value>4</value>
   </data>
   <data name="txtClass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 75</value>
+    <value>240, 72</value>
   </data>
   <data name="txtClass.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
@@ -7390,7 +7390,7 @@
     <value>49</value>
   </data>
   <data name="cmdAddFeature.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddFeature.Name" xml:space="preserve">
     <value>cmdAddFeature</value>
@@ -7822,7 +7822,7 @@
     <value>3</value>
   </data>
   <data name="txtFeatureEdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 123</value>
+    <value>114, 123</value>
   </data>
   <data name="txtFeatureEdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -7846,7 +7846,7 @@
     <value>True</value>
   </data>
   <data name="lblStnId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 53</value>
+    <value>18, 56</value>
   </data>
   <data name="lblStnId.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -7870,7 +7870,7 @@
     <value>5</value>
   </data>
   <data name="txtFeatureStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 50</value>
+    <value>114, 50</value>
   </data>
   <data name="txtFeatureStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
@@ -7891,7 +7891,7 @@
     <value>6</value>
   </data>
   <data name="txtFeatureBdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 86</value>
+    <value>112, 86</value>
   </data>
   <data name="txtFeatureBdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -7912,7 +7912,7 @@
     <value>7</value>
   </data>
   <data name="txtFeatureDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 153</value>
+    <value>114, 153</value>
   </data>
   <data name="txtFeatureDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -7933,7 +7933,7 @@
     <value>8</value>
   </data>
   <data name="txtFeatureClass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 194</value>
+    <value>116, 194</value>
   </data>
   <data name="txtFeatureClass.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 20</value>
@@ -7957,7 +7957,7 @@
     <value>True</value>
   </data>
   <data name="lblFeatureDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 157</value>
+    <value>18, 160</value>
   </data>
   <data name="lblFeatureDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -7984,7 +7984,7 @@
     <value>True</value>
   </data>
   <data name="lblFeatureClass.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 198</value>
+    <value>20, 201</value>
   </data>
   <data name="lblFeatureClass.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -8011,7 +8011,7 @@
     <value>True</value>
   </data>
   <data name="lblFeatureBdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 127</value>
+    <value>18, 130</value>
   </data>
   <data name="lblFeatureBdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
@@ -8038,7 +8038,7 @@
     <value>True</value>
   </data>
   <data name="lblFeatureEdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 90</value>
+    <value>18, 93</value>
   </data>
   <data name="lblFeatureEdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -8224,7 +8224,7 @@
     <value>40</value>
   </data>
   <data name="cmdAddArchiveDef.Text" xml:space="preserve">
-    <value>AddNew</value>
+    <value>Add New</value>
   </data>
   <data name="&gt;&gt;cmdAddArchiveDef.Name" xml:space="preserve">
     <value>cmdAddArchiveDef</value>
@@ -8608,7 +8608,7 @@
     <value>1</value>
   </data>
   <data name="txtFormDescription.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 116</value>
+    <value>278, 113</value>
   </data>
   <data name="txtFormDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 20</value>
@@ -8629,7 +8629,7 @@
     <value>2</value>
   </data>
   <data name="txtFormId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 75</value>
+    <value>278, 72</value>
   </data>
   <data name="txtFormId.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
@@ -8818,7 +8818,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>32</value>
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>

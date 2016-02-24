@@ -35,62 +35,44 @@ Partial Class frmElementSequencerHourly
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(65, 78)
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(358, 215)
-        Me.DataGridView1.TabIndex = 0
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(245, 316)
+        resources.ApplyResources(Me.btnClose, "btnClose")
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 1
-        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(161, 316)
+        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 2
-        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(77, 316)
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 3
-        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(329, 316)
+        resources.ApplyResources(Me.btnHelp, "btnHelp")
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 4
-        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'lblSequencerGuidelines
         '
         Me.lblSequencerGuidelines.ForeColor = System.Drawing.Color.Red
-        Me.lblSequencerGuidelines.Location = New System.Drawing.Point(38, 9)
+        resources.ApplyResources(Me.lblSequencerGuidelines, "lblSequencerGuidelines")
         Me.lblSequencerGuidelines.Name = "lblSequencerGuidelines"
-        Me.lblSequencerGuidelines.Size = New System.Drawing.Size(422, 66)
-        Me.lblSequencerGuidelines.TabIndex = 11
-        Me.lblSequencerGuidelines.Text = resources.GetString("lblSequencerGuidelines.Text")
         '
         'frmElementSequencerHourly
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(497, 352)
         Me.Controls.Add(Me.lblSequencerGuidelines)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnDelete)
@@ -100,7 +82,6 @@ Partial Class frmElementSequencerHourly
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmElementSequencerHourly"
-        Me.Text = "Sequencer for Hourly data Using formHourly"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
