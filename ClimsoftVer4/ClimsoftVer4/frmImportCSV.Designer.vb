@@ -22,6 +22,7 @@ Partial Class frmImportCSV
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmImportCSV))
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
@@ -35,87 +36,58 @@ Partial Class frmImportCSV
         '
         'btnOK
         '
-        Me.btnOK.Enabled = False
-        Me.btnOK.Location = New System.Drawing.Point(210, 140)
+        resources.ApplyResources(Me.btnOK, "btnOK")
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 4
-        Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(309, 140)
+        resources.ApplyResources(Me.btnCancel, "btnCancel")
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = "Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(408, 140)
+        resources.ApplyResources(Me.btnHelp, "btnHelp")
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 6
-        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'txtDataFile
         '
-        Me.txtDataFile.Location = New System.Drawing.Point(128, 53)
+        resources.ApplyResources(Me.txtDataFile, "txtDataFile")
         Me.txtDataFile.Name = "txtDataFile"
-        Me.txtDataFile.Size = New System.Drawing.Size(355, 20)
-        Me.txtDataFile.TabIndex = 7
         '
         'lblDataFile
         '
-        Me.lblDataFile.AutoSize = True
-        Me.lblDataFile.Location = New System.Drawing.Point(25, 56)
+        resources.ApplyResources(Me.lblDataFile, "lblDataFile")
         Me.lblDataFile.Name = "lblDataFile"
-        Me.lblDataFile.Size = New System.Drawing.Size(49, 13)
-        Me.lblDataFile.TabIndex = 8
-        Me.lblDataFile.Text = "Data File"
         '
         'txtSchemaFile
         '
-        Me.txtSchemaFile.Location = New System.Drawing.Point(128, 90)
+        resources.ApplyResources(Me.txtSchemaFile, "txtSchemaFile")
         Me.txtSchemaFile.Name = "txtSchemaFile"
-        Me.txtSchemaFile.Size = New System.Drawing.Size(355, 20)
-        Me.txtSchemaFile.TabIndex = 9
         '
         'lblSchemaFile
         '
-        Me.lblSchemaFile.AutoSize = True
-        Me.lblSchemaFile.Location = New System.Drawing.Point(25, 93)
+        resources.ApplyResources(Me.lblSchemaFile, "lblSchemaFile")
         Me.lblSchemaFile.Name = "lblSchemaFile"
-        Me.lblSchemaFile.Size = New System.Drawing.Size(65, 13)
-        Me.lblSchemaFile.TabIndex = 10
-        Me.lblSchemaFile.Text = "Schema File"
         '
         'btnBrowseDataFile
         '
-        Me.btnBrowseDataFile.Location = New System.Drawing.Point(502, 53)
+        resources.ApplyResources(Me.btnBrowseDataFile, "btnBrowseDataFile")
         Me.btnBrowseDataFile.Name = "btnBrowseDataFile"
-        Me.btnBrowseDataFile.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseDataFile.TabIndex = 11
-        Me.btnBrowseDataFile.Text = "Browse"
         Me.btnBrowseDataFile.UseVisualStyleBackColor = True
         '
         'btnBrowseSchemaFile
         '
-        Me.btnBrowseSchemaFile.Location = New System.Drawing.Point(502, 87)
+        resources.ApplyResources(Me.btnBrowseSchemaFile, "btnBrowseSchemaFile")
         Me.btnBrowseSchemaFile.Name = "btnBrowseSchemaFile"
-        Me.btnBrowseSchemaFile.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseSchemaFile.TabIndex = 12
-        Me.btnBrowseSchemaFile.Text = "Browse"
         Me.btnBrowseSchemaFile.UseVisualStyleBackColor = True
         '
         'frmImportCSV
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(605, 190)
         Me.Controls.Add(Me.btnBrowseSchemaFile)
         Me.Controls.Add(Me.btnBrowseDataFile)
         Me.Controls.Add(Me.lblSchemaFile)
@@ -128,7 +100,6 @@ Partial Class frmImportCSV
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmImportCSV"
-        Me.Text = "Import from CSV"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

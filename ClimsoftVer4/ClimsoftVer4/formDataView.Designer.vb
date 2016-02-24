@@ -22,6 +22,7 @@ Partial Class formDataView
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formDataView))
         Me.DataGridView = New System.Windows.Forms.DataGridView()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -30,19 +31,15 @@ Partial Class formDataView
         '
         Me.DataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
         Me.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView.Location = New System.Drawing.Point(3, 1)
+        resources.ApplyResources(Me.DataGridView, "DataGridView")
         Me.DataGridView.Name = "DataGridView"
-        Me.DataGridView.Size = New System.Drawing.Size(852, 451)
-        Me.DataGridView.TabIndex = 0
         '
         'formDataView
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(851, 453)
         Me.Controls.Add(Me.DataGridView)
         Me.Name = "formDataView"
-        Me.Text = "Data View"
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

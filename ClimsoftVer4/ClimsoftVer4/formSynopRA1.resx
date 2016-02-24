@@ -120,151 +120,4374 @@
   <metadata name="YyyyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="YyyyLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="YyyyLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 27</value>
+  </data>
+  <data name="YyyyLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="YyyyLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="YyyyLabel.Text" xml:space="preserve">
+    <value>Year:</value>
+  </data>
+  <data name="&gt;&gt;YyyyLabel.Name" xml:space="preserve">
+    <value>YyyyLabel</value>
+  </data>
+  <data name="&gt;&gt;YyyyLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;YyyyLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;YyyyLabel.ZOrder" xml:space="preserve">
+    <value>170</value>
+  </data>
   <metadata name="Val_Elem106Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem106Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem106Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 65</value>
+  </data>
+  <data name="Val_Elem106Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="Val_Elem106Label.TabIndex" type="System.Int32, mscorlib">
+    <value>201</value>
+  </data>
+  <data name="Val_Elem106Label.Text" xml:space="preserve">
+    <value>PPPPP</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem106Label.Name" xml:space="preserve">
+    <value>Val_Elem106Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem106Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem106Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem106Label.ZOrder" xml:space="preserve">
+    <value>168</value>
+  </data>
   <metadata name="Val_Elem107Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem107Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem107Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 91</value>
+  </data>
+  <data name="Val_Elem107Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="Val_Elem107Label.TabIndex" type="System.Int32, mscorlib">
+    <value>202</value>
+  </data>
+  <data name="Val_Elem107Label.Text" xml:space="preserve">
+    <value>MSLPPPP</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem107Label.Name" xml:space="preserve">
+    <value>Val_Elem107Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem107Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem107Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem107Label.ZOrder" xml:space="preserve">
+    <value>166</value>
+  </data>
   <metadata name="Val_Elem400Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem400Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem400Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 117</value>
+  </data>
+  <data name="Val_Elem400Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="Val_Elem400Label.TabIndex" type="System.Int32, mscorlib">
+    <value>115</value>
+  </data>
+  <data name="Val_Elem400Label.Text" xml:space="preserve">
+    <value>3hrPPPChange</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem400Label.Name" xml:space="preserve">
+    <value>Val_Elem400Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem400Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem400Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem400Label.ZOrder" xml:space="preserve">
+    <value>164</value>
+  </data>
   <metadata name="Val_Elem814Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem814Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem814Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 143</value>
+  </data>
+  <data name="Val_Elem814Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="Val_Elem814Label.TabIndex" type="System.Int32, mscorlib">
+    <value>117</value>
+  </data>
+  <data name="Val_Elem814Label.Text" xml:space="preserve">
+    <value>a-3hrPPPChr</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem814Label.Name" xml:space="preserve">
+    <value>Val_Elem814Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem814Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem814Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem814Label.ZOrder" xml:space="preserve">
+    <value>162</value>
+  </data>
   <metadata name="Val_Elem399Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem399Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem399Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 169</value>
+  </data>
+  <data name="Val_Elem399Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="Val_Elem399Label.TabIndex" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="Val_Elem399Label.Text" xml:space="preserve">
+    <value>24hrPPPChange</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem399Label.Name" xml:space="preserve">
+    <value>Val_Elem399Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem399Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem399Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem399Label.ZOrder" xml:space="preserve">
+    <value>160</value>
+  </data>
   <metadata name="Val_Elem301Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem301Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem301Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 195</value>
+  </data>
+  <data name="Val_Elem301Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="Val_Elem301Label.TabIndex" type="System.Int32, mscorlib">
+    <value>121</value>
+  </data>
+  <data name="Val_Elem301Label.Text" xml:space="preserve">
+    <value>PPPStdLevel</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem301Label.Name" xml:space="preserve">
+    <value>Val_Elem301Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem301Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem301Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem301Label.ZOrder" xml:space="preserve">
+    <value>158</value>
+  </data>
   <metadata name="Val_Elem196Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem196Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem196Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 221</value>
+  </data>
+  <data name="Val_Elem196Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="Val_Elem196Label.TabIndex" type="System.Int32, mscorlib">
+    <value>123</value>
+  </data>
+  <data name="Val_Elem196Label.Text" xml:space="preserve">
+    <value>Geopotential</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem196Label.Name" xml:space="preserve">
+    <value>Val_Elem196Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem196Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem196Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem196Label.ZOrder" xml:space="preserve">
+    <value>156</value>
+  </data>
   <metadata name="Val_Elem101Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem101Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem101Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 247</value>
+  </data>
+  <data name="Val_Elem101Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="Val_Elem101Label.TabIndex" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="Val_Elem101Label.Text" xml:space="preserve">
+    <value>Drybulb</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem101Label.Name" xml:space="preserve">
+    <value>Val_Elem101Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem101Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem101Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem101Label.ZOrder" xml:space="preserve">
+    <value>154</value>
+  </data>
   <metadata name="Val_Elem102Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem102Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem102Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 273</value>
+  </data>
+  <data name="Val_Elem102Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="Val_Elem102Label.TabIndex" type="System.Int32, mscorlib">
+    <value>127</value>
+  </data>
+  <data name="Val_Elem102Label.Text" xml:space="preserve">
+    <value>Wetbulb</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem102Label.Name" xml:space="preserve">
+    <value>Val_Elem102Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem102Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem102Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem102Label.ZOrder" xml:space="preserve">
+    <value>152</value>
+  </data>
   <metadata name="Val_Elem103Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem103Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem103Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 299</value>
+  </data>
+  <data name="Val_Elem103Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="Val_Elem103Label.TabIndex" type="System.Int32, mscorlib">
+    <value>129</value>
+  </data>
+  <data name="Val_Elem103Label.Text" xml:space="preserve">
+    <value>Dewpoint</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem103Label.Name" xml:space="preserve">
+    <value>Val_Elem103Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem103Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem103Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem103Label.ZOrder" xml:space="preserve">
+    <value>150</value>
+  </data>
   <metadata name="Val_Elem105Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem105Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem105Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 325</value>
+  </data>
+  <data name="Val_Elem105Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="Val_Elem105Label.TabIndex" type="System.Int32, mscorlib">
+    <value>131</value>
+  </data>
+  <data name="Val_Elem105Label.Text" xml:space="preserve">
+    <value>RH</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem105Label.Name" xml:space="preserve">
+    <value>Val_Elem105Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem105Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem105Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem105Label.ZOrder" xml:space="preserve">
+    <value>148</value>
+  </data>
   <metadata name="Val_Elem176Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem176Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem176Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 351</value>
+  </data>
+  <data name="Val_Elem176Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="Val_Elem176Label.TabIndex" type="System.Int32, mscorlib">
+    <value>133</value>
+  </data>
+  <data name="Val_Elem176Label.Text" xml:space="preserve">
+    <value>h-HghtLowCld</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem176Label.Name" xml:space="preserve">
+    <value>Val_Elem176Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem176Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem176Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem176Label.ZOrder" xml:space="preserve">
+    <value>146</value>
+  </data>
   <metadata name="Val_Elem110Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem110Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem110Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 377</value>
+  </data>
+  <data name="Val_Elem110Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="Val_Elem110Label.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="Val_Elem110Label.Text" xml:space="preserve">
+    <value>Visibility</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem110Label.Name" xml:space="preserve">
+    <value>Val_Elem110Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem110Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem110Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem110Label.ZOrder" xml:space="preserve">
+    <value>144</value>
+  </data>
   <metadata name="Val_Elem114Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem114Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem114Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 403</value>
+  </data>
+  <data name="Val_Elem114Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="Val_Elem114Label.TabIndex" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
+  <data name="Val_Elem114Label.Text" xml:space="preserve">
+    <value>N-TotalOktas</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem114Label.Name" xml:space="preserve">
+    <value>Val_Elem114Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem114Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem114Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem114Label.ZOrder" xml:space="preserve">
+    <value>142</value>
+  </data>
   <metadata name="Val_Elem112Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem112Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem112Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 429</value>
+  </data>
+  <data name="Val_Elem112Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="Val_Elem112Label.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="Val_Elem112Label.Text" xml:space="preserve">
+    <value>WindDirection</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem112Label.Name" xml:space="preserve">
+    <value>Val_Elem112Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem112Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem112Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem112Label.ZOrder" xml:space="preserve">
+    <value>140</value>
+  </data>
   <metadata name="Val_Elem111Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem111Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem111Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 455</value>
+  </data>
+  <data name="Val_Elem111Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="Val_Elem111Label.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="Val_Elem111Label.Text" xml:space="preserve">
+    <value>WindSpeed</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem111Label.Name" xml:space="preserve">
+    <value>Val_Elem111Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem111Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem111Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem111Label.ZOrder" xml:space="preserve">
+    <value>138</value>
+  </data>
   <metadata name="Val_Elem167Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem167Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem167Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 65</value>
+  </data>
+  <data name="Val_Elem167Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="Val_Elem167Label.TabIndex" type="System.Int32, mscorlib">
+    <value>103</value>
+  </data>
+  <data name="Val_Elem167Label.Text" xml:space="preserve">
+    <value>PresentWx</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem167Label.Name" xml:space="preserve">
+    <value>Val_Elem167Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem167Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem167Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem167Label.ZOrder" xml:space="preserve">
+    <value>136</value>
+  </data>
   <metadata name="Val_Elem197Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem197Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem197Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 91</value>
+  </data>
+  <data name="Val_Elem197Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="Val_Elem197Label.TabIndex" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <data name="Val_Elem197Label.Text" xml:space="preserve">
+    <value>PastWx1</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem197Label.Name" xml:space="preserve">
+    <value>Val_Elem197Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem197Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem197Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem197Label.ZOrder" xml:space="preserve">
+    <value>134</value>
+  </data>
   <metadata name="Val_Elem193Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem193Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem193Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 117</value>
+  </data>
+  <data name="Val_Elem193Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="Val_Elem193Label.TabIndex" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="Val_Elem193Label.Text" xml:space="preserve">
+    <value>PastWx2</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem193Label.Name" xml:space="preserve">
+    <value>Val_Elem193Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem193Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem193Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem193Label.ZOrder" xml:space="preserve">
+    <value>132</value>
+  </data>
   <metadata name="Val_Elem115Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem115Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem115Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 143</value>
+  </data>
+  <data name="Val_Elem115Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="Val_Elem115Label.TabIndex" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="Val_Elem115Label.Text" xml:space="preserve">
+    <value>VertSig</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem115Label.Name" xml:space="preserve">
+    <value>Val_Elem115Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem115Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem115Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem115Label.ZOrder" xml:space="preserve">
+    <value>130</value>
+  </data>
   <metadata name="Val_Elem177Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem177Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem177Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 169</value>
+  </data>
+  <data name="Val_Elem177Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="Val_Elem177Label.TabIndex" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="Val_Elem177Label.Text" xml:space="preserve">
+    <value>Nh</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem177Label.Name" xml:space="preserve">
+    <value>Val_Elem177Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem177Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem177Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem177Label.ZOrder" xml:space="preserve">
+    <value>128</value>
+  </data>
   <metadata name="Val_Elem178Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem178Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem178Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 195</value>
+  </data>
+  <data name="Val_Elem178Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 13</value>
+  </data>
+  <data name="Val_Elem178Label.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="Val_Elem178Label.Text" xml:space="preserve">
+    <value>Cl</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem178Label.Name" xml:space="preserve">
+    <value>Val_Elem178Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem178Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem178Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem178Label.ZOrder" xml:space="preserve">
+    <value>126</value>
+  </data>
   <metadata name="Val_Elem179Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem179Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem179Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 221</value>
+  </data>
+  <data name="Val_Elem179Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 13</value>
+  </data>
+  <data name="Val_Elem179Label.TabIndex" type="System.Int32, mscorlib">
+    <value>155</value>
+  </data>
+  <data name="Val_Elem179Label.Text" xml:space="preserve">
+    <value>Cm</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem179Label.Name" xml:space="preserve">
+    <value>Val_Elem179Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem179Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem179Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem179Label.ZOrder" xml:space="preserve">
+    <value>124</value>
+  </data>
   <metadata name="Val_Elem180Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem180Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem180Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 247</value>
+  </data>
+  <data name="Val_Elem180Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 13</value>
+  </data>
+  <data name="Val_Elem180Label.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="Val_Elem180Label.Text" xml:space="preserve">
+    <value>CH</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem180Label.Name" xml:space="preserve">
+    <value>Val_Elem180Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem180Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem180Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem180Label.ZOrder" xml:space="preserve">
+    <value>122</value>
+  </data>
   <metadata name="Val_Elem119Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem119Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem119Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 273</value>
+  </data>
+  <data name="Val_Elem119Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="Val_Elem119Label.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="Val_Elem119Label.Text" xml:space="preserve">
+    <value>VertSig1</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem119Label.Name" xml:space="preserve">
+    <value>Val_Elem119Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem119Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem119Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem119Label.ZOrder" xml:space="preserve">
+    <value>120</value>
+  </data>
   <metadata name="Val_Elem116Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem116Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem116Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 299</value>
+  </data>
+  <data name="Val_Elem116Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="Val_Elem116Label.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="Val_Elem116Label.Text" xml:space="preserve">
+    <value>N1</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem116Label.Name" xml:space="preserve">
+    <value>Val_Elem116Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem116Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem116Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem116Label.ZOrder" xml:space="preserve">
+    <value>118</value>
+  </data>
   <metadata name="Val_Elem117Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem117Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem117Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 325</value>
+  </data>
+  <data name="Val_Elem117Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 13</value>
+  </data>
+  <data name="Val_Elem117Label.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="Val_Elem117Label.Text" xml:space="preserve">
+    <value>C1</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem117Label.Name" xml:space="preserve">
+    <value>Val_Elem117Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem117Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem117Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem117Label.ZOrder" xml:space="preserve">
+    <value>116</value>
+  </data>
   <metadata name="Val_Elem118Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem118Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem118Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 351</value>
+  </data>
+  <data name="Val_Elem118Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="Val_Elem118Label.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="Val_Elem118Label.Text" xml:space="preserve">
+    <value>HsHs1</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem118Label.Name" xml:space="preserve">
+    <value>Val_Elem118Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem118Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem118Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem118Label.ZOrder" xml:space="preserve">
+    <value>114</value>
+  </data>
   <metadata name="Val_Elem123Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem123Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem123Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 377</value>
+  </data>
+  <data name="Val_Elem123Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="Val_Elem123Label.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="Val_Elem123Label.Text" xml:space="preserve">
+    <value>VertSig2</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem123Label.Name" xml:space="preserve">
+    <value>Val_Elem123Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem123Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem123Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem123Label.ZOrder" xml:space="preserve">
+    <value>112</value>
+  </data>
   <metadata name="Val_Elem120Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem120Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem120Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 403</value>
+  </data>
+  <data name="Val_Elem120Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="Val_Elem120Label.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="Val_Elem120Label.Text" xml:space="preserve">
+    <value>N2</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem120Label.Name" xml:space="preserve">
+    <value>Val_Elem120Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem120Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem120Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem120Label.ZOrder" xml:space="preserve">
+    <value>110</value>
+  </data>
   <metadata name="Val_Elem121Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem121Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem121Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 429</value>
+  </data>
+  <data name="Val_Elem121Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 13</value>
+  </data>
+  <data name="Val_Elem121Label.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="Val_Elem121Label.Text" xml:space="preserve">
+    <value>C2</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem121Label.Name" xml:space="preserve">
+    <value>Val_Elem121Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem121Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem121Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem121Label.ZOrder" xml:space="preserve">
+    <value>108</value>
+  </data>
   <metadata name="Val_Elem122Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem122Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem122Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 455</value>
+  </data>
+  <data name="Val_Elem122Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="Val_Elem122Label.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="Val_Elem122Label.Text" xml:space="preserve">
+    <value>HsHs2</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem122Label.Name" xml:space="preserve">
+    <value>Val_Elem122Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem122Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem122Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem122Label.ZOrder" xml:space="preserve">
+    <value>106</value>
+  </data>
   <metadata name="Val_Elem127Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem127Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem127Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 65</value>
+  </data>
+  <data name="Val_Elem127Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="Val_Elem127Label.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="Val_Elem127Label.Text" xml:space="preserve">
+    <value>VertSig3</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem127Label.Name" xml:space="preserve">
+    <value>Val_Elem127Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem127Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem127Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem127Label.ZOrder" xml:space="preserve">
+    <value>104</value>
+  </data>
   <metadata name="Val_Elem124Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem124Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem124Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 91</value>
+  </data>
+  <data name="Val_Elem124Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="Val_Elem124Label.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="Val_Elem124Label.Text" xml:space="preserve">
+    <value>N3</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem124Label.Name" xml:space="preserve">
+    <value>Val_Elem124Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem124Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem124Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem124Label.ZOrder" xml:space="preserve">
+    <value>102</value>
+  </data>
   <metadata name="Val_Elem125Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem125Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem125Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 117</value>
+  </data>
+  <data name="Val_Elem125Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 13</value>
+  </data>
+  <data name="Val_Elem125Label.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="Val_Elem125Label.Text" xml:space="preserve">
+    <value>C3</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem125Label.Name" xml:space="preserve">
+    <value>Val_Elem125Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem125Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem125Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem125Label.ZOrder" xml:space="preserve">
+    <value>100</value>
+  </data>
   <metadata name="Val_Elem126Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem126Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem126Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 143</value>
+  </data>
+  <data name="Val_Elem126Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="Val_Elem126Label.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="Val_Elem126Label.Text" xml:space="preserve">
+    <value>HsHs3</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem126Label.Name" xml:space="preserve">
+    <value>Val_Elem126Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem126Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem126Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem126Label.ZOrder" xml:space="preserve">
+    <value>98</value>
+  </data>
   <metadata name="Val_Elem131Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem131Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem131Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 169</value>
+  </data>
+  <data name="Val_Elem131Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="Val_Elem131Label.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="Val_Elem131Label.Text" xml:space="preserve">
+    <value>VertSig4</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem131Label.Name" xml:space="preserve">
+    <value>Val_Elem131Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem131Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem131Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem131Label.ZOrder" xml:space="preserve">
+    <value>96</value>
+  </data>
   <metadata name="Val_Elem128Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem128Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem128Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 195</value>
+  </data>
+  <data name="Val_Elem128Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 13</value>
+  </data>
+  <data name="Val_Elem128Label.TabIndex" type="System.Int32, mscorlib">
+    <value>85</value>
+  </data>
+  <data name="Val_Elem128Label.Text" xml:space="preserve">
+    <value>N4</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem128Label.Name" xml:space="preserve">
+    <value>Val_Elem128Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem128Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem128Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem128Label.ZOrder" xml:space="preserve">
+    <value>94</value>
+  </data>
   <metadata name="Val_Elem129Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem129Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem129Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 221</value>
+  </data>
+  <data name="Val_Elem129Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 13</value>
+  </data>
+  <data name="Val_Elem129Label.TabIndex" type="System.Int32, mscorlib">
+    <value>87</value>
+  </data>
+  <data name="Val_Elem129Label.Text" xml:space="preserve">
+    <value>C4</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem129Label.Name" xml:space="preserve">
+    <value>Val_Elem129Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem129Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem129Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem129Label.ZOrder" xml:space="preserve">
+    <value>92</value>
+  </data>
   <metadata name="Val_Elem130Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem130Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem130Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 247</value>
+  </data>
+  <data name="Val_Elem130Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="Val_Elem130Label.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="Val_Elem130Label.Text" xml:space="preserve">
+    <value>Hshs4</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem130Label.Name" xml:space="preserve">
+    <value>Val_Elem130Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem130Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem130Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem130Label.ZOrder" xml:space="preserve">
+    <value>90</value>
+  </data>
   <metadata name="Val_Elem002Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem002Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem002Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 273</value>
+  </data>
+  <data name="Val_Elem002Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="Val_Elem002Label.TabIndex" type="System.Int32, mscorlib">
+    <value>91</value>
+  </data>
+  <data name="Val_Elem002Label.Text" xml:space="preserve">
+    <value>Tmax</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem002Label.Name" xml:space="preserve">
+    <value>Val_Elem002Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem002Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem002Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem002Label.ZOrder" xml:space="preserve">
+    <value>88</value>
+  </data>
   <metadata name="Val_Elem003Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem003Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem003Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 299</value>
+  </data>
+  <data name="Val_Elem003Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="Val_Elem003Label.TabIndex" type="System.Int32, mscorlib">
+    <value>93</value>
+  </data>
+  <data name="Val_Elem003Label.Text" xml:space="preserve">
+    <value>Tmin</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem003Label.Name" xml:space="preserve">
+    <value>Val_Elem003Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem003Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem003Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem003Label.ZOrder" xml:space="preserve">
+    <value>86</value>
+  </data>
   <metadata name="Val_Elem099Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem099Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem099Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 325</value>
+  </data>
+  <data name="Val_Elem099Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="Val_Elem099Label.TabIndex" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="Val_Elem099Label.Text" xml:space="preserve">
+    <value>Gmin</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem099Label.Name" xml:space="preserve">
+    <value>Val_Elem099Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem099Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem099Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem099Label.ZOrder" xml:space="preserve">
+    <value>84</value>
+  </data>
   <metadata name="Val_Elem018Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem018Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem018Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 351</value>
+  </data>
+  <data name="Val_Elem018Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="Val_Elem018Label.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
+  <data name="Val_Elem018Label.Text" xml:space="preserve">
+    <value>Evaporation</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem018Label.Name" xml:space="preserve">
+    <value>Val_Elem018Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem018Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem018Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem018Label.ZOrder" xml:space="preserve">
+    <value>82</value>
+  </data>
   <metadata name="Val_Elem084Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem084Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem084Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 377</value>
+  </data>
+  <data name="Val_Elem084Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="Val_Elem084Label.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="Val_Elem084Label.Text" xml:space="preserve">
+    <value>SSS-24Hr</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem084Label.Name" xml:space="preserve">
+    <value>Val_Elem084Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem084Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem084Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem084Label.ZOrder" xml:space="preserve">
+    <value>80</value>
+  </data>
   <metadata name="Val_Elem132Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem132Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem132Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 403</value>
+  </data>
+  <data name="Val_Elem132Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Val_Elem132Label.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="Val_Elem132Label.Text" xml:space="preserve">
+    <value>SSS-1Hr</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem132Label.Name" xml:space="preserve">
+    <value>Val_Elem132Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem132Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem132Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem132Label.ZOrder" xml:space="preserve">
+    <value>78</value>
+  </data>
   <metadata name="Val_Elem005Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem005Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem005Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 429</value>
+  </data>
+  <data name="Val_Elem005Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="Val_Elem005Label.TabIndex" type="System.Int32, mscorlib">
+    <value>103</value>
+  </data>
+  <data name="Val_Elem005Label.Text" xml:space="preserve">
+    <value>Precip-24Hr</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem005Label.Name" xml:space="preserve">
+    <value>Val_Elem005Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem005Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem005Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem005Label.ZOrder" xml:space="preserve">
+    <value>76</value>
+  </data>
   <metadata name="Val_Elem174Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem174Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem174Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 455</value>
+  </data>
+  <data name="Val_Elem174Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="Val_Elem174Label.TabIndex" type="System.Int32, mscorlib">
+    <value>105</value>
+  </data>
+  <data name="Val_Elem174Label.Text" xml:space="preserve">
+    <value>Precip-3Hr</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem174Label.Name" xml:space="preserve">
+    <value>Val_Elem174Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem174Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem174Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem174Label.ZOrder" xml:space="preserve">
+    <value>74</value>
+  </data>
   <metadata name="Val_Elem046Label.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <data name="Val_Elem046Label.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Val_Elem046Label.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 481</value>
+  </data>
+  <data name="Val_Elem046Label.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="Val_Elem046Label.TabIndex" type="System.Int32, mscorlib">
+    <value>107</value>
+  </data>
+  <data name="Val_Elem046Label.Text" xml:space="preserve">
+    <value>Insolation</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem046Label.Name" xml:space="preserve">
+    <value>Val_Elem046Label</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem046Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem046Label.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Val_Elem046Label.ZOrder" xml:space="preserve">
+    <value>72</value>
+  </data>
+  <data name="txtYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>386, 24</value>
+  </data>
+  <data name="txtYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="txtYear.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtYear.Name" xml:space="preserve">
+    <value>txtYear</value>
+  </data>
+  <data name="&gt;&gt;txtYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtYear.ZOrder" xml:space="preserve">
+    <value>171</value>
+  </data>
+  <data name="txtVal_Elem106Field005.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 62</value>
+  </data>
+  <data name="txtVal_Elem106Field005.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem106Field005.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem106Field005.Name" xml:space="preserve">
+    <value>txtVal_Elem106Field005</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem106Field005.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem106Field005.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem106Field005.ZOrder" xml:space="preserve">
+    <value>169</value>
+  </data>
+  <data name="txtVal_Elem107Field006.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 88</value>
+  </data>
+  <data name="txtVal_Elem107Field006.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem107Field006.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem107Field006.Name" xml:space="preserve">
+    <value>txtVal_Elem107Field006</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem107Field006.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem107Field006.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem107Field006.ZOrder" xml:space="preserve">
+    <value>167</value>
+  </data>
+  <data name="txtVal_Elem400Field007.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 114</value>
+  </data>
+  <data name="txtVal_Elem400Field007.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem400Field007.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem400Field007.Name" xml:space="preserve">
+    <value>txtVal_Elem400Field007</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem400Field007.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem400Field007.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem400Field007.ZOrder" xml:space="preserve">
+    <value>165</value>
+  </data>
+  <data name="txtVal_Elem814Field008.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 140</value>
+  </data>
+  <data name="txtVal_Elem814Field008.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem814Field008.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem814Field008.Name" xml:space="preserve">
+    <value>txtVal_Elem814Field008</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem814Field008.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem814Field008.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem814Field008.ZOrder" xml:space="preserve">
+    <value>163</value>
+  </data>
+  <data name="txtVal_Elem399Field009.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 166</value>
+  </data>
+  <data name="txtVal_Elem399Field009.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem399Field009.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem399Field009.Name" xml:space="preserve">
+    <value>txtVal_Elem399Field009</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem399Field009.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem399Field009.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem399Field009.ZOrder" xml:space="preserve">
+    <value>161</value>
+  </data>
+  <data name="txtVal_Elem301Field010.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 192</value>
+  </data>
+  <data name="txtVal_Elem301Field010.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem301Field010.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem301Field010.Name" xml:space="preserve">
+    <value>txtVal_Elem301Field010</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem301Field010.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem301Field010.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem301Field010.ZOrder" xml:space="preserve">
+    <value>159</value>
+  </data>
+  <data name="txtVal_Elem196Field011.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 218</value>
+  </data>
+  <data name="txtVal_Elem196Field011.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem196Field011.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem196Field011.Name" xml:space="preserve">
+    <value>txtVal_Elem196Field011</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem196Field011.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem196Field011.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem196Field011.ZOrder" xml:space="preserve">
+    <value>157</value>
+  </data>
+  <data name="txtVal_Elem101Field012.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 244</value>
+  </data>
+  <data name="txtVal_Elem101Field012.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem101Field012.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem101Field012.Name" xml:space="preserve">
+    <value>txtVal_Elem101Field012</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem101Field012.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem101Field012.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem101Field012.ZOrder" xml:space="preserve">
+    <value>155</value>
+  </data>
+  <data name="txtVal_Elem102Field013.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 270</value>
+  </data>
+  <data name="txtVal_Elem102Field013.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem102Field013.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem102Field013.Name" xml:space="preserve">
+    <value>txtVal_Elem102Field013</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem102Field013.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem102Field013.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem102Field013.ZOrder" xml:space="preserve">
+    <value>153</value>
+  </data>
+  <data name="txtVal_Elem103Field014.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 296</value>
+  </data>
+  <data name="txtVal_Elem103Field014.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem103Field014.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem103Field014.Name" xml:space="preserve">
+    <value>txtVal_Elem103Field014</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem103Field014.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem103Field014.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem103Field014.ZOrder" xml:space="preserve">
+    <value>151</value>
+  </data>
+  <data name="txtVal_Elem105Field015.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 322</value>
+  </data>
+  <data name="txtVal_Elem105Field015.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem105Field015.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem105Field015.Name" xml:space="preserve">
+    <value>txtVal_Elem105Field015</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem105Field015.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem105Field015.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem105Field015.ZOrder" xml:space="preserve">
+    <value>149</value>
+  </data>
+  <data name="txtVal_Elem176Field016.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 348</value>
+  </data>
+  <data name="txtVal_Elem176Field016.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem176Field016.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem176Field016.Name" xml:space="preserve">
+    <value>txtVal_Elem176Field016</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem176Field016.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem176Field016.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem176Field016.ZOrder" xml:space="preserve">
+    <value>147</value>
+  </data>
+  <data name="txtVal_Elem110Field017.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 374</value>
+  </data>
+  <data name="txtVal_Elem110Field017.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem110Field017.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem110Field017.Name" xml:space="preserve">
+    <value>txtVal_Elem110Field017</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem110Field017.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem110Field017.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem110Field017.ZOrder" xml:space="preserve">
+    <value>145</value>
+  </data>
+  <data name="txtVal_Elem114Field018.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 400</value>
+  </data>
+  <data name="txtVal_Elem114Field018.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem114Field018.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem114Field018.Name" xml:space="preserve">
+    <value>txtVal_Elem114Field018</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem114Field018.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem114Field018.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem114Field018.ZOrder" xml:space="preserve">
+    <value>143</value>
+  </data>
+  <data name="txtVal_Elem112Field019.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 426</value>
+  </data>
+  <data name="txtVal_Elem112Field019.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem112Field019.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem112Field019.Name" xml:space="preserve">
+    <value>txtVal_Elem112Field019</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem112Field019.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem112Field019.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem112Field019.ZOrder" xml:space="preserve">
+    <value>141</value>
+  </data>
+  <data name="txtVal_Elem111Field020.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 452</value>
+  </data>
+  <data name="txtVal_Elem111Field020.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem111Field020.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem111Field020.Name" xml:space="preserve">
+    <value>txtVal_Elem111Field020</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem111Field020.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem111Field020.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem111Field020.ZOrder" xml:space="preserve">
+    <value>139</value>
+  </data>
+  <data name="txtVal_Elem167Field021.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 62</value>
+  </data>
+  <data name="txtVal_Elem167Field021.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem167Field021.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem167Field021.Name" xml:space="preserve">
+    <value>txtVal_Elem167Field021</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem167Field021.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem167Field021.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem167Field021.ZOrder" xml:space="preserve">
+    <value>137</value>
+  </data>
+  <data name="txtVal_Elem197Field022.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 88</value>
+  </data>
+  <data name="txtVal_Elem197Field022.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem197Field022.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem197Field022.Name" xml:space="preserve">
+    <value>txtVal_Elem197Field022</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem197Field022.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem197Field022.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem197Field022.ZOrder" xml:space="preserve">
+    <value>135</value>
+  </data>
+  <data name="txtVal_Elem193Field023.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 114</value>
+  </data>
+  <data name="txtVal_Elem193Field023.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem193Field023.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem193Field023.Name" xml:space="preserve">
+    <value>txtVal_Elem193Field023</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem193Field023.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem193Field023.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem193Field023.ZOrder" xml:space="preserve">
+    <value>133</value>
+  </data>
+  <data name="txtVal_Elem115Field024.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 140</value>
+  </data>
+  <data name="txtVal_Elem115Field024.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem115Field024.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem115Field024.Name" xml:space="preserve">
+    <value>txtVal_Elem115Field024</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem115Field024.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem115Field024.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem115Field024.ZOrder" xml:space="preserve">
+    <value>131</value>
+  </data>
+  <data name="txtVal_Elem177Field025.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 166</value>
+  </data>
+  <data name="txtVal_Elem177Field025.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem177Field025.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem177Field025.Name" xml:space="preserve">
+    <value>txtVal_Elem177Field025</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem177Field025.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem177Field025.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem177Field025.ZOrder" xml:space="preserve">
+    <value>129</value>
+  </data>
+  <data name="txtVal_Elem178Field026.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 192</value>
+  </data>
+  <data name="txtVal_Elem178Field026.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem178Field026.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem178Field026.Name" xml:space="preserve">
+    <value>txtVal_Elem178Field026</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem178Field026.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem178Field026.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem178Field026.ZOrder" xml:space="preserve">
+    <value>127</value>
+  </data>
+  <data name="txtVal_Elem179Field027.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 218</value>
+  </data>
+  <data name="txtVal_Elem179Field027.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem179Field027.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem179Field027.Name" xml:space="preserve">
+    <value>txtVal_Elem179Field027</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem179Field027.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem179Field027.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem179Field027.ZOrder" xml:space="preserve">
+    <value>125</value>
+  </data>
+  <data name="txtVal_Elem180Field028.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 244</value>
+  </data>
+  <data name="txtVal_Elem180Field028.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem180Field028.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem180Field028.Name" xml:space="preserve">
+    <value>txtVal_Elem180Field028</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem180Field028.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem180Field028.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem180Field028.ZOrder" xml:space="preserve">
+    <value>123</value>
+  </data>
+  <data name="txtVal_Elem119Field029.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 270</value>
+  </data>
+  <data name="txtVal_Elem119Field029.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem119Field029.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem119Field029.Name" xml:space="preserve">
+    <value>txtVal_Elem119Field029</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem119Field029.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem119Field029.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem119Field029.ZOrder" xml:space="preserve">
+    <value>121</value>
+  </data>
+  <data name="txtVal_Elem116Field030.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 296</value>
+  </data>
+  <data name="txtVal_Elem116Field030.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem116Field030.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem116Field030.Name" xml:space="preserve">
+    <value>txtVal_Elem116Field030</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem116Field030.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem116Field030.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem116Field030.ZOrder" xml:space="preserve">
+    <value>119</value>
+  </data>
+  <data name="txtVal_Elem117Field031.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 322</value>
+  </data>
+  <data name="txtVal_Elem117Field031.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem117Field031.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem117Field031.Name" xml:space="preserve">
+    <value>txtVal_Elem117Field031</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem117Field031.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem117Field031.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem117Field031.ZOrder" xml:space="preserve">
+    <value>117</value>
+  </data>
+  <data name="txtVal_Elem118Field032.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 348</value>
+  </data>
+  <data name="txtVal_Elem118Field032.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem118Field032.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem118Field032.Name" xml:space="preserve">
+    <value>txtVal_Elem118Field032</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem118Field032.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem118Field032.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem118Field032.ZOrder" xml:space="preserve">
+    <value>115</value>
+  </data>
+  <data name="txtVal_Elem123Field033.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 374</value>
+  </data>
+  <data name="txtVal_Elem123Field033.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem123Field033.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem123Field033.Name" xml:space="preserve">
+    <value>txtVal_Elem123Field033</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem123Field033.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem123Field033.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem123Field033.ZOrder" xml:space="preserve">
+    <value>113</value>
+  </data>
+  <data name="txtVal_Elem120Field034.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 400</value>
+  </data>
+  <data name="txtVal_Elem120Field034.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem120Field034.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem120Field034.Name" xml:space="preserve">
+    <value>txtVal_Elem120Field034</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem120Field034.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem120Field034.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem120Field034.ZOrder" xml:space="preserve">
+    <value>111</value>
+  </data>
+  <data name="txtVal_Elem121Field035.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 426</value>
+  </data>
+  <data name="txtVal_Elem121Field035.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem121Field035.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem121Field035.Name" xml:space="preserve">
+    <value>txtVal_Elem121Field035</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem121Field035.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem121Field035.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem121Field035.ZOrder" xml:space="preserve">
+    <value>109</value>
+  </data>
+  <data name="txtVal_Elem122Field036.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 452</value>
+  </data>
+  <data name="txtVal_Elem122Field036.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="txtVal_Elem122Field036.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem122Field036.Name" xml:space="preserve">
+    <value>txtVal_Elem122Field036</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem122Field036.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem122Field036.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem122Field036.ZOrder" xml:space="preserve">
+    <value>107</value>
+  </data>
+  <data name="txtVal_Elem127Field037.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 62</value>
+  </data>
+  <data name="txtVal_Elem127Field037.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem127Field037.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem127Field037.Name" xml:space="preserve">
+    <value>txtVal_Elem127Field037</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem127Field037.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem127Field037.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem127Field037.ZOrder" xml:space="preserve">
+    <value>105</value>
+  </data>
+  <data name="txtVal_Elem124Field038.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 88</value>
+  </data>
+  <data name="txtVal_Elem124Field038.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem124Field038.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem124Field038.Name" xml:space="preserve">
+    <value>txtVal_Elem124Field038</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem124Field038.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem124Field038.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem124Field038.ZOrder" xml:space="preserve">
+    <value>103</value>
+  </data>
+  <data name="txtVal_Elem125Field039.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 114</value>
+  </data>
+  <data name="txtVal_Elem125Field039.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem125Field039.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem125Field039.Name" xml:space="preserve">
+    <value>txtVal_Elem125Field039</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem125Field039.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem125Field039.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem125Field039.ZOrder" xml:space="preserve">
+    <value>101</value>
+  </data>
+  <data name="txtVal_Elem126Field040.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 140</value>
+  </data>
+  <data name="txtVal_Elem126Field040.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem126Field040.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem126Field040.Name" xml:space="preserve">
+    <value>txtVal_Elem126Field040</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem126Field040.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem126Field040.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem126Field040.ZOrder" xml:space="preserve">
+    <value>99</value>
+  </data>
+  <data name="txtVal_Elem131Field041.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 166</value>
+  </data>
+  <data name="txtVal_Elem131Field041.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem131Field041.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem131Field041.Name" xml:space="preserve">
+    <value>txtVal_Elem131Field041</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem131Field041.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem131Field041.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem131Field041.ZOrder" xml:space="preserve">
+    <value>97</value>
+  </data>
+  <data name="txtVal_Elem128Field042.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 192</value>
+  </data>
+  <data name="txtVal_Elem128Field042.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem128Field042.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem128Field042.Name" xml:space="preserve">
+    <value>txtVal_Elem128Field042</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem128Field042.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem128Field042.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem128Field042.ZOrder" xml:space="preserve">
+    <value>95</value>
+  </data>
+  <data name="txtVal_Elem129Field043.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 218</value>
+  </data>
+  <data name="txtVal_Elem129Field043.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem129Field043.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem129Field043.Name" xml:space="preserve">
+    <value>txtVal_Elem129Field043</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem129Field043.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem129Field043.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem129Field043.ZOrder" xml:space="preserve">
+    <value>93</value>
+  </data>
+  <data name="txtVal_Elem130Field044.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 244</value>
+  </data>
+  <data name="txtVal_Elem130Field044.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem130Field044.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem130Field044.Name" xml:space="preserve">
+    <value>txtVal_Elem130Field044</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem130Field044.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem130Field044.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem130Field044.ZOrder" xml:space="preserve">
+    <value>91</value>
+  </data>
+  <data name="txtVal_Elem002Field045.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 270</value>
+  </data>
+  <data name="txtVal_Elem002Field045.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem002Field045.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem002Field045.Name" xml:space="preserve">
+    <value>txtVal_Elem002Field045</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem002Field045.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem002Field045.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem002Field045.ZOrder" xml:space="preserve">
+    <value>89</value>
+  </data>
+  <data name="txtVal_Elem003Field046.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 296</value>
+  </data>
+  <data name="txtVal_Elem003Field046.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem003Field046.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem003Field046.Name" xml:space="preserve">
+    <value>txtVal_Elem003Field046</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem003Field046.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem003Field046.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem003Field046.ZOrder" xml:space="preserve">
+    <value>87</value>
+  </data>
+  <data name="txtVal_Elem099Field047.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 322</value>
+  </data>
+  <data name="txtVal_Elem099Field047.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem099Field047.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem099Field047.Name" xml:space="preserve">
+    <value>txtVal_Elem099Field047</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem099Field047.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem099Field047.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem099Field047.ZOrder" xml:space="preserve">
+    <value>85</value>
+  </data>
+  <data name="txtVal_Elem018Field048.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 348</value>
+  </data>
+  <data name="txtVal_Elem018Field048.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem018Field048.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem018Field048.Name" xml:space="preserve">
+    <value>txtVal_Elem018Field048</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem018Field048.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem018Field048.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem018Field048.ZOrder" xml:space="preserve">
+    <value>83</value>
+  </data>
+  <data name="txVal_Elem084Field049.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 374</value>
+  </data>
+  <data name="txVal_Elem084Field049.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txVal_Elem084Field049.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem084Field049.Name" xml:space="preserve">
+    <value>txVal_Elem084Field049</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem084Field049.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem084Field049.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem084Field049.ZOrder" xml:space="preserve">
+    <value>81</value>
+  </data>
+  <data name="txVal_Elem132Field050.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 400</value>
+  </data>
+  <data name="txVal_Elem132Field050.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txVal_Elem132Field050.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem132Field050.Name" xml:space="preserve">
+    <value>txVal_Elem132Field050</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem132Field050.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem132Field050.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txVal_Elem132Field050.ZOrder" xml:space="preserve">
+    <value>79</value>
+  </data>
+  <data name="txtVal_Elem005Field051.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 426</value>
+  </data>
+  <data name="txtVal_Elem005Field051.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem005Field051.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem005Field051.Name" xml:space="preserve">
+    <value>txtVal_Elem005Field051</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem005Field051.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem005Field051.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem005Field051.ZOrder" xml:space="preserve">
+    <value>77</value>
+  </data>
+  <data name="txtVal_Elem174Field052.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 452</value>
+  </data>
+  <data name="txtVal_Elem174Field052.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem174Field052.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem174Field052.Name" xml:space="preserve">
+    <value>txtVal_Elem174Field052</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem174Field052.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem174Field052.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem174Field052.ZOrder" xml:space="preserve">
+    <value>75</value>
+  </data>
+  <data name="txtVal_Elem046Field053.Location" type="System.Drawing.Point, System.Drawing">
+    <value>617, 478</value>
+  </data>
+  <data name="txtVal_Elem046Field053.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="txtVal_Elem046Field053.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem046Field053.Name" xml:space="preserve">
+    <value>txtVal_Elem046Field053</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem046Field053.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem046Field053.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtVal_Elem046Field053.ZOrder" xml:space="preserve">
+    <value>73</value>
+  </data>
+  <data name="btnClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>481, 559</value>
+  </data>
+  <data name="btnClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnClose.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+    <value>btnClose</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <value>71</value>
+  </data>
+  <data name="btnClear.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>400, 559</value>
+  </data>
+  <data name="btnClear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnClear.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="btnClear.Text" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="&gt;&gt;btnClear.Name" xml:space="preserve">
+    <value>btnClear</value>
+  </data>
+  <data name="&gt;&gt;btnClear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnClear.ZOrder" xml:space="preserve">
+    <value>61</value>
+  </data>
+  <data name="btnCommit.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="btnCommit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 559</value>
+  </data>
+  <data name="btnCommit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnCommit.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="btnCommit.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;btnCommit.Name" xml:space="preserve">
+    <value>btnCommit</value>
+  </data>
+  <data name="&gt;&gt;btnCommit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCommit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCommit.ZOrder" xml:space="preserve">
+    <value>62</value>
+  </data>
+  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 559</value>
+  </data>
+  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
+    <value>btnDelete</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <value>63</value>
+  </data>
+  <data name="btnAddNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 559</value>
+  </data>
+  <data name="btnAddNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnAddNew.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="btnAddNew.Text" xml:space="preserve">
+    <value>Add New</value>
+  </data>
+  <data name="&gt;&gt;btnAddNew.Name" xml:space="preserve">
+    <value>btnAddNew</value>
+  </data>
+  <data name="&gt;&gt;btnAddNew.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAddNew.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnAddNew.ZOrder" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="btnUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 559</value>
+  </data>
+  <data name="btnUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnUpdate.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
+    <value>btnUpdate</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
+    <value>65</value>
+  </data>
+  <data name="btnMovePrevious.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMovePrevious.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 518</value>
+  </data>
+  <data name="btnMovePrevious.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 23</value>
+  </data>
+  <data name="btnMovePrevious.TabIndex" type="System.Int32, mscorlib">
+    <value>124</value>
+  </data>
+  <data name="btnMovePrevious.Text" xml:space="preserve">
+    <value>&lt;&lt;</value>
+  </data>
+  <data name="&gt;&gt;btnMovePrevious.Name" xml:space="preserve">
+    <value>btnMovePrevious</value>
+  </data>
+  <data name="&gt;&gt;btnMovePrevious.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMovePrevious.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnMovePrevious.ZOrder" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="btnMoveFirst.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveFirst.Location" type="System.Drawing.Point, System.Drawing">
+    <value>201, 518</value>
+  </data>
+  <data name="btnMoveFirst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMoveFirst.TabIndex" type="System.Int32, mscorlib">
+    <value>123</value>
+  </data>
+  <data name="btnMoveFirst.Text" xml:space="preserve">
+    <value>|&lt;&lt;</value>
+  </data>
+  <data name="&gt;&gt;btnMoveFirst.Name" xml:space="preserve">
+    <value>btnMoveFirst</value>
+  </data>
+  <data name="&gt;&gt;btnMoveFirst.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMoveFirst.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnMoveFirst.ZOrder" xml:space="preserve">
+    <value>67</value>
+  </data>
+  <data name="btnMoveLast.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveLast.Location" type="System.Drawing.Point, System.Drawing">
+    <value>491, 518</value>
+  </data>
+  <data name="btnMoveLast.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMoveLast.TabIndex" type="System.Int32, mscorlib">
+    <value>122</value>
+  </data>
+  <data name="btnMoveLast.Text" xml:space="preserve">
+    <value>&gt;&gt;|</value>
+  </data>
+  <data name="&gt;&gt;btnMoveLast.Name" xml:space="preserve">
+    <value>btnMoveLast</value>
+  </data>
+  <data name="&gt;&gt;btnMoveLast.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMoveLast.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnMoveLast.ZOrder" xml:space="preserve">
+    <value>68</value>
+  </data>
+  <data name="recNumberTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 520</value>
+  </data>
+  <data name="recNumberTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 20</value>
+  </data>
+  <data name="recNumberTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>121</value>
+  </data>
+  <data name="&gt;&gt;recNumberTextBox.Name" xml:space="preserve">
+    <value>recNumberTextBox</value>
+  </data>
+  <data name="&gt;&gt;recNumberTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;recNumberTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;recNumberTextBox.ZOrder" xml:space="preserve">
+    <value>69</value>
+  </data>
+  <data name="btnMoveNext.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveNext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>447, 518</value>
+  </data>
+  <data name="btnMoveNext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 23</value>
+  </data>
+  <data name="btnMoveNext.TabIndex" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="btnMoveNext.Text" xml:space="preserve">
+    <value>&gt;&gt;</value>
+  </data>
+  <data name="&gt;&gt;btnMoveNext.Name" xml:space="preserve">
+    <value>btnMoveNext</value>
+  </data>
+  <data name="&gt;&gt;btnMoveNext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMoveNext.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnMoveNext.ZOrder" xml:space="preserve">
+    <value>70</value>
+  </data>
+  <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>563, 558</value>
+  </data>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Name" xml:space="preserve">
+    <value>btnHelp</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="txtFlag106Field054.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 62</value>
+  </data>
+  <data name="txtFlag106Field054.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag106Field054.TabIndex" type="System.Int32, mscorlib">
+    <value>131</value>
+  </data>
+  <data name="&gt;&gt;txtFlag106Field054.Name" xml:space="preserve">
+    <value>txtFlag106Field054</value>
+  </data>
+  <data name="&gt;&gt;txtFlag106Field054.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag106Field054.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag106Field054.ZOrder" xml:space="preserve">
+    <value>59</value>
+  </data>
+  <data name="txtFlag107Field055.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 88</value>
+  </data>
+  <data name="txtFlag107Field055.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag107Field055.TabIndex" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <data name="&gt;&gt;txtFlag107Field055.Name" xml:space="preserve">
+    <value>txtFlag107Field055</value>
+  </data>
+  <data name="&gt;&gt;txtFlag107Field055.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag107Field055.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag107Field055.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="txtFlag400Field056.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 114</value>
+  </data>
+  <data name="txtFlag400Field056.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag400Field056.TabIndex" type="System.Int32, mscorlib">
+    <value>133</value>
+  </data>
+  <data name="&gt;&gt;txtFlag400Field056.Name" xml:space="preserve">
+    <value>txtFlag400Field056</value>
+  </data>
+  <data name="&gt;&gt;txtFlag400Field056.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag400Field056.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag400Field056.ZOrder" xml:space="preserve">
+    <value>57</value>
+  </data>
+  <data name="txtFlag814Field057.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 140</value>
+  </data>
+  <data name="txtFlag814Field057.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag814Field057.TabIndex" type="System.Int32, mscorlib">
+    <value>134</value>
+  </data>
+  <data name="&gt;&gt;txtFlag814Field057.Name" xml:space="preserve">
+    <value>txtFlag814Field057</value>
+  </data>
+  <data name="&gt;&gt;txtFlag814Field057.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag814Field057.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag814Field057.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="txtFlag399Field058.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 166</value>
+  </data>
+  <data name="txtFlag399Field058.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag399Field058.TabIndex" type="System.Int32, mscorlib">
+    <value>135</value>
+  </data>
+  <data name="&gt;&gt;txtFlag399Field058.Name" xml:space="preserve">
+    <value>txtFlag399Field058</value>
+  </data>
+  <data name="&gt;&gt;txtFlag399Field058.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag399Field058.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag399Field058.ZOrder" xml:space="preserve">
+    <value>55</value>
+  </data>
+  <data name="txtFlag301Field059.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 192</value>
+  </data>
+  <data name="txtFlag301Field059.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag301Field059.TabIndex" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="&gt;&gt;txtFlag301Field059.Name" xml:space="preserve">
+    <value>txtFlag301Field059</value>
+  </data>
+  <data name="&gt;&gt;txtFlag301Field059.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag301Field059.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag301Field059.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="txtFlag196Field060.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 218</value>
+  </data>
+  <data name="txtFlag196Field060.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag196Field060.TabIndex" type="System.Int32, mscorlib">
+    <value>137</value>
+  </data>
+  <data name="&gt;&gt;txtFlag196Field060.Name" xml:space="preserve">
+    <value>txtFlag196Field060</value>
+  </data>
+  <data name="&gt;&gt;txtFlag196Field060.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag196Field060.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag196Field060.ZOrder" xml:space="preserve">
+    <value>53</value>
+  </data>
+  <data name="txtFlag101Field061.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 244</value>
+  </data>
+  <data name="txtFlag101Field061.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag101Field061.TabIndex" type="System.Int32, mscorlib">
+    <value>138</value>
+  </data>
+  <data name="&gt;&gt;txtFlag101Field061.Name" xml:space="preserve">
+    <value>txtFlag101Field061</value>
+  </data>
+  <data name="&gt;&gt;txtFlag101Field061.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag101Field061.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag101Field061.ZOrder" xml:space="preserve">
+    <value>52</value>
+  </data>
+  <data name="txtFlag102Field062.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 270</value>
+  </data>
+  <data name="txtFlag102Field062.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag102Field062.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="&gt;&gt;txtFlag102Field062.Name" xml:space="preserve">
+    <value>txtFlag102Field062</value>
+  </data>
+  <data name="&gt;&gt;txtFlag102Field062.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag102Field062.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag102Field062.ZOrder" xml:space="preserve">
+    <value>51</value>
+  </data>
+  <data name="txtFlag103Field063.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 296</value>
+  </data>
+  <data name="txtFlag103Field063.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag103Field063.TabIndex" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <data name="&gt;&gt;txtFlag103Field063.Name" xml:space="preserve">
+    <value>txtFlag103Field063</value>
+  </data>
+  <data name="&gt;&gt;txtFlag103Field063.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag103Field063.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag103Field063.ZOrder" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="txtFlag105Field064.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 322</value>
+  </data>
+  <data name="txtFlag105Field064.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag105Field064.TabIndex" type="System.Int32, mscorlib">
+    <value>141</value>
+  </data>
+  <data name="&gt;&gt;txtFlag105Field064.Name" xml:space="preserve">
+    <value>txtFlag105Field064</value>
+  </data>
+  <data name="&gt;&gt;txtFlag105Field064.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag105Field064.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag105Field064.ZOrder" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="txtFlag176Field065.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 348</value>
+  </data>
+  <data name="txtFlag176Field065.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag176Field065.TabIndex" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="&gt;&gt;txtFlag176Field065.Name" xml:space="preserve">
+    <value>txtFlag176Field065</value>
+  </data>
+  <data name="&gt;&gt;txtFlag176Field065.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag176Field065.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag176Field065.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="txtFlag110Field066.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 374</value>
+  </data>
+  <data name="txtFlag110Field066.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag110Field066.TabIndex" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="&gt;&gt;txtFlag110Field066.Name" xml:space="preserve">
+    <value>txtFlag110Field066</value>
+  </data>
+  <data name="&gt;&gt;txtFlag110Field066.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag110Field066.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag110Field066.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="txtFlag114Field067.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 400</value>
+  </data>
+  <data name="txtFlag114Field067.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag114Field067.TabIndex" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="&gt;&gt;txtFlag114Field067.Name" xml:space="preserve">
+    <value>txtFlag114Field067</value>
+  </data>
+  <data name="&gt;&gt;txtFlag114Field067.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag114Field067.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag114Field067.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="txtFlag112Field068.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 426</value>
+  </data>
+  <data name="txtFlag112Field068.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag112Field068.TabIndex" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <data name="&gt;&gt;txtFlag112Field068.Name" xml:space="preserve">
+    <value>txtFlag112Field068</value>
+  </data>
+  <data name="&gt;&gt;txtFlag112Field068.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag112Field068.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag112Field068.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="txtFlag111Field069.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 452</value>
+  </data>
+  <data name="txtFlag111Field069.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag111Field069.TabIndex" type="System.Int32, mscorlib">
+    <value>146</value>
+  </data>
+  <data name="&gt;&gt;txtFlag111Field069.Name" xml:space="preserve">
+    <value>txtFlag111Field069</value>
+  </data>
+  <data name="&gt;&gt;txtFlag111Field069.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag111Field069.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag111Field069.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="txtFlag122Field085.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 452</value>
+  </data>
+  <data name="txtFlag122Field085.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag122Field085.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="&gt;&gt;txtFlag122Field085.Name" xml:space="preserve">
+    <value>txtFlag122Field085</value>
+  </data>
+  <data name="&gt;&gt;txtFlag122Field085.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag122Field085.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag122Field085.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="txtFlag121Field084.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 426</value>
+  </data>
+  <data name="txtFlag121Field084.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag121Field084.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="&gt;&gt;txtFlag121Field084.Name" xml:space="preserve">
+    <value>txtFlag121Field084</value>
+  </data>
+  <data name="&gt;&gt;txtFlag121Field084.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag121Field084.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag121Field084.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="txtFlag120Field083.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 400</value>
+  </data>
+  <data name="txtFlag120Field083.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag120Field083.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="&gt;&gt;txtFlag120Field083.Name" xml:space="preserve">
+    <value>txtFlag120Field083</value>
+  </data>
+  <data name="&gt;&gt;txtFlag120Field083.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag120Field083.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag120Field083.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="txtFlag123Field082.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 374</value>
+  </data>
+  <data name="txtFlag123Field082.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag123Field082.TabIndex" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="&gt;&gt;txtFlag123Field082.Name" xml:space="preserve">
+    <value>txtFlag123Field082</value>
+  </data>
+  <data name="&gt;&gt;txtFlag123Field082.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag123Field082.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag123Field082.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="txtFlag118Field081.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 348</value>
+  </data>
+  <data name="txtFlag118Field081.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag118Field081.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="&gt;&gt;txtFlag118Field081.Name" xml:space="preserve">
+    <value>txtFlag118Field081</value>
+  </data>
+  <data name="&gt;&gt;txtFlag118Field081.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag118Field081.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag118Field081.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="txtFlag117Field080.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 322</value>
+  </data>
+  <data name="txtFlag117Field080.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag117Field080.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="&gt;&gt;txtFlag117Field080.Name" xml:space="preserve">
+    <value>txtFlag117Field080</value>
+  </data>
+  <data name="&gt;&gt;txtFlag117Field080.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag117Field080.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag117Field080.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="txtFlag116Field079.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 296</value>
+  </data>
+  <data name="txtFlag116Field079.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag116Field079.TabIndex" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="&gt;&gt;txtFlag116Field079.Name" xml:space="preserve">
+    <value>txtFlag116Field079</value>
+  </data>
+  <data name="&gt;&gt;txtFlag116Field079.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag116Field079.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag116Field079.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="txtFlag119Field078.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 270</value>
+  </data>
+  <data name="txtFlag119Field078.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag119Field078.TabIndex" type="System.Int32, mscorlib">
+    <value>155</value>
+  </data>
+  <data name="&gt;&gt;txtFlag119Field078.Name" xml:space="preserve">
+    <value>txtFlag119Field078</value>
+  </data>
+  <data name="&gt;&gt;txtFlag119Field078.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag119Field078.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag119Field078.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="txtFlag180Field077.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 244</value>
+  </data>
+  <data name="txtFlag180Field077.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag180Field077.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="&gt;&gt;txtFlag180Field077.Name" xml:space="preserve">
+    <value>txtFlag180Field077</value>
+  </data>
+  <data name="&gt;&gt;txtFlag180Field077.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag180Field077.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag180Field077.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="txtFlag179Field076.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 218</value>
+  </data>
+  <data name="txtFlag179Field076.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag179Field076.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="&gt;&gt;txtFlag179Field076.Name" xml:space="preserve">
+    <value>txtFlag179Field076</value>
+  </data>
+  <data name="&gt;&gt;txtFlag179Field076.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag179Field076.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag179Field076.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="txtFlag178Field075.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 192</value>
+  </data>
+  <data name="txtFlag178Field075.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag178Field075.TabIndex" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="&gt;&gt;txtFlag178Field075.Name" xml:space="preserve">
+    <value>txtFlag178Field075</value>
+  </data>
+  <data name="&gt;&gt;txtFlag178Field075.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag178Field075.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag178Field075.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="txtFlag177Field074.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 166</value>
+  </data>
+  <data name="txtFlag177Field074.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag177Field074.TabIndex" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="&gt;&gt;txtFlag177Field074.Name" xml:space="preserve">
+    <value>txtFlag177Field074</value>
+  </data>
+  <data name="&gt;&gt;txtFlag177Field074.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag177Field074.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag177Field074.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="txtFlag115Field073.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 140</value>
+  </data>
+  <data name="txtFlag115Field073.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag115Field073.TabIndex" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="&gt;&gt;txtFlag115Field073.Name" xml:space="preserve">
+    <value>txtFlag115Field073</value>
+  </data>
+  <data name="&gt;&gt;txtFlag115Field073.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag115Field073.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag115Field073.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="txtFlag193Field072.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 114</value>
+  </data>
+  <data name="txtFlag193Field072.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag193Field072.TabIndex" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="&gt;&gt;txtFlag193Field072.Name" xml:space="preserve">
+    <value>txtFlag193Field072</value>
+  </data>
+  <data name="&gt;&gt;txtFlag193Field072.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag193Field072.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag193Field072.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="txtFlag197Field071.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 88</value>
+  </data>
+  <data name="txtFlag197Field071.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag197Field071.TabIndex" type="System.Int32, mscorlib">
+    <value>148</value>
+  </data>
+  <data name="&gt;&gt;txtFlag197Field071.Name" xml:space="preserve">
+    <value>txtFlag197Field071</value>
+  </data>
+  <data name="&gt;&gt;txtFlag197Field071.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag197Field071.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag197Field071.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="txtFlag167Field070.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 62</value>
+  </data>
+  <data name="txtFlag167Field070.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag167Field070.TabIndex" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="&gt;&gt;txtFlag167Field070.Name" xml:space="preserve">
+    <value>txtFlag167Field070</value>
+  </data>
+  <data name="&gt;&gt;txtFlag167Field070.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag167Field070.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag167Field070.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="txtFlag174Field101.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 452</value>
+  </data>
+  <data name="txtFlag174Field101.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag174Field101.TabIndex" type="System.Int32, mscorlib">
+    <value>178</value>
+  </data>
+  <data name="&gt;&gt;txtFlag174Field101.Name" xml:space="preserve">
+    <value>txtFlag174Field101</value>
+  </data>
+  <data name="&gt;&gt;txtFlag174Field101.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag174Field101.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag174Field101.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="txtFlag005Field100.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 426</value>
+  </data>
+  <data name="txtFlag005Field100.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag005Field100.TabIndex" type="System.Int32, mscorlib">
+    <value>177</value>
+  </data>
+  <data name="&gt;&gt;txtFlag005Field100.Name" xml:space="preserve">
+    <value>txtFlag005Field100</value>
+  </data>
+  <data name="&gt;&gt;txtFlag005Field100.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag005Field100.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag005Field100.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="txtFlag132Field099.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 400</value>
+  </data>
+  <data name="txtFlag132Field099.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag132Field099.TabIndex" type="System.Int32, mscorlib">
+    <value>176</value>
+  </data>
+  <data name="&gt;&gt;txtFlag132Field099.Name" xml:space="preserve">
+    <value>txtFlag132Field099</value>
+  </data>
+  <data name="&gt;&gt;txtFlag132Field099.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag132Field099.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag132Field099.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="txtFlag084Field098.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 374</value>
+  </data>
+  <data name="txtFlag084Field098.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag084Field098.TabIndex" type="System.Int32, mscorlib">
+    <value>175</value>
+  </data>
+  <data name="&gt;&gt;txtFlag084Field098.Name" xml:space="preserve">
+    <value>txtFlag084Field098</value>
+  </data>
+  <data name="&gt;&gt;txtFlag084Field098.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag084Field098.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag084Field098.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="txtFlag018Field097.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 348</value>
+  </data>
+  <data name="txtFlag018Field097.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag018Field097.TabIndex" type="System.Int32, mscorlib">
+    <value>174</value>
+  </data>
+  <data name="&gt;&gt;txtFlag018Field097.Name" xml:space="preserve">
+    <value>txtFlag018Field097</value>
+  </data>
+  <data name="&gt;&gt;txtFlag018Field097.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag018Field097.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag018Field097.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="txtFlag099Field096.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 322</value>
+  </data>
+  <data name="txtFlag099Field096.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag099Field096.TabIndex" type="System.Int32, mscorlib">
+    <value>173</value>
+  </data>
+  <data name="&gt;&gt;txtFlag099Field096.Name" xml:space="preserve">
+    <value>txtFlag099Field096</value>
+  </data>
+  <data name="&gt;&gt;txtFlag099Field096.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag099Field096.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag099Field096.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="txtFlag003Field095.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 296</value>
+  </data>
+  <data name="txtFlag003Field095.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag003Field095.TabIndex" type="System.Int32, mscorlib">
+    <value>172</value>
+  </data>
+  <data name="&gt;&gt;txtFlag003Field095.Name" xml:space="preserve">
+    <value>txtFlag003Field095</value>
+  </data>
+  <data name="&gt;&gt;txtFlag003Field095.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag003Field095.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag003Field095.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="txtFlag002Field094.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 270</value>
+  </data>
+  <data name="txtFlag002Field094.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag002Field094.TabIndex" type="System.Int32, mscorlib">
+    <value>171</value>
+  </data>
+  <data name="&gt;&gt;txtFlag002Field094.Name" xml:space="preserve">
+    <value>txtFlag002Field094</value>
+  </data>
+  <data name="&gt;&gt;txtFlag002Field094.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag002Field094.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag002Field094.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="txtFlag130Field093.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 244</value>
+  </data>
+  <data name="txtFlag130Field093.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag130Field093.TabIndex" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
+  <data name="&gt;&gt;txtFlag130Field093.Name" xml:space="preserve">
+    <value>txtFlag130Field093</value>
+  </data>
+  <data name="&gt;&gt;txtFlag130Field093.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag130Field093.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag130Field093.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="txtFlag129Field092.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 218</value>
+  </data>
+  <data name="txtFlag129Field092.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag129Field092.TabIndex" type="System.Int32, mscorlib">
+    <value>169</value>
+  </data>
+  <data name="&gt;&gt;txtFlag129Field092.Name" xml:space="preserve">
+    <value>txtFlag129Field092</value>
+  </data>
+  <data name="&gt;&gt;txtFlag129Field092.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag129Field092.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag129Field092.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="txtFlag128Field091.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 192</value>
+  </data>
+  <data name="txtFlag128Field091.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag128Field091.TabIndex" type="System.Int32, mscorlib">
+    <value>168</value>
+  </data>
+  <data name="&gt;&gt;txtFlag128Field091.Name" xml:space="preserve">
+    <value>txtFlag128Field091</value>
+  </data>
+  <data name="&gt;&gt;txtFlag128Field091.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag128Field091.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag128Field091.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="txtFlag131Field090.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 166</value>
+  </data>
+  <data name="txtFlag131Field090.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag131Field090.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
+  </data>
+  <data name="&gt;&gt;txtFlag131Field090.Name" xml:space="preserve">
+    <value>txtFlag131Field090</value>
+  </data>
+  <data name="&gt;&gt;txtFlag131Field090.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag131Field090.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag131Field090.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="txtFlag126Field089.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 140</value>
+  </data>
+  <data name="txtFlag126Field089.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag126Field089.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="&gt;&gt;txtFlag126Field089.Name" xml:space="preserve">
+    <value>txtFlag126Field089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag126Field089.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag126Field089.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag126Field089.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="txtFlag125Field088.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 114</value>
+  </data>
+  <data name="txtFlag125Field088.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag125Field088.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="&gt;&gt;txtFlag125Field088.Name" xml:space="preserve">
+    <value>txtFlag125Field088</value>
+  </data>
+  <data name="&gt;&gt;txtFlag125Field088.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag125Field088.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag125Field088.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="txtFlag124Field087.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 88</value>
+  </data>
+  <data name="txtFlag124Field087.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag124Field087.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="&gt;&gt;txtFlag124Field087.Name" xml:space="preserve">
+    <value>txtFlag124Field087</value>
+  </data>
+  <data name="&gt;&gt;txtFlag124Field087.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag124Field087.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag124Field087.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="txtFlag127Field086.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 62</value>
+  </data>
+  <data name="txtFlag127Field086.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag127Field086.TabIndex" type="System.Int32, mscorlib">
+    <value>163</value>
+  </data>
+  <data name="&gt;&gt;txtFlag127Field086.Name" xml:space="preserve">
+    <value>txtFlag127Field086</value>
+  </data>
+  <data name="&gt;&gt;txtFlag127Field086.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag127Field086.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag127Field086.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="txtFlag046Field102.Location" type="System.Drawing.Point, System.Drawing">
+    <value>671, 478</value>
+  </data>
+  <data name="txtFlag046Field102.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 20</value>
+  </data>
+  <data name="txtFlag046Field102.TabIndex" type="System.Int32, mscorlib">
+    <value>179</value>
+  </data>
+  <data name="&gt;&gt;txtFlag046Field102.Name" xml:space="preserve">
+    <value>txtFlag046Field102</value>
+  </data>
+  <data name="&gt;&gt;txtFlag046Field102.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFlag046Field102.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtFlag046Field102.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cboHour.Items" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cboHour.Items1" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cboHour.Items2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cboHour.Items3" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboHour.Items4" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cboHour.Items5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cboHour.Items6" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cboHour.Items7" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cboHour.Items8" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cboHour.Items9" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cboHour.Items10" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboHour.Items11" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cboHour.Items12" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cboHour.Items13" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cboHour.Items14" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="cboHour.Items15" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cboHour.Items16" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cboHour.Items17" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="cboHour.Items18" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="cboHour.Items19" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="cboHour.Items20" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cboHour.Items21" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="cboHour.Items22" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="cboHour.Items23" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="cboHour.Items24" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboHour.Location" type="System.Drawing.Point, System.Drawing">
+    <value>657, 23</value>
+  </data>
+  <data name="cboHour.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 21</value>
+  </data>
+  <data name="cboHour.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cboHour.Name" xml:space="preserve">
+    <value>cboHour</value>
+  </data>
+  <data name="&gt;&gt;cboHour.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboHour.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboHour.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboDay.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cboDay.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cboDay.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboDay.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cboDay.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cboDay.Items5" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cboDay.Items6" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cboDay.Items7" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cboDay.Items8" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cboDay.Items9" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboDay.Items10" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cboDay.Items11" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cboDay.Items12" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="cboDay.Items13" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="cboDay.Items14" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cboDay.Items15" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cboDay.Items16" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="cboDay.Items17" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="cboDay.Items18" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="cboDay.Items19" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cboDay.Items20" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="cboDay.Items21" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="cboDay.Items22" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="cboDay.Items23" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="cboDay.Items24" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="cboDay.Items25" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="cboDay.Items26" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="cboDay.Items27" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="cboDay.Items28" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="cboDay.Items29" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="cboDay.Items30" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="cboDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>568, 23</value>
+  </data>
+  <data name="cboDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 21</value>
+  </data>
+  <data name="cboDay.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cboDay.Name" xml:space="preserve">
+    <value>cboDay</value>
+  </data>
+  <data name="&gt;&gt;cboDay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboDay.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboDay.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cboMonth.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cboMonth.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cboMonth.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboMonth.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cboMonth.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cboMonth.Items5" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="cboMonth.Items6" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cboMonth.Items7" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cboMonth.Items8" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="cboMonth.Items9" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboMonth.Items10" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cboMonth.Items11" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cboMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>482, 24</value>
+  </data>
+  <data name="cboMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 21</value>
+  </data>
+  <data name="cboMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cboMonth.Name" xml:space="preserve">
+    <value>cboMonth</value>
+  </data>
+  <data name="&gt;&gt;cboMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboMonth.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboMonth.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>436, 26</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>183</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Month:</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>533, 27</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>184</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Day:</value>
+  </data>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>613, 26</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>185</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Hour:</value>
+  </data>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
+  </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cboStation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 23</value>
+  </data>
+  <data name="cboStation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 21</value>
+  </data>
+  <data name="cboStation.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cboStation.Name" xml:space="preserve">
+    <value>cboStation</value>
+  </data>
+  <data name="&gt;&gt;cboStation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboStation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboStation.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 25</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>204</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Station Identifier</value>
+  </data>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
+  </data>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtSequencer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 591</value>
+  </data>
+  <data name="txtSequencer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 20</value>
+  </data>
+  <data name="txtSequencer.TabIndex" type="System.Int32, mscorlib">
+    <value>205</value>
+  </data>
+  <data name="txtSequencer.Text" xml:space="preserve">
+    <value>seq_month_day_synoptime</value>
+  </data>
+  <data name="&gt;&gt;txtSequencer.Name" xml:space="preserve">
+    <value>txtSequencer</value>
+  </data>
+  <data name="&gt;&gt;txtSequencer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtSequencer.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtSequencer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 594</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>206</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Sequencer</value>
+  </data>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnUpload.Location" type="System.Drawing.Point, System.Drawing">
+    <value>563, 587</value>
+  </data>
+  <data name="btnUpload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnUpload.TabIndex" type="System.Int32, mscorlib">
+    <value>207</value>
+  </data>
+  <data name="btnUpload.Text" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="&gt;&gt;btnUpload.Name" xml:space="preserve">
+    <value>btnUpload</value>
+  </data>
+  <data name="&gt;&gt;btnUpload.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUpload.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnUpload.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>740, 632</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Synoptic Data For Many Elements For WMO - RA1</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>formSynopRA1</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

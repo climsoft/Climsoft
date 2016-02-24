@@ -1719,4 +1719,3634 @@
         ymbw3AdadRRREqQ8gLcxkcHyuo+tTabGs3ntIodt/wB5hk9KKKswq7I//9k=
 </value>
   </data>
+  <data name="Label2.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label2.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Label2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>316, 14</value>
+  </data>
+  <data name="Label2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="Label2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Stations</value>
+  </data>
+  <data name="txtStationOperation.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtStationOperation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 46</value>
+  </data>
+  <data name="txtStationOperation.RightToLeft" xml:space="preserve" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txtStationOperation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>15, 14</value>
+  </data>
+  <data name="txtStationOperation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtStationOperation.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomLeft</value>
+  </data>
+  <data name="cmdImport.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>578, -1</value>
+  </data>
+  <data name="cmdImport.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdImport.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="cmdImport.Text" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="cmdClear.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>251, 1</value>
+  </data>
+  <data name="cmdClear.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClear.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="cmdClear.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="cmdViewStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>469, -1</value>
+  </data>
+  <data name="cmdViewStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdViewStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cmdViewStation.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDelete.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>360, -1</value>
+  </data>
+  <data name="cmdDelete.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdDelete.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdDelete.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>142, -1</value>
+  </data>
+  <data name="cmdUpdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdUpdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cmdUpdate.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddNew.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>33, -1</value>
+  </data>
+  <data name="cmdAddNew.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdAddNew.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="cmdAddNew.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Panel2.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Panel2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 334</value>
+  </data>
+  <data name="Panel2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>698, 25</value>
+  </data>
+  <data name="Panel2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="btnMovePrevious.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="btnMovePrevious.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMovePrevious.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>38, -1</value>
+  </data>
+  <data name="btnMovePrevious.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMovePrevious.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="btnMoveFirst.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="btnMoveFirst.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveFirst.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>-1, -1</value>
+  </data>
+  <data name="btnMoveFirst.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMoveFirst.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="btnMoveLast.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="btnMoveLast.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveLast.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>655, -1</value>
+  </data>
+  <data name="btnMoveLast.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMoveLast.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="txtRecNumber.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>78, 0</value>
+  </data>
+  <data name="txtRecNumber.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>555, 20</value>
+  </data>
+  <data name="txtRecNumber.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="txtRecNumber.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="btnMoveNext.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="btnMoveNext.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btnMoveNext.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>620, -1</value>
+  </data>
+  <data name="btnMoveNext.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>41, 23</value>
+  </data>
+  <data name="btnMoveNext.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="Panel1.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Panel1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 359</value>
+  </data>
+  <data name="Panel1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>698, 23</value>
+  </data>
+  <data name="Panel1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="txtClosingDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 243</value>
+  </data>
+  <data name="txtClosingDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="txtClosingDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="txtOpenDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 215</value>
+  </data>
+  <data name="txtOpenDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="txtOpenDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="txtgeoAccuracy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 180</value>
+  </data>
+  <data name="txtgeoAccuracy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="txtgeoAccuracy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="txtgeoMethod.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 152</value>
+  </data>
+  <data name="txtgeoMethod.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="txtgeoMethod.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="txtElevation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 124</value>
+  </data>
+  <data name="txtElevation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="txtElevation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="txtLongitude.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 96</value>
+  </data>
+  <data name="txtLongitude.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="txtLongitude.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="txtLatitude.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>519, 68</value>
+  </data>
+  <data name="txtLatitude.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="txtLatitude.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="txtDrainageBasin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>128, 183</value>
+  </data>
+  <data name="txtDrainageBasin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="txtDrainageBasin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="txtAdminRegion.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 155</value>
+  </data>
+  <data name="txtAdminRegion.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="txtAdminRegion.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtAuthority.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 127</value>
+  </data>
+  <data name="txtAuthority.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>172, 20</value>
+  </data>
+  <data name="txtAuthority.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtCountry.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 99</value>
+  </data>
+  <data name="txtCountry.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtCountry.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="txtStationName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 71</value>
+  </data>
+  <data name="txtStationName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>238, 20</value>
+  </data>
+  <data name="txtStationName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="txtstationId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 43</value>
+  </data>
+  <data name="txtstationId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>124, 20</value>
+  </data>
+  <data name="txtstationId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblStationOperation.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStationOperation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 47</value>
+  </data>
+  <data name="lblStationOperation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="lblStationOperation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblStationOperation.Text" xml:space="preserve">
+    <value>Station opérationnelle</value>
+  </data>
+  <data name="lbldarainage.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbldarainage.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 187</value>
+  </data>
+  <data name="lbldarainage.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="lbldarainage.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lbldarainage.Text" xml:space="preserve">
+    <value>Bassin versant</value>
+  </data>
+  <data name="lblAdmin.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAdmin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 159</value>
+  </data>
+  <data name="lblAdmin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblAdmin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblAdmin.Text" xml:space="preserve">
+    <value>Région admin</value>
+  </data>
+  <data name="lblAuthority.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAuthority.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 131</value>
+  </data>
+  <data name="lblAuthority.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblAuthority.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblAuthority.Text" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="lblCountry.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCountry.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 103</value>
+  </data>
+  <data name="lblCountry.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="lblCountry.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblCountry.Text" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="lblClosingdate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblClosingdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 243</value>
+  </data>
+  <data name="lblClosingdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="lblClosingdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblClosingdate.Text" xml:space="preserve">
+    <value>Date de clôture</value>
+  </data>
+  <data name="lblOpendate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblOpendate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 215</value>
+  </data>
+  <data name="lblOpendate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblOpendate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblOpendate.Text" xml:space="preserve">
+    <value>Données ouvertes</value>
+  </data>
+  <data name="lblGeoAccuracy.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGeoAccuracy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 184</value>
+  </data>
+  <data name="lblGeoAccuracy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
+  </data>
+  <data name="lblGeoAccuracy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblGeoAccuracy.Text" xml:space="preserve">
+    <value>Précision géographique</value>
+  </data>
+  <data name="lblGeoMethod.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGeoMethod.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 156</value>
+  </data>
+  <data name="lblGeoMethod.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="lblGeoMethod.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblGeoMethod.Text" xml:space="preserve">
+    <value>Méthode géographique</value>
+  </data>
+  <data name="lblElevation.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElevation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 128</value>
+  </data>
+  <data name="lblElevation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblElevation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblElevation.Text" xml:space="preserve">
+    <value>Élévation</value>
+  </data>
+  <data name="lblongitude.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblongitude.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 100</value>
+  </data>
+  <data name="lblongitude.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblongitude.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblongitude.Text" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="lblLatitude.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLatitude.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>395, 72</value>
+  </data>
+  <data name="lblLatitude.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="lblLatitude.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblLatitude.Text" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="lblStationName.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStationName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 75</value>
+  </data>
+  <data name="lblStationName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="lblStationName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblStationName.Text" xml:space="preserve">
+    <value>Nom de la station</value>
+  </data>
+  <data name="lblStationId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStationId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>20, 47</value>
+  </data>
+  <data name="lblStationId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblStationId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblStationId.Text" xml:space="preserve">
+    <value>Id de la station</value>
+  </data>
+  <data name="grpStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>14, 35</value>
+  </data>
+  <data name="grpStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>704, 385</value>
+  </data>
+  <data name="grpStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpStation.Text" xml:space="preserve">
+    <value>Détails de la station</value>
+  </data>
+  <data name="TabStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabStation.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="TabStation.Text" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="cmdClearElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>261, 4</value>
+  </data>
+  <data name="cmdClearElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="cmdClearElement.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="cmdViewElements.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>469, 6</value>
+  </data>
+  <data name="cmdViewElements.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewElements.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cmdViewElements.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>365, 6</value>
+  </data>
+  <data name="cmdDeleteElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdDeleteElement.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>157, 6</value>
+  </data>
+  <data name="cmdUpdateElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cmdUpdateElement.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>53, 6</value>
+  </data>
+  <data name="cmdAddElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="cmdAddElement.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="GroupBox5.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 293</value>
+  </data>
+  <data name="GroupBox5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>582, 32</value>
+  </data>
+  <data name="GroupBox5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdPrevoius.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrevoius.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrevoius.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrevoius.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrevoius.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdFirstRecord.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdFirstRecord.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdFirstRecord.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdFirstRecord.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdFirstRecord.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLastRecord.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLastRecord.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLastRecord.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>541, 10</value>
+  </data>
+  <data name="cmdLastRecord.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLastRecord.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="Button4.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button4.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>505, 10</value>
+  </data>
+  <data name="Button4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="Button4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtElementNavigator.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 11</value>
+  </data>
+  <data name="txtElementNavigator.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>437, 20</value>
+  </data>
+  <data name="txtElementNavigator.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtElementNavigator.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox2.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 325</value>
+  </data>
+  <data name="GroupBox2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>582, 39</value>
+  </data>
+  <data name="GroupBox2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="txtType.Items" xml:space="preserve">
+    <value>Tous les jours</value>
+  </data>
+  <data name="txtType.Items1" xml:space="preserve">
+    <value>Toutes les heures</value>
+  </data>
+  <data name="txtType.Items2" xml:space="preserve">
+    <value>Mensuel</value>
+  </data>
+  <data name="txtType.Items3" xml:space="preserve">
+    <value>AWS</value>
+  </data>
+  <data name="txtType.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>182, 241</value>
+  </data>
+  <data name="txtType.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="txtType.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtUnit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>182, 214</value>
+  </data>
+  <data name="txtUnit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="txtUnit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="txtLowerLimit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>182, 187</value>
+  </data>
+  <data name="txtLowerLimit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="txtLowerLimit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txtUpperLimit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>182, 160</value>
+  </data>
+  <data name="txtUpperLimit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="txtUpperLimit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="txtScale.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 133</value>
+  </data>
+  <data name="txtScale.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtScale.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 106</value>
+  </data>
+  <data name="txtDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>244, 20</value>
+  </data>
+  <data name="txtDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 79</value>
+  </data>
+  <data name="txtName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="txtAbbreviation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 52</value>
+  </data>
+  <data name="txtAbbreviation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>124, 20</value>
+  </data>
+  <data name="txtAbbreviation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="txtId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 25</value>
+  </data>
+  <data name="txtId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>124, 20</value>
+  </data>
+  <data name="txtId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblType.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblType.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 249</value>
+  </data>
+  <data name="lblType.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="lblType.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lblUpperlimit.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUpperlimit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 168</value>
+  </data>
+  <data name="lblUpperlimit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblUpperlimit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblUpperlimit.Text" xml:space="preserve">
+    <value>Limite supérieure</value>
+  </data>
+  <data name="lblScale.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblScale.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 141</value>
+  </data>
+  <data name="lblScale.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="lblScale.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblScale.Text" xml:space="preserve">
+    <value>ECHELLE</value>
+  </data>
+  <data name="lblDescription.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 114</value>
+  </data>
+  <data name="lblDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblName.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 87</value>
+  </data>
+  <data name="lblName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="lblUnit.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUnit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 222</value>
+  </data>
+  <data name="lblUnit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="lblUnit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblUnit.Text" xml:space="preserve">
+    <value>Unité</value>
+  </data>
+  <data name="lblLowerLimit.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLowerLimit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 195</value>
+  </data>
+  <data name="lblLowerLimit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblLowerLimit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblLowerLimit.Text" xml:space="preserve">
+    <value>Limite inférieure</value>
+  </data>
+  <data name="lblAbbrev.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAbbrev.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 60</value>
+  </data>
+  <data name="lblAbbrev.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblAbbrev.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblAbbrev.Text" xml:space="preserve">
+    <value>Abréviation</value>
+  </data>
+  <data name="lblId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>103, 33</value>
+  </data>
+  <data name="lblId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>18, 13</value>
+  </data>
+  <data name="lblId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblId.Text" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="grpObservationElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 32</value>
+  </data>
+  <data name="grpObservationElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>588, 367</value>
+  </data>
+  <data name="grpObservationElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpObservationElement.Text" xml:space="preserve">
+    <value>Détails de l'élément</value>
+  </data>
+  <data name="Label1.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+  </data>
+  <data name="Label1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>294, 14</value>
+  </data>
+  <data name="Label1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>147, 15</value>
+  </data>
+  <data name="Label1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Éléments d'observation</value>
+  </data>
+  <data name="TabElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabElement.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TabElement.Text" xml:space="preserve">
+    <value>Elément</value>
+  </data>
+  <data name="lblStationElement.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStationElement.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="lblStationElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>323, 14</value>
+  </data>
+  <data name="lblStationElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>116, 16</value>
+  </data>
+  <data name="lblStationElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblStationElement.Text" xml:space="preserve">
+    <value>Élément de la station</value>
+  </data>
+  <data name="cmdClearStationElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 6</value>
+  </data>
+  <data name="cmdClearStationElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearStationElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="cmdClearStationElement.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="cmdViewStElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>456, 7</value>
+  </data>
+  <data name="cmdViewStElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewStElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cmdViewStElement.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteStElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>355, 7</value>
+  </data>
+  <data name="cmdDeleteStElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteStElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdDeleteStElement.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateStElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>153, 7</value>
+  </data>
+  <data name="cmdUpdateStElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateStElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cmdUpdateStElement.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddStElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>52, 7</value>
+  </data>
+  <data name="cmdAddStElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddStElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="cmdAddStElement.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="GroupBox7.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox7.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 301</value>
+  </data>
+  <data name="GroupBox7.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>584, 32</value>
+  </data>
+  <data name="GroupBox7.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="cmdPrev1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrev1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrev1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrev1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrev1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdfiratRec1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdfiratRec1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdfiratRec1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdfiratRec1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdfiratRec1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>541, 10</value>
+  </data>
+  <data name="cmdLast1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>505, 10</value>
+  </data>
+  <data name="cmdNext1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNavigator1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 11</value>
+  </data>
+  <data name="txtNavigator1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>432, 20</value>
+  </data>
+  <data name="txtNavigator1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNavigator1.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox6.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 333</value>
+  </data>
+  <data name="GroupBox6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>584, 39</value>
+  </data>
+  <data name="GroupBox6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="txtImstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>245, 102</value>
+  </data>
+  <data name="txtImstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
+  </data>
+  <data name="txtImstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="txtElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>245, 70</value>
+  </data>
+  <data name="txtElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
+  </data>
+  <data name="txtElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="txtStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>244, 38</value>
+  </data>
+  <data name="txtStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
+  </data>
+  <data name="txtStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="txtEndate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>245, 227</value>
+  </data>
+  <data name="txtEndate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="txtEndate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="txtBeginDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>245, 196</value>
+  </data>
+  <data name="txtBeginDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>156, 20</value>
+  </data>
+  <data name="txtBeginDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtHeight.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>246, 165</value>
+  </data>
+  <data name="txtHeight.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtHeight.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>246, 134</value>
+  </data>
+  <data name="txtScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>156, 20</value>
+  </data>
+  <data name="txtScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblBdate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 204</value>
+  </data>
+  <data name="lblBdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblBdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblBdate.Text" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="lblHeight.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHeight.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 173</value>
+  </data>
+  <data name="lblHeight.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="lblHeight.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblHeight.Text" xml:space="preserve">
+    <value>height</value>
+  </data>
+  <data name="lblSchedule.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSchedule.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 142</value>
+  </data>
+  <data name="lblSchedule.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblSchedule.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblSchedule.Text" xml:space="preserve">
+    <value>Horaire de classe</value>
+  </data>
+  <data name="lblInstrument.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 110</value>
+  </data>
+  <data name="lblInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblInstrument.Text" xml:space="preserve">
+    <value>ID de l'instrument</value>
+  </data>
+  <data name="lblEdate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 235</value>
+  </data>
+  <data name="lblEdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblEdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblEdate.Text" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="lblElement.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 78</value>
+  </data>
+  <data name="lblElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblElement.Text" xml:space="preserve">
+    <value>ID de l'élément</value>
+  </data>
+  <data name="lblstation.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblstation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>146, 46</value>
+  </data>
+  <data name="lblstation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblstation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblstation.Text" xml:space="preserve">
+    <value>ID de la station</value>
+  </data>
+  <data name="grpStationElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>69, 44</value>
+  </data>
+  <data name="grpStationElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>590, 375</value>
+  </data>
+  <data name="grpStationElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpStationElement.Text" xml:space="preserve">
+    <value>Détails d'élément station</value>
+  </data>
+  <data name="TabStationElement.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabStationElement.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabStationElement.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabStationElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabStationElement.Text" xml:space="preserve">
+    <value>Élément de la station</value>
+  </data>
+  <data name="cmdClear2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>323, 4</value>
+  </data>
+  <data name="cmdClear2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClear2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="cmdClear2.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="cmdViewInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>539, 5</value>
+  </data>
+  <data name="cmdViewInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cmdViewInstrument.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>431, 5</value>
+  </data>
+  <data name="cmdDeleteInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="cmdDeleteInstrument.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>215, 5</value>
+  </data>
+  <data name="cmdUpdateInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="cmdUpdateInstrument.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>107, 5</value>
+  </data>
+  <data name="cmdAddInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="cmdAddInstrument.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="grpCommand2.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="grpCommand2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 357</value>
+  </data>
+  <data name="grpCommand2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>735, 31</value>
+  </data>
+  <data name="grpCommand2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="cmdPrev2.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrev2.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrev2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrev2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrev2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdFirst1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdFirst1.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdFirst1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdFirst1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdFirst1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast2.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast2.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>686, 10</value>
+  </data>
+  <data name="cmdLast2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext2.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext2.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>650, 10</value>
+  </data>
+  <data name="cmdNext2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNavigator2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 11</value>
+  </data>
+  <data name="txtNavigator2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>575, 20</value>
+  </data>
+  <data name="txtNavigator2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNavigator2.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox8.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox8.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 388</value>
+  </data>
+  <data name="GroupBox8.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>735, 33</value>
+  </data>
+  <data name="GroupBox8.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="lblInstrumentPic.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstrumentPic.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>483, 319</value>
+  </data>
+  <data name="lblInstrumentPic.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="lblInstrumentPic.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="lblInstrumentPic.Text" xml:space="preserve">
+    <value>Appareil photo</value>
+  </data>
+  <data name="picInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>396, 21</value>
+  </data>
+  <data name="picInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>288, 291</value>
+  </data>
+  <data name="picInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="txtInstrHeight.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 320</value>
+  </data>
+  <data name="txtInstrHeight.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtInstrHeight.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="txtDeinstallDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 293</value>
+  </data>
+  <data name="txtDeinstallDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtDeinstallDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="txtInstallDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 266</value>
+  </data>
+  <data name="txtInstallDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtInstallDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="lblInstrStnId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstrStnId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 106</value>
+  </data>
+  <data name="lblInstrStnId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblInstrStnId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="lblInstrStnId.Text" xml:space="preserve">
+    <value>ID de la station</value>
+  </data>
+  <data name="lblInstrHt.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstrHt.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>66, 323</value>
+  </data>
+  <data name="lblInstrHt.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="lblInstrHt.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="lblInstrHt.Text" xml:space="preserve">
+    <value>height</value>
+  </data>
+  <data name="lblDeinstalDate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDeinstalDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>66, 296</value>
+  </data>
+  <data name="lblDeinstalDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="lblDeinstalDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="lblDeinstalDate.Text" xml:space="preserve">
+    <value>Date de désinstallation</value>
+  </data>
+  <data name="txtInstrStn.Items" xml:space="preserve">
+    <value>Tous les jours</value>
+  </data>
+  <data name="txtInstrStn.Items1" xml:space="preserve">
+    <value>Toutes les heures</value>
+  </data>
+  <data name="txtInstrStn.Items2" xml:space="preserve">
+    <value>Mensuel</value>
+  </data>
+  <data name="txtInstrStn.Items3" xml:space="preserve">
+    <value>AWS</value>
+  </data>
+  <data name="txtInstrStn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 103</value>
+  </data>
+  <data name="txtInstrStn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 21</value>
+  </data>
+  <data name="txtInstrStn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtUncertainity.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 239</value>
+  </data>
+  <data name="txtUncertainity.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="txtUncertainity.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="txtManufacturer.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 212</value>
+  </data>
+  <data name="txtManufacturer.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="txtManufacturer.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txtModel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>181, 185</value>
+  </data>
+  <data name="txtModel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="txtModel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="txtInstrScale.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 158</value>
+  </data>
+  <data name="txtInstrScale.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtInstrScale.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtSerial.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 131</value>
+  </data>
+  <data name="txtSerial.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtSerial.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtAbbrev.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 76</value>
+  </data>
+  <data name="txtAbbrev.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtAbbrev.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="txtInstName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 49</value>
+  </data>
+  <data name="txtInstName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtInstName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="txtInstrumentId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="txtInstrumentId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtInstrumentId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblIinstalDate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblIinstalDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 269</value>
+  </data>
+  <data name="lblIinstalDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblIinstalDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="lblIinstalDate.Text" xml:space="preserve">
+    <value>Date d'installation</value>
+  </data>
+  <data name="lblModel.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 188</value>
+  </data>
+  <data name="lblModel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="lblModel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblModel.Text" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="Label5.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 161</value>
+  </data>
+  <data name="Label5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="Label5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>ECHELLE</value>
+  </data>
+  <data name="lblSerial.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSerial.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 134</value>
+  </data>
+  <data name="lblSerial.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="lblSerial.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblSerial.Text" xml:space="preserve">
+    <value>Numéro de série</value>
+  </data>
+  <data name="lblInstAbbrev.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstAbbrev.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 79</value>
+  </data>
+  <data name="lblInstAbbrev.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblInstAbbrev.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblInstAbbrev.Text" xml:space="preserve">
+    <value>Abréviation</value>
+  </data>
+  <data name="lblUncertainity.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUncertainity.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 242</value>
+  </data>
+  <data name="lblUncertainity.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblUncertainity.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblUncertainity.Text" xml:space="preserve">
+    <value>Incertitude</value>
+  </data>
+  <data name="lblManufacturer.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblManufacturer.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 215</value>
+  </data>
+  <data name="lblManufacturer.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblManufacturer.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblManufacturer.Text" xml:space="preserve">
+    <value>Fabricant</value>
+  </data>
+  <data name="txtInstrumentName.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="txtInstrumentName.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 52</value>
+  </data>
+  <data name="txtInstrumentName.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="txtInstrumentName.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="txtInstrumentName.Text" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="lblInstId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>67, 25</value>
+  </data>
+  <data name="lblInstId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>18, 13</value>
+  </data>
+  <data name="lblInstId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblInstId.Text" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="grpInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 30</value>
+  </data>
+  <data name="grpInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>741, 424</value>
+  </data>
+  <data name="grpInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpInstrument.Text" xml:space="preserve">
+    <value>Détails de l'instrument</value>
+  </data>
+  <data name="lblInstruments.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInstruments.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+  </data>
+  <data name="lblInstruments.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>300, 8</value>
+  </data>
+  <data name="lblInstruments.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>75, 15</value>
+  </data>
+  <data name="lblInstruments.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblInstruments.Text" xml:space="preserve">
+    <value>Instrument</value>
+  </data>
+  <data name="TabInstrument.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabInstrument.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabInstrument.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabInstrument.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabInstrument.Text" xml:space="preserve">
+    <value>Instrument</value>
+  </data>
+  <data name="cmdViewHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>482, 8</value>
+  </data>
+  <data name="cmdViewHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="cmdViewHistory.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>379, 8</value>
+  </data>
+  <data name="cmdDeleteHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="cmdDeleteHistory.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>173, 8</value>
+  </data>
+  <data name="cmdUpdateHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="cmdUpdateHistory.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>70, 8</value>
+  </data>
+  <data name="cmdAddHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="cmdAddHistory.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="cmdClearHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>276, 7</value>
+  </data>
+  <data name="cmdClearHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="cmdClearHistory.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="GroupBox10.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox10.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 358</value>
+  </data>
+  <data name="GroupBox10.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>629, 34</value>
+  </data>
+  <data name="GroupBox10.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="cmdprev3.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdprev3.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdprev3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdprev3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdprev3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdfirst3.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdfirst3.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdfirst3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdfirst3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdfirst3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast3.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast3.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>589, 10</value>
+  </data>
+  <data name="cmdLast3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext3.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext3.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>553, 10</value>
+  </data>
+  <data name="cmdNext3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNav2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>77, 11</value>
+  </data>
+  <data name="txtNav2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>477, 20</value>
+  </data>
+  <data name="txtNav2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNav2.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox9.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox9.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 392</value>
+  </data>
+  <data name="GroupBox9.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>629, 33</value>
+  </data>
+  <data name="GroupBox9.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="txtDrgBasin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 317</value>
+  </data>
+  <data name="txtDrgBasin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtDrgBasin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="txtClosDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 155</value>
+  </data>
+  <data name="txtClosDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtClosDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="txtOpDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 128</value>
+  </data>
+  <data name="txtOpDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtOpDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="Label4.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 25</value>
+  </data>
+  <data name="Label4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="Label4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="Label6.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 323</value>
+  </data>
+  <data name="Label6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="Label6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Bassin versant</value>
+  </data>
+  <data name="Label8.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label8.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 161</value>
+  </data>
+  <data name="Label8.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="Label8.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Date de clôture</value>
+  </data>
+  <data name="txtlocStn.Items" xml:space="preserve">
+    <value>Journalière</value>
+  </data>
+  <data name="txtlocStn.Items1" xml:space="preserve">
+    <value>Horaire</value>
+  </data>
+  <data name="txtlocStn.Items2" xml:space="preserve">
+    <value>Mensuel</value>
+  </data>
+  <data name="txtlocStn.Items3" xml:space="preserve">
+    <value>AWS</value>
+  </data>
+  <data name="txtlocStn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 19</value>
+  </data>
+  <data name="txtlocStn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 21</value>
+  </data>
+  <data name="txtlocStn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtElev.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>274, 236</value>
+  </data>
+  <data name="txtElev.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="txtElev.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="txtLon.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 209</value>
+  </data>
+  <data name="txtLon.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="txtLon.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="txtLat.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 182</value>
+  </data>
+  <data name="txtLat.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="txtLat.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="txtAdmin.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 290</value>
+  </data>
+  <data name="txtAdmin.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="txtAdmin.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtAuth.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 263</value>
+  </data>
+  <data name="txtAuth.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtAuth.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtMethod.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 74</value>
+  </data>
+  <data name="txtMethod.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtMethod.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="txtStnType.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 47</value>
+  </data>
+  <data name="txtStnType.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtStnType.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="txtAccuracy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>273, 101</value>
+  </data>
+  <data name="txtAccuracy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="txtAccuracy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Label9.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label9.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 134</value>
+  </data>
+  <data name="Label9.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label9.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Date d'ouverture</value>
+  </data>
+  <data name="Label11.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label11.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 188</value>
+  </data>
+  <data name="Label11.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="Label11.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Label12.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label12.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 296</value>
+  </data>
+  <data name="Label12.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
+  </data>
+  <data name="Label12.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Région administrative</value>
+  </data>
+  <data name="Label13.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label13.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 269</value>
+  </data>
+  <data name="Label13.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Label13.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Label14.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label14.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 80</value>
+  </data>
+  <data name="Label14.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="Label14.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Méthode GeogLocation</value>
+  </data>
+  <data name="Label15.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label15.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 242</value>
+  </data>
+  <data name="Label15.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="Label15.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Élévation</value>
+  </data>
+  <data name="Label16.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label16.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 215</value>
+  </data>
+  <data name="Label16.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="Label16.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="Label17.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label17.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 53</value>
+  </data>
+  <data name="Label17.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
+  </data>
+  <data name="Label17.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Type de station</value>
+  </data>
+  <data name="Label18.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label18.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>127, 107</value>
+  </data>
+  <data name="Label18.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>122, 13</value>
+  </data>
+  <data name="Label18.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>GeogLocation précision</value>
+  </data>
+  <data name="GroupBox1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>48, 25</value>
+  </data>
+  <data name="GroupBox1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>635, 428</value>
+  </data>
+  <data name="GroupBox1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>HistoryDetails</value>
+  </data>
+  <data name="Label19.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label19.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+  </data>
+  <data name="Label19.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>300, 7</value>
+  </data>
+  <data name="Label19.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>159, 15</value>
+  </data>
+  <data name="Label19.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Gare historique</value>
+  </data>
+  <data name="TabStationLocationHistory.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabStationLocationHistory.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabStationLocationHistory.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabStationLocationHistory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="TabStationLocationHistory.Text" xml:space="preserve">
+    <value>Gare historique</value>
+  </data>
+  <data name="Label3.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label3.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Label3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>336, 28</value>
+  </data>
+  <data name="Label3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>118, 16</value>
+  </data>
+  <data name="Label3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Qualificateur de la station</value>
+  </data>
+  <data name="cmdDeleteView.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>454, 5</value>
+  </data>
+  <data name="cmdDeleteView.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteView.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="cmdDeleteView.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteQualier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>355, 5</value>
+  </data>
+  <data name="cmdDeleteQualier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteQualier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="cmdDeleteQualier.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateQualier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>157, 5</value>
+  </data>
+  <data name="cmdUpdateQualier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateQualier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="cmdUpdateQualier.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddQualier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>58, 5</value>
+  </data>
+  <data name="cmdAddQualier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddQualier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="cmdAddQualier.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="cmdClearQualifier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>256, 4</value>
+  </data>
+  <data name="cmdClearQualifier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearQualifier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="cmdClearQualifier.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="GroupBox12.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox12.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 285</value>
+  </data>
+  <data name="GroupBox12.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>597, 34</value>
+  </data>
+  <data name="GroupBox12.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="cmdPrev4.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrev4.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrev4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrev4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrev4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdFirst4.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdFirst4.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdFirst4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdFirst4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdFirst4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast4.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast4.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>556, 10</value>
+  </data>
+  <data name="cmdLast4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext4.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext4.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>520, 10</value>
+  </data>
+  <data name="cmdNext4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNav4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 11</value>
+  </data>
+  <data name="txtNav4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>448, 20</value>
+  </data>
+  <data name="txtNav4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNav4.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox11.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox11.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 319</value>
+  </data>
+  <data name="GroupBox11.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>597, 33</value>
+  </data>
+  <data name="GroupBox11.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="txtEndDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>259, 143</value>
+  </data>
+  <data name="txtEndDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtEndDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="Label20.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label20.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 75</value>
+  </data>
+  <data name="Label20.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="Label20.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>ID de la station</value>
+  </data>
+  <data name="txtQualifierStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>259, 68</value>
+  </data>
+  <data name="txtQualifierStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="txtQualifierStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtBDate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>257, 106</value>
+  </data>
+  <data name="txtBDate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtBDate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="txtNetwork.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>259, 217</value>
+  </data>
+  <data name="txtNetwork.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtNetwork.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtTZone.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>259, 180</value>
+  </data>
+  <data name="txtTZone.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="txtTZone.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="txtqualifier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>259, 31</value>
+  </data>
+  <data name="txtqualifier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>152, 20</value>
+  </data>
+  <data name="txtqualifier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Label21.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label21.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 224</value>
+  </data>
+  <data name="Label21.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="Label21.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Type de réseau</value>
+  </data>
+  <data name="Label22.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label22.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 187</value>
+  </data>
+  <data name="Label22.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="Label22.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Fuseau horaire</value>
+  </data>
+  <data name="Label23.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label23.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 150</value>
+  </data>
+  <data name="Label23.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="Label23.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Label25.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label25.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 113</value>
+  </data>
+  <data name="Label25.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="Label25.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="Label25.Text" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Label26.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label26.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>166, 38</value>
+  </data>
+  <data name="Label26.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="Label26.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label26.Text" xml:space="preserve">
+    <value>Qualificatif</value>
+  </data>
+  <data name="GroupBox3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>62, 60</value>
+  </data>
+  <data name="GroupBox3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>603, 355</value>
+  </data>
+  <data name="GroupBox3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Détails de qualificateur</value>
+  </data>
+  <data name="TabStationQualifier.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabStationQualifier.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabStationQualifier.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabStationQualifier.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="TabStationQualifier.Text" xml:space="preserve">
+    <value>Qualificateur de la station</value>
+  </data>
+  <data name="lblScheduleClass.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblScheduleClass.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="lblScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>343, 43</value>
+  </data>
+  <data name="lblScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>116, 16</value>
+  </data>
+  <data name="lblScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblScheduleClass.Text" xml:space="preserve">
+    <value>Horaire de classe</value>
+  </data>
+  <data name="cmdViewScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>410, 6</value>
+  </data>
+  <data name="cmdViewScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="cmdViewScheduleClass.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>313, 6</value>
+  </data>
+  <data name="cmdDeleteScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="cmdDeleteScheduleClass.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>119, 6</value>
+  </data>
+  <data name="cmdUpdateScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="cmdUpdateScheduleClass.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>22, 6</value>
+  </data>
+  <data name="cmdAddScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="cmdAddScheduleClass.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="cmdClearClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>216, 5</value>
+  </data>
+  <data name="cmdClearClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="cmdClearClass.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="GroupBox13.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox13.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 255</value>
+  </data>
+  <data name="GroupBox13.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>519, 34</value>
+  </data>
+  <data name="GroupBox13.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="cmdPrev5.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrev5.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrev5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrev5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrev5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdFirst5.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdFirst5.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdFirst5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdFirst5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdFirst5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast5.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast5.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>479, 10</value>
+  </data>
+  <data name="cmdLast5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext5.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext5.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>441, 10</value>
+  </data>
+  <data name="cmdNext5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNav5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>77, 11</value>
+  </data>
+  <data name="txtNav5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>365, 20</value>
+  </data>
+  <data name="txtNav5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNav5.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox14.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox14.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 289</value>
+  </data>
+  <data name="GroupBox14.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>519, 33</value>
+  </data>
+  <data name="GroupBox14.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="Label27.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label27.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>140, 116</value>
+  </data>
+  <data name="Label27.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="Label27.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="Label27.Text" xml:space="preserve">
+    <value>ID de la station</value>
+  </data>
+  <data name="txtClassStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>219, 109</value>
+  </data>
+  <data name="txtClassStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="txtClassStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="txtClassDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>219, 152</value>
+  </data>
+  <data name="txtClassDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtClassDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>219, 72</value>
+  </data>
+  <data name="txtClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>152, 20</value>
+  </data>
+  <data name="txtClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="Label28.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label28.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>140, 159</value>
+  </data>
+  <data name="Label28.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="Label28.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label28.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblClass.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>140, 79</value>
+  </data>
+  <data name="lblClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="lblClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblClass.Text" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="GroupBox4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>106, 73</value>
+  </data>
+  <data name="GroupBox4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>525, 325</value>
+  </data>
+  <data name="GroupBox4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Détails de classe</value>
+  </data>
+  <data name="TabScheduleClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabScheduleClass.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabScheduleClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabScheduleClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="TabScheduleClass.Text" xml:space="preserve">
+    <value>Horaire de classe</value>
+  </data>
+  <data name="lblPhysicalFeature.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPhysicalFeature.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="lblPhysicalFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>352, 20</value>
+  </data>
+  <data name="lblPhysicalFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>124, 16</value>
+  </data>
+  <data name="lblPhysicalFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lblPhysicalFeature.Text" xml:space="preserve">
+    <value>Caractéristiques physiques</value>
+  </data>
+  <data name="lblFeaturePic.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFeaturePic.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>369, 276</value>
+  </data>
+  <data name="lblFeaturePic.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="lblFeaturePic.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="lblFeaturePic.Text" xml:space="preserve">
+    <value>Fonction photo</value>
+  </data>
+  <data name="cmdViewFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>444, 5</value>
+  </data>
+  <data name="cmdViewFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="cmdViewFeature.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>334, 5</value>
+  </data>
+  <data name="cmdDeleteFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="cmdDeleteFeature.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>132, 5</value>
+  </data>
+  <data name="cmdUpdateFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdUpdateFeature.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>31, 5</value>
+  </data>
+  <data name="cmdAddFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdAddFeature.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="cmdClearFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>233, 4</value>
+  </data>
+  <data name="cmdClearFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 27</value>
+  </data>
+  <data name="cmdClearFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="cmdClearFeature.Text" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="GroupBox15.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox15.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 302</value>
+  </data>
+  <data name="GroupBox15.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>572, 34</value>
+  </data>
+  <data name="GroupBox15.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="cmdPrev6.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdPrev6.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdPrev6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="cmdPrev6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdPrev6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="cmdFirst6.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdFirst6.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdFirst6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="cmdFirst6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdFirst6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="cmdLast6.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdLast6.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdLast6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>531, 10</value>
+  </data>
+  <data name="cmdLast6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdLast6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="cmdNext6.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="cmdNext6.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="cmdNext6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>495, 10</value>
+  </data>
+  <data name="cmdNext6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="cmdNext6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtNav6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 11</value>
+  </data>
+  <data name="txtNav6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>420, 20</value>
+  </data>
+  <data name="txtNav6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="txtNav6.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox16.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox16.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 336</value>
+  </data>
+  <data name="GroupBox16.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>572, 33</value>
+  </data>
+  <data name="GroupBox16.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="PictureBox1.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="PictureBox1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>283, 29</value>
+  </data>
+  <data name="PictureBox1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>271, 244</value>
+  </data>
+  <data name="PictureBox1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="txtFeatureEdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>114, 123</value>
+  </data>
+  <data name="txtFeatureEdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtFeatureEdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="lblStnId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStnId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>35, 53</value>
+  </data>
+  <data name="lblStnId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblStnId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="lblStnId.Text" xml:space="preserve">
+    <value>ID de la station</value>
+  </data>
+  <data name="txtFeatureStation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>114, 50</value>
+  </data>
+  <data name="txtFeatureStation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="txtFeatureStation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="txtFeatureBdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>112, 86</value>
+  </data>
+  <data name="txtFeatureBdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtFeatureBdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="txtFeatureDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>114, 153</value>
+  </data>
+  <data name="txtFeatureDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtFeatureDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="txtFeatureClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>116, 194</value>
+  </data>
+  <data name="txtFeatureClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="txtFeatureClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="lblFeatureDescription.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFeatureDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>26, 157</value>
+  </data>
+  <data name="lblFeatureDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblFeatureDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="lblFeatureDescription.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblFeatureClass.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFeatureClass.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>28, 198</value>
+  </data>
+  <data name="lblFeatureClass.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="lblFeatureClass.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblFeatureClass.Text" xml:space="preserve">
+    <value>Classe d'entités</value>
+  </data>
+  <data name="lblFeatureBdate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFeatureBdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>26, 127</value>
+  </data>
+  <data name="lblFeatureBdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="lblFeatureBdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblFeatureBdate.Text" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="lblFeatureEdate.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFeatureEdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>26, 90</value>
+  </data>
+  <data name="lblFeatureEdate.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lblFeatureEdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="lblFeatureEdate.Text" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="grpPhysicalFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>76, 51</value>
+  </data>
+  <data name="grpPhysicalFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>578, 372</value>
+  </data>
+  <data name="grpPhysicalFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="grpPhysicalFeature.Text" xml:space="preserve">
+    <value>Détails de la fonction</value>
+  </data>
+  <data name="TabPhysicalFeature.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPhysicalFeature.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPhysicalFeature.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabPhysicalFeature.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="TabPhysicalFeature.Text" xml:space="preserve">
+    <value>Caractéristiques physiques</value>
+  </data>
+  <data name="Label7.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label7.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="Label7.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>289, 45</value>
+  </data>
+  <data name="Label7.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>175, 16</value>
+  </data>
+  <data name="Label7.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Définition d'archives papier</value>
+  </data>
+  <data name="cmdViewPaperArchive.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>397, 6</value>
+  </data>
+  <data name="cmdViewPaperArchive.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdViewPaperArchive.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="cmdViewPaperArchive.Text" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="cmdDeleteArchiveDef.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>275, 6</value>
+  </data>
+  <data name="cmdDeleteArchiveDef.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdDeleteArchiveDef.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="cmdDeleteArchiveDef.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmdUpdateArchiveDef.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>153, 6</value>
+  </data>
+  <data name="cmdUpdateArchiveDef.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdUpdateArchiveDef.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="cmdUpdateArchiveDef.Text" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="cmdAddArchiveDef.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>31, 6</value>
+  </data>
+  <data name="cmdAddArchiveDef.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 25</value>
+  </data>
+  <data name="cmdAddArchiveDef.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="cmdAddArchiveDef.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="GroupBox18.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox18.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 193</value>
+  </data>
+  <data name="GroupBox18.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>519, 34</value>
+  </data>
+  <data name="GroupBox18.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="Button7.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button7.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button7.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>39, 10</value>
+  </data>
+  <data name="Button7.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="Button7.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="Button8.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button8.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button8.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>1, 10</value>
+  </data>
+  <data name="Button8.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="Button8.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="Button9.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button9.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button9.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>479, 10</value>
+  </data>
+  <data name="Button9.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="Button9.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="Button10.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="Button10.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button10.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>441, 10</value>
+  </data>
+  <data name="Button10.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="Button10.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="TextBox1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>77, 11</value>
+  </data>
+  <data name="TextBox1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>365, 20</value>
+  </data>
+  <data name="TextBox1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="TextBox1.TextAlign" xml:space="preserve" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="GroupBox19.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="GroupBox19.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>3, 227</value>
+  </data>
+  <data name="GroupBox19.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>519, 33</value>
+  </data>
+  <data name="GroupBox19.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="txtFormDescription.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>211, 113</value>
+  </data>
+  <data name="txtFormDescription.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="txtFormDescription.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="txtFormId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>211, 72</value>
+  </data>
+  <data name="txtFormId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>152, 20</value>
+  </data>
+  <data name="txtFormId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lbldescri.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbldescri.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>140, 120</value>
+  </data>
+  <data name="lbldescri.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="lbldescri.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="lbldescri.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="lblFormId.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFormId.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>140, 79</value>
+  </data>
+  <data name="lblFormId.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblFormId.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblFormId.Text" xml:space="preserve">
+    <value>ID du formulaire</value>
+  </data>
+  <data name="GroupBox17.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>101, 79</value>
+  </data>
+  <data name="GroupBox17.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>525, 263</value>
+  </data>
+  <data name="GroupBox17.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="GroupBox17.Text" xml:space="preserve">
+    <value>Définitions</value>
+  </data>
+  <data name="TabPaperArchive.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPaperArchive.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPaperArchive.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>740, 450</value>
+  </data>
+  <data name="TabPaperArchive.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="TabPaperArchive.Text" xml:space="preserve">
+    <value>Archives papier</value>
+  </data>
+  <data name="TabMetadata.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 27</value>
+  </data>
+  <data name="TabMetadata.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>748, 476</value>
+  </data>
+  <data name="TabMetadata.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CloseToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Fermer</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Aide</value>
+  </data>
+  <data name="MenuMetadata.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="MenuMetadata.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>760, 24</value>
+  </data>
+  <data name="MenuMetadata.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="MenuMetadata.Text" xml:space="preserve">
+    <value>MenuStrip1</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>760, 515</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Gestion des métadonnées</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>
