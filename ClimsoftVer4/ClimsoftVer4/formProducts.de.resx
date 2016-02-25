@@ -158,20 +158,11 @@
   <data name="OpenListToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
-  <data name="OpenListToolStripMenuItem.Text" xml:space="preserve">
-    <value>Technische Daten zu speichern</value>
-  </data>
   <data name="ToolStripMenuItem2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
-  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Öffnen von Spezifikationen</value>
-  </data>
   <data name="OpenListToolStripMenuItem1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
-  </data>
-  <data name="OpenListToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Neues Produkt hinzufügen</value>
   </data>
   <data name="ToolStripMenuItem1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>176, 6</value>
@@ -179,26 +170,14 @@
   <data name="ExitToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
   </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Beenden</value>
-  </data>
   <data name="FileToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datei</value>
   </data>
   <data name="EditToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>39, 20</value>
   </data>
-  <data name="EditToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bearbeiten</value>
-  </data>
   <data name="HelpToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hilfe</value>
   </data>
   <data name="MenuStrip1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -208,9 +187,6 @@
   </data>
   <data name="MenuStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
   </data>
   <data name="lblProducts.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -227,17 +203,11 @@
   <data name="lblProducts.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="lblProducts.Text" xml:space="preserve">
-    <value>Produkte</value>
-  </data>
   <data name="NewToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="NewToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
-  </data>
-  <data name="NewToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Neu</value>
   </data>
   <data name="OpenToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -245,26 +215,17 @@
   <data name="OpenToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="OpenToolStripButton.Text" xml:space="preserve">
-    <value>Ö&amp;ffnen</value>
-  </data>
   <data name="SaveToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="SaveToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="SaveToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Speichern</value>
-  </data>
   <data name="PrintToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="PrintToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
-  </data>
-  <data name="PrintToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Drucken</value>
   </data>
   <data name="toolStripSeparator.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -275,26 +236,17 @@
   <data name="CutToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="CutToolStripButton.Text" xml:space="preserve">
-    <value>C&amp;Ut</value>
-  </data>
   <data name="CopyToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="CopyToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="CopyToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Kopieren</value>
-  </data>
   <data name="PasteToolStripButton.ImageTransparentColor" xml:space="preserve" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="PasteToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
-  </data>
-  <data name="PasteToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Einfügen</value>
   </data>
   <data name="toolStripSeparator1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -305,9 +257,6 @@
   <data name="HelpToolStripButton.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="HelpToolStripButton.Text" xml:space="preserve">
-    <value>&amp;?</value>
-  </data>
   <data name="ToolStrip1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -316,9 +265,6 @@
   </data>
   <data name="ToolStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>13</value>
-  </data>
-  <data name="ToolStrip1.Text" xml:space="preserve">
-    <value>ToolStrip1</value>
   </data>
   <data name="ToolStrip2.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -335,9 +281,6 @@
   <data name="ToolStripButton1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>40, 22</value>
   </data>
-  <data name="ToolStripButton1.Text" xml:space="preserve">
-    <value>Schließen</value>
-  </data>
   <data name="ToolStrip2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>0, 429</value>
   </data>
@@ -346,9 +289,6 @@
   </data>
   <data name="ToolStrip2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>16</value>
-  </data>
-  <data name="ToolStrip2.Text" xml:space="preserve">
-    <value>ToolStrip2</value>
   </data>
   <data name="cmbProductsCategory.ItemHeight" xml:space="preserve" type="System.Int32, mscorlib">
     <value>13</value>
@@ -376,9 +316,6 @@
   </data>
   <data name="lblProductsCategory.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>17</value>
-  </data>
-  <data name="lblProductsCategory.Text" xml:space="preserve">
-    <value>Wählen Sie die Produktkategorie</value>
   </data>
   <data name="lstvProducts.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>21, 41</value>
@@ -409,9 +346,6 @@
   </data>
   <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>515, 454</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Produktliste</value>
   </data>
   <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

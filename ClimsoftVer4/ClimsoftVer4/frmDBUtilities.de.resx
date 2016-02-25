@@ -3151,74 +3151,38 @@
   <data name="ObsInitialToFinalToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>169, 22</value>
   </data>
-  <data name="ObsInitialToFinalToolStripMenuItem.Text" xml:space="preserve">
-    <value>OBS-Initial bis Finale</value>
-  </data>
   <data name="ImportToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
-  </data>
-  <data name="ImportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hochladen</value>
   </data>
   <data name="GenerateValuesToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>102, 20</value>
   </data>
-  <data name="GenerateValuesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Werte zu generieren</value>
-  </data>
   <data name="CLICOMDailyToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
-  </data>
-  <data name="CLICOMDailyToolStripMenuItem.Text" xml:space="preserve">
-    <value>CLICOM täglich</value>
   </data>
   <data name="AWSToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
   </data>
-  <data name="AWSToolStripMenuItem.Text" xml:space="preserve">
-    <value>AWS </value>
-  </data>
   <data name="NOAAGTSToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
-  </data>
-  <data name="NOAAGTSToolStripMenuItem.Text" xml:space="preserve">
-    <value>NOAA-GTS</value>
   </data>
   <data name="CLIMSOFTV3ToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>153, 22</value>
   </data>
-  <data name="CLIMSOFTV3ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datenmigration</value>
-  </data>
   <data name="ExternalDataToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>87, 20</value>
-  </data>
-  <data name="ExternalDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>Externe Daten</value>
   </data>
   <data name="BackupToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
   </data>
-  <data name="BackupToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sicherung</value>
-  </data>
   <data name="RestoreToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
-  </data>
-  <data name="RestoreToolStripMenuItem.Text" xml:space="preserve">
-    <value>Wiederherstellen</value>
   </data>
   <data name="OptionsToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
   </data>
-  <data name="OptionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Optionen</value>
-  </data>
   <data name="HelpToolStripMenuItem.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hilfe</value>
   </data>
   <data name="MenuStrip1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -3229,9 +3193,6 @@
   <data name="MenuStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
   <data name="Button1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>305, 0</value>
   </data>
@@ -3240,9 +3201,6 @@
   </data>
   <data name="Button1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>OK</value>
   </data>
   <data name="Panel1.Dock" xml:space="preserve" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -3283,15 +3241,6 @@
   <data name="ToolStripLabel1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>55, 22</value>
   </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>der Datenbank</value>
-  </data>
-  <data name="cmbDb.Items" xml:space="preserve">
-    <value>Anfang</value>
-  </data>
-  <data name="cmbDb.Items1" xml:space="preserve">
-    <value>Endgültig</value>
-  </data>
   <data name="cmbDb.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
   </data>
@@ -3304,9 +3253,6 @@
   <data name="ToolStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="ToolStrip1.Text" xml:space="preserve">
-    <value>ToolStrip1</value>
-  </data>
   <data name="cmdUpload.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>167, 6</value>
   </data>
@@ -3315,9 +3261,6 @@
   </data>
   <data name="cmdUpload.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>7</value>
-  </data>
-  <data name="cmdUpload.Text" xml:space="preserve">
-    <value>Start Upload</value>
   </data>
   <data name="cmdUpload.Visible" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3384,9 +3327,6 @@
   </data>
   <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Datenbank-Dienstprogramme</value>
   </data>
   <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

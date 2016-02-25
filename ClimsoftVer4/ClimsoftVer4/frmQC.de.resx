@@ -27,9 +27,6 @@
   <data name="cmdApply.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="cmdApply.Text" xml:space="preserve">
-    <value>Übernehmen</value>
-  </data>
   <data name="cmdOk.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>320, 344</value>
   </data>
@@ -38,9 +35,6 @@
   </data>
   <data name="cmdOk.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="cmdOk.Text" xml:space="preserve">
-    <value>OK</value>
   </data>
   <data name="cmdCancel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>401, 344</value>
@@ -51,9 +45,6 @@
   <data name="cmdCancel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="cmdCancel.Text" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
   <data name="cmdHelp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>563, 344</value>
   </data>
@@ -62,9 +53,6 @@
   </data>
   <data name="cmdHelp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>4</value>
-  </data>
-  <data name="cmdHelp.Text" xml:space="preserve">
-    <value>Hilfe</value>
   </data>
   <data name="lblQcAdvanced.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -77,9 +65,6 @@
   </data>
   <data name="lblQcAdvanced.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="lblQcAdvanced.Text" xml:space="preserve">
-    <value>Erweiterte QC</value>
   </data>
   <data name="pnlAdvanced.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>363, 39</value>
@@ -102,9 +87,6 @@
   <data name="optInterElement.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="optInterElement.Text" xml:space="preserve">
-    <value>Inter Element Vergleich Kontrollen</value>
-  </data>
   <data name="optAbsoluteLimits.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -117,9 +99,6 @@
   <data name="optAbsoluteLimits.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="optAbsoluteLimits.Text" xml:space="preserve">
-    <value>Absolute Grenzen Kontrollen</value>
-  </data>
   <data name="lblPnl.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -131,9 +110,6 @@
   </data>
   <data name="lblPnl.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="lblPnl.Text" xml:space="preserve">
-    <value>Norm QC</value>
   </data>
   <data name="pnlQcStandard.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>26, 40</value>
@@ -153,9 +129,6 @@
   <data name="MenuStrip1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="MenuStrip1.Text" xml:space="preserve">
-    <value>MenuStrip1</value>
-  </data>
   <data name="btnUpdate.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
     <value>26, 344</value>
   </data>
@@ -165,17 +138,11 @@
   <data name="btnUpdate.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="btnUpdate.Text" xml:space="preserve">
-    <value>Aktualisieren</value>
-  </data>
   <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
     <value>669, 389</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Qualitätskontrolle</value>
   </data>
   <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
