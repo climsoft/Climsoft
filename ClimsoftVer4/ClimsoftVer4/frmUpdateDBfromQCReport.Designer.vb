@@ -22,7 +22,6 @@ Partial Class frmUpdateDBfromQCReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUpdateDBfromQCReport))
         Me.txtQCReportOriginal = New System.Windows.Forms.TextBox()
         Me.lblQCReportOriginal = New System.Windows.Forms.Label()
         Me.txtQCReportUpdated = New System.Windows.Forms.TextBox()
@@ -36,58 +35,87 @@ Partial Class frmUpdateDBfromQCReport
         '
         'txtQCReportOriginal
         '
-        resources.ApplyResources(Me.txtQCReportOriginal, "txtQCReportOriginal")
+        Me.txtQCReportOriginal.Location = New System.Drawing.Point(171, 47)
         Me.txtQCReportOriginal.Name = "txtQCReportOriginal"
+        Me.txtQCReportOriginal.Size = New System.Drawing.Size(310, 20)
+        Me.txtQCReportOriginal.TabIndex = 0
         '
         'lblQCReportOriginal
         '
-        resources.ApplyResources(Me.lblQCReportOriginal, "lblQCReportOriginal")
+        Me.lblQCReportOriginal.AutoSize = True
+        Me.lblQCReportOriginal.Location = New System.Drawing.Point(32, 50)
         Me.lblQCReportOriginal.Name = "lblQCReportOriginal"
+        Me.lblQCReportOriginal.Size = New System.Drawing.Size(95, 13)
+        Me.lblQCReportOriginal.TabIndex = 1
+        Me.lblQCReportOriginal.Text = "Original QC Report"
         '
         'txtQCReportUpdated
         '
-        resources.ApplyResources(Me.txtQCReportUpdated, "txtQCReportUpdated")
+        Me.txtQCReportUpdated.Location = New System.Drawing.Point(171, 94)
         Me.txtQCReportUpdated.Name = "txtQCReportUpdated"
+        Me.txtQCReportUpdated.Size = New System.Drawing.Size(310, 20)
+        Me.txtQCReportUpdated.TabIndex = 1
         '
         'lblQCReportUpdated
         '
-        resources.ApplyResources(Me.lblQCReportUpdated, "lblQCReportUpdated")
+        Me.lblQCReportUpdated.AutoSize = True
+        Me.lblQCReportUpdated.Location = New System.Drawing.Point(32, 97)
         Me.lblQCReportUpdated.Name = "lblQCReportUpdated"
+        Me.lblQCReportUpdated.Size = New System.Drawing.Size(101, 13)
+        Me.lblQCReportUpdated.TabIndex = 3
+        Me.lblQCReportUpdated.Text = "Updated QC Report"
         '
         'btnOK
         '
-        resources.ApplyResources(Me.btnOK, "btnOK")
+        Me.btnOK.Enabled = False
+        Me.btnOK.Location = New System.Drawing.Point(210, 148)
         Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnOK.TabIndex = 2
+        Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        resources.ApplyResources(Me.btnCancel, "btnCancel")
+        Me.btnCancel.Location = New System.Drawing.Point(308, 148)
         Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Location = New System.Drawing.Point(406, 148)
         Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Help"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnBrowseQCOriginal
         '
-        resources.ApplyResources(Me.btnBrowseQCOriginal, "btnBrowseQCOriginal")
+        Me.btnBrowseQCOriginal.Location = New System.Drawing.Point(487, 45)
         Me.btnBrowseQCOriginal.Name = "btnBrowseQCOriginal"
+        Me.btnBrowseQCOriginal.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowseQCOriginal.TabIndex = 10
+        Me.btnBrowseQCOriginal.Text = "Browse"
         Me.btnBrowseQCOriginal.UseVisualStyleBackColor = True
         '
         'btnQCUpdated
         '
-        resources.ApplyResources(Me.btnQCUpdated, "btnQCUpdated")
+        Me.btnQCUpdated.Location = New System.Drawing.Point(487, 92)
         Me.btnQCUpdated.Name = "btnQCUpdated"
+        Me.btnQCUpdated.Size = New System.Drawing.Size(75, 23)
+        Me.btnQCUpdated.TabIndex = 11
+        Me.btnQCUpdated.Text = "Browse"
         Me.btnQCUpdated.UseVisualStyleBackColor = True
         '
         'frmUpdateDBfromQCReport
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(594, 200)
         Me.Controls.Add(Me.btnQCUpdated)
         Me.Controls.Add(Me.btnBrowseQCOriginal)
         Me.Controls.Add(Me.Button1)
@@ -100,6 +128,7 @@ Partial Class frmUpdateDBfromQCReport
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmUpdateDBfromQCReport"
+        Me.Text = "Update ObservationInitial from QC Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

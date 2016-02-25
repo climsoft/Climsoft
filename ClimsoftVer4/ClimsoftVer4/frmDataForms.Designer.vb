@@ -22,7 +22,6 @@ Partial Class frmDataForms
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDataForms))
         Me.lstvForms = New System.Windows.Forms.ListView()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
@@ -37,38 +36,52 @@ Partial Class frmDataForms
         Me.lstvForms.FullRowSelect = True
         Me.lstvForms.GridLines = True
         Me.lstvForms.LabelEdit = True
-        resources.ApplyResources(Me.lstvForms, "lstvForms")
+        Me.lstvForms.Location = New System.Drawing.Point(12, 12)
         Me.lstvForms.Name = "lstvForms"
+        Me.lstvForms.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lstvForms.Size = New System.Drawing.Size(685, 329)
+        Me.lstvForms.TabIndex = 0
         Me.lstvForms.UseCompatibleStateImageBehavior = False
         Me.lstvForms.View = System.Windows.Forms.View.Details
         '
         'cmdApply
         '
-        resources.ApplyResources(Me.cmdApply, "cmdApply")
+        Me.cmdApply.Location = New System.Drawing.Point(422, 347)
         Me.cmdApply.Name = "cmdApply"
+        Me.cmdApply.Size = New System.Drawing.Size(69, 27)
+        Me.cmdApply.TabIndex = 1
+        Me.cmdApply.Text = "Apply"
         Me.cmdApply.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.Location = New System.Drawing.Point(614, 347)
         Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(69, 27)
+        Me.cmdHelp.TabIndex = 2
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
+        Me.cmdCancel.Location = New System.Drawing.Point(518, 347)
         Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(69, 27)
+        Me.cmdCancel.TabIndex = 3
+        Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'frmDataForms
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(697, 385)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.lstvForms)
         Me.Name = "frmDataForms"
+        Me.Text = "Data Forms"
         Me.ResumeLayout(False)
 
     End Sub

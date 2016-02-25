@@ -22,7 +22,6 @@ Partial Class frmLaunchPad
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLaunchPad))
         Me.btnStationInformation = New System.Windows.Forms.Button()
         Me.btnElementInformation = New System.Windows.Forms.Button()
         Me.btnSynopticData = New System.Windows.Forms.Button()
@@ -31,38 +30,52 @@ Partial Class frmLaunchPad
         '
         'btnStationInformation
         '
-        resources.ApplyResources(Me.btnStationInformation, "btnStationInformation")
+        Me.btnStationInformation.Location = New System.Drawing.Point(128, 51)
         Me.btnStationInformation.Name = "btnStationInformation"
+        Me.btnStationInformation.Size = New System.Drawing.Size(161, 23)
+        Me.btnStationInformation.TabIndex = 0
+        Me.btnStationInformation.Text = "Station Information"
         Me.btnStationInformation.UseVisualStyleBackColor = True
         '
         'btnElementInformation
         '
-        resources.ApplyResources(Me.btnElementInformation, "btnElementInformation")
+        Me.btnElementInformation.Location = New System.Drawing.Point(128, 100)
         Me.btnElementInformation.Name = "btnElementInformation"
+        Me.btnElementInformation.Size = New System.Drawing.Size(161, 23)
+        Me.btnElementInformation.TabIndex = 1
+        Me.btnElementInformation.Text = "Element Information"
         Me.btnElementInformation.UseVisualStyleBackColor = True
         '
         'btnSynopticData
         '
-        resources.ApplyResources(Me.btnSynopticData, "btnSynopticData")
+        Me.btnSynopticData.Location = New System.Drawing.Point(128, 147)
         Me.btnSynopticData.Name = "btnSynopticData"
+        Me.btnSynopticData.Size = New System.Drawing.Size(161, 23)
+        Me.btnSynopticData.TabIndex = 2
+        Me.btnSynopticData.Text = "Synoptic Data Key-entry"
         Me.btnSynopticData.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        resources.ApplyResources(Me.btnClose, "btnClose")
+        Me.btnClose.Location = New System.Drawing.Point(128, 197)
         Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(160, 23)
+        Me.btnClose.TabIndex = 3
+        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'frmLaunchPad
+        'FormLaunchPad
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(432, 297)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnSynopticData)
         Me.Controls.Add(Me.btnElementInformation)
         Me.Controls.Add(Me.btnStationInformation)
         Me.MaximizeBox = False
-        Me.Name = "frmLaunchPad"
+        Me.Name = "FormLaunchPad"
+        Me.Text = "FormLaunchPad"
         Me.ResumeLayout(False)
 
     End Sub

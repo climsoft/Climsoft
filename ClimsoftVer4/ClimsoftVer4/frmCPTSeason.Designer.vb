@@ -22,7 +22,6 @@ Partial Class frmCPTSeason
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCPTSeason))
         Me.grpCommands = New System.Windows.Forms.GroupBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -39,62 +38,90 @@ Partial Class frmCPTSeason
         Me.grpCommands.Controls.Add(Me.cmdHelp)
         Me.grpCommands.Controls.Add(Me.cmdCancel)
         Me.grpCommands.Controls.Add(Me.cmdOK)
-        resources.ApplyResources(Me.grpCommands, "grpCommands")
+        Me.grpCommands.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.grpCommands.Location = New System.Drawing.Point(0, 103)
         Me.grpCommands.Name = "grpCommands"
+        Me.grpCommands.Size = New System.Drawing.Size(526, 30)
+        Me.grpCommands.TabIndex = 0
         Me.grpCommands.TabStop = False
         '
         'cmdHelp
         '
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.cmdHelp.Location = New System.Drawing.Point(349, 5)
         Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(60, 25)
+        Me.cmdHelp.TabIndex = 3
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdCancel
         '
-        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
+        Me.cmdCancel.Location = New System.Drawing.Point(239, 5)
         Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(60, 25)
+        Me.cmdCancel.TabIndex = 2
+        Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
         'cmdOK
         '
-        resources.ApplyResources(Me.cmdOK, "cmdOK")
+        Me.cmdOK.Location = New System.Drawing.Point(131, 5)
         Me.cmdOK.Name = "cmdOK"
+        Me.cmdOK.Size = New System.Drawing.Size(60, 25)
+        Me.cmdOK.TabIndex = 1
+        Me.cmdOK.Text = "OK"
         Me.cmdOK.UseVisualStyleBackColor = True
         '
         'lblStartMonth
         '
-        resources.ApplyResources(Me.lblStartMonth, "lblStartMonth")
+        Me.lblStartMonth.AutoSize = True
+        Me.lblStartMonth.Location = New System.Drawing.Point(36, 49)
         Me.lblStartMonth.Name = "lblStartMonth"
+        Me.lblStartMonth.Size = New System.Drawing.Size(62, 13)
+        Me.lblStartMonth.TabIndex = 2
+        Me.lblStartMonth.Text = "Start Month"
         '
         'cmbStartMonth
         '
         Me.cmbStartMonth.FormattingEnabled = True
-        Me.cmbStartMonth.Items.AddRange(New Object() {resources.GetString("cmbStartMonth.Items"), resources.GetString("cmbStartMonth.Items1"), resources.GetString("cmbStartMonth.Items2"), resources.GetString("cmbStartMonth.Items3"), resources.GetString("cmbStartMonth.Items4"), resources.GetString("cmbStartMonth.Items5"), resources.GetString("cmbStartMonth.Items6"), resources.GetString("cmbStartMonth.Items7"), resources.GetString("cmbStartMonth.Items8"), resources.GetString("cmbStartMonth.Items9"), resources.GetString("cmbStartMonth.Items10"), resources.GetString("cmbStartMonth.Items11")})
-        resources.ApplyResources(Me.cmbStartMonth, "cmbStartMonth")
+        Me.cmbStartMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+        Me.cmbStartMonth.Location = New System.Drawing.Point(104, 45)
         Me.cmbStartMonth.Name = "cmbStartMonth"
+        Me.cmbStartMonth.Size = New System.Drawing.Size(49, 21)
+        Me.cmbStartMonth.TabIndex = 3
+        Me.cmbStartMonth.Text = "3"
         '
         'cmbEndMonth
         '
         Me.cmbEndMonth.FormattingEnabled = True
-        Me.cmbEndMonth.Items.AddRange(New Object() {resources.GetString("cmbEndMonth.Items"), resources.GetString("cmbEndMonth.Items1"), resources.GetString("cmbEndMonth.Items2"), resources.GetString("cmbEndMonth.Items3"), resources.GetString("cmbEndMonth.Items4"), resources.GetString("cmbEndMonth.Items5"), resources.GetString("cmbEndMonth.Items6"), resources.GetString("cmbEndMonth.Items7"), resources.GetString("cmbEndMonth.Items8"), resources.GetString("cmbEndMonth.Items9"), resources.GetString("cmbEndMonth.Items10"), resources.GetString("cmbEndMonth.Items11")})
-        resources.ApplyResources(Me.cmbEndMonth, "cmbEndMonth")
+        Me.cmbEndMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+        Me.cmbEndMonth.Location = New System.Drawing.Point(381, 45)
         Me.cmbEndMonth.Name = "cmbEndMonth"
+        Me.cmbEndMonth.Size = New System.Drawing.Size(49, 21)
+        Me.cmbEndMonth.TabIndex = 5
+        Me.cmbEndMonth.Text = "5"
         '
         'lblEndMonth
         '
-        resources.ApplyResources(Me.lblEndMonth, "lblEndMonth")
+        Me.lblEndMonth.AutoSize = True
+        Me.lblEndMonth.Location = New System.Drawing.Point(313, 49)
         Me.lblEndMonth.Name = "lblEndMonth"
+        Me.lblEndMonth.Size = New System.Drawing.Size(62, 13)
+        Me.lblEndMonth.TabIndex = 4
+        Me.lblEndMonth.Text = "Start Month"
         '
         'frmCPTSeason
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(526, 133)
         Me.Controls.Add(Me.cmbEndMonth)
         Me.Controls.Add(Me.lblEndMonth)
         Me.Controls.Add(Me.cmbStartMonth)
         Me.Controls.Add(Me.lblStartMonth)
         Me.Controls.Add(Me.grpCommands)
         Me.Name = "frmCPTSeason"
+        Me.Text = "CPT Season Months"
         Me.grpCommands.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()

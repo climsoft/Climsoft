@@ -22,7 +22,6 @@ Partial Class frmGeneralSettings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmGeneralSettings))
         Me.txtKeyName = New System.Windows.Forms.TextBox()
         Me.txtKeyValue = New System.Windows.Forms.TextBox()
         Me.txtKeyDescription = New System.Windows.Forms.TextBox()
@@ -45,109 +44,173 @@ Partial Class frmGeneralSettings
         '
         'txtKeyName
         '
-        resources.ApplyResources(Me.txtKeyName, "txtKeyName")
+        Me.txtKeyName.Enabled = False
+        Me.txtKeyName.Location = New System.Drawing.Point(136, 40)
         Me.txtKeyName.Name = "txtKeyName"
+        Me.txtKeyName.Size = New System.Drawing.Size(80, 20)
+        Me.txtKeyName.TabIndex = 0
         '
         'txtKeyValue
         '
-        resources.ApplyResources(Me.txtKeyValue, "txtKeyValue")
+        Me.txtKeyValue.Location = New System.Drawing.Point(319, 40)
         Me.txtKeyValue.Name = "txtKeyValue"
+        Me.txtKeyValue.Size = New System.Drawing.Size(287, 20)
+        Me.txtKeyValue.TabIndex = 1
         '
         'txtKeyDescription
         '
-        resources.ApplyResources(Me.txtKeyDescription, "txtKeyDescription")
+        Me.txtKeyDescription.Enabled = False
+        Me.txtKeyDescription.Location = New System.Drawing.Point(136, 90)
         Me.txtKeyDescription.Name = "txtKeyDescription"
+        Me.txtKeyDescription.Size = New System.Drawing.Size(470, 20)
+        Me.txtKeyDescription.TabIndex = 2
         '
         'lblKeyName
         '
-        resources.ApplyResources(Me.lblKeyName, "lblKeyName")
+        Me.lblKeyName.AutoSize = True
+        Me.lblKeyName.Location = New System.Drawing.Point(26, 43)
         Me.lblKeyName.Name = "lblKeyName"
+        Me.lblKeyName.Size = New System.Drawing.Size(71, 13)
+        Me.lblKeyName.TabIndex = 3
+        Me.lblKeyName.Text = "Setting Name"
         '
         'lblKeyValue
         '
-        resources.ApplyResources(Me.lblKeyValue, "lblKeyValue")
+        Me.lblKeyValue.AutoSize = True
+        Me.lblKeyValue.Location = New System.Drawing.Point(230, 43)
         Me.lblKeyValue.Name = "lblKeyValue"
+        Me.lblKeyValue.Size = New System.Drawing.Size(70, 13)
+        Me.lblKeyValue.TabIndex = 4
+        Me.lblKeyValue.Text = "Setting Value"
         '
         'lblKeyDescription
         '
-        resources.ApplyResources(Me.lblKeyDescription, "lblKeyDescription")
+        Me.lblKeyDescription.AutoSize = True
+        Me.lblKeyDescription.Location = New System.Drawing.Point(27, 97)
         Me.lblKeyDescription.Name = "lblKeyDescription"
+        Me.lblKeyDescription.Size = New System.Drawing.Size(96, 13)
+        Me.lblKeyDescription.TabIndex = 5
+        Me.lblKeyDescription.Text = "Setting Description"
         '
         'btnHelp
         '
-        resources.ApplyResources(Me.btnHelp, "btnHelp")
+        Me.btnHelp.Location = New System.Drawing.Point(548, 193)
         Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.TabIndex = 317
+        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'btnClear
         '
-        resources.ApplyResources(Me.btnClear, "btnClear")
+        Me.btnClear.Enabled = False
+        Me.btnClear.Location = New System.Drawing.Point(385, 194)
         Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 315
+        Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnCommit
         '
-        resources.ApplyResources(Me.btnCommit, "btnCommit")
+        Me.btnCommit.Enabled = False
+        Me.btnCommit.Location = New System.Drawing.Point(137, 194)
         Me.btnCommit.Name = "btnCommit"
+        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.TabIndex = 311
+        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.Enabled = False
+        Me.btnDelete.Location = New System.Drawing.Point(304, 194)
         Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 314
+        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        resources.ApplyResources(Me.btnAddNew, "btnAddNew")
+        Me.btnAddNew.Enabled = False
+        Me.btnAddNew.Location = New System.Drawing.Point(55, 194)
         Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 312
+        Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
+        Me.btnUpdate.Location = New System.Drawing.Point(218, 194)
         Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 313
+        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnMovePrevious
         '
-        resources.ApplyResources(Me.btnMovePrevious, "btnMovePrevious")
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(223, 154)
         Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.TabIndex = 322
+        Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
         'btnMoveFirst
         '
-        resources.ApplyResources(Me.btnMoveFirst, "btnMoveFirst")
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(176, 154)
         Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 321
+        Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
         'btnMoveLast
         '
-        resources.ApplyResources(Me.btnMoveLast, "btnMoveLast")
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(466, 154)
         Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLast.TabIndex = 320
+        Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        resources.ApplyResources(Me.recNumberTextBox, "recNumberTextBox")
+        Me.recNumberTextBox.Location = New System.Drawing.Point(275, 156)
         Me.recNumberTextBox.Name = "recNumberTextBox"
+        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
+        Me.recNumberTextBox.TabIndex = 319
         '
         'btnMoveNext
         '
-        resources.ApplyResources(Me.btnMoveNext, "btnMoveNext")
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(422, 154)
         Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.TabIndex = 318
+        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        resources.ApplyResources(Me.btnClose, "btnClose")
+        Me.btnClose.Location = New System.Drawing.Point(466, 194)
         Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 316
+        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'frmGeneralSettings
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(653, 246)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
@@ -169,6 +232,7 @@ Partial Class frmGeneralSettings
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmGeneralSettings"
+        Me.Text = "General Settings"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
