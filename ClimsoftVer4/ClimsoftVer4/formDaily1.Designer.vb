@@ -22,14 +22,15 @@ Partial Class formDaily1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formDaily1))
         Me.SuspendLayout()
         '
         'formDaily1
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(734, 631)
         Me.Name = "formDaily1"
+        Me.Text = "Daily Observations"
         Me.ResumeLayout(False)
 
     End Sub

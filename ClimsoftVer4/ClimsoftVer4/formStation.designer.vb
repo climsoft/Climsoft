@@ -23,7 +23,6 @@ Partial Class formStation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim StationIdLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formStation))
         Dim StationNameLabel As System.Windows.Forms.Label
         Dim LatitudeLabel As System.Windows.Forms.Label
         Dim LongitudeLabel As System.Windows.Forms.Label
@@ -84,230 +83,363 @@ Partial Class formStation
         '
         'StationIdLabel
         '
-        resources.ApplyResources(StationIdLabel, "StationIdLabel")
+        StationIdLabel.AutoSize = True
+        StationIdLabel.Location = New System.Drawing.Point(76, 37)
         StationIdLabel.Name = "StationIdLabel"
+        StationIdLabel.Size = New System.Drawing.Size(55, 13)
+        StationIdLabel.TabIndex = 1
+        StationIdLabel.Text = "Station Id:"
         '
         'StationNameLabel
         '
-        resources.ApplyResources(StationNameLabel, "StationNameLabel")
+        StationNameLabel.AutoSize = True
+        StationNameLabel.Location = New System.Drawing.Point(290, 40)
         StationNameLabel.Name = "StationNameLabel"
+        StationNameLabel.Size = New System.Drawing.Size(74, 13)
+        StationNameLabel.TabIndex = 3
+        StationNameLabel.Text = "Station Name:"
         '
         'LatitudeLabel
         '
-        resources.ApplyResources(LatitudeLabel, "LatitudeLabel")
+        LatitudeLabel.AutoSize = True
+        LatitudeLabel.Location = New System.Drawing.Point(85, 84)
         LatitudeLabel.Name = "LatitudeLabel"
+        LatitudeLabel.Size = New System.Drawing.Size(48, 13)
+        LatitudeLabel.TabIndex = 5
+        LatitudeLabel.Text = "Latitude:"
         '
         'LongitudeLabel
         '
-        resources.ApplyResources(LongitudeLabel, "LongitudeLabel")
+        LongitudeLabel.AutoSize = True
+        LongitudeLabel.Location = New System.Drawing.Point(309, 84)
         LongitudeLabel.Name = "LongitudeLabel"
+        LongitudeLabel.Size = New System.Drawing.Size(57, 13)
+        LongitudeLabel.TabIndex = 7
+        LongitudeLabel.Text = "Longitude:"
         '
         'ElevationLabel
         '
-        resources.ApplyResources(ElevationLabel, "ElevationLabel")
+        ElevationLabel.AutoSize = True
+        ElevationLabel.Location = New System.Drawing.Point(557, 87)
         ElevationLabel.Name = "ElevationLabel"
+        ElevationLabel.Size = New System.Drawing.Size(54, 13)
+        ElevationLabel.TabIndex = 9
+        ElevationLabel.Text = "Elevation:"
         '
         'GeoLocationMethodLabel
         '
-        resources.ApplyResources(GeoLocationMethodLabel, "GeoLocationMethodLabel")
+        GeoLocationMethodLabel.AutoSize = True
+        GeoLocationMethodLabel.Location = New System.Drawing.Point(24, 258)
         GeoLocationMethodLabel.Name = "GeoLocationMethodLabel"
+        GeoLocationMethodLabel.Size = New System.Drawing.Size(113, 13)
+        GeoLocationMethodLabel.TabIndex = 11
+        GeoLocationMethodLabel.Text = "Geo Location Method:"
         '
         'GeoLocationAccuracyLabel
         '
-        resources.ApplyResources(GeoLocationAccuracyLabel, "GeoLocationAccuracyLabel")
+        GeoLocationAccuracyLabel.AutoSize = True
+        GeoLocationAccuracyLabel.Location = New System.Drawing.Point(324, 258)
         GeoLocationAccuracyLabel.Name = "GeoLocationAccuracyLabel"
+        GeoLocationAccuracyLabel.Size = New System.Drawing.Size(122, 13)
+        GeoLocationAccuracyLabel.TabIndex = 13
+        GeoLocationAccuracyLabel.Text = "Geo Location Accuracy:"
         '
         'OpeningDatetimeLabel
         '
-        resources.ApplyResources(OpeningDatetimeLabel, "OpeningDatetimeLabel")
+        OpeningDatetimeLabel.AutoSize = True
+        OpeningDatetimeLabel.Location = New System.Drawing.Point(252, 170)
         OpeningDatetimeLabel.Name = "OpeningDatetimeLabel"
+        OpeningDatetimeLabel.Size = New System.Drawing.Size(95, 13)
+        OpeningDatetimeLabel.TabIndex = 15
+        OpeningDatetimeLabel.Text = "Opening Datetime:"
         '
         'ClosingDatetimeLabel
         '
-        resources.ApplyResources(ClosingDatetimeLabel, "ClosingDatetimeLabel")
+        ClosingDatetimeLabel.AutoSize = True
+        ClosingDatetimeLabel.Location = New System.Drawing.Point(252, 210)
         ClosingDatetimeLabel.Name = "ClosingDatetimeLabel"
+        ClosingDatetimeLabel.Size = New System.Drawing.Size(89, 13)
+        ClosingDatetimeLabel.TabIndex = 17
+        ClosingDatetimeLabel.Text = "Closing Datetime:"
         '
         'CountryLabel
         '
-        resources.ApplyResources(CountryLabel, "CountryLabel")
+        CountryLabel.AutoSize = True
+        CountryLabel.Location = New System.Drawing.Point(565, 43)
         CountryLabel.Name = "CountryLabel"
+        CountryLabel.Size = New System.Drawing.Size(46, 13)
+        CountryLabel.TabIndex = 19
+        CountryLabel.Text = "Country:"
         '
         'AuthorityLabel
         '
-        resources.ApplyResources(AuthorityLabel, "AuthorityLabel")
+        AuthorityLabel.AutoSize = True
+        AuthorityLabel.Location = New System.Drawing.Point(85, 124)
         AuthorityLabel.Name = "AuthorityLabel"
+        AuthorityLabel.Size = New System.Drawing.Size(51, 13)
+        AuthorityLabel.TabIndex = 21
+        AuthorityLabel.Text = "Authority:"
         '
         'AdminRegionLabel
         '
-        resources.ApplyResources(AdminRegionLabel, "AdminRegionLabel")
+        AdminRegionLabel.AutoSize = True
+        AdminRegionLabel.Location = New System.Drawing.Point(287, 127)
         AdminRegionLabel.Name = "AdminRegionLabel"
+        AdminRegionLabel.Size = New System.Drawing.Size(76, 13)
+        AdminRegionLabel.TabIndex = 23
+        AdminRegionLabel.Text = "Admin Region:"
         '
         'DrainageBasinLabel
         '
-        resources.ApplyResources(DrainageBasinLabel, "DrainageBasinLabel")
+        DrainageBasinLabel.AutoSize = True
+        DrainageBasinLabel.Location = New System.Drawing.Point(500, 124)
         DrainageBasinLabel.Name = "DrainageBasinLabel"
+        DrainageBasinLabel.Size = New System.Drawing.Size(82, 13)
+        DrainageBasinLabel.TabIndex = 25
+        DrainageBasinLabel.Text = "Drainage Basin:"
         '
         'CptSelectionLabel
         '
-        resources.ApplyResources(CptSelectionLabel, "CptSelectionLabel")
+        CptSelectionLabel.AutoSize = True
+        CptSelectionLabel.Location = New System.Drawing.Point(63, 213)
         CptSelectionLabel.Name = "CptSelectionLabel"
+        CptSelectionLabel.Size = New System.Drawing.Size(78, 13)
+        CptSelectionLabel.TabIndex = 29
+        CptSelectionLabel.Text = "CPT Selection:"
         '
         'StationOperationalLabel
         '
-        resources.ApplyResources(StationOperationalLabel, "StationOperationalLabel")
+        StationOperationalLabel.AutoSize = True
+        StationOperationalLabel.Location = New System.Drawing.Point(37, 173)
         StationOperationalLabel.Name = "StationOperationalLabel"
+        StationOperationalLabel.Size = New System.Drawing.Size(100, 13)
+        StationOperationalLabel.TabIndex = 31
+        StationOperationalLabel.Text = "Station Operational:"
         '
         'StationIdTextBox
         '
         Me.StationIdTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        resources.ApplyResources(Me.StationIdTextBox, "StationIdTextBox")
+        Me.StationIdTextBox.Location = New System.Drawing.Point(141, 34)
         Me.StationIdTextBox.Name = "StationIdTextBox"
+        Me.StationIdTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.StationIdTextBox.TabIndex = 0
         '
         'StationNameTextBox
         '
-        resources.ApplyResources(Me.StationNameTextBox, "StationNameTextBox")
+        Me.StationNameTextBox.Location = New System.Drawing.Point(368, 37)
         Me.StationNameTextBox.Name = "StationNameTextBox"
+        Me.StationNameTextBox.Size = New System.Drawing.Size(175, 20)
+        Me.StationNameTextBox.TabIndex = 1
         '
         'LatitudeTextBox
         '
-        resources.ApplyResources(Me.LatitudeTextBox, "LatitudeTextBox")
+        Me.LatitudeTextBox.Location = New System.Drawing.Point(141, 81)
         Me.LatitudeTextBox.Name = "LatitudeTextBox"
+        Me.LatitudeTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.LatitudeTextBox.TabIndex = 3
         '
         'LongitudeTextBox
         '
-        resources.ApplyResources(Me.LongitudeTextBox, "LongitudeTextBox")
+        Me.LongitudeTextBox.Location = New System.Drawing.Point(368, 81)
         Me.LongitudeTextBox.Name = "LongitudeTextBox"
+        Me.LongitudeTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.LongitudeTextBox.TabIndex = 4
         '
         'ElevationTextBox
         '
-        resources.ApplyResources(Me.ElevationTextBox, "ElevationTextBox")
+        Me.ElevationTextBox.Location = New System.Drawing.Point(616, 84)
         Me.ElevationTextBox.Name = "ElevationTextBox"
+        Me.ElevationTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.ElevationTextBox.TabIndex = 5
         '
         'GeoLocationMethodTextBox
         '
-        resources.ApplyResources(Me.GeoLocationMethodTextBox, "GeoLocationMethodTextBox")
+        Me.GeoLocationMethodTextBox.Location = New System.Drawing.Point(141, 255)
         Me.GeoLocationMethodTextBox.Name = "GeoLocationMethodTextBox"
+        Me.GeoLocationMethodTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.GeoLocationMethodTextBox.TabIndex = 13
         '
         'GeoLocationAccuracyTextBox
         '
-        resources.ApplyResources(Me.GeoLocationAccuracyTextBox, "GeoLocationAccuracyTextBox")
+        Me.GeoLocationAccuracyTextBox.Location = New System.Drawing.Point(459, 255)
         Me.GeoLocationAccuracyTextBox.Name = "GeoLocationAccuracyTextBox"
+        Me.GeoLocationAccuracyTextBox.Size = New System.Drawing.Size(109, 20)
+        Me.GeoLocationAccuracyTextBox.TabIndex = 14
         '
         'OpeningDatetimeDateTimePicker
         '
-        resources.ApplyResources(Me.OpeningDatetimeDateTimePicker, "OpeningDatetimeDateTimePicker")
+        Me.OpeningDatetimeDateTimePicker.CustomFormat = """MM dd yyyy hh mm ss"""
+        Me.OpeningDatetimeDateTimePicker.Location = New System.Drawing.Point(368, 166)
         Me.OpeningDatetimeDateTimePicker.Name = "OpeningDatetimeDateTimePicker"
+        Me.OpeningDatetimeDateTimePicker.Size = New System.Drawing.Size(200, 20)
+        Me.OpeningDatetimeDateTimePicker.TabIndex = 10
         '
         'ClosingDatetimeDateTimePicker
         '
-        resources.ApplyResources(Me.ClosingDatetimeDateTimePicker, "ClosingDatetimeDateTimePicker")
+        Me.ClosingDatetimeDateTimePicker.Location = New System.Drawing.Point(368, 206)
         Me.ClosingDatetimeDateTimePicker.Name = "ClosingDatetimeDateTimePicker"
+        Me.ClosingDatetimeDateTimePicker.Size = New System.Drawing.Size(200, 20)
+        Me.ClosingDatetimeDateTimePicker.TabIndex = 12
         '
         'CountryTextBox
         '
-        resources.ApplyResources(Me.CountryTextBox, "CountryTextBox")
+        Me.CountryTextBox.Location = New System.Drawing.Point(616, 40)
         Me.CountryTextBox.Name = "CountryTextBox"
+        Me.CountryTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.CountryTextBox.TabIndex = 2
         '
         'AuthorityTextBox
         '
-        resources.ApplyResources(Me.AuthorityTextBox, "AuthorityTextBox")
+        Me.AuthorityTextBox.Location = New System.Drawing.Point(141, 121)
         Me.AuthorityTextBox.Name = "AuthorityTextBox"
+        Me.AuthorityTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.AuthorityTextBox.TabIndex = 6
         '
         'AdminRegionTextBox
         '
-        resources.ApplyResources(Me.AdminRegionTextBox, "AdminRegionTextBox")
+        Me.AdminRegionTextBox.Location = New System.Drawing.Point(368, 124)
         Me.AdminRegionTextBox.Name = "AdminRegionTextBox"
+        Me.AdminRegionTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.AdminRegionTextBox.TabIndex = 7
         '
         'DrainageBasinTextBox
         '
-        resources.ApplyResources(Me.DrainageBasinTextBox, "DrainageBasinTextBox")
+        Me.DrainageBasinTextBox.Location = New System.Drawing.Point(616, 121)
         Me.DrainageBasinTextBox.Name = "DrainageBasinTextBox"
+        Me.DrainageBasinTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.DrainageBasinTextBox.TabIndex = 8
         '
         'CptSelectionTextBox
         '
-        resources.ApplyResources(Me.CptSelectionTextBox, "CptSelectionTextBox")
+        Me.CptSelectionTextBox.Location = New System.Drawing.Point(141, 210)
         Me.CptSelectionTextBox.Name = "CptSelectionTextBox"
+        Me.CptSelectionTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.CptSelectionTextBox.TabIndex = 11
         '
         'StationOperationalTextBox
         '
-        resources.ApplyResources(Me.StationOperationalTextBox, "StationOperationalTextBox")
+        Me.StationOperationalTextBox.Location = New System.Drawing.Point(141, 170)
         Me.StationOperationalTextBox.Name = "StationOperationalTextBox"
+        Me.StationOperationalTextBox.Size = New System.Drawing.Size(100, 20)
+        Me.StationOperationalTextBox.TabIndex = 9
         '
         'btnClose
         '
-        resources.ApplyResources(Me.btnClose, "btnClose")
+        Me.btnClose.Location = New System.Drawing.Point(527, 364)
         Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 33
+        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnMoveNext
         '
-        resources.ApplyResources(Me.btnMoveNext, "btnMoveNext")
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(477, 327)
         Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.TabIndex = 34
+        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        resources.ApplyResources(Me.recNumberTextBox, "recNumberTextBox")
+        Me.recNumberTextBox.Location = New System.Drawing.Point(330, 329)
         Me.recNumberTextBox.Name = "recNumberTextBox"
+        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
+        Me.recNumberTextBox.TabIndex = 35
         '
         'btnMoveLast
         '
-        resources.ApplyResources(Me.btnMoveLast, "btnMoveLast")
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(521, 327)
         Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(32, 23)
+        Me.btnMoveLast.TabIndex = 36
+        Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'btnMoveFirst
         '
-        resources.ApplyResources(Me.btnMoveFirst, "btnMoveFirst")
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(231, 327)
         Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 37
+        Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
         'btnMovePrevious
         '
-        resources.ApplyResources(Me.btnMovePrevious, "btnMovePrevious")
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(278, 327)
         Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.TabIndex = 38
+        Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
+        Me.btnUpdate.Location = New System.Drawing.Point(284, 364)
         Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 39
+        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        resources.ApplyResources(Me.btnAddNew, "btnAddNew")
+        Me.btnAddNew.Location = New System.Drawing.Point(119, 364)
         Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 40
+        Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.Location = New System.Drawing.Point(365, 364)
         Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 41
+        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnCommit
         '
-        resources.ApplyResources(Me.btnCommit, "btnCommit")
+        Me.btnCommit.Enabled = False
+        Me.btnCommit.Location = New System.Drawing.Point(200, 364)
         Me.btnCommit.Name = "btnCommit"
+        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.TabIndex = 42
+        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnClear
         '
-        resources.ApplyResources(Me.btnClear, "btnClear")
+        Me.btnClear.Enabled = False
+        Me.btnClear.Location = New System.Drawing.Point(446, 364)
         Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 43
+        Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnHelp
         '
-        resources.ApplyResources(Me.btnHelp, "btnHelp")
+        Me.btnHelp.Location = New System.Drawing.Point(608, 364)
         Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.TabIndex = 44
+        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'formStation
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(784, 411)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
@@ -352,6 +484,7 @@ Partial Class formStation
         Me.Controls.Add(Me.StationIdTextBox)
         Me.MaximizeBox = False
         Me.Name = "formStation"
+        Me.Text = "Station Information"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

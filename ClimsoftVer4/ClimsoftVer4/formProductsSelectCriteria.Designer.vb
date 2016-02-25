@@ -98,49 +98,59 @@ Partial Class formProductsSelectCriteria
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
-        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(893, 24)
+        Me.MenuStrip1.TabIndex = 0
+        Me.MenuStrip1.Text = "MenuStrip1"
         '
         'FileToolStripMenuItem
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenListToolStripMenuItem, Me.ToolStripMenuItem2, Me.OpenListToolStripMenuItem1, Me.ToolStripMenuItem1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
         '
         'OpenListToolStripMenuItem
         '
         Me.OpenListToolStripMenuItem.Name = "OpenListToolStripMenuItem"
-        resources.ApplyResources(Me.OpenListToolStripMenuItem, "OpenListToolStripMenuItem")
+        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem.Text = "Save Specifications"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Text = "Open Specifications"
         '
         'OpenListToolStripMenuItem1
         '
         Me.OpenListToolStripMenuItem1.Name = "OpenListToolStripMenuItem1"
-        resources.ApplyResources(Me.OpenListToolStripMenuItem1, "OpenListToolStripMenuItem1")
+        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem1.Text = "Add New Product"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(176, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        resources.ApplyResources(Me.ExitToolStripMenuItem, "ExitToolStripMenuItem")
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        resources.ApplyResources(Me.EditToolStripMenuItem, "EditToolStripMenuItem")
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Text = "Edit"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
         '
         'pnlStationsElements
         '
@@ -162,8 +172,10 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.chksatation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
-        resources.ApplyResources(Me.pnlStationsElements, "pnlStationsElements")
+        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
+        Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
+        Me.pnlStationsElements.TabIndex = 4
         '
         'pnlSummary
         '
@@ -171,49 +183,80 @@ Partial Class formProductsSelectCriteria
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        resources.ApplyResources(Me.pnlSummary, "pnlSummary")
+        Me.pnlSummary.Location = New System.Drawing.Point(541, 7)
         Me.pnlSummary.Name = "pnlSummary"
+        Me.pnlSummary.Size = New System.Drawing.Size(329, 48)
+        Me.pnlSummary.TabIndex = 23
         '
         'optTotal
         '
-        resources.ApplyResources(Me.optTotal, "optTotal")
+        Me.optTotal.AutoSize = True
+        Me.optTotal.Location = New System.Drawing.Point(205, 26)
         Me.optTotal.Name = "optTotal"
+        Me.optTotal.Size = New System.Drawing.Size(49, 17)
+        Me.optTotal.TabIndex = 2
+        Me.optTotal.Text = "Total"
         Me.optTotal.UseVisualStyleBackColor = True
         '
         'optMean
         '
-        resources.ApplyResources(Me.optMean, "optMean")
+        Me.optMean.AutoSize = True
         Me.optMean.Checked = True
+        Me.optMean.Location = New System.Drawing.Point(104, 26)
         Me.optMean.Name = "optMean"
+        Me.optMean.Size = New System.Drawing.Size(52, 17)
+        Me.optMean.TabIndex = 1
         Me.optMean.TabStop = True
+        Me.optMean.Text = "Mean"
         Me.optMean.UseVisualStyleBackColor = True
         '
         'lblSummary
         '
-        resources.ApplyResources(Me.lblSummary, "lblSummary")
+        Me.lblSummary.AutoSize = True
+        Me.lblSummary.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSummary.Location = New System.Drawing.Point(0, 0)
         Me.lblSummary.Name = "lblSummary"
+        Me.lblSummary.Size = New System.Drawing.Size(89, 13)
+        Me.lblSummary.TabIndex = 0
+        Me.lblSummary.Text = "Summary Type"
         '
         'cmdDelStation
         '
-        resources.ApplyResources(Me.cmdDelStation, "cmdDelStation")
+        Me.cmdDelStation.Location = New System.Drawing.Point(80, 348)
         Me.cmdDelStation.Name = "cmdDelStation"
+        Me.cmdDelStation.Size = New System.Drawing.Size(135, 27)
+        Me.cmdDelStation.TabIndex = 22
+        Me.cmdDelStation.Text = "Delete Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
         '
-        resources.ApplyResources(Me.cmdDelElement, "cmdDelElement")
+        Me.cmdDelElement.Location = New System.Drawing.Point(354, 348)
         Me.cmdDelElement.Name = "cmdDelElement"
+        Me.cmdDelElement.Size = New System.Drawing.Size(143, 27)
+        Me.cmdDelElement.TabIndex = 21
+        Me.cmdDelElement.Text = "Delete Selected Element"
         Me.cmdDelElement.UseVisualStyleBackColor = True
         '
         'lblProductType
         '
-        resources.ApplyResources(Me.lblProductType, "lblProductType")
+        Me.lblProductType.AutoSize = True
+        Me.lblProductType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProductType.Location = New System.Drawing.Point(254, 7)
         Me.lblProductType.Name = "lblProductType"
+        Me.lblProductType.Size = New System.Drawing.Size(31, 15)
+        Me.lblProductType.TabIndex = 20
+        Me.lblProductType.Text = "      "
         '
         'chkAdvancedSelection
         '
-        resources.ApplyResources(Me.chkAdvancedSelection, "chkAdvancedSelection")
+        Me.chkAdvancedSelection.AutoSize = True
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(542, 182)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
+        Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
+        Me.chkAdvancedSelection.TabIndex = 19
+        Me.chkAdvancedSelection.Text = "Advanced Selection"
         Me.chkAdvancedSelection.UseVisualStyleBackColor = True
         '
         'lstvElements
@@ -225,8 +268,11 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        resources.ApplyResources(Me.lstvElements, "lstvElements")
+        Me.lstvElements.Location = New System.Drawing.Point(270, 57)
         Me.lstvElements.Name = "lstvElements"
+        Me.lstvElements.RightToLeftLayout = True
+        Me.lstvElements.Size = New System.Drawing.Size(266, 291)
+        Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
         '
@@ -239,26 +285,42 @@ Partial Class formProductsSelectCriteria
         Me.lstvStations.HideSelection = False
         Me.lstvStations.HoverSelection = True
         Me.lstvStations.LabelEdit = True
-        resources.ApplyResources(Me.lstvStations, "lstvStations")
+        Me.lstvStations.Location = New System.Drawing.Point(5, 57)
         Me.lstvStations.Name = "lstvStations"
+        Me.lstvStations.RightToLeftLayout = True
+        Me.lstvStations.Size = New System.Drawing.Size(257, 289)
+        Me.lstvStations.TabIndex = 17
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
         '
         'lblProducts
         '
-        resources.ApplyResources(Me.lblProducts, "lblProducts")
+        Me.lblProducts.AutoSize = True
         Me.lblProducts.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProducts.Location = New System.Drawing.Point(874, 57)
         Me.lblProducts.Name = "lblProducts"
+        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
+        Me.lblProducts.TabIndex = 8
+        Me.lblProducts.Text = "   "
         '
         'lblElement
         '
-        resources.ApplyResources(Me.lblElement, "lblElement")
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(268, 34)
         Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(78, 13)
+        Me.lblElement.TabIndex = 9
+        Me.lblElement.Text = "Select Element"
         '
         'lblStation
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(10, 34)
         Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(73, 13)
+        Me.lblStation.TabIndex = 8
+        Me.lblStation.Text = "Select Station"
         '
         'pnlPeriod
         '
@@ -275,77 +337,121 @@ Partial Class formProductsSelectCriteria
         Me.pnlPeriod.Controls.Add(Me.dateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
-        resources.ApplyResources(Me.pnlPeriod, "pnlPeriod")
+        Me.pnlPeriod.Location = New System.Drawing.Point(542, 61)
         Me.pnlPeriod.Name = "pnlPeriod"
+        Me.pnlPeriod.Size = New System.Drawing.Size(330, 97)
+        Me.pnlPeriod.TabIndex = 7
         '
         'txtMinuteEnd
         '
         Me.txtMinuteEnd.FormattingEnabled = True
-        Me.txtMinuteEnd.Items.AddRange(New Object() {resources.GetString("txtMinuteEnd.Items"), resources.GetString("txtMinuteEnd.Items1"), resources.GetString("txtMinuteEnd.Items2"), resources.GetString("txtMinuteEnd.Items3"), resources.GetString("txtMinuteEnd.Items4"), resources.GetString("txtMinuteEnd.Items5"), resources.GetString("txtMinuteEnd.Items6"), resources.GetString("txtMinuteEnd.Items7"), resources.GetString("txtMinuteEnd.Items8"), resources.GetString("txtMinuteEnd.Items9"), resources.GetString("txtMinuteEnd.Items10"), resources.GetString("txtMinuteEnd.Items11"), resources.GetString("txtMinuteEnd.Items12"), resources.GetString("txtMinuteEnd.Items13"), resources.GetString("txtMinuteEnd.Items14"), resources.GetString("txtMinuteEnd.Items15"), resources.GetString("txtMinuteEnd.Items16"), resources.GetString("txtMinuteEnd.Items17"), resources.GetString("txtMinuteEnd.Items18"), resources.GetString("txtMinuteEnd.Items19"), resources.GetString("txtMinuteEnd.Items20"), resources.GetString("txtMinuteEnd.Items21"), resources.GetString("txtMinuteEnd.Items22"), resources.GetString("txtMinuteEnd.Items23"), resources.GetString("txtMinuteEnd.Items24"), resources.GetString("txtMinuteEnd.Items25"), resources.GetString("txtMinuteEnd.Items26"), resources.GetString("txtMinuteEnd.Items27"), resources.GetString("txtMinuteEnd.Items28"), resources.GetString("txtMinuteEnd.Items29"), resources.GetString("txtMinuteEnd.Items30"), resources.GetString("txtMinuteEnd.Items31"), resources.GetString("txtMinuteEnd.Items32"), resources.GetString("txtMinuteEnd.Items33"), resources.GetString("txtMinuteEnd.Items34"), resources.GetString("txtMinuteEnd.Items35"), resources.GetString("txtMinuteEnd.Items36"), resources.GetString("txtMinuteEnd.Items37"), resources.GetString("txtMinuteEnd.Items38"), resources.GetString("txtMinuteEnd.Items39"), resources.GetString("txtMinuteEnd.Items40"), resources.GetString("txtMinuteEnd.Items41"), resources.GetString("txtMinuteEnd.Items42"), resources.GetString("txtMinuteEnd.Items43"), resources.GetString("txtMinuteEnd.Items44"), resources.GetString("txtMinuteEnd.Items45"), resources.GetString("txtMinuteEnd.Items46"), resources.GetString("txtMinuteEnd.Items47"), resources.GetString("txtMinuteEnd.Items48"), resources.GetString("txtMinuteEnd.Items49"), resources.GetString("txtMinuteEnd.Items50"), resources.GetString("txtMinuteEnd.Items51"), resources.GetString("txtMinuteEnd.Items52"), resources.GetString("txtMinuteEnd.Items53"), resources.GetString("txtMinuteEnd.Items54"), resources.GetString("txtMinuteEnd.Items55"), resources.GetString("txtMinuteEnd.Items56"), resources.GetString("txtMinuteEnd.Items57"), resources.GetString("txtMinuteEnd.Items58"), resources.GetString("txtMinuteEnd.Items59")})
-        resources.ApplyResources(Me.txtMinuteEnd, "txtMinuteEnd")
+        Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(279, 67)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
+        Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteEnd.TabIndex = 15
+        Me.txtMinuteEnd.Text = "00"
         '
         'txtMinuteStart
         '
         Me.txtMinuteStart.FormattingEnabled = True
-        Me.txtMinuteStart.Items.AddRange(New Object() {resources.GetString("txtMinuteStart.Items"), resources.GetString("txtMinuteStart.Items1"), resources.GetString("txtMinuteStart.Items2"), resources.GetString("txtMinuteStart.Items3"), resources.GetString("txtMinuteStart.Items4"), resources.GetString("txtMinuteStart.Items5"), resources.GetString("txtMinuteStart.Items6"), resources.GetString("txtMinuteStart.Items7"), resources.GetString("txtMinuteStart.Items8"), resources.GetString("txtMinuteStart.Items9"), resources.GetString("txtMinuteStart.Items10"), resources.GetString("txtMinuteStart.Items11"), resources.GetString("txtMinuteStart.Items12"), resources.GetString("txtMinuteStart.Items13"), resources.GetString("txtMinuteStart.Items14"), resources.GetString("txtMinuteStart.Items15"), resources.GetString("txtMinuteStart.Items16"), resources.GetString("txtMinuteStart.Items17"), resources.GetString("txtMinuteStart.Items18"), resources.GetString("txtMinuteStart.Items19"), resources.GetString("txtMinuteStart.Items20"), resources.GetString("txtMinuteStart.Items21"), resources.GetString("txtMinuteStart.Items22"), resources.GetString("txtMinuteStart.Items23"), resources.GetString("txtMinuteStart.Items24"), resources.GetString("txtMinuteStart.Items25"), resources.GetString("txtMinuteStart.Items26"), resources.GetString("txtMinuteStart.Items27"), resources.GetString("txtMinuteStart.Items28"), resources.GetString("txtMinuteStart.Items29"), resources.GetString("txtMinuteStart.Items30"), resources.GetString("txtMinuteStart.Items31"), resources.GetString("txtMinuteStart.Items32"), resources.GetString("txtMinuteStart.Items33"), resources.GetString("txtMinuteStart.Items34"), resources.GetString("txtMinuteStart.Items35"), resources.GetString("txtMinuteStart.Items36"), resources.GetString("txtMinuteStart.Items37"), resources.GetString("txtMinuteStart.Items38"), resources.GetString("txtMinuteStart.Items39"), resources.GetString("txtMinuteStart.Items40"), resources.GetString("txtMinuteStart.Items41"), resources.GetString("txtMinuteStart.Items42"), resources.GetString("txtMinuteStart.Items43"), resources.GetString("txtMinuteStart.Items44"), resources.GetString("txtMinuteStart.Items45"), resources.GetString("txtMinuteStart.Items46"), resources.GetString("txtMinuteStart.Items47"), resources.GetString("txtMinuteStart.Items48"), resources.GetString("txtMinuteStart.Items49"), resources.GetString("txtMinuteStart.Items50"), resources.GetString("txtMinuteStart.Items51"), resources.GetString("txtMinuteStart.Items52"), resources.GetString("txtMinuteStart.Items53"), resources.GetString("txtMinuteStart.Items54"), resources.GetString("txtMinuteStart.Items55"), resources.GetString("txtMinuteStart.Items56"), resources.GetString("txtMinuteStart.Items57"), resources.GetString("txtMinuteStart.Items58"), resources.GetString("txtMinuteStart.Items59"), resources.GetString("txtMinuteStart.Items60")})
-        resources.ApplyResources(Me.txtMinuteStart, "txtMinuteStart")
+        Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
+        Me.txtMinuteStart.Location = New System.Drawing.Point(279, 33)
         Me.txtMinuteStart.Name = "txtMinuteStart"
+        Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteStart.TabIndex = 14
+        Me.txtMinuteStart.Text = "00"
         '
         'txtHourEnd
         '
         Me.txtHourEnd.FormattingEnabled = True
-        Me.txtHourEnd.Items.AddRange(New Object() {resources.GetString("txtHourEnd.Items"), resources.GetString("txtHourEnd.Items1"), resources.GetString("txtHourEnd.Items2"), resources.GetString("txtHourEnd.Items3"), resources.GetString("txtHourEnd.Items4"), resources.GetString("txtHourEnd.Items5"), resources.GetString("txtHourEnd.Items6"), resources.GetString("txtHourEnd.Items7"), resources.GetString("txtHourEnd.Items8"), resources.GetString("txtHourEnd.Items9"), resources.GetString("txtHourEnd.Items10"), resources.GetString("txtHourEnd.Items11"), resources.GetString("txtHourEnd.Items12"), resources.GetString("txtHourEnd.Items13"), resources.GetString("txtHourEnd.Items14"), resources.GetString("txtHourEnd.Items15"), resources.GetString("txtHourEnd.Items16"), resources.GetString("txtHourEnd.Items17"), resources.GetString("txtHourEnd.Items18"), resources.GetString("txtHourEnd.Items19"), resources.GetString("txtHourEnd.Items20"), resources.GetString("txtHourEnd.Items21"), resources.GetString("txtHourEnd.Items22"), resources.GetString("txtHourEnd.Items23")})
-        resources.ApplyResources(Me.txtHourEnd, "txtHourEnd")
+        Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
         Me.txtHourEnd.Name = "txtHourEnd"
+        Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourEnd.TabIndex = 13
+        Me.txtHourEnd.Text = "23"
         '
         'txtHourStart
         '
         Me.txtHourStart.FormattingEnabled = True
-        Me.txtHourStart.Items.AddRange(New Object() {resources.GetString("txtHourStart.Items"), resources.GetString("txtHourStart.Items1"), resources.GetString("txtHourStart.Items2"), resources.GetString("txtHourStart.Items3"), resources.GetString("txtHourStart.Items4"), resources.GetString("txtHourStart.Items5"), resources.GetString("txtHourStart.Items6"), resources.GetString("txtHourStart.Items7"), resources.GetString("txtHourStart.Items8"), resources.GetString("txtHourStart.Items9"), resources.GetString("txtHourStart.Items10"), resources.GetString("txtHourStart.Items11"), resources.GetString("txtHourStart.Items12"), resources.GetString("txtHourStart.Items13"), resources.GetString("txtHourStart.Items14"), resources.GetString("txtHourStart.Items15"), resources.GetString("txtHourStart.Items16"), resources.GetString("txtHourStart.Items17"), resources.GetString("txtHourStart.Items18"), resources.GetString("txtHourStart.Items19"), resources.GetString("txtHourStart.Items20"), resources.GetString("txtHourStart.Items21"), resources.GetString("txtHourStart.Items22"), resources.GetString("txtHourStart.Items23")})
-        resources.ApplyResources(Me.txtHourStart, "txtHourStart")
+        Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.txtHourStart.Location = New System.Drawing.Point(233, 34)
         Me.txtHourStart.Name = "txtHourStart"
+        Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourStart.TabIndex = 12
+        Me.txtHourStart.Text = "00"
         '
         'txtSminute
         '
-        resources.ApplyResources(Me.txtSminute, "txtSminute")
+        Me.txtSminute.AutoSize = True
+        Me.txtSminute.Location = New System.Drawing.Point(280, 18)
         Me.txtSminute.Name = "txtSminute"
+        Me.txtSminute.Size = New System.Drawing.Size(39, 13)
+        Me.txtSminute.TabIndex = 9
+        Me.txtSminute.Text = "Minute"
         '
         'lblHourEnd
         '
-        resources.ApplyResources(Me.lblHourEnd, "lblHourEnd")
+        Me.lblHourEnd.AutoSize = True
+        Me.lblHourEnd.Location = New System.Drawing.Point(236, 18)
         Me.lblHourEnd.Name = "lblHourEnd"
+        Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
+        Me.lblHourEnd.TabIndex = 7
+        Me.lblHourEnd.Text = "Hour"
         '
         'lblHourBegin
         '
-        resources.ApplyResources(Me.lblHourBegin, "lblHourBegin")
+        Me.lblHourBegin.AutoSize = True
+        Me.lblHourBegin.Location = New System.Drawing.Point(89, 18)
         Me.lblHourBegin.Name = "lblHourBegin"
+        Me.lblHourBegin.Size = New System.Drawing.Size(30, 13)
+        Me.lblHourBegin.TabIndex = 5
+        Me.lblHourBegin.Text = "Date"
         '
         'dateTo
         '
-        resources.ApplyResources(Me.dateTo, "dateTo")
+        Me.dateTo.Location = New System.Drawing.Point(63, 68)
         Me.dateTo.Name = "dateTo"
+        Me.dateTo.Size = New System.Drawing.Size(164, 20)
+        Me.dateTo.TabIndex = 4
         '
         'lblTo
         '
-        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(7, 72)
         Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(52, 13)
+        Me.lblTo.TabIndex = 3
+        Me.lblTo.Text = "End Date"
         '
         'dateFrom
         '
-        resources.ApplyResources(Me.dateFrom, "dateFrom")
+        Me.dateFrom.Location = New System.Drawing.Point(63, 33)
         Me.dateFrom.Name = "dateFrom"
+        Me.dateFrom.Size = New System.Drawing.Size(164, 20)
+        Me.dateFrom.TabIndex = 2
         Me.dateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
         '
         'lblFrom
         '
-        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(7, 37)
         Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.TabIndex = 1
+        Me.lblFrom.Text = "Start Date"
         '
         'lblPeriod
         '
-        resources.ApplyResources(Me.lblPeriod, "lblPeriod")
+        Me.lblPeriod.AutoSize = True
+        Me.lblPeriod.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblPeriod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPeriod.Location = New System.Drawing.Point(0, 0)
         Me.lblPeriod.Name = "lblPeriod"
+        Me.lblPeriod.Size = New System.Drawing.Size(43, 13)
+        Me.lblPeriod.TabIndex = 0
+        Me.lblPeriod.Text = "Period"
         '
         'pnlStation
         '
@@ -364,169 +470,248 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        resources.ApplyResources(Me.pnlStation, "pnlStation")
+        Me.pnlStation.Location = New System.Drawing.Point(542, 212)
         Me.pnlStation.Name = "pnlStation"
+        Me.pnlStation.Size = New System.Drawing.Size(330, 152)
+        Me.pnlStation.TabIndex = 6
+        Me.pnlStation.Visible = False
         '
         'lblRadius
         '
-        resources.ApplyResources(Me.lblRadius, "lblRadius")
+        Me.lblRadius.AutoSize = True
+        Me.lblRadius.Location = New System.Drawing.Point(203, 101)
         Me.lblRadius.Name = "lblRadius"
+        Me.lblRadius.Size = New System.Drawing.Size(69, 13)
+        Me.lblRadius.TabIndex = 13
+        Me.lblRadius.Text = "Radiuds (km)"
         '
         'lblLongitude
         '
-        resources.ApplyResources(Me.lblLongitude, "lblLongitude")
+        Me.lblLongitude.AutoSize = True
+        Me.lblLongitude.Location = New System.Drawing.Point(146, 101)
         Me.lblLongitude.Name = "lblLongitude"
+        Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
+        Me.lblLongitude.TabIndex = 12
+        Me.lblLongitude.Text = "Longitude"
         '
         'txtRadius
         '
-        resources.ApplyResources(Me.txtRadius, "txtRadius")
+        Me.txtRadius.Location = New System.Drawing.Point(212, 116)
         Me.txtRadius.Name = "txtRadius"
+        Me.txtRadius.Size = New System.Drawing.Size(53, 20)
+        Me.txtRadius.TabIndex = 11
         '
         'TxtLongitude
         '
-        resources.ApplyResources(Me.TxtLongitude, "TxtLongitude")
+        Me.TxtLongitude.Location = New System.Drawing.Point(152, 116)
         Me.TxtLongitude.Name = "TxtLongitude"
+        Me.TxtLongitude.Size = New System.Drawing.Size(53, 20)
+        Me.TxtLongitude.TabIndex = 10
         '
         'txtLatitude
         '
-        resources.ApplyResources(Me.txtLatitude, "txtLatitude")
+        Me.txtLatitude.Location = New System.Drawing.Point(92, 116)
         Me.txtLatitude.Name = "txtLatitude"
+        Me.txtLatitude.Size = New System.Drawing.Size(53, 20)
+        Me.txtLatitude.TabIndex = 9
         '
         'lblLatitude
         '
-        resources.ApplyResources(Me.lblLatitude, "lblLatitude")
+        Me.lblLatitude.AutoSize = True
+        Me.lblLatitude.Location = New System.Drawing.Point(91, 101)
         Me.lblLatitude.Name = "lblLatitude"
+        Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
+        Me.lblLatitude.TabIndex = 8
+        Me.lblLatitude.Text = "Latitude"
         '
         'OptGeography
         '
-        resources.ApplyResources(Me.OptGeography, "OptGeography")
+        Me.OptGeography.AutoSize = True
+        Me.OptGeography.Location = New System.Drawing.Point(3, 97)
         Me.OptGeography.Name = "OptGeography"
+        Me.OptGeography.Size = New System.Drawing.Size(88, 17)
+        Me.OptGeography.TabIndex = 7
         Me.OptGeography.TabStop = True
+        Me.OptGeography.Text = "Geographical"
         Me.OptGeography.UseVisualStyleBackColor = True
         '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        resources.ApplyResources(Me.ListBox1, "ListBox1")
+        Me.ListBox1.Location = New System.Drawing.Point(97, 74)
         Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(158, 17)
+        Me.ListBox1.TabIndex = 6
         '
         'optBasin
         '
-        resources.ApplyResources(Me.optBasin, "optBasin")
+        Me.optBasin.AutoSize = True
+        Me.optBasin.Location = New System.Drawing.Point(3, 74)
         Me.optBasin.Name = "optBasin"
+        Me.optBasin.Size = New System.Drawing.Size(97, 17)
+        Me.optBasin.TabIndex = 5
         Me.optBasin.TabStop = True
+        Me.optBasin.Text = "Drainage Basin"
         Me.optBasin.UseVisualStyleBackColor = True
         '
         'lstRegion
         '
         Me.lstRegion.FormattingEnabled = True
-        resources.ApplyResources(Me.lstRegion, "lstRegion")
+        Me.lstRegion.Location = New System.Drawing.Point(97, 51)
         Me.lstRegion.Name = "lstRegion"
+        Me.lstRegion.Size = New System.Drawing.Size(158, 17)
+        Me.lstRegion.TabIndex = 4
         '
         'RadioButton1
         '
-        resources.ApplyResources(Me.RadioButton1, "RadioButton1")
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(3, 51)
         Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(59, 17)
+        Me.RadioButton1.TabIndex = 3
         Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Region"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'lstAuthority
         '
         Me.lstAuthority.FormattingEnabled = True
-        resources.ApplyResources(Me.lstAuthority, "lstAuthority")
+        Me.lstAuthority.Location = New System.Drawing.Point(97, 28)
         Me.lstAuthority.Name = "lstAuthority"
+        Me.lstAuthority.Size = New System.Drawing.Size(158, 17)
+        Me.lstAuthority.TabIndex = 2
         '
         'optAuthority
         '
-        resources.ApplyResources(Me.optAuthority, "optAuthority")
+        Me.optAuthority.AutoSize = True
+        Me.optAuthority.Location = New System.Drawing.Point(3, 28)
         Me.optAuthority.Name = "optAuthority"
+        Me.optAuthority.Size = New System.Drawing.Size(66, 17)
+        Me.optAuthority.TabIndex = 1
         Me.optAuthority.TabStop = True
+        Me.optAuthority.Text = "Authority"
         Me.optAuthority.UseVisualStyleBackColor = True
         '
         'lblStations
         '
-        resources.ApplyResources(Me.lblStations, "lblStations")
+        Me.lblStations.AutoSize = True
+        Me.lblStations.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblStations.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStations.Location = New System.Drawing.Point(0, 0)
         Me.lblStations.Name = "lblStations"
+        Me.lblStations.Size = New System.Drawing.Size(121, 13)
+        Me.lblStations.TabIndex = 0
+        Me.lblStations.Text = "Advanced Selection"
         '
         'chkelement
         '
-        resources.ApplyResources(Me.chkelement, "chkelement")
+        Me.chkelement.AutoSize = True
+        Me.chkelement.Location = New System.Drawing.Point(270, 354)
         Me.chkelement.Name = "chkelement"
+        Me.chkelement.Size = New System.Drawing.Size(69, 17)
+        Me.chkelement.TabIndex = 5
+        Me.chkelement.Text = "Clear List"
         Me.chkelement.UseVisualStyleBackColor = True
         '
         'chksatation
         '
-        resources.ApplyResources(Me.chksatation, "chksatation")
+        Me.chksatation.AutoSize = True
+        Me.chksatation.Location = New System.Drawing.Point(5, 353)
         Me.chksatation.Name = "chksatation"
+        Me.chksatation.Size = New System.Drawing.Size(69, 17)
+        Me.chksatation.TabIndex = 4
+        Me.chksatation.Text = "Clear List"
         Me.chksatation.UseVisualStyleBackColor = True
         '
         'cmbElement
         '
         Me.cmbElement.FormattingEnabled = True
-        resources.ApplyResources(Me.cmbElement, "cmbElement")
+        Me.cmbElement.ItemHeight = 13
+        Me.cmbElement.Location = New System.Drawing.Point(352, 30)
         Me.cmbElement.Name = "cmbElement"
+        Me.cmbElement.Size = New System.Drawing.Size(182, 21)
+        Me.cmbElement.TabIndex = 3
         '
         'cmbstation
         '
         Me.cmbstation.FormattingEnabled = True
-        resources.ApplyResources(Me.cmbstation, "cmbstation")
+        Me.cmbstation.ItemHeight = 13
+        Me.cmbstation.Location = New System.Drawing.Point(84, 30)
         Me.cmbstation.Name = "cmbstation"
+        Me.cmbstation.Size = New System.Drawing.Size(178, 21)
+        Me.cmbstation.TabIndex = 1
         '
         'ToolStrip2
         '
-        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
+        Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1, Me.prgrbProducts})
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 450)
         Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip2.TabIndex = 9
+        Me.ToolStrip2.Text = "ToolStrip2"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        Me.ToolStripButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(99, 22)
+        Me.ToolStripButton1.Text = "Start Extraction"
         '
         'prgrbProducts
         '
         Me.prgrbProducts.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.prgrbProducts.Name = "prgrbProducts"
-        resources.ApplyResources(Me.prgrbProducts, "prgrbProducts")
+        Me.prgrbProducts.Size = New System.Drawing.Size(100, 22)
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        resources.ApplyResources(Me.toolStripSeparator, "toolStripSeparator")
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        resources.ApplyResources(Me.toolStripSeparator1, "toolStripSeparator1")
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'HelpToolStripButton
         '
         Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.HelpToolStripButton, "HelpToolStripButton")
+        Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
+        Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.HelpToolStripButton.Name = "HelpToolStripButton"
+        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.HelpToolStripButton.Text = "He&lp"
         '
         'ToolStrip1
         '
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator, Me.toolStripSeparator1, Me.HelpToolStripButton})
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip1.TabIndex = 1
+        Me.ToolStrip1.Text = "ToolStrip1"
         '
         'formProductsSelectCriteria
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(893, 475)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "formProductsSelectCriteria"
+        Me.Text = "Data Selection"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.pnlStationsElements.ResumeLayout(False)

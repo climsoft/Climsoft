@@ -23,7 +23,6 @@ Partial Class formMonthly
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim YyyyLabel As System.Windows.Forms.Label
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formMonthly))
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -88,323 +87,501 @@ Partial Class formMonthly
         '
         'YyyyLabel
         '
-        resources.ApplyResources(YyyyLabel, "YyyyLabel")
+        YyyyLabel.AutoSize = True
+        YyyyLabel.Location = New System.Drawing.Point(558, 20)
         YyyyLabel.Name = "YyyyLabel"
+        YyyyLabel.Size = New System.Drawing.Size(32, 13)
+        YyyyLabel.TabIndex = 472
+        YyyyLabel.Text = "Year:"
         '
         'Label34
         '
-        resources.ApplyResources(Me.Label34, "Label34")
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(345, 95)
         Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(27, 13)
+        Me.Label34.TabIndex = 569
+        Me.Label34.Text = "Flag"
         '
         'Label19
         '
-        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(231, 378)
         Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(19, 13)
+        Me.Label19.TabIndex = 554
+        Me.Label19.Text = "11"
         '
         'Label18
         '
-        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(231, 352)
         Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(19, 13)
+        Me.Label18.TabIndex = 553
+        Me.Label18.Text = "10"
         '
         'Label17
         '
-        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(231, 326)
         Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(19, 13)
+        Me.Label17.TabIndex = 552
+        Me.Label17.Text = "09"
         '
         'Label16
         '
-        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(231, 300)
         Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(19, 13)
+        Me.Label16.TabIndex = 551
+        Me.Label16.Text = "08"
         '
         'Label15
         '
-        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(231, 274)
         Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(19, 13)
+        Me.Label15.TabIndex = 550
+        Me.Label15.Text = "07"
         '
         'Label14
         '
-        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(231, 248)
         Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(19, 13)
+        Me.Label14.TabIndex = 549
+        Me.Label14.Text = "06"
         '
         'Label13
         '
-        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(231, 222)
         Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(19, 13)
+        Me.Label13.TabIndex = 548
+        Me.Label13.Text = "05"
         '
         'Label12
         '
-        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(231, 196)
         Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(19, 13)
+        Me.Label12.TabIndex = 547
+        Me.Label12.Text = "04"
         '
         'Label11
         '
-        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(231, 170)
         Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(19, 13)
+        Me.Label11.TabIndex = 546
+        Me.Label11.Text = "03"
         '
         'Label10
         '
-        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(231, 144)
         Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(19, 13)
+        Me.Label10.TabIndex = 545
+        Me.Label10.Text = "02"
         '
         'Label9
         '
-        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(231, 118)
         Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(19, 13)
+        Me.Label9.TabIndex = 544
+        Me.Label9.Text = "01"
         '
         'txtFlag12Field026
         '
-        resources.ApplyResources(Me.txtFlag12Field026, "txtFlag12Field026")
+        Me.txtFlag12Field026.Location = New System.Drawing.Point(345, 401)
         Me.txtFlag12Field026.Name = "txtFlag12Field026"
+        Me.txtFlag12Field026.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag12Field026.TabIndex = 530
         '
         'txtFlag11Field025
         '
-        resources.ApplyResources(Me.txtFlag11Field025, "txtFlag11Field025")
+        Me.txtFlag11Field025.Location = New System.Drawing.Point(345, 375)
         Me.txtFlag11Field025.Name = "txtFlag11Field025"
+        Me.txtFlag11Field025.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag11Field025.TabIndex = 529
         '
         'txtFlag10Field024
         '
-        resources.ApplyResources(Me.txtFlag10Field024, "txtFlag10Field024")
+        Me.txtFlag10Field024.Location = New System.Drawing.Point(345, 349)
         Me.txtFlag10Field024.Name = "txtFlag10Field024"
+        Me.txtFlag10Field024.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag10Field024.TabIndex = 528
         '
         'txtFlag08Field023
         '
-        resources.ApplyResources(Me.txtFlag08Field023, "txtFlag08Field023")
+        Me.txtFlag08Field023.Location = New System.Drawing.Point(345, 323)
         Me.txtFlag08Field023.Name = "txtFlag08Field023"
+        Me.txtFlag08Field023.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag08Field023.TabIndex = 527
         '
         'txtFlag08Field022
         '
-        resources.ApplyResources(Me.txtFlag08Field022, "txtFlag08Field022")
+        Me.txtFlag08Field022.Location = New System.Drawing.Point(345, 297)
         Me.txtFlag08Field022.Name = "txtFlag08Field022"
+        Me.txtFlag08Field022.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag08Field022.TabIndex = 526
         '
         'txtFlag07Field021
         '
-        resources.ApplyResources(Me.txtFlag07Field021, "txtFlag07Field021")
+        Me.txtFlag07Field021.Location = New System.Drawing.Point(345, 271)
         Me.txtFlag07Field021.Name = "txtFlag07Field021"
+        Me.txtFlag07Field021.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag07Field021.TabIndex = 525
         '
         'txtFlag06Field020
         '
-        resources.ApplyResources(Me.txtFlag06Field020, "txtFlag06Field020")
+        Me.txtFlag06Field020.Location = New System.Drawing.Point(345, 245)
         Me.txtFlag06Field020.Name = "txtFlag06Field020"
+        Me.txtFlag06Field020.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag06Field020.TabIndex = 524
         '
         'txtFlag05Field019
         '
-        resources.ApplyResources(Me.txtFlag05Field019, "txtFlag05Field019")
+        Me.txtFlag05Field019.Location = New System.Drawing.Point(345, 219)
         Me.txtFlag05Field019.Name = "txtFlag05Field019"
+        Me.txtFlag05Field019.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag05Field019.TabIndex = 523
         '
         'txtFlag04Field018
         '
-        resources.ApplyResources(Me.txtFlag04Field018, "txtFlag04Field018")
+        Me.txtFlag04Field018.Location = New System.Drawing.Point(345, 193)
         Me.txtFlag04Field018.Name = "txtFlag04Field018"
+        Me.txtFlag04Field018.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag04Field018.TabIndex = 522
         '
         'txtFlag03Field017
         '
-        resources.ApplyResources(Me.txtFlag03Field017, "txtFlag03Field017")
+        Me.txtFlag03Field017.Location = New System.Drawing.Point(345, 167)
         Me.txtFlag03Field017.Name = "txtFlag03Field017"
+        Me.txtFlag03Field017.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag03Field017.TabIndex = 521
         '
         'txtFlag02Field016
         '
-        resources.ApplyResources(Me.txtFlag02Field016, "txtFlag02Field016")
+        Me.txtFlag02Field016.Location = New System.Drawing.Point(345, 141)
         Me.txtFlag02Field016.Name = "txtFlag02Field016"
+        Me.txtFlag02Field016.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag02Field016.TabIndex = 520
         '
         'txtFlag01Field015
         '
-        resources.ApplyResources(Me.txtFlag01Field015, "txtFlag01Field015")
+        Me.txtFlag01Field015.Location = New System.Drawing.Point(345, 115)
         Me.txtFlag01Field015.Name = "txtFlag01Field015"
+        Me.txtFlag01Field015.Size = New System.Drawing.Size(27, 20)
+        Me.txtFlag01Field015.TabIndex = 519
         '
         'txtVal_12Field014
         '
-        resources.ApplyResources(Me.txtVal_12Field014, "txtVal_12Field014")
+        Me.txtVal_12Field014.Location = New System.Drawing.Point(271, 401)
         Me.txtVal_12Field014.Name = "txtVal_12Field014"
+        Me.txtVal_12Field014.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_12Field014.TabIndex = 14
         '
         'txtVal_11Field013
         '
-        resources.ApplyResources(Me.txtVal_11Field013, "txtVal_11Field013")
+        Me.txtVal_11Field013.Location = New System.Drawing.Point(271, 375)
         Me.txtVal_11Field013.Name = "txtVal_11Field013"
+        Me.txtVal_11Field013.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_11Field013.TabIndex = 13
         '
         'txtVal_10Field012
         '
-        resources.ApplyResources(Me.txtVal_10Field012, "txtVal_10Field012")
+        Me.txtVal_10Field012.Location = New System.Drawing.Point(271, 349)
         Me.txtVal_10Field012.Name = "txtVal_10Field012"
+        Me.txtVal_10Field012.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_10Field012.TabIndex = 12
         '
         'txtVal_09Field011
         '
-        resources.ApplyResources(Me.txtVal_09Field011, "txtVal_09Field011")
+        Me.txtVal_09Field011.Location = New System.Drawing.Point(271, 323)
         Me.txtVal_09Field011.Name = "txtVal_09Field011"
+        Me.txtVal_09Field011.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_09Field011.TabIndex = 11
         '
         'txtVal_08Field010
         '
-        resources.ApplyResources(Me.txtVal_08Field010, "txtVal_08Field010")
+        Me.txtVal_08Field010.Location = New System.Drawing.Point(271, 297)
         Me.txtVal_08Field010.Name = "txtVal_08Field010"
+        Me.txtVal_08Field010.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_08Field010.TabIndex = 10
         '
         'txtVal_07Field009
         '
-        resources.ApplyResources(Me.txtVal_07Field009, "txtVal_07Field009")
+        Me.txtVal_07Field009.Location = New System.Drawing.Point(271, 271)
         Me.txtVal_07Field009.Name = "txtVal_07Field009"
+        Me.txtVal_07Field009.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_07Field009.TabIndex = 9
         '
         'txtVal_06Field008
         '
-        resources.ApplyResources(Me.txtVal_06Field008, "txtVal_06Field008")
+        Me.txtVal_06Field008.Location = New System.Drawing.Point(271, 245)
         Me.txtVal_06Field008.Name = "txtVal_06Field008"
+        Me.txtVal_06Field008.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_06Field008.TabIndex = 8
         '
         'txtVal_05Field007
         '
-        resources.ApplyResources(Me.txtVal_05Field007, "txtVal_05Field007")
+        Me.txtVal_05Field007.Location = New System.Drawing.Point(271, 219)
         Me.txtVal_05Field007.Name = "txtVal_05Field007"
+        Me.txtVal_05Field007.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_05Field007.TabIndex = 7
         '
         'txtVal_04Field006
         '
-        resources.ApplyResources(Me.txtVal_04Field006, "txtVal_04Field006")
+        Me.txtVal_04Field006.Location = New System.Drawing.Point(271, 193)
         Me.txtVal_04Field006.Name = "txtVal_04Field006"
+        Me.txtVal_04Field006.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_04Field006.TabIndex = 6
         '
         'txtVal_03Field005
         '
-        resources.ApplyResources(Me.txtVal_03Field005, "txtVal_03Field005")
+        Me.txtVal_03Field005.Location = New System.Drawing.Point(271, 167)
         Me.txtVal_03Field005.Name = "txtVal_03Field005"
+        Me.txtVal_03Field005.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_03Field005.TabIndex = 5
         '
         'txtVal_02Field004
         '
-        resources.ApplyResources(Me.txtVal_02Field004, "txtVal_02Field004")
+        Me.txtVal_02Field004.Location = New System.Drawing.Point(271, 141)
         Me.txtVal_02Field004.Name = "txtVal_02Field004"
+        Me.txtVal_02Field004.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_02Field004.TabIndex = 4
         '
         'Label7
         '
-        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(271, 96)
         Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(34, 13)
+        Me.Label7.TabIndex = 495
+        Me.Label7.Text = "Value"
         '
         'Label6
         '
-        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(231, 96)
         Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(37, 13)
+        Me.Label6.TabIndex = 494
+        Me.Label6.Text = "Month"
         '
         'Label3
         '
-        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(308, 20)
         Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.TabIndex = 493
+        Me.Label3.Text = "Element"
         '
         'cboElement
         '
         Me.cboElement.FormattingEnabled = True
-        resources.ApplyResources(Me.cboElement, "cboElement")
+        Me.cboElement.Location = New System.Drawing.Point(311, 36)
         Me.cboElement.Name = "cboElement"
+        Me.cboElement.Size = New System.Drawing.Size(216, 21)
+        Me.cboElement.TabIndex = 1
         '
         'txtVal_01Field003
         '
-        resources.ApplyResources(Me.txtVal_01Field003, "txtVal_01Field003")
+        Me.txtVal_01Field003.Location = New System.Drawing.Point(271, 115)
         Me.txtVal_01Field003.Name = "txtVal_01Field003"
+        Me.txtVal_01Field003.Size = New System.Drawing.Size(68, 20)
+        Me.txtVal_01Field003.TabIndex = 3
         '
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        resources.ApplyResources(Me.btnUpload, "btnUpload")
+        Me.btnUpload.Location = New System.Drawing.Point(534, 526)
         Me.btnUpload.Name = "btnUpload"
+        Me.btnUpload.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpload.TabIndex = 490
+        Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
         'Label5
         '
-        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(182, 532)
         Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(59, 13)
+        Me.Label5.TabIndex = 489
+        Me.Label5.Text = "Sequencer"
         '
         'txtSequencer
         '
-        resources.ApplyResources(Me.txtSequencer, "txtSequencer")
+        Me.txtSequencer.Location = New System.Drawing.Point(247, 529)
         Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.TabIndex = 488
+        Me.txtSequencer.Text = "seq_year"
         '
         'Label4
         '
-        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(75, 20)
         Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(40, 13)
+        Me.Label4.TabIndex = 487
+        Me.Label4.Text = "Station"
         '
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        resources.ApplyResources(Me.cboStation, "cboStation")
+        Me.cboStation.Location = New System.Drawing.Point(75, 36)
         Me.cboStation.Name = "cboStation"
+        Me.cboStation.Size = New System.Drawing.Size(202, 21)
+        Me.cboStation.TabIndex = 0
         '
         'btnHelp
         '
-        resources.ApplyResources(Me.btnHelp, "btnHelp")
+        Me.btnHelp.Location = New System.Drawing.Point(534, 487)
         Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.TabIndex = 479
+        Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'btnClear
         '
-        resources.ApplyResources(Me.btnClear, "btnClear")
+        Me.btnClear.Enabled = False
+        Me.btnClear.Location = New System.Drawing.Point(371, 488)
         Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 477
+        Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnCommit
         '
-        resources.ApplyResources(Me.btnCommit, "btnCommit")
+        Me.btnCommit.Enabled = False
+        Me.btnCommit.Location = New System.Drawing.Point(123, 488)
         Me.btnCommit.Name = "btnCommit"
+        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.TabIndex = 15
+        Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.Location = New System.Drawing.Point(290, 488)
         Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 476
+        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        resources.ApplyResources(Me.btnAddNew, "btnAddNew")
+        Me.btnAddNew.Location = New System.Drawing.Point(41, 488)
         Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 473
+        Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        resources.ApplyResources(Me.btnUpdate, "btnUpdate")
+        Me.btnUpdate.Location = New System.Drawing.Point(204, 488)
         Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 475
+        Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnMovePrevious
         '
-        resources.ApplyResources(Me.btnMovePrevious, "btnMovePrevious")
+        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevious.Location = New System.Drawing.Point(219, 459)
         Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
+        Me.btnMovePrevious.TabIndex = 484
+        Me.btnMovePrevious.Text = "<<"
         Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
         'btnMoveFirst
         '
-        resources.ApplyResources(Me.btnMoveFirst, "btnMoveFirst")
+        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirst.Location = New System.Drawing.Point(172, 459)
         Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirst.TabIndex = 483
+        Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
         'btnMoveLast
         '
-        resources.ApplyResources(Me.btnMoveLast, "btnMoveLast")
+        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLast.Location = New System.Drawing.Point(462, 459)
         Me.btnMoveLast.Name = "btnMoveLast"
+        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLast.TabIndex = 482
+        Me.btnMoveLast.Text = ">>|"
         Me.btnMoveLast.UseVisualStyleBackColor = True
         '
         'recNumberTextBox
         '
-        resources.ApplyResources(Me.recNumberTextBox, "recNumberTextBox")
+        Me.recNumberTextBox.Location = New System.Drawing.Point(271, 461)
         Me.recNumberTextBox.Name = "recNumberTextBox"
+        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
+        Me.recNumberTextBox.TabIndex = 481
         '
         'btnMoveNext
         '
-        resources.ApplyResources(Me.btnMoveNext, "btnMoveNext")
+        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNext.Location = New System.Drawing.Point(418, 459)
         Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
+        Me.btnMoveNext.TabIndex = 480
+        Me.btnMoveNext.Text = ">>"
         Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'btnClose
         '
-        resources.ApplyResources(Me.btnClose, "btnClose")
+        Me.btnClose.Location = New System.Drawing.Point(452, 488)
         Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 478
+        Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'txtYear
         '
-        resources.ApplyResources(Me.txtYear, "txtYear")
+        Me.txtYear.Location = New System.Drawing.Point(557, 36)
         Me.txtYear.Name = "txtYear"
+        Me.txtYear.Size = New System.Drawing.Size(40, 20)
+        Me.txtYear.TabIndex = 2
         '
         'Label1
         '
-        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(231, 404)
         Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(19, 13)
+        Me.Label1.TabIndex = 570
+        Me.Label1.Text = "12"
         '
         'formMonthly
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(663, 574)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label34)
         Me.Controls.Add(Me.Label19)
@@ -467,6 +644,7 @@ Partial Class formMonthly
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.Name = "formMonthly"
+        Me.Text = "Monthly Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

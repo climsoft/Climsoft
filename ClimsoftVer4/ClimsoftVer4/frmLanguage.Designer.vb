@@ -22,7 +22,6 @@ Partial Class frmLanguage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLanguage))
         Me.cboLanguage = New System.Windows.Forms.ComboBox()
         Me.lblLanguage = New System.Windows.Forms.Label()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -32,39 +31,54 @@ Partial Class frmLanguage
         'cboLanguage
         '
         Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Items.AddRange(New Object() {resources.GetString("cboLanguage.Items"), resources.GetString("cboLanguage.Items1"), resources.GetString("cboLanguage.Items2")})
-        resources.ApplyResources(Me.cboLanguage, "cboLanguage")
+        Me.cboLanguage.Items.AddRange(New Object() {"English", "Français", "Deutsch"})
+        Me.cboLanguage.Location = New System.Drawing.Point(226, 52)
         Me.cboLanguage.Name = "cboLanguage"
+        Me.cboLanguage.Size = New System.Drawing.Size(196, 21)
+        Me.cboLanguage.TabIndex = 0
         '
         'lblLanguage
         '
-        resources.ApplyResources(Me.lblLanguage, "lblLanguage")
+        Me.lblLanguage.AutoSize = True
+        Me.lblLanguage.Location = New System.Drawing.Point(67, 55)
         Me.lblLanguage.Name = "lblLanguage"
+        Me.lblLanguage.Size = New System.Drawing.Size(88, 13)
+        Me.lblLanguage.TabIndex = 1
         Me.lblLanguage.Tag = "Select_Language"
+        Me.lblLanguage.Text = "Select Language"
+        Me.lblLanguage.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'cmdCancel
         '
         Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        resources.ApplyResources(Me.cmdCancel, "cmdCancel")
+        Me.cmdCancel.Location = New System.Drawing.Point(431, 185)
         Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(94, 23)
+        Me.cmdCancel.TabIndex = 7
         Me.cmdCancel.Tag = "Cancel"
+        Me.cmdCancel.Text = "&Cancel"
         '
         'cmdOK
         '
-        resources.ApplyResources(Me.cmdOK, "cmdOK")
+        Me.cmdOK.Location = New System.Drawing.Point(328, 185)
         Me.cmdOK.Name = "cmdOK"
+        Me.cmdOK.Size = New System.Drawing.Size(94, 23)
+        Me.cmdOK.TabIndex = 6
         Me.cmdOK.Tag = "OK"
+        Me.cmdOK.Text = "&OK"
         '
         'frmLanguage
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(537, 220)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdOK)
         Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.cboLanguage)
         Me.Name = "frmLanguage"
         Me.Tag = "Select_Language"
+        Me.Text = "Select Language"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

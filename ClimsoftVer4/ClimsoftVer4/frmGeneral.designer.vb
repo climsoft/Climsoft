@@ -22,7 +22,6 @@ Partial Class frmGeneral
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmGeneral))
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
@@ -30,36 +29,44 @@ Partial Class frmGeneral
         '
         'cmdHelp
         '
-        Me.HelpProvider1.SetHelpNavigator(Me.cmdHelp, CType(resources.GetObject("cmdHelp.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        resources.ApplyResources(Me.cmdHelp, "cmdHelp")
+        Me.HelpProvider1.SetHelpNavigator(Me.cmdHelp, System.Windows.Forms.HelpNavigator.Topic)
+        Me.cmdHelp.Location = New System.Drawing.Point(691, 526)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.HelpProvider1.SetShowHelp(Me.cmdHelp, CType(resources.GetObject("cmdHelp.ShowHelp"), Boolean))
+        Me.HelpProvider1.SetShowHelp(Me.cmdHelp, True)
+        Me.cmdHelp.Size = New System.Drawing.Size(75, 23)
+        Me.cmdHelp.TabIndex = 0
         Me.cmdHelp.Tag = "Help"
+        Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
         'cmdClose
         '
-        resources.ApplyResources(Me.cmdClose, "cmdClose")
+        Me.cmdClose.Location = New System.Drawing.Point(610, 526)
         Me.cmdClose.Name = "cmdClose"
+        Me.cmdClose.Size = New System.Drawing.Size(75, 23)
+        Me.cmdClose.TabIndex = 1
         Me.cmdClose.Tag = "Close"
+        Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'HelpProvider1
         '
-        resources.ApplyResources(Me.HelpProvider1, "HelpProvider1")
+        Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
         'frmGeneral
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(784, 561)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.cmdHelp)
         Me.HelpButton = True
-        Me.HelpProvider1.SetHelpKeyword(Me, resources.GetString("$this.HelpKeyword"))
-        Me.HelpProvider1.SetHelpNavigator(Me, CType(resources.GetObject("$this.HelpNavigator"), System.Windows.Forms.HelpNavigator))
-        Me.HelpProvider1.SetHelpString(Me, resources.GetString("$this.HelpString"))
+        Me.HelpProvider1.SetHelpKeyword(Me, "aboutclimsoft4.htm")
+        Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
+        Me.HelpProvider1.SetHelpString(Me, "Topic 1")
         Me.Name = "frmGeneral"
-        Me.HelpProvider1.SetShowHelp(Me, CType(resources.GetObject("$this.ShowHelp"), Boolean))
+        Me.HelpProvider1.SetShowHelp(Me, True)
+        Me.Text = "frmGeneralForm"
         Me.ResumeLayout(False)
 
     End Sub
