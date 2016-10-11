@@ -35,7 +35,7 @@ Err:
 
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented!", MsgBoxStyle.Information)
+        'Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "hourlydata.htm")
     End Sub
     
 End Class

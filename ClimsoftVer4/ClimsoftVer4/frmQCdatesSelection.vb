@@ -300,6 +300,6 @@ Public Class frmQCdatesSelection
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented")
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "qcchecks.htm#qc_daterange")
     End Sub
 End Class

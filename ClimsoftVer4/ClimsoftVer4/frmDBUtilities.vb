@@ -38,10 +38,6 @@ Public Class frmDBUtilities
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
-
     Private Sub ToolStripComboBox1_Click(sender As Object, e As EventArgs) Handles cmbDb.Click
 
     End Sub
@@ -255,14 +251,15 @@ Public Class frmDBUtilities
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupToolStripMenuItem.Click
-        frmBackupRestore.Text = "Backup to Text File"
-        frmBackupRestore.Show()
-
+        ''frmBackupRestore.Text = "Backup to Text File"
+        ''frmBackupRestore.Show()
+        frmBackup.Show()
     End Sub
 
     Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
-        frmBackupRestore.Text = "Restore Backup File"
-        frmBackupRestore.Show()
+        ''frmBackupRestore.Text = "Restore Backup File"
+        ''frmBackupRestore.Show()
+        frmRestore.Show()
     End Sub
 
     Function Current_db() As String
@@ -271,6 +268,15 @@ Public Class frmDBUtilities
         Current_db = Strings.Mid(frmLogin.txtusrpwd.Text, InStr(frmLogin.txtusrpwd.Text, "database") + (Len("database") + 1), k)
     End Function
 
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
 
+    Private Sub GenerateValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateValuesToolStripMenuItem.Click
 
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

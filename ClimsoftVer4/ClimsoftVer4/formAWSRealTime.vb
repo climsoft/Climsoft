@@ -53,7 +53,7 @@ Public Class formAWSRealTime
         dbconn.Open()
         ShowPanel(pnlProcessing, "Process Settings")
         load_PressingParameters("txtlFill")
-        'Timer1.Start()
+        Timer1.Start()
         'Timer2.Start()
 
     End Sub
@@ -85,17 +85,26 @@ Public Class formAWSRealTime
 
     Private Sub cmdSites_Click(sender As Object, e As EventArgs) Handles cmdSites.Click
         ShowPanel(pnlSites, "Site Settings")
+        'SetDataSet("aws_sites")
+
+        FillList(txtDataStructure, "aws_structures", "strName")
+        FillList(txtSiteID, "station", "stationId")
+        FillList(txtSiteName, "station", "stationName")
+        FillList(txtIP, "aws_basestation", "ftpId")
+
+        'PopulateForm("sites", txtsitesNav, rec)
+        DataGridViewSites.Visible = False
         SetDataSet("aws_sites")
         rec = 0
-
         PopulateForm("sites", txtSitesNavigator, rec)
-        FillList(txtDataStructure, "aws_structures", "strName")
+        'rec = 0
     End Sub
 
     Private Sub cmdDataStructures_Click(sender As Object, e As EventArgs) Handles cmdDataStructures.Click
 
         ShowPanel(pnlDataStructures, "Data Structures Settings")
         FillList(cmbExistingStructures, "aws_structures", "strName")
+
     End Sub
 
     Private Sub cmdMessages_Click(sender As Object, e As EventArgs) Handles cmdMessages.Click
@@ -111,18 +120,22 @@ Public Class formAWSRealTime
         pnlBaseStation.Visible = True
         pnlBaseStation.Enabled = True
         pnlMSS.Visible = False
-        SetDataSet("aws_basestation")
+
         rec = 0
+        SetDataSet("aws_basestation")
         PopulateForm("bss", txtbssNavigator, rec)
+
     End Sub
 
     Private Sub cmdMSS_Click(sender As Object, e As EventArgs) Handles cmdMSS.Click
         pnlBaseStation.Visible = False
         pnlMSS.Visible = True
         pnlMSS.Enabled = True
-        SetDataSet("aws_mss")
+
         rec = 0
+        SetDataSet("aws_mss")
         PopulateForm("mss", txtmssNavigator, rec)
+
     End Sub
 
     Private Sub cmdBstAddNew_Click(sender As Object, e As EventArgs) Handles cmdBstAddNew.Click
@@ -171,6 +184,7 @@ Err:
     Sub SetDataSet(tabl As String)
         On Error GoTo Err
         Dim sql As String
+
         sql = "SELECT * FROM " & tabl
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         ds.Clear()
@@ -178,9 +192,11 @@ Err:
 
         rec = 0
         Kount = ds.Tables(tabl).Rows.Count
+
         Exit Sub
 Err:
-        MsgBox(Err.Description)
+        Log_Errors(Err.Description & " SetDataset")
+        'MsgBox(Err.Description)
     End Sub
     Function GetDataSet(tabl As String, sql As String) As DataSet
         On Error GoTo Err
@@ -216,7 +232,8 @@ Err:
                 txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
 
             Case "sites"
-                txtStation.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
+                txtSiteID.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
+                txtSiteName.Text = ds.Tables("aws_sites").Rows(num).Item("SiteName")
                 txtInFile.Text = ds.Tables("aws_sites").Rows(num).Item("InputFile")
                 txtDataStructure.Text = ds.Tables("aws_sites").Rows(num).Item("DataStructure")
                 txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
@@ -228,9 +245,11 @@ Err:
 
         End Select
 
-
+        navbar.Text = ""
         If num < 0 Then num = 0
+
         If Kount > 0 Then navbar.Text = num + 1 & "of" & Kount
+
     End Sub
 
     Function RecordUpdate(tbl As String, pnl As String, num As Integer, cmdtype As String) As Boolean
@@ -387,7 +406,8 @@ Err:
                 txtmssNavigator.Clear()
 
             Case "sites"
-                txtStation.Text = ""
+                txtSiteID.Text = ""
+                txtSiteName.Text = ""
                 txtInFile.Clear()
                 txtDataStructure.Text = ""
                 txtFlag.Clear()
@@ -418,9 +438,10 @@ Err:
 
         ' Confirm Password
         If txtMSSPW.Text <> txtMSSConfirm.Text Then
-            MsgBox("Confirm Password")
-            txtMSSConfirm.Clear()
-            txtMSSPW.Clear()
+
+            MsgBox("Confirm Password" & " " & txtMSSConfirm.Text)
+            'txtMSSConfirm.Clear()
+            'txtMSSPW.Clear()
             Exit Sub
         End If
 
@@ -539,8 +560,12 @@ Err:
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
 
+        'sql = "SELECT * FROM aws_sites"
+        'ds = GetDataSet("aws_sites", sql)
+
         dsNewRow = ds.Tables("aws_sites").NewRow
-        dsNewRow.Item("SiteID") = txtStation.Text
+        dsNewRow.Item("SiteID") = txtSiteID.Text
+        dsNewRow.Item("SiteName") = txtSiteName.Text
         dsNewRow.Item("InputFile") = txtInFile.Text
         dsNewRow.Item("DataStructure") = txtDataStructure.Text
         dsNewRow.Item("MissingDataFlag") = txtFlag.Text
@@ -551,6 +576,7 @@ Err:
             dsNewRow.Item("OperationalStatus") = 0
         End If
         'Add a new record to the data source table
+
         ds.Tables("aws_sites").Rows.Add(dsNewRow)
         da.Update(ds, "aws_sites")
         FormReset("sites")
@@ -589,7 +615,8 @@ Err:
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtStation.Text
+        ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
+        ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
         ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
         ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
         ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
@@ -617,13 +644,17 @@ Err:
         Dim dstn As New DataSet
         Dim sql As String
         sql = "SELECT * FROM  " & tbl
+
         dlst = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
-        dlst.Fill(dstn, tbl)
+
+        dstn = GetDataSet(tbl, sql)
         lst.Items.Clear()
+
         For i = 0 To dstn.Tables(tbl).Rows.Count - 1
             lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(lstfld))
         Next
+        lst.Refresh()
     End Sub
 
     Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged
@@ -675,7 +706,9 @@ Err:
         'recEdit.messageBoxCommit()
 
         comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
-        sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+        'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+        sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+
         comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
         comm.ExecuteNonQuery()   ' Execute the query
 
@@ -683,8 +716,8 @@ Err:
         '' Create a table for the new structure
 
         Dim tbl As String = txtStrName.Text
-
-        sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
+        'sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
+        sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
                "( " & _
                 "`No` INT NOT NULL, " & _
                 "`Element_abbreviation` TEXT NOT NULL, " & _
@@ -742,7 +775,9 @@ Err:
         DataGridViewStructures.DataMember = tbl
         DataGridViewStructures.Refresh()
         DataGridViewStructures.Visible = True
-        DataGridViewStructures.Height = 100 + DataGridViewStructures.RowCount * 5
+        DataGridViewStructures.Height = 100 + DataGridViewStructures.RowCount * 17
+        If DataGridViewStructures.Height > 320 Then DataGridViewStructures.Height = 320
+        'DataGridViewStructures.Height = 330
         Exit Sub
 Err:
         MsgBox(Err.Number & ":" & Err.Description)
@@ -813,7 +848,7 @@ Err:
         If Len(txtNxtProcess.Text) = 0 Then
             'MsgBox(0)
             txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
-            optStart.Checked = True
+            'optStart.Checked = True
         End If
 
         If optStart.Checked = True Then
@@ -907,17 +942,31 @@ Err:
         Dim strRec As Integer
         Dim AWSsite As String
         Dim chr As String
+        Dim dTable As DataTable
+
+
+        ' Open the data set for the AWS sites and stations
+        SetDataSet("aws_sites")
+
+        If ds.Tables("aws_sites").Rows.Count = 0 Then
+            Log_Errors("No AWS sites defined. Refer to the Manuals then use the Tab 'Sites' to define the installed AWS sites")
+            Me.Cursor = Cursors.Default
+            optStop.Checked = True
+            Exit Sub
+        End If
 
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
 
         ' Compute the Template descriptor to Bianry form
-        If Not Compute_Descriptors(Desc_Bits) Then Exit Sub
-
+        If Not Compute_Descriptors(Desc_Bits) Then
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End If
         Bufr_Subst = 0
         BUFR_Subsets_Data = ""
 
-        'Get full path for the Subsets Output file file
+        'Get full path for the Subsets Output file file and create the file
         fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
@@ -925,18 +974,23 @@ Err:
         'WriteLine(1, "Testing")
         'FileClose(1)
 
-        ' Open the data set for the AWS sites and stations
-        SetDataSet("aws_sites")
+
+
+        Dim i As Integer
 
         With ds.Tables("aws_sites")
             For i = 0 To .Rows.Count - 1 'Kount - 1
-                'If Len(.Rows(i).Item("InputFile")) <> 0 And .Rows(i).Item("OperationalStatus") = 1 Then
+
+                'MsgBox(.Rows(i).Item("InputFile"))
+
                 If Not IsDBNull(.Rows(i).Item("InputFile")) And .Rows(i).Item("OperationalStatus") = 1 Then
+                    'Log_Errors(.Rows(i).Item("InputFile"))
                     'MsgBox(.Rows(i).Item("InputFile"))
                     ' Get station data details
                     nat_id = .Rows(i).Item("SiteID")
+
                     'MsgBox(nat_id)
-                    msg_header = .Rows(i).Item("aws_msg")
+                    'msg_header = .Rows(i).Item("aws_msg")
                     'MsgBox(msg_header)
                     flg = ""
                     If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag")
@@ -964,7 +1018,7 @@ Err:
 
                     infile = .Rows(i).Item("InputFile")
                     'MsgBox(i & infile)
-                    txtStatus.Text = "Seeking input data - " & infile
+                    Process_Status("Seeking input data - " & infile)
                     txtStatus.Refresh()
 
                     If Not FTP_Call(infile, "get") Then
@@ -982,15 +1036,13 @@ Err:
                     ''End With
 
                     FileClose(1)
-
+                    txtStatus.Text = "Organising the input file"
 
                     ' Assign a variable to an input file with header rows
                     aws_input_file = txtinputfile
 
                     ' Assign a variable to an output file without header rows
                     aws_input_file_flds = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
-
-
 
                     FileOpen(10, aws_input_file, OpenMode.Input)
                     FileOpen(11, aws_input_file_flds, OpenMode.Output)
@@ -1013,86 +1065,66 @@ Err:
 
                     FileClose(10)
                     FileClose(11)
+                    Dim colmn As Integer
+                    Dim rws As Long
+                    Dim x As String
 
-                    ' Open the output populated text file as an input file for the database
-                    FileOpen(11, aws_input_file_flds, OpenMode.Input)
+                    'MsgBox(aws_input_file)
+                    'ChrW(delimiter_ascii)
+                    dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
 
-                    ' Update the database and process the data one record at a time
-                    Dim datastring As String
-                    Dim endline As Boolean
+                    For k = 0 To rws - 2
+                        'Skip oder records
+                        datestring = dTable.Rows(k).Item(0)
+                        If InStr(datestring, txtqlfr) Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2)
+                        If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+                        'Log_Errors(datestring & " " & DateDiff("h", datestring, txtDateTime.Text) & " " & Val(txtPeriod.Text))
 
-                    'MsgBox(i & " " & aws_data)
-                    Do While EOF(11) = False
-                        aws_data = LineInput(11)
-                        siz = Len(aws_data)
-                        datastring = ""
-                        endline = False
-                        strRec = 0
+                        Process_Status("Processing AWS Record " & k & " of " & rws)
 
-                        For j = 1 To siz
-
-                            chr = Mid(aws_data, j, 1) ' Single character of the data line
-
-                            ' When the end of line is reached
-                            If j = siz Then
-                                If chr <> txtqlfr Then datastring = datastring & chr ' Get the last data value on the line by appending the last character
-                                endline = True
+                        For j = 0 To colmn - 1
+                            x = dTable.Rows(k).Item(j)
+                            If InStr(x, txtqlfr) Then
+                                x = Strings.Mid(x, 2, Len(x) - 2)
                             End If
-
-                            ' Process the data value when the delimiter character is encountered or end of line reached
-                            If Asc(Mid(aws_data, j, 1)) = delimiter_ascii Or endline = True Then
-                                AwsRecord_Update(datastring, strRec, flg, AWSsite)
-                                strRec = strRec + 1
-                                datt = datastring
-                                datastring = ""
-                            Else
-                                If chr <> txtqlfr And j < siz Then
-                                    datastring = datastring & chr ' Accumulate the characters into a data string but skip text qualifier
-                                    endline = False
-                                End If
-
-                            End If
-
+                            AwsRecord_Update(x, j, flg, AWSsite)
+                            'MsgBox(x)
                         Next
-                    Loop
-                    ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
 
-                    datestring = ds.Tables(AWSsite).Rows(0).Item("obsv")
+                        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+                        Dim sqlv As String
+                        sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+                        rs = GetDataSet(AWSsite, sqlv)
 
-                    'Sametimes Date and Time values are separately in the 1st and 2nd fields respectively. In such cases they are combined
-                    If Len(datestring) < 12 Then
-                        datestring = datastring & " " & ds.Tables(AWSsite).Rows(1).Item("obsv")
-                    End If
+                        'Get the date value
+                        datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
 
-                    'datestring = TimeStamp(rs)
-                    If Not IsDate(datestring) Then
-                        Log_Errors(datestring)
-                    End If
-
-
-                    'Log_Errors(datestring)
-                    'Process_Input_Record(AWSsite, datestring)
-                    If Val(txtPeriod.Text) = 999 Then
-                        Process_Input_Record(AWSsite, datestring)
-                        '    Process_Input_Record(datestring) ' Process the entire input file irespective of time difference
-                    Else
-                        'Process_Input_Record(AWSsite, datestring)
-                        'Log_Errors(DateDiff("h", datestring, txtDateTime.Text) & "<= " & Val(txtPeriod.Text - 1))
-                        If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-
-                            Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                        'Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
+                        If Len(datestring) < 12 Then
+                            datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
                         End If
-                    End If
 
-                    'MsgBox(9)
-                    'MsgBox(i)
-                    'MsgBox(.Rows(i).Item("InputFile"))
-                    'MsgBox(99)
-                    'End If
+                        'Don't process the record if having invalid datestamp
+                        If Not IsDate(datestring) Then
+                            Log_Errors(datestring)
+                        End If
 
-                    'Loop
+                        'Update the record into the database
+                        If Val(txtPeriod.Text) = 999 Then
+                            ' Process the entire input file irespective of time difference
+                            Process_Input_Record(AWSsite, datestring)
+                        Else
+                            'Process_Input_Record(AWSsite, datestring)
+                            'Log_Errors(DateDiff("h", datestring, txtDateTime.Text) & "<= " & Val(txtPeriod.Text - 1))
+                            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+                                Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                            End If
+                        End If
 
-                    FileClose(11)
+                    Next
+
+
+                    'FileClose(11)
                     '  Close #11
 
                     ' Delete input file from base station server if so selected
@@ -1110,7 +1142,8 @@ Err:
                 '.MoveNext()
 
                 'Loop
-            Next
+
+            Next i
         End With
 
 Continues:
@@ -1188,7 +1221,8 @@ Err:
         End If
         'If Err.Number = 3349 Then Resume Next
         ''   MsgBox Err.Number & " " & Err.description
-        Log_Errors(Err.Number & ": " & Err.Description)
+        'MsgBox("Process_input_data")
+        Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
         FileClose(10)
         FileClose(11)
@@ -1214,7 +1248,8 @@ Err:
         Dim descrfil As String
         Dim C1 As String
 
-        sql = "use mysql_climsoft_db_v4; SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
+        'sql = "use mysql_climsoft_db_v4; SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
+        sql = "SELECT Rec, Bufr_Template, CREX_Template, Sequence_Descriptor1, Sequence_Descriptor0, Bufr_Element, Crex_Element, Climsoft_Element, Element_Name, Crex_Unit, Crex_Scale, Crex_DataWidth, Bufr_Unit, Bufr_Scale, Bufr_RefValue, Bufr_DataWidth_Bits, Observation, Crex_Data, Bufr_Data " & _
               "FROM TM_307091 WHERE (((Sequence_Descriptor1) Is Not Null)) ORDER BY Rec;"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dr.Clear()
@@ -1311,7 +1346,8 @@ Err:
                     Else
                         txtqlfr = .Rows(i).Item("txtQualifier")
                     End If
-                    sql = "use mysql_climsoft_db_v4; SELECT * FROM " & struc & " order by Cols;"
+                    'sql = "use mysql_climsoft_db_v4; SELECT * FROM " & struc & " order by Cols;"
+                    sql = "SELECT * FROM " & struc & " order by Cols;"
 
                     rs = GetDataSet(struc, sql)
                     Exit For
@@ -1323,6 +1359,8 @@ Err:
         Log_Errors(Err.Number & ":" & Err.Description)
     End Sub
     Function FTP_Call(ftpfile As String, ftpmethod As String) As Boolean
+
+        'MsgBox(ftpfile & " " & ftpmethod)
         FTP_Call = True
         On Error GoTo Err
         Dim ftpscript As String
@@ -1331,13 +1369,13 @@ Err:
         Dim local_folder As String
         Dim out_folder As String
 
-
         Dim usr As String
         Dim pwd As String
         Dim flder As String
         Dim ftpmode As String
 
         Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd)
+        'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
         FileClose(1)
         local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
         Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
@@ -1350,9 +1388,11 @@ Err:
 
                 txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
 
+                'MsgBox(ftpmode & " " & txtinputfile)
+
                 If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
 
-                If ftpmode = "ftp" Then
+                If ftpmode = "FTP" Then
                     Print(1, "open " & ftp_host & Chr(13) & Chr(10))
                     Print(1, usr & Chr(13) & Chr(10))
                     Print(1, pwd & Chr(13) & Chr(10))
@@ -1384,12 +1424,13 @@ Err:
         Print(1, "echo off" & Chr(13) & Chr(10))
         Print(1, Drive1 & Chr(13) & Chr(10))
         Print(1, "CD " & local_folder & Chr(13) & Chr(10))
+
         If ftpmethod = "get" Then
-            If ftpmode = "ftp" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "psftp" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
         Else
-            If ftpmode = "ftp" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "psftp" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
         End If
 
         Print(1, "echo on" & Chr(13) & Chr(10))
@@ -1454,7 +1495,7 @@ Err:
         Dim rf As New DataSet
         Dim num As Integer
 
-
+        'MsgBox(aws_ftp)
         Select Case ftpmethod
             Case "get"
                 sql = "SELECT * FROM aws_basestation"
@@ -1520,16 +1561,22 @@ Err:
     Sub Process_Input_Record(aws_rs As String, datestring As String)
 
         On Error GoTo Err
+        Dim str As DataSet
+        Dim sql2 As String
 
-        SetDataSet("station")
-        With ds.Tables("station")
-            For i = 0 To ds.Tables("station").Rows.Count - 1
+
+        sql2 = "SELECT * FROM station"
+
+        str = GetDataSet("station", sql2)
+        'Log_Errors(str.Tables("station").Rows(0).Item("stationId"))
+        With str.Tables("station")
+            For i = 0 To .Rows.Count - 1
                 If .Rows(i).Item("stationId") = nat_id Then
                     '    wmo_id = .Fields("wmo_id")
-                    stn_name = .Rows(i).Item("stationName")
-                    lat = .Rows(i).Item("latitude")
-                    lon = .Rows(i).Item("longitude")
-                    elv = .Rows(i).Item("elevation")
+                    If Not IsDBNull(.Rows(i).Item("stationName")) Then stn_name = .Rows(i).Item("stationName")
+                    If Not IsDBNull(.Rows(i).Item("latitude")) Then lat = .Rows(i).Item("latitude")
+                    If Not IsDBNull(.Rows(i).Item("longitude")) Then lon = .Rows(i).Item("longitude")
+                    If Not IsDBNull(.Rows(i).Item("elevation")) Then elv = .Rows(i).Item("elevation")
                     Exit For
                 End If
             Next
@@ -1537,7 +1584,7 @@ Err:
         'Log_Errors(nat_id & " " & stn_name & " " & lat & " " & lon & " " & elv)
 
 
-        Process_Status(" Input file found - Extracting data")
+        'Process_Status(" Processing input record")
 
         ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
         update_main_db(aws_rs, datestring, nat_id)
@@ -1546,37 +1593,48 @@ Err:
 
         If IsDate(datestring) Then
             ' Process the messages for transmission at the scheduled time
+            ' Temporarily suspended
+            'update_tbltemplate(aws_rs, datestring)
 
-            update_tbltemplate(aws_rs, datestring)
         End If
         txtLastProcess.Text = datestring
-        ' End If
+        'End If
         Exit Sub
 Err:
         'If Err.Number = 94 Then Resume Next
         'MsgBox "Processing input record"
-        Log_Errors(Err.Description)
+        'MsgBox("Process_input_record")
+        Log_Errors(Err.Number & ": " & Err.Description & " at Process_Input_Record")
     End Sub
 
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
         On Error GoTo Err
         Dim dts As Date
+        Dim sql1 As String
+        Dim awsr As DataSet
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        SetDataSet(aws_struc)
+        txtStatus.Text = "Updating AWS Temporary Record"
+
+        sql1 = "SELECT * FROM " & aws_struc
+
+        awsr = GetDataSet(aws_struc, sql1)
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
 
         If InStr(datastring, flg) > 0 Or Len(flg) = 0 Then
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
+            awsr.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
         Else
-            ds.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
+            awsr.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
         End If
 
-        da.Update(ds, aws_struc)
-
+        da.Update(awsr, aws_struc)
+        awsr.Clear()
+        'Log_Errors(rec)
         Exit Sub
+
 Err:
-        Log_Errors(Err.Number & " " & Err.Description)
+        Log_Errors(Err.Number & " " & Err.Description & " at AwsRecord_Update")
     End Sub
 
     Sub Process_SubRecord(datastring As String, rec As Integer, flg As String, aws_struc As String)
@@ -1664,8 +1722,8 @@ Err:
     End Sub
 
     Private Sub optStart_Click(sender As Object, e As EventArgs) Handles optStart.Click
-        If optStart.Checked = True Then Start_Process()
-
+        'If optStart.Checked = True Then Start_Process()
+        Start_Process()
     End Sub
     Sub Process_Status(msg As String)
         On Error GoTo Err
@@ -1686,34 +1744,33 @@ Err:
 
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
         Dim dsdb As New DataSet
-        Dim sql As String
+        Dim sql, sql3 As String
         Dim obs As String
         Dim mysqldate As String
 
-
+        sql3 = "SELECT * FROM " & rs_aws
         cmd.Connection = dbconn
-        SetDataSet(rs_aws)
-
+        'SetDataSet(rs_aws)
+        dsdb = GetDataSet(rs_aws, sql3)
         ' Construct datetime string from DateTime data value that conforms to Mysql datetime format
         mysqldate = DateAndTime.Year(datestr) & "/" & DateAndTime.Month(datestr) & "/" & DateAndTime.Day(datestr) & " " & DateAndTime.Hour(datestr) & ":" & DateAndTime.Minute(datestr) & ":" & DateAndTime.Second(datestr)
 
-        With ds.Tables(rs_aws)
-            Process_Status("Updating Climsoft database with AWS data")
+        With dsdb.Tables(rs_aws)
+            'Process_Status("Updating Climsoft database with AWS data")
             For i = 0 To .Rows.Count - 1
-                If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) Then
+                If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
                     obs = .Rows(i).Item("obsv")
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
                     If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
-
-                    sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
+                    'sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
+                    sql = "INSERT INTO observationfinal " & _
                         "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
                         "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
-
+                    'Log_Errors(sql)
                     cmd.CommandText = sql
                     cmd.ExecuteNonQuery()
 
                 End If
-
             Next
         End With
 
@@ -1763,7 +1820,8 @@ Err:
         'If Err.Number = 3022 Then Resume Next
         'If Err.Number = 3146 Then Resume Next
         If Err.Number = 5 Then Resume Next
-        Log_Errors(Err.Number & ":" & Err.Description)
+        'MsgBox(" Update_main_db")
+        Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
 
     Sub update_tbltemplate(aws_struct As String, Date_Time As String)
@@ -2773,7 +2831,7 @@ Err:
         txtNxtProcess.Text = DateAdd("n", CLng(txtOffset.Text), txtNxtProcess.Text)
 
         Process_Status("Next Encoding Time -" & txtNxtProcess.Text)
-        'Process_Status("Next Encoding Time -" & Strings.Left(txtNxtProcess.Text, Len(txtNxtProcess.Text) - 3))
+        Process_Status("Next Encoding Time -" & Strings.Left(txtNxtProcess.Text, Len(txtNxtProcess.Text) - 3))
         Exit Function
 Err:
         Next_Encoding_Time = False
@@ -2781,6 +2839,250 @@ Err:
         ' list_errors.AddItem txttime & " " & Err.description
         ' MsgBox Err.description
     End Function
+
+    Private Sub cmdfirstSite_Click(sender As Object, e As EventArgs)
+        rec = 0
+        'PopulateForm("sites", txtsitesNav, rec)
+    End Sub
+
+
+    Private Sub nextSite_Click(sender As Object, e As EventArgs)
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            'PopulateForm("sites", txtsitesNav, rec)
+        End If
+    End Sub
+
+    Private Sub cmdsitesPrev_Click(sender As Object, e As EventArgs)
+        If rec > 0 Then
+            rec = rec - 1
+            'PopulateForm("sites", txtsitesNav, rec)
+        End If
+    End Sub
+
+    Private Sub cmdsitesLast_Click(sender As Object, e As EventArgs)
+        rec = Kount - 1
+        'PopulateForm("sites", txtsitesNav, rec)
+    End Sub
+
+ 
+    Private Sub cmdViewUpdate_Click(sender As Object, e As EventArgs) Handles cmdViewUpdate.Click
+
+        DataGridViewSites.Visible = True
+        DataGridViewSites.DataSource = ds
+        DataGridViewSites.DataMember = "aws_sites"
+        DataGridViewSites.Dock = DockStyle.Fill
+        DataGridViewSites.Height = 190
+
+    End Sub
+
+
+
+    Private Sub DataGridViewStructures_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewStructures.CellEndEdit
+        Dim col, rw As Integer
+        Dim tbl, dat As String
+        Dim recUpdate As New dataEntryGlobalRoutines
+        Try
+            col = DataGridViewStructures.CurrentCell.ColumnIndex
+            rw = DataGridViewStructures.CurrentRow.Index
+            If IsDBNull(DataGridViewStructures.CurrentRow.Cells(col).Value) Then
+                dat = ""
+            Else
+                dat = DataGridViewStructures.CurrentRow.Cells(col).Value
+            End If
+            'MsgBox(dat)
+
+            tbl = cmbExistingStructures.Text
+
+            SetDataSet(tbl)
+            Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            If Len(dat) > 0 Then
+                ds.Tables(tbl).Rows(rw).Item(col) = dat
+            Else
+                ds.Tables(tbl).Rows(rw).Item(col) = ""
+            End If
+
+            da.Update(ds, tbl)
+
+            'recUpdate.messageBoxRecordedUpdated()
+        Catch ex As Exception
+            'MsgBox(ex.HResult & " " & ex.Message)
+            If ex.HResult = -2146233080 Then
+                'MsgBox(DataGridViewStructures.Rows.Count)
+                'DataGridViewStructures.Rows.Add(1)
+                'DataGridViewStructures.Refresh()
+                CreateDataGridRow(ds, tbl, col, DataGridViewStructures.Rows.Count - 1)
+                DataGridViewStructures.Refresh()
+            End If
+            'MsgBox(DataGridViewStructures.Rows.Count)
+        End Try
+    End Sub
+    Sub CreateDataGridRow(dgr As DataSet, tbl As String, col As Integer, id As String)
+        On Error GoTo Err
+          Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+
+        dsNewRow = dgr.Tables(tbl).NewRow
+        dsNewRow.Item(col) = id
+
+        'Add a new record to the data source table
+        dgr.Tables(tbl).Rows.Add(dsNewRow)
+        da.Update(dgr, tbl)
+        'MsgBox("Record Added")
+
+        Exit Sub
+Err:
+        MsgBox(Err.Number & " : " & Err.Description)
+
+    End Sub
+
+
+
+    Private Sub DataGridViewStructures_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridViewStructures.KeyDown
+        Dim tbl As String
+        Dim recno As Integer
+        Try
+            If e.KeyCode = Keys.Delete And DataGridViewStructures.CurrentRow.Selected = True Then
+                tbl = cmbExistingStructures.Text
+                recno = DataGridViewStructures.CurrentRow.Index
+                SetDataSet(tbl)
+                Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+
+                ds.Tables(tbl).Rows(recno).Delete()
+                da.Update(ds, tbl)
+                DataGridViewStructures.Refresh()
+                'MsgBox("Record Deleted")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.HResult & ": " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DataGridViewSites_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSites.CellEndEdit
+        Dim col, rw As Integer
+        Dim tbl, dat As String
+        Dim recUpdate As New dataEntryGlobalRoutines
+        Try
+            col = DataGridViewSites.CurrentCell.ColumnIndex
+            rw = DataGridViewSites.CurrentRow.Index
+            If IsDBNull(DataGridViewSites.CurrentRow.Cells(col).Value) Then
+                dat = ""
+            Else
+                dat = DataGridViewSites.CurrentRow.Cells(col).Value
+            End If
+            'MsgBox(dat)
+
+            'tbl = cmbExistingStructures.Text
+            tbl = "aws_sites"
+            SetDataSet(tbl)
+            Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            If Len(dat) > 0 Then
+                ds.Tables(tbl).Rows(rw).Item(col) = dat
+            Else
+                ds.Tables(tbl).Rows(rw).Item(col) = ""
+            End If
+
+            da.Update(ds, tbl)
+
+            'recUpdate.messageBoxRecordedUpdated()
+        Catch ex As Exception
+            'MsgBox(ex.HResult & " " & ex.Message)
+            If ex.HResult = -2146233080 Then
+                'MsgBox(DataGridViewStructures.Rows.Count)
+                'DataGridViewStructures.Rows.Add(1)
+                'DataGridViewStructures.Refresh()
+                CreateDataGridRow(ds, tbl, col, dat)
+                'DataGridViewStructures.Refresh()
+            End If
+            'MsgBox(DataGridViewStructures.Rows.Count)
+        End Try
+    End Sub
+
+    'Private Sub DataGridViewSites_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewSites.CellEndEdit
+
+    'End Sub
+
+    Private Sub DataGridViewSites_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridViewSites.KeyDown
+        Dim tbl As String
+        Dim recno As Integer
+        Try
+            If e.KeyCode = Keys.Delete And DataGridViewSites.CurrentRow.Selected = True Then
+                tbl = "aws_sites"
+                recno = DataGridViewSites.CurrentRow.Index
+                SetDataSet(tbl)
+                Dim cw As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+
+                ds.Tables(tbl).Rows(recno).Delete()
+                da.Update(ds, tbl)
+                DataGridViewSites.Refresh()
+                'MsgBox("Record Deleted")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.HResult & ": " & ex.Message)
+        End Try
+    End Sub
+
+    Function Text_To_DataTable(ByVal path As String, ByVal delimitter As Char, ByVal hdrs As Integer, ByRef flds As Integer, ByRef recs As Long) As DataTable
+        Dim source As String = String.Empty
+        Dim dt As DataTable = New DataTable
+        Try
+            If IO.File.Exists(path) Then
+                source = IO.File.ReadAllText(path)
+            Else
+                Throw New IO.FileNotFoundException("Could not find the file at " & path, path)
+            End If
+
+            Dim rows() As String = source.Split({Environment.NewLine}, StringSplitOptions.None)
+
+            For i As Integer = 0 To rows(0).Split(delimitter).Length - 1
+                Dim column As String = rows(0).Split(delimitter)(i)
+                dt.Columns.Add(If(False, column, "column" & i + 1))
+            Next
+            'MsgBox(hdrs)
+            For i As Integer = If(False, 1, 0) To rows.Length - 1
+                Dim dr As DataRow = dt.NewRow
+
+                For x As Integer = hdrs To rows(i).Split(delimitter).Length - 1
+                    If x <= dt.Columns.Count - 1 Then
+                        dr(x) = rows(i).Split(delimitter)(x)
+                    Else
+                        Throw New Exception("The number of columns on row " & i + If(False, 0, 1) & " is greater than the amount of columns in the " & If(False, "header.", "first row."))
+                    End If
+                Next
+
+                dt.Rows.Add(dr)
+            Next
+            flds = dt.Columns.Count
+            recs = dt.Rows.Count
+            Text_To_DataTable = dt
+            'MsgBox(dt.Rows(0).Item)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Text_To_DataTable = dt
+        End Try
+    End Function
+
+    Private Sub optStop_CheckedChanged(sender As Object, e As EventArgs) Handles optStop.CheckedChanged
+        Process_Status("Process Stopped")
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        'MsgBox(Me.Text)
+        Select Case Me.Text
+            Case "Process Settings"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "processsettings.htm")
+            Case "Servers Settings"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "serverssettings.htm")
+            Case "Site Settings"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "sitesettings.htm")
+            Case "Data Structures Settings"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "structuressettings.htm")
+            Case "Message Coding Settings"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "codingsettings.htm")
+        End Select
+
+    End Sub
 End Class
 
 Public Class FTP

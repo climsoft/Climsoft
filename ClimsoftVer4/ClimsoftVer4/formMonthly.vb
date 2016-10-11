@@ -67,7 +67,12 @@ Public Class formMonthly
         For m = 3 To 14
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -77,7 +82,12 @@ Public Class formMonthly
         For m = 15 To 26
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -213,6 +223,12 @@ Public Class formMonthly
         'Set the record index counter to the first row
         inc = 0
 
+        'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
+
         myConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
@@ -249,7 +265,7 @@ Public Class formMonthly
         sql1 = "SELECT stationId,stationName FROM station"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obsElement WHERE elementId BETWEEN 200 AND 299"
+        sql3 = "SELECT elementID,elementName FROM obselement WHERE elementId BETWEEN 200 AND 299"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
@@ -470,7 +486,45 @@ Public Class formMonthly
                     End If
                 End If
             Next ctl
+            '===========================
+            ''Get the element limits
 
+            elemCode = cboElement.SelectedValue
+            sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
+            '
+            daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+            'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+            dsValueLimits.Clear()
+            'Add row for element code associated with active control
+            daValueLimits.Fill(dsValueLimits, "obselement")
+
+            obsValue = Me.ActiveControl.Text
+            'Get element lower limit
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+            Else
+                valLowerLimit = ""
+            End If
+            'Get element upper limit
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+            Else
+                valUpperLimit = ""
+            End If
+
+            'Get value for qcTotlRequired
+            totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            '===========================
+
+            'Check upper limit
+            For Each ctl In Me.Controls
+                obsValue = ctl.Text
+                If Strings.Left(ctl.Name, 6) = "txtVal" And ctl.Text <> "" And valUpperLimit <> "" Then
+                    If Not objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit) Then
+                        ctl.Focus()
+                    End If
+                End If
+            Next ctl
 
             'Check lower limit
             For Each ctl In Me.Controls
@@ -509,6 +563,9 @@ Public Class formMonthly
             ' txtSignature.Text = frmLogin.txtUser.Text
             ds.Tables("form_monthly").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
+            'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
+            ds.Tables("form_monthly").Rows(inc).Item("entryDatetime") = Now()
+
             'Commit observation values to database
             'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
             For m = 3 To 14
@@ -543,6 +600,12 @@ Public Class formMonthly
             btnMoveLast.Enabled = True
             btnMoveNext.Enabled = True
             btnMovePrevious.Enabled = True
+
+            'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+            If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                btnDelete.Enabled = False
+            End If
+
             maxRows = ds.Tables("form_monthly").Rows.Count
             inc = maxRows - 1
 
@@ -778,5 +841,61 @@ Public Class formMonthly
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
 
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_monthly"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
+        Else
+            sql = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Dim tableName As String
+        tableName = "form_monthly"
+        frmLogin.pushKeyEntryDataToRemote(tableName)
+        lblDataPushMessage.Text = msgDataPushtoRemote
+        lblDataPushMessage.Refresh()
+    End Sub
+
+    Private Sub btnSetSchedule_Click(sender As Object, e As EventArgs) Handles btnSetSchedule.Click
+
+        ' btnOK.Enabled = False
+        btnSetSchedule.Text = "Timer Activated"
+        btnSetSchedule.Enabled = False
+        btnSetSchedule.Refresh()
+
+        'Enable timer
+        Timer1.Enabled = True
+        lblTimerActivationStatus.Text = "Timer activated!"
+        lblTimerActivationStatus.Refresh()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim hourNow As Integer, minuteNow As Integer, secondNow As Integer
+
+        hourNow = Hour(Now)
+        minuteNow = Minute(Now)
+        secondNow = Second(Now())
+
+        'Start processing a minute from the time the schedule is set i.e. a minute after the "schedule" button is clicked.
+        'At that time the value of the variable "minute_now" will be a minute after the schedule is set.
+        'The value of the minute in the "minute texbox remains the same. It will be after an hour when the value of the variable
+        '"minute_now" will be equal to the value in the "minute" texbox plus 1. So the processing is repeated every hour
+
+        'If minuteNow = Val(txtTimerStartMinute.Text) + 1 Then
+        If minuteNow = Val(txtTimerStartMinute.Text) And secondNow = 0 Then
+            'call subroutine for compiling and ingesting AWS data
+            'compile_aws_data
+            frmLogin.pushKeyEntryDataToRemote("form_monthly")
+            lblDataPushMessage.Text = msgDataPushtoRemote
+            lblDataPushMessage.Refresh()
+        End If
     End Sub
 End Class

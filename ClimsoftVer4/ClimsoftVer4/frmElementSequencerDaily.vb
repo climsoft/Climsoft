@@ -41,6 +41,6 @@
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented!", MsgBoxStyle.Information)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "dailydata.htm")
     End Sub
 End Class

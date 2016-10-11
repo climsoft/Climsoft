@@ -35,20 +35,30 @@ Public Class frmProducts
             'sql = "SELECT * FROM tblproducts"
             sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            cmbProductsCategory.Items.Clear()
+            lstvProducts.Clear()
             da.Fill(ds, "tblproducts")
-            ' conn.Close()
+            conn.Close()
+            '------MaxRows assignment statement and [kount loop] below moved from position below [End Try] block
+            maxRows = ds.Tables("tblproducts").Rows.Count
+            For kount = 0 To maxRows - 1 Step 1
 
+                cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
+
+            Next
+            '--------------
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
 
-        maxRows = ds.Tables("tblproducts").Rows.Count
+        '' maxRows = ds.Tables("tblproducts").Rows.Count
         'MsgBox(maxRows)
-        For kount = 0 To maxRows - 1 Step 1
+        ''For kount = 0 To maxRows - 1 Step 1
 
-            cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
+        ''    cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
 
-        Next
+        ''Next
         Exit Sub
 
     End Sub
@@ -71,6 +81,7 @@ Public Class frmProducts
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
+
         da.Fill(ds, "tblProducts")
 
         maxRows = (ds.Tables("tblProducts").Rows.Count)
@@ -138,5 +149,17 @@ Public Class frmProducts
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
+
+    Private Sub EditToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm")
     End Sub
 End Class

@@ -7,6 +7,7 @@
     Dim rec As Integer
     Dim Kount As Integer
     Dim FileNm As String
+    Dim SelectedTab As Integer
 
 
     Private Sub cmdcloses_Click(sender As Object, e As EventArgs)
@@ -52,12 +53,15 @@
 
     Private Sub cmdFolder_Click_1(sender As Object, e As EventArgs) Handles cmdFolder.Click
         Dim fld As String
+        ' Set busy Cursor pointer
+        Me.Cursor = Cursors.WaitCursor
         folderPaperArchive.ShowDialog()
         txtSelectedFolder.Text = folderPaperArchive.SelectedPath
         fld = txtSelectedFolder.Text
 
         lstvFiles.Clear()
         ListFiles(fld)
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub chkFiles_CheckedChanged(sender As Object, e As EventArgs) Handles chkFiles.CheckedChanged
@@ -88,32 +92,44 @@
     End Sub
 
     Private Sub cmdArchive_Click(sender As Object, e As EventArgs) Handles cmdArchive.Click
-        Dim imgFile As String
-        On Error GoTo err
+        Dim imgFile, imageFolder As String
 
-        'Craete the images folder if it does not exist
-        If Not IO.Directory.Exists("c:\images") Then
-            IO.Directory.CreateDirectory("c:\images")
-        End If
+        ' Set busy Cursor pointer
+        Me.Cursor = Cursors.WaitCursor
 
-        For i = 0 To lstvFiles.Items.Count - 1
-            imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
-            If lstvFiles.Items(i).Checked Then
-                IO.File.Copy(imgFile, "c:\images\" & lstvFiles.Items(i).Text, True)
-                UpdateArchive(txtSelectedFolder.Text, lstvFiles.Items(i).Text)
+        Try
+
+            'Create the images folder if it does not exist
+            imageFolder = lblArhiveFolder.Text
+            If Not IO.Directory.Exists(imageFolder) Then
+                IO.Directory.CreateDirectory(imageFolder)
             End If
-        Next
-        MsgBox("Archiving Completed")
-        Exit Sub
-err:
-        MsgBox(Err.Description)
+            'MsgBox(imageFolder)
+            For i = 0 To lstvFiles.Items.Count - 1
+                imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
+                If lstvFiles.Items(i).Checked Then
+                    IO.File.Copy(imgFile, imageFolder & "\" & lstvFiles.Items(i).Text, True)
+                    'MsgBox(txtSelectedFolder.Text & " " & lstvFiles.Items(i).Text)
+                    UpdateArchive(lblArhiveFolder.Text, lstvFiles.Items(i).Text)
+
+                End If
+            Next
+            'MsgBox("Archiving Completed")
+            'lstMessages.Items.Add("Archiving Completed")
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            lstMessages.Items.Add(ex.Message)
+            ' Set busy Cursor pointer
+            Me.Cursor = Cursors.Default
+        End Try
+        Me.Cursor = Cursors.Default
     End Sub
     Sub UpdateArchive(FilePth As String, FileNm As String)
         Dim siz, count, i As Integer
         Dim imgfile, str, stn, frm, yy, mm, dd, hh, dt, datetim As String
 
         imgfile = FilePth & "\" & FileNm
-       
+        'MsgBox(imgfile)
         siz = Len(FileNm)
         count = 0
         str = ""
@@ -152,7 +168,8 @@ err:
                     'ArchiveRecord(stn, frm, yy, mm, dd, hh, imgfile)
                     ArchiveRecord(stn, frm, datetim, imgfile)
                 Else
-                    MsgBox("Incorrect Datetime Structure")
+                    'MsgBox("Incorrect Datetime Structure")
+                    lstMessages.Items.Add("Incorrect Datetime Structure")
                 End If
                 Exit For
             End If
@@ -181,6 +198,7 @@ err:
         'MsgBox(stn)
 
         Dim recCommit As New dataEntryGlobalRoutines
+
         dsNewRow = ds.Tables("paperarchive").NewRow
 
         dsNewRow.Item("belongsTo") = stn
@@ -188,20 +206,24 @@ err:
         dsNewRow.Item("image") = img
         dsNewRow.Item("classifiedInto") = frm
 
-        'dsNewRow.Item("year") = yr
-        'dsNewRow.Item("month") = mn
-        'dsNewRow.Item("day") = dy
-        'dsNewRow.Item("hour") = hr
-        'dsNewRow.Item("image") = img
-
         'Add a new record to the data source table
         ds.Tables("paperarchive").Rows.Add(dsNewRow)
         da.Update(ds, "paperarchive")
         'MsgBox("Record Archived")
         Exit Sub
 Err:
-        MsgBox(Err.Number & " : " & Err.Description)
+        'MsgBox(Err.Number & " : " & Err.Description)
+        lstMessages.Items.Add(Err.Description)
+    End Sub
 
+    Private Sub formPaperArchive_Click(sender As Object, e As EventArgs) Handles Me.Click
+        Select Case tabImageArchives.TabIndex
+            Case 0
+                MsgBox("Structured")
+            Case 1
+            Case 2
+
+        End Select
     End Sub
 
     Private Sub formPaperArchive_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -209,10 +231,6 @@ Err:
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()
-
-        'sql = "SELECT * FROM paperarchive"
-        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        'da.Fill(ds, "paperarchive")
 
         FillList(txtStationArchive, "station", "stationId")
         FillList(txtStation, "station", "stationId")
@@ -223,6 +241,35 @@ Err:
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         da.Fill(ds, "paperarchive")
 
+        ' Get the image archiving folder
+        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsr As New DataSet
+        Dim regmax As Integer
+        Dim appath As String
+        Dim ImagesPath As String
+
+        sql = "SELECT * FROM regkeys"
+        dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        dar.Fill(dsr, "regkeys")
+        regmax = dsr.Tables("regkeys").Rows.Count
+
+        ' Check for the settings for the image files archive folder and display the details to the user
+        For i = 0 To regmax - 1
+            If dsr.Tables("regkeys").Rows(i).Item("keyName") = "key12" Then
+                If IsDBNull(dsr.Tables("regkeys").Rows(i).Item("keyValue")) Or dsr.Tables("regkeys").Rows(i).Item("keyValue") = "" Then
+                    appath = IO.Directory.GetParent(Application.StartupPath).FullName
+                    ImagesPath = IO.Directory.GetParent(appath).FullName
+                    lblArhiveFolder.Text = ImagesPath & "\images"
+                    lblArhiveFolder.ForeColor = Color.Red
+                    lblArhiveFolder.Font.Bold.Equals(True)
+                    txtDefaultFolder.Text = "Default folder for image archiving is being used. " & _
+                                            "You may go to Tools -> General Settings and choose a convinient folder for good management of image files archiving"
+                Else
+                    lblArhiveFolder.Text = dsr.Tables("regkeys").Rows(i).Item("keyValue")
+                End If
+                Exit For
+            End If
+        Next
     End Sub
 
     '    Private Sub cmdView_Click(sender As Object, e As EventArgs)
@@ -279,43 +326,65 @@ Err:
 
 
     Private Sub cmdArchiveUnstructure_Click(sender As Object, e As EventArgs) Handles cmdArchiveUnstructure.Click
-        Dim dir, ext As String
+        Dim dir, ext, appath, ImagesPath As String
         Dim fld, xt As Integer
         Dim stn, frm, y, m, d, h As String
         Dim frmdatetime As Date
 
-        On Error GoTo Err
-        'Craete the images folder if it does not exist
-        If Not IO.Directory.Exists("c:\images") Then
-            IO.Directory.CreateDirectory("c:\images")
-        End If
+        Me.Cursor = Cursors.WaitCursor
+        Try
 
-        Dir = IO.Directory.GetParent(txtImageFile.Text).FullName
-        fld = Len(Dir)
-        xt = InStr(txtImageFile.Text, ".")
-        ext = Mid(txtImageFile.Text, xt + 1, Len(txtImageFile.Text) - 1)
+            ' Define Images Archiving path
+            appath = IO.Directory.GetParent(Application.StartupPath).FullName
+            ImagesPath = IO.Directory.GetParent(appath).FullName
 
-        FileNm = txtStationArchive.Text & "-" & txtFormId.Text & "-" & Format(Val(txtYear.Text), "00") & Format(Val(txtMonth.Text), "00") _
-            & Format(Val(txtDay.Text), "00") & Format(Val(txtHour.Text), "00") & "." & ext
+            ImagesPath = ImagesPath & "\images"
+            'MsgBox(ImagesPath)
+            '    GetFullPath(Application.StartupPath) & "\data"
 
-        stn = txtStationArchive.Text
-        frm = txtFormId.Text
+            If Not IO.Directory.Exists(ImagesPath) Then
+                IO.Directory.CreateDirectory(ImagesPath)
+            End If
 
-        y = txtYear.Text
-        m = Format(Val(txtDay.Text), "00")
-        d = Format(Val(txtMonth.Text), "00")
-        h = Format(Val(txtHour.Text), "00")
-        frmdatetime = y & "-" & m & "-" & d & " " & h & ":00:00"
 
-        If IsDate(frmdatetime) Then
-            IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
-            ArchiveRecord(stn, frm, frmdatetime, "c:\images\" & FileNm)
-        Else
-            MsgBox("Can't Archive Image. Invalid Datetime value")
-        End If
-        Exit Sub
-Err:
-        MsgBox(Err.Description)
+            'Craete the images folder if it does not exist
+
+            'If Not IO.Directory.Exists("c:\images") Then
+            '    IO.Directory.CreateDirectory("c:\images")
+            'End If
+
+            dir = IO.Directory.GetParent(txtImageFile.Text).FullName
+            fld = Len(dir)
+            xt = InStr(txtImageFile.Text, ".")
+            ext = Mid(txtImageFile.Text, xt + 1, Len(txtImageFile.Text) - 1)
+
+            FileNm = txtStationArchive.Text & "-" & txtFormId.Text & "-" & Format(Val(txtYear.Text), "00") & Format(Val(txtMonth.Text), "00") _
+                & Format(Val(txtDay.Text), "00") & Format(Val(txtHour.Text), "00") & "." & ext
+
+            stn = txtStationArchive.Text
+            frm = txtFormId.Text
+
+            y = txtYear.Text
+            m = Format(Val(txtMonth.Text), "00")
+            d = Format(Val(txtDay.Text), "00")
+            h = Format(Val(txtHour.Text), "00")
+            frmdatetime = y & "-" & m & "-" & d & " " & h & ":00:00"
+
+            If IsDate(frmdatetime) Then
+                'IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
+                IO.File.Copy(txtImageFile.Text, ImagesPath & "\" & FileNm, True)
+                ArchiveRecord(stn, frm, frmdatetime, ImagesPath & "\" & FileNm)
+            Else
+                'MsgBox("Can't Archive Image. Invalid Datetime value")
+                lstMessages.Items.Add("Can't Archive Image. Invalid Datetime value")
+            End If
+
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+            lstMessages.Items.Add(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
+        Me.Cursor = Cursors.Default
     End Sub
     Sub FillList(ByRef lst As ComboBox, tbl As String, idxfld As String)
         Dim dstn As New DataSet
@@ -331,18 +400,19 @@ Err:
     End Sub
 
     Private Sub tabImageArchives_Click(sender As Object, e As EventArgs) Handles tabImageArchives.Click
-
-        If tabImageArchives.SelectedIndex = 2 Then
+        SelectedTab = tabImageArchives.SelectedIndex
+        'MsgBox(SelectedTab)
+        If SelectedTab = 2 Then
 
             sql = "SELECT * FROM  paperarchive"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
             da.Fill(ds, "paperarchive")
 
             rec = 0
             Kount = ds.Tables("paperarchive").Rows.Count
 
             ViewImage(rec)
-
         End If
 
     End Sub
@@ -352,6 +422,7 @@ Err:
     End Sub
 
     Private Sub TabViewArchive_Click(sender As Object, e As EventArgs) Handles TabViewArchive.Click
+        lstMessages.Items.Clear()
 
     End Sub
 
@@ -427,4 +498,87 @@ Err:
     End Sub
 
 
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        lstMessages.Items.Clear()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Select Case tabImageArchives.SelectedIndex
+            Case 0
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "structuredfiles.htm")
+            Case 1
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "unstructuredfiles.htm")
+            Case 2
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "viewimages.htm")
+        End Select
+
+    End Sub
+
+    Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
+
+    End Sub
+
+    Private Sub cmdDeleteArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdDeleteArchiveDef.Click
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recDelete As New dataEntryGlobalRoutines
+
+        If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
+
+            sql = "SELECT * FROM paperarchive"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
+            da.Fill(ds, "paperarchive")
+
+            'Display message to show that delete operation has been cancelled
+            recDelete.messageBoxOperationCancelled()
+            Exit Sub
+        End If
+        Try
+            MsgBox(rec)
+            MsgBox(ds.Tables("paperarchive").Rows(rec).Item(0))
+            ds.Tables("paperarchive").Rows(rec).Delete()
+            da.Update(ds, "paperarchive")
+            Kount = Kount - 1
+            'inc = 0
+
+            ''Call subroutine for record navigation
+            'navigateRecords()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        'DeleteRecord("paperarchive", rec)
+
+    End Sub
+
+    Function DeleteRecord(tbl As String, recs As Integer) As Boolean
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recDelete As New dataEntryGlobalRoutines
+        DeleteRecord = True
+        On Error GoTo Err
+
+        sql = "SELECT * FROM " & tbl
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        da.Fill(ds, tbl)
+
+
+        ds.Tables(tbl).Rows(recs).Delete()
+        da.Update(ds, tbl)
+
+        'If rec < Kount - 1 Then
+        '    populateStations("station", rec + 1, Kount)
+        'Else
+        '    populateStations("station", rec, Kount)
+        'End If
+
+        Exit Function
+Err:
+        MsgBox(Err.Description)
+        DeleteRecord = False
+    End Function
 End Class

@@ -21,30 +21,36 @@ Public Class frmImportCSV
     Dim da As OleDb.OleDbDataAdapter
     Dim fd As OpenFileDialog = New OpenFileDialog()
     Dim strDataFile As String, strSchemaFile As String, strClicomDataFolder As String
+    Dim messageName As String, messageBoxAlert As String
 
     Private Sub frmImportCSV_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ' New language translation approach proposed as an alternative to using the Multilanguage tool provided by Microsoft. 20160206, ASM.
+        'Additional inline documentation is contained in the Class developed.
+        'New Class [clsLanguageTranslation] and Function [translateText] have been developed for translation. 201606, ASM
+
+        Dim ctrl As Control, TranslationInputText As String
+        Dim objTranslate As New clsLanguageTranslation
+
+        'Translate text for form title
+        TranslationInputText = Me.Tag
+        Me.Text = objTranslate.translateText(TranslationInputText)
+
+        'Translate text for lables and command buttons
+        For Each ctrl In Me.Controls      
+            If Strings.Left(ctrl.Name, 3) = "lbl" Or Strings.Left(ctrl.Name, 3) = "btn" Then
+                TranslationInputText = ctrl.Tag
+                ctrl.Text = objTranslate.translateText(TranslationInputText)
+            End If
+        Next ctrl
+
+        messageName = "msgNotYetImplemented"
+        'Translate message
+        TranslationInputText = messageName
+        messageBoxAlert = objTranslate.translateText(TranslationInputText)
+
+        'Get CLICOM data folder from dataset for [regkeys] table 
         strClicomDataFolder = dsReg.Tables("regData").Rows(9).Item("keyValue")
-        ''Dim strConnString As String
-        ''strFolderPath = txtFolderName.Text
-        ''strFileName = txtFileName.Text
-        ''strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strFolderPath & ";Extended Properties=Text;"
-        ''Dim conn1 As New OleDb.OleDbConnection
-        ''rec = -1
-
-        ' ''Try
-        ''conn1.ConnectionString = strConnString
-        ''conn1.Open()
-
-        ''sql = "SELECT * FROM [" & strFileName & "]"
-
-        ''da = New OleDb.OleDbDataAdapter(sql, conn1)
-        ''da.Fill(ds, "clicomDaily")
-        ''conn1.Close()
-        ''MsgBox("CSV data imported into dataset !", MsgBoxStyle.Information)
-
-        ' Catch ex As OleDb.OleDbException
-        'MessageBox.Show(ex.Message)
-        ' End Try
+        
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -217,5 +223,11 @@ Public Class frmImportCSV
             btnOK.Enabled = True
         End If
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        'MsgBox(messageBoxAlert, MsgBoxStyle.Information)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "datatransfers.htm#from_CLICOM")
+    End Sub
+
 End Class
 

@@ -8,8 +8,10 @@
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        msgTxtNotYetImplemented = "Not yet implemented!"
-        MsgBox(msgTxtNotYetImplemented)
+        'msgTxtNotYetImplemented = "Not yet implemented!"
+        'MsgBox(msgTxtNotYetImplemented)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "qcchecks.htm#updateobsfinal")
+
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
