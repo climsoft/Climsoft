@@ -42,7 +42,7 @@
         For Each da1 In d1
             fls = da1.Name
             'listImages.Items.Add(da1)
-            lstvFiles.Items.Add(fls)
+            If InStr("jpgpngtifgifbmpemf", Strings.Right(fls, 3)) > 0 Then lstvFiles.Items.Add(fls)
         Next
 
         FilesListSatus(True)
@@ -111,7 +111,6 @@
                     IO.File.Copy(imgFile, imageFolder & "\" & lstvFiles.Items(i).Text, True)
                     'MsgBox(txtSelectedFolder.Text & " " & lstvFiles.Items(i).Text)
                     UpdateArchive(lblArhiveFolder.Text, lstvFiles.Items(i).Text)
-
                 End If
             Next
             'MsgBox("Archiving Completed")
@@ -520,65 +519,125 @@ Err:
     End Sub
 
     Private Sub cmdDeleteArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdDeleteArchiveDef.Click
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recDelete As New dataEntryGlobalRoutines
+        Dim sql0 As String
+        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim stn, dt, img, frm As String
 
-        If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.No Then
-
-            sql = "SELECT * FROM paperarchive"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-            ds.Clear()
-            da.Fill(ds, "paperarchive")
-
-            'Display message to show that delete operation has been cancelled
-            recDelete.messageBoxOperationCancelled()
-            Exit Sub
-        End If
         Try
-            MsgBox(rec)
-            MsgBox(ds.Tables("paperarchive").Rows(rec).Item(0))
-            ds.Tables("paperarchive").Rows(rec).Delete()
-            da.Update(ds, "paperarchive")
-            Kount = Kount - 1
-            'inc = 0
+            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
 
-            ''Call subroutine for record navigation
-            'navigateRecords()
-        Catch ex As Exception
+                sql = "SELECT * FROM paperarchive"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                ds.Clear()
+                da.Fill(ds, "paperarchive")
+
+                stn = ds.Tables("PaperArchive").Rows(rec).Item(0)
+                dt = ds.Tables("PaperArchive").Rows(rec).Item(1)
+                img = ds.Tables("PaperArchive").Rows(rec).Item(2)
+                frm = ds.Tables("PaperArchive").Rows(rec).Item(3)
+
+                ' Change date format to yyyy-mm-dd hh:mm:ss
+                dt = DateAndTime.Year(dt) & "-" & DateAndTime.Month(dt) & "-" & DateAndTime.Day(dt) & Strings.Right(dt, 9)
+
+                ' Change the path character to mysql format
+                img = Strings.Replace(img, "\", "\\")
+
+                comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+                sql0 = "DELETE FROM `paperarchive` WHERE  `belongsTo`='" & stn & "' AND `formDatetime`='" & dt & "' AND `image`='" & img & "' AND `classifiedInto`='" & frm & "' LIMIT 1;"
+                comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+                comm.ExecuteNonQuery()   ' Execute the query
+
+                ds.Clear()
+                da.Fill(ds, "paperarchive")
+                Kount = ds.Tables("paperarchive").Rows.Count
+                If Kount > 0 Then
+                    rec = 0
+                    ViewImage(0)
+                End If
+
+            End If
+            Catch ex As Exception
             MsgBox(ex.Message)
         End Try
 
-        'DeleteRecord("paperarchive", rec)
+
+
+        '    'Display message to show that delete operation has been cancelled
+        '    recDelete.messageBoxOperationCancelled()
+        '    Exit Sub
+        'End If
+        'Try
+        '    'MsgBox(rec)
+        '    MsgBox(ds.Tables("paperarchive").Rows(rec).Item(2))
+        '    ds.Tables("paperarchive").Rows(rec).Delete()
+        '    da.Update(ds, "paperarchive")
+        '    Kount = Kount - 1
+        '    'inc = 0
+
+        '    ''Call subroutine for record navigation
+        '    'navigateRecords()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
+
+        'If DeleteRecord("paperarchive", rec) Then
+
+
+        'End If
 
     End Sub
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recDelete As New dataEntryGlobalRoutines
+        Dim recCommit As New dataEntryGlobalRoutines
+        Dim sql0 As String
+        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim stn, dt, img, frm As String
+
         DeleteRecord = True
-        On Error GoTo Err
+        Try
+            sql = "SELECT * FROM " & tbl
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            da.Fill(ds, tbl)
 
-        sql = "SELECT * FROM " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        da.Fill(ds, tbl)
+            stn = ds.Tables("PaperArchive").Rows(rec).Item(0)
+            dt = ds.Tables("PaperArchive").Rows(rec).Item(1)
+            img = ds.Tables("PaperArchive").Rows(rec).Item(2)
+            frm = ds.Tables("PaperArchive").Rows(rec).Item(3)
 
+            ' Change date format to yyyy-mm-dd hh:mm:ss
+            dt = DateAndTime.Year(dt) & "-" & DateAndTime.Month(dt) & "-" & DateAndTime.Day(dt) & Strings.Right(dt, 9)
 
-        ds.Tables(tbl).Rows(recs).Delete()
-        da.Update(ds, tbl)
+            ' Change the path character to mysql format
+            img = Strings.Replace(img, "\", "\\")
 
-        'If rec < Kount - 1 Then
-        '    populateStations("station", rec + 1, Kount)
-        'Else
-        '    populateStations("station", rec, Kount)
-        'End If
+            comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+            sql0 = "DELETE FROM `paperarchive` WHERE  `belongsTo`='" & stn & "' AND `formDatetime`='" & dt & "' AND `image`='" & img & "' AND `classifiedInto`='" & frm & "' LIMIT 1;"
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
 
-        Exit Function
-Err:
-        MsgBox(Err.Description)
-        DeleteRecord = False
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            DeleteRecord = False
+        End Try
+
+    End Function
+
+    Function NewString(sourcestring As String, str1 As String) As String
+        Dim num As Integer
+        Dim c As String
+
+        NewString = ""
+        For num = 1 To Len(sourcestring)
+            c = Mid(sourcestring, num, 1)
+            NewString = NewString & c
+            If c = str1 Then NewString = NewString & c
+        Next
+
     End Function
 End Class

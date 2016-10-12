@@ -1191,7 +1191,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Location = New System.Drawing.Point(196, 115)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 31)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 240)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
