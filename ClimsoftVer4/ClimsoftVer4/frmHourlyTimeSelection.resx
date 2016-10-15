@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblHourlyTimeSelection.Text" xml:space="preserve">
+  <data name="lblGuidelinesFormHourlyTimeSelection.Text" xml:space="preserve">
     <value>If you require to use the hourly form for entering only selected hours e.g. synoptic hours, then set the selection for those hours to one [1] and the rest to zero [0]. You can toggle to all hours on the hourly form when required.</value>
   </data>
 </root>

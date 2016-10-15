@@ -33,9 +33,9 @@ Public Class frmGeneralSettings
         'which is a parameter of the "Row" attribute or property of the dataset.
 
         'cboElement.Text = ds.Tables("form_hourly").Rows(inc).Item("elementId")
-        txtKeyName.Text = ds.Tables("regKeys").Rows(inc).Item("keyName")
-        txtKeyValue.Text = ds.Tables("regKeys").Rows(inc).Item("keyValue")
-        txtKeyDescription.Text = ds.Tables("regKeys").Rows(inc).Item("keyDescription")
+        txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
+        txtKeyValue.Text = ds.Tables("regkeys").Rows(inc).Item("keyValue")
+        txtKeyDescription.Text = ds.Tables("regkeys").Rows(inc).Item("keyDescription")
 
         displayRecordNumber()
     End Sub
@@ -66,9 +66,9 @@ Public Class frmGeneralSettings
 
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
-            Sql = "SELECT * FROM regKeys"
+            sql = "SELECT * FROM regkeys"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-            da.Fill(ds, "regKeys")
+            da.Fill(ds, "regkeys")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
@@ -77,16 +77,16 @@ Public Class frmGeneralSettings
             MessageBox.Show(ex.Message)
         End Try
 
-        maxRows = ds.Tables("regKeys").Rows.Count
+        maxRows = ds.Tables("regkeys").Rows.Count
 
        
 
         If maxRows > 0 Then
            
 
-            txtKeyName.Text = ds.Tables("regKeys").Rows(inc).Item("keyName")
+            txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
             txtKeyValue.Text = ds.Tables("regkeys").Rows(inc).Item("keyValue")
-            txtKeyDescription.Text = ds.Tables("regKeys").Rows(inc).Item("keyDescription")
+            txtKeyDescription.Text = ds.Tables("regkeys").Rows(inc).Item("keyDescription")
 
             displayRecordNumber()
         Else
@@ -207,17 +207,17 @@ Public Class frmGeneralSettings
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
             'Try
-        dsNewRow = ds.Tables("regKeys").NewRow
+        dsNewRow = ds.Tables("regkeys").NewRow
             'Add a new record to the data source table
-        ds.Tables("regKeys").Rows.Add(dsNewRow)
+        ds.Tables("regkeys").Rows.Add(dsNewRow)
         'Commit data to database
            
-        ds.Tables("regKeys").Rows(inc).Item("keyName") = txtKeyName.Text
-        ds.Tables("regKeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
-        ds.Tables("regKeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyName") = txtKeyName.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
 
           
-        da.Update(ds, "regKeys")
+        da.Update(ds, "regkeys")
 
             'Display message for successful record commit to table
             recCommit.messageBoxCommit()
@@ -231,7 +231,7 @@ Public Class frmGeneralSettings
             btnMoveLast.Enabled = True
             btnMoveNext.Enabled = True
             btnMovePrevious.Enabled = True
-        maxRows = ds.Tables("regKeys").Rows.Count
+        maxRows = ds.Tables("regkeys").Rows.Count
             inc = maxRows - 1
 
             'Call subroutine for record navigation
@@ -249,12 +249,12 @@ Public Class frmGeneralSettings
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
         'Update header fields for form in database
-        ds.Tables("regKeys").Rows(inc).Item("keyName") = txtKeyName.Text
-        ds.Tables("regKeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
-        ds.Tables("regKeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyName") = txtKeyName.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyValue") = txtKeyValue.Text
+        ds.Tables("regkeys").Rows(inc).Item("keyDescription") = txtKeyDescription.Text
 
         'The data adapter is used to update the record in the data source table
-        da.Update(ds, "regKeys")
+        da.Update(ds, "regkeys")
 
         'Show message for successful updating or record.
         recUpdate.messageBoxRecordedUpdated()
@@ -273,8 +273,8 @@ Public Class frmGeneralSettings
             Exit Sub
         End If
 
-        ds.Tables("regKeys").Rows(inc).Delete()
-        da.Update(ds, "regKeys")
+        ds.Tables("regkeys").Rows(inc).Delete()
+        da.Update(ds, "regkeys")
         maxRows = maxRows - 1
         inc = 0
 
@@ -307,6 +307,22 @@ Public Class frmGeneralSettings
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented!", MsgBoxStyle.Information)
+        'MsgBox("Not yet implemented!", MsgBoxStyle.Information)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "generalsettings.htm")
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        dsSourceTableName = "regkeys"
+        userName = frmLogin.txtUsername.Text
+        If userGroup = "ClimsoftAdmin" Or userName = "root" Then
+            sql = "SELECT * FROM regkeys ORDER by keyName;"
+            viewRecords.viewTableRecords(sql)
+        Else
+            MsgBox("You don't have permission to view the information!", MsgBoxStyle.Exclamation)
+        End If
+        MsgBox("When updation folder locations, Please keep forward slash'/' for QC output folder locations " & _
+            "and backslash for other folder locations '\'. ", MsgBoxStyle.Exclamation)
     End Sub
 End Class

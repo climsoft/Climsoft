@@ -247,7 +247,9 @@ Err:
     End Sub
 
     Private Sub cmdProcess_Click(sender As Object, e As EventArgs) Handles cmdProcess.Click
-        On Error GoTo Err
+        'On Error GoTo Err
+        'Try
+        Dim fails As Long
         Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(ImportFile)
             MyReader.TextFieldType = FileIO.FieldType.Delimited
             MyReader.SetDelimiters(",")
@@ -260,34 +262,55 @@ Err:
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
 
-
+            Me.Cursor = Windows.Forms.Cursors.WaitCursor
+            fails = 0
+            listErrors.Items.Clear()
             Do While MyReader.EndOfData = False
-                lin = MyReader.LineNumber()
+                Try
+                    lin = MyReader.LineNumber()
 
-                currentRow = MyReader.ReadFields()
+                    currentRow = MyReader.ReadFields()
 
-                If lin > 1 Then
-                    nums = 1
-                    dsNewRow = s.Tables("station").NewRow
-                    For Each currentField In currentRow
-                        rows = New String() {nums, currentField}
+                    If lin > 1 Then
+                        nums = 1
+                        dsNewRow = s.Tables("station").NewRow
+                        For Each currentField In currentRow
+                            rows = New String() {nums, currentField}
 
-                        If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 And Len(currentField) <> 0 Then
-                            'MsgBox(DataGridView1.Rows(nums - 1).Cells(2).Value & " " & currentField)
-                            dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
-                        End If
-                        nums = nums + 1
-                    Next
-                    s.Tables("station").Rows.Add(dsNewRow)
-                    d.Update(s, "station")
-                End If
+                            If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 And Len(currentField) <> 0 Then
+                                'MsgBox(DataGridView1.Rows(nums - 1).Cells(2).Value & " " & currentField)
+                                dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
+                            End If
+                            nums = nums + 1
+                        Next
+                        s.Tables("station").Rows.Add(dsNewRow)
+                        d.Update(s, "station")
+                    End If
+                Catch ex As Exception
+                    listErrors.Items.Add(lin - 1 & " " & ex.Message)
+                    listErrors.Refresh()
+                    fails = fails + 1
+                    s.Clear()
+                    'If ex.HResult <> -2147467259 Then Exit Do
+                End Try
             Loop
-            MsgBox("Data successfully imported")
+            Me.Cursor = Windows.Forms.Cursors.Default
+            lblSummary.Text = "Summary: " & lin - fails - 1 & " out of " & lin - 1 & " Records Successfully Imported"
         End Using
         Exit Sub
-Err:
-        'If Err.Number = 5 Then Resume Next
-        MsgBox(Err.Number & " " & Err.Description)
+        'Err:
+        '        MsgBox(Err.Description & " " & Err.Number)
+        '        If Err.Number = 5 Then Resume Next
+
+
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    If ex.HResult = -2147467259 Then Resume Next
+        '    MsgBox(ex.HResult)
+        Me.Cursor = Windows.Forms.Cursors.Default
+        '    'If Err.Number = 5 Then Resume Next
+        '    'MsgBox(Err.Number & " " & Err.Description)
+        'End Try
     End Sub
 
     Private Sub cmdCSV_Click(sender As Object, e As EventArgs) Handles cmdCSV.Click
@@ -316,33 +339,37 @@ Err:
         Me.Close()
     End Sub
 
-    Private Sub cmdCLIMSOFT3_Click(sender As Object, e As EventArgs) Handles cmdCLIMSOFT3.Click
+    Private Sub cmdCLIMSOFT3_Click(sender As Object, e As EventArgs)
         OpenFileImport.Filter = "CLIMSOFT database files|*.mdb"
         OpenFileImport.Title = "Open CLIMSOSFT Temporary Database File"
         OpenFileImport.ShowDialog()
 
         ImportFile = OpenFileImport.FileName
-        txtCLIMSOFT3.Text = ImportFile
+        'txtCLIMSOFT3.Text = ImportFile
         DataGridView1.Rows.Clear()
     End Sub
 
-    Private Sub cmdEXCEL_Click(sender As Object, e As EventArgs) Handles cmdEXCEL.Click
+    Private Sub cmdEXCEL_Click(sender As Object, e As EventArgs)
         OpenFileImport.Filter = "EXCEL files|*.xls;*.xlsx"
         OpenFileImport.Title = "Open EXCEL File"
         OpenFileImport.ShowDialog()
 
         ImportFile = OpenFileImport.FileName
-        txtEXCEL.Text = ImportFile
+        'txtEXCEL.Text = ImportFile
         DataGridView1.Rows.Clear()
     End Sub
 
-    Private Sub cmdACCESS_Click(sender As Object, e As EventArgs) Handles cmdACCESS.Click
+    Private Sub cmdACCESS_Click(sender As Object, e As EventArgs)
         OpenFileImport.Filter = "ACCESS database files|*.mdb;*.accdb"
         OpenFileImport.Title = "Open ACCESS File"
         OpenFileImport.ShowDialog()
 
         ImportFile = OpenFileImport.FileName
-        txtACCESS.Text = ImportFile
+        'txtACCESS.Text = ImportFile
         DataGridView1.Rows.Clear()
+    End Sub
+
+    Private Sub cmHelp_Click(sender As Object, e As EventArgs) Handles cmHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "importstations.htm")
     End Sub
 End Class

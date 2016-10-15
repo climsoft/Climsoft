@@ -22,6 +22,7 @@ Partial Class formDaily2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim YyyyLabel As System.Windows.Forms.Label
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
@@ -197,9 +198,22 @@ Partial Class formDaily2
         Me.btnAssignSameValue = New System.Windows.Forms.Button()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
+        Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
+        Me.lblDataPushMessage = New System.Windows.Forms.Label()
+        Me.btnSetSchedule = New System.Windows.Forms.Button()
+        Me.frameSetSchedule = New System.Windows.Forms.GroupBox()
+        Me.lblScheduleMinute = New System.Windows.Forms.Label()
+        Me.lblscheduleHour = New System.Windows.Forms.Label()
+        Me.txtTimerStartMinute = New System.Windows.Forms.TextBox()
+        Me.txtTimerStartHour = New System.Windows.Forms.TextBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.lblTimerActivationStatus = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.groupUnits.SuspendLayout()
         Me.grpDefaultValues.SuspendLayout()
+        Me.frameSetSchedule.SuspendLayout()
         Me.SuspendLayout()
         '
         'YyyyLabel
@@ -737,7 +751,7 @@ Partial Class formDaily2
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(385, 22)
+        Me.Label3.Location = New System.Drawing.Point(292, 22)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 493
@@ -746,7 +760,7 @@ Partial Class formDaily2
         'cboElement
         '
         Me.cboElement.FormattingEnabled = True
-        Me.cboElement.Location = New System.Drawing.Point(388, 38)
+        Me.cboElement.Location = New System.Drawing.Point(295, 38)
         Me.cboElement.Name = "cboElement"
         Me.cboElement.Size = New System.Drawing.Size(216, 21)
         Me.cboElement.TabIndex = 1
@@ -761,7 +775,7 @@ Partial Class formDaily2
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(574, 587)
+        Me.btnUpload.Location = New System.Drawing.Point(622, 568)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 490
@@ -771,7 +785,7 @@ Partial Class formDaily2
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(222, 593)
+        Me.Label5.Location = New System.Drawing.Point(219, 578)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 489
@@ -779,7 +793,7 @@ Partial Class formDaily2
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(287, 590)
+        Me.txtSequencer.Location = New System.Drawing.Point(284, 575)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 488
@@ -840,7 +854,7 @@ Partial Class formDaily2
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(574, 548)
+        Me.btnHelp.Location = New System.Drawing.Point(622, 534)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 479
@@ -850,7 +864,7 @@ Partial Class formDaily2
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(411, 549)
+        Me.btnClear.Location = New System.Drawing.Point(361, 534)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 477
@@ -860,7 +874,7 @@ Partial Class formDaily2
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(163, 549)
+        Me.btnCommit.Location = New System.Drawing.Point(100, 534)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 38
@@ -869,7 +883,7 @@ Partial Class formDaily2
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(330, 549)
+        Me.btnDelete.Location = New System.Drawing.Point(274, 534)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 476
@@ -878,7 +892,7 @@ Partial Class formDaily2
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(81, 549)
+        Me.btnAddNew.Location = New System.Drawing.Point(13, 534)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 37
@@ -887,7 +901,7 @@ Partial Class formDaily2
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(244, 549)
+        Me.btnUpdate.Location = New System.Drawing.Point(187, 534)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 475
@@ -897,7 +911,7 @@ Partial Class formDaily2
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(259, 520)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(256, 505)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 484
@@ -907,7 +921,7 @@ Partial Class formDaily2
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(212, 520)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(209, 505)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 483
@@ -917,7 +931,7 @@ Partial Class formDaily2
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(502, 520)
+        Me.btnMoveLast.Location = New System.Drawing.Point(499, 505)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 482
@@ -926,7 +940,7 @@ Partial Class formDaily2
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(311, 522)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(308, 507)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 481
@@ -934,7 +948,7 @@ Partial Class formDaily2
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(458, 520)
+        Me.btnMoveNext.Location = New System.Drawing.Point(455, 505)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 480
@@ -943,7 +957,7 @@ Partial Class formDaily2
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(492, 549)
+        Me.btnClose.Location = New System.Drawing.Point(535, 534)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 478
@@ -1574,7 +1588,6 @@ Partial Class formDaily2
         Me.txtSameValue.Name = "txtSameValue"
         Me.txtSameValue.Size = New System.Drawing.Size(47, 20)
         Me.txtSameValue.TabIndex = 1
-        Me.txtSameValue.Text = "0"
         '
         'btnAssignSameValue
         '
@@ -1604,11 +1617,130 @@ Partial Class formDaily2
         Me.Label36.TabIndex = 657
         Me.Label36.Text = "Period"
         '
+        'chkEnableSequencer
+        '
+        Me.chkEnableSequencer.AutoSize = True
+        Me.chkEnableSequencer.Checked = True
+        Me.chkEnableSequencer.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkEnableSequencer.ForeColor = System.Drawing.Color.Red
+        Me.chkEnableSequencer.Location = New System.Drawing.Point(535, 40)
+        Me.chkEnableSequencer.Name = "chkEnableSequencer"
+        Me.chkEnableSequencer.Size = New System.Drawing.Size(155, 17)
+        Me.chkEnableSequencer.TabIndex = 659
+        Me.chkEnableSequencer.Text = "Enable Element Sequencer"
+        Me.chkEnableSequencer.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(448, 534)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 660
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'btnPush
+        '
+        Me.btnPush.BackColor = System.Drawing.Color.Cyan
+        Me.btnPush.Location = New System.Drawing.Point(13, 568)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(75, 23)
+        Me.btnPush.TabIndex = 661
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = False
+        '
+        'lblDataPushMessage
+        '
+        Me.lblDataPushMessage.AutoSize = True
+        Me.lblDataPushMessage.ForeColor = System.Drawing.Color.Red
+        Me.lblDataPushMessage.Location = New System.Drawing.Point(10, 600)
+        Me.lblDataPushMessage.Name = "lblDataPushMessage"
+        Me.lblDataPushMessage.Size = New System.Drawing.Size(158, 13)
+        Me.lblDataPushMessage.TabIndex = 662
+        Me.lblDataPushMessage.Text = "Waiting for data push to remote."
+        '
+        'btnSetSchedule
+        '
+        Me.btnSetSchedule.Location = New System.Drawing.Point(13, 637)
+        Me.btnSetSchedule.Name = "btnSetSchedule"
+        Me.btnSetSchedule.Size = New System.Drawing.Size(117, 23)
+        Me.btnSetSchedule.TabIndex = 669
+        Me.btnSetSchedule.Text = "Activate Scheduler"
+        Me.btnSetSchedule.UseVisualStyleBackColor = True
+        '
+        'frameSetSchedule
+        '
+        Me.frameSetSchedule.Controls.Add(Me.lblScheduleMinute)
+        Me.frameSetSchedule.Controls.Add(Me.lblscheduleHour)
+        Me.frameSetSchedule.Controls.Add(Me.txtTimerStartMinute)
+        Me.frameSetSchedule.Controls.Add(Me.txtTimerStartHour)
+        Me.frameSetSchedule.Location = New System.Drawing.Point(167, 618)
+        Me.frameSetSchedule.Name = "frameSetSchedule"
+        Me.frameSetSchedule.Size = New System.Drawing.Size(216, 53)
+        Me.frameSetSchedule.TabIndex = 668
+        Me.frameSetSchedule.TabStop = False
+        Me.frameSetSchedule.Text = "Set minutes past hour"
+        '
+        'lblScheduleMinute
+        '
+        Me.lblScheduleMinute.AutoSize = True
+        Me.lblScheduleMinute.Location = New System.Drawing.Point(106, 24)
+        Me.lblScheduleMinute.Name = "lblScheduleMinute"
+        Me.lblScheduleMinute.Size = New System.Drawing.Size(50, 13)
+        Me.lblScheduleMinute.TabIndex = 3
+        Me.lblScheduleMinute.Text = "Minute(s)"
+        '
+        'lblscheduleHour
+        '
+        Me.lblscheduleHour.AutoSize = True
+        Me.lblscheduleHour.Enabled = False
+        Me.lblscheduleHour.Location = New System.Drawing.Point(9, 25)
+        Me.lblscheduleHour.Name = "lblscheduleHour"
+        Me.lblscheduleHour.Size = New System.Drawing.Size(30, 13)
+        Me.lblscheduleHour.TabIndex = 2
+        Me.lblscheduleHour.Text = "Hour"
+        '
+        'txtTimerStartMinute
+        '
+        Me.txtTimerStartMinute.Location = New System.Drawing.Point(162, 22)
+        Me.txtTimerStartMinute.Name = "txtTimerStartMinute"
+        Me.txtTimerStartMinute.Size = New System.Drawing.Size(45, 20)
+        Me.txtTimerStartMinute.TabIndex = 1
+        '
+        'txtTimerStartHour
+        '
+        Me.txtTimerStartHour.Enabled = False
+        Me.txtTimerStartHour.Location = New System.Drawing.Point(45, 22)
+        Me.txtTimerStartHour.Name = "txtTimerStartHour"
+        Me.txtTimerStartHour.Size = New System.Drawing.Size(40, 20)
+        Me.txtTimerStartHour.TabIndex = 0
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 1000
+        '
+        'lblTimerActivationStatus
+        '
+        Me.lblTimerActivationStatus.AutoSize = True
+        Me.lblTimerActivationStatus.ForeColor = System.Drawing.Color.Red
+        Me.lblTimerActivationStatus.Location = New System.Drawing.Point(407, 643)
+        Me.lblTimerActivationStatus.Name = "lblTimerActivationStatus"
+        Me.lblTimerActivationStatus.Size = New System.Drawing.Size(147, 13)
+        Me.lblTimerActivationStatus.TabIndex = 670
+        Me.lblTimerActivationStatus.Text = "Timer scheduler not activated"
+        '
         'formDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 631)
+        Me.ClientSize = New System.Drawing.Size(724, 698)
+        Me.Controls.Add(Me.lblTimerActivationStatus)
+        Me.Controls.Add(Me.btnSetSchedule)
+        Me.Controls.Add(Me.frameSetSchedule)
+        Me.Controls.Add(Me.lblDataPushMessage)
+        Me.Controls.Add(Me.btnPush)
+        Me.Controls.Add(Me.btnView)
+        Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.Label36)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.grpDefaultValues)
@@ -1780,6 +1912,8 @@ Partial Class formDaily2
         Me.groupUnits.PerformLayout()
         Me.grpDefaultValues.ResumeLayout(False)
         Me.grpDefaultValues.PerformLayout()
+        Me.frameSetSchedule.ResumeLayout(False)
+        Me.frameSetSchedule.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1958,4 +2092,16 @@ Partial Class formDaily2
     Friend WithEvents cboTemperatureUnits As System.Windows.Forms.ComboBox
     Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents chkEnableSequencer As System.Windows.Forms.CheckBox
+    Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents btnPush As System.Windows.Forms.Button
+    Friend WithEvents lblDataPushMessage As System.Windows.Forms.Label
+    Friend WithEvents btnSetSchedule As System.Windows.Forms.Button
+    Friend WithEvents frameSetSchedule As System.Windows.Forms.GroupBox
+    Friend WithEvents lblScheduleMinute As System.Windows.Forms.Label
+    Friend WithEvents lblscheduleHour As System.Windows.Forms.Label
+    Friend WithEvents txtTimerStartMinute As System.Windows.Forms.TextBox
+    Friend WithEvents txtTimerStartHour As System.Windows.Forms.TextBox
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents lblTimerActivationStatus As System.Windows.Forms.Label
 End Class

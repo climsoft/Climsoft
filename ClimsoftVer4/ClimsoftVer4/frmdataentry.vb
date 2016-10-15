@@ -151,4 +151,8 @@ Public Class frmKeyEntry
             End If
         Next
     End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm")
+    End Sub
 End Class

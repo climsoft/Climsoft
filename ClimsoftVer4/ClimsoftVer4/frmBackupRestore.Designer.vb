@@ -63,7 +63,7 @@ Partial Class frmBackupRestore
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(295, 2)
+        Me.cmdCancel.Location = New System.Drawing.Point(288, 2)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(71, 23)
         Me.cmdCancel.TabIndex = 9
@@ -115,7 +115,7 @@ Partial Class frmBackupRestore
         '
         'txtByear
         '
-        Me.txtByear.Location = New System.Drawing.Point(194, 138)
+        Me.txtByear.Location = New System.Drawing.Point(194, 141)
         Me.txtByear.Name = "txtByear"
         Me.txtByear.Size = New System.Drawing.Size(41, 20)
         Me.txtByear.TabIndex = 9
@@ -124,7 +124,7 @@ Partial Class frmBackupRestore
         'lblEyear
         '
         Me.lblEyear.AutoSize = True
-        Me.lblEyear.Location = New System.Drawing.Point(343, 143)
+        Me.lblEyear.Location = New System.Drawing.Point(334, 145)
         Me.lblEyear.Name = "lblEyear"
         Me.lblEyear.Size = New System.Drawing.Size(51, 13)
         Me.lblEyear.TabIndex = 12
@@ -133,11 +133,11 @@ Partial Class frmBackupRestore
         'lblByear
         '
         Me.lblByear.AutoSize = True
-        Me.lblByear.Location = New System.Drawing.Point(130, 141)
+        Me.lblByear.Location = New System.Drawing.Point(124, 145)
         Me.lblByear.Name = "lblByear"
-        Me.lblByear.Size = New System.Drawing.Size(65, 13)
+        Me.lblByear.Size = New System.Drawing.Size(59, 13)
         Me.lblByear.TabIndex = 11
-        Me.lblByear.Text = "Beging Year"
+        Me.lblByear.Text = "Begin Year"
         '
         'dlgRestore
         '

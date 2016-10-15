@@ -215,7 +215,9 @@ Public Class dataEntryGlobalRoutines
         End If
     End Function
     Public Function checkValidDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
-        If IsDate(dd & "/" & mm & "/" & yyyy) Then
+        'If IsDate(dd & "/" & mm & "/" & yyyy) Then
+        'Updated 20160309 to accommodate date formats for different Locales. ASM
+        If IsDate(DateSerial(yyyy, mm, dd)) Then
             checkValidDate = True
             ctl.BackColor = Color.White
             'My.Computer.Keyboard.SendKeys("{TAB}")
@@ -229,7 +231,9 @@ Public Class dataEntryGlobalRoutines
         End If
     End Function
     Public Function checkFutureDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
-        If DateValue(dd & "/" & mm & "/" & yyyy) <= Now() Then
+        'If DateValue(dd & "/" & mm & "/" & yyyy) <= Now() Then
+        'Updated 20160309 to accommodate date formats for different Locales. ASM
+        If DateSerial(yyyy, mm, dd) <= DateSerial(Year(Now()), Month(Now()), DateAndTime.Day(Now())) Then
             checkFutureDate = True
             ctl.BackColor = Color.White
             ' My.Computer.Keyboard.SendKeys("{TAB}")
@@ -239,7 +243,7 @@ Public Class dataEntryGlobalRoutines
             ctl.BackColor = Color.Red
             ctl.Focus()
             tabNext = False
-            MsgBox("Dates greater than today not accepted!", MsgBoxStyle.Critical)
+            MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
         End If
     End Function
     Public Function checkExists(ByVal itemFound As Boolean, ctl As Control) As Boolean
@@ -314,4 +318,34 @@ Public Class dataEntryGlobalRoutines
             MsgBox(msgTxt, MsgBoxStyle.Exclamation)
         End If
     End Function
+    Public Sub viewTableRecords(strSQL As String)
+
+        Dim tblRecords As New DataSet
+        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dbConnectionString As String
+        'Dim tblName As String
+        'Dim sql As String
+        dbConnectionString = frmLogin.txtusrpwd.Text
+        dbconn.ConnectionString = dbConnectionString
+        dbconn.Open()
+        ' strSQL = "SELECT * FROM  " & tbl
+        'strSQL = strSQL & tblName
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
+        tblRecords.Clear()
+
+        'tblName = "form_hourly"
+        ' dsSourceTableName = tblName
+        ' da.Fill(tblRecords, tblName)
+        da.Fill(tblRecords, "recordsView")
+
+        formDataView.Show()
+        'formDataView.DataGridView.DataSource = tblRecords
+        formDataView.DataGridView.DataSource = tblRecords.Tables(0)
+        'formDataView.DataGridView.DataMember = "recordsView"
+        formDataView.DataGridView.Refresh()
+
+        formDataView.DataGridView.Dock = DockStyle.Top
+        dbconn.Close()
+    End Sub
 End Class
