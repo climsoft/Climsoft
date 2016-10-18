@@ -22,7 +22,6 @@ Partial Class formHourly
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim YyyyLabel As System.Windows.Forms.Label
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -133,18 +132,7 @@ Partial Class formHourly
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
-        Me.btnPush = New System.Windows.Forms.Button()
-        Me.lblDataPushMessage = New System.Windows.Forms.Label()
-        Me.btnSetSchedule = New System.Windows.Forms.Button()
-        Me.frameSetSchedule = New System.Windows.Forms.GroupBox()
-        Me.lblScheduleMinute = New System.Windows.Forms.Label()
-        Me.lblscheduleHour = New System.Windows.Forms.Label()
-        Me.txtTimerStartMinute = New System.Windows.Forms.TextBox()
-        Me.txtTimerStartHour = New System.Windows.Forms.TextBox()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.lblTimerActivationStatus = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
-        Me.frameSetSchedule.SuspendLayout()
         Me.SuspendLayout()
         '
         'YyyyLabel
@@ -1040,106 +1028,11 @@ Partial Class formHourly
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
-        'btnPush
-        '
-        Me.btnPush.BackColor = System.Drawing.Color.Cyan
-        Me.btnPush.Location = New System.Drawing.Point(14, 562)
-        Me.btnPush.Name = "btnPush"
-        Me.btnPush.Size = New System.Drawing.Size(75, 23)
-        Me.btnPush.TabIndex = 662
-        Me.btnPush.Text = "Push"
-        Me.btnPush.UseVisualStyleBackColor = False
-        '
-        'lblDataPushMessage
-        '
-        Me.lblDataPushMessage.AutoSize = True
-        Me.lblDataPushMessage.ForeColor = System.Drawing.Color.Red
-        Me.lblDataPushMessage.Location = New System.Drawing.Point(12, 595)
-        Me.lblDataPushMessage.Name = "lblDataPushMessage"
-        Me.lblDataPushMessage.Size = New System.Drawing.Size(158, 13)
-        Me.lblDataPushMessage.TabIndex = 663
-        Me.lblDataPushMessage.Text = "Waiting for data push to remote."
-        '
-        'btnSetSchedule
-        '
-        Me.btnSetSchedule.Location = New System.Drawing.Point(15, 640)
-        Me.btnSetSchedule.Name = "btnSetSchedule"
-        Me.btnSetSchedule.Size = New System.Drawing.Size(117, 23)
-        Me.btnSetSchedule.TabIndex = 669
-        Me.btnSetSchedule.Text = "Activate Scheduler"
-        Me.btnSetSchedule.UseVisualStyleBackColor = True
-        '
-        'frameSetSchedule
-        '
-        Me.frameSetSchedule.Controls.Add(Me.lblScheduleMinute)
-        Me.frameSetSchedule.Controls.Add(Me.lblscheduleHour)
-        Me.frameSetSchedule.Controls.Add(Me.txtTimerStartMinute)
-        Me.frameSetSchedule.Controls.Add(Me.txtTimerStartHour)
-        Me.frameSetSchedule.Location = New System.Drawing.Point(167, 620)
-        Me.frameSetSchedule.Name = "frameSetSchedule"
-        Me.frameSetSchedule.Size = New System.Drawing.Size(216, 53)
-        Me.frameSetSchedule.TabIndex = 668
-        Me.frameSetSchedule.TabStop = False
-        Me.frameSetSchedule.Text = "Set minutes past hour"
-        '
-        'lblScheduleMinute
-        '
-        Me.lblScheduleMinute.AutoSize = True
-        Me.lblScheduleMinute.Location = New System.Drawing.Point(106, 24)
-        Me.lblScheduleMinute.Name = "lblScheduleMinute"
-        Me.lblScheduleMinute.Size = New System.Drawing.Size(50, 13)
-        Me.lblScheduleMinute.TabIndex = 3
-        Me.lblScheduleMinute.Text = "Minute(s)"
-        '
-        'lblscheduleHour
-        '
-        Me.lblscheduleHour.AutoSize = True
-        Me.lblscheduleHour.Enabled = False
-        Me.lblscheduleHour.Location = New System.Drawing.Point(9, 25)
-        Me.lblscheduleHour.Name = "lblscheduleHour"
-        Me.lblscheduleHour.Size = New System.Drawing.Size(30, 13)
-        Me.lblscheduleHour.TabIndex = 2
-        Me.lblscheduleHour.Text = "Hour"
-        '
-        'txtTimerStartMinute
-        '
-        Me.txtTimerStartMinute.Location = New System.Drawing.Point(162, 22)
-        Me.txtTimerStartMinute.Name = "txtTimerStartMinute"
-        Me.txtTimerStartMinute.Size = New System.Drawing.Size(45, 20)
-        Me.txtTimerStartMinute.TabIndex = 1
-        '
-        'txtTimerStartHour
-        '
-        Me.txtTimerStartHour.Enabled = False
-        Me.txtTimerStartHour.Location = New System.Drawing.Point(45, 22)
-        Me.txtTimerStartHour.Name = "txtTimerStartHour"
-        Me.txtTimerStartHour.Size = New System.Drawing.Size(40, 20)
-        Me.txtTimerStartHour.TabIndex = 0
-        '
-        'Timer1
-        '
-        Me.Timer1.Interval = 1000
-        '
-        'lblTimerActivationStatus
-        '
-        Me.lblTimerActivationStatus.AutoSize = True
-        Me.lblTimerActivationStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblTimerActivationStatus.Location = New System.Drawing.Point(405, 645)
-        Me.lblTimerActivationStatus.Name = "lblTimerActivationStatus"
-        Me.lblTimerActivationStatus.Size = New System.Drawing.Size(147, 13)
-        Me.lblTimerActivationStatus.TabIndex = 670
-        Me.lblTimerActivationStatus.Text = "Timer scheduler not activated"
-        '
         'formHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(681, 694)
-        Me.Controls.Add(Me.lblTimerActivationStatus)
-        Me.Controls.Add(Me.btnSetSchedule)
-        Me.Controls.Add(Me.frameSetSchedule)
-        Me.Controls.Add(Me.lblDataPushMessage)
-        Me.Controls.Add(Me.btnPush)
+        Me.ClientSize = New System.Drawing.Size(681, 615)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.txtTotal)
@@ -1253,8 +1146,6 @@ Partial Class formHourly
         Me.KeyPreview = True
         Me.Name = "formHourly"
         Me.Text = "Hourly Data"
-        Me.frameSetSchedule.ResumeLayout(False)
-        Me.frameSetSchedule.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1368,14 +1259,4 @@ Partial Class formHourly
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
-    Friend WithEvents btnPush As System.Windows.Forms.Button
-    Friend WithEvents lblDataPushMessage As System.Windows.Forms.Label
-    Friend WithEvents btnSetSchedule As System.Windows.Forms.Button
-    Friend WithEvents frameSetSchedule As System.Windows.Forms.GroupBox
-    Friend WithEvents lblScheduleMinute As System.Windows.Forms.Label
-    Friend WithEvents lblscheduleHour As System.Windows.Forms.Label
-    Friend WithEvents txtTimerStartMinute As System.Windows.Forms.TextBox
-    Friend WithEvents txtTimerStartHour As System.Windows.Forms.TextBox
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents lblTimerActivationStatus As System.Windows.Forms.Label
 End Class

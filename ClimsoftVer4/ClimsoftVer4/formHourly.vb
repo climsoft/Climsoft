@@ -1280,46 +1280,4 @@ Public Class formHourly
         viewRecords.viewTableRecords(sql)
     End Sub
 
-    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
-        Dim tableName As String
-        tableName = "form_hourly"
-        frmLogin.pushKeyEntryDataToRemote(tableName)
-        lblDataPushMessage.Text = msgDataPushtoRemote
-        lblDataPushMessage.Refresh()
-    End Sub
-
-    Private Sub btnSetSchedule_Click(sender As Object, e As EventArgs) Handles btnSetSchedule.Click
-
-        ' btnOK.Enabled = False
-        btnSetSchedule.Text = "Timer Activated"
-        btnSetSchedule.Enabled = False
-        btnSetSchedule.Refresh()
-
-        'Enable timer
-        Timer1.Enabled = True
-        lblTimerActivationStatus.Text = "Timer activated!"
-        lblTimerActivationStatus.Refresh()
-    End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Dim hourNow As Integer, minuteNow As Integer, secondNow As Integer
-
-        hourNow = Hour(Now)
-        minuteNow = Minute(Now)
-        secondNow = Second(Now())
-
-        'Start processing a minute from the time the schedule is set i.e. a minute after the "schedule" button is clicked.
-        'At that time the value of the variable "minute_now" will be a minute after the schedule is set.
-        'The value of the minute in the "minute texbox remains the same. It will be after an hour when the value of the variable
-        '"minute_now" will be equal to the value in the "minute" texbox plus 1. So the processing is repeated every hour
-
-        'If minuteNow = Val(txtTimerStartMinute.Text) + 1 Then
-        If minuteNow = Val(txtTimerStartMinute.Text) And secondNow = 0 Then
-            'call subroutine for compiling and ingesting AWS data
-            'compile_aws_data
-            frmLogin.pushKeyEntryDataToRemote("form_hourly")
-            lblDataPushMessage.Text = msgDataPushtoRemote
-            lblDataPushMessage.Refresh()
-        End If
-    End Sub
 End Class

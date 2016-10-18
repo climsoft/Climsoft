@@ -556,13 +556,18 @@ Err:
         Dim stn, dt, img, frm As String
 
         Try
+
+            sql = "SELECT * FROM paperarchive"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
+            da.Fill(ds, "paperarchive")
+
+            If ds.Tables("paperarchive").Rows.Count = 0 Then ' Zero records. Nothing to delete
+                MsgBox("Nothing to delete")
+                Exit Sub
+            End If
+
             If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
-
-                sql = "SELECT * FROM paperarchive"
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-                ds.Clear()
-                da.Fill(ds, "paperarchive")
-
                 stn = ds.Tables("PaperArchive").Rows(rec).Item(0)
                 dt = ds.Tables("PaperArchive").Rows(rec).Item(1)
                 img = ds.Tables("PaperArchive").Rows(rec).Item(2)
@@ -591,7 +596,7 @@ Err:
 
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.HResult & " " & ex.Message)
         End Try
 
 
