@@ -48,6 +48,17 @@ Public Class formDaily2
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
+        '----------------
+        'Refill dataset before getting maxRows
+        ds.Clear()
+        sql = "SELECT * FROM form_daily2"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "form_daily2")
+
+        maxRows = ds.Tables("form_daily2").Rows.Count
+        ''''inc = maxRows - 1
+        '----------------
+
         Dim stn As String, elem As String
         'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
         stn = ds.Tables("form_daily2").Rows(inc).Item("stationId")
@@ -270,21 +281,24 @@ Public Class formDaily2
         Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
 
-        sql1 = "SELECT stationId,stationName FROM station"
+        sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obselement;"
+        sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
-        'Populate station combobox
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
-
+        If ds1.Tables("station").Rows.Count > 0 Then
+            'Populate station combobox
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
         da3.Fill(ds3, "obsElem")
         'Populate station combobox
         With cboElement

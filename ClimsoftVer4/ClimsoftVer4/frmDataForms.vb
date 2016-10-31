@@ -55,7 +55,7 @@
             cmd.ExecuteNonQuery()
 
         Next
-
+        MsgBox(msgKeyentryFormsListUpdated, MsgBoxStyle.Information)
         Exit Sub
 Err:
         MsgBox(Err.Description)

@@ -32,7 +32,8 @@ Module mainModule
     Public dsSourceTableName As String
     Public connStrRemoteSvr As String
     Public remoteSvr As String
-    Public msgDataPushtoRemote As String
+    Public msgKeyentryFormsListUpdated As String
+    Public msgStationInformationNotFound As String
 
 End Module
 
@@ -910,14 +911,16 @@ Public Class formSynopRA1
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
         da1.Fill(ds1, "station")
-
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
-
+        If ds1.Tables("station").Rows.Count > 0 Then
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
 
         ''sql1 = "SELECT stationId,stationName FROM station"
         ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)

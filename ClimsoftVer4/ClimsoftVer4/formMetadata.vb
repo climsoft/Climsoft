@@ -16,7 +16,7 @@
 
 
     Private Sub formMetadata_Click(sender As Object, e As EventArgs) Handles Me.Click
-        MsgBox(TabMetadata.SelectedIndex)
+        'MsgBox(TabMetadata.SelectedIndex)
     End Sub
 
     Private Sub formMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,7 +66,7 @@
             Case 2 ' StationElement
                 FillList(txtStation, "station", "stationId")
                 FillList(txtElement, "obselement", "elementId")
-                FillList(txtImstrument, "instrument", "instrumentId")
+                FillList(txtInstrument, "instrument", "instrumentId")
 
                 SetDataSet("stationelement")
                 rec = 0
@@ -75,28 +75,31 @@
                 FillList(txtInstrStn, "station", "stationId")
                 SetDataSet("instrument")
                 rec = 0
-                'populateInstrumentForm("instrument", rec, Kount)
+                'populatePaperArchiveDefinition("instrument", rec, Kount)
+
+                'SetDataSet("instrument")
+                'rec = 0
+                populateInstrument("instrument", rec, Kount)
             Case 4 ' Station Location History
                 FillList(txtlocStn, "station", "stationId")
-                FillList(txtInstrStn, "station", "stationId")
                 SetDataSet("stationlocationhistory")
                 rec = 0
-                'populateHistorytForm("stationlocationhistory", rec, Kount)
+                populateStationHistory("stationlocationhistory", rec, Kount)
             Case 5 ' Station Qualifier
                 FillList(txtQualifierStation, "station", "stationId")
                 SetDataSet("stationqualifier")
                 rec = 0
-                'populateQualifierForm("stationqualifier", rec, Kount)
+                populateStationQualifier("stationqualifier", rec, Kount)
             Case 6 ' Schedule Class
                 FillList(txtClassStation, "station", "stationId")
                 SetDataSet("obsscheduleclass")
                 rec = 0
-                'populateScheduleForm("scheduleclass", rec, Kount)
+                populateScheduleClass("obsscheduleclass", rec, Kount)
             Case 7 ' Physical Feature
                 FillList(txtFeatureStation, "station", "stationId")
                 SetDataSet("physicalfeature")
                 rec = 0
-                'populateFeatureForm("physicalfeature", rec, Kount)
+                populatePhysicalFeature("physicalfeature", rec, Kount)
             Case 8 ' Paper Archive
                 SetDataSet("paperarchivedefinition")
                 rec = 0
@@ -116,7 +119,7 @@
     Sub populateStations(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
 
-
+        If maxRows = 0 Then Exit Sub
         txtstationId.Text = ds.Tables("station").Rows(num).Item("stationId")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("country")) Then txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
@@ -138,7 +141,7 @@
     End Sub
     Sub populateElementMetadata(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
+        If maxRows = 0 Then Exit Sub
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then txtId.Text = ds.Tables(frm).Rows(num).Item("elementId")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("abbreviation")) Then txtAbbreviation.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementName")) Then txtName.Text = ds.Tables(frm).Rows(num).Item("elementName")
@@ -155,24 +158,94 @@
     Sub populateStationElement(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
 
+        'MsgBox(num & " " & maxRows)
         txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
-        txtImstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
+        txtInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
         txtScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
         txtHeight.Text = ds.Tables(frm).Rows(num).Item("height")
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
 
-        If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows - 1 '"Record 1 of " & maxRows
+        If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
+    End Sub
+    Sub populateInstrument(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+
+        'MsgBox(num & " " & maxRows)
+        txtInstrumentId.Text = ds.Tables(frm).Rows(num).Item("instrumentId")
+        txtInstName.Text = ds.Tables(frm).Rows(num).Item("instrumentName")
+        txtAbbrev.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
+        txtInstrStn.Text = ds.Tables(frm).Rows(num).Item("installedAt")
+        txtSerial.Text = ds.Tables(frm).Rows(num).Item("serialNumber")
+        txtModel.Text = ds.Tables(frm).Rows(num).Item("model")
+        txtManufacturer.Text = ds.Tables(frm).Rows(num).Item("manufacturer")
+        txtUncertainity.Text = ds.Tables(frm).Rows(num).Item("instrumentUncertainty")
+        txtInstallDate.Text = ds.Tables(frm).Rows(num).Item("installationDatetime")
+        txtDeinstallDate.Text = ds.Tables(frm).Rows(num).Item("deinstallationDatetime")
+        txthgt.Text = ds.Tables(frm).Rows(num).Item("height")
+        picInstrument.Image = ds.Tables(frm).Rows(num).Item("instrumentPicture")
+
+        If maxRows > 0 Then txtNavigator2.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
+    End Sub
+    Sub populateStationHistory(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+
+        txtlocStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
+        txtStnType.Text = ds.Tables(frm).Rows(num).Item("stationType")
+        txtMethod.Text = ds.Tables(frm).Rows(num).Item("geoLocationMethod")
+        txtAccuracy.Text = ds.Tables(frm).Rows(num).Item("geoLocationAccuracy")
+        txtOpDate.Text = ds.Tables(frm).Rows(num).Item("openingDatetime")
+        txtClosDate.Text = ds.Tables(frm).Rows(num).Item("closingDatetime")
+        txtLat.Text = ds.Tables(frm).Rows(num).Item("latitude")
+        txtLon.Text = ds.Tables(frm).Rows(num).Item("longitude")
+        txtElev.Text = ds.Tables(frm).Rows(num).Item("elevation")
+        txtAuth.Text = ds.Tables(frm).Rows(num).Item("authority")
+        txtAdmin.Text = ds.Tables(frm).Rows(num).Item("adminRegion")
+        txtDrgBasin.Text = ds.Tables(frm).Rows(num).Item("drainageBasin")
+
+        If maxRows > 0 Then txtNav2.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
+    End Sub
+    Sub populateStationQualifier(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+        txtqualifier.Text = ds.Tables(frm).Rows(num).Item("qualifier")
+        txtQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
+        txtBDate.Text = ds.Tables(frm).Rows(num).Item("qualifierBeginDate")
+        txtEndDate.Text = ds.Tables(frm).Rows(num).Item("qualifierEndDate")
+        txtTZone.Text = ds.Tables(frm).Rows(num).Item("stationTimeZone")
+        txtNetwork.Text = ds.Tables(frm).Rows(num).Item("stationNetworkType")
+
+        If maxRows > 0 Then txtNav4.Text = rec + 1 & " of " & maxRows
+    End Sub
+    Sub populateScheduleClass(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+        txtClass.Text = ds.Tables(frm).Rows(num).Item("scheduleClass")
+        txtClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
+        txtClassDescription.Text = ds.Tables(frm).Rows(num).Item("description")
+
+        If maxRows > 0 Then txtNav5.Text = rec + 1 & " of " & maxRows
+    End Sub
+    Sub populatePhysicalFeature(frm As String, num As Integer, maxRows As Integer)
+        On Error Resume Next
+        txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
+        txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
+        txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
+        txtfeaturepic.Image = ds.Tables(frm).Rows(num).Item("image")
+        txtFeatureDescription.Text = ds.Tables(frm).Rows(num).Item("description")
+        txtFeatureClass.Text = ds.Tables(frm).Rows(num).Item("classifiedInto")
+        txtfeatureclassdescription.Text = ds.Tables(frm).Rows(num).Item("classifiedInto")
+
+        If maxRows > 0 Then txtNav6.Text = rec + 1 & " of " & maxRows
     End Sub
     Sub populatePaperArchiveDefinition(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
+        If maxRows = 0 Then Exit Sub
         txtFormId.Text = ds.Tables(frm).Rows(num).Item("formId")
         txtFormDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
         If maxRows > 0 Then PaperArchiveNavigation.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
     End Sub
+
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         rec = 0
         populateStations("station", rec, Kount)
@@ -278,6 +351,67 @@
         txtType.Text = ""
         txtElementNavigator.Clear()
 
+    End Sub
+    Sub ClearStationElementForm()
+        txtStation.Text = ""
+        txtElement.Text = ""
+        txtInstrument.Text = ""
+        txtScheduleClass.Text = ""
+        txtHeight.Text = ""
+        txtBeginDate.Text = ""
+        txtEndate.Text = ""
+    End Sub
+    Sub ClearInstrumentForm()
+        txtInstName.Text = ""
+        txtInstrumentId.Text = ""
+        txtSerial.Text = ""
+        txtAbbrev.Text = ""
+        txtModel.Text = ""
+        txtManufacturer.Text = ""
+        txtUncertainity.Text = ""
+        txtInstallDate.Text = ""
+        txtDeinstallDate.Text = ""
+        txthgt.Text = ""
+        'picInstrument.Image = ""
+        txtInstrStn.Text = ""
+    End Sub
+    Sub ClearStationHistoryForm()
+        txtlocStn.Text = ""
+        txtStnType.Text = ""
+        txtMethod.Text = ""
+        txtAccuracy.Text = ""
+        txtOpDate.Text = ""
+        txtClosDate.Text = ""
+        txtLat.Text = ""
+        txtLon.Text = ""
+        txtElev.Text = ""
+        txtAuth.Text = ""
+        txtAdmin.Text = ""
+        txtDrgBasin.Text = ""
+    End Sub
+    Sub ClearStationQualifierForm()
+        txtqualifier.Text = ""
+        txtQualifierStation.Text = ""
+        txtBDate.Text = ""
+        txtEndDate.Text = ""
+        txtTZone.Text = ""
+        txtNetwork.Text = ""
+    End Sub
+    Sub ClearFormScheduleClass()
+        txtClass.Text = ""
+        txtClassStation.Text = ""
+        txtClassDescription.Text = ""
+    End Sub
+    Sub ClearPhysicalFeatureForm()
+        txtFeatureClass.Text = ""
+        txtFeatureStation.Text = ""
+        txtfeatureclassdescription.Text = ""
+        txtFeatureStation.Text = ""
+        txtFeatureBdate.Text = ""
+        txtFeatureEdate.Text = ""
+        'txtfeaturepic.Image
+        txtFeatureDescription.Text = ""
+        txtFeatureClass.Text = ""
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         If txtstationId.Text = "" Then
@@ -398,7 +532,6 @@ Err:
         dsNewRow = ds.Tables("obselement").NewRow
         dsNewRow.Item("elementId") = txtId.Text
         dsNewRow.Item("abbreviation") = txtAbbreviation.Text
-        dsNewRow.Item("abbreviation") = txtAbbreviation.Text
         dsNewRow.Item("elementName") = txtName.Text
         dsNewRow.Item("description") = txtDescription.Text
         dsNewRow.Item("elementScale") = txtScale.Text
@@ -423,6 +556,7 @@ Err:
 
     Private Sub cmdUpdateElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateElement.Click
         On Error GoTo Err
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
@@ -442,8 +576,8 @@ Err:
         ds.Tables("obselement").Rows(rec).Item("elementtype") = txtType.Text
 
         da.Update(ds, "obselement")
+        recUpdate.messageBoxRecordedUpdated()
 
-        'If cmdtype = "update" Then recUpdate.messageBoxRecordedUpdated()
         ClearElementForm()
 
         Exit Sub
@@ -509,6 +643,42 @@ Err:
 
     Private Sub cmdAddStElement_Click(sender As Object, e As EventArgs) Handles cmdAddStElement.Click
 
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+        Try
+            dsNewRow = ds.Tables("stationelement").NewRow
+
+            dsNewRow.Item("recordedFrom") = txtStation.Text
+            dsNewRow.Item("describedBy") = txtElement.Text
+            dsNewRow.Item("recordedWith") = txtinstrument.Text
+            dsNewRow.Item("scheduledFor") = txtScheduleClass.Text
+            dsNewRow.Item("height") = txtHeight.Text
+            dsNewRow.Item("beginDate") = txtBeginDate.Text
+            dsNewRow.Item("endDate") = txtEndate.Text
+
+            'Add a new record to the data source table
+            ds.Tables("stationelement").Rows.Add(dsNewRow)
+            da.Update(ds, "stationelement")
+            ClearStationElementForm()
+        Catch ex As Exception
+
+            If ex.HResult = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+
+        End Try
+        'Err:
+        '        If Err.Number = 5 Then
+        '            MsgBox("Invalid Entries; Check values")
+        '            Exit Sub
+        '        End If
+        '        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
 
@@ -537,8 +707,9 @@ Err:
     End Sub
 
     Private Sub cmdDeleteArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdDeleteArchiveDef.Click
-        If DeleteRecord("paperarchive efinition", rec) Then
-
+        If DeleteRecord("paperarchivedefinition", rec) Then
+            SetDataSet("paperarchivedefinition")
+            populatePaperArchiveDefinition("paperarchivedefinition", 0, Kount)
         End If
     End Sub
 
@@ -936,5 +1107,628 @@ Err:
 
     Private Sub MenuMetadata_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuMetadata.ItemClicked
 
+    End Sub
+
+    Private Sub cmdDeleteStElement_Click(sender As Object, e As EventArgs) Handles cmdDeleteStElement.Click
+        If DeleteRecord("stationelement", rec) Then
+            SetDataSet("stationelement")
+            populatePaperArchiveDefinition("stationelement", 0, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdAddInstrument_Click(sender As Object, e As EventArgs) Handles cmdAddInstrument.Click
+
+        'On Error GoTo Err
+
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+        Try
+
+            dsNewRow = ds.Tables("instrument").NewRow
+
+            dsNewRow.Item("instrumentName") = txtInstName.Text
+            dsNewRow.Item("instrumentId") = txtInstrumentId.Text
+            dsNewRow.Item("serialNumber") = txtSerial.Text
+            dsNewRow.Item("abbreviation") = txtAbbrev.Text
+            dsNewRow.Item("model") = txtModel.Text
+            dsNewRow.Item("manufacturer") = txtManufacturer.Text
+            dsNewRow.Item("instrumentUncertainty") = txtUncertainity.Text
+            dsNewRow.Item("installationDatetime") = txtInstallDate.Text
+            dsNewRow.Item("deinstallationDatetime") = txtDeinstallDate.Text
+            dsNewRow.Item("height") = txthgt.Text
+            'dsNewRow.Item("instrumentPicture") = picInstrument.Image
+            dsNewRow.Item("installedAt") = txtInstrStn.Text
+
+            'Add a new record to the data source table
+            ds.Tables("instrument").Rows.Add(dsNewRow)
+            da.Update(ds, "instrument")
+
+            ClearInstrumentForm()
+
+        Catch ex As Exception
+            If Err.Number = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+        '        Exit Sub
+        'Err:
+        '        MsgBox(Err.Number & " : " & Err.Description)
+        '        If Err.Number = 5 Then
+        '            MsgBox("Invalid Entries; Check values")
+        '            Exit Sub
+        '        End If
+
+    End Sub
+
+    Private Sub cmdAddHistory_Click(sender As Object, e As EventArgs) Handles cmdAddHistory.Click
+        'On Error GoTo Err
+
+        'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
+        'must be declared for the Update method to work.
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+        Try
+
+            dsNewRow = ds.Tables("stationlocationhistory").NewRow
+
+            dsNewRow.Item("belongsTo") = txtlocStn.Text
+            dsNewRow.Item("stationType") = txtStnType.Text
+            dsNewRow.Item("geoLocationMethod") = txtMethod.Text
+            dsNewRow.Item("geoLocationAccuracy") = txtAccuracy.Text
+            dsNewRow.Item("openingDatetime") = txtOpDate.Text
+            dsNewRow.Item("closingDatetime") = txtClosDate.Text
+            dsNewRow.Item("latitude") = txtLat.Text
+            dsNewRow.Item("longitude") = txtLon.Text
+            dsNewRow.Item("elevation") = txtElev.Text
+            dsNewRow.Item("authority") = txtAuth.Text
+            dsNewRow.Item("adminRegion") = txtAdmin.Text
+            dsNewRow.Item("drainageBasin") = txtDrgBasin.Text
+
+            'Add a new record to the data source table
+            ds.Tables("stationlocationhistory").Rows.Add(dsNewRow)
+            da.Update(ds, "stationlocationhistory")
+
+            ClearStationHistoryForm()
+
+        Catch ex As Exception
+            If ex.HResult = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+    End Sub
+
+    Private Sub cmdAddQualier_Click(sender As Object, e As EventArgs) Handles cmdAddQualier.Click
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+        Try
+
+            dsNewRow = ds.Tables("stationqualifier").NewRow
+
+            dsNewRow.Item("qualifier") = txtqualifier.Text
+            dsNewRow.Item("belongsTo") = txtQualifierStation.Text
+            dsNewRow.Item("qualifierBeginDate") = txtBDate.Text
+            dsNewRow.Item("qualifierEndDate") = txtEndDate.Text
+            dsNewRow.Item("stationTimeZone") = txtTZone.Text
+            dsNewRow.Item("stationNetworkType") = txtNetwork.Text
+
+
+            'Add a new record to the data source table
+            ds.Tables("stationqualifier").Rows.Add(dsNewRow)
+            da.Update(ds, "stationqualifier")
+
+            ClearStationQualifierForm()
+
+        Catch ex As Exception
+            If ex.HResult = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+    End Sub
+
+    Private Sub cmdAddScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdAddScheduleClass.Click
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim dsNewRow As DataRow
+        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+        Dim recCommit As New dataEntryGlobalRoutines
+        Try
+
+            dsNewRow = ds.Tables("obsscheduleclass").NewRow
+
+            dsNewRow.Item("scheduleClass") = txtClass.Text
+            dsNewRow.Item("refersTo") = txtClassStation.Text
+            dsNewRow.Item("description") = txtClassDescription.Text
+
+            'Add a new record to the data source table
+            ds.Tables("obsscheduleclass").Rows.Add(dsNewRow)
+            da.Update(ds, "obsscheduleclass")
+
+            ClearFormScheduleClass()
+
+        Catch ex As Exception
+            If ex.HResult = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+    End Sub
+
+    Private Sub cmdAddFeature_Click(sender As Object, e As EventArgs) Handles cmdAddFeature.Click
+
+        Try
+            ' Update Feature Class
+            ' Set the feature Class definition
+            SetDataSet("physicalfeatureclass")
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim dsNewRow As DataRow
+            Dim recCommit As New dataEntryGlobalRoutines
+            dsNewRow = ds.Tables("physicalfeatureclass").NewRow
+
+            dsNewRow.Item("featureClass") = txtFeatureClass.Text
+            dsNewRow.Item("refersTo") = txtFeatureStation.Text
+            dsNewRow.Item("description") = txtfeatureclassdescription.Text
+
+            ds.Tables("physicalfeatureclass").Rows.Add(dsNewRow)
+            da.Update(ds, "physicalfeatureclass")
+
+            ' Update Physical Feature
+            ' Set the feature Class definition
+            SetDataSet("physicalfeature")
+            Dim cp As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            Dim dsNewRowp As DataRow
+            Dim recCommitp As New dataEntryGlobalRoutines
+
+            dsNewRowp = ds.Tables("physicalfeature").NewRow
+
+            dsNewRowp.Item("associatedWith") = txtFeatureStation.Text
+            dsNewRowp.Item("beginDate") = txtFeatureBdate.Text
+            dsNewRowp.Item("endDate") = txtFeatureEdate.Text
+            dsNewRowp.Item("image") = txtfeaturepic.Image
+            dsNewRowp.Item("description") = txtFeatureDescription.Text
+            dsNewRowp.Item("classifiedInto") = txtFeatureClass.Text
+
+            'Add a new record to the data source table
+            ds.Tables("physicalfeature").Rows.Add(dsNewRowp)
+            da.Update(ds, "physicalfeature")
+
+            ClearPhysicalFeatureForm()
+
+        Catch ex As Exception
+            If ex.HResult = 5 Then
+                MsgBox("Invalid Entries; Check values")
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
+    End Sub
+
+    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdateInstrument.Click
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+
+        ds.Tables("instrument").Rows(rec).Item("instrumentId") = txtInstrumentId.Text
+        ds.Tables("instrument").Rows(rec).Item("instrumentName") = txtInstName.Text
+        ds.Tables("instrument").Rows(rec).Item("serialNumber") = txtSerial.Text
+        ds.Tables("instrument").Rows(rec).Item("abbreviation") = txtAbbrev.Text
+        ds.Tables("instrument").Rows(rec).Item("model") = txtModel.Text
+        ds.Tables("instrument").Rows(rec).Item("manufacturer") = txtManufacturer.Text
+        ds.Tables("instrument").Rows(rec).Item("instrumentUncertainty") = txtUncertainity.Text
+        ds.Tables("instrument").Rows(rec).Item("installationDatetime") = txtInstallDate.Text
+        ds.Tables("instrument").Rows(rec).Item("deinstallationDatetime") = txtDeinstallDate.Text
+        ds.Tables("instrument").Rows(rec).Item("height") = txthgt.Text
+        'dsNewRow.Item("instrumentPicture") = picInstrument.Image
+        ds.Tables("instrument").Rows(rec).Item("installedAt") = txtInstrStn.Text
+
+
+        da.Update(ds, "instrument")
+        recUpdate.messageBoxRecordedUpdated()
+
+        ClearInstrumentForm()
+
+        Exit Sub
+
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdUpdateStElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStElement.Click
+        On Error Resume Next
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+
+        'MsgBox(txtHeight.Text)
+        ds.Tables("stationelement").Rows(rec).Item("recordedFrom") = txtStation.Text
+        ds.Tables("stationelement").Rows(rec).Item("describedBy") = txtElement.Text
+        ds.Tables("stationelement").Rows(rec).Item("recordedWith") = txtInstrument.Text
+        ds.Tables("stationelement").Rows(rec).Item("scheduledFor") = txtScheduleClass.Text
+        ds.Tables("stationelement").Rows(rec).Item("height") = txtHeight.Text
+        ds.Tables("stationelement").Rows(rec).Item("beginDate") = txtBeginDate.Text
+        ds.Tables("stationelement").Rows(rec).Item("endDate") = txtEndate.Text
+
+        da.Update(ds, "stationelement")
+
+        recUpdate.messageBoxRecordedUpdated()
+        ClearStationElementForm()
+
+        Exit Sub
+
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdClearStationElement_Click(sender As Object, e As EventArgs) Handles cmdClearStationElement.Click
+        ClearStationElementForm()
+    End Sub
+
+    Private Sub cmdClear2_Click(sender As Object, e As EventArgs) Handles cmdClear2.Click
+        ClearInstrumentForm()
+    End Sub
+
+    Private Sub cmdClearHistory_Click(sender As Object, e As EventArgs) Handles cmdClearHistory.Click
+        ClearStationHistoryForm()
+    End Sub
+
+    Private Sub cmdClearQualifier_Click(sender As Object, e As EventArgs) Handles cmdClearQualifier.Click
+        ClearStationQualifierForm()
+    End Sub
+
+    Private Sub cmdClearClass_Click(sender As Object, e As EventArgs) Handles cmdClearClass.Click
+        ClearFormScheduleClass()
+    End Sub
+
+    Private Sub cmdClearFeature_Click(sender As Object, e As EventArgs) Handles cmdClearFeature.Click
+        ClearPhysicalFeatureForm()
+    End Sub
+
+    Private Sub cmdfiratRec1_Click(sender As Object, e As EventArgs) Handles cmdfiratRec1.Click
+        rec = 0
+        populateStationElement("stationelement", rec, Kount)
+    End Sub
+
+    Private Sub cmdPrev1_Click(sender As Object, e As EventArgs) Handles cmdPrev1.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populateStationElement("stationelement", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext1_Click(sender As Object, e As EventArgs) Handles cmdNext1.Click
+ 
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populateStationElement("stationelement", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast1_Click(sender As Object, e As EventArgs) Handles cmdLast1.Click
+        rec = Kount - 1
+        populateStationElement("stationelement", rec, Kount)
+    End Sub
+
+    Private Sub cmdFirst1_Click(sender As Object, e As EventArgs) Handles cmdFirst1.Click
+        rec = 0
+        populateInstrument("instrument", rec, Kount)
+    End Sub
+
+    Private Sub cmdPrev2_Click(sender As Object, e As EventArgs) Handles cmdPrev2.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populateInstrument("instrument", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext2_Click_1(sender As Object, e As EventArgs) Handles cmdNext2.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populateInstrument("instrument", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast2_Click_1(sender As Object, e As EventArgs) Handles cmdLast2.Click
+        rec = Kount - 1
+        populateInstrument("instrument", rec, Kount)
+    End Sub
+
+    Private Sub cmdfirst3_Click(sender As Object, e As EventArgs) Handles cmdfirst3.Click
+        rec = 0
+        populateStationHistory("stationlocationhistory", rec, Kount)
+    End Sub
+
+    Private Sub cmdprev3_Click(sender As Object, e As EventArgs) Handles cmdprev3.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populateStationHistory("stationlocationhistory", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext3_Click(sender As Object, e As EventArgs) Handles cmdNext3.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populateStationHistory("stationlocationhistory", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast3_Click(sender As Object, e As EventArgs) Handles cmdLast3.Click
+        rec = Kount - 1
+        populateStationHistory("stationlocationhistory", rec, Kount)
+    End Sub
+
+    Private Sub cmdFirst4_Click(sender As Object, e As EventArgs) Handles cmdFirst4.Click
+        rec = 0
+        populateStationQualifier("stationqualifier", rec, Kount)
+    End Sub
+
+    Private Sub cmdPrev4_Click(sender As Object, e As EventArgs) Handles cmdPrev4.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populateStationQualifier("stationqualifier", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext4_Click(sender As Object, e As EventArgs) Handles cmdNext4.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populateStationQualifier("stationqualifier", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast4_Click(sender As Object, e As EventArgs) Handles cmdLast4.Click
+        rec = Kount - 1
+        populateStationQualifier("stationqualifier", rec, Kount)
+    End Sub
+
+    Private Sub cmdFirst5_Click(sender As Object, e As EventArgs) Handles cmdFirst5.Click
+        rec = 0
+        populateScheduleClass("obsscheduleclass", rec, Kount)
+    End Sub
+
+    Private Sub cmdPrev5_Click(sender As Object, e As EventArgs) Handles cmdPrev5.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populateScheduleClass("obsscheduleclass", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext5_Click(sender As Object, e As EventArgs) Handles cmdNext5.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populateScheduleClass("obsscheduleclass", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast5_Click(sender As Object, e As EventArgs) Handles cmdLast5.Click
+        rec = Kount - 1
+        populateScheduleClass("obsscheduleclass", rec, Kount)
+    End Sub
+
+    Private Sub cmdFirst6_Click(sender As Object, e As EventArgs) Handles cmdFirst6.Click
+        rec = Kount - 1
+        populatePhysicalFeature("physicalfeature", rec, Kount)
+    End Sub
+
+    Private Sub cmdPrev6_Click(sender As Object, e As EventArgs) Handles cmdPrev6.Click
+        If rec > 0 Then
+            rec = rec - 1
+            populatePhysicalFeature("physicalfeature", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdNext6_Click(sender As Object, e As EventArgs) Handles cmdNext6.Click
+        If rec < Kount - 1 Then
+            rec = rec + 1
+            populatePhysicalFeature("physicalfeature", rec, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdLast6_Click(sender As Object, e As EventArgs) Handles cmdLast6.Click
+        rec = Kount - 1
+        populatePhysicalFeature("physicalfeature", rec, Kount)
+    End Sub
+
+    Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        ds.Tables("paperarchivedefinition").Rows(rec).Item("formId") = txtFormId.Text
+        ds.Tables("paperarchivedefinition").Rows(rec).Item("description") = txtFormDescription.Text
+
+        da.Update(ds, "paperarchivedefinition")
+        recUpdate.messageBoxRecordedUpdated()
+        txtFormId.Text = ""
+        txtFormDescription.Text = ""
+
+        Exit Sub
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+
+    End Sub
+
+    Private Sub cmdUpdateHistory_Click(sender As Object, e As EventArgs) Handles cmdUpdateHistory.Click
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+
+        ds.Tables("stationlocationhistory").Rows(rec).Item("belongsTo") = txtlocStn.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("stationType") = txtStnType.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("geoLocationMethod") = txtMethod.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("geoLocationAccuracy") = txtAccuracy.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("openingDatetime") = txtOpDate.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("closingDatetime") = txtClosDate.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("latitude") = txtLat.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("longitude") = txtLon.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("elevation") = txtElev.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("authority") = txtAuth.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("adminRegion") = txtAdmin.Text
+        ds.Tables("stationlocationhistory").Rows(rec).Item("drainageBasin") = txtDrgBasin.Text
+
+        da.Update(ds, "stationlocationhistory")
+
+        recUpdate.messageBoxRecordedUpdated()
+
+        ClearStationHistoryForm()
+        Exit Sub
+
+Err:
+
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdUpdateQualier_Click(sender As Object, e As EventArgs) Handles cmdUpdateQualier.Click
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+        ds.Tables("stationqualifier").Rows(rec).Item("belongsTo") = txtlocStn.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("qualifier") = txtqualifier.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("belongsTo") = txtQualifierStation.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("qualifierBeginDate") = txtBDate.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("qualifierEndDate") = txtEndDate.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("stationTimeZone") = txtTZone.Text
+        ds.Tables("stationqualifier").Rows(rec).Item("stationNetworkType") = txtNetwork.Text
+
+        da.Update(ds, "stationqualifier")
+
+        recUpdate.messageBoxRecordedUpdated()
+
+        ClearStationQualifierForm()
+        Exit Sub
+
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdUpdateScheduleClass.Click
+
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+
+        ds.Tables("obsscheduleclass").Rows(rec).Item("scheduleClass") = txtClass.Text
+        ds.Tables("obsscheduleclass").Rows(rec).Item("refersTo") = txtClassStation.Text
+        ds.Tables("obsscheduleclass").Rows(rec).Item("description") = txtClassDescription.Text
+
+        da.Update(ds, "obsscheduleclass")
+        recUpdate.messageBoxRecordedUpdated()
+        ClearFormScheduleClass()
+
+        Exit Sub
+
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdUpdateFeature_Click(sender As Object, e As EventArgs) Handles cmdUpdateFeature.Click
+        On Error GoTo Err
+
+        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        Dim recUpdate As New dataEntryGlobalRoutines
+
+        'If txtId.Text = "" Then
+        '    MsgBox("No record Selected")
+        '    Exit Sub
+        'End If
+
+        ds.Tables("physicalfeature").Rows(rec).Item("associatedWith") = txtFeatureStation.Text
+        ds.Tables("physicalfeature").Rows(rec).Item("beginDate") = txtFeatureBdate.Text
+        ds.Tables("physicalfeature").Rows(rec).Item("endDate") = txtFeatureEdate.Text
+        ds.Tables("physicalfeature").Rows(rec).Item("image") = txtfeaturepic.Image
+        ds.Tables("physicalfeature").Rows(rec).Item("description") = txtFeatureDescription.Text
+        ds.Tables("physicalfeature").Rows(rec).Item("classifiedInto") = txtFeatureClass.Text
+
+        da.Update(ds, "physicalfeature")
+        recUpdate.messageBoxRecordedUpdated()
+        ClearPhysicalFeatureForm()
+
+        Exit Sub
+Err:
+        'MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDeleteInstrument.Click
+        If DeleteRecord("instrument", rec) Then
+            If rec < Kount - 1 Then
+                populateInstrument("instrument", rec + 1, Kount)
+            Else
+                populateInstrument("instrument", rec, Kount)
+            End If
+        End If
+    End Sub
+
+    Private Sub cmdDeleteHistory_Click(sender As Object, e As EventArgs) Handles cmdDeleteHistory.Click
+        If DeleteRecord("stationlocationhistory", rec) Then
+            SetDataSet("stationlocationhistory")
+            populateStationHistory("stationlocationhistory", 0, Kount)
+        End If
+
+    End Sub
+
+    Private Sub cmdDeleteQualier_Click(sender As Object, e As EventArgs) Handles cmdDeleteQualier.Click
+        If DeleteRecord("stationqualifier", rec) Then
+            SetDataSet("stationqualifier")
+            populateStationQualifier("stationqualifier", 0, Kount)
+        End If
+    End Sub
+
+    Private Sub cmdDeleteScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdDeleteScheduleClass.Click
+        If DeleteRecord("obsscheduleclass", rec) Then
+            SetDataSet("obsscheduleclass")
+            populateScheduleClass("obsscheduleclass", 0, Kount)
+        End If
+    End Sub
+
+ 
+    Private Sub cmdDeleteFeature_Click(sender As Object, e As EventArgs) Handles cmdDeleteFeature.Click
+        If DeleteRecord("physicalfeature", rec) Then
+            SetDataSet("physicalfeature")
+            populatePhysicalFeature("physicalfeature", 0, Kount)
+        End If
     End Sub
 End Class

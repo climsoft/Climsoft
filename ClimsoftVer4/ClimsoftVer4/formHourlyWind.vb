@@ -48,7 +48,18 @@ Public Class formHourlyWind
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        Dim stn As String, elem As String
+        '----------------
+        'Refill dataset before getting maxRows
+        ds.Clear()
+        sql = "SELECT * FROM form_hourlywind"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "form_hourlywind")
+
+        maxRows = ds.Tables("form_hourlywind").Rows.Count
+        ''''inc = maxRows - 1
+        '----------------
+
+        Dim stn As String
         'cboStation.Text = ds.Tables("form_hourly").Rows(inc).Item("stationId")
         stn = ds.Tables("form_hourlywind").Rows(inc).Item("stationId")
         cboStation.SelectedValue = stn
@@ -542,18 +553,21 @@ Public Class formHourlyWind
         Dim sql1 As String
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
-        sql1 = "SELECT stationId,stationName FROM station"
+        sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
         da1.Fill(ds1, "station")
-        'Populate station combobox
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
-
+        If ds1.Tables("station").Rows.Count > 0 Then
+            'Populate station combobox
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
 
         'Get number of digits for wind direction from RegKeys table
         DDdigits = dsReg.Tables("regData").Rows(5).Item("keyValue")

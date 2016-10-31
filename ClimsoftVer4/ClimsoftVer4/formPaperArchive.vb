@@ -501,6 +501,8 @@ Err:
         txtHH.Text = ""
 
         txtRec.Text = ""
+
+        txtRec.Text = 0 & " of " & 0
     End Sub
 
     Private Sub cmdright_Click(sender As Object, e As EventArgs) Handles cmdright.Click

@@ -120,7 +120,7 @@ Partial Class formMetadata
         Me.cmdLast1 = New System.Windows.Forms.Button()
         Me.cmdNext1 = New System.Windows.Forms.Button()
         Me.txtNavigator1 = New System.Windows.Forms.TextBox()
-        Me.txtImstrument = New System.Windows.Forms.ComboBox()
+        Me.txtInstrument = New System.Windows.Forms.ComboBox()
         Me.txtElement = New System.Windows.Forms.ComboBox()
         Me.txtStation = New System.Windows.Forms.ComboBox()
         Me.txtEndate = New System.Windows.Forms.DateTimePicker()
@@ -137,7 +137,9 @@ Partial Class formMetadata
         Me.TabInstrument = New System.Windows.Forms.TabPage()
         Me.grpInstrument = New System.Windows.Forms.GroupBox()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.cmdClear2 = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.cmdViewInstrument = New System.Windows.Forms.Button()
         Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
         Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
@@ -150,24 +152,22 @@ Partial Class formMetadata
         Me.txtNavigator2 = New System.Windows.Forms.TextBox()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
         Me.picInstrument = New System.Windows.Forms.PictureBox()
-        Me.txtInstrHeight = New System.Windows.Forms.TextBox()
+        Me.txthgt = New System.Windows.Forms.TextBox()
         Me.txtDeinstallDate = New System.Windows.Forms.DateTimePicker()
         Me.txtInstallDate = New System.Windows.Forms.DateTimePicker()
         Me.lblInstrStnId = New System.Windows.Forms.Label()
-        Me.lblInstrHt = New System.Windows.Forms.Label()
+        Me.lblInstalledAt = New System.Windows.Forms.Label()
         Me.lblDeinstalDate = New System.Windows.Forms.Label()
         Me.txtInstrStn = New System.Windows.Forms.ComboBox()
         Me.txtUncertainity = New System.Windows.Forms.TextBox()
         Me.txtManufacturer = New System.Windows.Forms.TextBox()
         Me.txtModel = New System.Windows.Forms.TextBox()
-        Me.txtInstrScale = New System.Windows.Forms.TextBox()
         Me.txtSerial = New System.Windows.Forms.TextBox()
         Me.txtAbbrev = New System.Windows.Forms.TextBox()
         Me.txtInstName = New System.Windows.Forms.TextBox()
         Me.txtInstrumentId = New System.Windows.Forms.TextBox()
         Me.lblIinstalDate = New System.Windows.Forms.Label()
         Me.lblModel = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.lblSerial = New System.Windows.Forms.Label()
         Me.lblInstAbbrev = New System.Windows.Forms.Label()
         Me.lblUncertainity = New System.Windows.Forms.Label()
@@ -265,6 +265,8 @@ Partial Class formMetadata
         Me.TabPhysicalFeature = New System.Windows.Forms.TabPage()
         Me.lblPhysicalFeature = New System.Windows.Forms.Label()
         Me.grpPhysicalFeature = New System.Windows.Forms.GroupBox()
+        Me.txtfeatureclassdescription = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.lblFeaturePic = New System.Windows.Forms.Label()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.cmdViewFeature = New System.Windows.Forms.Button()
@@ -278,7 +280,7 @@ Partial Class formMetadata
         Me.cmdLast6 = New System.Windows.Forms.Button()
         Me.cmdNext6 = New System.Windows.Forms.Button()
         Me.txtNav6 = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.txtfeaturepic = New System.Windows.Forms.PictureBox()
         Me.txtFeatureEdate = New System.Windows.Forms.DateTimePicker()
         Me.lblStnId = New System.Windows.Forms.Label()
         Me.txtFeatureStation = New System.Windows.Forms.ComboBox()
@@ -345,7 +347,7 @@ Partial Class formMetadata
         Me.grpPhysicalFeature.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtfeaturepic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPaperArchive.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -368,7 +370,7 @@ Partial Class formMetadata
         Me.TabMetadata.Location = New System.Drawing.Point(0, 27)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
-        Me.TabMetadata.Size = New System.Drawing.Size(748, 476)
+        Me.TabMetadata.Size = New System.Drawing.Size(786, 476)
         Me.TabMetadata.TabIndex = 0
         '
         'TabStation
@@ -378,7 +380,7 @@ Partial Class formMetadata
         Me.TabStation.Location = New System.Drawing.Point(4, 22)
         Me.TabStation.Name = "TabStation"
         Me.TabStation.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStation.Size = New System.Drawing.Size(740, 450)
+        Me.TabStation.Size = New System.Drawing.Size(778, 450)
         Me.TabStation.TabIndex = 0
         Me.TabStation.Text = "Station"
         Me.TabStation.UseVisualStyleBackColor = True
@@ -387,7 +389,7 @@ Partial Class formMetadata
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(316, 9)
+        Me.Label2.Location = New System.Drawing.Point(327, 9)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(64, 16)
         Me.Label2.TabIndex = 3
@@ -427,7 +429,7 @@ Partial Class formMetadata
         Me.grpStation.Controls.Add(Me.lblLatitude)
         Me.grpStation.Controls.Add(Me.lblStationName)
         Me.grpStation.Controls.Add(Me.lblStationId)
-        Me.grpStation.Location = New System.Drawing.Point(14, 28)
+        Me.grpStation.Location = New System.Drawing.Point(31, 28)
         Me.grpStation.Name = "grpStation"
         Me.grpStation.Size = New System.Drawing.Size(704, 392)
         Me.grpStation.TabIndex = 2
@@ -500,7 +502,7 @@ Partial Class formMetadata
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(64, 27)
         Me.cmdClear.TabIndex = 36
-        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.Text = "Reset"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdViewStation
@@ -823,7 +825,7 @@ Partial Class formMetadata
         Me.TabElement.Location = New System.Drawing.Point(4, 22)
         Me.TabElement.Name = "TabElement"
         Me.TabElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabElement.Size = New System.Drawing.Size(740, 450)
+        Me.TabElement.Size = New System.Drawing.Size(778, 450)
         Me.TabElement.TabIndex = 1
         Me.TabElement.Text = "Element"
         Me.TabElement.UseVisualStyleBackColor = True
@@ -852,7 +854,7 @@ Partial Class formMetadata
         Me.grpObservationElement.Controls.Add(Me.lblLowerLimit)
         Me.grpObservationElement.Controls.Add(Me.lblAbbrev)
         Me.grpObservationElement.Controls.Add(Me.lblId)
-        Me.grpObservationElement.Location = New System.Drawing.Point(67, 32)
+        Me.grpObservationElement.Location = New System.Drawing.Point(84, 32)
         Me.grpObservationElement.Name = "grpObservationElement"
         Me.grpObservationElement.Size = New System.Drawing.Size(588, 401)
         Me.grpObservationElement.TabIndex = 3
@@ -904,7 +906,7 @@ Partial Class formMetadata
         Me.cmdClearElement.Name = "cmdClearElement"
         Me.cmdClearElement.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearElement.TabIndex = 37
-        Me.cmdClearElement.Text = "Clear"
+        Me.cmdClearElement.Text = "Reset"
         Me.cmdClearElement.UseVisualStyleBackColor = True
         '
         'cmdViewElements
@@ -1152,7 +1154,7 @@ Partial Class formMetadata
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(294, 14)
+        Me.Label1.Location = New System.Drawing.Point(300, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(147, 15)
         Me.Label1.TabIndex = 1
@@ -1165,7 +1167,7 @@ Partial Class formMetadata
         Me.TabStationElement.Location = New System.Drawing.Point(4, 22)
         Me.TabStationElement.Name = "TabStationElement"
         Me.TabStationElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationElement.Size = New System.Drawing.Size(740, 450)
+        Me.TabStationElement.Size = New System.Drawing.Size(778, 450)
         Me.TabStationElement.TabIndex = 2
         Me.TabStationElement.Text = "Station Element"
         Me.TabStationElement.UseVisualStyleBackColor = True
@@ -1174,7 +1176,7 @@ Partial Class formMetadata
         '
         Me.lblStationElement.AutoSize = True
         Me.lblStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStationElement.Location = New System.Drawing.Point(323, 14)
+        Me.lblStationElement.Location = New System.Drawing.Point(336, 15)
         Me.lblStationElement.Name = "lblStationElement"
         Me.lblStationElement.Size = New System.Drawing.Size(116, 16)
         Me.lblStationElement.TabIndex = 5
@@ -1184,7 +1186,7 @@ Partial Class formMetadata
         '
         Me.grpStationElement.Controls.Add(Me.GroupBox7)
         Me.grpStationElement.Controls.Add(Me.GroupBox6)
-        Me.grpStationElement.Controls.Add(Me.txtImstrument)
+        Me.grpStationElement.Controls.Add(Me.txtInstrument)
         Me.grpStationElement.Controls.Add(Me.txtElement)
         Me.grpStationElement.Controls.Add(Me.txtStation)
         Me.grpStationElement.Controls.Add(Me.txtEndate)
@@ -1198,7 +1200,7 @@ Partial Class formMetadata
         Me.grpStationElement.Controls.Add(Me.lblEdate)
         Me.grpStationElement.Controls.Add(Me.lblElement)
         Me.grpStationElement.Controls.Add(Me.lblstation)
-        Me.grpStationElement.Location = New System.Drawing.Point(69, 44)
+        Me.grpStationElement.Location = New System.Drawing.Point(82, 44)
         Me.grpStationElement.Name = "grpStationElement"
         Me.grpStationElement.Size = New System.Drawing.Size(590, 375)
         Me.grpStationElement.TabIndex = 4
@@ -1225,7 +1227,7 @@ Partial Class formMetadata
         Me.cmdClearStationElement.Name = "cmdClearStationElement"
         Me.cmdClearStationElement.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearStationElement.TabIndex = 38
-        Me.cmdClearStationElement.Text = "Clear"
+        Me.cmdClearStationElement.Text = "Reset"
         Me.cmdClearStationElement.UseVisualStyleBackColor = True
         '
         'cmdViewStElement
@@ -1330,13 +1332,13 @@ Partial Class formMetadata
         Me.txtNavigator1.TabIndex = 46
         Me.txtNavigator1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtImstrument
+        'txtInstrument
         '
-        Me.txtImstrument.FormattingEnabled = True
-        Me.txtImstrument.Location = New System.Drawing.Point(228, 106)
-        Me.txtImstrument.Name = "txtImstrument"
-        Me.txtImstrument.Size = New System.Drawing.Size(157, 21)
-        Me.txtImstrument.TabIndex = 36
+        Me.txtInstrument.FormattingEnabled = True
+        Me.txtInstrument.Location = New System.Drawing.Point(228, 106)
+        Me.txtInstrument.Name = "txtInstrument"
+        Me.txtInstrument.Size = New System.Drawing.Size(157, 21)
+        Me.txtInstrument.TabIndex = 36
         '
         'txtElement
         '
@@ -1452,7 +1454,7 @@ Partial Class formMetadata
         Me.TabInstrument.Location = New System.Drawing.Point(4, 22)
         Me.TabInstrument.Name = "TabInstrument"
         Me.TabInstrument.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInstrument.Size = New System.Drawing.Size(740, 450)
+        Me.TabInstrument.Size = New System.Drawing.Size(778, 450)
         Me.TabInstrument.TabIndex = 3
         Me.TabInstrument.Text = "Instrument"
         Me.TabInstrument.UseVisualStyleBackColor = True
@@ -1463,50 +1465,57 @@ Partial Class formMetadata
         Me.grpInstrument.Controls.Add(Me.GroupBox8)
         Me.grpInstrument.Controls.Add(Me.lblInstrumentPic)
         Me.grpInstrument.Controls.Add(Me.picInstrument)
-        Me.grpInstrument.Controls.Add(Me.txtInstrHeight)
+        Me.grpInstrument.Controls.Add(Me.txthgt)
         Me.grpInstrument.Controls.Add(Me.txtDeinstallDate)
         Me.grpInstrument.Controls.Add(Me.txtInstallDate)
         Me.grpInstrument.Controls.Add(Me.lblInstrStnId)
-        Me.grpInstrument.Controls.Add(Me.lblInstrHt)
+        Me.grpInstrument.Controls.Add(Me.lblInstalledAt)
         Me.grpInstrument.Controls.Add(Me.lblDeinstalDate)
         Me.grpInstrument.Controls.Add(Me.txtInstrStn)
         Me.grpInstrument.Controls.Add(Me.txtUncertainity)
         Me.grpInstrument.Controls.Add(Me.txtManufacturer)
         Me.grpInstrument.Controls.Add(Me.txtModel)
-        Me.grpInstrument.Controls.Add(Me.txtInstrScale)
         Me.grpInstrument.Controls.Add(Me.txtSerial)
         Me.grpInstrument.Controls.Add(Me.txtAbbrev)
         Me.grpInstrument.Controls.Add(Me.txtInstName)
         Me.grpInstrument.Controls.Add(Me.txtInstrumentId)
         Me.grpInstrument.Controls.Add(Me.lblIinstalDate)
         Me.grpInstrument.Controls.Add(Me.lblModel)
-        Me.grpInstrument.Controls.Add(Me.Label5)
         Me.grpInstrument.Controls.Add(Me.lblSerial)
         Me.grpInstrument.Controls.Add(Me.lblInstAbbrev)
         Me.grpInstrument.Controls.Add(Me.lblUncertainity)
         Me.grpInstrument.Controls.Add(Me.lblManufacturer)
         Me.grpInstrument.Controls.Add(Me.txtInstrumentName)
         Me.grpInstrument.Controls.Add(Me.lblInstId)
-        Me.grpInstrument.Location = New System.Drawing.Point(12, 30)
+        Me.grpInstrument.Location = New System.Drawing.Point(16, 26)
         Me.grpInstrument.Name = "grpInstrument"
-        Me.grpInstrument.Size = New System.Drawing.Size(741, 424)
+        Me.grpInstrument.Size = New System.Drawing.Size(741, 428)
         Me.grpInstrument.TabIndex = 5
         Me.grpInstrument.TabStop = False
         Me.grpInstrument.Text = "Instrument Details"
         '
         'grpCommand2
         '
+        Me.grpCommand2.Controls.Add(Me.TextBox1)
         Me.grpCommand2.Controls.Add(Me.cmdClear2)
+        Me.grpCommand2.Controls.Add(Me.Label10)
         Me.grpCommand2.Controls.Add(Me.cmdViewInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdDeleteInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdUpdateInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdAddInstrument)
         Me.grpCommand2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.grpCommand2.Location = New System.Drawing.Point(3, 357)
+        Me.grpCommand2.Location = New System.Drawing.Point(3, 361)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(735, 31)
         Me.grpCommand2.TabIndex = 57
         Me.grpCommand2.TabStop = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(157, -20)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(56, 20)
+        Me.TextBox1.TabIndex = 59
         '
         'cmdClear2
         '
@@ -1514,8 +1523,17 @@ Partial Class formMetadata
         Me.cmdClear2.Name = "cmdClear2"
         Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
         Me.cmdClear2.TabIndex = 39
-        Me.cmdClear2.Text = "Clear"
+        Me.cmdClear2.Text = "Reset"
         Me.cmdClear2.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(60, -16)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(38, 13)
+        Me.Label10.TabIndex = 58
+        Me.Label10.Text = "Height"
         '
         'cmdViewInstrument
         '
@@ -1561,7 +1579,7 @@ Partial Class formMetadata
         Me.GroupBox8.Controls.Add(Me.cmdNext2)
         Me.GroupBox8.Controls.Add(Me.txtNavigator2)
         Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBox8.Location = New System.Drawing.Point(3, 388)
+        Me.GroupBox8.Location = New System.Drawing.Point(3, 392)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(735, 33)
         Me.GroupBox8.TabIndex = 56
@@ -1637,12 +1655,12 @@ Partial Class formMetadata
         Me.picInstrument.TabIndex = 39
         Me.picInstrument.TabStop = False
         '
-        'txtInstrHeight
+        'txthgt
         '
-        Me.txtInstrHeight.Location = New System.Drawing.Point(163, 319)
-        Me.txtInstrHeight.Name = "txtInstrHeight"
-        Me.txtInstrHeight.Size = New System.Drawing.Size(56, 20)
-        Me.txtInstrHeight.TabIndex = 38
+        Me.txthgt.Location = New System.Drawing.Point(163, 322)
+        Me.txthgt.Name = "txthgt"
+        Me.txthgt.Size = New System.Drawing.Size(56, 20)
+        Me.txthgt.TabIndex = 38
         '
         'txtDeinstallDate
         '
@@ -1653,7 +1671,7 @@ Partial Class formMetadata
         '
         'txtInstallDate
         '
-        Me.txtInstallDate.Location = New System.Drawing.Point(164, 265)
+        Me.txtInstallDate.Location = New System.Drawing.Point(164, 262)
         Me.txtInstallDate.Name = "txtInstallDate"
         Me.txtInstallDate.Size = New System.Drawing.Size(138, 20)
         Me.txtInstallDate.TabIndex = 36
@@ -1661,20 +1679,20 @@ Partial Class formMetadata
         'lblInstrStnId
         '
         Me.lblInstrStnId.AutoSize = True
-        Me.lblInstrStnId.Location = New System.Drawing.Point(67, 106)
+        Me.lblInstrStnId.Location = New System.Drawing.Point(67, 115)
         Me.lblInstrStnId.Name = "lblInstrStnId"
         Me.lblInstrStnId.Size = New System.Drawing.Size(54, 13)
         Me.lblInstrStnId.TabIndex = 35
         Me.lblInstrStnId.Text = "Station ID"
         '
-        'lblInstrHt
+        'lblInstalledAt
         '
-        Me.lblInstrHt.AutoSize = True
-        Me.lblInstrHt.Location = New System.Drawing.Point(66, 323)
-        Me.lblInstrHt.Name = "lblInstrHt"
-        Me.lblInstrHt.Size = New System.Drawing.Size(38, 13)
-        Me.lblInstrHt.TabIndex = 34
-        Me.lblInstrHt.Text = "Height"
+        Me.lblInstalledAt.AutoSize = True
+        Me.lblInstalledAt.Location = New System.Drawing.Point(66, 326)
+        Me.lblInstalledAt.Name = "lblInstalledAt"
+        Me.lblInstalledAt.Size = New System.Drawing.Size(38, 13)
+        Me.lblInstalledAt.TabIndex = 34
+        Me.lblInstalledAt.Text = "Height"
         '
         'lblDeinstalDate
         '
@@ -1689,56 +1707,49 @@ Partial Class formMetadata
         '
         Me.txtInstrStn.FormattingEnabled = True
         Me.txtInstrStn.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtInstrStn.Location = New System.Drawing.Point(163, 102)
+        Me.txtInstrStn.Location = New System.Drawing.Point(163, 111)
         Me.txtInstrStn.Name = "txtInstrStn"
         Me.txtInstrStn.Size = New System.Drawing.Size(138, 21)
         Me.txtInstrStn.TabIndex = 32
         '
         'txtUncertainity
         '
-        Me.txtUncertainity.Location = New System.Drawing.Point(164, 238)
+        Me.txtUncertainity.Location = New System.Drawing.Point(164, 232)
         Me.txtUncertainity.Name = "txtUncertainity"
         Me.txtUncertainity.Size = New System.Drawing.Size(55, 20)
         Me.txtUncertainity.TabIndex = 21
         '
         'txtManufacturer
         '
-        Me.txtManufacturer.Location = New System.Drawing.Point(164, 211)
+        Me.txtManufacturer.Location = New System.Drawing.Point(164, 202)
         Me.txtManufacturer.Name = "txtManufacturer"
         Me.txtManufacturer.Size = New System.Drawing.Size(137, 20)
         Me.txtManufacturer.TabIndex = 20
         '
         'txtModel
         '
-        Me.txtModel.Location = New System.Drawing.Point(164, 184)
+        Me.txtModel.Location = New System.Drawing.Point(164, 172)
         Me.txtModel.Name = "txtModel"
         Me.txtModel.Size = New System.Drawing.Size(137, 20)
         Me.txtModel.TabIndex = 19
         '
-        'txtInstrScale
-        '
-        Me.txtInstrScale.Location = New System.Drawing.Point(163, 157)
-        Me.txtInstrScale.Name = "txtInstrScale"
-        Me.txtInstrScale.Size = New System.Drawing.Size(56, 20)
-        Me.txtInstrScale.TabIndex = 18
-        '
         'txtSerial
         '
-        Me.txtSerial.Location = New System.Drawing.Point(163, 130)
+        Me.txtSerial.Location = New System.Drawing.Point(163, 142)
         Me.txtSerial.Name = "txtSerial"
         Me.txtSerial.Size = New System.Drawing.Size(138, 20)
         Me.txtSerial.TabIndex = 17
         '
         'txtAbbrev
         '
-        Me.txtAbbrev.Location = New System.Drawing.Point(163, 75)
+        Me.txtAbbrev.Location = New System.Drawing.Point(163, 81)
         Me.txtAbbrev.Name = "txtAbbrev"
         Me.txtAbbrev.Size = New System.Drawing.Size(138, 20)
         Me.txtAbbrev.TabIndex = 16
         '
         'txtInstName
         '
-        Me.txtInstName.Location = New System.Drawing.Point(163, 48)
+        Me.txtInstName.Location = New System.Drawing.Point(163, 51)
         Me.txtInstName.Name = "txtInstName"
         Me.txtInstName.Size = New System.Drawing.Size(138, 20)
         Me.txtInstName.TabIndex = 15
@@ -1753,7 +1764,7 @@ Partial Class formMetadata
         'lblIinstalDate
         '
         Me.lblIinstalDate.AutoSize = True
-        Me.lblIinstalDate.Location = New System.Drawing.Point(67, 269)
+        Me.lblIinstalDate.Location = New System.Drawing.Point(67, 266)
         Me.lblIinstalDate.Name = "lblIinstalDate"
         Me.lblIinstalDate.Size = New System.Drawing.Size(83, 13)
         Me.lblIinstalDate.TabIndex = 13
@@ -1762,25 +1773,16 @@ Partial Class formMetadata
         'lblModel
         '
         Me.lblModel.AutoSize = True
-        Me.lblModel.Location = New System.Drawing.Point(67, 188)
+        Me.lblModel.Location = New System.Drawing.Point(67, 176)
         Me.lblModel.Name = "lblModel"
         Me.lblModel.Size = New System.Drawing.Size(36, 13)
         Me.lblModel.TabIndex = 12
         Me.lblModel.Text = "Model"
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(67, 161)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(34, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Scale"
-        '
         'lblSerial
         '
         Me.lblSerial.AutoSize = True
-        Me.lblSerial.Location = New System.Drawing.Point(67, 134)
+        Me.lblSerial.Location = New System.Drawing.Point(67, 146)
         Me.lblSerial.Name = "lblSerial"
         Me.lblSerial.Size = New System.Drawing.Size(73, 13)
         Me.lblSerial.TabIndex = 10
@@ -1789,7 +1791,7 @@ Partial Class formMetadata
         'lblInstAbbrev
         '
         Me.lblInstAbbrev.AutoSize = True
-        Me.lblInstAbbrev.Location = New System.Drawing.Point(67, 79)
+        Me.lblInstAbbrev.Location = New System.Drawing.Point(67, 85)
         Me.lblInstAbbrev.Name = "lblInstAbbrev"
         Me.lblInstAbbrev.Size = New System.Drawing.Size(66, 13)
         Me.lblInstAbbrev.TabIndex = 9
@@ -1798,7 +1800,7 @@ Partial Class formMetadata
         'lblUncertainity
         '
         Me.lblUncertainity.AutoSize = True
-        Me.lblUncertainity.Location = New System.Drawing.Point(67, 242)
+        Me.lblUncertainity.Location = New System.Drawing.Point(67, 236)
         Me.lblUncertainity.Name = "lblUncertainity"
         Me.lblUncertainity.Size = New System.Drawing.Size(63, 13)
         Me.lblUncertainity.TabIndex = 8
@@ -1807,7 +1809,7 @@ Partial Class formMetadata
         'lblManufacturer
         '
         Me.lblManufacturer.AutoSize = True
-        Me.lblManufacturer.Location = New System.Drawing.Point(67, 215)
+        Me.lblManufacturer.Location = New System.Drawing.Point(67, 206)
         Me.lblManufacturer.Name = "lblManufacturer"
         Me.lblManufacturer.Size = New System.Drawing.Size(70, 13)
         Me.lblManufacturer.TabIndex = 7
@@ -1816,7 +1818,7 @@ Partial Class formMetadata
         'txtInstrumentName
         '
         Me.txtInstrumentName.AutoSize = True
-        Me.txtInstrumentName.Location = New System.Drawing.Point(67, 52)
+        Me.txtInstrumentName.Location = New System.Drawing.Point(67, 55)
         Me.txtInstrumentName.Name = "txtInstrumentName"
         Me.txtInstrumentName.Size = New System.Drawing.Size(35, 13)
         Me.txtInstrumentName.TabIndex = 1
@@ -1827,15 +1829,15 @@ Partial Class formMetadata
         Me.lblInstId.AutoSize = True
         Me.lblInstId.Location = New System.Drawing.Point(67, 25)
         Me.lblInstId.Name = "lblInstId"
-        Me.lblInstId.Size = New System.Drawing.Size(18, 13)
+        Me.lblInstId.Size = New System.Drawing.Size(65, 13)
         Me.lblInstId.TabIndex = 0
-        Me.lblInstId.Text = "ID"
+        Me.lblInstId.Text = "Intrument ID"
         '
         'lblInstruments
         '
         Me.lblInstruments.AutoSize = True
         Me.lblInstruments.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInstruments.Location = New System.Drawing.Point(300, 8)
+        Me.lblInstruments.Location = New System.Drawing.Point(317, 8)
         Me.lblInstruments.Name = "lblInstruments"
         Me.lblInstruments.Size = New System.Drawing.Size(75, 15)
         Me.lblInstruments.TabIndex = 4
@@ -1848,7 +1850,7 @@ Partial Class formMetadata
         Me.TabStationLocationHistory.Location = New System.Drawing.Point(4, 22)
         Me.TabStationLocationHistory.Name = "TabStationLocationHistory"
         Me.TabStationLocationHistory.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationLocationHistory.Size = New System.Drawing.Size(740, 450)
+        Me.TabStationLocationHistory.Size = New System.Drawing.Size(778, 450)
         Me.TabStationLocationHistory.TabIndex = 4
         Me.TabStationLocationHistory.Text = "Station Location History"
         Me.TabStationLocationHistory.UseVisualStyleBackColor = True
@@ -1881,7 +1883,7 @@ Partial Class formMetadata
         Me.GroupBox1.Controls.Add(Me.Label16)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Location = New System.Drawing.Point(48, 25)
+        Me.GroupBox1.Location = New System.Drawing.Point(73, 25)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(635, 428)
         Me.GroupBox1.TabIndex = 7
@@ -1944,7 +1946,7 @@ Partial Class formMetadata
         Me.cmdClearHistory.Name = "cmdClearHistory"
         Me.cmdClearHistory.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearHistory.TabIndex = 39
-        Me.cmdClearHistory.Text = "Clear"
+        Me.cmdClearHistory.Text = "Reset"
         Me.cmdClearHistory.UseVisualStyleBackColor = True
         '
         'GroupBox9
@@ -2015,21 +2017,21 @@ Partial Class formMetadata
         '
         'txtDrgBasin
         '
-        Me.txtDrgBasin.Location = New System.Drawing.Point(252, 319)
+        Me.txtDrgBasin.Location = New System.Drawing.Point(252, 328)
         Me.txtDrgBasin.Name = "txtDrgBasin"
         Me.txtDrgBasin.Size = New System.Drawing.Size(56, 20)
         Me.txtDrgBasin.TabIndex = 38
         '
         'txtClosDate
         '
-        Me.txtClosDate.Location = New System.Drawing.Point(252, 157)
+        Me.txtClosDate.Location = New System.Drawing.Point(252, 163)
         Me.txtClosDate.Name = "txtClosDate"
         Me.txtClosDate.Size = New System.Drawing.Size(138, 20)
         Me.txtClosDate.TabIndex = 37
         '
         'txtOpDate
         '
-        Me.txtOpDate.Location = New System.Drawing.Point(252, 130)
+        Me.txtOpDate.Location = New System.Drawing.Point(252, 136)
         Me.txtOpDate.Name = "txtOpDate"
         Me.txtOpDate.Size = New System.Drawing.Size(138, 20)
         Me.txtOpDate.TabIndex = 36
@@ -2037,7 +2039,7 @@ Partial Class formMetadata
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(127, 25)
+        Me.Label4.Location = New System.Drawing.Point(127, 31)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 13)
         Me.Label4.TabIndex = 35
@@ -2046,7 +2048,7 @@ Partial Class formMetadata
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(127, 323)
+        Me.Label6.Location = New System.Drawing.Point(127, 332)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(78, 13)
         Me.Label6.TabIndex = 34
@@ -2055,7 +2057,7 @@ Partial Class formMetadata
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(127, 161)
+        Me.Label8.Location = New System.Drawing.Point(127, 167)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(67, 13)
         Me.Label8.TabIndex = 33
@@ -2065,63 +2067,63 @@ Partial Class formMetadata
         '
         Me.txtlocStn.FormattingEnabled = True
         Me.txtlocStn.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtlocStn.Location = New System.Drawing.Point(252, 21)
+        Me.txtlocStn.Location = New System.Drawing.Point(252, 27)
         Me.txtlocStn.Name = "txtlocStn"
         Me.txtlocStn.Size = New System.Drawing.Size(138, 21)
         Me.txtlocStn.TabIndex = 32
         '
         'txtElev
         '
-        Me.txtElev.Location = New System.Drawing.Point(253, 238)
+        Me.txtElev.Location = New System.Drawing.Point(253, 247)
         Me.txtElev.Name = "txtElev"
         Me.txtElev.Size = New System.Drawing.Size(55, 20)
         Me.txtElev.TabIndex = 21
         '
         'txtLon
         '
-        Me.txtLon.Location = New System.Drawing.Point(252, 211)
+        Me.txtLon.Location = New System.Drawing.Point(252, 220)
         Me.txtLon.Name = "txtLon"
         Me.txtLon.Size = New System.Drawing.Size(137, 20)
         Me.txtLon.TabIndex = 20
         '
         'txtLat
         '
-        Me.txtLat.Location = New System.Drawing.Point(252, 184)
+        Me.txtLat.Location = New System.Drawing.Point(252, 193)
         Me.txtLat.Name = "txtLat"
         Me.txtLat.Size = New System.Drawing.Size(137, 20)
         Me.txtLat.TabIndex = 19
         '
         'txtAdmin
         '
-        Me.txtAdmin.Location = New System.Drawing.Point(252, 292)
+        Me.txtAdmin.Location = New System.Drawing.Point(252, 301)
         Me.txtAdmin.Name = "txtAdmin"
         Me.txtAdmin.Size = New System.Drawing.Size(56, 20)
         Me.txtAdmin.TabIndex = 18
         '
         'txtAuth
         '
-        Me.txtAuth.Location = New System.Drawing.Point(252, 265)
+        Me.txtAuth.Location = New System.Drawing.Point(252, 274)
         Me.txtAuth.Name = "txtAuth"
         Me.txtAuth.Size = New System.Drawing.Size(138, 20)
         Me.txtAuth.TabIndex = 17
         '
         'txtMethod
         '
-        Me.txtMethod.Location = New System.Drawing.Point(252, 76)
+        Me.txtMethod.Location = New System.Drawing.Point(252, 82)
         Me.txtMethod.Name = "txtMethod"
         Me.txtMethod.Size = New System.Drawing.Size(138, 20)
         Me.txtMethod.TabIndex = 16
         '
         'txtStnType
         '
-        Me.txtStnType.Location = New System.Drawing.Point(252, 49)
+        Me.txtStnType.Location = New System.Drawing.Point(252, 55)
         Me.txtStnType.Name = "txtStnType"
         Me.txtStnType.Size = New System.Drawing.Size(138, 20)
         Me.txtStnType.TabIndex = 15
         '
         'txtAccuracy
         '
-        Me.txtAccuracy.Location = New System.Drawing.Point(252, 103)
+        Me.txtAccuracy.Location = New System.Drawing.Point(252, 109)
         Me.txtAccuracy.Name = "txtAccuracy"
         Me.txtAccuracy.Size = New System.Drawing.Size(138, 20)
         Me.txtAccuracy.TabIndex = 14
@@ -2129,7 +2131,7 @@ Partial Class formMetadata
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(127, 134)
+        Me.Label9.Location = New System.Drawing.Point(127, 140)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(73, 13)
         Me.Label9.TabIndex = 13
@@ -2138,7 +2140,7 @@ Partial Class formMetadata
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(127, 188)
+        Me.Label11.Location = New System.Drawing.Point(127, 197)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(45, 13)
         Me.Label11.TabIndex = 12
@@ -2147,7 +2149,7 @@ Partial Class formMetadata
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(127, 296)
+        Me.Label12.Location = New System.Drawing.Point(127, 305)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(109, 13)
         Me.Label12.TabIndex = 11
@@ -2156,7 +2158,7 @@ Partial Class formMetadata
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(127, 269)
+        Me.Label13.Location = New System.Drawing.Point(127, 278)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(48, 13)
         Me.Label13.TabIndex = 10
@@ -2165,7 +2167,7 @@ Partial Class formMetadata
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(127, 80)
+        Me.Label14.Location = New System.Drawing.Point(127, 86)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(113, 13)
         Me.Label14.TabIndex = 9
@@ -2174,7 +2176,7 @@ Partial Class formMetadata
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(127, 242)
+        Me.Label15.Location = New System.Drawing.Point(127, 251)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(51, 13)
         Me.Label15.TabIndex = 8
@@ -2183,7 +2185,7 @@ Partial Class formMetadata
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(127, 215)
+        Me.Label16.Location = New System.Drawing.Point(127, 224)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(54, 13)
         Me.Label16.TabIndex = 7
@@ -2192,7 +2194,7 @@ Partial Class formMetadata
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(127, 53)
+        Me.Label17.Location = New System.Drawing.Point(127, 59)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(67, 13)
         Me.Label17.TabIndex = 1
@@ -2201,7 +2203,7 @@ Partial Class formMetadata
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(127, 107)
+        Me.Label18.Location = New System.Drawing.Point(127, 113)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(122, 13)
         Me.Label18.TabIndex = 0
@@ -2211,7 +2213,7 @@ Partial Class formMetadata
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(300, 7)
+        Me.Label19.Location = New System.Drawing.Point(325, 7)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(159, 15)
         Me.Label19.TabIndex = 6
@@ -2224,7 +2226,7 @@ Partial Class formMetadata
         Me.TabStationQualifier.Location = New System.Drawing.Point(4, 22)
         Me.TabStationQualifier.Name = "TabStationQualifier"
         Me.TabStationQualifier.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationQualifier.Size = New System.Drawing.Size(740, 450)
+        Me.TabStationQualifier.Size = New System.Drawing.Size(778, 450)
         Me.TabStationQualifier.TabIndex = 5
         Me.TabStationQualifier.Text = "Station Qualifier"
         Me.TabStationQualifier.UseVisualStyleBackColor = True
@@ -2233,7 +2235,7 @@ Partial Class formMetadata
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(336, 28)
+        Me.Label3.Location = New System.Drawing.Point(306, 26)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(118, 16)
         Me.Label3.TabIndex = 7
@@ -2255,7 +2257,7 @@ Partial Class formMetadata
         Me.GroupBox3.Controls.Add(Me.Label23)
         Me.GroupBox3.Controls.Add(Me.Label25)
         Me.GroupBox3.Controls.Add(Me.Label26)
-        Me.GroupBox3.Location = New System.Drawing.Point(62, 60)
+        Me.GroupBox3.Location = New System.Drawing.Point(77, 58)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(603, 355)
         Me.GroupBox3.TabIndex = 6
@@ -2318,7 +2320,7 @@ Partial Class formMetadata
         Me.cmdClearQualifier.Name = "cmdClearQualifier"
         Me.cmdClearQualifier.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearQualifier.TabIndex = 39
-        Me.cmdClearQualifier.Text = "Clear"
+        Me.cmdClearQualifier.Text = "Reset"
         Me.cmdClearQualifier.UseVisualStyleBackColor = True
         '
         'GroupBox11
@@ -2491,7 +2493,7 @@ Partial Class formMetadata
         Me.TabScheduleClass.Location = New System.Drawing.Point(4, 22)
         Me.TabScheduleClass.Name = "TabScheduleClass"
         Me.TabScheduleClass.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabScheduleClass.Size = New System.Drawing.Size(740, 450)
+        Me.TabScheduleClass.Size = New System.Drawing.Size(778, 450)
         Me.TabScheduleClass.TabIndex = 6
         Me.TabScheduleClass.Text = "Schedule Class"
         Me.TabScheduleClass.UseVisualStyleBackColor = True
@@ -2579,7 +2581,7 @@ Partial Class formMetadata
         Me.cmdClearClass.Name = "cmdClearClass"
         Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearClass.TabIndex = 39
-        Me.cmdClearClass.Text = "Clear"
+        Me.cmdClearClass.Text = "Reset"
         Me.cmdClearClass.UseVisualStyleBackColor = True
         '
         'GroupBox14
@@ -2704,7 +2706,7 @@ Partial Class formMetadata
         Me.TabPhysicalFeature.Location = New System.Drawing.Point(4, 22)
         Me.TabPhysicalFeature.Name = "TabPhysicalFeature"
         Me.TabPhysicalFeature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPhysicalFeature.Size = New System.Drawing.Size(740, 450)
+        Me.TabPhysicalFeature.Size = New System.Drawing.Size(778, 450)
         Me.TabPhysicalFeature.TabIndex = 7
         Me.TabPhysicalFeature.Text = "Physical Feature"
         Me.TabPhysicalFeature.UseVisualStyleBackColor = True
@@ -2721,10 +2723,12 @@ Partial Class formMetadata
         '
         'grpPhysicalFeature
         '
+        Me.grpPhysicalFeature.Controls.Add(Me.txtfeatureclassdescription)
+        Me.grpPhysicalFeature.Controls.Add(Me.Label5)
         Me.grpPhysicalFeature.Controls.Add(Me.lblFeaturePic)
         Me.grpPhysicalFeature.Controls.Add(Me.GroupBox15)
         Me.grpPhysicalFeature.Controls.Add(Me.GroupBox16)
-        Me.grpPhysicalFeature.Controls.Add(Me.PictureBox1)
+        Me.grpPhysicalFeature.Controls.Add(Me.txtfeaturepic)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeatureEdate)
         Me.grpPhysicalFeature.Controls.Add(Me.lblStnId)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeatureStation)
@@ -2737,15 +2741,31 @@ Partial Class formMetadata
         Me.grpPhysicalFeature.Controls.Add(Me.lblFeatureEdate)
         Me.grpPhysicalFeature.Location = New System.Drawing.Point(76, 51)
         Me.grpPhysicalFeature.Name = "grpPhysicalFeature"
-        Me.grpPhysicalFeature.Size = New System.Drawing.Size(578, 372)
+        Me.grpPhysicalFeature.Size = New System.Drawing.Size(631, 372)
         Me.grpPhysicalFeature.TabIndex = 10
         Me.grpPhysicalFeature.TabStop = False
         Me.grpPhysicalFeature.Text = "Feature Details"
         '
+        'txtfeatureclassdescription
+        '
+        Me.txtfeatureclassdescription.Location = New System.Drawing.Point(124, 234)
+        Me.txtfeatureclassdescription.Name = "txtfeatureclassdescription"
+        Me.txtfeatureclassdescription.Size = New System.Drawing.Size(153, 20)
+        Me.txtfeatureclassdescription.TabIndex = 64
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(28, 238)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(88, 13)
+        Me.Label5.TabIndex = 63
+        Me.Label5.Text = "Class Description"
+        '
         'lblFeaturePic
         '
         Me.lblFeaturePic.AutoSize = True
-        Me.lblFeaturePic.Location = New System.Drawing.Point(369, 276)
+        Me.lblFeaturePic.Location = New System.Drawing.Point(421, 276)
         Me.lblFeaturePic.Name = "lblFeaturePic"
         Me.lblFeaturePic.Size = New System.Drawing.Size(79, 13)
         Me.lblFeaturePic.TabIndex = 62
@@ -2761,7 +2781,7 @@ Partial Class formMetadata
         Me.GroupBox15.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox15.Location = New System.Drawing.Point(3, 302)
         Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.Size = New System.Drawing.Size(572, 34)
+        Me.GroupBox15.Size = New System.Drawing.Size(625, 34)
         Me.GroupBox15.TabIndex = 61
         Me.GroupBox15.TabStop = False
         '
@@ -2807,7 +2827,7 @@ Partial Class formMetadata
         Me.cmdClearFeature.Name = "cmdClearFeature"
         Me.cmdClearFeature.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearFeature.TabIndex = 39
-        Me.cmdClearFeature.Text = "Clear"
+        Me.cmdClearFeature.Text = "Reset"
         Me.cmdClearFeature.UseVisualStyleBackColor = True
         '
         'GroupBox16
@@ -2820,7 +2840,7 @@ Partial Class formMetadata
         Me.GroupBox16.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox16.Location = New System.Drawing.Point(3, 336)
         Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Size = New System.Drawing.Size(572, 33)
+        Me.GroupBox16.Size = New System.Drawing.Size(625, 33)
         Me.GroupBox16.TabIndex = 60
         Me.GroupBox16.TabStop = False
         '
@@ -2876,20 +2896,20 @@ Partial Class formMetadata
         Me.txtNav6.TabIndex = 46
         Me.txtNav6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'PictureBox1
+        'txtfeaturepic
         '
-        Me.PictureBox1.BackColor = System.Drawing.Color.Ivory
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(283, 29)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(271, 244)
-        Me.PictureBox1.TabIndex = 47
-        Me.PictureBox1.TabStop = False
+        Me.txtfeaturepic.BackColor = System.Drawing.Color.Ivory
+        Me.txtfeaturepic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.txtfeaturepic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.txtfeaturepic.Location = New System.Drawing.Point(324, 29)
+        Me.txtfeaturepic.Name = "txtfeaturepic"
+        Me.txtfeaturepic.Size = New System.Drawing.Size(271, 244)
+        Me.txtfeaturepic.TabIndex = 47
+        Me.txtfeaturepic.TabStop = False
         '
         'txtFeatureEdate
         '
-        Me.txtFeatureEdate.Location = New System.Drawing.Point(103, 123)
+        Me.txtFeatureEdate.Location = New System.Drawing.Point(125, 121)
         Me.txtFeatureEdate.Name = "txtFeatureEdate"
         Me.txtFeatureEdate.Size = New System.Drawing.Size(154, 20)
         Me.txtFeatureEdate.TabIndex = 46
@@ -2897,7 +2917,7 @@ Partial Class formMetadata
         'lblStnId
         '
         Me.lblStnId.AutoSize = True
-        Me.lblStnId.Location = New System.Drawing.Point(35, 53)
+        Me.lblStnId.Location = New System.Drawing.Point(27, 53)
         Me.lblStnId.Name = "lblStnId"
         Me.lblStnId.Size = New System.Drawing.Size(54, 13)
         Me.lblStnId.TabIndex = 45
@@ -2906,30 +2926,30 @@ Partial Class formMetadata
         'txtFeatureStation
         '
         Me.txtFeatureStation.FormattingEnabled = True
-        Me.txtFeatureStation.Location = New System.Drawing.Point(103, 50)
+        Me.txtFeatureStation.Location = New System.Drawing.Point(126, 50)
         Me.txtFeatureStation.Name = "txtFeatureStation"
         Me.txtFeatureStation.Size = New System.Drawing.Size(121, 21)
         Me.txtFeatureStation.TabIndex = 44
         '
         'txtFeatureBdate
         '
-        Me.txtFeatureBdate.Location = New System.Drawing.Point(101, 86)
+        Me.txtFeatureBdate.Location = New System.Drawing.Point(125, 84)
         Me.txtFeatureBdate.Name = "txtFeatureBdate"
         Me.txtFeatureBdate.Size = New System.Drawing.Size(154, 20)
         Me.txtFeatureBdate.TabIndex = 43
         '
         'txtFeatureDescription
         '
-        Me.txtFeatureDescription.Location = New System.Drawing.Point(103, 153)
+        Me.txtFeatureDescription.Location = New System.Drawing.Point(126, 157)
         Me.txtFeatureDescription.Name = "txtFeatureDescription"
         Me.txtFeatureDescription.Size = New System.Drawing.Size(154, 20)
         Me.txtFeatureDescription.TabIndex = 42
         '
         'txtFeatureClass
         '
-        Me.txtFeatureClass.Location = New System.Drawing.Point(105, 194)
+        Me.txtFeatureClass.Location = New System.Drawing.Point(125, 194)
         Me.txtFeatureClass.Name = "txtFeatureClass"
-        Me.txtFeatureClass.Size = New System.Drawing.Size(73, 20)
+        Me.txtFeatureClass.Size = New System.Drawing.Size(152, 20)
         Me.txtFeatureClass.TabIndex = 41
         '
         'lblFeatureDescription
@@ -2937,9 +2957,9 @@ Partial Class formMetadata
         Me.lblFeatureDescription.AutoSize = True
         Me.lblFeatureDescription.Location = New System.Drawing.Point(26, 157)
         Me.lblFeatureDescription.Name = "lblFeatureDescription"
-        Me.lblFeatureDescription.Size = New System.Drawing.Size(60, 13)
+        Me.lblFeatureDescription.Size = New System.Drawing.Size(99, 13)
         Me.lblFeatureDescription.TabIndex = 39
-        Me.lblFeatureDescription.Text = "Description"
+        Me.lblFeatureDescription.Text = "Feature Description"
         '
         'lblFeatureClass
         '
@@ -2975,7 +2995,7 @@ Partial Class formMetadata
         Me.TabPaperArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabPaperArchive.Name = "TabPaperArchive"
         Me.TabPaperArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPaperArchive.Size = New System.Drawing.Size(740, 450)
+        Me.TabPaperArchive.Size = New System.Drawing.Size(778, 450)
         Me.TabPaperArchive.TabIndex = 8
         Me.TabPaperArchive.Text = "Paper Archive"
         Me.TabPaperArchive.UseVisualStyleBackColor = True
@@ -2984,7 +3004,7 @@ Partial Class formMetadata
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(289, 45)
+        Me.Label7.Location = New System.Drawing.Point(305, 45)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(175, 16)
         Me.Label7.TabIndex = 11
@@ -2998,7 +3018,7 @@ Partial Class formMetadata
         Me.GroupBox17.Controls.Add(Me.txtFormId)
         Me.GroupBox17.Controls.Add(Me.lbldescri)
         Me.GroupBox17.Controls.Add(Me.lblFormId)
-        Me.GroupBox17.Location = New System.Drawing.Point(101, 79)
+        Me.GroupBox17.Location = New System.Drawing.Point(117, 79)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(525, 263)
         Me.GroupBox17.TabIndex = 10
@@ -3167,7 +3187,7 @@ Partial Class formMetadata
         Me.MenuMetadata.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuMetadata.Location = New System.Drawing.Point(0, 0)
         Me.MenuMetadata.Name = "MenuMetadata"
-        Me.MenuMetadata.Size = New System.Drawing.Size(760, 24)
+        Me.MenuMetadata.Size = New System.Drawing.Size(786, 24)
         Me.MenuMetadata.TabIndex = 1
         Me.MenuMetadata.Text = "MenuStrip1"
         '
@@ -3187,7 +3207,7 @@ Partial Class formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(760, 515)
+        Me.ClientSize = New System.Drawing.Size(786, 515)
         Me.Controls.Add(Me.TabMetadata)
         Me.Controls.Add(Me.MenuMetadata)
         Me.KeyPreview = True
@@ -3221,6 +3241,7 @@ Partial Class formMetadata
         Me.grpInstrument.ResumeLayout(False)
         Me.grpInstrument.PerformLayout()
         Me.grpCommand2.ResumeLayout(False)
+        Me.grpCommand2.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3252,7 +3273,7 @@ Partial Class formMetadata
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtfeaturepic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPaperArchive.ResumeLayout(False)
         Me.TabPaperArchive.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
@@ -3339,14 +3360,12 @@ Partial Class formMetadata
     Friend WithEvents txtUncertainity As System.Windows.Forms.TextBox
     Friend WithEvents txtManufacturer As System.Windows.Forms.TextBox
     Friend WithEvents txtModel As System.Windows.Forms.TextBox
-    Friend WithEvents txtInstrScale As System.Windows.Forms.TextBox
     Friend WithEvents txtSerial As System.Windows.Forms.TextBox
     Friend WithEvents txtAbbrev As System.Windows.Forms.TextBox
     Friend WithEvents txtInstName As System.Windows.Forms.TextBox
     Friend WithEvents txtInstrumentId As System.Windows.Forms.TextBox
     Friend WithEvents lblIinstalDate As System.Windows.Forms.Label
     Friend WithEvents lblModel As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblSerial As System.Windows.Forms.Label
     Friend WithEvents lblInstAbbrev As System.Windows.Forms.Label
     Friend WithEvents lblUncertainity As System.Windows.Forms.Label
@@ -3356,11 +3375,9 @@ Partial Class formMetadata
     Friend WithEvents lblInstruments As System.Windows.Forms.Label
     Friend WithEvents lblInstrumentPic As System.Windows.Forms.Label
     Friend WithEvents picInstrument As System.Windows.Forms.PictureBox
-    Friend WithEvents txtInstrHeight As System.Windows.Forms.TextBox
     Friend WithEvents txtDeinstallDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtInstallDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblInstrStnId As System.Windows.Forms.Label
-    Friend WithEvents lblInstrHt As System.Windows.Forms.Label
     Friend WithEvents lblDeinstalDate As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtDrgBasin As System.Windows.Forms.TextBox
@@ -3388,7 +3405,7 @@ Partial Class formMetadata
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents txtImstrument As System.Windows.Forms.ComboBox
+    Friend WithEvents txtInstrument As System.Windows.Forms.ComboBox
     Friend WithEvents txtElement As System.Windows.Forms.ComboBox
     Friend WithEvents txtStation As System.Windows.Forms.ComboBox
     Friend WithEvents txtEndate As System.Windows.Forms.DateTimePicker
@@ -3417,7 +3434,7 @@ Partial Class formMetadata
     Friend WithEvents lblClass As System.Windows.Forms.Label
     Friend WithEvents lblPhysicalFeature As System.Windows.Forms.Label
     Friend WithEvents grpPhysicalFeature As System.Windows.Forms.GroupBox
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents txtfeaturepic As System.Windows.Forms.PictureBox
     Friend WithEvents txtFeatureEdate As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblStnId As System.Windows.Forms.Label
     Friend WithEvents txtFeatureStation As System.Windows.Forms.ComboBox
@@ -3554,4 +3571,10 @@ Partial Class formMetadata
     Friend WithEvents combSearchElement As System.Windows.Forms.ComboBox
     Friend WithEvents txtId As System.Windows.Forms.ComboBox
     Friend WithEvents cmdReset As System.Windows.Forms.Button
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txthgt As System.Windows.Forms.TextBox
+    Friend WithEvents lblInstalledAt As System.Windows.Forms.Label
+    Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

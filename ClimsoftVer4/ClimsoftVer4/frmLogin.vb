@@ -81,13 +81,6 @@ Public Class frmLogin
             ' End Using
             regDataInit()
 
-            'Added connection to remote server for data synchronization. 20160726 ASM
-            'Get IP address of remote server
-            remoteSvr = dsReg.Tables("regData").Rows(13).Item("keyValue")
-            'Add connectionString to remote server. 
-            connStrRemoteSvr = "server=" & remoteSvr & ";database=mariadb_climsoft_db_v4;port=3308;" & "uid=" & txtUsername.Text & _
-                ";pwd=" & txtPassword.Text & ";Convert Zero Datetime=True"
-
             languageTableInit()
             climsoftuserRoles()
         Catch e As Exception
@@ -107,106 +100,7 @@ Public Class frmLogin
         daLanguageTable = New MySql.Data.MySqlClient.MySqlDataAdapter(languageTableSQL, conn)
         daLanguageTable.Fill(dsLanguageTable, "languageTranslation")
     End Sub
-    Sub pushKeyEntryDataToRemote(tableName As String)
-        'Added to allow pushing key-entry data from local to remote. 20160726 ASM
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim ds As New DataSet
-        Dim sql As String
-
-        conn.Close()
-
-        Dim myConnectionString As String
-        myConnectionString = txtusrpwd.Text
-        ' MsgBox(myConnectionString)
-        conn.ConnectionString = myConnectionString
-        conn.Open()
-
-        sql = "SELECT * FROM " & tableName
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        da.Fill(ds, tableName)
-
-        ' MsgBox("Connection local successful!")
-        Dim strSQL As String
-        Dim strBackupFileLocal As String, strBackupFolderLocal As String, strBackupFolderUnixStyleLocal As String
-        Dim strBackupFileRemote As String, strBackupFolderRemote As String, strBackupFolderUnixStyleRemote As String
-        Dim backupFileLocalMapped As String, backupFolderLocalMapped As String
-
-        strBackupFolderLocal = dsReg.Tables("regData").Rows(14).Item("keyValue")
-        backupFolderLocalMapped = dsReg.Tables("regData").Rows(16).Item("keyValue")
-
-        strBackupFileLocal = tableName & "_backup_" & txtUsername.Text & ".csv"
-        'Search and replace backslash "\" in folder path with forward slash "/"
-        strBackupFolderUnixStyleLocal = strBackupFolderLocal.Replace("\", "/")
-        strBackupFileLocal = strBackupFolderUnixStyleLocal & "/" & strBackupFileLocal
-
-        ' Delete previous backup file
-        If System.IO.File.Exists(strBackupFileLocal) Then System.IO.File.Delete(strBackupFileLocal)
-        strSQL = "SELECT * FROM " & tableName & " INTO OUTFILE '" & strBackupFileLocal & "' FIELDS TERMINATED BY ',';"
-
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-        ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-        Try
-            'Execute query
-            objCmd.ExecuteNonQuery()
-            '' MsgBox("Data exported successfully!")
-        Catch ex As Exception
-            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-            MsgBox(ex.Message)
-        End Try
-        conn.Close()
-
-        strBackupFileLocal = strBackupFolderLocal & "\" & tableName & "_backup_" & txtUsername.Text & ".csv"
-        backupFileLocalMapped = backupFolderLocalMapped & "\" & tableName & "_backup_" & txtUsername.Text & ".csv"
-
-        'Copy backup file to mapped drive folder and overwrite existing file
-        My.Computer.FileSystem.CopyFile(strBackupFileLocal, backupFileLocalMapped, True)
-
-        strBackupFileRemote = tableName & "_backup_" & txtUsername.Text & ".csv"
-        strBackupFolderRemote = dsReg.Tables("regData").Rows(15).Item("keyValue")
-        'Search and replace backslash "\" in folder path with forward slash "/"
-        strBackupFolderUnixStyleRemote = strBackupFolderRemote.Replace("\", "/")
-        strBackupFileRemote = strBackupFolderUnixStyleRemote & "/" & strBackupFileRemote
-
-        'Load data from backup file
-        Dim ColumnCount As Integer, i As Integer, valueList As String
-        ColumnCount = ds.Tables(tableName).Columns.Count
-        'MsgBox("Number of columns=" & ColumnCount)
-        valueList = ds.Tables(tableName).Columns.Item(0).ColumnName
-        For i = 1 To ColumnCount - 1
-            valueList = valueList & "," & ds.Tables(tableName).Columns.Item(i).ColumnName
-        Next i
-        'MsgBox(valueList)
-
-        myConnectionString = connStrRemoteSvr
-        ' MsgBox(myConnectionString)
-        conn.ConnectionString = myConnectionString
-        conn.Open()
-        ' MsgBox("Connection to remote database server successful!")
-
-        strSQL = "LOAD DATA INFILE '" & strBackupFileRemote & "' IGNORE INTO TABLE " & tableName & " FIELDS TERMINATED BY ',' (" & valueList & ");"
-        'Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-        ' Create the Command for executing query and set its properties
-        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-        Try
-            'Execute query
-            objCmd.ExecuteNonQuery()
-            msgDataPushtoRemote = "Data pushed to remote database server successfully! " & Now()
-            MsgBox(msgDataPushtoRemote)
-            'strDataPushMessage = msgDataPushtoRemote
-            'Catch ex As MySql.Data.MySqlClient.MySqlException
-            '    'Ignore expected error i.e. error of Duplicates in MySqlException
-        Catch ex As Exception
-            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-            msgDataPushtoRemote = "Data pushed to remote database server unsuccessful! " & Now()
-            MsgBox(msgDataPushtoRemote)
-            'strDataPushMessage = msgDataPushtoRemote
-        End Try
-
-        conn.Close()
-    End Sub
+    
     Sub regDataInit()
         'Set SQL string for populating "regData" dataset
         regSQL = "SELECT keyName,keyValue FROM regkeys"     '
@@ -243,6 +137,10 @@ Public Class frmLogin
         '-------Code for translation added 20160207,ASM
         'Translate text for controls on login form.
         'Other Translation after successful login will come from language translation table stored in database
+
+        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
+        msgStationInformationNotFound = "Station information not found. Please add station information and try again!"
+
         Dim lanCulture As String
         lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
         If Strings.Left(lanCulture, 2) = "en" Then

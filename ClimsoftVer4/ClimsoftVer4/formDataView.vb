@@ -45,16 +45,7 @@ Public Class formDataView
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        'MsgBox("Not yet implemented", MsgBoxStyle.Information)
-        MsgBox(DataGridView.DataMember)
-        If DataGridView.DataMember = "station" Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "viewstations.htm")
-        ElseIf DataGridView.DataMember = "obselement" Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "viewelements.htm")
-        Else
-            MsgBox("Not yet implemented", MsgBoxStyle.Information)
-        End If
-
+        MsgBox("Not yet implemented", MsgBoxStyle.Information)
     End Sub
 
     Private Sub populateDataGrid(strSQL As String)
@@ -108,30 +99,30 @@ Public Class formDataView
                 obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
                 obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
 
-                Sql = "DELETE FROM form_hourlywind where stationId='" & stnId & "' AND elementId=" & _
-                    " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND hh=" & obsDay & ";"
+                Sql = "DELETE FROM form_hourlywind where stationId='" & stnId & "' AND yyyy=" & obsYear & " AND mm= " & _
+                    obsMonth & " AND dd=" & obsDay & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+                    Sql2 = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
                 Else
-                    Sql = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
+                    Sql2 = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
                 End If
                 ' 
             Case "form_synoptic_2_ra1"
-                Dim stnId As String, elemId, obsYear, obsMonth, obsHour As Integer
+                Dim stnId As String, obsYear, obsMonth, obsDay, obsHour As Integer
                 stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
+                obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
+                obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
+                obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
                 obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
 
-                Sql = "DELETE FROM form_synoptic_2_RA1 where stationId='" & stnId & "' AND elementId=" & elemId & _
-                    " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND hh=" & obsHour & ";"
+                Sql = "DELETE FROM form_synoptic_2_RA1 where stationId='" & stnId & "' AND yyyy=" & obsYear & _
+                    " AND mm= " & obsMonth & " AND dd= " & obsDay & " AND hh=" & obsHour & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+                    Sql2 = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
                 Else
-                    Sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+                    Sql2 = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
                 End If
                 ' 
             Case "form_monthly"
@@ -144,9 +135,9 @@ Public Class formDataView
                     " AND yyyy=" & obsYear & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
+                    Sql2 = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
                 Else
-                    Sql = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
+                    Sql2 = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
                 End If
                 ' 
         End Select
@@ -231,11 +222,11 @@ Public Class formDataView
                     End If
 
                 Case "form_synoptic_2_ra1"
-                    Dim stnId As String, elemId, obsYear, obsMonth, obsHour As Integer
+                    Dim stnId As String, obsYear, obsMonth, obsDay, obsHour As Integer
                     stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                    obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
+                    obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
+                    obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
+                    obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
                     obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
 
                     k = Me.DataGridView.CurrentCell.ColumnIndex
@@ -244,8 +235,8 @@ Public Class formDataView
 
                     'Generate SQL string for updating the selected value
                     If k > 4 Then
-                        Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND elementId=" & elemId & _
-                            " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND hh=" & obsHour & ";"
+                        Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND yyyy=" & obsYear & _
+                            " AND mm= " & obsMonth & " AND dd= " & obsDay & " AND hh=" & obsHour & ";"
                     End If
 
                 Case "form_monthly"
@@ -261,7 +252,7 @@ Public Class formDataView
                     'Generate SQL string for updating the selected value 
                     If k > 2 Then
                         Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND elementId=" & elemId & _
-                            " AND yyyy=" & obsYear & " AND mm= " & ";"
+                            " AND yyyy=" & obsYear & ";"
                     End If
 
                 Case "regkeys"
@@ -283,6 +274,8 @@ Public Class formDataView
                     End If
             End Select
             '
+            'MsgBox(Sql)
+
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
                 conn.ConnectionString = connStr
