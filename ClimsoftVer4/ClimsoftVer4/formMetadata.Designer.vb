@@ -3187,7 +3187,7 @@ Partial Class formMetadata
         Me.MenuMetadata.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuMetadata.Location = New System.Drawing.Point(0, 0)
         Me.MenuMetadata.Name = "MenuMetadata"
-        Me.MenuMetadata.Size = New System.Drawing.Size(786, 24)
+        Me.MenuMetadata.Size = New System.Drawing.Size(790, 24)
         Me.MenuMetadata.TabIndex = 1
         Me.MenuMetadata.Text = "MenuStrip1"
         '
@@ -3207,7 +3207,7 @@ Partial Class formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(786, 515)
+        Me.ClientSize = New System.Drawing.Size(790, 515)
         Me.Controls.Add(Me.TabMetadata)
         Me.Controls.Add(Me.MenuMetadata)
         Me.KeyPreview = True

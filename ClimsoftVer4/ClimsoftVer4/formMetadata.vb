@@ -45,9 +45,9 @@
 
     End Sub
 
-    Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
-        MsgBox("Station")
-    End Sub
+    'Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
+    '    MsgBox("Station")
+    'End Sub
 
     Private Sub TabMetadata_Click(sender As Object, e As EventArgs) Handles TabMetadata.Click
         'MsgBox(TabMetadata.SelectedIndex)
@@ -1105,9 +1105,7 @@ Err:
         txtFormDescription.Text = ""
     End Sub
 
-    Private Sub MenuMetadata_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuMetadata.ItemClicked
 
-    End Sub
 
     Private Sub cmdDeleteStElement_Click(sender As Object, e As EventArgs) Handles cmdDeleteStElement.Click
         If DeleteRecord("stationelement", rec) Then
@@ -1731,4 +1729,6 @@ Err:
             populatePhysicalFeature("physicalfeature", 0, Kount)
         End If
     End Sub
+
+
 End Class

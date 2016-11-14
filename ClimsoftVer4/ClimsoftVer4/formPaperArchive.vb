@@ -31,23 +31,28 @@
     '    ListFiles(fld)
     'End Sub
     Sub ListFiles(flds As String)
-        ' Declare and assign folder variables
-        Dim f1 As New IO.DirectoryInfo(flds)
-        Dim d1 As IO.FileInfo() = f1.GetFiles()
-        Dim da1 As IO.FileInfo
-        Dim fls As String
+        Try
+            ' Declare and assign folder variables
+            Dim f1 As New IO.DirectoryInfo(flds)
+            Dim d1 As IO.FileInfo() = f1.GetFiles()
+            Dim da1 As IO.FileInfo
+            Dim fls As String
 
-        lstvFiles.Columns.Add("Files", 500, HorizontalAlignment.Left)
-        'list the names of all files in the specified directory
-        For Each da1 In d1
-            fls = da1.Name
-            'listImages.Items.Add(da1)
-            If InStr("jpgpngtifgifbmpemf", Strings.Right(fls, 3)) > 0 Then lstvFiles.Items.Add(fls)
-        Next
+            lstvFiles.Columns.Add("Files", 500, HorizontalAlignment.Left)
+            'list the names of all files in the specified directory
+            For Each da1 In d1
+                fls = da1.Name
+                'listImages.Items.Add(da1)
+                If InStr("jpgpngtifgifbmpemf", Strings.LCase((Strings.Right(fls, 3)))) > 0 Then lstvFiles.Items.Add(fls)
+            Next
 
-        FilesListSatus(True)
-        'chkFiles.Text = "Unselect All"
-        'To filter search change f1.GetFiles() to di.GetFiles(“.extionsion”)
+            FilesListSatus(True)
+            'chkFiles.Text = "Unselect All"
+            'To filter search change f1.GetFiles() to di.GetFiles(“.extionsion”)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
 
@@ -315,7 +320,7 @@
     Private Sub cmdImageFile_Click(sender As Object, e As EventArgs) Handles cmdImageFile.Click
         Dim img As String
 
-        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.gif;*.tif;*.bmp;*.png"
+        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
         OpenFilePaperArchive.ShowDialog()
         img = OpenFilePaperArchive.FileName
         txtImageFile.Text = img
@@ -677,4 +682,8 @@ Err:
         Next
 
     End Function
+
+    Private Sub OpenFilePaperArchive_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFilePaperArchive.FileOk
+
+    End Sub
 End Class
