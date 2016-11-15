@@ -16,7 +16,7 @@
 
 
     Private Sub formMetadata_Click(sender As Object, e As EventArgs) Handles Me.Click
-        MsgBox(TabMetadata.SelectedIndex)
+        'MsgBox(TabMetadata.SelectedIndex)
     End Sub
 
     Private Sub formMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -40,13 +40,13 @@
             da.Fill(ds, tbl)
             Kount = ds.Tables(tbl).Rows.Count
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
         End Try
 
     End Sub
 
     Private Sub TabStation_Click(sender As Object, e As EventArgs) Handles TabStation.Click
-        MsgBox("Station")
+        'MsgBox("Station")
     End Sub
 
     Private Sub TabMetadata_Click(sender As Object, e As EventArgs) Handles TabMetadata.Click
