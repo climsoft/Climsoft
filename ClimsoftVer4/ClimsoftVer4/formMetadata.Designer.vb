@@ -964,7 +964,7 @@ Partial Class formMetadata
         Me.cmdPrevoius.BackgroundImage = CType(resources.GetObject("cmdPrevoius.BackgroundImage"), System.Drawing.Image)
         Me.cmdPrevoius.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdPrevoius.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrevoius.Location = New System.Drawing.Point(39, 10)
+        Me.cmdPrevoius.Location = New System.Drawing.Point(39, 6)
         Me.cmdPrevoius.Name = "cmdPrevoius"
         Me.cmdPrevoius.Size = New System.Drawing.Size(40, 23)
         Me.cmdPrevoius.TabIndex = 50
@@ -975,7 +975,7 @@ Partial Class formMetadata
         Me.cmdFirstRecord.BackgroundImage = CType(resources.GetObject("cmdFirstRecord.BackgroundImage"), System.Drawing.Image)
         Me.cmdFirstRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdFirstRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirstRecord.Location = New System.Drawing.Point(1, 10)
+        Me.cmdFirstRecord.Location = New System.Drawing.Point(0, 6)
         Me.cmdFirstRecord.Name = "cmdFirstRecord"
         Me.cmdFirstRecord.Size = New System.Drawing.Size(40, 23)
         Me.cmdFirstRecord.TabIndex = 49
@@ -986,7 +986,7 @@ Partial Class formMetadata
         Me.cmdLastRecord.BackgroundImage = CType(resources.GetObject("cmdLastRecord.BackgroundImage"), System.Drawing.Image)
         Me.cmdLastRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdLastRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLastRecord.Location = New System.Drawing.Point(541, 10)
+        Me.cmdLastRecord.Location = New System.Drawing.Point(542, 6)
         Me.cmdLastRecord.Name = "cmdLastRecord"
         Me.cmdLastRecord.Size = New System.Drawing.Size(40, 23)
         Me.cmdLastRecord.TabIndex = 48
@@ -997,7 +997,7 @@ Partial Class formMetadata
         Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(505, 10)
+        Me.Button4.Location = New System.Drawing.Point(505, 6)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(40, 23)
         Me.Button4.TabIndex = 47
@@ -1005,7 +1005,7 @@ Partial Class formMetadata
         '
         'txtElementNavigator
         '
-        Me.txtElementNavigator.Location = New System.Drawing.Point(76, 11)
+        Me.txtElementNavigator.Location = New System.Drawing.Point(76, 7)
         Me.txtElementNavigator.Name = "txtElementNavigator"
         Me.txtElementNavigator.Size = New System.Drawing.Size(437, 20)
         Me.txtElementNavigator.TabIndex = 46

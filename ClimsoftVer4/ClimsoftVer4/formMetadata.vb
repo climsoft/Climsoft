@@ -118,8 +118,12 @@
 
     Sub populateStations(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
         If maxRows = 0 Then Exit Sub
+
+        SetDataSet(frm)
+
+        'MsgBox(ds.Tables("station").Rows(num).Item("stationId"))
+
         txtstationId.Text = ds.Tables("station").Rows(num).Item("stationId")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("country")) Then txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
@@ -135,13 +139,14 @@
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
 
-        txtRecNumber.Text = rec + 1 & " of " & maxRows - 1 '"Record 1 of " & maxRows
+        txtRecNumber.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
 
 
     End Sub
     Sub populateElementMetadata(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then txtId.Text = ds.Tables(frm).Rows(num).Item("elementId")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("abbreviation")) Then txtAbbreviation.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementName")) Then txtName.Text = ds.Tables(frm).Rows(num).Item("elementName")
@@ -152,12 +157,13 @@
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("units")) Then txtUnit.Text = ds.Tables(frm).Rows(num).Item("units")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementtype")) Then txtType.Text = ds.Tables(frm).Rows(num).Item("elementtype")
 
-        txtElementNavigator.Text = rec + 1 & " of " & maxRows - 1 '"Record 1 of " & maxRows
+        txtElementNavigator.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
 
     End Sub
     Sub populateStationElement(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
         txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
@@ -171,7 +177,8 @@
     End Sub
     Sub populateInstrument(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
         txtInstrumentId.Text = ds.Tables(frm).Rows(num).Item("instrumentId")
         txtInstName.Text = ds.Tables(frm).Rows(num).Item("instrumentName")
@@ -190,7 +197,8 @@
     End Sub
     Sub populateStationHistory(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
-
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         txtlocStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtStnType.Text = ds.Tables(frm).Rows(num).Item("stationType")
         txtMethod.Text = ds.Tables(frm).Rows(num).Item("geoLocationMethod")
@@ -208,6 +216,8 @@
     End Sub
     Sub populateStationQualifier(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         txtqualifier.Text = ds.Tables(frm).Rows(num).Item("qualifier")
         txtQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtBDate.Text = ds.Tables(frm).Rows(num).Item("qualifierBeginDate")
@@ -219,6 +229,8 @@
     End Sub
     Sub populateScheduleClass(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         txtClass.Text = ds.Tables(frm).Rows(num).Item("scheduleClass")
         txtClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
         txtClassDescription.Text = ds.Tables(frm).Rows(num).Item("description")
@@ -227,6 +239,8 @@
     End Sub
     Sub populatePhysicalFeature(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
+        If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
         txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
@@ -240,6 +254,7 @@
     Sub populatePaperArchiveDefinition(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
+        SetDataSet(frm)
         txtFormId.Text = ds.Tables(frm).Rows(num).Item("formId")
         txtFormDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
@@ -259,15 +274,14 @@
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
-        If rec < Kount Then
+        If rec < Kount - 1 Then
             rec = rec + 1
             populateStations("station", rec, Kount)
         End If
     End Sub
 
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
-
-        rec = Kount - 2
+        rec = Kount - 1
         populateStations("station", rec, Kount)
     End Sub
 
@@ -502,7 +516,7 @@ Err:
     End Sub
 
     Private Sub cmdLastRecord_Click(sender As Object, e As EventArgs) Handles cmdLastRecord.Click
-        rec = Kount - 2
+        rec = Kount - 1
         populateElementMetadata("obselement", rec, Kount)
     End Sub
 
@@ -514,7 +528,7 @@ Err:
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        If rec < Kount Then
+        If rec < Kount - 1 Then
             rec = rec + 1
             populateElementMetadata("obselement", rec, Kount)
         End If
@@ -1568,7 +1582,7 @@ Err:
 
         Exit Sub
 Err:
-        'MsgBox(Err.Number & " " & Err.Description)
+        MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
 
@@ -1729,6 +1743,5 @@ Err:
             populatePhysicalFeature("physicalfeature", 0, Kount)
         End If
     End Sub
-
 
 End Class
