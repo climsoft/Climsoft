@@ -12,22 +12,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addNew1" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="addNew1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MySql_Data" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="MySql_Data" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MySql.Data.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="COIN" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="COIN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\COIN.GIF;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addNew" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="addNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addNew2" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="addNew2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addNew3" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="addNew3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addNew2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OK" xml:space="preserve">
@@ -260,53 +260,5 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Année</value>
-  </data>
-  <data name="BUFR_Master_Table_Version_Number" xml:space="preserve">
-    <value>Numéro de Version de tableau de maître BUFR</value>
-  </data>
-  <data name="Binary_Message" xml:space="preserve">
-    <value>Message binaire</value>
-  </data>
-  <data name="BUFR_edition_Number" xml:space="preserve">
-    <value>Edition BUFR nombre</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Adresse de messagerie</value>
-  </data>
-  <data name="FTP" xml:space="preserve">
-    <value>FTP</value>
-  </data>
-  <data name="Indicators" xml:space="preserve">
-    <value>Indicateurs</value>
-  </data>
-  <data name="Instrument_Types" xml:space="preserve">
-    <value>Types d'instruments</value>
-  </data>
-  <data name="International_Data_Sub_Category" xml:space="preserve">
-    <value>Sous-catégorie de données internationales</value>
-  </data>
-  <data name="Local_Data_Sub_Cateory" xml:space="preserve">
-    <value>Sous-catégorie de données locales</value>
-  </data>
-  <data name="Masters_Table_Version_Number" xml:space="preserve">
-    <value>Numéro de Version de Table de maîtres</value>
-  </data>
-  <data name="Optional_Sequence_Inclusion" xml:space="preserve">
-    <value>Inclusion de la séquence optionnelle</value>
-  </data>
-  <data name="Originating_Generating_Centre" xml:space="preserve">
-    <value>Centre originaire/production</value>
-  </data>
-  <data name="Originating_Generating_SubCentre" xml:space="preserve">
-    <value>Sous-centre originaires/production</value>
-  </data>
-  <data name="Sensors_Height_From_Ground_M" xml:space="preserve">
-    <value>Capteurs de hauteur du sol (M)</value>
-  </data>
-  <data name="Table_Version_Number" xml:space="preserve">
-    <value>Numéro de Version de Tables locales</value>
-  </data>
-  <data name="Update_Sequence_Number" xml:space="preserve">
-    <value>Numéro de séquence de mise à jour</value>
   </data>
 </root>

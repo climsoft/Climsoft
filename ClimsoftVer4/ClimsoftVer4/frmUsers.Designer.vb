@@ -22,7 +22,6 @@ Partial Class frmUsers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUsers))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.cmdClose = New System.Windows.Forms.Button()
@@ -135,6 +134,9 @@ Partial Class frmUsers
         '
         Me.cmdView.Location = New System.Drawing.Point(263, 230)
         Me.cmdView.Name = "cmdView"
+        Me.cmdView.Size = New System.Drawing.Size(70, 24)
+        Me.cmdView.TabIndex = 7
+        Me.cmdView.Text = "View"
         Me.cmdView.UseVisualStyleBackColor = True
         '
         'cmdDelete
@@ -206,7 +208,7 @@ Partial Class frmUsers
         '
         'frmUsers
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LavenderBlush
         Me.ClientSize = New System.Drawing.Size(838, 330)
@@ -214,6 +216,7 @@ Partial Class frmUsers
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmUsers"
+        Me.Text = "User Adminstration"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

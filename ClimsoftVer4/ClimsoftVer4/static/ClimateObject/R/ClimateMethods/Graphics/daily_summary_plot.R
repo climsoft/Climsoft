@@ -1,26 +1,11 @@
 #==================================================================================================
 #' @title Plot Daily summary.
 #' @name daily_summary_plot
-#' @author Fanuel and Steve 2015 (AMI)
+#' @author Fanuel 2015 (AMI)
 
-#' @description \code{plot.daily.summary} 
+#' @description \code{plot daily summary} 
 #' Computes and plots daily summary e.g mean
-#'  
-#' @param data_list this is a list containing stations for analysis, 
-#' the years or periods to be analyzed and the required variables from the data.
-#' @param var   This contains the variables list of interest in the plot.
-#' @param col  The color for the line
-#' @param lwd width of the line
-#' @param type type of the plot
-#' @param lty  The line type
-#' @param summary_color color of the summary line
-#' @param summary_lty  summary line type
-#' @param plot_summary logical expression on whether to plot summary line or not
-#' @param title  Overall title for the plot
-#' @param na.rm logical expession on whether to exlude or include missing values
-#' @param summary_func the function to include in the plot
-#' @param xlab, ylab   Title for the x axis and y axis respectively.
-#' 
+#'   
 #' @examples
 #' ClimateObj <- climate( data_tables = list( data ), date_formats = list( "%m/%d/%Y" ) )
 #' Default dateformats: "%Y/%m/%d"
@@ -29,11 +14,9 @@
 #' @return return plot(s) of daily summary
 #
 
-climate$methods( daily_summary_plot = function(data_list=list(),var=rain_label, col="blue", lwd=3, type="l", 
-                                               lty=1, summary_color="black", summary_lty=2, summary_lwd=1, 
-                                               plot_summary=FALSE, title= "Daily Mean Rainfall Amounts", na.rm=TRUE,
-                                               summary_func=mean, xlab = "Day of Year", ylab = "Mean Rainfall"){
-                                               
+
+climate$methods( daily_summary_plot = function(data_list=list(),var=rain_label, col="blue", lwd=3, type="l", lty=1, summary_color="black", summary_lty=2, summary_lwd=1, plot_summary=FALSE, 
+                                               title= "Daily Mean Rainfall Amounts", na.rm=TRUE, summary_func=mean, xlab = "Day of Year", ylab = "Mean Rainfall"){
   #--------------------------------------------------------------------------------------------#
   # This function plots the average rainfall observations per day for all teh years. 
   #-------------------------------------------------------------------------------------------#
@@ -71,8 +54,7 @@ climate$methods( daily_summary_plot = function(data_list=list(),var=rain_label, 
       plot( db$DOY, db$Mean, ann=F, col=col, lwd=lwd, type=type, lty=lty ) 
       title( main = c( data_name,title),  xlab = xlab,  ylab = ylab )
       grid( 10, 10,lwd = 1 )
-      # If the line of the mean of total rainfall is required. But this only plot for teh first plot in case we 
-      #have multiple climate object.
+      # If the line of the mean of total rainfall is required. But this only plot for teh first plot in case we have multiple climate object.
       # still need to fix that. 
       if( plot_summary == TRUE ){
         par(new=T)
