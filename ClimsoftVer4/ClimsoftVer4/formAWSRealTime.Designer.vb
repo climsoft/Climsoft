@@ -25,6 +25,7 @@ Partial Class formAWSRealTime
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formAWSRealTime))
         Me.pnlControl = New System.Windows.Forms.Panel()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdMessages = New System.Windows.Forms.Button()
         Me.cmdDataStructures = New System.Windows.Forms.Button()
         Me.cmdSites = New System.Windows.Forms.Button()
@@ -32,86 +33,11 @@ Partial Class formAWSRealTime
         Me.cmdServers = New System.Windows.Forms.Button()
         Me.cmdProcess = New System.Windows.Forms.Button()
         Me.pnlProcessing = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.DataGridView3 = New System.Windows.Forms.DataGridView()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
-        Me.TextBox20 = New System.Windows.Forms.TextBox()
-        Me.TextBox21 = New System.Windows.Forms.TextBox()
-        Me.TextBox27 = New System.Windows.Forms.TextBox()
-        Me.TextBox28 = New System.Windows.Forms.TextBox()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.Label62 = New System.Windows.Forms.Label()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.Label64 = New System.Windows.Forms.Label()
-        Me.Label65 = New System.Windows.Forms.Label()
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label66 = New System.Windows.Forms.Label()
-        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
-        Me.DataGridView4 = New System.Windows.Forms.DataGridView()
-        Me.TextBox29 = New System.Windows.Forms.TextBox()
-        Me.Label67 = New System.Windows.Forms.Label()
-        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.TextBox30 = New System.Windows.Forms.TextBox()
-        Me.TextBox31 = New System.Windows.Forms.TextBox()
-        Me.TextBox32 = New System.Windows.Forms.TextBox()
-        Me.TextBox33 = New System.Windows.Forms.TextBox()
-        Me.TextBox34 = New System.Windows.Forms.TextBox()
-        Me.TextBox35 = New System.Windows.Forms.TextBox()
-        Me.TextBox36 = New System.Windows.Forms.TextBox()
-        Me.TextBox37 = New System.Windows.Forms.TextBox()
-        Me.TextBox38 = New System.Windows.Forms.TextBox()
-        Me.Label68 = New System.Windows.Forms.Label()
-        Me.Label69 = New System.Windows.Forms.Label()
-        Me.Label70 = New System.Windows.Forms.Label()
-        Me.Label71 = New System.Windows.Forms.Label()
-        Me.Label72 = New System.Windows.Forms.Label()
-        Me.Label73 = New System.Windows.Forms.Label()
-        Me.Label74 = New System.Windows.Forms.Label()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.Label76 = New System.Windows.Forms.Label()
-        Me.GroupBox19 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.Label77 = New System.Windows.Forms.Label()
-        Me.TextBox39 = New System.Windows.Forms.TextBox()
-        Me.Label78 = New System.Windows.Forms.Label()
         Me.list_errors = New System.Windows.Forms.ListBox()
         Me.Ltime = New System.Windows.Forms.Label()
         Me.pnlProcessSettings = New System.Windows.Forms.Panel()
+        Me.txtGMTDiff = New System.Windows.Forms.TextBox()
+        Me.lblGMT = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.chkDeleteFile = New System.Windows.Forms.CheckBox()
@@ -132,8 +58,6 @@ Partial Class formAWSRealTime
         Me.txtLastProcess = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.txtGMTDiff = New System.Windows.Forms.TextBox()
-        Me.lblGMT = New System.Windows.Forms.Label()
         Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtDateTime = New System.Windows.Forms.TextBox()
@@ -161,6 +85,9 @@ Partial Class formAWSRealTime
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
+        Me.txtSiteName = New System.Windows.Forms.ComboBox()
+        Me.Label41 = New System.Windows.Forms.Label()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdViewUpdate = New System.Windows.Forms.Button()
         Me.cmdDel = New System.Windows.Forms.Button()
@@ -181,7 +108,7 @@ Partial Class formAWSRealTime
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtInFile = New System.Windows.Forms.TextBox()
         Me.lblInfile = New System.Windows.Forms.Label()
-        Me.txtStation = New System.Windows.Forms.ComboBox()
+        Me.txtSiteID = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlDataStructures = New System.Windows.Forms.Panel()
         Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
@@ -227,9 +154,6 @@ Partial Class formAWSRealTime
         Me.lblInputUser = New System.Windows.Forms.Label()
         Me.lblFTPFolder = New System.Windows.Forms.Label()
         Me.lblBaseStationFTP = New System.Windows.Forms.Label()
-        Me.lblServerSettings = New System.Windows.Forms.Label()
-        Me.cmdMSS = New System.Windows.Forms.Button()
-        Me.cmdBaseStation = New System.Windows.Forms.Button()
         Me.pnlMSS = New System.Windows.Forms.Panel()
         Me.cmdmssRefresh = New System.Windows.Forms.Button()
         Me.cmdmssReset = New System.Windows.Forms.Button()
@@ -255,6 +179,9 @@ Partial Class formAWSRealTime
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblServerSettings = New System.Windows.Forms.Label()
+        Me.cmdMSS = New System.Windows.Forms.Button()
+        Me.cmdBaseStation = New System.Windows.Forms.Button()
         Me.pnlMsgEncoding = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.dgrdCodeFlag = New System.Windows.Forms.DataGridView()
@@ -336,17 +263,6 @@ Partial Class formAWSRealTime
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         Me.pnlControl.SuspendLayout()
         Me.pnlProcessing.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        Me.GroupBox12.SuspendLayout()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox13.SuspendLayout()
-        Me.GroupBox14.SuspendLayout()
-        Me.GroupBox15.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
-        Me.GroupBox17.SuspendLayout()
-        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox18.SuspendLayout()
-        Me.GroupBox19.SuspendLayout()
         Me.pnlProcessSettings.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -354,6 +270,7 @@ Partial Class formAWSRealTime
         Me.Panel2.SuspendLayout()
         Me.pnlSites.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
+        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDataStructures.SuspendLayout()
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStructures1.SuspendLayout()
@@ -379,6 +296,7 @@ Partial Class formAWSRealTime
         'pnlControl
         '
         Me.pnlControl.BackColor = System.Drawing.Color.DarkSalmon
+        Me.pnlControl.Controls.Add(Me.cmdHelp)
         Me.pnlControl.Controls.Add(Me.cmdMessages)
         Me.pnlControl.Controls.Add(Me.cmdDataStructures)
         Me.pnlControl.Controls.Add(Me.cmdSites)
@@ -387,25 +305,41 @@ Partial Class formAWSRealTime
         Me.pnlControl.Controls.Add(Me.cmdProcess)
         resources.ApplyResources(Me.pnlControl, "pnlControl")
         Me.pnlControl.Name = "pnlControl"
+        Me.pnlControl.Size = New System.Drawing.Size(191, 551)
+        Me.pnlControl.TabIndex = 0
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.BackColor = System.Drawing.Color.LightSalmon
+        Me.cmdHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdHelp.Location = New System.Drawing.Point(19, 431)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(141, 37)
+        Me.cmdHelp.TabIndex = 9
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = False
         '
         'cmdMessages
         '
         Me.cmdMessages.BackColor = System.Drawing.Color.SeaShell
-        resources.ApplyResources(Me.cmdMessages, "cmdMessages")
+        Me.cmdMessages.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdMessages.Location = New System.Drawing.Point(19, 329)
         Me.cmdMessages.Name = "cmdMessages"
         Me.cmdMessages.UseVisualStyleBackColor = False
         '
         'cmdDataStructures
         '
         Me.cmdDataStructures.BackColor = System.Drawing.Color.SeaShell
-        resources.ApplyResources(Me.cmdDataStructures, "cmdDataStructures")
+        Me.cmdDataStructures.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdDataStructures.Location = New System.Drawing.Point(19, 255)
         Me.cmdDataStructures.Name = "cmdDataStructures"
         Me.cmdDataStructures.UseVisualStyleBackColor = False
         '
         'cmdSites
         '
         Me.cmdSites.BackColor = System.Drawing.Color.SeaShell
-        resources.ApplyResources(Me.cmdSites, "cmdSites")
+        Me.cmdSites.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdSites.Location = New System.Drawing.Point(18, 181)
         Me.cmdSites.Name = "cmdSites"
         Me.cmdSites.UseVisualStyleBackColor = False
         '
@@ -419,14 +353,16 @@ Partial Class formAWSRealTime
         'cmdServers
         '
         Me.cmdServers.BackColor = System.Drawing.Color.SeaShell
-        resources.ApplyResources(Me.cmdServers, "cmdServers")
+        Me.cmdServers.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdServers.Location = New System.Drawing.Point(17, 107)
         Me.cmdServers.Name = "cmdServers"
         Me.cmdServers.UseVisualStyleBackColor = False
         '
         'cmdProcess
         '
         Me.cmdProcess.BackColor = System.Drawing.Color.SeaShell
-        resources.ApplyResources(Me.cmdProcess, "cmdProcess")
+        Me.cmdProcess.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdProcess.Location = New System.Drawing.Point(19, 32)
         Me.cmdProcess.Name = "cmdProcess"
         Me.cmdProcess.UseVisualStyleBackColor = False
         '
@@ -434,7 +370,6 @@ Partial Class formAWSRealTime
         '
         Me.pnlProcessing.BackColor = System.Drawing.Color.MistyRose
         Me.pnlProcessing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlProcessing.Controls.Add(Me.Panel5)
         Me.pnlProcessing.Controls.Add(Me.list_errors)
         Me.pnlProcessing.Controls.Add(Me.Ltime)
         Me.pnlProcessing.Controls.Add(Me.pnlProcessSettings)
@@ -444,492 +379,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.grpElements)
         resources.ApplyResources(Me.pnlProcessing, "pnlProcessing")
         Me.pnlProcessing.Name = "pnlProcessing"
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.Linen
-        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel5.Controls.Add(Me.GroupBox12)
-        Me.Panel5.Controls.Add(Me.GroupBox13)
-        Me.Panel5.Controls.Add(Me.GroupBox14)
-        Me.Panel5.Controls.Add(Me.GroupBox15)
-        Me.Panel5.Controls.Add(Me.GroupBox16)
-        Me.Panel5.Controls.Add(Me.GroupBox18)
-        Me.Panel5.Controls.Add(Me.GroupBox19)
-        resources.ApplyResources(Me.Panel5, "Panel5")
-        Me.Panel5.Name = "Panel5"
-        '
-        'GroupBox12
-        '
-        Me.GroupBox12.Controls.Add(Me.DataGridView3)
-        resources.ApplyResources(Me.GroupBox12, "GroupBox12")
-        Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.TabStop = False
-        '
-        'DataGridView3
-        '
-        Me.DataGridView3.BackgroundColor = System.Drawing.Color.Ivory
-        Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.DataGridView3, "DataGridView3")
-        Me.DataGridView3.Name = "DataGridView3"
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.TextBox4)
-        Me.GroupBox13.Controls.Add(Me.TextBox5)
-        Me.GroupBox13.Controls.Add(Me.TextBox6)
-        Me.GroupBox13.Controls.Add(Me.TextBox7)
-        Me.GroupBox13.Controls.Add(Me.Label47)
-        Me.GroupBox13.Controls.Add(Me.Label48)
-        Me.GroupBox13.Controls.Add(Me.Label49)
-        Me.GroupBox13.Controls.Add(Me.Label50)
-        Me.GroupBox13.Controls.Add(Me.TextBox8)
-        Me.GroupBox13.Controls.Add(Me.Label51)
-        resources.ApplyResources(Me.GroupBox13, "GroupBox13")
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.TabStop = False
-        Me.GroupBox13.Tag = ""
-        '
-        'TextBox4
-        '
-        resources.ApplyResources(Me.TextBox4, "TextBox4")
-        Me.TextBox4.Name = "TextBox4"
-        '
-        'TextBox5
-        '
-        resources.ApplyResources(Me.TextBox5, "TextBox5")
-        Me.TextBox5.Name = "TextBox5"
-        '
-        'TextBox6
-        '
-        resources.ApplyResources(Me.TextBox6, "TextBox6")
-        Me.TextBox6.Name = "TextBox6"
-        '
-        'TextBox7
-        '
-        resources.ApplyResources(Me.TextBox7, "TextBox7")
-        Me.TextBox7.Name = "TextBox7"
-        '
-        'Label47
-        '
-        resources.ApplyResources(Me.Label47, "Label47")
-        Me.Label47.Name = "Label47"
-        '
-        'Label48
-        '
-        resources.ApplyResources(Me.Label48, "Label48")
-        Me.Label48.Name = "Label48"
-        '
-        'Label49
-        '
-        resources.ApplyResources(Me.Label49, "Label49")
-        Me.Label49.Name = "Label49"
-        '
-        'Label50
-        '
-        resources.ApplyResources(Me.Label50, "Label50")
-        Me.Label50.Name = "Label50"
-        '
-        'TextBox8
-        '
-        resources.ApplyResources(Me.TextBox8, "TextBox8")
-        Me.TextBox8.Name = "TextBox8"
-        '
-        'Label51
-        '
-        resources.ApplyResources(Me.Label51, "Label51")
-        Me.Label51.Name = "Label51"
-        '
-        'GroupBox14
-        '
-        Me.GroupBox14.Controls.Add(Me.TextBox9)
-        Me.GroupBox14.Controls.Add(Me.TextBox10)
-        Me.GroupBox14.Controls.Add(Me.TextBox12)
-        Me.GroupBox14.Controls.Add(Me.TextBox13)
-        Me.GroupBox14.Controls.Add(Me.Label52)
-        Me.GroupBox14.Controls.Add(Me.Label53)
-        Me.GroupBox14.Controls.Add(Me.Label54)
-        Me.GroupBox14.Controls.Add(Me.Label55)
-        Me.GroupBox14.Controls.Add(Me.TextBox14)
-        Me.GroupBox14.Controls.Add(Me.Label56)
-        resources.ApplyResources(Me.GroupBox14, "GroupBox14")
-        Me.GroupBox14.Name = "GroupBox14"
-        Me.GroupBox14.TabStop = False
-        Me.GroupBox14.Tag = ""
-        '
-        'TextBox9
-        '
-        resources.ApplyResources(Me.TextBox9, "TextBox9")
-        Me.TextBox9.Name = "TextBox9"
-        '
-        'TextBox10
-        '
-        resources.ApplyResources(Me.TextBox10, "TextBox10")
-        Me.TextBox10.Name = "TextBox10"
-        '
-        'TextBox12
-        '
-        resources.ApplyResources(Me.TextBox12, "TextBox12")
-        Me.TextBox12.Name = "TextBox12"
-        '
-        'TextBox13
-        '
-        resources.ApplyResources(Me.TextBox13, "TextBox13")
-        Me.TextBox13.Name = "TextBox13"
-        '
-        'Label52
-        '
-        resources.ApplyResources(Me.Label52, "Label52")
-        Me.Label52.Name = "Label52"
-        '
-        'Label53
-        '
-        resources.ApplyResources(Me.Label53, "Label53")
-        Me.Label53.Name = "Label53"
-        '
-        'Label54
-        '
-        resources.ApplyResources(Me.Label54, "Label54")
-        Me.Label54.Name = "Label54"
-        '
-        'Label55
-        '
-        resources.ApplyResources(Me.Label55, "Label55")
-        Me.Label55.Name = "Label55"
-        '
-        'TextBox14
-        '
-        resources.ApplyResources(Me.TextBox14, "TextBox14")
-        Me.TextBox14.Name = "TextBox14"
-        '
-        'Label56
-        '
-        resources.ApplyResources(Me.Label56, "Label56")
-        Me.Label56.Name = "Label56"
-        '
-        'GroupBox15
-        '
-        Me.GroupBox15.Controls.Add(Me.CheckBox1)
-        Me.GroupBox15.Controls.Add(Me.TextBox15)
-        Me.GroupBox15.Controls.Add(Me.TextBox16)
-        Me.GroupBox15.Controls.Add(Me.TextBox17)
-        Me.GroupBox15.Controls.Add(Me.TextBox18)
-        Me.GroupBox15.Controls.Add(Me.TextBox19)
-        Me.GroupBox15.Controls.Add(Me.TextBox20)
-        Me.GroupBox15.Controls.Add(Me.TextBox21)
-        Me.GroupBox15.Controls.Add(Me.TextBox27)
-        Me.GroupBox15.Controls.Add(Me.TextBox28)
-        Me.GroupBox15.Controls.Add(Me.Label57)
-        Me.GroupBox15.Controls.Add(Me.Label58)
-        Me.GroupBox15.Controls.Add(Me.Label59)
-        Me.GroupBox15.Controls.Add(Me.Label60)
-        Me.GroupBox15.Controls.Add(Me.Label61)
-        Me.GroupBox15.Controls.Add(Me.Label62)
-        Me.GroupBox15.Controls.Add(Me.Label63)
-        Me.GroupBox15.Controls.Add(Me.Label64)
-        Me.GroupBox15.Controls.Add(Me.Label65)
-        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
-        Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.TabStop = False
-        '
-        'CheckBox1
-        '
-        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Tag = "  "
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'TextBox15
-        '
-        resources.ApplyResources(Me.TextBox15, "TextBox15")
-        Me.TextBox15.Name = "TextBox15"
-        '
-        'TextBox16
-        '
-        resources.ApplyResources(Me.TextBox16, "TextBox16")
-        Me.TextBox16.Name = "TextBox16"
-        '
-        'TextBox17
-        '
-        resources.ApplyResources(Me.TextBox17, "TextBox17")
-        Me.TextBox17.Name = "TextBox17"
-        '
-        'TextBox18
-        '
-        resources.ApplyResources(Me.TextBox18, "TextBox18")
-        Me.TextBox18.Name = "TextBox18"
-        '
-        'TextBox19
-        '
-        resources.ApplyResources(Me.TextBox19, "TextBox19")
-        Me.TextBox19.Name = "TextBox19"
-        '
-        'TextBox20
-        '
-        resources.ApplyResources(Me.TextBox20, "TextBox20")
-        Me.TextBox20.Name = "TextBox20"
-        '
-        'TextBox21
-        '
-        resources.ApplyResources(Me.TextBox21, "TextBox21")
-        Me.TextBox21.Name = "TextBox21"
-        '
-        'TextBox27
-        '
-        resources.ApplyResources(Me.TextBox27, "TextBox27")
-        Me.TextBox27.Name = "TextBox27"
-        '
-        'TextBox28
-        '
-        resources.ApplyResources(Me.TextBox28, "TextBox28")
-        Me.TextBox28.Name = "TextBox28"
-        '
-        'Label57
-        '
-        resources.ApplyResources(Me.Label57, "Label57")
-        Me.Label57.Name = "Label57"
-        '
-        'Label58
-        '
-        resources.ApplyResources(Me.Label58, "Label58")
-        Me.Label58.Name = "Label58"
-        '
-        'Label59
-        '
-        resources.ApplyResources(Me.Label59, "Label59")
-        Me.Label59.Name = "Label59"
-        '
-        'Label60
-        '
-        resources.ApplyResources(Me.Label60, "Label60")
-        Me.Label60.Name = "Label60"
-        '
-        'Label61
-        '
-        resources.ApplyResources(Me.Label61, "Label61")
-        Me.Label61.Name = "Label61"
-        '
-        'Label62
-        '
-        resources.ApplyResources(Me.Label62, "Label62")
-        Me.Label62.Name = "Label62"
-        '
-        'Label63
-        '
-        resources.ApplyResources(Me.Label63, "Label63")
-        Me.Label63.Name = "Label63"
-        '
-        'Label64
-        '
-        resources.ApplyResources(Me.Label64, "Label64")
-        Me.Label64.Name = "Label64"
-        '
-        'Label65
-        '
-        resources.ApplyResources(Me.Label65, "Label65")
-        Me.Label65.Name = "Label65"
-        '
-        'GroupBox16
-        '
-        Me.GroupBox16.Controls.Add(Me.ComboBox4)
-        Me.GroupBox16.Controls.Add(Me.Label66)
-        Me.GroupBox16.Controls.Add(Me.GroupBox17)
-        Me.GroupBox16.Controls.Add(Me.TextBox29)
-        Me.GroupBox16.Controls.Add(Me.Label67)
-        resources.ApplyResources(Me.GroupBox16, "GroupBox16")
-        Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.TabStop = False
-        Me.GroupBox16.Tag = ""
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {resources.GetString("ComboBox4.Items")})
-        resources.ApplyResources(Me.ComboBox4, "ComboBox4")
-        Me.ComboBox4.Name = "ComboBox4"
-        '
-        'Label66
-        '
-        resources.ApplyResources(Me.Label66, "Label66")
-        Me.Label66.Name = "Label66"
-        '
-        'GroupBox17
-        '
-        Me.GroupBox17.Controls.Add(Me.DataGridView4)
-        resources.ApplyResources(Me.GroupBox17, "GroupBox17")
-        Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.TabStop = False
-        '
-        'DataGridView4
-        '
-        Me.DataGridView4.BackgroundColor = System.Drawing.Color.Ivory
-        Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.DataGridView4, "DataGridView4")
-        Me.DataGridView4.Name = "DataGridView4"
-        '
-        'TextBox29
-        '
-        resources.ApplyResources(Me.TextBox29, "TextBox29")
-        Me.TextBox29.Name = "TextBox29"
-        '
-        'Label67
-        '
-        resources.ApplyResources(Me.Label67, "Label67")
-        Me.Label67.Name = "Label67"
-        '
-        'GroupBox18
-        '
-        Me.GroupBox18.Controls.Add(Me.CheckBox2)
-        Me.GroupBox18.Controls.Add(Me.TextBox30)
-        Me.GroupBox18.Controls.Add(Me.TextBox31)
-        Me.GroupBox18.Controls.Add(Me.TextBox32)
-        Me.GroupBox18.Controls.Add(Me.TextBox33)
-        Me.GroupBox18.Controls.Add(Me.TextBox34)
-        Me.GroupBox18.Controls.Add(Me.TextBox35)
-        Me.GroupBox18.Controls.Add(Me.TextBox36)
-        Me.GroupBox18.Controls.Add(Me.TextBox37)
-        Me.GroupBox18.Controls.Add(Me.TextBox38)
-        Me.GroupBox18.Controls.Add(Me.Label68)
-        Me.GroupBox18.Controls.Add(Me.Label69)
-        Me.GroupBox18.Controls.Add(Me.Label70)
-        Me.GroupBox18.Controls.Add(Me.Label71)
-        Me.GroupBox18.Controls.Add(Me.Label72)
-        Me.GroupBox18.Controls.Add(Me.Label73)
-        Me.GroupBox18.Controls.Add(Me.Label74)
-        Me.GroupBox18.Controls.Add(Me.Label75)
-        Me.GroupBox18.Controls.Add(Me.Label76)
-        resources.ApplyResources(Me.GroupBox18, "GroupBox18")
-        Me.GroupBox18.Name = "GroupBox18"
-        Me.GroupBox18.TabStop = False
-        '
-        'CheckBox2
-        '
-        resources.ApplyResources(Me.CheckBox2, "CheckBox2")
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Tag = "  "
-        Me.CheckBox2.UseVisualStyleBackColor = True
-        '
-        'TextBox30
-        '
-        resources.ApplyResources(Me.TextBox30, "TextBox30")
-        Me.TextBox30.Name = "TextBox30"
-        '
-        'TextBox31
-        '
-        resources.ApplyResources(Me.TextBox31, "TextBox31")
-        Me.TextBox31.Name = "TextBox31"
-        '
-        'TextBox32
-        '
-        resources.ApplyResources(Me.TextBox32, "TextBox32")
-        Me.TextBox32.Name = "TextBox32"
-        '
-        'TextBox33
-        '
-        resources.ApplyResources(Me.TextBox33, "TextBox33")
-        Me.TextBox33.Name = "TextBox33"
-        '
-        'TextBox34
-        '
-        resources.ApplyResources(Me.TextBox34, "TextBox34")
-        Me.TextBox34.Name = "TextBox34"
-        '
-        'TextBox35
-        '
-        resources.ApplyResources(Me.TextBox35, "TextBox35")
-        Me.TextBox35.Name = "TextBox35"
-        '
-        'TextBox36
-        '
-        resources.ApplyResources(Me.TextBox36, "TextBox36")
-        Me.TextBox36.Name = "TextBox36"
-        '
-        'TextBox37
-        '
-        resources.ApplyResources(Me.TextBox37, "TextBox37")
-        Me.TextBox37.Name = "TextBox37"
-        '
-        'TextBox38
-        '
-        resources.ApplyResources(Me.TextBox38, "TextBox38")
-        Me.TextBox38.Name = "TextBox38"
-        '
-        'Label68
-        '
-        resources.ApplyResources(Me.Label68, "Label68")
-        Me.Label68.Name = "Label68"
-        '
-        'Label69
-        '
-        resources.ApplyResources(Me.Label69, "Label69")
-        Me.Label69.Name = "Label69"
-        '
-        'Label70
-        '
-        resources.ApplyResources(Me.Label70, "Label70")
-        Me.Label70.Name = "Label70"
-        '
-        'Label71
-        '
-        resources.ApplyResources(Me.Label71, "Label71")
-        Me.Label71.Name = "Label71"
-        '
-        'Label72
-        '
-        resources.ApplyResources(Me.Label72, "Label72")
-        Me.Label72.Name = "Label72"
-        '
-        'Label73
-        '
-        resources.ApplyResources(Me.Label73, "Label73")
-        Me.Label73.Name = "Label73"
-        '
-        'Label74
-        '
-        resources.ApplyResources(Me.Label74, "Label74")
-        Me.Label74.Name = "Label74"
-        '
-        'Label75
-        '
-        resources.ApplyResources(Me.Label75, "Label75")
-        Me.Label75.Name = "Label75"
-        '
-        'Label76
-        '
-        resources.ApplyResources(Me.Label76, "Label76")
-        Me.Label76.Name = "Label76"
-        '
-        'GroupBox19
-        '
-        Me.GroupBox19.Controls.Add(Me.ComboBox5)
-        Me.GroupBox19.Controls.Add(Me.Label77)
-        Me.GroupBox19.Controls.Add(Me.TextBox39)
-        Me.GroupBox19.Controls.Add(Me.Label78)
-        resources.ApplyResources(Me.GroupBox19, "GroupBox19")
-        Me.GroupBox19.Name = "GroupBox19"
-        Me.GroupBox19.TabStop = False
-        Me.GroupBox19.Tag = ""
-        '
-        'ComboBox5
-        '
-        Me.ComboBox5.FormattingEnabled = True
-        resources.ApplyResources(Me.ComboBox5, "ComboBox5")
-        Me.ComboBox5.Name = "ComboBox5"
-        '
-        'Label77
-        '
-        resources.ApplyResources(Me.Label77, "Label77")
-        Me.Label77.Name = "Label77"
-        '
-        'TextBox39
-        '
-        resources.ApplyResources(Me.TextBox39, "TextBox39")
-        Me.TextBox39.Name = "TextBox39"
-        '
-        'Label78
-        '
-        resources.ApplyResources(Me.Label78, "Label78")
-        Me.Label78.Name = "Label78"
+        Me.pnlProcessing.Size = New System.Drawing.Size(734, 109)
+        Me.pnlProcessing.TabIndex = 1
+        Me.pnlProcessing.Visible = False
         '
         'list_errors
         '
@@ -946,6 +398,8 @@ Partial Class formAWSRealTime
         'pnlProcessSettings
         '
         Me.pnlProcessSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlProcessSettings.Controls.Add(Me.txtGMTDiff)
+        Me.pnlProcessSettings.Controls.Add(Me.lblGMT)
         Me.pnlProcessSettings.Controls.Add(Me.Label9)
         Me.pnlProcessSettings.Controls.Add(Me.cmdSave)
         Me.pnlProcessSettings.Controls.Add(Me.chkDeleteFile)
@@ -960,8 +414,30 @@ Partial Class formAWSRealTime
         Me.pnlProcessSettings.Controls.Add(Me.Label14)
         Me.pnlProcessSettings.Controls.Add(Me.optStop)
         Me.pnlProcessSettings.Controls.Add(Me.optStart)
-        resources.ApplyResources(Me.pnlProcessSettings, "pnlProcessSettings")
+        Me.pnlProcessSettings.Location = New System.Drawing.Point(13, 14)
         Me.pnlProcessSettings.Name = "pnlProcessSettings"
+        Me.pnlProcessSettings.Size = New System.Drawing.Size(685, 135)
+        Me.pnlProcessSettings.TabIndex = 6
+        '
+        'txtGMTDiff
+        '
+        Me.txtGMTDiff.BackColor = System.Drawing.Color.White
+        Me.txtGMTDiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGMTDiff.Location = New System.Drawing.Point(504, 92)
+        Me.txtGMTDiff.Name = "txtGMTDiff"
+        Me.txtGMTDiff.Size = New System.Drawing.Size(32, 20)
+        Me.txtGMTDiff.TabIndex = 16
+        Me.txtGMTDiff.Text = "0"
+        Me.txtGMTDiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblGMT
+        '
+        Me.lblGMT.AutoSize = True
+        Me.lblGMT.Location = New System.Drawing.Point(426, 96)
+        Me.lblGMT.Name = "lblGMT"
+        Me.lblGMT.Size = New System.Drawing.Size(67, 13)
+        Me.lblGMT.TabIndex = 15
+        Me.lblGMT.Text = "GMT Diff +/-"
         '
         'Label9
         '
@@ -970,25 +446,30 @@ Partial Class formAWSRealTime
         '
         'cmdSave
         '
-        resources.ApplyResources(Me.cmdSave, "cmdSave")
+        Me.cmdSave.Location = New System.Drawing.Point(572, 90)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.UseVisualStyleBackColor = True
         '
         'chkDeleteFile
         '
-        resources.ApplyResources(Me.chkDeleteFile, "chkDeleteFile")
+        Me.chkDeleteFile.AutoSize = True
+        Me.chkDeleteFile.Location = New System.Drawing.Point(237, 94)
         Me.chkDeleteFile.Name = "chkDeleteFile"
         Me.chkDeleteFile.UseVisualStyleBackColor = True
         '
         'txtTimeout
         '
-        resources.ApplyResources(Me.txtTimeout, "txtTimeout")
+        Me.txtTimeout.Location = New System.Drawing.Point(182, 92)
         Me.txtTimeout.Name = "txtTimeout"
         '
         'Label10
         '
-        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(48, 96)
         Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(129, 13)
+        Me.Label10.TabIndex = 9
+        Me.Label10.Text = "Timeout Period (Seconds)"
         '
         'Label11
         '
@@ -1027,16 +508,24 @@ Partial Class formAWSRealTime
         '
         'optStop
         '
-        resources.ApplyResources(Me.optStop, "optStop")
+        Me.optStop.AutoSize = True
+        Me.optStop.Checked = True
+        Me.optStop.Location = New System.Drawing.Point(121, 26)
         Me.optStop.Name = "optStop"
+        Me.optStop.Size = New System.Drawing.Size(47, 17)
+        Me.optStop.TabIndex = 1
+        Me.optStop.TabStop = True
+        Me.optStop.Text = "Stop"
         Me.optStop.UseVisualStyleBackColor = True
         '
         'optStart
         '
-        resources.ApplyResources(Me.optStart, "optStart")
-        Me.optStart.Checked = True
+        Me.optStart.AutoSize = True
+        Me.optStart.Location = New System.Drawing.Point(47, 26)
         Me.optStart.Name = "optStart"
-        Me.optStart.TabStop = True
+        Me.optStart.Size = New System.Drawing.Size(59, 17)
+        Me.optStart.TabIndex = 0
+        Me.optStart.Text = "Restart"
         Me.optStart.UseVisualStyleBackColor = True
         '
         'Panel4
@@ -1047,8 +536,6 @@ Partial Class formAWSRealTime
         Me.Panel4.Controls.Add(Me.txtLastProcess)
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.ProgressBar1)
-        Me.Panel4.Controls.Add(Me.txtGMTDiff)
-        Me.Panel4.Controls.Add(Me.lblGMT)
         Me.Panel4.Controls.Add(Me.txtStatus)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.txtDateTime)
@@ -1086,17 +573,6 @@ Partial Class formAWSRealTime
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         '
-        'txtGMTDiff
-        '
-        Me.txtGMTDiff.BackColor = System.Drawing.Color.MistyRose
-        resources.ApplyResources(Me.txtGMTDiff, "txtGMTDiff")
-        Me.txtGMTDiff.Name = "txtGMTDiff"
-        '
-        'lblGMT
-        '
-        resources.ApplyResources(Me.lblGMT, "lblGMT")
-        Me.lblGMT.Name = "lblGMT"
-        '
         'txtStatus
         '
         Me.txtStatus.BackColor = System.Drawing.Color.MistyRose
@@ -1111,12 +587,15 @@ Partial Class formAWSRealTime
         'txtDateTime
         '
         Me.txtDateTime.BackColor = System.Drawing.Color.MistyRose
-        resources.ApplyResources(Me.txtDateTime, "txtDateTime")
+        Me.txtDateTime.Enabled = False
+        Me.txtDateTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDateTime.Location = New System.Drawing.Point(118, 48)
         Me.txtDateTime.Name = "txtDateTime"
         '
         'lblDatetime
         '
-        resources.ApplyResources(Me.lblDatetime, "lblDatetime")
+        Me.lblDatetime.AutoSize = True
+        Me.lblDatetime.Location = New System.Drawing.Point(0, 52)
         Me.lblDatetime.Name = "lblDatetime"
         '
         'lblSatus
@@ -1261,10 +740,17 @@ Partial Class formAWSRealTime
         resources.ApplyResources(Me.pnlSites, "pnlSites")
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.GroupBox11)
+        Me.pnlSites.Location = New System.Drawing.Point(200, 273)
         Me.pnlSites.Name = "pnlSites"
+        Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.pnlSites.Size = New System.Drawing.Size(721, 416)
+        Me.pnlSites.TabIndex = 3
         '
         'GroupBox11
         '
+        Me.GroupBox11.Controls.Add(Me.DataGridViewSites)
+        Me.GroupBox11.Controls.Add(Me.txtSiteName)
+        Me.GroupBox11.Controls.Add(Me.Label41)
         Me.GroupBox11.Controls.Add(Me.cmdClear)
         Me.GroupBox11.Controls.Add(Me.cmdViewUpdate)
         Me.GroupBox11.Controls.Add(Me.cmdDel)
@@ -1285,11 +771,41 @@ Partial Class formAWSRealTime
         Me.GroupBox11.Controls.Add(Me.Label16)
         Me.GroupBox11.Controls.Add(Me.txtInFile)
         Me.GroupBox11.Controls.Add(Me.lblInfile)
-        Me.GroupBox11.Controls.Add(Me.txtStation)
+        Me.GroupBox11.Controls.Add(Me.txtSiteID)
         Me.GroupBox11.Controls.Add(Me.Label15)
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
+        Me.GroupBox11.Location = New System.Drawing.Point(2, 22)
         Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(709, 391)
+        Me.GroupBox11.TabIndex = 67
         Me.GroupBox11.TabStop = False
+        '
+        'DataGridViewSites
+        '
+        Me.DataGridViewSites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewSites.Location = New System.Drawing.Point(395, 203)
+        Me.DataGridViewSites.Name = "DataGridViewSites"
+        Me.DataGridViewSites.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DataGridViewSites.Size = New System.Drawing.Size(241, 51)
+        Me.DataGridViewSites.TabIndex = 68
+        Me.DataGridViewSites.Visible = False
+        '
+        'txtSiteName
+        '
+        Me.txtSiteName.FormattingEnabled = True
+        Me.txtSiteName.Location = New System.Drawing.Point(182, 74)
+        Me.txtSiteName.Name = "txtSiteName"
+        Me.txtSiteName.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtSiteName.Size = New System.Drawing.Size(280, 21)
+        Me.txtSiteName.TabIndex = 95
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Location = New System.Drawing.Point(85, 78)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(56, 13)
+        Me.Label41.TabIndex = 94
+        Me.Label41.Text = "Site Name"
         '
         'cmdClear
         '
@@ -1403,16 +919,23 @@ Partial Class formAWSRealTime
         resources.ApplyResources(Me.lblInfile, "lblInfile")
         Me.lblInfile.Name = "lblInfile"
         '
-        'txtStation
+        'txtSiteID
         '
-        Me.txtStation.FormattingEnabled = True
-        resources.ApplyResources(Me.txtStation, "txtStation")
-        Me.txtStation.Name = "txtStation"
+        Me.txtSiteID.FormattingEnabled = True
+        Me.txtSiteID.Location = New System.Drawing.Point(181, 37)
+        Me.txtSiteID.Name = "txtSiteID"
+        Me.txtSiteID.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtSiteID.Size = New System.Drawing.Size(137, 21)
+        Me.txtSiteID.TabIndex = 68
         '
         'Label15
         '
-        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(84, 41)
         Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(39, 13)
+        Me.Label15.TabIndex = 67
+        Me.Label15.Text = "Site ID"
         '
         'pnlDataStructures
         '
@@ -1420,23 +943,31 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        resources.ApplyResources(Me.pnlDataStructures, "pnlDataStructures")
+        Me.pnlDataStructures.Location = New System.Drawing.Point(196, 115)
         Me.pnlDataStructures.Name = "pnlDataStructures"
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 240)
+        Me.pnlDataStructures.TabIndex = 5
+        Me.pnlDataStructures.Visible = False
         '
         'DataGridViewStructures
         '
         Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
         Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.DataGridViewStructures, "DataGridViewStructures")
+        Me.DataGridViewStructures.Location = New System.Drawing.Point(3, 242)
         Me.DataGridViewStructures.Name = "DataGridViewStructures"
+        Me.DataGridViewStructures.Size = New System.Drawing.Size(726, 118)
+        Me.DataGridViewStructures.TabIndex = 2
+        Me.DataGridViewStructures.Visible = False
         '
         'grpStructures1
         '
         Me.grpStructures1.Controls.Add(Me.lblStructure)
         Me.grpStructures1.Controls.Add(Me.grpStructures)
         Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
-        resources.ApplyResources(Me.grpStructures1, "grpStructures1")
+        Me.grpStructures1.Location = New System.Drawing.Point(192, 13)
         Me.grpStructures1.Name = "grpStructures1"
+        Me.grpStructures1.Size = New System.Drawing.Size(327, 219)
+        Me.grpStructures1.TabIndex = 1
         Me.grpStructures1.TabStop = False
         '
         'lblStructure
@@ -1459,8 +990,10 @@ Partial Class formAWSRealTime
         Me.grpStructures.Controls.Add(Me.Label19)
         Me.grpStructures.Controls.Add(Me.lblStrName)
         Me.grpStructures.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        resources.ApplyResources(Me.grpStructures, "grpStructures")
+        Me.grpStructures.Location = New System.Drawing.Point(13, 62)
         Me.grpStructures.Name = "grpStructures"
+        Me.grpStructures.Size = New System.Drawing.Size(296, 149)
+        Me.grpStructures.TabIndex = 7
         Me.grpStructures.TabStop = False
         '
         'lblRecords
@@ -1471,8 +1004,8 @@ Partial Class formAWSRealTime
         'txtDelimiter
         '
         Me.txtDelimiter.FormattingEnabled = True
-        Me.txtDelimiter.Items.AddRange(New Object() {resources.GetString("txtDelimiter.Items"), resources.GetString("txtDelimiter.Items1"), resources.GetString("txtDelimiter.Items2")})
-        resources.ApplyResources(Me.txtDelimiter, "txtDelimiter")
+        Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "space"})
+        Me.txtDelimiter.Location = New System.Drawing.Point(119, 31)
         Me.txtDelimiter.Name = "txtDelimiter"
         '
         'txtQualifier
@@ -1492,19 +1025,19 @@ Partial Class formAWSRealTime
         '
         'cmdDelete
         '
-        resources.ApplyResources(Me.cmdDelete, "cmdDelete")
+        Me.cmdDelete.Location = New System.Drawing.Point(200, 118)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.UseVisualStyleBackColor = True
         '
         'cmdUpdate
         '
-        resources.ApplyResources(Me.cmdUpdate, "cmdUpdate")
+        Me.cmdUpdate.Location = New System.Drawing.Point(117, 118)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.UseVisualStyleBackColor = True
         '
         'cmdCreate
         '
-        resources.ApplyResources(Me.cmdCreate, "cmdCreate")
+        Me.cmdCreate.Location = New System.Drawing.Point(34, 118)
         Me.cmdCreate.Name = "cmdCreate"
         Me.cmdCreate.UseVisualStyleBackColor = True
         '
@@ -1539,12 +1072,14 @@ Partial Class formAWSRealTime
         Me.pnlServers.BackColor = System.Drawing.Color.PeachPuff
         Me.pnlServers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlServers.Controls.Add(Me.pnlBaseStation)
+        Me.pnlServers.Controls.Add(Me.pnlMSS)
         Me.pnlServers.Controls.Add(Me.lblServerSettings)
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
-        Me.pnlServers.Controls.Add(Me.pnlMSS)
-        resources.ApplyResources(Me.pnlServers, "pnlServers")
+        Me.pnlServers.Location = New System.Drawing.Point(196, 149)
         Me.pnlServers.Name = "pnlServers"
+        Me.pnlServers.Size = New System.Drawing.Size(734, 36)
+        Me.pnlServers.TabIndex = 2
         '
         'pnlBaseStation
         '
@@ -1569,7 +1104,8 @@ Partial Class formAWSRealTime
         Me.pnlBaseStation.Controls.Add(Me.lblInputUser)
         Me.pnlBaseStation.Controls.Add(Me.lblFTPFolder)
         Me.pnlBaseStation.Controls.Add(Me.lblBaseStationFTP)
-        resources.ApplyResources(Me.pnlBaseStation, "pnlBaseStation")
+        Me.pnlBaseStation.Enabled = False
+        Me.pnlBaseStation.Location = New System.Drawing.Point(114, 96)
         Me.pnlBaseStation.Name = "pnlBaseStation"
         '
         'cmdRefresh
@@ -1663,6 +1199,9 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me.txtbaseStationPWConfirm, "txtbaseStationPWConfirm")
         Me.txtbaseStationPWConfirm.Name = "txtbaseStationPWConfirm"
+        Me.txtbaseStationPWConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtbaseStationPWConfirm.Size = New System.Drawing.Size(87, 20)
+        Me.txtbaseStationPWConfirm.TabIndex = 10
         '
         'txtbaseStationPW
         '
@@ -1688,6 +1227,9 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me.lblConfirmInputPW, "lblConfirmInputPW")
         Me.lblConfirmInputPW.Name = "lblConfirmInputPW"
+        Me.lblConfirmInputPW.Size = New System.Drawing.Size(91, 13)
+        Me.lblConfirmInputPW.TabIndex = 4
+        Me.lblConfirmInputPW.Text = "Confirm Password"
         '
         'lblInputPW
         '
@@ -1708,23 +1250,6 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me.lblBaseStationFTP, "lblBaseStationFTP")
         Me.lblBaseStationFTP.Name = "lblBaseStationFTP"
-        '
-        'lblServerSettings
-        '
-        resources.ApplyResources(Me.lblServerSettings, "lblServerSettings")
-        Me.lblServerSettings.Name = "lblServerSettings"
-        '
-        'cmdMSS
-        '
-        resources.ApplyResources(Me.cmdMSS, "cmdMSS")
-        Me.cmdMSS.Name = "cmdMSS"
-        Me.cmdMSS.UseVisualStyleBackColor = True
-        '
-        'cmdBaseStation
-        '
-        resources.ApplyResources(Me.cmdBaseStation, "cmdBaseStation")
-        Me.cmdBaseStation.Name = "cmdBaseStation"
-        Me.cmdBaseStation.UseVisualStyleBackColor = True
         '
         'pnlMSS
         '
@@ -1749,7 +1274,8 @@ Partial Class formAWSRealTime
         Me.pnlMSS.Controls.Add(Me.Label6)
         Me.pnlMSS.Controls.Add(Me.Label7)
         Me.pnlMSS.Controls.Add(Me.Label8)
-        resources.ApplyResources(Me.pnlMSS, "pnlMSS")
+        Me.pnlMSS.Enabled = False
+        Me.pnlMSS.Location = New System.Drawing.Point(113, 98)
         Me.pnlMSS.Name = "pnlMSS"
         '
         'cmdmssRefresh
@@ -1843,6 +1369,9 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me.txtMSSConfirm, "txtMSSConfirm")
         Me.txtMSSConfirm.Name = "txtMSSConfirm"
+        Me.txtMSSConfirm.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtMSSConfirm.Size = New System.Drawing.Size(81, 20)
+        Me.txtMSSConfirm.TabIndex = 10
         '
         'txtMSSPW
         '
@@ -1868,6 +1397,9 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me.lblmssConfirmPassword, "lblmssConfirmPassword")
         Me.lblmssConfirmPassword.Name = "lblmssConfirmPassword"
+        Me.lblmssConfirmPassword.Size = New System.Drawing.Size(91, 13)
+        Me.lblmssConfirmPassword.TabIndex = 4
+        Me.lblmssConfirmPassword.Text = "Confirm Password"
         '
         'Label5
         '
@@ -1889,6 +1421,36 @@ Partial Class formAWSRealTime
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         '
+        'lblServerSettings
+        '
+        Me.lblServerSettings.AutoSize = True
+        Me.lblServerSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblServerSettings.Location = New System.Drawing.Point(243, 95)
+        Me.lblServerSettings.Name = "lblServerSettings"
+        Me.lblServerSettings.Size = New System.Drawing.Size(114, 16)
+        Me.lblServerSettings.TabIndex = 3
+        Me.lblServerSettings.Text = "Server Settings"
+        '
+        'cmdMSS
+        '
+        Me.cmdMSS.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cmdMSS.Location = New System.Drawing.Point(341, 44)
+        Me.cmdMSS.Name = "cmdMSS"
+        Me.cmdMSS.Size = New System.Drawing.Size(134, 28)
+        Me.cmdMSS.TabIndex = 1
+        Me.cmdMSS.Text = "Message Switch"
+        Me.cmdMSS.UseVisualStyleBackColor = True
+        '
+        'cmdBaseStation
+        '
+        Me.cmdBaseStation.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cmdBaseStation.Location = New System.Drawing.Point(210, 44)
+        Me.cmdBaseStation.Name = "cmdBaseStation"
+        Me.cmdBaseStation.Size = New System.Drawing.Size(134, 28)
+        Me.cmdBaseStation.TabIndex = 0
+        Me.cmdBaseStation.Text = "Base Station"
+        Me.cmdBaseStation.UseVisualStyleBackColor = True
+        '
         'pnlMsgEncoding
         '
         Me.pnlMsgEncoding.BackColor = System.Drawing.Color.Linen
@@ -1900,7 +1462,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
         Me.pnlMsgEncoding.Controls.Add(Me.lblMaster)
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
-        resources.ApplyResources(Me.pnlMsgEncoding, "pnlMsgEncoding")
+        Me.pnlMsgEncoding.Location = New System.Drawing.Point(196, 194)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
         '
         'GroupBox6
@@ -2387,33 +1949,18 @@ Partial Class formAWSRealTime
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.pnlSites)
+        Me.ClientSize = New System.Drawing.Size(931, 551)
         Me.Controls.Add(Me.pnlDataStructures)
-        Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlProcessing)
+        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlServers)
+        Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
+        Me.KeyPreview = True
         Me.Name = "formAWSRealTime"
         Me.pnlControl.ResumeLayout(False)
         Me.pnlProcessing.ResumeLayout(False)
         Me.pnlProcessing.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        Me.GroupBox12.ResumeLayout(False)
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox13.ResumeLayout(False)
-        Me.GroupBox13.PerformLayout()
-        Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox14.PerformLayout()
-        Me.GroupBox15.ResumeLayout(False)
-        Me.GroupBox15.PerformLayout()
-        Me.GroupBox16.ResumeLayout(False)
-        Me.GroupBox16.PerformLayout()
-        Me.GroupBox17.ResumeLayout(False)
-        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox18.ResumeLayout(False)
-        Me.GroupBox18.PerformLayout()
-        Me.GroupBox19.ResumeLayout(False)
-        Me.GroupBox19.PerformLayout()
         Me.pnlProcessSettings.ResumeLayout(False)
         Me.pnlProcessSettings.PerformLayout()
         Me.Panel4.ResumeLayout(False)
@@ -2427,6 +1974,7 @@ Partial Class formAWSRealTime
         Me.pnlSites.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
+        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlDataStructures.ResumeLayout(False)
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStructures1.ResumeLayout(False)
@@ -2494,8 +2042,6 @@ Partial Class formAWSRealTime
     Friend WithEvents lblOutputFTP As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
-    Friend WithEvents txtGMTDiff As System.Windows.Forms.TextBox
-    Friend WithEvents lblGMT As System.Windows.Forms.Label
     Friend WithEvents txtStatus As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtDateTime As System.Windows.Forms.TextBox
@@ -2677,7 +2223,7 @@ Partial Class formAWSRealTime
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents txtInFile As System.Windows.Forms.TextBox
     Friend WithEvents lblInfile As System.Windows.Forms.Label
-    Friend WithEvents txtStation As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSiteID As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents btnMovePrevious As System.Windows.Forms.Button
     Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
@@ -2697,81 +2243,10 @@ Partial Class formAWSRealTime
     Friend WithEvents Timer2 As System.Windows.Forms.Timer
     Friend WithEvents list_errors As System.Windows.Forms.ListBox
     Friend WithEvents DataGridViewStructures As System.Windows.Forms.DataGridView
-    Friend WithEvents Panel5 As System.Windows.Forms.Panel
-    Friend WithEvents GroupBox12 As System.Windows.Forms.GroupBox
-    Friend WithEvents DataGridView3 As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
-    Friend WithEvents Label47 As System.Windows.Forms.Label
-    Friend WithEvents Label48 As System.Windows.Forms.Label
-    Friend WithEvents Label49 As System.Windows.Forms.Label
-    Friend WithEvents Label50 As System.Windows.Forms.Label
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
-    Friend WithEvents Label51 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
-    Friend WithEvents Label52 As System.Windows.Forms.Label
-    Friend WithEvents Label53 As System.Windows.Forms.Label
-    Friend WithEvents Label54 As System.Windows.Forms.Label
-    Friend WithEvents Label55 As System.Windows.Forms.Label
-    Friend WithEvents TextBox14 As System.Windows.Forms.TextBox
-    Friend WithEvents Label56 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox15 As System.Windows.Forms.GroupBox
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox15 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox16 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox17 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox18 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox19 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox20 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox21 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox27 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox28 As System.Windows.Forms.TextBox
-    Friend WithEvents Label57 As System.Windows.Forms.Label
-    Friend WithEvents Label58 As System.Windows.Forms.Label
-    Friend WithEvents Label59 As System.Windows.Forms.Label
-    Friend WithEvents Label60 As System.Windows.Forms.Label
-    Friend WithEvents Label61 As System.Windows.Forms.Label
-    Friend WithEvents Label62 As System.Windows.Forms.Label
-    Friend WithEvents Label63 As System.Windows.Forms.Label
-    Friend WithEvents Label64 As System.Windows.Forms.Label
-    Friend WithEvents Label65 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label66 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox17 As System.Windows.Forms.GroupBox
-    Friend WithEvents DataGridView4 As System.Windows.Forms.DataGridView
-    Friend WithEvents TextBox29 As System.Windows.Forms.TextBox
-    Friend WithEvents Label67 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox18 As System.Windows.Forms.GroupBox
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox30 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox31 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox32 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox34 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox35 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox36 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox37 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox38 As System.Windows.Forms.TextBox
-    Friend WithEvents Label68 As System.Windows.Forms.Label
-    Friend WithEvents Label69 As System.Windows.Forms.Label
-    Friend WithEvents Label70 As System.Windows.Forms.Label
-    Friend WithEvents Label71 As System.Windows.Forms.Label
-    Friend WithEvents Label72 As System.Windows.Forms.Label
-    Friend WithEvents Label73 As System.Windows.Forms.Label
-    Friend WithEvents Label74 As System.Windows.Forms.Label
-    Friend WithEvents Label75 As System.Windows.Forms.Label
-    Friend WithEvents Label76 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox19 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBox5 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label77 As System.Windows.Forms.Label
-    Friend WithEvents TextBox39 As System.Windows.Forms.TextBox
-    Friend WithEvents Label78 As System.Windows.Forms.Label
+    Friend WithEvents txtGMTDiff As System.Windows.Forms.TextBox
+    Friend WithEvents lblGMT As System.Windows.Forms.Label
+    Friend WithEvents txtSiteName As System.Windows.Forms.ComboBox
+    Friend WithEvents Label41 As System.Windows.Forms.Label
+    Friend WithEvents DataGridViewSites As System.Windows.Forms.DataGridView
+    Friend WithEvents cmdHelp As System.Windows.Forms.Button
 End Class

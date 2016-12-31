@@ -18,7 +18,89 @@
 Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim usrName, usrRole As String
+        Dim i, maxRows As Integer
+        usrRole = ""
+        usrName = frmLogin.txtUsername.Text
+        maxRows = dsClimsoftUserRoles.Tables("userRoles").Rows.Count
+
+        Try
+            'Get the role for the logged in user from the climsoftusers table
+            If maxRows > 0 Then
+                For i = 0 To maxRows - 1
+                    If dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userName") = usrName Then
+                        usrRole = dsClimsoftUserRoles.Tables("userRoles").Rows(i).Item("userRole")
+                        userGroup = usrRole
+                    End If
+                Next i
+                'Disable controls that do not correspond to the user role
+                If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuLanguageTranslation.Enabled = False
+                    mnuQC.Enabled = False
+                    mnuProducts.Enabled = False
+                    cmdDataTransfer.Enabled = False
+                    cmdSettingsAWS.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    cmdQC.Enabled = False
+                    cmdProducts.Enabled = False
+                    cmdMetadata.Enabled = False
+                    '
+                ElseIf usrRole = "ClimsoftQC" Then
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuLanguageTranslation.Enabled = False
+                    mnuProducts.Enabled = False
+                    cmdDataTransfer.Enabled = False
+                    cmdSettingsAWS.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    cmdProducts.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    '
+                ElseIf usrRole = "ClimsoftMetadata" Then
+                    mnuProducts.Enabled = False
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuQC.Enabled = False
+                    mnuLanguageTranslation.Enabled = False
+                    cmdDataTransfer.Enabled = False
+                    cmdSettingsAWS.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    cmdQC.Enabled = False
+                    cmdProducts.Enabled = False
+                    cmdKeyEntry.Enabled = False
+                ElseIf usrRole = "ClimsoftProducts" Then
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuQC.Enabled = False
+                    mnuLanguageTranslation.Enabled = False
+                    mnuProducts.Enabled = False
+                    cmdDataTransfer.Enabled = False
+                    cmdSettingsAWS.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    cmdQC.Enabled = False
+                    cmdKeyEntry.Enabled = False
+                ElseIf usrRole = "ClimsoftTranslator" Then
+                    mnuAdministration.Enabled = False
+                    mnuTools.Enabled = False
+                    mnuQC.Enabled = False
+                    mnuProducts.Enabled = False
+                    cmdDataTransfer.Enabled = False
+                    cmdSettingsAWS.Enabled = False
+                    cmdUserManagement.Enabled = False
+                    cmdQC.Enabled = False
+                    cmdKeyEntry.Enabled = False
+                    cmdPaperArchive.Enabled = False
+                    cmdProducts.Enabled = False
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation)
+        End Try
+        autoTranslate(Me)
         HTMLHelp.HelpPage = "welcome.htm"
+
     End Sub
 
 
@@ -44,7 +126,8 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub cmdUserManagement_Click(sender As Object, e As EventArgs) Handles cmdUserManagement.Click
-        frmUsers.Show()
+        'frmUsers.Show()
+        frmUserManagement.Show()
     End Sub
 
     Private Sub cmdMetadata_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
@@ -69,7 +152,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub mnuInputPaperArchive_Click(sender As Object, e As EventArgs) Handles mnuInputPaperArchive.Click
-
+        formPaperArchive.Show()
     End Sub
 
     ' Accessories Menu items
@@ -99,7 +182,7 @@ Public Class frmMainMenu
     ' (currently not implemeted)
 
     ' Tools Menu Items
-    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs) Handles mnuToolsOptions.Click
+    Private Sub mnuToolsOptions_Click(sender As Object, e As EventArgs)
         formOptions.Show()
     End Sub
 
@@ -114,7 +197,9 @@ Public Class frmMainMenu
 
     ' Help Menu Items
     Private Sub mnuHelpContents_Click(sender As Object, e As EventArgs) Handles mnuHelpContents.Click
+        'HTMLHelp.HelpPage = "aboutclimsoft4.htm"
         Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
+
     End Sub
 
     Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
@@ -139,6 +224,7 @@ Public Class frmMainMenu
 
     Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
         frmElementSequencerHourly.Show()
+
     End Sub
 
     Private Sub FormHourlyTimeSelectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormHourlyTimeSelectionToolStripMenuItem.Click
@@ -147,6 +233,44 @@ Public Class frmMainMenu
 
     Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
         frmElementSequencerDaily.Show()
+
+    End Sub
+
+    Private Sub LanguageTranslationToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        frmLanguageTranslation.Show()
+    End Sub
+
+    Private Sub PasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasswordToolStripMenuItem.Click
+        frmChangePassword.Show()
+    End Sub
+
+    Private Sub ChangeOwnPasswordToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangeOwnPasswordToolStripMenuItem.Click
+        frmChangeOwnPassword.Show()
+    End Sub
+
+    Private Sub ConfigureDatabaseConnectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigureDatabaseConnectionToolStripMenuItem.Click
+        frmLogin.Server_db_port(frmLogin.cmbDatabases.Text)
+    End Sub
+
+    Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
+
+    End Sub
+
+    
+    Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
+        frmLanguageTranslation.Show()
+    End Sub
+
+    Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click
+        frmUserManagement.Show()
+    End Sub
+
+    Private Sub AWSElementsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSElementsToolStripMenuItem.Click
+        frmAWSelements.Show()
+    End Sub
+
+    Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
+        frmAWSstations.Show()
     End Sub
 
 End Class

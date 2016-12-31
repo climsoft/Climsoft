@@ -48,7 +48,18 @@ Public Class formHourlyWind
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
-        Dim stn As String, elem As String
+        '----------------
+        'Refill dataset before getting maxRows
+        ds.Clear()
+        sql = "SELECT * FROM form_hourlywind"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "form_hourlywind")
+
+        maxRows = ds.Tables("form_hourlywind").Rows.Count
+        ''''inc = maxRows - 1
+        '----------------
+
+        Dim stn As String
         'cboStation.Text = ds.Tables("form_hourly").Rows(inc).Item("stationId")
         stn = ds.Tables("form_hourlywind").Rows(inc).Item("stationId")
         cboStation.SelectedValue = stn
@@ -180,87 +191,113 @@ Public Class formHourlyWind
             txtSequencer.Text = "seq_month_day"
         End If
 
-        stn = cboStation.SelectedValue
-        'Assign station identifier to that of current record
+        '----------------Code block added 20160419. ASM
+        Try
+            Dim dsLastDataRecord As New DataSet
+            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecDay As String
 
-        cboStation.SelectedValue = stn
-        If cboMonth.Text = 12 And cboDay.Text = 31 Then
-            txtYear.Text = Val(txtYear.Text) + 1
-        Else
-            txtYear.Text = txtYear.Text
-        End If
+            SQL_last_record = "SELECT stationId,yyyy,mm,dd,signature,entryDatetime from form_hourlywind WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourlywind);"
+            dsLastDataRecord.Clear()
+            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+            '----------------
 
-        mm = Val(cboMonth.Text)
-        dd = Val(cboDay.Text)
-
-        Sql = "SELECT * FROM " & txtSequencer.Text
-        daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-        'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-        'of records in the recordest table whenever the AddNew button is clicked
-        dsSequencer.Clear()
-        daSequencer.Fill(dsSequencer, "sequencer")
-
-        seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
-
-        For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = mm And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = dd Then
-                If (k + 1) <= seqRecCount Then
-                    cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
-                    cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
-                Else
-                    cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
-                    cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
-                End If
+            stn = cboStation.SelectedValue
+            cboStation.SelectedValue = stn
+            If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+                cboStation.SelectedValue = stn
+                lastRecDay = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("dd")
+                lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
+                lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+                ' lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
             End If
-        Next k
 
-        Dim m As Integer
-        Dim ctl As Control
-        'Clear textboxes for dd values
-        For m = 4 To 28
+            'stn = cboStation.SelectedValue
+            'Assign station identifier to that of current record
+
+            'cboStation.SelectedValue = stn
+            If cboMonth.Text = 12 And cboDay.Text = 31 Then
+                txtYear.Text = Val(txtYear.Text) + 1
+            Else
+                txtYear.Text = txtYear.Text
+            End If
+
+            mm = Val(cboMonth.Text)
+            dd = Val(cboDay.Text)
+
+            Sql = "SELECT * FROM " & txtSequencer.Text
+            daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
+            'of records in the recordest table whenever the AddNew button is clicked
+            dsSequencer.Clear()
+            daSequencer.Fill(dsSequencer, "sequencer")
+
+            seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+
+            For k = 0 To seqRecCount - 1
+                If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecDay Then
+                    If (k + 1) <= seqRecCount - 1 Then
+                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
+                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
+                    Else
+                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
+                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
+                    End If
+                End If
+            Next k
+
+            Dim m As Integer
+            Dim ctl As Control
+            'Clear textboxes for dd values
+            For m = 4 To 28
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+            Next m
+
+            'Clear textboxes for ddff values
+            For m = 4 To 27
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+            Next m
+
+            'Clear textboxes for ff values
+            'For m = 4 To 27
             For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                If Strings.Left(ctl.Name, 6) = "txtff" Then
                     ctl.Text = ""
                 End If
             Next ctl
-        Next m
+            ' Next m
 
-        'Clear textboxes for ddff values
-        For m = 4 To 27
+
+            'Clear textboxes for ddfff flags
+            ' For m = 28 To 51
             For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                If Strings.Left(ctl.Name, 8) = "txt_ddfff" Then
                     ctl.Text = ""
                 End If
             Next ctl
-        Next m
+            ' Next m
 
-        'Clear textboxes for ff values
-        'For m = 4 To 27
-        For Each ctl In Me.Controls
-            If Strings.Left(ctl.Name, 6) = "txtff" Then
-                ctl.Text = ""
-            End If
-        Next ctl
-        ' Next m
+            'Set record index to last record
+            inc = maxRows
 
+            'Display record position in record navigation Text Box
+            recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
 
-        'Clear textboxes for ddfff flags
-        ' For m = 28 To 51
-        For Each ctl In Me.Controls
-            If Strings.Left(ctl.Name, 8) = "txt_ddfff" Then
-                ctl.Text = ""
-            End If
-        Next ctl
-        ' Next m
-
-        'Set record index to last record
-        inc = maxRows
-
-        'Display record position in record navigation Text Box
-        recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
-
-        'Set focus to texbox for station level pressure
-        txt_ddff00.Focus()
+            'Set focus to texbox for station level pressure
+            txt_ddff00.Focus()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
         '----------------------------------------
     End Sub
 
@@ -477,6 +514,12 @@ Public Class formHourlyWind
         'Set TAB next to true
         tabNext = True
         selectAllHours = False
+
+        'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
         'Set the record index counter to the first row
         inc = 0
 
@@ -510,18 +553,21 @@ Public Class formHourlyWind
         Dim sql1 As String
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
-        sql1 = "SELECT stationId,stationName FROM station"
+        sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
         da1.Fill(ds1, "station")
-        'Populate station combobox
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
-
+        If ds1.Tables("station").Rows.Count > 0 Then
+            'Populate station combobox
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
 
         'Get number of digits for wind direction from RegKeys table
         DDdigits = dsReg.Tables("regData").Rows(5).Item("keyValue")
@@ -572,6 +618,7 @@ Public Class formHourlyWind
                     End If
                 Next ctl
             Next m
+
             displayRecordNumber()
         Else
             'If this is the first record
@@ -870,67 +917,77 @@ Public Class formHourlyWind
             Dim dsNewRow As DataRow
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
-            'Try
-            dsNewRow = ds.Tables("form_hourlywind").NewRow
-            'Add a new record to the data source table
-            ds.Tables("form_hourlywind").Rows.Add(dsNewRow)
-            'Commit observation header information to database
-            ds.Tables("form_hourlywind").Rows(inc).Item("stationId") = cboStation.SelectedValue
-            ds.Tables("form_hourlywind").Rows(inc).Item("yyyy") = txtYear.Text
-            ds.Tables("form_hourlywind").Rows(inc).Item("mm") = cboMonth.Text
-            ds.Tables("form_hourlywind").Rows(inc).Item("dd") = cboDay.Text
+            Try
+                dsNewRow = ds.Tables("form_hourlywind").NewRow
+                'Add a new record to the data source table
+                ds.Tables("form_hourlywind").Rows.Add(dsNewRow)
+                'Commit observation header information to database
+                ds.Tables("form_hourlywind").Rows(inc).Item("stationId") = cboStation.SelectedValue
+                ds.Tables("form_hourlywind").Rows(inc).Item("yyyy") = txtYear.Text
+                ds.Tables("form_hourlywind").Rows(inc).Item("mm") = cboMonth.Text
+                ds.Tables("form_hourlywind").Rows(inc).Item("dd") = cboDay.Text
 
-            ' txtSignature.Text = frmLogin.txtUser.Text
-            ds.Tables("form_hourlywind").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+                ' txtSignature.Text = frmLogin.txtUser.Text
+                ds.Tables("form_hourlywind").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
-            'Commit Wind direction values to database
-            For m = 4 To 27
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 5) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
-                    End If
-                Next ctl
-            Next m
+                'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
+                ds.Tables("form_hourlywind").Rows(inc).Item("entryDatetime") = Now()
 
-            'Commit observation flags to database
-            For m = 28 To 51
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
-                    End If
-                Next ctl
-            Next m
 
-            'Commit wind speed to database
-            For m = 52 To 75
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 5) = "txtFF" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
-                    End If
-                Next ctl
-            Next m
-            da.Update(ds, "form_hourlywind")
+                'Commit Wind direction values to database
+                For m = 4 To 27
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 5) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
+                        End If
+                    Next ctl
+                Next m
 
-            'Display message for successful record commit to table
-            recCommit.messageBoxCommit()
+                'Commit observation flags to database
+                For m = 28 To 51
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
+                        End If
+                    Next ctl
+                Next m
 
-            btnAddNew.Enabled = True
-            btnClear.Enabled = False
-            btnCommit.Enabled = False
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
-            btnMoveFirst.Enabled = True
-            btnMoveLast.Enabled = True
-            btnMoveNext.Enabled = True
-            btnMovePrevious.Enabled = True
-            maxRows = ds.Tables("form_hourlywind").Rows.Count
-            inc = maxRows - 1
+                'Commit wind speed to database
+                For m = 52 To 75
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 5) = "txtFF" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            ds.Tables("form_hourlywind").Rows(inc).Item(m) = ctl.Text
+                        End If
+                    Next ctl
+                Next m
+                da.Update(ds, "form_hourlywind")
 
-            'Call subroutine for record navigation
-            navigateRecords()
-            ''Catch ex As Exception
-            ''    MessageBox.Show(ex.Message)
-            ''End Try
+                'Display message for successful record commit to table
+                recCommit.messageBoxCommit()
+
+                btnAddNew.Enabled = True
+                btnClear.Enabled = False
+                btnCommit.Enabled = False
+                btnDelete.Enabled = True
+                btnUpdate.Enabled = True
+                btnMoveFirst.Enabled = True
+                btnMoveLast.Enabled = True
+                btnMoveNext.Enabled = True
+                btnMovePrevious.Enabled = True
+
+                'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                    btnDelete.Enabled = False
+                End If
+
+                maxRows = ds.Tables("form_hourlywind").Rows.Count
+                inc = maxRows - 1
+
+                'Call subroutine for record navigation
+                navigateRecords()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
         Else
             msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
             MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
@@ -1208,5 +1265,23 @@ Public Class formHourlyWind
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
 
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_hourlywind"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourlywind")
     End Sub
 End Class

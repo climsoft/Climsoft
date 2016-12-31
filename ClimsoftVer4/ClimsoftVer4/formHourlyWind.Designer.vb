@@ -182,6 +182,7 @@ Partial Class formHourlyWind
         Me.Label40 = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'YyyyLabel
@@ -819,7 +820,7 @@ Partial Class formHourlyWind
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(520, 543)
+        Me.btnUpload.Location = New System.Drawing.Point(591, 539)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 490
@@ -898,7 +899,7 @@ Partial Class formHourlyWind
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(520, 504)
+        Me.btnHelp.Location = New System.Drawing.Point(591, 505)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 479
@@ -908,7 +909,7 @@ Partial Class formHourlyWind
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(357, 505)
+        Me.btnClear.Location = New System.Drawing.Point(345, 505)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 477
@@ -918,7 +919,7 @@ Partial Class formHourlyWind
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(109, 505)
+        Me.btnCommit.Location = New System.Drawing.Point(99, 505)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 29
@@ -927,7 +928,7 @@ Partial Class formHourlyWind
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(276, 505)
+        Me.btnDelete.Location = New System.Drawing.Point(263, 505)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 476
@@ -936,7 +937,7 @@ Partial Class formHourlyWind
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(27, 505)
+        Me.btnAddNew.Location = New System.Drawing.Point(17, 505)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 473
@@ -945,7 +946,7 @@ Partial Class formHourlyWind
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(190, 505)
+        Me.btnUpdate.Location = New System.Drawing.Point(181, 505)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 475
@@ -1001,7 +1002,7 @@ Partial Class formHourlyWind
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(438, 505)
+        Me.btnClose.Location = New System.Drawing.Point(509, 505)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 478
@@ -1434,11 +1435,21 @@ Partial Class formHourlyWind
         Me.Label33.TabIndex = 634
         Me.Label33.Text = "ff"
         '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(427, 505)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 661
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'formHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(655, 595)
+        Me.ClientSize = New System.Drawing.Size(687, 601)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.Label41)
         Me.Controls.Add(Me.Label40)
@@ -1766,4 +1777,5 @@ Partial Class formHourlyWind
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents YyyyLabel As System.Windows.Forms.Label
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

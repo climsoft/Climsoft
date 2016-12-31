@@ -26,29 +26,32 @@ Partial Class frmDBUtilities
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObsInitialToFinalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExternalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CLICOMDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NOAAGTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CLIMSOFTV3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.Dbtpanel2 = New System.Windows.Forms.Panel()
         Me.ProgressBarDb = New System.Windows.Forms.ProgressBar()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmbDb = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.Dbtpanel1 = New System.Windows.Forms.Panel()
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
         Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.ListViewDbUtil = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Dbtpanel2.SuspendLayout()
@@ -59,8 +62,8 @@ Partial Class frmDBUtilities
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.HelpToolStripMenuItem})
-        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportToolStripMenuItem, Me.ExternalDataToolStripMenuItem, Me.GenerateValuesToolStripMenuItem, Me.BackupToolStripMenuItem, Me.RestoreToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         '
         'ImportToolStripMenuItem
@@ -74,14 +77,9 @@ Partial Class frmDBUtilities
         Me.ObsInitialToFinalToolStripMenuItem.Name = "ObsInitialToFinalToolStripMenuItem"
         resources.ApplyResources(Me.ObsInitialToFinalToolStripMenuItem, "ObsInitialToFinalToolStripMenuItem")
         '
-        'GenerateValuesToolStripMenuItem
-        '
-        Me.GenerateValuesToolStripMenuItem.Name = "GenerateValuesToolStripMenuItem"
-        resources.ApplyResources(Me.GenerateValuesToolStripMenuItem, "GenerateValuesToolStripMenuItem")
-        '
         'ExternalDataToolStripMenuItem
         '
-        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
+        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem, Me.DailyToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
         resources.ApplyResources(Me.ExternalDataToolStripMenuItem, "ExternalDataToolStripMenuItem")
         '
@@ -105,6 +103,39 @@ Partial Class frmDBUtilities
         Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
         resources.ApplyResources(Me.CLIMSOFTV3ToolStripMenuItem, "CLIMSOFTV3ToolStripMenuItem")
         '
+        'DailyToolStripMenuItem
+        '
+        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.MonthlyToolStripMenuItem, Me.MonthlyToolStripMenuItem1})
+        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.DailyToolStripMenuItem.Text = "Text Files"
+        Me.DailyToolStripMenuItem.Visible = False
+        '
+        'DailyToolStripMenuItem1
+        '
+        Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(119, 22)
+        Me.DailyToolStripMenuItem1.Text = "Daily"
+        '
+        'MonthlyToolStripMenuItem
+        '
+        Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
+        Me.MonthlyToolStripMenuItem.Text = "Dekadal"
+        '
+        'MonthlyToolStripMenuItem1
+        '
+        Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
+        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(119, 22)
+        Me.MonthlyToolStripMenuItem1.Text = "Monthly"
+        '
+        'GenerateValuesToolStripMenuItem
+        '
+        Me.GenerateValuesToolStripMenuItem.Name = "GenerateValuesToolStripMenuItem"
+        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(103, 20)
+        Me.GenerateValuesToolStripMenuItem.Text = "Generate Values"
+        Me.GenerateValuesToolStripMenuItem.Visible = False
+        '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
@@ -118,23 +149,24 @@ Partial Class frmDBUtilities
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        resources.ApplyResources(Me.OptionsToolStripMenuItem, "OptionsToolStripMenuItem")
-        '
-        'HelpToolStripMenuItem
-        '
-        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.OptionsToolStripMenuItem.Text = "Options"
+        Me.OptionsToolStripMenuItem.Visible = False
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Button1)
-        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.btnClose)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 396)
         Me.Panel1.Name = "Panel1"
         '
-        'Button1
+        'btnClose
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
+        Me.btnClose.Location = New System.Drawing.Point(305, 0)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(67, 27)
+        Me.btnClose.TabIndex = 1
+        Me.btnClose.Text = "Close"
         '
         'Dbtpanel2
         '
@@ -154,27 +186,39 @@ Partial Class frmDBUtilities
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb})
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.cmbDb, Me.ToolStripButton1})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripLabel1
         '
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(55, 22)
+        Me.ToolStripLabel1.Text = "Database"
+        Me.ToolStripLabel1.Visible = False
         '
         'cmbDb
         '
         Me.cmbDb.Items.AddRange(New Object() {resources.GetString("cmbDb.Items"), resources.GetString("cmbDb.Items1")})
         Me.cmbDb.Name = "cmbDb"
-        resources.ApplyResources(Me.cmbDb, "cmbDb")
+        Me.cmbDb.Size = New System.Drawing.Size(121, 25)
+        Me.cmbDb.Visible = False
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Text = "ToolStripButton1"
+        Me.ToolStripButton1.Visible = False
         '
         'Dbtpanel1
         '
         Me.Dbtpanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Dbtpanel1.Controls.Add(Me.grpbxUpload)
-        Me.Dbtpanel1.Controls.Add(Me.ListViewDbUtil)
-        resources.ApplyResources(Me.Dbtpanel1, "Dbtpanel1")
+        Me.Dbtpanel1.Location = New System.Drawing.Point(12, 52)
         Me.Dbtpanel1.Name = "Dbtpanel1"
         '
         'grpbxUpload
@@ -202,18 +246,6 @@ Partial Class frmDBUtilities
         Me.ListView1.Name = "ListView1"
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'ListViewDbUtil
-        '
-        Me.ListViewDbUtil.AllowColumnReorder = True
-        Me.ListViewDbUtil.AllowDrop = True
-        Me.ListViewDbUtil.CheckBoxes = True
-        Me.ListViewDbUtil.GridLines = True
-        Me.ListViewDbUtil.LabelEdit = True
-        resources.ApplyResources(Me.ListViewDbUtil, "ListViewDbUtil")
-        Me.ListViewDbUtil.Name = "ListViewDbUtil"
-        Me.ListViewDbUtil.UseCompatibleStateImageBehavior = False
-        Me.ListViewDbUtil.View = System.Windows.Forms.View.Details
         '
         'frmDBUtilities
         '
@@ -244,7 +276,7 @@ Partial Class frmDBUtilities
     End Sub
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents ImportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GenerateValuesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExternalDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -254,12 +286,10 @@ Partial Class frmDBUtilities
     Friend WithEvents Dbtpanel2 As System.Windows.Forms.Panel
     Friend WithEvents ProgressBarDb As System.Windows.Forms.ProgressBar
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents cmbDb As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents Dbtpanel1 As System.Windows.Forms.Panel
-    Public WithEvents ListViewDbUtil As System.Windows.Forms.ListView
     Friend WithEvents grpbxUpload As System.Windows.Forms.GroupBox
     Friend WithEvents cmdUpload As System.Windows.Forms.Button
     Friend WithEvents CLICOMDailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -268,5 +298,10 @@ Partial Class frmDBUtilities
     Friend WithEvents NOAAGTSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ListView1 As System.Windows.Forms.ListView
     Friend WithEvents CLIMSOFTV3ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DailyToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MonthlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MonthlyToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

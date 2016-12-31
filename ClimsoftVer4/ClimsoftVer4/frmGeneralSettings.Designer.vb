@@ -40,35 +40,37 @@ Partial Class frmGeneralSettings
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.lblGuidelines = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtKeyName
         '
         Me.txtKeyName.Enabled = False
-        Me.txtKeyName.Location = New System.Drawing.Point(136, 40)
+        Me.txtKeyName.Location = New System.Drawing.Point(134, 65)
         Me.txtKeyName.Name = "txtKeyName"
         Me.txtKeyName.Size = New System.Drawing.Size(80, 20)
         Me.txtKeyName.TabIndex = 0
         '
         'txtKeyValue
         '
-        Me.txtKeyValue.Location = New System.Drawing.Point(319, 40)
+        Me.txtKeyValue.Location = New System.Drawing.Point(317, 65)
         Me.txtKeyValue.Name = "txtKeyValue"
-        Me.txtKeyValue.Size = New System.Drawing.Size(287, 20)
+        Me.txtKeyValue.Size = New System.Drawing.Size(357, 20)
         Me.txtKeyValue.TabIndex = 1
         '
         'txtKeyDescription
         '
         Me.txtKeyDescription.Enabled = False
-        Me.txtKeyDescription.Location = New System.Drawing.Point(136, 90)
+        Me.txtKeyDescription.Location = New System.Drawing.Point(134, 115)
         Me.txtKeyDescription.Name = "txtKeyDescription"
-        Me.txtKeyDescription.Size = New System.Drawing.Size(470, 20)
+        Me.txtKeyDescription.Size = New System.Drawing.Size(540, 20)
         Me.txtKeyDescription.TabIndex = 2
         '
         'lblKeyName
         '
         Me.lblKeyName.AutoSize = True
-        Me.lblKeyName.Location = New System.Drawing.Point(26, 43)
+        Me.lblKeyName.Location = New System.Drawing.Point(24, 68)
         Me.lblKeyName.Name = "lblKeyName"
         Me.lblKeyName.Size = New System.Drawing.Size(71, 13)
         Me.lblKeyName.TabIndex = 3
@@ -77,7 +79,7 @@ Partial Class frmGeneralSettings
         'lblKeyValue
         '
         Me.lblKeyValue.AutoSize = True
-        Me.lblKeyValue.Location = New System.Drawing.Point(230, 43)
+        Me.lblKeyValue.Location = New System.Drawing.Point(228, 68)
         Me.lblKeyValue.Name = "lblKeyValue"
         Me.lblKeyValue.Size = New System.Drawing.Size(70, 13)
         Me.lblKeyValue.TabIndex = 4
@@ -86,7 +88,7 @@ Partial Class frmGeneralSettings
         'lblKeyDescription
         '
         Me.lblKeyDescription.AutoSize = True
-        Me.lblKeyDescription.Location = New System.Drawing.Point(27, 97)
+        Me.lblKeyDescription.Location = New System.Drawing.Point(25, 122)
         Me.lblKeyDescription.Name = "lblKeyDescription"
         Me.lblKeyDescription.Size = New System.Drawing.Size(96, 13)
         Me.lblKeyDescription.TabIndex = 5
@@ -94,7 +96,7 @@ Partial Class frmGeneralSettings
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(548, 193)
+        Me.btnHelp.Location = New System.Drawing.Point(599, 224)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 317
@@ -104,7 +106,7 @@ Partial Class frmGeneralSettings
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(385, 194)
+        Me.btnClear.Location = New System.Drawing.Point(356, 224)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 315
@@ -114,7 +116,7 @@ Partial Class frmGeneralSettings
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(137, 194)
+        Me.btnCommit.Location = New System.Drawing.Point(113, 224)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 311
@@ -124,7 +126,7 @@ Partial Class frmGeneralSettings
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(304, 194)
+        Me.btnDelete.Location = New System.Drawing.Point(275, 224)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 314
@@ -134,7 +136,7 @@ Partial Class frmGeneralSettings
         'btnAddNew
         '
         Me.btnAddNew.Enabled = False
-        Me.btnAddNew.Location = New System.Drawing.Point(55, 194)
+        Me.btnAddNew.Location = New System.Drawing.Point(32, 224)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 312
@@ -143,7 +145,7 @@ Partial Class frmGeneralSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(218, 194)
+        Me.btnUpdate.Location = New System.Drawing.Point(194, 224)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 313
@@ -153,7 +155,7 @@ Partial Class frmGeneralSettings
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(223, 154)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(221, 179)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 322
@@ -163,7 +165,7 @@ Partial Class frmGeneralSettings
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(176, 154)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(174, 179)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 321
@@ -173,7 +175,7 @@ Partial Class frmGeneralSettings
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(466, 154)
+        Me.btnMoveLast.Location = New System.Drawing.Point(464, 179)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 320
@@ -182,7 +184,7 @@ Partial Class frmGeneralSettings
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(275, 156)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(273, 181)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 319
@@ -190,7 +192,7 @@ Partial Class frmGeneralSettings
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(422, 154)
+        Me.btnMoveNext.Location = New System.Drawing.Point(420, 179)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 318
@@ -199,18 +201,40 @@ Partial Class frmGeneralSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(466, 194)
+        Me.btnClose.Location = New System.Drawing.Point(518, 224)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 316
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(437, 224)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 662
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'lblGuidelines
+        '
+        Me.lblGuidelines.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGuidelines.ForeColor = System.Drawing.Color.Red
+        Me.lblGuidelines.Location = New System.Drawing.Point(24, 9)
+        Me.lblGuidelines.Name = "lblGuidelines"
+        Me.lblGuidelines.Size = New System.Drawing.Size(619, 34)
+        Me.lblGuidelines.TabIndex = 663
+        Me.lblGuidelines.Text = "When updating folder location for QC output, you must use forward slash '/'. For " & _
+    "all other folder locations use backslash '\'."
+        '
         'frmGeneralSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(653, 246)
+        Me.ClientSize = New System.Drawing.Size(711, 270)
+        Me.Controls.Add(Me.lblGuidelines)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
@@ -255,4 +279,6 @@ Partial Class frmGeneralSettings
     Friend WithEvents recNumberTextBox As System.Windows.Forms.TextBox
     Friend WithEvents btnMoveNext As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents lblGuidelines As System.Windows.Forms.Label
 End Class

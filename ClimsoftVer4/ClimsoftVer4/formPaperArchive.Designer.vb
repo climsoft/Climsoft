@@ -84,6 +84,12 @@ Partial Class formPaperArchive
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.folderPaperArchive = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFilePaperArchive = New System.Windows.Forms.OpenFileDialog()
+        Me.lblImagesAt = New System.Windows.Forms.Label()
+        Me.lblArhiveFolder = New System.Windows.Forms.Label()
+        Me.lstMessages = New System.Windows.Forms.ListBox()
+        Me.lblMessages = New System.Windows.Forms.Label()
+        Me.txtDefaultFolder = New System.Windows.Forms.TextBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -105,6 +111,8 @@ Partial Class formPaperArchive
         resources.ApplyResources(Me.tabImageArchives, "tabImageArchives")
         Me.tabImageArchives.Name = "tabImageArchives"
         Me.tabImageArchives.SelectedIndex = 0
+        Me.tabImageArchives.Size = New System.Drawing.Size(606, 481)
+        Me.tabImageArchives.TabIndex = 2
         '
         'tabStructured
         '
@@ -112,6 +120,10 @@ Partial Class formPaperArchive
         Me.tabStructured.Controls.Add(Me.grpInformation)
         resources.ApplyResources(Me.tabStructured, "tabStructured")
         Me.tabStructured.Name = "tabStructured"
+        Me.tabStructured.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabStructured.Size = New System.Drawing.Size(598, 455)
+        Me.tabStructured.TabIndex = 0
+        Me.tabStructured.Text = "Structured Filenames"
         Me.tabStructured.UseVisualStyleBackColor = True
         '
         'grpInformation
@@ -125,8 +137,10 @@ Partial Class formPaperArchive
         Me.grpInformation.Controls.Add(Me.lblImageFiles)
         Me.grpInformation.Controls.Add(Me.lblSelectedFolder)
         Me.grpInformation.Controls.Add(Me.txtSelectedFolder)
-        resources.ApplyResources(Me.grpInformation, "grpInformation")
+        Me.grpInformation.Location = New System.Drawing.Point(16, 6)
         Me.grpInformation.Name = "grpInformation"
+        Me.grpInformation.Size = New System.Drawing.Size(565, 440)
+        Me.grpInformation.TabIndex = 3
         Me.grpInformation.TabStop = False
         '
         'lblStnFormyyyymmddhh
@@ -150,8 +164,11 @@ Partial Class formPaperArchive
         'grpComands
         '
         Me.grpComands.Controls.Add(Me.cmdArchive)
-        resources.ApplyResources(Me.grpComands, "grpComands")
+        Me.grpComands.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.grpComands.Location = New System.Drawing.Point(3, 406)
         Me.grpComands.Name = "grpComands"
+        Me.grpComands.Size = New System.Drawing.Size(559, 31)
+        Me.grpComands.TabIndex = 18
         Me.grpComands.TabStop = False
         '
         'cmdArchive
@@ -203,6 +220,10 @@ Partial Class formPaperArchive
         Me.tabUnstructured.Controls.Add(Me.pnlUnstructuredNames)
         resources.ApplyResources(Me.tabUnstructured, "tabUnstructured")
         Me.tabUnstructured.Name = "tabUnstructured"
+        Me.tabUnstructured.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabUnstructured.Size = New System.Drawing.Size(598, 455)
+        Me.tabUnstructured.TabIndex = 1
+        Me.tabUnstructured.Text = "Unstructured Filenames"
         Me.tabUnstructured.UseVisualStyleBackColor = True
         '
         'pnlUnstructuredNames
@@ -225,8 +246,10 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.Controls.Add(Me.txtMonth)
         Me.pnlUnstructuredNames.Controls.Add(Me.txtStationArchive)
         Me.pnlUnstructuredNames.Controls.Add(Me.lblStationId)
-        resources.ApplyResources(Me.pnlUnstructuredNames, "pnlUnstructuredNames")
+        Me.pnlUnstructuredNames.Location = New System.Drawing.Point(12, 52)
         Me.pnlUnstructuredNames.Name = "pnlUnstructuredNames"
+        Me.pnlUnstructuredNames.Size = New System.Drawing.Size(564, 327)
+        Me.pnlUnstructuredNames.TabIndex = 0
         '
         'txtFormId
         '
@@ -241,7 +264,7 @@ Partial Class formPaperArchive
         '
         'cmdArchiveUnstructure
         '
-        resources.ApplyResources(Me.cmdArchiveUnstructure, "cmdArchiveUnstructure")
+        Me.cmdArchiveUnstructure.Location = New System.Drawing.Point(253, 282)
         Me.cmdArchiveUnstructure.Name = "cmdArchiveUnstructure"
         Me.cmdArchiveUnstructure.UseVisualStyleBackColor = True
         '
@@ -329,6 +352,10 @@ Partial Class formPaperArchive
         Me.TabViewArchive.Controls.Add(Me.grpImage)
         resources.ApplyResources(Me.TabViewArchive, "TabViewArchive")
         Me.TabViewArchive.Name = "TabViewArchive"
+        Me.TabViewArchive.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabViewArchive.Size = New System.Drawing.Size(598, 455)
+        Me.TabViewArchive.TabIndex = 2
+        Me.TabViewArchive.Text = "Archived Images"
         Me.TabViewArchive.UseVisualStyleBackColor = True
         '
         'grpImage
@@ -347,7 +374,7 @@ Partial Class formPaperArchive
         Me.grpImage.Controls.Add(Me.Label4)
         Me.grpImage.Controls.Add(Me.Label3)
         Me.grpImage.Controls.Add(Me.Label2)
-        resources.ApplyResources(Me.grpImage, "grpImage")
+        Me.grpImage.Location = New System.Drawing.Point(37, 57)
         Me.grpImage.Name = "grpImage"
         Me.grpImage.TabStop = False
         '
@@ -491,6 +518,9 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.HelpToolStripMenuItem})
         resources.ApplyResources(Me.MenuPaperArchive, "MenuPaperArchive")
         Me.MenuPaperArchive.Name = "MenuPaperArchive"
+        Me.MenuPaperArchive.Size = New System.Drawing.Size(926, 24)
+        Me.MenuPaperArchive.TabIndex = 3
+        Me.MenuPaperArchive.Text = "MenuStrip1"
         '
         'ExitToolStripMenuItem
         '
@@ -506,10 +536,72 @@ Partial Class formPaperArchive
         '
         Me.OpenFilePaperArchive.FileName = "OpenFilePaperArchive"
         '
+        'lblImagesAt
+        '
+        Me.lblImagesAt.AutoSize = True
+        Me.lblImagesAt.Location = New System.Drawing.Point(12, 511)
+        Me.lblImagesAt.Name = "lblImagesAt"
+        Me.lblImagesAt.Size = New System.Drawing.Size(101, 13)
+        Me.lblImagesAt.TabIndex = 24
+        Me.lblImagesAt.Text = "Images Archived at:"
+        '
+        'lblArhiveFolder
+        '
+        Me.lblArhiveFolder.AutoSize = True
+        Me.lblArhiveFolder.Location = New System.Drawing.Point(119, 511)
+        Me.lblArhiveFolder.Name = "lblArhiveFolder"
+        Me.lblArhiveFolder.Size = New System.Drawing.Size(0, 13)
+        Me.lblArhiveFolder.TabIndex = 25
+        '
+        'lstMessages
+        '
+        Me.lstMessages.FormattingEnabled = True
+        Me.lstMessages.HorizontalScrollbar = True
+        Me.lstMessages.Location = New System.Drawing.Point(617, 53)
+        Me.lstMessages.Name = "lstMessages"
+        Me.lstMessages.ScrollAlwaysVisible = True
+        Me.lstMessages.Size = New System.Drawing.Size(293, 446)
+        Me.lstMessages.TabIndex = 26
+        '
+        'lblMessages
+        '
+        Me.lblMessages.AutoSize = True
+        Me.lblMessages.Location = New System.Drawing.Point(736, 33)
+        Me.lblMessages.Name = "lblMessages"
+        Me.lblMessages.Size = New System.Drawing.Size(55, 13)
+        Me.lblMessages.TabIndex = 27
+        Me.lblMessages.Text = "Messages"
+        '
+        'txtDefaultFolder
+        '
+        Me.txtDefaultFolder.BackColor = System.Drawing.SystemColors.Control
+        Me.txtDefaultFolder.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDefaultFolder.Location = New System.Drawing.Point(617, 501)
+        Me.txtDefaultFolder.Multiline = True
+        Me.txtDefaultFolder.Name = "txtDefaultFolder"
+        Me.txtDefaultFolder.Size = New System.Drawing.Size(293, 23)
+        Me.txtDefaultFolder.TabIndex = 28
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(740, 476)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(39, 20)
+        Me.cmdClear.TabIndex = 29
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
         'formPaperArchive
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(926, 532)
+        Me.Controls.Add(Me.cmdClear)
+        Me.Controls.Add(Me.txtDefaultFolder)
+        Me.Controls.Add(Me.lblMessages)
+        Me.Controls.Add(Me.lstMessages)
+        Me.Controls.Add(Me.lblArhiveFolder)
+        Me.Controls.Add(Me.lblImagesAt)
         Me.Controls.Add(Me.tabImageArchives)
         Me.Controls.Add(Me.MenuPaperArchive)
         Me.MainMenuStrip = Me.MenuPaperArchive
@@ -595,4 +687,10 @@ Partial Class formPaperArchive
     Friend WithEvents cmdlast As System.Windows.Forms.Button
     Friend WithEvents cmdright As System.Windows.Forms.Button
     Friend WithEvents txtRec As System.Windows.Forms.TextBox
+    Friend WithEvents lblImagesAt As System.Windows.Forms.Label
+    Friend WithEvents lblArhiveFolder As System.Windows.Forms.Label
+    Friend WithEvents lstMessages As System.Windows.Forms.ListBox
+    Friend WithEvents lblMessages As System.Windows.Forms.Label
+    Friend WithEvents txtDefaultFolder As System.Windows.Forms.TextBox
+    Friend WithEvents cmdClear As System.Windows.Forms.Button
 End Class

@@ -87,4 +87,8 @@ Public Class frmProductsSelect
     Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.Click
 
     End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm")
+    End Sub
 End Class

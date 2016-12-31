@@ -16,6 +16,7 @@
 
 
 Public Class frmLogin
+    Public HTMLHelp As New clsHelp
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim line As String
 
@@ -78,40 +79,103 @@ Public Class frmLogin
             Me.Hide()
             ' End Using
             regDataInit()
+
+            languageTableInit()
+            climsoftuserRoles()
         Catch e As Exception
-            Msg("Login failure", e.Message)
+            'MsgBox("Login failure")
+            MsgBox(e.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
+    Sub climsoftuserRoles()
+        'Set SQL for populating user roles
+        rolesSQL = "SELECT * from climsoftusers"
+        daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
+        daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
+    End Sub
+    Sub languageTableInit()
+        'Set SQL string for populating "regData" dataset
+        languageTableSQL = "SELECT * from language_translation"     '
+        daLanguageTable = New MySql.Data.MySqlClient.MySqlDataAdapter(languageTableSQL, conn)
+        daLanguageTable.Fill(dsLanguageTable, "languageTranslation")
+    End Sub
+    
     Sub regDataInit()
         'Set SQL string for populating "regData" dataset
-        regSQL = "SELECT keyName,keyValue FROM regKeys"     '
+        regSQL = "SELECT keyName,keyValue FROM regkeys"     '
         daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
         daReg.Fill(dsReg, "regData")
     End Sub
 
     ' End Module
-    Function Server_db_port(svrdbstr As String) As String
+    Sub Server_db_port(svrdbstr As String)
         Dim Ssvr, Esvr, Sdb, Edb As Integer
-        Dim svrstr, dbstr As String
+        Dim Svr_db_port, svrstr, dbstr, portstr As String
         ' server=127.0.0.1;database=mysql_climsoft_db_v4;port=3306;
         Ssvr = 8
         Esvr = InStr(svrdbstr, ";database=")
         Sdb = Esvr + 10
         Edb = InStr(svrdbstr, ";port")
+        portstr = Mid(svrdbstr, Edb + 6, 4)
         svrstr = Mid(svrdbstr, Ssvr, Esvr - Ssvr)
         dbstr = Mid(svrdbstr, Sdb, Edb - Sdb)
-        Server_db_port = svrstr & "\\" & dbstr
+        Svr_db_port = svrstr & "\\" & dbstr
+        'MsgBox(svrstr & " " & dbstr & " " & portstr)
+        frmLaunchPad.txtServer.Text = svrstr
+        frmLaunchPad.txtDatabase.Text = dbstr
+        frmLaunchPad.txtPort.Text = portstr
+        frmLaunchPad.Show()
+        frmLaunchPad.lblConection.Text = svrdbstr & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";Convert Zero Datetime=True"
 
-    End Function
+    End Sub
     'Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     'End Sub
 
-    Private Sub LoginForm_BackgroundImageChanged(sender As Object, e As EventArgs) Handles Me.BackgroundImageChanged
-
-    End Sub
-
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        '-------Code for translation added 20160207,ASM
+        'Translate text for controls on login form.
+        'Other Translation after successful login will come from language translation table stored in database
+
+        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
+        msgStationInformationNotFound = "Station information not found. Please add station information and try again!"
+
+        Dim lanCulture As String
+        lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
+        If Strings.Left(lanCulture, 2) = "en" Then
+            ' MsgBox("Current language is: English-UK")
+            Me.Text = "Login"
+            lblUsername.Text = "User name:"
+            lblPassword.Text = "Password:"
+            lblDbdetails.Text = "Show and Configure Database Connection....."
+            OK.Text = "OK"
+            Cancel.Text = "Cancel"
+        ElseIf Strings.Left(lanCulture, 2) = "fr" Then
+            Me.Text = "s'identifier"
+            lblUsername.Text = "Nom d'utilisateur:"
+            lblPassword.Text = "Mot de passe:"
+            lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
+            OK.Text = "OK"
+            Cancel.Text = "Annuler"
+        ElseIf Strings.Left(lanCulture, 2) = "de" Then
+            Me.Text = "Anmeldung"
+            lblUsername.Text = "Benutzername:"
+            lblPassword.Text = "Passwort:"
+            lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
+            OK.Text = "OK"
+            Cancel.Text = "Stornieren"
+        ElseIf Strings.Left(lanCulture, 2) = "pt" Then
+            Me.Text = "Entrar"
+            lblUsername.Text = "Nome de usuário:"
+            lblPassword.Text = "Senha:"
+            lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
+            OK.Text = "OK"
+            Cancel.Text = "Cancelar"
+        End If
+        '------------------
+        ' If the user's machine is set to an alternative language then this alternative will be used if available
+        'autoTranslate(Me)
+
         Try
             sr = New IO.StreamReader("config.inf")
         Catch ex As Exception
@@ -128,16 +192,22 @@ Public Class frmLogin
         cmbDatabases.Items.Add(line)
 
         cmbDatabases.Text = cmbDatabases.Items.Item(0)
+        sr.Close()
+
     End Sub
 
 
     Private Sub lblDbdetails_Click(sender As Object, e As EventArgs) Handles lblDbdetails.Click
-        If lblDbdetails.Text = "Show Database Details........" Then
-            cmbDatabases.Visible = True
-            lblDbdetails.Text = "Hide Database Details........"
+        If lblDbdetails.Text = "Show and Configure Database Connection........" Then
+            'cmbDatabases.Visible = True
+            'sr.Close()
+            line = cmbDatabases.Text
+            Server_db_port(line)
+            'lblDbdetails.Text = "Hide Database Details........"
         Else
+            frmLaunchPad.Close()
             cmbDatabases.Visible = False
-            lblDbdetails.Text = "Show Database Details........"
+            lblDbdetails.Text = "Show and Configure Database Connection........"
         End If
     End Sub
 
@@ -150,7 +220,10 @@ Public Class frmLogin
 
     End Sub
 
-    Private Sub UsernameLabel_Click(sender As Object, e As EventArgs) Handles UsernameLabel.Click
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        'HTMLHelp.HelpPage = "login.htm"
+        'Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HTMLHelp.HelpPage)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "login.htm")
 
     End Sub
 End Class

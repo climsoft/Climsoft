@@ -40,6 +40,7 @@ Partial Class frmImportCSV
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 4
+        Me.btnOK.Tag = "btnOk"
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
@@ -49,6 +50,7 @@ Partial Class frmImportCSV
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Tag = "btnCancel"
         Me.btnCancel.Text = "Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -58,6 +60,7 @@ Partial Class frmImportCSV
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 6
+        Me.btnHelp.Tag = "btnHelp"
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -75,6 +78,7 @@ Partial Class frmImportCSV
         Me.lblDataFile.Name = "lblDataFile"
         Me.lblDataFile.Size = New System.Drawing.Size(49, 13)
         Me.lblDataFile.TabIndex = 8
+        Me.lblDataFile.Tag = "lblDataFile"
         Me.lblDataFile.Text = "Data File"
         '
         'txtSchemaFile
@@ -91,14 +95,16 @@ Partial Class frmImportCSV
         Me.lblSchemaFile.Name = "lblSchemaFile"
         Me.lblSchemaFile.Size = New System.Drawing.Size(65, 13)
         Me.lblSchemaFile.TabIndex = 10
+        Me.lblSchemaFile.Tag = "lblSchemaFile"
         Me.lblSchemaFile.Text = "Schema File"
         '
         'btnBrowseDataFile
         '
-        Me.btnBrowseDataFile.Location = New System.Drawing.Point(502, 53)
+        Me.btnBrowseDataFile.Location = New System.Drawing.Point(502, 50)
         Me.btnBrowseDataFile.Name = "btnBrowseDataFile"
         Me.btnBrowseDataFile.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseDataFile.TabIndex = 11
+        Me.btnBrowseDataFile.Tag = "btnBrowse"
         Me.btnBrowseDataFile.Text = "Browse"
         Me.btnBrowseDataFile.UseVisualStyleBackColor = True
         '
@@ -108,6 +114,7 @@ Partial Class frmImportCSV
         Me.btnBrowseSchemaFile.Name = "btnBrowseSchemaFile"
         Me.btnBrowseSchemaFile.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseSchemaFile.TabIndex = 12
+        Me.btnBrowseSchemaFile.Tag = "btnBrowse"
         Me.btnBrowseSchemaFile.Text = "Browse"
         Me.btnBrowseSchemaFile.UseVisualStyleBackColor = True
         '
@@ -128,6 +135,7 @@ Partial Class frmImportCSV
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmImportCSV"
+        Me.Tag = "titleFormImportCSV"
         Me.Text = "Import from CSV"
         Me.ResumeLayout(False)
         Me.PerformLayout()

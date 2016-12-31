@@ -34,16 +34,6 @@ Partial Class frmProducts
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblProducts = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.CopyToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.PasteToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
@@ -52,7 +42,6 @@ Partial Class frmProducts
         Me.lblProductsCategory = New System.Windows.Forms.Label()
         Me.lstvProducts = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -72,17 +61,23 @@ Partial Class frmProducts
         'OpenListToolStripMenuItem
         '
         Me.OpenListToolStripMenuItem.Name = "OpenListToolStripMenuItem"
-        resources.ApplyResources(Me.OpenListToolStripMenuItem, "OpenListToolStripMenuItem")
+        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem.Text = "Save Specifications"
+        Me.OpenListToolStripMenuItem.Visible = False
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Text = "Open Specifications"
+        Me.ToolStripMenuItem2.Visible = False
         '
         'OpenListToolStripMenuItem1
         '
         Me.OpenListToolStripMenuItem1.Name = "OpenListToolStripMenuItem1"
-        resources.ApplyResources(Me.OpenListToolStripMenuItem1, "OpenListToolStripMenuItem1")
+        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem1.Text = "Add New Product"
+        Me.OpenListToolStripMenuItem1.Visible = False
         '
         'ToolStripMenuItem1
         '
@@ -97,7 +92,9 @@ Partial Class frmProducts
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        resources.ApplyResources(Me.EditToolStripMenuItem, "EditToolStripMenuItem")
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.EditToolStripMenuItem.Visible = False
         '
         'HelpToolStripMenuItem
         '
@@ -111,67 +108,8 @@ Partial Class frmProducts
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.HelpToolStripButton})
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
-        '
-        'NewToolStripButton
-        '
-        Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.NewToolStripButton, "NewToolStripButton")
-        Me.NewToolStripButton.Name = "NewToolStripButton"
-        '
-        'OpenToolStripButton
-        '
-        Me.OpenToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.OpenToolStripButton, "OpenToolStripButton")
-        Me.OpenToolStripButton.Name = "OpenToolStripButton"
-        '
-        'SaveToolStripButton
-        '
-        Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.SaveToolStripButton, "SaveToolStripButton")
-        Me.SaveToolStripButton.Name = "SaveToolStripButton"
-        '
-        'PrintToolStripButton
-        '
-        Me.PrintToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.PrintToolStripButton, "PrintToolStripButton")
-        Me.PrintToolStripButton.Name = "PrintToolStripButton"
-        '
-        'toolStripSeparator
-        '
-        Me.toolStripSeparator.Name = "toolStripSeparator"
-        resources.ApplyResources(Me.toolStripSeparator, "toolStripSeparator")
-        '
-        'CutToolStripButton
-        '
-        Me.CutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.CutToolStripButton, "CutToolStripButton")
-        Me.CutToolStripButton.Name = "CutToolStripButton"
-        '
-        'CopyToolStripButton
-        '
-        Me.CopyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.CopyToolStripButton, "CopyToolStripButton")
-        Me.CopyToolStripButton.Name = "CopyToolStripButton"
-        '
-        'PasteToolStripButton
-        '
-        Me.PasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.PasteToolStripButton, "PasteToolStripButton")
-        Me.PasteToolStripButton.Name = "PasteToolStripButton"
-        '
-        'toolStripSeparator1
-        '
-        Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        resources.ApplyResources(Me.toolStripSeparator1, "toolStripSeparator1")
-        '
-        'HelpToolStripButton
-        '
-        Me.HelpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.HelpToolStripButton, "HelpToolStripButton")
-        Me.HelpToolStripButton.Name = "HelpToolStripButton"
         '
         'ToolStrip2
         '
@@ -236,8 +174,6 @@ Partial Class frmProducts
         Me.Name = "frmProducts"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -257,16 +193,6 @@ Partial Class frmProducts
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents lblProducts As System.Windows.Forms.Label
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents NewToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents OpenToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents SaveToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents PrintToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents toolStripSeparator As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents CutToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents CopyToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents PasteToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents HelpToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton

@@ -50,6 +50,19 @@ Public Class formHourly
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
         'which is a parameter of the "Row" attribute or property of the dataset.
 
+        '----------------
+        'Refill dataset before getting maxRows
+        ds.Clear()
+        sql = "SELECT * FROM form_hourly"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.Fill(ds, "form_hourly")
+
+        maxRows = ds.Tables("form_hourly").Rows.Count
+        ''''' inc = maxRows - 1
+        '----------------
+
+        '''' MsgBox("Record number: " & inc)
+
         Dim stn As String, elem As String
         'cboStation.Text = ds.Tables("form_hourly").Rows(inc).Item("stationId")
         stn = ds.Tables("form_hourly").Rows(inc).Item("stationId")
@@ -70,7 +83,12 @@ Public Class formHourly
         For m = 5 To 28
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_hourly").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_hourly").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_hourly").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_hourly").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -80,7 +98,12 @@ Public Class formHourly
         For m = 29 To 52
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_hourly").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_hourly").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_hourly").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_hourly").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -222,6 +245,12 @@ Public Class formHourly
         'Set TAB next to true
         tabNext = True
         selectAllHours = False
+
+        'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
         'Set the record index counter to the first row
         inc = 0
 
@@ -258,20 +287,24 @@ Public Class formHourly
         Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
 
 
-        sql1 = "SELECT stationId,stationName FROM station"
+        sql1 = "SELECT stationId,stationName FROM station ORDER by stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obsElement WHERE elementId BETWEEN 101 and 199"
+        sql3 = "SELECT elementID,elementName FROM obselement ORDER by elementName;"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
-        'Populate station combobox
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
+        If ds1.Tables("station").Rows.Count > 0 Then
+            'Populate station combobox
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
 
         da3.Fill(ds3, "obsElem")
         'Populate station combobox
@@ -282,7 +315,7 @@ Public Class formHourly
             .SelectedIndex = 0
         End With
 
-       
+
         'Populate dataForms
         sql2 = "SELECT val_start_position,val_end_position FROM data_forms WHERE table_name='form_hourly'"
         da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
@@ -327,7 +360,6 @@ Public Class formHourly
                     End If
                 Next ctl
             Next m
-
 
             displayRecordNumber()
         Else
@@ -421,70 +453,115 @@ Public Class formHourly
             txtSequencer.Text = "seq_month_day_element"
         End If
 
-        stn = cboStation.SelectedValue
+        txtSameValue.Text = ""
+
+        'stn = cboStation.SelectedValue
         'Assign station identifier to that of current record
-        cboStation.SelectedValue = stn
-        If cboMonth.Text = 12 And cboDay.Text = 31 Then
-            txtYear.Text = Val(txtYear.Text) + 1
-        Else
-            txtYear.Text = txtYear.Text
-        End If
+        'cboStation.SelectedValue = stn
 
-        Sql = "SELECT * FROM " & txtSequencer.Text
-        daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-        'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-        'of records in the recordest table whenever the AddNew button is clicked
-        dsSequencer.Clear()
-        daSequencer.Fill(dsSequencer, "sequencer")
+        ' ''If cboMonth.Text = 12 And cboDay.Text = 31 Then
+        ' ''    txtYear.Text = Val(txtYear.Text) + 1
+        ' ''Else
+        ' ''    txtYear.Text = txtYear.Text
+        ' ''End If
 
-        seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+        '----------------Code block added 20160419. ASM
+        Try
+            Dim dsLastDataRecord As New DataSet
+            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecDay As String, lastRecElement As String
 
-        j = cboElement.SelectedValue
+            SQL_last_record = "SELECT stationId,elementId,yyyy,mm,dd,signature,entryDatetime from form_hourly WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
+            dsLastDataRecord.Clear()
+            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
-        For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = j Then
-                If (k + 1) <= seqRecCount Then
-                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
-                    cboMonth.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
-                    cboDay.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
-                Else
-                    cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
-                    cboMonth.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
-                    cboDay.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
-                End If
+            'Initialize header fields required for sequencer
+            stn = cboStation.SelectedValue
+            cboStation.SelectedValue = stn
+            lastRecElement = cboElement.SelectedValue
+            lastRecDay = cboDay.Text
+            lastRecMonth = cboMonth.Text
+            lastRecYear = txtYear.Text
+
+            If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+                cboStation.SelectedValue = stn
+                lastRecDay = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("dd")
+                lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
+                lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+                lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
             End If
-        Next k
+            '-----------------------------------
 
-        Dim m As Integer
-        Dim ctl As Control
-        'Clear textboxes for observation values
-        'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
-        For m = 5 To 28
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ctl.Text = ""
+            Sql = "SELECT * FROM " & txtSequencer.Text
+            daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
+            'of records in the recordest table whenever the AddNew button is clicked
+            dsSequencer.Clear()
+            daSequencer.Fill(dsSequencer, "sequencer")
+
+            seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+
+            'j = cboElement.SelectedValue
+
+            'MsgBox("Last rec: stn=" & stn & ",elem=" & lastRecElement & ",yyyy=" & lastRecYear & ",mm=" & lastRecMonth & ",dd=" & lastRecDay)
+
+            For k = 0 To seqRecCount - 1
+                'If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = j Then! Previous code which was searching only for row containing
+                'current elementId. The resolution is to search for row containing current elementId, current day and current month
+                If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = lastRecElement _
+                    And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecDay _
+                    And dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth Then
+                    'If (k + 1) <= seqRecCount ! Then.....Old condition causing error. 
+                    'Resolution is for (k+1) to have maximum value of seqRecCount-2 i.e. one row less than the maximum row index which is seqRecCount-1
+                    If (k + 1) <= seqRecCount - 1 Then
+                        cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
+                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
+                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
+                        txtYear.Text = Val(lastRecYear)
+                    Else
+                        cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
+                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
+                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
+                        txtYear.Text = Val(lastRecYear) + 1
+                    End If
                 End If
-            Next ctl
-        Next m
+            Next k
 
-        'Clear textboxes for observation flags
-        'Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
-        For m = 29 To 52
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ctl.Text = ""
-                End If
-            Next ctl
-        Next m
+            Dim m As Integer
+            Dim ctl As Control
+            'Clear textboxes for observation values
+            'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
+            For m = 5 To 28
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+            Next m
 
-        'Set record index to last record
-        inc = maxRows
+            'Clear textboxes for observation flags
+            'Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
+            For m = 29 To 52
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+            Next m
 
-        'Display record position in record navigation Text Box
-        recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
+            'Set record index to last record
+            inc = maxRows
 
-        'Set focus to texbox for station level pressure
-        txtVal_00Field005.Focus()
+            'Display record position in record navigation Text Box
+            recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
+
+            'Set focus to texbox for station level pressure
+            txtVal_00Field005.Focus()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
         '----------------------------------------
     End Sub
 
@@ -496,6 +573,7 @@ Public Class formHourly
             If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
         Next ctl
 
+       
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
         If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
@@ -555,11 +633,39 @@ Public Class formHourly
             Next ctl
 
             'Check future date
-            
+
             If Not objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay) Then
                 cboDay.Focus()
             End If
+            '=======================
+            ''Get the element limits
 
+            elemCode = cboElement.SelectedValue
+            sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
+            '
+            daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+            'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+            dsValueLimits.Clear()
+            'Add row for element code associated with active control
+            daValueLimits.Fill(dsValueLimits, "obselement")
+
+            obsValue = Me.ActiveControl.Text
+            'Get element lower limit
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+            Else
+                valLowerLimit = ""
+            End If
+            'Get element upper limit
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+            Else
+                valUpperLimit = ""
+            End If
+
+            'Get value for qcTotalRequired
+            totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            '=======================
             'Check upper limit
             For Each ctl In Me.Controls
                 obsValue = ctl.Text
@@ -606,32 +712,74 @@ Public Class formHourly
 
             'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
             'must be declared for the Update method to work.
-            Dim m As Integer
+            Dim m As Integer, i As Integer
             'Dim ctl As Control
-            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-            Dim dsNewRow As DataRow
+            ''Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            ''Dim dsNewRow As DataRow
+
+            myConnectionString = frmLogin.txtusrpwd.Text
+
+            conn.ConnectionString = myConnectionString
+            conn.Open()
+
+            Dim strSQL As String, stnId As String, elemId As String, obsYear As String, obsMonth As String, obsDay As String, _
+                obsVal(24) As String, obsFlag(24) As String, strSignature As String, strTimeStamp As String, entryYear As String, _
+                entryMonth As String, entryDay As String, entryHour As String, entryMinute As String, entrySecond As String
+            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
             'Try
-            dsNewRow = ds.Tables("form_hourly").NewRow
-            'Add a new record to the data source table
-            ds.Tables("form_hourly").Rows.Add(dsNewRow)
-            'Commit observation header information to database
-            ds.Tables("form_hourly").Rows(inc).Item("stationId") = cboStation.SelectedValue
-            ds.Tables("form_hourly").Rows(inc).Item("elementId") = cboElement.SelectedValue
-            ds.Tables("form_hourly").Rows(inc).Item("yyyy") = txtYear.Text
-            ds.Tables("form_hourly").Rows(inc).Item("mm") = cboMonth.Text
-            ds.Tables("form_hourly").Rows(inc).Item("dd") = cboDay.Text
+            ''dsNewRow = ds.Tables("form_hourly").NewRow
+            ' ''Add a new record to the data source table
+            ''ds.Tables("form_hourly").Rows.Add(dsNewRow)
+            ' ''Commit observation header information to database
+            ''ds.Tables("form_hourly").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ''ds.Tables("form_hourly").Rows(inc).Item("elementId") = cboElement.SelectedValue
+            ''ds.Tables("form_hourly").Rows(inc).Item("yyyy") = txtYear.Text
+            ''ds.Tables("form_hourly").Rows(inc).Item("mm") = cboMonth.Text
+            ''ds.Tables("form_hourly").Rows(inc).Item("dd") = cboDay.Text
 
-            ' txtSignature.Text = frmLogin.txtUser.Text
-            ds.Tables("form_hourly").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+            stnId = cboStation.SelectedValue
+            elemId = cboElement.SelectedValue
+            obsYear = txtYear.Text
+            obsMonth = cboMonth.Text
+            obsDay = cboDay.Text
+            strSignature = frmLogin.txtUsername.Text
+            entryYear = Year(Now())
+            entryMonth = Month(Now())
+            If Val(entryMonth) < 10 Then entryMonth = "0" & entryMonth
+            entryDay = DateAndTime.Day(Now())
+            If Val(entryDay) < 10 Then entryDay = "0" & entryDay
+            entryHour = Hour(Now())
+            If Val(entryHour) < 10 Then entryHour = "0" & entryHour
+            entryMinute = Minute(Now())
+            If Val(entryMinute) < 10 Then entryMinute = "0" & entryMinute
+            entrySecond = Second(Now())
+            If Val(entrySecond) < 10 Then entrySecond = "0" & entrySecond
+
+            strTimeStamp = entryYear & "-" & entryMonth & "-" & entryDay & " " & entryHour & ":" & entryMinute & ":" & entrySecond
+
+            'MsgBox(strTimeStamp)
+
+            ' '' txtSignature.Text = frmLogin.txtUser.Text
+            ''ds.Tables("form_hourly").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+
+            ' ''Added field for timestamp to allow recording when data was entered. 20160419, ASM.
+            ''ds.Tables("form_hourly").Rows(inc).Item("entryDatetime") = Now()
 
             'Commit observation values to database
             'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
             For m = 5 To 28
+                i = m - 5
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_hourly").Rows(inc).Item(m) = ctl.Text
+                        'ds.Tables("form_hourly").Rows(inc).Item(m) = ctl.Text
+                        If Strings.Len(ctl.Text) > 0 Then
+                            obsVal(i) = ctl.Text
+                        Else
+                            obsVal(i) = ""
+                        End If
                     End If
                 Next ctl
             Next m
@@ -639,17 +787,69 @@ Public Class formHourly
             'Commit observation flags to database
             'Observation values range from column 30 i.e. column index 29 to column 53 i.e. column index 52
             For m = 29 To 52
+                i = m - 29
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_hourly").Rows(inc).Item(m) = ctl.Text
+                        'ds.Tables("form_hourly").Rows(inc).Item(m) = ctl.Text
+                        If Strings.Len(ctl.Text) > 0 Then
+                            obsFlag(i) = ctl.Text
+                        Else
+                            obsFlag(i) = ""
+                        End If
                     End If
                 Next ctl
             Next m
+            '================================
+            'Generate SQL string for inserting data into observationinitial table
+            '' If Strings.Len(obsVal) > 0 Then
+            strSQL = "INSERT INTO form_hourly (stationId,elementId,yyyy,mm,dd,hh_00,hh_01,hh_02,hh_03,hh_04,hh_05,hh_06,hh_07,hh_08," & _
+                "hh_09,hh_10,hh_11,hh_12,hh_13,hh_14,hh_15,hh_16,hh_17,hh_18,hh_19,hh_20,hh_21,hh_22,hh_23," & _
+                "flag00,flag01,flag02,flag03,flag04,flag05,flag06,flag07,flag08,flag09,flag10,flag11,flag12," & _
+                "flag13,flag14,flag15,flag16,flag17,flag18,flag19,flag20,flag21,flag22,flag23,signature,entryDatetime) " & _
+                "VALUES ('" & stnId & "','" & elemId & "','" & obsYear & "','" & obsMonth & "','" & obsDay & "','" & obsVal(0) & _
+                "','" & obsVal(1) & "','" & obsVal(2) & "','" & obsVal(3) & "','" & obsVal(4) & "','" & obsVal(5) & "','" & obsVal(6) & _
+                "','" & obsVal(7) & "','" & obsVal(8) & "','" & obsVal(9) & "','" & obsVal(10) & "','" & obsVal(11) & _
+                "','" & obsVal(12) & "','" & obsVal(13) & "','" & obsVal(14) & "','" & obsVal(15) & "','" & obsVal(16) & _
+                "','" & obsVal(17) & "','" & obsVal(18) & "','" & obsVal(19) & "','" & obsVal(20) & "','" & obsVal(21) & _
+                "','" & obsVal(22) & "','" & obsVal(23) & "','" & obsFlag(0) & "','" & obsFlag(1) & "','" & obsFlag(2) & _
+                "','" & obsFlag(3) & "','" & obsFlag(4) & "','" & obsFlag(5) & "','" & obsFlag(6) & "','" & obsFlag(7) & _
+                "','" & obsFlag(8) & "','" & obsFlag(9) & "','" & obsFlag(10) & "','" & obsFlag(11) & "','" & obsFlag(12) & _
+                "','" & obsFlag(13) & "','" & obsFlag(14) & "','" & obsFlag(15) & "','" & obsFlag(16) & "','" & obsFlag(17) & _
+                "','" & obsFlag(18) & "','" & obsFlag(19) & "','" & obsFlag(20) & "','" & obsFlag(21) & "','" & obsFlag(22) & _
+                "','" & obsFlag(23) & "','" & strSignature & "','" & strTimeStamp & "')"
 
-            da.Update(ds, "form_hourly")
+            ' MsgBox(strSQL)
 
-            'Display message for successful record commit to table
-            recCommit.messageBoxCommit()
+            ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+            ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+            ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+            ' Create the Command for executing query and set its properties
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+            Try
+                'Execute query
+                objCmd.ExecuteNonQuery()
+
+                'Display message for successful record commit to table
+                recCommit.messageBoxCommit()
+
+                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Ignore expected error i.e. error of Duplicates in MySqlException
+            Catch ex As Exception
+                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                MsgBox(ex.Message)
+                conn.Close()
+                Exit Sub
+            End Try
+            ''End If
+
+
+            '================================
+            ''da.Update(ds, "form_hourly")
+
+
+            ' MsgBox(userGroup)
 
             btnAddNew.Enabled = True
             btnClear.Enabled = False
@@ -660,18 +860,160 @@ Public Class formHourly
             btnMoveLast.Enabled = True
             btnMoveNext.Enabled = True
             btnMovePrevious.Enabled = True
+
+            'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+            If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                btnDelete.Enabled = False
+            End If
+
             maxRows = ds.Tables("form_hourly").Rows.Count
             inc = maxRows - 1
 
             'Call subroutine for record navigation
             navigateRecords()
-            ''Catch ex As Exception
-            ''    MessageBox.Show(ex.Message)
-            ''End Try
+            'Catch ex As Exception
+            '    MessageBox.Show(ex.Message)
+            'End Try
+
+        ElseIf n = 0 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
+            'Confirm if you want to add blank record to database table
+            Dim msgTxtAddBlankRecord As String
+            msgTxtAddBlankRecord = "Are you sure you want to add blank record to database table?"
+            If MsgBox(msgTxtAddBlankRecord, MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then Exit Sub
+
+            'Dim m As Integer, i As Integer
+            'Dim ctl As Control
+            ''Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            ''Dim dsNewRow As DataRow
+
+            myConnectionString = frmLogin.txtusrpwd.Text
+
+            conn.ConnectionString = myConnectionString
+            conn.Open()
+
+            Dim strSQL As String, stnId As String, elemId As String, obsYear As String, obsMonth As String, obsDay As String, _
+                strSignature As String, strTimeStamp As String, entryYear As String, _
+                entryMonth As String, entryDay As String, entryHour As String, entryMinute As String, entrySecond As String
+            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+
+            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+            Dim recCommit As New dataEntryGlobalRoutines
+            'Try
+            ''dsNewRow = ds.Tables("form_hourly").NewRow
+            ' ''Add a new record to the data source table
+            ''ds.Tables("form_hourly").Rows.Add(dsNewRow)
+            ' ''Commit observation header information to database
+            ''ds.Tables("form_hourly").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ''ds.Tables("form_hourly").Rows(inc).Item("elementId") = cboElement.SelectedValue
+            ''ds.Tables("form_hourly").Rows(inc).Item("yyyy") = txtYear.Text
+            ''ds.Tables("form_hourly").Rows(inc).Item("mm") = cboMonth.Text
+            ''ds.Tables("form_hourly").Rows(inc).Item("dd") = cboDay.Text
+
+            stnId = cboStation.SelectedValue
+            elemId = cboElement.SelectedValue
+            obsYear = txtYear.Text
+            obsMonth = cboMonth.Text
+            obsDay = cboDay.Text
+            strSignature = frmLogin.txtUsername.Text
+            entryYear = Year(Now())
+            entryMonth = Month(Now())
+            If Val(entryMonth) < 10 Then entryMonth = "0" & entryMonth
+            entryDay = DateAndTime.Day(Now())
+            If Val(entryDay) < 10 Then entryDay = "0" & entryDay
+            entryHour = Hour(Now())
+            If Val(entryHour) < 10 Then entryHour = "0" & entryHour
+            entryMinute = Minute(Now())
+            If Val(entryMinute) < 10 Then entryMinute = "0" & entryMinute
+            entrySecond = Second(Now())
+            If Val(entrySecond) < 10 Then entrySecond = "0" & entrySecond
+
+            strTimeStamp = entryYear & "-" & entryMonth & "-" & entryDay & " " & entryHour & ":" & entryMinute & ":" & entrySecond
+
+            'MsgBox(strTimeStamp)
+
+            'Generate SQL string for inserting data into observationinitial table
+            '' If Strings.Len(obsVal) > 0 Then
+            strSQL = "INSERT INTO form_hourly (stationId,elementId,yyyy,mm,dd,signature,entryDatetime) " & _
+                "VALUES ('" & stnId & "','" & elemId & "','" & obsYear & "','" & obsMonth & "','" & obsDay & "','"  & strSignature & "','" & strTimeStamp & "')"
+
+            'MsgBox(strSQL)
+
+            ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+            ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+            ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+            ' Create the Command for executing query and set its properties
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+            Try
+                'Execute query
+                objCmd.ExecuteNonQuery()
+
+                'Display message for successful record commit to table
+                recCommit.messageBoxCommit()
+
+                'Catch ex As MySql.Data.MySqlClient.MySqlException
+                'Ignore expected error i.e. error of Duplicates in MySqlException
+            Catch ex As Exception
+                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                MsgBox(ex.Message)
+                conn.Close()
+                Exit Sub
+            End Try
+
+            '' Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            '' Dim dsNewRow As DataRow
+            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+            ''Dim recCommit As New dataEntryGlobalRoutines
+            Try
+                ''dsNewRow = ds.Tables("form_hourly").NewRow
+                ' ''Add a new record to the data source table
+                ''ds.Tables("form_hourly").Rows.Add(dsNewRow)
+                ' ''Commit observation header information to database
+                ''ds.Tables("form_hourly").Rows(inc).Item("stationId") = cboStation.SelectedValue
+                ''ds.Tables("form_hourly").Rows(inc).Item("elementId") = cboElement.SelectedValue
+                ''ds.Tables("form_hourly").Rows(inc).Item("yyyy") = txtYear.Text
+                ''ds.Tables("form_hourly").Rows(inc).Item("mm") = cboMonth.Text
+                ''ds.Tables("form_hourly").Rows(inc).Item("dd") = cboDay.Text
+
+                ' '' txtSignature.Text = frmLogin.txtUser.Text
+                ''ds.Tables("form_hourly").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+                ''da.Update(ds, "form_hourly")
+
+                'Display message for successful record commit to table
+                recCommit.messageBoxCommit()
+
+                btnAddNew.Enabled = True
+                btnClear.Enabled = False
+                btnCommit.Enabled = False
+                btnDelete.Enabled = True
+                btnUpdate.Enabled = True
+                btnMoveFirst.Enabled = True
+                btnMoveLast.Enabled = True
+                btnMoveNext.Enabled = True
+                btnMovePrevious.Enabled = True
+
+                'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                    btnDelete.Enabled = False
+                End If
+
+                maxRows = ds.Tables("form_hourly").Rows.Count
+                inc = maxRows - 1
+
+                'Call subroutine for record navigation
+                navigateRecords()
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+                conn.Close()
+                Exit Sub
+            End Try
         Else
-            msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
+
+            msgTxtInsufficientData = "Incomplete header information!"
             MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
         End If
+        conn.Close()
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
@@ -939,6 +1281,20 @@ Public Class formHourly
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
     End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        dsSourceTableName = "form_hourly"
+        userName = frmLogin.txtUsername.Text
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_hourly ORDER by stationId,elementId,yyyy,mm,dd;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
 End Class

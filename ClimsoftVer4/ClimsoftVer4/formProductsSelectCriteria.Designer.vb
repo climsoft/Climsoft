@@ -33,6 +33,11 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
+        Me.pnlExtremes = New System.Windows.Forms.Panel()
+        Me.btnMinDate = New System.Windows.Forms.RadioButton()
+        Me.btnMaxDate = New System.Windows.Forms.RadioButton()
+        Me.btnLowHigh = New System.Windows.Forms.RadioButton()
+        Me.lblXtyp = New System.Windows.Forms.Label()
         Me.pnlSummary = New System.Windows.Forms.Panel()
         Me.optTotal = New System.Windows.Forms.RadioButton()
         Me.optMean = New System.Windows.Forms.RadioButton()
@@ -80,14 +85,16 @@ Partial Class formProductsSelectCriteria
         Me.cmbstation = New System.Windows.Forms.ComboBox()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.cmdExtract = New System.Windows.Forms.ToolStripButton()
         Me.prgrbProducts = New System.Windows.Forms.ToolStripProgressBar()
+        Me.cmdCancel = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
+        Me.pnlExtremes.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
         Me.pnlPeriod.SuspendLayout()
         Me.pnlStation.SuspendLayout()
@@ -156,6 +163,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlStationsElements.Controls.Add(Me.pnlExtremes)
         Me.pnlStationsElements.Controls.Add(Me.pnlSummary)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelStation)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelElement)
@@ -176,6 +184,62 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
         Me.pnlStationsElements.TabIndex = 4
+        '
+        'pnlExtremes
+        '
+        Me.pnlExtremes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlExtremes.Controls.Add(Me.btnMinDate)
+        Me.pnlExtremes.Controls.Add(Me.btnMaxDate)
+        Me.pnlExtremes.Controls.Add(Me.btnLowHigh)
+        Me.pnlExtremes.Controls.Add(Me.lblXtyp)
+        Me.pnlExtremes.Location = New System.Drawing.Point(547, 6)
+        Me.pnlExtremes.Name = "pnlExtremes"
+        Me.pnlExtremes.Size = New System.Drawing.Size(323, 48)
+        Me.pnlExtremes.TabIndex = 24
+        Me.pnlExtremes.Visible = False
+        '
+        'btnMinDate
+        '
+        Me.btnMinDate.AutoSize = True
+        Me.btnMinDate.Location = New System.Drawing.Point(222, 26)
+        Me.btnMinDate.Name = "btnMinDate"
+        Me.btnMinDate.Size = New System.Drawing.Size(104, 17)
+        Me.btnMinDate.TabIndex = 3
+        Me.btnMinDate.Text = "Lowest and date"
+        Me.btnMinDate.UseVisualStyleBackColor = True
+        '
+        'btnMaxDate
+        '
+        Me.btnMaxDate.AutoSize = True
+        Me.btnMaxDate.Location = New System.Drawing.Point(116, 26)
+        Me.btnMaxDate.Name = "btnMaxDate"
+        Me.btnMaxDate.Size = New System.Drawing.Size(100, 17)
+        Me.btnMaxDate.TabIndex = 2
+        Me.btnMaxDate.Text = "Higest and date"
+        Me.btnMaxDate.UseVisualStyleBackColor = True
+        '
+        'btnLowHigh
+        '
+        Me.btnLowHigh.AutoSize = True
+        Me.btnLowHigh.Checked = True
+        Me.btnLowHigh.Location = New System.Drawing.Point(3, 26)
+        Me.btnLowHigh.Name = "btnLowHigh"
+        Me.btnLowHigh.Size = New System.Drawing.Size(113, 17)
+        Me.btnLowHigh.TabIndex = 1
+        Me.btnLowHigh.TabStop = True
+        Me.btnLowHigh.Text = "Higest and Lowest"
+        Me.btnLowHigh.UseVisualStyleBackColor = True
+        '
+        'lblXtyp
+        '
+        Me.lblXtyp.AutoSize = True
+        Me.lblXtyp.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblXtyp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblXtyp.Location = New System.Drawing.Point(0, 0)
+        Me.lblXtyp.Name = "lblXtyp"
+        Me.lblXtyp.Size = New System.Drawing.Size(84, 13)
+        Me.lblXtyp.TabIndex = 0
+        Me.lblXtyp.Text = "Extreme Type"
         '
         'pnlSummary
         '
@@ -644,8 +708,8 @@ Partial Class formProductsSelectCriteria
         'ToolStrip2
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.ToolStripButton1, Me.prgrbProducts})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 450)
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.cmdExtract, Me.prgrbProducts, Me.cmdCancel})
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 458)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Size = New System.Drawing.Size(893, 25)
         Me.ToolStrip2.TabIndex = 9
@@ -656,21 +720,30 @@ Partial Class formProductsSelectCriteria
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
         '
-        'ToolStripButton1
+        'cmdExtract
         '
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(99, 22)
-        Me.ToolStripButton1.Text = "Start Extraction"
+        Me.cmdExtract.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.cmdExtract.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdExtract.Image = CType(resources.GetObject("cmdExtract.Image"), System.Drawing.Image)
+        Me.cmdExtract.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.cmdExtract.Name = "cmdExtract"
+        Me.cmdExtract.Size = New System.Drawing.Size(99, 22)
+        Me.cmdExtract.Text = "Start Extraction"
         '
         'prgrbProducts
         '
         Me.prgrbProducts.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.prgrbProducts.Name = "prgrbProducts"
         Me.prgrbProducts.Size = New System.Drawing.Size(100, 22)
+        '
+        'cmdCancel
+        '
+        Me.cmdCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.cmdCancel.Image = CType(resources.GetObject("cmdCancel.Image"), System.Drawing.Image)
+        Me.cmdCancel.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.cmdCancel.Name = "cmdCancel"
+        Me.cmdCancel.Size = New System.Drawing.Size(47, 22)
+        Me.cmdCancel.Text = "Cancel"
         '
         'toolStripSeparator
         '
@@ -704,7 +777,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(893, 475)
+        Me.ClientSize = New System.Drawing.Size(893, 483)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
@@ -716,6 +789,8 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.PerformLayout()
         Me.pnlStationsElements.ResumeLayout(False)
         Me.pnlStationsElements.PerformLayout()
+        Me.pnlExtremes.ResumeLayout(False)
+        Me.pnlExtremes.PerformLayout()
         Me.pnlSummary.ResumeLayout(False)
         Me.pnlSummary.PerformLayout()
         Me.pnlPeriod.ResumeLayout(False)
@@ -770,7 +845,7 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents lblStation As System.Windows.Forms.Label
     Friend WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents cmdExtract As System.Windows.Forms.ToolStripButton
     Friend WithEvents prgrbProducts As System.Windows.Forms.ToolStripProgressBar
     Public WithEvents lstvStations As System.Windows.Forms.ListView
     Public WithEvents lstvElements As System.Windows.Forms.ListView
@@ -793,4 +868,10 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents optTotal As System.Windows.Forms.RadioButton
     Friend WithEvents optMean As System.Windows.Forms.RadioButton
     Friend WithEvents lblSummary As System.Windows.Forms.Label
+    Friend WithEvents cmdCancel As System.Windows.Forms.ToolStripButton
+    Friend WithEvents pnlExtremes As System.Windows.Forms.Panel
+    Friend WithEvents btnMinDate As System.Windows.Forms.RadioButton
+    Friend WithEvents btnMaxDate As System.Windows.Forms.RadioButton
+    Friend WithEvents btnLowHigh As System.Windows.Forms.RadioButton
+    Friend WithEvents lblXtyp As System.Windows.Forms.Label
 End Class
