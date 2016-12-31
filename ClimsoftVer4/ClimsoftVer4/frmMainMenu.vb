@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports ClimsoftVer4.Translations
 
 
 Public Class frmMainMenu
@@ -170,12 +171,8 @@ Public Class frmMainMenu
     End Sub
 
     ' Products menu items
-    Private Sub StandardProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StandardProductsToolStripMenuItem.Click
+    Private Sub ProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProducts.Click
         frmProducts.ShowDialog()
-    End Sub
-
-    Private Sub RProductsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RProductsToolStripMenuItem.Click
-        frmDataSelector.ShowDialog()
     End Sub
 
     ' Administration Menu items
@@ -193,6 +190,7 @@ Public Class frmMainMenu
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
         frmLanguage.ShowDialog()
         ' When dialog is closed - update language in this window (will any other windows also be open?)
+        autoTranslate(Me)
     End Sub
 
     ' Help Menu Items
@@ -272,5 +270,4 @@ Public Class frmMainMenu
     Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
         frmAWSstations.Show()
     End Sub
-
 End Class

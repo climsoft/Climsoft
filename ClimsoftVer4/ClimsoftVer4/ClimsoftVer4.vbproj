@@ -224,12 +224,6 @@
     <Compile Include="frmDataMigration.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDataSelector.Designer.vb">
-      <DependentUpon>frmDataSelector.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmDataSelector.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmDataTransferProgress.Designer.vb">
       <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
     </Compile>
@@ -405,18 +399,6 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMsg.Designer.vb">
-      <DependentUpon>frmMsg.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmMsg.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProductsClimateObj.Designer.vb">
-      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmProductsClimateObj.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmQC.Designer.vb">
       <DependentUpon>frmQC.vb</DependentUpon>
     </Compile>
@@ -503,12 +485,6 @@
     <Compile Include="Common.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="formAWSRealTime.de.resx">
-      <DependentUpon>formAWSRealTime.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formAWSRealTime.fr.resx">
-      <DependentUpon>formAWSRealTime.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
@@ -545,12 +521,6 @@
     <EmbeddedResource Include="formDatabaseConnect.fr.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDataView.de.resx">
-      <DependentUpon>formDataView.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDataView.fr.resx">
-      <DependentUpon>formDataView.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formDataView.resx">
       <DependentUpon>formDataView.vb</DependentUpon>
     </EmbeddedResource>
@@ -566,29 +536,11 @@
     <EmbeddedResource Include="formHourly.fr.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formHourlyWind.de.resx">
-      <DependentUpon>formHourlyWind.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formHourlyWind.fr.resx">
-      <DependentUpon>formHourlyWind.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formHourlyWind.resx">
       <DependentUpon>formHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formImports.de.resx">
-      <DependentUpon>formImports.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formImports.fr.resx">
-      <DependentUpon>formImports.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formImports.resx">
       <DependentUpon>formImports.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formMetadata.de.resx">
-      <DependentUpon>formMetadata.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formMetadata.fr.resx">
-      <DependentUpon>formMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formMetadata.resx">
       <DependentUpon>formMetadata.vb</DependentUpon>
@@ -599,20 +551,8 @@
     <EmbeddedResource Include="formMonthly.fr.resx">
       <DependentUpon>formMonthly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formOptions.de.resx">
-      <DependentUpon>formOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formOptions.fr.resx">
-      <DependentUpon>formOptions.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formOptions.resx">
       <DependentUpon>formOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formPaperArchive.de.resx">
-      <DependentUpon>formPaperArchive.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formPaperArchive.fr.resx">
-      <DependentUpon>formPaperArchive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formProducts.de.resx">
       <DependentUpon>formProducts.vb</DependentUpon>
@@ -679,12 +619,6 @@
     <EmbeddedResource Include="frmBackup.resx">
       <DependentUpon>frmBackup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBackupRestore.de.resx">
-      <DependentUpon>frmBackupRestore.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmBackupRestore.fr.resx">
-      <DependentUpon>frmBackupRestore.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmBackupRestore.resx">
       <DependentUpon>frmBackupRestore.vb</DependentUpon>
     </EmbeddedResource>
@@ -706,12 +640,6 @@
     <EmbeddedResource Include="frmCPTSeason.resx">
       <DependentUpon>frmCPTSeason.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCrex.de.resx">
-      <DependentUpon>frmCrex.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmCrex.fr.resx">
-      <DependentUpon>frmCrex.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmCrex.resx">
       <DependentUpon>frmCrex.vb</DependentUpon>
     </EmbeddedResource>
@@ -723,20 +651,8 @@
       <DependentUpon>frmDataEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDataForms.de.resx">
-      <DependentUpon>frmDataForms.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataForms.fr.resx">
-      <DependentUpon>frmDataForms.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmDataForms.resx">
       <DependentUpon>frmDataForms.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataMigration.de.resx">
-      <DependentUpon>frmDataMigration.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataMigration.fr.resx">
-      <DependentUpon>frmDataMigration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataMigration.resx">
       <DependentUpon>frmDataMigration.vb</DependentUpon>
@@ -746,21 +662,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataOutpt.fr.resx">
       <DependentUpon>frmDataOutpt.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataSelector.de.resx">
-      <DependentUpon>frmDataSelector.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataSelector.fr.resx">
-      <DependentUpon>frmDataSelector.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataSelector.resx">
-      <DependentUpon>frmDataSelector.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataTransferProgress.de.resx">
-      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataTransferProgress.fr.resx">
-      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataTransferProgress.resx">
       <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
@@ -783,20 +684,8 @@
     <EmbeddedResource Include="formHourly.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmElementSequencer.de.resx">
-      <DependentUpon>frmElementSequencer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmElementSequencer.fr.resx">
-      <DependentUpon>frmElementSequencer.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmElementSequencer.resx">
       <DependentUpon>frmElementSequencer.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmElementSequencerDaily.de.resx">
-      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmElementSequencerDaily.fr.resx">
-      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmElementSequencerDaily.resx">
       <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
@@ -809,47 +698,17 @@
       <DependentUpon>frmGeneral.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneralSettings.de.resx">
-      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneralSettings.fr.resx">
-      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmGeneralSettings.resx">
       <DependentUpon>frmGeneralSettings.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGTSNOAA.de.resx">
-      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGTSNOAA.fr.resx">
-      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGTSNOAA.resx">
       <DependentUpon>frmGTSNOAA.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHourlyTimeSelection.de.resx">
-      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmHourlyTimeSelection.fr.resx">
-      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmHourlyTimeSelection.resx">
       <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImportAWS.de.resx">
-      <DependentUpon>frmImportAWS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmImportAWS.fr.resx">
-      <DependentUpon>frmImportAWS.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmImportAWS.resx">
       <DependentUpon>frmImportAWS.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmImportCSV.de.resx">
-      <DependentUpon>frmImportCSV.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmImportCSV.fr.resx">
-      <DependentUpon>frmImportCSV.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportCSV.resx">
       <DependentUpon>frmImportCSV.vb</DependentUpon>
@@ -932,24 +791,6 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMsg.de.resx">
-      <DependentUpon>frmMsg.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMsg.fr.resx">
-      <DependentUpon>frmMsg.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMsg.resx">
-      <DependentUpon>frmMsg.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProductsClimateObj.de.resx">
-      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProductsClimateObj.fr.resx">
-      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProductsClimateObj.resx">
-      <DependentUpon>frmProductsClimateObj.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmQC.de.resx">
       <DependentUpon>frmQC.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -965,12 +806,6 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmQCdatesSelection.de.resx">
-      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmQCdatesSelection.fr.resx">
-      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmQCdatesSelection.resx">
       <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
     </EmbeddedResource>
@@ -983,20 +818,8 @@
     <EmbeddedResource Include="frmSplashScreen.fr.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateDBfromQCReport.de.resx">
-      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdateDBfromQCReport.fr.resx">
-      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUploadToObsFinal.de.resx">
-      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUploadToObsFinal.fr.resx">
-      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUploadToObsFinal.resx">
       <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
