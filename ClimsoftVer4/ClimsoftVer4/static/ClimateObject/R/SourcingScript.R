@@ -28,8 +28,3 @@ ClimateCO <- function (data_tables = list(), climate_obj_meta_data = list(),
                    date_formats=date_formats)
   return=TRUE
 }
-ClimateCOfromSQL <- function (SQL) {
-  CO<<-climate$new()
-  CO$import_sqldata(SQL)
-  return=TRUE
-}

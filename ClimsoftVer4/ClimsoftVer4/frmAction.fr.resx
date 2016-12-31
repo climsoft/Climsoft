@@ -12,85 +12,130 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="$this.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
   </data>
   <data name="cmdHelp.Text" xml:space="preserve">
     <value>?</value>
   </data>
-  <data name="cmdHelp.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdHelp.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>663, 368</value>
   </data>
-  <data name="cmdOk.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
+  <data name="cmdOk.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmdApply.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+  <data name="cmdApply.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="cmdHelp.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
+  <data name="cmdHelp.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmdHelp.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="cmdApply.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
   </data>
   <data name="cmdCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="cmdOk.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cmdOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="cmdApply.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="cmdCancel.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+  <data name="cmdCancel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="cmdOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="cmdCancel.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
+  <data name="cmdApply.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cmdCancel.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmdApply.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
+  <data name="cmdHelp.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cmdApply.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmdCancel.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="cmdApply.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdApply.Location" type="System.Drawing.Point, System.Drawing">
     <value>493, 324</value>
+  </data>
+  <data name="cmdOk.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Action du formulaire</value>
   </data>
-  <data name="$this.ShowHelp" xml:space="preserve" type="System.Boolean, mscorlib">
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmdCancel.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+  <data name="$this.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>412, 324</value>
   </data>
-  <data name="cmdOk.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+  <data name="cmdCancel.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="cmdOk.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="cmdOk.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdOk.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="cmdApply.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="cmdOk.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cmdCancel.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="cmdOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>331, 324</value>
   </data>
-  <data name="cmdHelp.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdHelp.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>574, 324</value>
   </data>
   <data name="cmdApply.Text" xml:space="preserve">
     <value>S'appliquent</value>
   </data>
-  <metadata name="HelpProvider1.TrayLocation" xml:space="preserve" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="cmdCancel.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value></value>
+  </data>
+  <metadata name="HelpProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" xml:space="preserve" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>39</value>
   </metadata>
 </root>
