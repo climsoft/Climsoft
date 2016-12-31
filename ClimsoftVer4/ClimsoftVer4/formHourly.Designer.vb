@@ -131,6 +131,7 @@ Partial Class formHourly
         Me.Label36 = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
+        Me.btnView = New System.Windows.Forms.Button()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -146,7 +147,7 @@ Partial Class formHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(530, 586)
+        Me.btnUpload.Location = New System.Drawing.Point(581, 562)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 381
@@ -156,7 +157,7 @@ Partial Class formHourly
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(178, 592)
+        Me.Label5.Location = New System.Drawing.Point(177, 572)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 380
@@ -164,7 +165,7 @@ Partial Class formHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(243, 589)
+        Me.txtSequencer.Location = New System.Drawing.Point(242, 569)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 379
@@ -225,7 +226,7 @@ Partial Class formHourly
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(530, 547)
+        Me.btnHelp.Location = New System.Drawing.Point(581, 528)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 271
@@ -235,7 +236,7 @@ Partial Class formHourly
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(367, 548)
+        Me.btnClear.Location = New System.Drawing.Point(338, 528)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 269
@@ -245,7 +246,7 @@ Partial Class formHourly
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(119, 548)
+        Me.btnCommit.Location = New System.Drawing.Point(95, 528)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 30
@@ -254,7 +255,7 @@ Partial Class formHourly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(286, 548)
+        Me.btnDelete.Location = New System.Drawing.Point(257, 528)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 268
@@ -263,7 +264,7 @@ Partial Class formHourly
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(37, 548)
+        Me.btnAddNew.Location = New System.Drawing.Point(14, 528)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 265
@@ -272,7 +273,7 @@ Partial Class formHourly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(200, 548)
+        Me.btnUpdate.Location = New System.Drawing.Point(176, 528)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 267
@@ -282,7 +283,7 @@ Partial Class formHourly
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(215, 519)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(214, 499)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 310
@@ -292,7 +293,7 @@ Partial Class formHourly
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(168, 519)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(167, 499)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 308
@@ -302,7 +303,7 @@ Partial Class formHourly
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(458, 519)
+        Me.btnMoveLast.Location = New System.Drawing.Point(457, 499)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 307
@@ -311,7 +312,7 @@ Partial Class formHourly
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(267, 521)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(266, 501)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 306
@@ -319,7 +320,7 @@ Partial Class formHourly
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(414, 519)
+        Me.btnMoveNext.Location = New System.Drawing.Point(413, 499)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 304
@@ -328,7 +329,7 @@ Partial Class formHourly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(448, 548)
+        Me.btnClose.Location = New System.Drawing.Point(500, 528)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 270
@@ -1018,11 +1019,21 @@ Partial Class formHourly
         Me.Label37.TabIndex = 467
         Me.Label37.Text = "Total"
         '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(419, 528)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 661
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'formHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 632)
+        Me.ClientSize = New System.Drawing.Size(681, 615)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.txtTotal)
         Me.Controls.Add(Me.Label36)
@@ -1247,4 +1258,5 @@ Partial Class formHourly
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label37 As System.Windows.Forms.Label
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

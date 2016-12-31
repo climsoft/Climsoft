@@ -47,6 +47,7 @@ Partial Class frmDataMigration
         Me.optV3Backup = New System.Windows.Forms.RadioButton()
         Me.lblMessages = New System.Windows.Forms.Label()
         Me.OpenFileBackup = New System.Windows.Forms.OpenFileDialog()
+        Me.chkboxReplace = New System.Windows.Forms.CheckBox()
         Me.grpV3MysqlDb.SuspendLayout()
         Me.grpV3Backup.SuspendLayout()
         Me.pnlCommands.SuspendLayout()
@@ -256,10 +257,10 @@ Partial Class frmDataMigration
         Me.optV3MysqlDb.Checked = True
         Me.optV3MysqlDb.Location = New System.Drawing.Point(25, 23)
         Me.optV3MysqlDb.Name = "optV3MysqlDb"
-        Me.optV3MysqlDb.Size = New System.Drawing.Size(181, 17)
+        Me.optV3MysqlDb.Size = New System.Drawing.Size(301, 17)
         Me.optV3MysqlDb.TabIndex = 6
         Me.optV3MysqlDb.TabStop = True
-        Me.optV3MysqlDb.Text = "CLIMSOFT V3 MySQL Database"
+        Me.optV3MysqlDb.Text = "CLIMSOFT V3 MySQL Database - Within the same server)"
         Me.optV3MysqlDb.UseVisualStyleBackColor = True
         '
         'optV3Backup
@@ -285,11 +286,22 @@ Partial Class frmDataMigration
         '
         Me.OpenFileBackup.FileName = "Climsoft Backup"
         '
+        'chkboxReplace
+        '
+        Me.chkboxReplace.AutoSize = True
+        Me.chkboxReplace.Location = New System.Drawing.Point(25, 340)
+        Me.chkboxReplace.Name = "chkboxReplace"
+        Me.chkboxReplace.Size = New System.Drawing.Size(148, 17)
+        Me.chkboxReplace.TabIndex = 9
+        Me.chkboxReplace.Text = "Replace Existing Records"
+        Me.chkboxReplace.UseVisualStyleBackColor = True
+        '
         'frmDataMigration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(978, 397)
+        Me.Controls.Add(Me.chkboxReplace)
         Me.Controls.Add(Me.lblMessages)
         Me.Controls.Add(Me.optV3Backup)
         Me.Controls.Add(Me.optV3MysqlDb)
@@ -332,4 +344,5 @@ Partial Class frmDataMigration
     Friend WithEvents optV3Backup As System.Windows.Forms.RadioButton
     Friend WithEvents lblMessages As System.Windows.Forms.Label
     Friend WithEvents OpenFileBackup As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents chkboxReplace As System.Windows.Forms.CheckBox
 End Class

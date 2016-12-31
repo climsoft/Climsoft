@@ -116,7 +116,7 @@ Err:
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Not yet implemented!", MsgBoxStyle.Information)
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "hourlydata.htm")
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick

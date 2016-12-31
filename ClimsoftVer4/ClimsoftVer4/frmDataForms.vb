@@ -55,7 +55,7 @@
             cmd.ExecuteNonQuery()
 
         Next
-
+        MsgBox(msgKeyentryFormsListUpdated, MsgBoxStyle.Information)
         Exit Sub
 Err:
         MsgBox(Err.Description)
@@ -63,5 +63,9 @@ Err:
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "settingupkeyentryformlist.htm")
     End Sub
 End Class

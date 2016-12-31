@@ -19,9 +19,21 @@ Module mainModule
     Public tabNext As Boolean
     Public regKeyName As String
     Public regKeyValue As String
+    Public dsLanguageTable As New DataSet
+    Public daLanguageTable As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Public languageTableSQL As String
     Public dsReg As New DataSet
     Public daReg As New MySql.Data.MySqlClient.MySqlDataAdapter
     Public regSQL As String
+    Public dsClimsoftUserRoles As New DataSet
+    Public daClimsoftUserRoles As New MySql.Data.MySqlClient.MySqlDataAdapter
+    Public rolesSQL As String
+    Public userGroup As String
+    Public dsSourceTableName As String
+    Public connStrRemoteSvr As String
+    Public remoteSvr As String
+    Public msgKeyentryFormsListUpdated As String
+    Public msgStationInformationNotFound As String
 
 End Module
 
@@ -81,7 +93,12 @@ Public Class formSynopRA1
         For m = 5 To 53
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -91,7 +108,12 @@ Public Class formSynopRA1
         For m = 54 To 102
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    Else
+                        ctl.Text = ""
+                    End If
+
                 End If
             Next ctl
         Next m
@@ -252,6 +274,31 @@ Public Class formSynopRA1
             Sql = "SELECT * FROM " & txtSequencer.Text
         End If
 
+        Dim dsLastDataRecord As New DataSet
+        Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecHour As String, lastRecElement As String, stn As String
+
+        SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
+        dsLastDataRecord.Clear()
+        daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+        daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+
+        'Initialize header fields required for sequencer
+        stn = cboStation.SelectedValue
+        cboStation.SelectedValue = stn
+        lastRecHour = cboDay.Text
+        lastRecMonth = cboMonth.Text
+        lastRecYear = txtYear.Text
+
+        If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+            stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+            cboStation.SelectedValue = stn
+            lastRecHour = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("hh")
+            lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
+            lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+            lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
+        End If
+
         daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
         'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
         'of records in the recordest table whenever the AddNew button is clicked
@@ -263,11 +310,12 @@ Public Class formSynopRA1
         'MsgBox("station: " & cboStation.SelectedValue & " yyyy: " & strYear & " mm: " & strMonth & " dd: " & strDay & " hh: " & strHour)
 
         For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = strMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = strDay And _
-               dsSequencer.Tables("sequencer").Rows(k).Item("hh") = strHour Then
+            If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecHour And _
+               dsSequencer.Tables("sequencer").Rows(k).Item("hh") = lastRecHour Then
                 'If it is the last day of the year and the last synoptic observation hour then increment the year by 1.
-                If strMonth = 12 And strDay = 31 And strHour = 21 Then
-                    txtYear.Text = Val(txtYear.Text) + 1
+                If k = seqRecCount - 1 Then
+                    'txtYear.Text = Val(txtYear.Text) + 1
+                    txtYear.Text = Val(lastRecYear) + 1
                     'Check if the following is a leap year
                     If yearCheck.checkIsLeapYear(txtYear.Text) = True Then
                         txtSequencer.Text = "seq_month_day_synoptime_leap_yr"
@@ -318,7 +366,7 @@ Public Class formSynopRA1
         txtVal_Elem106Field005.Focus()
         '----------------------------------------
         '' ''Set SQL string for populating "regData" table
-        ' ''regSQL = "SELECT keyName,keyValue FROM regKeys"     '
+        ' ''regSQL = "SELECT keyName,keyValue FROM regkeys"     '
         ' ''daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
         ' ''daReg.Fill(dsReg, "regData")
 
@@ -615,6 +663,9 @@ Public Class formSynopRA1
             ' txtSignature.Text = frmLogin.txtUser.Text
             ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
+            'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
+            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("entryDatetime") = Now()
+
             'Commit observation values to database
             'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
             For m = 5 To 53
@@ -649,14 +700,20 @@ Public Class formSynopRA1
             btnMoveLast.Enabled = True
             btnMoveNext.Enabled = True
             btnMovePrevious.Enabled = True
+
+            'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+            If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                btnDelete.Enabled = False
+            End If
+
             maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
             inc = maxRows - 1
 
             'Call subroutine for record navigation
             navigateRecords()
-            ''Catch ex As Exception
-            ''    MessageBox.Show(ex.Message)
-            ''End Try
+            'Catch ex As Exception
+            '    MessageBox.Show(ex.Message)
+            'End Try
         Else
             msgTxtInsufficientData = "Incomplete header information and insufficient observation data!"
             MsgBox(msgTxtInsufficientData, MsgBoxStyle.Exclamation)
@@ -814,6 +871,12 @@ Public Class formSynopRA1
 
         'Set TAB next to true
         tabNext = True
+
+        'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
         'Set the record index counter to the first row
         inc = 0
 
@@ -848,14 +911,16 @@ Public Class formSynopRA1
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
         da1.Fill(ds1, "station")
-
-        With cboStation
-            .DataSource = ds1.Tables("station")
-            .DisplayMember = "stationName"
-            .ValueMember = "stationId"
-            .SelectedIndex = 0
-        End With
-
+        If ds1.Tables("station").Rows.Count > 0 Then
+            With cboStation
+                .DataSource = ds1.Tables("station")
+                .DisplayMember = "stationName"
+                .ValueMember = "stationId"
+                .SelectedIndex = 0
+            End With
+        Else
+            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+        End If
 
         ''sql1 = "SELECT stationId,stationName FROM station"
         ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
@@ -896,6 +961,7 @@ Public Class formSynopRA1
                     End If
                 Next ctl
             Next m
+
 
             displayRecordNumber()
         Else
@@ -965,46 +1031,50 @@ Public Class formSynopRA1
         Dim calculateValue As New dataEntryGlobalRoutines
         Dim dryBulb As String, wetBulb As String, ppp As String, gpm As String
         'Drybulb is element code 101 and wetbulb is element code 102
-        If Val(txtVal_Elem102Field013.Text) > Val(txtVal_Elem101Field012.Text) Then
-            'If wetbulb is greater than dewpoint both elements are flagged because either of them could be wrong.
-            'i.e. wetbulb value could be higher than the correct value or drybulb could be lower than the correct value.
-            txtVal_Elem101Field012.BackColor = Color.Cyan
-            txtVal_Elem102Field013.BackColor = Color.Cyan
-            txtVal_Elem102Field013.Focus()
-            tabNext = False
-            MsgBox("Drybulb must be greater or equal to Wetbulb!", MsgBoxStyle.Exclamation)
-        Else
-            txtVal_Elem101Field012.BackColor = Color.White
-            txtVal_Elem102Field013.BackColor = Color.White
-            tabNext = True
-            'Apply element scale factor to drybulb and wetbulb before calling function to calculate dewpoint
-            dryBulb = Val(txtVal_Elem101Field012.Text) / 10
-            wetBulb = Val(txtVal_Elem102Field013.Text) / 10
-            'Remove element scale factor from dewpoint
-            txtVal_Elem103Field014.Text = calculateValue.calculateDewpoint(dryBulb, wetBulb) * 10
+        Try
+            If Val(txtVal_Elem102Field013.Text) > Val(txtVal_Elem101Field012.Text) Then
+                'If wetbulb is greater than dewpoint both elements are flagged because either of them could be wrong.
+                'i.e. wetbulb value could be higher than the correct value or drybulb could be lower than the correct value.
+                txtVal_Elem101Field012.BackColor = Color.Cyan
+                txtVal_Elem102Field013.BackColor = Color.Cyan
+                txtVal_Elem102Field013.Focus()
+                tabNext = False
+                MsgBox("Drybulb must be greater or equal to Wetbulb!", MsgBoxStyle.Exclamation)
+            Else
+                txtVal_Elem101Field012.BackColor = Color.White
+                txtVal_Elem102Field013.BackColor = Color.White
+                tabNext = True
+                'Apply element scale factor to drybulb and wetbulb before calling function to calculate dewpoint
+                dryBulb = Val(txtVal_Elem101Field012.Text) / 10
+                wetBulb = Val(txtVal_Elem102Field013.Text) / 10
+                'Remove element scale factor from dewpoint
+                txtVal_Elem103Field014.Text = calculateValue.calculateDewpoint(dryBulb, wetBulb) * 10
 
-            stationCode = cboStation.SelectedValue
-            ppp = Val(txtVal_Elem106Field005.Text) / 10
-            ' dryBulb = Val(txtVal_Elem101Field012.Text) / 10
-            gpm = txtVal_Elem301Field010.Text
+                stationCode = cboStation.SelectedValue
+                ppp = Val(txtVal_Elem106Field005.Text) / 10
+                ' dryBulb = Val(txtVal_Elem101Field012.Text) / 10
+                gpm = txtVal_Elem301Field010.Text
 
-            sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid=" & stationCode
-            daStationElevation = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlStationElevation, conn)
-            'Clear all rows in dataset before filling dataset with new row record for active station
-            dsStationElevation.Clear()
-            'Add row for element code associated with active control
-            daStationElevation.Fill(dsStationElevation, "station")
-            stnElevation = dsStationElevation.Tables("station").Rows(0).Item("elevation")
+                sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid=" & stationCode
+                daStationElevation = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlStationElevation, conn)
+                'Clear all rows in dataset before filling dataset with new row record for active station
+                dsStationElevation.Clear()
+                'Add row for element code associated with active control
+                daStationElevation.Fill(dsStationElevation, "station")
+                stnElevation = dsStationElevation.Tables("station").Rows(0).Item("elevation")
 
-            If stnElevation <> "" And txtVal_Elem106Field005.Text <> "" And txtVal_Elem101Field012.Text <> "" Then
-                'Calculate geopotential
-                txtVal_Elem196Field011.Text = calculateValue.calculateGeopotential(ppp, dryBulb, stnElevation, gpm)
-                'calculate MSL pressure
-                txtVal_Elem107Field006.Text = calculateValue.calculateMSLppp(ppp, dryBulb, stnElevation)
+                If stnElevation <> "" And txtVal_Elem106Field005.Text <> "" And txtVal_Elem101Field012.Text <> "" Then
+                    'Calculate geopotential
+                    txtVal_Elem196Field011.Text = calculateValue.calculateGeopotential(ppp, dryBulb, stnElevation, gpm)
+                    'calculate MSL pressure
+                    txtVal_Elem107Field006.Text = calculateValue.calculateMSLppp(ppp, dryBulb, stnElevation)
+                End If
+
             End If
-
-        End If
-
+        Catch ex As Exception
+            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+            MsgBox(ex.Message)
+        End Try
         'dryBulb As String, 
 
     End Sub
@@ -1230,5 +1300,22 @@ Public Class formSynopRA1
 
     Private Sub txtVal_Elem002Field045_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem002Field045.LostFocus
 
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_synoptic_2_RA1"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+        Else
+            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
     End Sub
 End Class

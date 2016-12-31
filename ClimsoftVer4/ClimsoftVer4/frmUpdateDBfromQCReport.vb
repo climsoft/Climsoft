@@ -333,4 +333,8 @@ Public Class frmUpdateDBfromQCReport
             btnOK.Enabled = True
         End If
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "qcchecks.htm#update_qcreport")
+    End Sub
 End Class

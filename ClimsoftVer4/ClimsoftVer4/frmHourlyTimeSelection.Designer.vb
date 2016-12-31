@@ -27,12 +27,13 @@ Partial Class frmHourlyTimeSelection
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.lblHourlyTimeSelection = New System.Windows.Forms.Label()
+        Me.lblGuidelinesFormHourlyTimeSelection = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(51, 94)
         Me.DataGridView1.Name = "DataGridView1"
@@ -66,21 +67,21 @@ Partial Class frmHourlyTimeSelection
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'lblHourlyTimeSelection
+        'lblGuidelinesFormHourlyTimeSelection
         '
-        Me.lblHourlyTimeSelection.ForeColor = System.Drawing.Color.Red
-        Me.lblHourlyTimeSelection.Location = New System.Drawing.Point(48, 13)
-        Me.lblHourlyTimeSelection.Name = "lblHourlyTimeSelection"
-        Me.lblHourlyTimeSelection.Size = New System.Drawing.Size(283, 55)
-        Me.lblHourlyTimeSelection.TabIndex = 8
-        Me.lblHourlyTimeSelection.Text = resources.GetString("lblHourlyTimeSelection.Text")
+        Me.lblGuidelinesFormHourlyTimeSelection.ForeColor = System.Drawing.Color.Red
+        Me.lblGuidelinesFormHourlyTimeSelection.Location = New System.Drawing.Point(48, 13)
+        Me.lblGuidelinesFormHourlyTimeSelection.Name = "lblGuidelinesFormHourlyTimeSelection"
+        Me.lblGuidelinesFormHourlyTimeSelection.Size = New System.Drawing.Size(283, 55)
+        Me.lblGuidelinesFormHourlyTimeSelection.TabIndex = 8
+        Me.lblGuidelinesFormHourlyTimeSelection.Text = resources.GetString("lblGuidelinesFormHourlyTimeSelection.Text")
         '
         'frmHourlyTimeSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(374, 370)
-        Me.Controls.Add(Me.lblHourlyTimeSelection)
+        Me.Controls.Add(Me.lblGuidelinesFormHourlyTimeSelection)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
@@ -97,5 +98,5 @@ Partial Class frmHourlyTimeSelection
     Friend WithEvents btnHelp As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
-    Friend WithEvents lblHourlyTimeSelection As System.Windows.Forms.Label
+    Friend WithEvents lblGuidelinesFormHourlyTimeSelection As System.Windows.Forms.Label
 End Class
