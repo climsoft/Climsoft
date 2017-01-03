@@ -944,9 +944,9 @@ Partial Class formAWSRealTime
         Me.GroupBox11.Controls.Add(Me.lblInfile)
         Me.GroupBox11.Controls.Add(Me.txtSiteID)
         Me.GroupBox11.Controls.Add(Me.Label15)
-        Me.GroupBox11.Location = New System.Drawing.Point(2, 22)
+        Me.GroupBox11.Location = New System.Drawing.Point(2, 27)
         Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(709, 391)
+        Me.GroupBox11.Size = New System.Drawing.Size(709, 386)
         Me.GroupBox11.TabIndex = 67
         Me.GroupBox11.TabStop = False
         '
@@ -980,11 +980,11 @@ Partial Class formAWSRealTime
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(332, 310)
+        Me.cmdClear.Location = New System.Drawing.Point(164, 310)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(68, 29)
         Me.cmdClear.TabIndex = 88
-        Me.cmdClear.Text = "Reset"
+        Me.cmdClear.Text = "AddNew"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdViewUpdate
@@ -998,7 +998,7 @@ Partial Class formAWSRealTime
         '
         'cmdDel
         '
-        Me.cmdDel.Location = New System.Drawing.Point(420, 310)
+        Me.cmdDel.Location = New System.Drawing.Point(422, 310)
         Me.cmdDel.Name = "cmdDel"
         Me.cmdDel.Size = New System.Drawing.Size(68, 29)
         Me.cmdDel.TabIndex = 86
@@ -1007,7 +1007,7 @@ Partial Class formAWSRealTime
         '
         'cmdUpdateSites
         '
-        Me.cmdUpdateSites.Location = New System.Drawing.Point(244, 310)
+        Me.cmdUpdateSites.Location = New System.Drawing.Point(336, 310)
         Me.cmdUpdateSites.Name = "cmdUpdateSites"
         Me.cmdUpdateSites.Size = New System.Drawing.Size(68, 29)
         Me.cmdUpdateSites.TabIndex = 85
@@ -1016,11 +1016,11 @@ Partial Class formAWSRealTime
         '
         'cmdAdd
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(156, 310)
+        Me.cmdAdd.Location = New System.Drawing.Point(250, 310)
         Me.cmdAdd.Name = "cmdAdd"
         Me.cmdAdd.Size = New System.Drawing.Size(68, 29)
         Me.cmdAdd.TabIndex = 84
-        Me.cmdAdd.Text = "AddNew"
+        Me.cmdAdd.Text = "Save"
         Me.cmdAdd.UseVisualStyleBackColor = True
         '
         'btnMovePrevious

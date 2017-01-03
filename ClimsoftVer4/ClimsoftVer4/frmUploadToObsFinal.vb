@@ -19,7 +19,7 @@
         frmDataTransferProgress.Show()
 
         'Upload data to observationInitial table
-        Dim strSQL As String, stnId As String, elemCode As Integer, obsDate As String, obsVal As String, obsFlag As String, _
+        Dim strSQL As String, stnId As String, elemCode As Integer, obsDate As String, obsVal As String, obsFlag, mark1 As String, _
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, yyyy As Integer, mm As String, dd As String, hh As String
 
         Dim ds As New DataSet
@@ -38,7 +38,7 @@
         conn.ConnectionString = MyConnectionString
         conn.Open()
         'First upload records with QC status =1
-        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " & _
+        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " & _
             "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear & _
             " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1"
 
@@ -81,35 +81,38 @@
             obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
             stnId = ds.Tables("obsInitial").Rows(n).Item("recordedFrom")
             elemCode = ds.Tables("obsInitial").Rows(n).Item("describedBy")
-
+            mark1 = ds.Tables("obsInitial").Rows(n).Item("mark")
             'Get the element scale
-            For k = 0 To elemMaxRows - 1
-                If elemCode = ds1.Tables("elemScale").Rows(k).Item("elementId") Then valScale = ds1.Tables("elemScale").Rows(k).Item("elementScale")
-            Next k
-
-            obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
-            obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
-            obsVal = obsVal * valScale
-            obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
-            qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
-            acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
-
-            'Generate SQL string for inserting data into observationFinal table
-            strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                qcStatus & "," & acquisitionType & ")"
-
-            ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
             Try
+                For k = 0 To elemMaxRows - 1
+                    If elemCode = ds1.Tables("elemScale").Rows(k).Item("elementId") Then valScale = ds1.Tables("elemScale").Rows(k).Item("elementScale")
+                Next k
+
+                obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
+                obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
+                obsVal = obsVal * valScale
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("flag")) Then obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcStatus")) Then qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
+
+                'Generate SQL string for inserting data into observationFinal table
+                strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,mark) " & _
+                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                    qcStatus & "," & acquisitionType & "," & mark1 & ")"
+
+                ' Create the Command for executing query and set its properties
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+
                 'Execute query
                 objCmd.ExecuteNonQuery()
                 'Catch ex As MySql.Data.MySqlClient.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
             Catch ex As Exception
+
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                 MsgBox(ex.Message)
+
             End Try
 
             'Move to next record in dataset

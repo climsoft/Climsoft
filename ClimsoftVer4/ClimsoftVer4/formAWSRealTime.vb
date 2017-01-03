@@ -658,24 +658,28 @@ Err:
     End Sub
 
     Private Sub cmbExistingStructures_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExistingStructures.SelectedIndexChanged
-        On Error GoTo Err
-        SetDataSet("aws_structures")
+        Try
+            SetDataSet("aws_structures")
 
-        For i = 0 To Kount - 1
-            If cmbExistingStructures.Text = ds.Tables("aws_structures").Rows(i).Item("strName") Then
-                txtStrName.Text = ds.Tables("aws_structures").Rows(i).Item("strName")
-                txtDelimiter.Text = ds.Tables("aws_structures").Rows(i).Item("data_delimiter")
-                txtHeaders.Text = ds.Tables("aws_structures").Rows(i).Item("hdrRows")
-                txtQualifier.Text = ds.Tables("aws_structures").Rows(i).Item("txtQualifier")
-                lblRecords.Text = "Rec: " & i + 1
-            End If
-        Next
-        DataGridFill(txtStrName.Text)
-        Exit Sub
-Err:
-        DataGridViewStructures.Visible = False
-        If Err.Number = 13 Then Exit Sub
-        MsgBox(Err.Number & " " & Err.Description)
+            For i = 0 To Kount - 1
+                If cmbExistingStructures.Text = ds.Tables("aws_structures").Rows(i).Item("strName") Then
+                    If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("strName")) Then txtStrName.Text = ds.Tables("aws_structures").Rows(i).Item("strName")
+                    If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("strName")) Then txtDelimiter.Text = ds.Tables("aws_structures").Rows(i).Item("data_delimiter")
+                    If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("hdrRows")) Then txtHeaders.Text = ds.Tables("aws_structures").Rows(i).Item("hdrRows")
+                    If Not IsDBNull(ds.Tables("aws_structures").Rows(i).Item("txtQualifier")) Then txtQualifier.Text = ds.Tables("aws_structures").Rows(i).Item("txtQualifier")
+                    lblRecords.Text = "Rec: " & i + 1
+                End If
+            Next
+            DataGridFill(txtStrName.Text)
+        Catch ex As Exception
+            DataGridViewStructures.Visible = False
+            MsgBox(ex.Message)
+        End Try
+        'Err:
+        '        MsgBox(Err.Description)
+        '        DataGridViewStructures.Visible = False
+        '        If Err.Number = 13 Then Exit Sub
+        '        MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
     Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
@@ -715,23 +719,41 @@ Err:
 
         '' Create a table for the new structure
 
+        '        CREATE TABLE `aws_rwanda4` (
+        '	`Cols` INT(11) NOT NULL,
+        '	`Element_Name` VARCHAR(20) NULL DEFAULT NULL,
+        '	`Element_Abbreviation` VARCHAR(20) NULL DEFAULT NULL,
+        '	`Element_Details` VARCHAR(25) NULL DEFAULT NULL,
+        '	`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL,
+        '	`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL,
+        '	`unit` VARCHAR(15) NULL DEFAULT NULL,
+        '	`lower_limit` VARCHAR(10) NULL DEFAULT NULL,
+        '	`upper_limit` VARCHAR(10) NULL DEFAULT NULL,
+        '	`obsv` VARCHAR(25) NULL DEFAULT NULL,
+        '	PRIMARY KEY (`Cols`)
+        ')
+        'COLLATE='utf8_general_ci'
+        '        ENGINE = InnoDB
+        ';
         Dim tbl As String = txtStrName.Text
         'sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
         sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
                "( " & _
-                "`No` INT NOT NULL, " & _
-                "`Element_abbreviation` TEXT NOT NULL, " & _
-                "`Element_Name` TEXT NOT NULL, " & _
-                "`Element_Details` TEXT NOT NULL, " & _
-                "`Climsoft_Element` TEXT NOT NULL, " & _
-                "`Bufr_Element` TEXT NOT NULL, " & _
-                "`unit` TEXT NOT NULL, " & _
-                "`lower_limit` TEXT NOT NULL, " & _
-                "`upper_limit` TEXT NOT NULL, " & _
-                "`obsv` TEXT NOT NULL, " & _
-                "UNIQUE KEY `identification` (`No`) " & _
-             ");"
+                "`Cols` INT NOT NULL, " & _
+                "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
+                "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
+                "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
+                "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
+                "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
+                "UNIQUE KEY `identification` (`Cols`) " & _
+             ") COLLATE='utf8_general_ci';"
         'MsgBox(sql0)
+
+
 
         comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
         comm.ExecuteNonQuery()   ' Execute the query
@@ -748,10 +770,15 @@ Err:
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         'MsgBox(Strings.Right(txtRecNo.Text, 1))
-        Dim recs As Integer
-        recs = Int(Strings.Right(lblRecords.Text, 1)) - 1
-        RecordUpdate("aws_structures", "pnlDataStructures", recs, "update")
-        FillList(cmbExistingStructures, "aws_structures", "strName")
+        Try
+            Dim recs As Integer
+            recs = Int(Strings.Right(lblRecords.Text, 1)) - 1 ' Record number for the selected structure in the aws_structures table
+            RecordUpdate("aws_structures", "pnlDataStructures", recs, "update")
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -975,7 +1002,6 @@ Err:
         'FileClose(1)
 
 
-
         Dim i As Integer
 
         With ds.Tables("aws_sites")
@@ -993,7 +1019,7 @@ Err:
                     'msg_header = .Rows(i).Item("aws_msg")
                     'MsgBox(msg_header)
                     flg = ""
-                    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag")
+                    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag") 'flg = "M"
                     'End If
                     AWSsite = .Rows(i).Item("DataStructure")
                     Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
@@ -1073,10 +1099,14 @@ Err:
                     'ChrW(delimiter_ascii)
                     dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
 
+
                     For k = 0 To rws - 2
-                        'Skip oder records
+
+                        'Skip older records
                         datestring = dTable.Rows(k).Item(0)
-                        If InStr(datestring, txtqlfr) Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2)
+
+                        If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2)
+                        'MsgBox(DateAndTime.Year(datestring))
                         If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
                         'Log_Errors(datestring & " " & DateDiff("h", datestring, txtDateTime.Text) & " " & Val(txtPeriod.Text))
 
@@ -1084,9 +1114,10 @@ Err:
 
                         For j = 0 To colmn - 1
                             x = dTable.Rows(k).Item(j)
-                            If InStr(x, txtqlfr) Then
+                            If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
                                 x = Strings.Mid(x, 2, Len(x) - 2)
                             End If
+                            'MsgBox(x)
                             AwsRecord_Update(x, j, flg, AWSsite)
                             'MsgBox(x)
                         Next
@@ -1426,10 +1457,12 @@ Err:
         Print(1, "CD " & local_folder & Chr(13) & Chr(10))
 
         If ftpmethod = "get" Then
-            If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
             If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
         Else
-            If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+            'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
             If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
         End If
 
@@ -1483,6 +1516,7 @@ Err:
         If System.IO.Path.GetFileName(ftpfile).Length = 0 Then Exit Function
 
         'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
+
         Exit Function
 Err:
         Log_Errors(Err.Description)
@@ -1608,29 +1642,46 @@ Err:
     End Sub
 
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
+
         On Error GoTo Err
         Dim dts As Date
         Dim sql1 As String
         Dim awsr As DataSet
-        Dim recUpdate As New dataEntryGlobalRoutines
+        Dim obsdata As String
+        'Dim recUpdate As New dataEntryGlobalRoutines
+        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
-        txtStatus.Text = "Updating AWS Temporary Record"
+        cmd.Connection = dbconn
 
-        sql1 = "SELECT * FROM " & aws_struc
+        'MsgBox(datastring & " " & rec & " " & flg & " " & aws_struc)
 
-        awsr = GetDataSet(aws_struc, sql1)
+        txtStatus.Text = "Updating AWS Record"
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
 
-        If InStr(datastring, flg) > 0 Or Len(flg) = 0 Then
-            awsr.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
+        'sql1 = "SELECT * FROM " & aws_struc
+
+        'awsr = GetDataSet(aws_struc, sql1)
+
+        'If InStr(datastring, flg) > 0 Or Len(flg) = 0 Then
+        'If Len(flg) > 0 Then
+        If datastring = flg Then
+            obsdata = vbNullString
+            'awsr.Tables(aws_struc).Rows(rec).Item("obsv") = vbNullString
         Else
-            awsr.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
+            obsdata = datastring
+            'awsr.Tables(aws_struc).Rows(rec).Item("obsv") = datastring
         End If
 
-        da.Update(awsr, aws_struc)
-        awsr.Clear()
-        'Log_Errors(rec)
+        sql1 = "UPDATE " & aws_struc & " SET obsv = '" & obsdata & "' where cols = '" & rec + 1 & "';"
+
+        cmd.CommandText = sql1
+        cmd.ExecuteNonQuery()
+
+        ''MsgBox(datastring)
+        'da.Update(awsr, aws_struc)
+        'awsr.Clear()
+        ''Log_Errors(rec)
         Exit Sub
 
 Err:
@@ -1745,7 +1796,7 @@ Err:
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
         Dim dsdb As New DataSet
         Dim sql, sql3 As String
-        Dim obs As String
+        Dim obs, flgs, units As String
         Dim mysqldate As String
 
         sql3 = "SELECT * FROM " & rs_aws
@@ -1755,17 +1806,31 @@ Err:
         ' Construct datetime string from DateTime data value that conforms to Mysql datetime format
         mysqldate = DateAndTime.Year(datestr) & "/" & DateAndTime.Month(datestr) & "/" & DateAndTime.Day(datestr) & " " & DateAndTime.Hour(datestr) & ":" & DateAndTime.Minute(datestr) & ":" & DateAndTime.Second(datestr)
 
+
         With dsdb.Tables(rs_aws)
             'Process_Status("Updating Climsoft database with AWS data")
+
             For i = 0 To .Rows.Count - 1
+                flgs = ""
                 If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
                     obs = .Rows(i).Item("obsv")
-                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
-                    If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
+                    If Not IsDBNull(.Rows(i).Item("lower_limit")) And Not IsDBNull(.Rows(i).Item("upper_limit")) Then
+                        QC_Limits(stn, .Rows(i).Item("Climsoft_Element"), obs, .Rows(i).Item("lower_limit"), .Rows(i).Item("upper_limit"))
+                    End If
+
+                    If Not IsDBNull(.Rows(i).Item("unit")) Then
+                        units = .Rows(i).Item("unit")
+                        If units = "knots" Then obs = Val(obs) / 2
+                        If units = "HPa" Then obs = Val(obs) * 100
+                    End If
+
+                    'If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
+                    'If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
                     'sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
                     sql = "INSERT INTO observationfinal " & _
-                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue) " & _
-                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "';"
+                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag) " & _
+                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "','" & flgs & "';"
+
                     'Log_Errors(sql)
                     cmd.CommandText = sql
                     cmd.ExecuteNonQuery()
@@ -1823,7 +1888,31 @@ Err:
         'MsgBox(" Update_main_db")
         Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
+    Sub QC_Limits(stn As String, elms As String, obs As String, L_limit As String, U_limit As String)
+    
+        Try
+ 
+            If Val(obs) < Val(L_limit) Or Val(obs) > U_limit Then
+                Dim errdata, limittype As String
+                'Get full path for the Subsets Output file file and create the file
+                fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_qc_errors.csv"
+                FileOpen(21, fl, OpenMode.Append)
 
+                If Val(obs) < Val(L_limit) Then limittype = "below limit"
+                If Val(obs) > Val(U_limit) Then limittype = "above limit"
+
+                errdata = stn & "," & elms & "," & obs & "," & limittype
+
+                PrintLine(21, errdata)
+                FileClose(21)
+            End If
+            'End If
+        Catch ex As Exception
+            FileClose(21)
+            'Log_Errors(ex.HResult & ":" & ex.Message & "  at QC_Limits")
+        End Try
+
+    End Sub
     Sub update_tbltemplate(aws_struct As String, Date_Time As String)
 
         On Error GoTo Err
@@ -2865,7 +2954,7 @@ Err:
         'PopulateForm("sites", txtsitesNav, rec)
     End Sub
 
- 
+
     Private Sub cmdViewUpdate_Click(sender As Object, e As EventArgs) Handles cmdViewUpdate.Click
 
         DataGridViewSites.Visible = True
@@ -2919,7 +3008,7 @@ Err:
     End Sub
     Sub CreateDataGridRow(dgr As DataSet, tbl As String, col As Integer, id As String)
         On Error GoTo Err
-          Dim dsNewRow As DataRow
+        Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
 

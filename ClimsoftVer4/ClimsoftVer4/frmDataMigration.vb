@@ -8,9 +8,9 @@
     Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
     Dim ReplaceIgnore As String
     Private Sub cmdStart_Click(sender As Object, e As EventArgs) Handles cmdStart.Click
-        Dim sql_stn, sql_elm, col1 As String
+        Dim sql_stn, sql_elm, sql_obsv, dbstr, tmpbkpfile, sql_scale As String
         Try
-            Dim sql_obsv, dbstr, tmpbkpfile As String
+            'Dim sql_obsv, dbstr, tmpbkpfile, sql_scale As String
             sql_obsv = ""
 
             ' Export CLIMSOFT 3 Mysql db to text (CSV) backup
@@ -65,25 +65,26 @@
             dbstr = txtV4db.Text
 
             If optV3Backup.Checked = True Then
+
                 If Len(txtBkpFile.Text) = 0 Then
                     lstMsgs.Items.Add("No backup fle selected")
                     Me.Cursor = Cursors.Default
                     conn.Close()
                     Exit Sub
                 End If
-                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
+                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
             Else
-                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0; LOAD DATA INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
+                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0; LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
             End If
 
             ' Update station metadata
-            sql_stn = "LOAD DATA INFILE '" & bkpfile & "' IGNORE INTO TABLE station FIELDS TERMINATED BY ',' (stationId);"
+            sql_stn = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE station FIELDS TERMINATED BY ',' (stationId);"
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
             cmd.ExecuteNonQuery()
             'lstMsgs.Items.Add("Stations Updated")
 
             ' Update elements metadata
-            sql_elm = "LOAD DATA INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8) set elementId=@col2;"
+            sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8) set elementId=@col2;"
             'MsgBox(sql_elm)
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
             cmd.ExecuteNonQueryAsync()
@@ -94,6 +95,12 @@
             'Execute query for migrating data to V4 db
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
             cmd.ExecuteNonQuery()
+
+            sql_scale = "UPDATE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark='1' where obsValue <> '' and elementScale > 0 and mark <> '1';"
+            'Execute query for migrating data to V4 db
+            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_scale, conn)
+            cmd.ExecuteNonQuery()
+            'MsgBox("Sacaled")
 
             lstMsgs.Items.Add("CLIMSOFT V3 migration completed")
             Me.Cursor = Cursors.Default

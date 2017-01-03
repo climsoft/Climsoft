@@ -305,8 +305,17 @@
             dsNewRow.Item("authority") = txtAuthority.Text
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
-            dsNewRow.Item("openingDatetime") = txtOpenDate.Value
-            If IsDate(txtClosingDate.Text) Then dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+            
+            If IsDate(txtOpenDate.Text) Then
+                ' Opening date can only be in the past
+                If DateDiff(DateInterval.Day, DateValue(txtOpenDate.Text), Now) > 0 Then dsNewRow.Item("openingDatetime") = txtOpenDate.Text
+            End If
+
+            If IsDate(txtClosingDate.Text) Then
+                ' Opening date can only be in the past
+                If DateDiff(DateInterval.Day, DateValue(txtClosingDate.Text), Now) > 0 Then dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+            End If
+
             dsNewRow.Item("stationoperational") = txtStationOperation.CheckState
 
             'Add a new record to the data source table
