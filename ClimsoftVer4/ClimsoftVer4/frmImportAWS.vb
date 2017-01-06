@@ -23,7 +23,7 @@ Public Class frmImportAWS
     Dim strDataFile As String, strSchemaFile As String, strAWSDataFolder As String
     Sub importAWS()
         Try
-            Dim strConnString As String
+            Dim strConnString, AWSPath As String
             Dim maxDataRows As Integer, stnId As String, elemCode As String, obsYear As String, obsMonth As String, obsDate As String, obsDay As String, obsHour As String, _
                 obsLevel As String, obsVal As String, obsFlag As String, qcStatus As Integer, acquisitionType As Integer, n As Integer, _
                 j As Integer, i As Integer, obsMinute As String, elemFound As Boolean
@@ -36,15 +36,24 @@ Public Class frmImportAWS
             obsVal = ""
             obsFlag = ""
 
-            'strFolderPath = txtFolderName.Text
-            'strFileName = txtFileName.Text
+            AWSPath = IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_data"
 
-            'strDataFile = System.IO.Path.GetFileName(txtDataFile.Text)
-            ' strSchemaFile = System.IO.Path.GetFileName(txtSchemaFile.Text)
-            ' strFolderPath = System.IO.Path.GetDirectoryName(txtDataFile.Text)
+            If Not IO.Directory.Exists(AWSPath) Then
+                IO.Directory.CreateDirectory(AWSPath)
+            End If
 
-            strDataFile = strAWSDataFolder & "\aws_data.csv"
-            strSchemaFile = strAWSDataFolder & "\schema.ini"
+            strDataFile = AWSPath & "\aws_data.csv"
+            strSchemaFile = AWSPath & "\schema.ini"
+
+            ''strFolderPath = txtFolderName.Text
+            ''strFileName = txtFileName.Text
+
+            ''strDataFile = System.IO.Path.GetFileName(txtDataFile.Text)
+            '' strSchemaFile = System.IO.Path.GetFileName(txtSchemaFile.Text)
+            '' strFolderPath = System.IO.Path.GetDirectoryName(txtDataFile.Text)
+
+            'strDataFile = strAWSDataFolder & "\aws_data.csv"
+            'strSchemaFile = strAWSDataFolder & "\schema.ini"
 
             'Copy Data file to CLICOM folder and rename the files to [clicom_daily.csv] and [schema.ini] and overwrite existing file
             My.Computer.FileSystem.CopyFile(txtDataFile.Text, strDataFile, True)
@@ -54,8 +63,10 @@ Public Class frmImportAWS
 
             '   MsgBox("Files copied successfully!")
 
-            'strFolderPath = System.IO.Path.GetDirectoryName(txtQCReportOriginal.Text)
-            strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strAWSDataFolder & ";Extended Properties=Text;"
+            ''strFolderPath = System.IO.Path.GetDirectoryName(txtQCReportOriginal.Text)
+            'strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strAWSDataFolder & ";Extended Properties=Text;"
+
+            strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & AWSPath & ";Extended Properties=Text;"
             Dim conn1 As New OleDb.OleDbConnection
             'rec = -1
 
