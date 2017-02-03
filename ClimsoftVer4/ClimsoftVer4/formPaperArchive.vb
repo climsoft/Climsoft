@@ -188,9 +188,6 @@
         End Try
     End Function
 
-    Private Sub MenuPaperArchive_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuPaperArchive.ItemClicked
-
-    End Sub
 
     Function ArchiveRecord(stn As String, frm As String, frmdatetime As Date, img As String) As Boolean
         'On Error GoTo Err
@@ -486,10 +483,11 @@ Err:
 
             txtStation.Text = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
             txtForm.Text = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
-            txtYY.Text = Year(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
-            txtMM.Text = Month(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
-            txtDD.Text = Strings.Left(ds.Tables("paperarchive").Rows(num).Item("formDatetime"), 2)
-            txtHH.Text = Hour(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+            txtYY.Text = DateAndTime.Year(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+            txtMM.Text = DateAndTime.Month(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+            txtDD.Text = DateAndTime.Day(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
+            'txtDD.Text = Strings.Left(ds.Tables("paperarchive").Rows(num).Item("formDatetime"), 2)
+            txtHH.Text = DateAndTime.Hour(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
 
             txtRec.Text = rec + 1 & " of " & Kount
         Catch ex As Exception

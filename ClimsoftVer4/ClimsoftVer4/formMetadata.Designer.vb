@@ -489,7 +489,7 @@ Partial Class formMetadata
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(608, 1)
+        Me.cmdImport.Location = New System.Drawing.Point(597, -2)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(64, 27)
         Me.cmdImport.TabIndex = 37
@@ -498,16 +498,16 @@ Partial Class formMetadata
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(251, 1)
+        Me.cmdClear.Location = New System.Drawing.Point(47, -2)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(64, 27)
         Me.cmdClear.TabIndex = 36
-        Me.cmdClear.Text = "Reset"
+        Me.cmdClear.Text = "AddNew"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdViewStation
         '
-        Me.cmdViewStation.Location = New System.Drawing.Point(489, -1)
+        Me.cmdViewStation.Location = New System.Drawing.Point(487, -2)
         Me.cmdViewStation.Name = "cmdViewStation"
         Me.cmdViewStation.Size = New System.Drawing.Size(64, 27)
         Me.cmdViewStation.TabIndex = 35
@@ -516,7 +516,7 @@ Partial Class formMetadata
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(370, -1)
+        Me.cmdDelete.Location = New System.Drawing.Point(377, -2)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(64, 27)
         Me.cmdDelete.TabIndex = 34
@@ -525,7 +525,7 @@ Partial Class formMetadata
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(132, -1)
+        Me.cmdUpdate.Location = New System.Drawing.Point(267, -2)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(64, 27)
         Me.cmdUpdate.TabIndex = 33
@@ -534,11 +534,11 @@ Partial Class formMetadata
         '
         'cmdAddNew
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(13, -1)
+        Me.cmdAddNew.Location = New System.Drawing.Point(157, -2)
         Me.cmdAddNew.Name = "cmdAddNew"
         Me.cmdAddNew.Size = New System.Drawing.Size(64, 27)
         Me.cmdAddNew.TabIndex = 32
-        Me.cmdAddNew.Text = "AddNew"
+        Me.cmdAddNew.Text = "Save"
         Me.cmdAddNew.UseVisualStyleBackColor = True
         '
         'Panel1
@@ -902,16 +902,16 @@ Partial Class formMetadata
         '
         'cmdClearElement
         '
-        Me.cmdClearElement.Location = New System.Drawing.Point(261, 4)
+        Me.cmdClearElement.Location = New System.Drawing.Point(24, 6)
         Me.cmdClearElement.Name = "cmdClearElement"
         Me.cmdClearElement.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearElement.TabIndex = 37
-        Me.cmdClearElement.Text = "Reset"
+        Me.cmdClearElement.Text = "AddNew"
         Me.cmdClearElement.UseVisualStyleBackColor = True
         '
         'cmdViewElements
         '
-        Me.cmdViewElements.Location = New System.Drawing.Point(469, 6)
+        Me.cmdViewElements.Location = New System.Drawing.Point(464, 6)
         Me.cmdViewElements.Name = "cmdViewElements"
         Me.cmdViewElements.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewElements.TabIndex = 35
@@ -920,7 +920,7 @@ Partial Class formMetadata
         '
         'cmdDeleteElement
         '
-        Me.cmdDeleteElement.Location = New System.Drawing.Point(365, 6)
+        Me.cmdDeleteElement.Location = New System.Drawing.Point(354, 6)
         Me.cmdDeleteElement.Name = "cmdDeleteElement"
         Me.cmdDeleteElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteElement.TabIndex = 34
@@ -929,7 +929,7 @@ Partial Class formMetadata
         '
         'cmdUpdateElement
         '
-        Me.cmdUpdateElement.Location = New System.Drawing.Point(157, 6)
+        Me.cmdUpdateElement.Location = New System.Drawing.Point(244, 6)
         Me.cmdUpdateElement.Name = "cmdUpdateElement"
         Me.cmdUpdateElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateElement.TabIndex = 33
@@ -938,11 +938,11 @@ Partial Class formMetadata
         '
         'cmdAddElement
         '
-        Me.cmdAddElement.Location = New System.Drawing.Point(53, 6)
+        Me.cmdAddElement.Location = New System.Drawing.Point(134, 6)
         Me.cmdAddElement.Name = "cmdAddElement"
         Me.cmdAddElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddElement.TabIndex = 32
-        Me.cmdAddElement.Text = "AddNew"
+        Me.cmdAddElement.Text = "Save"
         Me.cmdAddElement.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -1223,16 +1223,16 @@ Partial Class formMetadata
         '
         'cmdClearStationElement
         '
-        Me.cmdClearStationElement.Location = New System.Drawing.Point(254, 6)
+        Me.cmdClearStationElement.Location = New System.Drawing.Point(27, 9)
         Me.cmdClearStationElement.Name = "cmdClearStationElement"
         Me.cmdClearStationElement.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearStationElement.TabIndex = 38
-        Me.cmdClearStationElement.Text = "Reset"
+        Me.cmdClearStationElement.Text = "AddNew"
         Me.cmdClearStationElement.UseVisualStyleBackColor = True
         '
         'cmdViewStElement
         '
-        Me.cmdViewStElement.Location = New System.Drawing.Point(456, 7)
+        Me.cmdViewStElement.Location = New System.Drawing.Point(479, 7)
         Me.cmdViewStElement.Name = "cmdViewStElement"
         Me.cmdViewStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewStElement.TabIndex = 35
@@ -1241,7 +1241,7 @@ Partial Class formMetadata
         '
         'cmdDeleteStElement
         '
-        Me.cmdDeleteStElement.Location = New System.Drawing.Point(355, 7)
+        Me.cmdDeleteStElement.Location = New System.Drawing.Point(366, 7)
         Me.cmdDeleteStElement.Name = "cmdDeleteStElement"
         Me.cmdDeleteStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteStElement.TabIndex = 34
@@ -1250,7 +1250,7 @@ Partial Class formMetadata
         '
         'cmdUpdateStElement
         '
-        Me.cmdUpdateStElement.Location = New System.Drawing.Point(153, 7)
+        Me.cmdUpdateStElement.Location = New System.Drawing.Point(253, 7)
         Me.cmdUpdateStElement.Name = "cmdUpdateStElement"
         Me.cmdUpdateStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateStElement.TabIndex = 33
@@ -1259,11 +1259,11 @@ Partial Class formMetadata
         '
         'cmdAddStElement
         '
-        Me.cmdAddStElement.Location = New System.Drawing.Point(52, 7)
+        Me.cmdAddStElement.Location = New System.Drawing.Point(140, 7)
         Me.cmdAddStElement.Name = "cmdAddStElement"
         Me.cmdAddStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddStElement.TabIndex = 32
-        Me.cmdAddStElement.Text = "AddNew"
+        Me.cmdAddStElement.Text = "Save"
         Me.cmdAddStElement.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -1519,11 +1519,11 @@ Partial Class formMetadata
         '
         'cmdClear2
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(323, 4)
+        Me.cmdClear2.Location = New System.Drawing.Point(95, 4)
         Me.cmdClear2.Name = "cmdClear2"
         Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
         Me.cmdClear2.TabIndex = 39
-        Me.cmdClear2.Text = "Reset"
+        Me.cmdClear2.Text = "AddNew"
         Me.cmdClear2.UseVisualStyleBackColor = True
         '
         'Label10
@@ -1537,7 +1537,7 @@ Partial Class formMetadata
         '
         'cmdViewInstrument
         '
-        Me.cmdViewInstrument.Location = New System.Drawing.Point(539, 5)
+        Me.cmdViewInstrument.Location = New System.Drawing.Point(583, 6)
         Me.cmdViewInstrument.Name = "cmdViewInstrument"
         Me.cmdViewInstrument.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewInstrument.TabIndex = 35
@@ -1546,7 +1546,7 @@ Partial Class formMetadata
         '
         'cmdDeleteInstrument
         '
-        Me.cmdDeleteInstrument.Location = New System.Drawing.Point(431, 5)
+        Me.cmdDeleteInstrument.Location = New System.Drawing.Point(461, 5)
         Me.cmdDeleteInstrument.Name = "cmdDeleteInstrument"
         Me.cmdDeleteInstrument.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteInstrument.TabIndex = 34
@@ -1555,7 +1555,7 @@ Partial Class formMetadata
         '
         'cmdUpdateInstrument
         '
-        Me.cmdUpdateInstrument.Location = New System.Drawing.Point(215, 5)
+        Me.cmdUpdateInstrument.Location = New System.Drawing.Point(339, 5)
         Me.cmdUpdateInstrument.Name = "cmdUpdateInstrument"
         Me.cmdUpdateInstrument.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateInstrument.TabIndex = 33
@@ -1564,11 +1564,11 @@ Partial Class formMetadata
         '
         'cmdAddInstrument
         '
-        Me.cmdAddInstrument.Location = New System.Drawing.Point(107, 5)
+        Me.cmdAddInstrument.Location = New System.Drawing.Point(217, 5)
         Me.cmdAddInstrument.Name = "cmdAddInstrument"
         Me.cmdAddInstrument.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddInstrument.TabIndex = 32
-        Me.cmdAddInstrument.Text = "AddNew"
+        Me.cmdAddInstrument.Text = "Save"
         Me.cmdAddInstrument.UseVisualStyleBackColor = True
         '
         'GroupBox8
@@ -1906,7 +1906,7 @@ Partial Class formMetadata
         '
         'cmdViewHistory
         '
-        Me.cmdViewHistory.Location = New System.Drawing.Point(482, 8)
+        Me.cmdViewHistory.Location = New System.Drawing.Point(499, 7)
         Me.cmdViewHistory.Name = "cmdViewHistory"
         Me.cmdViewHistory.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewHistory.TabIndex = 43
@@ -1915,7 +1915,7 @@ Partial Class formMetadata
         '
         'cmdDeleteHistory
         '
-        Me.cmdDeleteHistory.Location = New System.Drawing.Point(379, 8)
+        Me.cmdDeleteHistory.Location = New System.Drawing.Point(387, 8)
         Me.cmdDeleteHistory.Name = "cmdDeleteHistory"
         Me.cmdDeleteHistory.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteHistory.TabIndex = 42
@@ -1924,7 +1924,7 @@ Partial Class formMetadata
         '
         'cmdUpdateHistory
         '
-        Me.cmdUpdateHistory.Location = New System.Drawing.Point(173, 8)
+        Me.cmdUpdateHistory.Location = New System.Drawing.Point(275, 8)
         Me.cmdUpdateHistory.Name = "cmdUpdateHistory"
         Me.cmdUpdateHistory.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateHistory.TabIndex = 41
@@ -1933,20 +1933,20 @@ Partial Class formMetadata
         '
         'cmdAddHistory
         '
-        Me.cmdAddHistory.Location = New System.Drawing.Point(70, 8)
+        Me.cmdAddHistory.Location = New System.Drawing.Point(163, 8)
         Me.cmdAddHistory.Name = "cmdAddHistory"
         Me.cmdAddHistory.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddHistory.TabIndex = 40
-        Me.cmdAddHistory.Text = "AddNew"
+        Me.cmdAddHistory.Text = "Save"
         Me.cmdAddHistory.UseVisualStyleBackColor = True
         '
         'cmdClearHistory
         '
-        Me.cmdClearHistory.Location = New System.Drawing.Point(276, 7)
+        Me.cmdClearHistory.Location = New System.Drawing.Point(51, 7)
         Me.cmdClearHistory.Name = "cmdClearHistory"
         Me.cmdClearHistory.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearHistory.TabIndex = 39
-        Me.cmdClearHistory.Text = "Reset"
+        Me.cmdClearHistory.Text = "AddNew"
         Me.cmdClearHistory.UseVisualStyleBackColor = True
         '
         'GroupBox9
@@ -2280,7 +2280,7 @@ Partial Class formMetadata
         '
         'cmdDeleteView
         '
-        Me.cmdDeleteView.Location = New System.Drawing.Point(454, 5)
+        Me.cmdDeleteView.Location = New System.Drawing.Point(455, 5)
         Me.cmdDeleteView.Name = "cmdDeleteView"
         Me.cmdDeleteView.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteView.TabIndex = 43
@@ -2289,7 +2289,7 @@ Partial Class formMetadata
         '
         'cmdDeleteQualier
         '
-        Me.cmdDeleteQualier.Location = New System.Drawing.Point(355, 5)
+        Me.cmdDeleteQualier.Location = New System.Drawing.Point(354, 5)
         Me.cmdDeleteQualier.Name = "cmdDeleteQualier"
         Me.cmdDeleteQualier.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteQualier.TabIndex = 42
@@ -2298,7 +2298,7 @@ Partial Class formMetadata
         '
         'cmdUpdateQualier
         '
-        Me.cmdUpdateQualier.Location = New System.Drawing.Point(157, 5)
+        Me.cmdUpdateQualier.Location = New System.Drawing.Point(253, 5)
         Me.cmdUpdateQualier.Name = "cmdUpdateQualier"
         Me.cmdUpdateQualier.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateQualier.TabIndex = 41
@@ -2307,20 +2307,20 @@ Partial Class formMetadata
         '
         'cmdAddQualier
         '
-        Me.cmdAddQualier.Location = New System.Drawing.Point(58, 5)
+        Me.cmdAddQualier.Location = New System.Drawing.Point(152, 5)
         Me.cmdAddQualier.Name = "cmdAddQualier"
         Me.cmdAddQualier.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddQualier.TabIndex = 40
-        Me.cmdAddQualier.Text = "AddNew"
+        Me.cmdAddQualier.Text = "Save"
         Me.cmdAddQualier.UseVisualStyleBackColor = True
         '
         'cmdClearQualifier
         '
-        Me.cmdClearQualifier.Location = New System.Drawing.Point(256, 4)
+        Me.cmdClearQualifier.Location = New System.Drawing.Point(51, 3)
         Me.cmdClearQualifier.Name = "cmdClearQualifier"
         Me.cmdClearQualifier.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearQualifier.TabIndex = 39
-        Me.cmdClearQualifier.Text = "Reset"
+        Me.cmdClearQualifier.Text = "AddNew"
         Me.cmdClearQualifier.UseVisualStyleBackColor = True
         '
         'GroupBox11
@@ -2541,7 +2541,7 @@ Partial Class formMetadata
         '
         'cmdViewScheduleClass
         '
-        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(410, 6)
+        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(420, 6)
         Me.cmdViewScheduleClass.Name = "cmdViewScheduleClass"
         Me.cmdViewScheduleClass.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewScheduleClass.TabIndex = 43
@@ -2550,7 +2550,7 @@ Partial Class formMetadata
         '
         'cmdDeleteScheduleClass
         '
-        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(313, 6)
+        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(318, 6)
         Me.cmdDeleteScheduleClass.Name = "cmdDeleteScheduleClass"
         Me.cmdDeleteScheduleClass.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteScheduleClass.TabIndex = 42
@@ -2559,7 +2559,7 @@ Partial Class formMetadata
         '
         'cmdUpdateScheduleClass
         '
-        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(119, 6)
+        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(216, 6)
         Me.cmdUpdateScheduleClass.Name = "cmdUpdateScheduleClass"
         Me.cmdUpdateScheduleClass.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateScheduleClass.TabIndex = 41
@@ -2568,20 +2568,20 @@ Partial Class formMetadata
         '
         'cmdAddScheduleClass
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(22, 6)
+        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
         Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
         Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddScheduleClass.TabIndex = 40
-        Me.cmdAddScheduleClass.Text = "AddNew"
+        Me.cmdAddScheduleClass.Text = "Save"
         Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
         '
         'cmdClearClass
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(216, 5)
+        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
         Me.cmdClearClass.Name = "cmdClearClass"
         Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearClass.TabIndex = 39
-        Me.cmdClearClass.Text = "Reset"
+        Me.cmdClearClass.Text = "AddNew"
         Me.cmdClearClass.UseVisualStyleBackColor = True
         '
         'GroupBox14
@@ -2787,7 +2787,7 @@ Partial Class formMetadata
         '
         'cmdViewFeature
         '
-        Me.cmdViewFeature.Location = New System.Drawing.Point(444, 5)
+        Me.cmdViewFeature.Location = New System.Drawing.Point(470, 5)
         Me.cmdViewFeature.Name = "cmdViewFeature"
         Me.cmdViewFeature.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewFeature.TabIndex = 52
@@ -2796,7 +2796,7 @@ Partial Class formMetadata
         '
         'cmdDeleteFeature
         '
-        Me.cmdDeleteFeature.Location = New System.Drawing.Point(334, 5)
+        Me.cmdDeleteFeature.Location = New System.Drawing.Point(366, 5)
         Me.cmdDeleteFeature.Name = "cmdDeleteFeature"
         Me.cmdDeleteFeature.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteFeature.TabIndex = 51
@@ -2805,7 +2805,7 @@ Partial Class formMetadata
         '
         'cmdUpdateFeature
         '
-        Me.cmdUpdateFeature.Location = New System.Drawing.Point(132, 5)
+        Me.cmdUpdateFeature.Location = New System.Drawing.Point(262, 5)
         Me.cmdUpdateFeature.Name = "cmdUpdateFeature"
         Me.cmdUpdateFeature.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateFeature.TabIndex = 50
@@ -2814,20 +2814,20 @@ Partial Class formMetadata
         '
         'cmdAddFeature
         '
-        Me.cmdAddFeature.Location = New System.Drawing.Point(31, 5)
+        Me.cmdAddFeature.Location = New System.Drawing.Point(158, 5)
         Me.cmdAddFeature.Name = "cmdAddFeature"
         Me.cmdAddFeature.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddFeature.TabIndex = 49
-        Me.cmdAddFeature.Text = "AddNew"
+        Me.cmdAddFeature.Text = "Save"
         Me.cmdAddFeature.UseVisualStyleBackColor = True
         '
         'cmdClearFeature
         '
-        Me.cmdClearFeature.Location = New System.Drawing.Point(233, 4)
+        Me.cmdClearFeature.Location = New System.Drawing.Point(54, 4)
         Me.cmdClearFeature.Name = "cmdClearFeature"
         Me.cmdClearFeature.Size = New System.Drawing.Size(81, 27)
         Me.cmdClearFeature.TabIndex = 39
-        Me.cmdClearFeature.Text = "Reset"
+        Me.cmdClearFeature.Text = "AddNew"
         Me.cmdClearFeature.UseVisualStyleBackColor = True
         '
         'GroupBox16
@@ -3041,16 +3041,16 @@ Partial Class formMetadata
         '
         'cmdReset
         '
-        Me.cmdReset.Location = New System.Drawing.Point(117, 9)
+        Me.cmdReset.Location = New System.Drawing.Point(29, 9)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(63, 25)
         Me.cmdReset.TabIndex = 44
-        Me.cmdReset.Text = "Reset"
+        Me.cmdReset.Text = "AddNew"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'cmdViewPaperArchive
         '
-        Me.cmdViewPaperArchive.Location = New System.Drawing.Point(450, 9)
+        Me.cmdViewPaperArchive.Location = New System.Drawing.Point(437, 9)
         Me.cmdViewPaperArchive.Name = "cmdViewPaperArchive"
         Me.cmdViewPaperArchive.Size = New System.Drawing.Size(63, 25)
         Me.cmdViewPaperArchive.TabIndex = 43
@@ -3059,7 +3059,7 @@ Partial Class formMetadata
         '
         'cmdDeleteArchiveDef
         '
-        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(339, 9)
+        Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(335, 9)
         Me.cmdDeleteArchiveDef.Name = "cmdDeleteArchiveDef"
         Me.cmdDeleteArchiveDef.Size = New System.Drawing.Size(63, 25)
         Me.cmdDeleteArchiveDef.TabIndex = 42
@@ -3068,7 +3068,7 @@ Partial Class formMetadata
         '
         'cmdUpdateArchiveDef
         '
-        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(228, 9)
+        Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(233, 9)
         Me.cmdUpdateArchiveDef.Name = "cmdUpdateArchiveDef"
         Me.cmdUpdateArchiveDef.Size = New System.Drawing.Size(63, 25)
         Me.cmdUpdateArchiveDef.TabIndex = 41
@@ -3077,11 +3077,11 @@ Partial Class formMetadata
         '
         'cmdAddArchiveDef
         '
-        Me.cmdAddArchiveDef.Location = New System.Drawing.Point(6, 9)
+        Me.cmdAddArchiveDef.Location = New System.Drawing.Point(131, 9)
         Me.cmdAddArchiveDef.Name = "cmdAddArchiveDef"
         Me.cmdAddArchiveDef.Size = New System.Drawing.Size(63, 25)
         Me.cmdAddArchiveDef.TabIndex = 40
-        Me.cmdAddArchiveDef.Text = "AddNew"
+        Me.cmdAddArchiveDef.Text = "Save"
         Me.cmdAddArchiveDef.UseVisualStyleBackColor = True
         '
         'GroupBox19
