@@ -683,89 +683,74 @@ Err:
     End Sub
 
     Private Sub cmdCreate_Click(sender As Object, e As EventArgs) Handles cmdCreate.Click
-        On Error GoTo Err
+        'On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
+
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim str As New DataSet
-        Dim dsNewRow As DataRow
+        'Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
         Dim comm As New MySql.Data.MySqlClient.MySqlCommand
 
-        'str = GetDataSet("aws_structures", "Select * from aws_structures")
+        ' Create the structure details record in aws_structures table
+        If Len(txtStrName.Text) = 0 Or Len(txtDelimiter.Text) = 0 Or Len(txtHeaders.Text) = 0 Then
+            MsgBox("Values for Structure Name, Delimiter Type and Total Header Rows must all be provided!")
+            Exit Sub
+        End If
 
-        'dsNewRow = str.Tables("aws_structures").NewRow
-        'dsNewRow.Item("strName") = txtStrName.Text
-        'dsNewRow.Item("data_delimiter") = txtDelimiter.Text
-        'dsNewRow.Item("hdrRows") = txtHeaders.Text
-        'dsNewRow.Item("txtQualifier") = txtQualifier.Text
+        Try
+            comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+            'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
+            sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
 
-        ''Add a new record to the data source table
-        'str.Tables("aws_structures").Rows.Add(dsNewRow)
-        'da.Update(str, "aws_structures")
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
 
-        'recEdit.messageBoxCommit()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Exit Sub
+        End Try
 
-        comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
-        'sql0 = "INSERT INTO `mysql_climsoft_db_v4`.`aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
-        sql0 = "INSERT INTO `aws_structures` (`strName`, `data_delimiter`, `hdrRows`, `txtQualifier`)" & " VALUES ('" & txtStrName.Text & "', '" & txtDelimiter.Text & "', '" & txtHeaders.Text & "', '" & txtQualifier.Text & "');"
-
-        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-        comm.ExecuteNonQuery()   ' Execute the query
-
-
-        '' Create a table for the new structure
-
-        '        CREATE TABLE `aws_rwanda4` (
-        '	`Cols` INT(11) NOT NULL,
-        '	`Element_Name` VARCHAR(20) NULL DEFAULT NULL,
-        '	`Element_Abbreviation` VARCHAR(20) NULL DEFAULT NULL,
-        '	`Element_Details` VARCHAR(25) NULL DEFAULT NULL,
-        '	`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL,
-        '	`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL,
-        '	`unit` VARCHAR(15) NULL DEFAULT NULL,
-        '	`lower_limit` VARCHAR(10) NULL DEFAULT NULL,
-        '	`upper_limit` VARCHAR(10) NULL DEFAULT NULL,
-        '	`obsv` VARCHAR(25) NULL DEFAULT NULL,
-        '	PRIMARY KEY (`Cols`)
-        ')
-        'COLLATE='utf8_general_ci'
-        '        ENGINE = InnoDB
-        ';
+        ' Create a table for the new structure
         Dim tbl As String = txtStrName.Text
-        'sql0 = "CREATE TABLE `mysql_climsoft_db_v4`.`" & txtStrName.Text & "` " & _
-        sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
-               "( " & _
-                "`Cols` INT NOT NULL, " & _
-                "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
-                "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
-                "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
-                "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
-                "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
-                "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
-                "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
-                "UNIQUE KEY `identification` (`Cols`) " & _
-             ") COLLATE='utf8_general_ci';"
-        'MsgBox(sql0)
 
+        Try
 
+            sql0 = "CREATE TABLE `" & txtStrName.Text & "` " & _
+                   "( " & _
+                    "`Cols` INT NOT NULL, " & _
+                    "`Element_abbreviation` VARCHAR(20) NULL DEFAULT NULL, " & _
+                    "`Element_Name` VARCHAR(20) NULL DEFAULT NULL, " & _
+                    "`Element_Details` VARCHAR(25) NULL DEFAULT NULL, " & _
+                    "`Climsoft_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                    "`Bufr_Element` VARCHAR(6) NULL DEFAULT NULL, " & _
+                    "`unit` VARCHAR(15) NULL DEFAULT NULL, " & _
+                    "`lower_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                    "`upper_limit` VARCHAR(10) NULL DEFAULT NULL, " & _
+                    "`obsv` VARCHAR(25) NULL DEFAULT NULL, " & _
+                    "UNIQUE KEY `identification` (`Cols`) " & _
+                 ") COLLATE='utf8_general_ci';"
 
-        comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-        comm.ExecuteNonQuery()   ' Execute the query
+            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            comm.ExecuteNonQuery()   ' Execute the query
 
-        ' Display the created table on the DataGrid
+            ' Display the created table on the DataGrid
 
-        DataGridFill(txtStrName.Text)
-        FillList(cmbExistingStructures, "aws_structures", "strName")
-        cmbExistingStructures.Refresh()
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " : " & Err.Description)
+            DataGridFill(txtStrName.Text)
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+            cmbExistingStructures.Refresh()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        '        Exit Sub
+        'Err:
+        '        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
