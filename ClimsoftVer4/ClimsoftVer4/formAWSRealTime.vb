@@ -345,6 +345,7 @@ Err:
 
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
+        'MsgBox(1)
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
@@ -746,8 +747,10 @@ Err:
 
         Catch ex As Exception
             MsgBox(ex.Message)
+            Exit Sub
         End Try
 
+        MsgBox("The data structure: " & txtStrName.Text & " successfully created")
         '        Exit Sub
         'Err:
         '        MsgBox(Err.Number & " : " & Err.Description)
@@ -767,8 +770,23 @@ Err:
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, 1)) - 1)
-        FillList(cmbExistingStructures, "aws_structures", "strName")
+        Try
+            If Not IsNumeric(Strings.Right(lblRecords.Text, 1)) Then ' No data structure selected
+                MsgBox("Nothing to delete")
+                Exit Sub
+            End If
+            If MsgBox("The data structure " & txtStrName.Text & " will be deleted.", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
+            DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, Len(lblRecords.Text) - 5)) - 1)
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+            txtStrName.Text = ""
+            txtDelimiter.Text = ""
+            txtHeaders.Text = ""
+            txtQualifier.Text = ""
+            cmbExistingStructures.Text = ""
+            DataGridViewStructures.Visible = False
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub DataGridFill(tbl As String)
