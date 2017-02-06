@@ -778,11 +778,13 @@ Err:
             If MsgBox("The data structure " & txtStrName.Text & " will be deleted.", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
             DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, Len(lblRecords.Text) - 5)) - 1)
             FillList(cmbExistingStructures, "aws_structures", "strName")
+            ' Clear text boxes
             txtStrName.Text = ""
             txtDelimiter.Text = ""
             txtHeaders.Text = ""
             txtQualifier.Text = ""
             cmbExistingStructures.Text = ""
+            ' Hide Data grid view
             DataGridViewStructures.Visible = False
         Catch ex As Exception
             MsgBox(ex.Message)
