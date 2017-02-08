@@ -1260,6 +1260,7 @@ Err:
         'MsgBox("Process_input_data")
         Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
+        FileClose(1)
         FileClose(10)
         FileClose(11)
         FileClose(30)
@@ -1633,7 +1634,7 @@ Err:
         If IsDate(datestring) Then
             ' Process the messages for transmission at the scheduled time
             ' Temporarily suspended
-            'update_tbltemplate(aws_rs, datestring)
+            update_tbltemplate(aws_rs, datestring)
 
         End If
         txtLastProcess.Text = datestring
@@ -1949,6 +1950,8 @@ Err:
         ss = DateAndTime.Second(Date_Time)
         wmo_id = 63999
 
+        msg_header = txtMsgHeader.Text
+
         BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
 
         Process_Status("Updating TDCF Template with observations ")
@@ -2031,7 +2034,9 @@ Err:
 
         ' ' Compose the complete AWS BUFR message
         '
-        ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
+        'If Not AWS_BUFR_Code(sql, msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+
+        If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
 
         Exit Sub
 Err:
@@ -2822,7 +2827,7 @@ Err:
         kounter = 1
         ''MsgBox(kount)
         For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Mid(BUFR_Message, kount, 8), byt) Then
+            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
                 'writeBinay.Write(byt)
                 'writeBinay.Write(Binary_Decimal(Mid(BUFR_Message, kount, 8)))
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
