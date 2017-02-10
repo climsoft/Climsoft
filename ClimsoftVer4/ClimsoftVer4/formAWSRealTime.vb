@@ -1260,6 +1260,7 @@ Err:
         'MsgBox("Process_input_data")
         Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
+        FileClose(1)
         FileClose(10)
         FileClose(11)
         FileClose(30)
@@ -1949,6 +1950,8 @@ Err:
         ss = DateAndTime.Second(Date_Time)
         wmo_id = 63999
 
+        msg_header = txtMsgHeader.Text
+
         BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
 
         Process_Status("Updating TDCF Template with observations ")
@@ -2031,7 +2034,9 @@ Err:
 
         ' ' Compose the complete AWS BUFR message
         '
-        ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
+        'If Not AWS_BUFR_Code(sql, msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+
+        If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
 
         Exit Sub
 Err:
@@ -2802,7 +2807,7 @@ Err:
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
 
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         If File.Exists(AWS_BUFR_File) Then File.Delete(AWS_BUFR_File)
 
         'Open AWS_BUFR_File For Binary As #2
@@ -2813,8 +2818,8 @@ Err:
         Dim kounter As Long
 
         'Dim writeStream As FileStream
-        'writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
-        'Dim writeBinay As New BinaryWriter(writeStream)
+        ''writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
+        ''Dim writeBinay As New BinaryWriter(writeStream)
         'writeBinay.Write(89)
 
 
@@ -2822,11 +2827,11 @@ Err:
         kounter = 1
         ''MsgBox(kount)
         For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Mid(BUFR_Message, kount, 8), byt) Then
+            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
                 'writeBinay.Write(byt)
-                'writeBinay.Write(Binary_Decimal(Mid(BUFR_Message, kount, 8)))
+                'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
-                FilePut(2, byt, kounter)
+                FilePut(2, Strings.Mid(BUFR_Message, kount, 8), kounter)
                 'FilePutObject(2, byt, kounter)
                 'PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
                 kounter = kounter + 1
@@ -2850,7 +2855,7 @@ Err:
         '    bin_out = bin_out & dat
         'Loop
 
-        'FileClose(1)
+        FileClose(1)
 
         'MsgBox msg_file
         Dim bufr_filename As String
@@ -2860,7 +2865,7 @@ Err:
         If Not FTP_Call(bufr_filename, "put") Then Exit Function
 
         AWS_BUFR_Code = True
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         Exit Function
 Err:
         If Err.Description = "" Then
@@ -2876,6 +2881,87 @@ Err:
         FileClose(2)
         'writeBinay.Close()
     End Function
+
+    Sub WriteBytes(fl As String, dat As String)
+
+        'Dim myFileStream As FileStream
+        'Dim bteWrite() As Byte
+        'Dim intByte As Integer
+        'Dim lngLoop As Long
+
+        'Try
+        '    'intByte = Encoding.ASCII.GetBytes("asdf").Length
+        '    'ReDim bteWrite(intByte)
+        '    'bteWrite = Encoding.ASCII.GetBytes("asdf")
+        '    'myFileStream = File.OpenWrite("test.txt")
+        '    myFileStream = File.OpenWrite("test.txt")
+        '    'For lngLoop = 0 To intByte - 1
+        '    'For i = 0 To 7
+        '    myFileStream.WriteByte("1111111")
+        '    'Next i
+        '    'Next
+
+        '    myFileStream.Close()
+        'Catch ex As IOException
+        '    Console.WriteLine(ex.Message)
+        'End Try
+        Dim byt As Long
+        Const fileName As String = "Test#@@#.dat"
+
+        ' Create random data to write to the file.
+        Dim dataArray(8) As Byte
+        'Dim dataArray(4) As Byte
+        Dim randomGenerator As New Random()
+        randomGenerator.NextBytes(dataArray)
+        'byt = ""
+        'For i = 0 To 7
+        '    byt = byt & dataArray(i)
+
+        'MsgBox(byt)
+
+        Dim fileStream As FileStream = _
+            New FileStream(fileName, FileMode.Create)
+        Try
+            Dim kounts As Long
+            byt = ""
+            For kounts = 1 To Len(dat) Step 8
+                If Binary_Decimal(Strings.Mid(dat, kounts, 8), byt) Then
+
+                    If IsNumeric(byt) Then fileStream.WriteByte(byt)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(byt)
+        End Try
+        'Try
+
+        '    ' Write the data to the file, byte by byte.
+        '    For i As Integer = 0 To dataArray.Length - 1
+        '        fileStream.WriteByte(dataArray(i))
+        '    Next i
+
+        '    ' Set the stream position to the beginning of the stream.
+        '    fileStream.Seek(0, SeekOrigin.Begin)
+
+        '    ' Read and verify the data.
+        '    For i As Integer = 0 To _
+        '        CType(fileStream.Length, Integer) - 1
+
+        '        If dataArray(i) <> fileStream.ReadByte() Then
+        '            Console.WriteLine("Error writing data.")
+        '            Return
+        '        End If
+        '    Next i
+        '    Console.WriteLine("The data was written to {0} " & _
+        '        "and verified.", fileStream.Name)
+        'Finally
+        '    fileStream.Close()
+        'End Try
+
+        fileStream.Close()
+
+    End Sub
+
 
     Function Binary_Decimal(BinN As String, ByRef BinD As Long) As Boolean
         On Error GoTo Err
