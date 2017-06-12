@@ -345,6 +345,7 @@ Err:
 
 
     Function DeleteRecord(tbl As String, recs As Integer) As Boolean
+        'MsgBox(1)
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
@@ -769,8 +770,25 @@ Err:
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, 1)) - 1)
-        FillList(cmbExistingStructures, "aws_structures", "strName")
+        Try
+            If Not IsNumeric(Strings.Right(lblRecords.Text, 1)) Then ' No data structure selected
+                MsgBox("Nothing to delete")
+                Exit Sub
+            End If
+            If MsgBox("The data structure " & txtStrName.Text & " will be deleted.", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
+            DeleteRecord("aws_structures", Int(Strings.Right(lblRecords.Text, Len(lblRecords.Text) - 5)) - 1)
+            FillList(cmbExistingStructures, "aws_structures", "strName")
+            ' Clear text boxes
+            txtStrName.Text = ""
+            txtDelimiter.Text = ""
+            txtHeaders.Text = ""
+            txtQualifier.Text = ""
+            cmbExistingStructures.Text = ""
+            ' Hide Data grid view
+            DataGridViewStructures.Visible = False
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub DataGridFill(tbl As String)
@@ -1242,6 +1260,7 @@ Err:
         'MsgBox("Process_input_data")
         Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
+        FileClose(1)
         FileClose(10)
         FileClose(11)
         FileClose(30)
@@ -1615,7 +1634,7 @@ Err:
         If IsDate(datestring) Then
             ' Process the messages for transmission at the scheduled time
             ' Temporarily suspended
-            'update_tbltemplate(aws_rs, datestring)
+            update_tbltemplate(aws_rs, datestring)
 
         End If
         txtLastProcess.Text = datestring
@@ -1931,6 +1950,8 @@ Err:
         ss = DateAndTime.Second(Date_Time)
         wmo_id = 63999
 
+        msg_header = txtMsgHeader.Text
+
         BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
 
         Process_Status("Updating TDCF Template with observations ")
@@ -2013,7 +2034,9 @@ Err:
 
         ' ' Compose the complete AWS BUFR message
         '
-        ' If Not AWS_BUFR_Code(sql, header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors "Can't Encode Data"  ' MsgBox "Can't Encode Data"
+        'If Not AWS_BUFR_Code(sql, msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+
+        If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
 
         Exit Sub
 Err:
@@ -2390,7 +2413,7 @@ Err:
         Dim chr2 As String
         Dim kount As Integer
 
-        ' Truncate long data strings to bufr data width
+        ' Add leading zeroes to short data strings
         binstr = ""
         If Len(dat) < DataWidth / 8 Then
             For kount = 1 To DataWidth - Len(dat) * 8
@@ -2784,14 +2807,14 @@ Err:
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
 
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         If File.Exists(AWS_BUFR_File) Then File.Delete(AWS_BUFR_File)
 
         'Open AWS_BUFR_File For Binary As #2
         FileOpen(2, AWS_BUFR_File, OpenMode.Binary)
 
         'Output BUFR data into binary and text file
-        Dim byt As String
+        Dim byt As Long
         Dim kounter As Long
 
         'Dim writeStream As FileStream
@@ -2804,13 +2827,13 @@ Err:
         kounter = 1
         ''MsgBox(kount)
         For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Mid(BUFR_Message, kount, 8), byt) Then
+            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
                 'writeBinay.Write(byt)
-                'writeBinay.Write(Binary_Decimal(Mid(BUFR_Message, kount, 8)))
+                'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
                 FilePut(2, byt, kounter)
                 'FilePutObject(2, byt, kounter)
-                'PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
+                PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
                 kounter = kounter + 1
             End If
         Next kount
@@ -2832,7 +2855,7 @@ Err:
         '    bin_out = bin_out & dat
         'Loop
 
-        'FileClose(1)
+        FileClose(1)
 
         'MsgBox msg_file
         Dim bufr_filename As String
@@ -2842,7 +2865,7 @@ Err:
         If Not FTP_Call(bufr_filename, "put") Then Exit Function
 
         AWS_BUFR_Code = True
-
+        'WriteBytes(AWS_BUFR_File, BUFR_Message)
         Exit Function
 Err:
         If Err.Description = "" Then
@@ -2858,6 +2881,87 @@ Err:
         FileClose(2)
         'writeBinay.Close()
     End Function
+
+    Sub WriteBytes(fl As String, dat As String)
+
+        'Dim myFileStream As FileStream
+        'Dim bteWrite() As Byte
+        'Dim intByte As Integer
+        'Dim lngLoop As Long
+
+        'Try
+        '    'intByte = Encoding.ASCII.GetBytes("asdf").Length
+        '    'ReDim bteWrite(intByte)
+        '    'bteWrite = Encoding.ASCII.GetBytes("asdf")
+        '    'myFileStream = File.OpenWrite("test.txt")
+        '    myFileStream = File.OpenWrite("test.txt")
+        '    'For lngLoop = 0 To intByte - 1
+        '    'For i = 0 To 7
+        '    myFileStream.WriteByte("1111111")
+        '    'Next i
+        '    'Next
+
+        '    myFileStream.Close()
+        'Catch ex As IOException
+        '    Console.WriteLine(ex.Message)
+        'End Try
+        Dim byt As Long
+        Const fileName As String = "Test#@@#.dat"
+
+        ' Create random data to write to the file.
+        Dim dataArray(8) As Byte
+        'Dim dataArray(4) As Byte
+        Dim randomGenerator As New Random()
+        randomGenerator.NextBytes(dataArray)
+        'byt = ""
+        'For i = 0 To 7
+        '    byt = byt & dataArray(i)
+
+        'MsgBox(byt)
+
+        Dim fileStream As FileStream = _
+            New FileStream(fileName, FileMode.Create)
+        Try
+            Dim kounts As Long
+            byt = ""
+            For kounts = 1 To Len(dat) Step 8
+                If Binary_Decimal(Strings.Mid(dat, kounts, 8), byt) Then
+
+                    If IsNumeric(byt) Then fileStream.WriteByte(byt)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox(byt)
+        End Try
+        'Try
+
+        '    ' Write the data to the file, byte by byte.
+        '    For i As Integer = 0 To dataArray.Length - 1
+        '        fileStream.WriteByte(dataArray(i))
+        '    Next i
+
+        '    ' Set the stream position to the beginning of the stream.
+        '    fileStream.Seek(0, SeekOrigin.Begin)
+
+        '    ' Read and verify the data.
+        '    For i As Integer = 0 To _
+        '        CType(fileStream.Length, Integer) - 1
+
+        '        If dataArray(i) <> fileStream.ReadByte() Then
+        '            Console.WriteLine("Error writing data.")
+        '            Return
+        '        End If
+        '    Next i
+        '    Console.WriteLine("The data was written to {0} " & _
+        '        "and verified.", fileStream.Name)
+        'Finally
+        '    fileStream.Close()
+        'End Try
+
+        fileStream.Close()
+
+    End Sub
+
 
     Function Binary_Decimal(BinN As String, ByRef BinD As Long) As Boolean
         On Error GoTo Err

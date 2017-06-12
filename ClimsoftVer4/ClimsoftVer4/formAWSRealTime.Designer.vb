@@ -1191,7 +1191,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Location = New System.Drawing.Point(196, 115)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 240)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 204)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -1909,7 +1909,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
         Me.pnlMsgEncoding.Location = New System.Drawing.Point(196, 194)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 48)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 100)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '

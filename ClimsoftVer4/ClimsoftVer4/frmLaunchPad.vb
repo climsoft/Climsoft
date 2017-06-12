@@ -38,6 +38,7 @@ Public Class frmLaunchPad
         Try
             Dim configFilename As String = Application.StartupPath & "\config.inf"
             Dim dbconnectstr As String
+            'MsgBox(configFilename)
             FileOpen(12, configFilename, OpenMode.Output)
             'MsgBox(configFilename)
             'frmLaunchPad.lblConection.Text = svrdbstr & "uid=" & txtUsername.Text & ";pwd=" & txtPassword.Text & ";Convert Zero Datetime=True"
