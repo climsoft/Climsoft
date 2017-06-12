@@ -279,4 +279,12 @@ Public Class frmDBUtilities
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+        frmImportDaily.Show()
+    End Sub
+
+    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
+
+    End Sub
 End Class
