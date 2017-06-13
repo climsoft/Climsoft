@@ -49,8 +49,8 @@ Partial Class frmImportDaily
         Me.cmdLoadSpecs = New System.Windows.Forms.Button()
         Me.dlgSaveSchema = New System.Windows.Forms.SaveFileDialog()
         Me.pnlHeaders = New System.Windows.Forms.Panel()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.lblColumnHeaders = New System.Windows.Forms.Label()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -299,13 +299,6 @@ Partial Class frmImportDaily
         Me.pnlHeaders.Size = New System.Drawing.Size(354, 134)
         Me.pnlHeaders.TabIndex = 26
         '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(148, 22)
-        Me.ToolStripLabel1.Text = "Save Header Specifications"
-        '
         'lblColumnHeaders
         '
         Me.lblColumnHeaders.AutoSize = True
@@ -314,6 +307,13 @@ Partial Class frmImportDaily
         Me.lblColumnHeaders.Size = New System.Drawing.Size(126, 13)
         Me.lblColumnHeaders.TabIndex = 26
         Me.lblColumnHeaders.Text = "Columns Header Settings"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(148, 22)
+        Me.ToolStripLabel1.Text = "Save Header Specifications"
         '
         'cmdClose
         '
