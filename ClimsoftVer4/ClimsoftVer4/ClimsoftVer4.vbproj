@@ -286,6 +286,12 @@
     <Compile Include="frmImportCSV.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmImportDaily.Designer.vb">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLanguage.Designer.vb">
       <DependentUpon>frmLanguage.vb</DependentUpon>
     </Compile>
@@ -489,9 +495,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formAWSRealTime.resx">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily1.de.resx">
       <DependentUpon>formDaily1.vb</DependentUpon>
@@ -501,6 +509,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily1.resx">
       <DependentUpon>formDaily1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily2.de.resx">
       <DependentUpon>formDaily2.vb</DependentUpon>
@@ -510,6 +519,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily2.resx">
       <DependentUpon>formDaily2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formDatabaseConnect.de.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
@@ -519,6 +529,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDataView.resx">
       <DependentUpon>formDataView.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formElement.de.resx">
       <DependentUpon>formElement.vb</DependentUpon>
@@ -676,6 +687,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formElement.resx">
       <DependentUpon>formElement.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formHourly.resx">
       <DependentUpon>formHourly.vb</DependentUpon>
@@ -709,6 +721,9 @@
     <EmbeddedResource Include="frmImportCSV.resx">
       <DependentUpon>frmImportCSV.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmImportDaily.resx">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLanguage.de.resx">
       <DependentUpon>frmLanguage.vb</DependentUpon>
     </EmbeddedResource>
@@ -741,6 +756,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formDatabaseConnect.resx">
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formUpperAir.resx">
       <DependentUpon>formUpperAir.vb</DependentUpon>

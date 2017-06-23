@@ -1634,7 +1634,7 @@ Err:
         If IsDate(datestring) Then
             ' Process the messages for transmission at the scheduled time
             ' Temporarily suspended
-            'update_tbltemplate(aws_rs, datestring)
+            update_tbltemplate(aws_rs, datestring)
 
         End If
         txtLastProcess.Text = datestring
@@ -2413,7 +2413,7 @@ Err:
         Dim chr2 As String
         Dim kount As Integer
 
-        ' Truncate long data strings to bufr data width
+        ' Add leading zeroes to short data strings
         binstr = ""
         If Len(dat) < DataWidth / 8 Then
             For kount = 1 To DataWidth - Len(dat) * 8
@@ -2814,7 +2814,7 @@ Err:
         FileOpen(2, AWS_BUFR_File, OpenMode.Binary)
 
         'Output BUFR data into binary and text file
-        Dim byt As String
+        Dim byt As Long
         Dim kounter As Long
 
         'Dim writeStream As FileStream
@@ -2833,7 +2833,7 @@ Err:
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
                 FilePut(2, Strings.Mid(BUFR_Message, kount, 8), kounter)
                 'FilePutObject(2, byt, kounter)
-                'PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
+                PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
                 kounter = kounter + 1
             End If
         Next kount

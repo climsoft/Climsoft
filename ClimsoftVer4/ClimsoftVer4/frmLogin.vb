@@ -181,18 +181,22 @@ Public Class frmLogin
             sr = New IO.StreamReader("config.inf")
         Catch ex As Exception
             If TypeOf ex Is System.IO.FileNotFoundException Then
+
                 ' TODO: Log warning: "A required CLIMSOFT configuration file is missing. " & ex.Message
                 ' Try to recover by using the default settings:
                 ' My.MySettings.Default.defaultDatabase
             Else
+
                 Throw
             End If
         End Try
 
         line = sr.ReadLine()
+        'MsgBox(line)
         cmbDatabases.Items.Add(line)
 
         cmbDatabases.Text = cmbDatabases.Items.Item(0)
+        'MsgBox(cmbDatabases.Text)
         sr.Close()
 
     End Sub

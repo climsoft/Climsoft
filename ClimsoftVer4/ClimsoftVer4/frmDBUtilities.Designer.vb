@@ -30,11 +30,12 @@ Partial Class frmDBUtilities
         Me.CLICOMDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NOAAGTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CLIMSOFTV3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CLIMSOFTV3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerateValuesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -84,7 +85,7 @@ Partial Class frmDBUtilities
         '
         'ExternalDataToolStripMenuItem
         '
-        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem, Me.DailyToolStripMenuItem})
+        Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.DailyToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
         Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
@@ -107,37 +108,45 @@ Partial Class frmDBUtilities
         Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
+        'DailyToolStripMenuItem
+        '
+        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.MonthlyToolStripMenuItem, Me.MonthlyToolStripMenuItem1, Me.MonthlyToolStripMenuItem2})
+        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.DailyToolStripMenuItem.Text = "Text Files"
+        '
+        'DailyToolStripMenuItem1
+        '
+        Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.DailyToolStripMenuItem1.Text = "Hourly"
+        Me.DailyToolStripMenuItem1.Visible = False
+        '
+        'MonthlyToolStripMenuItem
+        '
+        Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem.Text = "Hourly/Daily"
+        '
+        'MonthlyToolStripMenuItem1
+        '
+        Me.MonthlyToolStripMenuItem1.Enabled = False
+        Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
+        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem1.Text = "Dekadal"
+        '
+        'MonthlyToolStripMenuItem2
+        '
+        Me.MonthlyToolStripMenuItem2.Enabled = False
+        Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
+        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem2.Text = "Monthly"
+        '
         'CLIMSOFTV3ToolStripMenuItem
         '
         Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
         Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.CLIMSOFTV3ToolStripMenuItem.Text = "Data Migration"
-        '
-        'DailyToolStripMenuItem
-        '
-        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.MonthlyToolStripMenuItem, Me.MonthlyToolStripMenuItem1})
-        Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
-        Me.DailyToolStripMenuItem.Text = "Text Files"
-        Me.DailyToolStripMenuItem.Visible = False
-        '
-        'DailyToolStripMenuItem1
-        '
-        Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
-        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(119, 22)
-        Me.DailyToolStripMenuItem1.Text = "Daily"
-        '
-        'MonthlyToolStripMenuItem
-        '
-        Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(119, 22)
-        Me.MonthlyToolStripMenuItem.Text = "Dekadal"
-        '
-        'MonthlyToolStripMenuItem1
-        '
-        Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
-        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(119, 22)
-        Me.MonthlyToolStripMenuItem1.Text = "Monthly"
         '
         'GenerateValuesToolStripMenuItem
         '
@@ -344,5 +353,6 @@ Partial Class frmDBUtilities
     Friend WithEvents DailyToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MonthlyToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
 
 End Class
