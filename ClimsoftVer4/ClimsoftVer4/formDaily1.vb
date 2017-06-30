@@ -1,5 +1,4 @@
-﻿
-'CLIMSOFT - Climate Database Management System
+﻿' CLIMSOFT - Climate Database Management System
 ' Copyright (C) 2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Public Class formDaily1
 
 End Class
