@@ -1,4 +1,20 @@
-﻿Public Class formPaperArchive
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formPaperArchive
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -113,7 +129,7 @@ err:
         Dim imgfile, str, stn, frm, yy, mm, dd, hh, dt, datetim As String
 
         imgfile = FilePth & "\" & FileNm
-       
+
         siz = Len(FileNm)
         count = 0
         str = ""
@@ -290,8 +306,8 @@ Err:
             IO.Directory.CreateDirectory("c:\images")
         End If
 
-        Dir = IO.Directory.GetParent(txtImageFile.Text).FullName
-        fld = Len(Dir)
+        dir = IO.Directory.GetParent(txtImageFile.Text).FullName
+        fld = Len(dir)
         xt = InStr(txtImageFile.Text, ".")
         ext = Mid(txtImageFile.Text, xt + 1, Len(txtImageFile.Text) - 1)
 
