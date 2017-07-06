@@ -313,6 +313,24 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox20 = New System.Windows.Forms.GroupBox()
+        Me.txtDegreesLon = New System.Windows.Forms.TextBox()
+        Me.txtDegreesLat = New System.Windows.Forms.TextBox()
+        Me.lblDegreesLon = New System.Windows.Forms.Label()
+        Me.lblDegreesLat = New System.Windows.Forms.Label()
+        Me.txtMinutesLon = New System.Windows.Forms.TextBox()
+        Me.txtMinutesLat = New System.Windows.Forms.TextBox()
+        Me.lblMinutesLon = New System.Windows.Forms.Label()
+        Me.lblMinutesLat = New System.Windows.Forms.Label()
+        Me.txtSecondsLon = New System.Windows.Forms.TextBox()
+        Me.txtSecondsLat = New System.Windows.Forms.TextBox()
+        Me.lblSecondsLon = New System.Windows.Forms.Label()
+        Me.lblSecondsLat = New System.Windows.Forms.Label()
+        Me.lblEW = New System.Windows.Forms.Label()
+        Me.lblNS = New System.Windows.Forms.Label()
+        Me.CombNS = New System.Windows.Forms.ComboBox()
+        Me.CombEW = New System.Windows.Forms.ComboBox()
+        Me.lblInMetres = New System.Windows.Forms.Label()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -353,6 +371,7 @@ Partial Class formMetadata
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
         Me.MenuMetadata.SuspendLayout()
+        Me.GroupBox20.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabMetadata
@@ -397,6 +416,8 @@ Partial Class formMetadata
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.lblInMetres)
+        Me.grpStation.Controls.Add(Me.GroupBox20)
         Me.grpStation.Controls.Add(Me.txtstationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
         Me.grpStation.Controls.Add(Me.combSearchStation)
@@ -439,7 +460,7 @@ Partial Class formMetadata
         'txtstationId
         '
         Me.txtstationId.FormattingEnabled = True
-        Me.txtstationId.Location = New System.Drawing.Point(105, 52)
+        Me.txtstationId.Location = New System.Drawing.Point(98, 16)
         Me.txtstationId.Name = "txtstationId"
         Me.txtstationId.Size = New System.Drawing.Size(139, 21)
         Me.txtstationId.TabIndex = 40
@@ -464,7 +485,7 @@ Partial Class formMetadata
         'txtStationOperation
         '
         Me.txtStationOperation.AutoSize = True
-        Me.txtStationOperation.Location = New System.Drawing.Point(514, 55)
+        Me.txtStationOperation.Location = New System.Drawing.Point(518, 47)
         Me.txtStationOperation.Name = "txtStationOperation"
         Me.txtStationOperation.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtStationOperation.Size = New System.Drawing.Size(15, 14)
@@ -610,84 +631,84 @@ Partial Class formMetadata
         '
         'txtClosingDate
         '
-        Me.txtClosingDate.Location = New System.Drawing.Point(105, 252)
+        Me.txtClosingDate.Location = New System.Drawing.Point(98, 313)
         Me.txtClosingDate.Name = "txtClosingDate"
         Me.txtClosingDate.Size = New System.Drawing.Size(165, 20)
         Me.txtClosingDate.TabIndex = 35
         '
         'txtOpenDate
         '
-        Me.txtOpenDate.Location = New System.Drawing.Point(105, 224)
+        Me.txtOpenDate.Location = New System.Drawing.Point(98, 285)
         Me.txtOpenDate.Name = "txtOpenDate"
         Me.txtOpenDate.Size = New System.Drawing.Size(165, 20)
         Me.txtOpenDate.TabIndex = 34
         '
         'txtgeoAccuracy
         '
-        Me.txtgeoAccuracy.Location = New System.Drawing.Point(514, 189)
+        Me.txtgeoAccuracy.Location = New System.Drawing.Point(489, 254)
         Me.txtgeoAccuracy.Name = "txtgeoAccuracy"
-        Me.txtgeoAccuracy.Size = New System.Drawing.Size(172, 20)
+        Me.txtgeoAccuracy.Size = New System.Drawing.Size(185, 20)
         Me.txtgeoAccuracy.TabIndex = 27
         '
         'txtgeoMethod
         '
-        Me.txtgeoMethod.Location = New System.Drawing.Point(514, 161)
+        Me.txtgeoMethod.Location = New System.Drawing.Point(489, 226)
         Me.txtgeoMethod.Name = "txtgeoMethod"
-        Me.txtgeoMethod.Size = New System.Drawing.Size(172, 20)
+        Me.txtgeoMethod.Size = New System.Drawing.Size(185, 20)
         Me.txtgeoMethod.TabIndex = 26
         '
         'txtElevation
         '
-        Me.txtElevation.Location = New System.Drawing.Point(514, 133)
+        Me.txtElevation.Location = New System.Drawing.Point(100, 198)
         Me.txtElevation.Name = "txtElevation"
         Me.txtElevation.Size = New System.Drawing.Size(74, 20)
         Me.txtElevation.TabIndex = 25
         '
         'txtLongitude
         '
-        Me.txtLongitude.Location = New System.Drawing.Point(514, 105)
+        Me.txtLongitude.Location = New System.Drawing.Point(100, 169)
         Me.txtLongitude.Name = "txtLongitude"
         Me.txtLongitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLongitude.TabIndex = 24
         '
         'txtLatitude
         '
-        Me.txtLatitude.Location = New System.Drawing.Point(514, 77)
+        Me.txtLatitude.Location = New System.Drawing.Point(100, 140)
         Me.txtLatitude.Name = "txtLatitude"
         Me.txtLatitude.Size = New System.Drawing.Size(74, 20)
         Me.txtLatitude.TabIndex = 23
         '
         'txtDrainageBasin
         '
-        Me.txtDrainageBasin.Location = New System.Drawing.Point(106, 192)
+        Me.txtDrainageBasin.Location = New System.Drawing.Point(99, 253)
         Me.txtDrainageBasin.Name = "txtDrainageBasin"
         Me.txtDrainageBasin.Size = New System.Drawing.Size(172, 20)
         Me.txtDrainageBasin.TabIndex = 19
         '
         'txtAdminRegion
         '
-        Me.txtAdminRegion.Location = New System.Drawing.Point(105, 164)
+        Me.txtAdminRegion.Location = New System.Drawing.Point(98, 225)
         Me.txtAdminRegion.Name = "txtAdminRegion"
         Me.txtAdminRegion.Size = New System.Drawing.Size(172, 20)
         Me.txtAdminRegion.TabIndex = 18
         '
         'txtAuthority
         '
-        Me.txtAuthority.Location = New System.Drawing.Point(105, 136)
+        Me.txtAuthority.Location = New System.Drawing.Point(98, 100)
         Me.txtAuthority.Name = "txtAuthority"
         Me.txtAuthority.Size = New System.Drawing.Size(172, 20)
         Me.txtAuthority.TabIndex = 17
         '
         'txtCountry
         '
-        Me.txtCountry.Location = New System.Drawing.Point(105, 108)
+        Me.txtCountry.Location = New System.Drawing.Point(98, 72)
         Me.txtCountry.Name = "txtCountry"
         Me.txtCountry.Size = New System.Drawing.Size(138, 20)
         Me.txtCountry.TabIndex = 16
         '
         'txtStationName
         '
-        Me.txtStationName.Location = New System.Drawing.Point(105, 80)
+        Me.txtStationName.Location = New System.Drawing.Point(98, 44)
         Me.txtStationName.Name = "txtStationName"
         Me.txtStationName.Size = New System.Drawing.Size(274, 20)
         Me.txtStationName.TabIndex = 15
@@ -695,7 +716,7 @@ Partial Class formMetadata
         'lblStationOperation
         '
         Me.lblStationOperation.AutoSize = True
-        Me.lblStationOperation.Location = New System.Drawing.Point(396, 56)
+        Me.lblStationOperation.Location = New System.Drawing.Point(400, 48)
         Me.lblStationOperation.Name = "lblStationOperation"
         Me.lblStationOperation.Size = New System.Drawing.Size(97, 13)
         Me.lblStationOperation.TabIndex = 13
@@ -704,7 +725,7 @@ Partial Class formMetadata
         'lbldarainage
         '
         Me.lbldarainage.AutoSize = True
-        Me.lbldarainage.Location = New System.Drawing.Point(21, 196)
+        Me.lbldarainage.Location = New System.Drawing.Point(14, 257)
         Me.lbldarainage.Name = "lbldarainage"
         Me.lbldarainage.Size = New System.Drawing.Size(79, 13)
         Me.lbldarainage.TabIndex = 12
@@ -713,7 +734,7 @@ Partial Class formMetadata
         'lblAdmin
         '
         Me.lblAdmin.AutoSize = True
-        Me.lblAdmin.Location = New System.Drawing.Point(21, 168)
+        Me.lblAdmin.Location = New System.Drawing.Point(14, 229)
         Me.lblAdmin.Name = "lblAdmin"
         Me.lblAdmin.Size = New System.Drawing.Size(73, 13)
         Me.lblAdmin.TabIndex = 11
@@ -722,7 +743,7 @@ Partial Class formMetadata
         'lblAuthority
         '
         Me.lblAuthority.AutoSize = True
-        Me.lblAuthority.Location = New System.Drawing.Point(21, 140)
+        Me.lblAuthority.Location = New System.Drawing.Point(14, 75)
         Me.lblAuthority.Name = "lblAuthority"
         Me.lblAuthority.Size = New System.Drawing.Size(48, 13)
         Me.lblAuthority.TabIndex = 10
@@ -731,7 +752,7 @@ Partial Class formMetadata
         'lblCountry
         '
         Me.lblCountry.AutoSize = True
-        Me.lblCountry.Location = New System.Drawing.Point(21, 112)
+        Me.lblCountry.Location = New System.Drawing.Point(14, 103)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(43, 13)
         Me.lblCountry.TabIndex = 9
@@ -740,7 +761,7 @@ Partial Class formMetadata
         'lblClosingdate
         '
         Me.lblClosingdate.AutoSize = True
-        Me.lblClosingdate.Location = New System.Drawing.Point(21, 252)
+        Me.lblClosingdate.Location = New System.Drawing.Point(14, 313)
         Me.lblClosingdate.Name = "lblClosingdate"
         Me.lblClosingdate.Size = New System.Drawing.Size(67, 13)
         Me.lblClosingdate.TabIndex = 8
@@ -749,7 +770,7 @@ Partial Class formMetadata
         'lblOpendate
         '
         Me.lblOpendate.AutoSize = True
-        Me.lblOpendate.Location = New System.Drawing.Point(21, 224)
+        Me.lblOpendate.Location = New System.Drawing.Point(14, 285)
         Me.lblOpendate.Name = "lblOpendate"
         Me.lblOpendate.Size = New System.Drawing.Size(59, 13)
         Me.lblOpendate.TabIndex = 7
@@ -758,7 +779,7 @@ Partial Class formMetadata
         'lblGeoAccuracy
         '
         Me.lblGeoAccuracy.AutoSize = True
-        Me.lblGeoAccuracy.Location = New System.Drawing.Point(396, 193)
+        Me.lblGeoAccuracy.Location = New System.Drawing.Point(371, 258)
         Me.lblGeoAccuracy.Name = "lblGeoAccuracy"
         Me.lblGeoAccuracy.Size = New System.Drawing.Size(118, 13)
         Me.lblGeoAccuracy.TabIndex = 6
@@ -767,7 +788,7 @@ Partial Class formMetadata
         'lblGeoMethod
         '
         Me.lblGeoMethod.AutoSize = True
-        Me.lblGeoMethod.Location = New System.Drawing.Point(396, 165)
+        Me.lblGeoMethod.Location = New System.Drawing.Point(371, 230)
         Me.lblGeoMethod.Name = "lblGeoMethod"
         Me.lblGeoMethod.Size = New System.Drawing.Size(109, 13)
         Me.lblGeoMethod.TabIndex = 5
@@ -776,7 +797,7 @@ Partial Class formMetadata
         'lblElevation
         '
         Me.lblElevation.AutoSize = True
-        Me.lblElevation.Location = New System.Drawing.Point(396, 137)
+        Me.lblElevation.Location = New System.Drawing.Point(17, 202)
         Me.lblElevation.Name = "lblElevation"
         Me.lblElevation.Size = New System.Drawing.Size(51, 13)
         Me.lblElevation.TabIndex = 4
@@ -785,7 +806,7 @@ Partial Class formMetadata
         'lblongitude
         '
         Me.lblongitude.AutoSize = True
-        Me.lblongitude.Location = New System.Drawing.Point(396, 109)
+        Me.lblongitude.Location = New System.Drawing.Point(17, 173)
         Me.lblongitude.Name = "lblongitude"
         Me.lblongitude.Size = New System.Drawing.Size(54, 13)
         Me.lblongitude.TabIndex = 3
@@ -794,7 +815,7 @@ Partial Class formMetadata
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(396, 81)
+        Me.lblLatitude.Location = New System.Drawing.Point(17, 144)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
         Me.lblLatitude.TabIndex = 2
@@ -803,7 +824,7 @@ Partial Class formMetadata
         'lblStationName
         '
         Me.lblStationName.AutoSize = True
-        Me.lblStationName.Location = New System.Drawing.Point(21, 84)
+        Me.lblStationName.Location = New System.Drawing.Point(14, 48)
         Me.lblStationName.Name = "lblStationName"
         Me.lblStationName.Size = New System.Drawing.Size(71, 13)
         Me.lblStationName.TabIndex = 1
@@ -812,7 +833,7 @@ Partial Class formMetadata
         'lblStationId
         '
         Me.lblStationId.AutoSize = True
-        Me.lblStationId.Location = New System.Drawing.Point(21, 56)
+        Me.lblStationId.Location = New System.Drawing.Point(14, 20)
         Me.lblStationId.Name = "lblStationId"
         Me.lblStationId.Size = New System.Drawing.Size(52, 13)
         Me.lblStationId.TabIndex = 0
@@ -3203,6 +3224,172 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
+        'GroupBox20
+        '
+        Me.GroupBox20.Controls.Add(Me.CombEW)
+        Me.GroupBox20.Controls.Add(Me.CombNS)
+        Me.GroupBox20.Controls.Add(Me.lblEW)
+        Me.GroupBox20.Controls.Add(Me.lblNS)
+        Me.GroupBox20.Controls.Add(Me.txtSecondsLon)
+        Me.GroupBox20.Controls.Add(Me.txtSecondsLat)
+        Me.GroupBox20.Controls.Add(Me.lblSecondsLon)
+        Me.GroupBox20.Controls.Add(Me.lblSecondsLat)
+        Me.GroupBox20.Controls.Add(Me.txtMinutesLon)
+        Me.GroupBox20.Controls.Add(Me.txtMinutesLat)
+        Me.GroupBox20.Controls.Add(Me.lblMinutesLon)
+        Me.GroupBox20.Controls.Add(Me.lblMinutesLat)
+        Me.GroupBox20.Controls.Add(Me.txtDegreesLon)
+        Me.GroupBox20.Controls.Add(Me.txtDegreesLat)
+        Me.GroupBox20.Controls.Add(Me.lblDegreesLon)
+        Me.GroupBox20.Controls.Add(Me.lblDegreesLat)
+        Me.GroupBox20.Location = New System.Drawing.Point(198, 123)
+        Me.GroupBox20.Name = "GroupBox20"
+        Me.GroupBox20.Size = New System.Drawing.Size(476, 74)
+        Me.GroupBox20.TabIndex = 41
+        Me.GroupBox20.TabStop = False
+        Me.GroupBox20.Text = "Computation of Decimal Degrees"
+        '
+        'txtDegreesLon
+        '
+        Me.txtDegreesLon.Location = New System.Drawing.Point(53, 47)
+        Me.txtDegreesLon.Name = "txtDegreesLon"
+        Me.txtDegreesLon.Size = New System.Drawing.Size(74, 20)
+        Me.txtDegreesLon.TabIndex = 24
+        '
+        'txtDegreesLat
+        '
+        Me.txtDegreesLat.Location = New System.Drawing.Point(53, 19)
+        Me.txtDegreesLat.Name = "txtDegreesLat"
+        Me.txtDegreesLat.Size = New System.Drawing.Size(74, 20)
+        Me.txtDegreesLat.TabIndex = 23
+        '
+        'lblDegreesLon
+        '
+        Me.lblDegreesLon.AutoSize = True
+        Me.lblDegreesLon.Location = New System.Drawing.Point(5, 51)
+        Me.lblDegreesLon.Name = "lblDegreesLon"
+        Me.lblDegreesLon.Size = New System.Drawing.Size(47, 13)
+        Me.lblDegreesLon.TabIndex = 3
+        Me.lblDegreesLon.Text = "Degrees"
+        '
+        'lblDegreesLat
+        '
+        Me.lblDegreesLat.AutoSize = True
+        Me.lblDegreesLat.Location = New System.Drawing.Point(5, 23)
+        Me.lblDegreesLat.Name = "lblDegreesLat"
+        Me.lblDegreesLat.Size = New System.Drawing.Size(47, 13)
+        Me.lblDegreesLat.TabIndex = 2
+        Me.lblDegreesLat.Text = "Degrees"
+        '
+        'txtMinutesLon
+        '
+        Me.txtMinutesLon.Location = New System.Drawing.Point(180, 48)
+        Me.txtMinutesLon.Name = "txtMinutesLon"
+        Me.txtMinutesLon.Size = New System.Drawing.Size(74, 20)
+        Me.txtMinutesLon.TabIndex = 28
+        '
+        'txtMinutesLat
+        '
+        Me.txtMinutesLat.Location = New System.Drawing.Point(180, 20)
+        Me.txtMinutesLat.Name = "txtMinutesLat"
+        Me.txtMinutesLat.Size = New System.Drawing.Size(74, 20)
+        Me.txtMinutesLat.TabIndex = 27
+        '
+        'lblMinutesLon
+        '
+        Me.lblMinutesLon.AutoSize = True
+        Me.lblMinutesLon.Location = New System.Drawing.Point(132, 52)
+        Me.lblMinutesLon.Name = "lblMinutesLon"
+        Me.lblMinutesLon.Size = New System.Drawing.Size(44, 13)
+        Me.lblMinutesLon.TabIndex = 26
+        Me.lblMinutesLon.Text = "Minutes"
+        '
+        'lblMinutesLat
+        '
+        Me.lblMinutesLat.AutoSize = True
+        Me.lblMinutesLat.Location = New System.Drawing.Point(132, 24)
+        Me.lblMinutesLat.Name = "lblMinutesLat"
+        Me.lblMinutesLat.Size = New System.Drawing.Size(44, 13)
+        Me.lblMinutesLat.TabIndex = 25
+        Me.lblMinutesLat.Text = "Minutes"
+        '
+        'txtSecondsLon
+        '
+        Me.txtSecondsLon.Location = New System.Drawing.Point(309, 49)
+        Me.txtSecondsLon.Name = "txtSecondsLon"
+        Me.txtSecondsLon.Size = New System.Drawing.Size(74, 20)
+        Me.txtSecondsLon.TabIndex = 32
+        '
+        'txtSecondsLat
+        '
+        Me.txtSecondsLat.Location = New System.Drawing.Point(309, 21)
+        Me.txtSecondsLat.Name = "txtSecondsLat"
+        Me.txtSecondsLat.Size = New System.Drawing.Size(74, 20)
+        Me.txtSecondsLat.TabIndex = 31
+        '
+        'lblSecondsLon
+        '
+        Me.lblSecondsLon.AutoSize = True
+        Me.lblSecondsLon.Location = New System.Drawing.Point(261, 53)
+        Me.lblSecondsLon.Name = "lblSecondsLon"
+        Me.lblSecondsLon.Size = New System.Drawing.Size(49, 13)
+        Me.lblSecondsLon.TabIndex = 30
+        Me.lblSecondsLon.Text = "Seconds"
+        '
+        'lblSecondsLat
+        '
+        Me.lblSecondsLat.AutoSize = True
+        Me.lblSecondsLat.Location = New System.Drawing.Point(261, 25)
+        Me.lblSecondsLat.Name = "lblSecondsLat"
+        Me.lblSecondsLat.Size = New System.Drawing.Size(49, 13)
+        Me.lblSecondsLat.TabIndex = 29
+        Me.lblSecondsLat.Text = "Seconds"
+        '
+        'lblEW
+        '
+        Me.lblEW.AutoSize = True
+        Me.lblEW.Location = New System.Drawing.Point(387, 52)
+        Me.lblEW.Name = "lblEW"
+        Me.lblEW.Size = New System.Drawing.Size(30, 13)
+        Me.lblEW.TabIndex = 34
+        Me.lblEW.Text = "E/W"
+        '
+        'lblNS
+        '
+        Me.lblNS.AutoSize = True
+        Me.lblNS.Location = New System.Drawing.Point(387, 24)
+        Me.lblNS.Name = "lblNS"
+        Me.lblNS.Size = New System.Drawing.Size(27, 13)
+        Me.lblNS.TabIndex = 33
+        Me.lblNS.Text = "N/S"
+        '
+        'CombNS
+        '
+        Me.CombNS.FormattingEnabled = True
+        Me.CombNS.Items.AddRange(New Object() {"N", "S"})
+        Me.CombNS.Location = New System.Drawing.Point(422, 18)
+        Me.CombNS.Name = "CombNS"
+        Me.CombNS.Size = New System.Drawing.Size(37, 21)
+        Me.CombNS.TabIndex = 42
+        '
+        'CombEW
+        '
+        Me.CombEW.FormattingEnabled = True
+        Me.CombEW.Items.AddRange(New Object() {"E", "W"})
+        Me.CombEW.Location = New System.Drawing.Point(422, 48)
+        Me.CombEW.Name = "CombEW"
+        Me.CombEW.Size = New System.Drawing.Size(37, 21)
+        Me.CombEW.TabIndex = 43
+        '
+        'lblInMetres
+        '
+        Me.lblInMetres.AutoSize = True
+        Me.lblInMetres.Location = New System.Drawing.Point(195, 202)
+        Me.lblInMetres.Name = "lblInMetres"
+        Me.lblInMetres.Size = New System.Drawing.Size(57, 13)
+        Me.lblInMetres.TabIndex = 42
+        Me.lblInMetres.Text = "(In Metres)"
+        '
         'formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3283,6 +3470,8 @@ Partial Class formMetadata
         Me.GroupBox19.PerformLayout()
         Me.MenuMetadata.ResumeLayout(False)
         Me.MenuMetadata.PerformLayout()
+        Me.GroupBox20.ResumeLayout(False)
+        Me.GroupBox20.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3577,4 +3766,22 @@ Partial Class formMetadata
     Friend WithEvents lblInstalledAt As System.Windows.Forms.Label
     Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox20 As GroupBox
+    Friend WithEvents CombEW As ComboBox
+    Friend WithEvents CombNS As ComboBox
+    Friend WithEvents lblEW As Label
+    Friend WithEvents lblNS As Label
+    Friend WithEvents txtSecondsLon As TextBox
+    Friend WithEvents txtSecondsLat As TextBox
+    Friend WithEvents lblSecondsLon As Label
+    Friend WithEvents lblSecondsLat As Label
+    Friend WithEvents txtMinutesLon As TextBox
+    Friend WithEvents txtMinutesLat As TextBox
+    Friend WithEvents lblMinutesLon As Label
+    Friend WithEvents lblMinutesLat As Label
+    Friend WithEvents txtDegreesLon As TextBox
+    Friend WithEvents txtDegreesLat As TextBox
+    Friend WithEvents lblDegreesLon As Label
+    Friend WithEvents lblDegreesLat As Label
+    Friend WithEvents lblInMetres As Label
 End Class
