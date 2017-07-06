@@ -1760,34 +1760,23 @@ Err:
     End Sub
 
     Private Sub CombEW_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CombEW.SelectedIndexChanged
-        Dim myLon As Double
-        If CombEW.SelectedItem = "W" Then
 
-            myLon = (-1) * (txtDegreesLon.Text + txtMinutesLon.Text / 60 + txtSecondsLon.Text / 3600)
-
-            txtLongitude.Text = myLon
-
-        ElseIf CombEW.SelectedItem = "E" Then
-            myLon = txtDegreesLon.Text + txtMinutesLon.Text / 60 + txtSecondsLon.Text / 3600
-
-            txtLongitude.Text = myLon
-        End If
+        txtLongitude.Text = DMSToDD(CombEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
     End Sub
 
     Private Sub CombNS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CombNS.SelectedIndexChanged
-        Dim myLat As Double
 
-        If CombNS.SelectedItem = "S" Then
-
-            myLat = (-1) * (txtDegreesLat.Text + txtMinutesLat.Text / 60 + txtSecondsLat.Text / 3600)
-
-            txtLatitude.Text = myLat
-
-        ElseIf CombNS.SelectedItem = "N" Then
-
-            myLat = txtDegreesLat.Text + txtMinutesLat.Text / 60 + txtSecondsLat.Text / 3600
-
-            txtLatitude.Text = myLat
-        End If
+        txtLatitude.Text = DMSToDD(CombNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
     End Sub
+    Private Function DMSToDD(Direction As Char, Deg As Integer, Min As Integer, Sec As Integer) As Double
+        ' Convert value in Degrees, Minutes and Seconds (DMS) to Decimal Degrees (DD)
+        ' Direction must be N, S, E or W
+        Dim multiplier As Integer = 1
+        Dim decimalDegrees As Double
+        If Direction = "S" OrElse Direction = "W" Then
+            multiplier = -1
+        End If
+        decimalDegrees = multiplier * (Deg + Min / 60 + Sec / 3600)
+        Return Math.Round(decimalDegrees, 2)
+    End Function
 End Class
