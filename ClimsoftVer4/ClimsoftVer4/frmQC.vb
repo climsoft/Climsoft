@@ -47,4 +47,8 @@ Public Class frmQC
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         frmUpdateDBfromQCReport.Show()
     End Sub
+
+    Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+        frmUpdateDBfromQCReport.Show()
+    End Sub
 End Class
