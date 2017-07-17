@@ -35,6 +35,7 @@ Partial Class frmQC
         Me.lblPnl = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.SuspendLayout()
@@ -96,6 +97,7 @@ Partial Class frmQC
         'pnlQcStandard
         '
         Me.pnlQcStandard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlQcStandard.Controls.Add(Me.RadioButton1)
         Me.pnlQcStandard.Controls.Add(Me.optInterElement)
         Me.pnlQcStandard.Controls.Add(Me.optAbsoluteLimits)
         Me.pnlQcStandard.Controls.Add(Me.lblPnl)
@@ -154,6 +156,17 @@ Partial Class frmQC
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = False
         '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(22, 98)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(95, 17)
+        Me.RadioButton1.TabIndex = 3
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Spatial checks"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
         'frmQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -190,4 +203,5 @@ Partial Class frmQC
     Friend WithEvents optAbsoluteLimits As System.Windows.Forms.RadioButton
     Friend WithEvents optInterElement As System.Windows.Forms.RadioButton
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents RadioButton1 As RadioButton
 End Class
