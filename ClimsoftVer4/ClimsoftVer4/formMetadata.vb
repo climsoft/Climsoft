@@ -1750,5 +1750,27 @@ Err:
             populatePhysicalFeature("physicalfeature", 0, Kount)
         End If
     End Sub
+    Private Function DMSToDD(Direction As Char, Deg As String, Min As String, Sec As String) As Double
+        ' Convert value in Degrees, Minutes and Seconds (DMS) to Decimal Degrees (DD)
+        ' Direction must be N, S, E or W
+        'MsgBox(1)
+        Dim multiplier As Integer = 1
+        Dim decimalDegrees As Double
+        If Direction = "S" OrElse Direction = "W" Then
+            multiplier = -1
+        End If
+        decimalDegrees = multiplier * (Val(Deg) + Val(Min) / 60 + Val(Sec) / 3600)
+        Return Math.Round(decimalDegrees, 2)
+    End Function
+    Private Sub lstNS_Click(sender As Object, e As EventArgs) Handles lstNS.SelectedIndexChanged
+        If IsNumeric(txtDegreesLat.Text) And IsNumeric(txtMinutesLat.Text) And IsNumeric(txtSecondsLat.Text) Then
+            txtLatitude.Text = DMSToDD(lstNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
+        End If
+    End Sub
 
+    Private Sub lstEW_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstEW.SelectedIndexChanged
+        If IsNumeric(txtDegreesLon.Text) And IsNumeric(txtMinutesLon.Text) And IsNumeric(txtSecondsLon.Text) Then
+            txtLongitude.Text = DMSToDD(lstEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
+        End If
+    End Sub
 End Class
