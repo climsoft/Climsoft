@@ -29,8 +29,8 @@ Partial Class formMetadata
         Me.grpStation = New System.Windows.Forms.GroupBox()
         Me.lblInMetres = New System.Windows.Forms.Label()
         Me.GroupBox20 = New System.Windows.Forms.GroupBox()
+        Me.lstEW = New System.Windows.Forms.ListBox()
         Me.lstNS = New System.Windows.Forms.ListBox()
-        Me.CombEW = New System.Windows.Forms.ComboBox()
         Me.lblEW = New System.Windows.Forms.Label()
         Me.lblNS = New System.Windows.Forms.Label()
         Me.txtSecondsLon = New System.Windows.Forms.TextBox()
@@ -331,7 +331,6 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lstEW = New System.Windows.Forms.ListBox()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -418,7 +417,6 @@ Partial Class formMetadata
         'grpStation
         '
         Me.grpStation.Controls.Add(Me.lblInMetres)
-        Me.grpStation.Controls.Add(Me.CombEW)
         Me.grpStation.Controls.Add(Me.GroupBox20)
         Me.grpStation.Controls.Add(Me.txtstationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
@@ -493,6 +491,15 @@ Partial Class formMetadata
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Computation of Decimal Degrees"
         '
+        'lstEW
+        '
+        Me.lstEW.FormattingEnabled = True
+        Me.lstEW.Items.AddRange(New Object() {"E", "W"})
+        Me.lstEW.Location = New System.Drawing.Point(422, 51)
+        Me.lstEW.Name = "lstEW"
+        Me.lstEW.Size = New System.Drawing.Size(37, 17)
+        Me.lstEW.TabIndex = 45
+        '
         'lstNS
         '
         Me.lstNS.FormattingEnabled = True
@@ -501,15 +508,6 @@ Partial Class formMetadata
         Me.lstNS.Name = "lstNS"
         Me.lstNS.Size = New System.Drawing.Size(37, 17)
         Me.lstNS.TabIndex = 44
-        '
-        'CombEW
-        '
-        Me.CombEW.FormattingEnabled = True
-        Me.CombEW.Items.AddRange(New Object() {"E", "W"})
-        Me.CombEW.Location = New System.Drawing.Point(627, 202)
-        Me.CombEW.Name = "CombEW"
-        Me.CombEW.Size = New System.Drawing.Size(37, 21)
-        Me.CombEW.TabIndex = 43
         '
         'lblEW
         '
@@ -3392,15 +3390,6 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
-        'lstEW
-        '
-        Me.lstEW.FormattingEnabled = True
-        Me.lstEW.Items.AddRange(New Object() {"E", "W"})
-        Me.lstEW.Location = New System.Drawing.Point(422, 51)
-        Me.lstEW.Name = "lstEW"
-        Me.lstEW.Size = New System.Drawing.Size(37, 17)
-        Me.lstEW.TabIndex = 45
-        '
         'formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3778,7 +3767,6 @@ Partial Class formMetadata
     Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents GroupBox20 As GroupBox
-    Friend WithEvents CombEW As ComboBox
     Friend WithEvents lblEW As Label
     Friend WithEvents lblNS As Label
     Friend WithEvents txtSecondsLon As TextBox

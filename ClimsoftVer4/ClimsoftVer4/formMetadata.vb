@@ -1742,8 +1742,6 @@ Err:
             populateScheduleClass("obsscheduleclass", 0, Kount)
         End If
     End Sub
-
- 
     Private Sub cmdDeleteFeature_Click(sender As Object, e As EventArgs) Handles cmdDeleteFeature.Click
         If DeleteRecord("physicalfeature", rec) Then
             SetDataSet("physicalfeature")
