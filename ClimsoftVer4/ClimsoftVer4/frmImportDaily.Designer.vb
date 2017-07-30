@@ -49,8 +49,8 @@ Partial Class frmImportDaily
         Me.cmdLoadSpecs = New System.Windows.Forms.Button()
         Me.dlgSaveSchema = New System.Windows.Forms.SaveFileDialog()
         Me.pnlHeaders = New System.Windows.Forms.Panel()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.lblColumnHeaders = New System.Windows.Forms.Label()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,7 +63,7 @@ Partial Class frmImportDaily
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(10, 181)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(948, 405)
+        Me.DataGridView1.Size = New System.Drawing.Size(948, 393)
         Me.DataGridView1.TabIndex = 0
         '
         'cmdOpenFile
@@ -299,13 +299,6 @@ Partial Class frmImportDaily
         Me.pnlHeaders.Size = New System.Drawing.Size(354, 134)
         Me.pnlHeaders.TabIndex = 26
         '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(148, 22)
-        Me.ToolStripLabel1.Text = "Save Header Specifications"
-        '
         'lblColumnHeaders
         '
         Me.lblColumnHeaders.AutoSize = True
@@ -314,6 +307,13 @@ Partial Class frmImportDaily
         Me.lblColumnHeaders.Size = New System.Drawing.Size(126, 13)
         Me.lblColumnHeaders.TabIndex = 26
         Me.lblColumnHeaders.Text = "Columns Header Settings"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(148, 22)
+        Me.ToolStripLabel1.Text = "Save Header Specifications"
         '
         'cmdClose
         '
@@ -337,7 +337,7 @@ Partial Class frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(970, 552)
+        Me.ClientSize = New System.Drawing.Size(970, 586)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.pnlHeaders)
