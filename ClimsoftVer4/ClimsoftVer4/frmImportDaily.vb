@@ -124,7 +124,9 @@
                 Load_Hourly()
         End Select
         Me.Cursor = Cursors.Default
+
         MsgBox("Data import process completed")
+
     End Sub
 
     Function Get_DataCat() As String
@@ -151,7 +153,9 @@
         Dim dat, stn, code, yy, mm, dd, hh, datetime As String
         Try
             With DataGridView1
+
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
+
                     If Get_RecordIdx(i, stn, code, yy, mm, dd, hh) Then
                         If hh = "" Then hh = txtObsHour.Text
                         datetime = yy & "-" & mm & "-" & dd & " " & hh & ":00"
@@ -168,7 +172,12 @@
                                 Scale_Data(code, dat)
                                 'MsgBox(dat)
                             End If
+<<<<<<< HEAD
                             If IsDate(datetime) Then If Not Add_Record(stn, code, datetime, dat) Then Exit Sub
+=======
+
+                            If IsDate(datetime) Then Add_Record(stn, code, datetime, dat)
+>>>>>>> origin/beta2
 
                             Exit For
                             'Exit Sub
@@ -178,12 +187,15 @@
                 Next
             End With
         Catch ex As Exception
+
             MsgBox(ex.HResult & " " & ex.Message)
+
         End Try
 
     End Sub
     Sub Load_Daily2()
         'MsgBox("formDaily2")
+
         Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
         Dim i, j As Integer
         Try
@@ -196,6 +208,7 @@
 
                     For j = 0 To .Columns.Count - 1
                         hd = .Columns(j).Name
+
                         dat = .Rows(i).Cells(j).Value
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
@@ -212,36 +225,52 @@
 
             End With
         Catch ex As Exception
+<<<<<<< HEAD
             If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
+=======
+<
+            MsgBox(ex.HResult & " " & ex.Message)
+
+>>>>>>> origin/beta2
         End Try
 
     End Sub
 
     Sub Load_Hourly()
         'MsgBox("form_hourly")
+
         Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
         Dim i, j As Integer
         Try
             With DataGridView1
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
+
                     Get_RecordIdx(i, st, cod, y, m, d, h)
 
 
                     For j = 0 To .Columns.Count - 1
+
                         dat = .Rows(i).Cells(j).Value
                         hd = .Columns(j).Name
                         If chkScale.Checked = True Then Scale_Data(cod, dat)
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
                             'If IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
+<<<<<<< HEAD
                             If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
+=======
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, dat)
+
+>>>>>>> origin/beta2
                         End If
                     Next
                 Next
 
             End With
         Catch ex As Exception
+
             MsgBox(ex.HResult & " " & ex.Message)
+
         End Try
     End Sub
     'Function Get_Station(rw As Long) As String
@@ -344,12 +373,14 @@
             dbcon.Close()
             Return True
         Catch ex As Exception
+
             dbcon.Close()
             'MsgBox(stn & " " & code & " " & datetime & " " & obsVal)
             If ex.HResult <> -2147024882 Then
                 'MsgBox(ex.HResult & ": " & ex.Message)
                 If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
             End If
+
         End Try
     End Function
 
@@ -456,4 +487,9 @@
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()
     End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textFileImport.htm")
+    End Sub
+
 End Class

@@ -53,6 +53,8 @@ Partial Class frmImportDaily
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+
+
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.SuspendLayout()
@@ -63,7 +65,9 @@ Partial Class frmImportDaily
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(10, 181)
         Me.DataGridView1.Name = "DataGridView1"
+
         Me.DataGridView1.Size = New System.Drawing.Size(948, 393)
+
         Me.DataGridView1.TabIndex = 0
         '
         'cmdOpenFile
@@ -71,6 +75,7 @@ Partial Class frmImportDaily
         Me.cmdOpenFile.Location = New System.Drawing.Point(468, 0)
         Me.cmdOpenFile.Name = "cmdOpenFile"
         Me.cmdOpenFile.Size = New System.Drawing.Size(91, 23)
+
         Me.cmdOpenFile.TabIndex = 1
         Me.cmdOpenFile.Text = "Select File"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
@@ -81,7 +86,9 @@ Partial Class frmImportDaily
         '
         'txtImportFile
         '
+
         Me.txtImportFile.Location = New System.Drawing.Point(4, 3)
+
         Me.txtImportFile.Name = "txtImportFile"
         Me.txtImportFile.Size = New System.Drawing.Size(464, 20)
         Me.txtImportFile.TabIndex = 2
@@ -333,11 +340,22 @@ Partial Class frmImportDaily
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(29, 5)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(55, 13)
+        Me.Label1.TabIndex = 29
+        Me.Label1.Text = "Import File"
+
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.ClientSize = New System.Drawing.Size(970, 586)
+
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.pnlHeaders)
@@ -398,4 +416,5 @@ Partial Class frmImportDaily
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
+
 End Class

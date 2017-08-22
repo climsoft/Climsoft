@@ -65,11 +65,11 @@
                 'execute command
                 objCmd.ExecuteNonQuery()
 
-                'Set default role to new user
-                Sql = "SET DEFAULT ROLE " & cboUserType.Text & " FOR '" & txtUserName.Text & "'@'localhost';"
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                'execute command
-                objCmd.ExecuteNonQuery()
+                'Set default role to New user
+                'Sql = "SET DEFAULT ROLE " & cboUserType.Text & " FOR '" & txtUserName.Text & "'@'localhost';"
+                'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                'execute Command
+                'objCmd.ExecuteNonQuery()
 
                 'Flush privileges
                 Sql = "FLUSH PRIVILEGES;"
