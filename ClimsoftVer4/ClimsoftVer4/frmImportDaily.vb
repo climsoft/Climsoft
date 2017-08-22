@@ -168,7 +168,8 @@
                                 Scale_Data(code, dat)
                                 'MsgBox(dat)
                             End If
-                            If IsDate(datetime) Then Add_Record(stn, code, datetime, dat)
+                            If IsDate(datetime) Then If Not Add_Record(stn, code, datetime, dat) Then Exit Sub
+
                             Exit For
                             'Exit Sub
                         End If
@@ -200,16 +201,18 @@
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
                             'If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
                             If chkScale.Checked = True Then Scale_Data(cod, dat)
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, dat)
-                            'If IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
+
                             'End If
+                            'If IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
+                        'End If
                         End If
                     Next
                 Next
 
             End With
         Catch ex As Exception
-            MsgBox(ex.HResult & " " & ex.Message)
+            If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         End Try
 
     End Sub
@@ -234,7 +237,7 @@
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
                             'If IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, dat)
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
                         End If
                     Next
                 Next
@@ -319,12 +322,13 @@
     End Sub
 
 
-    Sub Add_Record(stn As String, code As String, datetime As String, obsVal As String)
+    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String) As Boolean
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da1)
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
         Dim comm As New MySql.Data.MySqlClient.MySqlCommand
         'MsgBox(Len(stn) & " " & Strings.Left(stn, 2) & " " & stn & " " & obsVal)
+        Add_Record = True
         Try
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbcon.ConnectionString = dbConnectionString
@@ -341,14 +345,16 @@
             comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
             comm.ExecuteNonQuery()   ' Execute the query
             dbcon.Close()
+            Return True
         Catch ex As Exception
             dbcon.Close()
             'MsgBox(stn & " " & code & " " & datetime & " " & obsVal)
             If ex.HResult <> -2147024882 Then
-                MsgBox(ex.HResult & ": " & ex.Message)
+                'MsgBox(ex.HResult & ": " & ex.Message)
+                If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
             End If
         End Try
-    End Sub
+    End Function
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
         DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
