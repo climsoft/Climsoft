@@ -226,9 +226,6 @@
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
                     Get_RecordIdx(i, st, cod, y, m, d, h)
 
-                    'If Get_RecordIdx(i, st, cod, y, m, d, h) Then
-                    '    If h = "" Then h = txtObsHour.Text
-                    'End If
 
                     For j = 0 To .Columns.Count - 1
                         dat = .Rows(i).Cells(j).Value
