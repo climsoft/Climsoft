@@ -2818,8 +2818,8 @@ Err:
         Dim kounter As Long
 
         'Dim writeStream As FileStream
-        ''writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
-        ''Dim writeBinay As New BinaryWriter(writeStream)
+        'writeStream = New FileStream(AWS_BUFR_File, FileMode.Create)
+        'Dim writeBinay As New BinaryWriter(writeStream)
         'writeBinay.Write(89)
 
 
@@ -2831,7 +2831,7 @@ Err:
                 'writeBinay.Write(byt)
                 'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
                 'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
-                FilePut(2, Strings.Mid(BUFR_Message, kount, 8), kounter)
+                FilePut(2, byt, kounter)
                 'FilePutObject(2, byt, kounter)
                 PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
                 kounter = kounter + 1

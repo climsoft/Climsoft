@@ -118,28 +118,28 @@ Partial Class frmDBUtilities
         'DailyToolStripMenuItem1
         '
         Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
-        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.DailyToolStripMenuItem1.Text = "Hourly"
         Me.DailyToolStripMenuItem1.Visible = False
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MonthlyToolStripMenuItem.Text = "Hourly/Daily"
         '
         'MonthlyToolStripMenuItem1
         '
         Me.MonthlyToolStripMenuItem1.Enabled = False
         Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
-        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.MonthlyToolStripMenuItem1.Text = "Dekadal"
         '
         'MonthlyToolStripMenuItem2
         '
         Me.MonthlyToolStripMenuItem2.Enabled = False
         Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
-        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
         Me.MonthlyToolStripMenuItem2.Text = "Monthly"
         '
         'CLIMSOFTV3ToolStripMenuItem
