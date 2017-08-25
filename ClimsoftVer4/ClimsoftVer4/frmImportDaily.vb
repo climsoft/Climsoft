@@ -124,6 +124,7 @@
                 Load_Hourly()
         End Select
         Me.Cursor = Cursors.Default
+        MsgBox("Data import process completed")
     End Sub
 
     Function Get_DataCat() As String
@@ -150,7 +151,7 @@
         Dim dat, stn, code, yy, mm, dd, hh, datetime As String
         Try
             With DataGridView1
-                For i = CLng(txtStartRow.Text) - 1 To .RowCount - 1
+                For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
                     If Get_RecordIdx(i, stn, code, yy, mm, dd, hh) Then
                         If hh = "" Then hh = txtObsHour.Text
                         datetime = yy & "-" & mm & "-" & dd & " " & hh & ":00"
@@ -167,7 +168,8 @@
                                 Scale_Data(code, dat)
                                 'MsgBox(dat)
                             End If
-                            Add_Record(stn, code, datetime, dat)
+                            If IsDate(datetime) Then If Not Add_Record(stn, code, datetime, dat) Then Exit Sub
+
                             Exit For
                             'Exit Sub
                         End If
@@ -176,17 +178,17 @@
                 Next
             End With
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.HResult & " " & ex.Message)
         End Try
 
     End Sub
     Sub Load_Daily2()
         'MsgBox("formDaily2")
-        Dim dt, st, cod, y, m, d, h, dttime, hd As String
+        Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
         Dim i, j As Integer
         Try
             With DataGridView1
-                For i = CLng(txtStartRow.Text) - 1 To .RowCount - 1
+                For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
 
                     If Get_RecordIdx(i, st, cod, y, m, d, h) Then
                         If h = "" Then h = txtObsHour.Text
@@ -194,45 +196,48 @@
 
                     For j = 0 To .Columns.Count - 1
                         hd = .Columns(j).Name
+                        dat = .Rows(i).Cells(j).Value
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
-                            If IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
-                          End If
-                    Next
-                Next
 
-            End With
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+                            If chkScale.Checked = True Then Scale_Data(cod, dat)
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
 
-    End Sub
-
-    Sub Load_Hourly()
-        'MsgBox("form_hourly")
-        Dim dt, st, cod, y, m, d, h, dttime, hd As String
-        Dim i, j As Integer
-        Try
-            With DataGridView1
-                For i = CLng(txtStartRow.Text) - 1 To .RowCount - 1
-                    Get_RecordIdx(i, st, cod, y, m, d, h)
-
-                    'If Get_RecordIdx(i, st, cod, y, m, d, h) Then
-                    '    If h = "" Then h = txtObsHour.Text
-                    'End If
-
-                    For j = 0 To .Columns.Count - 1
-                        hd = .Columns(j).Name
-                        If IsNumeric(hd) Then
-                            dttime = y & "-" & m & "-" & d & " " & hd & ":00"
-                            If IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
                         End If
                     Next
                 Next
 
             End With
         Catch ex As Exception
-            MsgBox(ex.Message)
+            If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
+        End Try
+
+    End Sub
+
+    Sub Load_Hourly()
+        'MsgBox("form_hourly")
+        Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
+        Dim i, j As Integer
+        Try
+            With DataGridView1
+                For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
+                    Get_RecordIdx(i, st, cod, y, m, d, h)
+
+                    For j = 0 To .Columns.Count - 1
+                        dat = .Rows(i).Cells(j).Value
+                        hd = .Columns(j).Name
+                        If chkScale.Checked = True Then Scale_Data(cod, dat)
+                        If IsNumeric(hd) Then
+                            dttime = y & "-" & m & "-" & d & " " & hd & ":00"
+
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
+                        End If
+                    Next
+                Next
+
+            End With
+        Catch ex As Exception
+            MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
     'Function Get_Station(rw As Long) As String
@@ -310,12 +315,13 @@
     End Sub
 
 
-    Sub Add_Record(stn As String, code As String, datetime As String, obsVal As String)
+    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String) As Boolean
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da1)
         Dim recCommit As New dataEntryGlobalRoutines
         Dim sql0 As String
         Dim comm As New MySql.Data.MySqlClient.MySqlCommand
         'MsgBox(Len(stn) & " " & Strings.Left(stn, 2) & " " & stn & " " & obsVal)
+        Add_Record = True
         Try
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbcon.ConnectionString = dbConnectionString
@@ -332,11 +338,16 @@
             comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
             comm.ExecuteNonQuery()   ' Execute the query
             dbcon.Close()
+            Return True
         Catch ex As Exception
-            MsgBox(ex.Message & " " & sql0)
             dbcon.Close()
+            'MsgBox(stn & " " & code & " " & datetime & " " & obsVal)
+            If ex.HResult <> -2147024882 Then
+                'MsgBox(ex.HResult & ": " & ex.Message)
+                If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
+            End If
         End Try
-    End Sub
+    End Function
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
         DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
@@ -440,9 +451,5 @@
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()
-    End Sub
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textFileImport.htm")
     End Sub
 End Class
