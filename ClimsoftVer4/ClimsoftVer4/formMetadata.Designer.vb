@@ -27,6 +27,7 @@ Partial Class formMetadata
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.lblmetre = New System.Windows.Forms.Label()
         Me.txtstationId = New System.Windows.Forms.ComboBox()
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.combSearchStation = New System.Windows.Forms.ComboBox()
@@ -397,6 +398,7 @@ Partial Class formMetadata
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.lblmetre)
         Me.grpStation.Controls.Add(Me.txtstationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
         Me.grpStation.Controls.Add(Me.combSearchStation)
@@ -435,6 +437,15 @@ Partial Class formMetadata
         Me.grpStation.TabIndex = 2
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
+        '
+        'lblmetre
+        '
+        Me.lblmetre.AutoSize = True
+        Me.lblmetre.Location = New System.Drawing.Point(453, 139)
+        Me.lblmetre.Name = "lblmetre"
+        Me.lblmetre.Size = New System.Drawing.Size(39, 13)
+        Me.lblmetre.TabIndex = 41
+        Me.lblmetre.Text = "(metre)"
         '
         'txtstationId
         '
@@ -3577,4 +3588,5 @@ Partial Class formMetadata
     Friend WithEvents lblInstalledAt As System.Windows.Forms.Label
     Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lblmetre As Label
 End Class
