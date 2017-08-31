@@ -1751,4 +1751,19 @@ Err:
         End If
     End Sub
 
+    Private Sub lblmetre_Click(sender As Object, e As EventArgs) Handles lblmetre.Click
+
+    End Sub
+
+    Private Sub txtElevation_TextChanged(sender As Object, e As EventArgs) Handles txtElevation.TextChanged
+        MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub Label24_Click(sender As Object, e As EventArgs) Handles lbldecimal.Click
+        MsgBox(Err.Number & " " & Err.Description)
+    End Sub
+
+    Private Sub lbldecimal1_Click(sender As Object, e As EventArgs) Handles lbldecimal1.Click
+        MsgBox(Err.Number & " " & Err.Description)
+    End Sub
 End Class
