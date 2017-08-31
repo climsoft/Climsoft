@@ -27,6 +27,8 @@ Partial Class formMetadata
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.lbldecimal1 = New System.Windows.Forms.Label()
+        Me.lbldecimal = New System.Windows.Forms.Label()
         Me.lblmetre = New System.Windows.Forms.Label()
         Me.txtstationId = New System.Windows.Forms.ComboBox()
         Me.lblSearchStation = New System.Windows.Forms.Label()
@@ -398,6 +400,8 @@ Partial Class formMetadata
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.lbldecimal1)
+        Me.grpStation.Controls.Add(Me.lbldecimal)
         Me.grpStation.Controls.Add(Me.lblmetre)
         Me.grpStation.Controls.Add(Me.txtstationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
@@ -437,6 +441,24 @@ Partial Class formMetadata
         Me.grpStation.TabIndex = 2
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
+        '
+        'lbldecimal1
+        '
+        Me.lbldecimal1.AutoSize = True
+        Me.lbldecimal1.Location = New System.Drawing.Point(456, 83)
+        Me.lbldecimal1.Name = "lbldecimal1"
+        Me.lbldecimal1.Size = New System.Drawing.Size(49, 13)
+        Me.lbldecimal1.TabIndex = 43
+        Me.lbldecimal1.Text = "(decimal)"
+        '
+        'lbldecimal
+        '
+        Me.lbldecimal.AutoSize = True
+        Me.lbldecimal.Location = New System.Drawing.Point(456, 108)
+        Me.lbldecimal.Name = "lbldecimal"
+        Me.lbldecimal.Size = New System.Drawing.Size(49, 13)
+        Me.lbldecimal.TabIndex = 42
+        Me.lbldecimal.Text = "(decimal)"
         '
         'lblmetre
         '
@@ -3589,4 +3611,6 @@ Partial Class formMetadata
     Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lblmetre As Label
+    Friend WithEvents lbldecimal As Label
+    Friend WithEvents lbldecimal1 As Label
 End Class
