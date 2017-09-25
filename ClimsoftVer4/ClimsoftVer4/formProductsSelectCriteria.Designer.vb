@@ -104,10 +104,12 @@ Partial Class formProductsSelectCriteria
         '
         'MenuStrip1
         '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(893, 24)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1191, 28)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -115,48 +117,48 @@ Partial Class formProductsSelectCriteria
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenListToolStripMenuItem, Me.ToolStripMenuItem2, Me.OpenListToolStripMenuItem1, Me.ToolStripMenuItem1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(44, 24)
         Me.FileToolStripMenuItem.Text = "File"
         '
         'OpenListToolStripMenuItem
         '
         Me.OpenListToolStripMenuItem.Name = "OpenListToolStripMenuItem"
-        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
         Me.OpenListToolStripMenuItem.Text = "Save Specifications"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(216, 26)
         Me.ToolStripMenuItem2.Text = "Open Specifications"
         '
         'OpenListToolStripMenuItem1
         '
         Me.OpenListToolStripMenuItem1.Name = "OpenListToolStripMenuItem1"
-        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
+        Me.OpenListToolStripMenuItem1.Size = New System.Drawing.Size(216, 26)
         Me.OpenListToolStripMenuItem1.Text = "Add New Product"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(176, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(213, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(216, 26)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(47, 24)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(53, 24)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'pnlStationsElements
@@ -180,9 +182,10 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.chksatation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
-        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
+        Me.pnlStationsElements.Location = New System.Drawing.Point(0, 64)
+        Me.pnlStationsElements.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(1176, 485)
         Me.pnlStationsElements.TabIndex = 4
         '
         'pnlSummary
@@ -191,17 +194,19 @@ Partial Class formProductsSelectCriteria
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        Me.pnlSummary.Location = New System.Drawing.Point(541, 7)
+        Me.pnlSummary.Location = New System.Drawing.Point(721, 9)
+        Me.pnlSummary.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSummary.Name = "pnlSummary"
-        Me.pnlSummary.Size = New System.Drawing.Size(329, 48)
+        Me.pnlSummary.Size = New System.Drawing.Size(438, 59)
         Me.pnlSummary.TabIndex = 23
         '
         'optTotal
         '
         Me.optTotal.AutoSize = True
-        Me.optTotal.Location = New System.Drawing.Point(205, 26)
+        Me.optTotal.Location = New System.Drawing.Point(273, 32)
+        Me.optTotal.Margin = New System.Windows.Forms.Padding(4)
         Me.optTotal.Name = "optTotal"
-        Me.optTotal.Size = New System.Drawing.Size(49, 17)
+        Me.optTotal.Size = New System.Drawing.Size(61, 21)
         Me.optTotal.TabIndex = 2
         Me.optTotal.Text = "Total"
         Me.optTotal.UseVisualStyleBackColor = True
@@ -210,9 +215,10 @@ Partial Class formProductsSelectCriteria
         '
         Me.optMean.AutoSize = True
         Me.optMean.Checked = True
-        Me.optMean.Location = New System.Drawing.Point(104, 26)
+        Me.optMean.Location = New System.Drawing.Point(139, 32)
+        Me.optMean.Margin = New System.Windows.Forms.Padding(4)
         Me.optMean.Name = "optMean"
-        Me.optMean.Size = New System.Drawing.Size(52, 17)
+        Me.optMean.Size = New System.Drawing.Size(64, 21)
         Me.optMean.TabIndex = 1
         Me.optMean.TabStop = True
         Me.optMean.Text = "Mean"
@@ -224,8 +230,9 @@ Partial Class formProductsSelectCriteria
         Me.lblSummary.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblSummary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSummary.Location = New System.Drawing.Point(0, 0)
+        Me.lblSummary.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSummary.Name = "lblSummary"
-        Me.lblSummary.Size = New System.Drawing.Size(89, 13)
+        Me.lblSummary.Size = New System.Drawing.Size(115, 17)
         Me.lblSummary.TabIndex = 0
         Me.lblSummary.Text = "Summary Type"
         '
@@ -236,18 +243,20 @@ Partial Class formProductsSelectCriteria
         Me.pnlExtremes.Controls.Add(Me.btnMaxDate)
         Me.pnlExtremes.Controls.Add(Me.btnLowHigh)
         Me.pnlExtremes.Controls.Add(Me.lblXtyp)
-        Me.pnlExtremes.Location = New System.Drawing.Point(547, 6)
+        Me.pnlExtremes.Location = New System.Drawing.Point(729, 7)
+        Me.pnlExtremes.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlExtremes.Name = "pnlExtremes"
-        Me.pnlExtremes.Size = New System.Drawing.Size(323, 48)
+        Me.pnlExtremes.Size = New System.Drawing.Size(430, 59)
         Me.pnlExtremes.TabIndex = 24
         Me.pnlExtremes.Visible = False
         '
         'btnMinDate
         '
         Me.btnMinDate.AutoSize = True
-        Me.btnMinDate.Location = New System.Drawing.Point(222, 26)
+        Me.btnMinDate.Location = New System.Drawing.Point(296, 32)
+        Me.btnMinDate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinDate.Name = "btnMinDate"
-        Me.btnMinDate.Size = New System.Drawing.Size(104, 17)
+        Me.btnMinDate.Size = New System.Drawing.Size(133, 21)
         Me.btnMinDate.TabIndex = 3
         Me.btnMinDate.Text = "Lowest and date"
         Me.btnMinDate.UseVisualStyleBackColor = True
@@ -255,9 +264,10 @@ Partial Class formProductsSelectCriteria
         'btnMaxDate
         '
         Me.btnMaxDate.AutoSize = True
-        Me.btnMaxDate.Location = New System.Drawing.Point(116, 26)
+        Me.btnMaxDate.Location = New System.Drawing.Point(155, 32)
+        Me.btnMaxDate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaxDate.Name = "btnMaxDate"
-        Me.btnMaxDate.Size = New System.Drawing.Size(100, 17)
+        Me.btnMaxDate.Size = New System.Drawing.Size(129, 21)
         Me.btnMaxDate.TabIndex = 2
         Me.btnMaxDate.Text = "Higest and date"
         Me.btnMaxDate.UseVisualStyleBackColor = True
@@ -266,9 +276,10 @@ Partial Class formProductsSelectCriteria
         '
         Me.btnLowHigh.AutoSize = True
         Me.btnLowHigh.Checked = True
-        Me.btnLowHigh.Location = New System.Drawing.Point(3, 26)
+        Me.btnLowHigh.Location = New System.Drawing.Point(4, 32)
+        Me.btnLowHigh.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLowHigh.Name = "btnLowHigh"
-        Me.btnLowHigh.Size = New System.Drawing.Size(113, 17)
+        Me.btnLowHigh.Size = New System.Drawing.Size(145, 21)
         Me.btnLowHigh.TabIndex = 1
         Me.btnLowHigh.TabStop = True
         Me.btnLowHigh.Text = "Higest and Lowest"
@@ -280,25 +291,28 @@ Partial Class formProductsSelectCriteria
         Me.lblXtyp.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblXtyp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblXtyp.Location = New System.Drawing.Point(0, 0)
+        Me.lblXtyp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblXtyp.Name = "lblXtyp"
-        Me.lblXtyp.Size = New System.Drawing.Size(84, 13)
+        Me.lblXtyp.Size = New System.Drawing.Size(107, 17)
         Me.lblXtyp.TabIndex = 0
         Me.lblXtyp.Text = "Extreme Type"
         '
         'cmdDelStation
         '
-        Me.cmdDelStation.Location = New System.Drawing.Point(80, 348)
+        Me.cmdDelStation.Location = New System.Drawing.Point(107, 428)
+        Me.cmdDelStation.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDelStation.Name = "cmdDelStation"
-        Me.cmdDelStation.Size = New System.Drawing.Size(135, 27)
+        Me.cmdDelStation.Size = New System.Drawing.Size(180, 33)
         Me.cmdDelStation.TabIndex = 22
         Me.cmdDelStation.Text = "Delete Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(354, 348)
+        Me.cmdDelElement.Location = New System.Drawing.Point(472, 428)
+        Me.cmdDelElement.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdDelElement.Name = "cmdDelElement"
-        Me.cmdDelElement.Size = New System.Drawing.Size(143, 27)
+        Me.cmdDelElement.Size = New System.Drawing.Size(191, 33)
         Me.cmdDelElement.TabIndex = 21
         Me.cmdDelElement.Text = "Delete Selected Element"
         Me.cmdDelElement.UseVisualStyleBackColor = True
@@ -307,18 +321,20 @@ Partial Class formProductsSelectCriteria
         '
         Me.lblProductType.AutoSize = True
         Me.lblProductType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProductType.Location = New System.Drawing.Point(254, 7)
+        Me.lblProductType.Location = New System.Drawing.Point(339, 9)
+        Me.lblProductType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProductType.Name = "lblProductType"
-        Me.lblProductType.Size = New System.Drawing.Size(31, 15)
+        Me.lblProductType.Size = New System.Drawing.Size(38, 18)
         Me.lblProductType.TabIndex = 20
         Me.lblProductType.Text = "      "
         '
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(542, 182)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(723, 224)
+        Me.chkAdvancedSelection.Margin = New System.Windows.Forms.Padding(4)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
-        Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
+        Me.chkAdvancedSelection.Size = New System.Drawing.Size(155, 21)
         Me.chkAdvancedSelection.TabIndex = 19
         Me.chkAdvancedSelection.Text = "Advanced Selection"
         Me.chkAdvancedSelection.UseVisualStyleBackColor = True
@@ -332,10 +348,11 @@ Partial Class formProductsSelectCriteria
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(270, 57)
+        Me.lstvElements.Location = New System.Drawing.Point(360, 70)
+        Me.lstvElements.Margin = New System.Windows.Forms.Padding(4)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(266, 291)
+        Me.lstvElements.Size = New System.Drawing.Size(353, 357)
         Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
@@ -349,10 +366,11 @@ Partial Class formProductsSelectCriteria
         Me.lstvStations.HideSelection = False
         Me.lstvStations.HoverSelection = True
         Me.lstvStations.LabelEdit = True
-        Me.lstvStations.Location = New System.Drawing.Point(5, 57)
+        Me.lstvStations.Location = New System.Drawing.Point(7, 70)
+        Me.lstvStations.Margin = New System.Windows.Forms.Padding(4)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(257, 289)
+        Me.lstvStations.Size = New System.Drawing.Size(341, 355)
         Me.lstvStations.TabIndex = 17
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
@@ -362,27 +380,30 @@ Partial Class formProductsSelectCriteria
         Me.lblProducts.AutoSize = True
         Me.lblProducts.BackColor = System.Drawing.SystemColors.ControlLight
         Me.lblProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProducts.Location = New System.Drawing.Point(874, 57)
+        Me.lblProducts.Location = New System.Drawing.Point(1165, 70)
+        Me.lblProducts.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProducts.Name = "lblProducts"
-        Me.lblProducts.Size = New System.Drawing.Size(17, 16)
+        Me.lblProducts.Size = New System.Drawing.Size(24, 20)
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(268, 34)
+        Me.lblElement.Location = New System.Drawing.Point(357, 42)
+        Me.lblElement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(78, 13)
+        Me.lblElement.Size = New System.Drawing.Size(102, 17)
         Me.lblElement.TabIndex = 9
         Me.lblElement.Text = "Select Element"
         '
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(10, 34)
+        Me.lblStation.Location = New System.Drawing.Point(13, 42)
+        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(73, 13)
+        Me.lblStation.Size = New System.Drawing.Size(95, 17)
         Me.lblStation.TabIndex = 8
         Me.lblStation.Text = "Select Station"
         '
@@ -401,18 +422,20 @@ Partial Class formProductsSelectCriteria
         Me.pnlPeriod.Controls.Add(Me.dateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
-        Me.pnlPeriod.Location = New System.Drawing.Point(542, 61)
+        Me.pnlPeriod.Location = New System.Drawing.Point(723, 75)
+        Me.pnlPeriod.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlPeriod.Name = "pnlPeriod"
-        Me.pnlPeriod.Size = New System.Drawing.Size(330, 97)
+        Me.pnlPeriod.Size = New System.Drawing.Size(439, 119)
         Me.pnlPeriod.TabIndex = 7
         '
         'txtMinuteEnd
         '
         Me.txtMinuteEnd.FormattingEnabled = True
         Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(279, 67)
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(372, 82)
+        Me.txtMinuteEnd.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
-        Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteEnd.Size = New System.Drawing.Size(52, 24)
         Me.txtMinuteEnd.TabIndex = 15
         Me.txtMinuteEnd.Text = "00"
         '
@@ -420,9 +443,10 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtMinuteStart.FormattingEnabled = True
         Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
-        Me.txtMinuteStart.Location = New System.Drawing.Point(279, 33)
+        Me.txtMinuteStart.Location = New System.Drawing.Point(372, 41)
+        Me.txtMinuteStart.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMinuteStart.Name = "txtMinuteStart"
-        Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtMinuteStart.Size = New System.Drawing.Size(52, 24)
         Me.txtMinuteStart.TabIndex = 14
         Me.txtMinuteStart.Text = "00"
         '
@@ -430,9 +454,10 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourEnd.FormattingEnabled = True
         Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
+        Me.txtHourEnd.Location = New System.Drawing.Point(311, 84)
+        Me.txtHourEnd.Margin = New System.Windows.Forms.Padding(4)
         Me.txtHourEnd.Name = "txtHourEnd"
-        Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourEnd.Size = New System.Drawing.Size(52, 24)
         Me.txtHourEnd.TabIndex = 13
         Me.txtHourEnd.Text = "23"
         '
@@ -440,69 +465,77 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourStart.FormattingEnabled = True
         Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourStart.Location = New System.Drawing.Point(233, 34)
+        Me.txtHourStart.Location = New System.Drawing.Point(311, 42)
+        Me.txtHourStart.Margin = New System.Windows.Forms.Padding(4)
         Me.txtHourStart.Name = "txtHourStart"
-        Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
+        Me.txtHourStart.Size = New System.Drawing.Size(52, 24)
         Me.txtHourStart.TabIndex = 12
         Me.txtHourStart.Text = "00"
         '
         'txtSminute
         '
         Me.txtSminute.AutoSize = True
-        Me.txtSminute.Location = New System.Drawing.Point(280, 18)
+        Me.txtSminute.Location = New System.Drawing.Point(373, 22)
+        Me.txtSminute.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.txtSminute.Name = "txtSminute"
-        Me.txtSminute.Size = New System.Drawing.Size(39, 13)
+        Me.txtSminute.Size = New System.Drawing.Size(50, 17)
         Me.txtSminute.TabIndex = 9
         Me.txtSminute.Text = "Minute"
         '
         'lblHourEnd
         '
         Me.lblHourEnd.AutoSize = True
-        Me.lblHourEnd.Location = New System.Drawing.Point(236, 18)
+        Me.lblHourEnd.Location = New System.Drawing.Point(315, 22)
+        Me.lblHourEnd.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHourEnd.Name = "lblHourEnd"
-        Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
+        Me.lblHourEnd.Size = New System.Drawing.Size(39, 17)
         Me.lblHourEnd.TabIndex = 7
         Me.lblHourEnd.Text = "Hour"
         '
         'lblHourBegin
         '
         Me.lblHourBegin.AutoSize = True
-        Me.lblHourBegin.Location = New System.Drawing.Point(89, 18)
+        Me.lblHourBegin.Location = New System.Drawing.Point(119, 22)
+        Me.lblHourBegin.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHourBegin.Name = "lblHourBegin"
-        Me.lblHourBegin.Size = New System.Drawing.Size(30, 13)
+        Me.lblHourBegin.Size = New System.Drawing.Size(38, 17)
         Me.lblHourBegin.TabIndex = 5
         Me.lblHourBegin.Text = "Date"
         '
         'dateTo
         '
-        Me.dateTo.Location = New System.Drawing.Point(63, 68)
+        Me.dateTo.Location = New System.Drawing.Point(84, 84)
+        Me.dateTo.Margin = New System.Windows.Forms.Padding(4)
         Me.dateTo.Name = "dateTo"
-        Me.dateTo.Size = New System.Drawing.Size(164, 20)
+        Me.dateTo.Size = New System.Drawing.Size(217, 22)
         Me.dateTo.TabIndex = 4
         '
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(7, 72)
+        Me.lblTo.Location = New System.Drawing.Point(9, 89)
+        Me.lblTo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(52, 13)
+        Me.lblTo.Size = New System.Drawing.Size(67, 17)
         Me.lblTo.TabIndex = 3
         Me.lblTo.Text = "End Date"
         '
         'dateFrom
         '
-        Me.dateFrom.Location = New System.Drawing.Point(63, 33)
+        Me.dateFrom.Location = New System.Drawing.Point(84, 41)
+        Me.dateFrom.Margin = New System.Windows.Forms.Padding(4)
         Me.dateFrom.Name = "dateFrom"
-        Me.dateFrom.Size = New System.Drawing.Size(164, 20)
+        Me.dateFrom.Size = New System.Drawing.Size(217, 22)
         Me.dateFrom.TabIndex = 2
         Me.dateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
         '
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(7, 37)
+        Me.lblFrom.Location = New System.Drawing.Point(9, 46)
+        Me.lblFrom.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(55, 13)
+        Me.lblFrom.Size = New System.Drawing.Size(72, 17)
         Me.lblFrom.TabIndex = 1
         Me.lblFrom.Text = "Start Date"
         '
@@ -512,8 +545,9 @@ Partial Class formProductsSelectCriteria
         Me.lblPeriod.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblPeriod.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPeriod.Location = New System.Drawing.Point(0, 0)
+        Me.lblPeriod.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(43, 13)
+        Me.lblPeriod.Size = New System.Drawing.Size(55, 17)
         Me.lblPeriod.TabIndex = 0
         Me.lblPeriod.Text = "Period"
         '
@@ -534,66 +568,74 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(542, 212)
+        Me.pnlStation.Location = New System.Drawing.Point(723, 261)
+        Me.pnlStation.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStation.Name = "pnlStation"
-        Me.pnlStation.Size = New System.Drawing.Size(330, 152)
+        Me.pnlStation.Size = New System.Drawing.Size(439, 187)
         Me.pnlStation.TabIndex = 6
         Me.pnlStation.Visible = False
         '
         'lblRadius
         '
         Me.lblRadius.AutoSize = True
-        Me.lblRadius.Location = New System.Drawing.Point(203, 101)
+        Me.lblRadius.Location = New System.Drawing.Point(271, 124)
+        Me.lblRadius.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRadius.Name = "lblRadius"
-        Me.lblRadius.Size = New System.Drawing.Size(69, 13)
+        Me.lblRadius.Size = New System.Drawing.Size(92, 17)
         Me.lblRadius.TabIndex = 13
         Me.lblRadius.Text = "Radiuds (km)"
         '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(146, 101)
+        Me.lblLongitude.Location = New System.Drawing.Point(195, 124)
+        Me.lblLongitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLongitude.Name = "lblLongitude"
-        Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
+        Me.lblLongitude.Size = New System.Drawing.Size(71, 17)
         Me.lblLongitude.TabIndex = 12
         Me.lblLongitude.Text = "Longitude"
         '
         'txtRadius
         '
-        Me.txtRadius.Location = New System.Drawing.Point(212, 116)
+        Me.txtRadius.Location = New System.Drawing.Point(283, 143)
+        Me.txtRadius.Margin = New System.Windows.Forms.Padding(4)
         Me.txtRadius.Name = "txtRadius"
-        Me.txtRadius.Size = New System.Drawing.Size(53, 20)
+        Me.txtRadius.Size = New System.Drawing.Size(69, 22)
         Me.txtRadius.TabIndex = 11
         '
         'TxtLongitude
         '
-        Me.TxtLongitude.Location = New System.Drawing.Point(152, 116)
+        Me.TxtLongitude.Location = New System.Drawing.Point(203, 143)
+        Me.TxtLongitude.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtLongitude.Name = "TxtLongitude"
-        Me.TxtLongitude.Size = New System.Drawing.Size(53, 20)
+        Me.TxtLongitude.Size = New System.Drawing.Size(69, 22)
         Me.TxtLongitude.TabIndex = 10
         '
         'txtLatitude
         '
-        Me.txtLatitude.Location = New System.Drawing.Point(92, 116)
+        Me.txtLatitude.Location = New System.Drawing.Point(123, 143)
+        Me.txtLatitude.Margin = New System.Windows.Forms.Padding(4)
         Me.txtLatitude.Name = "txtLatitude"
-        Me.txtLatitude.Size = New System.Drawing.Size(53, 20)
+        Me.txtLatitude.Size = New System.Drawing.Size(69, 22)
         Me.txtLatitude.TabIndex = 9
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(91, 101)
+        Me.lblLatitude.Location = New System.Drawing.Point(121, 124)
+        Me.lblLatitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
+        Me.lblLatitude.Size = New System.Drawing.Size(59, 17)
         Me.lblLatitude.TabIndex = 8
         Me.lblLatitude.Text = "Latitude"
         '
         'OptGeography
         '
         Me.OptGeography.AutoSize = True
-        Me.OptGeography.Location = New System.Drawing.Point(3, 97)
+        Me.OptGeography.Location = New System.Drawing.Point(4, 119)
+        Me.OptGeography.Margin = New System.Windows.Forms.Padding(4)
         Me.OptGeography.Name = "OptGeography"
-        Me.OptGeography.Size = New System.Drawing.Size(88, 17)
+        Me.OptGeography.Size = New System.Drawing.Size(114, 21)
         Me.OptGeography.TabIndex = 7
         Me.OptGeography.TabStop = True
         Me.OptGeography.Text = "Geographical"
@@ -602,17 +644,20 @@ Partial Class formProductsSelectCriteria
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(97, 74)
+        Me.ListBox1.ItemHeight = 16
+        Me.ListBox1.Location = New System.Drawing.Point(129, 91)
+        Me.ListBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(158, 17)
+        Me.ListBox1.Size = New System.Drawing.Size(209, 20)
         Me.ListBox1.TabIndex = 6
         '
         'optBasin
         '
         Me.optBasin.AutoSize = True
-        Me.optBasin.Location = New System.Drawing.Point(3, 74)
+        Me.optBasin.Location = New System.Drawing.Point(4, 91)
+        Me.optBasin.Margin = New System.Windows.Forms.Padding(4)
         Me.optBasin.Name = "optBasin"
-        Me.optBasin.Size = New System.Drawing.Size(97, 17)
+        Me.optBasin.Size = New System.Drawing.Size(126, 21)
         Me.optBasin.TabIndex = 5
         Me.optBasin.TabStop = True
         Me.optBasin.Text = "Drainage Basin"
@@ -621,17 +666,20 @@ Partial Class formProductsSelectCriteria
         'lstRegion
         '
         Me.lstRegion.FormattingEnabled = True
-        Me.lstRegion.Location = New System.Drawing.Point(97, 51)
+        Me.lstRegion.ItemHeight = 16
+        Me.lstRegion.Location = New System.Drawing.Point(129, 63)
+        Me.lstRegion.Margin = New System.Windows.Forms.Padding(4)
         Me.lstRegion.Name = "lstRegion"
-        Me.lstRegion.Size = New System.Drawing.Size(158, 17)
+        Me.lstRegion.Size = New System.Drawing.Size(209, 20)
         Me.lstRegion.TabIndex = 4
         '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(3, 51)
+        Me.RadioButton1.Location = New System.Drawing.Point(4, 63)
+        Me.RadioButton1.Margin = New System.Windows.Forms.Padding(4)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(59, 17)
+        Me.RadioButton1.Size = New System.Drawing.Size(74, 21)
         Me.RadioButton1.TabIndex = 3
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Region"
@@ -640,17 +688,20 @@ Partial Class formProductsSelectCriteria
         'lstAuthority
         '
         Me.lstAuthority.FormattingEnabled = True
-        Me.lstAuthority.Location = New System.Drawing.Point(97, 28)
+        Me.lstAuthority.ItemHeight = 16
+        Me.lstAuthority.Location = New System.Drawing.Point(129, 34)
+        Me.lstAuthority.Margin = New System.Windows.Forms.Padding(4)
         Me.lstAuthority.Name = "lstAuthority"
-        Me.lstAuthority.Size = New System.Drawing.Size(158, 17)
+        Me.lstAuthority.Size = New System.Drawing.Size(209, 20)
         Me.lstAuthority.TabIndex = 2
         '
         'optAuthority
         '
         Me.optAuthority.AutoSize = True
-        Me.optAuthority.Location = New System.Drawing.Point(3, 28)
+        Me.optAuthority.Location = New System.Drawing.Point(4, 34)
+        Me.optAuthority.Margin = New System.Windows.Forms.Padding(4)
         Me.optAuthority.Name = "optAuthority"
-        Me.optAuthority.Size = New System.Drawing.Size(66, 17)
+        Me.optAuthority.Size = New System.Drawing.Size(85, 21)
         Me.optAuthority.TabIndex = 1
         Me.optAuthority.TabStop = True
         Me.optAuthority.Text = "Authority"
@@ -662,17 +713,19 @@ Partial Class formProductsSelectCriteria
         Me.lblStations.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblStations.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStations.Location = New System.Drawing.Point(0, 0)
+        Me.lblStations.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(121, 13)
+        Me.lblStations.Size = New System.Drawing.Size(151, 17)
         Me.lblStations.TabIndex = 0
         Me.lblStations.Text = "Advanced Selection"
         '
         'chkelement
         '
         Me.chkelement.AutoSize = True
-        Me.chkelement.Location = New System.Drawing.Point(270, 354)
+        Me.chkelement.Location = New System.Drawing.Point(360, 436)
+        Me.chkelement.Margin = New System.Windows.Forms.Padding(4)
         Me.chkelement.Name = "chkelement"
-        Me.chkelement.Size = New System.Drawing.Size(69, 17)
+        Me.chkelement.Size = New System.Drawing.Size(89, 21)
         Me.chkelement.TabIndex = 5
         Me.chkelement.Text = "Clear List"
         Me.chkelement.UseVisualStyleBackColor = True
@@ -680,9 +733,10 @@ Partial Class formProductsSelectCriteria
         'chksatation
         '
         Me.chksatation.AutoSize = True
-        Me.chksatation.Location = New System.Drawing.Point(5, 353)
+        Me.chksatation.Location = New System.Drawing.Point(7, 434)
+        Me.chksatation.Margin = New System.Windows.Forms.Padding(4)
         Me.chksatation.Name = "chksatation"
-        Me.chksatation.Size = New System.Drawing.Size(69, 17)
+        Me.chksatation.Size = New System.Drawing.Size(89, 21)
         Me.chksatation.TabIndex = 4
         Me.chksatation.Text = "Clear List"
         Me.chksatation.UseVisualStyleBackColor = True
@@ -690,35 +744,38 @@ Partial Class formProductsSelectCriteria
         'cmbElement
         '
         Me.cmbElement.FormattingEnabled = True
-        Me.cmbElement.ItemHeight = 13
-        Me.cmbElement.Location = New System.Drawing.Point(352, 30)
+        Me.cmbElement.ItemHeight = 16
+        Me.cmbElement.Location = New System.Drawing.Point(469, 37)
+        Me.cmbElement.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbElement.Name = "cmbElement"
-        Me.cmbElement.Size = New System.Drawing.Size(182, 21)
+        Me.cmbElement.Size = New System.Drawing.Size(241, 24)
         Me.cmbElement.TabIndex = 3
         '
         'cmbstation
         '
         Me.cmbstation.FormattingEnabled = True
-        Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(84, 30)
+        Me.cmbstation.ItemHeight = 16
+        Me.cmbstation.Location = New System.Drawing.Point(112, 37)
+        Me.cmbstation.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbstation.Name = "cmbstation"
-        Me.cmbstation.Size = New System.Drawing.Size(178, 21)
+        Me.cmbstation.Size = New System.Drawing.Size(236, 24)
         Me.cmbstation.TabIndex = 1
         '
         'ToolStrip2
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.cmdExtract, Me.prgrbProducts, Me.cmdCancel})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 458)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 564)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1191, 30)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 30)
         '
         'cmdExtract
         '
@@ -727,14 +784,14 @@ Partial Class formProductsSelectCriteria
         Me.cmdExtract.Image = CType(resources.GetObject("cmdExtract.Image"), System.Drawing.Image)
         Me.cmdExtract.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.cmdExtract.Name = "cmdExtract"
-        Me.cmdExtract.Size = New System.Drawing.Size(99, 22)
+        Me.cmdExtract.Size = New System.Drawing.Size(122, 27)
         Me.cmdExtract.Text = "Start Extraction"
         '
         'prgrbProducts
         '
         Me.prgrbProducts.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.prgrbProducts.Name = "prgrbProducts"
-        Me.prgrbProducts.Size = New System.Drawing.Size(100, 22)
+        Me.prgrbProducts.Size = New System.Drawing.Size(133, 27)
         '
         'cmdCancel
         '
@@ -742,18 +799,18 @@ Partial Class formProductsSelectCriteria
         Me.cmdCancel.Image = CType(resources.GetObject("cmdCancel.Image"), System.Drawing.Image)
         Me.cmdCancel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(47, 22)
+        Me.cmdCancel.Size = New System.Drawing.Size(57, 27)
         Me.cmdCancel.Text = "Cancel"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 25)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(6, 27)
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(6, 27)
         '
         'HelpToolStripButton
         '
@@ -761,28 +818,30 @@ Partial Class formProductsSelectCriteria
         Me.HelpToolStripButton.Image = CType(resources.GetObject("HelpToolStripButton.Image"), System.Drawing.Image)
         Me.HelpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.HelpToolStripButton.Name = "HelpToolStripButton"
-        Me.HelpToolStripButton.Size = New System.Drawing.Size(23, 22)
+        Me.HelpToolStripButton.Size = New System.Drawing.Size(24, 24)
         Me.HelpToolStripButton.Text = "He&lp"
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator, Me.toolStripSeparator1, Me.HelpToolStripButton})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(893, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1191, 27)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'formProductsSelectCriteria
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(893, 483)
+        Me.ClientSize = New System.Drawing.Size(1191, 594)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "formProductsSelectCriteria"
         Me.Text = "Data Selection"
         Me.MenuStrip1.ResumeLayout(False)
