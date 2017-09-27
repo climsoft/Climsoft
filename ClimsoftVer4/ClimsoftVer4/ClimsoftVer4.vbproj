@@ -110,6 +110,12 @@
     <Compile Include="formClimat.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmConversionDewPointRh.Designer.vb">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formDaily1.Designer.vb">
       <DependentUpon>formDaily1.vb</DependentUpon>
     </Compile>
@@ -647,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversionDewPointRh.resx">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCPTSeason.resx">
       <DependentUpon>frmCPTSeason.vb</DependentUpon>
