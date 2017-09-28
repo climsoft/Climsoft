@@ -22,7 +22,7 @@ Partial Class FrmConversionDewPointRh
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.drybulb = New System.Windows.Forms.TextBox()
+        Me.drybuld = New System.Windows.Forms.TextBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.lblTT = New System.Windows.Forms.Label()
         Me.humidity = New System.Windows.Forms.TextBox()
@@ -34,12 +34,12 @@ Partial Class FrmConversionDewPointRh
         Me.lblRH = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'drybulb
+        'drybuld
         '
-        Me.drybulb.Location = New System.Drawing.Point(12, 65)
-        Me.drybulb.Name = "drybulb"
-        Me.drybulb.Size = New System.Drawing.Size(75, 20)
-        Me.drybulb.TabIndex = 0
+        Me.drybuld.Location = New System.Drawing.Point(12, 65)
+        Me.drybuld.Name = "drybuld"
+        Me.drybuld.Size = New System.Drawing.Size(75, 20)
+        Me.drybuld.TabIndex = 0
         '
         'btnOK
         '
@@ -134,7 +134,7 @@ Partial Class FrmConversionDewPointRh
         Me.Controls.Add(Me.humidity)
         Me.Controls.Add(Me.lblTT)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.drybulb)
+        Me.Controls.Add(Me.drybuld)
         Me.Name = "FrmConversionDewPointRh"
         Me.Text = "Calculation of Dew Point and Relative Humidity"
         Me.ResumeLayout(False)
@@ -142,7 +142,7 @@ Partial Class FrmConversionDewPointRh
 
     End Sub
 
-    Friend WithEvents drybulb As TextBox
+    Friend WithEvents drybuld As TextBox
     Friend WithEvents btnOK As Button
     Friend WithEvents lblTT As Label
     Friend WithEvents humidity As TextBox
