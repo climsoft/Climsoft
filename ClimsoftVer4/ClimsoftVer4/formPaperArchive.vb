@@ -479,7 +479,7 @@ Err:
     End Sub
     Sub ViewImage(num As Integer)
         Try
-            'MsgBox(Kount)
+
             If Kount < 1 Then
                 ResetForm()
                 Exit Sub
@@ -490,7 +490,6 @@ Err:
             txtYY.Text = DateAndTime.Year(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
             txtMM.Text = DateAndTime.Month(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
             txtDD.Text = DateAndTime.Day(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
-            'txtDD.Text = Strings.Left(ds.Tables("paperarchive").Rows(num).Item("formDatetime"), 2)
             txtHH.Text = DateAndTime.Hour(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
 
             txtRec.Text = rec + 1 & " of " & Kount
@@ -699,7 +698,7 @@ Err:
             da.Fill(ds, "paperarchive")
 
             Kount = ds.Tables("paperarchive").Rows.Count
-
+            ' Set headers for the list views 
             lstArchival.Columns.Add("StaionId", 70, HorizontalAlignment.Left)
             lstArchival.Columns.Add("FormId", 75, HorizontalAlignment.Left)
             lstArchival.Columns.Add("Form Datetime", 130, HorizontalAlignment.Left)
@@ -709,7 +708,7 @@ Err:
             Dim itms = New ListViewItem
 
             For i = 0 To Kount - 1
-                'For i = 0 To 3 'dss.Tables("station").Rows.Count - 1
+
                 img(0) = ds.Tables("paperarchive").Rows(i).Item("belongsTo")
                 img(1) = ds.Tables("paperarchive").Rows(i).Item("classifiedInto")
                 img(2) = ds.Tables("paperarchive").Rows(i).Item("formDatetime")
