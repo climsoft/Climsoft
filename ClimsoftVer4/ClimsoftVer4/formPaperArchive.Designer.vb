@@ -79,6 +79,9 @@ Partial Class formPaperArchive
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.cmdList = New System.Windows.Forms.Button()
+        Me.lstArchival = New System.Windows.Forms.ListView()
         Me.MenuPaperArchive = New System.Windows.Forms.MenuStrip()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -100,6 +103,7 @@ Partial Class formPaperArchive
         Me.grpImage.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,6 +112,7 @@ Partial Class formPaperArchive
         Me.tabImageArchives.Controls.Add(Me.tabStructured)
         Me.tabImageArchives.Controls.Add(Me.tabUnstructured)
         Me.tabImageArchives.Controls.Add(Me.TabViewArchive)
+        Me.tabImageArchives.Controls.Add(Me.TabPage1)
         Me.tabImageArchives.Location = New System.Drawing.Point(9, 27)
         Me.tabImageArchives.Name = "tabImageArchives"
         Me.tabImageArchives.SelectedIndex = 0
@@ -448,7 +453,7 @@ Partial Class formPaperArchive
         Me.TabViewArchive.Padding = New System.Windows.Forms.Padding(3)
         Me.TabViewArchive.Size = New System.Drawing.Size(598, 455)
         Me.TabViewArchive.TabIndex = 2
-        Me.TabViewArchive.Text = "Archived Images"
+        Me.TabViewArchive.Text = "Retrieve Images"
         Me.TabViewArchive.UseVisualStyleBackColor = True
         '
         'grpImage
@@ -679,6 +684,44 @@ Partial Class formPaperArchive
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Station"
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.cmdList)
+        Me.TabPage1.Controls.Add(Me.lstArchival)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(598, 455)
+        Me.TabPage1.TabIndex = 3
+        Me.TabPage1.Text = "Archival List"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'cmdList
+        '
+        Me.cmdList.Location = New System.Drawing.Point(233, 428)
+        Me.cmdList.Name = "cmdList"
+        Me.cmdList.Size = New System.Drawing.Size(130, 24)
+        Me.cmdList.TabIndex = 19
+        Me.cmdList.Text = "List Image Details"
+        Me.cmdList.UseVisualStyleBackColor = True
+        '
+        'lstArchival
+        '
+        Me.lstArchival.AllowColumnReorder = True
+        Me.lstArchival.AllowDrop = True
+        Me.lstArchival.FullRowSelect = True
+        Me.lstArchival.GridLines = True
+        Me.lstArchival.HideSelection = False
+        Me.lstArchival.HoverSelection = True
+        Me.lstArchival.LabelEdit = True
+        Me.lstArchival.Location = New System.Drawing.Point(8, 28)
+        Me.lstArchival.Name = "lstArchival"
+        Me.lstArchival.RightToLeftLayout = True
+        Me.lstArchival.Size = New System.Drawing.Size(578, 397)
+        Me.lstArchival.TabIndex = 18
+        Me.lstArchival.UseCompatibleStateImageBehavior = False
+        Me.lstArchival.View = System.Windows.Forms.View.Details
+        '
         'MenuPaperArchive
         '
         Me.MenuPaperArchive.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.HelpToolStripMenuItem})
@@ -789,6 +832,7 @@ Partial Class formPaperArchive
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox18.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
         Me.ResumeLayout(False)
@@ -862,4 +906,7 @@ Partial Class formPaperArchive
     Friend WithEvents lblMessages As System.Windows.Forms.Label
     Friend WithEvents txtDefaultFolder As System.Windows.Forms.TextBox
     Friend WithEvents cmdClear As System.Windows.Forms.Button
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Public WithEvents lstArchival As System.Windows.Forms.ListView
+    Friend WithEvents cmdList As System.Windows.Forms.Button
 End Class

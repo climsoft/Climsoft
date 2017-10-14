@@ -1145,8 +1145,8 @@ Public Class formSynopRA1
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 53
                 stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
@@ -1240,7 +1240,7 @@ Public Class formSynopRA1
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
             'Loop through all observation fields adding observation records to observationInitial table
 
             dd = ""
@@ -1317,5 +1317,9 @@ Public Class formSynopRA1
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+    End Sub
+
+    Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
+        frmSynopTDCF.Show()
     End Sub
 End Class

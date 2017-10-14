@@ -35,6 +35,7 @@ Partial Class frmQCdatesSelection
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.lblQCtype = New System.Windows.Forms.Label()
         Me.lblProcessingStatus = New System.Windows.Forms.Label()
+        Me.LstViewStations = New System.Windows.Forms.ListView()
         Me.SuspendLayout()
         '
         'txtBeginYear
@@ -147,11 +148,26 @@ Partial Class frmQCdatesSelection
         Me.lblProcessingStatus.Size = New System.Drawing.Size(0, 13)
         Me.lblProcessingStatus.TabIndex = 12
         '
+        'LstViewStations
+        '
+        Me.LstViewStations.CheckBoxes = True
+        Me.LstViewStations.FullRowSelect = True
+        Me.LstViewStations.GridLines = True
+        Me.LstViewStations.Location = New System.Drawing.Point(335, 19)
+        Me.LstViewStations.Name = "LstViewStations"
+        Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.LstViewStations.RightToLeftLayout = True
+        Me.LstViewStations.Size = New System.Drawing.Size(321, 286)
+        Me.LstViewStations.TabIndex = 13
+        Me.LstViewStations.UseCompatibleStateImageBehavior = False
+        Me.LstViewStations.View = System.Windows.Forms.View.Details
+        '
         'frmQCdatesSelection
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(350, 251)
+        Me.ClientSize = New System.Drawing.Size(668, 317)
+        Me.Controls.Add(Me.LstViewStations)
         Me.Controls.Add(Me.lblProcessingStatus)
         Me.Controls.Add(Me.lblQCtype)
         Me.Controls.Add(Me.btnHelp)
@@ -186,4 +202,5 @@ Partial Class frmQCdatesSelection
     Friend WithEvents btnHelp As System.Windows.Forms.Button
     Friend WithEvents lblQCtype As System.Windows.Forms.Label
     Friend WithEvents lblProcessingStatus As System.Windows.Forms.Label
+    Public WithEvents LstViewStations As System.Windows.Forms.ListView
 End Class

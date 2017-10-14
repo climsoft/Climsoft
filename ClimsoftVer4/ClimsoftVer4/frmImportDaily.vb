@@ -199,10 +199,13 @@
                         dat = .Rows(i).Cells(j).Value
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
-
+                            'If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
                             If chkScale.Checked = True Then Scale_Data(cod, dat)
                             If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
 
+                            'End If
+                            'If IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
+                            'End If
                         End If
                     Next
                 Next
@@ -223,13 +226,17 @@
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
                     Get_RecordIdx(i, st, cod, y, m, d, h)
 
+                    'If Get_RecordIdx(i, st, cod, y, m, d, h) Then
+                    '    If h = "" Then h = txtObsHour.Text
+                    'End If
+
                     For j = 0 To .Columns.Count - 1
                         dat = .Rows(i).Cells(j).Value
                         hd = .Columns(j).Name
                         If chkScale.Checked = True Then Scale_Data(cod, dat)
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
-
+                            'If IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
                             If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
                         End If
                     Next

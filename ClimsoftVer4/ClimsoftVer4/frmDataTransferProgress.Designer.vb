@@ -22,19 +22,19 @@ Partial Class frmDataTransferProgress
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtDataTransferProgress = New System.Windows.Forms.TextBox()
+        Me.txtDataTransferProgress1 = New System.Windows.Forms.TextBox()
         Me.lblDataTransferProgress = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblTableRecords = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'txtDataTransferProgress
+        'txtDataTransferProgress1
         '
-        Me.txtDataTransferProgress.ForeColor = System.Drawing.Color.Black
-        Me.txtDataTransferProgress.Location = New System.Drawing.Point(70, 47)
-        Me.txtDataTransferProgress.Name = "txtDataTransferProgress"
-        Me.txtDataTransferProgress.Size = New System.Drawing.Size(273, 20)
-        Me.txtDataTransferProgress.TabIndex = 0
+        Me.txtDataTransferProgress1.ForeColor = System.Drawing.Color.Black
+        Me.txtDataTransferProgress1.Location = New System.Drawing.Point(70, 47)
+        Me.txtDataTransferProgress1.Name = "txtDataTransferProgress1"
+        Me.txtDataTransferProgress1.Size = New System.Drawing.Size(273, 20)
+        Me.txtDataTransferProgress1.TabIndex = 0
         '
         'lblDataTransferProgress
         '
@@ -71,7 +71,7 @@ Partial Class frmDataTransferProgress
         Me.Controls.Add(Me.lblTableRecords)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lblDataTransferProgress)
-        Me.Controls.Add(Me.txtDataTransferProgress)
+        Me.Controls.Add(Me.txtDataTransferProgress1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmDataTransferProgress"
@@ -80,7 +80,7 @@ Partial Class frmDataTransferProgress
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtDataTransferProgress As System.Windows.Forms.TextBox
+    Friend WithEvents txtDataTransferProgress1 As System.Windows.Forms.TextBox
     Friend WithEvents lblDataTransferProgress As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lblTableRecords As System.Windows.Forms.Label

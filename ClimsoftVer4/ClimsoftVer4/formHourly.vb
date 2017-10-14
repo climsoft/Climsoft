@@ -1227,8 +1227,8 @@ Public Class formHourly
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 28
                 stnId = ds.Tables("form_hourly").Rows(n).Item("stationId")

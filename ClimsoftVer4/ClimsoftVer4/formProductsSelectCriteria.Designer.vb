@@ -33,6 +33,9 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
+        Me.cmdClearStations = New System.Windows.Forms.Button()
+        Me.cmdClearElements = New System.Windows.Forms.Button()
+        Me.chkTranspose = New System.Windows.Forms.CheckBox()
         Me.pnlSummary = New System.Windows.Forms.Panel()
         Me.optTotal = New System.Windows.Forms.RadioButton()
         Me.optMean = New System.Windows.Forms.RadioButton()
@@ -79,8 +82,6 @@ Partial Class formProductsSelectCriteria
         Me.lstAuthority = New System.Windows.Forms.ListBox()
         Me.optAuthority = New System.Windows.Forms.RadioButton()
         Me.lblStations = New System.Windows.Forms.Label()
-        Me.chkelement = New System.Windows.Forms.CheckBox()
-        Me.chksatation = New System.Windows.Forms.CheckBox()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
@@ -163,6 +164,9 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlStationsElements.Controls.Add(Me.cmdClearStations)
+        Me.pnlStationsElements.Controls.Add(Me.cmdClearElements)
+        Me.pnlStationsElements.Controls.Add(Me.chkTranspose)
         Me.pnlStationsElements.Controls.Add(Me.pnlSummary)
         Me.pnlStationsElements.Controls.Add(Me.pnlExtremes)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelStation)
@@ -176,14 +180,40 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.lblStation)
         Me.pnlStationsElements.Controls.Add(Me.pnlPeriod)
         Me.pnlStationsElements.Controls.Add(Me.pnlStation)
-        Me.pnlStationsElements.Controls.Add(Me.chkelement)
-        Me.pnlStationsElements.Controls.Add(Me.chksatation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
         Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(883, 395)
         Me.pnlStationsElements.TabIndex = 4
+        '
+        'cmdClearStations
+        '
+        Me.cmdClearStations.Location = New System.Drawing.Point(175, 347)
+        Me.cmdClearStations.Name = "cmdClearStations"
+        Me.cmdClearStations.Size = New System.Drawing.Size(87, 23)
+        Me.cmdClearStations.TabIndex = 27
+        Me.cmdClearStations.Text = "Clear List"
+        Me.cmdClearStations.UseVisualStyleBackColor = True
+        '
+        'cmdClearElements
+        '
+        Me.cmdClearElements.Location = New System.Drawing.Point(449, 348)
+        Me.cmdClearElements.Name = "cmdClearElements"
+        Me.cmdClearElements.Size = New System.Drawing.Size(87, 23)
+        Me.cmdClearElements.TabIndex = 26
+        Me.cmdClearElements.Text = "Clear List"
+        Me.cmdClearElements.UseVisualStyleBackColor = True
+        '
+        'chkTranspose
+        '
+        Me.chkTranspose.AutoSize = True
+        Me.chkTranspose.Location = New System.Drawing.Point(542, 164)
+        Me.chkTranspose.Name = "chkTranspose"
+        Me.chkTranspose.Size = New System.Drawing.Size(111, 17)
+        Me.chkTranspose.TabIndex = 25
+        Me.chkTranspose.Text = "Transpose Values"
+        Me.chkTranspose.UseVisualStyleBackColor = True
         '
         'pnlSummary
         '
@@ -287,7 +317,7 @@ Partial Class formProductsSelectCriteria
         '
         'cmdDelStation
         '
-        Me.cmdDelStation.Location = New System.Drawing.Point(80, 348)
+        Me.cmdDelStation.Location = New System.Drawing.Point(5, 344)
         Me.cmdDelStation.Name = "cmdDelStation"
         Me.cmdDelStation.Size = New System.Drawing.Size(135, 27)
         Me.cmdDelStation.TabIndex = 22
@@ -296,11 +326,11 @@ Partial Class formProductsSelectCriteria
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(354, 348)
+        Me.cmdDelElement.Location = New System.Drawing.Point(270, 347)
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(143, 27)
         Me.cmdDelElement.TabIndex = 21
-        Me.cmdDelElement.Text = "Delete Selected Element"
+        Me.cmdDelElement.Text = "Delete Selected Elements"
         Me.cmdDelElement.UseVisualStyleBackColor = True
         '
         'lblProductType
@@ -322,6 +352,7 @@ Partial Class formProductsSelectCriteria
         Me.chkAdvancedSelection.TabIndex = 19
         Me.chkAdvancedSelection.Text = "Advanced Selection"
         Me.chkAdvancedSelection.UseVisualStyleBackColor = True
+        Me.chkAdvancedSelection.Visible = False
         '
         'lstvElements
         '
@@ -667,26 +698,6 @@ Partial Class formProductsSelectCriteria
         Me.lblStations.TabIndex = 0
         Me.lblStations.Text = "Advanced Selection"
         '
-        'chkelement
-        '
-        Me.chkelement.AutoSize = True
-        Me.chkelement.Location = New System.Drawing.Point(270, 354)
-        Me.chkelement.Name = "chkelement"
-        Me.chkelement.Size = New System.Drawing.Size(69, 17)
-        Me.chkelement.TabIndex = 5
-        Me.chkelement.Text = "Clear List"
-        Me.chkelement.UseVisualStyleBackColor = True
-        '
-        'chksatation
-        '
-        Me.chksatation.AutoSize = True
-        Me.chksatation.Location = New System.Drawing.Point(5, 353)
-        Me.chksatation.Name = "chksatation"
-        Me.chksatation.Size = New System.Drawing.Size(69, 17)
-        Me.chksatation.TabIndex = 4
-        Me.chksatation.Text = "Clear List"
-        Me.chksatation.UseVisualStyleBackColor = True
-        '
         'cmbElement
         '
         Me.cmbElement.FormattingEnabled = True
@@ -816,8 +827,6 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents chkelement As System.Windows.Forms.CheckBox
-    Friend WithEvents chksatation As System.Windows.Forms.CheckBox
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pnlPeriod As System.Windows.Forms.Panel
     Friend WithEvents dateTo As System.Windows.Forms.DateTimePicker
@@ -874,4 +883,7 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents btnMaxDate As System.Windows.Forms.RadioButton
     Friend WithEvents btnLowHigh As System.Windows.Forms.RadioButton
     Friend WithEvents lblXtyp As System.Windows.Forms.Label
+    Friend WithEvents chkTranspose As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdClearElements As System.Windows.Forms.Button
+    Friend WithEvents cmdClearStations As System.Windows.Forms.Button
 End Class
