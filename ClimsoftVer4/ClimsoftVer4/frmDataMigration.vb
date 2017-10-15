@@ -231,7 +231,8 @@
         Me.Cursor = Cursors.Default
         Exit Sub
 Err:
-        MsgBox(lstMsgs.Items.Add(Err.Description))
+        lstMsgs.Items.Add(Err.Description)
+        'MsgBox(lstMsgs.Items.Add(Err.Description))
         Me.Cursor = Cursors.Default
     End Sub
 

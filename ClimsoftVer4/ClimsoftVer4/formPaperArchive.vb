@@ -53,6 +53,8 @@
             MsgBox(ex.Message)
         End Try
 
+
+
     End Sub
 
 
@@ -282,6 +284,8 @@
                 Exit For
             End If
         Next
+
+
     End Sub
 
     '    Private Sub cmdView_Click(sender As Object, e As EventArgs)
@@ -475,7 +479,7 @@ Err:
     End Sub
     Sub ViewImage(num As Integer)
         Try
-            'MsgBox(Kount)
+
             If Kount < 1 Then
                 ResetForm()
                 Exit Sub
@@ -486,7 +490,6 @@ Err:
             txtYY.Text = DateAndTime.Year(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
             txtMM.Text = DateAndTime.Month(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
             txtDD.Text = DateAndTime.Day(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
-            'txtDD.Text = Strings.Left(ds.Tables("paperarchive").Rows(num).Item("formDatetime"), 2)
             txtHH.Text = DateAndTime.Hour(ds.Tables("paperarchive").Rows(num).Item("formDatetime"))
 
             txtRec.Text = rec + 1 & " of " & Kount
@@ -681,7 +684,43 @@ Err:
 
     End Function
 
-    Private Sub OpenFilePaperArchive_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFilePaperArchive.FileOk
+    Private Sub cmdList_Click(sender As Object, e As EventArgs) Handles cmdList.Click
 
+        lstArchival.Columns.Clear()
+        dbconn.Close()
+        Try
+            dbconn.ConnectionString = frmLogin.txtusrpwd.Text
+            dbconn.Open()
+
+            sql = "SELECT * FROM paperarchive ORDER BY belongsTo"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ds.Clear()
+            da.Fill(ds, "paperarchive")
+
+            Kount = ds.Tables("paperarchive").Rows.Count
+            ' Set headers for the list views 
+            lstArchival.Columns.Add("StaionId", 70, HorizontalAlignment.Left)
+            lstArchival.Columns.Add("FormId", 75, HorizontalAlignment.Left)
+            lstArchival.Columns.Add("Form Datetime", 130, HorizontalAlignment.Left)
+            lstArchival.Columns.Add("Image", 300, HorizontalAlignment.Left)
+
+            Dim img(4) As String
+            Dim itms = New ListViewItem
+
+            For i = 0 To Kount - 1
+
+                img(0) = ds.Tables("paperarchive").Rows(i).Item("belongsTo")
+                img(1) = ds.Tables("paperarchive").Rows(i).Item("classifiedInto")
+                img(2) = ds.Tables("paperarchive").Rows(i).Item("formDatetime")
+                img(3) = ds.Tables("paperarchive").Rows(i).Item("image")
+
+                itms = New ListViewItem(img)
+                lstArchival.Items.Add(itms)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbconn.Close()
+        End Try
+        dbconn.Close()
     End Sub
 End Class

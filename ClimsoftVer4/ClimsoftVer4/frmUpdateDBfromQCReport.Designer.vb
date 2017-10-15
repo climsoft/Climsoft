@@ -31,6 +31,7 @@ Partial Class frmUpdateDBfromQCReport
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnBrowseQCOriginal = New System.Windows.Forms.Button()
         Me.btnQCUpdated = New System.Windows.Forms.Button()
+        Me.lblProcessStatus = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtQCReportOriginal
@@ -72,7 +73,7 @@ Partial Class frmUpdateDBfromQCReport
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
         Me.btnOK.TabIndex = 2
-        Me.btnOK.Text = "OK"
+        Me.btnOK.Text = "Update"
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -111,11 +112,21 @@ Partial Class frmUpdateDBfromQCReport
         Me.btnQCUpdated.Text = "Browse"
         Me.btnQCUpdated.UseVisualStyleBackColor = True
         '
+        'lblProcessStatus
+        '
+        Me.lblProcessStatus.AutoSize = True
+        Me.lblProcessStatus.ForeColor = System.Drawing.Color.Red
+        Me.lblProcessStatus.Location = New System.Drawing.Point(179, 21)
+        Me.lblProcessStatus.Name = "lblProcessStatus"
+        Me.lblProcessStatus.Size = New System.Drawing.Size(0, 13)
+        Me.lblProcessStatus.TabIndex = 12
+        '
         'frmUpdateDBfromQCReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(594, 200)
+        Me.Controls.Add(Me.lblProcessStatus)
         Me.Controls.Add(Me.btnQCUpdated)
         Me.Controls.Add(Me.btnBrowseQCOriginal)
         Me.Controls.Add(Me.Button1)
@@ -142,4 +153,5 @@ Partial Class frmUpdateDBfromQCReport
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btnBrowseQCOriginal As System.Windows.Forms.Button
     Friend WithEvents btnQCUpdated As System.Windows.Forms.Button
+    Friend WithEvents lblProcessStatus As System.Windows.Forms.Label
 End Class

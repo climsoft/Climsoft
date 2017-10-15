@@ -109,17 +109,6 @@ Public Class frmProducts
 
         formProductsSelectCriteria.lblProductType.Text = prtyp.ProductType
 
-        ' Set Options for Wind Rose Selections
-        'If prtyp.ProductType = "WindRose" Then
-        '    formProductsSelectCriteria.pnlWindrose.Visible = True
-        'Else
-        '    formProductsSelectCriteria.pnlWindrose.Visible = False
-        'End If
-
-        'formcaption = ""
-        'formcaption = formProductsSelectCriteria.Text & " For " & prtyp.ProductType
-        'formProductsSelectCriteria.Text = formcaption
-        'MsgBox(prtyp.ProductType)
 
         formProductsSelectCriteria.Show()
 

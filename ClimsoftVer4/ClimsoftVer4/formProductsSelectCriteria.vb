@@ -25,9 +25,7 @@ Public Class formProductsSelectCriteria
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
 
-    Private Sub pnlStationsElements_Paint(sender As Object, e As PaintEventArgs) Handles pnlStationsElements.Paint
-
-    End Sub
+  
 
     'Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     '    Dim prtyp As New clsProducts
@@ -195,7 +193,7 @@ Public Class formProductsSelectCriteria
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
 
 
-        Dim ProductsPath As String
+        Dim ProductsPath, xpivot As String
 
         ' Define the products application path
         ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
@@ -211,6 +209,12 @@ Public Class formProductsSelectCriteria
             SummaryType = "Avg(obsValue) AS Mean"
             SumAvg = "AVG"
         End If
+
+        'xpivot = SumAvg
+        'For i = 1 To 12
+        '    If i = 1 Then xpivot = ""
+        '    xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+        'Next
 
         ' Get the stations list
         stnlist = ""
@@ -285,11 +289,36 @@ Public Class formProductsSelectCriteria
             Case "Monthly"
                 sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Year, Month;"
+
+                ' Transpose products if so selected
+                If chkTranspose.Checked = True Then
+                    xpivot = SumAvg
+                    For i = 1 To 12
+                        If i = 1 Then xpivot = ""
+                        xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                    Next
+
+                    sql = "SELECT recordedFrom as StationID, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year;"
+                End If
                 DataProducts(sql, lblProductType.Text)
 
             Case "Dekadal"
                 sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, " & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude,elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,DEKAD;"
+
+                ' Transpose products if so selected
+                'If chkTranspose.Checked = True Then
+                '    xpivot = SumAvg
+                '    For i = 1 To 3
+                '        If i = 1 Then xpivot = ""
+                '        xpivot = xpivot & "," & SumAvg & "(IF(round(Day(obsDatetime) / 10.5 + 0.5, 0)) = '" & i & "', value, NULL)) AS '" & i & "'"
+                '    Next
+
+                '    sql = "SELECT recordedFrom as StationID, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month" & xpivot & " FROM (SELECT recordedFrom, describedBy, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                '          "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year, Month;"
+                'End If
+
                 DataProducts(sql, lblProductType.Text)
 
             Case "Pentad"
@@ -345,7 +374,6 @@ Public Class formProductsSelectCriteria
                 MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
                 Exit Sub
         End Select
-
 
     End Sub
     Sub WindRoseData(sql As String)
@@ -1046,7 +1074,7 @@ Err:
         Next
     End Sub
 
-    Private Sub chksatation_CheckedChanged(sender As Object, e As EventArgs) Handles chksatation.CheckedChanged
+    Private Sub chksatation_CheckedChanged(sender As Object, e As EventArgs)
         lstvStations.Clear()
     End Sub
 
@@ -1064,7 +1092,7 @@ Err:
         Next
     End Sub
 
-    Private Sub chkelement_CheckedChanged(sender As Object, e As EventArgs) Handles chkelement.CheckedChanged
+    Private Sub chkelement_CheckedChanged(sender As Object, e As EventArgs)
         lstvElements.Clear()
     End Sub
 
@@ -1097,6 +1125,11 @@ Err:
             pnlSummary.Visible = True
         End If
 
+        If lblProductType.Text = "Monthly" Then 'Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
+            chkTranspose.Visible = True
+        Else
+            chkTranspose.Visible = False
+        End If
     End Sub
 
 
@@ -1139,4 +1172,15 @@ Err:
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#producstcriteria")
     End Sub
+
+    Private Sub cmdClearElements_Click(sender As Object, e As EventArgs) Handles cmdClearElements.Click
+        lstvElements.Clear()
+    End Sub
+
+
+    Private Sub cmdClearStations_Click(sender As Object, e As EventArgs) Handles cmdClearStations.Click
+        lstvStations.Clear()
+    End Sub
+
+
 End Class

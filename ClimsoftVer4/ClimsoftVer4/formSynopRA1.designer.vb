@@ -195,6 +195,7 @@ Partial Class formSynopRA1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.btnTDCF = New System.Windows.Forms.Button()
         YyyyLabel = New System.Windows.Forms.Label()
         Val_Elem106Label = New System.Windows.Forms.Label()
         Val_Elem107Label = New System.Windows.Forms.Label()
@@ -1052,9 +1053,9 @@ Partial Class formSynopRA1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(532, 547)
+        Me.btnClose.Location = New System.Drawing.Point(550, 547)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(64, 23)
         Me.btnClose.TabIndex = 59
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -1062,9 +1063,9 @@ Partial Class formSynopRA1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(366, 547)
+        Me.btnClear.Location = New System.Drawing.Point(322, 547)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(64, 23)
         Me.btnClear.TabIndex = 58
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -1072,36 +1073,36 @@ Partial Class formSynopRA1
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(117, 547)
+        Me.btnCommit.Location = New System.Drawing.Point(94, 547)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(75, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(64, 23)
         Me.btnCommit.TabIndex = 55
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(283, 547)
+        Me.btnDelete.Location = New System.Drawing.Point(246, 547)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(64, 23)
         Me.btnDelete.TabIndex = 57
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(34, 547)
+        Me.btnAddNew.Location = New System.Drawing.Point(18, 547)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
         Me.btnAddNew.TabIndex = 54
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(200, 547)
+        Me.btnUpdate.Location = New System.Drawing.Point(170, 547)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
         Me.btnUpdate.TabIndex = 56
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -1155,9 +1156,9 @@ Partial Class formSynopRA1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(615, 547)
+        Me.btnHelp.Location = New System.Drawing.Point(626, 547)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
         Me.btnHelp.TabIndex = 60
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -1654,18 +1655,28 @@ Partial Class formSynopRA1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(449, 547)
+        Me.btnView.Location = New System.Drawing.Point(398, 547)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(64, 23)
         Me.btnView.TabIndex = 661
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
+        '
+        'btnTDCF
+        '
+        Me.btnTDCF.Location = New System.Drawing.Point(474, 547)
+        Me.btnTDCF.Name = "btnTDCF"
+        Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
+        Me.btnTDCF.TabIndex = 662
+        Me.btnTDCF.Text = "TDCF"
+        Me.btnTDCF.UseVisualStyleBackColor = True
         '
         'formSynopRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(740, 636)
+        Me.Controls.Add(Me.btnTDCF)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
@@ -1970,5 +1981,6 @@ Partial Class formSynopRA1
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents btnUpload As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents btnTDCF As System.Windows.Forms.Button
 
 End Class

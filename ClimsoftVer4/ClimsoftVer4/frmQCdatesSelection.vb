@@ -293,6 +293,33 @@ Public Class frmQCdatesSelection
         ElseIf frmQC.optInterElement.Checked = True Then
             lblQCtype.Text = "QC Inter-element checks"
         End If
+
+        'lstvStations.Clear()
+        LstViewStations.Columns.Clear()
+        LstViewStations.Columns.Add("Station Id", 100, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add("Station Name", 200, HorizontalAlignment.Left)
+
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            sql = "SELECT * FROM station ORDER BY stationId"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.Fill(ds, "station")
+
+            Dim stn(2) As String
+            Dim itms = New ListViewItem
+            For i = 0 To ds.Tables("station").Rows.Count - 1
+                stn(0) = ds.Tables("station").Rows(i).Item("stationId") '"0123456789"
+                stn(1) = ds.Tables("station").Rows(i).Item("stationName") '"station1"
+                itms = New ListViewItem(stn)
+                LstViewStations.Items.Add(itms)
+            Next
+        Catch ex As MySql.Data.MySqlClient.MySqlException
+            MessageBox.Show(ex.Message)
+            conn.Close()
+        End Try
+
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

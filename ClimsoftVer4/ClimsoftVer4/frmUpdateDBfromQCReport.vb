@@ -45,6 +45,11 @@ Public Class frmUpdateDBfromQCReport
         strConnString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strFolderPath & ";Extended Properties=Text;"
         Dim conn1 As New OleDb.OleDbConnection
 
+        ' Set busy Cursor pointer
+        lblProcessStatus.Text = "Uploading ...........   Please wait"
+        lblProcessStatus.Refresh()
+
+        Me.Cursor = Cursors.WaitCursor
 
         Try
             conn1.ConnectionString = strConnString
@@ -65,6 +70,8 @@ Public Class frmUpdateDBfromQCReport
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
             MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+            lblProcessStatus.Text = "Stopped"
         End Try
 
         'Try
@@ -78,13 +85,17 @@ Public Class frmUpdateDBfromQCReport
 
         msgTxtQCReportsMismatch = "Mismatch between original and updated QC reports file names"
         msgTxtUpdatedQCReportFileName = "File name for updated QC report must end with [_updated.csv]"
+
         If Strings.Right(txtQCReportUpdated.Text, 12) <> "_updated.csv" Then
             MsgBox(msgTxtUpdatedQCReportFileName, MsgBoxStyle.Exclamation)
+            Me.Cursor = Cursors.Default
+            lblProcessStatus.Text = "Wrong file name...uploading aborted"
             Exit Sub
         End If
         If Strings.Left(txtQCReportOriginal.Text, Len(txtQCReportOriginal.Text) - 4) <> _
             Strings.Left(txtQCReportUpdated.Text, Len(txtQCReportUpdated.Text) - 12) Then
             MsgBox(msgTxtQCReportsMismatch, MsgBoxStyle.Exclamation)
+            lblProcessStatus.Text = "Wrong file name...uploading aborted"
             Exit Sub
         End If
 
@@ -152,9 +163,12 @@ Public Class frmUpdateDBfromQCReport
                                     objCmd.ExecuteNonQuery()
                                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                    Me.Cursor = Cursors.Default
+                                    lblProcessStatus.Text = "Stopped"
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                                     MsgBox(ex.Message)
+                                    Me.Cursor = Cursors.Default
                                 End Try
                             End If
                         End If
@@ -216,19 +230,25 @@ Public Class frmUpdateDBfromQCReport
                                     objCmd.ExecuteNonQuery()
                                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
+
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                                     MsgBox(ex.Message)
+                                    Me.Cursor = Cursors.Default
+                                    lblProcessStatus.Text = "Stopped"
                                 End Try
                             End If
                         End If
                     Next j
                 Next i
                 'End of checks for changes on element 2 for interelement checks
-                msgTxtInterelementChangesUpdated = "Changed records for interelement checks have been updated successfully!"
-                MsgBox(msgTxtInterelementChangesUpdated, MsgBoxStyle.Information)
+                'msgTxtInterelementChangesUpdated = "Changed records for interelement checks have been updated successfully!"
+                'MsgBox(msgTxtInterelementChangesUpdated, MsgBoxStyle.Information)
+                lblProcessStatus.Text = "Changed records for interelement checks have been updated successfully!"
             Catch ex As Exception
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
+                lblProcessStatus.Text = "Stopped"
             End Try
             'Check for changes in values for limits checks
         ElseIf Strings.Left(strFileName1, 20) = "qc_report_lowerlimit" Or Strings.Left(strFileName1, 20) = "qc_report_upperlimit" Then
@@ -291,18 +311,27 @@ Public Class frmUpdateDBfromQCReport
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                                     MsgBox(ex.Message)
+                                    Me.Cursor = Cursors.Default
+                                    lblProcessStatus.Text = "Stopped"
                                 End Try
                             End If
                         End If
                     Next j
                 Next i
-                msgTxtLimitsChecksChangesUpdated = "Changed records for limits checks have been updated successfully!"
-                MsgBox(msgTxtLimitsChecksChangesUpdated, MsgBoxStyle.Information)
+                'msgTxtLimitsChecksChangesUpdated = "Changed records for limits checks have been updated successfully!"
+                'MsgBox(msgTxtLimitsChecksChangesUpdated, MsgBoxStyle.Information)
+                lblProcessStatus.Text = "Changed records for limits checks have been updated successfully!"
             Catch ex As Exception
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
+                lblProcessStatus.Text = "Stopped"
+                conn.Close()
             End Try
         End If
         conn.Close()
+        ' Set busy Cursor pointer
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub btnBrowseQCOriginal_Click(sender As Object, e As EventArgs) Handles btnBrowseQCOriginal.Click

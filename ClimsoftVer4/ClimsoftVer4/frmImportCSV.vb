@@ -127,8 +127,8 @@ Public Class frmImportCSV
             'i is column for flag
             i = 4
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             stnId = ds.Tables("clicomDaily").Rows(n).Item(1)
             elemCode = ds.Tables("clicomDaily").Rows(n).Item(2)
             obsLevel = "surface"

@@ -71,8 +71,8 @@ Public Class frmGTSNOAA
                     currentRow = Reader.ReadFields()
                     i = i + 1
                     'Display progress of data transfer
-                    frmDataTransferProgress.txtDataTransferProgress.Text = " Transferring record: " & i & " of " & maxRows
-                    frmDataTransferProgress.txtDataTransferProgress.Refresh()
+                    frmDataTransferProgress.txtDataTransferProgress1.Text = " Transferring record: " & i & " of " & maxRows
+                    frmDataTransferProgress.txtDataTransferProgress1.Refresh()
                     'MsgBox("Row :" & i)
                     j = 0
                     stnId = ""

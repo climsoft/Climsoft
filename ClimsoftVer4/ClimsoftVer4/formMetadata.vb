@@ -19,6 +19,11 @@
         'MsgBox(TabMetadata.SelectedIndex)
     End Sub
 
+    Private Sub formMetadata_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+
+        If Asc(e.KeyChar) = 13 Then SendKeys.Send("{TAB}")
+    End Sub
+
     Private Sub formMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString
@@ -125,8 +130,8 @@
         txtstationId.Text = ds.Tables("station").Rows(num).Item("stationId")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("country")) Then txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
-        If Not IsDBNull(ds.Tables("station").Rows(num).Item("longitude")) Then txtLatitude.Text = ds.Tables("station").Rows(num).Item("latitude")
-        If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then txtLongitude.Text = ds.Tables("station").Rows(num).Item("longitude")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("latitude")) Then txtLatitude.Text = ds.Tables("station").Rows(num).Item("latitude")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("longitude")) Then txtLongitude.Text = ds.Tables("station").Rows(num).Item("longitude")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("elevation")) Then txtElevation.Text = ds.Tables("station").Rows(num).Item("elevation")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then txtOpenDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("closingdatetime")) Then txtClosingDate.Text = ds.Tables("station").Rows(num).Item("closingdatetime")
@@ -356,7 +361,7 @@
         txtClosingDate.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
-
+        txtstationId.Focus()
     End Sub
 
     Sub ClearElementForm()
@@ -371,7 +376,7 @@
         txtUnit.Clear()
         txtType.Text = ""
         txtElementNavigator.Clear()
-
+        txtId.Focus()
     End Sub
     Sub ClearStationElementForm()
         txtStation.Text = ""
@@ -381,10 +386,11 @@
         txtHeight.Text = ""
         txtBeginDate.Text = ""
         txtEndate.Text = ""
+        txtStation.Focus()
     End Sub
     Sub ClearInstrumentForm()
-        txtInstName.Text = ""
         txtInstrumentId.Text = ""
+        txtInstName.Text = ""
         txtSerial.Text = ""
         txtAbbrev.Text = ""
         txtModel.Text = ""
@@ -395,6 +401,7 @@
         txthgt.Text = ""
         'picInstrument.Image = ""
         txtInstrStn.Text = ""
+        txtInstrumentId.Focus()
     End Sub
     Sub ClearStationHistoryForm()
         txtlocStn.Text = ""
@@ -409,6 +416,7 @@
         txtAuth.Text = ""
         txtAdmin.Text = ""
         txtDrgBasin.Text = ""
+        txtlocStn.Focus()
     End Sub
     Sub ClearStationQualifierForm()
         txtqualifier.Text = ""
@@ -417,11 +425,13 @@
         txtEndDate.Text = ""
         txtTZone.Text = ""
         txtNetwork.Text = ""
+        txtqualifier.Focus()
     End Sub
     Sub ClearFormScheduleClass()
         txtClass.Text = ""
         txtClassStation.Text = ""
         txtClassDescription.Text = ""
+        txtClass.Focus()
     End Sub
     Sub ClearPhysicalFeatureForm()
         txtFeatureClass.Text = ""
@@ -433,6 +443,7 @@
         'txtfeaturepic.Image
         txtFeatureDescription.Text = ""
         txtFeatureClass.Text = ""
+        txtFeatureStation.Focus()
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         If txtstationId.Text = "" Then
@@ -1124,6 +1135,7 @@ Err:
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         txtFormId.Text = ""
         txtFormDescription.Text = ""
+        txtFormId.Focus()
     End Sub
 
 
@@ -1751,4 +1763,5 @@ Err:
         End If
     End Sub
 
+  
 End Class

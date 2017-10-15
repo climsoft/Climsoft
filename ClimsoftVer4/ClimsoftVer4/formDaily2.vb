@@ -405,7 +405,8 @@ Public Class formDaily2
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         inc = maxRows - 1
         'Call subroutine for record navigation
-        navigateRecords()
+
+        'navigateRecords()
 
         btnMoveFirst.Enabled = False
         btnMoveLast.Enabled = False
@@ -423,6 +424,7 @@ Public Class formDaily2
         Dim seqRecCount As Integer
         Dim dataFormRecCount As Integer
         Dim strYear As String, k As Integer, j As Integer
+        Dim CurrentDate, NextDate As Date
 
         dataFormRecCount = ds.Tables("form_daily2").Rows.Count
 
@@ -434,6 +436,7 @@ Public Class formDaily2
         ' ''Else
         ' ''    cboStation.SelectedValue = cboStation.SelectedValue
         strYear = txtYear.Text
+
         ' ''    strMonth = cboMonth.Text
         ' ''    strHour = cboHour.Text
         ' ''End If
@@ -525,10 +528,20 @@ Public Class formDaily2
                             cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
                         Else
                             cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
+
+                            ' Sequence the next date for data entry
+                            CurrentDate = "1/" & cboMonth.Text & "/" & txtYear.Text
+
+                            NextDate = DateAdd("m", 1, CurrentDate)
+
+                            ' Populate date text boxes with values for the next expected record
+                            txtYear.Text = NextDate.Year
+                            cboMonth.Text = NextDate.Month
                         End If
                     End If
                 Next k
             End If
+
 
             Dim m As Integer
             Dim ctl As Control
@@ -1245,48 +1258,52 @@ Public Class formDaily2
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
 
-        'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
-        Dim recUpdate As New dataEntryGlobalRoutines
-        'Update header fields for form in database
-        ds.Tables("form_daily2").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("form_daily2").Rows(inc).Item("elementid") = cboElement.SelectedValue
-        ds.Tables("form_daily2").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("form_daily2").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_daily2").Rows(inc).Item("hh") = cboHour.Text
+        Try
+            'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
+            Dim recUpdate As New dataEntryGlobalRoutines
+            'Update header fields for form in database
+            ds.Tables("form_daily2").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ds.Tables("form_daily2").Rows(inc).Item("elementid") = cboElement.SelectedValue
+            ds.Tables("form_daily2").Rows(inc).Item("yyyy") = txtYear.Text
+            ds.Tables("form_daily2").Rows(inc).Item("mm") = cboMonth.Text
+            ds.Tables("form_daily2").Rows(inc).Item("hh") = cboHour.Text
 
-        'Update observation values in database
-        'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To 35
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
+            'Update observation values in database
+            'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+            For m = 5 To 35
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
 
-        'Update observation flags in database
-        'Observation flags range from column 37 i.e. column index 36 to column 67 i.e. column index 66
-        For m = 36 To 66
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
-        'Update observation Periods in database
-        'Observation flags range from column 68 i.e. column index 67 to column 98 i.e. column index 97
-        For m = 67 To 97
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 9) = "txtPeriod" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
-                End If
-            Next ctl
-        Next m
-        'The data adapter is used to update the record in the data source table
-        da.Update(ds, "form_daily2")
+            'Update observation flags in database
+            'Observation flags range from column 37 i.e. column index 36 to column 67 i.e. column index 66
+            For m = 36 To 66
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
+            'Update observation Periods in database
+            'Observation flags range from column 68 i.e. column index 67 to column 98 i.e. column index 97
+            For m = 67 To 97
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 9) = "txtPeriod" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        ds.Tables("form_daily2").Rows(inc).Item(m) = ctl.Text
+                    End If
+                Next ctl
+            Next m
+            'The data adapter is used to update the record in the data source table
+            da.Update(ds, "form_daily2")
 
-        'Show message for successful updating or record.
-        recUpdate.messageBoxRecordedUpdated()
+            'Show message for successful updating or record.
+            recUpdate.messageBoxRecordedUpdated()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -1385,8 +1402,8 @@ Public Class formDaily2
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 35
                 stnId = ds.Tables("form_daily2").Rows(n).Item("stationId")

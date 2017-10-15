@@ -134,8 +134,8 @@ Public Class frmImportAWS
             'Loop through all rows in the input data file
             For n = 0 To maxDataRows - 1
                 'Display progress of data transfer
-                frmDataTransferProgress.txtDataTransferProgress.Text = " Transferring record: " & n + 1 & " of " & maxDataRows
-                frmDataTransferProgress.txtDataTransferProgress.Refresh()
+                frmDataTransferProgress.txtDataTransferProgress1.Text = " Transferring record: " & n + 1 & " of " & maxDataRows
+                frmDataTransferProgress.txtDataTransferProgress1.Refresh()
 
                 'Check if first colum is a valid date. If the data file is a merged file there would be field names of 
                 'header rows mixed with obs records

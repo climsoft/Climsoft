@@ -429,6 +429,12 @@
     <Compile Include="frmRestore.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSynopTDCF.Designer.vb">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSynopTDCF.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
     </Compile>
@@ -833,6 +839,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.fr.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSynopTDCF.resx">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>

@@ -1169,8 +1169,8 @@ Public Class formHourlyWind
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress.Refresh()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all dd and flag fields adding records to observationInitial table
             For m = 4 To 27
                 stnId = ds.Tables("form_hourlywind").Rows(n).Item("stationId")
