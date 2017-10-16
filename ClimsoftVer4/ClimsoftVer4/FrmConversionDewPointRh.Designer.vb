@@ -38,15 +38,15 @@ Partial Class FrmConversionDewPointRh
         '
         Me.drybuld.Location = New System.Drawing.Point(12, 65)
         Me.drybuld.Name = "drybuld"
-        Me.drybuld.Size = New System.Drawing.Size(75, 20)
-        Me.drybuld.TabIndex = 0
+        Me.drybuld.Size = New System.Drawing.Size(51, 20)
+        Me.drybuld.TabIndex = 5
         '
         'btnOK
         '
         Me.btnOK.Location = New System.Drawing.Point(109, 112)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 1
+        Me.btnOK.Size = New System.Drawing.Size(51, 23)
+        Me.btnOK.TabIndex = 9
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
@@ -57,36 +57,36 @@ Partial Class FrmConversionDewPointRh
         Me.lblTT.Location = New System.Drawing.Point(12, 38)
         Me.lblTT.Name = "lblTT"
         Me.lblTT.Size = New System.Drawing.Size(45, 15)
-        Me.lblTT.TabIndex = 2
+        Me.lblTT.TabIndex = 0
         Me.lblTT.Text = "TT (°C)"
         '
         'humidity
         '
         Me.humidity.Location = New System.Drawing.Point(316, 65)
         Me.humidity.Name = "humidity"
-        Me.humidity.Size = New System.Drawing.Size(75, 20)
-        Me.humidity.TabIndex = 3
+        Me.humidity.Size = New System.Drawing.Size(51, 20)
+        Me.humidity.TabIndex = 8
         '
         'wetbulb
         '
         Me.wetbulb.Location = New System.Drawing.Point(109, 65)
         Me.wetbulb.Name = "wetbulb"
-        Me.wetbulb.Size = New System.Drawing.Size(75, 20)
-        Me.wetbulb.TabIndex = 4
+        Me.wetbulb.Size = New System.Drawing.Size(51, 20)
+        Me.wetbulb.TabIndex = 6
         '
         'dewpoint
         '
         Me.dewpoint.Location = New System.Drawing.Point(216, 65)
         Me.dewpoint.Name = "dewpoint"
-        Me.dewpoint.Size = New System.Drawing.Size(75, 20)
-        Me.dewpoint.TabIndex = 5
+        Me.dewpoint.Size = New System.Drawing.Size(51, 20)
+        Me.dewpoint.TabIndex = 7
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(221, 112)
+        Me.btnClose.Location = New System.Drawing.Point(216, 112)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 6
+        Me.btnClose.Size = New System.Drawing.Size(51, 23)
+        Me.btnClose.TabIndex = 0
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -97,7 +97,7 @@ Partial Class FrmConversionDewPointRh
         Me.lblTw.Location = New System.Drawing.Point(106, 38)
         Me.lblTw.Name = "lblTw"
         Me.lblTw.Size = New System.Drawing.Size(47, 15)
-        Me.lblTw.TabIndex = 7
+        Me.lblTw.TabIndex = 2
         Me.lblTw.Text = "Tw (°C)"
         '
         'lblTd
@@ -107,7 +107,7 @@ Partial Class FrmConversionDewPointRh
         Me.lblTd.Location = New System.Drawing.Point(213, 38)
         Me.lblTd.Name = "lblTd"
         Me.lblTd.Size = New System.Drawing.Size(45, 15)
-        Me.lblTd.TabIndex = 8
+        Me.lblTd.TabIndex = 3
         Me.lblTd.Text = "Td (°C)"
         '
         'lblRH
@@ -117,14 +117,14 @@ Partial Class FrmConversionDewPointRh
         Me.lblRH.Location = New System.Drawing.Point(313, 38)
         Me.lblRH.Name = "lblRH"
         Me.lblRH.Size = New System.Drawing.Size(47, 15)
-        Me.lblRH.TabIndex = 9
+        Me.lblRH.TabIndex = 4
         Me.lblRH.Text = "RH (%)"
         '
         'FrmConversionDewPointRh
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 178)
+        Me.ClientSize = New System.Drawing.Size(381, 150)
         Me.Controls.Add(Me.lblRH)
         Me.Controls.Add(Me.lblTd)
         Me.Controls.Add(Me.lblTw)
