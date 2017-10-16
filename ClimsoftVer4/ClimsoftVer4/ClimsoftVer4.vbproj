@@ -881,10 +881,6 @@
     <None Include="Resources\MySql.Data.dll" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\ClimsoftVer4.de.xlf" />
-    <XliffResource Include="MultilingualResources\ClimsoftVer4.fr.xlf" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="config.inf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -896,6 +892,9 @@
     <Content Include="static\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MultilingualResources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
