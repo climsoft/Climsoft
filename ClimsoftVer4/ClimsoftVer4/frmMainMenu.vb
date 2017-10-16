@@ -158,7 +158,7 @@ Public Class frmMainMenu
 
     ' Accessories Menu items
     Private Sub mnuAccessoriesDewPointRH_Click(sender As Object, e As EventArgs) Handles mnuAccessoriesDewPointRH.Click
-
+        FrmConversionDewPointRh.Show()
     End Sub
 
     Private Sub mnuAccessoriesXMLOutput_Click(sender As Object, e As EventArgs) Handles mnuAccessoriesXMLOutput.Click
