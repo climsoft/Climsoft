@@ -6,7 +6,9 @@
     Dim sql As String
     Dim rec As Integer
     Dim Kount As Integer
+    Dim Kount1 As Integer
     Dim ActiveTab As Integer
+
     'Dim maxRows As Integer
 
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
@@ -1751,4 +1753,7 @@ Err:
         End If
     End Sub
 
+    Private Sub lblLatitude_Click(sender As Object, e As EventArgs) Handles lblLatitude.Click
+
+    End Sub
 End Class

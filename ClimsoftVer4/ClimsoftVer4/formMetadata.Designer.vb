@@ -313,6 +313,7 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -397,6 +398,7 @@ Partial Class formMetadata
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.Label24)
         Me.grpStation.Controls.Add(Me.txtstationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
         Me.grpStation.Controls.Add(Me.combSearchStation)
@@ -647,14 +649,14 @@ Partial Class formMetadata
         '
         Me.txtLongitude.Location = New System.Drawing.Point(514, 105)
         Me.txtLongitude.Name = "txtLongitude"
-        Me.txtLongitude.Size = New System.Drawing.Size(74, 20)
+        Me.txtLongitude.Size = New System.Drawing.Size(102, 20)
         Me.txtLongitude.TabIndex = 24
         '
         'txtLatitude
         '
         Me.txtLatitude.Location = New System.Drawing.Point(514, 77)
         Me.txtLatitude.Name = "txtLatitude"
-        Me.txtLatitude.Size = New System.Drawing.Size(74, 20)
+        Me.txtLatitude.Size = New System.Drawing.Size(102, 20)
         Me.txtLatitude.TabIndex = 23
         '
         'txtDrainageBasin
@@ -689,7 +691,7 @@ Partial Class formMetadata
         '
         Me.txtStationName.Location = New System.Drawing.Point(105, 80)
         Me.txtStationName.Name = "txtStationName"
-        Me.txtStationName.Size = New System.Drawing.Size(274, 20)
+        Me.txtStationName.Size = New System.Drawing.Size(229, 20)
         Me.txtStationName.TabIndex = 15
         '
         'lblStationOperation
@@ -3203,6 +3205,17 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.Red
+        Me.Label24.Location = New System.Drawing.Point(405, 231)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(75, 24)
+        Me.Label24.TabIndex = 41
+        Me.Label24.Text = "Latitude"
+        '
         'formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3577,4 +3590,5 @@ Partial Class formMetadata
     Friend WithEvents lblInstalledAt As System.Windows.Forms.Label
     Friend WithEvents txtfeatureclassdescription As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label24 As Label
 End Class
