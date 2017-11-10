@@ -853,11 +853,21 @@ Public Class formSynopRA1
                         itemFound = False
                     End If
                     objKeyPress.checkExists(itemFound, cboStation)
-                End If
-                'if TAB next is true Activate [TAB]
-                If tabNext = True Then
-                    My.Computer.Keyboard.SendKeys("{TAB}")
-                End If
+            Else
+                ' Generate flag M for missing data for blank values
+                For Each ctrl In Me.Controls
+                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                        ctrl.Text = "M" 'obsFlag
+                        Exit For
+                    End If
+                Next ctrl
+            End If
+
+            'if TAB next is true Activate [TAB]
+            If tabNext = True Then
+                My.Computer.Keyboard.SendKeys("{TAB}")
+            End If
+
             End If
 
     End Sub
@@ -1128,74 +1138,79 @@ Public Class formSynopRA1
         Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
 
-        myConnectionString = frmLogin.txtusrpwd.Text
+        Try
+            myConnectionString = frmLogin.txtusrpwd.Text
 
-        conn.ConnectionString = myConnectionString
-        conn.Open()
-        '
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-        maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
-        qcStatus = 0
-        acquisitionType = 1
-        obsLevel = "surface"
-        obsVal = ""
-        obsFlag = ""
-        dataForm = "form_synoptic_2_ra1"
+            conn.ConnectionString = myConnectionString
+            conn.Open()
+            '
+            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+            qcStatus = 0
+            acquisitionType = 1
+            obsLevel = "surface"
+            obsVal = ""
+            obsFlag = ""
+            dataForm = "form_synoptic_2_ra1"
 
-        'Loop through all records in dataset
-        For n = 0 To maxRows - 1
-            'Display progress of data transfer
-            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
-            'Loop through all observation fields adding observation records to observationInitial table
-            For m = 5 To 53
-                stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
-                yyyy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(1)
-                mm = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(2)
-                dd = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(3)
-                hh = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(4)
-                capturedBy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")
-                If Val(mm) < 10 Then mm = "0" & mm
-                If Val(dd) < 10 Then dd = "0" & dd
-                If Val(hh) < 10 Then hh = "0" & hh
+            'Loop through all records in dataset
+            For n = 0 To maxRows - 1
+                'Display progress of data transfer
+                frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+                frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+                'Loop through all observation fields adding observation records to observationInitial table
+                For m = 5 To 53
+                    stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
+                    yyyy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(1)
+                    mm = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(2)
+                    dd = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(3)
+                    hh = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(4)
+                    capturedBy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")
+                    If Val(mm) < 10 Then mm = "0" & mm
+                    If Val(dd) < 10 Then dd = "0" & dd
+                    If Val(hh) < 10 Then hh = "0" & hh
 
-                obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+                    obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
 
-                If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)) Then obsVal = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)
-                If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)) Then obsFlag = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)
-                'Get the element code from the control name corresponding to column index
-                For Each ctl In Me.Controls
-                    If Val(Strings.Right(ctl.Name, 3)) = m Then
-                        elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)) Then obsVal = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)) Then obsFlag = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)
+                    'Get the element code from the control name corresponding to column index
+                    For Each ctl In Me.Controls
+                        If Val(Strings.Right(ctl.Name, 3)) = m Then
+                            elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
+                        End If
+                    Next ctl
+                    'Generate SQL string for inserting data into observationinitial table
+                    If Strings.Len(obsVal) > 0 Then
+                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                            "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
+                            & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
+
+                        ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                        ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                        ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+                        ' Create the Command for executing query and set its properties
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                        Try
+                            'Execute query
+                            objCmd.ExecuteNonQuery()
+                            'Catch ex As MySql.Data.MySqlClient.MySqlException
+                            '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                        Catch ex As Exception
+                            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                            MsgBox(ex.Message)
+                        End Try
                     End If
-                Next ctl
-                'Generate SQL string for inserting data into observationinitial table
-                If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
-                        "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
-                        & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
-
-                    ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                    ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                    ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
-
-                    ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-                    Try
-                        'Execute query
-                        objCmd.ExecuteNonQuery()
-                        'Catch ex As MySql.Data.MySqlClient.MySqlException
-                        '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                    Catch ex As Exception
-                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        MsgBox(ex.Message)
-                    End Try
-                End If
-                'Move to next observation value in current record of the dataset
-            Next m
-            'Move to next record in dataset
-        Next n
+                    'Move to next observation value in current record of the dataset
+                Next m
+                'Move to next record in dataset
+            Next n
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
         conn.Close()
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
@@ -1321,5 +1336,41 @@ Public Class formSynopRA1
 
     Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
         frmSynopTDCF.Show()
+        frmSynopTDCF.cboTemplate.Text = "TM_307081"
+        ' Subset Observations
+        SubsetObservations()
+    End Sub
+
+    Sub SubsetObservations()
+        Dim kount As Integer
+        Try
+            myConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = myConnectionString
+            conn.Open()
+
+            sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
+
+            'MsgBox(sql)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "form_synoptic_2_ra1")
+            kount = ds.Tables("form_synoptic_2_ra1").Rows.Count
+
+            frmSynopTDCF.cboStation.Text = cboStation.Text
+            frmSynopTDCF.txtYear.Text = txtYear.Text
+            frmSynopTDCF.cboMonth.Text = cboMonth.Text
+            frmSynopTDCF.cboDay.Text = cboDay.Text
+            frmSynopTDCF.cboHour.Text = cboHour.Text
+
+            For i = 0 To kount - 1
+                'MsgBox(ds.Tables("form_synoptic_2_ra1").Rows(i).Item("stationId"))
+                frmSynopTDCF.cboStation.Items.Add(ds.Tables("form_synoptic_2_ra1").Rows(i).Item("stationId"))
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+        conn.Close
     End Sub
 End Class

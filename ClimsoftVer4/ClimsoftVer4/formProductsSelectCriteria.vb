@@ -17,15 +17,14 @@
 Public Class formProductsSelectCriteria
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim maxRows As Integer
+    Dim maxRows, maxColumns As Integer
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim MyConnectionString As String
     Dim kounts As Integer
     Dim stnlist, elmlist, elmcolmn, sdate, edate, sql As String
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
-
-  
+    Dim cmd As MySql.Data.MySqlClient.MySqlCommand
 
     'Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     '    Dim prtyp As New clsProducts
@@ -98,7 +97,9 @@ Public Class formProductsSelectCriteria
         Next
 
         ds.Clear()
-        sql = "SELECT * FROM obselement ORDER BY description"
+
+        'sql = "SELECT * FROM obselement ORDER BY description"
+        sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
         'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "obselement")
@@ -155,7 +156,9 @@ Public Class formProductsSelectCriteria
             lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
             'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
+
             sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
+            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
@@ -188,13 +191,12 @@ Public Class formProductsSelectCriteria
     End Sub
 
 
-
-
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
 
 
         Dim ProductsPath, xpivot As String
 
+        Me.Cursor = Cursors.WaitCursor
         ' Define the products application path
         ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
 
@@ -248,16 +250,17 @@ Public Class formProductsSelectCriteria
 
         'MsgBox(elmlist)
         'Exit Sub
-        sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-        edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
-
+        sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+        'edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+        edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
         ' Contrust a SQL statement for creating a query for the selected data product
 
         'sql0 = "SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
         Select Case Me.lblProductType.Text
             Case "WindRose"
-                sql = "SELECT recordedFrom as StationID,describedBy as Code, obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                'sql = "SELECT recordedFrom as StationID,describedBy as Code, obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
                 'WindRoseData(sql)
                 WRPlot(stnlist, sdate, edate)
 
@@ -324,11 +327,13 @@ Public Class formProductsSelectCriteria
             Case "Pentad"
                 sql = "SELECT recordedFrom as StationID, latitude as Lat,longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/5.5 + 0.5,0) as  PENTAD, " & elmcolmn & " FROM (SELECT recordedFrom,latitude,longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,PENTAD;"
+
                 DataProducts(sql, lblProductType.Text)
 
             Case "Annual"
                 sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                     "WHERE (RecordedFrom = " & stnlist & ") AND (RecordedFrom =" & elmlist & ") and (obsDatetime between '" & sdate & "' And '" & edate & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,Year;"
+                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' And '" & edate & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,Year;"
+
                 DataProducts(sql, lblProductType.Text)
 
             Case "Means"
@@ -368,13 +373,20 @@ Public Class formProductsSelectCriteria
                 'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
                 'DataProducts(sql, lblProductType.Text)
                 InstatProduct(sdate, edate, lblProductType.Text)
+            Case "Missing data"
+                'RefreshStatsCache()
+                'RefreshMissingCache()
+                'GatherStats()
+                'findmissing()
+                'frmplotter.show()
+
             Case "Rclimdex"
                 RclimdexProducts(sdate, edate, lblProductType.Text)
             Case Else
                 MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
                 Exit Sub
         End Select
-
+        Me.Cursor = Cursors.Default
     End Sub
     Sub WindRoseData(sql As String)
         On Error GoTo Err
@@ -405,67 +417,72 @@ Err:
 
     End Sub
     Sub WRPlot(stns As String, sdt As String, edt As String)
-        On Error GoTo Err
+
         Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath As String
         Dim pro, datval As Integer
         Dim ox As Object
 
-        WrplotAppPath = ""
-        ' Locate the installation path for the windrose plot application
-        If GetWRplotPath(WrplotAppPath) Then
-            WrplotAPP = WrplotAppPath & "WRPLOT_View.exe"
-        Else
-            MsgBox("WRPlot Application not found")
-            Exit Sub
-        End If
+        Try
+            WrplotAppPath = ""
+            ' Locate the installation path for the windrose plot application
+            If GetWRplotPath(WrplotAppPath) Then
+                WrplotAPP = WrplotAppPath & "WRPLOT_View.exe"
+            Else
+                MsgBox("WRPlot Application not found")
+                Exit Sub
+            End If
 
-        ' SQL statement for the selecting data for windrose plotting
-        sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
+            ' SQL statement for the selecting data for windrose plotting
+            'sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-        da.Fill(ds, "observationfinal")
+            sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+                "WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (year(obsDatetime) between '" & Year(sdt) & "' and '" & Year(edt) & "') and (month(obsDatetime) between '" & Month(sdt) & "' and '" & Month(edt) & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
 
-        maxRows = ds.Tables("observationfinal").Rows.Count
-        If maxRows = 0 Then
-            MsgBox("No wind speed and direction data found")
-            Exit Sub
-        End If
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
 
-        ' Create output file
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Wrose.txt"
+            maxRows = ds.Tables("observationfinal").Rows.Count
+            If maxRows = 0 Then
+                MsgBox("No wind speed and direction data found")
+                Exit Sub
+            End If
 
-        FileOpen(11, fl, OpenMode.Output)
+            ' Create output file
+            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Wrose.txt"
 
-        ' Output output format description
-        Print(11, "LAKES FORMAT")
-        PrintLine(11)
+            FileOpen(11, fl, OpenMode.Output)
 
-        ' Output data values
-        For k = 0 To maxRows - 1
-            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                datval = Int(ds.Tables("observationfinal").Rows(k).Item(i))
-                ' Multiply by factor of 10 where wind direction is in 2 digits
-                If i = ds.Tables("observationfinal").Columns.Count - 2 And Int(RegkeyValue("key05")) = 2 Then
-                    datval = datval * 10
-                End If
-                Print(11, datval & Chr(9))
-            Next
+            ' Output output format description
+            Print(11, "LAKES FORMAT")
             PrintLine(11)
-        Next
-        FileClose(11)
 
+            ' Output data values
+            For k = 0 To maxRows - 1
+                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
+                        datval = Int(ds.Tables("observationfinal").Rows(k).Item(i))
+                        ' Multiply by factor of 10 where wind direction is in 2 digits
+                        If i = ds.Tables("observationfinal").Columns.Count - 2 And Int(RegkeyValue("key05")) = 2 Then
+                            datval = datval * 10
+                        End If
+                        Print(11, datval & Chr(9))
+                    End If
+                Next
+                PrintLine(11)
+            Next
+            FileClose(11)
 
-        'WRpro = "C:\Program Files (x86)\Lakes\WRPLOT View\WRPLOT_View.exe " & Chr(34) & "C:\Climsoft Project\Climsoft V4\Climsoft\ClimsoftVer4\ClimsoftVer4\bin\Debug\data\Wrose.txt" & Chr(34)
+            'WRpro = "C:\Program Files (x86)\Lakes\WRPLOT View\WRPLOT_View.exe " & Chr(34) & "C:\Climsoft Project\Climsoft V4\Climsoft\ClimsoftVer4\ClimsoftVer4\bin\Debug\data\Wrose.txt" & Chr(34)
 
-        WRpro = WrplotAPP & " " & Chr(34) & fl & Chr(34)
-        'MsgBox(WRpro)
-        Shell(WRpro, AppWinStyle.MaximizedFocus)
+            WRpro = WrplotAPP & " " & Chr(34) & fl & Chr(34)
+            'MsgBox(WRpro)
+            Shell(WRpro, AppWinStyle.MaximizedFocus)
 
-        Exit Sub
-Err:
-        'If Err.Number = 5 Then On Error Resume Next
-        MsgBox(Err.Number & " " & Err.Description)
+        Catch ex As Exception
+            'If Err.Number = 5 Then On Error Resume Next
+            MsgBox(ex.HResult & " : " & ex.Message)
+        End Try
     End Sub
 
     Sub DataProducts(sql As String, typ As String)
@@ -1141,6 +1158,105 @@ Err:
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
     End Sub
+    ' Missing data plotting modules by Victor
+
+    Public Sub RefreshStatsCache()
+        cmd = New MySql.Data.MySqlClient.MySqlCommand
+        cmd.Connection = conn
+        cmd.CommandText = "refresh_stats"
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.ExecuteNonQuery()
+    End Sub
+
+    Public Sub RefreshMissingCache()
+        cmd = New MySql.Data.MySqlClient.MySqlCommand
+        cmd.Connection = conn
+        cmd.CommandText = "REFRESH_data"
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.ExecuteNonQuery()
+    End Sub
+
+    Public Sub GatherStats()
+        If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
+            For i = 0 To lstvStations.Items.Count - 1
+                For j = 0 To lstvElements.Items.Count - 1
+                    cmd = New MySql.Data.MySqlClient.MySqlCommand
+                    cmd.Connection = conn
+                    cmd.CommandText = "gather_stats"
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.CommandTimeout = 0
+                    cmd.Parameters.AddWithValue("Stn", lstvStations.Items(i).Text)
+                    cmd.Parameters.AddWithValue("Elm", lstvElements.Items(j).Text)
+                    cmd.Parameters.AddWithValue("Opening_Date", sdate)
+                    cmd.Parameters.AddWithValue("Closing_Date", edate)
+                    cmd.ExecuteNonQuery()
+                Next
+            Next
+        End If
+    End Sub
+
+    Public Sub findmissing()
+        Dim fl As String
+
+        If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
+            For i = 0 To lstvStations.Items.Count - 1
+                For j = 0 To lstvElements.Items.Count - 1
+                    cmd = New MySql.Data.MySqlClient.MySqlCommand
+                    cmd.Connection = conn
+                    cmd.CommandText = "missing_data"
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.CommandTimeout = 0
+                    cmd.Parameters.AddWithValue("Stn", lstvStations.Items(i).Text)
+                    cmd.Parameters.AddWithValue("ELEM", lstvElements.Items(j).Text)
+                    cmd.Parameters.AddWithValue("STARTDATE", sdate)
+                    cmd.Parameters.AddWithValue("ENDDATE", edate)
+                    cmd.ExecuteNonQuery()
+                Next
+            Next
+            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products-missing-records.csv"
+
+            FileOpen(11, fl, OpenMode.Output)
+
+            ' Write Column Headers
+            Write(11, "Station")
+            Write(11, "Latatitude")
+            Write(11, "Longitude")
+            Write(11, "Elevation")
+            Write(11, "Element")
+            Write(11, "Year")
+            Write(11, "Month")
+            Write(11, "Day")
+
+            PrintLine(11)
+
+            sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " & _
+                  "FROM(missing_data, station, obselement) WHERE station.stationId = missing_data.STN_ID AND obselement.elementId=missing_data.ELEM"
+            Try
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+
+                ds.Clear()
+                da.Fill(ds, "missing")
+
+                maxRows = ds.Tables("missing").Rows.Count
+                maxColumns = ds.Tables("missing").Columns.Count
+
+                For i = 0 To maxRows - 1
+                    For j = 0 To maxColumns - 1
+                        Write(11, ds.Tables("missing").Rows(i).Item(j))
+                    Next
+                    PrintLine(11)
+                Next
+
+                FileClose(11)
+
+                CommonModules.ViewFile(fl)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
+
+
 
     Function RegkeyValue(keynm As String) As String
         ' Get the image archiving folder
@@ -1183,4 +1299,7 @@ Err:
     End Sub
 
 
+    Private Sub dateTo_ValueChanged(sender As Object, e As EventArgs) Handles dateTo.ValueChanged
+
+    End Sub
 End Class

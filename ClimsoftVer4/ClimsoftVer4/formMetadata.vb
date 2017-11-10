@@ -19,6 +19,10 @@
         'MsgBox(TabMetadata.SelectedIndex)
     End Sub
 
+    Private Sub formMetadata_Deactivate(sender As Object, e As EventArgs) Handles Me.Deactivate
+
+    End Sub
+
     Private Sub formMetadata_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
 
         If Asc(e.KeyChar) = 13 Then SendKeys.Send("{TAB}")
@@ -129,12 +133,12 @@
 
         txtstationId.Text = ds.Tables("station").Rows(num).Item("stationId")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationName")) Then txtStationName.Text = ds.Tables("station").Rows(num).Item("stationName")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("wmoid")) Then txtwmoid.Text = ds.Tables("station").Rows(num).Item("wmoid")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("icaoid")) Then txticaoid.Text = ds.Tables("station").Rows(num).Item("icaoid")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("country")) Then txtCountry.Text = ds.Tables("station").Rows(num).Item("country")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("latitude")) Then txtLatitude.Text = ds.Tables("station").Rows(num).Item("latitude")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("longitude")) Then txtLongitude.Text = ds.Tables("station").Rows(num).Item("longitude")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("elevation")) Then txtElevation.Text = ds.Tables("station").Rows(num).Item("elevation")
-        If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then txtOpenDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
-        If Not IsDBNull(ds.Tables("station").Rows(num).Item("closingdatetime")) Then txtClosingDate.Text = ds.Tables("station").Rows(num).Item("closingdatetime")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("authority")) Then txtAuthority.Text = ds.Tables("station").Rows(num).Item("authority")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("adminregion")) Then txtAdminRegion.Text = ds.Tables("station").Rows(num).Item("adminregion")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("drainagebasin")) Then txtDrainageBasin.Text = ds.Tables("station").Rows(num).Item("drainagebasin")
@@ -142,8 +146,18 @@
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
 
-        txtRecNumber.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then
+            txtOpeningDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
+        Else
+            txtOpeningDate.Text = ""
+        End If
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("closingdatetime")) Then
+            txtClosingDate.Text = ds.Tables("station").Rows(num).Item("closingdatetime")
+        Else
+            txtClosingDate.Text = ""
+        End If
 
+        txtRecNumber.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
 
     End Sub
     Sub populateElementMetadata(frm As String, num As Integer, maxRows As Integer)
@@ -159,6 +173,20 @@
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("lowerLimit")) Then txtLowerLimit.Text = ds.Tables(frm).Rows(num).Item("lowerLimit")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("units")) Then txtUnit.Text = ds.Tables(frm).Rows(num).Item("units")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementtype")) Then txtType.Text = ds.Tables(frm).Rows(num).Item("elementtype")
+        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("selected")) Then
+            If ds.Tables(frm).Rows(num).Item("selected") = 1 Then
+                chkESelected.Checked = True
+            Else
+                chkESelected.Checked = False
+            End If
+        End If
+        If Not IsDBNull(ds.Tables(frm).Rows(num).Item("qcTotalRequired")) Then
+            If ds.Tables(frm).Rows(num).Item("qcTotalRequired") = 1 Then
+                chkqcTotal.Checked = True
+            Else
+                chkqcTotal.Checked = False
+            End If
+        End If
 
         txtElementNavigator.Text = rec + 1 & " of " & maxRows '"Record 1 of " & maxRows
 
@@ -300,6 +328,8 @@
 
             dsNewRow = ds.Tables("station").NewRow
             dsNewRow.Item("stationId") = txtstationId.Text
+            dsNewRow.Item("wmoid") = txtwmoid.Text
+            dsNewRow.Item("icaoid") = txticaoid.Text
             dsNewRow.Item("stationName") = txtStationName.Text
             dsNewRow.Item("country") = txtCountry.Text
             If IsNumeric(txtLatitude.Text) Then dsNewRow.Item("latitude") = Val(txtLatitude.Text)
@@ -310,10 +340,10 @@
             dsNewRow.Item("authority") = txtAuthority.Text
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
-            
-            If IsDate(txtOpenDate.Text) Then
+
+            If IsDate(txtOpeningDate.Text) Then
                 ' Opening date can only be in the past
-                If DateDiff(DateInterval.Day, DateValue(txtOpenDate.Text), Now) > 0 Then dsNewRow.Item("openingDatetime") = txtOpenDate.Text
+                If DateDiff(DateInterval.Day, DateValue(txtOpeningDate.Text), Now) > 0 Then dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
             End If
 
             If IsDate(txtClosingDate.Text) Then
@@ -348,6 +378,8 @@
         txtstationId.Text = ""
         combSearchStation.Text = ""
         txtStationName.Clear()
+        txtwmoid.Clear()
+        txticaoid.Clear()
         txtCountry.Clear()
         txtAuthority.Clear()
         txtLatitude.Clear()
@@ -357,8 +389,8 @@
         txtDrainageBasin.Clear()
         txtgeoAccuracy.Clear()
         txtgeoMethod.Clear()
-        txtOpenDate.Text = ""
-        txtClosingDate.Text = ""
+        OpenDate.Text = ""
+        ClosingDate.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
         txtstationId.Focus()
@@ -375,6 +407,8 @@
         txtLowerLimit.Clear()
         txtUnit.Clear()
         txtType.Text = ""
+        chkESelected.Checked = False
+        chkqcTotal.Checked = False
         txtElementNavigator.Clear()
         txtId.Focus()
     End Sub
@@ -464,6 +498,8 @@
 
             ds.Tables("station").Rows(recs).Item("stationId") = txtstationId.Text
             ds.Tables("station").Rows(recs).Item("stationName") = txtStationName.Text
+            ds.Tables("station").Rows(recs).Item("wmoid") = txtwmoid.Text
+            ds.Tables("station").Rows(recs).Item("icaoid") = txticaoid.Text
             ds.Tables("station").Rows(recs).Item("country") = txtCountry.Text
             If IsNumeric(txtLatitude.Text) Then ds.Tables("station").Rows(recs).Item("latitude") = Val(txtLatitude.Text)
             If IsNumeric(txtLongitude.Text) Then ds.Tables("station").Rows(recs).Item("longitude") = Val(txtLongitude.Text)
@@ -473,9 +509,24 @@
             ds.Tables("station").Rows(recs).Item("authority") = txtAuthority.Text
             If IsNumeric(txtgeoAccuracy.Text) Then ds.Tables("station").Rows(recs).Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then ds.Tables("station").Rows(recs).Item("geolocationMethod") = Val(txtgeoMethod.Text)
-            ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpenDate.Value
-            If IsDate(txtClosingDate.Text) Then ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
+
+            ' Update Opening date
+            If IsDate(txtOpeningDate.Text) Then
+                ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
+            Else
+                'ds.Tables("station").Rows(recs).Item("openingDatetime") = vbNull
+            End If
+
+            ' Update Closing date
+            If IsDate(txtClosingDate.Text) Then
+                ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
+            Else
+                'ds.Tables("station").Rows(recs).Item("closingDatetime") = vbNull
+            End If
+
             ds.Tables("station").Rows(recs).Item("stationoperational") = txtStationOperation.CheckState
+
+
 
             'Update the record in the data source table
             da.Update(ds, "station")
@@ -553,37 +604,48 @@ Err:
     End Sub
 
     Private Sub cmdAddElement_Click(sender As Object, e As EventArgs) Handles cmdAddElement.Click
-        On Error GoTo Err
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
+        Try
 
-        dsNewRow = ds.Tables("obselement").NewRow
-        dsNewRow.Item("elementId") = txtId.Text
-        dsNewRow.Item("abbreviation") = txtAbbreviation.Text
-        dsNewRow.Item("elementName") = txtName.Text
-        dsNewRow.Item("description") = txtDescription.Text
-        dsNewRow.Item("elementScale") = txtScale.Text
-        dsNewRow.Item("upperLimit") = txtUpperLimit.Text
-        dsNewRow.Item("lowerLimit") = txtLowerLimit.Text
-        dsNewRow.Item("units") = txtUnit.Text
-        dsNewRow.Item("elementtype") = txtType.Text
+            dsNewRow = ds.Tables("obselement").NewRow
+            dsNewRow.Item("elementId") = txtId.Text
+            dsNewRow.Item("abbreviation") = txtAbbreviation.Text
+            dsNewRow.Item("elementName") = txtName.Text
+            dsNewRow.Item("description") = txtDescription.Text
+            dsNewRow.Item("elementScale") = txtScale.Text
+            dsNewRow.Item("upperLimit") = txtUpperLimit.Text
+            dsNewRow.Item("lowerLimit") = txtLowerLimit.Text
+            dsNewRow.Item("units") = txtUnit.Text
+            dsNewRow.Item("elementtype") = txtType.Text
+            If chkESelected.Checked = True Then
+                dsNewRow.Item("selected") = 1
+            Else
+                dsNewRow.Item("selected") = 0
+            End If
 
-        'Add a new record to the data source table
-        ds.Tables("obselement").Rows.Add(dsNewRow)
-        da.Update(ds, "obselement")
-        ClearElementForm()
-        Exit Sub
-Err:
-        If Err.Number = 5 Then
-            MsgBox("Invalid Entries; Check values")
-            Exit Sub
-        End If
-        MsgBox(Err.Number & " : " & Err.Description)
+            If chkqcTotal.Checked = True Then
+                dsNewRow.Item("qcTotalRequired") = 1
+            Else
+                dsNewRow.Item("qcTotalRequired") = 0
+            End If
 
+            'Add a new record to the data source table
+            ds.Tables("obselement").Rows.Add(dsNewRow)
+            da.Update(ds, "obselement")
+            ClearElementForm()
+        Catch ex As Exception
+            If Err.Number = 5 Then
+                MsgBox("Invalid Entries; Check values")
+                Exit Sub
+            End If
+            MsgBox(Err.Number & " : " & Err.Description)
+        End Try
     End Sub
 
     Private Sub cmdUpdateElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateElement.Click
@@ -606,6 +668,16 @@ Err:
         ds.Tables("obselement").Rows(rec).Item("lowerLimit") = txtLowerLimit.Text
         ds.Tables("obselement").Rows(rec).Item("units") = txtUnit.Text
         ds.Tables("obselement").Rows(rec).Item("elementtype") = txtType.Text
+        If chkESelected.Checked = True Then
+            ds.Tables("obselement").Rows(rec).Item("selected") = 1
+        Else
+            ds.Tables("obselement").Rows(rec).Item("selected") = 0
+        End If
+        If chkqcTotal.Checked = True Then
+            ds.Tables("obselement").Rows(rec).Item("qcTotalRequired") = 1
+        Else
+            ds.Tables("obselement").Rows(rec).Item("qcTotalRequired") = 0
+        End If
 
         da.Update(ds, "obselement")
         recUpdate.messageBoxRecordedUpdated()
@@ -653,25 +725,6 @@ Err:
         Next
     End Sub
 
-    Private Sub GroupBox2_Enter_1(sender As Object, e As EventArgs) Handles GroupBox2.Enter
-
-    End Sub
-    Private Sub txtElementNavigator_TextChanged(sender As Object, e As EventArgs) Handles txtElementNavigator.TextChanged
-
-    End Sub
-    Private Sub TabMetadata_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabMetadata.SelectedIndexChanged
-
-    End Sub
-
-
-
-
-    Private Sub GroupBox10_Enter(sender As Object, e As EventArgs) Handles GroupBox10.Enter
-
-    End Sub
-    Private Sub txtNav2_TextChanged(sender As Object, e As EventArgs) Handles txtNav2.TextChanged
-
-    End Sub
 
     Private Sub cmdAddStElement_Click(sender As Object, e As EventArgs) Handles cmdAddStElement.Click
 
@@ -1084,10 +1137,6 @@ Err:
         Locate_Element("Id", txtId.Text)
     End Sub
 
-
-    Private Sub txtstationId_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtstationId.SelectedIndexChanged
-
-    End Sub
 
     Private Sub TabPaperArchive_Click(sender As Object, e As EventArgs) Handles TabPaperArchive.Click
 
@@ -1763,5 +1812,19 @@ Err:
         End If
     End Sub
 
-  
+    Private Sub OpenDate_TextChanged(sender As Object, e As EventArgs) Handles OpenDate.TextChanged
+        txtOpeningDate.Text = OpenDate.Text
+    End Sub
+
+    Private Sub ClosingDate_TextChanged(sender As Object, e As EventArgs) Handles ClosingDate.TextChanged
+        txtClosingDate.Text = ClosingDate.Text
+    End Sub
+
+    'Private Sub ClosingDate_ValueChanged(sender As Object, e As EventArgs) Handles ClosingDate.ValueChanged
+    '    txtClosingDate.Text = ClosingDate.Text
+    'End Sub
+
+    'Private Sub OpenDate_ValueChanged(sender As Object, e As EventArgs) Handles OpenDate.ValueChanged
+    '    txtOpeningDate.Text = OpenDate.Text
+    'End Sub
 End Class
