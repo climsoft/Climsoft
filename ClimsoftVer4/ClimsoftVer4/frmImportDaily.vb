@@ -77,6 +77,9 @@
                 DataGridView1.Refresh()
             End Using
 
+            ' In case of AWS files
+            If Text = "AWS Data Import" Then List_AWSFields()
+
             ''Populate the datagridview with data from the file
             'For Each THisLine In My.Computer.FileSystem.ReadAllText(txtImportFile.Text).Split(Environment.NewLine)
             '    DataGridView1.Rows.Add(THisLine.Split(delimit))
@@ -95,6 +98,44 @@
         End If
         Me.Cursor = Cursors.Default
     End Sub
+
+    Sub List_AWSFields()
+
+        Try
+
+            cmbFields.Items.Clear()
+            ' Add station, date and time headers whichever exist
+            cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("date_time")
+            cmbFields.Items.Add("date")
+            cmbFields.Items.Add("time")
+
+            ' Add the AWS element codes existing in obselement table
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            sql = "select elementId, abbreviation from obselement where elementId > 880 ;"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            kount = ds1.Tables("obselement").Rows.Count
+
+            If kount = 0 Then Exit Sub
+
+            For i = 0 To kount - 1
+                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId")) ' & ";" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbcon.Close()
+        End Try
+        dbcon.Close()
+    End Sub
+
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         'DataGridView1.Rows.Clear()
@@ -450,8 +491,12 @@
     End Function
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
-        DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
-        DataGridView1.Refresh()
+        Try
+            DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
+            DataGridView1.Refresh()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub Scale_Data(code As String, ByRef obsv As String)
