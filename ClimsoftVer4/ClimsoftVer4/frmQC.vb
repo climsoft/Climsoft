@@ -46,6 +46,7 @@ Public Class frmQC
 
         'Initialize Stations List Views
         LstViewStations.Columns.Clear()
+
         LstViewStations.Columns.Add("Station Id", 100, HorizontalAlignment.Left)
         LstViewStations.Columns.Add("Station Name", 200, HorizontalAlignment.Left)
 
@@ -60,11 +61,14 @@ Public Class frmQC
 
             Sql = "SELECT * FROM station ORDER BY stationId"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            dss.Clear()
+
             daa.Fill(dss, "station")
 
             Dim stn(2), elm(2) As String
             Dim itms = New ListViewItem
 
+            LstViewStations.Items.Clear()
             For i = 0 To dss.Tables("station").Rows.Count - 1
                 stn(0) = dss.Tables("station").Rows(i).Item("stationId") '"0123456789"
                 If Not IsDBNull(dss.Tables("station").Rows(i).Item("stationName")) Then
@@ -74,12 +78,15 @@ Public Class frmQC
                 End If
 
                 itms = New ListViewItem(stn)
+
                 LstViewStations.Items.Add(itms)
             Next
 
             sql = "SELECT * FROM obselement ORDER BY elementId"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            dss.Clear()
             daa.Fill(dss, "element")
+            lstViewElements.Items.Clear()
             For i = 0 To dss.Tables("element").Rows.Count - 1
                 elm(0) = dss.Tables("element").Rows(i).Item("elementId")
                 If Not IsDBNull(dss.Tables("element").Rows(i).Item("description")) Then

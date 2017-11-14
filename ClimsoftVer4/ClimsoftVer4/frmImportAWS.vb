@@ -283,7 +283,92 @@ Public Class frmImportAWS
             txtDataFile.Text = fd.FileName
             strDataFile = txtDataFile.Text
         End If
+        'Load_aws()
+
     End Sub
+
+    'Sub Load_aws()
+    '    Dim lin As Integer
+    '    Dim currentRow As String()
+    '    Dim currentField As String
+    '    Dim row As String()
+    '    Dim delimit As String
+    '    'Set cursor to busy mood
+    '    Me.Cursor = Cursors.WaitCursor
+
+    '    Try
+    '        ''Assign delimiter for the text file
+    '        '' Comma delimited
+    '        'If optComma.Checked Then
+    '        '    delimit = ","
+    '        '    'Tab delimited
+    '        'ElseIf OptTAB.Checked Then
+    '        '    ' Characters delimited
+    '        '    delimit = vbTab
+    '        'ElseIf OptOthers.Checked Then
+    '        '    delimit = txtOther.Text
+    '        'End If
+    '        'DataGridView1.Columns.Clear()
+    '        delimit = txtDelimiter.Text
+
+    '        Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtDataFile.Text)
+    '            MyReader.TextFieldType = FileIO.FieldType.Delimited
+    '            MyReader.SetDelimiters(delimit)
+
+    '            Dim num As Integer
+
+    '            lin = MyReader.LineNumber()
+
+    '            currentRow = MyReader.ReadFields()
+
+    '            If lin = 1 Then ' The header row
+    '                ' Compute the total columns
+    '                num = 0
+    '                For Each currentField In currentRow
+    '                    'MsgBox(currentField)
+    '                    num = num + 1
+    '                Next
+
+    '                '    DataGridView1.ColumnCount = num
+
+    '                '    'Number the column headers starting with digit 1
+    '                '    num = 0
+    '                '    lstColumn.Items.Clear()
+    '                '    For Each currentField In currentRow
+    '                '        DataGridView1.Columns(num).Name = num + 1
+    '                '        num = num + 1
+    '                '        lstColumn.Items.Add(num)
+    '                '    Next
+    '                '    DataGridView1.Refresh()
+    '            End If
+
+    '            'DataGridView1.Rows.Add(currentRow)
+    '            Do While MyReader.EndOfData = False
+
+    '                'DataGridView1.Rows.Add(currentRow)
+    '            Loop
+    '            'DataGridView1.Refresh()
+    '        End Using
+
+    '        ''Populate the datagridview with data from the file
+    '        'For Each THisLine In My.Computer.FileSystem.ReadAllText(txtImportFile.Text).Split(Environment.NewLine)
+    '        '    DataGridView1.Rows.Add(THisLine.Split(delimit))
+    '        'Next
+    '        'DataGridView1.Refresh()
+    '    Catch ex As Exception
+    '        MsgBox(ex.HResult & " " & Err.Description)
+    '        Me.Cursor = Cursors.Default
+    '    End Try
+    '    'If DataGridView1.RowCount > 0 Then
+    '    '    cmdLoadData.Enabled = True
+    '    '    pnlHeaders.Enabled = True
+    '    'Else
+    '    '    cmdLoadData.Enabled = False
+    '    '    pnlHeaders.Enabled = False
+    '    'End If
+    '    Me.Cursor = Cursors.Default
+
+    'End Sub
 
     Private Sub btnBrowseSchemaFile_Click(sender As Object, e As EventArgs) Handles btnBrowseSchemaFile.Click
         '

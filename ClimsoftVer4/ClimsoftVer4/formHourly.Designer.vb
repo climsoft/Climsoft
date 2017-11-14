@@ -485,7 +485,7 @@ Partial Class formHourly
         '
         'txtVal_15Field020
         '
-        Me.txtVal_15Field020.Location = New System.Drawing.Point(380, 250)
+        Me.txtVal_15Field020.Location = New System.Drawing.Point(380, 251)
         Me.txtVal_15Field020.Name = "txtVal_15Field020"
         Me.txtVal_15Field020.Size = New System.Drawing.Size(68, 20)
         Me.txtVal_15Field020.TabIndex = 20

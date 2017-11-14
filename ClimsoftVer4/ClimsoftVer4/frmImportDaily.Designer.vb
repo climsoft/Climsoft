@@ -53,6 +53,10 @@ Partial Class frmImportDaily
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.lblRecords = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.txtStn = New System.Windows.Forms.TextBox()
+        Me.lblStn = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.SuspendLayout()
@@ -63,16 +67,16 @@ Partial Class frmImportDaily
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(10, 181)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(948, 393)
+        Me.DataGridView1.Size = New System.Drawing.Size(948, 405)
         Me.DataGridView1.TabIndex = 0
         '
         'cmdOpenFile
         '
         Me.cmdOpenFile.Location = New System.Drawing.Point(468, 0)
         Me.cmdOpenFile.Name = "cmdOpenFile"
-        Me.cmdOpenFile.Size = New System.Drawing.Size(91, 23)
+        Me.cmdOpenFile.Size = New System.Drawing.Size(69, 23)
         Me.cmdOpenFile.TabIndex = 1
-        Me.cmdOpenFile.Text = "Select File"
+        Me.cmdOpenFile.Text = "Open File"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
         '
         'dlgOpenImportFile
@@ -137,9 +141,9 @@ Partial Class frmImportDaily
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(218, 148)
+        Me.cmdClear.Location = New System.Drawing.Point(215, 148)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(69, 29)
+        Me.cmdClear.Size = New System.Drawing.Size(62, 29)
         Me.cmdClear.TabIndex = 8
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
@@ -155,7 +159,7 @@ Partial Class frmImportDaily
         'cmbFields
         '
         Me.cmbFields.FormattingEnabled = True
-        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "yyyy", "mm", "dd", "hh", "value", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "value", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
         Me.cmbFields.Location = New System.Drawing.Point(151, 55)
         Me.cmbFields.Name = "cmbFields"
         Me.cmbFields.Size = New System.Drawing.Size(147, 21)
@@ -293,7 +297,7 @@ Partial Class frmImportDaily
         Me.pnlHeaders.Controls.Add(Me.lblColumns)
         Me.pnlHeaders.Controls.Add(Me.lblFieldName)
         Me.pnlHeaders.Enabled = False
-        Me.pnlHeaders.Location = New System.Drawing.Point(518, 41)
+        Me.pnlHeaders.Location = New System.Drawing.Point(539, 41)
         Me.pnlHeaders.Name = "pnlHeaders"
         Me.pnlHeaders.Padding = New System.Windows.Forms.Padding(1, 0, 1, 1)
         Me.pnlHeaders.Size = New System.Drawing.Size(354, 134)
@@ -317,27 +321,67 @@ Partial Class frmImportDaily
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(321, 148)
+        Me.cmdClose.Location = New System.Drawing.Point(308, 148)
         Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(69, 29)
+        Me.cmdClose.Size = New System.Drawing.Size(57, 29)
         Me.cmdClose.TabIndex = 27
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(410, 148)
+        Me.cmdHelp.Location = New System.Drawing.Point(396, 148)
         Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(69, 29)
+        Me.cmdHelp.Size = New System.Drawing.Size(62, 29)
         Me.cmdHelp.TabIndex = 28
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
+        '
+        'lblRecords
+        '
+        Me.lblRecords.AutoSize = True
+        Me.lblRecords.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRecords.ForeColor = System.Drawing.Color.Red
+        Me.lblRecords.Location = New System.Drawing.Point(339, 589)
+        Me.lblRecords.Name = "lblRecords"
+        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
+        Me.lblRecords.TabIndex = 29
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(757, 11)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(0, 13)
+        Me.lblType.TabIndex = 30
+        '
+        'txtStn
+        '
+        Me.txtStn.Location = New System.Drawing.Point(218, 102)
+        Me.txtStn.Name = "txtStn"
+        Me.txtStn.Size = New System.Drawing.Size(241, 20)
+        Me.txtStn.TabIndex = 31
+        Me.txtStn.Visible = False
+        '
+        'lblStn
+        '
+        Me.lblStn.AutoSize = True
+        Me.lblStn.Location = New System.Drawing.Point(158, 107)
+        Me.lblStn.Name = "lblStn"
+        Me.lblStn.Size = New System.Drawing.Size(54, 13)
+        Me.lblStn.TabIndex = 32
+        Me.lblStn.Text = "Station ID"
+        Me.lblStn.Visible = False
         '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(970, 586)
+        Me.ClientSize = New System.Drawing.Size(970, 609)
+        Me.Controls.Add(Me.lblStn)
+        Me.Controls.Add(Me.txtStn)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblRecords)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.pnlHeaders)
@@ -398,4 +442,8 @@ Partial Class frmImportDaily
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
+    Friend WithEvents lblRecords As System.Windows.Forms.Label
+    Friend WithEvents lblType As System.Windows.Forms.Label
+    Friend WithEvents txtStn As System.Windows.Forms.TextBox
+    Friend WithEvents lblStn As System.Windows.Forms.Label
 End Class

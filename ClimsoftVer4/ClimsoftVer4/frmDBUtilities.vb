@@ -247,7 +247,22 @@ Public Class frmDBUtilities
     End Sub
 
     Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
-        frmImportAWS.Show()
+        'frmImportAWS.Show()
+        With frmImportDaily
+            .Text = "AWS Data Import"
+            .lblType.Visible = False
+            .lblType.Text = "aws"
+            .chkObsHour.Visible = False
+            '.lblStartRow.Visible = False
+            .chkScale.Visible = True
+            .chkScale.Checked = True
+            '.txtStartRow.Visible = False
+            .txtObsHour.Visible = False
+            .txtStn.Visible = True
+            .lblStn.Visible = True
+            .Show()
+        End With
+
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupToolStripMenuItem.Click

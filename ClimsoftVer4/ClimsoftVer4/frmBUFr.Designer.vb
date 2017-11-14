@@ -741,7 +741,7 @@ Partial Class frmBUFR
         Me.GroupBox1.Controls.Add(Me.lblStation)
         Me.GroupBox1.Controls.Add(Me.cboStation)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(49, 3)
+        Me.GroupBox1.Location = New System.Drawing.Point(49, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(629, 141)
         Me.GroupBox1.TabIndex = 7

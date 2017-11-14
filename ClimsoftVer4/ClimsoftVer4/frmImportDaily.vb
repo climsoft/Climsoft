@@ -111,20 +111,75 @@
     End Sub
 
     Private Sub cmdLoadData_Click(sender As Object, e As EventArgs) Handles cmdLoadData.Click
-        Dim DataCat As String
-        ' Set busy Cursor pointer
-        Me.Cursor = Cursors.WaitCursor
-        DataCat = Get_DataCat()
-        Select Case DataCat
-            Case "daily1"
-                Load_Daily1()
-            Case "daily2"
-                Load_Daily2()
-            Case "hourly"
-                Load_Hourly()
-        End Select
-        Me.Cursor = Cursors.Default
-        MsgBox("Data import process completed")
+        Dim DataCat, fl1, fl2, cr, sql0 As String
+        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            ' Set busy Cursor pointer
+            Me.Cursor = Cursors.WaitCursor
+
+            fl1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_sql.csv"
+            FileOpen(101, fl1, OpenMode.Output)
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            ' Contruct the SQL path structure for the output file
+            fl2 = ""
+            For i = 1 To Len(fl1)
+                cr = Strings.Mid(fl1, i, 1)
+                If cr = "\" Then cr = "/"
+                fl2 = fl2 & cr
+            Next
+            ' AWS data category
+            If lblType.Text = "aws" Then
+                'If MsgBox("Import AWS Data", vbYesNo) = vbNo Then
+                '    Me.Close()
+                'Else
+                ' Import AWS data
+                DataCat = "aws"
+                'End If
+            Else
+                ' Other data categories
+                DataCat = Get_DataCat()
+            End If
+
+            lblRecords.Text = ""
+
+            Select Case DataCat
+                Case "daily1"
+                    Load_Daily1()
+                Case "daily2"
+                    Load_Daily2()
+                Case "hourly"
+                    Load_Hourly()
+                Case "aws"
+                    Load_Aws()
+            End Select
+
+            FileClose(101)
+            ' load data into observationinitial table
+
+            ' Create sql query
+            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue);"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
+
+            'Execute query
+            objCmd.ExecuteNonQuery()
+
+            lblRecords.Text = "Data import process completed"
+
+            dbcon.Close()
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            lblRecords.Text = "AWS Import Failed!, Check if the Staion Id exists in metadata"
+            dbcon.Close()
+            FileClose(101)
+            Me.Cursor = Cursors.Default
+        End Try
+
     End Sub
 
     Function Get_DataCat() As String
@@ -152,18 +207,21 @@
         Try
             With DataGridView1
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
+
+                    ' Show upload progress
+                    lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
+                    lblRecords.Refresh()
+
                     If Get_RecordIdx(i, stn, code, yy, mm, dd, hh) Then
                         If hh = "" Then hh = txtObsHour.Text
                         datetime = yy & "-" & mm & "-" & dd & " " & hh & ":00"
-                        'MsgBox(stn & code & yy & mm & dd & hh & " " & datetime)
-                        ' ''Exit For
+
                     End If
 
                     For j = 0 To .Columns.Count - 1
                         If .Columns(j).Name = "value" Then
                             dat = .Rows(i).Cells(j).Value
-                            'MsgBox(stn & " " & code & " " & datetime & " " & dat)
-                            'Update_database(stn, code, datetime, dat)
+ 
                             If chkScale.Checked = True Then
                                 Scale_Data(code, dat)
                                 'MsgBox(dat)
@@ -183,13 +241,17 @@
 
     End Sub
     Sub Load_Daily2()
-        'MsgBox("formDaily2")
+
         Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
         Dim i, j As Integer
+
         Try
             With DataGridView1
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
 
+                    ' Show upload progress
+                    lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
+                    lblRecords.Refresh()
                     If Get_RecordIdx(i, st, cod, y, m, d, h) Then
                         If h = "" Then h = txtObsHour.Text
                     End If
@@ -199,18 +261,13 @@
                         dat = .Rows(i).Cells(j).Value
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
-                            'If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
                             If chkScale.Checked = True Then Scale_Data(cod, dat)
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
-
-                            'End If
-                            'If IsDate(DateSerial(y, m, hd)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
-                            'End If
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit For 'Sub
                         End If
                     Next
                 Next
-
             End With
+
         Catch ex As Exception
             If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         End Try
@@ -224,11 +281,12 @@
         Try
             With DataGridView1
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
-                    Get_RecordIdx(i, st, cod, y, m, d, h)
 
-                    'If Get_RecordIdx(i, st, cod, y, m, d, h) Then
-                    '    If h = "" Then h = txtObsHour.Text
-                    'End If
+                    ' Show upload progress
+                    lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
+                    lblRecords.Refresh()
+
+                    Get_RecordIdx(i, st, cod, y, m, d, h)
 
                     For j = 0 To .Columns.Count - 1
                         dat = .Rows(i).Cells(j).Value
@@ -236,8 +294,7 @@
                         If chkScale.Checked = True Then Scale_Data(cod, dat)
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
-                            'If IsDate(DateSerial(y, m, d)) Then Add_Record(st, cod, dttime, .Rows(i).Cells(j).Value)
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit Sub
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit For 'Sub
                         End If
                     Next
                 Next
@@ -247,6 +304,56 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+
+    Sub Load_Aws()
+        'MsgBox("Aws")
+        Dim stn, code, dttim, dt, tt, dat As String
+        Dim i, j As Integer
+        Dim dt_tm As Boolean
+
+        Try
+            With DataGridView1
+                For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
+
+                    ' Show upload progress
+                    lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
+                    lblRecords.Refresh()
+
+                    With DataGridView1
+                        dt_tm = False
+                        For j = 0 To .Columns.Count - 1
+                            If .Columns(j).Name = "station_id" Then ' Station column found
+                                stn = .Rows(i).Cells(j).Value
+                            ElseIf .Columns(j).Name = "date_time" Then ' Combined Date and Timme column found
+                                dttim = .Rows(i).Cells(j).Value
+                                dt_tm = True
+                            ElseIf .Columns(j).Name = "date" Then ' Separate Date column found 
+                                dt = .Rows(i).Cells(j).Value
+                            ElseIf .Columns(j).Name = "time" Then ' Separate Time column found 
+                                tt = .Rows(i).Cells(j).Value
+                            Else ' Data Column found
+
+                                code = .Columns(j).Name
+                                dat = .Rows(i).Cells(j).Value
+                                If dt_tm = False Then dttim = dt & " " & tt
+                                If IsDate(dttim) Then
+                                    dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
+                                    If stn = "" Then stn = txtStn.Text
+                                    If Get_Code_Scale(code, dat) Then
+                                        Add_Record(stn, code, dttim, dat)
+                                    End If
+                                End If
+                            End If
+                        Next
+                    End With
+                Next
+            End With
+        Catch ex As Exception
+            MsgBox(ex.HResult & " " & ex.Message)
+        End Try
+    End Sub
+
+
     'Function Get_Station(rw As Long) As String
     '    Get_Station = ""
     '    With DataGridView1
@@ -258,6 +365,7 @@
     '        Next
     '    End With
     'End Function
+
     Function Get_RecordIdx(rw As Long, ByRef stn As String, ByRef code As String, ByRef yy As String, ByRef mm As String, ByRef dd As String, ByRef hh As String) As String
         Get_RecordIdx = True
         Try
@@ -283,6 +391,7 @@
             Get_RecordIdx = False
         End Try
     End Function
+    
 
     Private Sub cmbFields_Click(sender As Object, e As EventArgs) Handles cmbFields.Click
         'DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
@@ -295,13 +404,11 @@
             dbConnectionString = frmLogin.txtusrpwd.Text
             dbcon.ConnectionString = dbConnectionString
             dbcon.Open()
-            'formMetadata.SetDataSet("observationinitial")
+
             sql = "SELECT * FROM observationinitial"
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "observationinitial")
-            'kount = ds1.Tables("observationinitial").Rows.Count
-            'MsgBox(kount)
             dsNewRow = ds1.Tables("observationinitial").NewRow
             dsNewRow.Item("recordedFrom") = stn
             dsNewRow.Item("describedBy") = code
@@ -323,37 +430,23 @@
 
 
     Function Add_Record(stn As String, code As String, datetime As String, obsVal As String) As Boolean
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da1)
-        Dim recCommit As New dataEntryGlobalRoutines
-        Dim sql0 As String
-        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
-        'MsgBox(Len(stn) & " " & Strings.Left(stn, 2) & " " & stn & " " & obsVal)
-        Add_Record = True
+        'MsgBox(stn & " " & datetime)
+        Dim dat As String
+
         Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            dbcon.ConnectionString = dbConnectionString
-            dbcon.Open()
+            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal
 
-            sql = "SELECT * FROM " & "observationinitial"
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
-            da1.Fill(ds1, "observationinitial")
+            Print(101, dat)
+            PrintLine(101)
 
-            'stn = Strings.Mid(stn, 2, Len(stn) - 1)
-            comm.Connection = dbcon  ' Assign the already defined and asigned connection string to the Mysql command variable'
-            sql0 = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue) Values(" & stn & ", '" & code & "', '" & datetime & "','surface','" & obsVal & "' );"
-            'MsgBox(sql0)
-            comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
-            comm.ExecuteNonQuery()   ' Execute the query
-            dbcon.Close()
             Return True
         Catch ex As Exception
-            dbcon.Close()
-            'MsgBox(stn & " " & code & " " & datetime & " " & obsVal)
-            If ex.HResult <> -2147024882 Then
-                'MsgBox(ex.HResult & ": " & ex.Message)
+            If ex.HResult <> -2147024882 And ex.HResult <> -2146232969 And ex.HResult <> -2146233079 Then
                 If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
             End If
+            Return False
         End Try
+
     End Function
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
@@ -362,34 +455,74 @@
     End Sub
 
     Sub Scale_Data(code As String, ByRef obsv As String)
-        Dim scales As Decimal
-        Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            dbcon.ConnectionString = dbConnectionString
-            dbcon.Open()
 
-            sql = "SELECT * FROM " & "obselement"
+        Dim scales As Decimal
+
+        Try
+            sql = "select elementId, elementScale from obselement where elementId like " & code & ";"
+
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
             da1.Fill(ds1, "obselement")
-            With ds1.Tables("obselement")
-                kount = .Rows.Count
-                'MsgBox(kount)
-                For i = 0 To kount - 1
-                    If .Rows(i).Item("elementId") = code Then
-                        scales = Val(.Rows(i).Item("elementScale"))
-                        If scales > 0 Then obsv = Val(obsv) / scales
-                        Exit For
-                    End If
-                Next
-            End With
-            dbcon.Close()
+
+            If ds1.Tables("obselement").Rows.Count = 0 Then Exit Sub
+
+            If Not IsDBNull(ds1.Tables("obselement").Rows(0).Item("elementScale")) Then
+                scales = Val(ds1.Tables("obselement").Rows(0).Item("elementScale"))
+                If scales > 0 Then obsv = Math.Round(Val(obsv) / scales, 0)
+            End If
+
         Catch ex As Exception
-            'MsgBox(ex.Message)
-            dbcon.Close()
+            MsgBox(ex.Message)
         End Try
 
     End Sub
+    Function Get_Code_Scale(code As String, ByRef obsv As String) As Boolean
 
+        Dim scales As Decimal
+        Try
+
+            Get_Code_Scale = False
+
+            sql = "SELECT * FROM " & "obselement"
+            sql = "select elementId, elementScale from obselement where elementId like " & Val(code) & ";"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            If ds1.Tables("obselement").Rows.Count = 0 Then
+                Return False
+            Else
+                If chkScale.Checked = True Then ' Remove the scale if set so
+                    If Not IsDBNull(ds1.Tables("obselement").Rows(0).Item("elementScale")) Then
+                        scales = Val(ds1.Tables("obselement").Rows(0).Item("elementScale"))
+                        If scales > 0 Then obsv = Math.Round(Val(obsv) / scales, 0)
+                        Return True
+                    End If
+                End If
+            End If
+
+            'With ds1.Tables("obselement")
+            '    kount = .Rows.Count
+            '    For i = 0 To kount - 1
+            '        If .Rows(i).Item("elementId") = Val(code) Then
+            '            If chkScale.Checked = True Then ' Remove the scale if set so
+            '                scales = Val(.Rows(i).Item("elementScale"))
+            '                If scales > 0 Then obsv = Math.Round(Val(obsv) / scales, 0)
+            '            End If
+            '            Get_Code_Scale = True
+            '            Exit For
+            '        End If
+            '    Next
+            'End With
+
+        Catch ex As Exception
+            Get_Code_Scale = False
+            MsgBox(ex.Message)
+        End Try
+
+    End Function
     Private Sub cmdSaveSpecs_Click(sender As Object, e As EventArgs) Handles cmdSaveSpecs.Click
         Dim hdr, schemafile As String
         'Dim configFilename As String = Application.StartupPath & "\schema.sch"
