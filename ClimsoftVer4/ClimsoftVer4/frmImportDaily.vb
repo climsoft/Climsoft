@@ -109,7 +109,7 @@
             cmbFields.Items.Add("date_time")
             cmbFields.Items.Add("date")
             cmbFields.Items.Add("time")
-
+            cmbFields.Items.Add("NA")
             ' Add the AWS element codes existing in obselement table
 
             dbConnectionString = frmLogin.txtusrpwd.Text
@@ -127,7 +127,7 @@
             If kount = 0 Then Exit Sub
 
             For i = 0 To kount - 1
-                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId")) ' & ";" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId") & "-" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
             Next
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -491,8 +491,19 @@
     End Function
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
+        Dim Colhd As String
+
         Try
-            DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
+
+            If InStr(cmbFields.Text, "-") > 0 Then
+                Colhd = ""
+                For Each C As Char In cmbFields.Text
+                    If IsNumeric(C) Then Colhd = Colhd & C
+                Next
+            Else
+                Colhd = cmbFields.Text
+            End If
+            DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = Colhd 'cmbFields.Text
             DataGridView1.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
