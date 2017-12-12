@@ -33,6 +33,7 @@ Partial Class frmDBUtilities
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultipleElementColumnsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MonthlyToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CLIMSOFTV3ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,7 +111,7 @@ Partial Class frmDBUtilities
         '
         'DailyToolStripMenuItem
         '
-        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.MonthlyToolStripMenuItem, Me.MonthlyToolStripMenuItem1, Me.MonthlyToolStripMenuItem2})
+        Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.MonthlyToolStripMenuItem, Me.MultipleElementColumnsToolStripMenuItem, Me.MonthlyToolStripMenuItem1, Me.MonthlyToolStripMenuItem2})
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
         Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.DailyToolStripMenuItem.Text = "Text Files"
@@ -118,29 +119,37 @@ Partial Class frmDBUtilities
         'DailyToolStripMenuItem1
         '
         Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
-        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(215, 22)
         Me.DailyToolStripMenuItem1.Text = "Hourly"
         Me.DailyToolStripMenuItem1.Visible = False
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.MonthlyToolStripMenuItem.Text = "Hourly/Daily"
+        '
+        'MultipleElementColumnsToolStripMenuItem
+        '
+        Me.MultipleElementColumnsToolStripMenuItem.Name = "MultipleElementColumnsToolStripMenuItem"
+        Me.MultipleElementColumnsToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.MultipleElementColumnsToolStripMenuItem.Text = "Multiple Element Columns"
         '
         'MonthlyToolStripMenuItem1
         '
         Me.MonthlyToolStripMenuItem1.Enabled = False
         Me.MonthlyToolStripMenuItem1.Name = "MonthlyToolStripMenuItem1"
-        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem1.Size = New System.Drawing.Size(215, 22)
         Me.MonthlyToolStripMenuItem1.Text = "Dekadal"
+        Me.MonthlyToolStripMenuItem1.Visible = False
         '
         'MonthlyToolStripMenuItem2
         '
         Me.MonthlyToolStripMenuItem2.Enabled = False
         Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
-        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(141, 22)
+        Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
         Me.MonthlyToolStripMenuItem2.Text = "Monthly"
+        Me.MonthlyToolStripMenuItem2.Visible = False
         '
         'CLIMSOFTV3ToolStripMenuItem
         '
@@ -354,5 +363,6 @@ Partial Class frmDBUtilities
     Friend WithEvents MonthlyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MultipleElementColumnsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

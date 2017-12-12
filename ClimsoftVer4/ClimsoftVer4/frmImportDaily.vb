@@ -79,7 +79,7 @@
 
             ' In case of AWS files
             If Text = "AWS Data Import" Then List_AWSFields()
-
+            If Text = "Observations in Multiple Columns" Then List_ObsFields()
             ''Populate the datagridview with data from the file
             'For Each THisLine In My.Computer.FileSystem.ReadAllText(txtImportFile.Text).Split(Environment.NewLine)
             '    DataGridView1.Rows.Add(THisLine.Split(delimit))
@@ -135,7 +135,42 @@
         End Try
         dbcon.Close()
     End Sub
+    Sub List_ObsFields()
 
+        Try
+
+            cmbFields.Items.Clear()
+            ' Add station, date and time headers whichever exist
+            cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("yyyy")
+            cmbFields.Items.Add("mm")
+            cmbFields.Items.Add("dd")
+            cmbFields.Items.Add("hh")
+            ' Add the AWS element codes existing in obselement table
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            sql = "select elementId, abbreviation from obselement where elementId < 881;"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            kount = ds1.Tables("obselement").Rows.Count
+
+            If kount = 0 Then Exit Sub
+
+            For i = 0 To kount - 1
+                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId") & "-" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbcon.Close()
+        End Try
+        dbcon.Close()
+    End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         'DataGridView1.Rows.Clear()
@@ -173,14 +208,12 @@
                 If cr = "\" Then cr = "/"
                 fl2 = fl2 & cr
             Next
+
             ' AWS data category
             If lblType.Text = "aws" Then
-                'If MsgBox("Import AWS Data", vbYesNo) = vbNo Then
-                '    Me.Close()
-                'Else
-                ' Import AWS data
                 DataCat = "aws"
-                'End If
+            ElseIf lblType.Text = "Multiple Elements" Then
+                DataCat = "ColElms"
             Else
                 ' Other data categories
                 DataCat = Get_DataCat()
@@ -197,6 +230,8 @@
                     Load_Hourly()
                 Case "aws"
                     Load_Aws()
+                Case "ColElms"
+                    Load_ColumnElems()
             End Select
 
             FileClose(101)
@@ -359,6 +394,7 @@
                     ' Show upload progress
                     lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
                     lblRecords.Refresh()
+                    stn = txtStn.Text
 
                     With DataGridView1
                         dt_tm = False
@@ -379,7 +415,7 @@
                                 If dt_tm = False Then dttim = dt & " " & tt
                                 If IsDate(dttim) Then
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
-                                    If stn = "" Then stn = txtStn.Text
+                                    'If stn = "" Then stn = txtStn.Text
                                     If Get_Code_Scale(code, dat) Then
                                         Add_Record(stn, code, dttim, dat)
                                     End If
@@ -393,7 +429,64 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+    Sub Load_ColumnElems()
+        'MsgBox("Column Elements")
+        Dim stn, code, yr, mn, dy, hr, dt_tm, dat As String
+        Dim i, j, dttcom As Integer
 
+        Try
+            With DataGridView1
+                For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '- 1
+
+                    ' Show upload progress
+                    lblRecords.Text = "Loading: " & i & " of " & .RowCount - Val(txtStartRow.Text) '1
+                    lblRecords.Refresh()
+                    dttcom = 0
+                    hr = Val(txtObsHour.Text)
+                    stn = txtStn.Text
+
+                    'With DataGridView1
+
+                    For j = 0 To .Columns.Count - 1
+                        If .Columns(j).Name = "station_id" Then ' Station column found
+                            stn = .Rows(i).Cells(j).Value
+                        ElseIf .Columns(j).Name = "yyyy" Then ' Combined Date and Timme column found
+                            yr = .Rows(i).Cells(j).Value
+                            dttcom = dttcom + 1
+                        ElseIf .Columns(j).Name = "mm" Then ' Separate Date column found 
+                            mn = .Rows(i).Cells(j).Value
+                            dttcom = dttcom + 1
+                        ElseIf .Columns(j).Name = "dd" Then ' Separate Time column found 
+                            dy = .Rows(i).Cells(j).Value
+                            dttcom = dttcom + 1
+                        ElseIf .Columns(j).Name = "hh" Then ' Separate Time column found 
+                            hr = .Rows(i).Cells(j).Value
+
+                        Else ' Data Column found
+
+                            'compute datetime value
+                            If dttcom <> 3 Then
+                                MsgBox("Column headers yyyy, mm, dd Not found")
+                                Exit Sub
+                            Else
+                                dt_tm = yr & "-" & mn & "-" & dy & " " & hr & ":00:00"
+                            End If
+
+                            code = .Columns(j).Name
+                            dat = .Rows(i).Cells(j).Value
+
+                            If Get_Code_Scale(code, dat) Then
+                                Add_Record(stn, code, dt_tm, dat)
+                            End If
+
+                        End If
+                    Next j
+                Next i
+            End With
+        Catch ex As Exception
+            MsgBox(ex.HResult & " " & ex.Message)
+        End Try
+    End Sub
 
     'Function Get_Station(rw As Long) As String
     '    Get_Station = ""
@@ -411,6 +504,7 @@
         Get_RecordIdx = True
         Try
             With DataGridView1
+                stn = txtStn.Text
                 For i = 0 To .Columns.Count - 1
                     If .Columns(i).Name = "station_id" Then
                         stn = .Rows(rw).Cells(i).Value
@@ -462,6 +556,7 @@
             da1.Update(ds1, "observationinitial")
         Catch ex As Exception
             MsgBox(ex.Message)
+
         End Try
     End Sub
     Private Sub cmdtest_Click(sender As Object, e As EventArgs) Handles cmdtest.Click
@@ -482,6 +577,7 @@
 
             Return True
         Catch ex As Exception
+            dbcon.Close()
             If ex.HResult <> -2147024882 And ex.HResult <> -2146232969 And ex.HResult <> -2146233079 Then
                 If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Return False
             End If
@@ -534,13 +630,13 @@
 
     End Sub
     Function Get_Code_Scale(code As String, ByRef obsv As String) As Boolean
-
+        'MsgBox(code & " " & obsv)
         Dim scales As Decimal
         Try
 
-            Get_Code_Scale = False
+            Get_Code_Scale = True
 
-            sql = "SELECT * FROM " & "obselement"
+            'sql = "SELECT * FROM " & "obselement"
             sql = "select elementId, elementScale from obselement where elementId like " & Val(code) & ";"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
@@ -550,11 +646,12 @@
             If ds1.Tables("obselement").Rows.Count = 0 Then
                 Return False
             Else
+                obsv = obsv
                 If chkScale.Checked = True Then ' Remove the scale if set so
                     If Not IsDBNull(ds1.Tables("obselement").Rows(0).Item("elementScale")) Then
                         scales = Val(ds1.Tables("obselement").Rows(0).Item("elementScale"))
                         If scales > 0 Then obsv = Math.Round(Val(obsv) / scales, 0)
-                        Return True
+                        'Return True
                     End If
                 End If
             End If
@@ -647,5 +744,15 @@
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()
+    End Sub
+
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        If Text = "AWS Data Import" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#aws")
+        Else
+
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
+        End If
     End Sub
 End Class
