@@ -315,7 +315,6 @@
                 ' Set the replicated elements according to observations per subset
 
                 Set_Replications(dbconn)
-                'cboStation.Items.Item(i)
 
                 '  Update Station name to enable retrieval of the station details from the station table
                 sql = "update bufr_crex_data set Observation = '" & cboStation.Items.Item(i) & "' where Climsoft_Element = 'station_name';"
@@ -324,6 +323,9 @@
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, dbconn)
 
                 objCmd.ExecuteNonQuery()
+
+                sql = "select wmoid, latitude, longitude, elevation,qualifier from station where stationName = 'DAGORETTI CORNER METEOROLOGICAL STATION';"
+
 
 
                 '            sql = "SELECT lookup_station.id, lookup_station.station_name AS observation, Left([id_alias],2) AS block, Right([id_alias],3) AS [number], IIf([qualifier]=""AUTOMATIC"",2 Or [qualifier]<>""AUTOMATIC"",1) AS type, lookup_location.latitude AS lat, lookup_location.longitude AS lon, lookup_location.elevation AS height FROM (lookup_station INNER JOIN lookup_stationid_alias ON lookup_station.id = lookup_stationid_alias.refers_to) INNER JOIN lookup_location ON lookup_station.id = lookup_location.occupied_by " & _
@@ -845,7 +847,22 @@
             Next
         End With
     End Sub
+    Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+        Dim wmo_block, wmo_No, lat, lon, elev, typ As String
+        sql = "select wmoid, latitude, longitude, elevation, qualifier from station where stationName = '" & stn & "';"
 
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ds.Clear()
+        da.Fill(ds, "stations")
+
+        wmo_block = Strings.Left(ds.Tables("stations").Rows(0).Item("wmoid"), 2)
+        wmo_No = Strings.Right(ds.Tables("stations").Rows(0).Item("wmoid"), 3)
+        lat = ds.Tables("stations").Rows(0).Item("latitude")
+        lon = ds.Tables("stations").Rows(0).Item("longitude")
+        elev = ds.Tables("stations").Rows(0).Item(" elevation")
+        typ = ds.Tables("stations").Rows(0).Item("qualifier")
+
+    End Sub
     Sub Select_Descriptor(conn1 As MySql.Data.MySqlClient.MySqlConnection, elm As String, rep_type As String)
         Dim ds1 As New DataSet
         Dim kount1, num As Integer
