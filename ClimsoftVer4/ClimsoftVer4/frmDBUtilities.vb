@@ -252,7 +252,8 @@ Public Class frmDBUtilities
             .Text = "AWS Data Import"
             .lblType.Visible = False
             .lblType.Text = "aws"
-            .chkObsHour.Visible = False
+            .lblDefaultObsHour.Visible = False
+            .txtObsHour.Visible = False
             '.lblStartRow.Visible = False
             .chkScale.Visible = True
             .chkScale.Checked = True
@@ -264,6 +265,7 @@ Public Class frmDBUtilities
         End With
 
     End Sub
+
 
     Private Sub BackupToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackupToolStripMenuItem.Click
         ''frmBackupRestore.Text = "Backup to Text File"
@@ -299,7 +301,21 @@ Public Class frmDBUtilities
         frmImportDaily.Show()
     End Sub
 
-    Private Sub DailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem.Click
 
+    Private Sub MultipleElementColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MultipleElementColumnsToolStripMenuItem.Click
+        With frmImportDaily
+            .Text = "Observations in Multiple Columns"
+            '.lblType.Visible = False
+            .lblType.Text = "Multiple Elements"
+            '.chkObsHour.Visible = False
+            ''.lblStartRow.Visible = False
+            '.chkScale.Visible = True
+            '.chkScale.Checked = True
+            ''.txtStartRow.Visible = False
+            '.txtObsHour.Visible = False
+            '.txtStn.Visible = True
+            '.lblStn.Visible = True
+            .Show()
+        End With
     End Sub
 End Class

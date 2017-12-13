@@ -866,7 +866,7 @@ Public Class formHourlyWind
             'Check upper limit wind speed
             For Each ctl In Me.Controls
                 obsValue = ctl.Text
-                If Strings.Left(ctl.Name, 5) = "txtDD" And ctl.Text <> "" And valUpperLimit <> "" Then
+                If Strings.Left(ctl.Name, 5) = "txtFF" And ctl.Text <> "" And valUpperLimit <> "" Then
                     If Not objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit) Then
                         ctl.Focus()
                     End If
@@ -876,7 +876,7 @@ Public Class formHourlyWind
             'Check lower limit wind speed
             For Each ctl In Me.Controls
                 obsValue = ctl.Text
-                If Strings.Left(ctl.Name, 5) = "txtDD" And ctl.Text <> "" And valLowerLimit <> "" Then
+                If Strings.Left(ctl.Name, 5) = "txtFF" And ctl.Text <> "" And valLowerLimit <> "" Then
 
                     If Not objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit) Then
                         ctl.Focus()

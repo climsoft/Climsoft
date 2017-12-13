@@ -40,7 +40,6 @@ Partial Class frmImportDaily
         Me.lblDelimiters = New System.Windows.Forms.Label()
         Me.cmdLoadData = New System.Windows.Forms.Button()
         Me.txtObsHour = New System.Windows.Forms.TextBox()
-        Me.chkObsHour = New System.Windows.Forms.CheckBox()
         Me.lblStartRow = New System.Windows.Forms.Label()
         Me.txtStartRow = New System.Windows.Forms.TextBox()
         Me.cmdtest = New System.Windows.Forms.Button()
@@ -57,6 +56,7 @@ Partial Class frmImportDaily
         Me.lblType = New System.Windows.Forms.Label()
         Me.txtStn = New System.Windows.Forms.TextBox()
         Me.lblStn = New System.Windows.Forms.Label()
+        Me.lblDefaultObsHour = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.SuspendLayout()
@@ -214,34 +214,24 @@ Partial Class frmImportDaily
         '
         'txtObsHour
         '
-        Me.txtObsHour.Location = New System.Drawing.Point(321, 71)
+        Me.txtObsHour.Location = New System.Drawing.Point(264, 70)
         Me.txtObsHour.Name = "txtObsHour"
         Me.txtObsHour.Size = New System.Drawing.Size(23, 20)
         Me.txtObsHour.TabIndex = 18
         Me.txtObsHour.Text = "06"
-        '
-        'chkObsHour
-        '
-        Me.chkObsHour.AutoSize = True
-        Me.chkObsHour.Location = New System.Drawing.Point(153, 71)
-        Me.chkObsHour.Name = "chkObsHour"
-        Me.chkObsHour.Size = New System.Drawing.Size(168, 17)
-        Me.chkObsHour.TabIndex = 19
-        Me.chkObsHour.Text = "Use Default Observation Hour"
-        Me.chkObsHour.UseVisualStyleBackColor = True
         '
         'lblStartRow
         '
         Me.lblStartRow.AutoSize = True
         Me.lblStartRow.Location = New System.Drawing.Point(24, 74)
         Me.lblStartRow.Name = "lblStartRow"
-        Me.lblStartRow.Size = New System.Drawing.Size(57, 13)
+        Me.lblStartRow.Size = New System.Drawing.Size(54, 13)
         Me.lblStartRow.TabIndex = 20
-        Me.lblStartRow.Text = "Start Row:"
+        Me.lblStartRow.Text = "Start Row"
         '
         'txtStartRow
         '
-        Me.txtStartRow.Location = New System.Drawing.Point(87, 69)
+        Me.txtStartRow.Location = New System.Drawing.Point(87, 70)
         Me.txtStartRow.Name = "txtStartRow"
         Me.txtStartRow.Size = New System.Drawing.Size(30, 20)
         Me.txtStartRow.TabIndex = 21
@@ -306,9 +296,10 @@ Partial Class frmImportDaily
         'lblColumnHeaders
         '
         Me.lblColumnHeaders.AutoSize = True
+        Me.lblColumnHeaders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblColumnHeaders.Location = New System.Drawing.Point(125, 1)
         Me.lblColumnHeaders.Name = "lblColumnHeaders"
-        Me.lblColumnHeaders.Size = New System.Drawing.Size(126, 13)
+        Me.lblColumnHeaders.Size = New System.Drawing.Size(149, 13)
         Me.lblColumnHeaders.TabIndex = 26
         Me.lblColumnHeaders.Text = "Columns Header Settings"
         '
@@ -359,9 +350,8 @@ Partial Class frmImportDaily
         '
         Me.txtStn.Location = New System.Drawing.Point(218, 102)
         Me.txtStn.Name = "txtStn"
-        Me.txtStn.Size = New System.Drawing.Size(241, 20)
+        Me.txtStn.Size = New System.Drawing.Size(240, 20)
         Me.txtStn.TabIndex = 31
-        Me.txtStn.Visible = False
         '
         'lblStn
         '
@@ -371,13 +361,22 @@ Partial Class frmImportDaily
         Me.lblStn.Size = New System.Drawing.Size(54, 13)
         Me.lblStn.TabIndex = 32
         Me.lblStn.Text = "Station ID"
-        Me.lblStn.Visible = False
+        '
+        'lblDefaultObsHour
+        '
+        Me.lblDefaultObsHour.AutoSize = True
+        Me.lblDefaultObsHour.Location = New System.Drawing.Point(136, 74)
+        Me.lblDefaultObsHour.Name = "lblDefaultObsHour"
+        Me.lblDefaultObsHour.Size = New System.Drawing.Size(127, 13)
+        Me.lblDefaultObsHour.TabIndex = 33
+        Me.lblDefaultObsHour.Text = "Default Observation Hour"
         '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 609)
+        Me.Controls.Add(Me.lblDefaultObsHour)
         Me.Controls.Add(Me.lblStn)
         Me.Controls.Add(Me.txtStn)
         Me.Controls.Add(Me.lblType)
@@ -389,7 +388,6 @@ Partial Class frmImportDaily
         Me.Controls.Add(Me.chkScale)
         Me.Controls.Add(Me.txtStartRow)
         Me.Controls.Add(Me.lblStartRow)
-        Me.Controls.Add(Me.chkObsHour)
         Me.Controls.Add(Me.txtObsHour)
         Me.Controls.Add(Me.cmdLoadData)
         Me.Controls.Add(Me.lblDelimiters)
@@ -403,7 +401,7 @@ Partial Class frmImportDaily
         Me.Controls.Add(Me.cmdOpenFile)
         Me.Controls.Add(Me.DataGridView1)
         Me.Name = "frmImportDaily"
-        Me.Text = "Import Daily text File"
+        Me.Text = "Daily/Hourly Data"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeaders.ResumeLayout(False)
         Me.pnlHeaders.PerformLayout()
@@ -429,7 +427,6 @@ Partial Class frmImportDaily
     Friend WithEvents lblDelimiters As System.Windows.Forms.Label
     Friend WithEvents cmdLoadData As System.Windows.Forms.Button
     Friend WithEvents txtObsHour As System.Windows.Forms.TextBox
-    Friend WithEvents chkObsHour As System.Windows.Forms.CheckBox
     Friend WithEvents lblStartRow As System.Windows.Forms.Label
     Friend WithEvents txtStartRow As System.Windows.Forms.TextBox
     Friend WithEvents cmdtest As System.Windows.Forms.Button
@@ -446,4 +443,5 @@ Partial Class frmImportDaily
     Friend WithEvents lblType As System.Windows.Forms.Label
     Friend WithEvents txtStn As System.Windows.Forms.TextBox
     Friend WithEvents lblStn As System.Windows.Forms.Label
+    Friend WithEvents lblDefaultObsHour As System.Windows.Forms.Label
 End Class

@@ -27,6 +27,7 @@ Partial Class formDataView
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.cmdExport = New System.Windows.Forms.Button()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -41,18 +42,18 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(538, 418)
+        Me.btnHelp.Location = New System.Drawing.Point(579, 418)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(58, 23)
         Me.btnHelp.TabIndex = 8
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(286, 418)
+        Me.btnDelete.Location = New System.Drawing.Point(259, 418)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(58, 23)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -60,9 +61,9 @@ Partial Class formDataView
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(370, 418)
+        Me.btnUpdate.Location = New System.Drawing.Point(339, 418)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(58, 23)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -70,18 +71,28 @@ Partial Class formDataView
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(454, 418)
+        Me.btnClose.Location = New System.Drawing.Point(499, 418)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(58, 23)
         Me.btnClose.TabIndex = 5
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'cmdExport
+        '
+        Me.cmdExport.Location = New System.Drawing.Point(419, 418)
+        Me.cmdExport.Name = "cmdExport"
+        Me.cmdExport.Size = New System.Drawing.Size(58, 23)
+        Me.cmdExport.TabIndex = 9
+        Me.cmdExport.Text = "Export"
+        Me.cmdExport.UseVisualStyleBackColor = True
         '
         'formDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(851, 453)
+        Me.Controls.Add(Me.cmdExport)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
@@ -98,4 +109,5 @@ Partial Class formDataView
     Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents cmdExport As System.Windows.Forms.Button
 End Class
