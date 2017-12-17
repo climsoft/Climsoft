@@ -1,4 +1,20 @@
-﻿Public Class formMetadata
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formMetadata
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -76,6 +92,7 @@
                 FillList(txtStation, "station", "stationId")
                 FillList(txtElement, "obselement", "elementId")
                 FillList(txtInstrument, "instrument", "instrumentId")
+                FillList(txtScheduleClass, "obsscheduleclass", "scheduleClass")
 
                 SetDataSet("stationelement")
                 rec = 0
@@ -164,6 +181,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearElementForm()
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then txtId.Text = ds.Tables(frm).Rows(num).Item("elementId")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("abbreviation")) Then txtAbbreviation.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementName")) Then txtName.Text = ds.Tables(frm).Rows(num).Item("elementName")
@@ -196,6 +214,7 @@
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
+        ClearStationElementForm()
         txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
         txtInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
@@ -211,6 +230,7 @@
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
+        ClearInstrumentForm()
         txtInstrumentId.Text = ds.Tables(frm).Rows(num).Item("instrumentId")
         txtInstName.Text = ds.Tables(frm).Rows(num).Item("instrumentName")
         txtAbbrev.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
@@ -230,6 +250,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearStationHistoryForm()
         txtlocStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtStnType.Text = ds.Tables(frm).Rows(num).Item("stationType")
         txtMethod.Text = ds.Tables(frm).Rows(num).Item("geoLocationMethod")
@@ -249,6 +270,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearStationQualifierForm()
         txtqualifier.Text = ds.Tables(frm).Rows(num).Item("qualifier")
         txtQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtBDate.Text = ds.Tables(frm).Rows(num).Item("qualifierBeginDate")
@@ -262,6 +284,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearFormScheduleClass()
         txtClass.Text = ds.Tables(frm).Rows(num).Item("scheduleClass")
         txtClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
         txtClassDescription.Text = ds.Tables(frm).Rows(num).Item("description")
@@ -272,6 +295,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearPhysicalFeatureForm()
         txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
         txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
@@ -286,6 +310,7 @@
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+
         txtFormId.Text = ds.Tables(frm).Rows(num).Item("formId")
         txtFormDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
@@ -577,7 +602,7 @@ Err:
         ClearStationForm()
     End Sub
 
- 
+
 
     Private Sub cmdFirstRecord_Click(sender As Object, e As EventArgs) Handles cmdFirstRecord.Click
         rec = 0
@@ -1028,7 +1053,7 @@ Err:
         End Try
     End Sub
     Private Sub combSearchStation_Click(sender As Object, e As EventArgs) Handles combSearchStation.Click
-   
+
     End Sub
 
     Sub Locate_Station(fldnm As String, datval As String)
@@ -1180,7 +1205,7 @@ Err:
     End Sub
 
 
-    
+
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         txtFormId.Text = ""
         txtFormDescription.Text = ""
@@ -1231,6 +1256,7 @@ Err:
             ClearInstrumentForm()
 
         Catch ex As Exception
+            MsgBox(ex.Message)
             If Err.Number = 5 Then
                 MsgBox("Invalid Entries; Check values")
             Else
@@ -1804,7 +1830,6 @@ Err:
         End If
     End Sub
 
- 
     Private Sub cmdDeleteFeature_Click(sender As Object, e As EventArgs) Handles cmdDeleteFeature.Click
         If DeleteRecord("physicalfeature", rec) Then
             SetDataSet("physicalfeature")
@@ -1820,6 +1845,53 @@ Err:
         txtClosingDate.Text = ClosingDate.Text
     End Sub
 
+    Private Function DMSToDD(Direction As Char, Deg As String, Min As String, Sec As String) As String
+        ' Convert value in Degrees, Minutes and Seconds (DMS) to Decimal Degrees (DD)
+        ' Direction must be N, S, E or W
+        If IsNumeric(Deg) And IsNumeric(Min) And IsNumeric(Sec) And Not Direction = vbNullChar Then
+            Dim multiplier As Integer = 1
+            Dim decimalDegrees As Double
+            If Direction = "S" OrElse Direction = "W" Then
+                multiplier = -1
+            End If
+            decimalDegrees = multiplier * (Val(Deg) + Val(Min) / 60 + Val(Sec) / 3600)
+            Return Math.Round(decimalDegrees, 2).ToString()
+        Else
+            Return ""
+        End If
+    End Function
+    Private Sub lstNS_Click(sender As Object, e As EventArgs) Handles lstNS.SelectedIndexChanged
+        txtLatitude.Text = DMSToDD(lstNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
+    End Sub
+
+    Private Sub lstEW_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstEW.SelectedIndexChanged
+        txtLongitude.Text = DMSToDD(lstEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
+    End Sub
+
+    Private Sub txtDegreesLat_TextChanged(sender As Object, e As EventArgs) Handles txtDegreesLat.TextChanged
+        txtLatitude.Text = DMSToDD(lstNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
+    End Sub
+
+    Private Sub txtMinutesLat_TextChanged(sender As Object, e As EventArgs) Handles txtMinutesLat.TextChanged
+        txtLatitude.Text = DMSToDD(lstNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
+    End Sub
+
+    Private Sub txtSecondsLat_TextChanged(sender As Object, e As EventArgs) Handles txtSecondsLat.TextChanged
+        txtLatitude.Text = DMSToDD(lstNS.SelectedItem, txtDegreesLat.Text, txtMinutesLat.Text, txtSecondsLat.Text)
+    End Sub
+
+    Private Sub txtDegreesLon_TextChanged(sender As Object, e As EventArgs) Handles txtDegreesLon.TextChanged
+        txtLongitude.Text = DMSToDD(lstEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
+    End Sub
+
+    Private Sub txtMinutesLon_TextChanged(sender As Object, e As EventArgs) Handles txtMinutesLon.TextChanged
+        txtLongitude.Text = DMSToDD(lstEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
+    End Sub
+
+    Private Sub txtSecondsLon_TextChanged(sender As Object, e As EventArgs) Handles txtSecondsLon.TextChanged
+        txtLongitude.Text = DMSToDD(lstEW.SelectedItem, txtDegreesLon.Text, txtMinutesLon.Text, txtSecondsLon.Text)
+    End Sub
+
     'Private Sub ClosingDate_ValueChanged(sender As Object, e As EventArgs) Handles ClosingDate.ValueChanged
     '    txtClosingDate.Text = ClosingDate.Text
     'End Sub
@@ -1827,4 +1899,21 @@ Err:
     'Private Sub OpenDate_ValueChanged(sender As Object, e As EventArgs) Handles OpenDate.ValueChanged
     '    txtOpeningDate.Text = OpenDate.Text
     'End Sub
+
+    Private Sub InstallDate_ValueChanged(sender As Object, e As EventArgs) Handles InstallDate.ValueChanged
+        txtInstallDate.Text = InstallDate.Text
+    End Sub
+
+
+    Private Sub DeinstallDate_ValueChanged(sender As Object, e As EventArgs) Handles DeinstallDate.ValueChanged
+        txtDeinstallDate.Text = DeinstallDate.Text
+    End Sub
+
+    Private Sub BeginDate_ValueChanged(sender As Object, e As EventArgs) Handles BeginDate.ValueChanged
+        txtBeginDate.Text = BeginDate.Text
+    End Sub
+
+    Private Sub Endate_ValueChanged(sender As Object, e As EventArgs) Handles Endate.ValueChanged
+        txtEndate.Text = Endate.Text
+    End Sub
 End Class
