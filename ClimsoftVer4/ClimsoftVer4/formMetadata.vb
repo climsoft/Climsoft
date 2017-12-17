@@ -92,6 +92,7 @@ Public Class formMetadata
                 FillList(txtStation, "station", "stationId")
                 FillList(txtElement, "obselement", "elementId")
                 FillList(txtInstrument, "instrument", "instrumentId")
+                FillList(txtScheduleClass, "obsscheduleclass", "scheduleClass")
 
                 SetDataSet("stationelement")
                 rec = 0
@@ -180,6 +181,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearElementForm()
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementId")) Then txtId.Text = ds.Tables(frm).Rows(num).Item("elementId")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("abbreviation")) Then txtAbbreviation.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
         If Not IsDBNull(ds.Tables(frm).Rows(num).Item("elementName")) Then txtName.Text = ds.Tables(frm).Rows(num).Item("elementName")
@@ -212,6 +214,7 @@ Public Class formMetadata
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
+        ClearStationElementForm()
         txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
         txtInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
@@ -227,6 +230,7 @@ Public Class formMetadata
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         'MsgBox(num & " " & maxRows)
+        ClearInstrumentForm()
         txtInstrumentId.Text = ds.Tables(frm).Rows(num).Item("instrumentId")
         txtInstName.Text = ds.Tables(frm).Rows(num).Item("instrumentName")
         txtAbbrev.Text = ds.Tables(frm).Rows(num).Item("abbreviation")
@@ -246,6 +250,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearStationHistoryForm()
         txtlocStn.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtStnType.Text = ds.Tables(frm).Rows(num).Item("stationType")
         txtMethod.Text = ds.Tables(frm).Rows(num).Item("geoLocationMethod")
@@ -265,6 +270,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearStationQualifierForm()
         txtqualifier.Text = ds.Tables(frm).Rows(num).Item("qualifier")
         txtQualifierStation.Text = ds.Tables(frm).Rows(num).Item("belongsTo")
         txtBDate.Text = ds.Tables(frm).Rows(num).Item("qualifierBeginDate")
@@ -278,6 +284,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearFormScheduleClass()
         txtClass.Text = ds.Tables(frm).Rows(num).Item("scheduleClass")
         txtClassStation.Text = ds.Tables(frm).Rows(num).Item("refersTo")
         txtClassDescription.Text = ds.Tables(frm).Rows(num).Item("description")
@@ -288,6 +295,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+        ClearPhysicalFeatureForm()
         txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
         txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
@@ -302,6 +310,7 @@ Public Class formMetadata
         On Error Resume Next
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
+
         txtFormId.Text = ds.Tables(frm).Rows(num).Item("formId")
         txtFormDescription.Text = ds.Tables(frm).Rows(num).Item("description")
 
@@ -593,7 +602,7 @@ Err:
         ClearStationForm()
     End Sub
 
- 
+
 
     Private Sub cmdFirstRecord_Click(sender As Object, e As EventArgs) Handles cmdFirstRecord.Click
         rec = 0
@@ -1044,7 +1053,7 @@ Err:
         End Try
     End Sub
     Private Sub combSearchStation_Click(sender As Object, e As EventArgs) Handles combSearchStation.Click
-   
+
     End Sub
 
     Sub Locate_Station(fldnm As String, datval As String)
@@ -1196,7 +1205,7 @@ Err:
     End Sub
 
 
-    
+
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         txtFormId.Text = ""
         txtFormDescription.Text = ""
@@ -1247,6 +1256,7 @@ Err:
             ClearInstrumentForm()
 
         Catch ex As Exception
+            MsgBox(ex.Message)
             If Err.Number = 5 Then
                 MsgBox("Invalid Entries; Check values")
             Else
@@ -1889,4 +1899,21 @@ Err:
     'Private Sub OpenDate_ValueChanged(sender As Object, e As EventArgs) Handles OpenDate.ValueChanged
     '    txtOpeningDate.Text = OpenDate.Text
     'End Sub
+
+    Private Sub InstallDate_ValueChanged(sender As Object, e As EventArgs) Handles InstallDate.ValueChanged
+        txtInstallDate.Text = InstallDate.Text
+    End Sub
+
+
+    Private Sub DeinstallDate_ValueChanged(sender As Object, e As EventArgs) Handles DeinstallDate.ValueChanged
+        txtDeinstallDate.Text = DeinstallDate.Text
+    End Sub
+
+    Private Sub BeginDate_ValueChanged(sender As Object, e As EventArgs) Handles BeginDate.ValueChanged
+        txtBeginDate.Text = BeginDate.Text
+    End Sub
+
+    Private Sub Endate_ValueChanged(sender As Object, e As EventArgs) Handles Endate.ValueChanged
+        txtEndate.Text = Endate.Text
+    End Sub
 End Class

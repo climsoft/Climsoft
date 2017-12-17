@@ -315,7 +315,6 @@
                 ' Set the replicated elements according to observations per subset
 
                 Set_Replications(dbconn)
-                'cboStation.Items.Item(i)
 
                 '  Update Station name to enable retrieval of the station details from the station table
                 sql = "update bufr_crex_data set Observation = '" & cboStation.Items.Item(i) & "' where Climsoft_Element = 'station_name';"
@@ -325,80 +324,84 @@
 
                 objCmd.ExecuteNonQuery()
 
+                Update_Station_Details(dbconn, cboStation.Items(i))
+                Update_Instruments_Height(dbconn, cboStation.Items(i))
 
-                '            sql = "SELECT lookup_station.id, lookup_station.station_name AS observation, Left([id_alias],2) AS block, Right([id_alias],3) AS [number], IIf([qualifier]=""AUTOMATIC"",2 Or [qualifier]<>""AUTOMATIC"",1) AS type, lookup_location.latitude AS lat, lookup_location.longitude AS lon, lookup_location.elevation AS height FROM (lookup_station INNER JOIN lookup_stationid_alias ON lookup_station.id = lookup_stationid_alias.refers_to) INNER JOIN lookup_location ON lookup_station.id = lookup_location.occupied_by " & _
-                '                  "WHERE (((lookup_station.station_name)=""" & rs.Fields("station_name") & """) AND ((lookup_stationid_alias.belongs_to)=""wmo_id""));"
 
-                '            If clicom.query_exist("qry_crex_location", dbase) Then db.QueryDefs.Delete("qry_crex_location")
-                '            qry = db.CreateQueryDef("qry_crex_location", sql)
+                ''            sql = "SELECT lookup_station.id, lookup_station.station_name AS observation, Left([id_alias],2) AS block, Right([id_alias],3) AS [number], IIf([qualifier]=""AUTOMATIC"",2 Or [qualifier]<>""AUTOMATIC"",1) AS type, lookup_location.latitude AS lat, lookup_location.longitude AS lon, lookup_location.elevation AS height FROM (lookup_station INNER JOIN lookup_stationid_alias ON lookup_station.id = lookup_stationid_alias.refers_to) INNER JOIN lookup_location ON lookup_station.id = lookup_location.occupied_by " & _
+                ''                  "WHERE (((lookup_station.station_name)=""" & rs.Fields("station_name") & """) AND ((lookup_stationid_alias.belongs_to)=""wmo_id""));"
 
-                '            ' Set the recordset to the location query
-                '            rsbx1 = db.OpenRecordset("qry_crex_location")
+                ''            If clicom.query_exist("qry_crex_location", dbase) Then db.QueryDefs.Delete("qry_crex_location")
+                ''            qry = db.CreateQueryDef("qry_crex_location", sql)
 
-                '            'The following statement helps to skip a record without location. But it has been found to work similarly with resume next on empty record error
-                '            'If rsbx1.RecordCount = 0 Then GoTo NextSubset
+                ''            ' Set the recordset to the location query
+                ''            rsbx1 = db.OpenRecordset("qry_crex_location")
 
-                '            ' Determine whether it a is sysnoptic station
-                '            If IsNull(rsbx1.Fields("block")) Then
-                '                MsgBox("Can't Code. WMO Station Number not found")
-                '                Exit Sub
-                '                ' If MsgBox("Not a Synoptic station. Continue?", vbYesNo, "Synop Crex") = vbNo Then Exit Sub
-                '            End If
+                ''            'The following statement helps to skip a record without location. But it has been found to work similarly with resume next on empty record error
+                ''            'If rsbx1.RecordCount = 0 Then GoTo NextSubset
 
-                '            'Update Data with the synop_crex form
-                '            With rsbx
-                '                .MoveFirst()
-                '                Do While .EOF = False
-                '                    ' Update Station Name, Observation times and Instrument parameters from the synop interface form
-                '                    .Edit()
-                '                    Select Case .Fields("Climsoft_Element")
-                '                        '        Case "station_WMO_bloc"
-                '                        '           .Fields("Observation") = rsbx1.Fields("bloc")
-                '                        '        Case "station_WMO_number"
-                '                        '           .Fields("Observation") = rsbx1.Fields("number")
-                '                        Case "station_name"
-                '                            .Fields("Observation") = rs.Fields("station_name") 'txtstation
-                '                        Case "datetime_year"
-                '                            .Fields("observation") = Format(rs.Fields("yyyy"), "0000") 'Format(txtyear, "0000")
-                '                        Case "datetime_month"
-                '                            .Fields("observation") = Format(rs.Fields("mm"), "00") 'Format(txtmonth, "00")
-                '                        Case "datetime_day"
-                '                            .Fields("observation") = Format(rs.Fields("dd"), "00") 'Format(txtday, "00")
-                '                        Case "datetime_hour"
-                '                            .Fields("observation") = Format(rs.Fields("hh"), "00") 'Format(txthour, "00")
-                '                        Case "datetime_minute"
-                '                            .Fields("observation") = Format(txtminute, "00")
-                '                            '        Case "5"
-                '                        Case "Temp_SH" ' Sensor height for temperature measurement
-                '                            If txtth = "" Then
-                '                                .Fields("observation") = "/"
-                '                            Else
-                '                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level")  'txtth
-                '                            End If
-                '                        Case "Vis_SH" ' Sensor height for visibility measurement
-                '                            If txtvh = "" Then
-                '                                .Fields("observation") = "/"
-                '                            Else
-                '                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "VISIB_I", "instal_level") 'txtvh
-                '                            End If
-                '                        Case "R24_SH" ' Sensor height for precipitation measurement
-                '                            If txtrh = "" Then
-                '                                .Fields("observation") = "/"
-                '                            Else
-                '                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "PRECIP_I", "instal_level") 'txtrh
-                '                            End If
-                '                        Case "xt_SH" ' Sensor height for extreme temperature measurement
-                '                            If txtth = "" Then
-                '                                .Fields("observation") = "/"
-                '                            Else
-                '                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level") 'txtth
-                '                            End If
-                '                        Case "w_SH" ' Sensor height for wind measurement
-                '                            If txtwh = "" Then
-                '                                .Fields("observation") = "/"
-                '                            Else
-                '                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "WIND_I", "instal_level") 'txtwh
-                '                            End If
+                ''            ' Determine whether it a is sysnoptic station
+                ''            If IsNull(rsbx1.Fields("block")) Then
+                ''                MsgBox("Can't Code. WMO Station Number not found")
+                ''                Exit Sub
+                ''                ' If MsgBox("Not a Synoptic station. Continue?", vbYesNo, "Synop Crex") = vbNo Then Exit Sub
+                ''            End If
+
+
+                ''            'Update Data with the synop_crex form
+                ''            With rsbx
+                ''                .MoveFirst()
+                ''                Do While .EOF = False
+                ''                    ' Update Station Name, Observation times and Instrument parameters from the synop interface form
+                ''                    .Edit()
+                ''                    Select Case .Fields("Climsoft_Element")
+                ''                        '        Case "station_WMO_bloc"
+                ''                        '           .Fields("Observation") = rsbx1.Fields("bloc")
+                ''                        '        Case "station_WMO_number"
+                ''                        '           .Fields("Observation") = rsbx1.Fields("number")
+                ''                        Case "station_name"
+                ''                            .Fields("Observation") = rs.Fields("station_name") 'txtstation
+                ''                        Case "datetime_year"
+                ''                            .Fields("observation") = Format(rs.Fields("yyyy"), "0000") 'Format(txtyear, "0000")
+                ''                        Case "datetime_month"
+                ''                            .Fields("observation") = Format(rs.Fields("mm"), "00") 'Format(txtmonth, "00")
+                ''                        Case "datetime_day"
+                ''                            .Fields("observation") = Format(rs.Fields("dd"), "00") 'Format(txtday, "00")
+                ''                        Case "datetime_hour"
+                ''                            .Fields("observation") = Format(rs.Fields("hh"), "00") 'Format(txthour, "00")
+                ''                        Case "datetime_minute"
+                ''                            .Fields("observation") = Format(txtminute, "00")
+                ''                            '        Case "5"
+                ''                        Case "Temp_SH" ' Sensor height for temperature measurement
+                ''                            If txtth = "" Then
+                ''                                .Fields("observation") = "/"
+                ''                            Else
+                ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level")  'txtth
+                ''                            End If
+                ''                        Case "Vis_SH" ' Sensor height for visibility measurement
+                ''                            If txtvh = "" Then
+                ''                                .Fields("observation") = "/"
+                ''                            Else
+                ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "VISIB_I", "instal_level") 'txtvh
+                ''                            End If
+                ''                        Case "R24_SH" ' Sensor height for precipitation measurement
+                ''                            If txtrh = "" Then
+                ''                                .Fields("observation") = "/"
+                ''                            Else
+                ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "PRECIP_I", "instal_level") 'txtrh
+                ''                            End If
+                ''                        Case "xt_SH" ' Sensor height for extreme temperature measurement
+                ''                            If txtth = "" Then
+                ''                                .Fields("observation") = "/"
+                ''                            Else
+                ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level") 'txtth
+                ''                            End If
+                ''                        Case "w_SH" ' Sensor height for wind measurement
+                ''                            If txtwh = "" Then
+                ''                                .Fields("observation") = "/"
+                ''                            Else
+                ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "WIND_I", "instal_level") 'txtwh
+                ''                            End If
                 '                        Case "ww_TP" ' Time Period for Past and Present Weather
                 '                            If CLng(Hour(txthour)) Mod 6 = 0 Then
                 '                                .Fields("observation") = -6
@@ -738,6 +741,7 @@
             'Close #20
 
             '        Exit Sub
+            MsgBox("Finished Encoding")
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
@@ -845,6 +849,85 @@
             Next
         End With
     End Sub
+    Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+        'MsgBox(stn)
+        Dim wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
+        sql = "select wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ds.Clear()
+            da.Fill(ds, "stations")
+
+            wmo_block = Strings.Left(ds.Tables("stations").Rows(0).Item("wmoid"), 2)
+            wmo_No = Strings.Right(ds.Tables("stations").Rows(0).Item("wmoid"), 3)
+            lat = ds.Tables("stations").Rows(0).Item("latitude")
+            lon = ds.Tables("stations").Rows(0).Item("longitude")
+            elev = ds.Tables("stations").Rows(0).Item("elevation")
+            qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
+
+            If qualifier = "SYNOPTIC" Then
+                typ = 1
+            Else
+                typ = 2
+            End If
+            'Update the station details
+            Update_Observation(conn1, wmo_block, "station_WMO_bloc")
+            Update_Observation(conn1, wmo_No, "station_WMO_number")
+            Update_Observation(conn1, lat, "station_deglatitude")
+            Update_Observation(conn1, lon, "station_deglongitude")
+            Update_Observation(conn1, elev, "station_elevation")
+            Update_Observation(conn1, typ, "station_qualifier")
+
+            'Update the datetime details
+            Update_Observation(conn1, txtYear.Text, "datetime_year")
+            Update_Observation(conn1, cboMonth.Text, "datetime_month")
+            Update_Observation(conn1, cboDay.Text, "datetime_day")
+            Update_Observation(conn1, cboHour.Text, "datetime_hour")
+            Update_Observation(conn1, "00", "datetime_minute")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub Update_Instruments_Height(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
+        sql = "select describedby as code, height from stationelement where recordedfrom = '" & stn & "';"
+
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ds.Clear()
+            da.Fill(ds, "instruments")
+            With ds.Tables("instruments")
+                For i = 0 To .Rows.Count - 1
+                    Select Case .Rows(i).Item("code")
+                        Case 5 ' Pecipitation Instrument
+                            Update_Observation(conn1, .Rows(i).Item("height"), "R24_SH")
+                        Case 2  ' Extreme Temperature Instrument
+                            Update_Observation(conn1, .Rows(i).Item("height"), "Temp_SH")
+                        Case 111 ' Wind Instrument
+                            Update_Observation(conn1, .Rows(i).Item("height"), "w_SH")
+                        Case 110 ' Visibility Instrument
+                            Update_Observation(conn1, .Rows(i).Item("height"), "Vis_SH")
+                    End Select
+                Next
+            End With
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub Update_Observation(conn1 As MySql.Data.MySqlClient.MySqlConnection, data As String, element As String)
+        sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
+        ' Create the Command for executing query and set its properties
+        Try
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+            'Execute query
+            objCmd.ExecuteNonQuery()
+            'MsgBox(typ)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
 
     Sub Select_Descriptor(conn1 As MySql.Data.MySqlClient.MySqlConnection, elm As String, rep_type As String)
         Dim ds1 As New DataSet

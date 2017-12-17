@@ -2,7 +2,7 @@
     Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
     Dim recCommit As New dataEntryGlobalRoutines
     Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim dbConnectionString As String
+    Dim dbConnectionString, dat, flg As String
     Dim ds1 As New DataSet
     Dim dsNewRow As DataRow
     Dim sql As String
@@ -238,7 +238,7 @@
             ' load data into observationinitial table
 
             ' Create sql query
-            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue);"
+            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag);"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
             'Execute query
@@ -279,7 +279,7 @@
         If hly And Not dly Then Get_DataCat = "hourly"
     End Function
     Sub Load_Daily1()
-        Dim dat, stn, code, yy, mm, dd, hh, datetime As String
+        Dim stn, code, yy, mm, dd, hh, datetime As String
         Try
             With DataGridView1
                 For i = CLng(txtStartRow.Text) - 1 To .RowCount - Val(txtStartRow.Text) '1
@@ -297,12 +297,17 @@
                     For j = 0 To .Columns.Count - 1
                         If .Columns(j).Name = "value" Then
                             dat = .Rows(i).Cells(j).Value
- 
-                            If chkScale.Checked = True Then
-                                Scale_Data(code, dat)
-                                'MsgBox(dat)
+                            flg = ""
+                            If IsNumeric(dat) Then
+                                If chkScale.Checked = True Then
+                                    Scale_Data(code, dat)
+                                End If
+                            Else
+                                Get_Value_Flag(code, dat, flg)
+
                             End If
-                            If IsDate(datetime) Then If Not Add_Record(stn, code, datetime, dat) Then Exit Sub
+
+                            If IsDate(datetime) Then If Not Add_Record(stn, code, datetime, dat, flg) Then Exit Sub
 
                             Exit For
                             'Exit Sub
@@ -316,9 +321,10 @@
         End Try
 
     End Sub
+
     Sub Load_Daily2()
 
-        Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
+        Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg As String
         Dim i, j As Integer
 
         Try
@@ -335,10 +341,17 @@
                     For j = 0 To .Columns.Count - 1
                         hd = .Columns(j).Name
                         dat = .Rows(i).Cells(j).Value
+                        flg = ""
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
-                            If chkScale.Checked = True Then Scale_Data(cod, dat)
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit For 'Sub
+                            If IsNumeric(dat) Then
+                                If chkScale.Checked = True Then Scale_Data(cod, dat)
+                            Else
+                                Get_Value_Flag(cod, dat, flg)
+                                'dat = ""
+                                'flg = "M"
+                            End If
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, hd)) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
                         End If
                     Next
                 Next
@@ -352,7 +365,7 @@
 
     Sub Load_Hourly()
         'MsgBox("form_hourly")
-        Dim dt, st, cod, y, m, d, h, dttime, hd, dat As String
+        Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg As String
         Dim i, j As Integer
         Try
             With DataGridView1
@@ -367,10 +380,18 @@
                     For j = 0 To .Columns.Count - 1
                         dat = .Rows(i).Cells(j).Value
                         hd = .Columns(j).Name
-                        If chkScale.Checked = True Then Scale_Data(cod, dat)
+                        flg = ""
+                        If IsNumeric(dat) Then
+                            If chkScale.Checked = True Then Scale_Data(cod, dat)
+                        Else
+                            Get_Value_Flag(cod, dat, flg)
+                            'dat = ""
+                            'flg = "M"
+                        End If
+
                         If IsNumeric(hd) Then
                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
-                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat) Then Exit For 'Sub
+                            If IsDate(dttime) And IsDate(DateSerial(y, m, d)) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
                         End If
                     Next
                 Next
@@ -383,7 +404,7 @@
 
     Sub Load_Aws()
         'MsgBox("Aws")
-        Dim stn, code, dttim, dt, tt, dat As String
+        Dim stn, code, dttim, dt, tt, dat, flg As String
         Dim i, j As Integer
         Dim dt_tm As Boolean
 
@@ -408,17 +429,27 @@
                                 dt = .Rows(i).Cells(j).Value
                             ElseIf .Columns(j).Name = "time" Then ' Separate Time column found 
                                 tt = .Rows(i).Cells(j).Value
+                            ElseIf .Columns(j).Name = "NA" Then ' Not Required
+                                ' Do nothing
                             Else ' Data Column found
 
                                 code = .Columns(j).Name
                                 dat = .Rows(i).Cells(j).Value
                                 If dt_tm = False Then dttim = dt & " " & tt
+
                                 If IsDate(dttim) Then
+
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
-                                    'If stn = "" Then stn = txtStn.Text
-                                    If Get_Code_Scale(code, dat) Then
-                                        Add_Record(stn, code, dttim, dat)
+
+                                    flg = ""
+                                    If IsNumeric(dat) Then
+                                        If chkScale.Checked = True Then Scale_Data(code, dat)
+                                    Else
+                                        Get_Value_Flag(code, dat, flg)
                                     End If
+                                    'If Get_Code_Scale(code, dat) Then
+                                    Add_Record(stn, code, dttim, dat, flg)
+                                    'End If
                                 End If
                             End If
                         Next
@@ -431,7 +462,7 @@
     End Sub
     Sub Load_ColumnElems()
         'MsgBox("Column Elements")
-        Dim stn, code, yr, mn, dy, hr, dt_tm, dat As String
+        Dim stn, code, yr, mn, dy, hr, dt_tm, dat, flg As String
         Dim i, j, dttcom As Integer
 
         Try
@@ -474,10 +505,19 @@
 
                             code = .Columns(j).Name
                             dat = .Rows(i).Cells(j).Value
-
-                            If Get_Code_Scale(code, dat) Then
-                                Add_Record(stn, code, dt_tm, dat)
+                            flg = ""
+                            If IsNumeric(dat) Then
+                                If chkScale.Checked = True Then Scale_Data(code, dat)
+                            Else
+                                Get_Value_Flag(code, dat, flg)
+                                'dat = ""
+                                'flg = "M"
                             End If
+                            Add_Record(stn, code, dt_tm, dat, flg)
+
+                            'If Get_Code_Scale(code, dat) Then
+                            '    Add_Record(stn, code, dt_tm, dat)
+                            'End If
 
                         End If
                     Next j
@@ -487,7 +527,27 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+    Sub Get_Value_Flag(code As String, ByRef dat As String, ByRef flg As String)
+        Dim datstr, flgchr As String
 
+        If Len(dat) = 0 Then
+            dat = ""
+            flg = "M"
+        Else
+            datstr = Strings.Left(dat, Len(dat) - 1)
+            flgchr = Strings.Right(dat, 1)
+            If Not IsNumeric(datstr) Or IsNumeric(flgchr) Then
+                dat = ""
+                flg = "M"
+            Else
+                dat = datstr
+                If chkScale.Checked = True Then Scale_Data(code, dat)
+                flg = Strings.UCase(flgchr)
+            End If
+        End If
+
+
+    End Sub
     'Function Get_Station(rw As Long) As String
     '    Get_Station = ""
     '    With DataGridView1
@@ -532,7 +592,7 @@
         'DataGridView1.Columns(CInt(lstColumn.Text) - 1).Name = cmbFields.Text
         'DataGridView1.Refresh()
     End Sub
-    Sub Update_database(stn As String, code As String, datetime As String, dat As String)
+    Sub Update_database(stn As String, code As String, datetime As String, dat As String, flg As String)
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
 
         Try
@@ -550,6 +610,7 @@
             dsNewRow.Item("obsDatetime") = datetime
             dsNewRow.Item("obsLevel") = "surface"
             dsNewRow.Item("obsValue") = dat
+            dsNewRow.Item("flag") = flg
             dsNewRow.Item("qcStatus") = 0
             dsNewRow.Item("acquisitionType") = 0
             ds1.Tables("observationinitial").Rows.Add(dsNewRow)
@@ -561,16 +622,16 @@
     End Sub
     Private Sub cmdtest_Click(sender As Object, e As EventArgs) Handles cmdtest.Click
         'Update_database("8535004", "5", "2004-02-01 00:00", "0.1")
-        Add_Record("8535004", "2", "2004-2-1 9:00", "0.1")
+        Add_Record("8535004", "2", "2004-2-1 9:00", "0.1", "")
     End Sub
 
 
-    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String) As Boolean
+    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String) As Boolean
         'MsgBox(stn & " " & datetime)
         Dim dat As String
 
         Try
-            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal
+            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg
 
             Print(101, dat)
             PrintLine(101)

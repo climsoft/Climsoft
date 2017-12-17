@@ -1347,6 +1347,7 @@ Public Class formSynopRA1
             conn.ConnectionString = myConnectionString
             conn.Open()
 
+            ' Get all with the same observation time to constitute the subset of stations for encoding
             sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
             'MsgBox(sql)
@@ -1361,6 +1362,7 @@ Public Class formSynopRA1
             frmSynopTDCF.cboDay.Text = cboDay.Text
             frmSynopTDCF.cboHour.Text = cboHour.Text
 
+            ' Populate the station combo box with the stations for the subset
             For i = 0 To kount - 1
                 'MsgBox(ds.Tables("form_synoptic_2_ra1").Rows(i).Item("stationId"))
                 frmSynopTDCF.cboStation.Items.Add(ds.Tables("form_synoptic_2_ra1").Rows(i).Item("stationId"))

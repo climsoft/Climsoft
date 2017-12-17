@@ -134,6 +134,9 @@ Partial Class formMetadata
         Me.TabStationElement = New System.Windows.Forms.TabPage()
         Me.lblStationElement = New System.Windows.Forms.Label()
         Me.grpStationElement = New System.Windows.Forms.GroupBox()
+        Me.txtScheduleClass = New System.Windows.Forms.ComboBox()
+        Me.txtEndate = New System.Windows.Forms.TextBox()
+        Me.txtBeginDate = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.cmdClearStationElement = New System.Windows.Forms.Button()
         Me.cmdViewStElement = New System.Windows.Forms.Button()
@@ -149,10 +152,9 @@ Partial Class formMetadata
         Me.txtInstrument = New System.Windows.Forms.ComboBox()
         Me.txtElement = New System.Windows.Forms.ComboBox()
         Me.txtStation = New System.Windows.Forms.ComboBox()
-        Me.txtEndate = New System.Windows.Forms.DateTimePicker()
-        Me.txtBeginDate = New System.Windows.Forms.DateTimePicker()
+        Me.Endate = New System.Windows.Forms.DateTimePicker()
+        Me.BeginDate = New System.Windows.Forms.DateTimePicker()
         Me.txtHeight = New System.Windows.Forms.TextBox()
-        Me.txtScheduleClass = New System.Windows.Forms.TextBox()
         Me.lblBdate = New System.Windows.Forms.Label()
         Me.lblHeight = New System.Windows.Forms.Label()
         Me.lblSchedule = New System.Windows.Forms.Label()
@@ -162,6 +164,10 @@ Partial Class formMetadata
         Me.lblstation = New System.Windows.Forms.Label()
         Me.TabInstrument = New System.Windows.Forms.TabPage()
         Me.grpInstrument = New System.Windows.Forms.GroupBox()
+        Me.txtInstrStn = New System.Windows.Forms.ComboBox()
+        Me.lbStationID = New System.Windows.Forms.Label()
+        Me.txtDeinstallDate = New System.Windows.Forms.TextBox()
+        Me.txtInstallDate = New System.Windows.Forms.TextBox()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
         Me.cmdClear2 = New System.Windows.Forms.Button()
         Me.cmdViewInstrument = New System.Windows.Forms.Button()
@@ -177,12 +183,10 @@ Partial Class formMetadata
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
         Me.picInstrument = New System.Windows.Forms.PictureBox()
         Me.txthgt = New System.Windows.Forms.TextBox()
-        Me.txtDeinstallDate = New System.Windows.Forms.DateTimePicker()
-        Me.txtInstallDate = New System.Windows.Forms.DateTimePicker()
-        Me.lblInstrStnId = New System.Windows.Forms.Label()
+        Me.DeinstallDate = New System.Windows.Forms.DateTimePicker()
+        Me.InstallDate = New System.Windows.Forms.DateTimePicker()
         Me.lblInstalledAt = New System.Windows.Forms.Label()
         Me.lblDeinstalDate = New System.Windows.Forms.Label()
-        Me.txtInstrStn = New System.Windows.Forms.ComboBox()
         Me.txtUncertainity = New System.Windows.Forms.TextBox()
         Me.txtManufacturer = New System.Windows.Forms.TextBox()
         Me.txtModel = New System.Windows.Forms.TextBox()
@@ -470,6 +474,8 @@ Partial Class formMetadata
         '
         'grpComputationDD
         '
+       Me.grpComputationDD.BackColor = System.Drawing.Color.Snow
+
         Me.grpComputationDD.Controls.Add(Me.lblEW)
         Me.grpComputationDD.Controls.Add(Me.lblNS)
         Me.grpComputationDD.Controls.Add(Me.lstEW)
@@ -486,17 +492,21 @@ Partial Class formMetadata
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLon)
         Me.grpComputationDD.Controls.Add(Me.txtDegreesLat)
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLat)
-        Me.grpComputationDD.Location = New System.Drawing.Point(244, 72)
+
+        Me.grpComputationDD.Location = New System.Drawing.Point(200, 69)
         Me.grpComputationDD.Name = "grpComputationDD"
-        Me.grpComputationDD.Size = New System.Drawing.Size(455, 82)
+        Me.grpComputationDD.Size = New System.Drawing.Size(455, 69)
         Me.grpComputationDD.TabIndex = 63
         Me.grpComputationDD.TabStop = False
-        Me.grpComputationDD.Text = "Computation of Decimal Degrees"
+        Me.grpComputationDD.Text = "Latitude and Longitude Decimal Degrees Computation"
+
         '
         'lblEW
         '
         Me.lblEW.AutoSize = True
-        Me.lblEW.Location = New System.Drawing.Point(356, 59)
+
+        Me.lblEW.Location = New System.Drawing.Point(356, 46)
+
         Me.lblEW.Name = "lblEW"
         Me.lblEW.Size = New System.Drawing.Size(30, 13)
         Me.lblEW.TabIndex = 65
@@ -505,7 +515,9 @@ Partial Class formMetadata
         'lblNS
         '
         Me.lblNS.AutoSize = True
-        Me.lblNS.Location = New System.Drawing.Point(359, 22)
+
+        Me.lblNS.Location = New System.Drawing.Point(359, 18)
+
         Me.lblNS.Name = "lblNS"
         Me.lblNS.Size = New System.Drawing.Size(27, 13)
         Me.lblNS.TabIndex = 64
@@ -515,7 +527,9 @@ Partial Class formMetadata
         '
         Me.lstEW.FormattingEnabled = True
         Me.lstEW.Items.AddRange(New Object() {"E", "W"})
-        Me.lstEW.Location = New System.Drawing.Point(395, 55)
+
+        Me.lstEW.Location = New System.Drawing.Point(395, 42)
+
         Me.lstEW.Name = "lstEW"
         Me.lstEW.Size = New System.Drawing.Size(41, 21)
         Me.lstEW.TabIndex = 63
@@ -524,14 +538,18 @@ Partial Class formMetadata
         '
         Me.lstNS.FormattingEnabled = True
         Me.lstNS.Items.AddRange(New Object() {"N", "S"})
-        Me.lstNS.Location = New System.Drawing.Point(395, 19)
+
+        Me.lstNS.Location = New System.Drawing.Point(395, 15)
+
         Me.lstNS.Name = "lstNS"
         Me.lstNS.Size = New System.Drawing.Size(41, 21)
         Me.lstNS.TabIndex = 62
         '
         'txtSecondsLon
         '
-        Me.txtSecondsLon.Location = New System.Drawing.Point(295, 56)
+
+        Me.txtSecondsLon.Location = New System.Drawing.Point(295, 43)
+
         Me.txtSecondsLon.Name = "txtSecondsLon"
         Me.txtSecondsLon.Size = New System.Drawing.Size(55, 20)
         Me.txtSecondsLon.TabIndex = 60
@@ -539,7 +557,9 @@ Partial Class formMetadata
         'lblSecondsLon
         '
         Me.lblSecondsLon.AutoSize = True
-        Me.lblSecondsLon.Location = New System.Drawing.Point(242, 59)
+
+        Me.lblSecondsLon.Location = New System.Drawing.Point(242, 46)
+
         Me.lblSecondsLon.Name = "lblSecondsLon"
         Me.lblSecondsLon.Size = New System.Drawing.Size(49, 13)
         Me.lblSecondsLon.TabIndex = 61
@@ -547,7 +567,9 @@ Partial Class formMetadata
         '
         'txtSecondsLat
         '
-        Me.txtSecondsLat.Location = New System.Drawing.Point(296, 19)
+
+        Me.txtSecondsLat.Location = New System.Drawing.Point(296, 15)
+
         Me.txtSecondsLat.Name = "txtSecondsLat"
         Me.txtSecondsLat.Size = New System.Drawing.Size(54, 20)
         Me.txtSecondsLat.TabIndex = 58
@@ -555,7 +577,9 @@ Partial Class formMetadata
         'lblSecondsLat
         '
         Me.lblSecondsLat.AutoSize = True
-        Me.lblSecondsLat.Location = New System.Drawing.Point(243, 22)
+
+        Me.lblSecondsLat.Location = New System.Drawing.Point(243, 18)
+
         Me.lblSecondsLat.Name = "lblSecondsLat"
         Me.lblSecondsLat.Size = New System.Drawing.Size(49, 13)
         Me.lblSecondsLat.TabIndex = 59
@@ -563,7 +587,9 @@ Partial Class formMetadata
         '
         'txtMinutesLon
         '
-        Me.txtMinutesLon.Location = New System.Drawing.Point(173, 56)
+
+        Me.txtMinutesLon.Location = New System.Drawing.Point(173, 43)
+
         Me.txtMinutesLon.Name = "txtMinutesLon"
         Me.txtMinutesLon.Size = New System.Drawing.Size(58, 20)
         Me.txtMinutesLon.TabIndex = 56
@@ -571,7 +597,9 @@ Partial Class formMetadata
         'lblMinutesLon
         '
         Me.lblMinutesLon.AutoSize = True
-        Me.lblMinutesLon.Location = New System.Drawing.Point(123, 59)
+
+        Me.lblMinutesLon.Location = New System.Drawing.Point(123, 46)
+
         Me.lblMinutesLon.Name = "lblMinutesLon"
         Me.lblMinutesLon.Size = New System.Drawing.Size(44, 13)
         Me.lblMinutesLon.TabIndex = 57
@@ -579,7 +607,9 @@ Partial Class formMetadata
         '
         'txtMinutesLat
         '
-        Me.txtMinutesLat.Location = New System.Drawing.Point(174, 19)
+
+        Me.txtMinutesLat.Location = New System.Drawing.Point(174, 15)
+
         Me.txtMinutesLat.Name = "txtMinutesLat"
         Me.txtMinutesLat.Size = New System.Drawing.Size(58, 20)
         Me.txtMinutesLat.TabIndex = 54
@@ -587,7 +617,9 @@ Partial Class formMetadata
         'lblMinutesLat
         '
         Me.lblMinutesLat.AutoSize = True
-        Me.lblMinutesLat.Location = New System.Drawing.Point(124, 22)
+
+        Me.lblMinutesLat.Location = New System.Drawing.Point(124, 18)
+
         Me.lblMinutesLat.Name = "lblMinutesLat"
         Me.lblMinutesLat.Size = New System.Drawing.Size(44, 13)
         Me.lblMinutesLat.TabIndex = 55
@@ -595,7 +627,9 @@ Partial Class formMetadata
         '
         'txtDegreesLon
         '
-        Me.txtDegreesLon.Location = New System.Drawing.Point(56, 56)
+
+        Me.txtDegreesLon.Location = New System.Drawing.Point(56, 43)
+
         Me.txtDegreesLon.Name = "txtDegreesLon"
         Me.txtDegreesLon.Size = New System.Drawing.Size(59, 20)
         Me.txtDegreesLon.TabIndex = 52
@@ -603,7 +637,9 @@ Partial Class formMetadata
         'lblDegreesLon
         '
         Me.lblDegreesLon.AutoSize = True
-        Me.lblDegreesLon.Location = New System.Drawing.Point(3, 59)
+
+        Me.lblDegreesLon.Location = New System.Drawing.Point(3, 46)
+
         Me.lblDegreesLon.Name = "lblDegreesLon"
         Me.lblDegreesLon.Size = New System.Drawing.Size(47, 13)
         Me.lblDegreesLon.TabIndex = 53
@@ -611,7 +647,9 @@ Partial Class formMetadata
         '
         'txtDegreesLat
         '
-        Me.txtDegreesLat.Location = New System.Drawing.Point(57, 19)
+
+        Me.txtDegreesLat.Location = New System.Drawing.Point(57, 15)
+
         Me.txtDegreesLat.Name = "txtDegreesLat"
         Me.txtDegreesLat.Size = New System.Drawing.Size(59, 20)
         Me.txtDegreesLat.TabIndex = 50
@@ -619,7 +657,9 @@ Partial Class formMetadata
         'lblDegreesLat
         '
         Me.lblDegreesLat.AutoSize = True
-        Me.lblDegreesLat.Location = New System.Drawing.Point(4, 22)
+
+        Me.lblDegreesLat.Location = New System.Drawing.Point(4, 18)
+
         Me.lblDegreesLat.Name = "lblDegreesLat"
         Me.lblDegreesLat.Size = New System.Drawing.Size(47, 13)
         Me.lblDegreesLat.TabIndex = 51
@@ -717,14 +757,14 @@ Partial Class formMetadata
         Me.Panel2.Controls.Add(Me.cmdUpdate)
         Me.Panel2.Controls.Add(Me.cmdAddNew)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(3, 341)
+        Me.Panel2.Location = New System.Drawing.Point(3, 337)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(721, 25)
+        Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
         'cmdImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(597, -2)
+        Me.cmdImport.Location = New System.Drawing.Point(597, 0)
         Me.cmdImport.Name = "cmdImport"
         Me.cmdImport.Size = New System.Drawing.Size(64, 27)
         Me.cmdImport.TabIndex = 20
@@ -733,7 +773,7 @@ Partial Class formMetadata
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(47, -2)
+        Me.cmdClear.Location = New System.Drawing.Point(47, 0)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(64, 27)
         Me.cmdClear.TabIndex = 15
@@ -742,7 +782,7 @@ Partial Class formMetadata
         '
         'cmdViewStation
         '
-        Me.cmdViewStation.Location = New System.Drawing.Point(487, -2)
+        Me.cmdViewStation.Location = New System.Drawing.Point(487, 0)
         Me.cmdViewStation.Name = "cmdViewStation"
         Me.cmdViewStation.Size = New System.Drawing.Size(64, 27)
         Me.cmdViewStation.TabIndex = 19
@@ -751,7 +791,7 @@ Partial Class formMetadata
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(377, -2)
+        Me.cmdDelete.Location = New System.Drawing.Point(377, 0)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(64, 27)
         Me.cmdDelete.TabIndex = 18
@@ -760,7 +800,7 @@ Partial Class formMetadata
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(267, -2)
+        Me.cmdUpdate.Location = New System.Drawing.Point(267, 0)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(64, 27)
         Me.cmdUpdate.TabIndex = 17
@@ -769,7 +809,7 @@ Partial Class formMetadata
         '
         'cmdAddNew
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(157, -2)
+        Me.cmdAddNew.Location = New System.Drawing.Point(157, 0)
         Me.cmdAddNew.Name = "cmdAddNew"
         Me.cmdAddNew.Size = New System.Drawing.Size(64, 27)
         Me.cmdAddNew.TabIndex = 16
@@ -1172,15 +1212,15 @@ Partial Class formMetadata
         Me.GroupBox5.Controls.Add(Me.cmdUpdateElement)
         Me.GroupBox5.Controls.Add(Me.cmdAddElement)
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBox5.Location = New System.Drawing.Point(3, 352)
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 349)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(582, 26)
+        Me.GroupBox5.Size = New System.Drawing.Size(582, 29)
         Me.GroupBox5.TabIndex = 9
         Me.GroupBox5.TabStop = False
         '
         'cmdClearElement
         '
-        Me.cmdClearElement.Location = New System.Drawing.Point(24, 8)
+        Me.cmdClearElement.Location = New System.Drawing.Point(33, 8)
         Me.cmdClearElement.Name = "cmdClearElement"
         Me.cmdClearElement.Size = New System.Drawing.Size(60, 20)
         Me.cmdClearElement.TabIndex = 10
@@ -1189,7 +1229,7 @@ Partial Class formMetadata
         '
         'cmdViewElements
         '
-        Me.cmdViewElements.Location = New System.Drawing.Point(464, 8)
+        Me.cmdViewElements.Location = New System.Drawing.Point(474, 8)
         Me.cmdViewElements.Name = "cmdViewElements"
         Me.cmdViewElements.Size = New System.Drawing.Size(60, 20)
         Me.cmdViewElements.TabIndex = 14
@@ -1198,7 +1238,7 @@ Partial Class formMetadata
         '
         'cmdDeleteElement
         '
-        Me.cmdDeleteElement.Location = New System.Drawing.Point(354, 8)
+        Me.cmdDeleteElement.Location = New System.Drawing.Point(364, 8)
         Me.cmdDeleteElement.Name = "cmdDeleteElement"
         Me.cmdDeleteElement.Size = New System.Drawing.Size(60, 20)
         Me.cmdDeleteElement.TabIndex = 13
@@ -1207,7 +1247,7 @@ Partial Class formMetadata
         '
         'cmdUpdateElement
         '
-        Me.cmdUpdateElement.Location = New System.Drawing.Point(244, 8)
+        Me.cmdUpdateElement.Location = New System.Drawing.Point(254, 8)
         Me.cmdUpdateElement.Name = "cmdUpdateElement"
         Me.cmdUpdateElement.Size = New System.Drawing.Size(60, 20)
         Me.cmdUpdateElement.TabIndex = 12
@@ -1216,7 +1256,7 @@ Partial Class formMetadata
         '
         'cmdAddElement
         '
-        Me.cmdAddElement.Location = New System.Drawing.Point(134, 8)
+        Me.cmdAddElement.Location = New System.Drawing.Point(144, 8)
         Me.cmdAddElement.Name = "cmdAddElement"
         Me.cmdAddElement.Size = New System.Drawing.Size(60, 20)
         Me.cmdAddElement.TabIndex = 11
@@ -1452,15 +1492,17 @@ Partial Class formMetadata
         '
         'grpStationElement
         '
+        Me.grpStationElement.Controls.Add(Me.txtScheduleClass)
+        Me.grpStationElement.Controls.Add(Me.txtEndate)
+        Me.grpStationElement.Controls.Add(Me.txtBeginDate)
         Me.grpStationElement.Controls.Add(Me.GroupBox7)
         Me.grpStationElement.Controls.Add(Me.GroupBox6)
         Me.grpStationElement.Controls.Add(Me.txtInstrument)
         Me.grpStationElement.Controls.Add(Me.txtElement)
         Me.grpStationElement.Controls.Add(Me.txtStation)
-        Me.grpStationElement.Controls.Add(Me.txtEndate)
-        Me.grpStationElement.Controls.Add(Me.txtBeginDate)
+        Me.grpStationElement.Controls.Add(Me.Endate)
+        Me.grpStationElement.Controls.Add(Me.BeginDate)
         Me.grpStationElement.Controls.Add(Me.txtHeight)
-        Me.grpStationElement.Controls.Add(Me.txtScheduleClass)
         Me.grpStationElement.Controls.Add(Me.lblBdate)
         Me.grpStationElement.Controls.Add(Me.lblHeight)
         Me.grpStationElement.Controls.Add(Me.lblSchedule)
@@ -1475,6 +1517,28 @@ Partial Class formMetadata
         Me.grpStationElement.TabStop = False
         Me.grpStationElement.Text = "Station Element Details"
         '
+        'txtScheduleClass
+        '
+        Me.txtScheduleClass.FormattingEnabled = True
+        Me.txtScheduleClass.Location = New System.Drawing.Point(229, 139)
+        Me.txtScheduleClass.Name = "txtScheduleClass"
+        Me.txtScheduleClass.Size = New System.Drawing.Size(157, 21)
+        Me.txtScheduleClass.TabIndex = 40
+        '
+        'txtEndate
+        '
+        Me.txtEndate.Location = New System.Drawing.Point(227, 231)
+        Me.txtEndate.Name = "txtEndate"
+        Me.txtEndate.Size = New System.Drawing.Size(140, 20)
+        Me.txtEndate.TabIndex = 39
+        '
+        'txtBeginDate
+        '
+        Me.txtBeginDate.Location = New System.Drawing.Point(227, 200)
+        Me.txtBeginDate.Name = "txtBeginDate"
+        Me.txtBeginDate.Size = New System.Drawing.Size(140, 20)
+        Me.txtBeginDate.TabIndex = 38
+        '
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.cmdClearStationElement)
@@ -1483,9 +1547,9 @@ Partial Class formMetadata
         Me.GroupBox7.Controls.Add(Me.cmdUpdateStElement)
         Me.GroupBox7.Controls.Add(Me.cmdAddStElement)
         Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBox7.Location = New System.Drawing.Point(3, 301)
+        Me.GroupBox7.Location = New System.Drawing.Point(3, 295)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(584, 32)
+        Me.GroupBox7.Size = New System.Drawing.Size(584, 38)
         Me.GroupBox7.TabIndex = 7
         Me.GroupBox7.TabStop = False
         '
@@ -1500,7 +1564,7 @@ Partial Class formMetadata
         '
         'cmdViewStElement
         '
-        Me.cmdViewStElement.Location = New System.Drawing.Point(479, 7)
+        Me.cmdViewStElement.Location = New System.Drawing.Point(479, 10)
         Me.cmdViewStElement.Name = "cmdViewStElement"
         Me.cmdViewStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdViewStElement.TabIndex = 35
@@ -1509,7 +1573,7 @@ Partial Class formMetadata
         '
         'cmdDeleteStElement
         '
-        Me.cmdDeleteStElement.Location = New System.Drawing.Point(366, 7)
+        Me.cmdDeleteStElement.Location = New System.Drawing.Point(366, 10)
         Me.cmdDeleteStElement.Name = "cmdDeleteStElement"
         Me.cmdDeleteStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdDeleteStElement.TabIndex = 34
@@ -1518,7 +1582,7 @@ Partial Class formMetadata
         '
         'cmdUpdateStElement
         '
-        Me.cmdUpdateStElement.Location = New System.Drawing.Point(253, 7)
+        Me.cmdUpdateStElement.Location = New System.Drawing.Point(253, 10)
         Me.cmdUpdateStElement.Name = "cmdUpdateStElement"
         Me.cmdUpdateStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdUpdateStElement.TabIndex = 33
@@ -1527,7 +1591,7 @@ Partial Class formMetadata
         '
         'cmdAddStElement
         '
-        Me.cmdAddStElement.Location = New System.Drawing.Point(140, 7)
+        Me.cmdAddStElement.Location = New System.Drawing.Point(140, 10)
         Me.cmdAddStElement.Name = "cmdAddStElement"
         Me.cmdAddStElement.Size = New System.Drawing.Size(81, 25)
         Me.cmdAddStElement.TabIndex = 32
@@ -1624,19 +1688,21 @@ Partial Class formMetadata
         Me.txtStation.Size = New System.Drawing.Size(157, 21)
         Me.txtStation.TabIndex = 0
         '
-        'txtEndate
+        'Endate
         '
-        Me.txtEndate.Location = New System.Drawing.Point(228, 231)
-        Me.txtEndate.Name = "txtEndate"
-        Me.txtEndate.Size = New System.Drawing.Size(157, 20)
-        Me.txtEndate.TabIndex = 6
+        Me.Endate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.Endate.Location = New System.Drawing.Point(359, 231)
+        Me.Endate.Name = "Endate"
+        Me.Endate.Size = New System.Drawing.Size(26, 20)
+        Me.Endate.TabIndex = 6
         '
-        'txtBeginDate
+        'BeginDate
         '
-        Me.txtBeginDate.Location = New System.Drawing.Point(228, 200)
-        Me.txtBeginDate.Name = "txtBeginDate"
-        Me.txtBeginDate.Size = New System.Drawing.Size(156, 20)
-        Me.txtBeginDate.TabIndex = 5
+        Me.BeginDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.BeginDate.Location = New System.Drawing.Point(359, 200)
+        Me.BeginDate.Name = "BeginDate"
+        Me.BeginDate.Size = New System.Drawing.Size(25, 20)
+        Me.BeginDate.TabIndex = 5
         '
         'txtHeight
         '
@@ -1644,13 +1710,6 @@ Partial Class formMetadata
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.Size = New System.Drawing.Size(56, 20)
         Me.txtHeight.TabIndex = 4
-        '
-        'txtScheduleClass
-        '
-        Me.txtScheduleClass.Location = New System.Drawing.Point(229, 138)
-        Me.txtScheduleClass.Name = "txtScheduleClass"
-        Me.txtScheduleClass.Size = New System.Drawing.Size(156, 20)
-        Me.txtScheduleClass.TabIndex = 3
         '
         'lblBdate
         '
@@ -1729,17 +1788,19 @@ Partial Class formMetadata
         '
         'grpInstrument
         '
+        Me.grpInstrument.Controls.Add(Me.txtInstrStn)
+        Me.grpInstrument.Controls.Add(Me.lbStationID)
+        Me.grpInstrument.Controls.Add(Me.txtDeinstallDate)
+        Me.grpInstrument.Controls.Add(Me.txtInstallDate)
         Me.grpInstrument.Controls.Add(Me.grpCommand2)
         Me.grpInstrument.Controls.Add(Me.GroupBox8)
         Me.grpInstrument.Controls.Add(Me.lblInstrumentPic)
         Me.grpInstrument.Controls.Add(Me.picInstrument)
         Me.grpInstrument.Controls.Add(Me.txthgt)
-        Me.grpInstrument.Controls.Add(Me.txtDeinstallDate)
-        Me.grpInstrument.Controls.Add(Me.txtInstallDate)
-        Me.grpInstrument.Controls.Add(Me.lblInstrStnId)
+        Me.grpInstrument.Controls.Add(Me.DeinstallDate)
+        Me.grpInstrument.Controls.Add(Me.InstallDate)
         Me.grpInstrument.Controls.Add(Me.lblInstalledAt)
         Me.grpInstrument.Controls.Add(Me.lblDeinstalDate)
-        Me.grpInstrument.Controls.Add(Me.txtInstrStn)
         Me.grpInstrument.Controls.Add(Me.txtUncertainity)
         Me.grpInstrument.Controls.Add(Me.txtManufacturer)
         Me.grpInstrument.Controls.Add(Me.txtModel)
@@ -1761,6 +1822,37 @@ Partial Class formMetadata
         Me.grpInstrument.TabIndex = 5
         Me.grpInstrument.TabStop = False
         Me.grpInstrument.Text = "Instrument Details"
+        '
+        'txtInstrStn
+        '
+        Me.txtInstrStn.FormattingEnabled = True
+        Me.txtInstrStn.Location = New System.Drawing.Point(164, 108)
+        Me.txtInstrStn.Name = "txtInstrStn"
+        Me.txtInstrStn.Size = New System.Drawing.Size(138, 21)
+        Me.txtInstrStn.TabIndex = 61
+        '
+        'lbStationID
+        '
+        Me.lbStationID.AutoSize = True
+        Me.lbStationID.Location = New System.Drawing.Point(67, 112)
+        Me.lbStationID.Name = "lbStationID"
+        Me.lbStationID.Size = New System.Drawing.Size(54, 13)
+        Me.lbStationID.TabIndex = 60
+        Me.lbStationID.Text = "Station ID"
+        '
+        'txtDeinstallDate
+        '
+        Me.txtDeinstallDate.Location = New System.Drawing.Point(163, 282)
+        Me.txtDeinstallDate.Name = "txtDeinstallDate"
+        Me.txtDeinstallDate.Size = New System.Drawing.Size(118, 20)
+        Me.txtDeinstallDate.TabIndex = 58
+        '
+        'txtInstallDate
+        '
+        Me.txtInstallDate.Location = New System.Drawing.Point(163, 253)
+        Me.txtInstallDate.Name = "txtInstallDate"
+        Me.txtInstallDate.Size = New System.Drawing.Size(118, 20)
+        Me.txtInstallDate.TabIndex = 57
         '
         'grpCommand2
         '
@@ -1907,40 +1999,31 @@ Partial Class formMetadata
         '
         'txthgt
         '
-        Me.txthgt.Location = New System.Drawing.Point(163, 322)
+        Me.txthgt.Location = New System.Drawing.Point(163, 311)
         Me.txthgt.Name = "txthgt"
         Me.txthgt.Size = New System.Drawing.Size(56, 20)
         Me.txthgt.TabIndex = 10
         '
-        'txtDeinstallDate
+        'DeinstallDate
         '
-        Me.txtDeinstallDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtDeinstallDate.Location = New System.Drawing.Point(164, 292)
-        Me.txtDeinstallDate.Name = "txtDeinstallDate"
-        Me.txtDeinstallDate.Size = New System.Drawing.Size(138, 20)
-        Me.txtDeinstallDate.TabIndex = 9
+        Me.DeinstallDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DeinstallDate.Location = New System.Drawing.Point(281, 282)
+        Me.DeinstallDate.Name = "DeinstallDate"
+        Me.DeinstallDate.Size = New System.Drawing.Size(21, 20)
+        Me.DeinstallDate.TabIndex = 9
         '
-        'txtInstallDate
+        'InstallDate
         '
-        Me.txtInstallDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtInstallDate.Location = New System.Drawing.Point(164, 262)
-        Me.txtInstallDate.Name = "txtInstallDate"
-        Me.txtInstallDate.Size = New System.Drawing.Size(138, 20)
-        Me.txtInstallDate.TabIndex = 8
-        '
-        'lblInstrStnId
-        '
-        Me.lblInstrStnId.AutoSize = True
-        Me.lblInstrStnId.Location = New System.Drawing.Point(67, 115)
-        Me.lblInstrStnId.Name = "lblInstrStnId"
-        Me.lblInstrStnId.Size = New System.Drawing.Size(54, 13)
-        Me.lblInstrStnId.TabIndex = 33
-        Me.lblInstrStnId.Text = "Station ID"
+        Me.InstallDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.InstallDate.Location = New System.Drawing.Point(281, 253)
+        Me.InstallDate.Name = "InstallDate"
+        Me.InstallDate.Size = New System.Drawing.Size(21, 20)
+        Me.InstallDate.TabIndex = 8
         '
         'lblInstalledAt
         '
         Me.lblInstalledAt.AutoSize = True
-        Me.lblInstalledAt.Location = New System.Drawing.Point(66, 326)
+        Me.lblInstalledAt.Location = New System.Drawing.Point(66, 315)
         Me.lblInstalledAt.Name = "lblInstalledAt"
         Me.lblInstalledAt.Size = New System.Drawing.Size(38, 13)
         Me.lblInstalledAt.TabIndex = 40
@@ -1949,59 +2032,50 @@ Partial Class formMetadata
         'lblDeinstalDate
         '
         Me.lblDeinstalDate.AutoSize = True
-        Me.lblDeinstalDate.Location = New System.Drawing.Point(66, 296)
+        Me.lblDeinstalDate.Location = New System.Drawing.Point(66, 286)
         Me.lblDeinstalDate.Name = "lblDeinstalDate"
         Me.lblDeinstalDate.Size = New System.Drawing.Size(96, 13)
         Me.lblDeinstalDate.TabIndex = 39
         Me.lblDeinstalDate.Text = "Deinstallation Date"
         '
-        'txtInstrStn
-        '
-        Me.txtInstrStn.FormattingEnabled = True
-        Me.txtInstrStn.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtInstrStn.Location = New System.Drawing.Point(163, 111)
-        Me.txtInstrStn.Name = "txtInstrStn"
-        Me.txtInstrStn.Size = New System.Drawing.Size(138, 21)
-        Me.txtInstrStn.TabIndex = 3
-        '
         'txtUncertainity
         '
-        Me.txtUncertainity.Location = New System.Drawing.Point(164, 232)
+        Me.txtUncertainity.Location = New System.Drawing.Point(164, 224)
         Me.txtUncertainity.Name = "txtUncertainity"
         Me.txtUncertainity.Size = New System.Drawing.Size(55, 20)
         Me.txtUncertainity.TabIndex = 7
         '
         'txtManufacturer
         '
-        Me.txtManufacturer.Location = New System.Drawing.Point(164, 202)
+        Me.txtManufacturer.Location = New System.Drawing.Point(164, 195)
         Me.txtManufacturer.Name = "txtManufacturer"
         Me.txtManufacturer.Size = New System.Drawing.Size(137, 20)
         Me.txtManufacturer.TabIndex = 6
         '
         'txtModel
         '
-        Me.txtModel.Location = New System.Drawing.Point(164, 172)
+        Me.txtModel.Location = New System.Drawing.Point(164, 166)
         Me.txtModel.Name = "txtModel"
         Me.txtModel.Size = New System.Drawing.Size(137, 20)
         Me.txtModel.TabIndex = 5
         '
         'txtSerial
         '
-        Me.txtSerial.Location = New System.Drawing.Point(163, 142)
+        Me.txtSerial.Location = New System.Drawing.Point(163, 137)
         Me.txtSerial.Name = "txtSerial"
         Me.txtSerial.Size = New System.Drawing.Size(138, 20)
         Me.txtSerial.TabIndex = 4
         '
         'txtAbbrev
         '
-        Me.txtAbbrev.Location = New System.Drawing.Point(163, 81)
+        Me.txtAbbrev.Location = New System.Drawing.Point(163, 79)
         Me.txtAbbrev.Name = "txtAbbrev"
         Me.txtAbbrev.Size = New System.Drawing.Size(138, 20)
         Me.txtAbbrev.TabIndex = 2
         '
         'txtInstName
         '
-        Me.txtInstName.Location = New System.Drawing.Point(163, 51)
+        Me.txtInstName.Location = New System.Drawing.Point(163, 50)
         Me.txtInstName.Name = "txtInstName"
         Me.txtInstName.Size = New System.Drawing.Size(138, 20)
         Me.txtInstName.TabIndex = 1
@@ -2016,7 +2090,7 @@ Partial Class formMetadata
         'lblIinstalDate
         '
         Me.lblIinstalDate.AutoSize = True
-        Me.lblIinstalDate.Location = New System.Drawing.Point(67, 266)
+        Me.lblIinstalDate.Location = New System.Drawing.Point(67, 257)
         Me.lblIinstalDate.Name = "lblIinstalDate"
         Me.lblIinstalDate.Size = New System.Drawing.Size(83, 13)
         Me.lblIinstalDate.TabIndex = 38
@@ -2025,7 +2099,7 @@ Partial Class formMetadata
         'lblModel
         '
         Me.lblModel.AutoSize = True
-        Me.lblModel.Location = New System.Drawing.Point(67, 176)
+        Me.lblModel.Location = New System.Drawing.Point(67, 170)
         Me.lblModel.Name = "lblModel"
         Me.lblModel.Size = New System.Drawing.Size(36, 13)
         Me.lblModel.TabIndex = 35
@@ -2034,7 +2108,7 @@ Partial Class formMetadata
         'lblSerial
         '
         Me.lblSerial.AutoSize = True
-        Me.lblSerial.Location = New System.Drawing.Point(67, 146)
+        Me.lblSerial.Location = New System.Drawing.Point(67, 141)
         Me.lblSerial.Name = "lblSerial"
         Me.lblSerial.Size = New System.Drawing.Size(73, 13)
         Me.lblSerial.TabIndex = 34
@@ -2043,7 +2117,7 @@ Partial Class formMetadata
         'lblInstAbbrev
         '
         Me.lblInstAbbrev.AutoSize = True
-        Me.lblInstAbbrev.Location = New System.Drawing.Point(67, 85)
+        Me.lblInstAbbrev.Location = New System.Drawing.Point(67, 83)
         Me.lblInstAbbrev.Name = "lblInstAbbrev"
         Me.lblInstAbbrev.Size = New System.Drawing.Size(66, 13)
         Me.lblInstAbbrev.TabIndex = 32
@@ -2052,7 +2126,7 @@ Partial Class formMetadata
         'lblUncertainity
         '
         Me.lblUncertainity.AutoSize = True
-        Me.lblUncertainity.Location = New System.Drawing.Point(67, 236)
+        Me.lblUncertainity.Location = New System.Drawing.Point(67, 228)
         Me.lblUncertainity.Name = "lblUncertainity"
         Me.lblUncertainity.Size = New System.Drawing.Size(63, 13)
         Me.lblUncertainity.TabIndex = 37
@@ -2061,7 +2135,7 @@ Partial Class formMetadata
         'lblManufacturer
         '
         Me.lblManufacturer.AutoSize = True
-        Me.lblManufacturer.Location = New System.Drawing.Point(67, 206)
+        Me.lblManufacturer.Location = New System.Drawing.Point(67, 199)
         Me.lblManufacturer.Name = "lblManufacturer"
         Me.lblManufacturer.Size = New System.Drawing.Size(70, 13)
         Me.lblManufacturer.TabIndex = 36
@@ -2070,7 +2144,7 @@ Partial Class formMetadata
         'txtInstrumentName
         '
         Me.txtInstrumentName.AutoSize = True
-        Me.txtInstrumentName.Location = New System.Drawing.Point(67, 55)
+        Me.txtInstrumentName.Location = New System.Drawing.Point(67, 54)
         Me.txtInstrumentName.Name = "txtInstrumentName"
         Me.txtInstrumentName.Size = New System.Drawing.Size(35, 13)
         Me.txtInstrumentName.TabIndex = 31
@@ -3604,7 +3678,6 @@ Partial Class formMetadata
     Friend WithEvents lblStationElement As System.Windows.Forms.Label
     Friend WithEvents grpStationElement As System.Windows.Forms.GroupBox
     Friend WithEvents txtHeight As System.Windows.Forms.TextBox
-    Friend WithEvents txtScheduleClass As System.Windows.Forms.TextBox
     Friend WithEvents lblBdate As System.Windows.Forms.Label
     Friend WithEvents lblHeight As System.Windows.Forms.Label
     Friend WithEvents lblSchedule As System.Windows.Forms.Label
@@ -3613,7 +3686,6 @@ Partial Class formMetadata
     Friend WithEvents lblElement As System.Windows.Forms.Label
     Friend WithEvents lblstation As System.Windows.Forms.Label
     Friend WithEvents grpInstrument As System.Windows.Forms.GroupBox
-    Friend WithEvents txtInstrStn As System.Windows.Forms.ComboBox
     Friend WithEvents txtUncertainity As System.Windows.Forms.TextBox
     Friend WithEvents txtManufacturer As System.Windows.Forms.TextBox
     Friend WithEvents txtModel As System.Windows.Forms.TextBox
@@ -3632,9 +3704,8 @@ Partial Class formMetadata
     Friend WithEvents lblInstruments As System.Windows.Forms.Label
     Friend WithEvents lblInstrumentPic As System.Windows.Forms.Label
     Friend WithEvents picInstrument As System.Windows.Forms.PictureBox
-    Friend WithEvents txtDeinstallDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents txtInstallDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents lblInstrStnId As System.Windows.Forms.Label
+    Friend WithEvents DeinstallDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents InstallDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblDeinstalDate As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents txtDrgBasin As System.Windows.Forms.TextBox
@@ -3665,8 +3736,8 @@ Partial Class formMetadata
     Friend WithEvents txtInstrument As System.Windows.Forms.ComboBox
     Friend WithEvents txtElement As System.Windows.Forms.ComboBox
     Friend WithEvents txtStation As System.Windows.Forms.ComboBox
-    Friend WithEvents txtEndate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents txtBeginDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Endate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents BeginDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents txtEndDate As System.Windows.Forms.DateTimePicker
@@ -3859,4 +3930,13 @@ Partial Class formMetadata
     Friend WithEvents lblDegreesLon As Label
     Friend WithEvents txtDegreesLat As TextBox
     Friend WithEvents lblDegreesLat As Label
+
+    Friend WithEvents txtInstallDate As System.Windows.Forms.TextBox
+    Friend WithEvents txtDeinstallDate As System.Windows.Forms.TextBox
+    Friend WithEvents lbStationID As System.Windows.Forms.Label
+    Friend WithEvents txtInstrStn As System.Windows.Forms.ComboBox
+    Friend WithEvents txtBeginDate As System.Windows.Forms.TextBox
+    Friend WithEvents txtEndate As System.Windows.Forms.TextBox
+    Friend WithEvents txtScheduleClass As System.Windows.Forms.ComboBox
+
 End Class
