@@ -440,17 +440,13 @@
                                 If IsDate(dttim) Then
 
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
-                                    'If stn = "" Then stn = txtStn.Text
 
                                     flg = ""
                                     If IsNumeric(dat) Then
                                         If chkScale.Checked = True Then Scale_Data(code, dat)
                                     Else
                                         Get_Value_Flag(code, dat, flg)
-                                        'dat = ""
-                                        'flg = "M"
                                     End If
-
                                     'If Get_Code_Scale(code, dat) Then
                                     Add_Record(stn, code, dttim, dat, flg)
                                     'End If
