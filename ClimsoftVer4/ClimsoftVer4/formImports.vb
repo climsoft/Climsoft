@@ -1,4 +1,20 @@
-﻿Public Class formImports
+﻿' CLIMSOFT - Climate Database Management System
+' Copyright (C) 2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class formImports
     Dim dbcon As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConectionString As String
     Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -194,7 +210,7 @@ Err:
             Dim currentField As String
 
             Dim num As Integer = 1
-     
+
 
             Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(d)
             Dim dsNewRow As DataRow
