@@ -477,7 +477,8 @@ Partial Class formMetadata
         '
         'grpComputationDD
         '
-        Me.grpComputationDD.BackColor = System.Drawing.Color.Snow
+       Me.grpComputationDD.BackColor = System.Drawing.Color.Snow
+
         Me.grpComputationDD.Controls.Add(Me.lblEW)
         Me.grpComputationDD.Controls.Add(Me.lblNS)
         Me.grpComputationDD.Controls.Add(Me.lstEW)
@@ -494,17 +495,21 @@ Partial Class formMetadata
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLon)
         Me.grpComputationDD.Controls.Add(Me.txtDegreesLat)
         Me.grpComputationDD.Controls.Add(Me.lblDegreesLat)
+
         Me.grpComputationDD.Location = New System.Drawing.Point(200, 69)
         Me.grpComputationDD.Name = "grpComputationDD"
         Me.grpComputationDD.Size = New System.Drawing.Size(455, 69)
         Me.grpComputationDD.TabIndex = 63
         Me.grpComputationDD.TabStop = False
         Me.grpComputationDD.Text = "Latitude and Longitude Decimal Degrees Computation"
+
         '
         'lblEW
         '
         Me.lblEW.AutoSize = True
+
         Me.lblEW.Location = New System.Drawing.Point(356, 46)
+
         Me.lblEW.Name = "lblEW"
         Me.lblEW.Size = New System.Drawing.Size(30, 13)
         Me.lblEW.TabIndex = 65
@@ -513,7 +518,9 @@ Partial Class formMetadata
         'lblNS
         '
         Me.lblNS.AutoSize = True
+
         Me.lblNS.Location = New System.Drawing.Point(359, 18)
+
         Me.lblNS.Name = "lblNS"
         Me.lblNS.Size = New System.Drawing.Size(27, 13)
         Me.lblNS.TabIndex = 64
@@ -523,7 +530,9 @@ Partial Class formMetadata
         '
         Me.lstEW.FormattingEnabled = True
         Me.lstEW.Items.AddRange(New Object() {"E", "W"})
+
         Me.lstEW.Location = New System.Drawing.Point(395, 42)
+
         Me.lstEW.Name = "lstEW"
         Me.lstEW.Size = New System.Drawing.Size(41, 21)
         Me.lstEW.TabIndex = 63
@@ -532,14 +541,18 @@ Partial Class formMetadata
         '
         Me.lstNS.FormattingEnabled = True
         Me.lstNS.Items.AddRange(New Object() {"N", "S"})
+
         Me.lstNS.Location = New System.Drawing.Point(395, 15)
+
         Me.lstNS.Name = "lstNS"
         Me.lstNS.Size = New System.Drawing.Size(41, 21)
         Me.lstNS.TabIndex = 62
         '
         'txtSecondsLon
         '
+
         Me.txtSecondsLon.Location = New System.Drawing.Point(295, 43)
+
         Me.txtSecondsLon.Name = "txtSecondsLon"
         Me.txtSecondsLon.Size = New System.Drawing.Size(55, 20)
         Me.txtSecondsLon.TabIndex = 60
@@ -547,7 +560,9 @@ Partial Class formMetadata
         'lblSecondsLon
         '
         Me.lblSecondsLon.AutoSize = True
+
         Me.lblSecondsLon.Location = New System.Drawing.Point(242, 46)
+
         Me.lblSecondsLon.Name = "lblSecondsLon"
         Me.lblSecondsLon.Size = New System.Drawing.Size(49, 13)
         Me.lblSecondsLon.TabIndex = 61
@@ -555,7 +570,9 @@ Partial Class formMetadata
         '
         'txtSecondsLat
         '
+
         Me.txtSecondsLat.Location = New System.Drawing.Point(296, 15)
+
         Me.txtSecondsLat.Name = "txtSecondsLat"
         Me.txtSecondsLat.Size = New System.Drawing.Size(54, 20)
         Me.txtSecondsLat.TabIndex = 58
@@ -563,7 +580,9 @@ Partial Class formMetadata
         'lblSecondsLat
         '
         Me.lblSecondsLat.AutoSize = True
+
         Me.lblSecondsLat.Location = New System.Drawing.Point(243, 18)
+
         Me.lblSecondsLat.Name = "lblSecondsLat"
         Me.lblSecondsLat.Size = New System.Drawing.Size(49, 13)
         Me.lblSecondsLat.TabIndex = 59
@@ -571,7 +590,9 @@ Partial Class formMetadata
         '
         'txtMinutesLon
         '
+
         Me.txtMinutesLon.Location = New System.Drawing.Point(173, 43)
+
         Me.txtMinutesLon.Name = "txtMinutesLon"
         Me.txtMinutesLon.Size = New System.Drawing.Size(58, 20)
         Me.txtMinutesLon.TabIndex = 56
@@ -579,7 +600,9 @@ Partial Class formMetadata
         'lblMinutesLon
         '
         Me.lblMinutesLon.AutoSize = True
+
         Me.lblMinutesLon.Location = New System.Drawing.Point(123, 46)
+
         Me.lblMinutesLon.Name = "lblMinutesLon"
         Me.lblMinutesLon.Size = New System.Drawing.Size(44, 13)
         Me.lblMinutesLon.TabIndex = 57
@@ -587,7 +610,9 @@ Partial Class formMetadata
         '
         'txtMinutesLat
         '
+
         Me.txtMinutesLat.Location = New System.Drawing.Point(174, 15)
+
         Me.txtMinutesLat.Name = "txtMinutesLat"
         Me.txtMinutesLat.Size = New System.Drawing.Size(58, 20)
         Me.txtMinutesLat.TabIndex = 54
@@ -595,7 +620,9 @@ Partial Class formMetadata
         'lblMinutesLat
         '
         Me.lblMinutesLat.AutoSize = True
+
         Me.lblMinutesLat.Location = New System.Drawing.Point(124, 18)
+
         Me.lblMinutesLat.Name = "lblMinutesLat"
         Me.lblMinutesLat.Size = New System.Drawing.Size(44, 13)
         Me.lblMinutesLat.TabIndex = 55
@@ -603,7 +630,9 @@ Partial Class formMetadata
         '
         'txtDegreesLon
         '
+
         Me.txtDegreesLon.Location = New System.Drawing.Point(56, 43)
+
         Me.txtDegreesLon.Name = "txtDegreesLon"
         Me.txtDegreesLon.Size = New System.Drawing.Size(59, 20)
         Me.txtDegreesLon.TabIndex = 52
@@ -611,7 +640,9 @@ Partial Class formMetadata
         'lblDegreesLon
         '
         Me.lblDegreesLon.AutoSize = True
+
         Me.lblDegreesLon.Location = New System.Drawing.Point(3, 46)
+
         Me.lblDegreesLon.Name = "lblDegreesLon"
         Me.lblDegreesLon.Size = New System.Drawing.Size(47, 13)
         Me.lblDegreesLon.TabIndex = 53
@@ -619,7 +650,9 @@ Partial Class formMetadata
         '
         'txtDegreesLat
         '
+
         Me.txtDegreesLat.Location = New System.Drawing.Point(57, 15)
+
         Me.txtDegreesLat.Name = "txtDegreesLat"
         Me.txtDegreesLat.Size = New System.Drawing.Size(59, 20)
         Me.txtDegreesLat.TabIndex = 50
@@ -627,7 +660,9 @@ Partial Class formMetadata
         'lblDegreesLat
         '
         Me.lblDegreesLat.AutoSize = True
+
         Me.lblDegreesLat.Location = New System.Drawing.Point(4, 18)
+
         Me.lblDegreesLat.Name = "lblDegreesLat"
         Me.lblDegreesLat.Size = New System.Drawing.Size(47, 13)
         Me.lblDegreesLat.TabIndex = 51
@@ -3926,6 +3961,7 @@ Partial Class formMetadata
     Friend WithEvents lblDegreesLon As Label
     Friend WithEvents txtDegreesLat As TextBox
     Friend WithEvents lblDegreesLat As Label
+
     Friend WithEvents txtInstallDate As System.Windows.Forms.TextBox
     Friend WithEvents txtDeinstallDate As System.Windows.Forms.TextBox
     Friend WithEvents lbStationID As System.Windows.Forms.Label
@@ -3933,7 +3969,11 @@ Partial Class formMetadata
     Friend WithEvents txtBeginDate As System.Windows.Forms.TextBox
     Friend WithEvents txtEndate As System.Windows.Forms.TextBox
     Friend WithEvents txtScheduleClass As System.Windows.Forms.ComboBox
+<<<<<<< HEAD
     Friend WithEvents txtInstrumentCode As System.Windows.Forms.TextBox
     Friend WithEvents lblInstumentType As System.Windows.Forms.Label
     Friend WithEvents lblInstrumentCode As System.Windows.Forms.Label
+=======
+
+>>>>>>> origin/beta2
 End Class
