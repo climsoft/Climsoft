@@ -218,6 +218,7 @@ Public Class formMetadata
         txtStation.Text = ds.Tables(frm).Rows(num).Item("recordedFrom")
         txtElement.Text = ds.Tables(frm).Rows(num).Item("describedBy")
         txtInstrument.Text = ds.Tables(frm).Rows(num).Item("recordedWith")
+        txtInstrumentCode.Text = ds.Tables(frm).Rows(num).Item("instrumentcode")
         txtScheduleClass.Text = ds.Tables(frm).Rows(num).Item("scheduledFor")
         txtHeight.Text = ds.Tables(frm).Rows(num).Item("height")
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
@@ -441,6 +442,7 @@ Public Class formMetadata
         txtStation.Text = ""
         txtElement.Text = ""
         txtInstrument.Text = ""
+        txtInstrumentCode.Text = ""
         txtScheduleClass.Text = ""
         txtHeight.Text = ""
         txtBeginDate.Text = ""
@@ -764,7 +766,8 @@ Err:
 
             dsNewRow.Item("recordedFrom") = txtStation.Text
             dsNewRow.Item("describedBy") = txtElement.Text
-            dsNewRow.Item("recordedWith") = txtinstrument.Text
+            dsNewRow.Item("recordedWith") = txtInstrument.Text
+            dsNewRow.Item("instrumentcode") = txtInstrumentCode.Text
             dsNewRow.Item("scheduledFor") = txtScheduleClass.Text
             dsNewRow.Item("height") = txtHeight.Text
             dsNewRow.Item("beginDate") = txtBeginDate.Text
@@ -1461,34 +1464,35 @@ Err:
     End Sub
 
     Private Sub cmdUpdateStElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStElement.Click
-        On Error Resume Next
 
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
+        Try
+            'If txtId.Text = "" Then
+            '    MsgBox("No record Selected")
+            '    Exit Sub
+            'End If
 
-        'MsgBox(txtHeight.Text)
-        ds.Tables("stationelement").Rows(rec).Item("recordedFrom") = txtStation.Text
-        ds.Tables("stationelement").Rows(rec).Item("describedBy") = txtElement.Text
-        ds.Tables("stationelement").Rows(rec).Item("recordedWith") = txtInstrument.Text
-        ds.Tables("stationelement").Rows(rec).Item("scheduledFor") = txtScheduleClass.Text
-        ds.Tables("stationelement").Rows(rec).Item("height") = txtHeight.Text
-        ds.Tables("stationelement").Rows(rec).Item("beginDate") = txtBeginDate.Text
-        ds.Tables("stationelement").Rows(rec).Item("endDate") = txtEndate.Text
+            'MsgBox(txtHeight.Text)
+            ds.Tables("stationelement").Rows(rec).Item("recordedFrom") = txtStation.Text
+            ds.Tables("stationelement").Rows(rec).Item("describedBy") = txtElement.Text
+            ds.Tables("stationelement").Rows(rec).Item("recordedWith") = txtInstrument.Text
+            ds.Tables("stationelement").Rows(rec).Item("instrumentcode") = txtInstrumentCode.Text
+            ds.Tables("stationelement").Rows(rec).Item("scheduledFor") = txtScheduleClass.Text
+            ds.Tables("stationelement").Rows(rec).Item("height") = txtHeight.Text
+            ds.Tables("stationelement").Rows(rec).Item("beginDate") = txtBeginDate.Text
+            ds.Tables("stationelement").Rows(rec).Item("endDate") = txtEndate.Text
 
-        da.Update(ds, "stationelement")
+            da.Update(ds, "stationelement")
 
-        recUpdate.messageBoxRecordedUpdated()
-        ClearStationElementForm()
+            recUpdate.messageBoxRecordedUpdated()
+            ClearStationElementForm()
 
-        Exit Sub
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
-Err:
-        'MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
     Private Sub cmdClearStationElement_Click(sender As Object, e As EventArgs) Handles cmdClearStationElement.Click
@@ -1915,5 +1919,9 @@ Err:
 
     Private Sub Endate_ValueChanged(sender As Object, e As EventArgs) Handles Endate.ValueChanged
         txtEndate.Text = Endate.Text
+    End Sub
+
+    Private Sub grpStationElement_Enter(sender As Object, e As EventArgs) Handles grpStationElement.Enter
+
     End Sub
 End Class

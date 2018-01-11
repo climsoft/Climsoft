@@ -1399,7 +1399,7 @@ Err:
 
         'MsgBox(ftpfile & " " & ftpmethod)
         FTP_Call = True
-        On Error GoTo Err
+
         Dim ftpscript As String
         Dim ftpbatch As String
         Dim Drive1 As String
@@ -1411,122 +1411,123 @@ Err:
         Dim flder As String
         Dim ftpmode As String
 
-        Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd)
-        'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
-        FileClose(1)
-        local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-        Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
-        Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
-        ftpscript = local_folder & "\ftp_aws.txt"
-        FileOpen(1, ftpscript, OpenMode.Output)
+        Try
+            Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd)
+            'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
+            FileClose(1)
+            local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
+            ftpscript = local_folder & "\ftp_aws.txt"
+            FileOpen(1, ftpscript, OpenMode.Output)
 
-        Select Case ftpmethod
-            Case "get"
+            Select Case ftpmethod
+                Case "get"
 
-                txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
+                    txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
 
-                'MsgBox(ftpmode & " " & txtinputfile)
+                    'MsgBox(ftpmode & " " & txtinputfile)
 
-                If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
+                    If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
 
-                If ftpmode = "FTP" Then
-                    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                    Print(1, usr & Chr(13) & Chr(10))
-                    Print(1, pwd & Chr(13) & Chr(10))
-                    Print(1, "cd " & flder & Chr(13) & Chr(10))
-                    Print(1, "asc" & Chr(13) & Chr(10))
+                    If ftpmode = "FTP" Then
+                        Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                        Print(1, usr & Chr(13) & Chr(10))
+                        Print(1, pwd & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
+                        Print(1, "asc" & Chr(13) & Chr(10))
 
-                End If
-                Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                Print(1, "bye" & Chr(13) & Chr(10))
-            Case "put"
-                If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
-                If ftpmode = "ftp" Then
-                    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                    Print(1, usr & Chr(13) & Chr(10))
-                    Print(1, pwd & Chr(13) & Chr(10))
-                    Print(1, "cd " & flder & Chr(13) & Chr(10))
-                    Print(1, "bin" & Chr(13) & Chr(10))
-                End If
-                Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                Print(1, "bye" & Chr(13) & Chr(10))
-        End Select
-        FileClose(1)
+                    End If
+                    Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    Print(1, "bye" & Chr(13) & Chr(10))
+                Case "put"
+                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
+                    If ftpmode = "ftp" Then
+                        Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                        Print(1, usr & Chr(13) & Chr(10))
+                        Print(1, pwd & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
+                        Print(1, "bin" & Chr(13) & Chr(10))
+                    End If
+                    Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    Print(1, "bye" & Chr(13) & Chr(10))
+            End Select
+            FileClose(1)
 
-        '        ' Create batch file to execute FTP script
-        ftpbatch = local_folder & "\ftp_tdcf.bat"
+            '        ' Create batch file to execute FTP script
+            ftpbatch = local_folder & "\ftp_tdcf.bat"
 
-        FileOpen(1, ftpbatch, OpenMode.Output)
+            FileOpen(1, ftpbatch, OpenMode.Output)
 
-        Print(1, "echo off" & Chr(13) & Chr(10))
-        Print(1, Drive1 & Chr(13) & Chr(10))
-        Print(1, "CD " & local_folder & Chr(13) & Chr(10))
+            Print(1, "echo off" & Chr(13) & Chr(10))
+            Print(1, Drive1 & Chr(13) & Chr(10))
+            Print(1, "CD " & local_folder & Chr(13) & Chr(10))
 
-        If ftpmethod = "get" Then
-            If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
-        Else
-            If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-            If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
-        End If
+            If ftpmethod = "get" Then
+                If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+            Else
+                If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+            End If
 
-        Print(1, "echo on" & Chr(13) & Chr(10))
-        Print(1, "EXIT" & Chr(13) & Chr(10))
-        FileClose(1)
-
-
-        ' Execute the batch file to transfer the aws data file from aws server to a local folder
-        Shell(ftpbatch, vbMinimizedNoFocus)
-
-        If ftpmethod = "get" Then
-            ' Cause some delay to allow ftp file transfer before the processing starts.
-            Dim Cdate1 As Date
-            Dim tot As Integer
-            Dim timeout As Integer
-
-            Cdate1 = Now() '& " " & Time
-            tot = 0
-            timeout = CLng(txtTimeout.Text)
-            With ProgressBar1
-                .Visible = True
-                .Maximum = timeout ' 60
-                Do While tot < timeout
-                    tot = DateDiff("s", Cdate1, Now())
-                    .Value = tot
-                Loop
-                .Visible = False
-            End With
-
-            txtInputServer.Text = ftp_host
-            txtInputfolder.Text = flder
-
-            ' List the input file
-            lstInputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
-            lstInputFiles.Refresh()
-            txtInputServer.Refresh()
-
-        Else
-            txtOutputServer.Text = ftp_host
-            txtOutputFolder.Text = flder
-
-            ' List the processed output file
-            lstOutputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
-            txtOutputServer.Refresh()
-            txtOutputFolder.Refresh()
-            lstOutputFiles.Refresh()
-        End If
+            Print(1, "echo on" & Chr(13) & Chr(10))
+            Print(1, "EXIT" & Chr(13) & Chr(10))
+            FileClose(1)
 
 
-        If System.IO.Path.GetFileName(ftpfile).Length = 0 Then Exit Function
+            ' Execute the batch file to transfer the aws data file from aws server to a local folder
+            Shell(ftpbatch, vbMinimizedNoFocus)
 
-        'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
+            If ftpmethod = "get" Then
+                ' Cause some delay to allow ftp file transfer before the processing starts.
+                Dim Cdate1 As Date
+                Dim tot As Integer
+                Dim timeout As Integer
 
-        Exit Function
-Err:
-        Log_Errors(Err.Description)
-        FTP_Call = False
+                Cdate1 = Now() '& " " & Time
+                tot = 0
+                timeout = CLng(txtTimeout.Text)
+                With ProgressBar1
+                    .Visible = True
+                    .Maximum = timeout ' 60
+                    Do While tot < timeout
+                        tot = DateDiff("s", Cdate1, Now())
+                        .Value = tot
+                    Loop
+                    .Visible = False
+                End With
+
+                txtInputServer.Text = ftp_host
+                txtInputfolder.Text = flder
+
+                ' List the input file
+                lstInputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
+                lstInputFiles.Refresh()
+                txtInputServer.Refresh()
+
+            Else
+                txtOutputServer.Text = ftp_host
+                txtOutputFolder.Text = flder
+
+                ' List the processed output file
+                lstOutputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
+                txtOutputServer.Refresh()
+                txtOutputFolder.Refresh()
+                lstOutputFiles.Refresh()
+            End If
+
+
+            If System.IO.Path.GetFileName(ftpfile).Length = 0 Then Exit Function
+
+            'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
+
+        Catch ex As Exception
+            Log_Errors(Err.Description)
+            FTP_Call = False
+        End Try
     End Function
 
     Sub Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String)

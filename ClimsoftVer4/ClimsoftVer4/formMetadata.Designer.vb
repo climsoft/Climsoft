@@ -341,6 +341,9 @@ Partial Class formMetadata
         Me.MenuMetadata = New System.Windows.Forms.MenuStrip()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblInstumentType = New System.Windows.Forms.Label()
+        Me.txtInstrumentCode = New System.Windows.Forms.TextBox()
+        Me.lblInstrumentCode = New System.Windows.Forms.Label()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -1457,6 +1460,9 @@ Partial Class formMetadata
         '
         'grpStationElement
         '
+        Me.grpStationElement.Controls.Add(Me.lblInstrumentCode)
+        Me.grpStationElement.Controls.Add(Me.txtInstrumentCode)
+        Me.grpStationElement.Controls.Add(Me.lblInstumentType)
         Me.grpStationElement.Controls.Add(Me.txtScheduleClass)
         Me.grpStationElement.Controls.Add(Me.txtEndate)
         Me.grpStationElement.Controls.Add(Me.txtBeginDate)
@@ -1485,21 +1491,21 @@ Partial Class formMetadata
         'txtScheduleClass
         '
         Me.txtScheduleClass.FormattingEnabled = True
-        Me.txtScheduleClass.Location = New System.Drawing.Point(229, 139)
+        Me.txtScheduleClass.Location = New System.Drawing.Point(229, 165)
         Me.txtScheduleClass.Name = "txtScheduleClass"
         Me.txtScheduleClass.Size = New System.Drawing.Size(157, 21)
         Me.txtScheduleClass.TabIndex = 40
         '
         'txtEndate
         '
-        Me.txtEndate.Location = New System.Drawing.Point(227, 231)
+        Me.txtEndate.Location = New System.Drawing.Point(227, 257)
         Me.txtEndate.Name = "txtEndate"
         Me.txtEndate.Size = New System.Drawing.Size(140, 20)
         Me.txtEndate.TabIndex = 39
         '
         'txtBeginDate
         '
-        Me.txtBeginDate.Location = New System.Drawing.Point(227, 200)
+        Me.txtBeginDate.Location = New System.Drawing.Point(227, 226)
         Me.txtBeginDate.Name = "txtBeginDate"
         Me.txtBeginDate.Size = New System.Drawing.Size(140, 20)
         Me.txtBeginDate.TabIndex = 38
@@ -1656,7 +1662,7 @@ Partial Class formMetadata
         'Endate
         '
         Me.Endate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.Endate.Location = New System.Drawing.Point(359, 231)
+        Me.Endate.Location = New System.Drawing.Point(359, 257)
         Me.Endate.Name = "Endate"
         Me.Endate.Size = New System.Drawing.Size(26, 20)
         Me.Endate.TabIndex = 6
@@ -1664,14 +1670,14 @@ Partial Class formMetadata
         'BeginDate
         '
         Me.BeginDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.BeginDate.Location = New System.Drawing.Point(359, 200)
+        Me.BeginDate.Location = New System.Drawing.Point(359, 226)
         Me.BeginDate.Name = "BeginDate"
         Me.BeginDate.Size = New System.Drawing.Size(25, 20)
         Me.BeginDate.TabIndex = 5
         '
         'txtHeight
         '
-        Me.txtHeight.Location = New System.Drawing.Point(229, 169)
+        Me.txtHeight.Location = New System.Drawing.Point(229, 195)
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.Size = New System.Drawing.Size(56, 20)
         Me.txtHeight.TabIndex = 4
@@ -1679,7 +1685,7 @@ Partial Class formMetadata
         'lblBdate
         '
         Me.lblBdate.AutoSize = True
-        Me.lblBdate.Location = New System.Drawing.Point(146, 204)
+        Me.lblBdate.Location = New System.Drawing.Point(146, 230)
         Me.lblBdate.Name = "lblBdate"
         Me.lblBdate.Size = New System.Drawing.Size(60, 13)
         Me.lblBdate.TabIndex = 25
@@ -1688,7 +1694,7 @@ Partial Class formMetadata
         'lblHeight
         '
         Me.lblHeight.AutoSize = True
-        Me.lblHeight.Location = New System.Drawing.Point(146, 173)
+        Me.lblHeight.Location = New System.Drawing.Point(146, 199)
         Me.lblHeight.Name = "lblHeight"
         Me.lblHeight.Size = New System.Drawing.Size(38, 13)
         Me.lblHeight.TabIndex = 24
@@ -1697,7 +1703,7 @@ Partial Class formMetadata
         'lblSchedule
         '
         Me.lblSchedule.AutoSize = True
-        Me.lblSchedule.Location = New System.Drawing.Point(146, 142)
+        Me.lblSchedule.Location = New System.Drawing.Point(146, 168)
         Me.lblSchedule.Name = "lblSchedule"
         Me.lblSchedule.Size = New System.Drawing.Size(80, 13)
         Me.lblSchedule.TabIndex = 23
@@ -1715,7 +1721,7 @@ Partial Class formMetadata
         'lblEdate
         '
         Me.lblEdate.AutoSize = True
-        Me.lblEdate.Location = New System.Drawing.Point(146, 235)
+        Me.lblEdate.Location = New System.Drawing.Point(146, 261)
         Me.lblEdate.Name = "lblEdate"
         Me.lblEdate.Size = New System.Drawing.Size(52, 13)
         Me.lblEdate.TabIndex = 26
@@ -3500,6 +3506,31 @@ Partial Class formMetadata
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
+        'lblInstumentType
+        '
+        Me.lblInstumentType.AutoSize = True
+        Me.lblInstumentType.Location = New System.Drawing.Point(145, 137)
+        Me.lblInstumentType.Name = "lblInstumentType"
+        Me.lblInstumentType.Size = New System.Drawing.Size(83, 13)
+        Me.lblInstumentType.TabIndex = 42
+        Me.lblInstumentType.Text = "Instrument Type"
+        '
+        'txtInstrumentCode
+        '
+        Me.txtInstrumentCode.Location = New System.Drawing.Point(229, 134)
+        Me.txtInstrumentCode.Name = "txtInstrumentCode"
+        Me.txtInstrumentCode.Size = New System.Drawing.Size(56, 20)
+        Me.txtInstrumentCode.TabIndex = 43
+        '
+        'lblInstrumentCode
+        '
+        Me.lblInstrumentCode.AutoSize = True
+        Me.lblInstrumentCode.Location = New System.Drawing.Point(287, 137)
+        Me.lblInstrumentCode.Name = "lblInstrumentCode"
+        Me.lblInstrumentCode.Size = New System.Drawing.Size(68, 13)
+        Me.lblInstrumentCode.TabIndex = 44
+        Me.lblInstrumentCode.Text = "(Code Table)"
+        '
         'formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3902,4 +3933,7 @@ Partial Class formMetadata
     Friend WithEvents txtBeginDate As System.Windows.Forms.TextBox
     Friend WithEvents txtEndate As System.Windows.Forms.TextBox
     Friend WithEvents txtScheduleClass As System.Windows.Forms.ComboBox
+    Friend WithEvents txtInstrumentCode As System.Windows.Forms.TextBox
+    Friend WithEvents lblInstumentType As System.Windows.Forms.Label
+    Friend WithEvents lblInstrumentCode As System.Windows.Forms.Label
 End Class

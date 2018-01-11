@@ -417,8 +417,8 @@ Public Class formSynopRA1
             txtFlag018Field097.Enabled = True
             txtFlag018Field097.BackColor = Color.White
             'Apply same action to 24Hr sunshine
-            txVal_Elem084Field049.Enabled = True
-            txVal_Elem084Field049.BackColor = Color.White
+            txtVal_Elem084Field049.Enabled = True
+            txtVal_Elem084Field049.BackColor = Color.White
             txtFlag084Field098.Enabled = True
             txtFlag084Field098.BackColor = Color.White
             'Apply same action to 24Hr radiation
@@ -442,8 +442,8 @@ Public Class formSynopRA1
             txtFlag018Field097.Enabled = False
             txtFlag018Field097.BackColor = Color.LightGray
             'Apply same action to 24Hr sunshine
-            txVal_Elem084Field049.Enabled = False
-            txVal_Elem084Field049.BackColor = Color.LightGray
+            txtVal_Elem084Field049.Enabled = False
+            txtVal_Elem084Field049.BackColor = Color.LightGray
             txtFlag084Field098.Enabled = False
             txtFlag084Field098.BackColor = Color.LightGray
             'Apply same action to 24Hr radiation
@@ -753,75 +753,76 @@ Public Class formSynopRA1
         flagtextBoxSuffix = ""
         flagIndexDiff = 49
 
-        'If {ENTER} key is pressed
-        If e.KeyCode = Keys.Enter Then
+        Try
+            'If {ENTER} key is pressed
+            If e.KeyCode = Keys.Enter Then
 
-            If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
+                If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
-                'Check for an observation flag in the texbox for observation value.
-                ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
-                If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
-                    'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-                    'to the value string in the textbox.
-                    obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
-                    'Get the observation value by leaving out the last character from the string entered in the textbox
-                    obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
+                    'Check for an observation flag in the texbox for observation value.
+                    ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
+                    If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
+                        'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
+                        'to the value string in the textbox.
+                        obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
+                        'Get the observation value by leaving out the last character from the string entered in the textbox
+                        obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
 
-                    Me.ActiveControl.Text = obsVal
-                End If
-                'Now assign obsFlag to correct texbox on the form
-                For Each ctrl In Me.Controls
-                    'Loop through all controls on form
-                    'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
-                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-                        ctrl.Text = obsFlag
+                        Me.ActiveControl.Text = obsVal
                     End If
-                Next ctrl
+                    'Now assign obsFlag to correct texbox on the form
+                    For Each ctrl In Me.Controls
+                        'Loop through all controls on form
+                        'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
+                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                            ctrl.Text = obsFlag
+                        End If
+                    Next ctrl
 
-                'Check that numeric value has been entered for observation value
-                objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
+                    'Check that numeric value has been entered for observation value
+                    objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
 
-                ''Get the element limits
+                    ''Get the element limits
 
-                elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-                '
-                daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                dsValueLimits.Clear()
-                'Add row for element code associated with active control
-                daValueLimits.Fill(dsValueLimits, "obselement")
+                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
+                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
+                    '
+                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                    dsValueLimits.Clear()
+                    'Add row for element code associated with active control
+                    daValueLimits.Fill(dsValueLimits, "obselement")
 
-                obsValue = Me.ActiveControl.Text
-                'Get element lower limit
-                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                    valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                Else
-                    valLowerLimit = ""
-                End If
-                'Get element upper limit
-                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                    valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                Else
-                    valUpperLimit = ""
-                End If
+                    obsValue = Me.ActiveControl.Text
+                    'Get element lower limit
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                    Else
+                        valLowerLimit = ""
+                    End If
+                    'Get element upper limit
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                    Else
+                        valUpperLimit = ""
+                    End If
 
-                'Check lower limit
-                If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
-                    objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
-                End If
-                'Check upper limit
-                If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
-                    objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
-                End If
-                'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
-            ElseIf Me.ActiveControl.Name = "txtYear" Then
-                'Check for numeric
-                objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
-                'Check valid year
-                If tabNext = True Then
-                    objKeyPress.checkValidYear(txtYear.Text, txtYear)
-                End If
+                    'Check lower limit
+                    If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
+                        objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
+                    End If
+                    'Check upper limit
+                    If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
+                        objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
+                    End If
+                    'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
+                ElseIf Me.ActiveControl.Name = "txtYear" Then
+                    'Check for numeric
+                    objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
+                    'Check valid year
+                    If tabNext = True Then
+                        objKeyPress.checkValidYear(txtYear.Text, txtYear)
+                    End If
                 ElseIf Me.ActiveControl.Name = "cboMonth" Then
                     'Check for numeric
                     objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
@@ -830,16 +831,16 @@ Public Class formSynopRA1
                 ElseIf Me.ActiveControl.Name = "cboDay" Then
                     'Check for numeric
                     objKeyPress.checkIsNumeric(cboDay.Text, cboDay)
-                'Check valid day
-                If tabNext = True Then
-                    objKeyPress.checkValidDay(cboDay.Text, cboDay)
-                End If
-                If tabNext = True Then
-                    objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
-                End If
-                If tabNext = True Then
-                    objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
-                End If
+                    'Check valid day
+                    If tabNext = True Then
+                        objKeyPress.checkValidDay(cboDay.Text, cboDay)
+                    End If
+                    If tabNext = True Then
+                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                    End If
+                    If tabNext = True Then
+                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                    End If
                 ElseIf Me.ActiveControl.Name = "cboHour" Then
                     'Check for numeric
                     objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
@@ -853,22 +854,24 @@ Public Class formSynopRA1
                         itemFound = False
                     End If
                     objKeyPress.checkExists(itemFound, cboStation)
-            Else
-                ' Generate flag M for missing data for blank values
-                For Each ctrl In Me.Controls
-                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-                        ctrl.Text = "M" 'obsFlag
-                        Exit For
-                    End If
-                Next ctrl
-            End If
+                Else
+                    ' Generate flag M for missing data for blank values
+                    For Each ctrl In Me.Controls
+                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                            ctrl.Text = "M" 'obsFlag
+                            Exit For
+                        End If
+                    Next ctrl
+                End If
 
-            'if TAB next is true Activate [TAB]
-            If tabNext = True Then
-                My.Computer.Keyboard.SendKeys("{TAB}")
+                'if TAB next is true Activate [TAB]
+                If tabNext = True Then
+                    My.Computer.Keyboard.SendKeys("{TAB}")
+                End If
             End If
-
-            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
 
@@ -1075,7 +1078,7 @@ Public Class formSynopRA1
 
                 If stnElevation <> "" And txtVal_Elem106Field005.Text <> "" And txtVal_Elem101Field012.Text <> "" Then
                     'Calculate geopotential
-                    txtVal_Elem196Field011.Text = calculateValue.calculateGeopotential(ppp, dryBulb, stnElevation, gpm)
+                    txtVal_Elem185Field011.Text = calculateValue.calculateGeopotential(ppp, dryBulb, stnElevation, gpm)
                     'calculate MSL pressure
                     txtVal_Elem107Field006.Text = calculateValue.calculateMSLppp(ppp, dryBulb, stnElevation)
                 End If
@@ -1348,7 +1351,7 @@ Public Class formSynopRA1
             conn.ConnectionString = myConnectionString
             conn.Open()
 
-            ' Get all with the same observation time to constitute the subset of stations for encoding
+            ' Get all stations with the same observation time to constitute the subset of stations for encoding
             sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
             'MsgBox(sql)
@@ -1374,5 +1377,10 @@ Public Class formSynopRA1
             conn.Close()
         End Try
         conn.Close
+    End Sub
+
+
+    Private Sub txVal_Elem132Field050_TextChanged(sender As Object, e As EventArgs) Handles txtVal_Elem132Field050.TextChanged
+
     End Sub
 End Class

@@ -79,12 +79,12 @@ Partial Class formSynopRA1
         Me.txtVal_Elem814Field008 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem399Field009 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem301Field010 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem196Field011 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem185Field011 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem101Field012 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem102Field013 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem103Field014 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem105Field015 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem176Field016 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem192Field016 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem110Field017 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem114Field018 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem112Field019 = New System.Windows.Forms.TextBox()
@@ -93,10 +93,10 @@ Partial Class formSynopRA1
         Me.txtVal_Elem197Field022 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem193Field023 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem115Field024 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem177Field025 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem178Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem179Field027 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem180Field028 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem168Field025 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem169Field026 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem170Field027 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem171Field028 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem119Field029 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem116Field030 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem117Field031 = New System.Windows.Forms.TextBox()
@@ -117,8 +117,8 @@ Partial Class formSynopRA1
         Me.txtVal_Elem003Field046 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem099Field047 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem018Field048 = New System.Windows.Forms.TextBox()
-        Me.txVal_Elem084Field049 = New System.Windows.Forms.TextBox()
-        Me.txVal_Elem132Field050 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem084Field049 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem132Field050 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem005Field051 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem174Field052 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem046Field053 = New System.Windows.Forms.TextBox()
@@ -140,12 +140,12 @@ Partial Class formSynopRA1
         Me.txtFlag814Field057 = New System.Windows.Forms.TextBox()
         Me.txtFlag399Field058 = New System.Windows.Forms.TextBox()
         Me.txtFlag301Field059 = New System.Windows.Forms.TextBox()
-        Me.txtFlag196Field060 = New System.Windows.Forms.TextBox()
+        Me.txtFlag185Field060 = New System.Windows.Forms.TextBox()
         Me.txtFlag101Field061 = New System.Windows.Forms.TextBox()
         Me.txtFlag102Field062 = New System.Windows.Forms.TextBox()
         Me.txtFlag103Field063 = New System.Windows.Forms.TextBox()
         Me.txtFlag105Field064 = New System.Windows.Forms.TextBox()
-        Me.txtFlag176Field065 = New System.Windows.Forms.TextBox()
+        Me.txtFlag192Field065 = New System.Windows.Forms.TextBox()
         Me.txtFlag110Field066 = New System.Windows.Forms.TextBox()
         Me.txtFlag114Field067 = New System.Windows.Forms.TextBox()
         Me.txtFlag112Field068 = New System.Windows.Forms.TextBox()
@@ -161,7 +161,7 @@ Partial Class formSynopRA1
         Me.txtFlag180Field077 = New System.Windows.Forms.TextBox()
         Me.txtFlag179Field076 = New System.Windows.Forms.TextBox()
         Me.txtFlag178Field075 = New System.Windows.Forms.TextBox()
-        Me.txtFlag177Field074 = New System.Windows.Forms.TextBox()
+        Me.txtFlag168Field074 = New System.Windows.Forms.TextBox()
         Me.txtFlag115Field073 = New System.Windows.Forms.TextBox()
         Me.txtFlag193Field072 = New System.Windows.Forms.TextBox()
         Me.txtFlag197Field071 = New System.Windows.Forms.TextBox()
@@ -748,13 +748,13 @@ Partial Class formSynopRA1
         Me.txtVal_Elem301Field010.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem301Field010.TabIndex = 10
         '
-        'txtVal_Elem196Field011
+        'txtVal_Elem185Field011
         '
-        Me.txtVal_Elem196Field011.Location = New System.Drawing.Point(124, 218)
-        Me.txtVal_Elem196Field011.Name = "txtVal_Elem196Field011"
-        Me.txtVal_Elem196Field011.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem196Field011.TabIndex = 11
-        Me.txtVal_Elem196Field011.TabStop = False
+        Me.txtVal_Elem185Field011.Location = New System.Drawing.Point(124, 218)
+        Me.txtVal_Elem185Field011.Name = "txtVal_Elem185Field011"
+        Me.txtVal_Elem185Field011.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem185Field011.TabIndex = 11
+        Me.txtVal_Elem185Field011.TabStop = False
         '
         'txtVal_Elem101Field012
         '
@@ -785,12 +785,12 @@ Partial Class formSynopRA1
         Me.txtVal_Elem105Field015.TabIndex = 15
         Me.txtVal_Elem105Field015.TabStop = False
         '
-        'txtVal_Elem176Field016
+        'txtVal_Elem192Field016
         '
-        Me.txtVal_Elem176Field016.Location = New System.Drawing.Point(124, 348)
-        Me.txtVal_Elem176Field016.Name = "txtVal_Elem176Field016"
-        Me.txtVal_Elem176Field016.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem176Field016.TabIndex = 16
+        Me.txtVal_Elem192Field016.Location = New System.Drawing.Point(124, 348)
+        Me.txtVal_Elem192Field016.Name = "txtVal_Elem192Field016"
+        Me.txtVal_Elem192Field016.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem192Field016.TabIndex = 16
         '
         'txtVal_Elem110Field017
         '
@@ -822,14 +822,14 @@ Partial Class formSynopRA1
         '
         'txtVal_Elem167Field021
         '
-        Me.txtVal_Elem167Field021.Location = New System.Drawing.Point(379, 62)
+        Me.txtVal_Elem167Field021.Location = New System.Drawing.Point(379, 63)
         Me.txtVal_Elem167Field021.Name = "txtVal_Elem167Field021"
         Me.txtVal_Elem167Field021.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem167Field021.TabIndex = 21
         '
         'txtVal_Elem197Field022
         '
-        Me.txtVal_Elem197Field022.Location = New System.Drawing.Point(379, 88)
+        Me.txtVal_Elem197Field022.Location = New System.Drawing.Point(379, 87)
         Me.txtVal_Elem197Field022.Name = "txtVal_Elem197Field022"
         Me.txtVal_Elem197Field022.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem197Field022.TabIndex = 22
@@ -848,33 +848,33 @@ Partial Class formSynopRA1
         Me.txtVal_Elem115Field024.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem115Field024.TabIndex = 24
         '
-        'txtVal_Elem177Field025
+        'txtVal_Elem168Field025
         '
-        Me.txtVal_Elem177Field025.Location = New System.Drawing.Point(379, 166)
-        Me.txtVal_Elem177Field025.Name = "txtVal_Elem177Field025"
-        Me.txtVal_Elem177Field025.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem177Field025.TabIndex = 25
+        Me.txtVal_Elem168Field025.Location = New System.Drawing.Point(379, 166)
+        Me.txtVal_Elem168Field025.Name = "txtVal_Elem168Field025"
+        Me.txtVal_Elem168Field025.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem168Field025.TabIndex = 25
         '
-        'txtVal_Elem178Field026
+        'txtVal_Elem169Field026
         '
-        Me.txtVal_Elem178Field026.Location = New System.Drawing.Point(379, 192)
-        Me.txtVal_Elem178Field026.Name = "txtVal_Elem178Field026"
-        Me.txtVal_Elem178Field026.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem178Field026.TabIndex = 26
+        Me.txtVal_Elem169Field026.Location = New System.Drawing.Point(379, 192)
+        Me.txtVal_Elem169Field026.Name = "txtVal_Elem169Field026"
+        Me.txtVal_Elem169Field026.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem169Field026.TabIndex = 26
         '
-        'txtVal_Elem179Field027
+        'txtVal_Elem170Field027
         '
-        Me.txtVal_Elem179Field027.Location = New System.Drawing.Point(379, 218)
-        Me.txtVal_Elem179Field027.Name = "txtVal_Elem179Field027"
-        Me.txtVal_Elem179Field027.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem179Field027.TabIndex = 27
+        Me.txtVal_Elem170Field027.Location = New System.Drawing.Point(379, 218)
+        Me.txtVal_Elem170Field027.Name = "txtVal_Elem170Field027"
+        Me.txtVal_Elem170Field027.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem170Field027.TabIndex = 27
         '
-        'txtVal_Elem180Field028
+        'txtVal_Elem171Field028
         '
-        Me.txtVal_Elem180Field028.Location = New System.Drawing.Point(379, 244)
-        Me.txtVal_Elem180Field028.Name = "txtVal_Elem180Field028"
-        Me.txtVal_Elem180Field028.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem180Field028.TabIndex = 28
+        Me.txtVal_Elem171Field028.Location = New System.Drawing.Point(379, 244)
+        Me.txtVal_Elem171Field028.Name = "txtVal_Elem171Field028"
+        Me.txtVal_Elem171Field028.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem171Field028.TabIndex = 28
         '
         'txtVal_Elem119Field029
         '
@@ -1016,19 +1016,19 @@ Partial Class formSynopRA1
         Me.txtVal_Elem018Field048.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem018Field048.TabIndex = 48
         '
-        'txVal_Elem084Field049
+        'txtVal_Elem084Field049
         '
-        Me.txVal_Elem084Field049.Location = New System.Drawing.Point(617, 374)
-        Me.txVal_Elem084Field049.Name = "txVal_Elem084Field049"
-        Me.txVal_Elem084Field049.Size = New System.Drawing.Size(48, 20)
-        Me.txVal_Elem084Field049.TabIndex = 49
+        Me.txtVal_Elem084Field049.Location = New System.Drawing.Point(617, 374)
+        Me.txtVal_Elem084Field049.Name = "txtVal_Elem084Field049"
+        Me.txtVal_Elem084Field049.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem084Field049.TabIndex = 49
         '
-        'txVal_Elem132Field050
+        'txtVal_Elem132Field050
         '
-        Me.txVal_Elem132Field050.Location = New System.Drawing.Point(617, 400)
-        Me.txVal_Elem132Field050.Name = "txVal_Elem132Field050"
-        Me.txVal_Elem132Field050.Size = New System.Drawing.Size(48, 20)
-        Me.txVal_Elem132Field050.TabIndex = 50
+        Me.txtVal_Elem132Field050.Location = New System.Drawing.Point(617, 400)
+        Me.txtVal_Elem132Field050.Name = "txtVal_Elem132Field050"
+        Me.txtVal_Elem132Field050.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem132Field050.TabIndex = 50
         '
         'txtVal_Elem005Field051
         '
@@ -1211,13 +1211,13 @@ Partial Class formSynopRA1
         Me.txtFlag301Field059.TabIndex = 136
         Me.txtFlag301Field059.TabStop = False
         '
-        'txtFlag196Field060
+        'txtFlag185Field060
         '
-        Me.txtFlag196Field060.Location = New System.Drawing.Point(180, 218)
-        Me.txtFlag196Field060.Name = "txtFlag196Field060"
-        Me.txtFlag196Field060.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag196Field060.TabIndex = 137
-        Me.txtFlag196Field060.TabStop = False
+        Me.txtFlag185Field060.Location = New System.Drawing.Point(180, 218)
+        Me.txtFlag185Field060.Name = "txtFlag185Field060"
+        Me.txtFlag185Field060.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag185Field060.TabIndex = 137
+        Me.txtFlag185Field060.TabStop = False
         '
         'txtFlag101Field061
         '
@@ -1251,13 +1251,13 @@ Partial Class formSynopRA1
         Me.txtFlag105Field064.TabIndex = 141
         Me.txtFlag105Field064.TabStop = False
         '
-        'txtFlag176Field065
+        'txtFlag192Field065
         '
-        Me.txtFlag176Field065.Location = New System.Drawing.Point(180, 348)
-        Me.txtFlag176Field065.Name = "txtFlag176Field065"
-        Me.txtFlag176Field065.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag176Field065.TabIndex = 142
-        Me.txtFlag176Field065.TabStop = False
+        Me.txtFlag192Field065.Location = New System.Drawing.Point(180, 348)
+        Me.txtFlag192Field065.Name = "txtFlag192Field065"
+        Me.txtFlag192Field065.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag192Field065.TabIndex = 142
+        Me.txtFlag192Field065.TabStop = False
         '
         'txtFlag110Field066
         '
@@ -1379,13 +1379,13 @@ Partial Class formSynopRA1
         Me.txtFlag178Field075.TabIndex = 152
         Me.txtFlag178Field075.TabStop = False
         '
-        'txtFlag177Field074
+        'txtFlag168Field074
         '
-        Me.txtFlag177Field074.Location = New System.Drawing.Point(435, 166)
-        Me.txtFlag177Field074.Name = "txtFlag177Field074"
-        Me.txtFlag177Field074.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag177Field074.TabIndex = 151
-        Me.txtFlag177Field074.TabStop = False
+        Me.txtFlag168Field074.Location = New System.Drawing.Point(435, 166)
+        Me.txtFlag168Field074.Name = "txtFlag168Field074"
+        Me.txtFlag168Field074.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag168Field074.TabIndex = 151
+        Me.txtFlag168Field074.TabStop = False
         '
         'txtFlag115Field073
         '
@@ -1717,7 +1717,7 @@ Partial Class formSynopRA1
         Me.Controls.Add(Me.txtFlag180Field077)
         Me.Controls.Add(Me.txtFlag179Field076)
         Me.Controls.Add(Me.txtFlag178Field075)
-        Me.Controls.Add(Me.txtFlag177Field074)
+        Me.Controls.Add(Me.txtFlag168Field074)
         Me.Controls.Add(Me.txtFlag115Field073)
         Me.Controls.Add(Me.txtFlag193Field072)
         Me.Controls.Add(Me.txtFlag197Field071)
@@ -1726,12 +1726,12 @@ Partial Class formSynopRA1
         Me.Controls.Add(Me.txtFlag112Field068)
         Me.Controls.Add(Me.txtFlag114Field067)
         Me.Controls.Add(Me.txtFlag110Field066)
-        Me.Controls.Add(Me.txtFlag176Field065)
+        Me.Controls.Add(Me.txtFlag192Field065)
         Me.Controls.Add(Me.txtFlag105Field064)
         Me.Controls.Add(Me.txtFlag103Field063)
         Me.Controls.Add(Me.txtFlag102Field062)
         Me.Controls.Add(Me.txtFlag101Field061)
-        Me.Controls.Add(Me.txtFlag196Field060)
+        Me.Controls.Add(Me.txtFlag185Field060)
         Me.Controls.Add(Me.txtFlag301Field059)
         Me.Controls.Add(Me.txtFlag399Field058)
         Me.Controls.Add(Me.txtFlag814Field057)
@@ -1757,9 +1757,9 @@ Partial Class formSynopRA1
         Me.Controls.Add(Val_Elem005Label)
         Me.Controls.Add(Me.txtVal_Elem005Field051)
         Me.Controls.Add(Val_Elem132Label)
-        Me.Controls.Add(Me.txVal_Elem132Field050)
+        Me.Controls.Add(Me.txtVal_Elem132Field050)
         Me.Controls.Add(Val_Elem084Label)
-        Me.Controls.Add(Me.txVal_Elem084Field049)
+        Me.Controls.Add(Me.txtVal_Elem084Field049)
         Me.Controls.Add(Val_Elem018Label)
         Me.Controls.Add(Me.txtVal_Elem018Field048)
         Me.Controls.Add(Val_Elem099Label)
@@ -1801,13 +1801,13 @@ Partial Class formSynopRA1
         Me.Controls.Add(Val_Elem119Label)
         Me.Controls.Add(Me.txtVal_Elem119Field029)
         Me.Controls.Add(Val_Elem180Label)
-        Me.Controls.Add(Me.txtVal_Elem180Field028)
+        Me.Controls.Add(Me.txtVal_Elem171Field028)
         Me.Controls.Add(Val_Elem179Label)
-        Me.Controls.Add(Me.txtVal_Elem179Field027)
+        Me.Controls.Add(Me.txtVal_Elem170Field027)
         Me.Controls.Add(Val_Elem178Label)
-        Me.Controls.Add(Me.txtVal_Elem178Field026)
+        Me.Controls.Add(Me.txtVal_Elem169Field026)
         Me.Controls.Add(Val_Elem177Label)
-        Me.Controls.Add(Me.txtVal_Elem177Field025)
+        Me.Controls.Add(Me.txtVal_Elem168Field025)
         Me.Controls.Add(Val_Elem115Label)
         Me.Controls.Add(Me.txtVal_Elem115Field024)
         Me.Controls.Add(Val_Elem193Label)
@@ -1825,7 +1825,7 @@ Partial Class formSynopRA1
         Me.Controls.Add(Val_Elem110Label)
         Me.Controls.Add(Me.txtVal_Elem110Field017)
         Me.Controls.Add(Val_Elem176Label)
-        Me.Controls.Add(Me.txtVal_Elem176Field016)
+        Me.Controls.Add(Me.txtVal_Elem192Field016)
         Me.Controls.Add(Val_Elem105Label)
         Me.Controls.Add(Me.txtVal_Elem105Field015)
         Me.Controls.Add(Val_Elem103Label)
@@ -1835,7 +1835,7 @@ Partial Class formSynopRA1
         Me.Controls.Add(Val_Elem101Label)
         Me.Controls.Add(Me.txtVal_Elem101Field012)
         Me.Controls.Add(Val_Elem196Label)
-        Me.Controls.Add(Me.txtVal_Elem196Field011)
+        Me.Controls.Add(Me.txtVal_Elem185Field011)
         Me.Controls.Add(Val_Elem301Label)
         Me.Controls.Add(Me.txtVal_Elem301Field010)
         Me.Controls.Add(Val_Elem399Label)
@@ -1865,12 +1865,12 @@ Partial Class formSynopRA1
     Friend WithEvents txtVal_Elem814Field008 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem399Field009 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem301Field010 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem196Field011 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem185Field011 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem101Field012 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem102Field013 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem103Field014 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem105Field015 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem176Field016 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem192Field016 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem110Field017 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem114Field018 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem112Field019 As System.Windows.Forms.TextBox
@@ -1879,10 +1879,10 @@ Partial Class formSynopRA1
     Friend WithEvents txtVal_Elem197Field022 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem193Field023 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem115Field024 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem177Field025 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem178Field026 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem179Field027 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem180Field028 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem168Field025 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem169Field026 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem170Field027 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem171Field028 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem119Field029 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem116Field030 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem117Field031 As System.Windows.Forms.TextBox
@@ -1903,8 +1903,8 @@ Partial Class formSynopRA1
     Friend WithEvents txtVal_Elem003Field046 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem099Field047 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem018Field048 As System.Windows.Forms.TextBox
-    Friend WithEvents txVal_Elem084Field049 As System.Windows.Forms.TextBox
-    Friend WithEvents txVal_Elem132Field050 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem084Field049 As System.Windows.Forms.TextBox
+    Friend WithEvents txtVal_Elem132Field050 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem005Field051 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem174Field052 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem046Field053 As System.Windows.Forms.TextBox
@@ -1926,12 +1926,12 @@ Partial Class formSynopRA1
     Friend WithEvents txtFlag814Field057 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag399Field058 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag301Field059 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag196Field060 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag185Field060 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag101Field061 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag102Field062 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag103Field063 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag105Field064 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag176Field065 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag192Field065 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag110Field066 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag114Field067 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag112Field068 As System.Windows.Forms.TextBox
@@ -1947,7 +1947,7 @@ Partial Class formSynopRA1
     Friend WithEvents txtFlag180Field077 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag179Field076 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag178Field075 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag177Field074 As System.Windows.Forms.TextBox
+    Friend WithEvents txtFlag168Field074 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag115Field073 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag193Field072 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag197Field071 As System.Windows.Forms.TextBox
