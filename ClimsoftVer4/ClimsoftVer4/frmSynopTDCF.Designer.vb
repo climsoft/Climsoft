@@ -28,8 +28,9 @@ Partial Class frmSynopTDCF
         Me.cmdSend = New System.Windows.Forms.Button()
         Me.txtMsgbFile = New System.Windows.Forms.TextBox()
         Me.grpBinaryMessage = New System.Windows.Forms.GroupBox()
-        Me.txtEncoded = New System.Windows.Forms.TextBox()
         Me.grpObsHeaders = New System.Windows.Forms.GroupBox()
+        Me.lblBBB = New System.Windows.Forms.Label()
+        Me.cboBBB = New System.Windows.Forms.ComboBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.cboStation = New System.Windows.Forms.ComboBox()
         Me.lblHH = New System.Windows.Forms.Label()
@@ -59,11 +60,9 @@ Partial Class frmSynopTDCF
         Me.lblTransferMode = New System.Windows.Forms.Label()
         Me.lblServer = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblBBB = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cboTemplate = New System.Windows.Forms.ComboBox()
-        Me.cboBBB = New System.Windows.Forms.ComboBox()
         Me.txtMsgHeader = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.grpIndicators = New System.Windows.Forms.GroupBox()
@@ -94,6 +93,7 @@ Partial Class frmSynopTDCF
         Me.lblBinaryBox = New System.Windows.Forms.Label()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.TabHelp = New System.Windows.Forms.TabPage()
+        Me.txtEncoded = New System.Windows.Forms.TextBox()
         lblYYYY = New System.Windows.Forms.Label()
         Me.TabProcessing.SuspendLayout()
         Me.TabProcess.SuspendLayout()
@@ -109,7 +109,7 @@ Partial Class frmSynopTDCF
         '
         lblYYYY.AutoSize = True
         lblYYYY.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        lblYYYY.Location = New System.Drawing.Point(324, 28)
+        lblYYYY.Location = New System.Drawing.Point(137, 58)
         lblYYYY.Name = "lblYYYY"
         lblYYYY.Size = New System.Drawing.Size(32, 13)
         lblYYYY.TabIndex = 209
@@ -123,7 +123,7 @@ Partial Class frmSynopTDCF
         Me.TabProcessing.Location = New System.Drawing.Point(-5, 2)
         Me.TabProcessing.Name = "TabProcessing"
         Me.TabProcessing.SelectedIndex = 0
-        Me.TabProcessing.Size = New System.Drawing.Size(752, 437)
+        Me.TabProcessing.Size = New System.Drawing.Size(871, 487)
         Me.TabProcessing.TabIndex = 0
         '
         'TabProcess
@@ -139,14 +139,14 @@ Partial Class frmSynopTDCF
         Me.TabProcess.Location = New System.Drawing.Point(4, 22)
         Me.TabProcess.Name = "TabProcess"
         Me.TabProcess.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabProcess.Size = New System.Drawing.Size(744, 411)
+        Me.TabProcess.Size = New System.Drawing.Size(863, 461)
         Me.TabProcess.TabIndex = 0
         Me.TabProcess.Text = "Processing"
         Me.TabProcess.UseVisualStyleBackColor = True
         '
         'cmdSend
         '
-        Me.cmdSend.Location = New System.Drawing.Point(387, 382)
+        Me.cmdSend.Location = New System.Drawing.Point(387, 424)
         Me.cmdSend.Name = "cmdSend"
         Me.cmdSend.Size = New System.Drawing.Size(71, 22)
         Me.cmdSend.TabIndex = 10
@@ -155,34 +155,27 @@ Partial Class frmSynopTDCF
         '
         'txtMsgbFile
         '
-        Me.txtMsgbFile.Location = New System.Drawing.Point(131, 338)
+        Me.txtMsgbFile.Location = New System.Drawing.Point(131, 380)
         Me.txtMsgbFile.Name = "txtMsgbFile"
-        Me.txtMsgbFile.Size = New System.Drawing.Size(601, 20)
+        Me.txtMsgbFile.Size = New System.Drawing.Size(720, 20)
         Me.txtMsgbFile.TabIndex = 9
         '
         'grpBinaryMessage
         '
         Me.grpBinaryMessage.BackColor = System.Drawing.Color.WhiteSmoke
         Me.grpBinaryMessage.Controls.Add(Me.txtEncoded)
-        Me.grpBinaryMessage.Location = New System.Drawing.Point(11, 95)
+        Me.grpBinaryMessage.Location = New System.Drawing.Point(13, 102)
         Me.grpBinaryMessage.Name = "grpBinaryMessage"
-        Me.grpBinaryMessage.Size = New System.Drawing.Size(720, 228)
+        Me.grpBinaryMessage.Size = New System.Drawing.Size(838, 272)
         Me.grpBinaryMessage.TabIndex = 8
         Me.grpBinaryMessage.TabStop = False
         Me.grpBinaryMessage.Text = "Binary Message"
         '
-        'txtEncoded
-        '
-        Me.txtEncoded.Location = New System.Drawing.Point(6, 19)
-        Me.txtEncoded.Multiline = True
-        Me.txtEncoded.Name = "txtEncoded"
-        Me.txtEncoded.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtEncoded.Size = New System.Drawing.Size(708, 203)
-        Me.txtEncoded.TabIndex = 0
-        '
         'grpObsHeaders
         '
         Me.grpObsHeaders.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpObsHeaders.Controls.Add(Me.lblBBB)
+        Me.grpObsHeaders.Controls.Add(Me.cboBBB)
         Me.grpObsHeaders.Controls.Add(Me.lblStation)
         Me.grpObsHeaders.Controls.Add(Me.cboStation)
         Me.grpObsHeaders.Controls.Add(Me.lblHH)
@@ -196,16 +189,35 @@ Partial Class frmSynopTDCF
         Me.grpObsHeaders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpObsHeaders.Location = New System.Drawing.Point(11, 11)
         Me.grpObsHeaders.Name = "grpObsHeaders"
-        Me.grpObsHeaders.Size = New System.Drawing.Size(721, 67)
+        Me.grpObsHeaders.Size = New System.Drawing.Size(840, 85)
         Me.grpObsHeaders.TabIndex = 7
         Me.grpObsHeaders.TabStop = False
         Me.grpObsHeaders.Text = "Observation Headers"
+        '
+        'lblBBB
+        '
+        Me.lblBBB.AutoSize = True
+        Me.lblBBB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBBB.Location = New System.Drawing.Point(517, 57)
+        Me.lblBBB.Name = "lblBBB"
+        Me.lblBBB.Size = New System.Drawing.Size(28, 13)
+        Me.lblBBB.TabIndex = 216
+        Me.lblBBB.Tag = "BBB"
+        Me.lblBBB.Text = "BBB"
+        '
+        'cboBBB
+        '
+        Me.cboBBB.FormattingEnabled = True
+        Me.cboBBB.Location = New System.Drawing.Point(549, 53)
+        Me.cboBBB.Name = "cboBBB"
+        Me.cboBBB.Size = New System.Drawing.Size(112, 21)
+        Me.cboBBB.TabIndex = 215
         '
         'lblStation
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStation.Location = New System.Drawing.Point(13, 28)
+        Me.lblStation.Location = New System.Drawing.Point(135, 26)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(40, 13)
         Me.lblStation.TabIndex = 214
@@ -214,16 +226,16 @@ Partial Class frmSynopTDCF
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(59, 24)
+        Me.cboStation.Location = New System.Drawing.Point(181, 22)
         Me.cboStation.Name = "cboStation"
-        Me.cboStation.Size = New System.Drawing.Size(240, 21)
+        Me.cboStation.Size = New System.Drawing.Size(480, 21)
         Me.cboStation.TabIndex = 205
         '
         'lblHH
         '
         Me.lblHH.AutoSize = True
         Me.lblHH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHH.Location = New System.Drawing.Point(594, 28)
+        Me.lblHH.Location = New System.Drawing.Point(429, 58)
         Me.lblHH.Name = "lblHH"
         Me.lblHH.Size = New System.Drawing.Size(33, 13)
         Me.lblHH.TabIndex = 213
@@ -233,7 +245,7 @@ Partial Class frmSynopTDCF
         '
         Me.lblDD.AutoSize = True
         Me.lblDD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDD.Location = New System.Drawing.Point(509, 28)
+        Me.lblDD.Location = New System.Drawing.Point(341, 58)
         Me.lblDD.Name = "lblDD"
         Me.lblDD.Size = New System.Drawing.Size(29, 13)
         Me.lblDD.TabIndex = 212
@@ -243,7 +255,7 @@ Partial Class frmSynopTDCF
         '
         Me.lblMM.AutoSize = True
         Me.lblMM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMM.Location = New System.Drawing.Point(412, 28)
+        Me.lblMM.Location = New System.Drawing.Point(241, 58)
         Me.lblMM.Name = "lblMM"
         Me.lblMM.Size = New System.Drawing.Size(40, 13)
         Me.lblMM.TabIndex = 211
@@ -253,7 +265,7 @@ Partial Class frmSynopTDCF
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(456, 24)
+        Me.cboMonth.Location = New System.Drawing.Point(285, 54)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(41, 21)
         Me.cboMonth.TabIndex = 207
@@ -262,7 +274,7 @@ Partial Class frmSynopTDCF
         '
         Me.cboDay.FormattingEnabled = True
         Me.cboDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cboDay.Location = New System.Drawing.Point(542, 24)
+        Me.cboDay.Location = New System.Drawing.Point(374, 54)
         Me.cboDay.Name = "cboDay"
         Me.cboDay.Size = New System.Drawing.Size(39, 21)
         Me.cboDay.TabIndex = 208
@@ -271,14 +283,14 @@ Partial Class frmSynopTDCF
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", ""})
-        Me.cboHour.Location = New System.Drawing.Point(631, 24)
+        Me.cboHour.Location = New System.Drawing.Point(466, 54)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 210
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(360, 24)
+        Me.txtYear.Location = New System.Drawing.Point(181, 54)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(40, 20)
         Me.txtYear.TabIndex = 206
@@ -286,7 +298,7 @@ Partial Class frmSynopTDCF
         'lblEncodedFile
         '
         Me.lblEncodedFile.AutoSize = True
-        Me.lblEncodedFile.Location = New System.Drawing.Point(8, 343)
+        Me.lblEncodedFile.Location = New System.Drawing.Point(8, 385)
         Me.lblEncodedFile.Name = "lblEncodedFile"
         Me.lblEncodedFile.Size = New System.Drawing.Size(115, 13)
         Me.lblEncodedFile.TabIndex = 5
@@ -294,7 +306,7 @@ Partial Class frmSynopTDCF
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(479, 382)
+        Me.cmdClose.Location = New System.Drawing.Point(479, 424)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(72, 23)
         Me.cmdClose.TabIndex = 2
@@ -303,7 +315,8 @@ Partial Class frmSynopTDCF
         '
         'cmdViewDecsriptors
         '
-        Me.cmdViewDecsriptors.Location = New System.Drawing.Point(254, 382)
+        Me.cmdViewDecsriptors.Enabled = False
+        Me.cmdViewDecsriptors.Location = New System.Drawing.Point(249, 423)
         Me.cmdViewDecsriptors.Name = "cmdViewDecsriptors"
         Me.cmdViewDecsriptors.Size = New System.Drawing.Size(106, 23)
         Me.cmdViewDecsriptors.TabIndex = 1
@@ -312,7 +325,7 @@ Partial Class frmSynopTDCF
         '
         'cmdEncode
         '
-        Me.cmdEncode.Location = New System.Drawing.Point(138, 382)
+        Me.cmdEncode.Location = New System.Drawing.Point(138, 424)
         Me.cmdEncode.Name = "cmdEncode"
         Me.cmdEncode.Size = New System.Drawing.Size(81, 23)
         Me.cmdEncode.TabIndex = 0
@@ -329,7 +342,7 @@ Partial Class frmSynopTDCF
         Me.TabSettings.Location = New System.Drawing.Point(4, 22)
         Me.TabSettings.Name = "TabSettings"
         Me.TabSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabSettings.Size = New System.Drawing.Size(744, 411)
+        Me.TabSettings.Size = New System.Drawing.Size(863, 461)
         Me.TabSettings.TabIndex = 1
         Me.TabSettings.Text = "Settings"
         Me.TabSettings.UseVisualStyleBackColor = True
@@ -476,11 +489,9 @@ Partial Class frmSynopTDCF
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Gainsboro
-        Me.GroupBox1.Controls.Add(Me.lblBBB)
         Me.GroupBox1.Controls.Add(Me.lblHeader)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cboTemplate)
-        Me.GroupBox1.Controls.Add(Me.cboBBB)
         Me.GroupBox1.Controls.Add(Me.txtMsgHeader)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -490,17 +501,6 @@ Partial Class frmSynopTDCF
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Headers"
-        '
-        'lblBBB
-        '
-        Me.lblBBB.AutoSize = True
-        Me.lblBBB.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBBB.Location = New System.Drawing.Point(500, 28)
-        Me.lblBBB.Name = "lblBBB"
-        Me.lblBBB.Size = New System.Drawing.Size(28, 13)
-        Me.lblBBB.TabIndex = 6
-        Me.lblBBB.Tag = "BBB"
-        Me.lblBBB.Text = "BBB"
         '
         'lblHeader
         '
@@ -531,14 +531,6 @@ Partial Class frmSynopTDCF
         Me.cboTemplate.Name = "cboTemplate"
         Me.cboTemplate.Size = New System.Drawing.Size(151, 21)
         Me.cboTemplate.TabIndex = 3
-        '
-        'cboBBB
-        '
-        Me.cboBBB.FormattingEnabled = True
-        Me.cboBBB.Location = New System.Drawing.Point(532, 24)
-        Me.cboBBB.Name = "cboBBB"
-        Me.cboBBB.Size = New System.Drawing.Size(128, 21)
-        Me.cboBBB.TabIndex = 3
         '
         'txtMsgHeader
         '
@@ -834,16 +826,25 @@ Partial Class frmSynopTDCF
         Me.TabHelp.Location = New System.Drawing.Point(4, 22)
         Me.TabHelp.Name = "TabHelp"
         Me.TabHelp.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabHelp.Size = New System.Drawing.Size(744, 411)
+        Me.TabHelp.Size = New System.Drawing.Size(863, 411)
         Me.TabHelp.TabIndex = 2
         Me.TabHelp.Text = "Help"
         Me.TabHelp.UseVisualStyleBackColor = True
+        '
+        'txtEncoded
+        '
+        Me.txtEncoded.Location = New System.Drawing.Point(6, 19)
+        Me.txtEncoded.Multiline = True
+        Me.txtEncoded.Name = "txtEncoded"
+        Me.txtEncoded.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtEncoded.Size = New System.Drawing.Size(826, 247)
+        Me.txtEncoded.TabIndex = 1
         '
         'frmSynopTDCF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(759, 451)
+        Me.ClientSize = New System.Drawing.Size(876, 493)
         Me.Controls.Add(Me.TabProcessing)
         Me.Name = "frmSynopTDCF"
         Me.Text = "TDCF BUFR Encoding"
@@ -902,12 +903,10 @@ Partial Class frmSynopTDCF
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cboTemplate As System.Windows.Forms.ComboBox
-    Friend WithEvents cboBBB As System.Windows.Forms.ComboBox
     Friend WithEvents txtMsgHeader As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents lblHeader As System.Windows.Forms.Label
     Friend WithEvents cmdUpadate As System.Windows.Forms.Button
-    Friend WithEvents lblBBB As System.Windows.Forms.Label
     Friend WithEvents grpMsgSwitch As System.Windows.Forms.GroupBox
     Friend WithEvents cmdUpdate As System.Windows.Forms.Button
     Friend WithEvents txtConfirmPassword As System.Windows.Forms.TextBox
@@ -934,6 +933,8 @@ Partial Class frmSynopTDCF
     Friend WithEvents txtYear As System.Windows.Forms.TextBox
     Friend WithEvents txtMsgbFile As System.Windows.Forms.TextBox
     Friend WithEvents grpBinaryMessage As System.Windows.Forms.GroupBox
-    Friend WithEvents txtEncoded As System.Windows.Forms.TextBox
     Friend WithEvents cmdSend As System.Windows.Forms.Button
+    Friend WithEvents lblBBB As System.Windows.Forms.Label
+    Friend WithEvents cboBBB As System.Windows.Forms.ComboBox
+    Friend WithEvents txtEncoded As System.Windows.Forms.TextBox
 End Class
