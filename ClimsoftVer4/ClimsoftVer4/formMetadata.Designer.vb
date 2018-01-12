@@ -3969,11 +3969,8 @@ Partial Class formMetadata
     Friend WithEvents txtBeginDate As System.Windows.Forms.TextBox
     Friend WithEvents txtEndate As System.Windows.Forms.TextBox
     Friend WithEvents txtScheduleClass As System.Windows.Forms.ComboBox
-<<<<<<< HEAD
+
     Friend WithEvents txtInstrumentCode As System.Windows.Forms.TextBox
     Friend WithEvents lblInstumentType As System.Windows.Forms.Label
     Friend WithEvents lblInstrumentCode As System.Windows.Forms.Label
-=======
-
->>>>>>> origin/beta2
 End Class
