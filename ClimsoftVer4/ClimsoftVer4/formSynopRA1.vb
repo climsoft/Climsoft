@@ -1382,4 +1382,8 @@ Public Class formSynopRA1
     Private Sub txVal_Elem132Field050_TextChanged(sender As Object, e As EventArgs) Handles txtVal_Elem132Field050.TextChanged
 
     End Sub
+
+    Private Sub txtFlag046Field102_TextChanged(sender As Object, e As EventArgs) Handles txtFlag046Field102.TextChanged
+
+    End Sub
 End Class
