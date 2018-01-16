@@ -27,8 +27,8 @@ Partial Class frmMainMenu
         Me.mnuAccessories = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesDewPointRH = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesXMLOutput = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProducts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAdministration = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -119,7 +119,6 @@ Partial Class frmMainMenu
         Me.mnuAccessories.Size = New System.Drawing.Size(90, 23)
         Me.mnuAccessories.Tag = "Accessories"
         Me.mnuAccessories.Text = "Accessories"
-        Me.mnuAccessories.Visible = False
         '
         'mnuAccessoriesDewPointRH
         '
@@ -135,19 +134,19 @@ Partial Class frmMainMenu
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
-        'mnuQC
-        '
-        Me.mnuQC.Name = "mnuQC"
-        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
-        Me.mnuQC.Tag = "QC"
-        Me.mnuQC.Text = "QC"
-        '
         'mnuProducts
         '
         Me.mnuProducts.Name = "mnuProducts"
         Me.mnuProducts.Size = New System.Drawing.Size(75, 23)
         Me.mnuProducts.Tag = "Products"
         Me.mnuProducts.Text = "Products"
+        '
+        'mnuQC
+        '
+        Me.mnuQC.Name = "mnuQC"
+        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
+        Me.mnuQC.Tag = "QC"
+        Me.mnuQC.Text = "QC"
         '
         'mnuAdministration
         '

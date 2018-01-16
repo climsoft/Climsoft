@@ -74,7 +74,7 @@
                 End If
                 sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
             Else
-                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0; LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
+                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
             End If
 
             ' Update station metadata

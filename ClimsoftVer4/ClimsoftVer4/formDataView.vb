@@ -299,4 +299,51 @@ Public Class formDataView
         End Try
 
     End Sub
+
+    Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
+        Dim hdr, dat As String
+        Dim ds1 As New DataSet
+        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+
+        Try
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+            conn.Open()
+
+            hdr = DataGridView.Columns(0).Name
+
+            For i = 1 To DataGridView.ColumnCount - 1
+                hdr = hdr & "," & DataGridView.Columns(i).Name
+            Next
+            FileOpen(111, "dataexport.csv", OpenMode.Output)
+
+            PrintLine(111, hdr)
+            FileClose(111)
+
+            Sql = "select * from " & DataGridView.DataMember & ";"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+
+            ds1.Clear()
+            da1.Fill(ds1, DataGridView.DataMember)
+
+            FileOpen(111, "dataexport.csv", OpenMode.Append)
+
+            For i = 0 To ds1.Tables(DataGridView.DataMember).Rows.Count - 1
+                dat = ds1.Tables(DataGridView.DataMember).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(DataGridView.DataMember).Columns.Count - 1
+                    dat = dat & "," & ds1.Tables(DataGridView.DataMember).Rows(i).Item(j)
+                Next
+
+                PrintLine(111, dat)
+            Next
+            FileClose(111)
+            conn.Close()
+            CommonModules.ViewFile("dataexport.csv")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+            FileClose(111)
+        End Try
+
+    End Sub
 End Class

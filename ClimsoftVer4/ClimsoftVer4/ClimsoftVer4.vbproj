@@ -200,6 +200,12 @@
     <Compile Include="frmChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmConversionDewPointRh.designer.vb">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCPTSeason.Designer.vb">
       <DependentUpon>frmCPTSeason.vb</DependentUpon>
     </Compile>
@@ -405,6 +411,10 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPlotter.Designer.vb" />
+    <Compile Include="frmPlotter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmQC.Designer.vb">
       <DependentUpon>frmQC.vb</DependentUpon>
     </Compile>
@@ -495,6 +505,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common.vb" />
+    <Compile Include="UserControl1.Designer.vb">
+      <DependentUpon>UserControl1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="formClimat.de.resx">
@@ -561,6 +577,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMetadata.resx">
       <DependentUpon>formMetadata.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formMonthly.de.resx">
       <DependentUpon>formMonthly.vb</DependentUpon>
@@ -654,6 +671,9 @@
     <EmbeddedResource Include="frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversionDewPointRh.resx">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCPTSeason.resx">
       <DependentUpon>frmCPTSeason.vb</DependentUpon>
     </EmbeddedResource>
@@ -691,6 +711,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formPaperArchive.resx">
       <DependentUpon>formPaperArchive.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDBUtilities.resx">
       <DependentUpon>frmDBUtilities.vb</DependentUpon>
@@ -806,12 +827,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.de.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.fr.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlotter.resx">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQC.de.resx">
       <DependentUpon>frmQC.vb</DependentUpon>

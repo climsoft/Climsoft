@@ -227,6 +227,16 @@ Public Class formHourly
                     itemFound = False
                 End If
                 objKeyPress.checkExists(itemFound, cboElement)
+            Else
+                ' Generate flag M for missing data for blank values
+                For Each ctrl In Me.Controls
+                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                        If Strings.Mid(ctrl.Name, 4, 4) = "Flag" Then
+                            ctrl.Text = "M" 'obsFlag
+                            Exit For
+                        End If
+                    End If
+                Next ctrl
             End If
             'if TAB next is true Activate [TAB]
             If tabNext = True Then
@@ -290,7 +300,8 @@ Public Class formHourly
         sql1 = "SELECT stationId,stationName FROM station ORDER by stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obselement ORDER by elementName;"
+        'sql3 = "SELECT elementID,elementName FROM obselement ORDER by elementName;"
+        sql3 = "SELECT elementID,elementName FROM obselement where selected = '1' ORDER by elementName;"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")

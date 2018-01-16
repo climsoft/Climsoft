@@ -50,61 +50,65 @@ Public Class formDaily2
 
         '----------------
         'Refill dataset before getting maxRows
-        ds.Clear()
-        sql = "SELECT * FROM form_daily2"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        da.Fill(ds, "form_daily2")
+        Try
+            ds.Clear()
+            sql = "SELECT * FROM form_daily2"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.Fill(ds, "form_daily2")
 
-        maxRows = ds.Tables("form_daily2").Rows.Count
-        ''''inc = maxRows - 1
-        '----------------
+            maxRows = ds.Tables("form_daily2").Rows.Count
+            ''''inc = maxRows - 1
+            '----------------
 
-        Dim stn As String, elem As String
-        'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        elem = ds.Tables("form_daily2").Rows(inc).Item("elementId")
-        cboStation.SelectedValue = stn
-        cboElement.SelectedValue = elem
-        'cboElement.Text = ds.Tables("form_daily2").Rows(inc).Item("elementId")
-        txtYear.Text = ds.Tables("form_daily2").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("form_daily2").Rows(inc).Item("mm")
+            Dim stn As String, elem As String
+            'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
+            stn = ds.Tables("form_daily2").Rows(inc).Item("stationId")
+            elem = ds.Tables("form_daily2").Rows(inc).Item("elementId")
+            cboStation.SelectedValue = stn
+            cboElement.SelectedValue = elem
+            'cboElement.Text = ds.Tables("form_daily2").Rows(inc).Item("elementId")
+            txtYear.Text = ds.Tables("form_daily2").Rows(inc).Item("yyyy")
+            cboMonth.Text = ds.Tables("form_daily2").Rows(inc).Item("mm")
 
-        cboHour.Text = ds.Tables("form_daily2").Rows(inc).Item("hh")
+            cboHour.Text = ds.Tables("form_daily2").Rows(inc).Item("hh")
 
-        Dim m As Integer
-        Dim ctl As Control
+            Dim m As Integer
+            Dim ctl As Control
 
-        'Display observation values in coressponding textboxes
-        'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
-        For m = 5 To 35
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_daily2").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_daily2").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
+            'Display observation values in coressponding textboxes
+            'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
+            For m = 5 To 35
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_daily2").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_daily2").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
+
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
+            'Display observation flags in coressponding textboxes
+            'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
+            For m = 36 To 66
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_daily2").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_daily2").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
 
-        'Display observation flags in coressponding textboxes
-        'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-        For m = 36 To 66
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_daily2").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_daily2").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
-
-        displayRecordNumber()
+            displayRecordNumber()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
@@ -125,112 +129,128 @@ Public Class formDaily2
         flagtextBoxSuffix = ""
         flagIndexDiff = 31
 
-        'If {ENTER} key is pressed
-        If e.KeyCode = Keys.Enter Then
+        Try
+            'If {ENTER} key is pressed
+            If e.KeyCode = Keys.Enter Then
 
-            If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
+                If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
-                'Check for an observation flag in the texbox for observation value.
-                ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
-                If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
-                    'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-                    'to the value string in the textbox.
-                    obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
-                    'Get the observation value by leaving out the last character from the string entered in the textbox
-                    obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
+                    'Check for an observation flag in the texbox for observation value.
+                    ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
 
-                    Me.ActiveControl.Text = obsVal
-                End If
-                'Now assign obsFlag to correct texbox on the form
-                For Each ctrl In Me.Controls
-                    'Loop through all controls on form
-                    'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
-                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-                        ctrl.Text = obsFlag
+                    If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
+                        'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
+                        'to the value string in the textbox.
+                        obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
+
+                        'Get the observation value by leaving out the last character from the string entered in the textbox
+                        obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
+
+                        Me.ActiveControl.Text = obsVal
                     End If
-                Next ctrl
+                    'Now assign obsFlag to correct texbox on the form
+                    For Each ctrl In Me.Controls
+                        'Loop through all controls on form
+                        'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
+                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                            ctrl.Text = obsFlag
+                        End If
+                    Next ctrl
 
-                'Check that numeric value has been entered for observation value
-                objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
+                    'Check that numeric value has been entered for observation value
+                    objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
 
-                ''Get the element limits
+                    ''Get the element limits
 
-                elemCode = cboElement.SelectedValue
-                sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
-                '
-                daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                dsValueLimits.Clear()
-                'Add row for element code associated with active control
-                daValueLimits.Fill(dsValueLimits, "obselement")
+                    elemCode = cboElement.SelectedValue
+                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
+                    '
+                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                    dsValueLimits.Clear()
+                    'Add row for element code associated with active control
+                    daValueLimits.Fill(dsValueLimits, "obselement")
 
-                obsValue = Me.ActiveControl.Text
-                'Get element lower limit
-                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                    valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                    obsValue = Me.ActiveControl.Text
+                    'Get element lower limit
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                    Else
+                        valLowerLimit = ""
+                    End If
+                    'Get element upper limit
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                    Else
+                        valUpperLimit = ""
+                    End If
+
+                    'Get value for qcTotlRequired
+                    totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+
+                    'Check lower limit
+                    If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
+                        objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
+                    End If
+                    'Check upper limit
+                    If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
+                        objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
+                    End If
+                    'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
+                ElseIf Me.ActiveControl.Name = "txtYear" Then
+                    'Check for numeric
+                    objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
+                    'Check valid year
+                    If tabNext = True Then
+                        objKeyPress.checkValidYear(txtYear.Text, txtYear)
+                    End If
+                ElseIf Me.ActiveControl.Name = "cboMonth" Then
+                    'Check for numeric
+                    objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
+                    'Check valid month
+                    objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
+
+                ElseIf Me.ActiveControl.Name = "cboHour" Then
+                    'Check for numeric
+                    objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
+                    'Check valid hour
+                    objKeyPress.checkValidHour(cboHour.Text, cboHour)
+                ElseIf Me.ActiveControl.Name = "cboStation" Then
+                    Dim itemFound As Boolean
+                    If Len(cboStation.SelectedValue) > 1 Then
+                        itemFound = True
+                    Else
+                        itemFound = False
+                    End If
+                    objKeyPress.checkExists(itemFound, cboStation)
+                ElseIf Me.ActiveControl.Name = "cboElement" Then
+                    Dim itemFound As Boolean
+                    If Len(cboElement.SelectedValue) > 1 Then
+                        itemFound = True
+                    Else
+                        itemFound = False
+                    End If
+                    objKeyPress.checkExists(itemFound, cboElement)
                 Else
-                    valLowerLimit = ""
-                End If
-                'Get element upper limit
-                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                    valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                Else
-                    valUpperLimit = ""
-                End If
+                    ' Generate flag M for missing data for blank values
+                    For Each ctrl In Me.Controls
+                        If Strings.Mid(ctrl.Name, 4, 4) <> "Flag" Then Continue For
+                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                            ctrl.Text = "M" 'obsFlag
+                        End If
+                    Next ctrl
 
-                'Get value for qcTotlRequired
-                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
-
-                'Check lower limit
-                If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
-                    objKeyPress.checkLowerLimit(Me.ActiveControl, obsValue, valLowerLimit)
                 End If
-                'Check upper limit
-                If obsValue <> "" And valUpperLimit <> "" And tabNext = True Then
-                    objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
-                End If
-                'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
-            ElseIf Me.ActiveControl.Name = "txtYear" Then
-                'Check for numeric
-                objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
-                'Check valid year
+                'if TAB next is true Activate [TAB]
                 If tabNext = True Then
-                    objKeyPress.checkValidYear(txtYear.Text, txtYear)
+                    My.Computer.Keyboard.SendKeys("{TAB}")
                 End If
-            ElseIf Me.ActiveControl.Name = "cboMonth" Then
-                'Check for numeric
-                objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
-                'Check valid month
-                objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
-            
-            ElseIf Me.ActiveControl.Name = "cboHour" Then
-                'Check for numeric
-                objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
-                'Check valid hour
-                objKeyPress.checkValidHour(cboHour.Text, cboHour)
-            ElseIf Me.ActiveControl.Name = "cboStation" Then
-                Dim itemFound As Boolean
-                If Len(cboStation.SelectedValue) > 1 Then
-                    itemFound = True
-                Else
-                    itemFound = False
-                End If
-                objKeyPress.checkExists(itemFound, cboStation)
-            ElseIf Me.ActiveControl.Name = "cboElement" Then
-                Dim itemFound As Boolean
-                If Len(cboElement.SelectedValue) > 1 Then
-                    itemFound = True
-                Else
-                    itemFound = False
-                End If
-                objKeyPress.checkExists(itemFound, cboElement)
             End If
-            'if TAB next is true Activate [TAB]
-            If tabNext = True Then
-                My.Computer.Keyboard.SendKeys("{TAB}")
-            End If
-        End If
 
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub formDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -284,7 +304,8 @@ Public Class formDaily2
         sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
+        'sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
+        sql3 = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
@@ -1530,5 +1551,13 @@ Public Class formDaily2
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
+    End Sub
+
+    Private Sub txtTotal_LostFocus(sender As Object, e As EventArgs) Handles txtTotal.LostFocus
+
+    End Sub
+
+    Private Sub txtTotal_TextChanged(sender As Object, e As EventArgs) Handles txtTotal.TextChanged
+
     End Sub
 End Class
