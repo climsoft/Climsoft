@@ -264,6 +264,10 @@
             'MsgBox("Total subsets = " & substs & " > " & subsets)
             sss = subsets 'Format(substs, "000")
 
+            If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
+                IO.Directory.CreateDirectory(System.IO.Path.GetFullPath(Application.StartupPath) & "\data")
+            End If
+
             fl2 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.txt"
 
             FileOpen(20, fl2, OpenMode.Output)
