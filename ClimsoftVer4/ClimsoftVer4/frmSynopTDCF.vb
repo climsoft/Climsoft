@@ -882,7 +882,9 @@
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
         'MsgBox(stn)
         Dim station_name, wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
-        sql = "select stationName, wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+        'sql = "select stationName, wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+        sql = "select stationName, wmoid, latitude, longitude, elevation from station where stationId = '" & stn & "';"
+
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             ds.Clear()
@@ -895,14 +897,18 @@
             lat = ds.Tables("stations").Rows(0).Item("latitude")
             lon = ds.Tables("stations").Rows(0).Item("longitude")
             elev = ds.Tables("stations").Rows(0).Item("elevation")
-            qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
+            'qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
 
-            If qualifier = "SYNOPTIC" Then
-                typ = 1 ' Manual stations only
-            ElseIf qualifier = "AWS" Then
-                typ = 2 ' Automatic station observations only
-            ElseIf qualifier = "Hybrid" Then
-                typ = 3 ' Both auto and manual observations used
+            qualifier = Get_StationQualifier(conn1, stn)
+            'MsgBox(qualifier)
+            If qualifier = "AWS" Then
+                typ = 0 ' Manual stations only
+            ElseIf qualifier = "SYNOPTIC" Then
+                typ = 1 ' Automatic station observations only
+            ElseIf qualifier = "HYBRID" Then
+                typ = 2 ' Both auto and manual observations used
+            Else
+                typ = 3 ' Missing qualifier value
             End If
 
             'Update the station details
@@ -924,6 +930,30 @@
             MsgBox(ex.Message)
         End Try
     End Sub
+    Function Get_StationQualifier(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String) As String
+        sql = "select qualifier,belongsTo from stationqualifier where belongsTo = '" & stn & "';"
+
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ds.Clear()
+            da.Fill(ds, "qualifiers")
+
+            Get_StationQualifier = "MISSING" ' Initialize Qualifer to Missing value
+            With ds.Tables("qualifiers")
+                If .Rows.Count < 1 Then
+                    Get_StationQualifier = "MISSING" ' Missing qualifier because no records in qualifier t
+                Else
+                    If Not IsDBNull(.Rows(0).Item("qualifier")) Then
+                        Get_StationQualifier = .Rows(0).Item("qualifier")
+                    End If
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Get_StationQualifier = "MISSING"
+        End Try
+    End Function
     Sub Update_Instruments_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
         sql = "select describedby as code,instrumentcode,height from stationelement where recordedfrom = '" & stn & "';"
 
