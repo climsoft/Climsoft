@@ -67,4 +67,8 @@ Public Class DataCall
     Public Function GetFields() As Dictionary(Of String, String)
         Return dctFields
     End Function
+
+    Public Function GetDataTable()
+
+    End Function
 End Class
