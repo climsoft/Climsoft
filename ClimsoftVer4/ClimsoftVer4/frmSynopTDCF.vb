@@ -903,7 +903,7 @@
             'MsgBox(qualifier)
             If qualifier = "AWS" Then
                 typ = 0 ' Manual stations only
-            ElseIf qualifier = "SYNOPTIC" Then
+            ElseIf qualifier = "SYNOPTIC" Or qualifier = "RAINFALL" Then
                 typ = 1 ' Automatic station observations only
             ElseIf qualifier = "HYBRID" Then
                 typ = 2 ' Both auto and manual observations used
