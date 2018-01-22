@@ -106,4 +106,9 @@ Public Class TableFilter
         SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
     End Sub
+
+    Public Function GetLinqExpression() As Func(Of Entity.DbSet, Boolean)
+        ' e.g. x.stationId = "67774010"
+        Return Function(x) CallByName(x, "stationId", CallType.Get) = "67774010"
+    End Function
 End Class

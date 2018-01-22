@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrBaseDataLink
-    Private clsDataDefinition As New DataCall
+    Protected clsDataDefinition As New DataCall
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
@@ -36,9 +36,9 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Sub SetTable(dbsNewTable As Entity.DbSet)
         CreateDataDefinition()
-        clsDataDefinition.SetTable(strNewTable:=strNewTable)
+        clsDataDefinition.SetTable(dbsNewTable:=dbsNewTable)
     End Sub
 
     Public Sub SetFields(dctNewFields As Dictionary(Of String, String))
@@ -59,15 +59,15 @@ Public Class ucrBaseDataLink
         SetSortByItems()
     End Sub
 
-    Public Sub SetTableAndFields(strNewTable As String, lstNewFields As List(Of String))
+    Public Sub SetTableAndFields(dbsNewTable As Entity.DbSet, lstNewFields As List(Of String))
         CreateDataDefinition()
-        clsDataDefinition.SetTableAndFields(strNewTable:=strNewTable, lstNewFields:=lstNewFields)
+        clsDataDefinition.SetTableAndFields(dbsNewTable:=dbsNewTable, lstNewFields:=lstNewFields)
         SetSortByItems()
     End Sub
 
-    Public Sub SetTableAndField(strNewTable As String, strNewField As String)
+    Public Sub SetTableAndField(dbsNewTable As Entity.DbSet, strNewField As String)
         CreateDataDefinition()
-        clsDataDefinition.SetTableAndField(strNewTable:=strNewTable, strNewField:=strNewField)
+        clsDataDefinition.SetTableAndField(dbsNewTable:=dbsNewTable, strNewField:=strNewField)
         SetSortByItems()
     End Sub
 

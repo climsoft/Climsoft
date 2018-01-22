@@ -199,6 +199,7 @@ Partial Class formDaily2
         Me.Label36 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.UcrStationSelector1 = New ClimsoftVer4.ucrStationSelector()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.groupUnits.SuspendLayout()
         Me.grpDefaultValues.SuspendLayout()
@@ -1627,11 +1628,19 @@ Partial Class formDaily2
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'UcrStationSelector1
+        '
+        Me.UcrStationSelector1.Location = New System.Drawing.Point(111, 11)
+        Me.UcrStationSelector1.Name = "UcrStationSelector1"
+        Me.UcrStationSelector1.Size = New System.Drawing.Size(178, 21)
+        Me.UcrStationSelector1.TabIndex = 661
+        '
         'formDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(724, 613)
+        Me.Controls.Add(Me.UcrStationSelector1)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.Label36)
@@ -1985,4 +1994,5 @@ Partial Class formDaily2
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents chkEnableSequencer As System.Windows.Forms.CheckBox
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents UcrStationSelector1 As ucrStationSelector
 End Class

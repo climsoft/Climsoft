@@ -7,11 +7,11 @@
 
     Private Sub PopulateStationList()
         If dtbStations IsNot Nothing Then
-            cboValues.DataSource = dtbStations.DefaultView.ToTable()
+            cboValues.DataSource = clsDataDefinition.GetDataTable()
             ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
             cboValues.ValueMember = strTypeIDs
             If bFirstLoad Then
-                SetViewTypeAsStations()
+                SetViewTypeAsStationsAndIDs()
             End If
         End If
     End Sub
@@ -20,17 +20,17 @@
         'tsmStationNames.Checked = False
         'tsmIDs.Checked = False
         'tsmIDsAndStations.Checked = False
-        'Select Case strViewType
-        '    Case strTypeStations
-        '        tsmStationNames.Checked = True
-        '        cboValues.DisplayMember = strTypeStations
-        '    Case strTypeIDs
-        '        tsmIDs.Checked = True
-        '        cboValues.DisplayMember = strTypeIDs
-        '    Case strTypeIDsAndStations
-        '        tsmIDsAndStations.Checked = True
-        '        cboValues.DisplayMember = strTypeIDsAndStations
-        'End Select
+        Select Case strViewType
+            Case strTypeStations
+                '        tsmStationNames.Checked = True
+                cboValues.DisplayMember = strTypeStations
+            Case strTypeIDs
+                '        tsmIDs.Checked = True
+                cboValues.DisplayMember = strTypeIDs
+            Case strTypeIDsAndStations
+                '        tsmIDsAndStations.Checked = True
+                cboValues.DisplayMember = strTypeIDsAndStations
+        End Select
     End Sub
 
     Public Sub SetViewTypeAsStations()
@@ -47,7 +47,7 @@
 
     Private Sub ucrStationSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            InitialiseStationDataTable()
+            'InitialiseStationDataTable()
             'SortByStationName()
             PopulateStationList()
             bFirstLoad = False
