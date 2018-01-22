@@ -92,11 +92,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsDataCall.vb" />
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
+    <Compile Include="ucrStationSelector.Designer.vb">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrStationSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="clsTableFilter.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
@@ -505,6 +513,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common.vb" />
+    <Compile Include="ucrBaseDataLink.Designer.vb">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrBaseDataLink.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.Designer.vb">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControl1.Designer.vb">
       <DependentUpon>UserControl1.vb</DependentUpon>
     </Compile>
@@ -898,6 +918,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrBaseDataLink.resx">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataLinkCombobox.resx">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrStationSelector.resx">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

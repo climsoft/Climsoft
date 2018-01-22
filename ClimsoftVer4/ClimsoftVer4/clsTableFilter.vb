@@ -41,6 +41,9 @@ Public Class TableFilter
     Private clsLeftFilter As TableFilter
     Private clsRightFilter As TableFilter
 
+    ' If False then the filter will have NOT at the start of the condition
+    Private bIsPositiveCondition As Boolean = True
+
     Public Sub SetField(strNewField As String)
         strField = strNewField
         bIsCombinedFilter = False
@@ -67,20 +70,26 @@ Public Class TableFilter
         bIsCombinedFilter = False
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, lstNewValues As List(Of String))
+    Public Sub SetPositiveCondition(bNewIsPositiveCondition As Boolean)
+        bIsPositiveCondition = bNewIsPositiveCondition
+    End Sub
+
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, lstNewValues As List(Of String), Optional bNewIsPositiveCondition As Boolean = True)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValues(lstNewValues:=lstNewValues)
+        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String)
-        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=New List(Of String)({strNewValue}))
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=New List(Of String)({strNewValue}), bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall)
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall, Optional bNewIsPositiveCondition As Boolean = True)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValues(clsNewDataCall:=clsNewDataCall)
+        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
     Public Sub SetLeftFilter(clsNewLeftFilter As TableFilter)
