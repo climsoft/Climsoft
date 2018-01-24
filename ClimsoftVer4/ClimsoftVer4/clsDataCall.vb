@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.Data.Entity
+Imports System.Linq.Dynamic
 
 Public Class DataCall
     ' The table in the database to call values from
@@ -86,13 +87,18 @@ Public Class DataCall
     Public Function GetDataTable() As Object
         Dim db As New mariadb_climsoft_test_db_v4Entities
 
-        Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
+        Dim q = db.stations _
+            .Where("stationId == @0", "67774010")
+        '   .Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
+
+        'Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
         'Dim q = From emp In db.stations Select New With {.stationId = emp.stationId, .stationName = emp.stationName, .stations_ids = emp.stationId + " - " + emp.stationName}
         ' if DBQuery() contains NULL dates then the connection string must have "Convert Zero Datetime=True"
 
         Return q.ToList
-        Return db.stations.Local.ToBindingList()
-        Return db.stations.Local.Where(Function(x) x.stationId = "67774010")
-        Return db.stations.Local.Where(clsFilter.GetLinqExpression())
+        'Return db.stations.Local.ToBindingList()
+        'Return db.stations.Local.Where(Function(x) x.stationId = "67774010")
+        'Return db.stations.Local.Where(clsFilter.GetLinqExpression())
+        Return Nothing
     End Function
 End Class
