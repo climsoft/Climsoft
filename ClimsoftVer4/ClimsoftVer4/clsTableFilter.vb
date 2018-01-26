@@ -27,10 +27,12 @@ Public Class TableFilter
     Private strOperator As String
 
     ' The values for the filter can either be a static list of values or from a DataCall object which gets values from a calculation on the database
-    ' If using static values, bValuesFromDataCall = False, otherwise bValuesFromDataCall = True 
+    ' If using static values, bValuesFromDataCall = False, otherwise bValuesFromDataCall = True
     Private bValuesFromDataCall As Boolean = False
+    Private bArrayOperator As Boolean = False
     Private lstValues As List(Of String)
-    Private clsValues As DataCall
+    Private strValue As String
+    Private clsDataCallValues As DataCall
 
     ' A TableFilter could also be a combination of two TableFilter objects e.g. Element IN "Rain" AND Station IN "Maseno"
     ' In this case bIsCombinedFilter = True
@@ -58,16 +60,21 @@ Public Class TableFilter
         lstValues = lstNewValues
         bValuesFromDataCall = False
         bIsCombinedFilter = False
+        bArrayOperator = True
     End Sub
 
     Public Sub SetValue(strNewValue As String)
-        SetValues(New List(Of String)({strNewValue}))
+        strValue = strNewValue
+        bValuesFromDataCall = False
+        bIsCombinedFilter = False
+        bArrayOperator = False
     End Sub
 
     Public Sub SetValues(clsNewDataCall As DataCall)
-        clsValues = clsNewDataCall
+        clsDataCallValues = clsNewDataCall
         bValuesFromDataCall = True
         bIsCombinedFilter = False
+        bArrayOperator = True
     End Sub
 
     Public Sub SetPositiveCondition(bNewIsPositiveCondition As Boolean)
@@ -82,7 +89,10 @@ Public Class TableFilter
     End Sub
 
     Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True)
-        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=New List(Of String)({strNewValue}), bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        SetField(strNewField:=strNewField)
+        SetOperator(strNewOperator:=strNewOperator)
+        SetValue(strNewValue:=strNewValue)
+        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
     Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall, Optional bNewIsPositiveCondition As Boolean = True)
@@ -113,6 +123,26 @@ Public Class TableFilter
     'End Function
 
     Public Function GetLinqExpression() As String
-        Return ""
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            strExpression = clsLeftFilter.GetLinqExpression() & " " & strOperator & " " & clsRightFilter.GetLinqExpression()
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                strExpression = strExpression & " " & strOperator & " " & strValue
+            End If
+        End If
+        strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            strExpression = "not " & strExpression
+        End If
+        Return strExpression
     End Function
 End Class

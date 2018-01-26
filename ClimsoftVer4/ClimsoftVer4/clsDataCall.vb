@@ -43,17 +43,6 @@ Public Class DataCall
         dctFields = dctNewFields
     End Sub
 
-    Private Sub SetFieldsObject(emp)
-        'objFields = New Dynamic.ExpandoObject
-
-        'objFields.test = Function(x)
-
-        '                 End Function
-        'For Each strField As String In dctFields.Keys
-        '    CallByName(objFields, strField, CallType.Set, dctFields(strField))
-        'Next
-    End Sub
-
     Public Sub SetFields(lstNewFields As List(Of String))
         Dim dctNewFields As New Dictionary(Of String, String)
         For Each strTemp As String In lstNewFields
@@ -80,10 +69,26 @@ Public Class DataCall
         clsFilter = clsNewFilter
     End Sub
 
+    Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
+        Dim clsNewFilter As New TableFilter
+
+        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, strNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition)
+        SetFilter(clsNewFilter:=clsNewFilter)
+    End Sub
+
     Public Function GetValues() As List(Of String)
         Dim lstValues As New List(Of String)
+        Dim objData As Object
 
+        objData = GetDataTable()
+        For Each entItem In objData
+            lstValues.Add(CallByName(entItem, dctFields.Keys(0), CallType.Get))
+        Next
         Return lstValues
+    End Function
+
+    Public Function GetValuesAsString(Optional strSep As String = ",") As String
+        Return String.Join(strSep, GetValues())
     End Function
 
     Public Function GetFields() As Dictionary(Of String, String)
@@ -98,22 +103,16 @@ Public Class DataCall
         ' We tried adding an explicit cast before creating query but didn't have any effect
         ' x = DirectCast(x, DbSet(Of station))
         If strTable = "stations" Then
-            Dim x As DbSet(Of station)
-            x = db.stations
             ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
-            Dim q = x
-            'q = x.Where(clsFilter.GetLinqExpression())
-            Dim w = q.Select("new(stationId as stationId)")
-            'q = q.Select(GetSelectLinqExpression())
-            'Dim q = x
-            'If clsFilter IsNot Nothing Then
-            '    q = x.Where(clsFilter.GetLinqExpression())
-            'End If
+            If clsFilter IsNot Nothing Then
+                Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
+            Else
+                Return db.stations.ToList()
+            End If
             'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
             '    Return q.ToList
             'End If
             'q = x.Select(GetSelectLinqExpression())
-            Return q.ToList()
         End If
         '.Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
 

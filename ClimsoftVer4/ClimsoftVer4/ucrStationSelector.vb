@@ -8,6 +8,8 @@
     Private dtbStations As New DataTable
 
     Private Sub PopulateStationList()
+        ' Example of defining a filter for the data call
+        'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
         objStations = clsDataDefinition.GetDataTable()
         dtbStations = New DataTable()
         dtbStations.Columns.Add(strStationName, GetType(String))
