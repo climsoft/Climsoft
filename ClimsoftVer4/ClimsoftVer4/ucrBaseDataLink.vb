@@ -36,6 +36,11 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
+    Public Sub SetTable(strNewTable As String)
+        CreateDataDefinition()
+        clsDataDefinition.SetTable(strNewTable:=strNewTable)
+    End Sub
+
     Public Sub SetTable(dbsNewTable As Entity.DbSet)
         CreateDataDefinition()
         clsDataDefinition.SetTable(dbsNewTable:=dbsNewTable)

@@ -107,8 +107,12 @@ Public Class TableFilter
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
     End Sub
 
-    Public Function GetLinqExpression() As Func(Of Entity.DbSet, Boolean)
-        ' e.g. x.stationId = "67774010"
-        Return Function(x) CallByName(x, "stationId", CallType.Get) = "67774010"
+    'Public Function GetLinqExpression() As Func(Of Entity.DbSet, Boolean)
+    '    ' e.g. x.stationId = "67774010"
+    '    Return Function(x) CallByName(x, "stationId", CallType.Get) = "67774010"
+    'End Function
+
+    Public Function GetLinqExpression() As String
+        Return ""
     End Function
 End Class
