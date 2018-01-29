@@ -669,6 +669,12 @@
     <Compile Include="routinereportdefinition.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="sdgFilter.Designer.vb">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="seq_daily_element.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1116,6 +1122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSplashScreen.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFilter.resx">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
