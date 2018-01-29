@@ -24,7 +24,7 @@ Public Class DataCall
     ' The fields in the table which the values will be from
     ' The keys are the names of fields in the data base
     ' The values are how the field should be displayed to the user
-    Private dctFields As Dictionary(Of String, String)
+    Private dctFields As Dictionary(Of String, List(Of String))
 
     'Private objFields As Object = New Dynamic.ExpandoObject
 
@@ -39,14 +39,14 @@ Public Class DataCall
         strTable = strNewTable
     End Sub
 
-    Public Sub SetFields(dctNewFields As Dictionary(Of String, String))
+    Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         dctFields = dctNewFields
     End Sub
 
     Public Sub SetFields(lstNewFields As List(Of String))
-        Dim dctNewFields As New Dictionary(Of String, String)
+        Dim dctNewFields As New Dictionary(Of String, List(Of String))
         For Each strTemp As String In lstNewFields
-            dctNewFields.Add(strTemp, strTemp)
+            dctNewFields.Add(strTemp, New List(Of String)({strTemp}))
         Next
         SetFields(dctNewFields:=dctNewFields)
     End Sub
@@ -91,29 +91,81 @@ Public Class DataCall
         Return String.Join(strSep, GetValues())
     End Function
 
-    Public Function GetFields() As Dictionary(Of String, String)
+    Public Function GetFields() As Dictionary(Of String, List(Of String))
         Return dctFields
     End Function
 
-    Public Function GetDataTable() As Object
+    Public Function GetDataTable() As DataTable
+        Dim objData As Object
+        Dim dtbFields As DataTable
+
+        objData = GetDataObject()
+        dtbFields = New DataTable()
+        If objData IsNot Nothing Then
+            For Each strFieldDisplay As String In dctFields.Keys
+                dtbFields.Columns.Add(strFieldDisplay, GetType(String))
+            Next
+            For Each Item As Object In objData
+                dtbFields.Rows.Add(GetFieldsArray(Item))
+                'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
+            Next
+        End If
+        Return dtbFields
+    End Function
+
+    Public Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
+        Dim objFields As New List(Of Object)
+        Dim objData As Object
+        Dim lstFields As List(Of String)
+        Dim lstCombine As List(Of String)
+
+        objData = GetDataObject()
+        If objData IsNot Nothing Then
+            For Each strFieldDisplay As String In dctFields.Keys
+                lstFields = dctFields(strFieldDisplay)
+                If lstFields.Count = 1 Then
+                    objFields.Add(CallByName(Item, lstFields(0), CallType.Get))
+                Else
+                    lstCombine = New List(Of String)
+                    For Each strField In lstFields
+                        lstCombine.Add(CallByName(Item, strField, CallType.Get))
+                    Next
+                    objFields.Add(String.Join(strSep, lstCombine))
+                End If
+            Next
+            Return objFields.ToArray()
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Public Function GetDataObject() As Object
         Dim db As New mariadb_climsoft_test_db_v4Entities
 
-        ' CallByName(db, strTable, CallType.Get) should be the same as db.stations, where strTable = "stations"
-        ' but is not doing casting correctly
-        ' We tried adding an explicit cast before creating query but didn't have any effect
-        ' x = DirectCast(x, DbSet(Of station))
-        If strTable = "stations" Then
-            ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
+        Try
+            Dim x = CallByName(db, strTable, CallType.Get)
+            Dim y = TryCast(x, IQueryable(Of Object))
+
             If clsFilter IsNot Nothing Then
-                Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
-            Else
-                Return db.stations.ToList()
+                y = y.Where(clsFilter.GetLinqExpression())
             End If
-            'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
-            '    Return q.ToList
-            'End If
-            'q = x.Select(GetSelectLinqExpression())
-        End If
+            Return y.ToList()
+        Catch ex As Exception
+            Return Nothing
+        End Try
+
+        'If strTable = "stations" Then
+        '    ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
+        '    If clsFilter IsNot Nothing Then
+        '        Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
+        '    Else
+        '        Return db.stations.ToList()
+        '    End If
+        '    'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
+        '    '    Return q.ToList
+        '    'End If
+        '    'q = x.Select(GetSelectLinqExpression())
+        'End If
         '.Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
 
         'Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
@@ -125,7 +177,8 @@ Public Class DataCall
         'Return db.stations.Local.Where(clsFilter.GetLinqExpression())
     End Function
 
+    'TODO This should return the Linq expression that goes in the Select method
     Public Function GetSelectLinqExpression() As String
-
+        Return ""
     End Function
 End Class

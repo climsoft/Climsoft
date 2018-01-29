@@ -46,7 +46,7 @@ Public Class ucrBaseDataLink
         clsDataDefinition.SetTable(dbsNewTable:=dbsNewTable)
     End Sub
 
-    Public Sub SetFields(dctNewFields As Dictionary(Of String, String))
+    Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         CreateDataDefinition()
         clsDataDefinition.SetFields(dctNewFields:=dctNewFields)
         SetSortByItems()
@@ -82,12 +82,12 @@ Public Class ucrBaseDataLink
     End Sub
 
     Public Sub SetSortByItems()
-        tsSortBy.DropDownItems.Clear()
-        For Each kvpField As KeyValuePair(Of String, String) In clsDataDefinition.GetFields()
-            tsSortBy.DropDownItems.Add(kvpField.Value)
-            tsSortBy.DropDownItems.Item(tsSortBy.DropDownItems.Count - 1).Tag = kvpField.Key
-            AddHandler tsSortBy.DropDownItems.Item(tsSortBy.DropDownItems.Count - 1).Click, AddressOf Sort
-        Next
+        '    tsSortBy.DropDownItems.Clear()
+        '    For Each kvpField As KeyValuePair(Of String, String) In clsDataDefinition.GetFields()
+        '        tsSortBy.DropDownItems.Add(kvpField.Value)
+        '        tsSortBy.DropDownItems.Item(tsSortBy.DropDownItems.Count - 1).Tag = kvpField.Key
+        '        AddHandler tsSortBy.DropDownItems.Item(tsSortBy.DropDownItems.Count - 1).Click, AddressOf Sort
+        '    Next
     End Sub
 
     Protected Overridable Sub Sort()
