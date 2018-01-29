@@ -17,35 +17,30 @@ Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
 Public Class DataCall
+
     ' The table in the database to call values from
     Private dbsTable As DbSet
+    Private strTable As String
     ' The fields in the table which the values will be from
     ' The keys are the names of fields in the data base
     ' The values are how the field should be displayed to the user
     Private dctFields As Dictionary(Of String, String)
 
-    Private objFields As Object = New Dynamic.ExpandoObject
+    'Private objFields As Object = New Dynamic.ExpandoObject
 
     ' A TableFilter object which defines the rows in the table the values will be from
-    Private clsFilter As New TableFilter
+    Private clsFilter As TableFilter
 
     Public Sub SetTable(dbsNewTable As DbSet)
         dbsTable = dbsNewTable
     End Sub
 
-    Public Sub SetFields(dctNewFields As Dictionary(Of String, String))
-        dctFields = dctNewFields
+    Public Sub SetTable(strNewTable As String)
+        strTable = strNewTable
     End Sub
 
-    Private Sub SetFieldsObject(emp)
-        objFields = New Dynamic.ExpandoObject
-
-        objFields.test = Function(x)
-
-                         End Function
-        For Each strField As String In dctFields.Keys
-            CallByName(objFields, strField, CallType.Set, dctFields(strField))
-        Next
+    Public Sub SetFields(dctNewFields As Dictionary(Of String, String))
+        dctFields = dctNewFields
     End Sub
 
     Public Sub SetFields(lstNewFields As List(Of String))
@@ -74,10 +69,26 @@ Public Class DataCall
         clsFilter = clsNewFilter
     End Sub
 
+    Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
+        Dim clsNewFilter As New TableFilter
+
+        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, strNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition)
+        SetFilter(clsNewFilter:=clsNewFilter)
+    End Sub
+
     Public Function GetValues() As List(Of String)
         Dim lstValues As New List(Of String)
+        Dim objData As Object
 
+        objData = GetDataTable()
+        For Each entItem In objData
+            lstValues.Add(CallByName(entItem, dctFields.Keys(0), CallType.Get))
+        Next
         Return lstValues
+    End Function
+
+    Public Function GetValuesAsString(Optional strSep As String = ",") As String
+        Return String.Join(strSep, GetValues())
     End Function
 
     Public Function GetFields() As Dictionary(Of String, String)
@@ -87,18 +98,34 @@ Public Class DataCall
     Public Function GetDataTable() As Object
         Dim db As New mariadb_climsoft_test_db_v4Entities
 
-        Dim q = db.stations _
-            .Where("stationId == @0", "67774010")
-        '   .Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
+        ' CallByName(db, strTable, CallType.Get) should be the same as db.stations, where strTable = "stations"
+        ' but is not doing casting correctly
+        ' We tried adding an explicit cast before creating query but didn't have any effect
+        ' x = DirectCast(x, DbSet(Of station))
+        If strTable = "stations" Then
+            ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
+            If clsFilter IsNot Nothing Then
+                Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
+            Else
+                Return db.stations.ToList()
+            End If
+            'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
+            '    Return q.ToList
+            'End If
+            'q = x.Select(GetSelectLinqExpression())
+        End If
+        '.Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
 
         'Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
         'Dim q = From emp In db.stations Select New With {.stationId = emp.stationId, .stationName = emp.stationName, .stations_ids = emp.stationId + " - " + emp.stationName}
         ' if DBQuery() contains NULL dates then the connection string must have "Convert Zero Datetime=True"
 
-        Return q.ToList
         'Return db.stations.Local.ToBindingList()
         'Return db.stations.Local.Where(Function(x) x.stationId = "67774010")
         'Return db.stations.Local.Where(clsFilter.GetLinqExpression())
-        Return Nothing
+    End Function
+
+    Public Function GetSelectLinqExpression() As String
+
     End Function
 End Class

@@ -1,18 +1,29 @@
 ﻿Public Class ucrStationSelector
     Private bFirstLoad As Boolean = True
-    Private strTypeStations As String = "stationName"
-    Private strTypeIDs As String = "stationId"
-    Private strTypeIDsAndStations As String = "stations_ids"
+    Private strStationsTableName As String = "stations"
+    Private strStationName As String = "stationName"
+    Private strStationID As String = "stationId"
+    Private strIDsAndStations As String = "ids_stations"
+    Private objStations As New Object
     Private dtbStations As New DataTable
 
     Private Sub PopulateStationList()
-        If dtbStations IsNot Nothing Then
-            cboValues.DataSource = clsDataDefinition.GetDataTable()
-            ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
-            cboValues.ValueMember = strTypeIDs
-            If bFirstLoad Then
-                SetViewTypeAsStationsAndIDs()
-            End If
+        ' Example of defining a filter for the data call
+        'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
+        objStations = clsDataDefinition.GetDataTable()
+        dtbStations = New DataTable()
+        dtbStations.Columns.Add(strStationName, GetType(String))
+        dtbStations.Columns.Add(strStationID, GetType(String))
+        dtbStations.Columns.Add(strIDsAndStations, GetType(String))
+
+        For Each stnItem As station In objStations
+            dtbStations.Rows.Add(stnItem.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
+        Next
+        cboValues.DataSource = dtbStations
+        ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
+        cboValues.ValueMember = strStationID
+        If bFirstLoad Then
+            SetViewTypeAsStations()
         End If
     End Sub
 
@@ -21,58 +32,39 @@
         'tsmIDs.Checked = False
         'tsmIDsAndStations.Checked = False
         Select Case strViewType
-            Case strTypeStations
+            Case strStationName
                 '        tsmStationNames.Checked = True
-                cboValues.DisplayMember = strTypeStations
-            Case strTypeIDs
+                cboValues.DisplayMember = strStationName
+            Case strStationID
                 '        tsmIDs.Checked = True
-                cboValues.DisplayMember = strTypeIDs
-            Case strTypeIDsAndStations
+                cboValues.DisplayMember = strStationID
+            Case strIDsAndStations
                 '        tsmIDsAndStations.Checked = True
-                cboValues.DisplayMember = strTypeIDsAndStations
+                cboValues.DisplayMember = strIDsAndStations
         End Select
     End Sub
 
     Public Sub SetViewTypeAsStations()
-        SetViewType(strTypeStations)
+        SetViewType(strStationName)
     End Sub
 
     Public Sub SetViewTypeAsIDs()
-        SetViewType(strTypeIDs)
+        SetViewType(strStationID)
     End Sub
 
-    Public Sub SetViewTypeAsStationsAndIDs()
-        SetViewType(strTypeIDsAndStations)
+    Public Sub SetViewTypeAsIDsAndStations()
+        SetViewType(strIDsAndStations)
     End Sub
 
     Private Sub ucrStationSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'InitialiseStationDataTable()
             'SortByStationName()
+            SetTable(strStationsTableName)
+            SetFields(New List(Of String)({strStationID, strStationName}))
             PopulateStationList()
             bFirstLoad = False
         End If
-    End Sub
-
-    Private Sub InitialiseStationDataTable()
-        Dim dataAdapter As New MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim ds As New DataSet
-        Dim item As New ListViewItem
-        Dim sql As String
-
-        Try
-            sql = "SELECT * FROM station;"
-            dataAdapter = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, frmLogin.txtusrpwd.Text)
-            dataAdapter.Fill(ds, "station")
-            dtbStations = ds.Tables("station")
-            dtbStations.Columns.Add(strTypeIDsAndStations, GetType(String))
-            For i = 0 To dtbStations.Rows.Count - 1
-                dtbStations.Rows(i).Item(strTypeIDsAndStations) = dtbStations.Rows(i).Item(strTypeIDs) & " " & dtbStations.Rows(i).Item(strTypeStations)
-            Next
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            dtbStations = Nothing
-        End Try
     End Sub
 
     Private Sub tsmStations_Click(sender As Object, e As EventArgs)
@@ -84,7 +76,7 @@
     End Sub
 
     Private Sub tsmStationsAndIDs_Click(sender As Object, e As EventArgs)
-        SetViewTypeAsStationsAndIDs()
+        SetViewTypeAsIDsAndStations()
     End Sub
 
     Public Overrides Function ValidateSelection() As Boolean
