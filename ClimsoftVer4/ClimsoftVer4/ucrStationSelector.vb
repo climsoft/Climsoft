@@ -72,23 +72,47 @@
         End If
     End Sub
 
-    Private Sub tsmStations_Click(sender As Object, e As EventArgs)
-        SetViewTypeAsStations()
-    End Sub
-
-    Private Sub tsmIDs_Click(sender As Object, e As EventArgs)
-        SetViewTypeAsIDs()
-    End Sub
-
-    Private Sub tsmStationsAndIDs_Click(sender As Object, e As EventArgs)
-        SetViewTypeAsIDsAndStations()
-    End Sub
-
     Public Overrides Function ValidateSelection() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
-    Private Sub tsmFilterStations_Click(sender As Object, e As EventArgs)
+    Private Sub cmsStation_Click(sender As Object, e As EventArgs) Handles cmsStation.Click
+        SetViewTypeAsStations()
+    End Sub
+
+    Private Sub cmsStationIDs_Click(sender As Object, e As EventArgs) Handles cmsStationIDs.Click
+        SetViewTypeAsIDs()
+    End Sub
+
+    Private Sub cmsStationIDAndStation_Click(sender As Object, e As EventArgs) Handles cmsStationIDAndStation.Click
+        SetViewTypeAsIDsAndStations()
+    End Sub
+
+    Private Sub cmsStationSortByID_Click(sender As Object, e As EventArgs) Handles cmsStationSortByID.Click
+        SortByID()
+    End Sub
+
+    Private Sub SortByID()
+        If dtbStations IsNot Nothing Then
+            dtbStations.DefaultView.Sort = strStationID & " ASC"
+            cmsStationSortByID.Checked = True
+            cmsStationSortyByName.Checked = False
+            PopulateStationList()
+        End If
+    End Sub
+
+    Private Sub cmsStationSortyByName_Click(sender As Object, e As EventArgs) Handles cmsStationSortyByName.Click
+        SortByStationName()
+    End Sub
+
+    Private Sub SortByStationName()
+        dtbStations.DefaultView.Sort = strStationName & " ASC"
+        cmsStationSortByID.Checked = False
+        cmsStationSortyByName.Checked = True
+        PopulateStationList()
+    End Sub
+
+    Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
         'dlgFilterStations.SetDataTable(dtbStations)
         'dlgFilterStations.ShowDialog()
         'PopulateStationList()
