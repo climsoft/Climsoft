@@ -4,6 +4,8 @@
     Private strStationName As String = "stationName"
     Private strStationID As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
+    Private strTypeStations As String = "stationName"
+    Private strTypeIDs As String = "stationId"
     Private objStations As New Object
     Private dtbStations As New DataTable
 
@@ -83,18 +85,33 @@
         SetViewTypeAsIDsAndStations()
     End Sub
 
-    Private Sub SortByStationID()
+    Private Sub cmsStationSortByID_Click(sender As Object, e As EventArgs) Handles cmsStationSortByID.Click
+        SortByID()
+    End Sub
 
+    Private Sub SortByID()
+        If dtbStations IsNot Nothing Then
+            dtbStations.DefaultView.Sort = strTypeIDs & " ASC"
+            cmsStationSortByID.Checked = True
+            cmsStationSortyByName.Checked = False
+            PopulateStationList()
+        End If
+    End Sub
+
+    Private Sub cmsStationSortyByName_Click(sender As Object, e As EventArgs) Handles cmsStationSortyByName.Click
+        SortByStationName()
     End Sub
 
     Private Sub SortByStationName()
-
+        dtbStations.DefaultView.Sort = strTypeStations & " ASC"
+        cmsStationSortByID.Checked = False
+        cmsStationSortyByName.Checked = True
+        PopulateStationList()
     End Sub
+
     Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
         'dlgFilterStations.SetDataTable(dtbStations)
         'dlgFilterStations.ShowDialog()
         'PopulateStationList()
     End Sub
-
-
 End Class
