@@ -4,8 +4,6 @@
     Private strStationName As String = "stationName"
     Private strStationID As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
-    Private strTypeStations As String = "stationName"
-    Private strTypeIDs As String = "stationId"
     Private objStations As New Object
     Private dtbStations As New DataTable
 
@@ -91,7 +89,7 @@
 
     Private Sub SortByID()
         If dtbStations IsNot Nothing Then
-            dtbStations.DefaultView.Sort = strTypeIDs & " ASC"
+            dtbStations.DefaultView.Sort = strStationID & " ASC"
             cmsStationSortByID.Checked = True
             cmsStationSortyByName.Checked = False
             PopulateStationList()
@@ -103,7 +101,7 @@
     End Sub
 
     Private Sub SortByStationName()
-        dtbStations.DefaultView.Sort = strTypeStations & " ASC"
+        dtbStations.DefaultView.Sort = strStationName & " ASC"
         cmsStationSortByID.Checked = False
         cmsStationSortyByName.Checked = True
         PopulateStationList()
