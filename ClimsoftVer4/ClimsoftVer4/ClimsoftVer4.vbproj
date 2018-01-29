@@ -717,6 +717,12 @@
     <Compile Include="ucrDataLinkCombobox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrElemSelector.Designer.vb">
+      <DependentUpon>ucrElemSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElemSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrStationSelector.Designer.vb">
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
     </Compile>
@@ -1122,6 +1128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataLinkCombobox.resx">
       <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElemSelector.resx">
+      <DependentUpon>ucrElemSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrStationSelector.resx">
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
