@@ -96,52 +96,63 @@ Public Class DataCall
     End Function
 
     Public Function GetDataTable() As DataTable
-        Dim objData As Object = GetDataObject()
+        Dim objData As Object
         Dim dtbFields As DataTable
 
+        objData = GetDataObject()
         dtbFields = New DataTable()
-        For Each strFieldDisplay As String In dctFields.Keys
-            dtbFields.Columns.Add(strFieldDisplay, GetType(String))
-        Next
-
-        For Each Item As Object In objData
-            dtbFields.Rows.Add(GetFieldsArray(Item))
-            'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
-        Next
+        If objData IsNot Nothing Then
+            For Each strFieldDisplay As String In dctFields.Keys
+                dtbFields.Columns.Add(strFieldDisplay, GetType(String))
+            Next
+            For Each Item As Object In objData
+                dtbFields.Rows.Add(GetFieldsArray(Item))
+                'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
+            Next
+        End If
         Return dtbFields
     End Function
 
     Public Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
         Dim objFields As New List(Of Object)
-        Dim objData As Object = GetDataObject()
+        Dim objData As Object
         Dim lstFields As List(Of String)
         Dim lstCombine As List(Of String)
 
-        For Each strFieldDisplay As String In dctFields.Keys
-            lstFields = dctFields(strFieldDisplay)
-            If lstFields.Count = 1 Then
-                objFields.Add(CallByName(Item, lstFields(0), CallType.Get))
-            Else
-                lstCombine = New List(Of String)
-                For Each strField In lstFields
-                    lstCombine.Add(CallByName(Item, strField, CallType.Get))
-                Next
-                objFields.Add(String.Join(strSep, lstCombine))
-            End If
-        Next
-        Return objFields.ToArray()
+        objData = GetDataObject()
+        If objData IsNot Nothing Then
+            For Each strFieldDisplay As String In dctFields.Keys
+                lstFields = dctFields(strFieldDisplay)
+                If lstFields.Count = 1 Then
+                    objFields.Add(CallByName(Item, lstFields(0), CallType.Get))
+                Else
+                    lstCombine = New List(Of String)
+                    For Each strField In lstFields
+                        lstCombine.Add(CallByName(Item, strField, CallType.Get))
+                    Next
+                    objFields.Add(String.Join(strSep, lstCombine))
+                End If
+            Next
+            Return objFields.ToArray()
+        Else
+            Return Nothing
+        End If
     End Function
 
     Public Function GetDataObject() As Object
         Dim db As New mariadb_climsoft_test_db_v4Entities
 
-        Dim x = CallByName(db, strTable, CallType.Get)
-        Dim y = TryCast(x, IQueryable(Of Object))
+        Try
+            Dim x = CallByName(db, strTable, CallType.Get)
+            Dim y = TryCast(x, IQueryable(Of Object))
 
-        If clsFilter IsNot Nothing Then
-            y = y.Where(clsFilter.GetLinqExpression())
-        End If
-        Return y.ToList()
+            If clsFilter IsNot Nothing Then
+                y = y.Where(clsFilter.GetLinqExpression())
+            End If
+            Return y.ToList()
+        Catch ex As Exception
+            Return Nothing
+        End Try
 
         'If strTable = "stations" Then
         '    ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))

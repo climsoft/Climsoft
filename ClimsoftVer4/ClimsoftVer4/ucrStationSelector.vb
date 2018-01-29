@@ -20,11 +20,15 @@
         'For Each stnItem As station In objStations
         '    dtbStations.Rows.Add(stnItem.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
         'Next
-        cboValues.DataSource = dtbStations
-        ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
-        cboValues.ValueMember = strStationID
-        If bFirstLoad Then
-            SetViewTypeAsStations()
+        If dtbStations.Rows.Count > 0 Then
+            cboValues.DataSource = dtbStations
+            ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
+            cboValues.ValueMember = strStationID
+            If bFirstLoad Then
+                SetViewTypeAsStations()
+            End If
+        Else
+            cboValues.DataSource = Nothing
         End If
     End Sub
 
@@ -63,9 +67,9 @@
             'InitialiseStationDataTable()
             'SortByStationName()
             SetTable(strStationsTableName)
-            d.Add("Stations", New List(Of String)({strStationName}))
-            d.Add("IDs", New List(Of String)({strStationID}))
-            d.Add("IDs and Stations", New List(Of String)({strStationName, strStationID}))
+            d.Add(strStationName, New List(Of String)({strStationName}))
+            d.Add(strStationID, New List(Of String)({strStationID}))
+            d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
             SetFields(d)
             PopulateStationList()
             bFirstLoad = False
