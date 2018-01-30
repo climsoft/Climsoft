@@ -72,6 +72,7 @@
             d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
             SetFields(d)
             PopulateStationList()
+            cboValues.ContextMenuStrip = cmsStation
             bFirstLoad = False
         End If
     End Sub
@@ -117,8 +118,9 @@
     End Sub
 
     Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
-        'dlgFilterStations.SetDataTable(dtbStations)
-        'dlgFilterStations.ShowDialog()
-        'PopulateStationList()
+        ' TODOD SetDataTable() in sdgFilter needs to be created
+        'sdgFilter.SetDataTable(dtbStations)
+        sdgFilter.ShowDialog()
+        PopulateStationList()
     End Sub
 End Class

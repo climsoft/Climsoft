@@ -30,8 +30,8 @@ Partial Class ucrStationSelector
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmsStationSortByID = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsStationSortyByName = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmsFilterStations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmsStation.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -39,7 +39,7 @@ Partial Class ucrStationSelector
         '
         Me.cmsStation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmsStationStationNames, Me.cmsStationIDs, Me.cmsStationIDAndStation, Me.ToolStripSeparator2, Me.cmsStationSortByID, Me.cmsStationSortyByName, Me.cmsFilterStations, Me.ToolStripSeparator1})
         Me.cmsStation.Name = "cmsStation"
-        Me.cmsStation.Size = New System.Drawing.Size(187, 170)
+        Me.cmsStation.Size = New System.Drawing.Size(187, 148)
         '
         'cmsStationStationNames
         '
@@ -76,24 +76,23 @@ Partial Class ucrStationSelector
         Me.cmsStationSortyByName.Size = New System.Drawing.Size(186, 22)
         Me.cmsStationSortyByName.Text = "Sort By Station Name"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(183, 6)
-        '
         'cmsFilterStations
         '
         Me.cmsFilterStations.Name = "cmsFilterStations"
         Me.cmsFilterStations.Size = New System.Drawing.Size(186, 22)
         Me.cmsFilterStations.Text = "Filter Stations"
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(183, 6)
+        '
         'ucrStationSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ContextMenuStrip = Me.cmsStation
         Me.Name = "ucrStationSelector"
-        Me.Size = New System.Drawing.Size(260, 193)
+        Me.Size = New System.Drawing.Size(253, 24)
         Me.cmsStation.ResumeLayout(False)
         Me.ResumeLayout(False)
 
