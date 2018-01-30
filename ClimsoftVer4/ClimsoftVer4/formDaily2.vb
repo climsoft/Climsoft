@@ -304,8 +304,8 @@ Public Class formDaily2
         sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        'sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
-        sql3 = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
+        sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
+        'sql3 = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
         da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
         da1.Fill(ds1, "station")
