@@ -115,12 +115,10 @@ Public Class DataCall
 
     Public Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
         Dim objFields As New List(Of Object)
-        Dim objData As Object
         Dim lstFields As List(Of String)
         Dim lstCombine As List(Of String)
 
-        objData = GetDataObject()
-        If objData IsNot Nothing Then
+        If Item IsNot Nothing Then
             For Each strFieldDisplay As String In dctFields.Keys
                 lstFields = dctFields(strFieldDisplay)
                 If lstFields.Count = 1 Then
