@@ -1,4 +1,4 @@
-﻿Public Class ucrElemSelector
+﻿Public Class ucrElementSelector
     Private bFirstLoad As Boolean = True
     Private strElementTableName As String = "obselements"
     Private strElementName As String = "elementName"
@@ -72,29 +72,56 @@
             d.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
             SetFields(d)
             PopulateElementList()
+            cboValues.ContextMenuStrip = cmsElement
             bFirstLoad = False
         End If
     End Sub
 
-    'Private Sub tsmStations_Click(sender As Object, e As EventArgs)
-    '    SetViewTypeAsElements()
-    'End Sub
+    Private Sub cmsElementsNames_Click(sender As Object, e As EventArgs) Handles cmsElementsNames.Click
+        SetViewTypeAsElements()
+    End Sub
 
-    'Private Sub tsmIDs_Click(sender As Object, e As EventArgs)
-    '    SetViewTypeAsIDs()
-    'End Sub
+    Private Sub cmsElementIDs_Click(sender As Object, e As EventArgs) Handles cmsElementIDs.Click
+        SetViewTypeAsIDs()
+    End Sub
 
-    'Private Sub tsmStationsAndIDs_Click(sender As Object, e As EventArgs)
-    '    SetViewTypeAsIDsAndElements()
-    'End Sub
+    Private Sub cmsElemntIDName_Click(sender As Object, e As EventArgs) Handles cmsElemntIDName.Click
+        SetViewTypeAsIDsAndElements()
+    End Sub
 
     Public Overrides Function ValidateSelection() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
-    'Private Sub tsmFilterStations_Click(sender As Object, e As EventArgs)
-    '    'dlgFilterStations.SetDataTable(dtbElements)
-    '    'dlgFilterStations.ShowDialog()
-    '    'PopulateStationList()
-    'End Sub
+    Private Sub tsmSortByID_Click(sender As Object, e As EventArgs) Handles cmsElementSortByID.Click
+        SortByID()
+    End Sub
+
+    Private Sub SortByID()
+        If dtbElements IsNot Nothing Then
+            dtbElements.DefaultView.Sort = strElementID & " ASC"
+            cmsElementSortByID.Checked = True
+            cmsElementSortyByName.Checked = False
+            PopulateElementList()
+        End If
+    End Sub
+
+    Private Sub cmsElementSortyByName_Click(sender As Object, e As EventArgs) Handles cmsElementSortyByName.Click
+        SortByElementName()
+    End Sub
+
+    Private Sub SortByElementName()
+        dtbElements.DefaultView.Sort = strElementName & " ASC"
+        cmsElementSortByID.Checked = False
+        cmsElementSortyByName.Checked = True
+        PopulateElementList()
+    End Sub
+
+    Private Sub tsmFilterStations_Click(sender As Object, e As EventArgs) Handles cmsElementsFilter.Click
+        ' TODOD SetDataTable() in sdgFilter needs to be created
+        'sdgFilter.SetDataTable(dtbElements)
+        sdgFilter.ShowDialog()
+        PopulateElementList()
+    End Sub
 End Class
+
