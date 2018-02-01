@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrBaseDataLink
     Protected clsDataDefinition As New DataCall
+    Protected dtbRecords As New DataTable
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
@@ -76,7 +77,7 @@ Public Class ucrBaseDataLink
         SetSortByItems()
     End Sub
 
-    Public Sub SetFilter(clsNewFilter As TableFilter)
+    Public Overridable Sub SetFilter(clsNewFilter As TableFilter)
         CreateDataDefinition()
         clsDataDefinition.SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
@@ -102,4 +103,12 @@ Public Class ucrBaseDataLink
     Public Overridable Function ValidateSelection() As Boolean
         Return True
     End Function
+
+    Public Sub UpdateDataTable()
+        dtbRecords = clsDataDefinition.GetDataTable()
+    End Sub
+
+    Public Overridable Sub PopulateControl()
+        UpdateDataTable()
+    End Sub
 End Class
