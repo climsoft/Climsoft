@@ -35,7 +35,7 @@ Public Class DataCall
         dbsTable = dbsNewTable
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Sub SetTableName(strNewTable As String)
         strTable = strNewTable
     End Sub
 
@@ -141,16 +141,22 @@ Public Class DataCall
     End Function
 
     Public Function GetDataObject() As Object
-        Dim db As New mariadb_climsoft_test_db_v4Entities
+        Dim db As mariadb_climsoft_test_db_v4Entities
 
         Try
-            Dim x = CallByName(db, strTable, CallType.Get)
-            Dim y = TryCast(x, IQueryable(Of Object))
+            If strTable <> "" Then
+                db = New mariadb_climsoft_test_db_v4Entities
+                Dim x = CallByName(db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
 
-            If clsFilter IsNot Nothing Then
-                y = y.Where(clsFilter.GetLinqExpression())
+                If clsFilter IsNot Nothing Then
+                    y = y.Where(clsFilter.GetLinqExpression())
+                End If
+                Return y.ToList()
+            Else
+                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+                Return Nothing
             End If
-            Return y.ToList()
         Catch ex As Exception
             Return Nothing
         End Try

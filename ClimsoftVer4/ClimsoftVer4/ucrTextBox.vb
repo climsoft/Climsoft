@@ -27,29 +27,19 @@ Public Class ucrTextBox
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 1 Then
-            MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record.")
-        ElseIf dtbRecords.Columns.
-        End If
-    End Sub
-
-    Public Sub PopulateTextBox()
-
-        If strTableName.Trim.Length > 0 Then
-
-            Dim dctFields As New Dictionary(Of String, List(Of String))
-            SetTable(strTableName)
-            dctFields.Add(strFieldName, New List(Of String)({strFieldName}))
-            SetFields(dctFields)
-            dtbl = clsDataDefinition.GetDataTable()
-
-            If dtbl.Rows.Count > 0 Then
-                TextInput = dtbl.Rows(0).Field(Of String)(strFieldName)
+            MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record. " & dtbRecords.Rows.Count & " records found.", caption:="Developer error")
+        ElseIf dtbRecords.Columns.Count <> 1 Then
+            MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
+        Else
+            If dtbRecords.Rows.Count = 0 Then
+                TextboxValue = ""
+            Else
+                TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
             End If
-
         End If
     End Sub
 
-    Public Property TextInput() As String
+    Public Property TextboxValue() As String
         Get
             Return txtBox.Text
         End Get
@@ -60,11 +50,13 @@ Public Class ucrTextBox
 
     Public Sub SetTextToUpper()
         bToUpper = True
-    End Sub
-    Public Sub SetTextToLower()
         bToLower = False
     End Sub
 
+    Public Sub SetTextToLower()
+        bToLower = True
+        bToUpper = False
+    End Sub
 
     Public Sub SetValidationTypeAsNone()
         strValidationType = "none"
@@ -103,8 +95,8 @@ Public Class ucrTextBox
         Return iType
     End Function
 
-    Public Function IsValid(strText As String) As Boolean
-        Return (GetValidationCode(strText) = 0)
+    Public Overrides Function ValidateValue() As Boolean
+        Return (GetValidationCode(TextboxValue) = 0)
     End Function
 
     Public Function GetValidationCode(strText As String) As Integer
@@ -168,10 +160,6 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
-
-
-    Public Event KeyDownEvent(e As KeyEventArgs)
-
     Private Sub ucrStationSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -182,19 +170,17 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-        If bToLower Then
-            TextInput = TextInput.ToLower()
+
+
+      If bToLower Then
+            TextboxValue = TextboxValue.ToLower()
         ElseIf bToUpper Then
-            TextInput = TextInput.ToLower()
+            TextboxValue = TextboxValue.ToLower()
         End If
     End Sub
 
     Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
-        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
-
-        End If
-        RaiseEvent KeyDownEvent(e)
-
+        OnevtKeyDown(sender, e)
     End Sub
 
     Private Sub ucrTextBox_Enter(sender As Object, e As EventArgs) Handles txtBox.Enter
@@ -205,7 +191,7 @@ Public Class ucrTextBox
         txtBox.Focus()
     End Sub
     Public Function IsEmpty() As Boolean
-        If TextInput.Length > 0 Then
+        If TextboxValue.Length > 0 Then
             Return True
         Else
             Return False

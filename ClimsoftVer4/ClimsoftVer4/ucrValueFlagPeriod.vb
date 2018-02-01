@@ -16,18 +16,16 @@
 
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
-    Private strTableName As String = ""
 
-    Public Sub setTableName(strTableName As String)
-        Me.strTableName = strTableName
-        ucrValue.SetTableName(strTableName)
-        ucrFlag.SetTableName(strTableName)
-        ucrPeriod.SetTableName(strTableName)
+    Public Overrides Sub SetTableName(strNewTable As String)
+        MyBase.SetTableName(strNewTable)
+        ucrValue.SetTableName(strNewTable)
+        ucrFlag.SetTableName(strNewTable)
+        ucrPeriod.SetTableName(strNewTable)
     End Sub
-    Public Sub setFieldNames(Optional strValueFieldName As String = "", Optional strFlagFieldName As String = "", Optional strPeriodFieldName As String = "")
-        If strValueFieldName.Trim.Length > 0 Then
-            ucrValue.SetFieldName(strValueFieldName)
-        End If
+
+    Public Sub setFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        setValueFieldName(strValueFieldName)
         If strFlagFieldName.Trim.Length > 0 Then
             ucrFlag.SetFieldName(strFlagFieldName)
         End If
@@ -36,7 +34,7 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
     Public Sub setValueFieldName(strValueFieldName As String)
-        setFieldNames(strValueFieldName:=strValueFieldName)
+        ucrValue.SetFieldName(strValueFieldName)
     End Sub
     Public Sub setFlagFieldName(strFlagFieldName As String)
         setFieldNames(strFlagFieldName:=strFlagFieldName)
@@ -51,6 +49,7 @@ Public Class ucrValueFlagPeriod
         ucrFlag.SetFilter(clsNewFilter:=clsNewFilter)
         ucrPeriod.SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
+
     Public Sub PopulateValueFlagPeriod()
         PopulateValue()
         PopulateFlag()
@@ -135,18 +134,18 @@ Public Class ucrValueFlagPeriod
     Private Sub ucrValue_KeyDownEvent(e As KeyEventArgs) Handles ucrValue.KeyDownEvent
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
-            If Not IsNumeric(Strings.Right(ucrValue.TextInput, 1)) Then
+            If Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
                 'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
                 'to the value string in the textbox.
-                ucrFlag.TextInput = Strings.Right(ucrValue.TextInput, 1)
+                ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
 
                 'Get the observation value by leaving out the last character from the string entered in the textbox
-                ucrValue.TextInput = Strings.Left(ucrValue.TextInput, ucrValue.TextInput.Length - 1)
+                ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
 
             End If
 
             'Check that numeric value has been entered for observation value
-            If IsNumeric(ucrValue.TextInput) Then
+            If IsNumeric(ucrValue.TextboxValue) Then
                 ucrValue.RemoveBackColor()
                 'ucrValue.SetBackColor(Color.White)
                 ' My.Computer.Keyboard.SendKeys("{TAB}")

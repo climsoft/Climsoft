@@ -3,4 +3,12 @@
         MyBase.PopulateControl()
         cboValues.DataSource = dtbRecords
     End Sub
+
+    Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
+        OnevtKeyDown(sender, e)
+    End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Return cboValues.Items.Contains(cboValues.Text)
+    End Function
 End Class

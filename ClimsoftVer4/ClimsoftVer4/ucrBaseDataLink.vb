@@ -17,6 +17,8 @@ Public Class ucrBaseDataLink
     Protected clsDataDefinition As New DataCall
     Protected dtbRecords As New DataTable
 
+    Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
+
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
     ' Including: reading/writing, which tables/fields/records to connect to
@@ -37,9 +39,9 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Overridable Sub SetTableName(strNewTable As String)
         CreateDataDefinition()
-        clsDataDefinition.SetTable(strNewTable:=strNewTable)
+        clsDataDefinition.SetTableName(strNewTable:=strNewTable)
     End Sub
 
     Public Sub SetTable(dbsNewTable As Entity.DbSet)
@@ -100,7 +102,7 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Public Overridable Function ValidateSelection() As Boolean
+    Public Overridable Function ValidateValue() As Boolean
         Return True
     End Function
 
@@ -110,5 +112,9 @@ Public Class ucrBaseDataLink
 
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
+    End Sub
+
+    Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
+        RaiseEvent evtKeyDown(sender, e)
     End Sub
 End Class

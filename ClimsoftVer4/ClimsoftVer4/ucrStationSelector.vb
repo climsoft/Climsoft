@@ -54,7 +54,7 @@
         If bFirstLoad Then
             'InitialiseStationDataTable()
             'SortByStationName()
-            SetTable(strStationsTableName)
+            SetTableName(strStationsTableName)
             d.Add(strStationName, New List(Of String)({strStationName}))
             d.Add(strStationID, New List(Of String)({strStationID}))
             d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
@@ -65,7 +65,7 @@
         End If
     End Sub
 
-    Public Overrides Function ValidateSelection() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
