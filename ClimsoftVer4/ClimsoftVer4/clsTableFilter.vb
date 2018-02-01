@@ -46,6 +46,14 @@ Public Class TableFilter
     ' If False then the filter will have NOT at the start of the condition
     Private bIsPositiveCondition As Boolean = True
 
+    Public Sub New()
+
+    End Sub
+
+    Public Sub New(strNewField As String, strNewOperator As String, Optional strNewValue As String = "", Optional bNewIsPositiveCondition As Boolean = True)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
+    End Sub
+
     Public Sub SetField(strNewField As String)
         strField = strNewField
         bIsCombinedFilter = False

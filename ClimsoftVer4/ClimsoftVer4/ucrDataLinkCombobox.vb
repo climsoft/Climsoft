@@ -11,4 +11,8 @@
     Public Overrides Function ValidateValue() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
+
+    Public Overrides Function GetValue() As Object
+        Return cboValues.SelectedValue
+    End Function
 End Class

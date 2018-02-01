@@ -197,8 +197,9 @@ Public Class ucrTextBox
             Return False
         End If
     End Function
+
     Public Sub Clear()
-        txtBox.Clear()
+        TextboxValue = ""
     End Sub
 
 
@@ -210,4 +211,7 @@ Public Class ucrTextBox
         txtBox.BackColor = Color.White
     End Sub
 
+    Public Overrides Function GetValue() As Object
+        Return TextboxValue
+    End Function
 End Class

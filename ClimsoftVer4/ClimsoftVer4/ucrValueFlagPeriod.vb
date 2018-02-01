@@ -24,23 +24,22 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetTableName(strNewTable)
     End Sub
 
-    Public Sub setFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
-        setValueFieldName(strValueFieldName)
-        If strFlagFieldName.Trim.Length > 0 Then
-            ucrFlag.SetFieldName(strFlagFieldName)
-        End If
-        If strPeriodFieldName.Trim.Length > 0 Then
-            ucrPeriod.SetFieldName(strPeriodFieldName)
-        End If
+    Public Sub SetValueFlagPeriodFields(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        SetValueField(strValueFieldName)
+        SetFlagField(strFlagFieldName)
+        SetPeriodField(strPeriodFieldName)
     End Sub
-    Public Sub setValueFieldName(strValueFieldName As String)
-        ucrValue.SetFieldName(strValueFieldName)
+
+    Public Sub SetValueField(strValueFieldName As String)
+        ucrValue.SetField(strValueFieldName)
     End Sub
-    Public Sub setFlagFieldName(strFlagFieldName As String)
-        setFieldNames(strFlagFieldName:=strFlagFieldName)
+
+    Public Sub SetFlagField(strFlagFieldName As String)
+        ucrFlag.SetField(strFlagFieldName)
     End Sub
-    Public Sub setPeriodFieldName(strPeriodFieldName As String)
-        setFieldNames(strPeriodFieldName:=strPeriodFieldName)
+
+    Public Sub SetPeriodField(strPeriodFieldName As String)
+        ucrPeriod.SetField(strPeriodFieldName)
     End Sub
 
     Public Overrides Sub SetFilter(clsNewFilter As TableFilter)
@@ -50,31 +49,34 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
 
-    Public Sub PopulateValueFlagPeriod()
-        PopulateValue()
-        PopulateFlag()
-        PopulatePeriod()
+    Public Overrides Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
+        MyBase.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        ucrValue.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        ucrFlag.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        ucrPeriod.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
     End Sub
-    Public Sub PopulateValue()
-        ucrValue.PopulateTextBox()
+
+    Public Overrides Sub PopulateControl()
+        MyBase.PopulateControl()
+        ucrValue.PopulateControl()
+        ucrFlag.PopulateControl()
+        ucrPeriod.PopulateControl()
     End Sub
-    Public Sub PopulateFlag()
-        ucrFlag.PopulateTextBox()
-    End Sub
-    Public Sub PopulatePeriod()
-        ucrPeriod.PopulateTextBox()
-    End Sub
+
     Public Sub Clear()
         ClearValue()
         ClearFlag()
         ClearPeriod()
     End Sub
+
     Public Sub ClearValue()
         ucrValue.Clear()
     End Sub
+
     Public Sub ClearFlag()
         ucrFlag.Clear()
     End Sub
+
     Public Sub ClearPeriod()
         ucrPeriod.Clear()
     End Sub
@@ -82,17 +84,8 @@ Public Class ucrValueFlagPeriod
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-            'InitialiseStationDataTable()
-            'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
-
-            ' Access Rows property on DataTable.
-            'For Each row As DataRow In dtbl.Rows
-            ' Write value of first Integer.
-            'Console.WriteLine(row.Field(Of Integer)(0))
-            'Next
 
             ucrFlag.SetTextToUpper()
-
             bFirstLoad = False
         End If
     End Sub
@@ -131,7 +124,7 @@ Public Class ucrValueFlagPeriod
         'txtValue.BackColor = Color.White
     End Sub
 
-    Private Sub ucrValue_KeyDownEvent(e As KeyEventArgs) Handles ucrValue.KeyDownEvent
+    Private Sub ucrValue_KeyDownEvent(e As KeyEventArgs) 'Handles ucrValue.KeyDownEvent
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
             If Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then

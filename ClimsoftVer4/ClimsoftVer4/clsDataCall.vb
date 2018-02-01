@@ -98,11 +98,11 @@ Public Class DataCall
         Return dctFields
     End Function
 
-    Public Function GetDataTable() As DataTable
+    Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
 
-        objData = GetDataObject()
+        objData = GetDataObject(clsAdditionalFilter)
         dtbFields = New DataTable()
         If objData IsNot Nothing Then
             For Each strFieldDisplay As String In dctFields.Keys
@@ -140,7 +140,7 @@ Public Class DataCall
         End If
     End Function
 
-    Public Function GetDataObject() As Object
+    Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
         Dim db As mariadb_climsoft_test_db_v4Entities
 
         Try
