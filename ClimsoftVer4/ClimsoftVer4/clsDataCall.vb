@@ -64,6 +64,9 @@ Public Class DataCall
         SetTable(dbsNewTable:=dbsNewTable)
         SetField(strNewField:=strNewField)
     End Sub
+    Public Function GetFilter() As TableFilter
+        Return clsFilter
+    End Function
 
     Public Sub SetFilter(clsNewFilter As TableFilter)
         clsFilter = clsNewFilter
