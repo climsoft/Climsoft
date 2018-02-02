@@ -167,6 +167,7 @@ Partial Class formMetadata
         Me.lblstation = New System.Windows.Forms.Label()
         Me.TabInstrument = New System.Windows.Forms.TabPage()
         Me.grpInstrument = New System.Windows.Forms.GroupBox()
+        Me.lblPercent = New System.Windows.Forms.Label()
         Me.cmdInstrument = New System.Windows.Forms.Button()
         Me.txtInstrumentPicFile = New System.Windows.Forms.TextBox()
         Me.lblimgFile = New System.Windows.Forms.Label()
@@ -357,7 +358,6 @@ Partial Class formMetadata
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.lblPercent = New System.Windows.Forms.Label()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -1837,6 +1837,15 @@ Partial Class formMetadata
         Me.grpInstrument.TabStop = False
         Me.grpInstrument.Text = "Instrument Details"
         '
+        'lblPercent
+        '
+        Me.lblPercent.AutoSize = True
+        Me.lblPercent.Location = New System.Drawing.Point(125, 225)
+        Me.lblPercent.Name = "lblPercent"
+        Me.lblPercent.Size = New System.Drawing.Size(21, 13)
+        Me.lblPercent.TabIndex = 65
+        Me.lblPercent.Text = "(%)"
+        '
         'cmdInstrument
         '
         Me.cmdInstrument.Location = New System.Drawing.Point(465, 334)
@@ -2198,7 +2207,7 @@ Partial Class formMetadata
         Me.lblInstId.Name = "lblInstId"
         Me.lblInstId.Size = New System.Drawing.Size(70, 13)
         Me.lblInstId.TabIndex = 30
-        Me.lblInstId.Text = "Isntrument ID"
+        Me.lblInstId.Text = "Instrument ID"
         '
         'lblInstruments
         '
@@ -3661,15 +3670,6 @@ Partial Class formMetadata
         'MetadataFileDialog
         '
         Me.MetadataFileDialog.FileName = "MetadataFileDialog"
-        '
-        'lblPercent
-        '
-        Me.lblPercent.AutoSize = True
-        Me.lblPercent.Location = New System.Drawing.Point(125, 225)
-        Me.lblPercent.Name = "lblPercent"
-        Me.lblPercent.Size = New System.Drawing.Size(21, 13)
-        Me.lblPercent.TabIndex = 65
-        Me.lblPercent.Text = "(%)"
         '
         'formMetadata
         '

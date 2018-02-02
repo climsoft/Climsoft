@@ -72,6 +72,7 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -204,7 +205,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
@@ -595,6 +596,12 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'ConfigurationForTDCFToolStripMenuItem
+        '
+        Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
+        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -670,4 +677,5 @@ Partial Class frmMainMenu
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConfigurationForTDCFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
