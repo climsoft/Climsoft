@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ucrElemSelector
-    Inherits ClimsoftVer4.ucrDataLinkCombobox
+Partial Class ucrTextBox
+    Inherits ClimsoftVer4.ucrBaseDataLink
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -22,14 +22,28 @@ Partial Class ucrElemSelector
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.txtBox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
-        'ucrElemSelector
+        'txtBox
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.txtBox.Location = New System.Drawing.Point(4, 5)
+        Me.txtBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtBox.Name = "txtBox"
+        Me.txtBox.Size = New System.Drawing.Size(74, 26)
+        Me.txtBox.TabIndex = 578
+        '
+        'ucrTextBox
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Name = "ucrElemSelector"
+        Me.Controls.Add(Me.txtBox)
+        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.Name = "ucrTextBox"
+        Me.Size = New System.Drawing.Size(87, 40)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
+    Friend WithEvents txtBox As TextBox
 End Class

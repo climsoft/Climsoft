@@ -4,24 +4,12 @@
     Private strStationName As String = "stationName"
     Private strStationID As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
-    Private objStations As New Object
-    Private dtbStations As New DataTable
 
     Private Sub PopulateStationList()
         ' Example of defining a filter for the data call
         'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
-        dtbStations = clsDataDefinition.GetDataTable()
-        'objStations = clsDataDefinition.GetDataTable()
-        'dtbStations = New DataTable()
-        'dtbStations.Columns.Add(strStationName, GetType(String))
-        'dtbStations.Columns.Add(strStationID, GetType(String))
-        'dtbStations.Columns.Add(strIDsAndStations, GetType(String))
 
-        'For Each stnItem As station In objStations
-        '    dtbStations.Rows.Add(stnItem.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
-        'Next
-        If dtbStations.Rows.Count > 0 Then
-            cboValues.DataSource = dtbStations
+        If dtbRecords.Rows.Count > 0 Then
             ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
             cboValues.ValueMember = strStationID
             If bFirstLoad Then
@@ -66,17 +54,18 @@
         If bFirstLoad Then
             'InitialiseStationDataTable()
             'SortByStationName()
-            SetTable(strStationsTableName)
+            SetTableName(strStationsTableName)
             d.Add(strStationName, New List(Of String)({strStationName}))
             d.Add(strStationID, New List(Of String)({strStationID}))
             d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
             SetFields(d)
             PopulateStationList()
+            cboValues.ContextMenuStrip = cmsStation
             bFirstLoad = False
         End If
     End Sub
 
-    Public Overrides Function ValidateSelection() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
@@ -97,8 +86,9 @@
     End Sub
 
     Private Sub SortByID()
-        If dtbStations IsNot Nothing Then
-            dtbStations.DefaultView.Sort = strStationID & " ASC"
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strStationID & " ASC"
+            cboValues.DataSource.
             cmsStationSortByID.Checked = True
             cmsStationSortyByName.Checked = False
             PopulateStationList()
@@ -110,15 +100,16 @@
     End Sub
 
     Private Sub SortByStationName()
-        dtbStations.DefaultView.Sort = strStationName & " ASC"
+        dtbRecords.DefaultView.Sort = strStationName & " ASC"
         cmsStationSortByID.Checked = False
         cmsStationSortyByName.Checked = True
         PopulateStationList()
     End Sub
 
     Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
-        'dlgFilterStations.SetDataTable(dtbStations)
-        'dlgFilterStations.ShowDialog()
-        'PopulateStationList()
+        ' TODOD SetDataTable() in sdgFilter needs to be created
+        'sdgFilter.SetDataTable(dtbStations)
+        sdgFilter.ShowDialog()
+        PopulateStationList()
     End Sub
 End Class

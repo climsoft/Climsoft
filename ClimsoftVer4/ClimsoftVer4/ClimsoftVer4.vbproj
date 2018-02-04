@@ -717,16 +717,28 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTextBox.Designer.vb">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.Designer.vb">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDataLinkCombobox.Designer.vb">
       <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDataLinkCombobox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrElemSelector.Designer.vb">
-      <DependentUpon>ucrElemSelector.vb</DependentUpon>
+    <Compile Include="ucrElementSelector.Designer.vb">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrElemSelector.vb">
+    <Compile Include="ucrElementSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrStationSelector.Designer.vb">
@@ -1135,11 +1147,17 @@
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBox.resx">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValueFlagPeriod.resx">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataLinkCombobox.resx">
       <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrElemSelector.resx">
-      <DependentUpon>ucrElemSelector.vb</DependentUpon>
+    <EmbeddedResource Include="ucrElementSelector.resx">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrStationSelector.resx">
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
