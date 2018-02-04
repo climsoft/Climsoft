@@ -31,6 +31,18 @@ Public Class DataCall
     ' A TableFilter object which defines the rows in the table the values will be from
     Private clsFilter As TableFilter
 
+    Public Function Clone() As DataCall
+        Dim clsdatacall As New DataCall
+        'TODO
+        clsdatacall.SetTable(dbsTable) 'needs to be cloned in away a clone too
+
+        clsdatacall.SetTableName(strTable)
+        clsdatacall.SetFields(ClsCommonFunctions.GetClonedDict(dctFields)) 'need to be looked into. probably not a clone
+        clsdatacall.SetFilter(clsFilter.Clone())
+
+        Return clsdatacall
+    End Function
+
     Public Sub SetTable(dbsNewTable As DbSet)
         dbsTable = dbsNewTable
     End Sub

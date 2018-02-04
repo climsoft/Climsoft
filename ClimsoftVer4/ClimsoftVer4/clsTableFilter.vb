@@ -46,6 +46,33 @@ Public Class TableFilter
     ' If False then the filter will have NOT at the start of the condition
     Private bIsPositiveCondition As Boolean = True
 
+    Public Function Clone() As TableFilter
+        Dim tblFilter As New TableFilter
+        tblFilter.SetField(strField)
+        tblFilter.SetOperator(strOperator)
+        tblFilter.SetValue(strValue)
+        tblFilter.SetValues(ClsCommonFunctions.GetClonedList(lstValues)) ' needs to be looked into. not a clone
+        tblFilter.SetDataCallValues(clsDataCallValues.Clone())
+        tblFilter.SetLeftFilter(clsLeftFilter.Clone())
+        tblFilter.SetRightFilter(clsRightFilter.Clone())
+        tblFilter.SetIsPositiveCondition(bIsPositiveCondition)
+        tblFilter.SetIsValuesFromDataCall(bValuesFromDataCall)
+        tblFilter.SetIsArrayOperator(bArrayOperator)
+        tblFilter.SetIsCombinedFilter(bIsCombinedFilter)
+
+        Return tblFilter
+    End Function
+
+    Public Sub SetIsValuesFromDataCall(bNewValuesFromDataCall As Boolean)
+        bValuesFromDataCall = bNewValuesFromDataCall
+    End Sub
+    Public Sub SetIsArrayOperator(bNewArrayOperator As Boolean)
+        bArrayOperator = bNewArrayOperator
+    End Sub
+    Public Sub SetIsCombinedFilter(bNewIsCombinedFilter As Boolean)
+        bIsCombinedFilter = bNewIsCombinedFilter
+    End Sub
+
     Public Sub New()
 
     End Sub
@@ -78,14 +105,14 @@ Public Class TableFilter
         bArrayOperator = False
     End Sub
 
-    Public Sub SetValues(clsNewDataCall As DataCall)
+    Public Sub SetDataCallValues(clsNewDataCall As DataCall)
         clsDataCallValues = clsNewDataCall
         bValuesFromDataCall = True
         bIsCombinedFilter = False
         bArrayOperator = True
     End Sub
 
-    Public Sub SetPositiveCondition(bNewIsPositiveCondition As Boolean)
+    Public Sub SetIsPositiveCondition(bNewIsPositiveCondition As Boolean)
         bIsPositiveCondition = bNewIsPositiveCondition
     End Sub
 
@@ -93,21 +120,21 @@ Public Class TableFilter
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValues(lstNewValues:=lstNewValues)
-        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
     Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValue(strNewValue:=strNewValue)
-        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
     Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall, Optional bNewIsPositiveCondition As Boolean = True)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
-        SetValues(clsNewDataCall:=clsNewDataCall)
-        SetPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        SetDataCallValues(clsNewDataCall:=clsNewDataCall)
+        SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
     Public Sub SetLeftFilter(clsNewLeftFilter As TableFilter)
