@@ -14,7 +14,12 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrBaseDataLink
-    Protected clsDataDefinition As New DataCall
+    Protected clsDataDefinition As DataCall
+    Protected dtbRecords As DataTable
+    Protected dctLinkedControlsFilters As Dictionary(Of ucrBaseDataLink, TableFilter)
+
+    Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
+    Public Event evtValueChanged()
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
@@ -36,9 +41,9 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Overridable Sub SetTableName(strNewTable As String)
         CreateDataDefinition()
-        clsDataDefinition.SetTable(strNewTable:=strNewTable)
+        clsDataDefinition.SetTableName(strNewTable:=strNewTable)
     End Sub
 
     Public Sub SetTable(dbsNewTable As Entity.DbSet)
@@ -76,9 +81,14 @@ Public Class ucrBaseDataLink
         SetSortByItems()
     End Sub
 
-    Public Sub SetFilter(clsNewFilter As TableFilter)
+    Public Overridable Sub SetFilter(clsNewFilter As TableFilter)
         CreateDataDefinition()
         clsDataDefinition.SetFilter(clsNewFilter:=clsNewFilter)
+    End Sub
+
+    Public Overridable Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
+        CreateDataDefinition()
+        clsDataDefinition.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
     End Sub
 
     Public Sub SetSortByItems()
@@ -99,7 +109,65 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Public Overridable Function ValidateSelection() As Boolean
+    Public Overridable Function ValidateValue() As Boolean
         Return True
+    End Function
+
+    Public Sub UpdateDataTable()
+        dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
+    End Sub
+
+    Public Overridable Sub PopulateControl()
+        UpdateDataTable()
+    End Sub
+
+    Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
+        RaiseEvent evtKeyDown(sender, e)
+    End Sub
+
+    Public Overridable Function GetValue() As Object
+        Return Nothing
+    End Function
+
+    'Private Sub AddLinkedControls(dctNewDataLinkControls As Dictionary(Of String, ucrBaseDataLink))
+    '    For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctNewDataLinkControls
+    '        dctLinkedControls.Add(kvpTemp.Key, kvpTemp.Value)
+    '        AddHandler kvpTemp.Value.evtValueChanged, AddressOf LinkedControls_evtValueChanged
+    '    Next
+    'End Sub
+
+    Private Sub AddLinkedControl(ucrLinkedDataControl As ucrBaseDataLink, strNewField As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True)
+        dctLinkedControlsFilters.Add(ucrLinkedDataControl, New TableFilter(strNewField:=strNewField, strNewOperator:=strNewOperator, bNewIsPositiveCondition:=bNewIsPositiveCondition))
+        AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
+    End Sub
+
+    Private Sub LinkedControls_evtValueChanged()
+        UpdateDataTable()
+    End Sub
+
+    Public Function GetLinkedControlsFilter() As TableFilter
+        Dim clsOveralControlsFilter As TableFilter
+
+        For Each ucrTemp As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            dctLinkedControlsFilters(ucrTemp).SetValue(ucrTemp.GetValue())
+        Next
+        If dctLinkedControlsFilters.Count = 0 Then
+            clsOveralControlsFilter = Nothing
+        ElseIf dctLinkedControlsFilters.Count > 1 Then
+            clsOveralControlsFilter = New TableFilter
+            For i = 0 To dctLinkedControlsFilters.Count - 2
+                If i = 0 Then
+                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i))
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1))
+                    clsOveralControlsFilter.SetOperator("AND")
+                Else
+                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.clone())
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1))
+                End If
+            Next
+        Else
+            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).clone()
+        End If
+        Return clsOveralControlsFilter
     End Function
 End Class

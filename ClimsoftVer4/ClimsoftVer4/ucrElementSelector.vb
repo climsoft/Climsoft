@@ -66,7 +66,7 @@
         If bFirstLoad Then
             'InitialiseStationDataTable()
             'SortByStationName()
-            SetTable(strElementTableName)
+            SetTableName(strElementTableName)
             d.Add(strElementName, New List(Of String)({strElementName}))
             d.Add(strElementID, New List(Of String)({strElementID}))
             d.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
@@ -89,7 +89,7 @@
         SetViewTypeAsIDsAndElements()
     End Sub
 
-    Public Overrides Function ValidateSelection() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 

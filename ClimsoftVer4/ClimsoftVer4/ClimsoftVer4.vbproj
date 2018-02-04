@@ -161,6 +161,7 @@
     <Compile Include="climsoftuser.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClsCommonFunctions.vb" />
     <Compile Include="clsDataCall.vb" />
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
@@ -717,6 +718,18 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTextBox.Designer.vb">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.Designer.vb">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDataLinkCombobox.Designer.vb">
       <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
     </Compile>
@@ -1134,6 +1147,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBox.resx">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValueFlagPeriod.resx">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataLinkCombobox.resx">
       <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>

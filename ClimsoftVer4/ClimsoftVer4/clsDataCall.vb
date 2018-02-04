@@ -31,11 +31,23 @@ Public Class DataCall
     ' A TableFilter object which defines the rows in the table the values will be from
     Private clsFilter As TableFilter
 
+    Public Function Clone() As DataCall
+        Dim clsdatacall As New DataCall
+        'TODO
+        clsdatacall.SetTable(dbsTable) 'needs to be cloned in away a clone too
+
+        clsdatacall.SetTableName(strTable)
+        clsdatacall.SetFields(ClsCommonFunctions.GetClonedDict(dctFields)) 'need to be looked into. probably not a clone
+        clsdatacall.SetFilter(clsFilter.Clone())
+
+        Return clsdatacall
+    End Function
+
     Public Sub SetTable(dbsNewTable As DbSet)
         dbsTable = dbsNewTable
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Sub SetTableName(strNewTable As String)
         strTable = strNewTable
     End Sub
 
@@ -64,6 +76,9 @@ Public Class DataCall
         SetTable(dbsNewTable:=dbsNewTable)
         SetField(strNewField:=strNewField)
     End Sub
+    Public Function GetFilter() As TableFilter
+        Return clsFilter
+    End Function
 
     Public Sub SetFilter(clsNewFilter As TableFilter)
         clsFilter = clsNewFilter
@@ -95,11 +110,11 @@ Public Class DataCall
         Return dctFields
     End Function
 
-    Public Function GetDataTable() As DataTable
+    Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
 
-        objData = GetDataObject()
+        objData = GetDataObject(clsAdditionalFilter)
         dtbFields = New DataTable()
         If objData IsNot Nothing Then
             For Each strFieldDisplay As String In dctFields.Keys
@@ -137,17 +152,23 @@ Public Class DataCall
         End If
     End Function
 
-    Public Function GetDataObject() As Object
-        Dim db As New mariadb_climsoft_test_db_v4Entities
+    Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
+        Dim db As mariadb_climsoft_test_db_v4Entities
 
         Try
-            Dim x = CallByName(db, strTable, CallType.Get)
-            Dim y = TryCast(x, IQueryable(Of Object))
+            If strTable <> "" Then
+                db = New mariadb_climsoft_test_db_v4Entities
+                Dim x = CallByName(db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
 
-            If clsFilter IsNot Nothing Then
-                y = y.Where(clsFilter.GetLinqExpression())
+                If clsFilter IsNot Nothing Then
+                    y = y.Where(clsFilter.GetLinqExpression())
+                End If
+                Return y.ToList()
+            Else
+                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+                Return Nothing
             End If
-            Return y.ToList()
         Catch ex As Exception
             Return Nothing
         End Try
