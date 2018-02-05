@@ -5,7 +5,8 @@
     Private strStationID As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
 
-    Private Sub PopulateStationList()
+    Public Overrides Sub PopulateControl()
+        MyBase.PopulateControl()
         ' Example of defining a filter for the data call
         'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
 
@@ -59,7 +60,7 @@
             d.Add(strStationID, New List(Of String)({strStationID}))
             d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
             SetFields(d)
-            PopulateStationList()
+            PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
             bFirstLoad = False
         End If
@@ -88,10 +89,10 @@
     Private Sub SortByID()
         If dtbRecords IsNot Nothing Then
             dtbRecords.DefaultView.Sort = strStationID & " ASC"
-            cboValues.DataSource.
+            'cboValues.DataSource.
             cmsStationSortByID.Checked = True
             cmsStationSortyByName.Checked = False
-            PopulateStationList()
+            PopulateControl()
         End If
     End Sub
 
@@ -103,13 +104,13 @@
         dtbRecords.DefaultView.Sort = strStationName & " ASC"
         cmsStationSortByID.Checked = False
         cmsStationSortyByName.Checked = True
-        PopulateStationList()
+        PopulateControl()
     End Sub
 
     Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
         ' TODOD SetDataTable() in sdgFilter needs to be created
         'sdgFilter.SetDataTable(dtbStations)
         sdgFilter.ShowDialog()
-        PopulateStationList()
+        PopulateControl()
     End Sub
 End Class

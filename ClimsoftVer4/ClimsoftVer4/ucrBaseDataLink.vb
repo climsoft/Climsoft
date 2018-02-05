@@ -16,8 +16,7 @@
 Public Class ucrBaseDataLink
     Protected clsDataDefinition As DataCall
     Protected dtbRecords As DataTable
-    Protected dctLinkedControlsFilters As Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
-
+    Protected dctLinkedControlsFilters As New Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
 
     Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
     Public Event evtValueChanged()
@@ -134,6 +133,10 @@ Public Class ucrBaseDataLink
         Dim tempRow As DataRow
         Dim lstTemp As New List(Of String)
 
+        If strFieldName = "" Then
+            Return GetValue()
+        End If
+        UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 1 Then
             Return dtbRecords.Rows(0).Field(Of String)(strFieldName)
         ElseIf dtbRecords.Rows.Count > 1 Then
@@ -147,19 +150,36 @@ Public Class ucrBaseDataLink
 
     End Function
 
-    'TODO
-    'Correct this or get rid of it
-    Public Sub AddLinkedControl(ucrLinkedDataControl As ucrBaseDataLink, strNewField As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strFieldName As String = "")
-        AddLinkedControl(ucrLinkedDataControl, New TableFilter(strNewField:=strNewField, strNewOperator:=strNewOperator, bNewIsPositiveCondition:=bNewIsPositiveCondition), strFieldName)
+    Public Overridable Sub UpdateInputValueToDataTable()
+
     End Sub
 
-    Public Sub AddLinkedControl(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        dctLinkedControlsFilters.Add(ucrLinkedDataControl, New KeyValuePair(Of String, TableFilter)(strFieldName, tblFilter))
+    'TODO
+    'Correct this or get rid of it
+    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewField As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strFieldName As String = "")
+        AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewField, strNewOperator:=strNewOperator, bNewIsPositiveCondition:=bNewIsPositiveCondition), strFieldName)
+    End Sub
+
+    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+        Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strFieldName, tblFilter)
+
+        If dctLinkedControlsFilters.ContainsKey(ucrLinkedDataControl) Then
+            If Not dctLinkedControlsFilters.Contains(New KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))(ucrLinkedDataControl, kvpTemp)) Then
+                dctLinkedControlsFilters.Item(ucrLinkedDataControl) = kvpTemp
+            End If
+        Else
+            dctLinkedControlsFilters.Add(ucrLinkedDataControl, kvpTemp)
+        End If
+
         AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
     End Sub
 
     Private Sub LinkedControls_evtValueChanged()
         UpdateDataTable()
+    End Sub
+
+    Public Sub RemoveLinkedControlsFilters(ucrLinkedDataControl As ucrBaseDataLink)
+        dctLinkedControlsFilters.Remove(ucrLinkedDataControl)
     End Sub
 
     Protected Sub UpdateDctLinkedControlsFilters()
@@ -198,16 +218,16 @@ Public Class ucrBaseDataLink
             clsOveralControlsFilter = New TableFilter
             For i = 0 To dctLinkedControlsFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Key.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Key.Clone())
+                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                     clsOveralControlsFilter.SetOperator("AND")
                 Else
                     clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Key.Clone())
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                 End If
             Next
         Else
-            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Key.Clone()
+            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
         End If
         Return clsOveralControlsFilter
     End Function
