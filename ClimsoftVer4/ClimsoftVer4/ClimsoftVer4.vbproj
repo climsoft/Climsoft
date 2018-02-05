@@ -510,6 +510,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewFormDaily2.Designer.vb">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewFormDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.Designer.vb" />
     <Compile Include="frmPlotter.vb">
       <SubType>Form</SubType>
@@ -718,6 +724,30 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDay.Designer.vb">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDay.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFormDaily2.Designer.vb">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormDaily2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHour.Designer.vb">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHour.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonth.Designer.vb">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
@@ -746,6 +776,12 @@
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrStationSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrYear.Designer.vb">
+      <DependentUpon>ucrYear.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrYear.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControl1.Designer.vb">
@@ -1078,6 +1114,9 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewFormDaily2.resx">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
@@ -1148,6 +1187,18 @@
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDay.resx">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormDaily2.resx">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHour.resx">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonth.resx">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -1162,6 +1213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrStationSelector.resx">
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrYear.resx">
+      <DependentUpon>ucrYear.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
