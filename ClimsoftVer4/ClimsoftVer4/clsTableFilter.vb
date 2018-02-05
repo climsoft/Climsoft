@@ -102,6 +102,10 @@ Public Class TableFilter
         SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
+    Public Sub New(strNewField As String, strNewOperator As String, Optional lstNewValue As List(Of String) = Nothing, Optional bNewIsPositiveCondition As Boolean = True)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=lstNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
+    End Sub
+
     Public Sub SetField(strNewField As String)
         strField = strNewField
         bIsCombinedFilter = False
