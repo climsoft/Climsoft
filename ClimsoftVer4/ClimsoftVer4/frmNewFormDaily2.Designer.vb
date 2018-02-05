@@ -26,7 +26,7 @@ Partial Class frmNewFormDaily2
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.UcrFormDaily21 = New ClimsoftVer4.ucrFormDaily2()
+        Me.ucrFormDaily = New ClimsoftVer4.ucrFormDaily2()
         Me.SuspendLayout()
         '
         'lblStation
@@ -61,19 +61,19 @@ Partial Class frmNewFormDaily2
         Me.ucrStationSelector.Size = New System.Drawing.Size(175, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
-        'UcrFormDaily21
+        'ucrFormDaily
         '
-        Me.UcrFormDaily21.Location = New System.Drawing.Point(15, 60)
-        Me.UcrFormDaily21.Name = "UcrFormDaily21"
-        Me.UcrFormDaily21.Size = New System.Drawing.Size(712, 356)
-        Me.UcrFormDaily21.TabIndex = 3
+        Me.ucrFormDaily.Location = New System.Drawing.Point(15, 60)
+        Me.ucrFormDaily.Name = "ucrFormDaily"
+        Me.ucrFormDaily.Size = New System.Drawing.Size(712, 356)
+        Me.ucrFormDaily.TabIndex = 3
         '
         'frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(738, 523)
-        Me.Controls.Add(Me.UcrFormDaily21)
+        Me.Controls.Add(Me.ucrFormDaily)
         Me.Controls.Add(Me.ucrElementSelector)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblStation)
@@ -89,5 +89,5 @@ Partial Class frmNewFormDaily2
     Friend WithEvents lblStation As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents ucrElementSelector As ucrElementSelector
-    Friend WithEvents UcrFormDaily21 As ucrFormDaily2
+    Friend WithEvents ucrFormDaily As ucrFormDaily2
 End Class
