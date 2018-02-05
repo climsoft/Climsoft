@@ -1,7 +1,15 @@
 ﻿Public Class ucrDataLinkCombobox
+    Protected bFirstLoad As Boolean = True
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         cboValues.DataSource = dtbRecords
+    End Sub
+
+    Private Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            PopulateControl()
+            bFirstLoad = False
+        End If
     End Sub
 
     Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
@@ -27,6 +35,19 @@
         Else
             Return ""
         End If
+
     End Function
+
+    Protected Sub SetViewType(strViewType As String)
+
+        Dim col As DataColumn
+        For Each col In dtbRecords.Columns
+            If strViewType = col.ColumnName Then
+                cboValues.DisplayMember = strViewType
+                Exit For
+            End If
+        Next
+
+    End Sub
 
 End Class

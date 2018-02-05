@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrBaseDataLink
     Protected clsDataDefinition As DataCall
-    Protected dtbRecords As DataTable
+    Protected dtbRecords As New DataTable
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
 
     Public Event evtKeyDown(sender As Object, e As KeyEventArgs)

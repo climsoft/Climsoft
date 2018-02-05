@@ -1,51 +1,23 @@
 ﻿Public Class ucrElementSelector
-    Private bFirstLoad As Boolean = True
     Private strElementTableName As String = "obselements"
     Private strElementName As String = "elementName"
     Private strElementID As String = "elementId"
     Private strIDsAndElements As String = "ids_elements"
-    Private objElements As New Object
-    Private dtbElements As New DataTable
 
-    Private Sub PopulateElementList()
-        ' Example of defining a filter for the data call
-        'clsDataDefinition.SetFilter(strelementID, "==", Chr(34) & "67774010" & Chr(34))
-        dtbElements = clsDataDefinition.GetDataTable()
-        'dtbElements = New DataTable()
-        'dtbElements.Columns.Add(strElementName, GetType(String))
-        'dtbElements.Columns.Add(strelementID, GetType(String))
-        'dtbElements.Columns.Add(strIDsAndElements, GetType(String))
+    Public Overrides Sub PopulateControl()
+        MyBase.PopulateControl()
 
-        'For Each elemItem As obselement In objElements
-        '    dtbElements.Rows.Add(elemItem.elementName, elemItem.elementId, elemItem.elementId & " " & elemItem.elementName)
-        'Next
-        If dtbElements.Rows.Count > 0 Then
-            cboValues.DataSource = dtbElements
-            ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
+        If dtbRecords.Rows.Count > 0 Then
             cboValues.ValueMember = strElementID
+            'TODO 
+            'what if there were no records on the first load. 
+            'Then there are records later
             If bFirstLoad Then
                 SetViewTypeAsElements()
             End If
         Else
             cboValues.DataSource = Nothing
         End If
-    End Sub
-
-    Private Sub SetViewType(strViewType As String)
-        'tsmStationNames.Checked = False
-        'tsmIDs.Checked = False
-        'tsmIDsAndStations.Checked = False
-        Select Case strViewType
-            Case strElementName
-                '        tsmStationNames.Checked = True
-                cboValues.DisplayMember = strElementName
-            Case strElementID
-                '        tsmIDs.Checked = True
-                cboValues.DisplayMember = strElementID
-            Case strIDsAndElements
-                '        tsmIDsAndStations.Checked = True
-                cboValues.DisplayMember = strIDsAndElements
-        End Select
     End Sub
 
     Public Sub SetViewTypeAsElements()
@@ -71,7 +43,7 @@
             d.Add(strElementID, New List(Of String)({strElementID}))
             d.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
             SetFields(d)
-            PopulateElementList()
+            PopulateControl()
             cboValues.ContextMenuStrip = cmsElement
             bFirstLoad = False
         End If
@@ -98,11 +70,11 @@
     End Sub
 
     Private Sub SortByID()
-        If dtbElements IsNot Nothing Then
-            dtbElements.DefaultView.Sort = strElementID & " ASC"
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strElementID & " ASC"
             cmsElementSortByID.Checked = True
             cmsElementSortyByName.Checked = False
-            PopulateElementList()
+            PopulateControl()
         End If
     End Sub
 
@@ -111,17 +83,17 @@
     End Sub
 
     Private Sub SortByElementName()
-        dtbElements.DefaultView.Sort = strElementName & " ASC"
+        dtbRecords.DefaultView.Sort = strElementName & " ASC"
         cmsElementSortByID.Checked = False
         cmsElementSortyByName.Checked = True
-        PopulateElementList()
+        PopulateControl()
     End Sub
 
-    Private Sub tsmFilterStations_Click(sender As Object, e As EventArgs) Handles cmsElementsFilter.Click
+    Private Sub cmsElementsFilter_Click(sender As Object, e As EventArgs) Handles cmsElementsFilter.Click
         ' TODOD SetDataTable() in sdgFilter needs to be created
         'sdgFilter.SetDataTable(dtbElements)
         sdgFilter.ShowDialog()
-        PopulateElementList()
+        PopulateControl()
     End Sub
 End Class
 
