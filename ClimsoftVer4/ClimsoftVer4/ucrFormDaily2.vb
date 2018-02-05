@@ -2,43 +2,70 @@
 
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
-    Private strValueFieldName As String
-    Private strFlagFieldName As String
-    Private strPeriodFieldName As String
+    Private strValueFieldName As String = "day"
+    Private strFlagFieldName As String = "flag"
+    Private strPeriodFieldName As String = "period"
+    Private strStationName As String
+    Private strStationID As String
+    Private strIDsAndStations As String
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
-        ' Example of defining a filter for the data call
-        'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim ctrTotal As New ucrTextBox
 
-        If dtbRecords.Rows.Count > 0 Then
-            ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
-            '.ValueMember = strStationID
-            If bFirstLoad Then
-                'SetViewTypeAsStations()
-                SetTableName(strTableName)
-                'For Each ctrtemp As ucrValueFlagPeriod In ucrFormDaily2
-                '    ctrtemp.SetValueFlagPeriodFields(strValueFieldName, strFlagFieldName, strPeriodFieldName)
-                'Next
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctr = ctrVFP
+                ctrVFP.ucrValue.PopulateControl()
+                ctrVFP.ucrFlag.PopulateControl()
+                ctrVFP.ucrPeriod.PopulateControl()
+
+            ElseIf TypeOf ctr Is ucrTextBox Then
+                ctr = ctrTotal
+                ctrTotal.PopulateControl()
             End If
-        Else
-            'cboValues.DataSource = Nothing
-        End If
+        Next
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim d As New Dictionary(Of String, List(Of String))
+        Dim ctrValue As Integer
+        Dim ctr As Control
+        Dim ctrtemp As New ucrValueFlagPeriod
+
+        'Dim lstUcrValueFlagPeriod As New List(Of ucrValueFlagPeriod)
+
         If bFirstLoad Then
-            'InitialiseStationDataTable()
-            'SortByStationName()
-            'SetTableName(strStationsTableName)
-            'd.Add(strStationName, New List(Of String)({strStationName}))
-            'd.Add(strStationID, New List(Of String)({strStationID}))
-            'd.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
-            SetFields(d)
-            PopulateControl()
-            ' cboValues.ContextMenuStrip = cmsStation
+            'lstUcrValueFlagPeriod.AddRange({ucrValueFlagPeriod1, ucrValueFlagPeriod2, ucrValueFlagPeriod3, ucrValueFlagPeriod4, ucrValueFlagPeriod5})
+            'For ctrValue = 0 To lstUcrValueFlagPeriod.Count - 1
+            'If ctrValue < 10 Then
+            '        ctrValue = "0" & ctrValue + 1
+            '    Else
+            '        ctrValue = ctrValue + 1
+            '    End If
+            '    ctrtemp.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrValue, strFlagFieldName & ctrValue, strPeriodFieldName & ctrValue)
+            'Next
+
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctr = ctrtemp
+                    ctrtemp.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrValue, strFlagFieldName & ctrValue, strPeriodFieldName & ctrValue)
+                End If
+            Next
+
             bFirstLoad = False
+            PopulateControl()
         End If
+    End Sub
+
+    Private Sub SetCtrlTableName(strTable As String)
+        SetTableName(strTable)
+    End Sub
+
+    Private Sub SetCtrStationName(strStation As String)
+        strStationName = strStation
+
     End Sub
 End Class
