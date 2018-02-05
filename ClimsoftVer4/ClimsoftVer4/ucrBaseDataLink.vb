@@ -114,7 +114,9 @@ Public Class ucrBaseDataLink
     End Function
 
     Public Sub UpdateDataTable()
-        dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
+        If Not IsNothing(clsDataDefinition) Then
+            dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
+        End If
     End Sub
 
     Public Overridable Sub PopulateControl()
@@ -123,6 +125,10 @@ Public Class ucrBaseDataLink
 
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
+    End Sub
+
+    Public Sub OnevtValueChanged()
+        RaiseEvent evtValueChanged()
     End Sub
 
     Public Overridable Function GetValue() As Object
@@ -167,7 +173,7 @@ Public Class ucrBaseDataLink
 
     End Sub
 
-    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overridable Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strFieldName, tblFilter)
 
         If dctLinkedControlsFilters.ContainsKey(ucrLinkedDataControl) Then
@@ -214,13 +220,13 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Public Function GetLinkedControlsFilter() As TableFilter
+    Public Function GetLinkedControlsFilter() As Object
         Dim clsOveralControlsFilter As TableFilter
 
         UpdateDctLinkedControlsFilters()
 
         If dctLinkedControlsFilters.Count = 0 Then
-            clsOveralControlsFilter = Nothing
+            Return Nothing
         ElseIf dctLinkedControlsFilters.Count > 1 Then
             clsOveralControlsFilter = New TableFilter
             For i = 0 To dctLinkedControlsFilters.Count - 2

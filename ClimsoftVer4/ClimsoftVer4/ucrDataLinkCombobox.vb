@@ -5,7 +5,7 @@
         cboValues.DataSource = dtbRecords
     End Sub
 
-    Private Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             PopulateControl()
             bFirstLoad = False
@@ -50,4 +50,7 @@
 
     End Sub
 
+    Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
+        OnevtValueChanged()
+    End Sub
 End Class
