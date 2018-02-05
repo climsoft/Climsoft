@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrYear
-    Inherits ClimsoftVer4.ucrTextBox
+Partial Class ucrYearSelector
+    Inherits ClimsoftVer4.ucrDataLinkCombobox
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -21,13 +21,12 @@ Partial Class ucrYear
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'ucrYear
+        'ucrYearSelector
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Name = "ucrYear"
-        Me.Size = New System.Drawing.Size(56, 26)
+        Me.Name = "ucrYearSelector"
+        Me.Size = New System.Drawing.Size(62, 21)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
