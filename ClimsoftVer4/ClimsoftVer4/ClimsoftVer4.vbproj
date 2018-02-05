@@ -778,10 +778,10 @@
     <Compile Include="ucrStationSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrYear.Designer.vb">
-      <DependentUpon>ucrYear.vb</DependentUpon>
+    <Compile Include="ucrYearSelector.Designer.vb">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrYear.vb">
+    <Compile Include="ucrYearSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControl1.Designer.vb">
@@ -1214,8 +1214,8 @@
     <EmbeddedResource Include="ucrStationSelector.resx">
       <DependentUpon>ucrStationSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrYear.resx">
-      <DependentUpon>ucrYear.vb</DependentUpon>
+    <EmbeddedResource Include="ucrYearSelector.resx">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
