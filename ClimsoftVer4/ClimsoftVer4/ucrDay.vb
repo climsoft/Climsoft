@@ -5,7 +5,7 @@
     Private dtb29 As DataTable
     Private dtb30 As DataTable
     Private dtb31 As DataTable
-    Private ucrLinkedYear As ucrYear
+    Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
 
     Public Sub InitialiseControl()
@@ -69,7 +69,7 @@
         SetViewType(strDay)
     End Sub
 
-    Public Sub setYearAndMonthLink(ucrYearControl As ucrYear, ucrMonthControl As ucrMonth)
+    Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
     End Sub
