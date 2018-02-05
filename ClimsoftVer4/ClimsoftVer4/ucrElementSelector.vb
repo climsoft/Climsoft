@@ -32,7 +32,7 @@
         SetViewType(strIDsAndElements)
     End Sub
 
-    Private Sub ucrElemSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim d As New Dictionary(Of String, List(Of String))
 
         If bFirstLoad Then
