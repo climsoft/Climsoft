@@ -154,10 +154,17 @@ Public Class ucrBaseDataLink
 
     End Sub
 
-    'TODO
-    'Correct this or get rid of it
-    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewField As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strFieldName As String = "")
-        AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewField, strNewOperator:=strNewOperator, bNewIsPositiveCondition:=bNewIsPositiveCondition), strFieldName)
+    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "")
+
+        Dim temp As Object
+        temp = ucrLinkedDataControl.GetValue(strLinkedFieldName)
+
+        If TypeOf temp Is String Then
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition), strLinkedFieldName)
+        Else
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition), strLinkedFieldName)
+        End If
+
     End Sub
 
     Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -222,7 +229,7 @@ Public Class ucrBaseDataLink
                     clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                     clsOveralControlsFilter.SetOperator("AND")
                 Else
-                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.clone())
+                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.Clone())
                     clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                 End If
             Next
