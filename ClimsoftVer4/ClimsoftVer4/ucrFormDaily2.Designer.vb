@@ -95,7 +95,7 @@ Partial Class ucrFormDaily2
         Me.ucrValueFlagPeriod3 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod2 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod1 = New ClimsoftVer4.ucrValueFlagPeriod()
-        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
+        'CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrInputTotal
@@ -832,7 +832,7 @@ Partial Class ucrFormDaily2
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
         Me.Name = "ucrFormDaily2"
         Me.Size = New System.Drawing.Size(712, 356)
-        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
+        'CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
