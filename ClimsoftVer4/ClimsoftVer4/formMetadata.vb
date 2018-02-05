@@ -225,6 +225,11 @@ Public Class formMetadata
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
 
+        metadfrm.seStn = txtStation.Text
+        metadfrm.Eecode = txtElement.Text
+        metadfrm.Iecode = txtInstrument.Text
+        metadfrm.sebdate = txtBeginDate.Text
+
         If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
     End Sub
     Sub populateInstrument(frm As String, num As Integer, maxRows As Integer)
@@ -1479,7 +1484,7 @@ Err:
             da.Update(ds, "instrument")
             recUpdate.messageBoxRecordedUpdated()
 
-            ClearInstrumentForm()
+            'ClearInstrumentForm()
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1488,29 +1493,58 @@ Err:
 
     Private Sub cmdUpdateStElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStElement.Click
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim recUpdate As New dataEntryGlobalRoutines
+        Dim stn, ecode, icode, bdate As String
+        Dim stn0, ecode0, icode0, bdate0 As String
 
         Try
-            'If txtId.Text = "" Then
-            '    MsgBox("No record Selected")
-            '    Exit Sub
-            'End If
+   
+            stn = "= '" & metadfrm.seStn & "'"
+            ecode = "= '" & metadfrm.Eecode & "'"
+            icode = "= '" & metadfrm.Iecode & "'"
+            bdate = "= '" & metadfrm.sebdate & "'"
 
-            'MsgBox(txtHeight.Text)
-            ds.Tables("stationelement").Rows(rec).Item("recordedFrom") = txtStation.Text
-            ds.Tables("stationelement").Rows(rec).Item("describedBy") = txtElement.Text
-            ds.Tables("stationelement").Rows(rec).Item("recordedWith") = txtInstrument.Text
-            ds.Tables("stationelement").Rows(rec).Item("instrumentcode") = txtInstrumentCode.Text
-            ds.Tables("stationelement").Rows(rec).Item("scheduledFor") = txtScheduleClass.Text
-            ds.Tables("stationelement").Rows(rec).Item("height") = txtHeight.Text
-            ds.Tables("stationelement").Rows(rec).Item("beginDate") = txtBeginDate.Text
-            ds.Tables("stationelement").Rows(rec).Item("endDate") = txtEndate.Text
+            ' Check for NULLs from the previous record
+            If Len(metadfrm.seStn) = 0 Then stn = "IS NULL"
+            If Len(metadfrm.Iecode) = 0 Then icode = "IS NULL"
+            If Len(metadfrm.Eecode) = 0 Then ecode = "IS NULL"
+            If Len(metadfrm.sebdate) = 0 Then bdate = "IS NULL"
 
-            da.Update(ds, "stationelement")
+            ' Format for NULLs in the new values
+            If Len(txtStation.Text) = 0 Then
+                stn0 = "NULL"
+            Else
+                stn0 = "'" & txtStation.Text & "'"
+            End If
 
-            recUpdate.messageBoxRecordedUpdated()
-            ClearStationElementForm()
+            If Len(txtElement.Text) = 0 Then
+                ecode0 = "NULL"
+            Else
+                ecode0 = "'" & txtElement.Text & "'"
+            End If
+
+            If Len(txtInstrument.Text) = 0 Then
+                icode0 = "NULL"
+            Else
+                icode0 = "'" & txtInstrument.Text & "'"
+            End If
+
+            If Len(txtBeginDate.Text) = 0 Then
+                bdate0 = "NULL"
+            Else
+                bdate0 = "'" & txtBeginDate.Text & "'"
+            End If
+
+            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " & _
+                 "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
+
+            MsgBox(sql)
+
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+            'ClearStationElementForm()
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -2108,6 +2142,7 @@ Err:
     End Sub
 End Class
 Class MetadataVariables
-    Public qlfr, bdate, edate, stn As String 'Variables for Station Element
+    Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element
+    Public qlfr, bdate, edate, stn As String 'Variables for Station Qualifier
     Public pstn, pbdate, pedate, pfeature, pclass, pfile As String 'Valiables for Physical Feature
 End Class

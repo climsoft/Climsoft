@@ -271,4 +271,14 @@ Public Class frmMainMenu
     Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
         frmAWSstations.Show()
     End Sub
+
+    Private Sub ConfigurationForTDCFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigurationForTDCFToolStripMenuItem.Click
+        With frmSynopTDCF
+            .TabProcessing.SelectedTab = .TabSettings
+            .TabProcess.Hide()
+            .Show()
+            '.TabProcess.Refresh()
+        End With
+
+    End Sub
 End Class
