@@ -50,28 +50,49 @@ Public Class TableFilter
         Dim tblFilter As New TableFilter
         tblFilter.SetField(strField)
         tblFilter.SetOperator(strOperator)
-        tblFilter.SetValue(strValue)
-        tblFilter.SetValues(ClsCommonFunctions.GetClonedList(lstValues)) ' needs to be looked into. not a clone
-        tblFilter.SetDataCallValues(clsDataCallValues.Clone())
-        tblFilter.SetLeftFilter(clsLeftFilter.Clone())
-        tblFilter.SetRightFilter(clsRightFilter.Clone())
-        tblFilter.SetIsPositiveCondition(bIsPositiveCondition)
-        tblFilter.SetIsValuesFromDataCall(bValuesFromDataCall)
-        tblFilter.SetIsArrayOperator(bArrayOperator)
-        tblFilter.SetIsCombinedFilter(bIsCombinedFilter)
+
+        If tblFilter.IsCombinedFilter Then
+            tblFilter.SetLeftAndRightFilter(clsLeftFilter.Clone(), clsRightFilter.Clone())
+        Else
+            If tblFilter.IsArrayOperator Then
+                If tblFilter.IsValuesFromDataCall Then
+                    tblFilter.SetDataCallValues(clsDataCallValues.Clone())
+                Else
+                    tblFilter.SetValues(lstValues, bClone:=True)
+                End If
+            Else
+                tblFilter.SetValue(strValue)
+            End If
+        End If
+
+        tblFilter.SetIsPositiveCondition(IsPositiveCondition())
 
         Return tblFilter
     End Function
 
-    Public Sub SetIsValuesFromDataCall(bNewValuesFromDataCall As Boolean)
+    Private Sub SetIsValuesFromDataCall(bNewValuesFromDataCall As Boolean)
         bValuesFromDataCall = bNewValuesFromDataCall
     End Sub
-    Public Sub SetIsArrayOperator(bNewArrayOperator As Boolean)
+
+    Public Function IsValuesFromDataCall() As Boolean
+        Return bValuesFromDataCall
+    End Function
+
+    Private Sub SetIsArrayOperator(bNewArrayOperator As Boolean)
         bArrayOperator = bNewArrayOperator
     End Sub
-    Public Sub SetIsCombinedFilter(bNewIsCombinedFilter As Boolean)
+
+    Public Function IsArrayOperator() As Boolean
+        Return bArrayOperator
+    End Function
+
+    Private Sub SetIsCombinedFilter(bNewIsCombinedFilter As Boolean)
         bIsCombinedFilter = bNewIsCombinedFilter
     End Sub
+
+    Public Function IsCombinedFilter() As Boolean
+        Return bIsCombinedFilter
+    End Function
 
     Public Sub New()
 
@@ -91,30 +112,41 @@ Public Class TableFilter
         bIsCombinedFilter = False
     End Sub
 
-    Public Sub SetValues(lstNewValues As List(Of String))
-        lstValues = lstNewValues
+    Public Sub SetValues(lstNewValues As List(Of String), Optional bClone As Boolean = False)
+        If bClone Then
+            lstValues = ClsCloneFunctions.GetClonedList(lstNewValues)
+        Else
+            lstValues = lstNewValues
+        End If
+
         bValuesFromDataCall = False
         bIsCombinedFilter = False
-        bArrayOperator = True
+        SetIsArrayOperator(True)
     End Sub
+
+
 
     Public Sub SetValue(strNewValue As String)
         strValue = strNewValue
         bValuesFromDataCall = False
         bIsCombinedFilter = False
-        bArrayOperator = False
+        SetIsArrayOperator(False)
     End Sub
 
     Public Sub SetDataCallValues(clsNewDataCall As DataCall)
         clsDataCallValues = clsNewDataCall
         bValuesFromDataCall = True
         bIsCombinedFilter = False
-        bArrayOperator = True
+        SetIsArrayOperator(True)
     End Sub
 
     Public Sub SetIsPositiveCondition(bNewIsPositiveCondition As Boolean)
         bIsPositiveCondition = bNewIsPositiveCondition
     End Sub
+
+    Public Function IsPositiveCondition() As Boolean
+        Return bIsPositiveCondition
+    End Function
 
     Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, lstNewValues As List(Of String), Optional bNewIsPositiveCondition As Boolean = True)
         SetField(strNewField:=strNewField)
@@ -142,10 +174,18 @@ Public Class TableFilter
         bIsCombinedFilter = True
     End Sub
 
+    Public Function GetLeftFilter() As TableFilter
+        Return clsLeftFilter
+    End Function
+
     Public Sub SetRightFilter(clsNewRightFilter As TableFilter)
         clsRightFilter = clsNewRightFilter
         bIsCombinedFilter = True
     End Sub
+
+    Public Function GetRightFilter() As TableFilter
+        Return clsRightFilter
+    End Function
 
     Public Sub SetLeftAndRightFilter(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
         SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)

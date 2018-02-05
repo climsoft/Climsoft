@@ -33,11 +33,11 @@ Public Class DataCall
 
     Public Function Clone() As DataCall
         Dim clsdatacall As New DataCall
-        'TODO
-        clsdatacall.SetTable(dbsTable) 'needs to be cloned in away a clone too
+        'dbTable is not being cloned because we want to point to the same table in the entity framework
+        clsdatacall.SetTable(dbsTable)
 
         clsdatacall.SetTableName(strTable)
-        clsdatacall.SetFields(ClsCommonFunctions.GetClonedDict(dctFields)) 'need to be looked into. probably not a clone
+        clsdatacall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
         clsdatacall.SetFilter(clsFilter.Clone())
 
         Return clsdatacall
