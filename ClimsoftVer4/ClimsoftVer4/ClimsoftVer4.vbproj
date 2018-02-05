@@ -718,6 +718,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFormDaily2.Designer.vb">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormDaily2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
@@ -1147,6 +1153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormDaily2.resx">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>

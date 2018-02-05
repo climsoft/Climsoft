@@ -90,27 +90,15 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
-    Private Sub ucrControl_TextChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub ucrControl_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
 
         End If
     End Sub
-
-    Private Sub ucrControl_Enter(sender As Object, e As EventArgs)
-
-    End Sub
-
     Public Sub setValue()
 
     End Sub
-
-
-
-
 
     Public Function IsEmpty() As Boolean
         Return True
@@ -150,10 +138,7 @@ Public Class ucrValueFlagPeriod
                 'tabNext = False
                 'MsgBox("Number expected!", MsgBoxStyle.Critical)
             End If
-
         End If
-
     End Sub
-
 
 End Class
