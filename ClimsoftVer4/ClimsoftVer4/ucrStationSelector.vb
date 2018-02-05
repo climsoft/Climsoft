@@ -1,5 +1,4 @@
 ﻿Public Class ucrStationSelector
-    Private bFirstLoad As Boolean = True
     Private strStationsTableName As String = "stations"
     Private strStationName As String = "stationName"
     Private strStationID As String = "stationId"
@@ -11,31 +10,18 @@
         'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
 
         If dtbRecords.Rows.Count > 0 Then
-            ' May need ValueMember to be different in different instances e.g. if station name is needed as return value
+            'May need ValueMember to be different in different instances e.g. if station name is needed as return value
+            'Done. It is now possible to pass the field name into get value. This comment can now be deleted
             cboValues.ValueMember = strStationID
+            'TODO 
+            'what if there were no records on the first load. 
+            'Then there are records later
             If bFirstLoad Then
                 SetViewTypeAsStations()
             End If
         Else
             cboValues.DataSource = Nothing
         End If
-    End Sub
-
-    Private Sub SetViewType(strViewType As String)
-        'tsmStationNames.Checked = False
-        'tsmIDs.Checked = False
-        'tsmIDsAndStations.Checked = False
-        Select Case strViewType
-            Case strStationName
-                '        tsmStationNames.Checked = True
-                cboValues.DisplayMember = strStationName
-            Case strStationID
-                '        tsmIDs.Checked = True
-                cboValues.DisplayMember = strStationID
-            Case strIDsAndStations
-                '        tsmIDsAndStations.Checked = True
-                cboValues.DisplayMember = strIDsAndStations
-        End Select
     End Sub
 
     Public Sub SetViewTypeAsStations()
@@ -70,6 +56,23 @@
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
+    Private Sub SortByID()
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strStationID & " ASC"
+            'cboValues.DataSource.
+            cmsStationSortByID.Checked = True
+            cmsStationSortyByName.Checked = False
+            PopulateControl()
+        End If
+    End Sub
+
+    Private Sub SortByStationName()
+        dtbRecords.DefaultView.Sort = strStationName & " ASC"
+        cmsStationSortByID.Checked = False
+        cmsStationSortyByName.Checked = True
+        PopulateControl()
+    End Sub
+
     Private Sub cmsStation_Click(sender As Object, e As EventArgs) Handles cmsStation.Click
         SetViewTypeAsStations()
     End Sub
@@ -86,28 +89,11 @@
         SortByID()
     End Sub
 
-    Private Sub SortByID()
-        If dtbRecords IsNot Nothing Then
-            dtbRecords.DefaultView.Sort = strStationID & " ASC"
-            'cboValues.DataSource.
-            cmsStationSortByID.Checked = True
-            cmsStationSortyByName.Checked = False
-            PopulateControl()
-        End If
-    End Sub
-
     Private Sub cmsStationSortyByName_Click(sender As Object, e As EventArgs) Handles cmsStationSortyByName.Click
         SortByStationName()
     End Sub
 
-    Private Sub SortByStationName()
-        dtbRecords.DefaultView.Sort = strStationName & " ASC"
-        cmsStationSortByID.Checked = False
-        cmsStationSortyByName.Checked = True
-        PopulateControl()
-    End Sub
-
-    Private Sub cmsStationFilter_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
+    Private Sub cmsFilterStations_Click(sender As Object, e As EventArgs) Handles cmsFilterStations.Click
         ' TODOD SetDataTable() in sdgFilter needs to be created
         'sdgFilter.SetDataTable(dtbStations)
         sdgFilter.ShowDialog()
