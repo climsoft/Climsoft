@@ -8,11 +8,11 @@
         'MyBase.PopulateControl()
 
         dtbRecords = New DataTable
-        dtbRecords.Columns.Add(strMonthId, GetType(String))
+        dtbRecords.Columns.Add(strMonthId, GetType(Integer))
         dtbRecords.Columns.Add(strMonthName, GetType(String))
         dtbRecords.Columns.Add(strShortMonthName, GetType(String))
         For i As Integer = 1 To 12
-            dtbRecords.Rows.Add(CStr(i), DateAndTime.MonthName(i, False), DateAndTime.MonthName(i, True))
+            dtbRecords.Rows.Add(i, DateAndTime.MonthName(i, False), DateAndTime.MonthName(i, True))
         Next
         cboValues.DataSource = dtbRecords
         dtbRecords.DefaultView.Sort = strMonthId & " ASC"

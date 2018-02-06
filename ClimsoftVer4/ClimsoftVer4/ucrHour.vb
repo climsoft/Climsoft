@@ -10,12 +10,12 @@
         'MyBase.PopulateControl()
 
         dtbRecords = New DataTable
-        dtbRecords.Columns.Add(str24Hrs, GetType(String))
+        dtbRecords.Columns.Add(str24Hrs, GetType(Integer))
         dtbRecords.Columns.Add(str12Hrs, GetType(String))
         For i As Integer = 1 To 12
 
-            dtbRecords.Rows.Add(CStr(i), i & " AM")
-            dtbRecords.Rows.Add(CStr(i + 12), i & " PM")
+            dtbRecords.Rows.Add(i, i & " AM")
+            dtbRecords.Rows.Add(i + 12, i & " PM")
 
         Next
         cboValues.DataSource = dtbRecords
@@ -38,5 +38,6 @@
     Public Sub SetViewTypeAs12Hrs()
         SetViewType(str12Hrs)
     End Sub
+
 
 End Class
