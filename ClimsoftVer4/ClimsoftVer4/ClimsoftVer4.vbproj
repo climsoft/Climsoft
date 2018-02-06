@@ -54,6 +54,9 @@
     <ApplicationIcon>myweat02.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClimsoftVer4">
+      <HintPath>obj\Debug\ClimsoftVer4.exe</HintPath>
+    </Reference>
     <Reference Include="DynamicInterop">
       <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
     </Reference>

@@ -125,9 +125,9 @@ Partial Class dlgSynopticDataForManyElements
         Me.UcrValueFlagPeriod3 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.UcrValueFlagPeriod2 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.UcrValueFlagPeriod1 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.UcrHour1 = New ClimsoftVer4.ucrHour()
-        Me.UcrMonth1 = New ClimsoftVer4.ucrMonth()
-        Me.UcrYearSelector1 = New ClimsoftVer4.ucrYearSelector()
+        Me.ucrHour = New ClimsoftVer4.ucrHour()
+        Me.ucrMonth = New ClimsoftVer4.ucrMonth()
+        Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         lblYear = New System.Windows.Forms.Label()
         Val_Elem046Label = New System.Windows.Forms.Label()
@@ -1060,26 +1060,26 @@ Partial Class dlgSynopticDataForManyElements
         Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod1.TabIndex = 259
         '
-        'UcrHour1
+        'ucrHour
         '
-        Me.UcrHour1.Location = New System.Drawing.Point(646, 28)
-        Me.UcrHour1.Name = "UcrHour1"
-        Me.UcrHour1.Size = New System.Drawing.Size(62, 21)
-        Me.UcrHour1.TabIndex = 3
+        Me.ucrHour.Location = New System.Drawing.Point(646, 28)
+        Me.ucrHour.Name = "ucrHour"
+        Me.ucrHour.Size = New System.Drawing.Size(62, 21)
+        Me.ucrHour.TabIndex = 3
         '
-        'UcrMonth1
+        'ucrMonth
         '
-        Me.UcrMonth1.Location = New System.Drawing.Point(427, 28)
-        Me.UcrMonth1.Name = "UcrMonth1"
-        Me.UcrMonth1.Size = New System.Drawing.Size(62, 21)
-        Me.UcrMonth1.TabIndex = 2
+        Me.ucrMonth.Location = New System.Drawing.Point(427, 28)
+        Me.ucrMonth.Name = "ucrMonth"
+        Me.ucrMonth.Size = New System.Drawing.Size(62, 21)
+        Me.ucrMonth.TabIndex = 2
         '
-        'UcrYearSelector1
+        'ucrYearSelector
         '
-        Me.UcrYearSelector1.Location = New System.Drawing.Point(313, 28)
-        Me.UcrYearSelector1.Name = "UcrYearSelector1"
-        Me.UcrYearSelector1.Size = New System.Drawing.Size(62, 21)
-        Me.UcrYearSelector1.TabIndex = 1
+        Me.ucrYearSelector.Location = New System.Drawing.Point(313, 28)
+        Me.ucrYearSelector.Name = "ucrYearSelector"
+        Me.ucrYearSelector.Size = New System.Drawing.Size(62, 21)
+        Me.ucrYearSelector.TabIndex = 1
         '
         'ucrStationSelector
         '
@@ -1196,9 +1196,9 @@ Partial Class dlgSynopticDataForManyElements
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(lblYear)
-        Me.Controls.Add(Me.UcrHour1)
-        Me.Controls.Add(Me.UcrMonth1)
-        Me.Controls.Add(Me.UcrYearSelector1)
+        Me.Controls.Add(Me.ucrHour)
+        Me.Controls.Add(Me.ucrMonth)
+        Me.Controls.Add(Me.ucrYearSelector)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -1212,9 +1212,9 @@ Partial Class dlgSynopticDataForManyElements
     End Sub
 
     Friend WithEvents ucrStationSelector As ucrStationSelector
-    Friend WithEvents UcrYearSelector1 As ucrYearSelector
-    Friend WithEvents UcrMonth1 As ucrMonth
-    Friend WithEvents UcrHour1 As ucrHour
+    Friend WithEvents ucrYearSelector As ucrYearSelector
+    Friend WithEvents ucrMonth As ucrMonth
+    Friend WithEvents ucrHour As ucrHour
     Friend WithEvents lblStationIdentifier As Label
     Friend WithEvents lblHour As Label
     Friend WithEvents lblDay As Label
