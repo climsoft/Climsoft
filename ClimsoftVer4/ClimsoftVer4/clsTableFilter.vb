@@ -32,6 +32,7 @@ Public Class TableFilter
     Private bArrayOperator As Boolean = False
     Private lstValues As List(Of String)
     Private strValue As String
+    Public bValuesAsString As Boolean
     Private clsDataCallValues As DataCall
 
     ' A TableFilter could also be a combination of two TableFilter objects e.g. Element IN "Rain" AND Station IN "Maseno"
@@ -66,6 +67,7 @@ Public Class TableFilter
         End If
 
         tblFilter.SetIsPositiveCondition(IsPositiveCondition())
+        tblFilter.bValuesAsString = bValuesAsString
 
         Return tblFilter
     End Function
@@ -98,12 +100,12 @@ Public Class TableFilter
 
     End Sub
 
-    Public Sub New(strNewField As String, strNewOperator As String, Optional strNewValue As String = "", Optional bNewIsPositiveCondition As Boolean = True)
-        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
+    Public Sub New(strNewField As String, strNewOperator As String, Optional strNewValue As String = "", Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
     End Sub
 
-    Public Sub New(strNewField As String, strNewOperator As String, Optional lstNewValue As List(Of String) = Nothing, Optional bNewIsPositiveCondition As Boolean = True)
-        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=lstNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
+    Public Sub New(strNewField As String, strNewOperator As String, Optional lstNewValue As List(Of String) = Nothing, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=lstNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
     End Sub
 
     Public Sub New(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
@@ -156,25 +158,28 @@ Public Class TableFilter
         Return bIsPositiveCondition
     End Function
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, lstNewValues As List(Of String), Optional bNewIsPositiveCondition As Boolean = True)
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, lstNewValues As List(Of String), Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValues(lstNewValues:=lstNewValues)
         SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        bValuesAsString = bForceValuesAsString
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True)
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetValue(strNewValue:=strNewValue)
         SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        bValuesAsString = bForceValuesAsString
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall, Optional bNewIsPositiveCondition As Boolean = True)
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, clsNewDataCall As DataCall, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
         SetDataCallValues(clsNewDataCall:=clsNewDataCall)
         SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
+        bValuesAsString = bForceValuesAsString
     End Sub
 
     Public Sub SetLeftFilter(clsNewLeftFilter As TableFilter)
@@ -219,7 +224,11 @@ Public Class TableFilter
                     strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
                 End If
             Else
-                strExpression = strExpression & " " & strOperator & " " & strValue
+                If bValuesAsString Then
+                    strExpression = strExpression & " " & strOperator & " " & Chr(34) & strValue & Chr(34)
+                Else
+                    strExpression = strExpression & " " & strOperator & " " & strValue
+                End If
             End If
         End If
         strExpression = "(" & strExpression & ")"

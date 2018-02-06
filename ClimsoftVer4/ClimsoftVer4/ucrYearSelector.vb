@@ -9,11 +9,11 @@
         Dim endYear As Integer = DateAndTime.Year(DateTime.Today)
 
         dtbRecords = New DataTable
-        dtbRecords.Columns.Add(strYear, GetType(String))
-        dtbRecords.Columns.Add(strShortYear, GetType(String))
+        dtbRecords.Columns.Add(strYear, GetType(Integer))
+        dtbRecords.Columns.Add(strShortYear, GetType(Integer))
 
         For i As Integer = endYear To endYear - 5 Step -1
-            dtbRecords.Rows.Add(CStr(i), Strings.Right(i, 2))
+            dtbRecords.Rows.Add(i, CInt(Strings.Right(i, 2)))
         Next
 
         cboValues.DataSource = dtbRecords
