@@ -757,6 +757,12 @@
     <Compile Include="ucrMonth.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrSynopticDataForManyElements.Designer.vb">
+      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSynopticDataForManyElements.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
@@ -1210,6 +1216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMonth.resx">
       <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSynopticDataForManyElements.resx">
+      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
