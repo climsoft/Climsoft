@@ -109,7 +109,7 @@ Public Class frmKeyEntry
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
-                formDaily2.Show()
+                frmNewFormDaily2.Show()
             Case "form_hourly"
                 formHourly.Show()
             Case "form_monthly"

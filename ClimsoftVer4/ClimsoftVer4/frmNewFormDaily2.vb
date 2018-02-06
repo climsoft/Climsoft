@@ -4,29 +4,34 @@ Public Class frmNewFormDaily2
 
     Private Sub frmNewFormDaily2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-
-        Else
-
+            InitaliseDialog()
         End If
+
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrStationSelector.SetViewTypeAsStations()
-        ucrElementSelector.SetViewTypeAsElements()
-        ucrYearSelector.SetViewTypeAsYear()
-        ucrHour.SetViewTypeAs24Hrs()
 
-        ucrVisibilityUnits.SetField("visUnits")
-        ucrVisibilityUnits.SetTableName("form_daily2")
+        ucrFormDaily.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
-        ucrCloudheightUnits.SetField("cloudHeightUnits")
-        ucrCloudheightUnits.SetTableName("form_daily2")
+        ucrFormDaily.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        ucrFormDaily.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        ucrFormDaily.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        ucrFormDaily.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        ucrFormDaily.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
-        ucrPrecipUnits.SetField("precipUnits")
-        ucrPrecipUnits.SetTableName("form_daily2")
+        ucrFormDaily.PopulateControl()
 
-        ucrTempUnits.SetField("temperatureUnits")
-        ucrTempUnits.SetTableName("form_daily2")
+        'ucrVisibilityUnits.SetField("visUnits")
+        'ucrVisibilityUnits.SetTableName("form_daily2")
+
+        'ucrCloudheightUnits.SetField("cloudHeightUnits")
+        'ucrCloudheightUnits.SetTableName("form_daily2")
+
+        'ucrPrecipUnits.SetField("precipUnits")
+        'ucrPrecipUnits.SetTableName("form_daily2")
+
+        'ucrTempUnits.SetField("temperatureUnits")
+        'ucrTempUnits.SetTableName("form_daily2")
 
     End Sub
 
