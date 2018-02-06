@@ -29,6 +29,10 @@
         End If
     End Sub
 
+    Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        cboValues.ContextMenuStrip = cmsYear
+    End Sub
+
     Public Sub SetViewTypeAsYear()
         SetViewType(strYear)
     End Sub
@@ -37,4 +41,15 @@
         SetViewType(strShortYear)
     End Sub
 
+    Private Sub cmsYearViewLongYear_Click(sender As Object, e As EventArgs) Handles cmsYearViewLongYear.Click
+        SetViewTypeAsYear()
+        cmsYearViewShortYear.Checked = False
+        cmsYearViewShortYear.Checked = True
+    End Sub
+
+    Private Sub cmsYearViewShortYear_Click(sender As Object, e As EventArgs) Handles cmsYearViewShortYear.Click
+        SetViewTypeAsShortYear()
+        cmsYearViewShortYear.Checked = True
+        cmsYearViewShortYear.Checked = False
+    End Sub
 End Class

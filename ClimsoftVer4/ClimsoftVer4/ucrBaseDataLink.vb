@@ -188,7 +188,7 @@ Public Class ucrBaseDataLink
         AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
     End Sub
 
-    Private Sub LinkedControls_evtValueChanged()
+    Protected Overridable Sub LinkedControls_evtValueChanged()
         UpdateDataTable()
         PopulateControl()
     End Sub
