@@ -214,4 +214,13 @@ Public Class ucrTextBox
     Public Overrides Function GetValue() As Object
         Return TextboxValue
     End Function
+
+    Public Overrides Sub UpdateInputValueToDataTable()
+        If dtbRecords.Rows.Count = 0 Then
+            dtbRecords.Rows.Add(TextboxValue)
+        Else
+            dtbRecords.Rows(0).Item(0) = TextboxValue
+        End If
+
+    End Sub
 End Class

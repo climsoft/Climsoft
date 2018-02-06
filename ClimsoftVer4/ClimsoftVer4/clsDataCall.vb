@@ -116,14 +116,16 @@ Public Class DataCall
 
         objData = GetDataObject(clsAdditionalFilter)
         dtbFields = New DataTable()
-        If objData IsNot Nothing Then
+        If Not dctFields Is Nothing Then
             For Each strFieldDisplay As String In dctFields.Keys
                 dtbFields.Columns.Add(strFieldDisplay, GetType(String))
             Next
-            For Each Item As Object In objData
-                dtbFields.Rows.Add(GetFieldsArray(Item))
-                'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
-            Next
+            If objData IsNot Nothing Then
+                For Each Item As Object In objData
+                    dtbFields.Rows.Add(GetFieldsArray(Item))
+                    'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
+                Next
+            End If
         End If
         Return dtbFields
     End Function
@@ -154,15 +156,26 @@ Public Class DataCall
 
     Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
         Dim db As mariadb_climsoft_test_db_v4Entities
+        Dim clsCurrentFilter As TableFilter
 
-        Try
+        If Not IsNothing(clsAdditionalFilter) Then
+            If IsNothing(clsFilter) Then
+                clsCurrentFilter = clsAdditionalFilter
+            Else
+                clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+            End If
+        Else
+            clsCurrentFilter = clsFilter
+        End If
+
+            Try
             If strTable <> "" Then
                 db = New mariadb_climsoft_test_db_v4Entities
                 Dim x = CallByName(db, strTable, CallType.Get)
                 Dim y = TryCast(x, IQueryable(Of Object))
 
-                If clsFilter IsNot Nothing Then
-                    y = y.Where(clsFilter.GetLinqExpression())
+                If clsCurrentFilter IsNot Nothing Then
+                    y = y.Where(clsCurrentFilter.GetLinqExpression())
                 End If
                 Return y.ToList()
             Else

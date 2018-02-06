@@ -29,38 +29,41 @@ Partial Class ucrValueFlagPeriod
         '
         'ucrValue
         '
-        Me.ucrValue.Location = New System.Drawing.Point(0, 8)
-        Me.ucrValue.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrValue.Location = New System.Drawing.Point(-3, -3)
+        Me.ucrValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValue.Name = "ucrValue"
-        Me.ucrValue.Size = New System.Drawing.Size(86, 38)
+        Me.ucrValue.Size = New System.Drawing.Size(55, 24)
         Me.ucrValue.TabIndex = 581
+        Me.ucrValue.TextboxValue = ""
         '
         'ucrFlag
         '
-        Me.ucrFlag.Location = New System.Drawing.Point(91, 8)
-        Me.ucrFlag.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrFlag.Location = New System.Drawing.Point(54, -3)
+        Me.ucrFlag.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrFlag.Name = "ucrFlag"
-        Me.ucrFlag.Size = New System.Drawing.Size(86, 38)
+        Me.ucrFlag.Size = New System.Drawing.Size(55, 24)
         Me.ucrFlag.TabIndex = 582
+        Me.ucrFlag.TextboxValue = ""
         '
         'ucrPeriod
         '
-        Me.ucrPeriod.Location = New System.Drawing.Point(189, 8)
-        Me.ucrPeriod.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrPeriod.Location = New System.Drawing.Point(111, -3)
+        Me.ucrPeriod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPeriod.Name = "ucrPeriod"
-        Me.ucrPeriod.Size = New System.Drawing.Size(86, 38)
+        Me.ucrPeriod.Size = New System.Drawing.Size(55, 24)
         Me.ucrPeriod.TabIndex = 583
+        Me.ucrPeriod.TextboxValue = ""
         '
         'ucrValueFlagPeriod
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrPeriod)
         Me.Controls.Add(Me.ucrFlag)
         Me.Controls.Add(Me.ucrValue)
-        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrValueFlagPeriod"
-        Me.Size = New System.Drawing.Size(308, 63)
+        Me.Size = New System.Drawing.Size(165, 20)
         Me.ResumeLayout(False)
 
     End Sub

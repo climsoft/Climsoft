@@ -25,9 +25,15 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Public Sub SetValueFlagPeriodFields(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        SetFields(New List(Of String)({strValueFieldName, strFlagFieldName, strPeriodFieldName}))
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
         SetPeriodField(strPeriodFieldName)
+    End Sub
+
+    Public Sub SetTableNameAndValueFlagPeriodFields(strNewTable As String, strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        SetTableName(strNewTable)
+        SetValueFlagPeriodFields(strValueFieldName, strFlagFieldName, strPeriodFieldName)
     End Sub
 
     Public Sub SetValueField(strValueFieldName As String)
@@ -54,6 +60,13 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrFlag.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrPeriod.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+    End Sub
+
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+        MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        ucrValue.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        ucrPeriod.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
     End Sub
 
     Public Overrides Sub PopulateControl()
@@ -154,6 +167,5 @@ Public Class ucrValueFlagPeriod
         End If
 
     End Sub
-
 
 End Class

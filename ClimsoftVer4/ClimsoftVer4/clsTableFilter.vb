@@ -48,14 +48,14 @@ Public Class TableFilter
 
     Public Function Clone() As TableFilter
         Dim tblFilter As New TableFilter
-        tblFilter.SetField(strField)
-        tblFilter.SetOperator(strOperator)
 
-        If tblFilter.IsCombinedFilter Then
+        tblFilter.SetOperator(strOperator)
+        If IsCombinedFilter() Then
             tblFilter.SetLeftAndRightFilter(clsLeftFilter.Clone(), clsRightFilter.Clone())
         Else
-            If tblFilter.IsArrayOperator Then
-                If tblFilter.IsValuesFromDataCall Then
+            tblFilter.SetField(strField)
+            If IsArrayOperator() Then
+                If IsValuesFromDataCall() Then
                     tblFilter.SetDataCallValues(clsDataCallValues.Clone())
                 Else
                     tblFilter.SetValues(lstValues, bClone:=True)
@@ -102,6 +102,15 @@ Public Class TableFilter
         SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
     End Sub
 
+    Public Sub New(strNewField As String, strNewOperator As String, Optional lstNewValue As List(Of String) = Nothing, Optional bNewIsPositiveCondition As Boolean = True)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, lstNewValues:=lstNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition)
+    End Sub
+
+    Public Sub New(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
+        SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)
+        SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
+    End Sub
+
     Public Sub SetField(strNewField As String)
         strField = strNewField
         bIsCombinedFilter = False
@@ -109,7 +118,6 @@ Public Class TableFilter
 
     Public Sub SetOperator(strNewOperator As String)
         strOperator = strNewOperator
-        bIsCombinedFilter = False
     End Sub
 
     Public Sub SetValues(lstNewValues As List(Of String), Optional bClone As Boolean = False)
