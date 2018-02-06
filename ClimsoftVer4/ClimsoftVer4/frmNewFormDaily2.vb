@@ -3,6 +3,7 @@ Public Class frmNewFormDaily2
     Private bFirstLoad As Boolean = True
 
     Private Sub frmNewFormDaily2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If bFirstLoad Then
             InitaliseDialog()
         End If
@@ -10,28 +11,67 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub InitaliseDialog()
+        Dim dtbVis, dtbCld, dtbPrec, dtbTemp As New DataTable
 
         ucrFormDaily.setYearAndMonthLink(ucrYearSelector, ucrMonth)
-
-        ucrFormDaily.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrFormDaily.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrFormDaily.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        ucrFormDaily.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        ucrFormDaily.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AssignLinkToKeyField(ucrFormDaily)
 
         ucrFormDaily.PopulateControl()
 
-        'ucrVisibilityUnits.SetField("visUnits")
-        'ucrVisibilityUnits.SetTableName("form_daily2")
+        ucrVisibilityUnits.SetField("visUnits")
+        ucrVisibilityUnits.SetTableName("form_daily2")
+        ucrVisibilityUnits.bFillFromDataBase = False
+        dtbVis.Columns.Add("visUnits", GetType(String))
+        dtbVis.Rows.Add("metres")
+        dtbVis.Rows.Add("yards")
+        ucrVisibilityUnits.SetPossibleValues(dtbVis)
+        AssignLinkToKeyField(ucrVisibilityUnits)
+        ucrVisibilityUnits.PopulateControl()
+        ucrVisibilityUnits.SetViewType("visUnits")
 
-        'ucrCloudheightUnits.SetField("cloudHeightUnits")
-        'ucrCloudheightUnits.SetTableName("form_daily2")
+        ucrCloudheightUnits.SetField("cloudHeightUnits")
+        ucrCloudheightUnits.SetTableName("form_daily2")
+        ucrCloudheightUnits.bFillFromDataBase = False
+        dtbCld.Columns.Add("cloudHeightUnits", GetType(String))
+        dtbCld.Rows.Add("metres")
+        dtbCld.Rows.Add("feet")
+        ucrCloudheightUnits.SetPossibleValues(dtbCld)
+        AssignLinkToKeyField(ucrCloudheightUnits)
+        ucrCloudheightUnits.PopulateControl()
+        ucrCloudheightUnits.SetViewType("cloudHeightUnits")
 
-        'ucrPrecipUnits.SetField("precipUnits")
-        'ucrPrecipUnits.SetTableName("form_daily2")
+        ucrPrecipUnits.SetField("precipUnits")
+        ucrPrecipUnits.SetTableName("form_daily2")
+        ucrPrecipUnits.bFillFromDataBase = False
+        dtbPrec.Columns.Add("precipUnits", GetType(String))
+        dtbPrec.Rows.Add("mm")
+        dtbPrec.Rows.Add("inches")
+        ucrPrecipUnits.SetPossibleValues(dtbPrec)
+        AssignLinkToKeyField(ucrPrecipUnits)
+        ucrPrecipUnits.PopulateControl()
+        ucrPrecipUnits.SetViewType("precipUnits")
 
-        'ucrTempUnits.SetField("temperatureUnits")
-        'ucrTempUnits.SetTableName("form_daily2")
+        ucrTempUnits.SetField("temperatureUnits")
+        ucrTempUnits.SetTableName("form_daily2")
+        ucrTempUnits.bFillFromDataBase = False
+        dtbTemp.Columns.Add("temperatureUnits", GetType(String))
+        dtbTemp.Rows.Add("Deg C")
+        dtbTemp.Rows.Add("Deg F")
+        ucrTempUnits.SetPossibleValues(dtbTemp)
+        AssignLinkToKeyField(ucrTempUnits)
+        ucrTempUnits.PopulateControl()
+        ucrTempUnits.SetViewType("temperatureUnits")
+
+
+    End Sub
+
+    Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
+
+        ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        ucrControl.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
     End Sub
 
