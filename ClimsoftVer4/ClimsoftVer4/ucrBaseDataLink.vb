@@ -160,15 +160,15 @@ Public Class ucrBaseDataLink
 
     End Sub
 
-    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "")
+    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
 
         Dim temp As Object
         temp = ucrLinkedDataControl.GetValue(strLinkedFieldName)
 
         If TypeOf temp Is String Then
-            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition), strLinkedFieldName)
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         Else
-            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition), strLinkedFieldName)
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         End If
 
     End Sub
@@ -189,6 +189,7 @@ Public Class ucrBaseDataLink
 
     Private Sub LinkedControls_evtValueChanged()
         UpdateDataTable()
+        PopulateControl()
     End Sub
 
     Public Sub RemoveLinkedControlsFilters(ucrLinkedDataControl As ucrBaseDataLink)
