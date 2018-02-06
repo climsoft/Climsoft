@@ -165,7 +165,8 @@ Public Class ucrBaseDataLink
         Dim temp As Object
         temp = ucrLinkedDataControl.GetValue(strLinkedFieldName)
 
-        If TypeOf temp Is String Then
+        If TypeOf temp Is String OrElse TypeOf temp Is Integer Then
+            temp = CStr(temp)
             AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         Else
             AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)

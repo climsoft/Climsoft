@@ -31,7 +31,7 @@
         End If
 
         If dtbRecords.Rows.Count > 0 Then
-            Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of String)(strFieldName)
+            Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of Object)(strFieldName)
         Else
             Return ""
         End If
