@@ -5,67 +5,114 @@
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
-    Private strStationName As String
-    Private strStationID As String
-    Private strIDsAndStations As String
+    Private strTotalFieldName As String = "total"
+    Private ucrLinkedMonth As New ucrMonth
+    Private ucrLinkedYear As ucrYearSelector
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
+        MyBase.PopulateControl()
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctr = ctrVFP
-                ctrVFP.ucrValue.PopulateControl()
-                ctrVFP.ucrFlag.PopulateControl()
-                ctrVFP.ucrPeriod.PopulateControl()
-
+                ctrVFP = ctr
+                ctrVFP.PopulateControl()
             ElseIf TypeOf ctr Is ucrTextBox Then
-                ctr = ctrTotal
+                ctrTotal = ctr
                 ctrTotal.PopulateControl()
             End If
         Next
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim d As New Dictionary(Of String, List(Of String))
-        Dim ctrValue As Integer
         Dim ctr As Control
-        Dim ctrtemp As New ucrValueFlagPeriod
-
-        'Dim lstUcrValueFlagPeriod As New List(Of ucrValueFlagPeriod)
+        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim ctrTotal As New ucrTextBox
+        Dim lstTempFields As New List(Of String)
 
         If bFirstLoad Then
-            'lstUcrValueFlagPeriod.AddRange({ucrValueFlagPeriod1, ucrValueFlagPeriod2, ucrValueFlagPeriod3, ucrValueFlagPeriod4, ucrValueFlagPeriod5})
-            'For ctrValue = 0 To lstUcrValueFlagPeriod.Count - 1
-            'If ctrValue < 10 Then
-            '        ctrValue = "0" & ctrValue + 1
-            '    Else
-            '        ctrValue = ctrValue + 1
-            '    End If
-            '    ctrtemp.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrValue, strFlagFieldName & ctrValue, strPeriodFieldName & ctrValue)
-            'Next
-
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctr = ctrtemp
-                    ctrtemp.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrValue, strFlagFieldName & ctrValue, strPeriodFieldName & ctrValue)
+                    ctrVFP = ctr
+                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag, strPeriodFieldName & ctrVFP.Tag)
+                    lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
+                    lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
+                    lstTempFields.Add(strPeriodFieldName & ctrVFP.Tag)
+                ElseIf TypeOf ctr Is ucrTextBox Then
+                    ctrTotal = ctr
+                    ctrTotal.SetTableName(strTableName)
+                    ctrTotal.SetField(strTotalFieldName)
+                    lstTempFields.Add(strTotalFieldName)
                 End If
             Next
-
+            SetTableName(strTableName)
+            SetFields(lstTempFields)
             bFirstLoad = False
             PopulateControl()
+            EnableDaysofMonth()
         End If
-    End Sub
-
-    Private Sub SetCtrlTableName(strTable As String)
-        SetTableName(strTable)
-    End Sub
-
-    Private Sub SetCtrStationName(strStation As String)
-        strStationName = strStation
 
     End Sub
+
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim ctrTotal As New ucrTextBox
+
+        MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                ctrVFP.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+            ElseIf TypeOf ctr Is ucrTextBox Then
+                ctrTotal = ctr
+                ctrTotal.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+            End If
+        Next
+    End Sub
+
+    Protected Overrides Sub LinkedControls_evtValueChanged()
+
+        MyBase.LinkedControls_evtValueChanged()
+        EnableDaysofMonth()
+
+    End Sub
+
+    Private Sub EnableDaysofMonth()
+        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        Dim iMonthLength As Integer
+        Dim iMonth As Integer
+
+        iMonth = ucrLinkedMonth.GetValue()
+        If iMonth = 2 Then
+            If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
+                iMonthLength = 28
+            Else
+                iMonthLength = 29
+            End If
+        Else
+            If lstShortMonths.Contains(iMonth) Then
+                iMonthLength = 30
+            Else
+                iMonthLength = 31
+            End If
+        End If
+
+        For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+            If ctrVFP.Tag <= iMonthLength Then
+                ctrVFP.Enabled = True
+            Else
+                ctrVFP.Enabled = False
+            End If
+        Next
+    End Sub
+
+    Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
+        ucrLinkedYear = ucrYearControl
+        ucrLinkedMonth = ucrMonthControl
+    End Sub
+
 End Class

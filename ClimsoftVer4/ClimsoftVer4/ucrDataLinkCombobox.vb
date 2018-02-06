@@ -1,8 +1,16 @@
 ﻿Public Class ucrDataLinkCombobox
     Protected bFirstLoad As Boolean = True
+    Public bFillFromDataBase As Boolean = True
+
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
+        If bFillFromDataBase Then
+            MyBase.PopulateControl()
+        End If
         cboValues.DataSource = dtbRecords
+    End Sub
+
+    Public Sub SetPossibleValues(dtbNewRecords As DataTable)
+        dtbRecords = dtbNewRecords
     End Sub
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -38,7 +46,7 @@
 
     End Function
 
-    Protected Sub SetViewType(strViewType As String)
+    Public Sub SetViewType(strViewType As String)
 
         Dim col As DataColumn
         For Each col In dtbRecords.Columns

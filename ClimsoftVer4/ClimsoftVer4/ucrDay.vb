@@ -12,18 +12,18 @@
         'MyBase.PopulateControl()
 
         dtbRecords = New DataTable
-        dtbRecords.Columns.Add(strDay, GetType(String))
+        dtbRecords.Columns.Add(strDay, GetType(Integer))
 
         For i As Integer = 1 To 31
-            dtb31.Rows.Add(CStr(i))
+            dtb31.Rows.Add(i)
             If i <= 30 Then
-                dtb30.Rows.Add(CStr(i))
+                dtb30.Rows.Add(i)
             End If
             If i <= 29 Then
-                dtb29.Rows.Add(CStr(i))
+                dtb29.Rows.Add(i)
             End If
             If i <= 28 Then
-                dtb28.Rows.Add(CStr(i))
+                dtb28.Rows.Add(i)
             End If
         Next
 
