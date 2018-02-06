@@ -27,6 +27,10 @@
         End If
     End Sub
 
+    Private Sub ucrMonth_Load(sender As Object, e As EventArgs) Handles Me.Load
+        cboValues.ContextMenuStrip = cmsMonth
+    End Sub
+
     Public Sub SetViewTypeAsMonthsNames()
         SetViewType(strMonthName)
     End Sub
@@ -39,4 +43,24 @@
         SetViewType(strShortMonthName)
     End Sub
 
+    Private Sub cmsMonthIDs_Click(sender As Object, e As EventArgs) Handles cmsMonthIDs.Click
+        SetViewTypeAsMonthIds()
+        cmsMonthIDs.Checked = True
+        cmsMonthNames.Checked = False
+        cmsMonthShortMonthNames.Checked = False
+    End Sub
+
+    Private Sub cmsMonthNames_Click(sender As Object, e As EventArgs) Handles cmsMonthNames.Click
+        SetViewTypeAsMonthsNames()
+        cmsMonthIDs.Checked = False
+        cmsMonthNames.Checked = True
+        cmsMonthShortMonthNames.Checked = False
+    End Sub
+
+    Private Sub cmsMonthShortMonthNames_Click(sender As Object, e As EventArgs) Handles cmsMonthShortMonthNames.Click
+        SetViewTypeAsShortMonthName()
+        cmsMonthIDs.Checked = False
+        cmsMonthNames.Checked = False
+        cmsMonthShortMonthNames.Checked = True
+    End Sub
 End Class
