@@ -168,15 +168,23 @@ Public Class ucrTextBox
         End If
     End Sub
 
+    Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
+        OnevtKeyDown(sender, e)
+    End Sub
+
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
+
         'check if value is or not new
         If dtbRecords.Rows.Count = 1 Then
             If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
+                'value same as original
                 SetBackColor(Color.LightGreen)
             Else
+                'value different from the original
                 SetBackColor(Color.Orange)
             End If
         Else
+            'new value
             SetBackColor(Color.White)
         End If
 
@@ -188,19 +196,8 @@ Public Class ucrTextBox
         'change the case appropriately
         ChangeCase()
 
-    End Sub
-
-    Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
-        Dim str As String = txtBox.Text
-        Dim str2 As String = TextboxValue
-        'OnevtKeyDown(sender, e)
-    End Sub
-
-    Private Sub ucrTextBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBox.KeyUp
-        'OnevtKeyDown(sender, e)
-    End Sub
-
-    Private Sub ucrTextBox_Enter(sender As Object, e As EventArgs) Handles txtBox.Enter
+        'raise event
+        OnevtTextChanged(sender, e)
 
     End Sub
 

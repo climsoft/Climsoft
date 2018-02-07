@@ -19,6 +19,7 @@ Public Class ucrBaseDataLink
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
 
     Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
+    Public Event evtTextChanged(sender As Object, e As EventArgs)
     Public Event evtValueChanged()
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
@@ -125,6 +126,10 @@ Public Class ucrBaseDataLink
 
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
+    End Sub
+
+    Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
+        RaiseEvent evtTextChanged(sender , e )
     End Sub
 
     Public Sub OnevtValueChanged()
