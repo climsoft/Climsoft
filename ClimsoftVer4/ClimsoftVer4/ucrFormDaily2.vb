@@ -143,4 +143,16 @@
 
     End Sub
 
+    Public Sub Clear()
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                ctrVFP.ucrValue.Clear()
+                ctrVFP.ucrFlag.Clear()
+                ctrVFP.ucrPeriod.Clear()
+            End If
+        Next
+    End Sub
 End Class
