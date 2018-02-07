@@ -7,7 +7,6 @@ Public Class frmNewFormDaily2
         If bFirstLoad Then
             InitaliseDialog()
         End If
-
     End Sub
 
     Private Sub InitaliseDialog()
@@ -62,17 +61,17 @@ Public Class frmNewFormDaily2
         ucrTempUnits.PopulateControl()
         ucrTempUnits.SetViewType("temperatureUnits")
 
-
+        ucrInputSequncer.SetTableName("seq_daily_element")
+        ucrInputSequncer.SetField("seq")
+        ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
-
         ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
-
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
@@ -81,13 +80,13 @@ Public Class frmNewFormDaily2
 
         For Each ctl In Me.Controls
             If TypeOf ctl Is ucrValueFlagPeriod Then
-                ctl = ctrltemp
+                ctrltemp = ctl
                 ctrltemp.ucrValue.txtBox.Text = ucrInputValue.txtBox.Text
             End If
         Next
     End Sub
 
-    Private Sub ucrVisibilityUnits_Load(sender As Object, e As EventArgs) Handles ucrVisibilityUnits.Load
-
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ucrFormDaily.Clear()
     End Sub
 End Class
