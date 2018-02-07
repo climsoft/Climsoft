@@ -16,6 +16,7 @@
 
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
+    Public Event evtGoToNextVFPControl()
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -77,66 +78,32 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Public Sub Clear()
-        ClearValue()
-        ClearFlag()
-        ClearPeriod()
-    End Sub
-
-    Public Sub ClearValue()
         ucrValue.Clear()
-    End Sub
-
-    Public Sub ClearFlag()
         ucrFlag.Clear()
-    End Sub
-
-    Public Sub ClearPeriod()
         ucrPeriod.Clear()
     End Sub
 
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-
-             ucrValue.SetValidationTypeAsNumeric()
+            ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             bFirstLoad = False
         End If
 
     End Sub
 
-    Private Sub ucrControl_TextChanged(sender As Object, e As EventArgs)
+    Private Sub ucrValue_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown
 
-    End Sub
-
-    Private Sub ucrControl_KeyDown(sender As Object, e As KeyEventArgs)
-        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
-
+        'If {ENTER} key is pressed
+        If e.KeyCode = Keys.Enter Then
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            RaiseEvent evtGoToNextVFPControl()
         End If
-    End Sub
-
-    Private Sub ucrControl_Enter(sender As Object, e As EventArgs)
 
     End Sub
 
-    Public Sub setValue()
-
-    End Sub
-
-    Public Function IsEmpty() As Boolean
-        Return True
-    End Function
-
-    Public Sub SetColor()
-        ' txtValue.BackColor = Color.Aqua
-    End Sub
-
-    Public Sub RemoveColor()
-        'txtValue.BackColor = Color.White
-    End Sub
-
-    Private Sub ucrValue_KeyDownEvent(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown
-
+    Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
 
         If Not ucrValue.IsEmpty AndAlso Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
             'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
@@ -154,10 +121,6 @@ Public Class ucrValueFlagPeriod
 
         End If
 
-        'If {ENTER} key is pressed
-        If e.KeyCode = Keys.Enter Then
-            My.Computer.Keyboard.SendKeys("{TAB}")
-        End If
 
     End Sub
 
