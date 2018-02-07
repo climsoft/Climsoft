@@ -98,9 +98,11 @@ Public Class ucrValueFlagPeriod
 
         If bFirstLoad Then
 
+             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             bFirstLoad = False
         End If
+
     End Sub
 
     Private Sub ucrControl_TextChanged(sender As Object, e As EventArgs)
@@ -121,10 +123,6 @@ Public Class ucrValueFlagPeriod
 
     End Sub
 
-
-
-
-
     Public Function IsEmpty() As Boolean
         Return True
     End Function
@@ -137,33 +135,28 @@ Public Class ucrValueFlagPeriod
         'txtValue.BackColor = Color.White
     End Sub
 
-    Private Sub ucrValue_KeyDownEvent(e As KeyEventArgs) 'Handles ucrValue.KeyDownEvent
-        'If {ENTER} key is pressed
-        If e.KeyCode = Keys.Enter Then
-            If Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
-                'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-                'to the value string in the textbox.
-                ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
+    Private Sub ucrValue_KeyDownEvent(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown
 
-                'Get the observation value by leaving out the last character from the string entered in the textbox
-                ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
 
-            End If
+        If Not ucrValue.IsEmpty AndAlso Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
+            'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
+            'to the value string in the textbox.
+            ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
+
+            'Get the observation value by leaving out the last character from the string entered in the textbox
+            ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
 
             'Check that numeric value has been entered for observation value
-            If IsNumeric(ucrValue.TextboxValue) Then
-                ucrValue.RemoveBackColor()
-                'ucrValue.SetBackColor(Color.White)
-                ' My.Computer.Keyboard.SendKeys("{TAB}")
-                'tabNext = True
-            Else
-                ucrValue.SetBackColor(Color.Red)
-                ucrValue.GetFocus()
-
+            If Not IsNumeric(ucrValue.TextboxValue) Then
                 'tabNext = False
-                'MsgBox("Number expected!", MsgBoxStyle.Critical)
+                MsgBox("Number expected!", MsgBoxStyle.Critical)
             End If
 
+        End If
+
+        'If {ENTER} key is pressed
+        If e.KeyCode = Keys.Enter Then
+            My.Computer.Keyboard.SendKeys("{TAB}")
         End If
 
     End Sub
