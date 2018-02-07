@@ -160,30 +160,51 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
-    Private Sub ucrStationSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-
 
             bFirstLoad = False
         End If
     End Sub
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-
-
-      If bToLower Then
-            TextboxValue = TextboxValue.ToLower()
-        ElseIf bToUpper Then
-            TextboxValue = TextboxValue.ToLower()
+        'check if value is or not new
+        If dtbRecords.Rows.Count = 1 Then
+            If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
+                SetBackColor(Color.LightGreen)
+            Else
+                SetBackColor(Color.Orange)
+            End If
+        Else
+            SetBackColor(Color.White)
         End If
+
+        'check if value is valid
+        If Not ValidateValue() Then
+            SetBackColor(Color.Red)
+        End If
+
+        'change the case appropriately
+        ChangeCase()
+
     End Sub
 
     Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
-        OnevtKeyDown(sender, e)
+        Dim str As String = txtBox.Text
+        Dim str2 As String = TextboxValue
+        'OnevtKeyDown(sender, e)
+    End Sub
+
+    Private Sub ucrTextBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBox.KeyUp
+        'OnevtKeyDown(sender, e)
     End Sub
 
     Private Sub ucrTextBox_Enter(sender As Object, e As EventArgs) Handles txtBox.Enter
+
+    End Sub
+
+    Private Sub ucrTextBox_LostFocus(sender As Object, e As EventArgs) Handles txtBox.LostFocus
 
     End Sub
 
@@ -192,9 +213,9 @@ Public Class ucrTextBox
     End Sub
     Public Function IsEmpty() As Boolean
         If TextboxValue.Length > 0 Then
-            Return True
-        Else
             Return False
+        Else
+            Return True
         End If
     End Function
 
@@ -202,13 +223,20 @@ Public Class ucrTextBox
         TextboxValue = ""
     End Sub
 
-
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
     End Sub
 
     Public Sub RemoveBackColor()
         txtBox.BackColor = Color.White
+    End Sub
+
+    Public Sub ChangeCase()
+        If bToLower Then
+            TextboxValue = TextboxValue.ToLower()
+        ElseIf bToUpper Then
+            TextboxValue = TextboxValue.ToUpper()
+        End If
     End Sub
 
     Public Overrides Function GetValue() As Object
