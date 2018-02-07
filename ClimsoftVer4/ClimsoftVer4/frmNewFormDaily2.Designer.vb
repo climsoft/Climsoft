@@ -34,10 +34,6 @@ Partial Class frmNewFormDaily2
         Me.LblCloudheight = New System.Windows.Forms.Label()
         Me.lblPrecip = New System.Windows.Forms.Label()
         Me.lblTemperature = New System.Windows.Forms.Label()
-        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
@@ -54,6 +50,11 @@ Partial Class frmNewFormDaily2
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
+        Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
+        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
@@ -61,7 +62,6 @@ Partial Class frmNewFormDaily2
         Me.ucrFormDaily = New ClimsoftVer4.ucrFormDaily2()
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -183,34 +183,6 @@ Partial Class frmNewFormDaily2
         Me.lblTemperature.TabIndex = 4
         Me.lblTemperature.Text = "Temperature:"
         '
-        'ucrVisibilityUnits
-        '
-        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
-        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
-        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrVisibilityUnits.TabIndex = 3
-        '
-        'ucrCloudheightUnits
-        '
-        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
-        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
-        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrCloudheightUnits.TabIndex = 2
-        '
-        'ucrPrecipUnits
-        '
-        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
-        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
-        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrPrecipUnits.TabIndex = 1
-        '
-        'ucrTempUnits
-        '
-        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
-        Me.ucrTempUnits.Name = "ucrTempUnits"
-        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrTempUnits.TabIndex = 0
-        '
         'btnView
         '
         Me.btnView.Location = New System.Drawing.Point(444, 555)
@@ -231,7 +203,6 @@ Partial Class frmNewFormDaily2
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(357, 555)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
@@ -241,7 +212,6 @@ Partial Class frmNewFormDaily2
         '
         'btnCommit
         '
-        Me.btnCommit.Enabled = False
         Me.btnCommit.Location = New System.Drawing.Point(96, 555)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
@@ -364,6 +334,43 @@ Partial Class frmNewFormDaily2
         Me.chkEnableSequencer.Text = "Enable Element Sequencer"
         Me.chkEnableSequencer.UseVisualStyleBackColor = True
         '
+        'ucrInputSequncer
+        '
+        Me.ucrInputSequncer.Location = New System.Drawing.Point(281, 596)
+        Me.ucrInputSequncer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrInputSequncer.Name = "ucrInputSequncer"
+        Me.ucrInputSequncer.Size = New System.Drawing.Size(150, 26)
+        Me.ucrInputSequncer.TabIndex = 678
+        Me.ucrInputSequncer.TextboxValue = ""
+        '
+        'ucrVisibilityUnits
+        '
+        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
+        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
+        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrVisibilityUnits.TabIndex = 3
+        '
+        'ucrCloudheightUnits
+        '
+        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
+        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
+        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrCloudheightUnits.TabIndex = 2
+        '
+        'ucrPrecipUnits
+        '
+        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
+        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
+        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrPrecipUnits.TabIndex = 1
+        '
+        'ucrTempUnits
+        '
+        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
+        Me.ucrTempUnits.Name = "ucrTempUnits"
+        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrTempUnits.TabIndex = 0
+        '
         'ucrInputValue
         '
         Me.ucrInputValue.Location = New System.Drawing.Point(577, 71)
@@ -414,15 +421,6 @@ Partial Class frmNewFormDaily2
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(175, 24)
         Me.ucrStationSelector.TabIndex = 0
-        '
-        'ucrInputSequncer
-        '
-        Me.ucrInputSequncer.Location = New System.Drawing.Point(281, 596)
-        Me.ucrInputSequncer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrInputSequncer.Name = "ucrInputSequncer"
-        Me.ucrInputSequncer.Size = New System.Drawing.Size(150, 26)
-        Me.ucrInputSequncer.TabIndex = 678
-        Me.ucrInputSequncer.TextboxValue = ""
         '
         'frmNewFormDaily2
         '

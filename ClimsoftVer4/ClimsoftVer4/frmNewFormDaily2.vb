@@ -27,7 +27,6 @@ Public Class frmNewFormDaily2
         AssignLinkToKeyField(ucrVisibilityUnits)
         ucrVisibilityUnits.PopulateControl()
         ucrVisibilityUnits.SetViewType("visUnits")
-        ucrFormDaily.AddUnitslink("visUnits", ucrVisibilityUnits)
 
         ucrCloudheightUnits.SetField("cloudHeightUnits")
         ucrCloudheightUnits.SetTableName("form_daily2")
@@ -39,7 +38,7 @@ Public Class frmNewFormDaily2
         AssignLinkToKeyField(ucrCloudheightUnits)
         ucrCloudheightUnits.PopulateControl()
         ucrCloudheightUnits.SetViewType("cloudHeightUnits")
-        ucrFormDaily.AddUnitslink("cloudHeightUnits", ucrCloudheightUnits)
+
 
         ucrPrecipUnits.SetField("precipUnits")
         ucrPrecipUnits.SetTableName("form_daily2")
@@ -51,7 +50,6 @@ Public Class frmNewFormDaily2
         AssignLinkToKeyField(ucrPrecipUnits)
         ucrPrecipUnits.PopulateControl()
         ucrPrecipUnits.SetViewType("precipUnits")
-        ucrFormDaily.AddUnitslink("precipUnits", ucrPrecipUnits)
 
         ucrTempUnits.SetField("temperatureUnits")
         ucrTempUnits.SetTableName("form_daily2")
@@ -63,7 +61,7 @@ Public Class frmNewFormDaily2
         AssignLinkToKeyField(ucrTempUnits)
         ucrTempUnits.PopulateControl()
         ucrTempUnits.SetViewType("temperatureUnits")
-        ucrFormDaily.AddUnitslink("temperatureUnits", ucrTempUnits)
+
 
         ucrInputSequncer.SetTableName("seq_daily_element")
         ucrInputSequncer.SetField("seq")
@@ -93,5 +91,10 @@ Public Class frmNewFormDaily2
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrFormDaily.Clear()
+    End Sub
+
+    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
+        clsDataConnection.db.SaveChanges()
     End Sub
 End Class

@@ -23,6 +23,7 @@ Public Class ucrTextBox
     Private bFirstLoad As Boolean = True
     Protected bIsReadOnly As Boolean = False
     Protected strValidationType As String = "none"
+    Public bValidate As Boolean = True
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
@@ -32,7 +33,9 @@ Public Class ucrTextBox
             MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
         Else
             If dtbRecords.Rows.Count = 0 Then
+                bValidate = False
                 TextboxValue = ""
+                bValidate = True
             Else
                 TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
             End If
@@ -91,6 +94,8 @@ Public Class ucrTextBox
                     iType = 2
                 End If
             End If
+        Else
+            iType = 1
         End If
         Return iType
     End Function
@@ -174,6 +179,12 @@ Public Class ucrTextBox
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
 
+        TextHandling(sender, e)
+
+    End Sub
+
+    Public Sub TextHandling(sender As Object, e As EventArgs)
+
         'check if value is or not new
         If dtbRecords.Rows.Count = 1 Then
             If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
@@ -189,7 +200,7 @@ Public Class ucrTextBox
         End If
 
         'check if value is valid
-        If Not ValidateValue() Then
+        If bValidate AndAlso Not ValidateValue() Then
             SetBackColor(Color.Red)
         End If
 
@@ -201,13 +212,10 @@ Public Class ucrTextBox
 
     End Sub
 
-    Private Sub ucrTextBox_LostFocus(sender As Object, e As EventArgs) Handles txtBox.LostFocus
-
-    End Sub
-
     Public Sub GetFocus()
         txtBox.Focus()
     End Sub
+
     Public Function IsEmpty() As Boolean
         If TextboxValue.Length > 0 Then
             Return False
@@ -217,7 +225,9 @@ Public Class ucrTextBox
     End Function
 
     Public Sub Clear()
+        bValidate = False
         TextboxValue = ""
+        bValidate = True
     End Sub
 
     Public Sub SetBackColor(backColor As Color)
@@ -246,6 +256,12 @@ Public Class ucrTextBox
         Else
             dtbRecords.Rows(0).Item(0) = TextboxValue
         End If
+
+    End Sub
+
+    Private Sub ucrTextBox_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+
+        OnevtValueChanged(Me, e)
 
     End Sub
 End Class
