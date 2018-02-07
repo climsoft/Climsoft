@@ -6,8 +6,9 @@
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
-    Private ucrLinkedMonth As New ucrMonth
+    Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedUnits As List(Of KeyValuePair(Of String, ucrDataLinkCombobox))
 
     Public Overrides Sub PopulateControl()
         Dim ctr As Control
@@ -86,7 +87,12 @@
         Dim iMonthLength As Integer
         Dim iMonth As Integer
 
-        iMonth = ucrLinkedMonth.GetValue()
+        If ucrLinkedMonth Is Nothing Then
+            iMonth = 1
+        Else
+            iMonth = ucrLinkedMonth.GetValue()
+        End If
+
         If iMonth = 2 Then
             If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
                 iMonthLength = 28
@@ -110,9 +116,31 @@
         Next
     End Sub
 
-    Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
+    Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
+    End Sub
+
+    Public Sub AddUnitslink(strFieldName As String, ucrComboBox As ucrDataLinkCombobox)
+
+        Dim bNotContained As Boolean
+
+        If ucrLinkedUnits Is Nothing Then
+            ucrLinkedUnits = New List(Of KeyValuePair(Of String, ucrDataLinkCombobox))
+        End If
+
+        bNotContained = True
+        For Each kvp As KeyValuePair(Of String, ucrDataLinkCombobox) In ucrLinkedUnits
+            If kvp.Key = strFieldName AndAlso kvp.Value Is ucrComboBox Then
+                bNotContained = False
+                Exit For
+            End If
+        Next
+
+        If bNotContained Then
+            ucrLinkedUnits.Add(New KeyValuePair(Of String, ucrDataLinkCombobox)(strFieldName, ucrComboBox))
+        End If
+
     End Sub
 
 End Class
