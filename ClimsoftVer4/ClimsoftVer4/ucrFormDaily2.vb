@@ -8,7 +8,8 @@
     Private strTotalFieldName As String = "total"
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedYear As ucrYearSelector
-    Private ucrLinkedUnits As List(Of KeyValuePair(Of String, ucrDataLinkCombobox))
+    Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
+    Private lstTempFields As New List(Of String)
 
     Public Overrides Sub PopulateControl()
         Dim ctr As Control
@@ -31,7 +32,6 @@
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
-        Dim lstTempFields As New List(Of String)
 
         If bFirstLoad Then
             For Each ctr In Me.Controls
@@ -72,6 +72,11 @@
                 ctrTotal.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
             End If
         Next
+        If Not lstTempFields.Contains(strFieldName) Then
+            lstTempFields.Add(strFieldName)
+            SetFields(lstTempFields)
+            PopulateControl()
+        End If
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -123,36 +128,36 @@
 
     Public Sub AddUnitslink(strFieldName As String, ucrComboBox As ucrDataLinkCombobox)
 
-        Dim bNotContained As Boolean
-
-        If ucrLinkedUnits Is Nothing Then
-            ucrLinkedUnits = New List(Of KeyValuePair(Of String, ucrDataLinkCombobox))
+        If ucrLinkedUnits.ContainsKey(strFieldName) Then
+            ucrLinkedUnits.Add(strFieldName, ucrComboBox)
+        Else
+            MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
         End If
 
-        bNotContained = True
-        For Each kvp As KeyValuePair(Of String, ucrDataLinkCombobox) In ucrLinkedUnits
-            If kvp.Key = strFieldName AndAlso kvp.Value Is ucrComboBox Then
-                bNotContained = False
-                Exit For
-            End If
-        Next
-
-        If bNotContained Then
-            ucrLinkedUnits.Add(New KeyValuePair(Of String, ucrDataLinkCombobox)(strFieldName, ucrComboBox))
+        If Not lstTempFields.Contains(strFieldName) Then
+            lstTempFields.Add(strFieldName)
+            SetFields(lstTempFields)
+            PopulateControl()
         End If
+
+        AddHandler ucrComboBox.evtValueChanged, AddressOf LinkedControls_evtValueChanged
 
     End Sub
 
     Public Sub Clear()
+
         Dim ctr As Control
+        Dim ctrTotal As ucrTextBox
         Dim ctrVFP As New ucrValueFlagPeriod
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ctrVFP = ctr
-                ctrVFP.ucrValue.Clear()
-                ctrVFP.ucrFlag.Clear()
-                ctrVFP.ucrPeriod.Clear()
+                ctrVFP.Clear()
+            ElseIf TypeOf ctr Is ucrTextBox Then
+                ctrTotal = ctr
+                ctrTotal.Clear()
             End If
         Next
     End Sub
+
 End Class
