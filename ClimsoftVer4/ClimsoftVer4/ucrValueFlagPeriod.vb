@@ -16,7 +16,7 @@
 
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
-    Public Event evtGoToNextVFPControl()
+    Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -71,10 +71,12 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
-        ucrValue.PopulateControl()
-        ucrFlag.PopulateControl()
-        ucrPeriod.PopulateControl()
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            ucrValue.PopulateControl()
+            ucrFlag.PopulateControl()
+            ucrPeriod.PopulateControl()
+        End If
     End Sub
 
     Public Sub Clear()
@@ -99,7 +101,7 @@ Public Class ucrValueFlagPeriod
         If e.KeyCode = Keys.Enter Then
             'My.Computer.Keyboard.SendKeys("{TAB}")
             ucrValue.TextHandling(sender, e)
-            RaiseEvent evtGoToNextVFPControl()
+            RaiseEvent evtGoToNextVFPControl(Me, e)
         End If
 
     End Sub

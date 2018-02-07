@@ -26,18 +26,20 @@ Public Class ucrTextBox
     Public bValidate As Boolean = True
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
-        If dtbRecords.Rows.Count > 1 Then
-            MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record. " & dtbRecords.Rows.Count & " records found.", caption:="Developer error")
-        ElseIf dtbRecords.Columns.Count <> 1 Then
-            MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
-        Else
-            If dtbRecords.Rows.Count = 0 Then
-                bValidate = False
-                TextboxValue = ""
-                bValidate = True
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            If dtbRecords.Rows.Count > 1 Then
+                MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record. " & dtbRecords.Rows.Count & " records found.", caption:="Developer error")
+            ElseIf dtbRecords.Columns.Count <> 1 Then
+                MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
             Else
-                TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
+                bValidate = False
+                If dtbRecords.Rows.Count = 0 Then
+                    TextboxValue = ""
+                Else
+                    TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
+                End If
+                bValidate = True
             End If
         End If
     End Sub
@@ -165,10 +167,9 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
-    Private Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-
             bFirstLoad = False
         End If
     End Sub
@@ -259,7 +260,7 @@ Public Class ucrTextBox
 
     End Sub
 
-    Private Sub ucrTextBox_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
+    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
 
         OnevtValueChanged(Me, e)
 

@@ -17,16 +17,18 @@
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
-        MyBase.PopulateControl()
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.PopulateControl()
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr
-                ctrTotal.PopulateControl()
-            End If
-        Next
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = ctr
+                    ctrVFP.PopulateControl()
+                ElseIf TypeOf ctr Is ucrTextBox Then
+                    ctrTotal = ctr
+                    ctrTotal.PopulateControl()
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -47,6 +49,8 @@
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
 
+                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ctrTotal = ctr
                     ctrTotal.SetTableName(strTableName)
@@ -59,7 +63,6 @@
             SetTableName(strTableName)
             SetFields(lstTempFields)
             bFirstLoad = False
-            PopulateControl()
             EnableDaysofMonth()
         End If
 
@@ -83,7 +86,6 @@
         If Not lstTempFields.Contains(tblFilter.GetField) Then
             lstTempFields.Add(tblFilter.GetField)
             SetFields(lstTempFields)
-            PopulateControl()
         End If
 
     End Sub
@@ -95,6 +97,25 @@
             ctr = sender
             CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
+    End Sub
+
+    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+
+        If TypeOf sender Is ucrValueFlagPeriod Then
+            ctrVFP = sender
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    If ctr.Tag = ctrVFP.Tag + 1 Then
+                        If ctr.Enabled Then
+                            ctr.Focus()
+                        End If
+                    End If
+                End If
+            Next
+        End If
+
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
