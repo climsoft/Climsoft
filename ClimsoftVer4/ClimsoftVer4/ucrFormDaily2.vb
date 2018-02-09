@@ -1,4 +1,8 @@
-﻿Public Class ucrFormDaily2
+﻿
+Imports System.Data.Entity
+Imports System.Linq.Dynamic
+
+Public Class ucrFormDaily2
 
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
@@ -10,15 +14,25 @@
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
     Private lstTempFields As New List(Of String)
-    Public fd2Record As New form_daily2
+    Public fd2Record As form_daily2
 
     Public Overrides Sub PopulateControl()
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
+        Dim clsCurrentFilter As TableFilter
 
         If Not bFirstLoad Then
             MyBase.PopulateControl()
+            If fd2Record Is Nothing Then
+                clsCurrentFilter = GetLinkedControlsFilter()
+                Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
+                If y.Count() = 1 Then
+                    fd2Record = y.FirstOrDefault()
+                Else
+                    fd2Record = New form_daily2
+                End If
+            End If
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = ctr
@@ -122,21 +136,21 @@
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
 
-        Dim ctr As Control
-        Dim ctrVFP As New ucrValueFlagPeriod
-        Dim ctrTotal As New ucrTextBox
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
-                CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
-                CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr
-                CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
-            End If
+        'Dim ctr As Control
+        'Dim ctrVFP As New ucrValueFlagPeriod
+        'Dim ctrTotal As New ucrTextBox
+        'For Each ctr In Me.Controls
+        '    If TypeOf ctr Is ucrValueFlagPeriod Then
+        '        ctrVFP = ctr
+        '        CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
+        '        CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
+        '        CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
+        '    ElseIf TypeOf ctr Is ucrTextBox Then
+        '        ctrTotal = ctr
+        '        CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
+        '    End If
 
-        Next
+        'Next
 
         For Each kvp In dctLinkedControlsFilters
             CallByName(fd2Record, kvp.Value.Value.GetField, CallType.Set, kvp.Key.GetValue)

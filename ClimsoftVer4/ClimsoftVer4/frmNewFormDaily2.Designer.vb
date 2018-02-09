@@ -34,6 +34,10 @@ Partial Class frmNewFormDaily2
         Me.LblCloudheight = New System.Windows.Forms.Label()
         Me.lblPrecip = New System.Windows.Forms.Label()
         Me.lblTemperature = New System.Windows.Forms.Label()
+        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
@@ -51,10 +55,6 @@ Partial Class frmNewFormDaily2
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
-        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
@@ -95,7 +95,7 @@ Partial Class frmNewFormDaily2
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(130, 57)
+        Me.lblMonth.Location = New System.Drawing.Point(152, 57)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 5
@@ -104,7 +104,7 @@ Partial Class frmNewFormDaily2
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(185, 58)
+        Me.lblHour.Location = New System.Drawing.Point(229, 58)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 5
@@ -182,6 +182,34 @@ Partial Class frmNewFormDaily2
         Me.lblTemperature.Size = New System.Drawing.Size(70, 13)
         Me.lblTemperature.TabIndex = 4
         Me.lblTemperature.Text = "Temperature:"
+        '
+        'ucrVisibilityUnits
+        '
+        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
+        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
+        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrVisibilityUnits.TabIndex = 3
+        '
+        'ucrCloudheightUnits
+        '
+        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
+        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
+        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrCloudheightUnits.TabIndex = 2
+        '
+        'ucrPrecipUnits
+        '
+        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
+        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
+        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrPrecipUnits.TabIndex = 1
+        '
+        'ucrTempUnits
+        '
+        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
+        Me.ucrTempUnits.Name = "ucrTempUnits"
+        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrTempUnits.TabIndex = 0
         '
         'btnView
         '
@@ -343,34 +371,6 @@ Partial Class frmNewFormDaily2
         Me.ucrInputSequncer.TabIndex = 678
         Me.ucrInputSequncer.TextboxValue = ""
         '
-        'ucrVisibilityUnits
-        '
-        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
-        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
-        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrVisibilityUnits.TabIndex = 3
-        '
-        'ucrCloudheightUnits
-        '
-        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
-        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
-        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrCloudheightUnits.TabIndex = 2
-        '
-        'ucrPrecipUnits
-        '
-        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
-        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
-        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrPrecipUnits.TabIndex = 1
-        '
-        'ucrTempUnits
-        '
-        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
-        Me.ucrTempUnits.Name = "ucrTempUnits"
-        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrTempUnits.TabIndex = 0
-        '
         'ucrInputValue
         '
         Me.ucrInputValue.Location = New System.Drawing.Point(577, 71)
@@ -382,23 +382,23 @@ Partial Class frmNewFormDaily2
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(189, 74)
+        Me.ucrHour.Location = New System.Drawing.Point(233, 74)
         Me.ucrHour.Name = "ucrHour"
-        Me.ucrHour.Size = New System.Drawing.Size(36, 21)
+        Me.ucrHour.Size = New System.Drawing.Size(65, 21)
         Me.ucrHour.TabIndex = 7
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(133, 73)
+        Me.ucrMonth.Location = New System.Drawing.Point(155, 73)
         Me.ucrMonth.Name = "ucrMonth"
-        Me.ucrMonth.Size = New System.Drawing.Size(37, 21)
+        Me.ucrMonth.Size = New System.Drawing.Size(58, 21)
         Me.ucrMonth.TabIndex = 6
         '
         'ucrYearSelector
         '
         Me.ucrYearSelector.Location = New System.Drawing.Point(68, 74)
         Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(46, 21)
+        Me.ucrYearSelector.Size = New System.Drawing.Size(59, 21)
         Me.ucrYearSelector.TabIndex = 4
         '
         'ucrFormDaily

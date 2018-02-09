@@ -15,8 +15,6 @@ Public Class frmNewFormDaily2
         ucrFormDaily.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         AssignLinkToKeyField(ucrFormDaily)
 
-        ucrFormDaily.PopulateControl()
-
         ucrVisibilityUnits.SetField("visUnits")
         ucrVisibilityUnits.SetTableName("form_daily2")
         ucrVisibilityUnits.bFillFromDataBase = False
@@ -38,7 +36,6 @@ Public Class frmNewFormDaily2
         AssignLinkToKeyField(ucrCloudheightUnits)
         ucrCloudheightUnits.PopulateControl()
         ucrCloudheightUnits.SetViewType("cloudHeightUnits")
-
 
         ucrPrecipUnits.SetField("precipUnits")
         ucrPrecipUnits.SetTableName("form_daily2")
@@ -66,6 +63,9 @@ Public Class frmNewFormDaily2
         ucrInputSequncer.SetTableName("seq_daily_element")
         ucrInputSequncer.SetField("seq")
         ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+
+        ucrFormDaily.PopulateControl()
+
 
     End Sub
 
