@@ -15,6 +15,7 @@ Public Class ucrFormDaily2
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
     Private lstTempFields As New List(Of String)
     Public fd2Record As form_daily2
+    Public bUpdating As Boolean = False
 
     Public Overrides Sub PopulateControl()
         Dim ctr As Control
@@ -29,8 +30,11 @@ Public Class ucrFormDaily2
                 Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
                 If y.Count() = 1 Then
                     fd2Record = y.FirstOrDefault()
+                    bUpdating = True
                 Else
                     fd2Record = New form_daily2
+                    clsDataConnection.db.form_daily2.Add(fd2Record)
+                    bUpdating = False
                 End If
             End If
             For Each ctr In Me.Controls
@@ -133,6 +137,8 @@ Public Class ucrFormDaily2
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
+        'need an if statement that checks for changes 
+        fd2Record = Nothing
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
 

@@ -59,7 +59,6 @@ Public Class frmNewFormDaily2
         ucrTempUnits.PopulateControl()
         ucrTempUnits.SetViewType("temperatureUnits")
 
-
         ucrInputSequncer.SetTableName("seq_daily_element")
         ucrInputSequncer.SetField("seq")
         ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
@@ -94,7 +93,6 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
         clsDataConnection.db.SaveChanges()
     End Sub
 End Class

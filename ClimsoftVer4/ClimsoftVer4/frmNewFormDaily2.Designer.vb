@@ -104,7 +104,7 @@ Partial Class frmNewFormDaily2
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(229, 58)
+        Me.lblHour.Location = New System.Drawing.Point(275, 58)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 5
@@ -382,7 +382,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(233, 74)
+        Me.ucrHour.Location = New System.Drawing.Point(277, 74)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(65, 21)
         Me.ucrHour.TabIndex = 7
@@ -391,7 +391,7 @@ Partial Class frmNewFormDaily2
         '
         Me.ucrMonth.Location = New System.Drawing.Point(155, 73)
         Me.ucrMonth.Name = "ucrMonth"
-        Me.ucrMonth.Size = New System.Drawing.Size(58, 21)
+        Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
         Me.ucrMonth.TabIndex = 6
         '
         'ucrYearSelector

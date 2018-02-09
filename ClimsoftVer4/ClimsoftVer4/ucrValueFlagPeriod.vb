@@ -95,7 +95,7 @@ Public Class ucrValueFlagPeriod
 
     End Sub
 
-    Private Sub ucrValue_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown
+    Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
 
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
@@ -123,11 +123,13 @@ Public Class ucrValueFlagPeriod
                     MsgBox("Number expected!", MsgBoxStyle.Critical)
                 End If
             End If
+            ucrFlag.GetFocus()
         End If
         If ucrValue.IsEmpty AndAlso ucrValue.bValidate Then
             If Not ucrFlag.TextboxValue = "M" Then
                 If ucrFlag.IsEmpty Then
                     ucrFlag.TextboxValue = "M"
+                    ucrFlag.GetFocus()
                 Else
                     MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
                 End If

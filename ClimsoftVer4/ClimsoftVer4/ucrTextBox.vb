@@ -39,6 +39,7 @@ Public Class ucrTextBox
                 Else
                     TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
                 End If
+                TextHandling(Me, New EventArgs)
                 bValidate = True
             End If
         End If
