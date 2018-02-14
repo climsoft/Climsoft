@@ -265,4 +265,8 @@ Public Class ucrBaseDataLink
         MessageBox.Show("Developer error: The Linking Datacall of " & Me.Name & " has not been overriden ", caption:="Developer error")
         Return Nothing
     End Function
+
+    Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

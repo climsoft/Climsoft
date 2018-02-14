@@ -80,10 +80,10 @@ Public Class frmNewFormDaily2
         Dim ctl As Control
         Dim ctrltemp As ucrValueFlagPeriod
 
-        For Each ctl In Me.Controls
+        For Each ctl In ucrFormDaily.Controls
             If TypeOf ctl Is ucrValueFlagPeriod Then
                 ctrltemp = ctl
-                ctrltemp.ucrValue.txtBox.Text = ucrInputValue.txtBox.Text
+                ctrltemp.ucrValue.TextboxValue = ucrInputValue.TextboxValue
             End If
         Next
     End Sub
@@ -93,6 +93,11 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        clsDataConnection.db.SaveChanges()
+        If ucrFormDaily.bUpdating Then
+            'Possibly we should be cloning and then updating here
+        Else
+            clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
+        End If
+        clsDataConnection.SaveUpdate()
     End Sub
 End Class

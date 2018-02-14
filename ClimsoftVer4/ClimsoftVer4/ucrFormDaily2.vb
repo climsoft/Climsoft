@@ -33,7 +33,6 @@ Public Class ucrFormDaily2
                     bUpdating = True
                 Else
                     fd2Record = New form_daily2
-                    clsDataConnection.db.form_daily2.Add(fd2Record)
                     bUpdating = False
                 End If
             End If

@@ -34,10 +34,6 @@ Partial Class frmNewFormDaily2
         Me.LblCloudheight = New System.Windows.Forms.Label()
         Me.lblPrecip = New System.Windows.Forms.Label()
         Me.lblTemperature = New System.Windows.Forms.Label()
-        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
@@ -55,6 +51,10 @@ Partial Class frmNewFormDaily2
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
+        Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
@@ -182,34 +182,6 @@ Partial Class frmNewFormDaily2
         Me.lblTemperature.Size = New System.Drawing.Size(70, 13)
         Me.lblTemperature.TabIndex = 4
         Me.lblTemperature.Text = "Temperature:"
-        '
-        'ucrVisibilityUnits
-        '
-        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
-        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
-        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrVisibilityUnits.TabIndex = 3
-        '
-        'ucrCloudheightUnits
-        '
-        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
-        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
-        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrCloudheightUnits.TabIndex = 2
-        '
-        'ucrPrecipUnits
-        '
-        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
-        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
-        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrPrecipUnits.TabIndex = 1
-        '
-        'ucrTempUnits
-        '
-        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
-        Me.ucrTempUnits.Name = "ucrTempUnits"
-        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrTempUnits.TabIndex = 0
         '
         'btnView
         '
@@ -370,6 +342,34 @@ Partial Class frmNewFormDaily2
         Me.ucrInputSequncer.Size = New System.Drawing.Size(150, 26)
         Me.ucrInputSequncer.TabIndex = 678
         Me.ucrInputSequncer.TextboxValue = ""
+        '
+        'ucrVisibilityUnits
+        '
+        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
+        Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
+        Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrVisibilityUnits.TabIndex = 3
+        '
+        'ucrCloudheightUnits
+        '
+        Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
+        Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
+        Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrCloudheightUnits.TabIndex = 2
+        '
+        'ucrPrecipUnits
+        '
+        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
+        Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
+        Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrPrecipUnits.TabIndex = 1
+        '
+        'ucrTempUnits
+        '
+        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
+        Me.ucrTempUnits.Name = "ucrTempUnits"
+        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrTempUnits.TabIndex = 0
         '
         'ucrInputValue
         '

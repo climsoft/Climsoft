@@ -185,21 +185,26 @@ Public Class ucrTextBox
 
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Public Sub TextHandling(sender As Object, e As EventArgs)
 
         'check if value is or not new
-        If dtbRecords.Rows.Count = 1 Then
-            If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
-                'value same as original
-                SetBackColor(Color.LightGreen)
-            Else
-                'value different from the original
-                SetBackColor(Color.Orange)
-            End If
-        Else
-            'new value
-            SetBackColor(Color.White)
-        End If
+        'If dtbRecords.Rows.Count = 1 Then
+        'If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
+        'value same as original
+        ' SetBackColor(Color.LightGreen)
+        ' Else
+        'value different from the original
+        ''SetBackColor(Color.Orange)
+        'End If
+        ' Else
+        'new value
+        'SetBackColor(Color.White)
+        ' End If
 
         'check if value is valid
         If bValidate AndAlso Not ValidateValue() Then
