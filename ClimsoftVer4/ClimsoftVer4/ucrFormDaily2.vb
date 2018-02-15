@@ -1,4 +1,8 @@
-﻿Public Class ucrFormDaily2
+﻿
+Imports System.Data.Entity
+Imports System.Linq.Dynamic
+
+Public Class ucrFormDaily2
 
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
@@ -6,31 +10,48 @@
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
-    Private ucrLinkedMonth As New ucrMonth
+    Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
+    Private lstTempFields As New List(Of String)
+    Public fd2Record As form_daily2
+    Public bUpdating As Boolean = False
 
     Public Overrides Sub PopulateControl()
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
+        Dim clsCurrentFilter As TableFilter
 
-        MyBase.PopulateControl()
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.PopulateControl()
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr
-                ctrTotal.PopulateControl()
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            If fd2Record Is Nothing Then
+                clsCurrentFilter = GetLinkedControlsFilter()
+                Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
+                If y.Count() = 1 Then
+                    fd2Record = y.FirstOrDefault()
+                    bUpdating = True
+                Else
+                    fd2Record = New form_daily2
+                    bUpdating = False
+                End If
             End If
-        Next
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = ctr
+                    ctrVFP.PopulateControl()
+                ElseIf TypeOf ctr Is ucrTextBox Then
+                    ctrTotal = ctr
+                    ctrTotal.PopulateControl()
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
-        Dim lstTempFields As New List(Of String)
 
         If bFirstLoad Then
             For Each ctr In Me.Controls
@@ -40,17 +61,25 @@
                     lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strPeriodFieldName & ctrVFP.Tag)
+
+                    AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
+
+                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ctrTotal = ctr
                     ctrTotal.SetTableName(strTableName)
                     ctrTotal.SetField(strTotalFieldName)
                     lstTempFields.Add(strTotalFieldName)
+                    AddHandler ctrTotal.evtValueChanged, AddressOf InnerControlValueChanged
+
                 End If
             Next
             SetTableName(strTableName)
             SetFields(lstTempFields)
             bFirstLoad = False
-            PopulateControl()
             EnableDaysofMonth()
         End If
 
@@ -71,12 +100,66 @@
                 ctrTotal.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
             End If
         Next
+        If Not lstTempFields.Contains(tblFilter.GetField) Then
+            lstTempFields.Add(tblFilter.GetField)
+            SetFields(lstTempFields)
+        End If
+
+    End Sub
+
+    Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
+        Dim ctr As ucrTextBox
+
+        If TypeOf sender Is ucrTextBox Then
+            ctr = sender
+            CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
+        End If
+    End Sub
+
+    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+
+        If TypeOf sender Is ucrValueFlagPeriod Then
+            ctrVFP = sender
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    If ctr.Tag = ctrVFP.Tag + 1 Then
+                        If ctr.Enabled Then
+                            ctr.Focus()
+                        End If
+                    End If
+                End If
+            Next
+        End If
+
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-
+        'need an if statement that checks for changes 
+        fd2Record = Nothing
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
+
+        'Dim ctr As Control
+        'Dim ctrVFP As New ucrValueFlagPeriod
+        'Dim ctrTotal As New ucrTextBox
+        'For Each ctr In Me.Controls
+        '    If TypeOf ctr Is ucrValueFlagPeriod Then
+        '        ctrVFP = ctr
+        '        CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
+        '        CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
+        '        CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
+        '    ElseIf TypeOf ctr Is ucrTextBox Then
+        '        ctrTotal = ctr
+        '        CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
+        '    End If
+
+        'Next
+
+        For Each kvp In dctLinkedControlsFilters
+            CallByName(fd2Record, kvp.Value.Value.GetField, CallType.Set, kvp.Key.GetValue)
+        Next
 
     End Sub
 
@@ -86,7 +169,12 @@
         Dim iMonthLength As Integer
         Dim iMonth As Integer
 
-        iMonth = ucrLinkedMonth.GetValue()
+        If ucrLinkedMonth Is Nothing Then
+            iMonth = 1
+        Else
+            iMonth = ucrLinkedMonth.GetValue()
+        End If
+
         If iMonth = 2 Then
             If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
                 iMonthLength = 28
@@ -110,9 +198,43 @@
         Next
     End Sub
 
-    Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
+    Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
+    End Sub
+
+    Public Sub AddUnitslink(strFieldName As String, ucrComboBox As ucrDataLinkCombobox)
+
+        If ucrLinkedUnits.ContainsKey(strFieldName) Then
+            ucrLinkedUnits.Add(strFieldName, ucrComboBox)
+        Else
+            MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
+        End If
+
+        If Not lstTempFields.Contains(strFieldName) Then
+            lstTempFields.Add(strFieldName)
+            SetFields(lstTempFields)
+            PopulateControl()
+        End If
+
+        AddHandler ucrComboBox.evtValueChanged, AddressOf LinkedControls_evtValueChanged
+
+    End Sub
+
+    Public Sub Clear()
+
+        Dim ctr As Control
+        Dim ctrTotal As ucrTextBox
+        Dim ctrVFP As New ucrValueFlagPeriod
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                ctrVFP.Clear()
+            ElseIf TypeOf ctr Is ucrTextBox Then
+                ctrTotal = ctr
+                ctrTotal.Clear()
+            End If
+        Next
     End Sub
 
 End Class

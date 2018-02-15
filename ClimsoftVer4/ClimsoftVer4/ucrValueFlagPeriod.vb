@@ -16,6 +16,7 @@
 
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
+    Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -70,100 +71,69 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
-        ucrValue.PopulateControl()
-        ucrFlag.PopulateControl()
-        ucrPeriod.PopulateControl()
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            ucrValue.PopulateControl()
+            ucrFlag.PopulateControl()
+            ucrPeriod.PopulateControl()
+        End If
     End Sub
 
     Public Sub Clear()
-        ClearValue()
-        ClearFlag()
-        ClearPeriod()
-    End Sub
-
-    Public Sub ClearValue()
         ucrValue.Clear()
-    End Sub
-
-    Public Sub ClearFlag()
         ucrFlag.Clear()
-    End Sub
-
-    Public Sub ClearPeriod()
         ucrPeriod.Clear()
     End Sub
 
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-
+            ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             bFirstLoad = False
         End If
-    End Sub
-
-    Private Sub ucrControl_TextChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub ucrControl_KeyDown(sender As Object, e As KeyEventArgs)
-        If e.KeyCode = Keys.Delete Or e.KeyCode = Keys.Back Then
+    Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
 
-        End If
-    End Sub
-
-    Private Sub ucrControl_Enter(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Public Sub setValue()
-
-    End Sub
-
-
-
-
-
-    Public Function IsEmpty() As Boolean
-        Return True
-    End Function
-
-    Public Sub SetColor()
-        ' txtValue.BackColor = Color.Aqua
-    End Sub
-
-    Public Sub RemoveColor()
-        'txtValue.BackColor = Color.White
-    End Sub
-
-    Private Sub ucrValue_KeyDownEvent(e As KeyEventArgs) 'Handles ucrValue.KeyDownEvent
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
-            If Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
-                'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-                'to the value string in the textbox.
-                ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
+            'My.Computer.Keyboard.SendKeys("{TAB}")
+            ucrValue.TextHandling(sender, e)
+            RaiseEvent evtGoToNextVFPControl(Me, e)
+        End If
 
-                'Get the observation value by leaving out the last character from the string entered in the textbox
-                ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
+    End Sub
 
-            End If
+    Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
+
+        If Not ucrValue.IsEmpty AndAlso Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
+            'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
+            'to the value string in the textbox.
+            ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
+
+            'Get the observation value by leaving out the last character from the string entered in the textbox
+            ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
 
             'Check that numeric value has been entered for observation value
-            If IsNumeric(ucrValue.TextboxValue) Then
-                ucrValue.RemoveBackColor()
-                'ucrValue.SetBackColor(Color.White)
-                ' My.Computer.Keyboard.SendKeys("{TAB}")
-                'tabNext = True
-            Else
-                ucrValue.SetBackColor(Color.Red)
-                ucrValue.GetFocus()
-
+            If Not IsNumeric(ucrValue.TextboxValue) Then
                 'tabNext = False
-                'MsgBox("Number expected!", MsgBoxStyle.Critical)
+                If Not ucrValue.IsEmpty Then
+                    MsgBox("Number expected!", MsgBoxStyle.Critical)
+                End If
             End If
-
+            ucrFlag.GetFocus()
+        End If
+        If ucrValue.IsEmpty AndAlso ucrValue.bValidate Then
+            If Not ucrFlag.TextboxValue = "M" Then
+                If ucrFlag.IsEmpty Then
+                    ucrFlag.TextboxValue = "M"
+                    ucrFlag.GetFocus()
+                Else
+                    MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+                End If
+            End If
         End If
 
     End Sub

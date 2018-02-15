@@ -23,18 +23,24 @@ Public Class ucrTextBox
     Private bFirstLoad As Boolean = True
     Protected bIsReadOnly As Boolean = False
     Protected strValidationType As String = "none"
+    Public bValidate As Boolean = True
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
-        If dtbRecords.Rows.Count > 1 Then
-            MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record. " & dtbRecords.Rows.Count & " records found.", caption:="Developer error")
-        ElseIf dtbRecords.Columns.Count <> 1 Then
-            MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
-        Else
-            If dtbRecords.Rows.Count = 0 Then
-                TextboxValue = ""
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            If dtbRecords.Rows.Count > 1 Then
+                MessageBox.Show("Developer error: More than one value found for: " & Me.Name & ". A textbox should be linked to a single record. " & dtbRecords.Rows.Count & " records found.", caption:="Developer error")
+            ElseIf dtbRecords.Columns.Count <> 1 Then
+                MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
             Else
-                TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
+                bValidate = False
+                If dtbRecords.Rows.Count = 0 Then
+                    TextboxValue = ""
+                Else
+                    TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
+                End If
+                TextHandling(Me, New EventArgs)
+                bValidate = True
             End If
         End If
     End Sub
@@ -91,6 +97,8 @@ Public Class ucrTextBox
                     iType = 2
                 End If
             End If
+        Else
+            iType = 1
         End If
         Return iType
     End Function
@@ -160,22 +168,10 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
-    Private Sub ucrStationSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
-
-
             bFirstLoad = False
-        End If
-    End Sub
-
-    Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-
-
-      If bToLower Then
-            TextboxValue = TextboxValue.ToLower()
-        ElseIf bToUpper Then
-            TextboxValue = TextboxValue.ToLower()
         End If
     End Sub
 
@@ -183,25 +179,63 @@ Public Class ucrTextBox
         OnevtKeyDown(sender, e)
     End Sub
 
-    Private Sub ucrTextBox_Enter(sender As Object, e As EventArgs) Handles txtBox.Enter
+    Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
+
+        TextHandling(sender, e)
+
+    End Sub
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Public Sub TextHandling(sender As Object, e As EventArgs)
+
+        'check if value is or not new
+        'If dtbRecords.Rows.Count = 1 Then
+        'If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
+        'value same as original
+        ' SetBackColor(Color.LightGreen)
+        ' Else
+        'value different from the original
+        ''SetBackColor(Color.Orange)
+        'End If
+        ' Else
+        'new value
+        'SetBackColor(Color.White)
+        ' End If
+
+        'check if value is valid
+        If bValidate AndAlso Not ValidateValue() Then
+            SetBackColor(Color.Red)
+        End If
+
+        'change the case appropriately
+        ChangeCase()
+
+        'raise event
+        OnevtTextChanged(sender, e)
 
     End Sub
 
     Public Sub GetFocus()
         txtBox.Focus()
     End Sub
+
     Public Function IsEmpty() As Boolean
         If TextboxValue.Length > 0 Then
-            Return True
-        Else
             Return False
+        Else
+            Return True
         End If
     End Function
 
     Public Sub Clear()
+        bValidate = False
         TextboxValue = ""
+        bValidate = True
     End Sub
-
 
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
@@ -209,6 +243,14 @@ Public Class ucrTextBox
 
     Public Sub RemoveBackColor()
         txtBox.BackColor = Color.White
+    End Sub
+
+    Public Sub ChangeCase()
+        If bToLower Then
+            TextboxValue = TextboxValue.ToLower()
+        ElseIf bToUpper Then
+            TextboxValue = TextboxValue.ToUpper()
+        End If
     End Sub
 
     Public Overrides Function GetValue() As Object
@@ -221,6 +263,12 @@ Public Class ucrTextBox
         Else
             dtbRecords.Rows(0).Item(0) = TextboxValue
         End If
+
+    End Sub
+
+    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+
+        OnevtValueChanged(Me, e)
 
     End Sub
 End Class

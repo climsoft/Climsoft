@@ -19,7 +19,8 @@ Public Class ucrBaseDataLink
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
 
     Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
-    Public Event evtValueChanged()
+    Public Event evtTextChanged(sender As Object, e As EventArgs)
+    Public Event evtValueChanged(sender As Object, e As EventArgs)
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
@@ -34,6 +35,10 @@ Public Class ucrBaseDataLink
     Public Sub SetDataDefinition(clsNewDataDefinition As DataCall)
         clsDataDefinition = clsNewDataDefinition
     End Sub
+
+    Public Function GetDataDefinition() As DataCall
+        Return clsDataDefinition
+    End Function
 
     Private Sub CreateDataDefinition()
         If clsDataDefinition Is Nothing Then
@@ -68,6 +73,10 @@ Public Class ucrBaseDataLink
         clsDataDefinition.SetFields(lstNewFields:=New List(Of String)({strNewField}))
         SetSortByItems()
     End Sub
+
+    Public Function GetField() As String
+        Return clsDataDefinition.GetField
+    End Function
 
     Public Sub SetTableAndFields(dbsNewTable As Entity.DbSet, lstNewFields As List(Of String))
         CreateDataDefinition()
@@ -127,9 +136,14 @@ Public Class ucrBaseDataLink
         RaiseEvent evtKeyDown(sender, e)
     End Sub
 
-    Public Sub OnevtValueChanged()
-        RaiseEvent evtValueChanged()
+    Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
+        RaiseEvent evtTextChanged(sender , e )
     End Sub
+
+    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
+        RaiseEvent evtValueChanged(sender, e)
+    End Sub
+
 
     Public Overridable Function GetValue() As Object
         Return Nothing
@@ -174,8 +188,8 @@ Public Class ucrBaseDataLink
 
     End Sub
 
-    Public Overridable Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strFieldName, tblFilter)
+    Public Overridable Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strLinkedFieldName As String = "")
+        Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strLinkedFieldName, tblFilter)
 
         If dctLinkedControlsFilters.ContainsKey(ucrLinkedDataControl) Then
             If Not dctLinkedControlsFilters.Contains(New KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))(ucrLinkedDataControl, kvpTemp)) Then
@@ -251,4 +265,8 @@ Public Class ucrBaseDataLink
         MessageBox.Show("Developer error: The Linking Datacall of " & Me.Name & " has not been overriden ", caption:="Developer error")
         Return Nothing
     End Function
+
+    Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
