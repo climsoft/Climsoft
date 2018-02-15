@@ -36,32 +36,39 @@
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim lstLongMonths As New List(Of String)({1, 3, 5, 7, 8, 10, 12})
+        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        Dim iMonth As Integer
         'MyBase.PopulateControl()
 
-        If ucrLinkedMonth.GetValue = 2 Then
+        If ucrLinkedMonth Is Nothing Then
+            iMonth = 1
+        Else
+            iMonth = ucrLinkedMonth.GetValue
+        End If
+        If iMonth = 2 Then
             If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
                 dtbRecords = dtb28
             Else
                 dtbRecords = dtb29
             End If
         Else
-            If Not lstLongMonths.Contains(ucrLinkedMonth.GetValue) Then
+            If lstShortMonths.Contains(iMonth) Then
                 dtbRecords = dtb30
             Else
                 dtbRecords = dtb31
             End If
         End If
 
-        dtbRecords.DefaultView.Sort = strDay & " ASC"
-
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strDay
-            If bFirstLoad Then
-                SetViewTypeAsDay()
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strDay & " ASC"
+            If dtbRecords.Rows.Count > 0 Then
+                cboValues.ValueMember = strDay
+                If bFirstLoad Then
+                    SetViewTypeAsDay()
+                End If
+            Else
+                cboValues.DataSource = Nothing
             End If
-        Else
-            cboValues.DataSource = Nothing
         End If
     End Sub
 
