@@ -1,18 +1,22 @@
 ﻿Public Class ucrDay
     'Private strDaysTableName As String = "days"
     Private strDay As String = "day"
-    Private dtb28 As DataTable
-    Private dtb29 As DataTable
-    Private dtb30 As DataTable
-    Private dtb31 As DataTable
+    Private dtb28 As New DataTable
+    Private dtb29 As New DataTable
+    Private dtb30 As New DataTable
+    Private dtb31 As New DataTable
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
 
+
     Public Sub InitialiseControl()
         'MyBase.PopulateControl()
-
         dtbRecords = New DataTable
         dtbRecords.Columns.Add(strDay, GetType(Integer))
+        'dtb31.Columns.Add(strDay, GetType(Integer))
+        'dtb30.Columns.Add(strDay, GetType(Integer))
+        'dtb29.Columns.Add(strDay, GetType(Integer))
+        'dtb28.Columns.Add(strDay, GetType(Integer))
 
         For i As Integer = 1 To 31
             dtb31.Rows.Add(i)
@@ -36,6 +40,7 @@
     End Sub
 
     Public Overrides Sub PopulateControl()
+        InitialiseControl()
         Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
         Dim iMonth As Integer
         'MyBase.PopulateControl()

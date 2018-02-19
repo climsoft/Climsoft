@@ -758,7 +758,9 @@
     <Compile Include="ucrSynopticDataForManyElements.Designer.vb">
       <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrSynopticDataForManyElements.vb" />
+    <Compile Include="ucrSynopticDataForManyElements.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
