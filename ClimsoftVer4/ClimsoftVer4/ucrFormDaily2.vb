@@ -237,4 +237,33 @@ Public Class ucrFormDaily2
         Next
     End Sub
 
+    Public Sub checkTotal()
+        'Check total if required
+        ' Am not sure how to get this value yet
+        'If totalRequired = 1 Then
+
+        Dim elemTotal As Integer = 0
+        Dim expectedTotal As Integer
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+
+        expectedTotal = ucrInputTotal.GetValue
+
+        For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = ctr
+                    elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+                End If
+            Next
+
+        If elemTotal <> expectedTotal Then
+            MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
+            ucrInputTotal.txtBox.Focus()
+            ucrInputTotal.txtBox.BackColor = Color.Cyan
+        End If
+    End Sub
+
+    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
+        checkTotal()
+    End Sub
 End Class
