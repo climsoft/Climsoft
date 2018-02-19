@@ -110,6 +110,14 @@ Public Class DataCall
         Return dctFields
     End Function
 
+    Public Function GetField() As String
+        If dctFields.Count = 1 Then
+            Return dctFields.First.Key
+        Else
+            Return ""
+        End If
+    End Function
+
     Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
@@ -155,7 +163,6 @@ Public Class DataCall
     End Function
 
     Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
-        Dim db As mariadb_climsoft_test_db_v4Entities
         Dim clsCurrentFilter As TableFilter
 
         If Not IsNothing(clsAdditionalFilter) Then
@@ -170,8 +177,7 @@ Public Class DataCall
 
             Try
             If strTable <> "" Then
-                db = New mariadb_climsoft_test_db_v4Entities
-                Dim x = CallByName(db, strTable, CallType.Get)
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
                 Dim y = TryCast(x, IQueryable(Of Object))
 
                 If clsCurrentFilter IsNot Nothing Then

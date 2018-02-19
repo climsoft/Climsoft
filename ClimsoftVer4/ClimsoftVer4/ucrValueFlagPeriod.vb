@@ -16,7 +16,7 @@
 
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
-    Public Event evtGoToNextVFPControl()
+    Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -71,10 +71,12 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
-        ucrValue.PopulateControl()
-        ucrFlag.PopulateControl()
-        ucrPeriod.PopulateControl()
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+            ucrValue.PopulateControl()
+            ucrFlag.PopulateControl()
+            ucrPeriod.PopulateControl()
+        End If
     End Sub
 
     Public Sub Clear()
@@ -93,12 +95,13 @@ Public Class ucrValueFlagPeriod
 
     End Sub
 
-    Private Sub ucrValue_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown
+    Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
 
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
             'My.Computer.Keyboard.SendKeys("{TAB}")
-            RaiseEvent evtGoToNextVFPControl()
+            ucrValue.TextHandling(sender, e)
+            RaiseEvent evtGoToNextVFPControl(Me, e)
         End If
 
     End Sub
@@ -116,11 +119,22 @@ Public Class ucrValueFlagPeriod
             'Check that numeric value has been entered for observation value
             If Not IsNumeric(ucrValue.TextboxValue) Then
                 'tabNext = False
-                MsgBox("Number expected!", MsgBoxStyle.Critical)
+                If Not ucrValue.IsEmpty Then
+                    MsgBox("Number expected!", MsgBoxStyle.Critical)
+                End If
             End If
-
+            ucrFlag.GetFocus()
         End If
-
+        If ucrValue.IsEmpty AndAlso ucrValue.bValidate Then
+            If Not ucrFlag.TextboxValue = "M" Then
+                If ucrFlag.IsEmpty Then
+                    ucrFlag.TextboxValue = "M"
+                    ucrFlag.GetFocus()
+                Else
+                    MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+                End If
+            End If
+        End If
 
     End Sub
 

@@ -830,7 +830,7 @@ Partial Class formDaily2
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         Me.cboMonth.Location = New System.Drawing.Point(182, 83)
         Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(41, 21)
+        Me.cboMonth.Size = New System.Drawing.Size(68, 21)
         Me.cboMonth.TabIndex = 3
         '
         'cboHour
@@ -839,7 +839,7 @@ Partial Class formDaily2
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.cboHour.Location = New System.Drawing.Point(308, 84)
         Me.cboHour.Name = "cboHour"
-        Me.cboHour.Size = New System.Drawing.Size(39, 21)
+        Me.cboHour.Size = New System.Drawing.Size(51, 21)
         Me.cboHour.TabIndex = 4
         '
         'btnHelp
@@ -958,7 +958,7 @@ Partial Class formDaily2
         '
         Me.txtYear.Location = New System.Drawing.Point(68, 84)
         Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(40, 20)
+        Me.txtYear.Size = New System.Drawing.Size(55, 20)
         Me.txtYear.TabIndex = 2
         '
         'txtPeriod10Field076

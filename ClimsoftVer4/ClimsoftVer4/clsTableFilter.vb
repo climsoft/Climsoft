@@ -118,6 +118,27 @@ Public Class TableFilter
         bIsCombinedFilter = False
     End Sub
 
+    Public Function GetField() As String
+        If bIsCombinedFilter Then
+            Return ""
+        Else
+            Return strField
+        End If
+    End Function
+
+    Public Function GetFields() As List(Of String)
+        Dim lstRet As New List(Of String)
+
+        If bIsCombinedFilter Then
+            lstRet.AddRange(clsLeftFilter.GetFields)
+            lstRet.AddRange(clsRightFilter.GetFields)
+        Else
+            lstRet.Add(strField)
+        End If
+        Return lstRet
+
+    End Function
+
     Public Sub SetOperator(strNewOperator As String)
         strOperator = strNewOperator
     End Sub
