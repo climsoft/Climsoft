@@ -174,10 +174,10 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="formNewSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>formNewSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </Compile>
-    <Compile Include="formNewSynopticDataForManyElements.vb">
+    <Compile Include="frmNewSynopticDataForManyElements.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -805,8 +805,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="formNewSynopticDataForManyElements.resx">
-      <DependentUpon>formNewSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>

@@ -28,11 +28,11 @@
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        '    If ucrSynopticDataForManyElementsucrSynopticDataForManyElements.bUpdating Then
-        '        'Possibly we should be cloning and then updating here
-        '    Else
-        '        clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElementsucrSynopticDataForManyElements.fs2Record)
-        '    End If
-        '    clsDataConnection.SaveUpdate()
+        If ucrSynopticDataForManyElementsucrSynopticDataForManyElements.bUpdating Then
+            'Possibly we should be cloning and then updating here
+        Else
+            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElementsucrSynopticDataForManyElements.fs2Record)
+        End If
+        clsDataConnection.SaveUpdate()
     End Sub
 End Class
