@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class formNewSynopticDataForManyElements
+Partial Class frmNewSynopticDataForManyElements
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class formNewSynopticDataForManyElements
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim lblYear As System.Windows.Forms.Label
-        Me.lblStationIdentifier = New System.Windows.Forms.Label()
+        Me.lblStationSelector = New System.Windows.Forms.Label()
         Me.lblHour = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
@@ -62,14 +62,14 @@ Partial Class formNewSynopticDataForManyElements
         lblYear.TabIndex = 205
         lblYear.Text = "Year:"
         '
-        'lblStationIdentifier
+        'lblStationSelector
         '
-        Me.lblStationIdentifier.AutoSize = True
-        Me.lblStationIdentifier.Location = New System.Drawing.Point(30, 18)
-        Me.lblStationIdentifier.Name = "lblStationIdentifier"
-        Me.lblStationIdentifier.Size = New System.Drawing.Size(86, 13)
-        Me.lblStationIdentifier.TabIndex = 209
-        Me.lblStationIdentifier.Text = "Station Identifier:"
+        Me.lblStationSelector.AutoSize = True
+        Me.lblStationSelector.Location = New System.Drawing.Point(30, 18)
+        Me.lblStationSelector.Name = "lblStationSelector"
+        Me.lblStationSelector.Size = New System.Drawing.Size(86, 13)
+        Me.lblStationSelector.TabIndex = 209
+        Me.lblStationSelector.Text = "Station Identifier:"
         '
         'lblHour
         '
@@ -286,7 +286,7 @@ Partial Class formNewSynopticDataForManyElements
         '
         Me.ucrYearSelector.Location = New System.Drawing.Point(348, 14)
         Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(66, 24)
+        Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
         Me.ucrYearSelector.TabIndex = 211
         '
         'ucrStationSelector
@@ -296,7 +296,7 @@ Partial Class formNewSynopticDataForManyElements
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 210
         '
-        'formNewSynopticDataForManyElements
+        'frmNewSynopticDataForManyElements
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -324,7 +324,7 @@ Partial Class formNewSynopticDataForManyElements
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.ucrYearSelector)
         Me.Controls.Add(Me.ucrStationSelector)
-        Me.Controls.Add(Me.lblStationIdentifier)
+        Me.Controls.Add(Me.lblStationSelector)
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
@@ -332,7 +332,7 @@ Partial Class formNewSynopticDataForManyElements
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "formNewSynopticDataForManyElements"
+        Me.Name = "frmNewSynopticDataForManyElements"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
         Me.ResumeLayout(False)
@@ -340,7 +340,7 @@ Partial Class formNewSynopticDataForManyElements
 
     End Sub
 
-    Friend WithEvents lblStationIdentifier As Label
+    Friend WithEvents lblStationSelector As Label
     Friend WithEvents lblHour As Label
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label

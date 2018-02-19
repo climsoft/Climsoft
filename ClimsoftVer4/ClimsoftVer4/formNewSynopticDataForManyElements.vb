@@ -1,4 +1,4 @@
-﻿Public Class formNewSynopticDataForManyElements
+﻿Public Class frmNewSynopticDataForManyElements
     Private bFirstLoad As Boolean = True
 
     Private Sub formNewSynopticDataForManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
