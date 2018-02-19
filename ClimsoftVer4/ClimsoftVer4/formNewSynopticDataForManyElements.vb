@@ -1,7 +1,7 @@
 ﻿Public Class frmNewSynopticDataForManyElements
     Private bFirstLoad As Boolean = True
 
-    Private Sub formNewSynopticDataForManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmNewSynopticDataForManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
         End If
@@ -19,7 +19,7 @@
         ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrDay, "dd", "==", strLinkedFieldName:="DayId", bForceValuesAsString:=False)
+        ucrControl.AddLinkedControlFilters(ucrDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
     End Sub
 
