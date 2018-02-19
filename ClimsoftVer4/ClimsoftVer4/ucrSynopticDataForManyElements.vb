@@ -3,7 +3,7 @@
     Private strTableName As String = "form_synoptic_2_RA1"
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
-    Private strPeriodFieldName As String = "period"
+    'Private strPeriodFieldName As String = "period"
     Private ucrLinkedMonth As New ucrMonth
     Private ucrLinkedDay As ucrDay
     Private ucrLinkedHour As ucrHour
@@ -34,7 +34,7 @@
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = ctr
-                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag, strPeriodFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
                 End If
