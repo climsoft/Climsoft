@@ -1,18 +1,22 @@
 ﻿Public Class ucrDay
     'Private strDaysTableName As String = "days"
     Private strDay As String = "day"
-    Private dtb28 As DataTable
-    Private dtb29 As DataTable
-    Private dtb30 As DataTable
-    Private dtb31 As DataTable
+    Private dtb28 As New DataTable
+    Private dtb29 As New DataTable
+    Private dtb30 As New DataTable
+    Private dtb31 As New DataTable
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
 
+
     Public Sub InitialiseControl()
         'MyBase.PopulateControl()
-
         dtbRecords = New DataTable
         dtbRecords.Columns.Add(strDay, GetType(Integer))
+        'dtb31.Columns.Add(strDay, GetType(Integer))
+        'dtb30.Columns.Add(strDay, GetType(Integer))
+        'dtb29.Columns.Add(strDay, GetType(Integer))
+        'dtb28.Columns.Add(strDay, GetType(Integer))
 
         For i As Integer = 1 To 31
             dtb31.Rows.Add(i)
@@ -36,32 +40,40 @@
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim lstLongMonths As New List(Of String)({1, 3, 5, 7, 8, 10, 12})
+        InitialiseControl()
+        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        Dim iMonth As Integer
         'MyBase.PopulateControl()
 
-        If ucrLinkedMonth.GetValue = 2 Then
+        If ucrLinkedMonth Is Nothing Then
+            iMonth = 1
+        Else
+            iMonth = ucrLinkedMonth.GetValue
+        End If
+        If iMonth = 2 Then
             If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
                 dtbRecords = dtb28
             Else
                 dtbRecords = dtb29
             End If
         Else
-            If Not lstLongMonths.Contains(ucrLinkedMonth.GetValue) Then
+            If lstShortMonths.Contains(iMonth) Then
                 dtbRecords = dtb30
             Else
                 dtbRecords = dtb31
             End If
         End If
 
-        dtbRecords.DefaultView.Sort = strDay & " ASC"
-
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strDay
-            If bFirstLoad Then
-                SetViewTypeAsDay()
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strDay & " ASC"
+            If dtbRecords.Rows.Count > 0 Then
+                cboValues.ValueMember = strDay
+                If bFirstLoad Then
+                    SetViewTypeAsDay()
+                End If
+            Else
+                cboValues.DataSource = Nothing
             End If
-        Else
-            cboValues.DataSource = Nothing
         End If
     End Sub
 

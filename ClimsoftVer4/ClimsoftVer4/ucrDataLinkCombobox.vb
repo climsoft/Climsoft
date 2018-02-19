@@ -38,10 +38,10 @@
             Return GetValue()
         End If
 
-        If dtbRecords.Rows.Count > 0 Then
+        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
             Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of Object)(strFieldName)
         Else
-            Return ""
+            Return Nothing
         End If
 
     End Function
@@ -59,6 +59,6 @@
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
-        OnevtValueChanged()
+        OnevtValueChanged(sender, e)
     End Sub
 End Class
