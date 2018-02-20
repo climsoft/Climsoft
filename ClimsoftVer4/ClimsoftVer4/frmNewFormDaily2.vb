@@ -100,4 +100,17 @@ Public Class frmNewFormDaily2
         End If
         clsDataConnection.SaveUpdate()
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim cust As New form_daily2
+        cust.yyyy = "2018"
+        cust.stationId = "67755030"
+        cust.elementId = "2"
+        cust.mm = "2"
+        cust.hh = "1"
+        clsDataConnection.db.form_daily2.Attach(cust)
+        clsDataConnection.db.form_daily2.Remove(cust)
+        clsDataConnection.db.SaveChanges()
+        MsgBox("deleted")
+    End Sub
 End Class
