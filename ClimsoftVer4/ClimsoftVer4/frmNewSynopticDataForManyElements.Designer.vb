@@ -45,7 +45,7 @@ Partial Class frmNewSynopticDataForManyElements
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
-        Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements = New ClimsoftVer4.ucrSynopticDataManyElements()
+        Me.ucrSynopticDataForManyElements = New ClimsoftVer4.ucrSynopticDataManyElements()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
@@ -154,7 +154,6 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(443, 574)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
@@ -261,12 +260,12 @@ Partial Class frmNewSynopticDataForManyElements
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
         Me.ucrDay.TabIndex = 215
         '
-        'ucrSynopticDataForManyElementsucrSynopticDataForManyElements
+        'ucrSynopticDataForManyElements
         '
-        Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements.Location = New System.Drawing.Point(12, 44)
-        Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements.Name = "ucrSynopticDataForManyElementsucrSynopticDataForManyElements"
-        Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements.Size = New System.Drawing.Size(926, 485)
-        Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements.TabIndex = 214
+        Me.ucrSynopticDataForManyElements.Location = New System.Drawing.Point(12, 44)
+        Me.ucrSynopticDataForManyElements.Name = "ucrSynopticDataForManyElements"
+        Me.ucrSynopticDataForManyElements.Size = New System.Drawing.Size(926, 485)
+        Me.ucrSynopticDataForManyElements.TabIndex = 214
         '
         'ucrHour
         '
@@ -319,7 +318,7 @@ Partial Class frmNewSynopticDataForManyElements
         Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.ucrDay)
-        Me.Controls.Add(Me.ucrSynopticDataForManyElementsucrSynopticDataForManyElements)
+        Me.Controls.Add(Me.ucrSynopticDataForManyElements)
         Me.Controls.Add(Me.ucrHour)
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.ucrYearSelector)
@@ -348,7 +347,7 @@ Partial Class frmNewSynopticDataForManyElements
     Friend WithEvents ucrYearSelector As ucrYearSelector
     Friend WithEvents ucrMonth As ucrMonth
     Friend WithEvents ucrHour As ucrHour
-    Friend WithEvents ucrSynopticDataForManyElementsucrSynopticDataForManyElements As ucrSynopticDataManyElements
+    Friend WithEvents ucrSynopticDataForManyElements As ucrSynopticDataManyElements
     Friend WithEvents ucrDay As ucrDay
     Friend WithEvents btnTDCF As Button
     Friend WithEvents btnView As Button

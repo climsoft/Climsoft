@@ -8,9 +8,9 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrSynopticDataForManyElementsucrSynopticDataForManyElements.setYearMonthDayHourLink(ucrYearControl:=ucrYearSelector, ucrMonthControl:=ucrMonth, ucrDayControl:=ucrDay, ucrHourControl:=ucrHour)
-        AssignLinkToKeyField(ucrSynopticDataForManyElementsucrSynopticDataForManyElements)
-        ucrSynopticDataForManyElementsucrSynopticDataForManyElements.PopulateControl()
+        ucrSynopticDataForManyElements.setYearMonthDayHourLink(ucrYearControl:=ucrYearSelector, ucrMonthControl:=ucrMonth, ucrDayControl:=ucrDay, ucrHourControl:=ucrHour)
+        AssignLinkToKeyField(ucrSynopticDataForManyElements)
+        ucrSynopticDataForManyElements.PopulateControl()
 
     End Sub
 
@@ -24,14 +24,14 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrSynopticDataForManyElementsucrSynopticDataForManyElements.Clear()
+        ucrSynopticDataForManyElements.Clear()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If ucrSynopticDataForManyElementsucrSynopticDataForManyElements.bUpdating Then
+        If ucrSynopticDataForManyElements.bUpdating Then
             'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElementsucrSynopticDataForManyElements.fs2Record)
+            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElements.fs2Record)
         End If
         clsDataConnection.SaveUpdate()
     End Sub

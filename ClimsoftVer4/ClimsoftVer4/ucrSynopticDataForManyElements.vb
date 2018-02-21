@@ -60,13 +60,13 @@ Public Class ucrSynopticDataManyElements
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = ctr
+                    ctrVFP.ucrPeriod.Visible = False
                     ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
 
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
 
                 End If
             Next
@@ -87,7 +87,6 @@ Public Class ucrSynopticDataManyElements
                 ctrVFP.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
             End If
         Next
-        'AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
