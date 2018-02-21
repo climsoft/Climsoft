@@ -174,6 +174,12 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="frmNewHourly.Designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
       <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </Compile>
@@ -731,6 +737,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrHourly.Designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNavigation.Designer.vb">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
     </Compile>
@@ -811,6 +823,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
       <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </EmbeddedResource>
@@ -1208,6 +1223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNavigation.resx">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
