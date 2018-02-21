@@ -57,6 +57,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod1.Name = "UcrValueFlagPeriod1"
         Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod1.TabIndex = 0
+        Me.UcrValueFlagPeriod1.Tag = "01"
         '
         'UcrValueFlagPeriod2
         '
@@ -65,6 +66,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod2.Name = "UcrValueFlagPeriod2"
         Me.UcrValueFlagPeriod2.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod2.TabIndex = 1
+        Me.UcrValueFlagPeriod2.Tag = "05"
         '
         'UcrValueFlagPeriod3
         '
@@ -73,6 +75,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod3.Name = "UcrValueFlagPeriod3"
         Me.UcrValueFlagPeriod3.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod3.TabIndex = 2
+        Me.UcrValueFlagPeriod3.Tag = "06"
         '
         'UcrValueFlagPeriod4
         '
@@ -81,6 +84,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod4.Name = "UcrValueFlagPeriod4"
         Me.UcrValueFlagPeriod4.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod4.TabIndex = 3
+        Me.UcrValueFlagPeriod4.Tag = "12"
         '
         'UcrValueFlagPeriod5
         '
@@ -89,6 +93,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod5.Name = "UcrValueFlagPeriod5"
         Me.UcrValueFlagPeriod5.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod5.TabIndex = 4
+        Me.UcrValueFlagPeriod5.Tag = "11"
         '
         'UcrValueFlagPeriod6
         '
@@ -97,6 +102,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod6.Name = "UcrValueFlagPeriod6"
         Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod6.TabIndex = 5
+        Me.UcrValueFlagPeriod6.Tag = "10"
         '
         'UcrValueFlagPeriod7
         '
@@ -105,6 +111,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod7.Name = "UcrValueFlagPeriod7"
         Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod7.TabIndex = 6
+        Me.UcrValueFlagPeriod7.Tag = "07"
         '
         'UcrValueFlagPeriod8
         '
@@ -113,6 +120,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod8.Name = "UcrValueFlagPeriod8"
         Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod8.TabIndex = 7
+        Me.UcrValueFlagPeriod8.Tag = "08"
         '
         'UcrValueFlagPeriod9
         '
@@ -121,6 +129,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod9.Name = "UcrValueFlagPeriod9"
         Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod9.TabIndex = 8
+        Me.UcrValueFlagPeriod9.Tag = "09"
         '
         'UcrValueFlagPeriod10
         '
@@ -129,6 +138,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod10.Name = "UcrValueFlagPeriod10"
         Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod10.TabIndex = 9
+        Me.UcrValueFlagPeriod10.Tag = "04"
         '
         'UcrValueFlagPeriod11
         '
@@ -137,6 +147,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod11.Name = "UcrValueFlagPeriod11"
         Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod11.TabIndex = 10
+        Me.UcrValueFlagPeriod11.Tag = "03"
         '
         'UcrValueFlagPeriod12
         '
@@ -145,6 +156,7 @@ Partial Class ucrMonthlydata
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
         Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(165, 20)
         Me.UcrValueFlagPeriod12.TabIndex = 11
+        Me.UcrValueFlagPeriod12.Tag = "02"
         '
         'lblFlag
         '
