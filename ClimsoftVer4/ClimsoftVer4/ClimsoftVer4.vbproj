@@ -731,6 +731,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNavigation.Designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDay.Designer.vb">
       <DependentUpon>ucrDay.vb</DependentUpon>
     </Compile>
@@ -1202,6 +1208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDay.resx">
       <DependentUpon>ucrDay.vb</DependentUpon>
