@@ -54,9 +54,6 @@
     <ApplicationIcon>myweat02.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClimsoftVer4">
-      <HintPath>obj\Debug\ClimsoftVer4.exe</HintPath>
-    </Reference>
     <Reference Include="DynamicInterop">
       <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
     </Reference>
@@ -166,6 +163,7 @@
     </Compile>
     <Compile Include="ClsCloneFunctions.vb" />
     <Compile Include="clsDataCall.vb" />
+    <Compile Include="clsDataConnection.vb" />
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
@@ -176,10 +174,10 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.vb">
+    <Compile Include="frmNewSynopticDataForManyElements.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -733,6 +731,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNavigation.Designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDay.Designer.vb">
       <DependentUpon>ucrDay.vb</DependentUpon>
     </Compile>
@@ -807,8 +811,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlgSynopticDataForManyElements.resx">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
@@ -1204,6 +1208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDay.resx">
       <DependentUpon>ucrDay.vb</DependentUpon>

@@ -31,6 +31,10 @@
         End If
     End Sub
 
+
+    Private Sub ucrHour_Load(sender As Object, e As EventArgs) Handles Me.Load
+        cboValues.ContextMenuStrip = cmsHour
+    End Sub
     Public Sub SetViewTypeAs24Hrs()
         SetViewType(str24Hrs)
     End Sub
@@ -39,5 +43,15 @@
         SetViewType(str12Hrs)
     End Sub
 
+    Private Sub cmsHour24_Click(sender As Object, e As EventArgs) Handles cmsHour24.Click
+        SetViewTypeAs24Hrs()
+        cmsHour24.Checked = True
+        cmsHour12.Checked = False
+    End Sub
 
+    Private Sub cmsHour12_Click(sender As Object, e As EventArgs) Handles cmsHour12.Click
+        SetViewTypeAs12Hrs()
+        cmsHour24.Checked = False
+        cmsHour12.Checked = True
+    End Sub
 End Class

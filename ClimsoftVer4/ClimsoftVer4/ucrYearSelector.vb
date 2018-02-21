@@ -44,12 +44,12 @@
     Private Sub cmsYearViewLongYear_Click(sender As Object, e As EventArgs) Handles cmsYearViewLongYear.Click
         SetViewTypeAsYear()
         cmsYearViewShortYear.Checked = False
-        cmsYearViewShortYear.Checked = True
+        cmsYearViewLongYear.Checked = True
     End Sub
 
     Private Sub cmsYearViewShortYear_Click(sender As Object, e As EventArgs) Handles cmsYearViewShortYear.Click
         SetViewTypeAsShortYear()
         cmsYearViewShortYear.Checked = True
-        cmsYearViewShortYear.Checked = False
+        cmsYearViewLongYear.Checked = False
     End Sub
 End Class

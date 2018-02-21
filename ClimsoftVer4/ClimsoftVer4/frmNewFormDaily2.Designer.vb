@@ -45,16 +45,11 @@ Partial Class frmNewFormDaily2
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnMovePrevious = New System.Windows.Forms.Button()
-        Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnMoveLast = New System.Windows.Forms.Button()
-        Me.recNumberTextBox = New System.Windows.Forms.TextBox()
-        Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
+        Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
@@ -62,6 +57,7 @@ Partial Class frmNewFormDaily2
         Me.ucrFormDaily = New ClimsoftVer4.ucrFormDaily2()
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrDaiy2Navigation = New ClimsoftVer4.ucrNavigation()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -95,7 +91,7 @@ Partial Class frmNewFormDaily2
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(130, 57)
+        Me.lblMonth.Location = New System.Drawing.Point(152, 57)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 5
@@ -104,7 +100,7 @@ Partial Class frmNewFormDaily2
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(185, 58)
+        Me.lblHour.Location = New System.Drawing.Point(275, 58)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 5
@@ -231,7 +227,6 @@ Partial Class frmNewFormDaily2
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(357, 555)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
@@ -241,7 +236,6 @@ Partial Class frmNewFormDaily2
         '
         'btnCommit
         '
-        Me.btnCommit.Enabled = False
         Me.btnCommit.Location = New System.Drawing.Point(96, 555)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
@@ -276,53 +270,6 @@ Partial Class frmNewFormDaily2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'btnMovePrevious
-        '
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(252, 526)
-        Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
-        Me.btnMovePrevious.TabIndex = 672
-        Me.btnMovePrevious.Text = "<<"
-        Me.btnMovePrevious.UseVisualStyleBackColor = True
-        '
-        'btnMoveFirst
-        '
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(205, 526)
-        Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 671
-        Me.btnMoveFirst.Text = "|<<"
-        Me.btnMoveFirst.UseVisualStyleBackColor = True
-        '
-        'btnMoveLast
-        '
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(495, 526)
-        Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveLast.TabIndex = 670
-        Me.btnMoveLast.Text = ">>|"
-        Me.btnMoveLast.UseVisualStyleBackColor = True
-        '
-        'recNumberTextBox
-        '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(304, 528)
-        Me.recNumberTextBox.Name = "recNumberTextBox"
-        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
-        Me.recNumberTextBox.TabIndex = 669
-        '
-        'btnMoveNext
-        '
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(451, 526)
-        Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
-        Me.btnMoveNext.TabIndex = 668
-        Me.btnMoveNext.Text = ">>"
-        Me.btnMoveNext.UseVisualStyleBackColor = True
-        '
         'btnClose
         '
         Me.btnClose.Location = New System.Drawing.Point(531, 555)
@@ -351,14 +298,6 @@ Partial Class frmNewFormDaily2
         Me.Label5.TabIndex = 675
         Me.Label5.Text = "Sequencer"
         '
-        'txtSequencer
-        '
-        Me.txtSequencer.Location = New System.Drawing.Point(280, 603)
-        Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
-        Me.txtSequencer.TabIndex = 674
-        Me.txtSequencer.Text = "seq_daily_element"
-        '
         'chkEnableSequencer
         '
         Me.chkEnableSequencer.AutoSize = True
@@ -372,6 +311,15 @@ Partial Class frmNewFormDaily2
         Me.chkEnableSequencer.Text = "Enable Element Sequencer"
         Me.chkEnableSequencer.UseVisualStyleBackColor = True
         '
+        'ucrInputSequncer
+        '
+        Me.ucrInputSequncer.Location = New System.Drawing.Point(281, 596)
+        Me.ucrInputSequncer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrInputSequncer.Name = "ucrInputSequncer"
+        Me.ucrInputSequncer.Size = New System.Drawing.Size(150, 26)
+        Me.ucrInputSequncer.TabIndex = 678
+        Me.ucrInputSequncer.TextboxValue = ""
+        '
         'ucrInputValue
         '
         Me.ucrInputValue.Location = New System.Drawing.Point(577, 71)
@@ -383,23 +331,23 @@ Partial Class frmNewFormDaily2
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(189, 74)
+        Me.ucrHour.Location = New System.Drawing.Point(277, 74)
         Me.ucrHour.Name = "ucrHour"
-        Me.ucrHour.Size = New System.Drawing.Size(36, 21)
+        Me.ucrHour.Size = New System.Drawing.Size(65, 21)
         Me.ucrHour.TabIndex = 7
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(133, 73)
+        Me.ucrMonth.Location = New System.Drawing.Point(155, 73)
         Me.ucrMonth.Name = "ucrMonth"
-        Me.ucrMonth.Size = New System.Drawing.Size(37, 21)
+        Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
         Me.ucrMonth.TabIndex = 6
         '
         'ucrYearSelector
         '
         Me.ucrYearSelector.Location = New System.Drawing.Point(68, 74)
         Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(46, 21)
+        Me.ucrYearSelector.Size = New System.Drawing.Size(59, 21)
         Me.ucrYearSelector.TabIndex = 4
         '
         'ucrFormDaily
@@ -423,15 +371,24 @@ Partial Class frmNewFormDaily2
         Me.ucrStationSelector.Size = New System.Drawing.Size(175, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
+        'ucrDaiy2Navigation
+        '
+        Me.ucrDaiy2Navigation.Location = New System.Drawing.Point(111, 512)
+        Me.ucrDaiy2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrDaiy2Navigation.Name = "ucrDaiy2Navigation"
+        Me.ucrDaiy2Navigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrDaiy2Navigation.TabIndex = 679
+        '
         'frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(738, 631)
+        Me.Controls.Add(Me.ucrDaiy2Navigation)
+        Me.Controls.Add(Me.ucrInputSequncer)
         Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
@@ -439,11 +396,6 @@ Partial Class frmNewFormDaily2
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnMovePrevious)
-        Me.Controls.Add(Me.btnMoveFirst)
-        Me.Controls.Add(Me.btnMoveLast)
-        Me.Controls.Add(Me.recNumberTextBox)
-        Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.grpUnits)
         Me.Controls.Add(Me.Label30)
@@ -499,14 +451,10 @@ Partial Class frmNewFormDaily2
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnMovePrevious As Button
-    Friend WithEvents btnMoveFirst As Button
-    Friend WithEvents btnMoveLast As Button
-    Friend WithEvents recNumberTextBox As TextBox
-    Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtSequencer As TextBox
     Friend WithEvents chkEnableSequencer As CheckBox
+    Friend WithEvents ucrInputSequncer As ucrTextBox
+    Friend WithEvents ucrDaiy2Navigation As ucrNavigation
 End Class
