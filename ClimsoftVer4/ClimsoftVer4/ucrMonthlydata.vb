@@ -4,6 +4,8 @@
     Private strValueFieldName As String = "mm_"
     Private strFlagFieldName As String = "Flag"
     Private strPeriodFieldName As String = "Period"
+    Private ucrLinkedStation As ucrStationSelector
+    Private ucrLinkedElement As ucrElementSelector
     Private ucrLinkedYear As ucrYearSelector
 
     Public Overrides Sub PopulateControl()
@@ -56,7 +58,21 @@
         Next
     End Sub
 
-    Public Sub setYearLink(ucrYearControl As ucrYearSelector)
+    Public Sub setStationElementYearLink(ucrStationControl As ucrStationSelector, ucrElementControl As ucrElementSelector, ucrYearControl As ucrYearSelector)
+        ucrLinkedStation = ucrStationControl
+        ucrLinkedElement = ucrElementControl
         ucrLinkedYear = ucrYearControl
+    End Sub
+
+    Public Sub Clear()
+        Dim ctr As Control
+        Dim ctrVFP As ucrValueFlagPeriod
+
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                ctrVFP.Clear()
+            End If
+        Next
     End Sub
 End Class
