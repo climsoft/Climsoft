@@ -8,6 +8,7 @@ Public Class ucrHourly
     Private strFlagFieldName As String = "flag"
     Private strTotalFieldName As String = "total"
     Private ucrLinkedMonth As ucrMonth
+    Private ucrLinkedday As ucrDay
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
     Private lstTempFields As New List(Of String)
@@ -25,8 +26,8 @@ Public Class ucrHourly
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = ctr
                     ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & "_" & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
+                    lstTempFields.Add(strValueFieldName & "_" & ctrVFP.Tag)
                     lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
 
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
@@ -45,7 +46,7 @@ Public Class ucrHourly
                 End If
             Next
             SetTableName(strTableName)
-            'SetFields(lstTempFields)
+            SetFields(lstTempFields)
             bFirstLoad = False
         End If
     End Sub
@@ -54,7 +55,7 @@ Public Class ucrHourly
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
-        Dim clsCurrentFilter As TableFilter
+        Dim clsCurrentFilter As New TableFilter
 
         If Not bFirstLoad Then
             MyBase.PopulateControl()
@@ -143,9 +144,10 @@ Public Class ucrHourly
 
     End Sub
 
-    Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
+    Public Sub SetYearMonthAndDayLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
+        ucrLinkedday = ucrDayControl
     End Sub
 
     Public Sub Clear()
@@ -192,6 +194,10 @@ Public Class ucrHourly
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
+    End Sub
+
+    Private Sub UcrValueFlagPeriod131_Load(sender As Object, e As EventArgs) Handles UcrValueFlagPeriod21.Load
+
     End Sub
 End Class
 

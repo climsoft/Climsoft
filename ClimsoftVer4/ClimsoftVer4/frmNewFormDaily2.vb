@@ -6,6 +6,7 @@ Public Class frmNewFormDaily2
 
         If bFirstLoad Then
             InitaliseDialog()
+            bFirstLoad = False
         End If
     End Sub
 

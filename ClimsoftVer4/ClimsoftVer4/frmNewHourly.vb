@@ -3,32 +3,31 @@
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
+            bFirstLoad = False
         End If
     End Sub
     Private Sub InitaliseDialog()
-        Dim dtbVis, dtbCld, dtbPrec, dtbTemp As New DataTable
+
         Dim d As New Dictionary(Of String, List(Of String))
-
-        UcrHourly1.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
-        AssignLinkToKeyField(UcrHourly1)
-
 
         d.Add("stationId", New List(Of String)({"stationId"}))
         d.Add("elementId", New List(Of String)({"elementId"}))
         d.Add("yyyy", New List(Of String)({"yyyy"}))
         d.Add("mm", New List(Of String)({"mm"}))
-        d.Add("hh", New List(Of String)({"hh"}))
-
+        d.Add("dd", New List(Of String)({"dd"}))
         UcrNavigation1.SetFields(d)
-        UcrNavigation1.SetTableName("form_daily2")
+        UcrNavigation1.SetTableName("form_hourly")
+
 
         ucrStationSelector.AddLinkedControlFilters(UcrNavigation1, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         ucrElementSelector.AddLinkedControlFilters(UcrNavigation1, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
         ucrYearSelector.AddLinkedControlFilters(UcrNavigation1, "Year", "==", strLinkedFieldName:="yyyy", bForceValuesAsString:=False)
         ucrMonth.AddLinkedControlFilters(UcrNavigation1, "MonthId", "==", strLinkedFieldName:="mm", bForceValuesAsString:=False)
-
+        ucrDay.AddLinkedControlFilters(UcrNavigation1, "day", "==", strLinkedFieldName:="dd", bForceValuesAsString:=False)
 
         UcrNavigation1.PopulateControl()
+        UcrHourly1.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
+        AssignLinkToKeyField(UcrHourly1)
         UcrHourly1.PopulateControl()
 
     End Sub
@@ -38,6 +37,7 @@
         ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        ucrControl.AddLinkedControlFilters(ucrDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
 
     End Sub
 
