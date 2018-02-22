@@ -113,7 +113,8 @@ Public Class frmKeyEntry
             Case "form_hourly"
                 frmNewHourly.Show()
             Case "form_monthly"
-                formMonthly.Show()
+                frmNewMonthly.Show()
+            'formMonthly.Show()
             Case "form_upperair1"
                 formUpperAir.Show()
             Case "form_hourlywind"

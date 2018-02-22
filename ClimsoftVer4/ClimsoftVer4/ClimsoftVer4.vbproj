@@ -174,10 +174,10 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="frmNewHourly.Designer.vb">
-      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    <Compile Include="frmNewMonthly.Designer.vb">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewHourly.vb">
+    <Compile Include="frmNewMonthly.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
@@ -737,10 +737,10 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrHourly.Designer.vb">
-      <DependentUpon>ucrHourly.vb</DependentUpon>
+    <Compile Include="ucrMonthlyData.Designer.vb">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrHourly.vb">
+    <Compile Include="ucrMonthlyData.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrNavigation.Designer.vb">
@@ -823,8 +823,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmNewHourly.resx">
-      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewMonthly.resx">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
       <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
@@ -1224,8 +1224,8 @@
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrHourly.resx">
-      <DependentUpon>ucrHourly.vb</DependentUpon>
+    <EmbeddedResource Include="ucrMonthlyData.resx">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNavigation.resx">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
