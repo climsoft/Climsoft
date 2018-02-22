@@ -50,6 +50,8 @@
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         'In order to move to move to the first record the record index is set to zero.
         currRow = 0
+        'we always want to have the record number displayed 
+        displayRecordNumber()
         OnevtValueChanged(sender, e)
 
     End Sub
@@ -58,33 +60,30 @@
 
         If currRow > 0 Then
             currRow = currRow - 1
+            displayRecordNumber()
             OnevtValueChanged(sender, e)
         Else
             MsgBox("No more previous record!", MsgBoxStyle.Exclamation)
         End If
-
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
 
         If currRow < (maxRows - 1) Then
             currRow = currRow + 1
+            displayRecordNumber()
             OnevtValueChanged(sender, e)
         Else
             MsgBox("No more next record!", MsgBoxStyle.Exclamation)
         End If
-
     End Sub
 
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         currRow = maxRows - 1
+        displayRecordNumber()
         OnevtValueChanged(sender, e)
-
     End Sub
-
-
-
 End Class
 
 

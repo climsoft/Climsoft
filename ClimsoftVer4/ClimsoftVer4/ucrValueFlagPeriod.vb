@@ -17,12 +17,15 @@
 Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
+    Private bIncludePeriod As Boolean = True
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
         ucrValue.SetTableName(strNewTable)
         ucrFlag.SetTableName(strNewTable)
-        ucrPeriod.SetTableName(strNewTable)
+        If bIncludePeriod Then
+            ucrPeriod.SetTableName(strNewTable)
+        End If
     End Sub
 
     Public Sub SetValueFlagPeriodFields(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
@@ -30,11 +33,24 @@ Public Class ucrValueFlagPeriod
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
         SetPeriodField(strPeriodFieldName)
+        bIncludePeriod = True
+    End Sub
+    'added this to set value and flag field
+    Public Sub SetValueFlagFields(strValueFieldName As String, strFlagFieldName As String)
+        SetFields(New List(Of String)({strValueFieldName, strFlagFieldName}))
+        SetValueField(strValueFieldName)
+        SetFlagField(strFlagFieldName)
+        bIncludePeriod = False
     End Sub
 
     Public Sub SetTableNameAndValueFlagPeriodFields(strNewTable As String, strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
         SetTableName(strNewTable)
         SetValueFlagPeriodFields(strValueFieldName, strFlagFieldName, strPeriodFieldName)
+    End Sub
+    'added this to set table name and value flag field
+    Public Sub SetTableNameAndValueFlagFields(strNewTable As String, strValueFieldName As String, strFlagFieldName As String)
+        SetTableName(strNewTable)
+        SetValueFlagFields(strValueFieldName, strFlagFieldName)
     End Sub
 
     Public Sub SetValueField(strValueFieldName As String)
@@ -53,21 +69,27 @@ Public Class ucrValueFlagPeriod
         MyBase.SetFilter(clsNewFilter)
         ucrValue.SetFilter(clsNewFilter:=clsNewFilter)
         ucrFlag.SetFilter(clsNewFilter:=clsNewFilter)
-        ucrPeriod.SetFilter(clsNewFilter:=clsNewFilter)
+        If bIncludePeriod Then
+            ucrPeriod.SetFilter(clsNewFilter:=clsNewFilter)
+        End If
     End Sub
 
     Public Overrides Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
         MyBase.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrValue.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrFlag.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
-        ucrPeriod.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        If bIncludePeriod Then
+            ucrPeriod.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        End If
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrValue.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        ucrPeriod.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        If bIncludePeriod Then
+            ucrPeriod.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        End If
     End Sub
 
     Public Overrides Sub PopulateControl()
@@ -75,14 +97,18 @@ Public Class ucrValueFlagPeriod
             MyBase.PopulateControl()
             ucrValue.PopulateControl()
             ucrFlag.PopulateControl()
-            ucrPeriod.PopulateControl()
+            If bIncludePeriod Then
+                ucrPeriod.PopulateControl()
+            End If
         End If
     End Sub
 
     Public Sub Clear()
         ucrValue.Clear()
         ucrFlag.Clear()
-        ucrPeriod.Clear()
+        If bIncludePeriod Then
+            ucrPeriod.Clear()
+        End If
     End Sub
 
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load

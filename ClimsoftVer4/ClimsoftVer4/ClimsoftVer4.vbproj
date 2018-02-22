@@ -174,10 +174,22 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="frmNewHourly.Designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.vb">
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMonthly.Designer.vb">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewSynopticDataForManyElements.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -731,6 +743,18 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrHourly.Designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonthlyData.Designer.vb">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthlyData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNavigation.Designer.vb">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
     </Compile>
@@ -811,8 +835,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlgSynopticDataForManyElements.resx">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMonthly.resx">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
+      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
@@ -1208,6 +1238,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthlyData.resx">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNavigation.resx">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
