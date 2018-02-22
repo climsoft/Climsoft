@@ -36,8 +36,8 @@ Partial Class frmNewHourly
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.btnHourSelection = New System.Windows.Forms.Button()
-        Me.UcrHourly1 = New ClimsoftVer4.ucrHourly()
-        Me.UcrNavigation1 = New ClimsoftVer4.ucrNavigation()
+        Me.ucrHourly = New ClimsoftVer4.ucrHourly()
+        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
@@ -169,20 +169,20 @@ Partial Class frmNewHourly
         Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
-        'UcrHourly1
+        'ucrHourly
         '
-        Me.UcrHourly1.Location = New System.Drawing.Point(12, 122)
-        Me.UcrHourly1.Name = "UcrHourly1"
-        Me.UcrHourly1.Size = New System.Drawing.Size(419, 389)
-        Me.UcrHourly1.TabIndex = 464
+        Me.ucrHourly.Location = New System.Drawing.Point(104, 120)
+        Me.ucrHourly.Name = "ucrHourly"
+        Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
+        Me.ucrHourly.TabIndex = 464
         '
-        'UcrNavigation1
+        'ucrNavigation
         '
-        Me.UcrNavigation1.Location = New System.Drawing.Point(63, 519)
-        Me.UcrNavigation1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrNavigation1.Name = "UcrNavigation1"
-        Me.UcrNavigation1.Size = New System.Drawing.Size(336, 25)
-        Me.UcrNavigation1.TabIndex = 465
+        Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
+        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigation.Name = "ucrNavigation"
+        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigation.TabIndex = 465
         '
         'btnView
         '
@@ -224,7 +224,6 @@ Partial Class frmNewHourly
         '
         'btnCommit
         '
-        Me.btnCommit.Enabled = False
         Me.btnCommit.Location = New System.Drawing.Point(91, 570)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
@@ -282,8 +281,8 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.UcrNavigation1)
-        Me.Controls.Add(Me.UcrHourly1)
+        Me.Controls.Add(Me.ucrNavigation)
+        Me.Controls.Add(Me.ucrHourly)
         Me.Controls.Add(Me.btnHourSelection)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.ucrInputValue)
@@ -318,8 +317,8 @@ Partial Class frmNewHourly
     Friend WithEvents ucrElementSelector As ucrElementSelector
     Friend WithEvents lblElement As Label
     Friend WithEvents btnHourSelection As Button
-    Friend WithEvents UcrHourly1 As ucrHourly
-    Friend WithEvents UcrNavigation1 As ucrNavigation
+    Friend WithEvents ucrHourly As ucrHourly
+    Friend WithEvents ucrNavigation As ucrNavigation
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button
