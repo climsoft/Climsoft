@@ -103,7 +103,7 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
         ucrValue.Clear()
         ucrFlag.Clear()
         If bIncludePeriod Then

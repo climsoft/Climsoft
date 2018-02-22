@@ -74,6 +74,21 @@ Public Class ucrBaseDataLink
         SetSortByItems()
     End Sub
 
+    Public Overridable Sub SetTableNameAndField(strNewTable As String, strNewField As String)
+        SetTableName(strNewTable)
+        SetField(strNewField)
+    End Sub
+
+    Public Overridable Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
+        SetTableName(strNewTable)
+        SetFields(dctNewFields)
+    End Sub
+
+    Public Overridable Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+        SetTableName(strNewTable)
+        SetFields(lstNewFields)
+    End Sub
+
     Public Function GetField() As String
         Return clsDataDefinition.GetField
     End Function
@@ -192,11 +207,17 @@ Public Class ucrBaseDataLink
         Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strLinkedFieldName, tblFilter)
 
         If dctLinkedControlsFilters.ContainsKey(ucrLinkedDataControl) Then
+            'TODO
+            'THIS NEEDS TO BE CHANGED
             If Not dctLinkedControlsFilters.Contains(New KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))(ucrLinkedDataControl, kvpTemp)) Then
                 dctLinkedControlsFilters.Item(ucrLinkedDataControl) = kvpTemp
             End If
+
+            'If dctLinkedControlsFilters.Item(ucrLinkedDataControl).Key = strLinkedFieldName Then
+            '    dctLinkedControlsFilters.Item(ucrLinkedDataControl) = kvpTemp
+            'End If
         Else
-            dctLinkedControlsFilters.Add(ucrLinkedDataControl, kvpTemp)
+                dctLinkedControlsFilters.Add(ucrLinkedDataControl, kvpTemp)
         End If
 
         AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
@@ -265,6 +286,10 @@ Public Class ucrBaseDataLink
         MessageBox.Show("Developer error: The Linking Datacall of " & Me.Name & " has not been overriden ", caption:="Developer error")
         Return Nothing
     End Function
+
+    Public Overridable Sub Clear()
+
+    End Sub
 
     Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 

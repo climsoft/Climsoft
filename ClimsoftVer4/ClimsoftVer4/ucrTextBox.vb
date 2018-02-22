@@ -231,7 +231,7 @@ Public Class ucrTextBox
         End If
     End Function
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
         bValidate = False
         TextboxValue = ""
         bValidate = True

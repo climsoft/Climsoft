@@ -797,6 +797,12 @@
     <Compile Include="ucrTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.Designer.vb">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrValueFlagPeriod.Designer.vb">
       <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
     </Compile>
@@ -1265,6 +1271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrValueFlagPeriod.resx">
       <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
