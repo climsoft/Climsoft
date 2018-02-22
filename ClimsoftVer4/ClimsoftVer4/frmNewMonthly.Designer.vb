@@ -25,9 +25,6 @@ Partial Class frmNewMonthly
         Dim lblYear As System.Windows.Forms.Label
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
-        Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -44,6 +41,10 @@ Partial Class frmNewMonthly
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.ucrMonthlydata = New ClimsoftVer4.ucrMonthlydata()
+        Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
+        Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -74,30 +75,9 @@ Partial Class frmNewMonthly
         Me.lblStation.TabIndex = 495
         Me.lblStation.Text = "Station:"
         '
-        'ucrStationSelector
-        '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(90, 22)
-        Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(187, 24)
-        Me.ucrStationSelector.TabIndex = 497
-        '
-        'ucrElementSelector
-        '
-        Me.ucrElementSelector.Location = New System.Drawing.Point(331, 22)
-        Me.ucrElementSelector.Name = "ucrElementSelector"
-        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
-        Me.ucrElementSelector.TabIndex = 498
-        '
-        'ucrYearSelector
-        '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(551, 22)
-        Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(85, 25)
-        Me.ucrYearSelector.TabIndex = 499
-        '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(424, 410)
+        Me.btnView.Location = New System.Drawing.Point(421, 492)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 677
@@ -107,7 +87,7 @@ Partial Class frmNewMonthly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(586, 443)
+        Me.btnUpload.Location = New System.Drawing.Point(583, 525)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 676
@@ -117,7 +97,7 @@ Partial Class frmNewMonthly
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(183, 453)
+        Me.Label5.Location = New System.Drawing.Point(180, 535)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 675
@@ -125,7 +105,7 @@ Partial Class frmNewMonthly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(248, 450)
+        Me.txtSequencer.Location = New System.Drawing.Point(245, 532)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 674
@@ -133,7 +113,7 @@ Partial Class frmNewMonthly
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(586, 410)
+        Me.btnHelp.Location = New System.Drawing.Point(583, 492)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
         Me.btnHelp.TabIndex = 668
@@ -143,7 +123,7 @@ Partial Class frmNewMonthly
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(343, 410)
+        Me.btnClear.Location = New System.Drawing.Point(340, 492)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
         Me.btnClear.TabIndex = 666
@@ -153,7 +133,7 @@ Partial Class frmNewMonthly
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(100, 410)
+        Me.btnCommit.Location = New System.Drawing.Point(97, 492)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
         Me.btnCommit.TabIndex = 662
@@ -162,7 +142,7 @@ Partial Class frmNewMonthly
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(262, 410)
+        Me.btnDelete.Location = New System.Drawing.Point(259, 492)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 665
@@ -171,7 +151,7 @@ Partial Class frmNewMonthly
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(19, 410)
+        Me.btnAddNew.Location = New System.Drawing.Point(16, 492)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 663
@@ -180,7 +160,7 @@ Partial Class frmNewMonthly
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(181, 410)
+        Me.btnUpdate.Location = New System.Drawing.Point(178, 492)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 664
@@ -190,7 +170,7 @@ Partial Class frmNewMonthly
         'btnMovePrevious
         '
         Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(220, 380)
+        Me.btnMovePrevious.Location = New System.Drawing.Point(217, 462)
         Me.btnMovePrevious.Name = "btnMovePrevious"
         Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
         Me.btnMovePrevious.TabIndex = 673
@@ -200,7 +180,7 @@ Partial Class frmNewMonthly
         'btnMoveFirst
         '
         Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(173, 380)
+        Me.btnMoveFirst.Location = New System.Drawing.Point(170, 462)
         Me.btnMoveFirst.Name = "btnMoveFirst"
         Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveFirst.TabIndex = 672
@@ -210,7 +190,7 @@ Partial Class frmNewMonthly
         'btnMoveLast
         '
         Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(463, 380)
+        Me.btnMoveLast.Location = New System.Drawing.Point(460, 462)
         Me.btnMoveLast.Name = "btnMoveLast"
         Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
         Me.btnMoveLast.TabIndex = 671
@@ -219,7 +199,7 @@ Partial Class frmNewMonthly
         '
         'recNumberTextBox
         '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(272, 382)
+        Me.recNumberTextBox.Location = New System.Drawing.Point(269, 464)
         Me.recNumberTextBox.Name = "recNumberTextBox"
         Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
         Me.recNumberTextBox.TabIndex = 670
@@ -227,7 +207,7 @@ Partial Class frmNewMonthly
         'btnMoveNext
         '
         Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(419, 380)
+        Me.btnMoveNext.Location = New System.Drawing.Point(416, 462)
         Me.btnMoveNext.Name = "btnMoveNext"
         Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
         Me.btnMoveNext.TabIndex = 669
@@ -236,18 +216,47 @@ Partial Class frmNewMonthly
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(505, 410)
+        Me.btnClose.Location = New System.Drawing.Point(502, 492)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 667
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'ucrMonthlydata
+        '
+        Me.ucrMonthlydata.Location = New System.Drawing.Point(177, 52)
+        Me.ucrMonthlydata.Name = "ucrMonthlydata"
+        Me.ucrMonthlydata.Size = New System.Drawing.Size(343, 404)
+        Me.ucrMonthlydata.TabIndex = 678
+        '
+        'ucrYearSelector
+        '
+        Me.ucrYearSelector.Location = New System.Drawing.Point(551, 22)
+        Me.ucrYearSelector.Name = "ucrYearSelector"
+        Me.ucrYearSelector.Size = New System.Drawing.Size(85, 25)
+        Me.ucrYearSelector.TabIndex = 499
+        '
+        'ucrElementSelector
+        '
+        Me.ucrElementSelector.Location = New System.Drawing.Point(331, 22)
+        Me.ucrElementSelector.Name = "ucrElementSelector"
+        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
+        Me.ucrElementSelector.TabIndex = 498
+        '
+        'ucrStationSelector
+        '
+        Me.ucrStationSelector.Location = New System.Drawing.Point(90, 22)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(187, 24)
+        Me.ucrStationSelector.TabIndex = 497
+        '
         'frmNewMonthly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(681, 476)
+        Me.ClientSize = New System.Drawing.Size(681, 563)
+        Me.Controls.Add(Me.ucrMonthlydata)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
@@ -302,4 +311,5 @@ Partial Class frmNewMonthly
     Friend WithEvents recNumberTextBox As TextBox
     Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents ucrMonthlydata As ucrMonthlydata
 End Class
