@@ -1,15 +1,17 @@
-﻿Public Class ucrMonthlydata
+﻿Imports System.Data.Entity
+Imports System.Linq.Dynamic
+Public Class ucrMonthlydata
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_monthly"
     Private strValueFieldName As String = "mm_"
-    Private strFlagFieldName As String = "Flag"
-    Private strPeriodFieldName As String = "Period"
-    Private ucrLinkedStation As ucrStationSelector
-    Private ucrLinkedElement As ucrElementSelector
-    Private ucrLinkedYear As ucrYearSelector
+    Private strFlagFieldName As String = "flag"
+    Private strPeriodFieldName As String = "period"
+    'Private ucrLinkedStation As New ucrStationSelector
+    'Private ucrLinkedElement As New ucrElementSelector
+    'Private ucrLinkedYear As New ucrYearSelector
 
     Public Overrides Sub PopulateControl()
-        Dim ctr As Control
+        Dim ctr As New Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim clsCurrentFilter As New TableFilter
 
@@ -58,11 +60,11 @@
         Next
     End Sub
 
-    Public Sub setStationElementYearLink(ucrStationControl As ucrStationSelector, ucrElementControl As ucrElementSelector, ucrYearControl As ucrYearSelector)
-        ucrLinkedStation = ucrStationControl
-        ucrLinkedElement = ucrElementControl
-        ucrLinkedYear = ucrYearControl
-    End Sub
+    'Public Sub setStationElementYearLink(ucrStationControl As ucrStationSelector, ucrElementControl As ucrElementSelector, ucrYearControl As ucrYearSelector)
+    ' ucrLinkedStation = ucrStationControl
+    ' ucrLinkedElement = ucrElementControl
+    ' ucrLinkedYear = ucrYearControl
+    'End Sub
 
     Public Sub Clear()
         Dim ctr As Control
