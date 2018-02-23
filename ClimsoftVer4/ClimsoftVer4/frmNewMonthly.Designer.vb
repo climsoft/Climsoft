@@ -122,7 +122,6 @@ Partial Class frmNewMonthly
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(340, 492)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
@@ -132,7 +131,6 @@ Partial Class frmNewMonthly
         '
         'btnCommit
         '
-        Me.btnCommit.Enabled = False
         Me.btnCommit.Location = New System.Drawing.Point(97, 492)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)

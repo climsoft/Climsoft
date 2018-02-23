@@ -15,20 +15,20 @@
         d.Add("yyyy", New List(Of String)({"yyyy"}))
         d.Add("mm", New List(Of String)({"mm"}))
         d.Add("dd", New List(Of String)({"dd"}))
-        UcrNavigation1.SetFields(d)
-        UcrNavigation1.SetTableName("form_hourly")
+        ucrNavigation.SetFields(d)
+        ucrNavigation.SetTableName("form_hourly")
 
 
-        ucrStationSelector.AddLinkedControlFilters(UcrNavigation1, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrElementSelector.AddLinkedControlFilters(UcrNavigation1, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrYearSelector.AddLinkedControlFilters(UcrNavigation1, "Year", "==", strLinkedFieldName:="yyyy", bForceValuesAsString:=False)
-        ucrMonth.AddLinkedControlFilters(UcrNavigation1, "MonthId", "==", strLinkedFieldName:="mm", bForceValuesAsString:=False)
-        ucrDay.AddLinkedControlFilters(UcrNavigation1, "day", "==", strLinkedFieldName:="dd", bForceValuesAsString:=False)
+        ucrStationSelector.AddLinkedControlFilters(ucrNavigation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        ucrElementSelector.AddLinkedControlFilters(ucrNavigation, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        ucrYearSelector.AddLinkedControlFilters(ucrNavigation, "Year", "==", strLinkedFieldName:="yyyy", bForceValuesAsString:=False)
+        ucrMonth.AddLinkedControlFilters(ucrNavigation, "MonthId", "==", strLinkedFieldName:="mm", bForceValuesAsString:=False)
+        ucrDay.AddLinkedControlFilters(ucrNavigation, "day", "==", strLinkedFieldName:="dd", bForceValuesAsString:=False)
 
-        UcrNavigation1.PopulateControl()
-        UcrHourly1.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
-        AssignLinkToKeyField(UcrHourly1)
-        UcrHourly1.PopulateControl()
+        ucrNavigation.PopulateControl()
+        ucrHourly.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
+        AssignLinkToKeyField(ucrHourly)
+        ucrHourly.PopulateControl()
 
     End Sub
 
@@ -45,7 +45,7 @@
         Dim ctl As Control
         Dim ctrltemp As ucrValueFlagPeriod
 
-        For Each ctl In UcrHourly1.Controls
+        For Each ctl In ucrHourly.Controls
             If TypeOf ctl Is ucrValueFlagPeriod Then
                 ctrltemp = ctl
                 ctrltemp.ucrValue.TextboxValue = ucrInputValue.TextboxValue
@@ -54,14 +54,14 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        UcrHourly1.Clear()
+        ucrHourly.Clear()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If UcrHourly1.bUpdating Then
+        If ucrHourly.bUpdating Then
             'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.form_hourly.Add(UcrHourly1.fhRecord)
+            clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
         End If
         clsDataConnection.SaveUpdate()
     End Sub
@@ -77,5 +77,15 @@
         clsDataConnection.db.form_daily2.Remove(cust)
         clsDataConnection.db.SaveChanges()
         MsgBox("deleted")
+    End Sub
+
+    Private Sub UcrHourly1_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        formDataView.DataGridView.DataSource = ucrHourly.fhRecord
+        formDataView.DataGridView.Refresh()
+        formDataView.DataGridView.Dock = DockStyle.Top
     End Sub
 End Class
