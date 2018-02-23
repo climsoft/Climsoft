@@ -11,6 +11,32 @@
 
     Public Sub SetPossibleValues(dtbNewRecords As DataTable)
         dtbRecords = dtbNewRecords
+        bFillFromDataBase = False
+    End Sub
+
+    Public Sub SetPossibleValues(strColumnName As String, tColumnType As Type, lstValues As IEnumerable(Of Object))
+        SetPossibleValues(New DataTable)
+        dtbRecords.Columns.Add(strColumnName, tColumnType)
+        For Each objVal In lstValues
+            dtbRecords.Rows.Add(objVal)
+        Next
+    End Sub
+    'NOT SURE ABOUT THIS BUT I SUSPECT IT NEEDS TO BE OVERRIDEN 
+    'ALTERANITIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
+    Protected Overrides Sub LinkedControls_evtValueChanged()
+        If Not IsNothing(clsDataDefinition) Then
+            Dim objData As List(Of String)
+            Dim strDbValue As String
+            objData = clsDataDefinition.GetValues(GetLinkedControlsFilter())
+            If objData.Count > 0 Then
+                strDbValue = objData(0)
+                For index As Integer = 0 To dtbRecords.Rows.Count - 1
+                    If dtbRecords.Rows(index).Field(Of String)(0) = strDbValue Then
+                        cboValues.SelectedIndex = index
+                    End If
+                Next
+            End If
+        End If
     End Sub
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -39,7 +65,12 @@
         End If
 
         If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
-            Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of Object)(strFieldName)
+            If cboValues.SelectedIndex > -1 Then
+                Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of Object)(strFieldName)
+            Else
+                Return Nothing
+            End If
+
         Else
             Return Nothing
         End If

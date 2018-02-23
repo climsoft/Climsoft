@@ -83,7 +83,9 @@
         currRow = maxRows - 1
         displayRecordNumber()
         OnevtValueChanged(sender, e)
+
     End Sub
+
 End Class
 
 
