@@ -116,33 +116,7 @@ Public Class ucrDirectionSpeedFlag
 
     Private Sub ucrDDFF_TextChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtTextChanged
 
-        If Not ucrDDFF.IsEmpty AndAlso Not IsNumeric(Strings.Right(ucrDD.TextboxValue, 1)) Then
-            'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-            'to the value string in the textbox.
-            ucrFF.TextboxValue = Strings.Right(ucrDD.TextboxValue, 1)
 
-            'Get the observation value by leaving out the last character from the string entered in the textbox
-            ucrDD.TextboxValue = Strings.Left(ucrDD.TextboxValue, ucrDD.TextboxValue.Length - 1)
-
-            'Check that numeric value has been entered for observation value
-            If Not IsNumeric(ucrDD.TextboxValue) Then
-                'tabNext = False
-                If Not ucrDD.IsEmpty Then
-                    MsgBox("Number expected!", MsgBoxStyle.Critical)
-                End If
-            End If
-            ucrFF.GetFocus()
-        End If
-        If ucrDD.IsEmpty AndAlso ucrDD.bValidate Then
-            If Not ucrFF.TextboxValue = "M" Then
-                If ucrFF.IsEmpty Then
-                    ucrFF.TextboxValue = "M"
-                    ucrFF.GetFocus()
-                Else
-                    MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
-                End If
-            End If
-        End If
 
     End Sub
 

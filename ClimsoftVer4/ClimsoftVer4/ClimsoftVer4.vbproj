@@ -749,6 +749,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrHourlyWind.Designer.vb">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourlyWind.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrHourly.Designer.vb">
       <DependentUpon>ucrHourly.vb</DependentUpon>
     </Compile>
@@ -1253,6 +1259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourlyWind.resx">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourly.resx">
       <DependentUpon>ucrHourly.vb</DependentUpon>
