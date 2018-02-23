@@ -7,7 +7,7 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrMonthlydata.setYearLink(ucrYearControl:=ucrYearSelector)
+        ucrMonthlydata.setStationElementYearLink(ucrStationControl:=ucrStationSelector, ucrElementControl:=ucrElementSelector, ucrYearControl:=ucrYearSelector)
         AssignLinkToKeyField(ucrMonthlydata)
         ucrMonthlydata.PopulateControl()
     End Sub
@@ -16,5 +16,13 @@
         ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
         ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ucrMonthlydata.Clear()
+    End Sub
+
+    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+
     End Sub
 End Class
