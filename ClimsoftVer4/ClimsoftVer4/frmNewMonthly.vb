@@ -7,7 +7,7 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrMonthlydata.setStationElementYearLink(ucrStationControl:=ucrStationSelector, ucrElementControl:=ucrElementSelector, ucrYearControl:=ucrYearSelector)
+        'ucrMonthlydata.setStationElementYearLink(ucrStationControl:=ucrStationSelector, ucrElementControl:=ucrElementSelector, ucrYearControl:=ucrYearSelector)
         AssignLinkToKeyField(ucrMonthlydata)
         ucrMonthlydata.PopulateControl()
     End Sub
@@ -24,5 +24,9 @@
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
 
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class
