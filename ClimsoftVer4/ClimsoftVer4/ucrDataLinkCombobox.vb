@@ -22,7 +22,7 @@
         Next
     End Sub
     'NOT SURE ABOUT THIS BUT I SUSPECT IT NEEDS TO BE OVERRIDEN 
-    'ALTERANITIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
+    'ALTERNATIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         If Not IsNothing(clsDataDefinition) Then
             Dim objData As List(Of String)
@@ -54,42 +54,58 @@
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
-    Public Overrides Function GetValue() As Object
-        Return cboValues.SelectedValue
-    End Function
+    Public Overrides Sub SetValue(objNewValue As Object)
+        Dim strCol As String
 
-    Public Overrides Function GetValue(strFieldName As String) As Object
+        MyBase.SetValue(objNewValue)
 
-        If strFieldName = "" Then
-            Return GetValue()
-        End If
-
-        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
-            If cboValues.SelectedIndex > -1 Then
-                Return dtbRecords.Rows(cboValues.SelectedIndex).Field(Of Object)(strFieldName)
-            Else
-                Return Nothing
+        strCol = cboValues.ValueMember
+        For Each rTemp As DataRow In dtbRecords.Rows
+            If rTemp(strCol) = objNewValue Then
+                cboValues.SelectedValue = objNewValue
+                Exit Sub
             End If
+        Next
+        cboValues.Text = objNewValue
+    End Sub
 
-        Else
-            Return Nothing
-        End If
+    ' If the text in the textbox portion does not match any of the items in the dropdown then GetValue will always return cboValue.Text
+    ' regardless of strFieldName
+    ' If the text matches an item then the value from strFieldName for the selected item will be returned.
+    ' When strFieldName is not specified cboValue.SelectedValue will be returned.
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Dim strCol As String
 
+        strCol = cboValues.DisplayMember
+        For Each rTemp As DataRow In dtbRecords.Rows
+            If rTemp(strCol) = cboValues.Text Then
+                If strFieldName = "" Then
+                    Return cboValues.SelectedValue
+                Else
+                    Return rTemp(strFieldName)
+                End If
+            End If
+        Next
+        Return cboValues.Text
     End Function
 
     Public Sub SetViewType(strViewType As String)
-
         Dim col As DataColumn
+
         For Each col In dtbRecords.Columns
             If strViewType = col.ColumnName Then
                 cboValues.DisplayMember = strViewType
                 Exit For
             End If
         Next
-
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
+        OnevtValueChanged(sender, e)
+    End Sub
+
+    Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
+        OnevtTextChanged(sender, e)
         OnevtValueChanged(sender, e)
     End Sub
 End Class

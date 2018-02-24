@@ -22,6 +22,10 @@ Public Class ucrBaseDataLink
     Public Event evtTextChanged(sender As Object, e As EventArgs)
     Public Event evtValueChanged(sender As Object, e As EventArgs)
 
+    ' When True, ValueChanged and TextChanged etc. events will not be raised
+    ' Used when wanting to update several controls without linked controls updating inbetween.
+    Public bSuppressChangedEvents As Boolean = False
+
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
     ' Including: reading/writing, which tables/fields/records to connect to
@@ -152,24 +156,27 @@ Public Class ucrBaseDataLink
     End Sub
 
     Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
-        RaiseEvent evtTextChanged(sender , e )
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtTextChanged(sender, e)
+        End If
     End Sub
 
     Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
-        RaiseEvent evtValueChanged(sender, e)
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtValueChanged(sender, e)
+        End If
     End Sub
 
+    Public Overridable Sub SetValue(objNewValue As Object)
 
-    Public Overridable Function GetValue() As Object
-        Return Nothing
-    End Function
+    End Sub
 
-    Public Overridable Function GetValue(strFieldName As String) As Object
+    Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
         Dim tempRow As DataRow
         Dim lstTemp As New List(Of String)
 
         If strFieldName = "" Then
-            Return GetValue()
+            Return Nothing
         End If
         UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 1 Then
@@ -224,7 +231,6 @@ Public Class ucrBaseDataLink
     End Sub
 
     Protected Overridable Sub LinkedControls_evtValueChanged()
-        UpdateDataTable()
         PopulateControl()
     End Sub
 

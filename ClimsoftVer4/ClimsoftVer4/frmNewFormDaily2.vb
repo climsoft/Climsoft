@@ -12,9 +12,10 @@ Public Class frmNewFormDaily2
 
     Private Sub InitaliseDialog()
         Dim dtbVis, dtbCld, dtbPrec, dtbTemp As New DataTable
-        Dim d As New Dictionary(Of String, List(Of String))
+        Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
+        Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
-        ucrFormDaily.setYearAndMonthLink(ucrYearSelector, ucrMonth)
+        ucrFormDaily.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
         AssignLinkToKeyField(ucrFormDaily)
 
         ucrVisibilityUnits.SetField("visUnits")
@@ -66,24 +67,25 @@ Public Class frmNewFormDaily2
         ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
 
 
-        d.Add("stationId", New List(Of String)({"stationId"}))
-        d.Add("elementId", New List(Of String)({"elementId"}))
-        d.Add("yyyy", New List(Of String)({"yyyy"}))
-        d.Add("mm", New List(Of String)({"mm"}))
-        d.Add("hh", New List(Of String)({"hh"}))
+        dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
+        dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
+        dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
+        dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
+        dctNavigationFields.Add("hh", New List(Of String)({"hh"}))
 
-        ucrDaiy2Navigation.SetFields(d)
+        ucrDaiy2Navigation.SetFields(dctNavigationFields)
         ucrDaiy2Navigation.SetTableName("form_daily2")
 
-        ucrStationSelector.AddLinkedControlFilters(ucrDaiy2Navigation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrElementSelector.AddLinkedControlFilters(ucrDaiy2Navigation, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrYearSelector.AddLinkedControlFilters(ucrDaiy2Navigation, "Year", "==", strLinkedFieldName:="yyyy", bForceValuesAsString:=False)
-        ucrMonth.AddLinkedControlFilters(ucrDaiy2Navigation, "MonthId", "==", strLinkedFieldName:="mm", bForceValuesAsString:=False)
-        ucrHour.AddLinkedControlFilters(ucrDaiy2Navigation, "24Hrs", "==", strLinkedFieldName:="hh", bForceValuesAsString:=False)
+        dctNavigationKeyControls.Add("stationId", ucrStationSelector)
+        dctNavigationKeyControls.Add("elementId", ucrElementSelector)
+        dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
+        dctNavigationKeyControls.Add("mm", ucrMonth)
+        dctNavigationKeyControls.Add("hh", ucrHour)
+
+        ucrDaiy2Navigation.SetKeyControls(dctNavigationKeyControls)
 
         ucrDaiy2Navigation.PopulateControl()
         ucrFormDaily.PopulateControl()
-
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -101,7 +103,7 @@ Public Class frmNewFormDaily2
         For Each ctl In ucrFormDaily.Controls
             If TypeOf ctl Is ucrValueFlagPeriod Then
                 ctrltemp = ctl
-                ctrltemp.ucrValue.TextboxValue = ucrInputValue.TextboxValue
+                ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
             End If
         Next
     End Sub
