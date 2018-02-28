@@ -68,7 +68,7 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?" & Me.Text, "Delete Record" & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
             Try
                 clsDataConnection.db.form_hourly.Attach(ucrHourly.fhRecord)

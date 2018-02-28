@@ -122,15 +122,18 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim cust As New form_daily2
-        cust.yyyy = "2018"
-        cust.stationId = "67755030"
-        cust.elementId = "2"
-        cust.mm = "2"
-        cust.hh = "1"
-        clsDataConnection.db.form_daily2.Attach(cust)
-        clsDataConnection.db.form_daily2.Remove(cust)
-        clsDataConnection.db.SaveChanges()
-        MsgBox("deleted")
+        Dim dlgResponse As DialogResult
+        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
+            Try
+                clsDataConnection.db.form_daily2.Attach(ucrFormDaily.fd2Record)
+                clsDataConnection.db.form_daily2.Remove(ucrFormDaily.fd2Record)
+                clsDataConnection.db.SaveChanges()
+                MessageBox.Show("Record has been deleted", "Delete Record")
+                ucrDaiy2Navigation.MoveNext(sender, e)
+            Catch
+                MessageBox.Show("Record has not been deleted", "Delete Record")
+            End Try
+        End If
     End Sub
 End Class
