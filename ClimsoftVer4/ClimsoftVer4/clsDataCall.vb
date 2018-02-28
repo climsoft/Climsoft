@@ -31,11 +31,23 @@ Public Class DataCall
     ' A TableFilter object which defines the rows in the table the values will be from
     Private clsFilter As TableFilter
 
+    Public Function Clone() As DataCall
+        Dim clsdatacall As New DataCall
+        'dbTable is not being cloned because we want to point to the same table in the entity framework
+        clsdatacall.SetTable(dbsTable)
+
+        clsdatacall.SetTableName(strTable)
+        clsdatacall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
+        clsdatacall.SetFilter(clsFilter.Clone())
+
+        Return clsdatacall
+    End Function
+
     Public Sub SetTable(dbsNewTable As DbSet)
         dbsTable = dbsNewTable
     End Sub
 
-    Public Sub SetTable(strNewTable As String)
+    Public Sub SetTableName(strNewTable As String)
         strTable = strNewTable
     End Sub
 
@@ -64,15 +76,18 @@ Public Class DataCall
         SetTable(dbsNewTable:=dbsNewTable)
         SetField(strNewField:=strNewField)
     End Sub
+    Public Function GetFilter() As TableFilter
+        Return clsFilter
+    End Function
 
     Public Sub SetFilter(clsNewFilter As TableFilter)
         clsFilter = clsNewFilter
     End Sub
 
-    Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
+    Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         Dim clsNewFilter As New TableFilter
 
-        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, strNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition)
+        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, strNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
         SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
 
@@ -87,6 +102,18 @@ Public Class DataCall
         Return lstValues
     End Function
 
+    'PLEASE NOTE THIS IS MY QUICK FIX OF THE ABOVE GETVALUES.
+    Public Function GetValues(Optional clsAdditionalFilter As TableFilter = Nothing) As List(Of String)
+        Dim lstValues As New List(Of String)
+        Dim objData As DataTable
+
+        objData = GetDataTable(clsAdditionalFilter)
+        For Each entItem As DataRow In objData.Rows
+            lstValues.Add(entItem.Field(Of String)(0))
+        Next
+        Return lstValues
+    End Function
+
     Public Function GetValuesAsString(Optional strSep As String = ",") As String
         Return String.Join(strSep, GetValues())
     End Function
@@ -95,20 +122,30 @@ Public Class DataCall
         Return dctFields
     End Function
 
-    Public Function GetDataTable() As DataTable
+    Public Function GetField() As String
+        If dctFields.Count = 1 Then
+            Return dctFields.First.Key
+        Else
+            Return ""
+        End If
+    End Function
+
+    Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
 
-        objData = GetDataObject()
+        objData = GetDataObject(clsAdditionalFilter)
         dtbFields = New DataTable()
-        If objData IsNot Nothing Then
+        If Not dctFields Is Nothing Then
             For Each strFieldDisplay As String In dctFields.Keys
                 dtbFields.Columns.Add(strFieldDisplay, GetType(String))
             Next
-            For Each Item As Object In objData
-                dtbFields.Rows.Add(GetFieldsArray(Item))
-                'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
-            Next
+            If objData IsNot Nothing Then
+                For Each Item As Object In objData
+                    dtbFields.Rows.Add(GetFieldsArray(Item))
+                    'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
+                Next
+            End If
         End If
         Return dtbFields
     End Function
@@ -137,17 +174,32 @@ Public Class DataCall
         End If
     End Function
 
-    Public Function GetDataObject() As Object
-        Dim db As New mariadb_climsoft_test_db_v4Entities
+    Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
+        Dim clsCurrentFilter As TableFilter
 
-        Try
-            Dim x = CallByName(db, strTable, CallType.Get)
-            Dim y = TryCast(x, IQueryable(Of Object))
-
-            If clsFilter IsNot Nothing Then
-                y = y.Where(clsFilter.GetLinqExpression())
+        If Not IsNothing(clsAdditionalFilter) Then
+            If IsNothing(clsFilter) Then
+                clsCurrentFilter = clsAdditionalFilter
+            Else
+                clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
             End If
-            Return y.ToList()
+        Else
+            clsCurrentFilter = clsFilter
+        End If
+
+            Try
+            If strTable <> "" Then
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
+
+                If clsCurrentFilter IsNot Nothing Then
+                    y = y.Where(clsCurrentFilter.GetLinqExpression())
+                End If
+                Return y.ToList()
+            Else
+                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+                Return Nothing
+            End If
         Catch ex As Exception
             Return Nothing
         End Try
