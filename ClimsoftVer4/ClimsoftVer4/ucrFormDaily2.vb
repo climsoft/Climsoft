@@ -61,7 +61,7 @@ Public Class ucrFormDaily2
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     lstFields.Add(strPeriodFieldName & ctrVFP.Tag)
-
+                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
@@ -99,7 +99,7 @@ Public Class ucrFormDaily2
         Dim ctr As ucrTextBox
 
         If TypeOf sender Is ucrTextBox Then
-            ctr = sender
+            ctr = DirectCast(sender, ucrTextBox)
             CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
     End Sub

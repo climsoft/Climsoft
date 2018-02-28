@@ -87,4 +87,5 @@
         formDataView.DataGridView.Refresh()
         formDataView.DataGridView.Dock = DockStyle.Top
     End Sub
+
 End Class
