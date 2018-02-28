@@ -23,21 +23,13 @@ Partial Class frmNewHourly
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim lblYear As System.Windows.Forms.Label
-        Me.ucrDay = New ClimsoftVer4.ucrDay()
-        Me.ucrMonth = New ClimsoftVer4.ucrMonth()
-        Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
-        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.lblStationSelector = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.cmdAssignSameValue = New System.Windows.Forms.Button()
-        Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.btnHourSelection = New System.Windows.Forms.Button()
-        Me.ucrHourly = New ClimsoftVer4.ucrHourly()
-        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
@@ -47,6 +39,14 @@ Partial Class frmNewHourly
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.ucrHourly = New ClimsoftVer4.ucrHourly()
+        Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
+        Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
+        Me.ucrDay = New ClimsoftVer4.ucrDay()
+        Me.ucrMonth = New ClimsoftVer4.ucrMonth()
+        Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -58,34 +58,6 @@ Partial Class frmNewHourly
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 216
         lblYear.Text = "Year:"
-        '
-        'ucrDay
-        '
-        Me.ucrDay.Location = New System.Drawing.Point(316, 42)
-        Me.ucrDay.Name = "ucrDay"
-        Me.ucrDay.Size = New System.Drawing.Size(51, 24)
-        Me.ucrDay.TabIndex = 225
-        '
-        'ucrMonth
-        '
-        Me.ucrMonth.Location = New System.Drawing.Point(178, 42)
-        Me.ucrMonth.Name = "ucrMonth"
-        Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
-        Me.ucrMonth.TabIndex = 223
-        '
-        'ucrYearSelector
-        '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(58, 42)
-        Me.ucrYearSelector.Name = "ucrYearSelector"
-        Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
-        Me.ucrYearSelector.TabIndex = 222
-        '
-        'ucrStationSelector
-        '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(58, 12)
-        Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
-        Me.ucrStationSelector.TabIndex = 221
         '
         'lblStationSelector
         '
@@ -124,15 +96,6 @@ Partial Class frmNewHourly
         Me.Label30.TabIndex = 230
         Me.Label30.Text = "Value="
         '
-        'ucrInputValue
-        '
-        Me.ucrInputValue.Location = New System.Drawing.Point(399, 88)
-        Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrInputValue.Name = "ucrInputValue"
-        Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputValue.TabIndex = 229
-        Me.ucrInputValue.TextboxValue = ""
-        '
         'cmdAssignSameValue
         '
         Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
@@ -142,13 +105,6 @@ Partial Class frmNewHourly
         Me.cmdAssignSameValue.TabIndex = 228
         Me.cmdAssignSameValue.Text = "Assign same value to all obs"
         Me.cmdAssignSameValue.UseVisualStyleBackColor = True
-        '
-        'ucrElementSelector
-        '
-        Me.ucrElementSelector.Location = New System.Drawing.Point(316, 12)
-        Me.ucrElementSelector.Name = "ucrElementSelector"
-        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
-        Me.ucrElementSelector.TabIndex = 227
         '
         'lblElement
         '
@@ -168,21 +124,6 @@ Partial Class frmNewHourly
         Me.btnHourSelection.TabIndex = 463
         Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
-        '
-        'ucrHourly
-        '
-        Me.ucrHourly.Location = New System.Drawing.Point(104, 120)
-        Me.ucrHourly.Name = "ucrHourly"
-        Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
-        Me.ucrHourly.TabIndex = 464
-        '
-        'ucrNavigation
-        '
-        Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
-        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNavigation.Name = "ucrNavigation"
-        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 465
         '
         'btnView
         '
@@ -266,6 +207,65 @@ Partial Class frmNewHourly
         Me.btnClose.TabIndex = 667
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'ucrNavigation
+        '
+        Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
+        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigation.Name = "ucrNavigation"
+        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigation.TabIndex = 465
+        '
+        'ucrHourly
+        '
+        Me.ucrHourly.Location = New System.Drawing.Point(104, 120)
+        Me.ucrHourly.Name = "ucrHourly"
+        Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
+        Me.ucrHourly.TabIndex = 464
+        '
+        'ucrInputValue
+        '
+        Me.ucrInputValue.Location = New System.Drawing.Point(399, 88)
+        Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrInputValue.Name = "ucrInputValue"
+        Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputValue.TabIndex = 229
+        Me.ucrInputValue.TextboxValue = ""
+        '
+        'ucrElementSelector
+        '
+        Me.ucrElementSelector.Location = New System.Drawing.Point(316, 12)
+        Me.ucrElementSelector.Name = "ucrElementSelector"
+        Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
+        Me.ucrElementSelector.TabIndex = 227
+        '
+        'ucrDay
+        '
+        Me.ucrDay.Location = New System.Drawing.Point(316, 42)
+        Me.ucrDay.Name = "ucrDay"
+        Me.ucrDay.Size = New System.Drawing.Size(51, 24)
+        Me.ucrDay.TabIndex = 225
+        '
+        'ucrMonth
+        '
+        Me.ucrMonth.Location = New System.Drawing.Point(178, 42)
+        Me.ucrMonth.Name = "ucrMonth"
+        Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
+        Me.ucrMonth.TabIndex = 223
+        '
+        'ucrYearSelector
+        '
+        Me.ucrYearSelector.Location = New System.Drawing.Point(58, 42)
+        Me.ucrYearSelector.Name = "ucrYearSelector"
+        Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
+        Me.ucrYearSelector.TabIndex = 222
+        '
+        'ucrStationSelector
+        '
+        Me.ucrStationSelector.Location = New System.Drawing.Point(58, 12)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
+        Me.ucrStationSelector.TabIndex = 221
         '
         'frmNewHourly
         '

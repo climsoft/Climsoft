@@ -13,12 +13,13 @@ Public Class ucrFormDaily2
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
-    Private lstTempFields As New List(Of String)
+    Private lstFields As New List(Of String)
     Public fd2Record As form_daily2
     Public bUpdating As Boolean = False
+    Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+    Private lstTextboxControls As List(Of ucrTextBox)
 
     Public Overrides Sub PopulateControl()
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
         Dim clsCurrentFilter As TableFilter
@@ -36,14 +37,11 @@ Public Class ucrFormDaily2
                     bUpdating = False
                 End If
             End If
-            For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    ctrVFP.PopulateControl()
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    ctrTotal = ctr
-                    ctrTotal.PopulateControl()
-                End If
+            For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
+                ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag), GetValue(strPeriodFieldName & ucrVFP.Tag)}))
+            Next
+            For Each ucrText As ucrTextBox In lstTextboxControls
+                ucrText.SetValue(GetValue(strTotalFieldName))
             Next
         End If
     End Sub
@@ -54,35 +52,34 @@ Public Class ucrFormDaily2
         Dim ctrTotal As New ucrTextBox
 
         If bFirstLoad Then
+            lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod)
+            lstTextboxControls = New List(Of ucrTextBox)
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag, strPeriodFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strPeriodFieldName & ctrVFP.Tag)
-
+                    lstValueFlagPeriodControls.Add(ctr)
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    lstFields.Add(strValueFieldName & ctrVFP.Tag)
+                    lstFields.Add(strFlagFieldName & ctrVFP.Tag)
+                    lstFields.Add(strPeriodFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
-
                     AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-
                 ElseIf TypeOf ctr Is ucrTextBox Then
+                    lstTextboxControls.Add(ctr)
                     ctrTotal = ctr
                     ctrTotal.SetTableName(strTableName)
                     ctrTotal.SetField(strTotalFieldName)
-                    lstTempFields.Add(strTotalFieldName)
+                    lstFields.Add(strTotalFieldName)
                     AddHandler ctrTotal.evtValueChanged, AddressOf InnerControlValueChanged
-
                 End If
             Next
             SetTableName(strTableName)
-            SetFields(lstTempFields)
+            SetFields(lstFields)
             bFirstLoad = False
             EnableDaysofMonth()
         End If
-
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -91,18 +88,9 @@ Public Class ucrFormDaily2
         Dim ctrTotal As New ucrTextBox
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr
-                ctrTotal.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-            End If
-        Next
-        If Not lstTempFields.Contains(tblFilter.GetField) Then
-            lstTempFields.Add(tblFilter.GetField)
-            SetFields(lstTempFields)
+        If Not lstFields.Contains(tblFilter.GetField) Then
+            lstFields.Add(tblFilter.GetField)
+            SetFields(lstFields)
         End If
 
     End Sub
@@ -111,7 +99,7 @@ Public Class ucrFormDaily2
         Dim ctr As ucrTextBox
 
         If TypeOf sender Is ucrTextBox Then
-            ctr = sender
+            ctr = DirectCast(sender, ucrTextBox)
             CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
     End Sub
@@ -157,8 +145,8 @@ Public Class ucrFormDaily2
 
         'Next
 
-        For Each kvp In dctLinkedControlsFilters
-            CallByName(fd2Record, kvp.Value.Value.GetField, CallType.Set, kvp.Key.GetValue)
+        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
 
     End Sub
@@ -211,9 +199,9 @@ Public Class ucrFormDaily2
             MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
         End If
 
-        If Not lstTempFields.Contains(strFieldName) Then
-            lstTempFields.Add(strFieldName)
-            SetFields(lstTempFields)
+        If Not lstFields.Contains(strFieldName) Then
+            lstFields.Add(strFieldName)
+            SetFields(lstFields)
             PopulateControl()
         End If
 
