@@ -70,7 +70,9 @@
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
-
+        MoveNext(sender, e)
+    End Sub
+    Public Sub MoveNext(sender As Object, e As EventArgs)
         If iCurrRow < (iMaxRows - 1) Then
             iCurrRow = iCurrRow + 1
             displayRecordNumber()
@@ -79,7 +81,6 @@
             MsgBox("No more next record!", MsgBoxStyle.Exclamation)
         End If
     End Sub
-
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         iCurrRow = iMaxRows - 1
