@@ -11,7 +11,7 @@ Public Class ucrHourlyWind
     'Private ucrLinkedYear As ucrYearSelector
     'Private ucrLinkedMonth As ucrMonth
     Private lstFields As New List(Of String)
-    Public fd2Record As form_hourlywind
+    Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
 
     Public Overrides Sub PopulateControl()
@@ -22,14 +22,14 @@ Public Class ucrHourlyWind
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            If fd2Record Is Nothing Then
+            If fhourlyWindRecord Is Nothing Then
                 clsCurrentFilter = GetLinkedControlsFilter()
                 Dim y = clsDataConnection.db.form_hourlywind.Where(clsCurrentFilter.GetLinqExpression())
                 If y.Count() = 1 Then
-                    fd2Record = y.FirstOrDefault()
+                    fhourlyWindRecord = y.FirstOrDefault()
                     bUpdating = True
                 Else
-                    fd2Record = New form_hourlywind
+                    fhourlyWindRecord = New form_hourlywind
                     bUpdating = False
                 End If
             End If
@@ -87,7 +87,7 @@ Public Class ucrHourlyWind
         If TypeOf sender Is ucrTextBox Then
             'ctr = DirectCast(sender, ucrTextBox)
             ctr = sender
-            CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
+            CallByName(fhourlyWindRecord, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
     End Sub
 
@@ -125,9 +125,9 @@ Public Class ucrHourlyWind
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         'need an if statement that checks for changes 
-        fd2Record = Nothing
+        fhourlyWindRecord = Nothing
         MyBase.LinkedControls_evtValueChanged()
-        'EnableDaysofMonth()
+
 
         'Dim ctr As Control
         'Dim ctrDDFFFlag As  ucrDirectionSpeedFlag
@@ -146,7 +146,7 @@ Public Class ucrHourlyWind
         'Next
 
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
 
     End Sub
