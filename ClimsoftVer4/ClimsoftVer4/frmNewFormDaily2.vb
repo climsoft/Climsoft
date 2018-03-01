@@ -11,81 +11,100 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub InitaliseDialog()
-        Dim dtbVis, dtbCld, dtbPrec, dtbTemp As New DataTable
-        Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
-        Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
+        'Dim dtbVis, dtbCld, dtbPrec, dtbTemp As New DataTable
+        'Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
+        'Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
         ucrFormDaily.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
         AssignLinkToKeyField(ucrFormDaily)
 
-        ucrVisibilityUnits.SetField("visUnits")
-        ucrVisibilityUnits.SetTableName("form_daily2")
-        ucrVisibilityUnits.bFillFromDataBase = False
-        dtbVis.Columns.Add("visUnits", GetType(String))
-        dtbVis.Rows.Add("metres")
-        dtbVis.Rows.Add("yards")
-        ucrVisibilityUnits.SetPossibleValues(dtbVis)
+        'ucrVisibilityUnits.SetField("visUnits")
+        'ucrVisibilityUnits.SetTableName("form_daily2")
+        'ucrVisibilityUnits.bFillFromDataBase = False
+        'dtbVis.Columns.Add("visUnits", GetType(String))
+        'dtbVis.Rows.Add("metres")
+        'dtbVis.Rows.Add("yards")
+        'ucrVisibilityUnits.SetPossibleValues(dtbVis)
+
+        ucrVisibilityUnits.SetTableNameAndField("form_daily2", "visUnits")
+        ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
+
         AssignLinkToKeyField(ucrVisibilityUnits)
         ucrVisibilityUnits.PopulateControl()
         ucrVisibilityUnits.SetViewType("visUnits")
 
-        ucrCloudheightUnits.SetField("cloudHeightUnits")
-        ucrCloudheightUnits.SetTableName("form_daily2")
-        ucrCloudheightUnits.bFillFromDataBase = False
-        dtbCld.Columns.Add("cloudHeightUnits", GetType(String))
-        dtbCld.Rows.Add("metres")
-        dtbCld.Rows.Add("feet")
-        ucrCloudheightUnits.SetPossibleValues(dtbCld)
+        'ucrCloudheightUnits.SetField("cloudHeightUnits")
+        'ucrCloudheightUnits.SetTableName("form_daily2")
+        'ucrCloudheightUnits.bFillFromDataBase = False
+        'dtbCld.Columns.Add("cloudHeightUnits", GetType(String))
+        'dtbCld.Rows.Add("metres")
+        'dtbCld.Rows.Add("feet")
+        'ucrCloudheightUnits.SetPossibleValues(dtbCld)
+
+        ucrCloudheightUnits.SetTableNameAndField("form_daily2", "cloudHeightUnits")
+        ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"metres", "feet"})
         AssignLinkToKeyField(ucrCloudheightUnits)
         ucrCloudheightUnits.PopulateControl()
         ucrCloudheightUnits.SetViewType("cloudHeightUnits")
 
-        ucrPrecipUnits.SetField("precipUnits")
-        ucrPrecipUnits.SetTableName("form_daily2")
-        ucrPrecipUnits.bFillFromDataBase = False
-        dtbPrec.Columns.Add("precipUnits", GetType(String))
-        dtbPrec.Rows.Add("mm")
-        dtbPrec.Rows.Add("inches")
-        ucrPrecipUnits.SetPossibleValues(dtbPrec)
+        'ucrPrecipUnits.SetField("precipUnits")
+        'ucrPrecipUnits.SetTableName("form_daily2")
+        'ucrPrecipUnits.bFillFromDataBase = False
+        'dtbPrec.Columns.Add("precipUnits", GetType(String))
+        'dtbPrec.Rows.Add("mm")
+        'dtbPrec.Rows.Add("inches")
+        'ucrPrecipUnits.SetPossibleValues(dtbPrec)
+        ucrPrecipUnits.SetTableNameAndField("form_daily2", "precipUnits")
+        ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
         AssignLinkToKeyField(ucrPrecipUnits)
         ucrPrecipUnits.PopulateControl()
         ucrPrecipUnits.SetViewType("precipUnits")
 
-        ucrTempUnits.SetField("temperatureUnits")
-        ucrTempUnits.SetTableName("form_daily2")
-        ucrTempUnits.bFillFromDataBase = False
-        dtbTemp.Columns.Add("temperatureUnits", GetType(String))
-        dtbTemp.Rows.Add("Deg C")
-        dtbTemp.Rows.Add("Deg F")
-        ucrTempUnits.SetPossibleValues(dtbTemp)
+        'ucrTempUnits.SetField("temperatureUnits")
+        'ucrTempUnits.SetTableName("form_daily2")
+        'ucrTempUnits.bFillFromDataBase = False
+        'dtbTemp.Columns.Add("temperatureUnits", GetType(String))
+        'dtbTemp.Rows.Add("Deg C")
+        'dtbTemp.Rows.Add("Deg F")
+        'ucrTempUnits.SetPossibleValues(dtbTemp)
+        ucrTempUnits.SetTableNameAndField("form_daily2", "temperatureUnits")
+        ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
         AssignLinkToKeyField(ucrTempUnits)
         ucrTempUnits.PopulateControl()
         ucrTempUnits.SetViewType("temperatureUnits")
 
-        ucrInputSequncer.SetTableName("seq_daily_element")
-        ucrInputSequncer.SetField("seq")
+        'ucrInputSequncer.SetTableName("seq_daily_element")
+        'ucrInputSequncer.SetField("seq")
+        ucrInputSequncer.SetTableNameAndField("seq_daily_element", "seq")
         ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
 
 
-        dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
-        dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
-        dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
-        dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
-        dctNavigationFields.Add("hh", New List(Of String)({"hh"}))
+        'dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
+        'dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
+        'dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
+        'dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
+        'dctNavigationFields.Add("hh", New List(Of String)({"hh"}))
 
-        ucrDaiy2Navigation.SetFields(dctNavigationFields)
-        ucrDaiy2Navigation.SetTableName("form_daily2")
+        'ucrDaiy2Navigation.SetFields(dctNavigationFields)
+        'ucrDaiy2Navigation.SetTableName("form_daily2")
 
-        dctNavigationKeyControls.Add("stationId", ucrStationSelector)
-        dctNavigationKeyControls.Add("elementId", ucrElementSelector)
-        dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
-        dctNavigationKeyControls.Add("mm", ucrMonth)
-        dctNavigationKeyControls.Add("hh", ucrHour)
+        ucrDaiy2Navigation.SetTableNameAndFields("form_daily2", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
 
-        ucrDaiy2Navigation.SetKeyControls(dctNavigationKeyControls)
+        'dctNavigationKeyControls.Add("stationId", ucrStationSelector)
+        'dctNavigationKeyControls.Add("elementId", ucrElementSelector)
+        'dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
+        'dctNavigationKeyControls.Add("mm", ucrMonth)
+        'dctNavigationKeyControls.Add("hh", ucrHour)
+
+        'ucrDaiy2Navigation.SetKeyControls(dctNavigationKeyControls)
+        ucrDaiy2Navigation.SetKeyControls("stationId", ucrStationSelector)
+        ucrDaiy2Navigation.SetKeyControls("elementId", ucrElementSelector)
+        ucrDaiy2Navigation.SetKeyControls("yyyy", ucrYearSelector)
+        ucrDaiy2Navigation.SetKeyControls("mm", ucrMonth)
+        ucrDaiy2Navigation.SetKeyControls("hh", ucrHour)
 
         ucrDaiy2Navigation.PopulateControl()
-        ucrFormDaily.PopulateControl()
+        'ucrFormDaily.PopulateControl()
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
