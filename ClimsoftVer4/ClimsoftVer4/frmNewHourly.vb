@@ -7,16 +7,23 @@
         End If
     End Sub
     Private Sub InitaliseDialog()
+        Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
+        Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
-        Dim d As New Dictionary(Of String, List(Of String))
-
-        d.Add("stationId", New List(Of String)({"stationId"}))
-        d.Add("elementId", New List(Of String)({"elementId"}))
-        d.Add("yyyy", New List(Of String)({"yyyy"}))
-        d.Add("mm", New List(Of String)({"mm"}))
-        d.Add("dd", New List(Of String)({"dd"}))
-        ucrNavigation.SetFields(d)
+        dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
+        dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
+        dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
+        dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
+        dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
+        ucrNavigation.SetFields(dctNavigationFields)
         ucrNavigation.SetTableName("form_hourly")
+
+        dctNavigationKeyControls.Add("stationId", ucrStationSelector)
+        dctNavigationKeyControls.Add("elementId", ucrElementSelector)
+        dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
+        dctNavigationKeyControls.Add("mm", ucrMonth)
+        dctNavigationKeyControls.Add("dd", ucrDay)
+        ucrNavigation.SetKeyControls(dctNavigationKeyControls)
 
 
         ucrStationSelector.AddLinkedControlFilters(ucrNavigation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
@@ -48,7 +55,7 @@
         For Each ctl In ucrHourly.Controls
             If TypeOf ctl Is ucrValueFlagPeriod Then
                 ctrltemp = ctl
-                ctrltemp.ucrValue.TextboxValue = ucrInputValue.TextboxValue
+                ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
             End If
         Next
     End Sub
@@ -88,4 +95,7 @@
         formDataView.DataGridView.Dock = DockStyle.Top
     End Sub
 
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
 End Class

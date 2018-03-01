@@ -155,7 +155,6 @@ Partial Class frmNewHourly
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(334, 570)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
