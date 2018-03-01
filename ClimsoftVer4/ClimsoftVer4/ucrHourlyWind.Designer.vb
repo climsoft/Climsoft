@@ -386,6 +386,7 @@ Partial Class ucrHourlyWind
         Me.ucrDirectionSpeedFlag0.Name = "ucrDirectionSpeedFlag0"
         Me.ucrDirectionSpeedFlag0.Size = New System.Drawing.Size(354, 40)
         Me.ucrDirectionSpeedFlag0.TabIndex = 58
+        Me.ucrDirectionSpeedFlag0.Tag = "00"
         '
         'lblFF
         '
@@ -404,6 +405,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag1.Name = "UcrDirectionSpeedFlag1"
         Me.UcrDirectionSpeedFlag1.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag1.TabIndex = 60
+        Me.UcrDirectionSpeedFlag1.Tag = "01"
         '
         'UcrDirectionSpeedFlag2
         '
@@ -412,6 +414,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag2.Name = "UcrDirectionSpeedFlag2"
         Me.UcrDirectionSpeedFlag2.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag2.TabIndex = 61
+        Me.UcrDirectionSpeedFlag2.Tag = "02"
         '
         'UcrDirectionSpeedFlag3
         '
@@ -420,6 +423,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag3.Name = "UcrDirectionSpeedFlag3"
         Me.UcrDirectionSpeedFlag3.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag3.TabIndex = 62
+        Me.UcrDirectionSpeedFlag3.Tag = "03"
         '
         'UcrDirectionSpeedFlag4
         '
@@ -428,6 +432,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag4.Name = "UcrDirectionSpeedFlag4"
         Me.UcrDirectionSpeedFlag4.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag4.TabIndex = 63
+        Me.UcrDirectionSpeedFlag4.Tag = "04"
         '
         'UcrDirectionSpeedFlag5
         '
@@ -436,6 +441,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag5.Name = "UcrDirectionSpeedFlag5"
         Me.UcrDirectionSpeedFlag5.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag5.TabIndex = 64
+        Me.UcrDirectionSpeedFlag5.Tag = "05"
         '
         'UcrDirectionSpeedFlag6
         '
@@ -444,6 +450,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag6.Name = "UcrDirectionSpeedFlag6"
         Me.UcrDirectionSpeedFlag6.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag6.TabIndex = 65
+        Me.UcrDirectionSpeedFlag6.Tag = "06"
         '
         'UcrDirectionSpeedFlag7
         '
@@ -452,6 +459,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag7.Name = "UcrDirectionSpeedFlag7"
         Me.UcrDirectionSpeedFlag7.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag7.TabIndex = 66
+        Me.UcrDirectionSpeedFlag7.Tag = "07"
         '
         'UcrDirectionSpeedFlag8
         '
@@ -460,6 +468,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag8.Name = "UcrDirectionSpeedFlag8"
         Me.UcrDirectionSpeedFlag8.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag8.TabIndex = 67
+        Me.UcrDirectionSpeedFlag8.Tag = "08"
         '
         'UcrDirectionSpeedFlag9
         '
@@ -468,6 +477,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag9.Name = "UcrDirectionSpeedFlag9"
         Me.UcrDirectionSpeedFlag9.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag9.TabIndex = 68
+        Me.UcrDirectionSpeedFlag9.Tag = "09"
         '
         'UcrDirectionSpeedFlag10
         '
@@ -476,6 +486,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag10.Name = "UcrDirectionSpeedFlag10"
         Me.UcrDirectionSpeedFlag10.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag10.TabIndex = 69
+        Me.UcrDirectionSpeedFlag10.Tag = "10"
         '
         'UcrDirectionSpeedFlag11
         '
@@ -484,6 +495,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag11.Name = "UcrDirectionSpeedFlag11"
         Me.UcrDirectionSpeedFlag11.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag11.TabIndex = 70
+        Me.UcrDirectionSpeedFlag11.Tag = "11"
         '
         'UcrDirectionSpeedFlag12
         '
@@ -492,6 +504,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag12.Name = "UcrDirectionSpeedFlag12"
         Me.UcrDirectionSpeedFlag12.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag12.TabIndex = 71
+        Me.UcrDirectionSpeedFlag12.Tag = "12"
         '
         'UcrDirectionSpeedFlag13
         '
@@ -500,6 +513,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag13.Name = "UcrDirectionSpeedFlag13"
         Me.UcrDirectionSpeedFlag13.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag13.TabIndex = 72
+        Me.UcrDirectionSpeedFlag13.Tag = "13"
         '
         'UcrDirectionSpeedFlag14
         '
@@ -508,6 +522,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag14.Name = "UcrDirectionSpeedFlag14"
         Me.UcrDirectionSpeedFlag14.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag14.TabIndex = 73
+        Me.UcrDirectionSpeedFlag14.Tag = "14"
         '
         'UcrDirectionSpeedFlag15
         '
@@ -516,6 +531,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag15.Name = "UcrDirectionSpeedFlag15"
         Me.UcrDirectionSpeedFlag15.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag15.TabIndex = 74
+        Me.UcrDirectionSpeedFlag15.Tag = "15"
         '
         'UcrDirectionSpeedFlag16
         '
@@ -524,6 +540,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag16.Name = "UcrDirectionSpeedFlag16"
         Me.UcrDirectionSpeedFlag16.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag16.TabIndex = 75
+        Me.UcrDirectionSpeedFlag16.Tag = "16"
         '
         'UcrDirectionSpeedFlag17
         '
@@ -532,6 +549,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag17.Name = "UcrDirectionSpeedFlag17"
         Me.UcrDirectionSpeedFlag17.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag17.TabIndex = 76
+        Me.UcrDirectionSpeedFlag17.Tag = "17"
         '
         'UcrDirectionSpeedFlag18
         '
@@ -540,6 +558,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag18.Name = "UcrDirectionSpeedFlag18"
         Me.UcrDirectionSpeedFlag18.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag18.TabIndex = 77
+        Me.UcrDirectionSpeedFlag18.Tag = "18"
         '
         'UcrDirectionSpeedFlag19
         '
@@ -548,6 +567,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag19.Name = "UcrDirectionSpeedFlag19"
         Me.UcrDirectionSpeedFlag19.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag19.TabIndex = 78
+        Me.UcrDirectionSpeedFlag19.Tag = "19"
         '
         'UcrDirectionSpeedFlag20
         '
@@ -556,6 +576,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag20.Name = "UcrDirectionSpeedFlag20"
         Me.UcrDirectionSpeedFlag20.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag20.TabIndex = 79
+        Me.UcrDirectionSpeedFlag20.Tag = "20"
         '
         'UcrDirectionSpeedFlag21
         '
@@ -564,6 +585,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag21.Name = "UcrDirectionSpeedFlag21"
         Me.UcrDirectionSpeedFlag21.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag21.TabIndex = 80
+        Me.UcrDirectionSpeedFlag21.Tag = "21"
         '
         'UcrDirectionSpeedFlag22
         '
@@ -572,6 +594,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag22.Name = "UcrDirectionSpeedFlag22"
         Me.UcrDirectionSpeedFlag22.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag22.TabIndex = 81
+        Me.UcrDirectionSpeedFlag22.Tag = "22"
         '
         'UcrDirectionSpeedFlag23
         '
@@ -580,6 +603,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag23.Name = "UcrDirectionSpeedFlag23"
         Me.UcrDirectionSpeedFlag23.Size = New System.Drawing.Size(354, 40)
         Me.UcrDirectionSpeedFlag23.TabIndex = 82
+        Me.UcrDirectionSpeedFlag23.Tag = "23"
         '
         'ucrHourlyWind
         '

@@ -20,30 +20,38 @@ Public Class ucrDirectionSpeedFlag
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
-        ucrDDFF.SetTableName(strNewTable)
-        ucrDD.SetTableName(strNewTable)
-        ucrFF.SetTableName(strNewTable)
+        'ucrDirectionSpeed.SetTableName(strNewTable)
+        ucrDirection.SetTableName(strNewTable)
+        ucrSpeed.SetTableName(strNewTable)
         ucrFlag.SetTableName(strNewTable)
     End Sub
 
-    Public Sub SetDDFFFlagFields(strDDFieldName As String, strFFFieldName As String, strFlagFieldName As String)
-        SetFields(New List(Of String)({strDDFieldName, strFFFieldName, strFlagFieldName}))
-        SetDDField(strDDFieldName)
-        SetFFField(strFFFieldName)
+    Public Sub SetDirectionSpeedFlagFields(strDirectionFieldName As String, strSpeedFieldName As String, strFlagFieldName As String)
+        SetFields(New List(Of String)({strDirectionFieldName, strSpeedFieldName, strFlagFieldName}))
+        'SetDirectionSpeedField(strDirectionFieldName, strSpeedFieldName)
+        SetDirectionField(strDirectionFieldName)
+        SetSpeedField(strSpeedFieldName)
         SetFlagField(strFlagFieldName)
     End Sub
 
-    Public Sub SetTableNameAndDDFFFlagFields(strNewTable As String, strDDFieldName As String, strFFFieldName As String, strFlagFieldName As String)
-        SetTableName(strNewTable)
-        SetDDFFFlagFields(strDDFieldName, strFFFieldName, strFlagFieldName)
+    Public Sub SetTableNameAndDirectionSpeedFlagFields(strTableName As String, strDirectionFieldName As String, strSpeedFieldName As String, strFlagFieldName As String)
+        SetTableName(strTableName)
+        SetDirectionSpeedFlagFields(strDirectionFieldName, strSpeedFieldName, strFlagFieldName)
     End Sub
 
-    Public Sub SetDDField(strFieldName As String)
-        ucrDD.SetField(strFieldName)
+    'Public Sub SetDirectionSpeedField(strDirectionFieldName As String, strSpeedFieldName As String)
+
+    'Dim dctNewFields As New Dictionary(Of String, List(Of String))
+    'dctNewFields.Add(strDirectionFieldName, New List(Of String)({strDirectionFieldName, strSpeedFieldName}))
+    'ucrDirectionSpeed.SetFields(dctNewFields)
+    'End Sub
+
+    Public Sub SetDirectionField(strFieldName As String)
+        ucrDirection.SetField(strFieldName)
     End Sub
 
-    Public Sub SetFFField(strFieldName As String)
-        ucrFF.SetField(strFieldName)
+    Public Sub SetSpeedField(strFieldName As String)
+        ucrSpeed.SetField(strFieldName)
     End Sub
 
     Public Sub SetFlagField(strFieldName As String)
@@ -52,72 +60,84 @@ Public Class ucrDirectionSpeedFlag
 
     Public Overrides Sub SetFilter(clsNewFilter As TableFilter)
         MyBase.SetFilter(clsNewFilter)
-        ucrDDFF.SetFilter(clsNewFilter:=clsNewFilter)
-        ucrDD.SetFilter(clsNewFilter:=clsNewFilter)
-        ucrFF.SetFilter(clsNewFilter:=clsNewFilter)
+        'ucrDirectionSpeed.SetFilter(clsNewFilter:=clsNewFilter)
+        ucrDirection.SetFilter(clsNewFilter:=clsNewFilter)
+        ucrSpeed.SetFilter(clsNewFilter:=clsNewFilter)
         ucrFlag.SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
 
     Public Overrides Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
         MyBase.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
-        ucrDDFF.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
-        ucrDD.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
-        ucrFF.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        'ucrDirectionSpeed.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        ucrDirection.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        ucrSpeed.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrFlag.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        ucrDDFF.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        ucrDD.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        ucrFF.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        'ucrDirectionSpeed.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        ucrDirection.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        ucrSpeed.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
     End Sub
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
             MyBase.PopulateControl()
-            ucrDDFF.PopulateControl()
-            ucrDD.PopulateControl()
-            ucrFF.PopulateControl()
+            'ucrDirectionSpeed.PopulateControl()
+            ucrDirection.PopulateControl()
+            ucrSpeed.PopulateControl()
             ucrFlag.PopulateControl()
         End If
     End Sub
 
     Public Overrides Sub Clear()
-        ucrDDFF.Clear()
-        ucrDD.Clear()
-        ucrFF.Clear()
+        ucrDirectionSpeed.Clear()
+        ucrDirection.Clear()
+        ucrSpeed.Clear()
         ucrFlag.Clear()
     End Sub
 
     Private Sub ucrDirectionSpeedFlag_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            ucrDDFF.SetValidationTypeAsNumeric()
-            ucrDD.SetValidationTypeAsNumeric()
-            ucrFF.SetValidationTypeAsNumeric()
+            ucrDirectionSpeed.SetValidationTypeAsNumeric()
+            ucrDirection.SetValidationTypeAsNumeric()
+            ucrSpeed.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             bFirstLoad = False
         End If
     End Sub
 
-    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDD.evtKeyDown, ucrFF.evtKeyDown, ucrFlag.evtKeyDown
+    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeed.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
 
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
             'My.Computer.Keyboard.SendKeys("{TAB}")
-            If sender Is ucrDDFF Then
-                ucrDDFF.TextHandling(sender, e)
+            If sender Is ucrDirectionSpeed Then
+                ucrDirectionSpeed.TextHandling(sender, e)
             End If
             RaiseEvent evtGoToNextVFPControl(Me, e)
         End If
 
     End Sub
 
-    Private Sub ucrDDFF_TextChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtTextChanged
+    Private Sub ucrDDFF_TextChanged(sender As Object, e As EventArgs) Handles ucrDirectionSpeed.evtTextChanged
 
 
+    End Sub
 
+    Public Overrides Sub SetValue(objNewValue As Object)
+        Dim lstValues As List(Of Object)
+
+        MyBase.SetValue(objNewValue)
+        lstValues = TryCast(objNewValue, List(Of Object))
+        If lstValues.Count = 3 Then
+            'ucrDirectionSpeed.SetValue(lstValues(0) + lstValues(1))
+            ucrDirection.SetValue(lstValues(0))
+            ucrSpeed.SetValue(lstValues(1))
+            ucrFlag.SetValue(lstValues(2))
+        End If
     End Sub
 
 End Class

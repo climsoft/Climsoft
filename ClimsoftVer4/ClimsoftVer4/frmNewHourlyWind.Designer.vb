@@ -42,12 +42,12 @@ Partial Class frmNewHourlyWind
         Me.btnHourSelection = New System.Windows.Forms.Button()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
+        Me.ucrHourlyWind = New ClimsoftVer4.ucrHourlyWind()
         Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.ucrHourlyWind = New ClimsoftVer4.ucrHourlyWind()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -255,6 +255,14 @@ Partial Class frmNewHourlyWind
         Me.txtSequencer.TabIndex = 676
         Me.txtSequencer.Text = "seq_month_day"
         '
+        'ucrHourlyWind
+        '
+        Me.ucrHourlyWind.Location = New System.Drawing.Point(11, 165)
+        Me.ucrHourlyWind.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrHourlyWind.Name = "ucrHourlyWind"
+        Me.ucrHourlyWind.Size = New System.Drawing.Size(963, 598)
+        Me.ucrHourlyWind.TabIndex = 678
+        '
         'ucrNavigation
         '
         Me.ucrNavigation.Location = New System.Drawing.Point(175, 786)
@@ -295,14 +303,6 @@ Partial Class frmNewHourlyWind
         Me.ucrStationSelector.Size = New System.Drawing.Size(276, 37)
         Me.ucrStationSelector.TabIndex = 221
         '
-        'ucrHourlyWind
-        '
-        Me.ucrHourlyWind.Location = New System.Drawing.Point(11, 165)
-        Me.ucrHourlyWind.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrHourlyWind.Name = "ucrHourlyWind"
-        Me.ucrHourlyWind.Size = New System.Drawing.Size(963, 598)
-        Me.ucrHourlyWind.TabIndex = 678
-        '
         'frmNewHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -336,7 +336,7 @@ Partial Class frmNewHourlyWind
         Me.Controls.Add(lblYear)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "frmNewHourlyWind"
-        Me.Text = "s"
+        Me.Text = "Hourly Wind Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

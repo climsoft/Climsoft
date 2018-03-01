@@ -22,30 +22,30 @@ Partial Class ucrDirectionSpeedFlag
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrDD = New ClimsoftVer4.ucrTextBox()
-        Me.ucrFF = New ClimsoftVer4.ucrTextBox()
+        Me.ucrDirection = New ClimsoftVer4.ucrTextBox()
+        Me.ucrSpeed = New ClimsoftVer4.ucrTextBox()
         Me.ucrFlag = New ClimsoftVer4.ucrTextBox()
-        Me.ucrDDFF = New ClimsoftVer4.ucrTextBox()
+        Me.ucrDirectionSpeed = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'ucrDD
+        'ucrDirection
         '
-        Me.ucrDD.Location = New System.Drawing.Point(91, 0)
-        Me.ucrDD.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrDD.Name = "ucrDD"
-        Me.ucrDD.Size = New System.Drawing.Size(82, 37)
-        Me.ucrDD.TabIndex = 581
-        Me.ucrDD.TextboxValue = ""
+        Me.ucrDirection.Location = New System.Drawing.Point(91, 0)
+        Me.ucrDirection.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrDirection.Name = "ucrDirection"
+        Me.ucrDirection.Size = New System.Drawing.Size(82, 37)
+        Me.ucrDirection.TabIndex = 581
+        Me.ucrDirection.TextboxValue = ""
         '
-        'ucrFF
+        'ucrSpeed
         '
-        Me.ucrFF.Location = New System.Drawing.Point(176, 0)
-        Me.ucrFF.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrFF.Name = "ucrFF"
-        Me.ucrFF.Size = New System.Drawing.Size(82, 37)
-        Me.ucrFF.TabIndex = 582
-        Me.ucrFF.TextboxValue = ""
+        Me.ucrSpeed.Location = New System.Drawing.Point(176, 0)
+        Me.ucrSpeed.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrSpeed.Name = "ucrSpeed"
+        Me.ucrSpeed.Size = New System.Drawing.Size(82, 37)
+        Me.ucrSpeed.TabIndex = 582
+        Me.ucrSpeed.TextboxValue = ""
         '
         'ucrFlag
         '
@@ -56,23 +56,23 @@ Partial Class ucrDirectionSpeedFlag
         Me.ucrFlag.TabIndex = 583
         Me.ucrFlag.TextboxValue = ""
         '
-        'ucrDDFF
+        'ucrDirectionSpeed
         '
-        Me.ucrDDFF.Location = New System.Drawing.Point(6, 0)
-        Me.ucrDDFF.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
-        Me.ucrDDFF.Name = "ucrDDFF"
-        Me.ucrDDFF.Size = New System.Drawing.Size(82, 37)
-        Me.ucrDDFF.TabIndex = 584
-        Me.ucrDDFF.TextboxValue = ""
+        Me.ucrDirectionSpeed.Location = New System.Drawing.Point(6, 0)
+        Me.ucrDirectionSpeed.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrDirectionSpeed.Name = "ucrDirectionSpeed"
+        Me.ucrDirectionSpeed.Size = New System.Drawing.Size(82, 37)
+        Me.ucrDirectionSpeed.TabIndex = 584
+        Me.ucrDirectionSpeed.TextboxValue = ""
         '
         'ucrDirectionSpeedFlag
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrDDFF)
+        Me.Controls.Add(Me.ucrDirectionSpeed)
         Me.Controls.Add(Me.ucrFlag)
-        Me.Controls.Add(Me.ucrFF)
-        Me.Controls.Add(Me.ucrDD)
+        Me.Controls.Add(Me.ucrSpeed)
+        Me.Controls.Add(Me.ucrDirection)
         Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.Name = "ucrDirectionSpeedFlag"
         Me.Size = New System.Drawing.Size(354, 40)
@@ -81,8 +81,8 @@ Partial Class ucrDirectionSpeedFlag
 
     End Sub
 
-    Friend WithEvents ucrDD As ucrTextBox
-    Friend WithEvents ucrFF As ucrTextBox
+    Friend WithEvents ucrDirection As ucrTextBox
+    Friend WithEvents ucrSpeed As ucrTextBox
     Friend WithEvents ucrFlag As ucrTextBox
-    Friend WithEvents ucrDDFF As ucrTextBox
+    Friend WithEvents ucrDirectionSpeed As ucrTextBox
 End Class

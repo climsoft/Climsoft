@@ -37,15 +37,14 @@
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim d As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
+            Dim dct As New Dictionary(Of String, List(Of String))
             'InitialiseStationDataTable()
             'SortByStationName()
-            SetTableName(strStationsTableName)
-            d.Add(strStationName, New List(Of String)({strStationName}))
-            d.Add(strStationID, New List(Of String)({strStationID}))
-            d.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
-            SetFields(d)
+            dct.Add(strStationName, New List(Of String)({strStationName}))
+            dct.Add(strStationID, New List(Of String)({strStationID}))
+            dct.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
+            SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
             bFirstLoad = False
