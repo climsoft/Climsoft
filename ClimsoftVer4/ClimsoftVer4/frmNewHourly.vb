@@ -10,6 +10,10 @@
         Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
         Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
+        ucrHourly.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
+        AssignLinkToKeyField(ucrHourly)
+        ucrHourly.PopulateControl()
+
         dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
         dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
         dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
@@ -24,19 +28,7 @@
         dctNavigationKeyControls.Add("mm", ucrMonth)
         dctNavigationKeyControls.Add("dd", ucrDay)
         ucrNavigation.SetKeyControls(dctNavigationKeyControls)
-
-
-        ucrStationSelector.AddLinkedControlFilters(ucrNavigation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrElementSelector.AddLinkedControlFilters(ucrNavigation, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrYearSelector.AddLinkedControlFilters(ucrNavigation, "Year", "==", strLinkedFieldName:="yyyy", bForceValuesAsString:=False)
-        ucrMonth.AddLinkedControlFilters(ucrNavigation, "MonthId", "==", strLinkedFieldName:="mm", bForceValuesAsString:=False)
-        ucrDay.AddLinkedControlFilters(ucrNavigation, "day", "==", strLinkedFieldName:="dd", bForceValuesAsString:=False)
-
         ucrNavigation.PopulateControl()
-        ucrHourly.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
-        AssignLinkToKeyField(ucrHourly)
-        ucrHourly.PopulateControl()
-
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -97,5 +89,20 @@
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        If clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified Then
+            Try
+                clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
+                clsDataConnection.db.SaveChanges()
+                MessageBox.Show("Record has been updated", "Updating Record")
+            Catch
+                MessageBox.Show("Record has not been updated", "Updating Record")
+            End Try
+        Else
+            MessageBox.Show("No values have been update, can not update this record", "Updating Record")
+        End If
     End Sub
 End Class
