@@ -15,8 +15,6 @@ Public Class ucrHourlyWind
     Public bUpdating As Boolean = False
 
     Public Overrides Sub PopulateControl()
-        Dim ucrDDFFFlag As ucrDirectionSpeedFlag
-        Dim ctrTotal As ucrTextBox
         Dim clsCurrentFilter As TableFilter
 
         If Not bFirstLoad Then
@@ -36,11 +34,9 @@ Public Class ucrHourlyWind
 
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDDFFFlag = ctr 'TODO remove this after testing
-                    ucrDDFFFlag.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ucrDDFFFlag.Tag), GetValue(strSpeedFieldName & ucrDDFFFlag.Tag), GetValue(strFlagFieldName & ucrDDFFFlag.Tag)}))
+                    ctr.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    ctrTotal = ctr 'TODO remove this after testing
-                    ctrTotal.SetValue(GetValue(strTotalFieldName))
+                    ctr.SetValue(GetValue(strTotalFieldName))
                 End If
             Next
         End If
@@ -57,7 +53,6 @@ Public Class ucrHourlyWind
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     'lstValueFlagPeriodControls.Add(ctr)
-                    'ctrVFP = DirectCast(ctr, ucrDirectionSpeedFlag)
                     ctrDDFFFlag = ctr
                     lstFields.Add(strDirectionFieldName & ctrDDFFFlag.Tag)
                     lstFields.Add(strSpeedFieldName & ctrDDFFFlag.Tag)
@@ -83,11 +78,9 @@ Public Class ucrHourlyWind
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         Dim ctr As ucrTextBox
-
         If TypeOf sender Is ucrTextBox Then
-            'ctr = DirectCast(sender, ucrTextBox)
             ctr = sender
-            CallByName(fhourlyWindRecord, ctr.GetField, CallType.Set, ctr.GetValue)
+            CallByName(fhourlyWindRecord, sender.GetField, CallType.Set, sender.GetValue)
         End If
     End Sub
 
@@ -99,7 +92,8 @@ Public Class ucrHourlyWind
             ctrDDFFFlag = sender
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    'TODO needs modification here. for enable all months functionality
+                    'TODO 
+                    'needs modification here. for hour selection functionality
                     If ctr.Tag = ctrDDFFFlag.Tag + 1 Then
                         If ctr.Enabled Then
                             ctr.Focus()
@@ -153,22 +147,17 @@ Public Class ucrHourlyWind
 
     Public Sub HourSelection(bselectAllHours As Boolean)
         If bselectAllHours Then
+        Else
 
         End If
     End Sub
 
     Public Overrides Sub Clear()
-
-        Dim ctr As Control 'TODO THIS COULD BE REMOVED AFTER TESTING
-        Dim ctrTotal As ucrTextBox
-        Dim ctrVFP As ucrValueFlagPeriod
         For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr 'TODO THIS COULD BE REMOVED AFTER TESTING
-                ctrVFP.Clear()
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ctr.Clear()
             ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr 'TODO THIS COULD BE REMOVED AFTER TESTING
-                ctrTotal.Clear()
+                ctr.Clear()
             End If
         Next
     End Sub
