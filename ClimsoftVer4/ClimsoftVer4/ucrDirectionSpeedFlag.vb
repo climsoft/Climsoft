@@ -16,6 +16,8 @@
 
 Public Class ucrDirectionSpeedFlag
     Private bFirstLoad As Boolean = True
+    Private iDirectionDigits As Integer = 2
+    Private iSpeedDigits As Integer = 2
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
@@ -93,38 +95,10 @@ Public Class ucrDirectionSpeedFlag
     End Sub
 
     Public Overrides Sub Clear()
-        ucrDirectionSpeed.Clear()
+        ucrDDFF.Clear()
         ucrDirection.Clear()
         ucrSpeed.Clear()
         ucrFlag.Clear()
-    End Sub
-
-    Private Sub ucrDirectionSpeedFlag_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            ucrDirectionSpeed.SetValidationTypeAsNumeric()
-            ucrDirection.SetValidationTypeAsNumeric()
-            ucrSpeed.SetValidationTypeAsNumeric()
-            ucrFlag.SetTextToUpper()
-            bFirstLoad = False
-        End If
-    End Sub
-
-    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeed.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
-
-        'If {ENTER} key is pressed
-        If e.KeyCode = Keys.Enter Then
-            'My.Computer.Keyboard.SendKeys("{TAB}")
-            If sender Is ucrDirectionSpeed Then
-                ucrDirectionSpeed.TextHandling(sender, e)
-            End If
-            RaiseEvent evtGoToNextVFPControl(Me, e)
-        End If
-
-    End Sub
-
-    Private Sub ucrDDFF_TextChanged(sender As Object, e As EventArgs) Handles ucrDirectionSpeed.evtTextChanged
-
-
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
@@ -140,4 +114,218 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
+    Public Sub SetBackColor(backColor As Color)
+        ucrDDFF.SetBackColor(backColor)
+        ucrDirection.SetBackColor(backColor)
+        ucrSpeed.SetBackColor(backColor)
+        ucrFlag.SetBackColor(backColor)
+    End Sub
+
+    Private Sub ucrDirectionSpeedFlag_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            ucrFlag.SetTextToUpper()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Public Sub SetDirectionValidation(elementId As Integer)
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition = New DataCall
+        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
+        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
+        clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            ucrDirection.SetValidationTypeAsNumeric(dcmMin:=dtbl.Rows(0).Item("lowerLimit"), dcmMax:=dtbl.Rows(0).Item("upperLimit"))
+        End If
+    End Sub
+
+    Public Sub SetSpeedValidation(elemCode As Integer)
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition = New DataCall
+        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
+        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
+        clsDataDefinition.SetFilter("elementId", "=", elemCode, bForceValuesAsString:=False)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=dtbl.Rows(0).Item("lowerLimit"), dcmMax:=dtbl.Rows(0).Item("upperLimit"))
+        End If
+    End Sub
+
+    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
+        'TODO
+        'FIND AWAY OF PASSING ME AND THE SENDER TO THE evtGoToNextVFPControl
+        'If {ENTER} key is pressed
+        If e.KeyCode = Keys.Enter Then
+            If sender Is ucrDDFF.txtBox Then
+                If ucrDDFFEnter() Then
+                    'My.Computer.Keyboard.SendKeys("{TAB}")
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                End If
+            ElseIf sender Is ucrDirection.txtBox Then
+                If QcForDirection() Then
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                End If
+            ElseIf sender Is ucrSpeed.txtBox Then
+                If QcForSpeed() Then
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                End If
+            ElseIf sender Is ucrFlag.txtBox Then
+                RaiseEvent evtGoToNextVFPControl(Me, e)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrDDFF_TextChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtTextChanged
+
+
+    End Sub
+
+    Private Function ucrDDFFEnter() As Boolean
+        Dim bValuesCorrect As Boolean = False
+        If Not ucrDDFF.IsEmpty() Then
+            'Check for an observation flag in the texbox for observation value.
+            'If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
+            If IsNumeric(Strings.Right(ucrDDFF.GetValue, 1)) Then
+                'Then Flag must be blank
+                ucrFlag.SetValue("")
+            Else
+                'Get observation flag from the texbox 
+                'flag Is a single letter added as the last character 
+                'assign obsFlag to correct texbox on the form
+                ucrFlag.SetValue(Strings.Right(ucrDDFF.GetValue, 1))
+                'Get the observation value by leaving out the last character from the string entered in the textbox
+                ucrDDFF.SetValue(Strings.Left(ucrDDFF.GetValue, ucrDDFF.GetValue.Length - 1))
+            End If
+
+            'Check that ddff is numeric
+            If IsNumeric(ucrDDFF.GetValue) Then
+                If ucrDDFF.GetValue.Length = iDirectionDigits + iSpeedDigits Then
+                    ucrDDFF.SetBackColor(Color.White)
+                    bValuesCorrect = True
+                    'If number of digits is correct then separate dd and ff
+                    ucrSpeed.SetValue(Strings.Right(ucrDDFF.GetValue, iSpeedDigits))
+                    ucrDirection.SetValue(Strings.Left(ucrDDFF.GetValue, iDirectionDigits))
+                Else
+                    ucrDDFF.SetBackColor(Color.Cyan)
+                    ucrDDFF.Focus()
+                    bValuesCorrect = False
+                    MsgBox("Wrong number of digits for ddff!", MsgBoxStyle.Exclamation)
+                End If
+            Else
+                ucrDDFF.SetBackColor(Color.Red)
+                ucrDDFF.Focus()
+                bValuesCorrect = False
+                MsgBox("Number expected!", MsgBoxStyle.Critical)
+            End If
+            If bValuesCorrect Then
+                If QcForDirection() AndAlso QcForSpeed() Then
+                    bValuesCorrect = True
+                Else
+                    ucrDDFF.SetBackColor(Color.Cyan)
+                    ucrDDFF.Focus()
+                    bValuesCorrect = False
+                End If
+            End If
+        Else
+            bValuesCorrect = True
+        End If
+        Return bValuesCorrect
+    End Function
+
+    Private Function QcForDirection() As Boolean
+        'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
+        'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
+        Dim bValuesCorrect As Boolean = False
+        Dim iType As Integer
+        'QC checks for  direction
+        If Not ucrDirection.IsEmpty() Then
+            iType = ucrDirection.ValidateNumeric(ucrDirection.GetValue)
+            If iType = 0 Then
+                ucrDirection.SetBackColor(Color.White)
+                bValuesCorrect = True
+            ElseIf iType = 1
+                ucrDirection.SetBackColor(Color.Red)
+                ucrDirection.Focus()
+                bValuesCorrect = False
+                MsgBox("Number expected!", MsgBoxStyle.Critical)
+            ElseIf iType = 2
+                'for out of range
+                'check if it was lower limit violation and display appropriate message
+                If ucrDirection.GetDcmMinimum <= Val(ucrDirection.GetValue) Then
+                    ucrDirection.SetBackColor(Color.White)
+                    bValuesCorrect = True
+                Else
+                    ucrDirection.SetBackColor(Color.Cyan)
+                    ucrDirection.Focus()
+                    bValuesCorrect = False
+                    MsgBox("Value lower than lowerlimit of: " & ucrDirection.GetDcmMinimum, MsgBoxStyle.Exclamation)
+                End If
+
+                'check if it was upper limit violation
+                If ucrDirection.GetDcmMaximum >= Val(ucrDirection.GetValue) Then
+                    ucrDirection.SetBackColor(Color.White)
+                    bValuesCorrect = True
+                Else
+                    ucrDirection.SetBackColor(Color.Cyan)
+                    ucrDirection.Focus()
+                    bValuesCorrect = False
+                    MsgBox("Value higher than upperlimit of: " & ucrDirection.GetDcmMaximum, MsgBoxStyle.Exclamation)
+                End If
+            End If
+        End If
+        Return bValuesCorrect
+    End Function
+
+    Private Function QcForSpeed() As Boolean
+        'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
+        'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
+        Dim bValuesCorrect As Boolean = False
+        Dim iType As Integer
+        'QC checks for  direction
+        If Not ucrSpeed.IsEmpty() Then
+            iType = ucrSpeed.ValidateNumeric(ucrSpeed.GetValue)
+            If iType = 0 Then
+                ucrSpeed.SetBackColor(Color.White)
+                bValuesCorrect = True
+            ElseIf iType = 1
+                ucrSpeed.SetBackColor(Color.Red)
+                ucrSpeed.Focus()
+                bValuesCorrect = False
+                MsgBox("Number expected!", MsgBoxStyle.Critical)
+            ElseIf iType = 2
+                'for out of range
+                'check if it was lower limit violation and display appropriate message
+                If ucrSpeed.GetDcmMinimum <= Val(ucrSpeed.GetValue) Then
+                    ucrSpeed.SetBackColor(Color.White)
+                    bValuesCorrect = True
+                Else
+                    ucrSpeed.SetBackColor(Color.Cyan)
+                    ucrSpeed.Focus()
+                    bValuesCorrect = False
+                    MsgBox("Value lower than lowerlimit of: " & ucrSpeed.GetDcmMinimum, MsgBoxStyle.Exclamation)
+                End If
+
+                'check if it was upper limit violation
+                If ucrSpeed.GetDcmMaximum >= Val(ucrSpeed.GetValue) Then
+                    ucrSpeed.SetBackColor(Color.White)
+                    bValuesCorrect = True
+                Else
+                    ucrSpeed.SetBackColor(Color.Cyan)
+                    ucrSpeed.Focus()
+                    bValuesCorrect = False
+                    MsgBox("Value higher than upperlimit of: " & ucrSpeed.GetDcmMaximum, MsgBoxStyle.Exclamation)
+                End If
+            End If
+        End If
+        Return bValuesCorrect
+    End Function
+
 End Class
+

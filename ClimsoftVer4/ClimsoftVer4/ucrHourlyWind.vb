@@ -8,8 +8,7 @@ Public Class ucrHourlyWind
     Private strFlagFieldName As String = "ddflag"
     Private strTotalFieldName As String = "total"
 
-    'Private ucrLinkedYear As ucrYearSelector
-    'Private ucrLinkedMonth As ucrMonth
+    Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
@@ -85,6 +84,8 @@ Public Class ucrHourlyWind
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+        'TODO 
+        'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
         Dim ctr As Control
         Dim ctrDDFFFlag As ucrDirectionSpeedFlag
 
@@ -94,7 +95,7 @@ Public Class ucrHourlyWind
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     'TODO 
                     'needs modification here. for hour selection functionality
-                    If ctr.Tag = ctrDDFFFlag.Tag + 1 Then
+                    If Val(ctr.Tag) = Val(ctrDDFFFlag.Tag) + 1 Then
                         If ctr.Enabled Then
                             ctr.Focus()
                         End If
@@ -145,11 +146,61 @@ Public Class ucrHourlyWind
 
     End Sub
 
-    Public Sub HourSelection(bselectAllHours As Boolean)
-        If bselectAllHours Then
+    Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
+        bSelectAllHours = bNewSelectAllHours
+        If bSelectAllHours Then
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                    ctr.enabled = True
+                    ctr.SetBackColor(Color.White)
+                End If
+            Next
         Else
-
+            Dim clsDataDefinition As DataCall
+            Dim dtbl As DataTable
+            Dim iTagVal As Integer
+            Dim row As DataRow
+            clsDataDefinition = New DataCall
+            clsDataDefinition.SetTableName("form_hourly_time_selection")
+            clsDataDefinition.SetFields(New List(Of String)({"hh", "hh_selection"}))
+            dtbl = clsDataDefinition.GetDataTable()
+            If dtbl IsNot Nothing Then
+                For Each ctr In Me.Controls
+                    If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                        iTagVal = Val(Strings.Right(ctr.Tag, 2))
+                        row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
+                        If row IsNot Nothing Then
+                            ctr.enabled = False
+                            ctr.SetBackColor(Color.LightYellow)
+                        End If
+                        'SIMILAR IMPLEMENTATION WOULD AS ABOVE WOULD BE AS COMMENTED BELOW
+                        'For Each rTemp As DataRow In dtbl.Rows
+                        '    If Val(rTemp("hh")) = iTagVal AndAlso Val(rTemp("hh_selection")) = 0 Then
+                        '        ctr.enabled = False
+                        '        ctr.SetBackColor(Color.LightYellow)
+                        '        Exit For
+                        '    End If
+                        'Next
+                    End If
+                Next
+            End If
         End If
+    End Sub
+
+    Public Sub SetDirectionValidation(elementId As Integer)
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ctr.SetDirectionValidation(elementId)
+            End If
+        Next
+    End Sub
+
+    Public Sub SetSpeedValidation(elementId As Integer)
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ctr.SetSpeedValidation(elementId)
+            End If
+        Next
     End Sub
 
     Public Overrides Sub Clear()

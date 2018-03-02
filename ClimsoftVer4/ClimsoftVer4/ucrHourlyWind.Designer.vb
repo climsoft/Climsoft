@@ -77,6 +77,10 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag21 = New ClimsoftVer4.ucrDirectionSpeedFlag()
         Me.UcrDirectionSpeedFlag22 = New ClimsoftVer4.ucrDirectionSpeedFlag()
         Me.UcrDirectionSpeedFlag23 = New ClimsoftVer4.ucrDirectionSpeedFlag()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -87,7 +91,7 @@ Partial Class ucrHourlyWind
         Me.lblDD.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDD.Name = "lblDD"
         Me.lblDD.Size = New System.Drawing.Size(27, 20)
-        Me.lblDD.TabIndex = 3
+        Me.lblDD.TabIndex = 93
         Me.lblDD.Text = "dd"
         '
         'lblDDFF
@@ -97,7 +101,7 @@ Partial Class ucrHourlyWind
         Me.lblDDFF.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDDFF.Name = "lblDDFF"
         Me.lblDDFF.Size = New System.Drawing.Size(37, 20)
-        Me.lblDDFF.TabIndex = 4
+        Me.lblDDFF.TabIndex = 91
         Me.lblDDFF.Text = "ddff"
         '
         'lbl01
@@ -107,7 +111,7 @@ Partial Class ucrHourlyWind
         Me.lbl01.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl01.Name = "lbl01"
         Me.lbl01.Size = New System.Drawing.Size(27, 20)
-        Me.lbl01.TabIndex = 5
+        Me.lbl01.TabIndex = 101
         Me.lbl01.Text = "01"
         '
         'lblHour
@@ -117,7 +121,7 @@ Partial Class ucrHourlyWind
         Me.lblHour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(44, 20)
-        Me.lblHour.TabIndex = 6
+        Me.lblHour.TabIndex = 90
         Me.lblHour.Text = "Hour"
         '
         'lbl10
@@ -127,7 +131,7 @@ Partial Class ucrHourlyWind
         Me.lbl10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl10.Name = "lbl10"
         Me.lbl10.Size = New System.Drawing.Size(27, 20)
-        Me.lbl10.TabIndex = 24
+        Me.lbl10.TabIndex = 110
         Me.lbl10.Text = "10"
         '
         'lbl09
@@ -137,7 +141,7 @@ Partial Class ucrHourlyWind
         Me.lbl09.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl09.Name = "lbl09"
         Me.lbl09.Size = New System.Drawing.Size(27, 20)
-        Me.lbl09.TabIndex = 22
+        Me.lbl09.TabIndex = 109
         Me.lbl09.Text = "09"
         '
         'lbl08
@@ -147,7 +151,7 @@ Partial Class ucrHourlyWind
         Me.lbl08.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl08.Name = "lbl08"
         Me.lbl08.Size = New System.Drawing.Size(27, 20)
-        Me.lbl08.TabIndex = 21
+        Me.lbl08.TabIndex = 108
         Me.lbl08.Text = "08"
         '
         'lbl07
@@ -157,7 +161,7 @@ Partial Class ucrHourlyWind
         Me.lbl07.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl07.Name = "lbl07"
         Me.lbl07.Size = New System.Drawing.Size(27, 20)
-        Me.lbl07.TabIndex = 20
+        Me.lbl07.TabIndex = 107
         Me.lbl07.Text = "07"
         '
         'lbl06
@@ -167,7 +171,7 @@ Partial Class ucrHourlyWind
         Me.lbl06.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl06.Name = "lbl06"
         Me.lbl06.Size = New System.Drawing.Size(27, 20)
-        Me.lbl06.TabIndex = 19
+        Me.lbl06.TabIndex = 106
         Me.lbl06.Text = "06"
         '
         'lbl05
@@ -177,7 +181,7 @@ Partial Class ucrHourlyWind
         Me.lbl05.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl05.Name = "lbl05"
         Me.lbl05.Size = New System.Drawing.Size(27, 20)
-        Me.lbl05.TabIndex = 18
+        Me.lbl05.TabIndex = 105
         Me.lbl05.Text = "05"
         '
         'lbl04
@@ -187,7 +191,7 @@ Partial Class ucrHourlyWind
         Me.lbl04.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl04.Name = "lbl04"
         Me.lbl04.Size = New System.Drawing.Size(27, 20)
-        Me.lbl04.TabIndex = 17
+        Me.lbl04.TabIndex = 104
         Me.lbl04.Text = "04"
         '
         'lbl03
@@ -197,7 +201,7 @@ Partial Class ucrHourlyWind
         Me.lbl03.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl03.Name = "lbl03"
         Me.lbl03.Size = New System.Drawing.Size(27, 20)
-        Me.lbl03.TabIndex = 23
+        Me.lbl03.TabIndex = 103
         Me.lbl03.Text = "03"
         '
         'lbl02
@@ -207,7 +211,7 @@ Partial Class ucrHourlyWind
         Me.lbl02.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl02.Name = "lbl02"
         Me.lbl02.Size = New System.Drawing.Size(27, 20)
-        Me.lbl02.TabIndex = 16
+        Me.lbl02.TabIndex = 102
         Me.lbl02.Text = "02"
         '
         'lbl11
@@ -217,7 +221,7 @@ Partial Class ucrHourlyWind
         Me.lbl11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl11.Name = "lbl11"
         Me.lbl11.Size = New System.Drawing.Size(27, 20)
-        Me.lbl11.TabIndex = 27
+        Me.lbl11.TabIndex = 111
         Me.lbl11.Text = "11"
         '
         'lbl23
@@ -227,7 +231,7 @@ Partial Class ucrHourlyWind
         Me.lbl23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl23.Name = "lbl23"
         Me.lbl23.Size = New System.Drawing.Size(27, 20)
-        Me.lbl23.TabIndex = 55
+        Me.lbl23.TabIndex = 123
         Me.lbl23.Text = "23"
         '
         'lbl22
@@ -237,7 +241,7 @@ Partial Class ucrHourlyWind
         Me.lbl22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl22.Name = "lbl22"
         Me.lbl22.Size = New System.Drawing.Size(27, 20)
-        Me.lbl22.TabIndex = 54
+        Me.lbl22.TabIndex = 122
         Me.lbl22.Text = "22"
         '
         'lbl21
@@ -247,7 +251,7 @@ Partial Class ucrHourlyWind
         Me.lbl21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl21.Name = "lbl21"
         Me.lbl21.Size = New System.Drawing.Size(27, 20)
-        Me.lbl21.TabIndex = 51
+        Me.lbl21.TabIndex = 121
         Me.lbl21.Text = "21"
         '
         'lbl20
@@ -257,7 +261,7 @@ Partial Class ucrHourlyWind
         Me.lbl20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl20.Name = "lbl20"
         Me.lbl20.Size = New System.Drawing.Size(27, 20)
-        Me.lbl20.TabIndex = 49
+        Me.lbl20.TabIndex = 120
         Me.lbl20.Text = "20"
         '
         'lbl19
@@ -267,7 +271,7 @@ Partial Class ucrHourlyWind
         Me.lbl19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl19.Name = "lbl19"
         Me.lbl19.Size = New System.Drawing.Size(27, 20)
-        Me.lbl19.TabIndex = 48
+        Me.lbl19.TabIndex = 119
         Me.lbl19.Text = "19"
         '
         'lbl18
@@ -277,7 +281,7 @@ Partial Class ucrHourlyWind
         Me.lbl18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl18.Name = "lbl18"
         Me.lbl18.Size = New System.Drawing.Size(27, 20)
-        Me.lbl18.TabIndex = 47
+        Me.lbl18.TabIndex = 118
         Me.lbl18.Text = "18"
         '
         'lbl17
@@ -287,7 +291,7 @@ Partial Class ucrHourlyWind
         Me.lbl17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl17.Name = "lbl17"
         Me.lbl17.Size = New System.Drawing.Size(27, 20)
-        Me.lbl17.TabIndex = 46
+        Me.lbl17.TabIndex = 117
         Me.lbl17.Text = "17"
         '
         'lbl16
@@ -297,7 +301,7 @@ Partial Class ucrHourlyWind
         Me.lbl16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl16.Name = "lbl16"
         Me.lbl16.Size = New System.Drawing.Size(27, 20)
-        Me.lbl16.TabIndex = 45
+        Me.lbl16.TabIndex = 116
         Me.lbl16.Text = "16"
         '
         'lbl15
@@ -307,7 +311,7 @@ Partial Class ucrHourlyWind
         Me.lbl15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl15.Name = "lbl15"
         Me.lbl15.Size = New System.Drawing.Size(27, 20)
-        Me.lbl15.TabIndex = 44
+        Me.lbl15.TabIndex = 115
         Me.lbl15.Text = "15"
         '
         'lbl14
@@ -317,7 +321,7 @@ Partial Class ucrHourlyWind
         Me.lbl14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl14.Name = "lbl14"
         Me.lbl14.Size = New System.Drawing.Size(27, 20)
-        Me.lbl14.TabIndex = 50
+        Me.lbl14.TabIndex = 114
         Me.lbl14.Text = "14"
         '
         'lbl13
@@ -327,7 +331,7 @@ Partial Class ucrHourlyWind
         Me.lbl13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl13.Name = "lbl13"
         Me.lbl13.Size = New System.Drawing.Size(27, 20)
-        Me.lbl13.TabIndex = 43
+        Me.lbl13.TabIndex = 113
         Me.lbl13.Text = "13"
         '
         'lblFlag
@@ -337,7 +341,7 @@ Partial Class ucrHourlyWind
         Me.lblFlag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(40, 20)
-        Me.lblFlag.TabIndex = 30
+        Me.lblFlag.TabIndex = 95
         Me.lblFlag.Text = "Flag"
         '
         'lbl12
@@ -347,7 +351,7 @@ Partial Class ucrHourlyWind
         Me.lbl12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl12.Name = "lbl12"
         Me.lbl12.Size = New System.Drawing.Size(27, 20)
-        Me.lbl12.TabIndex = 32
+        Me.lbl12.TabIndex = 112
         Me.lbl12.Text = "12"
         '
         'lbl00
@@ -357,26 +361,26 @@ Partial Class ucrHourlyWind
         Me.lbl00.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl00.Name = "lbl00"
         Me.lbl00.Size = New System.Drawing.Size(27, 20)
-        Me.lbl00.TabIndex = 5
+        Me.lbl00.TabIndex = 100
         Me.lbl00.Text = "00"
         '
         'ucrInputTotal
         '
-        Me.ucrInputTotal.Location = New System.Drawing.Point(872, 551)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(859, 545)
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputTotal.Name = "ucrInputTotal"
         Me.ucrInputTotal.Size = New System.Drawing.Size(87, 40)
-        Me.ucrInputTotal.TabIndex = 57
+        Me.ucrInputTotal.TabIndex = 29
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(820, 555)
+        Me.lblTotal.Location = New System.Drawing.Point(816, 555)
         Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(44, 20)
-        Me.lblTotal.TabIndex = 56
+        Me.lblTotal.TabIndex = 124
         Me.lblTotal.Text = "Total"
         '
         'ucrDirectionSpeedFlag0
@@ -385,7 +389,7 @@ Partial Class ucrHourlyWind
         Me.ucrDirectionSpeedFlag0.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDirectionSpeedFlag0.Name = "ucrDirectionSpeedFlag0"
         Me.ucrDirectionSpeedFlag0.Size = New System.Drawing.Size(354, 40)
-        Me.ucrDirectionSpeedFlag0.TabIndex = 58
+        Me.ucrDirectionSpeedFlag0.TabIndex = 5
         Me.ucrDirectionSpeedFlag0.Tag = "00"
         '
         'lblFF
@@ -394,9 +398,9 @@ Partial Class ucrHourlyWind
         Me.lblFF.Location = New System.Drawing.Point(257, 14)
         Me.lblFF.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFF.Name = "lblFF"
-        Me.lblFF.Size = New System.Drawing.Size(27, 20)
-        Me.lblFF.TabIndex = 59
-        Me.lblFF.Text = "dd"
+        Me.lblFF.Size = New System.Drawing.Size(19, 20)
+        Me.lblFF.TabIndex = 94
+        Me.lblFF.Text = "ff"
         '
         'UcrDirectionSpeedFlag1
         '
@@ -404,7 +408,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag1.Name = "UcrDirectionSpeedFlag1"
         Me.UcrDirectionSpeedFlag1.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag1.TabIndex = 60
+        Me.UcrDirectionSpeedFlag1.TabIndex = 6
         Me.UcrDirectionSpeedFlag1.Tag = "01"
         '
         'UcrDirectionSpeedFlag2
@@ -413,7 +417,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag2.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag2.Name = "UcrDirectionSpeedFlag2"
         Me.UcrDirectionSpeedFlag2.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag2.TabIndex = 61
+        Me.UcrDirectionSpeedFlag2.TabIndex = 7
         Me.UcrDirectionSpeedFlag2.Tag = "02"
         '
         'UcrDirectionSpeedFlag3
@@ -422,7 +426,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag3.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag3.Name = "UcrDirectionSpeedFlag3"
         Me.UcrDirectionSpeedFlag3.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag3.TabIndex = 62
+        Me.UcrDirectionSpeedFlag3.TabIndex = 8
         Me.UcrDirectionSpeedFlag3.Tag = "03"
         '
         'UcrDirectionSpeedFlag4
@@ -431,7 +435,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag4.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag4.Name = "UcrDirectionSpeedFlag4"
         Me.UcrDirectionSpeedFlag4.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag4.TabIndex = 63
+        Me.UcrDirectionSpeedFlag4.TabIndex = 9
         Me.UcrDirectionSpeedFlag4.Tag = "04"
         '
         'UcrDirectionSpeedFlag5
@@ -440,7 +444,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag5.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag5.Name = "UcrDirectionSpeedFlag5"
         Me.UcrDirectionSpeedFlag5.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag5.TabIndex = 64
+        Me.UcrDirectionSpeedFlag5.TabIndex = 10
         Me.UcrDirectionSpeedFlag5.Tag = "05"
         '
         'UcrDirectionSpeedFlag6
@@ -449,7 +453,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag6.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag6.Name = "UcrDirectionSpeedFlag6"
         Me.UcrDirectionSpeedFlag6.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag6.TabIndex = 65
+        Me.UcrDirectionSpeedFlag6.TabIndex = 11
         Me.UcrDirectionSpeedFlag6.Tag = "06"
         '
         'UcrDirectionSpeedFlag7
@@ -458,7 +462,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag7.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag7.Name = "UcrDirectionSpeedFlag7"
         Me.UcrDirectionSpeedFlag7.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag7.TabIndex = 66
+        Me.UcrDirectionSpeedFlag7.TabIndex = 12
         Me.UcrDirectionSpeedFlag7.Tag = "07"
         '
         'UcrDirectionSpeedFlag8
@@ -467,7 +471,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag8.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag8.Name = "UcrDirectionSpeedFlag8"
         Me.UcrDirectionSpeedFlag8.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag8.TabIndex = 67
+        Me.UcrDirectionSpeedFlag8.TabIndex = 13
         Me.UcrDirectionSpeedFlag8.Tag = "08"
         '
         'UcrDirectionSpeedFlag9
@@ -476,7 +480,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag9.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag9.Name = "UcrDirectionSpeedFlag9"
         Me.UcrDirectionSpeedFlag9.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag9.TabIndex = 68
+        Me.UcrDirectionSpeedFlag9.TabIndex = 14
         Me.UcrDirectionSpeedFlag9.Tag = "09"
         '
         'UcrDirectionSpeedFlag10
@@ -485,7 +489,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag10.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag10.Name = "UcrDirectionSpeedFlag10"
         Me.UcrDirectionSpeedFlag10.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag10.TabIndex = 69
+        Me.UcrDirectionSpeedFlag10.TabIndex = 15
         Me.UcrDirectionSpeedFlag10.Tag = "10"
         '
         'UcrDirectionSpeedFlag11
@@ -494,7 +498,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag11.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag11.Name = "UcrDirectionSpeedFlag11"
         Me.UcrDirectionSpeedFlag11.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag11.TabIndex = 70
+        Me.UcrDirectionSpeedFlag11.TabIndex = 16
         Me.UcrDirectionSpeedFlag11.Tag = "11"
         '
         'UcrDirectionSpeedFlag12
@@ -503,7 +507,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag12.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag12.Name = "UcrDirectionSpeedFlag12"
         Me.UcrDirectionSpeedFlag12.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag12.TabIndex = 71
+        Me.UcrDirectionSpeedFlag12.TabIndex = 17
         Me.UcrDirectionSpeedFlag12.Tag = "12"
         '
         'UcrDirectionSpeedFlag13
@@ -512,7 +516,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag13.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag13.Name = "UcrDirectionSpeedFlag13"
         Me.UcrDirectionSpeedFlag13.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag13.TabIndex = 72
+        Me.UcrDirectionSpeedFlag13.TabIndex = 18
         Me.UcrDirectionSpeedFlag13.Tag = "13"
         '
         'UcrDirectionSpeedFlag14
@@ -521,7 +525,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag14.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag14.Name = "UcrDirectionSpeedFlag14"
         Me.UcrDirectionSpeedFlag14.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag14.TabIndex = 73
+        Me.UcrDirectionSpeedFlag14.TabIndex = 19
         Me.UcrDirectionSpeedFlag14.Tag = "14"
         '
         'UcrDirectionSpeedFlag15
@@ -530,7 +534,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag15.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag15.Name = "UcrDirectionSpeedFlag15"
         Me.UcrDirectionSpeedFlag15.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag15.TabIndex = 74
+        Me.UcrDirectionSpeedFlag15.TabIndex = 20
         Me.UcrDirectionSpeedFlag15.Tag = "15"
         '
         'UcrDirectionSpeedFlag16
@@ -539,7 +543,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag16.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag16.Name = "UcrDirectionSpeedFlag16"
         Me.UcrDirectionSpeedFlag16.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag16.TabIndex = 75
+        Me.UcrDirectionSpeedFlag16.TabIndex = 21
         Me.UcrDirectionSpeedFlag16.Tag = "16"
         '
         'UcrDirectionSpeedFlag17
@@ -548,7 +552,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag17.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag17.Name = "UcrDirectionSpeedFlag17"
         Me.UcrDirectionSpeedFlag17.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag17.TabIndex = 76
+        Me.UcrDirectionSpeedFlag17.TabIndex = 22
         Me.UcrDirectionSpeedFlag17.Tag = "17"
         '
         'UcrDirectionSpeedFlag18
@@ -557,7 +561,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag18.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag18.Name = "UcrDirectionSpeedFlag18"
         Me.UcrDirectionSpeedFlag18.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag18.TabIndex = 77
+        Me.UcrDirectionSpeedFlag18.TabIndex = 23
         Me.UcrDirectionSpeedFlag18.Tag = "18"
         '
         'UcrDirectionSpeedFlag19
@@ -566,7 +570,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag19.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag19.Name = "UcrDirectionSpeedFlag19"
         Me.UcrDirectionSpeedFlag19.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag19.TabIndex = 78
+        Me.UcrDirectionSpeedFlag19.TabIndex = 24
         Me.UcrDirectionSpeedFlag19.Tag = "19"
         '
         'UcrDirectionSpeedFlag20
@@ -575,7 +579,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag20.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag20.Name = "UcrDirectionSpeedFlag20"
         Me.UcrDirectionSpeedFlag20.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag20.TabIndex = 79
+        Me.UcrDirectionSpeedFlag20.TabIndex = 25
         Me.UcrDirectionSpeedFlag20.Tag = "20"
         '
         'UcrDirectionSpeedFlag21
@@ -584,7 +588,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag21.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag21.Name = "UcrDirectionSpeedFlag21"
         Me.UcrDirectionSpeedFlag21.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag21.TabIndex = 80
+        Me.UcrDirectionSpeedFlag21.TabIndex = 26
         Me.UcrDirectionSpeedFlag21.Tag = "21"
         '
         'UcrDirectionSpeedFlag22
@@ -593,7 +597,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag22.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag22.Name = "UcrDirectionSpeedFlag22"
         Me.UcrDirectionSpeedFlag22.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag22.TabIndex = 81
+        Me.UcrDirectionSpeedFlag22.TabIndex = 27
         Me.UcrDirectionSpeedFlag22.Tag = "22"
         '
         'UcrDirectionSpeedFlag23
@@ -602,13 +606,57 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag23.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.UcrDirectionSpeedFlag23.Name = "UcrDirectionSpeedFlag23"
         Me.UcrDirectionSpeedFlag23.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag23.TabIndex = 82
+        Me.UcrDirectionSpeedFlag23.TabIndex = 28
         Me.UcrDirectionSpeedFlag23.Tag = "23"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(658, 14)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(19, 20)
+        Me.Label1.TabIndex = 98
+        Me.Label1.Text = "ff"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(737, 14)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(40, 20)
+        Me.Label2.TabIndex = 99
+        Me.Label2.Text = "Flag"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(572, 14)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(27, 20)
+        Me.Label3.TabIndex = 97
+        Me.Label3.Text = "dd"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(482, 14)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(37, 20)
+        Me.Label4.TabIndex = 96
+        Me.Label4.Text = "ddff"
         '
         'ucrHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.UcrDirectionSpeedFlag23)
         Me.Controls.Add(Me.UcrDirectionSpeedFlag22)
         Me.Controls.Add(Me.UcrDirectionSpeedFlag21)
@@ -666,7 +714,7 @@ Partial Class ucrHourlyWind
         Me.Controls.Add(Me.lblHour)
         Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.Name = "ucrHourlyWind"
-        Me.Size = New System.Drawing.Size(963, 598)
+        Me.Size = New System.Drawing.Size(952, 586)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -728,4 +776,8 @@ Partial Class ucrHourlyWind
     Friend WithEvents UcrDirectionSpeedFlag21 As ucrDirectionSpeedFlag
     Friend WithEvents UcrDirectionSpeedFlag22 As ucrDirectionSpeedFlag
     Friend WithEvents UcrDirectionSpeedFlag23 As ucrDirectionSpeedFlag
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
 End Class

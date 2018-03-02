@@ -177,6 +177,14 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
+    Public Function GetDcmMinimum() As Decimal
+        Return dcmMinimum
+    End Function
+
+    Public Function GetDcmMaximum() As Decimal
+        Return dcmMaximum
+    End Function
+
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then

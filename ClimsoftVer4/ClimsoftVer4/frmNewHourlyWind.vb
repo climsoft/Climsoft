@@ -13,6 +13,8 @@
     Private Sub InitaliseDialog()
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
+        ucrHourlyWind.SetDirectionValidation(112)
+        ucrHourlyWind.SetSpeedValidation(111)
         AssignLinkToKeyField(ucrHourlyWind)
 
         ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
@@ -33,10 +35,42 @@
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
-        ucrHourlyWind.HourSelection(True)
+        If btnHourSelection.Text = "Enable all hours" Then
+            ucrHourlyWind.SetHourSelection(True)
+            btnHourSelection.Text = "Enable synoptic hours only"
+        Else
+            ucrHourlyWind.SetHourSelection(False)
+            btnHourSelection.Text = "Enable all hours"
+        End If
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrHourlyWind.Clear()
     End Sub
+
+    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        If ucrHourlyWind.bUpdating Then
+            'Possibly we should be cloning and then updating here
+        Else
+            clsDataConnection.db.form_hourlywind.Add(ucrHourlyWind.fhourlyWindRecord)
+        End If
+        clsDataConnection.SaveUpdate()
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim dlgResponse As DialogResult
+        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
+            Try
+                clsDataConnection.db.form_hourlywind.Attach(ucrHourlyWind.fhourlyWindRecord)
+                clsDataConnection.db.form_hourlywind.Remove(ucrHourlyWind.fhourlyWindRecord)
+                clsDataConnection.db.SaveChanges()
+                MessageBox.Show("Record has been deleted", "Delete Record")
+                ucrNavigation.MoveNext(sender, e)
+            Catch
+                MessageBox.Show("Record has not been deleted", "Delete Record")
+            End Try
+        End If
+    End Sub
+
 End Class
