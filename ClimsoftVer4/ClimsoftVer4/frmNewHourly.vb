@@ -75,7 +75,7 @@
                 clsDataConnection.db.form_hourly.Remove(ucrHourly.fhRecord)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
-                ucrNavigation.MoveNext(sender, e)
+                'ucrNavigation.MoveNext(sender, e)
             Catch
                 MessageBox.Show("Record has not been deleted", "Delete Record")
             End Try

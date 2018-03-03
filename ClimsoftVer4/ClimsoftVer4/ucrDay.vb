@@ -85,7 +85,7 @@
         ucrLinkedMonth = ucrMonthControl
         'TODO 
         'the above 2 controls need to actually be linked. 
-        'currently the cause no change
+        'currently they cause no change
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load

@@ -29,6 +29,10 @@
         End If
     End Sub
 
+    Public Function isLeapYear() As Boolean
+        Return DateTime.IsLeapYear(GetValue)
+    End Function
+
     Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         cboValues.ContextMenuStrip = cmsYear
     End Sub

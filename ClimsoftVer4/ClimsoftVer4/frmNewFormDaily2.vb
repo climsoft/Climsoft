@@ -149,7 +149,7 @@ Public Class frmNewFormDaily2
                 clsDataConnection.db.form_daily2.Remove(ucrFormDaily.fd2Record)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
-                ucrDaiy2Navigation.MoveNext(sender, e)
+                'ucrDaiy2Navigation.MoveNext(sender, e)
             Catch
                 MessageBox.Show("Record has not been deleted", "Delete Record")
             End Try
