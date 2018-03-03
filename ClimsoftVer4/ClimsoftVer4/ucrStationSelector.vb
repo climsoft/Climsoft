@@ -55,24 +55,37 @@
         Return cboValues.Items.Contains(cboValues.Text)
     End Function
 
-    Private Sub SortByID()
+    Public Sub SortByID()
         If dtbRecords IsNot Nothing Then
+            'Datatable Sorting affects cboValues.SelectedValue
+            'thus SuppressChange And retain previous cboValues.SelectedValue 
+            Dim prevSelected = GetValue()
+            bSuppressChangedEvents = True
             dtbRecords.DefaultView.Sort = strStationID & " ASC"
-            'cboValues.DataSource.
             cmsStationSortByID.Checked = True
             cmsStationSortyByName.Checked = False
-            PopulateControl()
+            'PopulateControl()
+            SetValue(prevSelected)
+            bSuppressChangedEvents = False
         End If
     End Sub
 
-    Private Sub SortByStationName()
-        dtbRecords.DefaultView.Sort = strStationName & " ASC"
-        cmsStationSortByID.Checked = False
-        cmsStationSortyByName.Checked = True
-        PopulateControl()
+    Public Sub SortByStationName()
+        If dtbRecords IsNot Nothing Then
+            'Datatable Sorting affects cboValues.SelectedValue
+            'thus SuppressChange And retain previous cboValues.SelectedValue 
+            Dim prevSelected = GetValue()
+            bSuppressChangedEvents = True
+            dtbRecords.DefaultView.Sort = strStationName & " ASC"
+            cmsStationSortByID.Checked = False
+            cmsStationSortyByName.Checked = True
+            'PopulateControl()
+            SetValue(prevSelected)
+            bSuppressChangedEvents = False
+        End If
     End Sub
 
-    Private Sub cmsStation_Click(sender As Object, e As EventArgs) Handles cmsStation.Click
+    Private Sub cmsStationName_Click(sender As Object, e As EventArgs) Handles cmsStationNames.Click
         SetViewTypeAsStations()
     End Sub
 
