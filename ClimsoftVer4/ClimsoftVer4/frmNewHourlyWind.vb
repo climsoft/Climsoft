@@ -21,12 +21,20 @@
         ucrHourlyWind.SetSpeedValidation(111)
         AssignLinkToKeyField(ucrHourlyWind)
 
+        'TO CORRECTLY SORT THE RECORDS IN THE NAVIGATION IN SEQUENCE OF
+        'OF HOW THEY WERE SAVED THE entryDatetime NEEDS
+        'TO BE INCLUDED. CURRENTLY ITS NOT IN OUR MODEL
+
+        'ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd", "entryDatetime"})))
         ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
         ucrNavigation.SetKeyControls("stationId", ucrStationSelector)
         ucrNavigation.SetKeyControls("yyyy", ucrYearSelector)
         ucrNavigation.SetKeyControls("mm", ucrMonth)
         ucrNavigation.SetKeyControls("dd", ucrDay)
 
+
+        'THIS WILL WORK ONCE WE INCLUDE THE entryDatetime AS A FIELD FOR ucrNavigation
+        ucrNavigation.SetSortBy("entryDatetime")
         ucrNavigation.PopulateControl()
         SaveEnable()
 

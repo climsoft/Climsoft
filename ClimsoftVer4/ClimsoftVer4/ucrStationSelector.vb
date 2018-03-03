@@ -85,7 +85,7 @@
         End If
     End Sub
 
-    Private Sub cmsStation_Click(sender As Object, e As EventArgs) Handles cmsStation.Click
+    Private Sub cmsStationName_Click(sender As Object, e As EventArgs) Handles cmsStationNames.Click
         SetViewTypeAsStations()
     End Sub
 

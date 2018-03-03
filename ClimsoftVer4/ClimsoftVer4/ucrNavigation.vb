@@ -2,12 +2,16 @@
     Private bFirstLoad As Boolean = True
     Public iMaxRows As Integer
     Public iCurrRow As Integer
+    Public strSortCol As String = ""
     Private dctKeyControls As Dictionary(Of String, ucrBaseDataLink)
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         iCurrRow = 0
         iMaxRows = dtbRecords.Rows.Count
+        If strSortCol <> "" AndAlso dtbRecords.Rows.Count > 0 AndAlso dtbRecords.Columns.Contains(strSortCol) Then
+            dtbRecords.DefaultView.Sort = strSortCol & " ASC"
+        End If
         displayRecordNumber()
         UpdateKeyControls()
     End Sub
@@ -101,13 +105,20 @@
     End Sub
 
     Private Sub UpdateKeyControls()
-        If dctKeyControls IsNot Nothing Then
-            For i As Integer = 0 To dctKeyControls.Count - 1
-                ' Suppress events being raised while changing value of each key control
-                dctKeyControls.Values(i).bSuppressChangedEvents = True
-                dctKeyControls.Values(i).SetValue(dtbRecords.Rows(iCurrRow)(dctKeyControls.Keys(i)))
-                dctKeyControls.Values(i).bSuppressChangedEvents = False
+        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
+            'For i As Integer = 0 To dctKeyControls.Count - 1
+            '    ' Suppress events being raised while changing value of each key control
+            '    dctKeyControls.Values(i).bSuppressChangedEvents = True
+            '    dctKeyControls.Values(i).SetValue(dtbRecords.Rows(iCurrRow)(dctKeyControls.Keys(i)))
+            '    dctKeyControls.Values(i).bSuppressChangedEvents = False
+            'Next
+            For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+                'Suppress events being raised while changing value of each key control
+                kvp.Value.bSuppressChangedEvents = True
+                kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
+                kvp.Value.bSuppressChangedEvents = False
             Next
+
             ' All key controls are linked to the same controls so can just trigger
             ' events for one control after all updated
             dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(Nothing, Nothing)
@@ -166,6 +177,10 @@
         'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
         'RECORD COUNT ON DELETE
 
+    End Sub
+
+    Public Sub SetSortBy(strNewSortCol As String)
+        strSortCol = strNewSortCol
     End Sub
 
 End Class

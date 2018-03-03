@@ -90,14 +90,16 @@
     End Function
 
     Public Sub SetViewType(strViewType As String)
-        Dim col As DataColumn
-
-        For Each col In dtbRecords.Columns
-            If strViewType = col.ColumnName Then
-                cboValues.DisplayMember = strViewType
-                Exit For
-            End If
-        Next
+        'Dim col As DataColumn
+        'For Each col In dtbRecords.Columns
+        '    If strViewType = col.ColumnName Then
+        '        cboValues.DisplayMember = strViewType
+        '        Exit For
+        '    End If
+        'Next
+        If dtbRecords.Columns.Contains(strViewType) Then
+            cboValues.DisplayMember = strViewType
+        End If
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
