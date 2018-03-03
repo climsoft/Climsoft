@@ -315,7 +315,7 @@ Public Class ucrHourlyWind
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = ctr
-                    elemTotal = elemTotal + ucrDSF.GetFlagValue
+                    elemTotal = elemTotal + Val(ucrDSF.GetFlagValue)
                 End If
             Next
 
