@@ -15,12 +15,16 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class ucrBaseDataLink
     Protected clsDataDefinition As DataCall
-    Protected dtbRecords As DataTable
-    Protected dctLinkedControlsFilters As Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
-
+    Protected dtbRecords As New DataTable
+    Protected dctLinkedControlsFilters As New Dictionary(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))
 
     Public Event evtKeyDown(sender As Object, e As KeyEventArgs)
-    Public Event evtValueChanged()
+    Public Event evtTextChanged(sender As Object, e As EventArgs)
+    Public Event evtValueChanged(sender As Object, e As EventArgs)
+
+    ' When True, ValueChanged and TextChanged etc. events will not be raised
+    ' Used when wanting to update several controls without linked controls updating inbetween.
+    Public bSuppressChangedEvents As Boolean = False
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
     ' Infomation about how the control connects to the database will be here
@@ -35,6 +39,10 @@ Public Class ucrBaseDataLink
     Public Sub SetDataDefinition(clsNewDataDefinition As DataCall)
         clsDataDefinition = clsNewDataDefinition
     End Sub
+
+    Public Function GetDataDefinition() As DataCall
+        Return clsDataDefinition
+    End Function
 
     Private Sub CreateDataDefinition()
         If clsDataDefinition Is Nothing Then
@@ -69,6 +77,25 @@ Public Class ucrBaseDataLink
         clsDataDefinition.SetFields(lstNewFields:=New List(Of String)({strNewField}))
         SetSortByItems()
     End Sub
+
+    Public Overridable Sub SetTableNameAndField(strNewTable As String, strNewField As String)
+        SetTableName(strNewTable)
+        SetField(strNewField)
+    End Sub
+
+    Public Overridable Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
+        SetTableName(strNewTable)
+        SetFields(dctNewFields)
+    End Sub
+
+    Public Overridable Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+        SetTableName(strNewTable)
+        SetFields(lstNewFields)
+    End Sub
+
+    Public Function GetField() As String
+        Return clsDataDefinition.GetField
+    End Function
 
     Public Sub SetTableAndFields(dbsNewTable As Entity.DbSet, lstNewFields As List(Of String))
         CreateDataDefinition()
@@ -115,7 +142,9 @@ Public Class ucrBaseDataLink
     End Function
 
     Public Sub UpdateDataTable()
-        dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
+        If Not IsNothing(clsDataDefinition) Then
+            dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
+        End If
     End Sub
 
     Public Overridable Sub PopulateControl()
@@ -126,14 +155,30 @@ Public Class ucrBaseDataLink
         RaiseEvent evtKeyDown(sender, e)
     End Sub
 
-    Public Overridable Function GetValue() As Object
-        Return Nothing
-    End Function
+    Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtTextChanged(sender, e)
+        End If
+    End Sub
 
-    Public Overridable Function GetValue(strFieldName As String) As Object
+    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtValueChanged(sender, e)
+        End If
+    End Sub
+
+    Public Overridable Sub SetValue(objNewValue As Object)
+
+    End Sub
+
+    Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
         Dim tempRow As DataRow
         Dim lstTemp As New List(Of String)
 
+        If strFieldName = "" Then
+            Return Nothing
+        End If
+        UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 1 Then
             Return dtbRecords.Rows(0).Field(Of String)(strFieldName)
         ElseIf dtbRecords.Rows.Count > 1 Then
@@ -147,19 +192,50 @@ Public Class ucrBaseDataLink
 
     End Function
 
-    'TODO
-    'Correct this or get rid of it
-    Public Sub AddLinkedControl(ucrLinkedDataControl As ucrBaseDataLink, strNewField As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strFieldName As String = "")
-        AddLinkedControl(ucrLinkedDataControl, New TableFilter(strNewField:=strNewField, strNewOperator:=strNewOperator, bNewIsPositiveCondition:=bNewIsPositiveCondition), strFieldName)
+    Public Overridable Sub UpdateInputValueToDataTable()
+
     End Sub
 
-    Public Sub AddLinkedControl(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        dctLinkedControlsFilters.Add(ucrLinkedDataControl, New KeyValuePair(Of String, TableFilter)(strFieldName, tblFilter))
+    Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
+
+        Dim temp As Object
+        temp = ucrLinkedDataControl.GetValue(strLinkedFieldName)
+
+        If TypeOf temp Is String OrElse TypeOf temp Is Integer Then
+            temp = CStr(temp)
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
+        Else
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
+        End If
+
+    End Sub
+
+    Public Overridable Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strLinkedFieldName As String = "")
+        Dim kvpTemp As New KeyValuePair(Of String, TableFilter)(strLinkedFieldName, tblFilter)
+
+        If dctLinkedControlsFilters.ContainsKey(ucrLinkedDataControl) Then
+            'TODO
+            'THIS NEEDS TO BE CHANGED
+            If Not dctLinkedControlsFilters.Contains(New KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter))(ucrLinkedDataControl, kvpTemp)) Then
+                dctLinkedControlsFilters.Item(ucrLinkedDataControl) = kvpTemp
+            End If
+
+            'If dctLinkedControlsFilters.Item(ucrLinkedDataControl).Key = strLinkedFieldName Then
+            '    dctLinkedControlsFilters.Item(ucrLinkedDataControl) = kvpTemp
+            'End If
+        Else
+                dctLinkedControlsFilters.Add(ucrLinkedDataControl, kvpTemp)
+        End If
+
         AddHandler ucrLinkedDataControl.evtValueChanged, AddressOf LinkedControls_evtValueChanged
     End Sub
 
-    Private Sub LinkedControls_evtValueChanged()
-        UpdateDataTable()
+    Protected Overridable Sub LinkedControls_evtValueChanged()
+        PopulateControl()
+    End Sub
+
+    Public Sub RemoveLinkedControlsFilters(ucrLinkedDataControl As ucrBaseDataLink)
+        dctLinkedControlsFilters.Remove(ucrLinkedDataControl)
     End Sub
 
     Protected Sub UpdateDctLinkedControlsFilters()
@@ -187,27 +263,27 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Public Function GetLinkedControlsFilter() As TableFilter
+    Public Function GetLinkedControlsFilter() As Object
         Dim clsOveralControlsFilter As TableFilter
 
         UpdateDctLinkedControlsFilters()
 
         If dctLinkedControlsFilters.Count = 0 Then
-            clsOveralControlsFilter = Nothing
+            Return Nothing
         ElseIf dctLinkedControlsFilters.Count > 1 Then
             clsOveralControlsFilter = New TableFilter
             For i = 0 To dctLinkedControlsFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Key.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Key.Clone())
+                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                     clsOveralControlsFilter.SetOperator("AND")
                 Else
-                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Key.Clone())
+                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.Clone())
+                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                 End If
             Next
         Else
-            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Key.Clone()
+            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
         End If
         Return clsOveralControlsFilter
     End Function
@@ -216,4 +292,12 @@ Public Class ucrBaseDataLink
         MessageBox.Show("Developer error: The Linking Datacall of " & Me.Name & " has not been overriden ", caption:="Developer error")
         Return Nothing
     End Function
+
+    Public Overridable Sub Clear()
+
+    End Sub
+
+    Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
