@@ -175,7 +175,7 @@ Public Class ucrDirectionSpeedFlag
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
             ElseIf sender Is ucrSpeed.txtBox Then
-                If QcForSpeed() Then
+                If CheckQcForSpeed() Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
             ElseIf sender Is ucrFlag.txtBox Then
@@ -227,7 +227,7 @@ Public Class ucrDirectionSpeedFlag
                 MsgBox("Number expected!", MsgBoxStyle.Critical)
             End If
             If bValuesCorrect Then
-                If QcForDirection() AndAlso QcForSpeed() Then
+                If QcForDirection() AndAlso CheckQcForSpeed() Then
                     bValuesCorrect = True
                 Else
                     ucrDDFF.SetBackColor(Color.Cyan)
@@ -241,7 +241,7 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Private Function QcForDirection() As Boolean
+    Public Function QcForDirection() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False
@@ -285,7 +285,7 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Private Function QcForSpeed() As Boolean
+    Public Function CheckQcForSpeed() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False

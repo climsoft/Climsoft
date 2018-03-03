@@ -89,11 +89,36 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Try
-                ucrHourlyWind.SaveRecord()
-                ucrNavigation.GoToNewRecord()
-                ucrNavigation.ResetControls()
-                SaveEnable()
-                MessageBox.Show("New record added to database table!", "Save Record")
+                'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+                'carry out the next actions, otherwise bring up message showing that there is insufficient data
+                If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
+
+                    'Check valid station
+                    'Check valid year
+                    'Check valid month
+                    'Check valid Day
+                    'Check future date
+                    'MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
+
+                    'Do QC Checks. 
+                    'based on upper & lower limit for wind direction 
+                    If Not ucrHourlyWind.QcForDirection() Then
+                        Exit Sub
+                    End If
+                    'based on upper & lower limit for wind speed 
+                    If Not ucrHourlyWind.CheckQcForSpeed() Then
+                        Exit Sub
+                    End If
+
+                    ucrHourlyWind.SaveRecord()
+                    ucrNavigation.GoToNewRecord()
+                    ucrNavigation.ResetControls()
+                    SaveEnable()
+                    MessageBox.Show(Me, "New record added to database table!", "Save Record", MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show(Me, "Incomplete header information and insufficient observation data!", "Save Record", MessageBoxIcon.Exclamation)
+                End If
+
             Catch ex As Exception
                 MessageBox.Show(Me, "New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxIcon.Error)
             End Try

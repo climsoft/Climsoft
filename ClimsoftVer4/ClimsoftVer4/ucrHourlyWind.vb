@@ -143,12 +143,14 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         bSelectAllHours = bNewSelectAllHours
         If bSelectAllHours Then
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctr.enabled = True
-                    ctr.SetBackColor(Color.White)
+                    ucrDSF = ctr
+                    ucrDSF.Enabled = True
+                    ucrDSF.SetBackColor(Color.White)
                 End If
             Next
         Else
@@ -163,17 +165,18 @@ Public Class ucrHourlyWind
             If dtbl IsNot Nothing Then
                 For Each ctr In Me.Controls
                     If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                        iTagVal = Val(Strings.Right(ctr.Tag, 2))
+                        ucrDSF = ctr
+                        iTagVal = Val(Strings.Right(ucrDSF.Tag, 2))
                         row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
                         If row IsNot Nothing Then
-                            ctr.enabled = False
-                            ctr.SetBackColor(Color.LightYellow)
+                            ucrDSF.Enabled = False
+                            ucrDSF.SetBackColor(Color.LightYellow)
                         End If
                         'SIMILAR IMPLEMENTATION WOULD AS ABOVE WOULD BE AS COMMENTED BELOW
                         'For Each rTemp As DataRow In dtbl.Rows
                         '    If Val(rTemp("hh")) = iTagVal AndAlso Val(rTemp("hh_selection")) = 0 Then
-                        '        ctr.enabled = False
-                        '        ctr.SetBackColor(Color.LightYellow)
+                        '        ucrDSF.enabled = False
+                        '        ucrDSF.SetBackColor(Color.LightYellow)
                         '        Exit For
                         '    End If
                         'Next
@@ -184,22 +187,27 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ctr.SetDirectionDigits(iNewDirectionDigits)
+                ucrDSF = ctr
+                ucrDSF.SetDirectionDigits(iNewDirectionDigits)
             End If
         Next
     End Sub
 
     Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ctr.SetSpeedDigits(iNewSpeedDigits)
+                ucrDSF = ctr
+                ucrDSF.SetSpeedDigits(iNewSpeedDigits)
             End If
         Next
     End Sub
 
     Public Sub SetDirectionValidation(elementId As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
@@ -212,13 +220,15 @@ Public Class ucrHourlyWind
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctr.SetDirectionValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
+                    ucrDSF = ctr
+                    ucrDSF.SetDirectionValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
                 End If
             Next
         End If
     End Sub
 
     Public Sub SetSpeedValidation(elementId As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
@@ -231,26 +241,59 @@ Public Class ucrHourlyWind
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctr.SetSpeedValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
+                    ucrDSF = ctr
+                    ucrDSF.SetSpeedValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
                 End If
             Next
         End If
     End Sub
 
     Public Overrides Sub Clear()
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        Dim ucrTxt As ucrDirectionSpeedFlag
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ctr.Clear()
+                ucrDSF = ctr
+                ucrDSF.Clear()
             ElseIf TypeOf ctr Is ucrTextBox Then
-                ctr.Clear()
+                ucrTxt = ctr
+                ucrTxt.Clear()
             End If
         Next
     End Sub
 
     Public Function IsDirectionValuesEmpty() As Boolean
+        Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If (Not ctr.IsDirectionEmpty()) AndAlso IsNumeric(ctr.GetDirectionValue) Then
+                ucrDSF = ctr
+                If (Not ucrDSF.IsDirectionEmpty()) AndAlso IsNumeric(ucrDSF.GetDirectionValue) Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
+    Public Function QcForDirection() As Boolean
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ucrDSF = ctr
+                If Not ucrDSF.QcForDirection() Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
+    Public Function CheckQcForSpeed() As Boolean
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        For Each ctr In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ucrDSF = ctr
+                If Not ucrDSF.CheckQcForSpeed() Then
                     Return False
                 End If
             End If
