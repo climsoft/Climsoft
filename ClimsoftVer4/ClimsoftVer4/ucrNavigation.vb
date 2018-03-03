@@ -20,7 +20,6 @@
     'End Function
 
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-
         If strFieldName = "" Then
             Return Nothing
         End If
@@ -30,7 +29,6 @@
         Else
             Return ""
         End If
-
     End Function
 
     Private Sub displayRecordNumber()
@@ -43,23 +41,15 @@
 
     End Sub
 
-    Protected Overridable Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            bFirstLoad = False
-        End If
-    End Sub
-
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         'In order to move to move to the first record the record index is set to zero.
         iCurrRow = 0
         'we always want to have the record number displayed 
         displayRecordNumber()
         OnevtValueChanged(sender, e)
-
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
-
         If iCurrRow > 0 Then
             iCurrRow = iCurrRow - 1
             displayRecordNumber()
@@ -72,6 +62,7 @@
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
         MoveNext(sender, e)
     End Sub
+
     Public Sub MoveNext(sender As Object, e As EventArgs)
         If iCurrRow < (iMaxRows - 1) Then
             iCurrRow = iCurrRow + 1
@@ -81,16 +72,32 @@
             MsgBox("No more next record!", MsgBoxStyle.Exclamation)
         End If
     End Sub
+
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         iCurrRow = iMaxRows - 1
         displayRecordNumber()
         OnevtValueChanged(sender, e)
-
     End Sub
 
     Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrBaseDataLink))
         dctKeyControls = dctNewKeyControls
+    End Sub
+
+    Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrBaseDataLink)
+        If dctKeyControls Is Nothing Then
+            SetKeyControls(New Dictionary(Of String, ucrBaseDataLink))
+        End If
+
+        If dctKeyControls.ContainsKey(strFieldName) Then
+            If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
+                MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
+            Else
+                dctKeyControls.Item(strFieldName) = ucrKeyControl
+            End If
+        Else
+            dctKeyControls.Add(strFieldName, ucrKeyControl)
+        End If
     End Sub
 
     Private Sub UpdateKeyControls()
@@ -110,6 +117,33 @@
     Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
         UpdateKeyControls()
     End Sub
+
+    Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            txtRecNum.ReadOnly = True
+            txtRecNum.TextAlign = HorizontalAlignment.Center
+            bFirstLoad = False
+        End If
+
+    End Sub
+
+    Public Sub SetControlsForNewRecord()
+        btnMoveFirst.Enabled = False
+        btnMoveLast.Enabled = False
+        btnMoveNext.Enabled = False
+        btnMovePrevious.Enabled = False
+        txtRecNum.Text = "Record " & iMaxRows + 1 & " of " & iMaxRows + 1
+    End Sub
+
+    Public Sub ResetControls()
+        btnMoveFirst.Enabled = True
+        btnMoveLast.Enabled = True
+        btnMoveNext.Enabled = True
+        btnMovePrevious.Enabled = True
+        displayRecordNumber()
+        UpdateKeyControls()
+    End Sub
+
 End Class
 
 

@@ -50,6 +50,7 @@ Public Class ucrTextBox
 
         strNewValue = TryCast(objNewValue, String)
         TextboxValue = strNewValue
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
     ' TODO This shouldn't be used. We should be use the general SetValue() method.
@@ -177,6 +178,14 @@ Public Class ucrTextBox
         Return strRange
     End Function
 
+    Public Function GetDcmMinimum() As Decimal
+        Return dcmMinimum
+    End Function
+
+    Public Function GetDcmMaximum() As Decimal
+        Return dcmMaximum
+    End Function
+
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then
@@ -243,15 +252,12 @@ Public Class ucrTextBox
     Public Overrides Sub Clear()
         bValidate = False
         TextboxValue = ""
+        SetBackColor(Color.White)
         bValidate = True
     End Sub
 
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
-    End Sub
-
-    Public Sub RemoveBackColor()
-        txtBox.BackColor = Color.White
     End Sub
 
     Public Sub ChangeCase()
