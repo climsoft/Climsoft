@@ -127,6 +127,23 @@
 
     End Sub
 
+    Public Sub SetControlsForNewRecord()
+        btnMoveFirst.Enabled = False
+        btnMoveLast.Enabled = False
+        btnMoveNext.Enabled = False
+        btnMovePrevious.Enabled = False
+        txtRecNum.Text = "Record " & iMaxRows + 1 & " of " & iMaxRows + 1
+    End Sub
+
+    Public Sub ResetControls()
+        btnMoveFirst.Enabled = True
+        btnMoveLast.Enabled = True
+        btnMoveNext.Enabled = True
+        btnMovePrevious.Enabled = True
+        displayRecordNumber()
+        UpdateKeyControls()
+    End Sub
+
 End Class
 
 

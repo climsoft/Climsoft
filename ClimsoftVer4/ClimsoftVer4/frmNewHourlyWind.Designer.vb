@@ -30,7 +30,7 @@ Partial Class frmNewHourlyWind
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -54,7 +54,7 @@ Partial Class frmNewHourlyWind
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(323, 21)
+        lblYear.Location = New System.Drawing.Point(320, 9)
         lblYear.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(47, 20)
@@ -64,7 +64,7 @@ Partial Class frmNewHourlyWind
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(14, 23)
+        Me.lblStationSelector.Location = New System.Drawing.Point(14, 9)
         Me.lblStationSelector.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(64, 20)
@@ -74,7 +74,7 @@ Partial Class frmNewHourlyWind
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(644, 20)
+        Me.lblDay.Location = New System.Drawing.Point(625, 9)
         Me.lblDay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(41, 20)
@@ -84,7 +84,7 @@ Partial Class frmNewHourlyWind
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(452, 21)
+        Me.lblMonth.Location = New System.Drawing.Point(452, 9)
         Me.lblMonth.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(58, 20)
@@ -93,7 +93,7 @@ Partial Class frmNewHourlyWind
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(622, 877)
+        Me.btnView.Location = New System.Drawing.Point(615, 782)
         Me.btnView.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(112, 35)
@@ -104,7 +104,7 @@ Partial Class frmNewHourlyWind
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(866, 929)
+        Me.btnUpload.Location = New System.Drawing.Point(853, 819)
         Me.btnUpload.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(112, 35)
@@ -114,7 +114,7 @@ Partial Class frmNewHourlyWind
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(866, 877)
+        Me.btnHelp.Location = New System.Drawing.Point(859, 782)
         Me.btnHelp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(112, 35)
@@ -125,7 +125,7 @@ Partial Class frmNewHourlyWind
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(501, 877)
+        Me.btnClear.Location = New System.Drawing.Point(494, 782)
         Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(112, 35)
@@ -133,19 +133,19 @@ Partial Class frmNewHourlyWind
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
-        'btnCommit
+        'btnSave
         '
-        Me.btnCommit.Location = New System.Drawing.Point(136, 877)
-        Me.btnCommit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(112, 35)
-        Me.btnCommit.TabIndex = 662
-        Me.btnCommit.Text = "Save"
-        Me.btnCommit.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(129, 782)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(112, 35)
+        Me.btnSave.TabIndex = 662
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(380, 877)
+        Me.btnDelete.Location = New System.Drawing.Point(373, 782)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(112, 35)
@@ -155,7 +155,7 @@ Partial Class frmNewHourlyWind
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(15, 877)
+        Me.btnAddNew.Location = New System.Drawing.Point(8, 782)
         Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(112, 35)
@@ -165,7 +165,7 @@ Partial Class frmNewHourlyWind
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(258, 877)
+        Me.btnUpdate.Location = New System.Drawing.Point(251, 782)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
@@ -175,7 +175,7 @@ Partial Class frmNewHourlyWind
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(744, 877)
+        Me.btnClose.Location = New System.Drawing.Point(737, 782)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(112, 35)
@@ -186,7 +186,7 @@ Partial Class frmNewHourlyWind
         'txtSpeedDigits
         '
         Me.txtSpeedDigits.Enabled = False
-        Me.txtSpeedDigits.Location = New System.Drawing.Point(754, 108)
+        Me.txtSpeedDigits.Location = New System.Drawing.Point(755, 80)
         Me.txtSpeedDigits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSpeedDigits.Name = "txtSpeedDigits"
         Me.txtSpeedDigits.Size = New System.Drawing.Size(42, 26)
@@ -196,7 +196,7 @@ Partial Class frmNewHourlyWind
         'txtDirectionDigits
         '
         Me.txtDirectionDigits.Enabled = False
-        Me.txtDirectionDigits.Location = New System.Drawing.Point(494, 106)
+        Me.txtDirectionDigits.Location = New System.Drawing.Point(495, 78)
         Me.txtDirectionDigits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtDirectionDigits.Name = "txtDirectionDigits"
         Me.txtDirectionDigits.Size = New System.Drawing.Size(42, 26)
@@ -207,7 +207,7 @@ Partial Class frmNewHourlyWind
         '
         Me.lblSpeedDigits.AutoSize = True
         Me.lblSpeedDigits.ForeColor = System.Drawing.Color.Blue
-        Me.lblSpeedDigits.Location = New System.Drawing.Point(565, 111)
+        Me.lblSpeedDigits.Location = New System.Drawing.Point(566, 83)
         Me.lblSpeedDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSpeedDigits.Name = "lblSpeedDigits"
         Me.lblSpeedDigits.Size = New System.Drawing.Size(181, 20)
@@ -218,7 +218,7 @@ Partial Class frmNewHourlyWind
         '
         Me.lblDirectionDigits.AutoSize = True
         Me.lblDirectionDigits.ForeColor = System.Drawing.Color.Blue
-        Me.lblDirectionDigits.Location = New System.Drawing.Point(291, 111)
+        Me.lblDirectionDigits.Location = New System.Drawing.Point(292, 83)
         Me.lblDirectionDigits.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDirectionDigits.Name = "lblDirectionDigits"
         Me.lblDirectionDigits.Size = New System.Drawing.Size(197, 20)
@@ -228,7 +228,7 @@ Partial Class frmNewHourlyWind
         'btnHourSelection
         '
         Me.btnHourSelection.ForeColor = System.Drawing.Color.Blue
-        Me.btnHourSelection.Location = New System.Drawing.Point(17, 103)
+        Me.btnHourSelection.Location = New System.Drawing.Point(18, 75)
         Me.btnHourSelection.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(231, 35)
@@ -239,7 +239,7 @@ Partial Class frmNewHourlyWind
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(283, 944)
+        Me.lblSequencer.Location = New System.Drawing.Point(270, 834)
         Me.lblSequencer.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(87, 20)
@@ -248,7 +248,7 @@ Partial Class frmNewHourlyWind
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(381, 939)
+        Me.txtSequencer.Location = New System.Drawing.Point(368, 829)
         Me.txtSequencer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(298, 26)
@@ -257,7 +257,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrHourlyWind
         '
-        Me.ucrHourlyWind.Location = New System.Drawing.Point(11, 165)
+        Me.ucrHourlyWind.Location = New System.Drawing.Point(6, 117)
         Me.ucrHourlyWind.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrHourlyWind.Name = "ucrHourlyWind"
         Me.ucrHourlyWind.Size = New System.Drawing.Size(963, 598)
@@ -265,7 +265,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(175, 786)
+        Me.ucrNavigation.Location = New System.Drawing.Point(175, 731)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(504, 38)
@@ -273,7 +273,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrDay
         '
-        Me.ucrDay.Location = New System.Drawing.Point(634, 43)
+        Me.ucrDay.Location = New System.Drawing.Point(629, 34)
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(76, 37)
@@ -281,7 +281,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(456, 43)
+        Me.ucrMonth.Location = New System.Drawing.Point(451, 34)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(150, 37)
@@ -289,7 +289,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(324, 43)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(319, 34)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(104, 37)
@@ -297,7 +297,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(18, 43)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(15, 34)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(14, 18, 14, 18)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(276, 37)
@@ -307,7 +307,7 @@ Partial Class frmNewHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(987, 992)
+        Me.ClientSize = New System.Drawing.Size(976, 865)
         Me.Controls.Add(Me.ucrHourlyWind)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
@@ -320,7 +320,7 @@ Partial Class frmNewHourlyWind
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
@@ -354,7 +354,7 @@ Partial Class frmNewHourlyWind
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents btnCommit As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button

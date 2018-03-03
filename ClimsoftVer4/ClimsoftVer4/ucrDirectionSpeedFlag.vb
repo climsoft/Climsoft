@@ -16,8 +16,8 @@
 
 Public Class ucrDirectionSpeedFlag
     Private bFirstLoad As Boolean = True
-    Private iDirectionDigits As Integer = 2
-    Private iSpeedDigits As Integer = 2
+    Private iDirectionDigits As Integer
+    Private iSpeedDigits As Integer
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
@@ -94,6 +94,22 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
+    Public Function IsDirectionEmpty() As Boolean
+        Return ucrDirection.IsEmpty()
+    End Function
+
+    Public Function GetDirectionValue() As String
+        Return ucrDirection.GetValue
+    End Function
+
+    Public Function GetSpeedValue() As String
+        Return ucrDirection.GetValue
+    End Function
+
+    Public Function GetFlagValue() As String
+        Return ucrDirection.GetValue
+    End Function
+
     Public Overrides Sub Clear()
         ucrDDFF.Clear()
         ucrDirection.Clear()
@@ -128,34 +144,20 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
-    Public Sub SetDirectionValidation(elementId As Integer)
-        Dim clsDataDefinition As DataCall
-        Dim dtbl As DataTable
-        clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
-        clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
-        dtbl = clsDataDefinition.GetDataTable()
-        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            ucrDirection.SetValidationTypeAsNumeric(dcmMin:=dtbl.Rows(0).Item("lowerLimit"), dcmMax:=dtbl.Rows(0).Item("upperLimit"))
-        End If
+    Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
+        iDirectionDigits = iNewDirectionDigits
     End Sub
 
-    Public Sub SetSpeedValidation(elemCode As Integer)
-        Dim clsDataDefinition As DataCall
-        Dim dtbl As DataTable
-        clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
-        clsDataDefinition.SetFilter("elementId", "=", elemCode, bForceValuesAsString:=False)
-        dtbl = clsDataDefinition.GetDataTable()
-        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=dtbl.Rows(0).Item("lowerLimit"), dcmMax:=dtbl.Rows(0).Item("upperLimit"))
-        End If
+    Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
+        iSpeedDigits = iNewSpeedDigits
+    End Sub
+
+    Public Sub SetDirectionValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    End Sub
+
+    Public Sub SetSpeedValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
     Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
