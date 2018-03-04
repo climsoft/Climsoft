@@ -1,10 +1,12 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
+    Dim selectAllHours As Boolean = True
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
         End If
+
     End Sub
     Private Sub InitaliseDialog()
         Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
@@ -97,18 +99,36 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-
-        If clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified Then
+        Dim dlgResponse As DialogResult
+        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
             Try
-                clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
-                clsDataConnection.db.SaveChanges()
-                MessageBox.Show("Record has been updated", "Updating Record")
-            Catch
-                MessageBox.Show("Record has not been updated", "Updating Record")
+
+                If ucrHourly.bUpdating Then
+                    clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
+                    clsDataConnection.db.SaveChanges()
+                Else
+                    clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Added
+                    clsDataConnection.db.SaveChanges()
+                End If
+
+                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
             End Try
-        Else
-            MessageBox.Show("No values have been update, can not update this record", "Updating Record")
         End If
+
+        'If clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified Then
+        '    Try
+        '        clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
+        '        clsDataConnection.db.SaveChanges()
+        '        MessageBox.Show("Record has been updated", "Updating Record")
+        '    Catch
+        '        MessageBox.Show("Record has not been updated", "Updating Record")
+        '    End Try
+        'Else
+        '    MessageBox.Show("No values have been update, can not update this record", "Updating Record")
+        'End If
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -142,12 +162,37 @@
     End Sub
 
     Private Sub SaveEnable()
-        btnAddNew.Enabled = True
-        btnCommit.Enabled = False
-        btnClear.Enabled = False
-        If ucrNavigation.iMaxRows > 0 Then
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
+        'btnAddNew.Enabled = True
+        'btnCommit.Enabled = False
+        'btnClear.Enabled = False
+        'If ucrNavigation.iMaxRows > 0 Then
+        '    btnDelete.Enabled = True
+        '    btnUpdate.Enabled = True
+        'End If
+    End Sub
+
+    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+
+        If selectAllHours Then
+            selectAllHours = False
+            btnHourSelection.Text = "Enable synoptic hours only"
+            For Each ctrVFP As ucrValueFlagPeriod In {ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21}
+                ctrVFP.ucrFlag.Enabled = True
+                ctrVFP.ucrValue.Enabled = True
+                ctrVFP.ucrFlag.SetBackColor(Color.White)
+                ctrVFP.ucrValue.SetBackColor(Color.White)
+                'ctrVFP.BackColor = Color.White
+            Next
+        Else
+            selectAllHours = True
+            btnHourSelection.Text = "Enable all hours"
+            For Each ctrVFP As ucrValueFlagPeriod In {ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21}
+                ctrVFP.ucrFlag.Enabled = False
+                ctrVFP.ucrValue.Enabled = False
+                ctrVFP.ucrFlag.SetBackColor(Color.LightYellow)
+                ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
+                ctrVFP.BackColor = Color.LightYellow
+            Next
         End If
     End Sub
 End Class
