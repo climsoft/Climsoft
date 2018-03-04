@@ -251,7 +251,7 @@ Public Class frmDBUtilities
         With frmImportDaily
             .Text = "AWS Data Import"
             .lblType.Visible = False
-            .lblType.Text = "aws"
+            .lblType.Text = "AWS"
             .lblDefaultObsHour.Visible = False
             .txtObsHour.Visible = False
             '.lblStartRow.Visible = False
@@ -297,16 +297,64 @@ Public Class frmDBUtilities
 
     End Sub
 
-    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
-        frmImportDaily.Show()
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripDaily.Click
+        'frmImportDaily.Show()
+        With frmImportDaily
+            .Text = "Daily Data Import"
+            '.lblType.Visible = False
+            .lblType.Text = "Daily"
+            '.chkObsHour.Visible = False
+            ''.lblStartRow.Visible = False
+            '.chkScale.Visible = True
+            '.chkScale.Checked = True
+            ''.txtStartRow.Visible = False
+            '.txtObsHour.Visible = False
+            '.txtStn.Visible = True
+            '.lblStn.Visible = True
+            .Show()
+        End With
     End Sub
 
 
     Private Sub MultipleElementColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MultipleElementColumnsToolStripMenuItem.Click
         With frmImportDaily
-            .Text = "Observations in Multiple Columns"
+            .Text = "Multiple Columns Data Import"
             '.lblType.Visible = False
             .lblType.Text = "Multiple Elements"
+            '.chkObsHour.Visible = False
+            ''.lblStartRow.Visible = False
+            '.chkScale.Visible = True
+            '.chkScale.Checked = True
+            ''.txtStartRow.Visible = False
+            '.txtObsHour.Visible = False
+            '.txtStn.Visible = True
+            '.lblStn.Visible = True
+            .Show()
+        End With
+    End Sub
+
+    Private Sub DailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripHourly.Click
+        With frmImportDaily
+            .Text = "Hourly Data Import"
+            '.lblType.Visible = False
+            .lblType.Text = "Hourly"
+            '.chkObsHour.Visible = False
+            ''.lblStartRow.Visible = False
+            '.chkScale.Visible = True
+            '.chkScale.Checked = True
+            ''.txtStartRow.Visible = False
+            '.txtObsHour.Visible = False
+            '.txtStn.Visible = True
+            '.lblStn.Visible = True
+            .Show()
+        End With
+    End Sub
+
+    Private Sub ToolStripSynoptic_Click(sender As Object, e As EventArgs) Handles ToolStripSynoptic.Click
+        With frmImportDaily
+            .Text = "Synoptic Data Import"
+            '.lblType.Visible = False
+            .lblType.Text = "Synoptic"
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True

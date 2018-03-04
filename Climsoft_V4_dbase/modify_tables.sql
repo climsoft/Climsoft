@@ -1,4 +1,4 @@
-use mariadb_climsoft_test_db_v4;
+use mariadb_climsoft_db_v4;
 ALTER TABLE `station`
 	ADD COLUMN IF NOT EXISTS `icaoid` VARCHAR(20) NULL DEFAULT NULL AFTER `stationName`,
 	ADD COLUMN IF NOT EXISTS `wmoid` VARCHAR(20) NULL DEFAULT NULL AFTER `stationName`,

@@ -358,6 +358,8 @@ Partial Class formMetadata
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataFileDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.txtStationType = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -443,6 +445,8 @@ Partial Class formMetadata
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.txtStationType)
+        Me.grpStation.Controls.Add(Me.Label24)
         Me.grpStation.Controls.Add(Me.grpComputationDD)
         Me.grpStation.Controls.Add(Me.txtClosingDate)
         Me.grpStation.Controls.Add(Me.txtOpeningDate)
@@ -3671,6 +3675,22 @@ Partial Class formMetadata
         '
         Me.MetadataFileDialog.FileName = "MetadataFileDialog"
         '
+        'txtStationType
+        '
+        Me.txtStationType.Location = New System.Drawing.Point(518, 171)
+        Me.txtStationType.Name = "txtStationType"
+        Me.txtStationType.Size = New System.Drawing.Size(162, 20)
+        Me.txtStationType.TabIndex = 64
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(400, 175)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(45, 13)
+        Me.Label24.TabIndex = 65
+        Me.Label24.Text = "Qualifier"
+        '
         'formMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4092,4 +4112,6 @@ Partial Class formMetadata
     Friend WithEvents txtInstrumentPicFile As System.Windows.Forms.TextBox
     Friend WithEvents lblimgFile As System.Windows.Forms.Label
     Friend WithEvents lblPercent As System.Windows.Forms.Label
+    Friend WithEvents txtStationType As System.Windows.Forms.TextBox
+    Friend WithEvents Label24 As System.Windows.Forms.Label
 End Class
