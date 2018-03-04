@@ -227,9 +227,10 @@ Public Class frmUpdateDBfromQCReport
 
                                 Try
                                     'Execute query
+                                    objCmd.CommandTimeout = 0
                                     objCmd.ExecuteNonQuery()
                                     'Catch ex As MySql.Data.MySqlClient.MySqlException
-                                    '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                    'Ignore expected error i.e. error of Duplicates in MySqlException
 
                                 Catch ex As Exception
                                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
