@@ -189,4 +189,25 @@ Public Class frmNewFormDaily2
             btnUpdate.Enabled = True
         End If
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        Dim dlgResponse As DialogResult
+        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
+            Try
+
+                If ucrFormDaily.bUpdating Then
+                    clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
+                    clsDataConnection.db.SaveChanges()
+                Else
+                    clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Added
+                    clsDataConnection.db.SaveChanges()
+                End If
+
+                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
 End Class
