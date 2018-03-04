@@ -75,8 +75,8 @@ Public Class frmNewFormDaily2
 
         'ucrInputSequncer.SetTableName("seq_daily_element")
         'ucrInputSequncer.SetField("seq")
-        ucrInputSequncer.SetTableNameAndField("seq_daily_element", "seq")
-        ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        'ucrInputSequncer.SetTableNameAndField("seq_daily_element", "seq")
+        'ucrInputSequncer.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
 
 
         'dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
@@ -104,6 +104,7 @@ Public Class frmNewFormDaily2
         ucrDaiy2Navigation.SetKeyControls("hh", ucrHour)
 
         ucrDaiy2Navigation.PopulateControl()
+        SaveEnable()
         'ucrFormDaily.PopulateControl()
     End Sub
 
@@ -129,6 +130,8 @@ Public Class frmNewFormDaily2
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrFormDaily.Clear()
+        ucrDaiy2Navigation.ResetControls()
+        SaveEnable()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -138,6 +141,7 @@ Public Class frmNewFormDaily2
             clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
         End If
         clsDataConnection.SaveUpdate()
+        SaveEnable()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -149,10 +153,40 @@ Public Class frmNewFormDaily2
                 clsDataConnection.db.form_daily2.Remove(ucrFormDaily.fd2Record)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
-                'ucrDaiy2Navigation.MoveNext(sender, e)
+                ucrDaiy2Navigation.RemoveRecord()
+                SaveEnable()
             Catch
                 MessageBox.Show("Record has not been deleted", "Delete Record")
             End Try
+        End If
+    End Sub
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        btnAddNew.Enabled = False
+        btnClear.Enabled = True
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+        btnCommit.Enabled = True
+
+        ucrDaiy2Navigation.MoveLast()
+        ucrFormDaily.Clear()
+        ucrDaiy2Navigation.SetControlsForNewRecord()
+
+        If ucrYearSelector.isLeapYear Then
+            txtSequencer.Text = "seq_month_day_leap_yr"
+        Else
+            txtSequencer.Text = "seq_month_day"
+        End If
+        ucrFormDaily.ucrValueFlagPeriod1.Focus()
+    End Sub
+
+    Private Sub SaveEnable()
+        btnAddNew.Enabled = True
+        btnCommit.Enabled = False
+        btnClear.Enabled = False
+        If ucrDaiy2Navigation.iMaxRows > 0 Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
         End If
     End Sub
 End Class
