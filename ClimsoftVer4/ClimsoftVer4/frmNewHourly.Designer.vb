@@ -47,6 +47,8 @@ Partial Class frmNewHourly
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.lblSequencer = New System.Windows.Forms.Label()
+        Me.txtSequencer = New System.Windows.Forms.TextBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -266,11 +268,30 @@ Partial Class frmNewHourly
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 221
         '
+        'lblSequencer
+        '
+        Me.lblSequencer.AutoSize = True
+        Me.lblSequencer.Location = New System.Drawing.Point(188, 616)
+        Me.lblSequencer.Name = "lblSequencer"
+        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
+        Me.lblSequencer.TabIndex = 679
+        Me.lblSequencer.Text = "Sequencer"
+        '
+        'txtSequencer
+        '
+        Me.txtSequencer.Location = New System.Drawing.Point(253, 613)
+        Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.TabIndex = 678
+        Me.txtSequencer.Text = "seq_month_day"
+        '
         'frmNewHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(658, 645)
+        Me.Controls.Add(Me.lblSequencer)
+        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.btnHelp)
@@ -327,4 +348,6 @@ Partial Class frmNewHourly
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents lblSequencer As Label
+    Friend WithEvents txtSequencer As TextBox
 End Class

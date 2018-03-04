@@ -29,6 +29,7 @@
         dctNavigationKeyControls.Add("dd", ucrDay)
         ucrNavigation.SetKeyControls(dctNavigationKeyControls)
         ucrNavigation.PopulateControl()
+        SaveEnable()
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -54,6 +55,8 @@
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrHourly.Clear()
+        ucrNavigation.ResetControls()
+        SaveEnable()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -63,6 +66,7 @@
             clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
         End If
         clsDataConnection.SaveUpdate()
+        SaveEnable()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -74,11 +78,12 @@
                 clsDataConnection.db.form_hourly.Remove(ucrHourly.fhRecord)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
-                'ucrNavigation.MoveNext(sender, e)
+                ucrNavigation.RemoveRecord()
             Catch
                 MessageBox.Show("Record has not been deleted", "Delete Record")
             End Try
         End If
+        SaveEnable()
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -103,6 +108,46 @@
             End Try
         Else
             MessageBox.Show("No values have been update, can not update this record", "Updating Record")
+        End If
+    End Sub
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        btnAddNew.Enabled = False
+        btnClear.Enabled = True
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+        btnCommit.Enabled = True
+
+        ucrNavigation.MoveLast()
+        ucrHourly.Clear()
+        ucrNavigation.SetControlsForNewRecord()
+
+        If ucrYearSelector.isLeapYear Then
+            txtSequencer.Text = "seq_month_day_leap_yr"
+        Else
+            txtSequencer.Text = "seq_month_day"
+        End If
+
+        'change the year based on the month and the day
+        If ucrMonth.GetValue = 12 AndAlso ucrDay.GetValue = 31 Then
+            ucrYearSelector.SetValue(Val(ucrYearSelector.GetValue) + 1)
+        End If
+
+        'TODO
+        'CHANGE THE MONTH AND DAY VALUES BASED ON THE SEQUENCER AND LAST RECORD VALUES
+
+        ucrHourly.UcrValueFlagPeriod0.Focus()
+
+
+    End Sub
+
+    Private Sub SaveEnable()
+        btnAddNew.Enabled = True
+        btnCommit.Enabled = False
+        btnClear.Enabled = False
+        If ucrNavigation.iMaxRows > 0 Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
         End If
     End Sub
 End Class
