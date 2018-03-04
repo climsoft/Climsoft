@@ -2843,21 +2843,25 @@ Err:
         'byt = ""
         kounter = 1
         ''MsgBox(kount)
-        For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
-                'writeBinay.Write(byt)
-                'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
-                'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
-                FilePut(2, byt, kounter)
-                'FilePutObject(2, byt, kounter)
-                PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
-                kounter = kounter + 1
-            End If
-        Next kount
+        For i = 1 To Len(BUFR_Message) Step 8
+            'If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
+            'writeBinay.Write(byt)
+            'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
+            'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
+            'FilePut(2, byt, kounter)
+            'FilePutObject(2, byt, kounter)
+            FilePut(2, Binary_Decimal(Strings.Mid(BUFR_Message, i, 8), kounter))
+            PrintLine(1, kounter & "," & Strings.Mid(BUFR_Message, i, 8))
+            'PrintLine(1, kounter & "," & Mid(BUFR_Message, i, 8))
+            kounter = kounter + 1
+            'End If
+        Next
 
         'writeBinay.Close()
         FileClose(1)
         FileClose(2)
+
+
 
         ''Open AWS_BUFR_File For Input As #1
         'FileOpen(1, AWS_BUFR_File, OpenMode.Input)
