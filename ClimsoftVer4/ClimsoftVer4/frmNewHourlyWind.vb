@@ -92,6 +92,7 @@
             'carry out the next actions, otherwise bring up message showing that there is insufficient data
             If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
 
+                'TODO
                 'Check valid station
                 'Check valid year
                 'Check valid month
