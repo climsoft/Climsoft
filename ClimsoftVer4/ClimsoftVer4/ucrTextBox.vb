@@ -278,7 +278,7 @@ Public Class ucrTextBox
         'End If
 
         'check if value is valid
-        If bValidate AndAlso Not IsEmpty() Then
+        If bValidate Then
             ValidateValue()
         End If
 
