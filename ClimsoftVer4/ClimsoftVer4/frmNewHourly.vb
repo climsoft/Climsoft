@@ -1,12 +1,12 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
-    Dim selectAllHours As Boolean = True
+    Dim selectAllHours As Boolean
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
         End If
-
+        selectAllHours = False
     End Sub
     Private Sub InitaliseDialog()
         Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
@@ -176,7 +176,6 @@
                 ctrVFP.ucrValue.Enabled = True
                 ctrVFP.ucrFlag.SetBackColor(Color.White)
                 ctrVFP.ucrValue.SetBackColor(Color.White)
-                'ctrVFP.BackColor = Color.White
             Next
         Else
             selectAllHours = True
@@ -186,7 +185,6 @@
                 ctrVFP.ucrValue.Enabled = False
                 ctrVFP.ucrFlag.SetBackColor(Color.LightYellow)
                 ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
-                ctrVFP.BackColor = Color.LightYellow
             Next
         End If
     End Sub
