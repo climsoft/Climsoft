@@ -103,7 +103,7 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
         ucrValue.Clear()
         ucrFlag.Clear()
         If bIncludePeriod Then
@@ -164,4 +164,17 @@ Public Class ucrValueFlagPeriod
 
     End Sub
 
+    Public Overrides Sub SetValue(objNewValue As Object)
+        Dim lstValueFlagPeriod As List(Of Object)
+
+        MyBase.SetValue(objNewValue)
+        lstValueFlagPeriod = TryCast(objNewValue, List(Of Object))
+        If lstValueFlagPeriod.Count = 3 Then
+            ucrValue.SetValue(lstValueFlagPeriod(0))
+            ucrFlag.SetValue(lstValueFlagPeriod(1))
+            If bIncludePeriod Then
+                ucrPeriod.SetValue(lstValueFlagPeriod(2))
+            End If
+        End If
+    End Sub
 End Class

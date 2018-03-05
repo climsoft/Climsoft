@@ -45,6 +45,15 @@ Public Class ucrTextBox
         End If
     End Sub
 
+    Public Overrides Sub SetValue(objNewValue As Object)
+        Dim strNewValue As String
+
+        strNewValue = TryCast(objNewValue, String)
+        TextboxValue = strNewValue
+    End Sub
+
+    ' TODO This shouldn't be used. We should be use the general SetValue() method.
+    ' This can be kept but made private if needed.
     Public Property TextboxValue() As String
         Get
             Return txtBox.Text
@@ -231,7 +240,7 @@ Public Class ucrTextBox
         End If
     End Function
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
         bValidate = False
         TextboxValue = ""
         bValidate = True
@@ -253,7 +262,7 @@ Public Class ucrTextBox
         End If
     End Sub
 
-    Public Overrides Function GetValue() As Object
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         Return TextboxValue
     End Function
 

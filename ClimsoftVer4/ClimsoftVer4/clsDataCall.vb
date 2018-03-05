@@ -102,6 +102,18 @@ Public Class DataCall
         Return lstValues
     End Function
 
+    'PLEASE NOTE THIS IS MY QUICK FIX OF THE ABOVE GETVALUES.
+    Public Function GetValues(Optional clsAdditionalFilter As TableFilter = Nothing) As List(Of String)
+        Dim lstValues As New List(Of String)
+        Dim objData As DataTable
+
+        objData = GetDataTable(clsAdditionalFilter)
+        For Each entItem As DataRow In objData.Rows
+            lstValues.Add(entItem.Field(Of String)(0))
+        Next
+        Return lstValues
+    End Function
+
     Public Function GetValuesAsString(Optional strSep As String = ",") As String
         Return String.Join(strSep, GetValues())
     End Function
