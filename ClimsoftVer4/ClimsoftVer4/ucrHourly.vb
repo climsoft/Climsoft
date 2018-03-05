@@ -56,6 +56,7 @@ Public Class ucrHourly
     End Sub
 
     Public Overrides Sub PopulateControl()
+        Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
         Dim clsCurrentFilter As New TableFilter
 
@@ -83,7 +84,6 @@ Public Class ucrHourly
 
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
@@ -140,8 +140,7 @@ Public Class ucrHourly
         ucrLinkedday = ucrDayControl
     End Sub
 
-    Public Sub Clear()
-
+    Public Overrides Sub Clear()
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
         Dim ctrVFP As New ucrValueFlagPeriod

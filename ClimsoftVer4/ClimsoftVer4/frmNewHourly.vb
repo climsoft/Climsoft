@@ -69,6 +69,7 @@
         End If
         clsDataConnection.SaveUpdate()
         SaveEnable()
+        ucrNavigation.ResetControls()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -152,23 +153,17 @@
         If ucrMonth.GetValue = 12 AndAlso ucrDay.GetValue = 31 Then
             ucrYearSelector.SetValue(Val(ucrYearSelector.GetValue) + 1)
         End If
-
-        'TODO
-        'CHANGE THE MONTH AND DAY VALUES BASED ON THE SEQUENCER AND LAST RECORD VALUES
-
         ucrHourly.UcrValueFlagPeriod0.Focus()
-
-
     End Sub
 
     Private Sub SaveEnable()
-        'btnAddNew.Enabled = True
-        'btnCommit.Enabled = False
-        'btnClear.Enabled = False
-        'If ucrNavigation.iMaxRows > 0 Then
-        '    btnDelete.Enabled = True
-        '    btnUpdate.Enabled = True
-        'End If
+        btnAddNew.Enabled = True
+        btnCommit.Enabled = False
+        btnClear.Enabled = False
+        If ucrNavigation.iMaxRows > 0 Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+        End If
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
