@@ -1,7 +1,7 @@
 ﻿Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
-Public Class ucrSynopticDataManyElements
+Public Class ucrSynopticRA1
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_synoptic_2_RA1"
     Private strValueFieldName As String = "Val_Elem"
@@ -35,7 +35,7 @@ Public Class ucrSynopticDataManyElements
         Next
     End Sub
 
-    Private Sub ucrSynopticDataManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim lstTempFields As New List(Of String)
@@ -116,5 +116,13 @@ Public Class ucrSynopticDataManyElements
                 ctrVFP.Clear()
             End If
         Next
+    End Sub
+
+    Private Sub ucrVFPStationLevelPressure_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrVFPStationLevelPressure.KeyDown
+        If Val(ucrVFPStationLevelPressure.ucrValue.GetValue) < 7000 Then
+            MsgBox("Value Lower than lowerlimit of 7000.00", MsgBoxStyle.Exclamation)
+        Else
+            Exit Sub
+        End If
     End Sub
 End Class

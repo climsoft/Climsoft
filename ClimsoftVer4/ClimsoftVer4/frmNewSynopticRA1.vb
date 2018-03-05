@@ -1,7 +1,7 @@
-﻿Public Class frmNewSynopticDataForManyElements
+﻿Public Class frmNewSynopticRA1
     Private bFirstLoad As Boolean = True
 
-    Private Sub frmNewSynopticDataForManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmNewSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
@@ -65,6 +65,7 @@
         End If
 
     End Sub
+
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -96,7 +97,7 @@
         ucrNavigation.MoveLast()
         ucrSynopticDataForManyElements.Clear()
         ucrNavigation.SetControlsForNewRecord()
-        ucrSynopticDataForManyElements.UcrValueFlagPeriod1.Focus()
+        ucrSynopticDataForManyElements.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
