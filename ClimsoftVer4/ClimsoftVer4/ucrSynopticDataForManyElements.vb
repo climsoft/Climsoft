@@ -6,15 +6,13 @@ Public Class ucrSynopticDataManyElements
     Private strTableName As String = "form_synoptic_2_RA1"
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
-    Private ucrLinkedMonth As New ucrMonth
-    Private ucrLinkedDay As ucrDay
-    Private ucrLinkedHour As ucrHour
-    Private ucrLinkedYear As ucrYearSelector
     Public bUpdating As Boolean = False
     Public fs2Record As form_synoptic_2_ra1
+    Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+    Private lstFields As New List(Of String)
 
     Public Overrides Sub PopulateControl()
-        Dim ctr As Control
+        Dim ctr As New Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim clsCurrentFilter As New TableFilter
 
@@ -32,13 +30,35 @@ Public Class ucrSynopticDataManyElements
                 End If
             End If
         End If
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.PopulateControl()
-            End If
+        For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
+            ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
         Next
+    End Sub
 
+    Private Sub ucrSynopticDataManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim ctr As Control
+        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim lstTempFields As New List(Of String)
+
+        If bFirstLoad Then
+            lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod)
+            For Each ctr In Me.Controls
+                ctrVFP.ucrPeriod.Visible = False
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    lstValueFlagPeriodControls.Add(ctr)
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    lstFields.Add(strValueFieldName & ctrVFP.Tag)
+                    lstFields.Add(strFlagFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
+                    AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+                End If
+            Next
+            SetTableName(strTableName)
+            SetFields(lstTempFields)
+            bFirstLoad = False
+        End If
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
@@ -50,29 +70,21 @@ Public Class ucrSynopticDataManyElements
         End If
     End Sub
 
-    Private Sub ucrSynopticDataManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
-        Dim ctrTotal As New ucrTextBox
-        Dim lstTempFields As New List(Of String)
 
-        If bFirstLoad Then
+        If TypeOf sender Is ucrValueFlagPeriod Then
+            ctrVFP = sender
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strValueFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
-
-                    AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-
+                    If ctr.Tag = ctrVFP.Tag + 1 Then
+                        If ctr.Enabled Then
+                            ctr.Focus()
+                        End If
+                    End If
                 End If
             Next
-            SetTableName(strTableName)
-            SetFields(lstTempFields)
-            bFirstLoad = False
         End If
     End Sub
 
@@ -81,32 +93,22 @@ Public Class ucrSynopticDataManyElements
         Dim ctrVFP As New ucrValueFlagPeriod
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-            End If
-        Next
+        If Not lstFields.Contains(tblFilter.GetField) Then
+            lstFields.Add(tblFilter.GetField)
+            SetFields(lstFields)
+        End If
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         fs2Record = Nothing
         MyBase.LinkedControls_evtValueChanged()
 
-        For Each kvp In dctLinkedControlsFilters
-            CallByName(fs2Record, kvp.Value.Value.GetField, CallType.Set, kvp.Key.GetValue)
+        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            CallByName(fs2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
     End Sub
 
-    Public Sub setYearMonthDayHourLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrHourControl As ucrHour)
-        ucrLinkedYear = ucrYearControl
-        ucrLinkedMonth = ucrMonthControl
-        ucrLinkedDay = ucrDayControl
-        ucrLinkedHour = ucrHourControl
-    End Sub
-
-    Public Sub Clear()
-
+    Public Overrides Sub Clear()
         Dim ctr As Control
         Dim ctrVFP As ucrValueFlagPeriod
 
