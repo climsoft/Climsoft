@@ -7,7 +7,7 @@ Public Class ucrSynopticDataManyElements
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
     Public bUpdating As Boolean = False
-    Public fs2Record As form_synoptic_2_ra1
+    Public fs2ra1Record As form_synoptic_2_ra1
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstFields As New List(Of String)
 
@@ -16,16 +16,16 @@ Public Class ucrSynopticDataManyElements
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim clsCurrentFilter As New TableFilter
 
-        MyBase.PopulateControl()
         If Not bFirstLoad Then
-            If fs2Record Is Nothing Then
+            MyBase.PopulateControl()
+            If fs2ra1Record Is Nothing Then
                 clsCurrentFilter = GetLinkedControlsFilter()
                 Dim y = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression())
                 If y.Count() = 1 Then
-                    fs2Record = y.FirstOrDefault()
+                    fs2ra1Record = y.FirstOrDefault()
                     bUpdating = True
                 Else
-                    fs2Record = New form_synoptic_2_ra1
+                    fs2ra1Record = New form_synoptic_2_ra1
                     bUpdating = False
                 End If
             End If
@@ -66,7 +66,7 @@ Public Class ucrSynopticDataManyElements
 
         If TypeOf sender Is ucrTextBox Then
             ctr = sender
-            CallByName(fs2Record, ctr.GetField, CallType.Set, ctr.GetValue)
+            CallByName(fs2ra1Record, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
     End Sub
 
@@ -89,8 +89,6 @@ Public Class ucrSynopticDataManyElements
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
-        Dim ctrVFP As New ucrValueFlagPeriod
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
@@ -100,11 +98,11 @@ Public Class ucrSynopticDataManyElements
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        fs2Record = Nothing
+        fs2ra1Record = Nothing
         MyBase.LinkedControls_evtValueChanged()
 
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            CallByName(fs2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
     End Sub
 
