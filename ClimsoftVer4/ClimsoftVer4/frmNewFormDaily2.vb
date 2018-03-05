@@ -135,13 +135,23 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If ucrFormDaily.bUpdating Then
-            'Possibly we should be cloning and then updating here
+        'Confirm if you want to continue and save data from key-entry form to database table
+        Dim dlgResponse As DialogResult
+            dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If dlgResponse = DialogResult.Yes Then
+
+            If ucrFormDaily.bUpdating Then
+                'Possibly we should be cloning and then updating here
+            Else
+                clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
+            End If
+            clsDataConnection.SaveUpdate()
+            SaveEnable()
         Else
-            clsDataConnection.db.form_daily2.Add(ucrFormDaily.fd2Record)
-        End If
-        clsDataConnection.SaveUpdate()
-        SaveEnable()
+                MessageBox.Show("Record not Saved?", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
