@@ -24,7 +24,7 @@ Partial Class ucrStationSelector
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.cmsStation = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.cmsStationStationNames = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmsStationNames = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsStationIDs = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsStationIDAndStation = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -37,15 +37,15 @@ Partial Class ucrStationSelector
         '
         'cmsStation
         '
-        Me.cmsStation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmsStationStationNames, Me.cmsStationIDs, Me.cmsStationIDAndStation, Me.ToolStripSeparator2, Me.cmsStationSortByID, Me.cmsStationSortyByName, Me.cmsFilterStations, Me.ToolStripSeparator1})
+        Me.cmsStation.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmsStationNames, Me.cmsStationIDs, Me.cmsStationIDAndStation, Me.ToolStripSeparator2, Me.cmsStationSortByID, Me.cmsStationSortyByName, Me.cmsFilterStations, Me.ToolStripSeparator1})
         Me.cmsStation.Name = "cmsStation"
         Me.cmsStation.Size = New System.Drawing.Size(187, 148)
         '
-        'cmsStationStationNames
+        'cmsStationNames
         '
-        Me.cmsStationStationNames.Name = "cmsStationStationNames"
-        Me.cmsStationStationNames.Size = New System.Drawing.Size(186, 22)
-        Me.cmsStationStationNames.Text = "Station Names"
+        Me.cmsStationNames.Name = "cmsStationNames"
+        Me.cmsStationNames.Size = New System.Drawing.Size(186, 22)
+        Me.cmsStationNames.Text = "Station Names"
         '
         'cmsStationIDs
         '
@@ -99,7 +99,7 @@ Partial Class ucrStationSelector
     End Sub
 
     Friend WithEvents cmsStation As ContextMenuStrip
-    Friend WithEvents cmsStationStationNames As ToolStripMenuItem
+    Friend WithEvents cmsStationNames As ToolStripMenuItem
     Friend WithEvents cmsStationIDs As ToolStripMenuItem
     Friend WithEvents cmsStationIDAndStation As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator

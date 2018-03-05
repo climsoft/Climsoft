@@ -118,7 +118,7 @@ Public Class frmKeyEntry
             Case "form_upperair1"
                 formUpperAir.Show()
             Case "form_hourlywind"
-                formHourlyWind.Show()
+                frmNewHourlyWind.Show()
         End Select
     End Sub
 

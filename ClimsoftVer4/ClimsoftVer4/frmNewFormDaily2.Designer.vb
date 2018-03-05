@@ -47,9 +47,7 @@ Partial Class frmNewFormDaily2
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
-        Me.ucrInputSequncer = New ClimsoftVer4.ucrTextBox()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
@@ -58,6 +56,8 @@ Partial Class frmNewFormDaily2
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrDaiy2Navigation = New ClimsoftVer4.ucrNavigation()
+        Me.lblSequencer = New System.Windows.Forms.Label()
+        Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -289,15 +289,6 @@ Partial Class frmNewFormDaily2
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(215, 606)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(59, 13)
-        Me.Label5.TabIndex = 675
-        Me.Label5.Text = "Sequencer"
-        '
         'chkEnableSequencer
         '
         Me.chkEnableSequencer.AutoSize = True
@@ -310,15 +301,6 @@ Partial Class frmNewFormDaily2
         Me.chkEnableSequencer.TabIndex = 677
         Me.chkEnableSequencer.Text = "Enable Element Sequencer"
         Me.chkEnableSequencer.UseVisualStyleBackColor = True
-        '
-        'ucrInputSequncer
-        '
-        Me.ucrInputSequncer.Location = New System.Drawing.Point(281, 596)
-        Me.ucrInputSequncer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrInputSequncer.Name = "ucrInputSequncer"
-        Me.ucrInputSequncer.Size = New System.Drawing.Size(150, 26)
-        Me.ucrInputSequncer.TabIndex = 678
-        Me.ucrInputSequncer.TextboxValue = ""
         '
         'ucrInputValue
         '
@@ -379,16 +361,33 @@ Partial Class frmNewFormDaily2
         Me.ucrDaiy2Navigation.Size = New System.Drawing.Size(336, 25)
         Me.ucrDaiy2Navigation.TabIndex = 679
         '
+        'lblSequencer
+        '
+        Me.lblSequencer.AutoSize = True
+        Me.lblSequencer.Location = New System.Drawing.Point(212, 602)
+        Me.lblSequencer.Name = "lblSequencer"
+        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
+        Me.lblSequencer.TabIndex = 681
+        Me.lblSequencer.Text = "Sequencer"
+        '
+        'txtSequencer
+        '
+        Me.txtSequencer.Location = New System.Drawing.Point(277, 599)
+        Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.TabIndex = 680
+        Me.txtSequencer.Text = "seq_month_day"
+        '
         'frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(738, 631)
+        Me.Controls.Add(Me.lblSequencer)
+        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrDaiy2Navigation)
-        Me.Controls.Add(Me.ucrInputSequncer)
         Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.btnUpload)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
@@ -453,8 +452,8 @@ Partial Class frmNewFormDaily2
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents btnUpload As Button
-    Friend WithEvents Label5 As Label
     Friend WithEvents chkEnableSequencer As CheckBox
-    Friend WithEvents ucrInputSequncer As ucrTextBox
     Friend WithEvents ucrDaiy2Navigation As ucrNavigation
+    Friend WithEvents lblSequencer As Label
+    Friend WithEvents txtSequencer As TextBox
 End Class
