@@ -339,13 +339,20 @@ Public Class ucrHourlyWind
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         'AND bUpdating MIGHT NOT BE NECESSARY
+        'If bUpdating Then
+        '    'clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
+        '    clsDataConnection.db.SaveChanges()
+        'Else
+        '    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
+        '    clsDataConnection.db.SaveChanges()
+        'End If
+
         If bUpdating Then
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-            clsDataConnection.db.SaveChanges()
+            'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-            clsDataConnection.db.SaveChanges()
+            clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
         End If
+        clsDataConnection.SaveUpdate()
     End Sub
 
     Public Sub DeleteRecord()
