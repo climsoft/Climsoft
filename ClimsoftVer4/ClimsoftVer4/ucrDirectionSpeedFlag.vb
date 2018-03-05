@@ -241,7 +241,27 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
+    'QC checks for  direction
     Public Function QcForDirection() As Boolean
+        If ucrDirection.ValidateValue() Then
+            Return True
+        Else
+            ucrDirection.GetFocus()
+            Return False
+        End If
+    End Function
+
+    Public Function CheckQcForSpeed() As Boolean
+        If ucrSpeed.ValidateValue() Then
+            Return True
+        Else
+            ucrSpeed.GetFocus()
+            Return False
+        End If
+    End Function
+
+    'NO LONGER USED
+    Private Function QcForDirection1() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False
@@ -285,7 +305,8 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Public Function CheckQcForSpeed() As Boolean
+    'NO LONGER USED
+    Private Function CheckQcForSpeed1() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False

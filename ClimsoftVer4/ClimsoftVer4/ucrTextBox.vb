@@ -24,6 +24,8 @@ Public Class ucrTextBox
     Protected bIsReadOnly As Boolean = False
     Protected strValidationType As String = "none"
     Public bValidate As Boolean = True
+    Public bValidateSilently As Boolean = True
+    Public bValidateEmpty As Boolean = False
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
@@ -113,8 +115,54 @@ Public Class ucrTextBox
         Return iType
     End Function
 
+    'Public Overrides Function ValidateValue() As Boolean
+    '    Return (GetValidationCode(TextboxValue) = 0)
+    'End Function
+
     Public Overrides Function ValidateValue() As Boolean
-        Return (GetValidationCode(TextboxValue) = 0)
+        Dim iType As Integer
+        If Not bValidateEmpty AndAlso IsEmpty() Then
+            SetBackColor(Color.White)
+            Return True
+        End If
+
+        'If Not bValidateEmpty Then
+        '    If IsEmpty() Then
+        '        SetBackColor(Color.White)
+        '        Return True
+        '    End If
+        'End If
+
+        iType = GetValidationCode(GetValue)
+        If iType = 0 Then
+            SetBackColor(Color.White)
+        ElseIf iType = 1
+            SetBackColor(Color.Red)
+            If Not bValidateSilently Then
+                MsgBox("Number expected!", MsgBoxStyle.Critical)
+            End If
+        ElseIf iType = 2
+            'check if it was lower limit violation
+            If GetDcmMinimum() <= Val(GetValue) Then
+                SetBackColor(Color.White)
+            Else
+                SetBackColor(Color.Cyan)
+                If Not bValidateSilently Then
+                    MsgBox("Value lower than lowerlimit of: " & GetDcmMinimum(), MsgBoxStyle.Exclamation)
+                End If
+            End If
+
+            'check if it was upper limit violation
+            If GetDcmMaximum() >= Val(GetValue) Then
+                SetBackColor(Color.White)
+            Else
+                SetBackColor(Color.Cyan)
+                If Not bValidateSilently Then
+                    MsgBox("Value higher than upperlimit of: " & GetDcmMaximum(), MsgBoxStyle.Exclamation)
+                End If
+            End If
+        End If
+        Return (iType = 0)
     End Function
 
     Public Function GetValidationCode(strText As String) As Integer
@@ -225,8 +273,13 @@ Public Class ucrTextBox
         ' End If
 
         'check if value is valid
-        If bValidate AndAlso Not ValidateValue() Then
-            SetBackColor(Color.Red)
+        'If bValidate AndAlso Not ValidateValue() Then
+        '  SetBackColor(Color.Red)
+        'End If
+
+        'check if value is valid
+        If bValidate AndAlso Not IsEmpty() Then
+            ValidateValue()
         End If
 
         'change the case appropriately
