@@ -61,7 +61,7 @@ Public Class ucrFormDaily2
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     lstFields.Add(strPeriodFieldName & ctrVFP.Tag)
-
+                    ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
@@ -99,7 +99,7 @@ Public Class ucrFormDaily2
         Dim ctr As ucrTextBox
 
         If TypeOf sender Is ucrTextBox Then
-            ctr = sender
+            ctr = DirectCast(sender, ucrTextBox)
             CallByName(fd2Record, ctr.GetField, CallType.Set, ctr.GetValue)
         End If
     End Sub
@@ -152,32 +152,48 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub EnableDaysofMonth()
-        Dim ctrVFP As New ucrValueFlagPeriod
-        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        'Dim ctrVFP As New ucrValueFlagPeriod
+        'Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        'Dim iMonthLength As Integer
+        'Dim iMonth As Integer
+
+        'If ucrLinkedMonth Is Nothing Then
+        '    iMonth = 1
+        'Else
+        '    iMonth = ucrLinkedMonth.GetValue()
+        'End If
+
+        'If iMonth = 2 Then
+        '    If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
+        '        iMonthLength = 28
+        '    Else
+        '        iMonthLength = 29
+        '    End If
+        'Else
+        '    If lstShortMonths.Contains(iMonth) Then
+        '        iMonthLength = 30
+        '    Else
+        '        iMonthLength = 31
+        '    End If
+        'End If
+
+        'For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+        '    If ctrVFP.Tag <= iMonthLength Then
+        '        ctrVFP.Enabled = True
+        '    Else
+        '        ctrVFP.Enabled = False
+        '    End If
+        'Next
+
         Dim iMonthLength As Integer
-        Dim iMonth As Integer
 
-        If ucrLinkedMonth Is Nothing Then
-            iMonth = 1
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+            iMonthLength = 31
         Else
-            iMonth = ucrLinkedMonth.GetValue()
+            iMonthLength = DateTime.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
         End If
 
-        If iMonth = 2 Then
-            If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
-                iMonthLength = 28
-            Else
-                iMonthLength = 29
-            End If
-        Else
-            If lstShortMonths.Contains(iMonth) Then
-                iMonthLength = 30
-            Else
-                iMonthLength = 31
-            End If
-        End If
-
-        For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+        For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
             If ctrVFP.Tag <= iMonthLength Then
                 ctrVFP.Enabled = True
             Else
