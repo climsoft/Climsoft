@@ -90,9 +90,16 @@
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
-        formDataView.DataGridView.DataSource = ucrHourly.fhRecord
-        formDataView.DataGridView.Refresh()
-        formDataView.DataGridView.Dock = DockStyle.Top
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        dsSourceTableName = "form_hourly"
+        userName = frmLogin.txtUsername.Text
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_hourly ORDER by stationId,elementId,yyyy,mm,dd;"
+        End If
+        viewRecords.viewTableRecords(sql)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -104,32 +111,14 @@
         dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
             Try
-
-                If ucrHourly.bUpdating Then
-                    clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
-                    clsDataConnection.db.SaveChanges()
-                Else
-                    clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Added
-                    clsDataConnection.db.SaveChanges()
-                End If
+                clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
+                clsDataConnection.db.SaveChanges()
 
                 MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
             Catch ex As Exception
                 MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
             End Try
         End If
-
-        'If clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified Then
-        '    Try
-        '        clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
-        '        clsDataConnection.db.SaveChanges()
-        '        MessageBox.Show("Record has been updated", "Updating Record")
-        '    Catch
-        '        MessageBox.Show("Record has not been updated", "Updating Record")
-        '    End Try
-        'Else
-        '    MessageBox.Show("No values have been update, can not update this record", "Updating Record")
-        'End If
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -140,8 +129,10 @@
         btnCommit.Enabled = True
 
         ucrNavigation.MoveLast()
-        ucrHourly.Clear()
         ucrNavigation.SetControlsForNewRecord()
+        ucrHourly.Clear()
+        ucrHourly.bUpdating = False
+        ucrHourly.fhRecord = New form_hourly
 
         If ucrYearSelector.isLeapYear Then
             txtSequencer.Text = "seq_month_day_leap_yr"
@@ -187,5 +178,9 @@
                 ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
             Next
         End If
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
     End Sub
 End Class

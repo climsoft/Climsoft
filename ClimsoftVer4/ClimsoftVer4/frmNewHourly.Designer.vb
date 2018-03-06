@@ -39,6 +39,8 @@ Partial Class frmNewHourly
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.lblSequencer = New System.Windows.Forms.Label()
+        Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrHourly = New ClimsoftVer4.ucrHourly()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
@@ -47,8 +49,6 @@ Partial Class frmNewHourly
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.lblSequencer = New System.Windows.Forms.Label()
-        Me.txtSequencer = New System.Windows.Forms.TextBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -209,6 +209,23 @@ Partial Class frmNewHourly
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'lblSequencer
+        '
+        Me.lblSequencer.AutoSize = True
+        Me.lblSequencer.Location = New System.Drawing.Point(188, 616)
+        Me.lblSequencer.Name = "lblSequencer"
+        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
+        Me.lblSequencer.TabIndex = 679
+        Me.lblSequencer.Text = "Sequencer"
+        '
+        'txtSequencer
+        '
+        Me.txtSequencer.Location = New System.Drawing.Point(253, 613)
+        Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.TabIndex = 678
+        Me.txtSequencer.Text = "seq_month_day"
+        '
         'ucrNavigation
         '
         Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
@@ -267,23 +284,6 @@ Partial Class frmNewHourly
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 221
-        '
-        'lblSequencer
-        '
-        Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(188, 616)
-        Me.lblSequencer.Name = "lblSequencer"
-        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
-        Me.lblSequencer.TabIndex = 679
-        Me.lblSequencer.Text = "Sequencer"
-        '
-        'txtSequencer
-        '
-        Me.txtSequencer.Location = New System.Drawing.Point(253, 613)
-        Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
-        Me.txtSequencer.TabIndex = 678
-        Me.txtSequencer.Text = "seq_month_day"
         '
         'frmNewHourly
         '
