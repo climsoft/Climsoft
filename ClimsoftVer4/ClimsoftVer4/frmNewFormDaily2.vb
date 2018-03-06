@@ -103,6 +103,7 @@ Public Class frmNewFormDaily2
         ucrDaiy2Navigation.SetKeyControls("mm", ucrMonth)
         ucrDaiy2Navigation.SetKeyControls("hh", ucrHour)
 
+        ucrFormDaily.SetLinkedNavigation(ucrDaiy2Navigation)
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
         'ucrFormDaily.PopulateControl()
@@ -171,22 +172,29 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
+    Private Sub SetNewRecord(strSequencertext As String)
+        'Set key controls to next new record based on sequencer text
+
+    End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+
         btnAddNew.Enabled = False
         btnClear.Enabled = True
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ucrDaiy2Navigation.MoveLast()
-        ucrFormDaily.Clear()
-        ucrDaiy2Navigation.SetControlsForNewRecord()
 
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day"
-        End If
+        SetNewRecord(txtSequencer.Text)
+
+        'May want to change sequencer when year changes but not here
+
+        'If ucrYearSelector.isLeapYear Then
+        '    txtSequencer.Text = "seq_month_day_leap_yr"
+        'Else
+        '    txtSequencer.Text = "seq_month_day"
+        'End If
         ucrFormDaily.ucrValueFlagPeriod1.Focus()
     End Sub
 
@@ -201,23 +209,39 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
 
-                If ucrFormDaily.bUpdating Then
-                    clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
-                    clsDataConnection.db.SaveChanges()
-                Else
-                    clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Added
-                    clsDataConnection.db.SaveChanges()
-                End If
+        Try
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+                clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
+                clsDataConnection.db.SaveChanges()
 
                 MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
-            End Try
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_daily2"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_daily2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
+        Else
+            sql = "SELECT * FROM form_daily2 ORDER by stationId,elementId,yyyy,mm,hh;"
         End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
     End Sub
 End Class

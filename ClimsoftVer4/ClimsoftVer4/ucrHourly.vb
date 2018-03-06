@@ -52,6 +52,11 @@ Public Class ucrHourly
             SetTableName(strTableName)
             SetFields(lstFields)
             bFirstLoad = False
+
+            ctrVFP.ucrValue.SetValidationTypeAsNumeric()
+            ctrVFP.ucrFlag.SetTextToUpper()
+
+
         End If
     End Sub
 
@@ -184,5 +189,6 @@ Public Class ucrHourly
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
     End Sub
+
 End Class
 
