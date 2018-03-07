@@ -32,9 +32,12 @@
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
         If iMaxRows = 0 Then
-            txtRecNum.Text = "Record 0 of 0"
-        Else
+            txtRecNum.Text = "No Records"
+        ElseIf iCurrRow >= 0 AndAlso iCurrRow < iMaxRows Then
             txtRecNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
+        Else
+            txtRecNum.Text = "New Record"
+            SetControlsForNewRecord()
         End If
 
     End Sub
@@ -125,6 +128,37 @@
         End If
     End Sub
 
+    Public Sub UpdateNavigationByKeyControls()
+        Dim dctFieldvalue As New Dictionary(Of String, String)
+        Dim bRowExists As Boolean
+        Dim row As DataRow
+
+        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
+            iCurrRow = -1
+            For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+                dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
+            Next
+
+            For i As Integer = 0 To dtbRecords.Rows.Count - 1
+                row = dtbRecords.Rows(i)
+                bRowExists = True
+                For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+
+                    If Not (row(kvp.Key) = kvp.Value) Then
+                        bRowExists = False
+                        Exit For
+                    End If
+                Next
+                If bRowExists Then
+                    iCurrRow = i
+                    Exit For
+                End If
+            Next
+
+            displayRecordNumber()
+        End If
+    End Sub
+
     Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
         UpdateKeyControls()
     End Sub
@@ -142,7 +176,6 @@
         btnMoveLast.Enabled = False
         btnMoveNext.Enabled = False
         btnMovePrevious.Enabled = False
-        txtRecNum.Text = "Record " & iMaxRows + 1 & " of " & iMaxRows + 1
     End Sub
 
     Public Sub ResetControls()

@@ -39,7 +39,9 @@ Partial Class frmNewHourly
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.lblSequencer = New System.Windows.Forms.Label()
+        Me.txtSequencer = New System.Windows.Forms.TextBox()
+        Me.ucrHourlyNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrHourly = New ClimsoftVer4.ucrHourly()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
@@ -155,7 +157,6 @@ Partial Class frmNewHourly
         '
         'btnClear
         '
-        Me.btnClear.Enabled = False
         Me.btnClear.Location = New System.Drawing.Point(334, 570)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
@@ -208,13 +209,30 @@ Partial Class frmNewHourly
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'ucrNavigation
+        'lblSequencer
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
-        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNavigation.Name = "ucrNavigation"
-        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 465
+        Me.lblSequencer.AutoSize = True
+        Me.lblSequencer.Location = New System.Drawing.Point(188, 616)
+        Me.lblSequencer.Name = "lblSequencer"
+        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
+        Me.lblSequencer.TabIndex = 679
+        Me.lblSequencer.Text = "Sequencer"
+        '
+        'txtSequencer
+        '
+        Me.txtSequencer.Location = New System.Drawing.Point(253, 613)
+        Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
+        Me.txtSequencer.TabIndex = 678
+        Me.txtSequencer.Text = "seq_month_day"
+        '
+        'ucrHourlyNavigation
+        '
+        Me.ucrHourlyNavigation.Location = New System.Drawing.Point(121, 517)
+        Me.ucrHourlyNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrHourlyNavigation.Name = "ucrHourlyNavigation"
+        Me.ucrHourlyNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrHourlyNavigation.TabIndex = 465
         '
         'ucrHourly
         '
@@ -272,6 +290,8 @@ Partial Class frmNewHourly
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(658, 645)
+        Me.Controls.Add(Me.lblSequencer)
+        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.btnHelp)
@@ -281,7 +301,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.ucrNavigation)
+        Me.Controls.Add(Me.ucrHourlyNavigation)
         Me.Controls.Add(Me.ucrHourly)
         Me.Controls.Add(Me.btnHourSelection)
         Me.Controls.Add(Me.Label30)
@@ -318,7 +338,7 @@ Partial Class frmNewHourly
     Friend WithEvents lblElement As Label
     Friend WithEvents btnHourSelection As Button
     Friend WithEvents ucrHourly As ucrHourly
-    Friend WithEvents ucrNavigation As ucrNavigation
+    Friend WithEvents ucrHourlyNavigation As ucrNavigation
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button
@@ -328,4 +348,6 @@ Partial Class frmNewHourly
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents lblSequencer As Label
+    Friend WithEvents txtSequencer As TextBox
 End Class

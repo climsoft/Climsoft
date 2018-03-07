@@ -11,48 +11,57 @@ Public Class ucrHourly
     Private ucrLinkedday As ucrDay
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
-    Private lstTempFields As New List(Of String)
+    Private lstFields As New List(Of String)
     Public fhRecord As form_hourly
     Public bUpdating As Boolean = False
+    Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+    Private lstTextboxControls As List(Of ucrTextBox)
+    Private ucrLinkedNavigation As ucrNavigation
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
         If bFirstLoad Then
+            lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod)
+            lstTextboxControls = New List(Of ucrTextBox)
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
+
+                    lstValueFlagPeriodControls.Add(ctr)
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    lstFields.Add(strValueFieldName & "_" & ctrVFP.Tag)
+                    lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     ctrVFP.ucrPeriod.Visible = False
                     ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & "_" & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
-                    lstTempFields.Add(strValueFieldName & "_" & ctrVFP.Tag)
-                    lstTempFields.Add(strFlagFieldName & ctrVFP.Tag)
 
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-
-
                     AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
 
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
+                    lstTextboxControls.Add(ctr)
                     ctrTotal = ctr
                     ctrTotal.SetTableName(strTableName)
                     ctrTotal.SetField(strTotalFieldName)
-                    lstTempFields.Add(strTotalFieldName)
+                    lstFields.Add(strTotalFieldName)
                     AddHandler ctrTotal.evtValueChanged, AddressOf InnerControlValueChanged
-
                 End If
             Next
             SetTableName(strTableName)
-            SetFields(lstTempFields)
+            SetFields(lstFields)
             bFirstLoad = False
+
+            ctrVFP.ucrValue.SetValidationTypeAsNumeric()
+            ctrVFP.ucrFlag.SetTextToUpper()
+
+
         End If
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
         Dim clsCurrentFilter As New TableFilter
@@ -70,37 +79,27 @@ Public Class ucrHourly
                     bUpdating = False
                 End If
             End If
-            For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    ctrVFP.PopulateControl()
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    ctrTotal = ctr
-                    ctrTotal.PopulateControl()
-                End If
+            For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
+                ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & "_" & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
+            Next
+            For Each ucrText As ucrTextBox In lstTextboxControls
+                ucrText.SetValue(GetValue(strTotalFieldName))
             Next
         End If
     End Sub
 
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
+    End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                ctrVFP.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ctrTotal = ctr
-                ctrTotal.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-            End If
-        Next
-        If Not lstTempFields.Contains(tblFilter.GetField) Then
-            lstTempFields.Add(tblFilter.GetField)
-            SetFields(lstTempFields)
+        If Not lstFields.Contains(tblFilter.GetField) Then
+            lstFields.Add(tblFilter.GetField)
+            SetFields(lstFields)
         End If
 
     End Sub
@@ -138,10 +137,10 @@ Public Class ucrHourly
         fhRecord = Nothing
         MyBase.LinkedControls_evtValueChanged()
 
-        For Each kvp In dctLinkedControlsFilters
-            CallByName(fhRecord, kvp.Value.Value.GetField, CallType.Set, kvp.Key.GetValue)
+        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
-
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
 
     Public Sub SetYearMonthAndDayLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay)
@@ -150,8 +149,7 @@ Public Class ucrHourly
         ucrLinkedday = ucrDayControl
     End Sub
 
-    Public Sub Clear()
-
+    Public Overrides Sub Clear()
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -196,8 +194,5 @@ Public Class ucrHourly
         checkTotal()
     End Sub
 
-    Private Sub UcrValueFlagPeriod131_Load(sender As Object, e As EventArgs) Handles UcrValueFlagPeriod21.Load
-
-    End Sub
 End Class
 

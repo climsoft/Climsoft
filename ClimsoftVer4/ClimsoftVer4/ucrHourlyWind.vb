@@ -362,6 +362,12 @@ Public Class ucrHourlyWind
         clsDataConnection.db.SaveChanges()
     End Sub
 
+    Private Sub ucrDirectionSpeedFlag0_MouseDown(sender As Object, e As MouseEventArgs) Handles ucrDirectionSpeedFlag0.MouseDown
 
+    End Sub
+
+    Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
+
+    End Sub
 End Class
 
