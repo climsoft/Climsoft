@@ -174,16 +174,16 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="frmNewHourlyWind.Designer.vb">
-      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewHourlyWind.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmNewHourly.Designer.vb">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
     </Compile>
     <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.Designer.vb">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewMonthly.Designer.vb">
@@ -192,10 +192,10 @@
     <Compile Include="frmNewMonthly.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNewSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="frmNewSynopticRA1.Designer.vb">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewSynopticDataForManyElements.vb">
+    <Compile Include="frmNewSynopticRA1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -797,10 +797,10 @@
     <Compile Include="ucrMonth.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="ucrSynopticRA1.Designer.vb">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrSynopticDataForManyElements.vb">
+    <Compile Include="ucrSynopticRA1.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
@@ -853,17 +853,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmNewHourlyWind.resx">
-      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourly.resx">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourlyWind.resx">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewMonthly.resx">
       <DependentUpon>frmNewMonthly.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNewSynopticDataForManyElements.resx">
-      <DependentUpon>frmNewSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewSynopticRA1.resx">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
@@ -1284,8 +1284,9 @@
     <EmbeddedResource Include="ucrMonth.resx">
       <DependentUpon>ucrMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSynopticDataForManyElements.resx">
-      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="ucrSynopticRA1.resx">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>

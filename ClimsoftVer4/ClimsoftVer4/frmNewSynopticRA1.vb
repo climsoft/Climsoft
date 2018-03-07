@@ -1,7 +1,7 @@
-﻿Public Class frmNewSynopticDataForManyElements
+﻿Public Class frmNewSynopticRA1
     Private bFirstLoad As Boolean = True
 
-    Private Sub frmNewSynopticDataForManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmNewSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
@@ -30,8 +30,8 @@
         ucrNavigation.SetKeyControls(dctNavigationKeyControls)
 
         ucrNavigation.PopulateControl()
-        AssignLinkToKeyField(ucrSynopticDataForManyElements)
-        ucrSynopticDataForManyElements.PopulateControl()
+        AssignLinkToKeyField(ucrSynopticRA1)
+        ucrSynopticRA1.PopulateControl()
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -43,14 +43,16 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrSynopticDataForManyElements.Clear()
+        ucrNavigation.ResetControls()
+        ucrSynopticRA1.Clear()
+        SaveEnable()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If ucrSynopticDataForManyElements.bUpdating Then
+        If ucrSynopticRA1.bUpdating Then
             'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElements.fs2ra1Record)
+            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticRA1.fs2ra1Record)
         End If
         clsDataConnection.SaveUpdate()
     End Sub
@@ -65,6 +67,7 @@
         End If
 
     End Sub
+
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -74,8 +77,8 @@
         msgBoxResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If msgBoxResponse = DialogResult.Yes Then
             Try
-                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticDataForManyElements.fs2ra1Record)
-                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticDataForManyElements.fs2ra1Record)
+                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticRA1.fs2ra1Record)
+                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticRA1.fs2ra1Record)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
                 ucrNavigation.RemoveRecord()
@@ -93,10 +96,7 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ucrNavigation.MoveLast()
-        ucrSynopticDataForManyElements.Clear()
-        ucrNavigation.SetControlsForNewRecord()
-        ucrSynopticDataForManyElements.UcrValueFlagPeriod1.Focus()
+        ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -105,11 +105,11 @@
         If msgBoxResponse = DialogResult.Yes Then
             Try
 
-                If ucrSynopticDataForManyElements.bUpdating Then
-                    clsDataConnection.db.Entry(ucrSynopticDataForManyElements.fs2ra1Record).State = Entity.EntityState.Modified
+                If ucrSynopticRA1.bUpdating Then
+                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Modified
                     clsDataConnection.db.SaveChanges()
                 Else
-                    clsDataConnection.db.Entry(ucrSynopticDataForManyElements.fs2ra1Record).State = Entity.EntityState.Added
+                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Added
                     clsDataConnection.db.SaveChanges()
                 End If
 
@@ -118,5 +118,22 @@
                 MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
             End Try
         End If
+    End Sub
+    'This is from Samuel's code
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_synoptic_2_RA1"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+        Else
+            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+    'This is from Samuel's code
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
     End Sub
 End Class

@@ -41,7 +41,7 @@ Partial Class frmNewHourly
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
-        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.ucrHourlyNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrHourly = New ClimsoftVer4.ucrHourly()
         Me.ucrInputValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrElementSelector = New ClimsoftVer4.ucrElementSelector()
@@ -226,13 +226,13 @@ Partial Class frmNewHourly
         Me.txtSequencer.TabIndex = 678
         Me.txtSequencer.Text = "seq_month_day"
         '
-        'ucrNavigation
+        'ucrHourlyNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(121, 517)
-        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNavigation.Name = "ucrNavigation"
-        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 465
+        Me.ucrHourlyNavigation.Location = New System.Drawing.Point(121, 517)
+        Me.ucrHourlyNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrHourlyNavigation.Name = "ucrHourlyNavigation"
+        Me.ucrHourlyNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrHourlyNavigation.TabIndex = 465
         '
         'ucrHourly
         '
@@ -301,7 +301,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.ucrNavigation)
+        Me.Controls.Add(Me.ucrHourlyNavigation)
         Me.Controls.Add(Me.ucrHourly)
         Me.Controls.Add(Me.btnHourSelection)
         Me.Controls.Add(Me.Label30)
@@ -338,7 +338,7 @@ Partial Class frmNewHourly
     Friend WithEvents lblElement As Label
     Friend WithEvents btnHourSelection As Button
     Friend WithEvents ucrHourly As ucrHourly
-    Friend WithEvents ucrNavigation As ucrNavigation
+    Friend WithEvents ucrHourlyNavigation As ucrNavigation
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button

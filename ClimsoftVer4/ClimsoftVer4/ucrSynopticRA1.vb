@@ -1,7 +1,7 @@
 ﻿Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
-Public Class ucrSynopticDataManyElements
+Public Class ucrSynopticRA1
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_synoptic_2_RA1"
     Private strValueFieldName As String = "Val_Elem"
@@ -35,7 +35,7 @@ Public Class ucrSynopticDataManyElements
         Next
     End Sub
 
-    Private Sub ucrSynopticDataManyElements_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim lstTempFields As New List(Of String)
@@ -117,4 +117,19 @@ Public Class ucrSynopticDataManyElements
             End If
         Next
     End Sub
+    'This is meant to check validation of ucrVFPStationLevelPressure, not sure if this is the correct way to do this.
+    'There are other validations required for other ucrVFP's similar to this.
+    'Private Sub ucrVFPStationLevelPressure_Leave(sender As Object, e As EventArgs) Handles ucrVFPStationLevelPressure.Leave
+    '    Dim pval As String
+    '    pval = ucrVFPStationLevelPressure.ucrValue.GetValue
+    '    If pval Is Nothing Then
+    '        If Val(pval) < 7000 Then
+    '            MsgBox("Value Lower than lowerlimit of 7000.00", MsgBoxStyle.Exclamation)
+    '            ucrVFPStationLevelPressure.ucrValue.SetBackColor(Color.Cyan)
+    '            ucrVFPStationLevelPressure.ucrValue.Focus()
+    '        Else
+    '            Exit Sub
+    '        End If
+    '    End If
+    'End Sub
 End Class

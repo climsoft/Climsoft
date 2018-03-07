@@ -105,7 +105,7 @@ Public Class frmKeyEntry
 
         Select Case frm
             Case "form_synoptic_2_ra1"
-                frmNewSynopticDataForManyElements.Show()
+                frmNewSynopticRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
