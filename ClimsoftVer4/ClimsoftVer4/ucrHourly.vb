@@ -52,10 +52,16 @@ Public Class ucrHourly
             SetTableName(strTableName)
             SetFields(lstFields)
             bFirstLoad = False
+
+            ctrVFP.ucrValue.SetValidationTypeAsNumeric()
+            ctrVFP.ucrFlag.SetTextToUpper()
+
+
         End If
     End Sub
 
     Public Overrides Sub PopulateControl()
+        Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
         Dim clsCurrentFilter As New TableFilter
 
@@ -83,7 +89,6 @@ Public Class ucrHourly
 
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
@@ -140,8 +145,7 @@ Public Class ucrHourly
         ucrLinkedday = ucrDayControl
     End Sub
 
-    Public Sub Clear()
-
+    Public Overrides Sub Clear()
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -185,5 +189,6 @@ Public Class ucrHourly
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
     End Sub
+
 End Class
 

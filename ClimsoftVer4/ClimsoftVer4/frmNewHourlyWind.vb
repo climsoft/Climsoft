@@ -121,45 +121,38 @@
                     ucrNavigation.GoToNewRecord()
                     ucrNavigation.ResetControls()
                     SaveEnable()
-                    MessageBox.Show(Me, "New record added to database table!", "Save Record", MessageBoxIcon.Information)
+                    MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-
             Else
-                MessageBox.Show(Me, "Incomplete header information and insufficient observation data!", "Save Record", MessageBoxIcon.Exclamation)
+                MessageBox.Show("Incomplete header information and insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
-
         Catch ex As Exception
-            MessageBox.Show(Me, "New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxIcon.Error)
+            MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
+        Try
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.SaveRecord()
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
-            End Try
-        End If
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
+        Try
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.DeleteRecord()
                 ucrNavigation.RemoveRecord()
                 SaveEnable()
-                MessageBox.Show(Me, "Record has been deleted", "Delete Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxIcon.Error)
-            End Try
-        End If
+                MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
@@ -173,9 +166,8 @@
             ucrNavigation.ResetControls()
             SaveEnable()
         Else
-            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record")
+            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click

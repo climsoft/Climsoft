@@ -14,6 +14,8 @@ Public Class ucrHourlyWind
     Public bUpdating As Boolean = False
 
     Public Overrides Sub PopulateControl()
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        Dim ucrText As ucrTextBox
         Dim clsCurrentFilter As TableFilter
 
         If Not bFirstLoad Then
@@ -32,9 +34,11 @@ Public Class ucrHourlyWind
 
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctr.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    ucrDSF = ctr
+                    ucrDSF.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    ctr.SetValue(GetValue(strTotalFieldName))
+                    ucrText = ctr
+                    ucrText.SetValue(GetValue(strTotalFieldName))
                 End If
             Next
         End If
@@ -56,7 +60,7 @@ Public Class ucrHourlyWind
                     AddHandler ucrDSF.ucrDirection.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrDSF.ucrSpeed.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrDSF.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ucrDSF.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+                    AddHandler ucrDSF.evtGoToNextDSFControl, AddressOf GoToNextDSFControl
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     'lstTextboxControls.Add(ctr)
                     ucrText = ctr
@@ -78,7 +82,7 @@ Public Class ucrHourlyWind
         End If
     End Sub
 
-    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+    Private Sub GoToNextDSFControl(sender As Object, e As EventArgs)
         'TODO 
         'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
         Dim ctrDDFFFlag As ucrDirectionSpeedFlag
@@ -219,7 +223,7 @@ Public Class ucrHourlyWind
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = ctr
-                    ucrDSF.SetDirectionValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
+                    ucrDSF.SetDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
         End If
@@ -240,10 +244,10 @@ Public Class ucrHourlyWind
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = ctr
-                    ucrDSF.SetSpeedValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
-                    iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
+                    ucrDSF.SetSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
+            iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
         End If
     End Sub
 
@@ -335,13 +339,20 @@ Public Class ucrHourlyWind
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         'AND bUpdating MIGHT NOT BE NECESSARY
+        'If bUpdating Then
+        '    'clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
+        '    clsDataConnection.db.SaveChanges()
+        'Else
+        '    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
+        '    clsDataConnection.db.SaveChanges()
+        'End If
+
         If bUpdating Then
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-            clsDataConnection.db.SaveChanges()
+            'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-            clsDataConnection.db.SaveChanges()
+            clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
         End If
+        clsDataConnection.SaveUpdate()
     End Sub
 
     Public Sub DeleteRecord()
@@ -351,6 +362,12 @@ Public Class ucrHourlyWind
         clsDataConnection.db.SaveChanges()
     End Sub
 
+    Private Sub ucrDirectionSpeedFlag0_MouseDown(sender As Object, e As MouseEventArgs) Handles ucrDirectionSpeedFlag0.MouseDown
 
+    End Sub
+
+    Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
+
+    End Sub
 End Class
 
