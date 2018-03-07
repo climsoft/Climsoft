@@ -18,6 +18,7 @@ Public Class ucrFormDaily2
     Public bUpdating As Boolean = False
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
+    Private ucrLinkedNavigation As ucrNavigation
 
     Public Overrides Sub PopulateControl()
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -82,6 +83,11 @@ Public Class ucrFormDaily2
         End If
     End Sub
 
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
+    End Sub
+
+
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -129,6 +135,7 @@ Public Class ucrFormDaily2
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
 
+
         'Dim ctr As Control
         'Dim ctrVFP As New ucrValueFlagPeriod
         'Dim ctrTotal As New ucrTextBox
@@ -148,8 +155,9 @@ Public Class ucrFormDaily2
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
-
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
+
 
     Private Sub EnableDaysofMonth()
         'Dim ctrVFP As New ucrValueFlagPeriod
