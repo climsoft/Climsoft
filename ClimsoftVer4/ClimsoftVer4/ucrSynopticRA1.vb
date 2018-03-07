@@ -117,12 +117,19 @@ Public Class ucrSynopticRA1
             End If
         Next
     End Sub
-
-    Private Sub ucrVFPStationLevelPressure_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrVFPStationLevelPressure.KeyDown
-        If Val(ucrVFPStationLevelPressure.ucrValue.GetValue) < 7000 Then
-            MsgBox("Value Lower than lowerlimit of 7000.00", MsgBoxStyle.Exclamation)
-        Else
-            Exit Sub
-        End If
-    End Sub
+    'This is meant to check validation of ucrVFPStationLevelPressure, not sure if this is the correct way to do this.
+    'There are other validations required for other ucrVFP's similar to this.
+    'Private Sub ucrVFPStationLevelPressure_Leave(sender As Object, e As EventArgs) Handles ucrVFPStationLevelPressure.Leave
+    '    Dim pval As String
+    '    pval = ucrVFPStationLevelPressure.ucrValue.GetValue
+    '    If pval Is Nothing Then
+    '        If Val(pval) < 7000 Then
+    '            MsgBox("Value Lower than lowerlimit of 7000.00", MsgBoxStyle.Exclamation)
+    '            ucrVFPStationLevelPressure.ucrValue.SetBackColor(Color.Cyan)
+    '            ucrVFPStationLevelPressure.ucrValue.Focus()
+    '        Else
+    '            Exit Sub
+    '        End If
+    '    End If
+    'End Sub
 End Class

@@ -43,7 +43,9 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ucrNavigation.ResetControls()
         ucrSynopticDataForManyElements.Clear()
+        SaveEnable()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -94,9 +96,6 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ucrNavigation.MoveLast()
-        ucrSynopticDataForManyElements.Clear()
-        ucrNavigation.SetControlsForNewRecord()
         ucrSynopticDataForManyElements.ucrVFPStationLevelPressure.Focus()
     End Sub
 
@@ -119,5 +118,22 @@
                 MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
             End Try
         End If
+    End Sub
+    'This is from Samuel's code
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_synoptic_2_RA1"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+        Else
+            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+    'This is from Samuel's code
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
     End Sub
 End Class
