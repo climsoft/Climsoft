@@ -30,8 +30,8 @@
         ucrNavigation.SetKeyControls(dctNavigationKeyControls)
 
         ucrNavigation.PopulateControl()
-        AssignLinkToKeyField(ucrSynopticDataForManyElements)
-        ucrSynopticDataForManyElements.PopulateControl()
+        AssignLinkToKeyField(ucrSynopticRA1)
+        ucrSynopticRA1.PopulateControl()
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -44,15 +44,15 @@
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrNavigation.ResetControls()
-        ucrSynopticDataForManyElements.Clear()
+        ucrSynopticRA1.Clear()
         SaveEnable()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If ucrSynopticDataForManyElements.bUpdating Then
+        If ucrSynopticRA1.bUpdating Then
             'Possibly we should be cloning and then updating here
         Else
-            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticDataForManyElements.fs2ra1Record)
+            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticRA1.fs2ra1Record)
         End If
         clsDataConnection.SaveUpdate()
     End Sub
@@ -77,8 +77,8 @@
         msgBoxResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If msgBoxResponse = DialogResult.Yes Then
             Try
-                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticDataForManyElements.fs2ra1Record)
-                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticDataForManyElements.fs2ra1Record)
+                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticRA1.fs2ra1Record)
+                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticRA1.fs2ra1Record)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
                 ucrNavigation.RemoveRecord()
@@ -96,7 +96,7 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ucrSynopticDataForManyElements.ucrVFPStationLevelPressure.Focus()
+        ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -105,11 +105,11 @@
         If msgBoxResponse = DialogResult.Yes Then
             Try
 
-                If ucrSynopticDataForManyElements.bUpdating Then
-                    clsDataConnection.db.Entry(ucrSynopticDataForManyElements.fs2ra1Record).State = Entity.EntityState.Modified
+                If ucrSynopticRA1.bUpdating Then
+                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Modified
                     clsDataConnection.db.SaveChanges()
                 Else
-                    clsDataConnection.db.Entry(ucrSynopticDataForManyElements.fs2ra1Record).State = Entity.EntityState.Added
+                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Added
                     clsDataConnection.db.SaveChanges()
                 End If
 
