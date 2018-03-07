@@ -31,7 +31,6 @@ Partial Class frmNewSynopticRA1
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnCommit = New System.Windows.Forms.Button()
@@ -41,7 +40,7 @@ Partial Class frmNewSynopticRA1
         Me.btnClose = New System.Windows.Forms.Button()
         Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
-        Me.ucrSynopticDataForManyElements = New ClimsoftVer4.ucrSynopticRA1()
+        Me.ucrSynopticRA1 = New ClimsoftVer4.ucrSynopticRA1()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
@@ -131,14 +130,6 @@ Partial Class frmNewSynopticRA1
         Me.Label5.TabIndex = 676
         Me.Label5.Text = "Sequencer"
         '
-        'txtSequencer
-        '
-        Me.txtSequencer.Location = New System.Drawing.Point(354, 599)
-        Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
-        Me.txtSequencer.TabIndex = 675
-        Me.txtSequencer.Text = "seq_month_day_synoptime"
-        '
         'btnHelp
         '
         Me.btnHelp.Location = New System.Drawing.Point(693, 567)
@@ -217,12 +208,12 @@ Partial Class frmNewSynopticRA1
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
         Me.ucrDay.TabIndex = 215
         '
-        'ucrSynopticDataForManyElements
+        'ucrSynopticRA1
         '
-        Me.ucrSynopticDataForManyElements.Location = New System.Drawing.Point(10, 44)
-        Me.ucrSynopticDataForManyElements.Name = "ucrSynopticDataForManyElements"
-        Me.ucrSynopticDataForManyElements.Size = New System.Drawing.Size(820, 485)
-        Me.ucrSynopticDataForManyElements.TabIndex = 214
+        Me.ucrSynopticRA1.Location = New System.Drawing.Point(10, 44)
+        Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
+        Me.ucrSynopticRA1.Size = New System.Drawing.Size(820, 485)
+        Me.ucrSynopticRA1.TabIndex = 214
         '
         'ucrHour
         '
@@ -262,7 +253,6 @@ Partial Class frmNewSynopticRA1
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnCommit)
@@ -271,7 +261,7 @@ Partial Class frmNewSynopticRA1
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.ucrDay)
-        Me.Controls.Add(Me.ucrSynopticDataForManyElements)
+        Me.Controls.Add(Me.ucrSynopticRA1)
         Me.Controls.Add(Me.ucrHour)
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.ucrYearSelector)
@@ -300,13 +290,12 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents ucrYearSelector As ucrYearSelector
     Friend WithEvents ucrMonth As ucrMonth
     Friend WithEvents ucrHour As ucrHour
-    Friend WithEvents ucrSynopticDataForManyElements As ucrSynopticRA1
+    Friend WithEvents ucrSynopticRA1 As ucrSynopticRA1
     Friend WithEvents ucrDay As ucrDay
     Friend WithEvents btnTDCF As Button
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtSequencer As TextBox
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents btnCommit As Button

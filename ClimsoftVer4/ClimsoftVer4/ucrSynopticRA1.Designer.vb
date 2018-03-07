@@ -117,6 +117,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvlHsHs3 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrVFPVerticalSignificant3 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrVFPCloudTypeLvl3C3 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -197,9 +198,9 @@ Partial Class ucrSynopticRA1
         Me.Val_Elem002Label.AutoSize = True
         Me.Val_Elem002Label.Location = New System.Drawing.Point(615, 86)
         Me.Val_Elem002Label.Name = "Val_Elem002Label"
-        Me.Val_Elem002Label.Size = New System.Drawing.Size(33, 13)
+        Me.Val_Elem002Label.Size = New System.Drawing.Size(36, 13)
         Me.Val_Elem002Label.TabIndex = 736
-        Me.Val_Elem002Label.Text = "Tmax"
+        Me.Val_Elem002Label.Text = " Tmax"
         '
         'Val_Elem130Label
         '
@@ -341,9 +342,9 @@ Partial Class ucrSynopticRA1
         Me.Val_Elem119Label.AutoSize = True
         Me.Val_Elem119Label.Location = New System.Drawing.Point(328, 14)
         Me.Val_Elem119Label.Name = "Val_Elem119Label"
-        Me.Val_Elem119Label.Size = New System.Drawing.Size(112, 13)
+        Me.Val_Elem119Label.Size = New System.Drawing.Size(109, 13)
         Me.Val_Elem119Label.TabIndex = 799
-        Me.Val_Elem119Label.Text = "Vertical Significance 1"
+        Me.Val_Elem119Label.Text = "Vertical Significance1"
         '
         'Val_Elem180Label
         '
@@ -1003,9 +1004,19 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvl3C3.TabIndex = 870
         Me.ucrVFPCloudTypeLvl3C3.Tag = "125"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(659, 407)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(73, 13)
+        Me.Label1.TabIndex = 871
+        Me.Label1.Text = "hidden label 2"
+        '
         'ucrSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ucrVFPCloudTypeLvl3C3)
         Me.Controls.Add(Me.ucrVFPVerticalSignificant3)
         Me.Controls.Add(Me.ucrVFPCloudHtLvlHsHs3)
@@ -1210,4 +1221,5 @@ Partial Class ucrSynopticRA1
     Friend WithEvents Val_Elem400Label As Label
     Friend WithEvents Val_Elem107Label As Label
     Friend WithEvents Val_Elem106Label As Label
+    Friend WithEvents Label1 As Label
 End Class
