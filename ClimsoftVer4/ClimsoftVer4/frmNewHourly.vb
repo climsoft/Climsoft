@@ -21,16 +21,17 @@
         dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
         dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
         dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
-        ucrNavigation.SetFields(dctNavigationFields)
-        ucrNavigation.SetTableName("form_hourly")
+        ucrHourlyNavigation.SetFields(dctNavigationFields)
+        ucrHourlyNavigation.SetTableName("form_hourly")
 
         dctNavigationKeyControls.Add("stationId", ucrStationSelector)
         dctNavigationKeyControls.Add("elementId", ucrElementSelector)
         dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
         dctNavigationKeyControls.Add("mm", ucrMonth)
         dctNavigationKeyControls.Add("dd", ucrDay)
-        ucrNavigation.SetKeyControls(dctNavigationKeyControls)
-        ucrNavigation.PopulateControl()
+        ucrHourlyNavigation.SetKeyControls(dctNavigationKeyControls)
+        ucrHourly.SetLinkedNavigation(ucrHourlyNavigation)
+        ucrHourlyNavigation.PopulateControl()
         SaveEnable()
     End Sub
 
@@ -57,7 +58,7 @@
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ucrHourly.Clear()
-        ucrNavigation.ResetControls()
+        ucrHourlyNavigation.ResetControls()
         SaveEnable()
     End Sub
 
@@ -69,7 +70,7 @@
         End If
         clsDataConnection.SaveUpdate()
         SaveEnable()
-        ucrNavigation.ResetControls()
+        ucrHourlyNavigation.ResetControls()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -81,7 +82,7 @@
                 clsDataConnection.db.form_hourly.Remove(ucrHourly.fhRecord)
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record has been deleted", "Delete Record")
-                ucrNavigation.RemoveRecord()
+                ucrHourlyNavigation.RemoveRecord()
             Catch
                 MessageBox.Show("Record has not been deleted", "Delete Record")
             End Try
@@ -128,8 +129,8 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ucrNavigation.MoveLast()
-        ucrNavigation.SetControlsForNewRecord()
+        ucrHourlyNavigation.MoveLast()
+        ucrHourlyNavigation.SetControlsForNewRecord()
         ucrHourly.Clear()
         ucrHourly.bUpdating = False
         ucrHourly.fhRecord = New form_hourly
@@ -151,7 +152,7 @@
         btnAddNew.Enabled = True
         btnCommit.Enabled = False
         btnClear.Enabled = False
-        If ucrNavigation.iMaxRows > 0 Then
+        If ucrHourlyNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
         End If

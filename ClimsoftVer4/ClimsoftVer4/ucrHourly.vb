@@ -16,6 +16,7 @@ Public Class ucrHourly
     Public bUpdating As Boolean = False
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
+    Private ucrLinkedNavigation As ucrNavigation
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctr As Control
@@ -87,6 +88,9 @@ Public Class ucrHourly
         End If
     End Sub
 
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
+    End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -136,7 +140,7 @@ Public Class ucrHourly
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
-
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
 
     Public Sub SetYearMonthAndDayLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay)
