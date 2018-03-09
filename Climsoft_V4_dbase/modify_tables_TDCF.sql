@@ -11,8 +11,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for mariadb_climsoft_db_v4
-CREATE DATABASE IF NOT EXISTS `mariadb_climsoft_test_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `mariadb_climsoft_test_db_v4`;
+CREATE DATABASE IF NOT EXISTS `mariadb_climsoft_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `mariadb_climsoft_db_v4`;
 
 
 -- Dumping structure for table mariadb_climsoft_db_v4.aws_mss

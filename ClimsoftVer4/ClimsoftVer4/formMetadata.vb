@@ -52,9 +52,11 @@ Public Class formMetadata
 
         SetDataSet("station")
         rec = 0
-        populateStations("station", rec, Kount)
+
+        populateStations("station", 9, Kount)
         populateSearchStation()
         populateSearchElement()
+
     End Sub
 
     Sub SetDataSet(tbl As String)
@@ -65,6 +67,8 @@ Public Class formMetadata
             ds.Clear()
             da.Fill(ds, tbl)
             Kount = ds.Tables(tbl).Rows.Count
+            'MsgBox(Kount)
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -163,6 +167,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationmethod")) Then txtgeoMethod.Text = ds.Tables("station").Rows(num).Item("geolocationmethod")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("qualifier")) Then txtStationType.Text = ds.Tables("station").Rows(num).Item("qualifier")
 
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then
             txtOpeningDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
@@ -393,14 +398,25 @@ Public Class formMetadata
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
+            dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
+            dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+
             If IsDate(txtOpeningDate.Text) Then
                 ' Opening date can only be in the past
-                If DateDiff(DateInterval.Day, DateValue(txtOpeningDate.Text), Now) > 0 Then dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
+                If DateDiff(DateInterval.Day, DateValue(txtOpeningDate.Text), Now) < 0 Then
+                    dsNewRow.Item("openingDatetime") = ""
+                    MsgBox("Not Valid Opening date")
+                End If
+
             End If
 
             If IsDate(txtClosingDate.Text) Then
-                ' Opening date can only be in the past
-                If DateDiff(DateInterval.Day, DateValue(txtClosingDate.Text), Now) > 0 Then dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+                ' Closing date can only be in the past
+                If DateDiff(DateInterval.Day, DateValue(txtClosingDate.Text), Now) < 0 Then
+                    dsNewRow.Item("closingDatetime") = ""
+                    MsgBox("Not Valid Closing date date")
+                End If
+
             End If
 
             dsNewRow.Item("stationoperational") = txtStationOperation.CheckState
@@ -443,9 +459,11 @@ Public Class formMetadata
         txtgeoMethod.Clear()
         OpenDate.Text = ""
         ClosingDate.Text = ""
+        txtStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
         txtstationId.Focus()
+
     End Sub
 
     Sub ClearElementForm()
@@ -534,11 +552,31 @@ Public Class formMetadata
         txtFeatureStation.Focus()
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+        Dim oper As Integer
+        If txtStationOperation.Checked Then
+            oper = 1
+        Else
+            oper = 0
+        End If
+
         If txtstationId.Text = "" Then
             MsgBox("No record Selected")
         Else
-            TableUpdate(rec, "update")
+            'TableUpdate(rec, "update")
+
+            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" & _
+                ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', qualifier = '" & txtStationType.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
+
+            'MsgBox(sql)
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+
         End If
+
+
     End Sub
     Function TableUpdate(recs As Integer, cmdtype As String) As Boolean
         TableUpdate = True
@@ -550,11 +588,15 @@ Public Class formMetadata
             Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
             Dim recUpdate As New dataEntryGlobalRoutines
 
+            'MsgBox(ds.Tables("station").Rows.Count)
+
             ds.Tables("station").Rows(recs).Item("stationId") = txtstationId.Text
             ds.Tables("station").Rows(recs).Item("stationName") = txtStationName.Text
             ds.Tables("station").Rows(recs).Item("wmoid") = txtwmoid.Text
             ds.Tables("station").Rows(recs).Item("icaoid") = txticaoid.Text
             ds.Tables("station").Rows(recs).Item("country") = txtCountry.Text
+            ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
+            ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
             If IsNumeric(txtLatitude.Text) Then ds.Tables("station").Rows(recs).Item("latitude") = Val(txtLatitude.Text)
             If IsNumeric(txtLongitude.Text) Then ds.Tables("station").Rows(recs).Item("longitude") = Val(txtLongitude.Text)
             If IsNumeric(txtElevation.Text) Then ds.Tables("station").Rows(recs).Item("elevation") = Val(txtElevation.Text)
@@ -564,19 +606,19 @@ Public Class formMetadata
             If IsNumeric(txtgeoAccuracy.Text) Then ds.Tables("station").Rows(recs).Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then ds.Tables("station").Rows(recs).Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
-            ' Update Opening date
-            If IsDate(txtOpeningDate.Text) Then
-                ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
-            Else
-                'ds.Tables("station").Rows(recs).Item("openingDatetime") = vbNull
-            End If
+            '' Update Opening date
+            'If IsDate(txtOpeningDate.Text) Then
+            '    ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
+            'Else
+            '    'ds.Tables("station").Rows(recs).Item("openingDatetime") = vbNull
+            'End If
 
-            ' Update Closing date
-            If IsDate(txtClosingDate.Text) Then
-                ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
-            Else
-                'ds.Tables("station").Rows(recs).Item("closingDatetime") = vbNull
-            End If
+            '' Update Closing date
+            'If IsDate(txtClosingDate.Text) Then
+            '    ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
+            'Else
+            '    'ds.Tables("station").Rows(recs).Item("closingDatetime") = vbNull
+            'End If
 
             ds.Tables("station").Rows(recs).Item("stationoperational") = txtStationOperation.CheckState
 
@@ -1537,7 +1579,7 @@ Err:
             sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " & _
                  "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
 
-            MsgBox(sql)
+            'MsgBox(sql)
 
             If Not Update_Rec(sql) Then
                 MsgBox("Update Failed")
@@ -2140,6 +2182,8 @@ Err:
         picInstrument.ImageLocation = txtInstrumentPicFile.Text
         picInstrument.Refresh()
     End Sub
+
+
 End Class
 Class MetadataVariables
     Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element

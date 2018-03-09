@@ -42,6 +42,7 @@ Public Class formHourlyWind
     Dim selectAllHours As Boolean
     Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim dsSequencer As New DataSet
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub navigateRecords()
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
@@ -492,6 +493,7 @@ Public Class formHourlyWind
                     itemFound = True
                 Else
                     itemFound = False
+                    If FldName.Valid_Stn(cboStation) Then itemFound = True
                 End If
                 objKeyPress.checkExists(itemFound, cboStation)
 
@@ -543,98 +545,107 @@ Public Class formHourlyWind
 
         maxRows = ds.Tables("form_hourlywind").Rows.Count
 
-        '--------------------------------
-        'Fill combobox for station identifier with station list from station table
-        Dim m As Integer
-        Dim ctl As Control
-        Dim ds1 As New DataSet
-        Dim ds2 As New DataSet
-        Dim DDdigits As Integer, FFDigits As Integer
-        Dim sql1 As String
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Try
 
-        sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            '--------------------------------
+            'Fill combobox for station identifier with station list from station table
+            Dim m As Integer
+            Dim ctl As Control
+            Dim ds1 As New DataSet
+            Dim ds2 As New DataSet
+            Dim DDdigits As Integer, FFDigits As Integer
+            Dim sql1 As String
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
-        da1.Fill(ds1, "station")
-        If ds1.Tables("station").Rows.Count > 0 Then
-            'Populate station combobox
-            With cboStation
-                .DataSource = ds1.Tables("station")
-                .DisplayMember = "stationName"
-                .ValueMember = "stationId"
-                .SelectedIndex = 0
-            End With
-        Else
-            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        End If
+            sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        'Get number of digits for wind direction from RegKeys table
-        DDdigits = dsReg.Tables("regData").Rows(5).Item("keyValue")
-        ' MsgBox("Wind direction digits=" & DDdigits)
-        txtDirectionDigits.Text = DDdigits
-        'Get number of digits for wind speed from RegKeys table
-        FFDigits = dsReg.Tables("regData").Rows(6).Item("keyValue")
-        txtSpeedDigits.Text = FFDigits
-        'Initialize textboxes for dd values
+            da1.Fill(ds1, "station")
+            If ds1.Tables("station").Rows.Count > 0 Then
+                'Populate station combobox
+                With cboStation
+                    .DataSource = ds1.Tables("station")
+                    .DisplayMember = "stationName"
+                    .ValueMember = "stationId"
+                    .SelectedIndex = 0
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
 
-        If maxRows > 0 Then
-            'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            cboStation.SelectedValue = ds.Tables("form_hourlywind").Rows(inc).Item("stationId")
+            'Get number of digits for wind direction from RegKeys table
+            DDdigits = dsReg.Tables("regData").Rows(5).Item("keyValue")
+            ' MsgBox("Wind direction digits=" & DDdigits)
+            txtDirectionDigits.Text = DDdigits
+            'Get number of digits for wind speed from RegKeys table
+            FFDigits = dsReg.Tables("regData").Rows(6).Item("keyValue")
+            txtSpeedDigits.Text = FFDigits
+            'Initialize textboxes for dd values
 
-            txtYear.Text = ds.Tables("form_hourlywind").Rows(inc).Item("yyyy")
-            cboMonth.Text = ds.Tables("form_hourlywind").Rows(inc).Item("mm")
-            cboDay.Text = ds.Tables("form_hourlywind").Rows(inc).Item("dd")
+            If maxRows > 0 Then
+                'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                cboStation.SelectedValue = ds.Tables("form_hourlywind").Rows(inc).Item("stationId")
 
-            '
-            For m = 4 To 27
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 5) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
+                txtYear.Text = ds.Tables("form_hourlywind").Rows(inc).Item("yyyy")
+                cboMonth.Text = ds.Tables("form_hourlywind").Rows(inc).Item("mm")
+                cboDay.Text = ds.Tables("form_hourlywind").Rows(inc).Item("dd")
+
+                '
+                For m = 4 To 27
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 5) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
-            'Initialize textboxes for dd flags flags
-            '
-            For m = 28 To 51
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
+                'Initialize textboxes for dd flags flags
+                '
+                For m = 28 To 51
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
-            'Display ff values in coressponding textboxes
-            For m = 52 To 75
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 5) = "txtFF" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
-                    End If
-                Next ctl
-            Next m
+                'Display ff values in coressponding textboxes
+                For m = 52 To 75
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 5) = "txtFF" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_hourlywind").Rows(inc).Item(m)) Then ctl.Text = ds.Tables("form_hourlywind").Rows(inc).Item(m)
+                        End If
+                    Next ctl
+                Next m
 
-            displayRecordNumber()
-        Else
-            'If this is the first record
-            btnAddNew.Enabled = False
-            btnCommit.Enabled = True
-            btnUpdate.Enabled = False
-            btnDelete.Enabled = False
-            btnClear.Enabled = False
-            btnMoveFirst.Enabled = False
-            btnMoveNext.Enabled = False
-            btnMovePrevious.Enabled = False
-            btnMoveLast.Enabled = False
+                displayRecordNumber()
+            Else
+                'If this is the first record
+                btnAddNew.Enabled = False
+                btnCommit.Enabled = True
+                btnUpdate.Enabled = False
+                btnDelete.Enabled = False
+                btnClear.Enabled = False
+                btnMoveFirst.Enabled = False
+                btnMoveNext.Enabled = False
+                btnMovePrevious.Enabled = False
+                btnMoveLast.Enabled = False
 
-            recNumberTextBox.Text = "Record 1 of 1"
-        End If
+                recNumberTextBox.Text = "Record 1 of 1"
+            End If
 
+        Catch ex As Exception
+            If ex.HResult = "-2146233086" Then
+                MsgBox("No Element Selected!   >>> Select them at the Metadata form")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+        End Try
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click

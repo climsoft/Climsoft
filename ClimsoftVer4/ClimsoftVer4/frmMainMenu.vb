@@ -109,6 +109,7 @@ Public Class frmMainMenu
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
         ' The icon has been changed
         frmKeyEntry.ShowDialog()
+
     End Sub
 
     Private Sub cmdPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdPaperArchive.Click
