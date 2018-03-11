@@ -84,7 +84,8 @@ Partial Class formAWSRealTime
         Me.lblInformation = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
         Me.pnlSites = New System.Windows.Forms.Panel()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.grpSites = New System.Windows.Forms.GroupBox()
+        Me.chkGTSEncode = New System.Windows.Forms.CheckBox()
         Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
         Me.txtSiteName = New System.Windows.Forms.ComboBox()
         Me.Label41 = New System.Windows.Forms.Label()
@@ -269,7 +270,7 @@ Partial Class formAWSRealTime
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlSites.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
+        Me.grpSites.SuspendLayout()
         CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDataStructures.SuspendLayout()
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -910,45 +911,59 @@ Partial Class formAWSRealTime
         Me.pnlSites.AllowDrop = True
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
-        Me.pnlSites.Controls.Add(Me.GroupBox11)
-        Me.pnlSites.Location = New System.Drawing.Point(200, 273)
+        Me.pnlSites.Controls.Add(Me.grpSites)
+        Me.pnlSites.Location = New System.Drawing.Point(200, 255)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(721, 416)
+        Me.pnlSites.Size = New System.Drawing.Size(721, 404)
         Me.pnlSites.TabIndex = 3
         '
-        'GroupBox11
+        'grpSites
         '
-        Me.GroupBox11.Controls.Add(Me.DataGridViewSites)
-        Me.GroupBox11.Controls.Add(Me.txtSiteName)
-        Me.GroupBox11.Controls.Add(Me.Label41)
-        Me.GroupBox11.Controls.Add(Me.cmdClear)
-        Me.GroupBox11.Controls.Add(Me.cmdViewUpdate)
-        Me.GroupBox11.Controls.Add(Me.cmdDel)
-        Me.GroupBox11.Controls.Add(Me.cmdUpdateSites)
-        Me.GroupBox11.Controls.Add(Me.cmdAdd)
-        Me.GroupBox11.Controls.Add(Me.btnMovePrevious)
-        Me.GroupBox11.Controls.Add(Me.btnMoveFirst)
-        Me.GroupBox11.Controls.Add(Me.btnMoveLast)
-        Me.GroupBox11.Controls.Add(Me.txtSitesNavigator)
-        Me.GroupBox11.Controls.Add(Me.btnMoveNext)
-        Me.GroupBox11.Controls.Add(Me.Label4)
-        Me.GroupBox11.Controls.Add(Me.txtIP)
-        Me.GroupBox11.Controls.Add(Me.txtDataStructure)
-        Me.GroupBox11.Controls.Add(Me.txtFlag)
-        Me.GroupBox11.Controls.Add(Me.chkOperational)
-        Me.GroupBox11.Controls.Add(Me.Label18)
-        Me.GroupBox11.Controls.Add(Me.Label17)
-        Me.GroupBox11.Controls.Add(Me.Label16)
-        Me.GroupBox11.Controls.Add(Me.txtInFile)
-        Me.GroupBox11.Controls.Add(Me.lblInfile)
-        Me.GroupBox11.Controls.Add(Me.txtSiteID)
-        Me.GroupBox11.Controls.Add(Me.Label15)
-        Me.GroupBox11.Location = New System.Drawing.Point(2, 27)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(709, 386)
-        Me.GroupBox11.TabIndex = 67
-        Me.GroupBox11.TabStop = False
+        Me.grpSites.Controls.Add(Me.chkGTSEncode)
+        Me.grpSites.Controls.Add(Me.DataGridViewSites)
+        Me.grpSites.Controls.Add(Me.txtSiteName)
+        Me.grpSites.Controls.Add(Me.Label41)
+        Me.grpSites.Controls.Add(Me.cmdClear)
+        Me.grpSites.Controls.Add(Me.cmdViewUpdate)
+        Me.grpSites.Controls.Add(Me.cmdDel)
+        Me.grpSites.Controls.Add(Me.cmdUpdateSites)
+        Me.grpSites.Controls.Add(Me.cmdAdd)
+        Me.grpSites.Controls.Add(Me.btnMovePrevious)
+        Me.grpSites.Controls.Add(Me.btnMoveFirst)
+        Me.grpSites.Controls.Add(Me.btnMoveLast)
+        Me.grpSites.Controls.Add(Me.txtSitesNavigator)
+        Me.grpSites.Controls.Add(Me.btnMoveNext)
+        Me.grpSites.Controls.Add(Me.Label4)
+        Me.grpSites.Controls.Add(Me.txtIP)
+        Me.grpSites.Controls.Add(Me.txtDataStructure)
+        Me.grpSites.Controls.Add(Me.txtFlag)
+        Me.grpSites.Controls.Add(Me.chkOperational)
+        Me.grpSites.Controls.Add(Me.Label18)
+        Me.grpSites.Controls.Add(Me.Label17)
+        Me.grpSites.Controls.Add(Me.Label16)
+        Me.grpSites.Controls.Add(Me.txtInFile)
+        Me.grpSites.Controls.Add(Me.lblInfile)
+        Me.grpSites.Controls.Add(Me.txtSiteID)
+        Me.grpSites.Controls.Add(Me.Label15)
+        Me.grpSites.Location = New System.Drawing.Point(8, 15)
+        Me.grpSites.Name = "grpSites"
+        Me.grpSites.Size = New System.Drawing.Size(700, 386)
+        Me.grpSites.TabIndex = 67
+        Me.grpSites.TabStop = False
+        '
+        'chkGTSEncode
+        '
+        Me.chkGTSEncode.AutoSize = True
+        Me.chkGTSEncode.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkGTSEncode.Location = New System.Drawing.Point(85, 275)
+        Me.chkGTSEncode.Name = "chkGTSEncode"
+        Me.chkGTSEncode.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.chkGTSEncode.Size = New System.Drawing.Size(109, 17)
+        Me.chkGTSEncode.TabIndex = 96
+        Me.chkGTSEncode.Text = "Encode for GTS  "
+        Me.chkGTSEncode.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.chkGTSEncode.UseVisualStyleBackColor = True
         '
         'DataGridViewSites
         '
@@ -1191,7 +1206,7 @@ Partial Class formAWSRealTime
         Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
         Me.pnlDataStructures.Location = New System.Drawing.Point(196, 115)
         Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 204)
+        Me.pnlDataStructures.Size = New System.Drawing.Size(734, 121)
         Me.pnlDataStructures.TabIndex = 5
         Me.pnlDataStructures.Visible = False
         '
@@ -1909,7 +1924,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox4)
         Me.pnlMsgEncoding.Location = New System.Drawing.Point(196, 194)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 100)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(734, 51)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
@@ -2648,9 +2663,9 @@ Partial Class formAWSRealTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(931, 551)
+        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.Controls.Add(Me.pnlProcessing)
-        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
@@ -2671,8 +2686,8 @@ Partial Class formAWSRealTime
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.pnlSites.ResumeLayout(False)
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
+        Me.grpSites.ResumeLayout(False)
+        Me.grpSites.PerformLayout()
         CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlDataStructures.ResumeLayout(False)
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2911,7 +2926,7 @@ Partial Class formAWSRealTime
     Friend WithEvents cmdmssRefresh As System.Windows.Forms.Button
     Friend WithEvents cmdmssReset As System.Windows.Forms.Button
     Friend WithEvents txtmssFTPMode As System.Windows.Forms.ComboBox
-    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpSites As System.Windows.Forms.GroupBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtIP As System.Windows.Forms.ComboBox
     Friend WithEvents txtDataStructure As System.Windows.Forms.ComboBox
@@ -2948,4 +2963,5 @@ Partial Class formAWSRealTime
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents DataGridViewSites As System.Windows.Forms.DataGridView
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
+    Friend WithEvents chkGTSEncode As System.Windows.Forms.CheckBox
 End Class

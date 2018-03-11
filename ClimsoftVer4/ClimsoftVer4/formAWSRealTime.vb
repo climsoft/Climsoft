@@ -255,6 +255,7 @@ Err:
                 txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
                 txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
                 chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
+                chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
 
             Case "pnlDataStructures"
 
@@ -430,6 +431,7 @@ Err:
                 txtFlag.Clear()
                 chkOperational.Checked = True
                 txtIP.Text = ""
+
         End Select
     End Sub
 
@@ -539,7 +541,7 @@ Err:
 
     End Sub
 
-    Private Sub GroupBox11_Enter(sender As Object, e As EventArgs) Handles GroupBox11.Enter
+    Private Sub GroupBox11_Enter(sender As Object, e As EventArgs) Handles grpSites.Enter
 
     End Sub
 
@@ -592,6 +594,12 @@ Err:
         Else
             dsNewRow.Item("OperationalStatus") = 0
         End If
+        If chkGTSEncode.Checked Then
+            dsNewRow.Item("GTSEncode") = 1
+        Else
+            dsNewRow.Item("GTSEncode") = 0
+        End If
+
         'Add a new record to the data source table
 
         ds.Tables("aws_sites").Rows.Add(dsNewRow)
@@ -643,7 +651,11 @@ Err:
         Else
             ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
         End If
-
+        If chkGTSEncode.Checked Then
+            ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
+        Else
+            ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
+        End If
         'Add a new record to the data source table
         'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
 
@@ -1640,6 +1652,7 @@ Err:
                     If Not IsDBNull(.Rows(i).Item("latitude")) Then lat = .Rows(i).Item("latitude")
                     If Not IsDBNull(.Rows(i).Item("longitude")) Then lon = .Rows(i).Item("longitude")
                     If Not IsDBNull(.Rows(i).Item("elevation")) Then elv = .Rows(i).Item("elevation")
+                    If Not IsDBNull(.Rows(i).Item("wmoid")) Then wmo_id = .Rows(i).Item("wmoid")
                     Exit For
                 End If
             Next
@@ -1652,7 +1665,7 @@ Err:
         ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
         update_main_db(aws_rs, datestring, nat_id)
 
-        If Val(txtPeriod.Text) = 999 Then Exit Sub ' No processing of messages if entire file processing is selected
+        If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
 
         If IsDate(datestring) Then
             ' Process the messages for transmission at the scheduled time
@@ -1669,7 +1682,25 @@ Err:
         'MsgBox("Process_input_record")
         Log_Errors(Err.Number & ": " & Err.Description & " at Process_Input_Record")
     End Sub
+    Function GTSEncode(nat_id As String) As Boolean
+        Dim grs As DataSet
+        GTSEncode = False
+        Try
+            sql = "Select * from aws_sites"
+            grs = GetDataSet("aws_sites", sql)
 
+            With grs.Tables("aws_sites")
+                For i = 0 To 1
+                    If .Rows(i).Item("siteID") = nat_id Then
+                        If .Rows(i).Item("GTSEncode") = 1 Then GTSEncode = True
+                        Exit For
+                    End If
+                Next
+            End With
+        Catch ex As Exception
+            Log_Errors(ex.Message)
+        End Try
+    End Function
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
 
         On Error GoTo Err
@@ -1973,7 +2004,7 @@ Err:
         min = DateAndTime.Minute(Date_Time)
         ss = DateAndTime.Second(Date_Time)
         stn_typ = 0 ' Code for AWS
-        wmo_id = 63999
+        'wmo_id = 63999
         'MsgBox(stn_typ.ToString("D2"))
         msg_header = txtMsgHeader.Text
 
