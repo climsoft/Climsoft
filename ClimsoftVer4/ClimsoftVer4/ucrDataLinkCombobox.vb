@@ -67,6 +67,8 @@
             End If
         Next
         cboValues.Text = objNewValue
+        'TODO possibly want this as well?
+        'cboValues.SelectedIndex = -1
     End Sub
 
     ' If the text in the textbox portion does not match any of the items in the dropdown then GetValue will always return cboValue.Text
@@ -108,6 +110,9 @@
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
         OnevtTextChanged(sender, e)
-        OnevtValueChanged(sender, e)
+    End Sub
+
+    Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
+        SetValue(cboValues.Text)
     End Sub
 End Class
