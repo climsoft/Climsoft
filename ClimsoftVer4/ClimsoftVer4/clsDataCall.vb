@@ -143,7 +143,6 @@ Public Class DataCall
             If objData IsNot Nothing Then
                 For Each Item As Object In objData
                     dtbFields.Rows.Add(GetFieldsArray(Item))
-                    'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
                 Next
             End If
         End If

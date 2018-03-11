@@ -172,11 +172,6 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
-    Private Sub SetNewRecord(strSequencertext As String)
-        'Set key controls to next new record based on sequencer text
-
-    End Sub
-
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
 
         btnAddNew.Enabled = False
@@ -185,8 +180,12 @@ Public Class frmNewFormDaily2
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
+        ' temporary until we know how to get all fields from table without specifying names
+        Dim d As New Dictionary(Of String, List(Of String))
+        d.Add("seq", New List(Of String)({"seq"}))
+        d.Add("elementId", New List(Of String)({"elementId"}))
 
-        SetNewRecord(txtSequencer.Text)
+        ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=d, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
         'May want to change sequencer when year changes but not here
 
@@ -215,8 +214,7 @@ Public Class frmNewFormDaily2
 
                 clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
-
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
