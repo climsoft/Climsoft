@@ -7,10 +7,6 @@ Public Class ucrHourly
     Private strValueFieldName As String = "hh"
     Private strFlagFieldName As String = "flag"
     Private strTotalFieldName As String = "total"
-    Private ucrLinkedMonth As ucrMonth
-    Private ucrLinkedday As ucrDay
-    Private ucrLinkedYear As ucrYearSelector
-    Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
     Private lstFields As New List(Of String)
     Public fhRecord As form_hourly
     Public bUpdating As Boolean = False
@@ -56,8 +52,6 @@ Public Class ucrHourly
 
             ctrVFP.ucrValue.SetValidationTypeAsNumeric()
             ctrVFP.ucrFlag.SetTextToUpper()
-
-
         End If
     End Sub
 
@@ -88,6 +82,10 @@ Public Class ucrHourly
         End If
     End Sub
 
+    ''' <summary>
+    ''' Sets the linked navigation control 
+    ''' </summary>
+    ''' <param name="ucrNewNavigation"></param>
     Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
         ucrLinkedNavigation = ucrNewNavigation
     End Sub
@@ -141,12 +139,6 @@ Public Class ucrHourly
             CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
-    End Sub
-
-    Public Sub SetYearMonthAndDayLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay)
-        ucrLinkedYear = ucrYearControl
-        ucrLinkedMonth = ucrMonthControl
-        ucrLinkedday = ucrDayControl
     End Sub
 
     Public Overrides Sub Clear()

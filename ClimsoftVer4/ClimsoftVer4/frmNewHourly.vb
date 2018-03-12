@@ -9,31 +9,9 @@
         selectAllHours = False
     End Sub
     Private Sub InitaliseDialog()
-        'Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
-        'Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
-
-        ucrHourly.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
         AssignLinkToKeyField(ucrHourly)
-        'ucrHourly.PopulateControl()
-
-        'dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
-        'dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
-        'dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
-        'dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
-        'dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
-        'ucrHourlyNavigation.SetFields(dctNavigationFields)
-        'ucrHourlyNavigation.SetTableName("form_hourly")
 
         ucrHourlyNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
-
-
-        'dctNavigationKeyControls.Add("stationId", ucrStationSelector)
-        'dctNavigationKeyControls.Add("elementId", ucrElementSelector)
-        'dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
-        'dctNavigationKeyControls.Add("mm", ucrMonth)
-        'dctNavigationKeyControls.Add("dd", ucrDay)
-        'ucrHourlyNavigation.SetKeyControls(dctNavigationKeyControls)
-
         ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
         ucrHourlyNavigation.SetKeyControls("elementId", ucrElementSelector)
         ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
@@ -138,12 +116,6 @@
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
-
-        ucrHourlyNavigation.MoveLast()
-        ucrHourlyNavigation.SetControlsForNewRecord()
-        ucrHourly.Clear()
-        ucrHourly.bUpdating = False
-        ucrHourly.fhRecord = New form_hourly
 
         If ucrYearSelector.isLeapYear Then
             txtSequencer.Text = "seq_month_day_leap_yr"
