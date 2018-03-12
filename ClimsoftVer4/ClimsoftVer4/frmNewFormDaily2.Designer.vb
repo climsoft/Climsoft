@@ -376,7 +376,7 @@ Partial Class frmNewFormDaily2
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 680
-        Me.txtSequencer.Text = "seq_month_day"
+        Me.txtSequencer.Text = "seq_daily_element"
         '
         'frmNewFormDaily2
         '

@@ -29,14 +29,20 @@ Public Class ucrFormDaily2
             MyBase.PopulateControl()
             If fd2Record Is Nothing Then
                 clsCurrentFilter = GetLinkedControlsFilter()
-                Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
-                If y.Count() = 1 Then
-                    fd2Record = y.FirstOrDefault()
-                    bUpdating = True
-                Else
+                Try
+                    Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
+                    If y.Count() = 1 Then
+                        fd2Record = y.FirstOrDefault()
+                        bUpdating = True
+                    Else
+                        fd2Record = New form_daily2
+                        bUpdating = False
+                    End If
+                Catch ex As Exception
+                    'TODO Is this correct?
                     fd2Record = New form_daily2
                     bUpdating = False
-                End If
+                End Try
             End If
             For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
                 ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag), GetValue(strPeriodFieldName & ucrVFP.Tag)}))
