@@ -15,6 +15,11 @@ Public Class frmNewFormDaily2
         'Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
         'Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
+        ' Currently only works with this sequencer table so textbox disabled
+        txtSequencer.Text = "seq_daily_element"
+        txtSequencer.Enabled = False
+        chkEnableSequencer.Checked = True
+
         ucrFormDaily.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
         AssignLinkToKeyField(ucrFormDaily)
 
@@ -130,8 +135,7 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrFormDaily.Clear()
-        ucrDaiy2Navigation.ResetControls()
+        ucrDaiy2Navigation.MoveFirst()
         SaveEnable()
     End Sub
 
@@ -172,12 +176,8 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
-    Private Sub SetNewRecord(strSequencertext As String)
-        'Set key controls to next new record based on sequencer text
-
-    End Sub
-
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
 
         btnAddNew.Enabled = False
         btnClear.Enabled = True
@@ -185,8 +185,10 @@ Public Class frmNewFormDaily2
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
+        ' temporary until we know how to get all fields from table without specifying names
+        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
 
-        SetNewRecord(txtSequencer.Text)
+        ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
         'May want to change sequencer when year changes but not here
 
@@ -215,8 +217,7 @@ Public Class frmNewFormDaily2
 
                 clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
-
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -243,5 +244,13 @@ Public Class frmNewFormDaily2
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
+    End Sub
+
+    Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
+        If chkEnableSequencer.Checked Then
+            txtSequencer.Text = "seq_daily_element"
+        Else
+            txtSequencer.Text = ""
+        End If
     End Sub
 End Class
