@@ -9,27 +9,37 @@
         selectAllHours = False
     End Sub
     Private Sub InitaliseDialog()
-        Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
-        Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
+        'Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
+        'Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
 
         ucrHourly.SetYearMonthAndDayLink(ucrYearSelector, ucrMonth, ucrDay)
         AssignLinkToKeyField(ucrHourly)
-        ucrHourly.PopulateControl()
+        'ucrHourly.PopulateControl()
 
-        dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
-        dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
-        dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
-        dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
-        dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
-        ucrHourlyNavigation.SetFields(dctNavigationFields)
-        ucrHourlyNavigation.SetTableName("form_hourly")
+        'dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
+        'dctNavigationFields.Add("elementId", New List(Of String)({"elementId"}))
+        'dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
+        'dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
+        'dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
+        'ucrHourlyNavigation.SetFields(dctNavigationFields)
+        'ucrHourlyNavigation.SetTableName("form_hourly")
 
-        dctNavigationKeyControls.Add("stationId", ucrStationSelector)
-        dctNavigationKeyControls.Add("elementId", ucrElementSelector)
-        dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
-        dctNavigationKeyControls.Add("mm", ucrMonth)
-        dctNavigationKeyControls.Add("dd", ucrDay)
-        ucrHourlyNavigation.SetKeyControls(dctNavigationKeyControls)
+        ucrHourlyNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
+
+
+        'dctNavigationKeyControls.Add("stationId", ucrStationSelector)
+        'dctNavigationKeyControls.Add("elementId", ucrElementSelector)
+        'dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
+        'dctNavigationKeyControls.Add("mm", ucrMonth)
+        'dctNavigationKeyControls.Add("dd", ucrDay)
+        'ucrHourlyNavigation.SetKeyControls(dctNavigationKeyControls)
+
+        ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
+        ucrHourlyNavigation.SetKeyControls("elementId", ucrElementSelector)
+        ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
+        ucrHourlyNavigation.SetKeyControls("mm", ucrMonth)
+        ucrHourlyNavigation.SetKeyControls("dd", ucrDay)
+
         ucrHourly.SetLinkedNavigation(ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()

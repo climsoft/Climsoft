@@ -93,7 +93,8 @@
     Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrBaseDataLink))
         dctKeyControls = dctNewKeyControls
     End Sub
-
+    'TODO
+    'NOT SURE WHETHER TO CALL THIS AddKeyControls or SetKeyControls
     Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrBaseDataLink)
         If dctKeyControls Is Nothing Then
             SetKeyControls(New Dictionary(Of String, ucrBaseDataLink))
