@@ -22,7 +22,8 @@ Public Class formDataView
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'DataGridView.Top = 300
+        'MsgBox(dsSourceTableName)
     End Sub
     'Sub ViewStation()
     '    Dim sql As String = "SELECT * FROM Authors"
@@ -345,5 +346,28 @@ Public Class formDataView
             FileClose(111)
         End Try
 
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        If cmdEdit.Text = "Edit Mode" Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+            cmdEdit.Text = "View Mode"
+            grpSearch.Visible = False
+        Else
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            cmdEdit.Text = "Edit Mode"
+            grpSearch.Visible = True
+        End If
+    End Sub
+
+    Private Sub cmdSearch_Click(sender As Object, e As EventArgs) Handles cmdSearch.Click
+        Dim showRecords As New dataEntryGlobalRoutines
+        Dim sqlr As String
+
+        sqlr = "Select * from " & dsSourceTableName & " where stationId ='" & txtStn.Text & "' and yyyy ='" & txtYY.Text & "' and mm ='" & txtMM.Text & "';"
+        'MsgBox(sqlr)
+        showRecords.viewTableRecords(sqlr)
     End Sub
 End Class

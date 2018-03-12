@@ -192,201 +192,209 @@ Public Class formProductsSelectCriteria
 
 
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
-
+        'MsgBox(Me.lblProductType.Text)
 
         Dim ProductsPath, xpivot As String
 
         Me.Cursor = Cursors.WaitCursor
         ' Define the products application path
-        ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        Try
+            ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
 
-        If Not IO.Directory.Exists(ProductsPath) Then
-            IO.Directory.CreateDirectory(ProductsPath)
-        End If
+            If Not IO.Directory.Exists(ProductsPath) Then
+                IO.Directory.CreateDirectory(ProductsPath)
+            End If
 
-        If pnlSummary.Enabled And optTotal.Checked Then
-            SummaryType = "Sum(obsValue) AS Total"
-            SumAvg = "SUM"
-        Else
-            SummaryType = "Avg(obsValue) AS Mean"
-            SumAvg = "AVG"
-        End If
+            If pnlSummary.Enabled And optTotal.Checked Then
+                SummaryType = "Sum(obsValue) AS Total"
+                SumAvg = "SUM"
+            Else
+                SummaryType = "Avg(obsValue) AS Mean"
+                SumAvg = "AVG"
+            End If
 
-        'xpivot = SumAvg
-        'For i = 1 To 12
-        '    If i = 1 Then xpivot = ""
-        '    xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
-        'Next
+            'xpivot = SumAvg
+            'For i = 1 To 12
+            '    If i = 1 Then xpivot = ""
+            '    xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+            'Next
 
-        ' Get the stations list
-        stnlist = ""
-        If lstvStations.Items.Count > 0 Then
-            stnlist = "'" & lstvStations.Items(0).Text & "'"
-            For i = 1 To lstvStations.Items.Count - 1
-                '  MsgBox(lstvStations.Items(i).Text)
-                stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
-            Next
-        End If
+            ' Get the stations list
+            stnlist = ""
+            If lstvStations.Items.Count > 0 Then
+                stnlist = "'" & lstvStations.Items(0).Text & "'"
+                For i = 1 To lstvStations.Items.Count - 1
+                    '  MsgBox(lstvStations.Items(i).Text)
+                    stnlist = stnlist & " OR RecordedFrom = " & "'" & lstvStations.Items(i).Text & "'"
+                Next
+            End If
 
-        ' Get the Element list
-        elmlist = ""
-        elmcolmn = ""
+            ' Get the Element list
+            elmlist = ""
+            elmcolmn = ""
 
 
-        If lstvElements.Items.Count > 0 Then
-            elmlist = "'" & lstvElements.Items(0).Text & "'" '""""
-            'elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
-            elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).SubItems(1).Text & "'"
+            If lstvElements.Items.Count > 0 Then
+                elmlist = "'" & lstvElements.Items(0).Text & "'" '""""
+                'elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+                elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).SubItems(1).Text & "'"
 
-            'elmcolmn = " AVG(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
+                'elmcolmn = " AVG(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).Text & "'"
 
-            For i = 1 To lstvElements.Items.Count - 1
-                ' MsgBox(lstvElements.Items(i).Text)
-                elmlist = elmlist & " OR  describedBy = " & "'" & lstvElements.Items(i).Text & "'"  ' """ & lstvElements.Items(i).Text & """"
-                'elmcolmn = elmcolmn & ", AVG(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
-                elmcolmn = elmcolmn & ", " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).SubItems(1).Text & "'"
-            Next
-        End If
+                For i = 1 To lstvElements.Items.Count - 1
+                    ' MsgBox(lstvElements.Items(i).Text)
+                    elmlist = elmlist & " OR  describedBy = " & "'" & lstvElements.Items(i).Text & "'"  ' """ & lstvElements.Items(i).Text & """"
+                    'elmcolmn = elmcolmn & ", AVG(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).Text & "'"
+                    elmcolmn = elmcolmn & ", " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(i).Text & "', value, NULL)) AS '" & lstvElements.Items(i).SubItems(1).Text & "'"
+                Next
+            End If
 
-        'MsgBox(elmlist)
-        'Exit Sub
-        sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-        'edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
-        edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+            'MsgBox(elmlist)
+            'Exit Sub
+            sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+            'edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+            edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
-        ' Contrust a SQL statement for creating a query for the selected data product
+            ' Contrust a SQL statement for creating a query for the selected data product
 
-        'sql0 = "SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
-        Select Case Me.lblProductType.Text
-            Case "WindRose"
-                'sql = "SELECT recordedFrom as StationID,describedBy as Code, obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+            'sql0 = "SELECT recordedFrom as StationId,obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = '67774010' or '100000') AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '2005-01-01 00:00:00' and '2010-12-31 23:00:00') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+            Select Case Me.lblProductType.Text
+                Case "WindRose"
+                    'sql = "SELECT recordedFrom as StationID,describedBy as Code, obsDatetime,SUM(IF(describedBy = '111', value, NULL)) AS '111',SUM(IF(describedBy = '112', value, NULL)) AS '112' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
-                'WindRoseData(sql)
-                WRPlot(stnlist, sdate, edate)
+                    'WindRoseData(sql)
+                    WRPlot(stnlist, sdate, edate)
 
-            Case "Minutes"
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour,minute(obsDatetime) as Minute," & elmcolmn & " FROM (SELECT recordedFrom,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime), minute(obsDatetime);"
+                Case "Minutes"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour,minute(obsDatetime) as Minute," & elmcolmn & " FROM (SELECT recordedFrom,stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime), minute(obsDatetime);"
 
-                DataProducts(sql, lblProductType.Text)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Hourly"
+                Case "Hourly"
 
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom,latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
 
-                DataProducts(sql, lblProductType.Text)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Daily"
-                'sql = "SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                ' "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
-                sql = "SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
-                'MsgBox(sql)
-                DataProducts(sql, lblProductType.Text)
+                Case "Daily"
+                    'sql = "SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    ' "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                    sql = "SELECT recordedFrom as StationId,stationName as Station_Name,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+                    'MsgBox(sql)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Histograms"
-                Dim myInterface As New clsRInterface()
-                myInterface.productHistogramExample()
+                Case "Histograms"
+                    Dim myInterface As New clsRInterface()
+                    myInterface.productHistogramExample()
 
-            Case "Monthly"
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                       "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Year, Month;"
+                Case "Monthly"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, stationName, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Year, Month;"
 
-                ' Transpose products if so selected
-                If chkTranspose.Checked = True Then
-                    xpivot = SumAvg
-                    For i = 1 To 12
-                        If i = 1 Then xpivot = ""
-                        xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
-                    Next
+                    ' Transpose products if so selected
+                    If chkTranspose.Checked = True Then
+                        xpivot = SumAvg
+                        For i = 1 To 12
+                            If i = 1 Then xpivot = ""
+                            xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                        Next
 
-                    sql = "SELECT recordedFrom as StationID, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year;"
-                End If
-                DataProducts(sql, lblProductType.Text)
+                        sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year;"
+                    End If
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Dekadal"
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, " & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude,elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,DEKAD;"
+                Case "Dekadal"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, " & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude,elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,DEKAD;"
 
-                ' Transpose products if so selected
-                'If chkTranspose.Checked = True Then
-                '    xpivot = SumAvg
-                '    For i = 1 To 3
-                '        If i = 1 Then xpivot = ""
-                '        xpivot = xpivot & "," & SumAvg & "(IF(round(Day(obsDatetime) / 10.5 + 0.5, 0)) = '" & i & "', value, NULL)) AS '" & i & "'"
-                '    Next
+                    ' Transpose products if so selected
+                    'If chkTranspose.Checked = True Then
+                    '    xpivot = SumAvg
+                    '    For i = 1 To 3
+                    '        If i = 1 Then xpivot = ""
+                    '        xpivot = xpivot & "," & SumAvg & "(IF(round(Day(obsDatetime) / 10.5 + 0.5, 0)) = '" & i & "', value, NULL)) AS '" & i & "'"
+                    '    Next
 
-                '    sql = "SELECT recordedFrom as StationID, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month" & xpivot & " FROM (SELECT recordedFrom, describedBy, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                '          "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year, Month;"
-                'End If
+                    '    sql = "SELECT recordedFrom as StationID, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month" & xpivot & " FROM (SELECT recordedFrom, describedBy, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    '          "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year, Month;"
+                    'End If
 
-                DataProducts(sql, lblProductType.Text)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Pentad"
-                sql = "SELECT recordedFrom as StationID, latitude as Lat,longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/5.5 + 0.5,0) as  PENTAD, " & elmcolmn & " FROM (SELECT recordedFrom,latitude,longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,PENTAD;"
+                Case "Pentad"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat,longitude as Lon, elevation as Elev,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/5.5 + 0.5,0) as  PENTAD, " & elmcolmn & " FROM (SELECT recordedFrom,stationName,latitude,longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month,PENTAD;"
 
-                DataProducts(sql, lblProductType.Text)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Annual"
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' And '" & edate & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,Year;"
+                Case "Annual"
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year," & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                         "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' And '" & edate & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,Year;"
 
-                DataProducts(sql, lblProductType.Text)
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Means"
+                Case "Means"
 
-                sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, month(obsDatetime) as Month, " & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                 "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Month;"
-                DataProducts(sql, lblProductType.Text)
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name,latitude as Lat, longitude as Lon, elevation as Elev, month(obsDatetime) as Month, " & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Month;"
+                    DataProducts(sql, lblProductType.Text)
 
-            Case "Extremes"
+                Case "Extremes"
 
-                If btnLowHigh.Checked = True Then
-                    sql = "SELECT RecordedFrom,describedBy,stationName, abbreviation, latitude, longitude, elevation, Min(obsValue) AS Min, Max(obsValue) AS Max FROM station INNER JOIN (obselement INNER JOIN observationfinal ON elementId = describedBy) ON stationId = recordedFrom GROUP BY stationName, abbreviation, latitude, longitude, elevation, elementId " & _
-                          "HAVING ((RecordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & "));"
-                    XtremesWithoutDates(sql)
-                ElseIf btnMaxDate.Checked = True Then
-                    XtremesWithDates("MaxValue", "max", sdate, edate)
-                ElseIf btnMinDate.Checked = True Then
-                    XtremesWithDates("MinValue", "min", sdate, edate)
-                End If
+                    If btnLowHigh.Checked = True Then
+                        sql = "SELECT RecordedFrom, describedBy, stationId, stationName, abbreviation, latitude, longitude, elevation, Min(obsValue) AS Min, Max(obsValue) AS Max FROM station INNER JOIN (obselement INNER JOIN observationfinal ON elementId = describedBy) ON stationId = recordedFrom GROUP BY stationName, abbreviation, latitude, longitude, elevation, elementId " & _
+                              "HAVING ((RecordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & "));"
+                        XtremesWithoutDates(sql)
+                    ElseIf btnMaxDate.Checked = True Then
+                        XtremesWithDates("MaxValue", "max", sdate, edate)
+                    ElseIf btnMinDate.Checked = True Then
+                        XtremesWithDates("MinValue", "min", sdate, edate)
+                    End If
 
-            Case "GeoCLIM Monthly"
-                GeoCLIMMonthlyProducts(stnlist, sdate, edate)
-            Case "Inventory"
-                sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                Case "GeoCLIM Monthly"
+                    GeoCLIMMonthlyProducts(stnlist, sdate, edate)
+                Case "Inventory"
+                    sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
-                'sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime),describedBy FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                    'sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime),describedBy FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
-                InventoryProducts(sql, "Inventory")
-            Case "CPT"
-                'Dim myInterface As New clsRInterface()
-                'myInterface.productCDTExample()
-                frmCPTSeason.ShowDialog()
+                    InventoryProducts(sql, "Inventory")
+                Case "CPT"
+                    'Dim myInterface As New clsRInterface()
+                    'myInterface.productCDTExample()
+                    frmCPTSeason.ShowDialog()
 
-                If Len(CPTstart) > 0 And Len(CPTend) > 0 Then CPTProducts(CPTstart, CPTend)
-            Case "Instat"
-                'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
-                'DataProducts(sql, lblProductType.Text)
-                InstatProduct(sdate, edate, lblProductType.Text)
-            Case "Missing data"
-                'RefreshStatsCache()
-                'RefreshMissingCache()
-                'GatherStats()
-                'findmissing()
-                'frmplotter.show()
+                    If Len(CPTstart) > 0 And Len(CPTend) > 0 Then CPTProducts(CPTstart, CPTend)
+                Case "Instat"
+                    'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
+                    'DataProducts(sql, lblProductType.Text)
+                    InstatProduct(sdate, edate, lblProductType.Text)
+                Case "Missing data"
+                    'RefreshStatsCache()
+                    'RefreshMissingCache()
+                    'GatherStats()
+                    'findmissing()
+                    'frmplotter.show()
 
-            Case "Rclimdex"
-                RclimdexProducts(sdate, edate, lblProductType.Text)
-            Case Else
-                MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
-                Exit Sub
-        End Select
-        Me.Cursor = Cursors.Default
+                Case "Rclimdex"
+                    RclimdexProducts(sdate, edate, lblProductType.Text)
+                Case Else
+                    MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
+                    'Me.Cursor = Cursors.Default
+                    'Exit Sub
+            End Select
+
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
+
     End Sub
     Sub WindRoseData(sql As String)
         On Error GoTo Err
@@ -490,6 +498,7 @@ Err:
         Dim flds1, flds2, flds3 As String
         Dim fl As String
 
+        'MsgBox(sql)
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
@@ -525,8 +534,9 @@ Err:
 
             Exit Sub
 Err:
-            If Err.Number = 13 Or Err.Number = 5 Then Resume Next
-            MsgBox(Err.Number & " " & Err.Description)
+        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+        MsgBox("No data found. Check and confirm selections")
+        'MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
 
@@ -565,7 +575,7 @@ Err:
 
             FileOpen(11, fl, OpenMode.Output)
 
-            ' Write the lement headers as abbreviation
+            ' Write the element headers as abbreviation
             For kount = 0 To ds.Tables("observationfinal").Columns.Count - 1
                 Write(11, ds.Tables("observationfinal").Columns.Item(kount).ColumnName)
             Next
@@ -578,7 +588,7 @@ Err:
                     If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
                         Write(11, "-999")
                     Else
-                        Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
+                        Write(11, Format("{0:0.00}", ds.Tables("observationfinal").Rows(k).Item(i)))
                     End If
                 Next
                 PrintLine(11)
@@ -599,6 +609,8 @@ Err:
         Dim stnscolmn, f1, sql1, stn As String
         Dim dstn As New DataSet
         'frmCPTSeason.Hide()
+        'MsgBox(st & " " & ed)
+        On Error GoTo Err
         stnscolmn = ""
 
         ' ''If pnlSummary.Enabled And optTotal.Checked Then
@@ -613,10 +625,11 @@ Err:
         For k = 0 To lstvElements.Items.Count - 1
             ' Get the stations list
             ' Compute the CPT Summary type depending on the element type
+            ' Totals for Prcipitation, Evaporation and Sunshine hourd
             If lstvElements.Items(k).SubItems(0).Text = 5 Or lstvElements.Items(k).SubItems(0).Text = 18 Or lstvElements.Items(k).SubItems(0).Text = 892 Then
                 SummaryType = "Sum(obsValue) AS Total"
                 SumAvg = "SUM"
-            Else
+            Else ' Avarages for other elements
                 SummaryType = "Avg(obsValue) AS Mean"
                 SumAvg = "AVG"
             End If
@@ -657,45 +670,61 @@ Err:
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
             dstn.Clear()
             da.Fill(dstn, "station")
+            ''MsgBox(1)
+            '' Output Station Ids
+            'For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+            '    'MsgBox(ds.Tables("observationfinal").Columns(i).ColumnName)
+            '    'If ds.Tables("observationfinal").Columns(i).ColumnName = "stationId" Then
 
-            ' Output Station Ids
-            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                If i = 0 Then
-                    Print(11, "STN" & Chr(9))
-                Else
-                    Print(11, ds.Tables("observationfinal").Columns(i).ColumnName & Chr(9))
-                End If
-            Next
-            PrintLine(11)
-
+            '    '    Print(11, "STN" & Chr(9))
+            '    '    Print(11, ds.Tables("observationfinal").Columns(i).ColumnName & Chr(9))
+            '    'End If
+            '    If i = 0 Then
+            '        Print(11, "STN" & Chr(9))
+            '    Else
+            '        Print(11, ds.Tables("observationfinal").Columns(i).ColumnName & Chr(9))
+            '    End If
+            'Next
+            'PrintLine(11)
+            ''MsgBox(2)
             ' Output Latitudes
-            Print(11, "LAT" & Chr(9))
+            'Print(11, "LAT" & Chr(9))
             For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
                 stn = ds.Tables("observationfinal").Columns(i).ColumnName
                 For n = 0 To dstn.Tables("station").Rows.Count - 1
                     If dstn.Tables("station").Rows(n).Item(0) = stn Then
-                        Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(2))) & Chr(9))
+
+                        For l = 0 To dstn.Tables("station").Columns.Count - 1
+                            If dstn.Tables("station").Columns(l).ColumnName = "stationId" Then
+                                Print(11, "STN" & Chr(9) & dstn.Tables("station").Rows(n).Item("stationName") & Chr(13) & Chr(10))
+                                Print(11, "LAT" & Chr(9) & dstn.Tables("station").Rows(n).Item("latitude") & Chr(13) & Chr(10))
+                                Print(11, "LON" & Chr(9) & dstn.Tables("station").Rows(n).Item("longitude") & Chr(13) & Chr(10))
+                                'Print(11, dstn.Tables("station").Rows(n).Item(2) & Chr(9))
+                                'Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(2))) & Chr(9))
+                                Exit For
+                            End If
+                        Next
                         Exit For
                     End If
                 Next
             Next
-            PrintLine(11)
-
-            ' Output Latitudes
-            Print(11, "LON" & Chr(9))
-            For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
-                stn = ds.Tables("observationfinal").Columns(i).ColumnName
-                For n = 0 To dstn.Tables("station").Rows.Count - 1
-                    If dstn.Tables("station").Rows(n).Item(0) = stn Then
-                        Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(3))) & Chr(9))
-                        Exit For
-                    End If
-                Next
-            Next
-            PrintLine(11)
-
+            'PrintLine(11)
+            ''MsgBox(3)
+            '' Output Latitudes
+            'Print(11, "LON" & Chr(9))
+            'For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
+            '    stn = ds.Tables("observationfinal").Columns(i).ColumnName
+            '    For n = 0 To dstn.Tables("station").Rows.Count - 1
+            '        If dstn.Tables("station").Rows(n).Item(0) = stn Then
+            '            Print(11, dstn.Tables("station").Rows(n).Item(3) & Chr(9))
+            '            'Print(11, String.Format("{0:0.00}", Val(dstn.Tables("station").Rows(n).Item(3))) & Chr(9))
+            '            Exit For
+            '        End If
+            '    Next
+            'Next
+            'PrintLine(11)
+            ''MsgBox(4)
             For l = 0 To maxRows - 1
-
                 For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
                     ' Write the value in the outputfile with the convenient format e.g. string, integer and decimal with 2 decimal places
                     If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
@@ -704,7 +733,8 @@ Err:
                         If i = 0 Then 'Year has no decimal point
                             Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & Chr(9))
                         Else
-                            Print(11, String.Format("{0:0.0}", Val(ds.Tables("observationfinal").Rows(l).Item(i))) & Chr(9))
+                            'Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & Chr(9))
+                            Print(11, String.Format("{0:0.00}", Val(ds.Tables("observationfinal").Rows(l).Item(i))) & Chr(9))
                         End If
                     End If
 
@@ -718,7 +748,10 @@ Err:
             CommonModules.ViewFile(f1)
             'MsgBox(st & " " & ed)
         Next
-
+        Exit Sub
+Err:
+        MsgBox(Err.Description)
+        FileClose(11)
     End Sub
     Sub InstatProduct(dt1 As String, dt2 As String, typ As String)
         On Error GoTo Err
@@ -857,7 +890,7 @@ Err:
         Dim flds1, flds2, flds3 As String
         Dim fl As String
 
-
+        MsgBox(sql)
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
@@ -872,7 +905,8 @@ Err:
 
         ' Output the column headers
 
-        Write(11, "Station")
+        Write(11, "Station_Id")
+        Write(11, "Station_Name")
         Write(11, "Element")
         Write(11, "Lat")
         Write(11, "Lon")
@@ -910,7 +944,8 @@ Err:
             f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Xtremes.csv"  'data_products.csv"
             FileOpen(11, f1, OpenMode.Output)
 
-            Write(11, "Station")
+            Write(11, "Station_Id")
+            Write(11, "Station_Name")
             Write(11, "Element")
             Write(11, "Day")
             Write(11, "Month")
@@ -921,7 +956,7 @@ Err:
             For stns = 0 To lstvStations.Items.Count - 1
                 For elms = 0 To lstvElements.Items.Count - 1
                     'sql = "select stationname,abbreviation as element,obsdatetime,obsvalue as max_val from station,obselement, observationfinal where stationId=recordedfrom and elementId=describedby and recordedfrom='9136164' and describedby=2 and obsvalue=(select max(obsvalue) from observationfinal where recordedfrom='9136164' and describedby=2);"
-                    sql = " select stationname,abbreviation as element,day(obsdatetime) as Day,month(obsdatetime) as Month,year(obsdatetime) as Year,obsvalue as max_val from station,obselement, observationfinal " & _
+                    sql = " select stationId,stationname,abbreviation as element,day(obsdatetime) as Day,month(obsdatetime) as Month,year(obsdatetime) as Year,obsvalue as max_val from station,obselement, observationfinal " & _
                           "where stationId=recordedfrom and elementId=describedby and recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & " and obsvalue=(select " & Xtype & "(obsvalue) from observationfinal where recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & ");"
                     'sql = " select stationname,abbreviation as element,day(obsdatetime) as Day,month(obsdatetime) as Month,year(obsdatetime) as Year,obsvalue as max_val from station,obselement, observationfinal " & _
                     '      "where stationId=recordedfrom and elementId=describedby and recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & " and (year(obsDatetime) between '" & st & "' and '" & ed & "') and obsvalue=(select " & Xtype & "(obsvalue) from observationfinal where recordedfrom='" & lstvStations.Items(stns).SubItems(0).Text & "' and describedby=" & lstvElements.Items(elms).Text & ");"
@@ -948,16 +983,17 @@ Err:
     End Sub
     Sub InventoryProducts(sql As String, typ As String)
 
-        On Error GoTo Err
         Dim flds1, flds2, flds3 As String
         Dim fl As String
 
+        On Error GoTo Err
+        Me.Cursor = Cursors.WaitCursor
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "observationfinal")
 
         maxRows = ds.Tables("observationfinal").Rows.Count
-
+        'MsgBox(maxRows)
         fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
@@ -1008,13 +1044,14 @@ Err:
         flds1 = """" & lstvElements.Items(0).Text & """"
         flds2 = """" & lstvElements.Items(1).Text & """"
         flds3 = """" & lstvElements.Items(2).Text & """"
-
+        Me.Cursor = Cursors.Default
         Exit Sub
 Err:
         'MsgBox(Err.Description)
         If Err.Number = 13 Or Err.Number = 5 Then Resume Next
         MsgBox(Err.Number & " " & Err.Description)
-
+        FileClose(11)
+        Me.Cursor = Cursors.WaitCursor
     End Sub
 
     Sub MonthlyProducts(sql As String, typ As String)

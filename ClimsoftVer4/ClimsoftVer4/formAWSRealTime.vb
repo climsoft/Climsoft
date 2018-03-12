@@ -1225,7 +1225,9 @@ Continues:
 
         If Kount = 1 Then ' Only one substest existing
             If Len(subs(0)) <> 0 Then
-                BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(0)), "00") & Format(DateAndTime.Hour(dts(0)), "00") & Format(DateAndTime.Minute(dts(0)), "00") '& " " & txtBBB
+                'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(0)), "00") & Format(DateAndTime.Hour(dts(0)), "00") & Format(DateAndTime.Minute(dts(0)), "00") '& " " & txtBBB
+                BUFR_header = msg_header & " " & DateAndTime.Day(dts(0)) & DateAndTime.Hour(dts(0)) & DateAndTime.Minute(dts(0)) '& " " & txtBBB
+
                 AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(0)), DateAndTime.Month(dts(0)), DateAndTime.Day(dts(0)), DateAndTime.Hour(dts(0)), DateAndTime.Minute(dts(0)), DateAndTime.Second(dts(0)), subs(0))
             End If
         End If
@@ -1249,8 +1251,10 @@ Continues:
 
                 ' Compile a bulletin for the located same hour subsets
                 If Len(subst) <> 0 Then
-                    BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(i)), "00") & Format(DateAndTime.Hour(dts(i)), "00") & Format(DateAndTime.Minute(dts(i)), "00") '& " " & txtBBB
+                    'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(i)), "00") & Format(DateAndTime.Hour(dts(i)), "00") & Format(DateAndTime.Minute(dts(i)), "00") '& " " & txtBBB
+                    BUFR_header = msg_header & " " & DateAndTime.Day(dts(i)) & DateAndTime.Hour(dts(i)) & DateAndTime.Minute(dts(i)) '& " " & txtBBB
                     AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst)
+
                 End If
                 Tdone = Tdone & dts(i)
             Next
@@ -1342,23 +1346,28 @@ Err:
     End Function
 
     Function Decimal_Binary(DecN As Integer, bts As Integer) As String
-        On Error GoTo Err 'Resume Next
+
         Dim r As Integer
         Dim s As Integer
-        Dim num As Integer
-        'MsgBox(DecN & " " & bts)
-        Decimal_Binary = "0"
+        Dim x As String
+        Dim binstr As String
 
-        For num = 2 To bts
-            Decimal_Binary = Decimal_Binary & "0"
-        Next num
+        x = DecN
+        binstr = 0
 
-        s = 0
-        If DecN > 1 Then
-            ' Binary conversion for Deimal numbers greater than 1
-            Do While DecN > 1
+        Try
+            ' Build a Zeros bitstring to the size of data width. Binary converted data will replace the Zoreos from right side 
+            For i = 2 To bts
+                binstr = binstr & "0"
+            Next
+
+            s = 0 ' Initialize the bits counter
+            Do While bts > s
                 r = DecN Mod 2
-                Mid(Decimal_Binary, bts - s, 1) = r
+
+                ' Replace the Zero bit with the remainder value from division by 2
+                Mid(binstr, bts - s, 1) = r
+
                 If r = 1 Then
                     DecN = DecN / 2 - 0.5
                 Else
@@ -1366,16 +1375,13 @@ Err:
                 End If
                 s = s + 1
             Loop
-            ' Binary conversion for Decimal numbers 1 or 0
-        Else
-            Mid(Decimal_Binary, bts, 1) = DecN
-            'MsgBox(DecN & " " & bts & " " & Decimal_Binary)
-        End If
 
+            Return binstr
 
-        Exit Function
-Err:
-        Log_Errors(Err.Number & " " & Err.Description)
+        Catch ex As Exception
+            Log_Errors(ex.Message)
+            Return binstr
+        End Try
     End Function
 
     Sub Get_Station_Settings(struc As String, ByRef delmtr As String, ByRef hdrows As Integer, ByRef txtqlfr As String, ByRef rs As DataSet)
@@ -1579,7 +1585,7 @@ Err:
                 For i = 0 To num - 1
                     With rf.Tables("aws_mss")
                         If aws_ftp = .Rows(i).Item("ftpId") Then
-                            flder = .Rows(i).Item("outputFolder")
+                            flder = .Rows(i).Item("inputFolder")
                             ftpmode = .Rows(i).Item("ftpMode")
                             usr = .Rows(i).Item("userName")
                             pwd = .Rows(i).Item("password")
@@ -1949,6 +1955,7 @@ Err:
         Dim InitValue As String
         Dim BufrSection4 As String
         Dim hdr As String
+        Dim stn_typ As Integer
 
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
         cmd.Connection = dbconn
@@ -1965,11 +1972,14 @@ Err:
         hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
         min = DateAndTime.Minute(Date_Time)
         ss = DateAndTime.Second(Date_Time)
+        stn_typ = 0 ' Code for AWS
         wmo_id = 63999
-
+        'MsgBox(stn_typ.ToString("D2"))
         msg_header = txtMsgHeader.Text
 
-        BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
+
+        'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
+        BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
 
         Process_Status("Updating TDCF Template with observations ")
 
@@ -1999,10 +2009,10 @@ Err:
                 If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
                 If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
                 If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
+                If .Rows(i).Item("Bufr_Element") = "002001" Then .Rows(i).Item("Observation") = stn_typ
                 If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
                 If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
                 If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
-
                 If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
                 If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
                 If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
@@ -2046,7 +2056,7 @@ Err:
             BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
             ' Output substet binary data
             'MsgBox(BUFR_Subsets_Data)
-            Write(30, Date_Time, BufrSection4 & Chr(13))
+            Write(30, Date_Time, BufrSection4 & Chr(13) & Chr(10))
         End If
 
         ' ' Compose the complete AWS BUFR message
@@ -2224,7 +2234,7 @@ Err:
 
                 ' Update if Level located
                 If SoilTemp Then
-                    sql = "UPDATE " & tt_aws & " SET Observation = " & obsvs & " WHERE Bufr_Element = '007061';"
+                    sql = "UPDATE " & tt_aws & " SET Observation = '" & obsvs & "' WHERE Bufr_Element = '007061';"
                     cmd.CommandText = sql
                     cmd.ExecuteNonQuery()
                 End If
@@ -2233,7 +2243,8 @@ Err:
 
         Exit Sub
 Err:
-        MsgBox("Soil Reolication")
+        'MsgBox("Soil Replication")
+        'MsgBox(sql)
         Log_Errors(Err.Description)
         'list_errors.AddItem txttime & "  " & Err.description
         'MsgBox Err.description
@@ -2431,6 +2442,7 @@ Err:
         Dim kount As Integer
 
         ' Add leading zeroes to short data strings
+        CCITT_Binary = ""
         binstr = ""
         If Len(dat) < DataWidth / 8 Then
             For kount = 1 To DataWidth - Len(dat) * 8
@@ -2441,7 +2453,9 @@ Err:
         End If
 
         ' Loop the entire data string
+        'Log_Errors(dat)
         For kount = 1 To Len(dat)
+
             With rs0.Tables("ccitt")
 
                 For i = 0 To .Rows.Count - 1
@@ -2451,6 +2465,7 @@ Err:
                         chr1 = .Rows(i).Item("MostSignificant")
                         chr2 = .Rows(i).Item("LeastSignificant")
                         binstr = binstr & Decimal_Binary(Val(chr1), 4) & Decimal_Binary(Val(chr2), 4)
+                        'Log_Errors(dat1 & " " & chr1 & "-" & chr2 & " " & binstr)
                         Exit For
                     End If
                 Next
@@ -2556,7 +2571,7 @@ Err:
 
     Function AWS_BUFR_Code(message_header As String, yy As String, mm As String, dd As String, hh As String, min As String, ss As String, binary_data As String) As Boolean
         AWS_BUFR_Code = False
-
+        'Log_Errors(binary_data)
         On Error GoTo Err
         Dim octets As String
         Dim section0 As String
@@ -2733,7 +2748,7 @@ Err:
         section5 = ""
         ' Octet 1-4 "7777" (coded according to CCITT International Alphabet No. 5)
         section5 = section5 & CCITT_Binary(rs1, "7777", 32)
-
+        'Log_Errors("7777 = " & section5)
         ' Compute the BUFR message less section 0
         Dim BUFR_Message As String
         BUFR_Message = section1 & section2 & section3 & section4 & section5
@@ -2742,6 +2757,7 @@ Err:
         section0 = ""
         ' Octet 1 - 4.  "BUFR" (coded according to CCITT International Alphabet No. 5)
         section0 = section0 & CCITT_Binary(rs1, "BUFR", 32)
+        'Log_Errors("BUFR = " & section0)
         ' Octet 5-7 Total length of BUFR message, in octets (including Section 0). Section 0 has 8 octets
         siz = (Len(BUFR_Message) + 64) / 8
         section0 = section0 & Decimal_Binary(siz, 24)
@@ -2787,8 +2803,8 @@ Err:
 
         message_length = Format(Str(Len(Bufr_Message_With_Controls) / 8), "00000000")
         BUFR_Message = CCITT_Binary(rs1, message_length, 64) & Format_Id0 & Bufr_Message_With_Controls & dummy_msg
+        'Log_Errors(BUFR_Message)
 
-        'frm.txt_message = BUFR_Message
 
         'Delete the file to get rid of the previous data
         'If fso.FileExists(fso.GetParentFolderName(App.Path) & "\data\bufr.txt") Then fso.DeleteFile(fso.GetParentFolderName(App.Path) & "\data\bufr.txt")
@@ -2808,7 +2824,7 @@ Err:
         'Close #2
 
         'msg_file = Right(msg_header, 4) & Mid(message_header, 13, 2) & Mid(message_header, 15, 2) '& Format(min, "00") 'message_header
-        msg_file = Strings.Right(msg_header, 4) & Format(dy, "00") & Format(hr, "00")
+        msg_file = Strings.Right(msg_header, 4) & dy & hr & min ' Format(dy, "00") & Format(hr, "00")
 
         'Construct and open Bufr output text file based on the message header
 
@@ -2818,7 +2834,8 @@ Err:
         fserial = 0
         ValidFile = False
 
-        AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
+        'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
+        AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
         BUFR_octet_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\bufr_octets.txt")
 
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
@@ -2840,24 +2857,32 @@ Err:
         'writeBinay.Write(89)
 
 
-        'byt = ""
+
+        byt = 0
         kounter = 1
         ''MsgBox(kount)
-        For kount = 1 To Len(BUFR_Message) Step 8
-            If Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), byt) Then
-                'writeBinay.Write(byt)
-                'writeBinay.Write(Binary_Decimal(Strings.Mid(BUFR_Message, kount, 8), 8))
-                'Write(2, kounter, Binary_Decimal(Mid(BUFR_Message, kount, 8)))
+        For i = 1 To Len(BUFR_Message) Step 8
+            If Binary_Decimal(Strings.Mid(BUFR_Message, i, 8), byt) Then
                 FilePut(2, byt, kounter)
-                'FilePutObject(2, byt, kounter)
-                PrintLine(1, kounter & "," & Mid(BUFR_Message, kount, 8))
-                kounter = kounter + 1
+            Else
+                Log_Errors("Coding Error")
+                'Exit Function
             End If
-        Next kount
+            'FilePut(2, Binary_Decimal(Strings.Mid(BUFR_Message, i, 8)), kounter)
+            PrintLine(1, kounter & "," & Strings.Mid(BUFR_Message, i, 8))
 
+            'Log_Errors(byt)
+
+            kounter = kounter + 1
+
+        Next
+        'MsgBox(hh & ":" & min)
         'writeBinay.Close()
+
         FileClose(1)
         FileClose(2)
+
+        'MsgBox(BUFR_Message)
 
         ''Open AWS_BUFR_File For Input As #1
         'FileOpen(1, AWS_BUFR_File, OpenMode.Input)
@@ -2981,31 +3006,33 @@ Err:
 
 
     Function Binary_Decimal(BinN As String, ByRef BinD As Long) As Boolean
-        On Error GoTo Err
+        'Function Binary_Decimal(BinN As String) As Long
+
         Dim siz As Integer
         Dim dgt As String
         Dim posval As Integer
         Dim kount As Integer
-
-        siz = Len(BinN)
-        'Binary_Decimal = 0
+        'Dim BinD As Long
         Binary_Decimal = True
-        BinD = 0
-        For kount = 0 To siz - 1
-            dgt = Mid(BinN, siz - kount, 1)
-            If IsNumeric(dgt) Then
-                posval = Int(dgt)
-                'posval = Mid(BinN, siz - kount, 1)
-                'Binary_Decimal= Binary_Decimal + posval * 2 ^ kount
-                BinD = BinD + posval * 2 ^ kount
-            End If
 
-        Next kount
-
-        Exit Function
-Err:
-        Log_Errors(Err.Number & " " & Err.Description)
-        Binary_Decimal = False
+        Try
+            siz = Len(BinN)
+            'Binary_Decimal = 0
+            Binary_Decimal = True
+            BinD = 0
+            For kount = 0 To siz - 1
+                dgt = Mid(BinN, siz - kount, 1)
+                If IsNumeric(dgt) Then
+                    posval = Int(dgt)
+                    'posval = Mid(BinN, siz - kount, 1)
+                    'Binary_Decimal= Binary_Decimal + posval * 2 ^ kount
+                    BinD = BinD + posval * 2 ^ kount
+                End If
+            Next kount
+        Catch ex As Exception
+            Log_Errors(ex.HResult & " " & ex.Message)
+            Binary_Decimal = False
+        End Try
     End Function
 
     Function Next_Encoding_Time() As Boolean

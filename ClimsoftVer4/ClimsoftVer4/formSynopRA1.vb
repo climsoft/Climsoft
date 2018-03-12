@@ -64,6 +64,7 @@ Public Class formSynopRA1
     Dim obsValue As String
     Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim dsSequencer As New DataSet
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub navigateRecords()
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
@@ -876,6 +877,7 @@ Public Class formSynopRA1
                     itemFound = True
                 Else
                     itemFound = False
+                    If FldName.Valid_Stn(cboStation) Then itemFound = True
                 End If
                 objKeyPress.checkExists(itemFound, cboStation)
             Else
@@ -936,86 +938,95 @@ Public Class formSynopRA1
             MessageBox.Show(ex.Message)
         End Try
 
-        maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+        Try
+            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
 
-        '--------------------------------
-        'Fill combobox for station identifier with station list from station table
-        Dim m As Integer
-        Dim ctl As Control
-        Dim ds1 As New DataSet
-        Dim sql1 As String
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-        sql1 = "SELECT stationId,stationName FROM station"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            '--------------------------------
+            'Fill combobox for station identifier with station list from station table
+            Dim m As Integer
+            Dim ctl As Control
+            Dim ds1 As New DataSet
+            Dim sql1 As String
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            sql1 = "SELECT stationId,stationName FROM station"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        da1.Fill(ds1, "station")
-        If ds1.Tables("station").Rows.Count > 0 Then
-            With cboStation
-                .DataSource = ds1.Tables("station")
-                .DisplayMember = "stationName"
-                .ValueMember = "stationId"
-                .SelectedIndex = 0
-            End With
-        Else
-            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        End If
+            da1.Fill(ds1, "station")
+            If ds1.Tables("station").Rows.Count > 0 Then
+                With cboStation
+                    .DataSource = ds1.Tables("station")
+                    .DisplayMember = "stationName"
+                    .ValueMember = "stationId"
+                    .SelectedIndex = 0
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
 
-        ''sql1 = "SELECT stationId,stationName FROM station"
-        ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ''sql1 = "SELECT stationId,stationName FROM station"
+            ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        '---------------------------------
-        'Initialize header information for data-entry form
+            '---------------------------------
+            'Initialize header information for data-entry form
 
-        If maxRows > 0 Then
-            'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+            If maxRows > 0 Then
+                'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
 
-            txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-            cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-            cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-            cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+                txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
+                cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+                cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+                cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
 
-            'Initialize textboxes for observation values
-            'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-            For m = 5 To 53
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                'Initialize textboxes for observation values
+                'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+                For m = 5 To 53
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
-            'Initialize textboxes for observation flags
-            'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
-            For m = 54 To 102
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                'Initialize textboxes for observation flags
+                'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
+                For m = 54 To 102
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
 
-            displayRecordNumber()
-        Else
-            'If this is the first record
-            btnAddNew.Enabled = False
-            btnCommit.Enabled = True
-            btnUpdate.Enabled = False
-            btnDelete.Enabled = False
-            btnClear.Enabled = True
-            btnMoveFirst.Enabled = False
-            btnMoveNext.Enabled = False
-            btnMovePrevious.Enabled = False
-            btnMoveLast.Enabled = False
+                displayRecordNumber()
+            Else
+                'If this is the first record
+                btnAddNew.Enabled = False
+                btnCommit.Enabled = True
+                btnUpdate.Enabled = False
+                btnDelete.Enabled = False
+                btnClear.Enabled = True
+                btnMoveFirst.Enabled = False
+                btnMoveNext.Enabled = False
+                btnMovePrevious.Enabled = False
+                btnMoveLast.Enabled = False
 
-            recNumberTextBox.Text = "Record 1 of 1"
-        End If
+                recNumberTextBox.Text = "Record 1 of 1"
+            End If
+
+        Catch ex As Exception
+            If ex.HResult = "-2146233086" Then
+                MsgBox("No Element Selected!   >>> Select them at the Metadata form")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+        End Try
 
     End Sub
 
