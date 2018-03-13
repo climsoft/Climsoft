@@ -188,7 +188,7 @@ Public Class frmNewFormDaily2
         ' temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
 
-        ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+        ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
         'May want to change sequencer when year changes but not here
 

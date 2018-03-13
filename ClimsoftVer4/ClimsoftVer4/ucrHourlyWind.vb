@@ -12,6 +12,7 @@ Public Class ucrHourlyWind
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
+    Private ucrLinkedNavigation As ucrNavigation
 
     Public Overrides Sub PopulateControl()
         Dim ucrDSF As ucrDirectionSpeedFlag
@@ -89,6 +90,7 @@ Public Class ucrHourlyWind
 
         If TypeOf sender Is ucrDirectionSpeedFlag Then
             ctrDDFFFlag = sender
+            'Me.Controls.Select
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     'TODO 
@@ -104,9 +106,6 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        'Dim ctr As Control
-        'Dim ctrDDFFFlag As ucrDirectionSpeedFlag
-        'Dim ctrTotal As ucrTextBox
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
@@ -121,27 +120,14 @@ Public Class ucrHourlyWind
         fhourlyWindRecord = Nothing
         MyBase.LinkedControls_evtValueChanged()
 
-
-        'Dim ctr As Control
-        'Dim ctrDDFFFlag As  ucrDirectionSpeedFlag
-        'Dim ctrTotal As  ucrTextBox
-        'For Each ctr In Me.Controls
-        '    If TypeOf ctr Is ucrDirectionSpeedFlag Then
-        '        ctrVFP = ctr
-        '        CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
-        '        CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
-        '        CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
-        '    ElseIf TypeOf ctr Is ucrTextBox Then
-        '        ctrTotal = ctr
-        '        CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
-        '    End If
-
-        'Next
-
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+    End Sub
 
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
     Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
@@ -339,20 +325,16 @@ Public Class ucrHourlyWind
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         'AND bUpdating MIGHT NOT BE NECESSARY
-        'If bUpdating Then
-        '    'clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-        '    clsDataConnection.db.SaveChanges()
-        'Else
-        '    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-        '    clsDataConnection.db.SaveChanges()
-        'End If
-
         If bUpdating Then
-            'Possibly we should be cloning and then updating here
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
+            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
         Else
-            clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
+            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
         End If
-        clsDataConnection.SaveUpdate()
+
+        clsDataConnection.db.SaveChanges()
+
     End Sub
 
     Public Sub DeleteRecord()
@@ -360,10 +342,6 @@ Public Class ucrHourlyWind
         clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
         clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
         clsDataConnection.db.SaveChanges()
-    End Sub
-
-    Private Sub ucrDirectionSpeedFlag0_MouseDown(sender As Object, e As MouseEventArgs) Handles ucrDirectionSpeedFlag0.MouseDown
-
     End Sub
 
     Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
