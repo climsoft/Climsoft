@@ -42,9 +42,11 @@
 
         'Adds values to only enabled controls of the ucrHourly
         For Each ctl In ucrHourly.Controls
-            If TypeOf ctl Is ucrValueFlagPeriod AndAlso ctl.Enabled Then
+            If TypeOf ctl Is ucrValueFlagPeriod Then
                 ctrltemp = ctl
-                ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
+                If ctrltemp.ucrValue.Enabled Then
+                    ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
+                End If
             End If
         Next
     End Sub
