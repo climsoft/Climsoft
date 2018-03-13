@@ -40,8 +40,9 @@
         Dim ctl As Control
         Dim ctrltemp As ucrValueFlagPeriod
 
+        'Adds values to only enabled controls of the ucrHourly
         For Each ctl In ucrHourly.Controls
-            If TypeOf ctl Is ucrValueFlagPeriod Then
+            If TypeOf ctl Is ucrValueFlagPeriod AndAlso ctl.Enabled Then
                 ctrltemp = ctl
                 ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
             End If
@@ -112,9 +113,6 @@
                 '?messagebox
             End Try
         End If
-
-
-
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -125,7 +123,6 @@
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
-
 
         ' temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
@@ -164,6 +161,7 @@
                     End If
                 End If
             Next
+
         Else
             selectAllHours = True
             btnHourSelection.Text = "Enable all hours"
@@ -178,6 +176,7 @@
                     End If
                 End If
             Next
+
         End If
     End Sub
 
