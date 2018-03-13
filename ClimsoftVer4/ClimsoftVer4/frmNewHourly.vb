@@ -11,12 +11,16 @@
     Private Sub InitaliseDialog()
         AssignLinkToKeyField(ucrHourly)
 
+
         ucrHourlyNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
+
         ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
         ucrHourlyNavigation.SetKeyControls("elementId", ucrElementSelector)
         ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
         ucrHourlyNavigation.SetKeyControls("mm", ucrMonth)
         ucrHourlyNavigation.SetKeyControls("dd", ucrDay)
+
+        txtSequencer.Text = "seq_month_day_element"
 
         ucrHourly.SetLinkedNavigation(ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
@@ -45,8 +49,7 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrHourly.Clear()
-        ucrHourlyNavigation.ResetControls()
+        ucrHourlyNavigation.MoveFirst()
         SaveEnable()
     End Sub
 
@@ -111,22 +114,25 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
         btnAddNew.Enabled = False
         btnClear.Enabled = True
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
+
+        ' temporary until we know how to get all fields from table without specifying names
+        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+
         If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
+            txtSequencer.Text = "seq_month_day_element_leap_yr"
         Else
-            txtSequencer.Text = "seq_month_day"
+            txtSequencer.Text = "seq_month_day_element"
         End If
 
-        'change the year based on the month and the day
-        If ucrMonth.GetValue = 12 AndAlso ucrDay.GetValue = 31 Then
-            ucrYearSelector.SetValue(Val(ucrYearSelector.GetValue) + 1)
-        End If
         ucrHourly.UcrValueFlagPeriod0.Focus()
     End Sub
 
@@ -141,24 +147,38 @@
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+        Dim ctrVFP As ucrValueFlagPeriod
+        Dim lstSynopticHourControls As New List(Of ucrValueFlagPeriod)
+        lstSynopticHourControls.AddRange({ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21})
 
         If selectAllHours Then
             selectAllHours = False
             btnHourSelection.Text = "Enable synoptic hours only"
-            For Each ctrVFP As ucrValueFlagPeriod In {ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21}
-                ctrVFP.ucrFlag.Enabled = True
-                ctrVFP.ucrValue.Enabled = True
-                ctrVFP.ucrFlag.SetBackColor(Color.White)
-                ctrVFP.ucrValue.SetBackColor(Color.White)
+
+            For Each ctr As Control In ucrHourly.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    If Not lstSynopticHourControls.Contains(ctrVFP) Then
+                        ctrVFP.ucrFlag.Enabled = True
+                        ctrVFP.ucrValue.Enabled = True
+                        ctrVFP.ucrFlag.SetBackColor(Color.White)
+                        ctrVFP.ucrValue.SetBackColor(Color.White)
+                    End If
+                End If
             Next
         Else
             selectAllHours = True
             btnHourSelection.Text = "Enable all hours"
-            For Each ctrVFP As ucrValueFlagPeriod In {ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21}
-                ctrVFP.ucrFlag.Enabled = False
-                ctrVFP.ucrValue.Enabled = False
-                ctrVFP.ucrFlag.SetBackColor(Color.LightYellow)
-                ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
+            For Each ctr As Control In ucrHourly.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    If Not lstSynopticHourControls.Contains(ctrVFP) Then
+                        ctrVFP.ucrFlag.Enabled = False
+                        ctrVFP.ucrValue.Enabled = False
+                        ctrVFP.ucrFlag.SetBackColor(Color.LightYellow)
+                        ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
+                    End If
+                End If
             Next
         End If
     End Sub

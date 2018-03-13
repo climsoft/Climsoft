@@ -3,7 +3,6 @@ Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
-
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
     Private strValueFieldName As String = "day"
@@ -88,14 +87,16 @@ Public Class ucrFormDaily2
             EnableDaysofMonth()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Sets the linked navigation control
+    ''' </summary>
+    ''' <param name="ucrNewNavigation"></param>
     Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
         ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
@@ -268,11 +269,11 @@ Public Class ucrFormDaily2
         expectedTotal = ucrInputTotal.GetValue
 
         For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
-                End If
-            Next
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+            End If
+        Next
 
         If elemTotal <> expectedTotal Then
             MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
