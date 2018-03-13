@@ -66,7 +66,7 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        dlgResponse = MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If dlgResponse = DialogResult.Yes Then
             Try
                 clsDataConnection.db.form_hourly.Attach(ucrHourly.fhRecord)
@@ -75,10 +75,12 @@
                 MessageBox.Show("Record has been deleted", "Delete Record")
                 ucrHourlyNavigation.RemoveRecord()
             Catch
-                MessageBox.Show("Record has not been deleted", "Delete Record")
+                'message box?
             End Try
+        Else
+            MsgBox("Operation cancelled!", MsgBoxStyle.Information)
         End If
-        SaveEnable()
+        ucrHourlyNavigation.MoveFirst()
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -105,12 +107,14 @@
             Try
                 clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
-
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
+                MsgBox("Record updated successfully!", MsgBoxStyle.Information)
+            Catch
+                '?messagebox
             End Try
         End If
+
+
+
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -126,14 +130,8 @@
         ' temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
         ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
-
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_element_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day_element"
-        End If
-
         ucrHourly.UcrValueFlagPeriod0.Focus()
+        ucrHourlyNavigation.MoveLast()
     End Sub
 
     Private Sub SaveEnable()
