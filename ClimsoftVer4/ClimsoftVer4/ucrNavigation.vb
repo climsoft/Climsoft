@@ -187,8 +187,6 @@
         btnMoveLast.Enabled = True
         btnMoveNext.Enabled = True
         btnMovePrevious.Enabled = True
-        displayRecordNumber()
-        UpdateKeyControls()
     End Sub
 
     Public Sub GoToNewRecord()
@@ -201,26 +199,23 @@
         'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
         'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
         'RECORD COUNT ON SAVE
-
     End Sub
 
     Public Sub RemoveRecord()
         PopulateControl()
-        MovePrevious()
 
         'ALTERNATIVELY WE COULD JUST REMOVE RECORD IN THE DATATABLE WITH VALUES
         'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
         'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
         'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
         'RECORD COUNT ON DELETE
-
     End Sub
 
     Public Sub SetSortBy(strNewSortCol As String)
         strSortCol = strNewSortCol
     End Sub
 
-    Public Sub NewSequencerRecord(strSequencer As String, lstFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+    Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
         Dim dctKeySequencerControls As New Dictionary(Of String, ucrBaseDataLink)
@@ -235,8 +230,7 @@
         'TODO go to last record before sequencing?
         'MoveLast()
         If strSequencer <> "" Then
-            clsSeqDataCall.SetTableName(strSequencer)
-            clsSeqDataCall.SetFields(lstFields)
+            clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
             dtbSequencer = clsSeqDataCall.GetDataTable()
 
             Dim strColumnsNames(dtbSequencer.Columns.Count - 1) As String

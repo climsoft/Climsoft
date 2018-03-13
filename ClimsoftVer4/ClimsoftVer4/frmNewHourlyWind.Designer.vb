@@ -43,7 +43,7 @@ Partial Class frmNewHourlyWind
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.ucrHourlyWind = New ClimsoftVer4.ucrHourlyWind()
-        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.ucrHourlyNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
@@ -245,11 +245,11 @@ Partial Class frmNewHourlyWind
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(117, 475)
-        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNavigation.Name = "ucrNavigation"
-        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 465
+        Me.ucrHourlyNavigation.Location = New System.Drawing.Point(117, 475)
+        Me.ucrHourlyNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrHourlyNavigation.Name = "ucrNavigation"
+        Me.ucrHourlyNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrHourlyNavigation.TabIndex = 465
         '
         'ucrDay
         '
@@ -305,7 +305,7 @@ Partial Class frmNewHourlyWind
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.ucrNavigation)
+        Me.Controls.Add(Me.ucrHourlyNavigation)
         Me.Controls.Add(Me.ucrDay)
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.ucrYearSelector)
@@ -328,7 +328,7 @@ Partial Class frmNewHourlyWind
     Friend WithEvents lblStationSelector As Label
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
-    Friend WithEvents ucrNavigation As ucrNavigation
+    Friend WithEvents ucrHourlyNavigation As ucrNavigation
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button
