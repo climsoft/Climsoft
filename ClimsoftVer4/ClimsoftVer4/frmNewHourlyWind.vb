@@ -20,6 +20,7 @@
         ucrHourlyWind.SetDirectionDigits(Val(txtDirectionDigits.Text))
         ucrHourlyWind.SetDirectionValidation(112)
         ucrHourlyWind.SetSpeedValidation(111)
+
         AssignLinkToKeyField(ucrHourlyWind)
 
         'TO CORRECTLY SORT THE RECORDS IN THE NAVIGATION IN SEQUENCE OF
@@ -27,17 +28,18 @@
         'TO BE INCLUDED. CURRENTLY ITS NOT IN OUR MODEL
 
         'ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd", "entryDatetime"})))
-        ucrHourlyNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
-        ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
-        ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
-        ucrHourlyNavigation.SetKeyControls("mm", ucrMonth)
-        ucrHourlyNavigation.SetKeyControls("dd", ucrDay)
+        ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrNavigation.SetKeyControls("stationId", ucrStationSelector)
+        ucrNavigation.SetKeyControls("yyyy", ucrYearSelector)
+        ucrNavigation.SetKeyControls("mm", ucrMonth)
+        ucrNavigation.SetKeyControls("dd", ucrDay)
 
 
         'THIS WILL WORK ONCE WE INCLUDE THE entryDatetime AS A FIELD FOR ucrNavigation
         'ucrNavigation.SetSortBy("entryDatetime")
-        ucrHourlyWind.SetLinkedNavigation(ucrHourlyNavigation)
-        ucrHourlyNavigation.PopulateControl()
+        ucrHourlyWind.SetLinkedNavigation(ucrNavigation)
+        ucrNavigation.PopulateControl()
+
         SaveEnable()
 
     End Sub
@@ -80,7 +82,7 @@
         dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
 
-        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
         ucrHourlyWind.ucrDirectionSpeedFlag0.Focus()
     End Sub
@@ -117,8 +119,8 @@
                 'then go ahead and save to database
                 If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     ucrHourlyWind.SaveRecord()
-                    ucrHourlyNavigation.ResetControls()
-                    ucrHourlyNavigation.GoToNewRecord()
+                    ucrNavigation.ResetControls()
+                    ucrNavigation.GoToNewRecord()
                     SaveEnable()
                     MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
@@ -145,7 +147,7 @@
         Try
             If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.DeleteRecord()
-                ucrHourlyNavigation.RemoveRecord()
+                ucrNavigation.RemoveRecord()
                 SaveEnable()
                 MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
@@ -161,14 +163,20 @@
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
         If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
-            ucrHourlyNavigation.ResetControls()
-            ucrHourlyNavigation.MoveFirst()
+            ucrNavigation.ResetControls()
+            ucrNavigation.MoveFirst()
             SaveEnable()
         Else
             MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
+    'This is from Samuel's code
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+    End Sub
+
+    'This is from Samuel's code
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
@@ -194,7 +202,7 @@
         btnAddNew.Enabled = True
         btnSave.Enabled = False
         btnClear.Enabled = False
-        If ucrHourlyNavigation.iMaxRows > 0 Then
+        If ucrNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
         End If

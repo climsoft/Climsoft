@@ -9,29 +9,22 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        Dim dctNavigationFields As New Dictionary(Of String, List(Of String))
-        Dim dctNavigationKeyControls As New Dictionary(Of String, ucrBaseDataLink)
+        AssignLinkToKeyField(ucrSynopticRA1)
 
-        dctNavigationFields.Add("stationId", New List(Of String)({"stationId"}))
-        dctNavigationFields.Add("yyyy", New List(Of String)({"yyyy"}))
-        dctNavigationFields.Add("mm", New List(Of String)({"mm"}))
-        dctNavigationFields.Add("dd", New List(Of String)({"dd"}))
-        dctNavigationFields.Add("hh", New List(Of String)({"hh"}))
+        ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
-        ucrNavigation.SetFields(dctNavigationFields)
-        ucrNavigation.SetTableName("form_synoptic_2_ra1")
+        ucrNavigation.SetTableNameAndFields("form_synoptic_2_ra1", (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
+        ucrNavigation.SetKeyControls("stationId", ucrStationSelector)
+        ucrNavigation.SetKeyControls("yyyy", ucrYearSelector)
+        ucrNavigation.SetKeyControls("mm", ucrMonth)
+        ucrNavigation.SetKeyControls("dd", ucrDay)
+        ucrNavigation.SetKeyControls("hh", ucrHour)
 
-        dctNavigationKeyControls.Add("stationId", ucrStationSelector)
-        dctNavigationKeyControls.Add("yyyy", ucrYearSelector)
-        dctNavigationKeyControls.Add("mm", ucrMonth)
-        dctNavigationKeyControls.Add("dd", ucrDay)
-        dctNavigationKeyControls.Add("hh", ucrHour)
-
-        ucrNavigation.SetKeyControls(dctNavigationKeyControls)
+        ucrSynopticRA1.SetLinkedNavigation(ucrNavigation)
 
         ucrNavigation.PopulateControl()
-        AssignLinkToKeyField(ucrSynopticRA1)
-        ucrSynopticRA1.PopulateControl()
+        SaveEnable()
+
     End Sub
 
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
@@ -42,61 +35,23 @@
         ucrControl.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrNavigation.ResetControls()
-        ucrSynopticRA1.Clear()
-        SaveEnable()
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        btnAddNew.Enabled = False
+        btnClear.Enabled = True
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+        btnSave.Enabled = True
+
+        ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
-    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If ucrSynopticRA1.bUpdating Then
             'Possibly we should be cloning and then updating here
         Else
             clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticRA1.fs2ra1Record)
         End If
         clsDataConnection.SaveUpdate()
-    End Sub
-
-    Private Sub SaveEnable()
-        btnAddNew.Enabled = True
-        btnCommit.Enabled = False
-        btnClear.Enabled = False
-        If ucrNavigation.iMaxRows > 0 Then
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
-        End If
-
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
-
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim msgBoxResponse As DialogResult
-        msgBoxResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If msgBoxResponse = DialogResult.Yes Then
-            Try
-                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticRA1.fs2ra1Record)
-                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticRA1.fs2ra1Record)
-                clsDataConnection.db.SaveChanges()
-                MessageBox.Show("Record has been deleted", "Delete Record")
-                ucrNavigation.RemoveRecord()
-                SaveEnable()
-            Catch
-                MessageBox.Show("Record has not been deleted", "Delete Record")
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
-        btnAddNew.Enabled = False
-        btnClear.Enabled = True
-        btnDelete.Enabled = False
-        btnUpdate.Enabled = False
-        btnCommit.Enabled = True
-
-        ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -119,6 +74,36 @@
             End Try
         End If
     End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim msgBoxResponse As DialogResult
+        msgBoxResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If msgBoxResponse = DialogResult.Yes Then
+            Try
+                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticRA1.fs2ra1Record)
+                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticRA1.fs2ra1Record)
+                clsDataConnection.db.SaveChanges()
+                MessageBox.Show("Record has been deleted", "Delete Record")
+                ucrNavigation.RemoveRecord()
+                SaveEnable()
+            Catch
+                MessageBox.Show("Record has not been deleted", "Delete Record")
+            End Try
+        End If
+    End Sub
+
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ucrNavigation.ResetControls()
+        ucrNavigation.MoveFirst()
+        SaveEnable()
+    End Sub
+
+    'This is from Samuel's code
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+    End Sub
+
     'This is from Samuel's code
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
@@ -132,8 +117,23 @@
         End If
         viewRecords.viewTableRecords(sql)
     End Sub
-    'This is from Samuel's code
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'TODO
+    End Sub
+
+    Private Sub SaveEnable()
+        btnAddNew.Enabled = True
+        btnSave.Enabled = False
+        btnClear.Enabled = False
+        If ucrNavigation.iMaxRows > 0 Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+        End If
     End Sub
 End Class
