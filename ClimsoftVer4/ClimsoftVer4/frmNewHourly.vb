@@ -11,9 +11,10 @@
     Private Sub InitaliseDialog()
         AssignLinkToKeyField(ucrHourly)
 
-
+        'setting the table and fields for the Naviation control
         ucrHourlyNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
 
+        'setting the key contols for the Navigation control 
         ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
         ucrHourlyNavigation.SetKeyControls("elementId", ucrElementSelector)
         ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
@@ -52,6 +53,7 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        'On clear, navigation moves to first record
         ucrHourlyNavigation.MoveFirst()
         SaveEnable()
     End Sub
@@ -128,7 +130,7 @@
 
         ' temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
-        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, lstFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
         ucrHourly.UcrValueFlagPeriod0.Focus()
         ucrHourlyNavigation.MoveLast()
     End Sub
@@ -143,15 +145,17 @@
         End If
     End Sub
 
+    'Changes the date entry fields betwen synoptc hours and all hours
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
         Dim ctrVFP As ucrValueFlagPeriod
         Dim lstSynopticHourControls As New List(Of ucrValueFlagPeriod)
+        'list of controls that have synoptic hours fields
         lstSynopticHourControls.AddRange({ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21})
 
         If selectAllHours Then
             selectAllHours = False
             btnHourSelection.Text = "Enable synoptic hours only"
-
+            'Enables the previously disabled controls when entering synoptic hours only
             For Each ctr As Control In ucrHourly.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
@@ -167,6 +171,7 @@
         Else
             selectAllHours = True
             btnHourSelection.Text = "Enable all hours"
+            'Disbales the non- synoptic hours fields
             For Each ctr As Control In ucrHourly.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)

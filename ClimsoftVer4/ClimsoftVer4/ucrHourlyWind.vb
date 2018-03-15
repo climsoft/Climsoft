@@ -348,4 +348,3 @@ Public Class ucrHourlyWind
 
     End Sub
 End Class
-

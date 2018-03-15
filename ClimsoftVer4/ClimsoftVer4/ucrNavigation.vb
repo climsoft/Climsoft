@@ -95,6 +95,11 @@
     End Sub
     'TODO
     'NOT SURE WHETHER TO CALL THIS AddKeyControls or SetKeyControls
+    ''' <summary>
+    ''' Sets the key controls and their key field
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <param name="ucrKeyControl"></param>
     Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrBaseDataLink)
         If dctKeyControls Is Nothing Then
             SetKeyControls(New Dictionary(Of String, ucrBaseDataLink))

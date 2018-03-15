@@ -82,12 +82,20 @@ Public Class ucrBaseDataLink
         SetTableName(strNewTable)
         SetField(strNewField)
     End Sub
-
+    ''' <summary>
+    ''' Sets the table name and a dictionary of fields for a control
+    ''' </summary>
+    ''' <param name="strNewTable"></param>
+    ''' <param name="dctNewFields"></param>
     Public Overridable Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
         SetTableName(strNewTable)
         SetFields(dctNewFields)
     End Sub
-
+    ''' <summary>
+    ''' Sets the table name and a list of fields for a control
+    ''' </summary>
+    ''' <param name="strNewTable"></param>
+    ''' <param name="lstNewFields"></param>
     Public Overridable Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
         SetTableName(strNewTable)
         SetFields(lstNewFields)
