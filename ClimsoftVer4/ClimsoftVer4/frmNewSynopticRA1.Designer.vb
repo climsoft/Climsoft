@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmNewSynopticDataForManyElements
+Partial Class frmNewSynopticRA1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -31,21 +31,16 @@ Partial Class frmNewSynopticDataForManyElements
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtSequencer = New System.Windows.Forms.TextBox()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnMovePrevious = New System.Windows.Forms.Button()
-        Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnMoveLast = New System.Windows.Forms.Button()
-        Me.recNumberTextBox = New System.Windows.Forms.TextBox()
-        Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
-        Me.ucrSynopticDataForManyElements = New ClimsoftVer4.ucrSynopticDataManyElements()
+        Me.ucrSynopticRA1 = New ClimsoftVer4.ucrSynopticRA1()
         Me.ucrHour = New ClimsoftVer4.ucrHour()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
@@ -56,7 +51,7 @@ Partial Class frmNewSynopticDataForManyElements
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(313, 19)
+        lblYear.Location = New System.Drawing.Point(338, 19)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 205
@@ -65,7 +60,7 @@ Partial Class frmNewSynopticDataForManyElements
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(30, 18)
+        Me.lblStationSelector.Location = New System.Drawing.Point(55, 18)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(86, 13)
         Me.lblStationSelector.TabIndex = 209
@@ -74,7 +69,7 @@ Partial Class frmNewSynopticDataForManyElements
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(668, 19)
+        Me.lblHour.Location = New System.Drawing.Point(693, 19)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 208
@@ -83,7 +78,7 @@ Partial Class frmNewSynopticDataForManyElements
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(572, 19)
+        Me.lblDay.Location = New System.Drawing.Point(597, 19)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 207
@@ -92,7 +87,7 @@ Partial Class frmNewSynopticDataForManyElements
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(423, 19)
+        Me.lblMonth.Location = New System.Drawing.Point(448, 19)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 206
@@ -100,7 +95,7 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(595, 574)
+        Me.btnTDCF.Location = New System.Drawing.Point(541, 567)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
         Me.btnTDCF.TabIndex = 679
@@ -109,7 +104,7 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(519, 574)
+        Me.btnView.Location = New System.Drawing.Point(465, 567)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(64, 23)
         Me.btnView.TabIndex = 678
@@ -119,7 +114,7 @@ Partial Class frmNewSynopticDataForManyElements
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(725, 603)
+        Me.btnUpload.Location = New System.Drawing.Point(682, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 677
@@ -129,23 +124,15 @@ Partial Class frmNewSynopticDataForManyElements
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(343, 609)
+        Me.Label5.Location = New System.Drawing.Point(289, 602)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 676
         Me.Label5.Text = "Sequencer"
         '
-        'txtSequencer
-        '
-        Me.txtSequencer.Location = New System.Drawing.Point(408, 606)
-        Me.txtSequencer.Name = "txtSequencer"
-        Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
-        Me.txtSequencer.TabIndex = 675
-        Me.txtSequencer.Text = "seq_month_day_synoptime"
-        '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(747, 574)
+        Me.btnHelp.Location = New System.Drawing.Point(693, 567)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
         Me.btnHelp.TabIndex = 669
@@ -154,25 +141,25 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(443, 574)
+        Me.btnClear.Location = New System.Drawing.Point(389, 567)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
         Me.btnClear.TabIndex = 667
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
-        'btnCommit
+        'btnSave
         '
-        Me.btnCommit.Location = New System.Drawing.Point(215, 574)
-        Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(64, 23)
-        Me.btnCommit.TabIndex = 663
-        Me.btnCommit.Text = "Save"
-        Me.btnCommit.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(161, 567)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(64, 23)
+        Me.btnSave.TabIndex = 663
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(367, 574)
+        Me.btnDelete.Location = New System.Drawing.Point(313, 567)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(64, 23)
         Me.btnDelete.TabIndex = 666
@@ -181,7 +168,7 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(139, 574)
+        Me.btnAddNew.Location = New System.Drawing.Point(85, 567)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
         Me.btnAddNew.TabIndex = 665
@@ -190,135 +177,91 @@ Partial Class frmNewSynopticDataForManyElements
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(291, 574)
+        Me.btnUpdate.Location = New System.Drawing.Point(237, 567)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
         Me.btnUpdate.TabIndex = 664
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'btnMovePrevious
-        '
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(405, 545)
-        Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(46, 23)
-        Me.btnMovePrevious.TabIndex = 674
-        Me.btnMovePrevious.Text = "<<"
-        Me.btnMovePrevious.UseVisualStyleBackColor = True
-        '
-        'btnMoveFirst
-        '
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(358, 545)
-        Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 673
-        Me.btnMoveFirst.Text = "|<<"
-        Me.btnMoveFirst.UseVisualStyleBackColor = True
-        '
-        'btnMoveLast
-        '
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(648, 545)
-        Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveLast.TabIndex = 672
-        Me.btnMoveLast.Text = ">>|"
-        Me.btnMoveLast.UseVisualStyleBackColor = True
-        '
-        'recNumberTextBox
-        '
-        Me.recNumberTextBox.Location = New System.Drawing.Point(457, 547)
-        Me.recNumberTextBox.Name = "recNumberTextBox"
-        Me.recNumberTextBox.Size = New System.Drawing.Size(141, 20)
-        Me.recNumberTextBox.TabIndex = 671
-        '
-        'btnMoveNext
-        '
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(604, 545)
-        Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(38, 23)
-        Me.btnMoveNext.TabIndex = 670
-        Me.btnMoveNext.Text = ">>"
-        Me.btnMoveNext.UseVisualStyleBackColor = True
-        '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(671, 574)
+        Me.btnClose.Location = New System.Drawing.Point(617, 567)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
         Me.btnClose.TabIndex = 668
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'ucrNavigation
+        '
+        Me.ucrNavigation.Location = New System.Drawing.Point(253, 537)
+        Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigation.Name = "ucrNavigation"
+        Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigation.TabIndex = 680
+        '
         'ucrDay
         '
-        Me.ucrDay.Location = New System.Drawing.Point(604, 14)
+        Me.ucrDay.Location = New System.Drawing.Point(629, 14)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
         Me.ucrDay.TabIndex = 215
         '
-        'ucrSynopticDataForManyElements
+        'ucrSynopticRA1
         '
-        Me.ucrSynopticDataForManyElements.Location = New System.Drawing.Point(12, 44)
-        Me.ucrSynopticDataForManyElements.Name = "ucrSynopticDataForManyElements"
-        Me.ucrSynopticDataForManyElements.Size = New System.Drawing.Size(926, 485)
-        Me.ucrSynopticDataForManyElements.TabIndex = 214
+        Me.ucrSynopticRA1.Location = New System.Drawing.Point(10, 44)
+        Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
+        Me.ucrSynopticRA1.Size = New System.Drawing.Size(820, 485)
+        Me.ucrSynopticRA1.TabIndex = 214
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(704, 14)
+        Me.ucrHour.Location = New System.Drawing.Point(729, 14)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(59, 24)
         Me.ucrHour.TabIndex = 213
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(466, 14)
+        Me.ucrMonth.Location = New System.Drawing.Point(491, 14)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
         Me.ucrMonth.TabIndex = 212
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(348, 14)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(373, 14)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
         Me.ucrYearSelector.TabIndex = 211
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(119, 14)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(144, 14)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 210
         '
-        'frmNewSynopticDataForManyElements
+        'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(950, 631)
+        Me.ClientSize = New System.Drawing.Size(842, 631)
+        Me.Controls.Add(Me.ucrNavigation)
         Me.Controls.Add(Me.btnTDCF)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
-        Me.Controls.Add(Me.btnMovePrevious)
-        Me.Controls.Add(Me.btnMoveFirst)
-        Me.Controls.Add(Me.btnMoveLast)
-        Me.Controls.Add(Me.recNumberTextBox)
-        Me.Controls.Add(Me.btnMoveNext)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.ucrDay)
-        Me.Controls.Add(Me.ucrSynopticDataForManyElements)
+        Me.Controls.Add(Me.ucrSynopticRA1)
         Me.Controls.Add(Me.ucrHour)
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.ucrYearSelector)
@@ -331,7 +274,7 @@ Partial Class frmNewSynopticDataForManyElements
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmNewSynopticDataForManyElements"
+        Me.Name = "frmNewSynopticRA1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
         Me.ResumeLayout(False)
@@ -347,23 +290,18 @@ Partial Class frmNewSynopticDataForManyElements
     Friend WithEvents ucrYearSelector As ucrYearSelector
     Friend WithEvents ucrMonth As ucrMonth
     Friend WithEvents ucrHour As ucrHour
-    Friend WithEvents ucrSynopticDataForManyElements As ucrSynopticDataManyElements
+    Friend WithEvents ucrSynopticRA1 As ucrSynopticRA1
     Friend WithEvents ucrDay As ucrDay
     Friend WithEvents btnTDCF As Button
     Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtSequencer As TextBox
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents btnCommit As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
-    Friend WithEvents btnMovePrevious As Button
-    Friend WithEvents btnMoveFirst As Button
-    Friend WithEvents btnMoveLast As Button
-    Friend WithEvents recNumberTextBox As TextBox
-    Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents ucrNavigation As ucrNavigation
 End Class

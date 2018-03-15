@@ -105,7 +105,7 @@ Public Class frmKeyEntry
 
         Select Case frm
             Case "form_synoptic_2_ra1"
-                frmNewSynopticDataForManyElements.Show()
+                frmNewSynopticRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
@@ -118,6 +118,7 @@ Public Class frmKeyEntry
             Case "form_upperair1"
                 formUpperAir.Show()
             Case "form_hourlywind"
+                frmNewHourlyWind.Show()
                 formHourlyWind.Show()
         End Select
     End Sub

@@ -3,7 +3,6 @@ Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
-
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
     Private strValueFieldName As String = "day"
@@ -18,6 +17,7 @@ Public Class ucrFormDaily2
     Public bUpdating As Boolean = False
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
+    Private ucrLinkedNavigation As ucrNavigation
 
     Public Overrides Sub PopulateControl()
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -28,14 +28,20 @@ Public Class ucrFormDaily2
             MyBase.PopulateControl()
             If fd2Record Is Nothing Then
                 clsCurrentFilter = GetLinkedControlsFilter()
-                Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
-                If y.Count() = 1 Then
-                    fd2Record = y.FirstOrDefault()
-                    bUpdating = True
-                Else
+                Try
+                    Dim y = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression())
+                    If y.Count() = 1 Then
+                        fd2Record = y.FirstOrDefault()
+                        bUpdating = True
+                    Else
+                        fd2Record = New form_daily2
+                        bUpdating = False
+                    End If
+                Catch ex As Exception
+                    'TODO Is this correct?
                     fd2Record = New form_daily2
                     bUpdating = False
-                End If
+                End Try
             End If
             For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
                 ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag), GetValue(strPeriodFieldName & ucrVFP.Tag)}))
@@ -81,9 +87,16 @@ Public Class ucrFormDaily2
             EnableDaysofMonth()
         End If
     End Sub
+    ''' <summary>
+    ''' Sets the linked navigation control
+    ''' </summary>
+    ''' <param name="ucrNewNavigation"></param>
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
+    End Sub
+
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
@@ -129,6 +142,7 @@ Public Class ucrFormDaily2
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
 
+
         'Dim ctr As Control
         'Dim ctrVFP As New ucrValueFlagPeriod
         'Dim ctrTotal As New ucrTextBox
@@ -148,36 +162,53 @@ Public Class ucrFormDaily2
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
-
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
 
+
     Private Sub EnableDaysofMonth()
-        Dim ctrVFP As New ucrValueFlagPeriod
-        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        'Dim ctrVFP As New ucrValueFlagPeriod
+        'Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        'Dim iMonthLength As Integer
+        'Dim iMonth As Integer
+
+        'If ucrLinkedMonth Is Nothing Then
+        '    iMonth = 1
+        'Else
+        '    iMonth = ucrLinkedMonth.GetValue()
+        'End If
+
+        'If iMonth = 2 Then
+        '    If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
+        '        iMonthLength = 28
+        '    Else
+        '        iMonthLength = 29
+        '    End If
+        'Else
+        '    If lstShortMonths.Contains(iMonth) Then
+        '        iMonthLength = 30
+        '    Else
+        '        iMonthLength = 31
+        '    End If
+        'End If
+
+        'For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+        '    If ctrVFP.Tag <= iMonthLength Then
+        '        ctrVFP.Enabled = True
+        '    Else
+        '        ctrVFP.Enabled = False
+        '    End If
+        'Next
+
         Dim iMonthLength As Integer
-        Dim iMonth As Integer
 
-        If ucrLinkedMonth Is Nothing Then
-            iMonth = 1
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+            iMonthLength = 31
         Else
-            iMonth = ucrLinkedMonth.GetValue()
+            iMonthLength = DateTime.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
         End If
 
-        If iMonth = 2 Then
-            If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
-                iMonthLength = 28
-            Else
-                iMonthLength = 29
-            End If
-        Else
-            If lstShortMonths.Contains(iMonth) Then
-                iMonthLength = 30
-            Else
-                iMonthLength = 31
-            End If
-        End If
-
-        For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+        For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
             If ctrVFP.Tag <= iMonthLength Then
                 ctrVFP.Enabled = True
             Else
@@ -238,11 +269,11 @@ Public Class ucrFormDaily2
         expectedTotal = ucrInputTotal.GetValue
 
         For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
-                End If
-            Next
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+            End If
+        Next
 
         If elemTotal <> expectedTotal Then
             MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
