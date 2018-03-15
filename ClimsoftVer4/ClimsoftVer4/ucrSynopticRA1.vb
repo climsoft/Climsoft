@@ -8,71 +8,75 @@ Public Class ucrSynopticRA1
     Private strFlagFieldName As String = "Flag"
     Public bUpdating As Boolean = False
     Public fs2ra1Record As form_synoptic_2_ra1
-    Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+    'Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+
     Private lstFields As New List(Of String)
-
-    Public Overrides Sub PopulateControl()
-        Dim ctr As New Control
-        Dim ctrVFP As New ucrValueFlagPeriod
-        Dim clsCurrentFilter As New TableFilter
-
-        If Not bFirstLoad Then
-            MyBase.PopulateControl()
-            If fs2ra1Record Is Nothing Then
-                clsCurrentFilter = GetLinkedControlsFilter()
-                Dim y = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression())
-                If y.Count() = 1 Then
-                    fs2ra1Record = y.FirstOrDefault()
-                    bUpdating = True
-                Else
-                    fs2ra1Record = New form_synoptic_2_ra1
-                    bUpdating = False
-                End If
-            End If
-        End If
-        For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
-            ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
-        Next
-    End Sub
+    Private ucrLinkedNavigation As ucrNavigation
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim ctr As Control
-        Dim ctrVFP As New ucrValueFlagPeriod
-        Dim lstTempFields As New List(Of String)
+        Dim ctrVFP As ucrValueFlagPeriod
 
         If bFirstLoad Then
-            lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod)
+            'lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod) 
             For Each ctr In Me.Controls
-                ctrVFP.ucrPeriod.Visible = False
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    lstValueFlagPeriodControls.Add(ctr)
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ctrVFP.ucrPeriod.Visible = False
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
+                    'lstValueFlagPeriodControls.Add(ctrVFP)
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
                 End If
             Next
-            SetTableName(strTableName)
-            SetFields(lstTempFields)
+            SetTableNameAndFields(strTableName, lstFields)
             bFirstLoad = False
         End If
     End Sub
 
-    Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        Dim ctr As ucrTextBox
+    Public Overrides Sub PopulateControl()
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim clsCurrentFilter As New TableFilter
 
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+
+            If fs2ra1Record Is Nothing Then
+                clsCurrentFilter = GetLinkedControlsFilter()
+                fs2ra1Record = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
+                If fs2ra1Record Is Nothing Then
+                    fs2ra1Record = New form_synoptic_2_ra1
+                    bUpdating = False
+                Else
+                    bUpdating = True
+                End If
+            End If
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
+                End If
+            Next
+            'For Each ucrVFP In lstValueFlagPeriodControls
+            '    ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
+            'Next
+        End If
+
+    End Sub
+
+    Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
+        Dim ucrTextbox As ucrTextBox
         If TypeOf sender Is ucrTextBox Then
-            ctr = sender
-            CallByName(fs2ra1Record, ctr.GetField, CallType.Set, ctr.GetValue)
+            ucrTextbox = DirectCast(sender, ucrTextBox)
+            CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
         End If
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
         Dim ctr As Control
-        Dim ctrVFP As New ucrValueFlagPeriod
+        Dim ctrVFP As ucrValueFlagPeriod
 
         If TypeOf sender Is ucrValueFlagPeriod Then
             ctrVFP = sender
@@ -104,6 +108,11 @@ Public Class ucrSynopticRA1
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+    End Sub
+
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
     Public Overrides Sub Clear()

@@ -33,7 +33,7 @@ Partial Class frmNewSynopticRA1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -148,14 +148,14 @@ Partial Class frmNewSynopticRA1
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
-        'btnCommit
+        'btnSave
         '
-        Me.btnCommit.Location = New System.Drawing.Point(161, 567)
-        Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(64, 23)
-        Me.btnCommit.TabIndex = 663
-        Me.btnCommit.Text = "Save"
-        Me.btnCommit.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(161, 567)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(64, 23)
+        Me.btnSave.TabIndex = 663
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -255,7 +255,7 @@ Partial Class frmNewSynopticRA1
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
@@ -298,7 +298,7 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents Label5 As Label
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents btnCommit As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
