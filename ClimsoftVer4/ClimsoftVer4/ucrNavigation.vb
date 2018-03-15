@@ -28,7 +28,9 @@
             Return ""
         End If
     End Function
-
+    ''' <summary>
+    ''' Displays the record number for the navigation control
+    ''' </summary>
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
         If iMaxRows = 0 Then
@@ -45,7 +47,9 @@
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         MoveFirst()
     End Sub
-
+    ''' <summary>
+    ''' Moves to the first record of the current data table
+    ''' </summary>
     Public Sub MoveFirst()
         iCurrRow = 0
         displayRecordNumber()
@@ -57,6 +61,12 @@
     End Sub
 
     Private Sub btnMoveNext_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
+        MoveNext()
+    End Sub
+    ''' <summary>
+    ''' Moves to the next record of the current data table
+    ''' </summary>
+    Public Sub MoveNext()
         If iCurrRow < (iMaxRows - 1) Then
             iCurrRow = iCurrRow + 1
             displayRecordNumber()
@@ -70,7 +80,9 @@
     Private Sub btnMoveLast_Click(sender As Object, e As EventArgs) Handles btnMoveLast.Click
         MoveLast()
     End Sub
-
+    ''' <summary>
+    ''' Moves to the previous record of the current data table
+    ''' </summary>
     Public Sub MovePrevious()
         If iCurrRow > 0 Then
             iCurrRow = iCurrRow - 1
@@ -81,7 +93,9 @@
             MsgBox("No more previous record!", MsgBoxStyle.Exclamation)
         End If
     End Sub
-
+    ''' <summary>
+    ''' Moves to the last record of the current data table
+    ''' </summary>
     Public Sub MoveLast()
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         iCurrRow = iMaxRows - 1
@@ -115,7 +129,9 @@
             dctKeyControls.Add(strFieldName, ucrKeyControl)
         End If
     End Sub
-
+    ''' <summary>
+    ''' Updates the key controls by key values of the current record on the navigation
+    ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
             'For i As Integer = 0 To dctKeyControls.Count - 1
@@ -136,7 +152,9 @@
             dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(Nothing, Nothing)
         End If
     End Sub
-
+    ''' <summary>
+    ''' Updates Navigation control to the recored with selected key
+    ''' </summary>
     Public Sub UpdateNavigationByKeyControls()
         Dim dctFieldvalue As New Dictionary(Of String, String)
         Dim bRowExists As Boolean
