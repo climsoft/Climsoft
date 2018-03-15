@@ -214,7 +214,6 @@ Public Class frmNewFormDaily2
 
         Try
             If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-
                 clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
                 MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -252,5 +251,9 @@ Public Class frmNewFormDaily2
         Else
             txtSequencer.Text = ""
         End If
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        ucrFormDaily.UploadAllRecords()
     End Sub
 End Class
