@@ -36,11 +36,31 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
         btnAddNew.Enabled = False
         btnClear.Enabled = True
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnSave.Enabled = True
+
+        'change the sequencer
+        If ucrYearSelector.isLeapYear Then
+            txtSequencer.Text = "seq_month_day_synoptime_leap_yr"
+        Else
+            txtSequencer.Text = "seq_month_day_synoptime"
+        End If
+
+        'temporary until we know how to get all fields from table without specifying names
+        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+        dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
+
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+
+        'regSQL = "SELECT keyName,keyValue FROM regkeys"     '
+        'daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
+        'daReg.Fill(dsReg, "regData")
 
         ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
