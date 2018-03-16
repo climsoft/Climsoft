@@ -111,6 +111,25 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
+    Public Sub SetBackColor(backColor As Color)
+        ucrValue.SetBackColor(backColor)
+        ucrFlag.SetBackColor(backColor)
+        If bIncludePeriod Then
+            ucrPeriod.SetBackColor(backColor)
+        End If
+    End Sub
+    ''' <summary>
+    ''' Gets the value for ucrValue control
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetValueValue() As String
+        Return ucrValue.GetValue
+    End Function
+
+    Public Function IsValueEmpty() As Boolean
+        Return ucrValue.IsEmpty()
+    End Function
+
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         If bFirstLoad Then

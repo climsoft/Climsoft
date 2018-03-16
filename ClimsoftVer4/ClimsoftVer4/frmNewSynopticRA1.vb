@@ -58,65 +58,53 @@
 
         ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
-        'regSQL = "SELECT keyName,keyValue FROM regkeys"     '
-        'daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
-        'daReg.Fill(dsReg, "regData")
+        ' ucrSynopticRA1.SetDefaultStandardPressureLevel()
 
+        'Set focus of ucrSynopticRA1 first control 
         ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If ucrSynopticRA1.bUpdating Then
-            'Possibly we should be cloning and then updating here
-        Else
-            clsDataConnection.db.form_synoptic_2_ra1.Add(ucrSynopticRA1.fs2ra1Record)
-        End If
-        clsDataConnection.SaveUpdate()
+        'TODO
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim msgBoxResponse As DialogResult
-        msgBoxResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If msgBoxResponse = DialogResult.Yes Then
-            Try
-
-                If ucrSynopticRA1.bUpdating Then
-                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Modified
-                    clsDataConnection.db.SaveChanges()
-                Else
-                    clsDataConnection.db.Entry(ucrSynopticRA1.fs2ra1Record).State = Entity.EntityState.Added
-                    clsDataConnection.db.SaveChanges()
-                End If
-
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
-            End Try
-        End If
+        Try
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrSynopticRA1.SaveRecord()
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim msgBoxResponse As DialogResult
-        msgBoxResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If msgBoxResponse = DialogResult.Yes Then
-            Try
-                clsDataConnection.db.form_synoptic_2_ra1.Attach(ucrSynopticRA1.fs2ra1Record)
-                clsDataConnection.db.form_synoptic_2_ra1.Remove(ucrSynopticRA1.fs2ra1Record)
-                clsDataConnection.db.SaveChanges()
-                MessageBox.Show("Record has been deleted", "Delete Record")
+        Try
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrSynopticRA1.DeleteRecord()
                 ucrNavigation.RemoveRecord()
                 SaveEnable()
-            Catch
-                MessageBox.Show("Record has not been deleted", "Delete Record")
-            End Try
-        End If
+                MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrNavigation.ResetControls()
-        ucrNavigation.MoveFirst()
-        SaveEnable()
+        'SAMUEL IS DOING THIS AND I'M NOT SURE WHY BUT I DID IT TO HAVE
+        'A SIMILAR IMPLEMENTATION, THE CHECKING OF HEADER INFORMATION
+        'COULD BE REMOVED IF ITS NOT NECESSARY
+        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+        'carry out the next actions, otherwise bring up message showing that there is insufficient data
+        If (Not ucrSynopticRA1.IsValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 AndAlso Strings.Len(ucrHour.GetValue) > 0 Then
+            ucrNavigation.ResetControls()
+            ucrNavigation.MoveFirst()
+            SaveEnable()
+        Else
+            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 
     'This is from Samuel's code
@@ -138,7 +126,6 @@
         viewRecords.viewTableRecords(sql)
     End Sub
 
-
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -156,4 +143,7 @@
             btnUpdate.Enabled = True
         End If
     End Sub
+
+
+
 End Class
