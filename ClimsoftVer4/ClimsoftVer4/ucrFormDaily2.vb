@@ -3,7 +3,6 @@ Imports System.Data.Entity
 Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
-
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_daily2"
     Private strValueFieldName As String = "day"
@@ -19,6 +18,7 @@ Public Class ucrFormDaily2
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
     Private ucrLinkedNavigation As ucrNavigation
+    Private lstAllFields As New List(Of String)
 
     Public Overrides Sub PopulateControl()
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -43,6 +43,8 @@ Public Class ucrFormDaily2
                     fd2Record = New form_daily2
                     bUpdating = False
                 End Try
+                'This is determined by the current user not set from the form
+                fd2Record.signature = frmLogin.txtUsername.Text
             End If
             For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
                 ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag), GetValue(strPeriodFieldName & ucrVFP.Tag)}))
@@ -84,18 +86,25 @@ Public Class ucrFormDaily2
             Next
             SetTableName(strTableName)
             SetFields(lstFields)
+
+            ' This list is used for uploading to observation table so all fields needed.
+            lstAllFields.AddRange(lstFields)
+            'TODO "entryDatetime" should be here as well once entity model has been updated.
+            lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
             bFirstLoad = False
             EnableDaysofMonth()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Sets the linked navigation control
+    ''' </summary>
+    ''' <param name="ucrNewNavigation"></param>
     Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
         ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
 
@@ -268,11 +277,11 @@ Public Class ucrFormDaily2
         expectedTotal = ucrInputTotal.GetValue
 
         For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = ctr
-                    elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
-                End If
-            Next
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ctrVFP = ctr
+                elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+            End If
+        Next
 
         If elemTotal <> expectedTotal Then
             MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
@@ -283,5 +292,71 @@ Public Class ucrFormDaily2
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
+    End Sub
+
+    Public Sub UploadAllRecords()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strCurrTag As String
+        Dim dtObsDateTime As Date
+        Dim lElementID As Long
+        Dim iPeriod As Integer
+
+        clsAllRecordsCall.SetTableName("form_daily2")
+        clsAllRecordsCall.SetFields(lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For i As Integer = 1 To 31
+                rcdObservationInitial = Nothing
+                rcdObservationInitial = New observationinitial
+                If i < 10 Then
+                    strCurrTag = "0" & i
+                Else
+                    strCurrTag = i
+                End If
+                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    If Long.TryParse(row.Item("elementId"), lElementID) Then
+                        rcdObservationInitial.describedBy = lElementID
+                    Else
+                        Exit Sub
+                    End If
+                    Try
+                        dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                        rcdObservationInitial.obsDatetime = dtObsDateTime
+                    Catch ex As Exception
+
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
+                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
+                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
+                        rcdObservationInitial.period = iPeriod
+                    End If
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = "form_daily2"
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+                    If Not IsDBNull(row.Item("temperatureUnits")) Then
+                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
+                    End If
+                    If Not IsDBNull(row.Item("precipUnits")) Then
+                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
+                    End If
+                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
+                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
+                    End If
+                    If Not IsDBNull(row.Item("visUnits")) Then
+                        rcdObservationInitial.visUnits = row.Item("visUnits")
+                    End If
+                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                End If
+            Next
+        Next
+        clsDataConnection.SaveUpdate()
     End Sub
 End Class
