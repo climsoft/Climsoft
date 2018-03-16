@@ -18,11 +18,11 @@ Public Class ucrDirectionSpeedFlag
     Private bFirstLoad As Boolean = True
     Private iDirectionDigits As Integer
     Private iSpeedDigits As Integer
-    Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
+    Public Event evtGoToNextDSFControl(sender As Object, e As KeyEventArgs)
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
-        'ucrDirectionSpeed.SetTableName(strNewTable)
+        'ucrDDFF.SetTableName(strNewTable)
         ucrDirection.SetTableName(strNewTable)
         ucrSpeed.SetTableName(strNewTable)
         ucrFlag.SetTableName(strNewTable)
@@ -30,7 +30,7 @@ Public Class ucrDirectionSpeedFlag
 
     Public Sub SetDirectionSpeedFlagFields(strDirectionFieldName As String, strSpeedFieldName As String, strFlagFieldName As String)
         SetFields(New List(Of String)({strDirectionFieldName, strSpeedFieldName, strFlagFieldName}))
-        'SetDirectionSpeedField(strDirectionFieldName, strSpeedFieldName)
+        'SetDDFFField(strDirectionFieldName, strSpeedFieldName)
         SetDirectionField(strDirectionFieldName)
         SetSpeedField(strSpeedFieldName)
         SetFlagField(strFlagFieldName)
@@ -41,11 +41,11 @@ Public Class ucrDirectionSpeedFlag
         SetDirectionSpeedFlagFields(strDirectionFieldName, strSpeedFieldName, strFlagFieldName)
     End Sub
 
-    'Public Sub SetDirectionSpeedField(strDirectionFieldName As String, strSpeedFieldName As String)
+    'Public Sub SetDDFFField(strDirectionFieldName As String, strSpeedFieldName As String)
 
     'Dim dctNewFields As New Dictionary(Of String, List(Of String))
     'dctNewFields.Add(strDirectionFieldName, New List(Of String)({strDirectionFieldName, strSpeedFieldName}))
-    'ucrDirectionSpeed.SetFields(dctNewFields)
+    'ucrDDFF.SetFields(dctNewFields)
     'End Sub
 
     Public Sub SetDirectionField(strFieldName As String)
@@ -62,7 +62,7 @@ Public Class ucrDirectionSpeedFlag
 
     Public Overrides Sub SetFilter(clsNewFilter As TableFilter)
         MyBase.SetFilter(clsNewFilter)
-        'ucrDirectionSpeed.SetFilter(clsNewFilter:=clsNewFilter)
+        'ucrDDFF.SetFilter(clsNewFilter:=clsNewFilter)
         ucrDirection.SetFilter(clsNewFilter:=clsNewFilter)
         ucrSpeed.SetFilter(clsNewFilter:=clsNewFilter)
         ucrFlag.SetFilter(clsNewFilter:=clsNewFilter)
@@ -70,7 +70,7 @@ Public Class ucrDirectionSpeedFlag
 
     Public Overrides Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True)
         MyBase.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
-        'ucrDirectionSpeed.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
+        'ucrDDFF.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrDirection.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrSpeed.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
         ucrFlag.SetFilter(strField:=strField, strOperator:=strOperator, strValue:=strValue, bIsPositiveCondition:=bIsPositiveCondition)
@@ -78,7 +78,7 @@ Public Class ucrDirectionSpeedFlag
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        'ucrDirectionSpeed.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
+        'ucrDDFF.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrDirection.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrSpeed.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
@@ -87,7 +87,7 @@ Public Class ucrDirectionSpeedFlag
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
             MyBase.PopulateControl()
-            'ucrDirectionSpeed.PopulateControl()
+            'ucrDDFF.PopulateControl()
             ucrDirection.PopulateControl()
             ucrSpeed.PopulateControl()
             ucrFlag.PopulateControl()
@@ -96,6 +96,14 @@ Public Class ucrDirectionSpeedFlag
 
     Public Function IsDirectionEmpty() As Boolean
         Return ucrDirection.IsEmpty()
+    End Function
+
+    Public Function IsSpeedEmpty() As Boolean
+        Return ucrSpeed.IsEmpty()
+    End Function
+
+    Public Function IsFlagEmpty() As Boolean
+        Return ucrFlag.IsEmpty()
     End Function
 
     Public Function GetDirectionValue() As String
@@ -123,7 +131,8 @@ Public Class ucrDirectionSpeedFlag
         MyBase.SetValue(objNewValue)
         lstValues = TryCast(objNewValue, List(Of Object))
         If lstValues.Count = 3 Then
-            'ucrDirectionSpeed.SetValue(lstValues(0) + lstValues(1))
+            'ucrDDFF.SetValue(lstValues(0) + lstValues(1))
+            ucrDDFF.SetValue("")
             ucrDirection.SetValue(lstValues(0))
             ucrSpeed.SetValue(lstValues(1))
             ucrFlag.SetValue(lstValues(2))
@@ -139,6 +148,11 @@ Public Class ucrDirectionSpeedFlag
 
     Private Sub ucrDirectionSpeedFlag_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            ucrDDFF.SetValidationTypeAsNone()
+            ucrDirection.bValidateSilently = False
+            ucrSpeed.bValidateSilently = False
+            ucrDirection.SetValidationTypeAsNumeric()
+            ucrSpeed.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             bFirstLoad = False
         End If
@@ -168,18 +182,18 @@ Public Class ucrDirectionSpeedFlag
             If sender Is ucrDDFF.txtBox Then
                 If ucrDDFFEnter() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    RaiseEvent evtGoToNextDSFControl(Me, e)
                 End If
             ElseIf sender Is ucrDirection.txtBox Then
                 If QcForDirection() Then
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    RaiseEvent evtGoToNextDSFControl(Me, e)
                 End If
             ElseIf sender Is ucrSpeed.txtBox Then
                 If CheckQcForSpeed() Then
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    RaiseEvent evtGoToNextDSFControl(Me, e)
                 End If
             ElseIf sender Is ucrFlag.txtBox Then
-                RaiseEvent evtGoToNextVFPControl(Me, e)
+                RaiseEvent evtGoToNextDSFControl(Me, e)
             End If
         End If
     End Sub
@@ -191,6 +205,7 @@ Public Class ucrDirectionSpeedFlag
 
     Private Function ucrDDFFEnter() As Boolean
         Dim bValuesCorrect As Boolean = False
+        Dim bValidateSilently As Boolean
         If Not ucrDDFF.IsEmpty() Then
             'Check for an observation flag in the texbox for observation value.
             'If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
@@ -212,8 +227,16 @@ Public Class ucrDirectionSpeedFlag
                     ucrDDFF.SetBackColor(Color.White)
                     bValuesCorrect = True
                     'If number of digits is correct then separate dd and ff
+                    'switch of validation notification temprary then restore
+                    bValidateSilently = ucrSpeed.bValidateSilently
+                    ucrSpeed.bValidateSilently = True
                     ucrSpeed.SetValue(Strings.Right(ucrDDFF.GetValue, iSpeedDigits))
+                    ucrSpeed.bValidateSilently = bValidateSilently
+
+                    bValidateSilently = ucrDirection.bValidateSilently
+                    ucrDirection.bValidateSilently = True
                     ucrDirection.SetValue(Strings.Left(ucrDDFF.GetValue, iDirectionDigits))
+                    ucrDirection.bValidateSilently = bValidateSilently
                 Else
                     ucrDDFF.SetBackColor(Color.Cyan)
                     ucrDDFF.Focus()
@@ -241,7 +264,27 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
+    'QC checks for  direction
     Public Function QcForDirection() As Boolean
+        If ucrDirection.ValidateValue() Then
+            Return True
+        Else
+            ucrDirection.GetFocus()
+            Return False
+        End If
+    End Function
+
+    Public Function CheckQcForSpeed() As Boolean
+        If ucrSpeed.ValidateValue() Then
+            Return True
+        Else
+            ucrSpeed.GetFocus()
+            Return False
+        End If
+    End Function
+
+    'NO LONGER USED
+    Private Function QcForDirection1() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False
@@ -285,7 +328,8 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Public Function CheckQcForSpeed() As Boolean
+    'NO LONGER USED
+    Private Function CheckQcForSpeed1() As Boolean
         'THE VALIDATION DONE HERE CAN BE PUSHED INTO THE UCRTEXTBOX
         'I HAVE DONE IT HERE TEMPORARILY TO SHOW THE CONTROL FUNCTIONALITY
         Dim bValuesCorrect As Boolean = False

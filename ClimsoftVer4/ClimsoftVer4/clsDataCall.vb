@@ -67,6 +67,21 @@ Public Class DataCall
         SetFields(New List(Of String)({strNewField}))
     End Sub
 
+    Public Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
+        SetTableName(strNewTable)
+        SetFields(dctNewFields)
+    End Sub
+
+    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+        SetTableName(strNewTable)
+        SetFields(lstNewFields)
+    End Sub
+
+    Public Sub SetTableNameAndField(strNewTable As String, strNewField As String)
+        SetTableName(strNewTable)
+        SetField(strNewField)
+    End Sub
+
     Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
         SetTable(dbsNewTable:=dbsNewTable)
         SetFields(lstNewFields:=lstNewFields)
@@ -143,7 +158,6 @@ Public Class DataCall
             If objData IsNot Nothing Then
                 For Each Item As Object In objData
                     dtbFields.Rows.Add(GetFieldsArray(Item))
-                    'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
                 Next
             End If
         End If

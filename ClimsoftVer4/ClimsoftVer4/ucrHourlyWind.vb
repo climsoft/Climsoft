@@ -7,13 +7,50 @@ Public Class ucrHourlyWind
     Private strSpeedFieldName As String = "elem_111_"
     Private strFlagFieldName As String = "ddflag"
     Private strTotalFieldName As String = "total"
-
+    Private iSpeedTotalRequired As Integer
     Private bSelectAllHours As Boolean
+    'Private lstDirectionSpeedFlagControls As List(Of ucrDirectionSpeedFlag)
+    'Private lstTextboxControls As List(Of ucrTextBox)
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
+    Private ucrLinkedNavigation As ucrNavigation
+
+    Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        Dim ucrText As ucrTextBox
+
+        If bFirstLoad Then
+            'lstDirectionSpeedFlagControls = New List(Of ucrDirectionSpeedFlag)
+            'lstTextboxControls = New List(Of ucrTextBox)
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                    ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+                    ucrDSF.SetTableNameAndDirectionSpeedFlagFields(strTableName, strDirectionFieldName & ucrDSF.Tag, strSpeedFieldName & ucrDSF.Tag, strFlagFieldName & ucrDSF.Tag)
+                    'lstDirectionSpeedFlagControls.Add(ucrDSF)
+                    lstFields.Add(strDirectionFieldName & ucrDSF.Tag)
+                    lstFields.Add(strSpeedFieldName & ucrDSF.Tag)
+                    lstFields.Add(strFlagFieldName & ucrDSF.Tag)
+                    AddHandler ucrDSF.ucrDirection.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrDSF.ucrSpeed.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrDSF.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrDSF.evtGoToNextDSFControl, AddressOf GoToNextDSFControl
+                ElseIf TypeOf ctr Is ucrTextBox Then
+                    ucrText = DirectCast(ctr, ucrTextBox)
+                    ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
+                    'lstTextboxControls.Add(ucrText)
+                    lstFields.Add(strTotalFieldName)
+                    AddHandler ucrText.evtValueChanged, AddressOf InnerControlValueChanged
+                End If
+            Next
+            SetTableNameAndFields(strTableName, lstFields)
+            bFirstLoad = False
+        End If
+    End Sub
 
     Public Overrides Sub PopulateControl()
+        Dim ucrDSF As ucrDirectionSpeedFlag
+        Dim ucrText As ucrTextBox
         Dim clsCurrentFilter As TableFilter
 
         If Not bFirstLoad Then
@@ -32,66 +69,43 @@ Public Class ucrHourlyWind
 
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctr.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+                    ucrDSF.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    ctr.SetValue(GetValue(strTotalFieldName))
+                    ucrText = DirectCast(ctr, ucrTextBox)
+                    ucrText.SetValue(GetValue(strTotalFieldName))
                 End If
             Next
-        End If
-    End Sub
 
-    Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim ctr As Control
-        Dim ctrDDFFFlag As ucrDirectionSpeedFlag
-        Dim ctrTotal As ucrTextBox
-
-        If bFirstLoad Then
-            For Each ctr In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ctrDDFFFlag = ctr
-                    lstFields.Add(strDirectionFieldName & ctrDDFFFlag.Tag)
-                    lstFields.Add(strSpeedFieldName & ctrDDFFFlag.Tag)
-                    lstFields.Add(strFlagFieldName & ctrDDFFFlag.Tag)
-
-                    ctrDDFFFlag.SetTableNameAndDirectionSpeedFlagFields(strTableName, strDirectionFieldName & ctrDDFFFlag.Tag, strSpeedFieldName & ctrDDFFFlag.Tag, strFlagFieldName & ctrDDFFFlag.Tag)
-                    AddHandler ctrDDFFFlag.ucrDirection.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrDDFFFlag.ucrSpeed.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrDDFFFlag.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrDDFFFlag.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    'lstTextboxControls.Add(ctr)
-                    ctrTotal = ctr
-                    ctrTotal.SetTableNameAndField(strTableName, strTotalFieldName)
-                    lstFields.Add(strTotalFieldName)
-                    AddHandler ctrTotal.evtValueChanged, AddressOf InnerControlValueChanged
-                End If
-            Next
-            SetTableNameAndFields(strTableName, lstFields)
-            bFirstLoad = False
+            'For Each ucrDSF In lstDirectionSpeedFlagControls
+            '    ucrDSF.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ucrDSF.Tag), GetValue(strSpeedFieldName & ucrDSF.Tag), GetValue(strFlagFieldName & ucrDSF.Tag)}))
+            'Next
+            'For Each ucrText  In lstTextboxControls
+            '    ucrText.SetValue(GetValue(strTotalFieldName))
+            'Next
         End If
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        Dim ctr As ucrTextBox
+        Dim ucrTextbox As ucrTextBox
         If TypeOf sender Is ucrTextBox Then
-            ctr = sender
-            CallByName(fhourlyWindRecord, sender.GetField, CallType.Set, sender.GetValue)
+            ucrTextbox = DirectCast(sender, ucrTextBox)
+            CallByName(fhourlyWindRecord, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
         End If
     End Sub
 
-    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+    Private Sub GoToNextDSFControl(sender As Object, e As EventArgs)
         'TODO 
         'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
-        Dim ctr As Control
-        Dim ctrDDFFFlag As ucrDirectionSpeedFlag
+        Dim ucrDSF As ucrDirectionSpeedFlag
 
         If TypeOf sender Is ucrDirectionSpeedFlag Then
-            ctrDDFFFlag = sender
-            For Each ctr In Me.Controls
+            ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     'TODO 
                     'needs modification here. for hour selection functionality
-                    If Val(ctr.Tag) = Val(ctrDDFFFlag.Tag) + 1 Then
+                    If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
                         If ctr.Enabled Then
                             ctr.Focus()
                         End If
@@ -102,9 +116,6 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-        'Dim ctr As Control
-        'Dim ctrDDFFFlag As ucrDirectionSpeedFlag
-        'Dim ctrTotal As ucrTextBox
 
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
@@ -119,27 +130,14 @@ Public Class ucrHourlyWind
         fhourlyWindRecord = Nothing
         MyBase.LinkedControls_evtValueChanged()
 
-
-        'Dim ctr As Control
-        'Dim ctrDDFFFlag As  ucrDirectionSpeedFlag
-        'Dim ctrTotal As  ucrTextBox
-        'For Each ctr In Me.Controls
-        '    If TypeOf ctr Is ucrDirectionSpeedFlag Then
-        '        ctrVFP = ctr
-        '        CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
-        '        CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
-        '        CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
-        '    ElseIf TypeOf ctr Is ucrTextBox Then
-        '        ctrTotal = ctr
-        '        CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
-        '    End If
-
-        'Next
-
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
+        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+    End Sub
 
+    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+        ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
     Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
@@ -221,7 +219,7 @@ Public Class ucrHourlyWind
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = ctr
-                    ucrDSF.SetDirectionValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
+                    ucrDSF.SetDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
         End If
@@ -235,22 +233,23 @@ Public Class ucrHourlyWind
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
         clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "QCTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = ctr
-                    ucrDSF.SetSpeedValidation(dtbl.Rows(0).Item("lowerLimit"), dtbl.Rows(0).Item("upperLimit"))
+                    ucrDSF.SetSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
+            iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
         End If
     End Sub
 
     Public Overrides Sub Clear()
         Dim ucrDSF As ucrDirectionSpeedFlag
-        Dim ucrTxt As ucrDirectionSpeedFlag
+        Dim ucrTxt As ucrTextBox
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 ucrDSF = ctr
@@ -305,20 +304,47 @@ Public Class ucrHourlyWind
         checkTotal()
     End Sub
 
-    Public Sub checkTotal()
+    Public Function checkTotal() As Boolean
+        If iSpeedTotalRequired = 1 Then
+            Dim elemTotal As Integer = 0
+            Dim expectedTotal As Integer
+            Dim ucrDSF As ucrDirectionSpeedFlag
 
-    End Sub
+            expectedTotal = Val(ucrInputTotal.GetValue)
+
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                    ucrDSF = ctr
+                    elemTotal = elemTotal + Val(ucrDSF.GetFlagValue)
+                End If
+            Next
+
+            If elemTotal = expectedTotal Then
+                Return True
+            Else
+                MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total")
+                ucrInputTotal.Focus()
+                ucrInputTotal.SetBackColor(Color.Cyan)
+                Return False
+            End If
+        Else
+            Return True
+        End If
+    End Function
 
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         'AND bUpdating MIGHT NOT BE NECESSARY
         If bUpdating Then
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-            clsDataConnection.db.SaveChanges()
         Else
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-            clsDataConnection.db.SaveChanges()
         End If
+
+        clsDataConnection.db.SaveChanges()
+
     End Sub
 
     Public Sub DeleteRecord()
@@ -328,6 +354,7 @@ Public Class ucrHourlyWind
         clsDataConnection.db.SaveChanges()
     End Sub
 
+    Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
 
+    End Sub
 End Class
-

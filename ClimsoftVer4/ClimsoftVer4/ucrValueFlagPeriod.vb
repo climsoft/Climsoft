@@ -169,12 +169,20 @@ Public Class ucrValueFlagPeriod
 
         MyBase.SetValue(objNewValue)
         lstValueFlagPeriod = TryCast(objNewValue, List(Of Object))
+        'TODO
+        'Not sure about this check. No certain about whether we should force the
+        'developer to always pass a list with a min of 2 values for Value and flag
         If lstValueFlagPeriod.Count = 3 Then
             ucrValue.SetValue(lstValueFlagPeriod(0))
             ucrFlag.SetValue(lstValueFlagPeriod(1))
             If bIncludePeriod Then
                 ucrPeriod.SetValue(lstValueFlagPeriod(2))
             End If
+        ElseIf lstValueFlagPeriod.Count = 2 Then
+            ucrValue.SetValue(lstValueFlagPeriod(0))
+            ucrFlag.SetValue(lstValueFlagPeriod(1))
+        ElseIf lstValueFlagPeriod.Count = 1 Then
+            ucrValue.SetValue(lstValueFlagPeriod(0))
         End If
     End Sub
 End Class

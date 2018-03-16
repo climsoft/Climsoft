@@ -9,7 +9,8 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        'TODO If by default the selector is to be sorted by name
+        'TODO 
+        'If by default the selector is to be sorted by name
         'then this can be removed
         ucrStationSelector.SortByStationName()
 
@@ -19,6 +20,7 @@
         ucrHourlyWind.SetDirectionDigits(Val(txtDirectionDigits.Text))
         ucrHourlyWind.SetDirectionValidation(112)
         ucrHourlyWind.SetSpeedValidation(111)
+
         AssignLinkToKeyField(ucrHourlyWind)
 
         'TO CORRECTLY SORT THE RECORDS IN THE NAVIGATION IN SEQUENCE OF
@@ -34,8 +36,10 @@
 
 
         'THIS WILL WORK ONCE WE INCLUDE THE entryDatetime AS A FIELD FOR ucrNavigation
-        ucrNavigation.SetSortBy("entryDatetime")
+        'ucrNavigation.SetSortBy("entryDatetime")
+        ucrHourlyWind.SetLinkedNavigation(ucrNavigation)
         ucrNavigation.PopulateControl()
+
         SaveEnable()
 
     End Sub
@@ -58,14 +62,14 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
         btnAddNew.Enabled = False
         btnClear.Enabled = True
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnSave.Enabled = True
-        ucrNavigation.MoveLast()
-        ucrHourlyWind.Clear()
-        ucrNavigation.SetControlsForNewRecord()
+        'ucrNavigation.SetControlsForNewRecord()
 
         'change the sequencer
         If ucrYearSelector.isLeapYear Then
@@ -74,83 +78,82 @@
             txtSequencer.Text = "seq_month_day"
         End If
 
-        'change the year based on the month and the day
-        If ucrMonth.GetValue = 12 AndAlso ucrDay.GetValue = 31 Then
-            ucrYearSelector.SetValue(Val(ucrYearSelector.GetValue) + 1)
-        End If
+        ' temporary until we know how to get all fields from table without specifying names
+        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
 
-        'TODO
-        'CHANGE THE MONTH AND DAY VALUES BASED ON THE SEQUENCER AND LAST RECORD VALUES
-
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
 
         ucrHourlyWind.ucrDirectionSpeedFlag0.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            Try
-                'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-                'carry out the next actions, otherwise bring up message showing that there is insufficient data
-                If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
+        Try
+            'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+            'carry out the next actions, otherwise bring up message showing that there is insufficient data
+            If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
 
-                    'Check valid station
-                    'Check valid year
-                    'Check valid month
-                    'Check valid Day
-                    'Check future date
-                    'MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
+                'TODO
+                'Check valid station
+                'Check valid year
+                'Check valid month
+                'Check valid Day
+                'Check future date
+                'MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
 
-                    'Do QC Checks. 
-                    'based on upper & lower limit for wind direction 
-                    If Not ucrHourlyWind.QcForDirection() Then
-                        Exit Sub
-                    End If
-                    'based on upper & lower limit for wind speed 
-                    If Not ucrHourlyWind.CheckQcForSpeed() Then
-                        Exit Sub
-                    End If
-
-                    ucrHourlyWind.SaveRecord()
-                    ucrNavigation.GoToNewRecord()
-                    ucrNavigation.ResetControls()
-                    SaveEnable()
-                    MessageBox.Show(Me, "New record added to database table!", "Save Record", MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show(Me, "Incomplete header information and insufficient observation data!", "Save Record", MessageBoxIcon.Exclamation)
+                'Then Do QC Checks. 
+                'based on upper & lower limit for wind direction 
+                If Not ucrHourlyWind.QcForDirection() Then
+                    Exit Sub
+                End If
+                'based on upper & lower limit for wind speed 
+                If Not ucrHourlyWind.CheckQcForSpeed() Then
+                    Exit Sub
                 End If
 
-            Catch ex As Exception
-                MessageBox.Show(Me, "New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxIcon.Error)
-            End Try
-        End If
+                'check total: if its required
+                If Not ucrHourlyWind.checkTotal() Then
+                    Exit Sub
+                End If
+
+                'then go ahead and save to database
+                If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrHourlyWind.SaveRecord()
+                    ucrNavigation.ResetControls()
+                    ucrNavigation.GoToNewRecord()
+                    SaveEnable()
+                    MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                MessageBox.Show("Incomplete header information and insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
+        Try
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.SaveRecord()
-                MessageBox.Show(Me, "Record updated successfully!", "Update Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxIcon.Error)
-            End Try
-        End If
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
+        Try
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.DeleteRecord()
                 ucrNavigation.RemoveRecord()
                 SaveEnable()
-                MessageBox.Show(Me, "Record has been deleted", "Delete Record", MessageBoxIcon.Information)
-            Catch ex As Exception
-                MessageBox.Show(Me, "Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxIcon.Error)
-            End Try
-        End If
+                MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
@@ -160,17 +163,31 @@
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
         If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
-            ucrHourlyWind.Clear()
             ucrNavigation.ResetControls()
+            ucrNavigation.MoveFirst()
             SaveEnable()
         Else
-            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record")
+            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
-
     End Sub
 
+    'This is from Samuel's code
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+    End Sub
+
+    'This is from Samuel's code
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
-        'TODO
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_hourlywind"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
+        End If
+        viewRecords.viewTableRecords(sql)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

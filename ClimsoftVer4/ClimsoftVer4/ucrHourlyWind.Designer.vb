@@ -366,7 +366,7 @@ Partial Class ucrHourlyWind
         '
         'ucrInputTotal
         '
-        Me.ucrInputTotal.Location = New System.Drawing.Point(859, 545)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(816, 545)
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputTotal.Name = "ucrInputTotal"
         Me.ucrInputTotal.Size = New System.Drawing.Size(87, 40)
@@ -376,12 +376,12 @@ Partial Class ucrHourlyWind
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(816, 555)
+        Me.lblTotal.Location = New System.Drawing.Point(821, 524)
         Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(44, 20)
+        Me.lblTotal.Size = New System.Drawing.Size(70, 20)
         Me.lblTotal.TabIndex = 124
-        Me.lblTotal.Text = "Total"
+        Me.lblTotal.Text = "Total [ ff]"
         '
         'ucrDirectionSpeedFlag0
         '
@@ -714,7 +714,7 @@ Partial Class ucrHourlyWind
         Me.Controls.Add(Me.lblHour)
         Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.Name = "ucrHourlyWind"
-        Me.Size = New System.Drawing.Size(952, 586)
+        Me.Size = New System.Drawing.Size(911, 592)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
