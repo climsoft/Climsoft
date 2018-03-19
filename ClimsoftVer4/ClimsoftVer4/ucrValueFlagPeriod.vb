@@ -222,12 +222,6 @@ Public Class ucrValueFlagPeriod
         If ucrValue.IsEmpty Then
             If ucrFlag.IsEmpty OrElse ucrFlag.GetValue = "M" Then
                 ucrFlag.SetValue("M")
-                'bValuesCorrect = True
-            Else
-                'MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
-                'ucrFlag.SetBackColor(Color.Cyan)
-                'ucrFlag.GetFocus()
-                'bValuesCorrect = False
             End If
         Else
             If bValuesCorrect AndAlso ucrFlag.GetValue = "M" Then
