@@ -136,7 +136,6 @@ Public Class ucrHourlyWind
 
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
-        'AND bUpdating MIGHT NOT BE NECESSARY
         If bUpdating Then
             'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified

@@ -45,6 +45,7 @@ Public Class ucrSynopticRA1
             SetTableNameAndFields(strTableName, lstFields)
             'Get the Reg Keys to determine the Tmax,Tmin,gmin
             GetRegKeys()
+            SetValueValidation()
             bFirstLoad = False
         End If
     End Sub
@@ -102,12 +103,12 @@ Public Class ucrSynopticRA1
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
-        Dim ctr As Control
+        'Dim ctr As Control
         Dim ctrVFP As ucrValueFlagPeriod
 
         If TypeOf sender Is ucrValueFlagPeriod Then
-            ctrVFP = sender
-            For Each ctr In Me.Controls
+            ctrVFP = DirectCast(sender, ucrValueFlagPeriod)
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     If ctr.Tag = ctrVFP.Tag + 1 Then
                         If ctr.Enabled Then
@@ -151,7 +152,6 @@ Public Class ucrSynopticRA1
 
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
-        'AND bUpdating MIGHT NOT BE NECESSARY
         If bUpdating Then
             'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Modified
@@ -171,6 +171,30 @@ Public Class ucrSynopticRA1
         clsDataConnection.db.SaveChanges()
     End Sub
 
+    Public Sub SetValueValidation()
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        Dim row As DataRow
+        clsDataDefinition = New DataCall
+        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
+        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"elementId", "lowerLimit", "upperLimit"}))
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    row = dtbl.Select("elementId = '" & ucrVFP.Tag & "'").FirstOrDefault()
+                    If row IsNot Nothing Then
+                        ucrVFP.SetValueValidation(Val(row.Item("lowerLimit")), Val(row.Item("upperLimit")))
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
     ''' <summary>
     ''' checks if all the ucrValueFlagPeriod controls have a value.
     ''' Returns true if they are all empty and false if otherwise
@@ -181,7 +205,7 @@ Public Class ucrSynopticRA1
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                If (Not ucrVFP.IsValueEmpty()) AndAlso IsNumeric(ucrVFP.GetValueValue) Then
+                If (Not ucrVFP.IsValueValueEmpty()) AndAlso IsNumeric(ucrVFP.GetValueValue) Then
                     Return False
                 End If
             End If
@@ -344,6 +368,7 @@ Public Class ucrSynopticRA1
         Return (iMonth >= iGminStartMonth AndAlso iMonth < iGminEndMonth AndAlso iHour = 6)
     End Function
 
+    'I reached here
     Public Sub SetDefaultStandardPressureLevel()
         ucrVFPStandardPressureLevel.SetValue(New List(Of Object)({iStandardPressureLevel.ToString}))
         'ucrVFPStandardPressureLevel.ucrValue.SetValue(iStandardPressureLevel.ToString)
