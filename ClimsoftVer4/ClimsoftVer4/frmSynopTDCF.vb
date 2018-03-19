@@ -13,7 +13,7 @@
 
     Private Sub frmSynopTDCF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         sql = "CREATE TABLE IF NOT EXISTS `bufr_indicators` (`BUFR_Edition` int(11) DEFAULT '0',`Originating_Centre` int(11) DEFAULT '0',`Originating_SubCentre` int(11) DEFAULT '0',`Update_Sequence` int(11) DEFAULT '0',`Optional_Section` int(11) DEFAULT '0',`Data_Category` int(11) DEFAULT '0',`Intenational_Data_SubCategory` int(11) DEFAULT '0',`Local_Data_SubCategory` int(11) DEFAULT '0',`Master_table` int(11) DEFAULT '0',`Local_Table` int(11) DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-
+        PopulateForms()
     End Sub
 
     Sub PopulateForms()
@@ -30,6 +30,7 @@
             Kount = ds.Tables("bufr_indicators").Rows.Count
 
             ' Pulate the template list
+            cboTemplate.Items.Clear()
             For i = 0 To Kount - 1
                 cboTemplate.Items.Add(ds.Tables("bufr_indicators").Rows(i).Item("Tmplate"))
             Next
@@ -1877,4 +1878,71 @@
             Me.Cursor = Cursors.Default
         End Try
     End Function
+
+
+    'Private Sub cboTemplate_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+    '    If Len(cboTemplate.Text) > 0 Then
+    '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
+    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    '        ds.Clear()
+    '        da.Fill(ds, "bufr_indicators")
+
+    '        txtMsgHeader.Text = ds.Tables("bufr_indicators").Rows(0).Item("Msg_Header")
+    '        txtBUFREditionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("BUFR_Edition")
+    '        txtOriginatingGeneratingCentre.Text = ds.Tables("bufr_indicators").Rows(0).Item("Originating_Centre")
+    '        txtOriginatingGeneratingSubCentre.Text = ds.Tables("bufr_indicators").Rows(0).Item("Originating_SubCentre")
+    '        txtUpdateSequenceNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Update_Sequence")
+    '        chkOptionalSectionInclusion.Checked = ds.Tables("bufr_indicators").Rows(0).Item("Optional_Section")
+    '        'If ds.Tables("bufr_indicators").Rows(0).Item("Optional_Section") = 1 Then
+    '        '    chkOptionalSectionInclusion.Checked() = True
+    '        'Else
+    '        '    chkOptionalSectionInclusion.Checked() = False
+    '        'End If
+    '        txtDataCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Data_Category")
+    '        txtInternationalDataSubCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Intenational_Data_SubCategory")
+    '        txtLocalDataSubCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Local_Data_SubCategory")
+    '        txtMastersTableVersionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Master_table")
+    '        txtLocalTableVersionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Local_Table")
+    '    End If
+    'End Sub
+
+    Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cboTemplate_TextChanged1(sender As Object, e As EventArgs) Handles cboTemplate.TextChanged
+
+        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        ds.Clear()
+        da.Fill(ds, "bufr_indicators")
+        With ds.Tables("bufr_indicators")
+            If .Rows.Count > 0 Then
+                txtMsgHeader.Text = .Rows(0).Item("Msg_Header")
+                txtBUFREditionNumber.Text = .Rows(0).Item("BUFR_Edition")
+                txtOriginatingGeneratingCentre.Text = .Rows(0).Item("Originating_Centre")
+                txtOriginatingGeneratingSubCentre.Text = .Rows(0).Item("Originating_SubCentre")
+                txtUpdateSequenceNumber.Text = .Rows(0).Item("Update_Sequence")
+                chkOptionalSectionInclusion.Checked = .Rows(0).Item("Optional_Section")
+                txtDataCategory.Text = .Rows(0).Item("Data_Category")
+                txtInternationalDataSubCategory.Text = .Rows(0).Item("Intenational_Data_SubCategory")
+                txtLocalDataSubCategory.Text = .Rows(0).Item("Local_Data_SubCategory")
+                txtMastersTableVersionNumber.Text = .Rows(0).Item("Master_table")
+                txtLocalTableVersionNumber.Text = .Rows(0).Item("Local_Table")
+            Else
+                txtMsgHeader.Text = ""
+                txtBUFREditionNumber.Text = ""
+                txtOriginatingGeneratingCentre.Text = ""
+                txtOriginatingGeneratingSubCentre.Text = ""
+                txtUpdateSequenceNumber.Text = ""
+                chkOptionalSectionInclusion.Checked = 0
+                txtDataCategory.Text = ""
+                txtInternationalDataSubCategory.Text = ""
+                txtLocalDataSubCategory.Text = ""
+                txtMastersTableVersionNumber.Text = ""
+                txtLocalTableVersionNumber.Text = ""
+            End If
+
+        End With
+    End Sub
 End Class

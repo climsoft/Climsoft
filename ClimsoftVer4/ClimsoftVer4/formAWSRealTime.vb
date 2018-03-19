@@ -67,8 +67,10 @@ Public Class formAWSRealTime
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()
+
         ShowPanel(pnlProcessing, "Process Settings")
         load_PressingParameters("txtlFill")
+        load_Indicators(dbconn)
         Timer1.Start()
         'Timer2.Start()
 
@@ -256,6 +258,11 @@ Err:
                 txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
                 chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
                 chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
+                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
+                    txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
+                Else
+                    txtGTSHeader.Text = ""
+                End If
 
             Case "pnlDataStructures"
 
@@ -431,7 +438,7 @@ Err:
                 txtFlag.Clear()
                 chkOperational.Checked = True
                 txtIP.Text = ""
-
+                txtGTSHeader.Text = ""
         End Select
     End Sub
 
@@ -589,6 +596,7 @@ Err:
         dsNewRow.Item("DataStructure") = txtDataStructure.Text
         dsNewRow.Item("MissingDataFlag") = txtFlag.Text
         dsNewRow.Item("awsServerIp") = txtIP.Text
+        dsNewRow.Item("txtGTSHeader") = txtGTSHeader.Text
         If chkOperational.Checked Then
             dsNewRow.Item("OperationalStatus") = 1
         Else
@@ -646,6 +654,7 @@ Err:
         ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
         ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
         ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
+        ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
         If chkOperational.Checked Then
             ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
         Else
@@ -889,6 +898,47 @@ Err:
         'MsgBox(Err.Description)
         Log_Errors(Err.Description)
     End Sub
+    Sub load_Indicators(iconn As MySql.Data.MySqlClient.MySqlConnection)
+        Dim dai As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsi As New DataSet
+
+        ' Populate Template Combo box
+        sql = "SELECT * FROM bufr_indicators;"
+        dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, iconn)
+        dsi.Clear()
+        dai.Fill(dsi, "indicators")
+
+        With dsi.Tables("indicators")
+            For i = 0 To .Rows.Count - 1
+                txtTemplate.Items.Add(.Rows(i).Item("Tmplate"))
+            Next
+
+            ' Populate with AWS Template TM_307091
+            sql = "SELECT * FROM bufr_indicators where Tmplate = 'TM_307091';"
+            dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            dsi.Clear()
+            dai.Fill(dsi, "indicators")
+            txtTemplate.Text = .Rows(0).Item("Tmplate")
+            txtMsgHeader.Text = .Rows(0).Item("Msg_Header")
+            txtBufrEdition.Text = .Rows(0).Item("BUFR_Edition")
+            txtOriginatingCentre.Text = .Rows(0).Item("Originating_Centre")
+            txtOriginatingSubcentre.Text = .Rows(0).Item("Originating_SubCentre")
+            txtUpdateSequence.Text = .Rows(0).Item("Update_Sequence")
+            chkOptionalSection.Checked = .Rows(0).Item("Optional_Section")
+            txtDataCategory.Text = .Rows(0).Item("Data_Category")
+            InternationalSubcategory.Text = .Rows(0).Item("Intenational_Data_SubCategory")
+            LocalSubcategory.Text = .Rows(0).Item("Local_Data_SubCategory")
+            MastertableVersion.Text = .Rows(0).Item("Master_table")
+            LocaltableVersion.Text = .Rows(0).Item("Local_Table")
+        End With
+
+        ' Populate with Code and Flags
+        sql = "SELECT FXY as Element, Description as Name, Bufr_Unit as Unit, Bufr_Value as Value FROM code_flag;"
+        dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, iconn)
+        dsi.Clear()
+        dai.Fill(dsi, "code_flag")
+        dgrdCodeFlag.DataSource = dsi.Tables("code_flag")
+    End Sub
 
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
@@ -1048,6 +1098,13 @@ Err:
                     ' Get station data details
                     nat_id = .Rows(i).Item("SiteID")
 
+                    ' Get message meader for the station if exist. Otherwise use National bulletin header
+                    If Not IsDBNull(.Rows(i).Item("GTSHeader")) And Len(.Rows(i).Item("GTSHeader")) = 11 Then
+                        msg_header = .Rows(i).Item("GTSHeader")
+                    Else
+                        msg_header = txtMsgHeader.Text
+                    End If
+                    'Log_Errors(msg_header)
                     'MsgBox(nat_id)
                     'msg_header = .Rows(i).Item("aws_msg")
                     'MsgBox(msg_header)
@@ -1430,7 +1487,7 @@ Err:
         Log_Errors(Err.Number & ":" & Err.Description)
     End Sub
     Function FTP_Call(ftpfile As String, ftpmethod As String) As Boolean
-
+        'Log_Errors(ftpfile & " " & ftpmethod)
         'MsgBox(ftpfile & " " & ftpmethod)
         FTP_Call = True
 
@@ -1446,14 +1503,18 @@ Err:
         Dim ftpmode As String
 
         Try
-            Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd)
+            If Not Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd) Then
+                Log_Errors("Host server " & ftp_host & " Not found")
+                Return False
+            End If
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
             FileClose(1)
             local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
             Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_aws.txt"
-            FileOpen(1, ftpscript, OpenMode.Output)
+
+            'FileOpen(1, ftpscript, OpenMode.Output)
 
             Select Case ftpmethod
                 Case "get"
@@ -1461,22 +1522,22 @@ Err:
                     txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
 
                     'MsgBox(ftpmode & " " & txtinputfile)
-
+                    FileOpen(1, ftpscript, OpenMode.Output)
                     If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
-
                     If ftpmode = "FTP" Then
                         Print(1, "open " & ftp_host & Chr(13) & Chr(10))
                         Print(1, usr & Chr(13) & Chr(10))
                         Print(1, pwd & Chr(13) & Chr(10))
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
                         Print(1, "asc" & Chr(13) & Chr(10))
-
                     End If
                     Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Print(1, "bye" & Chr(13) & Chr(10))
+                    FileClose(1)
                 Case "put"
-                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
-                    If ftpmode = "ftp" Then
+                    FileOpen(1, ftpscript, OpenMode.Output)
+                    If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10))
+                    If ftpmode = "FTP" Then
                         Print(1, "open " & ftp_host & Chr(13) & Chr(10))
                         Print(1, usr & Chr(13) & Chr(10))
                         Print(1, pwd & Chr(13) & Chr(10))
@@ -1485,8 +1546,9 @@ Err:
                     End If
                     Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Print(1, "bye" & Chr(13) & Chr(10))
+                    FileClose(1)
             End Select
-            FileClose(1)
+            'FileClose(1)
 
             '        ' Create batch file to execute FTP script
             ftpbatch = local_folder & "\ftp_tdcf.bat"
@@ -1510,7 +1572,6 @@ Err:
             Print(1, "echo on" & Chr(13) & Chr(10))
             Print(1, "EXIT" & Chr(13) & Chr(10))
             FileClose(1)
-
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
             Shell(ftpbatch, vbMinimizedNoFocus)
@@ -1552,86 +1613,68 @@ Err:
                 txtOutputFolder.Refresh()
                 lstOutputFiles.Refresh()
             End If
-
+            FileClose(1)
 
             If System.IO.Path.GetFileName(ftpfile).Length = 0 Then Exit Function
 
             'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
 
         Catch ex As Exception
-            Log_Errors(Err.Description)
+            Log_Errors(ex.Message)
             FTP_Call = False
+            FileClose(1)
         End Try
     End Function
 
-    Sub Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String)
-        On Error GoTo Err
+    Function Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String) As Boolean
+
         Dim sql As String
         Dim rf As New DataSet
         Dim num As Integer
+        Try
+            Get_ftp_details = True
+            'MsgBox(aws_ftp)
+            Select Case ftpmethod
+                Case "get"
+                    sql = "SELECT * FROM aws_basestation"
+                    rf = GetDataSet("aws_basestation", sql)
 
-        'MsgBox(aws_ftp)
-        Select Case ftpmethod
-            Case "get"
-                sql = "SELECT * FROM aws_basestation"
-                rf = GetDataSet("aws_basestation", sql)
+                    num = rf.Tables("aws_basestation").Rows.Count
 
-                num = rf.Tables("aws_basestation").Rows.Count
+                    For i = 0 To num - 1 ' Get Ftp details for the current site
+                        With rf.Tables("aws_basestation")
+                            If aws_ftp = .Rows(i).Item("ftpId") Then
+                                flder = .Rows(i).Item("inputFolder")
+                                ftpmode = .Rows(i).Item("ftpMode")
+                                usr = .Rows(i).Item("userName")
+                                pwd = .Rows(i).Item("password")
+                                Exit For
+                            End If
+                        End With
+                    Next
+                Case "put"
+                    sql = "SELECT * FROM aws_mss"
+                    rf = GetDataSet("aws_mss", sql)
+                    If rf.Tables("aws_mss").Rows.Count = 0 Then
+                        Log_Errors("No Message Switch available")
+                        Return False
+                    Else
+                        With rf.Tables("aws_mss") ' Only one message switch. Get its details
+                            ftp_host = .Rows(0).Item("ftpId")
+                            flder = .Rows(0).Item("inputFolder")
+                            ftpmode = .Rows(0).Item("ftpMode")
+                            usr = .Rows(0).Item("userName")
+                            pwd = .Rows(0).Item("password")
+                        End With
+                    End If
+            End Select
 
-                For i = 0 To num - 1
-                    With rf.Tables("aws_basestation")
-                        If aws_ftp = .Rows(i).Item("ftpId") Then
-                            flder = .Rows(i).Item("inputFolder")
-                            ftpmode = .Rows(i).Item("ftpMode")
-                            usr = .Rows(i).Item("userName")
-                            pwd = .Rows(i).Item("password")
-                            Exit For
-                        End If
-                    End With
-                Next
-            Case "put"
-                sql = "SELECT * FROM aws_mss"
-                rf = GetDataSet("aws_mss", sql)
-                num = rf.Tables("aws_mss").Rows.Count
+        Catch ex As Exception
+            Log_Errors(ex.Message)
+            Return False
+        End Try
 
-                For i = 0 To num - 1
-                    With rf.Tables("aws_mss")
-                        If aws_ftp = .Rows(i).Item("ftpId") Then
-                            flder = .Rows(i).Item("inputFolder")
-                            ftpmode = .Rows(i).Item("ftpMode")
-                            usr = .Rows(i).Item("userName")
-                            pwd = .Rows(i).Item("password")
-                            Exit For
-                        End If
-                    End With
-                Next
-        End Select
-
-        'rss = db.OpenRecordset("aws_sever_settings")
-
-        'With rss
-        '.MoveFirst()
-        'Do While .EOF = False
-        '    If .Fields("aws_ftp") = aws_ftp Then
-        '        in_usr = .Fields("aws_user")
-        '        in_pwd = .Fields("aws_password")
-        '        in_folder = .Fields("aws_folder")
-        '        aws_comm = LCase(.Fields("aws_transfer_mode"))
-        '        mss_ftp = .Fields("mss_ftp")
-        '        out_usr = .Fields("mss_user")
-        '        out_pwd = .Fields("mss_password")
-        '        out_folder = .Fields("mss_folder")
-        '        mss_comm = LCase(.Fields("mss_transfer_mode"))
-        '        Exit Do
-        '    End If
-        '    .MoveNext()
-        'Loop
-        'End With
-        Exit Sub
-
-Err:
-        Log_Errors(Err.Description)
-    End Sub
+    End Function
 
     Sub Process_Input_Record(aws_rs As String, datestring As String)
 
@@ -1659,15 +1702,26 @@ Err:
         End With
         'Log_Errors(nat_id & " " & stn_name & " " & lat & " " & lon & " " & elv)
 
-
         'Process_Status(" Processing input record")
 
         ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
         update_main_db(aws_rs, datestring, nat_id)
 
+        ' Check if encoding time has been reached
+        If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
+            Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
+            Exit Sub
+        End If
+
+        Dim ET As Double
+        ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
+
+        If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
+
         If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
 
         If IsDate(datestring) Then
+
             ' Process the messages for transmission at the scheduled time
             ' Temporarily suspended
             update_tbltemplate(aws_rs, datestring)
@@ -1690,7 +1744,7 @@ Err:
             grs = GetDataSet("aws_sites", sql)
 
             With grs.Tables("aws_sites")
-                For i = 0 To 1
+                For i = 0 To .Rows.Count - 1
                     If .Rows(i).Item("siteID") = nat_id Then
                         If .Rows(i).Item("GTSEncode") = 1 Then GTSEncode = True
                         Exit For
@@ -2006,7 +2060,8 @@ Err:
         stn_typ = 0 ' Code for AWS
         'wmo_id = 63999
         'MsgBox(stn_typ.ToString("D2"))
-        msg_header = txtMsgHeader.Text
+
+        'msg_header = txtMsgHeader.Text
 
 
         'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
@@ -2854,9 +2909,12 @@ Err:
         'Close #1
         'Close #2
 
+        'myString = myString.PadLeft(desiredLength, "0"c)
         'msg_file = Right(msg_header, 4) & Mid(message_header, 13, 2) & Mid(message_header, 15, 2) '& Format(min, "00") 'message_header
         msg_file = Strings.Right(msg_header, 4) & dy & hr & min ' Format(dy, "00") & Format(hr, "00")
 
+
+        msg_file = Strings.Right(msg_header, 4) & dy.PadLeft(2, "0"c) & hr.PadLeft(2, "0"c) & min.PadLeft(2, "0"c)
         'Construct and open Bufr output text file based on the message header
 
         Dim fserial As Long
@@ -2935,6 +2993,8 @@ Err:
         Process_Status("Transmitting message")
 
         bufr_filename = (System.IO.Path.GetFileName(AWS_BUFR_File)) ' Get the filename without path
+        'Log_Errors(bufr_filename)
+
         If Not FTP_Call(bufr_filename, "put") Then Exit Function
 
         AWS_BUFR_Code = True

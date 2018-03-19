@@ -28,6 +28,7 @@ Partial Class frmSynopTDCF
         Me.cmdSend = New System.Windows.Forms.Button()
         Me.txtMsgbFile = New System.Windows.Forms.TextBox()
         Me.grpBinaryMessage = New System.Windows.Forms.GroupBox()
+        Me.txtEncoded = New System.Windows.Forms.TextBox()
         Me.grpObsHeaders = New System.Windows.Forms.GroupBox()
         Me.lblBBB = New System.Windows.Forms.Label()
         Me.cboBBB = New System.Windows.Forms.ComboBox()
@@ -93,7 +94,6 @@ Partial Class frmSynopTDCF
         Me.lblBinaryBox = New System.Windows.Forms.Label()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.TabHelp = New System.Windows.Forms.TabPage()
-        Me.txtEncoded = New System.Windows.Forms.TextBox()
         lblYYYY = New System.Windows.Forms.Label()
         Me.TabProcessing.SuspendLayout()
         Me.TabProcess.SuspendLayout()
@@ -170,6 +170,15 @@ Partial Class frmSynopTDCF
         Me.grpBinaryMessage.TabIndex = 8
         Me.grpBinaryMessage.TabStop = False
         Me.grpBinaryMessage.Text = "Binary Message"
+        '
+        'txtEncoded
+        '
+        Me.txtEncoded.Location = New System.Drawing.Point(6, 19)
+        Me.txtEncoded.Multiline = True
+        Me.txtEncoded.Name = "txtEncoded"
+        Me.txtEncoded.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtEncoded.Size = New System.Drawing.Size(826, 247)
+        Me.txtEncoded.TabIndex = 1
         '
         'grpObsHeaders
         '
@@ -826,19 +835,10 @@ Partial Class frmSynopTDCF
         Me.TabHelp.Location = New System.Drawing.Point(4, 22)
         Me.TabHelp.Name = "TabHelp"
         Me.TabHelp.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabHelp.Size = New System.Drawing.Size(863, 411)
+        Me.TabHelp.Size = New System.Drawing.Size(863, 461)
         Me.TabHelp.TabIndex = 2
         Me.TabHelp.Text = "Help"
         Me.TabHelp.UseVisualStyleBackColor = True
-        '
-        'txtEncoded
-        '
-        Me.txtEncoded.Location = New System.Drawing.Point(6, 19)
-        Me.txtEncoded.Multiline = True
-        Me.txtEncoded.Name = "txtEncoded"
-        Me.txtEncoded.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtEncoded.Size = New System.Drawing.Size(826, 247)
-        Me.txtEncoded.TabIndex = 1
         '
         'frmSynopTDCF
         '

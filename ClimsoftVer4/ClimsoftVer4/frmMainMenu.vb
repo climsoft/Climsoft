@@ -274,12 +274,13 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub ConfigurationForTDCFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigurationForTDCFToolStripMenuItem.Click
-        With frmSynopTDCF
-            .TabProcessing.SelectedTab = .TabSettings
-            .TabProcess.Hide()
-            .Show()
-            '.TabProcess.Refresh()
-        End With
+        'With frmSynopTDCF
+        '    .TabProcessing.SelectedTab = .TabSettings
+        '    .TabProcess.Hide()
+        '    .Show()
+        '    '.TabProcess.Refresh()
+        'End With
 
+        frmTDCFindicators.Show()
     End Sub
 End Class
