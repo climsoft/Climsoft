@@ -154,7 +154,7 @@ Public Class ucrValueFlagPeriod
         Return ucrValue.IsEmpty()
     End Function
 
-    Public Sub SetValueValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
+    Public Sub SetValueValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
         ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
@@ -192,6 +192,10 @@ Public Class ucrValueFlagPeriod
             End If
         End If
 
+    End Sub
+
+    Private Sub ucrValue_Leave(sender As Object, e As EventArgs) Handles ucrValue.Leave
+        ucrValueEnter()
     End Sub
 
     Private Function ucrValueEnter() As Boolean
