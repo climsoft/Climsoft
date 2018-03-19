@@ -1,6 +1,4 @@
-﻿
-Imports System.Data.Entity
-Imports System.Linq.Dynamic
+﻿Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
     Private bFirstLoad As Boolean = True
@@ -20,6 +18,9 @@ Public Class ucrFormDaily2
     Private ucrLinkedNavigation As ucrNavigation
     Private lstAllFields As New List(Of String)
 
+    ''' <summary>
+    ''' Sets the values of the controls to the coresponding record values in the database with the current key
+    ''' </summary>
     Public Overrides Sub PopulateControl()
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
@@ -71,6 +72,7 @@ Public Class ucrFormDaily2
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     lstFields.Add(strPeriodFieldName & ctrVFP.Tag)
                     ctrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ctrVFP.Tag)
+
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
@@ -248,7 +250,7 @@ Public Class ucrFormDaily2
 
     End Sub
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
 
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
