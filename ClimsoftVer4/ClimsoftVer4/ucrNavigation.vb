@@ -1,8 +1,12 @@
 ﻿Public Class ucrNavigation
     Private bFirstLoad As Boolean = True
+    'Stores the number of the maximum rows in a data table
     Public iMaxRows As Integer
+    'Stores the current row
     Public iCurrRow As Integer
+    'Stores the sort by querry
     Public strSortCol As String = ""
+    'Stors the dictonary of key controls and their fields
     Private dctKeyControls As Dictionary(Of String, ucrBaseDataLink)
 
     Public Overrides Sub PopulateControl()
@@ -181,7 +185,6 @@
                     Exit For
                 End If
             Next
-
             displayRecordNumber()
         End If
     End Sub
@@ -197,14 +200,18 @@
             bFirstLoad = False
         End If
     End Sub
-
+    ''' <summary>
+    ''' Disables the buttons on navigation while on a new record
+    ''' </summary>
     Public Sub SetControlsForNewRecord()
         btnMoveFirst.Enabled = False
         btnMoveLast.Enabled = False
         btnMoveNext.Enabled = False
         btnMovePrevious.Enabled = False
     End Sub
-
+    ''' <summary>
+    ''' Enables Navigation buttons 
+    ''' </summary>
     Public Sub ResetControls()
         btnMoveFirst.Enabled = True
         btnMoveLast.Enabled = True
