@@ -445,6 +445,12 @@
     <Compile Include="frmSynopTDCF.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmTDCFindicators.Designer.vb">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTDCFindicators.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
     </Compile>
@@ -867,6 +873,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSynopTDCF.resx">
       <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTDCFindicators.resx">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
