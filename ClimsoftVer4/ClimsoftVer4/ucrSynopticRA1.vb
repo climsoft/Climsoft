@@ -28,13 +28,11 @@ Public Class ucrSynopticRA1
         Dim ctrVFP As ucrValueFlagPeriod
 
         If bFirstLoad Then
-            'lstValueFlagPeriodControls = New List(Of ucrValueFlagPeriod) 
-            For Each ctr In Me.Controls
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ctrVFP.ucrPeriod.Visible = False
                     ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
-                    'lstValueFlagPeriodControls.Add(ctrVFP)
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
@@ -45,6 +43,7 @@ Public Class ucrSynopticRA1
             SetTableNameAndFields(strTableName, lstFields)
             'Get the Reg Keys to determine the Tmax,Tmin,gmin
             GetRegKeys()
+            'Set the validation for the elements(the value textboxes)
             SetValueValidation()
             bFirstLoad = False
         End If
@@ -73,14 +72,12 @@ Public Class ucrSynopticRA1
                     ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
                 End If
             Next
-            'For Each ucrVFP In lstValueFlagPeriodControls
-            '    ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
-            'Next
 
             'Check if Tmax is required and change properties accordingly
             SetTmaxRequired(IsTmaxRequired())
 
-            'check if Tmin is required and change properties accordingly. This also applies to 24Hr precipitation and 24Hr sunshine
+            'check if Tmin is required and change properties accordingly. 
+            'This also applies to 24Hr precipitation And 24Hr sunshine
             SetTminRequired(IsTminRequired())
 
             'Check if Gmin is required and change properties accordingly
@@ -102,6 +99,8 @@ Public Class ucrSynopticRA1
         End If
     End Sub
 
+    'TODO
+    'THE NEXT FOCUS NEEDS TO BE REDONE DIFFERENTLY
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
         'Dim ctr As Control
         Dim ctrVFP As ucrValueFlagPeriod
@@ -151,7 +150,6 @@ Public Class ucrSynopticRA1
     End Sub
 
     Public Sub SaveRecord()
-        'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         If bUpdating Then
             'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Modified
@@ -374,10 +372,74 @@ Public Class ucrSynopticRA1
         Return (iMonth >= iGminStartMonth AndAlso iMonth < iGminEndMonth AndAlso iHour = 6)
     End Function
 
-    'I reached here
     Public Sub SetDefaultStandardPressureLevel()
         ucrVFPStandardPressureLevel.SetValue(New List(Of Object)({iStandardPressureLevel.ToString}))
         'ucrVFPStandardPressureLevel.ucrValue.SetValue(iStandardPressureLevel.ToString)
+    End Sub
+
+    'TODO
+    'THIS IS YET TO BE COMPLETED
+    Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
+        Try
+            'If wetbulb > dewpoint both elements are flagged because either of them could be wrong.
+            'i.e. wetbulb > the correct value or drybulb < correct value.
+            If Val(ucrVFPWetBulbTemp.GetValue) > Val(ucrVFPDryBulbTemp.GetValue) Then
+                ucrVFPWetBulbTemp.SetBackColor(Color.Cyan)
+                ucrVFPDryBulbTemp.SetBackColor(Color.Cyan)
+                ucrVFPDryBulbTemp.Focus()
+                MsgBox("Drybulb must be greater or equal to Wetbulb!", MsgBoxStyle.Exclamation)
+            Else
+                ucrVFPWetBulbTemp.SetBackColor(Color.White)
+                ucrVFPDryBulbTemp.SetBackColor(Color.White)
+
+                'Apply element scale factor to drybulb and wetbulb 
+                'before calling function to calculate dewpoint
+                Dim dwPoint = calculateDewpoint(Val(ucrVFPDryBulbTemp.GetValue) / 10, Val(ucrVFPWetBulbTemp.GetValue) / 10)
+                ucrVFPDewPointTemp.SetValue(New List(Of Object)({dwPoint}))
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub UcrVFPWetBulbTemp_LostFocus(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.LostFocus
 
     End Sub
+
+    Public Function calculateDewpoint(ByVal dryBulb As Decimal, ByVal wetBulb As Decimal) As String
+        'Td in this case is Temperature drybulb,
+        'Tw wetBulb And Tp Is dewpoint temperature
+        'E is saturation vapour pressure(s.v.p.), 
+        'hence Ed Is s.v.p.over drybulb And Ew s.v.p. over wetbulb, 
+        'Ea actual s.v.p.
+        Dim Td_Fahrenheit As Object
+        Dim Ed As Object
+
+        Dim Tw_Fahrenheit As Object
+        Dim Ew As Object
+        Dim Ea As Object
+        'Dim Tp As Object
+        Dim Tp_Fahrenheit As Object
+        Dim Tp_Celcius As Object
+
+        Td_Fahrenheit = ((9 / 5) * dryBulb) + 32
+        '2.71828183 is natural number (e)
+        Ed = 6.1078 * 2.71828183 ^ (((9.5939 * Td_Fahrenheit) - 307.004) / ((0.556 * Td_Fahrenheit) + 219.522))
+        Tw_Fahrenheit = ((9 / 5) * wetBulb) + 32
+        Ew = 6.1078 * 2.71828183 ^ (((9.5939 * Tw_Fahrenheit) - 307.004) / ((0.556 * Tw_Fahrenheit) + 219.522))
+        Ea = Ew - 0.35 * (Td_Fahrenheit - Tw_Fahrenheit)
+        Tp_Fahrenheit = -1 * ((Math.Log(Ea / 6.1078) * 219.522) + 307.004) / ((Math.Log(Ea / 6.1078) * 0.556) - 9.59539)
+        Tp_Celcius = (5 / 9) * (Tp_Fahrenheit - 32)
+
+
+        Tp_Celcius = Math.Round(Tp_Celcius, 0)
+        Return Tp_Celcius
+    End Function
+
+    Private Sub UcrVFPDewPointTemp_LostFocus(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.LostFocus
+
+    End Sub
+
+
 End Class
