@@ -378,7 +378,7 @@ Public Class ucrSynopticRA1
     End Sub
 
     'TODO
-    'THIS IS YET TO BE COMPLETED
+    'THIS IS NOT YET COMPLETED
     Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
         Try
             'If wetbulb > dewpoint both elements are flagged because either of them could be wrong.
