@@ -56,16 +56,55 @@
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
         dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
 
-        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
-
-        ' ucrSynopticRA1.SetDefaultStandardPressureLevel()
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay, ucrHour}), ucrYear:=ucrYearSelector)
 
         'Set focus of ucrSynopticRA1 first control 
         ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        'TODO
+        Try
+            'Check if header information is complete. If the header information is complete and there is at least on obs value then,
+            'carry out the next actions, otherwise bring up message showing that there is insufficient data
+            If (Not ucrSynopticRA1.IsValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
+
+                'TODO
+                'Check valid station
+                'Check valid year
+                'Check valid month
+                'Check valid Day
+                'Check future date
+                'MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
+
+                'Then Do QC Checks. 
+                'based on upper & lower limit for wind direction 
+                'If Not ucrHourlyWind.QcForDirection() Then
+                '    Exit Sub
+                'End If
+                'based on upper & lower limit for wind speed 
+                'If Not ucrHourlyWind.CheckQcForSpeed() Then
+                'Exit Sub
+                'End If
+
+                'check total if its required
+                'If Not ucrHourlyWind.checkTotal() Then
+                '    Exit Sub
+                'End If
+
+                'then go ahead and save to database
+                If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrSynopticRA1.SaveRecord()
+                    ucrNavigation.ResetControls()
+                    ucrNavigation.GoToNewRecord()
+                    SaveEnable()
+                    MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                MessageBox.Show("Incomplete header information and insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -98,13 +137,13 @@
         'COULD BE REMOVED IF ITS NOT NECESSARY
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        If (Not ucrSynopticRA1.IsValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 AndAlso Strings.Len(ucrHour.GetValue) > 0 Then
-            ucrNavigation.ResetControls()
-            ucrNavigation.MoveFirst()
-            SaveEnable()
-        Else
-            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        'If (Not ucrSynopticRA1.IsValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 AndAlso Strings.Len(ucrHour.GetValue) > 0 Then
+        ucrNavigation.ResetControls()
+        ucrNavigation.MoveFirst()
+        SaveEnable()
+        'Else
+        'MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'End If
     End Sub
 
     'This is from Samuel's code
