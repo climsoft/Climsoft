@@ -82,7 +82,7 @@
         dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
 
-        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay}), ucrYear:=ucrYearSelector)
 
         ucrHourlyWind.ucrDirectionSpeedFlag0.Focus()
     End Sub
@@ -162,13 +162,13 @@
         'COULD BE REMOVED IF ITS NOT NECESSARY
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        If (Not ucrHourlyWind.IsDirectionValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 Then
-            ucrNavigation.ResetControls()
-            ucrNavigation.MoveFirst()
-            SaveEnable()
-        Else
-            MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+        'If (Not ucrHourlyWind.IsDirectionValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 Then
+        ucrNavigation.ResetControls()
+        ucrNavigation.MoveFirst()
+        SaveEnable()
+        'Else
+        'MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        'End If
     End Sub
 
     'This is from Samuel's code
