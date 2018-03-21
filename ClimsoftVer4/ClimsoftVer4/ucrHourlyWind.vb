@@ -49,8 +49,6 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        Dim ucrText As ucrTextBox
         Dim clsCurrentFilter As TableFilter
 
         If Not bFirstLoad Then
@@ -69,11 +67,9 @@ Public Class ucrHourlyWind
 
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
-                    ucrDSF.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    ucrText = DirectCast(ctr, ucrTextBox)
-                    ucrText.SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
             Next
 
@@ -116,13 +112,11 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
-
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
             SetFields(lstFields)
         End If
-
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -140,13 +134,44 @@ Public Class ucrHourlyWind
         ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
+    Public Sub SaveRecord()
+        'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
+        If bUpdating Then
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
+            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
+        Else
+            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
+            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
+        End If
+
+        clsDataConnection.db.SaveChanges()
+
+    End Sub
+
+    Public Sub DeleteRecord()
+        'clsDataConnection.db.Entry(fhourlyWindRecord)
+        clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
+        clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
+        clsDataConnection.db.SaveChanges()
+    End Sub
+
+    Public Overrides Sub Clear()
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                DirectCast(ctr, ucrDirectionSpeedFlag).Clear()
+            ElseIf TypeOf ctr Is ucrTextBox Then
+                DirectCast(ctr, ucrTextBox).Clear()
+            End If
+        Next
+    End Sub
+
     Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
         Dim ucrDSF As ucrDirectionSpeedFlag
         bSelectAllHours = bNewSelectAllHours
         If bSelectAllHours Then
-            For Each ctr In Me.Controls
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
+                    ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
                     ucrDSF.Enabled = True
                     ucrDSF.SetBackColor(Color.White)
                 End If
@@ -160,10 +185,10 @@ Public Class ucrHourlyWind
             clsDataDefinition.SetTableName("form_hourly_time_selection")
             clsDataDefinition.SetFields(New List(Of String)({"hh", "hh_selection"}))
             dtbl = clsDataDefinition.GetDataTable()
-            If dtbl IsNot Nothing Then
-                For Each ctr In Me.Controls
+            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+                For Each ctr As Control In Me.Controls
                     If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                        ucrDSF = ctr
+                        ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
                         iTagVal = Val(Strings.Right(ucrDSF.Tag, 2))
                         row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
                         If row IsNot Nothing Then
@@ -185,27 +210,22 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        For Each ctr In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                ucrDSF.SetDirectionDigits(iNewDirectionDigits)
+                DirectCast(ctr, ucrDirectionSpeedFlag).SetDirectionDigits(iNewDirectionDigits)
             End If
         Next
     End Sub
 
     Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        For Each ctr In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                ucrDSF.SetSpeedDigits(iNewSpeedDigits)
+                DirectCast(ctr, ucrDirectionSpeedFlag).SetSpeedDigits(iNewSpeedDigits)
             End If
         Next
     End Sub
 
     Public Sub SetDirectionValidation(elementId As Integer)
-        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
@@ -216,17 +236,15 @@ Public Class ucrHourlyWind
         clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            For Each ctr In Me.Controls
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
-                    ucrDSF.SetDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
         End If
     End Sub
 
     Public Sub SetSpeedValidation(elementId As Integer)
-        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
@@ -237,33 +255,18 @@ Public Class ucrHourlyWind
         clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            For Each ctr In Me.Controls
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
-                    ucrDSF.SetSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
             iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
         End If
     End Sub
 
-    Public Overrides Sub Clear()
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        Dim ucrTxt As ucrTextBox
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                ucrDSF.Clear()
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                ucrTxt = ctr
-                ucrTxt.Clear()
-            End If
-        Next
-    End Sub
-
     Public Function IsDirectionValuesEmpty() As Boolean
         Dim ucrDSF As ucrDirectionSpeedFlag
-        For Each ctr In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 ucrDSF = ctr
                 If (Not ucrDSF.IsDirectionEmpty()) AndAlso IsNumeric(ucrDSF.GetDirectionValue) Then
@@ -275,11 +278,9 @@ Public Class ucrHourlyWind
     End Function
 
     Public Function QcForDirection() As Boolean
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        For Each ctr In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                If Not ucrDSF.QcForDirection() Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForDirection() Then
                     Return False
                 End If
             End If
@@ -288,11 +289,9 @@ Public Class ucrHourlyWind
     End Function
 
     Public Function CheckQcForSpeed() As Boolean
-        Dim ucrDSF As ucrDirectionSpeedFlag
-        For Each ctr In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                If Not ucrDSF.CheckQcForSpeed() Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).CheckQcForSpeed() Then
                     Return False
                 End If
             End If
@@ -305,17 +304,16 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Function checkTotal() As Boolean
+        Dim elemTotal As Integer = 0
+        Dim expectedTotal As Integer
+
         If iSpeedTotalRequired = 1 Then
-            Dim elemTotal As Integer = 0
-            Dim expectedTotal As Integer
-            Dim ucrDSF As ucrDirectionSpeedFlag
 
             expectedTotal = Val(ucrInputTotal.GetValue)
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
-                    elemTotal = elemTotal + Val(ucrDSF.GetFlagValue)
+                    elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetFlagValue)
                 End If
             Next
 
@@ -323,7 +321,7 @@ Public Class ucrHourlyWind
                 Return True
             Else
                 MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total")
-                ucrInputTotal.Focus()
+                ucrInputTotal.GetFocus()
                 ucrInputTotal.SetBackColor(Color.Cyan)
                 Return False
             End If
@@ -332,27 +330,6 @@ Public Class ucrHourlyWind
         End If
     End Function
 
-    Public Sub SaveRecord()
-        'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
-        'AND bUpdating MIGHT NOT BE NECESSARY
-        If bUpdating Then
-            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-        Else
-            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-        End If
-
-        clsDataConnection.db.SaveChanges()
-
-    End Sub
-
-    Public Sub DeleteRecord()
-        ' clsDataConnection.db.Entry(fhourlyWindRecord)
-        clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
-        clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
-        clsDataConnection.db.SaveChanges()
-    End Sub
 
     Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
 
