@@ -506,6 +506,7 @@ Public Class ucrSynopticRA1
 
         MSLppp = (ppp * (1 - 0.0065 * elevation / (dryBulb + 0.0065 * elevation + 273.15)) ^ -5.257) * 10
         '0.0065 is dry adiabatic lapse rate
+        MSLppp = Math.Round(MSLppp)
         Return MSLppp
     End Function
 
