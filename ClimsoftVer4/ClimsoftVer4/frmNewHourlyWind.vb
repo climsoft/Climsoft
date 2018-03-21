@@ -111,7 +111,7 @@
                     Exit Sub
                 End If
 
-                'check total: if its required
+                'check total if its required
                 If Not ucrHourlyWind.checkTotal() Then
                     Exit Sub
                 End If
@@ -162,7 +162,7 @@
         'COULD BE REMOVED IF ITS NOT NECESSARY
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        If (Not ucrHourlyWind.IsDirectionValuesEmpty) And Strings.Len(ucrStationSelector.GetValue) > 0 And Strings.Len(ucrYearSelector.GetValue) > 0 And Strings.Len(ucrMonth.GetValue) And Strings.Len(ucrDay.GetValue) > 0 Then
+        If (Not ucrHourlyWind.IsDirectionValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 Then
             ucrNavigation.ResetControls()
             ucrNavigation.MoveFirst()
             SaveEnable()
