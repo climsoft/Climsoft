@@ -1,22 +1,33 @@
 ﻿Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
+    'Boolean to check if control is loading for first time
     Private bFirstLoad As Boolean = True
+    'sets table name assocaited with this user control
     Private strTableName As String = "form_daily2"
+    'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
+    'These store instances of linked controls
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
+    'Stores fields for the value flag and period
     Private lstFields As New List(Of String)
+    'Stores the record assocaited with this control
     Public fd2Record As form_daily2
+    'Boolean to check if record is updating
     Public bUpdating As Boolean = False
+    'Stores the list of containing for the  ucrValueFlagPeriod  controls
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
+    'Stores Linked navigation control
     Private ucrLinkedNavigation As ucrNavigation
+    'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
+    Private ElementId As Integer
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -152,9 +163,8 @@ Public Class ucrFormDaily2
         MyBase.LinkedControls_evtValueChanged()
         EnableDaysofMonth()
 
-
         'Dim ctr As Control
-        'Dim ctrVFP As New ucrValueFlagPeriod
+        'Dim ctrVFP As ucrDataLinkCombobox
         'Dim ctrTotal As New ucrTextBox
         'For Each ctr In Me.Controls
         '    If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -173,42 +183,13 @@ Public Class ucrFormDaily2
             CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
+        SetValueUpperAndLowerLimitsValidation()
     End Sub
-
+    ''' <summary>
+    ''' Enables the day of month fields equivalent to the days of that month
+    ''' </summary>
 
     Private Sub EnableDaysofMonth()
-        'Dim ctrVFP As New ucrValueFlagPeriod
-        'Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
-        'Dim iMonthLength As Integer
-        'Dim iMonth As Integer
-
-        'If ucrLinkedMonth Is Nothing Then
-        '    iMonth = 1
-        'Else
-        '    iMonth = ucrLinkedMonth.GetValue()
-        'End If
-
-        'If iMonth = 2 Then
-        '    If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
-        '        iMonthLength = 28
-        '    Else
-        '        iMonthLength = 29
-        '    End If
-        'Else
-        '    If lstShortMonths.Contains(iMonth) Then
-        '        iMonthLength = 30
-        '    Else
-        '        iMonthLength = 31
-        '    End If
-        'End If
-
-        'For Each ctrVFP In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
-        '    If ctrVFP.Tag <= iMonthLength Then
-        '        ctrVFP.Enabled = True
-        '    Else
-        '        ctrVFP.Enabled = False
-        '    End If
-        'Next
 
         Dim iMonthLength As Integer
 
@@ -226,12 +207,20 @@ Public Class ucrFormDaily2
             End If
         Next
     End Sub
-
+    ''' <summary>
+    ''' Sets the linked year and month controls
+    ''' </summary>
+    ''' <param name="ucrYearControl"></param>
+    ''' <param name="ucrMonthControl"></param>
     Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
     End Sub
-
+    ''' <summary>
+    ''' Sets the  filed name and the control for the liked units
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <param name="ucrComboBox"></param>
     Public Sub AddUnitslink(strFieldName As String, ucrComboBox As ucrDataLinkCombobox)
 
         If ucrLinkedUnits.ContainsKey(strFieldName) Then
@@ -249,9 +238,10 @@ Public Class ucrFormDaily2
         AddHandler ucrComboBox.evtValueChanged, AddressOf LinkedControls_evtValueChanged
 
     End Sub
-
+    ''' <summary>
+    ''' Clears all the text In the ucrValueFlagPeriod controls 
+    ''' </summary>
     Public Overrides Sub Clear()
-
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -265,7 +255,10 @@ Public Class ucrFormDaily2
             End If
         Next
     End Sub
-
+    ''' <summary>
+    ''' Checks if the computer computed total is same as the user total
+    ''' If not gives a warning
+    ''' </summary>
     Public Sub checkTotal()
         'Check total if required
         ' Am not sure how to get this value yet
@@ -360,5 +353,40 @@ Public Class ucrFormDaily2
             Next
         Next
         clsDataConnection.SaveUpdate()
+    End Sub
+    ''' <summary>
+    ''' Sets upper and lower limits validation curent element
+    ''' </summary>
+    Public Sub SetValueUpperAndLowerLimitsValidation()
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition = New DataCall
+
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
+
+        For Each ucrKeyControl As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If TypeOf ucrKeyControl Is ucrElementSelector Then
+                ElementId = Val(ucrKeyControl.GetValue)
+                Exit For
+            End If
+        Next
+        clsDataDefinition.SetFilter("elementId", "=", ElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
+
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
+                        ucrVFP.SetValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                    End If
+                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
+                        ucrVFP.SetValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                    End If
+                End If
+            Next
+        End If
     End Sub
 End Class

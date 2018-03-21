@@ -62,7 +62,10 @@ Public Class frmNewFormDaily2
         SaveEnable()
 
     End Sub
-
+    ''' <summary>
+    ''' Sets links to key controls as filters
+    ''' </summary>
+    ''' <param name="ucrControl"></param>
     Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
         ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
@@ -94,8 +97,8 @@ Public Class frmNewFormDaily2
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
-            dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If dlgResponse = DialogResult.Yes Then
+        dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
 
             If ucrFormDaily.bUpdating Then
                 'Possibly we should be cloning and then updating here
@@ -105,9 +108,9 @@ Public Class frmNewFormDaily2
             clsDataConnection.SaveUpdate()
             SaveEnable()
         Else
-                MessageBox.Show("Record not Saved?", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
+            MessageBox.Show("Record not Saved?", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
 
     End Sub
 
@@ -183,7 +186,7 @@ Public Class frmNewFormDaily2
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
+    'This is as is as Samuels view button
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
