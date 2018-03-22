@@ -223,6 +223,7 @@ Public Class ucrValueFlagPeriod
             If ucrFlag.IsEmpty OrElse ucrFlag.GetValue = "M" Then
                 ucrFlag.SetValue("M")
             End If
+            bValuesCorrect = True
         Else
             If bValuesCorrect AndAlso ucrFlag.GetValue = "M" Then
                 ucrFlag.SetValue("")
