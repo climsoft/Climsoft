@@ -9,7 +9,7 @@
             End If
         Catch
             If Not bSilent Then
-                MessageBox.Show("Record has been not been saved", "Saving Record")
+                MessageBox.Show("Record has not been saved", "Saving Record")
             End If
         End Try
     End Sub
