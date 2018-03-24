@@ -283,4 +283,9 @@ Public Class frmMainMenu
 
         frmTDCFindicators.Show()
     End Sub
+
+
+    Private Sub MetadataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MetadataToolStripMenuItem.Click
+        formMetadata.Show()
+    End Sub
 End Class

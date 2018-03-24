@@ -333,6 +333,9 @@ Public Class dataEntryGlobalRoutines
             ' strSQL = "SELECT * FROM  " & tbl
             'strSQL = strSQL & tblName
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             tblRecords.Clear()
 
             'tblName = "form_hourly"
@@ -366,9 +369,11 @@ Public Class dataEntryGlobalRoutines
             Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
 
             sqls = "SELECT stationId,stationName FROM station ORDER BY stationName;"
+            'das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
             das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            ' Set to unlimited timeout period
+            das.SelectCommand.CommandTimeout = 0
 
-            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
             das.Fill(dss, "station")
             For i = 0 To dss.Tables("station").Rows.Count - 1
                 If ctrl.Text = dss.Tables("station").Rows(i).Item("stationId") Then
@@ -398,8 +403,9 @@ Public Class dataEntryGlobalRoutines
 
             sqls = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
             das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            ' Set to unlimited timeout period
+            das.SelectCommand.CommandTimeout = 0
 
-            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
             das.Fill(dss, "elem")
             For i = 0 To dss.Tables("elem").Rows.Count - 1
                 If ctrl.Text = dss.Tables("elem").Rows(i).Item("elementID") Then

@@ -241,6 +241,9 @@ Public Class frmQC
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ' Set timeout period to unlimited
+            da1.SelectCommand.CommandTimeout = 0
+
             da1.Fill(ds1, "interElement")
             n = ds1.Tables("interElement").Rows.Count
             conn.Close()

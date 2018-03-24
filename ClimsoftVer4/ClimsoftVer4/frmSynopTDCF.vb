@@ -25,6 +25,9 @@
 
             sql = "SELECT * FROM bufr_indicators"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_indicators")
             Kount = ds.Tables("bufr_indicators").Rows.Count
@@ -59,6 +62,9 @@
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "aws_mss")
             Kount = ds.Tables("aws_mss").Rows.Count
@@ -177,6 +183,9 @@
 
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "aws_mss")
 
@@ -251,6 +260,9 @@
 
             'Set data set
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_crex_data")
 
@@ -749,6 +761,9 @@
         sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "bufr_coded")
 
@@ -789,6 +804,9 @@
             sql = "Select * from bufr_crex_data"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_crex_data")
 
@@ -838,6 +856,9 @@
         sql = "Select * from bufr_crex_data"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "bufr_crex_data")
 
@@ -853,6 +874,9 @@
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "from form_synoptic_2_ra1")
 
@@ -888,6 +912,9 @@
 
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "stations")
 
@@ -936,6 +963,9 @@
 
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "qualifiers")
 
@@ -960,6 +990,9 @@
 
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "instruments")
             With ds.Tables("instruments")
@@ -1022,6 +1055,9 @@
         sql = "select * from form_synoptic_2_ra1 where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "synoptic")
             If ds.Tables("synoptic").Rows.Count <> 0 Then
@@ -1140,6 +1176,9 @@
         Try
             sql = "Select * from bufr_crex_data"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds1.Clear()
             da.Fill(ds1, "bufr_crex_data")
             kount1 = ds1.Tables("bufr_crex_data").Rows.Count
@@ -1226,6 +1265,9 @@
         'Try
         sql = "Select * from bufr_crex_data"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds1.Clear()
         da.Fill(ds1, "bufr_crex_data")
         Kount = ds1.Tables("bufr_crex_data").Rows.Count
@@ -1272,6 +1314,9 @@
         Try
             sql = "Select elementId, elementScale from obselement where elementId = '" & Val(code) & "';"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "obselement")
             Kount = ds.Tables("obselement").Rows.Count
@@ -1388,6 +1433,9 @@
             sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_coded")
             Kount = ds.Tables("bufr_coded").Rows.Count
@@ -1417,6 +1465,9 @@
         Try
             sql = "Select * from ccitt;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "ccitt")
             recs = ds.Tables("ccitt").Rows.Count
@@ -1754,6 +1805,9 @@
 
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "server")
             Kount = ds.Tables("server").Rows.Count
@@ -1884,6 +1938,7 @@
     '    If Len(cboTemplate.Text) > 0 Then
     '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
     '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    
     '        ds.Clear()
     '        da.Fill(ds, "bufr_indicators")
 
@@ -1914,6 +1969,9 @@
 
         sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "bufr_indicators")
         With ds.Tables("bufr_indicators")

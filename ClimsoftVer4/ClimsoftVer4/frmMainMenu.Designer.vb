@@ -48,6 +48,7 @@ Partial Class frmMainMenu
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLanguageTranslation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
@@ -72,7 +73,6 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
-        Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -190,6 +190,7 @@ Partial Class frmMainMenu
         Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
         Me.UpdateElementsToolStripMenuItem.Tag = "Update_Element_Limits"
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
+        Me.UpdateElementsToolStripMenuItem.Visible = False
         '
         'ConfigureDatabaseConnectionToolStripMenuItem
         '
@@ -217,6 +218,7 @@ Partial Class frmMainMenu
         Me.mnuToolsModifyForms.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
+        Me.mnuToolsModifyForms.Visible = False
         '
         'SelectLanguageToolStripMenuItem
         '
@@ -262,6 +264,7 @@ Partial Class frmMainMenu
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
         Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.AWSToolStripMenuItem.Text = "AWS"
+        Me.AWSToolStripMenuItem.Visible = False
         '
         'AWSElementsToolStripMenuItem
         '
@@ -274,6 +277,12 @@ Partial Class frmMainMenu
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
         Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
+        '
+        'ConfigurationForTDCFToolStripMenuItem
+        '
+        Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
+        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
         '
         'mnuLanguageTranslation
         '
@@ -292,14 +301,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '
@@ -595,12 +604,6 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
-        '
-        'ConfigurationForTDCFToolStripMenuItem
-        '
-        Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
-        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
-        Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
         '
         'frmMainMenu
         '
