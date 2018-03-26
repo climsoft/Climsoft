@@ -15,9 +15,9 @@
         Dim optsection As Integer
 
         Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            dbconn.ConnectionString = dbConnectionString
-            dbconn.Open()
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            'dbconn.ConnectionString = dbConnectionString
+            'dbconn.Open()
 
             ' set value for the optional section
             If chkOptionalSectionInclusion.Checked() = True Then
@@ -29,6 +29,9 @@
             sql = "INSERT INTO bufr_indicators (Tmplate,Msg_Header,BUFR_Edition,Originating_Centre,Originating_SubCentre,Update_Sequence,Optional_Section,Data_Category,Intenational_Data_SubCategory,Local_Data_SubCategory,Master_table,Local_Table) VALUES('" & cboTemplate.Text & "','" & txtMsgHeader.Text & "','" & txtBUFREditionNumber.Text & "','" & txtOriginatingGeneratingCentre.Text & "','" & txtOriginatingGeneratingSubCentre.Text & "','" & txtUpdateSequenceNumber.Text & "','" & optsection & "','" & txtDataCategory.Text & "','" & txtInternationalDataSubCategory.Text & "','" & txtLocalDataSubCategory.Text & "','" & txtMastersTableVersionNumber.Text & "','" & txtLocalTableVersionNumber.Text & "');"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Remove timeout requirement
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "indicators")
             Kount = ds.Tables("bufr_indicators").Rows.Count
@@ -102,6 +105,9 @@
             sql = "select * from bufr_indicators;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Remove timeout requirement
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "indicators")
             kount = ds.Tables("indicators").Rows.Count
@@ -131,6 +137,9 @@
 
                 sql = "select * from bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                ' Remove timeout requirement
+                da.SelectCommand.CommandTimeout = 0
+
                 ds.Clear()
                 da.Fill(ds, "indicators")
 
@@ -148,7 +157,7 @@
                 dbconn.Close()
 
             Catch ex As Exception
-                MsgBox(ex.Message)
+                'MsgBox(ex.Message)
             End Try
         End If
     End Sub

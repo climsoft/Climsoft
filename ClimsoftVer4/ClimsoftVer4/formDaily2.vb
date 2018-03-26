@@ -55,6 +55,9 @@ Public Class formDaily2
             ds.Clear()
             sql = "SELECT * FROM form_daily2"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             da.Fill(ds, "form_daily2")
 
             maxRows = ds.Tables("form_daily2").Rows.Count
@@ -168,6 +171,9 @@ Public Class formDaily2
                     sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit,qcTotalRequired FROM obselement WHERE elementId=" & elemCode
                     '
                     daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                    ' Set to unlimited timeout period
+                    daValueLimits.SelectCommand.CommandTimeout = 0
+
                     'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
                     dsValueLimits.Clear()
                     'Add row for element code associated with active control
@@ -282,6 +288,9 @@ Public Class formDaily2
 
             sql = "SELECT * FROM form_daily2"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             da.Fill(ds, "form_daily2")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
@@ -308,10 +317,14 @@ Public Class formDaily2
 
             sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ' Set to unlimited timeout period
+            da1.SelectCommand.CommandTimeout = 0
 
             'sql3 = "SELECT elementID,elementName FROM obselement ORDER BY elementName;"
             sql3 = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
             da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
+            ' Set to unlimited timeout period
+            da3.SelectCommand.CommandTimeout = 0
 
             da1.Fill(ds1, "station")
             If ds1.Tables("station").Rows.Count > 0 Then
@@ -338,6 +351,9 @@ Public Class formDaily2
             'Populate dataForms
             sql2 = "SELECT val_start_position,val_end_position FROM data_forms WHERE table_name='form_daily2'"
             da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
+            ' Set to unlimited timeout period
+            da2.SelectCommand.CommandTimeout = 0
+
             da2.Fill(ds2, "dataForms")
             i = ds2.Tables("dataForms").Rows(0).Item("val_start_position")
             j = ds2.Tables("dataForms").Rows(0).Item("val_end_position")
@@ -530,6 +546,9 @@ Public Class formDaily2
             SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_daily2 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily2);"
             dsLastDataRecord.Clear()
             daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            ' Set to unlimited timeout period
+            daLastDataRecord.SelectCommand.CommandTimeout = 0
+
             daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
             txtSameValue.Text = ""
