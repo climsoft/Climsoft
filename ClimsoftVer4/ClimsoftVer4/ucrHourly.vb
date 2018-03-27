@@ -13,6 +13,7 @@ Public Class ucrHourly
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
     Private ucrLinkedNavigation As ucrNavigation
+    Private ElementId As Integer
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctr As Control
@@ -54,7 +55,9 @@ Public Class ucrHourly
             ctrVFP.ucrFlag.SetTextToUpper()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Sets the values of the controls to the coresponding record values in the database with the current key
+    ''' </summary>
     Public Overrides Sub PopulateControl()
         Dim ctrVFP As New ucrValueFlagPeriod
         Dim ctrTotal As New ucrTextBox
@@ -139,8 +142,11 @@ Public Class ucrHourly
             CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
+        SetValueValidation()
     End Sub
-
+    ''' <summary>
+    ''' Clears all the text In the ucrValueFlagPeriod controls 
+    ''' </summary>
     Public Overrides Sub Clear()
         Dim ctr As Control
         Dim ctrTotal As ucrTextBox
@@ -155,7 +161,10 @@ Public Class ucrHourly
             End If
         Next
     End Sub
-
+    ''' <summary>
+    ''' Checks if the computer computed total is same as the user total
+    ''' If not gives a warning
+    ''' </summary>
     Public Sub checkTotal()
         'Check total if required
         ' Am not sure how to get this value yet
@@ -166,12 +175,12 @@ Public Class ucrHourly
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
 
-        expectedTotal = ucrInputTotal.GetValue
+        expectedTotal = Val(ucrInputTotal.GetValue)
 
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ctrVFP = ctr
-                elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+                elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
             End If
         Next
 
@@ -184,6 +193,41 @@ Public Class ucrHourly
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
+    End Sub
+    ''' <summary>
+    ''' Sets upper and lower limits validation curent element
+    ''' </summary>
+    Public Sub SetValueValidation()
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
+        clsDataDefinition = New DataCall
+
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
+
+        For Each ucrKeyControl As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If TypeOf ucrKeyControl Is ucrElementSelector Then
+                ElementId = Val(ucrKeyControl.GetValue)
+                Exit For
+            End If
+        Next
+        clsDataDefinition.SetFilter("elementId", "=", ElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
+
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
+                        ucrVFP.SetValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                    End If
+                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
+                        ucrVFP.SetValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                    End If
+                End If
+            Next
+        End If
     End Sub
 
 End Class

@@ -59,14 +59,23 @@
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If ucrHourly.bUpdating Then
-            'Possibly we should be cloning and then updating here
+        'Confirm if you want to continue and save data from key-entry form to database table
+        Dim dlgResponse As DialogResult
+        dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dlgResponse = DialogResult.Yes Then
+
+            If ucrHourly.bUpdating Then
+                'Possibly we should be cloning and then updating here
+            Else
+                clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
+            End If
+            clsDataConnection.SaveUpdate()
+            SaveEnable()
+            ucrHourlyNavigation.ResetControls()
         Else
-            clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
+            MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
-        clsDataConnection.SaveUpdate()
-        SaveEnable()
-        ucrHourlyNavigation.ResetControls()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -130,8 +139,10 @@
 
         ' temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+
         ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
         ucrHourly.UcrValueFlagPeriod0.Focus()
+
         ucrHourlyNavigation.MoveLast()
     End Sub
 
