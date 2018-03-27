@@ -175,12 +175,12 @@ Public Class ucrHourly
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
 
-        expectedTotal = ucrInputTotal.GetValue
+        expectedTotal = Val(ucrInputTotal.GetValue)
 
         For Each ctr In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ctrVFP = ctr
-                elemTotal = elemTotal + ctrVFP.ucrValue.GetValue
+                elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
             End If
         Next
 
