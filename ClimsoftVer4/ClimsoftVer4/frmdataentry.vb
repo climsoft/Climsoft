@@ -105,18 +105,20 @@ Public Class frmKeyEntry
 
         Select Case frm
             Case "form_synoptic_2_ra1"
-                formSynopRA1.Show()
+                frmNewSynopticRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
                 frmNewFormDaily2.Show()
             Case "form_hourly"
-                formHourly.Show()
+                frmNewHourly.Show()
             Case "form_monthly"
-                formMonthly.Show()
+                frmNewMonthly.Show()
+            'formMonthly.Show()
             Case "form_upperair1"
                 formUpperAir.Show()
             Case "form_hourlywind"
+                frmNewHourlyWind.Show()
                 formHourlyWind.Show()
         End Select
     End Sub

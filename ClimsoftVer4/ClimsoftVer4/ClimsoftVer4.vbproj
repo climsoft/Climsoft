@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="ClsCloneFunctions.vb" />
     <Compile Include="clsDataCall.vb" />
+    <Compile Include="clsDataConnection.vb" />
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
@@ -173,10 +174,28 @@
     <Compile Include="data_forms.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="frmNewHourly.Designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgSynopticDataForManyElements.vb">
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.Designer.vb">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMonthly.Designer.vb">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.Designer.vb">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -730,6 +749,30 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrHourlyWind.Designer.vb">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourlyWind.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourly.Designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonthlyData.Designer.vb">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthlyData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrNavigation.Designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDay.Designer.vb">
       <DependentUpon>ucrDay.vb</DependentUpon>
     </Compile>
@@ -754,16 +797,22 @@
     <Compile Include="ucrMonth.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrSynopticDataForManyElements.Designer.vb">
-      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
+    <Compile Include="ucrSynopticRA1.Designer.vb">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrSynopticDataForManyElements.vb">
+    <Compile Include="ucrSynopticRA1.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.Designer.vb">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrValueFlagPeriod.Designer.vb">
@@ -796,16 +845,19 @@
     <Compile Include="ucrYearSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl1.Designer.vb">
-      <DependentUpon>UserControl1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl1.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="dlgSynopticDataForManyElements.resx">
-      <DependentUpon>dlgSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourlyWind.resx">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMonthly.resx">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSynopticRA1.resx">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
@@ -1202,6 +1254,18 @@
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourlyWind.resx">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthlyData.resx">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDay.resx">
       <DependentUpon>ucrDay.vb</DependentUpon>
     </EmbeddedResource>
@@ -1214,11 +1278,15 @@
     <EmbeddedResource Include="ucrMonth.resx">
       <DependentUpon>ucrMonth.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucrSynopticDataForManyElements.resx">
-      <DependentUpon>ucrSynopticDataForManyElements.vb</DependentUpon>
+    <EmbeddedResource Include="ucrSynopticRA1.resx">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrTextBox.resx">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrValueFlagPeriod.resx">
       <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>

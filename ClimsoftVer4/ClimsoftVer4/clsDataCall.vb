@@ -67,6 +67,21 @@ Public Class DataCall
         SetFields(New List(Of String)({strNewField}))
     End Sub
 
+    Public Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
+        SetTableName(strNewTable)
+        SetFields(dctNewFields)
+    End Sub
+
+    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+        SetTableName(strNewTable)
+        SetFields(lstNewFields)
+    End Sub
+
+    Public Sub SetTableNameAndField(strNewTable As String, strNewField As String)
+        SetTableName(strNewTable)
+        SetField(strNewField)
+    End Sub
+
     Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
         SetTable(dbsNewTable:=dbsNewTable)
         SetFields(lstNewFields:=lstNewFields)
@@ -102,12 +117,32 @@ Public Class DataCall
         Return lstValues
     End Function
 
+    'PLEASE NOTE THIS IS MY QUICK FIX OF THE ABOVE GETVALUES.
+    Public Function GetValues(Optional clsAdditionalFilter As TableFilter = Nothing) As List(Of String)
+        Dim lstValues As New List(Of String)
+        Dim objData As DataTable
+
+        objData = GetDataTable(clsAdditionalFilter)
+        For Each entItem As DataRow In objData.Rows
+            lstValues.Add(entItem.Field(Of String)(0))
+        Next
+        Return lstValues
+    End Function
+
     Public Function GetValuesAsString(Optional strSep As String = ",") As String
         Return String.Join(strSep, GetValues())
     End Function
 
     Public Function GetFields() As Dictionary(Of String, List(Of String))
         Return dctFields
+    End Function
+
+    Public Function GetField() As String
+        If dctFields.Count = 1 Then
+            Return dctFields.First.Key
+        Else
+            Return ""
+        End If
     End Function
 
     Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
@@ -123,7 +158,6 @@ Public Class DataCall
             If objData IsNot Nothing Then
                 For Each Item As Object In objData
                     dtbFields.Rows.Add(GetFieldsArray(Item))
-                    'dtbFields.Rows.Add(Item.stationName, stnItem.stationId, stnItem.stationId & " " & stnItem.stationName)
                 Next
             End If
         End If
@@ -155,7 +189,6 @@ Public Class DataCall
     End Function
 
     Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
-        Dim db As mariadb_climsoft_test_db_v4Entities
         Dim clsCurrentFilter As TableFilter
 
         If Not IsNothing(clsAdditionalFilter) Then
@@ -170,8 +203,7 @@ Public Class DataCall
 
             Try
             If strTable <> "" Then
-                db = New mariadb_climsoft_test_db_v4Entities
-                Dim x = CallByName(db, strTable, CallType.Get)
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
                 Dim y = TryCast(x, IQueryable(Of Object))
 
                 If clsCurrentFilter IsNot Nothing Then

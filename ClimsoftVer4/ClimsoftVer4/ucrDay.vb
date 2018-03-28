@@ -9,10 +9,16 @@
     Private ucrLinkedMonth As ucrMonth
 
     Public Sub InitialiseControl()
-        'MyBase.PopulateControl()
+        'MyBase.InitialiseControl()
+        dtb31 = New DataTable
+        dtb30 = New DataTable
+        dtb29 = New DataTable
+        dtb28 = New DataTable
 
-        dtbRecords = New DataTable
-        dtbRecords.Columns.Add(strDay, GetType(Integer))
+        dtb31.Columns.Add(strDay, GetType(Integer))
+        dtb30.Columns.Add(strDay, GetType(Integer))
+        dtb29.Columns.Add(strDay, GetType(Integer))
+        dtb28.Columns.Add(strDay, GetType(Integer))
 
         For i As Integer = 1 To 31
             dtb31.Rows.Add(i)
@@ -26,42 +32,47 @@
                 dtb28.Rows.Add(i)
             End If
         Next
-
         dtbRecords = dtb31
-        cboValues.DataSource = dtbRecords
-
-
-        PopulateControl()
-
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim lstLongMonths As New List(Of String)({1, 3, 5, 7, 8, 10, 12})
         'MyBase.PopulateControl()
+        Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
+        Dim iMonth As Integer
 
-        If ucrLinkedMonth.GetValue = 2 Then
-            If Not DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
-                dtbRecords = dtb28
-            Else
-                dtbRecords = dtb29
-            End If
+        'If ucrLinkedMonth Is Nothing Then
+        '    iMonth = 1
+        'Else
+        '    iMonth = ucrLinkedMonth.GetValue
+        'End If
+        iMonth = If(ucrLinkedMonth Is Nothing, 1, ucrLinkedMonth.GetValue)
+        If iMonth = 2 Then
+            'If DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
+            '    dtbRecords = dtb29
+            'Else
+            '    dtbRecords = dtb28
+            'End If
+            dtbRecords = If(ucrLinkedYear Is Nothing, dtb29, (If(DateTime.IsLeapYear(ucrLinkedYear.GetValue), dtb29, dtb28)))
         Else
-            If Not lstLongMonths.Contains(ucrLinkedMonth.GetValue) Then
-                dtbRecords = dtb30
-            Else
-                dtbRecords = dtb31
-            End If
+            'If lstShortMonths.Contains(iMonth) Then
+            '    dtbRecords = dtb30
+            'Else
+            '    dtbRecords = dtb31
+            'End If
+            dtbRecords = If(lstShortMonths.Contains(iMonth), dtb30, dtb31)
         End If
 
-        dtbRecords.DefaultView.Sort = strDay & " ASC"
-
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strDay
-            If bFirstLoad Then
-                SetViewTypeAsDay()
+        If dtbRecords IsNot Nothing Then
+            dtbRecords.DefaultView.Sort = strDay & " ASC"
+            If dtbRecords.Rows.Count > 0 Then
+                cboValues.DataSource = dtbRecords
+                cboValues.ValueMember = strDay
+                If bFirstLoad Then
+                    SetViewTypeAsDay()
+                End If
+            Else
+                cboValues.DataSource = Nothing
             End If
-        Else
-            cboValues.DataSource = Nothing
         End If
     End Sub
 
@@ -72,6 +83,17 @@
     Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
+        'TODO 
+        'the above 2 controls need to actually be linked. 
+        'currently they cause no change
+    End Sub
+
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            InitialiseControl()
+            PopulateControl()
+            bFirstLoad = False
+        End If
     End Sub
 
 End Class
