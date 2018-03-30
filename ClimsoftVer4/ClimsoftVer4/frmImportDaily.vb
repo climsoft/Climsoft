@@ -5,8 +5,8 @@
     Dim dbConnectionString, dat, flg As String
     Dim ds1 As New DataSet
     Dim dsNewRow As DataRow
-    Dim sql, currentRow(), delimit As String
-    Dim lin, rec, col, kount As Integer
+    Dim sql, currentRow(), delimit, cprd As String
+    Dim lin, rec, col, kount, prd As Integer
 
 
     Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
@@ -266,7 +266,7 @@
             ' load data into observationinitial table
 
             ' Create sql query
-            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag);"
+            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period);"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
             'Execute query
@@ -354,6 +354,7 @@
                                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
 
                                             If IsNumeric(dat) Then
+                                                prd = 0 ' initialize data period counter
                                                 If chkScale.Checked = True Then Scale_Data(cod, dat)
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
@@ -647,6 +648,7 @@
                                             dat = currentField
                                             flg = ""
                                             If IsNumeric(dat) Then
+                                                prd = 0
                                                 If chkScale.Checked = True Then Scale_Data(cod, dat)
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
@@ -676,6 +678,7 @@
         If Len(dat) = 0 Then
             dat = ""
             flg = "M"
+            prd = prd + 1 ' Update observation period counter
         Else
             datstr = Strings.Left(dat, Len(dat) - 1)
             flgchr = Strings.Right(dat, 1)
@@ -683,6 +686,13 @@
                 dat = ""
                 flg = "M"
             Else
+                If Strings.UCase(flgchr) = "C" Then
+                    'Compute Total period for accummulated data
+                    cprd = prd + 1
+                    prd = 0
+                    flgchr = ""
+                End If
+
                 dat = datstr
                 If chkScale.Checked = True Then Scale_Data(code, dat)
                 flg = Strings.UCase(flgchr)
@@ -775,8 +785,10 @@
         Dim dat As String
 
         Try
-            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg
+            If Val(cprd) < 1 Then cprd = "" ' No cummulative values
 
+            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg & ", " & cprd
+            cprd = "" ' Initialize Cummulative period value
             Print(101, dat)
             PrintLine(101)
 
