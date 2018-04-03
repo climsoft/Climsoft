@@ -11,9 +11,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for mariadb_climsoft_db_v4
-CREATE DATABASE IF NOT EXISTS `mariadb_climsoft_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `mariadb_climsoft_db_v4`;
-
+-- CREATE DATABASE IF NOT EXISTS `mariadb_climsoft_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- USE `mariadb_climsoft_db_v4`;
 
 -- Dumping structure for table mariadb_climsoft_db_v4.aws_mss
 DROP TABLE IF EXISTS `aws_mss`;
@@ -32,6 +31,33 @@ REPLACE INTO `aws_mss` (`ftpId`, `inputFolder`, `userName`, `ftpMode`, `password
 	('localhost', 'input', 'ftp', 'FTP', 'ftp');
 /*!40000 ALTER TABLE `aws_mss` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `bufr_indicators`;
+CREATE TABLE IF NOT EXISTS `bufr_indicators` (
+  `Tmplate` varchar(50) NOT NULL DEFAULT '0',
+  `Msg_Header` varchar(50) DEFAULT '0',
+  `BUFR_Edition` varchar(10) DEFAULT '0',
+  `Originating_Centre` varchar(10) DEFAULT '0',
+  `Originating_SubCentre` varchar(10) DEFAULT '0',
+  `Update_Sequence` varchar(10) DEFAULT '0',
+  `Optional_Section` varchar(10) DEFAULT '0',
+  `Data_Category` varchar(10) DEFAULT '0',
+  `Intenational_Data_SubCategory` varchar(10) DEFAULT '0',
+  `Local_Data_SubCategory` varchar(10) DEFAULT '0',
+  `Master_table` varchar(10) DEFAULT '0',
+  `Local_Table` varchar(10) DEFAULT '0',
+  PRIMARY KEY (`Tmplate`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table mariadb_climsoft_db_v4.bufr_indicators: ~7 rows (approximately)
+/*!40000 ALTER TABLE `bufr_indicators` DISABLE KEYS */;
+INSERT INTO `bufr_indicators` (`Tmplate`, `Msg_Header`, `BUFR_Edition`, `Originating_Centre`, `Originating_SubCentre`, `Update_Sequence`, `Optional_Section`, `Data_Category`, `Intenational_Data_SubCategory`, `Local_Data_SubCategory`, `Master_table`, `Local_Table`) VALUES
+	('TM_307080', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307081', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307082', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307083', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307084', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307086', 'ISNH40 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0'),
+	('TM_307091', 'ISNH01 HKNC', '04', '00014', '0', '0', '0', '0', '0', '0', '13', '0');
 
 -- Dumping structure for table mariadb_climsoft_db_v4.bufr_crex_data
 DROP TABLE IF EXISTS `bufr_crex_data`;
@@ -216,7 +242,6 @@ REPLACE INTO `bufr_crex_data` (`nos`, `Bufr_Template`, `Crex_Template`, `Sequenc
 	(160, NULL, NULL, '', 'B04024', '004024', 'B04024', 'tempc1_t', 'Time period or displacement (see Note 3)       ', 'Hour', '0', '4', 'Hour', '0', '-2048', '12', 1, '', '', '111111111111'),
 	(161, NULL, NULL, '', 'B12049', '012049', 'B12049', '94', 'Temperature change over period specified', '°C', '0', '2', 'K', '0', '-30', '6', 1, '', '', '111111');
 /*!40000 ALTER TABLE `bufr_crex_data` ENABLE KEYS */;
-
 
 -- Dumping structure for table mariadb_climsoft_db_v4.bufr_crex_master
 DROP TABLE IF EXISTS `bufr_crex_master`;

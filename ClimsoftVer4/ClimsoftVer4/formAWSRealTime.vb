@@ -42,7 +42,8 @@ Public Class formAWSRealTime
     Dim elv As String
     Dim BUFR_header As String
     Dim msg_header, msg_file As String
-    Dim datt As String
+    Dim datt, flprefix As String
+
     Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
 
@@ -262,12 +263,18 @@ Err:
                 txtDataStructure.Text = ds.Tables("aws_sites").Rows(num).Item("DataStructure")
                 txtFlag.Text = ds.Tables("aws_sites").Rows(num).Item("MissingDataFlag")
                 txtIP.Text = ds.Tables("aws_sites").Rows(num).Item("awsServerIp")
+                chkPrefix.Checked = ds.Tables("aws_sites").Rows(num).Item("chkPrefix")
                 chkOperational.Checked = ds.Tables("aws_sites").Rows(num).Item("OperationalStatus")
                 chkGTSEncode.Checked = ds.Tables("aws_sites").Rows(num).Item("GTSEncode")
                 If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("GTSHeader")) Then
                     txtGTSHeader.Text = ds.Tables("aws_sites").Rows(num).Item("GTSHeader")
                 Else
                     txtGTSHeader.Text = ""
+                End If
+                If Not IsDBNull(ds.Tables("aws_sites").Rows(num).Item("FilePrefix")) Then
+                    txtfilePrefix.Text = ds.Tables("aws_sites").Rows(num).Item("FilePrefix")
+                Else
+                    txtfilePrefix.Text = ""
                 End If
 
             Case "pnlDataStructures"
@@ -445,6 +452,8 @@ Err:
                 chkOperational.Checked = True
                 txtIP.Text = ""
                 txtGTSHeader.Text = ""
+                txtfilePrefix.Text = ""
+                chkPrefix.Checked = False
         End Select
     End Sub
 
@@ -602,7 +611,8 @@ Err:
         dsNewRow.Item("DataStructure") = txtDataStructure.Text
         dsNewRow.Item("MissingDataFlag") = txtFlag.Text
         dsNewRow.Item("awsServerIp") = txtIP.Text
-        dsNewRow.Item("txtGTSHeader") = txtGTSHeader.Text
+        dsNewRow.Item("GTSHeader") = txtGTSHeader.Text
+        dsNewRow.Item("FilePrefix") = txtfilePrefix.Text
         If chkOperational.Checked Then
             dsNewRow.Item("OperationalStatus") = 1
         Else
@@ -612,6 +622,11 @@ Err:
             dsNewRow.Item("GTSEncode") = 1
         Else
             dsNewRow.Item("GTSEncode") = 0
+        End If
+        If chkPrefix.Checked Then
+            dsNewRow.Item("FilePrefix") = 1
+        Else
+            dsNewRow.Item("FilePrefix") = 0
         End If
 
         'Add a new record to the data source table
@@ -661,6 +676,7 @@ Err:
         ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
         ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
         ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
+        ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
         If chkOperational.Checked Then
             ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
         Else
@@ -671,6 +687,12 @@ Err:
         Else
             ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
         End If
+        If chkPrefix.Checked Then
+            ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
+        Else
+            ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
+        End If
+
         'Add a new record to the data source table
         'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
 
@@ -885,6 +907,7 @@ Err:
                 txtOffset.Text = dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset")
                 txtPeriod.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod")
                 txtTimeout.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout")
+                txtGMTDiff.Text = dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff")
                 chkDeleteFile.Checked = dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile")
 
             Case "dpupdate"
@@ -894,6 +917,8 @@ Err:
                 dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset") = txtOffset.Text
                 dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod") = txtPeriod.Text
                 dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout") = txtTimeout.Text
+                dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff") = txtGMTDiff.Text
+
                 If chkDeleteFile.Checked = True Then
                     dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 1
                 Else
@@ -1147,6 +1172,13 @@ Err:
 
                 ftp_host = .Rows(i).Item("awsServerIp")
 
+                ' Get files prefix status
+                flprefix = ""
+                'MsgBox(.Rows(i).Item("chkPrefix"))
+                If Not IsDBNull(.Rows(i).Item("FilePrefix")) And .Rows(i).Item("chkPrefix") = True Then
+                    flprefix = .Rows(i).Item("FilePrefix")
+                End If
+
                 ' Compute Delimiter ascii value
                 Select Case delmtr
                     Case "tab"
@@ -1167,6 +1199,7 @@ Err:
                 txtStatus.Refresh()
 
                 If Not FTP_Call(infile, "get") Then
+
                     Log_Errors("Can't retrieve data from input file " & infile)
                     Continue For ' If FTP call failed
                 End If
@@ -1220,7 +1253,7 @@ Err:
 
                     ' Compare current time with time stamp on hourly basis
                     If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
-   
+
                     Process_Status("Processing AWS Record " & k & " of " & rws)
 
                     For j = 0 To colmn - 1
@@ -1541,7 +1574,12 @@ Err:
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
                         Print(1, "asc" & Chr(13) & Chr(10))
                     End If
-                    Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    ' Where file prefix is used
+                    If Len(flprefix) = 0 Then
+                        Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    Else
+                        Print(1, "mget *.*" & Chr(13) & Chr(10))
+                    End If
                     Print(1, "bye" & Chr(13) & Chr(10))
                     FileClose(1)
                 Case "put"
@@ -1571,8 +1609,8 @@ Err:
             Print(3, "CD " & local_folder & Chr(13) & Chr(10))
 
             If ftpmethod = "get" Then
-                If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                    If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "FTP" Then Print(3, ftpmode & " -i -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             Else
                 'If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
                 ''If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
@@ -1591,6 +1629,7 @@ Err:
                 Dim Cdate1 As Date
                 Dim tot As Integer
                 Dim timeout As Integer
+                Dim dat As String
 
                 Cdate1 = Now() '& " " & Time
                 tot = 0
@@ -1605,6 +1644,32 @@ Err:
                     .Visible = False
                 End With
 
+                'MsgBox(txtinputfile)
+                'MsgBox(flprefix)
+                ' Where file prefix is used
+
+                If Len(flprefix) > 0 Then
+
+                    Dim fd As New DirectoryInfo(local_folder)
+                    Dim aryFl As FileInfo() = fd.GetFiles("*.*")
+                    Dim fl As FileInfo
+
+                    FileOpen(100, txtinputfile, OpenMode.Output)
+                    For Each fl In aryFl
+                        If InStr(fl.Name, flprefix) > 0 Then
+                            FileOpen(200, local_folder & "\" & fl.Name, OpenMode.Input)
+                            Do While EOF(200) = False
+                                dat = LineInput(200)
+                                PrintLine(100, dat)
+                            Loop
+                            FileClose(200)
+                            File.Delete(local_folder & "\" & fl.Name)
+                            'File.Move(local_folder & "\" & fl.Name, local_folder & "\backup")
+                        End If
+                    Next fl
+                    FileClose(100)
+                End If
+
                 txtInputServer.Text = ftp_host
                 txtInputfolder.Text = flder
 
@@ -1612,6 +1677,7 @@ Err:
                 lstInputFiles.Items.Add(System.IO.Path.GetFileName(ftpfile))
                 lstInputFiles.Refresh()
                 txtInputServer.Refresh()
+
 
             Else
                 'txtOutputServer.Text = ftp_host
@@ -2040,7 +2106,8 @@ Err:
                 If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
                     obs = .Rows(i).Item("obsv")
                     If Not IsDBNull(.Rows(i).Item("lower_limit")) And Not IsDBNull(.Rows(i).Item("upper_limit")) Then
-                        QC_Limits(stn, .Rows(i).Item("Climsoft_Element"), obs, .Rows(i).Item("lower_limit"), .Rows(i).Item("upper_limit"))
+                        QC_Limits(stn, .Rows(i).Item("Climsoft_Element"), datestr, obs, .Rows(i).Item("lower_limit"), .Rows(i).Item("upper_limit"))
+                        Continue For
                     End If
 
                     If Not IsDBNull(.Rows(i).Item("unit")) Then
@@ -2113,23 +2180,28 @@ Err:
         'MsgBox(" Update_main_db")
         Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
-    Sub QC_Limits(stn As String, elms As String, obs As String, L_limit As String, U_limit As String)
-    
+    Sub QC_Limits(stn As String, elms As String, dts As String, obs As String, L_limit As String, U_limit As String)
+
         Try
- 
+
             If Val(obs) < Val(L_limit) Or Val(obs) > U_limit Then
                 Dim errdata, limittype As String
                 'Get full path for the Subsets Output file file and create the file
                 fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_qc_errors.csv"
                 FileOpen(21, fl, OpenMode.Append)
 
-                If Val(obs) < Val(L_limit) Then limittype = "below limit"
-                If Val(obs) > Val(U_limit) Then limittype = "above limit"
+                If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
+                If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
 
-                errdata = stn & "," & elms & "," & obs & "," & limittype
+                errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
 
                 PrintLine(21, errdata)
                 FileClose(21)
+
+                txtQC.Text = "QC Errors saved in file: " & fl
+                txtQC.Refresh()
+
+                'Log_Errors("QC Errors saved in file: " & fl)
             End If
             'End If
         Catch ex As Exception
@@ -2676,8 +2748,11 @@ Err:
     End Function
 
     Function AWS_Bufr_Section4(sql As String, ByRef binary_data As String, tt_aws As String) As Boolean
+
         AWS_Bufr_Section4 = True
+
         On Error GoTo Err
+
         'Compute Section 4 - Data Section
         Dim xtrbits As Integer
         Dim siz As Long
@@ -2713,7 +2788,7 @@ Err:
     Function FTP_Delete_InputFile(ftpfile As String) As Boolean
         FTP_Delete_InputFile = False
         On Error GoTo Err
-        Dim local_folder As String
+        Dim local_folder, backup_folder As String
 
         Dim usr As String
         Dim pwd As String
@@ -2726,11 +2801,13 @@ Err:
 
         ' Get the FTP details from the base station server
         Get_ftp_details("get", ftp_host, flder, ftpmode, usr, pwd)
-        MsgBox(usr & " " & pwd)
+        'MsgBox(usr & " " & pwd)
         FileClose(1) ' Close the file if ever it exist
 
         ' Define the file and path
         local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        backup_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup"
+
         Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
         ftpscript = local_folder & "\ftp_file_delete.txt"
         FileOpen(1, ftpscript, OpenMode.Output)
@@ -2740,7 +2817,9 @@ Err:
         Print(1, usr & Chr(13) & Chr(10))
         Print(1, pwd & Chr(13) & Chr(10))
         Print(1, "cd " & flder & Chr(13) & Chr(10))
-        Print(1, "del" & " " & ftpfile & Chr(13) & Chr(10))
+        'Print(1, "mget *.*" & Chr(13) & Chr(10))
+        Print(1, "mdel *.*" & Chr(13) & Chr(10))
+        'Print(1, "del" & " " & ftpfile & Chr(13) & Chr(10))
         Print(1, "bye" & Chr(13) & Chr(10))
 
         FileClose(1)
@@ -2753,7 +2832,8 @@ Err:
         Print(1, "echo off" & Chr(13) & Chr(10))
         Print(1, Drive1 & Chr(13) & Chr(10))
         Print(1, "CD " & local_folder & Chr(13) & Chr(10))
-        Print(1, "ftp -v -s:ftp_file_delete.txt" & Chr(13) & Chr(10))
+        'Print(1, "CD " & backup_folder & Chr(13) & Chr(10))
+        Print(1, "ftp -i -s:ftp_file_delete.txt" & Chr(13) & Chr(10))
         Print(1, "echo on" & Chr(13) & Chr(10))
         Print(1, "EXIT" & Chr(13) & Chr(10))
         FileClose(1)
@@ -3591,6 +3671,21 @@ Err:
     End Sub
 
     Private Sub pnlControl_Paint(sender As Object, e As PaintEventArgs) Handles pnlControl.Paint
+
+    End Sub
+
+
+    Private Sub chkPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrefix.CheckedChanged
+
+        If chkPrefix.Checked = True Then
+            txtfilePrefix.Visible = True
+            'If Len(txtfilePrefix.Text) = 0 Then MsgBox("Enter prefix value for the input files")
+        Else
+            txtfilePrefix.Visible = False
+        End If
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
 
     End Sub
 End Class

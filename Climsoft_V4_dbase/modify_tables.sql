@@ -1,10 +1,12 @@
-use mariadb_climsoft_db_v4;
+-- Dumping database structure for mariadb_climsoft_db_v4
+-- CREATE DATABASE IF NOT EXISTS `mariadb_climsoft_db_v4` /*!40100 DEFAULT CHARACTER SET latin1 */;
+-- USE `mariadb_climsoft_db_v4`;
+
 ALTER TABLE `station`
 	ADD COLUMN IF NOT EXISTS `icaoid` VARCHAR(20) NULL DEFAULT NULL AFTER `stationName`,
 	ADD COLUMN IF NOT EXISTS `wmoid` VARCHAR(20) NULL DEFAULT NULL AFTER `stationName`,
 	ADD COLUMN IF NOT EXISTS `qualifier` VARCHAR(20) NULL DEFAULT NULL AFTER `latitude`,
-	
-CHANGE COLUMN IF EXISTS `openingDatetime` `openingDatetime` VARCHAR(50) NULL DEFAULT NULL AFTER `geoLocationAccuracy`,
+	CHANGE COLUMN IF EXISTS `openingDatetime` `openingDatetime` VARCHAR(50) NULL DEFAULT NULL AFTER `geoLocationAccuracy`,
 	CHANGE COLUMN IF EXISTS `closingDatetime` `closingDatetime` VARCHAR(50) NULL DEFAULT NULL AFTER `openingDatetime`;
 ALTER TABLE `instrument`
 	CHANGE COLUMN IF EXISTS `installationDatetime` `installationDatetime` VARCHAR(50) NULL DEFAULT NULL AFTER `instrumentUncertainty`,
@@ -55,5 +57,7 @@ ALTER TABLE `form_synoptic_2_ra1`
 	CHANGE COLUMN IF EXISTS `Flag176` `Flag192` VARCHAR(1) NULL DEFAULT NULL AFTER `Flag105`,
 	CHANGE COLUMN IF EXISTS `Val_Elem177` `Val_Elem168` VARCHAR(6) NULL DEFAULT NULL AFTER `Val_Elem115`,
 	CHANGE COLUMN IF EXISTS `Flag177` `Flag168` VARCHAR(1) NULL DEFAULT NULL AFTER `Flag115`;
+ALTER TABLE `aws_sites` ADD COLUMN `GTSEncode` VARCHAR(20) NULL AFTER `OperationalStatus`;
+ALTER TABLE `aws_sites` ADD COLUMN `GTSHeader` VARCHAR(20) NULL AFTER `GTSEncode`;
 
 
