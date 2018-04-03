@@ -164,6 +164,7 @@ Public Class ucrValueFlagPeriod
             ucrValue.bValidateSilently = True
             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
+            ucrFlag.SetAsReadOnly()
             bFirstLoad = False
         End If
 
