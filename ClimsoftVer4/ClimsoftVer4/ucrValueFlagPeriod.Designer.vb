@@ -25,32 +25,33 @@ Partial Class ucrValueFlagPeriod
         Me.ucrValue = New ClimsoftVer4.ucrTextBox()
         Me.ucrFlag = New ClimsoftVer4.ucrTextBox()
         Me.ucrPeriod = New ClimsoftVer4.ucrTextBox()
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrValue
         '
-        Me.ucrValue.Location = New System.Drawing.Point(-3, -3)
+        Me.ucrValue.Location = New System.Drawing.Point(0, 3)
         Me.ucrValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValue.Name = "ucrValue"
-        Me.ucrValue.Size = New System.Drawing.Size(55, 24)
+        Me.ucrValue.Size = New System.Drawing.Size(55, 23)
         Me.ucrValue.TabIndex = 581
         Me.ucrValue.TextboxValue = ""
         '
         'ucrFlag
         '
-        Me.ucrFlag.Location = New System.Drawing.Point(54, -3)
+        Me.ucrFlag.Location = New System.Drawing.Point(59, 3)
         Me.ucrFlag.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrFlag.Name = "ucrFlag"
-        Me.ucrFlag.Size = New System.Drawing.Size(55, 24)
+        Me.ucrFlag.Size = New System.Drawing.Size(29, 23)
         Me.ucrFlag.TabIndex = 582
         Me.ucrFlag.TextboxValue = ""
         '
         'ucrPeriod
         '
-        Me.ucrPeriod.Location = New System.Drawing.Point(111, -3)
+        Me.ucrPeriod.Location = New System.Drawing.Point(92, 3)
         Me.ucrPeriod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPeriod.Name = "ucrPeriod"
-        Me.ucrPeriod.Size = New System.Drawing.Size(55, 24)
+        Me.ucrPeriod.Size = New System.Drawing.Size(35, 23)
         Me.ucrPeriod.TabIndex = 583
         Me.ucrPeriod.TextboxValue = ""
         '
@@ -63,7 +64,8 @@ Partial Class ucrValueFlagPeriod
         Me.Controls.Add(Me.ucrValue)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrValueFlagPeriod"
-        Me.Size = New System.Drawing.Size(165, 20)
+        Me.Size = New System.Drawing.Size(130, 23)
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
