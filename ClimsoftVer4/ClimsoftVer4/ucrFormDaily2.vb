@@ -285,8 +285,8 @@ Public Class ucrFormDaily2
                 Next
                 If elemTotal <> expectedTotal Then
                     MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
-                    ucrInputTotal.txtBox.Focus()
-                    ucrInputTotal.txtBox.BackColor = Color.Cyan
+                    ucrInputTotal.GetFocus()
+                    ucrInputTotal.SetBackColor(Color.Cyan)
                 End If
             End If
         End If

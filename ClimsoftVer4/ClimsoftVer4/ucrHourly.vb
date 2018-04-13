@@ -1,5 +1,4 @@
-﻿Imports System.Data.Entity
-Imports System.Linq.Dynamic
+﻿Imports System.Linq.Dynamic
 
 Public Class ucrHourly
     Private bFirstLoad As Boolean = True
@@ -191,8 +190,8 @@ Public Class ucrHourly
                 Next
                 If elemTotal <> expectedTotal Then
                     MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
-                    ucrInputTotal.txtBox.Focus()
-                    ucrInputTotal.txtBox.BackColor = Color.Cyan
+                    ucrInputTotal.GetFocus()
+                    ucrInputTotal.SetBackColor(Color.Cyan)
                 End If
             End If
         End If
