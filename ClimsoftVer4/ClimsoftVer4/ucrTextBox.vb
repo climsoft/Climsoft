@@ -361,8 +361,17 @@ Public Class ucrTextBox
     Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         OnevtValueChanged(Me, e)
     End Sub
-    'Sets the textbox as a read only 
+    ''' <summary>
+    '''Sets the textbox as a read only 
+    ''' </summary>
     Public Sub SetAsReadOnly()
         txtBox.ReadOnly = True
+    End Sub
+    ''' <summary>
+    ''' Sets the size of the texbox in the control
+    ''' </summary>
+    ''' <param name="Size"></param>
+    Public Sub SetElementValueSize(Size As Point)
+        txtBox.Size = New Size(Size)
     End Sub
 End Class

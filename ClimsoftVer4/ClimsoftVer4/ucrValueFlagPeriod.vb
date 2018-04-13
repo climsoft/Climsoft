@@ -266,9 +266,13 @@ Public Class ucrValueFlagPeriod
     End Function
 
     Private Sub SetTextBoxSize()
-        ucrValue.txtBox.Size = New Size(51, 20)
-        ucrFlag.txtBox.Size = New Size(27, 20)
-        ucrPeriod.txtBox.Size = New Size(33, 20)
+        ucrValue.SetElementValueSize(New Size(51, 20))
+        ucrFlag.SetElementValueSize(New Size(27, 20))
+        ucrPeriod.SetElementValueSize(New Size(33, 20))
+
+        'ucrValue.txtBox.Size = New Size(51, 20)
+        'ucrFlag.txtBox.Size = New Size(27, 20)
+        'ucrPeriod.txtBox.Size = New Size(33, 20)
     End Sub
 
     'Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
