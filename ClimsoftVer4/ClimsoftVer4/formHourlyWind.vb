@@ -872,7 +872,12 @@ Public Class formHourlyWind
                 valUpperLimit = ""
             End If
 
-            totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("QCTotalRequired")
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("QCTotalRequired")) Then
+                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("QCTotalRequired")
+            Else
+                totalRequired = 0
+            End If
+
 
             'Check upper limit wind speed
             For Each ctl In Me.Controls

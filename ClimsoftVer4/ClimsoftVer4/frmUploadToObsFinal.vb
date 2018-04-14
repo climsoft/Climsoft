@@ -346,95 +346,100 @@
         Dim maxRows As Integer
         Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer
 
+        Try
 
-        ' List the selected stations
-        stnlist = ""
-        elmlist = ""
-        stnselected = False
-        elmselected = False
+            ' List the selected stations
+            stnlist = ""
+            elmlist = ""
+            stnselected = False
+            elmselected = False
 
-        ' List the selected stations
-        If chkAllStations.Checked = False Then ' When NOT all stations are selected
-            For i = 0 To LstViewStations.Items.Count - 1
-                If LstViewStations.Items(i).Checked = True Then
-                    stnId = LstViewStations.Items(i).SubItems(0).Text
-                    stnselected = True
-                    If Len(stnlist) = 0 Then
-                        stnlist = "RecordedFrom = " & " '" & stnId & "'" 'stnid
-                    Else
-                        stnlist = stnlist & " OR RecordedFrom = " & "'" & stnId & "'"
+            ' List the selected stations
+            If chkAllStations.Checked = False Then ' When NOT all stations are selected
+                For i = 0 To LstViewStations.Items.Count - 1
+                    If LstViewStations.Items(i).Checked = True Then
+                        stnId = LstViewStations.Items(i).SubItems(0).Text
+                        stnselected = True
+                        If Len(stnlist) = 0 Then
+                            stnlist = "RecordedFrom = " & " '" & stnId & "'" 'stnid
+                        Else
+                            stnlist = stnlist & " OR RecordedFrom = " & "'" & stnId & "'"
+                        End If
+                        'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                     End If
-                    'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
-                End If
-            Next
-        Else ' When All stations are selected
-            stnselected = True
-        End If
+                Next
+            Else ' When All stations are selected
+                stnselected = True
+            End If
 
-        ' List the selected Elements
-        If chkAllElements.Checked = False Then ' When NOT all stations are selected
-            For i = 0 To lstViewElements.Items.Count - 1
-                If lstViewElements.Items(i).Checked = True Then
-                    elmcode = lstViewElements.Items(i).SubItems(0).Text
-                    elmselected = True
-                    If Len(elmlist) = 0 Then
-                        elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
-                    Else
-                        elmlist = elmlist & " OR describedBy = " & "'" & elmcode & "'"
+            ' List the selected Elements
+            If chkAllElements.Checked = False Then ' When NOT all stations are selected
+                For i = 0 To lstViewElements.Items.Count - 1
+                    If lstViewElements.Items(i).Checked = True Then
+                        elmcode = lstViewElements.Items(i).SubItems(0).Text
+                        elmselected = True
+                        If Len(elmlist) = 0 Then
+                            elmlist = "describedBy = " & " '" & elmcode & "'" 'stnid
+                        Else
+                            elmlist = elmlist & " OR describedBy = " & "'" & elmcode & "'"
+                        End If
+                        'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                     End If
-                    'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
-                End If
-            Next
-        Else ' When All stations are selected
-            elmselected = True
-        End If
+                Next
+            Else ' When All stations are selected
+                elmselected = True
+            End If
 
-        ' Contruct the Stations and Elements selction criteria string
-        If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
-        If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
+            ' Contruct the Stations and Elements selction criteria string
+            If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
+            If Len(elmlist) > 0 Then elmlist = "(" & elmlist & ")"
 
-        ' Set the stations and elements selection conditions
-        If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
-            MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
-            Exit Sub
-        Else
-            If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = elmlist & " and "
-            If chkAllElements.Checked = True And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and "
-            If chkAllElements.Checked = True And chkAllStations.Checked = True Then stnelm_selected = ""
-            If chkAllElements.Checked = False And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and " & elmlist & " and "
-        End If
+            ' Set the stations and elements selection conditions
+            If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+                MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
+                Exit Sub
+            Else
+                If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = elmlist & " and "
+                If chkAllElements.Checked = True And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and "
+                If chkAllElements.Checked = True And chkAllStations.Checked = True Then stnelm_selected = ""
+                If chkAllElements.Checked = False And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and " & elmlist & " and "
+            End If
 
 
-        beginYear = Val(txtBeginYear.Text)
-        endYear = Val(txtEndYear.Text)
-        beginMonth = Val(txtBeginMonth.Text)
-        endMonth = Val(txtEndMonth.Text)
+            beginYear = Val(txtBeginYear.Text)
+            endYear = Val(txtEndYear.Text)
+            beginMonth = Val(txtBeginMonth.Text)
+            endMonth = Val(txtEndMonth.Text)
 
 
-        '------
-        ds.Clear()
-        MyConnectionString = frmLogin.txtusrpwd.Text
-        ' conn.Close()
-        conn.ConnectionString = MyConnectionString
-        conn.Open()
-        'First upload records with QC status =1
+            '------
+            ds.Clear()
+            MyConnectionString = frmLogin.txtusrpwd.Text
+            ' conn.Close()
+            conn.ConnectionString = MyConnectionString
+            conn.Open()
+            'First upload records with QC status =1
 
-        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " & _
-            "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear & _
-            " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
+            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " & _
+                "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear & _
+                " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
 
-        'MsgBox(sql)
-        'Exit Sub
-        'dadData.SelectCommand.CommandTimeout=120
+            'MsgBox(sql)
+            'Exit Sub
+            'dadData.SelectCommand.CommandTimeout=120
 
-        Trecs = 0
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ' Set to unlimited timeout period
-        da.SelectCommand.CommandTimeout = 0
+            Trecs = 0
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
 
-        da.Fill(ds, "obsInitial")
-        ''conn.Close() '
-        ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
+            da.Fill(ds, "obsInitial")
+            ''conn.Close() '
+            ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
 
         Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
         maxRows = ds.Tables("obsInitial").Rows.Count
@@ -446,7 +451,8 @@
         Dim elemMaxRows As Integer, k As Integer, valScale As Single
         sql = "SELECT elementId,elementScale FROM obselement"
         da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ' Set to unlimited timeout periodda1.SelectCommand.CommandTimeout = 0
+        ' Set to unlimited timeout period
+        da1.SelectCommand.CommandTimeout = 0
         da1.Fill(ds1, "elemScale")
 
         elemMaxRows = ds1.Tables("elemScale").Rows.Count

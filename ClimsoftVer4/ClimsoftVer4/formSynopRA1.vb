@@ -1360,11 +1360,11 @@ Public Class formSynopRA1
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
         userName = frmLogin.txtUsername.Text
-        dsSourceTableName = "form_synoptic_2_RA1"
+        dsSourceTableName = "form_synoptic_2_ra1"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
         Else
-            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
     End Sub

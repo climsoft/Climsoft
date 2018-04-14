@@ -103,7 +103,7 @@ Partial Class formDataView
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(72, 23)
         Me.cmdEdit.TabIndex = 10
-        Me.cmdEdit.Text = "View Mode"
+        Me.cmdEdit.Text = "Edit Mode"
         Me.cmdEdit.UseVisualStyleBackColor = True
         '
         'grpSearch
@@ -120,7 +120,6 @@ Partial Class formDataView
         Me.grpSearch.Size = New System.Drawing.Size(255, 44)
         Me.grpSearch.TabIndex = 17
         Me.grpSearch.TabStop = False
-        Me.grpSearch.Visible = False
         '
         'cmdSearch
         '
