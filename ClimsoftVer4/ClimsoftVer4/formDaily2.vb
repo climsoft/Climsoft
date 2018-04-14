@@ -1521,54 +1521,54 @@ Public Class formDaily2
     End Sub
 
     Private Sub cboMonth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMonth.SelectedIndexChanged
-
-        Dim strYear As String
-        'Check if year in last observation record is a leap year
-        Dim yearCheck As New dataEntryGlobalRoutines
-        strYear = txtYear.Text
-        If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
-            'MsgBox("Leap year!")
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = False
-            txtFlag30Field065.Enabled = False
-            txtPeriod30Field096.Enabled = False
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
-            'MsgBox("Non leap year!")
-            txtVal_29Field033.Enabled = False
-            txtFlag29Field064.Enabled = False
-            txtPeriod29Field095.Enabled = False
-            txtVal_30Field034.Enabled = False
-            txtFlag30Field065.Enabled = False
-            txtPeriod30Field096.Enabled = False
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = True
-            txtFlag30Field065.Enabled = True
-            txtPeriod30Field096.Enabled = True
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        Else
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = True
-            txtFlag30Field065.Enabled = True
-            txtPeriod30Field096.Enabled = True
-            txtVal_31Field035.Enabled = True
-            txtFlag31Field066.Enabled = True
-            txtPeriod31Field097.Enabled = True
-        End If
+        Set_Month_Days()
+        'Dim strYear As String
+        ''Check if year in last observation record is a leap year
+        'Dim yearCheck As New dataEntryGlobalRoutines
+        'strYear = txtYear.Text
+        'If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
+        '    'MsgBox("Leap year!")
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = False
+        '    txtFlag30Field065.Enabled = False
+        '    txtPeriod30Field096.Enabled = False
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
+        '    'MsgBox("Non leap year!")
+        '    txtVal_29Field033.Enabled = False
+        '    txtFlag29Field064.Enabled = False
+        '    txtPeriod29Field095.Enabled = False
+        '    txtVal_30Field034.Enabled = False
+        '    txtFlag30Field065.Enabled = False
+        '    txtPeriod30Field096.Enabled = False
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = True
+        '    txtFlag30Field065.Enabled = True
+        '    txtPeriod30Field096.Enabled = True
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'Else
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = True
+        '    txtFlag30Field065.Enabled = True
+        '    txtPeriod30Field096.Enabled = True
+        '    txtVal_31Field035.Enabled = True
+        '    txtFlag31Field066.Enabled = True
+        '    txtPeriod31Field097.Enabled = True
+        'End If
 
     End Sub
 
@@ -1599,7 +1599,167 @@ Public Class formDaily2
 
     End Sub
 
-    Private Sub formDaily2_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
 
+    Private Sub txtYear_TextChanged(sender As Object, e As EventArgs) Handles txtYear.TextChanged
+
+        Set_Month_Days()
+        'Dim strYear As String
+        ''Check if year in last observation record is a leap year
+        'Dim yearCheck As New dataEntryGlobalRoutines
+
+        'Try
+        '    strYear = txtYear.Text
+        '    If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
+        '        'MsgBox("Leap year!")
+        '        txtVal_29Field033.Enabled = True
+        '        txtFlag29Field064.Enabled = True
+        '        txtPeriod29Field095.Enabled = True
+        '        txtVal_30Field034.Enabled = False
+        '        txtFlag30Field065.Enabled = False
+        '        txtPeriod30Field096.Enabled = False
+        '        txtVal_31Field035.Enabled = False
+        '        txtFlag31Field066.Enabled = False
+        '        txtPeriod31Field097.Enabled = False
+        '    ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
+        '        'MsgBox("Non leap year!")
+        '        txtVal_29Field033.Enabled = False
+        '        txtFlag29Field064.Enabled = False
+        '        txtPeriod29Field095.Enabled = False
+        '        txtVal_30Field034.Enabled = False
+        '        txtFlag30Field065.Enabled = False
+        '        txtPeriod30Field096.Enabled = False
+        '        txtVal_31Field035.Enabled = False
+        '        txtFlag31Field066.Enabled = False
+        '        txtPeriod31Field097.Enabled = False
+        '    ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
+        '        txtVal_29Field033.Enabled = True
+        '        txtFlag29Field064.Enabled = True
+        '        txtPeriod29Field095.Enabled = True
+        '        txtVal_30Field034.Enabled = True
+        '        txtFlag30Field065.Enabled = True
+        '        txtPeriod30Field096.Enabled = True
+        '        txtVal_31Field035.Enabled = False
+        '        txtFlag31Field066.Enabled = False
+        '        txtPeriod31Field097.Enabled = False
+        '    Else
+        '        txtVal_29Field033.Enabled = True
+        '        txtFlag29Field064.Enabled = True
+        '        txtPeriod29Field095.Enabled = True
+        '        txtVal_30Field034.Enabled = True
+        '        txtFlag30Field065.Enabled = True
+        '        txtPeriod30Field096.Enabled = True
+        '        txtVal_31Field035.Enabled = True
+        '        txtFlag31Field066.Enabled = True
+        '        txtPeriod31Field097.Enabled = True
+        '    End If
+        'Catch ex As Exception
+
+        'End Try
+    End Sub
+
+    Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
+        Set_Month_Days()
+        'Dim strYear As String
+        ''Check if year in last observation record is a leap year
+        'Dim yearCheck As New dataEntryGlobalRoutines
+        'strYear = txtYear.Text
+        'If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
+        '    'MsgBox("Leap year!")
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = False
+        '    txtFlag30Field065.Enabled = False
+        '    txtPeriod30Field096.Enabled = False
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
+        '    'MsgBox("Non leap year!")
+        '    txtVal_29Field033.Enabled = False
+        '    txtFlag29Field064.Enabled = False
+        '    txtPeriod29Field095.Enabled = False
+        '    txtVal_30Field034.Enabled = False
+        '    txtFlag30Field065.Enabled = False
+        '    txtPeriod30Field096.Enabled = False
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = True
+        '    txtFlag30Field065.Enabled = True
+        '    txtPeriod30Field096.Enabled = True
+        '    txtVal_31Field035.Enabled = False
+        '    txtFlag31Field066.Enabled = False
+        '    txtPeriod31Field097.Enabled = False
+        'Else
+        '    txtVal_29Field033.Enabled = True
+        '    txtFlag29Field064.Enabled = True
+        '    txtPeriod29Field095.Enabled = True
+        '    txtVal_30Field034.Enabled = True
+        '    txtFlag30Field065.Enabled = True
+        '    txtPeriod30Field096.Enabled = True
+        '    txtVal_31Field035.Enabled = True
+        '    txtFlag31Field066.Enabled = True
+        '    txtPeriod31Field097.Enabled = True
+        'End If
+    End Sub
+    Sub Set_Month_Days()
+        Dim strYear As String
+        'Check if year in last observation record is a leap year
+        Dim yearCheck As New dataEntryGlobalRoutines
+        Try
+            strYear = txtYear.Text
+            If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
+                'MsgBox("Leap year!")
+                txtVal_29Field033.Enabled = True
+                txtFlag29Field064.Enabled = True
+                txtPeriod29Field095.Enabled = True
+                txtVal_30Field034.Enabled = False
+                txtFlag30Field065.Enabled = False
+                txtPeriod30Field096.Enabled = False
+                txtVal_31Field035.Enabled = False
+                txtFlag31Field066.Enabled = False
+                txtPeriod31Field097.Enabled = False
+            ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
+                'MsgBox("Non leap year!")
+                txtVal_29Field033.Enabled = False
+                txtFlag29Field064.Enabled = False
+                txtPeriod29Field095.Enabled = False
+                txtVal_30Field034.Enabled = False
+                txtFlag30Field065.Enabled = False
+                txtPeriod30Field096.Enabled = False
+                txtVal_31Field035.Enabled = False
+                txtFlag31Field066.Enabled = False
+                txtPeriod31Field097.Enabled = False
+            ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
+                txtVal_29Field033.Enabled = True
+                txtFlag29Field064.Enabled = True
+                txtPeriod29Field095.Enabled = True
+                txtVal_30Field034.Enabled = True
+                txtFlag30Field065.Enabled = True
+                txtPeriod30Field096.Enabled = True
+                txtVal_31Field035.Enabled = False
+                txtFlag31Field066.Enabled = False
+                txtPeriod31Field097.Enabled = False
+            Else
+                txtVal_29Field033.Enabled = True
+                txtFlag29Field064.Enabled = True
+                txtPeriod29Field095.Enabled = True
+                txtVal_30Field034.Enabled = True
+                txtFlag30Field065.Enabled = True
+                txtPeriod30Field096.Enabled = True
+                txtVal_31Field035.Enabled = True
+                txtFlag31Field066.Enabled = True
+                txtPeriod31Field097.Enabled = True
+            End If
+        Catch ex As Exception
+            If ex.HResult <> -2147467262 Then
+                MsgBox(ex.Message)
+            End If
+        End Try
     End Sub
 End Class

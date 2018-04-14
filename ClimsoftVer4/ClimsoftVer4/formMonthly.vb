@@ -178,7 +178,12 @@ Public Class formMonthly
                 End If
 
                 'Get value for qcTotlRequired
-                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                    totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                Else
+                    totalRequired = 0
+                End If
+
 
                 'Check lower limit
                 If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
@@ -196,7 +201,7 @@ Public Class formMonthly
                 If tabNext = True Then
                     objKeyPress.checkValidYear(txtYear.Text, txtYear)
                 End If
-            
+
             ElseIf Me.ActiveControl.Name = "cboStation" Then
                 Dim itemFound As Boolean
                 If Len(cboStation.SelectedValue) > 1 Then
@@ -537,7 +542,12 @@ Public Class formMonthly
             End If
 
             'Get value for qcTotlRequired
-            totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            Else
+                totalRequired = 0
+            End If
+
             '===========================
 
             'Check upper limit
