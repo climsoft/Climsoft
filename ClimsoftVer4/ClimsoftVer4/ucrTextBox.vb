@@ -75,11 +75,19 @@ Public Class ucrTextBox
         bToLower = True
         bToUpper = False
     End Sub
-
+    ''' <summary>
+    ''' Sets validation of the textbox to none
+    ''' </summary>
     Public Sub SetValidationTypeAsNone()
         strValidationType = "none"
     End Sub
-
+    ''' <summary>
+    ''' Sets validation of the textbox to numeric
+    ''' </summary>
+    ''' <param name="dcmMin"></param>
+    ''' <param name="bIncludeMin"></param>
+    ''' <param name="dcmMax"></param>
+    ''' <param name="bIncludeMax"></param>
     Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
         strValidationType = "numeric"
         If dcmMin <> Decimal.MinValue Then
@@ -162,7 +170,11 @@ Public Class ucrTextBox
         End Select
         Return iType
     End Function
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
     Public Function ValidateText(strText As String) As Boolean
         Dim iValidationCode As Integer
 
@@ -187,7 +199,10 @@ Public Class ucrTextBox
         Return (iValidationCode = 0)
 
     End Function
-
+    ''' <summary>
+    ''' Returns the numeric range for the control
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetNumericRange() As String
         Dim strRange As String = ""
         If strValidationType = "numeric" Then
@@ -208,15 +223,20 @@ Public Class ucrTextBox
                     strRange = strRange & "< " & dcmMaximum.ToString()
                 End If
             End If
-
         End If
         Return strRange
     End Function
-
+    ''' <summary>
+    ''' Returns the minimum decimal number for the control
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetDcmMinimum() As Decimal
         Return dcmMinimum
     End Function
-
+    ''' <summary>
+    ''' Returns the maximum decimal number for the control
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetDcmMaximum() As Decimal
         Return dcmMaximum
     End Function
@@ -276,11 +296,17 @@ Public Class ucrTextBox
         OnevtTextChanged(sender, e)
 
     End Sub
-
+    ''' <summary>
+    ''' Sets the focus to the control 
+    ''' </summary>
     Public Sub GetFocus()
         txtBox.Focus()
     End Sub
-
+    ''' <summary>
+    ''' Checks if a textbox is empty
+    ''' Returns true when text box is empty
+    ''' </summary>
+    ''' <returns></returns>
     Public Function IsEmpty() As Boolean
         If TextboxValue.Length > 0 Then
             Return False
@@ -288,18 +314,25 @@ Public Class ucrTextBox
             Return True
         End If
     End Function
-
+    ''' <summary>
+    ''' Clears contents of the textbox
+    ''' </summary>
     Public Overrides Sub Clear()
         bValidate = False
         TextboxValue = ""
         SetBackColor(Color.White)
         bValidate = True
     End Sub
-
+    ''' <summary>
+    ''' Sets the back colour of the control
+    ''' </summary>
+    ''' <param name="backColor"></param>
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
     End Sub
-
+    ''' <summary>
+    ''' Returns converted text either to lower or upper case
+    ''' </summary>
     Public Sub ChangeCase()
         If bToLower Then
             TextboxValue = TextboxValue.ToLower()
@@ -307,7 +340,11 @@ Public Class ucrTextBox
             TextboxValue = TextboxValue.ToUpper()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Returns the value of the textbox
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         Return TextboxValue
     End Function
@@ -322,8 +359,19 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
-
         OnevtValueChanged(Me, e)
-
+    End Sub
+    ''' <summary>
+    '''Sets the textbox as a read only 
+    ''' </summary>
+    Public Sub SetAsReadOnly()
+        txtBox.ReadOnly = True
+    End Sub
+    ''' <summary>
+    ''' Sets the size of the texbox in the control
+    ''' </summary>
+    ''' <param name="Size"></param>
+    Public Sub SetElementValueSize(Size As Point)
+        txtBox.Size = New Size(Size)
     End Sub
 End Class

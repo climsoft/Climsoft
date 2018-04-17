@@ -164,9 +164,10 @@ Public Class ucrValueFlagPeriod
             ucrValue.bValidateSilently = True
             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
+            ucrFlag.SetAsReadOnly()
+            SetTextBoxSize()
             bFirstLoad = False
         End If
-
     End Sub
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
@@ -264,6 +265,12 @@ Public Class ucrValueFlagPeriod
 
         Return bValuesCorrect
     End Function
+
+    Private Sub SetTextBoxSize()
+        ucrValue.SetElementValueSize(New Size(51, 20))
+        ucrFlag.SetElementValueSize(New Size(27, 20))
+        ucrPeriod.SetElementValueSize(New Size(33, 20))
+    End Sub
 
     'Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
 
