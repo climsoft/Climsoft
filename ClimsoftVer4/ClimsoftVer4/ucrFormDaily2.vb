@@ -387,10 +387,10 @@ Public Class ucrFormDaily2
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-                        ucrVFP.SetValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                        ucrVFP.SetElementValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
                     End If
                     If dtbl.Rows(0).Item("upperLimit") <> "" Then
-                        ucrVFP.SetValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                        ucrVFP.SetElementValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
                     End If
                 End If
             Next

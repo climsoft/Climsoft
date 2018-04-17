@@ -187,11 +187,11 @@ Public Class ucrSynopticRA1
                     row = dtbl.Select("elementId = '" & ucrVFP.Tag & "'").FirstOrDefault()
                     If row IsNot Nothing Then
                         If Val(row.Item("lowerLimit")) <> 0 Then
-                            ucrVFP.SetValueValidation(iLowerLimit:=Val(row.Item("lowerLimit")))
+                            ucrVFP.SetElementValueValidation(iLowerLimit:=Val(row.Item("lowerLimit")))
                         End If
 
                         If Val(row.Item("upperLimit")) <> 0 Then
-                            ucrVFP.SetValueValidation(iUpperLimit:=Val(row.Item("upperLimit")))
+                            ucrVFP.SetElementValueValidation(iUpperLimit:=Val(row.Item("upperLimit")))
                         End If
                     End If
                 End If
@@ -209,7 +209,7 @@ Public Class ucrSynopticRA1
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                If (Not ucrVFP.IsValueValueEmpty()) AndAlso IsNumeric(ucrVFP.GetValueValue) Then
+                If (Not ucrVFP.IsElementValueEmpty()) AndAlso IsNumeric(ucrVFP.GetElementValue) Then
                     Return False
                 End If
             End If
@@ -383,7 +383,7 @@ Public Class ucrSynopticRA1
         Try
             'If wetbulb > dewpoint both elements are flagged because either of them could be wrong.
             'i.e. wetbulb > the correct value or drybulb < correct value.
-            If Val(ucrVFPWetBulbTemp.GetValueValue) > Val(ucrVFPDryBulbTemp.GetValueValue) Then
+            If Val(ucrVFPWetBulbTemp.GetElementValue) > Val(ucrVFPDryBulbTemp.GetElementValue) Then
                 ucrVFPWetBulbTemp.ucrValue.SetBackColor(Color.Cyan)
                 ucrVFPDryBulbTemp.ucrValue.SetBackColor(Color.Cyan)
                 'ucrVFPWetBulbTemp.Focus()
@@ -395,18 +395,18 @@ Public Class ucrSynopticRA1
 
                 'Apply element scale factor to drybulb and wetbulb 
                 'before calling function to calculate dewpoint
-                Dim dryBulb = Val(ucrVFPDryBulbTemp.GetValueValue) / 10
-                Dim wetBulb = Val(ucrVFPWetBulbTemp.GetValueValue) / 10
+                Dim dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
+                Dim wetBulb = Val(ucrVFPWetBulbTemp.GetElementValue) / 10
                 Dim dwPoint = calculateDewpoint(dryBulb, wetBulb) * 10
                 ucrVFPDewPointTemp.SetValue(New List(Of Object)({dwPoint.ToString}))
 
-                Dim ppp = Val(ucrVFPStationLevelPressure.GetValueValue) / 10
-                Dim gpm = Val(ucrVFPStandardPressureLevel.GetValueValue)
+                Dim ppp = Val(ucrVFPStationLevelPressure.GetElementValue) / 10
+                Dim gpm = Val(ucrVFPStandardPressureLevel.GetElementValue)
 
                 'do a datacall to get station elevation
                 Dim stnElevation = GetStationElevation()
 
-                If stnElevation <> "" AndAlso Not ucrVFPStationLevelPressure.IsValueValueEmpty AndAlso Not ucrVFPDryBulbTemp.IsValueValueEmpty Then
+                If stnElevation <> "" AndAlso Not ucrVFPStationLevelPressure.IsElementValueEmpty AndAlso Not ucrVFPDryBulbTemp.IsElementValueEmpty Then
                     'Calculate geopotential
                     Dim geoPotentialHeight = CalculateGeopotential(ppp, dryBulb, Val(stnElevation), gpm)
                     ucrVFPGeopotentialHeight.SetValue(New List(Of Object)({geoPotentialHeight.ToString}))
@@ -515,8 +515,8 @@ Public Class ucrSynopticRA1
         Dim dewPoint As Decimal
         Dim rh As Decimal
 
-        dryBulb = Val(ucrVFPDryBulbTemp.GetValueValue) / 10
-        dewPoint = Val(ucrVFPDewPointTemp.GetValueValue) / 10
+        dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
+        dewPoint = Val(ucrVFPDewPointTemp.GetElementValue) / 10
         'TODO SAMUEL IS USING THE DEWPOINT AND THE DRYBULB VALUES TO CALCULATE
         'THE RELATIVE HUMIDITY. I'M NOT SURE IF THOSE ARE THE CORRECT VALUES
         'FOR CALCULATING THAT. JUST DUPLICATED HIS

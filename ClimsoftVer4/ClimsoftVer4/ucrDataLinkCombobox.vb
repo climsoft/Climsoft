@@ -60,6 +60,9 @@
         MyBase.SetValue(objNewValue)
 
         strCol = cboValues.ValueMember
+
+        'objNewValue might throw invalid cast
+        'TODO
         For Each rTemp As DataRow In dtbRecords.Rows
             If rTemp(strCol) = objNewValue Then
                 cboValues.SelectedValue = objNewValue
