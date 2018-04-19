@@ -39,21 +39,6 @@
         End If
     End Sub
 
-    Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            PopulateControl()
-            bFirstLoad = False
-        End If
-    End Sub
-
-    Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
-        OnevtKeyDown(sender, e)
-    End Sub
-
-    Public Overrides Function ValidateValue() As Boolean
-        Return cboValues.Items.Contains(cboValues.Text)
-    End Function
-
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim strCol As String
 
@@ -72,6 +57,10 @@
         'TODO possibly want this as well?
         'cboValues.SelectedIndex = -1
     End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Return cboValues.Items.Contains(cboValues.Text)
+    End Function
 
     ' If the text in the textbox portion does not match any of the items in the dropdown then GetValue will always return cboValue.Text
     ' regardless of strFieldName
@@ -94,16 +83,44 @@
     End Function
 
     Public Sub SetViewType(strViewType As String)
-        'Dim col As DataColumn
-        'For Each col In dtbRecords.Columns
-        '    If strViewType = col.ColumnName Then
-        '        cboValues.DisplayMember = strViewType
-        '        Exit For
-        '    End If
-        'Next
         If dtbRecords.Columns.Contains(strViewType) Then
             cboValues.DisplayMember = strViewType
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Sorts the datatable in ascending order based on the c
+    ''' column specified as the parameter. This in turn sorts
+    ''' the combobox values
+    ''' </summary>
+    ''' <param name="strCol"></param>
+    Public Sub SortBy(strCol As String)
+        If dtbRecords IsNot Nothing Then
+            'Datatable Sorting affects cboValues.SelectedValue
+            'thus SuppressChange And retain previous cboValues.SelectedValue 
+            Dim prevSelected = GetValue()
+            bSuppressChangedEvents = True
+            dtbRecords.DefaultView.Sort = strCol & " ASC"
+            SetValue(prevSelected)
+            bSuppressChangedEvents = False
+        End If
+    End Sub
+
+    Protected Sub SetComboBoxSelectorProperties(Optional comboBoxStyle As ComboBoxStyle = ComboBoxStyle.DropDown, Optional autoCompletSource As AutoCompleteSource = AutoCompleteSource.ListItems, Optional autoCompleteMode As AutoCompleteMode = AutoCompleteMode.SuggestAppend)
+        cboValues.DropDownStyle = comboBoxStyle
+        cboValues.AutoCompleteSource = autoCompletSource
+        cboValues.AutoCompleteMode = autoCompleteMode
+    End Sub
+
+    Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            'PopulateControl()
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
+        OnevtKeyDown(sender, e)
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
