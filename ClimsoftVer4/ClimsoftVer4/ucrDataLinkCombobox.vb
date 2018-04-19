@@ -61,10 +61,9 @@
 
         strCol = cboValues.ValueMember
 
-        'objNewValue might throw invalid cast
-        'TODO
         For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp(strCol) = objNewValue Then
+            'Calling ToString to prevent invalid casting
+            If rTemp.Item(strCol).ToString = objNewValue.ToString Then
                 cboValues.SelectedValue = objNewValue
                 Exit Sub
             End If
