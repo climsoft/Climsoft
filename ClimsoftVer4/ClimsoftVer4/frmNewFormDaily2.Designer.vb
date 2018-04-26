@@ -334,9 +334,9 @@ Partial Class frmNewFormDaily2
         '
         'ucrFormDaily
         '
-        Me.ucrFormDaily.Location = New System.Drawing.Point(14, 159)
+        Me.ucrFormDaily.Location = New System.Drawing.Point(15, 160)
         Me.ucrFormDaily.Name = "ucrFormDaily"
-        Me.ucrFormDaily.Size = New System.Drawing.Size(712, 356)
+        Me.ucrFormDaily.Size = New System.Drawing.Size(619, 353)
         Me.ucrFormDaily.TabIndex = 3
         '
         'ucrElementSelector
@@ -355,7 +355,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrDaiy2Navigation
         '
-        Me.ucrDaiy2Navigation.Location = New System.Drawing.Point(111, 512)
+        Me.ucrDaiy2Navigation.Location = New System.Drawing.Point(105, 523)
         Me.ucrDaiy2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDaiy2Navigation.Name = "ucrDaiy2Navigation"
         Me.ucrDaiy2Navigation.Size = New System.Drawing.Size(336, 25)
@@ -382,7 +382,7 @@ Partial Class frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(738, 631)
+        Me.ClientSize = New System.Drawing.Size(704, 631)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrDaiy2Navigation)

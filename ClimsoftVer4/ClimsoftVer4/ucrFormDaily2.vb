@@ -256,33 +256,39 @@ Public Class ucrFormDaily2
         Next
     End Sub
     ''' <summary>
-    ''' Checks if the computer computed total is same as the user total
-    ''' If not gives a warning
+    ''' Checks if total for current element is required
+    ''' Checks if the computed total is same as the user entered total.
     ''' </summary>
     Public Sub checkTotal()
-        'Check total if required
-        ' Am not sure how to get this value yet
-        'If totalRequired = 1 Then
-
+        'Check total if required from obselements table from qcTotalRequired field
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
         Dim elemTotal As Integer = 0
         Dim expectedTotal As Integer
         Dim ctr As Control
         Dim ctrVFP As New ucrValueFlagPeriod
 
+        clsDataDefinition = New DataCall
+        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetFields(New List(Of String)({"qcTotalRequired"}))
+        clsDataDefinition.SetFilter("elementId", "=", ElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
 
-        expectedTotal = Val(ucrInputTotal.GetValue)
-
-        For Each ctr In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                ctrVFP = ctr
-                elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            If dtbl.Rows(0).Item("qcTotalRequired") = 1 Then
+                expectedTotal = Val(ucrInputTotal.GetValue)
+                For Each ctr In Me.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod Then
+                        ctrVFP = ctr
+                        elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
+                    End If
+                Next
+                If elemTotal <> expectedTotal Then
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
+                    ucrInputTotal.GetFocus()
+                    ucrInputTotal.SetBackColor(Color.Cyan)
+                End If
             End If
-        Next
-
-        If elemTotal <> expectedTotal Then
-            MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
-            ucrInputTotal.txtBox.Focus()
-            ucrInputTotal.txtBox.BackColor = Color.Cyan
         End If
     End Sub
 
@@ -381,10 +387,10 @@ Public Class ucrFormDaily2
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-                        ucrVFP.SetValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                        ucrVFP.SetElementValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
                     End If
                     If dtbl.Rows(0).Item("upperLimit") <> "" Then
-                        ucrVFP.SetValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                        ucrVFP.SetElementValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
                     End If
                 End If
             Next

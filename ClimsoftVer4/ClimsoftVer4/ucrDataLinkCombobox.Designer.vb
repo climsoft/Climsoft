@@ -23,6 +23,7 @@ Partial Class ucrDataLinkCombobox
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cboValues = New System.Windows.Forms.ComboBox()
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cboValues
@@ -30,17 +31,20 @@ Partial Class ucrDataLinkCombobox
         Me.cboValues.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cboValues.FormattingEnabled = True
         Me.cboValues.Location = New System.Drawing.Point(0, 0)
+        Me.cboValues.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.cboValues.Name = "cboValues"
-        Me.cboValues.Size = New System.Drawing.Size(178, 21)
+        Me.cboValues.Size = New System.Drawing.Size(267, 28)
         Me.cboValues.TabIndex = 0
         '
         'ucrDataLinkCombobox
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboValues)
+        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.Name = "ucrDataLinkCombobox"
-        Me.Size = New System.Drawing.Size(178, 21)
+        Me.Size = New System.Drawing.Size(267, 32)
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

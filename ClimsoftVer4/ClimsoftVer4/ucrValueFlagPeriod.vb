@@ -126,7 +126,7 @@ Public Class ucrValueFlagPeriod
         MyBase.SetValue(objNewValue)
         lstValueFlagPeriod = TryCast(objNewValue, List(Of Object))
         'TODO
-        'Not sure about this check. No certain about whether we should force the
+        'Not sure about this check. Not certain about whether we should force the
         'developer to always pass a list with a min of 2 values for Value and flag
         If lstValueFlagPeriod.Count = 3 Then
             ucrValue.SetValue(lstValueFlagPeriod(0))
@@ -142,31 +142,58 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
+    Public Sub SetElementValue(strValue As String)
+        ucrValue.SetValue(strValue)
+    End Sub
     ''' <summary>
     ''' Gets the value for ucrValue control
     ''' </summary>
     ''' <returns></returns>
-    Public Function GetValueValue() As String
+    Public Function GetElementValue() As String
         Return ucrValue.GetValue
     End Function
 
-    Public Function IsValueValueEmpty() As Boolean
+    Public Sub SetElementFlagValue(strValue As String)
+        ucrFlag.SetValue(strValue)
+    End Sub
+
+    Public Function GetElementFlagValue() As String
+        Return ucrFlag.GetValue
+    End Function
+
+    Public Function GetElementPeriodValue() As String
+        Return ucrPeriod.GetValue
+    End Function
+
+    Public Sub SetElementPeriodValue(strValue As String)
+        ucrPeriod.SetValue(strValue)
+    End Sub
+
+    Public Function IsElementValueEmpty() As Boolean
         Return ucrValue.IsEmpty()
     End Function
 
-    Public Sub SetValueValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
+    Public Function IsElementFlagEmpty() As Boolean
+        Return ucrFlag.IsEmpty()
+    End Function
+
+    Public Function IsElementPeriodEmpty() As Boolean
+        Return ucrPeriod.IsEmpty()
+    End Function
+
+    Public Sub SetElementValueValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
         ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         If bFirstLoad Then
             ucrValue.bValidateSilently = True
             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
+            ucrFlag.SetAsReadOnly()
+            SetTextBoxSize()
             bFirstLoad = False
         End If
-
     End Sub
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
@@ -223,6 +250,7 @@ Public Class ucrValueFlagPeriod
             If ucrFlag.IsEmpty OrElse ucrFlag.GetValue = "M" Then
                 ucrFlag.SetValue("M")
             End If
+            bValuesCorrect = True
         Else
             If bValuesCorrect AndAlso ucrFlag.GetValue = "M" Then
                 ucrFlag.SetValue("")
@@ -263,6 +291,12 @@ Public Class ucrValueFlagPeriod
 
         Return bValuesCorrect
     End Function
+
+    Private Sub SetTextBoxSize()
+        ucrValue.SetElementValueSize(New Size(51, 20))
+        ucrFlag.SetElementValueSize(New Size(27, 20))
+        ucrPeriod.SetElementValueSize(New Size(33, 20))
+    End Sub
 
     'Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
 

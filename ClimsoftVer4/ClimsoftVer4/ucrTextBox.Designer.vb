@@ -23,24 +23,25 @@ Partial Class ucrTextBox
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtBox = New System.Windows.Forms.TextBox()
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtBox
         '
-        Me.txtBox.Location = New System.Drawing.Point(4, 5)
-        Me.txtBox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtBox.Location = New System.Drawing.Point(0, 0)
         Me.txtBox.Name = "txtBox"
-        Me.txtBox.Size = New System.Drawing.Size(74, 26)
+        Me.txtBox.Size = New System.Drawing.Size(51, 20)
         Me.txtBox.TabIndex = 578
         '
         'ucrTextBox
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.txtBox)
-        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrTextBox"
-        Me.Size = New System.Drawing.Size(87, 40)
+        Me.Size = New System.Drawing.Size(51, 20)
+        CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -187,11 +187,11 @@ Public Class ucrSynopticRA1
                     row = dtbl.Select("elementId = '" & ucrVFP.Tag & "'").FirstOrDefault()
                     If row IsNot Nothing Then
                         If Val(row.Item("lowerLimit")) <> 0 Then
-                            ucrVFP.SetValueValidation(iLowerLimit:=Val(row.Item("lowerLimit")))
+                            ucrVFP.SetElementValueValidation(iLowerLimit:=Val(row.Item("lowerLimit")))
                         End If
 
                         If Val(row.Item("upperLimit")) <> 0 Then
-                            ucrVFP.SetValueValidation(iUpperLimit:=Val(row.Item("upperLimit")))
+                            ucrVFP.SetElementValueValidation(iUpperLimit:=Val(row.Item("upperLimit")))
                         End If
                     End If
                 End If
@@ -209,7 +209,7 @@ Public Class ucrSynopticRA1
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                If (Not ucrVFP.IsValueValueEmpty()) AndAlso IsNumeric(ucrVFP.GetValueValue) Then
+                If (Not ucrVFP.IsElementValueEmpty()) AndAlso IsNumeric(ucrVFP.GetElementValue) Then
                     Return False
                 End If
             End If
@@ -378,25 +378,42 @@ Public Class ucrSynopticRA1
     End Sub
 
     'TODO
-    'THIS IS YET TO BE COMPLETED
+    'THIS IS NOT YET COMPLETED
     Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
         Try
             'If wetbulb > dewpoint both elements are flagged because either of them could be wrong.
             'i.e. wetbulb > the correct value or drybulb < correct value.
-            If Val(ucrVFPWetBulbTemp.GetValue) > Val(ucrVFPDryBulbTemp.GetValue) Then
-                ucrVFPWetBulbTemp.SetBackColor(Color.Cyan)
-                ucrVFPDryBulbTemp.SetBackColor(Color.Cyan)
-                ucrVFPDryBulbTemp.Focus()
+            If Val(ucrVFPWetBulbTemp.GetElementValue) > Val(ucrVFPDryBulbTemp.GetElementValue) Then
+                ucrVFPWetBulbTemp.ucrValue.SetBackColor(Color.Cyan)
+                ucrVFPDryBulbTemp.ucrValue.SetBackColor(Color.Cyan)
+                'ucrVFPWetBulbTemp.Focus()
+                ucrVFPWetBulbTemp.ucrValue.GetFocus()
                 MsgBox("Drybulb must be greater or equal to Wetbulb!", MsgBoxStyle.Exclamation)
             Else
-                ucrVFPWetBulbTemp.SetBackColor(Color.White)
-                ucrVFPDryBulbTemp.SetBackColor(Color.White)
+                ucrVFPWetBulbTemp.ucrValue.SetBackColor(Color.White)
+                ucrVFPDryBulbTemp.ucrValue.SetBackColor(Color.White)
 
                 'Apply element scale factor to drybulb and wetbulb 
                 'before calling function to calculate dewpoint
-                Dim dwPoint = calculateDewpoint(Val(ucrVFPDryBulbTemp.GetValue) / 10, Val(ucrVFPWetBulbTemp.GetValue) / 10)
-                ucrVFPDewPointTemp.SetValue(New List(Of Object)({dwPoint}))
+                Dim dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
+                Dim wetBulb = Val(ucrVFPWetBulbTemp.GetElementValue) / 10
+                Dim dwPoint = calculateDewpoint(dryBulb, wetBulb) * 10
+                ucrVFPDewPointTemp.SetValue(New List(Of Object)({dwPoint.ToString}))
 
+                Dim ppp = Val(ucrVFPStationLevelPressure.GetElementValue) / 10
+                Dim gpm = Val(ucrVFPStandardPressureLevel.GetElementValue)
+
+                'do a datacall to get station elevation
+                Dim stnElevation = GetStationElevation()
+
+                If stnElevation <> "" AndAlso Not ucrVFPStationLevelPressure.IsElementValueEmpty AndAlso Not ucrVFPDryBulbTemp.IsElementValueEmpty Then
+                    'Calculate geopotential
+                    Dim geoPotentialHeight = CalculateGeopotential(ppp, dryBulb, Val(stnElevation), gpm)
+                    ucrVFPGeopotentialHeight.SetValue(New List(Of Object)({geoPotentialHeight.ToString}))
+                    'calculate MSL pressure
+                    Dim mslpp = CalculateMSLppp(ppp, dryBulb, Val(stnElevation))
+                    ucrVFPPressureReduced.SetValue(New List(Of Object)({mslpp.ToString}))
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -407,21 +424,19 @@ Public Class ucrSynopticRA1
 
     End Sub
 
-    Public Function calculateDewpoint(ByVal dryBulb As Decimal, ByVal wetBulb As Decimal) As String
+    Public Function calculateDewpoint(ByVal dryBulb As Decimal, ByVal wetBulb As Decimal) As Decimal
         'Td in this case is Temperature drybulb,
         'Tw wetBulb And Tp Is dewpoint temperature
         'E is saturation vapour pressure(s.v.p.), 
         'hence Ed Is s.v.p.over drybulb And Ew s.v.p. over wetbulb, 
         'Ea actual s.v.p.
-        Dim Td_Fahrenheit As Object
-        Dim Ed As Object
-
-        Dim Tw_Fahrenheit As Object
-        Dim Ew As Object
-        Dim Ea As Object
-        'Dim Tp As Object
-        Dim Tp_Fahrenheit As Object
-        Dim Tp_Celcius As Object
+        Dim Td_Fahrenheit As Decimal
+        Dim Ed As Decimal
+        Dim Tw_Fahrenheit As Decimal
+        Dim Ew As Decimal
+        Dim Ea As Decimal
+        Dim Tp_Fahrenheit As Decimal
+        Dim Tp_Celcius As Decimal
 
         Td_Fahrenheit = ((9 / 5) * dryBulb) + 32
         '2.71828183 is natural number (e)
@@ -431,15 +446,95 @@ Public Class ucrSynopticRA1
         Ea = Ew - 0.35 * (Td_Fahrenheit - Tw_Fahrenheit)
         Tp_Fahrenheit = -1 * ((Math.Log(Ea / 6.1078) * 219.522) + 307.004) / ((Math.Log(Ea / 6.1078) * 0.556) - 9.59539)
         Tp_Celcius = (5 / 9) * (Tp_Fahrenheit - 32)
-
-
         Tp_Celcius = Math.Round(Tp_Celcius, 0)
+
         Return Tp_Celcius
     End Function
 
-    Private Sub UcrVFPDewPointTemp_LostFocus(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.LostFocus
+    Private Function GetStationElevation() As String
+        Dim elevation As String = ""
+        Dim clsDataDefinition As DataCall
+        Dim dtbl As DataTable
 
+        Dim stationValue As String = ""
+        'get the station value
+        For Each ucrKeyControl As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If TypeOf ucrKeyControl Is ucrStationSelector Then
+                stationValue = ucrKeyControl.GetValue
+                Exit For
+            End If
+        Next
+
+        clsDataDefinition = New DataCall
+        clsDataDefinition.SetTableName("stations")
+        clsDataDefinition.SetFields(New List(Of String)({"stationId", "elevation"}))
+        clsDataDefinition.SetFilter("stationId", "=", stationValue, bIsPositiveCondition:=True, bForceValuesAsString:=True)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            elevation = dtbl.Rows(0).Item("elevation")
+        End If
+        Return elevation
+    End Function
+
+    'TODO
+    'SAMUEL IS USING VariantType WHICH TRUNCATES VALUES AND PRECISION
+    'IS LOST. WHEN DECIMALS ARE USED THE CALCULATION RESULTS CHANGES
+    'ANY SUGGESTION ON THE WAY FORWARD
+    Private Function CalculateGeopotential(ppp As Decimal, dryBulb As Decimal, elevation As Decimal, gpmStdLevel As Decimal) As Decimal
+        Dim geoPotential As Decimal
+        Dim g As VariantType, R As VariantType, gamma As VariantType, K As VariantType
+        'Dim g As Decimal
+        'Dim R As Decimal
+        'Dim gamma As Decimal
+        'Dim K As Decimal
+
+        '0.0065 is dry adiabatic lapse rate
+        '9.80665 is acceleration due to gravity
+        '287.04 is universal gas constant
+        '273.15 is zero Kelvin
+        gamma = 0.0065
+        g = 9.80665
+        R = 287.04
+        K = dryBulb + 273.15
+        geoPotential = Math.Round((elevation + (R / g) * Math.Log(ppp / gpmStdLevel) * (K + ((gamma / 2) * elevation))) / (1 + (R / g) * Math.Log(ppp / gpmStdLevel) * (gamma / 2)))
+
+        Return geoPotential
+    End Function
+
+    Private Function CalculateMSLppp(ppp As Decimal, dryBulb As Decimal, elevation As Decimal) As Decimal
+        Dim MSLppp As Decimal
+
+        MSLppp = (ppp * (1 - 0.0065 * elevation / (dryBulb + 0.0065 * elevation + 273.15)) ^ -5.257) * 10
+        '0.0065 is dry adiabatic lapse rate
+        MSLppp = Math.Round(MSLppp)
+        Return MSLppp
+    End Function
+
+    Private Sub UcrVFPDewPointTemp_LostFocus(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.LostFocus
+        Dim dryBulb As Decimal
+        Dim dewPoint As Decimal
+        Dim rh As Decimal
+
+        dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
+        dewPoint = Val(ucrVFPDewPointTemp.GetElementValue) / 10
+        'TODO SAMUEL IS USING THE DEWPOINT AND THE DRYBULB VALUES TO CALCULATE
+        'THE RELATIVE HUMIDITY. I'M NOT SURE IF THOSE ARE THE CORRECT VALUES
+        'FOR CALCULATING THAT. JUST DUPLICATED HIS
+        rh = CalculateRH(dewPoint, dryBulb)
+        ucrVFPRelativeHumidity.SetValue(New List(Of Object)({rh.ToString}))
     End Sub
 
+    Private Function CalculateRH(ByVal dewPoint As Decimal, ByVal dryBulb As Decimal) As Decimal
+        Dim RH As Decimal
+        Dim svp1 As Decimal
+        Dim svp2 As Decimal
+        'svp => saturation vapour pressure
+        'RH= svp(dewpoint)/svp(drybulb)
+
+        svp1 = 6.11 * 10 ^ (7.5 * dewPoint / (237.3 + dewPoint))
+        svp2 = 6.11 * 10 ^ (7.5 * dryBulb / (237.3 + dryBulb))
+        RH = Math.Round((svp1 / svp2) * 100, 0)
+        Return RH
+    End Function
 
 End Class
