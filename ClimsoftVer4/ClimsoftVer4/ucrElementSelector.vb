@@ -6,7 +6,6 @@
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
-
         If dtbRecords.Rows.Count > 0 Then
             cboValues.ValueMember = strElementID
             'TODO 
@@ -32,19 +31,30 @@
         SetViewType(strIDsAndElements)
     End Sub
 
-    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim d As New Dictionary(Of String, List(Of String))
+    Private Sub SortByID()
+        SortBy(strElementID)
+        cmsElementSortByID.Checked = True
+        cmsElementSortyByName.Checked = False
+    End Sub
 
+    Private Sub SortByElementName()
+        SortBy(strElementName)
+        cmsElementSortByID.Checked = False
+        cmsElementSortyByName.Checked = True
+    End Sub
+
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
-            'InitialiseStationDataTable()
             'SortByStationName()
             SetTableName(strElementTableName)
-            d.Add(strElementName, New List(Of String)({strElementName}))
-            d.Add(strElementID, New List(Of String)({strElementID}))
-            d.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
-            SetFields(d)
+            dct.Add(strElementName, New List(Of String)({strElementName}))
+            dct.Add(strElementID, New List(Of String)({strElementID}))
+            dct.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
+            SetFields(dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsElement
+            SetComboBoxSelectorProperties()
             bFirstLoad = False
         End If
     End Sub
@@ -61,32 +71,12 @@
         SetViewTypeAsIDsAndElements()
     End Sub
 
-    Public Overrides Function ValidateValue() As Boolean
-        Return cboValues.Items.Contains(cboValues.Text)
-    End Function
-
     Private Sub tsmSortByID_Click(sender As Object, e As EventArgs) Handles cmsElementSortByID.Click
         SortByID()
     End Sub
 
-    Private Sub SortByID()
-        If dtbRecords IsNot Nothing Then
-            dtbRecords.DefaultView.Sort = strElementID & " ASC"
-            cmsElementSortByID.Checked = True
-            cmsElementSortyByName.Checked = False
-            PopulateControl()
-        End If
-    End Sub
-
     Private Sub cmsElementSortyByName_Click(sender As Object, e As EventArgs) Handles cmsElementSortyByName.Click
         SortByElementName()
-    End Sub
-
-    Private Sub SortByElementName()
-        dtbRecords.DefaultView.Sort = strElementName & " ASC"
-        cmsElementSortByID.Checked = False
-        cmsElementSortyByName.Checked = True
-        PopulateControl()
     End Sub
 
     Private Sub cmsElementsFilter_Click(sender As Object, e As EventArgs) Handles cmsElementsFilter.Click

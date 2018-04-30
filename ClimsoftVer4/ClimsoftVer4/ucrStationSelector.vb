@@ -6,9 +6,6 @@
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
-        ' Example of defining a filter for the data call
-        'clsDataDefinition.SetFilter(strStationID, "==", Chr(34) & "67774010" & Chr(34))
-
         If dtbRecords.Rows.Count > 0 Then
             'May need ValueMember to be different in different instances e.g. if station name is needed as return value
             'Done. It is now possible to pass the field name into get value. This comment can now be deleted
@@ -36,10 +33,46 @@
         SetViewType(strIDsAndStations)
     End Sub
 
+    Public Sub SortByID()
+        SortBy(strStationID)
+        cmsStationSortByID.Checked = True
+        cmsStationSortyByName.Checked = False
+
+        'If dtbRecords IsNot Nothing Then
+        '    'Datatable Sorting affects cboValues.SelectedValue
+        '    'thus SuppressChange And retain previous cboValues.SelectedValue 
+        '    Dim prevSelected = GetValue()
+        '    bSuppressChangedEvents = True
+        '    dtbRecords.DefaultView.Sort = strStationID & " ASC"
+        '    cmsStationSortByID.Checked = True
+        '    cmsStationSortyByName.Checked = False
+        '    'PopulateControl()
+        '    SetValue(prevSelected)
+        '    bSuppressChangedEvents = False
+        'End If
+    End Sub
+
+    Public Sub SortByStationName()
+        SortBy(strStationName)
+        cmsStationSortByID.Checked = False
+        cmsStationSortyByName.Checked = True
+        'If dtbRecords IsNot Nothing Then
+        '    'Datatable Sorting affects cboValues.SelectedValue
+        '    'thus SuppressChange And retain previous cboValues.SelectedValue 
+        '    Dim prevSelected = GetValue()
+        '    bSuppressChangedEvents = True
+        '    dtbRecords.DefaultView.Sort = strStationName & " ASC"
+        '    cmsStationSortByID.Checked = False
+        '    cmsStationSortyByName.Checked = True
+        '    'PopulateControl()
+        '    SetValue(prevSelected)
+        '    bSuppressChangedEvents = False
+        'End If
+    End Sub
+
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
-            Dim dct As New Dictionary(Of String, List(Of String))
-            'InitialiseStationDataTable()
             'SortByStationName()
             dct.Add(strStationName, New List(Of String)({strStationName}))
             dct.Add(strStationID, New List(Of String)({strStationID}))
@@ -47,41 +80,8 @@
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
+            SetComboBoxSelectorProperties()
             bFirstLoad = False
-        End If
-    End Sub
-
-    Public Overrides Function ValidateValue() As Boolean
-        Return cboValues.Items.Contains(cboValues.Text)
-    End Function
-
-    Public Sub SortByID()
-        If dtbRecords IsNot Nothing Then
-            'Datatable Sorting affects cboValues.SelectedValue
-            'thus SuppressChange And retain previous cboValues.SelectedValue 
-            Dim prevSelected = GetValue()
-            bSuppressChangedEvents = True
-            dtbRecords.DefaultView.Sort = strStationID & " ASC"
-            cmsStationSortByID.Checked = True
-            cmsStationSortyByName.Checked = False
-            'PopulateControl()
-            SetValue(prevSelected)
-            bSuppressChangedEvents = False
-        End If
-    End Sub
-
-    Public Sub SortByStationName()
-        If dtbRecords IsNot Nothing Then
-            'Datatable Sorting affects cboValues.SelectedValue
-            'thus SuppressChange And retain previous cboValues.SelectedValue 
-            Dim prevSelected = GetValue()
-            bSuppressChangedEvents = True
-            dtbRecords.DefaultView.Sort = strStationName & " ASC"
-            cmsStationSortByID.Checked = False
-            cmsStationSortyByName.Checked = True
-            'PopulateControl()
-            SetValue(prevSelected)
-            bSuppressChangedEvents = False
         End If
     End Sub
 
