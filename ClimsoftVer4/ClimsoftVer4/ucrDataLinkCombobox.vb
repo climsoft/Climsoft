@@ -114,7 +114,7 @@
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            'PopulateControl()
+            PopulateControl()
             bFirstLoad = False
         End If
     End Sub
