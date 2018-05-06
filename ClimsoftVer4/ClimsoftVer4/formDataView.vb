@@ -286,18 +286,19 @@ Public Class formDataView
             PrintLine(111, hdr)
             FileClose(111)
 
-            Sql = "select * from " & DataGridView.DataMember & ";"
+            Sql = "select * from " & dsSourceTableName & ";"
+
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
 
             ds1.Clear()
-            da1.Fill(ds1, DataGridView.DataMember)
+            da1.Fill(ds1, dsSourceTableName)
 
             FileOpen(111, "dataexport.csv", OpenMode.Append)
 
-            For i = 0 To ds1.Tables(DataGridView.DataMember).Rows.Count - 1
-                dat = ds1.Tables(DataGridView.DataMember).Rows(i).Item(0)
-                For j = 1 To ds1.Tables(DataGridView.DataMember).Columns.Count - 1
-                    dat = dat & "," & ds1.Tables(DataGridView.DataMember).Rows(i).Item(j)
+            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+                    dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
                 Next
 
                 PrintLine(111, dat)

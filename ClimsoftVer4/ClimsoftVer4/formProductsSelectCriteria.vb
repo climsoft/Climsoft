@@ -102,6 +102,7 @@ Public Class formProductsSelectCriteria
         sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
         'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.SelectCommand.CommandTimeout = 0
         da.Fill(ds, "obselement")
         ' conn.Close()
 
@@ -1337,6 +1338,71 @@ Err:
 
 
     Private Sub dateTo_ValueChanged(sender As Object, e As EventArgs) Handles dateTo.ValueChanged
+
+    End Sub
+
+    Private Sub cmdSelectAllStations_Click(sender As Object, e As EventArgs) Handles cmdSelectAllStations.Click
+        Try
+            lstvStations.Clear()
+            lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
+            lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
+
+            sql = "SELECT recordedFrom, stationName FROM observationfinal INNER JOIN station ON stationId = recordedFrom GROUP BY recordedFrom;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.SelectCommand.CommandTimeout = 0
+            da.Fill(ds, "stations")
+
+            maxRows = (ds.Tables("stations").Rows.Count)
+            'MsgBox(maxRows)
+            Dim strs(2) As String
+            Dim itm = New ListViewItem
+
+            For kount = 0 To maxRows - 1 Step 1
+                strs(0) = ds.Tables("stations").Rows(kount).Item("recordedFrom")
+                strs(1) = ds.Tables("stations").Rows(kount).Item("stationName")
+                itm = New ListViewItem(strs)
+                lstvStations.Items.Add(itm)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub cmdSelectAllElements_Click(sender As Object, e As EventArgs) Handles cmdSelectAllElements.Click
+        Try
+            'lstvElements.Columns.Clear()
+            'lstvElements.Refresh()
+            lstvElements.Clear()
+            lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
+            lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
+            lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
+
+            sql = "SELECT describedBy, elementName,description  FROM observationfinal INNER JOIN obselement ON elementId = describedBy GROUP BY describedBy;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+
+            da.SelectCommand.CommandTimeout = 0
+            da.Fill(ds, "Elements")
+
+            maxRows = (ds.Tables("Elements").Rows.Count)
+            'MsgBox(maxRows)
+            Dim strs(3) As String
+            Dim itm = New ListViewItem
+
+            For kount = 0 To maxRows - 1 Step 1
+                strs(0) = ds.Tables("Elements").Rows(kount).Item("describedBy")
+                strs(1) = ds.Tables("Elements").Rows(kount).Item("elementName")
+                strs(2) = ds.Tables("Elements").Rows(kount).Item("description")
+                itm = New ListViewItem(strs)
+                lstvElements.Items.Add(itm)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub pnlStationsElements_Paint(sender As Object, e As PaintEventArgs) Handles pnlStationsElements.Paint
 
     End Sub
 End Class

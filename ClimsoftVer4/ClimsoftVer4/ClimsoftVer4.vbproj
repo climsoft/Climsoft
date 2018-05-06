@@ -411,6 +411,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmModifyObservations.Designer.vb">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmModifyObservations.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.Designer.vb" />
     <Compile Include="frmPlotter.vb">
       <SubType>Form</SubType>
@@ -840,6 +846,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifyObservations.resx">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
