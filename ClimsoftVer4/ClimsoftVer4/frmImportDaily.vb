@@ -96,6 +96,12 @@
             '    DataGridView1.Rows.Add(THisLine.Split(delimit))
             'Next
             DataGridView1.Refresh()
+
+            ' Append a Blank Line to the import file to control the EOF code
+            FileOpen(200, txtImportFile.Text, OpenMode.Append)
+            PrintLine(200, Chr(10) & Chr(13))
+            FileClose(200)
+
         Catch ex As Exception
             MsgBox(ex.HResult & " " & Err.Description)
             Me.Cursor = Cursors.Default
@@ -321,6 +327,7 @@
 
                 Do While MyReader.EndOfData = False
 
+                    'While Not MyReader.EndOfData
                     currentRow = MyReader.ReadFields()
 
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
@@ -335,7 +342,7 @@
 
                             With DataGridView1
                                 If col < .ColumnCount Then
-
+                                    'If col = 3 Then MsgBox(dat)
                                     If .Columns(col).Name = "station_id" Then
                                         st = dat
                                     ElseIf .Columns(col).Name = "element_code" Then
@@ -351,6 +358,7 @@
 
                                         flg = ""
                                         If IsNumeric(hd) Then
+
                                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
 
                                             If IsNumeric(dat) Then
@@ -359,18 +367,21 @@
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
+                                            'If IsDate(dttime) Then Add_Record(st, cod, dttime, dat, flg)
                                             If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
                                         End If
                                     End If
                                     ' Show upload progress
-                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
                                     col = col + 1
                                 End If
                             End With
                         Next
                     End If
+
                 Loop
+
             End Using
 
         Catch ex As Exception
@@ -673,6 +684,7 @@
         End Try
     End Sub
     Sub Get_Value_Flag(code As String, ByRef dat As String, ByRef flg As String)
+        'MsgBox("Flag")
         Dim datstr, flgchr As String
 
         If Len(dat) = 0 Then
@@ -824,12 +836,12 @@
     End Sub
 
     Sub Scale_Data(code As String, ByRef obsv As String)
-
+        'MsgBox(code)
         Dim scales As Decimal
 
         Try
             sql = "select elementId, elementScale from obselement where elementId like " & code & ";"
-
+            'MsgBox(sql)
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")

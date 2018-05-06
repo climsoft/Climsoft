@@ -346,6 +346,7 @@
         Dim maxRows As Integer
         Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer
 
+
         Try
 
             ' List the selected stations
@@ -353,6 +354,9 @@
             elmlist = ""
             stnselected = False
             elmselected = False
+
+            'Set Cursor to busy mode
+            Me.Cursor = Cursors.WaitCursor
 
             ' List the selected stations
             If chkAllStations.Checked = False Then ' When NOT all stations are selected
@@ -436,38 +440,38 @@
             da.Fill(ds, "obsInitial")
             ''conn.Close() '
             ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            'Catch ex As Exception
+            '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
+            'End Try
 
 
-        Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-        maxRows = ds.Tables("obsInitial").Rows.Count
+            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+            maxRows = ds.Tables("obsInitial").Rows.Count
 
-        Trecs = Trecs + maxRows ' Total Records
+            Trecs = Trecs + maxRows ' Total Records
 
-        Dim ds1 As New DataSet
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim elemMaxRows As Integer, k As Integer, valScale As Single
-        sql = "SELECT elementId,elementScale FROM obselement"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ' Set to unlimited timeout period
-        da1.SelectCommand.CommandTimeout = 0
-        da1.Fill(ds1, "elemScale")
+            Dim ds1 As New DataSet
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim elemMaxRows As Integer, k As Integer, valScale As Single
+            sql = "SELECT elementId,elementScale FROM obselement"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da1.SelectCommand.CommandTimeout = 0
+            da1.Fill(ds1, "elemScale")
 
-        elemMaxRows = ds1.Tables("elemScale").Rows.Count
-        'MsgBox("Number of elements: " & elemMaxRows)
+            elemMaxRows = ds1.Tables("elemScale").Rows.Count
+            'MsgBox("Number of elements: " & elemMaxRows)
 
 
-        'Loop through all records in dataset
-        For n = 0 To maxRows - 1
-            lblTableRecords.Text = "Uploading records with qcStatus=1"
-            lblTableRecords.Refresh()
-            'Display progress of data transfer
-            txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            txtDataTransferProgress.Refresh()
-            'Loop through all observation fields adding observation records to observationInitial table
-            Try
+            'Loop through all records in dataset
+            For n = 0 To maxRows - 1
+                lblTableRecords.Text = "Uploading records with qcStatus=1"
+                lblTableRecords.Refresh()
+                'Display progress of data transfer
+                txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+                txtDataTransferProgress.Refresh()
+                'Loop through all observation fields adding observation records to observationInitial table
+                'Try
                 dd = ""
                 hh = ""
                 yyyy = DateAndTime.Year(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
@@ -507,24 +511,21 @@
                 objCmd.ExecuteNonQuery()
                 'Catch ex As MySql.Data.MySqlClient.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
-            Catch ex As Exception
+                'Catch ex As Exception
+                '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
+                'End Try
 
-                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                MsgBox(ex.Message)
+                'Move to next record in dataset
+            Next n
 
-            End Try
-
-            'Move to next record in dataset
-        Next n
-
-        conn.Close()
-        '------
-        ds.Clear()
-        MyConnectionString = frmLogin.txtusrpwd.Text
-        ' conn.Close()
-        conn.ConnectionString = MyConnectionString
-        conn.Open()
-        Try
+            conn.Close()
+            '------
+            ds.Clear()
+            MyConnectionString = frmLogin.txtusrpwd.Text
+            ' conn.Close()
+            conn.ConnectionString = MyConnectionString
+            conn.Open()
+            'Try
             'Next upload records with QC status =2
             sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " & _
                 "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear & _
@@ -551,25 +552,25 @@
             'MsgBox("Number of elements: " & elemMaxRows)
 
             'Loop through all records in dataset
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            'Catch ex As Exception
+            '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
+            'End Try
 
-        For n = 0 To maxRows - 1
-            lblTableRecords.Text = "Uploading records with qcStatus=2"
-            lblTableRecords.Refresh()
+            For n = 0 To maxRows - 1
+                lblTableRecords.Text = "Uploading records with qcStatus=2"
+                lblTableRecords.Refresh()
 
-            'Display progress of data transfer
+                'Display progress of data transfer
 
-            'frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+                'frmDataTransferProgress.txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
 
-            'frmDataTransferProgress.txtDataTransferProgress.Refresh()
+                'frmDataTransferProgress.txtDataTransferProgress.Refresh()
 
-            txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
-            txtDataTransferProgress.Refresh()
+                txtDataTransferProgress.Text = "      Transferring record: " & n + 1 & " of " & maxRows
+                txtDataTransferProgress.Refresh()
 
-            'Loop through all observation fields adding observation records to observationInitial table
-            Try
+                'Loop through all observation fields adding observation records to observationInitial table
+                'Try
                 dd = ""
                 hh = ""
                 yyyy = DateAndTime.Year(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
@@ -608,13 +609,23 @@
                 objCmd.ExecuteNonQuery()
                 'Catch ex As MySql.Data.MySqlClient.MySqlException
                 '    'Ignore expected error i.e. error of Duplicates in MySqlException
-            Catch ex As Exception
-                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                MsgBox(ex.Message)
-            End Try
+                'Catch ex As Exception
 
-            'Move to next record in dataset
-        Next n
+                '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
+                'End Try
+
+                'Move to next record in dataset
+            Next n
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            lblTableRecords.ForeColor = Color.Red
+            lblTableRecords.Text = "Data transfer failed !"
+            conn.Close()
+            Me.Cursor = Cursors.Default
+            Exit Sub
+        End Try
+
 
         conn.Close()
         'frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
@@ -623,6 +634,9 @@
         lblTableRecords.ForeColor = Color.Red
         lblTableRecords.Text = "Data transfer complete !"
         txtDataTransferProgress.Text = Trecs & " Records Transferred!"
+
+        'Set Cursor to busy mode
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub txtBeginMonth_TextChanged(sender As Object, e As EventArgs) Handles txtBeginMonth.TextChanged

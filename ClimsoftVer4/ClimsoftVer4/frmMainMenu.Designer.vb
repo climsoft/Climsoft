@@ -73,6 +73,7 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class frmMainMenu
         '
         'mnuAdministration
         '
-        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem})
+        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
         Me.mnuAdministration.Tag = "Administration"
@@ -301,14 +302,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(152, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(152, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '
@@ -605,6 +606,12 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'UpdateObservationsToolStripMenuItem1
+        '
+        Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
+        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -681,4 +688,5 @@ Partial Class frmMainMenu
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConfigurationForTDCFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

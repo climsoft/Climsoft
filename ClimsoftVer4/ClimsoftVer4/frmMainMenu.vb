@@ -288,4 +288,8 @@ Public Class frmMainMenu
     Private Sub MetadataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MetadataToolStripMenuItem.Click
         formMetadata.Show()
     End Sub
+
+    Private Sub UpdateObservationsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles UpdateObservationsToolStripMenuItem1.Click
+        frmModifyObservations.Show()
+    End Sub
 End Class
