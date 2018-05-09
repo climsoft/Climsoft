@@ -34,6 +34,7 @@
         ucrNavigation.SetKeyControls("mm", ucrMonth)
         ucrNavigation.SetKeyControls("dd", ucrDay)
 
+        ucrHourlyWind.SetYearMonthDayLink(ucrYearSelector, ucrMonth, ucrDay)
 
         'THIS WILL WORK ONCE WE INCLUDE THE entryDatetime AS A FIELD FOR ucrNavigation
         'ucrNavigation.SetSortBy("entryDatetime")
