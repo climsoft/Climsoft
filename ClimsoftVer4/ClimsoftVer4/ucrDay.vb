@@ -1,6 +1,8 @@
 ﻿Public Class ucrDay
     'Private strDaysTableName As String = "days"
     Private strDay As String = "day"
+    'TODO
+    'Is it necessary to have 4 datatables for this control?
     Private dtb28 As DataTable
     Private dtb29 As DataTable
     Private dtb30 As DataTable
