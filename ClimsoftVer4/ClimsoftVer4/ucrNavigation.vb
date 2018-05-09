@@ -19,14 +19,18 @@
         displayRecordNumber()
         UpdateKeyControls()
     End Sub
-
+    ''' <summary>
+    ''' Gets the value of the specified column(strFieldName) at the current row 
+    ''' Returns empty string or nothing if no rows found or strFieldName is not specified
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         If strFieldName = "" Then
             Return Nothing
         End If
 
         If dtbRecords.Rows.Count > 0 Then
-            'Return dtbRecords.Rows(iCurrRow).Field(Of Object)(strFieldName)
             Return dtbRecords.Rows(iCurrRow).Item(strFieldName)
         Else
             Return ""
@@ -34,6 +38,7 @@
     End Function
     ''' <summary>
     ''' Displays the record number for the navigation control
+    ''' Disables the navigation buttons if the selected row does not exist
     ''' </summary>
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
@@ -45,7 +50,6 @@
             txtRecNum.Text = "New Record"
             SetControlsForNewRecord()
         End If
-
     End Sub
 
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
@@ -74,10 +78,9 @@
         If iCurrRow < (iMaxRows - 1) Then
             iCurrRow = iCurrRow + 1
             displayRecordNumber()
-            'OnevtValueChanged(sender, e)
             UpdateKeyControls()
         Else
-            MsgBox("No more next record!", MsgBoxStyle.Exclamation)
+            MessageBox.Show("No more next record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
 
@@ -94,7 +97,7 @@
             'OnevtValueChanged(sender, e)
             UpdateKeyControls()
         Else
-            MsgBox("No more previous record!", MsgBoxStyle.Exclamation)
+            MessageBox.Show("No more previous record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
     End Sub
     ''' <summary>
@@ -104,7 +107,6 @@
         'In order to move to move to the last record the record index is set to the maximum number of records minus one.
         iCurrRow = iMaxRows - 1
         displayRecordNumber()
-        'OnevtValueChanged(sender, e)
         UpdateKeyControls()
     End Sub
 
@@ -114,7 +116,8 @@
     'TODO
     'NOT SURE WHETHER TO CALL THIS AddKeyControls or SetKeyControls
     ''' <summary>
-    ''' Sets the key controls and their key field
+    ''' Sets the key controls and their key field. 
+    ''' The field must be unique. If the field is found, the old ucrKeyControl is discarded
     ''' </summary>
     ''' <param name="strFieldName"></param>
     ''' <param name="ucrKeyControl"></param>
@@ -138,12 +141,6 @@
     ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
-            'For i As Integer = 0 To dctKeyControls.Count - 1
-            '    ' Suppress events being raised while changing value of each key control
-            '    dctKeyControls.Values(i).bSuppressChangedEvents = True
-            '    dctKeyControls.Values(i).SetValue(dtbRecords.Rows(iCurrRow)(dctKeyControls.Keys(i)))
-            '    dctKeyControls.Values(i).bSuppressChangedEvents = False
-            'Next
             For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
                 'Suppress events being raised while changing value of each key control
                 kvp.Value.bSuppressChangedEvents = True
@@ -241,6 +238,11 @@
         'RECORD COUNT ON DELETE
     End Sub
 
+    ''' <summary>
+    ''' Sets the column to be used in sorting. 
+    ''' The passed column will be sorted in ascending order
+    ''' </summary>
+    ''' <param name="strNewSortCol"></param>
     Public Sub SetSortBy(strNewSortCol As String)
         strSortCol = strNewSortCol
     End Sub
