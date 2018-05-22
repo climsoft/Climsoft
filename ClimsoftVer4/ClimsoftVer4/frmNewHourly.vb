@@ -158,43 +158,42 @@
 
     'Changes the date entry fields betwen synoptc hours and all hours
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
-        Dim ctrVFP As ucrValueFlagPeriod
-        Dim lstSynopticHourControls As New List(Of ucrValueFlagPeriod)
-        'list of controls that have synoptic hours fields
-        lstSynopticHourControls.AddRange({ucrHourly.ucrValueFlagPeriod3, ucrHourly.ucrValueFlagPeriod6, ucrHourly.ucrValueFlagPeriod9, ucrHourly.UcrValueFlagPeriod12, ucrHourly.UcrValueFlagPeriod15, ucrHourly.UcrValueFlagPeriod18, ucrHourly.UcrValueFlagPeriod21})
 
+        Dim ctrVFP As ucrValueFlagPeriod
         If selectAllHours Then
             selectAllHours = False
             btnHourSelection.Text = "Enable synoptic hours only"
-            'Enables the previously disabled controls when entering synoptic hours only
             For Each ctr As Control In ucrHourly.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    If Not lstSynopticHourControls.Contains(ctrVFP) Then
-                        ctrVFP.ucrFlag.Enabled = True
-                        ctrVFP.ucrValue.Enabled = True
-                        ctrVFP.ucrFlag.SetBackColor(Color.White)
-                        ctrVFP.ucrValue.SetBackColor(Color.White)
-                    End If
+                    ctrVFP.Enabled = True
+                    ctrVFP.SetBackColor(Color.White)
                 End If
             Next
-
         Else
             selectAllHours = True
             btnHourSelection.Text = "Enable all hours"
-            'Disbales the non- synoptic hours fields
-            For Each ctr As Control In ucrHourly.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    If Not lstSynopticHourControls.Contains(ctrVFP) Then
-                        ctrVFP.ucrFlag.Enabled = False
-                        ctrVFP.ucrValue.Enabled = False
-                        ctrVFP.ucrFlag.SetBackColor(Color.LightYellow)
-                        ctrVFP.ucrValue.SetBackColor(Color.LightYellow)
+            Dim clsDataDefinition As DataCall
+            Dim dtbl As DataTable
+            Dim iTagVal As Integer
+            Dim row As DataRow
+            clsDataDefinition = New DataCall
+            clsDataDefinition.SetTableName("form_hourly_time_selection")
+            clsDataDefinition.SetFields(New List(Of String)({"hh", "hh_selection"}))
+            dtbl = clsDataDefinition.GetDataTable()
+            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+                For Each ctr As Control In ucrHourly.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod Then
+                        ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                        iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
+                        row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
+                        If row IsNot Nothing Then
+                            ctrVFP.Enabled = False
+                            ctrVFP.SetBackColor(Color.LightYellow)
+                        End If
                     End If
-                End If
-            Next
-
+                Next
+            End If
         End If
     End Sub
 
