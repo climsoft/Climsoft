@@ -331,22 +331,25 @@ Public Class ucrHourlyWind
     ''' <param name="ucrDayControl"></param>
     ''' <param name="ucrNavigationControl"></param>
     Public Sub SetKeyControls(ucrStationControl As ucrStationSelector, ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrNavigationControl As ucrNavigation)
-        AddLinkedControlFilters(ucrStationControl, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrYearControl, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrMonthControl, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrDayControl, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
-
-        ucrNavigationControl.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
-        ucrNavigationControl.SetKeyControls("stationId", ucrStationControl)
-        ucrNavigationControl.SetKeyControls("yyyy", ucrYearControl)
-        ucrNavigationControl.SetKeyControls("mm", ucrMonthControl)
-        ucrNavigationControl.SetKeyControls("dd", ucrDayControl)
 
         ucrLinkedStation = ucrStationControl
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
         ucrLinkedDay = ucrDayControl
         ucrLinkedNavigation = ucrNavigationControl
+
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+
+        ucrLinkedNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
+        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+
+
     End Sub
 
     ''' <summary>
