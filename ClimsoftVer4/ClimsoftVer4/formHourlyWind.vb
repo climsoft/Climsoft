@@ -1088,7 +1088,7 @@ Public Class formHourlyWind
         ds.Tables("form_hourlywind").Rows(inc).Item("stationId") = cboStation.SelectedValue
         ds.Tables("form_hourlywind").Rows(inc).Item("yyyy") = txtYear.Text
         ds.Tables("form_hourlywind").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_hourlywind").Rows(inc).Item("hh") = cboDay.Text
+        'ds.Tables("form_hourlywind").Rows(inc).Item("hh") = cboDay.Text
 
         'Update wind direction values in database
         For m = 4 To 27

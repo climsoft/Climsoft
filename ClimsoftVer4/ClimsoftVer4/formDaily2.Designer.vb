@@ -199,7 +199,8 @@ Partial Class formDaily2
         Me.Label36 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.btnView = New System.Windows.Forms.Button()
-        Me.Label54 = New System.Windows.Forms.Label()
+
+
         YyyyLabel = New System.Windows.Forms.Label()
         Me.groupUnits.SuspendLayout()
         Me.grpDefaultValues.SuspendLayout()
@@ -829,7 +830,7 @@ Partial Class formDaily2
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         Me.cboMonth.Location = New System.Drawing.Point(182, 83)
         Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(41, 21)
+        Me.cboMonth.Size = New System.Drawing.Size(68, 21)
         Me.cboMonth.TabIndex = 3
         '
         'cboHour
@@ -838,7 +839,7 @@ Partial Class formDaily2
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.cboHour.Location = New System.Drawing.Point(308, 84)
         Me.cboHour.Name = "cboHour"
-        Me.cboHour.Size = New System.Drawing.Size(39, 21)
+        Me.cboHour.Size = New System.Drawing.Size(51, 21)
         Me.cboHour.TabIndex = 4
         '
         'btnHelp
@@ -957,7 +958,7 @@ Partial Class formDaily2
         '
         Me.txtYear.Location = New System.Drawing.Point(68, 84)
         Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(40, 20)
+        Me.txtYear.Size = New System.Drawing.Size(55, 20)
         Me.txtYear.TabIndex = 2
         '
         'txtPeriod10Field076
@@ -1628,6 +1629,7 @@ Partial Class formDaily2
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+
         'Label54
         '
         Me.Label54.AutoSize = True
@@ -1636,12 +1638,14 @@ Partial Class formDaily2
         Me.Label54.Size = New System.Drawing.Size(37, 13)
         Me.Label54.TabIndex = 661
         Me.Label54.Text = "Period"
+
         '
         'formDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(724, 613)
+
         Me.Controls.Add(Me.Label54)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.chkEnableSequencer)
@@ -1996,5 +2000,7 @@ Partial Class formDaily2
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents chkEnableSequencer As System.Windows.Forms.CheckBox
     Friend WithEvents btnView As System.Windows.Forms.Button
+
     Friend WithEvents Label54 As System.Windows.Forms.Label
+
 End Class

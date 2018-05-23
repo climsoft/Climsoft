@@ -302,6 +302,7 @@ Public Class formDaily2
 
         maxRows = ds.Tables("form_daily2").Rows.Count
 
+
         Try
             '--------------------------------
             'Fill combobox for station identifier with station list from station table
@@ -339,6 +340,7 @@ Public Class formDaily2
                 MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
             End If
             da3.Fill(ds3, "obsElem")
+
             'Populate station combobox
             With cboElement
                 .DataSource = ds3.Tables("obsElem")
@@ -1585,6 +1587,9 @@ Public Class formDaily2
         viewRecords.viewTableRecords(sql)
     End Sub
 
+    Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
+
+    End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
