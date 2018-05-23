@@ -199,6 +199,7 @@ Partial Class formDaily2
         Me.Label36 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.Label54 = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.groupUnits.SuspendLayout()
         Me.grpDefaultValues.SuspendLayout()
@@ -232,7 +233,7 @@ Partial Class formDaily2
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(359, 192)
+        Me.Label35.Location = New System.Drawing.Point(358, 192)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(27, 13)
         Me.Label35.TabIndex = 570
@@ -241,7 +242,7 @@ Partial Class formDaily2
         'Label34
         '
         Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(163, 191)
+        Me.Label34.Location = New System.Drawing.Point(163, 192)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(27, 13)
         Me.Label34.TabIndex = 569
@@ -250,7 +251,7 @@ Partial Class formDaily2
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(303, 191)
+        Me.Label33.Location = New System.Drawing.Point(303, 192)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(34, 13)
         Me.Label33.TabIndex = 568
@@ -259,7 +260,7 @@ Partial Class formDaily2
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(265, 191)
+        Me.Label32.Location = New System.Drawing.Point(265, 192)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(26, 13)
         Me.Label32.TabIndex = 567
@@ -865,7 +866,7 @@ Partial Class formDaily2
         Me.btnCommit.Location = New System.Drawing.Point(100, 534)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 38
+        Me.btnCommit.TabIndex = 37
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -883,7 +884,7 @@ Partial Class formDaily2
         Me.btnAddNew.Location = New System.Drawing.Point(13, 534)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 37
+        Me.btnAddNew.TabIndex = 38
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -1181,7 +1182,7 @@ Partial Class formDaily2
         'Label38
         '
         Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(503, 191)
+        Me.Label38.Location = New System.Drawing.Point(503, 192)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(34, 13)
         Me.Label38.TabIndex = 638
@@ -1190,7 +1191,7 @@ Partial Class formDaily2
         'Label39
         '
         Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(465, 191)
+        Me.Label39.Location = New System.Drawing.Point(465, 192)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(26, 13)
         Me.Label39.TabIndex = 637
@@ -1590,7 +1591,7 @@ Partial Class formDaily2
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(194, 191)
+        Me.Label31.Location = New System.Drawing.Point(194, 192)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(37, 13)
         Me.Label31.TabIndex = 656
@@ -1627,11 +1628,21 @@ Partial Class formDaily2
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(387, 192)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(37, 13)
+        Me.Label54.TabIndex = 661
+        Me.Label54.Text = "Period"
+        '
         'formDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(724, 613)
+        Me.Controls.Add(Me.Label54)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.chkEnableSequencer)
         Me.Controls.Add(Me.Label36)
@@ -1985,4 +1996,5 @@ Partial Class formDaily2
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents chkEnableSequencer As System.Windows.Forms.CheckBox
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents Label54 As System.Windows.Forms.Label
 End Class
