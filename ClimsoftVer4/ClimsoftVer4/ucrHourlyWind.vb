@@ -124,9 +124,6 @@ Public Class ucrHourlyWind
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
 
-    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
-        ucrLinkedNavigation = ucrNewNavigation
-    End Sub
 
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
@@ -325,16 +322,29 @@ Public Class ucrHourlyWind
     End Function
 
     ''' <summary>
-    ''' Sets the linked year,month and day control to be used for 
-    ''' checking whether data entry in this control should be allowed for the selected values
+    ''' Sets the controls used by this control station,year,month,day and ucrNavigation controls 
     ''' </summary>
+    ''' <param name="ucrStationControl"></param>
     ''' <param name="ucrYearControl"></param>
     ''' <param name="ucrMonthControl"></param>
     ''' <param name="ucrDayControl"></param>
-    Public Sub SetYearMonthDayLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay)
+    ''' <param name="ucrNavigationControl"></param>
+    Public Sub SetKeyControls(ucrStationControl As ucrStationSelector, ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrNavigationControl As ucrNavigation)
+        AddLinkedControlFilters(ucrStationControl, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrYearControl, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrMonthControl, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrDayControl, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+
+        ucrNavigationControl.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrNavigationControl.SetKeyControls("stationId", ucrStationControl)
+        ucrNavigationControl.SetKeyControls("yyyy", ucrYearControl)
+        ucrNavigationControl.SetKeyControls("mm", ucrMonthControl)
+        ucrNavigationControl.SetKeyControls("dd", ucrDayControl)
+
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
         ucrLinkedDay = ucrDayControl
+        ucrLinkedNavigation = ucrNavigationControl
     End Sub
 
     ''' <summary>

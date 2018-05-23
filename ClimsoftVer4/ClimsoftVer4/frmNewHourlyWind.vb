@@ -9,9 +9,6 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        'TODO 
-        'If by default the selector is to be sorted by name
-        'then this can be removed
         ucrStationSelector.SortByStationName()
 
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
@@ -21,35 +18,11 @@
         ucrHourlyWind.SetDirectionValidation(112)
         ucrHourlyWind.SetSpeedValidation(111)
 
-        AssignLinkToKeyField(ucrHourlyWind)
+        ucrHourlyWind.SetKeyControls(ucrStationSelector, ucrYearSelector, ucrMonth, ucrDay, ucrNavigation)
 
-        'TO CORRECTLY SORT THE RECORDS IN THE NAVIGATION IN SEQUENCE OF
-        'OF HOW THEY WERE SAVED THE entryDatetime NEEDS
-        'TO BE INCLUDED. CURRENTLY ITS NOT IN OUR MODEL
-
-        'ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd", "entryDatetime"})))
-        ucrNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
-        ucrNavigation.SetKeyControls("stationId", ucrStationSelector)
-        ucrNavigation.SetKeyControls("yyyy", ucrYearSelector)
-        ucrNavigation.SetKeyControls("mm", ucrMonth)
-        ucrNavigation.SetKeyControls("dd", ucrDay)
-
-        ucrHourlyWind.SetYearMonthDayLink(ucrYearSelector, ucrMonth, ucrDay)
-
-        'THIS WILL WORK ONCE WE INCLUDE THE entryDatetime AS A FIELD FOR ucrNavigation
-        'ucrNavigation.SetSortBy("entryDatetime")
-        ucrHourlyWind.SetLinkedNavigation(ucrNavigation)
         ucrNavigation.PopulateControl()
 
         SaveEnable()
-
-    End Sub
-
-    Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
-        ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
