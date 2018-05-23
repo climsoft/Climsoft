@@ -13,6 +13,7 @@ Public Class ucrHourlyWind
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
     Private ucrLinkedNavigation As ucrNavigation
+    Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedDay As ucrDay
@@ -341,6 +342,7 @@ Public Class ucrHourlyWind
         ucrNavigationControl.SetKeyControls("mm", ucrMonthControl)
         ucrNavigationControl.SetKeyControls("dd", ucrDayControl)
 
+        ucrLinkedStation = ucrStationControl
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
         ucrLinkedDay = ucrDayControl
