@@ -11,67 +11,37 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub InitaliseDialog()
+        ucrFormDaily.SetKeyControls(ucrNewYear:=ucrYearSelector, ucrNewMonth:=ucrMonth, ucrNewHour:=ucrHour, ucrNewStation:=ucrStationSelector, ucrNewElement:=ucrElementSelector, ucrNewNavigation:=ucrDaiy2Navigation, ucrNewVisibilityUnits:=ucrVisibilityUnits, ucrNewCloudheightUnits:=ucrCloudheightUnits, ucrNewPrecipUnits:=ucrPrecipUnits, ucrNewTempUnits:=ucrTempUnits)
         ' Currently only works with this sequencer table so textbox disabled
         txtSequencer.Text = "seq_daily_element"
         txtSequencer.Enabled = False
         chkEnableSequencer.Checked = True
 
         'Sets the linked year and month controls to enable appropraite field for different months
-        ucrFormDaily.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
-        AssignLinkToKeyField(ucrFormDaily)
+        ' ucrFormDaily.SetYearAndMonthLink(ucrYearSelector, ucrMonth)
 
-        'Sets table name and data table field for Visibility
-        ucrVisibilityUnits.SetTableNameAndField("form_daily2", "visUnits")
         'Sets values for the units combobox
         ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
-        AssignLinkToKeyField(ucrVisibilityUnits)
         ucrVisibilityUnits.PopulateControl()
         ucrVisibilityUnits.SetViewType("visUnits")
 
 
-        ucrCloudheightUnits.SetTableNameAndField("form_daily2", "cloudHeightUnits")
         ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"metres", "feet"})
-        AssignLinkToKeyField(ucrCloudheightUnits)
         ucrCloudheightUnits.PopulateControl()
         ucrCloudheightUnits.SetViewType("cloudHeightUnits")
 
-        ucrPrecipUnits.SetTableNameAndField("form_daily2", "precipUnits")
         ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
-        AssignLinkToKeyField(ucrPrecipUnits)
         ucrPrecipUnits.PopulateControl()
         ucrPrecipUnits.SetViewType("precipUnits")
 
-        ucrTempUnits.SetTableNameAndField("form_daily2", "temperatureUnits")
+
         ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
-        AssignLinkToKeyField(ucrTempUnits)
         ucrTempUnits.PopulateControl()
         ucrTempUnits.SetViewType("temperatureUnits")
 
-        ucrDaiy2Navigation.SetTableNameAndFields("form_daily2", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
-
-        'Sets key controls for the navigation
-        ucrDaiy2Navigation.SetKeyControls("stationId", ucrStationSelector)
-        ucrDaiy2Navigation.SetKeyControls("elementId", ucrElementSelector)
-        ucrDaiy2Navigation.SetKeyControls("yyyy", ucrYearSelector)
-        ucrDaiy2Navigation.SetKeyControls("mm", ucrMonth)
-        ucrDaiy2Navigation.SetKeyControls("hh", ucrHour)
-
-        'Sets the linked Navigation control on the form
-        ucrFormDaily.SetLinkedNavigation(ucrDaiy2Navigation)
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
 
-    End Sub
-    ''' <summary>
-    ''' Sets links to key controls as filters
-    ''' </summary>
-    ''' <param name="ucrControl"></param>
-    Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
-        ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click

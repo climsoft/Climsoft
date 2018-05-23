@@ -9,32 +9,10 @@
         selectAllHours = False
     End Sub
     Private Sub InitaliseDialog()
-        AssignLinkToKeyField(ucrHourly)
-
-        'setting the table and fields for the Naviation control
-        ucrHourlyNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
-
-        'setting the key contols for the Navigation control 
-        ucrHourlyNavigation.SetKeyControls("stationId", ucrStationSelector)
-        ucrHourlyNavigation.SetKeyControls("elementId", ucrElementSelector)
-        ucrHourlyNavigation.SetKeyControls("yyyy", ucrYearSelector)
-        ucrHourlyNavigation.SetKeyControls("mm", ucrMonth)
-        ucrHourlyNavigation.SetKeyControls("dd", ucrDay)
-
         txtSequencer.Text = "seq_month_day_element"
-
-        ucrHourly.SetLinkedNavigation(ucrHourlyNavigation)
+        ucrHourly.SetKeyControls(ucrElement:=ucrElementSelector, ucrYear:=ucrYearSelector, ucrMonth:=ucrMonth, ucrDay:=ucrDay, ucrStation:=ucrStationSelector, ucrNavigation:=ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
-    End Sub
-
-    Private Sub AssignLinkToKeyField(ucrControl As ucrBaseDataLink)
-        ucrControl.AddLinkedControlFilters(ucrStationSelector, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        ucrControl.AddLinkedControlFilters(ucrElementSelector, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrYearSelector, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        ucrControl.AddLinkedControlFilters(ucrDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
-
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
@@ -137,9 +115,13 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ' temporary until we know how to get all fields from table without specifying names
-        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+        If ucrYearSelector.isLeapYear Then
+            txtSequencer.Text = "seq_month_day_leap_yr"
+        Else
+            txtSequencer.Text = "seq_month_day"
+        End If
 
+        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
         ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
         ucrHourly.UcrValueFlagPeriod0.Focus()
 

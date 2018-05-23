@@ -13,6 +13,11 @@ Public Class ucrHourly
     Private lstTextboxControls As List(Of ucrTextBox)
     Private ucrLinkedNavigation As ucrNavigation
     Private ElementId As Integer
+    Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedMonth As ucrMonth
+    Private ucrLinkedDay As ucrDay
+    Private ucrLinkedStation As ucrStationSelector
+    Private ucrlinkedElement As ucrElementSelector
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctr As Control
@@ -74,6 +79,7 @@ Public Class ucrHourly
                     fhRecord = New form_hourly
                     bUpdating = False
                 End If
+                ValidateDataEntryPermision()
             End If
             For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
                 ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & "_" & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag)}))
@@ -84,13 +90,13 @@ Public Class ucrHourly
         End If
     End Sub
 
-    ''' <summary>
-    ''' Sets the linked navigation control 
-    ''' </summary>
-    ''' <param name="ucrNewNavigation"></param>
-    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
-        ucrLinkedNavigation = ucrNewNavigation
-    End Sub
+    '''' <summary>
+    '''' Sets the linked navigation control 
+    '''' </summary>
+    '''' <param name="ucrNewNavigation"></param>
+    'Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
+    '    ucrLinkedNavigation = ucrNewNavigation
+    'End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         Dim ctrVFP As New ucrValueFlagPeriod
@@ -232,6 +238,52 @@ Public Class ucrHourly
                     End If
                 End If
             Next
+        End If
+    End Sub
+    ''' <summary>
+    ''' Sets the Key controls
+    ''' </summary>
+    ''' <param name="ucrYear"></param>
+    ''' <param name="ucrMonth"></param>
+    ''' <param name="ucrDay"></param>
+    Public Sub SetKeyControls(ucrYear As ucrYearSelector, ucrMonth As ucrMonth, ucrDay As ucrDay, ucrStation As ucrStationSelector, ucrElement As ucrElementSelector, ucrNavigation As ucrNavigation)
+        ucrLinkedYear = ucrYear
+        ucrLinkedMonth = ucrMonth
+        ucrLinkedDay = ucrDay
+        ucrLinkedStation = ucrStation
+        ucrlinkedElement = ucrElement
+        ucrLinkedNavigation = ucrNavigation
+
+
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrlinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+
+        'setting the key contols for the Navigation control 
+        ucrLinkedNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.SetKeyControls("elementId", ucrlinkedElement)
+        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
+        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+    End Sub
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    Private Sub ValidateDataEntryPermision()
+        Dim TodaysDate As New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
+        Dim SelectedDate As New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+
+        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Exit Sub
+        End If
+
+        If Date.Compare(SelectedDate, TodaysDate) < 0 Then
+            Me.Enabled = True
+        Else
+            Me.Enabled = False
         End If
     End Sub
 
