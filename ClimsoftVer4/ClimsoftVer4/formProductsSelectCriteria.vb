@@ -375,12 +375,12 @@ Public Class formProductsSelectCriteria
                     'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
                     'DataProducts(sql, lblProductType.Text)
                     InstatProduct(sdate, edate, lblProductType.Text)
-                Case "Missing data"
+                Case "Data Gaps"
                     'RefreshStatsCache()
-                    'RefreshMissingCache()
-                    'GatherStats()
+                    RefreshMissingCache()
+                    GatherStats()
                     'findmissing()
-                    'frmplotter.show()
+                    frmPlotter.Show()
 
                 Case "Rclimdex"
                     RclimdexProducts(sdate, edate, lblProductType.Text)
@@ -1198,18 +1198,18 @@ Err:
     End Sub
     ' Missing data plotting modules by Victor
 
-    Public Sub RefreshStatsCache()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand
-        cmd.Connection = conn
-        cmd.CommandText = "refresh_stats"
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.ExecuteNonQuery()
-    End Sub
+    'Public Sub RefreshStatsCache()
+    '    cmd = New MySql.Data.MySqlClient.MySqlCommand
+    '    cmd.Connection = conn
+    '    cmd.CommandText = "refresh_stats"
+    '    cmd.CommandType = CommandType.StoredProcedure
+    '    cmd.ExecuteNonQuery()
+    'End Sub
 
     Public Sub RefreshMissingCache()
         cmd = New MySql.Data.MySqlClient.MySqlCommand
         cmd.Connection = conn
-        cmd.CommandText = "REFRESH_data"
+        cmd.CommandText = "refresh_data"
         cmd.CommandType = CommandType.StoredProcedure
         cmd.ExecuteNonQuery()
     End Sub
@@ -1233,66 +1233,66 @@ Err:
         End If
     End Sub
 
-    Public Sub findmissing()
-        Dim fl As String
+    'Public Sub findmissing()
+    '    Dim fl As String
 
-        If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
-            For i = 0 To lstvStations.Items.Count - 1
-                For j = 0 To lstvElements.Items.Count - 1
-                    cmd = New MySql.Data.MySqlClient.MySqlCommand
-                    cmd.Connection = conn
-                    cmd.CommandText = "missing_data"
-                    cmd.CommandType = CommandType.StoredProcedure
-                    cmd.CommandTimeout = 0
-                    cmd.Parameters.AddWithValue("Stn", lstvStations.Items(i).Text)
-                    cmd.Parameters.AddWithValue("ELEM", lstvElements.Items(j).Text)
-                    cmd.Parameters.AddWithValue("STARTDATE", sdate)
-                    cmd.Parameters.AddWithValue("ENDDATE", edate)
-                    cmd.ExecuteNonQuery()
-                Next
-            Next
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products-missing-records.csv"
+    '    If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
+    '        For i = 0 To lstvStations.Items.Count - 1
+    '            For j = 0 To lstvElements.Items.Count - 1
+    '                cmd = New MySql.Data.MySqlClient.MySqlCommand
+    '                cmd.Connection = conn
+    '                cmd.CommandText = "missing_data"
+    '                cmd.CommandType = CommandType.StoredProcedure
+    '                cmd.CommandTimeout = 0
+    '                cmd.Parameters.AddWithValue("Stn", lstvStations.Items(i).Text)
+    '                cmd.Parameters.AddWithValue("ELEM", lstvElements.Items(j).Text)
+    '                cmd.Parameters.AddWithValue("STARTDATE", sdate)
+    '                cmd.Parameters.AddWithValue("ENDDATE", edate)
+    '                cmd.ExecuteNonQuery()
+    '            Next
+    '        Next
+    '        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products-missing-records.csv"
 
-            FileOpen(11, fl, OpenMode.Output)
+    '        FileOpen(11, fl, OpenMode.Output)
 
-            ' Write Column Headers
-            Write(11, "Station")
-            Write(11, "Latatitude")
-            Write(11, "Longitude")
-            Write(11, "Elevation")
-            Write(11, "Element")
-            Write(11, "Year")
-            Write(11, "Month")
-            Write(11, "Day")
+    '        ' Write Column Headers
+    '        Write(11, "Station")
+    '        Write(11, "Latatitude")
+    '        Write(11, "Longitude")
+    '        Write(11, "Elevation")
+    '        Write(11, "Element")
+    '        Write(11, "Year")
+    '        Write(11, "Month")
+    '        Write(11, "Day")
 
-            PrintLine(11)
+    '        PrintLine(11)
 
-            sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " & _
-                  "FROM(missing_data, station, obselement) WHERE station.stationId = missing_data.STN_ID AND obselement.elementId=missing_data.ELEM"
-            Try
-                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " & _
+    '              "FROM(missing_data, station, obselement) WHERE station.stationId = missing_data.STN_ID AND obselement.elementId=missing_data.ELEM"
+    '        Try
+    '            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
 
-                ds.Clear()
-                da.Fill(ds, "missing")
+    '            ds.Clear()
+    '            da.Fill(ds, "missing")
 
-                maxRows = ds.Tables("missing").Rows.Count
-                maxColumns = ds.Tables("missing").Columns.Count
+    '            maxRows = ds.Tables("missing").Rows.Count
+    '            maxColumns = ds.Tables("missing").Columns.Count
 
-                For i = 0 To maxRows - 1
-                    For j = 0 To maxColumns - 1
-                        Write(11, ds.Tables("missing").Rows(i).Item(j))
-                    Next
-                    PrintLine(11)
-                Next
+    '            For i = 0 To maxRows - 1
+    '                For j = 0 To maxColumns - 1
+    '                    Write(11, ds.Tables("missing").Rows(i).Item(j))
+    '                Next
+    '                PrintLine(11)
+    '            Next
 
-                FileClose(11)
+    '            FileClose(11)
 
-                CommonModules.ViewFile(fl)
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
-    End Sub
+    '            CommonModules.ViewFile(fl)
+    '        Catch ex As Exception
+    '            MsgBox(ex.Message)
+    '        End Try
+    '    End If
+    'End Sub
 
 
 
