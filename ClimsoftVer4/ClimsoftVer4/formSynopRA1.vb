@@ -64,6 +64,7 @@ Public Class formSynopRA1
     Dim obsValue As String
     Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim dsSequencer As New DataSet
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub navigateRecords()
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
@@ -247,7 +248,7 @@ Public Class formSynopRA1
         Dim strDay As String
         Dim strHour As String
         Dim k As Integer
-
+        'Try
         dataFormRecCount = ds.Tables("form_synoptic_2_RA1").Rows.Count
 
         If dataFormRecCount > 0 Then
@@ -263,75 +264,79 @@ Public Class formSynopRA1
             strDay = cboDay.Text
             strHour = cboHour.Text
         End If
-        'Check if year in last observation record is a leap year
-        Dim yearCheck As New dataEntryGlobalRoutines
-        If yearCheck.checkIsLeapYear(strYear) = True Then
-            'MsgBox("Leap year!")
-            Sql = "SELECT * FROM " & txtSequencer.Text & "_leap_yr"
-        Else
-            'MsgBox("Non leap year!")
-            Sql = "SELECT * FROM " & txtSequencer.Text
-        End If
+    
+        ''Check if year in last observation record is a leap year
+        'Dim yearCheck As New dataEntryGlobalRoutines
+        'If yearCheck.checkIsLeapYear(strYear) = True Then
+        '    'MsgBox("Leap year!")
+        '    Sql = "SELECT * FROM " & txtSequencer.Text & "_leap_yr"
+        'Else
+        '    'MsgBox("Non leap year!")
+        '    Sql = "SELECT * FROM " & txtSequencer.Text
+        'End If
 
-        Dim dsLastDataRecord As New DataSet
-        Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecHour As String, lastRecElement As String, stn As String
+        'Dim dsLastDataRecord As New DataSet
+        'Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+        'Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecHour, lastRecElement, stn As String
 
-        SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
-        dsLastDataRecord.Clear()
-        daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
-        daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+        ''SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
+        'SQL_last_record = "SELECT stationId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
 
-        'Initialize header fields required for sequencer
-        stn = cboStation.SelectedValue
-        cboStation.SelectedValue = stn
-        lastRecHour = cboDay.Text
-        lastRecMonth = cboMonth.Text
-        lastRecYear = txtYear.Text
+        'dsLastDataRecord.Clear()
+        'daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+        'daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
-        If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
-            stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
-            cboStation.SelectedValue = stn
-            lastRecHour = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("hh")
-            lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
-            lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
-            lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
-        End If
+        ''Initialize header fields required for sequencer
+        'stn = cboStation.SelectedValue
+        'cboStation.SelectedValue = stn
+        'lastRecHour = cboDay.Text
+        'lastRecMonth = cboMonth.Text
+        'lastRecYear = txtYear.Text
 
-        daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-        'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-        'of records in the recordest table whenever the AddNew button is clicked
-        dsSequencer.Clear()
-        daSequencer.Fill(dsSequencer, "sequencer")
+        'If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+        '    stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+        '    cboStation.SelectedValue = stn
+        '    lastRecHour = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("hh")
+        '    lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
+        '    lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+        '    'lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
+        'End If
 
-        seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+        'daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+        ''Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
+        ''of records in the recordest table whenever the AddNew button is clicked
+        'dsSequencer.Clear()
+        'daSequencer.Fill(dsSequencer, "sequencer")
 
-        'MsgBox("station: " & cboStation.SelectedValue & " yyyy: " & strYear & " mm: " & strMonth & " dd: " & strDay & " hh: " & strHour)
+        'seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
 
-        For k = 0 To seqRecCount - 1
-            If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecHour And _
-               dsSequencer.Tables("sequencer").Rows(k).Item("hh") = lastRecHour Then
-                'If it is the last day of the year and the last synoptic observation hour then increment the year by 1.
-                If k = seqRecCount - 1 Then
-                    'txtYear.Text = Val(txtYear.Text) + 1
-                    txtYear.Text = Val(lastRecYear) + 1
-                    'Check if the following is a leap year
-                    If yearCheck.checkIsLeapYear(txtYear.Text) = True Then
-                        txtSequencer.Text = "seq_month_day_synoptime_leap_yr"
-                    Else
-                        txtSequencer.Text = "seq_month_day_synoptime"
-                    End If
-                    cboMonth.Text = 1
-                    cboDay.Text = 1
-                    cboHour.Text = 0
-                Else
-                    txtYear.Text = strYear
-                    cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
-                    cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
-                    cboHour.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("hh")
-                End If
-            End If
-        Next k
+        ''MsgBox("station: " & cboStation.SelectedValue & " yyyy: " & strYear & " mm: " & strMonth & " dd: " & strDay & " hh: " & strHour)
+
+        'For k = 0 To seqRecCount - 1
+        '    If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecHour And _
+        '       dsSequencer.Tables("sequencer").Rows(k).Item("hh") = lastRecHour Then
+        '        'If it is the last day of the year and the last synoptic observation hour then increment the year by 1.
+        '        If k = seqRecCount - 1 Then
+        '            'txtYear.Text = Val(txtYear.Text) + 1
+        '            txtYear.Text = Val(lastRecYear) + 1
+        '            'Check if the following is a leap year
+        '            If yearCheck.checkIsLeapYear(txtYear.Text) = True Then
+        '                txtSequencer.Text = "seq_month_day_synoptime_leap_yr"
+        '            Else
+        '                txtSequencer.Text = "seq_month_day_synoptime"
+        '            End If
+        '            cboMonth.Text = 1
+        '            cboDay.Text = 1
+        '            cboHour.Text = 0
+        '        Else
+        '            txtYear.Text = strYear
+        '            cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
+        '            cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
+        '            cboHour.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("hh")
+        '        End If
+        '    End If
+        'Next k
+
 
         Dim m As Integer
         Dim ctl As Control
@@ -355,6 +360,18 @@ Public Class formSynopRA1
             Next ctl
         Next m
 
+        ' Set the next data entry time to the next synoptic hour
+        Dim Datehdr As DateTime
+
+        Datehdr = DateSerial(strYear, strMonth, strDay) & " " & strHour & ":00"
+        Datehdr = DateAdd("h", 3, Datehdr)
+
+        txtYear.Text = DateAndTime.Year(Datehdr)
+        cboMonth.Text = DateAndTime.Month(Datehdr)
+        cboDay.Text = DateAndTime.Day(Datehdr)
+        cboHour.Text = DateAndTime.Hour(Datehdr)
+
+
         'Set record index to last record
         inc = maxRows
 
@@ -370,16 +387,17 @@ Public Class formSynopRA1
         ' ''daReg.Fill(dsReg, "regData")
 
         '----------------------------------------
-
+        'Get the value for station level pressure
         txtVal_Elem301Field010.Text = dsReg.Tables("regData").Rows(0).Item("keyValue")
 
         Dim tmaxHour1 As String, tmaxHour2 As String, gminStartMonth As String, gminEndMonth As String
 
-        'Get first hour for reading tmax
+        'Get first hour for reading tmax, tmin and precip 
         tmaxHour1 = dsReg.Tables("regData").Rows(1).Item("keyValue")
         'Get second hour for reading tmax
         tmaxHour2 = dsReg.Tables("regData").Rows(2).Item("keyValue")
         gminStartMonth = dsReg.Tables("regData").Rows(3).Item("keyValue")
+        ' Get Month for starting recording of Gmin
         gminEndMonth = dsReg.Tables("regData").Rows(4).Item("keyValue")
 
         'MsgBox(tmaxHour1)
@@ -424,7 +442,7 @@ Public Class formSynopRA1
             txtVal_Elem046Field053.Enabled = True
             txtVal_Elem046Field053.BackColor = Color.White
             txtFlag046Field102.Enabled = True
-            txtVal_Elem046Field053.BackColor = Color.White
+            txtFlag046Field102.BackColor = Color.White
         Else
             txtVal_Elem003Field046.Enabled = False
             txtVal_Elem003Field046.BackColor = Color.LightGray
@@ -464,6 +482,9 @@ Public Class formSynopRA1
             txtFlag099Field096.Enabled = False
             txtFlag099Field096.BackColor = Color.LightGray
         End If
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
 
     End Sub
 
@@ -604,33 +625,34 @@ Public Class formSynopRA1
                     daValueLimits.Fill(dsValueLimits, "obselement")
 
                     'Get element upper limit
-                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
-                        valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
-                    Else
-                        valUpperLimit = ""
-                    End If
+                    If dsValueLimits.Tables("obselement").Rows.Count < 0 Then
+                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")) Then
+                            valUpperLimit = dsValueLimits.Tables("obselement").Rows(0).Item("upperlimit")
+                        Else
+                            valUpperLimit = ""
+                        End If
 
-                    'Get element lower limit
-                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
-                        valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
-                    Else
-                        valLowerLimit = ""
-                    End If
+                        'Get element lower limit
+                        If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
+                            valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
+                        Else
+                            valLowerLimit = ""
+                        End If
 
-                    'Check upper limit
-                    If ctl.Text <> "" And valUpperLimit <> "" Then
-                        If Not objKeyPress.checkUpperLimit(ctl, obsValue, valUpperLimit) Then
-                            ctl.Focus()
+                        'Check upper limit
+                        If ctl.Text <> "" And valUpperLimit <> "" Then
+                            If Not objKeyPress.checkUpperLimit(ctl, obsValue, valUpperLimit) Then
+                                ctl.Focus()
+                            End If
+                        End If
+
+                        'Check lower limit
+                        If ctl.Text <> "" And valLowerLimit <> "" Then
+                            If Not objKeyPress.checkLowerLimit(ctl, obsValue, valLowerLimit) Then
+                                ctl.Focus()
+                            End If
                         End If
                     End If
-
-                    'Check lower limit
-                    If ctl.Text <> "" And valLowerLimit <> "" Then
-                        If Not objKeyPress.checkLowerLimit(ctl, obsValue, valLowerLimit) Then
-                            ctl.Focus()
-                        End If
-                    End If
-
                 End If
             Next ctl
 
@@ -752,48 +774,50 @@ Public Class formSynopRA1
         flagtextBoxSuffix = ""
         flagIndexDiff = 49
 
-        Try
-            'If {ENTER} key is pressed
-            If e.KeyCode = Keys.Enter Then
+        'Try
+        'If {ENTER} key is pressed
+        If e.KeyCode = Keys.Enter Then
 
-                If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
+            If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
-                    'Check for an observation flag in the texbox for observation value.
-                    ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
-                    If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
-                        'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-                        'to the value string in the textbox.
-                        obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
-                        'Get the observation value by leaving out the last character from the string entered in the textbox
-                        obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
+                'Check for an observation flag in the texbox for observation value.
+                ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
+                If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
+                    'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
+                    'to the value string in the textbox.
+                    obsFlag = Strings.Right(Me.ActiveControl.Text, 1).ToUpper
+                    'Get the observation value by leaving out the last character from the string entered in the textbox
+                    obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
 
-                        Me.ActiveControl.Text = obsVal
+                    Me.ActiveControl.Text = obsVal
+                End If
+                'Now assign obsFlag to correct texbox on the form
+                For Each ctrl In Me.Controls
+                    'Loop through all controls on form
+                    'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
+                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                        ctrl.Text = obsFlag
                     End If
-                    'Now assign obsFlag to correct texbox on the form
-                    For Each ctrl In Me.Controls
-                        'Loop through all controls on form
-                        'Locate the textbox for the flag field by calling the Function "getFlagTexboxSuffix"
-                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-                            ctrl.Text = obsFlag
-                        End If
-                    Next ctrl
+                Next ctrl
 
-                    'Check that numeric value has been entered for observation value
-                    objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
+                'Check that numeric value has been entered for observation value
+                objKeyPress.checkIsNumeric(Me.ActiveControl.Text, Me.ActiveControl)
 
-                    ''Get the element limits
+                ''Get the element limits
 
-                    elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
-                    sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
-                    '
-                    daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
-                    'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
-                    dsValueLimits.Clear()
-                    'Add row for element code associated with active control
-                    daValueLimits.Fill(dsValueLimits, "obselement")
+                elemCode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
+                sqlValueLimits = "SELECT elementId,upperLimit,lowerLimit FROM obselement WHERE elementId=" & elemCode
+                '
+                daValueLimits = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlValueLimits, conn)
+                'Clear all rows in dataset before filling dataset with new row record for element code associated with active control
+                dsValueLimits.Clear()
+                'Add row for element code associated with active control
+                daValueLimits.Fill(dsValueLimits, "obselement")
 
-                    obsValue = Me.ActiveControl.Text
+                obsValue = Me.ActiveControl.Text
+                If dsValueLimits.Tables("obselement").Rows.Count > 0 Then ' Limits record available
                     'Get element lower limit
+
                     If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")) Then
                         valLowerLimit = dsValueLimits.Tables("obselement").Rows(0).Item("lowerlimit")
                     Else
@@ -815,62 +839,66 @@ Public Class formSynopRA1
                         objKeyPress.checkUpperLimit(Me.ActiveControl, obsValue, valUpperLimit)
                     End If
                     'MsgBox("Obs Value: " & obsValue & " Upper Limit: " & valUpperLimit & " Lower Limit: " & valLowerLimit)
-                ElseIf Me.ActiveControl.Name = "txtYear" Then
-                    'Check for numeric
-                    objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
-                    'Check valid year
-                    If tabNext = True Then
-                        objKeyPress.checkValidYear(txtYear.Text, txtYear)
-                    End If
-                ElseIf Me.ActiveControl.Name = "cboMonth" Then
-                    'Check for numeric
-                    objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
-                    'Check valid month
-                    objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
-                ElseIf Me.ActiveControl.Name = "cboDay" Then
-                    'Check for numeric
-                    objKeyPress.checkIsNumeric(cboDay.Text, cboDay)
-                    'Check valid day
-                    If tabNext = True Then
-                        objKeyPress.checkValidDay(cboDay.Text, cboDay)
-                    End If
-                    If tabNext = True Then
-                        objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
-                    End If
-                    If tabNext = True Then
-                        objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
-                    End If
-                ElseIf Me.ActiveControl.Name = "cboHour" Then
-                    'Check for numeric
-                    objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
-                    'Check valid hour
-                    objKeyPress.checkValidHour(cboHour.Text, cboHour)
-                ElseIf Me.ActiveControl.Name = "cboStation" Then
-                    Dim itemFound As Boolean
-                    If Len(cboStation.SelectedValue) > 1 Then
-                        itemFound = True
-                    Else
-                        itemFound = False
-                    End If
-                    objKeyPress.checkExists(itemFound, cboStation)
-                Else
-                    ' Generate flag M for missing data for blank values
-                    For Each ctrl In Me.Controls
-                        If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
-                            ctrl.Text = "M" 'obsFlag
-                            Exit For
-                        End If
-                    Next ctrl
                 End If
 
-                'if TAB next is true Activate [TAB]
+            ElseIf Me.ActiveControl.Name = "txtYear" Then
+                'Check for numeric
+                objKeyPress.checkIsNumeric(txtYear.Text, txtYear)
+                'Check valid year
                 If tabNext = True Then
-                    My.Computer.Keyboard.SendKeys("{TAB}")
+                    objKeyPress.checkValidYear(txtYear.Text, txtYear)
                 End If
+            ElseIf Me.ActiveControl.Name = "cboMonth" Then
+                'Check for numeric
+                objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
+                'Check valid month
+                objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
+            ElseIf Me.ActiveControl.Name = "cboDay" Then
+                'Check for numeric
+                objKeyPress.checkIsNumeric(cboDay.Text, cboDay)
+                'Check valid day
+                If tabNext = True Then
+                    objKeyPress.checkValidDay(cboDay.Text, cboDay)
+                End If
+                If tabNext = True Then
+                    objKeyPress.checkValidDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                End If
+                If tabNext = True Then
+                    objKeyPress.checkFutureDate(cboDay.Text, cboMonth.Text, txtYear.Text, cboDay)
+                End If
+            ElseIf Me.ActiveControl.Name = "cboHour" Then
+                'Check for numeric
+                objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
+                'Check valid hour
+                objKeyPress.checkValidHour(cboHour.Text, cboHour)
+            ElseIf Me.ActiveControl.Name = "cboStation" Then
+                Dim itemFound As Boolean
+                If Len(cboStation.SelectedValue) > 1 Then
+                    itemFound = True
+                Else
+                    itemFound = False
+                    If FldName.Valid_Stn(cboStation) Then itemFound = True
+                End If
+                objKeyPress.checkExists(itemFound, cboStation)
+            Else
+                ' Generate flag M for missing data for blank values
+                For Each ctrl In Me.Controls
+                    If Strings.Right(ctrl.Name, 3) = objKeyPress.getFlagTexboxSuffix(Me.ActiveControl.Text, Me.ActiveControl, flagIndexDiff) Then
+                        ctrl.Text = "M" 'obsFlag
+                        Exit For
+                    End If
+                Next ctrl
             End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+
+            'if TAB next is true Activate [TAB]
+            If tabNext = True Then
+                My.Computer.Keyboard.SendKeys("{TAB}")
+            End If
+        End If
+        'Catch ex As Exception
+        '    'MsgBox(tabNext)
+        '    MsgBox(ex.Message)
+        'End Try
 
     End Sub
 
@@ -910,86 +938,95 @@ Public Class formSynopRA1
             MessageBox.Show(ex.Message)
         End Try
 
-        maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+        Try
+            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
 
-        '--------------------------------
-        'Fill combobox for station identifier with station list from station table
-        Dim m As Integer
-        Dim ctl As Control
-        Dim ds1 As New DataSet
-        Dim sql1 As String
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-        sql1 = "SELECT stationId,stationName FROM station"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            '--------------------------------
+            'Fill combobox for station identifier with station list from station table
+            Dim m As Integer
+            Dim ctl As Control
+            Dim ds1 As New DataSet
+            Dim sql1 As String
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            sql1 = "SELECT stationId,stationName FROM station"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        da1.Fill(ds1, "station")
-        If ds1.Tables("station").Rows.Count > 0 Then
-            With cboStation
-                .DataSource = ds1.Tables("station")
-                .DisplayMember = "stationName"
-                .ValueMember = "stationId"
-                .SelectedIndex = 0
-            End With
-        Else
-            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        End If
+            da1.Fill(ds1, "station")
+            If ds1.Tables("station").Rows.Count > 0 Then
+                With cboStation
+                    .DataSource = ds1.Tables("station")
+                    .DisplayMember = "stationName"
+                    .ValueMember = "stationId"
+                    .SelectedIndex = 0
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
 
-        ''sql1 = "SELECT stationId,stationName FROM station"
-        ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ''sql1 = "SELECT stationId,stationName FROM station"
+            ''da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        '---------------------------------
-        'Initialize header information for data-entry form
+            '---------------------------------
+            'Initialize header information for data-entry form
 
-        If maxRows > 0 Then
-            'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-            cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+            If maxRows > 0 Then
+                'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
 
-            txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-            cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-            cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-            cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+                txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
+                cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
+                cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
+                cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
 
-            'Initialize textboxes for observation values
-            'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-            For m = 5 To 53
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                'Initialize textboxes for observation values
+                'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+                For m = 5 To 53
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
-            'Initialize textboxes for observation flags
-            'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
-            For m = 54 To 102
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                'Initialize textboxes for observation flags
+                'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
+                For m = 54 To 102
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
 
-            displayRecordNumber()
-        Else
-            'If this is the first record
-            btnAddNew.Enabled = False
-            btnCommit.Enabled = True
-            btnUpdate.Enabled = False
-            btnDelete.Enabled = False
-            btnClear.Enabled = True
-            btnMoveFirst.Enabled = False
-            btnMoveNext.Enabled = False
-            btnMovePrevious.Enabled = False
-            btnMoveLast.Enabled = False
+                displayRecordNumber()
+            Else
+                'If this is the first record
+                btnAddNew.Enabled = False
+                btnCommit.Enabled = True
+                btnUpdate.Enabled = False
+                btnDelete.Enabled = False
+                btnClear.Enabled = True
+                btnMoveFirst.Enabled = False
+                btnMoveNext.Enabled = False
+                btnMovePrevious.Enabled = False
+                btnMoveLast.Enabled = False
 
-            recNumberTextBox.Text = "Record 1 of 1"
-        End If
+                recNumberTextBox.Text = "Record 1 of 1"
+            End If
+
+        Catch ex As Exception
+            If ex.HResult = "-2146233086" Then
+                MsgBox("No Element Selected!   >>> Select them at the Metadata form")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+        End Try
 
     End Sub
 
@@ -1323,11 +1360,11 @@ Public Class formSynopRA1
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
         userName = frmLogin.txtUsername.Text
-        dsSourceTableName = "form_synoptic_2_RA1"
+        dsSourceTableName = "form_synoptic_2_ra1"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
         Else
-            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
     End Sub
@@ -1379,11 +1416,5 @@ Public Class formSynopRA1
     End Sub
 
 
-    Private Sub txVal_Elem132Field050_TextChanged(sender As Object, e As EventArgs) Handles txtVal_Elem132Field050.TextChanged
-
-    End Sub
-
-    Private Sub txtFlag046Field102_TextChanged(sender As Object, e As EventArgs) Handles txtFlag046Field102.TextChanged
-
-    End Sub
+    
 End Class
