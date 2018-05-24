@@ -236,13 +236,13 @@ Public Class ucrDirectionSpeedFlag
                     ucrDirection.bValidateSilently = bValidateSilently
                 Else
                     ucrDDFF.SetBackColor(Color.Cyan)
-                    ucrDDFF.Focus()
+                    'ucrDDFF.Focus()
                     bValuesCorrect = False
                     MsgBox("Wrong number of digits for ddff!", MsgBoxStyle.Exclamation)
                 End If
             Else
                 ucrDDFF.SetBackColor(Color.Red)
-                ucrDDFF.Focus()
+                'ucrDDFF.Focus()
                 bValuesCorrect = False
                 MsgBox("Number expected!", MsgBoxStyle.Critical)
             End If
@@ -251,7 +251,7 @@ Public Class ucrDirectionSpeedFlag
                     bValuesCorrect = True
                 Else
                     ucrDDFF.SetBackColor(Color.Cyan)
-                    ucrDDFF.Focus()
+                    'ucrDDFF.Focus()
                     bValuesCorrect = False
                 End If
             End If
