@@ -65,6 +65,7 @@
     Public Sub SetViewTypeAsDay()
         SetViewType(strDay)
     End Sub
+
     ''' <summary>
     ''' links this control to the year and month control
     ''' </summary>
