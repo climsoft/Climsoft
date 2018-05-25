@@ -75,7 +75,14 @@
     End Sub
 
     Private Sub YearMonthEvtValueChanged()
+        Dim iCurrentSelectedDay As Integer
+        'store the current selected value to retain it after repopulating the control
+        iCurrentSelectedDay = GetValue(strDay)
         PopulateControl()
+        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
+            iCurrentSelectedDay = dtbRecords.Rows.Count
+        End If
+        SetValue(iCurrentSelectedDay)
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
