@@ -65,7 +65,11 @@
     Public Sub SetViewTypeAsDay()
         SetViewType(strDay)
     End Sub
-
+    ''' <summary>
+    ''' links this control to the year and month control
+    ''' </summary>
+    ''' <param name="ucrYearControl"></param>
+    ''' <param name="ucrMonthControl"></param>
     Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
@@ -74,6 +78,9 @@
         AddHandler ucrLinkedMonth.evtValueChanged, AddressOf YearMonthEvtValueChanged
     End Sub
 
+    ''' <summary>
+    ''' this gets called when the linked year or month controls change their values
+    ''' </summary>
     Private Sub YearMonthEvtValueChanged()
         Dim iCurrentSelectedDay As Integer
         'store the current selected value to retain it after repopulating the control
