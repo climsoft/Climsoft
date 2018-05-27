@@ -1,4 +1,5 @@
 ﻿Imports System.Linq.Dynamic
+Imports ClimsoftVer4
 
 Public Class ucrFormDaily2
     'Boolean to check if control is loading for first time
@@ -10,10 +11,6 @@ Public Class ucrFormDaily2
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
-    'These store instances of linked controls
-    Private ucrLinkedMonth As ucrMonth
-    Private ucrLinkedYear As ucrYearSelector
-    Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
     'Stores fields for the value flag and period
     Private lstFields As New List(Of String)
     'Stores the record assocaited with this control
@@ -23,11 +20,23 @@ Public Class ucrFormDaily2
     'Stores the list of containing for the  ucrValueFlagPeriod  controls
     Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
     Private lstTextboxControls As List(Of ucrTextBox)
-    'Stores Linked navigation control
-    Private ucrLinkedNavigation As ucrNavigation
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
     Private ElementId As Integer
+
+    'These store instances of linked controls
+    Private ucrLinkedMonth As ucrMonth
+    Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
+    Private ucrLinkedHour As ucrHour
+    'Stores Linked navigation control
+    Private ucrLinkedNavigation As ucrNavigation
+    Private ucrLinkedStation As ucrStationSelector
+    Private ucrLinkedElement As ucrElementSelector
+    Private ucrLinkedVisibilityUnits As ucrDataLinkCombobox
+    Private ucrLinkedCloudheightUnits As ucrDataLinkCombobox
+    Private ucrLinkedPrecipUnits As ucrDataLinkCombobox
+    Private ucrLinkedTempUnits As ucrDataLinkCombobox
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -57,6 +66,7 @@ Public Class ucrFormDaily2
                 End Try
                 'This is determined by the current user not set from the form
                 fd2Record.signature = frmLogin.txtUsername.Text
+                ValidateDataEntryPermision()
             End If
             For Each ucrVFP As ucrValueFlagPeriod In lstValueFlagPeriodControls
                 ucrVFP.SetValue(New List(Of Object)({GetValue(strValueFieldName & ucrVFP.Tag), GetValue(strFlagFieldName & ucrVFP.Tag), GetValue(strPeriodFieldName & ucrVFP.Tag)}))
@@ -207,15 +217,15 @@ Public Class ucrFormDaily2
             End If
         Next
     End Sub
-    ''' <summary>
-    ''' Sets the linked year and month controls
-    ''' </summary>
-    ''' <param name="ucrYearControl"></param>
-    ''' <param name="ucrMonthControl"></param>
-    Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
-        ucrLinkedYear = ucrYearControl
-        ucrLinkedMonth = ucrMonthControl
-    End Sub
+    '''' <summary>
+    '''' Sets the linked year and month controls
+    '''' </summary>
+    '''' <param name="ucrYearControl"></param>
+    '''' <param name="ucrMonthControl"></param>
+    'Public Sub SetYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
+    '    ucrLinkedYear = ucrYearControl
+    '    ucrLinkedMonth = ucrMonthControl
+    'End Sub
     ''' <summary>
     ''' Sets the  filed name and the control for the liked units
     ''' </summary>
@@ -395,5 +405,86 @@ Public Class ucrFormDaily2
                 End If
             Next
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Sets the key controls
+    ''' </summary>
+    ''' <param name="ucrNewYear"></param>
+    ''' <param name="ucrNewMonth"></param>
+    ''' <param name="ucrNewHour"></param>
+    ''' <param name="ucrNewStation"></param>
+    ''' <param name="ucrNewElement"></param>
+    ''' <param name="ucrNewNavigation"></param>
+    ''' <param name="ucrNewVisibilityUnits"></param>
+    ''' <param name="ucrNewCloudheightUnits"></param>
+    ''' <param name="ucrNewPrecipUnits"></param>
+    ''' <param name="ucrNewTempUnits"></param>
+    ''' 
+    Public Sub SetKeyControls(ucrNewYear As ucrYearSelector, ucrNewMonth As ucrMonth, ucrNewHour As ucrHour, ucrNewStation As ucrStationSelector, ucrNewElement As ucrElementSelector, ucrNewNavigation As ucrNavigation, ucrNewVisibilityUnits As ucrDataLinkCombobox, ucrNewCloudheightUnits As ucrDataLinkCombobox, ucrNewPrecipUnits As ucrDataLinkCombobox, ucrNewTempUnits As ucrDataLinkCombobox)
+        ucrLinkedYear = ucrNewYear
+        ucrLinkedMonth = ucrNewMonth
+        ucrLinkedHour = ucrNewHour
+        ucrLinkedStation = ucrNewStation
+        ucrLinkedElement = ucrNewElement
+        ucrLinkedNavigation = ucrNewNavigation
+        ucrLinkedVisibilityUnits = ucrNewVisibilityUnits
+        ucrLinkedCloudheightUnits = ucrNewCloudheightUnits
+        ucrLinkedPrecipUnits = ucrNewPrecipUnits
+        ucrLinkedTempUnits = ucrNewTempUnits
+
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+
+        'Sets key controls for the navigation
+        ucrLinkedNavigation.SetTableNameAndFields("form_daily2", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
+        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
+        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
+        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+
+        ucrLinkedVisibilityUnits.SetTableNameAndField("form_daily2", "cloudHeightUnits")
+        ucrLinkedCloudheightUnits.SetTableNameAndField("form_daily2", "visUnits")
+        ucrLinkedPrecipUnits.SetTableNameAndField("form_daily2", "precipUnits")
+        ucrLinkedTempUnits.SetTableNameAndField("form_daily2", "temperatureUnits")
+
+    End Sub
+
+    Private Sub ValidateDataEntryPermision()
+        'Dim TodaysDate As Date
+        'Dim SelectedDate As Date
+
+        'Dim ctr As Control
+        'Dim ctrTagValue As Integer
+
+        'If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+        '    Exit Sub
+        'End If
+        'TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
+        'SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue)
+
+        'If ucrLinkedYear.GetValue > TodaysDate.Year Then
+
+        '    Me.Enabled = False
+
+        'ElseIf ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue = TodaysDate.Month Then
+        '    For Each ctr In Me.Controls
+        '        If TypeOf ctr Is ucrValueFlagPeriod Then
+        '            ctrTagValue = Val(ctr.Tag)
+        '            If ctr.Tag >= Val(TodaysDate.Date) Then
+        '                ctr.Enabled = False
+        '            Else
+        '                ctr.Enabled = True
+        '            End If
+        '        End If
+        '    Next
+        'Else
+        '    Me.Enabled = True
+
+        'End If
     End Sub
 End Class

@@ -36,11 +36,11 @@
         cboValues.ContextMenuStrip = cmsHour
     End Sub
     Public Sub SetViewTypeAs24Hrs()
-        SetViewType(str24Hrs)
+        SetDisplayMember(str24Hrs)
     End Sub
 
     Public Sub SetViewTypeAs12Hrs()
-        SetViewType(str12Hrs)
+        SetDisplayMember(str12Hrs)
     End Sub
 
     Private Sub cmsHour24_Click(sender As Object, e As EventArgs) Handles cmsHour24.Click

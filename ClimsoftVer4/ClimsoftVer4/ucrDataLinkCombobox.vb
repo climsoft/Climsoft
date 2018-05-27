@@ -20,6 +20,7 @@
         For Each objVal In lstValues
             dtbRecords.Rows.Add(objVal)
         Next
+        PopulateControl()
     End Sub
     'NOT SURE ABOUT THIS BUT I SUSPECT IT NEEDS TO BE OVERRIDEN 
     'ALTERNATIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
@@ -82,10 +83,25 @@
         Return cboValues.Text
     End Function
 
-    Public Sub SetViewType(strViewType As String)
-        If dtbRecords.Columns.Contains(strViewType) Then
-            cboValues.DisplayMember = strViewType
+    Public Sub SetDisplayMember(strDisplay As String)
+        If dtbRecords.Columns.Contains(strDisplay) Then
+            cboValues.DisplayMember = strDisplay
         End If
+    End Sub
+
+    Public Sub SetValueMember(strValue As String)
+        If dtbRecords.Columns.Contains(strValue) Then
+            cboValues.ValueMember = strValue
+        End If
+    End Sub
+
+    Public Sub SetDisplayAndValueMember(strDisplay As String, strValue As String)
+        SetDisplayMember(strDisplay)
+        SetValueMember(strValue)
+    End Sub
+
+    Public Sub SetDisplayAndValueMember(strDisplayAndValue As String)
+        SetDisplayAndValueMember(strDisplayAndValue, strDisplayAndValue)
     End Sub
 
     ''' <summary>

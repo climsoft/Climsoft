@@ -38,11 +38,11 @@
     End Sub
 
     Public Sub SetViewTypeAsYear()
-        SetViewType(strYear)
+        SetDisplayMember(strYear)
     End Sub
 
     Public Sub SetViewTypeAsShortYear()
-        SetViewType(strShortYear)
+        SetDisplayMember(strShortYear)
     End Sub
 
     Private Sub cmsYearViewLongYear_Click(sender As Object, e As EventArgs) Handles cmsYearViewLongYear.Click
