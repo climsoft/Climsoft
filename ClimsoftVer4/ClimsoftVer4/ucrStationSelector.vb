@@ -22,15 +22,15 @@
     End Sub
 
     Public Sub SetViewTypeAsStations()
-        SetViewType(strStationName)
+        SetDisplayMember(strStationName)
     End Sub
 
     Public Sub SetViewTypeAsIDs()
-        SetViewType(strStationID)
+        SetDisplayMember(strStationID)
     End Sub
 
     Public Sub SetViewTypeAsIDsAndStations()
-        SetViewType(strIDsAndStations)
+        SetDisplayMember(strIDsAndStations)
     End Sub
 
     Public Sub SortByID()

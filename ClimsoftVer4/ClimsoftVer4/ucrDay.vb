@@ -77,7 +77,7 @@
     End Sub
 
     Public Sub SetViewTypeAsDay()
-        SetViewType(strDay)
+        SetDisplayMember(strDay)
     End Sub
 
     Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)

@@ -22,22 +22,16 @@ Public Class frmNewFormDaily2
 
         'Sets values for the units combobox
         ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
-        ucrVisibilityUnits.PopulateControl()
-        ucrVisibilityUnits.SetViewType("visUnits")
-
+        ucrVisibilityUnits.SetDisplayAndValueMember("visUnits")
 
         ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"metres", "feet"})
-        ucrCloudheightUnits.PopulateControl()
-        ucrCloudheightUnits.SetViewType("cloudHeightUnits")
+        ucrCloudheightUnits.SetDisplayAndValueMember("cloudHeightUnits")
 
         ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
-        ucrPrecipUnits.PopulateControl()
-        ucrPrecipUnits.SetViewType("precipUnits")
-
+        ucrPrecipUnits.SetDisplayAndValueMember("precipUnits")
 
         ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
-        ucrTempUnits.PopulateControl()
-        ucrTempUnits.SetViewType("temperatureUnits")
+        ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
