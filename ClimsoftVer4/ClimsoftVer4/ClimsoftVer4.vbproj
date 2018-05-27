@@ -538,9 +538,10 @@
 
     <Compile Include="frmNewFormDaily2.Designer.vb">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewFormDaily2.vb">
-
+    </Compile>    
+      <Compile Include="frmNewFormDaily2.vb">
+        <SubType>Form</SubType>
+      </Compile>
     <Compile Include="frmModifyObservations.Designer.vb">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </Compile>
@@ -1197,11 +1198,12 @@
 
     <EmbeddedResource Include="frmNewFormDaily2.resx">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
-
+    </EmbeddedResource>
+    
     <EmbeddedResource Include="frmModifyObservations.resx">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
-
     </EmbeddedResource>
+    
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
