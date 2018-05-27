@@ -121,10 +121,11 @@
             txtSequencer.Text = "seq_month_day"
         End If
 
-        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
         ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
-        ucrHourly.UcrValueFlagPeriod0.Focus()
 
+        ucrHourly.UcrValueFlagPeriod0.Focus()
         ucrHourlyNavigation.MoveLast()
     End Sub
 

@@ -273,12 +273,15 @@ Public Class ucrHourly
     ''' 
     ''' </summary>
     Private Sub ValidateDataEntryPermision()
-        Dim TodaysDate As New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        Dim SelectedDate As New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+        Dim TodaysDate As Date
+        Dim SelectedDate As Date
 
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
             Exit Sub
         End If
+
+        TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
+        SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
         If Date.Compare(SelectedDate, TodaysDate) < 0 Then
             Me.Enabled = True
