@@ -17,12 +17,13 @@
 
 Public Class formDataView
     Dim connStr As String
-    Dim Sql, Sql2, userName As String
+    Dim Sql, Sql2, userName, id, cd, yr, mn, dy, hr As String
     Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'DataGridView.Top = 300
+        'MsgBox(dsSourceTableName)
     End Sub
     'Sub ViewStation()
     '    Dim sql As String = "SELECT * FROM Authors"
@@ -169,91 +170,58 @@ Public Class formDataView
             Sql = ""
             Select Case dsSourceTableName
                 Case "form_hourly"
-                    Dim stnId As String, elemId, obsYear, obsMonth, obsDay As Integer
-                    stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                    obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
-                    obsDay = Me.DataGridView.CurrentRow.Cells(4).Value
-
+   
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
 
                     'Generate SQL string for updating the selected value
-                    If k > 4 Then
-                        Sql = "UPDATE form_hourly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND elementId=" & elemId & _
-                            " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND dd=" & obsDay & ";"
-                    End If
+
+                    Sql = "UPDATE form_hourly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
+                        " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
 
                 Case "form_hourlywind"
-                    Dim stnId As String, obsYear, obsMonth, obsDay As Integer
-                    stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
-                    obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
 
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
 
                     'Generate SQL string for updating the selected value
-                    If k > 3 Then
-                        Sql = "UPDATE form_hourlywind SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND yyyy=" & obsYear & _
-                            " AND mm= " & obsMonth & " AND dd=" & obsDay & ";"
-                    End If
-
+                    'If k > 3 Then
+                    Sql = "UPDATE form_hourlywind SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy='" & yr & "' AND mm= '" & mn & "' AND dd='" & dy & "';"
+                    'End If
+                    'MsgBox(Sql)
                 Case "form_daily2"
-                    Dim stnId As String, elemId, obsYear, obsMonth, obsHour As Integer
-                    stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                    obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
-                    obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
 
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
 
                     'Generate SQL string for updating the selected value
-                    If k > 4 Then
-                        Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND elementId=" & elemId & _
-                            " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND hh=" & obsHour & ";"
-                    End If
+                     Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
+                        " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
 
                 Case "form_synoptic_2_ra1"
-                    Dim stnId As String, obsYear, obsMonth, obsDay, obsHour As Integer
-                    stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
-                    obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
-                    obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
 
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
 
                     'Generate SQL string for updating the selected value
-                    If k > 4 Then
-                        Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND yyyy=" & obsYear & _
-                            " AND mm= " & obsMonth & " AND dd= " & obsDay & " AND hh=" & obsHour & ";"
-                    End If
+
+                    Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr & _
+                        " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
 
                 Case "form_monthly"
-                    Dim stnId As String, elemId, obsYear As Integer
-                    stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                    elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                    obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
 
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
 
                     'Generate SQL string for updating the selected value 
-                    If k > 2 Then
-                        Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & stnId & "' AND elementId=" & elemId & _
-                            " AND yyyy=" & obsYear & ";"
-                    End If
+
+                    Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
+                        " AND yyyy=" & yr & ";"
 
                 Case "regkeys"
                     Dim keyNameValue As String
@@ -273,9 +241,7 @@ Public Class formDataView
                         Sql = "UPDATE regkeys SET " & cellColName & "='" & cellValue & "' WHERE keyName='" & keyNameValue & "';"
                     End If
             End Select
-            '
-            'MsgBox(Sql)
-
+   
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
                 conn.ConnectionString = connStr
@@ -320,18 +286,19 @@ Public Class formDataView
             PrintLine(111, hdr)
             FileClose(111)
 
-            Sql = "select * from " & DataGridView.DataMember & ";"
+            Sql = "select * from " & dsSourceTableName & ";"
+
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
 
             ds1.Clear()
-            da1.Fill(ds1, DataGridView.DataMember)
+            da1.Fill(ds1, dsSourceTableName)
 
             FileOpen(111, "dataexport.csv", OpenMode.Append)
 
-            For i = 0 To ds1.Tables(DataGridView.DataMember).Rows.Count - 1
-                dat = ds1.Tables(DataGridView.DataMember).Rows(i).Item(0)
-                For j = 1 To ds1.Tables(DataGridView.DataMember).Columns.Count - 1
-                    dat = dat & "," & ds1.Tables(DataGridView.DataMember).Rows(i).Item(j)
+            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+                    dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
                 Next
 
                 PrintLine(111, dat)
@@ -345,5 +312,70 @@ Public Class formDataView
             FileClose(111)
         End Try
 
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        If cmdEdit.Text = "Edit Mode" Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
+            cmdEdit.Text = "View Mode"
+            'grpSearch.Visible = False
+        Else
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            cmdEdit.Text = "Edit Mode"
+            'grpSearch.Visible = True
+        End If
+    End Sub
+
+    Private Sub cmdSearch_Click(sender As Object, e As EventArgs) Handles cmdSearch.Click
+        Dim showRecords As New dataEntryGlobalRoutines
+        Dim sqlr As String
+
+        sqlr = "Select * from " & dsSourceTableName & " where stationId ='" & txtStn.Text & "' and yyyy ='" & txtYY.Text & "' and mm ='" & txtMM.Text & "';"
+        'MsgBox(sqlr)
+        showRecords.viewTableRecords(sqlr)
+    End Sub
+
+    Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellClick
+        Get_RecordIdx(dsSourceTableName)
+    End Sub
+
+    Private Sub DataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView.CellContentClick
+        'MsgBox(DataGridView.CurrentRow.Cells(0).Value)
+        Get_RecordIdx(dsSourceTableName)
+    End Sub
+    Sub Get_RecordIdx(tbl As String)
+        'MsgBox(tbl & " " & DataGridView.CurrentRow.Cells(0).Value)
+
+        Select Case tbl
+            Case "form_daily2"
+                id = Me.DataGridView.CurrentRow.Cells(0).Value
+                cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                mn = Me.DataGridView.CurrentRow.Cells(3).Value
+                hr = Me.DataGridView.CurrentRow.Cells(4).Value
+            Case "form_hourly"
+                id = Me.DataGridView.CurrentRow.Cells(0).Value
+                cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                mn = Me.DataGridView.CurrentRow.Cells(3).Value
+                dy = Me.DataGridView.CurrentRow.Cells(4).Value
+            Case "form_hourlywind"
+                id = Me.DataGridView.CurrentRow.Cells(0).Value
+                yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                dy = Me.DataGridView.CurrentRow.Cells(3).Value
+            Case "form_synoptic_2_ra1"
+                id = Me.DataGridView.CurrentRow.Cells(0).Value
+                yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                dy = Me.DataGridView.CurrentRow.Cells(3).Value
+                hr = Me.DataGridView.CurrentRow.Cells(4).Value
+            Case "form_monthly"
+                id = Me.DataGridView.CurrentRow.Cells(0).Value
+                cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                yr = Me.DataGridView.CurrentRow.Cells(2).Value
+        End Select
     End Sub
 End Class

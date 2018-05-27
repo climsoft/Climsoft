@@ -9,25 +9,24 @@ Public Class ucrHourlyWind
     Private strTotalFieldName As String = "total"
     Private iSpeedTotalRequired As Integer
     Private bSelectAllHours As Boolean
-    'Private lstDirectionSpeedFlagControls As List(Of ucrDirectionSpeedFlag)
-    'Private lstTextboxControls As List(Of ucrTextBox)
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
     Private ucrLinkedNavigation As ucrNavigation
+    Private ucrLinkedStation As ucrStationSelector
+    Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedMonth As ucrMonth
+    Private ucrLinkedDay As ucrDay
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim ucrText As ucrTextBox
 
         If bFirstLoad Then
-            'lstDirectionSpeedFlagControls = New List(Of ucrDirectionSpeedFlag)
-            'lstTextboxControls = New List(Of ucrTextBox)
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
                     ucrDSF.SetTableNameAndDirectionSpeedFlagFields(strTableName, strDirectionFieldName & ucrDSF.Tag, strSpeedFieldName & ucrDSF.Tag, strFlagFieldName & ucrDSF.Tag)
-                    'lstDirectionSpeedFlagControls.Add(ucrDSF)
                     lstFields.Add(strDirectionFieldName & ucrDSF.Tag)
                     lstFields.Add(strSpeedFieldName & ucrDSF.Tag)
                     lstFields.Add(strFlagFieldName & ucrDSF.Tag)
@@ -38,7 +37,6 @@ Public Class ucrHourlyWind
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrText = DirectCast(ctr, ucrTextBox)
                     ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
-                    'lstTextboxControls.Add(ucrText)
                     lstFields.Add(strTotalFieldName)
                     AddHandler ucrText.evtValueChanged, AddressOf InnerControlValueChanged
                 End If
@@ -63,9 +61,11 @@ Public Class ucrHourlyWind
                 Else
                     bUpdating = True
                 End If
+                'enable or disable textboxes based on year month day
+                ValidateDataEntryPermission()
             End If
 
-            For Each ctr In Me.Controls
+            For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
@@ -73,12 +73,7 @@ Public Class ucrHourlyWind
                 End If
             Next
 
-            'For Each ucrDSF In lstDirectionSpeedFlagControls
-            '    ucrDSF.SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ucrDSF.Tag), GetValue(strSpeedFieldName & ucrDSF.Tag), GetValue(strFlagFieldName & ucrDSF.Tag)}))
-            'Next
-            'For Each ucrText  In lstTextboxControls
-            '    ucrText.SetValue(GetValue(strTotalFieldName))
-            'Next
+
         End If
     End Sub
 
@@ -130,9 +125,6 @@ Public Class ucrHourlyWind
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
     End Sub
 
-    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
-        ucrLinkedNavigation = ucrNewNavigation
-    End Sub
 
     Public Sub SaveRecord()
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
@@ -320,7 +312,7 @@ Public Class ucrHourlyWind
             If elemTotal = expectedTotal Then
                 Return True
             Else
-                MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total")
+                MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ucrInputTotal.GetFocus()
                 ucrInputTotal.SetBackColor(Color.Cyan)
                 Return False
@@ -330,8 +322,61 @@ Public Class ucrHourlyWind
         End If
     End Function
 
+    ''' <summary>
+    ''' Sets the controls used by this control station,year,month,day and ucrNavigation controls 
+    ''' </summary>
+    ''' <param name="ucrStationControl"></param>
+    ''' <param name="ucrYearControl"></param>
+    ''' <param name="ucrMonthControl"></param>
+    ''' <param name="ucrDayControl"></param>
+    ''' <param name="ucrNavigationControl"></param>
+    Public Sub SetKeyControls(ucrStationControl As ucrStationSelector, ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrNavigationControl As ucrNavigation)
 
-    Private Sub ucrDirectionSpeedFlag0_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDirectionSpeedFlag0.KeyDown
+        ucrLinkedStation = ucrStationControl
+        ucrLinkedYear = ucrYearControl
+        ucrLinkedMonth = ucrMonthControl
+        ucrLinkedDay = ucrDayControl
+        ucrLinkedNavigation = ucrNavigationControl
+
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+
+        ucrLinkedNavigation.SetTableNameAndFields("form_hourlywind", (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
+        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+
 
     End Sub
+
+    ''' <summary>
+    ''' checks the selected year month day to permit entry or not.
+    ''' this prevents data entry of current and future dates
+    ''' </summary>
+    Private Sub ValidateDataEntryPermission()
+        'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
+        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim todayDate As Date
+        Dim selectedDate As Date
+
+        'initialise the dates with ONLY year month and day values. 
+        'Neglect the time factor
+        todayDate = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+
+        'if selectedDate is earlier than todayDate enable control
+        If DateTime.Compare(selectedDate, todayDate) < 0 Then
+            Me.Enabled = True
+        Else
+            'if it is same time (0) or later than (>0) disable control
+            Me.Enabled = False
+        End If
+    End Sub
+
 End Class

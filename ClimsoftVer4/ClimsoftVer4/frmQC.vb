@@ -118,8 +118,6 @@ Public Class frmQC
         'End If
     End Sub
 
-
-
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         frmUpdateDBfromQCReport.Show()
     End Sub
@@ -165,6 +163,8 @@ Public Class frmQC
         Dim stnid, elmcode, stnlist, elmlist, stnelm_selected, QcReportFile As String
         Dim stnselected, elmselected As Boolean
 
+        Me.Cursor = Cursors.WaitCursor
+
         lblDataTransferProgress.Text = "Processing....Please wait!"
 
         ' List the selected stations
@@ -172,6 +172,7 @@ Public Class frmQC
         elmlist = ""
         stnselected = False
         elmselected = False
+
 
         ' List the selected stations
         If chkAllStations.Checked = False Then ' When NOT all stations are selected
@@ -216,6 +217,7 @@ Public Class frmQC
         ' Set the stations and elements selection conditions
         If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
             MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
+            Me.Cursor = Cursors.Default
             Exit Sub
         Else
             If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = elmlist & " and "
@@ -227,19 +229,21 @@ Public Class frmQC
         myConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = myConnectionString
+
             conn.Open()
 
-            'MsgBox("Connection Successful !", MsgBoxStyle.Information)
+            '' The following code was commented because its role was not clear and it was cause timeout error when the observationinitial table became big
 
-            sql = "SELECT * FROM observationInitial where year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            da.Fill(ds, "obsInitial")
-
-            ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
+            'sql = "SELECT * FROM observationInitial where year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth
+            'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            'da.Fill(ds, "obsInitial")
 
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            ' Set timeout period to unlimited
+            da1.SelectCommand.CommandTimeout = 0
+
             da1.Fill(ds1, "interElement")
             n = ds1.Tables("interElement").Rows.Count
             conn.Close()
@@ -266,55 +270,62 @@ Public Class frmQC
 
 
         ' Get folder for the QC reports
+
+        'Try
+        qcReportsFolderWindows = dsReg.Tables("regData").Rows(7).Item("keyValue")
+
+        'Create qc reports folder if it does not exist
+        If Not IO.Directory.Exists(qcReportsFolderWindows) Then IO.Directory.CreateDirectory(qcReportsFolderWindows)
+
+        qcReportsFolderUnix = dsReg.Tables("regData").Rows(8).Item("keyValue")
+
+        ''If Not IO.Directory.Exists(qcReportsFolderUnix) Then IO.Directory.CreateDirectory(qcReportsFolderUnix)
+        'QcReportFile = qcReportsFolderWindows & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & "'.csv'"
+        'MsgBox(QcReportFile)
+
+        ''Delete the QC Report file if already there
+        'If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+
+        If beginMonth < 10 Then beginYearMonth = beginYear & "0" & beginMonth
+        If endMonth < 10 Then endYearMonth = endYear & "0" & beginMonth
+
+        ' create the QC output table if not existing
+        'strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`limitType` varchar(10) DEFAULT NULL,`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`,`limitType`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+        strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+        objCmd.CommandTimeout = 0
+
         Try
-            qcReportsFolderWindows = dsReg.Tables("regData").Rows(7).Item("keyValue")
+            objCmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.Message & " Can't create QC Output limits table")
+            Me.Cursor = Cursors.Default
+        End Try
 
-            'Create qc reports folder if it does not exist
-            If Not IO.Directory.Exists(qcReportsFolderWindows) Then IO.Directory.CreateDirectory(qcReportsFolderWindows)
+        'Update QC status for selected date range from 0 to 1
+        strSQL = "update observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
-            qcReportsFolderUnix = dsReg.Tables("regData").Rows(8).Item("keyValue")
+        ' Create the Command for executing query and set its properties
+        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
-            ''If Not IO.Directory.Exists(qcReportsFolderUnix) Then IO.Directory.CreateDirectory(qcReportsFolderUnix)
-            'QcReportFile = qcReportsFolderWindows & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & "'.csv'"
-            'MsgBox(QcReportFile)
-
-            ''Delete the QC Report file if already there
-            'If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
-
-            If beginMonth < 10 Then beginYearMonth = beginYear & "0" & beginMonth
-            If endMonth < 10 Then endYearMonth = endYear & "0" & beginMonth
-
-            ' create the QC output table if not existing
-            'strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`limitType` varchar(10) DEFAULT NULL,`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`,`limitType`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-            strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-            Try
-                objCmd.ExecuteNonQuery()
-            Catch ex As Exception
-                MsgBox(ex.Message & " Can't create QC Output limits table")
-            End Try
-
-            'Update QC status for selected date range from 0 to 1
-            strSQL = "update observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
-
-            ' Create the Command for executing query and set its properties
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-            'Try
+        Try
 
             'Execute query
+            objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
             objCmd.ExecuteNonQuery()
             ' MsgBox("QC status updated!", MsgBoxStyle.Information)
             'Catch ex As MySql.Data.MySqlClient.MySqlException
             '    'Ignore expected error i.e. error of Duplicates in MySqlException
+
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
 
             If ex.HResult = "-2147467259" Then
-                MsgBox("Repeat QC encountered on some records")
+                'MsgBox("Repeat QC encountered on some records")
             Else
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
             End If
         End Try
 
@@ -330,9 +341,11 @@ Public Class frmQC
             Try
                 strSQL = "TRUNCATE qcabslimits;"
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
             Catch ex As Exception
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
             End Try
 
             'strSQL = "select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -355,8 +368,8 @@ Public Class frmQC
 
             Try
                 'Execute query
+                objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
-
                 ' Output QC Report
                 'OutputQCReport(210, qcReportsFolderWindows & "\qc_values_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv")
                 OutputQCReport(210, QcReportFile)
@@ -368,6 +381,7 @@ Public Class frmQC
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
 
             End Try
 
@@ -382,9 +396,11 @@ Public Class frmQC
             Try
                 strSQL = "TRUNCATE qcabslimits;"
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
             Catch ex As Exception
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
             End Try
 
             'strSQL = "select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -408,6 +424,7 @@ Public Class frmQC
 
             Try
                 'Execute query
+                objCmd.CommandTimeout = 0
                 objCmd.ExecuteNonQuery()
 
                 ' Output QC Report
@@ -423,6 +440,7 @@ Public Class frmQC
             Catch ex As Exception
                 'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                 MsgBox(ex.Message)
+                Me.Cursor = Cursors.Default
             End Try
 
             'Interelement comparison checks
@@ -442,6 +460,8 @@ Public Class frmQC
 
                 Try
                     'Execute query
+                    objCmd.CommandTimeout = 0
+
                     objCmd.ExecuteNonQuery()
                     ' MsgBox("Table qc_interelement_1 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -449,6 +469,7 @@ Public Class frmQC
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
                 End Try
 
                 strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " & _
@@ -461,6 +482,7 @@ Public Class frmQC
 
                 Try
                     'Execute query
+                    objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
                     'MsgBox("Table qc_interelement_2 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -468,6 +490,7 @@ Public Class frmQC
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     ''MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
                 End Try
 
                 'Select element 2 for inter-eleent comparison
@@ -479,6 +502,7 @@ Public Class frmQC
 
                 Try
                     'Execute query
+                    objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
                     ' MsgBox("Table qc_interelement_1 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -486,8 +510,8 @@ Public Class frmQC
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
                 End Try
-
                 '
                 strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " & _
                     "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " & _
@@ -499,6 +523,7 @@ Public Class frmQC
 
                 Try
                     'Execute query
+                    objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
                     'MsgBox("Table qc_interelement_2 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -506,6 +531,7 @@ Public Class frmQC
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
                 End Try
 
                 'Carry out interelement comparison
@@ -547,7 +573,9 @@ Public Class frmQC
 
                 Try
                     'Execute query
+                    objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
+
                     'MsgBox("QC inter-element report( send to: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
 
                     'MsgBox("Table qc_interelement_2 cleared!")
@@ -556,6 +584,7 @@ Public Class frmQC
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
                 End Try
 
             Next m
@@ -564,7 +593,7 @@ Public Class frmQC
             MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
         End If
         lblDataTransferProgress.Text = "Processing complete!"
-
+        Me.Cursor = Cursors.Default
         conn.Close()
     End Sub
     Sub OutputQCReport(fp As Integer, fl As String)

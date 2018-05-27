@@ -104,9 +104,10 @@ Err:
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Me.DataGridView1.Rows.Remove(DataGridView1.SelectedRows(0))
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Try
+            Me.DataGridView1.Rows.Remove(DataGridView1.SelectedRows(0))
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+
             da.Update(ds, "seqElement")
             MsgBox("Record Deleted!", MsgBoxStyle.Information)
         Catch ex As Exception
