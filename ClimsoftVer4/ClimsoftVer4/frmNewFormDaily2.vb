@@ -61,6 +61,7 @@ Public Class frmNewFormDaily2
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
+
         dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
 
@@ -131,6 +132,9 @@ Public Class frmNewFormDaily2
         If ucrDaiy2Navigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
+        Else
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
         End If
     End Sub
 
