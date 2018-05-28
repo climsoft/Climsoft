@@ -1,6 +1,8 @@
 ﻿Public Class ucrDay
     'Private strDaysTableName As String = "days"
     Private strDay As String = "day"
+    'TODO
+    'Is it necessary to have 4 datatables for this control?
     Private dtb28 As DataTable
     Private dtb29 As DataTable
     Private dtb30 As DataTable
@@ -9,7 +11,6 @@
     Private ucrLinkedMonth As ucrMonth
 
     Public Sub InitialiseControl()
-        'MyBase.InitialiseControl()
         dtb31 = New DataTable
         dtb30 = New DataTable
         dtb29 = New DataTable
@@ -40,25 +41,10 @@
         Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
         Dim iMonth As Integer
 
-        'If ucrLinkedMonth Is Nothing Then
-        '    iMonth = 1
-        'Else
-        '    iMonth = ucrLinkedMonth.GetValue
-        'End If
         iMonth = If(ucrLinkedMonth Is Nothing, 1, ucrLinkedMonth.GetValue)
         If iMonth = 2 Then
-            'If DateTime.IsLeapYear(ucrLinkedYear.GetValue) Then
-            '    dtbRecords = dtb29
-            'Else
-            '    dtbRecords = dtb28
-            'End If
             dtbRecords = If(ucrLinkedYear Is Nothing, dtb29, (If(DateTime.IsLeapYear(ucrLinkedYear.GetValue), dtb29, dtb28)))
         Else
-            'If lstShortMonths.Contains(iMonth) Then
-            '    dtbRecords = dtb30
-            'Else
-            '    dtbRecords = dtb31
-            'End If
             dtbRecords = If(lstShortMonths.Contains(iMonth), dtb30, dtb31)
         End If
 
@@ -80,12 +66,31 @@
         SetDisplayMember(strDay)
     End Sub
 
+    ''' <summary>
+    ''' links this control to the year and month control
+    ''' </summary>
+    ''' <param name="ucrYearControl"></param>
+    ''' <param name="ucrMonthControl"></param>
     Public Sub setYearAndMonthLink(ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth)
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
-        'TODO 
-        'the above 2 controls need to actually be linked. 
-        'currently they cause no change
+        'add event handler for the 2 controls
+        AddHandler ucrLinkedYear.evtValueChanged, AddressOf YearMonthEvtValueChanged
+        AddHandler ucrLinkedMonth.evtValueChanged, AddressOf YearMonthEvtValueChanged
+    End Sub
+
+    ''' <summary>
+    ''' this gets called when the linked year or month controls change their values
+    ''' </summary>
+    Private Sub YearMonthEvtValueChanged()
+        Dim iCurrentSelectedDay As Integer
+        'store the current selected value to retain it after repopulating the control
+        iCurrentSelectedDay = GetValue(strDay)
+        PopulateControl()
+        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
+            iCurrentSelectedDay = dtbRecords.Rows.Count
+        End If
+        SetValue(iCurrentSelectedDay)
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load

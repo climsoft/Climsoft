@@ -179,6 +179,9 @@
         If ucrNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
+        Else
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
         End If
     End Sub
 

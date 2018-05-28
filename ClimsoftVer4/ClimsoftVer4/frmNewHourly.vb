@@ -1,6 +1,7 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
     Dim selectAllHours As Boolean
+
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
@@ -8,6 +9,7 @@
         End If
         selectAllHours = False
     End Sub
+
     Private Sub InitaliseDialog()
         txtSequencer.Text = "seq_month_day_element"
         ucrHourly.SetKeyControls(ucrElement:=ucrElementSelector, ucrYear:=ucrYearSelector, ucrMonth:=ucrMonth, ucrDay:=ucrDay, ucrStation:=ucrStationSelector, ucrNavigation:=ucrHourlyNavigation)
