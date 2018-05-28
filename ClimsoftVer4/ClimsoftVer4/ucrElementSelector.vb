@@ -20,15 +20,15 @@
     End Sub
 
     Public Sub SetViewTypeAsElements()
-        SetViewType(strElementName)
+        SetDisplayMember(strElementName)
     End Sub
 
     Public Sub SetViewTypeAsIDs()
-        SetViewType(strElementID)
+        SetDisplayMember(strElementID)
     End Sub
 
     Public Sub SetViewTypeAsIDsAndElements()
-        SetViewType(strIDsAndElements)
+        SetDisplayMember(strIDsAndElements)
     End Sub
 
     Private Sub SortByID()

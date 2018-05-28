@@ -57,6 +57,7 @@ Partial Class frmImportDaily
         Me.txtStn = New System.Windows.Forms.TextBox()
         Me.lblStn = New System.Windows.Forms.Label()
         Me.lblDefaultObsHour = New System.Windows.Forms.Label()
+        Me.lblTRecords = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.SuspendLayout()
@@ -341,10 +342,11 @@ Partial Class frmImportDaily
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(757, 11)
+        Me.lblType.Location = New System.Drawing.Point(753, 6)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(0, 13)
         Me.lblType.TabIndex = 30
+        Me.lblType.Visible = False
         '
         'txtStn
         '
@@ -371,11 +373,22 @@ Partial Class frmImportDaily
         Me.lblDefaultObsHour.TabIndex = 33
         Me.lblDefaultObsHour.Text = "Default Observation Hour"
         '
+        'lblTRecords
+        '
+        Me.lblTRecords.AutoSize = True
+        Me.lblTRecords.Location = New System.Drawing.Point(881, 589)
+        Me.lblTRecords.Name = "lblTRecords"
+        Me.lblTRecords.Size = New System.Drawing.Size(74, 13)
+        Me.lblTRecords.TabIndex = 34
+        Me.lblTRecords.Text = "Total Records"
+        Me.lblTRecords.Visible = False
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 609)
+        Me.Controls.Add(Me.lblTRecords)
         Me.Controls.Add(Me.lblDefaultObsHour)
         Me.Controls.Add(Me.lblStn)
         Me.Controls.Add(Me.txtStn)
@@ -444,4 +457,5 @@ Partial Class frmImportDaily
     Friend WithEvents txtStn As System.Windows.Forms.TextBox
     Friend WithEvents lblStn As System.Windows.Forms.Label
     Friend WithEvents lblDefaultObsHour As System.Windows.Forms.Label
+    Friend WithEvents lblTRecords As System.Windows.Forms.Label
 End Class

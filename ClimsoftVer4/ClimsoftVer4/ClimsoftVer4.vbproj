@@ -535,10 +535,18 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="frmNewFormDaily2.Designer.vb">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </Compile>    
+      <Compile Include="frmNewFormDaily2.vb">
+        <SubType>Form</SubType>
+      </Compile>
+    <Compile Include="frmModifyObservations.Designer.vb">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewFormDaily2.vb">
+    <Compile Include="frmModifyObservations.vb">
+
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPlotter.Designer.vb" />
@@ -573,6 +581,12 @@
       <DependentUpon>frmSynopTDCF.vb</DependentUpon>
     </Compile>
     <Compile Include="frmSynopTDCF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTDCFindicators.Designer.vb">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTDCFindicators.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
@@ -1181,9 +1195,15 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="frmNewFormDaily2.resx">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
     </EmbeddedResource>
+    
+    <EmbeddedResource Include="frmModifyObservations.resx">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </EmbeddedResource>
+    
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
@@ -1216,6 +1236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSynopTDCF.resx">
       <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTDCFindicators.resx">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
       <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>

@@ -324,28 +324,100 @@ Public Class dataEntryGlobalRoutines
         Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dbConnectionString As String
-        'Dim tblName As String
-        'Dim sql As String
-        dbConnectionString = frmLogin.txtusrpwd.Text
-        dbconn.ConnectionString = dbConnectionString
-        dbconn.Open()
-        ' strSQL = "SELECT * FROM  " & tbl
-        'strSQL = strSQL & tblName
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
-        tblRecords.Clear()
+        Try
+            'Dim tblName As String
+            'Dim sql As String
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbconn.ConnectionString = dbConnectionString
+            dbconn.Open()
+            ' strSQL = "SELECT * FROM  " & tbl
+            'strSQL = strSQL & tblName
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
 
-        'tblName = "form_hourly"
-        ' dsSourceTableName = tblName
-        ' da.Fill(tblRecords, tblName)
-        da.Fill(tblRecords, "recordsView")
+            tblRecords.Clear()
 
-        formDataView.Show()
-        'formDataView.DataGridView.DataSource = tblRecords
-        formDataView.DataGridView.DataSource = tblRecords.Tables(0)
-        'formDataView.DataGridView.DataMember = "recordsView"
-        formDataView.DataGridView.Refresh()
+            'tblName = "form_hourly"
+            ' dsSourceTableName = tblName
+            ' da.Fill(tblRecords, tblName)
+            da.Fill(tblRecords, "recordsView")
+            'MsgBox(tblRecords.Tables("recordsView").Rows.Count)
+            formDataView.Show()
+            'formDataView.DataGridView.DataSource = tblRecords
+            formDataView.DataGridView.DataSource = tblRecords.Tables(0)
+            'formDataView.DataGridView.DataMember = "recordsView"
+            formDataView.DataGridView.Refresh()
 
-        formDataView.DataGridView.Dock = DockStyle.Top
-        dbconn.Close()
+            'formDataView.DataGridView.Dock = DockStyle.Top
+            dbconn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbconn.Close()
+        End Try
     End Sub
+    Public Function Valid_Stn(ctrl As Control) As Boolean
+
+        Valid_Stn = False
+
+        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        conns.ConnectionString = frmLogin.txtusrpwd.Text
+        conns.Open()
+        Try
+            Dim dss As New DataSet
+            Dim sqls As String
+            Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            sqls = "SELECT stationId,stationName FROM station ORDER BY stationName;"
+            'das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            ' Set to unlimited timeout period
+            das.SelectCommand.CommandTimeout = 0
+
+            das.Fill(dss, "station")
+            For i = 0 To dss.Tables("station").Rows.Count - 1
+                If ctrl.Text = dss.Tables("station").Rows(i).Item("stationId") Then
+                    ctrl.Text = dss.Tables("station").Rows(i).Item("stationName")
+                    Valid_Stn = True
+                    Exit For
+                End If
+            Next
+            conns.Close()
+        Catch ex As Exception
+            conns.Close()
+            Valid_Stn = False
+        End Try
+    End Function
+
+    Public Function Valid_Elm(ctrl As Control) As Boolean
+
+        Valid_Elm = False
+
+        Dim conns As New MySql.Data.MySqlClient.MySqlConnection
+        conns.ConnectionString = frmLogin.txtusrpwd.Text
+        conns.Open()
+        Try
+            Dim dss As New DataSet
+            Dim sqls As String
+            Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            sqls = "SELECT elementID,elementName FROM obselement where Selected = '1' ORDER BY elementName;"
+            das = New MySql.Data.MySqlClient.MySqlDataAdapter(sqls, conns)
+            ' Set to unlimited timeout period
+            das.SelectCommand.CommandTimeout = 0
+
+            das.Fill(dss, "elem")
+            For i = 0 To dss.Tables("elem").Rows.Count - 1
+                If ctrl.Text = dss.Tables("elem").Rows(i).Item("elementID") Then
+                    ctrl.Text = dss.Tables("elem").Rows(i).Item("elementName")
+                    Valid_Elm = True
+                    Exit For
+                End If
+            Next
+            conns.Close()
+        Catch ex As Exception
+            conns.Close()
+            Valid_Elm = False
+        End Try
+    End Function
 End Class

@@ -32,15 +32,15 @@
     End Sub
 
     Public Sub SetViewTypeAsMonthsNames()
-        SetViewType(strMonthName)
+        SetDisplayMember(strMonthName)
     End Sub
 
     Public Sub SetViewTypeAsMonthIds()
-        SetViewType(strMonthId)
+        SetDisplayMember(strMonthId)
     End Sub
 
     Public Sub SetViewTypeAsShortMonthName()
-        SetViewType(strShortMonthName)
+        SetDisplayMember(strShortMonthName)
     End Sub
 
     Private Sub cmsMonthIDs_Click(sender As Object, e As EventArgs) Handles cmsMonthIDs.Click

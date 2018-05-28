@@ -63,7 +63,7 @@
     End Sub
 
     Public Sub SetViewTypeAsDay()
-        SetViewType(strDay)
+        SetDisplayMember(strDay)
     End Sub
 
     ''' <summary>
