@@ -40,6 +40,33 @@
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+
+        If Not ucrStationSelector.ValidateValue Then
+            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrElementSelector.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrMonth.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrYearSelector.ValidateValue Then
+            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrDay.ValidateValue Then
+            MsgBox("Invalid Day", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
         dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)

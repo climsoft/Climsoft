@@ -59,6 +59,31 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        If Not ucrStationSelector.ValidateValue Then
+            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrElementSelector.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrMonth.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrYearSelector.ValidateValue Then
+            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        If Not ucrHour.ValidateValue Then
+            MsgBox("Invalid Hour", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
 
@@ -82,6 +107,7 @@ Public Class frmNewFormDaily2
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim dlgResponse As DialogResult
+
         'Prompts the user if they really want to delete a record
         dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
