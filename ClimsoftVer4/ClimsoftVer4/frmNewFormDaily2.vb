@@ -59,28 +59,7 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If Not ucrStationSelector.ValidateValue Then
-            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        If Not ucrElementSelector.ValidateValue Then
-            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        If Not ucrMonth.ValidateValue Then
-            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        If Not ucrYearSelector.ValidateValue Then
-            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        If Not ucrHour.ValidateValue Then
-            MsgBox("Invalid Hour", MsgBoxStyle.Exclamation)
+        If Not ValidateValues() Then
             Exit Sub
         End If
 
@@ -167,6 +146,10 @@ Public Class frmNewFormDaily2
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
         Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
@@ -210,4 +193,31 @@ Public Class frmNewFormDaily2
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         ucrFormDaily.UploadAllRecords()
     End Sub
+    Private Function ValidateValues() As Boolean
+        If Not ucrStationSelector.ValidateValue Then
+            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrElementSelector.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrMonth.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrYearSelector.ValidateValue Then
+            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrHour.ValidateValue Then
+            MsgBox("Invalid Hour", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+        Return True
+    End Function
 End Class
