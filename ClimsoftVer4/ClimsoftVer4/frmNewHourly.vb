@@ -223,6 +223,11 @@
             MsgBox("Invalid Day", MsgBoxStyle.Exclamation)
             Return False
         End If
+
+        If Not ucrHourly.checkTotal Then
+            Return False
+        End If
+
         Return True
     End Function
 End Class

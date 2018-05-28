@@ -253,7 +253,7 @@ Public Class ucrFormDaily2
     ''' Checks if total for current element is required
     ''' Checks if the computed total is same as the user entered total.
     ''' </summary>
-    Public Sub checkTotal()
+    Public Function checkTotal() As Boolean
         'Check total if required from obselements table from qcTotalRequired field
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
@@ -277,14 +277,19 @@ Public Class ucrFormDaily2
                         elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
                     End If
                 Next
-                If elemTotal <> expectedTotal Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
+                If elemTotal = expectedTotal Then
+                    Return True
+                Else
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.GetFocus()
                     ucrInputTotal.SetBackColor(Color.Cyan)
+                    Return False
                 End If
+            Else
+                Return True
             End If
         End If
-    End Sub
+    End Function
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()

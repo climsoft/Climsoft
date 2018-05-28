@@ -218,6 +218,12 @@ Public Class frmNewFormDaily2
             MsgBox("Invalid Hour", MsgBoxStyle.Exclamation)
             Return False
         End If
+
+        If Not ucrFormDaily.checkTotal Then
+            Return False
+        End If
+
         Return True
+
     End Function
 End Class
