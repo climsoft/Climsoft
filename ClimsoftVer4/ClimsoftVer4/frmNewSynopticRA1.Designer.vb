@@ -52,7 +52,7 @@ Partial Class frmNewSynopticRA1
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(338, 19)
+        lblYear.Location = New System.Drawing.Point(339, 17)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 205
@@ -61,7 +61,7 @@ Partial Class frmNewSynopticRA1
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(55, 18)
+        Me.lblStationSelector.Location = New System.Drawing.Point(56, 17)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(86, 13)
         Me.lblStationSelector.TabIndex = 209
@@ -70,7 +70,7 @@ Partial Class frmNewSynopticRA1
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(693, 19)
+        Me.lblHour.Location = New System.Drawing.Point(694, 17)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 208
@@ -79,7 +79,7 @@ Partial Class frmNewSynopticRA1
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(597, 19)
+        Me.lblDay.Location = New System.Drawing.Point(598, 17)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 207
@@ -88,7 +88,7 @@ Partial Class frmNewSynopticRA1
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(448, 19)
+        Me.lblMonth.Location = New System.Drawing.Point(449, 17)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 206
