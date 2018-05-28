@@ -223,69 +223,6 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-
-
-    Private Function ucrDDFFEnter2() As Boolean
-        Dim bValuesCorrect As Boolean = False
-        Dim bValidateSilently As Boolean
-        If Not ucrDDFF.IsEmpty() Then
-            'Check for an observation flag 
-            'If a flag exists then set it 
-            If IsNumeric(Strings.Right(ucrDDFF.GetValue, 1)) Then
-                'Then Flag must be blank
-                ucrFlag.SetValue("")
-            Else
-                'Get observation flag (last character) and set it to ucrFlag
-                ucrFlag.SetValue(Strings.Right(ucrDDFF.GetValue, 1))
-                'Remove the last flag  
-                ucrDDFF.SetValue(Strings.Left(ucrDDFF.GetValue, ucrDDFF.GetValue.Length - 1))
-
-            End If
-
-            'Check that ddff is numeric
-            If IsNumeric(ucrDDFF.GetValue) Then
-                If ucrDDFF.GetValue.Length = iDirectionDigits + iSpeedDigits Then
-                    ucrDDFF.SetBackColor(Color.White)
-                    bValuesCorrect = True
-                    'If number of digits is correct then separate dd and ff
-                    'switch of validation notification temprary then restore
-                    bValidateSilently = ucrSpeed.bValidateSilently
-                    ucrSpeed.bValidateSilently = True
-                    ucrSpeed.SetValue(Strings.Right(ucrDDFF.GetValue, iSpeedDigits))
-                    ucrSpeed.bValidateSilently = bValidateSilently
-
-                    bValidateSilently = ucrDirection.bValidateSilently
-                    ucrDirection.bValidateSilently = True
-                    ucrDirection.SetValue(Strings.Left(ucrDDFF.GetValue, iDirectionDigits))
-                    ucrDirection.bValidateSilently = bValidateSilently
-                Else
-                    ucrDDFF.SetBackColor(Color.Cyan)
-                    'ucrDDFF.Focus()
-                    bValuesCorrect = False
-                    MsgBox("Wrong number of digits for ddff!", MsgBoxStyle.Exclamation)
-                End If
-            Else
-                ucrDDFF.SetBackColor(Color.Red)
-                'ucrDDFF.Focus()
-                bValuesCorrect = False
-                MsgBox("Number expected!", MsgBoxStyle.Critical)
-            End If
-            If bValuesCorrect Then
-                If QcForDirection() AndAlso QcForSpeed() Then
-                    bValuesCorrect = True
-                Else
-                    ucrDDFF.SetBackColor(Color.Cyan)
-                    'ucrDDFF.Focus()
-                    bValuesCorrect = False
-                End If
-            End If
-        Else
-            bValuesCorrect = True
-        End If
-
-        Return bValuesCorrect
-    End Function
-
     Private Function QCForUcrDDFF() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean

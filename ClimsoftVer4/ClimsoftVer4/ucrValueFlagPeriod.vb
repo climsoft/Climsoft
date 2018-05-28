@@ -207,7 +207,7 @@ Public Class ucrValueFlagPeriod
 
         If e.KeyCode = Keys.Enter Then
             If sender Is ucrValue.txtBox Then
-                If ucrValueEnter() Then
+                If QCForValue() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
@@ -222,10 +222,10 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Private Sub ucrValue_Leave(sender As Object, e As EventArgs) Handles ucrValue.Leave
-        ucrValueEnter()
+        QCForValue()
     End Sub
 
-    Private Function ucrValueEnter() As Boolean
+    Private Function QCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
 
