@@ -6,7 +6,7 @@
     Public Overrides Sub PopulateControl()
         'MyBase.PopulateControl()
 
-        Dim endYear As Integer = DateAndTime.Year(DateTime.Today)
+        Dim endYear As Integer = DateTime.Now.Year   'DateAndTime.Year(DateTime.Today)
 
         dtbRecords = New DataTable
         dtbRecords.Columns.Add(strYear, GetType(Integer))
@@ -18,19 +18,37 @@
 
         cboValues.DataSource = dtbRecords
         dtbRecords.DefaultView.Sort = strYear & " DESC"
-
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strYear
-            If bFirstLoad Then
-                SetViewTypeAsYear()
-            End If
-        Else
-            cboValues.DataSource = Nothing
+        cboValues.ValueMember = strYear
+        If bFirstLoad Then
+            SetViewTypeAsYear()
         End If
+
     End Sub
 
     Public Function isLeapYear() As Boolean
         Return DateTime.IsLeapYear(GetValue)
+    End Function
+
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean = False
+        Dim strCol As String
+
+        bValid = MyBase.ValidateValue
+
+        If Not bValid Then
+            strCol = cboValues.DisplayMember
+            If strCol = strYear Then
+                If cboValues.Text.Length = 4 AndAlso Val(cboValues.Text) <= DateTime.Now.Year Then
+                    bValid = True
+                End If
+            ElseIf strCol = strShortYear
+                'TODO
+                'check validity of short years
+            End If
+        End If
+
+        SetBackColor(If(bValid, Color.White, Color.Red))
+        Return bValid
     End Function
 
     Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
