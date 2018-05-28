@@ -209,13 +209,15 @@ Public Class ucrFormDaily2
             iMonthLength = DateTime.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
         End If
 
-        For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
-            If ctrVFP.Tag <= iMonthLength Then
-                ctrVFP.Enabled = True
-            Else
-                ctrVFP.Enabled = False
-            End If
-        Next
+        If Me.Enabled Then
+            For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+                If ctrVFP.Tag <= iMonthLength Then
+                    ctrVFP.Enabled = True
+                Else
+                    ctrVFP.Enabled = False
+                End If
+            Next
+        End If
     End Sub
     '''' <summary>
     '''' Sets the linked year and month controls
@@ -455,36 +457,42 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub ValidateDataEntryPermision()
-        'Dim TodaysDate As Date
-        'Dim SelectedDate As Date
+        Dim TodaysDate As Date
+        Dim SelectedDate As Date
 
-        'Dim ctr As Control
-        'Dim ctrTagValue As Integer
+        Dim ctr As Control
+        Dim ctrTagValue As Integer
 
-        'If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
-        '    Exit Sub
-        'End If
-        'TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        'SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue)
+        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+            Exit Sub
+        End If
+        TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
+        SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, TodaysDate.Day)
 
-        'If ucrLinkedYear.GetValue > TodaysDate.Year Then
+        If ucrLinkedYear.GetValue > TodaysDate.Year OrElse (ucrLinkedYear.GetValue = TodaysDate.Year And ucrLinkedMonth.GetValue > TodaysDate.Month) Then
+            Me.Enabled = False
+            Exit Sub
+        Else
+            Me.Enabled = True
+        End If
 
-        '    Me.Enabled = False
-
-        'ElseIf ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue = TodaysDate.Month Then
-        '    For Each ctr In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            ctrTagValue = Val(ctr.Tag)
-        '            If ctr.Tag >= Val(TodaysDate.Date) Then
-        '                ctr.Enabled = False
-        '            Else
-        '                ctr.Enabled = True
-        '            End If
-        '        End If
-        '    Next
-        'Else
-        '    Me.Enabled = True
-
-        'End If
+        If ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue = TodaysDate.Month Then
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrTagValue = Val(ctr.Tag)
+                    If ctr.Tag >= Val(TodaysDate.Date) Then
+                        ctr.Enabled = False
+                    Else
+                        ctr.Enabled = True
+                    End If
+                End If
+            Next
+        Else
+            For Each ctr In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctr.Enabled = True
+                End If
+            Next
+        End If
     End Sub
 End Class
