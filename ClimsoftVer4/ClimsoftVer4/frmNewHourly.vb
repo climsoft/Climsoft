@@ -40,6 +40,10 @@
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        If Not ValidateValues() Then
+            Exit Sub
+        End If
+
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
         dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -97,16 +101,20 @@
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-            Try
+        Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
+            dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If dlgResponse = DialogResult.Yes Then
                 clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
                 MsgBox("Record updated successfully!", MsgBoxStyle.Information)
-            Catch
-                '?messagebox
-            End Try
-        End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -189,4 +197,37 @@
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
     End Sub
+
+    Private Function ValidateValues() As Boolean
+        If Not ucrStationSelector.ValidateValue Then
+            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrElementSelector.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+                Return False
+            End If
+
+            If Not ucrMonth.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrYearSelector.ValidateValue Then
+            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrDay.ValidateValue Then
+            MsgBox("Invalid Day", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrHourly.checkTotal Then
+            Return False
+        End If
+
+        Return True
+    End Function
 End Class
