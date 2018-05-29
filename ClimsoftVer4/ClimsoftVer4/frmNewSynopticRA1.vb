@@ -183,6 +183,8 @@
         End If
     End Sub
 
-
-
+    Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
+        frmSynopTDCF.Show()
+        frmSynopTDCF.cboTemplate.Text = "TM_307081"
+           End Sub
 End Class

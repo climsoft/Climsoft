@@ -11,7 +11,7 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        txtSequencer.Text = "seq_month_day_element"
+        txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrElement:=ucrElementSelector, ucrYear:=ucrYearSelector, ucrMonth:=ucrMonth, ucrDay:=ucrDay, ucrStation:=ucrStationSelector, ucrNavigation:=ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
@@ -55,8 +55,9 @@
                 clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
             End If
             clsDataConnection.SaveUpdate()
-            SaveEnable()
             ucrHourlyNavigation.ResetControls()
+            ucrHourlyNavigation.GoToNewRecord()
+            SaveEnable()
         Else
             MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
