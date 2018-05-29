@@ -9,8 +9,6 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrStationSelector.SortByStationName()
-
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         ucrHourlyWind.SetSpeedDigits(Val(txtSpeedDigits.Text))

@@ -8,10 +8,15 @@ Public Class ucrSynopticRA1
     Private strFlagFieldName As String = "Flag"
     Public bUpdating As Boolean = False
     Public fs2ra1Record As form_synoptic_2_ra1
-    'Private lstValueFlagPeriodControls As List(Of ucrValueFlagPeriod)
+
 
     Private lstFields As New List(Of String)
     Private ucrLinkedNavigation As ucrNavigation
+    Private ucrLinkedStation As ucrStationSelector
+    Private ucrLinkedYear As ucrYearSelector
+    Private ucrLinkedMonth As ucrMonth
+    Private ucrLinkedDay As ucrDay
+    Private ucrLinkedHour As ucrHour
 
     'Stores Morning time for recording tmax
     Private iTmaxHour1 As Integer
@@ -65,6 +70,8 @@ Public Class ucrSynopticRA1
                 Else
                     bUpdating = True
                 End If
+                'enable or disable textboxes based on year month day
+                ValidateDataEntryPermission()
             End If
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -135,10 +142,6 @@ Public Class ucrSynopticRA1
             CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
-    End Sub
-
-    Public Sub SetLinkedNavigation(ucrNewNavigation As ucrNavigation)
-        ucrLinkedNavigation = ucrNewNavigation
     End Sub
 
     Public Overrides Sub Clear()
@@ -537,4 +540,63 @@ Public Class ucrSynopticRA1
         Return RH
     End Function
 
+    ''' <summary>
+    ''' Sets the controls used by this control station,year,month,day and ucrNavigation controls 
+    ''' </summary>
+    ''' <param name="ucrStationControl"></param>
+    ''' <param name="ucrYearControl"></param>
+    ''' <param name="ucrMonthControl"></param>
+    ''' <param name="ucrDayControl"></param>
+    ''' <param name="ucrHourControl"></param>
+    ''' <param name="ucrNavigationControl"></param>
+    Public Sub SetKeyControls(ucrStationControl As ucrStationSelector, ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrHourControl As ucrHour, ucrNavigationControl As ucrNavigation)
+
+        ucrLinkedStation = ucrStationControl
+        ucrLinkedYear = ucrYearControl
+        ucrLinkedMonth = ucrMonthControl
+        ucrLinkedDay = ucrDayControl
+        ucrLinkedHour = ucrHourControl
+        ucrLinkedNavigation = ucrNavigationControl
+
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+
+        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
+        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
+        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+
+    End Sub
+
+    ''' <summary>
+    ''' checks the selected year month day to permit entry or not.
+    ''' this prevents data entry of current and future dates
+    ''' </summary>
+    Private Sub ValidateDataEntryPermission()
+        'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
+        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim todayDate As Date
+        Dim selectedDate As Date
+
+        'initialise the dates with ONLY year month and day values. 
+        'Neglect the time factor
+        todayDate = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+
+        'if selectedDate is earlier than todayDate enable control
+        If DateTime.Compare(selectedDate, todayDate) < 0 Then
+            Me.Enabled = True
+        Else
+            'if it is same time (0) or later than (>0) disable control
+            Me.Enabled = False
+        End If
+    End Sub
 End Class
