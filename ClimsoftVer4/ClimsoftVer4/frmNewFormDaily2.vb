@@ -76,6 +76,7 @@ Public Class frmNewFormDaily2
             End If
             clsDataConnection.SaveUpdate()
             ucrDaiy2Navigation.ResetControls()
+            ucrDaiy2Navigation.GoToNewRecord()
             SaveEnable()
         Else
             MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
