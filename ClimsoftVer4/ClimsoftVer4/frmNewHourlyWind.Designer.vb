@@ -54,7 +54,7 @@ Partial Class frmNewHourlyWind
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(213, 6)
+        lblYear.Location = New System.Drawing.Point(216, 7)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 216
@@ -63,7 +63,7 @@ Partial Class frmNewHourlyWind
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(9, 6)
+        Me.lblStationSelector.Location = New System.Drawing.Point(13, 7)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(43, 13)
         Me.lblStationSelector.TabIndex = 220
@@ -72,7 +72,7 @@ Partial Class frmNewHourlyWind
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(417, 6)
+        Me.lblDay.Location = New System.Drawing.Point(422, 7)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 218
@@ -81,7 +81,7 @@ Partial Class frmNewHourlyWind
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(301, 6)
+        Me.lblMonth.Location = New System.Drawing.Point(304, 7)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 217

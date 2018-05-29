@@ -28,7 +28,7 @@ Partial Class frmNewFormDaily2
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblHour = New System.Windows.Forms.Label()
         Me.cmdAssignSameValue = New System.Windows.Forms.Button()
-        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lblValue = New System.Windows.Forms.Label()
         Me.grpUnits = New System.Windows.Forms.GroupBox()
         Me.lblVisibility = New System.Windows.Forms.Label()
         Me.LblCloudheight = New System.Windows.Forms.Label()
@@ -64,7 +64,7 @@ Partial Class frmNewFormDaily2
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(12, 20)
+        Me.lblStation.Location = New System.Drawing.Point(23, 20)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class frmNewFormDaily2
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(280, 20)
+        Me.lblElement.Location = New System.Drawing.Point(272, 20)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 1
@@ -116,15 +116,15 @@ Partial Class frmNewFormDaily2
         Me.cmdAssignSameValue.Text = "Assign same value to all obs"
         Me.cmdAssignSameValue.UseVisualStyleBackColor = True
         '
-        'Label30
+        'lblValue
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.ForeColor = System.Drawing.Color.Blue
-        Me.Label30.Location = New System.Drawing.Point(537, 77)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(40, 13)
-        Me.Label30.TabIndex = 10
-        Me.Label30.Text = "Value="
+        Me.lblValue.AutoSize = True
+        Me.lblValue.ForeColor = System.Drawing.Color.Blue
+        Me.lblValue.Location = New System.Drawing.Point(535, 73)
+        Me.lblValue.Name = "lblValue"
+        Me.lblValue.Size = New System.Drawing.Size(40, 13)
+        Me.lblValue.TabIndex = 10
+        Me.lblValue.Text = "Value="
         '
         'grpUnits
         '
@@ -146,7 +146,7 @@ Partial Class frmNewFormDaily2
         'lblVisibility
         '
         Me.lblVisibility.AutoSize = True
-        Me.lblVisibility.Location = New System.Drawing.Point(447, 20)
+        Me.lblVisibility.Location = New System.Drawing.Point(450, 22)
         Me.lblVisibility.Name = "lblVisibility"
         Me.lblVisibility.Size = New System.Drawing.Size(46, 13)
         Me.lblVisibility.TabIndex = 7
@@ -155,7 +155,7 @@ Partial Class frmNewFormDaily2
         'LblCloudheight
         '
         Me.LblCloudheight.AutoSize = True
-        Me.LblCloudheight.Location = New System.Drawing.Point(283, 20)
+        Me.LblCloudheight.Location = New System.Drawing.Point(288, 22)
         Me.LblCloudheight.Name = "LblCloudheight"
         Me.LblCloudheight.Size = New System.Drawing.Size(69, 13)
         Me.LblCloudheight.TabIndex = 6
@@ -164,7 +164,7 @@ Partial Class frmNewFormDaily2
         'lblPrecip
         '
         Me.lblPrecip.AutoSize = True
-        Me.lblPrecip.Location = New System.Drawing.Point(166, 20)
+        Me.lblPrecip.Location = New System.Drawing.Point(179, 22)
         Me.lblPrecip.Name = "lblPrecip"
         Me.lblPrecip.Size = New System.Drawing.Size(40, 13)
         Me.lblPrecip.TabIndex = 5
@@ -173,7 +173,7 @@ Partial Class frmNewFormDaily2
         'lblTemperature
         '
         Me.lblTemperature.AutoSize = True
-        Me.lblTemperature.Location = New System.Drawing.Point(6, 20)
+        Me.lblTemperature.Location = New System.Drawing.Point(22, 22)
         Me.lblTemperature.Name = "lblTemperature"
         Me.lblTemperature.Size = New System.Drawing.Size(70, 13)
         Me.lblTemperature.TabIndex = 4
@@ -181,7 +181,8 @@ Partial Class frmNewFormDaily2
         '
         'ucrVisibilityUnits
         '
-        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(499, 20)
+        Me.ucrVisibilityUnits.Location = New System.Drawing.Point(498, 19)
+        Me.ucrVisibilityUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
         Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
         Me.ucrVisibilityUnits.TabIndex = 3
@@ -189,20 +190,23 @@ Partial Class frmNewFormDaily2
         'ucrCloudheightUnits
         '
         Me.ucrCloudheightUnits.Location = New System.Drawing.Point(359, 19)
+        Me.ucrCloudheightUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
         Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
         Me.ucrCloudheightUnits.TabIndex = 2
         '
         'ucrPrecipUnits
         '
-        Me.ucrPrecipUnits.Location = New System.Drawing.Point(215, 20)
+        Me.ucrPrecipUnits.Location = New System.Drawing.Point(221, 19)
+        Me.ucrPrecipUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
         Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
         Me.ucrPrecipUnits.TabIndex = 1
         '
         'ucrTempUnits
         '
-        Me.ucrTempUnits.Location = New System.Drawing.Point(95, 20)
+        Me.ucrTempUnits.Location = New System.Drawing.Point(94, 19)
+        Me.ucrTempUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTempUnits.Name = "ucrTempUnits"
         Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
         Me.ucrTempUnits.TabIndex = 0
@@ -314,6 +318,7 @@ Partial Class frmNewFormDaily2
         'ucrHour
         '
         Me.ucrHour.Location = New System.Drawing.Point(277, 74)
+        Me.ucrHour.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(65, 21)
         Me.ucrHour.TabIndex = 7
@@ -321,6 +326,7 @@ Partial Class frmNewFormDaily2
         'ucrMonth
         '
         Me.ucrMonth.Location = New System.Drawing.Point(155, 73)
+        Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
         Me.ucrMonth.TabIndex = 6
@@ -328,6 +334,7 @@ Partial Class frmNewFormDaily2
         'ucrYearSelector
         '
         Me.ucrYearSelector.Location = New System.Drawing.Point(68, 74)
+        Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(59, 21)
         Me.ucrYearSelector.TabIndex = 4
@@ -341,14 +348,16 @@ Partial Class frmNewFormDaily2
         '
         'ucrElementSelector
         '
-        Me.ucrElementSelector.Location = New System.Drawing.Point(326, 20)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(322, 17)
+        Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
         Me.ucrElementSelector.TabIndex = 2
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(69, 20)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(68, 17)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(175, 24)
         Me.ucrStationSelector.TabIndex = 0
@@ -397,7 +406,7 @@ Partial Class frmNewFormDaily2
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.grpUnits)
-        Me.Controls.Add(Me.Label30)
+        Me.Controls.Add(Me.lblValue)
         Me.Controls.Add(Me.ucrInputValue)
         Me.Controls.Add(Me.cmdAssignSameValue)
         Me.Controls.Add(Me.ucrHour)
@@ -433,7 +442,7 @@ Partial Class frmNewFormDaily2
     Friend WithEvents lblHour As Label
     Friend WithEvents cmdAssignSameValue As Button
     Friend WithEvents ucrInputValue As ucrTextBox
-    Friend WithEvents Label30 As Label
+    Friend WithEvents lblValue As Label
     Friend WithEvents grpUnits As GroupBox
     Friend WithEvents ucrVisibilityUnits As ucrDataLinkCombobox
     Friend WithEvents ucrCloudheightUnits As ucrDataLinkCombobox
