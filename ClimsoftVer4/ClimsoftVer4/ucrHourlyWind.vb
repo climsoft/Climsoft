@@ -255,13 +255,16 @@ Public Class ucrHourlyWind
             iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
         End If
     End Sub
-
+    ''' <summary>
+    ''' Returns true if all the direction values are empty and false if ANY has a value set
+    ''' </summary>
+    ''' <returns></returns>
     Public Function IsDirectionValuesEmpty() As Boolean
         Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 ucrDSF = ctr
-                If (Not ucrDSF.IsDirectionEmpty()) AndAlso IsNumeric(ucrDSF.GetDirectionValue) Then
+                If Not ucrDSF.IsDirectionEmpty() Then
                     Return False
                 End If
             End If
@@ -269,7 +272,11 @@ Public Class ucrHourlyWind
         Return True
     End Function
 
-    Public Function QcForDirection() As Boolean
+    ''' <summary>
+    ''' returns true if all direction values are valid
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function CheckQcForDirection() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForDirection() Then
@@ -280,10 +287,14 @@ Public Class ucrHourlyWind
         Return True
     End Function
 
+    ''' <summary>
+    ''' returns true if all the speed values are bvalid
+    ''' </summary>
+    ''' <returns></returns>
     Public Function CheckQcForSpeed() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).CheckQcForSpeed() Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForSpeed() Then
                     Return False
                 End If
             End If

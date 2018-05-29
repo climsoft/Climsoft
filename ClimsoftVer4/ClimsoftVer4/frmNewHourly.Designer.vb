@@ -26,7 +26,7 @@ Partial Class frmNewHourly
         Me.lblStationSelector = New System.Windows.Forms.Label()
         Me.lblDay = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lblValue = New System.Windows.Forms.Label()
         Me.cmdAssignSameValue = New System.Windows.Forms.Button()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.btnHourSelection = New System.Windows.Forms.Button()
@@ -55,7 +55,7 @@ Partial Class frmNewHourly
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(9, 45)
+        lblYear.Location = New System.Drawing.Point(60, 63)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 216
@@ -64,7 +64,7 @@ Partial Class frmNewHourly
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(9, 15)
+        Me.lblStationSelector.Location = New System.Drawing.Point(61, 18)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(43, 13)
         Me.lblStationSelector.TabIndex = 220
@@ -73,7 +73,7 @@ Partial Class frmNewHourly
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(284, 47)
+        Me.lblDay.Location = New System.Drawing.Point(318, 63)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 218
@@ -82,26 +82,26 @@ Partial Class frmNewHourly
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(135, 47)
+        Me.lblMonth.Location = New System.Drawing.Point(175, 63)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 217
         Me.lblMonth.Text = "Month:"
         '
-        'Label30
+        'lblValue
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.ForeColor = System.Drawing.Color.Blue
-        Me.Label30.Location = New System.Drawing.Point(359, 94)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(40, 13)
-        Me.Label30.TabIndex = 230
-        Me.Label30.Text = "Value="
+        Me.lblValue.AutoSize = True
+        Me.lblValue.ForeColor = System.Drawing.Color.Blue
+        Me.lblValue.Location = New System.Drawing.Point(357, 121)
+        Me.lblValue.Name = "lblValue"
+        Me.lblValue.Size = New System.Drawing.Size(40, 13)
+        Me.lblValue.TabIndex = 230
+        Me.lblValue.Text = "Value="
         '
         'cmdAssignSameValue
         '
         Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.cmdAssignSameValue.Location = New System.Drawing.Point(185, 91)
+        Me.cmdAssignSameValue.Location = New System.Drawing.Point(185, 118)
         Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
         Me.cmdAssignSameValue.Size = New System.Drawing.Size(169, 23)
         Me.cmdAssignSameValue.TabIndex = 228
@@ -111,7 +111,7 @@ Partial Class frmNewHourly
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(270, 12)
+        Me.lblElement.Location = New System.Drawing.Point(315, 18)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 226
@@ -120,7 +120,7 @@ Partial Class frmNewHourly
         'btnHourSelection
         '
         Me.btnHourSelection.ForeColor = System.Drawing.Color.Blue
-        Me.btnHourSelection.Location = New System.Drawing.Point(12, 91)
+        Me.btnHourSelection.Location = New System.Drawing.Point(12, 118)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 463
@@ -212,7 +212,7 @@ Partial Class frmNewHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(188, 616)
+        Me.lblSequencer.Location = New System.Drawing.Point(132, 616)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
         Me.lblSequencer.TabIndex = 679
@@ -220,7 +220,7 @@ Partial Class frmNewHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(253, 613)
+        Me.txtSequencer.Location = New System.Drawing.Point(197, 613)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 678
@@ -228,7 +228,7 @@ Partial Class frmNewHourly
         '
         'ucrHourlyNavigation
         '
-        Me.ucrHourlyNavigation.Location = New System.Drawing.Point(121, 517)
+        Me.ucrHourlyNavigation.Location = New System.Drawing.Point(121, 537)
         Me.ucrHourlyNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHourlyNavigation.Name = "ucrHourlyNavigation"
         Me.ucrHourlyNavigation.Size = New System.Drawing.Size(336, 25)
@@ -236,14 +236,14 @@ Partial Class frmNewHourly
         '
         'ucrHourly
         '
-        Me.ucrHourly.Location = New System.Drawing.Point(104, 120)
+        Me.ucrHourly.Location = New System.Drawing.Point(91, 140)
         Me.ucrHourly.Name = "ucrHourly"
         Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
         Me.ucrHourly.TabIndex = 464
         '
         'ucrInputValue
         '
-        Me.ucrInputValue.Location = New System.Drawing.Point(399, 88)
+        Me.ucrInputValue.Location = New System.Drawing.Point(399, 118)
         Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputValue.Name = "ucrInputValue"
         Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
@@ -252,35 +252,40 @@ Partial Class frmNewHourly
         '
         'ucrElementSelector
         '
-        Me.ucrElementSelector.Location = New System.Drawing.Point(316, 12)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(312, 33)
+        Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
         Me.ucrElementSelector.TabIndex = 227
         '
         'ucrDay
         '
-        Me.ucrDay.Location = New System.Drawing.Point(316, 42)
+        Me.ucrDay.Location = New System.Drawing.Point(316, 78)
+        Me.ucrDay.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
         Me.ucrDay.TabIndex = 225
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(178, 42)
+        Me.ucrMonth.Location = New System.Drawing.Point(172, 78)
+        Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
         Me.ucrMonth.TabIndex = 223
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(58, 42)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(58, 78)
+        Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
         Me.ucrYearSelector.TabIndex = 222
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(58, 12)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(58, 33)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 221
@@ -304,7 +309,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.ucrHourlyNavigation)
         Me.Controls.Add(Me.ucrHourly)
         Me.Controls.Add(Me.btnHourSelection)
-        Me.Controls.Add(Me.Label30)
+        Me.Controls.Add(Me.lblValue)
         Me.Controls.Add(Me.ucrInputValue)
         Me.Controls.Add(Me.cmdAssignSameValue)
         Me.Controls.Add(Me.ucrElementSelector)
@@ -331,7 +336,7 @@ Partial Class frmNewHourly
     Friend WithEvents lblStationSelector As Label
     Friend WithEvents lblDay As Label
     Friend WithEvents lblMonth As Label
-    Friend WithEvents Label30 As Label
+    Friend WithEvents lblValue As Label
     Friend WithEvents ucrInputValue As ucrTextBox
     Friend WithEvents cmdAssignSameValue As Button
     Friend WithEvents ucrElementSelector As ucrElementSelector

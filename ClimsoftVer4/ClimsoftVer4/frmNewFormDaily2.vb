@@ -59,8 +59,13 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        If Not ValidateValues() Then
+            Exit Sub
+        End If
+
         'Confirm if you want to continue and save data from key-entry form to database table
         Dim dlgResponse As DialogResult
+
         dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
 
@@ -81,6 +86,7 @@ Public Class frmNewFormDaily2
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim dlgResponse As DialogResult
+
         'Prompts the user if they really want to delete a record
         dlgResponse = MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dlgResponse = DialogResult.Yes Then
@@ -131,12 +137,19 @@ Public Class frmNewFormDaily2
         If ucrDaiy2Navigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
+        Else
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
         End If
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
         Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 clsDataConnection.db.Entry(ucrFormDaily.fd2Record).State = Entity.EntityState.Modified
                 clsDataConnection.db.SaveChanges()
@@ -180,4 +193,37 @@ Public Class frmNewFormDaily2
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         ucrFormDaily.UploadAllRecords()
     End Sub
+    Private Function ValidateValues() As Boolean
+        If Not ucrStationSelector.ValidateValue Then
+            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrElementSelector.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrMonth.ValidateValue Then
+            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrYearSelector.ValidateValue Then
+            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrHour.ValidateValue Then
+            MsgBox("Invalid Hour", MsgBoxStyle.Exclamation)
+            Return False
+        End If
+
+        If Not ucrFormDaily.checkTotal Then
+            Return False
+        End If
+
+        Return True
+
+    End Function
 End Class

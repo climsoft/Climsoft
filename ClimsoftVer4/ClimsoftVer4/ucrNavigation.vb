@@ -13,7 +13,7 @@
         MyBase.PopulateControl()
         iCurrRow = 0
         iMaxRows = dtbRecords.Rows.Count
-        If strSortCol <> "" AndAlso dtbRecords.Rows.Count > 0 AndAlso dtbRecords.Columns.Contains(strSortCol) Then
+        If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
             dtbRecords.DefaultView.Sort = strSortCol & " ASC"
         End If
         displayRecordNumber()
@@ -140,14 +140,17 @@
     ''' Updates the key controls by key values of the current record on the navigation
     ''' </summary>
     Private Sub UpdateKeyControls()
-        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
-            For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
-                'Suppress events being raised while changing value of each key control
-                kvp.Value.bSuppressChangedEvents = True
-                kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
-                kvp.Value.bSuppressChangedEvents = False
-            Next
+        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
+            If iMaxRows > 0 Then
+                For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+                    'Suppress events being raised while changing value of each key control
+                    kvp.Value.bSuppressChangedEvents = True
+                    kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
+                    kvp.Value.bSuppressChangedEvents = False
+                Next
+            End If
 
+            'A key control eventvalue changed should always be raised regardless of whether iMaxRows > 0 or not
             ' All key controls are linked to the same controls so can just trigger
             ' events for one control after all updated
             dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(Nothing, Nothing)

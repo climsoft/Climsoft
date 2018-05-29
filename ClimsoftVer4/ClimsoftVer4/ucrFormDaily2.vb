@@ -115,7 +115,6 @@ Public Class ucrFormDaily2
             'TODO "entryDatetime" should be here as well once entity model has been updated.
             lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
             bFirstLoad = False
-            EnableDaysofMonth()
         End If
     End Sub
     ''' <summary>
@@ -171,23 +170,6 @@ Public Class ucrFormDaily2
         'need an if statement that checks for changes 
         fd2Record = Nothing
         MyBase.LinkedControls_evtValueChanged()
-        EnableDaysofMonth()
-
-        'Dim ctr As Control
-        'Dim ctrVFP As ucrDataLinkCombobox
-        'Dim ctrTotal As New ucrTextBox
-        'For Each ctr In Me.Controls
-        '    If TypeOf ctr Is ucrValueFlagPeriod Then
-        '        ctrVFP = ctr
-        '        CallByName(fd2Record, strValueFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrValue.GetValue)
-        '        CallByName(fd2Record, strFlagFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrFlag.GetValue)
-        '        CallByName(fd2Record, strPeriodFieldName & ctrVFP.Tag, CallType.Set, ctrVFP.ucrPeriod.GetValue)
-        '    ElseIf TypeOf ctr Is ucrTextBox Then
-        '        ctrTotal = ctr
-        '        CallByName(fd2Record, strTotalFieldName, CallType.Set, ctrTotal.GetValue)
-        '    End If
-
-        'Next
 
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
@@ -201,21 +183,23 @@ Public Class ucrFormDaily2
 
     Private Sub EnableDaysofMonth()
 
-        Dim iMonthLength As Integer
+        'Dim iMonthLength As Integer
 
-        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
-            iMonthLength = 31
-        Else
-            iMonthLength = DateTime.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
-        End If
+        'If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+        '    iMonthLength = 31
+        'Else
+        '    iMonthLength = DateTime.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
+        'End If
 
-        For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
-            If ctrVFP.Tag <= iMonthLength Then
-                ctrVFP.Enabled = True
-            Else
-                ctrVFP.Enabled = False
-            End If
-        Next
+        'If Me.Enabled Then
+        '    For Each ctrVFP As ucrValueFlagPeriod In {ucrValueFlagPeriod29, ucrValueFlagPeriod30, ucrValueFlagPeriod31}
+        '        If ctrVFP.Tag <= iMonthLength Then
+        '            ctrVFP.Enabled = True
+        '        Else
+        '            ctrVFP.Enabled = False
+        '        End If
+        '    Next
+        'End If
     End Sub
     '''' <summary>
     '''' Sets the linked year and month controls
@@ -269,7 +253,7 @@ Public Class ucrFormDaily2
     ''' Checks if total for current element is required
     ''' Checks if the computed total is same as the user entered total.
     ''' </summary>
-    Public Sub checkTotal()
+    Public Function checkTotal() As Boolean
         'Check total if required from obselements table from qcTotalRequired field
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
@@ -293,14 +277,19 @@ Public Class ucrFormDaily2
                         elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
                     End If
                 Next
-                If elemTotal <> expectedTotal Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", caption:="Error in total")
+                If elemTotal = expectedTotal Then
+                    Return True
+                Else
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.GetFocus()
                     ucrInputTotal.SetBackColor(Color.Cyan)
+                    Return False
                 End If
+            Else
+                Return True
             End If
         End If
-    End Sub
+    End Function
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkTotal()
@@ -455,36 +444,40 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub ValidateDataEntryPermision()
-        'Dim TodaysDate As Date
-        'Dim SelectedDate As Date
+        Dim iMonthLength As Integer
+        Dim TodaysDate As Date
+        Dim ctr As Control
 
-        'Dim ctr As Control
-        'Dim ctrTagValue As Integer
+        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+            Exit Sub
+        End If
 
-        'If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
-        '    Exit Sub
-        'End If
-        'TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        'SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue)
+        TodaysDate = Date.Now
+        iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
 
-        'If ucrLinkedYear.GetValue > TodaysDate.Year Then
-
-        '    Me.Enabled = False
-
-        'ElseIf ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue = TodaysDate.Month Then
-        '    For Each ctr In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            ctrTagValue = Val(ctr.Tag)
-        '            If ctr.Tag >= Val(TodaysDate.Date) Then
-        '                ctr.Enabled = False
-        '            Else
-        '                ctr.Enabled = True
-        '            End If
-        '        End If
-        '    Next
-        'Else
-        '    Me.Enabled = True
-
-        'End If
+        If ucrLinkedYear.GetValue > TodaysDate.Year OrElse (ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue > TodaysDate.Month) Then
+            Me.Enabled = False
+        Else
+            Me.Enabled = True
+            If ucrLinkedYear.GetValue = TodaysDate.Year AndAlso ucrLinkedMonth.GetValue = TodaysDate.Month Then
+                For Each ctr In Me.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod Then
+                        If Val(ctr.Tag) >= TodaysDate.Day Then
+                            ctr.Enabled = False
+                        Else
+                            ctr.Enabled = True
+                        End If
+                    End If
+                Next
+            Else
+                For Each ctr In Me.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod AndAlso Val(ctr.Tag > iMonthLength) Then
+                        ctr.Enabled = False
+                    Else
+                        ctr.Enabled = True
+                    End If
+                Next
+            End If
+        End If
     End Sub
 End Class

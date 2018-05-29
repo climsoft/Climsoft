@@ -207,7 +207,7 @@ Public Class ucrValueFlagPeriod
 
         If e.KeyCode = Keys.Enter Then
             If sender Is ucrValue.txtBox Then
-                If ucrValueEnter() Then
+                If QCForValue() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
@@ -222,42 +222,42 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Private Sub ucrValue_Leave(sender As Object, e As EventArgs) Handles ucrValue.Leave
-        ucrValueEnter()
+        QCForValue()
     End Sub
 
-    Private Function ucrValueEnter() As Boolean
+    Private Function QCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
 
-        If Not ucrValue.IsEmpty Then
+        If ucrValue.IsEmpty Then
+            'empty ucrValue is a valid value
+            bValuesCorrect = True
+        Else
             'Check for an observation flag in the ucrValue.
             'If a flag exists then separate and place it in the  ucrValueFlag 
-            If Not IsNumeric(Strings.Right(ucrValue.GetValue, 1)) Then
+            If Not IsNumeric(Strings.Right(ucrValue.GetValue, 1)) AndAlso IsNumeric(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
                 'Get observation flag from the ucrValue (the last character). 
                 ucrFlag.SetValue(Strings.Right(ucrValue.GetValue, 1))
                 'Get the observation value by leaving out the last character  
                 ucrValue.SetValue(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1))
             End If
-            'change bValidateSilently temporarily then restore it
+
+            'validate value loudly 
             bValidateSilently = ucrValue.bValidateSilently
             ucrValue.bValidateSilently = False
             bValuesCorrect = ucrValue.ValidateValue()
             ucrValue.bValidateSilently = bValidateSilently
         End If
 
-        'if value is empty then set flag as M else remove the M
-        If ucrValue.IsEmpty Then
-            If ucrFlag.IsEmpty OrElse ucrFlag.GetValue = "M" Then
+        If bValuesCorrect Then
+            'if value is empty then set flag as M else remove the M
+            If ucrValue.IsEmpty Then
                 ucrFlag.SetValue("M")
-            End If
-            bValuesCorrect = True
-        Else
-            If bValuesCorrect AndAlso ucrFlag.GetValue = "M" Then
+            ElseIf ucrFlag.GetValue = "M"
                 ucrFlag.SetValue("")
             End If
-        End If
 
-        If bValuesCorrect Then
+            'do QC for flag
             bValuesCorrect = QcForFlag()
         End If
 
@@ -298,38 +298,10 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetElementValueSize(New Size(33, 20))
     End Sub
 
-    'Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
-
-    '    If Not ucrValue.IsEmpty AndAlso Not IsNumeric(Strings.Right(ucrValue.TextboxValue, 1)) Then
-    '        'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
-    '        'to the value string in the textbox.
-    '        ucrFlag.TextboxValue = Strings.Right(ucrValue.TextboxValue, 1)
-
-    '        'Get the observation value by leaving out the last character from the string entered in the textbox
-    '        ucrValue.TextboxValue = Strings.Left(ucrValue.TextboxValue, ucrValue.TextboxValue.Length - 1)
-
-    '        'Check that numeric value has been entered for observation value
-    '        If Not IsNumeric(ucrValue.TextboxValue) Then
-    '            'tabNext = False
-    '            If Not ucrValue.IsEmpty Then
-    '                MsgBox("Number expected!", MsgBoxStyle.Critical)
-    '            End If
-    '        End If
-    '        ucrFlag.GetFocus()
-    '    End If
-    '    If ucrValue.IsEmpty AndAlso ucrValue.bValidate Then
-    '        If Not ucrFlag.TextboxValue = "M" Then
-    '            If ucrFlag.IsEmpty Then
-    '                ucrFlag.TextboxValue = "M"
-    '                ucrFlag.GetFocus()
-    '            Else
-    '                MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
-    '            End If
-    '        End If
-    '    End If
-
-    'End Sub
-
-
-
+    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
+        'ucrFlag should is set as readonly. That changes its back color to the one given below
+        'for consistency we are rienforcing this color everytime a value is changed on this control
+        'to override the white color being set on textbox validation subroutine
+        ucrFlag.SetBackColor(SystemColors.Control)
+    End Sub
 End Class
