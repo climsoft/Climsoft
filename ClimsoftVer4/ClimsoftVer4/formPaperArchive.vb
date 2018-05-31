@@ -32,11 +32,13 @@
     'End Sub
     Sub ListFiles(flds As String)
         Try
+
             ' Declare and assign folder variables
             Dim f1 As New IO.DirectoryInfo(flds)
             Dim d1 As IO.FileInfo() = f1.GetFiles()
             Dim da1 As IO.FileInfo
             Dim fls As String
+            lstvFiles.Clear()
 
             lstvFiles.Columns.Add("Files", 500, HorizontalAlignment.Left)
             'list the names of all files in the specified directory
@@ -46,19 +48,24 @@
                 If InStr("jpgpngtifgifbmpemf", Strings.LCase((Strings.Right(fls, 3)))) > 0 Then lstvFiles.Items.Add(fls)
             Next
 
-            FilesListSatus(True)
+            If lstvFiles.Items.Count > 0 Then
+                FilesListSatus(True)
+                chkFiles.Visible = True
+            Else
+                chkFiles.Visible = False
+            End If
             'chkFiles.Text = "Unselect All"
             'To filter search change f1.GetFiles() to di.GetFiles(“.extionsion”)
+
         Catch ex As Exception
             MsgBox(ex.Message)
+            chkFiles.Visible = False
         End Try
-
-
 
     End Sub
 
 
-    Private Sub cmdFolder_Click_1(sender As Object, e As EventArgs) Handles cmdFolder.Click
+    Private Sub cmdFolder_Click(sender As Object, e As EventArgs) Handles cmdFolder.Click
         Dim fld As String
         ' Set busy Cursor pointer
         Me.Cursor = Cursors.WaitCursor
@@ -66,8 +73,8 @@
         txtSelectedFolder.Text = folderPaperArchive.SelectedPath
         fld = txtSelectedFolder.Text
 
-        lstvFiles.Clear()
-        ListFiles(fld)
+        'lstvFiles.Clear()
+        'ListFiles(fld)
         Me.Cursor = Cursors.Default
     End Sub
 
@@ -233,11 +240,21 @@
     Private Sub formPaperArchive_Click(sender As Object, e As EventArgs) Handles Me.Click
         Select Case tabImageArchives.TabIndex
             Case 0
-                MsgBox("Structured")
+                'MsgBox("Structured")
             Case 1
             Case 2
 
         End Select
+    End Sub
+
+    Private Sub formPaperArchive_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        'MsgBox(e.KeyCode)
+        If e.KeyCode = 13 Then My.Computer.Keyboard.SendKeys("{TAB}")
+
+    End Sub
+
+    Private Sub formPaperArchive_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+
     End Sub
 
     Private Sub formPaperArchive_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -390,15 +407,32 @@
             If IsDate(frmdatetime) Then
                 'IO.File.Copy(txtImageFile.Text, "c:\images\" & FileNm, True)
                 IO.File.Copy(txtImageFile.Text, ImagesPath & "\" & FileNm, True)
-                If ArchiveRecord(stn, frm, frmdatetime, ImagesPath & "\" & FileNm) Then lstMessages.Items.Add(FileNm & " Archived")
+                If ArchiveRecord(stn, frm, frmdatetime, ImagesPath & "\" & FileNm) Then
+                    lblArchiveMsg.Text = FileNm & " Archived"
+                    'Clear Form
+                    txtImageFile.Text = ""
+                    txtStationArchive.Text = ""
+                    txtFormId.Text = ""
+                    txtYear.Text = ""
+                    txtMonth.Text = ""
+                    txtDay.Text = ""
+                    txtHour.Text = ""
+                Else
+                    lblArchiveMsg.Text = "Invalid Entries. Not archived"
+                End If
+                ' lstMessages.Items.Add(FileNm & " Archived")
+
             Else
                 'MsgBox("Can't Archive Image. Invalid Datetime value")
-                lstMessages.Items.Add("Invalid Datetime value. Not archived")
+                'lstMessages.Items.Add("Invalid Datetime value. Not archived")
+
+                lblArchiveMsg.Text = "Invalid Datetime value. Not archived"
             End If
 
         Catch ex As Exception
             'MsgBox(ex.Message)
-            lstMessages.Items.Add(ex.Message)
+            'lstMessages.Items.Add(ex.Message)
+            lblArchiveMsg.Text = ex.Message
             Me.Cursor = Cursors.Default
         End Try
         Me.Cursor = Cursors.Default
@@ -419,19 +453,65 @@
     Private Sub tabImageArchives_Click(sender As Object, e As EventArgs) Handles tabImageArchives.Click
         SelectedTab = tabImageArchives.SelectedIndex
         'MsgBox(SelectedTab)
-        If SelectedTab = 2 Then
+        Select Case SelectedTab
+            Case 0 ' Structured Image Filename
+                txtSelectedFolder.Text = ""
+                lstvFiles.Clear()
+                PicForm.Visible = False
+                lstMessages.Visible = True
+                lblZoomout.Visible = False
+                lblMessages.Visible = True
+            Case 1 ' Unstructured Image Filename
+                'Clear Tab
+                txtImageFile.Text = ""
+                txtStationArchive.Text = ""
+                txtFormId.Text = ""
+                txtYear.Text = ""
+                txtMonth.Text = ""
+                txtDay.Text = ""
+                txtHour.Text = ""
+                lblZoomout.Visible = True
+                lblMessages.Visible = False
+                PicForm.Visible = True
+                lstMessages.Visible = False
+                ' Set Image box to Nothing
+                PicForm.ImageLocation = Nothing
+                PicForm.Refresh()
+            Case 2 ' Retrieve Archived Images
+                ''Clear Tab
+                'txtStation.Text = ""
+                'txtForm.Text = ""
+                'txtYY.Text = ""
+                'txtMM.Text = ""
+                'txtDD.Text = ""
+                'txtHH.Text = ""
+                lblZoomout.Visible = True
+                lblMessages.Visible = False
+                PicForm.Visible = True
+                lstMessages.Visible = False
+                ' Set Image box to Nothing
+                PicForm.ImageLocation = Nothing
+                PicForm.Refresh()
 
-            sql = "SELECT * FROM  paperarchive"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-            ds.Clear()
-            da.Fill(ds, "paperarchive")
+                sql = "SELECT * FROM  paperarchive"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+                ds.Clear()
+                da.Fill(ds, "paperarchive")
 
-            rec = 0
-            Kount = ds.Tables("paperarchive").Rows.Count
+                rec = 0
+                Kount = ds.Tables("paperarchive").Rows.Count
 
-            ViewImage(rec)
-        End If
-
+                ViewImage(rec)
+                'End If
+            Case 3 ' View Archived Images List
+                lblZoomout.Visible = True
+                lblMessages.Visible = False
+                PicForm.Visible = True
+                lstMessages.Visible = False
+                ' Set Image box to Nothing
+                PicForm.ImageLocation = Nothing
+                PicForm.Refresh()
+        End Select
     End Sub
 
     Private Sub txtDay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtDay.SelectedIndexChanged
@@ -457,7 +537,9 @@
             frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
             img = ds.Tables("paperarchive").Rows(num).Item("image")
             If InStr(img, imgfl) > 0 Then
-                ShowImage(img)
+                'ShowImage(img)
+                PicForm.ImageLocation = img
+                PicForm.Refresh()
                 Exit For
             End If
         Next
@@ -550,9 +632,7 @@ Err:
 
     End Sub
 
-    Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
 
-    End Sub
 
     Private Sub cmdDeleteArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdDeleteArchiveDef.Click
 
@@ -564,7 +644,10 @@ Err:
         Dim stn, dt, img, frm As String
 
         Try
-
+            If PicForm.ImageLocation = "" Then
+                MsgBox("Can't Delete. No Image Retrieved")
+                Exit Sub
+            End If
             sql = "SELECT * FROM paperarchive"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
@@ -589,6 +672,7 @@ Err:
 
                 comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
                 sql0 = "DELETE FROM `paperarchive` WHERE  `belongsTo`='" & stn & "' AND `formDatetime`='" & dt & "' AND `image`='" & img & "' AND `classifiedInto`='" & frm & "' LIMIT 1;"
+                MsgBox(sql0)
                 comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
                 comm.ExecuteNonQuery()   ' Execute the query
 
@@ -601,7 +685,9 @@ Err:
                 Else
                     ResetForm()
                 End If
-
+                ' Set Image location to nothin
+                PicForm.ImageLocation = Nothing
+                PicForm.Refresh()
             End If
         Catch ex As Exception
             MsgBox(ex.HResult & " " & ex.Message)
@@ -688,10 +774,11 @@ Err:
 
         lstArchival.Columns.Clear()
         dbconn.Close()
+
         Try
             dbconn.ConnectionString = frmLogin.txtusrpwd.Text
             dbconn.Open()
-
+            lstArchival.Clear()
             sql = "SELECT * FROM paperarchive ORDER BY belongsTo"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ds.Clear()
@@ -723,4 +810,93 @@ Err:
         End Try
         dbconn.Close()
     End Sub
+
+    Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
+        PicForm.ImageLocation = txtImageFile.Text
+        'lblArchiveMsg.Text = ""
+        PicForm.Refresh()
+        'PicForm.Visible = True
+        'lstMessages.Visible = False
+
+    End Sub
+
+    Private Sub tabUnstructured_Click(sender As Object, e As EventArgs) Handles tabUnstructured.Click
+        'MsgBox("Unstructured Image File")
+        'PicForm.Visible = True
+        'lstMessages.Visible = False
+    End Sub
+
+
+    Private Sub lblZoomout_Click(sender As Object, e As EventArgs) Handles lblZoomout.Click
+        'frmViewImage.picView.ImageLocation = txtImageFile.Text
+        'frmViewImage.picView.Refresh()
+        'frmViewImage.Show()
+
+        ImageZoom(PicForm.ImageLocation)
+    End Sub
+
+    Private Sub lblMessages_Click(sender As Object, e As EventArgs) Handles lblMessages.Click
+
+    End Sub
+
+    Private Sub MenuPaperArchive_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuPaperArchive.ItemClicked
+
+    End Sub
+
+    Sub ImageZoom(flnm As String)
+        frmViewImage.picView.ImageLocation = flnm
+        frmViewImage.picView.Refresh()
+        frmViewImage.Show()
+    End Sub
+
+    Private Sub lstArchival_Click(sender As Object, e As EventArgs) Handles lstArchival.Click
+        'MsgBox(lstArchival.FocusedItem.SubItems(3).Text)
+        PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
+    End Sub
+
+
+    Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
+        If PicForm.ImageLocation = "" Then
+            MsgBox("Can't Update. No Image Retrieved")
+            Exit Sub
+        End If
+        Try
+            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
+                Dim dt, img, sql0 As String
+                Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+
+                img = PicForm.ImageLocation
+
+                ' Change the path character to mysql format
+                img = Strings.Replace(img, "\", "\\")
+                dt = txtYY.Text & "-" & txtMM.Text & "-" & txtDD.Text & " " & txtHH.Text & ":00:00"
+
+                comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+
+                sql0 = "update paperarchive set belongsTo = '" & txtStation.Text & "', formDatetime='" & dt & "', classifiedInto='" & txtForm.Text & "' " & _
+                       "where image ='" & img & "';"
+
+                'MsgBox(sql0)
+                comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+                comm.ExecuteNonQuery()   ' Execute the query
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub PicForm_MouseHover(sender As Object, e As EventArgs) Handles PicForm.MouseHover
+
+    End Sub
+
+    Private Sub txtSelectedFolder_TextChanged(sender As Object, e As EventArgs) Handles txtSelectedFolder.TextChanged
+        If IO.Directory.Exists(txtSelectedFolder.Text) Then
+            ListFiles(txtSelectedFolder.Text)
+        Else
+            lstvFiles.Clear()
+            chkFiles.Visible = False
+        End If
+    End Sub
+
+
 End Class
