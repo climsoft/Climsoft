@@ -37,6 +37,7 @@ Partial Class formPaperArchive
         Me.lblSelectedFolder = New System.Windows.Forms.Label()
         Me.txtSelectedFolder = New System.Windows.Forms.TextBox()
         Me.tabUnstructured = New System.Windows.Forms.TabPage()
+        Me.lblArchiveMsg = New System.Windows.Forms.Label()
         Me.pnlUnstructuredNames = New System.Windows.Forms.Panel()
         Me.txtFormId = New System.Windows.Forms.ComboBox()
         Me.txtYear = New System.Windows.Forms.TextBox()
@@ -93,6 +94,8 @@ Partial Class formPaperArchive
         Me.lblMessages = New System.Windows.Forms.Label()
         Me.txtDefaultFolder = New System.Windows.Forms.TextBox()
         Me.cmdClear = New System.Windows.Forms.Button()
+        Me.PicForm = New System.Windows.Forms.PictureBox()
+        Me.lblZoomout = New System.Windows.Forms.Label()
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -105,6 +108,7 @@ Partial Class formPaperArchive
         Me.GroupBox18.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
+        CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -116,7 +120,7 @@ Partial Class formPaperArchive
         Me.tabImageArchives.Location = New System.Drawing.Point(9, 27)
         Me.tabImageArchives.Name = "tabImageArchives"
         Me.tabImageArchives.SelectedIndex = 0
-        Me.tabImageArchives.Size = New System.Drawing.Size(606, 481)
+        Me.tabImageArchives.Size = New System.Drawing.Size(546, 481)
         Me.tabImageArchives.TabIndex = 2
         '
         'tabStructured
@@ -127,7 +131,7 @@ Partial Class formPaperArchive
         Me.tabStructured.Location = New System.Drawing.Point(4, 22)
         Me.tabStructured.Name = "tabStructured"
         Me.tabStructured.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabStructured.Size = New System.Drawing.Size(598, 455)
+        Me.tabStructured.Size = New System.Drawing.Size(538, 455)
         Me.tabStructured.TabIndex = 0
         Me.tabStructured.Text = "Structured Filenames"
         Me.tabStructured.UseVisualStyleBackColor = True
@@ -145,7 +149,7 @@ Partial Class formPaperArchive
         Me.grpInformation.Controls.Add(Me.txtSelectedFolder)
         Me.grpInformation.Location = New System.Drawing.Point(16, 6)
         Me.grpInformation.Name = "grpInformation"
-        Me.grpInformation.Size = New System.Drawing.Size(565, 440)
+        Me.grpInformation.Size = New System.Drawing.Size(514, 440)
         Me.grpInformation.TabIndex = 3
         Me.grpInformation.TabStop = False
         Me.grpInformation.Text = "Image Files"
@@ -174,7 +178,7 @@ Partial Class formPaperArchive
         Me.chkFiles.AutoSize = True
         Me.chkFiles.Checked = True
         Me.chkFiles.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkFiles.Location = New System.Drawing.Point(104, 378)
+        Me.chkFiles.Location = New System.Drawing.Point(21, 383)
         Me.chkFiles.Name = "chkFiles"
         Me.chkFiles.Size = New System.Drawing.Size(82, 17)
         Me.chkFiles.TabIndex = 19
@@ -188,7 +192,7 @@ Partial Class formPaperArchive
         Me.grpComands.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.grpComands.Location = New System.Drawing.Point(3, 406)
         Me.grpComands.Name = "grpComands"
-        Me.grpComands.Size = New System.Drawing.Size(559, 31)
+        Me.grpComands.Size = New System.Drawing.Size(508, 31)
         Me.grpComands.TabIndex = 18
         Me.grpComands.TabStop = False
         '
@@ -213,10 +217,10 @@ Partial Class formPaperArchive
         Me.lstvFiles.HideSelection = False
         Me.lstvFiles.HoverSelection = True
         Me.lstvFiles.LabelEdit = True
-        Me.lstvFiles.Location = New System.Drawing.Point(104, 96)
+        Me.lstvFiles.Location = New System.Drawing.Point(21, 92)
         Me.lstvFiles.Name = "lstvFiles"
         Me.lstvFiles.RightToLeftLayout = True
-        Me.lstvFiles.Size = New System.Drawing.Size(423, 280)
+        Me.lstvFiles.Size = New System.Drawing.Size(474, 280)
         Me.lstvFiles.TabIndex = 17
         Me.lstvFiles.UseCompatibleStateImageBehavior = False
         Me.lstvFiles.View = System.Windows.Forms.View.Details
@@ -225,7 +229,7 @@ Partial Class formPaperArchive
         '
         Me.cmdFolder.BackgroundImage = CType(resources.GetObject("cmdFolder.BackgroundImage"), System.Drawing.Image)
         Me.cmdFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFolder.Location = New System.Drawing.Point(492, 52)
+        Me.cmdFolder.Location = New System.Drawing.Point(468, 52)
         Me.cmdFolder.Name = "cmdFolder"
         Me.cmdFolder.Size = New System.Drawing.Size(35, 26)
         Me.cmdFolder.TabIndex = 16
@@ -254,20 +258,30 @@ Partial Class formPaperArchive
         Me.txtSelectedFolder.BackColor = System.Drawing.Color.Snow
         Me.txtSelectedFolder.Location = New System.Drawing.Point(104, 55)
         Me.txtSelectedFolder.Name = "txtSelectedFolder"
-        Me.txtSelectedFolder.Size = New System.Drawing.Size(390, 20)
+        Me.txtSelectedFolder.Size = New System.Drawing.Size(367, 20)
         Me.txtSelectedFolder.TabIndex = 0
         '
         'tabUnstructured
         '
         Me.tabUnstructured.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabUnstructured.Controls.Add(Me.lblArchiveMsg)
         Me.tabUnstructured.Controls.Add(Me.pnlUnstructuredNames)
         Me.tabUnstructured.Location = New System.Drawing.Point(4, 22)
         Me.tabUnstructured.Name = "tabUnstructured"
         Me.tabUnstructured.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabUnstructured.Size = New System.Drawing.Size(598, 455)
+        Me.tabUnstructured.Size = New System.Drawing.Size(538, 455)
         Me.tabUnstructured.TabIndex = 1
         Me.tabUnstructured.Text = "Unstructured Filenames"
         Me.tabUnstructured.UseVisualStyleBackColor = True
+        '
+        'lblArchiveMsg
+        '
+        Me.lblArchiveMsg.AutoSize = True
+        Me.lblArchiveMsg.ForeColor = System.Drawing.Color.Red
+        Me.lblArchiveMsg.Location = New System.Drawing.Point(108, 396)
+        Me.lblArchiveMsg.Name = "lblArchiveMsg"
+        Me.lblArchiveMsg.Size = New System.Drawing.Size(0, 13)
+        Me.lblArchiveMsg.TabIndex = 1
         '
         'pnlUnstructuredNames
         '
@@ -289,39 +303,39 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.Controls.Add(Me.txtMonth)
         Me.pnlUnstructuredNames.Controls.Add(Me.txtStationArchive)
         Me.pnlUnstructuredNames.Controls.Add(Me.lblStationId)
-        Me.pnlUnstructuredNames.Location = New System.Drawing.Point(12, 52)
+        Me.pnlUnstructuredNames.Location = New System.Drawing.Point(16, 30)
         Me.pnlUnstructuredNames.Name = "pnlUnstructuredNames"
-        Me.pnlUnstructuredNames.Size = New System.Drawing.Size(564, 327)
+        Me.pnlUnstructuredNames.Size = New System.Drawing.Size(501, 327)
         Me.pnlUnstructuredNames.TabIndex = 0
         '
         'txtFormId
         '
         Me.txtFormId.FormattingEnabled = True
-        Me.txtFormId.Location = New System.Drawing.Point(401, 22)
+        Me.txtFormId.Location = New System.Drawing.Point(345, 68)
         Me.txtFormId.Name = "txtFormId"
         Me.txtFormId.Size = New System.Drawing.Size(148, 21)
-        Me.txtFormId.TabIndex = 20
+        Me.txtFormId.TabIndex = 2
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(67, 56)
+        Me.txtYear.Location = New System.Drawing.Point(67, 102)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(41, 20)
-        Me.txtYear.TabIndex = 19
+        Me.txtYear.TabIndex = 3
         '
         'cmdArchiveUnstructure
         '
         Me.cmdArchiveUnstructure.Location = New System.Drawing.Point(253, 282)
         Me.cmdArchiveUnstructure.Name = "cmdArchiveUnstructure"
         Me.cmdArchiveUnstructure.Size = New System.Drawing.Size(88, 25)
-        Me.cmdArchiveUnstructure.TabIndex = 16
+        Me.cmdArchiveUnstructure.TabIndex = 7
         Me.cmdArchiveUnstructure.Text = "Archive"
         Me.cmdArchiveUnstructure.UseVisualStyleBackColor = True
         '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(36, 225)
+        Me.CheckBox1.Location = New System.Drawing.Point(15, 290)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(126, 17)
         Me.CheckBox1.TabIndex = 15
@@ -333,7 +347,7 @@ Partial Class formPaperArchive
         '
         Me.cmdImageFile.BackgroundImage = CType(resources.GetObject("cmdImageFile.BackgroundImage"), System.Drawing.Image)
         Me.cmdImageFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdImageFile.Location = New System.Drawing.Point(519, 187)
+        Me.cmdImageFile.Location = New System.Drawing.Point(463, 17)
         Me.cmdImageFile.Name = "cmdImageFile"
         Me.cmdImageFile.Size = New System.Drawing.Size(30, 26)
         Me.cmdImageFile.TabIndex = 14
@@ -342,7 +356,7 @@ Partial Class formPaperArchive
         'lblImageFile
         '
         Me.lblImageFile.AutoSize = True
-        Me.lblImageFile.Location = New System.Drawing.Point(12, 194)
+        Me.lblImageFile.Location = New System.Drawing.Point(12, 24)
         Me.lblImageFile.Name = "lblImageFile"
         Me.lblImageFile.Size = New System.Drawing.Size(55, 13)
         Me.lblImageFile.TabIndex = 13
@@ -350,15 +364,15 @@ Partial Class formPaperArchive
         '
         'txtImageFile
         '
-        Me.txtImageFile.Location = New System.Drawing.Point(67, 190)
+        Me.txtImageFile.Location = New System.Drawing.Point(67, 20)
         Me.txtImageFile.Name = "txtImageFile"
-        Me.txtImageFile.Size = New System.Drawing.Size(456, 20)
-        Me.txtImageFile.TabIndex = 12
+        Me.txtImageFile.Size = New System.Drawing.Size(400, 20)
+        Me.txtImageFile.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(351, 26)
+        Me.Label5.Location = New System.Drawing.Point(295, 72)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(44, 13)
         Me.Label5.TabIndex = 11
@@ -368,15 +382,15 @@ Partial Class formPaperArchive
         '
         Me.txtHour.FormattingEnabled = True
         Me.txtHour.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHour.Location = New System.Drawing.Point(67, 157)
+        Me.txtHour.Location = New System.Drawing.Point(67, 203)
         Me.txtHour.Name = "txtHour"
         Me.txtHour.Size = New System.Drawing.Size(41, 21)
-        Me.txtHour.TabIndex = 10
+        Me.txtHour.TabIndex = 6
         '
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(12, 161)
+        Me.lblHour.Location = New System.Drawing.Point(12, 207)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(30, 13)
         Me.lblHour.TabIndex = 9
@@ -385,7 +399,7 @@ Partial Class formPaperArchive
         'lblday
         '
         Me.lblday.AutoSize = True
-        Me.lblday.Location = New System.Drawing.Point(12, 127)
+        Me.lblday.Location = New System.Drawing.Point(12, 173)
         Me.lblday.Name = "lblday"
         Me.lblday.Size = New System.Drawing.Size(26, 13)
         Me.lblday.TabIndex = 8
@@ -394,7 +408,7 @@ Partial Class formPaperArchive
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(12, 93)
+        Me.lblMonth.Location = New System.Drawing.Point(12, 139)
         Me.lblMonth.Margin = New System.Windows.Forms.Padding(0)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(37, 13)
@@ -404,7 +418,7 @@ Partial Class formPaperArchive
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(12, 60)
+        Me.lblYear.Location = New System.Drawing.Point(12, 106)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(29, 13)
         Me.lblYear.TabIndex = 6
@@ -414,7 +428,7 @@ Partial Class formPaperArchive
         '
         Me.txtDay.FormattingEnabled = True
         Me.txtDay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.txtDay.Location = New System.Drawing.Point(67, 123)
+        Me.txtDay.Location = New System.Drawing.Point(67, 169)
         Me.txtDay.Name = "txtDay"
         Me.txtDay.Size = New System.Drawing.Size(41, 21)
         Me.txtDay.TabIndex = 5
@@ -423,7 +437,7 @@ Partial Class formPaperArchive
         '
         Me.txtMonth.FormattingEnabled = True
         Me.txtMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.txtMonth.Location = New System.Drawing.Point(67, 89)
+        Me.txtMonth.Location = New System.Drawing.Point(67, 135)
         Me.txtMonth.Name = "txtMonth"
         Me.txtMonth.Size = New System.Drawing.Size(41, 21)
         Me.txtMonth.TabIndex = 4
@@ -431,15 +445,15 @@ Partial Class formPaperArchive
         'txtStationArchive
         '
         Me.txtStationArchive.FormattingEnabled = True
-        Me.txtStationArchive.Location = New System.Drawing.Point(67, 22)
+        Me.txtStationArchive.Location = New System.Drawing.Point(67, 68)
         Me.txtStationArchive.Name = "txtStationArchive"
         Me.txtStationArchive.Size = New System.Drawing.Size(210, 21)
-        Me.txtStationArchive.TabIndex = 2
+        Me.txtStationArchive.TabIndex = 1
         '
         'lblStationId
         '
         Me.lblStationId.AutoSize = True
-        Me.lblStationId.Location = New System.Drawing.Point(12, 26)
+        Me.lblStationId.Location = New System.Drawing.Point(12, 72)
         Me.lblStationId.Name = "lblStationId"
         Me.lblStationId.Size = New System.Drawing.Size(51, 13)
         Me.lblStationId.TabIndex = 0
@@ -451,7 +465,7 @@ Partial Class formPaperArchive
         Me.TabViewArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabViewArchive.Name = "TabViewArchive"
         Me.TabViewArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabViewArchive.Size = New System.Drawing.Size(598, 455)
+        Me.TabViewArchive.Size = New System.Drawing.Size(538, 455)
         Me.TabViewArchive.TabIndex = 2
         Me.TabViewArchive.Text = "Retrieve Images"
         Me.TabViewArchive.UseVisualStyleBackColor = True
@@ -472,7 +486,7 @@ Partial Class formPaperArchive
         Me.grpImage.Controls.Add(Me.Label4)
         Me.grpImage.Controls.Add(Me.Label3)
         Me.grpImage.Controls.Add(Me.Label2)
-        Me.grpImage.Location = New System.Drawing.Point(37, 57)
+        Me.grpImage.Location = New System.Drawing.Point(18, 27)
         Me.grpImage.Name = "grpImage"
         Me.grpImage.Size = New System.Drawing.Size(499, 332)
         Me.grpImage.TabIndex = 0
@@ -558,7 +572,7 @@ Partial Class formPaperArchive
         Me.cmdView.Location = New System.Drawing.Point(91, 6)
         Me.cmdView.Name = "cmdView"
         Me.cmdView.Size = New System.Drawing.Size(81, 25)
-        Me.cmdView.TabIndex = 43
+        Me.cmdView.TabIndex = 16
         Me.cmdView.Text = "View Image"
         Me.cmdView.UseVisualStyleBackColor = True
         '
@@ -567,7 +581,7 @@ Partial Class formPaperArchive
         Me.cmdDeleteArchiveDef.Location = New System.Drawing.Point(358, 6)
         Me.cmdDeleteArchiveDef.Name = "cmdDeleteArchiveDef"
         Me.cmdDeleteArchiveDef.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteArchiveDef.TabIndex = 42
+        Me.cmdDeleteArchiveDef.TabIndex = 18
         Me.cmdDeleteArchiveDef.Text = "Delete"
         Me.cmdDeleteArchiveDef.UseVisualStyleBackColor = True
         '
@@ -576,7 +590,7 @@ Partial Class formPaperArchive
         Me.cmdUpdateArchiveDef.Location = New System.Drawing.Point(230, 6)
         Me.cmdUpdateArchiveDef.Name = "cmdUpdateArchiveDef"
         Me.cmdUpdateArchiveDef.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateArchiveDef.TabIndex = 41
+        Me.cmdUpdateArchiveDef.TabIndex = 17
         Me.cmdUpdateArchiveDef.Text = "Update"
         Me.cmdUpdateArchiveDef.UseVisualStyleBackColor = True
         '
@@ -585,7 +599,7 @@ Partial Class formPaperArchive
         Me.txtYY.Location = New System.Drawing.Point(157, 104)
         Me.txtYY.Name = "txtYY"
         Me.txtYY.Size = New System.Drawing.Size(41, 20)
-        Me.txtYY.TabIndex = 20
+        Me.txtYY.TabIndex = 12
         '
         'txtHH
         '
@@ -594,7 +608,7 @@ Partial Class formPaperArchive
         Me.txtHH.Location = New System.Drawing.Point(157, 194)
         Me.txtHH.Name = "txtHH"
         Me.txtHH.Size = New System.Drawing.Size(41, 21)
-        Me.txtHH.TabIndex = 16
+        Me.txtHH.TabIndex = 15
         '
         'txtDD
         '
@@ -603,7 +617,7 @@ Partial Class formPaperArchive
         Me.txtDD.Location = New System.Drawing.Point(157, 164)
         Me.txtDD.Name = "txtDD"
         Me.txtDD.Size = New System.Drawing.Size(41, 21)
-        Me.txtDD.TabIndex = 15
+        Me.txtDD.TabIndex = 14
         '
         'txtMM
         '
@@ -612,7 +626,7 @@ Partial Class formPaperArchive
         Me.txtMM.Location = New System.Drawing.Point(157, 134)
         Me.txtMM.Name = "txtMM"
         Me.txtMM.Size = New System.Drawing.Size(41, 21)
-        Me.txtMM.TabIndex = 14
+        Me.txtMM.TabIndex = 13
         '
         'txtForm
         '
@@ -620,7 +634,7 @@ Partial Class formPaperArchive
         Me.txtForm.Location = New System.Drawing.Point(157, 75)
         Me.txtForm.Name = "txtForm"
         Me.txtForm.Size = New System.Drawing.Size(176, 21)
-        Me.txtForm.TabIndex = 7
+        Me.txtForm.TabIndex = 11
         '
         'txtStation
         '
@@ -628,7 +642,7 @@ Partial Class formPaperArchive
         Me.txtStation.Location = New System.Drawing.Point(157, 42)
         Me.txtStation.Name = "txtStation"
         Me.txtStation.Size = New System.Drawing.Size(176, 21)
-        Me.txtStation.TabIndex = 6
+        Me.txtStation.TabIndex = 10
         '
         'Label8
         '
@@ -691,16 +705,16 @@ Partial Class formPaperArchive
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(598, 455)
+        Me.TabPage1.Size = New System.Drawing.Size(538, 455)
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "Archival List"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'cmdList
         '
-        Me.cmdList.Location = New System.Drawing.Point(233, 428)
+        Me.cmdList.Location = New System.Drawing.Point(196, 425)
         Me.cmdList.Name = "cmdList"
-        Me.cmdList.Size = New System.Drawing.Size(130, 24)
+        Me.cmdList.Size = New System.Drawing.Size(104, 24)
         Me.cmdList.TabIndex = 19
         Me.cmdList.Text = "List Image Details"
         Me.cmdList.UseVisualStyleBackColor = True
@@ -717,7 +731,7 @@ Partial Class formPaperArchive
         Me.lstArchival.Location = New System.Drawing.Point(8, 28)
         Me.lstArchival.Name = "lstArchival"
         Me.lstArchival.RightToLeftLayout = True
-        Me.lstArchival.Size = New System.Drawing.Size(578, 397)
+        Me.lstArchival.Size = New System.Drawing.Size(524, 397)
         Me.lstArchival.TabIndex = 18
         Me.lstArchival.UseCompatibleStateImageBehavior = False
         Me.lstArchival.View = System.Windows.Forms.View.Details
@@ -727,7 +741,7 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExitToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuPaperArchive.Location = New System.Drawing.Point(0, 0)
         Me.MenuPaperArchive.Name = "MenuPaperArchive"
-        Me.MenuPaperArchive.Size = New System.Drawing.Size(926, 24)
+        Me.MenuPaperArchive.Size = New System.Drawing.Size(1108, 24)
         Me.MenuPaperArchive.TabIndex = 3
         Me.MenuPaperArchive.Text = "MenuStrip1"
         '
@@ -768,16 +782,16 @@ Partial Class formPaperArchive
         '
         Me.lstMessages.FormattingEnabled = True
         Me.lstMessages.HorizontalScrollbar = True
-        Me.lstMessages.Location = New System.Drawing.Point(617, 53)
+        Me.lstMessages.Location = New System.Drawing.Point(557, 42)
         Me.lstMessages.Name = "lstMessages"
         Me.lstMessages.ScrollAlwaysVisible = True
-        Me.lstMessages.Size = New System.Drawing.Size(293, 446)
+        Me.lstMessages.Size = New System.Drawing.Size(535, 524)
         Me.lstMessages.TabIndex = 26
         '
         'lblMessages
         '
         Me.lblMessages.AutoSize = True
-        Me.lblMessages.Location = New System.Drawing.Point(736, 33)
+        Me.lblMessages.Location = New System.Drawing.Point(788, 27)
         Me.lblMessages.Name = "lblMessages"
         Me.lblMessages.Size = New System.Drawing.Size(55, 13)
         Me.lblMessages.TabIndex = 27
@@ -787,7 +801,7 @@ Partial Class formPaperArchive
         '
         Me.txtDefaultFolder.BackColor = System.Drawing.SystemColors.Control
         Me.txtDefaultFolder.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDefaultFolder.Location = New System.Drawing.Point(617, 501)
+        Me.txtDefaultFolder.Location = New System.Drawing.Point(232, 536)
         Me.txtDefaultFolder.Multiline = True
         Me.txtDefaultFolder.Name = "txtDefaultFolder"
         Me.txtDefaultFolder.Size = New System.Drawing.Size(293, 23)
@@ -795,18 +809,44 @@ Partial Class formPaperArchive
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(740, 476)
+        Me.cmdClear.Location = New System.Drawing.Point(804, 546)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(39, 20)
         Me.cmdClear.TabIndex = 29
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
+        'PicForm
+        '
+        Me.PicForm.AccessibleRole = System.Windows.Forms.AccessibleRole.Window
+        Me.PicForm.BackColor = System.Drawing.SystemColors.Control
+        Me.PicForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.PicForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PicForm.Location = New System.Drawing.Point(557, 43)
+        Me.PicForm.Name = "PicForm"
+        Me.PicForm.Size = New System.Drawing.Size(535, 523)
+        Me.PicForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PicForm.TabIndex = 30
+        Me.PicForm.TabStop = False
+        Me.PicForm.Visible = False
+        '
+        'lblZoomout
+        '
+        Me.lblZoomout.AutoSize = True
+        Me.lblZoomout.Location = New System.Drawing.Point(1026, 27)
+        Me.lblZoomout.Name = "lblZoomout"
+        Me.lblZoomout.Size = New System.Drawing.Size(66, 13)
+        Me.lblZoomout.TabIndex = 31
+        Me.lblZoomout.Text = "Zoom Image"
+        Me.lblZoomout.Visible = False
+        '
         'formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(926, 532)
+        Me.ClientSize = New System.Drawing.Size(1108, 571)
+        Me.Controls.Add(Me.lblZoomout)
+        Me.Controls.Add(Me.PicForm)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.txtDefaultFolder)
         Me.Controls.Add(Me.lblMessages)
@@ -815,6 +855,7 @@ Partial Class formPaperArchive
         Me.Controls.Add(Me.lblImagesAt)
         Me.Controls.Add(Me.tabImageArchives)
         Me.Controls.Add(Me.MenuPaperArchive)
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.MenuPaperArchive
         Me.Name = "formPaperArchive"
         Me.Text = "Paper Archiving"
@@ -824,6 +865,7 @@ Partial Class formPaperArchive
         Me.grpInformation.PerformLayout()
         Me.grpComands.ResumeLayout(False)
         Me.tabUnstructured.ResumeLayout(False)
+        Me.tabUnstructured.PerformLayout()
         Me.pnlUnstructuredNames.ResumeLayout(False)
         Me.pnlUnstructuredNames.PerformLayout()
         Me.TabViewArchive.ResumeLayout(False)
@@ -835,6 +877,7 @@ Partial Class formPaperArchive
         Me.TabPage1.ResumeLayout(False)
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
+        CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -909,4 +952,7 @@ Partial Class formPaperArchive
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents lstArchival As System.Windows.Forms.ListView
     Friend WithEvents cmdList As System.Windows.Forms.Button
+    Friend WithEvents PicForm As System.Windows.Forms.PictureBox
+    Friend WithEvents lblZoomout As System.Windows.Forms.Label
+    Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
 End Class
