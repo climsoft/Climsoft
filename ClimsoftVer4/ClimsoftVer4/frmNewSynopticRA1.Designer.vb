@@ -96,6 +96,7 @@ Partial Class frmNewSynopticRA1
         '
         'btnTDCF
         '
+        Me.btnTDCF.Enabled = False
         Me.btnTDCF.Location = New System.Drawing.Point(541, 567)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
@@ -115,6 +116,7 @@ Partial Class frmNewSynopticRA1
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
+        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(682, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
