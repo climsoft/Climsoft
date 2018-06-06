@@ -321,6 +321,7 @@ Public Class ucrHourlyWind
 
     ''' <summary>
     ''' will check the expected total if its indicated as required in the obselements table
+    ''' returns true if the expected total speed value = computed total speed value or when the speed total is not required
     ''' </summary>
     ''' <returns></returns>
     Public Function checkSpeedTotal() As Boolean
@@ -329,10 +330,8 @@ Public Class ucrHourlyWind
         Dim expectedTotal As Integer
 
         If iSpeedTotalRequired = 1 Then
-
             If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the (Total [ff]) textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'ucrInputTotal.GetFocus()
                 ucrInputTotal.SetBackColor(Color.Cyan)
                 bValueCorrect = False
             Else
@@ -345,7 +344,6 @@ Public Class ucrHourlyWind
                 bValueCorrect = (elemTotal = expectedTotal)
                 If Not bValueCorrect Then
                     MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    'ucrInputTotal.GetFocus()
                     ucrInputTotal.SetBackColor(Color.Cyan)
                 End If
             End If
