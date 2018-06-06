@@ -206,6 +206,7 @@ Public Class ucrValueFlagPeriod
         'End If
 
         If e.KeyCode = Keys.Enter Then
+
             If sender Is ucrValue.txtBox Then
                 'do QC for ucrValue first
                 If QCForValue() Then
@@ -248,6 +249,7 @@ Public Class ucrValueFlagPeriod
     Private Function QCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
+        Dim bSuppressChangedEvents As Boolean
 
         If ucrValue.IsEmpty Then
             'empty ucrValue is a valid value
@@ -258,11 +260,15 @@ Public Class ucrValueFlagPeriod
             If Not IsNumeric(Strings.Right(ucrValue.GetValue, 1)) AndAlso IsNumeric(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
                 'Get observation flag from the ucrValue (the last character). 
                 ucrFlag.SetValue(Strings.Right(ucrValue.GetValue, 1))
+
                 'Get the observation value by leaving out the last character  
+                bSuppressChangedEvents = ucrValue.bSuppressChangedEvents
+                ucrValue.bSuppressChangedEvents = True
                 ucrValue.SetValue(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1))
+                ucrValue.bSuppressChangedEvents = bSuppressChangedEvents
             End If
 
-            'validate value loudly 
+            'validate value loudly  
             bValidateSilently = ucrValue.bValidateSilently
             ucrValue.bValidateSilently = False
             bValuesCorrect = ucrValue.ValidateValue()
