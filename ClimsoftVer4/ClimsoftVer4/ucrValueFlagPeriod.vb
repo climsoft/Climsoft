@@ -207,9 +207,20 @@ Public Class ucrValueFlagPeriod
 
         If e.KeyCode = Keys.Enter Then
             If sender Is ucrValue.txtBox Then
+                'do QC for ucrValue first
                 If QCForValue() Then
-                    'My.Computer.Keyboard.SendKeys("{TAB}")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    'if value is empty then set flag as M else remove the M
+                    If ucrValue.IsEmpty Then
+                        ucrFlag.SetValue("M")
+                    ElseIf ucrFlag.GetValue = "M"
+                        ucrFlag.SetValue("")
+                    End If
+
+                    'then do QC for flag
+                    If QcForFlag() Then
+                        'My.Computer.Keyboard.SendKeys("{TAB}")
+                        RaiseEvent evtGoToNextVFPControl(Me, e)
+                    End If
                 End If
             ElseIf sender Is ucrFlag.txtBox Then
                 If QcForFlag() Then
@@ -221,8 +232,17 @@ Public Class ucrValueFlagPeriod
 
     End Sub
 
-    Private Sub ucrValue_Leave(sender As Object, e As EventArgs) Handles ucrValue.Leave
+    Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
+
         QCForValue()
+
+        'Remove the missing value flag for non empty
+        If Not ucrValue.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
+            ucrFlag.SetValue("")
+        End If
+
+        QcForFlag()
+
     End Sub
 
     Private Function QCForValue() As Boolean
@@ -249,17 +269,17 @@ Public Class ucrValueFlagPeriod
             ucrValue.bValidateSilently = bValidateSilently
         End If
 
-        If bValuesCorrect Then
-            'if value is empty then set flag as M else remove the M
-            If ucrValue.IsEmpty Then
-                ucrFlag.SetValue("M")
-            ElseIf ucrFlag.GetValue = "M"
-                ucrFlag.SetValue("")
-            End If
+        'If bValuesCorrect Then
+        '    'if value is empty then set flag as M else remove the M
+        '    If ucrValue.IsEmpty Then
+        '        ucrFlag.SetValue("M")
+        '    ElseIf ucrFlag.GetValue = "M"
+        '        ucrFlag.SetValue("")
+        '    End If
 
-            'do QC for flag
-            bValuesCorrect = QcForFlag()
-        End If
+        '    'do QC for flag
+        '    bValuesCorrect = QcForFlag()
+        'End If
 
         Return bValuesCorrect
     End Function
@@ -270,7 +290,7 @@ Public Class ucrValueFlagPeriod
 
         'if value is empty then set flag as M else remove the M
         If ucrValue.IsEmpty Then
-            If ucrFlag.GetValue = "M" Then
+            If ucrFlag.GetValue = "M" OrElse ucrFlag.IsEmpty Then
                 bValuesCorrect = True
             Else
                 MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
@@ -304,4 +324,6 @@ Public Class ucrValueFlagPeriod
         'to override the white color being set on textbox validation subroutine
         ucrFlag.SetBackColor(SystemColors.Control)
     End Sub
+
+
 End Class
