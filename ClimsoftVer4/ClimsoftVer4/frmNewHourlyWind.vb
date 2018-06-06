@@ -204,8 +204,8 @@
             Return False
         End If
 
-        'check total if its required
-        If Not ucrHourlyWind.checkTotal() Then
+        'check speed total required
+        If Not ucrHourlyWind.checkSpeedTotal() Then
             Return False
         End If
 

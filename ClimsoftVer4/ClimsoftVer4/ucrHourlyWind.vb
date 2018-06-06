@@ -260,11 +260,24 @@ Public Class ucrHourlyWind
     ''' </summary>
     ''' <returns></returns>
     Public Function IsDirectionValuesEmpty() As Boolean
-        Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = ctr
-                If Not ucrDSF.IsDirectionEmpty() Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsDirectionEmpty() Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' Returns true if all the speed values are empty and false if ANY has a value set
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function IsSpeedValuesEmpty() As Boolean
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsSpeedEmpty Then
                     Return False
                 End If
             End If
@@ -302,35 +315,45 @@ Public Class ucrHourlyWind
         Return True
     End Function
 
-    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
-        checkTotal()
+    Private Sub ucrInputTotal_evtValueChanged(sender As Object, e As EventArgs) Handles ucrInputTotal.evtValueChanged
+        checkSpeedTotal()
     End Sub
 
-    Public Function checkTotal() As Boolean
+    ''' <summary>
+    ''' will check the expected total if its indicated as required in the obselements table
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function checkSpeedTotal() As Boolean
+        Dim bValueCorrect As Boolean = False
         Dim elemTotal As Integer = 0
         Dim expectedTotal As Integer
 
         If iSpeedTotalRequired = 1 Then
 
-            expectedTotal = Val(ucrInputTotal.GetValue)
-
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetFlagValue)
-                End If
-            Next
-
-            If elemTotal = expectedTotal Then
-                Return True
-            Else
-                MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.GetFocus()
+            If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
+                MessageBox.Show("Please enter the Total Value in the (Total [ff]) textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'ucrInputTotal.GetFocus()
                 ucrInputTotal.SetBackColor(Color.Cyan)
-                Return False
+                bValueCorrect = False
+            Else
+                expectedTotal = Val(ucrInputTotal.GetValue)
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetSpeedValue)
+                    End If
+                Next
+                bValueCorrect = (elemTotal = expectedTotal)
+                If Not bValueCorrect Then
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    'ucrInputTotal.GetFocus()
+                    ucrInputTotal.SetBackColor(Color.Cyan)
+                End If
             End If
         Else
-            Return True
+            bValueCorrect = True
         End If
+
+        Return bValueCorrect
     End Function
 
     ''' <summary>
