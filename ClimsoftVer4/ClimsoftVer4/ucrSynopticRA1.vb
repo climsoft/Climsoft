@@ -371,7 +371,6 @@ Public Class ucrSynopticRA1
         ucrVFPStandardPressureLevel.SetElementValue(iStandardPressureLevel)
     End Sub
 
-    'TODO. Should this be done under ValueChanged event?
     Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
         Try
             If Val(ucrVFPDryBulbTemp.GetElementValue) < Val(ucrVFPWetBulbTemp.GetElementValue) Then
@@ -411,7 +410,6 @@ Public Class ucrSynopticRA1
         End Try
     End Sub
 
-    'TODO. Should this be done under ValueChanged event?
     Private Sub UcrVFPDewPointTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.Leave
         Dim dryBulb, dewPoint As Decimal
         'Apply element scale factor to drybulb and wetbulb before calling the function to calculate relative humidty
