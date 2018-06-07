@@ -47,7 +47,6 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-
             If Not ValidateValues() Then
                 Exit Sub
             End If
@@ -60,7 +59,6 @@
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
-
         Catch ex As Exception
             MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -95,18 +93,9 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'SAMUEL IS DOING THIS AND I'M NOT SURE WHY BUT I DID IT TO HAVE
-        'A SIMILAR IMPLEMENTATION, THE CHECKING OF HEADER INFORMATION
-        'COULD BE REMOVED IF ITS NOT NECESSARY
-        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-        'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        'If (Not ucrSynopticRA1.IsValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 AndAlso Strings.Len(ucrHour.GetValue) > 0 Then
         ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
-        'Else
-        'MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'End If
     End Sub
 
     'This is from Samuel's code
@@ -179,6 +168,8 @@
             MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
+
+        'TODO. Validate the values entered
 
         'Then Do QC Checks. 
         'based on upper & lower limit for wind direction 
