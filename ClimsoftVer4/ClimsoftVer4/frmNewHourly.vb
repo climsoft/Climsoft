@@ -11,7 +11,7 @@
     End Sub
 
     Private Sub InitaliseDialog()
-        txtSequencer.Text = "seq_month_day_element"
+        txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrElement:=ucrElementSelector, ucrYear:=ucrYearSelector, ucrMonth:=ucrMonth, ucrDay:=ucrDay, ucrStation:=ucrStationSelector, ucrNavigation:=ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()

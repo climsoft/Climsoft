@@ -139,6 +139,7 @@ Partial Class frmNewHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
+        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(577, 604)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
