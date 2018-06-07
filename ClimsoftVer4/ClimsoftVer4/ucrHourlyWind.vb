@@ -7,7 +7,7 @@ Public Class ucrHourlyWind
     Private strSpeedFieldName As String = "elem_111_"
     Private strFlagFieldName As String = "ddflag"
     Private strTotalFieldName As String = "total"
-    Private iSpeedTotalRequired As Integer
+    Private bSpeedTotalRequired As Boolean
     Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
@@ -210,6 +210,7 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SetDirectionValidation(elementId As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
@@ -222,29 +223,42 @@ Public Class ucrHourlyWind
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetElementDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    ucrDSF = ctr
+                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
+                        ucrDSF.SetElementDirectionValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                    End If
+                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
+                        ucrDSF.SetElementDirectionValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                    End If
                 End If
             Next
         End If
     End Sub
 
     Public Sub SetSpeedValidation(elementId As Integer)
+        Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
         clsDataDefinition = New DataCall
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
         clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "QCTotalRequired"}))
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetElementSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    ucrDSF = ctr
+                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
+                        ucrDSF.SetElementSpeedValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+                    End If
+                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
+                        ucrDSF.SetElementSpeedValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+                    End If
                 End If
             Next
-            iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
+            bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
         End If
     End Sub
     ''' <summary>
@@ -317,7 +331,7 @@ Public Class ucrHourlyWind
         Dim elemTotal As Integer = 0
         Dim expectedTotal As Integer
 
-        If iSpeedTotalRequired = 1 Then
+        If bSpeedTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the (Total [ff]) textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ucrInputTotal.SetBackColor(Color.Cyan)

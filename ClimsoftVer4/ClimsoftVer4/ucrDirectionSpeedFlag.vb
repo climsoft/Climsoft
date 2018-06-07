@@ -144,11 +144,11 @@ Public Class ucrDirectionSpeedFlag
         Return ucrFlag.IsEmpty()
     End Function
 
-    Public Sub SetElementDirectionValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
+    Public Sub SetElementDirectionValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
         ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
-    Public Sub SetElementSpeedValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
+    Public Sub SetElementSpeedValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
         ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
