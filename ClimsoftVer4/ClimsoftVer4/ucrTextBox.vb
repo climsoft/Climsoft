@@ -358,7 +358,7 @@ Public Class ucrTextBox
 
     End Sub
 
-    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
         OnevtValueChanged(Me, e)
     End Sub
     ''' <summary>
