@@ -175,6 +175,10 @@ Public Class ucrDirectionSpeedFlag
         ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
+    Public Function IsValuesValid() As Boolean
+
+    End Function
+
     Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
         'TODO
         'FIND AWAY OF PASSING ME AND THE SENDER TO THE evtGoToNextVFPControl

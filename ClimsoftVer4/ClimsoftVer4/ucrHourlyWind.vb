@@ -277,11 +277,29 @@ Public Class ucrHourlyWind
         Return True
     End Function
 
+
     ''' <summary>
     ''' returns true if all direction values are valid
     ''' </summary>
     ''' <returns></returns>
-    Public Function CheckQcForDirection() As Boolean
+    Public Function IsValuesValid() As Boolean
+        'For Each ctr As Control In Me.Controls
+        '    If TypeOf ctr Is ucrDirectionSpeedFlag Then
+        '        'TODO
+        '        If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsValuesValid() Then
+        '            Return False
+        '        End If
+        '    End If
+        'Next
+        Return CheckQcForDirection() AndAlso CheckQcForSpeed()
+    End Function
+
+    ''' <summary>
+    ''' TODO. this will be removed later
+    ''' returns true if all direction values are valid
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function CheckQcForDirection() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForDirection() Then
@@ -293,10 +311,11 @@ Public Class ucrHourlyWind
     End Function
 
     ''' <summary>
-    ''' returns true if all the speed values are bvalid
+    ''' TODO. this will be removed later
+    ''' returns true if all the speed values are valid
     ''' </summary>
     ''' <returns></returns>
-    Public Function CheckQcForSpeed() As Boolean
+    Private Function CheckQcForSpeed() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForSpeed() Then
@@ -335,7 +354,7 @@ Public Class ucrHourlyWind
                 Next
                 bValueCorrect = (elemTotal = expectedTotal)
                 If Not bValueCorrect Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Value in (Total [ff]) textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.SetBackColor(Color.Cyan)
                 End If
             End If
@@ -388,7 +407,7 @@ Public Class ucrHourlyWind
 
         'initialise the dates with ONLY year month and day values. 
         'Neglect the time factor
-        todayDate = New Date(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
+        todayDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
         selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
         'if selectedDate is earlier than todayDate enable control

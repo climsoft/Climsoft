@@ -1,5 +1,7 @@
 ﻿Public Class frmNewHourlyWind
     Private bFirstLoad As Boolean = True
+    Dim iDirectionDigits As Integer
+    Dim iSpeedDigits As Integer
 
     Private Sub frmNewHourlyWind_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -11,8 +13,14 @@
     Private Sub InitaliseDialog()
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
-        ucrHourlyWind.SetSpeedDigits(Val(txtSpeedDigits.Text))
-        ucrHourlyWind.SetDirectionDigits(Val(txtDirectionDigits.Text))
+        'get default database direction and speed digits, then set them to the controls
+        SetDirectionAndSpeedDigits()
+        txtDirectionDigits.Text = iDirectionDigits
+        txtSpeedDigits.Text = iSpeedDigits
+
+        ucrHourlyWind.SetDirectionDigits(iDirectionDigits)
+        ucrHourlyWind.SetSpeedDigits(iSpeedDigits)
+
         ucrHourlyWind.SetDirectionValidation(112)
         ucrHourlyWind.SetSpeedValidation(111)
 
@@ -109,18 +117,9 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'SAMUEL IS DOING THIS AND I'M NOT SURE WHY BUT I DID IT TO HAVE
-        'A SIMILAR IMPLEMENTATION, THE CHECKING OF HEADER INFORMATION
-        'COULD BE REMOVED IF ITS NOT NECESSARY
-        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-        'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        'If (Not ucrHourlyWind.IsDirectionValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 Then
         ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
-        'Else
-        'MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'End If
     End Sub
 
     'This is from Samuel's code
@@ -194,13 +193,8 @@
             Return False
         End If
 
-        'Then Do QC Checks. 
-        'based on upper & lower limit for wind direction 
-        If Not ucrHourlyWind.CheckQcForDirection() Then
-            Return False
-        End If
-        'based on upper & lower limit for wind speed 
-        If Not ucrHourlyWind.CheckQcForSpeed() Then
+        'check if values are valid.  
+        If Not ucrHourlyWind.IsValuesValid() Then
             Return False
         End If
 
