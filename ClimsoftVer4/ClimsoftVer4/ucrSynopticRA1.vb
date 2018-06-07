@@ -200,18 +200,36 @@ Public Class ucrSynopticRA1
 
     ''' <summary>
     ''' checks if all the ucrValueFlagPeriod controls have a value.
-    ''' Returns true if they are all empty and false if otherwise
+    ''' returns true if they are all empty and false if any one of them has an invalid value
     ''' </summary>
     ''' <returns></returns>
     Public Function IsValuesEmpty() As Boolean
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                If Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' checks if all the controls have a valid values.
+    ''' Returns true if they are all valid and false if any one of them has invalid value
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function IsValuesValid() As Boolean
         Dim ucrVFP As ucrValueFlagPeriod
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                'TODO remove the checking of IsNumeric here
-                If (Not ucrVFP.IsElementValueEmpty()) AndAlso IsNumeric(ucrVFP.GetElementValue) Then
-                    Return False
-                End If
+
+                'TODO. check validity of all the  controls values
+
+                'If (Not ucrVFP.doq) AndAlso IsNumeric(ucrVFP.GetElementValue) Then
+                '    Return False
+                'End If
             End If
         Next
         Return True

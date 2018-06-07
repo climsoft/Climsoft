@@ -169,16 +169,11 @@
             Return False
         End If
 
-        'TODO. Validate the values entered
-
-        'Then Do QC Checks. 
-        'based on upper & lower limit for wind direction 
-        'If Not ucrHourlyWind.CheckQcForDirection() Then
-        '    Return False
-        'End If
-
-
-
+        'Check if all values are valid. There should be atleast one observation value
+        If Not ucrSynopticRA1.IsValuesValid Then
+            MessageBox.Show("Invalid observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return False
+        End If
 
         Return True
     End Function
