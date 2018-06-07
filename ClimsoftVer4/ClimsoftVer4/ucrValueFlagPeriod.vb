@@ -185,6 +185,22 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
+    Public Function IsValuesValid() As Boolean
+        Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
+    End Function
+
+    Public Function IsElementValueValid() As Boolean
+        Return DoQCForValue()
+    End Function
+
+    Public Function IsElementFlagValid() As Boolean
+        Return DoQcForFlag()
+    End Function
+
+    Public Function IsElementPeriodValid() As Boolean
+        Return If(bIncludePeriod, ucrPeriod.ValidateValue, True)
+    End Function
+
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             ucrValue.bValidateSilently = True
@@ -209,7 +225,7 @@ Public Class ucrValueFlagPeriod
 
             If sender Is ucrValue.txtBox Then
                 'do QC for ucrValue first
-                If QCForValue() Then
+                If DoQCForValue() Then
                     'if value is empty then set flag as M else remove the M
                     If ucrValue.IsEmpty Then
                         ucrFlag.SetValue("M")
@@ -218,13 +234,13 @@ Public Class ucrValueFlagPeriod
                     End If
 
                     'then do QC for flag
-                    If QcForFlag() Then
+                    If DoQcForFlag() Then
                         'My.Computer.Keyboard.SendKeys("{TAB}")
                         RaiseEvent evtGoToNextVFPControl(Me, e)
                     End If
                 End If
             ElseIf sender Is ucrFlag.txtBox Then
-                If QcForFlag() Then
+                If DoQcForFlag() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
@@ -234,19 +250,15 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
-
-        QCForValue()
-
+        DoQCForValue()
         'Remove the missing value flag for non empty
         If Not ucrValue.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
             ucrFlag.SetValue("")
         End If
-
-        QcForFlag()
-
+        DoQcForFlag()
     End Sub
 
-    Private Function QCForValue() As Boolean
+    Private Function DoQCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
         Dim bSuppressChangedEvents As Boolean
@@ -274,24 +286,11 @@ Public Class ucrValueFlagPeriod
             bValuesCorrect = ucrValue.ValidateValue()
             ucrValue.bValidateSilently = bValidateSilently
         End If
-
-        'If bValuesCorrect Then
-        '    'if value is empty then set flag as M else remove the M
-        '    If ucrValue.IsEmpty Then
-        '        ucrFlag.SetValue("M")
-        '    ElseIf ucrFlag.GetValue = "M"
-        '        ucrFlag.SetValue("")
-        '    End If
-
-        '    'do QC for flag
-        '    bValuesCorrect = QcForFlag()
-        'End If
-
         Return bValuesCorrect
     End Function
 
     'QC checks for flag
-    Public Function QcForFlag() As Boolean
+    Private Function DoQcForFlag() As Boolean
         Dim bValuesCorrect As Boolean = True
 
         'if value is empty then set flag as M else remove the M
@@ -299,16 +298,14 @@ Public Class ucrValueFlagPeriod
             If ucrFlag.GetValue = "M" OrElse ucrFlag.IsEmpty Then
                 bValuesCorrect = True
             Else
-                MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+                MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 ucrFlag.SetBackColor(Color.Cyan)
-                ucrFlag.GetFocus()
                 bValuesCorrect = False
             End If
         Else
             If ucrFlag.GetValue = "M" Then
                 'MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
                 ucrFlag.SetBackColor(Color.Cyan)
-                ucrFlag.GetFocus()
                 bValuesCorrect = False
             Else
                 bValuesCorrect = True
