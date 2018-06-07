@@ -313,7 +313,7 @@ Public Class ucrDirectionSpeedFlag
                 ucrFlag.SetValue("")
             End If
 
-            'do QC for flag
+            'then do QC for flag
             bValuesCorrect = DoQcForFlag()
         End If
 
