@@ -222,7 +222,7 @@ Public Class ucrHourlyWind
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetElementDirectionValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
         End If
@@ -241,7 +241,7 @@ Public Class ucrHourlyWind
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetElementSpeedValidation(Val(dtbl.Rows(0).Item("lowerLimit")), Val(dtbl.Rows(0).Item("upperLimit")))
                 End If
             Next
             iSpeedTotalRequired = Val(dtbl.Rows(0).Item("QCTotalRequired"))
@@ -254,7 +254,7 @@ Public Class ucrHourlyWind
     Public Function IsDirectionValuesEmpty() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsDirectionEmpty() Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsElementDirectionEmpty() Then
                     Return False
                 End If
             End If
@@ -269,7 +269,7 @@ Public Class ucrHourlyWind
     Public Function IsSpeedValuesEmpty() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsSpeedEmpty Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsElementSpeedEmpty Then
                     Return False
                 End If
             End If
@@ -279,30 +279,23 @@ Public Class ucrHourlyWind
 
 
     ''' <summary>
-    ''' returns true if all direction values are valid
+    ''' returns true if all direction values are valid and false if any of them is not valid
     ''' </summary>
     ''' <returns></returns>
     Public Function IsValuesValid() As Boolean
-        'For Each ctr As Control In Me.Controls
-        '    If TypeOf ctr Is ucrDirectionSpeedFlag Then
-        '        'TODO
-        '        If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsValuesValid() Then
-        '            Return False
-        '        End If
-        '    End If
-        'Next
-        Return CheckQcForDirection() AndAlso CheckQcForSpeed()
-    End Function
-
-    ''' <summary>
-    ''' TODO. this will be removed later
-    ''' returns true if all direction values are valid
-    ''' </summary>
-    ''' <returns></returns>
-    Private Function CheckQcForDirection() As Boolean
+        Dim ucrDSF As ucrDirectionSpeedFlag
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForDirection() Then
+                ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+                If Not ucrDSF.IsElementDirectionValueValid Then
+                    ucrDSF.ucrDirection.GetFocus()
+                    Return False
+                ElseIf Not ucrDSF.IsElementSpeedValueValid
+                    ucrDSF.ucrSpeed.GetFocus()
+                    Return False
+                ElseIf Not ucrDSF.IsElementFlagValueValid
+                    'because Flag is read only
+                    ucrDSF.Focus()
                     Return False
                 End If
             End If
@@ -310,23 +303,7 @@ Public Class ucrHourlyWind
         Return True
     End Function
 
-    ''' <summary>
-    ''' TODO. this will be removed later
-    ''' returns true if all the speed values are valid
-    ''' </summary>
-    ''' <returns></returns>
-    Private Function CheckQcForSpeed() As Boolean
-        For Each ctr As Control In Me.Controls
-            If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).QcForSpeed() Then
-                    Return False
-                End If
-            End If
-        Next
-        Return True
-    End Function
-
-    Private Sub ucrInputTotal_evtValueChanged(sender As Object, e As EventArgs) Handles ucrInputTotal.evtValueChanged
+    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
         checkSpeedTotal()
     End Sub
 
@@ -349,7 +326,7 @@ Public Class ucrHourlyWind
                 expectedTotal = Val(ucrInputTotal.GetValue)
                 For Each ctr As Control In Me.Controls
                     If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetSpeedValue)
+                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetElementSpeedValue)
                     End If
                 Next
                 bValueCorrect = (elemTotal = expectedTotal)
