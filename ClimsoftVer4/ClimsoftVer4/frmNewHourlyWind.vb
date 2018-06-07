@@ -212,4 +212,32 @@
         Return True
     End Function
 
+    ''' <summary>
+    ''' This sets the direction and speed digits from the database 
+    ''' by getting the values from the regkeys database table
+    ''' </summary>
+    Private Sub SetDirectionAndSpeedDigits()
+        Try
+            Dim clsDataDefinition As DataCall
+            Dim dtbl As DataTable
+            Dim row As DataRow
+
+            clsDataDefinition = New DataCall
+            clsDataDefinition.SetTableName("regkeys")
+            clsDataDefinition.SetFields(New List(Of String)({"keyName", "keyValue"}))
+            dtbl = clsDataDefinition.GetDataTable()
+            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+                'get direction digits
+                row = dtbl.Select("keyName = 'key05'").FirstOrDefault()
+                iDirectionDigits = If(row IsNot Nothing, Integer.Parse(row.Item("keyValue")), 0)
+
+                'get speed digits
+                row = dtbl.Select("keyName = 'key06'").FirstOrDefault()
+                iSpeedDigits = If(row IsNot Nothing, Integer.Parse(row.Item("keyValue")), 0)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error in getting direction and speed digits in the database . Error: " & ex.Message, "Digits", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class
