@@ -187,14 +187,6 @@ Public Class ucrHourlyWind
                             ucrDSF.Enabled = False
                             ucrDSF.SetBackColor(Color.LightYellow)
                         End If
-                        'SIMILAR IMPLEMENTATION WOULD AS ABOVE WOULD BE AS COMMENTED BELOW
-                        'For Each rTemp As DataRow In dtbl.Rows
-                        '    If Val(rTemp("hh")) = iTagVal AndAlso Val(rTemp("hh_selection")) = 0 Then
-                        '        ucrDSF.enabled = False
-                        '        ucrDSF.SetBackColor(Color.LightYellow)
-                        '        Exit For
-                        '    End If
-                        'Next
                     End If
                 Next
             End If
@@ -363,7 +355,6 @@ Public Class ucrHourlyWind
     ''' <param name="ucrDayControl"></param>
     ''' <param name="ucrNavigationControl"></param>
     Public Sub SetKeyControls(ucrStationControl As ucrStationSelector, ucrYearControl As ucrYearSelector, ucrMonthControl As ucrMonth, ucrDayControl As ucrDay, ucrNavigationControl As ucrNavigation)
-
         ucrLinkedStation = ucrStationControl
         ucrLinkedYear = ucrYearControl
         ucrLinkedMonth = ucrMonthControl
@@ -380,8 +371,6 @@ Public Class ucrHourlyWind
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
         ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
         ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
-
-
     End Sub
 
     ''' <summary>
