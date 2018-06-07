@@ -220,16 +220,12 @@ Public Class ucrSynopticRA1
     ''' </summary>
     ''' <returns></returns>
     Public Function IsValuesValid() As Boolean
-        Dim ucrVFP As ucrValueFlagPeriod
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-
-                'TODO. check validity of all the  controls values
-
-                'If (Not ucrVFP.doq) AndAlso IsNumeric(ucrVFP.GetElementValue) Then
-                '    Return False
-                'End If
+                If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid() Then
+                    ctr.Focus()
+                    Return False
+                End If
             End If
         Next
         Return True
