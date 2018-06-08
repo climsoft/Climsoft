@@ -240,7 +240,7 @@ Partial Class frmNewHourly
         Me.ucrHourly.Location = New System.Drawing.Point(91, 140)
         Me.ucrHourly.Name = "ucrHourly"
         Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
-        Me.ucrHourly.TabIndex = 464
+        Me.ucrHourly.TabIndex = 5
         '
         'ucrInputValue
         '
@@ -257,7 +257,7 @@ Partial Class frmNewHourly
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
-        Me.ucrElementSelector.TabIndex = 227
+        Me.ucrElementSelector.TabIndex = 1
         '
         'ucrDay
         '
@@ -265,7 +265,7 @@ Partial Class frmNewHourly
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
-        Me.ucrDay.TabIndex = 225
+        Me.ucrDay.TabIndex = 4
         '
         'ucrMonth
         '
@@ -273,7 +273,7 @@ Partial Class frmNewHourly
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
-        Me.ucrMonth.TabIndex = 223
+        Me.ucrMonth.TabIndex = 3
         '
         'ucrYearSelector
         '
@@ -281,7 +281,7 @@ Partial Class frmNewHourly
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
-        Me.ucrYearSelector.TabIndex = 222
+        Me.ucrYearSelector.TabIndex = 2
         '
         'ucrStationSelector
         '
@@ -289,7 +289,7 @@ Partial Class frmNewHourly
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
-        Me.ucrStationSelector.TabIndex = 221
+        Me.ucrStationSelector.TabIndex = 0
         '
         'frmNewHourly
         '
