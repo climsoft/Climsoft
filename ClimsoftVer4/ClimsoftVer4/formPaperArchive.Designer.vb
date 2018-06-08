@@ -96,6 +96,7 @@ Partial Class formPaperArchive
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.PicForm = New System.Windows.Forms.PictureBox()
         Me.lblZoomout = New System.Windows.Forms.Label()
+        Me.lblImageRotate = New System.Windows.Forms.Label()
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -822,6 +823,7 @@ Partial Class formPaperArchive
         Me.PicForm.BackColor = System.Drawing.SystemColors.Control
         Me.PicForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PicForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PicForm.ErrorImage = Nothing
         Me.PicForm.Location = New System.Drawing.Point(557, 43)
         Me.PicForm.Name = "PicForm"
         Me.PicForm.Size = New System.Drawing.Size(535, 523)
@@ -840,11 +842,21 @@ Partial Class formPaperArchive
         Me.lblZoomout.Text = "Zoom Image"
         Me.lblZoomout.Visible = False
         '
+        'lblImageRotate
+        '
+        Me.lblImageRotate.AutoSize = True
+        Me.lblImageRotate.Location = New System.Drawing.Point(561, 28)
+        Me.lblImageRotate.Name = "lblImageRotate"
+        Me.lblImageRotate.Size = New System.Drawing.Size(71, 13)
+        Me.lblImageRotate.TabIndex = 32
+        Me.lblImageRotate.Text = "Rotate Image"
+        '
         'formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1108, 571)
+        Me.Controls.Add(Me.lblImageRotate)
         Me.Controls.Add(Me.lblZoomout)
         Me.Controls.Add(Me.PicForm)
         Me.Controls.Add(Me.cmdClear)
@@ -955,4 +967,5 @@ Partial Class formPaperArchive
     Friend WithEvents PicForm As System.Windows.Forms.PictureBox
     Friend WithEvents lblZoomout As System.Windows.Forms.Label
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
+    Friend WithEvents lblImageRotate As System.Windows.Forms.Label
 End Class
