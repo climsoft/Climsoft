@@ -1,5 +1,7 @@
 ﻿Public Class frmNewHourlyWind
     Private bFirstLoad As Boolean = True
+    Dim iDirectionDigits As Integer
+    Dim iSpeedDigits As Integer
 
     Private Sub frmNewHourlyWind_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -11,8 +13,14 @@
     Private Sub InitaliseDialog()
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
-        ucrHourlyWind.SetSpeedDigits(Val(txtSpeedDigits.Text))
-        ucrHourlyWind.SetDirectionDigits(Val(txtDirectionDigits.Text))
+        'get default database direction and speed digits, then set them to the controls
+        SetDirectionAndSpeedDigits()
+        txtDirectionDigits.Text = iDirectionDigits
+        txtSpeedDigits.Text = iSpeedDigits
+
+        ucrHourlyWind.SetDirectionDigits(iDirectionDigits)
+        ucrHourlyWind.SetSpeedDigits(iSpeedDigits)
+
         ucrHourlyWind.SetDirectionValidation(112)
         ucrHourlyWind.SetSpeedValidation(111)
 
@@ -109,18 +117,9 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'SAMUEL IS DOING THIS AND I'M NOT SURE WHY BUT I DID IT TO HAVE
-        'A SIMILAR IMPLEMENTATION, THE CHECKING OF HEADER INFORMATION
-        'COULD BE REMOVED IF ITS NOT NECESSARY
-        'Check if header information is complete. If the header information is complete and there is at least on obs value then,
-        'carry out the next actions, otherwise bring up message showing that there is insufficient data
-        'If (Not ucrHourlyWind.IsDirectionValuesEmpty) AndAlso Strings.Len(ucrStationSelector.GetValue) > 0 AndAlso Strings.Len(ucrYearSelector.GetValue) > 0 AndAlso Strings.Len(ucrMonth.GetValue) AndAlso Strings.Len(ucrDay.GetValue) > 0 Then
         ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
-        'Else
-        'MessageBox.Show("Incomplete header information and insufficient observation data!", "Clear Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        'End If
     End Sub
 
     'This is from Samuel's code
@@ -194,22 +193,45 @@
             Return False
         End If
 
-        'Then Do QC Checks. 
-        'based on upper & lower limit for wind direction 
-        If Not ucrHourlyWind.CheckQcForDirection() Then
-            Return False
-        End If
-        'based on upper & lower limit for wind speed 
-        If Not ucrHourlyWind.CheckQcForSpeed() Then
+        'check if values are valid.  
+        If Not ucrHourlyWind.IsValuesValid() Then
             Return False
         End If
 
-        'check total if its required
-        If Not ucrHourlyWind.checkTotal() Then
+        'check speed total required
+        If Not ucrHourlyWind.checkSpeedTotal() Then
             Return False
         End If
 
         Return True
     End Function
 
+    ''' <summary>
+    ''' This sets the direction and speed digits from the database 
+    ''' by getting the values from the regkeys database table
+    ''' </summary>
+    Private Sub SetDirectionAndSpeedDigits()
+        Try
+            Dim clsDataDefinition As DataCall
+            Dim dtbl As DataTable
+            Dim row As DataRow
+
+            clsDataDefinition = New DataCall
+            clsDataDefinition.SetTableName("regkeys")
+            clsDataDefinition.SetFields(New List(Of String)({"keyName", "keyValue"}))
+            dtbl = clsDataDefinition.GetDataTable()
+            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+                'get direction digits
+                row = dtbl.Select("keyName = 'key05'").FirstOrDefault()
+                iDirectionDigits = If(row IsNot Nothing, Integer.Parse(row.Item("keyValue")), 0)
+
+                'get speed digits
+                row = dtbl.Select("keyName = 'key06'").FirstOrDefault()
+                iSpeedDigits = If(row IsNot Nothing, Integer.Parse(row.Item("keyValue")), 0)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error in getting direction and speed digits in the database . Error: " & ex.Message, "Digits", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 End Class
