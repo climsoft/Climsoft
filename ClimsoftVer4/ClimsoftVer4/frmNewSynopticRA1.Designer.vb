@@ -218,7 +218,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
-        Me.ucrDay.TabIndex = 215
+        Me.ucrDay.TabIndex = 3
         '
         'ucrSynopticRA1
         '
@@ -226,7 +226,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrSynopticRA1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
         Me.ucrSynopticRA1.Size = New System.Drawing.Size(820, 477)
-        Me.ucrSynopticRA1.TabIndex = 214
+        Me.ucrSynopticRA1.TabIndex = 5
         '
         'ucrHour
         '
@@ -234,7 +234,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrHour.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(59, 24)
-        Me.ucrHour.TabIndex = 213
+        Me.ucrHour.TabIndex = 4
         '
         'ucrMonth
         '
@@ -242,7 +242,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
-        Me.ucrMonth.TabIndex = 212
+        Me.ucrMonth.TabIndex = 2
         '
         'ucrYearSelector
         '
@@ -250,7 +250,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
-        Me.ucrYearSelector.TabIndex = 211
+        Me.ucrYearSelector.TabIndex = 1
         '
         'ucrStationSelector
         '
@@ -258,7 +258,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
-        Me.ucrStationSelector.TabIndex = 210
+        Me.ucrStationSelector.TabIndex = 0
         '
         'frmNewSynopticRA1
         '
