@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Win32
 Module CommonModules
+
     Function ViewFile(flname As String) As Boolean
         Try
             ViewFile = True
@@ -37,4 +38,5 @@ errhandler:
         'End Try
 
     End Function
+
 End Module

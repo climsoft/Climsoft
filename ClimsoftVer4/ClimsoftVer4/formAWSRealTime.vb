@@ -1248,53 +1248,57 @@ Err:
 
                     'Skip older records
                     datestring = dTable.Rows(k).Item(0)
+                    If IsDate(datestring) Then
+                        If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
-                    If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+                        ' Compare current time with time stamp on hourly basis
 
-                    ' Compare current time with time stamp on hourly basis
-                    If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+                        If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
 
-                    Process_Status("Processing AWS Record " & k & " of " & rws)
+                        Process_Status("Processing AWS Record " & k & " of " & rws)
 
-                    For j = 0 To colmn - 1
-                        x = dTable.Rows(k).Item(j)
-                        If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                            x = Strings.Mid(x, 2, Len(x) - 2)
+                        For j = 0 To colmn - 1
+                            x = dTable.Rows(k).Item(j)
+                            If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+                                x = Strings.Mid(x, 2, Len(x) - 2)
+                            End If
+                            'MsgBox(x)
+                            AwsRecord_Update(x, j, flg, AWSsite)
+                        Next j
+
+                        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+                        Dim sqlv As String
+                        sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+                        rs = GetDataSet(AWSsite, sqlv)
+
+                        'Get the date value
+                        datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
+
+                        'Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
+                        If Len(datestring) < 12 Then
+                            datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
                         End If
-                        'MsgBox(x)
-                        AwsRecord_Update(x, j, flg, AWSsite)
-                    Next j
 
-                    ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
-                    Dim sqlv As String
-                    sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
-                    rs = GetDataSet(AWSsite, sqlv)
+                        'Don't process the record if having invalid datestamp
+                        'If Not IsDate(datestring) Then
+                        'If IsDate(datestring) Then
+                        '    Log_Errors(datestring)
+                        '    Continue For
+                        'End If
 
-                    'Get the date value
-                    datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
-
-                    'Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
-                    If Len(datestring) < 12 Then
-                        datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
-                    End If
-
-                    'Don't process the record if having invalid datestamp
-                    If Not IsDate(datestring) Then
-                        Log_Errors(datestring)
-                        Continue For
-                    End If
-
-                    'Update the record into the database
-                    If Val(txtPeriod.Text) = 999 Then
-                        ' Process the entire input file irespective of time difference
-                        Process_Input_Record(AWSsite, datestring)
-                    Else
-                        'Process_Input_Record(AWSsite, datestring)
-                        If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                            Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                        'Update the record into the database
+                        If Val(txtPeriod.Text) = 999 Then
+                            ' Process the entire input file irespective of time difference
+                            Process_Input_Record(AWSsite, datestring)
+                        Else
+                            'Process_Input_Record(AWSsite, datestring)
+                            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+                                Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                            End If
                         End If
-                    End If
 
+                        'End If
+                    End If
                 Next k
 
                 ' Delete input file from base station server if so selected
@@ -1378,6 +1382,7 @@ Err:
         'MsgBox(Err.Number & " " & Err.Description)
         'If Err.Number = 9 Then Resume Next
         ''MsgBox(datt & " " & datestring)
+        'If Err.Number = 13 Then Resume Next
         If Err.Number = 62 Or Err.Number = 9 Then
             Log_Errors("Can't retrieve data from " & infile)
             'list_errors.Refresh()
@@ -1543,7 +1548,7 @@ Err:
 
         Dim usr As String
         Dim pwd As String
-        Dim flder As String
+        Dim flder, fldr As String
         Dim ftpmode As String
 
         Try
@@ -1578,6 +1583,12 @@ Err:
                     If Len(flprefix) = 0 Then
                         Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Else
+                        ' Get input files path
+
+                        fldr = flder & ftpfile
+                        fldr = (IO.Path.GetDirectoryName(fldr))
+                        'MsgBox(fldr)
+                        Print(1, "cd " & fldr & Chr(13) & Chr(10))
                         Print(1, "mget *.*" & Chr(13) & Chr(10))
                     End If
                     Print(1, "bye" & Chr(13) & Chr(10))

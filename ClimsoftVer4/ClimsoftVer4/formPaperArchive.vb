@@ -45,7 +45,7 @@
             For Each da1 In d1
                 fls = da1.Name
                 'listImages.Items.Add(da1)
-                If InStr("jpgpngtifgifbmpemf", Strings.LCase((Strings.Right(fls, 3)))) > 0 Then lstvFiles.Items.Add(fls)
+                If InStr("jpgpngtifgifbmpemfpdf", Strings.LCase((Strings.Right(fls, 3)))) > 0 Then lstvFiles.Items.Add(fls)
             Next
 
             If lstvFiles.Items.Count > 0 Then
@@ -338,7 +338,7 @@
     Private Sub cmdImageFile_Click(sender As Object, e As EventArgs) Handles cmdImageFile.Click
         Dim img As String
 
-        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png;*.pdf"
         OpenFilePaperArchive.ShowDialog()
         img = OpenFilePaperArchive.FileName
         txtImageFile.Text = img
@@ -460,6 +460,7 @@
                 PicForm.Visible = False
                 lstMessages.Visible = True
                 lblZoomout.Visible = False
+                lblImageRotate.Visible = False
                 lblMessages.Visible = True
             Case 1 ' Unstructured Image Filename
                 'Clear Tab
@@ -471,6 +472,7 @@
                 txtDay.Text = ""
                 txtHour.Text = ""
                 lblZoomout.Visible = True
+                lblImageRotate.Visible = True
                 lblMessages.Visible = False
                 PicForm.Visible = True
                 lstMessages.Visible = False
@@ -486,6 +488,7 @@
                 'txtDD.Text = ""
                 'txtHH.Text = ""
                 lblZoomout.Visible = True
+                lblImageRotate.Visible = True
                 lblMessages.Visible = False
                 PicForm.Visible = True
                 lstMessages.Visible = False
@@ -505,6 +508,7 @@
                 'End If
             Case 3 ' View Archived Images List
                 lblZoomout.Visible = True
+                lblImageRotate.Visible = True
                 lblMessages.Visible = False
                 PicForm.Visible = True
                 lstMessages.Visible = False
@@ -537,9 +541,15 @@
             frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
             img = ds.Tables("paperarchive").Rows(num).Item("image")
             If InStr(img, imgfl) > 0 Then
-                'ShowImage(img)
-                PicForm.ImageLocation = img
-                PicForm.Refresh()
+                If Strings.UCase(Strings.Right(img, 3)) = "PDF" Then
+                    ShowImage(img)
+                Else
+                    PicForm.ImageLocation = img
+                    PicForm.Refresh()
+                End If
+                ''ShowImage(img)
+                'PicForm.ImageLocation = img
+                'PicForm.Refresh()
                 Exit For
             End If
         Next
@@ -812,11 +822,22 @@ Err:
     End Sub
 
     Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
-        PicForm.ImageLocation = txtImageFile.Text
-        'lblArchiveMsg.Text = ""
-        PicForm.Refresh()
-        'PicForm.Visible = True
-        'lstMessages.Visible = False
+        Try
+            PicForm.ImageLocation = txtImageFile.Text
+
+            'lblArchiveMsg.Text = ""
+
+            If Strings.UCase(Strings.Right(txtImageFile.Text, 3)) = "PDF" Then
+                ShowImage(txtImageFile.Text)
+            Else
+                PicForm.Refresh()
+            End If
+            'PicForm.Visible = True
+            'lstMessages.Visible = False
+            'MsgBox(PicForm.ImageLocation)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
 
@@ -851,7 +872,15 @@ Err:
 
     Private Sub lstArchival_Click(sender As Object, e As EventArgs) Handles lstArchival.Click
         'MsgBox(lstArchival.FocusedItem.SubItems(3).Text)
-        PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
+        Dim SelectedImage As String
+        SelectedImage = lstArchival.FocusedItem.SubItems(3).Text
+        If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
+            ShowImage(SelectedImage)
+        Else
+            PicForm.ImageLocation = SelectedImage
+            PicForm.Refresh()
+        End If
+        'PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
     End Sub
 
 
@@ -899,4 +928,13 @@ Err:
     End Sub
 
 
+    Private Sub lblImageRotate_Click(sender As Object, e As EventArgs) Handles lblImageRotate.Click
+        PicForm.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        PicForm.Refresh()
+    End Sub
+
+
+    Private Sub lstArchival_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstArchival.SelectedIndexChanged
+
+    End Sub
 End Class
