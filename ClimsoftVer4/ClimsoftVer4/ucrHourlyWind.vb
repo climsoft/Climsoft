@@ -10,6 +10,8 @@ Public Class ucrHourlyWind
     Private bSpeedTotalRequired As Boolean
     Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
+    'stores a list containing all fields of this control
+    Private lstAllFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
     Private ucrLinkedNavigation As ucrNavigation
@@ -42,6 +44,11 @@ Public Class ucrHourlyWind
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
+            ' This list is used for uploading to observation table so all fields needed.
+            lstAllFields.AddRange(lstFields)
+            'TODO "entryDatetime" should be here as well once entity model has been updated.
+            lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
+1
             bFirstLoad = False
         End If
     End Sub
@@ -408,6 +415,71 @@ Public Class ucrHourlyWind
             'if it is same time (0) or later than (>0) disable control
             Me.Enabled = False
         End If
+    End Sub
+
+    Public Sub UploadAllRecords()
+        'PROCEED WITH MAKING THIS SUIT THIS CONTROL
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strCurrTag As String
+        Dim lElementID As Long
+        Dim iPeriod As Integer
+
+        clsAllRecordsCall.SetTableName(strTableName)
+        clsAllRecordsCall.SetFields(lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For i As Integer = 1 To 31
+                rcdObservationInitial = Nothing
+                rcdObservationInitial = New observationinitial
+                If i < 10 Then
+                    strCurrTag = "0" & i
+                Else
+                    strCurrTag = i
+                End If
+                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    If Long.TryParse(row.Item("elementId"), lElementID) Then
+                        rcdObservationInitial.describedBy = lElementID
+                    Else
+                        Exit Sub
+                    End If
+                    Try
+                        rcdObservationInitial.obsDatetime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                    Catch ex As Exception
+
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
+                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
+                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
+                        rcdObservationInitial.period = iPeriod
+                    End If
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = "form_daily2"
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+                    If Not IsDBNull(row.Item("temperatureUnits")) Then
+                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
+                    End If
+                    If Not IsDBNull(row.Item("precipUnits")) Then
+                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
+                    End If
+                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
+                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
+                    End If
+                    If Not IsDBNull(row.Item("visUnits")) Then
+                        rcdObservationInitial.visUnits = row.Item("visUnits")
+                    End If
+                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                End If
+            Next
+        Next
+        clsDataConnection.SaveUpdate()
     End Sub
 
 End Class
