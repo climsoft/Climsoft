@@ -170,11 +170,12 @@
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        SetValue(cboValues.Text)
+        'SetValue(cboValues.Text)
         'check if value is valid
         If bValidate Then
             ValidateValue()
         End If
+        OnevtValueChanged(sender, e)
     End Sub
 
 End Class
