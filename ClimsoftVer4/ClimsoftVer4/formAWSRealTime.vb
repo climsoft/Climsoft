@@ -1248,8 +1248,11 @@ Err:
 
                     'Skip older records
                     datestring = dTable.Rows(k).Item(0)
+                    If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+                    'MsgBox(datestring)
                     If IsDate(datestring) Then
-                        If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+
+                        'If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
                         ' Compare current time with time stamp on hourly basis
 
