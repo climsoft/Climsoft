@@ -31,9 +31,9 @@ Public Class ucrDirectionSpeedFlag
     Public Sub SetDirectionSpeedFlagFields(strDirectionFieldName As String, strSpeedFieldName As String, strFlagFieldName As String)
         SetFields(New List(Of String)({strDirectionFieldName, strSpeedFieldName, strFlagFieldName}))
         'SetDDFFField(strDirectionFieldName, strSpeedFieldName)
-        SetDirectionField(strDirectionFieldName)
-        SetSpeedField(strSpeedFieldName)
-        SetFlagField(strFlagFieldName)
+        SetElementDirectionField(strDirectionFieldName)
+        SetElementSpeedField(strSpeedFieldName)
+        SetElementFlagField(strFlagFieldName)
     End Sub
 
     Public Sub SetTableNameAndDirectionSpeedFlagFields(strTableName As String, strDirectionFieldName As String, strSpeedFieldName As String, strFlagFieldName As String)
@@ -41,22 +41,15 @@ Public Class ucrDirectionSpeedFlag
         SetDirectionSpeedFlagFields(strDirectionFieldName, strSpeedFieldName, strFlagFieldName)
     End Sub
 
-    'Public Sub SetDDFFField(strDirectionFieldName As String, strSpeedFieldName As String)
-
-    'Dim dctNewFields As New Dictionary(Of String, List(Of String))
-    'dctNewFields.Add(strDirectionFieldName, New List(Of String)({strDirectionFieldName, strSpeedFieldName}))
-    'ucrDDFF.SetFields(dctNewFields)
-    'End Sub
-
-    Public Sub SetDirectionField(strFieldName As String)
+    Public Sub SetElementDirectionField(strFieldName As String)
         ucrDirection.SetField(strFieldName)
     End Sub
 
-    Public Sub SetSpeedField(strFieldName As String)
+    Public Sub SetElementSpeedField(strFieldName As String)
         ucrSpeed.SetField(strFieldName)
     End Sub
 
-    Public Sub SetFlagField(strFieldName As String)
+    Public Sub SetElementFlagField(strFieldName As String)
         ucrFlag.SetField(strFieldName)
     End Sub
 
@@ -152,11 +145,11 @@ Public Class ucrDirectionSpeedFlag
         ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
-    Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
+    Public Sub SetElementDirectionDigits(iNewDirectionDigits As Integer)
         iDirectionDigits = iNewDirectionDigits
     End Sub
 
-    Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
+    Public Sub SetElementSpeedDigits(iNewSpeedDigits As Integer)
         iSpeedDigits = iNewSpeedDigits
     End Sub
 
@@ -175,8 +168,6 @@ Public Class ucrDirectionSpeedFlag
     Public Function IsElementFlagValueValid() As Boolean
         Return DoQcForFlag()
     End Function
-
-
 
     Public Overrides Sub Clear()
         ucrDDFF.Clear()
@@ -217,6 +208,7 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
+    'TODO. Do this in the event value changed?
     Private Sub ucrDDFF_Leave(sender As Object, e As EventArgs) Handles ucrDDFF.Leave, ucrDirection.Leave, ucrSpeed.Leave
         DoInputQCCheck(sender)
     End Sub
