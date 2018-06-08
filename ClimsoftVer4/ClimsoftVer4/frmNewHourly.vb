@@ -13,7 +13,7 @@
     Private Sub InitaliseDialog()
         txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
-        ucrHourly.SetKeyControls(ucrElement:=ucrElementSelector, ucrYear:=ucrYearSelector, ucrMonth:=ucrMonth, ucrDay:=ucrDay, ucrStation:=ucrStationSelector, ucrNavigation:=ucrHourlyNavigation)
+        ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
     End Sub
@@ -33,54 +33,62 @@
         Next
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        'On clear, navigation moves to first record
-        ucrHourlyNavigation.MoveFirst()
-        SaveEnable()
+    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+        Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
+            'Confirm if you want to continue and save data from key-entry form to database table
+            If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrHourly.SaveRecord()
+                ucrHourlyNavigation.ResetControls()
+                ucrHourlyNavigation.GoToNewRecord()
+                SaveEnable()
+                MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
-        If Not ValidateValues() Then
-            Exit Sub
-        End If
-
-        'Confirm if you want to continue and save data from key-entry form to database table
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If dlgResponse = DialogResult.Yes Then
-
-            If ucrHourly.bUpdating Then
-                'Possibly we should be cloning and then updating here
-            Else
-                clsDataConnection.db.form_hourly.Add(ucrHourly.fhRecord)
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        Try
+            If Not ValidateValues() Then
+                Exit Sub
             End If
-            clsDataConnection.SaveUpdate()
-            ucrHourlyNavigation.ResetControls()
-            ucrHourlyNavigation.GoToNewRecord()
-            SaveEnable()
-        Else
-            MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Exit Sub
-        End If
+
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrHourly.SaveRecord()
+                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-        If dlgResponse = DialogResult.Yes Then
-            Try
-                clsDataConnection.db.form_hourly.Attach(ucrHourly.fhRecord)
-                clsDataConnection.db.form_hourly.Remove(ucrHourly.fhRecord)
-                clsDataConnection.db.SaveChanges()
-                MessageBox.Show("Record has been deleted", "Delete Record")
+        Try
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+                ucrHourly.DeleteRecord()
                 ucrHourlyNavigation.RemoveRecord()
-            Catch
-                'message box?
-            End Try
-        Else
-            MsgBox("Operation cancelled!", MsgBoxStyle.Information)
-        End If
+                SaveEnable()
+                MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+            ucrHourlyNavigation.MoveFirst()
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ucrHourlyNavigation.ResetControls()
         ucrHourlyNavigation.MoveFirst()
+        SaveEnable()
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -100,23 +108,7 @@
         Me.Close()
     End Sub
 
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim dlgResponse As DialogResult
-        Try
-            If Not ValidateValues() Then
-                Exit Sub
-            End If
 
-            dlgResponse = MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If dlgResponse = DialogResult.Yes Then
-                clsDataConnection.db.Entry(ucrHourly.fhRecord).State = Entity.EntityState.Modified
-                clsDataConnection.db.SaveChanges()
-                MsgBox("Record updated successfully!", MsgBoxStyle.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
@@ -225,6 +217,18 @@
             Return False
         End If
 
+        'Check if all values are empty. There should be atleast one observation value
+        If ucrHourly.IsValuesEmpty() Then
+            MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return False
+        End If
+
+        'check if all values are valid
+        If Not ucrHourly.IsValuesValid Then
+            Return False
+        End If
+
+        'check computed total vs input total
         If Not ucrHourly.checkTotal Then
             Return False
         End If
