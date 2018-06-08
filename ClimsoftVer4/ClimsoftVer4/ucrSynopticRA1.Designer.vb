@@ -568,7 +568,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPStationLevelPressure.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPStationLevelPressure.Name = "ucrVFPStationLevelPressure"
         Me.ucrVFPStationLevelPressure.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPStationLevelPressure.TabIndex = 822
+        Me.ucrVFPStationLevelPressure.TabIndex = 0
         Me.ucrVFPStationLevelPressure.Tag = "106"
         '
         'ucrVFPHighLvlCloudsType
@@ -577,7 +577,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPHighLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPHighLvlCloudsType.Name = "ucrVFPHighLvlCloudsType"
         Me.ucrVFPHighLvlCloudsType.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPHighLvlCloudsType.TabIndex = 823
+        Me.ucrVFPHighLvlCloudsType.TabIndex = 18
         Me.ucrVFPHighLvlCloudsType.Tag = "180"
         '
         'ucrVFPMediumLvlClouds
@@ -586,7 +586,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPMediumLvlClouds.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPMediumLvlClouds.Name = "ucrVFPMediumLvlClouds"
         Me.ucrVFPMediumLvlClouds.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPMediumLvlClouds.TabIndex = 824
+        Me.ucrVFPMediumLvlClouds.TabIndex = 17
         Me.ucrVFPMediumLvlClouds.Tag = "179"
         '
         'ucrVFPLowLvlCloudsType
@@ -595,7 +595,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowLvlCloudsType.Name = "ucrVFPLowLvlCloudsType"
         Me.ucrVFPLowLvlCloudsType.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPLowLvlCloudsType.TabIndex = 825
+        Me.ucrVFPLowLvlCloudsType.TabIndex = 16
         Me.ucrVFPLowLvlCloudsType.Tag = "178"
         '
         'ucrVFPLowLvlCloudsAmt
@@ -604,7 +604,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowLvlCloudsAmt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowLvlCloudsAmt.Name = "ucrVFPLowLvlCloudsAmt"
         Me.ucrVFPLowLvlCloudsAmt.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPLowLvlCloudsAmt.TabIndex = 826
+        Me.ucrVFPLowLvlCloudsAmt.TabIndex = 15
         Me.ucrVFPLowLvlCloudsAmt.Tag = "177"
         '
         'ucrVFPVerticalSignificance
@@ -613,7 +613,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance.Name = "ucrVFPVerticalSignificance"
         Me.ucrVFPVerticalSignificance.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPVerticalSignificance.TabIndex = 827
+        Me.ucrVFPVerticalSignificance.TabIndex = 14
         Me.ucrVFPVerticalSignificance.Tag = "115"
         '
         'ucrVFPTotalCloudCover
@@ -622,7 +622,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTotalCloudCover.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTotalCloudCover.Name = "ucrVFPTotalCloudCover"
         Me.ucrVFPTotalCloudCover.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPTotalCloudCover.TabIndex = 828
+        Me.ucrVFPTotalCloudCover.TabIndex = 13
         Me.ucrVFPTotalCloudCover.Tag = "114"
         '
         'ucrVFPLowCloudHght
@@ -631,7 +631,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPLowCloudHght.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPLowCloudHght.Name = "ucrVFPLowCloudHght"
         Me.ucrVFPLowCloudHght.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPLowCloudHght.TabIndex = 829
+        Me.ucrVFPLowCloudHght.TabIndex = 12
         Me.ucrVFPLowCloudHght.Tag = "176"
         '
         'ucrVFPHorizontalVisibilty
@@ -640,7 +640,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPHorizontalVisibilty.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPHorizontalVisibilty.Name = "ucrVFPHorizontalVisibilty"
         Me.ucrVFPHorizontalVisibilty.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPHorizontalVisibilty.TabIndex = 830
+        Me.ucrVFPHorizontalVisibilty.TabIndex = 11
         Me.ucrVFPHorizontalVisibilty.Tag = "110"
         '
         'ucrVFPRelativeHumidity
@@ -649,7 +649,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPRelativeHumidity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPRelativeHumidity.Name = "ucrVFPRelativeHumidity"
         Me.ucrVFPRelativeHumidity.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPRelativeHumidity.TabIndex = 831
+        Me.ucrVFPRelativeHumidity.TabIndex = 10
         Me.ucrVFPRelativeHumidity.Tag = "105"
         '
         'ucrVFPDewPointTemp
@@ -658,7 +658,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPDewPointTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPDewPointTemp.Name = "ucrVFPDewPointTemp"
         Me.ucrVFPDewPointTemp.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPDewPointTemp.TabIndex = 832
+        Me.ucrVFPDewPointTemp.TabIndex = 9
         Me.ucrVFPDewPointTemp.Tag = "103"
         '
         'ucrVFPWetBulbTemp
@@ -667,7 +667,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWetBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWetBulbTemp.Name = "ucrVFPWetBulbTemp"
         Me.ucrVFPWetBulbTemp.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPWetBulbTemp.TabIndex = 833
+        Me.ucrVFPWetBulbTemp.TabIndex = 8
         Me.ucrVFPWetBulbTemp.Tag = "102"
         '
         'ucrVFPDryBulbTemp
@@ -676,7 +676,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPDryBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPDryBulbTemp.Name = "ucrVFPDryBulbTemp"
         Me.ucrVFPDryBulbTemp.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPDryBulbTemp.TabIndex = 834
+        Me.ucrVFPDryBulbTemp.TabIndex = 7
         Me.ucrVFPDryBulbTemp.Tag = "101"
         '
         'ucrVFPGeopotentialHeight
@@ -685,7 +685,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPGeopotentialHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPGeopotentialHeight.Name = "ucrVFPGeopotentialHeight"
         Me.ucrVFPGeopotentialHeight.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPGeopotentialHeight.TabIndex = 835
+        Me.ucrVFPGeopotentialHeight.TabIndex = 6
         Me.ucrVFPGeopotentialHeight.Tag = "196"
         '
         'ucrVFPStandardPressureLevel
@@ -694,7 +694,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPStandardPressureLevel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPStandardPressureLevel.Name = "ucrVFPStandardPressureLevel"
         Me.ucrVFPStandardPressureLevel.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPStandardPressureLevel.TabIndex = 836
+        Me.ucrVFPStandardPressureLevel.TabIndex = 5
         Me.ucrVFPStandardPressureLevel.Tag = "301"
         '
         'ucrVFP24HrPressureChange
@@ -703,7 +703,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP24HrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP24HrPressureChange.Name = "ucrVFP24HrPressureChange"
         Me.ucrVFP24HrPressureChange.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFP24HrPressureChange.TabIndex = 837
+        Me.ucrVFP24HrPressureChange.TabIndex = 4
         Me.ucrVFP24HrPressureChange.Tag = "399"
         '
         'ucrVFP3hrPressureCharacteristic
@@ -712,7 +712,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP3hrPressureCharacteristic.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP3hrPressureCharacteristic.Name = "ucrVFP3hrPressureCharacteristic"
         Me.ucrVFP3hrPressureCharacteristic.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFP3hrPressureCharacteristic.TabIndex = 838
+        Me.ucrVFP3hrPressureCharacteristic.TabIndex = 3
         Me.ucrVFP3hrPressureCharacteristic.Tag = "814"
         '
         'ucrVFP3hrPressureChange
@@ -721,7 +721,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFP3hrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFP3hrPressureChange.Name = "ucrVFP3hrPressureChange"
         Me.ucrVFP3hrPressureChange.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFP3hrPressureChange.TabIndex = 839
+        Me.ucrVFP3hrPressureChange.TabIndex = 2
         Me.ucrVFP3hrPressureChange.Tag = "400"
         '
         'ucrVFPPressureReduced
@@ -730,7 +730,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPressureReduced.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPressureReduced.Name = "ucrVFPPressureReduced"
         Me.ucrVFPPressureReduced.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPressureReduced.TabIndex = 840
+        Me.ucrVFPPressureReduced.TabIndex = 1
         Me.ucrVFPPressureReduced.Tag = "107"
         '
         'ucrVFPCloudTypeLvlC4
@@ -739,7 +739,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvlC4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvlC4.Name = "ucrVFPCloudTypeLvlC4"
         Me.ucrVFPCloudTypeLvlC4.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudTypeLvlC4.TabIndex = 841
+        Me.ucrVFPCloudTypeLvlC4.TabIndex = 33
         Me.ucrVFPCloudTypeLvlC4.Tag = "129"
         '
         'ucrVFPCloudHtLvl4HsHs4
@@ -748,7 +748,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl4HsHs4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl4HsHs4.Name = "ucrVFPCloudHtLvl4HsHs4"
         Me.ucrVFPCloudHtLvl4HsHs4.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudHtLvl4HsHs4.TabIndex = 842
+        Me.ucrVFPCloudHtLvl4HsHs4.TabIndex = 34
         Me.ucrVFPCloudHtLvl4HsHs4.Tag = "130"
         '
         'ucrVFPInsolation
@@ -757,7 +757,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPInsolation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPInsolation.Name = "ucrVFPInsolation"
         Me.ucrVFPInsolation.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPInsolation.TabIndex = 843
+        Me.ucrVFPInsolation.TabIndex = 48
         Me.ucrVFPInsolation.Tag = "046"
         '
         'ucrVFPWindSpeedfff
@@ -766,7 +766,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWindSpeedfff.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWindSpeedfff.Name = "ucrVFPWindSpeedfff"
         Me.ucrVFPWindSpeedfff.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPWindSpeedfff.TabIndex = 844
+        Me.ucrVFPWindSpeedfff.TabIndex = 47
         Me.ucrVFPWindSpeedfff.Tag = "111"
         '
         'ucrVFPWindDirectiondd
@@ -775,7 +775,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPWindDirectiondd.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPWindDirectiondd.Name = "ucrVFPWindDirectiondd"
         Me.ucrVFPWindDirectiondd.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPWindDirectiondd.TabIndex = 845
+        Me.ucrVFPWindDirectiondd.TabIndex = 46
         Me.ucrVFPWindDirectiondd.Tag = "112"
         '
         'ucrVFPPrecip3Hr
@@ -784,7 +784,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPrecip3Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPrecip3Hr.Name = "ucrVFPPrecip3Hr"
         Me.ucrVFPPrecip3Hr.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPrecip3Hr.TabIndex = 846
+        Me.ucrVFPPrecip3Hr.TabIndex = 45
         Me.ucrVFPPrecip3Hr.Tag = "174"
         '
         'ucrVFPPrecip24Hr
@@ -793,7 +793,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPrecip24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPrecip24Hr.Name = "ucrVFPPrecip24Hr"
         Me.ucrVFPPrecip24Hr.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPrecip24Hr.TabIndex = 847
+        Me.ucrVFPPrecip24Hr.TabIndex = 44
         Me.ucrVFPPrecip24Hr.Tag = "005"
         '
         'ucrVFPSss1Hr
@@ -802,7 +802,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPSss1Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPSss1Hr.Name = "ucrVFPSss1Hr"
         Me.ucrVFPSss1Hr.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPSss1Hr.TabIndex = 848
+        Me.ucrVFPSss1Hr.TabIndex = 43
         Me.ucrVFPSss1Hr.Tag = "132"
         '
         'ucrVFPSss24Hr
@@ -811,7 +811,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPSss24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPSss24Hr.Name = "ucrVFPSss24Hr"
         Me.ucrVFPSss24Hr.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPSss24Hr.TabIndex = 849
+        Me.ucrVFPSss24Hr.TabIndex = 42
         Me.ucrVFPSss24Hr.Tag = "084"
         '
         'ucrVFPEvaporation
@@ -820,7 +820,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPEvaporation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPEvaporation.Name = "ucrVFPEvaporation"
         Me.ucrVFPEvaporation.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPEvaporation.TabIndex = 850
+        Me.ucrVFPEvaporation.TabIndex = 41
         Me.ucrVFPEvaporation.Tag = "018"
         '
         'ucrVFPGrassMinTemp
@@ -829,7 +829,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPGrassMinTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPGrassMinTemp.Name = "ucrVFPGrassMinTemp"
         Me.ucrVFPGrassMinTemp.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPGrassMinTemp.TabIndex = 851
+        Me.ucrVFPGrassMinTemp.TabIndex = 40
         Me.ucrVFPGrassMinTemp.Tag = "099"
         '
         'ucrVFPTmin
@@ -838,7 +838,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTmin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTmin.Name = "ucrVFPTmin"
         Me.ucrVFPTmin.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPTmin.TabIndex = 852
+        Me.ucrVFPTmin.TabIndex = 39
         Me.ucrVFPTmin.Tag = "003"
         '
         'ucrVFPTmax
@@ -847,7 +847,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPTmax.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPTmax.Name = "ucrVFPTmax"
         Me.ucrVFPTmax.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPTmax.TabIndex = 853
+        Me.ucrVFPTmax.TabIndex = 38
         Me.ucrVFPTmax.Tag = "002"
         '
         'ucrVFPPastWx2
@@ -856,7 +856,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPastWx2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPastWx2.Name = "ucrVFPPastWx2"
         Me.ucrVFPPastWx2.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPastWx2.TabIndex = 854
+        Me.ucrVFPPastWx2.TabIndex = 37
         Me.ucrVFPPastWx2.Tag = "193"
         '
         'ucrVFPPastWx1
@@ -865,7 +865,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPastWx1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPastWx1.Name = "ucrVFPPastWx1"
         Me.ucrVFPPastWx1.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPastWx1.TabIndex = 855
+        Me.ucrVFPPastWx1.TabIndex = 36
         Me.ucrVFPPastWx1.Tag = "197"
         '
         'ucrVFPPresentWx
@@ -874,7 +874,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPPresentWx.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPPresentWx.Name = "ucrVFPPresentWx"
         Me.ucrVFPPresentWx.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPPresentWx.TabIndex = 856
+        Me.ucrVFPPresentWx.TabIndex = 35
         Me.ucrVFPPresentWx.Tag = "167"
         '
         'ucrVFPVerticalSignificance4
@@ -883,7 +883,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance4.Name = "ucrVFPVerticalSignificance4"
         Me.ucrVFPVerticalSignificance4.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPVerticalSignificance4.TabIndex = 857
+        Me.ucrVFPVerticalSignificance4.TabIndex = 31
         Me.ucrVFPVerticalSignificance4.Tag = "131"
         '
         'ucrVFPCloudAmtLvl4N4
@@ -892,7 +892,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl4N4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl4N4.Name = "ucrVFPCloudAmtLvl4N4"
         Me.ucrVFPCloudAmtLvl4N4.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudAmtLvl4N4.TabIndex = 858
+        Me.ucrVFPCloudAmtLvl4N4.TabIndex = 32
         Me.ucrVFPCloudAmtLvl4N4.Tag = "128"
         '
         'ucrVFPCloudHtLvl2H2Hs2
@@ -901,7 +901,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl2H2Hs2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl2H2Hs2.Name = "ucrVFPCloudHtLvl2H2Hs2"
         Me.ucrVFPCloudHtLvl2H2Hs2.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudHtLvl2H2Hs2.TabIndex = 859
+        Me.ucrVFPCloudHtLvl2H2Hs2.TabIndex = 26
         Me.ucrVFPCloudHtLvl2H2Hs2.Tag = "122"
         '
         'ucrVFPCloudTypeLv2C2
@@ -910,7 +910,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLv2C2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLv2C2.Name = "ucrVFPCloudTypeLv2C2"
         Me.ucrVFPCloudTypeLv2C2.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudTypeLv2C2.TabIndex = 860
+        Me.ucrVFPCloudTypeLv2C2.TabIndex = 25
         Me.ucrVFPCloudTypeLv2C2.Tag = "121"
         '
         'ucrVFPCloudAmtLvl2N2
@@ -919,7 +919,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl2N2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl2N2.Name = "ucrVFPCloudAmtLvl2N2"
         Me.ucrVFPCloudAmtLvl2N2.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudAmtLvl2N2.TabIndex = 861
+        Me.ucrVFPCloudAmtLvl2N2.TabIndex = 24
         Me.ucrVFPCloudAmtLvl2N2.Tag = "120"
         '
         'ucrVFPVerticalSignificance2
@@ -928,7 +928,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance2.Name = "ucrVFPVerticalSignificance2"
         Me.ucrVFPVerticalSignificance2.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPVerticalSignificance2.TabIndex = 862
+        Me.ucrVFPVerticalSignificance2.TabIndex = 23
         Me.ucrVFPVerticalSignificance2.Tag = "123"
         '
         'ucrVFPCloudHtLvl1HsHs1
@@ -937,7 +937,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvl1HsHs1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvl1HsHs1.Name = "ucrVFPCloudHtLvl1HsHs1"
         Me.ucrVFPCloudHtLvl1HsHs1.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudHtLvl1HsHs1.TabIndex = 863
+        Me.ucrVFPCloudHtLvl1HsHs1.TabIndex = 22
         Me.ucrVFPCloudHtLvl1HsHs1.Tag = "118"
         '
         'ucrVFPCloudTypeLvl1C1
@@ -946,7 +946,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvl1C1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvl1C1.Name = "ucrVFPCloudTypeLvl1C1"
         Me.ucrVFPCloudTypeLvl1C1.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudTypeLvl1C1.TabIndex = 864
+        Me.ucrVFPCloudTypeLvl1C1.TabIndex = 21
         Me.ucrVFPCloudTypeLvl1C1.Tag = "117"
         '
         'ucrVFPCloudAmtLvl1N1
@@ -955,7 +955,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl1N1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl1N1.Name = "ucrVFPCloudAmtLvl1N1"
         Me.ucrVFPCloudAmtLvl1N1.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudAmtLvl1N1.TabIndex = 865
+        Me.ucrVFPCloudAmtLvl1N1.TabIndex = 20
         Me.ucrVFPCloudAmtLvl1N1.Tag = "116"
         '
         'ucrVFPVerticalSignificance1
@@ -964,7 +964,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificance1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificance1.Name = "ucrVFPVerticalSignificance1"
         Me.ucrVFPVerticalSignificance1.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPVerticalSignificance1.TabIndex = 866
+        Me.ucrVFPVerticalSignificance1.TabIndex = 19
         Me.ucrVFPVerticalSignificance1.Tag = "119"
         '
         'ucrVFPCloudAmtLvl3N3
@@ -973,7 +973,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudAmtLvl3N3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudAmtLvl3N3.Name = "ucrVFPCloudAmtLvl3N3"
         Me.ucrVFPCloudAmtLvl3N3.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudAmtLvl3N3.TabIndex = 867
+        Me.ucrVFPCloudAmtLvl3N3.TabIndex = 28
         Me.ucrVFPCloudAmtLvl3N3.Tag = "124"
         '
         'ucrVFPCloudHtLvlHsHs3
@@ -982,7 +982,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudHtLvlHsHs3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudHtLvlHsHs3.Name = "ucrVFPCloudHtLvlHsHs3"
         Me.ucrVFPCloudHtLvlHsHs3.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudHtLvlHsHs3.TabIndex = 868
+        Me.ucrVFPCloudHtLvlHsHs3.TabIndex = 30
         Me.ucrVFPCloudHtLvlHsHs3.Tag = "126"
         '
         'ucrVFPVerticalSignificant3
@@ -991,7 +991,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPVerticalSignificant3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPVerticalSignificant3.Name = "ucrVFPVerticalSignificant3"
         Me.ucrVFPVerticalSignificant3.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPVerticalSignificant3.TabIndex = 869
+        Me.ucrVFPVerticalSignificant3.TabIndex = 27
         Me.ucrVFPVerticalSignificant3.Tag = "127"
         '
         'ucrVFPCloudTypeLvl3C3
@@ -1000,7 +1000,7 @@ Partial Class ucrSynopticRA1
         Me.ucrVFPCloudTypeLvl3C3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVFPCloudTypeLvl3C3.Name = "ucrVFPCloudTypeLvl3C3"
         Me.ucrVFPCloudTypeLvl3C3.Size = New System.Drawing.Size(165, 23)
-        Me.ucrVFPCloudTypeLvl3C3.TabIndex = 870
+        Me.ucrVFPCloudTypeLvl3C3.TabIndex = 29
         Me.ucrVFPCloudTypeLvl3C3.Tag = "125"
         '
         'ucrSynopticRA1
