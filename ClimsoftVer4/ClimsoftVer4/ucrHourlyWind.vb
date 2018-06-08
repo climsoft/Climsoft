@@ -196,7 +196,7 @@ Public Class ucrHourlyWind
     Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                DirectCast(ctr, ucrDirectionSpeedFlag).SetDirectionDigits(iNewDirectionDigits)
+                DirectCast(ctr, ucrDirectionSpeedFlag).SetElementDirectionDigits(iNewDirectionDigits)
             End If
         Next
     End Sub
@@ -204,7 +204,7 @@ Public Class ucrHourlyWind
     Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                DirectCast(ctr, ucrDirectionSpeedFlag).SetSpeedDigits(iNewSpeedDigits)
+                DirectCast(ctr, ucrDirectionSpeedFlag).SetElementSpeedDigits(iNewSpeedDigits)
             End If
         Next
     End Sub
