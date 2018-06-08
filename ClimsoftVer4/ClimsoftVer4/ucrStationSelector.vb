@@ -37,46 +37,22 @@
         SortBy(strStationID)
         cmsStationSortByID.Checked = True
         cmsStationSortyByName.Checked = False
-
-        'If dtbRecords IsNot Nothing Then
-        '    'Datatable Sorting affects cboValues.SelectedValue
-        '    'thus SuppressChange And retain previous cboValues.SelectedValue 
-        '    Dim prevSelected = GetValue()
-        '    bSuppressChangedEvents = True
-        '    dtbRecords.DefaultView.Sort = strStationID & " ASC"
-        '    cmsStationSortByID.Checked = True
-        '    cmsStationSortyByName.Checked = False
-        '    'PopulateControl()
-        '    SetValue(prevSelected)
-        '    bSuppressChangedEvents = False
-        'End If
     End Sub
 
     Public Sub SortByStationName()
         SortBy(strStationName)
         cmsStationSortByID.Checked = False
         cmsStationSortyByName.Checked = True
-        'If dtbRecords IsNot Nothing Then
-        '    'Datatable Sorting affects cboValues.SelectedValue
-        '    'thus SuppressChange And retain previous cboValues.SelectedValue 
-        '    Dim prevSelected = GetValue()
-        '    bSuppressChangedEvents = True
-        '    dtbRecords.DefaultView.Sort = strStationName & " ASC"
-        '    cmsStationSortByID.Checked = False
-        '    cmsStationSortyByName.Checked = True
-        '    'PopulateControl()
-        '    SetValue(prevSelected)
-        '    bSuppressChangedEvents = False
-        'End If
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim dct As New Dictionary(Of String, List(Of String))
+        Dim dct As Dictionary(Of String, List(Of String))
         If bFirstLoad Then
             'SortByStationName()
-            dct.Add(strStationName, New List(Of String)({strStationName}))
+            dct = New Dictionary(Of String, List(Of String))
             dct.Add(strStationID, New List(Of String)({strStationID}))
-            dct.Add(strIDsAndStations, New List(Of String)({strStationName, strStationID}))
+            dct.Add(strStationName, New List(Of String)({strStationName}))
+            dct.Add(strIDsAndStations, New List(Of String)({strStationID, strStationName}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
