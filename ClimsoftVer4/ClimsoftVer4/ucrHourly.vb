@@ -242,7 +242,7 @@ Public Class ucrHourly
                 If elemTotal = expectedTotal Then
                     bValueCorrect = True
                 Else
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.SetBackColor(Color.Cyan)
                     bValueCorrect = False
                 End If
