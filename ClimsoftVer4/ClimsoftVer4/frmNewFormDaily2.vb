@@ -229,7 +229,9 @@ Public Class frmNewFormDaily2
     End Function
 
     Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown, ucrElementSelector.evtKeyDown
-        Me.SelectNextControl(sender, True, True, True, True)
+        If e.KeyCode = Keys.Enter Then
+            Me.SelectNextControl(sender, True, True, True, True)
+        End If
     End Sub
 
 End Class
