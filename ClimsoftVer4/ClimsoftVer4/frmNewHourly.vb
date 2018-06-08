@@ -235,4 +235,8 @@
 
         Return True
     End Function
+
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourly.evtKeyDown, ucrElementSelector.evtKeyDown, ucrDay.evtKeyDown
+        Me.SelectNextControl(sender, True, True, True, True)
+    End Sub
 End Class
