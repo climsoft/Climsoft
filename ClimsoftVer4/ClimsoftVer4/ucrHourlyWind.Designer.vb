@@ -87,571 +87,537 @@ Partial Class ucrHourlyWind
         'lblDD
         '
         Me.lblDD.AutoSize = True
-        Me.lblDD.Location = New System.Drawing.Point(171, 14)
-        Me.lblDD.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDD.Location = New System.Drawing.Point(114, 9)
         Me.lblDD.Name = "lblDD"
-        Me.lblDD.Size = New System.Drawing.Size(27, 20)
+        Me.lblDD.Size = New System.Drawing.Size(19, 13)
         Me.lblDD.TabIndex = 93
         Me.lblDD.Text = "dd"
         '
         'lblDDFF
         '
         Me.lblDDFF.AutoSize = True
-        Me.lblDDFF.Location = New System.Drawing.Point(81, 14)
-        Me.lblDDFF.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDDFF.Location = New System.Drawing.Point(54, 9)
         Me.lblDDFF.Name = "lblDDFF"
-        Me.lblDDFF.Size = New System.Drawing.Size(37, 20)
+        Me.lblDDFF.Size = New System.Drawing.Size(25, 13)
         Me.lblDDFF.TabIndex = 91
         Me.lblDDFF.Text = "ddff"
         '
         'lbl01
         '
         Me.lbl01.AutoSize = True
-        Me.lbl01.Location = New System.Drawing.Point(18, 94)
-        Me.lbl01.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl01.Location = New System.Drawing.Point(12, 61)
         Me.lbl01.Name = "lbl01"
-        Me.lbl01.Size = New System.Drawing.Size(27, 20)
+        Me.lbl01.Size = New System.Drawing.Size(19, 13)
         Me.lbl01.TabIndex = 101
         Me.lbl01.Text = "01"
         '
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(8, 14)
-        Me.lblHour.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblHour.Location = New System.Drawing.Point(5, 9)
         Me.lblHour.Name = "lblHour"
-        Me.lblHour.Size = New System.Drawing.Size(44, 20)
+        Me.lblHour.Size = New System.Drawing.Size(30, 13)
         Me.lblHour.TabIndex = 90
         Me.lblHour.Text = "Hour"
         '
         'lbl10
         '
         Me.lbl10.AutoSize = True
-        Me.lbl10.Location = New System.Drawing.Point(18, 509)
-        Me.lbl10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl10.Location = New System.Drawing.Point(12, 331)
         Me.lbl10.Name = "lbl10"
-        Me.lbl10.Size = New System.Drawing.Size(27, 20)
+        Me.lbl10.Size = New System.Drawing.Size(19, 13)
         Me.lbl10.TabIndex = 110
         Me.lbl10.Text = "10"
         '
         'lbl09
         '
         Me.lbl09.AutoSize = True
-        Me.lbl09.Location = New System.Drawing.Point(18, 463)
-        Me.lbl09.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl09.Location = New System.Drawing.Point(12, 301)
         Me.lbl09.Name = "lbl09"
-        Me.lbl09.Size = New System.Drawing.Size(27, 20)
+        Me.lbl09.Size = New System.Drawing.Size(19, 13)
         Me.lbl09.TabIndex = 109
         Me.lbl09.Text = "09"
         '
         'lbl08
         '
         Me.lbl08.AutoSize = True
-        Me.lbl08.Location = New System.Drawing.Point(18, 417)
-        Me.lbl08.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl08.Location = New System.Drawing.Point(12, 271)
         Me.lbl08.Name = "lbl08"
-        Me.lbl08.Size = New System.Drawing.Size(27, 20)
+        Me.lbl08.Size = New System.Drawing.Size(19, 13)
         Me.lbl08.TabIndex = 108
         Me.lbl08.Text = "08"
         '
         'lbl07
         '
         Me.lbl07.AutoSize = True
-        Me.lbl07.Location = New System.Drawing.Point(18, 371)
-        Me.lbl07.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl07.Location = New System.Drawing.Point(12, 241)
         Me.lbl07.Name = "lbl07"
-        Me.lbl07.Size = New System.Drawing.Size(27, 20)
+        Me.lbl07.Size = New System.Drawing.Size(19, 13)
         Me.lbl07.TabIndex = 107
         Me.lbl07.Text = "07"
         '
         'lbl06
         '
         Me.lbl06.AutoSize = True
-        Me.lbl06.Location = New System.Drawing.Point(18, 325)
-        Me.lbl06.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl06.Location = New System.Drawing.Point(12, 211)
         Me.lbl06.Name = "lbl06"
-        Me.lbl06.Size = New System.Drawing.Size(27, 20)
+        Me.lbl06.Size = New System.Drawing.Size(19, 13)
         Me.lbl06.TabIndex = 106
         Me.lbl06.Text = "06"
         '
         'lbl05
         '
         Me.lbl05.AutoSize = True
-        Me.lbl05.Location = New System.Drawing.Point(18, 278)
-        Me.lbl05.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl05.Location = New System.Drawing.Point(12, 181)
         Me.lbl05.Name = "lbl05"
-        Me.lbl05.Size = New System.Drawing.Size(27, 20)
+        Me.lbl05.Size = New System.Drawing.Size(19, 13)
         Me.lbl05.TabIndex = 105
         Me.lbl05.Text = "05"
         '
         'lbl04
         '
         Me.lbl04.AutoSize = True
-        Me.lbl04.Location = New System.Drawing.Point(18, 232)
-        Me.lbl04.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl04.Location = New System.Drawing.Point(12, 151)
         Me.lbl04.Name = "lbl04"
-        Me.lbl04.Size = New System.Drawing.Size(27, 20)
+        Me.lbl04.Size = New System.Drawing.Size(19, 13)
         Me.lbl04.TabIndex = 104
         Me.lbl04.Text = "04"
         '
         'lbl03
         '
         Me.lbl03.AutoSize = True
-        Me.lbl03.Location = New System.Drawing.Point(18, 186)
-        Me.lbl03.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl03.Location = New System.Drawing.Point(12, 121)
         Me.lbl03.Name = "lbl03"
-        Me.lbl03.Size = New System.Drawing.Size(27, 20)
+        Me.lbl03.Size = New System.Drawing.Size(19, 13)
         Me.lbl03.TabIndex = 103
         Me.lbl03.Text = "03"
         '
         'lbl02
         '
         Me.lbl02.AutoSize = True
-        Me.lbl02.Location = New System.Drawing.Point(18, 140)
-        Me.lbl02.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl02.Location = New System.Drawing.Point(12, 91)
         Me.lbl02.Name = "lbl02"
-        Me.lbl02.Size = New System.Drawing.Size(27, 20)
+        Me.lbl02.Size = New System.Drawing.Size(19, 13)
         Me.lbl02.TabIndex = 102
         Me.lbl02.Text = "02"
         '
         'lbl11
         '
         Me.lbl11.AutoSize = True
-        Me.lbl11.Location = New System.Drawing.Point(18, 555)
-        Me.lbl11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl11.Location = New System.Drawing.Point(12, 361)
         Me.lbl11.Name = "lbl11"
-        Me.lbl11.Size = New System.Drawing.Size(27, 20)
+        Me.lbl11.Size = New System.Drawing.Size(19, 13)
         Me.lbl11.TabIndex = 111
         Me.lbl11.Text = "11"
         '
         'lbl23
         '
         Me.lbl23.AutoSize = True
-        Me.lbl23.Location = New System.Drawing.Point(417, 551)
-        Me.lbl23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl23.Location = New System.Drawing.Point(278, 358)
         Me.lbl23.Name = "lbl23"
-        Me.lbl23.Size = New System.Drawing.Size(27, 20)
+        Me.lbl23.Size = New System.Drawing.Size(19, 13)
         Me.lbl23.TabIndex = 123
         Me.lbl23.Text = "23"
         '
         'lbl22
         '
         Me.lbl22.AutoSize = True
-        Me.lbl22.Location = New System.Drawing.Point(417, 505)
-        Me.lbl22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl22.Location = New System.Drawing.Point(278, 328)
         Me.lbl22.Name = "lbl22"
-        Me.lbl22.Size = New System.Drawing.Size(27, 20)
+        Me.lbl22.Size = New System.Drawing.Size(19, 13)
         Me.lbl22.TabIndex = 122
         Me.lbl22.Text = "22"
         '
         'lbl21
         '
         Me.lbl21.AutoSize = True
-        Me.lbl21.Location = New System.Drawing.Point(417, 459)
-        Me.lbl21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl21.Location = New System.Drawing.Point(278, 298)
         Me.lbl21.Name = "lbl21"
-        Me.lbl21.Size = New System.Drawing.Size(27, 20)
+        Me.lbl21.Size = New System.Drawing.Size(19, 13)
         Me.lbl21.TabIndex = 121
         Me.lbl21.Text = "21"
         '
         'lbl20
         '
         Me.lbl20.AutoSize = True
-        Me.lbl20.Location = New System.Drawing.Point(417, 413)
-        Me.lbl20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl20.Location = New System.Drawing.Point(278, 268)
         Me.lbl20.Name = "lbl20"
-        Me.lbl20.Size = New System.Drawing.Size(27, 20)
+        Me.lbl20.Size = New System.Drawing.Size(19, 13)
         Me.lbl20.TabIndex = 120
         Me.lbl20.Text = "20"
         '
         'lbl19
         '
         Me.lbl19.AutoSize = True
-        Me.lbl19.Location = New System.Drawing.Point(417, 367)
-        Me.lbl19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl19.Location = New System.Drawing.Point(278, 239)
         Me.lbl19.Name = "lbl19"
-        Me.lbl19.Size = New System.Drawing.Size(27, 20)
+        Me.lbl19.Size = New System.Drawing.Size(19, 13)
         Me.lbl19.TabIndex = 119
         Me.lbl19.Text = "19"
         '
         'lbl18
         '
         Me.lbl18.AutoSize = True
-        Me.lbl18.Location = New System.Drawing.Point(417, 321)
-        Me.lbl18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl18.Location = New System.Drawing.Point(278, 209)
         Me.lbl18.Name = "lbl18"
-        Me.lbl18.Size = New System.Drawing.Size(27, 20)
+        Me.lbl18.Size = New System.Drawing.Size(19, 13)
         Me.lbl18.TabIndex = 118
         Me.lbl18.Text = "18"
         '
         'lbl17
         '
         Me.lbl17.AutoSize = True
-        Me.lbl17.Location = New System.Drawing.Point(417, 273)
-        Me.lbl17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl17.Location = New System.Drawing.Point(278, 177)
         Me.lbl17.Name = "lbl17"
-        Me.lbl17.Size = New System.Drawing.Size(27, 20)
+        Me.lbl17.Size = New System.Drawing.Size(19, 13)
         Me.lbl17.TabIndex = 117
         Me.lbl17.Text = "17"
         '
         'lbl16
         '
         Me.lbl16.AutoSize = True
-        Me.lbl16.Location = New System.Drawing.Point(417, 227)
-        Me.lbl16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl16.Location = New System.Drawing.Point(278, 148)
         Me.lbl16.Name = "lbl16"
-        Me.lbl16.Size = New System.Drawing.Size(27, 20)
+        Me.lbl16.Size = New System.Drawing.Size(19, 13)
         Me.lbl16.TabIndex = 116
         Me.lbl16.Text = "16"
         '
         'lbl15
         '
         Me.lbl15.AutoSize = True
-        Me.lbl15.Location = New System.Drawing.Point(417, 181)
-        Me.lbl15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl15.Location = New System.Drawing.Point(278, 118)
         Me.lbl15.Name = "lbl15"
-        Me.lbl15.Size = New System.Drawing.Size(27, 20)
+        Me.lbl15.Size = New System.Drawing.Size(19, 13)
         Me.lbl15.TabIndex = 115
         Me.lbl15.Text = "15"
         '
         'lbl14
         '
         Me.lbl14.AutoSize = True
-        Me.lbl14.Location = New System.Drawing.Point(417, 140)
-        Me.lbl14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl14.Location = New System.Drawing.Point(278, 91)
         Me.lbl14.Name = "lbl14"
-        Me.lbl14.Size = New System.Drawing.Size(27, 20)
+        Me.lbl14.Size = New System.Drawing.Size(19, 13)
         Me.lbl14.TabIndex = 114
         Me.lbl14.Text = "14"
         '
         'lbl13
         '
         Me.lbl13.AutoSize = True
-        Me.lbl13.Location = New System.Drawing.Point(417, 94)
-        Me.lbl13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl13.Location = New System.Drawing.Point(278, 61)
         Me.lbl13.Name = "lbl13"
-        Me.lbl13.Size = New System.Drawing.Size(27, 20)
+        Me.lbl13.Size = New System.Drawing.Size(19, 13)
         Me.lbl13.TabIndex = 113
         Me.lbl13.Text = "13"
         '
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(336, 14)
-        Me.lblFlag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFlag.Location = New System.Drawing.Point(224, 9)
         Me.lblFlag.Name = "lblFlag"
-        Me.lblFlag.Size = New System.Drawing.Size(40, 20)
+        Me.lblFlag.Size = New System.Drawing.Size(27, 13)
         Me.lblFlag.TabIndex = 95
         Me.lblFlag.Text = "Flag"
         '
         'lbl12
         '
         Me.lbl12.AutoSize = True
-        Me.lbl12.Location = New System.Drawing.Point(417, 48)
-        Me.lbl12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl12.Location = New System.Drawing.Point(278, 31)
         Me.lbl12.Name = "lbl12"
-        Me.lbl12.Size = New System.Drawing.Size(27, 20)
+        Me.lbl12.Size = New System.Drawing.Size(19, 13)
         Me.lbl12.TabIndex = 112
         Me.lbl12.Text = "12"
         '
         'lbl00
         '
         Me.lbl00.AutoSize = True
-        Me.lbl00.Location = New System.Drawing.Point(18, 48)
-        Me.lbl00.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl00.Location = New System.Drawing.Point(12, 31)
         Me.lbl00.Name = "lbl00"
-        Me.lbl00.Size = New System.Drawing.Size(27, 20)
+        Me.lbl00.Size = New System.Drawing.Size(19, 13)
         Me.lbl00.TabIndex = 100
         Me.lbl00.Text = "00"
         '
         'ucrInputTotal
         '
-        Me.ucrInputTotal.Location = New System.Drawing.Point(816, 545)
-        Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(544, 354)
+        Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
-        Me.ucrInputTotal.Size = New System.Drawing.Size(87, 40)
-        Me.ucrInputTotal.TabIndex = 29
+        Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputTotal.TabIndex = 24
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(821, 524)
-        Me.lblTotal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTotal.Location = New System.Drawing.Point(547, 341)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(70, 20)
+        Me.lblTotal.Size = New System.Drawing.Size(49, 13)
         Me.lblTotal.TabIndex = 124
         Me.lblTotal.Text = "Total [ ff]"
         '
         'ucrDirectionSpeedFlag0
         '
-        Me.ucrDirectionSpeedFlag0.Location = New System.Drawing.Point(53, 42)
-        Me.ucrDirectionSpeedFlag0.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrDirectionSpeedFlag0.Location = New System.Drawing.Point(35, 27)
+        Me.ucrDirectionSpeedFlag0.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDirectionSpeedFlag0.Name = "ucrDirectionSpeedFlag0"
-        Me.ucrDirectionSpeedFlag0.Size = New System.Drawing.Size(354, 40)
-        Me.ucrDirectionSpeedFlag0.TabIndex = 5
+        Me.ucrDirectionSpeedFlag0.Size = New System.Drawing.Size(236, 26)
+        Me.ucrDirectionSpeedFlag0.TabIndex = 0
         Me.ucrDirectionSpeedFlag0.Tag = "00"
         '
         'lblFF
         '
         Me.lblFF.AutoSize = True
-        Me.lblFF.Location = New System.Drawing.Point(257, 14)
-        Me.lblFF.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFF.Location = New System.Drawing.Point(171, 9)
         Me.lblFF.Name = "lblFF"
-        Me.lblFF.Size = New System.Drawing.Size(19, 20)
+        Me.lblFF.Size = New System.Drawing.Size(13, 13)
         Me.lblFF.TabIndex = 94
         Me.lblFF.Text = "ff"
         '
         'UcrDirectionSpeedFlag1
         '
-        Me.UcrDirectionSpeedFlag1.Location = New System.Drawing.Point(53, 88)
-        Me.UcrDirectionSpeedFlag1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag1.Location = New System.Drawing.Point(35, 57)
+        Me.UcrDirectionSpeedFlag1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag1.Name = "UcrDirectionSpeedFlag1"
-        Me.UcrDirectionSpeedFlag1.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag1.TabIndex = 6
+        Me.UcrDirectionSpeedFlag1.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag1.TabIndex = 1
         Me.UcrDirectionSpeedFlag1.Tag = "01"
         '
         'UcrDirectionSpeedFlag2
         '
-        Me.UcrDirectionSpeedFlag2.Location = New System.Drawing.Point(53, 134)
-        Me.UcrDirectionSpeedFlag2.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag2.Location = New System.Drawing.Point(35, 87)
+        Me.UcrDirectionSpeedFlag2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag2.Name = "UcrDirectionSpeedFlag2"
-        Me.UcrDirectionSpeedFlag2.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag2.TabIndex = 7
+        Me.UcrDirectionSpeedFlag2.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag2.TabIndex = 2
         Me.UcrDirectionSpeedFlag2.Tag = "02"
         '
         'UcrDirectionSpeedFlag3
         '
-        Me.UcrDirectionSpeedFlag3.Location = New System.Drawing.Point(53, 175)
-        Me.UcrDirectionSpeedFlag3.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag3.Location = New System.Drawing.Point(35, 114)
+        Me.UcrDirectionSpeedFlag3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag3.Name = "UcrDirectionSpeedFlag3"
-        Me.UcrDirectionSpeedFlag3.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag3.TabIndex = 8
+        Me.UcrDirectionSpeedFlag3.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag3.TabIndex = 3
         Me.UcrDirectionSpeedFlag3.Tag = "03"
         '
         'UcrDirectionSpeedFlag4
         '
-        Me.UcrDirectionSpeedFlag4.Location = New System.Drawing.Point(53, 221)
-        Me.UcrDirectionSpeedFlag4.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag4.Location = New System.Drawing.Point(35, 144)
+        Me.UcrDirectionSpeedFlag4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag4.Name = "UcrDirectionSpeedFlag4"
-        Me.UcrDirectionSpeedFlag4.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag4.TabIndex = 9
+        Me.UcrDirectionSpeedFlag4.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag4.TabIndex = 4
         Me.UcrDirectionSpeedFlag4.Tag = "04"
         '
         'UcrDirectionSpeedFlag5
         '
-        Me.UcrDirectionSpeedFlag5.Location = New System.Drawing.Point(55, 267)
-        Me.UcrDirectionSpeedFlag5.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag5.Location = New System.Drawing.Point(37, 174)
+        Me.UcrDirectionSpeedFlag5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag5.Name = "UcrDirectionSpeedFlag5"
-        Me.UcrDirectionSpeedFlag5.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag5.TabIndex = 10
+        Me.UcrDirectionSpeedFlag5.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag5.TabIndex = 5
         Me.UcrDirectionSpeedFlag5.Tag = "05"
         '
         'UcrDirectionSpeedFlag6
         '
-        Me.UcrDirectionSpeedFlag6.Location = New System.Drawing.Point(57, 314)
-        Me.UcrDirectionSpeedFlag6.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag6.Location = New System.Drawing.Point(38, 204)
+        Me.UcrDirectionSpeedFlag6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag6.Name = "UcrDirectionSpeedFlag6"
-        Me.UcrDirectionSpeedFlag6.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag6.TabIndex = 11
+        Me.UcrDirectionSpeedFlag6.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag6.TabIndex = 6
         Me.UcrDirectionSpeedFlag6.Tag = "06"
         '
         'UcrDirectionSpeedFlag7
         '
-        Me.UcrDirectionSpeedFlag7.Location = New System.Drawing.Point(57, 361)
-        Me.UcrDirectionSpeedFlag7.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag7.Location = New System.Drawing.Point(38, 235)
+        Me.UcrDirectionSpeedFlag7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag7.Name = "UcrDirectionSpeedFlag7"
-        Me.UcrDirectionSpeedFlag7.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag7.TabIndex = 12
+        Me.UcrDirectionSpeedFlag7.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag7.TabIndex = 7
         Me.UcrDirectionSpeedFlag7.Tag = "07"
         '
         'UcrDirectionSpeedFlag8
         '
-        Me.UcrDirectionSpeedFlag8.Location = New System.Drawing.Point(57, 411)
-        Me.UcrDirectionSpeedFlag8.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag8.Location = New System.Drawing.Point(38, 267)
+        Me.UcrDirectionSpeedFlag8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag8.Name = "UcrDirectionSpeedFlag8"
-        Me.UcrDirectionSpeedFlag8.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag8.TabIndex = 13
+        Me.UcrDirectionSpeedFlag8.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag8.TabIndex = 8
         Me.UcrDirectionSpeedFlag8.Tag = "08"
         '
         'UcrDirectionSpeedFlag9
         '
-        Me.UcrDirectionSpeedFlag9.Location = New System.Drawing.Point(57, 453)
-        Me.UcrDirectionSpeedFlag9.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag9.Location = New System.Drawing.Point(38, 294)
+        Me.UcrDirectionSpeedFlag9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag9.Name = "UcrDirectionSpeedFlag9"
-        Me.UcrDirectionSpeedFlag9.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag9.TabIndex = 14
+        Me.UcrDirectionSpeedFlag9.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag9.TabIndex = 9
         Me.UcrDirectionSpeedFlag9.Tag = "09"
         '
         'UcrDirectionSpeedFlag10
         '
-        Me.UcrDirectionSpeedFlag10.Location = New System.Drawing.Point(57, 499)
-        Me.UcrDirectionSpeedFlag10.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag10.Location = New System.Drawing.Point(38, 324)
+        Me.UcrDirectionSpeedFlag10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag10.Name = "UcrDirectionSpeedFlag10"
-        Me.UcrDirectionSpeedFlag10.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag10.TabIndex = 15
+        Me.UcrDirectionSpeedFlag10.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag10.TabIndex = 10
         Me.UcrDirectionSpeedFlag10.Tag = "10"
         '
         'UcrDirectionSpeedFlag11
         '
-        Me.UcrDirectionSpeedFlag11.Location = New System.Drawing.Point(57, 545)
-        Me.UcrDirectionSpeedFlag11.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag11.Location = New System.Drawing.Point(38, 354)
+        Me.UcrDirectionSpeedFlag11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag11.Name = "UcrDirectionSpeedFlag11"
-        Me.UcrDirectionSpeedFlag11.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag11.TabIndex = 16
+        Me.UcrDirectionSpeedFlag11.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag11.TabIndex = 11
         Me.UcrDirectionSpeedFlag11.Tag = "11"
         '
         'UcrDirectionSpeedFlag12
         '
-        Me.UcrDirectionSpeedFlag12.Location = New System.Drawing.Point(454, 42)
-        Me.UcrDirectionSpeedFlag12.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag12.Location = New System.Drawing.Point(303, 27)
+        Me.UcrDirectionSpeedFlag12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag12.Name = "UcrDirectionSpeedFlag12"
-        Me.UcrDirectionSpeedFlag12.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag12.TabIndex = 17
+        Me.UcrDirectionSpeedFlag12.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag12.TabIndex = 12
         Me.UcrDirectionSpeedFlag12.Tag = "12"
         '
         'UcrDirectionSpeedFlag13
         '
-        Me.UcrDirectionSpeedFlag13.Location = New System.Drawing.Point(456, 88)
-        Me.UcrDirectionSpeedFlag13.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag13.Location = New System.Drawing.Point(304, 57)
+        Me.UcrDirectionSpeedFlag13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag13.Name = "UcrDirectionSpeedFlag13"
-        Me.UcrDirectionSpeedFlag13.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag13.TabIndex = 18
+        Me.UcrDirectionSpeedFlag13.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag13.TabIndex = 13
         Me.UcrDirectionSpeedFlag13.Tag = "13"
         '
         'UcrDirectionSpeedFlag14
         '
-        Me.UcrDirectionSpeedFlag14.Location = New System.Drawing.Point(456, 134)
-        Me.UcrDirectionSpeedFlag14.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag14.Location = New System.Drawing.Point(304, 87)
+        Me.UcrDirectionSpeedFlag14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag14.Name = "UcrDirectionSpeedFlag14"
-        Me.UcrDirectionSpeedFlag14.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag14.TabIndex = 19
+        Me.UcrDirectionSpeedFlag14.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag14.TabIndex = 14
         Me.UcrDirectionSpeedFlag14.Tag = "14"
         '
         'UcrDirectionSpeedFlag15
         '
-        Me.UcrDirectionSpeedFlag15.Location = New System.Drawing.Point(456, 181)
-        Me.UcrDirectionSpeedFlag15.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag15.Location = New System.Drawing.Point(304, 118)
+        Me.UcrDirectionSpeedFlag15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag15.Name = "UcrDirectionSpeedFlag15"
-        Me.UcrDirectionSpeedFlag15.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag15.TabIndex = 20
+        Me.UcrDirectionSpeedFlag15.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag15.TabIndex = 15
         Me.UcrDirectionSpeedFlag15.Tag = "15"
         '
         'UcrDirectionSpeedFlag16
         '
-        Me.UcrDirectionSpeedFlag16.Location = New System.Drawing.Point(454, 221)
-        Me.UcrDirectionSpeedFlag16.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag16.Location = New System.Drawing.Point(303, 144)
+        Me.UcrDirectionSpeedFlag16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag16.Name = "UcrDirectionSpeedFlag16"
-        Me.UcrDirectionSpeedFlag16.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag16.TabIndex = 21
+        Me.UcrDirectionSpeedFlag16.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag16.TabIndex = 16
         Me.UcrDirectionSpeedFlag16.Tag = "16"
         '
         'UcrDirectionSpeedFlag17
         '
-        Me.UcrDirectionSpeedFlag17.Location = New System.Drawing.Point(454, 267)
-        Me.UcrDirectionSpeedFlag17.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag17.Location = New System.Drawing.Point(303, 174)
+        Me.UcrDirectionSpeedFlag17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag17.Name = "UcrDirectionSpeedFlag17"
-        Me.UcrDirectionSpeedFlag17.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag17.TabIndex = 22
+        Me.UcrDirectionSpeedFlag17.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag17.TabIndex = 17
         Me.UcrDirectionSpeedFlag17.Tag = "17"
         '
         'UcrDirectionSpeedFlag18
         '
-        Me.UcrDirectionSpeedFlag18.Location = New System.Drawing.Point(456, 314)
-        Me.UcrDirectionSpeedFlag18.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag18.Location = New System.Drawing.Point(304, 204)
+        Me.UcrDirectionSpeedFlag18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag18.Name = "UcrDirectionSpeedFlag18"
-        Me.UcrDirectionSpeedFlag18.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag18.TabIndex = 23
+        Me.UcrDirectionSpeedFlag18.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag18.TabIndex = 18
         Me.UcrDirectionSpeedFlag18.Tag = "18"
         '
         'UcrDirectionSpeedFlag19
         '
-        Me.UcrDirectionSpeedFlag19.Location = New System.Drawing.Point(456, 361)
-        Me.UcrDirectionSpeedFlag19.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag19.Location = New System.Drawing.Point(304, 235)
+        Me.UcrDirectionSpeedFlag19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag19.Name = "UcrDirectionSpeedFlag19"
-        Me.UcrDirectionSpeedFlag19.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag19.TabIndex = 24
+        Me.UcrDirectionSpeedFlag19.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag19.TabIndex = 19
         Me.UcrDirectionSpeedFlag19.Tag = "19"
         '
         'UcrDirectionSpeedFlag20
         '
-        Me.UcrDirectionSpeedFlag20.Location = New System.Drawing.Point(456, 405)
-        Me.UcrDirectionSpeedFlag20.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag20.Location = New System.Drawing.Point(304, 263)
+        Me.UcrDirectionSpeedFlag20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag20.Name = "UcrDirectionSpeedFlag20"
-        Me.UcrDirectionSpeedFlag20.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag20.TabIndex = 25
+        Me.UcrDirectionSpeedFlag20.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag20.TabIndex = 20
         Me.UcrDirectionSpeedFlag20.Tag = "20"
         '
         'UcrDirectionSpeedFlag21
         '
-        Me.UcrDirectionSpeedFlag21.Location = New System.Drawing.Point(454, 453)
-        Me.UcrDirectionSpeedFlag21.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag21.Location = New System.Drawing.Point(303, 294)
+        Me.UcrDirectionSpeedFlag21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag21.Name = "UcrDirectionSpeedFlag21"
-        Me.UcrDirectionSpeedFlag21.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag21.TabIndex = 26
+        Me.UcrDirectionSpeedFlag21.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag21.TabIndex = 21
         Me.UcrDirectionSpeedFlag21.Tag = "21"
         '
         'UcrDirectionSpeedFlag22
         '
-        Me.UcrDirectionSpeedFlag22.Location = New System.Drawing.Point(456, 499)
-        Me.UcrDirectionSpeedFlag22.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag22.Location = New System.Drawing.Point(304, 324)
+        Me.UcrDirectionSpeedFlag22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag22.Name = "UcrDirectionSpeedFlag22"
-        Me.UcrDirectionSpeedFlag22.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag22.TabIndex = 27
+        Me.UcrDirectionSpeedFlag22.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag22.TabIndex = 22
         Me.UcrDirectionSpeedFlag22.Tag = "22"
         '
         'UcrDirectionSpeedFlag23
         '
-        Me.UcrDirectionSpeedFlag23.Location = New System.Drawing.Point(456, 545)
-        Me.UcrDirectionSpeedFlag23.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.UcrDirectionSpeedFlag23.Location = New System.Drawing.Point(304, 354)
+        Me.UcrDirectionSpeedFlag23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag23.Name = "UcrDirectionSpeedFlag23"
-        Me.UcrDirectionSpeedFlag23.Size = New System.Drawing.Size(354, 40)
-        Me.UcrDirectionSpeedFlag23.TabIndex = 28
+        Me.UcrDirectionSpeedFlag23.Size = New System.Drawing.Size(236, 26)
+        Me.UcrDirectionSpeedFlag23.TabIndex = 23
         Me.UcrDirectionSpeedFlag23.Tag = "23"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(658, 14)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(439, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(19, 20)
+        Me.Label1.Size = New System.Drawing.Size(13, 13)
         Me.Label1.TabIndex = 98
         Me.Label1.Text = "ff"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(737, 14)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(491, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(40, 20)
+        Me.Label2.Size = New System.Drawing.Size(27, 13)
         Me.Label2.TabIndex = 99
         Me.Label2.Text = "Flag"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(572, 14)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(381, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(27, 20)
+        Me.Label3.Size = New System.Drawing.Size(19, 13)
         Me.Label3.TabIndex = 97
         Me.Label3.Text = "dd"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(482, 14)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(321, 9)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(37, 20)
+        Me.Label4.Size = New System.Drawing.Size(25, 13)
         Me.Label4.TabIndex = 96
         Me.Label4.Text = "ddff"
         '
         'ucrHourlyWind
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label2)
@@ -712,9 +678,9 @@ Partial Class ucrHourlyWind
         Me.Controls.Add(Me.lbl00)
         Me.Controls.Add(Me.lbl01)
         Me.Controls.Add(Me.lblHour)
-        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrHourlyWind"
-        Me.Size = New System.Drawing.Size(911, 592)
+        Me.Size = New System.Drawing.Size(607, 385)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

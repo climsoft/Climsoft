@@ -94,37 +94,6 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
-    Public Function IsDirectionEmpty() As Boolean
-        Return ucrDirection.IsEmpty()
-    End Function
-
-    Public Function IsSpeedEmpty() As Boolean
-        Return ucrSpeed.IsEmpty()
-    End Function
-
-    Public Function IsFlagEmpty() As Boolean
-        Return ucrFlag.IsEmpty()
-    End Function
-
-    Public Function GetDirectionValue() As String
-        Return ucrDirection.GetValue
-    End Function
-
-    Public Function GetSpeedValue() As String
-        Return ucrDirection.GetValue
-    End Function
-
-    Public Function GetFlagValue() As String
-        Return ucrDirection.GetValue
-    End Function
-
-    Public Overrides Sub Clear()
-        ucrDDFF.Clear()
-        ucrDirection.Clear()
-        ucrSpeed.Clear()
-        ucrFlag.Clear()
-    End Sub
-
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim lstValues As List(Of Object)
 
@@ -133,10 +102,87 @@ Public Class ucrDirectionSpeedFlag
         If lstValues.Count = 3 Then
             'ucrDDFF.SetValue(lstValues(0) + lstValues(1))
             ucrDDFF.SetValue("")
-            ucrDirection.SetValue(lstValues(0))
-            ucrSpeed.SetValue(lstValues(1))
-            ucrFlag.SetValue(lstValues(2))
+            SetElementDirectionValue(lstValues(0))
+            SetElementSpeedValue(lstValues(1))
+            SetElementFlagValue(lstValues(2))
         End If
+    End Sub
+
+    Public Sub SetElementDirectionValue(strValue As String)
+        ucrDirection.SetValue(strValue)
+    End Sub
+
+    Public Sub SetElementSpeedValue(strValue As String)
+        ucrSpeed.SetValue(strValue)
+    End Sub
+
+    Public Sub SetElementFlagValue(strValue As String)
+        ucrFlag.SetValue(strValue)
+    End Sub
+
+    Public Function GetElementDirectionValue() As String
+        Return ucrDirection.GetValue
+    End Function
+
+    Public Function GetElementSpeedValue() As String
+        Return ucrSpeed.GetValue
+    End Function
+
+    Public Function GetElementFlagValue() As String
+        Return ucrFlag.GetValue
+    End Function
+
+    Public Function IsElementDirectionEmpty() As Boolean
+        Return ucrDirection.IsEmpty()
+    End Function
+
+    Public Function IsElementSpeedEmpty() As Boolean
+        Return ucrSpeed.IsEmpty()
+    End Function
+
+    Public Function IsElementFlagEmpty() As Boolean
+        Return ucrFlag.IsEmpty()
+    End Function
+
+    Public Sub SetElementDirectionValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
+        ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    End Sub
+
+    Public Sub SetElementSpeedValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
+        ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    End Sub
+
+    Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
+        iDirectionDigits = iNewDirectionDigits
+    End Sub
+
+    Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
+        iSpeedDigits = iNewSpeedDigits
+    End Sub
+
+    Public Function IsValuesValid() As Boolean
+        Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
+    End Function
+
+    Public Function IsElementDirectionValueValid() As Boolean
+        Return DoQcForDirection()
+    End Function
+
+    Public Function IsElementSpeedValueValid() As Boolean
+        Return DoQcForSpeed()
+    End Function
+
+    Public Function IsElementFlagValueValid() As Boolean
+        Return DoQcForFlag()
+    End Function
+
+
+
+    Public Overrides Sub Clear()
+        ucrDDFF.Clear()
+        ucrDirection.Clear()
+        ucrSpeed.Clear()
+        ucrFlag.Clear()
     End Sub
 
     Public Sub SetBackColor(backColor As Color)
@@ -159,23 +205,8 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
-    Public Sub SetDirectionDigits(iNewDirectionDigits As Integer)
-        iDirectionDigits = iNewDirectionDigits
-    End Sub
-
-    Public Sub SetSpeedDigits(iNewSpeedDigits As Integer)
-        iSpeedDigits = iNewSpeedDigits
-    End Sub
-
-    Public Sub SetDirectionValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
-        ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
-    End Sub
-
-    Public Sub SetSpeedValidation(iLowerLimit As Decimal, iUpperLimit As Decimal)
-        ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
-    End Sub
-
-    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown, ucrFlag.evtKeyDown
+    'Todo remove flag event
+    Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown, ucrDirection.evtKeyDown, ucrSpeed.evtKeyDown
         'TODO
         'FIND AWAY OF PASSING ME AND THE SENDER TO THE evtGoToNextVFPControl
         'If {ENTER} key is pressed
@@ -200,30 +231,28 @@ Public Class ucrDirectionSpeedFlag
         Dim bValuesCorrect As Boolean = False
 
         If sender Is ucrDDFF.txtBox Then
-            If QCForUcrDDFF() Then
+            If DoQCForUcrDDFFUserInput() Then
                 bValuesCorrect = True
             End If
         ElseIf sender Is ucrDirection.txtBox Then
-            If QcForDirection() Then
+            If DoQcForDirection() Then
                 If Not ucrDirection.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
                     ucrFlag.SetValue("")
                 End If
-                bValuesCorrect = True
+                bValuesCorrect = DoQcForFlag()
             End If
         ElseIf sender Is ucrSpeed.txtBox Then
-            If QcForSpeed() Then
+            If DoQcForSpeed() Then
                 If Not ucrSpeed.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
                     ucrFlag.SetValue("")
                 End If
-                bValuesCorrect = True
+                bValuesCorrect = DoQcForFlag()
             End If
-        ElseIf sender Is ucrFlag.txtBox Then
-            bValuesCorrect = True
         End If
         Return bValuesCorrect
     End Function
 
-    Private Function QCForUcrDDFF() As Boolean
+    Private Function DoQCForUcrDDFFUserInput() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
 
@@ -255,7 +284,7 @@ Public Class ucrDirectionSpeedFlag
                     ucrDirection.bValidateSilently = bValidateSilently
 
                     'proceed to do QC checks for direction and speed
-                    If QcForDirection() AndAlso QcForSpeed() Then
+                    If DoQcForDirection() AndAlso DoQcForSpeed() Then
                         ucrDDFF.SetBackColor(Color.White)
                         bValuesCorrect = True
                     Else
@@ -276,7 +305,6 @@ Public Class ucrDirectionSpeedFlag
             End If
         End If
 
-
         If bValuesCorrect Then
             'if values are empty then set flag as M else remove the M if its the currently set flag
             If ucrDDFF.IsEmpty AndAlso ucrDirection.IsEmpty AndAlso ucrSpeed.IsEmpty Then
@@ -285,52 +313,41 @@ Public Class ucrDirectionSpeedFlag
                 ucrFlag.SetValue("")
             End If
 
-            'do QC for flag
-            bValuesCorrect = QcForFlag()
+            'then do QC for flag
+            bValuesCorrect = DoQcForFlag()
         End If
 
         Return bValuesCorrect
     End Function
 
     'QC checks for  direction
-    Public Function QcForDirection() As Boolean
-        If ucrDirection.ValidateValue() Then
-            Return True
-        Else
-            ucrDirection.GetFocus()
-            Return False
-        End If
+    Private Function DoQcForDirection() As Boolean
+        'TODO. Should we check ucrDirection.GetValue.Length = iDirectionDigits ?
+        Return ucrDirection.ValidateValue()
     End Function
 
-    'QC checks for  wind
-    Public Function QcForSpeed() As Boolean
-        If ucrSpeed.ValidateValue() Then
-            Return True
-        Else
-            ucrSpeed.GetFocus()
-            Return False
-        End If
+    'QC checks for speed
+    Public Function DoQcForSpeed() As Boolean
+        'TODO. Should we check ucrSpeed.GetValue.Length = iSpeedDigits ?
+        Return ucrSpeed.ValidateValue()
     End Function
 
     'QC checks for flag
-    Public Function QcForFlag() As Boolean
+    Private Function DoQcForFlag() As Boolean
         Dim bValuesCorrect As Boolean = True
 
         'if value is empty then set flag as M else remove the M
         If ucrDirection.IsEmpty OrElse ucrSpeed.IsEmpty Then
-            If ucrFlag.GetValue = "M" Then
+            If ucrFlag.GetValue = "M" OrElse ucrFlag.IsEmpty Then
                 bValuesCorrect = True
             Else
                 MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
                 ucrFlag.SetBackColor(Color.Cyan)
-                ucrFlag.GetFocus()
                 bValuesCorrect = False
             End If
         Else
             If ucrFlag.GetValue = "M" Then
-                'MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
                 ucrFlag.SetBackColor(Color.Cyan)
-                ucrFlag.GetFocus()
                 bValuesCorrect = False
             Else
                 bValuesCorrect = True
@@ -339,7 +356,6 @@ Public Class ucrDirectionSpeedFlag
 
         Return bValuesCorrect
     End Function
-
 
     Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
         'ucrFlag should is set as readonly. That changes its back color to the one given below

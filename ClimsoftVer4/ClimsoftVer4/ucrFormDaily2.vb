@@ -11,6 +11,7 @@ Public Class ucrFormDaily2
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
+    Private bTotalRequired As Boolean
     'Stores fields for the value flag and period
     Private lstFields As New List(Of String)
     'Stores the record assocaited with this control
@@ -249,46 +250,54 @@ Public Class ucrFormDaily2
             End If
         Next
     End Sub
-    ''' <summary>
-    ''' Checks if total for current element is required
-    ''' Checks if the computed total is same as the user entered total.
-    ''' </summary>
+
+    Public Function IsValuesEmpty() As Boolean
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                If Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
     Public Function checkTotal() As Boolean
-        'Check total if required from obselements table from qcTotalRequired field
-        Dim clsDataDefinition As DataCall
-        Dim dtbl As DataTable
+        Dim bValueCorrect As Boolean = False
         Dim elemTotal As Integer = 0
         Dim expectedTotal As Integer
-        Dim ctr As Control
-        Dim ctrVFP As New ucrValueFlagPeriod
 
-        clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"qcTotalRequired"}))
-        clsDataDefinition.SetFilter("elementId", "=", ElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
-
-        dtbl = clsDataDefinition.GetDataTable()
-        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            If dtbl.Rows(0).Item("qcTotalRequired") = 1 Then
+        If bTotalRequired Then
+            If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
+                MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ucrInputTotal.SetBackColor(Color.Cyan)
+                bValueCorrect = False
+            Else
                 expectedTotal = Val(ucrInputTotal.GetValue)
-                For Each ctr In Me.Controls
+                For Each ctr As Control In Me.Controls
                     If TypeOf ctr Is ucrValueFlagPeriod Then
-                        ctrVFP = ctr
-                        elemTotal = elemTotal + Val(ctrVFP.ucrValue.GetValue)
+                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrValueFlagPeriod).GetElementValue)
                     End If
                 Next
                 If elemTotal = expectedTotal Then
-                    Return True
+                    bValueCorrect = True
                 Else
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer!", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.GetFocus()
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.SetBackColor(Color.Cyan)
-                    Return False
+                    bValueCorrect = False
                 End If
-            Else
-                Return True
+                bValueCorrect = (elemTotal = expectedTotal)
+                If Not bValueCorrect Then
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ucrInputTotal.SetBackColor(Color.Cyan)
+                End If
+
             End If
+        Else
+            bValueCorrect = True
         End If
+
+        Return bValueCorrect
     End Function
 
     Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
@@ -367,19 +376,13 @@ Public Class ucrFormDaily2
         Dim ucrVFP As ucrValueFlagPeriod
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
+        Dim iElementId As Integer
+
+        iElementId = ucrLinkedElement.GetValue
         clsDataDefinition = New DataCall
-
         clsDataDefinition.SetTableName("obselements")
-        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
-
-        For Each ucrKeyControl As ucrBaseDataLink In dctLinkedControlsFilters.Keys
-            If TypeOf ucrKeyControl Is ucrElementSelector Then
-                ElementId = Val(ucrKeyControl.GetValue)
-                Exit For
-            End If
-        Next
-        clsDataDefinition.SetFilter("elementId", "=", ElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
-
+        clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
+        clsDataDefinition.SetFilter("elementId", "=", iElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             For Each ctr As Control In Me.Controls
@@ -393,6 +396,7 @@ Public Class ucrFormDaily2
                     End If
                 End If
             Next
+            bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
         End If
     End Sub
 

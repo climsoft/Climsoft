@@ -322,7 +322,7 @@ Partial Class frmNewFormDaily2
         Me.ucrHour.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(65, 21)
-        Me.ucrHour.TabIndex = 7
+        Me.ucrHour.TabIndex = 4
         '
         'ucrMonth
         '
@@ -330,7 +330,7 @@ Partial Class frmNewFormDaily2
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
-        Me.ucrMonth.TabIndex = 6
+        Me.ucrMonth.TabIndex = 3
         '
         'ucrYearSelector
         '
@@ -338,14 +338,14 @@ Partial Class frmNewFormDaily2
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(59, 21)
-        Me.ucrYearSelector.TabIndex = 4
+        Me.ucrYearSelector.TabIndex = 2
         '
         'ucrFormDaily
         '
         Me.ucrFormDaily.Location = New System.Drawing.Point(15, 160)
         Me.ucrFormDaily.Name = "ucrFormDaily"
         Me.ucrFormDaily.Size = New System.Drawing.Size(619, 353)
-        Me.ucrFormDaily.TabIndex = 3
+        Me.ucrFormDaily.TabIndex = 6
         '
         'ucrElementSelector
         '
@@ -353,7 +353,7 @@ Partial Class frmNewFormDaily2
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
-        Me.ucrElementSelector.TabIndex = 2
+        Me.ucrElementSelector.TabIndex = 1
         '
         'ucrStationSelector
         '
