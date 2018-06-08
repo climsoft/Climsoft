@@ -131,7 +131,7 @@ Partial Class frmNewHourlyWind
         Me.btnSave.Location = New System.Drawing.Point(86, 508)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 662
+        Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -242,7 +242,7 @@ Partial Class frmNewHourlyWind
         Me.ucrHourlyWind.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHourlyWind.Name = "ucrHourlyWind"
         Me.ucrHourlyWind.Size = New System.Drawing.Size(642, 389)
-        Me.ucrHourlyWind.TabIndex = 678
+        Me.ucrHourlyWind.TabIndex = 4
         '
         'ucrNavigation
         '
@@ -258,7 +258,7 @@ Partial Class frmNewHourlyWind
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
-        Me.ucrDay.TabIndex = 225
+        Me.ucrDay.TabIndex = 3
         '
         'ucrMonth
         '
@@ -266,7 +266,7 @@ Partial Class frmNewHourlyWind
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
-        Me.ucrMonth.TabIndex = 223
+        Me.ucrMonth.TabIndex = 2
         '
         'ucrYearSelector
         '
@@ -274,7 +274,7 @@ Partial Class frmNewHourlyWind
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
-        Me.ucrYearSelector.TabIndex = 222
+        Me.ucrYearSelector.TabIndex = 1
         '
         'ucrStationSelector
         '
@@ -282,7 +282,7 @@ Partial Class frmNewHourlyWind
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
-        Me.ucrStationSelector.TabIndex = 221
+        Me.ucrStationSelector.TabIndex = 0
         '
         'frmNewHourlyWind
         '
