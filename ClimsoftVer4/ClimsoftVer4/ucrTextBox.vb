@@ -35,28 +35,19 @@ Public Class ucrTextBox
             ElseIf dtbRecords.Columns.Count <> 1 Then
                 MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
             Else
-                bValidate = False
-                If dtbRecords.Rows.Count = 0 Then
-                    TextboxValue = ""
-                Else
-                    TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
-                End If
-                TextHandling(Me, New EventArgs)
-                bValidate = True
+                SetValue(If(dtbRecords.Rows.Count = 0, "", dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)))
             End If
         End If
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim strNewValue As String
-
         strNewValue = TryCast(objNewValue, String)
-        TextboxValue = strNewValue
+        txtBox.Text = strNewValue
         OnevtValueChanged(Me, Nothing)
     End Sub
 
-    ' TODO This shouldn't be used. We should be use the general SetValue() method.
-    ' This can be kept but made private if needed.
+    ' TODO This can now be removed once the forms using it in the deisignners have been fixed.
     Public Property TextboxValue() As String
         Get
             Return txtBox.Text
@@ -122,10 +113,6 @@ Public Class ucrTextBox
         End If
         Return iType
     End Function
-
-    'Public Overrides Function ValidateValue() As Boolean
-    '    Return (GetValidationCode(TextboxValue) = 0)
-    'End Function
 
     Public Overrides Function ValidateValue() As Boolean
         Dim iType As Integer
@@ -253,73 +240,37 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-
-        TextHandling(sender, e)
-
-    End Sub
-
-    ''' <summary>
-    ''' 
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Public Sub TextHandling(sender As Object, e As EventArgs)
-
-        'check if value is or not new
-        'If dtbRecords.Rows.Count = 1 Then
-        'If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
-        'value same as original
-        ' SetBackColor(Color.LightGreen)
-        ' Else
-        'value different from the original
-        ''SetBackColor(Color.Orange)
-        'End If
-        ' Else
-        'new value
-        'SetBackColor(Color.White)
-        ' End If
-
-        'check if value is valid
-        'If bValidate AndAlso Not ValidateValue() Then
-        '  SetBackColor(Color.Red)
-        'End If
-
         'check if value is valid
         If bValidate Then
             ValidateValue()
         End If
 
-        'change the case appropriately
-        ChangeCase()
-
         'raise event
         OnevtTextChanged(sender, e)
-
     End Sub
+
     ''' <summary>
     ''' Sets the focus to the control 
     ''' </summary>
     Public Sub GetFocus()
         txtBox.Focus()
     End Sub
+
     ''' <summary>
     ''' Checks if a textbox is empty
     ''' Returns true when text box is empty
     ''' </summary>
     ''' <returns></returns>
     Public Function IsEmpty() As Boolean
-        If TextboxValue.Length > 0 Then
-            Return False
-        Else
-            Return True
-        End If
+        Return Strings.Len(GetValue) = 0
     End Function
     ''' <summary>
     ''' Clears contents of the textbox
     ''' </summary>
     Public Overrides Sub Clear()
         bValidate = False
-        TextboxValue = ""
+        'txtBox.Text = ""
+        SetValue("")
         SetBackColor(Color.White)
         bValidate = True
     End Sub
@@ -335,9 +286,9 @@ Public Class ucrTextBox
     ''' </summary>
     Public Sub ChangeCase()
         If bToLower Then
-            TextboxValue = TextboxValue.ToLower()
+            txtBox.Text = txtBox.Text.ToLower()
         ElseIf bToUpper Then
-            TextboxValue = TextboxValue.ToUpper()
+            txtBox.Text = txtBox.Text.ToUpper()
         End If
     End Sub
     ''' <summary>
@@ -346,20 +297,23 @@ Public Class ucrTextBox
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Return TextboxValue
+        Return txtBox.Text
     End Function
 
     Public Overrides Sub UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 0 Then
-            dtbRecords.Rows.Add(TextboxValue)
+            dtbRecords.Rows.Add(txtBox.Text)
         Else
-            dtbRecords.Rows(0).Item(0) = TextboxValue
+            dtbRecords.Rows(0).Item(0) = txtBox.Text
         End If
-
     End Sub
 
     Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
         OnevtValueChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+        ChangeCase()
     End Sub
     ''' <summary>
     '''Sets the textbox as a read only 
