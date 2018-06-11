@@ -237,6 +237,8 @@
     End Function
 
     Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourly.evtKeyDown, ucrElementSelector.evtKeyDown, ucrDay.evtKeyDown
-        Me.SelectNextControl(sender, True, True, True, True)
+        If e.KeyCode = Keys.Enter Then
+            Me.SelectNextControl(sender, True, True, True, True)
+        End If
     End Sub
 End Class
