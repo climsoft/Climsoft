@@ -45,10 +45,10 @@ Public Class ucrHourlyWind
             Next
             SetTableNameAndFields(strTableName, lstFields)
             ' This list is used for uploading to observation table so all fields needed.
-            lstAllFields.AddRange(lstFields)
+            'lstAllFields.AddRange(lstFields)
             'TODO "entryDatetime" should be here as well once entity model has been updated.
-            lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
-1
+            'lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
+
             bFirstLoad = False
         End If
     End Sub
@@ -400,19 +400,18 @@ Public Class ucrHourlyWind
             Exit Sub
         End If
 
-        Dim todayDate As Date
-        Dim selectedDate As Date
+        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Dim todayDate As Date = Date.Now
+            Dim selectedDate As Date
 
-        'initialise the dates with ONLY year month and day values. 
-        'Neglect the time factor
-        todayDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+            'initialise the dates with ONLY year month and day values to Neglect the time factor
+            todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
+            selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
-        'if selectedDate is earlier than todayDate enable control
-        If DateTime.Compare(selectedDate, todayDate) < 0 Then
-            Me.Enabled = True
+            'if selectedDate  is earlier than todayDate (<0)  then its a valid date for data entry
+            'if it is same time (0) or later than (>0) then its invalid, disable control
+            Me.Enabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
         Else
-            'if it is same time (0) or later than (>0) disable control
             Me.Enabled = False
         End If
     End Sub
