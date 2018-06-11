@@ -190,7 +190,6 @@ Public Class ucrValueFlagPeriod
     End Function
 
     Public Function IsElementValueValid() As Boolean
-        'Return DoQCForValue()
         Return ucrValue.ValidateValue
     End Function
 
