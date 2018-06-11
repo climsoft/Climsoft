@@ -84,7 +84,7 @@
         Dim strCol As String
         strCol = cboValues.DisplayMember
         For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp(strCol).ToString = cboValues.Text Then
+            If rTemp.Item(strCol).ToString = cboValues.Text Then
                 bValid = True
                 Exit For
             End If
