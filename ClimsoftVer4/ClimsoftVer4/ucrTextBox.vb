@@ -26,6 +26,8 @@ Public Class ucrTextBox
     Public bValidate As Boolean = True
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
+    'used to set the default back color to show when the value input is a valid one
+    Private bValidColor As Color = Color.White
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
@@ -118,13 +120,13 @@ Public Class ucrTextBox
         Dim iType As Integer
 
         If Not bValidateEmpty AndAlso IsEmpty() Then
-            SetBackColor(Color.White)
+            SetBackColor(bValidColor)
             Return True
         End If
 
         iType = GetValidationCode(GetValue)
         If iType = 0 Then
-            SetBackColor(Color.White)
+            SetBackColor(bValidColor)
         ElseIf iType = 1
             SetBackColor(Color.Red)
             If Not bValidateSilently Then
@@ -271,7 +273,7 @@ Public Class ucrTextBox
         bValidate = False
         'txtBox.Text = ""
         SetValue("")
-        SetBackColor(Color.White)
+        SetBackColor(bValidColor)
         bValidate = True
     End Sub
     ''' <summary>
@@ -281,6 +283,12 @@ Public Class ucrTextBox
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
     End Sub
+
+    Public Sub SetValidColor(backColor As Color)
+        bValidColor = backColor
+    End Sub
+
+
     ''' <summary>
     ''' Returns converted text either to lower or upper case
     ''' </summary>
