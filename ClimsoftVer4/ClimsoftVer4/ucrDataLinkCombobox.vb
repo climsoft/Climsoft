@@ -25,8 +25,7 @@
         Next
         PopulateControl()
     End Sub
-    'NOT SURE ABOUT THIS BUT I SUSPECT IT NEEDS TO BE OVERRIDEN 
-    'ALTERNATIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
+
     Protected Overrides Sub LinkedControls_evtValueChanged()
         'If Not IsNothing(clsDataDefinition) Then
         '    Dim objData As List(Of String)
@@ -55,8 +54,6 @@
             End If
         Next
         cboValues.Text = objNewValue
-        'TODO possibly want this as well?
-        'cboValues.SelectedIndex = -1
     End Sub
 
     ''' <summary>
@@ -92,7 +89,6 @@
                 Exit For
             End If
         Next
-
         SetBackColor(If(bValid, Color.White, Color.Red))
         Return bValid
     End Function
