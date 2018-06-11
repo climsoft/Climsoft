@@ -205,7 +205,7 @@ Public Class ucrValueFlagPeriod
             End If
         Else
             If ucrFlag.GetValue = "M" Then
-                MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+                MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 ucrFlag.SetBackColor(Color.Cyan)
                 bValuesCorrect = False
             End If
@@ -313,6 +313,7 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetElementValueSize(New Size(33, 20))
     End Sub
 
+    'This is temporary
     Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
         'ucrFlag should is set as readonly. That changes its back color to the one given below
         'for consistency we are rienforcing this color everytime a value is changed on this control
