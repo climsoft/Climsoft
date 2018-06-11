@@ -265,8 +265,6 @@ Public Class ucrValueFlagPeriod
         OnevtValueChanged(sender, e)
     End Sub
 
-
-
     Private Function DoQCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
@@ -322,6 +320,5 @@ Public Class ucrValueFlagPeriod
         'to override the white color being set on textbox validation subroutine
         ucrFlag.SetBackColor(SystemColors.Control)
     End Sub
-
 
 End Class
