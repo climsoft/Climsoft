@@ -344,7 +344,7 @@ Public Class ucrHourlyWind
                 ucrInputTotal.SetBackColor(Color.Red)
                 bValueCorrect = False
             Else
-                expectedTotal = If(ucrInputTotal.IsEmpty, 0, Val(ucrInputTotal.GetValue))
+                expectedTotal = Val(ucrInputTotal.GetValue)
                 For Each ctr As Control In Me.Controls
                     If TypeOf ctr Is ucrDirectionSpeedFlag Then
                         elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetElementSpeedValue)
