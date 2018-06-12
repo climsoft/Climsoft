@@ -246,13 +246,13 @@ Public Class ucrDirectionSpeedFlag
             End If
 
         End If
-        OnevtKeyDown(sender, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrDDFF_ValueChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtValueChanged
         DoQCForUcrDDFFInput()
         IsElementFlagValueValid()
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Function DoQCForUcrDDFFInput() As Boolean
