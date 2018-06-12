@@ -185,6 +185,10 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
+    ''' <summary>
+    ''' checks if the values of all the controls are valid.
+    ''' </summary>
+    ''' <returns></returns>
     Public Function IsValuesValid() As Boolean
         Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
     End Function
@@ -309,7 +313,7 @@ Public Class ucrValueFlagPeriod
 
     ''' <summary>
     ''' checks if the value input in the ucrValue will be a valid value or not 
-    ''' when Quality Control is applied to the input
+    ''' when Quality Control is applied to the input.
     ''' </summary>
     ''' <returns></returns>
     Public Function PreValidateValue() As Boolean
