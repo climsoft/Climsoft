@@ -320,11 +320,26 @@ Public Class ucrValueFlagPeriod
     ''' </summary>
     ''' <returns></returns>
     Public Function PreValidateValue() As Boolean
-        If ucrValue.ValidateText(ucrValue.GetValue) OrElse ucrValue.ValidateText(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
-            Return True
+        Dim bValuesCorrect As Boolean = False
+        Dim strValue As String = ucrValue.GetValue
+
+        If strValue = "" Then
+            bValuesCorrect = True
         Else
-            Return False
+            'Check for an observation flag in the value If a flag exists then separate and get it 
+            If Not IsNumeric(Strings.Right(strValue, 1)) AndAlso IsNumeric(Strings.Left(strValue, Strings.Len(strValue) - 1)) Then
+                strValue = Strings.Left(strValue, Strings.Len(strValue) - 1)
+            Else
+                'if the value is just an M, ignore it and interpret it as a user's intention to put missing value
+                If strValue = "M" Then
+                    strValue = ""
+                End If
+            End If
+
+            'check if the result is a valid value 
+            bValuesCorrect = ucrValue.ValidateText(strValue)
         End If
+        Return bValuesCorrect
     End Function
 
     Private Sub SetTextBoxSize()
