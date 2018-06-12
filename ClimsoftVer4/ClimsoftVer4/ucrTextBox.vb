@@ -119,6 +119,7 @@ Public Class ucrTextBox
     Public Overrides Function ValidateValue() As Boolean
         Dim iType As Integer
 
+        'if set to not validate empty values and textbox is empty then don't proceed with validation
         If Not bValidateEmpty AndAlso IsEmpty() Then
             SetBackColor(bValidColor)
             Return True
@@ -130,19 +131,19 @@ Public Class ucrTextBox
         ElseIf iType = 1
             SetBackColor(Color.Red)
             If Not bValidateSilently Then
-                MsgBox("Number expected!", MsgBoxStyle.Critical)
+                MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         ElseIf iType = 2
             'check if it was lower and upper limit violation
             If Not (GetDcmMinimum() <= Val(GetValue)) Then
                 SetBackColor(Color.Cyan)
                 If Not bValidateSilently Then
-                    MsgBox("Value lower than lowerlimit of: " & GetDcmMinimum(), MsgBoxStyle.Exclamation)
+                    MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
             ElseIf Not (GetDcmMaximum() >= Val(GetValue))
                 SetBackColor(Color.Cyan)
                 If Not bValidateSilently Then
-                    MsgBox("Value higher than upperlimit of: " & GetDcmMaximum(), MsgBoxStyle.Exclamation)
+                    MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
             End If
         End If
