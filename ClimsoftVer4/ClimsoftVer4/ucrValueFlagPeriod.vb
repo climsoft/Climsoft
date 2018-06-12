@@ -236,7 +236,7 @@ Public Class ucrValueFlagPeriod
                 If ucrValue.IsEmpty Then
                     ucrFlag.SetValue("M")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf ucrValue.ValidateText(ucrValue.GetValue) OrElse ucrValue.ValidateText(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
+                ElseIf PreValidateValue() Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 ElseIf ucrValue.GetValue = "M"
                     RaiseEvent evtGoToNextVFPControl(Me, e)
@@ -305,6 +305,19 @@ Public Class ucrValueFlagPeriod
             ucrValue.bValidateSilently = bValidateSilently
         End If
         Return bValuesCorrect
+    End Function
+
+    ''' <summary>
+    ''' checks if the value input in the ucrValue will be a valid value or not 
+    ''' when Quality Control is applied to the input
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function PreValidateValue() As Boolean
+        If ucrValue.ValidateText(ucrValue.GetValue) OrElse ucrValue.ValidateText(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 
     Private Sub SetTextBoxSize()
