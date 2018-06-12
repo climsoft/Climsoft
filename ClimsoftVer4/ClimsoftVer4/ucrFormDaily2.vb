@@ -1,5 +1,4 @@
 ﻿Imports System.Linq.Dynamic
-Imports ClimsoftVer4
 
 Public Class ucrFormDaily2
     'Boolean to check if control is loading for first time
@@ -38,6 +37,7 @@ Public Class ucrFormDaily2
     Private ucrLinkedCloudheightUnits As ucrDataLinkCombobox
     Private ucrLinkedPrecipUnits As ucrDataLinkCombobox
     Private ucrLinkedTempUnits As ucrDataLinkCombobox
+    Private iMonthLength As Integer
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -76,6 +76,7 @@ Public Class ucrFormDaily2
                 ucrText.SetValue(GetValue(strTotalFieldName))
             Next
         End If
+        iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -117,6 +118,7 @@ Public Class ucrFormDaily2
             lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
             bFirstLoad = False
         End If
+
     End Sub
     ''' <summary>
     ''' Sets the linked navigation control
@@ -161,10 +163,12 @@ Public Class ucrFormDaily2
                             ctr.Focus()
                         End If
                     End If
+                    If ctrVFP.Tag = iMonthLength Then
+                        ucrInputTotal.GetFocus()
+                    End If
                 End If
             Next
         End If
-
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -177,6 +181,7 @@ Public Class ucrFormDaily2
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
         SetValueUpperAndLowerLimitsValidation()
+        iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
     End Sub
     ''' <summary>
     ''' Enables the day of month fields equivalent to the days of that month
