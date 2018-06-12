@@ -234,7 +234,6 @@ Public Class ucrTextBox
     End Function
 
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         If bFirstLoad Then
             bFirstLoad = False
         End If
@@ -287,10 +286,13 @@ Public Class ucrTextBox
         txtBox.BackColor = backColor
     End Sub
 
+    ''' <summary>
+    ''' Sets the default back color for when this control has a valid value
+    ''' </summary>
+    ''' <param name="backColor"></param>
     Public Sub SetValidColor(backColor As Color)
         bValidColor = backColor
     End Sub
-
 
     ''' <summary>
     ''' Returns converted text either to lower or upper case
