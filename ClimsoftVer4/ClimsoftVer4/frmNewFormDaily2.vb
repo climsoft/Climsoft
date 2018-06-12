@@ -35,6 +35,7 @@ Public Class frmNewFormDaily2
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
+        ucrFormDaily.SetSaveButton(btnCommit)
 
     End Sub
 

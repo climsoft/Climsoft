@@ -38,6 +38,7 @@ Public Class ucrFormDaily2
     Private ucrLinkedPrecipUnits As ucrDataLinkCombobox
     Private ucrLinkedTempUnits As ucrDataLinkCombobox
     Private iMonthLength As Integer
+    Private cmdSave As Button
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -493,5 +494,13 @@ Public Class ucrFormDaily2
                 Next
             End If
         End If
+    End Sub
+
+    Public Sub SetSaveButton(cmdNewSave As Button)
+        cmdSave = cmdNewSave
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        cmdSave.Focus()
     End Sub
 End Class
