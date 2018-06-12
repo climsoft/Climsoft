@@ -341,10 +341,10 @@ Public Class ucrHourlyWind
         If bSpeedTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the (Total [ff]) textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
                 bValueCorrect = False
             Else
-                expectedTotal = Val(ucrInputTotal.GetValue)
+                expectedTotal = If(ucrInputTotal.IsEmpty, 0, Val(ucrInputTotal.GetValue))
                 For Each ctr As Control In Me.Controls
                     If TypeOf ctr Is ucrDirectionSpeedFlag Then
                         elemTotal = elemTotal + Val(DirectCast(ctr, ucrDirectionSpeedFlag).GetElementSpeedValue)
@@ -353,7 +353,7 @@ Public Class ucrHourlyWind
                 bValueCorrect = (elemTotal = expectedTotal)
                 If Not bValueCorrect Then
                     MessageBox.Show("Value in (Total [ff]) textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
+                    ucrInputTotal.SetBackColor(Color.Red)
                 End If
             End If
         Else
@@ -417,7 +417,7 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub UploadAllRecords()
-        'PROCEED WITH MAKING THIS SUIT THIS CONTROL
+        'TODO.PROCEED WITH MAKING THIS SUIT THIS CONTROL
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
