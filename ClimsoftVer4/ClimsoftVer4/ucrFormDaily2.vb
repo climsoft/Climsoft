@@ -270,7 +270,8 @@ Public Class ucrFormDaily2
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
+                ucrInputTotal.GetFocus()
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)
@@ -282,15 +283,19 @@ Public Class ucrFormDaily2
                 If elemTotal = expectedTotal Then
                     bValueCorrect = True
                 Else
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ucrInputTotal.SetBackColor(Color.Red)
+                    ucrInputTotal.GetFocus()
                     bValueCorrect = False
                 End If
-                bValueCorrect = (elemTotal = expectedTotal)
-                If Not bValueCorrect Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
-                End If
+
+                'bValueCorrect = (elemTotal = expectedTotal)
+
+                'If Not bValueCorrect Then
+                '    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                '    ucrInputTotal.SetBackColor(Color.Red)
+                '    ucrInputTotal.GetFocus()
+                'End If
 
             End If
         Else
@@ -363,7 +368,7 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("visUnits")) Then
                         rcdObservationInitial.visUnits = row.Item("visUnits")
                     End If
-                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
                 End If
             Next
         Next
