@@ -26,6 +26,8 @@ Public Class ucrTextBox
     Public bValidate As Boolean = True
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
+    'used to set the default back color to show when the value input is a valid one
+    Private bValidColor As Color = Color.White
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
@@ -35,28 +37,19 @@ Public Class ucrTextBox
             ElseIf dtbRecords.Columns.Count <> 1 Then
                 MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
             Else
-                bValidate = False
-                If dtbRecords.Rows.Count = 0 Then
-                    TextboxValue = ""
-                Else
-                    TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)
-                End If
-                TextHandling(Me, New EventArgs)
-                bValidate = True
+                SetValue(If(dtbRecords.Rows.Count = 0, "", dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)))
             End If
         End If
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim strNewValue As String
-
         strNewValue = TryCast(objNewValue, String)
-        TextboxValue = strNewValue
+        txtBox.Text = strNewValue
         OnevtValueChanged(Me, Nothing)
     End Sub
 
-    ' TODO This shouldn't be used. We should be use the general SetValue() method.
-    ' This can be kept but made private if needed.
+    ' TODO This can now be removed once the forms using it in the deisignners have been fixed.
     Public Property TextboxValue() As String
         Get
             Return txtBox.Text
@@ -123,37 +116,34 @@ Public Class ucrTextBox
         Return iType
     End Function
 
-    'Public Overrides Function ValidateValue() As Boolean
-    '    Return (GetValidationCode(TextboxValue) = 0)
-    'End Function
-
     Public Overrides Function ValidateValue() As Boolean
         Dim iType As Integer
 
+        'if set to not validate empty values and textbox is empty then don't proceed with validation
         If Not bValidateEmpty AndAlso IsEmpty() Then
-            SetBackColor(Color.White)
+            SetBackColor(bValidColor)
             Return True
         End If
 
         iType = GetValidationCode(GetValue)
         If iType = 0 Then
-            SetBackColor(Color.White)
+            SetBackColor(bValidColor)
         ElseIf iType = 1
             SetBackColor(Color.Red)
             If Not bValidateSilently Then
-                MsgBox("Number expected!", MsgBoxStyle.Critical)
+                MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         ElseIf iType = 2
             'check if it was lower and upper limit violation
             If Not (GetDcmMinimum() <= Val(GetValue)) Then
                 SetBackColor(Color.Cyan)
                 If Not bValidateSilently Then
-                    MsgBox("Value lower than lowerlimit of: " & GetDcmMinimum(), MsgBoxStyle.Exclamation)
+                    MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
             ElseIf Not (GetDcmMaximum() >= Val(GetValue))
                 SetBackColor(Color.Cyan)
                 If Not bValidateSilently Then
-                    MsgBox("Value higher than upperlimit of: " & GetDcmMaximum(), MsgBoxStyle.Exclamation)
+                    MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
             End If
         End If
@@ -171,11 +161,11 @@ Public Class ucrTextBox
         Return iType
     End Function
     ''' <summary>
-    ''' 
+    ''' checks if the string passed can be a valid value for this control
     ''' </summary>
     ''' <param name="strText"></param>
     ''' <returns></returns>
-    Public Function ValidateText(strText As String) As Boolean
+    Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
         Dim iValidationCode As Integer
 
         iValidationCode = GetValidationCode(strText)
@@ -186,18 +176,20 @@ Public Class ucrTextBox
             Case 1
                 Select Case strValidationType
                     Case "Numeric"
-                        MsgBox("Entry must be numeric.", vbOKOnly)
+                        If Not bValidateSilently Then
+                            MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
                 End Select
             Case 2
                 Select Case strValidationType
                     Case "Numeric"
-                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
+                        If Not bValidateSilently Then
+                            MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
                 End Select
-
 
         End Select
         Return (iValidationCode = 0)
-
     End Function
     ''' <summary>
     ''' Returns the numeric range for the control
@@ -242,7 +234,6 @@ Public Class ucrTextBox
     End Function
 
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         If bFirstLoad Then
             bFirstLoad = False
         End If
@@ -253,74 +244,38 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-
-        TextHandling(sender, e)
-
-    End Sub
-
-    ''' <summary>
-    ''' 
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Public Sub TextHandling(sender As Object, e As EventArgs)
-
-        'check if value is or not new
-        'If dtbRecords.Rows.Count = 1 Then
-        'If TextboxValue = dtbRecords.Rows(0).Field(Of String)(columnIndex:=0) Then
-        'value same as original
-        ' SetBackColor(Color.LightGreen)
-        ' Else
-        'value different from the original
-        ''SetBackColor(Color.Orange)
-        'End If
-        ' Else
-        'new value
-        'SetBackColor(Color.White)
-        ' End If
-
-        'check if value is valid
-        'If bValidate AndAlso Not ValidateValue() Then
-        '  SetBackColor(Color.Red)
-        'End If
-
         'check if value is valid
         If bValidate Then
             ValidateValue()
         End If
 
-        'change the case appropriately
-        ChangeCase()
-
         'raise event
         OnevtTextChanged(sender, e)
-
     End Sub
+
     ''' <summary>
     ''' Sets the focus to the control 
     ''' </summary>
     Public Sub GetFocus()
         txtBox.Focus()
     End Sub
+
     ''' <summary>
     ''' Checks if a textbox is empty
     ''' Returns true when text box is empty
     ''' </summary>
     ''' <returns></returns>
     Public Function IsEmpty() As Boolean
-        If TextboxValue.Length > 0 Then
-            Return False
-        Else
-            Return True
-        End If
+        Return Strings.Len(GetValue) = 0
     End Function
     ''' <summary>
     ''' Clears contents of the textbox
     ''' </summary>
     Public Overrides Sub Clear()
         bValidate = False
-        TextboxValue = ""
-        SetBackColor(Color.White)
+        'txtBox.Text = ""
+        SetValue("")
+        SetBackColor(bValidColor)
         bValidate = True
     End Sub
     ''' <summary>
@@ -330,14 +285,23 @@ Public Class ucrTextBox
     Public Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
     End Sub
+
+    ''' <summary>
+    ''' Sets the default back color for when this control has a valid value
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Sub SetValidColor(backColor As Color)
+        bValidColor = backColor
+    End Sub
+
     ''' <summary>
     ''' Returns converted text either to lower or upper case
     ''' </summary>
     Public Sub ChangeCase()
         If bToLower Then
-            TextboxValue = TextboxValue.ToLower()
+            txtBox.Text = txtBox.Text.ToLower()
         ElseIf bToUpper Then
-            TextboxValue = TextboxValue.ToUpper()
+            txtBox.Text = txtBox.Text.ToUpper()
         End If
     End Sub
     ''' <summary>
@@ -346,20 +310,23 @@ Public Class ucrTextBox
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Return TextboxValue
+        Return txtBox.Text
     End Function
 
     Public Overrides Sub UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 0 Then
-            dtbRecords.Rows.Add(TextboxValue)
+            dtbRecords.Rows.Add(txtBox.Text)
         Else
-            dtbRecords.Rows(0).Item(0) = TextboxValue
+            dtbRecords.Rows(0).Item(0) = txtBox.Text
         End If
-
     End Sub
 
     Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
         OnevtValueChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+        ChangeCase()
     End Sub
     ''' <summary>
     '''Sets the textbox as a read only 
