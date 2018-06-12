@@ -153,6 +153,10 @@ Public Class ucrDirectionSpeedFlag
         iSpeedDigits = iNewSpeedDigits
     End Sub
 
+    ''' <summary>
+    ''' checks if the already Quality Control processed values are valid or not for all the controls
+    ''' </summary>
+    ''' <returns></returns>
     Public Function IsValuesValid() As Boolean
         Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
     End Function
@@ -232,7 +236,7 @@ Public Class ucrDirectionSpeedFlag
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
                     RaiseEvent evtGoToNextDSFControl(Me, e)
-                ElseIf UcrDDFFValidateValue() Then
+                ElseIf PreValidateValue() Then
                     RaiseEvent evtGoToNextDSFControl(Me, e)
                 ElseIf ucrDDFF.GetValue = "M"
                     RaiseEvent evtGoToNextDSFControl(Me, e)
@@ -329,27 +333,32 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Private Function UcrDDFFValidateValue() As Boolean
+    ''' <summary>
+    ''' checks if the value of the DD and FF input in the ucrDDFF will be a valid value or not 
+    ''' when Quality Control is applied to the input
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function PreValidateValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim strVal As String
         strVal = ucrDDFF.GetValue
         If strVal = "" Then
             bValuesCorrect = True
         Else
+            'if initial value is not a number, strip out the flag
             If Not IsNumeric(Strings.Right(strVal, 1)) AndAlso IsNumeric(Strings.Left(strVal, strVal.Length - 1)) Then
                 strVal = Strings.Left(strVal, Strings.Len(strVal) - 1)
             End If
 
             If IsNumeric(strVal) AndAlso strVal.Length = (iDirectionDigits + iSpeedDigits) Then
-                'separate dd and ff check the direction and speed values
-
+                'separate dd and ff check validity of direction and speed values
                 bValuesCorrect = (ucrDirection.ValidateText(Strings.Left(strVal, iDirectionDigits)) AndAlso ucrSpeed.ValidateText(Strings.Right(strVal, iSpeedDigits)))
             End If
         End If
         Return bValuesCorrect
     End Function
 
-    'This is temporary
+    'TODO. This is temporary. To be changed once the textbox valid color property has been added
     Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
         'ucrFlag should is set as readonly. That changes its back color to the one given below
         'for consistency we are rienforcing this color everytime a value is changed on this control
