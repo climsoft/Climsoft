@@ -161,11 +161,11 @@ Public Class ucrTextBox
         Return iType
     End Function
     ''' <summary>
-    ''' 
+    ''' checks if the string passed can be a valid value for this control
     ''' </summary>
     ''' <param name="strText"></param>
     ''' <returns></returns>
-    Public Function ValidateText(strText As String) As Boolean
+    Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
         Dim iValidationCode As Integer
 
         iValidationCode = GetValidationCode(strText)
@@ -176,18 +176,20 @@ Public Class ucrTextBox
             Case 1
                 Select Case strValidationType
                     Case "Numeric"
-                        MsgBox("Entry must be numeric.", vbOKOnly)
+                        If Not bValidateSilently Then
+                            MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
                 End Select
             Case 2
                 Select Case strValidationType
                     Case "Numeric"
-                        MsgBox("This number must be: " & GetNumericRange(), vbOKOnly)
+                        If Not bValidateSilently Then
+                            MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
                 End Select
-
 
         End Select
         Return (iValidationCode = 0)
-
     End Function
     ''' <summary>
     ''' Returns the numeric range for the control
