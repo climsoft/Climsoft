@@ -1,5 +1,4 @@
 ﻿Imports System.Linq.Dynamic
-Imports ClimsoftVer4
 
 Public Class ucrFormDaily2
     'Boolean to check if control is loading for first time
@@ -38,6 +37,8 @@ Public Class ucrFormDaily2
     Private ucrLinkedCloudheightUnits As ucrDataLinkCombobox
     Private ucrLinkedPrecipUnits As ucrDataLinkCombobox
     Private ucrLinkedTempUnits As ucrDataLinkCombobox
+    Private iMonthLength As Integer
+    Private cmdSave As Button
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -76,6 +77,7 @@ Public Class ucrFormDaily2
                 ucrText.SetValue(GetValue(strTotalFieldName))
             Next
         End If
+        iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
     End Sub
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -117,6 +119,7 @@ Public Class ucrFormDaily2
             lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
             bFirstLoad = False
         End If
+
     End Sub
     ''' <summary>
     ''' Sets the linked navigation control
@@ -161,10 +164,12 @@ Public Class ucrFormDaily2
                             ctr.Focus()
                         End If
                     End If
+                    If ctrVFP.Tag = iMonthLength Then
+                        ucrInputTotal.GetFocus()
+                    End If
                 End If
             Next
         End If
-
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -177,6 +182,7 @@ Public Class ucrFormDaily2
         Next
         ucrLinkedNavigation.UpdateNavigationByKeyControls()
         SetValueUpperAndLowerLimitsValidation()
+        iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
     End Sub
     ''' <summary>
     ''' Enables the day of month fields equivalent to the days of that month
@@ -270,7 +276,8 @@ Public Class ucrFormDaily2
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
+                ucrInputTotal.GetFocus()
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)
@@ -282,15 +289,19 @@ Public Class ucrFormDaily2
                 If elemTotal = expectedTotal Then
                     bValueCorrect = True
                 Else
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ucrInputTotal.SetBackColor(Color.Red)
+                    ucrInputTotal.GetFocus()
                     bValueCorrect = False
                 End If
-                bValueCorrect = (elemTotal = expectedTotal)
-                If Not bValueCorrect Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
-                End If
+
+                'bValueCorrect = (elemTotal = expectedTotal)
+
+                'If Not bValueCorrect Then
+                '    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                '    ucrInputTotal.SetBackColor(Color.Red)
+                '    ucrInputTotal.GetFocus()
+                'End If
 
             End If
         Else
@@ -363,7 +374,7 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("visUnits")) Then
                         rcdObservationInitial.visUnits = row.Item("visUnits")
                     End If
-                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
                 End If
             Next
         Next
@@ -483,5 +494,13 @@ Public Class ucrFormDaily2
                 Next
             End If
         End If
+    End Sub
+
+    Public Sub SetSaveButton(cmdNewSave As Button)
+        cmdSave = cmdNewSave
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        cmdSave.Focus()
     End Sub
 End Class
