@@ -189,6 +189,7 @@
         If e.KeyCode = Keys.Enter Then
             Dim bGoToNextControl As Boolean = False
 
+            'do validations to determine whether to go to next control
             If TypeOf sender Is ucrValueFlagPeriod Then
                 If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
                     bGoToNextControl = True
