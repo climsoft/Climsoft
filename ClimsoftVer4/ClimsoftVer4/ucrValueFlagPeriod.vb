@@ -185,16 +185,36 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
     End Sub
 
+    ''' <summary>
+    ''' checks if the values of all the controls are valid.
+    ''' </summary>
+    ''' <returns></returns>
     Public Function IsValuesValid() As Boolean
         Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
     End Function
 
     Public Function IsElementValueValid() As Boolean
-        Return DoQCForValue()
+        Return ucrValue.ValidateValue
     End Function
 
     Public Function IsElementFlagValid() As Boolean
-        Return DoQcForFlag()
+        Dim bValuesCorrect As Boolean = True
+
+        'if value is empty then set flag as M else remove the M
+        If ucrValue.IsEmpty Then
+            If Not ucrFlag.IsEmpty AndAlso ucrFlag.GetValue <> "M" Then
+                MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                ucrFlag.SetBackColor(Color.Cyan)
+                bValuesCorrect = False
+            End If
+        Else
+            If ucrFlag.GetValue = "M" Then
+                MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                ucrFlag.SetBackColor(Color.Cyan)
+                bValuesCorrect = False
+            End If
+        End If
+        Return bValuesCorrect
     End Function
 
     Public Function IsElementPeriodValid() As Boolean
@@ -213,49 +233,42 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
-
-        'If {ENTER} key is pressed
-        'If e.KeyCode = Keys.Enter Then
-        ''My.Computer.Keyboard.SendKeys("{TAB}")
-        'ucrValue.TextHandling(sender, e)
-        'RaiseEvent evtGoToNextVFPControl(Me, e)
-        'End If
-
         If e.KeyCode = Keys.Enter Then
-
-            If sender Is ucrValue.txtBox Then
-                'do QC for ucrValue first
-                If DoQCForValue() Then
-                    'if value is empty then set flag as M else remove the M
-                    If ucrValue.IsEmpty Then
-                        ucrFlag.SetValue("M")
-                    ElseIf ucrFlag.GetValue = "M"
-                        ucrFlag.SetValue("")
-                    End If
-
-                    'then do QC for flag
-                    If DoQcForFlag() Then
-                        'My.Computer.Keyboard.SendKeys("{TAB}")
-                        RaiseEvent evtGoToNextVFPControl(Me, e)
-                    End If
+            If sender Is ucrValue Then
+                'check ucrValue input. if value is empty then set flag as M else remove the M
+                If ucrValue.IsEmpty Then
+                    ucrFlag.SetValue("M")
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                ElseIf PreValidateValue() Then
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                ElseIf ucrValue.GetValue = "M"
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                Else
+                    DoQCForValue()
                 End If
-            ElseIf sender Is ucrFlag.txtBox Then
-                If DoQcForFlag() Then
+            ElseIf sender Is ucrFlag Then
+                If IsElementFlagValid() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
+                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                End If
+            ElseIf sender Is ucrPeriod Then
+                If IsElementPeriodValid() Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
             End If
         End If
 
+        OnevtKeyDown(Me, e)
+    End Sub
+
+    Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
+        OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
         DoQCForValue()
-        'Remove the missing value flag for non empty
-        If Not ucrValue.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
-            ucrFlag.SetValue("")
-        End If
-        DoQcForFlag()
+        IsElementFlagValid()
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Function DoQCForValue() As Boolean
@@ -264,20 +277,32 @@ Public Class ucrValueFlagPeriod
         Dim bSuppressChangedEvents As Boolean
 
         If ucrValue.IsEmpty Then
-            'empty ucrValue is a valid value
             bValuesCorrect = True
+            If Not ucrFlag.IsEmpty AndAlso ucrFlag.GetValue <> "M" Then
+                'remove the flag
+                ucrFlag.SetValue("")
+            End If
         Else
             'Check for an observation flag in the ucrValue.
             'If a flag exists then separate and place it in the  ucrValueFlag 
             If Not IsNumeric(Strings.Right(ucrValue.GetValue, 1)) AndAlso IsNumeric(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
-                'Get observation flag from the ucrValue (the last character). 
-                ucrFlag.SetValue(Strings.Right(ucrValue.GetValue, 1))
+                'Get observation flag from the ucrValue (the last character). If its an "M" just set flag as empty text
+                ucrFlag.SetValue(If(Strings.Right(ucrValue.GetValue, 1) = "M", "", Strings.Right(ucrValue.GetValue, 1)))
 
                 'Get the observation value by leaving out the last character  
                 bSuppressChangedEvents = ucrValue.bSuppressChangedEvents
                 ucrValue.bSuppressChangedEvents = True
                 ucrValue.SetValue(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1))
                 ucrValue.bSuppressChangedEvents = bSuppressChangedEvents
+            Else
+                'if the value is just an M, then interpret it as a user's intention to put missing value
+                If ucrValue.GetValue = "M" Then
+                    ucrFlag.SetValue("M")
+                    ucrValue.SetValue("")
+                Else
+                    'remove the flag
+                    ucrFlag.SetValue("")
+                End If
             End If
 
             'validate value loudly  
@@ -289,29 +314,31 @@ Public Class ucrValueFlagPeriod
         Return bValuesCorrect
     End Function
 
-    'QC checks for flag
-    Private Function DoQcForFlag() As Boolean
-        Dim bValuesCorrect As Boolean = True
+    ''' <summary>
+    ''' checks if the value input in the ucrValue will be a valid value or not 
+    ''' when Quality Control is applied to the input.
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function PreValidateValue() As Boolean
+        Dim bValuesCorrect As Boolean = False
+        Dim strValue As String = ucrValue.GetValue
 
-        'if value is empty then set flag as M else remove the M
-        If ucrValue.IsEmpty Then
-            If ucrFlag.GetValue = "M" OrElse ucrFlag.IsEmpty Then
-                bValuesCorrect = True
-            Else
-                MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                ucrFlag.SetBackColor(Color.Cyan)
-                bValuesCorrect = False
-            End If
+        If strValue = "" Then
+            bValuesCorrect = True
         Else
-            If ucrFlag.GetValue = "M" Then
-                'MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
-                ucrFlag.SetBackColor(Color.Cyan)
-                bValuesCorrect = False
+            'Check for an observation flag in the value If a flag exists then separate and get it 
+            If Not IsNumeric(Strings.Right(strValue, 1)) AndAlso IsNumeric(Strings.Left(strValue, Strings.Len(strValue) - 1)) Then
+                strValue = Strings.Left(strValue, Strings.Len(strValue) - 1)
             Else
-                bValuesCorrect = True
+                'if the value is just an M, ignore it and interpret it as a user's intention to put missing value
+                If strValue = "M" Then
+                    strValue = ""
+                End If
             End If
-        End If
 
+            'check if the result is a valid value 
+            bValuesCorrect = ucrValue.ValidateText(strValue)
+        End If
         Return bValuesCorrect
     End Function
 
@@ -321,12 +348,12 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetElementValueSize(New Size(33, 20))
     End Sub
 
+    'This is temporary
     Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
         'ucrFlag should is set as readonly. That changes its back color to the one given below
         'for consistency we are rienforcing this color everytime a value is changed on this control
         'to override the white color being set on textbox validation subroutine
         ucrFlag.SetBackColor(SystemColors.Control)
     End Sub
-
 
 End Class
