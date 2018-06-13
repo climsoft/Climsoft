@@ -534,4 +534,68 @@ Public Class ucrSynopticRA1
         End If
     End Sub
 
+    Public Sub UploadAllRecords()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strCurrTag As String
+        Dim dtObsDateTime As Date
+        Dim lElementID As Long
+        Dim iPeriod As Integer
+
+        clsAllRecordsCall.SetTableAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For i As Integer = 1 To 31
+                rcdObservationInitial = New observationinitial
+                If i < 10 Then
+                    strCurrTag = "0" & i
+                Else
+                    strCurrTag = i
+                End If
+
+                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+
+                    'TODO. A LOOP TO GET ELEMENTID
+                    If Long.TryParse(row.Item("elementId"), lElementID) Then
+                        rcdObservationInitial.describedBy = lElementID
+                    Else
+                        Exit Sub
+                    End If
+
+                    Try
+                        rcdObservationInitial.obsDatetime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                    Catch ex As Exception
+
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
+                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
+
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = "form_daily2"
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+                    If Not IsDBNull(row.Item("temperatureUnits")) Then
+                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
+                    End If
+                    If Not IsDBNull(row.Item("precipUnits")) Then
+                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
+                    End If
+                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
+                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
+                    End If
+                    If Not IsDBNull(row.Item("visUnits")) Then
+                        rcdObservationInitial.visUnits = row.Item("visUnits")
+                    End If
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                End If
+            Next
+        Next
+        clsDataConnection.SaveUpdate()
+    End Sub
 End Class
