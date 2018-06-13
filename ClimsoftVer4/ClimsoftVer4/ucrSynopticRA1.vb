@@ -41,7 +41,6 @@ Public Class ucrSynopticRA1
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
@@ -101,25 +100,6 @@ Public Class ucrSynopticRA1
             ucrTextbox = DirectCast(sender, ucrTextBox)
             CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
         End If
-    End Sub
-
-    'TODO
-    'THE NEXT FOCUS NEEDS TO BE REDONE DIFFERENTLY
-    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
-        'Dim ctrVFP As ucrValueFlagPeriod
-
-        'If TypeOf sender Is ucrValueFlagPeriod Then
-        '    ctrVFP = DirectCast(sender, ucrValueFlagPeriod)
-        '    For Each ctr As Control In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            If ctr.Tag = ctrVFP.Tag + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '        End If
-        '    Next
-        'End If
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
