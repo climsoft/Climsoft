@@ -19,6 +19,7 @@ Public Class ucrHourlyWind
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedDay As ucrDay
+    Private cmdSave As Button
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrDSF As ucrDirectionSpeedFlag
@@ -95,22 +96,23 @@ Public Class ucrHourlyWind
     Private Sub GoToNextDSFControl(sender As Object, e As EventArgs)
         'TODO 
         'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
-        Dim ucrDSF As ucrDirectionSpeedFlag
+        'Dim ucrDSF As ucrDirectionSpeedFlag
 
-        If TypeOf sender Is ucrDirectionSpeedFlag Then
-            ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    'TODO 
-                    'needs modification here. for hour selection functionality
-                    If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
-                        If ctr.Enabled Then
-                            ctr.Focus()
-                        End If
-                    End If
-                End If
-            Next
-        End If
+        'If TypeOf sender Is ucrDirectionSpeedFlag Then
+        '    ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
+        '    For Each ctr As Control In Me.Controls
+        '        If TypeOf ctr Is ucrDirectionSpeedFlag Then
+        '            'TODO 
+        '            'needs modification here. for hour selection functionality
+        '            If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
+        '                If ctr.Enabled Then
+        '                    ctr.Focus()
+        '                End If
+        '            End If
+        '        End If
+        '    Next
+        'End If
+        SelectNextControl(sender, True, True, True, True)
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -481,4 +483,15 @@ Public Class ucrHourlyWind
         clsDataConnection.SaveUpdate()
     End Sub
 
+    Public Sub SetSaveButton(cmdNewSave As Button)
+        cmdSave = cmdNewSave
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If checkSpeedTotal() Then
+                cmdSave.Focus()
+            End If
+        End If
+    End Sub
 End Class

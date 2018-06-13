@@ -29,6 +29,7 @@
         ucrNavigation.PopulateControl()
 
         SaveEnable()
+        ucrHourlyWind.SetSaveButton(btnSave)
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
@@ -65,6 +66,7 @@
         ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay}), ucrYear:=ucrYearSelector)
 
         ucrHourlyWind.ucrDirectionSpeedFlag0.Focus()
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -233,5 +235,17 @@
         Catch ex As Exception
             MessageBox.Show("Error in getting direction and speed digits in the database . Error: " & ex.Message, "Digits", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourlyWind.evtKeyDown, ucrDay.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If TypeOf sender Is ucrBaseDataLink Then
+                If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
+                    Me.SelectNextControl(sender, True, True, True, True)
+                End If
+                'this handles the noise on  return key down
+                e.SuppressKeyPress = True
+            End If
+        End If
     End Sub
 End Class
