@@ -164,9 +164,9 @@
             If TypeOf formCtr Is ucrBaseDataLink Then
                 If TypeOf formCtr Is ucrSynopticRA1 Then
                     Dim synopticControl As ucrSynopticRA1 = DirectCast(formCtr, ucrSynopticRA1)
-                    For Each synopCtl As Control In synopticControl.Controls
-                        If TypeOf synopCtl Is ucrValueFlagPeriod Then
-                            AddHandler DirectCast(synopCtl, ucrValueFlagPeriod).evtKeyDown, AddressOf GoToNextControl
+                    For Each synopCtr As Control In synopticControl.Controls
+                        If TypeOf synopCtr Is ucrValueFlagPeriod Then
+                            AddHandler DirectCast(synopCtr, ucrValueFlagPeriod).evtKeyDown, AddressOf GoToNextControl
                         End If
                     Next
                 Else
@@ -180,14 +180,6 @@
     Private Sub GoToNextControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
 
-            If TypeOf sender Is ucrSynopticRA1 Then
-                Dim oo = True
-            End If
-
-            If TypeOf sender Is ucrValueFlagPeriod Then
-                Dim l = True
-            End If
-
             If TypeOf sender Is ucrValueFlagPeriod Then
                 If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
@@ -197,16 +189,7 @@
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
             End If
-
-
-
-
-
-
-
         End If
-
-
 
     End Sub
 
