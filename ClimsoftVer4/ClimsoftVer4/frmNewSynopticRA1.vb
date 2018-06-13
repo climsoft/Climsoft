@@ -160,11 +160,13 @@
     ''' sets key down listeners for the form controls
     ''' </summary>
     Private Sub SetControlsKeyDownListners()
+        Dim synopticControl As ucrSynopticRA1
+
         For Each formCtr As Control In Me.Controls
             If TypeOf formCtr Is ucrBaseDataLink Then
                 If TypeOf formCtr Is ucrSynopticRA1 Then
                     'for ucrSynopticRA1 controls
-                    Dim synopticControl As ucrSynopticRA1 = DirectCast(formCtr, ucrSynopticRA1)
+                    synopticControl = DirectCast(formCtr, ucrSynopticRA1)
                     For Each synopCtr As Control In synopticControl.Controls
                         If TypeOf synopCtr Is ucrValueFlagPeriod Then
                             AddHandler DirectCast(synopCtr, ucrValueFlagPeriod).evtKeyDown, AddressOf GoToNextControl
