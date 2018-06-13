@@ -103,23 +103,9 @@ Public Class ucrSynopticRA1
         End If
     End Sub
 
-    'TODO
-    'THE NEXT FOCUS NEEDS TO BE REDONE DIFFERENTLY
+    'TODO?
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
-        'Dim ctrVFP As ucrValueFlagPeriod
 
-        'If TypeOf sender Is ucrValueFlagPeriod Then
-        '    ctrVFP = DirectCast(sender, ucrValueFlagPeriod)
-        '    For Each ctr As Control In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            If ctr.Tag = ctrVFP.Tag + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '        End If
-        '    Next
-        'End If
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -141,6 +127,9 @@ Public Class ucrSynopticRA1
     End Sub
 
     Public Sub SaveRecord()
+        'This is determined by the current user not set from the form
+        fs2ra1Record.signature = frmLogin.txtUsername.Text
+
         If bUpdating Then
             'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Modified
@@ -219,7 +208,7 @@ Public Class ucrSynopticRA1
     ''' Returns true if they are all valid and false if any one of them has invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid() Then
@@ -523,22 +512,24 @@ Public Class ucrSynopticRA1
     ''' this prevents data entry of current and future dates
     ''' </summary>
     Private Sub ValidateDataEntryPermission()
-        'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
+        'if its an update or any of the linked year,month and day selector is nothing then just enable the control
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Exit Sub
-        End If
-
-        Dim todayDate As Date
-        Dim selectedDate As Date
-        'initialise the dates with ONLY year month and day values. Neglect the time factor
-        todayDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
-
-        'if selectedDate is earlier than todayDate enable control
-        If DateTime.Compare(selectedDate, todayDate) < 0 Then
             Me.Enabled = True
+        ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Dim todayDate As Date = Date.Now
+            Dim selectedDate As Date
+            'initialise the dates with ONLY year month and day values. Neglect the time factor
+            todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
+            selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+
+            'if selectedDate is earlier than todayDate enable control
+            If Date.Compare(selectedDate, todayDate) < 0 Then
+                Me.Enabled = True
+            Else
+                'if it is same time (0) or later than (>0) disable control
+                Me.Enabled = False
+            End If
         Else
-            'if it is same time (0) or later than (>0) disable control
             Me.Enabled = False
         End If
     End Sub
