@@ -203,6 +203,7 @@
             If bGoToNextControl Then
                 Me.SelectNextControl(sender, True, True, True, True)
             End If
+
             'to handle the "noise"
             e.SuppressKeyPress = True
         End If
