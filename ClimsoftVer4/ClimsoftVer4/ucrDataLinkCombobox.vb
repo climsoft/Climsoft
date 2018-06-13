@@ -154,15 +154,15 @@
     End Sub
 
     Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
-        OnevtKeyDown(sender, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
-        OnevtTextChanged(sender, e)
+        OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
@@ -171,7 +171,7 @@
         If bValidate Then
             ValidateValue()
         End If
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
 End Class
