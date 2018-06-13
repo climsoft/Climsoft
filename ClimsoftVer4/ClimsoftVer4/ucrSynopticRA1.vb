@@ -512,12 +512,10 @@ Public Class ucrSynopticRA1
     ''' this prevents data entry of current and future dates
     ''' </summary>
     Private Sub ValidateDataEntryPermission()
-        'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
+        'if its an update or any of the linked year,month and day selector is nothing then just enable the control
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Exit Sub
-        End If
-
-        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Me.Enabled = True
+        ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
             Dim selectedDate As Date
             'initialise the dates with ONLY year month and day values. Neglect the time factor
