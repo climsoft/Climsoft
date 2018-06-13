@@ -41,6 +41,7 @@ Public Class ucrSynopticRA1
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
@@ -100,6 +101,11 @@ Public Class ucrSynopticRA1
             ucrTextbox = DirectCast(sender, ucrTextBox)
             CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
         End If
+    End Sub
+
+    'TODO?
+    Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
+
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
