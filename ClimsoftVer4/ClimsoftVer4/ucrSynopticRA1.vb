@@ -121,6 +121,9 @@ Public Class ucrSynopticRA1
     End Sub
 
     Public Sub SaveRecord()
+        'This is determined by the current user not set from the form
+        fs2ra1Record.signature = frmLogin.txtUsername.Text
+
         If bUpdating Then
             'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Modified
