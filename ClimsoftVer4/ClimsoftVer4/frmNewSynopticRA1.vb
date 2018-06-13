@@ -163,6 +163,7 @@
         For Each formCtr As Control In Me.Controls
             If TypeOf formCtr Is ucrBaseDataLink Then
                 If TypeOf formCtr Is ucrSynopticRA1 Then
+                    'for ucrSynopticRA1 controls
                     Dim synopticControl As ucrSynopticRA1 = DirectCast(formCtr, ucrSynopticRA1)
                     For Each synopCtr As Control In synopticControl.Controls
                         If TypeOf synopCtr Is ucrValueFlagPeriod Then
@@ -170,27 +171,34 @@
                         End If
                     Next
                 Else
+                    'for the other base controls e.g station, year, month, day, hour slectors
                     AddHandler DirectCast(formCtr, ucrBaseDataLink).evtKeyDown, AddressOf GoToNextControl
                 End If
             End If
-
         Next
     End Sub
 
+    ''' <summary>
+    ''' determines the next control to get focus on enter key  
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub GoToNextControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
-
             If TypeOf sender Is ucrValueFlagPeriod Then
                 If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
+                'for the other base controls e.g station, year, month, day, hour slectors
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
             End If
-        End If
 
+            'to handle the "noise"
+            e.SuppressKeyPress = True
+        End If
     End Sub
 
     'This is from Samuel's code
