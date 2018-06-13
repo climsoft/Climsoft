@@ -131,12 +131,7 @@ Public Class ucrHourly
         'Dim i As Integer = 0
         'ctrTemp = sender
         'ctrTemp = GetNextControl(ctrTemp, True)
-
-        If TypeOf sender Is ucrTextBox Then
-            cmdSave.Focus()
-        Else
-            SelectNextControl(sender, True, True, True, True)
-        End If
+        SelectNextControl(sender, True, True, True, True)
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -343,6 +338,14 @@ Public Class ucrHourly
 
     Public Sub SetSaveButton(cmdNewSave As Button)
         cmdSave = cmdNewSave
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If checkTotal() Then
+                cmdSave.Focus()
+            End If
+        End If
     End Sub
 End Class
 
