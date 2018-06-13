@@ -258,17 +258,17 @@ Public Class ucrValueFlagPeriod
             End If
         End If
 
-        OnevtKeyDown(sender, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
-        OnevtTextChanged(sender, e)
+        OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
         DoQCForValue()
         IsElementFlagValid()
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Function DoQCForValue() As Boolean
