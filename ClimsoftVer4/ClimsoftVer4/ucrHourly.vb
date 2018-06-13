@@ -16,6 +16,7 @@ Public Class ucrHourly
     Private ucrLinkedDay As ucrDay
     Private ucrLinkedStation As ucrStationSelector
     Private ucrlinkedElement As ucrElementSelector
+    Private cmdSave As Button
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ucrVFP As ucrValueFlagPeriod
@@ -32,6 +33,7 @@ Public Class ucrHourly
                     AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrText = ctr
                     ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
@@ -92,21 +94,49 @@ Public Class ucrHourly
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As EventArgs)
-        Dim ctrVFP As ucrValueFlagPeriod
+        'Dim ctrVFP As ucrValueFlagPeriod
 
-        If TypeOf sender Is ucrValueFlagPeriod Then
-            ctrVFP = sender
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    If ctr.Tag = ctrVFP.Tag + 1 Then
-                        If ctr.Enabled Then
-                            ctr.Focus()
-                        End If
-                    End If
-                End If
-            Next
+        'If TypeOf sender Is ucrValueFlagPeriod Then
+        '    ctrVFP = sender
+        '    For Each ctr As Control In Me.Controls
+        '        If TypeOf ctr Is ucrValueFlagPeriod Then
+        '            If ctr.Tag = ctrVFP.Tag + 1 Then
+        '                If ctr.Enabled Then
+        '                    ctr.Focus()
+        '                End If
+        '            End If
+        '        End If
+        '    Next
+        'End If
+        'Dim ctrTemp As Control
+        'Dim i As Integer = 0
+        'ctrTemp = sender
+        'While i < Me.Controls.Count
+        '    ctrTemp = GetNextControl(ctrTemp, True)
+        '    i = i + 1
+        '    If TypeOf ctrTemp Is ucrValueFlagPeriod OrElse TypeOf ctrTemp Is ucrTextBox Then
+        '        If ctrTemp.Enabled Then
+        '            'ctrTemp.Focus()
+        '        Else
+
+        '        End If
+        '        If TypeOf ctrTemp Is ucrValueFlagPeriod Then
+        '            SelectNextControl(ActiveControl, True, True, True, True)
+        '        End If
+        '        Exit While
+        '    End If
+        'End While
+
+        'Dim ctrTemp As Control
+        'Dim i As Integer = 0
+        'ctrTemp = sender
+        'ctrTemp = GetNextControl(ctrTemp, True)
+
+        If TypeOf sender Is ucrTextBox Then
+            cmdSave.Focus()
+        Else
+            SelectNextControl(sender, True, True, True, True)
         End If
-
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -311,5 +341,8 @@ Public Class ucrHourly
         End If
     End Sub
 
+    Public Sub SetSaveButton(cmdNewSave As Button)
+        cmdSave = cmdNewSave
+    End Sub
 End Class
 

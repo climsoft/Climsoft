@@ -16,6 +16,7 @@
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
+        ucrHourly.SetSaveButton(btnCommit)
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
