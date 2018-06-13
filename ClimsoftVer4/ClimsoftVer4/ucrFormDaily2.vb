@@ -501,6 +501,10 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        cmdSave.Focus()
+        If e.KeyCode = Keys.Enter Then
+            If checkTotal() Then
+                cmdSave.Focus()
+            End If
+        End If
     End Sub
 End Class
