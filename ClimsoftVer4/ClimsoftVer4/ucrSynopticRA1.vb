@@ -199,7 +199,7 @@ Public Class ucrSynopticRA1
     ''' Returns true if they are all valid and false if any one of them has invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid() Then
@@ -508,17 +508,21 @@ Public Class ucrSynopticRA1
             Exit Sub
         End If
 
-        Dim todayDate As Date
-        Dim selectedDate As Date
-        'initialise the dates with ONLY year month and day values. Neglect the time factor
-        todayDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Dim todayDate As Date = Date.Now
+            Dim selectedDate As Date
+            'initialise the dates with ONLY year month and day values. Neglect the time factor
+            todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
+            selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
-        'if selectedDate is earlier than todayDate enable control
-        If DateTime.Compare(selectedDate, todayDate) < 0 Then
-            Me.Enabled = True
+            'if selectedDate is earlier than todayDate enable control
+            If Date.Compare(selectedDate, todayDate) < 0 Then
+                Me.Enabled = True
+            Else
+                'if it is same time (0) or later than (>0) disable control
+                Me.Enabled = False
+            End If
         Else
-            'if it is same time (0) or later than (>0) disable control
             Me.Enabled = False
         End If
     End Sub

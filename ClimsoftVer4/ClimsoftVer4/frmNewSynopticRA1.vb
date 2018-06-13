@@ -148,7 +148,7 @@
         End If
 
         'Check if all values are valid. There should be atleast one observation value
-        If Not ucrSynopticRA1.IsValuesValid Then
+        If Not ucrSynopticRA1.ValidateValue Then
             MessageBox.Show("Invalid observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
