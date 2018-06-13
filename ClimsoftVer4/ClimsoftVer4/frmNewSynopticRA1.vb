@@ -187,17 +187,22 @@
     ''' <param name="e"></param>
     Private Sub GoToNextControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
+            Dim bGoToNextControl As Boolean = False
+
             If TypeOf sender Is ucrValueFlagPeriod Then
                 If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
-                    Me.SelectNextControl(sender, True, True, True, True)
+                    bGoToNextControl = True
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
                 'for the other base controls e.g station, year, month, day, hour slectors
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
-                    Me.SelectNextControl(sender, True, True, True, True)
+                    bGoToNextControl = True
                 End If
             End If
 
+            If bGoToNextControl Then
+                Me.SelectNextControl(sender, True, True, True, True)
+            End If
             'to handle the "noise"
             e.SuppressKeyPress = True
         End If
