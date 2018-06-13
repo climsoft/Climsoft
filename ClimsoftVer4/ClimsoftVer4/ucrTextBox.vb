@@ -240,7 +240,7 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
-        OnevtKeyDown(sender, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
@@ -250,7 +250,15 @@ Public Class ucrTextBox
         End If
 
         'raise event
-        OnevtTextChanged(sender, e)
+        OnevtTextChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
+        OnevtValueChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+        ChangeCase()
     End Sub
 
     ''' <summary>
@@ -321,13 +329,7 @@ Public Class ucrTextBox
         End If
     End Sub
 
-    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
-        OnevtValueChanged(Me, e)
-    End Sub
 
-    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        ChangeCase()
-    End Sub
     ''' <summary>
     '''Sets the textbox as a read only 
     ''' </summary>
