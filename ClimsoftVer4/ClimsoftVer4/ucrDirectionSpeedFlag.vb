@@ -231,7 +231,7 @@ Public Class ucrDirectionSpeedFlag
     Private Sub ucrDirectionSpeedFlag_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrDDFF.evtKeyDown
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
-            If sender Is ucrDDFF.txtBox Then
+            If sender Is ucrDDFF Then
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
@@ -244,15 +244,15 @@ Public Class ucrDirectionSpeedFlag
                     DoQCForUcrDDFFInput()
                 End If
             End If
-
         End If
-        OnevtKeyDown(sender, e)
+
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrDDFF_ValueChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtValueChanged
         DoQCForUcrDDFFInput()
         IsElementFlagValueValid()
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Function DoQCForUcrDDFFInput() As Boolean

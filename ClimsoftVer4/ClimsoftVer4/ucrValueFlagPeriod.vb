@@ -234,7 +234,7 @@ Public Class ucrValueFlagPeriod
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
         If e.KeyCode = Keys.Enter Then
-            If sender Is ucrValue.txtBox Then
+            If sender Is ucrValue Then
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrValue.IsEmpty Then
                     ucrFlag.SetValue("M")
@@ -246,12 +246,12 @@ Public Class ucrValueFlagPeriod
                 Else
                     DoQCForValue()
                 End If
-            ElseIf sender Is ucrFlag.txtBox Then
+            ElseIf sender Is ucrFlag Then
                 If IsElementFlagValid() Then
                     'My.Computer.Keyboard.SendKeys("{TAB}")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
-            ElseIf sender Is ucrPeriod.txtBox Then
+            ElseIf sender Is ucrPeriod Then
                 If IsElementPeriodValid() Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
