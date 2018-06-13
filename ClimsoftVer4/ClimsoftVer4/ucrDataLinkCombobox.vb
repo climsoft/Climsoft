@@ -25,8 +25,7 @@
         Next
         PopulateControl()
     End Sub
-    'NOT SURE ABOUT THIS BUT I SUSPECT IT NEEDS TO BE OVERRIDEN 
-    'ALTERNATIVELY WE COULD OVERRIDE THE sub UpdateDataTable() 
+
     Protected Overrides Sub LinkedControls_evtValueChanged()
         'If Not IsNothing(clsDataDefinition) Then
         '    Dim objData As List(Of String)
@@ -55,8 +54,6 @@
             End If
         Next
         cboValues.Text = objNewValue
-        'TODO possibly want this as well?
-        'cboValues.SelectedIndex = -1
     End Sub
 
     ''' <summary>
@@ -87,12 +84,11 @@
         Dim strCol As String
         strCol = cboValues.DisplayMember
         For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp(strCol).ToString = cboValues.Text Then
+            If rTemp.Item(strCol).ToString = cboValues.Text Then
                 bValid = True
                 Exit For
             End If
         Next
-
         SetBackColor(If(bValid, Color.White, Color.Red))
         Return bValid
     End Function
@@ -158,23 +154,24 @@
     End Sub
 
     Private Sub cboValues_KeyDown(sender As Object, e As KeyEventArgs) Handles cboValues.KeyDown
-        OnevtKeyDown(sender, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub cboValues_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboValues.SelectedValueChanged
-        OnevtValueChanged(sender, e)
+        OnevtValueChanged(Me, e)
     End Sub
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
-        OnevtTextChanged(sender, e)
+        OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        SetValue(cboValues.Text)
+        'SetValue(cboValues.Text)
         'check if value is valid
         If bValidate Then
             ValidateValue()
         End If
+        OnevtValueChanged(Me, e)
     End Sub
 
 End Class
