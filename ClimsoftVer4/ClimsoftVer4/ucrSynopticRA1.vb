@@ -36,7 +36,7 @@ Public Class ucrSynopticRA1
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
@@ -538,64 +538,64 @@ Public Class ucrSynopticRA1
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
-        Dim strCurrTag As String
-        Dim dtObsDateTime As Date
-        Dim lElementID As Long
-        Dim iPeriod As Integer
+        Dim strValueCol As String
+        Dim strFlagCol As String
+        Dim strElementCode As String
+        Dim iElementId As Long
+        Dim lstAllFields As New List(Of String)
 
-        clsAllRecordsCall.SetTableAndFields(strTableName, lstAllFields)
+        'This list is used for uploading to observation table so all fields needed.
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
         dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
         For Each row As DataRow In dtbAllRecords.Rows
-            For i As Integer = 1 To 31
-                rcdObservationInitial = New observationinitial
-                If i < 10 Then
-                    strCurrTag = "0" & i
-                Else
-                    strCurrTag = i
+
+            For i As Integer = 0 To lstFields.Count
+                ' For Each strFieldName As String In lstFields
+                If Not lstFields.Item(i).StartsWith(strValueFieldName) Then
+                    Continue For
                 End If
 
-                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
-                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                strElementCode = lstFields.Item(i).Substring(strValueFieldName.Length)
+                strValueCol = lstFields.Item(i)
+                strFlagCol = lstFields.Find(Function(x As String)
+                                                Return x.Equals(strFlagFieldName & strElementCode)
+                                            End Function)
 
-                    'TODO. A LOOP TO GET ELEMENTID
-                    If Long.TryParse(row.Item("elementId"), lElementID) Then
-                        rcdObservationInitial.describedBy = lElementID
-                    Else
-                        Exit Sub
-                    End If
+                'set the record
+                If Long.TryParse(strElementCode, iElementId) AndAlso Not IsDBNull(row.Item(strValueCol)) AndAlso String.IsNullOrEmpty(row.Item(strValueCol)) Then
+
+                    rcdObservationInitial = New observationinitial
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    rcdObservationInitial.describedBy = iElementId
 
                     Try
-                        rcdObservationInitial.obsDatetime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
                     Catch ex As Exception
-
                     End Try
                     rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
-                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
-
+                    rcdObservationInitial.obsValue = row.Item(strValueCol)
+                    rcdObservationInitial.flag = row.Item(strFlagCol)
                     rcdObservationInitial.qcStatus = 0
                     rcdObservationInitial.acquisitionType = 1
-                    rcdObservationInitial.dataForm = "form_daily2"
+                    rcdObservationInitial.dataForm = strTableName
+
                     If Not IsDBNull(row.Item("signature")) Then
                         rcdObservationInitial.capturedBy = row.Item("signature")
                     End If
-                    If Not IsDBNull(row.Item("temperatureUnits")) Then
-                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
-                    End If
-                    If Not IsDBNull(row.Item("precipUnits")) Then
-                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
-                    End If
-                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
-                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
-                    End If
-                    If Not IsDBNull(row.Item("visUnits")) Then
-                        rcdObservationInitial.visUnits = row.Item("visUnits")
-                    End If
+
                     clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+
+
+
                 End If
             Next
         Next
         clsDataConnection.SaveUpdate()
+
     End Sub
 End Class

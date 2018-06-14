@@ -6,6 +6,8 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this line once button upload is enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
@@ -210,6 +212,16 @@
         End If
     End Sub
 
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmDataTransferProgress.Show()
+        frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+        frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+        ucrSynopticRA1.UploadAllRecords()
+        frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+        frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+    End Sub
+
     'This is from Samuel's code
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
@@ -227,10 +239,6 @@
             sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
-    End Sub
-
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'TODO
     End Sub
 
     'TODO. Copied from Samuel's code
