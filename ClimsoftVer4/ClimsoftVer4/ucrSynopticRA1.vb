@@ -71,6 +71,7 @@ Public Class ucrSynopticRA1
                 'enable or disable textboxes based on year month day
                 ValidateDataEntryPermission()
             End If
+
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -538,13 +539,13 @@ Public Class ucrSynopticRA1
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
-        Dim strValueCol As String
-        Dim strFlagCol As String
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
         Dim strElementCode As String
         Dim iElementId As Long
         Dim lstAllFields As New List(Of String)
 
-        'This list is used for uploading to observation table so all fields needed.
+        'get the observation values fields
         lstAllFields.AddRange(lstFields)
         'TODO "entryDatetime" should be here as well once entity model has been updated.
         lstAllFields.AddRange({"signature"})
@@ -553,21 +554,20 @@ Public Class ucrSynopticRA1
         dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
         For Each row As DataRow In dtbAllRecords.Rows
-
-            For i As Integer = 0 To lstFields.Count
-                ' For Each strFieldName As String In lstFields
-                If Not lstFields.Item(i).StartsWith(strValueFieldName) Then
+            For Each strFieldName As String In lstFields
+                'if its not an observation value field then skip the loop
+                If Not strFieldName.StartsWith(Me.strValueFieldName) Then
                     Continue For
                 End If
 
-                strElementCode = lstFields.Item(i).Substring(strValueFieldName.Length)
-                strValueCol = lstFields.Item(i)
-                strFlagCol = lstFields.Find(Function(x As String)
-                                                Return x.Equals(strFlagFieldName & strElementCode)
-                                            End Function)
+                strElementCode = strFieldName.Substring(Me.strValueFieldName.Length)
+                strValueColumn = strFieldName
+                strFlagColumn = lstFields.Find(Function(x As String)
+                                                   Return x.Equals(Me.strFlagFieldName & strElementCode)
+                                               End Function)
 
                 'set the record
-                If Long.TryParse(strElementCode, iElementId) AndAlso Not IsDBNull(row.Item(strValueCol)) AndAlso String.IsNullOrEmpty(row.Item(strValueCol)) Then
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, iElementId) Then
 
                     rcdObservationInitial = New observationinitial
                     rcdObservationInitial.recordedFrom = row.Item("stationId")
@@ -578,8 +578,8 @@ Public Class ucrSynopticRA1
                     Catch ex As Exception
                     End Try
                     rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.obsValue = row.Item(strValueCol)
-                    rcdObservationInitial.flag = row.Item(strFlagCol)
+                    rcdObservationInitial.obsValue = row.Item(strValueColumn)
+                    rcdObservationInitial.flag = row.Item(strFlagColumn)
                     rcdObservationInitial.qcStatus = 0
                     rcdObservationInitial.acquisitionType = 1
                     rcdObservationInitial.dataForm = strTableName
@@ -590,11 +590,11 @@ Public Class ucrSynopticRA1
 
                     clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
 
-
-
                 End If
             Next
         Next
+
+        'save the Observation record
         clsDataConnection.SaveUpdate()
 
     End Sub
