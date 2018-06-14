@@ -150,16 +150,7 @@ Public Class ucrTextBox
         Return (iType = 0)
     End Function
 
-    Public Function GetValidationCode(strText As String) As Integer
-        Dim iType As Integer
-        Select Case strValidationType
-            Case "none"
-                iType = 0
-            Case "numeric"
-                iType = ValidateNumeric(strText)
-        End Select
-        Return iType
-    End Function
+    'TODO. CAN THE FUNCTION BELOW BE MERGED WITH FUNCTION ValidateValue()
     ''' <summary>
     ''' checks if the string passed can be a valid value for this control
     ''' </summary>
@@ -168,8 +159,12 @@ Public Class ucrTextBox
     Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
         Dim iValidationCode As Integer
 
-        iValidationCode = GetValidationCode(strText)
+        'if set to not validate empty values and string is empty then don't proceed with validation
+        If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
+            Return True
+        End If
 
+        iValidationCode = GetValidationCode(strText)
         Select Case iValidationCode
             Case 0
                 'this is for none. No validation
@@ -191,6 +186,18 @@ Public Class ucrTextBox
         End Select
         Return (iValidationCode = 0)
     End Function
+
+    Public Function GetValidationCode(strText As String) As Integer
+        Dim iType As Integer
+        Select Case strValidationType
+            Case "none"
+                iType = 0
+            Case "numeric"
+                iType = ValidateNumeric(strText)
+        End Select
+        Return iType
+    End Function
+
     ''' <summary>
     ''' Returns the numeric range for the control
     ''' </summary>
@@ -274,7 +281,7 @@ Public Class ucrTextBox
     ''' </summary>
     ''' <returns></returns>
     Public Function IsEmpty() As Boolean
-        Return Strings.Len(GetValue) = 0
+        Return String.IsNullOrEmpty(GetValue())
     End Function
     ''' <summary>
     ''' Clears contents of the textbox

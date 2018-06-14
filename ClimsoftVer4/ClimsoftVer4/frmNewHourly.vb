@@ -16,6 +16,7 @@
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
+        ucrHourly.SetSaveButton(btnCommit)
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
@@ -238,7 +239,13 @@
 
     Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourly.evtKeyDown, ucrElementSelector.evtKeyDown, ucrDay.evtKeyDown
         If e.KeyCode = Keys.Enter Then
-            Me.SelectNextControl(sender, True, True, True, True)
+            If TypeOf sender Is ucrBaseDataLink Then
+                If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
+                    Me.SelectNextControl(sender, True, True, True, True)
+                End If
+                'this handles the noise on  return key down
+                e.SuppressKeyPress = True
+            End If
         End If
     End Sub
 End Class
