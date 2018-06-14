@@ -215,15 +215,18 @@ Public Class ucrDirectionSpeedFlag
             ucrDirection.bValidateSilently = True
             ucrDirection.SetValidationTypeAsNumeric()
             ucrDirection.SetAsReadOnly()
-            ucrDirection.SetBackColor(Color.White)
+            'ucrDirection being a readonly. Makes back color to be like that of readonly when it has a valid value
+            ucrDirection.SetValidColor(SystemColors.Control)
 
             ucrSpeed.bValidateSilently = True
             ucrSpeed.SetValidationTypeAsNumeric()
             ucrSpeed.SetAsReadOnly()
-            ucrSpeed.SetBackColor(Color.White)
+            ucrSpeed.SetValidColor(SystemColors.Control)
 
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
+            ucrFlag.SetValidColor(SystemColors.Control)
+
             bFirstLoad = False
         End If
     End Sub
@@ -357,14 +360,6 @@ Public Class ucrDirectionSpeedFlag
         End If
         Return bValuesCorrect
     End Function
-
-    'TODO. This is temporary. To be changed once the textbox valid color property has been added
-    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
-        'ucrFlag should is set as readonly. That changes its back color to the one given below
-        'for consistency we are rienforcing this color everytime a value is changed on this control
-        'to override the white color being set on textbox validation subroutine
-        ucrFlag.SetBackColor(SystemColors.Control)
-    End Sub
 
 End Class
 
