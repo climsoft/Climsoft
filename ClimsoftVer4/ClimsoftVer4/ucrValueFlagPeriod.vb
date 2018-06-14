@@ -227,6 +227,8 @@ Public Class ucrValueFlagPeriod
             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
+            'ucrFlag being a readonly. This makes its back color to be just like that of readonly when it has a valid value
+            ucrFlag.SetValidColor(SystemColors.Control)
             SetTextBoxSize()
             bFirstLoad = False
         End If
@@ -346,14 +348,6 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetElementValueSize(New Size(51, 20))
         ucrFlag.SetElementValueSize(New Size(27, 20))
         ucrPeriod.SetElementValueSize(New Size(33, 20))
-    End Sub
-
-    'This is temporary
-    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
-        'ucrFlag should is set as readonly. That changes its back color to the one given below
-        'for consistency we are rienforcing this color everytime a value is changed on this control
-        'to override the white color being set on textbox validation subroutine
-        ucrFlag.SetBackColor(SystemColors.Control)
     End Sub
 
 End Class
