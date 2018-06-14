@@ -10,6 +10,8 @@ Public Class ucrHourlyWind
     Private bSpeedTotalRequired As Boolean
     Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
+    'stores a list containing all fields of this control
+    Private lstAllFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
     Private ucrLinkedNavigation As ucrNavigation
@@ -17,6 +19,7 @@ Public Class ucrHourlyWind
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedDay As ucrDay
+    Private cmdSave As Button
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrDSF As ucrDirectionSpeedFlag
@@ -42,6 +45,11 @@ Public Class ucrHourlyWind
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
+            ' This list is used for uploading to observation table so all fields needed.
+            'lstAllFields.AddRange(lstFields)
+            'TODO "entryDatetime" should be here as well once entity model has been updated.
+            'lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
+
             bFirstLoad = False
         End If
     End Sub
@@ -88,22 +96,23 @@ Public Class ucrHourlyWind
     Private Sub GoToNextDSFControl(sender As Object, e As EventArgs)
         'TODO 
         'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
-        Dim ucrDSF As ucrDirectionSpeedFlag
+        'Dim ucrDSF As ucrDirectionSpeedFlag
 
-        If TypeOf sender Is ucrDirectionSpeedFlag Then
-            ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    'TODO 
-                    'needs modification here. for hour selection functionality
-                    If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
-                        If ctr.Enabled Then
-                            ctr.Focus()
-                        End If
-                    End If
-                End If
-            Next
-        End If
+        'If TypeOf sender Is ucrDirectionSpeedFlag Then
+        '    ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
+        '    For Each ctr As Control In Me.Controls
+        '        If TypeOf ctr Is ucrDirectionSpeedFlag Then
+        '            'TODO 
+        '            'needs modification here. for hour selection functionality
+        '            If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
+        '                If ctr.Enabled Then
+        '                    ctr.Focus()
+        '                End If
+        '            End If
+        '        End If
+        '    Next
+        'End If
+        SelectNextControl(sender, True, True, True, True)
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -334,7 +343,7 @@ Public Class ucrHourlyWind
         If bSpeedTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the (Total [ff]) textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)
@@ -346,7 +355,7 @@ Public Class ucrHourlyWind
                 bValueCorrect = (elemTotal = expectedTotal)
                 If Not bValueCorrect Then
                     MessageBox.Show("Value in (Total [ff]) textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Cyan)
+                    ucrInputTotal.SetBackColor(Color.Red)
                 End If
             End If
         Else
@@ -393,21 +402,96 @@ Public Class ucrHourlyWind
             Exit Sub
         End If
 
-        Dim todayDate As Date
-        Dim selectedDate As Date
+        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Dim todayDate As Date = Date.Now
+            Dim selectedDate As Date
 
-        'initialise the dates with ONLY year month and day values. 
-        'Neglect the time factor
-        todayDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-        selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
+            'initialise the dates with ONLY year month and day values to Neglect the time factor
+            todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
+            selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
-        'if selectedDate is earlier than todayDate enable control
-        If DateTime.Compare(selectedDate, todayDate) < 0 Then
-            Me.Enabled = True
+            'if selectedDate  is earlier than todayDate (<0)  then its a valid date for data entry
+            'if it is same time (0) or later than (>0) then its invalid, disable control
+            Me.Enabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
         Else
-            'if it is same time (0) or later than (>0) disable control
             Me.Enabled = False
         End If
     End Sub
 
+    Public Sub UploadAllRecords()
+        'TODO.PROCEED WITH MAKING THIS SUIT THIS CONTROL
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strCurrTag As String
+        Dim lElementID As Long
+        Dim iPeriod As Integer
+
+        clsAllRecordsCall.SetTableName(strTableName)
+        clsAllRecordsCall.SetFields(lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For i As Integer = 1 To 31
+                rcdObservationInitial = Nothing
+                rcdObservationInitial = New observationinitial
+                If i < 10 Then
+                    strCurrTag = "0" & i
+                Else
+                    strCurrTag = i
+                End If
+                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    If Long.TryParse(row.Item("elementId"), lElementID) Then
+                        rcdObservationInitial.describedBy = lElementID
+                    Else
+                        Exit Sub
+                    End If
+                    Try
+                        rcdObservationInitial.obsDatetime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                    Catch ex As Exception
+
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
+                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
+                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
+                        rcdObservationInitial.period = iPeriod
+                    End If
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = "form_daily2"
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+                    If Not IsDBNull(row.Item("temperatureUnits")) Then
+                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
+                    End If
+                    If Not IsDBNull(row.Item("precipUnits")) Then
+                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
+                    End If
+                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
+                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
+                    End If
+                    If Not IsDBNull(row.Item("visUnits")) Then
+                        rcdObservationInitial.visUnits = row.Item("visUnits")
+                    End If
+                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                End If
+            Next
+        Next
+        clsDataConnection.SaveUpdate()
+    End Sub
+
+    Public Sub SetSaveButton(cmdNewSave As Button)
+        cmdSave = cmdNewSave
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If checkSpeedTotal() Then
+                cmdSave.Focus()
+            End If
+        End If
+    End Sub
 End Class
