@@ -213,13 +213,17 @@
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'Open form for displaying data transfer progress
-        frmDataTransferProgress.Show()
-        frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
-        frmDataTransferProgress.txtDataTransferProgress1.Refresh()
-        ucrSynopticRA1.UploadAllRecords()
-        frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-        frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Try
+            'Open form for displaying data transfer progress
+            frmDataTransferProgress.Show()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+            ucrSynopticRA1.UploadAllRecords()
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Catch ex As Exception
+            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'This is from Samuel's code
