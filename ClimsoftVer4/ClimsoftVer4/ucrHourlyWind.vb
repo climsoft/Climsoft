@@ -134,7 +134,6 @@ Public Class ucrHourlyWind
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         Dim bValidValues As Boolean = True
-        fhourlyWindRecord = Nothing
 
         'validate the values of the linked controls
         For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
@@ -145,14 +144,14 @@ Public Class ucrHourlyWind
         Next
 
         If bValidValues Then
+            fhourlyWindRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
-
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
-
+            Me.Enabled = False
         End If
 
 
