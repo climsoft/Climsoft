@@ -118,13 +118,27 @@ Public Class ucrSynopticRA1
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        fs2ra1Record = Nothing
-        MyBase.LinkedControls_evtValueChanged()
-
-        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+        Dim bValuesCorrect As Boolean = True
+        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If Not key.ValidateValue Then
+                bValuesCorrect = False
+                Exit For
+            End If
         Next
-        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+
+        If bValuesCorrect Then
+            fs2ra1Record = Nothing
+            MyBase.LinkedControls_evtValueChanged()
+
+            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            Next
+            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+        Else
+            'TODO. DISABLE??
+            Me.Enabled = True
+        End If
+
     End Sub
 
     Public Sub SaveRecord()
