@@ -35,6 +35,7 @@ Public Class frmNewFormDaily2
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
+        ucrFormDaily.SetSaveButton(btnCommit)
 
     End Sub
 
@@ -230,8 +231,13 @@ Public Class frmNewFormDaily2
 
     Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown, ucrElementSelector.evtKeyDown
         If e.KeyCode = Keys.Enter Then
-            Me.SelectNextControl(sender, True, True, True, True)
+            If TypeOf sender Is ucrBaseDataLink Then
+                If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
+                    Me.SelectNextControl(sender, True, True, True, True)
+                End If
+                'this handles the noise on  return key down
+                e.SuppressKeyPress = True
+            End If
         End If
     End Sub
-
 End Class
