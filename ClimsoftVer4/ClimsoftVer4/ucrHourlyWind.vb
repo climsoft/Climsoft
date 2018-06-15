@@ -7,6 +7,8 @@ Public Class ucrHourlyWind
     Private strSpeedFieldName As String = "elem_111_"
     Private strFlagFieldName As String = "ddflag"
     Private strTotalFieldName As String = "total"
+    Private iDirectionElementId As Integer
+    Private iSpeedElementId As Integer
     Private bSpeedTotalRequired As Boolean
     Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
@@ -72,7 +74,6 @@ Public Class ucrHourlyWind
                     DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
             Next
-
 
         End If
     End Sub
@@ -151,7 +152,8 @@ Public Class ucrHourlyWind
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
-            Me.Enabled = False
+            'TODO. Disable??
+            'Me.Enabled = False
         End If
 
 
@@ -246,6 +248,7 @@ Public Class ucrHourlyWind
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
+        iDirectionElementId = elementId
         clsDataDefinition = New DataCall
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
@@ -272,6 +275,7 @@ Public Class ucrHourlyWind
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
+        iSpeedElementId = elementId
         clsDataDefinition = New DataCall
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
@@ -294,6 +298,7 @@ Public Class ucrHourlyWind
             bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
         End If
     End Sub
+
     ''' <summary>
     ''' Returns true if all the direction values are empty and false if ANY has a value set
     ''' </summary>
@@ -430,70 +435,68 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub UploadAllRecords()
-        'TODO.PROCEED WITH MAKING THIS SUIT THIS CONTROL
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
-        Dim strCurrTag As String
-        Dim lElementID As Long
-        Dim iPeriod As Integer
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strTag As String
+        Dim iElementId As Long
+        Dim lstAllFields As New List(Of String)
 
-        clsAllRecordsCall.SetTableName(strTableName)
-        'clsAllRecordsCall.SetFields(lstAllFields)
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
         dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
         For Each row As DataRow In dtbAllRecords.Rows
-            For i As Integer = 1 To 31
-                rcdObservationInitial = Nothing
-                rcdObservationInitial = New observationinitial
-                If i < 10 Then
-                    strCurrTag = "0" & i
+            For Each strFieldName As String In lstFields
+                'if its not an observation direction or speed value field then skip the loop
+                If strFieldName.StartsWith(Me.strDirectionFieldName) Then
+                    iElementId = iDirectionElementId
+                    strTag = strFieldName.Substring(Me.strDirectionFieldName.Length)
+                ElseIf strFieldName.StartsWith(Me.strSpeedFieldName) Then
+                    iElementId = iSpeedElementId
+                    strTag = strFieldName.Substring(Me.strSpeedFieldName.Length)
                 Else
-                    strCurrTag = i
+                    Continue For
                 End If
-                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Strings.Len(row.Item("day" & strCurrTag)) > 0 Then
-                    rcdObservationInitial.recordedFrom = row.Item("stationId")
-                    If Long.TryParse(row.Item("elementId"), lElementID) Then
-                        rcdObservationInitial.describedBy = lElementID
-                    Else
-                        Exit Sub
-                    End If
-                    Try
-                        rcdObservationInitial.obsDatetime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
-                    Catch ex As Exception
 
+                strValueColumn = strFieldName
+                strFlagColumn = lstFields.Find(Function(x As String)
+                                                   Return x.Equals(Me.strFlagFieldName & strTag)
+                                               End Function)
+
+                'set the record
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
+                    rcdObservationInitial = New observationinitial
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    rcdObservationInitial.describedBy = iElementId
+                    Try
+                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
+                    Catch ex As Exception
                     End Try
                     rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
-                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
-                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
-                        rcdObservationInitial.period = iPeriod
-                    End If
+                    rcdObservationInitial.obsValue = row.Item(strValueColumn)
+                    rcdObservationInitial.flag = row.Item(strFlagColumn)
                     rcdObservationInitial.qcStatus = 0
                     rcdObservationInitial.acquisitionType = 1
-                    rcdObservationInitial.dataForm = "form_daily2"
+                    rcdObservationInitial.dataForm = strTableName
+
                     If Not IsDBNull(row.Item("signature")) Then
                         rcdObservationInitial.capturedBy = row.Item("signature")
                     End If
-                    If Not IsDBNull(row.Item("temperatureUnits")) Then
-                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
-                    End If
-                    If Not IsDBNull(row.Item("precipUnits")) Then
-                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
-                    End If
-                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
-                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
-                    End If
-                    If Not IsDBNull(row.Item("visUnits")) Then
-                        rcdObservationInitial.visUnits = row.Item("visUnits")
-                    End If
-                    'clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
                 End If
             Next
         Next
+
+        'save the Observation record
         clsDataConnection.SaveUpdate()
     End Sub
-
-
 
 End Class
