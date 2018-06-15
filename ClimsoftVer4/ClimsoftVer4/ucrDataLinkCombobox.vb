@@ -68,11 +68,12 @@
         Dim strCol As String
         strCol = cboValues.DisplayMember
         For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp(strCol).ToString = cboValues.Text Then
+            If rTemp.Item(strCol).ToString = cboValues.Text Then
                 If strFieldName = "" Then
-                    Return cboValues.SelectedValue
+                    'Return cboValues.SelectedValue
+                    Return rTemp.Item(cboValues.ValueMember)
                 Else
-                    Return rTemp(strFieldName)
+                    Return rTemp.Item(strFieldName)
                 End If
             End If
         Next
