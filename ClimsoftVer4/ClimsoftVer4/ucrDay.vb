@@ -86,12 +86,15 @@
         If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
             Dim iCurrentSelectedDay As Integer
             'store the current selected value to retain it after repopulating the control
-            iCurrentSelectedDay = GetValue(strDay)
-            PopulateControl()
-            If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
-                iCurrentSelectedDay = dtbRecords.Rows.Count
+            If Integer.TryParse(GetValue(strDay), iCurrentSelectedDay) Then
+                PopulateControl()
+                If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
+                    iCurrentSelectedDay = dtbRecords.Rows.Count
+                End If
+                SetValue(iCurrentSelectedDay)
+            Else
+                PopulateControl()
             End If
-            SetValue(iCurrentSelectedDay)
         End If
     End Sub
 
