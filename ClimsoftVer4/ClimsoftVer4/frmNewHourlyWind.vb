@@ -29,7 +29,6 @@
         ucrNavigation.PopulateControl()
 
         SaveEnable()
-        ucrHourlyWind.SetSaveButton(btnSave)
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
@@ -196,7 +195,7 @@
         End If
 
         'check if values are valid.  
-        If Not ucrHourlyWind.IsValuesValid() Then
+        If Not ucrHourlyWind.ValidateValue() Then
             Return False
         End If
 
@@ -243,7 +242,7 @@
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
-                'this handles the noise on  return key down
+                'this handles the "noise" on enter key down
                 e.SuppressKeyPress = True
             End If
         End If

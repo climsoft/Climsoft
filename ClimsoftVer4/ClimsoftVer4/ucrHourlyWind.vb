@@ -10,8 +10,6 @@ Public Class ucrHourlyWind
     Private bSpeedTotalRequired As Boolean
     Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
-    'stores a list containing all fields of this control
-    Private lstAllFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
     Private ucrLinkedNavigation As ucrNavigation
@@ -19,7 +17,6 @@ Public Class ucrHourlyWind
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
     Private ucrLinkedDay As ucrDay
-    Private cmdSave As Button
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrDSF As ucrDirectionSpeedFlag
@@ -45,11 +42,6 @@ Public Class ucrHourlyWind
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
-            ' This list is used for uploading to observation table so all fields needed.
-            'lstAllFields.AddRange(lstFields)
-            'TODO "entryDatetime" should be here as well once entity model has been updated.
-            'lstAllFields.AddRange({"stationId", "elementId", "yyyy", "mm", "hh", "signature", "temperatureUnits", "precipUnits", "cloudHeightUnits", "visUnits"})
-
             bFirstLoad = False
         End If
     End Sub
@@ -93,7 +85,7 @@ Public Class ucrHourlyWind
         End If
     End Sub
 
-    Private Sub GoToNextDSFControl(sender As Object, e As EventArgs)
+    Private Sub GoToNextDSFControl(sender As Object, e As KeyEventArgs)
         'TODO 
         'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
         'Dim ucrDSF As ucrDirectionSpeedFlag
@@ -112,7 +104,24 @@ Public Class ucrHourlyWind
         '        End If
         '    Next
         'End If
+
         SelectNextControl(sender, True, True, True, True)
+        'this handles the "noise" on enter key down
+        e.SuppressKeyPress = True
+
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If checkSpeedTotal() Then
+                Me.FindForm.SelectNextControl(Me, True, True, True, True)
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
+        checkSpeedTotal()
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
@@ -124,18 +133,35 @@ Public Class ucrHourlyWind
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        'need an if statement that checks for changes 
+        Dim bValidValues As Boolean = True
         fhourlyWindRecord = Nothing
-        MyBase.LinkedControls_evtValueChanged()
 
-        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+        'validate the values of the linked controls
+        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If Not key.ValidateValue() Then
+                bValidValues = False
+                Exit For
+            End If
         Next
-        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+
+        If bValidValues Then
+            MyBase.LinkedControls_evtValueChanged()
+
+            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            Next
+            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+        Else
+
+        End If
+
+
     End Sub
 
-
     Public Sub SaveRecord()
+        'This is determined by the current user not set from the form
+        fhourlyWindRecord.signature = frmLogin.txtUsername.Text
+
         'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         If bUpdating Then
             'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
@@ -146,7 +172,6 @@ Public Class ucrHourlyWind
         End If
 
         clsDataConnection.db.SaveChanges()
-
     End Sub
 
     Public Sub DeleteRecord()
@@ -305,30 +330,17 @@ Public Class ucrHourlyWind
     ''' returns true if all direction values are valid and false if any of them is not valid
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
-        Dim ucrDSF As ucrDirectionSpeedFlag
+    Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
-                If Not ucrDSF.IsElementDirectionValueValid Then
-                    ucrDSF.ucrDirection.GetFocus()
-                    Return False
-                ElseIf Not ucrDSF.IsElementSpeedValueValid
-                    ucrDSF.ucrSpeed.GetFocus()
-                    Return False
-                ElseIf Not ucrDSF.IsElementFlagValueValid
-                    'because Flag is read only
-                    ucrDSF.Focus()
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsValuesValid Then
+                    ctr.Focus()
                     Return False
                 End If
             End If
         Next
         Return True
     End Function
-
-    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
-        checkSpeedTotal()
-    End Sub
 
     ''' <summary>
     ''' will check the expected total if its indicated as required in the obselements table
@@ -428,7 +440,7 @@ Public Class ucrHourlyWind
         Dim iPeriod As Integer
 
         clsAllRecordsCall.SetTableName(strTableName)
-        clsAllRecordsCall.SetFields(lstAllFields)
+        'clsAllRecordsCall.SetFields(lstAllFields)
         dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
         For Each row As DataRow In dtbAllRecords.Rows
@@ -483,15 +495,6 @@ Public Class ucrHourlyWind
         clsDataConnection.SaveUpdate()
     End Sub
 
-    Public Sub SetSaveButton(cmdNewSave As Button)
-        cmdSave = cmdNewSave
-    End Sub
 
-    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        If e.KeyCode = Keys.Enter Then
-            If checkSpeedTotal() Then
-                cmdSave.Focus()
-            End If
-        End If
-    End Sub
+
 End Class
