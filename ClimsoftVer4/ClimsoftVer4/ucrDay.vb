@@ -83,14 +83,19 @@
     ''' this gets called when the linked year or month controls change their values
     ''' </summary>
     Private Sub YearMonthEvtValueChanged()
-        Dim iCurrentSelectedDay As Integer
-        'store the current selected value to retain it after repopulating the control
-        iCurrentSelectedDay = GetValue(strDay)
-        PopulateControl()
-        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
-            iCurrentSelectedDay = dtbRecords.Rows.Count
+        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
+            Dim iCurrentSelectedDay As Integer
+            'store the current selected value to retain it after repopulating the control
+            If Integer.TryParse(GetValue(strDay), iCurrentSelectedDay) Then
+                PopulateControl()
+                If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count < iCurrentSelectedDay Then
+                    iCurrentSelectedDay = dtbRecords.Rows.Count
+                End If
+                SetValue(iCurrentSelectedDay)
+            Else
+                PopulateControl()
+            End If
         End If
-        SetValue(iCurrentSelectedDay)
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
