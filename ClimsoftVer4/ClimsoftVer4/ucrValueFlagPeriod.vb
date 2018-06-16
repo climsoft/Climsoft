@@ -241,7 +241,7 @@ Public Class ucrValueFlagPeriod
                 If ucrValue.IsEmpty Then
                     ucrFlag.SetValue("M")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf PreValidateValue() Then
+                ElseIf ValidateText(ucrValue.GetValue) Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 ElseIf ucrValue.GetValue = "M"
                     RaiseEvent evtGoToNextVFPControl(Me, e)
@@ -318,12 +318,12 @@ Public Class ucrValueFlagPeriod
 
     ''' <summary>
     ''' checks if the value input in the ucrValue will be a valid value or not 
-    ''' when Quality Control is applied to the input.
+    ''' when Quality Control is applied to the passed value.
     ''' </summary>
     ''' <returns></returns>
-    Public Function PreValidateValue() As Boolean
+    Public Function ValidateText(strNewValue As String) As Boolean
         Dim bValuesCorrect As Boolean = False
-        Dim strValue As String = ucrValue.GetValue
+        Dim strValue As String = strNewValue
 
         If strValue = "" Then
             bValuesCorrect = True
