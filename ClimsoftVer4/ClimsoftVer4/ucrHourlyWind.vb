@@ -109,7 +109,6 @@ Public Class ucrHourlyWind
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter key down
         e.SuppressKeyPress = True
-
     End Sub
 
     Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
@@ -155,8 +154,6 @@ Public Class ucrHourlyWind
             'TODO. Disable??
             'Me.Enabled = False
         End If
-
-
     End Sub
 
     Public Sub SaveRecord()
