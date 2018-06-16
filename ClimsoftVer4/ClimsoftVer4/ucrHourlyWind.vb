@@ -10,7 +10,6 @@ Public Class ucrHourlyWind
     Private iDirectionElementId As Integer
     Private iSpeedElementId As Integer
     Private bSpeedTotalRequired As Boolean
-    Private bSelectAllHours As Boolean
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
     Public bUpdating As Boolean = False
@@ -191,8 +190,7 @@ Public Class ucrHourlyWind
 
     Public Sub SetHourSelection(bNewSelectAllHours As Boolean)
         Dim ucrDSF As ucrDirectionSpeedFlag
-        bSelectAllHours = bNewSelectAllHours
-        If bSelectAllHours Then
+        If bNewSelectAllHours Then
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
@@ -412,10 +410,8 @@ Public Class ucrHourlyWind
     Private Sub ValidateDataEntryPermission()
         'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Exit Sub
-        End If
-
-        If ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
+            Me.Enabled = True
+        ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
             Dim selectedDate As Date
 
