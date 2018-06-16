@@ -1,37 +1,64 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
-    Dim selectAllHours As Boolean
 
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
         End If
-        selectAllHours = False
     End Sub
 
     Private Sub InitaliseDialog()
+        ucrInputValue.SetValidationTypeAsNumeric()
+        ucrInputValue.bValidateSilently = False
         txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
-        ucrHourly.SetSaveButton(btnCommit)
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
-        Dim ctl As Control
-        Dim ctrltemp As ucrValueFlagPeriod
+        'Dim ctl As Control
+        'Dim ctrltemp As ucrValueFlagPeriod
 
-        'Adds values to only enabled controls of the ucrHourly
-        For Each ctl In ucrHourly.Controls
-            If TypeOf ctl Is ucrValueFlagPeriod Then
-                ctrltemp = ctl
-                If ctrltemp.ucrValue.Enabled Then
-                    ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
-                End If
-            End If
-        Next
+        ''Adds values to only enabled controls of the ucrHourly
+        'For Each ctl In ucrHourly.Controls
+        '    If TypeOf ctl Is ucrValueFlagPeriod Then
+        '        ctrltemp = ctl
+        '        If ctrltemp.ucrValue.Enabled Then
+        '            ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
+        '        End If
+        '    End If
+        'Next
+
+        If ucrInputValue.ValidateValue() Then
+            ucrHourly.SetSameValueToAllControls(ucrInputValue.GetValue())
+        End If
+
+    End Sub
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
+        btnAddNew.Enabled = False
+        btnClear.Enabled = True
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+        btnCommit.Enabled = True
+
+        If ucrYearSelector.isLeapYear Then
+            txtSequencer.Text = "seq_month_day_leap_yr"
+        Else
+            txtSequencer.Text = "seq_month_day"
+        End If
+
+        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+
+        ucrHourly.UcrValueFlagPeriod0.Focus()
+        ucrHourlyNavigation.MoveLast()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -92,6 +119,25 @@
         SaveEnable()
     End Sub
 
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    'Changes the date entry fields betwen synoptc hours and all hours
+    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+        If btnHourSelection.Text = "Enable all hours" Then
+            ucrHourly.SetSynopticHourSelectionOnly(True)
+            btnHourSelection.Text = "Enable synoptic hours only"
+        Else
+            ucrHourly.SetSynopticHourSelectionOnly(False)
+            btnHourSelection.Text = "Enable all hours"
+        End If
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
+    End Sub
+
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
@@ -105,35 +151,6 @@
         viewRecords.viewTableRecords(sql)
     End Sub
 
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
-
-
-
-    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
-        Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
-
-        btnAddNew.Enabled = False
-        btnClear.Enabled = True
-        btnDelete.Enabled = False
-        btnUpdate.Enabled = False
-        btnCommit.Enabled = True
-
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day"
-        End If
-
-        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
-        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
-        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
-
-        ucrHourly.UcrValueFlagPeriod0.Focus()
-        ucrHourlyNavigation.MoveLast()
-    End Sub
-
     Private Sub SaveEnable()
         btnAddNew.Enabled = True
         btnCommit.Enabled = False
@@ -145,51 +162,6 @@
             btnDelete.Enabled = False
             btnUpdate.Enabled = False
         End If
-    End Sub
-
-    'Changes the date entry fields betwen synoptc hours and all hours
-    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
-
-        Dim ctrVFP As ucrValueFlagPeriod
-        If selectAllHours Then
-            selectAllHours = False
-            btnHourSelection.Text = "Enable synoptic hours only"
-            For Each ctr As Control In ucrHourly.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ctrVFP.Enabled = True
-                    ctrVFP.SetBackColor(Color.White)
-                End If
-            Next
-        Else
-            selectAllHours = True
-            btnHourSelection.Text = "Enable all hours"
-            Dim clsDataDefinition As DataCall
-            Dim dtbl As DataTable
-            Dim iTagVal As Integer
-            Dim row As DataRow
-            clsDataDefinition = New DataCall
-            clsDataDefinition.SetTableName("form_hourly_time_selection")
-            clsDataDefinition.SetFields(New List(Of String)({"hh", "hh_selection"}))
-            dtbl = clsDataDefinition.GetDataTable()
-            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-                For Each ctr As Control In ucrHourly.Controls
-                    If TypeOf ctr Is ucrValueFlagPeriod Then
-                        ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                        iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
-                        row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
-                        If row IsNot Nothing Then
-                            ctrVFP.Enabled = False
-                            ctrVFP.SetBackColor(Color.LightYellow)
-                        End If
-                    End If
-                Next
-            End If
-        End If
-    End Sub
-
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
     End Sub
 
     Private Function ValidateValues() As Boolean
@@ -243,9 +215,10 @@
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
-                'this handles the noise on  return key down
+                'this handles the "noise" on enter  
                 e.SuppressKeyPress = True
             End If
         End If
     End Sub
+
 End Class
