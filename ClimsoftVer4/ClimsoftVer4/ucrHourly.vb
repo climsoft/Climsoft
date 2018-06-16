@@ -3,7 +3,7 @@
 Public Class ucrHourly
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_hourly"
-    Private strValueFieldName As String = "hh"
+    Private strValueFieldName As String = "hh_"
     Private strFlagFieldName As String = "flag"
     Private strTotalFieldName As String = "total"
     Private lstFields As New List(Of String)
@@ -17,7 +17,6 @@ Public Class ucrHourly
     Private ucrLinkedStation As ucrStationSelector
     Private ucrlinkedElement As ucrElementSelector
 
-
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ucrVFP As ucrValueFlagPeriod
         Dim ucrText As ucrTextBox
@@ -26,16 +25,15 @@ Public Class ucrHourly
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    lstFields.Add(strValueFieldName & "_" & ucrVFP.Tag)
+                    lstFields.Add(strValueFieldName & ucrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ucrVFP.Tag)
                     ucrVFP.ucrPeriod.Visible = False
-                    ucrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & "_" & ucrVFP.Tag, strFlagFieldName & ucrVFP.Tag)
+                    ucrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ucrVFP.Tag, strFlagFieldName & ucrVFP.Tag)
                     AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    ucrText = ctr
+                    ucrText = DirectCast(ctr, ucrTextBox)
                     ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
                     lstFields.Add(strTotalFieldName)
                     AddHandler ucrText.evtValueChanged, AddressOf InnerControlValueChanged
@@ -71,7 +69,7 @@ Public Class ucrHourly
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & "_" & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
@@ -146,6 +144,10 @@ Public Class ucrHourly
                 e.SuppressKeyPress = True
             End If
         End If
+    End Sub
+
+    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
+        checkTotal()
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
@@ -239,22 +241,17 @@ Public Class ucrHourly
         End If
     End Sub
 
-    Public Sub SetSameValueToAllControls(bNewValue As String)
+    Public Sub SetSameValueToAllObsElements(bNewValue As String)
         Dim ucrVFP As ucrValueFlagPeriod
-
         'Adds values to only enabled controls of the ucrHourly
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                'If ucrVFP.ucrValue.Enabled Then
-                '    ucrVFP.ucrValue.SetValue(bNewValue)
-                'End If
-
-                If ucrVFP.Enabled AndAlso ucrVFP.ValidateText(bNewValue) Then
+                If ctr.Enabled Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.SetElementValue(bNewValue)
-                Else
-                    ucrVFP.Focus()
-                    Exit Sub
+                    If Not ucrVFP.IsValuesValid() Then
+                        Exit Sub
+                    End If
                 End If
             End If
         Next
@@ -324,10 +321,6 @@ Public Class ucrHourly
         Return True
     End Function
 
-    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
-        checkTotal()
-    End Sub
-
     ''' <summary>
     ''' Checks if total for current element is required
     ''' Checks if the computed total is same as the user entered total.
@@ -393,25 +386,6 @@ Public Class ucrHourly
         ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
     End Sub
 
-
-    'Private Sub ValidateDataEntryPermision()
-    '    Dim TodaysDate As Date
-    '    Dim SelectedDate As Date
-
-    '    If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-    '        Exit Sub
-    '    End If
-
-    '    TodaysDate = New Date(Date.Now.Year, Date.Now.Month, Date.Now.Day)
-    '    SelectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
-
-    '    If Date.Compare(SelectedDate, TodaysDate) < 0 Then
-    '        Me.Enabled = True
-    '    Else
-    '        Me.Enabled = False
-    '    End If
-    'End Sub
-
     Private Sub ValidateDataEntryPermission()
         'if its an update or any of the linked year,month and day selector is nothing then just enable the control
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
@@ -431,6 +405,73 @@ Public Class ucrHourly
             Me.Enabled = False
         End If
     End Sub
+
+    Public Sub UploadAllRecords()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strTag As String
+        Dim iElementId As Long
+        Dim hh As Integer
+        Dim lstAllFields As New List(Of String)
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For Each strFieldName As String In lstFields
+                'if its not an observation value field then skip the loop
+                If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                    Continue For
+                End If
+
+                strValueColumn = strFieldName
+                'set the record
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), iElementId) Then
+
+                    strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                    strFlagColumn = lstFields.Find(Function(x As String)
+                                                       Return x.Equals(Me.strFlagFieldName & strTag)
+                                                   End Function)
+
+                    rcdObservationInitial = New observationinitial
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    rcdObservationInitial.describedBy = iElementId
+
+                    Try
+                        hh = Integer.Parse(strTag)
+                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
+                    Catch ex As Exception
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item(strValueColumn)
+                    rcdObservationInitial.flag = row.Item(strFlagColumn)
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = strTableName
+
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+
+                End If
+            Next
+        Next
+
+        'save the Observation record
+        clsDataConnection.SaveUpdate()
+
+    End Sub
+
 
 End Class
 

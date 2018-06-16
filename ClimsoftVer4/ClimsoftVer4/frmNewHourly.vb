@@ -6,11 +6,11 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this once btnUpload has been enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
-        ucrInputValue.SetValidationTypeAsNumeric()
-        ucrInputValue.bValidateSilently = False
         txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
@@ -19,23 +19,18 @@
     End Sub
 
     Private Sub cmdAssignSameValue_Click(sender As Object, e As EventArgs) Handles cmdAssignSameValue.Click
-        'Dim ctl As Control
-        'Dim ctrltemp As ucrValueFlagPeriod
+        ucrHourly.SetSameValueToAllObsElements(ucrInputValue.GetValue())
+    End Sub
 
-        ''Adds values to only enabled controls of the ucrHourly
-        'For Each ctl In ucrHourly.Controls
-        '    If TypeOf ctl Is ucrValueFlagPeriod Then
-        '        ctrltemp = ctl
-        '        If ctrltemp.ucrValue.Enabled Then
-        '            ctrltemp.ucrValue.SetValue(ucrInputValue.GetValue())
-        '        End If
-        '    End If
-        'Next
-
-        If ucrInputValue.ValidateValue() Then
-            ucrHourly.SetSameValueToAllControls(ucrInputValue.GetValue())
+    'Changes the date entry fields betwen synoptc hours and all hours
+    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+        If btnHourSelection.Text = "Enable all hours" Then
+            ucrHourly.SetSynopticHourSelectionOnly(True)
+            btnHourSelection.Text = "Enable synoptic hours only"
+        Else
+            ucrHourly.SetSynopticHourSelectionOnly(False)
+            btnHourSelection.Text = "Enable all hours"
         End If
-
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -123,19 +118,22 @@
         Me.Close()
     End Sub
 
-    'Changes the date entry fields betwen synoptc hours and all hours
-    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
-        If btnHourSelection.Text = "Enable all hours" Then
-            ucrHourly.SetSynopticHourSelectionOnly(True)
-            btnHourSelection.Text = "Enable synoptic hours only"
-        Else
-            ucrHourly.SetSynopticHourSelectionOnly(False)
-            btnHourSelection.Text = "Enable all hours"
-        End If
-    End Sub
-
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        Try
+            'Open form for displaying data transfer progress
+            frmDataTransferProgress.Show()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+            ucrHourly.UploadAllRecords()
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Catch ex As Exception
+            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -172,10 +170,10 @@
 
         If Not ucrElementSelector.ValidateValue Then
             MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
-                Return False
-            End If
+            Return False
+        End If
 
-            If Not ucrMonth.ValidateValue Then
+        If Not ucrMonth.ValidateValue Then
             MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
             Return False
         End If
