@@ -71,7 +71,6 @@
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
             End If
 
         Catch ex As Exception
@@ -100,9 +99,9 @@
                 ucrHourly.DeleteRecord()
                 ucrHourlyNavigation.RemoveRecord()
                 SaveEnable()
+                ucrHourlyNavigation.MoveFirst()
                 MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
-            ucrHourlyNavigation.MoveFirst()
         Catch ex As Exception
             MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -164,27 +163,27 @@
 
     Private Function ValidateValues() As Boolean
         If Not ucrStationSelector.ValidateValue Then
-            MsgBox("Invalid Station", MsgBoxStyle.Exclamation)
+            MessageBox.Show("Invalid Station", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
         If Not ucrElementSelector.ValidateValue Then
-            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            MessageBox.Show("Invalid Element", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
         If Not ucrMonth.ValidateValue Then
-            MsgBox("Invalid Element", MsgBoxStyle.Exclamation)
+            MessageBox.Show("Invalid Month", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
         If Not ucrYearSelector.ValidateValue Then
-            MsgBox("Invalid Year", MsgBoxStyle.Exclamation)
+            MessageBox.Show("Invalid Day", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
         If Not ucrDay.ValidateValue Then
-            MsgBox("Invalid Day", MsgBoxStyle.Exclamation)
+            MessageBox.Show("Invalid Day", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
@@ -195,12 +194,12 @@
         End If
 
         'check if all values are valid
-        If Not ucrHourly.IsValuesValid Then
+        If Not ucrHourly.ValidateValue() Then
             Return False
         End If
 
         'check computed total vs input total
-        If Not ucrHourly.checkTotal Then
+        If Not ucrHourly.checkTotal() Then
             Return False
         End If
 
