@@ -6,6 +6,8 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this line once button upload is enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
@@ -191,7 +193,8 @@
 
             'do validations to determine whether to go to next control
             If TypeOf sender Is ucrValueFlagPeriod Then
-                If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
+                Dim ucrVFP As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+                If ucrVFP.ValidateText(ucrVFP.ucrValue.GetValue()) Then
                     bGoToNextControl = True
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
@@ -208,6 +211,20 @@
             'to handle the "noise"
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        Try
+            'Open form for displaying data transfer progress
+            frmDataTransferProgress.Show()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+            ucrSynopticRA1.UploadAllRecords()
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Catch ex As Exception
+            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'This is from Samuel's code
@@ -227,10 +244,6 @@
             sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
-    End Sub
-
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'TODO
     End Sub
 
     'TODO. Copied from Samuel's code
