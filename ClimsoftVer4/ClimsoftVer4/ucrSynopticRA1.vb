@@ -536,13 +536,9 @@ Public Class ucrSynopticRA1
             todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
             selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
-            'if selectedDate is earlier than todayDate enable control
-            If Date.Compare(selectedDate, todayDate) < 0 Then
-                Me.Enabled = True
-            Else
-                'if it is same time (0) or later than (>0) disable control
-                Me.Enabled = False
-            End If
+            'if selectedDate is earlier than todayDate (<0) enable control
+            'if it is same time (0) or later than (>0) disable control
+            Me.Enabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
         Else
             Me.Enabled = False
         End If

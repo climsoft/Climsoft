@@ -193,7 +193,8 @@
 
             'do validations to determine whether to go to next control
             If TypeOf sender Is ucrValueFlagPeriod Then
-                If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
+                Dim ucrVFP As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+                If ucrVFP.ValidateText(ucrVFP.ucrValue.GetValue()) Then
                     bGoToNextControl = True
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
