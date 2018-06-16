@@ -239,7 +239,7 @@ Public Class ucrDirectionSpeedFlag
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
                     RaiseEvent evtGoToNextDSFControl(Me, e)
-                ElseIf PreValidateValue() Then
+                ElseIf ValidateText(ucrDDFF.GetValue) Then
                     RaiseEvent evtGoToNextDSFControl(Me, e)
                 ElseIf ucrDDFF.GetValue = "M"
                     RaiseEvent evtGoToNextDSFControl(Me, e)
@@ -338,13 +338,13 @@ Public Class ucrDirectionSpeedFlag
 
     ''' <summary>
     ''' checks if the value of the DD and FF input in the ucrDDFF will be a valid value or not 
-    ''' when Quality Control is applied to the input
+    ''' when Quality Control is applied to the passed value
     ''' </summary>
     ''' <returns></returns>
-    Public Function PreValidateValue() As Boolean
+    Public Function ValidateText(strNewVal As String) As Boolean
         Dim bValuesCorrect As Boolean = False
-        Dim strVal As String
-        strVal = ucrDDFF.GetValue
+        Dim strVal As String = strNewVal
+
         If strVal = "" Then
             bValuesCorrect = True
         Else
