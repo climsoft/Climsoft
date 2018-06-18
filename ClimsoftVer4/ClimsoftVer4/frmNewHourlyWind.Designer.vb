@@ -92,7 +92,7 @@ Partial Class frmNewHourlyWind
         Me.btnView.Location = New System.Drawing.Point(410, 508)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 670
+        Me.btnView.TabIndex = 10
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -103,7 +103,7 @@ Partial Class frmNewHourlyWind
         Me.btnUpload.Location = New System.Drawing.Point(569, 532)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 669
+        Me.btnUpload.TabIndex = 13
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
@@ -112,7 +112,7 @@ Partial Class frmNewHourlyWind
         Me.btnHelp.Location = New System.Drawing.Point(573, 508)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 668
+        Me.btnHelp.TabIndex = 12
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -122,7 +122,7 @@ Partial Class frmNewHourlyWind
         Me.btnClear.Location = New System.Drawing.Point(329, 508)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 666
+        Me.btnClear.TabIndex = 9
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -140,7 +140,7 @@ Partial Class frmNewHourlyWind
         Me.btnDelete.Location = New System.Drawing.Point(249, 508)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 665
+        Me.btnDelete.TabIndex = 8
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -149,7 +149,7 @@ Partial Class frmNewHourlyWind
         Me.btnAddNew.Location = New System.Drawing.Point(5, 508)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 663
+        Me.btnAddNew.TabIndex = 7
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -158,7 +158,7 @@ Partial Class frmNewHourlyWind
         Me.btnUpdate.Location = New System.Drawing.Point(167, 508)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 664
+        Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -167,7 +167,7 @@ Partial Class frmNewHourlyWind
         Me.btnClose.Location = New System.Drawing.Point(491, 508)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 667
+        Me.btnClose.TabIndex = 11
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -177,7 +177,7 @@ Partial Class frmNewHourlyWind
         Me.txtSpeedDigits.Location = New System.Drawing.Point(503, 52)
         Me.txtSpeedDigits.Name = "txtSpeedDigits"
         Me.txtSpeedDigits.Size = New System.Drawing.Size(29, 20)
-        Me.txtSpeedDigits.TabIndex = 675
+        Me.txtSpeedDigits.TabIndex = 17
         Me.txtSpeedDigits.Text = "2"
         '
         'txtDirectionDigits
@@ -186,7 +186,7 @@ Partial Class frmNewHourlyWind
         Me.txtDirectionDigits.Location = New System.Drawing.Point(330, 51)
         Me.txtDirectionDigits.Name = "txtDirectionDigits"
         Me.txtDirectionDigits.Size = New System.Drawing.Size(29, 20)
-        Me.txtDirectionDigits.TabIndex = 674
+        Me.txtDirectionDigits.TabIndex = 16
         Me.txtDirectionDigits.Text = "2"
         '
         'lblSpeedDigits
@@ -215,7 +215,7 @@ Partial Class frmNewHourlyWind
         Me.btnHourSelection.Location = New System.Drawing.Point(12, 49)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
-        Me.btnHourSelection.TabIndex = 671
+        Me.btnHourSelection.TabIndex = 15
         Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
@@ -250,7 +250,7 @@ Partial Class frmNewHourlyWind
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 465
+        Me.ucrNavigation.TabIndex = 14
         '
         'ucrDay
         '
