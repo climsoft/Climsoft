@@ -139,7 +139,7 @@ Partial Class frmNewFormDaily2
         Me.grpUnits.Location = New System.Drawing.Point(68, 106)
         Me.grpUnits.Name = "grpUnits"
         Me.grpUnits.Size = New System.Drawing.Size(567, 54)
-        Me.grpUnits.TabIndex = 11
+        Me.grpUnits.TabIndex = 19
         Me.grpUnits.TabStop = False
         Me.grpUnits.Text = "Units"
         '
@@ -185,7 +185,7 @@ Partial Class frmNewFormDaily2
         Me.ucrVisibilityUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
         Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrVisibilityUnits.TabIndex = 22
+        Me.ucrVisibilityUnits.TabIndex = 23
         '
         'ucrCloudheightUnits
         '
@@ -193,7 +193,7 @@ Partial Class frmNewFormDaily2
         Me.ucrCloudheightUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
         Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrCloudheightUnits.TabIndex = 21
+        Me.ucrCloudheightUnits.TabIndex = 22
         '
         'ucrPrecipUnits
         '
@@ -201,7 +201,7 @@ Partial Class frmNewFormDaily2
         Me.ucrPrecipUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
         Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrPrecipUnits.TabIndex = 20
+        Me.ucrPrecipUnits.TabIndex = 21
         '
         'ucrTempUnits
         '
@@ -209,7 +209,7 @@ Partial Class frmNewFormDaily2
         Me.ucrTempUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTempUnits.Name = "ucrTempUnits"
         Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrTempUnits.TabIndex = 19
+        Me.ucrTempUnits.TabIndex = 20
         '
         'btnView
         '
