@@ -42,7 +42,13 @@
     ''' </summary>
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
-        If iMaxRows = 0 Then
+
+        'TODO. Correct way?
+        If iCurrRow = -1 Then
+            txtRecNum.Text = "New Record"
+            'disable navigation buttons
+            EnableNavigationButtons(False)
+        ElseIf iMaxRows = 0 Then
             txtRecNum.Text = "No Records"
             'disable navigation buttons
             EnableNavigationButtons(False)

@@ -476,6 +476,42 @@ Public Class ucrFormDaily2
         Dim todaysDate As Date
         Dim ctr As Control
 
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
+            Me.Enabled = True
+        ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
+            todaysDate = Date.Now
+            iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
+
+            If ucrLinkedYear.GetValue > todaysDate.Year OrElse (ucrLinkedYear.GetValue = todaysDate.Year AndAlso ucrLinkedMonth.GetValue > todaysDate.Month) Then
+                Me.Enabled = False
+            Else
+                Me.Enabled = True
+                If ucrLinkedYear.GetValue = todaysDate.Year AndAlso ucrLinkedMonth.GetValue = todaysDate.Month Then
+                    For Each ctr In Me.Controls
+                        If TypeOf ctr Is ucrValueFlagPeriod Then
+                            ctr.Enabled = If(Val(ctr.Tag) >= todaysDate.Day, False, True)
+                        End If
+                    Next
+                Else
+                    For Each ctr In Me.Controls
+                        If TypeOf ctr Is ucrValueFlagPeriod Then
+                            ctr.Enabled = If(Val(ctr.Tag > iMonthLength), False, True)
+                        End If
+                    Next
+                End If
+
+            End If
+        Else
+            Me.Enabled = False
+        End If
+    End Sub
+
+
+    Private Sub ValidateDataEntryPermision1()
+        Dim iMonthLength As Integer
+        Dim todaysDate As Date
+        Dim ctr As Control
+
         If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
             Me.Enabled = True
         ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
