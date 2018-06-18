@@ -112,7 +112,7 @@ Partial Class frmNewFormDaily2
         Me.cmdAssignSameValue.Location = New System.Drawing.Point(362, 71)
         Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
         Me.cmdAssignSameValue.Size = New System.Drawing.Size(169, 23)
-        Me.cmdAssignSameValue.TabIndex = 8
+        Me.cmdAssignSameValue.TabIndex = 16
         Me.cmdAssignSameValue.Text = "Assign same value to all obs"
         Me.cmdAssignSameValue.UseVisualStyleBackColor = True
         '
@@ -185,7 +185,7 @@ Partial Class frmNewFormDaily2
         Me.ucrVisibilityUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrVisibilityUnits.Name = "ucrVisibilityUnits"
         Me.ucrVisibilityUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrVisibilityUnits.TabIndex = 3
+        Me.ucrVisibilityUnits.TabIndex = 22
         '
         'ucrCloudheightUnits
         '
@@ -193,7 +193,7 @@ Partial Class frmNewFormDaily2
         Me.ucrCloudheightUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrCloudheightUnits.Name = "ucrCloudheightUnits"
         Me.ucrCloudheightUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrCloudheightUnits.TabIndex = 2
+        Me.ucrCloudheightUnits.TabIndex = 21
         '
         'ucrPrecipUnits
         '
@@ -201,7 +201,7 @@ Partial Class frmNewFormDaily2
         Me.ucrPrecipUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrPrecipUnits.Name = "ucrPrecipUnits"
         Me.ucrPrecipUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrPrecipUnits.TabIndex = 1
+        Me.ucrPrecipUnits.TabIndex = 20
         '
         'ucrTempUnits
         '
@@ -209,14 +209,14 @@ Partial Class frmNewFormDaily2
         Me.ucrTempUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTempUnits.Name = "ucrTempUnits"
         Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
-        Me.ucrTempUnits.TabIndex = 0
+        Me.ucrTempUnits.TabIndex = 19
         '
         'btnView
         '
         Me.btnView.Location = New System.Drawing.Point(444, 555)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 673
+        Me.btnView.TabIndex = 11
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -225,7 +225,7 @@ Partial Class frmNewFormDaily2
         Me.btnHelp.Location = New System.Drawing.Point(618, 555)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 667
+        Me.btnHelp.TabIndex = 13
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -234,7 +234,7 @@ Partial Class frmNewFormDaily2
         Me.btnClear.Location = New System.Drawing.Point(357, 555)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 665
+        Me.btnClear.TabIndex = 10
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -243,7 +243,7 @@ Partial Class frmNewFormDaily2
         Me.btnCommit.Location = New System.Drawing.Point(96, 555)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 662
+        Me.btnCommit.TabIndex = 6
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -252,7 +252,7 @@ Partial Class frmNewFormDaily2
         Me.btnDelete.Location = New System.Drawing.Point(270, 555)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 664
+        Me.btnDelete.TabIndex = 9
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -261,7 +261,7 @@ Partial Class frmNewFormDaily2
         Me.btnAddNew.Location = New System.Drawing.Point(9, 555)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 661
+        Me.btnAddNew.TabIndex = 8
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -270,7 +270,7 @@ Partial Class frmNewFormDaily2
         Me.btnUpdate.Location = New System.Drawing.Point(183, 555)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 663
+        Me.btnUpdate.TabIndex = 7
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -279,7 +279,7 @@ Partial Class frmNewFormDaily2
         Me.btnClose.Location = New System.Drawing.Point(531, 555)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 666
+        Me.btnClose.TabIndex = 12
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -290,7 +290,7 @@ Partial Class frmNewFormDaily2
         Me.btnUpload.Location = New System.Drawing.Point(618, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 676
+        Me.btnUpload.TabIndex = 14
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
@@ -303,7 +303,7 @@ Partial Class frmNewFormDaily2
         Me.chkEnableSequencer.Location = New System.Drawing.Point(531, 20)
         Me.chkEnableSequencer.Name = "chkEnableSequencer"
         Me.chkEnableSequencer.Size = New System.Drawing.Size(155, 17)
-        Me.chkEnableSequencer.TabIndex = 677
+        Me.chkEnableSequencer.TabIndex = 18
         Me.chkEnableSequencer.Text = "Enable Element Sequencer"
         Me.chkEnableSequencer.UseVisualStyleBackColor = True
         '
@@ -313,7 +313,7 @@ Partial Class frmNewFormDaily2
         Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputValue.Name = "ucrInputValue"
         Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputValue.TabIndex = 9
+        Me.ucrInputValue.TabIndex = 17
         Me.ucrInputValue.TextboxValue = ""
         '
         'ucrHour
@@ -345,7 +345,7 @@ Partial Class frmNewFormDaily2
         Me.ucrFormDaily.Location = New System.Drawing.Point(15, 160)
         Me.ucrFormDaily.Name = "ucrFormDaily"
         Me.ucrFormDaily.Size = New System.Drawing.Size(619, 353)
-        Me.ucrFormDaily.TabIndex = 6
+        Me.ucrFormDaily.TabIndex = 5
         '
         'ucrElementSelector
         '
@@ -369,7 +369,7 @@ Partial Class frmNewFormDaily2
         Me.ucrDaiy2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDaiy2Navigation.Name = "ucrDaiy2Navigation"
         Me.ucrDaiy2Navigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrDaiy2Navigation.TabIndex = 679
+        Me.ucrDaiy2Navigation.TabIndex = 15
         '
         'lblSequencer
         '
@@ -422,7 +422,7 @@ Partial Class frmNewFormDaily2
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Name = "frmNewFormDaily2"
-        Me.Text = "frmNewFormDaily2"
+        Me.Text = "Daily data for the whole month"
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
         Me.ResumeLayout(False)
