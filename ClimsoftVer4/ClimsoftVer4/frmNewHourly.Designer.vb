@@ -92,7 +92,7 @@ Partial Class frmNewHourly
         '
         Me.lblValue.AutoSize = True
         Me.lblValue.ForeColor = System.Drawing.Color.Blue
-        Me.lblValue.Location = New System.Drawing.Point(357, 121)
+        Me.lblValue.Location = New System.Drawing.Point(403, 114)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(40, 13)
         Me.lblValue.TabIndex = 230
@@ -101,10 +101,10 @@ Partial Class frmNewHourly
         'cmdAssignSameValue
         '
         Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.cmdAssignSameValue.Location = New System.Drawing.Point(185, 118)
+        Me.cmdAssignSameValue.Location = New System.Drawing.Point(231, 111)
         Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
         Me.cmdAssignSameValue.Size = New System.Drawing.Size(169, 23)
-        Me.cmdAssignSameValue.TabIndex = 228
+        Me.cmdAssignSameValue.TabIndex = 18
         Me.cmdAssignSameValue.Text = "Assign same value to all obs"
         Me.cmdAssignSameValue.UseVisualStyleBackColor = True
         '
@@ -120,10 +120,10 @@ Partial Class frmNewHourly
         'btnHourSelection
         '
         Me.btnHourSelection.ForeColor = System.Drawing.Color.Blue
-        Me.btnHourSelection.Location = New System.Drawing.Point(12, 118)
+        Me.btnHourSelection.Location = New System.Drawing.Point(58, 111)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
-        Me.btnHourSelection.TabIndex = 463
+        Me.btnHourSelection.TabIndex = 16
         Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
@@ -132,7 +132,7 @@ Partial Class frmNewHourly
         Me.btnView.Location = New System.Drawing.Point(415, 570)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 670
+        Me.btnView.TabIndex = 11
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -143,7 +143,7 @@ Partial Class frmNewHourly
         Me.btnUpload.Location = New System.Drawing.Point(577, 604)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 669
+        Me.btnUpload.TabIndex = 14
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
@@ -152,7 +152,7 @@ Partial Class frmNewHourly
         Me.btnHelp.Location = New System.Drawing.Point(577, 570)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 668
+        Me.btnHelp.TabIndex = 13
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -161,7 +161,7 @@ Partial Class frmNewHourly
         Me.btnClear.Location = New System.Drawing.Point(334, 570)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 666
+        Me.btnClear.TabIndex = 10
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -170,7 +170,7 @@ Partial Class frmNewHourly
         Me.btnCommit.Location = New System.Drawing.Point(91, 570)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(75, 23)
-        Me.btnCommit.TabIndex = 662
+        Me.btnCommit.TabIndex = 6
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -179,7 +179,7 @@ Partial Class frmNewHourly
         Me.btnDelete.Location = New System.Drawing.Point(253, 570)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 665
+        Me.btnDelete.TabIndex = 9
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -188,7 +188,7 @@ Partial Class frmNewHourly
         Me.btnAddNew.Location = New System.Drawing.Point(10, 570)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 663
+        Me.btnAddNew.TabIndex = 8
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -197,7 +197,7 @@ Partial Class frmNewHourly
         Me.btnUpdate.Location = New System.Drawing.Point(172, 570)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 664
+        Me.btnUpdate.TabIndex = 7
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -206,7 +206,7 @@ Partial Class frmNewHourly
         Me.btnClose.Location = New System.Drawing.Point(496, 570)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 667
+        Me.btnClose.TabIndex = 12
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -233,22 +233,22 @@ Partial Class frmNewHourly
         Me.ucrHourlyNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHourlyNavigation.Name = "ucrHourlyNavigation"
         Me.ucrHourlyNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrHourlyNavigation.TabIndex = 465
+        Me.ucrHourlyNavigation.TabIndex = 15
         '
         'ucrHourly
         '
-        Me.ucrHourly.Location = New System.Drawing.Point(91, 140)
+        Me.ucrHourly.Location = New System.Drawing.Point(58, 140)
         Me.ucrHourly.Name = "ucrHourly"
         Me.ucrHourly.Size = New System.Drawing.Size(445, 389)
         Me.ucrHourly.TabIndex = 5
         '
         'ucrInputValue
         '
-        Me.ucrInputValue.Location = New System.Drawing.Point(399, 118)
+        Me.ucrInputValue.Location = New System.Drawing.Point(445, 111)
         Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputValue.Name = "ucrInputValue"
         Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputValue.TabIndex = 229
+        Me.ucrInputValue.TabIndex = 17
         Me.ucrInputValue.TextboxValue = ""
         '
         'ucrElementSelector
@@ -324,7 +324,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(lblYear)
         Me.Name = "frmNewHourly"
-        Me.Text = "frmNewHourly"
+        Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
