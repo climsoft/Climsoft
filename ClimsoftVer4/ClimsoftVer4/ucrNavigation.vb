@@ -44,8 +44,10 @@
         'Display the record number in the data navigation Textbox
         If iMaxRows = 0 Then
             txtRecNum.Text = "No Records"
+            SetControlsForNewRecord()
         ElseIf iCurrRow >= 0 AndAlso iCurrRow < iMaxRows Then
             txtRecNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
+            ResetControls()
         Else
             txtRecNum.Text = "New Record"
             SetControlsForNewRecord()

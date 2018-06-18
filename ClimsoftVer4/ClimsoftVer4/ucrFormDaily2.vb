@@ -48,6 +48,8 @@ Public Class ucrFormDaily2
                     fd2Record = New form_daily2
                     bUpdating = False
                 Else
+                    'Detach this from the EF context to prevent it from tracking the changes made to it
+                    clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
 

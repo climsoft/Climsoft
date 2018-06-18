@@ -66,6 +66,7 @@ Public Class ucrSynopticRA1
                     fs2ra1Record = New form_synoptic_2_ra1
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day

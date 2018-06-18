@@ -58,6 +58,7 @@ Public Class ucrHourly
                     fhRecord = New form_hourly
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day

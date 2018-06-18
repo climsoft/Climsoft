@@ -60,6 +60,7 @@ Public Class ucrHourlyWind
                     fhourlyWindRecord = New form_hourlywind
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day
