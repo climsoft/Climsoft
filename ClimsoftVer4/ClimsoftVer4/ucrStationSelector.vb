@@ -7,12 +7,9 @@
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
-            'May need ValueMember to be different in different instances e.g. if station name is needed as return value
-            'Done. It is now possible to pass the field name into get value. This comment can now be deleted
             cboValues.ValueMember = strStationID
             'TODO 
-            'what if there were no records on the first load. 
-            'Then there are records later
+            'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then
                 SetViewTypeAsStations()
             End If
@@ -20,6 +17,25 @@
             cboValues.DataSource = Nothing
         End If
     End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean = False
+        bValid = MyBase.ValidateValue()
+
+        If Not bValid Then
+            Dim strCol As String
+            strCol = cboValues.ValueMember
+            For Each rTemp As DataRow In dtbRecords.Rows
+                If rTemp.Item(strCol).ToString = cboValues.Text Then
+                    bValid = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        SetBackColor(If(bValid, Color.White, Color.Red))
+        Return bValid
+    End Function
 
     Public Sub SetViewTypeAsStations()
         SetDisplayMember(strStationName)
