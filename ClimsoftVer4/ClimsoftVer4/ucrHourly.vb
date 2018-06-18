@@ -250,7 +250,7 @@ Public Class ucrHourly
                 If ctr.Enabled Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.SetElementValue(bNewValue)
-                    If Not ucrVFP.IsValuesValid() Then
+                    If Not ucrVFP.ValidateValue() Then
                         Exit Sub
                     End If
                 End If
@@ -313,7 +313,7 @@ Public Class ucrHourly
     Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid Then
+                If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
                     ctr.Focus()
                     Return False
                 End If
