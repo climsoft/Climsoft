@@ -19,6 +19,25 @@
         End If
     End Sub
 
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean = False
+        bValid = MyBase.ValidateValue()
+
+        If Not bValid Then
+            Dim strCol As String
+            strCol = cboValues.ValueMember
+            For Each rTemp As DataRow In dtbRecords.Rows
+                If rTemp.Item(strCol).ToString = cboValues.Text Then
+                    bValid = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        SetBackColor(If(bValid, Color.White, Color.Red))
+        Return bValid
+    End Function
+
     Public Sub SetViewTypeAsElements()
         SetDisplayMember(strElementName)
     End Sub

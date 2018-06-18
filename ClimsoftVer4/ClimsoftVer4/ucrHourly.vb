@@ -309,7 +309,7 @@ Public Class ucrHourly
     ''' Returns true if they are all valid and false if any has Invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid Then
@@ -378,7 +378,7 @@ Public Class ucrHourly
         AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
 
         'setting the key contols for the Navigation control 
-        ucrLinkedNavigation.SetTableNameAndFields("form_hourly", (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
         ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
         ucrLinkedNavigation.SetKeyControls("elementId", ucrlinkedElement)
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
