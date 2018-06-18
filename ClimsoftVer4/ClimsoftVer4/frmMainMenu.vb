@@ -109,6 +109,7 @@ Public Class frmMainMenu
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
         ' The icon has been changed
         frmKeyEntry.ShowDialog()
+
     End Sub
 
     Private Sub cmdPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdPaperArchive.Click
@@ -270,5 +271,25 @@ Public Class frmMainMenu
 
     Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
         frmAWSstations.Show()
+    End Sub
+
+    Private Sub ConfigurationForTDCFToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigurationForTDCFToolStripMenuItem.Click
+        'With frmSynopTDCF
+        '    .TabProcessing.SelectedTab = .TabSettings
+        '    .TabProcess.Hide()
+        '    .Show()
+        '    '.TabProcess.Refresh()
+        'End With
+
+        frmTDCFindicators.Show()
+    End Sub
+
+
+    Private Sub MetadataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MetadataToolStripMenuItem.Click
+        formMetadata.Show()
+    End Sub
+
+    Private Sub UpdateObservationsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles UpdateObservationsToolStripMenuItem1.Click
+        frmModifyObservations.Show()
     End Sub
 End Class

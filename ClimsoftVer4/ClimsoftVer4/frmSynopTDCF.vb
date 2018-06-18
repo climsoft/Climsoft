@@ -13,7 +13,7 @@
 
     Private Sub frmSynopTDCF_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         sql = "CREATE TABLE IF NOT EXISTS `bufr_indicators` (`BUFR_Edition` int(11) DEFAULT '0',`Originating_Centre` int(11) DEFAULT '0',`Originating_SubCentre` int(11) DEFAULT '0',`Update_Sequence` int(11) DEFAULT '0',`Optional_Section` int(11) DEFAULT '0',`Data_Category` int(11) DEFAULT '0',`Intenational_Data_SubCategory` int(11) DEFAULT '0',`Local_Data_SubCategory` int(11) DEFAULT '0',`Master_table` int(11) DEFAULT '0',`Local_Table` int(11) DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-
+        PopulateForms()
     End Sub
 
     Sub PopulateForms()
@@ -25,11 +25,15 @@
 
             sql = "SELECT * FROM bufr_indicators"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_indicators")
             Kount = ds.Tables("bufr_indicators").Rows.Count
 
             ' Pulate the template list
+            cboTemplate.Items.Clear()
             For i = 0 To Kount - 1
                 cboTemplate.Items.Add(ds.Tables("bufr_indicators").Rows(i).Item("Tmplate"))
             Next
@@ -58,6 +62,9 @@
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "aws_mss")
             Kount = ds.Tables("aws_mss").Rows.Count
@@ -176,6 +183,9 @@
 
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "aws_mss")
 
@@ -250,6 +260,9 @@
 
             'Set data set
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_crex_data")
 
@@ -263,6 +276,10 @@
 
             'MsgBox("Total subsets = " & substs & " > " & subsets)
             sss = subsets 'Format(substs, "000")
+
+            If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
+                IO.Directory.CreateDirectory(System.IO.Path.GetFullPath(Application.StartupPath) & "\data")
+            End If
 
             fl2 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.txt"
 
@@ -744,6 +761,9 @@
         sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "bufr_coded")
 
@@ -784,6 +804,9 @@
             sql = "Select * from bufr_crex_data"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_crex_data")
 
@@ -833,6 +856,9 @@
         sql = "Select * from bufr_crex_data"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "bufr_crex_data")
 
@@ -848,6 +874,9 @@
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds.Clear()
         da.Fill(ds, "from form_synoptic_2_ra1")
 
@@ -878,9 +907,14 @@
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
         'MsgBox(stn)
         Dim station_name, wmo_block, wmo_No, lat, lon, elev, qualifier, typ As String
-        sql = "select stationName, wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+        'sql = "select stationName, wmoid, latitude, longitude, elevation, qualifier from station where stationId = '" & stn & "';"
+        sql = "select stationName, wmoid, latitude, longitude, elevation from station where stationId = '" & stn & "';"
+
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "stations")
 
@@ -891,14 +925,18 @@
             lat = ds.Tables("stations").Rows(0).Item("latitude")
             lon = ds.Tables("stations").Rows(0).Item("longitude")
             elev = ds.Tables("stations").Rows(0).Item("elevation")
-            qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
+            'qualifier = ds.Tables("stations").Rows(0).Item("qualifier")
 
-            If qualifier = "SYNOPTIC" Then
-                typ = 1 ' Manual stations only
-            ElseIf qualifier = "AWS" Then
-                typ = 2 ' Automatic station observations only
-            ElseIf qualifier = "Hybrid" Then
-                typ = 3 ' Both auto and manual observations used
+            qualifier = Get_StationQualifier(conn1, stn)
+            'MsgBox(qualifier)
+            If qualifier = "AWS" Then
+                typ = 0 ' Manual stations only
+            ElseIf qualifier = "SYNOPTIC" Or qualifier = "RAINFALL" Then
+                typ = 1 ' Automatic station observations only
+            ElseIf qualifier = "HYBRID" Then
+                typ = 2 ' Both auto and manual observations used
+            Else
+                typ = 3 ' Missing qualifier value
             End If
 
             'Update the station details
@@ -920,11 +958,41 @@
             MsgBox(ex.Message)
         End Try
     End Sub
+    Function Get_StationQualifier(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String) As String
+        sql = "select qualifier,belongsTo from stationqualifier where belongsTo = '" & stn & "';"
+
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
+            ds.Clear()
+            da.Fill(ds, "qualifiers")
+
+            Get_StationQualifier = "MISSING" ' Initialize Qualifer to Missing value
+            With ds.Tables("qualifiers")
+                If .Rows.Count < 1 Then
+                    Get_StationQualifier = "MISSING" ' Missing qualifier because no records in qualifier t
+                Else
+                    If Not IsDBNull(.Rows(0).Item("qualifier")) Then
+                        Get_StationQualifier = .Rows(0).Item("qualifier")
+                    End If
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Get_StationQualifier = "MISSING"
+        End Try
+    End Function
     Sub Update_Instruments_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
         sql = "select describedby as code,instrumentcode,height from stationelement where recordedfrom = '" & stn & "';"
 
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "instruments")
             With ds.Tables("instruments")
@@ -987,6 +1055,9 @@
         sql = "select * from form_synoptic_2_ra1 where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "synoptic")
             If ds.Tables("synoptic").Rows.Count <> 0 Then
@@ -1105,6 +1176,9 @@
         Try
             sql = "Select * from bufr_crex_data"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds1.Clear()
             da.Fill(ds1, "bufr_crex_data")
             kount1 = ds1.Tables("bufr_crex_data").Rows.Count
@@ -1191,6 +1265,9 @@
         'Try
         sql = "Select * from bufr_crex_data"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
         ds1.Clear()
         da.Fill(ds1, "bufr_crex_data")
         Kount = ds1.Tables("bufr_crex_data").Rows.Count
@@ -1237,6 +1314,9 @@
         Try
             sql = "Select elementId, elementScale from obselement where elementId = '" & Val(code) & "';"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "obselement")
             Kount = ds.Tables("obselement").Rows.Count
@@ -1353,6 +1433,9 @@
             sql = "select * from bufr_crex_data where selected =1 order by nos;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "bufr_coded")
             Kount = ds.Tables("bufr_coded").Rows.Count
@@ -1382,6 +1465,9 @@
         Try
             sql = "Select * from ccitt;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "ccitt")
             recs = ds.Tables("ccitt").Rows.Count
@@ -1719,6 +1805,9 @@
 
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             ds.Clear()
             da.Fill(ds, "server")
             Kount = ds.Tables("server").Rows.Count
@@ -1843,4 +1932,75 @@
             Me.Cursor = Cursors.Default
         End Try
     End Function
+
+
+    'Private Sub cboTemplate_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+    '    If Len(cboTemplate.Text) > 0 Then
+    '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
+    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+    
+    '        ds.Clear()
+    '        da.Fill(ds, "bufr_indicators")
+
+    '        txtMsgHeader.Text = ds.Tables("bufr_indicators").Rows(0).Item("Msg_Header")
+    '        txtBUFREditionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("BUFR_Edition")
+    '        txtOriginatingGeneratingCentre.Text = ds.Tables("bufr_indicators").Rows(0).Item("Originating_Centre")
+    '        txtOriginatingGeneratingSubCentre.Text = ds.Tables("bufr_indicators").Rows(0).Item("Originating_SubCentre")
+    '        txtUpdateSequenceNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Update_Sequence")
+    '        chkOptionalSectionInclusion.Checked = ds.Tables("bufr_indicators").Rows(0).Item("Optional_Section")
+    '        'If ds.Tables("bufr_indicators").Rows(0).Item("Optional_Section") = 1 Then
+    '        '    chkOptionalSectionInclusion.Checked() = True
+    '        'Else
+    '        '    chkOptionalSectionInclusion.Checked() = False
+    '        'End If
+    '        txtDataCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Data_Category")
+    '        txtInternationalDataSubCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Intenational_Data_SubCategory")
+    '        txtLocalDataSubCategory.Text = ds.Tables("bufr_indicators").Rows(0).Item("Local_Data_SubCategory")
+    '        txtMastersTableVersionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Master_table")
+    '        txtLocalTableVersionNumber.Text = ds.Tables("bufr_indicators").Rows(0).Item("Local_Table")
+    '    End If
+    'End Sub
+
+    Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cboTemplate_TextChanged1(sender As Object, e As EventArgs) Handles cboTemplate.TextChanged
+
+        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+        ' Set to unlimited timeout period
+        da.SelectCommand.CommandTimeout = 0
+
+        ds.Clear()
+        da.Fill(ds, "bufr_indicators")
+        With ds.Tables("bufr_indicators")
+            If .Rows.Count > 0 Then
+                txtMsgHeader.Text = .Rows(0).Item("Msg_Header")
+                txtBUFREditionNumber.Text = .Rows(0).Item("BUFR_Edition")
+                txtOriginatingGeneratingCentre.Text = .Rows(0).Item("Originating_Centre")
+                txtOriginatingGeneratingSubCentre.Text = .Rows(0).Item("Originating_SubCentre")
+                txtUpdateSequenceNumber.Text = .Rows(0).Item("Update_Sequence")
+                chkOptionalSectionInclusion.Checked = .Rows(0).Item("Optional_Section")
+                txtDataCategory.Text = .Rows(0).Item("Data_Category")
+                txtInternationalDataSubCategory.Text = .Rows(0).Item("Intenational_Data_SubCategory")
+                txtLocalDataSubCategory.Text = .Rows(0).Item("Local_Data_SubCategory")
+                txtMastersTableVersionNumber.Text = .Rows(0).Item("Master_table")
+                txtLocalTableVersionNumber.Text = .Rows(0).Item("Local_Table")
+            Else
+                txtMsgHeader.Text = ""
+                txtBUFREditionNumber.Text = ""
+                txtOriginatingGeneratingCentre.Text = ""
+                txtOriginatingGeneratingSubCentre.Text = ""
+                txtUpdateSequenceNumber.Text = ""
+                chkOptionalSectionInclusion.Checked = 0
+                txtDataCategory.Text = ""
+                txtInternationalDataSubCategory.Text = ""
+                txtLocalDataSubCategory.Text = ""
+                txtMastersTableVersionNumber.Text = ""
+                txtLocalTableVersionNumber.Text = ""
+            End If
+
+        End With
+    End Sub
 End Class

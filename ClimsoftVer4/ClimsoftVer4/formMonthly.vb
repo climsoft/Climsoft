@@ -178,7 +178,12 @@ Public Class formMonthly
                 End If
 
                 'Get value for qcTotlRequired
-                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                    totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                Else
+                    totalRequired = 0
+                End If
+
 
                 'Check lower limit
                 If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
@@ -196,7 +201,7 @@ Public Class formMonthly
                 If tabNext = True Then
                     objKeyPress.checkValidYear(txtYear.Text, txtYear)
                 End If
-            
+
             ElseIf Me.ActiveControl.Name = "cboStation" Then
                 Dim itemFound As Boolean
                 If Len(cboStation.SelectedValue) > 1 Then
@@ -258,110 +263,119 @@ Public Class formMonthly
             MessageBox.Show(ex.Message)
         End Try
 
-        maxRows = ds.Tables("form_monthly").Rows.Count
+        Try
+            maxRows = ds.Tables("form_monthly").Rows.Count
 
-        '--------------------------------
-        'Fill combobox for station identifier with station list from station table
-        Dim m As Integer, i As Integer, j As Integer
-        Dim ctl As Control
-        Dim ds1 As New DataSet
-        Dim ds2 As New DataSet
-        Dim ds3 As New DataSet
-        Dim sql1 As String, sql2 As String, sql3 As String
-        Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
+            '--------------------------------
+            'Fill combobox for station identifier with station list from station table
+            Dim m As Integer, i As Integer, j As Integer
+            Dim ctl As Control
+            Dim ds1 As New DataSet
+            Dim ds2 As New DataSet
+            Dim ds3 As New DataSet
+            Dim sql1 As String, sql2 As String, sql3 As String
+            Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da2 As MySql.Data.MySqlClient.MySqlDataAdapter
+            Dim da3 As MySql.Data.MySqlClient.MySqlDataAdapter
 
 
-        sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
-        da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+            sql1 = "SELECT stationId,stationName FROM station ORDER BY stationName;"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
 
-        sql3 = "SELECT elementID,elementName FROM obselement WHERE elementId BETWEEN 200 AND 299 ORDER BY elementName;"
-        da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
+            sql3 = "SELECT elementID,elementName FROM obselement WHERE elementId BETWEEN 200 AND 299 ORDER BY elementName;"
+            da3 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql3, conn)
 
-        da1.Fill(ds1, "station")
-        If ds1.Tables("station").Rows.Count > 0 Then
+            da1.Fill(ds1, "station")
+            If ds1.Tables("station").Rows.Count > 0 Then
+                'Populate station combobox
+                With cboStation
+                    .DataSource = ds1.Tables("station")
+                    .DisplayMember = "stationName"
+                    .ValueMember = "stationId"
+                    .SelectedIndex = 0
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
+
+            da3.Fill(ds3, "obsElem")
             'Populate station combobox
-            With cboStation
-                .DataSource = ds1.Tables("station")
-                .DisplayMember = "stationName"
-                .ValueMember = "stationId"
+            With cboElement
+                .DataSource = ds3.Tables("obsElem")
+                .DisplayMember = "elementName"
+                .ValueMember = "elementId"
                 .SelectedIndex = 0
             End With
-        Else
-            MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        End If
-
-        da3.Fill(ds3, "obsElem")
-        'Populate station combobox
-        With cboElement
-            .DataSource = ds3.Tables("obsElem")
-            .DisplayMember = "elementName"
-            .ValueMember = "elementId"
-            .SelectedIndex = 0
-        End With
 
 
-        'Populate dataForms
-        sql2 = "SELECT val_start_position,val_end_position FROM data_forms WHERE table_name='form_monthly'"
-        da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
-        da2.Fill(ds2, "dataForms")
+            'Populate dataForms
+            sql2 = "SELECT val_start_position,val_end_position FROM data_forms WHERE table_name='form_monthly'"
+            da2 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql2, conn)
+            da2.Fill(ds2, "dataForms")
 
-        i = ds2.Tables("dataForms").Rows(0).Item("val_start_position")
-        j = ds2.Tables("dataForms").Rows(0).Item("val_end_position")
+            i = ds2.Tables("dataForms").Rows(0).Item("val_start_position")
+            j = ds2.Tables("dataForms").Rows(0).Item("val_end_position")
 
-        'MsgBox("Value start position: " & i & " Value end position: " & j)
-        '---------------------------------
-        'Initialize header information for data-entry form
+            'MsgBox("Value start position: " & i & " Value end position: " & j)
+            '---------------------------------
+            'Initialize header information for data-entry form
 
-        If maxRows > 0 Then
-            'StationIdTextBox.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
-            'cboStation.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
-            cboStation.SelectedValue = ds.Tables("form_monthly").Rows(inc).Item("stationId")
+            If maxRows > 0 Then
+                'StationIdTextBox.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
+                'cboStation.Text = ds.Tables("form_monthly").Rows(inc).Item("stationId")
+                cboStation.SelectedValue = ds.Tables("form_monthly").Rows(inc).Item("stationId")
 
-            txtYear.Text = ds.Tables("form_monthly").Rows(inc).Item("yyyy")
+                txtYear.Text = ds.Tables("form_monthly").Rows(inc).Item("yyyy")
 
-            'Initialize textboxes for observation values
-            'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
-            For m = i To j
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                'Initialize textboxes for observation values
+                'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
+                For m = i To j
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
-            'Initialize textboxes for observation flags
-            'Observation flags range from column 37 i.e. column index 36 to column 67 i.e. column index 66
-            For m = j + 1 To (j + 1) + 11
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
-                            ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                'Initialize textboxes for observation flags
+                'Observation flags range from column 37 i.e. column index 36 to column 67 i.e. column index 66
+                For m = j + 1 To (j + 1) + 11
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            If Not IsDBNull(ds.Tables("form_monthly").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_monthly").Rows(inc).Item(m)
+                            End If
                         End If
-                    End If
-                Next ctl
-            Next m
+                    Next ctl
+                Next m
 
 
-            displayRecordNumber()
-        Else
-            'If this is the first record
-            btnAddNew.Enabled = False
-            btnCommit.Enabled = True
-            btnUpdate.Enabled = False
-            btnDelete.Enabled = False
-            btnClear.Enabled = False
-            btnMoveFirst.Enabled = False
-            btnMoveNext.Enabled = False
-            btnMovePrevious.Enabled = False
-            btnMoveLast.Enabled = False
+                displayRecordNumber()
+            Else
+                'If this is the first record
+                btnAddNew.Enabled = False
+                btnCommit.Enabled = True
+                btnUpdate.Enabled = False
+                btnDelete.Enabled = False
+                btnClear.Enabled = False
+                btnMoveFirst.Enabled = False
+                btnMoveNext.Enabled = False
+                btnMovePrevious.Enabled = False
+                btnMoveLast.Enabled = False
 
-            recNumberTextBox.Text = "Record 1 of 1"
-        End If
+                recNumberTextBox.Text = "Record 1 of 1"
 
+            End If
+
+        Catch ex As Exception
+            If ex.HResult = "-2146233086" Then
+                MsgBox("No Element Selected!   >>> Select them at the Metadata form")
+            Else
+                MessageBox.Show(ex.Message)
+            End If
+        End Try
     End Sub
 
 
@@ -528,7 +542,12 @@ Public Class formMonthly
             End If
 
             'Get value for qcTotlRequired
-            totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+            Else
+                totalRequired = 0
+            End If
+
             '===========================
 
             'Check upper limit

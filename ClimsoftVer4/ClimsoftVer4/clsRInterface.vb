@@ -211,6 +211,9 @@ Module TemporaryInterfaceCode
             conn.ConnectionString = MyConnectionString
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+
             da.Fill(ds, tableName)
             'MsgBox(ds.Tables(tableName).Rows.Count)
 

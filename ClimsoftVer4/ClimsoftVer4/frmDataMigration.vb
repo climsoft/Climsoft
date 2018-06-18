@@ -56,6 +56,7 @@
                 cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
 
                 'Execute query for making a V3 db backup
+                cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
 
                 lstMsgs.Items.Add("CLIMSOFT V3 backup created")
@@ -80,6 +81,7 @@
             ' Update station metadata
             sql_stn = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE station FIELDS TERMINATED BY ',' (stationId);"
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
+            cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
             'lstMsgs.Items.Add("Stations Updated")
 
@@ -87,6 +89,7 @@
             sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8) set elementId=@col2;"
             'MsgBox(sql_elm)
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
+            cmd.CommandTimeout = 0
             cmd.ExecuteNonQueryAsync()
 
             'cmd.ExecuteNonQuery()
@@ -94,11 +97,13 @@
 
             'Execute query for migrating data to V4 db
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
+            cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
 
             sql_scale = "UPDATE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark='1' where obsValue <> '' and elementScale > 0 and mark <> '1';"
             'Execute query for migrating data to V4 db
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_scale, conn)
+            cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
             'MsgBox("Sacaled")
 
@@ -137,7 +142,7 @@
         Dim nums, lin As Integer
         Dim rows As String()
         Dim currentRow As String()
-
+        Me.Cursor = Cursors.WaitCursor
         ' Define the text files application path
         DataPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
         If Not IO.Directory.Exists(DataPath) Then
@@ -150,7 +155,7 @@
 
         bkpfile = OpenFileBackup.FileName
 
-        Me.Cursor = Cursors.WaitCursor
+
         ' Display the selected backup file
         txtBkpFile.Text = bkpfile
 
@@ -185,24 +190,6 @@
                         rows = New String() {currentField}
 
                         If nums = 0 Then dat = rows(0)
-
-                        'If nums = 0 Then dat = rows(0)
-                        '    '' Skip records for non existence stations
-                        '    If Not StationExist(rows(0)) Then
-                        '        lstMsgs.Items.Add("Line " & lin & " skipped due to missing Station: " & rows(0))
-                        '        Continue Do
-                        '    Else
-                        '        dat = rows(0)
-                        '    End If
-                        'End If
-
-                        'If nums = 1 Then
-                        '    ' Skip records for non existence Element
-                        '    If Not ElementExist(rows(0)) Then
-                        '        lstMsgs.Items.Add("Line " & lin & " skipped due to missing Element: " & rows(0))
-                        '        Continue Do
-                        '    End If
-                        'End If
 
                         ' Convert datetime structure into MySQL format
                         If nums = 2 Then

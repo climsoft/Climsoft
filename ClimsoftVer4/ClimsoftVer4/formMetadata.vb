@@ -23,6 +23,7 @@ Public Class formMetadata
     Dim rec As Integer
     Dim Kount As Integer
     Dim ActiveTab As Integer
+    Dim metadfrm As New MetadataVariables
     'Dim maxRows As Integer
 
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
@@ -51,9 +52,11 @@ Public Class formMetadata
 
         SetDataSet("station")
         rec = 0
-        populateStations("station", rec, Kount)
+
+        populateStations("station", 9, Kount)
         populateSearchStation()
         populateSearchElement()
+
     End Sub
 
     Sub SetDataSet(tbl As String)
@@ -64,6 +67,8 @@ Public Class formMetadata
             ds.Clear()
             da.Fill(ds, tbl)
             Kount = ds.Tables(tbl).Rows.Count
+            'MsgBox(Kount)
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -162,6 +167,7 @@ Public Class formMetadata
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationmethod")) Then txtgeoMethod.Text = ds.Tables("station").Rows(num).Item("geolocationmethod")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("geolocationaccuracy")) Then txtgeoAccuracy.Text = ds.Tables("station").Rows(num).Item("geolocationaccuracy")
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("stationoperational")) Then txtStationOperation.CheckState = ds.Tables("station").Rows(num).Item("stationoperational")
+        If Not IsDBNull(ds.Tables("station").Rows(num).Item("qualifier")) Then txtStationType.Text = ds.Tables("station").Rows(num).Item("qualifier")
 
         If Not IsDBNull(ds.Tables("station").Rows(num).Item("openingdatetime")) Then
             txtOpeningDate.Text = ds.Tables("station").Rows(num).Item("openingdatetime")
@@ -224,6 +230,11 @@ Public Class formMetadata
         txtBeginDate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtEndate.Text = ds.Tables(frm).Rows(num).Item("endDate")
 
+        metadfrm.seStn = txtStation.Text
+        metadfrm.Eecode = txtElement.Text
+        metadfrm.Iecode = txtInstrument.Text
+        metadfrm.sebdate = txtBeginDate.Text
+
         If maxRows > 0 Then txtNavigator1.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
     End Sub
     Sub populateInstrument(frm As String, num As Integer, maxRows As Integer)
@@ -243,7 +254,7 @@ Public Class formMetadata
         txtInstallDate.Text = ds.Tables(frm).Rows(num).Item("installationDatetime")
         txtDeinstallDate.Text = ds.Tables(frm).Rows(num).Item("deinstallationDatetime")
         txthgt.Text = ds.Tables(frm).Rows(num).Item("height")
-        picInstrument.Image = ds.Tables(frm).Rows(num).Item("instrumentPicture")
+        txtInstrumentPicFile.Text = ds.Tables(frm).Rows(num).Item("instrumentPicture")
 
         If maxRows > 0 Then txtNavigator2.Text = rec + 1 & " of " & maxRows ' - 1 '"Record 1 of " & maxRows
     End Sub
@@ -279,6 +290,11 @@ Public Class formMetadata
         txtTZone.Text = ds.Tables(frm).Rows(num).Item("stationTimeZone")
         txtNetwork.Text = ds.Tables(frm).Rows(num).Item("stationNetworkType")
 
+        metadfrm.qlfr = txtqualifier.Text
+        metadfrm.bdate = txtBDate.Text
+        metadfrm.edate = txtEndDate.Text
+        metadfrm.stn = txtQualifierStation.Text
+
         If maxRows > 0 Then txtNav4.Text = rec + 1 & " of " & maxRows
     End Sub
     Sub populateScheduleClass(frm As String, num As Integer, maxRows As Integer)
@@ -297,15 +313,30 @@ Public Class formMetadata
         If maxRows = 0 Then Exit Sub
         SetDataSet(frm)
         ClearPhysicalFeatureForm()
+
         txtFeatureStation.Text = ds.Tables(frm).Rows(num).Item("associatedWith")
         txtFeatureBdate.Text = ds.Tables(frm).Rows(num).Item("beginDate")
         txtFeatureEdate.Text = ds.Tables(frm).Rows(num).Item("endDate")
-        txtfeaturepic.Image = ds.Tables(frm).Rows(num).Item("image")
         txtFeatureDescription.Text = ds.Tables(frm).Rows(num).Item("description")
         txtFeatureClass.Text = ds.Tables(frm).Rows(num).Item("classifiedInto")
-        txtfeatureclassdescription.Text = ds.Tables(frm).Rows(num).Item("classifiedInto")
+        txtImageFile.Text = ds.Tables(frm).Rows(num).Item("image")
+
+        metadfrm.pstn = ds.Tables(frm).Rows(num).Item("associatedWith")
+        metadfrm.pbdate = ds.Tables(frm).Rows(num).Item("beginDate")
+        metadfrm.pedate = ds.Tables(frm).Rows(num).Item("endDate")
+        metadfrm.pfeature = ds.Tables(frm).Rows(num).Item("description")
+
+        SetDataSet("physicalfeatureclass")
+        txtFeatureClassDescription.Text = ds.Tables("physicalfeatureclass").Rows(1).Item("description")
 
         If maxRows > 0 Then txtNav6.Text = rec + 1 & " of " & maxRows
+
+        'pstn, pbdate, pedate, pfeature, pclass, pfile
+
+
+        metadfrm.pclass = txtFeatureClass.Text
+        metadfrm.pfile = txtImageFile.Text
+
     End Sub
     Sub populatePaperArchiveDefinition(frm As String, num As Integer, maxRows As Integer)
         On Error Resume Next
@@ -367,14 +398,25 @@ Public Class formMetadata
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
+            dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
+            dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+
             If IsDate(txtOpeningDate.Text) Then
                 ' Opening date can only be in the past
-                If DateDiff(DateInterval.Day, DateValue(txtOpeningDate.Text), Now) > 0 Then dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
+                If DateDiff(DateInterval.Day, DateValue(txtOpeningDate.Text), Now) < 0 Then
+                    dsNewRow.Item("openingDatetime") = ""
+                    MsgBox("Not Valid Opening date")
+                End If
+
             End If
 
             If IsDate(txtClosingDate.Text) Then
-                ' Opening date can only be in the past
-                If DateDiff(DateInterval.Day, DateValue(txtClosingDate.Text), Now) > 0 Then dsNewRow.Item("closingDatetime") = txtClosingDate.Text
+                ' Closing date can only be in the past
+                If DateDiff(DateInterval.Day, DateValue(txtClosingDate.Text), Now) < 0 Then
+                    dsNewRow.Item("closingDatetime") = ""
+                    MsgBox("Not Valid Closing date date")
+                End If
+
             End If
 
             dsNewRow.Item("stationoperational") = txtStationOperation.CheckState
@@ -417,9 +459,11 @@ Public Class formMetadata
         txtgeoMethod.Clear()
         OpenDate.Text = ""
         ClosingDate.Text = ""
+        txtStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
         txtstationId.Focus()
+
     End Sub
 
     Sub ClearElementForm()
@@ -456,11 +500,11 @@ Public Class formMetadata
         txtAbbrev.Text = ""
         txtModel.Text = ""
         txtManufacturer.Text = ""
-        txtUncertainity.Text = ""
+        txtUncertainity.Text = 0
         txtInstallDate.Text = ""
         txtDeinstallDate.Text = ""
         txthgt.Text = ""
-        'picInstrument.Image = ""
+        txtInstrumentPicFile.Text = ""
         txtInstrStn.Text = ""
         txtInstrumentId.Focus()
     End Sub
@@ -497,21 +541,42 @@ Public Class formMetadata
     Sub ClearPhysicalFeatureForm()
         txtFeatureClass.Text = ""
         txtFeatureStation.Text = ""
-        txtfeatureclassdescription.Text = ""
+        txtImageFile.Text = ""
         txtFeatureStation.Text = ""
         txtFeatureBdate.Text = ""
         txtFeatureEdate.Text = ""
-        'txtfeaturepic.Image
+        txtImageFile.Text = ""
         txtFeatureDescription.Text = ""
         txtFeatureClass.Text = ""
+        txtFeatureClassDescription.Text = ""
         txtFeatureStation.Focus()
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+        Dim oper As Integer
+        If txtStationOperation.Checked Then
+            oper = 1
+        Else
+            oper = 0
+        End If
+
         If txtstationId.Text = "" Then
             MsgBox("No record Selected")
         Else
-            TableUpdate(rec, "update")
+            'TableUpdate(rec, "update")
+
+            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" & _
+                ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', qualifier = '" & txtStationType.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
+
+            'MsgBox(sql)
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+
         End If
+
+
     End Sub
     Function TableUpdate(recs As Integer, cmdtype As String) As Boolean
         TableUpdate = True
@@ -523,11 +588,15 @@ Public Class formMetadata
             Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
             Dim recUpdate As New dataEntryGlobalRoutines
 
+            'MsgBox(ds.Tables("station").Rows.Count)
+
             ds.Tables("station").Rows(recs).Item("stationId") = txtstationId.Text
             ds.Tables("station").Rows(recs).Item("stationName") = txtStationName.Text
             ds.Tables("station").Rows(recs).Item("wmoid") = txtwmoid.Text
             ds.Tables("station").Rows(recs).Item("icaoid") = txticaoid.Text
             ds.Tables("station").Rows(recs).Item("country") = txtCountry.Text
+            ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
+            ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
             If IsNumeric(txtLatitude.Text) Then ds.Tables("station").Rows(recs).Item("latitude") = Val(txtLatitude.Text)
             If IsNumeric(txtLongitude.Text) Then ds.Tables("station").Rows(recs).Item("longitude") = Val(txtLongitude.Text)
             If IsNumeric(txtElevation.Text) Then ds.Tables("station").Rows(recs).Item("elevation") = Val(txtElevation.Text)
@@ -537,19 +606,19 @@ Public Class formMetadata
             If IsNumeric(txtgeoAccuracy.Text) Then ds.Tables("station").Rows(recs).Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
             If IsNumeric(txtgeoMethod.Text) Then ds.Tables("station").Rows(recs).Item("geolocationMethod") = Val(txtgeoMethod.Text)
 
-            ' Update Opening date
-            If IsDate(txtOpeningDate.Text) Then
-                ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
-            Else
-                'ds.Tables("station").Rows(recs).Item("openingDatetime") = vbNull
-            End If
+            '' Update Opening date
+            'If IsDate(txtOpeningDate.Text) Then
+            '    ds.Tables("station").Rows(recs).Item("openingDatetime") = txtOpeningDate.Text
+            'Else
+            '    'ds.Tables("station").Rows(recs).Item("openingDatetime") = vbNull
+            'End If
 
-            ' Update Closing date
-            If IsDate(txtClosingDate.Text) Then
-                ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
-            Else
-                'ds.Tables("station").Rows(recs).Item("closingDatetime") = vbNull
-            End If
+            '' Update Closing date
+            'If IsDate(txtClosingDate.Text) Then
+            '    ds.Tables("station").Rows(recs).Item("closingDatetime") = txtClosingDate.Text
+            'Else
+            '    'ds.Tables("station").Rows(recs).Item("closingDatetime") = vbNull
+            'End If
 
             ds.Tables("station").Rows(recs).Item("stationoperational") = txtStationOperation.CheckState
 
@@ -574,20 +643,22 @@ Public Class formMetadata
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recDelete As New dataEntryGlobalRoutines
         DeleteRecord = True
-        On Error GoTo Err
-        ds.Tables(tbl).Rows(recs).Delete()
-        da.Update(ds, tbl)
+        Try
+            'MsgBox(ds.Tables(tbl).Rows(recs).Item("drainageBasin"))
+            ds.Tables(tbl).Rows(recs).Delete()
+            da.Update(ds, tbl)
 
-        'If rec < Kount - 1 Then
-        '    populateStations("station", rec + 1, Kount)
-        'Else
-        '    populateStations("station", rec, Kount)
-        'End If
+            'If rec < Kount - 1 Then
+            '    populateStations("station", rec + 1, Kount)
+            'Else
+            '    populateStations("station", rec, Kount)
+            'End If
 
-        Exit Function
-Err:
-        MsgBox(Err.Description)
-        DeleteRecord = False
+        Catch ex As Exception
+            MsgBox(Err.Description)
+            DeleteRecord = False
+        End Try
+
     End Function
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
@@ -1329,8 +1400,8 @@ Err:
 
             dsNewRow.Item("qualifier") = txtqualifier.Text
             dsNewRow.Item("belongsTo") = txtQualifierStation.Text
-            dsNewRow.Item("qualifierBeginDate") = txtBDate.Text
-            dsNewRow.Item("qualifierEndDate") = txtEndDate.Text
+            dsNewRow.Item("qualifierBeginDate") = txtdBDate.Text
+            dsNewRow.Item("qualifierEndDate") = txtdEndDate.Text
             dsNewRow.Item("stationTimeZone") = txtTZone.Text
             dsNewRow.Item("stationNetworkType") = txtNetwork.Text
 
@@ -1391,7 +1462,7 @@ Err:
 
             dsNewRow.Item("featureClass") = txtFeatureClass.Text
             dsNewRow.Item("refersTo") = txtFeatureStation.Text
-            dsNewRow.Item("description") = txtfeatureclassdescription.Text
+            dsNewRow.Item("description") = txtFeatureClassDescription.Text
 
             ds.Tables("physicalfeatureclass").Rows.Add(dsNewRow)
             da.Update(ds, "physicalfeatureclass")
@@ -1406,9 +1477,9 @@ Err:
             dsNewRowp = ds.Tables("physicalfeature").NewRow
 
             dsNewRowp.Item("associatedWith") = txtFeatureStation.Text
-            dsNewRowp.Item("beginDate") = txtFeatureBdate.Text
-            dsNewRowp.Item("endDate") = txtFeatureEdate.Text
-            dsNewRowp.Item("image") = txtfeaturepic.Image
+            dsNewRowp.Item("beginDate") = txtFeaturedBdate.Text
+            dsNewRowp.Item("endDate") = txtFeaturedEdate.Text
+            dsNewRowp.Item("image") = txtImageFile.Text
             dsNewRowp.Item("description") = txtFeatureDescription.Text
             dsNewRowp.Item("classifiedInto") = txtFeatureClass.Text
 
@@ -1428,66 +1499,94 @@ Err:
     End Sub
 
     Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdateInstrument.Click
-        On Error GoTo Err
+
 
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
-
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
-
-        ds.Tables("instrument").Rows(rec).Item("instrumentId") = txtInstrumentId.Text
-        ds.Tables("instrument").Rows(rec).Item("instrumentName") = txtInstName.Text
-        ds.Tables("instrument").Rows(rec).Item("serialNumber") = txtSerial.Text
-        ds.Tables("instrument").Rows(rec).Item("abbreviation") = txtAbbrev.Text
-        ds.Tables("instrument").Rows(rec).Item("model") = txtModel.Text
-        ds.Tables("instrument").Rows(rec).Item("manufacturer") = txtManufacturer.Text
-        ds.Tables("instrument").Rows(rec).Item("instrumentUncertainty") = txtUncertainity.Text
-        ds.Tables("instrument").Rows(rec).Item("installationDatetime") = txtInstallDate.Text
-        ds.Tables("instrument").Rows(rec).Item("deinstallationDatetime") = txtDeinstallDate.Text
-        ds.Tables("instrument").Rows(rec).Item("height") = txthgt.Text
-        'dsNewRow.Item("instrumentPicture") = picInstrument.Image
-        ds.Tables("instrument").Rows(rec).Item("installedAt") = txtInstrStn.Text
-
-
-        da.Update(ds, "instrument")
-        recUpdate.messageBoxRecordedUpdated()
-
-        ClearInstrumentForm()
-
-        Exit Sub
-
-Err:
-        'MsgBox(Err.Number & " " & Err.Description)
-    End Sub
-
-    Private Sub cmdUpdateStElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStElement.Click
-
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim recUpdate As New dataEntryGlobalRoutines
-
         Try
             'If txtId.Text = "" Then
             '    MsgBox("No record Selected")
             '    Exit Sub
             'End If
 
-            'MsgBox(txtHeight.Text)
-            ds.Tables("stationelement").Rows(rec).Item("recordedFrom") = txtStation.Text
-            ds.Tables("stationelement").Rows(rec).Item("describedBy") = txtElement.Text
-            ds.Tables("stationelement").Rows(rec).Item("recordedWith") = txtInstrument.Text
-            ds.Tables("stationelement").Rows(rec).Item("instrumentcode") = txtInstrumentCode.Text
-            ds.Tables("stationelement").Rows(rec).Item("scheduledFor") = txtScheduleClass.Text
-            ds.Tables("stationelement").Rows(rec).Item("height") = txtHeight.Text
-            ds.Tables("stationelement").Rows(rec).Item("beginDate") = txtBeginDate.Text
-            ds.Tables("stationelement").Rows(rec).Item("endDate") = txtEndate.Text
+            ds.Tables("instrument").Rows(rec).Item("instrumentId") = txtInstrumentId.Text
+            ds.Tables("instrument").Rows(rec).Item("instrumentName") = txtInstName.Text
+            ds.Tables("instrument").Rows(rec).Item("serialNumber") = txtSerial.Text
+            ds.Tables("instrument").Rows(rec).Item("abbreviation") = txtAbbrev.Text
+            ds.Tables("instrument").Rows(rec).Item("model") = txtModel.Text
+            ds.Tables("instrument").Rows(rec).Item("manufacturer") = txtManufacturer.Text
+            ds.Tables("instrument").Rows(rec).Item("instrumentUncertainty") = txtUncertainity.Text
+            ds.Tables("instrument").Rows(rec).Item("installationDatetime") = txtInstallDate.Text
+            ds.Tables("instrument").Rows(rec).Item("deinstallationDatetime") = txtDeinstallDate.Text
+            ds.Tables("instrument").Rows(rec).Item("height") = txthgt.Text
+            ds.Tables("instrument").Rows(rec).Item("installedAt") = txtInstrStn.Text
+            ds.Tables("instrument").Rows(rec).Item("instrumentPicture") = txtInstrumentPicFile.Text
+            'dsNewRow.Item("instrumentPicture") = picInstrument.Image
 
-            da.Update(ds, "stationelement")
-
+            da.Update(ds, "instrument")
             recUpdate.messageBoxRecordedUpdated()
-            ClearStationElementForm()
+
+            'ClearInstrumentForm()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub cmdUpdateStElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStElement.Click
+
+        Dim stn, ecode, icode, bdate As String
+        Dim stn0, ecode0, icode0, bdate0 As String
+
+        Try
+   
+            stn = "= '" & metadfrm.seStn & "'"
+            ecode = "= '" & metadfrm.Eecode & "'"
+            icode = "= '" & metadfrm.Iecode & "'"
+            bdate = "= '" & metadfrm.sebdate & "'"
+
+            ' Check for NULLs from the previous record
+            If Len(metadfrm.seStn) = 0 Then stn = "IS NULL"
+            If Len(metadfrm.Iecode) = 0 Then icode = "IS NULL"
+            If Len(metadfrm.Eecode) = 0 Then ecode = "IS NULL"
+            If Len(metadfrm.sebdate) = 0 Then bdate = "IS NULL"
+
+            ' Format for NULLs in the new values
+            If Len(txtStation.Text) = 0 Then
+                stn0 = "NULL"
+            Else
+                stn0 = "'" & txtStation.Text & "'"
+            End If
+
+            If Len(txtElement.Text) = 0 Then
+                ecode0 = "NULL"
+            Else
+                ecode0 = "'" & txtElement.Text & "'"
+            End If
+
+            If Len(txtInstrument.Text) = 0 Then
+                icode0 = "NULL"
+            Else
+                icode0 = "'" & txtInstrument.Text & "'"
+            End If
+
+            If Len(txtBeginDate.Text) = 0 Then
+                bdate0 = "NULL"
+            Else
+                bdate0 = "'" & txtBeginDate.Text & "'"
+            End If
+
+            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " & _
+                 "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
+
+            'MsgBox(sql)
+
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+            'ClearStationElementForm()
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1532,7 +1631,7 @@ Err:
     End Sub
 
     Private Sub cmdNext1_Click(sender As Object, e As EventArgs) Handles cmdNext1.Click
- 
+
         If rec < Kount - 1 Then
             rec = rec + 1
             populateStationElement("stationelement", rec, Kount)
@@ -1685,121 +1784,170 @@ Err:
     End Sub
 
     Private Sub cmdUpdateHistory_Click(sender As Object, e As EventArgs) Handles cmdUpdateHistory.Click
-        On Error GoTo Err
 
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
+        Try
+            Dim G_accuracy As String
 
-        ds.Tables("stationlocationhistory").Rows(rec).Item("belongsTo") = txtlocStn.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("stationType") = txtStnType.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("geoLocationMethod") = txtMethod.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("geoLocationAccuracy") = txtAccuracy.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("openingDatetime") = txtOpDate.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("closingDatetime") = txtClosDate.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("latitude") = txtLat.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("longitude") = txtLon.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("elevation") = txtElev.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("authority") = txtAuth.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("adminRegion") = txtAdmin.Text
-        ds.Tables("stationlocationhistory").Rows(rec).Item("drainageBasin") = txtDrgBasin.Text
+            G_accuracy = ",geoLocationAccuracy= '" & txtAccuracy.Text & "'"
 
-        da.Update(ds, "stationlocationhistory")
+            'Geographical accuracy field can only be umeric or Null
+            If Not IsNumeric(txtAccuracy.Text) Then G_accuracy = ",geoLocationAccuracy= Null"
 
-        recUpdate.messageBoxRecordedUpdated()
+            sql = "Update stationlocationhistory set " & _
+                   "belongsTo = '" & txtlocStn.Text & "',stationType= '" & txtStnType.Text & "',geoLocationMethod= '" & txtMethod.Text & "'" & G_accuracy & ",openingDatetime='" & txtOpDate.Text & "',closingDatetime='" & txtClosDate.Text & "',latitude = '" & txtLat.Text & "',longitude = '" & txtLon.Text & "',elevation = '" & txtElev.Text & "',authority= '" & txtAuth.Text & "',adminRegion= '" & txtAdmin.Text & "',drainageBasin= '" & txtDrgBasin.Text & "'" & _
+                  " where belongsTo = '" & txtlocStn.Text & "' and openingDatetime = '" & txtOpDate.Text & "';"
+            'MsgBox(sql)
 
-        ClearStationHistoryForm()
-        Exit Sub
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
 
-Err:
+            'ClearStationHistoryForm()
 
-        'MsgBox(Err.Number & " " & Err.Description)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
     Private Sub cmdUpdateQualier_Click(sender As Object, e As EventArgs) Handles cmdUpdateQualier.Click
-        On Error GoTo Err
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim recUpdate As New dataEntryGlobalRoutines
+        Dim qlfr, bdate, edate, stn, ntwk, dateb, datee As String
+        Dim stationTimeZone As Long
 
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
-        ds.Tables("stationqualifier").Rows(rec).Item("belongsTo") = txtlocStn.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("qualifier") = txtqualifier.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("belongsTo") = txtQualifierStation.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("qualifierBeginDate") = txtBDate.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("qualifierEndDate") = txtEndDate.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("stationTimeZone") = txtTZone.Text
-        ds.Tables("stationqualifier").Rows(rec).Item("stationNetworkType") = txtNetwork.Text
+        Try
+            qlfr = "= '" & metadfrm.qlfr & "'"
+            bdate = "= '" & metadfrm.bdate & "'"
+            edate = "= '" & metadfrm.edate & "'"
+            stn = "= '" & metadfrm.stn & "'"
 
-        da.Update(ds, "stationqualifier")
+            ' Check for NULLs from the previous record
+            If Len(metadfrm.qlfr) = 0 Then qlfr = "IS NULL"
+            If Len(metadfrm.bdate) = 0 Then bdate = "IS NULL"
+            If Len(metadfrm.edate) = 0 Then edate = "IS NULL"
+            If Len(metadfrm.stn) = 0 Then stn = "IS NULL"
 
-        recUpdate.messageBoxRecordedUpdated()
+            ' Format for NULLs in the new values
+            If Len(txtBDate.Text) = 0 Then
+                dateb = "NULL"
+            Else
+                dateb = "'" & txtBDate.Text & "'"
+            End If
 
-        ClearStationQualifierForm()
-        Exit Sub
+            If Len(txtEndDate.Text) = 0 Then
+                datee = "NULL"
+            Else
+                datee = "'" & txtEndDate.Text & "'"
+            End If
 
-Err:
-        'MsgBox(Err.Number & " " & Err.Description)
+            ntwk = txtNetwork.Text
+            stationTimeZone = Val(txtTZone.Text)
+
+            sql = "UPDATE `stationqualifier` SET `belongsTo`='" & txtQualifierStation.Text & "',`qualifier`='" & txtqualifier.Text & "',`qualifierBeginDate`= " & dateb & " , `qualifierEndDate`= " & datee & " , `stationTimeZone`='" & stationTimeZone & "', `stationNetworkType`='" & ntwk & "' WHERE  `qualifier`" & qlfr & " AND `qualifierBeginDate` " & bdate & " AND `qualifierEndDate` " & edate & " AND `belongsTo`" & stn & ";"
+
+            'MsgBox(sql)
+
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+
+            'ClearStationHistoryForm()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
     Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdUpdateScheduleClass.Click
 
-        On Error GoTo Err
-
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
+        Try
 
-        ds.Tables("obsscheduleclass").Rows(rec).Item("scheduleClass") = txtClass.Text
-        ds.Tables("obsscheduleclass").Rows(rec).Item("refersTo") = txtClassStation.Text
-        ds.Tables("obsscheduleclass").Rows(rec).Item("description") = txtClassDescription.Text
+            ds.Tables("obsscheduleclass").Rows(rec).Item("scheduleClass") = txtClass.Text
+            ds.Tables("obsscheduleclass").Rows(rec).Item("refersTo") = txtClassStation.Text
+            ds.Tables("obsscheduleclass").Rows(rec).Item("description") = txtClassDescription.Text
 
-        da.Update(ds, "obsscheduleclass")
-        recUpdate.messageBoxRecordedUpdated()
-        ClearFormScheduleClass()
+            da.Update(ds, "obsscheduleclass")
+            recUpdate.messageBoxRecordedUpdated()
+            'ClearFormScheduleClass()
 
-        Exit Sub
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
-Err:
-        'MsgBox(Err.Number & " " & Err.Description)
     End Sub
 
     Private Sub cmdUpdateFeature_Click(sender As Object, e As EventArgs) Handles cmdUpdateFeature.Click
-        On Error GoTo Err
 
-        Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-        Dim recUpdate As New dataEntryGlobalRoutines
+        'Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+        'Dim recUpdate As New dataEntryGlobalRoutines
+        Dim img As String
 
-        'If txtId.Text = "" Then
-        '    MsgBox("No record Selected")
-        '    Exit Sub
-        'End If
+        Try
 
-        ds.Tables("physicalfeature").Rows(rec).Item("associatedWith") = txtFeatureStation.Text
-        ds.Tables("physicalfeature").Rows(rec).Item("beginDate") = txtFeatureBdate.Text
-        ds.Tables("physicalfeature").Rows(rec).Item("endDate") = txtFeatureEdate.Text
-        ds.Tables("physicalfeature").Rows(rec).Item("image") = txtfeaturepic.Image
-        ds.Tables("physicalfeature").Rows(rec).Item("description") = txtFeatureDescription.Text
-        ds.Tables("physicalfeature").Rows(rec).Item("classifiedInto") = txtFeatureClass.Text
+            'ds.Tables("physicalfeature").Rows(rec).Item("associatedWith") = txtFeatureStation.Text
+            'ds.Tables("physicalfeature").Rows(rec).Item("beginDate") = txtFeaturedBdate.Text
+            'ds.Tables("physicalfeature").Rows(rec).Item("endDate") = txtFeaturedEdate.Text
+            'ds.Tables("physicalfeature").Rows(rec).Item("image") = txtfeaturepic.Image
+            'ds.Tables("physicalfeature").Rows(rec).Item("description") = txtFeatureDescription.Text
+            'ds.Tables("physicalfeature").Rows(rec).Item("classifiedInto") = txtFeatureClass.Text
 
-        da.Update(ds, "physicalfeature")
-        recUpdate.messageBoxRecordedUpdated()
-        ClearPhysicalFeatureForm()
+            'da.Update(ds, "physicalfeature")
+            'recUpdate.messageBoxRecordedUpdated()
+            'ClearPhysicalFeatureForm()
 
-        Exit Sub
-Err:
-        'MsgBox(Err.Number & " " & Err.Description)
+            Dim stn, bdat, bdate, edate, ftr, cls As String
+
+            stn = "= '" & metadfrm.pstn & "'"
+            bdat = "= '" & metadfrm.pbdate & "'"
+            ftr = "= '" & metadfrm.pfeature & "'"
+            cls = "= '" & metadfrm.pclass & "'"
+
+            ' Check for NULLs from the previous record
+            If Len(metadfrm.pstn) = 0 Then stn = "IS NULL"
+            If Len(metadfrm.pbdate) = 0 Then bdat = "IS NULL"
+            If Len(metadfrm.pfeature) = 0 Then ftr = "IS NULL"
+            If Len(metadfrm.pclass) = 0 Then cls = "IS NULL"
+
+            ' Format for NULLs in the new values whose corresponding database fields are in indexed unique key
+            If Len(txtFeatureBdate.Text) = 0 Then
+                bdate = "= NULL"
+            Else
+                bdate = "='" & txtFeatureBdate.Text & "'"
+            End If
+
+            If Len(txtFeatureEdate.Text) = 0 Then
+                edate = "= NULL"
+            Else
+                edate = "='" & txtFeatureEdate.Text & "'"
+            End If
+
+            'sql = "UPDATE `physicalfeature` SET `associatedWith`='8534002' ,`beginDate`='20/01/2018' ,`endDate`= '20/01/2015' ,`image`='climate.jpg' ,`description`='1', `classifiedInto`='1' WHERE  `description`='1' AND `beginDate`='20/01/2018' AND `classifiedInto`='1' AND `associatedWith`='8534002';"
+            img = txtImageFile.Text
+            sql = "UPDATE `physicalfeature` SET `associatedWith`='" & txtFeatureStation.Text & "' ,`beginDate`" & bdate & " ,`endDate`" & edate & ", `image`='" & img & "' ,`description`='" & txtFeatureDescription.Text & "', `classifiedInto`='" & txtFeatureClass.Text & "' WHERE  `description`" & ftr & " AND `beginDate` " & bdat & " AND `classifiedInto` " & cls & " AND `associatedWith`" & stn & ";"
+
+            'MsgBox(sql)
+
+            If Not Update_Rec(sql) Then
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
+            End If
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDeleteInstrument.Click
@@ -1813,9 +1961,15 @@ Err:
     End Sub
 
     Private Sub cmdDeleteHistory_Click(sender As Object, e As EventArgs) Handles cmdDeleteHistory.Click
-        If DeleteRecord("stationlocationhistory", rec) Then
-            SetDataSet("stationlocationhistory")
-            populateStationHistory("stationlocationhistory", 0, Kount)
+        sql = "Delete from stationlocationhistory where belongsTo ='" & txtlocStn.Text & "' and openingDatetime='" & txtOpDate.Text & "';"
+
+        If Not Update_Rec(sql) Then
+            MsgBox("Delete Failed")
+        Else
+            MsgBox("Record Deleted")
+            ' Refresh records
+            cmdLast3.PerformClick()
+            cmdfirst3.PerformClick()
         End If
 
     End Sub
@@ -1921,7 +2075,118 @@ Err:
         txtEndate.Text = Endate.Text
     End Sub
 
-    Private Sub grpStationElement_Enter(sender As Object, e As EventArgs) Handles grpStationElement.Enter
+
+    Private Sub txtdOpDate_ValueChanged(sender As Object, e As EventArgs) Handles txtdOpDate.ValueChanged
+        txtOpDate.Text = txtdOpDate.Text
+    End Sub
+
+    Private Sub txtdClosDate_ValueChanged(sender As Object, e As EventArgs) Handles txtdClosDate.ValueChanged
+        txtClosDate.Text = txtdClosDate.Text
+    End Sub
+
+    Function Update_Rec(sq As String) As Boolean
+        dbConnectionString = frmLogin.txtusrpwd.Text
+        dbconn.ConnectionString = dbConnectionString
+        dbconn.Open()
+
+        Try
+            Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
+
+            ' Create the Command for executing query and set its properties
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sq, dbconn)
+
+            'Execute query
+            objCmd.ExecuteNonQuery()
+            'MsgBox("Record Successfully Updated")
+
+            dbconn.Close()
+            Update_Rec = True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Update_Rec = False
+            dbconn.Close()
+        End Try
+    End Function
+
+
+    Private Sub txtdBDate_ValueChanged(sender As Object, e As EventArgs) Handles txtdBDate.ValueChanged
+        txtBDate.Text = txtdBDate.Text
+    End Sub
+
+    Private Sub txtdEndDate_ValueChanged(sender As Object, e As EventArgs) Handles txtdEndDate.ValueChanged
+        txtEndDate.Text = txtdEndDate.Text
+    End Sub
+
+    Private Sub txtFeaturedBdate_ValueChanged(sender As Object, e As EventArgs) Handles txtFeaturedBdate.ValueChanged
+        txtFeatureBdate.Text = txtFeaturedBdate.Text
+    End Sub
+
+    Private Sub txtFeaturedEdate_ValueChanged(sender As Object, e As EventArgs) Handles txtFeaturedEdate.ValueChanged
+        txtFeatureEdate.Text = txtFeaturedEdate.Text
+    End Sub
+
+
+    Private Sub txtfeaturepic_Click(sender As Object, e As EventArgs) Handles txtfeaturepic.Click
 
     End Sub
+
+    Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
+        txtfeaturepic.ImageLocation = txtImageFile.Text
+        txtfeaturepic.Refresh()
+    End Sub
+
+    Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
+        Dim img, fl As String
+
+        fl = ""
+        MetadataFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        MetadataFileDialog.ShowDialog()
+        img = MetadataFileDialog.FileName
+
+        For i = 1 To Len(img)
+            If Strings.Mid(img, i, 1) = "\" Then
+                fl = fl & "/"
+            Else
+                fl = fl & Strings.Mid(img, i, 1)
+            End If
+        Next
+
+        'MsgBox(fl)
+        txtImageFile.Text = fl
+        txtImageFile.Refresh()
+
+    End Sub
+
+    Private Sub cmdInstrument_Click(sender As Object, e As EventArgs) Handles cmdInstrument.Click
+        Dim img, fl As String
+
+        fl = ""
+        MetadataFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        MetadataFileDialog.ShowDialog()
+        img = MetadataFileDialog.FileName
+
+        For i = 1 To Len(img)
+            If Strings.Mid(img, i, 1) = "\" Then
+                fl = fl & "/"
+            Else
+                fl = fl & Strings.Mid(img, i, 1)
+            End If
+        Next
+
+        'MsgBox(fl)
+        txtInstrumentPicFile.Text = fl
+        txtInstrumentPicFile.Refresh()
+    End Sub
+
+    Private Sub txtInstrumentPicFile_TextChanged(sender As Object, e As EventArgs) Handles txtInstrumentPicFile.TextChanged
+        picInstrument.ImageLocation = txtInstrumentPicFile.Text
+        picInstrument.Refresh()
+    End Sub
+
+
+End Class
+Class MetadataVariables
+    Public seStn, sebdate, Eecode, Iecode As String 'Variables for Station Element
+    Public qlfr, bdate, edate, stn As String 'Variables for Station Qualifier
+    Public pstn, pbdate, pedate, pfeature, pclass, pfile As String 'Valiables for Physical Feature
 End Class

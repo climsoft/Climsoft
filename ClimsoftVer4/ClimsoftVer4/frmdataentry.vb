@@ -68,7 +68,7 @@ Public Class frmKeyEntry
         ' MsgBox(ListView1.Items.Count)
         'MsgBox((ListView1.Height - 46) / ListView1.Items.Count)
 
-        ListView1.Height = 46 + 23 * (ListView1.Items.Count - 1)
+        ListView1.Height = 60 + 23 * (ListView1.Items.Count - 1)
 
         ' Get and list the database name
         lblDb.Text = Mid(frmLogin.cmbDatabases.Items.Item(0), 1, Len(frmLogin.cmbDatabases.Items.Item(0)) - 1)
@@ -105,18 +105,20 @@ Public Class frmKeyEntry
 
         Select Case frm
             Case "form_synoptic_2_ra1"
-                formSynopRA1.Show()
+                frmNewSynopticRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
-                formDaily2.Show()
+                frmNewFormDaily2.Show()
             Case "form_hourly"
-                formHourly.Show()
+                frmNewHourly.Show()
             Case "form_monthly"
-                formMonthly.Show()
+                frmNewMonthly.Show()
+            'formMonthly.Show()
             Case "form_upperair1"
                 formUpperAir.Show()
             Case "form_hourlywind"
+                frmNewHourlyWind.Show()
                 formHourlyWind.Show()
         End Select
     End Sub
@@ -125,17 +127,6 @@ Public Class frmKeyEntry
         Help.ShowHelp(Me, Application.StartupPath & "\" & HelpProvider1.HelpNamespace, HelpProvider1.GetHelpKeyword(Me))
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs)
-
-    End Sub
-
-    Private Sub ListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
-
-    End Sub
 
 
 

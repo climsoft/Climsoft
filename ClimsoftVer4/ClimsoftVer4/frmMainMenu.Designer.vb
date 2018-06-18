@@ -48,6 +48,7 @@ Partial Class frmMainMenu
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLanguageTranslation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
@@ -72,6 +73,7 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -150,7 +152,7 @@ Partial Class frmMainMenu
         '
         'mnuAdministration
         '
-        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem})
+        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
         Me.mnuAdministration.Tag = "Administration"
@@ -189,6 +191,7 @@ Partial Class frmMainMenu
         Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
         Me.UpdateElementsToolStripMenuItem.Tag = "Update_Element_Limits"
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
+        Me.UpdateElementsToolStripMenuItem.Visible = False
         '
         'ConfigureDatabaseConnectionToolStripMenuItem
         '
@@ -204,7 +207,7 @@ Partial Class frmMainMenu
         '
         'mnuTools
         '
-        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem})
+        Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
         Me.mnuTools.Size = New System.Drawing.Size(53, 23)
         Me.mnuTools.Tag = "Tools"
@@ -216,6 +219,7 @@ Partial Class frmMainMenu
         Me.mnuToolsModifyForms.Size = New System.Drawing.Size(242, 24)
         Me.mnuToolsModifyForms.Tag = "Modify_Forms"
         Me.mnuToolsModifyForms.Text = "Modify Forms"
+        Me.mnuToolsModifyForms.Visible = False
         '
         'SelectLanguageToolStripMenuItem
         '
@@ -261,6 +265,7 @@ Partial Class frmMainMenu
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
         Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.AWSToolStripMenuItem.Text = "AWS"
+        Me.AWSToolStripMenuItem.Visible = False
         '
         'AWSElementsToolStripMenuItem
         '
@@ -273,6 +278,12 @@ Partial Class frmMainMenu
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
         Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
+        '
+        'ConfigurationForTDCFToolStripMenuItem
+        '
+        Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
+        Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
+        Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
         '
         'mnuLanguageTranslation
         '
@@ -595,6 +606,12 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'UpdateObservationsToolStripMenuItem1
+        '
+        Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
+        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -670,4 +687,6 @@ Partial Class frmMainMenu
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConfigurationForTDCFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class
