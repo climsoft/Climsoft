@@ -334,7 +334,7 @@ Public Class ucrHourly
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)

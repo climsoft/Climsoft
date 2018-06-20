@@ -69,6 +69,11 @@ Public Class ucrFormDaily2
                 End If
             Next
 
+            'set values for the units
+            For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
+                kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
+            Next
+
         End If
     End Sub
 
@@ -121,6 +126,11 @@ Public Class ucrFormDaily2
         If TypeOf sender Is ucrTextBox Then
             ucrText = DirectCast(sender, ucrTextBox)
             CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
+        ElseIf TypeOf sender Is ucrDataLinkCombobox Then
+            'TODO. Get the actual sender instead of writing to the all units loop?
+            For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
+                CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+            Next
         End If
     End Sub
 
@@ -173,26 +183,12 @@ Public Class ucrFormDaily2
             End If
         Next
 
-        'validate values of the linked units controls
-        If bValidValues Then
-            For Each key As ucrDataLinkCombobox In dctLinkedUnits.Values
-                If Not key.ValidateValue() Then
-                    bValidValues = False
-                    Exit For
-                End If
-            Next
-        End If
-
         If bValidValues Then
             fd2Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
 
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
-            Next
-
-            For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
             Next
 
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
@@ -212,7 +208,7 @@ Public Class ucrFormDaily2
             MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
         Else
             dctLinkedUnits.Add(strFieldName, ucrComboBox)
-            AddHandler ucrComboBox.evtValueChanged, AddressOf LinkedControls_evtValueChanged
+            AddHandler ucrComboBox.evtValueChanged, AddressOf InnerControlValueChanged
             'add the field
             If Not lstFields.Contains(strFieldName) Then
                 lstFields.Add(strFieldName)
@@ -429,31 +425,20 @@ Public Class ucrFormDaily2
     ''' <summary>
     ''' Sets the key controls
     ''' </summary>
+    ''' <param name="ucrNewStation"></param>
+    ''' <param name="ucrNewElement"></param>
     ''' <param name="ucrNewYear"></param>
     ''' <param name="ucrNewMonth"></param>
     ''' <param name="ucrNewHour"></param>
-    ''' <param name="ucrNewStation"></param>
-    ''' <param name="ucrNewElement"></param>
-    ''' <param name="ucrNewNavigation"></param>
-    ''' <param name="ucrNewVisibilityUnits"></param>
-    ''' <param name="ucrNewCloudheightUnits"></param>
-    ''' <param name="ucrNewPrecipUnits"></param>
-    ''' <param name="ucrNewTempUnits"></param>
+    ''' <param name="ucrNewNavigation"></param> 
     ''' 
-    Public Sub SetKeyControls(ucrNewStation As ucrStationSelector, ucrNewElement As ucrElementSelector, ucrNewYear As ucrYearSelector, ucrNewMonth As ucrMonth, ucrNewHour As ucrHour, ucrNewVisibilityUnits As ucrDataLinkCombobox, ucrNewCloudheightUnits As ucrDataLinkCombobox, ucrNewPrecipUnits As ucrDataLinkCombobox, ucrNewTempUnits As ucrDataLinkCombobox, ucrNewNavigation As ucrNavigation)
+    Public Sub SetKeyControls(ucrNewStation As ucrStationSelector, ucrNewElement As ucrElementSelector, ucrNewYear As ucrYearSelector, ucrNewMonth As ucrMonth, ucrNewHour As ucrHour, ucrNewNavigation As ucrNavigation)
         ucrLinkedStation = ucrNewStation
         ucrLinkedElement = ucrNewElement
         ucrLinkedYear = ucrNewYear
         ucrLinkedMonth = ucrNewMonth
         ucrLinkedHour = ucrNewHour
         ucrLinkedNavigation = ucrNewNavigation
-
-        'TODO. Should this be passed in here. We arleady hava a collection for the below commented controls
-        'ucrLinkedVisibilityUnits = ucrNewVisibilityUnits
-        'ucrLinkedCloudheightUnits = ucrNewCloudheightUnits
-        'ucrLinkedPrecipUnits = ucrNewPrecipUnits
-        'ucrLinkedTempUnits = ucrNewTempUnits
-
 
         AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)

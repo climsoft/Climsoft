@@ -28,6 +28,8 @@ Public Class ucrSynopticRA1
     'Stores default Geopotential standard pressure level
     Private iStandardPressureLevel As Integer
 
+    Public bAutoFillValues As Boolean = True
+
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctrVFP As ucrValueFlagPeriod
 
@@ -377,6 +379,10 @@ Public Class ucrSynopticRA1
 
     Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
         Try
+            If Not bAutoFillValues Then
+                Exit Sub
+            End If
+
             If Val(ucrVFPDryBulbTemp.GetElementValue) < Val(ucrVFPWetBulbTemp.GetElementValue) Then
                 ucrVFPWetBulbTemp.ucrValue.SetBackColor(Color.Cyan)
                 ucrVFPDryBulbTemp.ucrValue.SetBackColor(Color.Cyan)
@@ -415,6 +421,10 @@ Public Class ucrSynopticRA1
     End Sub
 
     Private Sub UcrVFPDewPointTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.Leave
+        If Not bAutoFillValues Then
+            Exit Sub
+        End If
+
         Dim dryBulb, dewPoint As Decimal
         'Apply element scale factor to drybulb and wetbulb before calling the function to calculate relative humidty
         dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
