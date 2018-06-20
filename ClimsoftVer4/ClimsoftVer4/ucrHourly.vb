@@ -58,6 +58,7 @@ Public Class ucrHourly
                     fhRecord = New form_hourly
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day
@@ -249,7 +250,7 @@ Public Class ucrHourly
                 If ctr.Enabled Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.SetElementValue(bNewValue)
-                    If Not ucrVFP.IsValuesValid() Then
+                    If Not ucrVFP.ValidateValue() Then
                         Exit Sub
                     End If
                 End If
@@ -312,7 +313,7 @@ Public Class ucrHourly
     Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid Then
+                If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
                     ctr.Focus()
                     Return False
                 End If
@@ -333,7 +334,7 @@ Public Class ucrHourly
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Cyan)
+                ucrInputTotal.SetBackColor(Color.Red)
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)

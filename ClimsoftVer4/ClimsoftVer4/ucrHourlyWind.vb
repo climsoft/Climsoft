@@ -60,6 +60,7 @@ Public Class ucrHourlyWind
                     fhourlyWindRecord = New form_hourlywind
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day
@@ -332,7 +333,7 @@ Public Class ucrHourlyWind
     Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                If Not DirectCast(ctr, ucrDirectionSpeedFlag).IsValuesValid Then
+                If Not DirectCast(ctr, ucrDirectionSpeedFlag).ValidateValue Then
                     ctr.Focus()
                     Return False
                 End If

@@ -189,7 +189,7 @@ Public Class ucrValueFlagPeriod
     ''' checks if the values of all the controls are valid.
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
     End Function
 

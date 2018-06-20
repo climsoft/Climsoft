@@ -14,11 +14,11 @@
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         ucrSynopticRA1.SetKeyControls(ucrStationSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHour, ucrNavigation)
+        ucrSynopticRA1.bAutoFillValues = True 'TODO Should come from the checkbox
 
         ucrNavigation.PopulateControl()
-
         SaveEnable()
-        SetControlsKeyDownListners()
+        SetControlsKeyDownListeners()
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -57,7 +57,6 @@
             'then go ahead and save to database
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrSynopticRA1.SaveRecord()
-                ucrNavigation.ResetControls()
                 ucrNavigation.GoToNewRecord()
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -96,7 +95,6 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
     End Sub
@@ -161,7 +159,7 @@
     ''' <summary>
     ''' sets key down listeners for the form controls
     ''' </summary>
-    Private Sub SetControlsKeyDownListners()
+    Private Sub SetControlsKeyDownListeners()
         Dim synopticControl As ucrSynopticRA1
 
         For Each formCtr As Control In Me.Controls
@@ -194,7 +192,7 @@
             'do validations to determine whether to go to next control
             If TypeOf sender Is ucrValueFlagPeriod Then
                 Dim ucrVFP As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
-                If ucrVFP.ValidateText(ucrVFP.ucrValue.GetValue()) Then
+                If ucrVFP.ValidateText(ucrVFP.GetElementValue()) Then
                     bGoToNextControl = True
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
