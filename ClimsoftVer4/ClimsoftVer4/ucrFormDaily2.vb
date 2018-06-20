@@ -315,7 +315,7 @@ Public Class ucrFormDaily2
                 If Not bValueCorrect Then
                     MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     ucrInputTotal.SetBackColor(Color.Red)
-                    ucrInputTotal.GetFocus()
+                    'ucrInputTotal.GetFocus()
                 End If
             End If
         Else

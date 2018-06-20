@@ -243,8 +243,8 @@ Public Class ucrValueFlagPeriod
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 ElseIf ValidateText(ucrValue.GetValue) Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf ucrValue.GetValue = "M"
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    'ElseIf ucrValue.GetValue = "M"
+                    '    RaiseEvent evtGoToNextVFPControl(Me, e)
                 Else
                     DoQCForValue()
                 End If
@@ -298,13 +298,14 @@ Public Class ucrValueFlagPeriod
                 ucrValue.bSuppressChangedEvents = bSuppressChangedEvents
             Else
                 'if the value is just an M, then interpret it as a user's intention to put missing value
-                If ucrValue.GetValue = "M" Then
-                    ucrFlag.SetValue("M")
-                    ucrValue.SetValue("")
-                Else
-                    'remove the flag
-                    ucrFlag.SetValue("")
-                End If
+                'If ucrValue.GetValue = "M" Then
+                '    ucrFlag.SetValue("M")
+                '    ucrValue.SetValue("")
+                'Else
+                '    'remove the flag
+                '    ucrFlag.SetValue("")
+                'End If
+                ucrFlag.SetValue("")
             End If
 
             'validate value loudly  
@@ -333,9 +334,9 @@ Public Class ucrValueFlagPeriod
                 strValue = Strings.Left(strValue, Strings.Len(strValue) - 1)
             Else
                 'if the value is just an M, ignore it and interpret it as a user's intention to put missing value
-                If strValue = "M" Then
-                    strValue = ""
-                End If
+                'If strValue = "M" Then
+                '    strValue = ""
+                'End If
             End If
 
             'check if the result is a valid value 
