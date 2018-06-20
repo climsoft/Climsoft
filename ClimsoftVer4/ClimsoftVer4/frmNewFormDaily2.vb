@@ -17,24 +17,29 @@ Public Class frmNewFormDaily2
         chkEnableSequencer.Checked = True
 
         'Sets values for the units combobox
-        ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
-        ucrVisibilityUnits.SetDisplayAndValueMember("visUnits")
+        ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
+        ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
+        ucrTempUnits.bValidate = False
 
         ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"metres", "feet"})
         ucrCloudheightUnits.SetDisplayAndValueMember("cloudHeightUnits")
+        ucrCloudheightUnits.bValidate = False
 
         ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
         ucrPrecipUnits.SetDisplayAndValueMember("precipUnits")
+        ucrPrecipUnits.bValidate = False
 
-        ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
-        ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
+        ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
+        ucrVisibilityUnits.SetDisplayAndValueMember("visUnits")
+        ucrVisibilityUnits.bValidate = False
 
-        ucrFormDaily.SetKeyControls(ucrNewStation:=ucrStationSelector, ucrNewElement:=ucrElementSelector, ucrNewYear:=ucrYearSelector, ucrNewMonth:=ucrMonth, ucrNewHour:=ucrHour, ucrNewVisibilityUnits:=ucrVisibilityUnits, ucrNewCloudheightUnits:=ucrCloudheightUnits, ucrNewPrecipUnits:=ucrPrecipUnits, ucrNewTempUnits:=ucrTempUnits, ucrNewNavigation:=ucrDaiy2Navigation)
-
+        'add the units link  
         ucrFormDaily.AddUnitslink("visUnits", ucrVisibilityUnits)
         ucrFormDaily.AddUnitslink("cloudHeightUnits", ucrCloudheightUnits)
         ucrFormDaily.AddUnitslink("precipUnits", ucrPrecipUnits)
         ucrFormDaily.AddUnitslink("temperatureUnits", ucrTempUnits)
+
+        ucrFormDaily.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrHour, ucrNewNavigation:=ucrDaiy2Navigation)
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
@@ -66,7 +71,7 @@ Public Class frmNewFormDaily2
         'Else
         '    txtSequencer.Text = "seq_month_day"
         'End If
-        ucrFormDaily.ucrValueFlagPeriod1.Focus()
+        ucrFormDaily.Focus()
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -78,7 +83,6 @@ Public Class frmNewFormDaily2
             'Confirm if you want to continue and save data from key-entry form to database table
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrFormDaily.SaveRecord()
-                ucrDaiy2Navigation.ResetControls()
                 ucrDaiy2Navigation.GoToNewRecord()
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -190,7 +194,7 @@ Public Class frmNewFormDaily2
         End If
 
         If Not ucrYearSelector.ValidateValue Then
-            MessageBox.Show("Invalid Hour", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Invalid Year", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return False
         End If
 
@@ -222,7 +226,7 @@ Public Class frmNewFormDaily2
 
     End Function
 
-    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown, ucrElementSelector.evtKeyDown
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrStationSelector.evtKeyDown, ucrElementSelector.evtKeyDown, ucrYearSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrBaseDataLink Then
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
@@ -231,6 +235,18 @@ Public Class frmNewFormDaily2
                 'this handles the noise on  return key down
                 e.SuppressKeyPress = True
             End If
+        End If
+    End Sub
+
+    Private Sub UnitsControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrTempUnits.evtKeyDown, ucrPrecipUnits.evtKeyDown, ucrCloudheightUnits.evtKeyDown, ucrVisibilityUnits.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If sender Is ucrVisibilityUnits Then
+                ucrFormDaily.Focus()
+            Else
+                Me.SelectNextControl(sender, True, True, True, True)
+            End If
+            'this handles the noise on  return key down
+            e.SuppressKeyPress = True
         End If
     End Sub
 

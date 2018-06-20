@@ -1,13 +1,13 @@
 ﻿Public Class ucrStationSelector
     Private strStationsTableName As String = "stations"
     Private strStationName As String = "stationName"
-    Private strStationID As String = "stationId"
+    Private strStationId As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strStationID
+            cboValues.ValueMember = strStationId
             'TODO 
             'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then
@@ -23,8 +23,7 @@
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
-            Dim strCol As String
-            strCol = cboValues.ValueMember
+            Dim strCol As String = cboValues.ValueMember
             For Each rTemp As DataRow In dtbRecords.Rows
                 If rTemp.Item(strCol).ToString = cboValues.Text Then
                     bValid = True
@@ -42,7 +41,7 @@
     End Sub
 
     Public Sub SetViewTypeAsIDs()
-        SetDisplayMember(strStationID)
+        SetDisplayMember(strStationId)
     End Sub
 
     Public Sub SetViewTypeAsIDsAndStations()
@@ -50,7 +49,7 @@
     End Sub
 
     Public Sub SortByID()
-        SortBy(strStationID)
+        SortBy(strStationId)
         cmsStationSortByID.Checked = True
         cmsStationSortyByName.Checked = False
     End Sub
@@ -66,14 +65,27 @@
         If bFirstLoad Then
             'SortByStationName()
             dct = New Dictionary(Of String, List(Of String))
-            dct.Add(strStationID, New List(Of String)({strStationID}))
+            dct.Add(strStationId, New List(Of String)({strStationId}))
             dct.Add(strStationName, New List(Of String)({strStationName}))
-            dct.Add(strIDsAndStations, New List(Of String)({strStationID, strStationName}))
+            dct.Add(strIDsAndStations, New List(Of String)({strStationId, strStationName}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
             SetComboBoxSelectorProperties()
             bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
+        If Not cboValues.DisplayMember = strStationId Then
+            If IsNumeric(cboValues.Text) Then
+                If ValidateValue() Then
+                    Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
+                    bSuppressChangedEvents = True
+                    SetValue(cboValues.Text)
+                    bSuppressChangedEvents = bChangedEvents
+                End If
+            End If
         End If
     End Sub
 

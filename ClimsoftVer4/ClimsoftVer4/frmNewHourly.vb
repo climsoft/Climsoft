@@ -65,7 +65,6 @@
             'Confirm if you want to continue and save data from key-entry form to database table
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourly.SaveRecord()
-                ucrHourlyNavigation.ResetControls()
                 ucrHourlyNavigation.GoToNewRecord()
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -108,7 +107,6 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrHourlyNavigation.ResetControls()
         ucrHourlyNavigation.MoveFirst()
         SaveEnable()
     End Sub

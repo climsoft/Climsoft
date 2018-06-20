@@ -42,13 +42,24 @@
     ''' </summary>
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
-        If iMaxRows = 0 Then
+
+        'TODO. Correct way?
+        If iCurrRow = -1 Then
+            txtRecNum.Text = "New Record"
+            'disable navigation buttons
+            EnableNavigationButtons(False)
+        ElseIf iMaxRows = 0 Then
             txtRecNum.Text = "No Records"
+            'disable navigation buttons
+            EnableNavigationButtons(False)
         ElseIf iCurrRow >= 0 AndAlso iCurrRow < iMaxRows Then
             txtRecNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
+            'enable navigation buttons
+            EnableNavigationButtons(True)
         Else
             txtRecNum.Text = "New Record"
-            SetControlsForNewRecord()
+            'disable navigation buttons
+            EnableNavigationButtons(False)
         End If
     End Sub
 
@@ -200,23 +211,15 @@
             bFirstLoad = False
         End If
     End Sub
+
     ''' <summary>
-    ''' Disables the buttons on navigation while on a new record
+    ''' Enables or disables Navigation buttons 
     ''' </summary>
-    Public Sub SetControlsForNewRecord()
-        btnMoveFirst.Enabled = False
-        btnMoveLast.Enabled = False
-        btnMoveNext.Enabled = False
-        btnMovePrevious.Enabled = False
-    End Sub
-    ''' <summary>
-    ''' Enables Navigation buttons 
-    ''' </summary>
-    Public Sub ResetControls()
-        btnMoveFirst.Enabled = True
-        btnMoveLast.Enabled = True
-        btnMoveNext.Enabled = True
-        btnMovePrevious.Enabled = True
+    Private Sub EnableNavigationButtons(bEnableState As Boolean)
+        btnMoveFirst.Enabled = bEnableState
+        btnMoveLast.Enabled = bEnableState
+        btnMoveNext.Enabled = bEnableState
+        btnMovePrevious.Enabled = bEnableState
     End Sub
 
     Public Sub GoToNewRecord()

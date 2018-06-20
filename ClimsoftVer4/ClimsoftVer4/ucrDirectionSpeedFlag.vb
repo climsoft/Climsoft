@@ -157,7 +157,7 @@ Public Class ucrDirectionSpeedFlag
     ''' checks if the already Quality Control processed values are valid or not for all the controls
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
     End Function
 
