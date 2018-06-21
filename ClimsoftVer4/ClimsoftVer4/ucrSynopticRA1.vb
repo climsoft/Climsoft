@@ -92,7 +92,7 @@ Public Class ucrSynopticRA1
             'Check if Gmin is required and change properties accordingly
             SetGminRequired(IsGminRequired())
 
-            If Not bUpdating Then
+            If Not bUpdating AndAlso bAutoFillValues Then
                 SetDefaultStandardPressureLevel()
             End If
         End If

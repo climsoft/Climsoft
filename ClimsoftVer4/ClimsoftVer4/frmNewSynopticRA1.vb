@@ -14,7 +14,7 @@
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         ucrSynopticRA1.SetKeyControls(ucrStationSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHour, ucrNavigation)
-        ucrSynopticRA1.bAutoFillValues = True 'TODO Should come from the checkbox
+        ucrSynopticRA1.bAutoFillValues = chkAutoFillValues.Checked
 
         ucrNavigation.PopulateControl()
         SaveEnable()
@@ -211,6 +211,10 @@
         End If
     End Sub
 
+    Private Sub chkAutoFillValues_Click(sender As Object, e As EventArgs) Handles chkAutoFillValues.Click
+        ucrSynopticRA1.bAutoFillValues = chkAutoFillValues.Checked
+    End Sub
+
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         Try
             'Open form for displaying data transfer progress
@@ -292,7 +296,6 @@
         End Try
         conn.Close()
     End Sub
-
 
 
 End Class
