@@ -54,7 +54,7 @@ Partial Class frmNewHourlyWind
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(216, 7)
+        lblYear.Location = New System.Drawing.Point(270, 7)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 216
@@ -63,7 +63,7 @@ Partial Class frmNewHourlyWind
         'lblStationSelector
         '
         Me.lblStationSelector.AutoSize = True
-        Me.lblStationSelector.Location = New System.Drawing.Point(13, 7)
+        Me.lblStationSelector.Location = New System.Drawing.Point(67, 7)
         Me.lblStationSelector.Name = "lblStationSelector"
         Me.lblStationSelector.Size = New System.Drawing.Size(43, 13)
         Me.lblStationSelector.TabIndex = 220
@@ -72,7 +72,7 @@ Partial Class frmNewHourlyWind
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(422, 7)
+        Me.lblDay.Location = New System.Drawing.Point(476, 7)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 218
@@ -81,7 +81,7 @@ Partial Class frmNewHourlyWind
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(304, 7)
+        Me.lblMonth.Location = New System.Drawing.Point(358, 7)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 217
@@ -174,7 +174,7 @@ Partial Class frmNewHourlyWind
         'txtSpeedDigits
         '
         Me.txtSpeedDigits.Enabled = False
-        Me.txtSpeedDigits.Location = New System.Drawing.Point(503, 52)
+        Me.txtSpeedDigits.Location = New System.Drawing.Point(557, 52)
         Me.txtSpeedDigits.Name = "txtSpeedDigits"
         Me.txtSpeedDigits.Size = New System.Drawing.Size(29, 20)
         Me.txtSpeedDigits.TabIndex = 17
@@ -183,7 +183,7 @@ Partial Class frmNewHourlyWind
         'txtDirectionDigits
         '
         Me.txtDirectionDigits.Enabled = False
-        Me.txtDirectionDigits.Location = New System.Drawing.Point(330, 51)
+        Me.txtDirectionDigits.Location = New System.Drawing.Point(384, 51)
         Me.txtDirectionDigits.Name = "txtDirectionDigits"
         Me.txtDirectionDigits.Size = New System.Drawing.Size(29, 20)
         Me.txtDirectionDigits.TabIndex = 16
@@ -193,7 +193,7 @@ Partial Class frmNewHourlyWind
         '
         Me.lblSpeedDigits.AutoSize = True
         Me.lblSpeedDigits.ForeColor = System.Drawing.Color.Blue
-        Me.lblSpeedDigits.Location = New System.Drawing.Point(377, 54)
+        Me.lblSpeedDigits.Location = New System.Drawing.Point(431, 54)
         Me.lblSpeedDigits.Name = "lblSpeedDigits"
         Me.lblSpeedDigits.Size = New System.Drawing.Size(121, 13)
         Me.lblSpeedDigits.TabIndex = 673
@@ -203,7 +203,7 @@ Partial Class frmNewHourlyWind
         '
         Me.lblDirectionDigits.AutoSize = True
         Me.lblDirectionDigits.ForeColor = System.Drawing.Color.Blue
-        Me.lblDirectionDigits.Location = New System.Drawing.Point(195, 54)
+        Me.lblDirectionDigits.Location = New System.Drawing.Point(249, 54)
         Me.lblDirectionDigits.Name = "lblDirectionDigits"
         Me.lblDirectionDigits.Size = New System.Drawing.Size(132, 13)
         Me.lblDirectionDigits.TabIndex = 672
@@ -212,7 +212,7 @@ Partial Class frmNewHourlyWind
         'btnHourSelection
         '
         Me.btnHourSelection.ForeColor = System.Drawing.Color.Blue
-        Me.btnHourSelection.Location = New System.Drawing.Point(12, 49)
+        Me.btnHourSelection.Location = New System.Drawing.Point(66, 49)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
         Me.btnHourSelection.TabIndex = 15
@@ -238,15 +238,15 @@ Partial Class frmNewHourlyWind
         '
         'ucrHourlyWind
         '
-        Me.ucrHourlyWind.Location = New System.Drawing.Point(4, 76)
+        Me.ucrHourlyWind.Location = New System.Drawing.Point(24, 76)
         Me.ucrHourlyWind.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHourlyWind.Name = "ucrHourlyWind"
-        Me.ucrHourlyWind.Size = New System.Drawing.Size(642, 389)
+        Me.ucrHourlyWind.Size = New System.Drawing.Size(603, 389)
         Me.ucrHourlyWind.TabIndex = 4
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(117, 475)
+        Me.ucrNavigation.Location = New System.Drawing.Point(157, 475)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
@@ -254,7 +254,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrDay
         '
-        Me.ucrDay.Location = New System.Drawing.Point(419, 22)
+        Me.ucrDay.Location = New System.Drawing.Point(473, 22)
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
@@ -262,7 +262,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(301, 22)
+        Me.ucrMonth.Location = New System.Drawing.Point(355, 22)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
@@ -270,7 +270,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(213, 22)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(267, 22)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
@@ -278,7 +278,7 @@ Partial Class frmNewHourlyWind
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(10, 22)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(64, 22)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)

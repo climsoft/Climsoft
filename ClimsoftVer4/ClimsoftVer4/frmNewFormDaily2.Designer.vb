@@ -64,7 +64,7 @@ Partial Class frmNewFormDaily2
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(23, 20)
+        Me.lblStation.Location = New System.Drawing.Point(25, 20)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class frmNewFormDaily2
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(272, 20)
+        Me.lblElement.Location = New System.Drawing.Point(274, 20)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(48, 13)
         Me.lblElement.TabIndex = 1
@@ -82,7 +82,7 @@ Partial Class frmNewFormDaily2
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(68, 55)
+        Me.lblYear.Location = New System.Drawing.Point(70, 55)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 5
@@ -91,7 +91,7 @@ Partial Class frmNewFormDaily2
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(152, 57)
+        Me.lblMonth.Location = New System.Drawing.Point(154, 57)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 5
@@ -100,7 +100,7 @@ Partial Class frmNewFormDaily2
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(275, 58)
+        Me.lblHour.Location = New System.Drawing.Point(277, 58)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 5
@@ -109,7 +109,7 @@ Partial Class frmNewFormDaily2
         'cmdAssignSameValue
         '
         Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.cmdAssignSameValue.Location = New System.Drawing.Point(362, 71)
+        Me.cmdAssignSameValue.Location = New System.Drawing.Point(364, 71)
         Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
         Me.cmdAssignSameValue.Size = New System.Drawing.Size(169, 23)
         Me.cmdAssignSameValue.TabIndex = 16
@@ -120,7 +120,7 @@ Partial Class frmNewFormDaily2
         '
         Me.lblValue.AutoSize = True
         Me.lblValue.ForeColor = System.Drawing.Color.Blue
-        Me.lblValue.Location = New System.Drawing.Point(535, 73)
+        Me.lblValue.Location = New System.Drawing.Point(537, 73)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(40, 13)
         Me.lblValue.TabIndex = 10
@@ -136,7 +136,7 @@ Partial Class frmNewFormDaily2
         Me.grpUnits.Controls.Add(Me.ucrCloudheightUnits)
         Me.grpUnits.Controls.Add(Me.ucrPrecipUnits)
         Me.grpUnits.Controls.Add(Me.ucrTempUnits)
-        Me.grpUnits.Location = New System.Drawing.Point(68, 106)
+        Me.grpUnits.Location = New System.Drawing.Point(70, 106)
         Me.grpUnits.Name = "grpUnits"
         Me.grpUnits.Size = New System.Drawing.Size(567, 54)
         Me.grpUnits.TabIndex = 19
@@ -300,7 +300,7 @@ Partial Class frmNewFormDaily2
         Me.chkEnableSequencer.Checked = True
         Me.chkEnableSequencer.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkEnableSequencer.ForeColor = System.Drawing.Color.Red
-        Me.chkEnableSequencer.Location = New System.Drawing.Point(531, 20)
+        Me.chkEnableSequencer.Location = New System.Drawing.Point(533, 20)
         Me.chkEnableSequencer.Name = "chkEnableSequencer"
         Me.chkEnableSequencer.Size = New System.Drawing.Size(155, 17)
         Me.chkEnableSequencer.TabIndex = 18
@@ -309,7 +309,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrInputValue
         '
-        Me.ucrInputValue.Location = New System.Drawing.Point(577, 71)
+        Me.ucrInputValue.Location = New System.Drawing.Point(579, 71)
         Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputValue.Name = "ucrInputValue"
         Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
@@ -318,7 +318,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(277, 74)
+        Me.ucrHour.Location = New System.Drawing.Point(279, 74)
         Me.ucrHour.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(65, 21)
@@ -326,7 +326,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(155, 73)
+        Me.ucrMonth.Location = New System.Drawing.Point(157, 73)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
@@ -334,7 +334,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(68, 74)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(70, 74)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(59, 21)
@@ -342,14 +342,14 @@ Partial Class frmNewFormDaily2
         '
         'ucrFormDaily
         '
-        Me.ucrFormDaily.Location = New System.Drawing.Point(15, 160)
+        Me.ucrFormDaily.Location = New System.Drawing.Point(43, 160)
         Me.ucrFormDaily.Name = "ucrFormDaily"
         Me.ucrFormDaily.Size = New System.Drawing.Size(619, 353)
         Me.ucrFormDaily.TabIndex = 5
         '
         'ucrElementSelector
         '
-        Me.ucrElementSelector.Location = New System.Drawing.Point(322, 17)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(324, 17)
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
@@ -357,7 +357,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(68, 17)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(70, 17)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(175, 24)
@@ -365,7 +365,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrDaiy2Navigation
         '
-        Me.ucrDaiy2Navigation.Location = New System.Drawing.Point(105, 523)
+        Me.ucrDaiy2Navigation.Location = New System.Drawing.Point(133, 523)
         Me.ucrDaiy2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDaiy2Navigation.Name = "ucrDaiy2Navigation"
         Me.ucrDaiy2Navigation.Size = New System.Drawing.Size(336, 25)

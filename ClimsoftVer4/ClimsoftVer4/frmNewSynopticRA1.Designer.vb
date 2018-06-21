@@ -46,6 +46,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.chkAutoFillValues = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -222,7 +223,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrSynopticRA1
         '
-        Me.ucrSynopticRA1.Location = New System.Drawing.Point(10, 44)
+        Me.ucrSynopticRA1.Location = New System.Drawing.Point(40, 44)
         Me.ucrSynopticRA1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
         Me.ucrSynopticRA1.Size = New System.Drawing.Size(820, 477)
@@ -260,11 +261,25 @@ Partial Class frmNewSynopticRA1
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
+        'chkAutoFillValues
+        '
+        Me.chkAutoFillValues.AutoSize = True
+        Me.chkAutoFillValues.Checked = True
+        Me.chkAutoFillValues.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAutoFillValues.ForeColor = System.Drawing.Color.Red
+        Me.chkAutoFillValues.Location = New System.Drawing.Point(799, 17)
+        Me.chkAutoFillValues.Name = "chkAutoFillValues"
+        Me.chkAutoFillValues.Size = New System.Drawing.Size(98, 17)
+        Me.chkAutoFillValues.TabIndex = 682
+        Me.chkAutoFillValues.Text = "Auto Fill Values"
+        Me.chkAutoFillValues.UseVisualStyleBackColor = True
+        '
         'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(842, 641)
+        Me.ClientSize = New System.Drawing.Size(900, 641)
+        Me.Controls.Add(Me.chkAutoFillValues)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrNavigation)
         Me.Controls.Add(Me.btnTDCF)
@@ -320,4 +335,5 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents btnClose As Button
     Friend WithEvents ucrNavigation As ucrNavigation
     Friend WithEvents txtSequencer As TextBox
+    Friend WithEvents chkAutoFillValues As CheckBox
 End Class
