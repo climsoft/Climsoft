@@ -579,7 +579,7 @@ Partial Class ucrHourly
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(343, 364)
+        Me.lblTotal.Location = New System.Drawing.Point(367, 342)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(31, 13)
         Me.lblTotal.TabIndex = 56
