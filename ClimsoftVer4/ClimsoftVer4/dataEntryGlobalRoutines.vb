@@ -420,4 +420,120 @@ Public Class dataEntryGlobalRoutines
             Valid_Elm = False
         End Try
     End Function
+
+    'Public Sub E_Value(con As MySql.Data.MySqlClient.MySqlConnection, st1 As String, cod As Integer, yy As Integer)
+    '    MsgBox(st1)
+
+    'End Sub
+
+    Public Function Entered_Value(con As MySql.Data.MySqlClient.MySqlConnection, stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, ByRef obs As String) As Boolean
+        Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim s As New DataSet
+        Dim dttime, sql As String
+
+        Entered_Value = True
+        dttime = yy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+
+        sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
+        Try
+            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con)
+            ' Set to unlimited timeout period
+            d.SelectCommand.CommandTimeout = 0
+            d.Fill(s, "obsv_rec")
+
+            If s.Tables("obsv_rec").Rows.Count = 0 Then
+                Entered_Value = False
+            Else
+                obs = s.Tables("obsv_rec").Rows(0).Item("obsValue")
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Entered_Value = False
+        End Try
+    End Function
+
+    Function Db_Update_Conflicts(stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, obs As String) As Boolean
+        Dim con As New MySql.Data.MySqlClient.MySqlConnection
+        Dim constr As String
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        constr = frmLogin.txtusrpwd.Text
+        con.ConnectionString = constr
+        con.Open()
+
+        Dim dttime, sql, flg As String
+        dttime = yy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+
+        ' Compute Fag value
+        If Len(obs) = 0 Then
+            flg = "M"
+        Else
+            flg = ""
+        End If
+        sql = "update observationinitial set obsValue= '" & obs & "', flag ='" & flg & "', mark ='1' where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
+
+        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
+        qry.CommandTimeout = 0
+        Try
+            'Execute query
+            qry.ExecuteNonQuery()
+            Db_Update_Conflicts = True
+        Catch ex As Exception
+            MsgBox(ex.Message) '& ": Update Failure!")
+            Db_Update_Conflicts = False
+            con.Close()
+        End Try
+        con.Close()
+    End Function
+
+    Function Entry_Verification(con As MySql.Data.MySqlClient.MySqlConnection, frm As Object, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String) As Boolean
+        Dim obsv1, cpVal, c1 As String
+        Dim conflict As Boolean
+
+        Entry_Verification = False
+        Try
+            With frm
+                If Not Entered_Value(con, stnid, elmcode, yy, mm, dd, hh, obsv1) Then
+                    MsgBox("Can't Compare. Data not previously entered")
+                    Exit Function
+                Else
+
+                    If .ActiveControl.Text <> obsv1 Then ' Conflicting values encountered
+                        MsgBox("Conflicting Values")
+                        .ActiveControl.BackColor = Color.Yellow
+                        cpVal = .ActiveControl.Text
+                        conflict = True
+                        .ActiveControl.Text = ""
+                        Do While conflict = True
+                            c1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
+                            If c1 <> cpVal Then
+                                cpVal = c1
+                                conflict = True
+                                MsgBox("Re Entry Conflict! Try Again")
+                            Else
+                                .ActiveControl.Text = c1
+                                conflict = False
+                                ' Update database with the verified value
+                                If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
+                                    If Not Db_Update_Conflicts(stnid, elmcode, yy, mm, dd, hh, c1) Then
+                                        MsgBox("Update Failure")
+                                    End If
+                                Else
+                                    MsgBox("Update ancelled by operator")
+                                    .ActiveControl.Text = ""
+                                End If
+                                .ActiveControl.BackColor = Color.White
+                            End If
+                        Loop
+                    End If
+                End If
+
+            End With
+            Entry_Verification = True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Entry_Verification = False
+        End Try
+    End Function
 End Class

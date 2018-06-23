@@ -1139,6 +1139,7 @@ Err:
         BUFR_Subsets_Data = ""
 
         'Get full path for the Subsets Output file file and create the file
+        Refresh_Folder(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\")
         fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
@@ -1311,7 +1312,6 @@ Err:
 
             Next i
         End With
-
 
         ' Encode the and compose the BUFR Bulletins
         FileClose(30)
@@ -1562,6 +1562,7 @@ Err:
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
             FileClose(1)
             local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            'Refresh_Folder(local_folder)
             Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_aws.txt"
@@ -1671,6 +1672,11 @@ Err:
                     FileOpen(100, txtinputfile, OpenMode.Output)
                     For Each fl In aryFl
                         If InStr(fl.Name, flprefix) > 0 Then
+                            'If IO.File.Exists(local_folder & "\" & fl.Name) Then
+                            '    'MsgBox(local_folder & "\" & fl.Name)
+                            '    File.Delete(local_folder & "\" & fl.Name)
+                            'End If
+
                             FileOpen(200, local_folder & "\" & fl.Name, OpenMode.Input)
                             Do While EOF(200) = False
                                 dat = LineInput(200)
@@ -1710,12 +1716,25 @@ Err:
             'Log_Errors(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
 
         Catch ex As Exception
+            FileClose(1)
+            FileClose(3)
+            FileClose(100)
+            FileClose(200)
             Log_Errors(ex.Message & " at FTP_Call")
             FTP_Call = False
-            FileClose(1)
         End Try
     End Function
-
+    Sub Refresh_Folder(flder As String)
+        Dim fd As New DirectoryInfo(flder)
+        Dim aryFl As FileInfo() = fd.GetFiles("*.*")
+        Dim fl As FileInfo
+        'MsgBox(flder)
+        If aryFl.Count > 0 Then
+            For Each fl In aryFl
+                fl.Delete()
+            Next
+        End If
+    End Sub
     Function Get_ftp_details(ftpmethod As String, aws_ftp As String, ByRef flder As String, ByRef ftpmode As String, ByRef usr As String, ByRef pwd As String) As Boolean
 
         Dim sql As String

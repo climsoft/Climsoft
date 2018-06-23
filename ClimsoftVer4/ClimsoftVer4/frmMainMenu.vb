@@ -292,4 +292,8 @@ Public Class frmMainMenu
     Private Sub UpdateObservationsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles UpdateObservationsToolStripMenuItem1.Click
         frmModifyObservations.Show()
     End Sub
+
+    Private Sub OpeartionsMonitoringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpeartionsMonitoringToolStripMenuItem.Click
+        frmMonitoring.Show()
+    End Sub
 End Class

@@ -125,7 +125,7 @@ Public Class formDaily2
     Private Sub formDaily2_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim objKeyPress As New dataEntryGlobalRoutines
         Dim obsVal As String, obsFlag As String, ctrl As Control, flagtextBoxSuffix As String, flagIndexDiff As Integer
-
+        'Dim conflict As Boolean
         ' Dim obsValColIndex As Integer, flagColIndex As Integer
 
         'Initialize string variables
@@ -138,10 +138,25 @@ Public Class formDaily2
             'If {ENTER} key is pressed
             If e.KeyCode = Keys.Enter Then
 
+                ' Check for conflicts if Double key entry mode is set
+                If chkRepeatEntry.Checked And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+
+                    Dim dd, hh As String
+                    dd = Strings.Mid(Me.ActiveControl.Name, 8, 2)
+                    hh = cboHour.Text
+                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, cboElement.SelectedValue, txtYear.Text, cboMonth.Text, dd, hh) Then
+                        MsgBox("Can't derify data")
+                    End If
+                End If
+
                 If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
                     'Check for an observation flag in the texbox for observation value.
                     ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
+
+
 
                     If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
                         'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
@@ -152,7 +167,10 @@ Public Class formDaily2
                         obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
 
                         Me.ActiveControl.Text = obsVal
+
+
                     End If
+
                     'Now assign obsFlag to correct texbox on the form
                     For Each ctrl In Me.Controls
                         'Loop through all controls on form
@@ -194,7 +212,11 @@ Public Class formDaily2
                     End If
 
                     'Get value for qcTotlRequired
-                    totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                        totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                    Else
+                        totalRequired = 0
+                    End If
 
                     'Check lower limit
                     If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
@@ -217,7 +239,6 @@ Public Class formDaily2
                     objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
                     'Check valid month
                     objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
-
                 ElseIf Me.ActiveControl.Name = "cboHour" Then
                     'Check for numeric
                     objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
@@ -256,7 +277,6 @@ Public Class formDaily2
                     My.Computer.Keyboard.SendKeys("{TAB}")
                 End If
             End If
-
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1456,7 +1476,7 @@ Public Class formDaily2
         obsVal = ""
         obsFlag = ""
         dataForm = "form_daily2"
-
+        'Try
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
@@ -1464,56 +1484,64 @@ Public Class formDaily2
             frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 35
-                stnId = ds.Tables("form_daily2").Rows(n).Item("stationId")
-                elemCode = ds.Tables("form_daily2").Rows(n).Item("elementId")
-                yyyy = ds.Tables("form_daily2").Rows(n).Item("yyyy")
-                mm = ds.Tables("form_daily2").Rows(n).Item("mm")
-                temperatureUnits = ds.Tables("form_daily2").Rows(n).Item("temperatureUnits")
-                precipUnits = ds.Tables("form_daily2").Rows(n).Item("precipUnits")
-                visUnits = ds.Tables("form_daily2").Rows(n).Item("visUnits")
-                cloudHeightUnits = ds.Tables("form_daily2").Rows(n).Item("cloudHeightUnits")
+                Try
+                    stnId = ds.Tables("form_daily2").Rows(n).Item("stationId")
+                    elemCode = ds.Tables("form_daily2").Rows(n).Item("elementId")
+                    yyyy = ds.Tables("form_daily2").Rows(n).Item("yyyy")
+                    mm = ds.Tables("form_daily2").Rows(n).Item("mm")
 
-                'dd = ds.Tables("form_daily2").Rows(n).Item(3)
-                dd = m - 4
-                hh = ds.Tables("form_daily2").Rows(n).Item("hh")
-                capturedBy = ds.Tables("form_daily2").Rows(n).Item("signature")
-                If Val(mm) < 10 Then mm = "0" & mm
-                If Val(dd) < 10 Then dd = "0" & dd
-                If Val(hh) < 10 Then hh = "0" & hh
+                    temperatureUnits = ds.Tables("form_daily2").Rows(n).Item("temperatureUnits")
+                    precipUnits = ds.Tables("form_daily2").Rows(n).Item("precipUnits")
+                    visUnits = ds.Tables("form_daily2").Rows(n).Item("visUnits")
+                    cloudHeightUnits = ds.Tables("form_daily2").Rows(n).Item("cloudHeightUnits")
 
-                obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+                    'dd = ds.Tables("form_daily2").Rows(n).Item(3)
+                    dd = m - 4
+                    hh = ds.Tables("form_daily2").Rows(n).Item("hh")
+                    capturedBy = ds.Tables("form_daily2").Rows(n).Item("signature")
+                    If Val(mm) < 10 Then mm = "0" & mm
+                    If Val(dd) < 10 Then dd = "0" & dd
+                    If Val(hh) < 10 Then hh = "0" & hh
 
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m)) Then obsVal = ds.Tables("form_daily2").Rows(n).Item(m)
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 31)) Then obsFlag = ds.Tables("form_daily2").Rows(n).Item(m + 31)
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 62)) Then obsPeriod = Val(ds.Tables("form_daily2").Rows(n).Item(m + 62))
-               
-                'Generate SQL string for inserting data into observationinitial table
-                If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits) " & _
-                        "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
-                        & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "','" & temperatureUnits & "','" & precipUnits & "','" & cloudHeightUnits & "','" & visUnits & "')"
+                    obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
 
-                    ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                    ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                    ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m)) Then obsVal = ds.Tables("form_daily2").Rows(n).Item(m)
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 31)) Then obsFlag = ds.Tables("form_daily2").Rows(n).Item(m + 31)
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 62)) Then obsPeriod = Val(ds.Tables("form_daily2").Rows(n).Item(m + 62))
 
-                    ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    'Generate SQL string for inserting data into observationinitial table
+                    If Strings.Len(obsVal) > 0 Then
+                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits) " & _
+                            "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
+                            & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "','" & temperatureUnits & "','" & precipUnits & "','" & cloudHeightUnits & "','" & visUnits & "')"
 
-                    Try
+                        ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                        ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                        ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+                        ' Create the Command for executing query and set its properties
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                        'Try
                         'Execute query
                         objCmd.ExecuteNonQuery()
                         'Catch ex As MySql.Data.MySqlClient.MySqlException
                         '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                    Catch ex As Exception
-                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        MsgBox(ex.Message)
-                    End Try
-                End If
-                'Move to next observation value in current record of the dataset
+                    End If
+                Catch ex As Exception
+                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                    If ex.HResult = -2147467262 Then Continue For ' When NULL values are encountered
+                    MsgBox(ex.HResult & " " & ex.Message)
+
+                End Try
+                'End If
+                    'Move to next observation value in current record of the dataset
             Next m
             'Move to next record in dataset
         Next n
+        'Catch ex1 As Exception
+        '    MsgBox(ex1.HResult & " " & ex1.Message)
+        'End Try
         conn.Close()
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
@@ -1762,4 +1790,5 @@ Public Class formDaily2
             End If
         End Try
     End Sub
+
 End Class
