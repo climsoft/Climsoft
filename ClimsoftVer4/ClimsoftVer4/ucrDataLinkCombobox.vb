@@ -46,21 +46,26 @@
         Dim strCol As String
         'MyBase.SetValue(objNewValue)
         strCol = cboValues.ValueMember
-        For Each rTemp As DataRow In dtbRecords.Rows
-            'Calling ToString to prevent invalid casting
-            If rTemp.Item(strCol).ToString = objNewValue.ToString Then
-                cboValues.SelectedValue = objNewValue
-                Exit Sub
-            End If
-        Next
-        cboValues.Text = objNewValue
+        If String.IsNullOrEmpty(objNewValue) Then
+            cboValues.Text = ""
+        Else
+            For Each rTemp As DataRow In dtbRecords.Rows
+                'Calling ToString to prevent invalid casting
+                If rTemp.Item(strCol).ToString = objNewValue.ToString Then
+                    'set the text using the display column
+                    cboValues.Text = rTemp.Item(cboValues.DisplayMember)
+                    'cboValues.SelectedValue = objNewValue
+                    Exit Sub
+                End If
+            Next
+            cboValues.Text = objNewValue
+        End If
+
+        'OnevtValueChanged(Me, e)
     End Sub
 
     ''' <summary>
-    ''' If the text in the textbox portion does not match any of the items in the dropdown then GetValue will always return cboValue.Text
-    ''' regardless of strFieldName
-    ''' If the text matches an item then the value from strFieldName for the selected item will be returned.
-    ''' When strFieldName is not specified cboValue.SelectedValue will be returned.
+    ''' Gets the set or selected value of the combobox. if strFieldName is not empty the value of the passed field will be returned
     ''' </summary>
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
@@ -68,11 +73,13 @@
         Dim strCol As String
         strCol = cboValues.DisplayMember
         For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp(strCol).ToString = cboValues.Text Then
+            If rTemp.Item(strCol).ToString = cboValues.Text Then
                 If strFieldName = "" Then
-                    Return cboValues.SelectedValue
+                    'Return cboValues.SelectedValue
+                    'get the value from the value column
+                    Return rTemp.Item(cboValues.ValueMember)
                 Else
-                    Return rTemp(strFieldName)
+                    Return rTemp.Item(strFieldName)
                 End If
             End If
         Next
@@ -81,8 +88,7 @@
 
     Public Overrides Function ValidateValue() As Boolean
         Dim bValid As Boolean = False
-        Dim strCol As String
-        strCol = cboValues.DisplayMember
+        Dim strCol As String = cboValues.DisplayMember
         For Each rTemp As DataRow In dtbRecords.Rows
             If rTemp.Item(strCol).ToString = cboValues.Text Then
                 bValid = True
@@ -166,7 +172,6 @@
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        'SetValue(cboValues.Text)
         'check if value is valid
         If bValidate Then
             ValidateValue()

@@ -46,6 +46,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.chkAutoFillValues = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -100,7 +101,7 @@ Partial Class frmNewSynopticRA1
         Me.btnTDCF.Location = New System.Drawing.Point(541, 567)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
-        Me.btnTDCF.TabIndex = 679
+        Me.btnTDCF.TabIndex = 12
         Me.btnTDCF.Text = "TDCF"
         Me.btnTDCF.UseVisualStyleBackColor = True
         '
@@ -109,7 +110,7 @@ Partial Class frmNewSynopticRA1
         Me.btnView.Location = New System.Drawing.Point(465, 567)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(64, 23)
-        Me.btnView.TabIndex = 678
+        Me.btnView.TabIndex = 11
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -120,7 +121,7 @@ Partial Class frmNewSynopticRA1
         Me.btnUpload.Location = New System.Drawing.Point(682, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 677
+        Me.btnUpload.TabIndex = 15
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
@@ -138,7 +139,7 @@ Partial Class frmNewSynopticRA1
         Me.btnHelp.Location = New System.Drawing.Point(693, 567)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
-        Me.btnHelp.TabIndex = 669
+        Me.btnHelp.TabIndex = 14
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -147,7 +148,7 @@ Partial Class frmNewSynopticRA1
         Me.btnClear.Location = New System.Drawing.Point(389, 567)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
-        Me.btnClear.TabIndex = 667
+        Me.btnClear.TabIndex = 10
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -156,7 +157,7 @@ Partial Class frmNewSynopticRA1
         Me.btnSave.Location = New System.Drawing.Point(161, 567)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(64, 23)
-        Me.btnSave.TabIndex = 663
+        Me.btnSave.TabIndex = 6
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -165,7 +166,7 @@ Partial Class frmNewSynopticRA1
         Me.btnDelete.Location = New System.Drawing.Point(313, 567)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(64, 23)
-        Me.btnDelete.TabIndex = 666
+        Me.btnDelete.TabIndex = 9
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -174,7 +175,7 @@ Partial Class frmNewSynopticRA1
         Me.btnAddNew.Location = New System.Drawing.Point(85, 567)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
-        Me.btnAddNew.TabIndex = 665
+        Me.btnAddNew.TabIndex = 8
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -183,7 +184,7 @@ Partial Class frmNewSynopticRA1
         Me.btnUpdate.Location = New System.Drawing.Point(237, 567)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
-        Me.btnUpdate.TabIndex = 664
+        Me.btnUpdate.TabIndex = 7
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -192,7 +193,7 @@ Partial Class frmNewSynopticRA1
         Me.btnClose.Location = New System.Drawing.Point(617, 567)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
-        Me.btnClose.TabIndex = 668
+        Me.btnClose.TabIndex = 13
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -210,7 +211,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigation.TabIndex = 680
+        Me.ucrNavigation.TabIndex = 16
         '
         'ucrDay
         '
@@ -222,7 +223,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrSynopticRA1
         '
-        Me.ucrSynopticRA1.Location = New System.Drawing.Point(10, 44)
+        Me.ucrSynopticRA1.Location = New System.Drawing.Point(40, 44)
         Me.ucrSynopticRA1.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSynopticRA1.Name = "ucrSynopticRA1"
         Me.ucrSynopticRA1.Size = New System.Drawing.Size(820, 477)
@@ -260,11 +261,25 @@ Partial Class frmNewSynopticRA1
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
+        'chkAutoFillValues
+        '
+        Me.chkAutoFillValues.AutoSize = True
+        Me.chkAutoFillValues.Checked = True
+        Me.chkAutoFillValues.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkAutoFillValues.ForeColor = System.Drawing.Color.Red
+        Me.chkAutoFillValues.Location = New System.Drawing.Point(799, 17)
+        Me.chkAutoFillValues.Name = "chkAutoFillValues"
+        Me.chkAutoFillValues.Size = New System.Drawing.Size(98, 17)
+        Me.chkAutoFillValues.TabIndex = 682
+        Me.chkAutoFillValues.Text = "Auto Fill Values"
+        Me.chkAutoFillValues.UseVisualStyleBackColor = True
+        '
         'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(842, 641)
+        Me.ClientSize = New System.Drawing.Size(900, 641)
+        Me.Controls.Add(Me.chkAutoFillValues)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrNavigation)
         Me.Controls.Add(Me.btnTDCF)
@@ -320,4 +335,5 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents btnClose As Button
     Friend WithEvents ucrNavigation As ucrNavigation
     Friend WithEvents txtSequencer As TextBox
+    Friend WithEvents chkAutoFillValues As CheckBox
 End Class

@@ -6,17 +6,19 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this line once button upload is enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         ucrSynopticRA1.SetKeyControls(ucrStationSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHour, ucrNavigation)
+        ucrSynopticRA1.bAutoFillValues = chkAutoFillValues.Checked
 
         ucrNavigation.PopulateControl()
-
         SaveEnable()
-        SetControlsKeyDownListners()
+        SetControlsKeyDownListeners()
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
@@ -55,7 +57,6 @@
             'then go ahead and save to database
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrSynopticRA1.SaveRecord()
-                ucrNavigation.ResetControls()
                 ucrNavigation.GoToNewRecord()
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -94,7 +95,6 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
     End Sub
@@ -159,7 +159,7 @@
     ''' <summary>
     ''' sets key down listeners for the form controls
     ''' </summary>
-    Private Sub SetControlsKeyDownListners()
+    Private Sub SetControlsKeyDownListeners()
         Dim synopticControl As ucrSynopticRA1
 
         For Each formCtr As Control In Me.Controls
@@ -191,7 +191,8 @@
 
             'do validations to determine whether to go to next control
             If TypeOf sender Is ucrValueFlagPeriod Then
-                If DirectCast(sender, ucrValueFlagPeriod).PreValidateValue() Then
+                Dim ucrVFP As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+                If ucrVFP.ValidateText(ucrVFP.GetElementValue()) Then
                     bGoToNextControl = True
                 End If
             ElseIf TypeOf sender Is ucrBaseDataLink Then
@@ -208,6 +209,24 @@
             'to handle the "noise"
             e.SuppressKeyPress = True
         End If
+    End Sub
+
+    Private Sub chkAutoFillValues_Click(sender As Object, e As EventArgs) Handles chkAutoFillValues.Click
+        ucrSynopticRA1.bAutoFillValues = chkAutoFillValues.Checked
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        Try
+            'Open form for displaying data transfer progress
+            frmDataTransferProgress.Show()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+            ucrSynopticRA1.UploadAllRecords()
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Catch ex As Exception
+            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'This is from Samuel's code
@@ -227,10 +246,6 @@
             sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
-    End Sub
-
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'TODO
     End Sub
 
     'TODO. Copied from Samuel's code
@@ -281,7 +296,6 @@
         End Try
         conn.Close()
     End Sub
-
 
 
 End Class

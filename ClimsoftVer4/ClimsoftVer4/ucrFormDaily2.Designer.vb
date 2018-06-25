@@ -100,17 +100,17 @@ Partial Class ucrFormDaily2
         '
         'ucrInputTotal
         '
-        Me.ucrInputTotal.Location = New System.Drawing.Point(557, 330)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(530, 330)
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
-        Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputTotal.Size = New System.Drawing.Size(58, 23)
         Me.ucrInputTotal.TabIndex = 31
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(529, 334)
+        Me.lblTotal.Location = New System.Drawing.Point(527, 312)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(31, 13)
         Me.lblTotal.TabIndex = 50
@@ -119,7 +119,7 @@ Partial Class ucrFormDaily2
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(488, 14)
+        Me.Label15.Location = New System.Drawing.Point(489, 15)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(37, 13)
         Me.Label15.TabIndex = 49
@@ -128,7 +128,7 @@ Partial Class ucrFormDaily2
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(455, 14)
+        Me.Label16.Location = New System.Drawing.Point(455, 15)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(27, 13)
         Me.Label16.TabIndex = 47
@@ -137,7 +137,7 @@ Partial Class ucrFormDaily2
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(396, 14)
+        Me.Label17.Location = New System.Drawing.Point(397, 15)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(34, 13)
         Me.Label17.TabIndex = 46
@@ -146,7 +146,7 @@ Partial Class ucrFormDaily2
         'lblDay31
         '
         Me.lblDay31.AutoSize = True
-        Me.lblDay31.Location = New System.Drawing.Point(367, 334)
+        Me.lblDay31.Location = New System.Drawing.Point(369, 333)
         Me.lblDay31.Name = "lblDay31"
         Me.lblDay31.Size = New System.Drawing.Size(19, 13)
         Me.lblDay31.TabIndex = 45
@@ -155,7 +155,7 @@ Partial Class ucrFormDaily2
         'lblDay30
         '
         Me.lblDay30.AutoSize = True
-        Me.lblDay30.Location = New System.Drawing.Point(367, 304)
+        Me.lblDay30.Location = New System.Drawing.Point(369, 303)
         Me.lblDay30.Name = "lblDay30"
         Me.lblDay30.Size = New System.Drawing.Size(19, 13)
         Me.lblDay30.TabIndex = 45
@@ -164,7 +164,7 @@ Partial Class ucrFormDaily2
         'lblDay29
         '
         Me.lblDay29.AutoSize = True
-        Me.lblDay29.Location = New System.Drawing.Point(367, 274)
+        Me.lblDay29.Location = New System.Drawing.Point(369, 273)
         Me.lblDay29.Name = "lblDay29"
         Me.lblDay29.Size = New System.Drawing.Size(19, 13)
         Me.lblDay29.TabIndex = 44
@@ -173,7 +173,7 @@ Partial Class ucrFormDaily2
         'lblDay28
         '
         Me.lblDay28.AutoSize = True
-        Me.lblDay28.Location = New System.Drawing.Point(367, 244)
+        Me.lblDay28.Location = New System.Drawing.Point(369, 243)
         Me.lblDay28.Name = "lblDay28"
         Me.lblDay28.Size = New System.Drawing.Size(19, 13)
         Me.lblDay28.TabIndex = 43
@@ -182,7 +182,7 @@ Partial Class ucrFormDaily2
         'lblDay27
         '
         Me.lblDay27.AutoSize = True
-        Me.lblDay27.Location = New System.Drawing.Point(367, 214)
+        Me.lblDay27.Location = New System.Drawing.Point(369, 214)
         Me.lblDay27.Name = "lblDay27"
         Me.lblDay27.Size = New System.Drawing.Size(19, 13)
         Me.lblDay27.TabIndex = 42
@@ -191,7 +191,7 @@ Partial Class ucrFormDaily2
         'lblDay26
         '
         Me.lblDay26.AutoSize = True
-        Me.lblDay26.Location = New System.Drawing.Point(367, 184)
+        Me.lblDay26.Location = New System.Drawing.Point(369, 185)
         Me.lblDay26.Name = "lblDay26"
         Me.lblDay26.Size = New System.Drawing.Size(19, 13)
         Me.lblDay26.TabIndex = 41
@@ -200,7 +200,7 @@ Partial Class ucrFormDaily2
         'lblDay25
         '
         Me.lblDay25.AutoSize = True
-        Me.lblDay25.Location = New System.Drawing.Point(367, 154)
+        Me.lblDay25.Location = New System.Drawing.Point(369, 157)
         Me.lblDay25.Name = "lblDay25"
         Me.lblDay25.Size = New System.Drawing.Size(19, 13)
         Me.lblDay25.TabIndex = 40
@@ -209,7 +209,7 @@ Partial Class ucrFormDaily2
         'lblDay24
         '
         Me.lblDay24.AutoSize = True
-        Me.lblDay24.Location = New System.Drawing.Point(367, 124)
+        Me.lblDay24.Location = New System.Drawing.Point(369, 127)
         Me.lblDay24.Name = "lblDay24"
         Me.lblDay24.Size = New System.Drawing.Size(19, 13)
         Me.lblDay24.TabIndex = 39
@@ -218,7 +218,7 @@ Partial Class ucrFormDaily2
         'lblDay23
         '
         Me.lblDay23.AutoSize = True
-        Me.lblDay23.Location = New System.Drawing.Point(367, 94)
+        Me.lblDay23.Location = New System.Drawing.Point(369, 99)
         Me.lblDay23.Name = "lblDay23"
         Me.lblDay23.Size = New System.Drawing.Size(19, 13)
         Me.lblDay23.TabIndex = 48
@@ -227,7 +227,7 @@ Partial Class ucrFormDaily2
         'lblDay22
         '
         Me.lblDay22.AutoSize = True
-        Me.lblDay22.Location = New System.Drawing.Point(367, 64)
+        Me.lblDay22.Location = New System.Drawing.Point(369, 69)
         Me.lblDay22.Name = "lblDay22"
         Me.lblDay22.Size = New System.Drawing.Size(19, 13)
         Me.lblDay22.TabIndex = 38
@@ -236,7 +236,7 @@ Partial Class ucrFormDaily2
         'lblDay21
         '
         Me.lblDay21.AutoSize = True
-        Me.lblDay21.Location = New System.Drawing.Point(367, 34)
+        Me.lblDay21.Location = New System.Drawing.Point(369, 40)
         Me.lblDay21.Name = "lblDay21"
         Me.lblDay21.Size = New System.Drawing.Size(19, 13)
         Me.lblDay21.TabIndex = 37
@@ -253,7 +253,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod31
         '
-        Me.ucrValueFlagPeriod31.Location = New System.Drawing.Point(393, 330)
+        Me.ucrValueFlagPeriod31.Location = New System.Drawing.Point(393, 327)
         Me.ucrValueFlagPeriod31.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod31.Name = "ucrValueFlagPeriod31"
         Me.ucrValueFlagPeriod31.Size = New System.Drawing.Size(127, 23)
@@ -262,7 +262,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod30
         '
-        Me.ucrValueFlagPeriod30.Location = New System.Drawing.Point(393, 300)
+        Me.ucrValueFlagPeriod30.Location = New System.Drawing.Point(393, 297)
         Me.ucrValueFlagPeriod30.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod30.Name = "ucrValueFlagPeriod30"
         Me.ucrValueFlagPeriod30.Size = New System.Drawing.Size(127, 23)
@@ -271,7 +271,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod29
         '
-        Me.ucrValueFlagPeriod29.Location = New System.Drawing.Point(393, 270)
+        Me.ucrValueFlagPeriod29.Location = New System.Drawing.Point(393, 267)
         Me.ucrValueFlagPeriod29.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod29.Name = "ucrValueFlagPeriod29"
         Me.ucrValueFlagPeriod29.Size = New System.Drawing.Size(127, 23)
@@ -280,7 +280,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod28
         '
-        Me.ucrValueFlagPeriod28.Location = New System.Drawing.Point(393, 240)
+        Me.ucrValueFlagPeriod28.Location = New System.Drawing.Point(393, 237)
         Me.ucrValueFlagPeriod28.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod28.Name = "ucrValueFlagPeriod28"
         Me.ucrValueFlagPeriod28.Size = New System.Drawing.Size(127, 23)
@@ -289,7 +289,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod27
         '
-        Me.ucrValueFlagPeriod27.Location = New System.Drawing.Point(393, 210)
+        Me.ucrValueFlagPeriod27.Location = New System.Drawing.Point(393, 208)
         Me.ucrValueFlagPeriod27.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod27.Name = "ucrValueFlagPeriod27"
         Me.ucrValueFlagPeriod27.Size = New System.Drawing.Size(127, 23)
@@ -298,7 +298,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod26
         '
-        Me.ucrValueFlagPeriod26.Location = New System.Drawing.Point(393, 180)
+        Me.ucrValueFlagPeriod26.Location = New System.Drawing.Point(393, 179)
         Me.ucrValueFlagPeriod26.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod26.Name = "ucrValueFlagPeriod26"
         Me.ucrValueFlagPeriod26.Size = New System.Drawing.Size(127, 23)
@@ -316,7 +316,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod24
         '
-        Me.ucrValueFlagPeriod24.Location = New System.Drawing.Point(393, 120)
+        Me.ucrValueFlagPeriod24.Location = New System.Drawing.Point(393, 121)
         Me.ucrValueFlagPeriod24.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod24.Name = "ucrValueFlagPeriod24"
         Me.ucrValueFlagPeriod24.Size = New System.Drawing.Size(127, 23)
@@ -325,7 +325,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod23
         '
-        Me.ucrValueFlagPeriod23.Location = New System.Drawing.Point(393, 90)
+        Me.ucrValueFlagPeriod23.Location = New System.Drawing.Point(393, 92)
         Me.ucrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod23.Name = "ucrValueFlagPeriod23"
         Me.ucrValueFlagPeriod23.Size = New System.Drawing.Size(127, 23)
@@ -334,7 +334,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod22
         '
-        Me.ucrValueFlagPeriod22.Location = New System.Drawing.Point(393, 60)
+        Me.ucrValueFlagPeriod22.Location = New System.Drawing.Point(393, 63)
         Me.ucrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod22.Name = "ucrValueFlagPeriod22"
         Me.ucrValueFlagPeriod22.Size = New System.Drawing.Size(127, 23)
@@ -343,7 +343,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod21
         '
-        Me.ucrValueFlagPeriod21.Location = New System.Drawing.Point(393, 30)
+        Me.ucrValueFlagPeriod21.Location = New System.Drawing.Point(393, 34)
         Me.ucrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod21.Name = "ucrValueFlagPeriod21"
         Me.ucrValueFlagPeriod21.Size = New System.Drawing.Size(127, 23)
@@ -353,7 +353,7 @@ Partial Class ucrFormDaily2
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(306, 15)
+        Me.Label1.Location = New System.Drawing.Point(313, 15)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 25
@@ -362,7 +362,7 @@ Partial Class ucrFormDaily2
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(274, 14)
+        Me.Label2.Location = New System.Drawing.Point(279, 15)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(27, 13)
         Me.Label2.TabIndex = 23
@@ -371,7 +371,7 @@ Partial Class ucrFormDaily2
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(214, 14)
+        Me.Label3.Location = New System.Drawing.Point(221, 15)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(34, 13)
         Me.Label3.TabIndex = 22
@@ -380,7 +380,7 @@ Partial Class ucrFormDaily2
         'lblDay20
         '
         Me.lblDay20.AutoSize = True
-        Me.lblDay20.Location = New System.Drawing.Point(185, 304)
+        Me.lblDay20.Location = New System.Drawing.Point(192, 302)
         Me.lblDay20.Name = "lblDay20"
         Me.lblDay20.Size = New System.Drawing.Size(19, 13)
         Me.lblDay20.TabIndex = 21
@@ -389,7 +389,7 @@ Partial Class ucrFormDaily2
         'lblDay19
         '
         Me.lblDay19.AutoSize = True
-        Me.lblDay19.Location = New System.Drawing.Point(185, 274)
+        Me.lblDay19.Location = New System.Drawing.Point(192, 272)
         Me.lblDay19.Name = "lblDay19"
         Me.lblDay19.Size = New System.Drawing.Size(19, 13)
         Me.lblDay19.TabIndex = 20
@@ -398,7 +398,7 @@ Partial Class ucrFormDaily2
         'lblDay18
         '
         Me.lblDay18.AutoSize = True
-        Me.lblDay18.Location = New System.Drawing.Point(185, 244)
+        Me.lblDay18.Location = New System.Drawing.Point(192, 243)
         Me.lblDay18.Name = "lblDay18"
         Me.lblDay18.Size = New System.Drawing.Size(19, 13)
         Me.lblDay18.TabIndex = 19
@@ -407,7 +407,7 @@ Partial Class ucrFormDaily2
         'lblDay17
         '
         Me.lblDay17.AutoSize = True
-        Me.lblDay17.Location = New System.Drawing.Point(185, 214)
+        Me.lblDay17.Location = New System.Drawing.Point(192, 214)
         Me.lblDay17.Name = "lblDay17"
         Me.lblDay17.Size = New System.Drawing.Size(19, 13)
         Me.lblDay17.TabIndex = 18
@@ -416,7 +416,7 @@ Partial Class ucrFormDaily2
         'lblDay16
         '
         Me.lblDay16.AutoSize = True
-        Me.lblDay16.Location = New System.Drawing.Point(185, 184)
+        Me.lblDay16.Location = New System.Drawing.Point(192, 186)
         Me.lblDay16.Name = "lblDay16"
         Me.lblDay16.Size = New System.Drawing.Size(19, 13)
         Me.lblDay16.TabIndex = 17
@@ -425,7 +425,7 @@ Partial Class ucrFormDaily2
         'lblDay15
         '
         Me.lblDay15.AutoSize = True
-        Me.lblDay15.Location = New System.Drawing.Point(185, 154)
+        Me.lblDay15.Location = New System.Drawing.Point(192, 157)
         Me.lblDay15.Name = "lblDay15"
         Me.lblDay15.Size = New System.Drawing.Size(19, 13)
         Me.lblDay15.TabIndex = 16
@@ -434,7 +434,7 @@ Partial Class ucrFormDaily2
         'lblDay14
         '
         Me.lblDay14.AutoSize = True
-        Me.lblDay14.Location = New System.Drawing.Point(185, 124)
+        Me.lblDay14.Location = New System.Drawing.Point(192, 127)
         Me.lblDay14.Name = "lblDay14"
         Me.lblDay14.Size = New System.Drawing.Size(19, 13)
         Me.lblDay14.TabIndex = 15
@@ -443,7 +443,7 @@ Partial Class ucrFormDaily2
         'lblDay13
         '
         Me.lblDay13.AutoSize = True
-        Me.lblDay13.Location = New System.Drawing.Point(185, 94)
+        Me.lblDay13.Location = New System.Drawing.Point(192, 98)
         Me.lblDay13.Name = "lblDay13"
         Me.lblDay13.Size = New System.Drawing.Size(19, 13)
         Me.lblDay13.TabIndex = 24
@@ -452,7 +452,7 @@ Partial Class ucrFormDaily2
         'lblDay12
         '
         Me.lblDay12.AutoSize = True
-        Me.lblDay12.Location = New System.Drawing.Point(185, 64)
+        Me.lblDay12.Location = New System.Drawing.Point(192, 69)
         Me.lblDay12.Name = "lblDay12"
         Me.lblDay12.Size = New System.Drawing.Size(19, 13)
         Me.lblDay12.TabIndex = 14
@@ -461,7 +461,7 @@ Partial Class ucrFormDaily2
         'lblDay11
         '
         Me.lblDay11.AutoSize = True
-        Me.lblDay11.Location = New System.Drawing.Point(185, 34)
+        Me.lblDay11.Location = New System.Drawing.Point(192, 40)
         Me.lblDay11.Name = "lblDay11"
         Me.lblDay11.Size = New System.Drawing.Size(19, 13)
         Me.lblDay11.TabIndex = 13
@@ -470,7 +470,7 @@ Partial Class ucrFormDaily2
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(185, 14)
+        Me.Label14.Location = New System.Drawing.Point(189, 15)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(26, 13)
         Me.Label14.TabIndex = 12
@@ -478,7 +478,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod11
         '
-        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(211, 300)
+        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(216, 295)
         Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod11.Name = "ucrValueFlagPeriod11"
         Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(127, 23)
@@ -487,7 +487,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod12
         '
-        Me.ucrValueFlagPeriod12.Location = New System.Drawing.Point(211, 270)
+        Me.ucrValueFlagPeriod12.Location = New System.Drawing.Point(216, 266)
         Me.ucrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod12.Name = "ucrValueFlagPeriod12"
         Me.ucrValueFlagPeriod12.Size = New System.Drawing.Size(127, 23)
@@ -496,7 +496,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod13
         '
-        Me.ucrValueFlagPeriod13.Location = New System.Drawing.Point(211, 240)
+        Me.ucrValueFlagPeriod13.Location = New System.Drawing.Point(216, 237)
         Me.ucrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod13.Name = "ucrValueFlagPeriod13"
         Me.ucrValueFlagPeriod13.Size = New System.Drawing.Size(127, 23)
@@ -505,7 +505,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod14
         '
-        Me.ucrValueFlagPeriod14.Location = New System.Drawing.Point(211, 210)
+        Me.ucrValueFlagPeriod14.Location = New System.Drawing.Point(217, 208)
         Me.ucrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod14.Name = "ucrValueFlagPeriod14"
         Me.ucrValueFlagPeriod14.Size = New System.Drawing.Size(127, 23)
@@ -514,7 +514,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod15
         '
-        Me.ucrValueFlagPeriod15.Location = New System.Drawing.Point(211, 180)
+        Me.ucrValueFlagPeriod15.Location = New System.Drawing.Point(216, 179)
         Me.ucrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod15.Name = "ucrValueFlagPeriod15"
         Me.ucrValueFlagPeriod15.Size = New System.Drawing.Size(127, 23)
@@ -523,7 +523,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod16
         '
-        Me.ucrValueFlagPeriod16.Location = New System.Drawing.Point(211, 150)
+        Me.ucrValueFlagPeriod16.Location = New System.Drawing.Point(216, 150)
         Me.ucrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod16.Name = "ucrValueFlagPeriod16"
         Me.ucrValueFlagPeriod16.Size = New System.Drawing.Size(127, 23)
@@ -532,7 +532,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod17
         '
-        Me.ucrValueFlagPeriod17.Location = New System.Drawing.Point(211, 120)
+        Me.ucrValueFlagPeriod17.Location = New System.Drawing.Point(216, 121)
         Me.ucrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod17.Name = "ucrValueFlagPeriod17"
         Me.ucrValueFlagPeriod17.Size = New System.Drawing.Size(127, 23)
@@ -541,7 +541,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod18
         '
-        Me.ucrValueFlagPeriod18.Location = New System.Drawing.Point(211, 90)
+        Me.ucrValueFlagPeriod18.Location = New System.Drawing.Point(216, 92)
         Me.ucrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod18.Name = "ucrValueFlagPeriod18"
         Me.ucrValueFlagPeriod18.Size = New System.Drawing.Size(127, 23)
@@ -550,7 +550,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod19
         '
-        Me.ucrValueFlagPeriod19.Location = New System.Drawing.Point(211, 60)
+        Me.ucrValueFlagPeriod19.Location = New System.Drawing.Point(217, 63)
         Me.ucrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod19.Name = "ucrValueFlagPeriod19"
         Me.ucrValueFlagPeriod19.Size = New System.Drawing.Size(127, 23)
@@ -559,7 +559,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod20
         '
-        Me.ucrValueFlagPeriod20.Location = New System.Drawing.Point(211, 30)
+        Me.ucrValueFlagPeriod20.Location = New System.Drawing.Point(217, 34)
         Me.ucrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod20.Name = "ucrValueFlagPeriod20"
         Me.ucrValueFlagPeriod20.Size = New System.Drawing.Size(127, 23)
@@ -569,7 +569,7 @@ Partial Class ucrFormDaily2
         'lblPeriod
         '
         Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(134, 15)
+        Me.lblPeriod.Location = New System.Drawing.Point(135, 15)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(37, 13)
         Me.lblPeriod.TabIndex = 1
@@ -578,7 +578,7 @@ Partial Class ucrFormDaily2
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(101, 14)
+        Me.lblFlag.Location = New System.Drawing.Point(101, 15)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(27, 13)
         Me.lblFlag.TabIndex = 1
@@ -587,7 +587,7 @@ Partial Class ucrFormDaily2
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(42, 14)
+        Me.lblValue.Location = New System.Drawing.Point(43, 15)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(34, 13)
         Me.lblValue.TabIndex = 1
@@ -596,7 +596,7 @@ Partial Class ucrFormDaily2
         'lblDay10
         '
         Me.lblDay10.AutoSize = True
-        Me.lblDay10.Location = New System.Drawing.Point(13, 304)
+        Me.lblDay10.Location = New System.Drawing.Point(13, 302)
         Me.lblDay10.Name = "lblDay10"
         Me.lblDay10.Size = New System.Drawing.Size(19, 13)
         Me.lblDay10.TabIndex = 1
@@ -605,7 +605,7 @@ Partial Class ucrFormDaily2
         'lblDay9
         '
         Me.lblDay9.AutoSize = True
-        Me.lblDay9.Location = New System.Drawing.Point(13, 274)
+        Me.lblDay9.Location = New System.Drawing.Point(13, 273)
         Me.lblDay9.Name = "lblDay9"
         Me.lblDay9.Size = New System.Drawing.Size(19, 13)
         Me.lblDay9.TabIndex = 1
@@ -623,7 +623,7 @@ Partial Class ucrFormDaily2
         'lblDay7
         '
         Me.lblDay7.AutoSize = True
-        Me.lblDay7.Location = New System.Drawing.Point(13, 214)
+        Me.lblDay7.Location = New System.Drawing.Point(13, 215)
         Me.lblDay7.Name = "lblDay7"
         Me.lblDay7.Size = New System.Drawing.Size(19, 13)
         Me.lblDay7.TabIndex = 1
@@ -632,7 +632,7 @@ Partial Class ucrFormDaily2
         'lblDay6
         '
         Me.lblDay6.AutoSize = True
-        Me.lblDay6.Location = New System.Drawing.Point(13, 184)
+        Me.lblDay6.Location = New System.Drawing.Point(13, 186)
         Me.lblDay6.Name = "lblDay6"
         Me.lblDay6.Size = New System.Drawing.Size(19, 13)
         Me.lblDay6.TabIndex = 1
@@ -641,7 +641,7 @@ Partial Class ucrFormDaily2
         'lblDay5
         '
         Me.lblDay5.AutoSize = True
-        Me.lblDay5.Location = New System.Drawing.Point(13, 154)
+        Me.lblDay5.Location = New System.Drawing.Point(13, 157)
         Me.lblDay5.Name = "lblDay5"
         Me.lblDay5.Size = New System.Drawing.Size(19, 13)
         Me.lblDay5.TabIndex = 1
@@ -650,7 +650,7 @@ Partial Class ucrFormDaily2
         'lblDay4
         '
         Me.lblDay4.AutoSize = True
-        Me.lblDay4.Location = New System.Drawing.Point(13, 124)
+        Me.lblDay4.Location = New System.Drawing.Point(13, 128)
         Me.lblDay4.Name = "lblDay4"
         Me.lblDay4.Size = New System.Drawing.Size(19, 13)
         Me.lblDay4.TabIndex = 1
@@ -659,7 +659,7 @@ Partial Class ucrFormDaily2
         'lblDay3
         '
         Me.lblDay3.AutoSize = True
-        Me.lblDay3.Location = New System.Drawing.Point(13, 94)
+        Me.lblDay3.Location = New System.Drawing.Point(13, 99)
         Me.lblDay3.Name = "lblDay3"
         Me.lblDay3.Size = New System.Drawing.Size(19, 13)
         Me.lblDay3.TabIndex = 1
@@ -668,7 +668,7 @@ Partial Class ucrFormDaily2
         'lblDay2
         '
         Me.lblDay2.AutoSize = True
-        Me.lblDay2.Location = New System.Drawing.Point(13, 64)
+        Me.lblDay2.Location = New System.Drawing.Point(13, 70)
         Me.lblDay2.Name = "lblDay2"
         Me.lblDay2.Size = New System.Drawing.Size(19, 13)
         Me.lblDay2.TabIndex = 1
@@ -677,7 +677,7 @@ Partial Class ucrFormDaily2
         'lblDay1
         '
         Me.lblDay1.AutoSize = True
-        Me.lblDay1.Location = New System.Drawing.Point(13, 34)
+        Me.lblDay1.Location = New System.Drawing.Point(13, 41)
         Me.lblDay1.Name = "lblDay1"
         Me.lblDay1.Size = New System.Drawing.Size(19, 13)
         Me.lblDay1.TabIndex = 1
@@ -694,7 +694,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod10
         '
-        Me.ucrValueFlagPeriod10.Location = New System.Drawing.Point(39, 300)
+        Me.ucrValueFlagPeriod10.Location = New System.Drawing.Point(39, 295)
         Me.ucrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod10.Name = "ucrValueFlagPeriod10"
         Me.ucrValueFlagPeriod10.Size = New System.Drawing.Size(127, 23)
@@ -703,7 +703,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod9
         '
-        Me.ucrValueFlagPeriod9.Location = New System.Drawing.Point(39, 270)
+        Me.ucrValueFlagPeriod9.Location = New System.Drawing.Point(39, 266)
         Me.ucrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod9.Name = "ucrValueFlagPeriod9"
         Me.ucrValueFlagPeriod9.Size = New System.Drawing.Size(127, 23)
@@ -712,7 +712,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod8
         '
-        Me.ucrValueFlagPeriod8.Location = New System.Drawing.Point(39, 240)
+        Me.ucrValueFlagPeriod8.Location = New System.Drawing.Point(39, 237)
         Me.ucrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod8.Name = "ucrValueFlagPeriod8"
         Me.ucrValueFlagPeriod8.Size = New System.Drawing.Size(127, 23)
@@ -721,7 +721,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod7
         '
-        Me.ucrValueFlagPeriod7.Location = New System.Drawing.Point(39, 210)
+        Me.ucrValueFlagPeriod7.Location = New System.Drawing.Point(39, 208)
         Me.ucrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod7.Name = "ucrValueFlagPeriod7"
         Me.ucrValueFlagPeriod7.Size = New System.Drawing.Size(127, 23)
@@ -730,7 +730,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod6
         '
-        Me.ucrValueFlagPeriod6.Location = New System.Drawing.Point(39, 180)
+        Me.ucrValueFlagPeriod6.Location = New System.Drawing.Point(39, 179)
         Me.ucrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod6.Name = "ucrValueFlagPeriod6"
         Me.ucrValueFlagPeriod6.Size = New System.Drawing.Size(127, 23)
@@ -748,7 +748,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod4
         '
-        Me.ucrValueFlagPeriod4.Location = New System.Drawing.Point(39, 120)
+        Me.ucrValueFlagPeriod4.Location = New System.Drawing.Point(39, 121)
         Me.ucrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod4.Name = "ucrValueFlagPeriod4"
         Me.ucrValueFlagPeriod4.Size = New System.Drawing.Size(127, 23)
@@ -757,7 +757,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod3
         '
-        Me.ucrValueFlagPeriod3.Location = New System.Drawing.Point(39, 90)
+        Me.ucrValueFlagPeriod3.Location = New System.Drawing.Point(39, 92)
         Me.ucrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod3.Name = "ucrValueFlagPeriod3"
         Me.ucrValueFlagPeriod3.Size = New System.Drawing.Size(127, 23)
@@ -766,7 +766,7 @@ Partial Class ucrFormDaily2
         '
         'ucrValueFlagPeriod2
         '
-        Me.ucrValueFlagPeriod2.Location = New System.Drawing.Point(39, 64)
+        Me.ucrValueFlagPeriod2.Location = New System.Drawing.Point(39, 63)
         Me.ucrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod2.Name = "ucrValueFlagPeriod2"
         Me.ucrValueFlagPeriod2.Size = New System.Drawing.Size(127, 23)

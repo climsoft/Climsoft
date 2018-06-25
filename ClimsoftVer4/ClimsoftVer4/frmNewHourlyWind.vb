@@ -8,6 +8,8 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this once btnUpload has beeen enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
@@ -29,7 +31,6 @@
         ucrNavigation.PopulateControl()
 
         SaveEnable()
-        ucrHourlyWind.SetSaveButton(btnSave)
     End Sub
 
     Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
@@ -71,7 +72,6 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-
             If Not ValidateValues() Then
                 Exit Sub
             End If
@@ -79,12 +79,10 @@
             'then go ahead and save to database
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.SaveRecord()
-                ucrNavigation.ResetControls()
                 ucrNavigation.GoToNewRecord()
                 SaveEnable()
                 MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
-
         Catch ex As Exception
             MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -119,9 +117,26 @@
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ucrNavigation.ResetControls()
         ucrNavigation.MoveFirst()
         SaveEnable()
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        Try
+            'Open form for displaying data transfer progress
+            frmDataTransferProgress.Show()
+            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
+            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+            ucrHourlyWind.UploadAllRecords()
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        Catch ex As Exception
+            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'This is from Samuel's code
@@ -141,14 +156,6 @@
             sql = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
         End If
         viewRecords.viewTableRecords(sql)
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
-
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'TODO
     End Sub
 
     Private Sub SaveEnable()
@@ -196,7 +203,7 @@
         End If
 
         'check if values are valid.  
-        If Not ucrHourlyWind.IsValuesValid() Then
+        If Not ucrHourlyWind.ValidateValue() Then
             Return False
         End If
 
@@ -243,9 +250,12 @@
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
-                'this handles the noise on  return key down
+                'this handles the "noise" on enter key down
                 e.SuppressKeyPress = True
             End If
         End If
     End Sub
+
+
+
 End Class

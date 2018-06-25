@@ -189,7 +189,7 @@ Public Class ucrValueFlagPeriod
     ''' checks if the values of all the controls are valid.
     ''' </summary>
     ''' <returns></returns>
-    Public Function IsValuesValid() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
     End Function
 
@@ -227,6 +227,8 @@ Public Class ucrValueFlagPeriod
             ucrValue.SetValidationTypeAsNumeric()
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
+            'ucrFlag being a readonly. This makes its back color to be just like that of readonly when it has a valid value
+            ucrFlag.SetValidColor(SystemColors.Control)
             SetTextBoxSize()
             bFirstLoad = False
         End If
@@ -239,10 +241,10 @@ Public Class ucrValueFlagPeriod
                 If ucrValue.IsEmpty Then
                     ucrFlag.SetValue("M")
                     RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf PreValidateValue() Then
+                ElseIf ValidateText(ucrValue.GetValue) Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf ucrValue.GetValue = "M"
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    'ElseIf ucrValue.GetValue = "M"
+                    '    RaiseEvent evtGoToNextVFPControl(Me, e)
                 Else
                     DoQCForValue()
                 End If
@@ -296,13 +298,14 @@ Public Class ucrValueFlagPeriod
                 ucrValue.bSuppressChangedEvents = bSuppressChangedEvents
             Else
                 'if the value is just an M, then interpret it as a user's intention to put missing value
-                If ucrValue.GetValue = "M" Then
-                    ucrFlag.SetValue("M")
-                    ucrValue.SetValue("")
-                Else
-                    'remove the flag
-                    ucrFlag.SetValue("")
-                End If
+                'If ucrValue.GetValue = "M" Then
+                '    ucrFlag.SetValue("M")
+                '    ucrValue.SetValue("")
+                'Else
+                '    'remove the flag
+                '    ucrFlag.SetValue("")
+                'End If
+                ucrFlag.SetValue("")
             End If
 
             'validate value loudly  
@@ -316,12 +319,12 @@ Public Class ucrValueFlagPeriod
 
     ''' <summary>
     ''' checks if the value input in the ucrValue will be a valid value or not 
-    ''' when Quality Control is applied to the input.
+    ''' when Quality Control is applied to the passed value.
     ''' </summary>
     ''' <returns></returns>
-    Public Function PreValidateValue() As Boolean
+    Public Function ValidateText(strNewValue As String) As Boolean
         Dim bValuesCorrect As Boolean = False
-        Dim strValue As String = ucrValue.GetValue
+        Dim strValue As String = strNewValue
 
         If strValue = "" Then
             bValuesCorrect = True
@@ -331,9 +334,9 @@ Public Class ucrValueFlagPeriod
                 strValue = Strings.Left(strValue, Strings.Len(strValue) - 1)
             Else
                 'if the value is just an M, ignore it and interpret it as a user's intention to put missing value
-                If strValue = "M" Then
-                    strValue = ""
-                End If
+                'If strValue = "M" Then
+                '    strValue = ""
+                'End If
             End If
 
             'check if the result is a valid value 
@@ -346,14 +349,6 @@ Public Class ucrValueFlagPeriod
         ucrValue.SetElementValueSize(New Size(51, 20))
         ucrFlag.SetElementValueSize(New Size(27, 20))
         ucrPeriod.SetElementValueSize(New Size(33, 20))
-    End Sub
-
-    'This is temporary
-    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
-        'ucrFlag should is set as readonly. That changes its back color to the one given below
-        'for consistency we are rienforcing this color everytime a value is changed on this control
-        'to override the white color being set on textbox validation subroutine
-        ucrFlag.SetBackColor(SystemColors.Control)
     End Sub
 
 End Class

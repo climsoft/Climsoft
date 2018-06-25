@@ -28,6 +28,8 @@ Public Class ucrSynopticRA1
     'Stores default Geopotential standard pressure level
     Private iStandardPressureLevel As Integer
 
+    Public bAutoFillValues As Boolean = True
+
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ctrVFP As ucrValueFlagPeriod
 
@@ -36,7 +38,7 @@ Public Class ucrSynopticRA1
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName:=strValueFieldName & ctrVFP.Tag, strFlagFieldName:=strFlagFieldName & ctrVFP.Tag)
+                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
                     lstFields.Add(strValueFieldName & ctrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ctrVFP.Tag)
                     AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
@@ -66,11 +68,13 @@ Public Class ucrSynopticRA1
                     fs2ra1Record = New form_synoptic_2_ra1
                     bUpdating = False
                 Else
+                    clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
                     bUpdating = True
                 End If
                 'enable or disable textboxes based on year month day
                 ValidateDataEntryPermission()
             End If
+
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -88,7 +92,7 @@ Public Class ucrSynopticRA1
             'Check if Gmin is required and change properties accordingly
             SetGminRequired(IsGminRequired())
 
-            If Not bUpdating Then
+            If Not bUpdating AndAlso bAutoFillValues Then
                 SetDefaultStandardPressureLevel()
             End If
         End If
@@ -117,13 +121,26 @@ Public Class ucrSynopticRA1
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        fs2ra1Record = Nothing
-        MyBase.LinkedControls_evtValueChanged()
-
-        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+        Dim bValidValues As Boolean = True
+        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+            If Not key.ValidateValue Then
+                bValidValues = False
+                Exit For
+            End If
         Next
-        ucrLinkedNavigation.UpdateNavigationByKeyControls()
+
+        If bValidValues Then
+            fs2ra1Record = Nothing
+            MyBase.LinkedControls_evtValueChanged()
+            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            Next
+            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+        Else
+            'TODO. DISABLE??
+            'Me.Enabled = False
+        End If
+
     End Sub
 
     Public Sub SaveRecord()
@@ -211,7 +228,7 @@ Public Class ucrSynopticRA1
     Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                If Not DirectCast(ctr, ucrValueFlagPeriod).IsValuesValid() Then
+                If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue() Then
                     ctr.Focus()
                     Return False
                 End If
@@ -362,6 +379,10 @@ Public Class ucrSynopticRA1
 
     Private Sub ucrVFPWetBulbTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPWetBulbTemp.Leave
         Try
+            If Not bAutoFillValues Then
+                Exit Sub
+            End If
+
             If Val(ucrVFPDryBulbTemp.GetElementValue) < Val(ucrVFPWetBulbTemp.GetElementValue) Then
                 ucrVFPWetBulbTemp.ucrValue.SetBackColor(Color.Cyan)
                 ucrVFPDryBulbTemp.ucrValue.SetBackColor(Color.Cyan)
@@ -400,6 +421,10 @@ Public Class ucrSynopticRA1
     End Sub
 
     Private Sub UcrVFPDewPointTemp_Leave(sender As Object, e As EventArgs) Handles ucrVFPDewPointTemp.Leave
+        If Not bAutoFillValues Then
+            Exit Sub
+        End If
+
         Dim dryBulb, dewPoint As Decimal
         'Apply element scale factor to drybulb and wetbulb before calling the function to calculate relative humidty
         dryBulb = Val(ucrVFPDryBulbTemp.GetElementValue) / 10
@@ -522,16 +547,75 @@ Public Class ucrSynopticRA1
             todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
             selectedDate = New Date(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue, ucrLinkedDay.GetValue)
 
-            'if selectedDate is earlier than todayDate enable control
-            If Date.Compare(selectedDate, todayDate) < 0 Then
-                Me.Enabled = True
-            Else
-                'if it is same time (0) or later than (>0) disable control
-                Me.Enabled = False
-            End If
+            'if selectedDate is earlier than todayDate (<0) enable control
+            'if it is same time (0) or later than (>0) disable control
+            Me.Enabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
         Else
             Me.Enabled = False
         End If
     End Sub
 
+    Public Sub UploadAllRecords()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strElementCode As String
+        Dim iElementId As Long
+        Dim lstAllFields As New List(Of String)
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For Each strFieldName As String In lstFields
+                'if its not an observation value field then skip the loop
+                If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                    Continue For
+                End If
+
+                strElementCode = strFieldName.Substring(Me.strValueFieldName.Length)
+                strValueColumn = strFieldName
+                strFlagColumn = lstFields.Find(Function(x As String)
+                                                   Return x.Equals(Me.strFlagFieldName & strElementCode)
+                                               End Function)
+
+                'set the record
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, iElementId) Then
+
+                    rcdObservationInitial = New observationinitial
+                    rcdObservationInitial.recordedFrom = row.Item("stationId")
+                    rcdObservationInitial.describedBy = iElementId
+
+                    Try
+                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
+                    Catch ex As Exception
+                    End Try
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.obsValue = row.Item(strValueColumn)
+                    rcdObservationInitial.flag = row.Item(strFlagColumn)
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = strTableName
+
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+
+                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+
+                End If
+            Next
+        Next
+
+        'save the Observation record
+        clsDataConnection.SaveUpdate()
+
+    End Sub
 End Class

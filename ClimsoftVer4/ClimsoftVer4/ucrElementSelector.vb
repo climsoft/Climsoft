@@ -1,13 +1,13 @@
 ﻿Public Class ucrElementSelector
     Private strElementTableName As String = "obselements"
     Private strElementName As String = "elementName"
-    Private strElementID As String = "elementId"
+    Private strElementId As String = "elementId"
     Private strIDsAndElements As String = "ids_elements"
 
     Public Overrides Sub PopulateControl()
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strElementID
+            cboValues.ValueMember = strElementId
             'TODO 
             'what if there were no records on the first load. 
             'Then there are records later
@@ -19,12 +19,31 @@
         End If
     End Sub
 
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean = False
+        bValid = MyBase.ValidateValue()
+
+        If Not bValid Then
+            Dim strCol As String
+            strCol = cboValues.ValueMember
+            For Each rTemp As DataRow In dtbRecords.Rows
+                If rTemp.Item(strCol).ToString = cboValues.Text Then
+                    bValid = True
+                    Exit For
+                End If
+            Next
+        End If
+
+        SetBackColor(If(bValid, Color.White, Color.Red))
+        Return bValid
+    End Function
+
     Public Sub SetViewTypeAsElements()
         SetDisplayMember(strElementName)
     End Sub
 
     Public Sub SetViewTypeAsIDs()
-        SetDisplayMember(strElementID)
+        SetDisplayMember(strElementId)
     End Sub
 
     Public Sub SetViewTypeAsIDsAndElements()
@@ -32,7 +51,7 @@
     End Sub
 
     Private Sub SortByID()
-        SortBy(strElementID)
+        SortBy(strElementId)
         cmsElementSortByID.Checked = True
         cmsElementSortyByName.Checked = False
     End Sub
@@ -49,13 +68,26 @@
             'SortByStationName()
             SetTableName(strElementTableName)
             dct.Add(strElementName, New List(Of String)({strElementName}))
-            dct.Add(strElementID, New List(Of String)({strElementID}))
-            dct.Add(strIDsAndElements, New List(Of String)({strElementID, strElementName}))
+            dct.Add(strElementId, New List(Of String)({strElementId}))
+            dct.Add(strIDsAndElements, New List(Of String)({strElementId, strElementName}))
             SetFields(dct)
             PopulateControl()
             cboValues.ContextMenuStrip = cmsElement
             SetComboBoxSelectorProperties()
             bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
+        If Not cboValues.DisplayMember = strElementId Then
+            If IsNumeric(cboValues.Text) Then
+                If ValidateValue() Then
+                    Dim bChangedEvents As Boolean = Me.bSuppressChangedEvents
+                    bSuppressChangedEvents = True
+                    SetValue(cboValues.Text)
+                    bSuppressChangedEvents = bChangedEvents
+                End If
+            End If
         End If
     End Sub
 
