@@ -86,6 +86,18 @@
         Return cboValues.Text
     End Function
 
+    Public Sub SelectFirst()
+        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
+            SetValue(dtbRecords.Rows.Item(0).Item(cboValues.ValueMember))
+        End If
+    End Sub
+
+    Public Sub SelectLast()
+        If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
+            SetValue(dtbRecords.Rows.Item(dtbRecords.Rows.Count - 1).Item(cboValues.ValueMember))
+        End If
+    End Sub
+
     Public Overrides Function ValidateValue() As Boolean
         Dim bValid As Boolean = False
         Dim strCol As String = cboValues.DisplayMember

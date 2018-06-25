@@ -70,9 +70,16 @@ Public Class ucrFormDaily2
             Next
 
             'set values for the units
-            For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
-            Next
+            If bUpdating Then
+                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
+                    kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
+                Next
+            Else
+                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
+                    kvpTemp.Value.SelectFirst()
+                Next
+            End If
+
 
         End If
     End Sub
@@ -302,7 +309,7 @@ Public Class ucrFormDaily2
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then
                 MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ucrInputTotal.SetBackColor(Color.Red)
-                ucrInputTotal.GetFocus()
+                'ucrInputTotal.GetFocus()
                 bValueCorrect = False
             Else
                 expectedTotal = Val(ucrInputTotal.GetValue)
