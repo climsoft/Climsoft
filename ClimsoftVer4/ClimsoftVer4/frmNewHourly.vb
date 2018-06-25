@@ -150,44 +150,53 @@
         btnAddNew.Enabled = True
         btnCommit.Enabled = False
         btnClear.Enabled = False
-        If ucrHourlyNavigation.iMaxRows > 0 Then
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+
+        If ucrHourlyNavigation.iMaxRows = 0 Then
+            btnAddNew.Enabled = False
+            btnCommit.Enabled = True
+        ElseIf ucrHourlyNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
-        Else
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
         End If
     End Sub
 
     Private Function ValidateValues() As Boolean
         If Not ucrStationSelector.ValidateValue Then
             MessageBox.Show("Invalid Station", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrStationSelector.Focus()
             Return False
         End If
 
         If Not ucrElementSelector.ValidateValue Then
             MessageBox.Show("Invalid Element", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrElementSelector.Focus()
             Return False
         End If
 
         If Not ucrMonth.ValidateValue Then
             MessageBox.Show("Invalid Month", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrMonth.Focus()
             Return False
         End If
 
         If Not ucrYearSelector.ValidateValue Then
             MessageBox.Show("Invalid Day", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrYearSelector.Focus()
             Return False
         End If
 
         If Not ucrDay.ValidateValue Then
             MessageBox.Show("Invalid Day", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrDay.Focus()
             Return False
         End If
 
         'Check if all values are empty. There should be atleast one observation value
         If ucrHourly.IsValuesEmpty() Then
             MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrHourly.Focus()
             Return False
         End If
 
@@ -198,6 +207,7 @@
 
         'check computed total vs input total
         If Not ucrHourly.checkTotal() Then
+            ucrHourly.ucrInputTotal.Focus()
             Return False
         End If
 
