@@ -778,6 +778,18 @@ Public Class formSynopRA1
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
 
+            ' Check for conflicts if Double key entry mode is set
+            If chkRepeatEntry.Checked And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                btnAddNew.Enabled = True
+                btnCommit.Enabled = False
+
+                Dim elmcode As String
+                elmcode = Strings.Mid(Me.ActiveControl.Name, 12, 3)
+                If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, elmcode, txtYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text) Then
+                    MsgBox("Can't derify data")
+                End If
+            End If
+
             If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
                 'Check for an observation flag in the texbox for observation value.
@@ -1198,13 +1210,16 @@ Public Class formSynopRA1
                 frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & n + 1 & " of " & maxRows
                 frmDataTransferProgress.txtDataTransferProgress1.Refresh()
                 'Loop through all observation fields adding observation records to observationInitial table
+
                 For m = 5 To 53
+
                     stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
                     yyyy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(1)
                     mm = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(2)
                     dd = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(3)
                     hh = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(4)
-                    capturedBy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")) Then capturedBy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")
+
                     If Val(mm) < 10 Then mm = "0" & mm
                     If Val(dd) < 10 Then dd = "0" & dd
                     If Val(hh) < 10 Then hh = "0" & hh
@@ -1219,6 +1234,7 @@ Public Class formSynopRA1
                             elemCode = Val(Strings.Mid(ctl.Name, 12, 3))
                         End If
                     Next ctl
+
                     'Generate SQL string for inserting data into observationinitial table
                     If Strings.Len(obsVal) > 0 Then
                         strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
@@ -1243,6 +1259,7 @@ Public Class formSynopRA1
                         End Try
                     End If
                     'Move to next observation value in current record of the dataset
+
                 Next m
                 'Move to next record in dataset
             Next n
@@ -1416,5 +1433,7 @@ Public Class formSynopRA1
     End Sub
 
 
-    
+    Private Sub chkRepeatEntry_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeatEntry.CheckedChanged
+
+    End Sub
 End Class

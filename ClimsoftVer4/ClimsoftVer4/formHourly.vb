@@ -153,6 +153,19 @@ Public Class formHourly
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
 
+            ' Check for conflicts if Double key entry mode is set
+            If chkRepeatEntry.Checked And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                btnAddNew.Enabled = True
+                btnCommit.Enabled = False
+
+                Dim hh As String
+                hh = Strings.Mid(Me.ActiveControl.Name, 8, 2)
+                If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, cboElement.SelectedValue, txtYear.Text, cboMonth.Text, cboDay.Text, hh) Then
+                    MsgBox("Can't derify data")
+                End If
+            End If
+
+
             If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
                 'Check for an observation flag in the texbox for observation value.

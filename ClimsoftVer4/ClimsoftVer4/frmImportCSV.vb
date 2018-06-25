@@ -166,7 +166,7 @@ Public Class frmImportCSV
                 ' ''   "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
                 ' ''   qcStatus & "," & acquisitionType & ")" & "ON DUPLICATE KEY UPDATE obsValue=" & obsVal 
 
-                If IsDate(obsDate) And Val(obsVal) > 0 Then
+                If IsDate(obsDate) And Val(obsVal) >= 0 Then
                     ' Create the Command for executing query and set its properties
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                     Try

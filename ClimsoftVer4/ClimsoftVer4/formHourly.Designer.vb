@@ -132,6 +132,7 @@ Partial Class formHourly
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -147,7 +148,7 @@ Partial Class formHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(581, 562)
+        Me.btnUpload.Location = New System.Drawing.Point(581, 568)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 381
@@ -157,7 +158,7 @@ Partial Class formHourly
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(177, 572)
+        Me.Label5.Location = New System.Drawing.Point(177, 573)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 380
@@ -1028,11 +1029,22 @@ Partial Class formHourly
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(18, 571)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
+        Me.chkRepeatEntry.TabIndex = 663
+        Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'formHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(681, 615)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label37)
         Me.Controls.Add(Me.txtTotal)
@@ -1259,4 +1271,5 @@ Partial Class formHourly
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
 End Class

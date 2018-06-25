@@ -98,6 +98,12 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formAgro1.Designer.vb">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
     </Compile>
@@ -417,6 +423,12 @@
     <Compile Include="frmModifyObservations.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMonitoring.Designer.vb">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMonitoring.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.Designer.vb" />
     <Compile Include="frmPlotter.vb">
       <SubType>Form</SubType>
@@ -531,6 +543,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formAgro1.resx">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
@@ -855,6 +870,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifyObservations.resx">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonitoring.resx">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>

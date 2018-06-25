@@ -56,7 +56,8 @@
             rw = -1
             ' Select records
             sql = "select recordedFrom as Station, describedBy as Element, year(obsdatetime) as Year, month(obsdatetime) as Month, day(obsdatetime) as Day, right(obsdatetime,8) as Time, obsvalue as Value, obslevel as Level, flag as Flag, period as Period, qcstatus as QcStatus, acquisitiontype as AcquisitionType from " & db & " WHERE " & _
-                "recordedFrom = '" & txtStation.Text & "' and describedBy='" & txtElement.Text & "' and (year(obsdatetime) between " & txtStartYear.Text & " and " & txtEndYear.Text & ") and (month(obsdatetime) between " & txtStartMonth.Text & " and " & txtEndMonth.Text & ") and (day(obsdatetime) between 1 and 31);"
+                  "recordedFrom = '" & txtStation.Text & "' and describedBy='" & txtElement.Text & "' and (year(obsdatetime) between '" & txtStartYear.Text & "' and '" & txtEndYear.Text & "') and (month(obsdatetime) between '" & txtStartMonth.Text & "' and '" & txtEndMonth.Text & "') and (day(obsdatetime) between '" & txtStartDay.Text & "' and '" & txtEndDay.Text & "') and (hour(obsdatetime) between '" & txtStartHour.Text & "' and '" & txtEndHour.Text & "');"
+            'MsgBox(sql)
             das = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbc)
             ' Set to unlimited timeout period
             das.SelectCommand.CommandTimeout = 0
