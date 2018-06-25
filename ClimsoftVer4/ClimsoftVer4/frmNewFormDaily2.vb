@@ -39,7 +39,7 @@ Public Class frmNewFormDaily2
         ucrFormDaily.AddUnitslink("precipUnits", ucrPrecipUnits)
         ucrFormDaily.AddUnitslink("temperatureUnits", ucrTempUnits)
 
-        ucrFormDaily.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrHour, ucrNewNavigation:=ucrDaiy2Navigation)
+        ucrFormDaily.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrHour, ucrDaiy2Navigation)
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
