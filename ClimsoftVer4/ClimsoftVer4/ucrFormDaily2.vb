@@ -311,16 +311,16 @@ Public Class ucrFormDaily2
     Public Overrides Function ValidateValue() As Boolean
         Dim bValidValues As Boolean = True
         Dim ucrVFP As ucrValueFlagPeriod = Nothing
+
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                 If Not ucrVFP.ValidateValue() Then
-                    'ctr.Focus()
                     bValidValues = False
-                    'Return False
                 End If
             End If
         Next
+
         If ucrVFP IsNot Nothing Then
             ucrVFP.Focus()
         End If
