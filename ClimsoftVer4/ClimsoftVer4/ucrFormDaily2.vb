@@ -16,7 +16,7 @@ Public Class ucrFormDaily2
     'Stores the record assocaited with this control
     Public fd2Record As form_daily2
     'Boolean to check if record is updating
-    Public bUpdating As Boolean = False
+    Public bUpdating As Boolean = True
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
 
