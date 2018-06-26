@@ -16,7 +16,7 @@ Public Class ucrFormDaily2
     'Stores the record assocaited with this control
     Public fd2Record As form_daily2
     'Boolean to check if record is updating
-    Public bUpdating As Boolean = False
+    Public bUpdating As Boolean = True
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
 
@@ -38,24 +38,36 @@ Public Class ucrFormDaily2
     ''' </summary>
     Public Overrides Sub PopulateControl()
         Dim clsCurrentFilter As TableFilter
+        Dim tempFd2Record As form_daily2
 
         If Not bFirstLoad Then
             MyBase.PopulateControl()
-            If fd2Record Is Nothing Then
-                clsCurrentFilter = GetLinkedControlsFilter()
-                fd2Record = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-                If fd2Record Is Nothing Then
-                    fd2Record = New form_daily2
-                    bUpdating = False
-                Else
-                    'Detach this from the EF context to prevent it from tracking the changes made to it
-                    clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
-                    bUpdating = True
-                End If
 
-                'check whether to permit data entry based on date entry values
+            'try to get the record based on the given filter
+            clsCurrentFilter = GetLinkedControlsFilter()
+            tempFd2Record = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
+
+            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
+            'then just do validation of values based on the new key controls values and exit the sub
+            If tempFd2Record Is Nothing AndAlso Not bUpdating Then
                 ValidateDataEntryPermision()
+                SetValueUpperAndLowerLimitsValidation()
+                ValidateValue()
+                Exit Sub
             End If
+
+            fd2Record = tempFd2Record
+            If fd2Record Is Nothing Then
+                fd2Record = New form_daily2
+                bUpdating = False
+            Else
+                'Detach this from the EF context to prevent it from tracking the changes made to it
+                clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
+                bUpdating = True
+            End If
+
+            'check whether to permit data entry based on date entry values
+            ValidateDataEntryPermision()
 
             'set values validation for the Value Flag period input controls
             SetValueUpperAndLowerLimitsValidation()
@@ -75,11 +87,12 @@ Public Class ucrFormDaily2
                     kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
                 Next
             Else
-                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    kvpTemp.Value.SelectFirst()
+                For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
+                    ucrCombobox.SelectFirst()
                 Next
             End If
 
+            OnevtValueChanged(Me, Nothing)
 
         End If
     End Sub
@@ -194,7 +207,7 @@ Public Class ucrFormDaily2
         Next
 
         If bValidValues Then
-            fd2Record = Nothing
+            'fd2Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
 
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
@@ -292,15 +305,23 @@ Public Class ucrFormDaily2
     ''' </summary>
     ''' <returns></returns>
     Public Overrides Function ValidateValue() As Boolean
+        Dim bValidValues As Boolean = True
+        Dim ucrVFP As ucrValueFlagPeriod = Nothing
+
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
-                    ctr.Focus()
-                    Return False
+                ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                If Not ucrVFP.ValidateValue() Then
+                    bValidValues = False
                 End If
             End If
         Next
-        Return True
+
+        If ucrVFP IsNot Nothing Then
+            ucrVFP.Focus()
+        End If
+
+        Return bValidValues
     End Function
 
     Public Function checkTotal() As Boolean

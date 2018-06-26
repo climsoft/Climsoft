@@ -44,6 +44,7 @@
 
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim strCol As String
+        Dim bValueFound As Boolean = False
         'MyBase.SetValue(objNewValue)
         strCol = cboValues.ValueMember
         If String.IsNullOrEmpty(objNewValue) Then
@@ -55,13 +56,19 @@
                     'set the text using the display column
                     cboValues.Text = rTemp.Item(cboValues.DisplayMember)
                     'cboValues.SelectedValue = objNewValue
-                    Exit Sub
+                    bValueFound = True
+                    Exit For
                 End If
             Next
-            cboValues.Text = objNewValue
+
+            If Not bValueFound Then
+                cboValues.Text = objNewValue
+            End If
+
         End If
 
-        'OnevtValueChanged(Me, e)
+
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
     ''' <summary>
