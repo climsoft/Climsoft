@@ -259,4 +259,15 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
+    Private Sub ucrFormDaily_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFormDaily.evtValueChanged
+        If ucrFormDaily.bUpdating Then
+            SaveEnable()
+        Else
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnCommit.Enabled = True
+        End If
+    End Sub
 End Class
