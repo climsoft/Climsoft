@@ -134,9 +134,12 @@ Public Class ucrFormDaily2
             ucrText = DirectCast(sender, ucrTextBox)
             CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
         ElseIf TypeOf sender Is ucrDataLinkCombobox Then
-            'TODO. Get the actual sender instead of writing to the all units loop?
             For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+                'overwrite the specific unit value
+                If sender Is kvpTemp.Value Then
+                    CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+                    Exit For
+                End If
             Next
         End If
     End Sub
