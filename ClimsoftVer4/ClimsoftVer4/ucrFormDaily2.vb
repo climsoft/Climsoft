@@ -43,8 +43,6 @@ Public Class ucrFormDaily2
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'If fd2Record Is Nothing Then
-
             'try to get the record based on the given filter
             clsCurrentFilter = GetLinkedControlsFilter()
             tempFd2Record = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
@@ -71,8 +69,6 @@ Public Class ucrFormDaily2
             'check whether to permit data entry based on date entry values
             ValidateDataEntryPermision()
 
-            'End If
-
             'set values validation for the Value Flag period input controls
             SetValueUpperAndLowerLimitsValidation()
 
@@ -91,8 +87,8 @@ Public Class ucrFormDaily2
                     kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
                 Next
             Else
-                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    kvpTemp.Value.SelectFirst()
+                For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
+                    ucrCombobox.SelectFirst()
                 Next
             End If
 
