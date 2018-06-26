@@ -39,7 +39,7 @@ Public Class frmNewFormDaily2
         ucrFormDaily.AddUnitslink("precipUnits", ucrPrecipUnits)
         ucrFormDaily.AddUnitslink("temperatureUnits", ucrTempUnits)
 
-        ucrFormDaily.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrHour, ucrNewNavigation:=ucrDaiy2Navigation)
+        ucrFormDaily.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrHour, ucrDaiy2Navigation)
 
         ucrDaiy2Navigation.PopulateControl()
         SaveEnable()
@@ -143,12 +143,15 @@ Public Class frmNewFormDaily2
         btnAddNew.Enabled = True
         btnCommit.Enabled = False
         btnClear.Enabled = False
-        If ucrDaiy2Navigation.iMaxRows > 0 Then
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+
+        If ucrDaiy2Navigation.iMaxRows = 0 Then
+            btnAddNew.Enabled = False
+            btnCommit.Enabled = True
+        ElseIf ucrDaiy2Navigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
-        Else
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
         End If
     End Sub
 
@@ -185,21 +188,25 @@ Public Class frmNewFormDaily2
     Private Function ValidateValues() As Boolean
         If Not ucrStationSelector.ValidateValue Then
             MessageBox.Show("Invalid Station", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrStationSelector.Focus()
             Return False
         End If
 
         If Not ucrElementSelector.ValidateValue Then
             MessageBox.Show("Invalid Element", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrElementSelector.Focus()
             Return False
         End If
 
         If Not ucrYearSelector.ValidateValue Then
             MessageBox.Show("Invalid Year", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrYearSelector.Focus()
             Return False
         End If
 
         If Not ucrMonth.ValidateValue Then
             MessageBox.Show("Invalid Month", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrMonth.Focus()
             Return False
         End If
 
@@ -211,6 +218,7 @@ Public Class frmNewFormDaily2
         'Check if all values are empty. There should be atleast one observation value
         If ucrFormDaily.IsValuesEmpty() Then
             MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrFormDaily.Focus()
             Return False
         End If
 
@@ -218,7 +226,8 @@ Public Class frmNewFormDaily2
             Return False
         End If
 
-        If Not ucrFormDaily.checkTotal Then
+        If Not ucrFormDaily.checkTotal() Then
+            ucrFormDaily.ucrInputTotal.Focus()
             Return False
         End If
 
@@ -250,4 +259,15 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
+    Private Sub ucrFormDaily_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFormDaily.evtValueChanged
+        If ucrFormDaily.bUpdating Then
+            SaveEnable()
+        Else
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnCommit.Enabled = True
+        End If
+    End Sub
 End Class

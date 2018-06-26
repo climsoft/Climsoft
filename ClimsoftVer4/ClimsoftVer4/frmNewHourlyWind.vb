@@ -162,12 +162,15 @@
         btnAddNew.Enabled = True
         btnSave.Enabled = False
         btnClear.Enabled = False
-        If ucrNavigation.iMaxRows > 0 Then
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+
+        If ucrNavigation.iMaxRows = 0 Then
+            btnAddNew.Enabled = False
+            btnSave.Enabled = True
+        ElseIf ucrNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
-        Else
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
         End If
     End Sub
 
@@ -175,30 +178,35 @@
         'Check valid station
         If Not ucrStationSelector.ValidateValue() Then
             MessageBox.Show("Invalid station", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrStationSelector.Focus()
             Return False
         End If
 
         'Check valid year
         If Not ucrYearSelector.ValidateValue() Then
             MessageBox.Show("Invalid year", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrYearSelector.Focus()
             Return False
         End If
 
         'Check valid month
         If Not ucrMonth.ValidateValue() Then
             MessageBox.Show("Invalid Month", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrMonth.Focus()
             Return False
         End If
 
         'Check valid Day
         If Not ucrDay.ValidateValue() Then
             MessageBox.Show("Invalid day", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrDay.Focus()
             Return False
         End If
 
         'Check if all values are empty. There should be atleast one observation value
         If ucrHourlyWind.IsDirectionValuesEmpty() Then
             MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            ucrHourlyWind.Focus()
             Return False
         End If
 
@@ -209,6 +217,7 @@
 
         'check speed total required
         If Not ucrHourlyWind.checkSpeedTotal() Then
+            ucrHourlyWind.ucrInputTotal.Focus()
             Return False
         End If
 
