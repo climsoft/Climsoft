@@ -28,10 +28,6 @@ Public Class ucrFormDaily2
     Private ucrLinkedNavigation As ucrNavigation
     Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedElement As ucrElementSelector
-    'Private ucrLinkedVisibilityUnits As ucrDataLinkCombobox
-    'Private ucrLinkedCloudheightUnits As ucrDataLinkCombobox
-    'Private ucrLinkedPrecipUnits As ucrDataLinkCombobox
-    'Private ucrLinkedTempUnits As ucrDataLinkCombobox
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
