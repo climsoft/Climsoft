@@ -12,8 +12,8 @@ Public Class frmNewFormDaily2
 
     Private Sub InitaliseDialog()
         ' Currently only works with this sequencer table so textbox disabled
+        txtSequencer.ReadOnly = True
         txtSequencer.Text = "seq_daily_element"
-        txtSequencer.Enabled = False
         chkEnableSequencer.Checked = True
 
         'Sets values for the units combobox
@@ -21,7 +21,7 @@ Public Class frmNewFormDaily2
         ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
         ucrTempUnits.bValidate = False
 
-        ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"metres", "feet"})
+        ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"feet", "metres"})
         ucrCloudheightUnits.SetDisplayAndValueMember("cloudHeightUnits")
         ucrCloudheightUnits.bValidate = False
 
@@ -59,18 +59,12 @@ Public Class frmNewFormDaily2
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        ' temporary until we know how to get all fields from table without specifying names
-        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+        If chkEnableSequencer.Checked Then
+            ' temporary until we know how to get all fields from table without specifying names
+            dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+            ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+        End If
 
-        ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
-
-        'May want to change sequencer when year changes but not here
-
-        'If ucrYearSelector.isLeapYear Then
-        '    txtSequencer.Text = "seq_month_day_leap_yr"
-        'Else
-        '    txtSequencer.Text = "seq_month_day"
-        'End If
         ucrFormDaily.Focus()
     End Sub
 
@@ -113,11 +107,14 @@ Public Class frmNewFormDaily2
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
                 ucrFormDaily.DeleteRecord()
                 ucrDaiy2Navigation.RemoveRecord()
                 SaveEnable()
-                ucrDaiy2Navigation.MoveFirst()
                 MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Catch ex As Exception
@@ -171,14 +168,6 @@ Public Class frmNewFormDaily2
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
-    End Sub
-
-    Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
-        If chkEnableSequencer.Checked Then
-            txtSequencer.Text = "seq_daily_element"
-        Else
-            txtSequencer.Text = ""
-        End If
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
@@ -270,4 +259,10 @@ Public Class frmNewFormDaily2
             btnCommit.Enabled = True
         End If
     End Sub
+
+    Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
+        txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
+    End Sub
+
+
 End Class

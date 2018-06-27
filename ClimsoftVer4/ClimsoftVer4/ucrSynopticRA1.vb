@@ -191,13 +191,19 @@ Public Class ucrSynopticRA1
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     row = dtbl.Select("elementId = '" & ucrVFP.Tag & "'").FirstOrDefault()
                     If row IsNot Nothing Then
-                        If Val(row.Item("lowerLimit")) <> 0 Then
-                            ucrVFP.SetElementValueValidation(iLowerLimit:=Val(row.Item("lowerLimit")))
+
+                        If String.IsNullOrEmpty(row.Item("lowerLimit")) Then
+                            ucrVFP.SetElementValueLowerLimit(Decimal.MinValue)
+                        Else
+                            ucrVFP.SetElementValueLowerLimit(Val(row.Item("lowerLimit")))
                         End If
 
-                        If Val(row.Item("upperLimit")) <> 0 Then
-                            ucrVFP.SetElementValueValidation(iUpperLimit:=Val(row.Item("upperLimit")))
+                        If String.IsNullOrEmpty(row.Item("upperLimit")) Then
+                            ucrVFP.SetElementValueHigherLimit(Decimal.MaxValue)
+                        Else
+                            ucrVFP.SetElementValueHigherLimit(Val(row.Item("upperLimit")))
                         End If
+
                     End If
                 End If
             Next
