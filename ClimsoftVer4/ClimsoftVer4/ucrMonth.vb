@@ -14,17 +14,16 @@
         For i As Integer = 1 To 12
             dtbRecords.Rows.Add(i, DateAndTime.MonthName(i, False), DateAndTime.MonthName(i, True))
         Next
-        cboValues.DataSource = dtbRecords
-        dtbRecords.DefaultView.Sort = strMonthId & " ASC"
 
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = strMonthId
-            If bFirstLoad Then
-                SetViewTypeAsMonthIds()
-            End If
-        Else
-            cboValues.DataSource = Nothing
+        bSuppressChangedEvents = True
+        dtbRecords.DefaultView.Sort = strMonthId & " ASC"
+        cboValues.DataSource = dtbRecords
+        cboValues.ValueMember = strMonthId
+        If bFirstLoad Then
+            SetViewTypeAsMonthIds()
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
     Private Sub ucrMonth_Load(sender As Object, e As EventArgs) Handles Me.Load

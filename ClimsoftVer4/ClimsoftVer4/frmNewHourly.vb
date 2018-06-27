@@ -7,11 +7,12 @@
             bFirstLoad = False
         End If
         'TODO. Remove this once btnUpload has been enabled in the designer
-        btnUpload.Enabled = True
+        'btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
-        txtSequencer.Text = "seq_month_day"
+        txtSequencer.ReadOnly = True
+        txtSequencer.Text = "seq_month_day_element"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
         ucrHourlyNavigation.PopulateControl()
@@ -42,18 +43,13 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day"
-        End If
-
+        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
         dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
         ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
 
-        ucrHourly.UcrValueFlagPeriod0.Focus()
-        ucrHourlyNavigation.MoveLast()
+        ucrHourly.Focus()
+
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -94,11 +90,15 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
+
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
                 ucrHourly.DeleteRecord()
                 ucrHourlyNavigation.RemoveRecord()
                 SaveEnable()
-                ucrHourlyNavigation.MoveFirst()
                 MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Catch ex As Exception
@@ -223,6 +223,12 @@
                 'this handles the "noise" on enter  
                 e.SuppressKeyPress = True
             End If
+        End If
+    End Sub
+
+    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
+        If ucrYearSelector.ValidateValue() Then
+            txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
         End If
     End Sub
 

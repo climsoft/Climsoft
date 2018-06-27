@@ -5,6 +5,7 @@
     Private strIDsAndStations As String = "ids_stations"
 
     Public Overrides Sub PopulateControl()
+        bSuppressChangedEvents = True
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
             cboValues.ValueMember = strStationId
@@ -16,6 +17,8 @@
         Else
             cboValues.DataSource = Nothing
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean

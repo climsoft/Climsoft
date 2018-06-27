@@ -5,7 +5,7 @@
 
     Public Overrides Sub PopulateControl()
         'MyBase.PopulateControl()
-        Dim endYear As Integer = DateTime.Now.Year
+        Dim endYear As Integer = Date.Now.Year
 
         dtbRecords = New DataTable
         dtbRecords.Columns.Add(strYear, GetType(Integer))
@@ -15,16 +15,19 @@
             dtbRecords.Rows.Add(i, CInt(Strings.Right(i, 2)))
         Next
 
-        cboValues.DataSource = dtbRecords
+        bSuppressChangedEvents = True
         dtbRecords.DefaultView.Sort = strYear & " DESC"
+        cboValues.DataSource = dtbRecords
         cboValues.ValueMember = strYear
         If bFirstLoad Then
             SetViewTypeAsYear()
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
-    Public Function isLeapYear() As Boolean
-        Return DateTime.IsLeapYear(GetValue)
+    Public Function IsLeapYear() As Boolean
+        Return Date.IsLeapYear(GetValue)
     End Function
 
     Public Overrides Function ValidateValue() As Boolean
@@ -46,9 +49,9 @@
                         'check validity of short years
                 End Select
             End If
+            SetBackColor(If(bValid, Color.White, Color.Red))
         End If
 
-        SetBackColor(If(bValid, Color.White, Color.Red))
         Return bValid
     End Function
 

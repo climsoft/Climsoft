@@ -13,6 +13,8 @@
     End Sub
 
     Private Sub InitaliseDialog()
+        txtSequencer.ReadOnly = True
+        txtSequencer.Text = "seq_month_day"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         'get default database direction and speed digits, then set them to the controls
@@ -51,22 +53,15 @@
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
         btnSave.Enabled = True
-        'ucrNavigation.SetControlsForNewRecord()
-
-        'change the sequencer
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day"
-        End If
 
         ' temporary until we know how to get all fields from table without specifying names
+
         dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
 
         ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay}), ucrYear:=ucrYearSelector)
 
-        ucrHourlyWind.ucrDirectionSpeedFlag0.Focus()
+        ucrHourlyWind.Focus()
 
     End Sub
 
@@ -105,6 +100,10 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourlyWind.DeleteRecord()
                 ucrNavigation.RemoveRecord()
@@ -265,6 +264,8 @@
         End If
     End Sub
 
-
+    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
+        txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_leap_yr", "seq_month_day")
+    End Sub
 
 End Class

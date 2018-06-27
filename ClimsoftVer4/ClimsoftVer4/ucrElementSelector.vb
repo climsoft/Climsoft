@@ -5,6 +5,7 @@
     Private strIDsAndElements As String = "ids_elements"
 
     Public Overrides Sub PopulateControl()
+        bSuppressChangedEvents = True
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
             cboValues.ValueMember = strElementId
@@ -17,10 +18,12 @@
         Else
             cboValues.DataSource = Nothing
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean
-        Dim bValid As Boolean = False
+        Dim bValid As Boolean
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
@@ -32,9 +35,9 @@
                     Exit For
                 End If
             Next
+            SetBackColor(If(bValid, Color.White, Color.Red))
         End If
 
-        SetBackColor(If(bValid, Color.White, Color.Red))
         Return bValid
     End Function
 

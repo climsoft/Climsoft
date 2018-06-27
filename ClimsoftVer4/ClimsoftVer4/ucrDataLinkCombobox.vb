@@ -27,19 +27,7 @@
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        'If Not IsNothing(clsDataDefinition) Then
-        '    Dim objData As List(Of String)
-        '    Dim strDbValue As String
-        '    objData = clsDataDefinition.GetValues(GetLinkedControlsFilter())
-        '    If objData.Count > 0 Then
-        '        strDbValue = objData(0)
-        '        For index As Integer = 0 To dtbRecords.Rows.Count - 1
-        '            If dtbRecords.Rows(index).Field(Of String)(0) = strDbValue Then
-        '                cboValues.SelectedIndex = index
-        '            End If
-        '        Next
-        '    End If
-        'End If
+        'TODO
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)

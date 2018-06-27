@@ -181,8 +181,17 @@ Public Class ucrValueFlagPeriod
         Return ucrPeriod.IsEmpty()
     End Function
 
-    Public Sub SetElementValueValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
-        ucrValue.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    Public Sub SetElementValueLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        SetElementValueLowerLimit(iLowerLimit)
+        SetElementValueHigherLimit(iUpperLimit)
+    End Sub
+
+    Public Sub SetElementValueLowerLimit(iLowerLimit As Decimal)
+        ucrValue.SetMinimumValue(iLowerLimit)
+    End Sub
+
+    Public Sub SetElementValueHigherLimit(iUpperLimit As Decimal)
+        ucrValue.SetMaximumValue(iUpperLimit)
     End Sub
 
     ''' <summary>
