@@ -93,6 +93,19 @@ Public Class ucrTextBox
         End If
     End Sub
 
+    Public Sub SetMinimumValue(dcmMin As Decimal)
+        strValidationType = "numeric"
+        dcmMinimum = dcmMin
+        bMinimumIncluded = True
+    End Sub
+
+    Public Sub SetMaximumValue(dcmMax As Decimal)
+        strValidationType = "numeric"
+        dcmMaximum = dcmMax
+        bMaximumIncluded = True
+    End Sub
+
+
     'Returns integer as code for validation
     ' 0 : string is valid
     ' 1 : string is not numeric

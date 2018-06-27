@@ -7,10 +7,13 @@
             bFirstLoad = False
         End If
         'TODO. Remove this line once button upload is enabled in the designer
-        btnUpload.Enabled = True
+        'btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
+        txtSequencer.ReadOnly = True
+        txtSequencer.Text = "seq_month_day_synoptime"
+
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
 
         ucrSynopticRA1.SetKeyControls(ucrStationSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHour, ucrNavigation)
@@ -30,13 +33,6 @@
         btnUpdate.Enabled = False
         btnSave.Enabled = True
 
-        'change the sequencer
-        If ucrYearSelector.isLeapYear Then
-            txtSequencer.Text = "seq_month_day_synoptime_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day_synoptime"
-        End If
-
         'temporary until we know how to get all fields from table without specifying names
         dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
         dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
@@ -45,7 +41,7 @@
         ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay, ucrHour}), ucrYear:=ucrYearSelector)
 
         'Set focus of ucrSynopticRA1 first control 
-        ucrSynopticRA1.ucrVFPStationLevelPressure.Focus()
+        ucrSynopticRA1.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -83,6 +79,10 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
+            If Not ValidateValues() Then
+                Exit Sub
+            End If
+
             If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrSynopticRA1.DeleteRecord()
                 ucrNavigation.RemoveRecord()
@@ -304,5 +304,10 @@
         conn.Close()
     End Sub
 
+    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
+        If ucrYearSelector.ValidateValue() Then
+            txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_synoptime_leap_yr", "seq_month_day_synoptime")
+        End If
+    End Sub
 
 End Class

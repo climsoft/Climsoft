@@ -265,28 +265,53 @@ Public Class ucrHourly
         Dim ucrVFP As ucrValueFlagPeriod
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
-        Dim iElementId As Integer
+        Dim strLowerLimit As String = ""
+        Dim strUpperLimit As String = ""
 
-        iElementId = ucrlinkedElement.GetValue
         clsDataDefinition = New DataCall
         clsDataDefinition.SetTableName("obselements")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
-        clsDataDefinition.SetFilter("elementId", "=", iElementId, bIsPositiveCondition:=True, bForceValuesAsString:=False)
+        clsDataDefinition.SetFilter("elementId", "=", Val(ucrlinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
+        'If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+        '    For Each ctr As Control In Me.Controls
+        '        If TypeOf ctr Is ucrValueFlagPeriod Then
+        '            ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+        '            If dtbl.Rows(0).Item("lowerLimit") <> "" Then
+        '                ucrVFP.SetElementValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
+        '            End If
+        '            If dtbl.Rows(0).Item("upperLimit") <> "" Then
+        '                ucrVFP.SetElementValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
+        '            End If
+        '        End If
+        '    Next
+        '    bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+        'End If
+
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-                        ucrVFP.SetElementValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
-                    End If
-                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
-                        ucrVFP.SetElementValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
-                    End If
-                End If
-            Next
-            bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
+            strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
+            strUpperLimit = dtbl.Rows(0).Item("upperLimit")
+            bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
         End If
+
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrValueFlagPeriod Then
+                ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+
+                If String.IsNullOrEmpty(strLowerLimit) Then
+                    ucrVFP.SetElementValueLowerLimit(Decimal.MinValue)
+                Else
+                    ucrVFP.SetElementValueLowerLimit(Val(strLowerLimit))
+                End If
+
+                If String.IsNullOrEmpty(strUpperLimit) Then
+                    ucrVFP.SetElementValueHigherLimit(Decimal.MaxValue)
+                Else
+                    ucrVFP.SetElementValueHigherLimit(Val(strUpperLimit))
+                End If
+
+            End If
+        Next
     End Sub
 
     ''' <summary>

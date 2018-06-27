@@ -48,18 +48,15 @@
             dtbRecords = If(lstShortMonths.Contains(iMonth), dtb30, dtb31)
         End If
 
-        If dtbRecords IsNot Nothing Then
-            dtbRecords.DefaultView.Sort = strDay & " ASC"
-            If dtbRecords.Rows.Count > 0 Then
-                cboValues.DataSource = dtbRecords
-                cboValues.ValueMember = strDay
-                If bFirstLoad Then
-                    SetViewTypeAsDay()
-                End If
-            Else
-                cboValues.DataSource = Nothing
-            End If
+        bSuppressChangedEvents = True
+        dtbRecords.DefaultView.Sort = strDay & " ASC"
+        cboValues.DataSource = dtbRecords
+        cboValues.ValueMember = strDay
+        If bFirstLoad Then
+            SetViewTypeAsDay()
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
     Public Sub SetViewTypeAsDay()

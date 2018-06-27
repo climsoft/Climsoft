@@ -13,22 +13,19 @@
         dtbRecords.Columns.Add(str24Hrs, GetType(Integer))
         dtbRecords.Columns.Add(str12Hrs, GetType(String))
         For i As Integer = 1 To 12
-
             dtbRecords.Rows.Add(i, i & " AM")
             dtbRecords.Rows.Add(i + 12, i & " PM")
-
         Next
-        cboValues.DataSource = dtbRecords
-        dtbRecords.DefaultView.Sort = str24Hrs & " ASC"
 
-        If dtbRecords.Rows.Count > 0 Then
-            cboValues.ValueMember = str24Hrs
-            If bFirstLoad Then
-                SetViewTypeAs24Hrs()
-            End If
-        Else
-            cboValues.DataSource = Nothing
+        bSuppressChangedEvents = True
+        dtbRecords.DefaultView.Sort = str24Hrs & " ASC"
+        cboValues.DataSource = dtbRecords
+        cboValues.ValueMember = str24Hrs
+        If bFirstLoad Then
+            SetViewTypeAs24Hrs()
         End If
+        bSuppressChangedEvents = False
+        'OnevtValueChanged(Me, Nothing)
     End Sub
 
 
