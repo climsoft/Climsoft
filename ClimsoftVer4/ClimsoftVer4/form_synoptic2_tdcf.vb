@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class form_synoptic2_tdcf
-    Public Property id As Long
     Public Property stationId As String
     Public Property yyyy As Long
     Public Property mm As Long

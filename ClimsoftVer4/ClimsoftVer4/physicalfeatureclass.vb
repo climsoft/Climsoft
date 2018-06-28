@@ -15,7 +15,7 @@ Partial Public Class physicalfeatureclass
     Public Property description As String
     Public Property refersTo As String
 
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
     Public Overridable Property station As station
+    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
 
 End Class

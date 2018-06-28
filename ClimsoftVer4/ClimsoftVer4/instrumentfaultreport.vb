@@ -13,14 +13,13 @@ Imports System.Collections.Generic
 Partial Public Class instrumentfaultreport
     Public Property refersTo As String
     Public Property reportId As Long
-    Public Property reportDatetime As String
+    Public Property reportDatetime As Nullable(Of Date)
     Public Property faultDescription As String
     Public Property reportedBy As String
-    Public Property receivedDatetime As String
+    Public Property receivedDatetime As Nullable(Of Date)
     Public Property receivedBy As String
     Public Property reportedFrom As String
 
-    Public Overridable Property faultresolutions As ICollection(Of faultresolution) = New HashSet(Of faultresolution)
     Public Overridable Property instrument As instrument
     Public Overridable Property station As station
 

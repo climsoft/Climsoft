@@ -11,15 +11,14 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class physicalfeature
-    Public Property id As Long
     Public Property associatedWith As String
-    Public Property beginDate As String
-    Public Property endDate As String
+    Public Property beginDate As Nullable(Of Date)
+    Public Property endDate As Nullable(Of Date)
     Public Property image As String
     Public Property description As String
     Public Property classifiedInto As String
 
-    Public Overridable Property station As station
     Public Overridable Property physicalfeatureclass As physicalfeatureclass
+    Public Overridable Property station As station
 
 End Class

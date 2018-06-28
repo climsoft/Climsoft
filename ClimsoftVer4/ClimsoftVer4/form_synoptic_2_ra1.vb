@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class form_synoptic_2_ra1
-    Public Property id As Long
     Public Property stationId As String
     Public Property yyyy As Integer
     Public Property mm As Integer
@@ -23,12 +22,12 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Val_Elem814 As String
     Public Property Val_Elem399 As String
     Public Property Val_Elem301 As String
-    Public Property Val_Elem185 As String
+    Public Property Val_Elem196 As String
     Public Property Val_Elem101 As String
     Public Property Val_Elem102 As String
     Public Property Val_Elem103 As String
     Public Property Val_Elem105 As String
-    Public Property Val_Elem192 As String
+    Public Property Val_Elem176 As String
     Public Property Val_Elem110 As String
     Public Property Val_Elem114 As String
     Public Property Val_Elem112 As String
@@ -37,10 +36,10 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Val_Elem197 As String
     Public Property Val_Elem193 As String
     Public Property Val_Elem115 As String
-    Public Property Val_Elem168 As String
-    Public Property Val_Elem169 As String
-    Public Property Val_Elem170 As String
-    Public Property Val_Elem171 As String
+    Public Property Val_Elem177 As String
+    Public Property Val_Elem178 As String
+    Public Property Val_Elem179 As String
+    Public Property Val_Elem180 As String
     Public Property Val_Elem119 As String
     Public Property Val_Elem116 As String
     Public Property Val_Elem117 As String
@@ -72,12 +71,12 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Flag814 As String
     Public Property Flag399 As String
     Public Property Flag301 As String
-    Public Property Flag185 As String
+    Public Property Flag196 As String
     Public Property Flag101 As String
     Public Property Flag102 As String
     Public Property Flag103 As String
     Public Property Flag105 As String
-    Public Property Flag192 As String
+    Public Property Flag176 As String
     Public Property Flag110 As String
     Public Property Flag114 As String
     Public Property Flag112 As String
@@ -86,7 +85,7 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Flag197 As String
     Public Property Flag193 As String
     Public Property Flag115 As String
-    Public Property Flag168 As String
+    Public Property Flag177 As String
     Public Property Flag178 As String
     Public Property Flag179 As String
     Public Property Flag180 As String
@@ -116,6 +115,5 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Flag174 As String
     Public Property Flag046 As String
     Public Property signature As String
-    Public Property entryDatetime As Nullable(Of Date)
 
 End Class

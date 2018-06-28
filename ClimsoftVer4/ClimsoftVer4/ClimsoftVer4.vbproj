@@ -110,6 +110,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="abc.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="acquisitiontype.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -155,18 +158,6 @@
     <Compile Include="aws_toa5_mg2.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="bufr_crex_data.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bufr_crex_master.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bufr_indicators.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ccitt.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="climsoftuser.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -179,47 +170,8 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="clsTableFilter.vb" />
-    <Compile Include="code_flag.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="data_forms.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="faultresolution.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="featuregeographicalposition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="flag.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="flagtable.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_agro1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_daily2.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_hourly.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_hourlywind.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_hourly_time_selection.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_monthly.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_synoptic2_tdcf.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_synoptic_2_ra1.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="frmNewHourly.Designer.vb">
@@ -245,6 +197,12 @@
     </Compile>
     <Compile Include="frmNewSynopticRA1.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="featuregeographicalposition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="flag.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
@@ -305,6 +263,24 @@
     </Compile>
     <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_daily2.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourly.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourlywind.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourly_time_selection.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_synoptic2_tdcf.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_synoptic_2_ra1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="frmAWSelements.Designer.vb">
       <DependentUpon>frmAWSelements.vb</DependentUpon>
@@ -559,16 +535,18 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="frmNewFormDaily2.Designer.vb">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewFormDaily2.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    </Compile>    
+      <Compile Include="frmNewFormDaily2.vb">
+        <SubType>Form</SubType>
+      </Compile>
     <Compile Include="frmModifyObservations.Designer.vb">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </Compile>
     <Compile Include="frmModifyObservations.vb">
+
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPlotter.Designer.vb" />
@@ -641,9 +619,6 @@
     <Compile Include="instrumentfaultreport.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="instrumentinspection.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="language_translation.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -707,13 +682,7 @@
     <Compile Include="observationinitial.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="observationschedule.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="obsscheduleclass.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="paperarchive.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="paperarchivedefinition.vb">
@@ -741,6 +710,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="regkey.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="routinereportdefinition.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="sdgFilter.Designer.vb">
@@ -776,31 +748,13 @@
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="stationelement.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationidalia.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationlocationhistory.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="stationnetworkdefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationqualifier.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="synopfeature.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblproduct.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tdcf_indicators.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tm_307091.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ucrBaseDataLink.Designer.vb">
@@ -1241,12 +1195,15 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="frmNewFormDaily2.resx">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
     </EmbeddedResource>
+    
     <EmbeddedResource Include="frmModifyObservations.resx">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </EmbeddedResource>
+    
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
