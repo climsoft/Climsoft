@@ -11,6 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class qc_interelement_relationship_definition
+    Public Property id As Long
     Public Property elementId_1 As Integer
     Public Property relationship As String
     Public Property elementId_2 As Integer
