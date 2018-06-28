@@ -14,4 +14,6 @@ Partial Public Class paperarchivedefinition
     Public Property formId As String
     Public Property description As String
 
+    Public Overridable Property paperarchives As ICollection(Of paperarchive) = New HashSet(Of paperarchive)
+
 End Class

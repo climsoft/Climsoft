@@ -10,12 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class physicalfeatureclass
-    Public Property featureClass As String
-    Public Property description As String
-    Public Property refersTo As String
-
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
-    Public Overridable Property station As station
+Partial Public Class tdcf_indicators
+    Public Property id As Long
+    Public Property CREX_Edition As Nullable(Of Integer)
+    Public Property CREX_Table As Nullable(Of Integer)
+    Public Property BUFR_Table As Nullable(Of Integer)
+    Public Property Local_Table As Nullable(Of Integer)
+    Public Property Data_Category As Nullable(Of Integer)
+    Public Property Data_SubCategory As Nullable(Of Integer)
+    Public Property Originating_Centre As Nullable(Of Integer)
 
 End Class
