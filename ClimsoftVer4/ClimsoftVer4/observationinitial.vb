@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class observationinitial
-    Public Property id As Long
     Public Property recordedFrom As String
     Public Property describedBy As Nullable(Of Long)
     Public Property obsDatetime As Nullable(Of Date)

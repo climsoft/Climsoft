@@ -13,16 +13,13 @@ Imports System.Collections.Generic
 Partial Public Class station
     Public Property stationId As String
     Public Property stationName As String
-    Public Property wmoid As String
-    Public Property icaoid As String
     Public Property latitude As Nullable(Of Double)
-    Public Property qualifier As String
     Public Property longitude As Nullable(Of Double)
     Public Property elevation As String
     Public Property geoLocationMethod As String
     Public Property geoLocationAccuracy As Nullable(Of Single)
-    Public Property openingDatetime As String
-    Public Property closingDatetime As String
+    Public Property openingDatetime As Nullable(Of Date)
+    Public Property closingDatetime As Nullable(Of Date)
     Public Property country As String
     Public Property authority As String
     Public Property adminRegion As String
@@ -33,16 +30,10 @@ Partial Public Class station
 
     Public Overridable Property instruments As ICollection(Of instrument) = New HashSet(Of instrument)
     Public Overridable Property instrumentfaultreports As ICollection(Of instrumentfaultreport) = New HashSet(Of instrumentfaultreport)
-    Public Overridable Property instrumentinspections As ICollection(Of instrumentinspection) = New HashSet(Of instrumentinspection)
-    Public Overridable Property observationfinals As ICollection(Of observationfinal) = New HashSet(Of observationfinal)
-    Public Overridable Property observationinitials As ICollection(Of observationinitial) = New HashSet(Of observationinitial)
     Public Overridable Property obsscheduleclasses As ICollection(Of obsscheduleclass) = New HashSet(Of obsscheduleclass)
-    Public Overridable Property paperarchives As ICollection(Of paperarchive) = New HashSet(Of paperarchive)
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
     Public Overridable Property physicalfeatureclasses As ICollection(Of physicalfeatureclass) = New HashSet(Of physicalfeatureclass)
-    Public Overridable Property stationelements As ICollection(Of stationelement) = New HashSet(Of stationelement)
-    Public Overridable Property stationqualifiers As ICollection(Of stationqualifier) = New HashSet(Of stationqualifier)
-    Public Overridable Property stationidalias As ICollection(Of stationidalia) = New HashSet(Of stationidalia)
-    Public Overridable Property stationlocationhistories As ICollection(Of stationlocationhistory) = New HashSet(Of stationlocationhistory)
+    Public Overridable Property observationinitial As observationinitial
+    Public Overridable Property observationfinal As observationfinal
+    Public Overridable Property physicalfeature As physicalfeature
 
 End Class

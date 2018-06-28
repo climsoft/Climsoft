@@ -14,13 +14,9 @@ Partial Public Class aws_sites
     Public Property SiteID As String
     Public Property SiteName As String
     Public Property InputFile As String
-    Public Property FilePrefix As String
-    Public Property chkPrefix As Nullable(Of Boolean)
     Public Property DataStructure As String
     Public Property MissingDataFlag As String
     Public Property awsServerIP As String
     Public Property OperationalStatus As Boolean
-    Public Property GTSEncode As String
-    Public Property GTSHeader As String
 
 End Class
