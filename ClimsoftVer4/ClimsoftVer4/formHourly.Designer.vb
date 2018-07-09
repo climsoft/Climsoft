@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formHourly
+Partial Class form_hourly
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -1032,6 +1032,7 @@ Partial Class formHourly
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
         Me.chkRepeatEntry.Location = New System.Drawing.Point(18, 571)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
@@ -1039,7 +1040,7 @@ Partial Class formHourly
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
-        'formHourly
+        'form_hourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1156,7 +1157,7 @@ Partial Class formHourly
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formHourly"
+        Me.Name = "form_hourly"
         Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()

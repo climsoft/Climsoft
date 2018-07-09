@@ -296,4 +296,18 @@ Public Class frmMainMenu
     Private Sub OpeartionsMonitoringToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpeartionsMonitoringToolStripMenuItem.Click
         frmMonitoring.Show()
     End Sub
+
+    Private Sub UserRecordsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles UserRecordsToolStripMenuItem1.Click
+        With frmMonitoring
+            .grpPerformance.Enabled = False
+            .grpVerify.Enabled = False
+            .grpSettings.Enabled = False
+            .optAll.Enabled = False
+            .cboUser.Enabled = False
+            .cboUser.Text = frmLogin.txtUsername.Text
+            .optUsers.Enabled = False
+            .Show()
+        End With
+
+    End Sub
 End Class

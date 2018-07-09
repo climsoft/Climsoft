@@ -85,8 +85,8 @@ Partial Class frmDataForms
         Me.ResumeLayout(False)
 
     End Sub
-    Public WithEvents lstvForms As System.Windows.Forms.ListView
     Friend WithEvents cmdApply As System.Windows.Forms.Button
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
     Friend WithEvents cmdCancel As System.Windows.Forms.Button
+    Friend WithEvents lstvForms As System.Windows.Forms.ListView
 End Class

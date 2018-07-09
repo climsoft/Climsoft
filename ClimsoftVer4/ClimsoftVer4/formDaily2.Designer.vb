@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formDaily2
+Partial Class form_daily2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -1641,6 +1641,7 @@ Partial Class formDaily2
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
         Me.chkRepeatEntry.Location = New System.Drawing.Point(16, 578)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
@@ -1648,7 +1649,7 @@ Partial Class formDaily2
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
-        'formDaily2
+        'form_daily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1822,7 +1823,7 @@ Partial Class formDaily2
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formDaily2"
+        Me.Name = "form_daily2"
         Me.Text = "Daily data for the whole month"
         Me.groupUnits.ResumeLayout(False)
         Me.groupUnits.PerformLayout()

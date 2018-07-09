@@ -19,70 +19,76 @@
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr
         conn.Open()
-        Try
-            ' Get Users
-            sql = "Select * from climsoftusers;"
+        'Try
+        ' Get Users
+        sql = "Select * from climsoftusers;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ds.Clear()
-            da.Fill(ds, "Users")
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.SelectCommand.CommandTimeout = 0
+        ds.Clear()
+        da.Fill(ds, "Users")
 
-            For kount = 0 To ds.Tables("Users").Rows.Count - 1
-                cboUser.Items.Add(ds.Tables("Users").Rows(kount).Item(0))
-            Next
-            cboUser.Items.Add("root")
-            cboUser.Refresh()
+        For kount = 0 To ds.Tables("Users").Rows.Count - 1
+            cboUser.Items.Add(ds.Tables("Users").Rows(kount).Item(0))
+        Next
+        cboUser.Items.Add("root")
+        cboUser.Refresh()
 
-            ' Get Key Entry forms
-            sql = "Select * from data_forms where selected =1;"
+        ' Get Key Entry forms
+        sql = "Select * from data_forms where selected =1;"
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ds.Clear()
-            da.Fill(ds, "KeyEntryForms")
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        da.SelectCommand.CommandTimeout = 0
+        ds.Clear()
+        da.Fill(ds, "KeyEntryForms")
 
-            For kount = 0 To ds.Tables("KeyEntryForms").Rows.Count - 1
-                cboForms.Items.Add(ds.Tables("KeyEntryForms").Rows(kount).Item(2))
-            Next
-            cboForms.Refresh()
-            ' Table for Users records
-            'sql = "Drop TABLE IF EXISTS `UserRecords`; " & _
-            sql = "CREATE TABLE IF NOT EXISTS `UserRecords` ( " & _
-                  "`username` varchar(255) NOT NULL DEFAULT '', " & _
-                  "`recsdone` int(11) DEFAULT NULL, " & _
-                  "`recsexpt` int(11) DEFAULT NULL, " & _
-                  "`perform` int(11) DEFAULT NULL, " & _
-                  "PRIMARY KEY (`username`));"
+        For kount = 0 To ds.Tables("KeyEntryForms").Rows.Count - 1
+            cboForms.Items.Add(ds.Tables("KeyEntryForms").Rows(kount).Item(2))
+        Next
+        cboForms.Refresh()
+        ' Table for Users records
+        'sql = "Drop TABLE IF EXISTS `UserRecords`; " & _
+        sql = "CREATE TABLE IF NOT EXISTS `UserRecords` ( " & _
+              "`username` varchar(255) NOT NULL DEFAULT '', " & _
+              "`recsdone` int(11) DEFAULT NULL, " & _
+              "`recsexpt` int(11) DEFAULT NULL, " & _
+              "`perform` int(11) DEFAULT NULL, " & _
+              "PRIMARY KEY (`username`));"
 
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-            qwry.CommandTimeout = 0
-            qwry.ExecuteNonQuery()
+        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        qwry.CommandTimeout = 0
+        qwry.ExecuteNonQuery()
 
-            ' Populate the table with users
-            sql = "INSERT IGNORE INTO userrecords ( userName ) SELECT climsoftusers.userName FROM climsoftusers;"
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-            qwry.CommandTimeout = 0
-            qwry.ExecuteNonQuery()
+        ' Populate the table with users
+        sql = "INSERT IGNORE INTO userrecords ( userName ) SELECT climsoftusers.userName FROM climsoftusers;"
+        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        qwry.CommandTimeout = 0
+        qwry.ExecuteNonQuery()
 
-            ' Add root user
-            sql = "INSERT IGNORE INTO `userrecords` (`username`) VALUES ('root');"
-            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-            qwry.CommandTimeout = 0
-            qwry.ExecuteNonQuery()
+        ' Add root user
+        sql = "INSERT IGNORE INTO `userrecords` (`username`) VALUES ('root');"
+        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        qwry.CommandTimeout = 0
+        qwry.ExecuteNonQuery()
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
     End Sub
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
         Dim dts, dte As String
+
+        Me.Cursor = Cursors.WaitCursor
+        ListViewRecs.Clear()
+        lblTrecs.Text = 0
 
         dts = DateAndTime.Year(DateTimeStart.Text) & "-" & DateAndTime.Month(DateTimeStart.Text) & "-" & DateAndTime.Day(DateTimeStart.Text) & " 00:00:00"
         dte = DateAndTime.Year(DateTimeEnd.Text) & "-" & DateAndTime.Month(DateTimeEnd.Text) & "-" & DateAndTime.Day(DateTimeEnd.Text) & " 23:59:59"
         Dim Rec(6) As String
 
         Try
-            ' Initialize List View
+            'Initialize List View
 
             ListViewRecs.Clear()
             ListViewRecs.Columns.Clear()
@@ -108,7 +114,9 @@
                        "ORDER BY entryDatetime;"
                 End If
                 'MsgBox(sql)
+
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "Records")
                 'MsgBox(cboForms.Items(i))
@@ -126,15 +134,20 @@
             Next i
             lblTrecs.Text = ListViewRecs.Items.Count
             lblTrecs.Refresh()
-
+            Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
         End Try
     End Sub
 
     Private Sub cmdRetrieve_Click(sender As Object, e As EventArgs) Handles cmdRetrieve.Click
         Dim dtf, dtt As String
         Dim kt As Long
+
+        Me.Cursor = Cursors.WaitCursor
+        ListViewRecs.Clear()
+        lblTrecs.Text = 0
 
         dtf = DateAndTime.Year(dtFrom.Text) & "-" & DateAndTime.Month(dtFrom.Text) & "-" & DateAndTime.Day(dtFrom.Text) & " 00:00:00"
         dtt = DateAndTime.Year(dtTo.Text) & "-" & DateAndTime.Month(dtTo.Text) & "-" & DateAndTime.Day(dtTo.Text) & " 23:59:59"
@@ -151,8 +164,8 @@
                         sql = "SELECT signature, entryDatetime FROM " & cboForms.Items(k) & " WHERE entryDatetime Between '" & dtf & "' and '" & dtt & "';"
                     End If
 
-                    'MsgBox(sql)
                     da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                    da.SelectCommand.CommandTimeout = 0
                     ds.Clear()
                     da.Fill(ds, "UserRecords")
                     'MsgBox(ds.Tables("UserRecords").Rows.Count)
@@ -174,6 +187,7 @@
 
         Catch x As Exception
             MsgBox(x.Message)
+            Me.Cursor = Cursors.Default
         End Try
 
         Dim Rec(4) As String
@@ -192,6 +206,7 @@
             sql = "select username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance from userrecords;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Performs")
 
@@ -208,15 +223,17 @@
                 ListViewRecs.Items.Add(itms)
             Next i
             lblTrecs.Text = ds.Tables("Performs").Rows.Count
-
+            Me.Cursor = Cursors.Default
         Catch x As Exception
             MsgBox(x.Message)
+            Me.Cursor = Cursors.Default
         End Try
     End Sub
 
 
     Private Sub cmdSave1_Click(sender As Object, e As EventArgs) Handles cmdSave1.Click
         Dim fl, datarow, datahdr As String
+        Me.Cursor = Cursors.WaitCursor
 
         Try
             fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Performance.csv"
@@ -250,101 +267,167 @@
             Next i
             FileClose(11)
             If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
 
+    Private Sub cmdretrieve1_Click(sender As Object, e As EventArgs) Handles cmdretrieve1.Click
+
+        Me.Cursor = Cursors.WaitCursor
+
+        ' Add a record for key entry mode if not exists
+        Try
+            Dim qry As MySql.Data.MySqlClient.MySqlCommand
+            sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+        Catch ex As Exception
+            If ex.HResult <> -2147467259 Then 'Existing record
+                MsgBox(ex.HResult & " " & ex.Message)
+            End If
+        End Try
+
+        ListViewRecs.Clear()
+        lblTrecs.Text = 0
+
+        Try
+            If optTargets.Checked Then
+                sql = "SELECT username as User,recsexpt as Target_Records FROM userrecords;"
+               
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds.Clear()
+                da.Fill(ds, "settings")
+                DataGridSettings.DataSource = ds.Tables("settings")
+                DataGridSettings.Refresh()
+            Else
+                sql = "SELECT form_name,description, entry_mode FROM data_forms where selected ='1';"
+
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds.Clear()
+                da.Fill(ds, "forms")
+                DataGridSettings.DataSource = ds.Tables("forms")
+                DataGridSettings.Refresh()
+            End If
+            Me.Cursor = Cursors.Default
+            lblTrecs.Text = DataGridSettings.Rows.Count
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+        Dim usr, expt As String
+        Dim entrymode As Integer
+        Try
+            With DataGridSettings
+                If .Rows.Count = 0 Then
+                    MsgBox("No ecords retrieved yet!")
+                    Exit Sub
+                End If
+                If optTargets.Checked Then ' Targets Settings
+                    For i = 0 To .Rows.Count - 1
+                        usr = .Rows(i).Cells(0).Value
+                        expt = .Rows(i).Cells(1).Value
+                        ' Update user record
+                        sql = "UPDATE userrecords set recsexpt = '" & expt & "' where username ='" & usr & "';"
+                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry.CommandTimeout = 0
+                        qwry.ExecuteNonQuery()
+                    Next
+                Else    ' Key Entry Mode Settings
+                    For i = 0 To .Rows.Count - 1
+                        entrymode = Val(.Rows(i).Cells(2).Value)
+                        ' Update user record
+                        sql = "UPDATE data_forms set entry_mode = '" & entrymode & "' where form_name ='" & .Rows(i).Cells(0).Value & "';"
+                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry.CommandTimeout = 0
+                        qwry.ExecuteNonQuery()
+                    Next
+                End If
+                MsgBox("Update Successful")
+            End With
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
 
-    Private Sub cmdretrieve1_Click(sender As Object, e As EventArgs) Handles cmdretrieve1.Click
-        ' Compute Performance
-        sql = "SELECT username as User,recsexpt as Target_Records FROM userrecords;"
-        'MsgBox(sql)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-        da.Fill(ds, "settings")
-        DataGridSettings.DataSource = ds.Tables("settings")
-        DataGridSettings.Refresh()
-    End Sub
-
-    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
-        Dim usr, expt As String
-        With DataGridSettings
-            For i = 0 To .Rows.Count - 1
-                usr = .Rows(i).Cells(0).Value
-                expt = .Rows(i).Cells(1).Value
-
-                ' Update user record
-                sql = "UPDATE userrecords set recsexpt = '" & expt & "' where username ='" & usr & "';"
-                'MsgBox(sql)
-                qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                qwry.CommandTimeout = 0
-                qwry.ExecuteNonQuery()
-            Next
-        End With
-    End Sub
-
     Private Sub cmdExtarct_Click(sender As Object, e As EventArgs) Handles cmdExtarct.Click
-
         Dim Rec(6), MarkType As String
 
-        'Set selections
-        If optVerified.Checked Then
-            MarkType = "mark = 1"
-        Else
-            MarkType = "(mark is null or mark <> 1)"
-        End If
+        Try
+            Me.Cursor = Cursors.WaitCursor
+            ListViewRecs.Clear()
+            lblTrecs.Text = 0
 
-        If optKeyEntryForm.Checked Then
-            sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
-                  "where " & MarkType & " and dataForm ='" & cboForms.Text & "' and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
-        Else
-            sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
-                  "where " & MarkType & " and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
-
-        End If
-        'MsgBox(sql)
-
-        ' Extract data
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-        da.Fill(ds, "verified")
-
-        ' Initialize List View
-        ListViewRecs.Clear()
-        ListViewRecs.Columns.Clear()
-        ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
-        ListViewRecs.Columns.Add("Element", 100, HorizontalAlignment.Left)
-        ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
-        ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
-        ListViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
-        ListViewRecs.Columns.Add("Login", 150, HorizontalAlignment.Left)
-
-        For i = 0 To ds.Tables("verified").Rows.Count - 1
-            Rec(0) = ds.Tables("verified").Rows(i).Item(0)
-            Rec(1) = ds.Tables("verified").Rows(i).Item(1)
-            Rec(2) = ds.Tables("verified").Rows(i).Item(2)
-            Rec(3) = ds.Tables("verified").Rows(i).Item(3)
-            If Not IsDBNull(ds.Tables("verified").Rows(i).Item(4)) Then
-                Rec(4) = ds.Tables("verified").Rows(i).Item(4)
+            'Set selections
+            If optVerified.Checked Then
+                MarkType = "mark = 1"
             Else
-                Rec(4) = "UNKOWN"
-            End If
-            If Not IsDBNull(ds.Tables("verified").Rows(i).Item(5)) And Len(ds.Tables("verified").Rows(i).Item(5)) > 0 Then
-                Rec(5) = ds.Tables("verified").Rows(i).Item(5)
-            Else
-                Rec(5) = "UNKOWN"
+                MarkType = "(mark is null or mark <> 1)"
             End If
 
-            Dim itms = New ListViewItem(Rec)
-            ListViewRecs.Items.Add(itms)
-        Next i
-        lblTrecs.Text = ListViewRecs.Items.Count
+            If optKeyEntryForm.Checked Then
+                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
+                      "where " & MarkType & " and dataForm ='" & cboForms.Text & "' and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
+            Else
+                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
+                      "where " & MarkType & " and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
+
+            End If
+
+            ' Extract data
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "verified")
+
+            ' Initialize List View
+            ListViewRecs.Clear()
+            ListViewRecs.Columns.Clear()
+            ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+            ListViewRecs.Columns.Add("Element", 100, HorizontalAlignment.Left)
+            ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+            ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+            ListViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
+            ListViewRecs.Columns.Add("Login", 150, HorizontalAlignment.Left)
+
+            For i = 0 To ds.Tables("verified").Rows.Count - 1
+                Rec(0) = ds.Tables("verified").Rows(i).Item(0)
+                Rec(1) = ds.Tables("verified").Rows(i).Item(1)
+                Rec(2) = ds.Tables("verified").Rows(i).Item(2)
+                Rec(3) = ds.Tables("verified").Rows(i).Item(3)
+                If Not IsDBNull(ds.Tables("verified").Rows(i).Item(4)) Then
+                    Rec(4) = ds.Tables("verified").Rows(i).Item(4)
+                Else
+                    Rec(4) = "UNKOWN"
+                End If
+
+                If IsDBNull(ds.Tables("verified").Rows(i).Item(5)) Then
+                    Rec(5) = "UNKOWN"
+                ElseIf Len(ds.Tables("verified").Rows(i).Item(5)) = 0 Then
+                    Rec(5) = "UNKOWN"
+                Else
+                    Rec(5) = ds.Tables("verified").Rows(i).Item(5)
+                End If
+
+                Dim itms = New ListViewItem(Rec)
+                ListViewRecs.Items.Add(itms)
+            Next i
+            lblTrecs.Text = ListViewRecs.Items.Count
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
 
-    Private Sub optAllForms_CheckedChanged(sender As Object, e As EventArgs) Handles optAllForms.CheckedChanged
-
-    End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
         Dim savefile As String
@@ -398,5 +481,16 @@
 
     Private Sub cmdSave0_Click(sender As Object, e As EventArgs)
         Save_Output("Records", "Users Records")
+    End Sub
+
+    Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
+        Me.Close()
+    End Sub
+
+
+    Private Sub optTargets_CheckedChanged(sender As Object, e As EventArgs) Handles optTargets.CheckedChanged
+        DataGridSettings.DataSource = ""
+        DataGridSettings.Refresh()
+        lblTrecs.Text = 0
     End Sub
 End Class

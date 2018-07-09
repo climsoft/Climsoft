@@ -11,17 +11,42 @@
         Dim col(2) As String
         Dim itm As New ListViewItem
 
+        MyConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = MyConnectionString
+
+        ' Add a record for key entry mode if not exists
+        Try
+            Dim qry As MySql.Data.MySqlClient.MySqlCommand
+            sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
+            conn.Open()
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            conn.Close()
+        Catch ex As Exception
+            If ex.HResult <> -2147467259 Then 'Existing record
+                MsgBox(ex.HResult & " " & ex.Message)
+            End If
+            conn.Close()
+        End Try
+
+
+
         lstvForms.Clear()
         lstvForms.Columns.Clear()
 
         lstvForms.Columns.Add("Form Name", 150, HorizontalAlignment.Left)
-        lstvForms.Columns.Add("Form Details", 600, HorizontalAlignment.Left)
+        lstvForms.Columns.Add("Form Details", 400, HorizontalAlignment.Left)
+        'lstvForms.Columns.Add("Mode", 50, HorizontalAlignment.Center)
+
         Try
-            MyConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = MyConnectionString
+
             conn.Open()
 
-            sql = "SELECT selected,form_name, description FROM data_forms;"
+            'sql = "SELECT selected,form_name, description, entry_mode FROM data_forms;"
+            sql = "SELECT selected,form_name, description, entry_mode FROM data_forms;"
+
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "data_forms")
@@ -29,6 +54,7 @@
             For i = 0 To ds.Tables("data_forms").Rows.Count - 1
                 col(0) = ds.Tables("data_forms").Rows(i).Item(1)
                 col(1) = ds.Tables("data_forms").Rows(i).Item(2)
+                'col(3) = ds.Tables("data_forms").Rows(i).Item(3)
                 itm = New ListViewItem(col)
                 lstvForms.Items.Add(itm)
                 If ds.Tables("data_forms").Rows(i).Item(0) = 1 Then lstvForms.Items(i).Checked = True
@@ -42,19 +68,23 @@
 
         cmd.Connection = conn
 
-        On Error GoTo err
+        On Error GoTo Err
+
         For i = 0 To lstvForms.Items.Count - 1
             If lstvForms.Items(i).Checked = True Then
 
-                sql = "UPDATE data_forms SET selected = 1 WHERE form_name = '" & lstvForms.Items(i).Text & "';"
+                sql = "UPDATE data_forms SET selected = 1, entry_mode = '" & lstvForms.Items(i).SubItems(2).Text & "' WHERE form_name = '" & lstvForms.Items(i).SubItems(1).Text & "';"
             Else
-                sql = "UPDATE data_forms set SELECTED = 0 WHERE form_name = '" & lstvForms.Items(i).Text & "';"
+                sql = "UPDATE data_forms set SELECTED = 0, entry_mode = '" & Strings.Right(lstvForms.Items(i).Text, 1) & "' WHERE form_name = '" & lstvForms.Items(i).Text & "';"
             End If
 
             cmd.CommandText = sql
             cmd.ExecuteNonQuery()
-
         Next
+
+        cmd.CommandText = sql
+        cmd.ExecuteNonQuery()
+
         MsgBox(msgKeyentryFormsListUpdated, MsgBoxStyle.Information)
         Exit Sub
 Err:

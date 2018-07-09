@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formAgro1
+Partial Class form_agro1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -1290,6 +1290,7 @@ Partial Class formAgro1
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
         Me.chkRepeatEntry.Location = New System.Drawing.Point(69, 600)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
@@ -1331,7 +1332,7 @@ Partial Class formAgro1
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
         Me.txtSequencer.TabIndex = 1148
-        Me.txtSequencer.Text = "seq_month_day_synoptime"
+        Me.txtSequencer.Text = "seq_month_day"
         '
         'btnHelp
         '
@@ -1444,7 +1445,7 @@ Partial Class formAgro1
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
-        'formAgro1
+        'form_agro1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1601,7 +1602,7 @@ Partial Class formAgro1
         Me.Controls.Add(Me.cboDay)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formAgro1"
+        Me.Name = "form_agro1"
         Me.Text = "Kenya Agromet Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
