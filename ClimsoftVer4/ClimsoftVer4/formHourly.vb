@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class formHourly
+Public Class form_hourly
 
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
@@ -425,6 +425,9 @@ Public Class formHourly
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
 
+            ' Retrieve Keyentry mode information and mark on the checkbox
+            If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
+
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")
@@ -501,6 +504,22 @@ Public Class formHourly
                 ctrl.BackColor = Color.White
             End If
         Next ctrl
+
+        ' Don't use Sequencer to fill the form header text boxes if in Double Key Entry i.e. Repeat Entry Mode
+        If chkRepeatEntry.Checked Then
+            Dim recdate As Date
+            ' Enable AddNew button and Diable Save button
+            btnAddNew.Enabled = True
+            btnCommit.Enabled = False
+            ' Compute the new header entries for the next record
+            recdate = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
+            recdate = DateAdd("d", 1, recdate)
+            txtYear.Text = DateAndTime.Year(recdate)
+            cboMonth.Text = DateAndTime.Month(recdate)
+            cboDay.Text = DateAndTime.Day(recdate)
+            Exit Sub
+        End If
+
 
         'Check for leap year
         Dim objCheckYear As New dataEntryGlobalRoutines
@@ -638,7 +657,7 @@ Public Class formHourly
             If Strings.Left(ctl.Name, 6) = "txtVal" And IsNumeric(ctl.Text) Then n = 1
         Next ctl
 
-       
+
         'Check if header information is complete. If the header information is complete and there is at least on obs value then,
         'carry out the next actions, otherwise bring up message showing that there is insufficient data
         If n = 1 And Strings.Len(cboStation.Text) > 0 And Strings.Len(txtYear.Text) > 0 And Strings.Len(cboMonth.Text) And Strings.Len(cboDay.Text) > 0 Then
@@ -1000,7 +1019,7 @@ Public Class formHourly
             'Generate SQL string for inserting data into observationinitial table
             '' If Strings.Len(obsVal) > 0 Then
             strSQL = "INSERT INTO form_hourly (stationId,elementId,yyyy,mm,dd,signature,entryDatetime) " & _
-                "VALUES ('" & stnId & "','" & elemId & "','" & obsYear & "','" & obsMonth & "','" & obsDay & "','"  & strSignature & "','" & strTimeStamp & "')"
+                "VALUES ('" & stnId & "','" & elemId & "','" & obsYear & "','" & obsMonth & "','" & obsDay & "','" & strSignature & "','" & strTimeStamp & "')"
 
             'MsgBox(strSQL)
 
@@ -1319,7 +1338,7 @@ Public Class formHourly
 
                 If Not IsDBNull(ds.Tables("form_hourly").Rows(n).Item(m)) Then obsVal = ds.Tables("form_hourly").Rows(n).Item(m)
                 If Not IsDBNull(ds.Tables("form_hourly").Rows(n).Item(m + 24)) Then obsFlag = ds.Tables("form_hourly").Rows(n).Item(m + 24)
-                
+
                 'Generate SQL string for inserting data into observationinitial table
                 If Strings.Len(obsVal) > 0 Then
                     strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
@@ -1380,4 +1399,7 @@ Public Class formHourly
     End Sub
 
 
+    Private Sub txtVal_00Field005_TextChanged(sender As Object, e As EventArgs) Handles txtVal_00Field005.TextChanged
+
+    End Sub
 End Class

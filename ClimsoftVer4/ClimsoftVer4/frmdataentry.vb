@@ -23,6 +23,7 @@ Public Class frmKeyEntry
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim MyConnectionString As String
     Dim kounts As Integer
+    Dim keyentrymode As Integer
 
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -30,7 +31,30 @@ Public Class frmKeyEntry
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4;"
         'TODO: This line of code loads data into the 'Dataforms.data_forms' table
 
+
         MyConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = MyConnectionString
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            ' Add a record for key entry mode if not exists
+            sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
+            conn.Open()
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            conn.Close()
+        Catch ex As Exception
+            If ex.HResult <> -2147467259 Then 'Existing record
+                MsgBox(ex.HResult & " " & ex.Message)
+            End If
+            conn.Close()
+        End Try
+
+
+
+        'MyConnectionString = frmLogin.txtusrpwd.Text
         ListView1.Columns.Add("Form Name", 150, HorizontalAlignment.Left)
         ListView1.Columns.Add("Form Details", 600, HorizontalAlignment.Left)
 
@@ -49,6 +73,7 @@ Public Class frmKeyEntry
 
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
+            conn.Close()
         End Try
 
         maxRows = ds.Tables("data_forms").Rows.Count
@@ -73,6 +98,19 @@ Public Class frmKeyEntry
         ' Get and list the database name
         lblDb.Text = Mid(frmLogin.cmbDatabases.Items.Item(0), 1, Len(frmLogin.cmbDatabases.Items.Item(0)) - 1)
 
+        ''Get the key entry mode
+        'Try
+        '    sql = "select keyValue from regkeys where keyName='key14';"
+        '    conn.Open()
+        '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '    ds.Clear()
+        '    da.Fill(ds, "regkeys")
+        '    keyentrymode = ds.Tables("regkeys").Rows(0).Item(0)
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    conn.Close()
+        'End Try
 
     End Sub
 
@@ -105,21 +143,21 @@ Public Class frmKeyEntry
 
         Select Case frm
             Case "form_synoptic_2_ra1"
-                formSynopRA1.Show()
+                form_synopticRA1.Show()
             Case "form_daily1"
                 formDaily1.Show()
             Case "form_daily2"
-                formDaily2.Show()
+                form_daily2.Show()
             Case "form_hourly"
-                formHourly.Show()
+                form_hourly.Show()
             Case "form_monthly"
-                formMonthly.Show()
+                form_monthly.Show()
             Case "form_upperair1"
-                formUpperAir.Show()
+                form_upperair1.Show()
             Case "form_hourlywind"
-                formHourlyWind.Show()
+                form_hourlywind.Show()
             Case "form_agro1"
-                formAgro1.Show()
+                form_agro1.Show()
         End Select
     End Sub
 

@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class formMonthly
+Public Class form_monthly
 
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
@@ -422,7 +422,7 @@ Public Class formMonthly
         ' ''Else
         ' ''    cboStation.SelectedValue = cboStation.SelectedValue
         strYear = txtYear.Text
-       
+
 
         'Clear the texboxes and comboboxes of any background colors from previous Qc operation
 
@@ -701,7 +701,7 @@ Public Class formMonthly
         ds.Tables("form_monthly").Rows(inc).Item("stationId") = cboStation.SelectedValue
         ds.Tables("form_monthly").Rows(inc).Item("elementid") = cboElement.SelectedValue
         ds.Tables("form_monthly").Rows(inc).Item("yyyy") = txtYear.Text
-       
+
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
         For m = 3 To 14
@@ -721,7 +721,7 @@ Public Class formMonthly
                 End If
             Next ctl
         Next m
-        
+
         'The data adapter is used to update the record in the data source table
         da.Update(ds, "form_monthly")
 
@@ -796,7 +796,7 @@ Public Class formMonthly
         navigateRecords()
     End Sub
 
-   
+
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
         frmDataTransferProgress.Show()

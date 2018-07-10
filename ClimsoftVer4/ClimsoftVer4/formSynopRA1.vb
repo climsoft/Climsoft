@@ -36,7 +36,7 @@ Module mainModule
 
 End Module
 
-Public Class formSynopRA1
+Public Class form_synopticRA1
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -264,7 +264,7 @@ Public Class formSynopRA1
             strDay = cboDay.Text
             strHour = cboHour.Text
         End If
-    
+
         ''Check if year in last observation record is a leap year
         'Dim yearCheck As New dataEntryGlobalRoutines
         'If yearCheck.checkIsLeapYear(strYear) = True Then
@@ -1031,6 +1031,8 @@ Public Class formSynopRA1
 
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
+            ' Retrieve Keyentry mode information and mark on the checkbox
+            If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -1429,7 +1431,7 @@ Public Class formSynopRA1
             MsgBox(ex.Message)
             conn.Close()
         End Try
-        conn.Close
+        conn.Close()
     End Sub
 
 

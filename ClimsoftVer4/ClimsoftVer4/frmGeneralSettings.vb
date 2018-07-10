@@ -55,19 +55,41 @@ Public Class frmGeneralSettings
         'MsgBox(loggedInUser)
 
         'Set TAB next to true
+        myConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = myConnectionString
+
+        '' Add a record for key entry mode if not exists
+        'Try
+        '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        '    sql = "INSERT INTO `regkeys` (`keyName`, `keyValue`, `keyDescription`) VALUES ('key14', 'Single', 'Data entry mode. Single or Double entry');"
+
+        '    conn.Open()
+        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry.CommandTimeout = 0
+        '    qry.ExecuteNonQuery()
+
+        '    conn.Close()
+        'Catch ex As Exception
+        '    If ex.HResult <> -2147467259 Then 'Existing record
+        '        MsgBox(ex.HResult & " " & ex.Message)
+        '    End If
+        '    conn.Close()
+        'End Try
+
         tabNext = True
         'Set the record index counter to the first row
         inc = 0
 
-        myConnectionString = frmLogin.txtusrpwd.Text
+
         Try
-            conn.ConnectionString = myConnectionString
+
             conn.Open()
 
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
             sql = "SELECT * FROM regkeys"
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "regkeys")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
@@ -75,15 +97,13 @@ Public Class frmGeneralSettings
             'FormLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
+            conn.Close()
         End Try
 
         maxRows = ds.Tables("regkeys").Rows.Count
 
-       
 
         If maxRows > 0 Then
-           
-
             txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
             txtKeyValue.Text = ds.Tables("regkeys").Rows(inc).Item("keyValue")
             txtKeyDescription.Text = ds.Tables("regkeys").Rows(inc).Item("keyDescription")

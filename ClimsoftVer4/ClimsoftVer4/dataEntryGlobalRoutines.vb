@@ -536,4 +536,33 @@ Public Class dataEntryGlobalRoutines
             Entry_Verification = False
         End Try
     End Function
+
+    Function Key_Entry_Mode(frm As String) As String
+        'Get the key entry mode
+        Dim cons As New MySql.Data.MySqlClient.MySqlConnection
+        Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim s As New DataSet
+        Dim sql As String
+
+        cons.ConnectionString = frmLogin.txtusrpwd.Text
+
+        Key_Entry_Mode = "Single"
+        Try
+            sql = "select entry_mode from data_forms where form_name ='" & frm & "';"
+            cons.Open()
+            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, cons)
+            d.SelectCommand.CommandTimeout = 0
+            s.Clear()
+            d.Fill(s, "forms")
+            'MsgBox(sql)
+            'MsgBox(Val(s.Tables("forms").Rows(0).Item(0)))
+            If Val(s.Tables("forms").Rows(0).Item(0)) = 1 Then Key_Entry_Mode = "Double"
+
+            cons.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            cons.Close()
+        End Try
+    End Function
+
 End Class

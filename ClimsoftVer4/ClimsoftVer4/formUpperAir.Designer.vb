@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formUpperAir
+Partial Class form_upperair1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,12 +24,12 @@ Partial Class formUpperAir
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'formUpperAir
+        'form_upperair1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(734, 631)
-        Me.Name = "formUpperAir"
+        Me.Name = "form_upperair1"
         Me.Text = "Upper air Observations"
         Me.ResumeLayout(False)
 

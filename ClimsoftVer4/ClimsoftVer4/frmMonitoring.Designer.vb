@@ -68,12 +68,18 @@ Partial Class frmMonitoring
         Me.cboForms = New System.Windows.Forms.ComboBox()
         Me.TabSettings = New System.Windows.Forms.TabPage()
         Me.grpSettings = New System.Windows.Forms.GroupBox()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.optTargets = New System.Windows.Forms.RadioButton()
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdretrieve1 = New System.Windows.Forms.Button()
         Me.DataGridSettings = New System.Windows.Forms.DataGridView()
         Me.ListViewRecs = New System.Windows.Forms.ListView()
         Me.lblRecords = New System.Windows.Forms.Label()
         Me.lblTrecs = New System.Windows.Forms.Label()
+        Me.cmdClose = New System.Windows.Forms.Button()
+        Me.lblSingleEntryMode = New System.Windows.Forms.Label()
+        Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.TabMonitoring.SuspendLayout()
         Me.TabUsrRecords.SuspendLayout()
         Me.grpUsers.SuspendLayout()
@@ -548,50 +554,77 @@ Partial Class frmMonitoring
         '
         'grpSettings
         '
+        Me.grpSettings.Controls.Add(Me.lblDoubleEntryMode)
+        Me.grpSettings.Controls.Add(Me.lblSingleEntryMode)
+        Me.grpSettings.Controls.Add(Me.RadioButton1)
+        Me.grpSettings.Controls.Add(Me.optTargets)
         Me.grpSettings.Controls.Add(Me.cmdUpdate)
         Me.grpSettings.Controls.Add(Me.cmdretrieve1)
         Me.grpSettings.Controls.Add(Me.DataGridSettings)
         Me.grpSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSettings.Location = New System.Drawing.Point(8, 13)
+        Me.grpSettings.Location = New System.Drawing.Point(8, 3)
         Me.grpSettings.Name = "grpSettings"
-        Me.grpSettings.Size = New System.Drawing.Size(654, 158)
+        Me.grpSettings.Size = New System.Drawing.Size(654, 168)
         Me.grpSettings.TabIndex = 2
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Settings"
         '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(7, 64)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(116, 19)
+        Me.RadioButton1.TabIndex = 6
+        Me.RadioButton1.Text = "Data Entry Mode"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'optTargets
+        '
+        Me.optTargets.AutoSize = True
+        Me.optTargets.Checked = True
+        Me.optTargets.Location = New System.Drawing.Point(6, 30)
+        Me.optTargets.Name = "optTargets"
+        Me.optTargets.Size = New System.Drawing.Size(115, 19)
+        Me.optTargets.TabIndex = 5
+        Me.optTargets.TabStop = True
+        Me.optTargets.Text = "Targets Records"
+        Me.optTargets.UseVisualStyleBackColor = True
+        '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(472, 94)
+        Me.cmdUpdate.Location = New System.Drawing.Point(98, 136)
         Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(107, 28)
+        Me.cmdUpdate.Size = New System.Drawing.Size(56, 25)
         Me.cmdUpdate.TabIndex = 2
         Me.cmdUpdate.Text = "Update"
         Me.cmdUpdate.UseVisualStyleBackColor = True
         '
         'cmdretrieve1
         '
-        Me.cmdretrieve1.Location = New System.Drawing.Point(472, 37)
+        Me.cmdretrieve1.Location = New System.Drawing.Point(18, 137)
         Me.cmdretrieve1.Name = "cmdretrieve1"
-        Me.cmdretrieve1.Size = New System.Drawing.Size(107, 28)
+        Me.cmdretrieve1.Size = New System.Drawing.Size(56, 25)
         Me.cmdretrieve1.TabIndex = 1
-        Me.cmdretrieve1.Text = "Retrieve Users"
+        Me.cmdretrieve1.Text = "View"
         Me.cmdretrieve1.UseVisualStyleBackColor = True
         '
         'DataGridSettings
         '
         Me.DataGridSettings.AllowUserToOrderColumns = True
         Me.DataGridSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridSettings.Location = New System.Drawing.Point(7, 20)
+        Me.DataGridSettings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.DataGridSettings.Location = New System.Drawing.Point(200, 11)
         Me.DataGridSettings.Name = "DataGridSettings"
-        Me.DataGridSettings.Size = New System.Drawing.Size(448, 132)
+        Me.DataGridSettings.Size = New System.Drawing.Size(448, 151)
         Me.DataGridSettings.TabIndex = 0
         '
         'ListViewRecs
         '
         Me.ListViewRecs.GridLines = True
-        Me.ListViewRecs.Location = New System.Drawing.Point(13, 233)
+        Me.ListViewRecs.Location = New System.Drawing.Point(9, 234)
         Me.ListViewRecs.Name = "ListViewRecs"
-        Me.ListViewRecs.Size = New System.Drawing.Size(666, 311)
+        Me.ListViewRecs.Size = New System.Drawing.Size(670, 321)
         Me.ListViewRecs.TabIndex = 10
         Me.ListViewRecs.UseCompatibleStateImageBehavior = False
         Me.ListViewRecs.View = System.Windows.Forms.View.Details
@@ -599,27 +632,67 @@ Partial Class frmMonitoring
         'lblRecords
         '
         Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(295, 216)
+        Me.lblRecords.Location = New System.Drawing.Point(290, 218)
         Me.lblRecords.Name = "lblRecords"
-        Me.lblRecords.Size = New System.Drawing.Size(86, 13)
+        Me.lblRecords.Size = New System.Drawing.Size(89, 13)
         Me.lblRecords.TabIndex = 11
-        Me.lblRecords.Text = "Total Records = "
+        Me.lblRecords.Text = "Total Records  = "
         '
         'lblTrecs
         '
         Me.lblTrecs.AutoSize = True
-        Me.lblTrecs.Location = New System.Drawing.Point(377, 217)
+        Me.lblTrecs.Location = New System.Drawing.Point(377, 219)
         Me.lblTrecs.Name = "lblTrecs"
         Me.lblTrecs.Size = New System.Drawing.Size(13, 13)
         Me.lblTrecs.TabIndex = 12
         Me.lblTrecs.Text = "0"
         Me.lblTrecs.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
+        'cmdClose
+        '
+        Me.cmdClose.Location = New System.Drawing.Point(9, 210)
+        Me.cmdClose.Name = "cmdClose"
+        Me.cmdClose.Size = New System.Drawing.Size(78, 23)
+        Me.cmdClose.TabIndex = 13
+        Me.cmdClose.Text = "Close"
+        Me.cmdClose.UseVisualStyleBackColor = True
+        '
+        'lblSingleEntryMode
+        '
+        Me.lblSingleEntryMode.AutoSize = True
+        Me.lblSingleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSingleEntryMode.Location = New System.Drawing.Point(29, 84)
+        Me.lblSingleEntryMode.Name = "lblSingleEntryMode"
+        Me.lblSingleEntryMode.Size = New System.Drawing.Size(116, 13)
+        Me.lblSingleEntryMode.TabIndex = 14
+        Me.lblSingleEntryMode.Text = "0 for Single Data Entry "
+        '
+        'lblDoubleEntryMode
+        '
+        Me.lblDoubleEntryMode.AutoSize = True
+        Me.lblDoubleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDoubleEntryMode.Location = New System.Drawing.Point(29, 101)
+        Me.lblDoubleEntryMode.Name = "lblDoubleEntryMode"
+        Me.lblDoubleEntryMode.Size = New System.Drawing.Size(116, 13)
+        Me.lblDoubleEntryMode.TabIndex = 15
+        Me.lblDoubleEntryMode.Text = "1 for Double Key Entry "
+        '
+        'cmdHelp
+        '
+        Me.cmdHelp.Location = New System.Drawing.Point(600, 210)
+        Me.cmdHelp.Name = "cmdHelp"
+        Me.cmdHelp.Size = New System.Drawing.Size(78, 23)
+        Me.cmdHelp.TabIndex = 14
+        Me.cmdHelp.Text = "Help"
+        Me.cmdHelp.UseVisualStyleBackColor = True
+        '
         'frmMonitoring
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(692, 545)
+        Me.ClientSize = New System.Drawing.Size(692, 559)
+        Me.Controls.Add(Me.cmdHelp)
+        Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.lblTrecs)
         Me.Controls.Add(Me.lblRecords)
         Me.Controls.Add(Me.ListViewRecs)
@@ -641,6 +714,7 @@ Partial Class frmMonitoring
         Me.GroupBox2.PerformLayout()
         Me.TabSettings.ResumeLayout(False)
         Me.grpSettings.ResumeLayout(False)
+        Me.grpSettings.PerformLayout()
         CType(Me.DataGridSettings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -698,4 +772,10 @@ Partial Class frmMonitoring
     Friend WithEvents optNotVerified As System.Windows.Forms.RadioButton
     Friend WithEvents optVerified As System.Windows.Forms.RadioButton
     Friend WithEvents cmdView As System.Windows.Forms.Button
+    Friend WithEvents cmdClose As System.Windows.Forms.Button
+    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents optTargets As System.Windows.Forms.RadioButton
+    Friend WithEvents lblDoubleEntryMode As System.Windows.Forms.Label
+    Friend WithEvents lblSingleEntryMode As System.Windows.Forms.Label
+    Friend WithEvents cmdHelp As System.Windows.Forms.Button
 End Class

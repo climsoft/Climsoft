@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formSynopRA1
+Partial Class form_synopticRA1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -1675,6 +1675,7 @@ Partial Class formSynopRA1
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
         Me.chkRepeatEntry.Location = New System.Drawing.Point(21, 639)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
@@ -1682,7 +1683,7 @@ Partial Class formSynopRA1
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
-        'formSynopRA1
+        'form_synopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1864,7 +1865,7 @@ Partial Class formSynopRA1
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.Name = "formSynopRA1"
+        Me.Name = "form_synopticRA1"
         Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
