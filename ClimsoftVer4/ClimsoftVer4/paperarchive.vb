@@ -10,12 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class physicalfeatureclass
-    Public Property featureClass As String
-    Public Property description As String
-    Public Property refersTo As String
+Partial Public Class paperarchive
+    Public Property id As Long
+    Public Property belongsTo As String
+    Public Property formDatetime As Nullable(Of Date)
+    Public Property image As String
+    Public Property classifiedInto As String
 
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
     Public Overridable Property station As station
+    Public Overridable Property paperarchivedefinition As paperarchivedefinition
 
 End Class

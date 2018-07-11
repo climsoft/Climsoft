@@ -10,12 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class physicalfeatureclass
-    Public Property featureClass As String
-    Public Property description As String
-    Public Property refersTo As String
+Partial Public Class observationschedule
+    Public Property id As Long
+    Public Property classifiedInto As String
+    Public Property startTime As String
+    Public Property endTime As String
+    Public Property interval As String
+    Public Property additionalObsTime As String
 
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
-    Public Overridable Property station As station
+    Public Overridable Property obsscheduleclass As obsscheduleclass
 
 End Class
