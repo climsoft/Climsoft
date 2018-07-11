@@ -11,6 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class form_hourlywind
+    Public Property id As Long
     Public Property stationId As String
     Public Property yyyy As Integer
     Public Property mm As Integer
