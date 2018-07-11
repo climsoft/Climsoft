@@ -10,12 +10,11 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class physicalfeatureclass
-    Public Property featureClass As String
-    Public Property description As String
-    Public Property refersTo As String
-
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
-    Public Overridable Property station As station
+Partial Public Class flagtable
+    Public Property Bufr_Descriptor As String
+    Public Property Crex_Descriptor As String
+    Public Property Details As String
+    Public Property Widths As Nullable(Of Integer)
+    Public Property Missing As Nullable(Of Integer)
 
 End Class

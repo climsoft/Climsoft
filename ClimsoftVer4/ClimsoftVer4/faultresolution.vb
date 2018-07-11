@@ -10,12 +10,13 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class physicalfeatureclass
-    Public Property featureClass As String
-    Public Property description As String
-    Public Property refersTo As String
+Partial Public Class faultresolution
+    Public Property id As Long
+    Public Property resolvedDatetime As String
+    Public Property resolvedBy As String
+    Public Property associatedWith As Nullable(Of Long)
+    Public Property remarks As String
 
-    Public Overridable Property physicalfeatures As ICollection(Of physicalfeature) = New HashSet(Of physicalfeature)
-    Public Overridable Property station As station
+    Public Overridable Property instrumentfaultreport As instrumentfaultreport
 
 End Class

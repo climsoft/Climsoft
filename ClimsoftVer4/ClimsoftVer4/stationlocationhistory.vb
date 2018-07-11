@@ -10,11 +10,21 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class featuregeographicalposition
+Partial Public Class stationlocationhistory
     Public Property id As Long
     Public Property belongsTo As String
-    Public Property observedOn As String
+    Public Property stationType As String
+    Public Property geoLocationMethod As String
+    Public Property geoLocationAccuracy As Nullable(Of Single)
+    Public Property openingDatetime As String
+    Public Property closingDatetime As String
     Public Property latitude As Nullable(Of Double)
     Public Property longitude As Nullable(Of Double)
+    Public Property elevation As Nullable(Of Long)
+    Public Property authority As String
+    Public Property adminRegion As String
+    Public Property drainageBasin As String
+
+    Public Overridable Property station As station
 
 End Class
