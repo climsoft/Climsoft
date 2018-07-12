@@ -3,10 +3,14 @@
     Private Sub frmNewMonthly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
+            bFirstLoad = False
         End If
     End Sub
 
     Private Sub InitaliseDialog()
+        txtSequencer.ReadOnly = True
+        txtSequencer.Text = "seq_year"
+
         'ucrMonthlydata.setStationElementYearLink(ucrStationControl:=ucrStationSelector, ucrElementControl:=ucrElementSelector, ucrYearControl:=ucrYearSelector)
         AssignLinkToKeyField(ucrMonthlydata)
         ucrMonthlydata.PopulateControl()

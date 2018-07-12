@@ -546,8 +546,4 @@ Public Class ucrFormDaily2
 
     End Sub
 
-    Private Class MyExampleClass
-        Public i As Integer
-    End Class
-
 End Class

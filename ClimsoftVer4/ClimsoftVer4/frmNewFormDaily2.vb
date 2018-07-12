@@ -13,7 +13,6 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub InitaliseDialog()
-        ' Currently only works with this sequencer table so textbox disabled
         txtSequencer.ReadOnly = True
         txtSequencer.Text = "seq_daily_element"
         chkEnableSequencer.Checked = True
