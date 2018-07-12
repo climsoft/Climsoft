@@ -44,7 +44,7 @@ Public Class ucrFormDaily2
             clsCurrentFilter = GetLinkedControlsFilter()
             tempRecord = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
 
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
+            'if this was already a new record (Is Nothing AndAlso Not bUpdating) 
             'then just do validation of values based on the new key controls values and exit the sub
             If tempRecord Is Nothing AndAlso Not bUpdating Then
                 ValidateDataEntryPermission()
@@ -247,7 +247,6 @@ Public Class ucrFormDaily2
     End Sub
 
     Public Sub DeleteRecord()
-        'clsDataConnection.db.Entry(fhRecord)
         clsDataConnection.db.form_daily2.Attach(fd2Record)
         clsDataConnection.db.form_daily2.Remove(fd2Record)
         clsDataConnection.db.SaveChanges()
@@ -430,7 +429,7 @@ Public Class ucrFormDaily2
         Dim ctr As Control
 
         If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
-            Me.Enabled = True
+            Me.Enabled = False
         ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
             todaysDate = Date.Now
             iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())

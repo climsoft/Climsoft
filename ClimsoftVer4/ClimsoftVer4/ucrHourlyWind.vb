@@ -256,55 +256,79 @@ Public Class ucrHourlyWind
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
+        Dim strLowerLimit As String = ""
+        Dim strUpperLimit As String = ""
+
         iDirectionElementId = elementId
         clsDataDefinition = New DataCall
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
         clsDataDefinition.SetTableName("obselements")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
-        clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
+        clsDataDefinition.SetFilter("elementId", "=", iDirectionElementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
-                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-                        ucrDSF.SetElementDirectionValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
-                    End If
-                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
-                        ucrDSF.SetElementDirectionValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
-                    End If
-                End If
-            Next
+            strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
+            strUpperLimit = dtbl.Rows(0).Item("upperLimit")
         End If
+
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+
+                If String.IsNullOrEmpty(strLowerLimit) Then
+                    ucrDSF.SetElementDirectionLowerLimit(Decimal.MinValue)
+                Else
+                    ucrDSF.SetElementDirectionLowerLimit(Val(strLowerLimit))
+                End If
+
+                If String.IsNullOrEmpty(strUpperLimit) Then
+                    ucrDSF.SetElementDirectionHigherLimit(Decimal.MaxValue)
+                Else
+                    ucrDSF.SetElementDirectionHigherLimit(Val(strUpperLimit))
+                End If
+            End If
+        Next
     End Sub
 
     Public Sub SetSpeedValidation(elementId As Integer)
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
+        Dim strLowerLimit As String = ""
+        Dim strUpperLimit As String = ""
+
         iSpeedElementId = elementId
         clsDataDefinition = New DataCall
         'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
         'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
         clsDataDefinition.SetTableName("obselements")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
-        clsDataDefinition.SetFilter("elementId", "=", elementId, bForceValuesAsString:=False)
+        clsDataDefinition.SetFilter("elementId", "=", iSpeedElementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    ucrDSF = ctr
-                    If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-                        ucrDSF.SetElementSpeedValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
-                    End If
-                    If dtbl.Rows(0).Item("upperLimit") <> "" Then
-                        ucrDSF.SetElementSpeedValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
-                    End If
-                End If
-            Next
+            strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
+            strUpperLimit = dtbl.Rows(0).Item("upperLimit")
             bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
         End If
+
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+
+                If String.IsNullOrEmpty(strLowerLimit) Then
+                    ucrDSF.SetElementSpeedLowerLimit(Decimal.MinValue)
+                Else
+                    ucrDSF.SetElementSpeedLowerLimit(Val(strLowerLimit))
+                End If
+
+                If String.IsNullOrEmpty(strUpperLimit) Then
+                    ucrDSF.SetElementSpeedHigherLimit(Decimal.MaxValue)
+                Else
+                    ucrDSF.SetElementSpeedHigherLimit(Val(strUpperLimit))
+                End If
+            End If
+        Next
     End Sub
 
     ''' <summary>
@@ -422,8 +446,8 @@ Public Class ucrHourlyWind
     ''' </summary>
     Private Sub ValidateDataEntryPermission()
         'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
-        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Me.Enabled = True
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Me.Enabled = False
         ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
             Dim selectedDate As Date

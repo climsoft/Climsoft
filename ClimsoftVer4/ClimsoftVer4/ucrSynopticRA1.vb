@@ -560,8 +560,8 @@ Public Class ucrSynopticRA1
     ''' </summary>
     Private Sub ValidateDataEntryPermission()
         'if its an update or any of the linked year,month and day selector is nothing then just enable the control
-        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Me.Enabled = True
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Me.Enabled = False
         ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
             Dim selectedDate As Date
