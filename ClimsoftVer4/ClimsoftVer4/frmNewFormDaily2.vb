@@ -8,6 +8,8 @@ Public Class frmNewFormDaily2
             InitaliseDialog()
             bFirstLoad = False
         End If
+        'TODO. Remove this once btnUpload has been enabled in the designer
+        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
@@ -111,7 +113,7 @@ Public Class frmNewFormDaily2
                 Exit Sub
             End If
 
-            If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrFormDaily.DeleteRecord()
                 ucrDaiy2Navigation.RemoveRecord()
                 SaveEnable()
@@ -171,7 +173,14 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        ucrFormDaily.UploadAllRecords()
+        Try
+            If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrFormDaily.UploadAllRecords()
+                MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function ValidateValues() As Boolean

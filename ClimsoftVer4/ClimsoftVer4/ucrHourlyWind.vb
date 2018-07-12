@@ -12,7 +12,8 @@ Public Class ucrHourlyWind
     Private bSpeedTotalRequired As Boolean
     Private lstFields As New List(Of String)
     Public fhourlyWindRecord As form_hourlywind
-    Public bUpdating As Boolean = False
+    'Set to True by default
+    Public bUpdating As Boolean = True
     Private ucrLinkedNavigation As ucrNavigation
     Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedYear As ucrYearSelector
@@ -49,23 +50,34 @@ Public Class ucrHourlyWind
 
     Public Overrides Sub PopulateControl()
         Dim clsCurrentFilter As TableFilter
+        Dim tempRecord As form_hourlywind
 
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            If fhourlyWindRecord Is Nothing Then
-                clsCurrentFilter = GetLinkedControlsFilter()
-                fhourlyWindRecord = clsDataConnection.db.form_hourlywind.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-                If fhourlyWindRecord Is Nothing Then
-                    fhourlyWindRecord = New form_hourlywind
-                    bUpdating = False
-                Else
-                    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
-                    bUpdating = True
-                End If
-                'enable or disable textboxes based on year month day
+            'try to get the record based on the given filter
+            clsCurrentFilter = GetLinkedControlsFilter()
+            tempRecord = clsDataConnection.db.form_hourlywind.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
+
+            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
+            'then just do validation of values based on the new key controls values and exit the sub
+            If tempRecord Is Nothing AndAlso Not bUpdating Then
                 ValidateDataEntryPermission()
+                ValidateValue()
+                Exit Sub
             End If
+
+            fhourlyWindRecord = tempRecord
+            If fhourlyWindRecord Is Nothing Then
+                fhourlyWindRecord = New form_hourlywind
+                bUpdating = False
+            Else
+                clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
+                bUpdating = True
+            End If
+
+            'enable or disable textboxes based on year month day
+            ValidateDataEntryPermission()
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
@@ -74,6 +86,8 @@ Public Class ucrHourlyWind
                     DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
             Next
+
+            OnevtValueChanged(Me, Nothing)
 
         End If
     End Sub
@@ -144,7 +158,7 @@ Public Class ucrHourlyWind
         Next
 
         If bValidValues Then
-            fhourlyWindRecord = Nothing
+            'fhourlyWindRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
@@ -160,20 +174,18 @@ Public Class ucrHourlyWind
         'This is determined by the current user not set from the form
         fhourlyWindRecord.signature = frmLogin.txtUsername.Text
 
-        'THIS CAN NOW BE PUSHED TO clsDataConnection CLASS
         If bUpdating Then
-            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
         Else
-            'clsDataConnection.db.form_hourlywind.Add(fhourlyWindRecord)
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
         End If
 
         clsDataConnection.db.SaveChanges()
+        'detach the record to prevent caching of records on the EF
+        clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        'clsDataConnection.db.Entry(fhourlyWindRecord)
         clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
         clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
         clsDataConnection.db.SaveChanges()
@@ -435,8 +447,12 @@ Public Class ucrHourlyWind
         Dim strValueColumn As String
         Dim strFlagColumn As String
         Dim strTag As String
-        Dim iElementId As Long
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim hh As Integer
+        Dim dtObsDateTime As Date
         Dim lstAllFields As New List(Of String)
+        Dim bNewRecord As Boolean
 
         'get the observation values fields
         lstAllFields.AddRange(lstFields)
@@ -450,10 +466,10 @@ Public Class ucrHourlyWind
             For Each strFieldName As String In lstFields
                 'if its not an observation direction or speed value field then skip the loop
                 If strFieldName.StartsWith(Me.strDirectionFieldName) Then
-                    iElementId = iDirectionElementId
+                    lElementId = iDirectionElementId
                     strTag = strFieldName.Substring(Me.strDirectionFieldName.Length)
                 ElseIf strFieldName.StartsWith(Me.strSpeedFieldName) Then
-                    iElementId = iSpeedElementId
+                    lElementId = iSpeedElementId
                     strTag = strFieldName.Substring(Me.strSpeedFieldName.Length)
                 Else
                     Continue For
@@ -466,13 +482,24 @@ Public Class ucrHourlyWind
 
                 'set the record
                 If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
-                    rcdObservationInitial = New observationinitial
-                    rcdObservationInitial.recordedFrom = row.Item("stationId")
-                    rcdObservationInitial.describedBy = iElementId
-                    Try
-                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
-                    Catch ex As Exception
-                    End Try
+
+                    strStationId = row.Item("stationId")
+                    hh = Integer.Parse(strTag)
+                    dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
+
+                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
+                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
+
+                    If rcdObservationInitial Is Nothing Then
+                        bNewRecord = True
+                        rcdObservationInitial = New observationinitial
+                    Else
+                        bNewRecord = False
+                    End If
+
+                    rcdObservationInitial.recordedFrom = strStationId
+                    rcdObservationInitial.describedBy = lElementId
+                    rcdObservationInitial.obsDatetime = dtObsDateTime
                     rcdObservationInitial.obsLevel = "surface"
                     rcdObservationInitial.obsValue = row.Item(strValueColumn)
                     rcdObservationInitial.flag = row.Item(strFlagColumn)
@@ -484,13 +511,18 @@ Public Class ucrHourlyWind
                         rcdObservationInitial.capturedBy = row.Item("signature")
                     End If
 
-                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    If bNewRecord Then
+                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    End If
+                    'save the Observation record
+                    clsDataConnection.db.SaveChanges()
+
                 End If
             Next
         Next
 
-        'save the Observation record
-        clsDataConnection.SaveUpdate()
+        'TODO? because of the detachment
+        PopulateControl()
     End Sub
 
 End Class
