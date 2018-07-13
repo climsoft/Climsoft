@@ -8,7 +8,8 @@ Public Class ucrHourly
     Private strTotalFieldName As String = "total"
     Private lstFields As New List(Of String)
     Public fhRecord As form_hourly
-    Public bUpdating As Boolean = False
+    'Set to True by default
+    Public bUpdating As Boolean = True
     Private ucrLinkedNavigation As ucrNavigation
     Private bTotalRequired As Boolean
     Private ucrLinkedYear As ucrYearSelector
@@ -16,6 +17,57 @@ Public Class ucrHourly
     Private ucrLinkedDay As ucrDay
     Private ucrLinkedStation As ucrStationSelector
     Private ucrlinkedElement As ucrElementSelector
+
+    ''' <summary>
+    ''' Sets the values of the controls to the coresponding record values in the database with the current key
+    ''' </summary>
+    Public Overrides Sub PopulateControl()
+        Dim clsCurrentFilter As New TableFilter
+        Dim tempRecord As form_hourly
+
+        If Not bFirstLoad Then
+            MyBase.PopulateControl()
+
+            'try to get the record based on the given filter
+            clsCurrentFilter = GetLinkedControlsFilter()
+            tempRecord = clsDataConnection.db.form_hourly.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
+
+            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
+            'then just do validation of values based on the new key controls values and exit the sub
+            If tempRecord Is Nothing AndAlso Not bUpdating Then
+                ValidateDataEntryPermission()
+                SetValueValidation()
+                ValidateValue()
+                Exit Sub
+            End If
+
+            fhRecord = tempRecord
+            If fhRecord Is Nothing Then
+                fhRecord = New form_hourly
+                bUpdating = False
+            Else
+                clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
+                bUpdating = True
+            End If
+
+            'check whether to permit data entry based on date entry values
+            ValidateDataEntryPermission()
+
+            'set the validation of the controls
+            SetValueValidation()
+
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                ElseIf TypeOf ctr Is ucrTextBox Then
+                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                End If
+            Next
+
+            OnevtValueChanged(Me, Nothing)
+
+        End If
+    End Sub
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ucrVFP As ucrValueFlagPeriod
@@ -43,40 +95,7 @@ Public Class ucrHourly
             bFirstLoad = False
         End If
     End Sub
-    ''' <summary>
-    ''' Sets the values of the controls to the coresponding record values in the database with the current key
-    ''' </summary>
-    Public Overrides Sub PopulateControl()
-        Dim clsCurrentFilter As New TableFilter
 
-        If Not bFirstLoad Then
-            MyBase.PopulateControl()
-            If fhRecord Is Nothing Then
-                clsCurrentFilter = GetLinkedControlsFilter()
-                fhRecord = clsDataConnection.db.form_hourly.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-                If fhRecord Is Nothing Then
-                    fhRecord = New form_hourly
-                    bUpdating = False
-                Else
-                    clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
-                    bUpdating = True
-                End If
-                'enable or disable textboxes based on year month day
-                ValidateDataEntryPermission()
-            End If
-
-            'change the validation of the controls
-            SetValueValidation()
-
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
-                End If
-            Next
-        End If
-    End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
@@ -163,9 +182,8 @@ Public Class ucrHourly
         Next
 
         If bValidValues Then
-            fhRecord = Nothing
+            'fhRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
-
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
@@ -185,11 +203,13 @@ Public Class ucrHourly
         Else
             clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Added
         End If
+
         clsDataConnection.db.SaveChanges()
+        'detach the record to prevent caching of records on the EF
+        clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        'clsDataConnection.db.Entry(fhRecord)
         clsDataConnection.db.form_hourly.Attach(fhRecord)
         clsDataConnection.db.form_hourly.Remove(fhRecord)
         clsDataConnection.db.SaveChanges()
@@ -273,21 +293,7 @@ Public Class ucrHourly
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", Val(ucrlinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
-        'If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-        '    For Each ctr As Control In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-        '            If dtbl.Rows(0).Item("lowerLimit") <> "" Then
-        '                ucrVFP.SetElementValueValidation(iLowerLimit:=Val(dtbl.Rows(0).Item("lowerLimit")))
-        '            End If
-        '            If dtbl.Rows(0).Item("upperLimit") <> "" Then
-        '                ucrVFP.SetElementValueValidation(iUpperLimit:=Val(dtbl.Rows(0).Item("upperLimit")))
-        '            End If
-        '        End If
-        '    Next
-        '    bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
-        'End If
-
+        'get upper and lower limits
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
             strUpperLimit = dtbl.Rows(0).Item("upperLimit")
@@ -439,9 +445,12 @@ Public Class ucrHourly
         Dim strValueColumn As String
         Dim strFlagColumn As String
         Dim strTag As String
-        Dim iElementId As Long
+        Dim strStationId As String
+        Dim lElementId As Long
         Dim hh As Integer
+        Dim dtObsDateTime As Date
         Dim lstAllFields As New List(Of String)
+        Dim bNewRecord As Boolean
 
         'get the observation values fields
         lstAllFields.AddRange(lstFields)
@@ -460,22 +469,30 @@ Public Class ucrHourly
 
                 strValueColumn = strFieldName
                 'set the record
-                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), iElementId) Then
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
+                    strStationId = row.Item("stationId")
                     strTag = strFieldName.Substring(Me.strValueFieldName.Length)
                     strFlagColumn = lstFields.Find(Function(x As String)
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    rcdObservationInitial = New observationinitial
-                    rcdObservationInitial.recordedFrom = row.Item("stationId")
-                    rcdObservationInitial.describedBy = iElementId
+                    hh = Integer.Parse(strTag)
+                    dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
 
-                    Try
-                        hh = Integer.Parse(strTag)
-                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
-                    Catch ex As Exception
-                    End Try
+                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
+                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
+
+                    If rcdObservationInitial Is Nothing Then
+                        bNewRecord = True
+                        rcdObservationInitial = New observationinitial
+                    Else
+                        bNewRecord = False
+                    End If
+
+                    rcdObservationInitial.recordedFrom = strStationId
+                    rcdObservationInitial.describedBy = lElementId
+                    rcdObservationInitial.obsDatetime = dtObsDateTime
                     rcdObservationInitial.obsLevel = "surface"
                     rcdObservationInitial.obsValue = row.Item(strValueColumn)
                     rcdObservationInitial.flag = row.Item(strFlagColumn)
@@ -487,14 +504,19 @@ Public Class ucrHourly
                         rcdObservationInitial.capturedBy = row.Item("signature")
                     End If
 
-                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    If bNewRecord Then
+                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    End If
+                    'save the Observation record
+                    clsDataConnection.db.SaveChanges()
 
                 End If
             Next
         Next
 
-        'save the Observation record
-        clsDataConnection.SaveUpdate()
+
+        'TODO? because of the detachment
+        PopulateControl()
 
     End Sub
 

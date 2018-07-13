@@ -137,12 +137,30 @@ Public Class ucrDirectionSpeedFlag
         Return ucrFlag.IsEmpty()
     End Function
 
-    Public Sub SetElementDirectionValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
-        ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    Public Sub SetElementDirectionLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        SetElementDirectionLowerLimit(iLowerLimit)
+        SetElementDirectionHigherLimit(iUpperLimit)
     End Sub
 
-    Public Sub SetElementSpeedValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
-        ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    Public Sub SetElementDirectionLowerLimit(iLowerLimit As Decimal)
+        ucrDirection.SetMinimumValue(iLowerLimit)
+    End Sub
+
+    Public Sub SetElementDirectionHigherLimit(iUpperLimit As Decimal)
+        ucrDirection.SetMaximumValue(iUpperLimit)
+    End Sub
+
+    Public Sub SetElementSpeedLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        SetElementSpeedLowerLimit(iLowerLimit)
+        SetElementSpeedHigherLimit(iUpperLimit)
+    End Sub
+
+    Public Sub SetElementSpeedLowerLimit(iLowerLimit As Decimal)
+        ucrSpeed.SetMinimumValue(iLowerLimit)
+    End Sub
+
+    Public Sub SetElementSpeedHigherLimit(iUpperLimit As Decimal)
+        ucrSpeed.SetMaximumValue(iUpperLimit)
     End Sub
 
     Public Sub SetElementDirectionDigits(iNewDirectionDigits As Integer)
