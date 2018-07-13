@@ -355,9 +355,16 @@ Public Class ucrValueFlagPeriod
     End Function
 
     Private Sub SetTextBoxSize()
-        ucrValue.SetElementValueSize(New Size(51, 20))
-        ucrFlag.SetElementValueSize(New Size(27, 20))
-        ucrPeriod.SetElementValueSize(New Size(33, 20))
+        ucrValue.SetSize(New Size(51, 20))
+        ucrFlag.SetSize(New Size(27, 20))
+        ucrPeriod.SetSize(New Size(33, 20))
+    End Sub
+
+
+    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+        ucrValue.SetContextMenuStrip(contextMenuStrip)
+        ucrFlag.SetContextMenuStrip(contextMenuStrip)
+        ucrPeriod.SetContextMenuStrip(contextMenuStrip)
     End Sub
 
 End Class

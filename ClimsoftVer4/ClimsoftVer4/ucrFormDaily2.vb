@@ -30,6 +30,8 @@ Public Class ucrFormDaily2
     Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedElement As ucrElementSelector
 
+    Dim vfpContextMenuStrip As ContextMenuStrip
+
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
     ''' </summary>
@@ -99,18 +101,24 @@ Public Class ucrFormDaily2
         Dim ucrTotal As ucrTextBox
 
         If bFirstLoad Then
+            Me.vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     lstFields.Add(strValueFieldName & ucrVFP.Tag)
                     lstFields.Add(strFlagFieldName & ucrVFP.Tag)
                     lstFields.Add(strPeriodFieldName & ucrVFP.Tag)
+
                     ucrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ucrVFP.Tag, strFlagFieldName:=strFlagFieldName & ucrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ucrVFP.Tag)
 
                     AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
+                    ucrVFP.SetContextMenuStrip(Me.vfpContextMenuStrip)
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrTotal = DirectCast(ctr, ucrTextBox)
                     ucrTotal.SetTableNameAndField(strTableName, strTotalFieldName)
@@ -543,6 +551,41 @@ Public Class ucrFormDaily2
         'TODO? because of the detachment
         PopulateControl()
 
+    End Sub
+
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        Dim vfpContextMenuStrip As New ContextMenuStrip
+        Dim menuItemShiftUpwards As New ToolStripMenuItem("Shift Upwards")
+        Dim menuItemShiftDownwards As New ToolStripMenuItem("Shift Downwards")
+
+        vfpContextMenuStrip.Items.Add(menuItemShiftUpwards)
+        vfpContextMenuStrip.Items.Add(menuItemShiftDownwards)
+
+        'Add functionality for ToolStripMenuItem1 (Maximize) click
+        AddHandler menuItemShiftUpwards.Click, AddressOf menuItemShiftUpwards_Click
+
+        'Add functionality for ToolStripMenuItem2 (Exit) click
+        AddHandler menuItemShiftDownwards.Click, AddressOf menuItemShiftDownwards_Click
+
+        Return vfpContextMenuStrip
+    End Function
+
+    Private Sub menuItemShiftUpwards_Click(ByVal sender As Object, ByVal e As EventArgs)
+        'TODO
+        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
+            Dim vfpControl = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
+
+            If TypeOf vfpControl Is ucrValueFlagPeriod Then
+                'TODO Start the shifting
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub menuItemShiftDownwards_Click(ByVal sender As Object, ByVal e As EventArgs)
+        'TODO
     End Sub
 
 End Class
