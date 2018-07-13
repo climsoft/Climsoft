@@ -61,7 +61,12 @@ Public Class ucrSynopticRA1
         Dim tempRecord As form_synoptic_2_ra1
 
         If Not bFirstLoad Then
-            MyBase.PopulateControl()
+            'TODO. the try catch can be removed later after the table has been fixed
+            Try
+                MyBase.PopulateControl()
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message, "Populate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
 
             'try to get the record based on the given filter
             clsCurrentFilter = GetLinkedControlsFilter()
@@ -115,14 +120,19 @@ Public Class ucrSynopticRA1
 
         End If
 
+
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        Dim ucrTextbox As ucrTextBox
-        If TypeOf sender Is ucrTextBox Then
-            ucrTextbox = DirectCast(sender, ucrTextBox)
-            CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
-        End If
+        Try
+            Dim ucrTextbox As ucrTextBox
+            If TypeOf sender Is ucrTextBox Then
+                ucrTextbox = DirectCast(sender, ucrTextBox)
+                CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Fields Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'TODO?
