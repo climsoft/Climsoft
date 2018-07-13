@@ -139,7 +139,6 @@ Partial Class frmNewHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(577, 604)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
@@ -323,6 +322,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(lblYear)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewHourly"
         Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
