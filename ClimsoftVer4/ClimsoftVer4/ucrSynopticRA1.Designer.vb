@@ -129,7 +129,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem046Label
         '
         Me.Val_Elem046Label.AutoSize = True
-        Me.Val_Elem046Label.Location = New System.Drawing.Point(922, 518)
+        Me.Val_Elem046Label.Location = New System.Drawing.Point(917, 523)
         Me.Val_Elem046Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem046Label.Name = "Val_Elem046Label"
         Me.Val_Elem046Label.Size = New System.Drawing.Size(78, 20)
@@ -139,7 +139,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem174Label
         '
         Me.Val_Elem174Label.AutoSize = True
-        Me.Val_Elem174Label.Location = New System.Drawing.Point(922, 409)
+        Me.Val_Elem174Label.Location = New System.Drawing.Point(917, 412)
         Me.Val_Elem174Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem174Label.Name = "Val_Elem174Label"
         Me.Val_Elem174Label.Size = New System.Drawing.Size(84, 20)
@@ -149,7 +149,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem005Label
         '
         Me.Val_Elem005Label.AutoSize = True
-        Me.Val_Elem005Label.Location = New System.Drawing.Point(922, 372)
+        Me.Val_Elem005Label.Location = New System.Drawing.Point(917, 375)
         Me.Val_Elem005Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem005Label.Name = "Val_Elem005Label"
         Me.Val_Elem005Label.Size = New System.Drawing.Size(93, 20)
@@ -159,7 +159,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem132Label
         '
         Me.Val_Elem132Label.AutoSize = True
-        Me.Val_Elem132Label.Location = New System.Drawing.Point(922, 334)
+        Me.Val_Elem132Label.Location = New System.Drawing.Point(917, 338)
         Me.Val_Elem132Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem132Label.Name = "Val_Elem132Label"
         Me.Val_Elem132Label.Size = New System.Drawing.Size(73, 20)
@@ -169,7 +169,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem084Label
         '
         Me.Val_Elem084Label.AutoSize = True
-        Me.Val_Elem084Label.Location = New System.Drawing.Point(922, 298)
+        Me.Val_Elem084Label.Location = New System.Drawing.Point(917, 301)
         Me.Val_Elem084Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem084Label.Name = "Val_Elem084Label"
         Me.Val_Elem084Label.Size = New System.Drawing.Size(82, 20)
@@ -179,7 +179,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem018Label
         '
         Me.Val_Elem018Label.AutoSize = True
-        Me.Val_Elem018Label.Location = New System.Drawing.Point(922, 262)
+        Me.Val_Elem018Label.Location = New System.Drawing.Point(917, 262)
         Me.Val_Elem018Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem018Label.Name = "Val_Elem018Label"
         Me.Val_Elem018Label.Size = New System.Drawing.Size(94, 20)
@@ -189,7 +189,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem099Label
         '
         Me.Val_Elem099Label.AutoSize = True
-        Me.Val_Elem099Label.Location = New System.Drawing.Point(922, 225)
+        Me.Val_Elem099Label.Location = New System.Drawing.Point(917, 227)
         Me.Val_Elem099Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem099Label.Name = "Val_Elem099Label"
         Me.Val_Elem099Label.Size = New System.Drawing.Size(125, 20)
@@ -199,7 +199,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem003Label
         '
         Me.Val_Elem003Label.AutoSize = True
-        Me.Val_Elem003Label.Location = New System.Drawing.Point(922, 186)
+        Me.Val_Elem003Label.Location = New System.Drawing.Point(917, 190)
         Me.Val_Elem003Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem003Label.Name = "Val_Elem003Label"
         Me.Val_Elem003Label.Size = New System.Drawing.Size(43, 20)
@@ -209,17 +209,17 @@ Partial Class ucrSynopticRA1
         'Val_Elem002Label
         '
         Me.Val_Elem002Label.AutoSize = True
-        Me.Val_Elem002Label.Location = New System.Drawing.Point(922, 151)
+        Me.Val_Elem002Label.Location = New System.Drawing.Point(917, 152)
         Me.Val_Elem002Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem002Label.Name = "Val_Elem002Label"
-        Me.Val_Elem002Label.Size = New System.Drawing.Size(51, 20)
+        Me.Val_Elem002Label.Size = New System.Drawing.Size(47, 20)
         Me.Val_Elem002Label.TabIndex = 736
-        Me.Val_Elem002Label.Text = " Tmax"
+        Me.Val_Elem002Label.Text = "Tmax"
         '
         'Val_Elem130Label
         '
         Me.Val_Elem130Label.AutoSize = True
-        Me.Val_Elem130Label.Location = New System.Drawing.Point(492, 589)
+        Me.Val_Elem130Label.Location = New System.Drawing.Point(492, 594)
         Me.Val_Elem130Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem130Label.Name = "Val_Elem130Label"
         Me.Val_Elem130Label.Size = New System.Drawing.Size(154, 20)
@@ -229,7 +229,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem129Label
         '
         Me.Val_Elem129Label.AutoSize = True
-        Me.Val_Elem129Label.Location = New System.Drawing.Point(492, 552)
+        Me.Val_Elem129Label.Location = New System.Drawing.Point(492, 558)
         Me.Val_Elem129Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem129Label.Name = "Val_Elem129Label"
         Me.Val_Elem129Label.Size = New System.Drawing.Size(145, 20)
@@ -239,7 +239,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem128Label
         '
         Me.Val_Elem128Label.AutoSize = True
-        Me.Val_Elem128Label.Location = New System.Drawing.Point(492, 515)
+        Me.Val_Elem128Label.Location = New System.Drawing.Point(492, 521)
         Me.Val_Elem128Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem128Label.Name = "Val_Elem128Label"
         Me.Val_Elem128Label.Size = New System.Drawing.Size(140, 20)
@@ -249,7 +249,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem131Label
         '
         Me.Val_Elem131Label.AutoSize = True
-        Me.Val_Elem131Label.Location = New System.Drawing.Point(492, 478)
+        Me.Val_Elem131Label.Location = New System.Drawing.Point(492, 486)
         Me.Val_Elem131Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem131Label.Name = "Val_Elem131Label"
         Me.Val_Elem131Label.Size = New System.Drawing.Size(165, 20)
@@ -259,7 +259,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem126Label
         '
         Me.Val_Elem126Label.AutoSize = True
-        Me.Val_Elem126Label.Location = New System.Drawing.Point(492, 442)
+        Me.Val_Elem126Label.Location = New System.Drawing.Point(492, 449)
         Me.Val_Elem126Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem126Label.Name = "Val_Elem126Label"
         Me.Val_Elem126Label.Size = New System.Drawing.Size(157, 20)
@@ -269,7 +269,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem125Label
         '
         Me.Val_Elem125Label.AutoSize = True
-        Me.Val_Elem125Label.Location = New System.Drawing.Point(492, 405)
+        Me.Val_Elem125Label.Location = New System.Drawing.Point(492, 410)
         Me.Val_Elem125Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem125Label.Name = "Val_Elem125Label"
         Me.Val_Elem125Label.Size = New System.Drawing.Size(145, 20)
@@ -279,7 +279,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem124Label
         '
         Me.Val_Elem124Label.AutoSize = True
-        Me.Val_Elem124Label.Location = New System.Drawing.Point(492, 368)
+        Me.Val_Elem124Label.Location = New System.Drawing.Point(492, 374)
         Me.Val_Elem124Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem124Label.Name = "Val_Elem124Label"
         Me.Val_Elem124Label.Size = New System.Drawing.Size(140, 20)
@@ -289,7 +289,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem127Label
         '
         Me.Val_Elem127Label.AutoSize = True
-        Me.Val_Elem127Label.Location = New System.Drawing.Point(492, 331)
+        Me.Val_Elem127Label.Location = New System.Drawing.Point(492, 336)
         Me.Val_Elem127Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem127Label.Name = "Val_Elem127Label"
         Me.Val_Elem127Label.Size = New System.Drawing.Size(153, 20)
@@ -299,7 +299,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem122Label
         '
         Me.Val_Elem122Label.AutoSize = True
-        Me.Val_Elem122Label.Location = New System.Drawing.Point(492, 294)
+        Me.Val_Elem122Label.Location = New System.Drawing.Point(492, 299)
         Me.Val_Elem122Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem122Label.Name = "Val_Elem122Label"
         Me.Val_Elem122Label.Size = New System.Drawing.Size(157, 20)
@@ -309,7 +309,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem121Label
         '
         Me.Val_Elem121Label.AutoSize = True
-        Me.Val_Elem121Label.Location = New System.Drawing.Point(492, 260)
+        Me.Val_Elem121Label.Location = New System.Drawing.Point(492, 264)
         Me.Val_Elem121Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem121Label.Name = "Val_Elem121Label"
         Me.Val_Elem121Label.Size = New System.Drawing.Size(142, 20)
@@ -319,7 +319,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem120Label
         '
         Me.Val_Elem120Label.AutoSize = True
-        Me.Val_Elem120Label.Location = New System.Drawing.Point(492, 225)
+        Me.Val_Elem120Label.Location = New System.Drawing.Point(492, 226)
         Me.Val_Elem120Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem120Label.Name = "Val_Elem120Label"
         Me.Val_Elem120Label.Size = New System.Drawing.Size(140, 20)
@@ -329,7 +329,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem123Label
         '
         Me.Val_Elem123Label.AutoSize = True
-        Me.Val_Elem123Label.Location = New System.Drawing.Point(492, 183)
+        Me.Val_Elem123Label.Location = New System.Drawing.Point(492, 190)
         Me.Val_Elem123Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem123Label.Name = "Val_Elem123Label"
         Me.Val_Elem123Label.Size = New System.Drawing.Size(165, 20)
@@ -339,7 +339,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem118Label
         '
         Me.Val_Elem118Label.AutoSize = True
-        Me.Val_Elem118Label.Location = New System.Drawing.Point(492, 146)
+        Me.Val_Elem118Label.Location = New System.Drawing.Point(492, 151)
         Me.Val_Elem118Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem118Label.Name = "Val_Elem118Label"
         Me.Val_Elem118Label.Size = New System.Drawing.Size(157, 20)
@@ -349,7 +349,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem117Label
         '
         Me.Val_Elem117Label.AutoSize = True
-        Me.Val_Elem117Label.Location = New System.Drawing.Point(492, 109)
+        Me.Val_Elem117Label.Location = New System.Drawing.Point(492, 113)
         Me.Val_Elem117Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem117Label.Name = "Val_Elem117Label"
         Me.Val_Elem117Label.Size = New System.Drawing.Size(145, 20)
@@ -359,7 +359,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem116Label
         '
         Me.Val_Elem116Label.AutoSize = True
-        Me.Val_Elem116Label.Location = New System.Drawing.Point(492, 72)
+        Me.Val_Elem116Label.Location = New System.Drawing.Point(492, 78)
         Me.Val_Elem116Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem116Label.Name = "Val_Elem116Label"
         Me.Val_Elem116Label.Size = New System.Drawing.Size(140, 20)
@@ -369,7 +369,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem119Label
         '
         Me.Val_Elem119Label.AutoSize = True
-        Me.Val_Elem119Label.Location = New System.Drawing.Point(492, 40)
+        Me.Val_Elem119Label.Location = New System.Drawing.Point(492, 43)
         Me.Val_Elem119Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem119Label.Name = "Val_Elem119Label"
         Me.Val_Elem119Label.Size = New System.Drawing.Size(161, 20)
@@ -379,7 +379,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem180Label
         '
         Me.Val_Elem180Label.AutoSize = True
-        Me.Val_Elem180Label.Location = New System.Drawing.Point(22, 700)
+        Me.Val_Elem180Label.Location = New System.Drawing.Point(17, 706)
         Me.Val_Elem180Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem180Label.Name = "Val_Elem180Label"
         Me.Val_Elem180Label.Size = New System.Drawing.Size(184, 20)
@@ -389,7 +389,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem179Label
         '
         Me.Val_Elem179Label.AutoSize = True
-        Me.Val_Elem179Label.Location = New System.Drawing.Point(22, 665)
+        Me.Val_Elem179Label.Location = New System.Drawing.Point(17, 671)
         Me.Val_Elem179Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem179Label.Name = "Val_Elem179Label"
         Me.Val_Elem179Label.Size = New System.Drawing.Size(208, 20)
@@ -399,7 +399,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem178Label
         '
         Me.Val_Elem178Label.AutoSize = True
-        Me.Val_Elem178Label.Location = New System.Drawing.Point(22, 626)
+        Me.Val_Elem178Label.Location = New System.Drawing.Point(17, 635)
         Me.Val_Elem178Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem178Label.Name = "Val_Elem178Label"
         Me.Val_Elem178Label.Size = New System.Drawing.Size(177, 20)
@@ -409,7 +409,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem177Label
         '
         Me.Val_Elem177Label.AutoSize = True
-        Me.Val_Elem177Label.Location = New System.Drawing.Point(22, 589)
+        Me.Val_Elem177Label.Location = New System.Drawing.Point(17, 597)
         Me.Val_Elem177Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem177Label.Name = "Val_Elem177Label"
         Me.Val_Elem177Label.Size = New System.Drawing.Size(172, 20)
@@ -419,7 +419,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem115Label
         '
         Me.Val_Elem115Label.AutoSize = True
-        Me.Val_Elem115Label.Location = New System.Drawing.Point(22, 552)
+        Me.Val_Elem115Label.Location = New System.Drawing.Point(17, 560)
         Me.Val_Elem115Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem115Label.Name = "Val_Elem115Label"
         Me.Val_Elem115Label.Size = New System.Drawing.Size(152, 20)
@@ -429,7 +429,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem193Label
         '
         Me.Val_Elem193Label.AutoSize = True
-        Me.Val_Elem193Label.Location = New System.Drawing.Point(922, 114)
+        Me.Val_Elem193Label.Location = New System.Drawing.Point(917, 117)
         Me.Val_Elem193Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem193Label.Name = "Val_Elem193Label"
         Me.Val_Elem193Label.Size = New System.Drawing.Size(72, 20)
@@ -439,7 +439,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem197Label
         '
         Me.Val_Elem197Label.AutoSize = True
-        Me.Val_Elem197Label.Location = New System.Drawing.Point(922, 77)
+        Me.Val_Elem197Label.Location = New System.Drawing.Point(917, 81)
         Me.Val_Elem197Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem197Label.Name = "Val_Elem197Label"
         Me.Val_Elem197Label.Size = New System.Drawing.Size(72, 20)
@@ -449,7 +449,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem167Label
         '
         Me.Val_Elem167Label.AutoSize = True
-        Me.Val_Elem167Label.Location = New System.Drawing.Point(922, 40)
+        Me.Val_Elem167Label.Location = New System.Drawing.Point(917, 43)
         Me.Val_Elem167Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem167Label.Name = "Val_Elem167Label"
         Me.Val_Elem167Label.Size = New System.Drawing.Size(86, 20)
@@ -459,7 +459,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem111Label
         '
         Me.Val_Elem111Label.AutoSize = True
-        Me.Val_Elem111Label.Location = New System.Drawing.Point(922, 483)
+        Me.Val_Elem111Label.Location = New System.Drawing.Point(917, 486)
         Me.Val_Elem111Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem111Label.Name = "Val_Elem111Label"
         Me.Val_Elem111Label.Size = New System.Drawing.Size(120, 20)
@@ -469,7 +469,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem112Label
         '
         Me.Val_Elem112Label.AutoSize = True
-        Me.Val_Elem112Label.Location = New System.Drawing.Point(922, 446)
+        Me.Val_Elem112Label.Location = New System.Drawing.Point(917, 448)
         Me.Val_Elem112Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem112Label.Name = "Val_Elem112Label"
         Me.Val_Elem112Label.Size = New System.Drawing.Size(135, 20)
@@ -479,7 +479,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem114Label
         '
         Me.Val_Elem114Label.AutoSize = True
-        Me.Val_Elem114Label.Location = New System.Drawing.Point(22, 515)
+        Me.Val_Elem114Label.Location = New System.Drawing.Point(17, 522)
         Me.Val_Elem114Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem114Label.Name = "Val_Elem114Label"
         Me.Val_Elem114Label.Size = New System.Drawing.Size(154, 20)
@@ -489,7 +489,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem110Label
         '
         Me.Val_Elem110Label.AutoSize = True
-        Me.Val_Elem110Label.Location = New System.Drawing.Point(22, 442)
+        Me.Val_Elem110Label.Location = New System.Drawing.Point(17, 448)
         Me.Val_Elem110Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem110Label.Name = "Val_Elem110Label"
         Me.Val_Elem110Label.Size = New System.Drawing.Size(167, 20)
@@ -499,7 +499,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem176Label
         '
         Me.Val_Elem176Label.AutoSize = True
-        Me.Val_Elem176Label.Location = New System.Drawing.Point(22, 478)
+        Me.Val_Elem176Label.Location = New System.Drawing.Point(17, 484)
         Me.Val_Elem176Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem176Label.Name = "Val_Elem176Label"
         Me.Val_Elem176Label.Size = New System.Drawing.Size(136, 20)
@@ -509,7 +509,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem105Label
         '
         Me.Val_Elem105Label.AutoSize = True
-        Me.Val_Elem105Label.Location = New System.Drawing.Point(22, 405)
+        Me.Val_Elem105Label.Location = New System.Drawing.Point(17, 409)
         Me.Val_Elem105Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem105Label.Name = "Val_Elem105Label"
         Me.Val_Elem105Label.Size = New System.Drawing.Size(148, 20)
@@ -519,7 +519,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem103Label
         '
         Me.Val_Elem103Label.AutoSize = True
-        Me.Val_Elem103Label.Location = New System.Drawing.Point(22, 368)
+        Me.Val_Elem103Label.Location = New System.Drawing.Point(17, 372)
         Me.Val_Elem103Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem103Label.Name = "Val_Elem103Label"
         Me.Val_Elem103Label.Size = New System.Drawing.Size(180, 20)
@@ -529,7 +529,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem102Label
         '
         Me.Val_Elem102Label.AutoSize = True
-        Me.Val_Elem102Label.Location = New System.Drawing.Point(22, 331)
+        Me.Val_Elem102Label.Location = New System.Drawing.Point(17, 336)
         Me.Val_Elem102Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem102Label.Name = "Val_Elem102Label"
         Me.Val_Elem102Label.Size = New System.Drawing.Size(177, 20)
@@ -539,7 +539,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem101Label
         '
         Me.Val_Elem101Label.AutoSize = True
-        Me.Val_Elem101Label.Location = New System.Drawing.Point(22, 294)
+        Me.Val_Elem101Label.Location = New System.Drawing.Point(17, 301)
         Me.Val_Elem101Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem101Label.Name = "Val_Elem101Label"
         Me.Val_Elem101Label.Size = New System.Drawing.Size(141, 20)
@@ -549,7 +549,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem196Label
         '
         Me.Val_Elem196Label.AutoSize = True
-        Me.Val_Elem196Label.Location = New System.Drawing.Point(22, 257)
+        Me.Val_Elem196Label.Location = New System.Drawing.Point(17, 263)
         Me.Val_Elem196Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem196Label.Name = "Val_Elem196Label"
         Me.Val_Elem196Label.Size = New System.Drawing.Size(184, 20)
@@ -559,7 +559,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem301Label
         '
         Me.Val_Elem301Label.AutoSize = True
-        Me.Val_Elem301Label.Location = New System.Drawing.Point(22, 220)
+        Me.Val_Elem301Label.Location = New System.Drawing.Point(17, 225)
         Me.Val_Elem301Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem301Label.Name = "Val_Elem301Label"
         Me.Val_Elem301Label.Size = New System.Drawing.Size(201, 20)
@@ -569,7 +569,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem399Label
         '
         Me.Val_Elem399Label.AutoSize = True
-        Me.Val_Elem399Label.Location = New System.Drawing.Point(22, 183)
+        Me.Val_Elem399Label.Location = New System.Drawing.Point(17, 190)
         Me.Val_Elem399Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem399Label.Name = "Val_Elem399Label"
         Me.Val_Elem399Label.Size = New System.Drawing.Size(196, 20)
@@ -579,7 +579,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem814Label
         '
         Me.Val_Elem814Label.AutoSize = True
-        Me.Val_Elem814Label.Location = New System.Drawing.Point(22, 146)
+        Me.Val_Elem814Label.Location = New System.Drawing.Point(17, 153)
         Me.Val_Elem814Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem814Label.Name = "Val_Elem814Label"
         Me.Val_Elem814Label.Size = New System.Drawing.Size(200, 20)
@@ -589,7 +589,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem400Label
         '
         Me.Val_Elem400Label.AutoSize = True
-        Me.Val_Elem400Label.Location = New System.Drawing.Point(22, 109)
+        Me.Val_Elem400Label.Location = New System.Drawing.Point(17, 118)
         Me.Val_Elem400Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem400Label.Name = "Val_Elem400Label"
         Me.Val_Elem400Label.Size = New System.Drawing.Size(178, 20)
@@ -599,7 +599,7 @@ Partial Class ucrSynopticRA1
         'Val_Elem107Label
         '
         Me.Val_Elem107Label.AutoSize = True
-        Me.Val_Elem107Label.Location = New System.Drawing.Point(22, 72)
+        Me.Val_Elem107Label.Location = New System.Drawing.Point(17, 80)
         Me.Val_Elem107Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem107Label.Name = "Val_Elem107Label"
         Me.Val_Elem107Label.Size = New System.Drawing.Size(211, 20)
@@ -610,7 +610,7 @@ Partial Class ucrSynopticRA1
         '
         Me.Val_Elem106Label.AutoSize = True
         Me.Val_Elem106Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Val_Elem106Label.Location = New System.Drawing.Point(22, 40)
+        Me.Val_Elem106Label.Location = New System.Drawing.Point(17, 42)
         Me.Val_Elem106Label.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Val_Elem106Label.Name = "Val_Elem106Label"
         Me.Val_Elem106Label.Size = New System.Drawing.Size(205, 20)
@@ -1061,7 +1061,7 @@ Partial Class ucrSynopticRA1
         'lblValue
         '
         Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(240, 6)
+        Me.lblValue.Location = New System.Drawing.Point(240, 9)
         Me.lblValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(50, 20)
@@ -1071,7 +1071,7 @@ Partial Class ucrSynopticRA1
         'lblFlag
         '
         Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(320, 6)
+        Me.lblFlag.Location = New System.Drawing.Point(320, 9)
         Me.lblFlag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlag.Name = "lblFlag"
         Me.lblFlag.Size = New System.Drawing.Size(40, 20)
@@ -1081,7 +1081,7 @@ Partial Class ucrSynopticRA1
         'lblValueTwo
         '
         Me.lblValueTwo.AutoSize = True
-        Me.lblValueTwo.Location = New System.Drawing.Point(672, 6)
+        Me.lblValueTwo.Location = New System.Drawing.Point(672, 9)
         Me.lblValueTwo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblValueTwo.Name = "lblValueTwo"
         Me.lblValueTwo.Size = New System.Drawing.Size(50, 20)
@@ -1091,7 +1091,7 @@ Partial Class ucrSynopticRA1
         'lblFlagTwo
         '
         Me.lblFlagTwo.AutoSize = True
-        Me.lblFlagTwo.Location = New System.Drawing.Point(752, 6)
+        Me.lblFlagTwo.Location = New System.Drawing.Point(752, 9)
         Me.lblFlagTwo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlagTwo.Name = "lblFlagTwo"
         Me.lblFlagTwo.Size = New System.Drawing.Size(40, 20)
@@ -1101,7 +1101,7 @@ Partial Class ucrSynopticRA1
         'lblValueThree
         '
         Me.lblValueThree.AutoSize = True
-        Me.lblValueThree.Location = New System.Drawing.Point(1064, 6)
+        Me.lblValueThree.Location = New System.Drawing.Point(1064, 9)
         Me.lblValueThree.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblValueThree.Name = "lblValueThree"
         Me.lblValueThree.Size = New System.Drawing.Size(50, 20)
@@ -1111,7 +1111,7 @@ Partial Class ucrSynopticRA1
         'lblFlagThree
         '
         Me.lblFlagThree.AutoSize = True
-        Me.lblFlagThree.Location = New System.Drawing.Point(1142, 6)
+        Me.lblFlagThree.Location = New System.Drawing.Point(1142, 9)
         Me.lblFlagThree.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlagThree.Name = "lblFlagThree"
         Me.lblFlagThree.Size = New System.Drawing.Size(40, 20)
