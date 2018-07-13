@@ -8,8 +8,6 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
-        'TODO. Remove this once btnUpload has beeen enabled in the designer
-        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
