@@ -6,8 +6,6 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
-        'TODO. Remove this line once button upload is enabled in the designer
-        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
