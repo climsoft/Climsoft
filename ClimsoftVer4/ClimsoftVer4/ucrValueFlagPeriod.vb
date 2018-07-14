@@ -123,24 +123,33 @@ Public Class ucrValueFlagPeriod
     Public Overrides Sub SetValue(objNewValue As Object)
         Dim lstValueFlagPeriod As List(Of Object)
 
-        MyBase.SetValue(objNewValue)
+        'MyBase.SetValue(objNewValue)
         lstValueFlagPeriod = TryCast(objNewValue, List(Of Object))
-        'TODO
-        'Not sure about this check. Not certain about whether we should force the
-        'developer to always pass a list with a min of 2 values for Value and flag
+
         If lstValueFlagPeriod.Count = 3 Then
-            ucrValue.SetValue(lstValueFlagPeriod(0))
-            ucrFlag.SetValue(lstValueFlagPeriod(1))
+            SetElementValue(lstValueFlagPeriod(0))
+            SetElementFlagValue(lstValueFlagPeriod(1))
             If bIncludePeriod Then
-                ucrPeriod.SetValue(lstValueFlagPeriod(2))
+                SetElementPeriodValue(lstValueFlagPeriod(2))
             End If
         ElseIf lstValueFlagPeriod.Count = 2 Then
-            ucrValue.SetValue(lstValueFlagPeriod(0))
-            ucrFlag.SetValue(lstValueFlagPeriod(1))
+            SetElementValue(lstValueFlagPeriod(0))
+            SetElementFlagValue(lstValueFlagPeriod(1))
         ElseIf lstValueFlagPeriod.Count = 1 Then
-            ucrValue.SetValue(lstValueFlagPeriod(0))
+            SetElementValue(lstValueFlagPeriod(0))
         End If
     End Sub
+
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Dim lstValueFlagPeriod As New List(Of Object)
+
+        lstValueFlagPeriod.Add(GetElementValue())
+        lstValueFlagPeriod.Add(GetElementFlagValue())
+        If bIncludePeriod Then
+            lstValueFlagPeriod.Add(GetElementPeriodValue())
+        End If
+        Return lstValueFlagPeriod
+    End Function
 
     Public Sub SetElementValue(strValue As String)
         ucrValue.SetValue(strValue)
@@ -169,6 +178,10 @@ Public Class ucrValueFlagPeriod
         ucrPeriod.SetValue(strValue)
     End Sub
 
+    Public Function IsEmpty() As Boolean
+        Return IsElementValueEmpty() AndAlso IsElementFlagEmpty() AndAlso IsElementPeriodEmpty()
+    End Function
+
     Public Function IsElementValueEmpty() As Boolean
         Return ucrValue.IsEmpty()
     End Function
@@ -178,7 +191,11 @@ Public Class ucrValueFlagPeriod
     End Function
 
     Public Function IsElementPeriodEmpty() As Boolean
-        Return ucrPeriod.IsEmpty()
+        If bIncludePeriod Then
+            Return ucrPeriod.IsEmpty()
+        Else
+            Return True
+        End If
     End Function
 
     Public Sub SetElementValueLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
@@ -359,7 +376,6 @@ Public Class ucrValueFlagPeriod
         ucrFlag.SetSize(New Size(27, 20))
         ucrPeriod.SetSize(New Size(33, 20))
     End Sub
-
 
     Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         ucrValue.SetContextMenuStrip(contextMenuStrip)

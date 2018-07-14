@@ -578,6 +578,7 @@ Public Class ucrFormDaily2
             If TypeOf vfpControl Is ucrValueFlagPeriod Then
                 'TODO Start the shifting
 
+
             End If
 
         End If
@@ -585,7 +586,39 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub menuItemShiftDownwards_Click(ByVal sender As Object, ByVal e As EventArgs)
-        'TODO
+        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
+            Dim vfpControl = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
+
+            If TypeOf vfpControl Is ucrValueFlagPeriod Then
+                'TOD THE BELOW CODE IS NOT YET COMPLETE
+                'TODO Start the shifting
+                Dim firstIndex As Integer = ucrValueFlagPeriod1.TabIndex
+                Dim currentIndex As Integer = vfpControl.TabIndex
+                Dim lstControls As New List(Of ucrValueFlagPeriod)
+
+                'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+                Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+
+                For Each ctr As ucrValueFlagPeriod In allVFP
+                    If ctr.TabIndex >= firstIndex AndAlso ctr.TabIndex <= currentIndex Then
+                        lstControls.Add(ctr)
+
+                    End If
+                Next
+
+                For Each ctr As ucrValueFlagPeriod In allVFP
+                    If ctr.TabIndex > currentIndex AndAlso lstControls.Count > 0 Then
+                        ctr.SetValue(lstControls.Item(0).GetValue())
+                        lstControls.Item(0).SetValue(New List(Of Object)({"", "", ""}))
+                        lstControls.RemoveAt(0)
+                    End If
+                Next
+
+
+            End If
+
+        End If
     End Sub
+
 
 End Class
