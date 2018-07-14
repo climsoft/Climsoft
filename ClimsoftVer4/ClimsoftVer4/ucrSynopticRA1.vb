@@ -6,7 +6,8 @@ Public Class ucrSynopticRA1
     Private strTableName As String = "form_synoptic_2_RA1"
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
-    Public bUpdating As Boolean = False
+    'Set to True by default
+    Public bUpdating As Boolean = True
     Public fs2ra1Record As form_synoptic_2_ra1
 
     Private lstFields As New List(Of String)
@@ -57,23 +58,42 @@ Public Class ucrSynopticRA1
 
     Public Overrides Sub PopulateControl()
         Dim clsCurrentFilter As TableFilter
+        Dim tempRecord As form_synoptic_2_ra1
 
         If Not bFirstLoad Then
-            MyBase.PopulateControl()
+            'TODO. the try catch can be removed later after the table has been fixed
+            Try
+                MyBase.PopulateControl()
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message, "Populate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
 
-            If fs2ra1Record Is Nothing Then
-                clsCurrentFilter = GetLinkedControlsFilter()
-                fs2ra1Record = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-                If fs2ra1Record Is Nothing Then
-                    fs2ra1Record = New form_synoptic_2_ra1
-                    bUpdating = False
-                Else
-                    clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
-                    bUpdating = True
-                End If
-                'enable or disable textboxes based on year month day
+            'try to get the record based on the given filter
+            clsCurrentFilter = GetLinkedControlsFilter()
+            tempRecord = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
+
+            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
+            'then just do validation of values based on the new key controls values and exit the sub
+            If tempRecord Is Nothing AndAlso Not bUpdating Then
                 ValidateDataEntryPermission()
+                SetTmaxRequired(IsTmaxRequired())
+                SetTminAndRelatedElementsRequired(IsTminRequired())
+                SetGminRequired(IsGminRequired())
+                ValidateValue()
+                Exit Sub
             End If
+
+            fs2ra1Record = tempRecord
+            If fs2ra1Record Is Nothing Then
+                fs2ra1Record = New form_synoptic_2_ra1
+                bUpdating = False
+            Else
+                clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
+                bUpdating = True
+            End If
+
+            'enable or disable textboxes based on year month day
+            ValidateDataEntryPermission()
 
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
@@ -95,16 +115,24 @@ Public Class ucrSynopticRA1
             If Not bUpdating AndAlso bAutoFillValues Then
                 SetDefaultStandardPressureLevel()
             End If
+
+            OnevtValueChanged(Me, Nothing)
+
         End If
+
 
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        Dim ucrTextbox As ucrTextBox
-        If TypeOf sender Is ucrTextBox Then
-            ucrTextbox = DirectCast(sender, ucrTextBox)
-            CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
-        End If
+        Try
+            Dim ucrTextbox As ucrTextBox
+            If TypeOf sender Is ucrTextBox Then
+                ucrTextbox = DirectCast(sender, ucrTextBox)
+                CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Fields Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     'TODO?
@@ -130,7 +158,7 @@ Public Class ucrSynopticRA1
         Next
 
         If bValidValues Then
-            fs2ra1Record = Nothing
+            'fs2ra1Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
@@ -148,19 +176,17 @@ Public Class ucrSynopticRA1
         fs2ra1Record.signature = frmLogin.txtUsername.Text
 
         If bUpdating Then
-            'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Modified
         Else
-            'clsDataConnection.db.fs2ra1Record.Add(fs2ra1Record)
             clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Added
         End If
 
         clsDataConnection.db.SaveChanges()
-
+        'detach the record to prevent caching of records on the EF
+        clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        'clsDataConnection.db.Entry(fs2ra1Record)
         clsDataConnection.db.form_synoptic_2_ra1.Attach(fs2ra1Record)
         clsDataConnection.db.form_synoptic_2_ra1.Remove(fs2ra1Record)
         clsDataConnection.db.SaveChanges()
@@ -544,8 +570,8 @@ Public Class ucrSynopticRA1
     ''' </summary>
     Private Sub ValidateDataEntryPermission()
         'if its an update or any of the linked year,month and day selector is nothing then just enable the control
-        If bUpdating OrElse ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
-            Me.Enabled = True
+        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing OrElse ucrLinkedDay Is Nothing Then
+            Me.Enabled = False
         ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue AndAlso ucrLinkedDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
             Dim selectedDate As Date
@@ -568,8 +594,11 @@ Public Class ucrSynopticRA1
         Dim strValueColumn As String
         Dim strFlagColumn As String
         Dim strElementCode As String
-        Dim iElementId As Long
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim dtObsDateTime As Date
         Dim lstAllFields As New List(Of String)
+        Dim bNewRecord As Boolean
 
         'get the observation values fields
         lstAllFields.AddRange(lstFields)
@@ -593,16 +622,24 @@ Public Class ucrSynopticRA1
                                                End Function)
 
                 'set the record
-                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, iElementId) Then
+                If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, lElementId) Then
 
-                    rcdObservationInitial = New observationinitial
-                    rcdObservationInitial.recordedFrom = row.Item("stationId")
-                    rcdObservationInitial.describedBy = iElementId
+                    strStationId = row.Item("stationId")
+                    dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
 
-                    Try
-                        rcdObservationInitial.obsDatetime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
-                    Catch ex As Exception
-                    End Try
+                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
+                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
+
+                    If rcdObservationInitial Is Nothing Then
+                        bNewRecord = True
+                        rcdObservationInitial = New observationinitial
+                    Else
+                        bNewRecord = False
+                    End If
+
+                    rcdObservationInitial.recordedFrom = strStationId
+                    rcdObservationInitial.describedBy = lElementId
+                    rcdObservationInitial.obsDatetime = dtObsDateTime
                     rcdObservationInitial.obsLevel = "surface"
                     rcdObservationInitial.obsValue = row.Item(strValueColumn)
                     rcdObservationInitial.flag = row.Item(strFlagColumn)
@@ -614,14 +651,18 @@ Public Class ucrSynopticRA1
                         rcdObservationInitial.capturedBy = row.Item("signature")
                     End If
 
-                    clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    If bNewRecord Then
+                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    End If
+                    'save the Observation record
+                    clsDataConnection.db.SaveChanges()
 
                 End If
             Next
         Next
 
-        'save the Observation record
-        clsDataConnection.SaveUpdate()
+        'TODO? because of the detachment
+        PopulateControl()
 
     End Sub
 End Class

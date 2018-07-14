@@ -8,8 +8,6 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
-        'TODO. Remove this once btnUpload has beeen enabled in the designer
-        btnUpload.Enabled = True
     End Sub
 
     Private Sub InitaliseDialog()
@@ -126,15 +124,12 @@
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         Try
-            'Open form for displaying data transfer progress
-            frmDataTransferProgress.Show()
-            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
-            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
-            ucrHourlyWind.UploadAllRecords()
-            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+            If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                ucrHourlyWind.UploadAllRecords()
+                MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         Catch ex As Exception
-            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
@@ -266,6 +261,18 @@
 
     Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
         txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_leap_yr", "seq_month_day")
+    End Sub
+
+    Private Sub ucrHourlyWind_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourlyWind.evtValueChanged
+        If ucrHourlyWind.bUpdating Then
+            SaveEnable()
+        Else
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnSave.Enabled = True
+        End If
     End Sub
 
 End Class
