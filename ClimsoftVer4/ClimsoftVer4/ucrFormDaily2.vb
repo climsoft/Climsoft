@@ -590,8 +590,14 @@ Public Class ucrFormDaily2
             Dim vfpControl = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
 
             If TypeOf vfpControl Is ucrValueFlagPeriod Then
-                'TOD THE BELOW CODE IS NOT YET COMPLETE
+
                 'TODO Start the shifting
+
+                If 1 = 1 Then
+                    Exit Sub
+                End If
+
+                'TODO THE BELOW CODE IS NOT YET COMPLETE
                 Dim firstIndex As Integer = ucrValueFlagPeriod1.TabIndex
                 Dim currentIndex As Integer = vfpControl.TabIndex
                 Dim lstControls As New List(Of ucrValueFlagPeriod)
