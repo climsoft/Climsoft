@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D89B70E-E6D5-4383-9C2C-80F532A26F1D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>ClimsoftVer4.My.MyApplication</StartupObject>
+    <RootNamespace>ClimsoftVer4</RootNamespace>
+    <AssemblyName>ClimsoftVer4</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ClimsoftVer4.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ClimsoftVer4.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>myweat02.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DynamicInterop">
+      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\MySQL\MySQL Connector Net 6.9.5\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="RDotNet">
+      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="RDotNet.NativeLibrary">
+      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsCloneFunctions.vb" />
+    <Compile Include="clsDataCall.vb" />
+    <Compile Include="clsDataConnection.vb" />
+    <Compile Include="clsHelp.vb" />
+    <Compile Include="clsClimsoftSettings.vb" />
+    <Compile Include="clsLanguageTranslation.vb" />
+    <Compile Include="clsProducts.vb" />
+    <Compile Include="clsRInterface.vb" />
+    <Compile Include="clsTableFilter.vb" />
+    <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="formAgro1.Designer.vb">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formAWSRealTime.Designer.vb">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAWSRealTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formClimat.Designer.vb">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formClimat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily1.Designer.vb">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDaily2.Designer.vb">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDataView.Designer.vb">
+      <DependentUpon>formDataView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formDataView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHourlyWind.designer.vb">
+      <DependentUpon>formHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formHourlyWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formImports.Designer.vb">
+      <DependentUpon>formImports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formImports.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMetadata.Designer.vb">
+      <DependentUpon>formMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formOptions.Designer.vb">
+      <DependentUpon>formOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPaperArchive.Designer.vb">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formPaperArchive.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_synoptic_2_ra1.vb" />
+    <Compile Include="frmAWSelements.Designer.vb">
+      <DependentUpon>frmAWSelements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAWSelements.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAWSstations.Designer.vb">
+      <DependentUpon>frmAWSstations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAWSstations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackup.Designer.vb">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackupRestore.Designer.vb">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackupRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBUFr.Designer.vb">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBUFR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangeOwnPassword.Designer.vb">
+      <DependentUpon>frmChangeOwnPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangeOwnPassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.designer.vb">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConversionDewPointRh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCPTSeason.Designer.vb">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCPTSeason.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrex.designer.vb">
+      <DependentUpon>frmCrex.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCrex.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataForms.Designer.vb">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataMigration.Designer.vb">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataMigration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataTransferProgress.Designer.vb">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataTransferProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDBUtilities.Designer.vb">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDBUtilities.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formElement.designer.vb">
+      <DependentUpon>formElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formElement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formHourly.Designer.vb">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencer.Designer.vb">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.Designer.vb">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmElementSequencerDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneralSettings.Designer.vb">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneralSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGTSNOAA.Designer.vb">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGTSNOAA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.Designer.vb">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHourlyTimeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportAWS.Designer.vb">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportAWS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportCSV.Designer.vb">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportCSV.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportDaily.Designer.vb">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanguage.Designer.vb">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLanguage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanguageTranslation.Designer.vb">
+      <DependentUpon>frmLanguageTranslation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLanguageTranslation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMonthly.Designer.vb">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProducts.Designer.vb">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProducts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProductsSelect.Designer.vb">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProductsSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.Designer.vb">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formProductsSelectCriteria.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formStation.designer.vb">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formStation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynopRA1.designer.vb">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynopRA1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDatabaseConnect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formDatabaseConnect.Designer.vb">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynoptic1.Designer.vb">
+      <DependentUpon>formSynoptic1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynoptic1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUpperAir.Designer.vb">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formUpperAir.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formWindRose.Designer.vb">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formWindRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAction.designer.vb">
+      <DependentUpon>frmAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataEntry.Designer.vb">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataOutpt.Designer.vb">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataOutpt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGeneral.designer.vb">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmGeneral.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLaunchPad.designer.vb">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLaunchPad.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.Designer.vb">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifyObservations.Designer.vb">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmModifyObservations.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMonitoring.Designer.vb">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMonitoring.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourly.designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlotter.Designer.vb" />
+    <Compile Include="frmPlotter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQC.Designer.vb">
+      <DependentUpon>frmQC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQCdatesSelection.Designer.vb">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmQCdatesSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRestore.Designer.vb">
+      <DependentUpon>frmRestore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRestore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSynopTDCF.Designer.vb">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSynopTDCF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTDCFindicators.Designer.vb">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTDCFindicators.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.Designer.vb">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateDBfromQCReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.Designer.vb">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUploadToObsFinal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserManagement.Designer.vb">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsers.Designer.vb">
+      <DependentUpon>frmUsers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewImage.Designer.vb">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Application1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.de.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.fr.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="frmSplashScreen.Designer.vb">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common.vb" />
+    <Compile Include="ucrBaseDataLink.designer.vb">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrBaseDataLink.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.designer.vb">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDay.designer.vb">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDay.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.designer.vb">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrElementSelector.designer.vb">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFormDaily2.designer.vb">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormDaily2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHour.designer.vb">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHour.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourly.designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourlyWind.designer.vb">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourlyWind.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonth.designer.vb">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonthlydata.designer.vb">
+      <DependentUpon>ucrMonthlydata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthlydata.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrNavigation.designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrStationSelector.designer.vb">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrStationSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.designer.vb">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTextBox.designer.vb">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.designer.vb">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrYearSelector.designer.vb">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrYearSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.vb">
+      <DependentUpon>UserControl1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="formAgro1.resx">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formClimat.de.resx">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formClimat.fr.resx">
+      <DependentUpon>formClimat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formAWSRealTime.resx">
+      <DependentUpon>formAWSRealTime.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formClimat.resx">
+      <DependentUpon>formClimat.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily1.de.resx">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily1.fr.resx">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily1.resx">
+      <DependentUpon>formDaily1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily2.de.resx">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily2.fr.resx">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDaily2.resx">
+      <DependentUpon>formDaily2.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDatabaseConnect.de.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDatabaseConnect.fr.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDataView.resx">
+      <DependentUpon>formDataView.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formElement.de.resx">
+      <DependentUpon>formElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formElement.fr.resx">
+      <DependentUpon>formElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourly.de.resx">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourly.fr.resx">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourlyWind.resx">
+      <DependentUpon>formHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formImports.resx">
+      <DependentUpon>formImports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMetadata.resx">
+      <DependentUpon>formMetadata.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMonthly.de.resx">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMonthly.fr.resx">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formOptions.resx">
+      <DependentUpon>formOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProducts.de.resx">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProducts.fr.resx">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelect.de.resx">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelect.fr.resx">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelectCriteria.de.resx">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelectCriteria.fr.resx">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStation.de.resx">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStation.fr.resx">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopRA1.de.resx">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopRA1.fr.resx">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUpperAir.de.resx">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUpperAir.fr.resx">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formWindRose.de.resx">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formWindRose.fr.resx">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.de-DE.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.de.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.en-GB.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.fr.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAWSelements.resx">
+      <DependentUpon>frmAWSelements.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAWSstations.resx">
+      <DependentUpon>frmAWSstations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackup.resx">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackupRestore.resx">
+      <DependentUpon>frmBackupRestore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBUFr.de.resx">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBUFr.fr.resx">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBUFr.resx">
+      <DependentUpon>frmBUFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangeOwnPassword.resx">
+      <DependentUpon>frmChangeOwnPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConversionDewPointRh.resx">
+      <DependentUpon>FrmConversionDewPointRh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCPTSeason.resx">
+      <DependentUpon>frmCPTSeason.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrex.resx">
+      <DependentUpon>frmCrex.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataEntry.de.resx">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataEntry.fr.resx">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataForms.resx">
+      <DependentUpon>frmDataForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataMigration.resx">
+      <DependentUpon>frmDataMigration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataOutpt.de.resx">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataOutpt.fr.resx">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataTransferProgress.resx">
+      <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDBUtilities.de.resx">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDBUtilities.fr.resx">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPaperArchive.resx">
+      <DependentUpon>formPaperArchive.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDBUtilities.resx">
+      <DependentUpon>frmDBUtilities.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formElement.resx">
+      <DependentUpon>formElement.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formHourly.resx">
+      <DependentUpon>formHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencer.resx">
+      <DependentUpon>frmElementSequencer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmElementSequencerDaily.resx">
+      <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneral.de.resx">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneral.fr.resx">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneralSettings.resx">
+      <DependentUpon>frmGeneralSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGTSNOAA.resx">
+      <DependentUpon>frmGTSNOAA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHourlyTimeSelection.resx">
+      <DependentUpon>frmHourlyTimeSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportAWS.resx">
+      <DependentUpon>frmImportAWS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportCSV.resx">
+      <DependentUpon>frmImportCSV.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportDaily.resx">
+      <DependentUpon>frmImportDaily.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguage.de.resx">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguage.fr.resx">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguage.resx">
+      <DependentUpon>frmLanguage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanguageTranslation.resx">
+      <DependentUpon>frmLanguageTranslation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMonthly.resx">
+      <DependentUpon>formMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProducts.resx">
+      <DependentUpon>formProducts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelect.resx">
+      <DependentUpon>formProductsSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formProductsSelectCriteria.resx">
+      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStation.resx">
+      <DependentUpon>formStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopRA1.resx">
+      <DependentUpon>formSynopRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formDatabaseConnect.resx">
+      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUpperAir.resx">
+      <DependentUpon>formUpperAir.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formWindRose.resx">
+      <DependentUpon>formWindRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAction.resx">
+      <DependentUpon>frmAction.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataEntry.resx">
+      <DependentUpon>frmDataEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataOutpt.resx">
+      <DependentUpon>frmDataOutpt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGeneral.resx">
+      <DependentUpon>frmGeneral.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLaunchPad.de.resx">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLaunchPad.fr.resx">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLaunchPad.resx">
+      <DependentUpon>frmLaunchPad.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.de.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.fr.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.de.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.fr.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModifyObservations.resx">
+      <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonitoring.resx">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlotter.resx">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQC.de.resx">
+      <DependentUpon>frmQC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQC.fr.resx">
+      <DependentUpon>frmQC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQC.resx">
+      <DependentUpon>frmQC.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQCdatesSelection.resx">
+      <DependentUpon>frmQCdatesSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRestore.resx">
+      <DependentUpon>frmRestore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.de.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.fr.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSynopTDCF.resx">
+      <DependentUpon>frmSynopTDCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTDCFindicators.resx">
+      <DependentUpon>frmTDCFindicators.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateDBfromQCReport.resx">
+      <DependentUpon>frmUpdateDBfromQCReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUploadToObsFinal.resx">
+      <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewImage.resx">
+      <DependentUpon>frmViewImage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsers.resx">
+      <DependentUpon>frmUsers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrBaseDataLink.resx">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataLinkCombobox.resx">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDay.resx">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementSelector.resx">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormDaily2.resx">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHour.resx">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourlyWind.resx">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonth.resx">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthlydata.resx">
+      <DependentUpon>ucrMonthlydata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrStationSelector.resx">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSynopticRA1.resx">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBox.resx">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValueFlagPeriod.resx">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrYearSelector.resx">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application1.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\MySql.Data.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\ClimsoftVer4.de.xlf" />
+    <XliffResource Include="MultilingualResources\ClimsoftVer4.fr.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config.inf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="myweat02.ico" />
+    <None Include="Resources\navigation-first.jpg" />
+    <None Include="Resources\navigation-left.jpg" />
+    <None Include="Resources\navigation-right.jpg" />
+    <None Include="Resources\navigation-last.jpg" />
+    <Content Include="static\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

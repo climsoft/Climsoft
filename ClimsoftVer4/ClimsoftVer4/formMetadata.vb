@@ -898,7 +898,7 @@ Err:
     End Sub
 
     Private Sub cmdViewStation_Click(sender As Object, e As EventArgs) Handles cmdViewStation.Click
-        dsSourceTableName = "station"
+
         RecordsView("station")
 
     End Sub
