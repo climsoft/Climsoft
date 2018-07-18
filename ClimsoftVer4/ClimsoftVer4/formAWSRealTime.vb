@@ -1592,7 +1592,7 @@ Err:
                         fldr = flder & ftpfile
                         fldr = (IO.Path.GetDirectoryName(fldr))
                         'MsgBox(fldr)
-                        'Print(1, "cd " & fldr & Chr(13) & Chr(10))
+                        Print(1, "cd " & fldr & Chr(13) & Chr(10))
                         Print(1, "mget *.*" & Chr(13) & Chr(10))
                     End If
                     Print(1, "bye" & Chr(13) & Chr(10))
