@@ -16,6 +16,9 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
 
     Public Sub New()
         MyBase.New("name=mariadb_climsoft_test_db_v4Entities")
+        ' FIXME: The following use of `txtusrpwd` is consistent with the previous
+        ' SQL connection code, but needs replacing when login is updated.
+        Me.Database.Connection.ConnectionString = frmLogin.txtusrpwd.Text
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
