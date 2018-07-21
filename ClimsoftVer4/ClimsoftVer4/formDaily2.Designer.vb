@@ -830,7 +830,7 @@ Partial Class form_daily2
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         Me.cboMonth.Location = New System.Drawing.Point(225, 75)
         Me.cboMonth.Name = "cboMonth"
-        Me.cboMonth.Size = New System.Drawing.Size(41, 21)
+        Me.cboMonth.Size = New System.Drawing.Size(68, 21)
         Me.cboMonth.TabIndex = 3
         '
         'cboHour
@@ -839,7 +839,7 @@ Partial Class form_daily2
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
         Me.cboHour.Location = New System.Drawing.Point(341, 75)
         Me.cboHour.Name = "cboHour"
-        Me.cboHour.Size = New System.Drawing.Size(39, 21)
+        Me.cboHour.Size = New System.Drawing.Size(51, 21)
         Me.cboHour.TabIndex = 4
         '
         'btnHelp
@@ -958,7 +958,7 @@ Partial Class form_daily2
         '
         Me.txtYear.Location = New System.Drawing.Point(121, 75)
         Me.txtYear.Name = "txtYear"
-        Me.txtYear.Size = New System.Drawing.Size(40, 20)
+        Me.txtYear.Size = New System.Drawing.Size(55, 20)
         Me.txtYear.TabIndex = 2
         '
         'txtPeriod10Field076
@@ -1629,6 +1629,7 @@ Partial Class form_daily2
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+
         'Label54
         '
         Me.Label54.AutoSize = True
@@ -1637,6 +1638,7 @@ Partial Class form_daily2
         Me.Label54.Size = New System.Drawing.Size(37, 13)
         Me.Label54.TabIndex = 661
         Me.Label54.Text = "Period"
+
         '
         'chkRepeatEntry
         '
@@ -2009,6 +2011,7 @@ Partial Class form_daily2
     Friend WithEvents Label36 As System.Windows.Forms.Label
     Friend WithEvents chkEnableSequencer As System.Windows.Forms.CheckBox
     Friend WithEvents btnView As System.Windows.Forms.Button
+
     Friend WithEvents Label54 As System.Windows.Forms.Label
     Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
 End Class

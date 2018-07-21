@@ -57,9 +57,21 @@
     <Reference Include="DynamicInterop">
       <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\MySQL\MySQL Connector Net 6.9.5\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.10\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.10\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RDotNet">
       <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
@@ -68,10 +80,16 @@
       <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,16 +110,146 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="acquisitiontype.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_basestation.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_elements.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_malawi1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_malawi12.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_mss.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_process_parameters.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_rwanda4.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_sasscal1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_sites.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_stations.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_structures.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_tahmo.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="aws_toa5_mg2.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bufr_crex_data.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bufr_crex_master.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bufr_indicators.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ccitt.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="climsoftuser.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClsCloneFunctions.vb" />
+    <Compile Include="clsDataCall.vb" />
+    <Compile Include="clsDataConnection.vb" />
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
+    <Compile Include="clsTableFilter.vb" />
+    <Compile Include="code_flag.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formAgro1.Designer.vb">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </Compile>
     <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data_forms.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="faultresolution.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="featuregeographicalposition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="flag.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="flagtable.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_agro1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_daily2.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourly.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourlywind.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_hourly_time_selection.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_monthly.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_synoptic2_tdcf.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_synoptic_2_ra1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly.Designer.vb">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.Designer.vb">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewHourlyWind.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMonthly.Designer.vb">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMonthly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.Designer.vb">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewSynopticRA1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
@@ -417,6 +565,12 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewFormDaily2.Designer.vb">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewFormDaily2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmModifyObservations.Designer.vb">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </Compile>
@@ -499,6 +653,33 @@
     <Compile Include="frmViewImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="instrument.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="instrumentfaultreport.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="instrumentinspection.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="language_translation.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Application1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -535,16 +716,229 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common.vb" />
-    <Compile Include="UserControl1.Designer.vb">
-      <DependentUpon>UserControl1.vb</DependentUpon>
+    <Compile Include="obselement.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserControl1.vb">
+    <Compile Include="observationfinal.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="observationinitial.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="observationschedule.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="obsscheduleclass.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="paperarchive.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="paperarchivedefinition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="physicalfeature.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="physicalfeatureclass.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="qcstatusdefinition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="qctype.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="qc_interelement_1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="qc_interelement_2.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="qc_interelement_relationship_definition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="regkey.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFilter.Designer.vb">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFilter.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="seq_daily_element.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_element.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day_element.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day_element_leap_yr.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day_leap_yr.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day_synoptime.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_month_day_synoptime_leap_yr.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="station.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stationelement.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stationidalia.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stationlocationhistory.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stationnetworkdefinition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stationqualifier.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="synopfeature.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblproduct.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tdcf_indicators.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tm_307091.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ucrBaseDataLink.Designer.vb">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrBaseDataLink.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourlyWind.Designer.vb">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourlyWind.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHourly.Designer.vb">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHourly.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonthlyData.Designer.vb">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthlyData.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrNavigation.Designer.vb">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDay.Designer.vb">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDay.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFormDaily2.Designer.vb">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFormDaily2.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrHour.Designer.vb">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrHour.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMonth.Designer.vb">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.Designer.vb">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrSynopticRA1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTextBox.Designer.vb">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.Designer.vb">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDirectionSpeedFlag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.Designer.vb">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueFlagPeriod.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.Designer.vb">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataLinkCombobox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrElementSelector.Designer.vb">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrStationSelector.Designer.vb">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrStationSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrYearSelector.Designer.vb">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrYearSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourly.resx">
+      <DependentUpon>frmNewHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewHourlyWind.resx">
+      <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMonthly.resx">
+      <DependentUpon>frmNewMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSynopticRA1.resx">
+      <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
@@ -868,6 +1262,9 @@
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewFormDaily2.resx">
+      <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModifyObservations.resx">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
     </EmbeddedResource>
@@ -944,9 +1341,71 @@
     <EmbeddedResource Include="frmSplashScreen.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgFilter.resx">
+      <DependentUpon>sdgFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrBaseDataLink.resx">
+      <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourlyWind.resx">
+      <DependentUpon>ucrHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHourly.resx">
+      <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthlyData.resx">
+      <DependentUpon>ucrMonthlyData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigation.resx">
+      <DependentUpon>ucrNavigation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDay.resx">
+      <DependentUpon>ucrDay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFormDaily2.resx">
+      <DependentUpon>ucrFormDaily2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrHour.resx">
+      <DependentUpon>ucrHour.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonth.resx">
+      <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrSynopticRA1.resx">
+      <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBox.resx">
+      <DependentUpon>ucrTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
+      <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValueFlagPeriod.resx">
+      <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataLinkCombobox.resx">
+      <DependentUpon>ucrDataLinkCombobox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementSelector.resx">
+      <DependentUpon>ucrElementSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrStationSelector.resx">
+      <DependentUpon>ucrStationSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrYearSelector.resx">
+      <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application1.Designer.vb</LastGenOutput>
@@ -972,6 +1431,16 @@
     <Content Include="config.inf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.vb</LastGenOutput>
+    </Content>
     <Content Include="myweat02.ico" />
     <None Include="Resources\navigation-first.jpg" />
     <None Include="Resources\navigation-left.jpg" />
@@ -980,6 +1449,9 @@
     <Content Include="static\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
