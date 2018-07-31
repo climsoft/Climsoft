@@ -16,5 +16,6 @@ Partial Public Class aws_process_parameters
     Public Property RetrievePeriod As Integer
     Public Property RetrieveTimeout As Integer
     Public Property DelinputFile As SByte
+    Public Property UTCDiff As Byte
 
 End Class

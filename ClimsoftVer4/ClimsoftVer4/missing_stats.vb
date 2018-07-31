@@ -10,16 +10,11 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class instrumentinspection
-    Public Property id As Long
-    Public Property performedOn As String
-    Public Property inspectionDatetime As String
-    Public Property performedBy As String
-    Public Property status As String
-    Public Property remarks As String
-    Public Property performedAt As String
-
-    Public Overridable Property instrument As instrument
-    Public Overridable Property station As station
+Partial Public Class missing_stats
+    Public Property STN_ID As String
+    Public Property ELEM As Long
+    Public Property MISSING As Nullable(Of Long)
+    Public Property Closing_Date As Date
+    Public Property Opening_Date As Date
 
 End Class
