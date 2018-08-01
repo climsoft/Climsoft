@@ -903,6 +903,9 @@ warning 6002: The table/view 'def.mariadb_climsoft_test_db_v4.featuregeographica
           <Property Name="Flag193" Type="varchar" MaxLength="1" />
           <Property Name="Flag115" Type="varchar" MaxLength="1" />
           <Property Name="Flag168" Type="varchar" MaxLength="1" />
+          <Property Name="Flag169" Type="varchar" MaxLength="1" />
+          <Property Name="Flag170" Type="varchar" MaxLength="1" />
+          <Property Name="Flag171" Type="varchar" MaxLength="1" />
           <Property Name="Flag178" Type="varchar" MaxLength="1" />
           <Property Name="Flag179" Type="varchar" MaxLength="1" />
           <Property Name="Flag180" Type="varchar" MaxLength="1" />
@@ -2919,6 +2922,9 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <Property Name="Flag193" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Flag115" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Flag168" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Flag169" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Flag170" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Flag171" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Flag178" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Flag179" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Flag180" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
@@ -4549,6 +4555,9 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
                 <ScalarProperty Name="Flag193" ColumnName="Flag193" />
                 <ScalarProperty Name="Flag115" ColumnName="Flag115" />
                 <ScalarProperty Name="Flag168" ColumnName="Flag168" />
+                <ScalarProperty Name="Flag169" ColumnName="Flag169" />
+                <ScalarProperty Name="Flag170" ColumnName="Flag170" />
+                <ScalarProperty Name="Flag171" ColumnName="Flag171" />
                 <ScalarProperty Name="Flag178" ColumnName="Flag178" />
                 <ScalarProperty Name="Flag179" ColumnName="Flag179" />
                 <ScalarProperty Name="Flag180" ColumnName="Flag180" />
