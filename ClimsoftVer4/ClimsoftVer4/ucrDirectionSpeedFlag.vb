@@ -93,13 +93,26 @@ Public Class ucrDirectionSpeedFlag
         MyBase.SetValue(objNewValue)
         lstValues = TryCast(objNewValue, List(Of Object))
         If lstValues.Count = 3 Then
-            'ucrDDFF.SetValue(lstValues(0) + lstValues(1))
-            ucrDDFF.SetValue("")
+            ucrDDFF.SetValue(lstValues(0) + "" + lstValues(1) + "" + lstValues(2))
+            'ucrDDFF.SetValue("")
             SetElementDirectionValue(lstValues(0))
             SetElementSpeedValue(lstValues(1))
             SetElementFlagValue(lstValues(2))
+        ElseIf lstValues.Count = 2 Then
+            ucrDDFF.SetValue(lstValues(0) + "" + lstValues(1))
+            'ucrDDFF.SetValue("")
+            SetElementDirectionValue(lstValues(0))
+            SetElementSpeedValue(lstValues(1))
         End If
     End Sub
+
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Dim lstValueDDFFFlag As New List(Of Object)
+        lstValueDDFFFlag.Add(GetElementDirectionValue())
+        lstValueDDFFFlag.Add(GetElementSpeedValue())
+        lstValueDDFFFlag.Add(GetElementFlagValue())
+        Return lstValueDDFFFlag
+    End Function
 
     Public Sub SetElementDirectionValue(strValue As String)
         ucrDirection.SetValue(strValue)
@@ -383,6 +396,13 @@ Public Class ucrDirectionSpeedFlag
         End If
         Return bValuesCorrect
     End Function
+
+    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+        ucrDDFF.SetContextMenuStrip(contextMenuStrip)
+        ucrDirection.SetContextMenuStrip(contextMenuStrip)
+        ucrSpeed.SetContextMenuStrip(contextMenuStrip)
+        ucrFlag.SetContextMenuStrip(contextMenuStrip)
+    End Sub
 
 End Class
 

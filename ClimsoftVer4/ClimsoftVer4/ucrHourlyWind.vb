@@ -23,8 +23,11 @@ Public Class ucrHourlyWind
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrDSF As ucrDirectionSpeedFlag
         Dim ucrText As ucrTextBox
+        Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+            vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
                     ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
@@ -36,6 +39,9 @@ Public Class ucrHourlyWind
                     AddHandler ucrDSF.ucrSpeed.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrDSF.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrDSF.evtGoToNextDSFControl, AddressOf GoToNextDSFControl
+
+                    ucrDSF.SetContextMenuStrip(vfpContextMenuStrip)
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrText = DirectCast(ctr, ucrTextBox)
                     ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
@@ -548,5 +554,11 @@ Public Class ucrHourlyWind
         'TODO? because of the detachment
         PopulateControl()
     End Sub
+
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allDF = From udf In Me.Controls.OfType(Of ucrDirectionSpeedFlag)() Order By udf.TabIndex
+        Return New ClsShiftCells(allDF).GetVFPContextMenu()
+    End Function
 
 End Class
