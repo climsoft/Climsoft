@@ -11,10 +11,9 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class form_monthly
-    Public Property id As Long
     Public Property stationId As String
-    Public Property elementId As Nullable(Of Integer)
-    Public Property yyyy As Nullable(Of Integer)
+    Public Property elementId As Integer
+    Public Property yyyy As Integer
     Public Property mm_01 As String
     Public Property mm_02 As String
     Public Property mm_03 As String

@@ -20,7 +20,6 @@ Partial Public Class instrumentfaultreport
     Public Property receivedBy As String
     Public Property reportedFrom As String
 
-    Public Overridable Property faultresolutions As ICollection(Of faultresolution) = New HashSet(Of faultresolution)
     Public Overridable Property instrument As instrument
     Public Overridable Property station As station
 

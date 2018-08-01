@@ -20,11 +20,10 @@ Partial Public Class obselement
     Public Property lowerLimit As String
     Public Property units As String
     Public Property elementtype As String
-    Public Property qcTotalRequired As Nullable(Of SByte)
+    Public Property qcTotalRequired As Nullable(Of Integer)
     Public Property selected As SByte
 
     Public Overridable Property observationinitials As ICollection(Of observationinitial) = New HashSet(Of observationinitial)
-    Public Overridable Property stationelements As ICollection(Of stationelement) = New HashSet(Of stationelement)
     Public Overridable Property observationfinals As ICollection(Of observationfinal) = New HashSet(Of observationfinal)
 
 End Class

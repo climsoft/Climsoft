@@ -21,5 +21,6 @@ Partial Public Class data_forms
     Public Property val_end_position As Nullable(Of Long)
     Public Property elem_code_location As String
     Public Property sequencer As String
+    Public Property entry_mode As Byte
 
 End Class
