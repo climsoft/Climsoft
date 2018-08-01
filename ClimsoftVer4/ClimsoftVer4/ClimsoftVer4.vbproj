@@ -791,6 +791,7 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClsShiftCells.vb" />
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

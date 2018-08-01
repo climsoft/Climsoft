@@ -32,19 +32,24 @@ Public Class ucrSynopticRA1
     Public bAutoFillValues As Boolean = True
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim ctrVFP As ucrValueFlagPeriod
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+            vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
-                    lstFields.Add(strValueFieldName & ctrVFP.Tag)
-                    lstFields.Add(strFlagFieldName & ctrVFP.Tag)
-                    AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ucrVFP.ucrPeriod.Visible = False
+                    ucrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ucrVFP.Tag, strFlagFieldName & ucrVFP.Tag)
+                    lstFields.Add(strValueFieldName & ucrVFP.Tag)
+                    lstFields.Add(strFlagFieldName & ucrVFP.Tag)
+                    AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
+                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
@@ -665,4 +670,11 @@ Public Class ucrSynopticRA1
         PopulateControl()
 
     End Sub
+
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+        Return New ClsShiftCells(allVFP).GetVFPContextMenu()
+    End Function
+
 End Class

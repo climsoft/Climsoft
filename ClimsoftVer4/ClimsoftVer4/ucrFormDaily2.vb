@@ -30,7 +30,7 @@ Public Class ucrFormDaily2
     Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedElement As ucrElementSelector
 
-    Private vfpContextMenuStrip As ContextMenuStrip
+
 
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
@@ -99,9 +99,10 @@ Public Class ucrFormDaily2
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ucrVFP As ucrValueFlagPeriod
         Dim ucrTotal As ucrTextBox
+        Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
-            Me.vfpContextMenuStrip = SetUpContextMenuStrip()
+            vfpContextMenuStrip = SetUpContextMenuStrip()
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -117,7 +118,7 @@ Public Class ucrFormDaily2
                     AddHandler ucrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
 
-                    ucrVFP.SetContextMenuStrip(Me.vfpContextMenuStrip)
+                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
 
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrTotal = DirectCast(ctr, ucrTextBox)
@@ -554,85 +555,10 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Function SetUpContextMenuStrip() As ContextMenuStrip
-        Dim vfpContextMenuStrip As New ContextMenuStrip
-        Dim menuItemShiftUpwards As New ToolStripMenuItem("Shift Upwards")
-        Dim menuItemShiftDownwards As New ToolStripMenuItem("Shift Downwards")
-
-        vfpContextMenuStrip.Items.Add(menuItemShiftUpwards)
-        vfpContextMenuStrip.Items.Add(menuItemShiftDownwards)
-
-        'Add functionality for ToolStripMenuItem1 (Maximize) click
-        AddHandler menuItemShiftUpwards.Click, AddressOf menuItemShiftUpwards_Click
-
-        'Add functionality for ToolStripMenuItem2 (Exit) click
-        AddHandler menuItemShiftDownwards.Click, AddressOf menuItemShiftDownwards_Click
-
-        Return vfpContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+        Return New ClsShiftCells(allVFP).GetVFPContextMenu()
     End Function
 
-    Private Sub menuItemShiftUpwards_Click(ByVal sender As Object, ByVal e As EventArgs)
-        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
-            Dim vfpControl = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
-
-            If TypeOf vfpControl Is ucrValueFlagPeriod Then
-                'Start the shifting
-                Dim currentIndex As Integer = vfpControl.TabIndex
-
-                Dim lstControls As New List(Of ucrValueFlagPeriod)
-                Dim lstValues As New List(Of Object)
-
-                'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
-                Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
-
-                For Each ctr As ucrValueFlagPeriod In allVFP
-                    If ctr.TabIndex >= currentIndex - 1 Then
-                        lstControls.Add(ctr)
-                        lstValues.Add(ctr.GetValue)
-                    End If
-                Next
-
-                For i As Integer = lstControls.Count - 1 To 1 Step -1
-                    lstControls.Item(i - 1).SetValue(lstValues.Item(i))
-                Next
-
-                If lstControls.Count > 0 Then
-                    lstControls.Item(lstControls.Count - 1).Clear()
-                End If
-
-            End If
-        End If
-    End Sub
-
-    Private Sub menuItemShiftDownwards_Click(ByVal sender As Object, ByVal e As EventArgs)
-        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
-            Dim vfpControl = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
-
-            If TypeOf vfpControl Is ucrValueFlagPeriod Then
-                'Start the shifting
-                Dim currentIndex As Integer = vfpControl.TabIndex
-
-                Dim lstControls As New List(Of ucrValueFlagPeriod)
-                Dim lstValues As New List(Of Object)
-
-                'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
-                Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
-
-                For Each ctr As ucrValueFlagPeriod In allVFP
-                    If ctr.TabIndex >= currentIndex Then
-                        lstControls.Add(ctr)
-                        lstValues.Add(ctr.GetValue)
-                    End If
-                Next
-
-                For i As Integer = 0 To lstControls.Count - 2
-                    lstControls.Item(i + 1).SetValue(lstValues.Item(i))
-                Next
-
-                DirectCast(vfpControl, ucrValueFlagPeriod).Clear()
-
-            End If
-        End If
-
-    End Sub
 
 End Class

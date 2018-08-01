@@ -74,8 +74,10 @@ Public Class ucrMonthlydata
 
     Private Sub ucrMonthlydata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ucrVFP As ucrValueFlagPeriod
-
+        Dim vfpContextMenuStrip As ContextMenuStrip
         If bFirstLoad Then
+            vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
@@ -88,6 +90,9 @@ Public Class ucrMonthlydata
                     AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
+                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
+
                 End If
             Next
 
@@ -387,4 +392,10 @@ Public Class ucrMonthlydata
 
     End Sub
 
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+        Dim shiftCells = New ClsShiftCells(allVFP)
+        Return shiftCells.GetVFPContextMenu()
+    End Function
 End Class
