@@ -773,12 +773,15 @@ warning 6002: The table/view 'def.mariadb_climsoft_test_db_v4.featuregeographica
           <Property Name="total" Type="varchar" MaxLength="50" />
           <Property Name="signature" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'def.mariadb_climsoft_test_db_v4.form_monthly' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="form_monthly">
-          <Property Name="stationId" Type="varchar" MaxLength="255" />
-          <Property Name="elementId" Type="int" />
-          <Property Name="yyyy" Type="int" />
+          <Key>
+            <PropertyRef Name="stationId" />
+            <PropertyRef Name="elementId" />
+            <PropertyRef Name="yyyy" />
+          </Key>
+          <Property Name="stationId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="elementId" Type="int" Nullable="false" />
+          <Property Name="yyyy" Type="int" Nullable="false" />
           <Property Name="mm_01" Type="varchar" MaxLength="255" />
           <Property Name="mm_02" Type="varchar" MaxLength="255" />
           <Property Name="mm_03" Type="varchar" MaxLength="255" />
@@ -816,7 +819,7 @@ warning 6013: The table/view 'def.mariadb_climsoft_test_db_v4.form_monthly' does
           <Property Name="period11" Type="varchar" MaxLength="255" />
           <Property Name="period12" Type="varchar" MaxLength="255" />
           <Property Name="signature" Type="varchar" MaxLength="50" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="form_synoptic_2_ra1">
           <Key>
             <PropertyRef Name="stationId" />
@@ -1035,6 +1038,16 @@ warning 6013: The table/view 'def.mariadb_climsoft_test_db_v4.form_monthly' does
           <Property Name="flag44" Type="varchar" MaxLength="1" />
           <Property Name="flag45" Type="varchar" MaxLength="1" />
           <Property Name="signature" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="gaps">
+          <Key>
+            <PropertyRef Name="Missing_STNID" />
+            <PropertyRef Name="Missing_ELEM" />
+            <PropertyRef Name="Missing_Date" />
+          </Key>
+          <Property Name="Missing_STNID" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Missing_ELEM" Type="bigint" Nullable="false" />
+          <Property Name="Missing_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="instrument">
           <Key>
@@ -1958,8 +1971,10 @@ warning 6035: The relationship 'FK_mysql_climsoft_db_v4_synopfeatureFeatureGeogr
           <EntitySet Name="form_hourly" EntityType="Self.form_hourly" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="form_hourly_time_selection" EntityType="Self.form_hourly_time_selection" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="form_hourlywind" EntityType="Self.form_hourlywind" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
+          <EntitySet Name="form_monthly" EntityType="Self.form_monthly" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="form_synoptic_2_ra1" EntityType="Self.form_synoptic_2_ra1" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="form_synoptic2_tdcf" EntityType="Self.form_synoptic2_tdcf" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
+          <EntitySet Name="gaps" EntityType="Self.gaps" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="instrument" EntityType="Self.instrument" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="instrumentfaultreport" EntityType="Self.instrumentfaultreport" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
           <EntitySet Name="language_translation" EntityType="Self.language_translation" Schema="mariadb_climsoft_test_db_v4" store:Type="Tables" />
@@ -2774,6 +2789,53 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <Property Name="total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="signature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="form_monthly">
+          <Key>
+            <PropertyRef Name="stationId" />
+            <PropertyRef Name="elementId" />
+            <PropertyRef Name="yyyy" />
+          </Key>
+          <Property Name="stationId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="elementId" Type="Int32" Nullable="false" />
+          <Property Name="yyyy" Type="Int32" Nullable="false" />
+          <Property Name="mm_01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_03" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_04" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_06" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_07" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_08" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_09" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_11" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mm_12" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag03" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag04" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag06" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag07" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag08" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag09" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag11" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="flag12" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period01" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period02" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period03" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period04" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period05" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period06" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period07" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period08" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period09" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period10" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period11" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="period12" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="signature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="form_synoptic_2_ra1">
           <Key>
             <PropertyRef Name="stationId" />
@@ -2992,6 +3054,16 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <Property Name="flag44" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="flag45" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="signature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="gap">
+          <Key>
+            <PropertyRef Name="Missing_STNID" />
+            <PropertyRef Name="Missing_ELEM" />
+            <PropertyRef Name="Missing_Date" />
+          </Key>
+          <Property Name="Missing_STNID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Missing_ELEM" Type="Int64" Nullable="false" />
+          <Property Name="Missing_Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="instrument">
           <Key>
@@ -3660,8 +3732,10 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <EntitySet Name="form_hourly" EntityType="Self.form_hourly" />
           <EntitySet Name="form_hourly_time_selection" EntityType="Self.form_hourly_time_selection" />
           <EntitySet Name="form_hourlywind" EntityType="Self.form_hourlywind" />
+          <EntitySet Name="form_monthly" EntityType="Self.form_monthly" />
           <EntitySet Name="form_synoptic_2_ra1" EntityType="Self.form_synoptic_2_ra1" />
           <EntitySet Name="form_synoptic2_tdcf" EntityType="Self.form_synoptic2_tdcf" />
+          <EntitySet Name="gaps" EntityType="Self.gap" />
           <EntitySet Name="instruments" EntityType="Self.instrument" />
           <EntitySet Name="instrumentfaultreports" EntityType="Self.instrumentfaultreport" />
           <EntitySet Name="language_translation" EntityType="Self.language_translation" />
@@ -4351,6 +4425,52 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="form_monthly">
+            <EntityTypeMapping TypeName="mariadb_climsoft_test_db_v4Model.form_monthly">
+              <MappingFragment StoreEntitySet="form_monthly">
+                <ScalarProperty Name="stationId" ColumnName="stationId" />
+                <ScalarProperty Name="elementId" ColumnName="elementId" />
+                <ScalarProperty Name="yyyy" ColumnName="yyyy" />
+                <ScalarProperty Name="mm_01" ColumnName="mm_01" />
+                <ScalarProperty Name="mm_02" ColumnName="mm_02" />
+                <ScalarProperty Name="mm_03" ColumnName="mm_03" />
+                <ScalarProperty Name="mm_04" ColumnName="mm_04" />
+                <ScalarProperty Name="mm_05" ColumnName="mm_05" />
+                <ScalarProperty Name="mm_06" ColumnName="mm_06" />
+                <ScalarProperty Name="mm_07" ColumnName="mm_07" />
+                <ScalarProperty Name="mm_08" ColumnName="mm_08" />
+                <ScalarProperty Name="mm_09" ColumnName="mm_09" />
+                <ScalarProperty Name="mm_10" ColumnName="mm_10" />
+                <ScalarProperty Name="mm_11" ColumnName="mm_11" />
+                <ScalarProperty Name="mm_12" ColumnName="mm_12" />
+                <ScalarProperty Name="flag01" ColumnName="flag01" />
+                <ScalarProperty Name="flag02" ColumnName="flag02" />
+                <ScalarProperty Name="flag03" ColumnName="flag03" />
+                <ScalarProperty Name="flag04" ColumnName="flag04" />
+                <ScalarProperty Name="flag05" ColumnName="flag05" />
+                <ScalarProperty Name="flag06" ColumnName="flag06" />
+                <ScalarProperty Name="flag07" ColumnName="flag07" />
+                <ScalarProperty Name="flag08" ColumnName="flag08" />
+                <ScalarProperty Name="flag09" ColumnName="flag09" />
+                <ScalarProperty Name="flag10" ColumnName="flag10" />
+                <ScalarProperty Name="flag11" ColumnName="flag11" />
+                <ScalarProperty Name="flag12" ColumnName="flag12" />
+                <ScalarProperty Name="period01" ColumnName="period01" />
+                <ScalarProperty Name="period02" ColumnName="period02" />
+                <ScalarProperty Name="period03" ColumnName="period03" />
+                <ScalarProperty Name="period04" ColumnName="period04" />
+                <ScalarProperty Name="period05" ColumnName="period05" />
+                <ScalarProperty Name="period06" ColumnName="period06" />
+                <ScalarProperty Name="period07" ColumnName="period07" />
+                <ScalarProperty Name="period08" ColumnName="period08" />
+                <ScalarProperty Name="period09" ColumnName="period09" />
+                <ScalarProperty Name="period10" ColumnName="period10" />
+                <ScalarProperty Name="period11" ColumnName="period11" />
+                <ScalarProperty Name="period12" ColumnName="period12" />
+                <ScalarProperty Name="signature" ColumnName="signature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="form_synoptic_2_ra1">
             <EntityTypeMapping TypeName="mariadb_climsoft_test_db_v4Model.form_synoptic_2_ra1">
               <MappingFragment StoreEntitySet="form_synoptic_2_ra1">
@@ -4561,6 +4681,15 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
                 <ScalarProperty Name="flag44" ColumnName="flag44" />
                 <ScalarProperty Name="flag45" ColumnName="flag45" />
                 <ScalarProperty Name="signature" ColumnName="signature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gaps">
+            <EntityTypeMapping TypeName="mariadb_climsoft_test_db_v4Model.gap">
+              <MappingFragment StoreEntitySet="gaps">
+                <ScalarProperty Name="Missing_STNID" ColumnName="Missing_STNID" />
+                <ScalarProperty Name="Missing_ELEM" ColumnName="Missing_ELEM" />
+                <ScalarProperty Name="Missing_Date" ColumnName="Missing_Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
