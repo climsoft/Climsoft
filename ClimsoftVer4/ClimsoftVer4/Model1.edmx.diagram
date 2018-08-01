@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3783f6754ceb4f2f9fef3269e7d73823" Name="Diagram1">
+      <Diagram DiagramId="bbc480a69b364c7ba8f0328efa2f5fbb" Name="Diagram1">
         <EntityTypeShape EntityType="mariadb_climsoft_test_db_v4Model.acquisitiontype" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="mariadb_climsoft_test_db_v4Model.aws_basestation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="mariadb_climsoft_test_db_v4Model.aws_elements" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
