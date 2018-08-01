@@ -320,6 +320,120 @@ Public Class ucrMonthlydata
         Dim lElementId As Long
         Dim dtObsDateTime As Date
         Dim lstAllFields As New List(Of String)
+        Dim bUpdateRecord As Boolean
+        Dim strSql As String
+        Dim strSignature As String
+        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            For Each row As DataRow In dtbAllRecords.Rows
+                For Each strFieldName As String In lstFields
+                    'if its not an observation value field then skip the loop
+                    If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                        Continue For
+                    End If
+
+                    strValueColumn = strFieldName
+                    'set the record
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+
+                        strStationId = row.Item("stationId")
+                        strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                        strFlagColumn = lstFields.Find(Function(x As String)
+                                                           Return x.Equals(Me.strFlagFieldName & strTag)
+                                                       End Function)
+                        strPeriodColumn = lstFields.Find(Function(x As String)
+                                                             Return x.Equals(Me.strPeriodFieldName & strTag)
+                                                         End Function)
+                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), 1, 6, 0, 0)
+
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        bUpdateRecord = False
+                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            bUpdateRecord = reader.HasRows
+                        End Using
+
+                        Integer.TryParse(row.Item(strPeriodColumn), iPeriod)
+
+                        strSignature = ""
+
+                        If Not IsDBNull(row.Item("signature")) Then
+                            strSignature = row.Item("signature")
+                        End If
+
+                        If bUpdateRecord Then
+                            strSql = "UPDATE observationInitial SET recordedFrom=@stationId,describedBy=@elemCode,obsDatetime=@obsDatetime,obsLevel=@obsLevel,obsValue=@obsVal,flag=@obsFlag,period=@obsPeriod,qcStatus=@qcStatus,acquisitionType=@acquisitiontype,capturedBy=@capturedBy,dataForm=@dataForm " &
+                                " WHERE recordedFrom=@stationId And describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Else
+                            strSql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                            "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
+                        End If
+
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                        cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                        cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                        cmd.Parameters.AddWithValue("@obsPeriod", If(iPeriod > 0, iPeriod, DBNull.Value))
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        cmd.ExecuteNonQuery()
+
+                    End If
+                Next
+            Next
+        Catch ex As Exception
+            MessageBox.Show("Upload Error " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+
+        'TODO? because of the detachment
+        'PopulateControl()
+
+    End Sub
+
+    Public Sub UploadAllRecordsEF()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strTag As String
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strPeriodColumn As String
+        Dim iPeriod As Integer
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim dtObsDateTime As Date
+        Dim lstAllFields As New List(Of String)
         Dim bNewRecord As Boolean
 
         'get the observation values fields
