@@ -18,6 +18,9 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
 
     Public Sub New()
         MyBase.New("name=mariadb_climsoft_test_db_v4Entities")
+        ' FIXME: The following use of `txtusrpwd` is consistent with the previous
+        ' SQL connection code, but needs replacing when login is updated.
+        Me.Database.Connection.ConnectionString = frmLogin.txtusrpwd.Text
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
@@ -48,8 +51,10 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property form_hourly() As DbSet(Of form_hourly)
     Public Overridable Property form_hourly_time_selection() As DbSet(Of form_hourly_time_selection)
     Public Overridable Property form_hourlywind() As DbSet(Of form_hourlywind)
+    Public Overridable Property form_monthly() As DbSet(Of form_monthly)
     Public Overridable Property form_synoptic_2_ra1() As DbSet(Of form_synoptic_2_ra1)
     Public Overridable Property form_synoptic2_tdcf() As DbSet(Of form_synoptic2_tdcf)
+    Public Overridable Property gaps() As DbSet(Of gap)
     Public Overridable Property instruments() As DbSet(Of instrument)
     Public Overridable Property instrumentfaultreports() As DbSet(Of instrumentfaultreport)
     Public Overridable Property language_translation() As DbSet(Of language_translation)
