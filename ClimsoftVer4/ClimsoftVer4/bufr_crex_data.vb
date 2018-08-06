@@ -11,7 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class bufr_crex_data
-    Public Property nos As Integer
+    Public Property nos As Nullable(Of Integer)
     Public Property Bufr_Template As String
     Public Property Crex_Template As String
     Public Property Sequence_Descriptor1 As String

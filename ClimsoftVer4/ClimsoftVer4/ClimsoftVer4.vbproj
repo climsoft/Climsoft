@@ -110,6 +110,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="abc.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="acquisitiontype.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -164,9 +167,6 @@
     <Compile Include="bufr_indicators.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ccitt.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="climsoftuser.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -183,16 +183,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
-    <Compile Include="formAgro1.Designer.vb">
-      <DependentUpon>formAgro1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formAgro1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="data_forms.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="faultresolution.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="featuregeographicalposition.vb">
@@ -204,23 +195,34 @@
     <Compile Include="flagtable.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="formAgro1.Designer.vb">
+      <DependentUpon>formAgro1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="form_agro1.vb">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_daily2.vb">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_hourly.vb">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_hourlywind.vb">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_hourly_time_selection.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="form_monthly.vb">
       <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="form_synoptic2_tdcf.vb">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -653,16 +655,19 @@
     <Compile Include="frmViewImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="gap.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="instrument.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="instrumentfaultreport.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="instrumentinspection.vb">
+    <Compile Include="language_translation.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="language_translation.vb">
+    <Compile Include="missing_stats.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.vb">
@@ -725,13 +730,7 @@
     <Compile Include="observationinitial.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="observationschedule.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="obsscheduleclass.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="paperarchive.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="paperarchivedefinition.vb">
@@ -791,31 +790,17 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClsShiftCells.vb" />
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="stationelement.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationidalia.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationlocationhistory.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="stationnetworkdefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationqualifier.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="synopfeature.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblproduct.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tdcf_indicators.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tm_307091.vb">

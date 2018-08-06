@@ -72,8 +72,11 @@ Public Class ucrHourly
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ucrVFP As ucrValueFlagPeriod
         Dim ucrText As ucrTextBox
+        Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+            vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
@@ -84,6 +87,9 @@ Public Class ucrHourly
                     AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
                     AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
+                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
+
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     ucrText = DirectCast(ctr, ucrTextBox)
                     ucrText.SetTableNameAndField(strTableName, strTotalFieldName)
@@ -441,6 +447,117 @@ Public Class ucrHourly
     Public Sub UploadAllRecords()
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strTag As String
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim hh As Integer
+        Dim dtObsDateTime As Date
+        Dim lstAllFields As New List(Of String)
+        Dim bUpdateRecord As Boolean
+        Dim strSql As String
+        Dim strSignature As String
+        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            For Each row As DataRow In dtbAllRecords.Rows
+                For Each strFieldName As String In lstFields
+                    'if its not an observation value field then skip the loop
+                    If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                        Continue For
+                    End If
+
+                    strValueColumn = strFieldName
+                    'set the record
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+
+                        strStationId = row.Item("stationId")
+                        strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                        strFlagColumn = lstFields.Find(Function(x As String)
+                                                           Return x.Equals(Me.strFlagFieldName & strTag)
+                                                       End Function)
+
+                        hh = Integer.Parse(strTag)
+                        dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
+
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        bUpdateRecord = False
+                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            bUpdateRecord = reader.HasRows
+                        End Using
+
+                        strSignature = ""
+
+                        If Not IsDBNull(row.Item("signature")) Then
+                            strSignature = row.Item("signature")
+                        End If
+
+                        If bUpdateRecord Then
+                            strSql = "UPDATE observationInitial SET recordedFrom=@stationId,describedBy=@elemCode,obsDatetime=@obsDatetime,obsLevel=@obsLevel,obsValue=@obsVal,flag=@obsFlag,qcStatus=@qcStatus,acquisitionType=@acquisitiontype,capturedBy=@capturedBy,dataForm=@dataForm " &
+                                " WHERE recordedFrom=@stationId And describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Else
+                            strSql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                            "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
+                        End If
+
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                        cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                        cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        cmd.ExecuteNonQuery()
+
+                    End If
+                Next
+            Next
+
+        Catch ex As Exception
+            MessageBox.Show("Upload Error " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+
+
+        'TODO? because of the detachment
+        'PopulateControl()
+
+    End Sub
+
+    'TODO. Will be used once the issue of ObservationInitial primary keys is fixed
+    Public Sub UploadAllRecordsEF()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
         Dim strValueColumn As String
         Dim strFlagColumn As String
@@ -520,6 +637,12 @@ Public Class ucrHourly
 
     End Sub
 
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+        Dim shiftCells = New ClsShiftCells(allVFP)
+        Return shiftCells.GetVFPContextMenu()
+    End Function
 
 End Class
 
