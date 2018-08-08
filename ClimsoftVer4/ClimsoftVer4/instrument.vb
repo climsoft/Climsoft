@@ -24,9 +24,7 @@ Partial Public Class instrument
     Public Property instrumentPicture As String
     Public Property installedAt As String
 
-    Public Overridable Property stationelements As ICollection(Of stationelement) = New HashSet(Of stationelement)
     Public Overridable Property station As station
     Public Overridable Property instrumentfaultreports As ICollection(Of instrumentfaultreport) = New HashSet(Of instrumentfaultreport)
-    Public Overridable Property instrumentinspections As ICollection(Of instrumentinspection) = New HashSet(Of instrumentinspection)
 
 End Class

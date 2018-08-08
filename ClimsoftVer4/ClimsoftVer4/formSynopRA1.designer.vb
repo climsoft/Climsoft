@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formSynopRA1
+Partial Class form_synopticRA1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -196,6 +196,7 @@ Partial Class formSynopRA1
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnTDCF = New System.Windows.Forms.Button()
         Me.txtFlag193Field072 = New System.Windows.Forms.TextBox()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         YyyyLabel = New System.Windows.Forms.Label()
         Val_Elem106Label = New System.Windows.Forms.Label()
         Val_Elem107Label = New System.Windows.Forms.Label()
@@ -1671,11 +1672,23 @@ Partial Class formSynopRA1
         Me.txtFlag193Field072.TabIndex = 149
         Me.txtFlag193Field072.TabStop = False
         '
-        'formSynopRA1
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(21, 639)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
+        Me.chkRepeatEntry.TabIndex = 663
+        Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
+        'form_synopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(717, 662)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnTDCF)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnUpload)
@@ -1852,7 +1865,7 @@ Partial Class formSynopRA1
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.MaximizeBox = False
-        Me.Name = "formSynopRA1"
+        Me.Name = "form_synopticRA1"
         Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1982,5 +1995,6 @@ Partial Class formSynopRA1
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnTDCF As System.Windows.Forms.Button
     Friend WithEvents txtFlag193Field072 As System.Windows.Forms.TextBox
+    Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
 
 End Class

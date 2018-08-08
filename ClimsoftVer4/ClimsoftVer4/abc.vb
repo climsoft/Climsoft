@@ -10,15 +10,16 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class stationqualifier
-    Public Property id As Long
-    Public Property qualifier As String
-    Public Property qualifierBeginDate As String
-    Public Property qualifierEndDate As String
-    Public Property stationTimeZone As Nullable(Of Integer)
-    Public Property stationNetworkType As String
-    Public Property belongsTo As String
-
-    Public Overridable Property station As station
+Partial Public Class abc
+    Public Property No As Integer
+    Public Property Element_abbreviation As String
+    Public Property Element_Name As String
+    Public Property Element_Details As String
+    Public Property Climsoft_Element As String
+    Public Property Bufr_Element As String
+    Public Property unit As String
+    Public Property lower_limit As String
+    Public Property upper_limit As String
+    Public Property obsv As String
 
 End Class

@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class form_synoptic_2_ra1
-    Public Property id As Long
     Public Property stationId As String
     Public Property yyyy As Integer
     Public Property mm As Integer
@@ -87,6 +86,9 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Flag193 As String
     Public Property Flag115 As String
     Public Property Flag168 As String
+    Public Property Flag169 As String
+    Public Property Flag170 As String
+    Public Property Flag171 As String
     Public Property Flag178 As String
     Public Property Flag179 As String
     Public Property Flag180 As String

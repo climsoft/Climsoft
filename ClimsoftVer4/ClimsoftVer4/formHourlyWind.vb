@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Public Class formHourlyWind
+Public Class form_hourlywind
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -111,7 +111,7 @@ Public Class formHourlyWind
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-   
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         'The AddNew button is for the purpose of adding a new record to the DataSet and "NOT FOR ADDING A NEW RECORD TO THE DATASOURCE TABLE".
         'It is the job of the Commit button to add the new record to the datasource table.
@@ -183,119 +183,135 @@ Public Class formHourlyWind
                 ctrl.Text = ""
             End If
         Next ctrl
-        'Check for leap year
-        Dim objCheckYear As New dataEntryGlobalRoutines
-
-        If objCheckYear.checkIsLeapYear(strYear) Then
-            txtSequencer.Text = "seq_month_day_leap_yr"
-        Else
-            txtSequencer.Text = "seq_month_day"
-        End If
-
-        '----------------Code block added 20160419. ASM
         Try
-            Dim dsLastDataRecord As New DataSet
-            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
-            Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecDay As String
-
-            SQL_last_record = "SELECT stationId,yyyy,mm,dd,signature,entryDatetime from form_hourlywind WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourlywind);"
-            dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
-            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
-            '----------------
-
-            stn = cboStation.SelectedValue
-            cboStation.SelectedValue = stn
-            If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
-                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
-                cboStation.SelectedValue = stn
-                lastRecDay = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("dd")
-                lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
-                lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
-                ' lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
-            End If
-
-            'stn = cboStation.SelectedValue
-            'Assign station identifier to that of current record
-
-            'cboStation.SelectedValue = stn
-            If cboMonth.Text = 12 And cboDay.Text = 31 Then
-                txtYear.Text = Val(txtYear.Text) + 1
+            If chkRepeatEntry.Checked Then
+                Dim recdate As Date
+                ' Enable AddNew button and Diable Save button
+                btnAddNew.Enabled = True
+                btnCommit.Enabled = False
+                ' Compute the new header entries for the next record
+                recdate = DateSerial(txtYear.Text, cboMonth.Text, 1)
+                recdate = DateAdd("d", 1, recdate)
+                txtYear.Text = DateAndTime.Year(recdate)
+                cboMonth.Text = DateAndTime.Month(recdate)
+                cboDay.Text = DateAndTime.Day(recdate)
+                'Exit Sub
             Else
-                txtYear.Text = txtYear.Text
+
+                'Check for leap year
+                Dim objCheckYear As New dataEntryGlobalRoutines
+
+                If objCheckYear.checkIsLeapYear(strYear) Then
+                    txtSequencer.Text = "seq_month_day_leap_yr"
+                Else
+                    txtSequencer.Text = "seq_month_day"
+                End If
+
+                '----------------Code block added 20160419. ASM
+                'Try
+                Dim dsLastDataRecord As New DataSet
+                Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+                Dim SQL_last_record As String, lastRecYear As String, lastRecMonth As String, lastRecDay As String
+
+                SQL_last_record = "SELECT stationId,yyyy,mm,dd,signature,entryDatetime from form_hourlywind WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourlywind);"
+                dsLastDataRecord.Clear()
+                daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+                daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+                '----------------
+
+                stn = cboStation.SelectedValue
+                cboStation.SelectedValue = stn
+                If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+                    stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+                    cboStation.SelectedValue = stn
+                    lastRecDay = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("dd")
+                    lastRecMonth = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("mm")
+                    lastRecYear = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("yyyy")
+                    ' lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
+                End If
+
+                'stn = cboStation.SelectedValue
+                'Assign station identifier to that of current record
+
+                'cboStation.SelectedValue = stn
+                If cboMonth.Text = 12 And cboDay.Text = 31 Then
+                    txtYear.Text = Val(txtYear.Text) + 1
+                Else
+                    txtYear.Text = txtYear.Text
+                End If
+
+                mm = Val(cboMonth.Text)
+                dd = Val(cboDay.Text)
+
+                Sql = "SELECT * FROM " & txtSequencer.Text
+                daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+                'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
+                'of records in the recordest table whenever the AddNew button is clicked
+                dsSequencer.Clear()
+                daSequencer.Fill(dsSequencer, "sequencer")
+
+                seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+
+                For k = 0 To seqRecCount - 1
+                    If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecDay Then
+                        If (k + 1) <= seqRecCount - 1 Then
+                            cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
+                            cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
+                        Else
+                            cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
+                            cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
+                        End If
+                    End If
+                Next k
+
+                Dim m As Integer
+                Dim ctl As Control
+                'Clear textboxes for dd values
+                For m = 4 To 28
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            ctl.Text = ""
+                        End If
+                    Next ctl
+                Next m
+
+                'Clear textboxes for ddff values
+                For m = 4 To 27
+                    For Each ctl In Me.Controls
+                        If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                            ctl.Text = ""
+                        End If
+                    Next ctl
+                Next m
+
+                'Clear textboxes for ff values
+                'For m = 4 To 27
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtff" Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+                ' Next m
+
+
+                'Clear textboxes for ddfff flags
+                ' For m = 28 To 51
+                For Each ctl In Me.Controls
+                    If Strings.Left(ctl.Name, 8) = "txt_ddfff" Then
+                        ctl.Text = ""
+                    End If
+                Next ctl
+                ' Next m
+
+                'Set record index to last record
+                inc = maxRows
+
+                'Display record position in record navigation Text Box
+                recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
+
+                'Set focus to texbox for station level pressure
+                txt_ddff00.Focus()
             End If
-
-            mm = Val(cboMonth.Text)
-            dd = Val(cboDay.Text)
-
-            Sql = "SELECT * FROM " & txtSequencer.Text
-            daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-            'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-            'of records in the recordest table whenever the AddNew button is clicked
-            dsSequencer.Clear()
-            daSequencer.Fill(dsSequencer, "sequencer")
-
-            seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
-
-            For k = 0 To seqRecCount - 1
-                If dsSequencer.Tables("sequencer").Rows(k).Item("mm") = lastRecMonth And dsSequencer.Tables("sequencer").Rows(k).Item("dd") = lastRecDay Then
-                    If (k + 1) <= seqRecCount - 1 Then
-                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("mm")
-                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(k + 1).Item("dd")
-                    Else
-                        cboMonth.Text = dsSequencer.Tables("sequencer").Rows(0).Item("mm")
-                        cboDay.Text = dsSequencer.Tables("sequencer").Rows(0).Item("dd")
-                    End If
-                End If
-            Next k
-
-            Dim m As Integer
-            Dim ctl As Control
-            'Clear textboxes for dd values
-            For m = 4 To 28
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ctl.Text = ""
-                    End If
-                Next ctl
-            Next m
-
-            'Clear textboxes for ddff values
-            For m = 4 To 27
-                For Each ctl In Me.Controls
-                    If Strings.Left(ctl.Name, 6) = "txtDD" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ctl.Text = ""
-                    End If
-                Next ctl
-            Next m
-
-            'Clear textboxes for ff values
-            'For m = 4 To 27
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtff" Then
-                    ctl.Text = ""
-                End If
-            Next ctl
-            ' Next m
-
-
-            'Clear textboxes for ddfff flags
-            ' For m = 28 To 51
-            For Each ctl In Me.Controls
-                If Strings.Left(ctl.Name, 8) = "txt_ddfff" Then
-                    ctl.Text = ""
-                End If
-            Next ctl
-            ' Next m
-
-            'Set record index to last record
-            inc = maxRows
-
-            'Display record position in record navigation Text Box
-            recNumberTextBox.Text = "Record " & maxRows + 1 & " of " & maxRows + 1
-
-            'Set focus to texbox for station level pressure
-            txt_ddff00.Focus()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -317,6 +333,20 @@ Public Class formHourlyWind
 
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
+
+            ' Check for conflicts if Double key entry mode is set
+            If chkRepeatEntry.Checked And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                btnAddNew.Enabled = True
+                btnCommit.Enabled = False
+
+                Dim hh As String
+                hh = Strings.Mid(Me.ActiveControl.Name, 8, 2)
+                If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, "111", txtYear.Text, cboMonth.Text, cboDay.Text, hh) Then
+                    MsgBox("Can't derify data")
+                End If
+            End If
+
+
             If Strings.Left(Me.ActiveControl.Name, 8) = "txt_ddff" And Strings.Len(Me.ActiveControl.Text) > 0 Then
                 'Separate flags
                 'Check for an observation flag in the texbox for observation value.
@@ -498,12 +528,12 @@ Public Class formHourlyWind
                 objKeyPress.checkExists(itemFound, cboStation)
 
             End If
-                '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                'if TAB next is true Activate [TAB]
-                If tabNext = True Then
-                    My.Computer.Keyboard.SendKeys("{TAB}")
-                End If
+            '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            'if TAB next is true Activate [TAB]
+            If tabNext = True Then
+                My.Computer.Keyboard.SendKeys("{TAB}")
             End If
+        End If
 
     End Sub
 
@@ -638,6 +668,8 @@ Public Class formHourlyWind
 
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
+            ' Retrieve Keyentry mode information and mark on the checkbox
+            If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -724,9 +756,9 @@ Public Class formHourlyWind
                     ctrl.enabled = True
                     ctrl.backcolor = Color.White
                 End If
-                    Next ctrl
+            Next ctrl
 
-                End If
+        End If
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click

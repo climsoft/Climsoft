@@ -10,13 +10,9 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class stationidalia
-    Public Property idAlias As String
-    Public Property refersTo As String
-    Public Property belongsTo As String
-    Public Property idAliasBeginDate As String
-    Public Property idAliasEndDate As String
-
-    Public Overridable Property station As station
+Partial Public Class gap
+    Public Property Missing_STNID As String
+    Public Property Missing_ELEM As Long
+    Public Property Missing_Date As Date
 
 End Class

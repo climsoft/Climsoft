@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formHourlyWind
+Partial Class form_hourlywind
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -183,6 +183,7 @@ Partial Class formHourlyWind
         Me.Label41 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'YyyyLabel
@@ -1444,11 +1445,25 @@ Partial Class formHourlyWind
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
-        'formHourlyWind
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(19, 549)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
+        Me.chkRepeatEntry.TabIndex = 663
+        Me.chkRepeatEntry.TabStop = False
+        Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        Me.chkRepeatEntry.Visible = False
+        '
+        'form_hourlywind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(687, 601)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.Label41)
@@ -1611,7 +1626,7 @@ Partial Class formHourlyWind
         Me.Controls.Add(Me.YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formHourlyWind"
+        Me.Name = "form_hourlywind"
         Me.Text = "Hourly wind data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1778,4 +1793,5 @@ Partial Class formHourlyWind
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents YyyyLabel As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
 End Class

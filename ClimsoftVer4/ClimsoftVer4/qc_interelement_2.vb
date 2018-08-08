@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class qc_interelement_2
-    Public Property id As Long
     Public Property stationId_2 As String
     Public Property elementId_2 As Integer
     Public Property obsDatetime_2 As Date

@@ -36,6 +36,8 @@ Partial Class frmMainMenu
         Me.DataFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfigureDatabaseConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpeartionsMonitoringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeOwnPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,7 +75,8 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
-        Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserRecordsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserRecordsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -93,7 +96,7 @@ Partial Class frmMainMenu
         '
         'mnuInput
         '
-        Me.mnuInput.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInputKeyEntry, Me.mnuInputPaperArchive})
+        Me.mnuInput.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInputKeyEntry, Me.mnuInputPaperArchive, Me.UserRecordsToolStripMenuItem})
         Me.mnuInput.Name = "mnuInput"
         Me.mnuInput.ShortcutKeyDisplayString = ""
         Me.mnuInput.Size = New System.Drawing.Size(54, 23)
@@ -116,7 +119,7 @@ Partial Class frmMainMenu
         '
         'mnuAccessories
         '
-        Me.mnuAccessories.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAccessoriesDewPointRH, Me.mnuAccessoriesXMLOutput})
+        Me.mnuAccessories.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuAccessoriesDewPointRH, Me.mnuAccessoriesXMLOutput, Me.UserRecordsToolStripMenuItem1})
         Me.mnuAccessories.Name = "mnuAccessories"
         Me.mnuAccessories.Size = New System.Drawing.Size(90, 23)
         Me.mnuAccessories.Tag = "Accessories"
@@ -152,7 +155,7 @@ Partial Class frmMainMenu
         '
         'mnuAdministration
         '
-        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1})
+        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1, Me.OpeartionsMonitoringToolStripMenuItem})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
         Me.mnuAdministration.Tag = "Administration"
@@ -198,6 +201,18 @@ Partial Class frmMainMenu
         Me.ConfigureDatabaseConnectionToolStripMenuItem.Name = "ConfigureDatabaseConnectionToolStripMenuItem"
         Me.ConfigureDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
         Me.ConfigureDatabaseConnectionToolStripMenuItem.Text = "Configure Database Connection"
+        '
+        'UpdateObservationsToolStripMenuItem1
+        '
+        Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
+        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
+        '
+        'OpeartionsMonitoringToolStripMenuItem
+        '
+        Me.OpeartionsMonitoringToolStripMenuItem.Name = "OpeartionsMonitoringToolStripMenuItem"
+        Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.OpeartionsMonitoringToolStripMenuItem.Text = "Operations Monitoring"
         '
         'ChangeOwnPasswordToolStripMenuItem
         '
@@ -606,11 +621,17 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
-        'UpdateObservationsToolStripMenuItem1
+        'UserRecordsToolStripMenuItem
         '
-        Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
-        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
-        Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
+        Me.UserRecordsToolStripMenuItem.Name = "UserRecordsToolStripMenuItem"
+        Me.UserRecordsToolStripMenuItem.Size = New System.Drawing.Size(162, 24)
+        Me.UserRecordsToolStripMenuItem.Text = "User Records"
+        '
+        'UserRecordsToolStripMenuItem1
+        '
+        Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
+        Me.UserRecordsToolStripMenuItem1.Text = "User Records"
         '
         'frmMainMenu
         '
@@ -689,4 +710,7 @@ Partial Class frmMainMenu
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConfigurationForTDCFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UserRecordsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

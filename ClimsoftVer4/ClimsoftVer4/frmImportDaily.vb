@@ -285,7 +285,7 @@
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
-            lblRecords.Text = "AWS Import Failed!, Check if the Staion Id exists in metadata"
+            lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
             dbcon.Close()
             FileClose(101)
             Me.Cursor = Cursors.Default
