@@ -916,13 +916,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-
     <EmbeddedResource Include="frmNewComputationProgress.resx">
       <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
-
+  </EmbeddedResource>
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
-
+  </EmbeddedResource>
+    <EmbeddedResource Include="formAgro1.resx">
+      <DependentUpon>formAgro1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourly.resx">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
