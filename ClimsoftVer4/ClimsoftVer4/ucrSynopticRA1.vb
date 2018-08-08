@@ -607,6 +607,7 @@ Public Class ucrSynopticRA1
         Dim strSignature As String
         Dim conn As MySql.Data.MySqlClient.MySqlConnection
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim pos As Integer = 0
 
         'get the observation values fields
         lstAllFields.AddRange(lstFields)
@@ -618,10 +619,17 @@ Public Class ucrSynopticRA1
 
         conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
+            frmDataTransferProgress.Show()
+
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             conn.Open()
 
             For Each row As DataRow In dtbAllRecords.Rows
+                'Display progress of data transfer
+                pos = pos + 1
+                frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & pos & " of " & dtbAllRecords.Rows.Count
+                frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+
                 For Each strFieldName As String In lstFields
                     'if its not an observation value field then skip the loop
                     If Not strFieldName.StartsWith(Me.strValueFieldName) Then
@@ -687,8 +695,13 @@ Public Class ucrSynopticRA1
                 Next
             Next
 
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+
         Catch ex As Exception
             MessageBox.Show("Upload Error " & ex.Message)
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer failed !"
         Finally
             conn.Close()
         End Try
