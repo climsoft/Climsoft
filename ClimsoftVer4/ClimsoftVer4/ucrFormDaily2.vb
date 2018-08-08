@@ -486,6 +486,7 @@ Public Class ucrFormDaily2
         Dim strVisUnits As String
         Dim conn As MySql.Data.MySqlClient.MySqlConnection
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim pos As Integer = 0
 
 
         'get the observation values fields
@@ -498,10 +499,16 @@ Public Class ucrFormDaily2
 
         conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
+            frmDataTransferProgress.Show()
+
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             conn.Open()
 
             For Each row As DataRow In dtbAllRecords.Rows
+                'Display progress of data transfer
+                pos = pos + 1
+                frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & pos & " of " & dtbAllRecords.Rows.Count
+                frmDataTransferProgress.txtDataTransferProgress1.Refresh()
                 For i As Integer = 1 To 31
                     If i < 10 Then
                         strCurrTag = "0" & i
@@ -589,11 +596,17 @@ Public Class ucrFormDaily2
                 Next
             Next
 
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+
         Catch ex As Exception
             MessageBox.Show("Upload Error " & ex.Message)
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer failed !"
         Finally
             conn.Close()
         End Try
+
 
 
         'TODO? because of the detachment

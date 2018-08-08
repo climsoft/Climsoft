@@ -168,14 +168,12 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        Try
-            If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                ucrFormDaily.UploadAllRecords()
-                MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Record has NOT been deleted. Error: " & ex.Message, "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+
+        If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            ucrFormDaily.UploadAllRecords()
+            'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
     End Sub
 
     Private Function ValidateValues() As Boolean
