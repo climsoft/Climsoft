@@ -68,12 +68,13 @@
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
-            'SortByStationName()
-            SetTableName(strElementTableName)
+
             dct.Add(strElementName, New List(Of String)({strElementName}))
             dct.Add(strElementId, New List(Of String)({strElementId}))
             dct.Add(strIDsAndElements, New List(Of String)({strElementId, strElementName}))
-            SetFields(dct)
+            SetTableNameAndFields(strElementTableName, dct)
+            SetFilter("selected", "=", "1", bIsPositiveCondition:=True)
+
             PopulateControl()
             cboValues.ContextMenuStrip = cmsElement
             SetComboBoxSelectorProperties()

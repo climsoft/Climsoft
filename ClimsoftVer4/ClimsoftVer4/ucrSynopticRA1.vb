@@ -32,19 +32,24 @@ Public Class ucrSynopticRA1
     Public bAutoFillValues As Boolean = True
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim ctrVFP As ucrValueFlagPeriod
+        Dim ucrVFP As ucrValueFlagPeriod
+        Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+            vfpContextMenuStrip = SetUpContextMenuStrip()
+
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ctrVFP.ucrPeriod.Visible = False
-                    ctrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ctrVFP.Tag, strFlagFieldName & ctrVFP.Tag)
-                    lstFields.Add(strValueFieldName & ctrVFP.Tag)
-                    lstFields.Add(strFlagFieldName & ctrVFP.Tag)
-                    AddHandler ctrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ctrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ucrVFP.ucrPeriod.Visible = False
+                    ucrVFP.SetTableNameAndValueFlagFields(strTableName, strValueFieldName & ucrVFP.Tag, strFlagFieldName & ucrVFP.Tag)
+                    lstFields.Add(strValueFieldName & ucrVFP.Tag)
+                    lstFields.Add(strFlagFieldName & ucrVFP.Tag)
+                    AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
+                    AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+
+                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
                 End If
             Next
             SetTableNameAndFields(strTableName, lstFields)
@@ -588,6 +593,141 @@ Public Class ucrSynopticRA1
     End Sub
 
     Public Sub UploadAllRecords()
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrLinkedNavigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrLinkedNavigation.iMaxRows)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
+        'Once this is fixed, the argument can be removed
+        frm.backgroundWorker.RunWorkerAsync(frmLogin.txtusrpwd.Text)
+
+        frm.Show()
+    End Sub
+
+    Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+        Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
+
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strElementCode As String
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim dtObsDateTime As Date
+        Dim lstAllFields As New List(Of String)
+        Dim bUpdateRecord As Boolean
+        Dim strSql As String
+        Dim strSignature As String
+        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim pos As Integer = 0
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        Try
+            'Temporary.The current connection properties are being stored in control, this line can be removed in future
+            conn.ConnectionString = e.Argument
+            conn.Open()
+
+            For Each row As DataRow In dtbAllRecords.Rows
+                If backgroundWorker.CancellationPending = True Then
+                    e.Cancel = True
+                    Exit For
+                End If
+                'Display progress of data transfer
+                pos = pos + 1
+                backgroundWorker.ReportProgress(pos)
+
+                For Each strFieldName As String In lstFields
+                    'if its not an observation value field then skip the loop
+                    If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                        Continue For
+                    End If
+
+                    strElementCode = strFieldName.Substring(Me.strValueFieldName.Length)
+                    strValueColumn = strFieldName
+                    strFlagColumn = lstFields.Find(Function(x As String)
+                                                       Return x.Equals(Me.strFlagFieldName & strElementCode)
+                                                   End Function)
+
+                    'set the record
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, lElementId) Then
+
+                        strStationId = row.Item("stationId")
+                        dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
+
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        bUpdateRecord = False
+                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                            bUpdateRecord = reader.HasRows
+                        End Using
+
+                        strSignature = ""
+
+                        If Not IsDBNull(row.Item("signature")) Then
+                            strSignature = row.Item("signature")
+                        End If
+
+                        If bUpdateRecord Then
+                            strSql = "UPDATE observationInitial SET recordedFrom=@stationId,describedBy=@elemCode,obsDatetime=@obsDatetime,obsLevel=@obsLevel,obsValue=@obsVal,flag=@obsFlag,qcStatus=@qcStatus,acquisitionType=@acquisitiontype,capturedBy=@capturedBy,dataForm=@dataForm " &
+                                " WHERE recordedFrom=@stationId And describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Else
+                            strSql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                            "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
+                        End If
+
+                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        cmd.Parameters.AddWithValue("@stationId", strStationId)
+                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                        cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                        cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                        cmd.Parameters.AddWithValue("@qcStatus", 0)
+                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        cmd.ExecuteNonQuery()
+
+                    End If
+                Next
+            Next
+
+            e.Result = "Records have been uploaded sucessfully"
+        Catch ex As Exception
+            e.Result = "Error " & ex.Message
+        Finally
+            conn.Close()
+        End Try
+
+
+        'TODO? because of the detachment
+        'PopulateControl()
+
+    End Sub
+
+    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
+    Public Sub UploadAllRecordsEF()
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim rcdObservationInitial As observationinitial
@@ -665,4 +805,11 @@ Public Class ucrSynopticRA1
         PopulateControl()
 
     End Sub
+
+    Private Function SetUpContextMenuStrip() As ContextMenuStrip
+        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+        Return New ClsShiftCells(allVFP).GetVFPContextMenu()
+    End Function
+
 End Class
