@@ -230,12 +230,6 @@
     <Compile Include="form_synoptic_2_ra1.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="frmNewComputationProgress.Designer.vb">
-      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewComputationProgress.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmNewHourly.Designer.vb">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
     </Compile>
@@ -916,12 +910,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmNewComputationProgress.resx">
-      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
-  </EmbeddedResource>
-    <EmbeddedResource Include="formAgro1.resx">
-      <DependentUpon>formAgro1.vb</DependentUpon>
-  </EmbeddedResource>
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </EmbeddedResource>
