@@ -658,4 +658,3 @@ Public Class ucrHourly
     End Function
 
 End Class
-
