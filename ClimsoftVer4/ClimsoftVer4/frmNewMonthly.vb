@@ -5,6 +5,7 @@
             InitaliseDialog()
             bFirstLoad = False
         End If
+
     End Sub
 
     Private Sub InitaliseDialog()

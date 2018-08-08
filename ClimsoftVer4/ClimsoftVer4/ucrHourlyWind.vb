@@ -1,5 +1,4 @@
 ﻿Imports System.Linq.Dynamic
-
 Public Class ucrHourlyWind
     Private bFirstLoad As Boolean = True
     Private strTableName As String = "form_hourlywind"
