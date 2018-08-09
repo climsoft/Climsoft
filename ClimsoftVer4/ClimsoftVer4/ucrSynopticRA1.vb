@@ -592,6 +592,7 @@ Public Class ucrSynopticRA1
         End If
     End Sub
 
+    'upload code in the background thread
     Public Sub UploadAllRecords()
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrLinkedNavigation.iMaxRows & " records")
