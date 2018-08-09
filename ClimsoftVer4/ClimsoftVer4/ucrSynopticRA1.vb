@@ -594,6 +594,22 @@ Public Class ucrSynopticRA1
 
     'upload code in the background thread
     Public Sub UploadAllRecords()
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrLinkedNavigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrLinkedNavigation.iMaxRows)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
+        'Once this is fixed, the argument can be removed
+        frm.backgroundWorker.RunWorkerAsync(frmLogin.txtusrpwd.Text)
+
+        frm.Show()
+    End Sub
+
+    Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+        Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
+
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
         Dim strValueColumn As String
@@ -620,16 +636,18 @@ Public Class ucrSynopticRA1
 
         conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
-            frmDataTransferProgress.Show()
-
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            'Temporary.The current connection properties are being stored in control, this line can be removed in future
+            conn.ConnectionString = e.Argument
             conn.Open()
 
             For Each row As DataRow In dtbAllRecords.Rows
+                If backgroundWorker.CancellationPending = True Then
+                    e.Cancel = True
+                    Exit For
+                End If
                 'Display progress of data transfer
                 pos = pos + 1
-                frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring record: " & pos & " of " & dtbAllRecords.Rows.Count
-                frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+                backgroundWorker.ReportProgress(pos)
 
                 For Each strFieldName As String In lstFields
                     'if its not an observation value field then skip the loop
@@ -696,13 +714,9 @@ Public Class ucrSynopticRA1
                 Next
             Next
 
-            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
-
+            e.Result = "Records have been uploaded sucessfully"
         Catch ex As Exception
-            MessageBox.Show("Upload Error " & ex.Message)
-            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer failed !"
+            e.Result = "Error " & ex.Message
         Finally
             conn.Close()
         End Try
@@ -713,7 +727,7 @@ Public Class ucrSynopticRA1
 
     End Sub
 
-    'TODO. Will be used once the issue of ObservationInitial primary keys is fixed
+    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
     Public Sub UploadAllRecordsEF()
         Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As DataTable
