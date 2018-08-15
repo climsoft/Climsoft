@@ -1603,7 +1603,7 @@ Partial Class form_agro1
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
         Me.Name = "form_agro1"
-        Me.Text = "Kenya Agromet Data"
+        Me.Text = "Kenya Agromet data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

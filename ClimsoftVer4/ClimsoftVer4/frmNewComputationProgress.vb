@@ -14,7 +14,7 @@ Public Class frmNewComputationProgress
     Private Sub backgroundWorker_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles backgroundWorker.ProgressChanged
         progressBar.Increment(e.ProgressPercentage)
         lblProgress.Text = (progressBar.Value / progressBar.Maximum) * 100 & "% completed"
-        Me.Text = e.ProgressPercentage & "% completed"
+        Me.Text = (progressBar.Value / progressBar.Maximum) * 100 & "% completed"
     End Sub
 
     Private Sub backgroundWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles backgroundWorker.RunWorkerCompleted

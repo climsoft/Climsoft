@@ -2,11 +2,17 @@
     Private bFirstLoad As Boolean = True
     Dim iDirectionDigits As Integer
     Dim iSpeedDigits As Integer
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewHourlyWind_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
+        End If
+
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
+            chkRepeatEntry.Checked = True
         End If
     End Sub
 

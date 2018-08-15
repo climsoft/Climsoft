@@ -1,5 +1,6 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -7,6 +8,10 @@
             bFirstLoad = False
         End If
 
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
+            chkRepeatEntry.Checked = True
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
@@ -77,11 +82,23 @@
             If Not ValidateValues() Then
                 Exit Sub
             End If
-
-            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                ucrHourly.SaveRecord()
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If Not chkRepeatEntry.Checked Then
+                If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrHourly.SaveRecord()
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+
+            ' When in double entry mode just skip update action. Values have been updated on entry
+            If chkRepeatEntry.Checked Then
+                Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
+                dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+                dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+                dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+                ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+            End If
+
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

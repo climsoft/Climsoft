@@ -48,6 +48,7 @@ Partial Class frmNewHourlyWind
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -283,11 +284,23 @@ Partial Class frmNewHourlyWind
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(5, 541)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 686
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'frmNewHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(651, 566)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.ucrHourlyWind)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
@@ -316,7 +329,7 @@ Partial Class frmNewHourlyWind
         Me.Controls.Add(lblYear)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewHourlyWind"
-        Me.Text = "Hourly Wind Data"
+        Me.Text = "Hourly wind data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -347,4 +360,5 @@ Partial Class frmNewHourlyWind
     Friend WithEvents lblSequencer As Label
     Friend WithEvents txtSequencer As TextBox
     Friend WithEvents ucrHourlyWind As ucrHourlyWind
+    Friend WithEvents chkRepeatEntry As CheckBox
 End Class
