@@ -10,12 +10,17 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
 
 Partial Public Class mariadb_climsoft_test_db_v4Entities
     Inherits DbContext
 
     Public Sub New()
         MyBase.New("name=mariadb_climsoft_test_db_v4Entities")
+        ' FIXME: The following use of `txtusrpwd` is consistent with the previous
+        ' SQL connection code, but needs replacing when login is updated.
+        Me.Database.Connection.ConnectionString = frmLogin.txtusrpwd.Text
     End Sub
 
     Protected Overrides Sub OnModelCreating(modelBuilder As DbModelBuilder)
@@ -35,18 +40,25 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property aws_structures() As DbSet(Of aws_structures)
     Public Overridable Property aws_tahmo() As DbSet(Of aws_tahmo)
     Public Overridable Property aws_toa5_mg2() As DbSet(Of aws_toa5_mg2)
+    Public Overridable Property bufr_indicators() As DbSet(Of bufr_indicators)
     Public Overridable Property climsoftusers() As DbSet(Of climsoftuser)
+    Public Overridable Property code_flag() As DbSet(Of code_flag)
     Public Overridable Property data_forms() As DbSet(Of data_forms)
     Public Overridable Property flags() As DbSet(Of flag)
+    Public Overridable Property flagtables() As DbSet(Of flagtable)
+    Public Overridable Property form_agro1() As DbSet(Of form_agro1)
     Public Overridable Property form_daily2() As DbSet(Of form_daily2)
     Public Overridable Property form_hourly() As DbSet(Of form_hourly)
     Public Overridable Property form_hourly_time_selection() As DbSet(Of form_hourly_time_selection)
     Public Overridable Property form_hourlywind() As DbSet(Of form_hourlywind)
+    Public Overridable Property form_monthly() As DbSet(Of form_monthly)
     Public Overridable Property form_synoptic_2_ra1() As DbSet(Of form_synoptic_2_ra1)
     Public Overridable Property form_synoptic2_tdcf() As DbSet(Of form_synoptic2_tdcf)
+    Public Overridable Property gaps() As DbSet(Of gap)
     Public Overridable Property instruments() As DbSet(Of instrument)
     Public Overridable Property instrumentfaultreports() As DbSet(Of instrumentfaultreport)
     Public Overridable Property language_translation() As DbSet(Of language_translation)
+    Public Overridable Property missing_stats() As DbSet(Of missing_stats)
     Public Overridable Property obselements() As DbSet(Of obselement)
     Public Overridable Property obsscheduleclasses() As DbSet(Of obsscheduleclass)
     Public Overridable Property paperarchivedefinitions() As DbSet(Of paperarchivedefinition)
@@ -57,7 +69,6 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property qcstatusdefinitions() As DbSet(Of qcstatusdefinition)
     Public Overridable Property qctypes() As DbSet(Of qctype)
     Public Overridable Property regkeys() As DbSet(Of regkey)
-    Public Overridable Property routinereportdefinitions() As DbSet(Of routinereportdefinition)
     Public Overridable Property seq_daily_element() As DbSet(Of seq_daily_element)
     Public Overridable Property seq_element() As DbSet(Of seq_element)
     Public Overridable Property seq_month_day() As DbSet(Of seq_month_day)
@@ -68,14 +79,49 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property stationnetworkdefinitions() As DbSet(Of stationnetworkdefinition)
     Public Overridable Property synopfeatures() As DbSet(Of synopfeature)
     Public Overridable Property tblproducts() As DbSet(Of tblproduct)
+    Public Overridable Property tm_307091() As DbSet(Of tm_307091)
     Public Overridable Property abcs() As DbSet(Of abc)
     Public Overridable Property aws_malawi12() As DbSet(Of aws_malawi12)
     Public Overridable Property aws1() As DbSet(Of aws1)
+    Public Overridable Property bufr_crex_data() As DbSet(Of bufr_crex_data)
+    Public Overridable Property bufr_crex_master() As DbSet(Of bufr_crex_master)
     Public Overridable Property featuregeographicalpositions() As DbSet(Of featuregeographicalposition)
     Public Overridable Property observationfinals() As DbSet(Of observationfinal)
     Public Overridable Property observationinitials() As DbSet(Of observationinitial)
     Public Overridable Property physicalfeatures() As DbSet(Of physicalfeature)
     Public Overridable Property seq_month_day_element() As DbSet(Of seq_month_day_element)
     Public Overridable Property seq_month_day_element_leap_yr() As DbSet(Of seq_month_day_element_leap_yr)
+
+    Public Overridable Function find_gaps(stn As String, elm As Nullable(Of Integer), opening_Date As Nullable(Of Date), closing_Date As Nullable(Of Date)) As Integer
+        Dim stnParameter As ObjectParameter = If(stn IsNot Nothing, New ObjectParameter("Stn", stn), New ObjectParameter("Stn", GetType(String)))
+
+        Dim elmParameter As ObjectParameter = If(elm.HasValue, New ObjectParameter("Elm", elm), New ObjectParameter("Elm", GetType(Integer)))
+
+        Dim opening_DateParameter As ObjectParameter = If(opening_Date.HasValue, New ObjectParameter("Opening_Date", opening_Date), New ObjectParameter("Opening_Date", GetType(Date)))
+
+        Dim closing_DateParameter As ObjectParameter = If(closing_Date.HasValue, New ObjectParameter("Closing_Date", closing_Date), New ObjectParameter("Closing_Date", GetType(Date)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("find_gaps", stnParameter, elmParameter, opening_DateParameter, closing_DateParameter)
+    End Function
+
+    Public Overridable Function gather_stats(stn As String, elm As Nullable(Of Integer), opening_Date As Nullable(Of Date), closing_Date As Nullable(Of Date)) As Integer
+        Dim stnParameter As ObjectParameter = If(stn IsNot Nothing, New ObjectParameter("Stn", stn), New ObjectParameter("Stn", GetType(String)))
+
+        Dim elmParameter As ObjectParameter = If(elm.HasValue, New ObjectParameter("Elm", elm), New ObjectParameter("Elm", GetType(Integer)))
+
+        Dim opening_DateParameter As ObjectParameter = If(opening_Date.HasValue, New ObjectParameter("Opening_Date", opening_Date), New ObjectParameter("Opening_Date", GetType(Date)))
+
+        Dim closing_DateParameter As ObjectParameter = If(closing_Date.HasValue, New ObjectParameter("Closing_Date", closing_Date), New ObjectParameter("Closing_Date", GetType(Date)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("gather_stats", stnParameter, elmParameter, opening_DateParameter, closing_DateParameter)
+    End Function
+
+    Public Overridable Function refresh_data() As Integer
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("refresh_data")
+    End Function
+
+    Public Overridable Function refresh_gaps() As Integer
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("refresh_gaps")
+    End Function
 
 End Class

@@ -12,7 +12,7 @@
         dtbRecords = New DataTable
         dtbRecords.Columns.Add(str24Hrs, GetType(Integer))
         dtbRecords.Columns.Add(str12Hrs, GetType(String))
-        For i As Integer = 1 To 12
+        For i As Integer = 0 To 11
             dtbRecords.Rows.Add(i, i & " AM")
             dtbRecords.Rows.Add(i + 12, i & " PM")
         Next

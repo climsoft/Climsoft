@@ -58,6 +58,7 @@ Partial Class frmNewFormDaily2
         Me.ucrDaiy2Navigation = New ClimsoftVer4.ucrNavigation()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -109,7 +110,7 @@ Partial Class frmNewFormDaily2
         'cmdAssignSameValue
         '
         Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.cmdAssignSameValue.Location = New System.Drawing.Point(364, 71)
+        Me.cmdAssignSameValue.Location = New System.Drawing.Point(364, 73)
         Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
         Me.cmdAssignSameValue.Size = New System.Drawing.Size(169, 23)
         Me.cmdAssignSameValue.TabIndex = 16
@@ -120,7 +121,7 @@ Partial Class frmNewFormDaily2
         '
         Me.lblValue.AutoSize = True
         Me.lblValue.ForeColor = System.Drawing.Color.Blue
-        Me.lblValue.Location = New System.Drawing.Point(537, 73)
+        Me.lblValue.Location = New System.Drawing.Point(537, 78)
         Me.lblValue.Name = "lblValue"
         Me.lblValue.Size = New System.Drawing.Size(40, 13)
         Me.lblValue.TabIndex = 10
@@ -286,7 +287,6 @@ Partial Class frmNewFormDaily2
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(618, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
@@ -309,10 +309,10 @@ Partial Class frmNewFormDaily2
         '
         'ucrInputValue
         '
-        Me.ucrInputValue.Location = New System.Drawing.Point(579, 71)
+        Me.ucrInputValue.Location = New System.Drawing.Point(579, 73)
         Me.ucrInputValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputValue.Name = "ucrInputValue"
-        Me.ucrInputValue.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputValue.Size = New System.Drawing.Size(58, 24)
         Me.ucrInputValue.TabIndex = 17
         Me.ucrInputValue.TextboxValue = ""
         '
@@ -326,7 +326,7 @@ Partial Class frmNewFormDaily2
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(157, 73)
+        Me.ucrMonth.Location = New System.Drawing.Point(157, 74)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(98, 21)
@@ -388,11 +388,23 @@ Partial Class frmNewFormDaily2
         Me.txtSequencer.TabIndex = 680
         Me.txtSequencer.Text = "seq_daily_element"
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(9, 602)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 684
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'frmNewFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(704, 631)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrDaiy2Navigation)
@@ -421,6 +433,7 @@ Partial Class frmNewFormDaily2
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrStationSelector)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewFormDaily2"
         Me.Text = "Daily data for the whole month"
         Me.grpUnits.ResumeLayout(False)
@@ -466,4 +479,5 @@ Partial Class frmNewFormDaily2
     Friend WithEvents ucrDaiy2Navigation As ucrNavigation
     Friend WithEvents lblSequencer As Label
     Friend WithEvents txtSequencer As TextBox
+    Friend WithEvents chkRepeatEntry As CheckBox
 End Class

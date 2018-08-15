@@ -159,6 +159,15 @@
     <Compile Include="aws_toa5_mg2.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="bufr_crex_data.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bufr_crex_master.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bufr_indicators.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="climsoftuser.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -171,8 +180,20 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
     <Compile Include="clsTableFilter.vb" />
+    <Compile Include="code_flag.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="data_forms.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="featuregeographicalposition.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="flag.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="flagtable.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="formAgro1.Designer.vb">
@@ -181,10 +202,39 @@
     <Compile Include="formAgro1.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMonitoring.Designer.vb">
-      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    <Compile Include="form_agro1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMonitoring.vb">
+    <Compile Include="form_daily2.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_hourly.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_hourlywind.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_hourly_time_selection.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_monthly.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_synoptic2_tdcf.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="form_synoptic_2_ra1.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewComputationProgress.Designer.vb">
+      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewComputationProgress.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewHourly.Designer.vb">
@@ -210,12 +260,6 @@
     </Compile>
     <Compile Include="frmNewSynopticRA1.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="featuregeographicalposition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="flag.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
@@ -276,27 +320,6 @@
     </Compile>
     <Compile Include="formPaperArchive.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_daily2.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourly.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourlywind.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourly_time_selection.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_synoptic2_tdcf.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_synoptic_2_ra1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="frmAWSelements.Designer.vb">
       <DependentUpon>frmAWSelements.vb</DependentUpon>
@@ -497,12 +520,6 @@
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formSynoptic1.Designer.vb">
-      <DependentUpon>formSynoptic1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formSynoptic1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="formUpperAir.Designer.vb">
       <DependentUpon>formUpperAir.vb</DependentUpon>
     </Compile>
@@ -563,9 +580,13 @@
     <Compile Include="frmModifyObservations.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPlotter.designer.vb">
-      <DependentUpon>frmPlotter.vb</DependentUpon>
+    <Compile Include="frmMonitoring.Designer.vb">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
     </Compile>
+    <Compile Include="frmMonitoring.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlotter.Designer.vb" />
     <Compile Include="frmPlotter.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -635,6 +656,9 @@
     <Compile Include="frmViewImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="gap.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="instrument.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -642,6 +666,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="language_translation.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="missing_stats.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.vb">
@@ -734,9 +761,6 @@
     <Compile Include="regkey.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="routinereportdefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="sdgFilter.Designer.vb">
       <DependentUpon>sdgFilter.vb</DependentUpon>
     </Compile>
@@ -767,6 +791,7 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ClsShiftCells.vb" />
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -777,6 +802,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="tblproduct.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tm_307091.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ucrBaseDataLink.Designer.vb">
@@ -886,8 +914,8 @@
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMonitoring.resx">
-      <DependentUpon>frmMonitoring.vb</DependentUpon>
+    <EmbeddedResource Include="frmNewComputationProgress.resx">
+      <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourly.resx">
       <DependentUpon>frmNewHourly.vb</DependentUpon>
@@ -1209,11 +1237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.de.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.fr.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.de.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
@@ -1221,17 +1247,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.fr.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewFormDaily2.resx">
       <DependentUpon>frmNewFormDaily2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifyObservations.resx">
       <DependentUpon>frmModifyObservations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMonitoring.resx">
+      <DependentUpon>frmMonitoring.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
@@ -1360,6 +1387,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.vb</LastGenOutput>

@@ -12,8 +12,8 @@ Imports System.Collections.Generic
 
 Partial Public Class physicalfeature
     Public Property associatedWith As String
-    Public Property beginDate As Nullable(Of Date)
-    Public Property endDate As Nullable(Of Date)
+    Public Property beginDate As String
+    Public Property endDate As String
     Public Property image As String
     Public Property description As String
     Public Property classifiedInto As String

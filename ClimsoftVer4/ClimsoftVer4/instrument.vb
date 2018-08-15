@@ -18,10 +18,10 @@ Partial Public Class instrument
     Public Property model As String
     Public Property manufacturer As String
     Public Property instrumentUncertainty As Nullable(Of Single)
-    Public Property installationDatetime As Nullable(Of Date)
-    Public Property deinstallationDatetime As Nullable(Of Date)
+    Public Property installationDatetime As String
+    Public Property deinstallationDatetime As String
     Public Property height As String
-    Public Property instrumentPicture As Byte()
+    Public Property instrumentPicture As String
     Public Property installedAt As String
 
     Public Overridable Property station As station

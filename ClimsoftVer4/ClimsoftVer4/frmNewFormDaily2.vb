@@ -1,6 +1,6 @@
-﻿
-Public Class frmNewFormDaily2
+﻿Public Class frmNewFormDaily2
     Private bFirstLoad As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewFormDaily2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Run InitaliseDialog only if its first load
@@ -8,10 +8,14 @@ Public Class frmNewFormDaily2
             InitaliseDialog()
             bFirstLoad = False
         End If
+
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
+            chkRepeatEntry.Checked = True
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
-        ' Currently only works with this sequencer table so textbox disabled
         txtSequencer.ReadOnly = True
         txtSequencer.Text = "seq_daily_element"
         chkEnableSequencer.Checked = True
@@ -83,11 +87,9 @@ Public Class frmNewFormDaily2
             Else
                 MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
-
         Catch ex As Exception
             MessageBox.Show("New Record has NOT been added to database table. Error: " & ex.Message, "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -96,10 +98,25 @@ Public Class frmNewFormDaily2
                 Exit Sub
             End If
 
-            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                ucrFormDaily.SaveRecord()
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If Not chkRepeatEntry.Checked Then
+                If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrFormDaily.SaveRecord()
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+
+            ' When in double entry mode just skip update action. Values have been updated on entry
+            If chkRepeatEntry.Checked Then
+                Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
+                'temporary until we know how to get all fields from table without specifying names
+                dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+                dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+                dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
+                ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+            End If
+
+
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -111,7 +128,7 @@ Public Class frmNewFormDaily2
                 Exit Sub
             End If
 
-            If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrFormDaily.DeleteRecord()
                 ucrDaiy2Navigation.RemoveRecord()
                 SaveEnable()
@@ -152,7 +169,7 @@ Public Class frmNewFormDaily2
         End If
     End Sub
 
-    'This is as is as Samuels view button
+    'TODO
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
@@ -171,7 +188,12 @@ Public Class frmNewFormDaily2
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        ucrFormDaily.UploadAllRecords()
+
+        If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            ucrFormDaily.UploadAllRecords()
+            'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
     End Sub
 
     Private Function ValidateValues() As Boolean

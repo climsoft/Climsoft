@@ -42,8 +42,6 @@
     ''' </summary>
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
-
-        'TODO. Correct way?
         If iCurrRow = -1 Then
             txtRecNum.Text = "New Record"
             'disable navigation buttons
@@ -61,6 +59,7 @@
             'disable navigation buttons
             EnableNavigationButtons(False)
         End If
+
     End Sub
 
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
@@ -152,9 +151,8 @@
     ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
-            Dim kvp As New KeyValuePair(Of String, ucrBaseDataLink)
             If iMaxRows > 0 Then
-                For Each kvp In dctKeyControls
+                For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
                     'Suppress events being raised while changing value of each key control
                     kvp.Value.bSuppressChangedEvents = True
                     kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
@@ -165,10 +163,8 @@
             'A key control eventvalue changed should always be raised regardless of whether iMaxRows > 0 or not
             ' All key controls are linked to the same controls so can just trigger
             ' events for one control after all updated
-            'dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(Nothing, Nothing)
-            If kvp.Value IsNot Nothing Then
-                kvp.Value.OnevtValueChanged(kvp, Nothing)
-            End If
+            dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(dctKeyControls.Values(dctKeyControls.Count - 1), Nothing)
+
         End If
     End Sub
     ''' <summary>
@@ -205,7 +201,7 @@
     End Sub
 
     Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        UpdateKeyControls()
+        'UpdateKeyControls()
     End Sub
 
     Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load

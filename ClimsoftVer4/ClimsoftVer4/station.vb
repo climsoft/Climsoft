@@ -13,13 +13,16 @@ Imports System.Collections.Generic
 Partial Public Class station
     Public Property stationId As String
     Public Property stationName As String
+    Public Property wmoid As String
+    Public Property icaoid As String
     Public Property latitude As Nullable(Of Double)
+    Public Property qualifier As String
     Public Property longitude As Nullable(Of Double)
     Public Property elevation As String
     Public Property geoLocationMethod As String
     Public Property geoLocationAccuracy As Nullable(Of Single)
-    Public Property openingDatetime As Nullable(Of Date)
-    Public Property closingDatetime As Nullable(Of Date)
+    Public Property openingDatetime As String
+    Public Property closingDatetime As String
     Public Property country As String
     Public Property authority As String
     Public Property adminRegion As String

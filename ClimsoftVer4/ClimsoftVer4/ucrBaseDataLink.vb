@@ -55,10 +55,10 @@ Public Class ucrBaseDataLink
         clsDataDefinition.SetTableName(strNewTable:=strNewTable)
     End Sub
 
-    'Public Sub SetTable(dbsNewTable As Entity.DbSet)
-    '    CreateDataDefinition()
-    '    clsDataDefinition.SetTable(dbsNewTable:=dbsNewTable)
-    'End Sub
+    Public Sub SetTable(dbsNewTable As Entity.DbSet)
+        CreateDataDefinition()
+        clsDataDefinition.SetTable(dbsNewTable:=dbsNewTable)
+    End Sub
 
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         CreateDataDefinition()
@@ -105,17 +105,17 @@ Public Class ucrBaseDataLink
         Return clsDataDefinition.GetField
     End Function
 
-    'Public Sub SetTableAndFields(dbsNewTable As Entity.DbSet, lstNewFields As List(Of String))
-    '    CreateDataDefinition()
-    '    clsDataDefinition.SetTableAndFields(dbsNewTable:=dbsNewTable, lstNewFields:=lstNewFields)
-    '    SetSortByItems()
-    'End Sub
+    Public Sub SetTableAndFields(dbsNewTable As Entity.DbSet, lstNewFields As List(Of String))
+        CreateDataDefinition()
+        clsDataDefinition.SetTableAndFields(dbsNewTable:=dbsNewTable, lstNewFields:=lstNewFields)
+        SetSortByItems()
+    End Sub
 
-    'Public Sub SetTableAndField(dbsNewTable As Entity.DbSet, strNewField As String)
-    '    CreateDataDefinition()
-    '    clsDataDefinition.SetTableAndField(dbsNewTable:=dbsNewTable, strNewField:=strNewField)
-    '    SetSortByItems()
-    'End Sub
+    Public Sub SetTableAndField(dbsNewTable As Entity.DbSet, strNewField As String)
+        CreateDataDefinition()
+        clsDataDefinition.SetTableAndField(dbsNewTable:=dbsNewTable, strNewField:=strNewField)
+        SetSortByItems()
+    End Sub
 
     Public Overridable Sub SetFilter(clsNewFilter As TableFilter)
         CreateDataDefinition()

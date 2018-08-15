@@ -13,10 +13,10 @@ Imports System.Collections.Generic
 Partial Public Class instrumentfaultreport
     Public Property refersTo As String
     Public Property reportId As Long
-    Public Property reportDatetime As Nullable(Of Date)
+    Public Property reportDatetime As String
     Public Property faultDescription As String
     Public Property reportedBy As String
-    Public Property receivedDatetime As Nullable(Of Date)
+    Public Property receivedDatetime As String
     Public Property receivedBy As String
     Public Property reportedFrom As String
 

@@ -360,7 +360,12 @@ Public Class ucrTextBox
     ''' Sets the size of the texbox in the control
     ''' </summary>
     ''' <param name="Size"></param>
-    Public Sub SetElementValueSize(Size As Point)
+    Public Sub SetSize(Size As Point)
         txtBox.Size = New Size(Size)
     End Sub
+
+    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+        txtBox.ContextMenuStrip = contextMenuStrip
+    End Sub
+
 End Class

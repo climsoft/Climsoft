@@ -12,7 +12,7 @@ Imports System.Collections.Generic
 
 Partial Public Class featuregeographicalposition
     Public Property belongsTo As String
-    Public Property observedOn As Nullable(Of Date)
+    Public Property observedOn As String
     Public Property latitude As Nullable(Of Double)
     Public Property longitude As Nullable(Of Double)
 

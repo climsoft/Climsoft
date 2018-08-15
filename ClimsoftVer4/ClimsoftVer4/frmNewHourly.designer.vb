@@ -49,6 +49,7 @@ Partial Class frmNewHourly
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -139,7 +140,6 @@ Partial Class frmNewHourly
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(577, 604)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
@@ -213,7 +213,7 @@ Partial Class frmNewHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(132, 616)
+        Me.lblSequencer.Location = New System.Drawing.Point(157, 616)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
         Me.lblSequencer.TabIndex = 679
@@ -221,7 +221,7 @@ Partial Class frmNewHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(197, 613)
+        Me.txtSequencer.Location = New System.Drawing.Point(222, 613)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 678
@@ -291,11 +291,23 @@ Partial Class frmNewHourly
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 0
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(10, 616)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 685
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'frmNewHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(658, 645)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.btnView)
@@ -323,6 +335,7 @@ Partial Class frmNewHourly
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(lblYear)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewHourly"
         Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
@@ -356,4 +369,5 @@ Partial Class frmNewHourly
     Friend WithEvents btnClose As Button
     Friend WithEvents lblSequencer As Label
     Friend WithEvents txtSequencer As TextBox
+    Friend WithEvents chkRepeatEntry As CheckBox
 End Class

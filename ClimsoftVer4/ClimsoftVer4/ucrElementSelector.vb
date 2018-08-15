@@ -5,35 +5,6 @@
     Private strIDsAndElements As String = "ids_elements"
 
     Public Overrides Sub PopulateControl()
-
-        'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim myConnectionString As String
-        'Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-        'Dim ds As New DataSet
-        'Dim sql As String
-
-        'myConnectionString = frmLogin.txtusrpwd.Text
-        'conn.ConnectionString = myConnectionString
-        'conn.Open()
-
-        'sql = "SELECT elementID,elementName FROM obselement where selected = '1' ORDER by elementName;"
-        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        'ds.Clear()
-        'da.Fill(ds, "obsElem")
-
-        'If ds.Tables("obsElem").Rows.Count > 0 Then
-        '    'Populate element combobox
-        '    With cboValues
-        '        .DataSource = ds.Tables("obsElem")
-        '        .DisplayMember = "elementName"
-        '        .ValueMember = "elementId"
-        '        .SelectedIndex = 0
-        '    End With
-        'Else
-        '    MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        'End If
-        'conn.Close()
-
         bSuppressChangedEvents = True
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
@@ -97,12 +68,13 @@
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
-            'SortByStationName()
-            SetTableName(strElementTableName)
+
             dct.Add(strElementName, New List(Of String)({strElementName}))
             dct.Add(strElementId, New List(Of String)({strElementId}))
             dct.Add(strIDsAndElements, New List(Of String)({strElementId, strElementName}))
-            SetFields(dct)
+            SetTableNameAndFields(strElementTableName, dct)
+            SetFilter("selected", "=", "1", bIsPositiveCondition:=True)
+
             PopulateControl()
             cboValues.ContextMenuStrip = cmsElement
             SetComboBoxSelectorProperties()
@@ -150,4 +122,3 @@
         PopulateControl()
     End Sub
 End Class
-

@@ -19,6 +19,7 @@ Public Class ucrDirectionSpeedFlag
     Private iDirectionDigits As Integer
     Private iSpeedDigits As Integer
     Public Event evtGoToNextDSFControl(sender As Object, e As KeyEventArgs)
+    Public objKeyPress As New dataEntryGlobalRoutines
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -93,13 +94,26 @@ Public Class ucrDirectionSpeedFlag
         MyBase.SetValue(objNewValue)
         lstValues = TryCast(objNewValue, List(Of Object))
         If lstValues.Count = 3 Then
-            'ucrDDFF.SetValue(lstValues(0) + lstValues(1))
-            ucrDDFF.SetValue("")
+            ucrDDFF.SetValue(lstValues(0) + "" + lstValues(1) + "" + lstValues(2))
+            'ucrDDFF.SetValue("")
             SetElementDirectionValue(lstValues(0))
             SetElementSpeedValue(lstValues(1))
             SetElementFlagValue(lstValues(2))
+        ElseIf lstValues.Count = 2 Then
+            ucrDDFF.SetValue(lstValues(0) + "" + lstValues(1))
+            'ucrDDFF.SetValue("")
+            SetElementDirectionValue(lstValues(0))
+            SetElementSpeedValue(lstValues(1))
         End If
     End Sub
+
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Dim lstValueDDFFFlag As New List(Of Object)
+        lstValueDDFFFlag.Add(GetElementDirectionValue())
+        lstValueDDFFFlag.Add(GetElementSpeedValue())
+        lstValueDDFFFlag.Add(GetElementFlagValue())
+        Return lstValueDDFFFlag
+    End Function
 
     Public Sub SetElementDirectionValue(strValue As String)
         ucrDirection.SetValue(strValue)
@@ -137,12 +151,30 @@ Public Class ucrDirectionSpeedFlag
         Return ucrFlag.IsEmpty()
     End Function
 
-    Public Sub SetElementDirectionValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
-        ucrDirection.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    Public Sub SetElementDirectionLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        SetElementDirectionLowerLimit(iLowerLimit)
+        SetElementDirectionHigherLimit(iUpperLimit)
     End Sub
 
-    Public Sub SetElementSpeedValidation(Optional iLowerLimit As Decimal = Decimal.MinValue, Optional iUpperLimit As Decimal = Decimal.MaxValue)
-        ucrSpeed.SetValidationTypeAsNumeric(dcmMin:=iLowerLimit, dcmMax:=iUpperLimit)
+    Public Sub SetElementDirectionLowerLimit(iLowerLimit As Decimal)
+        ucrDirection.SetMinimumValue(iLowerLimit)
+    End Sub
+
+    Public Sub SetElementDirectionHigherLimit(iUpperLimit As Decimal)
+        ucrDirection.SetMaximumValue(iUpperLimit)
+    End Sub
+
+    Public Sub SetElementSpeedLimit(iLowerLimit As Decimal, iUpperLimit As Decimal)
+        SetElementSpeedLowerLimit(iLowerLimit)
+        SetElementSpeedHigherLimit(iUpperLimit)
+    End Sub
+
+    Public Sub SetElementSpeedLowerLimit(iLowerLimit As Decimal)
+        ucrSpeed.SetMinimumValue(iLowerLimit)
+    End Sub
+
+    Public Sub SetElementSpeedHigherLimit(iUpperLimit As Decimal)
+        ucrSpeed.SetMaximumValue(iUpperLimit)
     End Sub
 
     Public Sub SetElementDirectionDigits(iNewDirectionDigits As Integer)
@@ -235,6 +267,10 @@ Public Class ucrDirectionSpeedFlag
         'If {ENTER} key is pressed
         If e.KeyCode = Keys.Enter Then
             If sender Is ucrDDFF Then
+
+                ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
+                Compare_Entry(ucrDDFF.TextboxValue)
+
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
@@ -366,5 +402,120 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
+    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+        ucrDDFF.SetContextMenuStrip(contextMenuStrip)
+        ucrDirection.SetContextMenuStrip(contextMenuStrip)
+        ucrSpeed.SetContextMenuStrip(contextMenuStrip)
+        ucrFlag.SetContextMenuStrip(contextMenuStrip)
+    End Sub
+
+    Sub Compare_Entry(obsv As String)
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim constr As String
+        Dim frm, stn, elm, yy, mm, dd, hh, wdspd, wddir, obsv1 As String
+        'Dim Conflict As Boolean
+
+        constr = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = constr
+        conn.Open()
+        'MsgBox(CurrentEntryValue)
+
+        'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
+
+        With frmKeyEntry.ListView1
+            For i = 0 To .Items.Count - 1
+                If .Items(i).Selected = True Then
+                    frm = .Items(i).SubItems(0).Text
+                    Exit For
+                End If
+            Next
+        End With
+        'MsgBox(frm & " " & obsv)
+
+        Try
+            With frmNewHourlyWind
+                If Not .chkRepeatEntry.Checked Then
+                    Exit Sub
+                End If
+                stn = .ucrStationSelector.cboValues.SelectedValue
+                elm = "111"
+                yy = .ucrYearSelector.cboValues.SelectedValue
+                mm = .ucrMonth.cboValues.SelectedValue
+                dd = .ucrDay.cboValues.SelectedValue
+                hh = Strings.Mid(.ucrHourlyWind.ActiveControl.Name, 22, Len(.ucrHourlyWind.ActiveControl.Name) - 21)
+            End With
+            'MsgBox(stn & " " & yy & " " & mm & " " & dd & " " & hh)
+
+            ' Get speed component of the wind wind data entry
+            If Not objKeyPress.Entered_Value(conn, stn, 111, yy, mm, dd, hh, obsv1) Then
+                MsgBox("Can't Verify: Wind speed record does not exist")
+                Exit Sub
+            Else
+                ' wind speed exits
+                wdspd = obsv1
+            End If
+            ' get direction component of wind data entry
+
+            If Not objKeyPress.Entered_Value(conn, stn, 112, yy, mm, dd, hh, obsv1) Then
+                MsgBox("Can't Verify: Wind direction Record does not exist")
+                Exit Sub
+            Else
+                ' Wind direction exists
+                wddir = obsv1
+            End If
+            'MsgBox(wddir & wdspd)
+
+            Validate_Entry(obsv, wddir & wdspd, stn, elm, yy, mm, dd, hh)
+        Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+    End Sub
+
+    Sub Validate_Entry(obsv As String, obsv1 As String, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String)
+        Dim Conflict As Boolean
+        Dim C1, cpVal, dir, spd As String
+
+        Conflict = False
+        If obsv <> obsv1 Then
+            MsgBox("Conflicting Values")
+            ucrDDFF.BackColor = Color.Yellow
+            cpVal = ucrDDFF.TextboxValue
+            Conflict = True
+            ucrDDFF.TextboxValue = ""
+
+            Do While Conflict = True
+                C1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
+                If C1 <> cpVal Then
+                    cpVal = C1
+                    Conflict = True
+                    MsgBox("Re Entry Conflict! Try Again")
+                Else
+                    ucrDDFF.TextboxValue = C1
+                    Conflict = False
+                    dir = Strings.Left(C1, Int(frmNewHourlyWind.txtDirectionDigits.Text))
+                    spd = Strings.Right(C1, Int(frmNewHourlyWind.txtSpeedDigits.Text))
+
+                    'MsgBox(dir & spd)
+                    'Update database with the verified value
+                    If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
+                        ' Update Direction value
+                        If Not objKeyPress.Db_Update_Conflicts(stnid, 112, yy, mm, dd, hh, dir) Then
+                            MsgBox("Direction Update Failure")
+                        End If
+
+                        ' Update Speed value
+                        If Not objKeyPress.Db_Update_Conflicts(stnid, 111, yy, mm, dd, hh, spd) Then
+                            MsgBox("Direction Update Failure")
+                        End If
+                    Else
+                        MsgBox("Update Cancelled by operator")
+                        ucrDDFF.TextboxValue = ""
+                    End If
+                    ucrDDFF.BackColor = Color.White
+                End If
+            Loop
+        End If
+    End Sub
 End Class
 

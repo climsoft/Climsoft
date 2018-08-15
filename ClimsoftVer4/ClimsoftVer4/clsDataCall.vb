@@ -19,7 +19,7 @@ Imports System.Linq.Dynamic
 Public Class DataCall
 
     ' The table in the database to call values from
-    'Private dbsTable As DbSet
+    Private dbsTable As DbSet
     Private strTable As String
     ' The fields in the table which the values will be from
     ' The keys are the names of fields in the data base
@@ -34,7 +34,7 @@ Public Class DataCall
     Public Function Clone() As DataCall
         Dim clsdatacall As New DataCall
         'dbTable is not being cloned because we want to point to the same table in the entity framework
-        'clsdatacall.SetTable(dbsTable)
+        clsdatacall.SetTable(dbsTable)
 
         clsdatacall.SetTableName(strTable)
         clsdatacall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
@@ -43,9 +43,9 @@ Public Class DataCall
         Return clsdatacall
     End Function
 
-    'Public Sub SetTable(dbsNewTable As DbSet)
-    '    dbsTable = dbsNewTable
-    'End Sub
+    Public Sub SetTable(dbsNewTable As DbSet)
+        dbsTable = dbsNewTable
+    End Sub
 
     Public Sub SetTableName(strNewTable As String)
         strTable = strNewTable
@@ -82,15 +82,15 @@ Public Class DataCall
         SetField(strNewField)
     End Sub
 
-    'Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
-    '    SetTable(dbsNewTable:=dbsNewTable)
-    '    SetFields(lstNewFields:=lstNewFields)
-    'End Sub
+    Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
+        SetTable(dbsNewTable:=dbsNewTable)
+        SetFields(lstNewFields:=lstNewFields)
+    End Sub
 
-    'Public Sub SetTableAndField(dbsNewTable As DbSet, strNewField As String)
-    '    SetTable(dbsNewTable:=dbsNewTable)
-    '    SetField(strNewField:=strNewField)
-    'End Sub
+    Public Sub SetTableAndField(dbsNewTable As DbSet, strNewField As String)
+        SetTable(dbsNewTable:=dbsNewTable)
+        SetField(strNewField:=strNewField)
+    End Sub
     Public Function GetFilter() As TableFilter
         Return clsFilter
     End Function
@@ -203,13 +203,13 @@ Public Class DataCall
 
             Try
             If strTable <> "" Then
-                'Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
-                'Dim y = TryCast(x, IQueryable(Of Object))
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
 
-                'If clsCurrentFilter IsNot Nothing Then
-                '    y = y.Where(clsCurrentFilter.GetLinqExpression())
-                'End If
-                'Return y.ToList()
+                If clsCurrentFilter IsNot Nothing Then
+                    y = y.Where(clsCurrentFilter.GetLinqExpression())
+                End If
+                Return y.ToList()
             Else
                 MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
                 Return Nothing

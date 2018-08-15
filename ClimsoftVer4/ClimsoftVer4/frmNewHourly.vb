@@ -1,14 +1,17 @@
 ﻿Public Class frmNewHourly
     Private bFirstLoad As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
         End If
-        'TODO. Remove this once btnUpload has been enabled in the designer
-        'btnUpload.Enabled = True
+
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
+            chkRepeatEntry.Checked = True
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
@@ -16,7 +19,6 @@
         txtSequencer.Text = "seq_month_day_element"
         ucrDay.setYearAndMonthLink(ucrYearSelector, ucrMonth)
         ucrHourly.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrMonth, ucrDay, ucrHourlyNavigation)
-
         ucrHourlyNavigation.PopulateControl()
         SaveEnable()
     End Sub
@@ -80,11 +82,23 @@
             If Not ValidateValues() Then
                 Exit Sub
             End If
-
-            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                ucrHourly.SaveRecord()
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If Not chkRepeatEntry.Checked Then
+                If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrHourly.SaveRecord()
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+
+            ' When in double entry mode just skip update action. Values have been updated on entry
+            If chkRepeatEntry.Checked Then
+                Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
+                dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+                dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+                dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+                ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+            End If
+
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -97,7 +111,7 @@
                 Exit Sub
             End If
 
-            If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            If MessageBox.Show("Are you sure you want to delete this record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 ucrHourly.DeleteRecord()
                 ucrHourlyNavigation.RemoveRecord()
                 SaveEnable()
@@ -122,17 +136,12 @@
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        Try
-            'Open form for displaying data transfer progress
-            frmDataTransferProgress.Show()
-            frmDataTransferProgress.txtDataTransferProgress1.Text = "      Transferring records... "
-            frmDataTransferProgress.txtDataTransferProgress1.Refresh()
-            'ucrHourly.UploadAllRecords()
-            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-            frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
-        Catch ex As Exception
-            MessageBox.Show("Records has NOT been uploaded. Error: " & ex.Message, "Records Upload", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+
+        If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            ucrHourly.UploadAllRecords()
+            'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -234,5 +243,16 @@
         End If
     End Sub
 
+    Private Sub ucrHourly_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourly.evtValueChanged
+        If ucrHourly.bUpdating Then
+            SaveEnable()
+        Else
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnCommit.Enabled = True
+        End If
+    End Sub
 
 End Class

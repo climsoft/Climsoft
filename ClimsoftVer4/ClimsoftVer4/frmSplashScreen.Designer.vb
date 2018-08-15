@@ -23,38 +23,40 @@ Partial Class frmSplashScreen
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim lblWait As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplashScreen))
-        Me.lblWait = New System.Windows.Forms.Label()
         Me.MainLayoutPanel = New System.Windows.Forms.TableLayoutPanel()
         Me.ApplicationTitle = New System.Windows.Forms.Label()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lblDescription = New System.Windows.Forms.Label()
+        lblWait = New System.Windows.Forms.Label()
         Me.MainLayoutPanel.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblWait
         '
-        Me.lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.lblWait.BackColor = System.Drawing.Color.Transparent
-        Me.lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWait.Location = New System.Drawing.Point(430, 440)
-        Me.lblWait.Name = "lblWait"
-        Me.lblWait.Size = New System.Drawing.Size(122, 19)
-        Me.lblWait.TabIndex = 7
-        Me.lblWait.Tag = "Please_Wait"
-        Me.lblWait.Text = "Please Wait.........."
+        lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
+        lblWait.BackColor = System.Drawing.Color.Transparent
+        lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        lblWait.Location = New System.Drawing.Point(430, 440)
+        lblWait.Name = "lblWait"
+        lblWait.Size = New System.Drawing.Size(122, 19)
+        lblWait.TabIndex = 7
+        lblWait.Tag = "Please_Wait"
+        lblWait.Text = "Please Wait.........."
         '
         'MainLayoutPanel
         '
         Me.MainLayoutPanel.BackColor = System.Drawing.Color.Transparent
+        Me.MainLayoutPanel.BackgroundImage = CType(resources.GetObject("MainLayoutPanel.BackgroundImage"), System.Drawing.Image)
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.MainLayoutPanel.ColumnCount = 1
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 983.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.MainLayoutPanel.Controls.Add(Me.ApplicationTitle, 1, 0)
         Me.MainLayoutPanel.Controls.Add(Me.lblVersion, 0, 1)
-        Me.MainLayoutPanel.Controls.Add(Me.lblWait, 0, 2)
+        Me.MainLayoutPanel.Controls.Add(lblWait, 0, 2)
         Me.MainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainLayoutPanel.Location = New System.Drawing.Point(0, 0)
         Me.MainLayoutPanel.Name = "MainLayoutPanel"
@@ -109,7 +111,6 @@ Partial Class frmSplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(983, 607)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblDescription)
@@ -130,5 +131,5 @@ Partial Class frmSplashScreen
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Public WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lblVersion As System.Windows.Forms.Label
-    Friend WithEvents lblWait As Label
+
 End Class

@@ -5,41 +5,10 @@
     Private strIDsAndStations As String = "ids_stations"
 
     Public Overrides Sub PopulateControl()
-        'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim myConnectionString As String
-        'Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-        'Dim ds As New DataSet
-        'Dim sql As String
-
-        'myConnectionString = frmLogin.txtusrpwd.Text
-        'conn.ConnectionString = myConnectionString
-        'conn.Open()
-
-        ''MsgBox("Connection Successful !", MsgBoxStyle.Information)
-
-        'sql = "SELECT stationId,stationName FROM station ORDER by stationName;"
-        'da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-
-        'da.Fill(ds, "station")
-
-        'If ds.Tables("station").Rows.Count > 0 Then
-        '    'Populate station combobox
-        '    With cboValues
-        '        .DataSource = ds.Tables("station")
-        '        .DisplayMember = "stationName"
-        '        .ValueMember = "stationId"
-        '        .SelectedIndex = 0
-        '    End With
-        'Else
-        '    MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
-        'End If
-        'conn.Close()
-
         bSuppressChangedEvents = True
         MyBase.PopulateControl()
         If dtbRecords.Rows.Count > 0 Then
             cboValues.ValueMember = strStationId
-
             'TODO 
             'what if there were no records on the first load.Then there are records later
             If bFirstLoad Then

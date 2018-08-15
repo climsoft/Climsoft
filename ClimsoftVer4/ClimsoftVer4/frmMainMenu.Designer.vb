@@ -27,6 +27,7 @@ Partial Class frmMainMenu
         Me.mnuAccessories = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesDewPointRH = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesXMLOutput = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UserRecordsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProducts = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAdministration = New System.Windows.Forms.ToolStripMenuItem()
@@ -75,8 +76,6 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
-        Me.UserRecordsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UserRecordsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -96,7 +95,7 @@ Partial Class frmMainMenu
         '
         'mnuInput
         '
-        Me.mnuInput.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInputKeyEntry, Me.mnuInputPaperArchive, Me.UserRecordsToolStripMenuItem})
+        Me.mnuInput.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInputKeyEntry, Me.mnuInputPaperArchive})
         Me.mnuInput.Name = "mnuInput"
         Me.mnuInput.ShortcutKeyDisplayString = ""
         Me.mnuInput.Size = New System.Drawing.Size(54, 23)
@@ -106,14 +105,14 @@ Partial Class frmMainMenu
         'mnuInputKeyEntry
         '
         Me.mnuInputKeyEntry.Name = "mnuInputKeyEntry"
-        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(162, 24)
+        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(180, 24)
         Me.mnuInputKeyEntry.Tag = "Key_Entry"
         Me.mnuInputKeyEntry.Text = "Key Entry"
         '
         'mnuInputPaperArchive
         '
         Me.mnuInputPaperArchive.Name = "mnuInputPaperArchive"
-        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(162, 24)
+        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(180, 24)
         Me.mnuInputPaperArchive.Tag = "Paper_Archive"
         Me.mnuInputPaperArchive.Text = "Paper Archive"
         '
@@ -138,6 +137,12 @@ Partial Class frmMainMenu
         Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
+        '
+        'UserRecordsToolStripMenuItem1
+        '
+        Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
+        Me.UserRecordsToolStripMenuItem1.Text = "User Records"
         '
         'mnuProducts
         '
@@ -621,18 +626,6 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
-        'UserRecordsToolStripMenuItem
-        '
-        Me.UserRecordsToolStripMenuItem.Name = "UserRecordsToolStripMenuItem"
-        Me.UserRecordsToolStripMenuItem.Size = New System.Drawing.Size(162, 24)
-        Me.UserRecordsToolStripMenuItem.Text = "User Records"
-        '
-        'UserRecordsToolStripMenuItem1
-        '
-        Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
-        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
-        Me.UserRecordsToolStripMenuItem1.Text = "User Records"
-        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -711,6 +704,5 @@ Partial Class frmMainMenu
     Friend WithEvents ConfigurationForTDCFToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UserRecordsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 End Class

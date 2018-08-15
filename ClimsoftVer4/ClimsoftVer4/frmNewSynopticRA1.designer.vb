@@ -47,13 +47,14 @@ Partial Class frmNewSynopticRA1
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.chkAutoFillValues = New System.Windows.Forms.CheckBox()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(339, 17)
+        lblYear.Location = New System.Drawing.Point(296, 17)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 205
@@ -64,14 +65,14 @@ Partial Class frmNewSynopticRA1
         Me.lblStationSelector.AutoSize = True
         Me.lblStationSelector.Location = New System.Drawing.Point(56, 17)
         Me.lblStationSelector.Name = "lblStationSelector"
-        Me.lblStationSelector.Size = New System.Drawing.Size(86, 13)
+        Me.lblStationSelector.Size = New System.Drawing.Size(43, 13)
         Me.lblStationSelector.TabIndex = 209
-        Me.lblStationSelector.Text = "Station Identifier:"
+        Me.lblStationSelector.Text = "Station:"
         '
         'lblHour
         '
         Me.lblHour.AutoSize = True
-        Me.lblHour.Location = New System.Drawing.Point(694, 17)
+        Me.lblHour.Location = New System.Drawing.Point(651, 17)
         Me.lblHour.Name = "lblHour"
         Me.lblHour.Size = New System.Drawing.Size(33, 13)
         Me.lblHour.TabIndex = 208
@@ -80,7 +81,7 @@ Partial Class frmNewSynopticRA1
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(598, 17)
+        Me.lblDay.Location = New System.Drawing.Point(555, 17)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 207
@@ -89,7 +90,7 @@ Partial Class frmNewSynopticRA1
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(449, 17)
+        Me.lblMonth.Location = New System.Drawing.Point(407, 17)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 206
@@ -97,7 +98,6 @@ Partial Class frmNewSynopticRA1
         '
         'btnTDCF
         '
-        Me.btnTDCF.Enabled = False
         Me.btnTDCF.Location = New System.Drawing.Point(541, 567)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
@@ -117,7 +117,6 @@ Partial Class frmNewSynopticRA1
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Enabled = False
         Me.btnUpload.Location = New System.Drawing.Point(682, 596)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
@@ -215,7 +214,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrDay
         '
-        Me.ucrDay.Location = New System.Drawing.Point(629, 14)
+        Me.ucrDay.Location = New System.Drawing.Point(587, 14)
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
@@ -231,7 +230,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrHour
         '
-        Me.ucrHour.Location = New System.Drawing.Point(729, 14)
+        Me.ucrHour.Location = New System.Drawing.Point(687, 14)
         Me.ucrHour.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrHour.Name = "ucrHour"
         Me.ucrHour.Size = New System.Drawing.Size(59, 24)
@@ -239,7 +238,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrMonth
         '
-        Me.ucrMonth.Location = New System.Drawing.Point(491, 14)
+        Me.ucrMonth.Location = New System.Drawing.Point(448, 14)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
@@ -247,7 +246,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.Location = New System.Drawing.Point(373, 14)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(331, 14)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
@@ -255,7 +254,7 @@ Partial Class frmNewSynopticRA1
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(144, 14)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(101, 14)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
@@ -267,18 +266,30 @@ Partial Class frmNewSynopticRA1
         Me.chkAutoFillValues.Checked = True
         Me.chkAutoFillValues.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkAutoFillValues.ForeColor = System.Drawing.Color.Red
-        Me.chkAutoFillValues.Location = New System.Drawing.Point(799, 17)
+        Me.chkAutoFillValues.Location = New System.Drawing.Point(757, 17)
         Me.chkAutoFillValues.Name = "chkAutoFillValues"
         Me.chkAutoFillValues.Size = New System.Drawing.Size(98, 17)
         Me.chkAutoFillValues.TabIndex = 682
         Me.chkAutoFillValues.Text = "Auto Fill Values"
         Me.chkAutoFillValues.UseVisualStyleBackColor = True
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(18, 610)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 683
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(900, 641)
+        Me.ClientSize = New System.Drawing.Size(900, 639)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.chkAutoFillValues)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrNavigation)
@@ -304,9 +315,10 @@ Partial Class frmNewSynopticRA1
         Me.Controls.Add(Me.lblDay)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(lblYear)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewSynopticRA1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
+        Me.Text = "Synoptic data for input into TDCF form for RA1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -336,4 +348,5 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents ucrNavigation As ucrNavigation
     Friend WithEvents txtSequencer As TextBox
     Friend WithEvents chkAutoFillValues As CheckBox
+    Friend WithEvents chkRepeatEntry As CheckBox
 End Class
