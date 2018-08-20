@@ -898,7 +898,6 @@ Err:
     End Sub
 
     Private Sub cmdViewStation_Click(sender As Object, e As EventArgs) Handles cmdViewStation.Click
-        ' View stations metadata
         dsSourceTableName = "station"
         RecordsView("station")
 
@@ -924,7 +923,6 @@ Err:
 
 
     Private Sub cmdViewElements_Click(sender As Object, e As EventArgs) Handles cmdViewElements.Click
-        ' View the element metadata
         RecordsView("obselement")
     End Sub
 
