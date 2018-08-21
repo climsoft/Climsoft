@@ -3,7 +3,7 @@ Imports System.Linq.Dynamic
 
 Public Class ucrSynopticRA1
     Private bFirstLoad As Boolean = True
-    Private strTableName As String = "form_synoptic_2_RA1"
+    Private strTableName As String = "form_synoptic_2_ra1"
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
     'Set to True by default
