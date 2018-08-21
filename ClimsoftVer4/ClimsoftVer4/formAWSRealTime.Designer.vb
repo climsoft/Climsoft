@@ -347,9 +347,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(196, 0)
+        Me.pnlProcessing.Location = New System.Drawing.Point(194, 12)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(734, 517)
+        Me.pnlProcessing.Size = New System.Drawing.Size(734, 243)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -374,7 +374,7 @@ Partial Class formAWSRealTime
         Me.pnlProcessSettings.Controls.Add(Me.optStop)
         Me.pnlProcessSettings.Location = New System.Drawing.Point(13, 14)
         Me.pnlProcessSettings.Name = "pnlProcessSettings"
-        Me.pnlProcessSettings.Size = New System.Drawing.Size(685, 131)
+        Me.pnlProcessSettings.Size = New System.Drawing.Size(685, 142)
         Me.pnlProcessSettings.TabIndex = 6
         '
         'optStart
@@ -875,7 +875,7 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(194, 227)
+        Me.pnlSites.Location = New System.Drawing.Point(196, 261)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.pnlSites.Size = New System.Drawing.Size(724, 389)
@@ -913,9 +913,9 @@ Partial Class formAWSRealTime
         Me.grpSites.Controls.Add(Me.lblInfile)
         Me.grpSites.Controls.Add(Me.txtSiteID)
         Me.grpSites.Controls.Add(Me.Label15)
-        Me.grpSites.Location = New System.Drawing.Point(11, 10)
+        Me.grpSites.Location = New System.Drawing.Point(11, 14)
         Me.grpSites.Name = "grpSites"
-        Me.grpSites.Size = New System.Drawing.Size(710, 376)
+        Me.grpSites.Size = New System.Drawing.Size(710, 372)
         Me.grpSites.TabIndex = 67
         Me.grpSites.TabStop = False
         '
@@ -1387,9 +1387,9 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.lblServerSettings)
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
-        Me.pnlServers.Location = New System.Drawing.Point(196, 115)
+        Me.pnlServers.Location = New System.Drawing.Point(194, 110)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(734, 35)
+        Me.pnlServers.Size = New System.Drawing.Size(734, 44)
         Me.pnlServers.TabIndex = 2
         '
         'pnlBaseStation

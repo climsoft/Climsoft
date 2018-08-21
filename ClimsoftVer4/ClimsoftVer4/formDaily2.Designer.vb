@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formDaily2
+Partial Class form_daily2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -199,8 +199,8 @@ Partial Class formDaily2
         Me.Label36 = New System.Windows.Forms.Label()
         Me.chkEnableSequencer = New System.Windows.Forms.CheckBox()
         Me.btnView = New System.Windows.Forms.Button()
-
-
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         YyyyLabel = New System.Windows.Forms.Label()
         Me.groupUnits.SuspendLayout()
         Me.grpDefaultValues.SuspendLayout()
@@ -209,11 +209,11 @@ Partial Class formDaily2
         'YyyyLabel
         '
         YyyyLabel.AutoSize = True
-        YyyyLabel.Location = New System.Drawing.Point(69, 68)
+        YyyyLabel.Location = New System.Drawing.Point(82, 79)
         YyyyLabel.Name = "YyyyLabel"
-        YyyyLabel.Size = New System.Drawing.Size(32, 13)
+        YyyyLabel.Size = New System.Drawing.Size(29, 13)
         YyyyLabel.TabIndex = 472
-        YyyyLabel.Text = "Year:"
+        YyyyLabel.Text = "Year"
         '
         'Label37
         '
@@ -741,7 +741,7 @@ Partial Class formDaily2
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(292, 22)
+        Me.Label3.Location = New System.Drawing.Point(389, 29)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 493
@@ -750,9 +750,9 @@ Partial Class formDaily2
         'cboElement
         '
         Me.cboElement.FormattingEnabled = True
-        Me.cboElement.Location = New System.Drawing.Point(295, 38)
+        Me.cboElement.Location = New System.Drawing.Point(436, 26)
         Me.cboElement.Name = "cboElement"
-        Me.cboElement.Size = New System.Drawing.Size(216, 21)
+        Me.cboElement.Size = New System.Drawing.Size(249, 21)
         Me.cboElement.TabIndex = 1
         '
         'txtVal_01Field005
@@ -765,7 +765,7 @@ Partial Class formDaily2
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(622, 568)
+        Me.btnUpload.Location = New System.Drawing.Point(622, 575)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
         Me.btnUpload.TabIndex = 490
@@ -775,7 +775,7 @@ Partial Class formDaily2
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(219, 578)
+        Me.Label5.Location = New System.Drawing.Point(225, 580)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 489
@@ -783,7 +783,7 @@ Partial Class formDaily2
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(284, 575)
+        Me.txtSequencer.Location = New System.Drawing.Point(290, 576)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 488
@@ -792,7 +792,7 @@ Partial Class formDaily2
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(65, 22)
+        Me.Label4.Location = New System.Drawing.Point(78, 29)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 13)
         Me.Label4.TabIndex = 487
@@ -801,15 +801,15 @@ Partial Class formDaily2
         'cboStation
         '
         Me.cboStation.FormattingEnabled = True
-        Me.cboStation.Location = New System.Drawing.Point(65, 38)
+        Me.cboStation.Location = New System.Drawing.Point(121, 26)
         Me.cboStation.Name = "cboStation"
-        Me.cboStation.Size = New System.Drawing.Size(202, 21)
+        Me.cboStation.Size = New System.Drawing.Size(259, 21)
         Me.cboStation.TabIndex = 0
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(305, 68)
+        Me.Label2.Location = New System.Drawing.Point(309, 79)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(30, 13)
         Me.Label2.TabIndex = 486
@@ -818,17 +818,17 @@ Partial Class formDaily2
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(179, 67)
+        Me.Label1.Location = New System.Drawing.Point(186, 79)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(40, 13)
+        Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 485
-        Me.Label1.Text = "Month:"
+        Me.Label1.Text = "Month"
         '
         'cboMonth
         '
         Me.cboMonth.FormattingEnabled = True
         Me.cboMonth.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
-        Me.cboMonth.Location = New System.Drawing.Point(182, 83)
+        Me.cboMonth.Location = New System.Drawing.Point(225, 75)
         Me.cboMonth.Name = "cboMonth"
         Me.cboMonth.Size = New System.Drawing.Size(68, 21)
         Me.cboMonth.TabIndex = 3
@@ -837,7 +837,7 @@ Partial Class formDaily2
         '
         Me.cboHour.FormattingEnabled = True
         Me.cboHour.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.cboHour.Location = New System.Drawing.Point(308, 84)
+        Me.cboHour.Location = New System.Drawing.Point(341, 75)
         Me.cboHour.Name = "cboHour"
         Me.cboHour.Size = New System.Drawing.Size(51, 21)
         Me.cboHour.TabIndex = 4
@@ -956,7 +956,7 @@ Partial Class formDaily2
         '
         'txtYear
         '
-        Me.txtYear.Location = New System.Drawing.Point(68, 84)
+        Me.txtYear.Location = New System.Drawing.Point(121, 75)
         Me.txtYear.Name = "txtYear"
         Me.txtYear.Size = New System.Drawing.Size(55, 20)
         Me.txtYear.TabIndex = 2
@@ -1613,7 +1613,7 @@ Partial Class formDaily2
         Me.chkEnableSequencer.Checked = True
         Me.chkEnableSequencer.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkEnableSequencer.ForeColor = System.Drawing.Color.Red
-        Me.chkEnableSequencer.Location = New System.Drawing.Point(535, 40)
+        Me.chkEnableSequencer.Location = New System.Drawing.Point(562, 3)
         Me.chkEnableSequencer.Name = "chkEnableSequencer"
         Me.chkEnableSequencer.Size = New System.Drawing.Size(155, 17)
         Me.chkEnableSequencer.TabIndex = 659
@@ -1640,12 +1640,23 @@ Partial Class formDaily2
         Me.Label54.Text = "Period"
 
         '
-        'formDaily2
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(16, 578)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
+        Me.chkRepeatEntry.TabIndex = 662
+        Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
+        'form_daily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(724, 613)
-
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.Label54)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.chkEnableSequencer)
@@ -1814,7 +1825,7 @@ Partial Class formDaily2
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formDaily2"
+        Me.Name = "form_daily2"
         Me.Text = "Daily data for the whole month"
         Me.groupUnits.ResumeLayout(False)
         Me.groupUnits.PerformLayout()
@@ -2002,5 +2013,5 @@ Partial Class formDaily2
     Friend WithEvents btnView As System.Windows.Forms.Button
 
     Friend WithEvents Label54 As System.Windows.Forms.Label
-
+    Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
 End Class

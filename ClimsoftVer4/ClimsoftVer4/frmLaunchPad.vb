@@ -21,7 +21,7 @@ Public Class frmLaunchPad
     End Sub
 
     Private Sub btnSynopticData_Click(sender As Object, e As EventArgs)
-        formSynopRA1.Show()
+        form_synopticRA1.Show()
     End Sub
 
     Private Sub btnElementInformation_Click(sender As Object, e As EventArgs) Handles btnElementInformation.Click

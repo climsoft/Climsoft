@@ -1,5 +1,4 @@
-﻿
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 
 Public Class frmNewComputationProgress
     Private bShowResultMessage As Boolean = False

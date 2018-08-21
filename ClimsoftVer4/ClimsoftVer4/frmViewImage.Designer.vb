@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class form_upperair1
+Partial Class frmViewImage
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,16 +22,30 @@ Partial Class form_upperair1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.picView = New System.Windows.Forms.PictureBox()
+        CType(Me.picView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'form_upperair1
+        'picView
+        '
+        Me.picView.Location = New System.Drawing.Point(12, 12)
+        Me.picView.Name = "picView"
+        Me.picView.Size = New System.Drawing.Size(596, 467)
+        Me.picView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picView.TabIndex = 0
+        Me.picView.TabStop = False
+        '
+        'frmViewImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 631)
-        Me.Name = "form_upperair1"
-        Me.Text = "Upper air Observations"
+        Me.ClientSize = New System.Drawing.Size(872, 649)
+        Me.Controls.Add(Me.picView)
+        Me.Name = "frmViewImage"
+        Me.Text = "View Image"
+        CType(Me.picView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
+    Friend WithEvents picView As System.Windows.Forms.PictureBox
 End Class

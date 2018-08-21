@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formMonthly
+Partial Class form_monthly
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -587,7 +587,7 @@ Partial Class formMonthly
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
-        'formMonthly
+        'form_monthly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -654,7 +654,7 @@ Partial Class formMonthly
         Me.Controls.Add(YyyyLabel)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "formMonthly"
+        Me.Name = "form_monthly"
         Me.Text = "Monthly Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()

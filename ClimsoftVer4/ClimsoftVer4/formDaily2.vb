@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-Public Class formDaily2
+Public Class form_daily2
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
     Dim usrName As String
@@ -44,6 +44,7 @@ Public Class formDaily2
     Dim daSequencer As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim dsSequencer As New DataSet
     Dim FldName As New dataEntryGlobalRoutines
+    Dim objKeyPress As New dataEntryGlobalRoutines
     Private Sub navigateRecords()
         'Display the values of data fields from the dataset in the corresponding textboxes on the form.
         'The record with values to be displayed in the texboxes is determined by the value of the variable "inc"
@@ -125,7 +126,7 @@ Public Class formDaily2
     Private Sub formDaily2_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         Dim objKeyPress As New dataEntryGlobalRoutines
         Dim obsVal As String, obsFlag As String, ctrl As Control, flagtextBoxSuffix As String, flagIndexDiff As Integer
-
+        'Dim conflict As Boolean
         ' Dim obsValColIndex As Integer, flagColIndex As Integer
 
         'Initialize string variables
@@ -138,10 +139,25 @@ Public Class formDaily2
             'If {ENTER} key is pressed
             If e.KeyCode = Keys.Enter Then
 
+                '' Check for conflicts if Double key entry mode is set
+                If chkRepeatEntry.Checked And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+
+                    Dim dd, hh As String
+                    dd = Strings.Mid(Me.ActiveControl.Name, 8, 2)
+                    hh = cboHour.Text
+                    If Not objKeyPress.Entry_Verification(conn, Me, cboStation.SelectedValue, cboElement.SelectedValue, txtYear.Text, cboMonth.Text, dd, hh) Then
+                        MsgBox("Can't derify data")
+                    End If
+                End If
+
                 If Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" And Strings.Len(Me.ActiveControl.Text) > 0 Then
 
                     'Check for an observation flag in the texbox for observation value.
                     ' If a flag exists then separate the flag from the value and place the flag in the corresponding flag field.
+
+
 
                     If Not IsNumeric(Strings.Right(Me.ActiveControl.Text, 1)) Then
                         'Get observation flag from the texbox and convert it to Uppercase. Flag is a single letter added as the last character
@@ -152,7 +168,10 @@ Public Class formDaily2
                         obsVal = Strings.Left(Me.ActiveControl.Text, Strings.Len(Me.ActiveControl.Text) - 1)
 
                         Me.ActiveControl.Text = obsVal
+
+
                     End If
+
                     'Now assign obsFlag to correct texbox on the form
                     For Each ctrl In Me.Controls
                         'Loop through all controls on form
@@ -194,7 +213,11 @@ Public Class formDaily2
                     End If
 
                     'Get value for qcTotlRequired
-                    totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                    If Not IsDBNull(dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")) Then
+                        totalRequired = dsValueLimits.Tables("obselement").Rows(0).Item("qcTotalRequired")
+                    Else
+                        totalRequired = 0
+                    End If
 
                     'Check lower limit
                     If obsValue <> "" And valLowerLimit <> "" And tabNext = True Then
@@ -217,7 +240,6 @@ Public Class formDaily2
                     objKeyPress.checkIsNumeric(cboMonth.Text, cboMonth)
                     'Check valid month
                     objKeyPress.checkValidMonth(cboMonth.Text, cboMonth)
-
                 ElseIf Me.ActiveControl.Name = "cboHour" Then
                     'Check for numeric
                     objKeyPress.checkIsNumeric(cboHour.Text, cboHour)
@@ -257,7 +279,6 @@ Public Class formDaily2
                 End If
             End If
 
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -295,7 +316,6 @@ Public Class formDaily2
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
-            'FormLaunchPad.Show()
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
@@ -425,6 +445,9 @@ Public Class formDaily2
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
 
+            ' Retrieve Keyentry mode information and mark on the checkbox
+            If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
+
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")
@@ -492,111 +515,130 @@ Public Class formDaily2
         ' ''    strMonth = cboMonth.Text
         ' ''    strHour = cboHour.Text
         ' ''End If
-
-        'Check if year in last observation record is a leap year
-        Dim yearCheck As New dataEntryGlobalRoutines
-        If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
-            'MsgBox("Leap year!")
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = False
-            txtFlag30Field065.Enabled = False
-            txtPeriod30Field096.Enabled = False
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
-            'MsgBox("Non leap year!")
-            txtVal_29Field033.Enabled = False
-            txtFlag29Field064.Enabled = False
-            txtPeriod29Field095.Enabled = False
-            txtVal_30Field034.Enabled = False
-            txtFlag30Field065.Enabled = False
-            txtPeriod30Field096.Enabled = False
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = True
-            txtFlag30Field065.Enabled = True
-            txtPeriod30Field096.Enabled = True
-            txtVal_31Field035.Enabled = False
-            txtFlag31Field066.Enabled = False
-            txtPeriod31Field097.Enabled = False
-        Else
-            txtVal_29Field033.Enabled = True
-            txtFlag29Field064.Enabled = True
-            txtPeriod29Field095.Enabled = True
-            txtVal_30Field034.Enabled = True
-            txtFlag30Field065.Enabled = True
-            txtPeriod30Field096.Enabled = True
-            txtVal_31Field035.Enabled = True
-            txtFlag31Field066.Enabled = True
-            txtPeriod31Field097.Enabled = True
-        End If
-
-        '----------------Code block added 20160419. ASM
+        ' Don't use Sequencer to fill the form header text boxes if in Double Key Entry i.e. Repeat Entry Mode
         Try
-            Dim dsLastDataRecord As New DataSet
-            Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
-            Dim SQL_last_record As String, stn As String, lastRecElement As String
+            If chkRepeatEntry.Checked Then
+                Dim recdate As Date
+                ' Enable AddNew button and Diable Save button
+                btnAddNew.Enabled = True
+                btnCommit.Enabled = False
+                ' Compute the new header entries for the next record
+                recdate = DateSerial(txtYear.Text, cboMonth.Text, 1)
+                recdate = DateAdd("m", 1, recdate)
+                txtYear.Text = DateAndTime.Year(recdate)
+                cboMonth.Text = DateAndTime.Month(recdate)
+                'cboDay.Text = DateAndTime.Day(recdate)
+                'Exit Sub
+            Else
 
-            SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_daily2 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily2);"
-            dsLastDataRecord.Clear()
-            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
-            ' Set to unlimited timeout period
-            daLastDataRecord.SelectCommand.CommandTimeout = 0
+                'End If
 
-            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
 
-            txtSameValue.Text = ""
-            lastRecElement = cboElement.SelectedValue
-            stn = cboStation.SelectedValue
-            cboStation.SelectedValue = stn
+                'Check if year in last observation record is a leap year
+                Dim yearCheck As New dataEntryGlobalRoutines
+                If yearCheck.checkIsLeapYear(strYear) = True And cboMonth.Text = 2 Then
+                    'MsgBox("Leap year!")
+                    txtVal_29Field033.Enabled = True
+                    txtFlag29Field064.Enabled = True
+                    txtPeriod29Field095.Enabled = True
+                    txtVal_30Field034.Enabled = False
+                    txtFlag30Field065.Enabled = False
+                    txtPeriod30Field096.Enabled = False
+                    txtVal_31Field035.Enabled = False
+                    txtFlag31Field066.Enabled = False
+                    txtPeriod31Field097.Enabled = False
+                ElseIf yearCheck.checkIsLeapYear(strYear) = False And cboMonth.Text = 2 Then
+                    'MsgBox("Non leap year!")
+                    txtVal_29Field033.Enabled = False
+                    txtFlag29Field064.Enabled = False
+                    txtPeriod29Field095.Enabled = False
+                    txtVal_30Field034.Enabled = False
+                    txtFlag30Field065.Enabled = False
+                    txtPeriod30Field096.Enabled = False
+                    txtVal_31Field035.Enabled = False
+                    txtFlag31Field066.Enabled = False
+                    txtPeriod31Field097.Enabled = False
+                ElseIf cboMonth.Text = 4 Or cboMonth.Text = 6 Or cboMonth.Text = 9 Or cboMonth.Text = 11 Then
+                    txtVal_29Field033.Enabled = True
+                    txtFlag29Field064.Enabled = True
+                    txtPeriod29Field095.Enabled = True
+                    txtVal_30Field034.Enabled = True
+                    txtFlag30Field065.Enabled = True
+                    txtPeriod30Field096.Enabled = True
+                    txtVal_31Field035.Enabled = False
+                    txtFlag31Field066.Enabled = False
+                    txtPeriod31Field097.Enabled = False
+                Else
+                    txtVal_29Field033.Enabled = True
+                    txtFlag29Field064.Enabled = True
+                    txtPeriod29Field095.Enabled = True
+                    txtVal_30Field034.Enabled = True
+                    txtFlag30Field065.Enabled = True
+                    txtPeriod30Field096.Enabled = True
+                    txtVal_31Field035.Enabled = True
+                    txtFlag31Field066.Enabled = True
+                    txtPeriod31Field097.Enabled = True
+                End If
 
-            If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
-                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+                '----------------Code block added 20160419. ASM
+                'Try
+                Dim dsLastDataRecord As New DataSet
+                Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+                Dim SQL_last_record As String, stn As String, lastRecElement As String
+
+                SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_daily2 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_daily2);"
+                dsLastDataRecord.Clear()
+                daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+                ' Set to unlimited timeout period
+                daLastDataRecord.SelectCommand.CommandTimeout = 0
+
+                daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+
+                txtSameValue.Text = ""
+                lastRecElement = cboElement.SelectedValue
+                stn = cboStation.SelectedValue
                 cboStation.SelectedValue = stn
-                lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
-            End If
 
-            If chkEnableSequencer.Checked = True Then
-                Sql = "SELECT * FROM " & txtSequencer.Text
-                daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
-                'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
-                'of records in the recordest table whenever the AddNew button is clicked
-                dsSequencer.Clear()
-                daSequencer.Fill(dsSequencer, "sequencer")
+                If dsLastDataRecord.Tables("lastDataRecord").Rows.Count > 0 Then
+                    stn = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("stationId")
+                    cboStation.SelectedValue = stn
+                    lastRecElement = dsLastDataRecord.Tables("lastDataRecord").Rows(0).Item("elementId")
+                End If
 
-                seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
+                If chkEnableSequencer.Checked = True Then
+                    Sql = "SELECT * FROM " & txtSequencer.Text
+                    daSequencer = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+                    'Clear dataset of all records before filling it with new data, otherwise the dataset will keep on growing by the same number
+                    'of records in the recordest table whenever the AddNew button is clicked
+                    dsSequencer.Clear()
+                    daSequencer.Fill(dsSequencer, "sequencer")
 
-                'j = cboElement.SelectedValue
-                ' MsgBox("Last rec: stn=" & stn & ",elem=" & lastRecElement)
+                    seqRecCount = dsSequencer.Tables("sequencer").Rows.Count
 
-                For k = 0 To seqRecCount - 1
-                    If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = lastRecElement Then
-                        If (k + 1) <= seqRecCount - 1 Then
-                            cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
-                        Else
-                            cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
+                    'j = cboElement.SelectedValue
+                    ' MsgBox("Last rec: stn=" & stn & ",elem=" & lastRecElement)
 
-                            ' Sequence the next date for data entry
-                            CurrentDate = "1/" & cboMonth.Text & "/" & txtYear.Text
+                    For k = 0 To seqRecCount - 1
+                        If dsSequencer.Tables("sequencer").Rows(k).Item("elementId") = lastRecElement Then
+                            If (k + 1) <= seqRecCount - 1 Then
+                                cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(k + 1).Item("elementId")
+                            Else
+                                cboElement.SelectedValue = dsSequencer.Tables("sequencer").Rows(0).Item("elementId")
 
-                            NextDate = DateAdd("m", 1, CurrentDate)
+                                ' Sequence the next date for data entry
+                                CurrentDate = "1/" & cboMonth.Text & "/" & txtYear.Text
 
-                            ' Populate date text boxes with values for the next expected record
-                            txtYear.Text = NextDate.Year
-                            cboMonth.Text = NextDate.Month
+                                NextDate = DateAdd("m", 1, CurrentDate)
+
+                                ' Populate date text boxes with values for the next expected record
+                                txtYear.Text = NextDate.Year
+                                cboMonth.Text = NextDate.Month
+                            End If
                         End If
-                    End If
-                Next k
-            End If
+                    Next k
+                End If
 
+            End If ' Sequencing
 
             Dim m As Integer
             Dim ctl As Control
@@ -1458,7 +1500,7 @@ Public Class formDaily2
         obsVal = ""
         obsFlag = ""
         dataForm = "form_daily2"
-
+        'Try
         'Loop through all records in dataset
         For n = 0 To maxRows - 1
             'Display progress of data transfer
@@ -1466,56 +1508,64 @@ Public Class formDaily2
             frmDataTransferProgress.txtDataTransferProgress1.Refresh()
             'Loop through all observation fields adding observation records to observationInitial table
             For m = 5 To 35
-                stnId = ds.Tables("form_daily2").Rows(n).Item("stationId")
-                elemCode = ds.Tables("form_daily2").Rows(n).Item("elementId")
-                yyyy = ds.Tables("form_daily2").Rows(n).Item("yyyy")
-                mm = ds.Tables("form_daily2").Rows(n).Item("mm")
-                temperatureUnits = ds.Tables("form_daily2").Rows(n).Item("temperatureUnits")
-                precipUnits = ds.Tables("form_daily2").Rows(n).Item("precipUnits")
-                visUnits = ds.Tables("form_daily2").Rows(n).Item("visUnits")
-                cloudHeightUnits = ds.Tables("form_daily2").Rows(n).Item("cloudHeightUnits")
+                Try
+                    stnId = ds.Tables("form_daily2").Rows(n).Item("stationId")
+                    elemCode = ds.Tables("form_daily2").Rows(n).Item("elementId")
+                    yyyy = ds.Tables("form_daily2").Rows(n).Item("yyyy")
+                    mm = ds.Tables("form_daily2").Rows(n).Item("mm")
 
-                'dd = ds.Tables("form_daily2").Rows(n).Item(3)
-                dd = m - 4
-                hh = ds.Tables("form_daily2").Rows(n).Item("hh")
-                capturedBy = ds.Tables("form_daily2").Rows(n).Item("signature")
-                If Val(mm) < 10 Then mm = "0" & mm
-                If Val(dd) < 10 Then dd = "0" & dd
-                If Val(hh) < 10 Then hh = "0" & hh
+                    temperatureUnits = ds.Tables("form_daily2").Rows(n).Item("temperatureUnits")
+                    precipUnits = ds.Tables("form_daily2").Rows(n).Item("precipUnits")
+                    visUnits = ds.Tables("form_daily2").Rows(n).Item("visUnits")
+                    cloudHeightUnits = ds.Tables("form_daily2").Rows(n).Item("cloudHeightUnits")
 
-                obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+                    'dd = ds.Tables("form_daily2").Rows(n).Item(3)
+                    dd = m - 4
+                    hh = ds.Tables("form_daily2").Rows(n).Item("hh")
+                    capturedBy = ds.Tables("form_daily2").Rows(n).Item("signature")
+                    If Val(mm) < 10 Then mm = "0" & mm
+                    If Val(dd) < 10 Then dd = "0" & dd
+                    If Val(hh) < 10 Then hh = "0" & hh
 
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m)) Then obsVal = ds.Tables("form_daily2").Rows(n).Item(m)
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 31)) Then obsFlag = ds.Tables("form_daily2").Rows(n).Item(m + 31)
-                If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 62)) Then obsPeriod = Val(ds.Tables("form_daily2").Rows(n).Item(m + 62))
-               
-                'Generate SQL string for inserting data into observationinitial table
-                If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits) " & _
-                        "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
-                        & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "','" & temperatureUnits & "','" & precipUnits & "','" & cloudHeightUnits & "','" & visUnits & "')"
+                    obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
 
-                    ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                    ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                    ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m)) Then obsVal = ds.Tables("form_daily2").Rows(n).Item(m)
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 31)) Then obsFlag = ds.Tables("form_daily2").Rows(n).Item(m + 31)
+                    If Not IsDBNull(ds.Tables("form_daily2").Rows(n).Item(m + 62)) Then obsPeriod = Val(ds.Tables("form_daily2").Rows(n).Item(m + 62))
 
-                    ' Create the Command for executing query and set its properties
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+                    'Generate SQL string for inserting data into observationinitial table
+                    If Strings.Len(obsVal) > 0 Then
+                        strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm,temperatureUnits,precipitationUnits,cloudHeightUnits,visUnits) " & _
+                            "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
+                            & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "','" & temperatureUnits & "','" & precipUnits & "','" & cloudHeightUnits & "','" & visUnits & "')"
 
-                    Try
+                        ' ''  strSQL = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
+                        ' ''"VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                        ' ''qcStatus & "," & acquisitionType & ")" & " ON DUPLICATE KEY UPDATE obsValue=" & obsVal
+
+                        ' Create the Command for executing query and set its properties
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                        'Try
                         'Execute query
                         objCmd.ExecuteNonQuery()
                         'Catch ex As MySql.Data.MySqlClient.MySqlException
                         '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                    Catch ex As Exception
-                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        MsgBox(ex.Message)
-                    End Try
-                End If
+                    End If
+                Catch ex As Exception
+                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                    If ex.HResult = -2147467262 Then Continue For ' When NULL values are encountered
+                    MsgBox(ex.HResult & " " & ex.Message)
+
+                End Try
+                'End If
                 'Move to next observation value in current record of the dataset
             Next m
             'Move to next record in dataset
         Next n
+        'Catch ex1 As Exception
+        '    MsgBox(ex1.HResult & " " & ex1.Message)
+        'End Try
         conn.Close()
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
@@ -1767,4 +1817,5 @@ Public Class formDaily2
             End If
         End Try
     End Sub
+
 End Class
