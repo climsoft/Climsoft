@@ -58,17 +58,11 @@ Public Class formDataView
         'Added June 2016. ASM
         userName = frmLogin.txtUsername.Text
         Sql = ""
+        'MsgBox(dsSourceTableName)
         Select Case dsSourceTableName
             Case "form_hourly"
-                Dim stnId As String, elemId, obsYear, obsMonth, obsDay As Integer
-                stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
-                obsDay = Me.DataGridView.CurrentRow.Cells(4).Value
-
-                Sql = "DELETE FROM form_hourly where stationId='" & stnId & "' AND elementId=" & elemId & _
-                    " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND dd=" & obsDay & ";"
+                Sql = "DELETE FROM form_hourly where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
@@ -77,15 +71,8 @@ Public Class formDataView
                 End If
                 ' 
             Case "form_daily2"
-                Dim stnId As String, elemId, obsYear, obsMonth, obsHour As Integer
-                stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-                obsMonth = Me.DataGridView.CurrentRow.Cells(3).Value
-                obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
-
-                Sql = "DELETE FROM form_daily2 where stationId='" & stnId & "' AND elementId=" & elemId & _
-                    " AND yyyy=" & obsYear & " AND mm= " & obsMonth & " AND hh=" & obsHour & ";"
+                Sql = "DELETE FROM form_daily2 where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_daily2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
@@ -94,14 +81,8 @@ Public Class formDataView
                 End If
                 ' 
             Case "form_hourlywind"
-                Dim stnId As String, obsYear, obsMonth, obsDay As Integer
-                stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
-                obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
-
-                Sql = "DELETE FROM form_hourlywind where stationId='" & stnId & "' AND yyyy=" & obsYear & " AND mm= " & _
-                    obsMonth & " AND dd=" & obsDay & ";"
+                Sql = "DELETE FROM form_hourlywind where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
+                    mn & " AND dd=" & dy & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
@@ -110,37 +91,42 @@ Public Class formDataView
                 End If
                 ' 
             Case "form_synoptic_2_ra1"
-                Dim stnId As String, obsYear, obsMonth, obsDay, obsHour As Integer
-                stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsMonth = Me.DataGridView.CurrentRow.Cells(2).Value
-                obsDay = Me.DataGridView.CurrentRow.Cells(3).Value
-                obsHour = Me.DataGridView.CurrentRow.Cells(4).Value
-
-                Sql = "DELETE FROM form_synoptic_2_RA1 where stationId='" & stnId & "' AND yyyy=" & obsYear & _
-                    " AND mm= " & obsMonth & " AND dd= " & obsDay & " AND hh=" & obsHour & ";"
-                '
+                Sql = "DELETE FROM form_synoptic_2_ra1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+                MsgBox(Sql)
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+                    Sql2 = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
                 Else
-                    Sql2 = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+                    Sql2 = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
                 End If
                 ' 
             Case "form_monthly"
-                Dim stnId As String, elemId, obsYear As Integer
-                stnId = Me.DataGridView.CurrentRow.Cells(0).Value
-                elemId = Me.DataGridView.CurrentRow.Cells(1).Value
-                obsYear = Me.DataGridView.CurrentRow.Cells(2).Value
-
-                Sql = "DELETE FROM form_monthly where stationId='" & stnId & "' AND elementId=" & elemId & _
-                    " AND yyyy=" & obsYear & ";"
+                Sql = "DELETE FROM form_monthly where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & ";"
                 '
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
                 Else
                     Sql2 = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
                 End If
-                ' 
+            Case "form_agro1"
+
+                Sql = "DELETE FROM form_agro1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
+                    mn & " AND dd=" & dy & ";"
+                '
+                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                    Sql2 = "SELECT * FROM form_agro1 where signature ='" & userName & "' ORDER by stationId,yyy,mm,dd;"
+                Else
+                    Sql2 = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd;"
+                End If
+
+            'Update metadata tables
+            Case "station"
+                Sql = "DELETE FROM station where stationId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
+                Sql2 = "SELECT * FROM station ORDER by stationId;"
+
+            Case "obselement"
+                Sql = "DELETE FROM obselement where elementId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
+                Sql2 = "SELECT * FROM obselement ORDER by elementId;"
         End Select
 
         If Strings.Len(Sql) > 0 Then
@@ -168,60 +154,34 @@ Public Class formDataView
             Dim cellValue As String, cellColName As String, k As Integer
             'MsgBox("Source Table: " & dsSourceTableName)
             Sql = ""
+
+            k = Me.DataGridView.CurrentCell.ColumnIndex
+            cellColName = Me.DataGridView.Columns(k).HeaderText
+            cellValue = Me.DataGridView.CurrentCell.Value
+
             Select Case dsSourceTableName
-                Case "form_hourly"
-   
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
-                    cellValue = Me.DataGridView.CurrentCell.Value
-
                     'Generate SQL string for updating the selected value
-
-                    Sql = "UPDATE form_hourly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
+                Case "form_hourly"
+                    Sql = "UPDATE form_hourly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
                         " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
 
                 Case "form_hourlywind"
-
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
-                    cellValue = Me.DataGridView.CurrentCell.Value
-
-                    'Generate SQL string for updating the selected value
-                    'If k > 3 Then
                     Sql = "UPDATE form_hourlywind SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy='" & yr & "' AND mm= '" & mn & "' AND dd='" & dy & "';"
-                    'End If
-                    'MsgBox(Sql)
+
                 Case "form_daily2"
-
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
-                    cellValue = Me.DataGridView.CurrentCell.Value
-
-                    'Generate SQL string for updating the selected value
-                     Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
-                        " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+                    Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
+                       " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
 
                 Case "form_synoptic_2_ra1"
-
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
-                    cellValue = Me.DataGridView.CurrentCell.Value
-
-                    'Generate SQL string for updating the selected value
-
-                    Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr & _
+                    Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
                         " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
 
                 Case "form_monthly"
-
-                    k = Me.DataGridView.CurrentCell.ColumnIndex
-                    cellColName = Me.DataGridView.Columns(k).HeaderText
-                    cellValue = Me.DataGridView.CurrentCell.Value
-
-                    'Generate SQL string for updating the selected value 
-
-                    Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd & _
+                    Sql = "UPDATE form_monthly SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
                         " AND yyyy=" & yr & ";"
+                Case "form_agro1"
+                    Sql = "UPDATE form_agro1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
+                        " AND mm= " & mn & " AND dd= " & dy & ";"
 
                 Case "regkeys"
                     Dim keyNameValue As String
@@ -240,8 +200,19 @@ Public Class formDataView
                         'Generate SQL string for updating the selected value 
                         Sql = "UPDATE regkeys SET " & cellColName & "='" & cellValue & "' WHERE keyName='" & keyNameValue & "';"
                     End If
+
+                ' Update metadata tables
+                Case "station"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    Sql = "UPDATE station SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "';"
+
+                Case "obselement"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    Sql = "UPDATE obselement SET " & cellColName & "='" & cellValue & "' WHERE elementId='" & id & "';"
+                    'MsgBox(Sql)
             End Select
-   
+
+
             If Strings.Len(Sql) > 0 Then
                 connStr = frmLogin.txtusrpwd.Text
                 conn.ConnectionString = connStr
@@ -347,35 +318,44 @@ Public Class formDataView
     End Sub
     Sub Get_RecordIdx(tbl As String)
         'MsgBox(tbl & " " & DataGridView.CurrentRow.Cells(0).Value)
-
-        Select Case tbl
-            Case "form_daily2"
-                id = Me.DataGridView.CurrentRow.Cells(0).Value
-                cd = Me.DataGridView.CurrentRow.Cells(1).Value
-                yr = Me.DataGridView.CurrentRow.Cells(2).Value
-                mn = Me.DataGridView.CurrentRow.Cells(3).Value
-                hr = Me.DataGridView.CurrentRow.Cells(4).Value
-            Case "form_hourly"
-                id = Me.DataGridView.CurrentRow.Cells(0).Value
-                cd = Me.DataGridView.CurrentRow.Cells(1).Value
-                yr = Me.DataGridView.CurrentRow.Cells(2).Value
-                mn = Me.DataGridView.CurrentRow.Cells(3).Value
-                dy = Me.DataGridView.CurrentRow.Cells(4).Value
-            Case "form_hourlywind"
-                id = Me.DataGridView.CurrentRow.Cells(0).Value
-                yr = Me.DataGridView.CurrentRow.Cells(1).Value
-                mn = Me.DataGridView.CurrentRow.Cells(2).Value
-                dy = Me.DataGridView.CurrentRow.Cells(3).Value
-            Case "form_synoptic_2_ra1"
-                id = Me.DataGridView.CurrentRow.Cells(0).Value
-                yr = Me.DataGridView.CurrentRow.Cells(1).Value
-                mn = Me.DataGridView.CurrentRow.Cells(2).Value
-                dy = Me.DataGridView.CurrentRow.Cells(3).Value
-                hr = Me.DataGridView.CurrentRow.Cells(4).Value
-            Case "form_monthly"
-                id = Me.DataGridView.CurrentRow.Cells(0).Value
-                cd = Me.DataGridView.CurrentRow.Cells(1).Value
-                yr = Me.DataGridView.CurrentRow.Cells(2).Value
-        End Select
+        Try
+            Select Case tbl
+                Case "form_daily2"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(3).Value
+                    hr = Me.DataGridView.CurrentRow.Cells(4).Value
+                Case "form_hourly"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(3).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(4).Value
+                Case "form_hourlywind"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(3).Value
+                Case "form_synoptic_2_ra1"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(3).Value
+                    hr = Me.DataGridView.CurrentRow.Cells(4).Value
+                Case "form_monthly"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    cd = Me.DataGridView.CurrentRow.Cells(1).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(2).Value
+                Case "form_agro1"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(3).Value
+            End Select
+        Catch ex As Exception
+            If ex.HResult = -2147467262 Then Exit Sub
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

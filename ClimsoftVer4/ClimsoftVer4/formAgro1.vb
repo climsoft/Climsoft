@@ -877,6 +877,7 @@
             sql = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd"
         End If
         viewRecords.viewTableRecords(sql)
+
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

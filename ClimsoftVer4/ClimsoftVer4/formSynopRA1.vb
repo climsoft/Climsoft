@@ -74,16 +74,16 @@ Public Class form_synopticRA1
         '--------------------------
         Dim stn As String
         'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+        stn = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId")
         cboStation.SelectedValue = stn
         '--------------------------
         'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
         'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
-        ' cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-        txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-        cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-        cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+        ' cboStation.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId")
+        txtYear.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("yyyy")
+        cboMonth.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("mm")
+        cboDay.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("dd")
+        cboHour.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("hh")
 
         Dim m As Integer
         Dim ctl As Control
@@ -93,8 +93,8 @@ Public Class form_synopticRA1
         For m = 5 To 53
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)
                     Else
                         ctl.Text = ""
                     End If
@@ -108,8 +108,8 @@ Public Class form_synopticRA1
         For m = 54 To 102
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)
                     Else
                         ctl.Text = ""
                     End If
@@ -181,18 +181,18 @@ Public Class form_synopticRA1
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
         'Update header fields for form in database
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("yyyy") = txtYear.Text
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("mm") = cboMonth.Text
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("dd") = cboDay.Text
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("hh") = cboHour.Text
 
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
         For m = 5 To 53
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                    ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m) = ctl.Text
                 End If
             Next ctl
         Next m
@@ -202,13 +202,13 @@ Public Class form_synopticRA1
         For m = 54 To 102
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                    ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m) = ctl.Text
                 End If
             Next ctl
         Next m
 
         'The data adapter is used to update the record in the data source table
-        da.Update(ds, "form_synoptic_2_RA1")
+        da.Update(ds, "form_synoptic_2_ra1")
 
         'Show message for successful updating or record.
         recUpdate.messageBoxRecordedUpdated()
@@ -249,14 +249,14 @@ Public Class form_synopticRA1
         Dim strHour As String
         Dim k As Integer
         'Try
-        dataFormRecCount = ds.Tables("form_synoptic_2_RA1").Rows.Count
+        dataFormRecCount = ds.Tables("form_synoptic_2_ra1").Rows.Count
 
         If dataFormRecCount > 0 Then
-            cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(dataFormRecCount - 1).Item("stationId")
-            strYear = ds.Tables("form_synoptic_2_RA1").Rows(dataFormRecCount - 1).Item("yyyy")
-            strMonth = ds.Tables("form_synoptic_2_RA1").Rows(dataFormRecCount - 1).Item("mm")
-            strDay = ds.Tables("form_synoptic_2_RA1").Rows(dataFormRecCount - 1).Item("dd")
-            strHour = ds.Tables("form_synoptic_2_RA1").Rows(dataFormRecCount - 1).Item("hh")
+            cboStation.SelectedValue = ds.Tables("form_synoptic_2_ra1").Rows(dataFormRecCount - 1).Item("stationId")
+            strYear = ds.Tables("form_synoptic_2_ra1").Rows(dataFormRecCount - 1).Item("yyyy")
+            strMonth = ds.Tables("form_synoptic_2_ra1").Rows(dataFormRecCount - 1).Item("mm")
+            strDay = ds.Tables("form_synoptic_2_ra1").Rows(dataFormRecCount - 1).Item("dd")
+            strHour = ds.Tables("form_synoptic_2_ra1").Rows(dataFormRecCount - 1).Item("hh")
         Else
             cboStation.SelectedValue = cboStation.SelectedValue
             strYear = txtYear.Text
@@ -279,8 +279,8 @@ Public Class form_synopticRA1
         'Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
         'Dim SQL_last_record, lastRecYear, lastRecMonth, lastRecHour, lastRecElement, stn As String
 
-        ''SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
-        'SQL_last_record = "SELECT stationId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_RA1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
+        ''SQL_last_record = "SELECT stationId,elementId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_ra1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
+        'SQL_last_record = "SELECT stationId,yyyy,mm,hh,signature,entryDatetime from form_synoptic_2_ra1 WHERE signature='" & frmLogin.txtUsername.Text & "' AND entryDatetime=(SELECT MAX(entryDatetime) FROM form_hourly);"
 
         'dsLastDataRecord.Clear()
         'daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
@@ -671,28 +671,28 @@ Public Class form_synopticRA1
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
             'Try
-            dsNewRow = ds.Tables("form_synoptic_2_RA1").NewRow
+            dsNewRow = ds.Tables("form_synoptic_2_ra1").NewRow
             'Add a new record to the data source table
-            ds.Tables("form_synoptic_2_RA1").Rows.Add(dsNewRow)
+            ds.Tables("form_synoptic_2_ra1").Rows.Add(dsNewRow)
             'Commit observation header information to database
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy") = txtYear.Text
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm") = cboMonth.Text
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd") = cboDay.Text
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh") = cboHour.Text
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("yyyy") = txtYear.Text
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("mm") = cboMonth.Text
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("dd") = cboDay.Text
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("hh") = cboHour.Text
 
             ' txtSignature.Text = frmLogin.txtUser.Text
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
             'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
-            ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("entryDatetime") = Now()
+            ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("entryDatetime") = Now()
 
             'Commit observation values to database
             'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
             For m = 5 To 53
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m) = ctl.Text
                     End If
                 Next ctl
             Next m
@@ -702,12 +702,12 @@ Public Class form_synopticRA1
             For m = 54 To 102
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                        ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m) = ctl.Text
+                        ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m) = ctl.Text
                     End If
                 Next ctl
             Next m
 
-            da.Update(ds, "form_synoptic_2_RA1")
+            da.Update(ds, "form_synoptic_2_ra1")
 
             'Display message for successful record commit to table
             recCommit.messageBoxCommit()
@@ -727,7 +727,7 @@ Public Class form_synopticRA1
                 btnDelete.Enabled = False
             End If
 
-            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+            maxRows = ds.Tables("form_synoptic_2_ra1").Rows.Count
             inc = maxRows - 1
 
             'Call subroutine for record navigation
@@ -754,8 +754,8 @@ Public Class form_synopticRA1
             Exit Sub
         End If
 
-        ds.Tables("form_synoptic_2_RA1").Rows(inc).Delete()
-        da.Update(ds, "form_synoptic_2_RA1")
+        ds.Tables("form_synoptic_2_ra1").Rows(inc).Delete()
+        da.Update(ds, "form_synoptic_2_ra1")
         maxRows = maxRows - 1
         inc = 0
 
@@ -939,9 +939,9 @@ Public Class form_synopticRA1
 
             'MsgBox("Connection Successful !", MsgBoxStyle.Information)
 
-            sql = "SELECT * FROM form_synoptic_2_RA1"
+            sql = "SELECT * FROM form_synoptic_2_ra1"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            da.Fill(ds, "form_synoptic_2_RA1")
+            da.Fill(ds, "form_synoptic_2_ra1")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
@@ -951,7 +951,7 @@ Public Class form_synopticRA1
         End Try
 
         Try
-            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+            maxRows = ds.Tables("form_synoptic_2_ra1").Rows.Count
 
             '--------------------------------
             'Fill combobox for station identifier with station list from station table
@@ -982,22 +982,22 @@ Public Class form_synopticRA1
             'Initialize header information for data-entry form
 
             If maxRows > 0 Then
-                'StationIdTextBox.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-                'cboStation.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
-                cboStation.SelectedValue = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("stationId")
+                'StationIdTextBox.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId")
+                'cboStation.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId")
+                cboStation.SelectedValue = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("stationId")
 
-                txtYear.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("yyyy")
-                cboMonth.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("mm")
-                cboDay.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("dd")
-                cboHour.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item("hh")
+                txtYear.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("yyyy")
+                cboMonth.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("mm")
+                cboDay.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("dd")
+                cboHour.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item("hh")
 
                 'Initialize textboxes for observation values
                 'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
                 For m = 5 To 53
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)
                             End If
                         End If
                     Next ctl
@@ -1008,8 +1008,8 @@ Public Class form_synopticRA1
                 For m = 54 To 102
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)) Then
-                                ctl.Text = ds.Tables("form_synoptic_2_RA1").Rows(inc).Item(m)
+                            If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_synoptic_2_ra1").Rows(inc).Item(m)
                             End If
                         End If
                     Next ctl
@@ -1198,7 +1198,7 @@ Public Class form_synopticRA1
             conn.Open()
             '
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-            maxRows = ds.Tables("form_synoptic_2_RA1").Rows.Count
+            maxRows = ds.Tables("form_synoptic_2_ra1").Rows.Count
             qcStatus = 0
             acquisitionType = 1
             obsLevel = "surface"
@@ -1215,12 +1215,12 @@ Public Class form_synopticRA1
 
                 For m = 5 To 53
 
-                    stnId = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(0)
-                    yyyy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(1)
-                    mm = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(2)
-                    dd = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(3)
-                    hh = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(4)
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")) Then capturedBy = ds.Tables("form_synoptic_2_RA1").Rows(n).Item("signature")
+                    stnId = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(0)
+                    yyyy = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(1)
+                    mm = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(2)
+                    dd = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(3)
+                    hh = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(4)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(n).Item("signature")) Then capturedBy = ds.Tables("form_synoptic_2_ra1").Rows(n).Item("signature")
 
                     If Val(mm) < 10 Then mm = "0" & mm
                     If Val(dd) < 10 Then dd = "0" & dd
@@ -1228,8 +1228,8 @@ Public Class form_synopticRA1
 
                     obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
 
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)) Then obsVal = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m)
-                    If Not IsDBNull(ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)) Then obsFlag = ds.Tables("form_synoptic_2_RA1").Rows(n).Item(m + 49)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(n).Item(m)) Then obsVal = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(m)
+                    If Not IsDBNull(ds.Tables("form_synoptic_2_ra1").Rows(n).Item(m + 49)) Then obsFlag = ds.Tables("form_synoptic_2_ra1").Rows(n).Item(m + 49)
                     'Get the element code from the control name corresponding to column index
                     For Each ctl In Me.Controls
                         If Val(Strings.Right(ctl.Name, 3)) = m Then
