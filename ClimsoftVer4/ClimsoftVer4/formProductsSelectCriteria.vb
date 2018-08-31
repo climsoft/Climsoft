@@ -375,12 +375,12 @@ Public Class formProductsSelectCriteria
                     'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
                     'DataProducts(sql, lblProductType.Text)
                     InstatProduct(sdate, edate, lblProductType.Text)
-                Case "Missing data"
+                Case "Missing Data"
                     'RefreshStatsCache()
-                    'RefreshMissingCache()
-                    'GatherStats()
+                    RefreshMissingCache()
+                    GatherStats()
                     'findmissing()
-                    'frmplotter.show()
+                    frmPlotter.Show()
 
                 Case "Rclimdex"
                     RclimdexProducts(sdate, edate, lblProductType.Text)
@@ -1216,6 +1216,7 @@ Err:
 
     Public Sub GatherStats()
         If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
+            'MsgBox(lstvStations.Items.Count & " " & lstvElements.Items.Count)
             For i = 0 To lstvStations.Items.Count - 1
                 For j = 0 To lstvElements.Items.Count - 1
                     cmd = New MySql.Data.MySqlClient.MySqlCommand
