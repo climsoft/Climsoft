@@ -47,6 +47,7 @@ Partial Class frmNewSynopticRA1
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.chkAutoFillValues = New System.Windows.Forms.CheckBox()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -97,7 +98,6 @@ Partial Class frmNewSynopticRA1
         '
         'btnTDCF
         '
-        Me.btnTDCF.Enabled = False
         Me.btnTDCF.Location = New System.Drawing.Point(541, 567)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
@@ -273,11 +273,23 @@ Partial Class frmNewSynopticRA1
         Me.chkAutoFillValues.Text = "Auto Fill Values"
         Me.chkAutoFillValues.UseVisualStyleBackColor = True
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(18, 610)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 683
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'frmNewSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(900, 639)
+        Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.chkAutoFillValues)
         Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.ucrNavigation)
@@ -306,7 +318,7 @@ Partial Class frmNewSynopticRA1
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmNewSynopticRA1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Synoptic Data For Many Elements For WMO - RA1"
+        Me.Text = "Synoptic data for input into TDCF form for RA1"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -336,4 +348,5 @@ Partial Class frmNewSynopticRA1
     Friend WithEvents ucrNavigation As ucrNavigation
     Friend WithEvents txtSequencer As TextBox
     Friend WithEvents chkAutoFillValues As CheckBox
+    Friend WithEvents chkRepeatEntry As CheckBox
 End Class

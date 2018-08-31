@@ -286,7 +286,7 @@
 
             ' Retrieve Keyentry mode information and mark on the checkbox
             'MsgBox(FldName.Key_Entry_Mode(Me.Name))
-            If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
+            If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -877,6 +877,7 @@
             sql = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd"
         End If
         viewRecords.viewTableRecords(sql)
+
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click

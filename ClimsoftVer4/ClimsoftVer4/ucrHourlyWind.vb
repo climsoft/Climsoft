@@ -87,15 +87,27 @@ Public Class ucrHourlyWind
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    'DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
             Next
 
             OnevtValueChanged(Me, Nothing)
-
         End If
+
+        ' Set conditions for double key entry
+        If frmNewHourlyWind.chkRepeatEntry.Checked Then
+            Me.Clear()
+            Me.ucrDirectionSpeedFlag0.ucrDDFF.GetFocus()
+            With frmNewHourlyWind
+                .btnAddNew.Enabled = False
+                .btnSave.Enabled = False
+                .btnUpdate.Enabled = True
+            End With
+        End If
+
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)

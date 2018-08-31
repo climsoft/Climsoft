@@ -67,6 +67,17 @@ Public Class ucrHourly
             OnevtValueChanged(Me, Nothing)
 
         End If
+
+        ' Set conditions for double key entry
+        If frmNewHourly.chkRepeatEntry.Checked Then
+            Me.Clear()
+            Me.UcrValueFlagPeriod0.ucrValue.GetFocus()
+            With frmNewHourly
+                .btnAddNew.Enabled = False
+                .btnCommit.Enabled = False
+                .btnUpdate.Enabled = True
+            End With
+        End If
     End Sub
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -227,7 +238,7 @@ Public Class ucrHourly
     Public Overrides Sub Clear()
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                DirectCast(ctr, ucrDirectionSpeedFlag).Clear()
+                'DirectCast(ctr, ucrDirectionSpeedFlag).Clear()
             ElseIf TypeOf ctr Is ucrTextBox Then
                 DirectCast(ctr, ucrTextBox).Clear()
             End If
@@ -672,4 +683,7 @@ Public Class ucrHourly
         Return shiftCells.GetVFPContextMenu()
     End Function
 
+    Private Sub UcrValueFlagPeriod0_GotFocus(sender As Object, e As EventArgs) Handles UcrValueFlagPeriod0.GotFocus
+
+    End Sub
 End Class

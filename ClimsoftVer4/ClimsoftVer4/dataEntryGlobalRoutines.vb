@@ -520,7 +520,7 @@ Public Class dataEntryGlobalRoutines
                                         MsgBox("Update Failure")
                                     End If
                                 Else
-                                    MsgBox("Update ancelled by operator")
+                                    MsgBox("Update Cancelled by operator")
                                     .ActiveControl.Text = ""
                                 End If
                                 .ActiveControl.BackColor = Color.White
@@ -548,7 +548,9 @@ Public Class dataEntryGlobalRoutines
 
         Key_Entry_Mode = "Single"
         Try
-            sql = "select entry_mode from data_forms where form_name ='" & frm & "';"
+            'sql = "select entry_mode from data_forms where form_name ='" & frm & "';"
+            sql = "select entry_mode from data_forms where description ='" & frm & "';"
+
             cons.Open()
             d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, cons)
             d.SelectCommand.CommandTimeout = 0

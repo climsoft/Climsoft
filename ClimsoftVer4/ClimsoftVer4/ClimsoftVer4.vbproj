@@ -91,6 +91,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -519,12 +520,6 @@
       <DependentUpon>formDatabaseConnect.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formSynoptic1.Designer.vb">
-      <DependentUpon>formSynoptic1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="formSynoptic1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="formUpperAir.Designer.vb">
       <DependentUpon>formUpperAir.vb</DependentUpon>
     </Compile>
@@ -591,7 +586,9 @@
     <Compile Include="frmMonitoring.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPlotter.Designer.vb" />
+    <Compile Include="frmPlotter.designer.vb">
+      <DependentUpon>frmPlotter.vb</DependentUpon>
+    </Compile>
     <Compile Include="frmPlotter.vb">
       <SubType>Form</SubType>
     </Compile>

@@ -69,7 +69,6 @@ Public Class ucrMonthlydata
             OnevtValueChanged(Me, Nothing)
 
         End If
-
     End Sub
 
     Private Sub ucrMonthlydata_Load(sender As Object, e As EventArgs) Handles MyBase.Load

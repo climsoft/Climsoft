@@ -923,34 +923,42 @@ Err:
 
 
     Private Sub cmdViewElements_Click(sender As Object, e As EventArgs) Handles cmdViewElements.Click
+        dsSourceTableName = "obselement"
         RecordsView("obselement")
     End Sub
 
     Private Sub cmdViewStElement_Click(sender As Object, e As EventArgs) Handles cmdViewStElement.Click
+        dsSourceTableName = "stationelement"
         RecordsView("stationelement")
     End Sub
 
     Private Sub cmdViewInstrument_Click(sender As Object, e As EventArgs) Handles cmdViewInstrument.Click
+        dsSourceTableName = "instrument"
         RecordsView("instrument")
     End Sub
 
     Private Sub cmdViewHistory_Click(sender As Object, e As EventArgs) Handles cmdViewHistory.Click
+        dsSourceTableName = "stationlocationhistory"
         RecordsView("stationlocationhistory")
     End Sub
 
     Private Sub cmdDeleteView_Click(sender As Object, e As EventArgs) Handles cmdDeleteView.Click
+        dsSourceTableName = "stationqualifier"
         RecordsView("stationqualifier")
     End Sub
 
     Private Sub cmdViewScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdViewScheduleClass.Click
+        dsSourceTableName = "obsscheduleclass"
         RecordsView("obsscheduleclass")
     End Sub
 
     Private Sub cmdViewFeature_Click(sender As Object, e As EventArgs) Handles cmdViewFeature.Click
+        dsSourceTableName = "physicalfeature"
         RecordsView("physicalfeature")
     End Sub
 
     Private Sub cmdViewPaperArchive_Click(sender As Object, e As EventArgs) Handles cmdViewPaperArchive.Click
+        dsSourceTableName = "paperarchivedefinition"
         RecordsView("paperarchivedefinition")
     End Sub
 

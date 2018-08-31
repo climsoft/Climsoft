@@ -93,7 +93,17 @@ Public Class ucrFormDaily2
             End If
 
             OnevtValueChanged(Me, Nothing)
+        End If
 
+        ' Set conditions for double key entry
+        If frmNewFormDaily2.chkRepeatEntry.Checked Then
+            Me.Clear()
+            ucrValueFlagPeriod1.ucrValue.GetFocus()
+            With frmNewFormDaily2
+                .btnAddNew.Enabled = False
+                .btnCommit.Enabled = False
+                .btnUpdate.Enabled = True
+            End With
         End If
     End Sub
 

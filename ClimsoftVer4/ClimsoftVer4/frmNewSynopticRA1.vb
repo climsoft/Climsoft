@@ -1,5 +1,6 @@
 ﻿Public Class frmNewSynopticRA1
     Private bFirstLoad As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -7,6 +8,10 @@
             bFirstLoad = False
         End If
 
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
+            chkRepeatEntry.Checked = True
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
@@ -67,10 +72,23 @@
                 Exit Sub
             End If
 
-            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                ucrSynopticRA1.SaveRecord()
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If Not chkRepeatEntry.Checked Then
+                If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    ucrSynopticRA1.SaveRecord()
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+
+            If chkRepeatEntry.Checked Then
+                Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+
+                'temporary until we know how to get all fields from table without specifying names
+                dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+                dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+                dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
+                ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay, ucrHour}), ucrYear:=ucrYearSelector)
+            End If
+
         Catch ex As Exception
             MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -238,11 +256,11 @@
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
         userName = frmLogin.txtUsername.Text
-        dsSourceTableName = "form_synoptic_2_RA1"
+        dsSourceTableName = "form_synoptic_2_ra1"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_synoptic_2_RA1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
         Else
-            sql = "SELECT * FROM form_synoptic_2_RA1 ORDER by stationId,yyyy,mm,dd,hh;"
+            sql = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
         End If
         viewRecords.viewTableRecords(sql)
     End Sub

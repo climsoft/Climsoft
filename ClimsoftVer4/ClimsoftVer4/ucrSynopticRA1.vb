@@ -3,7 +3,7 @@ Imports System.Linq.Dynamic
 
 Public Class ucrSynopticRA1
     Private bFirstLoad As Boolean = True
-    Private strTableName As String = "form_synoptic_2_RA1"
+    Private strTableName As String = "form_synoptic_2_ra1"
     Private strValueFieldName As String = "Val_Elem"
     Private strFlagFieldName As String = "Flag"
     'Set to True by default
@@ -59,9 +59,11 @@ Public Class ucrSynopticRA1
             SetValueValidation()
             bFirstLoad = False
         End If
+
     End Sub
 
     Public Overrides Sub PopulateControl()
+
         Dim clsCurrentFilter As TableFilter
         Dim tempRecord As form_synoptic_2_ra1
 
@@ -125,6 +127,16 @@ Public Class ucrSynopticRA1
 
         End If
 
+        ' Set conditions for double key entry
+        If frmNewSynopticRA1.chkRepeatEntry.Checked Then
+            Me.Clear()
+            ucrVFPStationLevelPressure.ucrValue.GetFocus()
+            With frmNewSynopticRA1
+                .btnAddNew.Enabled = False
+                .btnSave.Enabled = False
+                .btnUpdate.Enabled = True
+            End With
+        End If
 
     End Sub
 
