@@ -87,8 +87,8 @@ Public Class ucrHourlyWind
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    'DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    'DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
                     DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
                 End If
@@ -315,6 +315,7 @@ Public Class ucrHourlyWind
         Dim dtbl As DataTable
         Dim strLowerLimit As String = ""
         Dim strUpperLimit As String = ""
+        bSpeedTotalRequired = False
 
         iSpeedElementId = elementId
         clsDataDefinition = New DataCall
@@ -325,9 +326,11 @@ Public Class ucrHourlyWind
         clsDataDefinition.SetFilter("elementId", "=", iSpeedElementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
-            strUpperLimit = dtbl.Rows(0).Item("upperLimit")
-            bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
+            strLowerLimit = If(IsDBNull(dtbl.Rows(0).Item("lowerLimit")), "", dtbl.Rows(0).Item("lowerLimit"))
+            strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
+            If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
+                bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
+            End If
         End If
 
         For Each ctr As Control In Me.Controls
