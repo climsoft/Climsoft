@@ -104,7 +104,7 @@
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValues(False) Then
                 Exit Sub
             End If
 
@@ -172,7 +172,7 @@
         End If
     End Sub
 
-    Private Function ValidateValues() As Boolean
+    Private Function ValidateValues(Optional bCheckTotal As Boolean = True) As Boolean
         'Check valid station
         If Not ucrStationSelector.ValidateValue() Then
             MessageBox.Show("Invalid station", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -213,10 +213,12 @@
             Return False
         End If
 
-        'check speed total required
-        If Not ucrHourlyWind.checkSpeedTotal() Then
-            ucrHourlyWind.ucrInputTotal.Focus()
-            Return False
+        If bCheckTotal Then
+            'check speed total required
+            If Not ucrHourlyWind.checkSpeedTotal() Then
+                ucrHourlyWind.ucrInputTotal.Focus()
+                Return False
+            End If
         End If
 
         Return True

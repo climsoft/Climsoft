@@ -356,20 +356,20 @@ Public Class ucrDirectionSpeedFlag
             Else
 
                 'if the value is just an M, then interpret it as a user's intention to put missing value
-                'If ucrDDFF.GetValue = "M" Then
-                '    ucrFlag.SetValue("M")
-                '    ucrDDFF.SetValue("")
-                '    bValuesCorrect = True
-                '    ucrDDFF.SetBackColor(Color.White)
-                'Else
-                '    bValuesCorrect = False
-                '    ucrDDFF.SetBackColor(Color.Red)
-                '    MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                'End If
+                If ucrDDFF.GetValue = "M" Then
+                    ucrFlag.SetValue("M")
+                    ucrDDFF.SetValue("")
+                    bValuesCorrect = True
+                    ucrDDFF.SetBackColor(Color.White)
+                Else
+                    bValuesCorrect = False
+                    ucrDDFF.SetBackColor(Color.Red)
+                    MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
 
-                bValuesCorrect = False
-                ucrDDFF.SetBackColor(Color.Red)
-                MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                'bValuesCorrect = False
+                'ucrDDFF.SetBackColor(Color.Red)
+                'MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 
             End If
         End If

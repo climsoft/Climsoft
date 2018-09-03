@@ -235,13 +235,13 @@ Public Class ucrSynopticRA1
                     row = dtbl.Select("elementId = '" & ucrVFP.Tag & "'").FirstOrDefault()
                     If row IsNot Nothing Then
 
-                        If String.IsNullOrEmpty(row.Item("lowerLimit")) Then
+                        If IsDBNull(row.Item("lowerLimit")) OrElse String.IsNullOrEmpty(row.Item("lowerLimit")) Then
                             ucrVFP.SetElementValueLowerLimit(Decimal.MinValue)
                         Else
                             ucrVFP.SetElementValueLowerLimit(Val(row.Item("lowerLimit")))
                         End If
 
-                        If String.IsNullOrEmpty(row.Item("upperLimit")) Then
+                        If IsDBNull(row.Item("upperLimit")) OrElse String.IsNullOrEmpty(row.Item("upperLimit")) Then
                             ucrVFP.SetElementValueHigherLimit(Decimal.MaxValue)
                         Else
                             ucrVFP.SetElementValueHigherLimit(Val(row.Item("upperLimit")))
