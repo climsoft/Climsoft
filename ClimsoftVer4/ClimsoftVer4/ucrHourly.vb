@@ -380,8 +380,8 @@ Public Class ucrHourly
     ''' </summary>
     Public Function checkTotal() As Boolean
         Dim bValueCorrect As Boolean = False
-        Dim elemTotal As Integer = 0
-        Dim expectedTotal As Integer
+        Dim elemTotal As Decimal = 0
+        Dim expectedTotal As Decimal
 
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then

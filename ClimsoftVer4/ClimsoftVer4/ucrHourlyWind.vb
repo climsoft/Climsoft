@@ -406,8 +406,8 @@ Public Class ucrHourlyWind
     ''' <returns></returns>
     Public Function checkSpeedTotal() As Boolean
         Dim bValueCorrect As Boolean = False
-        Dim elemTotal As Integer = 0
-        Dim expectedTotal As Integer
+        Dim elemTotal As Decimal = 0
+        Dim expectedTotal As Decimal
 
         If bSpeedTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsSpeedValuesEmpty() Then
