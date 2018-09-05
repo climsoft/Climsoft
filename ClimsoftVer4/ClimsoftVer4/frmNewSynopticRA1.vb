@@ -4,7 +4,7 @@
 
     Private Sub frmNewSynopticRA1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
-        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+        If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
             btnDelete.Enabled = False
             btnUpload.Enabled = False
         End If
