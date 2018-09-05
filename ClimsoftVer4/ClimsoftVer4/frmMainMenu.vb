@@ -59,7 +59,7 @@ Public Class frmMainMenu
                     cmdUserManagement.Enabled = False
                     cmdProducts.Enabled = False
                     cmdUserManagement.Enabled = False
-                    '
+
                 ElseIf usrRole = "ClimsoftMetadata" Then
                     mnuProducts.Enabled = False
                     mnuAdministration.Enabled = False
@@ -72,6 +72,8 @@ Public Class frmMainMenu
                     cmdQC.Enabled = False
                     cmdProducts.Enabled = False
                     cmdKeyEntry.Enabled = False
+                    cmdPaperArchive.Enabled = False
+
                 ElseIf usrRole = "ClimsoftProducts" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
@@ -83,6 +85,8 @@ Public Class frmMainMenu
                     cmdUserManagement.Enabled = False
                     cmdQC.Enabled = False
                     cmdKeyEntry.Enabled = False
+                    cmdPaperArchive.Enabled = False
+
                 ElseIf usrRole = "ClimsoftTranslator" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
@@ -95,6 +99,7 @@ Public Class frmMainMenu
                     cmdKeyEntry.Enabled = False
                     cmdPaperArchive.Enabled = False
                     cmdProducts.Enabled = False
+
                 End If
             End If
         Catch ex As Exception
