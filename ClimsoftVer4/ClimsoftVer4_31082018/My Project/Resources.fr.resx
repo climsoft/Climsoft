@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="addNew1" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MySql_Data" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MySql.Data.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="COIN" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\COIN.GIF;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew2" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addNew3" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addNew2.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>S'appliquent</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aidez</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>NomUtilisateur</value>
+  </data>
+  <data name="Climate_Data_Management_System" xml:space="preserve">
+    <value>Système de gestion de données climatiques</value>
+  </data>
+  <data name="Hide_Database_Details" xml:space="preserve">
+    <value>Masquer les détails de la base de données</value>
+  </data>
+  <data name="Show_Database_Details" xml:space="preserve">
+    <value>Afficher les détails de la base de données</value>
+  </data>
+  <data name="Please_Wait" xml:space="preserve">
+    <value>Veuillez patienter</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Archive_Paper_Image" xml:space="preserve">
+    <value>Image d'archives papier</value>
+  </data>
+  <data name="AWS_Real_Time_Processing" xml:space="preserve">
+    <value>Traitement en temps réel AWS</value>
+  </data>
+  <data name="Climate_Data_Products" xml:space="preserve">
+    <value>Produits de données climatiques</value>
+  </data>
+  <data name="Data_Entry" xml:space="preserve">
+    <value>Entrée données</value>
+  </data>
+  <data name="Data_Transfer_Operations" xml:space="preserve">
+    <value>Opérations de transfert de données</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Entrée</value>
+  </data>
+  <data name="Metadata_Information" xml:space="preserve">
+    <value>Informations de métadonnées</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Produits</value>
+  </data>
+  <data name="Quality_Control_Checks" xml:space="preserve">
+    <value>Contrôles de qualité</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Outils</value>
+  </data>
+  <data name="Users_Administration" xml:space="preserve">
+    <value>Administration des utilisateurs</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermé</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Ouverture de session</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>À propos de</value>
+  </data>
+  <data name="Calculation_of_dew_Point_and_RH" xml:space="preserve">
+    <value>Calcul du Point de rosée et RH</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Contenu</value>
+  </data>
+  <data name="Data_Forms" xml:space="preserve">
+    <value>Formulaires de données</value>
+  </data>
+  <data name="Generate_XML_Output" xml:space="preserve">
+    <value>Générer une sortie XML</value>
+  </data>
+  <data name="Key_Entry" xml:space="preserve">
+    <value>Entrée de clé</value>
+  </data>
+  <data name="Metadata" xml:space="preserve">
+    <value>Métadonnées</value>
+  </data>
+  <data name="Modify_Forms" xml:space="preserve">
+    <value>Modifier des formes</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Paper_Archive" xml:space="preserve">
+    <value>Archives papier</value>
+  </data>
+  <data name="Update_Element_Limits" xml:space="preserve">
+    <value>Mettre à jour les limites de l'élément</value>
+  </data>
+  <data name="User_Admin" xml:space="preserve">
+    <value>L'utilisateur Admin</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>Sélectionner une langue</value>
+  </data>
+  <data name="Main_Menu" xml:space="preserve">
+    <value>Menu principal</value>
+  </data>
+  <data name="Attach_Uncoded_Data" xml:space="preserve">
+    <value>Attacher des données non codées</value>
+  </data>
+  <data name="BBB" xml:space="preserve">
+    <value>BBB</value>
+  </data>
+  <data name="Character_Message" xml:space="preserve">
+    <value>Message du caractère</value>
+  </data>
+  <data name="Close1" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Coded_Output" xml:space="preserve">
+    <value>Sortie codée</value>
+  </data>
+  <data name="Crex_Editions_Number" xml:space="preserve">
+    <value>Nombre d'éditions crex</value>
+  </data>
+  <data name="Crex_Table_Version_Number" xml:space="preserve">
+    <value>Numéro de Version de Table crex </value>
+  </data>
+  <data name="Data_Category" xml:space="preserve">
+    <value>Catégorie de données</value>
+  </data>
+  <data name="Data_Category_Sub_Category" xml:space="preserve">
+    <value>Données catégorie sous-catégorie</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>jour</value>
+  </data>
+  <data name="Encode" xml:space="preserve">
+    <value>Coder</value>
+  </data>
+  <data name="Evaporation" xml:space="preserve">
+    <value>Évaporation</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Header</value>
+  </data>
+  <data name="Help1" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Heure </value>
+  </data>
+  <data name="Include_Check_Digit" xml:space="preserve">
+    <value>Inscrire le chiffre de contrôle</value>
+  </data>
+  <data name="Mail_Applications" xml:space="preserve">
+    <value>Applications de messagerie</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Mois</value>
+  </data>
+  <data name="Number_Of_Subsets" xml:space="preserve">
+    <value>Nombre de sous-ensembles</value>
+  </data>
+  <data name="Originating_Generating_Center" xml:space="preserve">
+    <value>Provenance/production Center</value>
+  </data>
+  <data name="Originating_Generating_sub_Center" xml:space="preserve">
+    <value>Provenance/génération Sub Center</value>
+  </data>
+  <data name="Precipitation" xml:space="preserve">
+    <value>Précipitations</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Pression </value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Réinitialisation</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoi</value>
+  </data>
+  <data name="Sending_Options" xml:space="preserve">
+    <value>Options d'envoi</value>
+  </data>
+  <data name="Sequence_Number" xml:space="preserve">
+    <value>Numéro de séquence </value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres </value>
+  </data>
+  <data name="Station" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Objet </value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Température </value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="View_Import_Export" xml:space="preserve">
+    <value>Vue/Import/Export</value>
+  </data>
+  <data name="Visibility" xml:space="preserve">
+    <value>Visibilité</value>
+  </data>
+  <data name="Wind" xml:space="preserve">
+    <value>Wind</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Année</value>
+  </data>
+  <data name="navigation-left" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-left.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="navigation-right" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-right.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="navigation-first" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-first.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="navigation-last" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\navigation-last.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>
