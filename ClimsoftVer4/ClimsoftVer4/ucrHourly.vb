@@ -304,6 +304,7 @@ Public Class ucrHourly
         Dim dtbl As DataTable
         Dim strLowerLimit As String = ""
         Dim strUpperLimit As String = ""
+        bTotalRequired = False
 
         clsDataDefinition = New DataCall
         clsDataDefinition.SetTableName("obselements")
@@ -312,12 +313,15 @@ Public Class ucrHourly
         dtbl = clsDataDefinition.GetDataTable()
         'get upper and lower limits
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-            strLowerLimit = dtbl.Rows(0).Item("lowerLimit")
-            strUpperLimit = dtbl.Rows(0).Item("upperLimit")
-            bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+            strLowerLimit = If(IsDBNull(dtbl.Rows(0).Item("lowerLimit")), "", dtbl.Rows(0).Item("lowerLimit"))
+            strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
+            'qcTotalRequired is a nullable integer in the EF model
+            If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
+                bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+            End If
         End If
 
-        For Each ctr As Control In Me.Controls
+            For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
 
@@ -376,8 +380,8 @@ Public Class ucrHourly
     ''' </summary>
     Public Function checkTotal() As Boolean
         Dim bValueCorrect As Boolean = False
-        Dim elemTotal As Integer = 0
-        Dim expectedTotal As Integer
+        Dim elemTotal As Decimal = 0
+        Dim expectedTotal As Decimal
 
         If bTotalRequired Then
             If ucrInputTotal.IsEmpty AndAlso Not IsValuesEmpty() Then

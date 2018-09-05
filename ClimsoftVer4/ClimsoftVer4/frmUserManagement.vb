@@ -181,6 +181,11 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_agro1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
                         '---
                         'Privileges on operational CLIMSOFT V4 test database
                         Sql = "GRANT FILE ON *.* TO '" & txtUserName.Text & "';"
@@ -271,7 +276,7 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
-                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".paperarchive TO '" & txtUserName.Text & "';"
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_agro1 TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
@@ -565,6 +570,10 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_agro1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
 
                         'Privileges on operational CLIMSOFT V4 test database
                         Sql = "GRANT FILE ON *.* TO '" & txtUserName.Text & "';"
@@ -660,6 +669,11 @@
                         'execute command
                         objCmd.ExecuteNonQuery()
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.paperarchive TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.form_agro1 TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
@@ -778,6 +792,10 @@
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_agro1 TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
 
                         'Privileges on operational CLIMSOFT V4 test database
                         Sql = "GRANT FILE ON *.* TO '" & txtUserName.Text & "';"
@@ -888,6 +906,10 @@
                         'execute command
                         objCmd.ExecuteNonQuery()
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".paperarchive TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".form_agro1 TO '" & txtUserName.Text & "';"
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
