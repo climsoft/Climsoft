@@ -123,7 +123,8 @@
     'TODO
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
-        Dim sql, userName As String
+        Dim sql As String
+        Dim userName As String
         userName = frmLogin.txtUsername.Text
         dsSourceTableName = "form_monthly"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
