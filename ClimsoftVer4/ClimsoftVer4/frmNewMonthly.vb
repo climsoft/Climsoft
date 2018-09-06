@@ -127,7 +127,7 @@
         userName = frmLogin.txtUsername.Text
         dsSourceTableName = "form_monthly"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
+            sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy;"
         Else
             sql = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
         End If
