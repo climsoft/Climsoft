@@ -48,6 +48,7 @@
         cboForms.Refresh()
         ' Table for Users records
         'sql = "Drop TABLE IF EXISTS `UserRecords`; " & _
+
         sql = "CREATE TABLE IF NOT EXISTS `UserRecords` ( " & _
               "`username` varchar(255) NOT NULL DEFAULT '', " & _
               "`recsdone` int(11) DEFAULT NULL, " & _

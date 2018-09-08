@@ -1,6 +1,12 @@
 ﻿Public Class frmNewMonthly
     Private bFirstLoad As Boolean = True
     Private Sub frmNewMonthly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
+
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False
@@ -117,11 +123,12 @@
     'TODO
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
-        Dim sql, userName As String
+        Dim sql As String
+        Dim userName As String
         userName = frmLogin.txtUsername.Text
         dsSourceTableName = "form_monthly"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
+            sql = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy;"
         Else
             sql = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
         End If
