@@ -105,14 +105,14 @@ Partial Class frmMainMenu
         'mnuInputKeyEntry
         '
         Me.mnuInputKeyEntry.Name = "mnuInputKeyEntry"
-        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(180, 24)
+        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(162, 24)
         Me.mnuInputKeyEntry.Tag = "Key_Entry"
         Me.mnuInputKeyEntry.Text = "Key Entry"
         '
         'mnuInputPaperArchive
         '
         Me.mnuInputPaperArchive.Name = "mnuInputPaperArchive"
-        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(180, 24)
+        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(162, 24)
         Me.mnuInputPaperArchive.Tag = "Paper_Archive"
         Me.mnuInputPaperArchive.Text = "Paper Archive"
         '
@@ -366,7 +366,8 @@ Partial Class frmMainMenu
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(388, 452)
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(393, 452)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 16)
         Me.Label5.TabIndex = 36
@@ -469,12 +470,12 @@ Partial Class frmMainMenu
         Me.cmdRedCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdRedCloseButton.FlatAppearance.BorderSize = 4
         Me.cmdRedCloseButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 393)
+        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 383)
         Me.cmdRedCloseButton.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdRedCloseButton.Name = "cmdRedCloseButton"
         Me.cmdRedCloseButton.Padding = New System.Windows.Forms.Padding(5)
         Me.cmdRedCloseButton.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdRedCloseButton.Size = New System.Drawing.Size(83, 59)
+        Me.cmdRedCloseButton.Size = New System.Drawing.Size(96, 69)
         Me.cmdRedCloseButton.TabIndex = 25
         Me.cmdRedCloseButton.UseCompatibleTextRendering = True
         Me.cmdRedCloseButton.UseVisualStyleBackColor = True

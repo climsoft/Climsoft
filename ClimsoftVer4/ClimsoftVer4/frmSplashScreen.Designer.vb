@@ -89,7 +89,7 @@ Partial Class frmSplashScreen
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(76, 27)
         Me.lblVersion.TabIndex = 6
-        Me.lblVersion.Text = "Version 4.0"
+        Me.lblVersion.Text = "Version 4.1"
         '
         'Timer1
         '
