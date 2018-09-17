@@ -319,4 +319,8 @@ Public Class frmMainMenu
     Private Sub frmMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
     End Sub
+
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+        frmElementSequencerMonthly.Show()
+    End Sub
 End Class
