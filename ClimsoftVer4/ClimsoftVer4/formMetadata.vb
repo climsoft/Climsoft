@@ -469,6 +469,14 @@ Public Class formMetadata
         txtStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
+        txtDegreesLat.Text = ""
+        txtMinutesLat.Text = ""
+        txtSecondsLat.Text = ""
+        lstNS.Text = ""
+        txtDegreesLon.Text = ""
+        txtMinutesLon.Text = ""
+        txtSecondsLon.Text = ""
+        lstEW.Text = ""
         txtstationId.Focus()
 
     End Sub
@@ -2018,7 +2026,7 @@ Err:
     End Sub
 
     Private Sub ClosingDate_TextChanged(sender As Object, e As EventArgs) Handles ClosingDate.TextChanged
-        txtClosingDate.Text = ClosingDate.Text
+        If DateValue(ClosingDate.Text) <> DateValue(Now()) Then txtClosingDate.Text = ClosingDate.Text
     End Sub
 
     Private Function DMSToDD(Direction As Char, Deg As String, Min As String, Sec As String) As String
