@@ -123,9 +123,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON " & dbnme & ".seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -225,9 +229,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -329,9 +337,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON " & dbnme & ".seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -427,9 +439,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -531,9 +547,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON " & dbnme & ".seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -633,9 +653,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -741,9 +765,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON " & dbnme & ".seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON " & dbnme & ".seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -862,9 +890,13 @@
                             objCmd.ExecuteNonQuery()
                             Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_daily_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_monthly_element TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT SELECT ON mariadb_climsoft_test_db_v4.seq_element TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
