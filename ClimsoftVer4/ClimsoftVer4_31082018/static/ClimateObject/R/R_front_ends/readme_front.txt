@@ -1,1 +1,0 @@
-This folder will contain methods related to R front end

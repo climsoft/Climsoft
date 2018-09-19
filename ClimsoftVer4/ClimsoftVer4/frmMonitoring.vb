@@ -19,61 +19,66 @@
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr
         conn.Open()
-        'Try
-        ' Get Users
-        sql = "Select * from climsoftusers;"
+        Try
+            ' Get Users
+            sql = "Select * from climsoftusers;"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        da.SelectCommand.CommandTimeout = 0
-        ds.Clear()
-        da.Fill(ds, "Users")
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "Users")
 
-        For kount = 0 To ds.Tables("Users").Rows.Count - 1
-            cboUser.Items.Add(ds.Tables("Users").Rows(kount).Item(0))
-        Next
-        cboUser.Items.Add("root")
-        cboUser.Refresh()
+            For kount = 0 To ds.Tables("Users").Rows.Count - 1
+                cboUser.Items.Add(ds.Tables("Users").Rows(kount).Item(0))
+            Next
+            cboUser.Items.Add("root")
+            cboUser.Refresh()
 
-        ' Get Key Entry forms
-        sql = "Select * from data_forms where selected =1;"
+            ' Get Key Entry forms
+            sql = "Select * from data_forms where selected =1;"
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        da.SelectCommand.CommandTimeout = 0
-        ds.Clear()
-        da.Fill(ds, "KeyEntryForms")
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "KeyEntryForms")
 
-        For kount = 0 To ds.Tables("KeyEntryForms").Rows.Count - 1
-            cboForms.Items.Add(ds.Tables("KeyEntryForms").Rows(kount).Item(2))
-        Next
-        cboForms.Refresh()
-        ' Table for Users records
-        'sql = "Drop TABLE IF EXISTS `UserRecords`; " & _
-        sql = "CREATE TABLE IF NOT EXISTS `UserRecords` ( " & _
-              "`username` varchar(255) NOT NULL DEFAULT '', " & _
-              "`recsdone` int(11) DEFAULT NULL, " & _
-              "`recsexpt` int(11) DEFAULT NULL, " & _
-              "`perform` int(11) DEFAULT NULL, " & _
-              "PRIMARY KEY (`username`));"
+            For kount = 0 To ds.Tables("KeyEntryForms").Rows.Count - 1
+                cboForms.Items.Add(ds.Tables("KeyEntryForms").Rows(kount).Item(2))
+            Next
+            cboForms.Refresh()
+            ' Table for Users records
+            'sql = "Drop TABLE IF EXISTS `UserRecords`; " & _
 
-        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-        qwry.CommandTimeout = 0
-        qwry.ExecuteNonQuery()
+            sql = "CREATE TABLE IF NOT EXISTS `userrecords` ( " &
+                  "`username` varchar(255) NOT NULL DEFAULT '', " &
+                  "`recsdone` int(11) DEFAULT NULL, " &
+                  "`recsexpt` int(11) DEFAULT NULL, " &
+                  "`perform` int(11) DEFAULT NULL, " &
+                  "PRIMARY KEY (`username`));"
 
-        ' Populate the table with users
-        sql = "INSERT IGNORE INTO userrecords ( userName ) SELECT climsoftusers.userName FROM climsoftusers;"
-        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-        qwry.CommandTimeout = 0
-        qwry.ExecuteNonQuery()
+            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry.CommandTimeout = 0
+            qwry.ExecuteNonQuery()
 
-        ' Add root user
-        sql = "INSERT IGNORE INTO `userrecords` (`username`) VALUES ('root');"
-        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-        qwry.CommandTimeout = 0
-        qwry.ExecuteNonQuery()
+            ' Populate the table with users
+            sql = "INSERT IGNORE INTO userrecords ( userName ) SELECT climsoftusers.userName FROM climsoftusers;"
+            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry.CommandTimeout = 0
+            qwry.ExecuteNonQuery()
 
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        'End Try
+            ' Add root user
+            sql = "INSERT IGNORE INTO `userrecords` (`username`) VALUES ('root');"
+            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qwry.CommandTimeout = 0
+            qwry.ExecuteNonQuery()
+
+        Catch ex As Exception
+            If ex.HResult = -2147467259 Then
+                Me.Close()
+            Else
+                MsgBox(ex.Message)
+            End If
+        End Try
     End Sub
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click

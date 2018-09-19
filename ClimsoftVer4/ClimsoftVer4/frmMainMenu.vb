@@ -99,7 +99,7 @@ Public Class frmMainMenu
                     cmdKeyEntry.Enabled = False
                     cmdPaperArchive.Enabled = False
                     cmdProducts.Enabled = False
-
+                    cmdMetadata.Enabled = False
                 End If
             End If
         Catch ex As Exception
@@ -314,5 +314,13 @@ Public Class frmMainMenu
             .Show()
         End With
 
+    End Sub
+
+    Private Sub frmMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        End
+    End Sub
+
+    Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
+        frmElementSequencerMonthly.Show()
     End Sub
 End Class

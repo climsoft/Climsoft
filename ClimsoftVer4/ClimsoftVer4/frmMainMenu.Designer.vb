@@ -47,6 +47,7 @@ Partial Class frmMainMenu
         Me.SequencerConfigurationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FormHourlyTimeSelectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -105,14 +106,14 @@ Partial Class frmMainMenu
         'mnuInputKeyEntry
         '
         Me.mnuInputKeyEntry.Name = "mnuInputKeyEntry"
-        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(180, 24)
+        Me.mnuInputKeyEntry.Size = New System.Drawing.Size(162, 24)
         Me.mnuInputKeyEntry.Tag = "Key_Entry"
         Me.mnuInputKeyEntry.Text = "Key Entry"
         '
         'mnuInputPaperArchive
         '
         Me.mnuInputPaperArchive.Name = "mnuInputPaperArchive"
-        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(180, 24)
+        Me.mnuInputPaperArchive.Size = New System.Drawing.Size(162, 24)
         Me.mnuInputPaperArchive.Tag = "Paper_Archive"
         Me.mnuInputPaperArchive.Text = "Paper Archive"
         '
@@ -256,7 +257,7 @@ Partial Class frmMainMenu
         '
         'SequencerConfigurationToolStripMenuItem
         '
-        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem})
+        Me.SequencerConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HourlyToolStripMenuItem, Me.DailyToolStripMenuItem, Me.MonthlyToolStripMenuItem})
         Me.SequencerConfigurationToolStripMenuItem.Name = "SequencerConfigurationToolStripMenuItem"
         Me.SequencerConfigurationToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.SequencerConfigurationToolStripMenuItem.Text = "Sequencer Configuration"
@@ -264,14 +265,20 @@ Partial Class frmMainMenu
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(119, 24)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.HourlyToolStripMenuItem.Text = "Daily"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(119, 24)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.DailyToolStripMenuItem.Text = "Hourly"
+        '
+        'MonthlyToolStripMenuItem
+        '
+        Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
         '
@@ -366,7 +373,8 @@ Partial Class frmMainMenu
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(388, 452)
+        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.Location = New System.Drawing.Point(393, 436)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 16)
         Me.Label5.TabIndex = 36
@@ -401,7 +409,7 @@ Partial Class frmMainMenu
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(555, 431)
+        Me.Label8.Location = New System.Drawing.Point(555, 436)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(133, 16)
         Me.Label8.TabIndex = 32
@@ -469,12 +477,12 @@ Partial Class frmMainMenu
         Me.cmdRedCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdRedCloseButton.FlatAppearance.BorderSize = 4
         Me.cmdRedCloseButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 393)
+        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 364)
         Me.cmdRedCloseButton.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdRedCloseButton.Name = "cmdRedCloseButton"
         Me.cmdRedCloseButton.Padding = New System.Windows.Forms.Padding(5)
         Me.cmdRedCloseButton.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdRedCloseButton.Size = New System.Drawing.Size(83, 59)
+        Me.cmdRedCloseButton.Size = New System.Drawing.Size(96, 69)
         Me.cmdRedCloseButton.TabIndex = 25
         Me.cmdRedCloseButton.UseCompatibleTextRendering = True
         Me.cmdRedCloseButton.UseVisualStyleBackColor = True
@@ -503,7 +511,7 @@ Partial Class frmMainMenu
         Me.cmdMetadata.FlatAppearance.BorderSize = 4
         Me.cmdMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdMetadata.ForeColor = System.Drawing.Color.Red
-        Me.cmdMetadata.Location = New System.Drawing.Point(558, 355)
+        Me.cmdMetadata.Location = New System.Drawing.Point(558, 360)
         Me.cmdMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdMetadata.Name = "cmdMetadata"
         Me.cmdMetadata.Padding = New System.Windows.Forms.Padding(5)
@@ -705,4 +713,5 @@ Partial Class frmMainMenu
     Friend WithEvents UpdateObservationsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
 End Class

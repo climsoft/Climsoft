@@ -101,6 +101,7 @@ Public Class formMetadata
 
                 SetDataSet("stationelement")
                 rec = 0
+
                 populateStationElement("stationelement", rec, Kount)
             Case 3 ' Instrument
                 FillList(txtInstrStn, "station", "stationId")
@@ -130,6 +131,7 @@ Public Class formMetadata
                 FillList(txtFeatureStation, "station", "stationId")
                 SetDataSet("physicalfeature")
                 rec = 0
+
                 populatePhysicalFeature("physicalfeature", rec, Kount)
             Case 8 ' Paper Archive
                 SetDataSet("paperarchivedefinition")
@@ -327,6 +329,10 @@ Public Class formMetadata
         metadfrm.pfeature = ds.Tables(frm).Rows(num).Item("description")
 
         SetDataSet("physicalfeatureclass")
+
+        ' Reset the maximum records to physicalfeature table
+        Kount = maxRows
+
         txtFeatureClassDescription.Text = ds.Tables("physicalfeatureclass").Rows(1).Item("description")
 
         If maxRows > 0 Then txtNav6.Text = rec + 1 & " of " & maxRows
@@ -336,6 +342,7 @@ Public Class formMetadata
 
         metadfrm.pclass = txtFeatureClass.Text
         metadfrm.pfile = txtImageFile.Text
+
 
     End Sub
     Sub populatePaperArchiveDefinition(frm As String, num As Integer, maxRows As Integer)
@@ -462,6 +469,14 @@ Public Class formMetadata
         txtStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
+        txtDegreesLat.Text = ""
+        txtMinutesLat.Text = ""
+        txtSecondsLat.Text = ""
+        lstNS.Text = ""
+        txtDegreesLon.Text = ""
+        txtMinutesLon.Text = ""
+        txtSecondsLon.Text = ""
+        lstEW.Text = ""
         txtstationId.Focus()
 
     End Sub
@@ -564,7 +579,7 @@ Public Class formMetadata
         Else
             'TableUpdate(rec, "update")
 
-            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" & _
+            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
                 ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', qualifier = '" & txtStationType.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
             'MsgBox(sql)
@@ -817,6 +832,8 @@ Err:
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dstn.Clear()
         da.Fill(dstn, tbl)
+
+        lst.Items.Clear()
 
         For i = 0 To dstn.Tables(tbl).Rows.Count - 1
             lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
@@ -1547,7 +1564,7 @@ Err:
         Dim stn0, ecode0, icode0, bdate0 As String
 
         Try
-   
+
             stn = "= '" & metadfrm.seStn & "'"
             ecode = "= '" & metadfrm.Eecode & "'"
             icode = "= '" & metadfrm.Iecode & "'"
@@ -1584,7 +1601,7 @@ Err:
                 bdate0 = "'" & txtBeginDate.Text & "'"
             End If
 
-            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " & _
+            sql = "Update stationelement set recordedFrom = " & stn0 & ",describedBy=" & ecode0 & ", recordedWith =" & icode0 & ", instrumentcode='" & txtInstrumentCode.Text & "', scheduledFor='" & txtScheduleClass.Text & "', height='" & txtHeight.Text & "', beginDate=" & bdate0 & ", endDate='" & txtEndate.Text & "' " &
                  "where recordedFrom " & stn & "  AND describedBy " & ecode & "  AND recordedWith " & icode & "  AND beginDate " & bdate & ";"
 
             'MsgBox(sql)
@@ -1760,6 +1777,7 @@ Err:
     End Sub
 
     Private Sub cmdNext6_Click(sender As Object, e As EventArgs) Handles cmdNext6.Click
+
         If rec < Kount - 1 Then
             rec = rec + 1
             populatePhysicalFeature("physicalfeature", rec, Kount)
@@ -1804,8 +1822,8 @@ Err:
             'Geographical accuracy field can only be umeric or Null
             If Not IsNumeric(txtAccuracy.Text) Then G_accuracy = ",geoLocationAccuracy= Null"
 
-            sql = "Update stationlocationhistory set " & _
-                   "belongsTo = '" & txtlocStn.Text & "',stationType= '" & txtStnType.Text & "',geoLocationMethod= '" & txtMethod.Text & "'" & G_accuracy & ",openingDatetime='" & txtOpDate.Text & "',closingDatetime='" & txtClosDate.Text & "',latitude = '" & txtLat.Text & "',longitude = '" & txtLon.Text & "',elevation = '" & txtElev.Text & "',authority= '" & txtAuth.Text & "',adminRegion= '" & txtAdmin.Text & "',drainageBasin= '" & txtDrgBasin.Text & "'" & _
+            sql = "Update stationlocationhistory set " &
+                   "belongsTo = '" & txtlocStn.Text & "',stationType= '" & txtStnType.Text & "',geoLocationMethod= '" & txtMethod.Text & "'" & G_accuracy & ",openingDatetime='" & txtOpDate.Text & "',closingDatetime='" & txtClosDate.Text & "',latitude = '" & txtLat.Text & "',longitude = '" & txtLon.Text & "',elevation = '" & txtElev.Text & "',authority= '" & txtAuth.Text & "',adminRegion= '" & txtAdmin.Text & "',drainageBasin= '" & txtDrgBasin.Text & "'" &
                   " where belongsTo = '" & txtlocStn.Text & "' and openingDatetime = '" & txtOpDate.Text & "';"
             'MsgBox(sql)
 
@@ -2008,7 +2026,7 @@ Err:
     End Sub
 
     Private Sub ClosingDate_TextChanged(sender As Object, e As EventArgs) Handles ClosingDate.TextChanged
-        txtClosingDate.Text = ClosingDate.Text
+        If DateValue(ClosingDate.Text) <> DateValue(Now()) Then txtClosingDate.Text = ClosingDate.Text
     End Sub
 
     Private Function DMSToDD(Direction As Char, Deg As String, Min As String, Sec As String) As String
