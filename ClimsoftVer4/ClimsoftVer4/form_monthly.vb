@@ -51,5 +51,6 @@ Partial Public Class form_monthly
     Public Property period11 As String
     Public Property period12 As String
     Public Property signature As String
+    Public Property entryDatetime As Nullable(Of Date)
 
 End Class

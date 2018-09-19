@@ -89,9 +89,6 @@ Partial Public Class form_synoptic_2_ra1
     Public Property Flag169 As String
     Public Property Flag170 As String
     Public Property Flag171 As String
-    Public Property Flag178 As String
-    Public Property Flag179 As String
-    Public Property Flag180 As String
     Public Property Flag119 As String
     Public Property Flag116 As String
     Public Property Flag117 As String
