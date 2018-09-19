@@ -664,9 +664,6 @@
     <Compile Include="frmViewImage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="gap.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="instrument.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -775,10 +772,14 @@
     <Compile Include="sdgFilter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ClsShiftCells.vb" />
     <Compile Include="seq_daily_element.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="seq_element.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="seq_monthly_element.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="seq_month_day.vb">
@@ -799,7 +800,6 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClsShiftCells.vb" />
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -916,6 +916,9 @@
     </Compile>
     <Compile Include="ucrYearSelector.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userrecord.vb">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

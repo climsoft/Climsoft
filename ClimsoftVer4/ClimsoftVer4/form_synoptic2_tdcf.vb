@@ -107,5 +107,6 @@ Partial Public Class form_synoptic2_tdcf
     Public Property flag44 As String
     Public Property flag45 As String
     Public Property signature As String
+    Public Property entryDatetime As Nullable(Of Date)
 
 End Class
