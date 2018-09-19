@@ -464,8 +464,10 @@ Public Class formMetadata
         txtDrainageBasin.Clear()
         txtgeoAccuracy.Clear()
         txtgeoMethod.Clear()
-        OpenDate.Text = ""
-        ClosingDate.Text = ""
+        'OpenDate.Text = ""
+        'ClosingDate.Text = ""
+        txtOpeningDate.Text = ""
+        txtClosingDate.Text = ""
         txtStationType.Text = ""
         txtStationOperation.CheckState = CheckState.Unchecked
         txtRecNumber.Clear()
