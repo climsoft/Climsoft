@@ -72,10 +72,9 @@
 
         For i = 0 To lstvForms.Items.Count - 1
             If lstvForms.Items(i).Checked = True Then
-
-                sql = "UPDATE data_forms SET selected = 1, entry_mode = '" & lstvForms.Items(i).SubItems(2).Text & "' WHERE form_name = '" & lstvForms.Items(i).SubItems(1).Text & "';"
+                sql = "UPDATE data_forms SET selected = 1 WHERE form_name = '" & lstvForms.Items(i).SubItems(0).Text & "';"
             Else
-                sql = "UPDATE data_forms set SELECTED = 0, entry_mode = '" & Strings.Right(lstvForms.Items(i).Text, 1) & "' WHERE form_name = '" & lstvForms.Items(i).Text & "';"
+                sql = "UPDATE data_forms set SELECTED = 0 WHERE form_name = '" & lstvForms.Items(i).SubItems(0).Text & "';"
             End If
 
             cmd.CommandText = sql

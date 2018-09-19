@@ -3,6 +3,12 @@
     Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub frmNewHourly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
+        If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
+            btnDelete.Enabled = False
+            btnUpload.Enabled = False
+        End If
+
         If bFirstLoad Then
             InitaliseDialog()
             bFirstLoad = False

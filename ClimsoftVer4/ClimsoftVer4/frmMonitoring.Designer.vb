@@ -68,6 +68,8 @@ Partial Class frmMonitoring
         Me.cboForms = New System.Windows.Forms.ComboBox()
         Me.TabSettings = New System.Windows.Forms.TabPage()
         Me.grpSettings = New System.Windows.Forms.GroupBox()
+        Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
+        Me.lblSingleEntryMode = New System.Windows.Forms.Label()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.optTargets = New System.Windows.Forms.RadioButton()
         Me.cmdUpdate = New System.Windows.Forms.Button()
@@ -77,8 +79,6 @@ Partial Class frmMonitoring
         Me.lblRecords = New System.Windows.Forms.Label()
         Me.lblTrecs = New System.Windows.Forms.Label()
         Me.cmdClose = New System.Windows.Forms.Button()
-        Me.lblSingleEntryMode = New System.Windows.Forms.Label()
-        Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.TabMonitoring.SuspendLayout()
         Me.TabUsrRecords.SuspendLayout()
@@ -569,6 +569,26 @@ Partial Class frmMonitoring
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Settings"
         '
+        'lblDoubleEntryMode
+        '
+        Me.lblDoubleEntryMode.AutoSize = True
+        Me.lblDoubleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDoubleEntryMode.Location = New System.Drawing.Point(29, 101)
+        Me.lblDoubleEntryMode.Name = "lblDoubleEntryMode"
+        Me.lblDoubleEntryMode.Size = New System.Drawing.Size(116, 13)
+        Me.lblDoubleEntryMode.TabIndex = 15
+        Me.lblDoubleEntryMode.Text = "1 for Double Key Entry "
+        '
+        'lblSingleEntryMode
+        '
+        Me.lblSingleEntryMode.AutoSize = True
+        Me.lblSingleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSingleEntryMode.Location = New System.Drawing.Point(29, 84)
+        Me.lblSingleEntryMode.Name = "lblSingleEntryMode"
+        Me.lblSingleEntryMode.Size = New System.Drawing.Size(116, 13)
+        Me.lblSingleEntryMode.TabIndex = 14
+        Me.lblSingleEntryMode.Text = "0 for Single Data Entry "
+        '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
@@ -656,26 +676,6 @@ Partial Class frmMonitoring
         Me.cmdClose.TabIndex = 13
         Me.cmdClose.Text = "Close"
         Me.cmdClose.UseVisualStyleBackColor = True
-        '
-        'lblSingleEntryMode
-        '
-        Me.lblSingleEntryMode.AutoSize = True
-        Me.lblSingleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSingleEntryMode.Location = New System.Drawing.Point(29, 84)
-        Me.lblSingleEntryMode.Name = "lblSingleEntryMode"
-        Me.lblSingleEntryMode.Size = New System.Drawing.Size(116, 13)
-        Me.lblSingleEntryMode.TabIndex = 14
-        Me.lblSingleEntryMode.Text = "0 for Single Data Entry "
-        '
-        'lblDoubleEntryMode
-        '
-        Me.lblDoubleEntryMode.AutoSize = True
-        Me.lblDoubleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDoubleEntryMode.Location = New System.Drawing.Point(29, 101)
-        Me.lblDoubleEntryMode.Name = "lblDoubleEntryMode"
-        Me.lblDoubleEntryMode.Size = New System.Drawing.Size(116, 13)
-        Me.lblDoubleEntryMode.TabIndex = 15
-        Me.lblDoubleEntryMode.Text = "1 for Double Key Entry "
         '
         'cmdHelp
         '
