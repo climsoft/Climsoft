@@ -66,5 +66,6 @@ Partial Public Class form_hourly
     Public Property flag23 As String
     Public Property total As String
     Public Property signature As String
+    Public Property EntryDatetime As String
 
 End Class

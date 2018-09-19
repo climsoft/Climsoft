@@ -89,5 +89,6 @@ Partial Public Class form_hourlywind
     Public Property elem_111_23 As String
     Public Property total As String
     Public Property signature As String
+    Public Property entryDatetime As Nullable(Of Date)
 
 End Class
