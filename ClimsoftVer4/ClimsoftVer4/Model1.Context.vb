@@ -10,8 +10,6 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
-Imports System.Data.Entity.Core.Objects
-Imports System.Linq
 
 Partial Public Class mariadb_climsoft_test_db_v4Entities
     Inherits DbContext
@@ -54,7 +52,6 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property form_monthly() As DbSet(Of form_monthly)
     Public Overridable Property form_synoptic_2_ra1() As DbSet(Of form_synoptic_2_ra1)
     Public Overridable Property form_synoptic2_tdcf() As DbSet(Of form_synoptic2_tdcf)
-    Public Overridable Property gaps() As DbSet(Of gap)
     Public Overridable Property instruments() As DbSet(Of instrument)
     Public Overridable Property instrumentfaultreports() As DbSet(Of instrumentfaultreport)
     Public Overridable Property language_translation() As DbSet(Of language_translation)
@@ -75,11 +72,13 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property seq_month_day_leap_yr() As DbSet(Of seq_month_day_leap_yr)
     Public Overridable Property seq_month_day_synoptime() As DbSet(Of seq_month_day_synoptime)
     Public Overridable Property seq_month_day_synoptime_leap_yr() As DbSet(Of seq_month_day_synoptime_leap_yr)
+    Public Overridable Property seq_monthly_element() As DbSet(Of seq_monthly_element)
     Public Overridable Property stations() As DbSet(Of station)
     Public Overridable Property stationnetworkdefinitions() As DbSet(Of stationnetworkdefinition)
     Public Overridable Property synopfeatures() As DbSet(Of synopfeature)
     Public Overridable Property tblproducts() As DbSet(Of tblproduct)
     Public Overridable Property tm_307091() As DbSet(Of tm_307091)
+    Public Overridable Property userrecords() As DbSet(Of userrecord)
     Public Overridable Property abcs() As DbSet(Of abc)
     Public Overridable Property aws_malawi12() As DbSet(Of aws_malawi12)
     Public Overridable Property aws1() As DbSet(Of aws1)
@@ -91,37 +90,5 @@ Partial Public Class mariadb_climsoft_test_db_v4Entities
     Public Overridable Property physicalfeatures() As DbSet(Of physicalfeature)
     Public Overridable Property seq_month_day_element() As DbSet(Of seq_month_day_element)
     Public Overridable Property seq_month_day_element_leap_yr() As DbSet(Of seq_month_day_element_leap_yr)
-
-    Public Overridable Function find_gaps(stn As String, elm As Nullable(Of Integer), opening_Date As Nullable(Of Date), closing_Date As Nullable(Of Date)) As Integer
-        Dim stnParameter As ObjectParameter = If(stn IsNot Nothing, New ObjectParameter("Stn", stn), New ObjectParameter("Stn", GetType(String)))
-
-        Dim elmParameter As ObjectParameter = If(elm.HasValue, New ObjectParameter("Elm", elm), New ObjectParameter("Elm", GetType(Integer)))
-
-        Dim opening_DateParameter As ObjectParameter = If(opening_Date.HasValue, New ObjectParameter("Opening_Date", opening_Date), New ObjectParameter("Opening_Date", GetType(Date)))
-
-        Dim closing_DateParameter As ObjectParameter = If(closing_Date.HasValue, New ObjectParameter("Closing_Date", closing_Date), New ObjectParameter("Closing_Date", GetType(Date)))
-
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("find_gaps", stnParameter, elmParameter, opening_DateParameter, closing_DateParameter)
-    End Function
-
-    Public Overridable Function gather_stats(stn As String, elm As Nullable(Of Integer), opening_Date As Nullable(Of Date), closing_Date As Nullable(Of Date)) As Integer
-        Dim stnParameter As ObjectParameter = If(stn IsNot Nothing, New ObjectParameter("Stn", stn), New ObjectParameter("Stn", GetType(String)))
-
-        Dim elmParameter As ObjectParameter = If(elm.HasValue, New ObjectParameter("Elm", elm), New ObjectParameter("Elm", GetType(Integer)))
-
-        Dim opening_DateParameter As ObjectParameter = If(opening_Date.HasValue, New ObjectParameter("Opening_Date", opening_Date), New ObjectParameter("Opening_Date", GetType(Date)))
-
-        Dim closing_DateParameter As ObjectParameter = If(closing_Date.HasValue, New ObjectParameter("Closing_Date", closing_Date), New ObjectParameter("Closing_Date", GetType(Date)))
-
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("gather_stats", stnParameter, elmParameter, opening_DateParameter, closing_DateParameter)
-    End Function
-
-    Public Overridable Function refresh_data() As Integer
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("refresh_data")
-    End Function
-
-    Public Overridable Function refresh_gaps() As Integer
-        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("refresh_gaps")
-    End Function
 
 End Class

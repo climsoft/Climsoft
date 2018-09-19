@@ -10,9 +10,8 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class gap
-    Public Property Missing_STNID As String
-    Public Property Missing_ELEM As Long
-    Public Property Missing_Date As Date
+Partial Public Class seq_monthly_element
+    Public Property seq As Long
+    Public Property elementId As Long
 
 End Class
