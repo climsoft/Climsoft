@@ -155,17 +155,19 @@ Public Class ucrFormDaily2
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         Dim ucrText As ucrTextBox
-        If TypeOf sender Is ucrTextBox Then
-            ucrText = DirectCast(sender, ucrTextBox)
-            CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
-        ElseIf TypeOf sender Is ucrDataLinkCombobox Then
-            For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                'overwrite the specific unit value
-                If sender Is kvpTemp.Value Then
-                    CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
-                    Exit For
-                End If
-            Next
+        If fd2Record IsNot Nothing Then
+            If TypeOf sender Is ucrTextBox Then
+                ucrText = DirectCast(sender, ucrTextBox)
+                CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
+            ElseIf TypeOf sender Is ucrDataLinkCombobox Then
+                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
+                    'overwrite the specific unit value
+                    If sender Is kvpTemp.Value Then
+                        CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+                        Exit For
+                    End If
+                Next
+            End If
         End If
     End Sub
 
@@ -252,12 +254,12 @@ Public Class ucrFormDaily2
     End Sub
 
     Public Sub SaveRecord()
-        'This is determined by the current user not set from the form
-        fd2Record.signature = frmLogin.txtUsername.Text
-
         If bUpdating Then
             clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Modified
         Else
+            'This is determined by the current user not set from the form
+            fd2Record.signature = frmLogin.txtUsername.Text
+            fd2Record.EntryDatetime = Date.Now()
             clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Added
         End If
 
