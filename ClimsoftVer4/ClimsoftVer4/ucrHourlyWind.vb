@@ -189,12 +189,12 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SaveRecord()
-        'This is determined by the current user not set from the form
-        fhourlyWindRecord.signature = frmLogin.txtUsername.Text
-
         If bUpdating Then
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
         Else
+            'This is determined by the current user not set from the form
+            fhourlyWindRecord.signature = frmLogin.txtUsername.Text
+            fhourlyWindRecord.entryDatetime = Date.Now()
             clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
         End If
 

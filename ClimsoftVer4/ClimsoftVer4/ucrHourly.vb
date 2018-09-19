@@ -212,12 +212,12 @@ Public Class ucrHourly
     End Sub
 
     Public Sub SaveRecord()
-        'This is determined by the current user not set from the form
-        fhRecord.signature = frmLogin.txtUsername.Text
-
         If bUpdating Then
             clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Modified
         Else
+            'This is determined by the current user not set from the form
+            fhRecord.signature = frmLogin.txtUsername.Text
+            fhRecord.EntryDatetime = Date.Now()
             clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Added
         End If
 

@@ -1,5 +1,6 @@
 ﻿Public Class frmNewMonthly
     Private bFirstLoad As Boolean = True
+
     Private Sub frmNewMonthly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
         If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
@@ -16,7 +17,7 @@
 
     Private Sub InitaliseDialog()
         txtSequencer.ReadOnly = True
-        txtSequencer.Text = "seq_year"
+        txtSequencer.Text = "seq_monthly_element"
 
         ucrMonthlydata.SetKeyControls(ucrStationSelector, ucrElementSelector, ucrYearSelector, ucrNavigation)
 
@@ -33,7 +34,7 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        dctSequencerFields.Add("yyyy", New List(Of String)({"Year"}))
+        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
         ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields)
         ucrMonthlydata.Focus()
     End Sub
