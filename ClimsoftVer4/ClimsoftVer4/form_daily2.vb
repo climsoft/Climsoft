@@ -111,7 +111,7 @@ Partial Public Class form_daily2
     Public Property period31 As String
     Public Property total As String
     Public Property signature As String
-    Public Property EntryDatetime As String
+    Public Property EntryDatetime As Nullable(Of Date)
     Public Property temperatureUnits As String
     Public Property precipUnits As String
     Public Property cloudHeightUnits As String
