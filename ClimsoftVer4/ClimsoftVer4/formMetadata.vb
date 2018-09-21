@@ -935,7 +935,7 @@ Err:
         formDataView.DataGridView.DataSource = dstn
         formDataView.DataGridView.DataMember = tbl
         formDataView.DataGridView.Refresh()
-
+        formDataView.grpSearch.Visible = False
         formDataView.DataGridView.Dock = DockStyle.Top
 
     End Sub

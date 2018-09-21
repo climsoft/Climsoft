@@ -245,7 +245,7 @@
                 cboDay.Text = ds.Tables("formAgro1").Rows(inc).Item("dd")
 
                 'Initialize textboxes for observation values
-                'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
+                'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
                 For m = 4 To 37
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
@@ -257,7 +257,7 @@
                 Next m
 
                 'Initialize textboxes for observation flags
-                'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
+                'Observation flags range from column 38 i.e. column index 37 to column 72 i.e. column index 71
                 For m = 38 To 71
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
@@ -710,8 +710,8 @@
                 ds.Tables("formAgro1").Rows(inc).Item("entryDatetime") = Now()
 
                 'Commit observation values to database
-                'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-                For m = 5 To 53
+                'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
+                For m = 4 To 38
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
@@ -720,8 +720,8 @@
                 Next m
 
                 'Commit observation flags to database
-                'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-                For m = 54 To 102
+                'Observation Flags range from column 39 i.e. column index 38 to column 72 i.e. column index 71
+                For m = 39 To 71
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
