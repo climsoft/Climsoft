@@ -1020,7 +1020,7 @@ Partial Class formMetadata
         'lblClosingdate
         '
         Me.lblClosingdate.AutoSize = True
-        Me.lblClosingdate.Location = New System.Drawing.Point(399, 227)
+        Me.lblClosingdate.Location = New System.Drawing.Point(400, 227)
         Me.lblClosingdate.Name = "lblClosingdate"
         Me.lblClosingdate.Size = New System.Drawing.Size(67, 13)
         Me.lblClosingdate.TabIndex = 47
@@ -1029,11 +1029,11 @@ Partial Class formMetadata
         'lblOpendate
         '
         Me.lblOpendate.AutoSize = True
-        Me.lblOpendate.Location = New System.Drawing.Point(399, 201)
+        Me.lblOpendate.Location = New System.Drawing.Point(400, 201)
         Me.lblOpendate.Name = "lblOpendate"
-        Me.lblOpendate.Size = New System.Drawing.Size(59, 13)
+        Me.lblOpendate.Size = New System.Drawing.Size(73, 13)
         Me.lblOpendate.TabIndex = 46
-        Me.lblOpendate.Text = "Open Date"
+        Me.lblOpendate.Text = "Opening Date"
         '
         'lblGeoAccuracy
         '

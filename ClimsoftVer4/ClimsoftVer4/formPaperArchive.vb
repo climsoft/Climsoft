@@ -852,8 +852,8 @@ Err:
         'frmViewImage.picView.ImageLocation = txtImageFile.Text
         'frmViewImage.picView.Refresh()
         'frmViewImage.Show()
-
-        ImageZoom(PicForm.ImageLocation)
+        ShowImage(PicForm.ImageLocation)
+        'ImageZoom(PicForm.ImageLocation)
     End Sub
 
     Private Sub lblMessages_Click(sender As Object, e As EventArgs) Handles lblMessages.Click

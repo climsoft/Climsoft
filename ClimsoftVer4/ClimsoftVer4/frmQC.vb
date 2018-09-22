@@ -374,8 +374,8 @@ Public Class frmQC
                 'OutputQCReport(210, qcReportsFolderWindows & "\qc_values_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv")
                 OutputQCReport(210, QcReportFile)
 
-                msgTxtQCReportsOutUpperLimits = "QC upper limits report saved to: "
-                MsgBox(msgTxtQCReportsOutUpperLimits & QcReportFile, MsgBoxStyle.Information)
+                'msgTxtQCReportsOutUpperLimits = "QC upper limits report saved to: "
+                'MsgBox(msgTxtQCReportsOutUpperLimits & QcReportFile, MsgBoxStyle.Information)
 
 
             Catch ex As Exception
@@ -430,9 +430,9 @@ Public Class frmQC
                 ' Output QC Report
                 OutputQCReport(211, QcReportFile)
 
-                msgTxtQCReportsOutLowerLimits = "QC lower limits report saved to: "
-                'MsgBox(msgTxtQCReportsOutLowerLimits & qcReportsFolderWindows & "\qc_values_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
-                MsgBox(msgTxtQCReportsOutLowerLimits & QcReportFile, MsgBoxStyle.Information)
+                'msgTxtQCReportsOutLowerLimits = "QC lower limits report saved to: "
+                ''MsgBox(msgTxtQCReportsOutLowerLimits & qcReportsFolderWindows & "\qc_values_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
+                'MsgBox(msgTxtQCReportsOutLowerLimits & QcReportFile, MsgBoxStyle.Information)
 
 
                 'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -610,6 +610,12 @@ Public Class frmQC
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "qcabslimits")
             x = ds.Tables("qcabslimits").Rows.Count
+
+            ' Not to proceed if no QC data to output
+            If x = 0 Then
+                MsgBox("No QC errors found")
+                Exit Sub
+            End If
 
             ' Output Headers
             hder = ds.Tables("qcabslimits").Columns(0).ColumnName
