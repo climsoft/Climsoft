@@ -30,8 +30,8 @@ Partial Class frmViewImage
         '
         Me.picView.Location = New System.Drawing.Point(12, 12)
         Me.picView.Name = "picView"
-        Me.picView.Size = New System.Drawing.Size(596, 467)
-        Me.picView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picView.Size = New System.Drawing.Size(848, 625)
+        Me.picView.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picView.TabIndex = 0
         Me.picView.TabStop = False
         '

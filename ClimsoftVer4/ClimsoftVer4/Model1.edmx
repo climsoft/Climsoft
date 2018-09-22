@@ -611,7 +611,7 @@ warning 6002: The table/view 'def.mariadb_climsoft_test_db_v4.featuregeographica
           <Property Name="period31" Type="varchar" MaxLength="45" />
           <Property Name="total" Type="varchar" MaxLength="45" />
           <Property Name="signature" Type="varchar" MaxLength="45" />
-          <Property Name="EntryDatetime" Type="varchar" MaxLength="45" />
+          <Property Name="EntryDatetime" Type="datetime" Precision="0" />
           <Property Name="temperatureUnits" Type="varchar" MaxLength="45" />
           <Property Name="precipUnits" Type="varchar" MaxLength="45" />
           <Property Name="cloudHeightUnits" Type="varchar" MaxLength="45" />
@@ -680,7 +680,7 @@ warning 6002: The table/view 'def.mariadb_climsoft_test_db_v4.featuregeographica
           <Property Name="flag23" Type="varchar" MaxLength="50" />
           <Property Name="total" Type="varchar" MaxLength="50" />
           <Property Name="signature" Type="varchar" MaxLength="50" />
-          <Property Name="EntryDatetime" Type="varchar" MaxLength="50" />
+          <Property Name="EntryDatetime" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="form_hourly_time_selection">
           <Key>
@@ -2625,7 +2625,7 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <Property Name="period31" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="total" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="signature" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="EntryDatetime" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDatetime" Type="DateTime" />
           <Property Name="temperatureUnits" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="precipUnits" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="cloudHeightUnits" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
@@ -2694,7 +2694,7 @@ FROM `seq_month_day_element_leap_yr` AS `seq_month_day_element_leap_yr`</Definin
           <Property Name="flag23" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="signature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EntryDatetime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryDatetime" Type="DateTime" />
         </EntityType>
         <EntityType Name="form_hourly_time_selection">
           <Key>

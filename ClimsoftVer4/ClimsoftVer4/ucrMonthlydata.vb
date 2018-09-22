@@ -166,12 +166,12 @@ Public Class ucrMonthlydata
     End Sub
 
     Public Sub SaveRecord()
-        'This is determined by the current user not set from the form
-        fmonthlyRecord.signature = frmLogin.txtUsername.Text
-
         If bUpdating Then
             clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Modified
         Else
+            'This is determined by the current user not set from the form
+            fmonthlyRecord.signature = frmLogin.txtUsername.Text
+            fmonthlyRecord.entryDatetime = Date.Now()
             clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Added
         End If
 

@@ -100,31 +100,48 @@
             ListViewRecs.Columns.Add("Login", 120, HorizontalAlignment.Left)
             ListViewRecs.Columns.Add("Station", 80, HorizontalAlignment.Left)
             ListViewRecs.Columns.Add("Year", 60, HorizontalAlignment.Left)
-            ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Left)
+            ListViewRecs.Columns.Add("Month/Code", 80, HorizontalAlignment.Left)
             ListViewRecs.Columns.Add("Form", 150, HorizontalAlignment.Left)
             ListViewRecs.Columns.Add("Entry DateTime", 200, HorizontalAlignment.Left)
 
             For i = 0 To cboForms.Items.Count - 1
 
                 If optUsers.Checked Then
-                    sql = "SELECT signature as Login, stationId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " & _
-                         "GROUP BY signature, stationId, yyyy, mm, entryDatetime " & _
-                        "HAVING signature= '" & cboUser.Text & "' AND entryDatetime Between '" & dts & "' And '" & dte & "' " & _
+                    sql = "SELECT signature as Login, stationId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                         "GROUP BY signature, stationId, yyyy, mm, entryDatetime " &
+                        "HAVING signature= '" & cboUser.Text & "' AND entryDatetime Between '" & dts & "' And '" & dte & "' " &
                         "ORDER BY entryDatetime;"
+
+                    ' form_monthly is a pecial case since it has no mm field
+                    If cboForms.Items(i) = "form_monthly" Then
+                        sql = "SELECT signature as Login, stationId, yyyy as Year, elementId as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                             "GROUP BY signature, stationId, yyyy, entryDatetime " &
+                            "HAVING signature= '" & cboUser.Text & "' AND entryDatetime Between '" & dts & "' And '" & dte & "' " &
+                            "ORDER BY entryDatetime;"
+                    End If
+
                 Else
                     cboUser.Text = ""
-                    sql = "SELECT signature as Login, stationId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " & _
-                       "GROUP BY signature, stationId, yyyy, mm, entryDatetime " & _
-                       "HAVING entryDatetime Between '" & dts & "' And '" & dte & "' " & _
+                    sql = "SELECT signature as Login, stationId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                       "GROUP BY signature, stationId, yyyy, mm, entryDatetime " &
+                       "HAVING entryDatetime Between '" & dts & "' And '" & dte & "' " &
                        "ORDER BY entryDatetime;"
+
+                    ' form_monthly is a pecial case since it has no mm field
+                    If cboForms.Items(i) = "form_monthly" Then
+                        sql = "SELECT signature as Login, stationId, yyyy as Year, elementId as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                       "GROUP BY signature, stationId, yyyy, entryDatetime " &
+                       "HAVING entryDatetime Between '" & dts & "' And '" & dte & "' " &
+                       "ORDER BY entryDatetime;"
+                    End If
+
                 End If
-                'MsgBox(sql)
 
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "Records")
-                'MsgBox(cboForms.Items(i))
+
                 For kount = 0 To ds.Tables("Records").Rows.Count - 1
                     Rec(0) = ds.Tables("Records").Rows(kount).Item("Login")
                     Rec(1) = ds.Tables("Records").Rows(kount).Item("StationID")
