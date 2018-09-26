@@ -157,7 +157,7 @@ Public Class formAWSRealTime
 
     End Sub
 
-    Private Sub cmdBstAddNew_Click(sender As Object, e As EventArgs) Handles cmdBstAddNew.Click
+    Private Sub cmdBstSave_Click(sender As Object, e As EventArgs) Handles cmdBstSave.Click
         On Error GoTo Err
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
@@ -624,9 +624,9 @@ Err:
             dsNewRow.Item("GTSEncode") = 0
         End If
         If chkPrefix.Checked Then
-            dsNewRow.Item("FilePrefix") = 1
+            dsNewRow.Item("chkPrefix") = 1
         Else
-            dsNewRow.Item("FilePrefix") = 0
+            dsNewRow.Item("chkPrefix") = 0
         End If
 
         'Add a new record to the data source table
@@ -1568,6 +1568,7 @@ Err:
             ftpscript = local_folder & "\ftp_aws.txt"
 
             'FileOpen(1, ftpscript, OpenMode.Output)
+            ftpfile = flder & ftpfile
             txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
             Select Case ftpmethod
                 Case "get"
@@ -1589,10 +1590,12 @@ Err:
                     Else
                         ' Get input files path
 
-                        fldr = flder & ftpfile
-                        fldr = (IO.Path.GetDirectoryName(fldr))
+                        'fldr = flder & ftpfile
+                        'fldr = (IO.Path.GetDirectoryName(fldr))
+
+                        fldr = (IO.Path.GetDirectoryName(ftpfile))
                         'MsgBox(fldr)
-                        'Print(1, "cd " & fldr & Chr(13) & Chr(10))
+                        Print(1, "cd " & fldr & Chr(13) & Chr(10))
                         Print(1, "mget *.*" & Chr(13) & Chr(10))
                     End If
                     Print(1, "bye" & Chr(13) & Chr(10))
@@ -1915,6 +1918,7 @@ Err:
         'Process_Status(" Processing input record")
 
         ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
+
         update_main_db(aws_rs, datestring, nat_id)
 
         ' Check if encoding time has been reached
@@ -2135,12 +2139,18 @@ Err:
             'Process_Status("Updating Climsoft database with AWS data")
 
             For i = 0 To .Rows.Count - 1
+
                 flgs = ""
                 If Not IsDBNull(.Rows(i).Item("Climsoft_Element")) And Not IsDBNull(.Rows(i).Item("obsv")) Then
+
                     obs = .Rows(i).Item("obsv")
-                    If Not IsDBNull(.Rows(i).Item("lower_limit")) And Not IsDBNull(.Rows(i).Item("upper_limit")) Then
-                        QC_Limits(stn, .Rows(i).Item("Climsoft_Element"), datestr, obs, .Rows(i).Item("lower_limit"), .Rows(i).Item("upper_limit"))
-                        Continue For
+
+                    If Not IsDBNull(.Rows(i).Item("lower_limit")) And Not IsDBNull(.Rows(i).Item("upper_limit")) And Len(obs) <> 0 Then
+                        'If Len(.Rows(i).Item("lower_limit")) <> 0 And Len(.Rows(i).Item("upper_limit")) <> 0 And Len(obs) <> 0 Then
+                        If QC_Limits(stn, .Rows(i).Item("Climsoft_Element"), datestr, obs, .Rows(i).Item("lower_limit"), .Rows(i).Item("upper_limit")) Then
+                            Continue For
+                        End If
+
                     End If
 
                     If Not IsDBNull(.Rows(i).Item("unit")) Then
@@ -2152,8 +2162,8 @@ Err:
                     'If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "Knots" Then obs = Val(obs) / 2 ' Convert Values in Knots into M/s
                     'If Not IsDBNull(.Rows(i).Item("unit")) And .Rows(i).Item("unit") = "HPa" Then obs = Val(obs) * 100 ' Convert Values in Hpa into Pa
                     'sql = "use mysql_climsoft_db_v4; INSERT INTO observationfinal " & _
-                    sql = "INSERT INTO observationfinal " & _
-                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag) " & _
+                    sql = "INSERT INTO observationfinal " &
+                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag) " &
                         "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "','" & flgs & "';"
 
                     'Log_Errors(sql)
@@ -2213,11 +2223,12 @@ Err:
         'MsgBox(" Update_main_db")
         Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
-    Sub QC_Limits(stn As String, elms As String, dts As String, obs As String, L_limit As String, U_limit As String)
-
+    Function QC_Limits(stn As String, elms As String, dts As String, obs As String, L_limit As String, U_limit As String) As Boolean
+        QC_Limits = False
         Try
 
             If Val(obs) < Val(L_limit) Or Val(obs) > U_limit Then
+                QC_Limits = True
                 Dim errdata, limittype As String
                 'Get full path for the Subsets Output file file and create the file
                 fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_qc_errors.csv"
@@ -2242,7 +2253,7 @@ Err:
             'Log_Errors(ex.HResult & ":" & ex.Message & "  at QC_Limits")
         End Try
 
-    End Sub
+    End Function
     Sub update_tbltemplate(aws_struct As String, Date_Time As String)
 
         On Error GoTo Err
@@ -3703,10 +3714,9 @@ Err:
 
     End Sub
 
-    Private Sub pnlControl_Paint(sender As Object, e As PaintEventArgs) Handles pnlControl.Paint
+    Private Sub txtSiteName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtSiteName.SelectedIndexChanged
 
     End Sub
-
 
     Private Sub chkPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrefix.CheckedChanged
 
@@ -3718,8 +3728,39 @@ Err:
         End If
     End Sub
 
-    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+    Private Sub cmdBstAddNew_Click(sender As Object, e As EventArgs) Handles cmdBstAddNew.Click
 
+        txtBaseStationAddress.Text = ""
+        txtBaseStationFolder.Text = ""
+        txtBasestationFTPMode.Text = ""
+        txtBaseStationUser.Text = ""
+        txtbaseStationPW.Text = ""
+    End Sub
+
+    Private Sub txtSiteID_Click(sender As Object, e As EventArgs) Handles txtSiteID.Click
+        'MsgBox(ds.Tables("aws_sites").Rows(num).Item("SiteID"))
+
+        'For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
+        '    If txtSiteID.Text = ds.Tables("aws_sites").Rows(i).Item("SiteID") Then
+        '        PopulateForm("sites", txtSitesNavigator, i)
+        '    End If
+        'Next
+    End Sub
+
+    Private Sub txtSiteID_TextChanged(sender As Object, e As EventArgs) Handles txtSiteID.TextChanged
+        For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
+            If txtSiteID.Text = ds.Tables("aws_sites").Rows(i).Item("SiteID") Then
+                PopulateForm("sites", txtSitesNavigator, i)
+            End If
+        Next
+    End Sub
+
+    Private Sub txtSiteName_TextChanged(sender As Object, e As EventArgs) Handles txtSiteName.TextChanged
+        For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
+            If txtSiteName.Text = ds.Tables("aws_sites").Rows(i).Item("SiteName") Then
+                PopulateForm("sites", txtSitesNavigator, i)
+            End If
+        Next
     End Sub
 End Class
 
