@@ -14,6 +14,7 @@
         iCurrRow = 0
         iMaxRows = dtbRecords.Rows.Count
         If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
+            'TODO. This won't work, probably do the sorting at the EF level
             dtbRecords.DefaultView.Sort = strSortCol & " ASC"
         End If
         displayRecordNumber()
@@ -305,6 +306,10 @@
                         End If
                     Next
                     If bIncrementYear Then
+                        ucrYear.SetValue(ucrYear.GetValue() + 1)
+                    End If
+                Else
+                    If ucrYear IsNot Nothing Then
                         ucrYear.SetValue(ucrYear.GetValue() + 1)
                     End If
                 End If
