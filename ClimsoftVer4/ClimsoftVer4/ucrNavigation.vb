@@ -338,11 +338,7 @@
         If iMaxRows = 0 Then
             Return ""
         Else
-            Dim watch As Stopwatch = Stopwatch.StartNew()
-            Dim strVal As String = CallByName(GetRow(iRow), strField, CallType.Get)
-            watch.Stop()
-            Console.WriteLine("Time: " & watch.Elapsed.TotalMilliseconds)
-            Return strVal
+            Return CallByName(GetRow(iRow), strField, CallType.Get)
         End If
     End Function
 
