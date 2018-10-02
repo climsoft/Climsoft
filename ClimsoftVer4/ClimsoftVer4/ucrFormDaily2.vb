@@ -439,8 +439,8 @@ Public Class ucrFormDaily2
 
         'Sets key controls for the navigation
         'TODO. EntryDateTime field to be added and sorting field to be set too
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
-        'ucrLinkedNavigation.SetSortBy("entryDatetime")
+        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh", "EntryDatetime"})))
+        'ucrLinkedNavigation.SetSortBy("EntryDatetime")
         ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
         ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)

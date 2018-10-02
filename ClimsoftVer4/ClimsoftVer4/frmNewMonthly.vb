@@ -35,7 +35,7 @@
         btnCommit.Enabled = True
 
         dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
-        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields)
+        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, ucrYear:=ucrYearSelector)
         ucrMonthlydata.Focus()
     End Sub
 
