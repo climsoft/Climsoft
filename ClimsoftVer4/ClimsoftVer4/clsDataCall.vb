@@ -250,9 +250,34 @@ Public Class DataCall
         Return ""
     End Function
 
-    Public Function GetTableCount() As Integer
-        Dim x = CallByName(clsDataConnection.db, GetTableName(), CallType.Get)
-        Dim y = TryCast(x, IQueryable(Of Object))
-        Return y.Count()
+    Public Function TableCount(Optional clsAdditionalFilter As TableFilter = Nothing) As Integer
+        Dim clsCurrentFilter As TableFilter
+
+        If Not IsNothing(clsAdditionalFilter) Then
+            If IsNothing(clsFilter) Then
+                clsCurrentFilter = clsAdditionalFilter
+            Else
+                clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+            End If
+        Else
+            clsCurrentFilter = clsFilter
+        End If
+
+        Try
+            If strTable <> "" Then
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
+
+                If clsCurrentFilter IsNot Nothing Then
+                    y = y.Where(clsCurrentFilter.GetLinqExpression())
+                End If
+                Return y.Count()
+            Else
+                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+                Return 0
+            End If
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 End Class

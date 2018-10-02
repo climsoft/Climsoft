@@ -13,7 +13,7 @@
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
-        iMaxRows = clsDataDefinition.GetTableCount()
+        iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
@@ -338,7 +338,11 @@
     Private Function GetRow(iRow As Integer) As Object
         'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
         'You can only use Skip() if you use an Order function first.
-        'We might want to sort the records for the sequencer anyway?
-        Return clsDataConnection.db.form_daily2.OrderByDescending(Function(u) u.stationId).Skip(iRow).FirstOrDefault()
+
+        Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
+        Dim y = TryCast(x, IQueryable(Of Object))
+
+        ' OrderBy function returns 1 to give a default ordering
+        Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
     End Function
 End Class
