@@ -205,7 +205,7 @@ Public Class DataCall
             clsCurrentFilter = clsFilter
         End If
 
-            Try
+        Try
             If strTable <> "" Then
                 Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
                 Dim y = TryCast(x, IQueryable(Of Object))
@@ -248,5 +248,11 @@ Public Class DataCall
     'TODO This should return the Linq expression that goes in the Select method
     Public Function GetSelectLinqExpression() As String
         Return ""
+    End Function
+
+    Public Function GetTableCount() As Integer
+        Dim x = CallByName(clsDataConnection.db, GetTableName(), CallType.Get)
+        Dim y = TryCast(x, IQueryable(Of Object))
+        Return y.Count()
     End Function
 End Class

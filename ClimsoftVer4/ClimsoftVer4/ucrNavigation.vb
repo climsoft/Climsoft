@@ -13,14 +13,7 @@
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
-        ' Instead of getting the full table just get the number of rows.
-        ' This should work but doesn't for some reason.
-        'iMaxRows = CallByName(CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get), "Count", CallType.Method)
-        ' Tried this as an alternative too but gives same error
-        'Dim objTemp As Object = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
-        'iMaxRows = CallByName(objTemp, "Count", CallType.Method)
-        ' Doing this to test with form_daily2 until work out how to do in general.
-        iMaxRows = clsDataConnection.db.form_daily2.Count()
+        iMaxRows = clsDataDefinition.GetTableCount()
         iCurrRow = 0
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
@@ -344,7 +337,7 @@
 
     Private Function GetRow(iRow As Integer) As Object
         'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
-        'For some reason you can only use Skip() if you use an Order function first.
+        'You can only use Skip() if you use an Order function first.
         'We might want to sort the records for the sequencer anyway?
         Return clsDataConnection.db.form_daily2.OrderByDescending(Function(u) u.stationId).Skip(iRow).FirstOrDefault()
     End Function
