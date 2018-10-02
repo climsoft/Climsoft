@@ -51,6 +51,10 @@ Public Class DataCall
         strTable = strNewTable
     End Sub
 
+    Public Function GetTableName() As String
+        Return strTable
+    End Function
+
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         dctFields = dctNewFields
     End Sub
