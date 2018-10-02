@@ -22,7 +22,7 @@
         UpdateKeyControls()
     End Sub
     ''' <summary>
-    ''' Gets the value of the specified column(strFieldName) at the current row 
+    ''' Gets the value of the specified column (strFieldName) at the current row 
     ''' Returns empty string or nothing if no rows found or strFieldName is not specified
     ''' </summary>
     ''' <param name="strFieldName"></param>
@@ -36,7 +36,11 @@
         'Else
         '    Return ""
         'End If
-        Return GetValueFromRow(iCurrRow, strFieldName)
+        If iMaxRows > 0 Then
+            Return GetValueFromRow(iCurrRow, strFieldName)
+        Else
+            Return ""
+        End If
     End Function
     ''' <summary>
     ''' Displays the record number for the navigation control
