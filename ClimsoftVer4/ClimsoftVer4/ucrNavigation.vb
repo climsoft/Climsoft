@@ -369,9 +369,15 @@ Public Class ucrNavigation
                     End If
                 End If
             End If
-            For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeySequencerControls
-                kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
-            Next
+            If dctKeySequencerControls.Count > 0 Then
+                For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeySequencerControls
+                    kvpTemp.Value.bSuppressChangedEvents = True
+                    kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
+                    kvpTemp.Value.bSuppressChangedEvents = False
+                Next
+                'only one control should trigger the event change
+                dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
+            End If
         Else
             'First item in sequencer?
         End If
