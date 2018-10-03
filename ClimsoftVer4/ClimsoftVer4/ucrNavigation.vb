@@ -10,17 +10,19 @@
     Private dctKeyControls As Dictionary(Of String, ucrBaseDataLink)
 
     Public Overrides Sub PopulateControl()
-        MyBase.PopulateControl()
+        ' This is the cause of slow loading - getting all records into dtbRecords is slow.
+        'MyBase.PopulateControl()
+
+        iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
-        iMaxRows = dtbRecords.Rows.Count
-        If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
-            dtbRecords.DefaultView.Sort = strSortCol & " ASC"
-        End If
+        'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
+        '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
+        'End If
         displayRecordNumber()
         UpdateKeyControls()
     End Sub
     ''' <summary>
-    ''' Gets the value of the specified column(strFieldName) at the current row 
+    ''' Gets the value of the specified column (strFieldName) at the current row 
     ''' Returns empty string or nothing if no rows found or strFieldName is not specified
     ''' </summary>
     ''' <param name="strFieldName"></param>
@@ -29,9 +31,13 @@
         If strFieldName = "" Then
             Return Nothing
         End If
-
-        If dtbRecords.Rows.Count > 0 Then
-            Return dtbRecords.Rows(iCurrRow).Item(strFieldName)
+        'If dtbRecords.Rows.Count > 0 Then
+        '    Return dtbRecords.Rows(iCurrRow).Item(strFieldName)
+        'Else
+        '    Return ""
+        'End If
+        If iMaxRows > 0 Then
+            Return GetValueFromRow(iCurrRow, strFieldName)
         Else
             Return ""
         End If
@@ -155,7 +161,9 @@
                 For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
                     'Suppress events being raised while changing value of each key control
                     kvp.Value.bSuppressChangedEvents = True
-                    kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
+                    ' Use new GetValueFromRow method to get value from specific row since dtbRecords now nothing
+                    kvp.Value.SetValue(GetValueFromRow(iCurrRow, kvp.Key))
+                    'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
                     kvp.Value.bSuppressChangedEvents = False
                 Next
             End If
@@ -173,7 +181,8 @@
     Public Sub UpdateNavigationByKeyControls()
         Dim dctFieldvalue As New Dictionary(Of String, String)
         Dim bRowExists As Boolean
-        Dim row As DataRow
+        'Dim row As DataRow
+        Dim row As Object
 
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
             iCurrRow = -1
@@ -181,12 +190,14 @@
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
             Next
 
-            For i As Integer = 0 To dtbRecords.Rows.Count - 1
-                row = dtbRecords.Rows(i)
+            For i As Integer = 0 To iMaxRows - 1
+                ' Here use GetRow() since we want multiple fields.
+                row = GetRow(i)
                 bRowExists = True
                 For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
 
-                    If Not (row(kvp.Key) = kvp.Value) Then
+                    'If Not (row(kvp.Key) = kvp.Value) Then
+                    If Not (CallByName(row, kvp.Key, CallType.Get) = kvp.Value) Then
                         bRowExists = False
                         Exit For
                     End If
@@ -318,4 +329,23 @@
 
     End Sub
 
+    ' Use these two methods when you need to get a values from a specific row of the table
+    ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords
+    Private Function GetValueFromRow(iRow As Integer, strField As String) As String
+        If iMaxRows = 0 Then
+            Return ""
+        Else
+            Return CallByName(GetRow(iRow), strField, CallType.Get)
+        End If
+    End Function
+
+    Private Function GetRow(iRow As Integer) As Object
+        'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
+        'You can only use Skip() if you use an Order function first.
+        Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
+        x = x.AsNoTracking()
+        Dim y = TryCast(x, IQueryable(Of Object))
+        ' OrderBy function returns 1 to give a default ordering
+        Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
+    End Function
 End Class
