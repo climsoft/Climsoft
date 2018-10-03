@@ -342,10 +342,9 @@
     Private Function GetRow(iRow As Integer) As Object
         'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
         'You can only use Skip() if you use an Order function first.
-
         Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
+        x = x.AsNoTracking()
         Dim y = TryCast(x, IQueryable(Of Object))
-
         ' OrderBy function returns 1 to give a default ordering
         Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
     End Function
