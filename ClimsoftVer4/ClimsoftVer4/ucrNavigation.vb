@@ -387,7 +387,7 @@ Public Class ucrNavigation
         End If
     End Function
 
-    Private posOfcurrentRowData As Integer
+    Private posOfcurrentRowData As Integer 'TODO probably these 2 can be merged in to key value pair?
     Private currentRowData As New Dictionary(Of String, String)
     'Gets the row details as dictionary of column names and value
     Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
