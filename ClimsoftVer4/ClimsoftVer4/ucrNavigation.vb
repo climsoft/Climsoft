@@ -387,6 +387,8 @@ Public Class ucrNavigation
         End If
     End Function
 
+    Private posOfcurrentRowData As Integer
+    Private currentRowData As New Dictionary(Of String, String)
     'Gets the row details as dictionary of column names and value
     Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
         'holds column name(as key) and column value(as the value)
@@ -399,6 +401,11 @@ Public Class ucrNavigation
 
         If iRow < 0 Then
             Return dctRow 'empty row
+        End If
+
+        'if iRow is still the current row then just return the current row data 
+        If posOfcurrentRowData = iRow AndAlso currentRowData.Count > 0 Then
+            Return currentRowData
         End If
 
         'get all the fields
@@ -427,6 +434,8 @@ Public Class ucrNavigation
                 dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
             Next
         End If
+        posOfcurrentRowData = iRow
+        currentRowData = dctRow
         Return dctRow
     End Function
 
