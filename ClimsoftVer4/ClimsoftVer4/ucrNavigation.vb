@@ -1,4 +1,6 @@
-﻿Public Class ucrNavigation
+﻿Imports System.Data.Entity
+
+Public Class ucrNavigation
     Private bFirstLoad As Boolean = True
     'Stores the number of the maximum rows in a data table
     Public iMaxRows As Integer
@@ -175,41 +177,88 @@
 
         End If
     End Sub
+
+
     ''' <summary>
     ''' Updates Navigation control to the recored with selected key
     ''' </summary>
     Public Sub UpdateNavigationByKeyControls()
         Dim dctFieldvalue As New Dictionary(Of String, String)
         Dim bRowExists As Boolean
-        'Dim row As DataRow
-        Dim row As Object
+        Dim row As Dictionary(Of String, String)
 
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
-            iCurrRow = -1
+            'check if its current row first before fetching from database
+            bRowExists = True
+            row = GetRow(iCurrRow)
             For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
-            Next
-
-            For i As Integer = 0 To iMaxRows - 1
-                ' Here use GetRow() since we want multiple fields.
-                row = GetRow(i)
-                bRowExists = True
-                For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-
-                    'If Not (row(kvp.Key) = kvp.Value) Then
-                    If Not (CallByName(row, kvp.Key, CallType.Get) = kvp.Value) Then
-                        bRowExists = False
-                        Exit For
-                    End If
-                Next
-                If bRowExists Then
-                    iCurrRow = i
+                If row.Count > 0 AndAlso Not (row.Item(kvp.Key) = kvp.Value.GetValue) Then
+                    bRowExists = False
                     Exit For
                 End If
             Next
+
+            'if its not the current row then fetch from the database
+            If Not bRowExists Then
+                iCurrRow = -1
+
+                'TODO this could be replaced with a query that fetches the record position based on the values of the key controls
+                'instead of the looping through all the records
+
+                For i As Integer = 0 To iMaxRows - 1
+                    row = GetRow(i)  ' Here use GetRow() since we want multiple fields.
+                    bRowExists = True
+                    For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                        If Not (row.Item(kvp.Key) = kvp.Value) Then
+                            bRowExists = False
+                            Exit For
+                        End If
+                    Next
+                    If bRowExists Then
+                        iCurrRow = i
+                        Exit For
+                    End If
+                Next
+            End If
             displayRecordNumber()
         End If
     End Sub
+
+
+    'Public Sub UpdateNavigationByKeyControlsOLD()
+    '    Dim dctFieldvalue As New Dictionary(Of String, String)
+    '    Dim bRowExists As Boolean
+    '    'Dim row As DataRow
+    '    Dim row As Object
+
+    '    If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
+    '        iCurrRow = -1
+    '        For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+    '            dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
+    '        Next
+
+    '        For i As Integer = 0 To iMaxRows - 1
+    '            ' Here use GetRow() since we want multiple fields.
+    '            row = GetRow(i)
+    '            bRowExists = True
+    '            For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+
+    '                'If Not (row(kvp.Key) = kvp.Value) Then
+    '                If Not (CallByName(row, kvp.Key, CallType.Get) = kvp.Value) Then
+    '                    bRowExists = False
+    '                    Exit For
+    '                End If
+    '            Next
+    '            If bRowExists Then
+    '                iCurrRow = i
+    '                Exit For
+    '            End If
+    '        Next
+    '        displayRecordNumber()
+    '    End If
+    'End Sub
+
 
     Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
         'UpdateKeyControls()
@@ -329,24 +378,75 @@
 
     End Sub
 
-    ' Use these two methods when you need to get a values from a specific row of the table
-    ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords
+    'get specific column value
     Private Function GetValueFromRow(iRow As Integer, strField As String) As String
-        If iMaxRows = 0 Then
+        If iMaxRows = 0 OrElse iRow < 0 Then
             Return ""
         Else
-            Return CallByName(GetRow(iRow), strField, CallType.Get)
+            Return GetRow(iRow).Item(strField)
         End If
     End Function
 
-    Private Function GetRow(iRow As Integer) As Object
-        'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
-        'You can only use Skip() if you use an Order function first.
+    'Gets the row details as dictionary of column names and value
+    Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
+        'holds column name(as key) and column value(as the value)
+        Dim dctRow As New Dictionary(Of String, String)
+        Dim strDBValues As String
+        Dim arrDBValues() As String
+        Dim strSql As String
+        Dim strFields As String = ""
 
-        Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
-        Dim y = TryCast(x, IQueryable(Of Object))
 
-        ' OrderBy function returns 1 to give a default ordering
-        Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
+        If iRow < 0 Then
+            Return dctRow 'empty row
+        End If
+
+        'get all the fields
+        For Each str As String In clsDataDefinition.GetFields().Keys
+            If strFields = "" Then
+                strFields = str
+            Else
+                strFields = strFields & "," & str
+            End If
+        Next
+
+        'construct the necessary sql. Using CONCAT_WS to return a string of values. Probably use a unique separator?
+        strSql = "SELECT CONCAT_WS(' +++ '," & strFields & ") AS createdcol FROM " & clsDataDefinition.GetTableName()
+        If strSortCol <> "" Then
+            strSql = strSql & " ORDER BY " & strSortCol
+        End If
+        strSql = strSql & " LIMIT 1 OFFSET " & iRow
+
+        'get the concatenated column's values 
+        strDBValues = clsDataConnection.db.Database.SqlQuery(Of String)(strSql).FirstOrDefault()
+
+        If strDBValues IsNot Nothing Then
+            arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            'arrange the values to their corresponding column names
+            For i As Integer = 0 To clsDataDefinition.GetFields().Count - 1
+                dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
+            Next
+        End If
+        Return dctRow
     End Function
+
+    ' Use these two methods when you need to get a values from a specific row of the table
+    ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords
+    'Private Function GetValueFromRowOLD(iRow As Integer, strField As String) As String
+    '    If iMaxRows = 0 Then
+    '        Return ""
+    '    Else
+    '        Return CallByName(GetRow(iRow), strField, CallType.Get)
+    '    End If
+    'End Function
+
+    'Private Function GetRowOLD(iRow As Integer) As Object
+    '    'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
+    '    'You can only use Skip() if you use an Order function first.
+    '    Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
+    '    x = x.AsNoTracking()
+    '    Dim y = TryCast(x, IQueryable(Of Object))
+    '    ' OrderBy function returns 1 to give a default ordering
+    '    Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
+    'End Function
 End Class
