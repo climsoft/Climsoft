@@ -13,14 +13,7 @@
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
-        ' Instead of getting the full table just get the number of rows.
-        ' This should work but doesn't for some reason.
-        'iMaxRows = CallByName(CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get), "Count", CallType.Method)
-        ' Tried this as an alternative too but gives same error
-        'Dim objTemp As Object = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
-        'iMaxRows = CallByName(objTemp, "Count", CallType.Method)
-        ' Doing this to test with form_daily2 until work out how to do in general.
-        iMaxRows = clsDataConnection.db.form_daily2.Count()
+        iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
@@ -29,7 +22,7 @@
         UpdateKeyControls()
     End Sub
     ''' <summary>
-    ''' Gets the value of the specified column(strFieldName) at the current row 
+    ''' Gets the value of the specified column (strFieldName) at the current row 
     ''' Returns empty string or nothing if no rows found or strFieldName is not specified
     ''' </summary>
     ''' <param name="strFieldName"></param>
@@ -43,7 +36,11 @@
         'Else
         '    Return ""
         'End If
-        Return GetValueFromRow(iCurrRow, strFieldName)
+        If iMaxRows > 0 Then
+            Return GetValueFromRow(iCurrRow, strFieldName)
+        Else
+            Return ""
+        End If
     End Function
     ''' <summary>
     ''' Displays the record number for the navigation control
@@ -344,8 +341,12 @@
 
     Private Function GetRow(iRow As Integer) As Object
         'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
-        'For some reason you can only use Skip() if you use an Order function first.
-        'We might want to sort the records for the sequencer anyway?
-        Return clsDataConnection.db.form_daily2.OrderByDescending(Function(u) u.stationId).Skip(iRow).FirstOrDefault()
+        'You can only use Skip() if you use an Order function first.
+
+        Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
+        Dim y = TryCast(x, IQueryable(Of Object))
+
+        ' OrderBy function returns 1 to give a default ordering
+        Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
     End Function
 End Class
