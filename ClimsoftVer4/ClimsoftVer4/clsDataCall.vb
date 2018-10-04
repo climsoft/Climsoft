@@ -51,6 +51,10 @@ Public Class DataCall
         strTable = strNewTable
     End Sub
 
+    Public Function GetTableName() As String
+        Return strTable
+    End Function
+
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         dctFields = dctNewFields
     End Sub
@@ -201,7 +205,7 @@ Public Class DataCall
             clsCurrentFilter = clsFilter
         End If
 
-            Try
+        Try
             If strTable <> "" Then
                 Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
                 Dim y = TryCast(x, IQueryable(Of Object))
@@ -244,5 +248,36 @@ Public Class DataCall
     'TODO This should return the Linq expression that goes in the Select method
     Public Function GetSelectLinqExpression() As String
         Return ""
+    End Function
+
+    Public Function TableCount(Optional clsAdditionalFilter As TableFilter = Nothing) As Integer
+        Dim clsCurrentFilter As TableFilter
+
+        If Not IsNothing(clsAdditionalFilter) Then
+            If IsNothing(clsFilter) Then
+                clsCurrentFilter = clsAdditionalFilter
+            Else
+                clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+            End If
+        Else
+            clsCurrentFilter = clsFilter
+        End If
+
+        Try
+            If strTable <> "" Then
+                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+                Dim y = TryCast(x, IQueryable(Of Object))
+
+                If clsCurrentFilter IsNot Nothing Then
+                    y = y.Where(clsCurrentFilter.GetLinqExpression())
+                End If
+                Return y.Count()
+            Else
+                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+                Return 0
+            End If
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 End Class

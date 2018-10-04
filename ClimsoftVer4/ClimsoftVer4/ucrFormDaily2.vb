@@ -446,6 +446,7 @@ Public Class ucrFormDaily2
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
         ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
         ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+        ucrLinkedNavigation.SetSortBy("entryDatetime")
 
     End Sub
 
