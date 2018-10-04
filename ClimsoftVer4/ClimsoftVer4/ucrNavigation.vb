@@ -488,6 +488,8 @@ Public Class ucrNavigation
                     End If
                     i = i + 1
                 Next
+                'To save on memory. DataSets suppress the Garbage Collector
+                ds.Clear()
             End If
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
