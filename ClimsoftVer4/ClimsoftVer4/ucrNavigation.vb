@@ -195,33 +195,16 @@ Public Class ucrNavigation
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
                 If row.Count > 0 AndAlso Not (row.Item(kvp.Key) = kvp.Value.GetValue) Then
                     bRowExists = False
-                    Exit For
+                    'Exit For
                 End If
             Next
 
             'if its not the current row then fetch from the database
             If Not bRowExists Then
-                iCurrRow = -1
-
-                'TODO this could be replaced with a query that fetches the record position based on the values of the key controls
-                'instead of the looping through all the records
-
-                For i As Integer = 0 To iMaxRows - 1
-                    row = GetRow(i)  ' Here use GetRow() since we want multiple fields.
-                    bRowExists = True
-                    For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-                        If Not (row.Item(kvp.Key) = kvp.Value) Then
-                            bRowExists = False
-                            Exit For
-                        End If
-                    Next
-                    If bRowExists Then
-                        iCurrRow = i
-                        Exit For
-                    End If
-                Next
+                'Returns -1 if no row found
+                iCurrRow = GetRowPosition(dctFieldvalue)
+                displayRecordNumber()
             End If
-            displayRecordNumber()
         End If
     End Sub
 
@@ -404,7 +387,7 @@ Public Class ucrNavigation
         Dim strSql As String
         Dim strFields As String = ""
 
-
+        'if its a negative just abort
         If iRow < 0 Then
             Return dctRow 'empty row
         End If
@@ -443,6 +426,80 @@ Public Class ucrNavigation
         posOfcurrentRowData = iRow
         currentRowData = dctRow
         Return dctRow
+    End Function
+
+    'Gets the row position. The parameter is diction of column names and the values to fetch
+    Private Function GetRowPosition(dctFieldvalue As Dictionary(Of String, String)) As Integer
+        Dim rowIndex As Integer = -1
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim ds As New DataSet
+        Dim strSql As String
+        Dim strFields As String = ""
+        Dim strCondition As String = ""
+        'get all the fields and their condition values
+        For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+            If strFields = "" Then
+                strFields = kvp.Key
+                strCondition = kvp.Key & " = '" & kvp.Value & "'"
+            Else
+                strFields = strFields & "," & kvp.Key
+                strCondition = strCondition & " AND " & kvp.Key & " = '" & kvp.Value & "'"
+            End If
+
+        Next
+
+        'THIS SQL HAS BEEN LEFT HERE FOR FUTURE REFERENCE
+        'strSql = "SELECT CONCAT_WS('',num) AS colconverted FROM (SELECT " & strFields & " , @rownum := @rownum + 1 AS num FROM " & clsDataDefinition.GetTableName() & " JOIN (SELECT @rownum := 0) r "
+        'If strSortCol <> "" Then
+        '    strSql = strSql & "ORDER BY " & strSortCol
+        'End If
+        'strSql = strSql & " ) " & clsDataDefinition.GetTableName() & " WHERE " & strCondition
+
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
+            If strSortCol <> "" Then
+                strSql = strSql & "ORDER BY " & strSortCol
+            End If
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, conn)
+            da.Fill(ds, "table_rownumber")
+            If ds.Tables("table_rownumber").Rows.Count > 0 Then
+
+                'TODO TEST THIS SEGMENT. IF IT WORKS PROBABLY REPLACE IT WITH THE ONE BELOW?
+                'Dim row1 As DataRow = ds.Tables("table_rownumber").Select(strCondition).FirstOrDefault()
+                'If row1 IsNot Nothing Then
+                '    rowIndex = ds.Tables("table_rownumber").Rows.IndexOf(row1)
+                'End If
+
+                Dim i As Integer
+                Dim bIsRowFetched As Boolean
+                For Each row As DataRow In ds.Tables("table_rownumber").Rows
+                    bIsRowFetched = True
+                    For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                        If kvp.Value <> row.Item(kvp.Key) Then
+                            bIsRowFetched = False
+                            Exit For
+                        End If
+                    Next
+
+                    If bIsRowFetched Then
+                        rowIndex = i
+                        Exit For
+                    End If
+                    i = i + 1
+                Next
+
+
+
+            End If
+        Catch ex As Exception
+            MsgBox("Error : " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+        Return rowIndex
     End Function
 
     ' Use these two methods when you need to get a values from a specific row of the table
