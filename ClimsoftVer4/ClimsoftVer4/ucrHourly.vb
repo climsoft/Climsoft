@@ -437,6 +437,7 @@ Public Class ucrHourly
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
         ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
         ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+        ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 
     Private Sub ValidateDataEntryPermission()

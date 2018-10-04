@@ -296,6 +296,7 @@ Public Class ucrMonthlydata
         ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
         ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 
     Private Sub ValidateDataEntryPermission()

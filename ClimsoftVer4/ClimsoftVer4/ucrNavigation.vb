@@ -195,7 +195,6 @@ Public Class ucrNavigation
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
                 If row.Count > 0 AndAlso Not (row.Item(kvp.Key) = kvp.Value.GetValue) Then
                     bRowExists = False
-                    'Exit For
                 End If
             Next
 
@@ -450,7 +449,7 @@ Public Class ucrNavigation
         Next
 
         'THIS SQL HAS BEEN LEFT HERE FOR FUTURE REFERENCE
-        'strSql = "SELECT CONCAT_WS('',num) AS colconverted FROM (SELECT " & strFields & " , @rownum := @rownum + 1 AS num FROM " & clsDataDefinition.GetTableName() & " JOIN (SELECT @rownum := 0) r "
+        'strSql = "SELECT CONCAT_WS('',num) AS colconverted FROM (SELECT " & strFields & "," & strSortCol & " , @rownum := @rownum + 1 AS num FROM " & clsDataDefinition.GetTableName() & " JOIN (SELECT @rownum := 0) r "
         'If strSortCol <> "" Then
         '    strSql = strSql & "ORDER BY " & strSortCol
         'End If
@@ -460,13 +459,13 @@ Public Class ucrNavigation
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
             If strSortCol <> "" Then
-                strSql = strSql & "ORDER BY " & strSortCol
+                strSql = strSql & " ORDER BY " & strSortCol
             End If
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, conn)
             da.Fill(ds, "table_rownumber")
             If ds.Tables("table_rownumber").Rows.Count > 0 Then
 
-                'TODO TEST THIS SEGMENT. IF IT WORKS PROBABLY REPLACE IT WITH THE ONE BELOW?
+                'TODO TEST THIS CODE SEGMENT. IF IT WORKS PROBABLY REPLACE IT WITH THE ONE BELOW?
                 'Dim row1 As DataRow = ds.Tables("table_rownumber").Select(strCondition).FirstOrDefault()
                 'If row1 IsNot Nothing Then
                 '    rowIndex = ds.Tables("table_rownumber").Rows.IndexOf(row1)
@@ -489,9 +488,6 @@ Public Class ucrNavigation
                     End If
                     i = i + 1
                 Next
-
-
-
             End If
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
