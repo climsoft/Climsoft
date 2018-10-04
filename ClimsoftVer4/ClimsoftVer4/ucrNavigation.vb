@@ -193,7 +193,7 @@ Public Class ucrNavigation
             row = GetRow(iCurrRow)
             For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
-                If row.Count > 0 AndAlso Not (row.Item(kvp.Key) = kvp.Value.GetValue) Then
+                If row.Count < 1 OrElse row.Item(kvp.Key) <> kvp.Value.GetValue Then
                     bRowExists = False
                 End If
             Next
@@ -202,8 +202,8 @@ Public Class ucrNavigation
             If Not bRowExists Then
                 'Returns -1 if no row found
                 iCurrRow = GetRowPosition(dctFieldvalue)
-                displayRecordNumber()
             End If
+            displayRecordNumber()
         End If
     End Sub
 
@@ -431,52 +431,36 @@ Public Class ucrNavigation
     Private Function GetRowPosition(dctFieldvalue As Dictionary(Of String, String)) As Integer
         Dim rowIndex As Integer = -1
         Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim ds As New DataSet
+        Dim command As MySql.Data.MySqlClient.MySqlCommand
+        Dim reader As MySql.Data.MySqlClient.MySqlDataReader
         Dim strSql As String
         Dim strFields As String = ""
-        Dim strCondition As String = ""
+        Dim i As Integer
+        Dim bIsRowFetched As Boolean
         'get all the fields and their condition values
         For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
             If strFields = "" Then
                 strFields = kvp.Key
-                strCondition = kvp.Key & " = '" & kvp.Value & "'"
             Else
                 strFields = strFields & "," & kvp.Key
-                strCondition = strCondition & " AND " & kvp.Key & " = '" & kvp.Value & "'"
             End If
 
         Next
-
-        'THIS SQL HAS BEEN LEFT HERE FOR FUTURE REFERENCE
-        'strSql = "SELECT CONCAT_WS('',num) AS colconverted FROM (SELECT " & strFields & "," & strSortCol & " , @rownum := @rownum + 1 AS num FROM " & clsDataDefinition.GetTableName() & " JOIN (SELECT @rownum := 0) r "
-        'If strSortCol <> "" Then
-        '    strSql = strSql & "ORDER BY " & strSortCol
-        'End If
-        'strSql = strSql & " ) " & clsDataDefinition.GetTableName() & " WHERE " & strCondition
-
         Try
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            i = 0
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
             If strSortCol <> "" Then
                 strSql = strSql & " ORDER BY " & strSortCol
             End If
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, conn)
-            da.Fill(ds, "table_rownumber")
-            If ds.Tables("table_rownumber").Rows.Count > 0 Then
-
-                'TODO TEST THIS CODE SEGMENT. IF IT WORKS PROBABLY REPLACE IT WITH THE ONE BELOW?
-                'Dim row1 As DataRow = ds.Tables("table_rownumber").Select(strCondition).FirstOrDefault()
-                'If row1 IsNot Nothing Then
-                '    rowIndex = ds.Tables("table_rownumber").Rows.IndexOf(row1)
-                'End If
-
-                Dim i As Integer
-                Dim bIsRowFetched As Boolean
-                For Each row As DataRow In ds.Tables("table_rownumber").Rows
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            command = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+            conn.Open()
+            reader = command.ExecuteReader()
+            If reader.HasRows Then
+                While reader.Read()
                     bIsRowFetched = True
                     For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-                        If kvp.Value <> row.Item(kvp.Key) Then
+                        If kvp.Value <> reader.GetString(kvp.Key) Then
                             bIsRowFetched = False
                             Exit For
                         End If
@@ -484,13 +468,14 @@ Public Class ucrNavigation
 
                     If bIsRowFetched Then
                         rowIndex = i
-                        Exit For
+                        Exit While
                     End If
                     i = i + 1
-                Next
-                'To save on memory. DataSets suppress the Garbage Collector
-                ds.Clear()
+                End While
             End If
+
+            reader.Close()
+
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         Finally
