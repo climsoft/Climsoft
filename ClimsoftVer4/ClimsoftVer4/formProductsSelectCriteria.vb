@@ -281,7 +281,7 @@ Public Class formProductsSelectCriteria
                     If chkTranspose.Checked = True Then
                         xpivot = SumAvg
                         For i = 0 To 23
-                            If i = 1 Then xpivot = ""
+                            If i = 0 Then xpivot = ""
                             xpivot = xpivot & "," & SumAvg & "(IF(hour(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
                         Next
 
