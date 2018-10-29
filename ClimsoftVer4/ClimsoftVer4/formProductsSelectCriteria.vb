@@ -277,13 +277,37 @@ Public Class formProductsSelectCriteria
                     sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
                            "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
 
+                    'Transpose values when the option is selected
+                    If chkTranspose.Checked = True Then
+                        xpivot = SumAvg
+                        For i = 0 To 23
+                            If i = 0 Then xpivot = ""
+                            xpivot = xpivot & "," & SumAvg & "(IF(hour(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                        Next
+
+                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, Month(obsDatetime) As Day " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
+                    End If
+
+
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Daily"
-                    'sql = "SELECT recordedFrom as StationId,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                    ' "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
-                    sql = "SELECT recordedFrom as StationId,stationName as Station_Name,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    sql = "SELECT recordedFrom as StationId,stationName as Station_Name,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+
+                    'Transpose values when the option is selected
+                    If chkTranspose.Checked = True Then
+                        xpivot = SumAvg
+                        For i = 1 To 31
+                            If i = 1 Then xpivot = ""
+                            xpivot = xpivot & "," & SumAvg & "(IF(day(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                        Next
+
+                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month;"
+                    End If
+
                     'MsgBox(sql)
                     DataProducts(sql, lblProductType.Text)
 
@@ -303,8 +327,8 @@ Public Class formProductsSelectCriteria
                             xpivot = xpivot & "," & SumAvg & "(IF(month(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
                         Next
 
-                        sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Year;"
+                        sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year;"
                     End If
                     DataProducts(sql, lblProductType.Text)
 
@@ -359,10 +383,22 @@ Public Class formProductsSelectCriteria
                 Case "GeoCLIM Monthly"
                     GeoCLIMMonthlyProducts(stnlist, sdate, edate)
                 Case "Inventory"
-                    sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                         "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
                     'sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime),describedBy FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+
+                    'Set for daily inventory
+                    xpivot = SumAvg
+                    For i = 1 To 31
+                        If i = 1 Then xpivot = ""
+                        xpivot = xpivot & "," & SumAvg & "(IF(day(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                    Next
+
+                    sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                          "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month;"
+
+                    'MsgBox(sql)
 
                     InventoryProducts(sql, "Inventory")
                 Case "CPT"
@@ -1000,44 +1036,51 @@ Err:
         FileOpen(11, fl, OpenMode.Output)
 
         ' Write Column Headers
-        Write(11, "Station")
+        Write(11, "Station_ID")
+        Write(11, "Station_Name")
+        Write(11, "Element_Code")
         Write(11, "Lat")
         Write(11, "Lon")
         Write(11, "Elev")
 
         Write(11, "Year")
         Write(11, "Month")
-        Write(11, "Day")
-        Write(11, "Hour")
+        'Write(11, "Day")
+        'Write(11, "Hour")
 
 
-        ' Column headers from table field names
-        For j = 0 To lstvElements.Items.Count - 1
-            Write(11, lstvElements.Items(j).SubItems(1).Text)
+        '' Column headers from table field names
+        'For j = 0 To lstvElements.Items.Count - 1
+        '    Write(11, lstvElements.Items(j).SubItems(1).Text)
+        'Next
+
+        ' Daily headers 
+        For j = 1 To 31
+            Write(11, j)
         Next
 
         ' End header row
         PrintLine(11)
+        With ds.Tables("observationfinal")
+            For k = 0 To maxRows - 1
 
-        For k = 0 To maxRows - 1
-
-            For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                ' Write the row headers befor the Invetory descriptors
-                If i < 8 Then
-                    Write(11, ds.Tables("observationfinal").Rows(k).Item(i))
-                Else
-                    If InStr(ds.Tables("observationfinal").Rows(k).Item(i), "NULL") <> 0 Then 'Missing Values to be represented as blanks
-                        Write(11, "")
+                For i = 0 To .Columns.Count - 1
+                    ' Write the row headers befor the Invetory descriptors
+                    If i < 8 Then
+                        Write(11, .Rows(k).Item(i))
                     Else
-                        Write(11, "X")
+                        If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
+                            Write(11, "M")
+                        Else
+                            Write(11, "X")  'Available observations to be represented as "X"
+                        End If
+
                     End If
-
-                End If
+                Next
+                ' New line for another record
+                PrintLine(11)
             Next
-            ' New line for another record
-            PrintLine(11)
-        Next
-
+        End With
         FileClose(11)
 
         CommonModules.ViewFile(fl)
@@ -1180,7 +1223,7 @@ Err:
             pnlSummary.Visible = True
         End If
 
-        If lblProductType.Text = "Monthly" Then 'Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
+        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Hourly" Then 'Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
             chkTranspose.Visible = True
         Else
             chkTranspose.Visible = False

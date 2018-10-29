@@ -42,7 +42,7 @@ Public Class formAWSRealTime
     Dim elv As String
     Dim BUFR_header As String
     Dim msg_header, msg_file As String
-    Dim datt, flprefix As String
+    Dim datt, flprefix, stn1 As String
 
     Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
@@ -662,47 +662,83 @@ Err:
     End Sub
 
     Private Sub cmdUpdateSites_Click(sender As Object, e As EventArgs) Handles cmdUpdateSites.Click
-        On Error GoTo Err
+        'On Error GoTo Err
 
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim recUpdate As New dataEntryGlobalRoutines
+        Try
+            'Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+            'Dim sql0, Id, Nme, infl, str, flg, ip, hdr, Fpfx, chkGTS
+            'Dim opsts, chkPrfx
 
-        ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
-        ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
-        ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
-        ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
-        ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
-        ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
-        ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
-        ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
-        If chkOperational.Checked Then
-            ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
-        Else
-            ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
-        End If
-        If chkGTSEncode.Checked Then
-            ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
-        Else
-            ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
-        End If
-        If chkPrefix.Checked Then
-            ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
-        Else
-            ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
-        End If
+            'Id = txtSiteID.Text
+            'Nme = txtSiteName.Text
+            'infl = txtInFile.Text
+            'str = txtDataStructure.Text
+            'flg = txtFlag.Text
+            'ip = txtIP.Text
+            'hdr = txtGTSHeader.Text
+            'Fpfx = txtfilePrefix.Text
+            'If chkOperational.Checked Then
+            '    opsts = 1
+            'Else
+            '    opsts = 0
+            'End If
+            'If chkGTSEncode.Checked Then
+            '    chkGTS = 1
+            'Else
+            '    chkGTS = 0
+            'End If
+            'If chkPrefix.Checked Then
+            '    chkPrfx = 1
+            'Else
+            '    chkPrfx = 0
+            'End If
+            'MsgBox(rec)
+            'MsgBox(ds.Tables("aws_sites").Rows(rec).Item("SiteID"))
+            'MsgBox(stn1)
+            'sql0 = "UPDATE `aws_sites` SET `SiteID`='" & Id & " ', `SiteName`='" & Nme & "', `InputFile`='" & infl & "', `FilePrefix`='" & Fpfx & "', `DataStructure`='" & str & "', `MissingDataFlag`=' " & flg & "', `awsServerIP`='" & ip & "', `OperationalStatus`=' " & opsts & "', `GTSEncode`='" & chkGTS & "', `GTSHeader`='" & hdr & "' WHERE  `SiteID`='" & stn1 & "';"
 
-        'Add a new record to the data source table
-        'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
+            'comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
+            'comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
+            'comm.ExecuteNonQuery()   ' Execute the query
 
-        da.Update(ds, "aws_sites")
+            ds.Tables("aws_sites").Rows(rec).Item("SiteID") = txtSiteID.Text
+            ds.Tables("aws_sites").Rows(rec).Item("SiteName") = txtSiteName.Text
+            ds.Tables("aws_sites").Rows(rec).Item("InputFile") = txtInFile.Text
+            ds.Tables("aws_sites").Rows(rec).Item("DataStructure") = txtDataStructure.Text
+            ds.Tables("aws_sites").Rows(rec).Item("MissingDataFlag") = txtFlag.Text
+            ds.Tables("aws_sites").Rows(rec).Item("awsServerIp") = txtIP.Text
+            ds.Tables("aws_sites").Rows(rec).Item("GTSHeader") = txtGTSHeader.Text
+            ds.Tables("aws_sites").Rows(rec).Item("FilePrefix") = txtfilePrefix.Text
+            If chkOperational.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("OperationalStatus") = 0
+            End If
+            If chkGTSEncode.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("GTSEncode") = 0
+            End If
+            If chkPrefix.Checked Then
+                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 1
+            Else
+                ds.Tables("aws_sites").Rows(rec).Item("chkPrefix") = 0
+            End If
 
-        recUpdate.messageBoxRecordedUpdated()
-        'ClearStationForm()
-        Exit Sub
-Err:
-        MsgBox(Err.Description)
+            'Add a new record to the data source table
+            'If cmdtype = "add" Then ds.Tables("station").Rows.Add(dsNewRow)
+
+            da.Update(ds, "aws_sites")
+
+            recUpdate.messageBoxRecordedUpdated()
+            'ClearStationForm()
+        Catch ex As Exception
+            MsgBox("Update Failure")
+        End Try
     End Sub
 
     Sub FillList(ByRef lst As ComboBox, tbl As String, lstfld As String)
@@ -3737,6 +3773,7 @@ Err:
         txtbaseStationPW.Text = ""
     End Sub
 
+
     Private Sub txtSiteID_Click(sender As Object, e As EventArgs) Handles txtSiteID.Click
         'MsgBox(ds.Tables("aws_sites").Rows(num).Item("SiteID"))
 
@@ -3751,17 +3788,26 @@ Err:
         For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
             If txtSiteID.Text = ds.Tables("aws_sites").Rows(i).Item("SiteID") Then
                 PopulateForm("sites", txtSitesNavigator, i)
+                'rec = i - 1
             End If
         Next
+
     End Sub
 
     Private Sub txtSiteName_TextChanged(sender As Object, e As EventArgs) Handles txtSiteName.TextChanged
         For i = 0 To ds.Tables("aws_sites").Rows.Count - 1
             If txtSiteName.Text = ds.Tables("aws_sites").Rows(i).Item("SiteName") Then
                 PopulateForm("sites", txtSitesNavigator, i)
+                'rec = i - 1
             End If
         Next
+
     End Sub
+
+    'Private Sub txtSiteID_GotFocus(sender As Object, e As EventArgs) Handles txtSiteID.GotFocus
+
+    '    stn1 = txtSiteID.Text
+    'End Sub
 End Class
 
 Public Class FTP

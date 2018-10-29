@@ -381,7 +381,7 @@ Public Class formMetadata
     End Sub
 
     Private Sub cmdAddNew_Click_1(sender As Object, e As EventArgs) Handles cmdAddNew.Click
-
+        SetDataSet("station")
         Try
             'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
             'must be declared for the Update method to work.
