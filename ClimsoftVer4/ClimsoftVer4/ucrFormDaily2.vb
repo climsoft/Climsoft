@@ -88,7 +88,7 @@ Public Class ucrFormDaily2
                 Next
             Else
                 For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
-                    ucrCombobox.SelectFirst()
+                    ucrCombobox.SelectDefault()
                 Next
             End If
 
@@ -422,6 +422,8 @@ Public Class ucrFormDaily2
         ucrLinkedMonth = ucrNewMonth
         ucrLinkedHour = ucrNewHour
         ucrLinkedNavigation = ucrNewNavigation
+
+        ucrLinkedHour.setDefaultValue(6)
 
         AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)

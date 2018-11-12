@@ -4,6 +4,7 @@
     Public bValidate As Boolean = True
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
+    Private objDefaultValue As Object = Nothing
 
     Public Overrides Sub PopulateControl()
         If bFillFromDataBase Then
@@ -80,6 +81,18 @@
         Next
         Return cboValues.Text
     End Function
+
+    Public Sub setDefaultValue(objNewValue As Object)
+        objDefaultValue = objNewValue
+    End Sub
+
+    Public Sub SelectDefault()
+        If objDefaultValue IsNot Nothing AndAlso dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
+            SetValue(objDefaultValue)
+        Else
+            SelectFirst()
+        End If
+    End Sub
 
     Public Sub SelectFirst()
         If dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
