@@ -17,6 +17,8 @@ Public Class ucrNavigation
 
         iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
+        posOfcurrentRowData = -1
+        currentRowData = New Dictionary(Of String, String)
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
         'End If
@@ -375,7 +377,7 @@ Public Class ucrNavigation
         End If
     End Function
 
-    Private posOfcurrentRowData As Integer 'TODO probably these 2 can be merged in to key value pair?
+    Private posOfcurrentRowData As Integer 'TODO probably these 2 can be merged in to key value pair? They have been used as to temporarily implement caching of values of current row.
     Private currentRowData As New Dictionary(Of String, String)
     'Gets the row details as dictionary of column names and value
     Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
