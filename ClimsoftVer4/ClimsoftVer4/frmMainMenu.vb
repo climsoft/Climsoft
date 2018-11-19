@@ -323,4 +323,8 @@ Public Class frmMainMenu
     Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem.Click
         frmElementSequencerMonthly.Show()
     End Sub
+
+    Private Sub EmptyKeyEntryTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmptyKeyEntryTablesToolStripMenuItem.Click
+        frmEntryForms.Show()
+    End Sub
 End Class
