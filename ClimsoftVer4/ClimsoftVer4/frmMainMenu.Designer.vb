@@ -77,6 +77,7 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.EmptyKeyEntryTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -161,7 +162,7 @@ Partial Class frmMainMenu
         '
         'mnuAdministration
         '
-        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1, Me.OpeartionsMonitoringToolStripMenuItem})
+        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1, Me.OpeartionsMonitoringToolStripMenuItem, Me.EmptyKeyEntryTablesToolStripMenuItem})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
         Me.mnuAdministration.Tag = "Administration"
@@ -265,19 +266,19 @@ Partial Class frmMainMenu
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.HourlyToolStripMenuItem.Text = "Daily"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.DailyToolStripMenuItem.Text = "Hourly"
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
@@ -634,6 +635,12 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'EmptyKeyEntryTablesToolStripMenuItem
+        '
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Name = "EmptyKeyEntryTablesToolStripMenuItem"
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Text = "Empty Key Entry Forms"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -714,4 +721,5 @@ Partial Class frmMainMenu
     Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
 End Class

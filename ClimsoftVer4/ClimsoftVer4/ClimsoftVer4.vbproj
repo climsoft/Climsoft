@@ -237,6 +237,12 @@
     <Compile Include="frmElementSequencerMonthly.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmEntryForms.Designer.vb">
+      <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntryForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewComputationProgress.Designer.vb">
       <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
     </Compile>
@@ -927,6 +933,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmElementSequencerMonthly.resx">
       <DependentUpon>frmElementSequencerMonthly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntryForms.resx">
+      <DependentUpon>frmEntryForms.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewComputationProgress.resx">
       <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
