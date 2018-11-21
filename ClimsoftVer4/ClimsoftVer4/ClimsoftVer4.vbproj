@@ -845,10 +845,6 @@
     <Compile Include="ucrHourly.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrMetadataElement.Designer.vb">
-      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ucrMetadataElement.vb" />
     <Compile Include="ucrMetadataInstrument.Designer.vb">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
     </Compile>
