@@ -261,6 +261,12 @@
     <Compile Include="frmNewHourlyWind.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewMetadata.Designer.vb">
+      <DependentUpon>frmNewMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewMonthly.Designer.vb">
       <DependentUpon>frmNewMonthly.vb</DependentUpon>
     </Compile>
@@ -839,6 +845,52 @@
     <Compile Include="ucrHourly.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataElement.Designer.vb">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataElement.vb" />
+    <Compile Include="ucrMetadataInstrument.Designer.vb">
+      <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataInstrument.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchive.Designer.vb">
+      <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchive.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataPhysicalFeature.Designer.vb">
+      <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPhysicalFeature.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClass.Designer.vb">
+      <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClass.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStation.Designer.vb">
+      <DependentUpon>ucrMetadataStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationElement.Designer.vb">
+      <DependentUpon>ucrMetadataStationElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationElement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationLocationHistory.Designer.vb">
+      <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationLocationHistory.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMonthlyData.Designer.vb">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </Compile>
@@ -873,6 +925,12 @@
       <DependentUpon>ucrMonth.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMonth.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifier.Designer.vb">
+      <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifier.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrSynopticRA1.Designer.vb">
@@ -945,6 +1003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewHourlyWind.resx">
       <DependentUpon>frmNewHourlyWind.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMetadata.resx">
+      <DependentUpon>frmNewMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewMonthly.resx">
       <DependentUpon>frmNewMonthly.vb</DependentUpon>
