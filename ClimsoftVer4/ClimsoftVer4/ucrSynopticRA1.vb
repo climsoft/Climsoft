@@ -567,6 +567,8 @@ Public Class ucrSynopticRA1
         ucrLinkedHour = ucrHourControl
         ucrLinkedNavigation = ucrNavigationControl
 
+        ucrLinkedHour.setDefaultValue(6)
+
         AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
         AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
         AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
