@@ -845,6 +845,12 @@
     <Compile Include="ucrHourly.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataElement.Designer.vb">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataElement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataInstrument.Designer.vb">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
     </Compile>
@@ -1421,6 +1427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourly.resx">
       <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataElement.resx">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataInstrument.resx">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
