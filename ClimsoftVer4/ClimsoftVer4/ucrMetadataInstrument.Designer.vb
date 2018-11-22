@@ -35,7 +35,6 @@ Partial Class ucrMetadataInstrument
         Me.lblInstrumentName = New System.Windows.Forms.Label()
         Me.lblInstrumentID = New System.Windows.Forms.Label()
         Me.ucrDataLinkInstrumentID = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrDataLinkInstrumentName = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrTextBoxAbbrevation = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrTextBoxSerialNumber = New ClimsoftVer4.ucrTextBox()
@@ -59,6 +58,7 @@ Partial Class ucrMetadataInstrument
         Me.cmdViewInstrument = New System.Windows.Forms.Button()
         Me.txtInstallDate = New System.Windows.Forms.TextBox()
         Me.lblInstruments = New System.Windows.Forms.Label()
+        Me.ucrTextBoxtInstrumentName = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
@@ -179,14 +179,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrDataLinkInstrumentID.Name = "ucrDataLinkInstrumentID"
         Me.ucrDataLinkInstrumentID.Size = New System.Drawing.Size(139, 21)
         Me.ucrDataLinkInstrumentID.TabIndex = 76
-        '
-        'ucrDataLinkInstrumentName
-        '
-        Me.ucrDataLinkInstrumentName.Location = New System.Drawing.Point(132, 77)
-        Me.ucrDataLinkInstrumentName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrDataLinkInstrumentName.Name = "ucrDataLinkInstrumentName"
-        Me.ucrDataLinkInstrumentName.Size = New System.Drawing.Size(139, 21)
-        Me.ucrDataLinkInstrumentName.TabIndex = 77
+        Me.ucrDataLinkInstrumentID.Tag = "instrumentId"
         '
         'ucrTextBoxAbbrevation
         '
@@ -195,6 +188,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxAbbrevation.Name = "ucrTextBoxAbbrevation"
         Me.ucrTextBoxAbbrevation.Size = New System.Drawing.Size(139, 20)
         Me.ucrTextBoxAbbrevation.TabIndex = 78
+        Me.ucrTextBoxAbbrevation.Tag = "abbreviation"
         Me.ucrTextBoxAbbrevation.TextboxValue = ""
         '
         'ucrStationSelector
@@ -204,6 +198,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(139, 24)
         Me.ucrStationSelector.TabIndex = 79
+        Me.ucrStationSelector.Tag = "installedAt"
         '
         'ucrTextBoxSerialNumber
         '
@@ -212,6 +207,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxSerialNumber.Name = "ucrTextBoxSerialNumber"
         Me.ucrTextBoxSerialNumber.Size = New System.Drawing.Size(139, 20)
         Me.ucrTextBoxSerialNumber.TabIndex = 80
+        Me.ucrTextBoxSerialNumber.Tag = "serialNumber"
         Me.ucrTextBoxSerialNumber.TextboxValue = ""
         '
         'ucrTextBoxModel
@@ -221,6 +217,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxModel.Name = "ucrTextBoxModel"
         Me.ucrTextBoxModel.Size = New System.Drawing.Size(139, 20)
         Me.ucrTextBoxModel.TabIndex = 81
+        Me.ucrTextBoxModel.Tag = "model"
         Me.ucrTextBoxModel.TextboxValue = ""
         '
         'ucrTextBoxManufacturer
@@ -230,6 +227,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxManufacturer.Name = "ucrTextBoxManufacturer"
         Me.ucrTextBoxManufacturer.Size = New System.Drawing.Size(139, 20)
         Me.ucrTextBoxManufacturer.TabIndex = 82
+        Me.ucrTextBoxManufacturer.Tag = "manufacturer"
         Me.ucrTextBoxManufacturer.TextboxValue = ""
         '
         'ucrTextBoxUncertainity
@@ -239,6 +237,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxUncertainity.Name = "ucrTextBoxUncertainity"
         Me.ucrTextBoxUncertainity.Size = New System.Drawing.Size(139, 20)
         Me.ucrTextBoxUncertainity.TabIndex = 83
+        Me.ucrTextBoxUncertainity.Tag = "instrumentUncertainty"
         Me.ucrTextBoxUncertainity.TextboxValue = ""
         '
         'txtDeinstallDate
@@ -271,6 +270,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxHeight.Name = "ucrTextBoxHeight"
         Me.ucrTextBoxHeight.Size = New System.Drawing.Size(51, 20)
         Me.ucrTextBoxHeight.TabIndex = 88
+        Me.ucrTextBoxHeight.Tag = "height"
         Me.ucrTextBoxHeight.TextboxValue = ""
         '
         'ucrTextBoxImageFile
@@ -280,6 +280,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxImageFile.Name = "ucrTextBoxImageFile"
         Me.ucrTextBoxImageFile.Size = New System.Drawing.Size(301, 20)
         Me.ucrTextBoxImageFile.TabIndex = 89
+        Me.ucrTextBoxImageFile.Tag = "instrumentPicture"
         Me.ucrTextBoxImageFile.TextboxValue = ""
         '
         'lblInstrumentPic
@@ -393,10 +394,21 @@ Partial Class ucrMetadataInstrument
         Me.lblInstruments.TabIndex = 95
         Me.lblInstruments.Text = "Instrument"
         '
+        'ucrTextBoxtInstrumentName
+        '
+        Me.ucrTextBoxtInstrumentName.Location = New System.Drawing.Point(132, 75)
+        Me.ucrTextBoxtInstrumentName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxtInstrumentName.Name = "ucrTextBoxtInstrumentName"
+        Me.ucrTextBoxtInstrumentName.Size = New System.Drawing.Size(139, 20)
+        Me.ucrTextBoxtInstrumentName.TabIndex = 96
+        Me.ucrTextBoxtInstrumentName.Tag = "instrumentName"
+        Me.ucrTextBoxtInstrumentName.TextboxValue = ""
+        '
         'ucrMetadataInstrument
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxtInstrumentName)
         Me.Controls.Add(Me.lblInstruments)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationInstrument)
@@ -415,7 +427,6 @@ Partial Class ucrMetadataInstrument
         Me.Controls.Add(Me.ucrTextBoxSerialNumber)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrTextBoxAbbrevation)
-        Me.Controls.Add(Me.ucrDataLinkInstrumentName)
         Me.Controls.Add(Me.ucrDataLinkInstrumentID)
         Me.Controls.Add(Me.lblImageFile)
         Me.Controls.Add(Me.lbStationID)
@@ -451,7 +462,6 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents lblInstrumentName As Label
     Friend WithEvents lblInstrumentID As Label
     Friend WithEvents ucrDataLinkInstrumentID As ucrDataLinkCombobox
-    Friend WithEvents ucrDataLinkInstrumentName As ucrDataLinkCombobox
     Friend WithEvents ucrTextBoxAbbrevation As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrTextBoxSerialNumber As ucrTextBox
@@ -475,4 +485,5 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents cmdViewInstrument As Button
     Friend WithEvents txtInstallDate As TextBox
     Friend WithEvents lblInstruments As Label
+    Friend WithEvents ucrTextBoxtInstrumentName As ucrTextBox
 End Class
