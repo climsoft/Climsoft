@@ -99,8 +99,6 @@ Public Class ucrHourlyWind
     End Sub
 
     Private Sub GoToNextDSFControl(sender As Object, e As KeyEventArgs)
-
-
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter key down
         e.SuppressKeyPress = True
@@ -167,9 +165,9 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
-        clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
-        clsDataConnection.db.SaveChanges()
+        'clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
+        'clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
+        'clsDataConnection.db.SaveChanges()
     End Sub
 
     Public Overrides Sub Clear()

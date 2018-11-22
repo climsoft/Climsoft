@@ -64,40 +64,11 @@ Public Class ucrSynopticRA1
 
     Public Overrides Sub PopulateControl()
 
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_synoptic_2_ra1
-
         If Not bFirstLoad Then
-            'TODO. the try catch can be removed later after the table has been fixed
-            Try
-                MyBase.PopulateControl()
-            Catch ex As Exception
-                MessageBox.Show("Error: " & ex.Message, "Populate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetTmaxRequired(IsTmaxRequired())
-                SetTminAndRelatedElementsRequired(IsTminRequired())
-                SetGminRequired(IsGminRequired())
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fs2ra1Record = tempRecord
-            If fs2ra1Record Is Nothing Then
-                fs2ra1Record = New form_synoptic_2_ra1
-                bUpdating = False
-            Else
-                clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'enable or disable textboxes based on year month day
             ValidateDataEntryPermission()
@@ -145,7 +116,7 @@ Public Class ucrSynopticRA1
             Dim ucrTextbox As ucrTextBox
             If TypeOf sender Is ucrTextBox Then
                 ucrTextbox = DirectCast(sender, ucrTextBox)
-                CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+                'CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
             End If
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Fields Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -178,7 +149,7 @@ Public Class ucrSynopticRA1
             'fs2ra1Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+                'CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
@@ -223,9 +194,7 @@ Public Class ucrSynopticRA1
         Dim dtbl As DataTable
         Dim row As DataRow
         clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"elementId", "lowerLimit", "upperLimit"}))
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then

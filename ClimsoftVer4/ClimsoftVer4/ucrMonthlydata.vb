@@ -23,10 +23,6 @@ Public Class ucrMonthlydata
     Private ucrLinkedNavigation As ucrNavigation
 
     Public Overrides Sub PopulateControl()
-
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_monthly
-
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
