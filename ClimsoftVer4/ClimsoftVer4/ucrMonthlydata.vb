@@ -23,35 +23,11 @@ Public Class ucrMonthlydata
     Private ucrLinkedNavigation As ucrNavigation
 
     Public Overrides Sub PopulateControl()
-
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_monthly
-
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_monthly.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetValueValidation()
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fmonthlyRecord = tempRecord
-            If fmonthlyRecord Is Nothing Then
-                fmonthlyRecord = New form_monthly
-                bUpdating = False
-            Else
-                'Detach this from the EF context to prevent it from tracking the changes made to it
-                clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'check whether to permit data entry based on date entry values
             ValidateDataEntryPermission()
@@ -112,7 +88,7 @@ Public Class ucrMonthlydata
         Dim ucrText As ucrTextBox
         If TypeOf sender Is ucrTextBox Then
             ucrText = DirectCast(sender, ucrTextBox)
-            CallByName(fmonthlyRecord, ucrText.GetField, CallType.Set, ucrText.GetValue)
+            'CallByName(fmonthlyRecord, ucrText.GetField, CallType.Set, ucrText.GetValue)
         End If
     End Sub
 
@@ -156,7 +132,7 @@ Public Class ucrMonthlydata
             MyBase.LinkedControls_evtValueChanged()
 
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fmonthlyRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+                'CallByName(fmonthlyRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
@@ -166,24 +142,24 @@ Public Class ucrMonthlydata
     End Sub
 
     Public Sub SaveRecord()
-        If bUpdating Then
-            clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Modified
-        Else
-            'This is determined by the current user not set from the form
-            fmonthlyRecord.signature = frmLogin.txtUsername.Text
-            fmonthlyRecord.entryDatetime = Date.Now()
-            clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Added
-        End If
+        'If bUpdating Then
+        '    clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Modified
+        'Else
+        '    'This is determined by the current user not set from the form
+        '    fmonthlyRecord.signature = frmLogin.txtUsername.Text
+        '    fmonthlyRecord.entryDatetime = Date.Now()
+        '    clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Added
+        'End If
 
-        clsDataConnection.db.SaveChanges()
-        'detach the record to prevent caching of records on the EF
-        clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Detached
+        'clsDataConnection.db.SaveChanges()
+        ''detach the record to prevent caching of records on the EF
+        'clsDataConnection.db.Entry(fmonthlyRecord).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_monthly.Attach(fmonthlyRecord)
-        clsDataConnection.db.form_monthly.Remove(fmonthlyRecord)
-        clsDataConnection.db.SaveChanges()
+        'clsDataConnection.db.form_monthly.Attach(fmonthlyRecord)
+        'clsDataConnection.db.form_monthly.Remove(fmonthlyRecord)
+        'clsDataConnection.db.SaveChanges()
     End Sub
 
     ''' <summary>
@@ -236,7 +212,7 @@ Public Class ucrMonthlydata
         Dim strUpperLimit As String = ""
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableNameAndFields("obselements", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
+        clsDataDefinition.SetTableNameAndFields("obselement", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", Val(ucrLinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -277,9 +253,9 @@ Public Class ucrMonthlydata
         ucrLinkedYear = ucrNewYear
         ucrLinkedNavigation = ucrNewNavigation
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedElement, "elementId", "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
 
         'Sets key controls for the navigation
         'TODO. EntryDateTime field to be added and sorting field to be set too
