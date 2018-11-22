@@ -37,34 +37,11 @@ Public Class ucrFormDaily2
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
     ''' </summary>
     Public Overrides Sub PopulateControl()
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_daily2
-
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetValueValidation()
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fd2Record = tempRecord
-            If fd2Record Is Nothing Then
-                fd2Record = New form_daily2
-                bUpdating = False
-            Else
-                'Detach this from the EF context to prevent it from tracking the changes made to it
-                clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'check whether to permit data entry based on date entry values
             ValidateDataEntryPermission()
@@ -158,12 +135,16 @@ Public Class ucrFormDaily2
         If fd2Record IsNot Nothing Then
             If TypeOf sender Is ucrTextBox Then
                 ucrText = DirectCast(sender, ucrTextBox)
-                CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
+                'TODO Replace this with a call to update the datatable
+
+                'CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
             ElseIf TypeOf sender Is ucrDataLinkCombobox Then
                 For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
                     'overwrite the specific unit value
                     If sender Is kvpTemp.Value Then
-                        CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+                        'TODO Replace this with a call to update the datatable
+
+                        'CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
                         Exit For
                     End If
                 Next
@@ -172,25 +153,6 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
-        'Dim ctr As Control
-        'Dim ctrVFP As New ucrValueFlagPeriod
-
-        'If TypeOf sender Is ucrValueFlagPeriod Then
-        '    ctrVFP = sender
-        '    For Each ctr In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            If ctr.Tag = ctrVFP.Tag + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '            If ctrVFP.Tag = iMonthLength Then
-        '                ucrInputTotal.GetFocus()
-        '            End If
-        '        End If
-        '    Next
-        'End If
-
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter  
         e.SuppressKeyPress = True
@@ -221,11 +183,12 @@ Public Class ucrFormDaily2
         Next
 
         If bValidValues Then
-            'fd2Record = Nothing
+            'will populate the datatable based on the new key values
             MyBase.LinkedControls_evtValueChanged()
 
             For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+                'TODO Replace this with a call to update the datatable
+                'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
@@ -254,24 +217,14 @@ Public Class ucrFormDaily2
     End Sub
 
     Public Sub SaveRecord()
+        'TODO Replace this with a call to update or insert record the datatable and the datasorce
         If bUpdating Then
-            clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Modified
         Else
-            'This is determined by the current user not set from the form
-            fd2Record.signature = frmLogin.txtUsername.Text
-            fd2Record.EntryDatetime = Date.Now()
-            clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Added
         End If
-
-        clsDataConnection.db.SaveChanges()
-        'detach the record to prevent caching of records on the EF
-        clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_daily2.Attach(fd2Record)
-        clsDataConnection.db.form_daily2.Remove(fd2Record)
-        clsDataConnection.db.SaveChanges()
+        'TODO Replace this with a call to delete the record from the datatable and the datasorce
     End Sub
 
     ''' <summary>
@@ -373,7 +326,7 @@ Public Class ucrFormDaily2
         bTotalRequired = False
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableNameAndFields("obselements", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
+        clsDataDefinition.SetTableNameAndFields("obselement", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", Val(ucrLinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -381,7 +334,7 @@ Public Class ucrFormDaily2
             strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
             'qcTotalRequired is a nullable integer in the EF model
             If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
-                bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+                bTotalRequired = (Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0)
             End If
         End If
 
@@ -425,11 +378,11 @@ Public Class ucrFormDaily2
 
         ucrLinkedHour.setDefaultValue(6)
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedElement, "elementId", "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, "hh", "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
         'Sets key controls for the navigation
         'TODO. EntryDateTime field to be added and sorting field to be set too
@@ -553,7 +506,13 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
-                        dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                        Try
+                            dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+
+                        Catch ex As Exception
+                            Dim k = True
+                            Continue For
+                        End Try
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
@@ -641,94 +600,6 @@ Public Class ucrFormDaily2
 
         'TODO? because of the detachment
         'PopulateControl()
-
-    End Sub
-
-    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
-    Public Sub UploadAllRecordsEF()
-        Dim clsAllRecordsCall As New DataCall
-        Dim dtbAllRecords As DataTable
-        Dim rcdObservationInitial As observationinitial
-        Dim strCurrTag As String
-        Dim dtObsDateTime As Date
-        Dim strStationId As String
-        Dim lElementId As Long
-        Dim iPeriod As Integer
-        Dim lstAllFields As New List(Of String)
-        Dim bNewRecord As Boolean
-
-        'get the observation values fields
-        lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
-
-        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        dtbAllRecords = clsAllRecordsCall.GetDataTable()
-
-        For Each row As DataRow In dtbAllRecords.Rows
-            For i As Integer = 1 To 31
-                If i < 10 Then
-                    strCurrTag = "0" & i
-                Else
-                    strCurrTag = i
-                End If
-
-                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
-
-                    strStationId = row.Item("stationId")
-                    dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
-
-                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
-                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
-                    If rcdObservationInitial Is Nothing Then
-                        bNewRecord = True
-                        rcdObservationInitial = New observationinitial
-                    Else
-                        bNewRecord = False
-                    End If
-
-                    rcdObservationInitial.recordedFrom = strStationId
-                    rcdObservationInitial.describedBy = lElementId
-                    rcdObservationInitial.obsDatetime = dtObsDateTime
-                    rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.qcStatus = 0
-                    rcdObservationInitial.acquisitionType = 1
-                    rcdObservationInitial.dataForm = strTableName
-
-                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
-                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
-                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
-                        rcdObservationInitial.period = iPeriod
-                    End If
-
-                    If Not IsDBNull(row.Item("signature")) Then
-                        rcdObservationInitial.capturedBy = row.Item("signature")
-                    End If
-                    If Not IsDBNull(row.Item("temperatureUnits")) Then
-                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
-                    End If
-                    If Not IsDBNull(row.Item("precipUnits")) Then
-                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
-                    End If
-                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
-                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
-                    End If
-                    If Not IsDBNull(row.Item("visUnits")) Then
-                        rcdObservationInitial.visUnits = row.Item("visUnits")
-                    End If
-
-                    If bNewRecord Then
-                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
-                    End If
-                    'save the Observation record
-                    clsDataConnection.db.SaveChanges()
-
-                End If
-            Next
-        Next
-
-        'TODO? because of the detachment
-        PopulateControl()
 
     End Sub
 

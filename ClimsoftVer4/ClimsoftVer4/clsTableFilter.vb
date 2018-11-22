@@ -32,6 +32,7 @@ Public Class TableFilter
     Private bArrayOperator As Boolean = False
     Private lstValues As List(Of String)
     Private strValue As String
+    Private objValue As Object 'TODO just for testing
     Public bValuesAsString As Boolean
     Private clsDataCallValues As DataCall
 
@@ -258,4 +259,108 @@ Public Class TableFilter
         End If
         Return strExpression
     End Function
+
+    Public Function GetSqlExpression() As String
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            strExpression = clsLeftFilter.GetSqlExpression() & " " & strOperator & " " & clsRightFilter.GetSqlExpression()
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+                    strExpression = strExpression & " " & strOperator & " '" & strValue & "'"
+                Else
+                    strExpression = strExpression & " " & strOperator & " " & strValue
+                End If
+            End If
+        End If
+        strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            strExpression = "!= " & strExpression
+        End If
+        Return strExpression
+    End Function
+
+    Public Function GetSqlParameterisedExpression() As String
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            strExpression = clsLeftFilter.GetSqlParameterisedExpression() & " " & strOperator & " " & clsRightFilter.GetSqlParameterisedExpression()
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+                    strExpression = strExpression & " " & strOperator & " @" & strExpression
+                Else
+                    strExpression = strExpression & " " & strOperator & " @" & strExpression
+
+                End If
+            End If
+        End If
+        strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            'strExpression = "!= " & strExpression
+        End If
+        Return strExpression
+    End Function
+
+    Public Sub SetParameters(cmd As MySql.Data.MySqlClient.MySqlCommand)
+
+
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            'strExpression = clsLeftFilter.GetLinqExpression() & " " & strOperator & " " & clsRightFilter.GetLinqExpression()
+            clsLeftFilter.SetParameters(cmd)
+            clsRightFilter.SetParameters(cmd)
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+
+                    'TODO. Retain its type
+                    objValue = strValue
+                    'strExpression = strExpression & " " & strOperator & " @" & strExpression
+                    cmd.Parameters.AddWithValue("@" & strExpression, objValue)
+                Else
+                    'TODO. Retain its type
+                    objValue = strValue
+                    ' strExpression = strExpression & " " & strOperator & " @" & strExpression
+                    cmd.Parameters.AddWithValue("@" & strExpression, objValue)
+                End If
+
+
+            End If
+        End If
+        ' strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            'strExpression = "!= " & strExpression
+        End If
+        'Return strExpression
+    End Sub
+
+    Public Sub AddToSqlcommand(cmd As MySql.Data.MySqlClient.MySqlCommand)
+        cmd.CommandText = cmd.CommandText & " WHERE " & GetSqlParameterisedExpression()
+        SetParameters(cmd)
+    End Sub
+
 End Class
