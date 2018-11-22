@@ -306,28 +306,6 @@ Public Class DataCall
         Catch ex As Exception
             Return Nothing
         End Try
-
-        'If strTable = "stations" Then
-        '    ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
-        '    If clsFilter IsNot Nothing Then
-        '        Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
-        '    Else
-        '        Return db.stations.ToList()
-        '    End If
-        '    'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
-        '    '    Return q.ToList
-        '    'End If
-        '    'q = x.Select(GetSelectLinqExpression())
-        'End If
-        '.Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
-
-        'Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
-        'Dim q = From emp In db.stations Select New With {.stationId = emp.stationId, .stationName = emp.stationName, .stations_ids = emp.stationId + " - " + emp.stationName}
-        ' if DBQuery() contains NULL dates then the connection string must have "Convert Zero Datetime=True"
-
-        'Return db.stations.Local.ToBindingList()
-        'Return db.stations.Local.Where(Function(x) x.stationId = "67774010")
-        'Return db.stations.Local.Where(clsFilter.GetLinqExpression())
     End Function
 
     'TODO This should return the Linq expression that goes in the Select method
@@ -348,21 +326,66 @@ Public Class DataCall
             clsCurrentFilter = clsFilter
         End If
 
-        Try
-            If strTable <> "" Then
-                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
-                Dim y = TryCast(x, IQueryable(Of Object))
 
-                If clsCurrentFilter IsNot Nothing Then
-                    y = y.Where(clsCurrentFilter.GetLinqExpression())
-                End If
-                Return y.Count()
+
+        'Try
+        '    If strTable <> "" Then
+        '        Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+        '        Dim y = TryCast(x, IQueryable(Of Object))
+
+        '        If clsCurrentFilter IsNot Nothing Then
+        '            y = y.Where(clsCurrentFilter.GetLinqExpression())
+        '        End If
+        '        Return y.Count()
+        '    Else
+        '        MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+        '        Return 0
+        '    End If
+        'Catch ex As Exception
+        '    Return 0
+        'End Try
+
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        Dim iCount As Integer
+
+        Try
+
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            If IsNothing(clsAdditionalFilter) Then
+                clsCurrentFilter = clsFilter
             Else
-                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
-                Return 0
+                If IsNothing(clsFilter) Then
+                    clsCurrentFilter = clsAdditionalFilter
+                Else
+                    clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+                End If
             End If
+
+            cmd.Connection = conn
+            cmd.CommandText = "Select COUNT(*) AS num FROM " & strTable
+
+            If clsCurrentFilter IsNot Nothing Then
+                clsCurrentFilter.AddToSqlcommand(cmd)
+            End If
+
+            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                If reader.HasRows Then
+                    While reader.Read
+                        iCount = reader.Item("num")
+                    End While
+                End If
+            End Using
+
         Catch ex As Exception
-            Return 0
+            MsgBox("Error : " & ex.Message)
+        Finally
+            conn.Close()
         End Try
+
+        Return iCount
     End Function
 End Class
