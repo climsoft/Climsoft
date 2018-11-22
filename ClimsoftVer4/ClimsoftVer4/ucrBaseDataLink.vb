@@ -181,17 +181,17 @@ Public Class ucrBaseDataLink
 
     Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
         Dim tempRow As DataRow
-        Dim lstTemp As New List(Of String)
+        Dim lstTemp As New List(Of Object)
 
         If strFieldName = "" Then
             Return Nothing
         End If
         UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 1 Then
-            Return dtbRecords.Rows(0).Field(Of String)(strFieldName)
+            Return dtbRecords.Rows(0).Item(strFieldName)
         ElseIf dtbRecords.Rows.Count > 1 Then
             For Each tempRow In dtbRecords.Rows
-                lstTemp.Add(tempRow.Field(Of String)(strFieldName))
+                lstTemp.Add(tempRow.Item(strFieldName))
             Next
             Return lstTemp
         Else
@@ -209,8 +209,10 @@ Public Class ucrBaseDataLink
         Dim temp As Object
         temp = ucrLinkedDataControl.GetValue(strLinkedFieldName)
 
-        If TypeOf temp Is String OrElse TypeOf temp Is Integer Then
-            temp = CStr(temp)
+        'TODO. This needs to be refined. For some reason TypeOf temp fails to work as expected. the type of fails to match hence we added the  
+        'temp.GetType for redundancy
+        If TypeOf temp Is String OrElse TypeOf temp Is Integer OrElse TypeOf temp Is Long OrElse temp.GetType Is GetType(String) OrElse temp.GetType Is GetType(Integer) OrElse temp.GetType Is GetType(Long) Then
+            'temp = CStr(temp)
             AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         Else
             AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
