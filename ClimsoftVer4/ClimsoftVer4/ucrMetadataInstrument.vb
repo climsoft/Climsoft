@@ -20,7 +20,7 @@
 
             'set the values to the input controls
             For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrTextBox Then
+                If TypeOf ctr Is ucrTextBox OrElse TypeOf ctr Is ucrDatePicker Then
                     DirectCast(ctr, ucrBaseDataLink).SetValue(GetValue(ctr.Tag))
                 End If
             Next
@@ -35,7 +35,7 @@
         If bFirstLoad Then
             'setup the controls
             For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrTextBox Then
+                If TypeOf ctr Is ucrTextBox OrElse TypeOf ctr Is ucrDatePicker Then
                     lstFields.Add(ctr.Tag)
                     AddHandler DirectCast(ctr, ucrBaseDataLink).evtValueChanged, AddressOf InnerControlValueChanged
                 End If
@@ -49,7 +49,6 @@
             bFirstLoad = False
 
             'populate the values
-            'PopulateControl()
             ucrNavigationInstrument.PopulateControl()
         End If
     End Sub
@@ -59,13 +58,12 @@
     End Sub
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
-        'populate
         'will populate the datatable based on the new key values
         MyBase.LinkedControls_evtValueChanged()
 
         For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            'TODO Replace this with a call to update the datatable
-            'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            'TODO 
+
         Next
         ucrNavigationInstrument.UpdateNavigationByKeyControls()
 

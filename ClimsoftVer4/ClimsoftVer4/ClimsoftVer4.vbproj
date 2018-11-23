@@ -833,6 +833,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDatePicker.Designer.vb">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDatePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrHourlyWind.Designer.vb">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </Compile>
@@ -1421,6 +1427,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDatePicker.resx">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourlyWind.resx">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>

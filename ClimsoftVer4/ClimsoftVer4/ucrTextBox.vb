@@ -346,7 +346,8 @@ Public Class ucrTextBox
     ''' </summary>
     ''' <param name="Size"></param>
     Public Sub SetSize(Size As Point)
-        txtBox.Size = New Size(Size)
+        'txtBox.Size = New Size(Size)
+        Me.Size = New Size(Size)
     End Sub
 
     Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
