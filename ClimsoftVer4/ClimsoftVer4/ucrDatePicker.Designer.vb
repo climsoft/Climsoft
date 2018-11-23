@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class ucrTextBox
+Partial Class ucrDatePicker
     Inherits ClimsoftVer4.ucrBaseDataLink
 
     'UserControl overrides dispose to clean up the component list.
@@ -22,30 +22,42 @@ Partial Class ucrTextBox
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtBox = New System.Windows.Forms.TextBox()
+        Me.txtDate = New System.Windows.Forms.TextBox()
+        Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtBox
+        'txtDate
         '
-        Me.txtBox.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtBox.Location = New System.Drawing.Point(0, 0)
-        Me.txtBox.Name = "txtBox"
-        Me.txtBox.Size = New System.Drawing.Size(51, 20)
-        Me.txtBox.TabIndex = 578
+        Me.txtDate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDate.Location = New System.Drawing.Point(0, 0)
+        Me.txtDate.Name = "txtDate"
+        Me.txtDate.Size = New System.Drawing.Size(182, 20)
+        Me.txtDate.TabIndex = 59
         '
-        'ucrTextBox
+        'dtpDate
+        '
+        Me.dtpDate.Dock = System.Windows.Forms.DockStyle.Right
+        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDate.Location = New System.Drawing.Point(182, 0)
+        Me.dtpDate.Name = "dtpDate"
+        Me.dtpDate.Size = New System.Drawing.Size(20, 20)
+        Me.dtpDate.TabIndex = 58
+        '
+        'ucrDatePicker
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.txtBox)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Name = "ucrTextBox"
-        Me.Size = New System.Drawing.Size(51, 20)
+        Me.Controls.Add(Me.txtDate)
+        Me.Controls.Add(Me.dtpDate)
+        Me.Name = "ucrDatePicker"
+        Me.Size = New System.Drawing.Size(202, 21)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtBox As TextBox
+
+    Friend WithEvents txtDate As TextBox
+    Friend WithEvents dtpDate As DateTimePicker
 End Class

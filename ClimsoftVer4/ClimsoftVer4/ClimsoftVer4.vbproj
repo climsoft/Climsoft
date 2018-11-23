@@ -833,6 +833,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrDatePicker.Designer.vb">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDatePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrHourlyWind.Designer.vb">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </Compile>
@@ -848,7 +854,9 @@
     <Compile Include="ucrMetadataElement.Designer.vb">
       <DependentUpon>ucrMetadataElement.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrMetadataElement.vb" />
+    <Compile Include="ucrMetadataElement.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataInstrument.Designer.vb">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
     </Compile>
@@ -1420,11 +1428,17 @@
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDatePicker.resx">
+      <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrHourlyWind.resx">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourly.resx">
       <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataElement.resx">
+      <DependentUpon>ucrMetadataElement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataInstrument.resx">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>

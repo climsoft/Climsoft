@@ -24,22 +24,22 @@ Partial Class frmNewMetadata
     Private Sub InitializeComponent()
         Me.TabMetadata = New System.Windows.Forms.TabControl()
         Me.TabStation = New System.Windows.Forms.TabPage()
-        Me.TabElement = New System.Windows.Forms.TabPage()
-        Me.TabStationElement = New System.Windows.Forms.TabPage()
-        Me.TabInstrument = New System.Windows.Forms.TabPage()
-        Me.TabStationLocationHistory = New System.Windows.Forms.TabPage()
-        Me.TabStationQualifier = New System.Windows.Forms.TabPage()
-        Me.TabScheduleClass = New System.Windows.Forms.TabPage()
-        Me.TabPhysicalFeature = New System.Windows.Forms.TabPage()
-        Me.TabPaperArchive = New System.Windows.Forms.TabPage()
         Me.UcrMetadataStation1 = New ClimsoftVer4.ucrMetadataStation()
-        Me.UcrMeatadataElement1 = New ClimsoftVer4.ucrMeatadataElement()
+        Me.TabElement = New System.Windows.Forms.TabPage()
+        Me.UcrMetadataElement1 = New ClimsoftVer4.ucrMetadataElement()
+        Me.TabStationElement = New System.Windows.Forms.TabPage()
         Me.UcrMetadataStationElement1 = New ClimsoftVer4.ucrMetadataStationElement()
+        Me.TabInstrument = New System.Windows.Forms.TabPage()
         Me.UcrMetadataInstrument1 = New ClimsoftVer4.ucrMetadataInstrument()
+        Me.TabStationLocationHistory = New System.Windows.Forms.TabPage()
         Me.UcrMetadataStationLocationHistory1 = New ClimsoftVer4.ucrMetadataStationLocationHistory()
+        Me.TabStationQualifier = New System.Windows.Forms.TabPage()
         Me.UcrMetadataStationQualifier1 = New ClimsoftVer4.ucrMetadataStationQualifier()
+        Me.TabScheduleClass = New System.Windows.Forms.TabPage()
         Me.UcrMetadataScheduleClass1 = New ClimsoftVer4.ucrMetadataScheduleClass()
+        Me.TabPhysicalFeature = New System.Windows.Forms.TabPage()
         Me.UcrMetadataPhysicalFeature1 = New ClimsoftVer4.ucrMetadataPhysicalFeature()
+        Me.TabPaperArchive = New System.Windows.Forms.TabPage()
         Me.UcrMetadataPaperArchive1 = New ClimsoftVer4.ucrMetadataPaperArchive()
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
@@ -68,7 +68,7 @@ Partial Class frmNewMetadata
         Me.TabMetadata.Location = New System.Drawing.Point(5, 9)
         Me.TabMetadata.Name = "TabMetadata"
         Me.TabMetadata.SelectedIndex = 0
-        Me.TabMetadata.Size = New System.Drawing.Size(786, 476)
+        Me.TabMetadata.Size = New System.Drawing.Size(786, 527)
         Me.TabMetadata.TabIndex = 1
         '
         'TabStation
@@ -82,9 +82,16 @@ Partial Class frmNewMetadata
         Me.TabStation.Text = "Station"
         Me.TabStation.UseVisualStyleBackColor = True
         '
+        'UcrMetadataStation1
+        '
+        Me.UcrMetadataStation1.Location = New System.Drawing.Point(6, 6)
+        Me.UcrMetadataStation1.Name = "UcrMetadataStation1"
+        Me.UcrMetadataStation1.Size = New System.Drawing.Size(766, 438)
+        Me.UcrMetadataStation1.TabIndex = 0
+        '
         'TabElement
         '
-        Me.TabElement.Controls.Add(Me.UcrMeatadataElement1)
+        Me.TabElement.Controls.Add(Me.UcrMetadataElement1)
         Me.TabElement.Location = New System.Drawing.Point(4, 22)
         Me.TabElement.Name = "TabElement"
         Me.TabElement.Padding = New System.Windows.Forms.Padding(3)
@@ -92,6 +99,13 @@ Partial Class frmNewMetadata
         Me.TabElement.TabIndex = 1
         Me.TabElement.Text = "Element"
         Me.TabElement.UseVisualStyleBackColor = True
+        '
+        'UcrMetadataElement1
+        '
+        Me.UcrMetadataElement1.Location = New System.Drawing.Point(3, 3)
+        Me.UcrMetadataElement1.Name = "UcrMetadataElement1"
+        Me.UcrMetadataElement1.Size = New System.Drawing.Size(769, 441)
+        Me.UcrMetadataElement1.TabIndex = 0
         '
         'TabStationElement
         '
@@ -104,16 +118,30 @@ Partial Class frmNewMetadata
         Me.TabStationElement.Text = "Station Element"
         Me.TabStationElement.UseVisualStyleBackColor = True
         '
+        'UcrMetadataStationElement1
+        '
+        Me.UcrMetadataStationElement1.Location = New System.Drawing.Point(3, 6)
+        Me.UcrMetadataStationElement1.Name = "UcrMetadataStationElement1"
+        Me.UcrMetadataStationElement1.Size = New System.Drawing.Size(769, 438)
+        Me.UcrMetadataStationElement1.TabIndex = 0
+        '
         'TabInstrument
         '
         Me.TabInstrument.Controls.Add(Me.UcrMetadataInstrument1)
         Me.TabInstrument.Location = New System.Drawing.Point(4, 22)
         Me.TabInstrument.Name = "TabInstrument"
         Me.TabInstrument.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabInstrument.Size = New System.Drawing.Size(778, 450)
+        Me.TabInstrument.Size = New System.Drawing.Size(778, 501)
         Me.TabInstrument.TabIndex = 3
         Me.TabInstrument.Text = "Instrument"
         Me.TabInstrument.UseVisualStyleBackColor = True
+        '
+        'UcrMetadataInstrument1
+        '
+        Me.UcrMetadataInstrument1.Location = New System.Drawing.Point(6, 6)
+        Me.UcrMetadataInstrument1.Name = "UcrMetadataInstrument1"
+        Me.UcrMetadataInstrument1.Size = New System.Drawing.Size(766, 489)
+        Me.UcrMetadataInstrument1.TabIndex = 0
         '
         'TabStationLocationHistory
         '
@@ -126,6 +154,13 @@ Partial Class frmNewMetadata
         Me.TabStationLocationHistory.Text = "Station Location History"
         Me.TabStationLocationHistory.UseVisualStyleBackColor = True
         '
+        'UcrMetadataStationLocationHistory1
+        '
+        Me.UcrMetadataStationLocationHistory1.Location = New System.Drawing.Point(6, 6)
+        Me.UcrMetadataStationLocationHistory1.Name = "UcrMetadataStationLocationHistory1"
+        Me.UcrMetadataStationLocationHistory1.Size = New System.Drawing.Size(766, 438)
+        Me.UcrMetadataStationLocationHistory1.TabIndex = 0
+        '
         'TabStationQualifier
         '
         Me.TabStationQualifier.Controls.Add(Me.UcrMetadataStationQualifier1)
@@ -136,6 +171,13 @@ Partial Class frmNewMetadata
         Me.TabStationQualifier.TabIndex = 5
         Me.TabStationQualifier.Text = "Station Qualifier"
         Me.TabStationQualifier.UseVisualStyleBackColor = True
+        '
+        'UcrMetadataStationQualifier1
+        '
+        Me.UcrMetadataStationQualifier1.Location = New System.Drawing.Point(3, 6)
+        Me.UcrMetadataStationQualifier1.Name = "UcrMetadataStationQualifier1"
+        Me.UcrMetadataStationQualifier1.Size = New System.Drawing.Size(772, 441)
+        Me.UcrMetadataStationQualifier1.TabIndex = 2
         '
         'TabScheduleClass
         '
@@ -148,6 +190,13 @@ Partial Class frmNewMetadata
         Me.TabScheduleClass.Text = "Schedule Class"
         Me.TabScheduleClass.UseVisualStyleBackColor = True
         '
+        'UcrMetadataScheduleClass1
+        '
+        Me.UcrMetadataScheduleClass1.Location = New System.Drawing.Point(3, 6)
+        Me.UcrMetadataScheduleClass1.Name = "UcrMetadataScheduleClass1"
+        Me.UcrMetadataScheduleClass1.Size = New System.Drawing.Size(769, 427)
+        Me.UcrMetadataScheduleClass1.TabIndex = 0
+        '
         'TabPhysicalFeature
         '
         Me.TabPhysicalFeature.Controls.Add(Me.UcrMetadataPhysicalFeature1)
@@ -158,6 +207,13 @@ Partial Class frmNewMetadata
         Me.TabPhysicalFeature.TabIndex = 7
         Me.TabPhysicalFeature.Text = "Physical Feature"
         Me.TabPhysicalFeature.UseVisualStyleBackColor = True
+        '
+        'UcrMetadataPhysicalFeature1
+        '
+        Me.UcrMetadataPhysicalFeature1.Location = New System.Drawing.Point(3, 3)
+        Me.UcrMetadataPhysicalFeature1.Name = "UcrMetadataPhysicalFeature1"
+        Me.UcrMetadataPhysicalFeature1.Size = New System.Drawing.Size(772, 444)
+        Me.UcrMetadataPhysicalFeature1.TabIndex = 0
         '
         'TabPaperArchive
         '
@@ -170,74 +226,18 @@ Partial Class frmNewMetadata
         Me.TabPaperArchive.Text = "Paper Archive"
         Me.TabPaperArchive.UseVisualStyleBackColor = True
         '
-        'UcrMetadataStation1
-        '
-        Me.UcrMetadataStation1.Location = New System.Drawing.Point(6, 6)
-        Me.UcrMetadataStation1.Name = "UcrMetadataStation1"
-        Me.UcrMetadataStation1.Size = New System.Drawing.Size(766, 438)
-        Me.UcrMetadataStation1.TabIndex = 0
-        '
-        'UcrMeatadataElement1
-        '
-        Me.UcrMeatadataElement1.Location = New System.Drawing.Point(3, 3)
-        Me.UcrMeatadataElement1.Name = "UcrMeatadataElement1"
-        Me.UcrMeatadataElement1.Size = New System.Drawing.Size(769, 441)
-        Me.UcrMeatadataElement1.TabIndex = 0
-        '
-        'UcrMetadataStationElement1
-        '
-        Me.UcrMetadataStationElement1.Location = New System.Drawing.Point(3, 6)
-        Me.UcrMetadataStationElement1.Name = "UcrMetadataStationElement1"
-        Me.UcrMetadataStationElement1.Size = New System.Drawing.Size(769, 438)
-        Me.UcrMetadataStationElement1.TabIndex = 0
-        '
-        'UcrMetadataInstrument1
-        '
-        Me.UcrMetadataInstrument1.Location = New System.Drawing.Point(6, 6)
-        Me.UcrMetadataInstrument1.Name = "UcrMetadataInstrument1"
-        Me.UcrMetadataInstrument1.Size = New System.Drawing.Size(766, 438)
-        Me.UcrMetadataInstrument1.TabIndex = 0
-        '
-        'UcrMetadataStationLocationHistory1
-        '
-        Me.UcrMetadataStationLocationHistory1.Location = New System.Drawing.Point(6, 6)
-        Me.UcrMetadataStationLocationHistory1.Name = "UcrMetadataStationLocationHistory1"
-        Me.UcrMetadataStationLocationHistory1.Size = New System.Drawing.Size(766, 438)
-        Me.UcrMetadataStationLocationHistory1.TabIndex = 0
-        '
-        'UcrMetadataStationQualifier1
-        '
-        Me.UcrMetadataStationQualifier1.Location = New System.Drawing.Point(3, 6)
-        Me.UcrMetadataStationQualifier1.Name = "UcrMetadataStationQualifier1"
-        Me.UcrMetadataStationQualifier1.Size = New System.Drawing.Size(772, 441)
-        Me.UcrMetadataStationQualifier1.TabIndex = 2
-        '
-        'UcrMetadataScheduleClass1
-        '
-        Me.UcrMetadataScheduleClass1.Location = New System.Drawing.Point(3, 6)
-        Me.UcrMetadataScheduleClass1.Name = "UcrMetadataScheduleClass1"
-        Me.UcrMetadataScheduleClass1.Size = New System.Drawing.Size(769, 427)
-        Me.UcrMetadataScheduleClass1.TabIndex = 0
-        '
-        'UcrMetadataPhysicalFeature1
-        '
-        Me.UcrMetadataPhysicalFeature1.Location = New System.Drawing.Point(3, 3)
-        Me.UcrMetadataPhysicalFeature1.Name = "UcrMetadataPhysicalFeature1"
-        Me.UcrMetadataPhysicalFeature1.Size = New System.Drawing.Size(772, 444)
-        Me.UcrMetadataPhysicalFeature1.TabIndex = 0
-        '
         'UcrMetadataPaperArchive1
         '
-        Me.UcrMetadataPaperArchive1.Location = New System.Drawing.Point(3, 3)
+        Me.UcrMetadataPaperArchive1.Location = New System.Drawing.Point(122, 3)
         Me.UcrMetadataPaperArchive1.Name = "UcrMetadataPaperArchive1"
-        Me.UcrMetadataPaperArchive1.Size = New System.Drawing.Size(772, 441)
+        Me.UcrMetadataPaperArchive1.Size = New System.Drawing.Size(535, 378)
         Me.UcrMetadataPaperArchive1.TabIndex = 0
         '
         'frmNewMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(794, 489)
+        Me.ClientSize = New System.Drawing.Size(794, 538)
         Me.Controls.Add(Me.TabMetadata)
         Me.Name = "frmNewMetadata"
         Me.Text = "frmNewMetadata"
@@ -266,7 +266,7 @@ Partial Class frmNewMetadata
     Friend WithEvents TabPhysicalFeature As TabPage
     Friend WithEvents TabPaperArchive As TabPage
     Friend WithEvents UcrMetadataStation1 As ucrMetadataStation
-    Friend WithEvents UcrMeatadataElement1 As ucrMeatadataElement
+    Friend WithEvents UcrMetadataElement1 As ucrMetadataElement
     Friend WithEvents UcrMetadataStationElement1 As ucrMetadataStationElement
     Friend WithEvents UcrMetadataInstrument1 As ucrMetadataInstrument
     Friend WithEvents UcrMetadataStationLocationHistory1 As ucrMetadataStationLocationHistory
