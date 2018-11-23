@@ -43,6 +43,7 @@
             SetTableNameAndFields(strTableName, lstFields)
             AddLinkedControlFilters(ucrDataLinkInstrumentID, "instrumentId", "=", strLinkedFieldName:="instrumentId", bForceValuesAsString:=True)
 
+            'set up the navigation control
             ucrNavigationInstrument.SetTableNameAndFields(strTableName, (New List(Of String)({"instrumentId"})))
             ucrNavigationInstrument.SetKeyControls("instrumentId", ucrDataLinkInstrumentID)
 
