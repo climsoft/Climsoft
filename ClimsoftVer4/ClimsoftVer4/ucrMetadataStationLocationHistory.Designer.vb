@@ -36,12 +36,10 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrTextBoxStationType = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGeogLocationMethod = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGeoglocationHistory = New ClimsoftVer4.ucrTextBox()
-        Me.ucrDataLinkComboboxOpenningdate = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxAuthority = New ClimsoftVer4.ucrTextBox()
-        Me.ucrDataLinkComboboxClosingDate = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -51,6 +49,8 @@ Partial Class ucrMetadataStationLocationHistory
         Me.cmdAddHistory = New System.Windows.Forms.Button()
         Me.cmdClearHistory = New System.Windows.Forms.Button()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
+        Me.ucrDatePickerCkosingDate = New ClimsoftVer4.ucrDatePicker()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox10.SuspendLayout()
         Me.SuspendLayout()
@@ -68,7 +68,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(143, 73)
+        Me.lblStation.Location = New System.Drawing.Point(143, 53)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(40, 13)
         Me.lblStation.TabIndex = 70
@@ -77,7 +77,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblClosingDate
         '
         Me.lblClosingDate.AutoSize = True
-        Me.lblClosingDate.Location = New System.Drawing.Point(143, 208)
+        Me.lblClosingDate.Location = New System.Drawing.Point(143, 188)
         Me.lblClosingDate.Name = "lblClosingDate"
         Me.lblClosingDate.Size = New System.Drawing.Size(67, 13)
         Me.lblClosingDate.TabIndex = 75
@@ -86,7 +86,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblOpeningDate
         '
         Me.lblOpeningDate.AutoSize = True
-        Me.lblOpeningDate.Location = New System.Drawing.Point(143, 181)
+        Me.lblOpeningDate.Location = New System.Drawing.Point(143, 161)
         Me.lblOpeningDate.Name = "lblOpeningDate"
         Me.lblOpeningDate.Size = New System.Drawing.Size(73, 13)
         Me.lblOpeningDate.TabIndex = 74
@@ -95,7 +95,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(143, 235)
+        Me.lblLatitude.Location = New System.Drawing.Point(143, 215)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
         Me.lblLatitude.TabIndex = 76
@@ -104,7 +104,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblAuthority
         '
         Me.lblAuthority.AutoSize = True
-        Me.lblAuthority.Location = New System.Drawing.Point(143, 316)
+        Me.lblAuthority.Location = New System.Drawing.Point(143, 296)
         Me.lblAuthority.Name = "lblAuthority"
         Me.lblAuthority.Size = New System.Drawing.Size(48, 13)
         Me.lblAuthority.TabIndex = 79
@@ -113,7 +113,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblGeogLocationMethod
         '
         Me.lblGeogLocationMethod.AutoSize = True
-        Me.lblGeogLocationMethod.Location = New System.Drawing.Point(143, 127)
+        Me.lblGeogLocationMethod.Location = New System.Drawing.Point(143, 107)
         Me.lblGeogLocationMethod.Name = "lblGeogLocationMethod"
         Me.lblGeogLocationMethod.Size = New System.Drawing.Size(113, 13)
         Me.lblGeogLocationMethod.TabIndex = 72
@@ -122,7 +122,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblElevation
         '
         Me.lblElevation.AutoSize = True
-        Me.lblElevation.Location = New System.Drawing.Point(143, 289)
+        Me.lblElevation.Location = New System.Drawing.Point(143, 269)
         Me.lblElevation.Name = "lblElevation"
         Me.lblElevation.Size = New System.Drawing.Size(51, 13)
         Me.lblElevation.TabIndex = 78
@@ -131,7 +131,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(143, 262)
+        Me.lblLongitude.Location = New System.Drawing.Point(143, 242)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
         Me.lblLongitude.TabIndex = 77
@@ -140,7 +140,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblStationType
         '
         Me.lblStationType.AutoSize = True
-        Me.lblStationType.Location = New System.Drawing.Point(143, 100)
+        Me.lblStationType.Location = New System.Drawing.Point(143, 80)
         Me.lblStationType.Name = "lblStationType"
         Me.lblStationType.Size = New System.Drawing.Size(67, 13)
         Me.lblStationType.TabIndex = 71
@@ -149,7 +149,7 @@ Partial Class ucrMetadataStationLocationHistory
         'lblGeogLocationAccuracy
         '
         Me.lblGeogLocationAccuracy.AutoSize = True
-        Me.lblGeogLocationAccuracy.Location = New System.Drawing.Point(143, 154)
+        Me.lblGeogLocationAccuracy.Location = New System.Drawing.Point(143, 134)
         Me.lblGeogLocationAccuracy.Name = "lblGeogLocationAccuracy"
         Me.lblGeogLocationAccuracy.Size = New System.Drawing.Size(122, 13)
         Me.lblGeogLocationAccuracy.TabIndex = 73
@@ -157,82 +157,73 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxStationType
         '
-        Me.ucrTextBoxStationType.Location = New System.Drawing.Point(275, 91)
+        Me.ucrTextBoxStationType.Location = New System.Drawing.Point(275, 71)
         Me.ucrTextBoxStationType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxStationType.Name = "ucrTextBoxStationType"
         Me.ucrTextBoxStationType.Size = New System.Drawing.Size(129, 20)
         Me.ucrTextBoxStationType.TabIndex = 85
+        Me.ucrTextBoxStationType.Tag = "stationType"
         Me.ucrTextBoxStationType.TextboxValue = ""
         '
         'ucrTextBoxGeogLocationMethod
         '
-        Me.ucrTextBoxGeogLocationMethod.Location = New System.Drawing.Point(275, 119)
+        Me.ucrTextBoxGeogLocationMethod.Location = New System.Drawing.Point(275, 99)
         Me.ucrTextBoxGeogLocationMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeogLocationMethod.Name = "ucrTextBoxGeogLocationMethod"
-        Me.ucrTextBoxGeogLocationMethod.Size = New System.Drawing.Size(51, 22)
+        Me.ucrTextBoxGeogLocationMethod.Size = New System.Drawing.Size(129, 22)
         Me.ucrTextBoxGeogLocationMethod.TabIndex = 86
+        Me.ucrTextBoxGeogLocationMethod.Tag = "geoLocationMethod"
         Me.ucrTextBoxGeogLocationMethod.TextboxValue = ""
         '
         'ucrTextBoxGeoglocationHistory
         '
-        Me.ucrTextBoxGeoglocationHistory.Location = New System.Drawing.Point(275, 147)
+        Me.ucrTextBoxGeoglocationHistory.Location = New System.Drawing.Point(275, 127)
         Me.ucrTextBoxGeoglocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeoglocationHistory.Name = "ucrTextBoxGeoglocationHistory"
-        Me.ucrTextBoxGeoglocationHistory.Size = New System.Drawing.Size(51, 24)
+        Me.ucrTextBoxGeoglocationHistory.Size = New System.Drawing.Size(129, 24)
         Me.ucrTextBoxGeoglocationHistory.TabIndex = 87
+        Me.ucrTextBoxGeoglocationHistory.Tag = "geoLocationAccuracy"
         Me.ucrTextBoxGeoglocationHistory.TextboxValue = ""
-        '
-        'ucrDataLinkComboboxOpenningdate
-        '
-        Me.ucrDataLinkComboboxOpenningdate.Location = New System.Drawing.Point(275, 175)
-        Me.ucrDataLinkComboboxOpenningdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrDataLinkComboboxOpenningdate.Name = "ucrDataLinkComboboxOpenningdate"
-        Me.ucrDataLinkComboboxOpenningdate.Size = New System.Drawing.Size(178, 23)
-        Me.ucrDataLinkComboboxOpenningdate.TabIndex = 88
         '
         'ucrTextBoxLatitude
         '
-        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(275, 234)
+        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(275, 214)
         Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
-        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(51, 26)
+        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(129, 20)
         Me.ucrTextBoxLatitude.TabIndex = 90
+        Me.ucrTextBoxLatitude.Tag = "latitude"
         Me.ucrTextBoxLatitude.TextboxValue = ""
         '
         'ucrTextBoxLongitude
         '
-        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(275, 260)
+        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(276, 242)
         Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
-        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(51, 25)
+        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(128, 20)
         Me.ucrTextBoxLongitude.TabIndex = 91
+        Me.ucrTextBoxLongitude.Tag = "longitude"
         Me.ucrTextBoxLongitude.TextboxValue = ""
         '
         'ucrTextBoxElevation
         '
-        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(276, 287)
+        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(276, 267)
         Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
-        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(128, 20)
         Me.ucrTextBoxElevation.TabIndex = 92
+        Me.ucrTextBoxElevation.Tag = "elevation"
         Me.ucrTextBoxElevation.TextboxValue = ""
         '
         'ucrTextBoxAuthority
         '
-        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(276, 313)
+        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(276, 293)
         Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
-        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(128, 20)
         Me.ucrTextBoxAuthority.TabIndex = 93
+        Me.ucrTextBoxAuthority.Tag = "authority"
         Me.ucrTextBoxAuthority.TextboxValue = ""
-        '
-        'ucrDataLinkComboboxClosingDate
-        '
-        Me.ucrDataLinkComboboxClosingDate.Location = New System.Drawing.Point(275, 204)
-        Me.ucrDataLinkComboboxClosingDate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrDataLinkComboboxClosingDate.Name = "ucrDataLinkComboboxClosingDate"
-        Me.ucrDataLinkComboboxClosingDate.Size = New System.Drawing.Size(186, 27)
-        Me.ucrDataLinkComboboxClosingDate.TabIndex = 95
         '
         'Button1
         '
@@ -245,7 +236,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrNavigationStationLocationHistory
         '
-        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(123, 430)
+        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(132, 332)
         Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
         Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
@@ -258,9 +249,9 @@ Partial Class ucrMetadataStationLocationHistory
         Me.GroupBox10.Controls.Add(Me.cmdUpdateHistory)
         Me.GroupBox10.Controls.Add(Me.cmdAddHistory)
         Me.GroupBox10.Controls.Add(Me.cmdClearHistory)
-        Me.GroupBox10.Location = New System.Drawing.Point(0, 385)
+        Me.GroupBox10.Location = New System.Drawing.Point(3, 365)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(629, 34)
+        Me.GroupBox10.Size = New System.Drawing.Size(589, 34)
         Me.GroupBox10.TabIndex = 108
         Me.GroupBox10.TabStop = False
         '
@@ -311,26 +302,43 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(275, 66)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(275, 46)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(253, 24)
         Me.ucrStationSelector.TabIndex = 109
+        Me.ucrStationSelector.Tag = "station"
+        '
+        'ucrDatePickerOpeningDate
+        '
+        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(275, 153)
+        Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
+        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(129, 21)
+        Me.ucrDatePickerOpeningDate.TabIndex = 110
+        Me.ucrDatePickerOpeningDate.Tag = "openingDatetime"
+        '
+        'ucrDatePickerCkosingDate
+        '
+        Me.ucrDatePickerCkosingDate.Location = New System.Drawing.Point(275, 180)
+        Me.ucrDatePickerCkosingDate.Name = "ucrDatePickerCkosingDate"
+        Me.ucrDatePickerCkosingDate.Size = New System.Drawing.Size(129, 21)
+        Me.ucrDatePickerCkosingDate.TabIndex = 111
+        Me.ucrDatePickerCkosingDate.Tag = "closingDatetime"
         '
         'ucrMetadataStationLocationHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDatePickerCkosingDate)
+        Me.Controls.Add(Me.ucrDatePickerOpeningDate)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.ucrDataLinkComboboxClosingDate)
         Me.Controls.Add(Me.ucrTextBoxAuthority)
         Me.Controls.Add(Me.ucrTextBoxElevation)
         Me.Controls.Add(Me.ucrTextBoxLongitude)
         Me.Controls.Add(Me.ucrTextBoxLatitude)
-        Me.Controls.Add(Me.ucrDataLinkComboboxOpenningdate)
         Me.Controls.Add(Me.ucrTextBoxGeoglocationHistory)
         Me.Controls.Add(Me.ucrTextBoxGeogLocationMethod)
         Me.Controls.Add(Me.ucrTextBoxStationType)
@@ -346,7 +354,8 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.lblGeogLocationAccuracy)
         Me.Controls.Add(Me.Label19)
         Me.Name = "ucrMetadataStationLocationHistory"
-        Me.Size = New System.Drawing.Size(613, 495)
+        Me.Size = New System.Drawing.Size(601, 414)
+        Me.Tag = ""
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox10.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -368,12 +377,10 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents ucrTextBoxStationType As ucrTextBox
     Friend WithEvents ucrTextBoxGeogLocationMethod As ucrTextBox
     Friend WithEvents ucrTextBoxGeoglocationHistory As ucrTextBox
-    Friend WithEvents ucrDataLinkComboboxOpenningdate As ucrDataLinkCombobox
     Friend WithEvents ucrTextBoxLatitude As ucrTextBox
     Friend WithEvents ucrTextBoxLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxElevation As ucrTextBox
     Friend WithEvents ucrTextBoxAuthority As ucrTextBox
-    Friend WithEvents ucrDataLinkComboboxClosingDate As ucrDataLinkCombobox
     Friend WithEvents Button1 As Button
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
     Friend WithEvents GroupBox10 As GroupBox
@@ -383,4 +390,6 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents cmdAddHistory As Button
     Friend WithEvents cmdClearHistory As Button
     Friend WithEvents ucrStationSelector As ucrStationSelector
+    Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
+    Friend WithEvents ucrDatePickerCkosingDate As ucrDatePicker
 End Class
