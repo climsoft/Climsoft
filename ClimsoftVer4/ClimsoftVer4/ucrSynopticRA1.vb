@@ -691,7 +691,10 @@ Public Class ucrSynopticRA1
                         Catch ex As Exception
                             'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped" & Environment.NewLine
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Day: " & row.Item("dd") & ", Hour: " & row.Item("hh") &
+                                ". This row will be skipped" & Environment.NewLine
                             Exit For
                         End Try
 
@@ -741,7 +744,10 @@ Public Class ucrSynopticRA1
                         Catch ex As Exception
                             'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped" & Environment.NewLine
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Day: " & row.Item("dd") & ", Hour: " & row.Item("hh") &
+                                ". This record will be skipped" & Environment.NewLine
                             Exit For
                         End Try
 

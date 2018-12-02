@@ -390,7 +390,10 @@ Public Class ucrMonthlydata
                         Catch ex As Exception
                             'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped" & Environment.NewLine
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                                  " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") &
+                            ". This row will be skipped" & Environment.NewLine
                             Exit For
                         End Try
 
@@ -443,7 +446,10 @@ Public Class ucrMonthlydata
                         Catch ex As Exception
                             'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped" & Environment.NewLine
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
+                                  " Station: " & strStationId & ", Element: " & lElementId &
+                                 ", Year: " & row.Item("yyyy") &
+                                ". This record will be skipped" & Environment.NewLine
                             Exit For
                         End Try
 
