@@ -2,27 +2,49 @@
 
 Public Class frmNewComputationProgress
     Private bShowResultMessage As Boolean = False
+    Private bShowPercentage As Boolean = True
+    Private bShowNumbers As Boolean = False
+    Private strPretextProgress As String = ""
 
     Private Sub frmNewComputationProgress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         backgroundWorker.WorkerReportsProgress = True
         backgroundWorker.WorkerSupportsCancellation = True
         lblProgress.Text = ""
+        lblResultMessage.Text = ""
         lblResultMessage.Visible = False
         btnClose.Visible = False
     End Sub
 
     Private Sub backgroundWorker_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles backgroundWorker.ProgressChanged
-        progressBar.Increment(e.ProgressPercentage)
-        lblProgress.Text = (progressBar.Value / progressBar.Maximum) * 100 & "% completed"
-        Me.Text = (progressBar.Value / progressBar.Maximum) * 100 & "% completed"
+        'progressBar.Increment(e.ProgressPercentage)
+
+        If e.ProgressPercentage <= progressBar.Maximum Then
+            progressBar.Value = e.ProgressPercentage
+        End If
+
+        If bShowNumbers Then
+            lblProgress.Text = strPretextProgress & " " & progressBar.Value & " of " & progressBar.Maximum
+        ElseIf bShowPercentage Then
+            lblProgress.Text = strPretextProgress & " " & Math.Round((progressBar.Value / progressBar.Maximum) * 100) & "% completed"
+        End If
+
+        Me.Text = lblProgress.Text
     End Sub
 
     Private Sub backgroundWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles backgroundWorker.RunWorkerCompleted
 
         If bShowResultMessage Then
+
+            Try
+                If e.Result IsNot Nothing Then
+                    lblResultMessage.Text = e.Result.ToString()
+                    lblResultMessage.Visible = True
+                End If
+            Catch ex As Exception
+
+            End Try
+
             btnCancel.Visible = False
-            lblResultMessage.Text = e.Result.ToString()
-            lblResultMessage.Visible = True
             btnClose.Visible = True
             'MessageBox.Show(Me, e.Result.ToString(), lblHeader.Text, MessageBoxButtons.OK)
         Else
@@ -52,6 +74,18 @@ Public Class frmNewComputationProgress
 
     Public Sub SetHeader(strHeader As String)
         lblHeader.Text = strHeader
+    End Sub
+
+    Public Sub SetPretextProgress(strNewPretextProgress As String)
+        strPretextProgress = strNewPretextProgress
+    End Sub
+
+    Public Sub ShowPercentage(bNewShowPercentage As Boolean)
+        bShowPercentage = bNewShowPercentage
+    End Sub
+
+    Public Sub ShowNumbers(bNewShowNumbers As Boolean)
+        bShowNumbers = bNewShowNumbers
     End Sub
 
     Public Sub ShowResultMessage(bShow As Boolean)
