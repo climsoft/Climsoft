@@ -570,7 +570,7 @@ Public Class ucrFormDaily2
                             strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
                                 " Station: " & strStationId & ", Element: " & lElementId &
                                 ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Hour: " & row.Item("hh") &
-                                ". This row has been skipped" & Environment.NewLine
+                                ". This row was skipped" & Environment.NewLine
                             Exit For
                         End Try
 
@@ -652,7 +652,7 @@ Public Class ucrFormDaily2
                             strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
                                 " Station: " & strStationId & ", Element: " & lElementId &
                                 ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Hour: " & row.Item("hh") & ", Date: " & dtObsDateTime &
-                                ". This record was be skipped" & Environment.NewLine
+                                ". This record was skipped" & Environment.NewLine
                             Exit For
                         End Try
 

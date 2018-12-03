@@ -351,7 +351,7 @@ Public Class ucrMonthlydata
             conn.ConnectionString = e.Argument
             conn.Open()
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName, conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -448,8 +448,8 @@ Public Class ucrMonthlydata
                             invalidRecord = True
                             strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
                                   " Station: " & strStationId & ", Element: " & lElementId &
-                                 ", Year: " & row.Item("yyyy") &
-                                ". This record will be skipped" & Environment.NewLine
+                                 ", Year: " & row.Item("yyyy") & ", Date: " & dtObsDateTime &
+                                ". This record was skipped" & Environment.NewLine
                             Exit For
                         End Try
 

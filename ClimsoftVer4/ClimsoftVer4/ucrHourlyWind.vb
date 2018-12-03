@@ -537,7 +537,7 @@ Public Class ucrHourlyWind
             conn.ConnectionString = e.Argument
             conn.Open()
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName, conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -582,7 +582,7 @@ Public Class ucrHourlyWind
                             strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
                                  " Station: " & strStationId & ", Element: " & lElementId &
                                 ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") &
-                                ". This row has been skipped" & Environment.NewLine
+                                ". This row was skipped" & Environment.NewLine
                             Exit For
                         End Try
 
@@ -635,8 +635,8 @@ Public Class ucrHourlyWind
                             invalidRecord = True
                             strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
                                  " Station: " & strStationId & ", Element: " & lElementId &
-                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") &
-                                ". This record has been skipped" & Environment.NewLine
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Date: " & dtObsDateTime &
+                                ". This record was skipped" & Environment.NewLine
                             Exit For
                         End Try
 
