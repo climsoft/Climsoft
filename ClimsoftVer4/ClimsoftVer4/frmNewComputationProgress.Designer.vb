@@ -28,15 +28,14 @@ Partial Class frmNewComputationProgress
         Me.progressBar = New System.Windows.Forms.ProgressBar()
         Me.backgroundWorker = New System.ComponentModel.BackgroundWorker()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.lblResultMessage = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtResultMessage = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'lblHeader
         '
         Me.lblHeader.AutoSize = True
         Me.lblHeader.ForeColor = System.Drawing.Color.Black
-        Me.lblHeader.Location = New System.Drawing.Point(15, 9)
+        Me.lblHeader.Location = New System.Drawing.Point(15, 10)
         Me.lblHeader.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(96, 20)
@@ -45,10 +44,10 @@ Partial Class frmNewComputationProgress
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(363, 45)
+        Me.btnCancel.Location = New System.Drawing.Point(374, 42)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(44, 29)
+        Me.btnCancel.Size = New System.Drawing.Size(44, 35)
         Me.btnCancel.TabIndex = 9
         Me.btnCancel.Text = "x"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -78,41 +77,35 @@ Partial Class frmNewComputationProgress
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(333, 128)
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Location = New System.Drawing.Point(358, 172)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(84, 35)
-        Me.btnClose.TabIndex = 12
+        Me.btnClose.Size = New System.Drawing.Size(84, 31)
+        Me.btnClose.TabIndex = 13
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'lblResultMessage
+        'txtResultMessage
         '
-        Me.lblResultMessage.AutoSize = True
-        Me.lblResultMessage.ForeColor = System.Drawing.Color.Red
-        Me.lblResultMessage.Location = New System.Drawing.Point(15, 128)
-        Me.lblResultMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblResultMessage.Name = "lblResultMessage"
-        Me.lblResultMessage.Size = New System.Drawing.Size(124, 20)
-        Me.lblResultMessage.TabIndex = 11
-        Me.lblResultMessage.Text = "Result Message"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(19, 171)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(326, 111)
-        Me.TextBox1.TabIndex = 13
+        Me.txtResultMessage.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtResultMessage.ForeColor = System.Drawing.Color.Red
+        Me.txtResultMessage.Location = New System.Drawing.Point(10, 42)
+        Me.txtResultMessage.Multiline = True
+        Me.txtResultMessage.Name = "txtResultMessage"
+        Me.txtResultMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtResultMessage.Size = New System.Drawing.Size(432, 120)
+        Me.txtResultMessage.TabIndex = 15
         '
         'frmNewComputationProgress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 337)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(454, 213)
+        Me.Controls.Add(Me.txtResultMessage)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.lblResultMessage)
         Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lblProgress)
@@ -130,6 +123,5 @@ Partial Class frmNewComputationProgress
     Friend WithEvents progressBar As ProgressBar
     Friend WithEvents backgroundWorker As System.ComponentModel.BackgroundWorker
     Friend WithEvents btnClose As Button
-    Friend WithEvents lblResultMessage As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtResultMessage As TextBox
 End Class

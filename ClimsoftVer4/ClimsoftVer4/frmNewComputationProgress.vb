@@ -10,8 +10,9 @@ Public Class frmNewComputationProgress
         backgroundWorker.WorkerReportsProgress = True
         backgroundWorker.WorkerSupportsCancellation = True
         lblProgress.Text = ""
-        lblResultMessage.Text = ""
-        lblResultMessage.Visible = False
+        txtResultMessage.Text = "Please wait..."
+        txtResultMessage.Visible = False
+
         btnClose.Visible = False
     End Sub
 
@@ -34,16 +35,18 @@ Public Class frmNewComputationProgress
     Private Sub backgroundWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles backgroundWorker.RunWorkerCompleted
 
         If bShowResultMessage Then
-
             Try
                 If e.Result IsNot Nothing Then
-                    lblResultMessage.Text = e.Result.ToString()
-                    lblResultMessage.Visible = True
+                    txtResultMessage.Text = e.Result.ToString()
+                    txtResultMessage.SelectionStart = 0 'To remove the highlight
+                    txtResultMessage.Visible = True
                 End If
             Catch ex As Exception
 
             End Try
 
+            lblProgress.Visible = False
+            progressBar.Visible = False
             btnCancel.Visible = False
             btnClose.Visible = True
             'MessageBox.Show(Me, e.Result.ToString(), lblHeader.Text, MessageBoxButtons.OK)
@@ -51,6 +54,13 @@ Public Class frmNewComputationProgress
             Me.Close()
         End If
 
+    End Sub
+
+    Private Sub frmNewComputationProgress_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If backgroundWorker.IsBusy Then
+            backgroundWorker.CancelAsync()
+        End If
+        'backgroundWorker.Dispose()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -63,6 +73,7 @@ Public Class frmNewComputationProgress
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+
 
     Public Sub SetProgressMaximum(iMax As Integer)
         If progressBar.InvokeRequired Then
@@ -91,8 +102,6 @@ Public Class frmNewComputationProgress
     Public Sub ShowResultMessage(bShow As Boolean)
         Me.bShowResultMessage = bShow
     End Sub
-
-
 
 
 End Class
