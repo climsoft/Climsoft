@@ -496,10 +496,6 @@ Public Class ucrFormDaily2
         frm.Show()
     End Sub
 
-    Private Sub DoUploadDelete()
-
-    End Sub
-
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
