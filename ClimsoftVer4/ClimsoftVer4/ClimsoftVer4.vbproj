@@ -947,6 +947,12 @@
     <Compile Include="ucrSynopticRA1.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTableEntry.Designer.vb">
+      <DependentUpon>ucrTableEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTableEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
