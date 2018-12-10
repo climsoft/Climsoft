@@ -30,6 +30,18 @@ Public Class frmQC
 
 
     Public HTMLHelp As New clsHelp
+
+    Private Sub optInterElement_CheckedChanged(sender As Object, e As EventArgs) Handles optInterElement.CheckedChanged
+        ' Disable selection of elements since the list is set in database for the elements to be compared.
+        If optInterElement.Checked = True Then
+            lstViewElements.Enabled = False
+            chkAllElements.Enabled = False
+        Else
+            lstViewElements.Enabled = True
+            chkAllElements.Enabled = True
+        End If
+    End Sub
+
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
     End Sub
@@ -206,9 +218,11 @@ Public Class frmQC
                     'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                 End If
             Next
-        Else ' When All stations are selected
+        Else ' When All Elements are selected
             elmselected = True
         End If
+
+        If optInterElement.Checked = True Then elmselected = True
 
         ' Contruct the Stations and Elements selction criteria string
         If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
@@ -373,7 +387,7 @@ Public Class frmQC
                 ' Output QC Report
                 'OutputQCReport(210, qcReportsFolderWindows & "\qc_values_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv")
                 OutputQCReport(210, QcReportFile)
-
+                FileClose(210)
                 'msgTxtQCReportsOutUpperLimits = "QC upper limits report saved to: "
                 'MsgBox(msgTxtQCReportsOutUpperLimits & QcReportFile, MsgBoxStyle.Information)
 
@@ -429,7 +443,7 @@ Public Class frmQC
 
                 ' Output QC Report
                 OutputQCReport(211, QcReportFile)
-
+                FileClose(211)
                 'msgTxtQCReportsOutLowerLimits = "QC lower limits report saved to: "
                 ''MsgBox(msgTxtQCReportsOutLowerLimits & qcReportsFolderWindows & "\qc_values_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
                 'MsgBox(msgTxtQCReportsOutLowerLimits & QcReportFile, MsgBoxStyle.Information)
@@ -454,6 +468,11 @@ Public Class frmQC
                 'Select element 1 for inter-eleent comparison
                 'strSQL = "DELETE from qc_interelement_1"
                 strSQL = "TRUNCATE qc_interelement_1"
+
+                QcReportFile = qcReportsFolderWindows & "\qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv"
+
+                'Delete the Qc report file if already there
+                If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
 
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -533,7 +552,6 @@ Public Class frmQC
                     MsgBox(ex.Message)
                     Me.Cursor = Cursors.Default
                 End Try
-
                 'Carry out interelement comparison
                 If (elem1 = 2 And elem2 = 3) Or (elem1 = 101 And elem2 = 102) Or (elem1 = 102 And elem2 = 103) Then
                     strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " & _

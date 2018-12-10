@@ -123,9 +123,11 @@
             cmbFields.Items.Clear()
             ' Add station, date and time headers whichever exist
             cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("element_code")
             cmbFields.Items.Add("date_time")
             cmbFields.Items.Add("date")
             cmbFields.Items.Add("time")
+            cmbFields.Items.Add("value")
             cmbFields.Items.Add("NA")
             ' Add the AWS element codes existing in obselement table
 
@@ -247,8 +249,11 @@
 
             ' Check for Daily1 file type
             For i = 0 To DataGridView1.Columns.Count - 1
-                If DataGridView1.Columns(i).Name = "value" Then
+                If DataGridView1.Columns(i).Name = "value" And lblType.Text = "Daily" Then
                     DataCat = "Daily1"
+                    Exit For
+                ElseIf DataGridView1.Columns(i).Name = "value" And lblType.Text = "AWS" Then
+                    DataCat = "AWS_special"
                     Exit For
                 End If
             Next
@@ -264,6 +269,8 @@
                     Load_Hourly()
                 Case "AWS"
                     Load_Aws()
+                Case "AWS_special"
+                    Load_Aws_special()
                 Case "ColElms"
                     Load_ColumnElems()
             End Select
@@ -588,6 +595,7 @@
                                     End If
                                 End If
                             End With
+
                             col = col + 1
                             ' Show upload progress
                             lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
@@ -601,6 +609,82 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+    Sub Load_Aws_special()
+        'MsgBox(1)
+        Dim st, cod, dttim, d, tt, dt, dat, hd, flg As String
+        Dim dt_tm As Boolean
+
+        Try
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(delimit)
+
+                Do While MyReader.EndOfData = False
+
+                    currentRow = MyReader.ReadFields()
+                    If MyReader.LineNumber > Val(txtStartRow.Text) Then
+
+                        ' Initialize values
+                        col = 0
+                        st = txtStn.Text
+                        dt_tm = False
+
+                        'h = txtObsHour.Text
+
+                        For Each currentField In currentRow
+                            hd = DataGridView1.Columns(col).Name
+                            dat = currentField
+
+                            With DataGridView1
+                                If col < .ColumnCount Then
+                                    If .Columns(col).Name = "station_id" Then ' Station column found
+                                        st = dat
+                                    ElseIf .Columns(col).Name = "element_code" Then ' Station column found
+                                        cod = dat
+                                    ElseIf .Columns(col).Name = "date_time" Then ' Combined Date and Timme column found
+                                        dt_tm = True
+                                        dttim = dat
+                                    ElseIf .Columns(col).Name = "date" Then ' Separate Date column found 
+                                        dt = dat
+                                    ElseIf .Columns(col).Name = "time" Then ' Separate Time column found 
+                                        tt = dat
+                                    ElseIf .Columns(col).Name = "NA" Then ' Not Required
+                                        'Do nothing
+                                    End If
+                                End If
+                            End With
+                            If hd = "value" Then
+                                flg = "" ' Initialize the flag
+                                If dt_tm = False Then dttim = dt & " " & tt
+
+                                'dttime = y & "-" & m & "-" & d & " " & h & ":00"
+                                If IsNumeric(dat) Then
+                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                Else
+                                    Get_Value_Flag(cod, dat, flg)
+                                End If
+                                If IsDate(dttim) Then
+                                    dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
+                                    'MsgBox(dttim & " " & st & " " & cod & " " & dat & " " & flg)
+                                    If Not Add_Record(st, cod, dttim, dat, flg) Then Exit For
+                                End If
+
+                                ' Show upload progress
+                                lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                lblRecords.Refresh()
+
+                            End If
+                            col = col + 1
+
+                        Next
+                    End If
+                Loop
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.HResult & " " & ex.Message)
+        End Try
+    End Sub
+
     Sub Load_ColumnElems()
         'MsgBox("Column Elements")
         'Dim stn, code, yr, mn, dy, hr, dt_tm, dat, flg As String
