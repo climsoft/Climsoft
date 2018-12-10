@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataStationQualifier
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,11 +22,7 @@ Partial Class ucrMetadataStationQualifier
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtEndDate = New System.Windows.Forms.TextBox()
-        Me.txtBDate = New System.Windows.Forms.TextBox()
-        Me.txtdEndDate = New System.Windows.Forms.DateTimePicker()
         Me.lblStationID = New System.Windows.Forms.Label()
-        Me.txtdBDate = New System.Windows.Forms.DateTimePicker()
         Me.lblNetworkType = New System.Windows.Forms.Label()
         Me.lblTimeZone = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
@@ -34,41 +30,21 @@ Partial Class ucrMetadataStationQualifier
         Me.lblQualifier = New System.Windows.Forms.Label()
         Me.lblStationQualifier = New System.Windows.Forms.Label()
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
-        Me.ucrStationSelectorStationID = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.ucrTextBoxNetworkType = New ClimsoftVer4.ucrTextBox()
         Me.cmdClear2 = New System.Windows.Forms.Button()
         Me.cmdViewInstrument = New System.Windows.Forms.Button()
         Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
         Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
         Me.cmdAddInstrument = New System.Windows.Forms.Button()
+        Me.ucrTextBoxNetworkType = New ClimsoftVer4.ucrTextBox()
         Me.ucrNavigationStationQualifier = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxTimeZone = New ClimsoftVer4.ucrTextBox()
+        Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
+        Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtEndDate
-        '
-        Me.txtEndDate.Location = New System.Drawing.Point(301, 197)
-        Me.txtEndDate.Name = "txtEndDate"
-        Me.txtEndDate.Size = New System.Drawing.Size(140, 20)
-        Me.txtEndDate.TabIndex = 74
-        '
-        'txtBDate
-        '
-        Me.txtBDate.Location = New System.Drawing.Point(301, 160)
-        Me.txtBDate.Name = "txtBDate"
-        Me.txtBDate.Size = New System.Drawing.Size(140, 20)
-        Me.txtBDate.TabIndex = 73
-        '
-        'txtdEndDate
-        '
-        Me.txtdEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtdEndDate.Location = New System.Drawing.Point(441, 197)
-        Me.txtdEndDate.Name = "txtdEndDate"
-        Me.txtdEndDate.Size = New System.Drawing.Size(15, 20)
-        Me.txtdEndDate.TabIndex = 64
         '
         'lblStationID
         '
@@ -78,14 +54,6 @@ Partial Class ucrMetadataStationQualifier
         Me.lblStationID.Size = New System.Drawing.Size(54, 13)
         Me.lblStationID.TabIndex = 68
         Me.lblStationID.Text = "Station ID"
-        '
-        'txtdBDate
-        '
-        Me.txtdBDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtdBDate.Location = New System.Drawing.Point(441, 160)
-        Me.txtdBDate.Name = "txtdBDate"
-        Me.txtdBDate.Size = New System.Drawing.Size(15, 20)
-        Me.txtdBDate.TabIndex = 63
         '
         'lblNetworkType
         '
@@ -149,15 +117,17 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
         Me.ucrTextBoxQualifier.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxQualifier.TabIndex = 76
+        Me.ucrTextBoxQualifier.Tag = "qualifier"
         Me.ucrTextBoxQualifier.TextboxValue = ""
         '
-        'ucrStationSelectorStationID
+        'ucrStationSelector
         '
-        Me.ucrStationSelectorStationID.Location = New System.Drawing.Point(301, 126)
-        Me.ucrStationSelectorStationID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationSelectorStationID.Name = "ucrStationSelectorStationID"
-        Me.ucrStationSelectorStationID.Size = New System.Drawing.Size(155, 24)
-        Me.ucrStationSelectorStationID.TabIndex = 77
+        Me.ucrStationSelector.Location = New System.Drawing.Point(301, 126)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(155, 24)
+        Me.ucrStationSelector.TabIndex = 77
+        Me.ucrStationSelector.Tag = "belongsTo"
         '
         'grpCommand2
         '
@@ -171,15 +141,6 @@ Partial Class ucrMetadataStationQualifier
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 96
         Me.grpCommand2.TabStop = False
-        '
-        'ucrTextBoxNetworkType
-        '
-        Me.ucrTextBoxNetworkType.Location = New System.Drawing.Point(301, 274)
-        Me.ucrTextBoxNetworkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxNetworkType.Name = "ucrTextBoxNetworkType"
-        Me.ucrTextBoxNetworkType.Size = New System.Drawing.Size(154, 20)
-        Me.ucrTextBoxNetworkType.TabIndex = 17
-        Me.ucrTextBoxNetworkType.TextboxValue = ""
         '
         'cmdClear2
         '
@@ -226,6 +187,16 @@ Partial Class ucrMetadataStationQualifier
         Me.cmdAddInstrument.Text = "Save"
         Me.cmdAddInstrument.UseVisualStyleBackColor = True
         '
+        'ucrTextBoxNetworkType
+        '
+        Me.ucrTextBoxNetworkType.Location = New System.Drawing.Point(301, 274)
+        Me.ucrTextBoxNetworkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxNetworkType.Name = "ucrTextBoxNetworkType"
+        Me.ucrTextBoxNetworkType.Size = New System.Drawing.Size(154, 20)
+        Me.ucrTextBoxNetworkType.TabIndex = 17
+        Me.ucrTextBoxNetworkType.Tag = "stationNetworkType"
+        Me.ucrTextBoxNetworkType.TextboxValue = ""
+        '
         'ucrNavigationStationQualifier
         '
         Me.ucrNavigationStationQualifier.Location = New System.Drawing.Point(170, 375)
@@ -241,24 +212,39 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxTimeZone.Name = "ucrTextBoxTimeZone"
         Me.ucrTextBoxTimeZone.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxTimeZone.TabIndex = 97
+        Me.ucrTextBoxTimeZone.Tag = "stationTimeZone"
         Me.ucrTextBoxTimeZone.TextboxValue = ""
+        '
+        'ucrDatePickerBeginDate
+        '
+        Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(301, 160)
+        Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
+        Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(155, 21)
+        Me.ucrDatePickerBeginDate.TabIndex = 98
+        Me.ucrDatePickerBeginDate.Tag = "qualifierBeginDate"
+        '
+        'ucrDatePickerEndDate
+        '
+        Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(301, 196)
+        Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
+        Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(155, 21)
+        Me.ucrDatePickerEndDate.TabIndex = 99
+        Me.ucrDatePickerEndDate.Tag = "qualifierEndDate"
         '
         'ucrMetadataStationQualifier
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDatePickerEndDate)
+        Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrTextBoxTimeZone)
         Me.Controls.Add(Me.ucrTextBoxNetworkType)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationStationQualifier)
-        Me.Controls.Add(Me.ucrStationSelectorStationID)
+        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrTextBoxQualifier)
         Me.Controls.Add(Me.lblStationQualifier)
-        Me.Controls.Add(Me.txtEndDate)
-        Me.Controls.Add(Me.txtBDate)
-        Me.Controls.Add(Me.txtdEndDate)
         Me.Controls.Add(Me.lblStationID)
-        Me.Controls.Add(Me.txtdBDate)
         Me.Controls.Add(Me.lblNetworkType)
         Me.Controls.Add(Me.lblTimeZone)
         Me.Controls.Add(Me.lblEndDate)
@@ -272,12 +258,7 @@ Partial Class ucrMetadataStationQualifier
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtEndDate As TextBox
-    Friend WithEvents txtBDate As TextBox
-    Friend WithEvents txtdEndDate As DateTimePicker
     Friend WithEvents lblStationID As Label
-    Friend WithEvents txtdBDate As DateTimePicker
     Friend WithEvents lblNetworkType As Label
     Friend WithEvents lblTimeZone As Label
     Friend WithEvents lblEndDate As Label
@@ -285,7 +266,7 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents lblQualifier As Label
     Friend WithEvents lblStationQualifier As Label
     Friend WithEvents ucrTextBoxQualifier As ucrTextBox
-    Friend WithEvents ucrStationSelectorStationID As ucrStationSelector
+    Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents grpCommand2 As GroupBox
     Friend WithEvents cmdClear2 As Button
     Friend WithEvents cmdViewInstrument As Button
@@ -295,4 +276,6 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents ucrNavigationStationQualifier As ucrNavigation
     Friend WithEvents ucrTextBoxNetworkType As ucrTextBox
     Friend WithEvents ucrTextBoxTimeZone As ucrTextBox
+    Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
+    Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
 End Class

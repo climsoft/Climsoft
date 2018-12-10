@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataElement
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -26,7 +26,6 @@ Partial Class ucrMetadataElement
         Me.lblTotalRequired = New System.Windows.Forms.Label()
         Me.chkSelected = New System.Windows.Forms.CheckBox()
         Me.lblSelected = New System.Windows.Forms.Label()
-        Me.txtType = New System.Windows.Forms.ComboBox()
         Me.lblType = New System.Windows.Forms.Label()
         Me.lblUpperlimit = New System.Windows.Forms.Label()
         Me.lblScale = New System.Windows.Forms.Label()
@@ -51,6 +50,7 @@ Partial Class ucrMetadataElement
         Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
         Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
         Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.UcrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -62,6 +62,7 @@ Partial Class ucrMetadataElement
         Me.chkTotalRequired.Name = "chkTotalRequired"
         Me.chkTotalRequired.Size = New System.Drawing.Size(15, 14)
         Me.chkTotalRequired.TabIndex = 79
+        Me.chkTotalRequired.Tag = "qcTotalRequired"
         Me.chkTotalRequired.UseVisualStyleBackColor = True
         '
         'lblTotalRequired
@@ -80,6 +81,7 @@ Partial Class ucrMetadataElement
         Me.chkSelected.Name = "chkSelected"
         Me.chkSelected.Size = New System.Drawing.Size(15, 14)
         Me.chkSelected.TabIndex = 77
+        Me.chkSelected.Tag = "selected"
         Me.chkSelected.UseVisualStyleBackColor = True
         '
         'lblSelected
@@ -90,15 +92,6 @@ Partial Class ucrMetadataElement
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 76
         Me.lblSelected.Text = "Selected"
-        '
-        'txtType
-        '
-        Me.txtType.FormattingEnabled = True
-        Me.txtType.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtType.Location = New System.Drawing.Point(299, 256)
-        Me.txtType.Name = "txtType"
-        Me.txtType.Size = New System.Drawing.Size(121, 21)
-        Me.txtType.TabIndex = 64
         '
         'lblType
         '
@@ -196,6 +189,7 @@ Partial Class ucrMetadataElement
         Me.ucrDataLinkID.Name = "ucrDataLinkID"
         Me.ucrDataLinkID.Size = New System.Drawing.Size(178, 21)
         Me.ucrDataLinkID.TabIndex = 17
+        Me.ucrDataLinkID.Tag = "elementId"
         '
         'ucrTextBoxAbbreviation
         '
@@ -204,6 +198,7 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxAbbreviation.Name = "ucrTextBoxAbbreviation"
         Me.ucrTextBoxAbbreviation.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxAbbreviation.TabIndex = 97
+        Me.ucrTextBoxAbbreviation.Tag = "abbreviation"
         Me.ucrTextBoxAbbreviation.TextboxValue = ""
         '
         'ucrTextBoxName
@@ -213,6 +208,7 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxName.Name = "ucrTextBoxName"
         Me.ucrTextBoxName.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxName.TabIndex = 98
+        Me.ucrTextBoxName.Tag = "elementName"
         Me.ucrTextBoxName.TextboxValue = ""
         '
         'ucrTextBoxDescription
@@ -220,8 +216,9 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(298, 122)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
-        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxDescription.TabIndex = 99
+        Me.ucrTextBoxDescription.Tag = "elementScale"
         Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'ucrTextBoxScale
@@ -229,8 +226,9 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxScale.Location = New System.Drawing.Point(298, 148)
         Me.ucrTextBoxScale.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxScale.Name = "ucrTextBoxScale"
-        Me.ucrTextBoxScale.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxScale.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxScale.TabIndex = 100
+        Me.ucrTextBoxScale.Tag = "elementScale"
         Me.ucrTextBoxScale.TextboxValue = ""
         '
         'ucrTextBoxUpperLimit
@@ -238,8 +236,9 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(298, 174)
         Me.ucrTextBoxUpperLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUpperLimit.Name = "ucrTextBoxUpperLimit"
-        Me.ucrTextBoxUpperLimit.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxUpperLimit.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxUpperLimit.TabIndex = 101
+        Me.ucrTextBoxUpperLimit.Tag = "upperLimit"
         Me.ucrTextBoxUpperLimit.TextboxValue = ""
         '
         'ucrTextBoxLowerLimit
@@ -247,8 +246,9 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxLowerLimit.Location = New System.Drawing.Point(298, 199)
         Me.ucrTextBoxLowerLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLowerLimit.Name = "ucrTextBoxLowerLimit"
-        Me.ucrTextBoxLowerLimit.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxLowerLimit.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxLowerLimit.TabIndex = 102
+        Me.ucrTextBoxLowerLimit.Tag = "lowerLimit"
         Me.ucrTextBoxLowerLimit.TextboxValue = ""
         '
         'ucrTextBoxUnit
@@ -256,8 +256,9 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxUnit.Location = New System.Drawing.Point(298, 226)
         Me.ucrTextBoxUnit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUnit.Name = "ucrTextBoxUnit"
-        Me.ucrTextBoxUnit.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxUnit.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxUnit.TabIndex = 103
+        Me.ucrTextBoxUnit.Tag = "units"
         Me.ucrTextBoxUnit.TextboxValue = ""
         '
         'GroupBox13
@@ -318,10 +319,20 @@ Partial Class ucrMetadataElement
         Me.cmdClearClass.Text = "AddNew"
         Me.cmdClearClass.UseVisualStyleBackColor = True
         '
+        'UcrDataLinkType
+        '
+        Me.UcrDataLinkType.Location = New System.Drawing.Point(298, 255)
+        Me.UcrDataLinkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrDataLinkType.Name = "UcrDataLinkType"
+        Me.UcrDataLinkType.Size = New System.Drawing.Size(178, 21)
+        Me.UcrDataLinkType.TabIndex = 105
+        Me.UcrDataLinkType.Tag = "elementtype"
+        '
         'ucrMetadataElement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrDataLinkType)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrTextBoxUnit)
         Me.Controls.Add(Me.ucrTextBoxLowerLimit)
@@ -336,7 +347,6 @@ Partial Class ucrMetadataElement
         Me.Controls.Add(Me.lblTotalRequired)
         Me.Controls.Add(Me.chkSelected)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.txtType)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblUpperlimit)
         Me.Controls.Add(Me.lblScale)
@@ -359,7 +369,6 @@ Partial Class ucrMetadataElement
     Friend WithEvents lblTotalRequired As Label
     Friend WithEvents chkSelected As CheckBox
     Friend WithEvents lblSelected As Label
-    Friend WithEvents txtType As ComboBox
     Friend WithEvents lblType As Label
     Friend WithEvents lblUpperlimit As Label
     Friend WithEvents lblScale As Label
@@ -384,4 +393,5 @@ Partial Class ucrMetadataElement
     Friend WithEvents cmdUpdateScheduleClass As Button
     Friend WithEvents cmdAddScheduleClass As Button
     Friend WithEvents cmdClearClass As Button
+    Friend WithEvents UcrDataLinkType As ucrDataLinkCombobox
 End Class

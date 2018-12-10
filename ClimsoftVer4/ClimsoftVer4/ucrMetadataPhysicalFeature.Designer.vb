@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataPhysicalFeature
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -24,14 +24,10 @@ Partial Class ucrMetadataPhysicalFeature
     Private Sub InitializeComponent()
         Me.cmdOpenFile = New System.Windows.Forms.Button()
         Me.lblClassDescription = New System.Windows.Forms.Label()
-        Me.txtFeatureEdate = New System.Windows.Forms.TextBox()
-        Me.txtFeatureBdate = New System.Windows.Forms.TextBox()
         Me.lblFeatureImageFile = New System.Windows.Forms.Label()
         Me.lblFeaturePicture = New System.Windows.Forms.Label()
         Me.txtFeaturePicture = New System.Windows.Forms.PictureBox()
-        Me.txtFeaturedEdate = New System.Windows.Forms.DateTimePicker()
         Me.lblStationID = New System.Windows.Forms.Label()
-        Me.txtFeaturedBdate = New System.Windows.Forms.DateTimePicker()
         Me.lblFeatureDescription = New System.Windows.Forms.Label()
         Me.lblFeatureClass = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
@@ -44,11 +40,13 @@ Partial Class ucrMetadataPhysicalFeature
         Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
         Me.cmdClearClass = New System.Windows.Forms.Button()
         Me.ucrNavigationPhysicalFeature = New ClimsoftVer4.ucrNavigation()
-        Me.ucrStationSelectorStation = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrTextBoxFeatureDescription = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxFeatureClass = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxClassDescription = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxFeatureImageFile = New ClimsoftVer4.ucrTextBox()
+        Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
+        Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtFeaturePicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
@@ -71,20 +69,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblClassDescription.Size = New System.Drawing.Size(88, 13)
         Me.lblClassDescription.TabIndex = 85
         Me.lblClassDescription.Text = "Class Description"
-        '
-        'txtFeatureEdate
-        '
-        Me.txtFeatureEdate.Location = New System.Drawing.Point(142, 176)
-        Me.txtFeatureEdate.Name = "txtFeatureEdate"
-        Me.txtFeatureEdate.Size = New System.Drawing.Size(137, 20)
-        Me.txtFeatureEdate.TabIndex = 83
-        '
-        'txtFeatureBdate
-        '
-        Me.txtFeatureBdate.Location = New System.Drawing.Point(141, 145)
-        Me.txtFeatureBdate.Name = "txtFeatureBdate"
-        Me.txtFeatureBdate.Size = New System.Drawing.Size(137, 20)
-        Me.txtFeatureBdate.TabIndex = 82
         '
         'lblFeatureImageFile
         '
@@ -121,14 +105,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.txtFeaturePicture.TabIndex = 80
         Me.txtFeaturePicture.TabStop = False
         '
-        'txtFeaturedEdate
-        '
-        Me.txtFeaturedEdate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtFeaturedEdate.Location = New System.Drawing.Point(275, 176)
-        Me.txtFeaturedEdate.Name = "txtFeaturedEdate"
-        Me.txtFeaturedEdate.Size = New System.Drawing.Size(20, 20)
-        Me.txtFeaturedEdate.TabIndex = 70
-        '
         'lblStationID
         '
         Me.lblStationID.AutoSize = True
@@ -137,14 +113,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblStationID.Size = New System.Drawing.Size(54, 13)
         Me.lblStationID.TabIndex = 74
         Me.lblStationID.Text = "Station ID"
-        '
-        'txtFeaturedBdate
-        '
-        Me.txtFeaturedBdate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.txtFeaturedBdate.Location = New System.Drawing.Point(275, 145)
-        Me.txtFeaturedBdate.Name = "txtFeaturedBdate"
-        Me.txtFeaturedBdate.Size = New System.Drawing.Size(20, 20)
-        Me.txtFeaturedBdate.TabIndex = 69
         '
         'lblFeatureDescription
         '
@@ -258,13 +226,14 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrNavigationPhysicalFeature.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationPhysicalFeature.TabIndex = 107
         '
-        'ucrStationSelectorStation
+        'ucrStationSelector
         '
-        Me.ucrStationSelectorStation.Location = New System.Drawing.Point(141, 106)
-        Me.ucrStationSelectorStation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationSelectorStation.Name = "ucrStationSelectorStation"
-        Me.ucrStationSelectorStation.Size = New System.Drawing.Size(154, 24)
-        Me.ucrStationSelectorStation.TabIndex = 9
+        Me.ucrStationSelector.Location = New System.Drawing.Point(141, 106)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(154, 24)
+        Me.ucrStationSelector.TabIndex = 9
+        Me.ucrStationSelector.Tag = "associatedWith"
         '
         'ucrTextBoxFeatureDescription
         '
@@ -273,6 +242,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureDescription.Name = "ucrTextBoxFeatureDescription"
         Me.ucrTextBoxFeatureDescription.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxFeatureDescription.TabIndex = 109
+        Me.ucrTextBoxFeatureDescription.Tag = "description"
         Me.ucrTextBoxFeatureDescription.TextboxValue = ""
         '
         'ucrTextBoxFeatureClass
@@ -300,30 +270,45 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureImageFile.Name = "ucrTextBoxFeatureImageFile"
         Me.ucrTextBoxFeatureImageFile.Size = New System.Drawing.Size(180, 20)
         Me.ucrTextBoxFeatureImageFile.TabIndex = 112
+        Me.ucrTextBoxFeatureImageFile.Tag = "image"
         Me.ucrTextBoxFeatureImageFile.TextboxValue = ""
+        '
+        'ucrDatePickerBeginDate
+        '
+        Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(141, 140)
+        Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
+        Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(154, 21)
+        Me.ucrDatePickerBeginDate.TabIndex = 113
+        Me.ucrDatePickerBeginDate.Tag = "beginDate"
+        '
+        'ucrDatePickerEndDate
+        '
+        Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(141, 171)
+        Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
+        Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(154, 21)
+        Me.ucrDatePickerEndDate.TabIndex = 114
+        Me.ucrDatePickerEndDate.Tag = "endDate"
         '
         'ucrMetadataPhysicalFeature
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDatePickerEndDate)
+        Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrTextBoxFeatureImageFile)
         Me.Controls.Add(Me.ucrTextBoxClassDescription)
         Me.Controls.Add(Me.ucrTextBoxFeatureClass)
         Me.Controls.Add(Me.ucrTextBoxFeatureDescription)
-        Me.Controls.Add(Me.ucrStationSelectorStation)
+        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPhysicalFeature)
         Me.Controls.Add(Me.lblPhysicalFeature)
         Me.Controls.Add(Me.cmdOpenFile)
         Me.Controls.Add(Me.lblClassDescription)
-        Me.Controls.Add(Me.txtFeatureEdate)
-        Me.Controls.Add(Me.txtFeatureBdate)
         Me.Controls.Add(Me.lblFeatureImageFile)
         Me.Controls.Add(Me.lblFeaturePicture)
         Me.Controls.Add(Me.txtFeaturePicture)
-        Me.Controls.Add(Me.txtFeaturedEdate)
         Me.Controls.Add(Me.lblStationID)
-        Me.Controls.Add(Me.txtFeaturedBdate)
         Me.Controls.Add(Me.lblFeatureDescription)
         Me.Controls.Add(Me.lblFeatureClass)
         Me.Controls.Add(Me.lblEndDate)
@@ -340,14 +325,10 @@ Partial Class ucrMetadataPhysicalFeature
 
     Friend WithEvents cmdOpenFile As Button
     Friend WithEvents lblClassDescription As Label
-    Friend WithEvents txtFeatureEdate As TextBox
-    Friend WithEvents txtFeatureBdate As TextBox
     Friend WithEvents lblFeatureImageFile As Label
     Friend WithEvents lblFeaturePicture As Label
     Friend WithEvents txtFeaturePicture As PictureBox
-    Friend WithEvents txtFeaturedEdate As DateTimePicker
     Friend WithEvents lblStationID As Label
-    Friend WithEvents txtFeaturedBdate As DateTimePicker
     Friend WithEvents lblFeatureDescription As Label
     Friend WithEvents lblFeatureClass As Label
     Friend WithEvents lblEndDate As Label
@@ -360,9 +341,11 @@ Partial Class ucrMetadataPhysicalFeature
     Friend WithEvents cmdAddScheduleClass As Button
     Friend WithEvents cmdClearClass As Button
     Friend WithEvents ucrNavigationPhysicalFeature As ucrNavigation
-    Friend WithEvents ucrStationSelectorStation As ucrStationSelector
+    Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrTextBoxFeatureDescription As ucrTextBox
     Friend WithEvents ucrTextBoxFeatureClass As ucrTextBox
     Friend WithEvents ucrTextBoxClassDescription As ucrTextBox
     Friend WithEvents ucrTextBoxFeatureImageFile As ucrTextBox
+    Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
+    Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
 End Class
