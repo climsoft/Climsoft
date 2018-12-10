@@ -139,6 +139,7 @@ Partial Class ucrMetadataPaperArchive
         Me.ucrTextBoxFormId.Name = "ucrTextBoxFormId"
         Me.ucrTextBoxFormId.Size = New System.Drawing.Size(136, 20)
         Me.ucrTextBoxFormId.TabIndex = 107
+        Me.ucrTextBoxFormId.Tag = "formId"
         Me.ucrTextBoxFormId.TextboxValue = ""
         '
         'ucrTextBoxDefinition
@@ -148,6 +149,7 @@ Partial Class ucrMetadataPaperArchive
         Me.ucrTextBoxDefinition.Name = "ucrTextBoxDefinition"
         Me.ucrTextBoxDefinition.Size = New System.Drawing.Size(136, 20)
         Me.ucrTextBoxDefinition.TabIndex = 108
+        Me.ucrTextBoxDefinition.Tag = "description"
         Me.ucrTextBoxDefinition.TextboxValue = ""
         '
         'ucrMetadataPaperArchive

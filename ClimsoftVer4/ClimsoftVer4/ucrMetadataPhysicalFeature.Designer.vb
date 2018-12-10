@@ -233,6 +233,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(154, 24)
         Me.ucrStationSelector.TabIndex = 9
+        Me.ucrStationSelector.Tag = "associatedWith"
         '
         'ucrTextBoxFeatureDescription
         '
@@ -241,6 +242,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureDescription.Name = "ucrTextBoxFeatureDescription"
         Me.ucrTextBoxFeatureDescription.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxFeatureDescription.TabIndex = 109
+        Me.ucrTextBoxFeatureDescription.Tag = "description"
         Me.ucrTextBoxFeatureDescription.TextboxValue = ""
         '
         'ucrTextBoxFeatureClass
@@ -268,6 +270,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureImageFile.Name = "ucrTextBoxFeatureImageFile"
         Me.ucrTextBoxFeatureImageFile.Size = New System.Drawing.Size(180, 20)
         Me.ucrTextBoxFeatureImageFile.TabIndex = 112
+        Me.ucrTextBoxFeatureImageFile.Tag = "image"
         Me.ucrTextBoxFeatureImageFile.TextboxValue = ""
         '
         'ucrDatePickerBeginDate
@@ -276,6 +279,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(154, 21)
         Me.ucrDatePickerBeginDate.TabIndex = 113
+        Me.ucrDatePickerBeginDate.Tag = "beginDate"
         '
         'ucrDatePickerEndDate
         '
@@ -283,6 +287,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(154, 21)
         Me.ucrDatePickerEndDate.TabIndex = 114
+        Me.ucrDatePickerEndDate.Tag = "endDate"
         '
         'ucrMetadataPhysicalFeature
         '
