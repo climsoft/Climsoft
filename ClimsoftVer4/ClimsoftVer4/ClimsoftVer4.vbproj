@@ -1449,6 +1449,12 @@
     <EmbeddedResource Include="ucrMetadataInstrument.resx">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPaperArchive.resx">
+      <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPhysicalFeature.resx">
+      <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMonthlyData.resx">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </EmbeddedResource>

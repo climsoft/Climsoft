@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataPaperArchive
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,8 +22,6 @@ Partial Class ucrMetadataPaperArchive
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtFormDescription = New System.Windows.Forms.TextBox()
-        Me.txtFormId = New System.Windows.Forms.TextBox()
         Me.lbldescri = New System.Windows.Forms.Label()
         Me.lblFormId = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -34,23 +32,11 @@ Partial Class ucrMetadataPaperArchive
         Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
         Me.cmdClearClass = New System.Windows.Forms.Button()
         Me.ucrNavigationPaperArchive = New ClimsoftVer4.ucrNavigation()
+        Me.ucrTextBoxFormId = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDefinition = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtFormDescription
-        '
-        Me.txtFormDescription.Location = New System.Drawing.Point(200, 139)
-        Me.txtFormDescription.Name = "txtFormDescription"
-        Me.txtFormDescription.Size = New System.Drawing.Size(154, 20)
-        Me.txtFormDescription.TabIndex = 13
-        '
-        'txtFormId
-        '
-        Me.txtFormId.Location = New System.Drawing.Point(200, 98)
-        Me.txtFormId.Name = "txtFormId"
-        Me.txtFormId.Size = New System.Drawing.Size(152, 20)
-        Me.txtFormId.TabIndex = 12
         '
         'lbldescri
         '
@@ -146,14 +132,32 @@ Partial Class ucrMetadataPaperArchive
         Me.ucrNavigationPaperArchive.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationPaperArchive.TabIndex = 105
         '
+        'ucrTextBoxFormId
+        '
+        Me.ucrTextBoxFormId.Location = New System.Drawing.Point(212, 99)
+        Me.ucrTextBoxFormId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxFormId.Name = "ucrTextBoxFormId"
+        Me.ucrTextBoxFormId.Size = New System.Drawing.Size(136, 20)
+        Me.ucrTextBoxFormId.TabIndex = 107
+        Me.ucrTextBoxFormId.TextboxValue = ""
+        '
+        'ucrTextBoxDefinition
+        '
+        Me.ucrTextBoxDefinition.Location = New System.Drawing.Point(212, 141)
+        Me.ucrTextBoxDefinition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDefinition.Name = "ucrTextBoxDefinition"
+        Me.ucrTextBoxDefinition.Size = New System.Drawing.Size(136, 20)
+        Me.ucrTextBoxDefinition.TabIndex = 108
+        Me.ucrTextBoxDefinition.TextboxValue = ""
+        '
         'ucrMetadataPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxDefinition)
+        Me.Controls.Add(Me.ucrTextBoxFormId)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPaperArchive)
-        Me.Controls.Add(Me.txtFormDescription)
-        Me.Controls.Add(Me.txtFormId)
         Me.Controls.Add(Me.lbldescri)
         Me.Controls.Add(Me.lblFormId)
         Me.Controls.Add(Me.Label7)
@@ -165,9 +169,6 @@ Partial Class ucrMetadataPaperArchive
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents txtFormDescription As TextBox
-    Friend WithEvents txtFormId As TextBox
     Friend WithEvents lbldescri As Label
     Friend WithEvents lblFormId As Label
     Friend WithEvents Label7 As Label
@@ -178,4 +179,6 @@ Partial Class ucrMetadataPaperArchive
     Friend WithEvents cmdAddScheduleClass As Button
     Friend WithEvents cmdClearClass As Button
     Friend WithEvents ucrNavigationPaperArchive As ucrNavigation
+    Friend WithEvents ucrTextBoxFormId As ucrTextBox
+    Friend WithEvents ucrTextBoxDefinition As ucrTextBox
 End Class
