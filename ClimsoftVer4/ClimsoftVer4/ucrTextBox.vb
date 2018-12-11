@@ -30,7 +30,14 @@ Public Class ucrTextBox
     Public Overrides Sub SetValue(objNewValue As Object)
         'Dim strNewValue As String
         'strNewValue = TryCast(objNewValue, String)
-        txtBox.Text = objNewValue
+
+        'TODO. Implement this in a way that caters for for all possible data types
+        If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
+            txtBox.Text = ""
+        Else
+            txtBox.Text = objNewValue
+
+        End If
         OnevtValueChanged(Me, Nothing)
     End Sub
 

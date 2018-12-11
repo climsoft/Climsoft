@@ -77,7 +77,7 @@ Partial Class frmNewMetadata
         Me.TabStation.Location = New System.Drawing.Point(4, 22)
         Me.TabStation.Name = "TabStation"
         Me.TabStation.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStation.Size = New System.Drawing.Size(778, 450)
+        Me.TabStation.Size = New System.Drawing.Size(778, 501)
         Me.TabStation.TabIndex = 0
         Me.TabStation.Text = "Station"
         Me.TabStation.UseVisualStyleBackColor = True
@@ -95,7 +95,7 @@ Partial Class frmNewMetadata
         Me.TabElement.Location = New System.Drawing.Point(4, 22)
         Me.TabElement.Name = "TabElement"
         Me.TabElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabElement.Size = New System.Drawing.Size(778, 450)
+        Me.TabElement.Size = New System.Drawing.Size(778, 501)
         Me.TabElement.TabIndex = 1
         Me.TabElement.Text = "Element"
         Me.TabElement.UseVisualStyleBackColor = True
@@ -113,7 +113,7 @@ Partial Class frmNewMetadata
         Me.TabStationElement.Location = New System.Drawing.Point(4, 22)
         Me.TabStationElement.Name = "TabStationElement"
         Me.TabStationElement.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationElement.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationElement.Size = New System.Drawing.Size(778, 501)
         Me.TabStationElement.TabIndex = 2
         Me.TabStationElement.Text = "Station Element"
         Me.TabStationElement.UseVisualStyleBackColor = True
@@ -149,7 +149,7 @@ Partial Class frmNewMetadata
         Me.TabStationLocationHistory.Location = New System.Drawing.Point(4, 22)
         Me.TabStationLocationHistory.Name = "TabStationLocationHistory"
         Me.TabStationLocationHistory.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationLocationHistory.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationLocationHistory.Size = New System.Drawing.Size(778, 501)
         Me.TabStationLocationHistory.TabIndex = 4
         Me.TabStationLocationHistory.Text = "Station Location History"
         Me.TabStationLocationHistory.UseVisualStyleBackColor = True
@@ -167,7 +167,7 @@ Partial Class frmNewMetadata
         Me.TabStationQualifier.Location = New System.Drawing.Point(4, 22)
         Me.TabStationQualifier.Name = "TabStationQualifier"
         Me.TabStationQualifier.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabStationQualifier.Size = New System.Drawing.Size(778, 450)
+        Me.TabStationQualifier.Size = New System.Drawing.Size(778, 501)
         Me.TabStationQualifier.TabIndex = 5
         Me.TabStationQualifier.Text = "Station Qualifier"
         Me.TabStationQualifier.UseVisualStyleBackColor = True
@@ -185,16 +185,16 @@ Partial Class frmNewMetadata
         Me.TabScheduleClass.Location = New System.Drawing.Point(4, 22)
         Me.TabScheduleClass.Name = "TabScheduleClass"
         Me.TabScheduleClass.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabScheduleClass.Size = New System.Drawing.Size(778, 450)
+        Me.TabScheduleClass.Size = New System.Drawing.Size(778, 501)
         Me.TabScheduleClass.TabIndex = 6
         Me.TabScheduleClass.Text = "Schedule Class"
         Me.TabScheduleClass.UseVisualStyleBackColor = True
         '
         'UcrMetadataScheduleClass1
         '
-        Me.UcrMetadataScheduleClass1.Location = New System.Drawing.Point(3, 6)
+        Me.UcrMetadataScheduleClass1.Location = New System.Drawing.Point(95, 41)
         Me.UcrMetadataScheduleClass1.Name = "UcrMetadataScheduleClass1"
-        Me.UcrMetadataScheduleClass1.Size = New System.Drawing.Size(769, 427)
+        Me.UcrMetadataScheduleClass1.Size = New System.Drawing.Size(588, 419)
         Me.UcrMetadataScheduleClass1.TabIndex = 0
         '
         'TabPhysicalFeature
@@ -203,7 +203,7 @@ Partial Class frmNewMetadata
         Me.TabPhysicalFeature.Location = New System.Drawing.Point(4, 22)
         Me.TabPhysicalFeature.Name = "TabPhysicalFeature"
         Me.TabPhysicalFeature.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPhysicalFeature.Size = New System.Drawing.Size(778, 450)
+        Me.TabPhysicalFeature.Size = New System.Drawing.Size(778, 501)
         Me.TabPhysicalFeature.TabIndex = 7
         Me.TabPhysicalFeature.Text = "Physical Feature"
         Me.TabPhysicalFeature.UseVisualStyleBackColor = True
@@ -221,7 +221,7 @@ Partial Class frmNewMetadata
         Me.TabPaperArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabPaperArchive.Name = "TabPaperArchive"
         Me.TabPaperArchive.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPaperArchive.Size = New System.Drawing.Size(778, 450)
+        Me.TabPaperArchive.Size = New System.Drawing.Size(778, 501)
         Me.TabPaperArchive.TabIndex = 8
         Me.TabPaperArchive.Text = "Paper Archive"
         Me.TabPaperArchive.UseVisualStyleBackColor = True

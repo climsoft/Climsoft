@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataScheduleClass
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -27,7 +27,7 @@ Partial Class ucrMetadataScheduleClass
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.lblClass = New System.Windows.Forms.Label()
         Me.ucrTextBoxClass = New ClimsoftVer4.ucrTextBox()
-        Me.ucrStationSelectorStationID = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrTextBoxDescription = New ClimsoftVer4.ucrTextBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
@@ -84,23 +84,26 @@ Partial Class ucrMetadataScheduleClass
         Me.ucrTextBoxClass.Name = "ucrTextBoxClass"
         Me.ucrTextBoxClass.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxClass.TabIndex = 19
+        Me.ucrTextBoxClass.Tag = "scheduleClass"
         Me.ucrTextBoxClass.TextboxValue = ""
         '
-        'ucrStationSelectorStationID
+        'ucrStationSelector
         '
-        Me.ucrStationSelectorStationID.Location = New System.Drawing.Point(220, 133)
-        Me.ucrStationSelectorStationID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationSelectorStationID.Name = "ucrStationSelectorStationID"
-        Me.ucrStationSelectorStationID.Size = New System.Drawing.Size(154, 24)
-        Me.ucrStationSelectorStationID.TabIndex = 20
+        Me.ucrStationSelector.Location = New System.Drawing.Point(220, 133)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(154, 24)
+        Me.ucrStationSelector.TabIndex = 20
+        Me.ucrStationSelector.Tag = "refersTo"
         '
         'ucrTextBoxDescription
         '
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(220, 176)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
-        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxDescription.TabIndex = 21
+        Me.ucrTextBoxDescription.Tag = "description"
         Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'GroupBox13
@@ -176,7 +179,7 @@ Partial Class ucrMetadataScheduleClass
         Me.Controls.Add(Me.ucrNavigationScheduleClass)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrTextBoxDescription)
-        Me.Controls.Add(Me.ucrStationSelectorStationID)
+        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrTextBoxClass)
         Me.Controls.Add(Me.lblScheduleClass)
         Me.Controls.Add(Me.lblStationID)
@@ -196,7 +199,7 @@ Partial Class ucrMetadataScheduleClass
     Friend WithEvents lblDescription As Label
     Friend WithEvents lblClass As Label
     Friend WithEvents ucrTextBoxClass As ucrTextBox
-    Friend WithEvents ucrStationSelectorStationID As ucrStationSelector
+    Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrTextBoxDescription As ucrTextBox
     Friend WithEvents GroupBox13 As GroupBox
     Friend WithEvents cmdViewScheduleClass As Button

@@ -25,9 +25,14 @@
         If objNewValue Is Nothing OrElse (TypeOf objNewValue Is String AndAlso String.IsNullOrWhiteSpace(objNewValue)) Then
             txtDate.Text = ""
         Else
-            'TODO try creating a date object from the string value?
-            dtpDate.Value = objNewValue
-            txtDate.Text = dtpDate.Value
+            Try
+                'TODO try creating a date object from the string value?
+                dtpDate.Value = objNewValue
+                txtDate.Text = dtpDate.Value
+            Catch ex As Exception
+                txtDate.Text = ""
+            End Try
+
         End If
 
         OnevtValueChanged(Me, Nothing)

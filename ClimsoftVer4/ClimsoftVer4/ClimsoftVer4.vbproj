@@ -947,6 +947,12 @@
     <Compile Include="ucrSynopticRA1.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrTableEntry.Designer.vb">
+      <DependentUpon>ucrTableEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTableEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrTextBox.Designer.vb">
       <DependentUpon>ucrTextBox.vb</DependentUpon>
     </Compile>
@@ -1442,6 +1448,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataInstrument.resx">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPaperArchive.resx">
+      <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPhysicalFeature.resx">
+      <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMonthlyData.resx">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
