@@ -1,12 +1,12 @@
 ﻿Public Class ucrMetadataInstrument
     Private strInstrumentFieldName As String = "instrumentId"
 
-    Protected Overrides Sub ucrTableEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrMetadataInstrument_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             strTableName = "instrument"
 
-            'ucrTableEntry_Load fills in the lstFields
-            MyBase.ucrTableEntry_Load(sender, e)
+            'SetUpTableEntry 
+            SetUpTableEntry()
 
             AddLinkedControlFilters(ucrDataLinkInstrumentID, strInstrumentFieldName, "=", strLinkedFieldName:=strInstrumentFieldName, bForceValuesAsString:=True)
 

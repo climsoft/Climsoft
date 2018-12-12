@@ -1,20 +1,4 @@
-﻿' R- Instat
-' Copyright (C) 2015-2017
-'
-' This program is free software: you can redistribute it and/or modify
-' it under the terms of the GNU General Public License as published by
-' the Free Software Foundation, either version 3 of the License, or
-' (at your option) any later version.
-'
-' This program is distributed in the hope that it will be useful,
-' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License 
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Public Class ucrValueFlagPeriod
+﻿Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
@@ -405,12 +389,12 @@ Public Class ucrValueFlagPeriod
         'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
 
         With frmKeyEntry.ListView1
-                For i = 0 To .Items.Count - 1
-                    If .Items(i).Selected = True Then
-                        frm = .Items(i).SubItems(0).Text
-                        Exit For
-                    End If
-                Next
+            For i = 0 To .Items.Count - 1
+                If .Items(i).Selected = True Then
+                    frm = .Items(i).SubItems(0).Text
+                    Exit For
+                End If
+            Next
 
             'MsgBox(frm)
             Select Case frm
@@ -525,5 +509,17 @@ Public Class ucrValueFlagPeriod
                 End If
             Loop
         End If
+    End Sub
+
+    Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
+        ucrValue.AddFieldstoList(lstFields)
+        ucrFlag.AddFieldstoList(lstFields)
+        ucrPeriod.AddFieldstoList(lstFields)
+    End Sub
+
+    Public Overrides Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
+        ucrValue.AddEventValueChangedHandle(ehSub)
+        ucrFlag.AddEventValueChangedHandle(ehSub)
+        ucrPeriod.AddEventValueChangedHandle(ehSub)
     End Sub
 End Class
