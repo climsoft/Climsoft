@@ -30,6 +30,7 @@ Public Class DataCall
 
     ' A TableFilter object which defines the rows in the table the values will be from
     Private clsFilter As TableFilter
+    Public bReadOnly As Boolean = True
 
     Public Function Clone() As DataCall
         Dim clsdatacall As New DataCall
@@ -151,15 +152,11 @@ Public Class DataCall
 
     Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim clsCurrentFilter As TableFilter
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dtb As New DataTable
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         Dim strSql As String
 
         Try
-
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
-            conn.Open()
 
             If IsNothing(clsAdditionalFilter) Then
                 clsCurrentFilter = clsFilter
@@ -172,7 +169,8 @@ Public Class DataCall
             End If
 
             cmd = New MySql.Data.MySqlClient.MySqlCommand()
-            cmd.Connection = conn
+            cmd.Connection = clsDataConnection.conn
+            'TODO. Get the fields from dictionary 
             strSql = "Select * FROM " & strTable 'To confirm that this is the best approach to creating the paramatised Querie
             cmd.CommandText = strSql
 
@@ -182,6 +180,7 @@ Public Class DataCall
 
             Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
                 da.Fill(dtb)
+
             End Using
 
 
@@ -192,7 +191,7 @@ Public Class DataCall
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         Finally
-            conn.Close()
+            'conn.Close()
         End Try
 
         Return dtb
@@ -204,12 +203,20 @@ Public Class DataCall
         Dim lstCombine As List(Of String)
         Dim strSep As String = " "
 
-        dtb = GetSourceDataTable(clsAdditionalFilter)
+
+        If bReadOnly Then
+            dtb = GetSourceDataTable(clsAdditionalFilter)
+        Else
+            dtb = GetSourceDataTable(clsAdditionalFilter).Copy
+        End If
+
+
         If dtb.Columns.Count > 0 Then
             For Each strFieldDisplay As String In dctFields.Keys
                 lstFields = dctFields.Item(strFieldDisplay)
                 'if field = 1 just rename the database column name, if not create a sigle column from the fields and combine the values into the single column
                 If lstFields.Count = 1 Then
+                    'TODO
                     'Probably rename the column name
                     dtb.Columns.Item(lstFields(0)).ColumnName = strFieldDisplay
                 Else

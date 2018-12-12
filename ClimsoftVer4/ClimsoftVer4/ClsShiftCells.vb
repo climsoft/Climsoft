@@ -1,6 +1,6 @@
 ﻿Public Class ClsShiftCells
     Private vfpContextMenuStrip As ContextMenuStrip
-    Private lstOrderedVfpControls As New List(Of ucrBaseDataLink)
+    Private lstOrderedVfpControls As New List(Of ucrValueView)
 
     ''' <summary>
     ''' initialise the class with controls ordered by tab index
@@ -64,11 +64,11 @@
             If (TypeOf control Is ucrValueFlagPeriod) OrElse (TypeOf control Is ucrDirectionSpeedFlag) Then
                 'Start the shifting downwards
                 Dim currentIndex As Integer = control.TabIndex
-                Dim lstControls As New List(Of ucrBaseDataLink)
+                Dim lstControls As New List(Of ucrValueView)
                 Dim lstValues As New List(Of Object)
 
                 'get the values to shift and the respective controls
-                For Each ctr As ucrBaseDataLink In lstOrderedVfpControls
+                For Each ctr As ucrValueView In lstOrderedVfpControls
                     If ctr.TabIndex >= currentIndex AndAlso ctr.Enabled Then
                         lstControls.Add(ctr)
                         lstValues.Add(ctr.GetValue)
@@ -94,11 +94,11 @@
             If (TypeOf control Is ucrValueFlagPeriod) OrElse (TypeOf control Is ucrDirectionSpeedFlag) Then
                 'Start the shifting upwards
                 Dim currentIndex As Integer = control.TabIndex
-                Dim lstControls As New List(Of ucrBaseDataLink)
+                Dim lstControls As New List(Of ucrValueView)
                 Dim lstValues As New List(Of Object)
 
                 'get the values to shift and the respective controls
-                For Each ctr As ucrBaseDataLink In lstOrderedVfpControls
+                For Each ctr As ucrValueView In lstOrderedVfpControls
                     If ctr.TabIndex >= currentIndex AndAlso ctr.Enabled Then
                         lstControls.Add(ctr)
                         lstValues.Add(ctr.GetValue)
