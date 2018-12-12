@@ -46,6 +46,16 @@ Public Class frmLogin
 
     Sub ConfigFile()
         Try
+            'TODO. Remove this later
+            txtUsername.Text = "root"
+            txtPassword.Text = "P@trickm"
+            cmbDatabases.Text = "server=127.0.0.1;database=mariadb_climsoft_test_db_v4;port=3308;"
+            line = cmbDatabases.Text
+            Server_db_port(line)
+            frmLaunchPad.Hide()
+
+
+
             ' Create an instance of StreamReader to read from a file. 
             ' Then open the configuration file
             'MsgBox(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
@@ -84,6 +94,10 @@ Public Class frmLogin
 
             languageTableInit()
             climsoftuserRoles()
+
+            'Newly added code
+            clsDataConnection.openConnection()
+
         Catch e As Exception
             'MsgBox("Login failure")
             MsgBox(e.Message, MsgBoxStyle.Exclamation)

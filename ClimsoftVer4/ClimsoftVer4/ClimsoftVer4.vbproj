@@ -989,6 +989,12 @@
     <Compile Include="ucrStationSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrValueView.Designer.vb">
+      <DependentUpon>ucrValueView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrYearSelector.Designer.vb">
       <DependentUpon>ucrYearSelector.vb</DependentUpon>
     </Compile>
@@ -1505,6 +1511,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.vb</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram2.cd" />
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
