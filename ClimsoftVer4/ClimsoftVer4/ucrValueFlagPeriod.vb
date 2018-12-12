@@ -85,7 +85,7 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrValue.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
