@@ -35,7 +35,7 @@ Public Class ucrTextBox
         If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
             txtBox.Text = ""
         Else
-            txtBox.Text = objNewValue
+            txtBox.Text = objNewValue 'TODO
 
         End If
         OnevtValueChanged(Me, Nothing)
