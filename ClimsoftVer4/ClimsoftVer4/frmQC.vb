@@ -27,7 +27,9 @@ Public Class frmQC
     Dim msgTxtQCReportsOutUpperLimits As String
     Dim msgTxtQCReportsOutInterelement As String
 
+    Private Sub chkAllElements_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllElements.CheckedChanged
 
+    End Sub
 
     Public HTMLHelp As New clsHelp
 
@@ -36,6 +38,10 @@ Public Class frmQC
         If optInterElement.Checked = True Then
             lstViewElements.Enabled = False
             chkAllElements.Enabled = False
+            chkAllElements.Checked = False
+            For i = 0 To lstViewElements.Items.Count - 1
+                lstViewElements.Items(i).Checked = False
+            Next
         Else
             lstViewElements.Enabled = True
             chkAllElements.Enabled = True
@@ -67,6 +73,11 @@ Public Class frmQC
         lstViewElements.Columns.Clear()
         lstViewElements.Columns.Add("Element Code", 100, HorizontalAlignment.Left)
         lstViewElements.Columns.Add("Element Details", 200, HorizontalAlignment.Left)
+        lblDataTransferProgress.Text = ""
+        txtBeginYear.Text = ""
+        txtEndYear.Text = ""
+        chkAllStations.Checked = False
+        chkAllElements.Checked = False
 
         Try
             conns.ConnectionString = frmLogin.txtusrpwd.Text
@@ -370,10 +381,10 @@ Public Class frmQC
             '   "upperLimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT) " & _
             '   "into outfile '" & qcReportsFolderUnix & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
-            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " & _
-                     "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " & _
-                     "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " & _
-                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " & _
+            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " &
+                     "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
+                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
                      "upperlimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT);"
 
             ''"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -425,10 +436,10 @@ Public Class frmQC
             '   "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT) " & _
             '   "into outfile '" & qcReportsFolderUnix & "/qc_report_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
-            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " & _
-                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " & _
-                     "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " & _
-                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " & _
+            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " &
+                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
+                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
                       "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT);"
 
             '"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -491,9 +502,9 @@ Public Class frmQC
                     Me.Cursor = Cursors.Default
                 End Try
 
-                strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " & _
-                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " & _
-                    "WHERE describedby=" & elem1 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear & _
+                strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE describedby=" & elem1 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear &
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth
 
                 ' Create the Command for executing query and set its properties
@@ -532,9 +543,9 @@ Public Class frmQC
                     Me.Cursor = Cursors.Default
                 End Try
                 '
-                strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " & _
-                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " & _
-                    "WHERE describedby=" & elem2 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear & _
+                strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE describedby=" & elem2 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear &
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
 
                 ' Create the Command for executing query and set its properties
@@ -554,7 +565,7 @@ Public Class frmQC
                 End Try
                 'Carry out interelement comparison
                 If (elem1 = 2 And elem2 = 3) Or (elem1 = 101 And elem2 = 102) Or (elem1 = 102 And elem2 = 103) Then
-                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " & _
+                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
                         "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
                         "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 " &
                         "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
@@ -576,10 +587,10 @@ Public Class frmQC
                     ''End Try
 
                 ElseIf (elem1 = 2 And elem2 = 101) Or (elem1 = 101 And elem2 = 3) Then
-                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime_1','obsDatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " & _
+                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime_1','obsDatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
                         "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
-                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " & _
-                        "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " & _
+                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " &
+                        "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " &
                         "and day(obsDatetime_1)=day(obsDatetime_2) " &
                         "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
                         "'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
@@ -662,11 +673,4 @@ Public Class frmQC
         CommonModules.ViewFile(fl)
     End Sub
 
-    Private Sub chkAllElements_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllElements.CheckedChanged
-
-    End Sub
-
-    Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
-
-    End Sub
 End Class

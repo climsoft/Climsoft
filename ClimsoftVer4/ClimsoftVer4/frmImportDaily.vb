@@ -108,7 +108,9 @@
         End Try
         If DataGridView1.RowCount > 0 Then
             cmdLoadData.Enabled = True
-            pnlHeaders.Enabled = True
+
+            ' CLICOM imports have fixed structure hence the panel for header specifications should not be used hence it's not enabled
+            If InStr(Text, "CLICOM") < 1 Then pnlHeaders.Enabled = True
         Else
             cmdLoadData.Enabled = False
             pnlHeaders.Enabled = False
@@ -242,8 +244,14 @@
                 DataCat = "Hourly"
             ElseIf lblType.Text = "Daily" Then
                 DataCat = "Daily2"
+            ElseIf lblType.Text = "CLICOMdaily" Then
+                DataCat = "CLICOMDLY"
+            ElseIf lblType.Text = "CLICOMsynop" Then
+                DataCat = "CLICOMSYP"
+            ElseIf lblType.Text = "CLICOMhourly" Then
+                DataCat = "CLICOMHLY"
             Else
-                ' Other data categories
+                ' Other future data categories
                 'DataCat = Get_DataCat()
             End If
 
@@ -273,6 +281,12 @@
                     Load_Aws_special()
                 Case "ColElms"
                     Load_ColumnElems()
+                Case "CLICOMDLY"
+                    Load_CLICOM("daily")
+                Case "CLICOMSYP"
+                    Load_CLICOM("synop")
+                Case "CLICOMHLY"
+                    Load_CLICOM("hourly")
             End Select
 
             FileClose(101)
@@ -375,7 +389,9 @@
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
                                             'If IsDate(dttime) Then Add_Record(st, cod, dttime, dat, flg)
-                                            If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                            If Station_Element(st, cod) Then
+                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                            End If
                                         End If
                                     End If
                                     ' Show upload progress
@@ -445,7 +461,9 @@
                                     Get_Value_Flag(cod, dat, flg)
                                 End If
                                 If IsDate(dttime) And IsDate(DateSerial(y, m, h)) Then
-                                    If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For
+                                    If Station_Element(st, cod) Then
+                                        If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For
+                                    End If
                                 End If
 
                                 ' Show upload progress
@@ -512,9 +530,11 @@
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
-                                            If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                            If Station_Element(st, cod) Then
+                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                            End If
                                         End If
-                                    End If ' Last DataGridView which is equivalent to End data columns 
+                                        End If ' Last DataGridView which is equivalent to End data columns 
 
                                     ' Show upload progress
                                     lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
@@ -590,7 +610,8 @@
                                                 dat = ""
                                             End If
 
-                                            Add_Record(st, cod, dttim, dat, flg)
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg)
+
                                         End If
                                     End If
                                 End If
@@ -665,8 +686,11 @@
                                 End If
                                 If IsDate(dttim) Then
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
-                                    'MsgBox(dttim & " " & st & " " & cod & " " & dat & " " & flg)
-                                    If Not Add_Record(st, cod, dttim, dat, flg) Then Exit For
+
+                                    If Station_Element(st, cod) Then
+                                        If Not Add_Record(st, cod, dttim, dat, flg) Then Exit For
+                                    End If
+
                                 End If
 
                                 ' Show upload progress
@@ -686,9 +710,6 @@
     End Sub
 
     Sub Load_ColumnElems()
-        'MsgBox("Column Elements")
-        'Dim stn, code, yr, mn, dy, hr, dt_tm, dat, flg As String
-        'Dim i, j As Integer
         Dim st, cod, y, m, d, h, dt_tm, hd, dat, dttcom, flg As String
 
 
@@ -748,7 +769,7 @@
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
-                                            Add_Record(st, cod, dt_tm, dat, flg)
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg)
                                         End If
                                     End If
                                 End With
@@ -767,6 +788,124 @@
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
     End Sub
+
+    Sub Load_CLICOM(typ As String)
+        Dim col As Integer
+        Dim st, cod, dt, tm, dttime, hd, dat, flg As String
+        Dim maxrows As Long
+
+        ' Populate Gridview with column headers
+
+        'Label the rows descriptors
+        cmdLoadData.Enabled = True
+        DataGridView1.Columns(0).Name = "Seq"
+        DataGridView1.Columns(1).Name = "station_id"
+        DataGridView1.Columns(2).Name = "element_code"
+        DataGridView1.Columns(3).Name = "NA"
+        DataGridView1.Columns(4).Name = "Date"
+
+        ' Label the data and flag columns according to the CLICOM data type
+        Select Case typ
+            Case "daily"
+                For i = 5 To 65 Step 2
+                    col = (i - 1) / 2 - 1
+                    DataGridView1.Columns(i).Name = col
+                    DataGridView1.Columns(i + 1).Name = "FLAG"
+                Next
+            Case "synop"
+                For i = 5 To 19 Step 2
+                    col = i - (15 - i) / 2
+                    DataGridView1.Columns(i).Name = col
+                    DataGridView1.Columns(i + 1).Name = "FLAG"
+                Next
+            Case "hourly"
+                For i = 5 To 51 Step 2
+                    col = (i - 5) / 2
+                    DataGridView1.Columns(i).Name = col
+                    DataGridView1.Columns(i + 1).Name = "FLAG"
+                Next
+        End Select
+
+        DataGridView1.Refresh()
+
+        Me.Cursor = Cursors.WaitCursor
+        Try
+
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(delimit)
+
+                Do While MyReader.EndOfData = False
+
+                    currentRow = MyReader.ReadFields()
+
+                    If MyReader.LineNumber > Val(txtStartRow.Text) Then
+                        ' Get the record index
+                        col = 0
+                        st = txtStn.Text
+                        tm = txtObsHour.Text
+                        flg = ""
+
+                        For Each currentField In currentRow
+
+                            hd = DataGridView1.Columns(col).Name
+                            dat = currentField
+
+                            With DataGridView1
+                                If col < .ColumnCount Then
+                                    If .Columns(col).Name = "station_id" Then
+                                        st = dat
+                                    ElseIf .Columns(col).Name = "element_code" Then
+                                        cod = dat
+                                    ElseIf .Columns(col).Name = "Date" Then
+                                        dt = dat
+                                    Else ' Data or Flag column encountered
+
+                                        If IsNumeric(hd) Then ' Data column only
+
+                                            ' Construct the datetime string according to CLICOM data type
+                                            Select Case typ
+                                                Case "daily"
+                                                    dttime = dt & "-" & hd & " " & txtObsHour.Text & ":00"
+                                                Case "synop"
+                                                    dttime = dt & " " & hd & ":00"
+                                                Case "hourly"
+                                                    dttime = dt & " " & hd & ":00"
+                                            End Select
+
+                                            If IsNumeric(dat) Then
+                                                If dat = -99999 Then
+                                                    dat = ""
+                                                    flg = "M"
+                                                Else
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                    flg = ""
+                                                End If
+                                            End If
+                                            If Station_Element(st, cod) And IsDate(dttime) Then ' Exit For
+                                                If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For
+                                            End If
+                                        End If
+                                    End If
+                                    col = col + 1
+                                End If
+                            End With
+                        Next
+                        ' Show upload progress
+                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text
+                        lblRecords.Refresh()
+                    End If
+
+                Loop
+
+            End Using
+
+        Catch ex As Exception
+            If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
+        End Try
+
+    End Sub
+
     Sub Get_Value_Flag(code As String, ByRef dat As String, ByRef flg As String)
         'MsgBox("Flag")
         Dim datstr, flgchr As String
@@ -877,17 +1016,17 @@
 
 
     Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String) As Boolean
-        'MsgBox(stn & " " & datetime)
         Dim dat As String
 
         Try
-            If Val(cprd) < 1 Then cprd = "" ' No cummulative values
+            If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
 
             dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg & ", " & cprd
-            cprd = "" ' Initialize Cummulative period value
+
             Print(101, dat)
             PrintLine(101)
 
+            cprd = "" ' Initialize Cummulative period value
             Return True
         Catch ex As Exception
             dbcon.Close()
@@ -920,7 +1059,7 @@
     End Sub
 
     Sub Scale_Data(code As String, ByRef obsv As String)
-        'MsgBox(code)
+
         Dim scales As Decimal
 
         Try
@@ -942,6 +1081,55 @@
         End Try
 
     End Sub
+
+    Function Station_Element(stn_id As String, elm_code As String) As Boolean
+        Dim stn, elm As Boolean
+
+        stn = True
+        elm = True
+        Station_Element = True
+        Try
+            ' Check if Station exist
+            sql = "select stationId from station where stationId like '" & stn_id & "';"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "station")
+
+            If ds1.Tables("station").Rows.Count = 0 Then
+                'lblStnEror.Text = "Station " & stn_id & " Not Found"
+                lblStnEror.Visible = True
+                lstStations.Visible = True
+                lstStations.Items.Add(stn_id)
+                stn = False
+            End If
+
+            ' Check if Element exist
+            sql = "select elementId from obselement where elementId = '" & elm_code & "';"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "element")
+
+            If ds1.Tables("element").Rows.Count = 0 Then
+                'lblElmeror.Text = "Element " & elm_code & " Not Found"
+                lblElmeror.Visible = True
+                lstElements.Visible = True
+                lstElements.Items.Add(elm_code)
+                elm = False
+            End If
+
+            If stn = False Or elm = False Then
+                Return False
+            Else
+                Return True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Function
+
     Function Get_Code_Scale(code As String, ByRef obsv As String) As Boolean
         'MsgBox(code & " " & obsv)
         Dim scales As Decimal
