@@ -9,7 +9,7 @@ Public Class ucrNavigation
     'Stores the sort by querry
     Public strSortCol As String = ""
     'Stors the dictonary of key controls and their fields
-    Private dctKeyControls As Dictionary(Of String, ucrBaseDataLink)
+    Private dctKeyControls As Dictionary(Of String, ucrValueView)
 
     Public Overrides Sub PopulateControl()
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
@@ -31,7 +31,7 @@ Public Class ucrNavigation
     ''' </summary>
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
-    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+    Public Function GetValue(Optional strFieldName As String = "") As Object
         If strFieldName = "" Then
             Return Nothing
         End If
@@ -130,7 +130,7 @@ Public Class ucrNavigation
         UpdateKeyControls()
     End Sub
 
-    Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrBaseDataLink))
+    Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrValueView))
         dctKeyControls = dctNewKeyControls
     End Sub
     'TODO
@@ -141,9 +141,9 @@ Public Class ucrNavigation
     ''' </summary>
     ''' <param name="strFieldName"></param>
     ''' <param name="ucrKeyControl"></param>
-    Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrBaseDataLink)
+    Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrValueView)
         If dctKeyControls Is Nothing Then
-            SetKeyControls(New Dictionary(Of String, ucrBaseDataLink))
+            SetKeyControls(New Dictionary(Of String, ucrValueView))
         End If
 
         If dctKeyControls.ContainsKey(strFieldName) Then
@@ -162,7 +162,7 @@ Public Class ucrNavigation
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
             If iMaxRows > 0 Then
-                For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+                For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                     'Suppress events being raised while changing value of each key control
                     kvp.Value.bSuppressChangedEvents = True
                     ' Use new GetValueFromRow method to get value from specific row since dtbRecords now nothing
@@ -172,7 +172,7 @@ Public Class ucrNavigation
                 Next
             Else
                 'To do set the defaults for the controls
-                For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+                For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                     If TypeOf kvp.Value Is ucrDataLinkCombobox Then
                         'Suppress events being raised while changing value of each key control
                         kvp.Value.bSuppressChangedEvents = True
@@ -205,7 +205,7 @@ Public Class ucrNavigation
             'check if its current row first before fetching from database
             bRowExists = True
             row = GetRow(iCurrRow)
-            For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+            For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
                 If row.Count < 1 OrElse row.Item(kvp.Key) <> kvp.Value.GetValue Then
                     bRowExists = False
@@ -256,9 +256,9 @@ Public Class ucrNavigation
     'End Sub
 
 
-    Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        'UpdateKeyControls()
-    End Sub
+    'Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+    '    'UpdateKeyControls()
+    'End Sub
 
     Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -312,7 +312,7 @@ Public Class ucrNavigation
     Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
-        Dim dctKeySequencerControls As New Dictionary(Of String, ucrBaseDataLink)
+        Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
         Dim strSelectStatement As String = ""
         Dim rowsFitered As DataRow()
         Dim iCurrRow As Integer
@@ -329,7 +329,7 @@ Public Class ucrNavigation
         clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
-        For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
             If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
                 dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
                 If strSelectStatement <> "" Then
@@ -366,7 +366,7 @@ Public Class ucrNavigation
                 End If
             End If
             If dctKeySequencerControls.Count > 0 Then
-                For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeySequencerControls
+                For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
                     kvpTemp.Value.bSuppressChangedEvents = True
                     kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
                     kvpTemp.Value.bSuppressChangedEvents = False

@@ -67,14 +67,14 @@ Public Class ucrHourlyWind
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetFieldValue(strDirectionFieldName & ctr.Tag), GetFieldValue(strSpeedFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                     'DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
                 End If
             Next
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
         End If
 
         ' Set conditions for double key entry
@@ -117,7 +117,7 @@ Public Class ucrHourlyWind
         checkSpeedTotal()
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -129,7 +129,7 @@ Public Class ucrHourlyWind
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked controls
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue() Then
                 bValidValues = False
                 Exit For
@@ -139,7 +139,7 @@ Public Class ucrHourlyWind
         If bValidValues Then
             'fhourlyWindRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 'CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()
@@ -344,7 +344,7 @@ Public Class ucrHourlyWind
     ''' returns true if all direction values are valid and false if any of them is not valid
     ''' </summary>
     ''' <returns></returns>
-    Public Overrides Function ValidateValue() As Boolean
+    Public Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 If Not DirectCast(ctr, ucrDirectionSpeedFlag).ValidateValue Then

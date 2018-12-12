@@ -80,6 +80,7 @@ Public Class ucrFormDaily2
         Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+
             vfpContextMenuStrip = SetUpContextMenuStrip()
 
             For Each ctr As Control In Me.Controls
@@ -107,10 +108,12 @@ Public Class ucrFormDaily2
             Next
 
             strTableName = "form_daily2"
-            SetTableNameAndFields(strTableName, lstFields)
-            bFirstLoad = False
-        End If
+            'ucrTableEntry_Load fills in the lstFields
+            MyBase.ucrTableEntry_Load(sender, e)
 
+            bFirstLoad = False
+
+        End If
     End Sub
 
     Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
