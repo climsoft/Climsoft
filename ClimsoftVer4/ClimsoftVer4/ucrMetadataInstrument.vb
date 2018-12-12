@@ -26,7 +26,7 @@
         'will populate the datatable based on the new key values
         MyBase.LinkedControls_evtValueChanged()
 
-        For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+        For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
             'TODO 
 
         Next
