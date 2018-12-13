@@ -35,6 +35,7 @@ Partial Class ucrValueFlagPeriod
         Me.ucrValue.Name = "ucrValue"
         Me.ucrValue.Size = New System.Drawing.Size(55, 23)
         Me.ucrValue.TabIndex = 581
+        Me.ucrValue.Tag = "obsValue"
         Me.ucrValue.TextboxValue = ""
         '
         'ucrFlag
@@ -44,6 +45,7 @@ Partial Class ucrValueFlagPeriod
         Me.ucrFlag.Name = "ucrFlag"
         Me.ucrFlag.Size = New System.Drawing.Size(29, 23)
         Me.ucrFlag.TabIndex = 582
+        Me.ucrFlag.Tag = "flag"
         Me.ucrFlag.TextboxValue = ""
         '
         'ucrPeriod
@@ -53,6 +55,7 @@ Partial Class ucrValueFlagPeriod
         Me.ucrPeriod.Name = "ucrPeriod"
         Me.ucrPeriod.Size = New System.Drawing.Size(35, 23)
         Me.ucrPeriod.TabIndex = 583
+        Me.ucrPeriod.Tag = "period"
         Me.ucrPeriod.TextboxValue = ""
         '
         'ucrValueFlagPeriod
