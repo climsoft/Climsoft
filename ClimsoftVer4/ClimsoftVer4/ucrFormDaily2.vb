@@ -3,7 +3,7 @@ Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
 
-
+    Dim strTableName As String
     'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
@@ -170,22 +170,22 @@ Public Class ucrFormDaily2
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked key filter controls
-        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
-            If Not key.ValidateValue() Then
-                bValidValues = False
-                Exit For
-            End If
-        Next
+        'For Each key As ucrValueView In dctLinkedControlsFilters.Keys
+        ' If Not key.ValidateValue() Then
+        'bValidValues = False
+        'Exit For
+        ' End If
+        'Next
 
         If bValidValues Then
             'will populate the datatable based on the new key values
-            MyBase.LinkedControls_evtValueChanged()
+            'MyBase.LinkedControls_evtValueChanged()
 
-            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                'TODO Replace this with a call to update the datatable
-                'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
-            Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            'TODO Replace this with a call to update the datatable
+            'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            ' Next
+            ' ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -500,21 +500,19 @@ Public Class ucrFormDaily2
 
         ucrLinkedHour.setDefaultValue(6)
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedElement, "elementId", "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, "hh", "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedElement, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
         'Sets key controls for the navigation
-        'TODO. EntryDateTime field to be added and sorting field to be set too
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
-        'ucrLinkedNavigation.SetSortBy("entryDatetime")
-        ucrLinkedNavigation.AddKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedElement)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedHour)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
 
     End Sub

@@ -134,7 +134,7 @@ Public Class ucrMonthlydata
             For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 'CallByName(fmonthlyRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -259,11 +259,11 @@ Public Class ucrMonthlydata
 
         'Sets key controls for the navigation
         'TODO. EntryDateTime field to be added and sorting field to be set too
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy"})))
-        'ucrLinkedNavigation.SetSortBy("entryDatetime")
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedElement)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 

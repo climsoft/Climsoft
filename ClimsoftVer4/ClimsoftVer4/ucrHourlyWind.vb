@@ -142,7 +142,7 @@ Public Class ucrHourlyWind
             For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 'CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. Disable??
             'Me.Enabled = False
@@ -411,11 +411,12 @@ Public Class ucrHourlyWind
         AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
         AddLinkedControlFilters(ucrLinkedDay, "dd", "=", strLinkedFieldName:="day", bForceValuesAsString:=False)
 
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedDay)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 
