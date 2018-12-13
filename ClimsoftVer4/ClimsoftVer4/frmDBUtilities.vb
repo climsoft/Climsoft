@@ -183,7 +183,7 @@ Public Class frmDBUtilities
     End Function
 
     Private Sub CLICOMDailyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CLICOMDailyToolStripMenuItem.Click
-        frmImportCSV.Show()
+        'frmImportCSV.Show()
     End Sub
 
     Private Sub ObsInitialToFinalToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ObsInitialToFinalToolStripMenuItem.Click
@@ -363,6 +363,39 @@ Public Class frmDBUtilities
             '.txtObsHour.Visible = False
             '.txtStn.Visible = True
             '.lblStn.Visible = True
+            .Show()
+        End With
+    End Sub
+
+    Private Sub DailyToolStripMenuItem1_Click_1(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem1.Click
+        With frmImportDaily
+            .Text = "CLICOM Daily"
+            .lblType.Text = "CLICOMdaily"
+            .txtStartRow.Text = 1
+            .chkScale.Checked = True
+            .txtStn.Enabled = False
+            .Show()
+        End With
+    End Sub
+
+    Private Sub SynopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynopToolStripMenuItem.Click
+        With frmImportDaily
+            .Text = "CLICOM Synop"
+            .lblType.Text = "CLICOMsynop"
+            .txtStartRow.Text = 1
+            .chkScale.Checked = True
+            .txtStn.Enabled = False
+            .Show()
+        End With
+    End Sub
+
+    Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
+        With frmImportDaily
+            .Text = "CLICOM Hourly"
+            .lblType.Text = "CLICOMhourly"
+            .txtStartRow.Text = 1
+            .chkScale.Checked = True
+            .txtStn.Enabled = False
             .Show()
         End With
     End Sub
