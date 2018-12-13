@@ -1464,6 +1464,9 @@
     <EmbeddedResource Include="ucrMetadataScheduleClass.resx">
       <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStation.resx">
+      <DependentUpon>ucrMetadataStation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStationQualifier.resx">
       <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
     </EmbeddedResource>
