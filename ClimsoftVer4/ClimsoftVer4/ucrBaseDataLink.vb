@@ -95,7 +95,7 @@ Public Class ucrBaseDataLink
         SetFields(lstNewFields)
     End Sub
 
-    Public Function GetField() As String
+    Public Function GetDataField() As String
         Return clsDataDefinition.GetField
     End Function
 
