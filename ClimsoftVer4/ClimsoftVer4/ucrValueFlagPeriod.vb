@@ -3,6 +3,7 @@
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
+    Public strIdentifyField As String
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -522,4 +523,35 @@
         ucrFlag.AddEventValueChangedHandle(ehSub)
         ucrPeriod.AddEventValueChangedHandle(ehSub)
     End Sub
+
+    Public Overrides Sub SetValueFromDataTable(dtbValues As DataTable)
+        Dim tempRow As DataRow
+        Dim lstValues As New List(Of Object)
+        Dim lstDistinct As New List(Of Object)
+        Dim dtbTemp As DataTable
+
+        If strIdentifyField = "" OrElse Tag = "" Then
+            SetValue(Nothing)
+        Else
+            dtbTemp = dtbValues.Clone()
+            For Each tempRow In dtbValues.Rows
+                If tempRow(strIdentifyField) = Tag Then
+                    dtbTemp.Rows.Add(tempRow)
+                End If
+            Next
+
+            If dtbTemp.Rows.Count = 1 Then
+                lstValues.Add(dtbTemp.Rows(0)(ucrValue.Tag))
+                lstValues.Add(dtbTemp.Rows(0)(ucrFlag.Tag))
+                lstValues.Add(dtbTemp.Rows(0)(ucrPeriod.Tag))
+                SetValue(lstValues)
+            ElseIf dtbTemp.Rows.Count = 0 Then
+                SetValue(Nothing)
+            Else
+                'TODO Should we give an error in this case?
+                SetValue(Nothing)
+            End If
+        End If
+    End Sub
+
 End Class

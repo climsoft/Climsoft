@@ -108,8 +108,9 @@ Public Class ucrFormDaily2
             Next
 
             strTableName = "form_daily2"
-            'ucrTableEntry_Load fills in the lstFields
-            MyBase.ucrTableEntry_Load(sender, e)
+            'crTableEntry_Load fills in the lstFields 
+            'SetUpTableEntry()
+            SetTableNameAndFields(strTableName, lstFields)
 
             bFirstLoad = False
 
@@ -509,7 +510,7 @@ Public Class ucrFormDaily2
         'TODO. EntryDateTime field to be added and sorting field to be set too
         ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
         'ucrLinkedNavigation.SetSortBy("entryDatetime")
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls("stationId", ucrLinkedStation)
         ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
         ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)

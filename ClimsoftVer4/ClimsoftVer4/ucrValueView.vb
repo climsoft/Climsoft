@@ -7,6 +7,18 @@
     ' Used when wanting to update several controls without linked controls updating inbetween.
     Public bSuppressChangedEvents As Boolean = False
 
+    Public Property FieldName() As String
+        Get
+            Return Tag
+        End Get
+        Set(value As String)
+            Tag = value
+        End Set
+    End Property
+
+
+
+
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
     End Sub
@@ -29,19 +41,26 @@
     Public Overridable Sub SetValueFromDataTable(dtbValues As DataTable)
         Dim tempRow As DataRow
         Dim lstTemp As New List(Of Object)
+        Dim lstDistinct As New List(Of Object)
 
         If Tag = "" Then
             SetValue(Nothing)
-        End If
-        If dtbValues.Rows.Count = 1 Then
-            SetValue(dtbValues.Rows(0).Item(Tag))
-        ElseIf dtbRecords.Rows.Count > 1 Then
-            For Each tempRow In dtbValues.Rows
-                lstTemp.Add(tempRow.Item(Tag))
-            Next
-            SetValue(lstTemp)
         Else
-            SetValue(Nothing)
+            If dtbValues.Rows.Count = 1 Then
+                SetValue(dtbValues.Rows(0).Item(Tag))
+            ElseIf dtbRecords.Rows.Count > 1 Then
+                For Each tempRow In dtbValues.Rows
+                    lstTemp.Add(tempRow.Item(Tag))
+                Next
+                lstDistinct = lstTemp.Distinct()
+                If lstDistinct.Count = 1 Then
+                    SetValue(lstDistinct(0))
+                Else
+                    SetValue(lstTemp)
+                End If
+            Else
+                SetValue(Nothing)
+            End If
         End If
     End Sub
 
@@ -67,7 +86,7 @@
     End Function
 
     Public Overridable Sub AddFieldstoList(lstFields As List(Of String))
-        lstFields.Add(Me.Tag)
+        lstFields.Add(FieldName)
     End Sub
 
     Public Overridable Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)

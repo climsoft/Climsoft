@@ -17,7 +17,7 @@ Public Class ucrBaseDataLink
     Protected clsDataDefinition As DataCall
     Protected dtbRecords As New DataTable
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrValueView, KeyValuePair(Of String, TableFilter))
-
+    Private strTableName As String
 
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
@@ -46,8 +46,13 @@ Public Class ucrBaseDataLink
 
     Public Overridable Sub SetTableName(strNewTable As String)
         CreateDataDefinition()
+        strTableName = strNewTable
         clsDataDefinition.SetTableName(strNewTable:=strNewTable)
     End Sub
+
+    Public Function GetTableName() As String
+        Return strTableName
+    End Function
 
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         CreateDataDefinition()
