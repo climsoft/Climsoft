@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrMetadataStation
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -23,8 +23,29 @@ Partial Class ucrMetadataStation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.ucrTextBoxGeographicalAccuracy = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxGraphicalMethod = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDrainageBasin = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxAdminRegion = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxAuthority = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxCountry = New ClimsoftVer4.ucrTextBox()
+        Me.ucrICAOId = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxWMOId = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrSearchStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrStationIDcombobox = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
+        Me.ucrTextBoxSecondsLongitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxSecondsLatitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxMinutesLongitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxMinutesLatitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDegreesLongitude = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDegreesLatitude = New ClimsoftVer4.ucrTextBox()
         Me.lblEW = New System.Windows.Forms.Label()
         Me.lblNS = New System.Windows.Forms.Label()
         Me.lstEW = New System.Windows.Forms.ComboBox()
@@ -40,6 +61,7 @@ Partial Class ucrMetadataStation
         Me.lblICAOid = New System.Windows.Forms.Label()
         Me.lblWMOid = New System.Windows.Forms.Label()
         Me.lblSearchStation = New System.Windows.Forms.Label()
+        Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdImport = New System.Windows.Forms.Button()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -63,29 +85,8 @@ Partial Class ucrMetadataStation
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblStationId = New System.Windows.Forms.Label()
-        Me.ucrStationIDcombobox = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrSearchStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxWMOId = New ClimsoftVer4.ucrTextBox()
-        Me.ucrICAOId = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxCountry = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxAuthority = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxAdminRegion = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxDrainageBasin = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxDegreesLatitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxDegreesLongitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxMinutesLatitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxMinutesLongitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxSecondsLatitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxSecondsLongitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
-        Me.UcrNavigation1 = New ClimsoftVer4.ucrNavigation()
-        Me.ucrTextBoxGraphicalMethod = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxGeographicalAccuracy = New ClimsoftVer4.ucrTextBox()
-        Me.txtStationOperation = New System.Windows.Forms.CheckBox()
+        Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
+        Me.lblStations = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStation.SuspendLayout()
         Me.grpComputationDD.SuspendLayout()
@@ -141,6 +142,152 @@ Partial Class ucrMetadataStation
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
         '
+        'ucrTextBoxGeographicalAccuracy
+        '
+        Me.ucrTextBoxGeographicalAccuracy.Location = New System.Drawing.Point(518, 275)
+        Me.ucrTextBoxGeographicalAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGeographicalAccuracy.Name = "ucrTextBoxGeographicalAccuracy"
+        Me.ucrTextBoxGeographicalAccuracy.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxGeographicalAccuracy.TabIndex = 80
+        Me.ucrTextBoxGeographicalAccuracy.Tag = "geoLocationAccuracy"
+        Me.ucrTextBoxGeographicalAccuracy.TextboxValue = ""
+        '
+        'ucrTextBoxGraphicalMethod
+        '
+        Me.ucrTextBoxGraphicalMethod.Location = New System.Drawing.Point(518, 251)
+        Me.ucrTextBoxGraphicalMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGraphicalMethod.Name = "ucrTextBoxGraphicalMethod"
+        Me.ucrTextBoxGraphicalMethod.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxGraphicalMethod.TabIndex = 79
+        Me.ucrTextBoxGraphicalMethod.Tag = "geoLocationMethod"
+        Me.ucrTextBoxGraphicalMethod.TextboxValue = ""
+        '
+        'ucrTextBoxQualifier
+        '
+        Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(481, 170)
+        Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
+        Me.ucrTextBoxQualifier.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxQualifier.TabIndex = 78
+        Me.ucrTextBoxQualifier.Tag = "qualifier"
+        Me.ucrTextBoxQualifier.TextboxValue = ""
+        '
+        'ucrTextBoxDrainageBasin
+        '
+        Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(116, 304)
+        Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
+        Me.ucrTextBoxDrainageBasin.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDrainageBasin.TabIndex = 77
+        Me.ucrTextBoxDrainageBasin.Tag = "drainageBasin"
+        Me.ucrTextBoxDrainageBasin.TextboxValue = ""
+        '
+        'ucrTextBoxAdminRegion
+        '
+        Me.ucrTextBoxAdminRegion.Location = New System.Drawing.Point(117, 275)
+        Me.ucrTextBoxAdminRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxAdminRegion.Name = "ucrTextBoxAdminRegion"
+        Me.ucrTextBoxAdminRegion.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxAdminRegion.TabIndex = 76
+        Me.ucrTextBoxAdminRegion.Tag = "adminRegion"
+        Me.ucrTextBoxAdminRegion.TextboxValue = ""
+        '
+        'ucrTextBoxAuthority
+        '
+        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(117, 251)
+        Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
+        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxAuthority.TabIndex = 75
+        Me.ucrTextBoxAuthority.Tag = "authority"
+        Me.ucrTextBoxAuthority.TextboxValue = ""
+        '
+        'ucrTextBoxCountry
+        '
+        Me.ucrTextBoxCountry.Location = New System.Drawing.Point(116, 222)
+        Me.ucrTextBoxCountry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxCountry.Name = "ucrTextBoxCountry"
+        Me.ucrTextBoxCountry.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxCountry.TabIndex = 74
+        Me.ucrTextBoxCountry.Tag = "country"
+        Me.ucrTextBoxCountry.TextboxValue = ""
+        '
+        'ucrICAOId
+        '
+        Me.ucrICAOId.Location = New System.Drawing.Point(116, 197)
+        Me.ucrICAOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrICAOId.Name = "ucrICAOId"
+        Me.ucrICAOId.Size = New System.Drawing.Size(51, 20)
+        Me.ucrICAOId.TabIndex = 73
+        Me.ucrICAOId.Tag = "icaoid"
+        Me.ucrICAOId.TextboxValue = ""
+        '
+        'ucrTextBoxWMOId
+        '
+        Me.ucrTextBoxWMOId.Location = New System.Drawing.Point(117, 170)
+        Me.ucrTextBoxWMOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxWMOId.Name = "ucrTextBoxWMOId"
+        Me.ucrTextBoxWMOId.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxWMOId.TabIndex = 72
+        Me.ucrTextBoxWMOId.Tag = "wmoid"
+        Me.ucrTextBoxWMOId.TextboxValue = ""
+        '
+        'ucrTextBoxElevation
+        '
+        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(117, 141)
+        Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
+        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxElevation.TabIndex = 71
+        Me.ucrTextBoxElevation.Tag = "elevation"
+        Me.ucrTextBoxElevation.TextboxValue = ""
+        '
+        'ucrTextBoxLongitude
+        '
+        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(117, 107)
+        Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
+        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(76, 21)
+        Me.ucrTextBoxLongitude.TabIndex = 70
+        Me.ucrTextBoxLongitude.Tag = "longitude"
+        Me.ucrTextBoxLongitude.TextboxValue = ""
+        '
+        'ucrTextBoxLatitude
+        '
+        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(116, 82)
+        Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
+        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(77, 18)
+        Me.ucrTextBoxLatitude.TabIndex = 69
+        Me.ucrTextBoxLatitude.Tag = "latitude"
+        Me.ucrTextBoxLatitude.TextboxValue = ""
+        '
+        'ucrSearchStationNamecombobox
+        '
+        Me.ucrSearchStationNamecombobox.Location = New System.Drawing.Point(477, 16)
+        Me.ucrSearchStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSearchStationNamecombobox.Name = "ucrSearchStationNamecombobox"
+        Me.ucrSearchStationNamecombobox.Size = New System.Drawing.Size(178, 21)
+        Me.ucrSearchStationNamecombobox.TabIndex = 68
+        '
+        'ucrStationNamecombobox
+        '
+        Me.ucrStationNamecombobox.Location = New System.Drawing.Point(117, 43)
+        Me.ucrStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationNamecombobox.Name = "ucrStationNamecombobox"
+        Me.ucrStationNamecombobox.Size = New System.Drawing.Size(178, 21)
+        Me.ucrStationNamecombobox.TabIndex = 67
+        Me.ucrStationNamecombobox.Tag = "stationName"
+        '
+        'ucrStationIDcombobox
+        '
+        Me.ucrStationIDcombobox.Location = New System.Drawing.Point(117, 20)
+        Me.ucrStationIDcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationIDcombobox.Name = "ucrStationIDcombobox"
+        Me.ucrStationIDcombobox.Size = New System.Drawing.Size(178, 21)
+        Me.ucrStationIDcombobox.TabIndex = 66
+        Me.ucrStationIDcombobox.Tag = "stationId"
+        '
         'Label24
         '
         Me.Label24.AutoSize = True
@@ -175,6 +322,60 @@ Partial Class ucrMetadataStation
         Me.grpComputationDD.TabIndex = 63
         Me.grpComputationDD.TabStop = False
         Me.grpComputationDD.Text = "Latitude and Longitude Decimal Degrees Computation"
+        '
+        'ucrTextBoxSecondsLongitude
+        '
+        Me.ucrTextBoxSecondsLongitude.Location = New System.Drawing.Point(295, 43)
+        Me.ucrTextBoxSecondsLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxSecondsLongitude.Name = "ucrTextBoxSecondsLongitude"
+        Me.ucrTextBoxSecondsLongitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxSecondsLongitude.TabIndex = 561
+        Me.ucrTextBoxSecondsLongitude.TextboxValue = ""
+        '
+        'ucrTextBoxSecondsLatitude
+        '
+        Me.ucrTextBoxSecondsLatitude.Location = New System.Drawing.Point(295, 15)
+        Me.ucrTextBoxSecondsLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxSecondsLatitude.Name = "ucrTextBoxSecondsLatitude"
+        Me.ucrTextBoxSecondsLatitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxSecondsLatitude.TabIndex = 560
+        Me.ucrTextBoxSecondsLatitude.TextboxValue = ""
+        '
+        'ucrTextBoxMinutesLongitude
+        '
+        Me.ucrTextBoxMinutesLongitude.Location = New System.Drawing.Point(173, 43)
+        Me.ucrTextBoxMinutesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxMinutesLongitude.Name = "ucrTextBoxMinutesLongitude"
+        Me.ucrTextBoxMinutesLongitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxMinutesLongitude.TabIndex = 559
+        Me.ucrTextBoxMinutesLongitude.TextboxValue = ""
+        '
+        'ucrTextBoxMinutesLatitude
+        '
+        Me.ucrTextBoxMinutesLatitude.Location = New System.Drawing.Point(173, 18)
+        Me.ucrTextBoxMinutesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxMinutesLatitude.Name = "ucrTextBoxMinutesLatitude"
+        Me.ucrTextBoxMinutesLatitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxMinutesLatitude.TabIndex = 558
+        Me.ucrTextBoxMinutesLatitude.TextboxValue = ""
+        '
+        'ucrTextBoxDegreesLongitude
+        '
+        Me.ucrTextBoxDegreesLongitude.Location = New System.Drawing.Point(56, 44)
+        Me.ucrTextBoxDegreesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDegreesLongitude.Name = "ucrTextBoxDegreesLongitude"
+        Me.ucrTextBoxDegreesLongitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDegreesLongitude.TabIndex = 557
+        Me.ucrTextBoxDegreesLongitude.TextboxValue = ""
+        '
+        'ucrTextBoxDegreesLatitude
+        '
+        Me.ucrTextBoxDegreesLatitude.Location = New System.Drawing.Point(56, 18)
+        Me.ucrTextBoxDegreesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDegreesLatitude.Name = "ucrTextBoxDegreesLatitude"
+        Me.ucrTextBoxDegreesLatitude.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDegreesLatitude.TabIndex = 556
+        Me.ucrTextBoxDegreesLatitude.TextboxValue = ""
         '
         'lblEW
         '
@@ -272,6 +473,7 @@ Partial Class ucrMetadataStation
         Me.txtClosingDate.Name = "txtClosingDate"
         Me.txtClosingDate.Size = New System.Drawing.Size(162, 20)
         Me.txtClosingDate.TabIndex = 13
+        Me.txtClosingDate.Tag = "closingDatetime"
         '
         'txtOpeningDate
         '
@@ -279,6 +481,7 @@ Partial Class ucrMetadataStation
         Me.txtOpeningDate.Name = "txtOpeningDate"
         Me.txtOpeningDate.Size = New System.Drawing.Size(162, 20)
         Me.txtOpeningDate.TabIndex = 12
+        Me.txtOpeningDate.Tag = "openingDatetime"
         '
         'lblICAOid
         '
@@ -306,6 +509,18 @@ Partial Class ucrMetadataStation
         Me.lblSearchStation.Size = New System.Drawing.Size(108, 13)
         Me.lblSearchStation.TabIndex = 39
         Me.lblSearchStation.Text = "Search Station Name"
+        '
+        'txtStationOperation
+        '
+        Me.txtStationOperation.AutoSize = True
+        Me.txtStationOperation.Location = New System.Drawing.Point(518, 304)
+        Me.txtStationOperation.Name = "txtStationOperation"
+        Me.txtStationOperation.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtStationOperation.Size = New System.Drawing.Size(15, 14)
+        Me.txtStationOperation.TabIndex = 16
+        Me.txtStationOperation.Tag = "stationOperational"
+        Me.txtStationOperation.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.txtStationOperation.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -400,6 +615,7 @@ Partial Class ucrMetadataStation
         Me.lblStationOperation.Name = "lblStationOperation"
         Me.lblStationOperation.Size = New System.Drawing.Size(97, 13)
         Me.lblStationOperation.TabIndex = 48
+        Me.lblStationOperation.Tag = ""
         Me.lblStationOperation.Text = "Station Operational"
         '
         'lbldarainage
@@ -463,6 +679,7 @@ Partial Class ucrMetadataStation
         Me.lblGeoAccuracy.Name = "lblGeoAccuracy"
         Me.lblGeoAccuracy.Size = New System.Drawing.Size(118, 13)
         Me.lblGeoAccuracy.TabIndex = 53
+        Me.lblGeoAccuracy.Tag = ""
         Me.lblGeoAccuracy.Text = "Geographical Accuracy"
         '
         'lblGeoMethod
@@ -472,6 +689,7 @@ Partial Class ucrMetadataStation
         Me.lblGeoMethod.Name = "lblGeoMethod"
         Me.lblGeoMethod.Size = New System.Drawing.Size(109, 13)
         Me.lblGeoMethod.TabIndex = 52
+        Me.lblGeoMethod.Tag = ""
         Me.lblGeoMethod.Text = "Geographical Method"
         '
         'lblElevation
@@ -513,222 +731,35 @@ Partial Class ucrMetadataStation
         'lblStationId
         '
         Me.lblStationId.AutoSize = True
-        Me.lblStationId.Location = New System.Drawing.Point(22, 23)
+        Me.lblStationId.Location = New System.Drawing.Point(20, 28)
         Me.lblStationId.Name = "lblStationId"
         Me.lblStationId.Size = New System.Drawing.Size(52, 13)
         Me.lblStationId.TabIndex = 40
         Me.lblStationId.Text = "Station Id"
         '
-        'ucrStationIDcombobox
+        'ucrNavigationStation
         '
-        Me.ucrStationIDcombobox.Location = New System.Drawing.Point(117, 20)
-        Me.ucrStationIDcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationIDcombobox.Name = "ucrStationIDcombobox"
-        Me.ucrStationIDcombobox.Size = New System.Drawing.Size(178, 21)
-        Me.ucrStationIDcombobox.TabIndex = 66
+        Me.ucrNavigationStation.Location = New System.Drawing.Point(164, 428)
+        Me.ucrNavigationStation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigationStation.Name = "ucrNavigationStation"
+        Me.ucrNavigationStation.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigationStation.TabIndex = 16
         '
-        'ucrStationNamecombobox
+        'lblStations
         '
-        Me.ucrStationNamecombobox.Location = New System.Drawing.Point(117, 43)
-        Me.ucrStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationNamecombobox.Name = "ucrStationNamecombobox"
-        Me.ucrStationNamecombobox.Size = New System.Drawing.Size(178, 21)
-        Me.ucrStationNamecombobox.TabIndex = 67
-        '
-        'ucrSearchStationNamecombobox
-        '
-        Me.ucrSearchStationNamecombobox.Location = New System.Drawing.Point(477, 16)
-        Me.ucrSearchStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSearchStationNamecombobox.Name = "ucrSearchStationNamecombobox"
-        Me.ucrSearchStationNamecombobox.Size = New System.Drawing.Size(178, 21)
-        Me.ucrSearchStationNamecombobox.TabIndex = 68
-        '
-        'ucrTextBoxLatitude
-        '
-        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(116, 82)
-        Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
-        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(77, 18)
-        Me.ucrTextBoxLatitude.TabIndex = 69
-        Me.ucrTextBoxLatitude.TextboxValue = ""
-        '
-        'ucrTextBoxLongitude
-        '
-        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(117, 107)
-        Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
-        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(76, 21)
-        Me.ucrTextBoxLongitude.TabIndex = 70
-        Me.ucrTextBoxLongitude.TextboxValue = ""
-        '
-        'ucrTextBoxElevation
-        '
-        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(117, 141)
-        Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
-        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxElevation.TabIndex = 71
-        Me.ucrTextBoxElevation.TextboxValue = ""
-        '
-        'ucrTextBoxWMOId
-        '
-        Me.ucrTextBoxWMOId.Location = New System.Drawing.Point(117, 170)
-        Me.ucrTextBoxWMOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxWMOId.Name = "ucrTextBoxWMOId"
-        Me.ucrTextBoxWMOId.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxWMOId.TabIndex = 72
-        Me.ucrTextBoxWMOId.TextboxValue = ""
-        '
-        'ucrICAOId
-        '
-        Me.ucrICAOId.Location = New System.Drawing.Point(116, 197)
-        Me.ucrICAOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrICAOId.Name = "ucrICAOId"
-        Me.ucrICAOId.Size = New System.Drawing.Size(51, 20)
-        Me.ucrICAOId.TabIndex = 73
-        Me.ucrICAOId.TextboxValue = ""
-        '
-        'ucrTextBoxCountry
-        '
-        Me.ucrTextBoxCountry.Location = New System.Drawing.Point(116, 222)
-        Me.ucrTextBoxCountry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxCountry.Name = "ucrTextBoxCountry"
-        Me.ucrTextBoxCountry.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxCountry.TabIndex = 74
-        Me.ucrTextBoxCountry.TextboxValue = ""
-        '
-        'ucrTextBoxAuthority
-        '
-        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(117, 251)
-        Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
-        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxAuthority.TabIndex = 75
-        Me.ucrTextBoxAuthority.TextboxValue = ""
-        '
-        'ucrTextBoxAdminRegion
-        '
-        Me.ucrTextBoxAdminRegion.Location = New System.Drawing.Point(117, 275)
-        Me.ucrTextBoxAdminRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxAdminRegion.Name = "ucrTextBoxAdminRegion"
-        Me.ucrTextBoxAdminRegion.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxAdminRegion.TabIndex = 76
-        Me.ucrTextBoxAdminRegion.TextboxValue = ""
-        '
-        'ucrTextBoxDrainageBasin
-        '
-        Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(116, 304)
-        Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
-        Me.ucrTextBoxDrainageBasin.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxDrainageBasin.TabIndex = 77
-        Me.ucrTextBoxDrainageBasin.TextboxValue = ""
-        '
-        'ucrTextBoxDegreesLatitude
-        '
-        Me.ucrTextBoxDegreesLatitude.Location = New System.Drawing.Point(56, 18)
-        Me.ucrTextBoxDegreesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxDegreesLatitude.Name = "ucrTextBoxDegreesLatitude"
-        Me.ucrTextBoxDegreesLatitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxDegreesLatitude.TabIndex = 556
-        Me.ucrTextBoxDegreesLatitude.TextboxValue = ""
-        '
-        'ucrTextBoxDegreesLongitude
-        '
-        Me.ucrTextBoxDegreesLongitude.Location = New System.Drawing.Point(56, 44)
-        Me.ucrTextBoxDegreesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxDegreesLongitude.Name = "ucrTextBoxDegreesLongitude"
-        Me.ucrTextBoxDegreesLongitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxDegreesLongitude.TabIndex = 557
-        Me.ucrTextBoxDegreesLongitude.TextboxValue = ""
-        '
-        'ucrTextBoxMinutesLatitude
-        '
-        Me.ucrTextBoxMinutesLatitude.Location = New System.Drawing.Point(173, 18)
-        Me.ucrTextBoxMinutesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxMinutesLatitude.Name = "ucrTextBoxMinutesLatitude"
-        Me.ucrTextBoxMinutesLatitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxMinutesLatitude.TabIndex = 558
-        Me.ucrTextBoxMinutesLatitude.TextboxValue = ""
-        '
-        'ucrTextBoxMinutesLongitude
-        '
-        Me.ucrTextBoxMinutesLongitude.Location = New System.Drawing.Point(173, 43)
-        Me.ucrTextBoxMinutesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxMinutesLongitude.Name = "ucrTextBoxMinutesLongitude"
-        Me.ucrTextBoxMinutesLongitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxMinutesLongitude.TabIndex = 559
-        Me.ucrTextBoxMinutesLongitude.TextboxValue = ""
-        '
-        'ucrTextBoxSecondsLatitude
-        '
-        Me.ucrTextBoxSecondsLatitude.Location = New System.Drawing.Point(295, 15)
-        Me.ucrTextBoxSecondsLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxSecondsLatitude.Name = "ucrTextBoxSecondsLatitude"
-        Me.ucrTextBoxSecondsLatitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxSecondsLatitude.TabIndex = 560
-        Me.ucrTextBoxSecondsLatitude.TextboxValue = ""
-        '
-        'ucrTextBoxSecondsLongitude
-        '
-        Me.ucrTextBoxSecondsLongitude.Location = New System.Drawing.Point(295, 43)
-        Me.ucrTextBoxSecondsLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxSecondsLongitude.Name = "ucrTextBoxSecondsLongitude"
-        Me.ucrTextBoxSecondsLongitude.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxSecondsLongitude.TabIndex = 561
-        Me.ucrTextBoxSecondsLongitude.TextboxValue = ""
-        '
-        'ucrTextBoxQualifier
-        '
-        Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(481, 170)
-        Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
-        Me.ucrTextBoxQualifier.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxQualifier.TabIndex = 78
-        Me.ucrTextBoxQualifier.TextboxValue = ""
-        '
-        'UcrNavigation1
-        '
-        Me.UcrNavigation1.Location = New System.Drawing.Point(164, 428)
-        Me.UcrNavigation1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrNavigation1.Name = "UcrNavigation1"
-        Me.UcrNavigation1.Size = New System.Drawing.Size(336, 25)
-        Me.UcrNavigation1.TabIndex = 16
-        '
-        'ucrTextBoxGraphicalMethod
-        '
-        Me.ucrTextBoxGraphicalMethod.Location = New System.Drawing.Point(518, 251)
-        Me.ucrTextBoxGraphicalMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxGraphicalMethod.Name = "ucrTextBoxGraphicalMethod"
-        Me.ucrTextBoxGraphicalMethod.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxGraphicalMethod.TabIndex = 79
-        Me.ucrTextBoxGraphicalMethod.TextboxValue = ""
-        '
-        'ucrTextBoxGeographicalAccuracy
-        '
-        Me.ucrTextBoxGeographicalAccuracy.Location = New System.Drawing.Point(518, 275)
-        Me.ucrTextBoxGeographicalAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxGeographicalAccuracy.Name = "ucrTextBoxGeographicalAccuracy"
-        Me.ucrTextBoxGeographicalAccuracy.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxGeographicalAccuracy.TabIndex = 80
-        Me.ucrTextBoxGeographicalAccuracy.TextboxValue = ""
-        '
-        'txtStationOperation
-        '
-        Me.txtStationOperation.AutoSize = True
-        Me.txtStationOperation.Location = New System.Drawing.Point(518, 304)
-        Me.txtStationOperation.Name = "txtStationOperation"
-        Me.txtStationOperation.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.txtStationOperation.Size = New System.Drawing.Size(15, 14)
-        Me.txtStationOperation.TabIndex = 16
-        Me.txtStationOperation.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        Me.txtStationOperation.UseVisualStyleBackColor = True
+        Me.lblStations.AutoSize = True
+        Me.lblStations.Location = New System.Drawing.Point(311, 0)
+        Me.lblStations.Name = "lblStations"
+        Me.lblStations.Size = New System.Drawing.Size(45, 13)
+        Me.lblStations.TabIndex = 17
+        Me.lblStations.Text = "Stations"
         '
         'ucrMetadataStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrNavigation1)
+        Me.Controls.Add(Me.lblStations)
+        Me.Controls.Add(Me.ucrNavigationStation)
         Me.Controls.Add(Me.grpStation)
         Me.Name = "ucrMetadataStation"
         Me.Size = New System.Drawing.Size(734, 451)
@@ -739,6 +770,7 @@ Partial Class ucrMetadataStation
         Me.grpComputationDD.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -802,8 +834,9 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrTextBoxMinutesLatitude As ucrTextBox
     Friend WithEvents ucrTextBoxDegreesLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxDegreesLatitude As ucrTextBox
-    Friend WithEvents UcrNavigation1 As ucrNavigation
+    Friend WithEvents ucrNavigationStation As ucrNavigation
     Friend WithEvents ucrTextBoxGeographicalAccuracy As ucrTextBox
     Friend WithEvents ucrTextBoxGraphicalMethod As ucrTextBox
     Friend WithEvents txtStationOperation As CheckBox
+    Friend WithEvents lblStations As Label
 End Class
