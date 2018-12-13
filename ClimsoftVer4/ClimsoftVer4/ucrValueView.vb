@@ -26,6 +26,25 @@
     Public Overridable Sub SetValue(objNewValue As Object)
     End Sub
 
+    Public Overridable Sub SetValueFromDataTable(dtbValues As DataTable)
+        Dim tempRow As DataRow
+        Dim lstTemp As New List(Of Object)
+
+        If Tag = "" Then
+            SetValue(Nothing)
+        End If
+        If dtbValues.Rows.Count = 1 Then
+            SetValue(dtbValues.Rows(0).Item(Tag))
+        ElseIf dtbRecords.Rows.Count > 1 Then
+            For Each tempRow In dtbValues.Rows
+                lstTemp.Add(tempRow.Item(Tag))
+            Next
+            SetValue(lstTemp)
+        Else
+            SetValue(Nothing)
+        End If
+    End Sub
+
     Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
         'Dim tempRow As DataRow
         'Dim lstTemp As New List(Of Object)
@@ -47,7 +66,17 @@
 
     End Function
 
+    Public Overridable Sub AddFieldstoList(lstFields As List(Of String))
+        lstFields.Add(Me.Tag)
+    End Sub
 
+    Public Overridable Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
+        AddHandler evtValueChanged, ehSub
+    End Sub
 
+    Public Sub SetUpControlInParent(lstFields As List(Of String), ehSub As evtValueChangedEventHandler)
+        AddFieldstoList(lstFields)
+        AddEventValueChangedHandle(ehSub)
+    End Sub
 
 End Class
