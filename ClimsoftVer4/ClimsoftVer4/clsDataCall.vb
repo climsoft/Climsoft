@@ -71,6 +71,13 @@ Public Class DataCall
         SetFields(New List(Of String)({strNewField}))
     End Sub
 
+    Public Sub AddField(strNewField As String)
+        If dctFields Is Nothing Then
+            SetFields(New Dictionary(Of String, List(Of String)))
+        End If
+        dctFields.Add(strNewField, New List(Of String)({strNewField}))
+    End Sub
+
     Public Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
         SetTableName(strNewTable)
         SetFields(dctNewFields)
@@ -144,8 +151,10 @@ Public Class DataCall
         Dim clsCurrentFilter As TableFilter
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         Dim strSql As String
+        Dim lstTempFieldNames As New List(Of String)
 
         Try
+            'get the filter
             If IsNothing(clsAdditionalFilter) Then
                 clsCurrentFilter = clsFilter
             Else
@@ -156,13 +165,24 @@ Public Class DataCall
                 End If
             End If
 
+
+            'Get the field names 
+            For Each lstFieldNames As List(Of String) In dctFields.Values
+                lstTempFieldNames.AddRange(lstFieldNames)
+            Next
+
+            'Construct the select statements
+            If lstTempFieldNames.Count > 0 Then
+                strSql = "Select " & String.Join(",", lstTempFieldNames.Distinct.ToArray) & " FROM " & strTable
+            Else
+                strSql = "Select * FROM " & strTable
+            End If
+
             cmd = New MySql.Data.MySqlClient.MySqlCommand()
             cmd.Connection = clsDataConnection.conn
-            'TODO. Get the fields from dictionary 
-            strSql = "Select * FROM " & strTable 'To confirm that this is the best approach to creating the paramatised Querie
-            cmd.CommandText = strSql
-
+            cmd.CommandText = strSql 'To confirm that this is the best approach to creating the paramatised Querie
             If clsCurrentFilter IsNot Nothing Then
+                'contsruct the filter statement
                 clsCurrentFilter.AddToSqlcommand(cmd)
             End If
             da.SelectCommand = cmd
