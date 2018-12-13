@@ -76,7 +76,7 @@ Public Class ucrSynopticRA1
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                 End If
             Next
 
@@ -94,7 +94,7 @@ Public Class ucrSynopticRA1
                 SetDefaultStandardPressureLevel()
             End If
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
 
         End If
 
@@ -128,7 +128,7 @@ Public Class ucrSynopticRA1
 
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -138,7 +138,7 @@ Public Class ucrSynopticRA1
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         Dim bValidValues As Boolean = True
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue Then
                 bValidValues = False
                 Exit For
@@ -148,7 +148,7 @@ Public Class ucrSynopticRA1
         If bValidValues Then
             'fs2ra1Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 'CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
             ucrLinkedNavigation.UpdateNavigationByKeyControls()

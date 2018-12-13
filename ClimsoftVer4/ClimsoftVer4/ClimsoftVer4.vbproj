@@ -989,6 +989,12 @@
     <Compile Include="ucrStationSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrValueView.Designer.vb">
+      <DependentUpon>ucrValueView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValueView.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrYearSelector.Designer.vb">
       <DependentUpon>ucrYearSelector.vb</DependentUpon>
     </Compile>
@@ -1455,6 +1461,12 @@
     <EmbeddedResource Include="ucrMetadataPhysicalFeature.resx">
       <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataScheduleClass.resx">
+      <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationQualifier.resx">
+      <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMonthlyData.resx">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </EmbeddedResource>
@@ -1505,6 +1517,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.vb</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram2.cd" />
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>

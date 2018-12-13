@@ -2,23 +2,14 @@
 Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
-    'Boolean to check if control is loading for first time
-    Private bFirstLoad As Boolean = True
-    'sets table name assocaited with this user control
-    Private strTableName As String = "form_daily2"
+
+
     'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
     Private bTotalRequired As Boolean
-    'Stores fields for the value flag and period
-    Private lstFields As New List(Of String)
-    'Stores the record assocaited with this control
-    Public fd2Record As form_daily2
-    'Boolean to check if record is updating
-    'Set to True by default
-    Public bUpdating As Boolean = True
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
 
@@ -30,7 +21,6 @@ Public Class ucrFormDaily2
     Private ucrLinkedNavigation As ucrNavigation
     Private ucrLinkedStation As ucrStationSelector
     Private ucrLinkedElement As ucrElementSelector
-
 
 
     ''' <summary>
@@ -52,16 +42,16 @@ Public Class ucrFormDaily2
             'set the values to the input controls
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag), GetValue(strPeriodFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag), GetFieldValue(strPeriodFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
                 End If
             Next
 
             'set values for the units
             If bUpdating Then
                 For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
+                    kvpTemp.Value.SetValue(GetFieldValue(kvpTemp.Key))
                 Next
             Else
                 For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
@@ -69,7 +59,7 @@ Public Class ucrFormDaily2
                 Next
             End If
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
         End If
 
         ' Set conditions for double key entry
@@ -90,6 +80,7 @@ Public Class ucrFormDaily2
         Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+
             vfpContextMenuStrip = SetUpContextMenuStrip()
 
             For Each ctr As Control In Me.Controls
@@ -116,13 +107,17 @@ Public Class ucrFormDaily2
                 End If
             Next
 
+            strTableName = "form_daily2"
+            'crTableEntry_Load fills in the lstFields 
+            'SetUpTableEntry()
             SetTableNameAndFields(strTableName, lstFields)
-            bFirstLoad = False
-        End If
 
+            bFirstLoad = False
+
+        End If
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -132,8 +127,8 @@ Public Class ucrFormDaily2
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         Dim ucrText As ucrTextBox
-        If fd2Record IsNot Nothing Then
-            If TypeOf sender Is ucrTextBox Then
+        'If fd2Record IsNot Nothing Then
+        If TypeOf sender Is ucrTextBox Then
                 ucrText = DirectCast(sender, ucrTextBox)
                 'TODO Replace this with a call to update the datatable
 
@@ -149,7 +144,7 @@ Public Class ucrFormDaily2
                     End If
                 Next
             End If
-        End If
+        'End If
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
@@ -175,7 +170,7 @@ Public Class ucrFormDaily2
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked key filter controls
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue() Then
                 bValidValues = False
                 Exit For
@@ -186,7 +181,7 @@ Public Class ucrFormDaily2
             'will populate the datatable based on the new key values
             MyBase.LinkedControls_evtValueChanged()
 
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
                 'TODO Replace this with a call to update the datatable
                 'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
@@ -221,6 +216,133 @@ Public Class ucrFormDaily2
         If bUpdating Then
         Else
         End If
+
+        TEMPCODE()
+
+        If 1 = 1 Then
+            Return
+        End If
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+
+        Try
+
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter(
+                "SELECT elementId, elementName FROM obselement", conn)
+
+            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
+           "UPDATE obselement SET elementName = @elementName WHERE elementId = @elementId", conn)
+
+            dataAdpater.UpdateCommand.Parameters.Add("@elementName", MySql.Data.MySqlClient.MySqlDbType.VarChar, 255, "elementName")
+
+
+            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int64, 20)
+            param1.SourceColumn = "elementId"
+            param1.SourceVersion = DataRowVersion.Original
+
+
+            Dim dailyTable As New DataTable
+
+            dataAdpater.Fill(dailyTable)
+
+            Dim row As DataRow
+            row = dailyTable.Rows(0)
+            row("elementName") = "my element"
+
+            dataAdpater.Update(dailyTable)
+
+
+
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+            'MsgBox("Error : " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+
+
+    End Sub
+
+    Private Sub TEMPCODE()
+        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+
+        Try
+
+            conn = clsDataConnection.conn
+
+            'conn.ConnectionString = frmLogin.txtusrpwd.Text
+            'conn.Open()
+
+            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter(
+                "SELECT stationId, elementId, yyyy, mm, hh, day01 FROM form_daily2", conn)
+
+            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "UPDATE form_daily2 SET day01 = @day01 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh ", conn)
+
+
+
+            dataAdpater.UpdateCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
+
+
+            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
+            param1.SourceColumn = "stationId"
+            param1.SourceVersion = DataRowVersion.Original
+
+            Dim param2 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param2.SourceColumn = "elementId"
+            param2.SourceVersion = DataRowVersion.Original
+
+
+            Dim param3 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param3.SourceColumn = "yyyy"
+            param3.SourceVersion = DataRowVersion.Original
+
+
+            Dim param4 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param4.SourceColumn = "mm"
+            param4.SourceVersion = DataRowVersion.Original
+
+            Dim param5 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param5.SourceColumn = "hh"
+            param5.SourceVersion = DataRowVersion.Original
+
+            Dim dailyTable As New DataTable
+
+            dataAdpater.Fill(dailyTable)
+
+            dailyTable.Columns.Add("NNCOL", GetType(String))
+
+
+            Dim row As DataRow
+            row = dailyTable.Rows(0)
+            row("day01") = "75"
+            row("NNCOL") = "new column 1st"
+
+            Dim row2 As DataRow
+            row2 = dailyTable.Rows(1)
+            row2("day01") = "68"
+            row2("NNCOL") = "new column 2nd"
+
+            'dailyTable.Columns.Remove("NNCOL")
+
+            dataAdpater.Update(dailyTable)
+
+
+
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+            'MsgBox("Error : " & ex.Message)
+        Finally
+            'conn.Close()
+        End Try
     End Sub
 
     Public Sub DeleteRecord()
@@ -272,7 +394,7 @@ Public Class ucrFormDaily2
     ''' Returns true if they are all valid and false if any has Invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Overrides Function ValidateValue() As Boolean
+    Public Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
@@ -388,7 +510,7 @@ Public Class ucrFormDaily2
         'TODO. EntryDateTime field to be added and sorting field to be set too
         ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
         'ucrLinkedNavigation.SetSortBy("entryDatetime")
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls("stationId", ucrLinkedStation)
         ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
         ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
         ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
