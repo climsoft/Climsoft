@@ -261,7 +261,7 @@
         End Try
     End Sub
 
-    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourlyWind.evtKeyDown, ucrDay.evtKeyDown
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrDay.evtKeyDown
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrBaseDataLink Then
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
@@ -277,16 +277,16 @@
         txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_leap_yr", "seq_month_day")
     End Sub
 
-    Private Sub ucrHourlyWind_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourlyWind.evtValueChanged
-        If ucrHourlyWind.bUpdating Then
-            SaveEnable()
-        Else
-            btnAddNew.Enabled = False
-            btnClear.Enabled = True
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
-            btnSave.Enabled = True
-        End If
-    End Sub
+    'Private Sub ucrHourlyWind_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourlyWind.evtValueChanged
+    '    If ucrHourlyWind.bUpdating Then
+    '        SaveEnable()
+    '    Else
+    '        btnAddNew.Enabled = False
+    '        btnClear.Enabled = True
+    '        btnDelete.Enabled = False
+    '        btnUpdate.Enabled = False
+    '        btnSave.Enabled = True
+    '    End If
+    'End Sub
 
 End Class
