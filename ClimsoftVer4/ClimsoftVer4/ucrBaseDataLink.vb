@@ -68,7 +68,13 @@ Public Class ucrBaseDataLink
 
     Public Sub SetField(strNewField As String)
         CreateDataDefinition()
-        clsDataDefinition.SetFields(lstNewFields:=New List(Of String)({strNewField}))
+        clsDataDefinition.SetField(strNewField)
+        SetSortByItems()
+    End Sub
+
+    Public Sub AddField(strNewField As String)
+        CreateDataDefinition()
+        clsDataDefinition.AddField(strNewField)
         SetSortByItems()
     End Sub
 

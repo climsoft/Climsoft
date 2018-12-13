@@ -154,6 +154,7 @@ Public Class ucrNavigation
             End If
         Else
             dctKeyControls.Add(strFieldName, ucrKeyControl)
+            AddField(strFieldName)
         End If
 
         AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged

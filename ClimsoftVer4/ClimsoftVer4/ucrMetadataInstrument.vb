@@ -4,6 +4,12 @@
         If bFirstLoad Then
             SetUpTableEntry("instrument")
 
+            ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
+            ucrDataLinkInstrumentID.PopulateControl()
+            ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
+            ucrDataLinkInstrumentID.bValidate = False
+
+
             AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
 
             'set up the navigation control
