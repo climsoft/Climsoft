@@ -7,7 +7,6 @@
             conn.ConnectionString = frmLogin.txtusrpwd.Text
             conn.Open()
         End If
-
     End Sub
 
     Public Shared Sub closeConnection()

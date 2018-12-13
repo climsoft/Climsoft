@@ -1,9 +1,7 @@
 ﻿Public Class ucrTableEntry
     'Boolean to check if control is loading for first time
     Protected bFirstLoad As Boolean = True
-    'sets table name assocaited with this user control
-    Protected strTableName As String
-    'Stores fields for the value flag and period
+    'Stores fields for the table entry
     Protected lstFields As New List(Of String)
     'Boolean to check if record is updating
     'Set to True by default
@@ -18,34 +16,29 @@
 
             'set the values to the input controls
             For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrTextBox OrElse TypeOf ctr Is ucrDatePicker Then
-                    'DirectCast(ctr, ucrValueView).SetValue(GetFieldValue(ctr.Tag))
+                If TypeOf ctr Is ucrValueView Then
+                    DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
                 End If
             Next
-
-            'raise an event value changed event
-            'OnevtValueChanged(Me, Nothing)
         End If
-
     End Sub
 
-    Protected Overridable Sub ucrTableEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Protected Overridable Sub SetUpTableEntry(strNewTableName As String)
+        Dim ucrCtrValueView As ucrValueView
 
         For Each ctr As Control In Me.Controls
-            If TypeOf ctr Is ucrTextBox OrElse TypeOf ctr Is ucrDatePicker Then
-                'lstFields.Add(ctr.Tag)
-                'AddHandler DirectCast(ctr, ucrValueView).evtValueChanged, AddressOf InnerControlValueChanged
+            If TypeOf ctr Is ucrValueView Then
+                ucrCtrValueView = DirectCast(ctr, ucrValueView)
+                ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
             End If
         Next
-
-        SetTableNameAndFields(strTableName, lstFields)
-
+        SetTableNameAndFields(strNewTableName, lstFields)
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         'TODO update the user entered value to the data table
-    End Sub
 
+    End Sub
 
     Public Overridable Function GetFieldValue(strFieldName As String) As Object
         Dim tempRow As DataRow
@@ -54,7 +47,6 @@
         If strFieldName = "" Then
             Return Nothing
         End If
-        UpdateInputValueToDataTable()
         If dtbRecords.Rows.Count = 1 Then
             Return dtbRecords.Rows(0).Item(strFieldName)
         ElseIf dtbRecords.Rows.Count > 1 Then
@@ -65,7 +57,8 @@
         Else
             Return Nothing
         End If
-
     End Function
 
+    Protected Overrides Sub LinkedControls_evtValueChanged()
+    End Sub
 End Class

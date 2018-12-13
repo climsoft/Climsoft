@@ -9,7 +9,9 @@ Public Class ucrNavigation
     'Stores the sort by querry
     Public strSortCol As String = ""
     'Stors the dictonary of key controls and their fields
-    Private dctKeyControls As Dictionary(Of String, ucrValueView)
+    Private dctKeyControls As New Dictionary(Of String, ucrValueView)
+    Private ucrLinkedTableEntry As ucrTableEntry
+    Public bSuppressKeyControlChanges As Boolean = False
 
     Public Overrides Sub PopulateControl()
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
@@ -130,65 +132,78 @@ Public Class ucrNavigation
         UpdateKeyControls()
     End Sub
 
-    Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrValueView))
-        dctKeyControls = dctNewKeyControls
+    Public Sub SetTableEntry(ucrNewLinkedTableEntry As ucrTableEntry)
+        ucrLinkedTableEntry = ucrNewLinkedTableEntry
+        SetTableName(ucrLinkedTableEntry.GetTableName())
     End Sub
-    'TODO
-    'NOT SURE WHETHER TO CALL THIS AddKeyControls or SetKeyControls
-    ''' <summary>
-    ''' Sets the key controls and their key field. 
-    ''' The field must be unique. If the field is found, the old ucrKeyControl is discarded
-    ''' </summary>
-    ''' <param name="strFieldName"></param>
-    ''' <param name="ucrKeyControl"></param>
-    Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrValueView)
-        If dctKeyControls Is Nothing Then
-            SetKeyControls(New Dictionary(Of String, ucrValueView))
-        End If
 
+    Public Sub ClearKeyControls()
+        dctKeyControls.Clear()
+    End Sub
+
+    Public Sub AddKeyControls(ucrKeyControl As ucrValueView)
+        Dim strFieldName As String
+
+        strFieldName = ucrKeyControl.FieldName
         If dctKeyControls.ContainsKey(strFieldName) Then
             If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
                 MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
+                Exit Sub
             Else
                 dctKeyControls.Item(strFieldName) = ucrKeyControl
             End If
         Else
             dctKeyControls.Add(strFieldName, ucrKeyControl)
         End If
+
+        AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged
+
     End Sub
+
+    Private Sub KeyControls_evtValueChanged()
+        If Not bSuppressKeyControlChanges Then
+            UpdateNavigationByKeyControls()
+        End If
+    End Sub
+
     ''' <summary>
     ''' Updates the key controls by key values of the current record on the navigation
     ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
+            bSuppressKeyControlChanges = True
             If iMaxRows > 0 Then
                 For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                     'Suppress events being raised while changing value of each key control
-                    kvp.Value.bSuppressChangedEvents = True
+                    'kvp.Value.bSuppressChangedEvents = True
                     ' Use new GetValueFromRow method to get value from specific row since dtbRecords now nothing
                     kvp.Value.SetValue(GetValueFromRow(iCurrRow, kvp.Key))
                     'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
-                    kvp.Value.bSuppressChangedEvents = False
+                    'kvp.Value.bSuppressChangedEvents = False
                 Next
             Else
                 'To do set the defaults for the controls
                 For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                     If TypeOf kvp.Value Is ucrDataLinkCombobox Then
                         'Suppress events being raised while changing value of each key control
-                        kvp.Value.bSuppressChangedEvents = True
+                        'kvp.Value.bSuppressChangedEvents = True
                         'Select the default value if there
                         DirectCast(kvp.Value, ucrDataLinkCombobox).SelectDefault()
                         'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
-                        kvp.Value.bSuppressChangedEvents = False
+                        'kvp.Value.bSuppressChangedEvents = False
                     End If
                 Next
             End If
 
+            'TODO
+            'Update the Table entry
+
             'A key control eventvalue changed should always be raised regardless of whether iMaxRows > 0 or not
             ' All key controls are linked to the same controls so can just trigger
             ' events for one control after all updated
-            dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(dctKeyControls.Values(dctKeyControls.Count - 1), Nothing)
 
+            updateLinkedTableEntry()
+            bSuppressKeyControlChanges = False
         End If
     End Sub
 
@@ -196,7 +211,7 @@ Public Class ucrNavigation
     ''' <summary>
     ''' Updates Navigation control to the recored with selected key
     ''' </summary>
-    Public Sub UpdateNavigationByKeyControls()
+    Private Sub UpdateNavigationByKeyControls()
         Dim dctFieldvalue As New Dictionary(Of String, String)
         Dim bRowExists As Boolean
         Dim row As Dictionary(Of String, String)
@@ -217,7 +232,18 @@ Public Class ucrNavigation
                 'Returns -1 if no row found
                 iCurrRow = GetRowPosition(dctFieldvalue)
             End If
+
+            bSuppressKeyControlChanges = True
+            updateLinkedTableEntry()
+            bSuppressKeyControlChanges = False
             displayRecordNumber()
+
+        End If
+    End Sub
+
+    Private Sub updateLinkedTableEntry()
+        If ucrLinkedTableEntry IsNot Nothing Then
+            ucrLinkedTableEntry.PopulateControl()
         End If
     End Sub
 

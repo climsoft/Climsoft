@@ -7,6 +7,18 @@
     ' Used when wanting to update several controls without linked controls updating inbetween.
     Public bSuppressChangedEvents As Boolean = False
 
+    Public Property FieldName() As String
+        Get
+            Return Tag
+        End Get
+        Set(value As String)
+            Tag = value
+        End Set
+    End Property
+
+
+
+
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
     End Sub
@@ -24,6 +36,32 @@
     End Sub
 
     Public Overridable Sub SetValue(objNewValue As Object)
+    End Sub
+
+    Public Overridable Sub SetValueFromDataTable(dtbValues As DataTable)
+        Dim tempRow As DataRow
+        Dim lstTemp As New List(Of Object)
+        Dim lstDistinct As New List(Of Object)
+
+        If Tag = "" Then
+            SetValue(Nothing)
+        Else
+            If dtbValues.Rows.Count = 1 Then
+                SetValue(dtbValues.Rows(0).Item(Tag))
+            ElseIf dtbRecords.Rows.Count > 1 Then
+                For Each tempRow In dtbValues.Rows
+                    lstTemp.Add(tempRow.Item(Tag))
+                Next
+                lstDistinct = lstTemp.Distinct()
+                If lstDistinct.Count = 1 Then
+                    SetValue(lstDistinct(0))
+                Else
+                    SetValue(lstTemp)
+                End If
+            Else
+                SetValue(Nothing)
+            End If
+        End If
     End Sub
 
     Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
@@ -47,7 +85,17 @@
 
     End Function
 
+    Public Overridable Sub AddFieldstoList(lstFields As List(Of String))
+        lstFields.Add(FieldName)
+    End Sub
 
+    Public Overridable Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
+        AddHandler evtValueChanged, ehSub
+    End Sub
 
+    Public Sub SetUpControlInParent(lstFields As List(Of String), ehSub As evtValueChangedEventHandler)
+        AddFieldstoList(lstFields)
+        AddEventValueChangedHandle(ehSub)
+    End Sub
 
 End Class

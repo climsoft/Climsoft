@@ -18,8 +18,9 @@ Imports System.Linq.Dynamic
 
 Public Class DataCall
 
-    ' The table in the database to call values from
-    Private dbsTable As DbSet
+    'Data Adapater to retrieve data from the database
+    Private da As New MySql.Data.MySqlClient.MySqlDataAdapter
+
     Private strTable As String
     ' The fields in the table which the values will be from
     ' The keys are the names of fields in the data base
@@ -30,22 +31,20 @@ Public Class DataCall
 
     ' A TableFilter object which defines the rows in the table the values will be from
     Private clsFilter As TableFilter
-    Public bReadOnly As Boolean = True
 
     Public Function Clone() As DataCall
-        Dim clsdatacall As New DataCall
-        'dbTable is not being cloned because we want to point to the same table in the entity framework
-        clsdatacall.SetTable(dbsTable)
+        Dim clsNewDataCall As New DataCall
 
-        clsdatacall.SetTableName(strTable)
-        clsdatacall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
-        clsdatacall.SetFilter(clsFilter.Clone())
+        clsNewDataCall.SetDataAdapter(DirectCast(DirectCast(da, ICloneable).Clone(), MySql.Data.MySqlClient.MySqlDataAdapter))
+        clsNewDataCall.SetTableName(strTable)
+        clsNewDataCall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
+        clsNewDataCall.SetFilter(clsFilter.Clone())
 
-        Return clsdatacall
+        Return clsNewDataCall
     End Function
 
-    Public Sub SetTable(dbsNewTable As DbSet)
-        dbsTable = dbsNewTable
+    Public Sub SetDataAdapter(daNew As MySql.Data.MySqlClient.MySqlDataAdapter)
+        da = daNew
     End Sub
 
     Public Sub SetTableName(strNewTable As String)
@@ -87,15 +86,6 @@ Public Class DataCall
         SetField(strNewField)
     End Sub
 
-    Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
-        SetTable(dbsNewTable:=dbsNewTable)
-        SetFields(lstNewFields:=lstNewFields)
-    End Sub
-
-    Public Sub SetTableAndField(dbsNewTable As DbSet, strNewField As String)
-        SetTable(dbsNewTable:=dbsNewTable)
-        SetField(strNewField:=strNewField)
-    End Sub
     Public Function GetFilter() As TableFilter
         Return clsFilter
     End Function
@@ -150,14 +140,12 @@ Public Class DataCall
         End If
     End Function
 
-    Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+    Private Sub UpdateDataAdapter(Optional clsAdditionalFilter As TableFilter = Nothing)
         Dim clsCurrentFilter As TableFilter
-        Dim dtb As New DataTable
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         Dim strSql As String
 
         Try
-
             If IsNothing(clsAdditionalFilter) Then
                 clsCurrentFilter = clsFilter
             Else
@@ -177,23 +165,20 @@ Public Class DataCall
             If clsCurrentFilter IsNot Nothing Then
                 clsCurrentFilter.AddToSqlcommand(cmd)
             End If
-
-            Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmd)
-                da.Fill(dtb)
-
-            End Using
-
-
-            'Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-            '    dtb.Load(reader)
-            'End Using
-
+            da.SelectCommand = cmd
+            ' define update, insert, delete commands
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         Finally
             'conn.Close()
         End Try
+    End Sub
 
+    Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+        Dim dtb As New DataTable
+
+        UpdateDataAdapter(clsAdditionalFilter)
+        da.Fill(dtb)
         Return dtb
     End Function
 
@@ -203,14 +188,7 @@ Public Class DataCall
         Dim lstCombine As List(Of String)
         Dim strSep As String = " "
 
-
-        If bReadOnly Then
-            dtb = GetSourceDataTable(clsAdditionalFilter)
-        Else
-            dtb = GetSourceDataTable(clsAdditionalFilter).Copy
-        End If
-
-
+        dtb = GetSourceDataTable(clsAdditionalFilter)
         If dtb.Columns.Count > 0 Then
             For Each strFieldDisplay As String In dctFields.Keys
                 lstFields = dctFields.Item(strFieldDisplay)
