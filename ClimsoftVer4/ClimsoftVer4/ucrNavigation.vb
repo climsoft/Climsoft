@@ -145,19 +145,19 @@ Public Class ucrNavigation
         Dim strFieldName As String
 
         strFieldName = ucrKeyControl.FieldName
-        If dctKeyControls.ContainsKey(strFieldName) Then
-            If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
-                MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
-                Exit Sub
-            Else
-                dctKeyControls.Item(strFieldName) = ucrKeyControl
-            End If
-        Else
-            dctKeyControls.Add(strFieldName, ucrKeyControl)
-            AddField(strFieldName)
-        End If
+        'If dctKeyControls.ContainsKey(strFieldName) Then
+        '    If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
+        '        MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
+        '        Exit Sub
+        '    Else
+        '        dctKeyControls.Item(strFieldName) = ucrKeyControl
+        '    End If
+        'Else
+        '    dctKeyControls.Add(strFieldName, ucrKeyControl)
+        '    AddField(strFieldName)
+        'End If
 
-        AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged
+        'AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged
 
     End Sub
 

@@ -7,7 +7,7 @@
             ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
-            ucrDataLinkInstrumentID.bValidate = False
+            ucrDataLinkInstrumentID.bValidate = False ' TODO build in the extra validation
 
 
             AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)

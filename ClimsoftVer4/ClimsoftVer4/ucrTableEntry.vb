@@ -26,7 +26,7 @@
     Protected Overridable Sub SetUpTableEntry(strNewTableName As String)
         Dim ucrCtrValueView As ucrValueView
 
-        For Each ctr As Control In Me.Controls
+        For Each ctr As Control In Controls
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
