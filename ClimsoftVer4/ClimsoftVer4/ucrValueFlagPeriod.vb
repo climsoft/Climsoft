@@ -1,24 +1,9 @@
-﻿' R- Instat
-' Copyright (C) 2015-2017
-'
-' This program is free software: you can redistribute it and/or modify
-' it under the terms of the GNU General Public License as published by
-' the Free Software Foundation, either version 3 of the License, or
-' (at your option) any later version.
-'
-' This program is distributed in the hope that it will be useful,
-' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License 
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Public Class ucrValueFlagPeriod
+﻿Public Class ucrValueFlagPeriod
     Private bFirstLoad As Boolean = True
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
+    Public strIdentifyField As String
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -85,7 +70,7 @@ Public Class ucrValueFlagPeriod
         End If
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrValue.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         ucrFlag.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
@@ -405,12 +390,12 @@ Public Class ucrValueFlagPeriod
         'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
 
         With frmKeyEntry.ListView1
-                For i = 0 To .Items.Count - 1
-                    If .Items(i).Selected = True Then
-                        frm = .Items(i).SubItems(0).Text
-                        Exit For
-                    End If
-                Next
+            For i = 0 To .Items.Count - 1
+                If .Items(i).Selected = True Then
+                    frm = .Items(i).SubItems(0).Text
+                    Exit For
+                End If
+            Next
 
             'MsgBox(frm)
             Select Case frm
@@ -526,4 +511,47 @@ Public Class ucrValueFlagPeriod
             Loop
         End If
     End Sub
+
+    Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
+        ucrValue.AddFieldstoList(lstFields)
+        ucrFlag.AddFieldstoList(lstFields)
+        ucrPeriod.AddFieldstoList(lstFields)
+    End Sub
+
+    Public Overrides Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
+        ucrValue.AddEventValueChangedHandle(ehSub)
+        ucrFlag.AddEventValueChangedHandle(ehSub)
+        ucrPeriod.AddEventValueChangedHandle(ehSub)
+    End Sub
+
+    Public Overrides Sub SetValueFromDataTable(dtbValues As DataTable)
+        Dim tempRow As DataRow
+        Dim lstValues As New List(Of Object)
+        Dim lstDistinct As New List(Of Object)
+        Dim dtbTemp As DataTable
+
+        If strIdentifyField = "" OrElse Tag = "" Then
+            SetValue(Nothing)
+        Else
+            dtbTemp = dtbValues.Clone()
+            For Each tempRow In dtbValues.Rows
+                If tempRow(strIdentifyField) = Tag Then
+                    dtbTemp.Rows.Add(tempRow)
+                End If
+            Next
+
+            If dtbTemp.Rows.Count = 1 Then
+                lstValues.Add(dtbTemp.Rows(0)(ucrValue.Tag))
+                lstValues.Add(dtbTemp.Rows(0)(ucrFlag.Tag))
+                lstValues.Add(dtbTemp.Rows(0)(ucrPeriod.Tag))
+                SetValue(lstValues)
+            ElseIf dtbTemp.Rows.Count = 0 Then
+                SetValue(Nothing)
+            Else
+                'TODO Should we give an error in this case?
+                SetValue(Nothing)
+            End If
+        End If
+    End Sub
+
 End Class

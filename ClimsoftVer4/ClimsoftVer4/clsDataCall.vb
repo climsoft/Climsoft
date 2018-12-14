@@ -18,8 +18,9 @@ Imports System.Linq.Dynamic
 
 Public Class DataCall
 
-    ' The table in the database to call values from
-    Private dbsTable As DbSet
+    'Data Adapater to retrieve data from the database
+    Private da As New MySql.Data.MySqlClient.MySqlDataAdapter
+
     Private strTable As String
     ' The fields in the table which the values will be from
     ' The keys are the names of fields in the data base
@@ -32,19 +33,18 @@ Public Class DataCall
     Private clsFilter As TableFilter
 
     Public Function Clone() As DataCall
-        Dim clsdatacall As New DataCall
-        'dbTable is not being cloned because we want to point to the same table in the entity framework
-        clsdatacall.SetTable(dbsTable)
+        Dim clsNewDataCall As New DataCall
 
-        clsdatacall.SetTableName(strTable)
-        clsdatacall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
-        clsdatacall.SetFilter(clsFilter.Clone())
+        clsNewDataCall.SetDataAdapter(DirectCast(DirectCast(da, ICloneable).Clone(), MySql.Data.MySqlClient.MySqlDataAdapter))
+        clsNewDataCall.SetTableName(strTable)
+        clsNewDataCall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
+        clsNewDataCall.SetFilter(clsFilter.Clone())
 
-        Return clsdatacall
+        Return clsNewDataCall
     End Function
 
-    Public Sub SetTable(dbsNewTable As DbSet)
-        dbsTable = dbsNewTable
+    Public Sub SetDataAdapter(daNew As MySql.Data.MySqlClient.MySqlDataAdapter)
+        da = daNew
     End Sub
 
     Public Sub SetTableName(strNewTable As String)
@@ -71,6 +71,13 @@ Public Class DataCall
         SetFields(New List(Of String)({strNewField}))
     End Sub
 
+    Public Sub AddField(strNewField As String)
+        If dctFields Is Nothing Then
+            SetFields(New Dictionary(Of String, List(Of String)))
+        End If
+        dctFields.Add(strNewField, New List(Of String)({strNewField}))
+    End Sub
+
     Public Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
         SetTableName(strNewTable)
         SetFields(dctNewFields)
@@ -86,15 +93,6 @@ Public Class DataCall
         SetField(strNewField)
     End Sub
 
-    Public Sub SetTableAndFields(dbsNewTable As DbSet, lstNewFields As List(Of String))
-        SetTable(dbsNewTable:=dbsNewTable)
-        SetFields(lstNewFields:=lstNewFields)
-    End Sub
-
-    Public Sub SetTableAndField(dbsNewTable As DbSet, strNewField As String)
-        SetTable(dbsNewTable:=dbsNewTable)
-        SetField(strNewField:=strNewField)
-    End Sub
     Public Function GetFilter() As TableFilter
         Return clsFilter
     End Function
@@ -149,7 +147,99 @@ Public Class DataCall
         End If
     End Function
 
+    Private Sub UpdateDataAdapter(Optional clsAdditionalFilter As TableFilter = Nothing)
+        Dim clsCurrentFilter As TableFilter
+        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim strSql As String
+        Dim lstTempFieldNames As New List(Of String)
+
+        Try
+            'get the filter
+            If IsNothing(clsAdditionalFilter) Then
+                clsCurrentFilter = clsFilter
+            Else
+                If IsNothing(clsFilter) Then
+                    clsCurrentFilter = clsAdditionalFilter
+                Else
+                    clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+                End If
+            End If
+
+
+            'Get the field names 
+            For Each lstFieldNames As List(Of String) In dctFields.Values
+                lstTempFieldNames.AddRange(lstFieldNames)
+            Next
+
+            'Construct the select statements
+            If lstTempFieldNames.Count > 0 Then
+                strSql = "Select " & String.Join(",", lstTempFieldNames.Distinct.ToArray) & " FROM " & strTable
+            Else
+                strSql = "Select * FROM " & strTable
+            End If
+
+            cmd = New MySql.Data.MySqlClient.MySqlCommand()
+            cmd.Connection = clsDataConnection.conn
+            cmd.CommandText = strSql 'To confirm that this is the best approach to creating the paramatised Querie
+            If clsCurrentFilter IsNot Nothing Then
+                'contsruct the filter statement
+                clsCurrentFilter.AddToSqlcommand(cmd)
+            End If
+            da.SelectCommand = cmd
+            ' define update, insert, delete commands
+        Catch ex As Exception
+            MsgBox("Error : " & ex.Message)
+        Finally
+            'conn.Close()
+        End Try
+    End Sub
+
+    Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+        Dim dtb As New DataTable
+
+        UpdateDataAdapter(clsAdditionalFilter)
+        da.Fill(dtb)
+        Return dtb
+    End Function
+
     Public Function GetDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+        Dim dtb As DataTable
+        Dim lstFields As List(Of String)
+        Dim lstCombine As List(Of String)
+        Dim strSep As String = " "
+
+        dtb = GetSourceDataTable(clsAdditionalFilter)
+        If dtb.Columns.Count > 0 Then
+            For Each strFieldDisplay As String In dctFields.Keys
+                lstFields = dctFields.Item(strFieldDisplay)
+                'if field = 1 just rename the database column name, if not create a sigle column from the fields and combine the values into the single column
+                If lstFields.Count = 1 Then
+                    'TODO
+                    'Probably rename the column name
+                    dtb.Columns.Item(lstFields(0)).ColumnName = strFieldDisplay
+                Else
+                    'create the column
+                    dtb.Columns.Add(strFieldDisplay, GetType(String))
+
+                    For Each row As DataRow In dtb.Rows
+                        'get the values of all the needed columns/fields in this row then combine them into the new coulmn
+                        lstCombine = New List(Of String)
+                        For Each strField As String In lstFields
+                            lstCombine.Add(row.Item(strField))
+                        Next
+                        'set the column with the combined values
+                        row.Item(strFieldDisplay) = String.Join(strSep, lstCombine)
+                    Next
+
+                End If
+            Next
+        End If
+
+        Return dtb
+    End Function
+
+    'TODO. Delete this fumction later
+    Public Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
 
@@ -221,28 +311,6 @@ Public Class DataCall
         Catch ex As Exception
             Return Nothing
         End Try
-
-        'If strTable = "stations" Then
-        '    ' e.g. .Where("stationId == " & Chr(34) & "67774010" & Chr(34))
-        '    If clsFilter IsNot Nothing Then
-        '        Return db.stations.Where(clsFilter.GetLinqExpression()).ToList()
-        '    Else
-        '        Return db.stations.ToList()
-        '    End If
-        '    'If dctFields IsNot Nothing AndAlso dctFields.Count > 0 Then
-        '    '    Return q.ToList
-        '    'End If
-        '    'q = x.Select(GetSelectLinqExpression())
-        'End If
-        '.Select("new(stationId as stationId, stationName, stationId+" - "+stationName As station_ids)")
-
-        'Dim q = From emp In db.stations Select New Dynamic.ExpandoObject
-        'Dim q = From emp In db.stations Select New With {.stationId = emp.stationId, .stationName = emp.stationName, .stations_ids = emp.stationId + " - " + emp.stationName}
-        ' if DBQuery() contains NULL dates then the connection string must have "Convert Zero Datetime=True"
-
-        'Return db.stations.Local.ToBindingList()
-        'Return db.stations.Local.Where(Function(x) x.stationId = "67774010")
-        'Return db.stations.Local.Where(clsFilter.GetLinqExpression())
     End Function
 
     'TODO This should return the Linq expression that goes in the Select method
@@ -263,21 +331,66 @@ Public Class DataCall
             clsCurrentFilter = clsFilter
         End If
 
-        Try
-            If strTable <> "" Then
-                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
-                Dim y = TryCast(x, IQueryable(Of Object))
 
-                If clsCurrentFilter IsNot Nothing Then
-                    y = y.Where(clsCurrentFilter.GetLinqExpression())
-                End If
-                Return y.Count()
+
+        'Try
+        '    If strTable <> "" Then
+        '        Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+        '        Dim y = TryCast(x, IQueryable(Of Object))
+
+        '        If clsCurrentFilter IsNot Nothing Then
+        '            y = y.Where(clsCurrentFilter.GetLinqExpression())
+        '        End If
+        '        Return y.Count()
+        '    Else
+        '        MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+        '        Return 0
+        '    End If
+        'Catch ex As Exception
+        '    Return 0
+        'End Try
+
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
+        Dim iCount As Integer
+
+        Try
+
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            If IsNothing(clsAdditionalFilter) Then
+                clsCurrentFilter = clsFilter
             Else
-                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
-                Return 0
+                If IsNothing(clsFilter) Then
+                    clsCurrentFilter = clsAdditionalFilter
+                Else
+                    clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+                End If
             End If
+
+            cmd.Connection = conn
+            cmd.CommandText = "Select COUNT(*) AS num FROM " & strTable
+
+            If clsCurrentFilter IsNot Nothing Then
+                clsCurrentFilter.AddToSqlcommand(cmd)
+            End If
+
+            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                If reader.HasRows Then
+                    While reader.Read
+                        iCount = reader.Item("num")
+                    End While
+                End If
+            End Using
+
         Catch ex As Exception
-            Return 0
+            MsgBox("Error : " & ex.Message)
+        Finally
+            conn.Close()
         End Try
+
+        Return iCount
     End Function
 End Class

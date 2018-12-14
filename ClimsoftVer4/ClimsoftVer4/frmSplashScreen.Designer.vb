@@ -85,11 +85,11 @@ Partial Class frmSplashScreen
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(453, 227)
+        Me.lblVersion.Location = New System.Drawing.Point(442, 227)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(76, 27)
+        Me.lblVersion.Size = New System.Drawing.Size(99, 27)
         Me.lblVersion.TabIndex = 6
-        Me.lblVersion.Text = "Version 4.1"
+        Me.lblVersion.Text = "Version 4.1.1"
         '
         'Timer1
         '

@@ -1,19 +1,4 @@
-﻿' R- Instat
-' Copyright (C) 2015-2017
-'
-' This program is free software: you can redistribute it and/or modify
-' it under the terms of the GNU General Public License as published by
-' the Free Software Foundation, either version 3 of the License, or
-' (at your option) any later version.
-'
-' This program is distributed in the hope that it will be useful,
-' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License 
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+﻿
 Public Class ucrTextBox
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
@@ -43,9 +28,16 @@ Public Class ucrTextBox
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
-        Dim strNewValue As String
-        strNewValue = TryCast(objNewValue, String)
-        txtBox.Text = strNewValue
+        'Dim strNewValue As String
+        'strNewValue = TryCast(objNewValue, String)
+
+        'TODO. Implement this in a way that caters for for all possible data types
+        If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
+            txtBox.Text = ""
+        Else
+            txtBox.Text = objNewValue 'TODO
+
+        End If
         OnevtValueChanged(Me, Nothing)
     End Sub
 
@@ -361,7 +353,8 @@ Public Class ucrTextBox
     ''' </summary>
     ''' <param name="Size"></param>
     Public Sub SetSize(Size As Point)
-        txtBox.Size = New Size(Size)
+        'txtBox.Size = New Size(Size)
+        Me.Size = New Size(Size)
     End Sub
 
     Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
