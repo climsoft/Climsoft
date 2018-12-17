@@ -202,13 +202,18 @@ Public Class DataCall
             For Each strName As String In lstTempFieldNames
                 Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
                 Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
+                Dim type As MySql.Data.MySqlClient.MySqlDbType
+                Dim iSize As Integer
+
+                type = GetFieldMySqlDbType(strName, dtbSchema)
+                iSize = GetFieldMySqlDbLength(strName, dtbSchema)
 
                 lstTempFieldParameters.Add("@" & strName)
-                cmdInsert.Parameters.Add("@" & strName, , , strName)
-                paramUpdate = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, GetFieldMySqlDbType(strName, dtbSchema), , strName)
+                cmdInsert.Parameters.Add("@" & strName, type, iSize, strName)
+                paramUpdate = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
                 paramUpdate.SourceVersion = DataRowVersion.Original
                 cmdUpdate.Parameters.Add(paramUpdate)
-                paramDelete = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, GetFieldMySqlDbType(strName, dtbSchema), , strName)
+                paramDelete = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
                 paramDelete.SourceVersion = DataRowVersion.Original
                 cmdDelete.Parameters.Add(paramDelete)
             Next
@@ -525,5 +530,20 @@ Public Class DataCall
                 'TODO Add all the other types
         End Select
         Return type
+    End Function
+
+    Private Function GetFieldMySqlDbLength(strField As String, dtbSchema As DataTable) As Integer
+        Dim iLength As Integer = -1
+        Dim row As DataRow
+        Dim strType As String
+        Dim iBracketStart As Integer
+
+        row = dtbSchema.Select("COLUMN_NAME = '" & strField & "'").FirstOrDefault()
+        strType = row("COLUMN_TYPE")
+        If strType.EndsWith(")") Then
+            iBracketStart = strType.IndexOf("(")
+            iLength = Integer.TryParse(strType.Substring(iBracketStart + 1, strType.Length - 2), iLength)
+        End If
+        Return iLength
     End Function
 End Class
