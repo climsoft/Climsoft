@@ -329,7 +329,7 @@ Public Class frmQC
         End Try
 
         'Update QC status for selected date range from 0 to 1
-        strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+        strSQL = "update observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
         ' Create the Command for executing query and set its properties
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
