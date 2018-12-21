@@ -53,10 +53,12 @@ Partial Class frmQC
         Me.lblStationsElementsList = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.pnlQCTypes.SuspendLayout()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -375,6 +377,7 @@ Partial Class frmQC
         Me.pnlQCTypes.ResumeLayout(False)
         Me.pnlQCTypes.PerformLayout()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -409,4 +412,5 @@ Partial Class frmQC
     Friend WithEvents lblStationsElementsList As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents BindingSource2 As BindingSource
 End Class
