@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMetadataStationLocationHistory
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -48,9 +48,9 @@ Partial Class ucrMetadataStationLocationHistory
         Me.cmdUpdateHistory = New System.Windows.Forms.Button()
         Me.cmdAddHistory = New System.Windows.Forms.Button()
         Me.cmdClearHistory = New System.Windows.Forms.Button()
-        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerCkosingDate = New ClimsoftVer4.ucrDatePicker()
+        Me.UcrStationSelector1 = New ClimsoftVer4.ucrStationSelector()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox10.SuspendLayout()
         Me.SuspendLayout()
@@ -300,15 +300,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.cmdClearHistory.Text = "AddNew"
         Me.cmdClearHistory.UseVisualStyleBackColor = True
         '
-        'ucrStationSelector
-        '
-        Me.ucrStationSelector.Location = New System.Drawing.Point(275, 46)
-        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(253, 24)
-        Me.ucrStationSelector.TabIndex = 109
-        Me.ucrStationSelector.Tag = "station"
-        '
         'ucrDatePickerOpeningDate
         '
         Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(275, 153)
@@ -325,13 +316,22 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrDatePickerCkosingDate.TabIndex = 111
         Me.ucrDatePickerCkosingDate.Tag = "closingDatetime"
         '
+        'UcrStationSelector1
+        '
+        Me.UcrStationSelector1.Location = New System.Drawing.Point(275, 39)
+        Me.UcrStationSelector1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.UcrStationSelector1.Name = "UcrStationSelector1"
+        Me.UcrStationSelector1.Size = New System.Drawing.Size(219, 27)
+        Me.UcrStationSelector1.TabIndex = 112
+        Me.UcrStationSelector1.Tag = "belongsTo"
+        '
         'ucrMetadataStationLocationHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrStationSelector1)
         Me.Controls.Add(Me.ucrDatePickerCkosingDate)
         Me.Controls.Add(Me.ucrDatePickerOpeningDate)
-        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
         Me.Controls.Add(Me.Button1)
@@ -389,7 +389,7 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents cmdUpdateHistory As Button
     Friend WithEvents cmdAddHistory As Button
     Friend WithEvents cmdClearHistory As Button
-    Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
     Friend WithEvents ucrDatePickerCkosingDate As ucrDatePicker
+    Friend WithEvents UcrStationSelector1 As ucrStationSelector
 End Class
