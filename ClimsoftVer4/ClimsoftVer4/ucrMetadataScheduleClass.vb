@@ -4,6 +4,11 @@
         If bFirstLoad Then
             SetUpTableEntry("obsscheduleclass")
 
+            ucrTextBoxClass.SetTableNameAndField("obsscheduleclass", "scheduleClass")
+            ucrTextBoxClass.PopulateControl()
+            ucrTextBoxClass.SetValue("scheduleClass")
+            ucrTextBoxClass.bValidate = False
+
             AddLinkedControlFilters(ucrTextBoxClass, ucrTextBoxClass.FieldName, "=", strLinkedFieldName:=ucrTextBoxClass.FieldName, bForceValuesAsString:=True)
 
             'set up the navigation control

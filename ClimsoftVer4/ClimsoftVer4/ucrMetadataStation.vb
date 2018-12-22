@@ -4,6 +4,11 @@
             'SetUpTableEntry 
             SetUpTableEntry("station")
 
+            ucrStationIDcombobox.SetTableNameAndField("station", "stationId")
+            ucrStationIDcombobox.PopulateControl()
+            ucrStationIDcombobox.SetDisplayAndValueMember("stationId")
+            ucrStationIDcombobox.bValidate = False
+
             AddLinkedControlFilters(ucrStationIDcombobox, ucrStationIDcombobox.FieldName(), "=", strLinkedFieldName:=ucrStationIDcombobox.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control

@@ -4,6 +4,11 @@
         If bFirstLoad Then
             SetUpTableEntry("stationqualifier")
 
+            ucrTextBoxQualifier.SetTableNameAndField("stationqualifier", "qualifier")
+            ucrTextBoxQualifier.PopulateControl()
+            ucrTextBoxQualifier.SetValue("qualifier")
+            ucrTextBoxQualifier.bValidate = False
+
             AddLinkedControlFilters(ucrTextBoxQualifier, ucrTextBoxQualifier.FieldName, "=", strLinkedFieldName:=ucrTextBoxQualifier.FieldName, bForceValuesAsString:=True)
 
             'set up the navigation control

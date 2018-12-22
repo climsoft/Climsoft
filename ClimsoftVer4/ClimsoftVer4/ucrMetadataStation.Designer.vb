@@ -23,6 +23,8 @@ Partial Class ucrMetadataStation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.ucrDatePickerClosingDate = New ClimsoftVer4.ucrDatePicker()
+        Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrTextBoxGeographicalAccuracy = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGraphicalMethod = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
@@ -82,9 +84,7 @@ Partial Class ucrMetadataStation
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblStationId = New System.Windows.Forms.Label()
         Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
-        Me.lblStations = New System.Windows.Forms.Label()
-        Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
-        Me.ucrDatePickerClosingDate = New ClimsoftVer4.ucrDatePicker()
+        Me.lblStation = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStation.SuspendLayout()
         Me.grpComputationDD.SuspendLayout()
@@ -137,6 +137,24 @@ Partial Class ucrMetadataStation
         Me.grpStation.TabIndex = 15
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
+        '
+        'ucrDatePickerClosingDate
+        '
+        Me.ucrDatePickerClosingDate.FieldName = "closingDatetime"
+        Me.ucrDatePickerClosingDate.Location = New System.Drawing.Point(481, 224)
+        Me.ucrDatePickerClosingDate.Name = "ucrDatePickerClosingDate"
+        Me.ucrDatePickerClosingDate.Size = New System.Drawing.Size(174, 21)
+        Me.ucrDatePickerClosingDate.TabIndex = 82
+        Me.ucrDatePickerClosingDate.Tag = "closingDatetime"
+        '
+        'ucrDatePickerOpeningDate
+        '
+        Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
+        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(481, 196)
+        Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
+        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(174, 21)
+        Me.ucrDatePickerOpeningDate.TabIndex = 81
+        Me.ucrDatePickerOpeningDate.Tag = "openingDatetime"
         '
         'ucrTextBoxGeographicalAccuracy
         '
@@ -728,38 +746,21 @@ Partial Class ucrMetadataStation
         Me.ucrNavigationStation.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationStation.TabIndex = 16
         '
-        'lblStations
+        'lblStation
         '
-        Me.lblStations.AutoSize = True
-        Me.lblStations.Location = New System.Drawing.Point(311, 0)
-        Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(45, 13)
-        Me.lblStations.TabIndex = 17
-        Me.lblStations.Text = "Stations"
-        '
-        'ucrDatePickerOpeningDate
-        '
-        Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
-        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(481, 196)
-        Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
-        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(174, 21)
-        Me.ucrDatePickerOpeningDate.TabIndex = 81
-        Me.ucrDatePickerOpeningDate.Tag = "openingDatetime"
-        '
-        'ucrDatePickerClosingDate
-        '
-        Me.ucrDatePickerClosingDate.FieldName = "closingDatetime"
-        Me.ucrDatePickerClosingDate.Location = New System.Drawing.Point(481, 224)
-        Me.ucrDatePickerClosingDate.Name = "ucrDatePickerClosingDate"
-        Me.ucrDatePickerClosingDate.Size = New System.Drawing.Size(174, 21)
-        Me.ucrDatePickerClosingDate.TabIndex = 82
-        Me.ucrDatePickerClosingDate.Tag = "closingDatetime"
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStation.Location = New System.Drawing.Point(330, 6)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(52, 15)
+        Me.lblStation.TabIndex = 96
+        Me.lblStation.Text = "Station"
         '
         'ucrMetadataStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblStations)
+        Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrNavigationStation)
         Me.Controls.Add(Me.grpStation)
         Me.Name = "ucrMetadataStation"
@@ -835,7 +836,7 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrTextBoxGeographicalAccuracy As ucrTextBox
     Friend WithEvents ucrTextBoxGraphicalMethod As ucrTextBox
     Friend WithEvents txtStationOperation As CheckBox
-    Friend WithEvents lblStations As Label
     Friend WithEvents ucrDatePickerClosingDate As ucrDatePicker
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
+    Friend WithEvents lblStation As Label
 End Class

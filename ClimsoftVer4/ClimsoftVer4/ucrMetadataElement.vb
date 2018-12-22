@@ -5,6 +5,11 @@
             'SetUpTableEntry 
             SetUpTableEntry("obselement")
 
+            ucrDataLinkID.SetTableNameAndField("obselement", "elementId")
+            ucrDataLinkID.PopulateControl()
+            ucrDataLinkID.SetDisplayAndValueMember("elementId")
+            ucrDataLinkID.bValidate = False
+
             AddLinkedControlFilters(ucrDataLinkID, ucrDataLinkID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkID.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control

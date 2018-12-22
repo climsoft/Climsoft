@@ -5,6 +5,11 @@
             'SetUpTableEntry 
             SetUpTableEntry("stationelement")
 
+            ucrDataLinkElementID.SetTableNameAndField("stationelement", "describedBy")
+            ucrDataLinkElementID.PopulateControl()
+            ucrDataLinkElementID.SetDisplayAndValueMember("describedBy")
+            ucrDataLinkElementID.bValidate = False
+
             AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control
