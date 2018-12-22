@@ -184,6 +184,7 @@ Partial Class ucrMetadataElement
         '
         'ucrDataLinkID
         '
+        Me.ucrDataLinkID.FieldName = "elementId"
         Me.ucrDataLinkID.Location = New System.Drawing.Point(298, 41)
         Me.ucrDataLinkID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkID.Name = "ucrDataLinkID"
@@ -193,6 +194,7 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxAbbreviation
         '
+        Me.ucrTextBoxAbbreviation.FieldName = "abbreviation"
         Me.ucrTextBoxAbbreviation.Location = New System.Drawing.Point(298, 68)
         Me.ucrTextBoxAbbreviation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAbbreviation.Name = "ucrTextBoxAbbreviation"
@@ -203,6 +205,7 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxName
         '
+        Me.ucrTextBoxName.FieldName = "elementName"
         Me.ucrTextBoxName.Location = New System.Drawing.Point(298, 95)
         Me.ucrTextBoxName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxName.Name = "ucrTextBoxName"
@@ -213,16 +216,18 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxDescription
         '
+        Me.ucrTextBoxDescription.FieldName = "description"
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(298, 122)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
         Me.ucrTextBoxDescription.Size = New System.Drawing.Size(178, 20)
         Me.ucrTextBoxDescription.TabIndex = 99
-        Me.ucrTextBoxDescription.Tag = "elementScale"
+        Me.ucrTextBoxDescription.Tag = "description"
         Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'ucrTextBoxScale
         '
+        Me.ucrTextBoxScale.FieldName = "elementScale"
         Me.ucrTextBoxScale.Location = New System.Drawing.Point(298, 148)
         Me.ucrTextBoxScale.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxScale.Name = "ucrTextBoxScale"
@@ -233,6 +238,7 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxUpperLimit
         '
+        Me.ucrTextBoxUpperLimit.FieldName = "upperLimit"
         Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(298, 174)
         Me.ucrTextBoxUpperLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUpperLimit.Name = "ucrTextBoxUpperLimit"
@@ -243,6 +249,7 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxLowerLimit
         '
+        Me.ucrTextBoxLowerLimit.FieldName = "lowerLimit"
         Me.ucrTextBoxLowerLimit.Location = New System.Drawing.Point(298, 199)
         Me.ucrTextBoxLowerLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLowerLimit.Name = "ucrTextBoxLowerLimit"
@@ -253,6 +260,7 @@ Partial Class ucrMetadataElement
         '
         'ucrTextBoxUnit
         '
+        Me.ucrTextBoxUnit.FieldName = "units"
         Me.ucrTextBoxUnit.Location = New System.Drawing.Point(298, 226)
         Me.ucrTextBoxUnit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUnit.Name = "ucrTextBoxUnit"
@@ -321,6 +329,7 @@ Partial Class ucrMetadataElement
         '
         'UcrDataLinkType
         '
+        Me.UcrDataLinkType.FieldName = "elementtype"
         Me.UcrDataLinkType.Location = New System.Drawing.Point(298, 255)
         Me.UcrDataLinkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDataLinkType.Name = "UcrDataLinkType"
