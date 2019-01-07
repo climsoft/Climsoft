@@ -300,7 +300,6 @@ Public Class ucrFormDaily2
             param31.SourceColumn = "yyyy"
             param31.SourceVersion = DataRowVersion.Original
 
-
             Dim param41 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
             param41.SourceColumn = "mm"
             param41.SourceVersion = DataRowVersion.Original
@@ -358,21 +357,18 @@ Public Class ucrFormDaily2
 
             Dim row As DataRow
             row = dailyTable.Rows(0)
-            'row("day01") = "885"
-            'row("yyyy") = 1929
-            dailyTable.Rows.RemoveAt(0)
-            'dailyTable.Rows.Remove(row)
 
-            'Dim row2 As DataRow
-            'row2 = dailyTable.NewRow()
-            'row2("stationId") = "10101100"
-            'row2("elementId") = 2
-            'row2("yyyy") = 1929
-            'row2("mm") = 9
-            'row2("hh") = 6
-            'row2("day01") = "755"
+            Dim row2 As DataRow
+            row2 = dailyTable.NewRow()
+            row2("stationId") = row("stationId")
+            row2("elementId") = row("elementId")
+            row2("yyyy") = row("yyyy")
+            row2("mm") = row("mm")
+            row2("hh") = row("hh")
+            row2("day01") = "9999"
 
-            'dailyTable.Rows.Add(row2)
+            dailyTable.Rows(0).Delete()
+            dailyTable.Rows.Add(row2)
 
 
             dataAdpater.Update(dailyTable)
