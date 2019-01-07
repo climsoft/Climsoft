@@ -7,6 +7,7 @@
     Private bValidColor As Color = Color.White
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            'TODO determine the default date format?
             'dtpDate.Format = DateFormat.LongDate
             dtpDate.Value = Date.Today
             bFirstLoad = False

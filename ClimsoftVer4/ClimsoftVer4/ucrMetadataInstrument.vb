@@ -12,10 +12,10 @@
             ucrDataLinkInstrumentID.bValidate = False ' TODO build in the extra validation
 
 
-            'set filter control used in the where clause of the select statement
+            'set FILTER control used in the where clause of the SELECT statement
             AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
 
-            'set filter field name used in the where clause of update and delete statement
+            'set FILTER field name used in the where clause of UPDATE and DELETE statement
             AddKeyField(ucrDataLinkInstrumentID.FieldName)
 
             'set up the navigation control
