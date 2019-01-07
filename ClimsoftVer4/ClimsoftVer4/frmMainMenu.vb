@@ -141,6 +141,7 @@ Public Class frmMainMenu
     Private Sub cmdMetadata_Click(sender As Object, e As EventArgs) Handles cmdMetadata.Click
         'frmLaunchPad.ShowDialog()
         formMetadata.Show()
+        frmNewMetadata.Show()
     End Sub
 
     Private Sub cmdSettingsAWS_Click(sender As Object, e As EventArgs) Handles cmdSettingsAWS.Click
