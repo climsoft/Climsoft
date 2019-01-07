@@ -39,7 +39,6 @@
     End Sub
 
     Public Overridable Sub SetValueFromDataTable(dtbValues As DataTable)
-        Dim tempRow As DataRow
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
@@ -48,8 +47,8 @@
         Else
             If dtbValues.Rows.Count = 1 Then
                 SetValue(dtbValues.Rows(0).Item(FieldName))
-            ElseIf dtbRecords.Rows.Count > 1 Then
-                For Each tempRow In dtbValues.Rows
+            ElseIf dtbValues.Rows.Count > 1 Then
+                For Each tempRow As DataRow In dtbValues.Rows
                     lstTemp.Add(tempRow.Item(FieldName))
                 Next
                 lstDistinct = lstTemp.Distinct().ToList
@@ -60,6 +59,23 @@
                 End If
             Else
                 SetValue(Nothing)
+            End If
+        End If
+    End Sub
+
+    Public Overridable Sub SetValueToDataTable(dtbValues As DataTable)
+        Dim lstTemp As New List(Of Object)
+        Dim lstDistinct As New List(Of Object)
+
+        If FieldName = "" Then
+            'TODO?
+        Else
+            If dtbValues.Rows.Count = 1 Then
+                dtbValues.Rows(0).Item(FieldName) = GetValue()
+            ElseIf dtbValues.Rows.Count > 1 Then
+                'TODO
+            Else
+                'TODO
             End If
         End If
     End Sub

@@ -29,4 +29,12 @@
 
         End If
     End Sub
+
+    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdateInstrument.Click
+        UpdateRecord()
+    End Sub
+
+    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDeleteInstrument.Click
+        DeleteRecord()
+    End Sub
 End Class

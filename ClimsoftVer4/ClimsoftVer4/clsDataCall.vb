@@ -27,7 +27,7 @@ Public Class DataCall
     ' The values are how the field should be displayed to the user
     Private dctFields As Dictionary(Of String, List(Of String))
 
-    Private lstKeyFields As New List(Of String)
+    Private lstKeyFieldNames As New List(Of String)
 
     'Private objFields As Object = New Dynamic.ExpandoObject
 
@@ -40,7 +40,7 @@ Public Class DataCall
         clsNewDataCall.SetDataAdapter(DirectCast(DirectCast(da, ICloneable).Clone(), MySql.Data.MySqlClient.MySqlDataAdapter))
         clsNewDataCall.SetTableName(strTable)
         clsNewDataCall.SetFields(ClsCloneFunctions.GetClonedDict(dctFields))
-        clsNewDataCall.SetKeyFields(ClsCloneFunctions.GetClonedList(lstKeyFields))
+        clsNewDataCall.SetKeyFields(ClsCloneFunctions.GetClonedList(lstKeyFieldNames))
         clsNewDataCall.SetFilter(clsFilter.Clone())
 
         Return clsNewDataCall
@@ -82,11 +82,11 @@ Public Class DataCall
     End Sub
 
     Public Sub SetKeyFields(lstNewKeyFields As List(Of String))
-        lstKeyFields = lstNewKeyFields
+        lstKeyFieldNames = lstNewKeyFields
     End Sub
 
     Public Sub AddKeyField(strNewKeyField As String)
-        lstKeyFields.Add(strNewKeyField)
+        lstKeyFieldNames.Add(strNewKeyField)
     End Sub
 
     Public Sub SetTableNameAndFields(strNewTable As String, dctNewFields As Dictionary(Of String, List(Of String)))
@@ -158,7 +158,7 @@ Public Class DataCall
         End If
     End Function
 
-    Private Sub UpdateDataAdapter(Optional clsAdditionalFilter As TableFilter = Nothing)
+    Private Sub UpdateDataAdapterOLD(Optional clsAdditionalFilter As TableFilter = Nothing)
         Dim clsCurrentFilter As TableFilter
         Dim strSqlFieldNames As String
         Dim strSqlFieldParameters As String
@@ -247,9 +247,9 @@ Public Class DataCall
 
             'UPDATE statement
             strKeysWhereCommand = ""
-            For Each strTempKeyField In lstKeyFields
+            For Each strTempKeyField In lstKeyFieldNames
                 If strKeysWhereCommand = "" Then
-                    strKeysWhereCommand = strTempKeyField & " = @" & strTempKeyField
+                    strKeysWhereCommand = strTempKeyField & " = @_" & strTempKeyField & "_"
                 Else
                     strKeysWhereCommand = strKeysWhereCommand & " AND " & strTempKeyField & " = @_" & strTempKeyField & "_"
                 End If
@@ -265,7 +265,156 @@ Public Class DataCall
             strUpdateCommand = "UPDATE " & strTable & " SET " & strUpdateSetCommand & " WHERE " & strKeysWhereCommand
 
             cmdUpdate.Connection = clsDataConnection.conn
-            cmdUpdate.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
+            cmdUpdate.CommandText = strUpdateCommand 'To confirm that this is the best approach to creating the paramatised Querie
+            da.UpdateCommand = cmdUpdate
+
+            'DELETE statement
+            strDeleteCommand = "DELETE FROM " & strTable & " WHERE " & strKeysWhereCommand
+            cmdDelete.Connection = clsDataConnection.conn
+            cmdDelete.CommandText = strDeleteCommand 'To confirm that this is the best approach to creating the paramatised Querie
+            da.DeleteCommand = cmdDelete
+
+        Catch ex As Exception
+            MsgBox("Error : " & ex.Message)
+        Finally
+            'conn.Close()
+        End Try
+    End Sub
+
+    Private Sub UpdateDataAdapter(Optional clsAdditionalFilter As TableFilter = Nothing)
+        Dim clsCurrentFilter As TableFilter
+        Dim strSqlFieldNames As String
+        Dim strSqlFieldParameters As String
+        Dim cmdSelect As MySql.Data.MySqlClient.MySqlCommand
+        Dim strSelectCommand As String
+        Dim strKeysWhereCommand As String
+        Dim cmdInsert As MySql.Data.MySqlClient.MySqlCommand
+        Dim strInsertCommand As String
+        Dim cmdUpdate As MySql.Data.MySqlClient.MySqlCommand
+        Dim strUpdateCommand As String
+        Dim strUpdateSetCommand As String
+        Dim cmdDelete As MySql.Data.MySqlClient.MySqlCommand
+        Dim strDeleteCommand As String
+        Dim lstTempFieldNames As New List(Of String)
+        Dim lstTempFieldParameters As New List(Of String)
+        Dim dtbSchema As DataTable
+        Dim type As MySql.Data.MySqlClient.MySqlDbType
+        Dim iSize As Integer
+
+        Try
+            If IsNothing(clsAdditionalFilter) Then
+                clsCurrentFilter = clsFilter
+            Else
+                If IsNothing(clsFilter) Then
+                    clsCurrentFilter = clsAdditionalFilter
+                Else
+                    clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+                End If
+            End If
+
+            cmdSelect = New MySql.Data.MySqlClient.MySqlCommand()
+            cmdInsert = New MySql.Data.MySqlClient.MySqlCommand()
+            cmdUpdate = New MySql.Data.MySqlClient.MySqlCommand()
+            cmdDelete = New MySql.Data.MySqlClient.MySqlCommand()
+
+            dtbSchema = GetTableSchema(strTable)
+
+            'Get the field names and parameter placeholders
+            For Each lstFieldNames As List(Of String) In dctFields.Values
+                lstTempFieldNames.AddRange(lstFieldNames)
+            Next
+
+            lstTempFieldNames = lstTempFieldNames.Distinct().ToList
+
+            For Each strName As String In lstTempFieldNames
+                'Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
+                'Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
+
+                type = GetFieldMySqlDbType(strName, dtbSchema)
+                iSize = GetFieldMySqlDbLength(strName, dtbSchema)
+
+                lstTempFieldParameters.Add("@" & strName)
+                'TODO change the size parameter for dates
+                cmdInsert.Parameters.Add("@" & strName, type, iSize, strName)
+
+                'paramUpdate = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
+                'paramUpdate.SourceVersion = DataRowVersion.Original
+                'cmdUpdate.Parameters.Add(paramUpdate)
+                'paramDelete = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
+                'paramDelete.SourceVersion = DataRowVersion.Original
+                'cmdDelete.Parameters.Add(paramDelete)
+            Next
+
+            strSqlFieldNames = String.Join(",", lstTempFieldNames.ToArray)
+            strSqlFieldParameters = String.Join(",", lstTempFieldParameters.ToArray)
+
+            'SELECT statement
+            If lstTempFieldNames.Count > 0 Then
+                strSelectCommand = "SELECT " & strSqlFieldNames & " FROM " & strTable
+            Else
+                strSelectCommand = "SELECT * FROM " & strTable
+            End If
+
+            cmdSelect.Connection = clsDataConnection.conn
+            cmdSelect.CommandText = strSelectCommand 'To confirm that this is the best approach to creating the paramatised Querie
+            da.SelectCommand = cmdSelect
+            If clsCurrentFilter IsNot Nothing Then
+                'contsruct the filter statement
+                clsCurrentFilter.AddToSqlcommand(cmdSelect)
+            End If
+
+            'INSERT statement
+            strInsertCommand = "INSERT INTO " & strTable & " (" & strSqlFieldNames & ") " & "VALUES (" & strSqlFieldParameters & ")"
+
+            cmdInsert.Connection = clsDataConnection.conn
+            cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
+            da.InsertCommand = cmdInsert
+
+            'UPDATE statement
+            strKeysWhereCommand = ""
+            Dim parameterPlaceHolder As String
+            For Each strTempKeyField As String In lstKeyFieldNames
+                parameterPlaceHolder = "@_" & strTempKeyField & "_"
+                If strKeysWhereCommand = "" Then
+                    strKeysWhereCommand = strTempKeyField & " = " & parameterPlaceHolder
+                Else
+                    strKeysWhereCommand = strKeysWhereCommand & " AND " & strTempKeyField & " = " & parameterPlaceHolder
+                End If
+
+                Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
+                Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
+
+                type = GetFieldMySqlDbType(strTempKeyField, dtbSchema)
+                iSize = GetFieldMySqlDbLength(strTempKeyField, dtbSchema)
+
+                'TODO change the size parameter for dates
+                paramUpdate = New MySql.Data.MySqlClient.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
+                paramUpdate.SourceVersion = DataRowVersion.Original
+                cmdUpdate.Parameters.Add(paramUpdate)
+                paramDelete = New MySql.Data.MySqlClient.MySqlParameter(parameterPlaceHolder, type, iSize, strTempKeyField)
+                paramDelete.SourceVersion = DataRowVersion.Original
+                cmdDelete.Parameters.Add(paramDelete)
+            Next
+            strUpdateSetCommand = ""
+            For Each strTempField In lstTempFieldNames
+                parameterPlaceHolder = "@" & strTempField
+                If strUpdateSetCommand = "" Then
+                    strUpdateSetCommand = strTempField & " = " & strTempField
+                Else
+                    strUpdateSetCommand = strUpdateSetCommand & " , " & strTempField & " = " & parameterPlaceHolder
+                End If
+
+
+                type = GetFieldMySqlDbType(strTempField, dtbSchema)
+                iSize = GetFieldMySqlDbLength(strTempField, dtbSchema)
+
+                'TODO change the size parameter for dates
+                cmdUpdate.Parameters.Add(parameterPlaceHolder, type, iSize, strTempField)
+            Next
+            strUpdateCommand = "UPDATE " & strTable & " SET " & strUpdateSetCommand & " WHERE " & strKeysWhereCommand
+
+            cmdUpdate.Connection = clsDataConnection.conn
+            cmdUpdate.CommandText = strUpdateCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.UpdateCommand = cmdUpdate
 
             'DELETE statement
@@ -323,6 +472,14 @@ Public Class DataCall
 
         Return dtb
     End Function
+
+    Public Sub Save(dtb As DataTable)
+        Try
+            da.Update(dtb)
+        Catch ex As Exception
+            MessageBox.Show("Error : " + ex.Message, "Error in saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     'TODO. Delete this function later
     Private Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
