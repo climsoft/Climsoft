@@ -43,14 +43,14 @@
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
-        If Tag = "" Then
+        If FieldName = "" Then
             SetValue(Nothing)
         Else
             If dtbValues.Rows.Count = 1 Then
-                SetValue(dtbValues.Rows(0).Item(Tag))
+                SetValue(dtbValues.Rows(0).Item(FieldName))
             ElseIf dtbRecords.Rows.Count > 1 Then
                 For Each tempRow In dtbValues.Rows
-                    lstTemp.Add(tempRow.Item(Tag))
+                    lstTemp.Add(tempRow.Item(FieldName))
                 Next
                 lstDistinct = lstTemp.Distinct().ToList
                 If lstDistinct.Count = 1 Then
