@@ -198,7 +198,9 @@ Public Class DataCall
             For Each lstFieldNames As List(Of String) In dctFields.Values
                 lstTempFieldNames.AddRange(lstFieldNames)
             Next
-            lstTempFieldNames = lstTempFieldNames.Distinct
+
+            lstTempFieldNames = lstTempFieldNames.Distinct().ToList
+
             For Each strName As String In lstTempFieldNames
                 Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
                 Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
@@ -241,7 +243,6 @@ Public Class DataCall
 
             cmdInsert.Connection = clsDataConnection.conn
             cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
-
             da.InsertCommand = cmdInsert
 
             'UPDATE statement
@@ -300,9 +301,8 @@ Public Class DataCall
                 lstFields = dctFields.Item(strFieldDisplay)
                 'if field = 1 just rename the database column name, if not create a sigle column from the fields and combine the values into the single column
                 If lstFields.Count = 1 Then
-                    'TODO
-                    'Probably rename the column name
-                    dtb.Columns.Item(lstFields(0)).ColumnName = strFieldDisplay
+                    'TODO Probably create the Display column if it does not exist?
+                    'dtb.Columns.Item(lstFields(0)).ColumnName = strFieldDisplay
                 Else
                     'create the column
                     dtb.Columns.Add(strFieldDisplay, GetType(String))
@@ -324,8 +324,8 @@ Public Class DataCall
         Return dtb
     End Function
 
-    'TODO. Delete this fumction later
-    Public Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+    'TODO. Delete this function later
+    Private Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim objData As Object
         Dim dtbFields As DataTable
 
@@ -344,7 +344,8 @@ Public Class DataCall
         Return dtbFields
     End Function
 
-    Public Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
+    'TODO. Delete this fucntion
+    Private Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
         Dim objFields As New List(Of Object)
         Dim lstFields As List(Of String)
         Dim lstCombine As List(Of String)
@@ -368,9 +369,11 @@ Public Class DataCall
         End If
     End Function
 
-    Public Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
+    'TODO. Delete this function
+    Private Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
         Dim clsCurrentFilter As TableFilter
 
+        'TODO. This code is repeated somewhere else. Push it to a function
         If Not IsNothing(clsAdditionalFilter) Then
             If IsNothing(clsFilter) Then
                 clsCurrentFilter = clsAdditionalFilter
@@ -405,8 +408,11 @@ Public Class DataCall
     End Function
 
     Public Function TableCount(Optional clsAdditionalFilter As TableFilter = Nothing) As Integer
+        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim iCount As Integer
         Dim clsCurrentFilter As TableFilter
 
+        'TODO. This code is repeated somewhere else. Push it to a function
         If Not IsNothing(clsAdditionalFilter) Then
             If IsNothing(clsFilter) Then
                 clsCurrentFilter = clsAdditionalFilter
@@ -417,48 +423,11 @@ Public Class DataCall
             clsCurrentFilter = clsFilter
         End If
 
-
-
-        'Try
-        '    If strTable <> "" Then
-        '        Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
-        '        Dim y = TryCast(x, IQueryable(Of Object))
-
-        '        If clsCurrentFilter IsNot Nothing Then
-        '            y = y.Where(clsCurrentFilter.GetLinqExpression())
-        '        End If
-        '        Return y.Count()
-        '    Else
-        '        MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
-        '        Return 0
-        '    End If
-        'Catch ex As Exception
-        '    Return 0
-        'End Try
-
-
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-        Dim iCount As Integer
-
         Try
 
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
-            conn.Open()
-
-            If IsNothing(clsAdditionalFilter) Then
-                clsCurrentFilter = clsFilter
-            Else
-                If IsNothing(clsFilter) Then
-                    clsCurrentFilter = clsAdditionalFilter
-                Else
-                    clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
-                End If
-            End If
-
-            cmd.Connection = conn
-            cmd.CommandText = "Select COUNT(*) AS num FROM " & strTable
-
+            cmd = New MySql.Data.MySqlClient.MySqlCommand()
+            cmd.Connection = clsDataConnection.conn
+            cmd.CommandText = "SELECT COUNT(*) AS num FROM " & strTable
             If clsCurrentFilter IsNot Nothing Then
                 clsCurrentFilter.AddToSqlcommand(cmd)
             End If
@@ -474,7 +443,7 @@ Public Class DataCall
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
         Finally
-            conn.Close()
+            'conn.Close()
         End Try
 
         Return iCount
@@ -494,14 +463,12 @@ Public Class DataCall
     Private Function GetFieldMySqlDbType(strField As String, dtbSchema As DataTable) As MySql.Data.MySqlClient.MySqlDbType
         Dim type As MySql.Data.MySqlClient.MySqlDbType
         Dim strType As String
-        Dim row As DataRow
         Dim iBracketStart As Integer
 
-        row = dtbSchema.Select("COLUMN_NAME = '" & strField & "'").FirstOrDefault()
-        strType = row("COLUMN_TYPE")
+        strType = dtbSchema.Select("COLUMN_NAME = '" & strField & "'").FirstOrDefault().Item("COLUMN_TYPE")
         If strType.EndsWith(")") Then
             iBracketStart = strType.IndexOf("(")
-            strType = strType.Substring(0, iBracketStart - 1)
+            strType = strType.Substring(0, iBracketStart)
         End If
         Select Case strType
             Case "varchar"
@@ -534,15 +501,13 @@ Public Class DataCall
 
     Private Function GetFieldMySqlDbLength(strField As String, dtbSchema As DataTable) As Integer
         Dim iLength As Integer = -1
-        Dim row As DataRow
         Dim strType As String
         Dim iBracketStart As Integer
 
-        row = dtbSchema.Select("COLUMN_NAME = '" & strField & "'").FirstOrDefault()
-        strType = row("COLUMN_TYPE")
+        strType = dtbSchema.Select("COLUMN_NAME = '" & strField & "'").FirstOrDefault().Item("COLUMN_TYPE")
         If strType.EndsWith(")") Then
             iBracketStart = strType.IndexOf("(")
-            iLength = Integer.TryParse(strType.Substring(iBracketStart + 1, strType.Length - 2), iLength)
+            Integer.TryParse(strType.Substring(iBracketStart + 1, strType.Length - 2 - iBracketStart), iLength)
         End If
         Return iLength
     End Function

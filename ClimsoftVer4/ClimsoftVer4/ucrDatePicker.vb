@@ -32,7 +32,6 @@
             Catch ex As Exception
                 txtDate.Text = ""
             End Try
-
         End If
 
         OnevtValueChanged(Me, Nothing)

@@ -52,7 +52,7 @@
                 For Each tempRow In dtbValues.Rows
                     lstTemp.Add(tempRow.Item(Tag))
                 Next
-                lstDistinct = lstTemp.Distinct()
+                lstDistinct = lstTemp.Distinct().ToList
                 If lstDistinct.Count = 1 Then
                     SetValue(lstDistinct(0))
                 Else
