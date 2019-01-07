@@ -281,14 +281,51 @@ Public Class ucrFormDaily2
 
             Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
 
-            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter(
-                "SELECT stationId, elementId, yyyy, mm, hh, day01 FROM form_daily2", conn)
+            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT stationId, elementId, yyyy, mm, hh, day01 FROM form_daily2", conn)
 
+            'setup delete command
+            dataAdpater.DeleteCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "DELETE FROM form_daily2 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
+
+            Dim param11 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
+            param11.SourceColumn = "stationId"
+            param11.SourceVersion = DataRowVersion.Original
+
+            Dim param21 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param21.SourceColumn = "elementId"
+            param21.SourceVersion = DataRowVersion.Original
+
+
+            Dim param31 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param31.SourceColumn = "yyyy"
+            param31.SourceVersion = DataRowVersion.Original
+
+            Dim param41 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param41.SourceColumn = "mm"
+            param41.SourceVersion = DataRowVersion.Original
+
+            Dim param51 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param51.SourceColumn = "hh"
+            param51.SourceVersion = DataRowVersion.Original
+
+            'setup insert command
+            dataAdpater.InsertCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "INSERT INTO form_daily2 (stationId,elementId,yyyy,mm,hh,day01) VALUES (@stationId,@elementId,@yyyy,@mm,@hh,@day01)", conn)
+
+            dataAdpater.InsertCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50, "stationId")
+            dataAdpater.InsertCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "elementId")
+            dataAdpater.InsertCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
+            dataAdpater.InsertCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "mm")
+            dataAdpater.InsertCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "hh")
+            dataAdpater.InsertCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
+
+
+            'set up update command
             dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
-            "UPDATE form_daily2 SET day01 = @day01 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh ", conn)
+            "UPDATE form_daily2 SET yyyy = @yyyy2 , day01 = @day01 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
 
 
-
+            dataAdpater.UpdateCommand.Parameters.Add("@yyyy2", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
             dataAdpater.UpdateCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
 
 
@@ -318,25 +355,26 @@ Public Class ucrFormDaily2
 
             dataAdpater.Fill(dailyTable)
 
-            dailyTable.Columns.Add("NNCOL", GetType(String))
-
-
             Dim row As DataRow
             row = dailyTable.Rows(0)
-            row("day01") = "75"
-            row("NNCOL") = "new column 1st"
 
             Dim row2 As DataRow
-            row2 = dailyTable.Rows(1)
-            row2("day01") = "68"
-            row2("NNCOL") = "new column 2nd"
+            row2 = dailyTable.NewRow()
+            row2("stationId") = row("stationId")
+            row2("elementId") = row("elementId")
+            row2("yyyy") = row("yyyy")
+            row2("mm") = row("mm")
+            row2("hh") = row("hh")
+            row2("day01") = "9999"
 
-            'dailyTable.Columns.Remove("NNCOL")
+            dailyTable.Rows(0).Delete()
+            dailyTable.Rows.Add(row2)
+
 
             dataAdpater.Update(dailyTable)
 
-
-
+            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Deleted))
+            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Added))
         Catch ex As Exception
             Console.WriteLine("Error: " & ex.Message)
             'MsgBox("Error : " & ex.Message)

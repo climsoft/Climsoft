@@ -78,6 +78,11 @@ Public Class ucrBaseDataLink
         SetSortByItems()
     End Sub
 
+    Public Sub AddKeyField(strNewField As String)
+        CreateDataDefinition()
+        clsDataDefinition.AddKeyField(strNewField)
+    End Sub
+
     Public Overridable Sub SetTableNameAndField(strNewTable As String, strNewField As String)
         SetTableName(strNewTable)
         SetField(strNewField)
