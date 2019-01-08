@@ -33,12 +33,8 @@
     End Sub
 
     Private Sub cmdAddNew_Click(sender As Object, e As EventArgs) Handles cmdAddNew.Click
-        cmdAddNew.Enabled = False
-        cmdClear.Enabled = True
-        cmdDelete.Enabled = False
-        cmdUpdate.Enabled = False
-        cmdSave.Enabled = True
         ucrNavigationInstrument.NewRecord()
+        SaveEnable()
     End Sub
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
@@ -109,7 +105,13 @@
         cmdDelete.Enabled = False
         cmdUpdate.Enabled = False
 
-        If ucrNavigationInstrument.iMaxRows = 0 Then
+        If ucrNavigationInstrument.iCurrRow = -1 Then
+            cmdAddNew.Enabled = False
+            cmdClear.Enabled = True
+            cmdDelete.Enabled = False
+            cmdUpdate.Enabled = False
+            cmdSave.Enabled = True
+        ElseIf ucrNavigationInstrument.iMaxRows = 0 Then
             cmdAddNew.Enabled = False
             cmdSave.Enabled = True
         ElseIf ucrNavigationInstrument.iMaxRows > 0 Then

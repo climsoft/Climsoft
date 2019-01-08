@@ -6,9 +6,12 @@
     'Boolean to check if record is updating
     'Set to True by default
     Public bUpdating As Boolean = True
+    Public bPopulating As Boolean = False
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
+            bPopulating = True
+
             MyBase.PopulateControl()
 
             bUpdating = dtbRecords.Rows.Count > 0
@@ -23,7 +26,7 @@
                     DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
                 End If
             Next
-
+            bPopulating = False
         End If
     End Sub
 
@@ -44,8 +47,10 @@
         'TODO update the user entered value to the data table
 
         If TypeOf sender Is ucrValueView Then
+            If Not bPopulating Then
+                DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
+            End If
 
-            DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
 
             ' Dim ucr As ucrValueView = DirectCast(sender, ucrValueView)
             'If dtbRecords.Rows.Count = 1 Then
