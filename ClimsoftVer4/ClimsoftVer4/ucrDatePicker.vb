@@ -5,7 +5,8 @@
     Public bValidateEmpty As Boolean = False
     'used to set the default back color to show when the value input is a valid one
     Private bValidColor As Color = Color.White
-    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+    Protected Overridable Sub ucrDatePicker_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'TODO determine the default date format?
             'dtpDate.Format = DateFormat.LongDate
