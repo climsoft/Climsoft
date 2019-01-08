@@ -26,7 +26,7 @@
     Protected Overridable Sub SetUpTableEntry(strNewTableName As String)
         Dim ucrCtrValueView As ucrValueView
 
-        For Each ctr As Control In Me.Controls
+        For Each ctr As Control In Controls
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
@@ -38,10 +38,48 @@
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         'TODO update the user entered value to the data table
 
+        If TypeOf sender Is ucrValueView Then
+
+            'DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
+
+            ' Dim ucr As ucrValueView = DirectCast(sender, ucrValueView)
+            'If dtbRecords.Rows.Count = 1 Then
+            '    dtbRecords.Rows(0).Item(ucr.FieldName) = ucr.GetValue
+            'ElseIf dtbRecords.Rows.Count > 1 Then
+            '    'TODO
+            'Else
+            '    'TODO
+            'End If
+        End If
+
+    End Sub
+
+    Protected Overrides Sub LinkedControls_evtValueChanged()
+        'Do nothing. Overriden to prevent any default action from being taken by the parent
+    End Sub
+
+    Public Sub InsertRecord()
+        clsDataDefinition.Save(dtbRecords)
+    End Sub
+
+    Public Sub UpdateRecord()
+        clsDataDefinition.Save(dtbRecords)
+    End Sub
+
+    Public Sub DeleteRecord()
+        If dtbRecords.Rows.Count = 1 Then
+            dtbRecords.Rows(0).Delete()
+        ElseIf dtbRecords.Rows.Count > 1 Then
+            For index As Integer = 0 To dtbRecords.Rows.Count - 1
+                dtbRecords.Rows(index).Delete()
+            Next
+        Else
+            'TODO?
+        End If
+        clsDataDefinition.Save(dtbRecords)
     End Sub
 
     Public Overridable Function GetFieldValue(strFieldName As String) As Object
-        Dim tempRow As DataRow
         Dim lstTemp As New List(Of Object)
 
         If strFieldName = "" Then
@@ -50,7 +88,7 @@
         If dtbRecords.Rows.Count = 1 Then
             Return dtbRecords.Rows(0).Item(strFieldName)
         ElseIf dtbRecords.Rows.Count > 1 Then
-            For Each tempRow In dtbRecords.Rows
+            For Each tempRow As DataRow In dtbRecords.Rows
                 lstTemp.Add(tempRow.Item(strFieldName))
             Next
             Return lstTemp
@@ -59,6 +97,5 @@
         End If
     End Function
 
-    Protected Overrides Sub LinkedControls_evtValueChanged()
-    End Sub
+
 End Class

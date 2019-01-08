@@ -1464,6 +1464,15 @@
     <EmbeddedResource Include="ucrMetadataScheduleClass.resx">
       <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStation.resx">
+      <DependentUpon>ucrMetadataStation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationElement.resx">
+      <DependentUpon>ucrMetadataStationElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationLocationHistory.resx">
+      <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStationQualifier.resx">
       <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
     </EmbeddedResource>

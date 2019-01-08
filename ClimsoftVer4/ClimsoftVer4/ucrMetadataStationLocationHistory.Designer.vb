@@ -40,19 +40,18 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxAuthority = New ClimsoftVer4.ucrTextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
-        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
-        Me.cmdViewHistory = New System.Windows.Forms.Button()
-        Me.cmdDeleteHistory = New System.Windows.Forms.Button()
-        Me.cmdUpdateHistory = New System.Windows.Forms.Button()
-        Me.cmdAddHistory = New System.Windows.Forms.Button()
-        Me.cmdClearHistory = New System.Windows.Forms.Button()
         Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerCkosingDate = New ClimsoftVer4.ucrDatePicker()
-        Me.UcrStationSelector1 = New ClimsoftVer4.ucrStationSelector()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.grpCommand2 = New System.Windows.Forms.GroupBox()
+        Me.cmdClear2 = New System.Windows.Forms.Button()
+        Me.cmdViewStationLocationHistory = New System.Windows.Forms.Button()
+        Me.cmdDeleteStationLocationHistory = New System.Windows.Forms.Button()
+        Me.cmdUpdateStationLocationHistory = New System.Windows.Forms.Button()
+        Me.cmdSaveStationLocationHistory = New System.Windows.Forms.Button()
+        Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox10.SuspendLayout()
+        Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label19
@@ -157,6 +156,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxStationType
         '
+        Me.ucrTextBoxStationType.FieldName = "stationType"
         Me.ucrTextBoxStationType.Location = New System.Drawing.Point(275, 71)
         Me.ucrTextBoxStationType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxStationType.Name = "ucrTextBoxStationType"
@@ -167,6 +167,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxGeogLocationMethod
         '
+        Me.ucrTextBoxGeogLocationMethod.FieldName = "geoLocationMethod"
         Me.ucrTextBoxGeogLocationMethod.Location = New System.Drawing.Point(275, 99)
         Me.ucrTextBoxGeogLocationMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeogLocationMethod.Name = "ucrTextBoxGeogLocationMethod"
@@ -177,6 +178,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxGeoglocationHistory
         '
+        Me.ucrTextBoxGeoglocationHistory.FieldName = "geoLocationAccuracy"
         Me.ucrTextBoxGeoglocationHistory.Location = New System.Drawing.Point(275, 127)
         Me.ucrTextBoxGeoglocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeoglocationHistory.Name = "ucrTextBoxGeoglocationHistory"
@@ -187,6 +189,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxLatitude
         '
+        Me.ucrTextBoxLatitude.FieldName = "latitude"
         Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(275, 214)
         Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
@@ -197,6 +200,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxLongitude
         '
+        Me.ucrTextBoxLongitude.FieldName = "longitude"
         Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(276, 242)
         Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
@@ -207,6 +211,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxElevation
         '
+        Me.ucrTextBoxElevation.FieldName = "elevation"
         Me.ucrTextBoxElevation.Location = New System.Drawing.Point(276, 267)
         Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
@@ -217,6 +222,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrTextBoxAuthority
         '
+        Me.ucrTextBoxAuthority.FieldName = "authority"
         Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(276, 293)
         Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
@@ -225,83 +231,9 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrTextBoxAuthority.Tag = "authority"
         Me.ucrTextBoxAuthority.TextboxValue = ""
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(737, 335)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 106
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'ucrNavigationStationLocationHistory
-        '
-        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(132, 332)
-        Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
-        Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigationStationLocationHistory.TabIndex = 107
-        '
-        'GroupBox10
-        '
-        Me.GroupBox10.Controls.Add(Me.cmdViewHistory)
-        Me.GroupBox10.Controls.Add(Me.cmdDeleteHistory)
-        Me.GroupBox10.Controls.Add(Me.cmdUpdateHistory)
-        Me.GroupBox10.Controls.Add(Me.cmdAddHistory)
-        Me.GroupBox10.Controls.Add(Me.cmdClearHistory)
-        Me.GroupBox10.Location = New System.Drawing.Point(3, 365)
-        Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(589, 34)
-        Me.GroupBox10.TabIndex = 108
-        Me.GroupBox10.TabStop = False
-        '
-        'cmdViewHistory
-        '
-        Me.cmdViewHistory.Location = New System.Drawing.Point(499, 7)
-        Me.cmdViewHistory.Name = "cmdViewHistory"
-        Me.cmdViewHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewHistory.TabIndex = 20
-        Me.cmdViewHistory.Text = "View"
-        Me.cmdViewHistory.UseVisualStyleBackColor = True
-        '
-        'cmdDeleteHistory
-        '
-        Me.cmdDeleteHistory.Location = New System.Drawing.Point(387, 8)
-        Me.cmdDeleteHistory.Name = "cmdDeleteHistory"
-        Me.cmdDeleteHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteHistory.TabIndex = 19
-        Me.cmdDeleteHistory.Text = "Delete"
-        Me.cmdDeleteHistory.UseVisualStyleBackColor = True
-        '
-        'cmdUpdateHistory
-        '
-        Me.cmdUpdateHistory.Location = New System.Drawing.Point(275, 8)
-        Me.cmdUpdateHistory.Name = "cmdUpdateHistory"
-        Me.cmdUpdateHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateHistory.TabIndex = 18
-        Me.cmdUpdateHistory.Text = "Update"
-        Me.cmdUpdateHistory.UseVisualStyleBackColor = True
-        '
-        'cmdAddHistory
-        '
-        Me.cmdAddHistory.Location = New System.Drawing.Point(163, 8)
-        Me.cmdAddHistory.Name = "cmdAddHistory"
-        Me.cmdAddHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddHistory.TabIndex = 17
-        Me.cmdAddHistory.Text = "Save"
-        Me.cmdAddHistory.UseVisualStyleBackColor = True
-        '
-        'cmdClearHistory
-        '
-        Me.cmdClearHistory.Location = New System.Drawing.Point(51, 7)
-        Me.cmdClearHistory.Name = "cmdClearHistory"
-        Me.cmdClearHistory.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearHistory.TabIndex = 16
-        Me.cmdClearHistory.Text = "AddNew"
-        Me.cmdClearHistory.UseVisualStyleBackColor = True
-        '
         'ucrDatePickerOpeningDate
         '
+        Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
         Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(275, 153)
         Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
         Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(129, 21)
@@ -310,31 +242,98 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrDatePickerCkosingDate
         '
+        Me.ucrDatePickerCkosingDate.FieldName = "closingDatetime"
         Me.ucrDatePickerCkosingDate.Location = New System.Drawing.Point(275, 180)
         Me.ucrDatePickerCkosingDate.Name = "ucrDatePickerCkosingDate"
         Me.ucrDatePickerCkosingDate.Size = New System.Drawing.Size(129, 21)
         Me.ucrDatePickerCkosingDate.TabIndex = 111
         Me.ucrDatePickerCkosingDate.Tag = "closingDatetime"
         '
-        'UcrStationSelector1
+        'ucrStationSelector
         '
-        Me.UcrStationSelector1.Location = New System.Drawing.Point(275, 39)
-        Me.UcrStationSelector1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrStationSelector1.Name = "UcrStationSelector1"
-        Me.UcrStationSelector1.Size = New System.Drawing.Size(219, 27)
-        Me.UcrStationSelector1.TabIndex = 112
-        Me.UcrStationSelector1.Tag = "belongsTo"
+        Me.ucrStationSelector.FieldName = "belongsTo"
+        Me.ucrStationSelector.Location = New System.Drawing.Point(275, 39)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(219, 27)
+        Me.ucrStationSelector.TabIndex = 112
+        Me.ucrStationSelector.Tag = "belongsTo"
+        '
+        'grpCommand2
+        '
+        Me.grpCommand2.Controls.Add(Me.cmdClear2)
+        Me.grpCommand2.Controls.Add(Me.cmdViewStationLocationHistory)
+        Me.grpCommand2.Controls.Add(Me.cmdDeleteStationLocationHistory)
+        Me.grpCommand2.Controls.Add(Me.cmdUpdateStationLocationHistory)
+        Me.grpCommand2.Controls.Add(Me.cmdSaveStationLocationHistory)
+        Me.grpCommand2.Location = New System.Drawing.Point(37, 344)
+        Me.grpCommand2.Name = "grpCommand2"
+        Me.grpCommand2.Size = New System.Drawing.Size(601, 31)
+        Me.grpCommand2.TabIndex = 114
+        Me.grpCommand2.TabStop = False
+        '
+        'cmdClear2
+        '
+        Me.cmdClear2.Location = New System.Drawing.Point(15, 4)
+        Me.cmdClear2.Name = "cmdClear2"
+        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
+        Me.cmdClear2.TabIndex = 12
+        Me.cmdClear2.Text = "AddNew"
+        Me.cmdClear2.UseVisualStyleBackColor = True
+        '
+        'cmdViewStationLocationHistory
+        '
+        Me.cmdViewStationLocationHistory.Location = New System.Drawing.Point(503, 6)
+        Me.cmdViewStationLocationHistory.Name = "cmdViewStationLocationHistory"
+        Me.cmdViewStationLocationHistory.Size = New System.Drawing.Size(81, 25)
+        Me.cmdViewStationLocationHistory.TabIndex = 16
+        Me.cmdViewStationLocationHistory.Text = "View"
+        Me.cmdViewStationLocationHistory.UseVisualStyleBackColor = True
+        '
+        'cmdDeleteStationLocationHistory
+        '
+        Me.cmdDeleteStationLocationHistory.Location = New System.Drawing.Point(381, 5)
+        Me.cmdDeleteStationLocationHistory.Name = "cmdDeleteStationLocationHistory"
+        Me.cmdDeleteStationLocationHistory.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteStationLocationHistory.TabIndex = 15
+        Me.cmdDeleteStationLocationHistory.Text = "Delete"
+        Me.cmdDeleteStationLocationHistory.UseVisualStyleBackColor = True
+        '
+        'cmdUpdateStationLocationHistory
+        '
+        Me.cmdUpdateStationLocationHistory.Location = New System.Drawing.Point(259, 5)
+        Me.cmdUpdateStationLocationHistory.Name = "cmdUpdateStationLocationHistory"
+        Me.cmdUpdateStationLocationHistory.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateStationLocationHistory.TabIndex = 14
+        Me.cmdUpdateStationLocationHistory.Text = "Update"
+        Me.cmdUpdateStationLocationHistory.UseVisualStyleBackColor = True
+        '
+        'cmdSaveStationLocationHistory
+        '
+        Me.cmdSaveStationLocationHistory.Location = New System.Drawing.Point(137, 5)
+        Me.cmdSaveStationLocationHistory.Name = "cmdSaveStationLocationHistory"
+        Me.cmdSaveStationLocationHistory.Size = New System.Drawing.Size(81, 25)
+        Me.cmdSaveStationLocationHistory.TabIndex = 13
+        Me.cmdSaveStationLocationHistory.Text = "Save"
+        Me.cmdSaveStationLocationHistory.UseVisualStyleBackColor = True
+        '
+        'ucrNavigationStationLocationHistory
+        '
+        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(141, 384)
+        Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
+        Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigationStationLocationHistory.TabIndex = 113
         '
         'ucrMetadataStationLocationHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrStationSelector1)
+        Me.Controls.Add(Me.grpCommand2)
+        Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
+        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrDatePickerCkosingDate)
         Me.Controls.Add(Me.ucrDatePickerOpeningDate)
-        Me.Controls.Add(Me.GroupBox10)
-        Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ucrTextBoxAuthority)
         Me.Controls.Add(Me.ucrTextBoxElevation)
         Me.Controls.Add(Me.ucrTextBoxLongitude)
@@ -354,10 +353,10 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.lblGeogLocationAccuracy)
         Me.Controls.Add(Me.Label19)
         Me.Name = "ucrMetadataStationLocationHistory"
-        Me.Size = New System.Drawing.Size(601, 414)
+        Me.Size = New System.Drawing.Size(674, 414)
         Me.Tag = ""
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox10.ResumeLayout(False)
+        Me.grpCommand2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -381,15 +380,14 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents ucrTextBoxLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxElevation As ucrTextBox
     Friend WithEvents ucrTextBoxAuthority As ucrTextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
-    Friend WithEvents GroupBox10 As GroupBox
-    Friend WithEvents cmdViewHistory As Button
-    Friend WithEvents cmdDeleteHistory As Button
-    Friend WithEvents cmdUpdateHistory As Button
-    Friend WithEvents cmdAddHistory As Button
-    Friend WithEvents cmdClearHistory As Button
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
     Friend WithEvents ucrDatePickerCkosingDate As ucrDatePicker
-    Friend WithEvents UcrStationSelector1 As ucrStationSelector
+    Friend WithEvents ucrStationSelector As ucrStationSelector
+    Friend WithEvents grpCommand2 As GroupBox
+    Friend WithEvents cmdClear2 As Button
+    Friend WithEvents cmdViewStationLocationHistory As Button
+    Friend WithEvents cmdDeleteStationLocationHistory As Button
+    Friend WithEvents cmdUpdateStationLocationHistory As Button
+    Friend WithEvents cmdSaveStationLocationHistory As Button
+    Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
 End Class
