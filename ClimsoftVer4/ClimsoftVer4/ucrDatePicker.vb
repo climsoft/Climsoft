@@ -23,7 +23,7 @@
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
-        If objNewValue Is Nothing OrElse (TypeOf objNewValue Is String AndAlso String.IsNullOrWhiteSpace(objNewValue)) Then
+        If IsDBNull(objNewValue) OrElse objNewValue Is Nothing OrElse (TypeOf objNewValue Is String AndAlso String.IsNullOrWhiteSpace(objNewValue)) Then
             txtDate.Text = ""
         Else
             Try
@@ -42,7 +42,9 @@
         If txtDate.Text.Trim = "" Then
             Return Nothing
         Else
-            Return dtpDate.Value
+            'TODO sometimes we may need the time component?
+            'Also check on the required format?
+            Return dtpDate.Value.ToShortDateString
         End If
     End Function
 

@@ -11,15 +11,32 @@
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'TODO. Might not be need anymore
+
             bUpdating = dtbRecords.Rows.Count > 0
 
-            'set the values to the input controls
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueView Then
-                    DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
-                End If
-            Next
+            If Not bUpdating Then
+                dtbRecords.Rows.Add(dtbRecords.NewRow())
+            End If
+
+            'TODO What should happen for new records
+
+            If bUpdating Then
+                'set the values to the input controls
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrValueView Then
+                        DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
+                    End If
+                Next
+            Else
+                'set the values to the input controls
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrValueView Then
+                        DirectCast(ctr, ucrValueView).SetValueToDataTable(dtbRecords)
+                    End If
+                Next
+            End If
+
+
         End If
     End Sub
 
@@ -40,7 +57,7 @@
 
         If TypeOf sender Is ucrValueView Then
 
-            'DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
+            DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
 
             ' Dim ucr As ucrValueView = DirectCast(sender, ucrValueView)
             'If dtbRecords.Rows.Count = 1 Then
@@ -58,15 +75,15 @@
         'Do nothing. Overriden to prevent any default action from being taken by the parent
     End Sub
 
-    Public Sub InsertRecord()
-        clsDataDefinition.Save(dtbRecords)
-    End Sub
+    Public Function InsertRecord() As Boolean
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
 
-    Public Sub UpdateRecord()
-        clsDataDefinition.Save(dtbRecords)
-    End Sub
+    Public Function UpdateRecord() As Boolean
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
 
-    Public Sub DeleteRecord()
+    Public Function DeleteRecord() As Boolean
         If dtbRecords.Rows.Count = 1 Then
             dtbRecords.Rows(0).Delete()
         ElseIf dtbRecords.Rows.Count > 1 Then
@@ -76,8 +93,8 @@
         Else
             'TODO?
         End If
-        clsDataDefinition.Save(dtbRecords)
-    End Sub
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
 
     Public Overridable Function GetFieldValue(strFieldName As String) As Object
         Dim lstTemp As New List(Of Object)
