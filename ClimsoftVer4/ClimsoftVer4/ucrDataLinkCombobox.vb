@@ -5,6 +5,7 @@
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
     Private objDefaultValue As Object = Nothing
+    Private bValidColor As Color = Color.White
 
     Public Overrides Sub PopulateControl()
         If bFillFromDataBase Then
@@ -36,7 +37,7 @@
         Dim bValueFound As Boolean = False
         'MyBase.SetValue(objNewValue)
         strCol = cboValues.ValueMember
-        If String.IsNullOrEmpty(objNewValue) Then
+        If IsDBNull(objNewValue) OrElse String.IsNullOrEmpty(objNewValue) Then
             cboValues.Text = ""
         Else
             For Each rTemp As DataRow In dtbRecords.Rows
@@ -127,6 +128,14 @@
         cboValues.BackColor = backColor
     End Sub
 
+    ''' <summary>
+    ''' Sets the default back color for when this control has a valid value
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Sub SetValidColor(backColor As Color)
+        bValidColor = backColor
+    End Sub
+
     Public Sub SetDisplayMember(strDisplay As String)
         If dtbRecords.Columns.Contains(strDisplay) Then
             cboValues.DisplayMember = strDisplay
@@ -197,6 +206,13 @@
             ValidateValue()
         End If
         OnevtValueChanged(Me, e)
+    End Sub
+
+    Public Overrides Sub Clear()
+        bValidate = False
+        SetValue("")
+        SetBackColor(bValidColor)
+        bValidate = True
     End Sub
 
 End Class
