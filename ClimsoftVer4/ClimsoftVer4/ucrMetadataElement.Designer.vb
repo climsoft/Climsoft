@@ -45,11 +45,11 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxLowerLimit = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxUnit = New ClimsoftVer4.ucrTextBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdDeleteScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.cmdViewElement = New System.Windows.Forms.Button()
+        Me.cmdDeleteElement = New System.Windows.Forms.Button()
+        Me.cmdUpdateElement = New System.Windows.Forms.Button()
+        Me.cmdSaveElement = New System.Windows.Forms.Button()
+        Me.cmdAddNewElement = New System.Windows.Forms.Button()
         Me.UcrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
@@ -271,61 +271,61 @@ Partial Class ucrMetadataElement
         '
         'GroupBox13
         '
-        Me.GroupBox13.Controls.Add(Me.cmdViewScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdDeleteScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdUpdateScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdAddScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdClearClass)
+        Me.GroupBox13.Controls.Add(Me.cmdViewElement)
+        Me.GroupBox13.Controls.Add(Me.cmdDeleteElement)
+        Me.GroupBox13.Controls.Add(Me.cmdUpdateElement)
+        Me.GroupBox13.Controls.Add(Me.cmdSaveElement)
+        Me.GroupBox13.Controls.Add(Me.cmdAddNewElement)
         Me.GroupBox13.Location = New System.Drawing.Point(79, 332)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
         Me.GroupBox13.TabIndex = 104
         Me.GroupBox13.TabStop = False
         '
-        'cmdViewScheduleClass
+        'cmdViewElement
         '
-        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(420, 6)
-        Me.cmdViewScheduleClass.Name = "cmdViewScheduleClass"
-        Me.cmdViewScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewScheduleClass.TabIndex = 8
-        Me.cmdViewScheduleClass.Text = "View"
-        Me.cmdViewScheduleClass.UseVisualStyleBackColor = True
+        Me.cmdViewElement.Location = New System.Drawing.Point(420, 6)
+        Me.cmdViewElement.Name = "cmdViewElement"
+        Me.cmdViewElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdViewElement.TabIndex = 8
+        Me.cmdViewElement.Text = "View"
+        Me.cmdViewElement.UseVisualStyleBackColor = True
         '
-        'cmdDeleteScheduleClass
+        'cmdDeleteElement
         '
-        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(318, 6)
-        Me.cmdDeleteScheduleClass.Name = "cmdDeleteScheduleClass"
-        Me.cmdDeleteScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteScheduleClass.TabIndex = 7
-        Me.cmdDeleteScheduleClass.Text = "Delete"
-        Me.cmdDeleteScheduleClass.UseVisualStyleBackColor = True
+        Me.cmdDeleteElement.Location = New System.Drawing.Point(318, 6)
+        Me.cmdDeleteElement.Name = "cmdDeleteElement"
+        Me.cmdDeleteElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteElement.TabIndex = 7
+        Me.cmdDeleteElement.Text = "Delete"
+        Me.cmdDeleteElement.UseVisualStyleBackColor = True
         '
-        'cmdUpdateScheduleClass
+        'cmdUpdateElement
         '
-        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(216, 6)
-        Me.cmdUpdateScheduleClass.Name = "cmdUpdateScheduleClass"
-        Me.cmdUpdateScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateScheduleClass.TabIndex = 6
-        Me.cmdUpdateScheduleClass.Text = "Update"
-        Me.cmdUpdateScheduleClass.UseVisualStyleBackColor = True
+        Me.cmdUpdateElement.Location = New System.Drawing.Point(216, 6)
+        Me.cmdUpdateElement.Name = "cmdUpdateElement"
+        Me.cmdUpdateElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateElement.TabIndex = 6
+        Me.cmdUpdateElement.Text = "Update"
+        Me.cmdUpdateElement.UseVisualStyleBackColor = True
         '
-        'cmdAddScheduleClass
+        'cmdSaveElement
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
-        Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
-        Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddScheduleClass.TabIndex = 5
-        Me.cmdAddScheduleClass.Text = "Save"
-        Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
+        Me.cmdSaveElement.Location = New System.Drawing.Point(114, 7)
+        Me.cmdSaveElement.Name = "cmdSaveElement"
+        Me.cmdSaveElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdSaveElement.TabIndex = 5
+        Me.cmdSaveElement.Text = "Save"
+        Me.cmdSaveElement.UseVisualStyleBackColor = True
         '
-        'cmdClearClass
+        'cmdAddNewElement
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
-        Me.cmdClearClass.Name = "cmdClearClass"
-        Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearClass.TabIndex = 4
-        Me.cmdClearClass.Text = "AddNew"
-        Me.cmdClearClass.UseVisualStyleBackColor = True
+        Me.cmdAddNewElement.Location = New System.Drawing.Point(12, 5)
+        Me.cmdAddNewElement.Name = "cmdAddNewElement"
+        Me.cmdAddNewElement.Size = New System.Drawing.Size(81, 27)
+        Me.cmdAddNewElement.TabIndex = 4
+        Me.cmdAddNewElement.Text = "AddNew"
+        Me.cmdAddNewElement.UseVisualStyleBackColor = True
         '
         'UcrDataLinkType
         '
@@ -397,10 +397,10 @@ Partial Class ucrMetadataElement
     Friend WithEvents ucrTextBoxLowerLimit As ucrTextBox
     Friend WithEvents ucrTextBoxUnit As ucrTextBox
     Friend WithEvents GroupBox13 As GroupBox
-    Friend WithEvents cmdViewScheduleClass As Button
-    Friend WithEvents cmdDeleteScheduleClass As Button
-    Friend WithEvents cmdUpdateScheduleClass As Button
-    Friend WithEvents cmdAddScheduleClass As Button
-    Friend WithEvents cmdClearClass As Button
+    Friend WithEvents cmdViewElement As Button
+    Friend WithEvents cmdDeleteElement As Button
+    Friend WithEvents cmdUpdateElement As Button
+    Friend WithEvents cmdSaveElement As Button
+    Friend WithEvents cmdAddNewElement As Button
     Friend WithEvents UcrDataLinkType As ucrDataLinkCombobox
 End Class

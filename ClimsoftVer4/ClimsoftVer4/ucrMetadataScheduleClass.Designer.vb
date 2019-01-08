@@ -33,8 +33,8 @@ Partial Class ucrMetadataScheduleClass
         Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
         Me.cmdDeleteScheduleClass = New System.Windows.Forms.Button()
         Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.cmdSaveScheduleClass = New System.Windows.Forms.Button()
+        Me.cmdAddNewScheduleClass = New System.Windows.Forms.Button()
         Me.ucrNavigationScheduleClass = New ClimsoftVer4.ucrNavigation()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
@@ -79,6 +79,7 @@ Partial Class ucrMetadataScheduleClass
         '
         'ucrTextBoxClass
         '
+        Me.ucrTextBoxClass.FieldName = "scheduleClass"
         Me.ucrTextBoxClass.Location = New System.Drawing.Point(220, 96)
         Me.ucrTextBoxClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxClass.Name = "ucrTextBoxClass"
@@ -89,6 +90,7 @@ Partial Class ucrMetadataScheduleClass
         '
         'ucrStationSelector
         '
+        Me.ucrStationSelector.FieldName = "refersTo"
         Me.ucrStationSelector.Location = New System.Drawing.Point(220, 133)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -98,6 +100,7 @@ Partial Class ucrMetadataScheduleClass
         '
         'ucrTextBoxDescription
         '
+        Me.ucrTextBoxDescription.FieldName = "description"
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(220, 176)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
@@ -111,8 +114,8 @@ Partial Class ucrMetadataScheduleClass
         Me.GroupBox13.Controls.Add(Me.cmdViewScheduleClass)
         Me.GroupBox13.Controls.Add(Me.cmdDeleteScheduleClass)
         Me.GroupBox13.Controls.Add(Me.cmdUpdateScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdAddScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdClearClass)
+        Me.GroupBox13.Controls.Add(Me.cmdSaveScheduleClass)
+        Me.GroupBox13.Controls.Add(Me.cmdAddNewScheduleClass)
         Me.GroupBox13.Location = New System.Drawing.Point(6, 277)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
@@ -146,23 +149,23 @@ Partial Class ucrMetadataScheduleClass
         Me.cmdUpdateScheduleClass.Text = "Update"
         Me.cmdUpdateScheduleClass.UseVisualStyleBackColor = True
         '
-        'cmdAddScheduleClass
+        'cmdSaveScheduleClass
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
-        Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
-        Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddScheduleClass.TabIndex = 5
-        Me.cmdAddScheduleClass.Text = "Save"
-        Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
+        Me.cmdSaveScheduleClass.Location = New System.Drawing.Point(114, 7)
+        Me.cmdSaveScheduleClass.Name = "cmdSaveScheduleClass"
+        Me.cmdSaveScheduleClass.Size = New System.Drawing.Size(81, 25)
+        Me.cmdSaveScheduleClass.TabIndex = 5
+        Me.cmdSaveScheduleClass.Text = "Save"
+        Me.cmdSaveScheduleClass.UseVisualStyleBackColor = True
         '
-        'cmdClearClass
+        'cmdAddNewScheduleClass
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
-        Me.cmdClearClass.Name = "cmdClearClass"
-        Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearClass.TabIndex = 4
-        Me.cmdClearClass.Text = "AddNew"
-        Me.cmdClearClass.UseVisualStyleBackColor = True
+        Me.cmdAddNewScheduleClass.Location = New System.Drawing.Point(12, 5)
+        Me.cmdAddNewScheduleClass.Name = "cmdAddNewScheduleClass"
+        Me.cmdAddNewScheduleClass.Size = New System.Drawing.Size(81, 27)
+        Me.cmdAddNewScheduleClass.TabIndex = 4
+        Me.cmdAddNewScheduleClass.Text = "AddNew"
+        Me.cmdAddNewScheduleClass.UseVisualStyleBackColor = True
         '
         'ucrNavigationScheduleClass
         '
@@ -205,7 +208,7 @@ Partial Class ucrMetadataScheduleClass
     Friend WithEvents cmdViewScheduleClass As Button
     Friend WithEvents cmdDeleteScheduleClass As Button
     Friend WithEvents cmdUpdateScheduleClass As Button
-    Friend WithEvents cmdAddScheduleClass As Button
-    Friend WithEvents cmdClearClass As Button
+    Friend WithEvents cmdSaveScheduleClass As Button
+    Friend WithEvents cmdAddNewScheduleClass As Button
     Friend WithEvents ucrNavigationScheduleClass As ucrNavigation
 End Class

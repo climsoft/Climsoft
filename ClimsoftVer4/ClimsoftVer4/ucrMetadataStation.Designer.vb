@@ -63,12 +63,12 @@ Partial Class ucrMetadataStation
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmdImport = New System.Windows.Forms.Button()
-        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdImportStation = New System.Windows.Forms.Button()
+        Me.cmdAddNewStation = New System.Windows.Forms.Button()
         Me.cmdViewStation = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdUpdate = New System.Windows.Forms.Button()
-        Me.cmdAddNew = New System.Windows.Forms.Button()
+        Me.cmdDeleteStation = New System.Windows.Forms.Button()
+        Me.cmdUpdateStation = New System.Windows.Forms.Button()
+        Me.cmdSaveStation = New System.Windows.Forms.Button()
         Me.lblStationOperation = New System.Windows.Forms.Label()
         Me.lbldarainage = New System.Windows.Forms.Label()
         Me.lblAdmin = New System.Windows.Forms.Label()
@@ -544,34 +544,34 @@ Partial Class ucrMetadataStation
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel2.Controls.Add(Me.cmdImport)
-        Me.Panel2.Controls.Add(Me.cmdClear)
+        Me.Panel2.Controls.Add(Me.cmdImportStation)
+        Me.Panel2.Controls.Add(Me.cmdAddNewStation)
         Me.Panel2.Controls.Add(Me.cmdViewStation)
-        Me.Panel2.Controls.Add(Me.cmdDelete)
-        Me.Panel2.Controls.Add(Me.cmdUpdate)
-        Me.Panel2.Controls.Add(Me.cmdAddNew)
+        Me.Panel2.Controls.Add(Me.cmdDeleteStation)
+        Me.Panel2.Controls.Add(Me.cmdUpdateStation)
+        Me.Panel2.Controls.Add(Me.cmdSaveStation)
         Me.Panel2.Location = New System.Drawing.Point(3, 360)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
-        'cmdImport
+        'cmdImportStation
         '
-        Me.cmdImport.Location = New System.Drawing.Point(597, 0)
-        Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(64, 27)
-        Me.cmdImport.TabIndex = 20
-        Me.cmdImport.Text = "Import"
-        Me.cmdImport.UseVisualStyleBackColor = True
+        Me.cmdImportStation.Location = New System.Drawing.Point(597, 0)
+        Me.cmdImportStation.Name = "cmdImportStation"
+        Me.cmdImportStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdImportStation.TabIndex = 20
+        Me.cmdImportStation.Text = "Import"
+        Me.cmdImportStation.UseVisualStyleBackColor = True
         '
-        'cmdClear
+        'cmdAddNewStation
         '
-        Me.cmdClear.Location = New System.Drawing.Point(47, 0)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(64, 27)
-        Me.cmdClear.TabIndex = 15
-        Me.cmdClear.Text = "AddNew"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.cmdAddNewStation.Location = New System.Drawing.Point(47, 0)
+        Me.cmdAddNewStation.Name = "cmdAddNewStation"
+        Me.cmdAddNewStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdAddNewStation.TabIndex = 15
+        Me.cmdAddNewStation.Text = "AddNew"
+        Me.cmdAddNewStation.UseVisualStyleBackColor = True
         '
         'cmdViewStation
         '
@@ -582,32 +582,32 @@ Partial Class ucrMetadataStation
         Me.cmdViewStation.Text = "View"
         Me.cmdViewStation.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'cmdDeleteStation
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(377, 0)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(64, 27)
-        Me.cmdDelete.TabIndex = 18
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        Me.cmdDeleteStation.Location = New System.Drawing.Point(377, 0)
+        Me.cmdDeleteStation.Name = "cmdDeleteStation"
+        Me.cmdDeleteStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdDeleteStation.TabIndex = 18
+        Me.cmdDeleteStation.Text = "Delete"
+        Me.cmdDeleteStation.UseVisualStyleBackColor = True
         '
-        'cmdUpdate
+        'cmdUpdateStation
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(267, 0)
-        Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(64, 27)
-        Me.cmdUpdate.TabIndex = 17
-        Me.cmdUpdate.Text = "Update"
-        Me.cmdUpdate.UseVisualStyleBackColor = True
+        Me.cmdUpdateStation.Location = New System.Drawing.Point(267, 0)
+        Me.cmdUpdateStation.Name = "cmdUpdateStation"
+        Me.cmdUpdateStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdUpdateStation.TabIndex = 17
+        Me.cmdUpdateStation.Text = "Update"
+        Me.cmdUpdateStation.UseVisualStyleBackColor = True
         '
-        'cmdAddNew
+        'cmdSaveStation
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(157, 0)
-        Me.cmdAddNew.Name = "cmdAddNew"
-        Me.cmdAddNew.Size = New System.Drawing.Size(64, 27)
-        Me.cmdAddNew.TabIndex = 17
-        Me.cmdAddNew.Text = "Save"
-        Me.cmdAddNew.UseVisualStyleBackColor = True
+        Me.cmdSaveStation.Location = New System.Drawing.Point(157, 0)
+        Me.cmdSaveStation.Name = "cmdSaveStation"
+        Me.cmdSaveStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdSaveStation.TabIndex = 17
+        Me.cmdSaveStation.Text = "Save"
+        Me.cmdSaveStation.UseVisualStyleBackColor = True
         '
         'lblStationOperation
         '
@@ -793,12 +793,12 @@ Partial Class ucrMetadataStation
     Friend WithEvents lblWMOid As Label
     Friend WithEvents lblSearchStation As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmdImport As Button
-    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdImportStation As Button
+    Friend WithEvents cmdAddNewStation As Button
     Friend WithEvents cmdViewStation As Button
-    Friend WithEvents cmdDelete As Button
-    Friend WithEvents cmdUpdate As Button
-    Friend WithEvents cmdAddNew As Button
+    Friend WithEvents cmdDeleteStation As Button
+    Friend WithEvents cmdUpdateStation As Button
+    Friend WithEvents cmdSaveStation As Button
     Friend WithEvents lblStationOperation As Label
     Friend WithEvents lbldarainage As Label
     Friend WithEvents lblAdmin As Label

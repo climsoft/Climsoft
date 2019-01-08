@@ -25,7 +25,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxtInstrumentName = New ClimsoftVer4.ucrTextBox()
         Me.lblInstruments = New System.Windows.Forms.Label()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear2 = New System.Windows.Forms.Button()
+        Me.cmdAddNewInstrument = New System.Windows.Forms.Button()
         Me.cmdViewInstrument = New System.Windows.Forms.Button()
         Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
         Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
@@ -85,7 +85,7 @@ Partial Class ucrMetadataInstrument
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear2)
+        Me.grpCommand2.Controls.Add(Me.cmdAddNewInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdViewInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdDeleteInstrument)
         Me.grpCommand2.Controls.Add(Me.cmdUpdateInstrument)
@@ -96,14 +96,14 @@ Partial Class ucrMetadataInstrument
         Me.grpCommand2.TabIndex = 94
         Me.grpCommand2.TabStop = False
         '
-        'cmdClear2
+        'cmdAddNewInstrument
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(95, 4)
-        Me.cmdClear2.Name = "cmdClear2"
-        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClear2.TabIndex = 12
-        Me.cmdClear2.Text = "AddNew"
-        Me.cmdClear2.UseVisualStyleBackColor = True
+        Me.cmdAddNewInstrument.Location = New System.Drawing.Point(95, 4)
+        Me.cmdAddNewInstrument.Name = "cmdAddNewInstrument"
+        Me.cmdAddNewInstrument.Size = New System.Drawing.Size(81, 27)
+        Me.cmdAddNewInstrument.TabIndex = 12
+        Me.cmdAddNewInstrument.Text = "AddNew"
+        Me.cmdAddNewInstrument.UseVisualStyleBackColor = True
         '
         'cmdViewInstrument
         '
@@ -468,7 +468,7 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents picInstrument As PictureBox
     Friend WithEvents cmdInstrument As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
-    Friend WithEvents cmdClear2 As Button
+    Friend WithEvents cmdAddNewInstrument As Button
     Friend WithEvents cmdDeleteInstrument As Button
     Friend WithEvents cmdUpdateInstrument As Button
     Friend WithEvents cmdSaveInstrument As Button
