@@ -1,7 +1,7 @@
 ﻿Public Class ucrMetadataStationElement
 
     Private Sub ucrMetadataStationElement_Load(sender As Object, e As EventArgs) Handles Me.Load
-            If bFirstLoad Then
+        If bFirstLoad Then
             'SetUpTableEntry 
             SetUpTableEntry("stationelement")
 
@@ -11,6 +11,9 @@
             ucrDataLinkElementID.bValidate = False
 
             AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
+
+            'set FILTER field name used in the where clause of UPDATE and DELETE statement
+            AddKeyField(ucrStationSelector.FieldName)
 
             'set up the navigation control
             ucrNavigationStationElement.SetTableEntry(Me)
@@ -22,5 +25,14 @@
             ucrNavigationStationElement.PopulateControl()
 
         End If
-        End Sub
+    End Sub
+
+    Private Sub cmdUpdateStationElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateStationElement.Click
+        UpdateRecord()
+    End Sub
+
+    Private Sub cmdDeleteStationElement_Click(sender As Object, e As EventArgs) Handles cmdDeleteStationElement.Click
+        DeleteRecord()
+    End Sub
 End Class
+

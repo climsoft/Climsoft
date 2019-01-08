@@ -37,12 +37,14 @@ Partial Class ucrMetadataStationElement
         Me.ucrTextboxInstrumentType = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrDataLinkScheduleClass = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.urTextHeight = New ClimsoftVer4.ucrTextBox()
+
+        Me.ucrTextHeight = New ClimsoftVer4.ucrTextBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
+
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.ucrNavigationStationElement = New ClimsoftVer4.ucrNavigation()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
@@ -74,7 +76,7 @@ Partial Class ucrMetadataStationElement
         'lblStationElement
         '
         Me.lblStationElement.AutoSize = True
-        Me.lblStationElement.Location = New System.Drawing.Point(307, 6)
+        Me.lblStationElement.Location = New System.Drawing.Point(307, 8)
         Me.lblStationElement.Name = "lblStationElement"
         Me.lblStationElement.Size = New System.Drawing.Size(81, 13)
         Me.lblStationElement.TabIndex = 67
@@ -192,16 +194,16 @@ Partial Class ucrMetadataStationElement
         Me.ucrDataLinkScheduleClass.TabIndex = 73
         Me.ucrDataLinkScheduleClass.Tag = "scheduledFor"
         '
-        'urTextHeight
+        'ucrTextHeight
         '
-        Me.urTextHeight.FieldName = "height"
-        Me.urTextHeight.Location = New System.Drawing.Point(227, 185)
-        Me.urTextHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.urTextHeight.Name = "urTextHeight"
-        Me.urTextHeight.Size = New System.Drawing.Size(51, 20)
-        Me.urTextHeight.TabIndex = 74
-        Me.urTextHeight.Tag = "height"
-        Me.urTextHeight.TextboxValue = ""
+        Me.ucrTextHeight.FieldName = "height"
+        Me.ucrTextHeight.Location = New System.Drawing.Point(227, 185)
+        Me.ucrTextHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextHeight.Name = "ucrTextHeight"
+        Me.ucrTextHeight.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextHeight.TabIndex = 74
+        Me.ucrTextHeight.Tag = "height"
+        Me.ucrTextHeight.TextboxValue = ""
         '
         'btnSave
         '
@@ -294,7 +296,7 @@ Partial Class ucrMetadataStationElement
         Me.Controls.Add(Me.ucrDatePickerEndDate)
         Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrNavigationStationElement)
-        Me.Controls.Add(Me.urTextHeight)
+        Me.Controls.Add(Me.ucrTextHeight)
         Me.Controls.Add(Me.ucrDataLinkScheduleClass)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrTextboxInstrumentType)
