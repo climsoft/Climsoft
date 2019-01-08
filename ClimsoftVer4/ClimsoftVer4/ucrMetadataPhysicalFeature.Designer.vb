@@ -34,6 +34,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblBeginDate = New System.Windows.Forms.Label()
         Me.lblPhysicalFeature = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -47,7 +48,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureImageFile = New ClimsoftVer4.ucrTextBox()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
-        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtFeaturePicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
@@ -58,7 +58,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.cmdOpenFile.Location = New System.Drawing.Point(326, 295)
         Me.cmdOpenFile.Name = "cmdOpenFile"
         Me.cmdOpenFile.Size = New System.Drawing.Size(49, 27)
-        Me.cmdOpenFile.TabIndex = 86
+        Me.cmdOpenFile.TabIndex = 15
         Me.cmdOpenFile.Text = "Open"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
         '
@@ -68,7 +68,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblClassDescription.Location = New System.Drawing.Point(39, 273)
         Me.lblClassDescription.Name = "lblClassDescription"
         Me.lblClassDescription.Size = New System.Drawing.Size(88, 13)
-        Me.lblClassDescription.TabIndex = 85
+        Me.lblClassDescription.TabIndex = 11
         Me.lblClassDescription.Text = "Class Description"
         '
         'lblFeatureImageFile
@@ -77,7 +77,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblFeatureImageFile.Location = New System.Drawing.Point(41, 304)
         Me.lblFeatureImageFile.Name = "lblFeatureImageFile"
         Me.lblFeatureImageFile.Size = New System.Drawing.Size(94, 13)
-        Me.lblFeatureImageFile.TabIndex = 79
+        Me.lblFeatureImageFile.TabIndex = 13
         Me.lblFeatureImageFile.Text = "Feature Image File"
         '
         'lblFeaturePicture
@@ -86,7 +86,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblFeaturePicture.Location = New System.Drawing.Point(471, 321)
         Me.lblFeaturePicture.Name = "lblFeaturePicture"
         Me.lblFeaturePicture.Size = New System.Drawing.Size(79, 13)
-        Me.lblFeaturePicture.TabIndex = 81
+        Me.lblFeaturePicture.TabIndex = 16
         Me.lblFeaturePicture.Text = "Feature Picture"
         '
         'txtFeaturePicture
@@ -112,7 +112,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblStationID.Location = New System.Drawing.Point(40, 117)
         Me.lblStationID.Name = "lblStationID"
         Me.lblStationID.Size = New System.Drawing.Size(54, 13)
-        Me.lblStationID.TabIndex = 74
+        Me.lblStationID.TabIndex = 1
         Me.lblStationID.Text = "Station ID"
         '
         'lblFeatureDescription
@@ -121,7 +121,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblFeatureDescription.Location = New System.Drawing.Point(39, 211)
         Me.lblFeatureDescription.Name = "lblFeatureDescription"
         Me.lblFeatureDescription.Size = New System.Drawing.Size(99, 13)
-        Me.lblFeatureDescription.TabIndex = 77
+        Me.lblFeatureDescription.TabIndex = 7
         Me.lblFeatureDescription.Text = "Feature Description"
         '
         'lblFeatureClass
@@ -130,7 +130,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblFeatureClass.Location = New System.Drawing.Point(41, 242)
         Me.lblFeatureClass.Name = "lblFeatureClass"
         Me.lblFeatureClass.Size = New System.Drawing.Size(71, 13)
-        Me.lblFeatureClass.TabIndex = 78
+        Me.lblFeatureClass.TabIndex = 9
         Me.lblFeatureClass.Text = "Feature Class"
         '
         'lblEndDate
@@ -139,7 +139,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblEndDate.Location = New System.Drawing.Point(39, 180)
         Me.lblEndDate.Name = "lblEndDate"
         Me.lblEndDate.Size = New System.Drawing.Size(52, 13)
-        Me.lblEndDate.TabIndex = 76
+        Me.lblEndDate.TabIndex = 5
         Me.lblEndDate.Text = "End Date"
         '
         'lblBeginDate
@@ -148,7 +148,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblBeginDate.Location = New System.Drawing.Point(39, 149)
         Me.lblBeginDate.Name = "lblBeginDate"
         Me.lblBeginDate.Size = New System.Drawing.Size(60, 13)
-        Me.lblBeginDate.TabIndex = 75
+        Me.lblBeginDate.TabIndex = 3
         Me.lblBeginDate.Text = "Begin Date"
         '
         'lblPhysicalFeature
@@ -158,7 +158,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblPhysicalFeature.Location = New System.Drawing.Point(269, 15)
         Me.lblPhysicalFeature.Name = "lblPhysicalFeature"
         Me.lblPhysicalFeature.Size = New System.Drawing.Size(124, 16)
-        Me.lblPhysicalFeature.TabIndex = 87
+        Me.lblPhysicalFeature.TabIndex = 0
         Me.lblPhysicalFeature.Text = "Physical Feature"
         '
         'GroupBox13
@@ -172,15 +172,24 @@ Partial Class ucrMetadataPhysicalFeature
         Me.GroupBox13.Location = New System.Drawing.Point(3, 352)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(611, 34)
-        Me.GroupBox13.TabIndex = 108
+        Me.GroupBox13.TabIndex = 17
         Me.GroupBox13.TabStop = False
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(416, 7)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnView
         '
         Me.btnView.Location = New System.Drawing.Point(515, 7)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 8
+        Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -189,7 +198,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.btnDelete.Location = New System.Drawing.Point(317, 7)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 7
+        Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -198,7 +207,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.btnUpdate.Location = New System.Drawing.Point(218, 7)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 6
+        Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -207,7 +216,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.btnSave.Location = New System.Drawing.Point(119, 7)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 5
+        Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -216,7 +225,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.btnAddNew.Location = New System.Drawing.Point(20, 7)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 4
+        Me.btnAddNew.TabIndex = 0
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -226,7 +235,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrNavigationPhysicalFeature.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationPhysicalFeature.Name = "ucrNavigationPhysicalFeature"
         Me.ucrNavigationPhysicalFeature.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigationPhysicalFeature.TabIndex = 107
+        Me.ucrNavigationPhysicalFeature.TabIndex = 18
         '
         'ucrStationSelector
         '
@@ -235,7 +244,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(154, 24)
-        Me.ucrStationSelector.TabIndex = 9
+        Me.ucrStationSelector.TabIndex = 2
         Me.ucrStationSelector.Tag = "associatedWith"
         '
         'ucrTextBoxFeatureDescription
@@ -245,7 +254,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureDescription.Name = "ucrTextBoxFeatureDescription"
         Me.ucrTextBoxFeatureDescription.Size = New System.Drawing.Size(154, 20)
-        Me.ucrTextBoxFeatureDescription.TabIndex = 109
+        Me.ucrTextBoxFeatureDescription.TabIndex = 8
         Me.ucrTextBoxFeatureDescription.Tag = "description"
         Me.ucrTextBoxFeatureDescription.TextboxValue = ""
         '
@@ -256,7 +265,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureClass.Name = "ucrTextBoxFeatureClass"
         Me.ucrTextBoxFeatureClass.Size = New System.Drawing.Size(154, 20)
-        Me.ucrTextBoxFeatureClass.TabIndex = 110
+        Me.ucrTextBoxFeatureClass.TabIndex = 10
         Me.ucrTextBoxFeatureClass.TextboxValue = ""
         '
         'ucrTextBoxClassDescription
@@ -266,7 +275,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxClassDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxClassDescription.Name = "ucrTextBoxClassDescription"
         Me.ucrTextBoxClassDescription.Size = New System.Drawing.Size(154, 20)
-        Me.ucrTextBoxClassDescription.TabIndex = 111
+        Me.ucrTextBoxClassDescription.TabIndex = 12
         Me.ucrTextBoxClassDescription.TextboxValue = ""
         '
         'ucrTextBoxFeatureImageFile
@@ -276,7 +285,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureImageFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureImageFile.Name = "ucrTextBoxFeatureImageFile"
         Me.ucrTextBoxFeatureImageFile.Size = New System.Drawing.Size(180, 20)
-        Me.ucrTextBoxFeatureImageFile.TabIndex = 112
+        Me.ucrTextBoxFeatureImageFile.TabIndex = 14
         Me.ucrTextBoxFeatureImageFile.Tag = "image"
         Me.ucrTextBoxFeatureImageFile.TextboxValue = ""
         '
@@ -286,7 +295,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(141, 140)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(154, 21)
-        Me.ucrDatePickerBeginDate.TabIndex = 113
+        Me.ucrDatePickerBeginDate.TabIndex = 4
         Me.ucrDatePickerBeginDate.Tag = "beginDate"
         '
         'ucrDatePickerEndDate
@@ -295,17 +304,8 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(141, 171)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(154, 21)
-        Me.ucrDatePickerEndDate.TabIndex = 114
+        Me.ucrDatePickerEndDate.TabIndex = 6
         Me.ucrDatePickerEndDate.Tag = "endDate"
-        '
-        'btnClear
-        '
-        Me.btnClear.Location = New System.Drawing.Point(416, 7)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 18
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataPhysicalFeature
         '
