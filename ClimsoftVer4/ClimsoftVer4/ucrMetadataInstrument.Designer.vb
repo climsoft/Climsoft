@@ -25,11 +25,11 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxtInstrumentName = New ClimsoftVer4.ucrTextBox()
         Me.lblInstruments = New System.Windows.Forms.Label()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear2 = New System.Windows.Forms.Button()
-        Me.cmdViewInstrument = New System.Windows.Forms.Button()
-        Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
-        Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
-        Me.cmdAddInstrument = New System.Windows.Forms.Button()
+        Me.cmdAddNew = New System.Windows.Forms.Button()
+        Me.cmdView = New System.Windows.Forms.Button()
+        Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdUpdate = New System.Windows.Forms.Button()
+        Me.cmdSave = New System.Windows.Forms.Button()
         Me.ucrNavigationInstrument = New ClimsoftVer4.ucrNavigation()
         Me.cmdInstrument = New System.Windows.Forms.Button()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
@@ -57,6 +57,7 @@ Partial Class ucrMetadataInstrument
         Me.lblInstrumentID = New System.Windows.Forms.Label()
         Me.ucrDatePickerInstallation = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerDeinstallation = New ClimsoftVer4.ucrDatePicker()
+        Me.cmdClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,6 +65,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxtInstrumentName
         '
+        Me.ucrTextBoxtInstrumentName.FieldName = "instrumentName"
         Me.ucrTextBoxtInstrumentName.Location = New System.Drawing.Point(132, 75)
         Me.ucrTextBoxtInstrumentName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxtInstrumentName.Name = "ucrTextBoxtInstrumentName"
@@ -84,61 +86,62 @@ Partial Class ucrMetadataInstrument
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear2)
-        Me.grpCommand2.Controls.Add(Me.cmdViewInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdDeleteInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdateInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdAddInstrument)
+        Me.grpCommand2.Controls.Add(Me.cmdClear)
+        Me.grpCommand2.Controls.Add(Me.cmdAddNew)
+        Me.grpCommand2.Controls.Add(Me.cmdView)
+        Me.grpCommand2.Controls.Add(Me.cmdDelete)
+        Me.grpCommand2.Controls.Add(Me.cmdUpdate)
+        Me.grpCommand2.Controls.Add(Me.cmdSave)
         Me.grpCommand2.Location = New System.Drawing.Point(3, 404)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 94
         Me.grpCommand2.TabStop = False
         '
-        'cmdClear2
+        'cmdAddNew
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(95, 4)
-        Me.cmdClear2.Name = "cmdClear2"
-        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClear2.TabIndex = 12
-        Me.cmdClear2.Text = "AddNew"
-        Me.cmdClear2.UseVisualStyleBackColor = True
+        Me.cmdAddNew.Location = New System.Drawing.Point(29, 4)
+        Me.cmdAddNew.Name = "cmdAddNew"
+        Me.cmdAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.cmdAddNew.TabIndex = 12
+        Me.cmdAddNew.Text = "AddNew"
+        Me.cmdAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewInstrument
+        'cmdView
         '
-        Me.cmdViewInstrument.Location = New System.Drawing.Point(583, 6)
-        Me.cmdViewInstrument.Name = "cmdViewInstrument"
-        Me.cmdViewInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewInstrument.TabIndex = 16
-        Me.cmdViewInstrument.Text = "View"
-        Me.cmdViewInstrument.UseVisualStyleBackColor = True
+        Me.cmdView.Location = New System.Drawing.Point(579, 6)
+        Me.cmdView.Name = "cmdView"
+        Me.cmdView.Size = New System.Drawing.Size(75, 23)
+        Me.cmdView.TabIndex = 16
+        Me.cmdView.Text = "View"
+        Me.cmdView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteInstrument
+        'cmdDelete
         '
-        Me.cmdDeleteInstrument.Location = New System.Drawing.Point(461, 5)
-        Me.cmdDeleteInstrument.Name = "cmdDeleteInstrument"
-        Me.cmdDeleteInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteInstrument.TabIndex = 15
-        Me.cmdDeleteInstrument.Text = "Delete"
-        Me.cmdDeleteInstrument.UseVisualStyleBackColor = True
+        Me.cmdDelete.Location = New System.Drawing.Point(359, 5)
+        Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
+        Me.cmdDelete.TabIndex = 15
+        Me.cmdDelete.Text = "Delete"
+        Me.cmdDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateInstrument
+        'cmdUpdate
         '
-        Me.cmdUpdateInstrument.Location = New System.Drawing.Point(339, 5)
-        Me.cmdUpdateInstrument.Name = "cmdUpdateInstrument"
-        Me.cmdUpdateInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateInstrument.TabIndex = 14
-        Me.cmdUpdateInstrument.Text = "Update"
-        Me.cmdUpdateInstrument.UseVisualStyleBackColor = True
+        Me.cmdUpdate.Location = New System.Drawing.Point(249, 5)
+        Me.cmdUpdate.Name = "cmdUpdate"
+        Me.cmdUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.cmdUpdate.TabIndex = 14
+        Me.cmdUpdate.Text = "Update"
+        Me.cmdUpdate.UseVisualStyleBackColor = True
         '
-        'cmdAddInstrument
+        'cmdSave
         '
-        Me.cmdAddInstrument.Location = New System.Drawing.Point(217, 5)
-        Me.cmdAddInstrument.Name = "cmdAddInstrument"
-        Me.cmdAddInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddInstrument.TabIndex = 13
-        Me.cmdAddInstrument.Text = "Save"
-        Me.cmdAddInstrument.UseVisualStyleBackColor = True
+        Me.cmdSave.Location = New System.Drawing.Point(139, 5)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSave.TabIndex = 13
+        Me.cmdSave.Text = "Save"
+        Me.cmdSave.UseVisualStyleBackColor = True
         '
         'ucrNavigationInstrument
         '
@@ -178,6 +181,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxImageFile
         '
+        Me.ucrTextBoxImageFile.FieldName = "instrumentPicture"
         Me.ucrTextBoxImageFile.Location = New System.Drawing.Point(132, 362)
         Me.ucrTextBoxImageFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxImageFile.Name = "ucrTextBoxImageFile"
@@ -188,6 +192,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxHeight
         '
+        Me.ucrTextBoxHeight.FieldName = "height"
         Me.ucrTextBoxHeight.Location = New System.Drawing.Point(132, 334)
         Me.ucrTextBoxHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxHeight.Name = "ucrTextBoxHeight"
@@ -198,6 +203,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxUncertainity
         '
+        Me.ucrTextBoxUncertainity.FieldName = "instrumentUncertainty"
         Me.ucrTextBoxUncertainity.Location = New System.Drawing.Point(132, 250)
         Me.ucrTextBoxUncertainity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUncertainity.Name = "ucrTextBoxUncertainity"
@@ -208,6 +214,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxManufacturer
         '
+        Me.ucrTextBoxManufacturer.FieldName = "manufacturer"
         Me.ucrTextBoxManufacturer.Location = New System.Drawing.Point(132, 222)
         Me.ucrTextBoxManufacturer.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxManufacturer.Name = "ucrTextBoxManufacturer"
@@ -218,6 +225,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxModel
         '
+        Me.ucrTextBoxModel.FieldName = "model"
         Me.ucrTextBoxModel.Location = New System.Drawing.Point(132, 194)
         Me.ucrTextBoxModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxModel.Name = "ucrTextBoxModel"
@@ -228,6 +236,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxSerialNumber
         '
+        Me.ucrTextBoxSerialNumber.FieldName = "serialNumber"
         Me.ucrTextBoxSerialNumber.Location = New System.Drawing.Point(132, 166)
         Me.ucrTextBoxSerialNumber.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSerialNumber.Name = "ucrTextBoxSerialNumber"
@@ -238,6 +247,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrStationSelector
         '
+        Me.ucrStationSelector.FieldName = "installedAt"
         Me.ucrStationSelector.Location = New System.Drawing.Point(132, 138)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -247,6 +257,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrTextBoxAbbrevation
         '
+        Me.ucrTextBoxAbbrevation.FieldName = "abbreviation"
         Me.ucrTextBoxAbbrevation.Location = New System.Drawing.Point(132, 108)
         Me.ucrTextBoxAbbrevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAbbrevation.Name = "ucrTextBoxAbbrevation"
@@ -257,6 +268,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrDataLinkInstrumentID
         '
+        Me.ucrDataLinkInstrumentID.FieldName = "instrumentId"
         Me.ucrDataLinkInstrumentID.Location = New System.Drawing.Point(132, 46)
         Me.ucrDataLinkInstrumentID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkInstrumentID.Name = "ucrDataLinkInstrumentID"
@@ -374,6 +386,7 @@ Partial Class ucrMetadataInstrument
         '
         'ucrDatePickerInstallation
         '
+        Me.ucrDatePickerInstallation.FieldName = "installationDatetime"
         Me.ucrDatePickerInstallation.Location = New System.Drawing.Point(132, 278)
         Me.ucrDatePickerInstallation.Name = "ucrDatePickerInstallation"
         Me.ucrDatePickerInstallation.Size = New System.Drawing.Size(139, 23)
@@ -382,11 +395,21 @@ Partial Class ucrMetadataInstrument
         '
         'ucrDatePickerDeinstallation
         '
+        Me.ucrDatePickerDeinstallation.FieldName = "deinstallationDatetime"
         Me.ucrDatePickerDeinstallation.Location = New System.Drawing.Point(130, 303)
         Me.ucrDatePickerDeinstallation.Name = "ucrDatePickerDeinstallation"
         Me.ucrDatePickerDeinstallation.Size = New System.Drawing.Size(141, 23)
         Me.ucrDatePickerDeinstallation.TabIndex = 98
         Me.ucrDatePickerDeinstallation.Tag = "deinstallationDatetime"
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Location = New System.Drawing.Point(469, 5)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(75, 23)
+        Me.cmdClear.TabIndex = 17
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataInstrument
         '
@@ -456,14 +479,15 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents picInstrument As PictureBox
     Friend WithEvents cmdInstrument As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
-    Friend WithEvents cmdClear2 As Button
-    Friend WithEvents cmdDeleteInstrument As Button
-    Friend WithEvents cmdUpdateInstrument As Button
-    Friend WithEvents cmdAddInstrument As Button
+    Friend WithEvents cmdAddNew As Button
+    Friend WithEvents cmdDelete As Button
+    Friend WithEvents cmdUpdate As Button
+    Friend WithEvents cmdSave As Button
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdViewInstrument As Button
+    Friend WithEvents cmdView As Button
     Friend WithEvents lblInstruments As Label
     Friend WithEvents ucrTextBoxtInstrumentName As ucrTextBox
     Friend WithEvents ucrDatePickerInstallation As ucrDatePicker
     Friend WithEvents ucrDatePickerDeinstallation As ucrDatePicker
+    Friend WithEvents cmdClear As Button
 End Class

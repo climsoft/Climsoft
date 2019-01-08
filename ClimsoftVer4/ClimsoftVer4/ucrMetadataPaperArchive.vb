@@ -4,6 +4,11 @@
             'SetUpTableEntry 
             SetUpTableEntry("paperarchive")
 
+            ucrTextBoxFormId.SetTableNameAndField("obselement", "elementId")
+            ucrTextBoxFormId.PopulateControl()
+            ucrTextBoxFormId.SetValue("elementId")
+            ucrTextBoxFormId.bValidate = False
+
             AddLinkedControlFilters(ucrTextBoxFormId, ucrTextBoxFormId.FieldName(), "=", strLinkedFieldName:=ucrTextBoxFormId.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control

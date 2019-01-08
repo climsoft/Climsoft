@@ -23,6 +23,8 @@ Partial Class ucrMetadataStation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpStation = New System.Windows.Forms.GroupBox()
+        Me.ucrDatePickerClosingDate = New ClimsoftVer4.ucrDatePicker()
+        Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrTextBoxGeographicalAccuracy = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGraphicalMethod = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
@@ -56,21 +58,17 @@ Partial Class ucrMetadataStation
         Me.lblMinutesLat = New System.Windows.Forms.Label()
         Me.lblDegreesLon = New System.Windows.Forms.Label()
         Me.lblDegreesLat = New System.Windows.Forms.Label()
-        Me.txtClosingDate = New System.Windows.Forms.TextBox()
-        Me.txtOpeningDate = New System.Windows.Forms.TextBox()
         Me.lblICAOid = New System.Windows.Forms.Label()
         Me.lblWMOid = New System.Windows.Forms.Label()
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmdImport = New System.Windows.Forms.Button()
-        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdImportStation = New System.Windows.Forms.Button()
+        Me.cmdAddNewStation = New System.Windows.Forms.Button()
         Me.cmdViewStation = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdUpdate = New System.Windows.Forms.Button()
-        Me.cmdAddNew = New System.Windows.Forms.Button()
-        Me.ClosingDate = New System.Windows.Forms.DateTimePicker()
-        Me.OpenDate = New System.Windows.Forms.DateTimePicker()
+        Me.cmdDeleteStation = New System.Windows.Forms.Button()
+        Me.cmdUpdateStation = New System.Windows.Forms.Button()
+        Me.cmdSaveStation = New System.Windows.Forms.Button()
         Me.lblStationOperation = New System.Windows.Forms.Label()
         Me.lbldarainage = New System.Windows.Forms.Label()
         Me.lblAdmin = New System.Windows.Forms.Label()
@@ -86,7 +84,7 @@ Partial Class ucrMetadataStation
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblStationId = New System.Windows.Forms.Label()
         Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
-        Me.lblStations = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStation.SuspendLayout()
         Me.grpComputationDD.SuspendLayout()
@@ -95,6 +93,8 @@ Partial Class ucrMetadataStation
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.ucrDatePickerClosingDate)
+        Me.grpStation.Controls.Add(Me.ucrDatePickerOpeningDate)
         Me.grpStation.Controls.Add(Me.ucrTextBoxGeographicalAccuracy)
         Me.grpStation.Controls.Add(Me.ucrTextBoxGraphicalMethod)
         Me.grpStation.Controls.Add(Me.ucrTextBoxQualifier)
@@ -112,15 +112,11 @@ Partial Class ucrMetadataStation
         Me.grpStation.Controls.Add(Me.ucrStationIDcombobox)
         Me.grpStation.Controls.Add(Me.Label24)
         Me.grpStation.Controls.Add(Me.grpComputationDD)
-        Me.grpStation.Controls.Add(Me.txtClosingDate)
-        Me.grpStation.Controls.Add(Me.txtOpeningDate)
         Me.grpStation.Controls.Add(Me.lblICAOid)
         Me.grpStation.Controls.Add(Me.lblWMOid)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
         Me.grpStation.Controls.Add(Me.txtStationOperation)
         Me.grpStation.Controls.Add(Me.Panel2)
-        Me.grpStation.Controls.Add(Me.ClosingDate)
-        Me.grpStation.Controls.Add(Me.OpenDate)
         Me.grpStation.Controls.Add(Me.lblStationOperation)
         Me.grpStation.Controls.Add(Me.lbldarainage)
         Me.grpStation.Controls.Add(Me.lblAdmin)
@@ -137,13 +133,32 @@ Partial Class ucrMetadataStation
         Me.grpStation.Controls.Add(Me.lblStationId)
         Me.grpStation.Location = New System.Drawing.Point(4, 29)
         Me.grpStation.Name = "grpStation"
-        Me.grpStation.Size = New System.Drawing.Size(727, 392)
+        Me.grpStation.Size = New System.Drawing.Size(727, 433)
         Me.grpStation.TabIndex = 15
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
         '
+        'ucrDatePickerClosingDate
+        '
+        Me.ucrDatePickerClosingDate.FieldName = "closingDatetime"
+        Me.ucrDatePickerClosingDate.Location = New System.Drawing.Point(481, 224)
+        Me.ucrDatePickerClosingDate.Name = "ucrDatePickerClosingDate"
+        Me.ucrDatePickerClosingDate.Size = New System.Drawing.Size(174, 21)
+        Me.ucrDatePickerClosingDate.TabIndex = 82
+        Me.ucrDatePickerClosingDate.Tag = "closingDatetime"
+        '
+        'ucrDatePickerOpeningDate
+        '
+        Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
+        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(481, 196)
+        Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
+        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(174, 21)
+        Me.ucrDatePickerOpeningDate.TabIndex = 81
+        Me.ucrDatePickerOpeningDate.Tag = "openingDatetime"
+        '
         'ucrTextBoxGeographicalAccuracy
         '
+        Me.ucrTextBoxGeographicalAccuracy.FieldName = "geoLocationAccuracy"
         Me.ucrTextBoxGeographicalAccuracy.Location = New System.Drawing.Point(518, 275)
         Me.ucrTextBoxGeographicalAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGeographicalAccuracy.Name = "ucrTextBoxGeographicalAccuracy"
@@ -154,6 +169,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxGraphicalMethod
         '
+        Me.ucrTextBoxGraphicalMethod.FieldName = "geoLocationMethod"
         Me.ucrTextBoxGraphicalMethod.Location = New System.Drawing.Point(518, 251)
         Me.ucrTextBoxGraphicalMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxGraphicalMethod.Name = "ucrTextBoxGraphicalMethod"
@@ -164,6 +180,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxQualifier
         '
+        Me.ucrTextBoxQualifier.FieldName = "qualifier"
         Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(481, 170)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
@@ -174,6 +191,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxDrainageBasin
         '
+        Me.ucrTextBoxDrainageBasin.FieldName = "drainageBasin"
         Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(116, 304)
         Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
@@ -184,6 +202,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxAdminRegion
         '
+        Me.ucrTextBoxAdminRegion.FieldName = "adminRegion"
         Me.ucrTextBoxAdminRegion.Location = New System.Drawing.Point(117, 275)
         Me.ucrTextBoxAdminRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAdminRegion.Name = "ucrTextBoxAdminRegion"
@@ -194,6 +213,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxAuthority
         '
+        Me.ucrTextBoxAuthority.FieldName = "authority"
         Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(117, 251)
         Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
@@ -204,6 +224,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxCountry
         '
+        Me.ucrTextBoxCountry.FieldName = "country"
         Me.ucrTextBoxCountry.Location = New System.Drawing.Point(116, 222)
         Me.ucrTextBoxCountry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxCountry.Name = "ucrTextBoxCountry"
@@ -214,6 +235,7 @@ Partial Class ucrMetadataStation
         '
         'ucrICAOId
         '
+        Me.ucrICAOId.FieldName = "icaoid"
         Me.ucrICAOId.Location = New System.Drawing.Point(116, 197)
         Me.ucrICAOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrICAOId.Name = "ucrICAOId"
@@ -224,6 +246,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxWMOId
         '
+        Me.ucrTextBoxWMOId.FieldName = "wmoid"
         Me.ucrTextBoxWMOId.Location = New System.Drawing.Point(117, 170)
         Me.ucrTextBoxWMOId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxWMOId.Name = "ucrTextBoxWMOId"
@@ -234,6 +257,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxElevation
         '
+        Me.ucrTextBoxElevation.FieldName = "elevation"
         Me.ucrTextBoxElevation.Location = New System.Drawing.Point(117, 141)
         Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
@@ -244,6 +268,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxLongitude
         '
+        Me.ucrTextBoxLongitude.FieldName = "longitude"
         Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(117, 107)
         Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
@@ -254,16 +279,18 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxLatitude
         '
+        Me.ucrTextBoxLatitude.FieldName = "latitude"
         Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(116, 82)
         Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
-        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(77, 18)
+        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(77, 22)
         Me.ucrTextBoxLatitude.TabIndex = 69
         Me.ucrTextBoxLatitude.Tag = "latitude"
         Me.ucrTextBoxLatitude.TextboxValue = ""
         '
         'ucrSearchStationNamecombobox
         '
+        Me.ucrSearchStationNamecombobox.FieldName = Nothing
         Me.ucrSearchStationNamecombobox.Location = New System.Drawing.Point(477, 16)
         Me.ucrSearchStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSearchStationNamecombobox.Name = "ucrSearchStationNamecombobox"
@@ -272,6 +299,7 @@ Partial Class ucrMetadataStation
         '
         'ucrStationNamecombobox
         '
+        Me.ucrStationNamecombobox.FieldName = "stationName"
         Me.ucrStationNamecombobox.Location = New System.Drawing.Point(117, 43)
         Me.ucrStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationNamecombobox.Name = "ucrStationNamecombobox"
@@ -281,6 +309,7 @@ Partial Class ucrMetadataStation
         '
         'ucrStationIDcombobox
         '
+        Me.ucrStationIDcombobox.FieldName = "stationId"
         Me.ucrStationIDcombobox.Location = New System.Drawing.Point(117, 20)
         Me.ucrStationIDcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationIDcombobox.Name = "ucrStationIDcombobox"
@@ -325,6 +354,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxSecondsLongitude
         '
+        Me.ucrTextBoxSecondsLongitude.FieldName = Nothing
         Me.ucrTextBoxSecondsLongitude.Location = New System.Drawing.Point(295, 43)
         Me.ucrTextBoxSecondsLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSecondsLongitude.Name = "ucrTextBoxSecondsLongitude"
@@ -334,6 +364,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxSecondsLatitude
         '
+        Me.ucrTextBoxSecondsLatitude.FieldName = Nothing
         Me.ucrTextBoxSecondsLatitude.Location = New System.Drawing.Point(295, 15)
         Me.ucrTextBoxSecondsLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxSecondsLatitude.Name = "ucrTextBoxSecondsLatitude"
@@ -343,6 +374,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxMinutesLongitude
         '
+        Me.ucrTextBoxMinutesLongitude.FieldName = Nothing
         Me.ucrTextBoxMinutesLongitude.Location = New System.Drawing.Point(173, 43)
         Me.ucrTextBoxMinutesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxMinutesLongitude.Name = "ucrTextBoxMinutesLongitude"
@@ -352,6 +384,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxMinutesLatitude
         '
+        Me.ucrTextBoxMinutesLatitude.FieldName = Nothing
         Me.ucrTextBoxMinutesLatitude.Location = New System.Drawing.Point(173, 18)
         Me.ucrTextBoxMinutesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxMinutesLatitude.Name = "ucrTextBoxMinutesLatitude"
@@ -361,6 +394,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxDegreesLongitude
         '
+        Me.ucrTextBoxDegreesLongitude.FieldName = Nothing
         Me.ucrTextBoxDegreesLongitude.Location = New System.Drawing.Point(56, 44)
         Me.ucrTextBoxDegreesLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDegreesLongitude.Name = "ucrTextBoxDegreesLongitude"
@@ -370,6 +404,7 @@ Partial Class ucrMetadataStation
         '
         'ucrTextBoxDegreesLatitude
         '
+        Me.ucrTextBoxDegreesLatitude.FieldName = Nothing
         Me.ucrTextBoxDegreesLatitude.Location = New System.Drawing.Point(56, 18)
         Me.ucrTextBoxDegreesLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDegreesLatitude.Name = "ucrTextBoxDegreesLatitude"
@@ -467,22 +502,6 @@ Partial Class ucrMetadataStation
         Me.lblDegreesLat.TabIndex = 511
         Me.lblDegreesLat.Text = "Degrees"
         '
-        'txtClosingDate
-        '
-        Me.txtClosingDate.Location = New System.Drawing.Point(518, 223)
-        Me.txtClosingDate.Name = "txtClosingDate"
-        Me.txtClosingDate.Size = New System.Drawing.Size(162, 20)
-        Me.txtClosingDate.TabIndex = 13
-        Me.txtClosingDate.Tag = "closingDatetime"
-        '
-        'txtOpeningDate
-        '
-        Me.txtOpeningDate.Location = New System.Drawing.Point(518, 197)
-        Me.txtOpeningDate.Name = "txtOpeningDate"
-        Me.txtOpeningDate.Size = New System.Drawing.Size(162, 20)
-        Me.txtOpeningDate.TabIndex = 12
-        Me.txtOpeningDate.Tag = "openingDatetime"
-        '
         'lblICAOid
         '
         Me.lblICAOid.AutoSize = True
@@ -525,35 +544,34 @@ Partial Class ucrMetadataStation
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel2.Controls.Add(Me.cmdImport)
-        Me.Panel2.Controls.Add(Me.cmdClear)
+        Me.Panel2.Controls.Add(Me.cmdImportStation)
+        Me.Panel2.Controls.Add(Me.cmdAddNewStation)
         Me.Panel2.Controls.Add(Me.cmdViewStation)
-        Me.Panel2.Controls.Add(Me.cmdDelete)
-        Me.Panel2.Controls.Add(Me.cmdUpdate)
-        Me.Panel2.Controls.Add(Me.cmdAddNew)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Controls.Add(Me.cmdDeleteStation)
+        Me.Panel2.Controls.Add(Me.cmdUpdateStation)
+        Me.Panel2.Controls.Add(Me.cmdSaveStation)
         Me.Panel2.Location = New System.Drawing.Point(3, 360)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
-        'cmdImport
+        'cmdImportStation
         '
-        Me.cmdImport.Location = New System.Drawing.Point(597, 0)
-        Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(64, 27)
-        Me.cmdImport.TabIndex = 20
-        Me.cmdImport.Text = "Import"
-        Me.cmdImport.UseVisualStyleBackColor = True
+        Me.cmdImportStation.Location = New System.Drawing.Point(597, 0)
+        Me.cmdImportStation.Name = "cmdImportStation"
+        Me.cmdImportStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdImportStation.TabIndex = 20
+        Me.cmdImportStation.Text = "Import"
+        Me.cmdImportStation.UseVisualStyleBackColor = True
         '
-        'cmdClear
+        'cmdAddNewStation
         '
-        Me.cmdClear.Location = New System.Drawing.Point(47, 0)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(64, 27)
-        Me.cmdClear.TabIndex = 15
-        Me.cmdClear.Text = "AddNew"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.cmdAddNewStation.Location = New System.Drawing.Point(47, 0)
+        Me.cmdAddNewStation.Name = "cmdAddNewStation"
+        Me.cmdAddNewStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdAddNewStation.TabIndex = 15
+        Me.cmdAddNewStation.Text = "AddNew"
+        Me.cmdAddNewStation.UseVisualStyleBackColor = True
         '
         'cmdViewStation
         '
@@ -564,49 +582,32 @@ Partial Class ucrMetadataStation
         Me.cmdViewStation.Text = "View"
         Me.cmdViewStation.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'cmdDeleteStation
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(377, 0)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(64, 27)
-        Me.cmdDelete.TabIndex = 18
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        Me.cmdDeleteStation.Location = New System.Drawing.Point(377, 0)
+        Me.cmdDeleteStation.Name = "cmdDeleteStation"
+        Me.cmdDeleteStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdDeleteStation.TabIndex = 18
+        Me.cmdDeleteStation.Text = "Delete"
+        Me.cmdDeleteStation.UseVisualStyleBackColor = True
         '
-        'cmdUpdate
+        'cmdUpdateStation
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(267, 0)
-        Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(64, 27)
-        Me.cmdUpdate.TabIndex = 17
-        Me.cmdUpdate.Text = "Update"
-        Me.cmdUpdate.UseVisualStyleBackColor = True
+        Me.cmdUpdateStation.Location = New System.Drawing.Point(267, 0)
+        Me.cmdUpdateStation.Name = "cmdUpdateStation"
+        Me.cmdUpdateStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdUpdateStation.TabIndex = 17
+        Me.cmdUpdateStation.Text = "Update"
+        Me.cmdUpdateStation.UseVisualStyleBackColor = True
         '
-        'cmdAddNew
+        'cmdSaveStation
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(157, 0)
-        Me.cmdAddNew.Name = "cmdAddNew"
-        Me.cmdAddNew.Size = New System.Drawing.Size(64, 27)
-        Me.cmdAddNew.TabIndex = 17
-        Me.cmdAddNew.Text = "Save"
-        Me.cmdAddNew.UseVisualStyleBackColor = True
-        '
-        'ClosingDate
-        '
-        Me.ClosingDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.ClosingDate.Location = New System.Drawing.Point(673, 223)
-        Me.ClosingDate.Name = "ClosingDate"
-        Me.ClosingDate.Size = New System.Drawing.Size(27, 20)
-        Me.ClosingDate.TabIndex = 22
-        '
-        'OpenDate
-        '
-        Me.OpenDate.Checked = False
-        Me.OpenDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.OpenDate.Location = New System.Drawing.Point(673, 197)
-        Me.OpenDate.Name = "OpenDate"
-        Me.OpenDate.Size = New System.Drawing.Size(27, 20)
-        Me.OpenDate.TabIndex = 21
+        Me.cmdSaveStation.Location = New System.Drawing.Point(157, 0)
+        Me.cmdSaveStation.Name = "cmdSaveStation"
+        Me.cmdSaveStation.Size = New System.Drawing.Size(64, 27)
+        Me.cmdSaveStation.TabIndex = 17
+        Me.cmdSaveStation.Text = "Save"
+        Me.cmdSaveStation.UseVisualStyleBackColor = True
         '
         'lblStationOperation
         '
@@ -739,30 +740,31 @@ Partial Class ucrMetadataStation
         '
         'ucrNavigationStation
         '
-        Me.ucrNavigationStation.Location = New System.Drawing.Point(164, 428)
+        Me.ucrNavigationStation.Location = New System.Drawing.Point(160, 429)
         Me.ucrNavigationStation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationStation.Name = "ucrNavigationStation"
         Me.ucrNavigationStation.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationStation.TabIndex = 16
         '
-        'lblStations
+        'lblStation
         '
-        Me.lblStations.AutoSize = True
-        Me.lblStations.Location = New System.Drawing.Point(311, 0)
-        Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(45, 13)
-        Me.lblStations.TabIndex = 17
-        Me.lblStations.Text = "Stations"
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStation.Location = New System.Drawing.Point(330, 6)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(52, 15)
+        Me.lblStation.TabIndex = 96
+        Me.lblStation.Text = "Station"
         '
         'ucrMetadataStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.lblStations)
+        Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrNavigationStation)
         Me.Controls.Add(Me.grpStation)
         Me.Name = "ucrMetadataStation"
-        Me.Size = New System.Drawing.Size(734, 451)
+        Me.Size = New System.Drawing.Size(734, 509)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStation.ResumeLayout(False)
         Me.grpStation.PerformLayout()
@@ -787,20 +789,16 @@ Partial Class ucrMetadataStation
     Friend WithEvents lblMinutesLat As Label
     Friend WithEvents lblDegreesLon As Label
     Friend WithEvents lblDegreesLat As Label
-    Friend WithEvents txtClosingDate As TextBox
-    Friend WithEvents txtOpeningDate As TextBox
     Friend WithEvents lblICAOid As Label
     Friend WithEvents lblWMOid As Label
     Friend WithEvents lblSearchStation As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmdImport As Button
-    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdImportStation As Button
+    Friend WithEvents cmdAddNewStation As Button
     Friend WithEvents cmdViewStation As Button
-    Friend WithEvents cmdDelete As Button
-    Friend WithEvents cmdUpdate As Button
-    Friend WithEvents cmdAddNew As Button
-    Friend WithEvents ClosingDate As DateTimePicker
-    Friend WithEvents OpenDate As DateTimePicker
+    Friend WithEvents cmdDeleteStation As Button
+    Friend WithEvents cmdUpdateStation As Button
+    Friend WithEvents cmdSaveStation As Button
     Friend WithEvents lblStationOperation As Label
     Friend WithEvents lbldarainage As Label
     Friend WithEvents lblAdmin As Label
@@ -838,5 +836,7 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrTextBoxGeographicalAccuracy As ucrTextBox
     Friend WithEvents ucrTextBoxGraphicalMethod As ucrTextBox
     Friend WithEvents txtStationOperation As CheckBox
-    Friend WithEvents lblStations As Label
+    Friend WithEvents ucrDatePickerClosingDate As ucrDatePicker
+    Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
+    Friend WithEvents lblStation As Label
 End Class

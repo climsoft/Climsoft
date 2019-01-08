@@ -84,9 +84,9 @@ Partial Class frmNewMetadata
         '
         'UcrMetadataStation1
         '
-        Me.UcrMetadataStation1.Location = New System.Drawing.Point(6, 6)
+        Me.UcrMetadataStation1.Location = New System.Drawing.Point(0, 0)
         Me.UcrMetadataStation1.Name = "UcrMetadataStation1"
-        Me.UcrMetadataStation1.Size = New System.Drawing.Size(766, 438)
+        Me.UcrMetadataStation1.Size = New System.Drawing.Size(778, 501)
         Me.UcrMetadataStation1.TabIndex = 0
         '
         'TabElement
@@ -102,9 +102,9 @@ Partial Class frmNewMetadata
         '
         'UcrMetadataElement1
         '
-        Me.UcrMetadataElement1.Location = New System.Drawing.Point(3, 3)
+        Me.UcrMetadataElement1.Location = New System.Drawing.Point(0, 0)
         Me.UcrMetadataElement1.Name = "UcrMetadataElement1"
-        Me.UcrMetadataElement1.Size = New System.Drawing.Size(769, 441)
+        Me.UcrMetadataElement1.Size = New System.Drawing.Size(778, 505)
         Me.UcrMetadataElement1.TabIndex = 0
         '
         'TabStationElement
@@ -120,9 +120,9 @@ Partial Class frmNewMetadata
         '
         'UcrMetadataStationElement1
         '
-        Me.UcrMetadataStationElement1.Location = New System.Drawing.Point(3, 6)
+        Me.UcrMetadataStationElement1.Location = New System.Drawing.Point(0, 0)
         Me.UcrMetadataStationElement1.Name = "UcrMetadataStationElement1"
-        Me.UcrMetadataStationElement1.Size = New System.Drawing.Size(769, 438)
+        Me.UcrMetadataStationElement1.Size = New System.Drawing.Size(778, 501)
         Me.UcrMetadataStationElement1.TabIndex = 0
         '
         'TabInstrument
@@ -160,6 +160,7 @@ Partial Class frmNewMetadata
         Me.UcrMetadataStationLocationHistory1.Name = "UcrMetadataStationLocationHistory1"
         Me.UcrMetadataStationLocationHistory1.Size = New System.Drawing.Size(766, 438)
         Me.UcrMetadataStationLocationHistory1.TabIndex = 0
+        Me.UcrMetadataStationLocationHistory1.Tag = ""
         '
         'TabStationQualifier
         '

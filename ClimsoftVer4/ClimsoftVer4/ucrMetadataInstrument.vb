@@ -30,7 +30,7 @@
         End If
     End Sub
 
-    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdateInstrument.Click
+    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If UpdateRecord() Then
                 MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -39,7 +39,7 @@
         End If
     End Sub
 
-    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDeleteInstrument.Click
+    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         Try
             If Not ValidateValues() Then
                 Exit Sub

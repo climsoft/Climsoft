@@ -4,6 +4,11 @@
         If bFirstLoad Then
             SetUpTableEntry("physicalfeature")
 
+            ucrStationSelector.SetTableNameAndField("physicalfeature", "associatedWith")
+            ucrStationSelector.PopulateControl()
+            ucrStationSelector.SetDisplayAndValueMember("associatedWith")
+            ucrStationSelector.bValidate = False
+
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:=ucrStationSelector.FieldName, bForceValuesAsString:=True)
 
             'set up the navigation control

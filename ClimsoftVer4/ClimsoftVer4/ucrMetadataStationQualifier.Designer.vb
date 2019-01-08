@@ -32,11 +32,11 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear2 = New System.Windows.Forms.Button()
-        Me.cmdViewInstrument = New System.Windows.Forms.Button()
-        Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
-        Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
-        Me.cmdAddInstrument = New System.Windows.Forms.Button()
+        Me.cmdAddNewStationQualifier = New System.Windows.Forms.Button()
+        Me.cmdViewStationQualifier = New System.Windows.Forms.Button()
+        Me.cmdDeleteStationQualifier = New System.Windows.Forms.Button()
+        Me.cmdUpdateQualifier = New System.Windows.Forms.Button()
+        Me.cmdSaveStationQualifier = New System.Windows.Forms.Button()
         Me.ucrTextBoxNetworkType = New ClimsoftVer4.ucrTextBox()
         Me.ucrNavigationStationQualifier = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxTimeZone = New ClimsoftVer4.ucrTextBox()
@@ -112,6 +112,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrTextBoxQualifier
         '
+        Me.ucrTextBoxQualifier.FieldName = "qualifier"
         Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(301, 89)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
@@ -122,6 +123,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrStationSelector
         '
+        Me.ucrStationSelector.FieldName = "belongsTo"
         Me.ucrStationSelector.Location = New System.Drawing.Point(301, 126)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -131,64 +133,65 @@ Partial Class ucrMetadataStationQualifier
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear2)
-        Me.grpCommand2.Controls.Add(Me.cmdViewInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdDeleteInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdateInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdAddInstrument)
+        Me.grpCommand2.Controls.Add(Me.cmdAddNewStationQualifier)
+        Me.grpCommand2.Controls.Add(Me.cmdViewStationQualifier)
+        Me.grpCommand2.Controls.Add(Me.cmdDeleteStationQualifier)
+        Me.grpCommand2.Controls.Add(Me.cmdUpdateQualifier)
+        Me.grpCommand2.Controls.Add(Me.cmdSaveStationQualifier)
         Me.grpCommand2.Location = New System.Drawing.Point(3, 335)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 96
         Me.grpCommand2.TabStop = False
         '
-        'cmdClear2
+        'cmdAddNewStationQualifier
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(95, 4)
-        Me.cmdClear2.Name = "cmdClear2"
-        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClear2.TabIndex = 12
-        Me.cmdClear2.Text = "AddNew"
-        Me.cmdClear2.UseVisualStyleBackColor = True
+        Me.cmdAddNewStationQualifier.Location = New System.Drawing.Point(95, 4)
+        Me.cmdAddNewStationQualifier.Name = "cmdAddNewStationQualifier"
+        Me.cmdAddNewStationQualifier.Size = New System.Drawing.Size(81, 27)
+        Me.cmdAddNewStationQualifier.TabIndex = 12
+        Me.cmdAddNewStationQualifier.Text = "AddNew"
+        Me.cmdAddNewStationQualifier.UseVisualStyleBackColor = True
         '
-        'cmdViewInstrument
+        'cmdViewStationQualifier
         '
-        Me.cmdViewInstrument.Location = New System.Drawing.Point(583, 6)
-        Me.cmdViewInstrument.Name = "cmdViewInstrument"
-        Me.cmdViewInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewInstrument.TabIndex = 16
-        Me.cmdViewInstrument.Text = "View"
-        Me.cmdViewInstrument.UseVisualStyleBackColor = True
+        Me.cmdViewStationQualifier.Location = New System.Drawing.Point(583, 6)
+        Me.cmdViewStationQualifier.Name = "cmdViewStationQualifier"
+        Me.cmdViewStationQualifier.Size = New System.Drawing.Size(81, 25)
+        Me.cmdViewStationQualifier.TabIndex = 16
+        Me.cmdViewStationQualifier.Text = "View"
+        Me.cmdViewStationQualifier.UseVisualStyleBackColor = True
         '
-        'cmdDeleteInstrument
+        'cmdDeleteStationQualifier
         '
-        Me.cmdDeleteInstrument.Location = New System.Drawing.Point(461, 5)
-        Me.cmdDeleteInstrument.Name = "cmdDeleteInstrument"
-        Me.cmdDeleteInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteInstrument.TabIndex = 15
-        Me.cmdDeleteInstrument.Text = "Delete"
-        Me.cmdDeleteInstrument.UseVisualStyleBackColor = True
+        Me.cmdDeleteStationQualifier.Location = New System.Drawing.Point(461, 5)
+        Me.cmdDeleteStationQualifier.Name = "cmdDeleteStationQualifier"
+        Me.cmdDeleteStationQualifier.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteStationQualifier.TabIndex = 15
+        Me.cmdDeleteStationQualifier.Text = "Delete"
+        Me.cmdDeleteStationQualifier.UseVisualStyleBackColor = True
         '
-        'cmdUpdateInstrument
+        'cmdUpdateQualifier
         '
-        Me.cmdUpdateInstrument.Location = New System.Drawing.Point(339, 5)
-        Me.cmdUpdateInstrument.Name = "cmdUpdateInstrument"
-        Me.cmdUpdateInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateInstrument.TabIndex = 14
-        Me.cmdUpdateInstrument.Text = "Update"
-        Me.cmdUpdateInstrument.UseVisualStyleBackColor = True
+        Me.cmdUpdateQualifier.Location = New System.Drawing.Point(339, 5)
+        Me.cmdUpdateQualifier.Name = "cmdUpdateQualifier"
+        Me.cmdUpdateQualifier.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateQualifier.TabIndex = 14
+        Me.cmdUpdateQualifier.Text = "Update"
+        Me.cmdUpdateQualifier.UseVisualStyleBackColor = True
         '
-        'cmdAddInstrument
+        'cmdSaveStationQualifier
         '
-        Me.cmdAddInstrument.Location = New System.Drawing.Point(217, 5)
-        Me.cmdAddInstrument.Name = "cmdAddInstrument"
-        Me.cmdAddInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddInstrument.TabIndex = 13
-        Me.cmdAddInstrument.Text = "Save"
-        Me.cmdAddInstrument.UseVisualStyleBackColor = True
+        Me.cmdSaveStationQualifier.Location = New System.Drawing.Point(217, 5)
+        Me.cmdSaveStationQualifier.Name = "cmdSaveStationQualifier"
+        Me.cmdSaveStationQualifier.Size = New System.Drawing.Size(81, 25)
+        Me.cmdSaveStationQualifier.TabIndex = 13
+        Me.cmdSaveStationQualifier.Text = "Save"
+        Me.cmdSaveStationQualifier.UseVisualStyleBackColor = True
         '
         'ucrTextBoxNetworkType
         '
+        Me.ucrTextBoxNetworkType.FieldName = "stationNetworkType"
         Me.ucrTextBoxNetworkType.Location = New System.Drawing.Point(301, 274)
         Me.ucrTextBoxNetworkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxNetworkType.Name = "ucrTextBoxNetworkType"
@@ -207,6 +210,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrTextBoxTimeZone
         '
+        Me.ucrTextBoxTimeZone.FieldName = "stationTimeZone"
         Me.ucrTextBoxTimeZone.Location = New System.Drawing.Point(301, 237)
         Me.ucrTextBoxTimeZone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxTimeZone.Name = "ucrTextBoxTimeZone"
@@ -217,6 +221,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrDatePickerBeginDate
         '
+        Me.ucrDatePickerBeginDate.FieldName = "qualifierBeginDate"
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(301, 160)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(155, 21)
@@ -225,6 +230,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrDatePickerEndDate
         '
+        Me.ucrDatePickerEndDate.FieldName = "qualifierEndDate"
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(301, 196)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(155, 21)
@@ -268,11 +274,11 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents ucrTextBoxQualifier As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdClear2 As Button
-    Friend WithEvents cmdViewInstrument As Button
-    Friend WithEvents cmdDeleteInstrument As Button
-    Friend WithEvents cmdUpdateInstrument As Button
-    Friend WithEvents cmdAddInstrument As Button
+    Friend WithEvents cmdAddNewStationQualifier As Button
+    Friend WithEvents cmdViewStationQualifier As Button
+    Friend WithEvents cmdDeleteStationQualifier As Button
+    Friend WithEvents cmdUpdateQualifier As Button
+    Friend WithEvents cmdSaveStationQualifier As Button
     Friend WithEvents ucrNavigationStationQualifier As ucrNavigation
     Friend WithEvents ucrTextBoxNetworkType As ucrTextBox
     Friend WithEvents ucrTextBoxTimeZone As ucrTextBox
