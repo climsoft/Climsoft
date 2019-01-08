@@ -204,7 +204,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrNavigationStationQualifier
         '
-        Me.ucrNavigationStationQualifier.Location = New System.Drawing.Point(170, 375)
+        Me.ucrNavigationStationQualifier.Location = New System.Drawing.Point(172, 375)
         Me.ucrNavigationStationQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationStationQualifier.Name = "ucrNavigationStationQualifier"
         Me.ucrNavigationStationQualifier.Size = New System.Drawing.Size(336, 25)

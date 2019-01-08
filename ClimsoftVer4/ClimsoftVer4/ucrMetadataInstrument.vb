@@ -32,12 +32,12 @@
         End If
     End Sub
 
-    Private Sub cmdAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationInstrument.NewRecord()
         SaveEnable()
     End Sub
 
-    Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             If Not ValidateValues() Then
                 Exit Sub
@@ -56,7 +56,7 @@
         End Try
     End Sub
 
-    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If UpdateRecord() Then
                 MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -65,7 +65,7 @@
         End If
     End Sub
 
-    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
             If Not ValidateValues() Then
                 Exit Sub
@@ -84,7 +84,7 @@
 
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         'Move to the first record of datatable
         ucrNavigationInstrument.MoveFirst()
         'Enable appropriate base buttons

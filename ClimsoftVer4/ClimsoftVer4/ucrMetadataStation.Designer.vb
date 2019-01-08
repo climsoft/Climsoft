@@ -85,6 +85,7 @@ Partial Class ucrMetadataStation
         Me.lblStationId = New System.Windows.Forms.Label()
         Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
         Me.lblStation = New System.Windows.Forms.Label()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStation.SuspendLayout()
         Me.grpComputationDD.SuspendLayout()
@@ -544,6 +545,7 @@ Partial Class ucrMetadataStation
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Panel2.Controls.Add(Me.btnClear)
         Me.Panel2.Controls.Add(Me.btnImport)
         Me.Panel2.Controls.Add(Me.btnAddNew)
         Me.Panel2.Controls.Add(Me.btnView)
@@ -557,54 +559,54 @@ Partial Class ucrMetadataStation
         '
         'btnImport
         '
-        Me.btnImport.Location = New System.Drawing.Point(597, 0)
+        Me.btnImport.Location = New System.Drawing.Point(626, 0)
         Me.btnImport.Name = "btnImport"
-        Me.btnImport.Size = New System.Drawing.Size(64, 27)
+        Me.btnImport.Size = New System.Drawing.Size(75, 23)
         Me.btnImport.TabIndex = 20
         Me.btnImport.Text = "Import"
         Me.btnImport.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(47, 0)
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 0)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(64, 27)
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 15
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(487, 0)
+        Me.btnView.Location = New System.Drawing.Point(525, 0)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(64, 27)
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 19
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(377, 0)
+        Me.btnDelete.Location = New System.Drawing.Point(323, 0)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(64, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 18
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(267, 0)
+        Me.btnUpdate.Location = New System.Drawing.Point(222, 0)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(64, 27)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 17
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(157, 0)
+        Me.btnSave.Location = New System.Drawing.Point(121, 0)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(64, 27)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 17
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -756,6 +758,15 @@ Partial Class ucrMetadataStation
         Me.lblStation.TabIndex = 96
         Me.lblStation.Text = "Station"
         '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(424, 0)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 21
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
         'ucrMetadataStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -839,4 +850,5 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrDatePickerClosingDate As ucrDatePicker
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
     Friend WithEvents lblStation As Label
+    Friend WithEvents btnClear As Button
 End Class
