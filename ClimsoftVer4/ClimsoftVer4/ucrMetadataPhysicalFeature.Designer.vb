@@ -34,11 +34,11 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblBeginDate = New System.Windows.Forms.Label()
         Me.lblPhysicalFeature = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdDeleteScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
         Me.ucrNavigationPhysicalFeature = New ClimsoftVer4.ucrNavigation()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrTextBoxFeatureDescription = New ClimsoftVer4.ucrTextBox()
@@ -162,61 +162,61 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'GroupBox13
         '
-        Me.GroupBox13.Controls.Add(Me.cmdViewScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdDeleteScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdUpdateScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdAddScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdClearClass)
+        Me.GroupBox13.Controls.Add(Me.btnView)
+        Me.GroupBox13.Controls.Add(Me.btnDelete)
+        Me.GroupBox13.Controls.Add(Me.btnUpdate)
+        Me.GroupBox13.Controls.Add(Me.btnSave)
+        Me.GroupBox13.Controls.Add(Me.btnAddNew)
         Me.GroupBox13.Location = New System.Drawing.Point(72, 352)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
         Me.GroupBox13.TabIndex = 108
         Me.GroupBox13.TabStop = False
         '
-        'cmdViewScheduleClass
+        'btnView
         '
-        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(420, 6)
-        Me.cmdViewScheduleClass.Name = "cmdViewScheduleClass"
-        Me.cmdViewScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewScheduleClass.TabIndex = 8
-        Me.cmdViewScheduleClass.Text = "View"
-        Me.cmdViewScheduleClass.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(420, 6)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.TabIndex = 8
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteScheduleClass
+        'btnDelete
         '
-        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(318, 6)
-        Me.cmdDeleteScheduleClass.Name = "cmdDeleteScheduleClass"
-        Me.cmdDeleteScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteScheduleClass.TabIndex = 7
-        Me.cmdDeleteScheduleClass.Text = "Delete"
-        Me.cmdDeleteScheduleClass.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(318, 6)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.TabIndex = 7
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateScheduleClass
+        'btnUpdate
         '
-        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(216, 6)
-        Me.cmdUpdateScheduleClass.Name = "cmdUpdateScheduleClass"
-        Me.cmdUpdateScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateScheduleClass.TabIndex = 6
-        Me.cmdUpdateScheduleClass.Text = "Update"
-        Me.cmdUpdateScheduleClass.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(216, 6)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.TabIndex = 6
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdAddScheduleClass
+        'btnSave
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
-        Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
-        Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddScheduleClass.TabIndex = 5
-        Me.cmdAddScheduleClass.Text = "Save"
-        Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(114, 7)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.TabIndex = 5
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'cmdClearClass
+        'btnAddNew
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
-        Me.cmdClearClass.Name = "cmdClearClass"
-        Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearClass.TabIndex = 4
-        Me.cmdClearClass.Text = "AddNew"
-        Me.cmdClearClass.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(12, 5)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 4
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'ucrNavigationPhysicalFeature
         '
@@ -228,6 +228,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrStationSelector
         '
+        Me.ucrStationSelector.FieldName = "associatedWith"
         Me.ucrStationSelector.Location = New System.Drawing.Point(141, 106)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -237,6 +238,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrTextBoxFeatureDescription
         '
+        Me.ucrTextBoxFeatureDescription.FieldName = "description"
         Me.ucrTextBoxFeatureDescription.Location = New System.Drawing.Point(141, 204)
         Me.ucrTextBoxFeatureDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureDescription.Name = "ucrTextBoxFeatureDescription"
@@ -247,6 +249,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrTextBoxFeatureClass
         '
+        Me.ucrTextBoxFeatureClass.FieldName = Nothing
         Me.ucrTextBoxFeatureClass.Location = New System.Drawing.Point(141, 234)
         Me.ucrTextBoxFeatureClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureClass.Name = "ucrTextBoxFeatureClass"
@@ -256,6 +259,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrTextBoxClassDescription
         '
+        Me.ucrTextBoxClassDescription.FieldName = Nothing
         Me.ucrTextBoxClassDescription.Location = New System.Drawing.Point(141, 264)
         Me.ucrTextBoxClassDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxClassDescription.Name = "ucrTextBoxClassDescription"
@@ -265,6 +269,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrTextBoxFeatureImageFile
         '
+        Me.ucrTextBoxFeatureImageFile.FieldName = "image"
         Me.ucrTextBoxFeatureImageFile.Location = New System.Drawing.Point(141, 300)
         Me.ucrTextBoxFeatureImageFile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureImageFile.Name = "ucrTextBoxFeatureImageFile"
@@ -275,6 +280,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrDatePickerBeginDate
         '
+        Me.ucrDatePickerBeginDate.FieldName = "beginDate"
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(141, 140)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(154, 21)
@@ -283,6 +289,7 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrDatePickerEndDate
         '
+        Me.ucrDatePickerEndDate.FieldName = "endDate"
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(141, 171)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(154, 21)
@@ -335,11 +342,11 @@ Partial Class ucrMetadataPhysicalFeature
     Friend WithEvents lblBeginDate As Label
     Friend WithEvents lblPhysicalFeature As Label
     Friend WithEvents GroupBox13 As GroupBox
-    Friend WithEvents cmdViewScheduleClass As Button
-    Friend WithEvents cmdDeleteScheduleClass As Button
-    Friend WithEvents cmdUpdateScheduleClass As Button
-    Friend WithEvents cmdAddScheduleClass As Button
-    Friend WithEvents cmdClearClass As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnAddNew As Button
     Friend WithEvents ucrNavigationPhysicalFeature As ucrNavigation
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrTextBoxFeatureDescription As ucrTextBox

@@ -25,11 +25,12 @@ Partial Class ucrMetadataInstrument
         Me.ucrTextBoxtInstrumentName = New ClimsoftVer4.ucrTextBox()
         Me.lblInstruments = New System.Windows.Forms.Label()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdAddNew = New System.Windows.Forms.Button()
-        Me.cmdView = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdUpdate = New System.Windows.Forms.Button()
-        Me.cmdSave = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationInstrument = New ClimsoftVer4.ucrNavigation()
         Me.cmdInstrument = New System.Windows.Forms.Button()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
@@ -57,7 +58,6 @@ Partial Class ucrMetadataInstrument
         Me.lblInstrumentID = New System.Windows.Forms.Label()
         Me.ucrDatePickerInstallation = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerDeinstallation = New ClimsoftVer4.ucrDatePicker()
-        Me.cmdClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,62 +86,71 @@ Partial Class ucrMetadataInstrument
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear)
-        Me.grpCommand2.Controls.Add(Me.cmdAddNew)
-        Me.grpCommand2.Controls.Add(Me.cmdView)
-        Me.grpCommand2.Controls.Add(Me.cmdDelete)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdate)
-        Me.grpCommand2.Controls.Add(Me.cmdSave)
+        Me.grpCommand2.Controls.Add(Me.btnClear)
+        Me.grpCommand2.Controls.Add(Me.btnAddNew)
+        Me.grpCommand2.Controls.Add(Me.btnView)
+        Me.grpCommand2.Controls.Add(Me.btnDelete)
+        Me.grpCommand2.Controls.Add(Me.btnUpdate)
+        Me.grpCommand2.Controls.Add(Me.btnSave)
         Me.grpCommand2.Location = New System.Drawing.Point(3, 404)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 94
         Me.grpCommand2.TabStop = False
         '
-        'cmdAddNew
+        'btnClear
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(29, 4)
-        Me.cmdAddNew.Name = "cmdAddNew"
-        Me.cmdAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAddNew.TabIndex = 12
-        Me.cmdAddNew.Text = "AddNew"
-        Me.cmdAddNew.UseVisualStyleBackColor = True
+        Me.btnClear.Location = New System.Drawing.Point(469, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 17
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
-        'cmdView
+        'btnAddNew
         '
-        Me.cmdView.Location = New System.Drawing.Point(579, 6)
-        Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(75, 23)
-        Me.cmdView.TabIndex = 16
-        Me.cmdView.Text = "View"
-        Me.cmdView.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(29, 4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 12
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'btnView
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(359, 5)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
-        Me.cmdDelete.TabIndex = 15
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(579, 6)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 16
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdUpdate
+        'btnDelete
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(249, 5)
-        Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.cmdUpdate.TabIndex = 14
-        Me.cmdUpdate.Text = "Update"
-        Me.cmdUpdate.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(359, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 15
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdSave
+        'btnUpdate
         '
-        Me.cmdSave.Location = New System.Drawing.Point(139, 5)
-        Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSave.TabIndex = 13
-        Me.cmdSave.Text = "Save"
-        Me.cmdSave.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(249, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 14
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(139, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 13
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'ucrNavigationInstrument
         '
@@ -402,15 +411,6 @@ Partial Class ucrMetadataInstrument
         Me.ucrDatePickerDeinstallation.TabIndex = 98
         Me.ucrDatePickerDeinstallation.Tag = "deinstallationDatetime"
         '
-        'cmdClear
-        '
-        Me.cmdClear.Location = New System.Drawing.Point(469, 5)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(75, 23)
-        Me.cmdClear.TabIndex = 17
-        Me.cmdClear.Text = "Clear"
-        Me.cmdClear.UseVisualStyleBackColor = True
-        '
         'ucrMetadataInstrument
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -479,15 +479,15 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents picInstrument As PictureBox
     Friend WithEvents cmdInstrument As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
-    Friend WithEvents cmdAddNew As Button
-    Friend WithEvents cmdDelete As Button
-    Friend WithEvents cmdUpdate As Button
-    Friend WithEvents cmdSave As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdView As Button
+    Friend WithEvents btnView As Button
     Friend WithEvents lblInstruments As Label
     Friend WithEvents ucrTextBoxtInstrumentName As ucrTextBox
     Friend WithEvents ucrDatePickerInstallation As ucrDatePicker
     Friend WithEvents ucrDatePickerDeinstallation As ucrDatePicker
-    Friend WithEvents cmdClear As Button
+    Friend WithEvents btnClear As Button
 End Class

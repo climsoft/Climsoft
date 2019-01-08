@@ -32,11 +32,11 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdAddNewStationQualifier = New System.Windows.Forms.Button()
-        Me.cmdViewStationQualifier = New System.Windows.Forms.Button()
-        Me.cmdDeleteStationQualifier = New System.Windows.Forms.Button()
-        Me.cmdUpdateQualifier = New System.Windows.Forms.Button()
-        Me.cmdSaveStationQualifier = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrTextBoxNetworkType = New ClimsoftVer4.ucrTextBox()
         Me.ucrNavigationStationQualifier = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxTimeZone = New ClimsoftVer4.ucrTextBox()
@@ -133,61 +133,61 @@ Partial Class ucrMetadataStationQualifier
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdAddNewStationQualifier)
-        Me.grpCommand2.Controls.Add(Me.cmdViewStationQualifier)
-        Me.grpCommand2.Controls.Add(Me.cmdDeleteStationQualifier)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdateQualifier)
-        Me.grpCommand2.Controls.Add(Me.cmdSaveStationQualifier)
+        Me.grpCommand2.Controls.Add(Me.btnAddNew)
+        Me.grpCommand2.Controls.Add(Me.btnView)
+        Me.grpCommand2.Controls.Add(Me.btnDelete)
+        Me.grpCommand2.Controls.Add(Me.btnUpdate)
+        Me.grpCommand2.Controls.Add(Me.btnSave)
         Me.grpCommand2.Location = New System.Drawing.Point(3, 335)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 96
         Me.grpCommand2.TabStop = False
         '
-        'cmdAddNewStationQualifier
+        'btnAddNew
         '
-        Me.cmdAddNewStationQualifier.Location = New System.Drawing.Point(95, 4)
-        Me.cmdAddNewStationQualifier.Name = "cmdAddNewStationQualifier"
-        Me.cmdAddNewStationQualifier.Size = New System.Drawing.Size(81, 27)
-        Me.cmdAddNewStationQualifier.TabIndex = 12
-        Me.cmdAddNewStationQualifier.Text = "AddNew"
-        Me.cmdAddNewStationQualifier.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(95, 4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 12
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewStationQualifier
+        'btnView
         '
-        Me.cmdViewStationQualifier.Location = New System.Drawing.Point(583, 6)
-        Me.cmdViewStationQualifier.Name = "cmdViewStationQualifier"
-        Me.cmdViewStationQualifier.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewStationQualifier.TabIndex = 16
-        Me.cmdViewStationQualifier.Text = "View"
-        Me.cmdViewStationQualifier.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(583, 6)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.TabIndex = 16
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteStationQualifier
+        'btnDelete
         '
-        Me.cmdDeleteStationQualifier.Location = New System.Drawing.Point(461, 5)
-        Me.cmdDeleteStationQualifier.Name = "cmdDeleteStationQualifier"
-        Me.cmdDeleteStationQualifier.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteStationQualifier.TabIndex = 15
-        Me.cmdDeleteStationQualifier.Text = "Delete"
-        Me.cmdDeleteStationQualifier.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(461, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.TabIndex = 15
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateQualifier
+        'btnUpdate
         '
-        Me.cmdUpdateQualifier.Location = New System.Drawing.Point(339, 5)
-        Me.cmdUpdateQualifier.Name = "cmdUpdateQualifier"
-        Me.cmdUpdateQualifier.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateQualifier.TabIndex = 14
-        Me.cmdUpdateQualifier.Text = "Update"
-        Me.cmdUpdateQualifier.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(339, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.TabIndex = 14
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdSaveStationQualifier
+        'btnSave
         '
-        Me.cmdSaveStationQualifier.Location = New System.Drawing.Point(217, 5)
-        Me.cmdSaveStationQualifier.Name = "cmdSaveStationQualifier"
-        Me.cmdSaveStationQualifier.Size = New System.Drawing.Size(81, 25)
-        Me.cmdSaveStationQualifier.TabIndex = 13
-        Me.cmdSaveStationQualifier.Text = "Save"
-        Me.cmdSaveStationQualifier.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(217, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.TabIndex = 13
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'ucrTextBoxNetworkType
         '
@@ -274,11 +274,11 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents ucrTextBoxQualifier As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdAddNewStationQualifier As Button
-    Friend WithEvents cmdViewStationQualifier As Button
-    Friend WithEvents cmdDeleteStationQualifier As Button
-    Friend WithEvents cmdUpdateQualifier As Button
-    Friend WithEvents cmdSaveStationQualifier As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationQualifier As ucrNavigation
     Friend WithEvents ucrTextBoxNetworkType As ucrTextBox
     Friend WithEvents ucrTextBoxTimeZone As ucrTextBox

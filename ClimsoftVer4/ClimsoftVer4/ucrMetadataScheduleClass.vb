@@ -25,11 +25,11 @@
         End If
     End Sub
 
-    Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdUpdateScheduleClass.Click
+    Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         UpdateRecord()
     End Sub
 
-    Private Sub cmdDeleteScheduleClass_Click(sender As Object, e As EventArgs) Handles cmdDeleteScheduleClass.Click
+    Private Sub cmdDeleteScheduleClass_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         DeleteRecord()
     End Sub
 End Class

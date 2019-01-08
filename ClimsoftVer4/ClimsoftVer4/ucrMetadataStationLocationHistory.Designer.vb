@@ -44,11 +44,11 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrDatePickerCkosingDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear2 = New System.Windows.Forms.Button()
-        Me.cmdViewStationLocationHistory = New System.Windows.Forms.Button()
-        Me.cmdDeleteStationLocationHistory = New System.Windows.Forms.Button()
-        Me.cmdUpdateStationLocationHistory = New System.Windows.Forms.Button()
-        Me.cmdSaveStationLocationHistory = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
@@ -261,61 +261,61 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear2)
-        Me.grpCommand2.Controls.Add(Me.cmdViewStationLocationHistory)
-        Me.grpCommand2.Controls.Add(Me.cmdDeleteStationLocationHistory)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdateStationLocationHistory)
-        Me.grpCommand2.Controls.Add(Me.cmdSaveStationLocationHistory)
+        Me.grpCommand2.Controls.Add(Me.btnAddNew)
+        Me.grpCommand2.Controls.Add(Me.btnView)
+        Me.grpCommand2.Controls.Add(Me.btnDelete)
+        Me.grpCommand2.Controls.Add(Me.btnUpdate)
+        Me.grpCommand2.Controls.Add(Me.btnSave)
         Me.grpCommand2.Location = New System.Drawing.Point(37, 344)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(601, 31)
         Me.grpCommand2.TabIndex = 114
         Me.grpCommand2.TabStop = False
         '
-        'cmdClear2
+        'btnAddNew
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(15, 4)
-        Me.cmdClear2.Name = "cmdClear2"
-        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClear2.TabIndex = 12
-        Me.cmdClear2.Text = "AddNew"
-        Me.cmdClear2.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(15, 4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 12
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewStationLocationHistory
+        'btnView
         '
-        Me.cmdViewStationLocationHistory.Location = New System.Drawing.Point(503, 6)
-        Me.cmdViewStationLocationHistory.Name = "cmdViewStationLocationHistory"
-        Me.cmdViewStationLocationHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewStationLocationHistory.TabIndex = 16
-        Me.cmdViewStationLocationHistory.Text = "View"
-        Me.cmdViewStationLocationHistory.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(503, 6)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.TabIndex = 16
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteStationLocationHistory
+        'btnDelete
         '
-        Me.cmdDeleteStationLocationHistory.Location = New System.Drawing.Point(381, 5)
-        Me.cmdDeleteStationLocationHistory.Name = "cmdDeleteStationLocationHistory"
-        Me.cmdDeleteStationLocationHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteStationLocationHistory.TabIndex = 15
-        Me.cmdDeleteStationLocationHistory.Text = "Delete"
-        Me.cmdDeleteStationLocationHistory.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(381, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.TabIndex = 15
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateStationLocationHistory
+        'btnUpdate
         '
-        Me.cmdUpdateStationLocationHistory.Location = New System.Drawing.Point(259, 5)
-        Me.cmdUpdateStationLocationHistory.Name = "cmdUpdateStationLocationHistory"
-        Me.cmdUpdateStationLocationHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateStationLocationHistory.TabIndex = 14
-        Me.cmdUpdateStationLocationHistory.Text = "Update"
-        Me.cmdUpdateStationLocationHistory.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(259, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.TabIndex = 14
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdSaveStationLocationHistory
+        'btnSave
         '
-        Me.cmdSaveStationLocationHistory.Location = New System.Drawing.Point(137, 5)
-        Me.cmdSaveStationLocationHistory.Name = "cmdSaveStationLocationHistory"
-        Me.cmdSaveStationLocationHistory.Size = New System.Drawing.Size(81, 25)
-        Me.cmdSaveStationLocationHistory.TabIndex = 13
-        Me.cmdSaveStationLocationHistory.Text = "Save"
-        Me.cmdSaveStationLocationHistory.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(137, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.TabIndex = 13
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'ucrNavigationStationLocationHistory
         '
@@ -384,10 +384,10 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents ucrDatePickerCkosingDate As ucrDatePicker
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdClear2 As Button
-    Friend WithEvents cmdViewStationLocationHistory As Button
-    Friend WithEvents cmdDeleteStationLocationHistory As Button
-    Friend WithEvents cmdUpdateStationLocationHistory As Button
-    Friend WithEvents cmdSaveStationLocationHistory As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
 End Class

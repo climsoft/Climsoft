@@ -26,11 +26,11 @@
         End If
     End Sub
 
-    Private Sub cmdUpdateElement_Click(sender As Object, e As EventArgs) Handles cmdUpdateElement.Click
+    Private Sub cmdUpdateElement_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         UpdateRecord()
     End Sub
 
-    Private Sub cmdDeleteElement_Click(sender As Object, e As EventArgs) Handles cmdDeleteElement.Click
+    Private Sub cmdDeleteElement_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         DeleteRecord()
     End Sub
 End Class

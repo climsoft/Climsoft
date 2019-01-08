@@ -25,11 +25,11 @@
         End If
     End Sub
 
-    Private Sub cmdUpdateStationQualifier_Click(sender As Object, e As EventArgs) Handles cmdUpdateQualifier.Click
+    Private Sub cmdUpdateStationQualifier_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         UpdateRecord()
     End Sub
 
-    Private Sub cmdDeleteStationQualifier_Click(sender As Object, e As EventArgs) Handles cmdDeleteStationQualifier.Click
+    Private Sub cmdDeleteStationQualifier_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         DeleteRecord()
     End Sub
 End Class

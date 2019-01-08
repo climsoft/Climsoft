@@ -63,12 +63,12 @@ Partial Class ucrMetadataStation
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmdImportStation = New System.Windows.Forms.Button()
-        Me.cmdAddNewStation = New System.Windows.Forms.Button()
-        Me.cmdViewStation = New System.Windows.Forms.Button()
-        Me.cmdDeleteStation = New System.Windows.Forms.Button()
-        Me.cmdUpdateStation = New System.Windows.Forms.Button()
-        Me.cmdSaveStation = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.lblStationOperation = New System.Windows.Forms.Label()
         Me.lbldarainage = New System.Windows.Forms.Label()
         Me.lblAdmin = New System.Windows.Forms.Label()
@@ -544,70 +544,70 @@ Partial Class ucrMetadataStation
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel2.Controls.Add(Me.cmdImportStation)
-        Me.Panel2.Controls.Add(Me.cmdAddNewStation)
-        Me.Panel2.Controls.Add(Me.cmdViewStation)
-        Me.Panel2.Controls.Add(Me.cmdDeleteStation)
-        Me.Panel2.Controls.Add(Me.cmdUpdateStation)
-        Me.Panel2.Controls.Add(Me.cmdSaveStation)
+        Me.Panel2.Controls.Add(Me.btnImport)
+        Me.Panel2.Controls.Add(Me.btnAddNew)
+        Me.Panel2.Controls.Add(Me.btnView)
+        Me.Panel2.Controls.Add(Me.btnDelete)
+        Me.Panel2.Controls.Add(Me.btnUpdate)
+        Me.Panel2.Controls.Add(Me.btnSave)
         Me.Panel2.Location = New System.Drawing.Point(3, 360)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
-        'cmdImportStation
+        'btnImport
         '
-        Me.cmdImportStation.Location = New System.Drawing.Point(597, 0)
-        Me.cmdImportStation.Name = "cmdImportStation"
-        Me.cmdImportStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdImportStation.TabIndex = 20
-        Me.cmdImportStation.Text = "Import"
-        Me.cmdImportStation.UseVisualStyleBackColor = True
+        Me.btnImport.Location = New System.Drawing.Point(597, 0)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(64, 27)
+        Me.btnImport.TabIndex = 20
+        Me.btnImport.Text = "Import"
+        Me.btnImport.UseVisualStyleBackColor = True
         '
-        'cmdAddNewStation
+        'btnAddNew
         '
-        Me.cmdAddNewStation.Location = New System.Drawing.Point(47, 0)
-        Me.cmdAddNewStation.Name = "cmdAddNewStation"
-        Me.cmdAddNewStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdAddNewStation.TabIndex = 15
-        Me.cmdAddNewStation.Text = "AddNew"
-        Me.cmdAddNewStation.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(47, 0)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(64, 27)
+        Me.btnAddNew.TabIndex = 15
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewStation
+        'btnView
         '
-        Me.cmdViewStation.Location = New System.Drawing.Point(487, 0)
-        Me.cmdViewStation.Name = "cmdViewStation"
-        Me.cmdViewStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdViewStation.TabIndex = 19
-        Me.cmdViewStation.Text = "View"
-        Me.cmdViewStation.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(487, 0)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(64, 27)
+        Me.btnView.TabIndex = 19
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteStation
+        'btnDelete
         '
-        Me.cmdDeleteStation.Location = New System.Drawing.Point(377, 0)
-        Me.cmdDeleteStation.Name = "cmdDeleteStation"
-        Me.cmdDeleteStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdDeleteStation.TabIndex = 18
-        Me.cmdDeleteStation.Text = "Delete"
-        Me.cmdDeleteStation.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(377, 0)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(64, 27)
+        Me.btnDelete.TabIndex = 18
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateStation
+        'btnUpdate
         '
-        Me.cmdUpdateStation.Location = New System.Drawing.Point(267, 0)
-        Me.cmdUpdateStation.Name = "cmdUpdateStation"
-        Me.cmdUpdateStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdUpdateStation.TabIndex = 17
-        Me.cmdUpdateStation.Text = "Update"
-        Me.cmdUpdateStation.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(267, 0)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(64, 27)
+        Me.btnUpdate.TabIndex = 17
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdSaveStation
+        'btnSave
         '
-        Me.cmdSaveStation.Location = New System.Drawing.Point(157, 0)
-        Me.cmdSaveStation.Name = "cmdSaveStation"
-        Me.cmdSaveStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdSaveStation.TabIndex = 17
-        Me.cmdSaveStation.Text = "Save"
-        Me.cmdSaveStation.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(157, 0)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(64, 27)
+        Me.btnSave.TabIndex = 17
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'lblStationOperation
         '
@@ -793,12 +793,12 @@ Partial Class ucrMetadataStation
     Friend WithEvents lblWMOid As Label
     Friend WithEvents lblSearchStation As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmdImportStation As Button
-    Friend WithEvents cmdAddNewStation As Button
-    Friend WithEvents cmdViewStation As Button
-    Friend WithEvents cmdDeleteStation As Button
-    Friend WithEvents cmdUpdateStation As Button
-    Friend WithEvents cmdSaveStation As Button
+    Friend WithEvents btnImport As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents lblStationOperation As Label
     Friend WithEvents lbldarainage As Label
     Friend WithEvents lblAdmin As Label
