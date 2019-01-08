@@ -37,10 +37,10 @@ Partial Class ucrMetadataStationElement
         Me.ucrTextboxInstrumentType = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrDataLinkScheduleClass = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.urTextHeight = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextHeight = New ClimsoftVer4.ucrTextBox()
         Me.cmdAddStElement = New System.Windows.Forms.Button()
-        Me.cmdUpdateStElement = New System.Windows.Forms.Button()
-        Me.cmdDeleteStElement = New System.Windows.Forms.Button()
+        Me.cmdUpdateStationElement = New System.Windows.Forms.Button()
+        Me.cmdDeleteStationElement = New System.Windows.Forms.Button()
         Me.cmdViewStElement = New System.Windows.Forms.Button()
         Me.cmdClearStationElement = New System.Windows.Forms.Button()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
@@ -74,7 +74,7 @@ Partial Class ucrMetadataStationElement
         'lblStationElement
         '
         Me.lblStationElement.AutoSize = True
-        Me.lblStationElement.Location = New System.Drawing.Point(307, 6)
+        Me.lblStationElement.Location = New System.Drawing.Point(307, 8)
         Me.lblStationElement.Name = "lblStationElement"
         Me.lblStationElement.Size = New System.Drawing.Size(81, 13)
         Me.lblStationElement.TabIndex = 67
@@ -192,16 +192,16 @@ Partial Class ucrMetadataStationElement
         Me.ucrDataLinkScheduleClass.TabIndex = 73
         Me.ucrDataLinkScheduleClass.Tag = "scheduledFor"
         '
-        'urTextHeight
+        'ucrTextHeight
         '
-        Me.urTextHeight.FieldName = "height"
-        Me.urTextHeight.Location = New System.Drawing.Point(227, 185)
-        Me.urTextHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.urTextHeight.Name = "urTextHeight"
-        Me.urTextHeight.Size = New System.Drawing.Size(51, 20)
-        Me.urTextHeight.TabIndex = 74
-        Me.urTextHeight.Tag = "height"
-        Me.urTextHeight.TextboxValue = ""
+        Me.ucrTextHeight.FieldName = "height"
+        Me.ucrTextHeight.Location = New System.Drawing.Point(227, 185)
+        Me.ucrTextHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextHeight.Name = "ucrTextHeight"
+        Me.ucrTextHeight.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextHeight.TabIndex = 74
+        Me.ucrTextHeight.Tag = "height"
+        Me.ucrTextHeight.TextboxValue = ""
         '
         'cmdAddStElement
         '
@@ -212,23 +212,23 @@ Partial Class ucrMetadataStationElement
         Me.cmdAddStElement.Text = "Save"
         Me.cmdAddStElement.UseVisualStyleBackColor = True
         '
-        'cmdUpdateStElement
+        'cmdUpdateStationElement
         '
-        Me.cmdUpdateStElement.Location = New System.Drawing.Point(253, 10)
-        Me.cmdUpdateStElement.Name = "cmdUpdateStElement"
-        Me.cmdUpdateStElement.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateStElement.TabIndex = 33
-        Me.cmdUpdateStElement.Text = "Update"
-        Me.cmdUpdateStElement.UseVisualStyleBackColor = True
+        Me.cmdUpdateStationElement.Location = New System.Drawing.Point(253, 10)
+        Me.cmdUpdateStationElement.Name = "cmdUpdateStationElement"
+        Me.cmdUpdateStationElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdUpdateStationElement.TabIndex = 33
+        Me.cmdUpdateStationElement.Text = "Update"
+        Me.cmdUpdateStationElement.UseVisualStyleBackColor = True
         '
-        'cmdDeleteStElement
+        'cmdDeleteStationElement
         '
-        Me.cmdDeleteStElement.Location = New System.Drawing.Point(366, 10)
-        Me.cmdDeleteStElement.Name = "cmdDeleteStElement"
-        Me.cmdDeleteStElement.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteStElement.TabIndex = 34
-        Me.cmdDeleteStElement.Text = "Delete"
-        Me.cmdDeleteStElement.UseVisualStyleBackColor = True
+        Me.cmdDeleteStationElement.Location = New System.Drawing.Point(366, 10)
+        Me.cmdDeleteStationElement.Name = "cmdDeleteStationElement"
+        Me.cmdDeleteStationElement.Size = New System.Drawing.Size(81, 25)
+        Me.cmdDeleteStationElement.TabIndex = 34
+        Me.cmdDeleteStationElement.Text = "Delete"
+        Me.cmdDeleteStationElement.UseVisualStyleBackColor = True
         '
         'cmdViewStElement
         '
@@ -252,8 +252,8 @@ Partial Class ucrMetadataStationElement
         '
         Me.GroupBox7.Controls.Add(Me.cmdClearStationElement)
         Me.GroupBox7.Controls.Add(Me.cmdViewStElement)
-        Me.GroupBox7.Controls.Add(Me.cmdDeleteStElement)
-        Me.GroupBox7.Controls.Add(Me.cmdUpdateStElement)
+        Me.GroupBox7.Controls.Add(Me.cmdDeleteStationElement)
+        Me.GroupBox7.Controls.Add(Me.cmdUpdateStationElement)
         Me.GroupBox7.Controls.Add(Me.cmdAddStElement)
         Me.GroupBox7.Location = New System.Drawing.Point(0, 363)
         Me.GroupBox7.Name = "GroupBox7"
@@ -294,7 +294,7 @@ Partial Class ucrMetadataStationElement
         Me.Controls.Add(Me.ucrDatePickerEndDate)
         Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrNavigationStationElement)
-        Me.Controls.Add(Me.urTextHeight)
+        Me.Controls.Add(Me.ucrTextHeight)
         Me.Controls.Add(Me.ucrDataLinkScheduleClass)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrTextboxInstrumentType)
@@ -335,10 +335,10 @@ Partial Class ucrMetadataStationElement
     Friend WithEvents ucrTextboxInstrumentType As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrDataLinkScheduleClass As ucrDataLinkCombobox
-    Friend WithEvents urTextHeight As ucrTextBox
+    Friend WithEvents ucrTextHeight As ucrTextBox
     Friend WithEvents cmdAddStElement As Button
-    Friend WithEvents cmdUpdateStElement As Button
-    Friend WithEvents cmdDeleteStElement As Button
+    Friend WithEvents cmdUpdateStationElement As Button
+    Friend WithEvents cmdDeleteStationElement As Button
     Friend WithEvents cmdViewStElement As Button
     Friend WithEvents cmdClearStationElement As Button
     Friend WithEvents GroupBox7 As GroupBox
