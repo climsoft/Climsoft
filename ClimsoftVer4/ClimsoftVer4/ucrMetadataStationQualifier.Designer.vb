@@ -32,11 +32,11 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxQualifier = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.grpCommand2 = New System.Windows.Forms.GroupBox()
-        Me.cmdClear2 = New System.Windows.Forms.Button()
-        Me.cmdViewInstrument = New System.Windows.Forms.Button()
-        Me.cmdDeleteInstrument = New System.Windows.Forms.Button()
-        Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
-        Me.cmdAddInstrument = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrTextBoxNetworkType = New ClimsoftVer4.ucrTextBox()
         Me.ucrNavigationStationQualifier = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxTimeZone = New ClimsoftVer4.ucrTextBox()
@@ -112,6 +112,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrTextBoxQualifier
         '
+        Me.ucrTextBoxQualifier.FieldName = "qualifier"
         Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(301, 89)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
@@ -122,6 +123,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrStationSelector
         '
+        Me.ucrStationSelector.FieldName = "belongsTo"
         Me.ucrStationSelector.Location = New System.Drawing.Point(301, 126)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
@@ -131,64 +133,65 @@ Partial Class ucrMetadataStationQualifier
         '
         'grpCommand2
         '
-        Me.grpCommand2.Controls.Add(Me.cmdClear2)
-        Me.grpCommand2.Controls.Add(Me.cmdViewInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdDeleteInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdUpdateInstrument)
-        Me.grpCommand2.Controls.Add(Me.cmdAddInstrument)
+        Me.grpCommand2.Controls.Add(Me.btnAddNew)
+        Me.grpCommand2.Controls.Add(Me.btnView)
+        Me.grpCommand2.Controls.Add(Me.btnDelete)
+        Me.grpCommand2.Controls.Add(Me.btnUpdate)
+        Me.grpCommand2.Controls.Add(Me.btnSave)
         Me.grpCommand2.Location = New System.Drawing.Point(3, 335)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(670, 31)
         Me.grpCommand2.TabIndex = 96
         Me.grpCommand2.TabStop = False
         '
-        'cmdClear2
+        'btnAddNew
         '
-        Me.cmdClear2.Location = New System.Drawing.Point(95, 4)
-        Me.cmdClear2.Name = "cmdClear2"
-        Me.cmdClear2.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClear2.TabIndex = 12
-        Me.cmdClear2.Text = "AddNew"
-        Me.cmdClear2.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(95, 4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 12
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewInstrument
+        'btnView
         '
-        Me.cmdViewInstrument.Location = New System.Drawing.Point(583, 6)
-        Me.cmdViewInstrument.Name = "cmdViewInstrument"
-        Me.cmdViewInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewInstrument.TabIndex = 16
-        Me.cmdViewInstrument.Text = "View"
-        Me.cmdViewInstrument.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(583, 6)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.TabIndex = 16
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDeleteInstrument
+        'btnDelete
         '
-        Me.cmdDeleteInstrument.Location = New System.Drawing.Point(461, 5)
-        Me.cmdDeleteInstrument.Name = "cmdDeleteInstrument"
-        Me.cmdDeleteInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteInstrument.TabIndex = 15
-        Me.cmdDeleteInstrument.Text = "Delete"
-        Me.cmdDeleteInstrument.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(461, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.TabIndex = 15
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdateInstrument
+        'btnUpdate
         '
-        Me.cmdUpdateInstrument.Location = New System.Drawing.Point(339, 5)
-        Me.cmdUpdateInstrument.Name = "cmdUpdateInstrument"
-        Me.cmdUpdateInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateInstrument.TabIndex = 14
-        Me.cmdUpdateInstrument.Text = "Update"
-        Me.cmdUpdateInstrument.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(339, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.TabIndex = 14
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdAddInstrument
+        'btnSave
         '
-        Me.cmdAddInstrument.Location = New System.Drawing.Point(217, 5)
-        Me.cmdAddInstrument.Name = "cmdAddInstrument"
-        Me.cmdAddInstrument.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddInstrument.TabIndex = 13
-        Me.cmdAddInstrument.Text = "Save"
-        Me.cmdAddInstrument.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(217, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.TabIndex = 13
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'ucrTextBoxNetworkType
         '
+        Me.ucrTextBoxNetworkType.FieldName = "stationNetworkType"
         Me.ucrTextBoxNetworkType.Location = New System.Drawing.Point(301, 274)
         Me.ucrTextBoxNetworkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxNetworkType.Name = "ucrTextBoxNetworkType"
@@ -207,6 +210,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrTextBoxTimeZone
         '
+        Me.ucrTextBoxTimeZone.FieldName = "stationTimeZone"
         Me.ucrTextBoxTimeZone.Location = New System.Drawing.Point(301, 237)
         Me.ucrTextBoxTimeZone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxTimeZone.Name = "ucrTextBoxTimeZone"
@@ -217,6 +221,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrDatePickerBeginDate
         '
+        Me.ucrDatePickerBeginDate.FieldName = "qualifierBeginDate"
         Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(301, 160)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
         Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(155, 21)
@@ -225,6 +230,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'ucrDatePickerEndDate
         '
+        Me.ucrDatePickerEndDate.FieldName = "qualifierEndDate"
         Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(301, 196)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
         Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(155, 21)
@@ -268,11 +274,11 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents ucrTextBoxQualifier As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents grpCommand2 As GroupBox
-    Friend WithEvents cmdClear2 As Button
-    Friend WithEvents cmdViewInstrument As Button
-    Friend WithEvents cmdDeleteInstrument As Button
-    Friend WithEvents cmdUpdateInstrument As Button
-    Friend WithEvents cmdAddInstrument As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationQualifier As ucrNavigation
     Friend WithEvents ucrTextBoxNetworkType As ucrTextBox
     Friend WithEvents ucrTextBoxTimeZone As ucrTextBox

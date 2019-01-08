@@ -37,12 +37,14 @@ Partial Class ucrMetadataStationElement
         Me.ucrTextboxInstrumentType = New ClimsoftVer4.ucrTextBox()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrDataLinkScheduleClass = New ClimsoftVer4.ucrDataLinkCombobox()
+
         Me.ucrTextHeight = New ClimsoftVer4.ucrTextBox()
-        Me.cmdAddStElement = New System.Windows.Forms.Button()
-        Me.cmdUpdateStationElement = New System.Windows.Forms.Button()
-        Me.cmdDeleteStationElement = New System.Windows.Forms.Button()
-        Me.cmdViewStElement = New System.Windows.Forms.Button()
-        Me.cmdClearStationElement = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.ucrNavigationStationElement = New ClimsoftVer4.ucrNavigation()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
@@ -203,58 +205,58 @@ Partial Class ucrMetadataStationElement
         Me.ucrTextHeight.Tag = "height"
         Me.ucrTextHeight.TextboxValue = ""
         '
-        'cmdAddStElement
+        'btnSave
         '
-        Me.cmdAddStElement.Location = New System.Drawing.Point(137, 11)
-        Me.cmdAddStElement.Name = "cmdAddStElement"
-        Me.cmdAddStElement.Size = New System.Drawing.Size(89, 25)
-        Me.cmdAddStElement.TabIndex = 32
-        Me.cmdAddStElement.Text = "Save"
-        Me.cmdAddStElement.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(137, 11)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(89, 25)
+        Me.btnSave.TabIndex = 32
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'cmdUpdateStationElement
+        'btnUpdate
         '
-        Me.cmdUpdateStationElement.Location = New System.Drawing.Point(253, 10)
-        Me.cmdUpdateStationElement.Name = "cmdUpdateStationElement"
-        Me.cmdUpdateStationElement.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateStationElement.TabIndex = 33
-        Me.cmdUpdateStationElement.Text = "Update"
-        Me.cmdUpdateStationElement.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(253, 10)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.TabIndex = 33
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdDeleteStationElement
+        'btnDelete
         '
-        Me.cmdDeleteStationElement.Location = New System.Drawing.Point(366, 10)
-        Me.cmdDeleteStationElement.Name = "cmdDeleteStationElement"
-        Me.cmdDeleteStationElement.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteStationElement.TabIndex = 34
-        Me.cmdDeleteStationElement.Text = "Delete"
-        Me.cmdDeleteStationElement.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(366, 10)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.TabIndex = 34
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdViewStElement
+        'btnView
         '
-        Me.cmdViewStElement.Location = New System.Drawing.Point(479, 10)
-        Me.cmdViewStElement.Name = "cmdViewStElement"
-        Me.cmdViewStElement.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewStElement.TabIndex = 35
-        Me.cmdViewStElement.Text = "View"
-        Me.cmdViewStElement.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(479, 10)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.TabIndex = 35
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdClearStationElement
+        'btnAddNew
         '
-        Me.cmdClearStationElement.Location = New System.Drawing.Point(22, 11)
-        Me.cmdClearStationElement.Name = "cmdClearStationElement"
-        Me.cmdClearStationElement.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearStationElement.TabIndex = 8
-        Me.cmdClearStationElement.Text = "AddNew"
-        Me.cmdClearStationElement.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(22, 11)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 8
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'GroupBox7
         '
-        Me.GroupBox7.Controls.Add(Me.cmdClearStationElement)
-        Me.GroupBox7.Controls.Add(Me.cmdViewStElement)
-        Me.GroupBox7.Controls.Add(Me.cmdDeleteStationElement)
-        Me.GroupBox7.Controls.Add(Me.cmdUpdateStationElement)
-        Me.GroupBox7.Controls.Add(Me.cmdAddStElement)
+        Me.GroupBox7.Controls.Add(Me.btnAddNew)
+        Me.GroupBox7.Controls.Add(Me.btnView)
+        Me.GroupBox7.Controls.Add(Me.btnDelete)
+        Me.GroupBox7.Controls.Add(Me.btnUpdate)
+        Me.GroupBox7.Controls.Add(Me.btnSave)
         Me.GroupBox7.Location = New System.Drawing.Point(0, 363)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(643, 41)
@@ -335,12 +337,12 @@ Partial Class ucrMetadataStationElement
     Friend WithEvents ucrTextboxInstrumentType As ucrTextBox
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrDataLinkScheduleClass As ucrDataLinkCombobox
-    Friend WithEvents ucrTextHeight As ucrTextBox
-    Friend WithEvents cmdAddStElement As Button
-    Friend WithEvents cmdUpdateStationElement As Button
-    Friend WithEvents cmdDeleteStationElement As Button
-    Friend WithEvents cmdViewStElement As Button
-    Friend WithEvents cmdClearStationElement As Button
+    Friend WithEvents urTextHeight As ucrTextBox
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnAddNew As Button
     Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents ucrNavigationStationElement As ucrNavigation
     Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker

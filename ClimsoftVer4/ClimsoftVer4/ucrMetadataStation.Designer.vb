@@ -63,12 +63,12 @@ Partial Class ucrMetadataStation
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmdImport = New System.Windows.Forms.Button()
-        Me.cmdClear = New System.Windows.Forms.Button()
-        Me.cmdViewStation = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdUpdate = New System.Windows.Forms.Button()
-        Me.cmdAddNew = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.lblStationOperation = New System.Windows.Forms.Label()
         Me.lbldarainage = New System.Windows.Forms.Label()
         Me.lblAdmin = New System.Windows.Forms.Label()
@@ -544,70 +544,70 @@ Partial Class ucrMetadataStation
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel2.Controls.Add(Me.cmdImport)
-        Me.Panel2.Controls.Add(Me.cmdClear)
-        Me.Panel2.Controls.Add(Me.cmdViewStation)
-        Me.Panel2.Controls.Add(Me.cmdDelete)
-        Me.Panel2.Controls.Add(Me.cmdUpdate)
-        Me.Panel2.Controls.Add(Me.cmdAddNew)
+        Me.Panel2.Controls.Add(Me.btnImport)
+        Me.Panel2.Controls.Add(Me.btnAddNew)
+        Me.Panel2.Controls.Add(Me.btnView)
+        Me.Panel2.Controls.Add(Me.btnDelete)
+        Me.Panel2.Controls.Add(Me.btnUpdate)
+        Me.Panel2.Controls.Add(Me.btnSave)
         Me.Panel2.Location = New System.Drawing.Point(3, 360)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
-        'cmdImport
+        'btnImport
         '
-        Me.cmdImport.Location = New System.Drawing.Point(597, 0)
-        Me.cmdImport.Name = "cmdImport"
-        Me.cmdImport.Size = New System.Drawing.Size(64, 27)
-        Me.cmdImport.TabIndex = 20
-        Me.cmdImport.Text = "Import"
-        Me.cmdImport.UseVisualStyleBackColor = True
+        Me.btnImport.Location = New System.Drawing.Point(597, 0)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(64, 27)
+        Me.btnImport.TabIndex = 20
+        Me.btnImport.Text = "Import"
+        Me.btnImport.UseVisualStyleBackColor = True
         '
-        'cmdClear
+        'btnAddNew
         '
-        Me.cmdClear.Location = New System.Drawing.Point(47, 0)
-        Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(64, 27)
-        Me.cmdClear.TabIndex = 15
-        Me.cmdClear.Text = "AddNew"
-        Me.cmdClear.UseVisualStyleBackColor = True
+        Me.btnAddNew.Location = New System.Drawing.Point(47, 0)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(64, 27)
+        Me.btnAddNew.TabIndex = 15
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'cmdViewStation
+        'btnView
         '
-        Me.cmdViewStation.Location = New System.Drawing.Point(487, 0)
-        Me.cmdViewStation.Name = "cmdViewStation"
-        Me.cmdViewStation.Size = New System.Drawing.Size(64, 27)
-        Me.cmdViewStation.TabIndex = 19
-        Me.cmdViewStation.Text = "View"
-        Me.cmdViewStation.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(487, 0)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(64, 27)
+        Me.btnView.TabIndex = 19
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'btnDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(377, 0)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(64, 27)
-        Me.cmdDelete.TabIndex = 18
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(377, 0)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(64, 27)
+        Me.btnDelete.TabIndex = 18
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdUpdate
+        'btnUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(267, 0)
-        Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(64, 27)
-        Me.cmdUpdate.TabIndex = 17
-        Me.cmdUpdate.Text = "Update"
-        Me.cmdUpdate.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(267, 0)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(64, 27)
+        Me.btnUpdate.TabIndex = 17
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdAddNew
+        'btnSave
         '
-        Me.cmdAddNew.Location = New System.Drawing.Point(157, 0)
-        Me.cmdAddNew.Name = "cmdAddNew"
-        Me.cmdAddNew.Size = New System.Drawing.Size(64, 27)
-        Me.cmdAddNew.TabIndex = 17
-        Me.cmdAddNew.Text = "Save"
-        Me.cmdAddNew.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(157, 0)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(64, 27)
+        Me.btnSave.TabIndex = 17
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'lblStationOperation
         '
@@ -793,12 +793,12 @@ Partial Class ucrMetadataStation
     Friend WithEvents lblWMOid As Label
     Friend WithEvents lblSearchStation As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmdImport As Button
-    Friend WithEvents cmdClear As Button
-    Friend WithEvents cmdViewStation As Button
-    Friend WithEvents cmdDelete As Button
-    Friend WithEvents cmdUpdate As Button
-    Friend WithEvents cmdAddNew As Button
+    Friend WithEvents btnImport As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents lblStationOperation As Label
     Friend WithEvents lbldarainage As Label
     Friend WithEvents lblAdmin As Label

@@ -6,13 +6,19 @@
     'Boolean to check if record is updating
     'Set to True by default
     Public bUpdating As Boolean = True
+    Public bPopulating As Boolean = False
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
+            bPopulating = True
+
             MyBase.PopulateControl()
 
-            'TODO. Might not be need anymore
             bUpdating = dtbRecords.Rows.Count > 0
+
+            If Not bUpdating Then
+                dtbRecords.Rows.Add(dtbRecords.NewRow())
+            End If
 
             'set the values to the input controls
             For Each ctr As Control In Me.Controls
@@ -20,6 +26,7 @@
                     DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
                 End If
             Next
+            bPopulating = False
         End If
     End Sub
 
@@ -30,6 +37,7 @@
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
+                AddHandler ucrCtrValueView.evtKeyDown, AddressOf GoToNextChildControl
             End If
         Next
         SetTableNameAndFields(strNewTableName, lstFields)
@@ -39,8 +47,10 @@
         'TODO update the user entered value to the data table
 
         If TypeOf sender Is ucrValueView Then
+            If Not bPopulating Then
+                DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
+            End If
 
-            'DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
 
             ' Dim ucr As ucrValueView = DirectCast(sender, ucrValueView)
             'If dtbRecords.Rows.Count = 1 Then
@@ -58,15 +68,28 @@
         'Do nothing. Overriden to prevent any default action from being taken by the parent
     End Sub
 
-    Public Sub InsertRecord()
-        clsDataDefinition.Save(dtbRecords)
+    Private Sub GoToNextChildControl(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            If TypeOf sender Is ucrValueView Then
+                If DirectCast(sender, ucrValueView).ValidateValue() Then
+                    Me.SelectNextControl(sender, True, True, True, True)
+                End If
+                'this handles the "noise" on  return key down
+                e.SuppressKeyPress = True
+            End If
+        End If
+
     End Sub
 
-    Public Sub UpdateRecord()
-        clsDataDefinition.Save(dtbRecords)
-    End Sub
+    Public Function InsertRecord() As Boolean
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
 
-    Public Sub DeleteRecord()
+    Public Function UpdateRecord() As Boolean
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
+
+    Public Function DeleteRecord() As Boolean
         If dtbRecords.Rows.Count = 1 Then
             dtbRecords.Rows(0).Delete()
         ElseIf dtbRecords.Rows.Count > 1 Then
@@ -76,8 +99,8 @@
         Else
             'TODO?
         End If
-        clsDataDefinition.Save(dtbRecords)
-    End Sub
+        Return clsDataDefinition.Save(dtbRecords)
+    End Function
 
     Public Overridable Function GetFieldValue(strFieldName As String) As Object
         Dim lstTemp As New List(Of Object)

@@ -11,6 +11,8 @@
 
             AddLinkedControlFilters(ucrTextBoxQualifier, ucrTextBoxQualifier.FieldName, "=", strLinkedFieldName:=ucrTextBoxQualifier.FieldName, bForceValuesAsString:=True)
 
+            AddKeyField(ucrTextBoxQualifier.FieldName)
+
             'set up the navigation control
             ucrNavigationStationQualifier.SetTableEntry(Me)
             ucrNavigationStationQualifier.AddKeyControls(ucrTextBoxQualifier)
@@ -21,5 +23,13 @@
             ucrNavigationStationQualifier.PopulateControl()
 
         End If
+    End Sub
+
+    Private Sub cmdUpdateStationQualifier_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        UpdateRecord()
+    End Sub
+
+    Private Sub cmdDeleteStationQualifier_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        DeleteRecord()
     End Sub
 End Class

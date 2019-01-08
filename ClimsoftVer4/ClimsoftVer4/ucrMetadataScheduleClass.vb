@@ -11,6 +11,8 @@
 
             AddLinkedControlFilters(ucrTextBoxClass, ucrTextBoxClass.FieldName, "=", strLinkedFieldName:=ucrTextBoxClass.FieldName, bForceValuesAsString:=True)
 
+            AddKeyField(ucrTextBoxClass.FieldName)
+
             'set up the navigation control
             ucrNavigationScheduleClass.SetTableEntry(Me)
             ucrNavigationScheduleClass.AddKeyControls(ucrTextBoxClass)
@@ -21,5 +23,13 @@
             ucrNavigationScheduleClass.PopulateControl()
 
         End If
+    End Sub
+
+    Private Sub cmdUpdateScheduleClass_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        UpdateRecord()
+    End Sub
+
+    Private Sub cmdDeleteScheduleClass_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        DeleteRecord()
     End Sub
 End Class
