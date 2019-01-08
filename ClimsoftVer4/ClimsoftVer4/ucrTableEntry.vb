@@ -11,31 +11,18 @@
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-
             bUpdating = dtbRecords.Rows.Count > 0
 
             If Not bUpdating Then
                 dtbRecords.Rows.Add(dtbRecords.NewRow())
             End If
 
-            'TODO What should happen for new records
-
-            If bUpdating Then
-                'set the values to the input controls
-                For Each ctr As Control In Me.Controls
-                    If TypeOf ctr Is ucrValueView Then
-                        DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
-                    End If
-                Next
-            Else
-                'set the values to the input controls
-                For Each ctr As Control In Me.Controls
-                    If TypeOf ctr Is ucrValueView Then
-                        DirectCast(ctr, ucrValueView).SetValueToDataTable(dtbRecords)
-                    End If
-                Next
-            End If
-
+            'set the values to the input controls
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueView Then
+                    DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
+                End If
+            Next
 
         End If
     End Sub
@@ -47,6 +34,7 @@
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
+                AddHandler ucrCtrValueView.evtKeyDown, AddressOf GoToNextChildControl
             End If
         Next
         SetTableNameAndFields(strNewTableName, lstFields)
@@ -73,6 +61,19 @@
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         'Do nothing. Overriden to prevent any default action from being taken by the parent
+    End Sub
+
+    Private Sub GoToNextChildControl(sender As Object, e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            If TypeOf sender Is ucrValueView Then
+                If DirectCast(sender, ucrValueView).ValidateValue() Then
+                    Me.SelectNextControl(sender, True, True, True, True)
+                End If
+                'this handles the "noise" on  return key down
+                e.SuppressKeyPress = True
+            End If
+        End If
+
     End Sub
 
     Public Function InsertRecord() As Boolean

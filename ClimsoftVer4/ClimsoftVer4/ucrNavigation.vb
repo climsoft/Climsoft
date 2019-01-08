@@ -12,6 +12,15 @@ Public Class ucrNavigation
     Private dctKeyControls As New Dictionary(Of String, ucrValueView)
     Private ucrLinkedTableEntry As ucrTableEntry
     Public bSuppressKeyControlChanges As Boolean = False
+    'Public bNewRecordMode As Boolean = False
+
+    Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            txtRecNum.ReadOnly = True
+            txtRecNum.TextAlign = HorizontalAlignment.Center
+            bFirstLoad = False
+        End If
+    End Sub
 
     Public Overrides Sub PopulateControl()
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
@@ -74,6 +83,16 @@ Public Class ucrNavigation
 
     End Sub
 
+    ''' <summary>
+    ''' Enables or disables Navigation buttons 
+    ''' </summary>
+    Private Sub EnableNavigationButtons(bEnableState As Boolean)
+        btnMoveFirst.Enabled = bEnableState
+        btnMoveLast.Enabled = bEnableState
+        btnMoveNext.Enabled = bEnableState
+        btnMovePrevious.Enabled = bEnableState
+    End Sub
+
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         MoveFirst()
     End Sub
@@ -132,6 +151,39 @@ Public Class ucrNavigation
         UpdateKeyControls()
     End Sub
 
+
+    Public Sub GoToNewRecord()
+        'We could repopulate entirely or add a the last added record from the datatabase
+        PopulateControl()
+        MoveLast()
+
+
+        'ALTERNATIVELY WE COULD JUST UPDATE THE DATATABLE WITH VALUES
+        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
+        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
+        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
+        'RECORD COUNT ON SAVE
+    End Sub
+
+    Public Sub RemoveRecord()
+        PopulateControl()
+
+        'ALTERNATIVELY WE COULD JUST REMOVE RECORD IN THE DATATABLE WITH VALUES
+        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
+        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
+        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
+        'RECORD COUNT ON DELETE
+    End Sub
+
+    ''' <summary>
+    ''' Sets the column to be used in sorting. 
+    ''' The passed column will be sorted in ascending order
+    ''' </summary>
+    ''' <param name="strNewSortCol"></param>
+    Public Sub SetSortBy(strNewSortCol As String)
+        strSortCol = strNewSortCol
+    End Sub
+
     Public Sub SetTableEntry(ucrNewLinkedTableEntry As ucrTableEntry)
         ucrLinkedTableEntry = ucrNewLinkedTableEntry
         SetTableName(ucrLinkedTableEntry.GetTableName())
@@ -162,7 +214,7 @@ Public Class ucrNavigation
     End Sub
 
     Private Sub KeyControls_evtValueChanged()
-        If Not bSuppressKeyControlChanges Then
+        If Not bSuppressKeyControlChanges AndAlso iCurrRow <> -1 Then
             UpdateNavigationByKeyControls()
         End If
     End Sub
@@ -245,6 +297,7 @@ Public Class ucrNavigation
     End Sub
 
 
+    'TODO. Delete this subroutine
     'Public Sub UpdateNavigationByKeyControlsOLD()
     '    Dim dctFieldvalue As New Dictionary(Of String, String)
     '    Dim bRowExists As Boolean
@@ -283,53 +336,22 @@ Public Class ucrNavigation
     '    'UpdateKeyControls()
     'End Sub
 
-    Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            txtRecNum.ReadOnly = True
-            txtRecNum.TextAlign = HorizontalAlignment.Center
-            bFirstLoad = False
+    Public Sub NewRecord()
+        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
+            bSuppressKeyControlChanges = True  'switch on suppressing of value changed events from key controls
+            For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+                kvp.Value.Clear()
+            Next
+
+            'Update the Table entry
+            updateLinkedTableEntry()
+
+            iCurrRow = -1 'new record
+            displayRecordNumber()
+
+            bSuppressKeyControlChanges = False  'switch off suppressing of value changed events from key controls
+
         End If
-    End Sub
-
-    ''' <summary>
-    ''' Enables or disables Navigation buttons 
-    ''' </summary>
-    Private Sub EnableNavigationButtons(bEnableState As Boolean)
-        btnMoveFirst.Enabled = bEnableState
-        btnMoveLast.Enabled = bEnableState
-        btnMoveNext.Enabled = bEnableState
-        btnMovePrevious.Enabled = bEnableState
-    End Sub
-
-    Public Sub GoToNewRecord()
-        'We could repopulate entirely or add a the last added record from the datatabase
-        PopulateControl()
-        MoveLast()
-
-        'ALTERNATIVELY WE COULD JUST UPDATE THE DATATABLE WITH VALUES
-        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
-        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
-        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
-        'RECORD COUNT ON SAVE
-    End Sub
-
-    Public Sub RemoveRecord()
-        PopulateControl()
-
-        'ALTERNATIVELY WE COULD JUST REMOVE RECORD IN THE DATATABLE WITH VALUES
-        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
-        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
-        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
-        'RECORD COUNT ON DELETE
-    End Sub
-
-    ''' <summary>
-    ''' Sets the column to be used in sorting. 
-    ''' The passed column will be sorted in ascending order
-    ''' </summary>
-    ''' <param name="strNewSortCol"></param>
-    Public Sub SetSortBy(strNewSortCol As String)
-        strSortCol = strNewSortCol
     End Sub
 
     Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
