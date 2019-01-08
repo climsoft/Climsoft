@@ -36,6 +36,7 @@ Partial Class ucrMetadataScheduleClass
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.ucrNavigationScheduleClass = New ClimsoftVer4.ucrNavigation()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -44,7 +45,7 @@ Partial Class ucrMetadataScheduleClass
         '
         Me.lblScheduleClass.AutoSize = True
         Me.lblScheduleClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblScheduleClass.Location = New System.Drawing.Point(207, 20)
+        Me.lblScheduleClass.Location = New System.Drawing.Point(257, 20)
         Me.lblScheduleClass.Name = "lblScheduleClass"
         Me.lblScheduleClass.Size = New System.Drawing.Size(116, 16)
         Me.lblScheduleClass.TabIndex = 15
@@ -53,7 +54,7 @@ Partial Class ucrMetadataScheduleClass
         'lblStationID
         '
         Me.lblStationID.AutoSize = True
-        Me.lblStationID.Location = New System.Drawing.Point(156, 133)
+        Me.lblStationID.Location = New System.Drawing.Point(206, 133)
         Me.lblStationID.Name = "lblStationID"
         Me.lblStationID.Size = New System.Drawing.Size(54, 13)
         Me.lblStationID.TabIndex = 17
@@ -62,7 +63,7 @@ Partial Class ucrMetadataScheduleClass
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(156, 176)
+        Me.lblDescription.Location = New System.Drawing.Point(206, 176)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(60, 13)
         Me.lblDescription.TabIndex = 18
@@ -71,7 +72,7 @@ Partial Class ucrMetadataScheduleClass
         'lblClass
         '
         Me.lblClass.AutoSize = True
-        Me.lblClass.Location = New System.Drawing.Point(156, 96)
+        Me.lblClass.Location = New System.Drawing.Point(206, 96)
         Me.lblClass.Name = "lblClass"
         Me.lblClass.Size = New System.Drawing.Size(32, 13)
         Me.lblClass.TabIndex = 16
@@ -80,7 +81,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrTextBoxClass
         '
         Me.ucrTextBoxClass.FieldName = "scheduleClass"
-        Me.ucrTextBoxClass.Location = New System.Drawing.Point(220, 96)
+        Me.ucrTextBoxClass.Location = New System.Drawing.Point(270, 96)
         Me.ucrTextBoxClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxClass.Name = "ucrTextBoxClass"
         Me.ucrTextBoxClass.Size = New System.Drawing.Size(154, 20)
@@ -91,7 +92,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "refersTo"
-        Me.ucrStationSelector.Location = New System.Drawing.Point(220, 133)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(270, 133)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(154, 24)
@@ -101,7 +102,7 @@ Partial Class ucrMetadataScheduleClass
         'ucrTextBoxDescription
         '
         Me.ucrTextBoxDescription.FieldName = "description"
-        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(220, 176)
+        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(270, 176)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
         Me.ucrTextBoxDescription.Size = New System.Drawing.Size(154, 20)
@@ -111,6 +112,7 @@ Partial Class ucrMetadataScheduleClass
         '
         'GroupBox13
         '
+        Me.GroupBox13.Controls.Add(Me.btnClear)
         Me.GroupBox13.Controls.Add(Me.btnView)
         Me.GroupBox13.Controls.Add(Me.btnDelete)
         Me.GroupBox13.Controls.Add(Me.btnUpdate)
@@ -118,49 +120,49 @@ Partial Class ucrMetadataScheduleClass
         Me.GroupBox13.Controls.Add(Me.btnAddNew)
         Me.GroupBox13.Location = New System.Drawing.Point(6, 277)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
+        Me.GroupBox13.Size = New System.Drawing.Size(614, 34)
         Me.GroupBox13.TabIndex = 22
         Me.GroupBox13.TabStop = False
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(420, 6)
+        Me.btnView.Location = New System.Drawing.Point(510, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.Size = New System.Drawing.Size(81, 27)
         Me.btnView.TabIndex = 8
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(318, 6)
+        Me.btnDelete.Location = New System.Drawing.Point(314, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(81, 27)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(216, 6)
+        Me.btnUpdate.Location = New System.Drawing.Point(216, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 27)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(114, 7)
+        Me.btnSave.Location = New System.Drawing.Point(118, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.Size = New System.Drawing.Size(81, 27)
         Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 5)
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 5)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
         Me.btnAddNew.TabIndex = 4
@@ -169,11 +171,20 @@ Partial Class ucrMetadataScheduleClass
         '
         'ucrNavigationScheduleClass
         '
-        Me.ucrNavigationScheduleClass.Location = New System.Drawing.Point(95, 319)
+        Me.ucrNavigationScheduleClass.Location = New System.Drawing.Point(147, 319)
         Me.ucrNavigationScheduleClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationScheduleClass.Name = "ucrNavigationScheduleClass"
         Me.ucrNavigationScheduleClass.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationScheduleClass.TabIndex = 96
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(412, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(81, 27)
+        Me.btnClear.TabIndex = 18
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataScheduleClass
         '
@@ -189,7 +200,7 @@ Partial Class ucrMetadataScheduleClass
         Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.lblClass)
         Me.Name = "ucrMetadataScheduleClass"
-        Me.Size = New System.Drawing.Size(530, 349)
+        Me.Size = New System.Drawing.Size(630, 349)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -211,4 +222,5 @@ Partial Class ucrMetadataScheduleClass
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents ucrNavigationScheduleClass As ucrNavigation
+    Friend WithEvents btnClear As Button
 End Class

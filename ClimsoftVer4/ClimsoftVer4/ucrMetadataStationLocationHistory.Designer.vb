@@ -50,6 +50,7 @@ Partial Class ucrMetadataStationLocationHistory
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
@@ -261,6 +262,7 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'grpCommand2
         '
+        Me.grpCommand2.Controls.Add(Me.btnClear)
         Me.grpCommand2.Controls.Add(Me.btnAddNew)
         Me.grpCommand2.Controls.Add(Me.btnView)
         Me.grpCommand2.Controls.Add(Me.btnDelete)
@@ -274,45 +276,45 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(15, 4)
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 4)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 12
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(503, 6)
+        Me.btnView.Location = New System.Drawing.Point(505, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 16
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(381, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(311, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 15
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(259, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(214, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 14
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(137, 5)
+        Me.btnSave.Location = New System.Drawing.Point(117, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 13
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -324,6 +326,15 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
         Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationStationLocationHistory.TabIndex = 113
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(408, 6)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 18
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataStationLocationHistory
         '
@@ -390,4 +401,5 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
+    Friend WithEvents btnClear As Button
 End Class

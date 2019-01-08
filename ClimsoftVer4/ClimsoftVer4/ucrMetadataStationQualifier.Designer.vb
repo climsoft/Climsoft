@@ -42,6 +42,7 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrTextBoxTimeZone = New ClimsoftVer4.ucrTextBox()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
@@ -133,6 +134,7 @@ Partial Class ucrMetadataStationQualifier
         '
         'grpCommand2
         '
+        Me.grpCommand2.Controls.Add(Me.btnClear)
         Me.grpCommand2.Controls.Add(Me.btnAddNew)
         Me.grpCommand2.Controls.Add(Me.btnView)
         Me.grpCommand2.Controls.Add(Me.btnDelete)
@@ -146,45 +148,45 @@ Partial Class ucrMetadataStationQualifier
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(95, 4)
+        Me.btnAddNew.Location = New System.Drawing.Point(18, 4)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 12
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(583, 6)
+        Me.btnView.Location = New System.Drawing.Point(578, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 16
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(461, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(354, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 15
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(339, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(242, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 14
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(217, 5)
+        Me.btnSave.Location = New System.Drawing.Point(130, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 13
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -237,6 +239,15 @@ Partial Class ucrMetadataStationQualifier
         Me.ucrDatePickerEndDate.TabIndex = 99
         Me.ucrDatePickerEndDate.Tag = "qualifierEndDate"
         '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(466, 6)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 18
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
         'ucrMetadataStationQualifier
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -284,4 +295,5 @@ Partial Class ucrMetadataStationQualifier
     Friend WithEvents ucrTextBoxTimeZone As ucrTextBox
     Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
     Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
+    Friend WithEvents btnClear As Button
 End Class

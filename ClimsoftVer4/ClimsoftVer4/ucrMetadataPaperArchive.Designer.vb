@@ -34,6 +34,7 @@ Partial Class ucrMetadataPaperArchive
         Me.ucrNavigationPaperArchive = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxFormId = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxDefinition = New ClimsoftVer4.ucrTextBox()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -41,7 +42,7 @@ Partial Class ucrMetadataPaperArchive
         'lbldescri
         '
         Me.lbldescri.AutoSize = True
-        Me.lbldescri.Location = New System.Drawing.Point(136, 143)
+        Me.lbldescri.Location = New System.Drawing.Point(202, 143)
         Me.lbldescri.Name = "lbldescri"
         Me.lbldescri.Size = New System.Drawing.Size(60, 13)
         Me.lbldescri.TabIndex = 15
@@ -50,7 +51,7 @@ Partial Class ucrMetadataPaperArchive
         'lblFormId
         '
         Me.lblFormId.AutoSize = True
-        Me.lblFormId.Location = New System.Drawing.Point(136, 102)
+        Me.lblFormId.Location = New System.Drawing.Point(202, 102)
         Me.lblFormId.Name = "lblFormId"
         Me.lblFormId.Size = New System.Drawing.Size(44, 13)
         Me.lblFormId.TabIndex = 14
@@ -60,7 +61,7 @@ Partial Class ucrMetadataPaperArchive
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(158, 17)
+        Me.Label7.Location = New System.Drawing.Point(224, 17)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(175, 16)
         Me.Label7.TabIndex = 16
@@ -68,6 +69,7 @@ Partial Class ucrMetadataPaperArchive
         '
         'GroupBox13
         '
+        Me.GroupBox13.Controls.Add(Me.btnClear)
         Me.GroupBox13.Controls.Add(Me.btnView)
         Me.GroupBox13.Controls.Add(Me.btnDelete)
         Me.GroupBox13.Controls.Add(Me.btnUpdate)
@@ -75,49 +77,49 @@ Partial Class ucrMetadataPaperArchive
         Me.GroupBox13.Controls.Add(Me.btnAddNew)
         Me.GroupBox13.Location = New System.Drawing.Point(6, 241)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
+        Me.GroupBox13.Size = New System.Drawing.Size(606, 34)
         Me.GroupBox13.TabIndex = 106
         Me.GroupBox13.TabStop = False
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(420, 6)
+        Me.btnView.Location = New System.Drawing.Point(498, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.Size = New System.Drawing.Size(81, 27)
         Me.btnView.TabIndex = 8
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(318, 6)
+        Me.btnDelete.Location = New System.Drawing.Point(308, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(81, 27)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(216, 6)
+        Me.btnUpdate.Location = New System.Drawing.Point(213, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 27)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(114, 7)
+        Me.btnSave.Location = New System.Drawing.Point(118, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.Size = New System.Drawing.Size(81, 27)
         Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 5)
+        Me.btnAddNew.Location = New System.Drawing.Point(23, 5)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
         Me.btnAddNew.TabIndex = 4
@@ -126,7 +128,7 @@ Partial Class ucrMetadataPaperArchive
         '
         'ucrNavigationPaperArchive
         '
-        Me.ucrNavigationPaperArchive.Location = New System.Drawing.Point(97, 286)
+        Me.ucrNavigationPaperArchive.Location = New System.Drawing.Point(140, 286)
         Me.ucrNavigationPaperArchive.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationPaperArchive.Name = "ucrNavigationPaperArchive"
         Me.ucrNavigationPaperArchive.Size = New System.Drawing.Size(336, 25)
@@ -135,7 +137,7 @@ Partial Class ucrMetadataPaperArchive
         'ucrTextBoxFormId
         '
         Me.ucrTextBoxFormId.FieldName = "formId"
-        Me.ucrTextBoxFormId.Location = New System.Drawing.Point(212, 99)
+        Me.ucrTextBoxFormId.Location = New System.Drawing.Point(278, 99)
         Me.ucrTextBoxFormId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFormId.Name = "ucrTextBoxFormId"
         Me.ucrTextBoxFormId.Size = New System.Drawing.Size(136, 20)
@@ -146,13 +148,22 @@ Partial Class ucrMetadataPaperArchive
         'ucrTextBoxDefinition
         '
         Me.ucrTextBoxDefinition.FieldName = "description"
-        Me.ucrTextBoxDefinition.Location = New System.Drawing.Point(212, 141)
+        Me.ucrTextBoxDefinition.Location = New System.Drawing.Point(278, 141)
         Me.ucrTextBoxDefinition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDefinition.Name = "ucrTextBoxDefinition"
         Me.ucrTextBoxDefinition.Size = New System.Drawing.Size(136, 20)
         Me.ucrTextBoxDefinition.TabIndex = 108
         Me.ucrTextBoxDefinition.Tag = "description"
         Me.ucrTextBoxDefinition.TextboxValue = ""
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(403, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(81, 27)
+        Me.btnClear.TabIndex = 18
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataPaperArchive
         '
@@ -166,7 +177,7 @@ Partial Class ucrMetadataPaperArchive
         Me.Controls.Add(Me.lblFormId)
         Me.Controls.Add(Me.Label7)
         Me.Name = "ucrMetadataPaperArchive"
-        Me.Size = New System.Drawing.Size(531, 316)
+        Me.Size = New System.Drawing.Size(617, 316)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -185,4 +196,5 @@ Partial Class ucrMetadataPaperArchive
     Friend WithEvents ucrNavigationPaperArchive As ucrNavigation
     Friend WithEvents ucrTextBoxFormId As ucrTextBox
     Friend WithEvents ucrTextBoxDefinition As ucrTextBox
+    Friend WithEvents btnClear As Button
 End Class

@@ -51,6 +51,7 @@ Partial Class ucrMetadataElement
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.UcrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -271,58 +272,59 @@ Partial Class ucrMetadataElement
         '
         'GroupBox13
         '
+        Me.GroupBox13.Controls.Add(Me.btnClear)
         Me.GroupBox13.Controls.Add(Me.btnView)
         Me.GroupBox13.Controls.Add(Me.btnDelete)
         Me.GroupBox13.Controls.Add(Me.btnUpdate)
         Me.GroupBox13.Controls.Add(Me.btnSave)
         Me.GroupBox13.Controls.Add(Me.btnAddNew)
-        Me.GroupBox13.Location = New System.Drawing.Point(79, 332)
+        Me.GroupBox13.Location = New System.Drawing.Point(17, 332)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
+        Me.GroupBox13.Size = New System.Drawing.Size(581, 34)
         Me.GroupBox13.TabIndex = 104
         Me.GroupBox13.TabStop = False
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(420, 6)
+        Me.btnView.Location = New System.Drawing.Point(485, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(81, 25)
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 8
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(318, 6)
+        Me.btnDelete.Location = New System.Drawing.Point(299, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(216, 6)
+        Me.btnUpdate.Location = New System.Drawing.Point(206, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(81, 25)
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
         Me.btnUpdate.TabIndex = 6
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(114, 7)
+        Me.btnSave.Location = New System.Drawing.Point(113, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 25)
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 5)
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 5)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
         Me.btnAddNew.TabIndex = 4
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -336,6 +338,15 @@ Partial Class ucrMetadataElement
         Me.UcrDataLinkType.Size = New System.Drawing.Size(178, 21)
         Me.UcrDataLinkType.TabIndex = 105
         Me.UcrDataLinkType.Tag = "elementtype"
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(392, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 18
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'ucrMetadataElement
         '
@@ -403,4 +414,5 @@ Partial Class ucrMetadataElement
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents UcrDataLinkType As ucrDataLinkCombobox
+    Friend WithEvents btnClear As Button
 End Class
