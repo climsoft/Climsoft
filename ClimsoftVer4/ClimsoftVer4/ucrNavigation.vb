@@ -154,6 +154,7 @@ Public Class ucrNavigation
             End If
         Else
             dctKeyControls.Add(strFieldName, ucrKeyControl)
+            AddField(strFieldName)
         End If
 
         AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged
@@ -171,7 +172,7 @@ Public Class ucrNavigation
     ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
-            bSuppressKeyControlChanges = True
+            bSuppressKeyControlChanges = True  'switch on suppressing of value changed events from key controls
             If iMaxRows > 0 Then
                 For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                     'Suppress events being raised while changing value of each key control
@@ -195,15 +196,11 @@ Public Class ucrNavigation
                 Next
             End If
 
-            'TODO
+
             'Update the Table entry
-
-            'A key control eventvalue changed should always be raised regardless of whether iMaxRows > 0 or not
-            ' All key controls are linked to the same controls so can just trigger
-            ' events for one control after all updated
-
             updateLinkedTableEntry()
-            bSuppressKeyControlChanges = False
+
+            bSuppressKeyControlChanges = False  'switch off suppressing of value changed events from key controls
         End If
     End Sub
 

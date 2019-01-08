@@ -1,24 +1,25 @@
 ﻿Public Class ucrMetadataPaperArchive
-
-    Private strformId As String = "formId"
-
-    Protected Overrides Sub ucrTableEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrMetadataInstrument_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            strTableName = "paperarchivedefinition"
+            'SetUpTableEntry 
+            SetUpTableEntry("paperarchive")
 
-            'ucrTableEntry_Load fills in the lstFields
-            MyBase.ucrTableEntry_Load(sender, e)
+            ucrTextBoxFormId.SetTableNameAndField("obselement", "elementId")
+            ucrTextBoxFormId.PopulateControl()
+            ucrTextBoxFormId.SetValue("elementId")
+            ucrTextBoxFormId.bValidate = False
 
-            AddLinkedControlFilters(ucrTextBoxFormId, strformId, "=", strLinkedFieldName:=strformId, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrTextBoxFormId, ucrTextBoxFormId.FieldName(), "=", strLinkedFieldName:=ucrTextBoxFormId.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control
-            ucrNavigationPaperArchive.SetTableNameAndFields(strTableName, (New List(Of String)({strformId})))
-            ucrNavigationPaperArchive.SetKeyControls(strformId, ucrTextBoxFormId)
+            ucrNavigationPaperArchive.SetTableEntry(Me)
+            ucrNavigationPaperArchive.AddKeyControls(ucrTextBoxFormId)
 
             bFirstLoad = False
 
             'populate the values
             ucrNavigationPaperArchive.PopulateControl()
+
         End If
     End Sub
 End Class

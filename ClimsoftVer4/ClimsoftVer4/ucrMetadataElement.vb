@@ -1,23 +1,26 @@
 ﻿Public Class ucrMetadataElement
-    Private strelementId As String = "elementid"
 
-    Protected Overrides Sub ucrTableEntry_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrMetadataElement_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            strTableName = "obselement"
+            'SetUpTableEntry 
+            SetUpTableEntry("obselement")
 
-            'ucrTableEntry_Load fills in the lstFields
-            MyBase.ucrTableEntry_Load(sender, e)
+            ucrDataLinkID.SetTableNameAndField("obselement", "elementId")
+            ucrDataLinkID.PopulateControl()
+            ucrDataLinkID.SetDisplayAndValueMember("elementId")
+            ucrDataLinkID.bValidate = False
 
-            AddLinkedControlFilters(ucrDataLinkID, strelementId, "=", strLinkedFieldName:=strelementId, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDataLinkID, ucrDataLinkID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkID.FieldName(), bForceValuesAsString:=True)
 
             'set up the navigation control
-            ucrNavigationElement.SetTableNameAndFields(strTableName, (New List(Of String)({strelementId})))
-            ucrNavigationElement.SetKeyControls(strelementId, ucrDataLinkID)
+            ucrNavigationElement.SetTableEntry(Me)
+            ucrNavigationElement.AddKeyControls(ucrDataLinkID)
 
             bFirstLoad = False
 
             'populate the values
             ucrNavigationElement.PopulateControl()
+
         End If
     End Sub
 End Class
