@@ -23,7 +23,6 @@ Partial Class ucrMetadataPhysicalFeature
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.cmdOpenFile = New System.Windows.Forms.Button()
-        Me.lblClassDescription = New System.Windows.Forms.Label()
         Me.lblFeatureImageFile = New System.Windows.Forms.Label()
         Me.lblFeaturePicture = New System.Windows.Forms.Label()
         Me.txtFeaturePicture = New System.Windows.Forms.PictureBox()
@@ -44,7 +43,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
         Me.ucrTextBoxFeatureDescription = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxFeatureClass = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxClassDescription = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxFeatureImageFile = New ClimsoftVer4.ucrTextBox()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
@@ -61,15 +59,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.cmdOpenFile.TabIndex = 15
         Me.cmdOpenFile.Text = "Open"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
-        '
-        'lblClassDescription
-        '
-        Me.lblClassDescription.AutoSize = True
-        Me.lblClassDescription.Location = New System.Drawing.Point(39, 273)
-        Me.lblClassDescription.Name = "lblClassDescription"
-        Me.lblClassDescription.Size = New System.Drawing.Size(88, 13)
-        Me.lblClassDescription.TabIndex = 11
-        Me.lblClassDescription.Text = "Class Description"
         '
         'lblFeatureImageFile
         '
@@ -260,23 +249,14 @@ Partial Class ucrMetadataPhysicalFeature
         '
         'ucrTextBoxFeatureClass
         '
-        Me.ucrTextBoxFeatureClass.FieldName = Nothing
+        Me.ucrTextBoxFeatureClass.FieldName = "classifiedInto"
         Me.ucrTextBoxFeatureClass.Location = New System.Drawing.Point(141, 234)
         Me.ucrTextBoxFeatureClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFeatureClass.Name = "ucrTextBoxFeatureClass"
         Me.ucrTextBoxFeatureClass.Size = New System.Drawing.Size(154, 20)
         Me.ucrTextBoxFeatureClass.TabIndex = 10
+        Me.ucrTextBoxFeatureClass.Tag = "classifiedInto"
         Me.ucrTextBoxFeatureClass.TextboxValue = ""
-        '
-        'ucrTextBoxClassDescription
-        '
-        Me.ucrTextBoxClassDescription.FieldName = Nothing
-        Me.ucrTextBoxClassDescription.Location = New System.Drawing.Point(141, 264)
-        Me.ucrTextBoxClassDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxClassDescription.Name = "ucrTextBoxClassDescription"
-        Me.ucrTextBoxClassDescription.Size = New System.Drawing.Size(154, 20)
-        Me.ucrTextBoxClassDescription.TabIndex = 12
-        Me.ucrTextBoxClassDescription.TextboxValue = ""
         '
         'ucrTextBoxFeatureImageFile
         '
@@ -314,7 +294,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Controls.Add(Me.ucrDatePickerEndDate)
         Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrTextBoxFeatureImageFile)
-        Me.Controls.Add(Me.ucrTextBoxClassDescription)
         Me.Controls.Add(Me.ucrTextBoxFeatureClass)
         Me.Controls.Add(Me.ucrTextBoxFeatureDescription)
         Me.Controls.Add(Me.ucrStationSelector)
@@ -322,7 +301,6 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Controls.Add(Me.ucrNavigationPhysicalFeature)
         Me.Controls.Add(Me.lblPhysicalFeature)
         Me.Controls.Add(Me.cmdOpenFile)
-        Me.Controls.Add(Me.lblClassDescription)
         Me.Controls.Add(Me.lblFeatureImageFile)
         Me.Controls.Add(Me.lblFeaturePicture)
         Me.Controls.Add(Me.txtFeaturePicture)
@@ -342,7 +320,6 @@ Partial Class ucrMetadataPhysicalFeature
     End Sub
 
     Friend WithEvents cmdOpenFile As Button
-    Friend WithEvents lblClassDescription As Label
     Friend WithEvents lblFeatureImageFile As Label
     Friend WithEvents lblFeaturePicture As Label
     Friend WithEvents txtFeaturePicture As PictureBox
@@ -362,7 +339,6 @@ Partial Class ucrMetadataPhysicalFeature
     Friend WithEvents ucrStationSelector As ucrStationSelector
     Friend WithEvents ucrTextBoxFeatureDescription As ucrTextBox
     Friend WithEvents ucrTextBoxFeatureClass As ucrTextBox
-    Friend WithEvents ucrTextBoxClassDescription As ucrTextBox
     Friend WithEvents ucrTextBoxFeatureImageFile As ucrTextBox
     Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
     Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
