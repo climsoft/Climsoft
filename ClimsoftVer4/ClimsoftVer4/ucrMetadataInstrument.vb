@@ -32,12 +32,34 @@
         End If
     End Sub
 
-    Private Sub cmdAddNew_Click(sender As Object, e As EventArgs) Handles cmdAddNew.Click
+
+    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
+        Dim img, fl As String
+
+        fl = ""
+        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        OpenFileDialog.ShowDialog()
+        img = OpenFileDialog.FileName
+
+        For i = 1 To Len(img)
+            If Strings.Mid(img, i, 1) = "\" Then
+                fl = fl & "/"
+            Else
+                fl = fl & Strings.Mid(img, i, 1)
+            End If
+        Next
+
+        'MsgBox(fl)
+        ucrTextBoxImageFile.Text = fl
+        ucrTextBoxImageFile.Refresh()
+
+    End Sub
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationInstrument.NewRecord()
         SaveEnable()
     End Sub
 
-    Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             If Not ValidateValues() Then
                 Exit Sub
@@ -56,7 +78,7 @@
         End Try
     End Sub
 
-    Private Sub cmdUpdateInstrument_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If UpdateRecord() Then
                 MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -65,7 +87,7 @@
         End If
     End Sub
 
-    Private Sub cmdDeleteInstrument_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
             If Not ValidateValues() Then
                 Exit Sub
@@ -84,7 +106,7 @@
 
     End Sub
 
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         'Move to the first record of datatable
         ucrNavigationInstrument.MoveFirst()
         'Enable appropriate base buttons
@@ -99,24 +121,24 @@
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
     ''' </summary>
     Private Sub SaveEnable()
-        cmdAddNew.Enabled = True
-        cmdSave.Enabled = False
-        cmdClear.Enabled = False
-        cmdDelete.Enabled = False
-        cmdUpdate.Enabled = False
+        btnAddNew.Enabled = True
+        btnSave.Enabled = False
+        btnClear.Enabled = False
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
 
         If ucrNavigationInstrument.iCurrRow = -1 Then
-            cmdAddNew.Enabled = False
-            cmdClear.Enabled = True
-            cmdDelete.Enabled = False
-            cmdUpdate.Enabled = False
-            cmdSave.Enabled = True
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnSave.Enabled = True
         ElseIf ucrNavigationInstrument.iMaxRows = 0 Then
-            cmdAddNew.Enabled = False
-            cmdSave.Enabled = True
+            btnAddNew.Enabled = False
+            btnSave.Enabled = True
         ElseIf ucrNavigationInstrument.iMaxRows > 0 Then
-            cmdDelete.Enabled = True
-            cmdUpdate.Enabled = True
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
         End If
     End Sub
 
