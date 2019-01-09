@@ -22,7 +22,7 @@ Partial Class ucrMetadataPhysicalFeature
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cmdOpenFile = New System.Windows.Forms.Button()
+        Me.btnOpen = New System.Windows.Forms.Button()
         Me.lblFeatureImageFile = New System.Windows.Forms.Label()
         Me.lblFeaturePicture = New System.Windows.Forms.Label()
         Me.txtFeaturePicture = New System.Windows.Forms.PictureBox()
@@ -51,14 +51,14 @@ Partial Class ucrMetadataPhysicalFeature
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
-        'cmdOpenFile
+        'btnOpen
         '
-        Me.cmdOpenFile.Location = New System.Drawing.Point(326, 295)
-        Me.cmdOpenFile.Name = "cmdOpenFile"
-        Me.cmdOpenFile.Size = New System.Drawing.Size(49, 27)
-        Me.cmdOpenFile.TabIndex = 15
-        Me.cmdOpenFile.Text = "Open"
-        Me.cmdOpenFile.UseVisualStyleBackColor = True
+        Me.btnOpen.Location = New System.Drawing.Point(326, 295)
+        Me.btnOpen.Name = "btnOpen"
+        Me.btnOpen.Size = New System.Drawing.Size(49, 27)
+        Me.btnOpen.TabIndex = 15
+        Me.btnOpen.Text = "Open"
+        Me.btnOpen.UseVisualStyleBackColor = True
         '
         'lblFeatureImageFile
         '
@@ -300,7 +300,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPhysicalFeature)
         Me.Controls.Add(Me.lblPhysicalFeature)
-        Me.Controls.Add(Me.cmdOpenFile)
+        Me.Controls.Add(Me.btnOpen)
         Me.Controls.Add(Me.lblFeatureImageFile)
         Me.Controls.Add(Me.lblFeaturePicture)
         Me.Controls.Add(Me.txtFeaturePicture)
@@ -319,7 +319,7 @@ Partial Class ucrMetadataPhysicalFeature
 
     End Sub
 
-    Friend WithEvents cmdOpenFile As Button
+    Friend WithEvents btnOpen As Button
     Friend WithEvents lblFeatureImageFile As Label
     Friend WithEvents lblFeaturePicture As Label
     Friend WithEvents txtFeaturePicture As PictureBox

@@ -25,6 +25,10 @@
         End If
     End Sub
 
+    Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
+
+    End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationPhysicalFeature.NewRecord()
         SaveEnable()

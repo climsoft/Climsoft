@@ -32,7 +32,7 @@ Partial Class ucrMetadataInstrument
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationInstrument = New ClimsoftVer4.ucrNavigation()
-        Me.cmdInstrument = New System.Windows.Forms.Button()
+        Me.btnOpen = New System.Windows.Forms.Button()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
         Me.picInstrument = New System.Windows.Forms.PictureBox()
         Me.ucrTextBoxImageFile = New ClimsoftVer4.ucrTextBox()
@@ -160,14 +160,14 @@ Partial Class ucrMetadataInstrument
         Me.ucrNavigationInstrument.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationInstrument.TabIndex = 28
         '
-        'cmdInstrument
+        'btnOpen
         '
-        Me.cmdInstrument.Location = New System.Drawing.Point(441, 358)
-        Me.cmdInstrument.Name = "cmdInstrument"
-        Me.cmdInstrument.Size = New System.Drawing.Size(47, 29)
-        Me.cmdInstrument.TabIndex = 25
-        Me.cmdInstrument.Text = "Open"
-        Me.cmdInstrument.UseVisualStyleBackColor = True
+        Me.btnOpen.Location = New System.Drawing.Point(441, 358)
+        Me.btnOpen.Name = "btnOpen"
+        Me.btnOpen.Size = New System.Drawing.Size(47, 29)
+        Me.btnOpen.TabIndex = 25
+        Me.btnOpen.Text = "Open"
+        Me.btnOpen.UseVisualStyleBackColor = True
         '
         'lblInstrumentPic
         '
@@ -421,7 +421,7 @@ Partial Class ucrMetadataInstrument
         Me.Controls.Add(Me.lblInstruments)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationInstrument)
-        Me.Controls.Add(Me.cmdInstrument)
+        Me.Controls.Add(Me.btnOpen)
         Me.Controls.Add(Me.lblInstrumentPic)
         Me.Controls.Add(Me.picInstrument)
         Me.Controls.Add(Me.ucrTextBoxImageFile)
@@ -477,7 +477,7 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents ucrTextBoxImageFile As ucrTextBox
     Friend WithEvents lblInstrumentPic As Label
     Friend WithEvents picInstrument As PictureBox
-    Friend WithEvents cmdInstrument As Button
+    Friend WithEvents btnOpen As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnDelete As Button
