@@ -2,11 +2,11 @@
     Private Sub ucrMetadataInstrument_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'SetUpTableEntry 
-            SetUpTableEntry("paperarchive")
+            SetUpTableEntry("paperarchivedefinition")
 
-            ucrTextBoxFormId.SetTableNameAndField("obselement", "elementId")
+            ucrTextBoxFormId.SetTableNameAndField("paperarchivedefinition", "formId")
             ucrTextBoxFormId.PopulateControl()
-            ucrTextBoxFormId.SetValue("elementId")
+            ucrTextBoxFormId.SetValue("formId")
             ucrTextBoxFormId.bValidate = False
 
             AddLinkedControlFilters(ucrTextBoxFormId, ucrTextBoxFormId.FieldName(), "=", strLinkedFieldName:=ucrTextBoxFormId.FieldName(), bForceValuesAsString:=True)

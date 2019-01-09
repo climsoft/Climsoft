@@ -34,7 +34,7 @@ Partial Class ucrMetadataPaperArchive
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.ucrNavigationPaperArchive = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxFormId = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxDefinition = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDescription = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -154,22 +154,22 @@ Partial Class ucrMetadataPaperArchive
         Me.ucrTextBoxFormId.Tag = "formId"
         Me.ucrTextBoxFormId.TextboxValue = ""
         '
-        'ucrTextBoxDefinition
+        'ucrTextBoxDescription
         '
-        Me.ucrTextBoxDefinition.FieldName = "description"
-        Me.ucrTextBoxDefinition.Location = New System.Drawing.Point(278, 141)
-        Me.ucrTextBoxDefinition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxDefinition.Name = "ucrTextBoxDefinition"
-        Me.ucrTextBoxDefinition.Size = New System.Drawing.Size(136, 20)
-        Me.ucrTextBoxDefinition.TabIndex = 4
-        Me.ucrTextBoxDefinition.Tag = "description"
-        Me.ucrTextBoxDefinition.TextboxValue = ""
+        Me.ucrTextBoxDescription.FieldName = "description"
+        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(278, 141)
+        Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
+        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(136, 20)
+        Me.ucrTextBoxDescription.TabIndex = 4
+        Me.ucrTextBoxDescription.Tag = "description"
+        Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'ucrMetadataPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrTextBoxDefinition)
+        Me.Controls.Add(Me.ucrTextBoxDescription)
         Me.Controls.Add(Me.ucrTextBoxFormId)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPaperArchive)
@@ -195,6 +195,6 @@ Partial Class ucrMetadataPaperArchive
     Friend WithEvents btnAddNew As Button
     Friend WithEvents ucrNavigationPaperArchive As ucrNavigation
     Friend WithEvents ucrTextBoxFormId As ucrTextBox
-    Friend WithEvents ucrTextBoxDefinition As ucrTextBox
+    Friend WithEvents ucrTextBoxDescription As ucrTextBox
     Friend WithEvents btnClear As Button
 End Class

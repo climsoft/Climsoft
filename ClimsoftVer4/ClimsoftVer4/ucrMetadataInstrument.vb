@@ -32,6 +32,28 @@
         End If
     End Sub
 
+
+    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
+        Dim img, fl As String
+
+        fl = ""
+        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        OpenFileDialog.ShowDialog()
+        img = OpenFileDialog.FileName
+
+        For i = 1 To Len(img)
+            If Strings.Mid(img, i, 1) = "\" Then
+                fl = fl & "/"
+            Else
+                fl = fl & Strings.Mid(img, i, 1)
+            End If
+        Next
+
+        'MsgBox(fl)
+        ucrTextBoxImageFile.Text = fl
+        ucrTextBoxImageFile.Refresh()
+
+    End Sub
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationInstrument.NewRecord()
         SaveEnable()

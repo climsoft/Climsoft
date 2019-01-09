@@ -22,7 +22,7 @@ Partial Class ucrMetadataPhysicalFeature
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnOpen = New System.Windows.Forms.Button()
+        Me.btnOpenFile = New System.Windows.Forms.Button()
         Me.lblFeatureImageFile = New System.Windows.Forms.Label()
         Me.lblFeaturePicture = New System.Windows.Forms.Label()
         Me.txtFeaturePicture = New System.Windows.Forms.PictureBox()
@@ -46,19 +46,20 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrTextBoxFeatureImageFile = New ClimsoftVer4.ucrTextBox()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtFeaturePicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnOpen
+        'btnOpenFile
         '
-        Me.btnOpen.Location = New System.Drawing.Point(326, 295)
-        Me.btnOpen.Name = "btnOpen"
-        Me.btnOpen.Size = New System.Drawing.Size(49, 27)
-        Me.btnOpen.TabIndex = 15
-        Me.btnOpen.Text = "Open"
-        Me.btnOpen.UseVisualStyleBackColor = True
+        Me.btnOpenFile.Location = New System.Drawing.Point(326, 295)
+        Me.btnOpenFile.Name = "btnOpenFile"
+        Me.btnOpenFile.Size = New System.Drawing.Size(49, 27)
+        Me.btnOpenFile.TabIndex = 15
+        Me.btnOpenFile.Text = "Open"
+        Me.btnOpenFile.UseVisualStyleBackColor = True
         '
         'lblFeatureImageFile
         '
@@ -287,6 +288,10 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerEndDate.TabIndex = 6
         Me.ucrDatePickerEndDate.Tag = "endDate"
         '
+        'OpenFileDialog
+        '
+        Me.OpenFileDialog.FileName = "OpenFileDialog1"
+        '
         'ucrMetadataPhysicalFeature
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,7 +305,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPhysicalFeature)
         Me.Controls.Add(Me.lblPhysicalFeature)
-        Me.Controls.Add(Me.btnOpen)
+        Me.Controls.Add(Me.btnOpenFile)
         Me.Controls.Add(Me.lblFeatureImageFile)
         Me.Controls.Add(Me.lblFeaturePicture)
         Me.Controls.Add(Me.txtFeaturePicture)
@@ -319,7 +324,7 @@ Partial Class ucrMetadataPhysicalFeature
 
     End Sub
 
-    Friend WithEvents btnOpen As Button
+    Friend WithEvents btnOpenFile As Button
     Friend WithEvents lblFeatureImageFile As Label
     Friend WithEvents lblFeaturePicture As Label
     Friend WithEvents txtFeaturePicture As PictureBox
@@ -343,4 +348,5 @@ Partial Class ucrMetadataPhysicalFeature
     Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
     Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
     Friend WithEvents btnClear As Button
+    Friend WithEvents OpenFileDialog As OpenFileDialog
 End Class

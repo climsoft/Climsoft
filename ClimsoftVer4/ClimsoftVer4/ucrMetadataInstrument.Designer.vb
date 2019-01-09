@@ -32,7 +32,7 @@ Partial Class ucrMetadataInstrument
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationInstrument = New ClimsoftVer4.ucrNavigation()
-        Me.btnOpen = New System.Windows.Forms.Button()
+        Me.btnOpenFile = New System.Windows.Forms.Button()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
         Me.picInstrument = New System.Windows.Forms.PictureBox()
         Me.ucrTextBoxImageFile = New ClimsoftVer4.ucrTextBox()
@@ -58,6 +58,7 @@ Partial Class ucrMetadataInstrument
         Me.lblInstrumentID = New System.Windows.Forms.Label()
         Me.ucrDatePickerInstallation = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerDeinstallation = New ClimsoftVer4.ucrDatePicker()
+        Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -160,14 +161,14 @@ Partial Class ucrMetadataInstrument
         Me.ucrNavigationInstrument.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationInstrument.TabIndex = 28
         '
-        'btnOpen
+        'btnOpenFile
         '
-        Me.btnOpen.Location = New System.Drawing.Point(441, 358)
-        Me.btnOpen.Name = "btnOpen"
-        Me.btnOpen.Size = New System.Drawing.Size(47, 29)
-        Me.btnOpen.TabIndex = 25
-        Me.btnOpen.Text = "Open"
-        Me.btnOpen.UseVisualStyleBackColor = True
+        Me.btnOpenFile.Location = New System.Drawing.Point(441, 358)
+        Me.btnOpenFile.Name = "btnOpenFile"
+        Me.btnOpenFile.Size = New System.Drawing.Size(47, 29)
+        Me.btnOpenFile.TabIndex = 25
+        Me.btnOpenFile.Text = "Open"
+        Me.btnOpenFile.UseVisualStyleBackColor = True
         '
         'lblInstrumentPic
         '
@@ -411,6 +412,10 @@ Partial Class ucrMetadataInstrument
         Me.ucrDatePickerDeinstallation.TabIndex = 20
         Me.ucrDatePickerDeinstallation.Tag = "deinstallationDatetime"
         '
+        'OpenFileDialog
+        '
+        Me.OpenFileDialog.FileName = "OpenFileDialog1"
+        '
         'ucrMetadataInstrument
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -421,7 +426,7 @@ Partial Class ucrMetadataInstrument
         Me.Controls.Add(Me.lblInstruments)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationInstrument)
-        Me.Controls.Add(Me.btnOpen)
+        Me.Controls.Add(Me.btnOpenFile)
         Me.Controls.Add(Me.lblInstrumentPic)
         Me.Controls.Add(Me.picInstrument)
         Me.Controls.Add(Me.ucrTextBoxImageFile)
@@ -477,7 +482,7 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents ucrTextBoxImageFile As ucrTextBox
     Friend WithEvents lblInstrumentPic As Label
     Friend WithEvents picInstrument As PictureBox
-    Friend WithEvents btnOpen As Button
+    Friend WithEvents btnOpenFile As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnDelete As Button
@@ -490,4 +495,5 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents ucrDatePickerInstallation As ucrDatePicker
     Friend WithEvents ucrDatePickerDeinstallation As ucrDatePicker
     Friend WithEvents btnClear As Button
+    Friend WithEvents OpenFileDialog As OpenFileDialog
 End Class
