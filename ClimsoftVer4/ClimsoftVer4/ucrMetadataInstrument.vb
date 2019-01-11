@@ -120,8 +120,6 @@
         picInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
     End Sub
 
-
-
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
     ''' </summary>
