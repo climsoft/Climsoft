@@ -8,7 +8,7 @@
             ucrDataLinkID.SetTableNameAndField("obselement", "elementId")
             ucrDataLinkID.PopulateControl()
             ucrDataLinkID.SetDisplayAndValueMember("elementId")
-            ucrDataLinkID.bValidate = False
+            ucrDataLinkID.SetValidationTypeAsNumeric(dcmMin:=1)
 
             AddLinkedControlFilters(ucrDataLinkID, ucrDataLinkID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkID.FieldName(), bForceValuesAsString:=True)
 
