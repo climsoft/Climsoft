@@ -9,6 +9,9 @@
             ucrTextBoxClass.SetValue("scheduleClass")
             ucrTextBoxClass.bValidate = False
 
+            'set view type for the station selector to ID
+            ucrStationSelector.SetViewTypeAsIDs()
+
             AddLinkedControlFilters(ucrTextBoxClass, ucrTextBoxClass.FieldName, "=", strLinkedFieldName:=ucrTextBoxClass.FieldName, bForceValuesAsString:=True)
 
             AddKeyField(ucrTextBoxClass.FieldName)

@@ -26,26 +26,18 @@
     End Sub
 
     Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
-        Dim img, fl As String
+        Dim filePathName As String
 
-        fl = ""
+        OpenFileDialog.Title = "Select image file"
         OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
-        OpenFileDialog.ShowDialog()
-        img = OpenFileDialog.FileName
 
-        For i = 1 To Len(img)
-            If Strings.Mid(img, i, 1) = "\" Then
-                fl = fl & "/"
-            Else
-                fl = fl & Strings.Mid(img, i, 1)
-            End If
-        Next
-
-        'MsgBox(fl)
-        ucrTextBoxFeatureImageFile.Text = fl
-        ucrTextBoxFeatureImageFile.Refresh()
-
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            filePathName = OpenFileDialog.FileName
+            filePathName = filePathName.Replace("\", "/")
+            ucrTextBoxFeatureImageFile.SetValue(filePathName)
+        End If
     End Sub
+
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationPhysicalFeature.NewRecord()
         SaveEnable()

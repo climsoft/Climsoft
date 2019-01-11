@@ -10,6 +10,9 @@
             ucrDataLinkElementID.SetDisplayAndValueMember("describedBy")
             ucrDataLinkElementID.bValidate = False
 
+            'set view type for the station selector to ID
+            ucrStationSelector.SetViewTypeAsIDs()
+
             AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
 
             'set FILTER field name used in the where clause of UPDATE and DELETE statement

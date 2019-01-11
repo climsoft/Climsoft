@@ -833,6 +833,12 @@
     <Compile Include="ucrBaseDataLink.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrCheck.Designer.vb">
+      <DependentUpon>ucrCheck.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrCheck.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDatePicker.Designer.vb">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
     </Compile>
@@ -1439,6 +1445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrCheck.resx">
+      <DependentUpon>ucrCheck.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDatePicker.resx">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
