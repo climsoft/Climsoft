@@ -7,7 +7,9 @@
             ucrStationIDcombobox.SetTableNameAndField("station", "stationId")
             ucrStationIDcombobox.PopulateControl()
             ucrStationIDcombobox.SetDisplayAndValueMember("stationId")
-            ucrStationIDcombobox.bValidate = False
+            ucrTextBoxLatitude.SetValidationTypeAsNumeric()
+            ucrTextBoxLongitude.SetValidationTypeAsNumeric()
+            ucrTextBoxGeographicalAccuracy.SetValidationTypeAsNumeric()
 
             AddLinkedControlFilters(ucrStationIDcombobox, ucrStationIDcombobox.FieldName(), "=", strLinkedFieldName:=ucrStationIDcombobox.FieldName(), bForceValuesAsString:=True)
 
