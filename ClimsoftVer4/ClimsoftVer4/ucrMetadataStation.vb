@@ -112,12 +112,4 @@
             btnUpdate.Enabled = True
         End If
     End Sub
-
-    Private Sub ucrTextBoxQualifier_Load(sender As Object, e As EventArgs) Handles ucrTextBoxQualifier.Load
-
-    End Sub
-
-    Private Sub grpStation_Enter(sender As Object, e As EventArgs) Handles grpStation.Enter
-
-    End Sub
 End Class
