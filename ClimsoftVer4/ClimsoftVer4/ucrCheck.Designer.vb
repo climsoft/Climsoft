@@ -22,24 +22,24 @@ Partial Class ucrCheck
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkCheck = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
-        'CheckBox1
+        'chkCheck
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(4, 4)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBox1.TabIndex = 0
-        Me.CheckBox1.Text = "CheckBox1"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkCheck.AutoSize = True
+        Me.chkCheck.Location = New System.Drawing.Point(4, 4)
+        Me.chkCheck.Name = "chkCheck"
+        Me.chkCheck.Size = New System.Drawing.Size(81, 17)
+        Me.chkCheck.TabIndex = 0
+        Me.chkCheck.Text = "CheckBox1"
+        Me.chkCheck.UseVisualStyleBackColor = True
         '
         'ucrCheck
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.chkCheck)
         Me.Name = "ucrCheck"
         Me.Size = New System.Drawing.Size(179, 24)
         Me.ResumeLayout(False)
@@ -47,5 +47,5 @@ Partial Class ucrCheck
 
     End Sub
 
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkCheck As CheckBox
 End Class

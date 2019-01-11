@@ -9,7 +9,10 @@
             ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
-            ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1) 'validate any value as a numeric 
+
+            'The validation for the instrument Id will be enable once the field data type in the database has been corrected
+            'ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1) 'validate any value as a numeric 
+            ucrTextBoxUncertainity.SetValidationTypeAsNumeric()
 
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
