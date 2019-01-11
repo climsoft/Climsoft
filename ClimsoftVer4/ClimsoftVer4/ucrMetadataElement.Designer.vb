@@ -45,11 +45,12 @@ Partial Class ucrMetadataElement
         Me.ucrTextBoxLowerLimit = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxUnit = New ClimsoftVer4.ucrTextBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdDeleteScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
         Me.UcrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
@@ -61,7 +62,7 @@ Partial Class ucrMetadataElement
         Me.chkTotalRequired.Location = New System.Drawing.Point(299, 305)
         Me.chkTotalRequired.Name = "chkTotalRequired"
         Me.chkTotalRequired.Size = New System.Drawing.Size(15, 14)
-        Me.chkTotalRequired.TabIndex = 79
+        Me.chkTotalRequired.TabIndex = 21
         Me.chkTotalRequired.Tag = "qcTotalRequired"
         Me.chkTotalRequired.UseVisualStyleBackColor = True
         '
@@ -71,7 +72,7 @@ Partial Class ucrMetadataElement
         Me.lblTotalRequired.Location = New System.Drawing.Point(202, 306)
         Me.lblTotalRequired.Name = "lblTotalRequired"
         Me.lblTotalRequired.Size = New System.Drawing.Size(77, 13)
-        Me.lblTotalRequired.TabIndex = 78
+        Me.lblTotalRequired.TabIndex = 20
         Me.lblTotalRequired.Text = "Total Required"
         '
         'chkSelected
@@ -80,7 +81,7 @@ Partial Class ucrMetadataElement
         Me.chkSelected.Location = New System.Drawing.Point(298, 284)
         Me.chkSelected.Name = "chkSelected"
         Me.chkSelected.Size = New System.Drawing.Size(15, 14)
-        Me.chkSelected.TabIndex = 77
+        Me.chkSelected.TabIndex = 19
         Me.chkSelected.Tag = "selected"
         Me.chkSelected.UseVisualStyleBackColor = True
         '
@@ -90,7 +91,7 @@ Partial Class ucrMetadataElement
         Me.lblSelected.Location = New System.Drawing.Point(201, 285)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
-        Me.lblSelected.TabIndex = 76
+        Me.lblSelected.TabIndex = 18
         Me.lblSelected.Text = "Selected"
         '
         'lblType
@@ -99,7 +100,7 @@ Partial Class ucrMetadataElement
         Me.lblType.Location = New System.Drawing.Point(201, 260)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(31, 13)
-        Me.lblType.TabIndex = 75
+        Me.lblType.TabIndex = 16
         Me.lblType.Text = "Type"
         '
         'lblUpperlimit
@@ -108,7 +109,7 @@ Partial Class ucrMetadataElement
         Me.lblUpperlimit.Location = New System.Drawing.Point(201, 179)
         Me.lblUpperlimit.Name = "lblUpperlimit"
         Me.lblUpperlimit.Size = New System.Drawing.Size(60, 13)
-        Me.lblUpperlimit.TabIndex = 72
+        Me.lblUpperlimit.TabIndex = 10
         Me.lblUpperlimit.Text = "Upper Limit"
         '
         'lblScale
@@ -117,7 +118,7 @@ Partial Class ucrMetadataElement
         Me.lblScale.Location = New System.Drawing.Point(201, 152)
         Me.lblScale.Name = "lblScale"
         Me.lblScale.Size = New System.Drawing.Size(34, 13)
-        Me.lblScale.TabIndex = 71
+        Me.lblScale.TabIndex = 8
         Me.lblScale.Text = "Scale"
         '
         'lblDescription
@@ -126,7 +127,7 @@ Partial Class ucrMetadataElement
         Me.lblDescription.Location = New System.Drawing.Point(201, 125)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(60, 13)
-        Me.lblDescription.TabIndex = 70
+        Me.lblDescription.TabIndex = 6
         Me.lblDescription.Text = "Description"
         '
         'lblName
@@ -135,7 +136,7 @@ Partial Class ucrMetadataElement
         Me.lblName.Location = New System.Drawing.Point(201, 98)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
-        Me.lblName.TabIndex = 69
+        Me.lblName.TabIndex = 4
         Me.lblName.Text = "Name"
         '
         'lblUnit
@@ -144,7 +145,7 @@ Partial Class ucrMetadataElement
         Me.lblUnit.Location = New System.Drawing.Point(201, 233)
         Me.lblUnit.Name = "lblUnit"
         Me.lblUnit.Size = New System.Drawing.Size(26, 13)
-        Me.lblUnit.TabIndex = 74
+        Me.lblUnit.TabIndex = 14
         Me.lblUnit.Text = "Unit"
         '
         'lblLowerLimit
@@ -153,7 +154,7 @@ Partial Class ucrMetadataElement
         Me.lblLowerLimit.Location = New System.Drawing.Point(201, 206)
         Me.lblLowerLimit.Name = "lblLowerLimit"
         Me.lblLowerLimit.Size = New System.Drawing.Size(60, 13)
-        Me.lblLowerLimit.TabIndex = 73
+        Me.lblLowerLimit.TabIndex = 12
         Me.lblLowerLimit.Text = "Lower Limit"
         '
         'lblAbbreviation
@@ -162,7 +163,7 @@ Partial Class ucrMetadataElement
         Me.lblAbbreviation.Location = New System.Drawing.Point(201, 71)
         Me.lblAbbreviation.Name = "lblAbbreviation"
         Me.lblAbbreviation.Size = New System.Drawing.Size(66, 13)
-        Me.lblAbbreviation.TabIndex = 68
+        Me.lblAbbreviation.TabIndex = 2
         Me.lblAbbreviation.Text = "Abbreviation"
         '
         'lblID
@@ -171,7 +172,7 @@ Partial Class ucrMetadataElement
         Me.lblID.Location = New System.Drawing.Point(201, 43)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(18, 13)
-        Me.lblID.TabIndex = 65
+        Me.lblID.TabIndex = 0
         Me.lblID.Text = "ID"
         '
         'ucrNavigationElement
@@ -180,152 +181,171 @@ Partial Class ucrMetadataElement
         Me.ucrNavigationElement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationElement.Name = "ucrNavigationElement"
         Me.ucrNavigationElement.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigationElement.TabIndex = 95
+        Me.ucrNavigationElement.TabIndex = 23
         '
         'ucrDataLinkID
         '
+        Me.ucrDataLinkID.FieldName = "elementId"
         Me.ucrDataLinkID.Location = New System.Drawing.Point(298, 41)
         Me.ucrDataLinkID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkID.Name = "ucrDataLinkID"
         Me.ucrDataLinkID.Size = New System.Drawing.Size(178, 21)
-        Me.ucrDataLinkID.TabIndex = 17
+        Me.ucrDataLinkID.TabIndex = 1
         Me.ucrDataLinkID.Tag = "elementId"
         '
         'ucrTextBoxAbbreviation
         '
+        Me.ucrTextBoxAbbreviation.FieldName = "abbreviation"
         Me.ucrTextBoxAbbreviation.Location = New System.Drawing.Point(298, 68)
         Me.ucrTextBoxAbbreviation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAbbreviation.Name = "ucrTextBoxAbbreviation"
         Me.ucrTextBoxAbbreviation.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxAbbreviation.TabIndex = 97
+        Me.ucrTextBoxAbbreviation.TabIndex = 3
         Me.ucrTextBoxAbbreviation.Tag = "abbreviation"
         Me.ucrTextBoxAbbreviation.TextboxValue = ""
         '
         'ucrTextBoxName
         '
+        Me.ucrTextBoxName.FieldName = "elementName"
         Me.ucrTextBoxName.Location = New System.Drawing.Point(298, 95)
         Me.ucrTextBoxName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxName.Name = "ucrTextBoxName"
         Me.ucrTextBoxName.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxName.TabIndex = 98
+        Me.ucrTextBoxName.TabIndex = 5
         Me.ucrTextBoxName.Tag = "elementName"
         Me.ucrTextBoxName.TextboxValue = ""
         '
         'ucrTextBoxDescription
         '
+        Me.ucrTextBoxDescription.FieldName = "description"
         Me.ucrTextBoxDescription.Location = New System.Drawing.Point(298, 122)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
         Me.ucrTextBoxDescription.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxDescription.TabIndex = 99
-        Me.ucrTextBoxDescription.Tag = "elementScale"
+        Me.ucrTextBoxDescription.TabIndex = 7
+        Me.ucrTextBoxDescription.Tag = "description"
         Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'ucrTextBoxScale
         '
+        Me.ucrTextBoxScale.FieldName = "elementScale"
         Me.ucrTextBoxScale.Location = New System.Drawing.Point(298, 148)
         Me.ucrTextBoxScale.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxScale.Name = "ucrTextBoxScale"
         Me.ucrTextBoxScale.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxScale.TabIndex = 100
+        Me.ucrTextBoxScale.TabIndex = 9
         Me.ucrTextBoxScale.Tag = "elementScale"
         Me.ucrTextBoxScale.TextboxValue = ""
         '
         'ucrTextBoxUpperLimit
         '
+        Me.ucrTextBoxUpperLimit.FieldName = "upperLimit"
         Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(298, 174)
         Me.ucrTextBoxUpperLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUpperLimit.Name = "ucrTextBoxUpperLimit"
         Me.ucrTextBoxUpperLimit.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxUpperLimit.TabIndex = 101
+        Me.ucrTextBoxUpperLimit.TabIndex = 11
         Me.ucrTextBoxUpperLimit.Tag = "upperLimit"
         Me.ucrTextBoxUpperLimit.TextboxValue = ""
         '
         'ucrTextBoxLowerLimit
         '
+        Me.ucrTextBoxLowerLimit.FieldName = "lowerLimit"
         Me.ucrTextBoxLowerLimit.Location = New System.Drawing.Point(298, 199)
         Me.ucrTextBoxLowerLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLowerLimit.Name = "ucrTextBoxLowerLimit"
         Me.ucrTextBoxLowerLimit.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxLowerLimit.TabIndex = 102
+        Me.ucrTextBoxLowerLimit.TabIndex = 13
         Me.ucrTextBoxLowerLimit.Tag = "lowerLimit"
         Me.ucrTextBoxLowerLimit.TextboxValue = ""
         '
         'ucrTextBoxUnit
         '
+        Me.ucrTextBoxUnit.FieldName = "units"
         Me.ucrTextBoxUnit.Location = New System.Drawing.Point(298, 226)
         Me.ucrTextBoxUnit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUnit.Name = "ucrTextBoxUnit"
         Me.ucrTextBoxUnit.Size = New System.Drawing.Size(178, 20)
-        Me.ucrTextBoxUnit.TabIndex = 103
+        Me.ucrTextBoxUnit.TabIndex = 15
         Me.ucrTextBoxUnit.Tag = "units"
         Me.ucrTextBoxUnit.TextboxValue = ""
         '
         'GroupBox13
         '
-        Me.GroupBox13.Controls.Add(Me.cmdViewScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdDeleteScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdUpdateScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdAddScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdClearClass)
-        Me.GroupBox13.Location = New System.Drawing.Point(79, 332)
+        Me.GroupBox13.Controls.Add(Me.btnClear)
+        Me.GroupBox13.Controls.Add(Me.btnView)
+        Me.GroupBox13.Controls.Add(Me.btnDelete)
+        Me.GroupBox13.Controls.Add(Me.btnUpdate)
+        Me.GroupBox13.Controls.Add(Me.btnSave)
+        Me.GroupBox13.Controls.Add(Me.btnAddNew)
+        Me.GroupBox13.Location = New System.Drawing.Point(17, 332)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
-        Me.GroupBox13.TabIndex = 104
+        Me.GroupBox13.Size = New System.Drawing.Size(581, 34)
+        Me.GroupBox13.TabIndex = 22
         Me.GroupBox13.TabStop = False
         '
-        'cmdViewScheduleClass
+        'btnClear
         '
-        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(420, 6)
-        Me.cmdViewScheduleClass.Name = "cmdViewScheduleClass"
-        Me.cmdViewScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewScheduleClass.TabIndex = 8
-        Me.cmdViewScheduleClass.Text = "View"
-        Me.cmdViewScheduleClass.UseVisualStyleBackColor = True
+        Me.btnClear.Location = New System.Drawing.Point(392, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
-        'cmdDeleteScheduleClass
+        'btnView
         '
-        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(318, 6)
-        Me.cmdDeleteScheduleClass.Name = "cmdDeleteScheduleClass"
-        Me.cmdDeleteScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteScheduleClass.TabIndex = 7
-        Me.cmdDeleteScheduleClass.Text = "Delete"
-        Me.cmdDeleteScheduleClass.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(485, 5)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 5
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdUpdateScheduleClass
+        'btnDelete
         '
-        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(216, 6)
-        Me.cmdUpdateScheduleClass.Name = "cmdUpdateScheduleClass"
-        Me.cmdUpdateScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateScheduleClass.TabIndex = 6
-        Me.cmdUpdateScheduleClass.Text = "Update"
-        Me.cmdUpdateScheduleClass.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(299, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 3
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdAddScheduleClass
+        'btnUpdate
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
-        Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
-        Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddScheduleClass.TabIndex = 5
-        Me.cmdAddScheduleClass.Text = "Save"
-        Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(206, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdClearClass
+        'btnSave
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
-        Me.cmdClearClass.Name = "cmdClearClass"
-        Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearClass.TabIndex = 4
-        Me.cmdClearClass.Text = "AddNew"
-        Me.cmdClearClass.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(113, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 1
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(20, 5)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.TabIndex = 0
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'UcrDataLinkType
         '
+        Me.UcrDataLinkType.FieldName = "elementtype"
         Me.UcrDataLinkType.Location = New System.Drawing.Point(298, 255)
         Me.UcrDataLinkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDataLinkType.Name = "UcrDataLinkType"
         Me.UcrDataLinkType.Size = New System.Drawing.Size(178, 21)
-        Me.UcrDataLinkType.TabIndex = 105
+        Me.UcrDataLinkType.TabIndex = 17
         Me.UcrDataLinkType.Tag = "elementtype"
         '
         'ucrMetadataElement
@@ -388,10 +408,11 @@ Partial Class ucrMetadataElement
     Friend WithEvents ucrTextBoxLowerLimit As ucrTextBox
     Friend WithEvents ucrTextBoxUnit As ucrTextBox
     Friend WithEvents GroupBox13 As GroupBox
-    Friend WithEvents cmdViewScheduleClass As Button
-    Friend WithEvents cmdDeleteScheduleClass As Button
-    Friend WithEvents cmdUpdateScheduleClass As Button
-    Friend WithEvents cmdAddScheduleClass As Button
-    Friend WithEvents cmdClearClass As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnAddNew As Button
     Friend WithEvents UcrDataLinkType As ucrDataLinkCombobox
+    Friend WithEvents btnClear As Button
 End Class

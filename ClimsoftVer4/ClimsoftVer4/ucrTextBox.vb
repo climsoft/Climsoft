@@ -36,7 +36,6 @@ Public Class ucrTextBox
             txtBox.Text = ""
         Else
             txtBox.Text = objNewValue 'TODO
-
         End If
         OnevtValueChanged(Me, Nothing)
     End Sub
@@ -293,7 +292,6 @@ Public Class ucrTextBox
     ''' </summary>
     Public Overrides Sub Clear()
         bValidate = False
-        'txtBox.Text = ""
         SetValue("")
         SetBackColor(bValidColor)
         bValidate = True

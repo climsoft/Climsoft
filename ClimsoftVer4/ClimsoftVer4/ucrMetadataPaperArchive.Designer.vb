@@ -26,14 +26,15 @@ Partial Class ucrMetadataPaperArchive
         Me.lblFormId = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.cmdViewScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdDeleteScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdUpdateScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
-        Me.cmdClearClass = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
         Me.ucrNavigationPaperArchive = New ClimsoftVer4.ucrNavigation()
         Me.ucrTextBoxFormId = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxDefinition = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDescription = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -41,122 +42,134 @@ Partial Class ucrMetadataPaperArchive
         'lbldescri
         '
         Me.lbldescri.AutoSize = True
-        Me.lbldescri.Location = New System.Drawing.Point(136, 143)
+        Me.lbldescri.Location = New System.Drawing.Point(202, 143)
         Me.lbldescri.Name = "lbldescri"
         Me.lbldescri.Size = New System.Drawing.Size(60, 13)
-        Me.lbldescri.TabIndex = 15
+        Me.lbldescri.TabIndex = 3
         Me.lbldescri.Text = "Description"
         '
         'lblFormId
         '
         Me.lblFormId.AutoSize = True
-        Me.lblFormId.Location = New System.Drawing.Point(136, 102)
+        Me.lblFormId.Location = New System.Drawing.Point(202, 102)
         Me.lblFormId.Name = "lblFormId"
         Me.lblFormId.Size = New System.Drawing.Size(44, 13)
-        Me.lblFormId.TabIndex = 14
+        Me.lblFormId.TabIndex = 1
         Me.lblFormId.Text = "Form ID"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(158, 17)
+        Me.Label7.Location = New System.Drawing.Point(224, 17)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(175, 16)
-        Me.Label7.TabIndex = 16
+        Me.Label7.TabIndex = 0
         Me.Label7.Text = "Paper Archive Definition"
         '
         'GroupBox13
         '
-        Me.GroupBox13.Controls.Add(Me.cmdViewScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdDeleteScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdUpdateScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdAddScheduleClass)
-        Me.GroupBox13.Controls.Add(Me.cmdClearClass)
+        Me.GroupBox13.Controls.Add(Me.btnClear)
+        Me.GroupBox13.Controls.Add(Me.btnView)
+        Me.GroupBox13.Controls.Add(Me.btnDelete)
+        Me.GroupBox13.Controls.Add(Me.btnUpdate)
+        Me.GroupBox13.Controls.Add(Me.btnSave)
+        Me.GroupBox13.Controls.Add(Me.btnAddNew)
         Me.GroupBox13.Location = New System.Drawing.Point(6, 241)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(519, 34)
-        Me.GroupBox13.TabIndex = 106
+        Me.GroupBox13.Size = New System.Drawing.Size(606, 34)
+        Me.GroupBox13.TabIndex = 5
         Me.GroupBox13.TabStop = False
         '
-        'cmdViewScheduleClass
+        'btnClear
         '
-        Me.cmdViewScheduleClass.Location = New System.Drawing.Point(420, 6)
-        Me.cmdViewScheduleClass.Name = "cmdViewScheduleClass"
-        Me.cmdViewScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdViewScheduleClass.TabIndex = 8
-        Me.cmdViewScheduleClass.Text = "View"
-        Me.cmdViewScheduleClass.UseVisualStyleBackColor = True
+        Me.btnClear.Location = New System.Drawing.Point(403, 5)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(81, 27)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
-        'cmdDeleteScheduleClass
+        'btnView
         '
-        Me.cmdDeleteScheduleClass.Location = New System.Drawing.Point(318, 6)
-        Me.cmdDeleteScheduleClass.Name = "cmdDeleteScheduleClass"
-        Me.cmdDeleteScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdDeleteScheduleClass.TabIndex = 7
-        Me.cmdDeleteScheduleClass.Text = "Delete"
-        Me.cmdDeleteScheduleClass.UseVisualStyleBackColor = True
+        Me.btnView.Location = New System.Drawing.Point(498, 5)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(81, 27)
+        Me.btnView.TabIndex = 5
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
-        'cmdUpdateScheduleClass
+        'btnDelete
         '
-        Me.cmdUpdateScheduleClass.Location = New System.Drawing.Point(216, 6)
-        Me.cmdUpdateScheduleClass.Name = "cmdUpdateScheduleClass"
-        Me.cmdUpdateScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdUpdateScheduleClass.TabIndex = 6
-        Me.cmdUpdateScheduleClass.Text = "Update"
-        Me.cmdUpdateScheduleClass.UseVisualStyleBackColor = True
+        Me.btnDelete.Location = New System.Drawing.Point(308, 5)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(81, 27)
+        Me.btnDelete.TabIndex = 3
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdAddScheduleClass
+        'btnUpdate
         '
-        Me.cmdAddScheduleClass.Location = New System.Drawing.Point(114, 7)
-        Me.cmdAddScheduleClass.Name = "cmdAddScheduleClass"
-        Me.cmdAddScheduleClass.Size = New System.Drawing.Size(81, 25)
-        Me.cmdAddScheduleClass.TabIndex = 5
-        Me.cmdAddScheduleClass.Text = "Save"
-        Me.cmdAddScheduleClass.UseVisualStyleBackColor = True
+        Me.btnUpdate.Location = New System.Drawing.Point(213, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 27)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'cmdClearClass
+        'btnSave
         '
-        Me.cmdClearClass.Location = New System.Drawing.Point(12, 5)
-        Me.cmdClearClass.Name = "cmdClearClass"
-        Me.cmdClearClass.Size = New System.Drawing.Size(81, 27)
-        Me.cmdClearClass.TabIndex = 4
-        Me.cmdClearClass.Text = "AddNew"
-        Me.cmdClearClass.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(118, 5)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(81, 27)
+        Me.btnSave.TabIndex = 1
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(23, 5)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(81, 27)
+        Me.btnAddNew.TabIndex = 0
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'ucrNavigationPaperArchive
         '
-        Me.ucrNavigationPaperArchive.Location = New System.Drawing.Point(97, 286)
+        Me.ucrNavigationPaperArchive.Location = New System.Drawing.Point(140, 286)
         Me.ucrNavigationPaperArchive.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationPaperArchive.Name = "ucrNavigationPaperArchive"
         Me.ucrNavigationPaperArchive.Size = New System.Drawing.Size(336, 25)
-        Me.ucrNavigationPaperArchive.TabIndex = 105
+        Me.ucrNavigationPaperArchive.TabIndex = 6
         '
         'ucrTextBoxFormId
         '
-        Me.ucrTextBoxFormId.Location = New System.Drawing.Point(212, 99)
+        Me.ucrTextBoxFormId.FieldName = "formId"
+        Me.ucrTextBoxFormId.Location = New System.Drawing.Point(278, 99)
         Me.ucrTextBoxFormId.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxFormId.Name = "ucrTextBoxFormId"
         Me.ucrTextBoxFormId.Size = New System.Drawing.Size(136, 20)
-        Me.ucrTextBoxFormId.TabIndex = 107
+        Me.ucrTextBoxFormId.TabIndex = 2
         Me.ucrTextBoxFormId.Tag = "formId"
         Me.ucrTextBoxFormId.TextboxValue = ""
         '
-        'ucrTextBoxDefinition
+        'ucrTextBoxDescription
         '
-        Me.ucrTextBoxDefinition.Location = New System.Drawing.Point(212, 141)
-        Me.ucrTextBoxDefinition.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxDefinition.Name = "ucrTextBoxDefinition"
-        Me.ucrTextBoxDefinition.Size = New System.Drawing.Size(136, 20)
-        Me.ucrTextBoxDefinition.TabIndex = 108
-        Me.ucrTextBoxDefinition.Tag = "description"
-        Me.ucrTextBoxDefinition.TextboxValue = ""
+        Me.ucrTextBoxDescription.FieldName = "description"
+        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(278, 141)
+        Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
+        Me.ucrTextBoxDescription.Size = New System.Drawing.Size(136, 20)
+        Me.ucrTextBoxDescription.TabIndex = 4
+        Me.ucrTextBoxDescription.Tag = "description"
+        Me.ucrTextBoxDescription.TextboxValue = ""
         '
         'ucrMetadataPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrTextBoxDefinition)
+        Me.Controls.Add(Me.ucrTextBoxDescription)
         Me.Controls.Add(Me.ucrTextBoxFormId)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrNavigationPaperArchive)
@@ -164,7 +177,7 @@ Partial Class ucrMetadataPaperArchive
         Me.Controls.Add(Me.lblFormId)
         Me.Controls.Add(Me.Label7)
         Me.Name = "ucrMetadataPaperArchive"
-        Me.Size = New System.Drawing.Size(531, 316)
+        Me.Size = New System.Drawing.Size(617, 316)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -175,12 +188,13 @@ Partial Class ucrMetadataPaperArchive
     Friend WithEvents lblFormId As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents GroupBox13 As GroupBox
-    Friend WithEvents cmdViewScheduleClass As Button
-    Friend WithEvents cmdDeleteScheduleClass As Button
-    Friend WithEvents cmdUpdateScheduleClass As Button
-    Friend WithEvents cmdAddScheduleClass As Button
-    Friend WithEvents cmdClearClass As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnAddNew As Button
     Friend WithEvents ucrNavigationPaperArchive As ucrNavigation
     Friend WithEvents ucrTextBoxFormId As ucrTextBox
-    Friend WithEvents ucrTextBoxDefinition As ucrTextBox
+    Friend WithEvents ucrTextBoxDescription As ucrTextBox
+    Friend WithEvents btnClear As Button
 End Class
