@@ -1,18 +1,14 @@
 ﻿
 Public Class ucrTextBox
-    Protected dcmMinimum As Decimal = Decimal.MinValue
-    Protected dcmMaximum As Decimal = Decimal.MaxValue
-    Protected bMinimumIncluded, bMaximumIncluded As Boolean
+
     Private bToUpper As Boolean = False
     Private bToLower As Boolean = False
     Private bFirstLoad As Boolean = True
     Protected bIsReadOnly As Boolean = False
-    Protected strValidationType As String = "none"
-    Public bValidate As Boolean = True
-    Public bValidateSilently As Boolean = True
-    Public bValidateEmpty As Boolean = False
-    'used to set the default back color to show when the value input is a valid one
-    Private bValidColor As Color = Color.White
+
+    Protected dcmMinimum As Decimal = Decimal.MinValue
+    Protected dcmMaximum As Decimal = Decimal.MaxValue
+    Protected bMinimumIncluded, bMaximumIncluded As Boolean
 
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
@@ -65,6 +61,7 @@ Public Class ucrTextBox
     Public Sub SetValidationTypeAsNone()
         strValidationType = "none"
     End Sub
+
     ''' <summary>
     ''' Sets validation of the textbox to numeric
     ''' </summary>
@@ -97,11 +94,102 @@ Public Class ucrTextBox
     End Sub
 
 
+    Public Overrides Function ValidateValue() As Boolean
+        Dim iType As Integer
+
+        If bValidate Then
+            'if set to not validate empty values and textbox is empty then don't proceed with validation
+            If Not bValidateEmpty AndAlso IsEmpty() Then
+                SetBackColor(bValidColor)
+                Return True
+            End If
+
+            iType = GetValidationCode(GetValue)
+            If iType = 0 Then
+                SetBackColor(bValidColor)
+            ElseIf iType = 1 Then
+                SetBackColor(Color.Red)
+                If Not bValidateSilently Then
+                    MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            ElseIf iType = 2 Then
+                'check if it was lower and upper limit violation
+                If Not (GetDcmMinimum() <= Val(GetValue)) Then
+                    SetBackColor(Color.Cyan)
+                    If Not bValidateSilently Then
+                        MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
+                ElseIf Not (GetDcmMaximum() >= Val(GetValue)) Then
+                    SetBackColor(Color.Cyan)
+                    If Not bValidateSilently Then
+                        MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
+                End If
+            End If
+            Return (iType = 0)
+        Else
+            Return True
+        End If
+
+    End Function
+
+
+    ''' <summary>
+    ''' checks if the string passed can be a valid value for this control
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
+    Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
+        Dim iValidationCode As Integer
+
+        If bValidate Then
+            'if set to not validate empty values and string is empty then don't proceed with validation
+            If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
+                Return True
+            End If
+
+            iValidationCode = GetValidationCode(strText)
+            Select Case iValidationCode
+                Case 0
+                'this is for none. No validation
+                Case 1
+                    Select Case strValidationType
+                        Case "Numeric"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                    End Select
+                Case 2
+                    Select Case strValidationType
+                        Case "Numeric"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                    End Select
+            End Select
+            Return (iValidationCode = 0)
+        Else
+            Return True
+        End If
+
+    End Function
+
+    Public Function GetValidationCode(strText As String) As Integer
+        Dim iType As Integer
+        Select Case strValidationType
+            Case "none"
+                iType = 0
+            Case "numeric"
+                iType = ValidateNumeric(strText)
+        End Select
+        Return iType
+    End Function
+
     'Returns integer as code for validation
     ' 0 : string is valid
     ' 1 : string is not numeric
     ' 2 : string is outside range
-    Public Function ValidateNumeric(strText As String) As Integer
+    Private Function ValidateNumeric(strText As String) As Integer
         Dim dcmText As Decimal
         Dim iType As Integer = 0
 
@@ -117,88 +205,6 @@ Public Class ucrTextBox
         Else
             iType = 1
         End If
-        Return iType
-    End Function
-
-    Public Overrides Function ValidateValue() As Boolean
-        Dim iType As Integer
-
-        'if set to not validate empty values and textbox is empty then don't proceed with validation
-        If Not bValidateEmpty AndAlso IsEmpty() Then
-            SetBackColor(bValidColor)
-            Return True
-        End If
-
-        iType = GetValidationCode(GetValue)
-        If iType = 0 Then
-            SetBackColor(bValidColor)
-        ElseIf iType = 1
-            SetBackColor(Color.Red)
-            If Not bValidateSilently Then
-                MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-        ElseIf iType = 2
-            'check if it was lower and upper limit violation
-            If Not (GetDcmMinimum() <= Val(GetValue)) Then
-                SetBackColor(Color.Cyan)
-                If Not bValidateSilently Then
-                    MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
-            ElseIf Not (GetDcmMaximum() >= Val(GetValue))
-                SetBackColor(Color.Cyan)
-                If Not bValidateSilently Then
-                    MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
-            End If
-        End If
-        Return (iType = 0)
-    End Function
-
-    'TODO. CAN THE FUNCTION BELOW BE MERGED WITH FUNCTION ValidateValue()
-    ''' <summary>
-    ''' checks if the string passed can be a valid value for this control
-    ''' </summary>
-    ''' <param name="strText"></param>
-    ''' <returns></returns>
-    Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
-        Dim iValidationCode As Integer
-
-        'if set to not validate empty values and string is empty then don't proceed with validation
-        If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
-            Return True
-        End If
-
-        iValidationCode = GetValidationCode(strText)
-        Select Case iValidationCode
-            Case 0
-                'this is for none. No validation
-            Case 1
-                Select Case strValidationType
-                    Case "Numeric"
-                        If Not bValidateSilently Then
-                            MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End If
-                End Select
-            Case 2
-                Select Case strValidationType
-                    Case "Numeric"
-                        If Not bValidateSilently Then
-                            MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        End If
-                End Select
-
-        End Select
-        Return (iValidationCode = 0)
-    End Function
-
-    Public Function GetValidationCode(strText As String) As Integer
-        Dim iType As Integer
-        Select Case strValidationType
-            Case "none"
-                iType = 0
-            Case "numeric"
-                iType = ValidateNumeric(strText)
-        End Select
         Return iType
     End Function
 
@@ -246,6 +252,7 @@ Public Class ucrTextBox
 
     Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            strValidationType = "none"
             bFirstLoad = False
         End If
     End Sub
@@ -256,9 +263,7 @@ Public Class ucrTextBox
 
     Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
         'check if value is valid
-        If bValidate Then
-            ValidateValue()
-        End If
+        ValidateValue()
 
         'raise event
         OnevtTextChanged(Me, e)
@@ -291,10 +296,11 @@ Public Class ucrTextBox
     ''' Clears contents of the textbox
     ''' </summary>
     Public Overrides Sub Clear()
+        Dim bPrevValidate As Boolean = bValidate
         bValidate = False
         SetValue("")
         SetBackColor(bValidColor)
-        bValidate = True
+        bValidate = bPrevValidate
     End Sub
     ''' <summary>
     ''' Sets the back colour of the control

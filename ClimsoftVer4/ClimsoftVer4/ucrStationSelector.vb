@@ -75,6 +75,8 @@
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
             SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
             bFirstLoad = False
         End If
     End Sub
