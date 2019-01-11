@@ -10,6 +10,10 @@
             ucrDataLinkID.SetDisplayAndValueMember("elementId")
             ucrDataLinkID.SetValidationTypeAsNumeric(dcmMin:=1)
 
+            ucrTextBoxUpperLimit.SetValidationTypeAsNumeric()
+            ucrTextBoxLowerLimit.SetValidationTypeAsNumeric()
+
+
             AddLinkedControlFilters(ucrDataLinkID, ucrDataLinkID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkID.FieldName(), bForceValuesAsString:=True)
 
             AddKeyField(ucrDataLinkID.FieldName)
