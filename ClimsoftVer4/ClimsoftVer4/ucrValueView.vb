@@ -7,6 +7,12 @@
     ' Used when wanting to update several controls without linked controls updating inbetween.
     Public bSuppressChangedEvents As Boolean = False
 
+    Protected bValidColor As Color = Color.White 'used to set the default back color to show when the value input is a valid one
+    Public bValidate As Boolean = True
+    Public bValidateSilently As Boolean = True
+    Public bValidateEmpty As Boolean = False
+    Protected strValidationType As String = "none"
+
     Public Property FieldName() As String
         Get
             Return Tag
@@ -100,7 +106,9 @@
     End Function
 
     Public Overridable Sub AddFieldstoList(lstFields As List(Of String))
-        lstFields.Add(FieldName)
+        If Not String.IsNullOrEmpty(FieldName) Then
+            lstFields.Add(FieldName)
+        End If
     End Sub
 
     Public Overridable Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)

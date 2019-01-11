@@ -1,11 +1,11 @@
 ﻿Public Class ucrDataLinkCombobox
     Protected bFirstLoad As Boolean = True
     Public bFillFromDataBase As Boolean = True
-    Public bValidate As Boolean = True
-    Public bValidateSilently As Boolean = True
-    Public bValidateEmpty As Boolean = False
     Private objDefaultValue As Object = Nothing
-    Private bValidColor As Color = Color.White
+
+    Protected dcmMinimum As Decimal = Decimal.MinValue
+    Protected dcmMaximum As Decimal = Decimal.MaxValue
+    Protected bMinimumIncluded, bMaximumIncluded As Boolean
 
     Public Overrides Sub PopulateControl()
         If bFillFromDataBase Then
@@ -107,19 +107,6 @@
         End If
     End Sub
 
-    Public Overrides Function ValidateValue() As Boolean
-        Dim bValid As Boolean = False
-        Dim strCol As String = cboValues.DisplayMember
-        For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp.Item(strCol).ToString = cboValues.Text Then
-                bValid = True
-                Exit For
-            End If
-        Next
-        SetBackColor(If(bValid, Color.White, Color.Red))
-        Return bValid
-    End Function
-
     ''' <summary>
     ''' Sets the back colour of the control
     ''' </summary>
@@ -183,6 +170,8 @@
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            bValidateEmpty = True
+            strValidationType = "exists"
             PopulateControl()
             bFirstLoad = False
         End If
@@ -201,18 +190,231 @@
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        'check if value is valid
-        If bValidate Then
-            ValidateValue()
-        End If
+        ValidateValue()
         OnevtValueChanged(Me, e)
     End Sub
 
     Public Overrides Sub Clear()
+        Dim bPrevValidate As Boolean = bValidate
         bValidate = False
         SetValue("")
         SetBackColor(bValidColor)
-        bValidate = True
+        bValidate = bPrevValidate
     End Sub
+
+    Public Sub SetValidationTypeAsMustExist()
+        strValidationType = "exists"
+    End Sub
+
+    ''' <summary>
+    ''' Sets validation of the combobox to any numeric
+    ''' </summary>
+    ''' <param name="dcmMin"></param>
+    ''' <param name="bIncludeMin"></param>
+    ''' <param name="dcmMax"></param>
+    ''' <param name="bIncludeMax"></param>
+    Public Sub SetValidationTypeAsNumeric(Optional dcmMin As Decimal = Decimal.MinValue, Optional bIncludeMin As Boolean = True, Optional dcmMax As Decimal = Decimal.MaxValue, Optional bIncludeMax As Boolean = True)
+        strValidationType = "numeric"
+        If dcmMin <> Decimal.MinValue Then
+            dcmMinimum = dcmMin
+            bMinimumIncluded = bIncludeMin
+        End If
+        If dcmMax <> Decimal.MaxValue Then
+            dcmMaximum = dcmMax
+            bMaximumIncluded = bIncludeMax
+        End If
+    End Sub
+
+    Public Sub SetMinimumValue(dcmMin As Decimal)
+        strValidationType = "numeric"
+        dcmMinimum = dcmMin
+        bMinimumIncluded = True
+    End Sub
+
+    Public Sub SetMaximumValue(dcmMax As Decimal)
+        strValidationType = "numeric"
+        dcmMaximum = dcmMax
+        bMaximumIncluded = True
+    End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean = False
+
+        If bValidate Then
+            'if set to not validate empty values and textbox is empty then don't proceed with validation
+            If Not bValidateEmpty AndAlso IsEmpty() Then
+                SetBackColor(bValidColor)
+                Return True
+            End If
+
+            If strValidationType = "exists" Then
+                If cboValues.DisplayMember <> "" Then
+                    For Each rTemp As DataRow In dtbRecords.Rows
+                        If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
+                            bValid = True
+                            SetBackColor(bValidColor)
+                            Exit For
+                        End If
+                    Next
+                End If
+            ElseIf strValidationType = "numeric" Then
+                Dim iValidationCode As Integer = ValidateNumeric(GetValue)
+                Select Case iValidationCode
+                    Case 0
+                        bValid = True
+                        SetBackColor(bValidColor)
+                    Case 1
+                        bValid = False
+                        SetBackColor(Color.Red)
+                        If Not bValidateSilently Then
+                            MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+                    Case 2
+                        bValid = False
+                        'check if it was lower and upper limit violation
+                        If Not (GetDcmMinimum() <= Val(GetValue)) Then
+                            SetBackColor(Color.Cyan)
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                        ElseIf Not (GetDcmMaximum() >= Val(GetValue)) Then
+                            SetBackColor(Color.Cyan)
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                        End If
+                End Select
+
+            End If
+        Else
+            bValid = True
+            SetBackColor(bValidColor)
+        End If
+        Return bValid
+    End Function
+
+
+    ''' <summary>
+    ''' checks if the string passed can be a valid value for this control
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
+    Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
+        Dim bValid As Boolean = False
+        Dim iValidationCode As Integer
+
+        If bValidate Then
+            'if set to not validate empty values and string is empty then don't proceed with validation
+            If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
+                Return True
+            End If
+
+            If strValidationType = "exists" Then
+                If cboValues.DisplayMember <> "" Then
+                    For Each rTemp As DataRow In dtbRecords.Rows
+                        If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
+                            bValid = True
+                            Exit For
+                        End If
+                    Next
+                End If
+                Return False
+            ElseIf strValidationType = "numeric" Then
+                iValidationCode = ValidateNumeric(strText)
+                Select Case iValidationCode
+                    Case 1
+                        If Not bValidateSilently Then
+                            MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End If
+                    Case 2
+                        If Not bValidateSilently Then
+                            MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                        End If
+                End Select
+                bValid = (iValidationCode = 0)
+            End If
+
+        Else
+            bValid = True
+        End If
+        Return bValid
+    End Function
+
+    'Returns integer as code for validation
+    ' 0 : string is valid
+    ' 1 : string is not numeric
+    ' 2 : string is outside range
+    Private Function ValidateNumeric(strText As String) As Integer
+        Dim dcmText As Decimal
+        Dim iType As Integer = 0
+
+        If strText <> "" Then
+            If Not IsNumeric(strText) Then
+                iType = 1
+            Else
+                dcmText = Convert.ToDecimal(strText)
+                If (dcmText < dcmMinimum) OrElse (dcmText > dcmMaximum) OrElse (Not bMinimumIncluded And dcmText <= dcmMinimum) OrElse (Not bMaximumIncluded And dcmText >= dcmMaximum) Then
+                    iType = 2
+                End If
+            End If
+        Else
+            iType = 1
+        End If
+        Return iType
+    End Function
+
+
+    ''' <summary>
+    ''' Returns the numeric range for the control
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetNumericRange() As String
+        Dim strRange As String = ""
+        If strValidationType = "numeric" Then
+            If dcmMinimum <> Decimal.MinValue Then
+                If bMinimumIncluded Then
+                    strRange = ">= " & dcmMinimum.ToString()
+                Else
+                    strRange = "> " & dcmMinimum.ToString()
+                End If
+                If dcmMaximum <> Decimal.MaxValue Then
+                    strRange = strRange & " and "
+                End If
+            End If
+            If dcmMaximum <> Decimal.MaxValue Then
+                If bMaximumIncluded Then
+                    strRange = strRange & "<= " & dcmMaximum.ToString()
+                Else
+                    strRange = strRange & "< " & dcmMaximum.ToString()
+                End If
+            End If
+        End If
+        Return strRange
+    End Function
+
+    ''' <summary>
+    ''' Returns the minimum decimal number for the control
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetDcmMinimum() As Decimal
+        Return dcmMinimum
+    End Function
+
+    ''' <summary>
+    ''' Returns the maximum decimal number for the control
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function GetDcmMaximum() As Decimal
+        Return dcmMaximum
+    End Function
+
+    ''' <summary>
+    ''' Checks if a textbox is empty
+    ''' Returns true when text box is empty
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function IsEmpty() As Boolean
+        Return String.IsNullOrEmpty(cboValues.Text)
+    End Function
 
 End Class

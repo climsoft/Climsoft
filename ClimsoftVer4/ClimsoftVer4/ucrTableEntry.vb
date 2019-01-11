@@ -44,22 +44,15 @@
     End Sub
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        'TODO update the user entered value to the data table
-
+        Dim ucr As ucrValueView
         If TypeOf sender Is ucrValueView Then
             If Not bPopulating Then
-                DirectCast(sender, ucrValueView).SetValueToDataTable(dtbRecords)
+                ucr = DirectCast(sender, ucrValueView)
+                If ucr.ValidateValue() Then
+                    ucr.SetValueToDataTable(dtbRecords)
+                End If
             End If
 
-
-            ' Dim ucr As ucrValueView = DirectCast(sender, ucrValueView)
-            'If dtbRecords.Rows.Count = 1 Then
-            '    dtbRecords.Rows(0).Item(ucr.FieldName) = ucr.GetValue
-            'ElseIf dtbRecords.Rows.Count > 1 Then
-            '    'TODO
-            'Else
-            '    'TODO
-            'End If
         End If
 
     End Sub
@@ -80,6 +73,18 @@
         End If
 
     End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        For Each ctr As Control In Controls
+            If TypeOf ctr Is ucrValueView Then
+                If Not DirectCast(ctr, ucrValueView).ValidateValue() Then
+                    ctr.Focus()
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
 
     Public Function InsertRecord() As Boolean
         Return clsDataDefinition.Save(dtbRecords)
