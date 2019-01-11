@@ -51,7 +51,10 @@ Partial Class ucrMetadataElement
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.UcrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrDataLinkType = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrSearchElementcombobox = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.lblSearchElement = New System.Windows.Forms.Label()
+        Me.lblElement = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
@@ -59,7 +62,7 @@ Partial Class ucrMetadataElement
         'chkTotalRequired
         '
         Me.chkTotalRequired.AutoSize = True
-        Me.chkTotalRequired.Location = New System.Drawing.Point(299, 305)
+        Me.chkTotalRequired.Location = New System.Drawing.Point(299, 365)
         Me.chkTotalRequired.Name = "chkTotalRequired"
         Me.chkTotalRequired.Size = New System.Drawing.Size(15, 14)
         Me.chkTotalRequired.TabIndex = 21
@@ -69,7 +72,7 @@ Partial Class ucrMetadataElement
         'lblTotalRequired
         '
         Me.lblTotalRequired.AutoSize = True
-        Me.lblTotalRequired.Location = New System.Drawing.Point(202, 306)
+        Me.lblTotalRequired.Location = New System.Drawing.Point(202, 366)
         Me.lblTotalRequired.Name = "lblTotalRequired"
         Me.lblTotalRequired.Size = New System.Drawing.Size(77, 13)
         Me.lblTotalRequired.TabIndex = 20
@@ -78,7 +81,7 @@ Partial Class ucrMetadataElement
         'chkSelected
         '
         Me.chkSelected.AutoSize = True
-        Me.chkSelected.Location = New System.Drawing.Point(298, 284)
+        Me.chkSelected.Location = New System.Drawing.Point(298, 344)
         Me.chkSelected.Name = "chkSelected"
         Me.chkSelected.Size = New System.Drawing.Size(15, 14)
         Me.chkSelected.TabIndex = 19
@@ -88,7 +91,7 @@ Partial Class ucrMetadataElement
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(201, 285)
+        Me.lblSelected.Location = New System.Drawing.Point(201, 345)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(49, 13)
         Me.lblSelected.TabIndex = 18
@@ -97,7 +100,7 @@ Partial Class ucrMetadataElement
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(201, 260)
+        Me.lblType.Location = New System.Drawing.Point(201, 320)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(31, 13)
         Me.lblType.TabIndex = 16
@@ -106,7 +109,7 @@ Partial Class ucrMetadataElement
         'lblUpperlimit
         '
         Me.lblUpperlimit.AutoSize = True
-        Me.lblUpperlimit.Location = New System.Drawing.Point(201, 179)
+        Me.lblUpperlimit.Location = New System.Drawing.Point(201, 239)
         Me.lblUpperlimit.Name = "lblUpperlimit"
         Me.lblUpperlimit.Size = New System.Drawing.Size(60, 13)
         Me.lblUpperlimit.TabIndex = 10
@@ -115,7 +118,7 @@ Partial Class ucrMetadataElement
         'lblScale
         '
         Me.lblScale.AutoSize = True
-        Me.lblScale.Location = New System.Drawing.Point(201, 152)
+        Me.lblScale.Location = New System.Drawing.Point(201, 212)
         Me.lblScale.Name = "lblScale"
         Me.lblScale.Size = New System.Drawing.Size(34, 13)
         Me.lblScale.TabIndex = 8
@@ -124,7 +127,7 @@ Partial Class ucrMetadataElement
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(201, 125)
+        Me.lblDescription.Location = New System.Drawing.Point(201, 185)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(60, 13)
         Me.lblDescription.TabIndex = 6
@@ -133,7 +136,7 @@ Partial Class ucrMetadataElement
         'lblName
         '
         Me.lblName.AutoSize = True
-        Me.lblName.Location = New System.Drawing.Point(201, 98)
+        Me.lblName.Location = New System.Drawing.Point(201, 158)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(35, 13)
         Me.lblName.TabIndex = 4
@@ -142,7 +145,7 @@ Partial Class ucrMetadataElement
         'lblUnit
         '
         Me.lblUnit.AutoSize = True
-        Me.lblUnit.Location = New System.Drawing.Point(201, 233)
+        Me.lblUnit.Location = New System.Drawing.Point(201, 293)
         Me.lblUnit.Name = "lblUnit"
         Me.lblUnit.Size = New System.Drawing.Size(26, 13)
         Me.lblUnit.TabIndex = 14
@@ -151,7 +154,7 @@ Partial Class ucrMetadataElement
         'lblLowerLimit
         '
         Me.lblLowerLimit.AutoSize = True
-        Me.lblLowerLimit.Location = New System.Drawing.Point(201, 206)
+        Me.lblLowerLimit.Location = New System.Drawing.Point(201, 266)
         Me.lblLowerLimit.Name = "lblLowerLimit"
         Me.lblLowerLimit.Size = New System.Drawing.Size(60, 13)
         Me.lblLowerLimit.TabIndex = 12
@@ -160,7 +163,7 @@ Partial Class ucrMetadataElement
         'lblAbbreviation
         '
         Me.lblAbbreviation.AutoSize = True
-        Me.lblAbbreviation.Location = New System.Drawing.Point(201, 71)
+        Me.lblAbbreviation.Location = New System.Drawing.Point(201, 131)
         Me.lblAbbreviation.Name = "lblAbbreviation"
         Me.lblAbbreviation.Size = New System.Drawing.Size(66, 13)
         Me.lblAbbreviation.TabIndex = 2
@@ -169,7 +172,7 @@ Partial Class ucrMetadataElement
         'lblID
         '
         Me.lblID.AutoSize = True
-        Me.lblID.Location = New System.Drawing.Point(201, 43)
+        Me.lblID.Location = New System.Drawing.Point(201, 103)
         Me.lblID.Name = "lblID"
         Me.lblID.Size = New System.Drawing.Size(18, 13)
         Me.lblID.TabIndex = 0
@@ -177,7 +180,7 @@ Partial Class ucrMetadataElement
         '
         'ucrNavigationElement
         '
-        Me.ucrNavigationElement.Location = New System.Drawing.Point(170, 377)
+        Me.ucrNavigationElement.Location = New System.Drawing.Point(170, 437)
         Me.ucrNavigationElement.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationElement.Name = "ucrNavigationElement"
         Me.ucrNavigationElement.Size = New System.Drawing.Size(336, 25)
@@ -186,7 +189,7 @@ Partial Class ucrMetadataElement
         'ucrDataLinkID
         '
         Me.ucrDataLinkID.FieldName = "elementId"
-        Me.ucrDataLinkID.Location = New System.Drawing.Point(298, 41)
+        Me.ucrDataLinkID.Location = New System.Drawing.Point(298, 101)
         Me.ucrDataLinkID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkID.Name = "ucrDataLinkID"
         Me.ucrDataLinkID.Size = New System.Drawing.Size(178, 21)
@@ -196,7 +199,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxAbbreviation
         '
         Me.ucrTextBoxAbbreviation.FieldName = "abbreviation"
-        Me.ucrTextBoxAbbreviation.Location = New System.Drawing.Point(298, 68)
+        Me.ucrTextBoxAbbreviation.Location = New System.Drawing.Point(298, 128)
         Me.ucrTextBoxAbbreviation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxAbbreviation.Name = "ucrTextBoxAbbreviation"
         Me.ucrTextBoxAbbreviation.Size = New System.Drawing.Size(178, 20)
@@ -207,7 +210,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxName
         '
         Me.ucrTextBoxName.FieldName = "elementName"
-        Me.ucrTextBoxName.Location = New System.Drawing.Point(298, 95)
+        Me.ucrTextBoxName.Location = New System.Drawing.Point(298, 155)
         Me.ucrTextBoxName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxName.Name = "ucrTextBoxName"
         Me.ucrTextBoxName.Size = New System.Drawing.Size(178, 20)
@@ -218,7 +221,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxDescription
         '
         Me.ucrTextBoxDescription.FieldName = "description"
-        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(298, 122)
+        Me.ucrTextBoxDescription.Location = New System.Drawing.Point(298, 182)
         Me.ucrTextBoxDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxDescription.Name = "ucrTextBoxDescription"
         Me.ucrTextBoxDescription.Size = New System.Drawing.Size(178, 20)
@@ -229,7 +232,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxScale
         '
         Me.ucrTextBoxScale.FieldName = "elementScale"
-        Me.ucrTextBoxScale.Location = New System.Drawing.Point(298, 148)
+        Me.ucrTextBoxScale.Location = New System.Drawing.Point(298, 208)
         Me.ucrTextBoxScale.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxScale.Name = "ucrTextBoxScale"
         Me.ucrTextBoxScale.Size = New System.Drawing.Size(178, 20)
@@ -240,7 +243,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxUpperLimit
         '
         Me.ucrTextBoxUpperLimit.FieldName = "upperLimit"
-        Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(298, 174)
+        Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(298, 234)
         Me.ucrTextBoxUpperLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUpperLimit.Name = "ucrTextBoxUpperLimit"
         Me.ucrTextBoxUpperLimit.Size = New System.Drawing.Size(178, 20)
@@ -251,7 +254,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxLowerLimit
         '
         Me.ucrTextBoxLowerLimit.FieldName = "lowerLimit"
-        Me.ucrTextBoxLowerLimit.Location = New System.Drawing.Point(298, 199)
+        Me.ucrTextBoxLowerLimit.Location = New System.Drawing.Point(298, 259)
         Me.ucrTextBoxLowerLimit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxLowerLimit.Name = "ucrTextBoxLowerLimit"
         Me.ucrTextBoxLowerLimit.Size = New System.Drawing.Size(178, 20)
@@ -262,7 +265,7 @@ Partial Class ucrMetadataElement
         'ucrTextBoxUnit
         '
         Me.ucrTextBoxUnit.FieldName = "units"
-        Me.ucrTextBoxUnit.Location = New System.Drawing.Point(298, 226)
+        Me.ucrTextBoxUnit.Location = New System.Drawing.Point(298, 286)
         Me.ucrTextBoxUnit.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxUnit.Name = "ucrTextBoxUnit"
         Me.ucrTextBoxUnit.Size = New System.Drawing.Size(178, 20)
@@ -278,7 +281,7 @@ Partial Class ucrMetadataElement
         Me.GroupBox13.Controls.Add(Me.btnUpdate)
         Me.GroupBox13.Controls.Add(Me.btnSave)
         Me.GroupBox13.Controls.Add(Me.btnAddNew)
-        Me.GroupBox13.Location = New System.Drawing.Point(17, 332)
+        Me.GroupBox13.Location = New System.Drawing.Point(17, 392)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(581, 34)
         Me.GroupBox13.TabIndex = 22
@@ -338,21 +341,52 @@ Partial Class ucrMetadataElement
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'UcrDataLinkType
+        'ucrDataLinkType
         '
-        Me.UcrDataLinkType.FieldName = "elementtype"
-        Me.UcrDataLinkType.Location = New System.Drawing.Point(298, 255)
-        Me.UcrDataLinkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrDataLinkType.Name = "UcrDataLinkType"
-        Me.UcrDataLinkType.Size = New System.Drawing.Size(178, 21)
-        Me.UcrDataLinkType.TabIndex = 17
-        Me.UcrDataLinkType.Tag = "elementtype"
+        Me.ucrDataLinkType.FieldName = "elementtype"
+        Me.ucrDataLinkType.Location = New System.Drawing.Point(298, 315)
+        Me.ucrDataLinkType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrDataLinkType.Name = "ucrDataLinkType"
+        Me.ucrDataLinkType.Size = New System.Drawing.Size(178, 21)
+        Me.ucrDataLinkType.TabIndex = 17
+        Me.ucrDataLinkType.Tag = "elementtype"
+        '
+        'ucrSearchElementcombobox
+        '
+        Me.ucrSearchElementcombobox.FieldName = Nothing
+        Me.ucrSearchElementcombobox.Location = New System.Drawing.Point(483, 46)
+        Me.ucrSearchElementcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSearchElementcombobox.Name = "ucrSearchElementcombobox"
+        Me.ucrSearchElementcombobox.Size = New System.Drawing.Size(178, 21)
+        Me.ucrSearchElementcombobox.TabIndex = 25
+        '
+        'lblSearchElement
+        '
+        Me.lblSearchElement.AutoSize = True
+        Me.lblSearchElement.Location = New System.Drawing.Point(385, 48)
+        Me.lblSearchElement.Name = "lblSearchElement"
+        Me.lblSearchElement.Size = New System.Drawing.Size(82, 13)
+        Me.lblSearchElement.TabIndex = 24
+        Me.lblSearchElement.Text = "Search Element"
+        '
+        'lblElement
+        '
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblElement.Location = New System.Drawing.Point(312, 13)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(60, 15)
+        Me.lblElement.TabIndex = 26
+        Me.lblElement.Text = "Element"
         '
         'ucrMetadataElement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrDataLinkType)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.ucrSearchElementcombobox)
+        Me.Controls.Add(Me.lblSearchElement)
+        Me.Controls.Add(Me.ucrDataLinkType)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrTextBoxUnit)
         Me.Controls.Add(Me.ucrTextBoxLowerLimit)
@@ -377,7 +411,7 @@ Partial Class ucrMetadataElement
         Me.Controls.Add(Me.lblAbbreviation)
         Me.Controls.Add(Me.lblID)
         Me.Name = "ucrMetadataElement"
-        Me.Size = New System.Drawing.Size(676, 408)
+        Me.Size = New System.Drawing.Size(676, 481)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -413,6 +447,9 @@ Partial Class ucrMetadataElement
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
-    Friend WithEvents UcrDataLinkType As ucrDataLinkCombobox
+    Friend WithEvents ucrDataLinkType As ucrDataLinkCombobox
     Friend WithEvents btnClear As Button
+    Friend WithEvents ucrSearchElementcombobox As ucrDataLinkCombobox
+    Friend WithEvents lblSearchElement As Label
+    Friend WithEvents lblElement As Label
 End Class
