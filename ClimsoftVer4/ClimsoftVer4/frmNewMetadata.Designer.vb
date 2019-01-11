@@ -86,7 +86,7 @@ Partial Class frmNewMetadata
         '
         Me.UcrMetadataStation1.Location = New System.Drawing.Point(0, 0)
         Me.UcrMetadataStation1.Name = "UcrMetadataStation1"
-        Me.UcrMetadataStation1.Size = New System.Drawing.Size(778, 501)
+        Me.UcrMetadataStation1.Size = New System.Drawing.Size(778, 498)
         Me.UcrMetadataStation1.TabIndex = 0
         '
         'TabElement
