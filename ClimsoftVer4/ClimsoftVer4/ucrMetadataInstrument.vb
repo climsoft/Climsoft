@@ -9,10 +9,12 @@
             ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
-            ucrDataLinkInstrumentID.bValidate = False ' TODO build in the extra validation like accepting new valid value
+            ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1) 'validate any value as a numeric 
 
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
+            ucrTextBoxUncertainity.SetValidationTypeAsNumeric()
+            ucrTextBoxHeight.SetValidationTypeAsNumeric()
 
             'set FILTER control used in the where clause of the SELECT statement
             AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
@@ -40,7 +42,7 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -58,17 +60,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -104,16 +114,13 @@
             ucrTextBoxImageFile.SetValue(filePathName)
         End If
 
-
     End Sub
 
     Private Sub ucrTextBoxImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxImageFile.evtTextChanged
         picInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
     End Sub
 
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
+
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
