@@ -24,7 +24,6 @@ Partial Class ucrMetadataStationElement
     Private Sub InitializeComponent()
         Me.ucrDataLinkInstrumentID = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrDataLinkElementID = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.lblStationElement = New System.Windows.Forms.Label()
         Me.lblInstrumentCode = New System.Windows.Forms.Label()
         Me.lblInstumentType = New System.Windows.Forms.Label()
         Me.lblBdate = New System.Windows.Forms.Label()
@@ -48,6 +47,7 @@ Partial Class ucrMetadataStationElement
         Me.ucrNavigationStationElement = New ClimsoftVer4.ucrNavigation()
         Me.ucrDatePickerBeginDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
+        Me.lblStationElement = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +55,7 @@ Partial Class ucrMetadataStationElement
         'ucrDataLinkInstrumentID
         '
         Me.ucrDataLinkInstrumentID.FieldName = "recordedWith"
-        Me.ucrDataLinkInstrumentID.Location = New System.Drawing.Point(242, 92)
+        Me.ucrDataLinkInstrumentID.Location = New System.Drawing.Point(242, 140)
         Me.ucrDataLinkInstrumentID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkInstrumentID.Name = "ucrDataLinkInstrumentID"
         Me.ucrDataLinkInstrumentID.Size = New System.Drawing.Size(178, 21)
@@ -65,26 +65,17 @@ Partial Class ucrMetadataStationElement
         'ucrDataLinkElementID
         '
         Me.ucrDataLinkElementID.FieldName = "describedBy"
-        Me.ucrDataLinkElementID.Location = New System.Drawing.Point(242, 65)
+        Me.ucrDataLinkElementID.Location = New System.Drawing.Point(242, 113)
         Me.ucrDataLinkElementID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkElementID.Name = "ucrDataLinkElementID"
-        Me.ucrDataLinkElementID.Size = New System.Drawing.Size(180, 21)
+        Me.ucrDataLinkElementID.Size = New System.Drawing.Size(178, 21)
         Me.ucrDataLinkElementID.TabIndex = 4
         Me.ucrDataLinkElementID.Tag = "describedBy"
-        '
-        'lblStationElement
-        '
-        Me.lblStationElement.AutoSize = True
-        Me.lblStationElement.Location = New System.Drawing.Point(322, 8)
-        Me.lblStationElement.Name = "lblStationElement"
-        Me.lblStationElement.Size = New System.Drawing.Size(81, 13)
-        Me.lblStationElement.TabIndex = 0
-        Me.lblStationElement.Text = "Station Element"
         '
         'lblInstrumentCode
         '
         Me.lblInstrumentCode.AutoSize = True
-        Me.lblInstrumentCode.Location = New System.Drawing.Point(302, 130)
+        Me.lblInstrumentCode.Location = New System.Drawing.Point(302, 178)
         Me.lblInstrumentCode.Name = "lblInstrumentCode"
         Me.lblInstrumentCode.Size = New System.Drawing.Size(68, 13)
         Me.lblInstrumentCode.TabIndex = 9
@@ -93,7 +84,7 @@ Partial Class ucrMetadataStationElement
         'lblInstumentType
         '
         Me.lblInstumentType.AutoSize = True
-        Me.lblInstumentType.Location = New System.Drawing.Point(148, 130)
+        Me.lblInstumentType.Location = New System.Drawing.Point(148, 178)
         Me.lblInstumentType.Name = "lblInstumentType"
         Me.lblInstumentType.Size = New System.Drawing.Size(83, 13)
         Me.lblInstumentType.TabIndex = 7
@@ -102,7 +93,7 @@ Partial Class ucrMetadataStationElement
         'lblBdate
         '
         Me.lblBdate.AutoSize = True
-        Me.lblBdate.Location = New System.Drawing.Point(149, 221)
+        Me.lblBdate.Location = New System.Drawing.Point(149, 269)
         Me.lblBdate.Name = "lblBdate"
         Me.lblBdate.Size = New System.Drawing.Size(60, 13)
         Me.lblBdate.TabIndex = 14
@@ -111,7 +102,7 @@ Partial Class ucrMetadataStationElement
         'lblHeight
         '
         Me.lblHeight.AutoSize = True
-        Me.lblHeight.Location = New System.Drawing.Point(148, 192)
+        Me.lblHeight.Location = New System.Drawing.Point(148, 240)
         Me.lblHeight.Name = "lblHeight"
         Me.lblHeight.Size = New System.Drawing.Size(38, 13)
         Me.lblHeight.TabIndex = 12
@@ -120,7 +111,7 @@ Partial Class ucrMetadataStationElement
         'lblSchedule
         '
         Me.lblSchedule.AutoSize = True
-        Me.lblSchedule.Location = New System.Drawing.Point(148, 161)
+        Me.lblSchedule.Location = New System.Drawing.Point(148, 209)
         Me.lblSchedule.Name = "lblSchedule"
         Me.lblSchedule.Size = New System.Drawing.Size(80, 13)
         Me.lblSchedule.TabIndex = 10
@@ -129,7 +120,7 @@ Partial Class ucrMetadataStationElement
         'lblInstrument
         '
         Me.lblInstrument.AutoSize = True
-        Me.lblInstrument.Location = New System.Drawing.Point(148, 100)
+        Me.lblInstrument.Location = New System.Drawing.Point(148, 148)
         Me.lblInstrument.Name = "lblInstrument"
         Me.lblInstrument.Size = New System.Drawing.Size(70, 13)
         Me.lblInstrument.TabIndex = 5
@@ -138,7 +129,7 @@ Partial Class ucrMetadataStationElement
         'lblEdate
         '
         Me.lblEdate.AutoSize = True
-        Me.lblEdate.Location = New System.Drawing.Point(148, 252)
+        Me.lblEdate.Location = New System.Drawing.Point(148, 300)
         Me.lblEdate.Name = "lblEdate"
         Me.lblEdate.Size = New System.Drawing.Size(52, 13)
         Me.lblEdate.TabIndex = 16
@@ -147,7 +138,7 @@ Partial Class ucrMetadataStationElement
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(148, 72)
+        Me.lblElement.Location = New System.Drawing.Point(148, 120)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
         Me.lblElement.TabIndex = 3
@@ -156,7 +147,7 @@ Partial Class ucrMetadataStationElement
         'lblstation
         '
         Me.lblstation.AutoSize = True
-        Me.lblstation.Location = New System.Drawing.Point(148, 40)
+        Me.lblstation.Location = New System.Drawing.Point(148, 88)
         Me.lblstation.Name = "lblstation"
         Me.lblstation.Size = New System.Drawing.Size(54, 13)
         Me.lblstation.TabIndex = 1
@@ -165,7 +156,7 @@ Partial Class ucrMetadataStationElement
         'ucrTextboxInstrumentType
         '
         Me.ucrTextboxInstrumentType.FieldName = "instrumentcode"
-        Me.ucrTextboxInstrumentType.Location = New System.Drawing.Point(243, 123)
+        Me.ucrTextboxInstrumentType.Location = New System.Drawing.Point(243, 171)
         Me.ucrTextboxInstrumentType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextboxInstrumentType.Name = "ucrTextboxInstrumentType"
         Me.ucrTextboxInstrumentType.Size = New System.Drawing.Size(51, 20)
@@ -176,17 +167,17 @@ Partial Class ucrMetadataStationElement
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "recordedFrom"
-        Me.ucrStationSelector.Location = New System.Drawing.Point(242, 29)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(242, 77)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(253, 24)
+        Me.ucrStationSelector.Size = New System.Drawing.Size(178, 24)
         Me.ucrStationSelector.TabIndex = 2
         Me.ucrStationSelector.Tag = "recordedFrom"
         '
         'ucrDataLinkScheduleClass
         '
         Me.ucrDataLinkScheduleClass.FieldName = "scheduledFor"
-        Me.ucrDataLinkScheduleClass.Location = New System.Drawing.Point(242, 153)
+        Me.ucrDataLinkScheduleClass.Location = New System.Drawing.Point(242, 201)
         Me.ucrDataLinkScheduleClass.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDataLinkScheduleClass.Name = "ucrDataLinkScheduleClass"
         Me.ucrDataLinkScheduleClass.Size = New System.Drawing.Size(178, 21)
@@ -196,7 +187,7 @@ Partial Class ucrMetadataStationElement
         'ucrTextHeight
         '
         Me.ucrTextHeight.FieldName = "height"
-        Me.ucrTextHeight.Location = New System.Drawing.Point(242, 185)
+        Me.ucrTextHeight.Location = New System.Drawing.Point(242, 233)
         Me.ucrTextHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextHeight.Name = "ucrTextHeight"
         Me.ucrTextHeight.Size = New System.Drawing.Size(51, 20)
@@ -283,25 +274,36 @@ Partial Class ucrMetadataStationElement
         'ucrDatePickerBeginDate
         '
         Me.ucrDatePickerBeginDate.FieldName = "beginDate"
-        Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(242, 213)
+        Me.ucrDatePickerBeginDate.Location = New System.Drawing.Point(242, 261)
         Me.ucrDatePickerBeginDate.Name = "ucrDatePickerBeginDate"
-        Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(202, 21)
+        Me.ucrDatePickerBeginDate.Size = New System.Drawing.Size(178, 21)
         Me.ucrDatePickerBeginDate.TabIndex = 15
         Me.ucrDatePickerBeginDate.Tag = "beginDate"
         '
         'ucrDatePickerEndDate
         '
         Me.ucrDatePickerEndDate.FieldName = "endDate"
-        Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(242, 244)
+        Me.ucrDatePickerEndDate.Location = New System.Drawing.Point(242, 292)
         Me.ucrDatePickerEndDate.Name = "ucrDatePickerEndDate"
-        Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(202, 21)
+        Me.ucrDatePickerEndDate.Size = New System.Drawing.Size(178, 21)
         Me.ucrDatePickerEndDate.TabIndex = 17
         Me.ucrDatePickerEndDate.Tag = "endDate"
+        '
+        'lblStationElement
+        '
+        Me.lblStationElement.AutoSize = True
+        Me.lblStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStationElement.Location = New System.Drawing.Point(295, 21)
+        Me.lblStationElement.Name = "lblStationElement"
+        Me.lblStationElement.Size = New System.Drawing.Size(109, 15)
+        Me.lblStationElement.TabIndex = 20
+        Me.lblStationElement.Text = "Station Element"
         '
         'ucrMetadataStationElement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblStationElement)
         Me.Controls.Add(Me.ucrDatePickerEndDate)
         Me.Controls.Add(Me.ucrDatePickerBeginDate)
         Me.Controls.Add(Me.ucrNavigationStationElement)
@@ -311,7 +313,6 @@ Partial Class ucrMetadataStationElement
         Me.Controls.Add(Me.ucrTextboxInstrumentType)
         Me.Controls.Add(Me.ucrDataLinkInstrumentID)
         Me.Controls.Add(Me.ucrDataLinkElementID)
-        Me.Controls.Add(Me.lblStationElement)
         Me.Controls.Add(Me.lblInstrumentCode)
         Me.Controls.Add(Me.lblInstumentType)
         Me.Controls.Add(Me.GroupBox7)
@@ -333,7 +334,6 @@ Partial Class ucrMetadataStationElement
 
     Friend WithEvents ucrDataLinkInstrumentID As ucrDataLinkCombobox
     Friend WithEvents ucrDataLinkElementID As ucrDataLinkCombobox
-    Friend WithEvents lblStationElement As Label
     Friend WithEvents lblInstrumentCode As Label
     Friend WithEvents lblInstumentType As Label
     Friend WithEvents lblBdate As Label
@@ -357,4 +357,5 @@ Partial Class ucrMetadataStationElement
     Friend WithEvents ucrDatePickerBeginDate As ucrDatePicker
     Friend WithEvents ucrDatePickerEndDate As ucrDatePicker
     Friend WithEvents btnClear As Button
+    Friend WithEvents lblStationElement As Label
 End Class

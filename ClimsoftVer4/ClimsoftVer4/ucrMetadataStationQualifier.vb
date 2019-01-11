@@ -9,6 +9,9 @@
             ucrTextBoxQualifier.SetValue("qualifier")
             ucrTextBoxQualifier.bValidate = False
 
+            'set view type for the station selector to ID
+            ucrStationSelector.SetViewTypeAsIDs()
+
             AddLinkedControlFilters(ucrTextBoxQualifier, ucrTextBoxQualifier.FieldName, "=", strLinkedFieldName:=ucrTextBoxQualifier.FieldName, bForceValuesAsString:=True)
 
             AddKeyField(ucrTextBoxQualifier.FieldName)
