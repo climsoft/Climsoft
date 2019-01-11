@@ -142,32 +142,36 @@ Public Class ucrTextBox
     Public Function ValidateText(strText As String, Optional bValidateSilently As Boolean = True) As Boolean
         Dim iValidationCode As Integer
 
-        'if set to not validate empty values and string is empty then don't proceed with validation
-        If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
+        If bValidate Then
+            'if set to not validate empty values and string is empty then don't proceed with validation
+            If Not bValidateEmpty AndAlso String.IsNullOrEmpty(strText) Then
+                Return True
+            End If
+
+            iValidationCode = GetValidationCode(strText)
+            Select Case iValidationCode
+                Case 0
+                'this is for none. No validation
+                Case 1
+                    Select Case strValidationType
+                        Case "Numeric"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                    End Select
+                Case 2
+                    Select Case strValidationType
+                        Case "Numeric"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                    End Select
+            End Select
+            Return (iValidationCode = 0)
+        Else
             Return True
         End If
 
-        iValidationCode = GetValidationCode(strText)
-        Select Case iValidationCode
-            Case 0
-                'this is for none. No validation
-            Case 1
-                Select Case strValidationType
-                    Case "Numeric"
-                        If Not bValidateSilently Then
-                            MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        End If
-                End Select
-            Case 2
-                Select Case strValidationType
-                    Case "Numeric"
-                        If Not bValidateSilently Then
-                            MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        End If
-                End Select
-
-        End Select
-        Return (iValidationCode = 0)
     End Function
 
     Public Function GetValidationCode(strText As String) As Integer

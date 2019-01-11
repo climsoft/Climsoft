@@ -74,6 +74,18 @@
 
     End Sub
 
+    Public Overrides Function ValidateValue() As Boolean
+        For Each ctr As Control In Controls
+            If TypeOf ctr Is ucrValueView Then
+                If Not DirectCast(ctr, ucrValueView).ValidateValue() Then
+                    ctr.Focus()
+                    Return False
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
     Public Function InsertRecord() As Boolean
         Return clsDataDefinition.Save(dtbRecords)
     End Function
