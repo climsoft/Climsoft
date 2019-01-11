@@ -28,32 +28,11 @@
 
             'populate the values
             ucrNavigationInstrument.PopulateControl()
+            SaveEnable()
 
         End If
     End Sub
 
-
-    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
-        Dim img, fl As String
-
-        fl = ""
-        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
-        OpenFileDialog.ShowDialog()
-        img = OpenFileDialog.FileName
-
-        For i = 1 To Len(img)
-            If Strings.Mid(img, i, 1) = "\" Then
-                fl = fl & "/"
-            Else
-                fl = fl & Strings.Mid(img, i, 1)
-            End If
-        Next
-
-        'MsgBox(fl)
-        ucrTextBoxImageFile.Text = fl
-        ucrTextBoxImageFile.Refresh()
-
-    End Sub
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationInstrument.NewRecord()
         SaveEnable()
@@ -111,6 +90,25 @@
         ucrNavigationInstrument.MoveFirst()
         'Enable appropriate base buttons
         SaveEnable()
+    End Sub
+
+    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
+        Dim filePathName As String
+
+        OpenFileDialog.Title = "Select image file"
+        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            filePathName = OpenFileDialog.FileName
+            filePathName = filePathName.Replace("\", "/")
+            ucrTextBoxImageFile.SetValue(filePathName)
+        End If
+
+
+    End Sub
+
+    Private Sub ucrTextBoxImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxImageFile.evtTextChanged
+        picInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
     End Sub
 
     Private Function ValidateValues() As Boolean
