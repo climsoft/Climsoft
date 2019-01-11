@@ -10,9 +10,12 @@
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
             ucrDataLinkInstrumentID.bValidate = False ' TODO build in the extra validation like accepting new valid value
+            ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1)
 
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
+            ucrTextBoxUncertainity.SetValidationTypeAsNumeric()
+            ucrTextBoxHeight.SetValidationTypeAsNumeric()
 
             'set FILTER control used in the where clause of the SELECT statement
             AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
@@ -103,7 +106,6 @@
             filePathName = filePathName.Replace("\", "/")
             ucrTextBoxImageFile.SetValue(filePathName)
         End If
-
 
     End Sub
 
