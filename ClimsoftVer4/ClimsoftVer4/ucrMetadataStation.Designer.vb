@@ -38,7 +38,6 @@ Partial Class ucrMetadataStation
         Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrSearchStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.ucrStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrStationIDcombobox = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
@@ -63,6 +62,7 @@ Partial Class ucrMetadataStation
         Me.lblSearchStation = New System.Windows.Forms.Label()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
@@ -85,7 +85,7 @@ Partial Class ucrMetadataStation
         Me.lblStationId = New System.Windows.Forms.Label()
         Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.btnClear = New System.Windows.Forms.Button()
+        Me.ucrStationName = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStation.SuspendLayout()
         Me.grpComputationDD.SuspendLayout()
@@ -94,6 +94,7 @@ Partial Class ucrMetadataStation
         '
         'grpStation
         '
+        Me.grpStation.Controls.Add(Me.ucrStationName)
         Me.grpStation.Controls.Add(Me.ucrDatePickerClosingDate)
         Me.grpStation.Controls.Add(Me.ucrDatePickerOpeningDate)
         Me.grpStation.Controls.Add(Me.ucrTextBoxGeographicalAccuracy)
@@ -109,7 +110,6 @@ Partial Class ucrMetadataStation
         Me.grpStation.Controls.Add(Me.ucrTextBoxLongitude)
         Me.grpStation.Controls.Add(Me.ucrTextBoxLatitude)
         Me.grpStation.Controls.Add(Me.ucrSearchStationNamecombobox)
-        Me.grpStation.Controls.Add(Me.ucrStationNamecombobox)
         Me.grpStation.Controls.Add(Me.ucrStationIDcombobox)
         Me.grpStation.Controls.Add(Me.Label24)
         Me.grpStation.Controls.Add(Me.grpComputationDD)
@@ -297,16 +297,6 @@ Partial Class ucrMetadataStation
         Me.ucrSearchStationNamecombobox.Name = "ucrSearchStationNamecombobox"
         Me.ucrSearchStationNamecombobox.Size = New System.Drawing.Size(228, 21)
         Me.ucrSearchStationNamecombobox.TabIndex = 5
-        '
-        'ucrStationNamecombobox
-        '
-        Me.ucrStationNamecombobox.FieldName = "stationName"
-        Me.ucrStationNamecombobox.Location = New System.Drawing.Point(117, 43)
-        Me.ucrStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationNamecombobox.Name = "ucrStationNamecombobox"
-        Me.ucrStationNamecombobox.Size = New System.Drawing.Size(228, 21)
-        Me.ucrStationNamecombobox.TabIndex = 3
-        Me.ucrStationNamecombobox.Tag = "stationName"
         '
         'ucrStationIDcombobox
         '
@@ -557,6 +547,15 @@ Partial Class ucrMetadataStation
         Me.Panel2.Size = New System.Drawing.Size(721, 29)
         Me.Panel2.TabIndex = 37
         '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(424, 0)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(64, 27)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
         'btnImport
         '
         Me.btnImport.Location = New System.Drawing.Point(626, 0)
@@ -758,14 +757,16 @@ Partial Class ucrMetadataStation
         Me.lblStation.TabIndex = 0
         Me.lblStation.Text = "Station"
         '
-        'btnClear
+        'ucrStationName
         '
-        Me.btnClear.Location = New System.Drawing.Point(424, 0)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(64, 27)
-        Me.btnClear.TabIndex = 4
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
+        Me.ucrStationName.FieldName = "stationName"
+        Me.ucrStationName.Location = New System.Drawing.Point(117, 43)
+        Me.ucrStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationName.Name = "ucrStationName"
+        Me.ucrStationName.Size = New System.Drawing.Size(228, 21)
+        Me.ucrStationName.TabIndex = 38
+        Me.ucrStationName.Tag = "stationName"
+        Me.ucrStationName.TextboxValue = ""
         '
         'ucrMetadataStation
         '
@@ -829,7 +830,6 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrTextBoxLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxLatitude As ucrTextBox
     Friend WithEvents ucrSearchStationNamecombobox As ucrDataLinkCombobox
-    Friend WithEvents ucrStationNamecombobox As ucrDataLinkCombobox
     Friend WithEvents ucrStationIDcombobox As ucrDataLinkCombobox
     Friend WithEvents ucrTextBoxQualifier As ucrTextBox
     Friend WithEvents ucrTextBoxDrainageBasin As ucrTextBox
@@ -851,4 +851,5 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
     Friend WithEvents lblStation As Label
     Friend WithEvents btnClear As Button
+    Friend WithEvents ucrStationName As ucrTextBox
 End Class
