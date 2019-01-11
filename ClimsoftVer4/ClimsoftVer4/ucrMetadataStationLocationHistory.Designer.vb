@@ -22,6 +22,7 @@ Partial Class ucrMetadataStationLocationHistory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblClosingDate = New System.Windows.Forms.Label()
@@ -51,6 +52,11 @@ Partial Class ucrMetadataStationLocationHistory
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
+        Me.AdministrationRegionTextBox = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AdministrationRegionLabel = New System.Windows.Forms.Label()
+        Me.DrainageBasinLabel = New System.Windows.Forms.Label()
+        Me.DrainageBasinTextBox = New System.Windows.Forms.TextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
@@ -216,7 +222,7 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrTextBoxElevation.Location = New System.Drawing.Point(276, 267)
         Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
-        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(128, 20)
+        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(50, 20)
         Me.ucrTextBoxElevation.TabIndex = 18
         Me.ucrTextBoxElevation.Tag = "elevation"
         Me.ucrTextBoxElevation.TextboxValue = ""
@@ -256,7 +262,7 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrStationSelector.Location = New System.Drawing.Point(275, 39)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(219, 27)
+        Me.ucrStationSelector.Size = New System.Drawing.Size(129, 27)
         Me.ucrStationSelector.TabIndex = 2
         Me.ucrStationSelector.Tag = "belongsTo"
         '
@@ -268,7 +274,7 @@ Partial Class ucrMetadataStationLocationHistory
         Me.grpCommand2.Controls.Add(Me.btnDelete)
         Me.grpCommand2.Controls.Add(Me.btnUpdate)
         Me.grpCommand2.Controls.Add(Me.btnSave)
-        Me.grpCommand2.Location = New System.Drawing.Point(37, 344)
+        Me.grpCommand2.Location = New System.Drawing.Point(37, 391)
         Me.grpCommand2.Name = "grpCommand2"
         Me.grpCommand2.Size = New System.Drawing.Size(601, 31)
         Me.grpCommand2.TabIndex = 21
@@ -330,16 +336,59 @@ Partial Class ucrMetadataStationLocationHistory
         '
         'ucrNavigationStationLocationHistory
         '
-        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(141, 384)
+        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(141, 438)
         Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
         Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationStationLocationHistory.TabIndex = 22
         '
+        'AdministrationRegionTextBox
+        '
+        Me.AdministrationRegionTextBox.Location = New System.Drawing.Point(275, 321)
+        Me.AdministrationRegionTextBox.Name = "AdministrationRegionTextBox"
+        Me.AdministrationRegionTextBox.Size = New System.Drawing.Size(51, 20)
+        Me.AdministrationRegionTextBox.TabIndex = 23
+        Me.AdministrationRegionTextBox.Tag = "adminRegion"
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
+        'AdministrationRegionLabel
+        '
+        Me.AdministrationRegionLabel.AutoSize = True
+        Me.AdministrationRegionLabel.Location = New System.Drawing.Point(143, 328)
+        Me.AdministrationRegionLabel.Name = "AdministrationRegionLabel"
+        Me.AdministrationRegionLabel.Size = New System.Drawing.Size(109, 13)
+        Me.AdministrationRegionLabel.TabIndex = 25
+        Me.AdministrationRegionLabel.Text = "Administration Region"
+        '
+        'DrainageBasinLabel
+        '
+        Me.DrainageBasinLabel.AutoSize = True
+        Me.DrainageBasinLabel.Location = New System.Drawing.Point(143, 361)
+        Me.DrainageBasinLabel.Name = "DrainageBasinLabel"
+        Me.DrainageBasinLabel.Size = New System.Drawing.Size(79, 13)
+        Me.DrainageBasinLabel.TabIndex = 26
+        Me.DrainageBasinLabel.Text = "Drainage Basin"
+        '
+        'DrainageBasinTextBox
+        '
+        Me.DrainageBasinTextBox.Location = New System.Drawing.Point(275, 354)
+        Me.DrainageBasinTextBox.Name = "DrainageBasinTextBox"
+        Me.DrainageBasinTextBox.Size = New System.Drawing.Size(51, 20)
+        Me.DrainageBasinTextBox.TabIndex = 27
+        Me.DrainageBasinTextBox.Tag = "drainageBasin"
+        '
         'ucrMetadataStationLocationHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.DrainageBasinTextBox)
+        Me.Controls.Add(Me.DrainageBasinLabel)
+        Me.Controls.Add(Me.AdministrationRegionLabel)
+        Me.Controls.Add(Me.AdministrationRegionTextBox)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
         Me.Controls.Add(Me.ucrStationSelector)
@@ -364,7 +413,7 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.lblGeogLocationAccuracy)
         Me.Controls.Add(Me.Label19)
         Me.Name = "ucrMetadataStationLocationHistory"
-        Me.Size = New System.Drawing.Size(674, 414)
+        Me.Size = New System.Drawing.Size(674, 479)
         Me.Tag = ""
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCommand2.ResumeLayout(False)
@@ -402,4 +451,9 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
     Friend WithEvents btnClear As Button
+    Friend WithEvents AdministrationRegionTextBox As TextBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents AdministrationRegionLabel As Label
+    Friend WithEvents DrainageBasinLabel As Label
+    Friend WithEvents DrainageBasinTextBox As TextBox
 End Class
