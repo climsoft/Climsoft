@@ -5,7 +5,8 @@
     Public bValidateEmpty As Boolean = False
     'used to set the default back color to show when the value input is a valid one
     Private bValidColor As Color = Color.White
-    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+    Protected Overridable Sub ucrDatePicker_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'TODO determine the default date format?
             'dtpDate.Format = DateFormat.LongDate
@@ -23,7 +24,7 @@
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
-        If objNewValue Is Nothing OrElse (TypeOf objNewValue Is String AndAlso String.IsNullOrWhiteSpace(objNewValue)) Then
+        If IsDBNull(objNewValue) OrElse objNewValue Is Nothing OrElse (TypeOf objNewValue Is String AndAlso String.IsNullOrWhiteSpace(objNewValue)) Then
             txtDate.Text = ""
         Else
             Try
@@ -42,7 +43,9 @@
         If txtDate.Text.Trim = "" Then
             Return Nothing
         Else
-            Return dtpDate.Value
+            'TODO sometimes we may need the time component?
+            'Also check on the required format?
+            Return dtpDate.Value.ToShortDateString
         End If
     End Function
 

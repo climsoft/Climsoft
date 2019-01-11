@@ -17,8 +17,6 @@
     End Property
 
 
-
-
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
     End Sub

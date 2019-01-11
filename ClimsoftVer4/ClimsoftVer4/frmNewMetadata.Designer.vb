@@ -86,7 +86,7 @@ Partial Class frmNewMetadata
         '
         Me.UcrMetadataStation1.Location = New System.Drawing.Point(0, 0)
         Me.UcrMetadataStation1.Name = "UcrMetadataStation1"
-        Me.UcrMetadataStation1.Size = New System.Drawing.Size(778, 501)
+        Me.UcrMetadataStation1.Size = New System.Drawing.Size(778, 498)
         Me.UcrMetadataStation1.TabIndex = 0
         '
         'TabElement
@@ -213,7 +213,7 @@ Partial Class frmNewMetadata
         '
         Me.UcrMetadataPhysicalFeature1.Location = New System.Drawing.Point(3, 3)
         Me.UcrMetadataPhysicalFeature1.Name = "UcrMetadataPhysicalFeature1"
-        Me.UcrMetadataPhysicalFeature1.Size = New System.Drawing.Size(772, 444)
+        Me.UcrMetadataPhysicalFeature1.Size = New System.Drawing.Size(772, 449)
         Me.UcrMetadataPhysicalFeature1.TabIndex = 0
         '
         'TabPaperArchive
@@ -229,9 +229,9 @@ Partial Class frmNewMetadata
         '
         'UcrMetadataPaperArchive1
         '
-        Me.UcrMetadataPaperArchive1.Location = New System.Drawing.Point(122, 3)
+        Me.UcrMetadataPaperArchive1.Location = New System.Drawing.Point(78, 3)
         Me.UcrMetadataPaperArchive1.Name = "UcrMetadataPaperArchive1"
-        Me.UcrMetadataPaperArchive1.Size = New System.Drawing.Size(535, 378)
+        Me.UcrMetadataPaperArchive1.Size = New System.Drawing.Size(623, 378)
         Me.UcrMetadataPaperArchive1.TabIndex = 0
         '
         'frmNewMetadata
