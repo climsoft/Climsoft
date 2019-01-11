@@ -106,7 +106,9 @@
     End Function
 
     Public Overridable Sub AddFieldstoList(lstFields As List(Of String))
-        lstFields.Add(FieldName)
+        If Not String.IsNullOrEmpty(FieldName) Then
+            lstFields.Add(FieldName)
+        End If
     End Sub
 
     Public Overridable Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
