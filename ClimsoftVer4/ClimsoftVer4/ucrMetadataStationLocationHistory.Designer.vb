@@ -28,11 +28,11 @@ Partial Class ucrMetadataStationLocationHistory
         Me.lblOpeningDate = New System.Windows.Forms.Label()
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblAuthority = New System.Windows.Forms.Label()
-        Me.lblGeogLocationMethod = New System.Windows.Forms.Label()
+        Me.lblGeoLocationMethod = New System.Windows.Forms.Label()
         Me.lblElevation = New System.Windows.Forms.Label()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.lblStationType = New System.Windows.Forms.Label()
-        Me.lblGeogLocationAccuracy = New System.Windows.Forms.Label()
+        Me.lblGeoLocationAccuracy = New System.Windows.Forms.Label()
         Me.ucrTextBoxStationType = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGeoLocationMethod = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxGeolocationAccuracy = New ClimsoftVer4.ucrTextBox()
@@ -114,14 +114,14 @@ Partial Class ucrMetadataStationLocationHistory
         Me.lblAuthority.TabIndex = 19
         Me.lblAuthority.Text = "Authority"
         '
-        'lblGeogLocationMethod
+        'lblGeoLocationMethod
         '
-        Me.lblGeogLocationMethod.AutoSize = True
-        Me.lblGeogLocationMethod.Location = New System.Drawing.Point(143, 107)
-        Me.lblGeogLocationMethod.Name = "lblGeogLocationMethod"
-        Me.lblGeogLocationMethod.Size = New System.Drawing.Size(113, 13)
-        Me.lblGeogLocationMethod.TabIndex = 5
-        Me.lblGeogLocationMethod.Text = "GeogLocation Method"
+        Me.lblGeoLocationMethod.AutoSize = True
+        Me.lblGeoLocationMethod.Location = New System.Drawing.Point(143, 107)
+        Me.lblGeoLocationMethod.Name = "lblGeoLocationMethod"
+        Me.lblGeoLocationMethod.Size = New System.Drawing.Size(107, 13)
+        Me.lblGeoLocationMethod.TabIndex = 5
+        Me.lblGeoLocationMethod.Text = "GeoLocation Method"
         '
         'lblElevation
         '
@@ -150,14 +150,14 @@ Partial Class ucrMetadataStationLocationHistory
         Me.lblStationType.TabIndex = 3
         Me.lblStationType.Text = "Station Type"
         '
-        'lblGeogLocationAccuracy
+        'lblGeoLocationAccuracy
         '
-        Me.lblGeogLocationAccuracy.AutoSize = True
-        Me.lblGeogLocationAccuracy.Location = New System.Drawing.Point(143, 134)
-        Me.lblGeogLocationAccuracy.Name = "lblGeogLocationAccuracy"
-        Me.lblGeogLocationAccuracy.Size = New System.Drawing.Size(122, 13)
-        Me.lblGeogLocationAccuracy.TabIndex = 7
-        Me.lblGeogLocationAccuracy.Text = "GeogLocation Accuracy"
+        Me.lblGeoLocationAccuracy.AutoSize = True
+        Me.lblGeoLocationAccuracy.Location = New System.Drawing.Point(143, 134)
+        Me.lblGeoLocationAccuracy.Name = "lblGeoLocationAccuracy"
+        Me.lblGeoLocationAccuracy.Size = New System.Drawing.Size(116, 13)
+        Me.lblGeoLocationAccuracy.TabIndex = 7
+        Me.lblGeoLocationAccuracy.Text = "GeoLocation Accuracy"
         '
         'ucrTextBoxStationType
         '
@@ -399,11 +399,11 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.lblOpeningDate)
         Me.Controls.Add(Me.lblLatitude)
         Me.Controls.Add(Me.lblAuthority)
-        Me.Controls.Add(Me.lblGeogLocationMethod)
+        Me.Controls.Add(Me.lblGeoLocationMethod)
         Me.Controls.Add(Me.lblElevation)
         Me.Controls.Add(Me.lblLongitude)
         Me.Controls.Add(Me.lblStationType)
-        Me.Controls.Add(Me.lblGeogLocationAccuracy)
+        Me.Controls.Add(Me.lblGeoLocationAccuracy)
         Me.Controls.Add(Me.Label19)
         Me.Name = "ucrMetadataStationLocationHistory"
         Me.Size = New System.Drawing.Size(674, 479)
@@ -421,11 +421,11 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents lblOpeningDate As Label
     Friend WithEvents lblLatitude As Label
     Friend WithEvents lblAuthority As Label
-    Friend WithEvents lblGeogLocationMethod As Label
+    Friend WithEvents lblGeoLocationMethod As Label
     Friend WithEvents lblElevation As Label
     Friend WithEvents lblLongitude As Label
     Friend WithEvents lblStationType As Label
-    Friend WithEvents lblGeogLocationAccuracy As Label
+    Friend WithEvents lblGeoLocationAccuracy As Label
     Friend WithEvents ucrTextBoxStationType As ucrTextBox
     Friend WithEvents ucrTextBoxGeoLocationMethod As ucrTextBox
     Friend WithEvents ucrTextBoxGeolocationAccuracy As ucrTextBox

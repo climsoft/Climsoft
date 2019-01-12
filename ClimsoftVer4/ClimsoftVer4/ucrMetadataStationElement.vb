@@ -1,8 +1,6 @@
 ﻿Public Class ucrMetadataStationElement
 
     Private Sub ucrMetadataStationElement_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-
         If bFirstLoad Then
             'SetUpTableEntry 
             SetUpTableEntry("stationelement")
@@ -10,6 +8,7 @@
             ucrDataLinkElementID.SetTableNameAndField("stationelement", "describedBy")
             ucrDataLinkElementID.PopulateControl()
             ucrDataLinkElementID.SetDisplayAndValueMember("describedBy")
+
             ucrDataLinkElementID.SetValidationTypeAsNumeric()
             ucrTextHeight.SetValidationTypeAsNumeric()
             'set view type for the station selector to ID
