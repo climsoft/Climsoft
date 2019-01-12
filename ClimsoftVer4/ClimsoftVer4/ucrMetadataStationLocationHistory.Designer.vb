@@ -22,7 +22,6 @@ Partial Class ucrMetadataStationLocationHistory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblClosingDate = New System.Windows.Forms.Label()
@@ -35,8 +34,8 @@ Partial Class ucrMetadataStationLocationHistory
         Me.lblStationType = New System.Windows.Forms.Label()
         Me.lblGeogLocationAccuracy = New System.Windows.Forms.Label()
         Me.ucrTextBoxStationType = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxGeogLocationMethod = New ClimsoftVer4.ucrTextBox()
-        Me.ucrTextBoxGeoglocationHistory = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxGeoLocationMethod = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxGeolocationAccuracy = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
@@ -53,7 +52,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
         Me.AdministrationRegionTextBox = New System.Windows.Forms.TextBox()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AdministrationRegionLabel = New System.Windows.Forms.Label()
         Me.DrainageBasinLabel = New System.Windows.Forms.Label()
         Me.DrainageBasinTextBox = New System.Windows.Forms.TextBox()
@@ -172,27 +170,27 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrTextBoxStationType.Tag = "stationType"
         Me.ucrTextBoxStationType.TextboxValue = ""
         '
-        'ucrTextBoxGeogLocationMethod
+        'ucrTextBoxGeoLocationMethod
         '
-        Me.ucrTextBoxGeogLocationMethod.FieldName = "geoLocationMethod"
-        Me.ucrTextBoxGeogLocationMethod.Location = New System.Drawing.Point(275, 99)
-        Me.ucrTextBoxGeogLocationMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxGeogLocationMethod.Name = "ucrTextBoxGeogLocationMethod"
-        Me.ucrTextBoxGeogLocationMethod.Size = New System.Drawing.Size(129, 22)
-        Me.ucrTextBoxGeogLocationMethod.TabIndex = 6
-        Me.ucrTextBoxGeogLocationMethod.Tag = "geoLocationMethod"
-        Me.ucrTextBoxGeogLocationMethod.TextboxValue = ""
+        Me.ucrTextBoxGeoLocationMethod.FieldName = "geoLocationMethod"
+        Me.ucrTextBoxGeoLocationMethod.Location = New System.Drawing.Point(275, 99)
+        Me.ucrTextBoxGeoLocationMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGeoLocationMethod.Name = "ucrTextBoxGeoLocationMethod"
+        Me.ucrTextBoxGeoLocationMethod.Size = New System.Drawing.Size(129, 22)
+        Me.ucrTextBoxGeoLocationMethod.TabIndex = 6
+        Me.ucrTextBoxGeoLocationMethod.Tag = "geoLocationMethod"
+        Me.ucrTextBoxGeoLocationMethod.TextboxValue = ""
         '
-        'ucrTextBoxGeoglocationHistory
+        'ucrTextBoxGeolocationAccuracy
         '
-        Me.ucrTextBoxGeoglocationHistory.FieldName = "geoLocationAccuracy"
-        Me.ucrTextBoxGeoglocationHistory.Location = New System.Drawing.Point(275, 127)
-        Me.ucrTextBoxGeoglocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrTextBoxGeoglocationHistory.Name = "ucrTextBoxGeoglocationHistory"
-        Me.ucrTextBoxGeoglocationHistory.Size = New System.Drawing.Size(129, 24)
-        Me.ucrTextBoxGeoglocationHistory.TabIndex = 8
-        Me.ucrTextBoxGeoglocationHistory.Tag = "geoLocationAccuracy"
-        Me.ucrTextBoxGeoglocationHistory.TextboxValue = ""
+        Me.ucrTextBoxGeolocationAccuracy.FieldName = "geoLocationAccuracy"
+        Me.ucrTextBoxGeolocationAccuracy.Location = New System.Drawing.Point(275, 127)
+        Me.ucrTextBoxGeolocationAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGeolocationAccuracy.Name = "ucrTextBoxGeolocationAccuracy"
+        Me.ucrTextBoxGeolocationAccuracy.Size = New System.Drawing.Size(129, 24)
+        Me.ucrTextBoxGeolocationAccuracy.TabIndex = 8
+        Me.ucrTextBoxGeolocationAccuracy.Tag = "geoLocationAccuracy"
+        Me.ucrTextBoxGeolocationAccuracy.TextboxValue = ""
         '
         'ucrTextBoxLatitude
         '
@@ -350,11 +348,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.AdministrationRegionTextBox.TabIndex = 23
         Me.AdministrationRegionTextBox.Tag = "adminRegion"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
         'AdministrationRegionLabel
         '
         Me.AdministrationRegionLabel.AutoSize = True
@@ -398,8 +391,8 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.ucrTextBoxElevation)
         Me.Controls.Add(Me.ucrTextBoxLongitude)
         Me.Controls.Add(Me.ucrTextBoxLatitude)
-        Me.Controls.Add(Me.ucrTextBoxGeoglocationHistory)
-        Me.Controls.Add(Me.ucrTextBoxGeogLocationMethod)
+        Me.Controls.Add(Me.ucrTextBoxGeolocationAccuracy)
+        Me.Controls.Add(Me.ucrTextBoxGeoLocationMethod)
         Me.Controls.Add(Me.ucrTextBoxStationType)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.lblClosingDate)
@@ -434,8 +427,8 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents lblStationType As Label
     Friend WithEvents lblGeogLocationAccuracy As Label
     Friend WithEvents ucrTextBoxStationType As ucrTextBox
-    Friend WithEvents ucrTextBoxGeogLocationMethod As ucrTextBox
-    Friend WithEvents ucrTextBoxGeoglocationHistory As ucrTextBox
+    Friend WithEvents ucrTextBoxGeoLocationMethod As ucrTextBox
+    Friend WithEvents ucrTextBoxGeolocationAccuracy As ucrTextBox
     Friend WithEvents ucrTextBoxLatitude As ucrTextBox
     Friend WithEvents ucrTextBoxLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxElevation As ucrTextBox
@@ -452,7 +445,6 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
     Friend WithEvents btnClear As Button
     Friend WithEvents AdministrationRegionTextBox As TextBox
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents AdministrationRegionLabel As Label
     Friend WithEvents DrainageBasinLabel As Label
     Friend WithEvents DrainageBasinTextBox As TextBox
