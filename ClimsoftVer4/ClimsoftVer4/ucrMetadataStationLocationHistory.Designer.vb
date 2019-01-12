@@ -22,7 +22,6 @@ Partial Class ucrMetadataStationLocationHistory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblClosingDate = New System.Windows.Forms.Label()
@@ -53,7 +52,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
         Me.AdministrationRegionTextBox = New System.Windows.Forms.TextBox()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.AdministrationRegionLabel = New System.Windows.Forms.Label()
         Me.DrainageBasinLabel = New System.Windows.Forms.Label()
         Me.DrainageBasinTextBox = New System.Windows.Forms.TextBox()
@@ -350,11 +348,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.AdministrationRegionTextBox.TabIndex = 23
         Me.AdministrationRegionTextBox.Tag = "adminRegion"
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
         'AdministrationRegionLabel
         '
         Me.AdministrationRegionLabel.AutoSize = True
@@ -452,7 +445,6 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
     Friend WithEvents btnClear As Button
     Friend WithEvents AdministrationRegionTextBox As TextBox
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents AdministrationRegionLabel As Label
     Friend WithEvents DrainageBasinLabel As Label
     Friend WithEvents DrainageBasinTextBox As TextBox
