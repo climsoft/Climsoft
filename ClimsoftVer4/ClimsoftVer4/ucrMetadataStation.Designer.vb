@@ -24,7 +24,7 @@ Partial Class ucrMetadataStation
     Private Sub InitializeComponent()
         Me.ucrNavigationStation = New ClimsoftVer4.ucrNavigation()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrStationName = New ClimsoftVer4.ucrTextBox()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrTextBox()
         Me.ucrDatePickerClosingDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrDatePickerOpeningDate = New ClimsoftVer4.ucrDatePicker()
         Me.ucrTextBoxGeographicalAccuracy = New ClimsoftVer4.ucrTextBox()
@@ -39,7 +39,6 @@ Partial Class ucrMetadataStation
         Me.ucrTextBoxElevation = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLongitude = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxLatitude = New ClimsoftVer4.ucrTextBox()
-        Me.ucrSearchStationNamecombobox = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrStationIDcombobox = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
@@ -85,6 +84,7 @@ Partial Class ucrMetadataStation
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblStationId = New System.Windows.Forms.Label()
+        Me.ucrSearchStationName = New ClimsoftVer4.ucrStationSelector()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpComputationDD.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -108,16 +108,16 @@ Partial Class ucrMetadataStation
         Me.lblStation.TabIndex = 0
         Me.lblStation.Text = "Station"
         '
-        'ucrStationName
+        'ucrStationSelector
         '
-        Me.ucrStationName.FieldName = "stationName"
-        Me.ucrStationName.Location = New System.Drawing.Point(121, 95)
-        Me.ucrStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrStationName.Name = "ucrStationName"
-        Me.ucrStationName.Size = New System.Drawing.Size(228, 21)
-        Me.ucrStationName.TabIndex = 76
-        Me.ucrStationName.Tag = "stationName"
-        Me.ucrStationName.TextboxValue = ""
+        Me.ucrStationSelector.FieldName = "stationName"
+        Me.ucrStationSelector.Location = New System.Drawing.Point(121, 95)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(228, 21)
+        Me.ucrStationSelector.TabIndex = 76
+        Me.ucrStationSelector.Tag = "stationName"
+        Me.ucrStationSelector.TextboxValue = ""
         '
         'ucrDatePickerClosingDate
         '
@@ -268,15 +268,6 @@ Partial Class ucrMetadataStation
         Me.ucrTextBoxLatitude.TabIndex = 45
         Me.ucrTextBoxLatitude.Tag = "latitude"
         Me.ucrTextBoxLatitude.TextboxValue = ""
-        '
-        'ucrSearchStationNamecombobox
-        '
-        Me.ucrSearchStationNamecombobox.FieldName = Nothing
-        Me.ucrSearchStationNamecombobox.Location = New System.Drawing.Point(481, 68)
-        Me.ucrSearchStationNamecombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSearchStationNamecombobox.Name = "ucrSearchStationNamecombobox"
-        Me.ucrSearchStationNamecombobox.Size = New System.Drawing.Size(228, 21)
-        Me.ucrSearchStationNamecombobox.TabIndex = 43
         '
         'ucrStationIDcombobox
         '
@@ -719,11 +710,22 @@ Partial Class ucrMetadataStation
         Me.lblStationId.TabIndex = 39
         Me.lblStationId.Text = "Station Id"
         '
+        'ucrSearchStationName
+        '
+        Me.ucrSearchStationName.FieldName = "Sea"
+        Me.ucrSearchStationName.Location = New System.Drawing.Point(475, 68)
+        Me.ucrSearchStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSearchStationName.Name = "ucrSearchStationName"
+        Me.ucrSearchStationName.Size = New System.Drawing.Size(253, 24)
+        Me.ucrSearchStationName.TabIndex = 77
+        Me.ucrSearchStationName.Tag = "Sea"
+        '
         'ucrMetadataStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrStationName)
+        Me.Controls.Add(Me.ucrSearchStationName)
+        Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.ucrDatePickerClosingDate)
         Me.Controls.Add(Me.ucrDatePickerOpeningDate)
         Me.Controls.Add(Me.ucrTextBoxGeographicalAccuracy)
@@ -738,7 +740,6 @@ Partial Class ucrMetadataStation
         Me.Controls.Add(Me.ucrTextBoxElevation)
         Me.Controls.Add(Me.ucrTextBoxLongitude)
         Me.Controls.Add(Me.ucrTextBoxLatitude)
-        Me.Controls.Add(Me.ucrSearchStationNamecombobox)
         Me.Controls.Add(Me.ucrStationIDcombobox)
         Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.grpComputationDD)
@@ -775,7 +776,7 @@ Partial Class ucrMetadataStation
     End Sub
     Friend WithEvents ucrNavigationStation As ucrNavigation
     Friend WithEvents lblStation As Label
-    Friend WithEvents ucrStationName As ucrTextBox
+    Friend WithEvents ucrStationSelector As ucrTextBox
     Friend WithEvents ucrDatePickerClosingDate As ucrDatePicker
     Friend WithEvents ucrDatePickerOpeningDate As ucrDatePicker
     Friend WithEvents ucrTextBoxGeographicalAccuracy As ucrTextBox
@@ -790,7 +791,6 @@ Partial Class ucrMetadataStation
     Friend WithEvents ucrTextBoxElevation As ucrTextBox
     Friend WithEvents ucrTextBoxLongitude As ucrTextBox
     Friend WithEvents ucrTextBoxLatitude As ucrTextBox
-    Friend WithEvents ucrSearchStationNamecombobox As ucrDataLinkCombobox
     Friend WithEvents ucrStationIDcombobox As ucrDataLinkCombobox
     Friend WithEvents Label24 As Label
     Friend WithEvents grpComputationDD As GroupBox
@@ -836,4 +836,5 @@ Partial Class ucrMetadataStation
     Friend WithEvents lblLatitude As Label
     Friend WithEvents lblStationName As Label
     Friend WithEvents lblStationId As Label
+    Friend WithEvents ucrSearchStationName As ucrStationSelector
 End Class
