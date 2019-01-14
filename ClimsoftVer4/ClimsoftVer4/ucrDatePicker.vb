@@ -67,11 +67,11 @@
     End Function
 
     Public Overrides Sub Clear()
-        Dim bPrevValidate As Boolean = bValidate
-        bValidate = False
+        'Dim bPrevValidate As Boolean = bValidate
+        'bValidate = False
         SetValue("") 'TODO
         SetBackColor(bValidColor)
-        bValidate = bPrevValidate
+        'bValidate = bPrevValidate
     End Sub
 
     Public Overrides Sub SetBackColor(backColor As Color)

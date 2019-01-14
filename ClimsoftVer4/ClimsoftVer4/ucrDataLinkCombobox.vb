@@ -195,11 +195,11 @@
     End Sub
 
     Public Overrides Sub Clear()
-        Dim bPrevValidate As Boolean = bValidate
-        bValidate = False
+        'Dim bPrevValidate As Boolean = bValidate
+        'bValidate = False
         SetValue("")
         SetBackColor(bValidColor)
-        bValidate = bPrevValidate
+        ' bValidate = bPrevValidate
     End Sub
 
     Public Sub SetValidationTypeAsMustExist()
@@ -248,15 +248,16 @@
             End If
 
             If strValidationType = "exists" Then
+                bValid = False
                 If cboValues.DisplayMember <> "" Then
                     For Each rTemp As DataRow In dtbRecords.Rows
                         If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
                             bValid = True
-                            SetBackColor(bValidColor)
                             Exit For
                         End If
                     Next
                 End If
+                SetBackColor(If(bValid, bValidColor, Color.Red))
             ElseIf strValidationType = "numeric" Then
                 Dim iValidationCode As Integer = ValidateNumeric(GetValue)
                 Select Case iValidationCode

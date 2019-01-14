@@ -225,12 +225,11 @@ Public Class DataCall
 
             'INSERT statement
             strInsertCommand = "INSERT INTO " & strTable & " (" & strSqlFieldNames & ") " & "VALUES (" & strSqlFieldParameters & ")"
-
             cmdInsert.Connection = clsDataConnection.conn
             cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.InsertCommand = cmdInsert
 
-            'Where clause parameters
+            'Where clause parameters for update and delete statements
             strKeysWhereCommand = ""
             For Each strTempKeyField As String In lstKeyFieldNames
                 parameterPlaceHolder = "@_" & strTempKeyField & "_"
@@ -255,7 +254,7 @@ Public Class DataCall
                 cmdDelete.Parameters.Add(paramDelete)
             Next
 
-            'update set 
+            'update set command parameters 
             strUpdateSetCommand = ""
             For Each strTempField In lstTempFieldNames
                 parameterPlaceHolder = "@" & strTempField
@@ -295,8 +294,13 @@ Public Class DataCall
     Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim dtb As New DataTable
 
-        UpdateDataAdapter(clsAdditionalFilter)
-        da.Fill(dtb)
+        Try
+            UpdateDataAdapter(clsAdditionalFilter)
+            da.Fill(dtb)
+        Catch ex As Exception
+            MsgBox("Error : " & ex.Message)
+        End Try
+
         Return dtb
     End Function
 

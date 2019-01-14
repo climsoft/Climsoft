@@ -2,7 +2,10 @@
     Private bFirstLoad As Boolean = True
 
     Private Sub ucrCheck_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
 
+            bFirstLoad = False
+        End If
     End Sub
 
     Private Sub chkCheck_KeyDown(sender As Object, e As KeyEventArgs) Handles chkCheck.KeyDown
@@ -29,28 +32,29 @@
         End If
     End Sub
 
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        'TODO probably do a check to determine if a boolean is the one needed ?
+        Return If(chkCheck.Checked, 1, 0)
+    End Function
+
     Public Overrides Sub SetValue(objNewValue As Object)
         If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
             chkCheck.Checked = False
+        ElseIf TypeOf objNewValue Is Boolean Then
+            chkCheck.Checked = objNewValue
+        ElseIf IsNumeric(objNewValue) Then
+            chkCheck.Checked = Not (Val(objNewValue) = 0)
         Else
-            If IsNumeric(objNewValue) Then
-                If Val(objNewValue) = 0 Then
-                    chkCheck.Checked = False
-                Else
-                    chkCheck.Checked = True
-                End If
-            Else
-                MessageBox.Show("Developer error: Checkbox can only accept true,false(booleans) or 0,1. Control: " & Me.Name, caption:="Developer error")
-            End If
+            MessageBox.Show("Developer error: Checkbox can only accept true,false(booleans) or 0,1. Control: " & Me.Name, caption:="Developer error")
         End If
         OnevtValueChanged(Me, Nothing)
     End Sub
 
     Public Overrides Sub Clear()
-        Dim bPrevValidate As Boolean = bValidate
-        bValidate = False
+        'Dim bPrevValidate As Boolean = bValidate
+        'bValidate = False
         SetValue(False)
-        bValidate = bPrevValidate
+        'bValidate = bPrevValidate
     End Sub
 
     Public Overrides Sub GetFocus()

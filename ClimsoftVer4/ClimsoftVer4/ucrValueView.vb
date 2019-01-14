@@ -15,10 +15,10 @@
 
     Public Property FieldName() As String
         Get
-            Return Tag
+            Return Me.Tag
         End Get
         Set(value As String)
-            Tag = value
+            Me.Tag = value
         End Set
     End Property
 

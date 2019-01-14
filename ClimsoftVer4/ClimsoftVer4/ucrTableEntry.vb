@@ -75,9 +75,11 @@
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean
+        Dim ucr As ucrValueView
         For Each ctr As Control In Controls
             If TypeOf ctr Is ucrValueView Then
-                If Not DirectCast(ctr, ucrValueView).ValidateValue() Then
+                ucr = DirectCast(ctr, ucrValueView)
+                If Not String.IsNullOrEmpty(ucr.FieldName) AndAlso Not ucr.ValidateValue() Then
                     ctr.Focus()
                     Return False
                 End If

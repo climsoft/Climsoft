@@ -50,6 +50,15 @@ Public Class ucrTextBox
         End If
     End Sub
 
+    ''' <summary>
+    ''' Returns the value of the textbox
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <returns></returns>
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Return txtBox.Text
+    End Function
+
     Public Overrides Sub SetValue(objNewValue As Object)
         If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
             txtBox.Text = ""
@@ -294,11 +303,11 @@ Public Class ucrTextBox
     ''' Clears contents of the textbox
     ''' </summary>
     Public Overrides Sub Clear()
-        Dim bPrevValidate As Boolean = bValidate
-        bValidate = False
+        'Dim bPrevValidate As Boolean = bValidate
+        'bValidate = False
         SetValue("")
         SetBackColor(bValidColor)
-        bValidate = bPrevValidate
+        'bValidate = bPrevValidate
     End Sub
 
     ''' <summary>
@@ -319,14 +328,7 @@ Public Class ucrTextBox
             txtBox.Text = txtBox.Text.ToUpper()
         End If
     End Sub
-    ''' <summary>
-    ''' Returns the value of the textbox
-    ''' </summary>
-    ''' <param name="strFieldName"></param>
-    ''' <returns></returns>
-    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Return txtBox.Text
-    End Function
+
 
     ''' <summary>
     '''Sets the textbox as a read only 
