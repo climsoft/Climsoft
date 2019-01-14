@@ -5,22 +5,20 @@
             'SetUpTableEntry 
             SetUpTableEntry("obselement")
 
-            ucrDataLinkID.SetTableNameAndField("obselement", "elementId")
-            ucrDataLinkID.PopulateControl()
-            ucrDataLinkID.SetDisplayAndValueMember("elementId")
-            ucrDataLinkID.SetValidationTypeAsNumeric(dcmMin:=1)
+            ucrDataLinkElementID.SetTableNameAndField("obselement", "elementId")
+            ucrDataLinkElementID.PopulateControl()
+            ucrDataLinkElementID.SetDisplayAndValueMember("elementId")
 
-            ucrTextBoxUpperLimit.SetValidationTypeAsNumeric()
-            ucrTextBoxLowerLimit.SetValidationTypeAsNumeric()
+            ucrDataLinkElementID.SetValidationTypeAsNumeric(dcmMin:=1)
+            ucrTextBoxScale.SetValidationTypeAsNumeric()
 
+            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
 
-            AddLinkedControlFilters(ucrDataLinkID, ucrDataLinkID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkID.FieldName(), bForceValuesAsString:=True)
-
-            AddKeyField(ucrDataLinkID.FieldName)
+            AddKeyField(ucrDataLinkElementID.FieldName)
 
             'set up the navigation control
             ucrNavigationElement.SetTableEntry(Me)
-            ucrNavigationElement.AddKeyControls(ucrDataLinkID)
+            ucrNavigationElement.AddKeyControls(ucrDataLinkElementID)
 
             bFirstLoad = False
 

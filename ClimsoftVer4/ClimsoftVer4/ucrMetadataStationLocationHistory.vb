@@ -6,8 +6,11 @@
             ucrStationSelector.SetTableNameAndField("stationlocationhistory", "belongsTo")
             ucrStationSelector.PopulateControl()
             ucrStationSelector.SetDisplayAndValueMember("belongsTo")
-            ucrStationSelector.bValidate = False
 
+            ucrTextBoxGeolocationAccuracy.SetValidationTypeAsNumeric()
+            ucrTextBoxLatitude.SetValidationTypeAsNumeric()
+            ucrTextBoxLongitude.SetValidationTypeAsNumeric()
+            ucrTextBoxElevation.SetValidationTypeAsNumeric()
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:=ucrStationSelector.FieldName, bForceValuesAsString:=True)
 

@@ -8,8 +8,9 @@
             ucrDataLinkElementID.SetTableNameAndField("stationelement", "describedBy")
             ucrDataLinkElementID.PopulateControl()
             ucrDataLinkElementID.SetDisplayAndValueMember("describedBy")
-            ucrDataLinkElementID.bValidate = False
 
+            ucrDataLinkElementID.SetValidationTypeAsNumeric()
+            ucrTextHeight.SetValidationTypeAsNumeric()
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
 
