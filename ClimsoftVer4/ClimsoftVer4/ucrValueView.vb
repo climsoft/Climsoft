@@ -46,7 +46,7 @@
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
-        If FieldName = "" Then
+        If String.IsNullOrEmpty(FieldName) Then
             SetValue(Nothing)
         Else
             If dtbValues.Rows.Count = 1 Then
@@ -71,7 +71,7 @@
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
-        If FieldName = "" Then
+        If String.IsNullOrEmpty(FieldName) Then
             'TODO?
         Else
             If dtbValues.Rows.Count = 1 Then
@@ -118,6 +118,28 @@
     Public Sub SetUpControlInParent(lstFields As List(Of String), ehSub As evtValueChangedEventHandler)
         AddFieldstoList(lstFields)
         AddEventValueChangedHandle(ehSub)
+    End Sub
+
+    ''' <summary>
+    ''' Sets the back colour of the control
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Overridable Sub SetBackColor(backColor As Color)
+    End Sub
+
+    ''' <summary>
+    ''' Sets the default back color for when this control has a valid value
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Sub SetValidColor(backColor As Color)
+        bValidColor = backColor
+    End Sub
+
+    ''' <summary>
+    ''' Sets the focus to the control 
+    ''' </summary>
+    Public Overridable Sub GetFocus()
+        Me.Focus()
     End Sub
 
 End Class
