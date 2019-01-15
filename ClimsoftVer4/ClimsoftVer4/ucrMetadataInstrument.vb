@@ -19,7 +19,7 @@
             ucrTextBoxHeight.SetValidationTypeAsNumeric()
 
             'set FILTER control used in the where clause of the SELECT statement
-            AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", bForceValuesAsString:=True)
 
             'set FILTER field name used in the where clause of UPDATE and DELETE statement
             AddKeyField(ucrDataLinkInstrumentID.FieldName)
@@ -106,15 +106,11 @@
     End Sub
 
     Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
-        Dim filePathName As String
-
         OpenFileDialog.Title = "Select image file"
         OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
-
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            filePathName = OpenFileDialog.FileName
-            filePathName = filePathName.Replace("\", "/")
-            ucrTextBoxImageFile.SetValue(filePathName)
+            'replace the backslash in the filepath with forward slash
+            ucrTextBoxImageFile.SetValue(OpenFileDialog.FileName.Replace("\", "/"))
         End If
 
     End Sub

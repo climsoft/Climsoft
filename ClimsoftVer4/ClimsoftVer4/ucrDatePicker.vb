@@ -65,7 +65,7 @@
 
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         If String.IsNullOrWhiteSpace(txtDate.Text) Then
-            Return Nothing
+            Return If(strValueReturnType = "date", Nothing, "")
         Else
             If strValueReturnType = "date" Then
                 If strDateFormat = "" Then
