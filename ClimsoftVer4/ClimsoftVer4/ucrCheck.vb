@@ -57,9 +57,5 @@
         'bValidate = bPrevValidate
     End Sub
 
-    Public Overrides Sub GetFocus()
-        chkCheck.Focus()
-    End Sub
-
 
 End Class

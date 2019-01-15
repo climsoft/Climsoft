@@ -67,19 +67,20 @@
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Dim strCol As String
-        strCol = cboValues.DisplayMember
-        For Each rTemp As DataRow In dtbRecords.Rows
-            If rTemp.Item(strCol).ToString = cboValues.Text Then
-                If strFieldName = "" Then
-                    'Return cboValues.SelectedValue
-                    'get the value from the value column
-                    Return rTemp.Item(cboValues.ValueMember)
-                Else
-                    Return rTemp.Item(strFieldName)
+        If Not String.IsNullOrEmpty(cboValues.DisplayMember) Then
+            For Each rTemp As DataRow In dtbRecords.Rows
+                If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
+                    If strFieldName = "" Then
+                        'Return cboValues.SelectedValue
+                        'get the value from the value column
+                        Return rTemp.Item(cboValues.ValueMember)
+                    Else
+                        Return rTemp.Item(strFieldName)
+                    End If
                 End If
-            End If
-        Next
+            Next
+        End If
+
         Return cboValues.Text
     End Function
 
@@ -111,16 +112,8 @@
     ''' Sets the back colour of the control
     ''' </summary>
     ''' <param name="backColor"></param>
-    Public Sub SetBackColor(backColor As Color)
+    Public Overrides Sub SetBackColor(backColor As Color)
         cboValues.BackColor = backColor
-    End Sub
-
-    ''' <summary>
-    ''' Sets the default back color for when this control has a valid value
-    ''' </summary>
-    ''' <param name="backColor"></param>
-    Public Sub SetValidColor(backColor As Color)
-        bValidColor = backColor
     End Sub
 
     Public Sub SetDisplayMember(strDisplay As String)
@@ -257,28 +250,28 @@
                         End If
                     Next
                 End If
-                SetBackColor(If(bValid, bValidColor, Color.Red))
+                SetBackColor(If(bValid, bValidColor, bInValidColor))
             ElseIf strValidationType = "numeric" Then
-                Dim iValidationCode As Integer = ValidateNumeric(GetValue)
+                Dim iValidationCode As Integer = ValidateNumeric(cboValues.Text)
                 Select Case iValidationCode
                     Case 0
                         bValid = True
                         SetBackColor(bValidColor)
                     Case 1
                         bValid = False
-                        SetBackColor(Color.Red)
+                        SetBackColor(bInValidColor)
                         If Not bValidateSilently Then
                             MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
                     Case 2
                         bValid = False
                         'check if it was lower and upper limit violation
-                        If Not (GetDcmMinimum() <= Val(GetValue)) Then
+                        If Not (GetDcmMinimum() <= Val(cboValues.Text)) Then
                             SetBackColor(Color.Cyan)
                             If Not bValidateSilently Then
                                 MessageBox.Show("Value lower than lowerlimit of: " & GetDcmMinimum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
-                        ElseIf Not (GetDcmMaximum() >= Val(GetValue)) Then
+                        ElseIf Not (GetDcmMaximum() >= Val(cboValues.Text)) Then
                             SetBackColor(Color.Cyan)
                             If Not bValidateSilently Then
                                 MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)

@@ -7,7 +7,8 @@
     ' Used when wanting to update several controls without linked controls updating inbetween.
     Public bSuppressChangedEvents As Boolean = False
 
-    Protected bValidColor As Color = Color.White 'used to set the default back color to show when the value input is a valid one
+    Protected bValidColor As Color = Color.White 'used to set the default back color to show when the value input is  valid 
+    Protected bInValidColor As Color = Color.Red 'used to set the default back color to show when the value input is invalid 
     Public bValidate As Boolean = True
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
@@ -135,9 +136,7 @@
         bValidColor = backColor
     End Sub
 
-    ''' <summary>
-    ''' Sets the focus to the control 
-    ''' </summary>
+    'TODO. Rethink how to override the Focus function
     Public Overridable Sub GetFocus()
         Me.Focus()
     End Sub
