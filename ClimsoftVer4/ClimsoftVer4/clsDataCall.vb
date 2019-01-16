@@ -130,18 +130,6 @@ Public Class DataCall
         Return lstValues
     End Function
 
-    'PLEASE NOTE THIS IS MY QUICK FIX OF THE ABOVE GETVALUES.
-    Public Function GetValues(Optional clsAdditionalFilter As TableFilter = Nothing) As List(Of String)
-        Dim lstValues As New List(Of String)
-        Dim objData As DataTable
-
-        objData = GetDataTable(clsAdditionalFilter)
-        For Each entItem As DataRow In objData.Rows
-            lstValues.Add(entItem.Field(Of String)(0))
-        Next
-        Return lstValues
-    End Function
-
     Public Function GetValuesAsString(Optional strSep As String = ",") As String
         Return String.Join(strSep, GetValues())
     End Function
@@ -205,9 +193,6 @@ Public Class DataCall
             lstTempFieldNames = lstTempFieldNames.Distinct().ToList
 
             For Each strName As String In lstTempFieldNames
-                'Dim paramUpdate As MySql.Data.MySqlClient.MySqlParameter
-                'Dim paramDelete As MySql.Data.MySqlClient.MySqlParameter
-
 
                 type = GetFieldMySqlDbType(strName, dtbSchema)
                 iSize = GetFieldMySqlDbLength(strName, dtbSchema)
@@ -218,13 +203,6 @@ Public Class DataCall
 
                 'TODO change the size parameter for dates
                 cmdInsert.Parameters.Add(parameterPlaceHolder, type, iSize, strName)
-
-                'paramUpdate = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
-                'paramUpdate.SourceVersion = DataRowVersion.Original
-                'cmdUpdate.Parameters.Add(paramUpdate)
-                'paramDelete = New MySql.Data.MySqlClient.MySqlParameter("@" & strName, type, iSize, strName)
-                'paramDelete.SourceVersion = DataRowVersion.Original
-                'cmdDelete.Parameters.Add(paramDelete)
             Next
 
             strSqlFieldNames = String.Join(",", lstTempFieldNames.ToArray)
@@ -247,12 +225,11 @@ Public Class DataCall
 
             'INSERT statement
             strInsertCommand = "INSERT INTO " & strTable & " (" & strSqlFieldNames & ") " & "VALUES (" & strSqlFieldParameters & ")"
-
             cmdInsert.Connection = clsDataConnection.conn
             cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.InsertCommand = cmdInsert
 
-            'Where clause parameters
+            'Where clause parameters for update and delete statements
             strKeysWhereCommand = ""
             For Each strTempKeyField As String In lstKeyFieldNames
                 parameterPlaceHolder = "@_" & strTempKeyField & "_"
@@ -277,7 +254,7 @@ Public Class DataCall
                 cmdDelete.Parameters.Add(paramDelete)
             Next
 
-            'update set 
+            'update set command parameters 
             strUpdateSetCommand = ""
             For Each strTempField In lstTempFieldNames
                 parameterPlaceHolder = "@" & strTempField
@@ -317,8 +294,13 @@ Public Class DataCall
     Private Function GetSourceDataTable(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
         Dim dtb As New DataTable
 
-        UpdateDataAdapter(clsAdditionalFilter)
-        da.Fill(dtb)
+        Try
+            UpdateDataAdapter(clsAdditionalFilter)
+            da.Fill(dtb)
+        Catch ex As Exception
+            MsgBox("Error : " & ex.Message)
+        End Try
+
         Return dtb
     End Function
 

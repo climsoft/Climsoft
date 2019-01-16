@@ -10,6 +10,32 @@ Public Class ucrTextBox
     Protected dcmMaximum As Decimal = Decimal.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
 
+    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            strValidationType = "none"
+            bFirstLoad = False
+        End If
+    End Sub
+
+    Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
+        OnevtKeyDown(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
+        'check if value is valid
+        ValidateValue()
+        'raise event
+        OnevtTextChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
+        OnevtValueChanged(Me, e)
+    End Sub
+
+    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+        ChangeCase()
+    End Sub
+
     Public Overrides Sub PopulateControl()
         If Not bFirstLoad Then
             MyBase.PopulateControl()
@@ -18,25 +44,32 @@ Public Class ucrTextBox
             ElseIf dtbRecords.Columns.Count <> 1 Then
                 MessageBox.Show("Developer error: A textbox must have exactly one field set. Control: " & Me.Name & "has " & dtbRecords.Columns.Count & " fields.", caption:="Developer error")
             Else
-                SetValue(If(dtbRecords.Rows.Count = 0, "", dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)))
+                'TODO
+                'SetValue(If(dtbRecords.Rows.Count = 0, "", dtbRecords.Rows(0).Field(Of String)(columnIndex:=0)))
             End If
         End If
     End Sub
 
-    Public Overrides Sub SetValue(objNewValue As Object)
-        'Dim strNewValue As String
-        'strNewValue = TryCast(objNewValue, String)
+    ''' <summary>
+    ''' Returns the value of the textbox
+    ''' </summary>
+    ''' <param name="strFieldName"></param>
+    ''' <returns></returns>
+    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+        Return txtBox.Text
+    End Function
 
-        'TODO. Implement this in a way that caters for for all possible data types
+    Public Overrides Sub SetValue(objNewValue As Object)
         If IsDBNull(objNewValue) OrElse IsNothing(objNewValue) Then
             txtBox.Text = ""
         Else
-            txtBox.Text = objNewValue 'TODO
+            'strNewValue = TryCast(objNewValue, String)
+            txtBox.Text = objNewValue
         End If
         OnevtValueChanged(Me, Nothing)
     End Sub
 
-    ' TODO This can now be removed once the forms using it in the deisignners have been fixed.
+    ' TODO This can now be removed once the forms using it in the deisigners have been fixed.
     Public Property TextboxValue() As String
         Get
             Return txtBox.Text
@@ -250,37 +283,10 @@ Public Class ucrTextBox
         Return dcmMaximum
     End Function
 
-    Protected Overridable Sub ucrTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            strValidationType = "none"
-            bFirstLoad = False
-        End If
-    End Sub
-
-    Private Sub ucrTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBox.KeyDown
-        OnevtKeyDown(Me, e)
-    End Sub
-
-    Private Sub ucrTextBox_TextChanged(sender As Object, e As EventArgs) Handles txtBox.TextChanged
-        'check if value is valid
-        ValidateValue()
-
-        'raise event
-        OnevtTextChanged(Me, e)
-    End Sub
-
-    Private Sub ucrTextBox_Leave(sender As Object, e As EventArgs) Handles txtBox.Leave
-        OnevtValueChanged(Me, e)
-    End Sub
-
-    Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        ChangeCase()
-    End Sub
-
     ''' <summary>
     ''' Sets the focus to the control 
     ''' </summary>
-    Public Sub GetFocus()
+    Public Overrides Sub GetFocus()
         txtBox.Focus()
     End Sub
 
@@ -292,30 +298,24 @@ Public Class ucrTextBox
     Public Function IsEmpty() As Boolean
         Return String.IsNullOrEmpty(GetValue())
     End Function
+
     ''' <summary>
     ''' Clears contents of the textbox
     ''' </summary>
     Public Overrides Sub Clear()
-        Dim bPrevValidate As Boolean = bValidate
-        bValidate = False
+        'Dim bPrevValidate As Boolean = bValidate
+        'bValidate = False
         SetValue("")
         SetBackColor(bValidColor)
-        bValidate = bPrevValidate
+        'bValidate = bPrevValidate
     End Sub
+
     ''' <summary>
     ''' Sets the back colour of the control
     ''' </summary>
     ''' <param name="backColor"></param>
-    Public Sub SetBackColor(backColor As Color)
+    Public Overrides Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
-    End Sub
-
-    ''' <summary>
-    ''' Sets the default back color for when this control has a valid value
-    ''' </summary>
-    ''' <param name="backColor"></param>
-    Public Sub SetValidColor(backColor As Color)
-        bValidColor = backColor
     End Sub
 
     ''' <summary>
@@ -326,22 +326,6 @@ Public Class ucrTextBox
             txtBox.Text = txtBox.Text.ToLower()
         ElseIf bToUpper Then
             txtBox.Text = txtBox.Text.ToUpper()
-        End If
-    End Sub
-    ''' <summary>
-    ''' Returns the value of the textbox
-    ''' </summary>
-    ''' <param name="strFieldName"></param>
-    ''' <returns></returns>
-    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Return txtBox.Text
-    End Function
-
-    Public Overrides Sub UpdateInputValueToDataTable()
-        If dtbRecords.Rows.Count = 0 Then
-            dtbRecords.Rows.Add(txtBox.Text)
-        Else
-            dtbRecords.Rows(0).Item(0) = txtBox.Text
         End If
     End Sub
 

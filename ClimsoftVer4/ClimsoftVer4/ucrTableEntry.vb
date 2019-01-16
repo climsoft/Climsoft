@@ -3,9 +3,7 @@
     Protected bFirstLoad As Boolean = True
     'Stores fields for the table entry
     Protected lstFields As New List(Of String)
-    'Boolean to check if record is updating
-    'Set to True by default
-    Public bUpdating As Boolean = True
+    Public bUpdating As Boolean = True    'Boolean Flag to check if record is updating. Set to True by default
     Public bPopulating As Boolean = False
 
     Public Overrides Sub PopulateControl()
@@ -64,6 +62,7 @@
     Private Sub GoToNextChildControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrValueView Then
+                'on enter only go next if what has been typed in is valid
                 If DirectCast(sender, ucrValueView).ValidateValue() Then
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
@@ -75,9 +74,12 @@
     End Sub
 
     Public Overrides Function ValidateValue() As Boolean
+        Dim ucr As ucrValueView
         For Each ctr As Control In Controls
             If TypeOf ctr Is ucrValueView Then
-                If Not DirectCast(ctr, ucrValueView).ValidateValue() Then
+                ucr = DirectCast(ctr, ucrValueView)
+                'TODO. What should we do for controls without field names
+                If Not String.IsNullOrEmpty(ucr.FieldName) AndAlso Not ucr.ValidateValue() Then
                     ctr.Focus()
                     Return False
                 End If

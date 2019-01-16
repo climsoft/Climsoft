@@ -9,18 +9,17 @@
             ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
-
-            'The validation for the instrument Id will be enable once the field data type in the database has been corrected
-            'ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1) 'validate any value as a numeric 
-            ucrTextBoxUncertainity.SetValidationTypeAsNumeric()
+            ucrDataLinkInstrumentID.SetValidationTypeAsNumeric(dcmMin:=1)
 
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
+
+            'validations
             ucrTextBoxUncertainity.SetValidationTypeAsNumeric()
             ucrTextBoxHeight.SetValidationTypeAsNumeric()
 
             'set FILTER control used in the where clause of the SELECT statement
-            AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", strLinkedFieldName:=ucrDataLinkInstrumentID.FieldName, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName, "=", bForceValuesAsString:=True)
 
             'set FILTER field name used in the where clause of UPDATE and DELETE statement
             AddKeyField(ucrDataLinkInstrumentID.FieldName)
@@ -41,6 +40,7 @@
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationInstrument.NewRecord()
         SaveEnable()
+        ucrDataLinkInstrumentID.GetFocus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -106,15 +106,11 @@
     End Sub
 
     Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
-        Dim filePathName As String
-
         OpenFileDialog.Title = "Select image file"
         OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
-
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            filePathName = OpenFileDialog.FileName
-            filePathName = filePathName.Replace("\", "/")
-            ucrTextBoxImageFile.SetValue(filePathName)
+            'replace the backslash in the filepath with forward slash
+            ucrTextBoxImageFile.SetValue(OpenFileDialog.FileName.Replace("\", "/"))
         End If
 
     End Sub
@@ -122,8 +118,6 @@
     Private Sub ucrTextBoxImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxImageFile.evtTextChanged
         picInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
     End Sub
-
-
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load

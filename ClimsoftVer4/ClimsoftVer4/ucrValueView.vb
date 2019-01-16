@@ -7,7 +7,8 @@
     ' Used when wanting to update several controls without linked controls updating inbetween.
     Public bSuppressChangedEvents As Boolean = False
 
-    Protected bValidColor As Color = Color.White 'used to set the default back color to show when the value input is a valid one
+    Protected bValidColor As Color = Color.White 'used to set the default back color to show when the value input is  valid 
+    Protected bInValidColor As Color = Color.Red 'used to set the default back color to show when the value input is invalid 
     Public bValidate As Boolean = True
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
@@ -15,10 +16,10 @@
 
     Public Property FieldName() As String
         Get
-            Return Tag
+            Return Me.Tag
         End Get
         Set(value As String)
-            Tag = value
+            Me.Tag = value
         End Set
     End Property
 
@@ -46,7 +47,7 @@
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
-        If FieldName = "" Then
+        If String.IsNullOrEmpty(FieldName) Then
             SetValue(Nothing)
         Else
             If dtbValues.Rows.Count = 1 Then
@@ -71,7 +72,7 @@
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
-        If FieldName = "" Then
+        If String.IsNullOrEmpty(FieldName) Then
             'TODO?
         Else
             If dtbValues.Rows.Count = 1 Then
@@ -118,6 +119,26 @@
     Public Sub SetUpControlInParent(lstFields As List(Of String), ehSub As evtValueChangedEventHandler)
         AddFieldstoList(lstFields)
         AddEventValueChangedHandle(ehSub)
+    End Sub
+
+    ''' <summary>
+    ''' Sets the back colour of the control
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Overridable Sub SetBackColor(backColor As Color)
+    End Sub
+
+    ''' <summary>
+    ''' Sets the default back color for when this control has a valid value
+    ''' </summary>
+    ''' <param name="backColor"></param>
+    Public Sub SetValidColor(backColor As Color)
+        bValidColor = backColor
+    End Sub
+
+    'TODO. Rethink how to override the Focus function
+    Public Overridable Sub GetFocus()
+        Me.Focus()
     End Sub
 
 End Class
