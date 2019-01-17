@@ -104,7 +104,7 @@
     End Sub
 
     Private Sub ucrTextBoxFeatureImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxFeatureImageFile.evtTextChanged
-        txtFeaturePicture.ImageLocation = ucrTextBoxFeatureImageFile.GetValue()
+        pbFeaturePicture.ImageLocation = ucrTextBoxFeatureImageFile.GetValue()
     End Sub
 
     ''' <summary>
