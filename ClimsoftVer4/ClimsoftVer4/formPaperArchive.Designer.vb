@@ -22,6 +22,7 @@ Partial Class formPaperArchive
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formPaperArchive))
         Me.tabImageArchives = New System.Windows.Forms.TabControl()
         Me.tabStructured = New System.Windows.Forms.TabPage()
@@ -97,6 +98,7 @@ Partial Class formPaperArchive
         Me.PicForm = New System.Windows.Forms.PictureBox()
         Me.lblZoomout = New System.Windows.Forms.Label()
         Me.lblImageRotate = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -110,6 +112,7 @@ Partial Class formPaperArchive
         Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -850,6 +853,7 @@ Partial Class formPaperArchive
         Me.lblImageRotate.Size = New System.Drawing.Size(71, 13)
         Me.lblImageRotate.TabIndex = 32
         Me.lblImageRotate.Text = "Rotate Image"
+        Me.lblImageRotate.Visible = False
         '
         'formPaperArchive
         '
@@ -890,6 +894,7 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -968,4 +973,5 @@ Partial Class formPaperArchive
     Friend WithEvents lblZoomout As System.Windows.Forms.Label
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
     Friend WithEvents lblImageRotate As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

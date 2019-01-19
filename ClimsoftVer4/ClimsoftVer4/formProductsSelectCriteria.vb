@@ -1368,7 +1368,22 @@ Err:
     End Function
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#producstcriteria")
+
+        If lblProductType.Text = "Inventory" Or lblProductType.Text = "Missing Data" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#inventory")
+        ElseIf lblProductType.Text = "WindRose" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#windrose")
+        ElseIf lblProductType.Text = "CPT" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#cpt")
+        ElseIf lblProductType.Text = "Instat" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#instat")
+        ElseIf lblProductType.Text = "Rclimdex" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#rclimdex")
+        ElseIf lblProductType.Text = "GeoCLIM Monthly" Or lblProductType.Text = "GeoCLIM Dekadal" Or lblProductType.Text = "GeoCLIM Daily" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#geoclim")
+        Else
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#products")
+        End If
     End Sub
 
     Private Sub cmdClearElements_Click(sender As Object, e As EventArgs) Handles cmdClearElements.Click
