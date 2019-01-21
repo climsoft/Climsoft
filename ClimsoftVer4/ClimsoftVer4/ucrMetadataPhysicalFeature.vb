@@ -4,37 +4,31 @@
         If bFirstLoad Then
             SetUpTableEntry("physicalfeature")
 
-            ucrStationSelector.SetTableNameAndField("physicalfeature", "associatedWith")
-            ucrStationSelector.PopulateControl()
-            ucrStationSelector.SetDisplayAndValueMember("associatedWith")
-            ucrStationSelector.bValidate = False
+            ucrStationSelector.SetViewTypeAsIDs()
 
-            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:=ucrStationSelector.FieldName, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDatePickerBeginDate, ucrDatePickerBeginDate.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrTextBoxFeatureDescription, ucrTextBoxFeatureDescription.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrTextBoxFeatureClass, ucrTextBoxFeatureClass.FieldName, "=", bForceValuesAsString:=True)
 
             AddKeyField(ucrStationSelector.FieldName)
+            AddKeyField(ucrDatePickerBeginDate.FieldName)
+            AddKeyField(ucrTextBoxFeatureDescription.FieldName)
+            AddKeyField(ucrTextBoxFeatureClass.FieldName)
 
             'set up the navigation control
             ucrNavigationPhysicalFeature.SetTableEntry(Me)
             ucrNavigationPhysicalFeature.AddKeyControls(ucrStationSelector)
+            ucrNavigationPhysicalFeature.AddKeyControls(ucrDatePickerBeginDate)
+            ucrNavigationPhysicalFeature.AddKeyControls(ucrTextBoxFeatureDescription)
+            ucrNavigationPhysicalFeature.AddKeyControls(ucrTextBoxFeatureClass)
 
             bFirstLoad = False
 
             'populate the values
             ucrNavigationPhysicalFeature.PopulateControl()
+            SaveEnable()
 
-        End If
-    End Sub
-
-    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
-        Dim filePathName As String
-
-        OpenFileDialog.Title = "Select image file"
-        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
-
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            filePathName = OpenFileDialog.FileName
-            filePathName = filePathName.Replace("\", "/")
-            ucrTextBoxFeatureImageFile.SetValue(filePathName)
         End If
     End Sub
 
@@ -45,7 +39,7 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -63,17 +57,20 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
-
-        End If
+        Catch ex As Exception
+        MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -97,9 +94,18 @@
         SaveEnable()
     End Sub
 
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
+    Private Sub btnOpenFile_Click(sender As Object, e As EventArgs) Handles btnOpenFile.Click
+        OpenFileDialog.Title = "Select image file"
+        OpenFileDialog.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png"
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            'replace the backslash in the filepath with forward slash
+            ucrTextBoxFeatureImageFile.SetValue(OpenFileDialog.FileName.Replace("\", "/"))
+        End If
+    End Sub
+
+    Private Sub ucrTextBoxFeatureImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxFeatureImageFile.evtTextChanged
+        pbFeaturePicture.ImageLocation = ucrTextBoxFeatureImageFile.GetValue()
+    End Sub
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load

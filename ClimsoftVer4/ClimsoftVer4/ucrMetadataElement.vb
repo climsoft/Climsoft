@@ -8,9 +8,19 @@
             ucrDataLinkElementID.SetTableNameAndField("obselement", "elementId")
             ucrDataLinkElementID.PopulateControl()
             ucrDataLinkElementID.SetDisplayAndValueMember("elementId")
-
             ucrDataLinkElementID.SetValidationTypeAsNumeric(dcmMin:=1)
+
+            ucrDataLinkType.SetPossibleValues("elementtypes", GetType(String), {"Daily", "Hourly", "Monthly", "AWS"})
+            ucrDataLinkType.SetDisplayAndValueMember("elementtypes")
+            ucrDataLinkType.bValidateEmpty = False
+
+            ucrElementSelectorSearch.bValidate = False
+
             ucrTextBoxScale.SetValidationTypeAsNumeric()
+            ucrTextBoxUpperLimit.SetValidationTypeAsNumeric()
+            ucrTextBoxUpperLimit.bValidateEmpty = False
+            ucrTextBoxLowerLimit.SetValidationTypeAsNumeric()
+            ucrTextBoxLowerLimit.bValidateEmpty = False
 
             AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
 
@@ -24,18 +34,19 @@
 
             'populate the values
             ucrNavigationElement.PopulateControl()
-
+            SaveEnable()
         End If
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationElement.NewRecord()
         SaveEnable()
+        ucrDataLinkElementID.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -53,17 +64,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -87,13 +106,6 @@
         SaveEnable()
     End Sub
 
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
-
-    ''' <summary>
-    ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
-    ''' </summary>
     Private Sub SaveEnable()
         btnAddNew.Enabled = True
         btnSave.Enabled = False
@@ -113,6 +125,12 @@
         ElseIf ucrNavigationElement.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
+        End If
+    End Sub
+
+    Private Sub ucrElementSelectorSearch_evtValueChanged(sender As Object, e As EventArgs) Handles ucrElementSelectorSearch.evtValueChanged
+        If ucrElementSelectorSearch.ValidateValue Then
+            ucrDataLinkElementID.SetValue(ucrElementSelectorSearch.GetValue)
         End If
     End Sub
 End Class

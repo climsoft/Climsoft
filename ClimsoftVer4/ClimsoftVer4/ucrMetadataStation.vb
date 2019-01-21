@@ -114,4 +114,10 @@
             btnUpdate.Enabled = True
         End If
     End Sub
+
+    Private Sub ucrSearchStationName_evtValueChanged(sender As Object, e As EventArgs) Handles ucrSearchStationName.evtValueChanged
+        If ucrSearchStationName.ValidateValue Then
+            ucrStationIDcombobox.SetValue(ucrSearchStationName.GetValue)
+        End If
+    End Sub
 End Class

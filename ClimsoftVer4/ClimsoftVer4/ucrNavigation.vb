@@ -465,7 +465,7 @@ Public Class ucrNavigation
         Next
 
         'construct the necessary sql. Using CONCAT_WS to return a string of values. Probably use a unique separator?
-        strSql = "SELECT CONCAT_WS(' +++ '," & strFields & ") AS createdcol FROM " & clsDataDefinition.GetTableName()
+        strSql = "SELECT CONCAT_WS('+++'," & strFields & ") AS createdcol FROM " & clsDataDefinition.GetTableName()
         If strSortCol <> "" Then
             strSql = strSql & " ORDER BY " & strSortCol
         End If
@@ -475,7 +475,8 @@ Public Class ucrNavigation
         strDBValues = clsDataConnection.db.Database.SqlQuery(Of String)(strSql).FirstOrDefault()
 
         If strDBValues IsNot Nothing Then
-            arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            arrDBValues = strDBValues.Split("+++".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+            'arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
             'arrange the values to their corresponding column names
             For i As Integer = 0 To clsDataDefinition.GetFields().Count - 1
                 dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))

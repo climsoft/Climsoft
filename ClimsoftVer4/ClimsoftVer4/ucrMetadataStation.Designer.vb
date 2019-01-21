@@ -712,13 +712,13 @@ Partial Class ucrMetadataStation
         '
         'ucrSearchStationName
         '
-        Me.ucrSearchStationName.FieldName = "Sea"
+        Me.ucrSearchStationName.FieldName = ""
         Me.ucrSearchStationName.Location = New System.Drawing.Point(475, 68)
         Me.ucrSearchStationName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSearchStationName.Name = "ucrSearchStationName"
         Me.ucrSearchStationName.Size = New System.Drawing.Size(253, 24)
         Me.ucrSearchStationName.TabIndex = 77
-        Me.ucrSearchStationName.Tag = "Sea"
+        Me.ucrSearchStationName.Tag = ""
         '
         'ucrMetadataStation
         '
