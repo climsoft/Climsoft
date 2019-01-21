@@ -1252,9 +1252,12 @@
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         If Text = "AWS Data Import" Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#aws")
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aws.htm")
+        ElseIf Text = "CLICOM Daily" Or Text = "CLICOM Synop" Or Text = "CLICOM Hourly" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "clicom.htm")
+        ElseIf Text = "Hourly Data Import" Or Text = "Daily Data Import" Or Text = "Multiple Columns Data Import" Then
+            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#DailyHourly")
         Else
-
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
         End If
     End Sub
