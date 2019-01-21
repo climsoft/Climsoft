@@ -127,4 +127,10 @@
             btnUpdate.Enabled = True
         End If
     End Sub
+
+    Private Sub ucrElementSelectorSearch_evtValueChanged(sender As Object, e As EventArgs) Handles ucrElementSelectorSearch.evtValueChanged
+        If ucrElementSelectorSearch.ValidateValue Then
+            ucrDataLinkElementID.SetValue(ucrElementSelectorSearch.GetValue)
+        End If
+    End Sub
 End Class
