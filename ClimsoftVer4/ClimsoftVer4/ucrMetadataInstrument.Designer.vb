@@ -34,7 +34,7 @@ Partial Class ucrMetadataInstrument
         Me.ucrNavigationInstrument = New ClimsoftVer4.ucrNavigation()
         Me.btnOpenFile = New System.Windows.Forms.Button()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
-        Me.picInstrument = New System.Windows.Forms.PictureBox()
+        Me.pbInstrument = New System.Windows.Forms.PictureBox()
         Me.ucrTextBoxImageFile = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxHeight = New ClimsoftVer4.ucrTextBox()
         Me.ucrTextBoxUncertainity = New ClimsoftVer4.ucrTextBox()
@@ -61,7 +61,7 @@ Partial Class ucrMetadataInstrument
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
-        CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ucrTextBoxtInstrumentName
@@ -179,15 +179,15 @@ Partial Class ucrMetadataInstrument
         Me.lblInstrumentPic.TabIndex = 26
         Me.lblInstrumentPic.Text = "Instrument Picture"
         '
-        'picInstrument
+        'pbInstrument
         '
-        Me.picInstrument.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.picInstrument.Location = New System.Drawing.Point(370, 46)
-        Me.picInstrument.Name = "picInstrument"
-        Me.picInstrument.Size = New System.Drawing.Size(288, 291)
-        Me.picInstrument.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picInstrument.TabIndex = 90
-        Me.picInstrument.TabStop = False
+        Me.pbInstrument.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pbInstrument.Location = New System.Drawing.Point(370, 46)
+        Me.pbInstrument.Name = "pbInstrument"
+        Me.pbInstrument.Size = New System.Drawing.Size(288, 291)
+        Me.pbInstrument.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbInstrument.TabIndex = 90
+        Me.pbInstrument.TabStop = False
         '
         'ucrTextBoxImageFile
         '
@@ -428,7 +428,7 @@ Partial Class ucrMetadataInstrument
         Me.Controls.Add(Me.ucrNavigationInstrument)
         Me.Controls.Add(Me.btnOpenFile)
         Me.Controls.Add(Me.lblInstrumentPic)
-        Me.Controls.Add(Me.picInstrument)
+        Me.Controls.Add(Me.pbInstrument)
         Me.Controls.Add(Me.ucrTextBoxImageFile)
         Me.Controls.Add(Me.ucrTextBoxHeight)
         Me.Controls.Add(Me.ucrTextBoxUncertainity)
@@ -454,7 +454,7 @@ Partial Class ucrMetadataInstrument
         Me.Size = New System.Drawing.Size(676, 478)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCommand2.ResumeLayout(False)
-        CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbInstrument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -481,7 +481,7 @@ Partial Class ucrMetadataInstrument
     Friend WithEvents ucrTextBoxHeight As ucrTextBox
     Friend WithEvents ucrTextBoxImageFile As ucrTextBox
     Friend WithEvents lblInstrumentPic As Label
-    Friend WithEvents picInstrument As PictureBox
+    Friend WithEvents pbInstrument As PictureBox
     Friend WithEvents btnOpenFile As Button
     Friend WithEvents ucrNavigationInstrument As ucrNavigation
     Friend WithEvents btnAddNew As Button

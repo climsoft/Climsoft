@@ -116,7 +116,7 @@
     End Sub
 
     Private Sub ucrTextBoxImageFile_TextChanged(sender As Object, e As EventArgs) Handles ucrTextBoxImageFile.evtTextChanged
-        picInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
+        pbInstrument.ImageLocation = ucrTextBoxImageFile.GetValue()
     End Sub
 
     ''' <summary>

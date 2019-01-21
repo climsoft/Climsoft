@@ -51,10 +51,10 @@ Partial Class ucrMetadataStationLocationHistory
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigationStationLocationHistory = New ClimsoftVer4.ucrNavigation()
-        Me.AdministrationRegionTextBox = New System.Windows.Forms.TextBox()
         Me.AdministrationRegionLabel = New System.Windows.Forms.Label()
         Me.DrainageBasinLabel = New System.Windows.Forms.Label()
-        Me.DrainageBasinTextBox = New System.Windows.Forms.TextBox()
+        Me.ucrTextBoxAdministrativeRegion = New ClimsoftVer4.ucrTextBox()
+        Me.ucrTextBoxDrainageBasin = New ClimsoftVer4.ucrTextBox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
@@ -340,14 +340,6 @@ Partial Class ucrMetadataStationLocationHistory
         Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigationStationLocationHistory.TabIndex = 22
         '
-        'AdministrationRegionTextBox
-        '
-        Me.AdministrationRegionTextBox.Location = New System.Drawing.Point(275, 321)
-        Me.AdministrationRegionTextBox.Name = "AdministrationRegionTextBox"
-        Me.AdministrationRegionTextBox.Size = New System.Drawing.Size(51, 20)
-        Me.AdministrationRegionTextBox.TabIndex = 23
-        Me.AdministrationRegionTextBox.Tag = "adminRegion"
-        '
         'AdministrationRegionLabel
         '
         Me.AdministrationRegionLabel.AutoSize = True
@@ -360,28 +352,42 @@ Partial Class ucrMetadataStationLocationHistory
         'DrainageBasinLabel
         '
         Me.DrainageBasinLabel.AutoSize = True
-        Me.DrainageBasinLabel.Location = New System.Drawing.Point(143, 361)
+        Me.DrainageBasinLabel.Location = New System.Drawing.Point(143, 357)
         Me.DrainageBasinLabel.Name = "DrainageBasinLabel"
         Me.DrainageBasinLabel.Size = New System.Drawing.Size(79, 13)
         Me.DrainageBasinLabel.TabIndex = 26
         Me.DrainageBasinLabel.Text = "Drainage Basin"
         '
-        'DrainageBasinTextBox
+        'ucrTextBoxAdministrativeRegion
         '
-        Me.DrainageBasinTextBox.Location = New System.Drawing.Point(275, 354)
-        Me.DrainageBasinTextBox.Name = "DrainageBasinTextBox"
-        Me.DrainageBasinTextBox.Size = New System.Drawing.Size(51, 20)
-        Me.DrainageBasinTextBox.TabIndex = 27
-        Me.DrainageBasinTextBox.Tag = "drainageBasin"
+        Me.ucrTextBoxAdministrativeRegion.FieldName = "adminRegion"
+        Me.ucrTextBoxAdministrativeRegion.Location = New System.Drawing.Point(276, 321)
+        Me.ucrTextBoxAdministrativeRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxAdministrativeRegion.Name = "ucrTextBoxAdministrativeRegion"
+        Me.ucrTextBoxAdministrativeRegion.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxAdministrativeRegion.TabIndex = 28
+        Me.ucrTextBoxAdministrativeRegion.Tag = "adminRegion"
+        Me.ucrTextBoxAdministrativeRegion.TextboxValue = ""
+        '
+        'ucrTextBoxDrainageBasin
+        '
+        Me.ucrTextBoxDrainageBasin.FieldName = "drainageBasin"
+        Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(276, 354)
+        Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
+        Me.ucrTextBoxDrainageBasin.Size = New System.Drawing.Size(51, 20)
+        Me.ucrTextBoxDrainageBasin.TabIndex = 29
+        Me.ucrTextBoxDrainageBasin.Tag = "drainageBasin"
+        Me.ucrTextBoxDrainageBasin.TextboxValue = ""
         '
         'ucrMetadataStationLocationHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.DrainageBasinTextBox)
+        Me.Controls.Add(Me.ucrTextBoxDrainageBasin)
+        Me.Controls.Add(Me.ucrTextBoxAdministrativeRegion)
         Me.Controls.Add(Me.DrainageBasinLabel)
         Me.Controls.Add(Me.AdministrationRegionLabel)
-        Me.Controls.Add(Me.AdministrationRegionTextBox)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.ucrNavigationStationLocationHistory)
         Me.Controls.Add(Me.ucrStationSelector)
@@ -444,8 +450,8 @@ Partial Class ucrMetadataStationLocationHistory
     Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigationStationLocationHistory As ucrNavigation
     Friend WithEvents btnClear As Button
-    Friend WithEvents AdministrationRegionTextBox As TextBox
     Friend WithEvents AdministrationRegionLabel As Label
     Friend WithEvents DrainageBasinLabel As Label
-    Friend WithEvents DrainageBasinTextBox As TextBox
+    Friend WithEvents ucrTextBoxAdministrativeRegion As ucrTextBox
+    Friend WithEvents ucrTextBoxDrainageBasin As ucrTextBox
 End Class

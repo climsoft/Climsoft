@@ -25,7 +25,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.btnOpenFile = New System.Windows.Forms.Button()
         Me.lblFeatureImageFile = New System.Windows.Forms.Label()
         Me.lblFeaturePicture = New System.Windows.Forms.Label()
-        Me.txtFeaturePicture = New System.Windows.Forms.PictureBox()
+        Me.pbFeaturePicture = New System.Windows.Forms.PictureBox()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.lblFeatureDescription = New System.Windows.Forms.Label()
         Me.lblFeatureClass = New System.Windows.Forms.Label()
@@ -48,7 +48,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.ucrDatePickerEndDate = New ClimsoftVer4.ucrDatePicker()
         Me.OpenFileDialog = New System.Windows.Forms.OpenFileDialog()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.txtFeaturePicture, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbFeaturePicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,22 +79,22 @@ Partial Class ucrMetadataPhysicalFeature
         Me.lblFeaturePicture.TabIndex = 16
         Me.lblFeaturePicture.Text = "Feature Picture"
         '
-        'txtFeaturePicture
+        'pbFeaturePicture
         '
-        Me.txtFeaturePicture.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pbFeaturePicture.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtFeaturePicture.BackColor = System.Drawing.Color.Ivory
-        Me.txtFeaturePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.txtFeaturePicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.txtFeaturePicture.ImageLocation = ""
-        Me.txtFeaturePicture.InitialImage = Nothing
-        Me.txtFeaturePicture.Location = New System.Drawing.Point(377, 93)
-        Me.txtFeaturePicture.Name = "txtFeaturePicture"
-        Me.txtFeaturePicture.Size = New System.Drawing.Size(258, 227)
-        Me.txtFeaturePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.txtFeaturePicture.TabIndex = 80
-        Me.txtFeaturePicture.TabStop = False
+        Me.pbFeaturePicture.BackColor = System.Drawing.Color.Ivory
+        Me.pbFeaturePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbFeaturePicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pbFeaturePicture.ImageLocation = ""
+        Me.pbFeaturePicture.InitialImage = Nothing
+        Me.pbFeaturePicture.Location = New System.Drawing.Point(377, 93)
+        Me.pbFeaturePicture.Name = "pbFeaturePicture"
+        Me.pbFeaturePicture.Size = New System.Drawing.Size(258, 227)
+        Me.pbFeaturePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbFeaturePicture.TabIndex = 80
+        Me.pbFeaturePicture.TabStop = False
         '
         'lblStationID
         '
@@ -308,7 +308,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Controls.Add(Me.btnOpenFile)
         Me.Controls.Add(Me.lblFeatureImageFile)
         Me.Controls.Add(Me.lblFeaturePicture)
-        Me.Controls.Add(Me.txtFeaturePicture)
+        Me.Controls.Add(Me.pbFeaturePicture)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.lblFeatureDescription)
         Me.Controls.Add(Me.lblFeatureClass)
@@ -317,7 +317,7 @@ Partial Class ucrMetadataPhysicalFeature
         Me.Name = "ucrMetadataPhysicalFeature"
         Me.Size = New System.Drawing.Size(662, 427)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.txtFeaturePicture, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbFeaturePicture, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -327,7 +327,7 @@ Partial Class ucrMetadataPhysicalFeature
     Friend WithEvents btnOpenFile As Button
     Friend WithEvents lblFeatureImageFile As Label
     Friend WithEvents lblFeaturePicture As Label
-    Friend WithEvents txtFeaturePicture As PictureBox
+    Friend WithEvents pbFeaturePicture As PictureBox
     Friend WithEvents lblStationID As Label
     Friend WithEvents lblFeatureDescription As Label
     Friend WithEvents lblFeatureClass As Label
