@@ -162,7 +162,7 @@ Partial Class ucrMetadataStation
         'ucrTextBoxQualifier
         '
         Me.ucrTextBoxQualifier.FieldName = "qualifier"
-        Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(522, 227)
+        Me.ucrTextBoxQualifier.Location = New System.Drawing.Point(522, 223)
         Me.ucrTextBoxQualifier.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrTextBoxQualifier.Name = "ucrTextBoxQualifier"
         Me.ucrTextBoxQualifier.Size = New System.Drawing.Size(162, 20)
@@ -272,7 +272,7 @@ Partial Class ucrMetadataStation
         'ucrStationIDcombobox
         '
         Me.ucrStationIDcombobox.FieldName = "stationId"
-        Me.ucrStationIDcombobox.Location = New System.Drawing.Point(121, 72)
+        Me.ucrStationIDcombobox.Location = New System.Drawing.Point(121, 68)
         Me.ucrStationIDcombobox.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationIDcombobox.Name = "ucrStationIDcombobox"
         Me.ucrStationIDcombobox.Size = New System.Drawing.Size(139, 21)
@@ -704,7 +704,7 @@ Partial Class ucrMetadataStation
         'lblStationId
         '
         Me.lblStationId.AutoSize = True
-        Me.lblStationId.Location = New System.Drawing.Point(24, 80)
+        Me.lblStationId.Location = New System.Drawing.Point(24, 76)
         Me.lblStationId.Name = "lblStationId"
         Me.lblStationId.Size = New System.Drawing.Size(52, 13)
         Me.lblStationId.TabIndex = 39

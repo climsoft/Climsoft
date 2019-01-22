@@ -167,7 +167,7 @@ Partial Class ucrMetadataStationElement
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "recordedFrom"
-        Me.ucrStationSelector.Location = New System.Drawing.Point(242, 77)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(242, 83)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(178, 24)
