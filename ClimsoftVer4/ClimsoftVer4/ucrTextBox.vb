@@ -56,7 +56,11 @@ Public Class ucrTextBox
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
-        Return txtBox.Text
+        If String.IsNullOrEmpty(txtBox.Text) Then
+            Return DBNull.Value
+        Else
+            Return txtBox.Text
+        End If
     End Function
 
     Public Overrides Sub SetValue(objNewValue As Object)
@@ -133,13 +137,13 @@ Public Class ucrTextBox
         If bValidate Then
             'if set to not validate empty values and textbox is empty then don't proceed with validation
             If Not bValidateEmpty AndAlso IsEmpty() Then
-                SetBackColor(bValidColor)
+                SetBackColor(clValidColor)
                 Return True
             End If
 
             iType = GetValidationCode(GetValue)
             If iType = 0 Then
-                SetBackColor(bValidColor)
+                SetBackColor(clValidColor)
             ElseIf iType = 1 Then
                 SetBackColor(Color.Red)
                 If Not bValidateSilently Then
@@ -296,7 +300,7 @@ Public Class ucrTextBox
     ''' </summary>
     ''' <returns></returns>
     Public Function IsEmpty() As Boolean
-        Return String.IsNullOrEmpty(GetValue())
+        Return String.IsNullOrEmpty(txtBox.Text)
     End Function
 
     ''' <summary>
@@ -306,7 +310,7 @@ Public Class ucrTextBox
         'Dim bPrevValidate As Boolean = bValidate
         'bValidate = False
         SetValue("")
-        SetBackColor(bValidColor)
+        SetBackColor(clValidColor)
         'bValidate = bPrevValidate
     End Sub
 
