@@ -35,7 +35,7 @@
             Next
         End If
 
-        SetBackColor(If(bValid, Color.White, Color.Red))
+        SetBackColor(If(bValid, clValidColor, clInValidColor))
         Return bValid
     End Function
 

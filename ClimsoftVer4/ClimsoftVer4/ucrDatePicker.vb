@@ -41,6 +41,7 @@
             txtDate.Text = ""
         Else
             Try
+                'TODO. Restrict this also based on the return type not on the object type
                 If TypeOf objNewValue Is DateTime Then
                     dtpDate.Value = objNewValue
                     txtDate.Text = If(strDateFormat = "", dtpDate.Value, dtpDate.Value.ToString(strDateFormat))
@@ -87,10 +88,11 @@
         If bValidate Then
             'if set to not validate empty values and textbox is empty then don't proceed with validation
             If Not bValidateEmpty AndAlso IsEmpty() Then
-                SetBackColor(bValidColor)
+                SetBackColor(clValidColor)
                 Return True
             End If
 
+            'TODO. Restrict this also based on the return type
             Try
                 Dim dte As DateTime
                 If strDateFormat = "" Then
@@ -106,7 +108,7 @@
             bValid = True
         End If
 
-        SetBackColor(If(bValid, bValidColor, bInValidColor))
+        SetBackColor(If(bValid, clValidColor, clInValidColor))
         Return bValid
     End Function
 
@@ -140,7 +142,7 @@
         'Dim bPrevValidate As Boolean = bValidate
         'bValidate = False
         SetValue("") 'TODO
-        SetBackColor(bValidColor)
+        SetBackColor(clValidColor)
         'bValidate = bPrevValidate
     End Sub
 
