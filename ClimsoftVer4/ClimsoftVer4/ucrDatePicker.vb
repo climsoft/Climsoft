@@ -66,7 +66,8 @@
 
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         If String.IsNullOrWhiteSpace(txtDate.Text) Then
-            Return If(strValueReturnType = "date", Nothing, "")
+            'Return If(strValueReturnType = "date", Nothing, "")
+            Return Nothing
         Else
             If strValueReturnType = "date" Then
                 If strDateFormat = "" Then
@@ -90,6 +91,9 @@
             If Not bValidateEmpty AndAlso IsEmpty() Then
                 SetBackColor(clValidColor)
                 Return True
+            ElseIf bValidateEmpty AndAlso IsEmpty Then
+                SetBackColor(clInValidColor)
+                Return False
             End If
 
             'TODO. Restrict this also based on the return type
