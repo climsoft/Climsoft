@@ -4,37 +4,49 @@
         If bFirstLoad Then
             SetUpTableEntry("stationqualifier")
 
-            ucrTextBoxQualifier.SetTableNameAndField("stationqualifier", "qualifier")
-            ucrTextBoxQualifier.PopulateControl()
-            ucrTextBoxQualifier.SetValue("qualifier")
-            ucrTextBoxQualifier.bValidate = False
-
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
 
-            AddLinkedControlFilters(ucrTextBoxQualifier, ucrTextBoxQualifier.FieldName, "=", strLinkedFieldName:=ucrTextBoxQualifier.FieldName, bForceValuesAsString:=True)
+            'validations
+            ucrTextBoxQualifier.bValidateEmpty = True
+            ucrDatePickerBeginDate.bValidateEmpty = True
+            ucrDatePickerEndDate.bValidateEmpty = True
+            ucrTextBoxTimeZone.SetValidationTypeAsNumeric()
+
+            AddLinkedControlFilters(ucrTextBoxQualifier, ucrTextBoxQualifier.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDatePickerBeginDate, ucrDatePickerBeginDate.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDatePickerEndDate, ucrDatePickerEndDate.FieldName, "=", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+
 
             AddKeyField(ucrTextBoxQualifier.FieldName)
+            AddKeyField(ucrDatePickerBeginDate.FieldName)
+            AddKeyField(ucrDatePickerEndDate.FieldName)
+            AddKeyField(ucrStationSelector.FieldName)
 
             'set up the navigation control
             ucrNavigationStationQualifier.SetTableEntry(Me)
             ucrNavigationStationQualifier.AddKeyControls(ucrTextBoxQualifier)
+            ucrNavigationStationQualifier.AddKeyControls(ucrDatePickerBeginDate)
+            ucrNavigationStationQualifier.AddKeyControls(ucrDatePickerEndDate)
+            ucrNavigationStationQualifier.AddKeyControls(ucrStationSelector)
 
             bFirstLoad = False
 
             'populate the values
             ucrNavigationStationQualifier.PopulateControl()
-
+            SaveEnable()
         End If
     End Sub
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationStationQualifier.NewRecord()
         SaveEnable()
+        ucrTextBoxQualifier.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -52,17 +64,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -85,10 +105,6 @@
         'Enable appropriate base buttons
         SaveEnable()
     End Sub
-
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load

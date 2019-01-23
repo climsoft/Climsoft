@@ -63,109 +63,120 @@ Partial Class ucrMetadataStationLocationHistory
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(227, 9)
+        Me.Label19.Location = New System.Drawing.Point(340, 14)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(159, 15)
+        Me.Label19.Size = New System.Drawing.Size(224, 22)
         Me.Label19.TabIndex = 0
         Me.Label19.Text = "Station Location History"
         '
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(143, 53)
+        Me.lblStation.Location = New System.Drawing.Point(214, 82)
+        Me.lblStation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(40, 13)
+        Me.lblStation.Size = New System.Drawing.Size(60, 20)
         Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station"
         '
         'lblClosingDate
         '
         Me.lblClosingDate.AutoSize = True
-        Me.lblClosingDate.Location = New System.Drawing.Point(143, 188)
+        Me.lblClosingDate.Location = New System.Drawing.Point(214, 289)
+        Me.lblClosingDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblClosingDate.Name = "lblClosingDate"
-        Me.lblClosingDate.Size = New System.Drawing.Size(67, 13)
+        Me.lblClosingDate.Size = New System.Drawing.Size(100, 20)
         Me.lblClosingDate.TabIndex = 11
         Me.lblClosingDate.Text = "Closing Date"
         '
         'lblOpeningDate
         '
         Me.lblOpeningDate.AutoSize = True
-        Me.lblOpeningDate.Location = New System.Drawing.Point(143, 161)
+        Me.lblOpeningDate.Location = New System.Drawing.Point(214, 248)
+        Me.lblOpeningDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblOpeningDate.Name = "lblOpeningDate"
-        Me.lblOpeningDate.Size = New System.Drawing.Size(73, 13)
+        Me.lblOpeningDate.Size = New System.Drawing.Size(108, 20)
         Me.lblOpeningDate.TabIndex = 9
         Me.lblOpeningDate.Text = "Opening Date"
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(143, 215)
+        Me.lblLatitude.Location = New System.Drawing.Point(214, 331)
+        Me.lblLatitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLatitude.Name = "lblLatitude"
-        Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
+        Me.lblLatitude.Size = New System.Drawing.Size(67, 20)
         Me.lblLatitude.TabIndex = 13
         Me.lblLatitude.Text = "Latitude"
         '
         'lblAuthority
         '
         Me.lblAuthority.AutoSize = True
-        Me.lblAuthority.Location = New System.Drawing.Point(143, 296)
+        Me.lblAuthority.Location = New System.Drawing.Point(214, 455)
+        Me.lblAuthority.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAuthority.Name = "lblAuthority"
-        Me.lblAuthority.Size = New System.Drawing.Size(48, 13)
+        Me.lblAuthority.Size = New System.Drawing.Size(72, 20)
         Me.lblAuthority.TabIndex = 19
         Me.lblAuthority.Text = "Authority"
         '
         'lblGeoLocationMethod
         '
         Me.lblGeoLocationMethod.AutoSize = True
-        Me.lblGeoLocationMethod.Location = New System.Drawing.Point(143, 107)
+        Me.lblGeoLocationMethod.Location = New System.Drawing.Point(214, 165)
+        Me.lblGeoLocationMethod.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGeoLocationMethod.Name = "lblGeoLocationMethod"
-        Me.lblGeoLocationMethod.Size = New System.Drawing.Size(107, 13)
+        Me.lblGeoLocationMethod.Size = New System.Drawing.Size(159, 20)
         Me.lblGeoLocationMethod.TabIndex = 5
         Me.lblGeoLocationMethod.Text = "GeoLocation Method"
         '
         'lblElevation
         '
         Me.lblElevation.AutoSize = True
-        Me.lblElevation.Location = New System.Drawing.Point(143, 269)
+        Me.lblElevation.Location = New System.Drawing.Point(214, 414)
+        Me.lblElevation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblElevation.Name = "lblElevation"
-        Me.lblElevation.Size = New System.Drawing.Size(51, 13)
+        Me.lblElevation.Size = New System.Drawing.Size(74, 20)
         Me.lblElevation.TabIndex = 17
         Me.lblElevation.Text = "Elevation"
         '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(143, 242)
+        Me.lblLongitude.Location = New System.Drawing.Point(214, 372)
+        Me.lblLongitude.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLongitude.Name = "lblLongitude"
-        Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
+        Me.lblLongitude.Size = New System.Drawing.Size(80, 20)
         Me.lblLongitude.TabIndex = 15
         Me.lblLongitude.Text = "Longitude"
         '
         'lblStationType
         '
         Me.lblStationType.AutoSize = True
-        Me.lblStationType.Location = New System.Drawing.Point(143, 80)
+        Me.lblStationType.Location = New System.Drawing.Point(214, 123)
+        Me.lblStationType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblStationType.Name = "lblStationType"
-        Me.lblStationType.Size = New System.Drawing.Size(67, 13)
+        Me.lblStationType.Size = New System.Drawing.Size(98, 20)
         Me.lblStationType.TabIndex = 3
         Me.lblStationType.Text = "Station Type"
         '
         'lblGeoLocationAccuracy
         '
         Me.lblGeoLocationAccuracy.AutoSize = True
-        Me.lblGeoLocationAccuracy.Location = New System.Drawing.Point(143, 134)
+        Me.lblGeoLocationAccuracy.Location = New System.Drawing.Point(214, 206)
+        Me.lblGeoLocationAccuracy.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblGeoLocationAccuracy.Name = "lblGeoLocationAccuracy"
-        Me.lblGeoLocationAccuracy.Size = New System.Drawing.Size(116, 13)
+        Me.lblGeoLocationAccuracy.Size = New System.Drawing.Size(170, 20)
         Me.lblGeoLocationAccuracy.TabIndex = 7
         Me.lblGeoLocationAccuracy.Text = "GeoLocation Accuracy"
         '
         'ucrTextBoxStationType
         '
         Me.ucrTextBoxStationType.FieldName = "stationType"
-        Me.ucrTextBoxStationType.Location = New System.Drawing.Point(275, 71)
-        Me.ucrTextBoxStationType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxStationType.Location = New System.Drawing.Point(412, 109)
+        Me.ucrTextBoxStationType.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxStationType.Name = "ucrTextBoxStationType"
-        Me.ucrTextBoxStationType.Size = New System.Drawing.Size(129, 20)
+        Me.ucrTextBoxStationType.Size = New System.Drawing.Size(194, 31)
         Me.ucrTextBoxStationType.TabIndex = 4
         Me.ucrTextBoxStationType.Tag = "stationType"
         Me.ucrTextBoxStationType.TextboxValue = ""
@@ -173,10 +184,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxGeoLocationMethod
         '
         Me.ucrTextBoxGeoLocationMethod.FieldName = "geoLocationMethod"
-        Me.ucrTextBoxGeoLocationMethod.Location = New System.Drawing.Point(275, 99)
-        Me.ucrTextBoxGeoLocationMethod.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGeoLocationMethod.Location = New System.Drawing.Point(412, 152)
+        Me.ucrTextBoxGeoLocationMethod.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxGeoLocationMethod.Name = "ucrTextBoxGeoLocationMethod"
-        Me.ucrTextBoxGeoLocationMethod.Size = New System.Drawing.Size(129, 22)
+        Me.ucrTextBoxGeoLocationMethod.Size = New System.Drawing.Size(194, 34)
         Me.ucrTextBoxGeoLocationMethod.TabIndex = 6
         Me.ucrTextBoxGeoLocationMethod.Tag = "geoLocationMethod"
         Me.ucrTextBoxGeoLocationMethod.TextboxValue = ""
@@ -184,10 +195,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxGeolocationAccuracy
         '
         Me.ucrTextBoxGeolocationAccuracy.FieldName = "geoLocationAccuracy"
-        Me.ucrTextBoxGeolocationAccuracy.Location = New System.Drawing.Point(275, 127)
-        Me.ucrTextBoxGeolocationAccuracy.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxGeolocationAccuracy.Location = New System.Drawing.Point(412, 195)
+        Me.ucrTextBoxGeolocationAccuracy.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxGeolocationAccuracy.Name = "ucrTextBoxGeolocationAccuracy"
-        Me.ucrTextBoxGeolocationAccuracy.Size = New System.Drawing.Size(129, 24)
+        Me.ucrTextBoxGeolocationAccuracy.Size = New System.Drawing.Size(194, 37)
         Me.ucrTextBoxGeolocationAccuracy.TabIndex = 8
         Me.ucrTextBoxGeolocationAccuracy.Tag = "geoLocationAccuracy"
         Me.ucrTextBoxGeolocationAccuracy.TextboxValue = ""
@@ -195,10 +206,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxLatitude
         '
         Me.ucrTextBoxLatitude.FieldName = "latitude"
-        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(275, 214)
-        Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxLatitude.Location = New System.Drawing.Point(412, 329)
+        Me.ucrTextBoxLatitude.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxLatitude.Name = "ucrTextBoxLatitude"
-        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(129, 20)
+        Me.ucrTextBoxLatitude.Size = New System.Drawing.Size(194, 31)
         Me.ucrTextBoxLatitude.TabIndex = 14
         Me.ucrTextBoxLatitude.Tag = "latitude"
         Me.ucrTextBoxLatitude.TextboxValue = ""
@@ -206,10 +217,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxLongitude
         '
         Me.ucrTextBoxLongitude.FieldName = "longitude"
-        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(276, 242)
-        Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxLongitude.Location = New System.Drawing.Point(414, 372)
+        Me.ucrTextBoxLongitude.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxLongitude.Name = "ucrTextBoxLongitude"
-        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(128, 20)
+        Me.ucrTextBoxLongitude.Size = New System.Drawing.Size(192, 31)
         Me.ucrTextBoxLongitude.TabIndex = 16
         Me.ucrTextBoxLongitude.Tag = "longitude"
         Me.ucrTextBoxLongitude.TextboxValue = ""
@@ -217,10 +228,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxElevation
         '
         Me.ucrTextBoxElevation.FieldName = "elevation"
-        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(276, 267)
-        Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxElevation.Location = New System.Drawing.Point(414, 411)
+        Me.ucrTextBoxElevation.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxElevation.Name = "ucrTextBoxElevation"
-        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(50, 20)
+        Me.ucrTextBoxElevation.Size = New System.Drawing.Size(75, 31)
         Me.ucrTextBoxElevation.TabIndex = 18
         Me.ucrTextBoxElevation.Tag = "elevation"
         Me.ucrTextBoxElevation.TextboxValue = ""
@@ -228,10 +239,10 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrTextBoxAuthority
         '
         Me.ucrTextBoxAuthority.FieldName = "authority"
-        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(276, 293)
-        Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxAuthority.Location = New System.Drawing.Point(414, 451)
+        Me.ucrTextBoxAuthority.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxAuthority.Name = "ucrTextBoxAuthority"
-        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(128, 20)
+        Me.ucrTextBoxAuthority.Size = New System.Drawing.Size(192, 31)
         Me.ucrTextBoxAuthority.TabIndex = 20
         Me.ucrTextBoxAuthority.Tag = "authority"
         Me.ucrTextBoxAuthority.TextboxValue = ""
@@ -239,28 +250,30 @@ Partial Class ucrMetadataStationLocationHistory
         'ucrDatePickerOpeningDate
         '
         Me.ucrDatePickerOpeningDate.FieldName = "openingDatetime"
-        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(275, 153)
+        Me.ucrDatePickerOpeningDate.Location = New System.Drawing.Point(412, 235)
+        Me.ucrDatePickerOpeningDate.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDatePickerOpeningDate.Name = "ucrDatePickerOpeningDate"
-        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(129, 21)
+        Me.ucrDatePickerOpeningDate.Size = New System.Drawing.Size(194, 32)
         Me.ucrDatePickerOpeningDate.TabIndex = 10
         Me.ucrDatePickerOpeningDate.Tag = "openingDatetime"
         '
         'ucrDatePickerCkosingDate
         '
         Me.ucrDatePickerCkosingDate.FieldName = "closingDatetime"
-        Me.ucrDatePickerCkosingDate.Location = New System.Drawing.Point(275, 180)
+        Me.ucrDatePickerCkosingDate.Location = New System.Drawing.Point(412, 277)
+        Me.ucrDatePickerCkosingDate.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDatePickerCkosingDate.Name = "ucrDatePickerCkosingDate"
-        Me.ucrDatePickerCkosingDate.Size = New System.Drawing.Size(129, 21)
+        Me.ucrDatePickerCkosingDate.Size = New System.Drawing.Size(194, 32)
         Me.ucrDatePickerCkosingDate.TabIndex = 12
         Me.ucrDatePickerCkosingDate.Tag = "closingDatetime"
         '
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "belongsTo"
-        Me.ucrStationSelector.Location = New System.Drawing.Point(275, 39)
-        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrStationSelector.Location = New System.Drawing.Point(412, 60)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrStationSelector.Name = "ucrStationSelector"
-        Me.ucrStationSelector.Size = New System.Drawing.Size(129, 27)
+        Me.ucrStationSelector.Size = New System.Drawing.Size(194, 42)
         Me.ucrStationSelector.TabIndex = 2
         Me.ucrStationSelector.Tag = "belongsTo"
         '
@@ -272,117 +285,127 @@ Partial Class ucrMetadataStationLocationHistory
         Me.grpCommand2.Controls.Add(Me.btnDelete)
         Me.grpCommand2.Controls.Add(Me.btnUpdate)
         Me.grpCommand2.Controls.Add(Me.btnSave)
-        Me.grpCommand2.Location = New System.Drawing.Point(37, 391)
+        Me.grpCommand2.Location = New System.Drawing.Point(56, 602)
+        Me.grpCommand2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grpCommand2.Name = "grpCommand2"
-        Me.grpCommand2.Size = New System.Drawing.Size(601, 31)
+        Me.grpCommand2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grpCommand2.Size = New System.Drawing.Size(902, 48)
         Me.grpCommand2.TabIndex = 21
         Me.grpCommand2.TabStop = False
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(408, 6)
+        Me.btnClear.Location = New System.Drawing.Point(612, 9)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.Size = New System.Drawing.Size(112, 35)
         Me.btnClear.TabIndex = 4
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(20, 4)
+        Me.btnAddNew.Location = New System.Drawing.Point(30, 6)
+        Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(112, 35)
         Me.btnAddNew.TabIndex = 0
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(505, 5)
+        Me.btnView.Location = New System.Drawing.Point(758, 8)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.Size = New System.Drawing.Size(112, 35)
         Me.btnView.TabIndex = 5
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(311, 5)
+        Me.btnDelete.Location = New System.Drawing.Point(466, 8)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(112, 35)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(214, 5)
+        Me.btnUpdate.Location = New System.Drawing.Point(321, 8)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
         Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(117, 5)
+        Me.btnSave.Location = New System.Drawing.Point(176, 8)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(112, 35)
         Me.btnSave.TabIndex = 1
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'ucrNavigationStationLocationHistory
         '
-        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(141, 438)
-        Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrNavigationStationLocationHistory.Location = New System.Drawing.Point(212, 674)
+        Me.ucrNavigationStationLocationHistory.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrNavigationStationLocationHistory.Name = "ucrNavigationStationLocationHistory"
-        Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(336, 25)
+        Me.ucrNavigationStationLocationHistory.Size = New System.Drawing.Size(504, 38)
         Me.ucrNavigationStationLocationHistory.TabIndex = 22
         '
         'AdministrationRegionLabel
         '
         Me.AdministrationRegionLabel.AutoSize = True
-        Me.AdministrationRegionLabel.Location = New System.Drawing.Point(143, 328)
+        Me.AdministrationRegionLabel.Location = New System.Drawing.Point(214, 505)
+        Me.AdministrationRegionLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.AdministrationRegionLabel.Name = "AdministrationRegionLabel"
-        Me.AdministrationRegionLabel.Size = New System.Drawing.Size(109, 13)
-        Me.AdministrationRegionLabel.TabIndex = 25
+        Me.AdministrationRegionLabel.Size = New System.Drawing.Size(165, 20)
+        Me.AdministrationRegionLabel.TabIndex = 21
         Me.AdministrationRegionLabel.Text = "Administration Region"
         '
         'DrainageBasinLabel
         '
         Me.DrainageBasinLabel.AutoSize = True
-        Me.DrainageBasinLabel.Location = New System.Drawing.Point(143, 357)
+        Me.DrainageBasinLabel.Location = New System.Drawing.Point(214, 549)
+        Me.DrainageBasinLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DrainageBasinLabel.Name = "DrainageBasinLabel"
-        Me.DrainageBasinLabel.Size = New System.Drawing.Size(79, 13)
-        Me.DrainageBasinLabel.TabIndex = 26
+        Me.DrainageBasinLabel.Size = New System.Drawing.Size(118, 20)
+        Me.DrainageBasinLabel.TabIndex = 23
         Me.DrainageBasinLabel.Text = "Drainage Basin"
         '
         'ucrTextBoxAdministrativeRegion
         '
         Me.ucrTextBoxAdministrativeRegion.FieldName = "adminRegion"
-        Me.ucrTextBoxAdministrativeRegion.Location = New System.Drawing.Point(276, 321)
-        Me.ucrTextBoxAdministrativeRegion.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxAdministrativeRegion.Location = New System.Drawing.Point(414, 494)
+        Me.ucrTextBoxAdministrativeRegion.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxAdministrativeRegion.Name = "ucrTextBoxAdministrativeRegion"
-        Me.ucrTextBoxAdministrativeRegion.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxAdministrativeRegion.TabIndex = 28
+        Me.ucrTextBoxAdministrativeRegion.Size = New System.Drawing.Size(76, 31)
+        Me.ucrTextBoxAdministrativeRegion.TabIndex = 22
         Me.ucrTextBoxAdministrativeRegion.Tag = "adminRegion"
         Me.ucrTextBoxAdministrativeRegion.TextboxValue = ""
         '
         'ucrTextBoxDrainageBasin
         '
         Me.ucrTextBoxDrainageBasin.FieldName = "drainageBasin"
-        Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(276, 354)
-        Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTextBoxDrainageBasin.Location = New System.Drawing.Point(414, 545)
+        Me.ucrTextBoxDrainageBasin.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrTextBoxDrainageBasin.Name = "ucrTextBoxDrainageBasin"
-        Me.ucrTextBoxDrainageBasin.Size = New System.Drawing.Size(51, 20)
-        Me.ucrTextBoxDrainageBasin.TabIndex = 29
+        Me.ucrTextBoxDrainageBasin.Size = New System.Drawing.Size(76, 31)
+        Me.ucrTextBoxDrainageBasin.TabIndex = 24
         Me.ucrTextBoxDrainageBasin.Tag = "drainageBasin"
         Me.ucrTextBoxDrainageBasin.TextboxValue = ""
         '
         'ucrMetadataStationLocationHistory
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrTextBoxDrainageBasin)
         Me.Controls.Add(Me.ucrTextBoxAdministrativeRegion)
@@ -411,8 +434,9 @@ Partial Class ucrMetadataStationLocationHistory
         Me.Controls.Add(Me.lblStationType)
         Me.Controls.Add(Me.lblGeoLocationAccuracy)
         Me.Controls.Add(Me.Label19)
+        Me.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.Name = "ucrMetadataStationLocationHistory"
-        Me.Size = New System.Drawing.Size(674, 479)
+        Me.Size = New System.Drawing.Size(1011, 737)
         Me.Tag = ""
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCommand2.ResumeLayout(False)

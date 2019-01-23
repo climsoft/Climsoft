@@ -1,17 +1,15 @@
 ﻿Public Class ucrMetadataPaperArchive
     Private Sub ucrMetadataInstrument_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            'SetUpTableEntry 
+
             SetUpTableEntry("paperarchivedefinition")
 
-            ucrTextBoxFormId.SetTableNameAndField("paperarchivedefinition", "formId")
-            ucrTextBoxFormId.PopulateControl()
-            ucrTextBoxFormId.SetValue("formId")
-            ucrTextBoxFormId.bValidate = False
-
-            AddLinkedControlFilters(ucrTextBoxFormId, ucrTextBoxFormId.FieldName(), "=", strLinkedFieldName:=ucrTextBoxFormId.FieldName(), bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrTextBoxFormId, ucrTextBoxFormId.FieldName, "=", bForceValuesAsString:=True)
 
             AddKeyField(ucrTextBoxFormId.FieldName)
+
+            'validations
+            ucrTextBoxFormId.bValidateEmpty = True
 
             'set up the navigation control
             ucrNavigationPaperArchive.SetTableEntry(Me)
@@ -21,18 +19,19 @@
 
             'populate the values
             ucrNavigationPaperArchive.PopulateControl()
-
+            SaveEnable()
         End If
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationPaperArchive.NewRecord()
         SaveEnable()
+        ucrTextBoxFormId.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -50,17 +49,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -84,9 +91,6 @@
         SaveEnable()
     End Sub
 
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load

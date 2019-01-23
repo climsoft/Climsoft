@@ -23,7 +23,7 @@
 
             ucrElementSelectorSearch.SetInValidColor(ucrElementSelectorSearch.GetValidColor)
 
-            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=False)
 
             AddKeyField(ucrDataLinkElementID.FieldName)
 

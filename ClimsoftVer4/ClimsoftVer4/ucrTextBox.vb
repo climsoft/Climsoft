@@ -57,7 +57,8 @@ Public Class ucrTextBox
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         If String.IsNullOrEmpty(txtBox.Text) Then
-            Return DBNull.Value
+            'Return DBNull.Value
+            Return Nothing
         Else
             Return txtBox.Text
         End If
@@ -139,9 +140,12 @@ Public Class ucrTextBox
             If Not bValidateEmpty AndAlso IsEmpty() Then
                 SetBackColor(clValidColor)
                 Return True
+            ElseIf bValidateEmpty AndAlso IsEmpty() Then
+                SetBackColor(clInValidColor)
+                Return False
             End If
 
-            iType = GetValidationCode(GetValue)
+            iType = GetValidationCode(txtBox.Text)
             If iType = 0 Then
                 SetBackColor(clValidColor)
             ElseIf iType = 1 Then
