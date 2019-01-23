@@ -27,14 +27,15 @@
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
-            Dim strCol As String
-            strCol = cboValues.ValueMember
-            For Each rTemp As DataRow In dtbRecords.Rows
-                If rTemp.Item(strCol).ToString = cboValues.Text Then
-                    bValid = True
-                    Exit For
-                End If
-            Next
+            If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
+                For Each rTemp As DataRow In dtbRecords.Rows
+                    If rTemp.Item(cboValues.ValueMember).ToString = cboValues.Text Then
+                        bValid = True
+                        Exit For
+                    End If
+                Next
+            End If
+
             SetBackColor(If(bValid, clValidColor, clInValidColor))
         End If
 
