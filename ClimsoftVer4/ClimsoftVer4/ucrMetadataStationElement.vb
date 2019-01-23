@@ -12,11 +12,13 @@
             ucrDataLinkInstrumentID.PopulateControl()
             ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
 
+            ucrDataLinkScheduleClass.SetTableNameAndField("obsscheduleclass", "scheduleClass")
+            ucrDataLinkScheduleClass.PopulateControl()
+            ucrDataLinkScheduleClass.SetDisplayAndValueMember("scheduleClass")
+
             'validations
             ucrTextHeight.SetValidationTypeAsNumeric()
-            ucrDatePickerBeginDate.bValidateEmpty = False
-
-
+            ucrDatePickerBeginDate.bValidateEmpty = True
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName(), "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName(), "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
