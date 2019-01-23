@@ -5,23 +5,33 @@
             'SetUpTableEntry 
             SetUpTableEntry("stationelement")
 
-            ucrDataLinkElementID.SetTableNameAndField("stationelement", "describedBy")
-            ucrDataLinkElementID.PopulateControl()
-            ucrDataLinkElementID.SetDisplayAndValueMember("describedBy")
-
-            ucrDataLinkElementID.SetValidationTypeAsNumeric()
-            ucrTextHeight.SetValidationTypeAsNumeric()
-            'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
+            ucrElementSelector.SetViewTypeAsIDs()
 
-            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
+            ucrDataLinkInstrumentID.SetTableNameAndField("instrument", "instrumentId")
+            ucrDataLinkInstrumentID.PopulateControl()
+            ucrDataLinkInstrumentID.SetDisplayAndValueMember("instrumentId")
+
+            'validations
+            ucrTextHeight.SetValidationTypeAsNumeric()
+            ucrDatePickerBeginDate.bValidateEmpty = False
+
+
+
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName(), "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName(), "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrDataLinkInstrumentID, ucrDataLinkInstrumentID.FieldName(), "=", strLinkedFieldName:="instrumentId", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrDatePickerBeginDate, ucrDatePickerBeginDate.FieldName(), "=", bForceValuesAsString:=True)
 
             'set FILTER field name used in the where clause of UPDATE and DELETE statement
             AddKeyField(ucrStationSelector.FieldName)
 
             'set up the navigation control
             ucrNavigationStationElement.SetTableEntry(Me)
-            ucrNavigationStationElement.AddKeyControls(ucrDataLinkElementID)
+            ucrNavigationStationElement.AddKeyControls(ucrStationSelector)
+            ucrNavigationStationElement.AddKeyControls(ucrElementSelector)
+            ucrNavigationStationElement.AddKeyControls(ucrDataLinkInstrumentID)
+            ucrNavigationStationElement.AddKeyControls(ucrDatePickerBeginDate)
 
             bFirstLoad = False
 
@@ -34,11 +44,12 @@
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationStationElement.NewRecord()
         SaveEnable()
+        ucrStationSelector.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -56,17 +67,24 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End If
+        Catch ex As Exception
+        MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -89,10 +107,6 @@
         'Enable appropriate base buttons
         SaveEnable()
     End Sub
-
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
