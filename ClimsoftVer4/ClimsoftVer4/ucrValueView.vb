@@ -77,7 +77,7 @@
         Else
             If dtbValues.Rows.Count = 1 Then
                 If ValidateValue() Then
-                    dtbValues.Rows(0).Item(FieldName) = GetValue()
+                    dtbValues.Rows(0).Item(FieldName) = If(IsNothing(GetValue()), DBNull.Value, GetValue())
                 Else
                     dtbValues.Rows(0).Item(FieldName) = DBNull.Value
                 End If

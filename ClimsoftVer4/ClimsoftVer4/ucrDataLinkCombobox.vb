@@ -181,11 +181,12 @@
     End Sub
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
+        ValidateValue()
         OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        ValidateValue()
+        'ValidateValue()
         OnevtValueChanged(Me, e)
     End Sub
 
