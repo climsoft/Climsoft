@@ -7,6 +7,7 @@
             ucrStationIDcombobox.SetTableNameAndField("station", "stationId")
             ucrStationIDcombobox.PopulateControl()
             ucrStationIDcombobox.SetDisplayAndValueMember("stationId")
+            ucrStationIDcombobox.SetValidationTypeAsNumeric()
 
             'validations
             ucrStationName.bValidateEmpty = True
@@ -178,5 +179,4 @@
         decimalDegrees = multiplier * (dDeg + (dMin / 60) + (dSec / 3600))
         Return Math.Round(decimalDegrees, 2)
     End Function
-
 End Class
