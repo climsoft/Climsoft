@@ -68,17 +68,19 @@
     ''' <returns></returns>
     Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
         If Not String.IsNullOrEmpty(cboValues.DisplayMember) Then
-            For Each rTemp As DataRow In dtbRecords.Rows
-                If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
-                    If strFieldName = "" Then
-                        'Return cboValues.SelectedValue
-                        'get the value from the value column
-                        Return rTemp.Item(cboValues.ValueMember)
-                    Else
-                        Return rTemp.Item(strFieldName)
+            If Not String.IsNullOrEmpty(strFieldName) OrElse Not String.IsNullOrEmpty(cboValues.ValueMember) Then
+                For Each rTemp As DataRow In dtbRecords.Rows
+                    If rTemp.Item(cboValues.DisplayMember).ToString = cboValues.Text Then
+                        If strFieldName = "" Then
+                            'Return cboValues.SelectedValue
+                            'get the value from the value column
+                            Return rTemp.Item(cboValues.ValueMember)
+                        Else
+                            Return rTemp.Item(strFieldName)
+                        End If
                     End If
-                End If
-            Next
+                Next
+            End If
         End If
 
         Return cboValues.Text
@@ -179,11 +181,12 @@
     End Sub
 
     Private Sub cboValues_TextChanged(sender As Object, e As EventArgs) Handles cboValues.TextChanged
+        ValidateValue()
         OnevtTextChanged(Me, e)
     End Sub
 
     Private Sub cboValues_Leave(sender As Object, e As EventArgs) Handles cboValues.Leave
-        ValidateValue()
+        'ValidateValue()
         OnevtValueChanged(Me, e)
     End Sub
 
@@ -191,7 +194,7 @@
         'Dim bPrevValidate As Boolean = bValidate
         'bValidate = False
         SetValue("")
-        SetBackColor(bValidColor)
+        SetBackColor(clValidColor)
         ' bValidate = bPrevValidate
     End Sub
 
@@ -236,7 +239,7 @@
         If bValidate Then
             'if set to not validate empty values and textbox is empty then don't proceed with validation
             If Not bValidateEmpty AndAlso IsEmpty() Then
-                SetBackColor(bValidColor)
+                SetBackColor(clValidColor)
                 Return True
             End If
 
@@ -250,16 +253,16 @@
                         End If
                     Next
                 End If
-                SetBackColor(If(bValid, bValidColor, bInValidColor))
+                SetBackColor(If(bValid, clValidColor, clInValidColor))
             ElseIf strValidationType = "numeric" Then
                 Dim iValidationCode As Integer = ValidateNumeric(cboValues.Text)
                 Select Case iValidationCode
                     Case 0
                         bValid = True
-                        SetBackColor(bValidColor)
+                        SetBackColor(clValidColor)
                     Case 1
                         bValid = False
-                        SetBackColor(bInValidColor)
+                        SetBackColor(clInValidColor)
                         If Not bValidateSilently Then
                             MessageBox.Show("Number expected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         End If
@@ -282,7 +285,7 @@
             End If
         Else
             bValid = True
-            SetBackColor(bValidColor)
+            SetBackColor(clValidColor)
         End If
         Return bValid
     End Function

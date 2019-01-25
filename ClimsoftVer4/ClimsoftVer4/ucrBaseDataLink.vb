@@ -163,9 +163,10 @@ Public Class ucrBaseDataLink
 
         'TODO. This needs to be refined. For some reason TypeOf temp fails to work as expected. the type of fails to match hence we added the  
         'temp.GetType for redundancy
-        If TypeOf temp Is String OrElse TypeOf temp Is Integer OrElse TypeOf temp Is Long OrElse temp.GetType Is GetType(String) OrElse temp.GetType Is GetType(Integer) OrElse temp.GetType Is GetType(Long) Then
+        If IsDBNull(temp) OrElse IsNothing(temp) OrElse TypeOf temp Is String OrElse TypeOf temp Is Integer OrElse TypeOf temp Is Long OrElse temp.GetType Is GetType(String) OrElse temp.GetType Is GetType(Integer) OrElse temp.GetType Is GetType(Long) Then
             'temp = CStr(temp)
-            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, strNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
+            'temp = TryCast(temp, String)
+            AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         Else
             AddLinkedControlFilters(ucrLinkedDataControl, New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, lstNewValue:=temp, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString), strLinkedFieldName)
         End If

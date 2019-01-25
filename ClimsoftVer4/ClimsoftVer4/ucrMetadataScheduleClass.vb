@@ -4,17 +4,15 @@
         If bFirstLoad Then
             SetUpTableEntry("obsscheduleclass")
 
-            ucrTextBoxClass.SetTableNameAndField("obsscheduleclass", "scheduleClass")
-            ucrTextBoxClass.PopulateControl()
-            ucrTextBoxClass.SetValue("scheduleClass")
-            ucrTextBoxClass.bValidate = False
-
             'set view type for the station selector to ID
             ucrStationSelector.SetViewTypeAsIDs()
 
-            AddLinkedControlFilters(ucrTextBoxClass, ucrTextBoxClass.FieldName, "=", strLinkedFieldName:=ucrTextBoxClass.FieldName, bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrTextBoxClass, ucrTextBoxClass.FieldName, "=", bForceValuesAsString:=True)
 
             AddKeyField(ucrTextBoxClass.FieldName)
+
+            'validations
+            ucrTextBoxClass.bValidateEmpty = True
 
             'set up the navigation control
             ucrNavigationScheduleClass.SetTableEntry(Me)
@@ -24,6 +22,7 @@
 
             'populate the values
             ucrNavigationScheduleClass.PopulateControl()
+            SaveEnable()
 
         End If
     End Sub
@@ -31,11 +30,12 @@
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         ucrNavigationScheduleClass.NewRecord()
         SaveEnable()
+        ucrTextBoxClass.Focus()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -53,17 +53,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            If UpdateRecord() Then
-                MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Try
+            If Not ValidateValue() Then
+                Exit Sub
             End If
 
-        End If
+            If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If UpdateRecord() Then
+                    MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Record has NOT been updated. Error: " & ex.Message, "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Not ValidateValues() Then
+            If Not ValidateValue() Then
                 Exit Sub
             End If
 
@@ -86,10 +94,6 @@
         'Enable appropriate base buttons
         SaveEnable()
     End Sub
-
-    Private Function ValidateValues() As Boolean
-        Return True
-    End Function
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load

@@ -14,15 +14,16 @@
             ucrDataLinkType.SetDisplayAndValueMember("elementtypes")
             ucrDataLinkType.bValidateEmpty = False
 
-            ucrElementSelectorSearch.bValidate = False
-
+            ucrTextBoxName.bValidateEmpty = True
             ucrTextBoxScale.SetValidationTypeAsNumeric()
             ucrTextBoxUpperLimit.SetValidationTypeAsNumeric()
-            ucrTextBoxUpperLimit.bValidateEmpty = False
+            'ucrTextBoxUpperLimit.bValidateEmpty = False
             ucrTextBoxLowerLimit.SetValidationTypeAsNumeric()
-            ucrTextBoxLowerLimit.bValidateEmpty = False
+            'ucrTextBoxLowerLimit.bValidateEmpty = False
 
-            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=True)
+            ucrElementSelectorSearch.SetInValidColor(ucrElementSelectorSearch.GetValidColor)
+
+            AddLinkedControlFilters(ucrDataLinkElementID, ucrDataLinkElementID.FieldName(), "=", strLinkedFieldName:=ucrDataLinkElementID.FieldName(), bForceValuesAsString:=False)
 
             AddKeyField(ucrDataLinkElementID.FieldName)
 
@@ -53,6 +54,7 @@
             'Confirm if you want to continue and save data from key-entry form to database table
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 If InsertRecord() Then
+                    ucrDataLinkElementID.PopulateControl()
                     ucrNavigationElement.GoToNewRecord()
                     SaveEnable()
                     MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -129,7 +131,7 @@
     End Sub
 
     Private Sub ucrElementSelectorSearch_evtValueChanged(sender As Object, e As EventArgs) Handles ucrElementSelectorSearch.evtValueChanged
-        If ucrElementSelectorSearch.ValidateValue Then
+        If Not ucrElementSelectorSearch.IsEmpty() AndAlso ucrElementSelectorSearch.ValidateValue() Then
             ucrDataLinkElementID.SetValue(ucrElementSelectorSearch.GetValue)
         End If
     End Sub

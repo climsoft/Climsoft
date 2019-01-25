@@ -115,7 +115,7 @@ Public Class DataCall
     Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         Dim clsNewFilter As New TableFilter
 
-        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, strNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, objNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
         SetFilter(clsNewFilter:=clsNewFilter)
     End Sub
 

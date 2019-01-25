@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Entity
 
 Public Class ucrNavigation
+    Public Event evtValueChanged(sender As Object, e As EventArgs)
     Private bFirstLoad As Boolean = True
     'Stores the number of the maximum rows in a data table
     Public iMaxRows As Integer
@@ -35,6 +36,7 @@ Public Class ucrNavigation
         'End If
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
     ''' <summary>
     ''' Gets the value of the specified column (strFieldName) at the current row 
@@ -103,6 +105,7 @@ Public Class ucrNavigation
         iCurrRow = 0
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
@@ -120,6 +123,7 @@ Public Class ucrNavigation
             iCurrRow = iCurrRow + 1
             displayRecordNumber()
             UpdateKeyControls()
+            OnevtValueChanged(Me, Nothing)
         Else
             MessageBox.Show("No more next record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
@@ -137,6 +141,7 @@ Public Class ucrNavigation
             displayRecordNumber()
             'OnevtValueChanged(sender, e)
             UpdateKeyControls()
+            OnevtValueChanged(Me, Nothing)
         Else
             MessageBox.Show("No more previous record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
@@ -149,6 +154,7 @@ Public Class ucrNavigation
         iCurrRow = iMaxRows - 1
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
 
@@ -479,7 +485,12 @@ Public Class ucrNavigation
             'arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
             'arrange the values to their corresponding column names
             For i As Integer = 0 To clsDataDefinition.GetFields().Count - 1
-                dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
+                If i > arrDBValues.Length - 1 Then
+                    dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, Nothing)
+                Else
+                    dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
+                End If
+
             Next
         End If
         posOfcurrentRowData = iRow
@@ -544,6 +555,12 @@ Public Class ucrNavigation
 
         Return rowIndex
     End Function
+
+    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
+        ' If Not bSuppressChangedEvents Then
+        RaiseEvent evtValueChanged(sender, e)
+        'End If
+    End Sub
 
     ' Use these two methods when you need to get a values from a specific row of the table
     ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords

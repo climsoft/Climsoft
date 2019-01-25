@@ -46,9 +46,10 @@
         If TypeOf sender Is ucrValueView Then
             If Not bPopulating Then
                 ucr = DirectCast(sender, ucrValueView)
-                If ucr.ValidateValue() Then
-                    ucr.SetValueToDataTable(dtbRecords)
-                End If
+                'If ucr.ValidateValue() Then
+                '    ucr.SetValueToDataTable(dtbRecords)
+                'End If
+                ucr.SetValueToDataTable(dtbRecords)
             End If
 
         End If
