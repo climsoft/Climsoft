@@ -495,7 +495,7 @@ Public Class dataEntryGlobalRoutines
         Try
             With frm
                 If Not Entered_Value(con, stnid, elmcode, yy, mm, dd, hh, obsv1) Then
-                    MsgBox("Can't Compare. Data not previously entered")
+                    MsgBox("Can't Compare. Data not previously uploaded")
                     Exit Function
                 Else
 
@@ -556,7 +556,7 @@ Public Class dataEntryGlobalRoutines
             d.SelectCommand.CommandTimeout = 0
             s.Clear()
             d.Fill(s, "forms")
-            'MsgBox(sql)
+            If s.Tables("forms").Rows.Count = 0 Then Return "Single"
             'MsgBox(Val(s.Tables("forms").Rows(0).Item(0)))
             If Val(s.Tables("forms").Rows(0).Item(0)) = 1 Then Key_Entry_Mode = "Double"
 
