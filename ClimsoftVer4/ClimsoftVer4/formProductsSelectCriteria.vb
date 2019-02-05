@@ -1368,7 +1368,6 @@ Err:
     End Function
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-
         If lblProductType.Text = "Inventory" Or lblProductType.Text = "Missing Data" Then
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#inventory")
         ElseIf lblProductType.Text = "WindRose" Then
