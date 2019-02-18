@@ -56,6 +56,9 @@ Partial Class formSynopticCaribbean
         Dim Val_Elem110Label As System.Windows.Forms.Label
         Dim Val_Elem176Label As System.Windows.Forms.Label
         Dim YyyyLabel As System.Windows.Forms.Label
+        Dim Label6 As System.Windows.Forms.Label
+        Dim Label7 As System.Windows.Forms.Label
+        Dim Label8 As System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cboStation = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -64,50 +67,50 @@ Partial Class formSynopticCaribbean
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboHour = New System.Windows.Forms.ComboBox()
-        Me.txtFlag130Field070 = New System.Windows.Forms.TextBox()
-        Me.txtFlag0129Field069 = New System.Windows.Forms.TextBox()
-        Me.txtFlag128Field068 = New System.Windows.Forms.TextBox()
-        Me.txtFlag126Field067 = New System.Windows.Forms.TextBox()
-        Me.txtFlag125Field066 = New System.Windows.Forms.TextBox()
-        Me.txtFlag124Field065 = New System.Windows.Forms.TextBox()
-        Me.txtFlag118Field061 = New System.Windows.Forms.TextBox()
-        Me.txtFlag117Field060 = New System.Windows.Forms.TextBox()
-        Me.txtFlag116Field059 = New System.Windows.Forms.TextBox()
-        Me.txtFlag099Field058 = New System.Windows.Forms.TextBox()
-        Me.txtFlag003Field057 = New System.Windows.Forms.TextBox()
-        Me.txtFlag180Field056 = New System.Windows.Forms.TextBox()
-        Me.txtFlag179Field055 = New System.Windows.Forms.TextBox()
-        Me.txtFlag178Field054 = New System.Windows.Forms.TextBox()
-        Me.txtFlag177Field053 = New System.Windows.Forms.TextBox()
-        Me.txtFlag193Field052 = New System.Windows.Forms.TextBox()
-        Me.txtFlag197Field051 = New System.Windows.Forms.TextBox()
-        Me.txtFlag167Field050 = New System.Windows.Forms.TextBox()
-        Me.txtFlag122Field064 = New System.Windows.Forms.TextBox()
-        Me.txtFlag121Field063 = New System.Windows.Forms.TextBox()
-        Me.txtFlag120Field062 = New System.Windows.Forms.TextBox()
-        Me.txtFlag104Field049 = New System.Windows.Forms.TextBox()
-        Me.txtFlag107Field048 = New System.Windows.Forms.TextBox()
-        Me.txtFlag106Field047 = New System.Windows.Forms.TextBox()
-        Me.txtFlag105Field046 = New System.Windows.Forms.TextBox()
-        Me.txtFlag103Field045 = New System.Windows.Forms.TextBox()
-        Me.txtFlag102Field044 = New System.Windows.Forms.TextBox()
-        Me.txtFlag101Field043 = New System.Windows.Forms.TextBox()
-        Me.txtFlag111Field042 = New System.Windows.Forms.TextBox()
-        Me.txtFlag112Field041 = New System.Windows.Forms.TextBox()
-        Me.txtFlag114Field040 = New System.Windows.Forms.TextBox()
-        Me.txtFlag110Field039 = New System.Windows.Forms.TextBox()
-        Me.txtFlag176ield038 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem130Field037 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem129Field036 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem128Field035 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem126Field034 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem125Field033 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem124Field032 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem118Field028 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem117Field027 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem116Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem099Field025 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem003Field024 = New System.Windows.Forms.TextBox()
+        Me.txtFlag130Field076 = New System.Windows.Forms.TextBox()
+        Me.txtFlag129Field075 = New System.Windows.Forms.TextBox()
+        Me.txtFlag128Field074 = New System.Windows.Forms.TextBox()
+        Me.txtFlag126Field073 = New System.Windows.Forms.TextBox()
+        Me.txtFlag125Field072 = New System.Windows.Forms.TextBox()
+        Me.txtFlag124Field071 = New System.Windows.Forms.TextBox()
+        Me.txtFlag118Field067 = New System.Windows.Forms.TextBox()
+        Me.txtFlag117Field066 = New System.Windows.Forms.TextBox()
+        Me.txtFlag116Field065 = New System.Windows.Forms.TextBox()
+        Me.txtFlag002Field060 = New System.Windows.Forms.TextBox()
+        Me.txtFlag003Field061 = New System.Windows.Forms.TextBox()
+        Me.txtFlag180Field059 = New System.Windows.Forms.TextBox()
+        Me.txtFlag179Field058 = New System.Windows.Forms.TextBox()
+        Me.txtFlag178Field057 = New System.Windows.Forms.TextBox()
+        Me.txtFlag177Field056 = New System.Windows.Forms.TextBox()
+        Me.txtFlag193Field055 = New System.Windows.Forms.TextBox()
+        Me.txtFlag197Field054 = New System.Windows.Forms.TextBox()
+        Me.txtFlag167Field053 = New System.Windows.Forms.TextBox()
+        Me.txtFlag122Field070 = New System.Windows.Forms.TextBox()
+        Me.txtFlag121Field069 = New System.Windows.Forms.TextBox()
+        Me.txtFlag120Field068 = New System.Windows.Forms.TextBox()
+        Me.txtFlag104Field052 = New System.Windows.Forms.TextBox()
+        Me.txtFlag107Field051 = New System.Windows.Forms.TextBox()
+        Me.txtFlag106Field050 = New System.Windows.Forms.TextBox()
+        Me.txtFlag105Field049 = New System.Windows.Forms.TextBox()
+        Me.txtFlag103Field048 = New System.Windows.Forms.TextBox()
+        Me.txtFlag102Field047 = New System.Windows.Forms.TextBox()
+        Me.txtFlag101Field046 = New System.Windows.Forms.TextBox()
+        Me.txtFlag111Field045 = New System.Windows.Forms.TextBox()
+        Me.txtFlag112Field044 = New System.Windows.Forms.TextBox()
+        Me.txtFlag114Field043 = New System.Windows.Forms.TextBox()
+        Me.txtFlag110Field042 = New System.Windows.Forms.TextBox()
+        Me.txtFlag176ield041 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem130Field040 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem129Field039 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem128Field038 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem126Field037 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem125Field036 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem124Field035 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem118Field031 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem117Field030 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem116Field029 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem002Field024 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem003Field025 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem180Field023 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem179Field022 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem178Field021 = New System.Windows.Forms.TextBox()
@@ -115,9 +118,9 @@ Partial Class formSynopticCaribbean
         Me.txtVal_Elem193Field019 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem197Field018 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem167Field017 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem122Field031 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem121Field030 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem120Field029 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem122Field034 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem121Field033 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem120Field032 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem104Field016 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem107Field015 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem106Field014 = New System.Windows.Forms.TextBox()
@@ -149,6 +152,12 @@ Partial Class formSynopticCaribbean
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.txtFlag099Field064 = New System.Windows.Forms.TextBox()
+        Me.txtFlag018Field063 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem099Field028 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem018Field027 = New System.Windows.Forms.TextBox()
+        Me.txtFlag085Field062 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem085Field026 = New System.Windows.Forms.TextBox()
         Val_Elem130Label = New System.Windows.Forms.Label()
         Val_Elem129Label = New System.Windows.Forms.Label()
         Val_Elem128Label = New System.Windows.Forms.Label()
@@ -183,12 +192,15 @@ Partial Class formSynopticCaribbean
         Val_Elem110Label = New System.Windows.Forms.Label()
         Val_Elem176Label = New System.Windows.Forms.Label()
         YyyyLabel = New System.Windows.Forms.Label()
+        Label6 = New System.Windows.Forms.Label()
+        Label7 = New System.Windows.Forms.Label()
+        Label8 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Val_Elem130Label
         '
         Val_Elem130Label.AutoSize = True
-        Val_Elem130Label.Location = New System.Drawing.Point(541, 294)
+        Val_Elem130Label.Location = New System.Drawing.Point(543, 369)
         Val_Elem130Label.Name = "Val_Elem130Label"
         Val_Elem130Label.Size = New System.Drawing.Size(85, 13)
         Val_Elem130Label.TabIndex = 275
@@ -197,7 +209,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem129Label
         '
         Val_Elem129Label.AutoSize = True
-        Val_Elem129Label.Location = New System.Drawing.Point(550, 269)
+        Val_Elem129Label.Location = New System.Drawing.Point(552, 344)
         Val_Elem129Label.Name = "Val_Elem129Label"
         Val_Elem129Label.Size = New System.Drawing.Size(76, 13)
         Val_Elem129Label.TabIndex = 272
@@ -206,7 +218,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem128Label
         '
         Val_Elem128Label.AutoSize = True
-        Val_Elem128Label.Location = New System.Drawing.Point(553, 244)
+        Val_Elem128Label.Location = New System.Drawing.Point(555, 319)
         Val_Elem128Label.Name = "Val_Elem128Label"
         Val_Elem128Label.Size = New System.Drawing.Size(73, 13)
         Val_Elem128Label.TabIndex = 271
@@ -215,7 +227,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem126Label
         '
         Val_Elem126Label.AutoSize = True
-        Val_Elem126Label.Location = New System.Drawing.Point(541, 219)
+        Val_Elem126Label.Location = New System.Drawing.Point(543, 294)
         Val_Elem126Label.Name = "Val_Elem126Label"
         Val_Elem126Label.Size = New System.Drawing.Size(85, 13)
         Val_Elem126Label.TabIndex = 270
@@ -224,7 +236,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem125Label
         '
         Val_Elem125Label.AutoSize = True
-        Val_Elem125Label.Location = New System.Drawing.Point(550, 194)
+        Val_Elem125Label.Location = New System.Drawing.Point(552, 269)
         Val_Elem125Label.Name = "Val_Elem125Label"
         Val_Elem125Label.Size = New System.Drawing.Size(76, 13)
         Val_Elem125Label.TabIndex = 269
@@ -233,7 +245,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem124Label
         '
         Val_Elem124Label.AutoSize = True
-        Val_Elem124Label.Location = New System.Drawing.Point(553, 169)
+        Val_Elem124Label.Location = New System.Drawing.Point(555, 244)
         Val_Elem124Label.Name = "Val_Elem124Label"
         Val_Elem124Label.Size = New System.Drawing.Size(73, 13)
         Val_Elem124Label.TabIndex = 268
@@ -242,7 +254,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem118Label
         '
         Val_Elem118Label.AutoSize = True
-        Val_Elem118Label.Location = New System.Drawing.Point(320, 369)
+        Val_Elem118Label.Location = New System.Drawing.Point(543, 144)
         Val_Elem118Label.Name = "Val_Elem118Label"
         Val_Elem118Label.Size = New System.Drawing.Size(85, 13)
         Val_Elem118Label.TabIndex = 263
@@ -251,7 +263,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem117Label
         '
         Val_Elem117Label.AutoSize = True
-        Val_Elem117Label.Location = New System.Drawing.Point(329, 344)
+        Val_Elem117Label.Location = New System.Drawing.Point(552, 119)
         Val_Elem117Label.Name = "Val_Elem117Label"
         Val_Elem117Label.Size = New System.Drawing.Size(76, 13)
         Val_Elem117Label.TabIndex = 262
@@ -260,7 +272,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem116Label
         '
         Val_Elem116Label.AutoSize = True
-        Val_Elem116Label.Location = New System.Drawing.Point(332, 319)
+        Val_Elem116Label.Location = New System.Drawing.Point(555, 94)
         Val_Elem116Label.Name = "Val_Elem116Label"
         Val_Elem116Label.Size = New System.Drawing.Size(73, 13)
         Val_Elem116Label.TabIndex = 261
@@ -269,16 +281,16 @@ Partial Class formSynopticCaribbean
         'Val_Elem099Label
         '
         Val_Elem099Label.AutoSize = True
-        Val_Elem099Label.Location = New System.Drawing.Point(374, 294)
+        Val_Elem099Label.Location = New System.Drawing.Point(375, 269)
         Val_Elem099Label.Name = "Val_Elem099Label"
-        Val_Elem099Label.Size = New System.Drawing.Size(31, 13)
+        Val_Elem099Label.Size = New System.Drawing.Size(33, 13)
         Val_Elem099Label.TabIndex = 260
-        Val_Elem099Label.Text = "Gmin"
+        Val_Elem099Label.Text = "Tmax"
         '
         'Val_Elem003Label
         '
         Val_Elem003Label.AutoSize = True
-        Val_Elem003Label.Location = New System.Drawing.Point(375, 269)
+        Val_Elem003Label.Location = New System.Drawing.Point(375, 294)
         Val_Elem003Label.Name = "Val_Elem003Label"
         Val_Elem003Label.Size = New System.Drawing.Size(30, 13)
         Val_Elem003Label.TabIndex = 259
@@ -350,7 +362,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem122Label
         '
         Val_Elem122Label.AutoSize = True
-        Val_Elem122Label.Location = New System.Drawing.Point(541, 144)
+        Val_Elem122Label.Location = New System.Drawing.Point(543, 219)
         Val_Elem122Label.Name = "Val_Elem122Label"
         Val_Elem122Label.Size = New System.Drawing.Size(85, 13)
         Val_Elem122Label.TabIndex = 307
@@ -359,7 +371,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem121Label
         '
         Val_Elem121Label.AutoSize = True
-        Val_Elem121Label.Location = New System.Drawing.Point(550, 119)
+        Val_Elem121Label.Location = New System.Drawing.Point(552, 194)
         Val_Elem121Label.Name = "Val_Elem121Label"
         Val_Elem121Label.Size = New System.Drawing.Size(76, 13)
         Val_Elem121Label.TabIndex = 304
@@ -368,7 +380,7 @@ Partial Class formSynopticCaribbean
         'Val_Elem120Label
         '
         Val_Elem120Label.AutoSize = True
-        Val_Elem120Label.Location = New System.Drawing.Point(553, 94)
+        Val_Elem120Label.Location = New System.Drawing.Point(555, 169)
         Val_Elem120Label.Name = "Val_Elem120Label"
         Val_Elem120Label.Size = New System.Drawing.Size(73, 13)
         Val_Elem120Label.TabIndex = 276
@@ -492,6 +504,33 @@ Partial Class formSynopticCaribbean
         YyyyLabel.TabIndex = 254
         YyyyLabel.Text = "Year:"
         '
+        'Label6
+        '
+        Label6.AutoSize = True
+        Label6.Location = New System.Drawing.Point(373, 369)
+        Label6.Name = "Label6"
+        Label6.Size = New System.Drawing.Size(33, 13)
+        Label6.TabIndex = 685
+        Label6.Text = "Wrun"
+        '
+        'Label7
+        '
+        Label7.AutoSize = True
+        Label7.Location = New System.Drawing.Point(374, 344)
+        Label7.Name = "Label7"
+        Label7.Size = New System.Drawing.Size(32, 13)
+        Label7.TabIndex = 684
+        Label7.Text = "Evap"
+        '
+        'Label8
+        '
+        Label8.AutoSize = True
+        Label8.Location = New System.Drawing.Point(373, 319)
+        Label8.Name = "Label8"
+        Label8.Size = New System.Drawing.Size(31, 13)
+        Label8.TabIndex = 689
+        Label8.Text = "Gmin"
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -563,346 +602,346 @@ Partial Class formSynopticCaribbean
         Me.cboHour.Size = New System.Drawing.Size(39, 21)
         Me.cboHour.TabIndex = 4
         '
-        'txtFlag130Field070
-        '
-        Me.txtFlag130Field070.Location = New System.Drawing.Point(686, 290)
-        Me.txtFlag130Field070.Name = "txtFlag130Field070"
-        Me.txtFlag130Field070.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag130Field070.TabIndex = 331
-        Me.txtFlag130Field070.TabStop = False
+        'txtFlag130Field076
+        '
+        Me.txtFlag130Field076.Location = New System.Drawing.Point(688, 365)
+        Me.txtFlag130Field076.Name = "txtFlag130Field076"
+        Me.txtFlag130Field076.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag130Field076.TabIndex = 324
+        Me.txtFlag130Field076.TabStop = False
         '
-        'txtFlag0129Field069
-        '
-        Me.txtFlag0129Field069.Location = New System.Drawing.Point(686, 265)
-        Me.txtFlag0129Field069.Name = "txtFlag0129Field069"
-        Me.txtFlag0129Field069.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag0129Field069.TabIndex = 330
-        Me.txtFlag0129Field069.TabStop = False
+        'txtFlag129Field075
+        '
+        Me.txtFlag129Field075.Location = New System.Drawing.Point(688, 340)
+        Me.txtFlag129Field075.Name = "txtFlag129Field075"
+        Me.txtFlag129Field075.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag129Field075.TabIndex = 323
+        Me.txtFlag129Field075.TabStop = False
         '
-        'txtFlag128Field068
-        '
-        Me.txtFlag128Field068.Location = New System.Drawing.Point(686, 240)
-        Me.txtFlag128Field068.Name = "txtFlag128Field068"
-        Me.txtFlag128Field068.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag128Field068.TabIndex = 329
-        Me.txtFlag128Field068.TabStop = False
+        'txtFlag128Field074
+        '
+        Me.txtFlag128Field074.Location = New System.Drawing.Point(688, 315)
+        Me.txtFlag128Field074.Name = "txtFlag128Field074"
+        Me.txtFlag128Field074.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag128Field074.TabIndex = 322
+        Me.txtFlag128Field074.TabStop = False
         '
-        'txtFlag126Field067
-        '
-        Me.txtFlag126Field067.Location = New System.Drawing.Point(686, 215)
-        Me.txtFlag126Field067.Name = "txtFlag126Field067"
-        Me.txtFlag126Field067.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag126Field067.TabIndex = 328
-        Me.txtFlag126Field067.TabStop = False
+        'txtFlag126Field073
+        '
+        Me.txtFlag126Field073.Location = New System.Drawing.Point(688, 290)
+        Me.txtFlag126Field073.Name = "txtFlag126Field073"
+        Me.txtFlag126Field073.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag126Field073.TabIndex = 321
+        Me.txtFlag126Field073.TabStop = False
         '
-        'txtFlag125Field066
-        '
-        Me.txtFlag125Field066.Location = New System.Drawing.Point(686, 190)
-        Me.txtFlag125Field066.Name = "txtFlag125Field066"
-        Me.txtFlag125Field066.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag125Field066.TabIndex = 327
-        Me.txtFlag125Field066.TabStop = False
+        'txtFlag125Field072
+        '
+        Me.txtFlag125Field072.Location = New System.Drawing.Point(688, 265)
+        Me.txtFlag125Field072.Name = "txtFlag125Field072"
+        Me.txtFlag125Field072.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag125Field072.TabIndex = 320
+        Me.txtFlag125Field072.TabStop = False
         '
-        'txtFlag124Field065
-        '
-        Me.txtFlag124Field065.Location = New System.Drawing.Point(686, 165)
-        Me.txtFlag124Field065.Name = "txtFlag124Field065"
-        Me.txtFlag124Field065.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag124Field065.TabIndex = 326
-        Me.txtFlag124Field065.TabStop = False
+        'txtFlag124Field071
+        '
+        Me.txtFlag124Field071.Location = New System.Drawing.Point(688, 240)
+        Me.txtFlag124Field071.Name = "txtFlag124Field071"
+        Me.txtFlag124Field071.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag124Field071.TabIndex = 319
+        Me.txtFlag124Field071.TabStop = False
         '
-        'txtFlag118Field061
-        '
-        Me.txtFlag118Field061.Location = New System.Drawing.Point(465, 365)
-        Me.txtFlag118Field061.Name = "txtFlag118Field061"
-        Me.txtFlag118Field061.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag118Field061.TabIndex = 323
-        Me.txtFlag118Field061.TabStop = False
+        'txtFlag118Field067
+        '
+        Me.txtFlag118Field067.Location = New System.Drawing.Point(688, 140)
+        Me.txtFlag118Field067.Name = "txtFlag118Field067"
+        Me.txtFlag118Field067.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag118Field067.TabIndex = 315
+        Me.txtFlag118Field067.TabStop = False
         '
-        'txtFlag117Field060
-        '
-        Me.txtFlag117Field060.Location = New System.Drawing.Point(465, 340)
-        Me.txtFlag117Field060.Name = "txtFlag117Field060"
-        Me.txtFlag117Field060.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag117Field060.TabIndex = 322
-        Me.txtFlag117Field060.TabStop = False
+        'txtFlag117Field066
+        '
+        Me.txtFlag117Field066.Location = New System.Drawing.Point(688, 115)
+        Me.txtFlag117Field066.Name = "txtFlag117Field066"
+        Me.txtFlag117Field066.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag117Field066.TabIndex = 314
+        Me.txtFlag117Field066.TabStop = False
         '
-        'txtFlag116Field059
-        '
-        Me.txtFlag116Field059.Location = New System.Drawing.Point(465, 315)
-        Me.txtFlag116Field059.Name = "txtFlag116Field059"
-        Me.txtFlag116Field059.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag116Field059.TabIndex = 321
-        Me.txtFlag116Field059.TabStop = False
+        'txtFlag116Field065
+        '
+        Me.txtFlag116Field065.Location = New System.Drawing.Point(688, 90)
+        Me.txtFlag116Field065.Name = "txtFlag116Field065"
+        Me.txtFlag116Field065.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag116Field065.TabIndex = 313
+        Me.txtFlag116Field065.TabStop = False
         '
-        'txtFlag099Field058
-        '
-        Me.txtFlag099Field058.Location = New System.Drawing.Point(465, 290)
-        Me.txtFlag099Field058.Name = "txtFlag099Field058"
-        Me.txtFlag099Field058.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag099Field058.TabIndex = 320
-        Me.txtFlag099Field058.TabStop = False
+        'txtFlag002Field060
+        '
+        Me.txtFlag002Field060.Location = New System.Drawing.Point(465, 265)
+        Me.txtFlag002Field060.Name = "txtFlag002Field060"
+        Me.txtFlag002Field060.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag002Field060.TabIndex = 308
+        Me.txtFlag002Field060.TabStop = False
         '
-        'txtFlag003Field057
-        '
-        Me.txtFlag003Field057.Location = New System.Drawing.Point(465, 265)
-        Me.txtFlag003Field057.Name = "txtFlag003Field057"
-        Me.txtFlag003Field057.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag003Field057.TabIndex = 319
-        Me.txtFlag003Field057.TabStop = False
+        'txtFlag003Field061
+        '
+        Me.txtFlag003Field061.Location = New System.Drawing.Point(465, 290)
+        Me.txtFlag003Field061.Name = "txtFlag003Field061"
+        Me.txtFlag003Field061.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag003Field061.TabIndex = 309
+        Me.txtFlag003Field061.TabStop = False
         '
-        'txtFlag180Field056
-        '
-        Me.txtFlag180Field056.Location = New System.Drawing.Point(465, 240)
-        Me.txtFlag180Field056.Name = "txtFlag180Field056"
-        Me.txtFlag180Field056.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag180Field056.TabIndex = 318
-        Me.txtFlag180Field056.TabStop = False
+        'txtFlag180Field059
+        '
+        Me.txtFlag180Field059.Location = New System.Drawing.Point(465, 240)
+        Me.txtFlag180Field059.Name = "txtFlag180Field059"
+        Me.txtFlag180Field059.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag180Field059.TabIndex = 307
+        Me.txtFlag180Field059.TabStop = False
         '
-        'txtFlag179Field055
-        '
-        Me.txtFlag179Field055.Location = New System.Drawing.Point(465, 215)
-        Me.txtFlag179Field055.Name = "txtFlag179Field055"
-        Me.txtFlag179Field055.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag179Field055.TabIndex = 317
-        Me.txtFlag179Field055.TabStop = False
+        'txtFlag179Field058
+        '
+        Me.txtFlag179Field058.Location = New System.Drawing.Point(465, 215)
+        Me.txtFlag179Field058.Name = "txtFlag179Field058"
+        Me.txtFlag179Field058.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag179Field058.TabIndex = 306
+        Me.txtFlag179Field058.TabStop = False
         '
-        'txtFlag178Field054
-        '
-        Me.txtFlag178Field054.Location = New System.Drawing.Point(465, 190)
-        Me.txtFlag178Field054.Name = "txtFlag178Field054"
-        Me.txtFlag178Field054.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag178Field054.TabIndex = 315
-        Me.txtFlag178Field054.TabStop = False
+        'txtFlag178Field057
+        '
+        Me.txtFlag178Field057.Location = New System.Drawing.Point(465, 190)
+        Me.txtFlag178Field057.Name = "txtFlag178Field057"
+        Me.txtFlag178Field057.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag178Field057.TabIndex = 305
+        Me.txtFlag178Field057.TabStop = False
         '
-        'txtFlag177Field053
-        '
-        Me.txtFlag177Field053.Location = New System.Drawing.Point(465, 165)
-        Me.txtFlag177Field053.Name = "txtFlag177Field053"
-        Me.txtFlag177Field053.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag177Field053.TabIndex = 314
-        Me.txtFlag177Field053.TabStop = False
+        'txtFlag177Field056
+        '
+        Me.txtFlag177Field056.Location = New System.Drawing.Point(465, 165)
+        Me.txtFlag177Field056.Name = "txtFlag177Field056"
+        Me.txtFlag177Field056.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag177Field056.TabIndex = 304
+        Me.txtFlag177Field056.TabStop = False
         '
-        'txtFlag193Field052
-        '
-        Me.txtFlag193Field052.Location = New System.Drawing.Point(466, 140)
-        Me.txtFlag193Field052.Name = "txtFlag193Field052"
-        Me.txtFlag193Field052.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag193Field052.TabIndex = 313
-        Me.txtFlag193Field052.TabStop = False
+        'txtFlag193Field055
+        '
+        Me.txtFlag193Field055.Location = New System.Drawing.Point(465, 140)
+        Me.txtFlag193Field055.Name = "txtFlag193Field055"
+        Me.txtFlag193Field055.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag193Field055.TabIndex = 303
+        Me.txtFlag193Field055.TabStop = False
         '
-        'txtFlag197Field051
-        '
-        Me.txtFlag197Field051.Location = New System.Drawing.Point(465, 115)
-        Me.txtFlag197Field051.Name = "txtFlag197Field051"
-        Me.txtFlag197Field051.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag197Field051.TabIndex = 312
-        Me.txtFlag197Field051.TabStop = False
+        'txtFlag197Field054
+        '
+        Me.txtFlag197Field054.Location = New System.Drawing.Point(465, 115)
+        Me.txtFlag197Field054.Name = "txtFlag197Field054"
+        Me.txtFlag197Field054.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag197Field054.TabIndex = 302
+        Me.txtFlag197Field054.TabStop = False
         '
-        'txtFlag167Field050
-        '
-        Me.txtFlag167Field050.Location = New System.Drawing.Point(465, 90)
-        Me.txtFlag167Field050.Name = "txtFlag167Field050"
-        Me.txtFlag167Field050.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag167Field050.TabIndex = 311
-        Me.txtFlag167Field050.TabStop = False
+        'txtFlag167Field053
+        '
+        Me.txtFlag167Field053.Location = New System.Drawing.Point(465, 90)
+        Me.txtFlag167Field053.Name = "txtFlag167Field053"
+        Me.txtFlag167Field053.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag167Field053.TabIndex = 301
+        Me.txtFlag167Field053.TabStop = False
         '
-        'txtFlag122Field064
-        '
-        Me.txtFlag122Field064.Location = New System.Drawing.Point(686, 140)
-        Me.txtFlag122Field064.Name = "txtFlag122Field064"
-        Me.txtFlag122Field064.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag122Field064.TabIndex = 310
-        Me.txtFlag122Field064.TabStop = False
+        'txtFlag122Field070
+        '
+        Me.txtFlag122Field070.Location = New System.Drawing.Point(688, 215)
+        Me.txtFlag122Field070.Name = "txtFlag122Field070"
+        Me.txtFlag122Field070.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag122Field070.TabIndex = 318
+        Me.txtFlag122Field070.TabStop = False
         '
-        'txtFlag121Field063
-        '
-        Me.txtFlag121Field063.Location = New System.Drawing.Point(686, 115)
-        Me.txtFlag121Field063.Name = "txtFlag121Field063"
-        Me.txtFlag121Field063.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag121Field063.TabIndex = 309
-        Me.txtFlag121Field063.TabStop = False
+        'txtFlag121Field069
+        '
+        Me.txtFlag121Field069.Location = New System.Drawing.Point(688, 190)
+        Me.txtFlag121Field069.Name = "txtFlag121Field069"
+        Me.txtFlag121Field069.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag121Field069.TabIndex = 317
+        Me.txtFlag121Field069.TabStop = False
         '
-        'txtFlag120Field062
-        '
-        Me.txtFlag120Field062.Location = New System.Drawing.Point(686, 90)
-        Me.txtFlag120Field062.Name = "txtFlag120Field062"
-        Me.txtFlag120Field062.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag120Field062.TabIndex = 308
-        Me.txtFlag120Field062.TabStop = False
+        'txtFlag120Field068
+        '
+        Me.txtFlag120Field068.Location = New System.Drawing.Point(688, 165)
+        Me.txtFlag120Field068.Name = "txtFlag120Field068"
+        Me.txtFlag120Field068.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag120Field068.TabIndex = 316
+        Me.txtFlag120Field068.TabStop = False
         '
-        'txtFlag104Field049
-        '
-        Me.txtFlag104Field049.Location = New System.Drawing.Point(235, 365)
-        Me.txtFlag104Field049.Name = "txtFlag104Field049"
-        Me.txtFlag104Field049.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag104Field049.TabIndex = 302
-        Me.txtFlag104Field049.TabStop = False
+        'txtFlag104Field052
+        '
+        Me.txtFlag104Field052.Location = New System.Drawing.Point(235, 365)
+        Me.txtFlag104Field052.Name = "txtFlag104Field052"
+        Me.txtFlag104Field052.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag104Field052.TabIndex = 300
+        Me.txtFlag104Field052.TabStop = False
         '
-        'txtFlag107Field048
-        '
-        Me.txtFlag107Field048.Location = New System.Drawing.Point(235, 340)
-        Me.txtFlag107Field048.Name = "txtFlag107Field048"
-        Me.txtFlag107Field048.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag107Field048.TabIndex = 300
-        Me.txtFlag107Field048.TabStop = False
+        'txtFlag107Field051
+        '
+        Me.txtFlag107Field051.Location = New System.Drawing.Point(235, 340)
+        Me.txtFlag107Field051.Name = "txtFlag107Field051"
+        Me.txtFlag107Field051.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag107Field051.TabIndex = 298
+        Me.txtFlag107Field051.TabStop = False
         '
-        'txtFlag106Field047
+        'txtFlag106Field050
         '
-        Me.txtFlag106Field047.Location = New System.Drawing.Point(235, 315)
-        Me.txtFlag106Field047.Name = "txtFlag106Field047"
-        Me.txtFlag106Field047.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag106Field047.TabIndex = 299
-        Me.txtFlag106Field047.TabStop = False
+        Me.txtFlag106Field050.Location = New System.Drawing.Point(235, 315)
+        Me.txtFlag106Field050.Name = "txtFlag106Field050"
+        Me.txtFlag106Field050.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag106Field050.TabIndex = 297
+        Me.txtFlag106Field050.TabStop = False
         '
-        'txtFlag105Field046
+        'txtFlag105Field049
         '
-        Me.txtFlag105Field046.Location = New System.Drawing.Point(235, 290)
-        Me.txtFlag105Field046.Name = "txtFlag105Field046"
-        Me.txtFlag105Field046.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag105Field046.TabIndex = 298
-        Me.txtFlag105Field046.TabStop = False
+        Me.txtFlag105Field049.Location = New System.Drawing.Point(235, 290)
+        Me.txtFlag105Field049.Name = "txtFlag105Field049"
+        Me.txtFlag105Field049.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag105Field049.TabIndex = 296
+        Me.txtFlag105Field049.TabStop = False
         '
-        'txtFlag103Field045
+        'txtFlag103Field048
         '
-        Me.txtFlag103Field045.Location = New System.Drawing.Point(235, 265)
-        Me.txtFlag103Field045.Name = "txtFlag103Field045"
-        Me.txtFlag103Field045.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag103Field045.TabIndex = 297
-        Me.txtFlag103Field045.TabStop = False
+        Me.txtFlag103Field048.Location = New System.Drawing.Point(235, 265)
+        Me.txtFlag103Field048.Name = "txtFlag103Field048"
+        Me.txtFlag103Field048.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag103Field048.TabIndex = 295
+        Me.txtFlag103Field048.TabStop = False
         '
-        'txtFlag102Field044
+        'txtFlag102Field047
         '
-        Me.txtFlag102Field044.Location = New System.Drawing.Point(235, 240)
-        Me.txtFlag102Field044.Name = "txtFlag102Field044"
-        Me.txtFlag102Field044.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag102Field044.TabIndex = 296
-        Me.txtFlag102Field044.TabStop = False
+        Me.txtFlag102Field047.Location = New System.Drawing.Point(235, 240)
+        Me.txtFlag102Field047.Name = "txtFlag102Field047"
+        Me.txtFlag102Field047.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag102Field047.TabIndex = 294
+        Me.txtFlag102Field047.TabStop = False
         '
-        'txtFlag101Field043
+        'txtFlag101Field046
         '
-        Me.txtFlag101Field043.Location = New System.Drawing.Point(235, 215)
-        Me.txtFlag101Field043.Name = "txtFlag101Field043"
-        Me.txtFlag101Field043.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag101Field043.TabIndex = 295
-        Me.txtFlag101Field043.TabStop = False
+        Me.txtFlag101Field046.Location = New System.Drawing.Point(235, 215)
+        Me.txtFlag101Field046.Name = "txtFlag101Field046"
+        Me.txtFlag101Field046.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag101Field046.TabIndex = 293
+        Me.txtFlag101Field046.TabStop = False
         '
-        'txtFlag111Field042
+        'txtFlag111Field045
         '
-        Me.txtFlag111Field042.Location = New System.Drawing.Point(235, 190)
-        Me.txtFlag111Field042.Name = "txtFlag111Field042"
-        Me.txtFlag111Field042.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag111Field042.TabIndex = 294
-        Me.txtFlag111Field042.TabStop = False
+        Me.txtFlag111Field045.Location = New System.Drawing.Point(235, 190)
+        Me.txtFlag111Field045.Name = "txtFlag111Field045"
+        Me.txtFlag111Field045.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag111Field045.TabIndex = 292
+        Me.txtFlag111Field045.TabStop = False
         '
-        'txtFlag112Field041
+        'txtFlag112Field044
         '
-        Me.txtFlag112Field041.Location = New System.Drawing.Point(235, 165)
-        Me.txtFlag112Field041.Name = "txtFlag112Field041"
-        Me.txtFlag112Field041.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag112Field041.TabIndex = 293
-        Me.txtFlag112Field041.TabStop = False
+        Me.txtFlag112Field044.Location = New System.Drawing.Point(235, 165)
+        Me.txtFlag112Field044.Name = "txtFlag112Field044"
+        Me.txtFlag112Field044.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag112Field044.TabIndex = 291
+        Me.txtFlag112Field044.TabStop = False
         '
-        'txtFlag114Field040
+        'txtFlag114Field043
         '
-        Me.txtFlag114Field040.Location = New System.Drawing.Point(234, 140)
-        Me.txtFlag114Field040.Name = "txtFlag114Field040"
-        Me.txtFlag114Field040.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag114Field040.TabIndex = 291
-        Me.txtFlag114Field040.TabStop = False
+        Me.txtFlag114Field043.Location = New System.Drawing.Point(234, 140)
+        Me.txtFlag114Field043.Name = "txtFlag114Field043"
+        Me.txtFlag114Field043.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag114Field043.TabIndex = 290
+        Me.txtFlag114Field043.TabStop = False
         '
-        'txtFlag110Field039
+        'txtFlag110Field042
         '
-        Me.txtFlag110Field039.Location = New System.Drawing.Point(234, 115)
-        Me.txtFlag110Field039.Name = "txtFlag110Field039"
-        Me.txtFlag110Field039.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag110Field039.TabIndex = 290
-        Me.txtFlag110Field039.TabStop = False
+        Me.txtFlag110Field042.Location = New System.Drawing.Point(234, 115)
+        Me.txtFlag110Field042.Name = "txtFlag110Field042"
+        Me.txtFlag110Field042.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag110Field042.TabIndex = 289
+        Me.txtFlag110Field042.TabStop = False
         '
-        'txtFlag176ield038
+        'txtFlag176ield041
         '
-        Me.txtFlag176ield038.Location = New System.Drawing.Point(234, 90)
-        Me.txtFlag176ield038.Name = "txtFlag176ield038"
-        Me.txtFlag176ield038.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag176ield038.TabIndex = 288
-        Me.txtFlag176ield038.TabStop = False
+        Me.txtFlag176ield041.Location = New System.Drawing.Point(234, 90)
+        Me.txtFlag176ield041.Name = "txtFlag176ield041"
+        Me.txtFlag176ield041.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag176ield041.TabIndex = 288
+        Me.txtFlag176ield041.TabStop = False
         '
-        'txtVal_Elem130Field037
+        'txtVal_Elem130Field040
         '
-        Me.txtVal_Elem130Field037.Location = New System.Drawing.Point(632, 290)
-        Me.txtVal_Elem130Field037.Name = "txtVal_Elem130Field037"
-        Me.txtVal_Elem130Field037.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem130Field037.TabIndex = 37
+        Me.txtVal_Elem130Field040.Location = New System.Drawing.Point(634, 365)
+        Me.txtVal_Elem130Field040.Name = "txtVal_Elem130Field040"
+        Me.txtVal_Elem130Field040.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem130Field040.TabIndex = 40
         '
-        'txtVal_Elem129Field036
+        'txtVal_Elem129Field039
         '
-        Me.txtVal_Elem129Field036.Location = New System.Drawing.Point(632, 265)
-        Me.txtVal_Elem129Field036.Name = "txtVal_Elem129Field036"
-        Me.txtVal_Elem129Field036.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem129Field036.TabIndex = 36
+        Me.txtVal_Elem129Field039.Location = New System.Drawing.Point(634, 340)
+        Me.txtVal_Elem129Field039.Name = "txtVal_Elem129Field039"
+        Me.txtVal_Elem129Field039.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem129Field039.TabIndex = 39
         '
-        'txtVal_Elem128Field035
+        'txtVal_Elem128Field038
         '
-        Me.txtVal_Elem128Field035.Location = New System.Drawing.Point(632, 240)
-        Me.txtVal_Elem128Field035.Name = "txtVal_Elem128Field035"
-        Me.txtVal_Elem128Field035.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem128Field035.TabIndex = 35
+        Me.txtVal_Elem128Field038.Location = New System.Drawing.Point(634, 315)
+        Me.txtVal_Elem128Field038.Name = "txtVal_Elem128Field038"
+        Me.txtVal_Elem128Field038.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem128Field038.TabIndex = 38
         '
-        'txtVal_Elem126Field034
+        'txtVal_Elem126Field037
         '
-        Me.txtVal_Elem126Field034.Location = New System.Drawing.Point(632, 215)
-        Me.txtVal_Elem126Field034.Name = "txtVal_Elem126Field034"
-        Me.txtVal_Elem126Field034.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem126Field034.TabIndex = 34
+        Me.txtVal_Elem126Field037.Location = New System.Drawing.Point(634, 290)
+        Me.txtVal_Elem126Field037.Name = "txtVal_Elem126Field037"
+        Me.txtVal_Elem126Field037.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem126Field037.TabIndex = 37
         '
-        'txtVal_Elem125Field033
+        'txtVal_Elem125Field036
         '
-        Me.txtVal_Elem125Field033.Location = New System.Drawing.Point(632, 190)
-        Me.txtVal_Elem125Field033.Name = "txtVal_Elem125Field033"
-        Me.txtVal_Elem125Field033.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem125Field033.TabIndex = 33
+        Me.txtVal_Elem125Field036.Location = New System.Drawing.Point(634, 265)
+        Me.txtVal_Elem125Field036.Name = "txtVal_Elem125Field036"
+        Me.txtVal_Elem125Field036.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem125Field036.TabIndex = 36
         '
-        'txtVal_Elem124Field032
+        'txtVal_Elem124Field035
         '
-        Me.txtVal_Elem124Field032.Location = New System.Drawing.Point(632, 165)
-        Me.txtVal_Elem124Field032.Name = "txtVal_Elem124Field032"
-        Me.txtVal_Elem124Field032.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem124Field032.TabIndex = 32
+        Me.txtVal_Elem124Field035.Location = New System.Drawing.Point(634, 240)
+        Me.txtVal_Elem124Field035.Name = "txtVal_Elem124Field035"
+        Me.txtVal_Elem124Field035.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem124Field035.TabIndex = 35
         '
-        'txtVal_Elem118Field028
+        'txtVal_Elem118Field031
         '
-        Me.txtVal_Elem118Field028.Location = New System.Drawing.Point(411, 365)
-        Me.txtVal_Elem118Field028.Name = "txtVal_Elem118Field028"
-        Me.txtVal_Elem118Field028.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem118Field028.TabIndex = 28
+        Me.txtVal_Elem118Field031.Location = New System.Drawing.Point(634, 140)
+        Me.txtVal_Elem118Field031.Name = "txtVal_Elem118Field031"
+        Me.txtVal_Elem118Field031.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem118Field031.TabIndex = 31
         '
-        'txtVal_Elem117Field027
+        'txtVal_Elem117Field030
         '
-        Me.txtVal_Elem117Field027.Location = New System.Drawing.Point(411, 340)
-        Me.txtVal_Elem117Field027.Name = "txtVal_Elem117Field027"
-        Me.txtVal_Elem117Field027.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem117Field027.TabIndex = 27
+        Me.txtVal_Elem117Field030.Location = New System.Drawing.Point(634, 115)
+        Me.txtVal_Elem117Field030.Name = "txtVal_Elem117Field030"
+        Me.txtVal_Elem117Field030.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem117Field030.TabIndex = 30
         '
-        'txtVal_Elem116Field026
+        'txtVal_Elem116Field029
         '
-        Me.txtVal_Elem116Field026.Location = New System.Drawing.Point(411, 315)
-        Me.txtVal_Elem116Field026.Name = "txtVal_Elem116Field026"
-        Me.txtVal_Elem116Field026.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem116Field026.TabIndex = 26
+        Me.txtVal_Elem116Field029.Location = New System.Drawing.Point(634, 90)
+        Me.txtVal_Elem116Field029.Name = "txtVal_Elem116Field029"
+        Me.txtVal_Elem116Field029.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem116Field029.TabIndex = 29
         '
-        'txtVal_Elem099Field025
+        'txtVal_Elem002Field024
         '
-        Me.txtVal_Elem099Field025.Location = New System.Drawing.Point(411, 290)
-        Me.txtVal_Elem099Field025.Name = "txtVal_Elem099Field025"
-        Me.txtVal_Elem099Field025.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem099Field025.TabIndex = 25
+        Me.txtVal_Elem002Field024.Location = New System.Drawing.Point(411, 265)
+        Me.txtVal_Elem002Field024.Name = "txtVal_Elem002Field024"
+        Me.txtVal_Elem002Field024.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem002Field024.TabIndex = 25
         '
-        'txtVal_Elem003Field024
+        'txtVal_Elem003Field025
         '
-        Me.txtVal_Elem003Field024.Location = New System.Drawing.Point(411, 265)
-        Me.txtVal_Elem003Field024.Name = "txtVal_Elem003Field024"
-        Me.txtVal_Elem003Field024.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem003Field024.TabIndex = 24
+        Me.txtVal_Elem003Field025.Location = New System.Drawing.Point(411, 290)
+        Me.txtVal_Elem003Field025.Name = "txtVal_Elem003Field025"
+        Me.txtVal_Elem003Field025.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem003Field025.TabIndex = 25
         '
         'txtVal_Elem180Field023
         '
@@ -934,7 +973,7 @@ Partial Class formSynopticCaribbean
         '
         'txtVal_Elem193Field019
         '
-        Me.txtVal_Elem193Field019.Location = New System.Drawing.Point(412, 140)
+        Me.txtVal_Elem193Field019.Location = New System.Drawing.Point(411, 140)
         Me.txtVal_Elem193Field019.Name = "txtVal_Elem193Field019"
         Me.txtVal_Elem193Field019.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem193Field019.TabIndex = 19
@@ -953,26 +992,26 @@ Partial Class formSynopticCaribbean
         Me.txtVal_Elem167Field017.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem167Field017.TabIndex = 17
         '
-        'txtVal_Elem122Field031
+        'txtVal_Elem122Field034
         '
-        Me.txtVal_Elem122Field031.Location = New System.Drawing.Point(633, 140)
-        Me.txtVal_Elem122Field031.Name = "txtVal_Elem122Field031"
-        Me.txtVal_Elem122Field031.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem122Field031.TabIndex = 31
+        Me.txtVal_Elem122Field034.Location = New System.Drawing.Point(635, 215)
+        Me.txtVal_Elem122Field034.Name = "txtVal_Elem122Field034"
+        Me.txtVal_Elem122Field034.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem122Field034.TabIndex = 34
         '
-        'txtVal_Elem121Field030
+        'txtVal_Elem121Field033
         '
-        Me.txtVal_Elem121Field030.Location = New System.Drawing.Point(632, 115)
-        Me.txtVal_Elem121Field030.Name = "txtVal_Elem121Field030"
-        Me.txtVal_Elem121Field030.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem121Field030.TabIndex = 30
+        Me.txtVal_Elem121Field033.Location = New System.Drawing.Point(634, 190)
+        Me.txtVal_Elem121Field033.Name = "txtVal_Elem121Field033"
+        Me.txtVal_Elem121Field033.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem121Field033.TabIndex = 33
         '
-        'txtVal_Elem120Field029
+        'txtVal_Elem120Field032
         '
-        Me.txtVal_Elem120Field029.Location = New System.Drawing.Point(632, 90)
-        Me.txtVal_Elem120Field029.Name = "txtVal_Elem120Field029"
-        Me.txtVal_Elem120Field029.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem120Field029.TabIndex = 29
+        Me.txtVal_Elem120Field032.Location = New System.Drawing.Point(634, 165)
+        Me.txtVal_Elem120Field032.Name = "txtVal_Elem120Field032"
+        Me.txtVal_Elem120Field032.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem120Field032.TabIndex = 32
         '
         'txtVal_Elem104Field016
         '
@@ -1078,10 +1117,11 @@ Partial Class formSynopticCaribbean
         '
         'btnTDCF
         '
+        Me.btnTDCF.Enabled = False
         Me.btnTDCF.Location = New System.Drawing.Point(504, 467)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(64, 23)
-        Me.btnTDCF.TabIndex = 44
+        Me.btnTDCF.TabIndex = 47
         Me.btnTDCF.Text = "TDCF"
         Me.btnTDCF.UseVisualStyleBackColor = True
         '
@@ -1090,7 +1130,7 @@ Partial Class formSynopticCaribbean
         Me.btnView.Location = New System.Drawing.Point(428, 467)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(64, 23)
-        Me.btnView.TabIndex = 43
+        Me.btnView.TabIndex = 46
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -1126,7 +1166,7 @@ Partial Class formSynopticCaribbean
         Me.btnHelp.Location = New System.Drawing.Point(656, 467)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
-        Me.btnHelp.TabIndex = 46
+        Me.btnHelp.TabIndex = 49
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -1136,7 +1176,7 @@ Partial Class formSynopticCaribbean
         Me.btnClear.Location = New System.Drawing.Point(352, 467)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
-        Me.btnClear.TabIndex = 42
+        Me.btnClear.TabIndex = 45
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -1146,7 +1186,7 @@ Partial Class formSynopticCaribbean
         Me.btnCommit.Location = New System.Drawing.Point(124, 467)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(64, 23)
-        Me.btnCommit.TabIndex = 38
+        Me.btnCommit.TabIndex = 41
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
@@ -1155,7 +1195,7 @@ Partial Class formSynopticCaribbean
         Me.btnDelete.Location = New System.Drawing.Point(276, 467)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(64, 23)
-        Me.btnDelete.TabIndex = 41
+        Me.btnDelete.TabIndex = 44
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -1164,7 +1204,7 @@ Partial Class formSynopticCaribbean
         Me.btnAddNew.Location = New System.Drawing.Point(48, 467)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
-        Me.btnAddNew.TabIndex = 39
+        Me.btnAddNew.TabIndex = 42
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -1173,7 +1213,7 @@ Partial Class formSynopticCaribbean
         Me.btnUpdate.Location = New System.Drawing.Point(200, 467)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
-        Me.btnUpdate.TabIndex = 40
+        Me.btnUpdate.TabIndex = 43
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -1229,15 +1269,69 @@ Partial Class formSynopticCaribbean
         Me.btnClose.Location = New System.Drawing.Point(580, 467)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
-        Me.btnClose.TabIndex = 45
+        Me.btnClose.TabIndex = 48
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'txtFlag099Field064
+        '
+        Me.txtFlag099Field064.Location = New System.Drawing.Point(465, 365)
+        Me.txtFlag099Field064.Name = "txtFlag099Field064"
+        Me.txtFlag099Field064.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag099Field064.TabIndex = 312
+        Me.txtFlag099Field064.TabStop = False
+        '
+        'txtFlag018Field063
+        '
+        Me.txtFlag018Field063.Location = New System.Drawing.Point(465, 340)
+        Me.txtFlag018Field063.Name = "txtFlag018Field063"
+        Me.txtFlag018Field063.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag018Field063.TabIndex = 311
+        Me.txtFlag018Field063.TabStop = False
+        '
+        'txtVal_Elem099Field028
+        '
+        Me.txtVal_Elem099Field028.Location = New System.Drawing.Point(411, 365)
+        Me.txtVal_Elem099Field028.Name = "txtVal_Elem099Field028"
+        Me.txtVal_Elem099Field028.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem099Field028.TabIndex = 28
+        '
+        'txtVal_Elem018Field027
+        '
+        Me.txtVal_Elem018Field027.Location = New System.Drawing.Point(411, 340)
+        Me.txtVal_Elem018Field027.Name = "txtVal_Elem018Field027"
+        Me.txtVal_Elem018Field027.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem018Field027.TabIndex = 27
+        '
+        'txtFlag085Field062
+        '
+        Me.txtFlag085Field062.Location = New System.Drawing.Point(465, 315)
+        Me.txtFlag085Field062.Name = "txtFlag085Field062"
+        Me.txtFlag085Field062.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag085Field062.TabIndex = 310
+        Me.txtFlag085Field062.TabStop = False
+        '
+        'txtVal_Elem085Field026
+        '
+        Me.txtVal_Elem085Field026.Location = New System.Drawing.Point(411, 315)
+        Me.txtVal_Elem085Field026.Name = "txtVal_Elem085Field026"
+        Me.txtVal_Elem085Field026.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem085Field026.TabIndex = 26
         '
         'formSynopticCaribbean
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(767, 543)
+        Me.Controls.Add(Me.txtFlag085Field062)
+        Me.Controls.Add(Label8)
+        Me.Controls.Add(Me.txtVal_Elem085Field026)
+        Me.Controls.Add(Me.txtFlag099Field064)
+        Me.Controls.Add(Me.txtFlag018Field063)
+        Me.Controls.Add(Label6)
+        Me.Controls.Add(Me.txtVal_Elem099Field028)
+        Me.Controls.Add(Label7)
+        Me.Controls.Add(Me.txtVal_Elem018Field027)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnTDCF)
         Me.Controls.Add(Me.btnView)
@@ -1264,61 +1358,61 @@ Partial Class formSynopticCaribbean
         Me.Controls.Add(Me.cboMonth)
         Me.Controls.Add(Me.cboDay)
         Me.Controls.Add(Me.cboHour)
-        Me.Controls.Add(Me.txtFlag130Field070)
-        Me.Controls.Add(Me.txtFlag0129Field069)
-        Me.Controls.Add(Me.txtFlag128Field068)
-        Me.Controls.Add(Me.txtFlag126Field067)
-        Me.Controls.Add(Me.txtFlag125Field066)
-        Me.Controls.Add(Me.txtFlag124Field065)
-        Me.Controls.Add(Me.txtFlag118Field061)
-        Me.Controls.Add(Me.txtFlag117Field060)
-        Me.Controls.Add(Me.txtFlag116Field059)
-        Me.Controls.Add(Me.txtFlag099Field058)
-        Me.Controls.Add(Me.txtFlag003Field057)
-        Me.Controls.Add(Me.txtFlag180Field056)
-        Me.Controls.Add(Me.txtFlag179Field055)
-        Me.Controls.Add(Me.txtFlag178Field054)
-        Me.Controls.Add(Me.txtFlag177Field053)
-        Me.Controls.Add(Me.txtFlag193Field052)
-        Me.Controls.Add(Me.txtFlag197Field051)
-        Me.Controls.Add(Me.txtFlag167Field050)
-        Me.Controls.Add(Me.txtFlag122Field064)
-        Me.Controls.Add(Me.txtFlag121Field063)
-        Me.Controls.Add(Me.txtFlag120Field062)
-        Me.Controls.Add(Me.txtFlag104Field049)
-        Me.Controls.Add(Me.txtFlag107Field048)
-        Me.Controls.Add(Me.txtFlag106Field047)
-        Me.Controls.Add(Me.txtFlag105Field046)
-        Me.Controls.Add(Me.txtFlag103Field045)
-        Me.Controls.Add(Me.txtFlag102Field044)
-        Me.Controls.Add(Me.txtFlag101Field043)
-        Me.Controls.Add(Me.txtFlag111Field042)
-        Me.Controls.Add(Me.txtFlag112Field041)
-        Me.Controls.Add(Me.txtFlag114Field040)
-        Me.Controls.Add(Me.txtFlag110Field039)
-        Me.Controls.Add(Me.txtFlag176ield038)
+        Me.Controls.Add(Me.txtFlag130Field076)
+        Me.Controls.Add(Me.txtFlag129Field075)
+        Me.Controls.Add(Me.txtFlag128Field074)
+        Me.Controls.Add(Me.txtFlag126Field073)
+        Me.Controls.Add(Me.txtFlag125Field072)
+        Me.Controls.Add(Me.txtFlag124Field071)
+        Me.Controls.Add(Me.txtFlag118Field067)
+        Me.Controls.Add(Me.txtFlag117Field066)
+        Me.Controls.Add(Me.txtFlag116Field065)
+        Me.Controls.Add(Me.txtFlag002Field060)
+        Me.Controls.Add(Me.txtFlag003Field061)
+        Me.Controls.Add(Me.txtFlag180Field059)
+        Me.Controls.Add(Me.txtFlag179Field058)
+        Me.Controls.Add(Me.txtFlag178Field057)
+        Me.Controls.Add(Me.txtFlag177Field056)
+        Me.Controls.Add(Me.txtFlag193Field055)
+        Me.Controls.Add(Me.txtFlag197Field054)
+        Me.Controls.Add(Me.txtFlag167Field053)
+        Me.Controls.Add(Me.txtFlag122Field070)
+        Me.Controls.Add(Me.txtFlag121Field069)
+        Me.Controls.Add(Me.txtFlag120Field068)
+        Me.Controls.Add(Me.txtFlag104Field052)
+        Me.Controls.Add(Me.txtFlag107Field051)
+        Me.Controls.Add(Me.txtFlag106Field050)
+        Me.Controls.Add(Me.txtFlag105Field049)
+        Me.Controls.Add(Me.txtFlag103Field048)
+        Me.Controls.Add(Me.txtFlag102Field047)
+        Me.Controls.Add(Me.txtFlag101Field046)
+        Me.Controls.Add(Me.txtFlag111Field045)
+        Me.Controls.Add(Me.txtFlag112Field044)
+        Me.Controls.Add(Me.txtFlag114Field043)
+        Me.Controls.Add(Me.txtFlag110Field042)
+        Me.Controls.Add(Me.txtFlag176ield041)
         Me.Controls.Add(Val_Elem130Label)
-        Me.Controls.Add(Me.txtVal_Elem130Field037)
+        Me.Controls.Add(Me.txtVal_Elem130Field040)
         Me.Controls.Add(Val_Elem129Label)
-        Me.Controls.Add(Me.txtVal_Elem129Field036)
+        Me.Controls.Add(Me.txtVal_Elem129Field039)
         Me.Controls.Add(Val_Elem128Label)
-        Me.Controls.Add(Me.txtVal_Elem128Field035)
+        Me.Controls.Add(Me.txtVal_Elem128Field038)
         Me.Controls.Add(Val_Elem126Label)
-        Me.Controls.Add(Me.txtVal_Elem126Field034)
+        Me.Controls.Add(Me.txtVal_Elem126Field037)
         Me.Controls.Add(Val_Elem125Label)
-        Me.Controls.Add(Me.txtVal_Elem125Field033)
+        Me.Controls.Add(Me.txtVal_Elem125Field036)
         Me.Controls.Add(Val_Elem124Label)
-        Me.Controls.Add(Me.txtVal_Elem124Field032)
+        Me.Controls.Add(Me.txtVal_Elem124Field035)
         Me.Controls.Add(Val_Elem118Label)
-        Me.Controls.Add(Me.txtVal_Elem118Field028)
+        Me.Controls.Add(Me.txtVal_Elem118Field031)
         Me.Controls.Add(Val_Elem117Label)
-        Me.Controls.Add(Me.txtVal_Elem117Field027)
+        Me.Controls.Add(Me.txtVal_Elem117Field030)
         Me.Controls.Add(Val_Elem116Label)
-        Me.Controls.Add(Me.txtVal_Elem116Field026)
+        Me.Controls.Add(Me.txtVal_Elem116Field029)
         Me.Controls.Add(Val_Elem099Label)
-        Me.Controls.Add(Me.txtVal_Elem099Field025)
+        Me.Controls.Add(Me.txtVal_Elem002Field024)
         Me.Controls.Add(Val_Elem003Label)
-        Me.Controls.Add(Me.txtVal_Elem003Field024)
+        Me.Controls.Add(Me.txtVal_Elem003Field025)
         Me.Controls.Add(Val_Elem180Label)
         Me.Controls.Add(Me.txtVal_Elem180Field023)
         Me.Controls.Add(Val_Elem179Label)
@@ -1334,11 +1428,11 @@ Partial Class formSynopticCaribbean
         Me.Controls.Add(Val_Elem167Label)
         Me.Controls.Add(Me.txtVal_Elem167Field017)
         Me.Controls.Add(Val_Elem122Label)
-        Me.Controls.Add(Me.txtVal_Elem122Field031)
+        Me.Controls.Add(Me.txtVal_Elem122Field034)
         Me.Controls.Add(Val_Elem121Label)
-        Me.Controls.Add(Me.txtVal_Elem121Field030)
+        Me.Controls.Add(Me.txtVal_Elem121Field033)
         Me.Controls.Add(Val_Elem120Label)
-        Me.Controls.Add(Me.txtVal_Elem120Field029)
+        Me.Controls.Add(Me.txtVal_Elem120Field032)
         Me.Controls.Add(Val_Elem104Label)
         Me.Controls.Add(Me.txtVal_Elem104Field016)
         Me.Controls.Add(Val_Elem107Label)
@@ -1381,50 +1475,50 @@ Partial Class formSynopticCaribbean
     Friend WithEvents cboMonth As ComboBox
     Friend WithEvents cboDay As ComboBox
     Friend WithEvents cboHour As ComboBox
-    Friend WithEvents txtFlag130Field070 As TextBox
-    Friend WithEvents txtFlag0129Field069 As TextBox
-    Friend WithEvents txtFlag128Field068 As TextBox
-    Friend WithEvents txtFlag126Field067 As TextBox
-    Friend WithEvents txtFlag125Field066 As TextBox
-    Friend WithEvents txtFlag124Field065 As TextBox
-    Friend WithEvents txtFlag118Field061 As TextBox
-    Friend WithEvents txtFlag117Field060 As TextBox
-    Friend WithEvents txtFlag116Field059 As TextBox
-    Friend WithEvents txtFlag099Field058 As TextBox
-    Friend WithEvents txtFlag003Field057 As TextBox
-    Friend WithEvents txtFlag180Field056 As TextBox
-    Friend WithEvents txtFlag179Field055 As TextBox
-    Friend WithEvents txtFlag178Field054 As TextBox
-    Friend WithEvents txtFlag177Field053 As TextBox
-    Friend WithEvents txtFlag193Field052 As TextBox
-    Friend WithEvents txtFlag197Field051 As TextBox
-    Friend WithEvents txtFlag167Field050 As TextBox
-    Friend WithEvents txtFlag122Field064 As TextBox
-    Friend WithEvents txtFlag121Field063 As TextBox
-    Friend WithEvents txtFlag120Field062 As TextBox
-    Friend WithEvents txtFlag104Field049 As TextBox
-    Friend WithEvents txtFlag107Field048 As TextBox
-    Friend WithEvents txtFlag106Field047 As TextBox
-    Friend WithEvents txtFlag105Field046 As TextBox
-    Friend WithEvents txtFlag103Field045 As TextBox
-    Friend WithEvents txtFlag102Field044 As TextBox
-    Friend WithEvents txtFlag101Field043 As TextBox
-    Friend WithEvents txtFlag111Field042 As TextBox
-    Friend WithEvents txtFlag112Field041 As TextBox
-    Friend WithEvents txtFlag114Field040 As TextBox
-    Friend WithEvents txtFlag110Field039 As TextBox
-    Friend WithEvents txtFlag176ield038 As TextBox
-    Friend WithEvents txtVal_Elem130Field037 As TextBox
-    Friend WithEvents txtVal_Elem129Field036 As TextBox
-    Friend WithEvents txtVal_Elem128Field035 As TextBox
-    Friend WithEvents txtVal_Elem126Field034 As TextBox
-    Friend WithEvents txtVal_Elem125Field033 As TextBox
-    Friend WithEvents txtVal_Elem124Field032 As TextBox
-    Friend WithEvents txtVal_Elem118Field028 As TextBox
-    Friend WithEvents txtVal_Elem117Field027 As TextBox
-    Friend WithEvents txtVal_Elem116Field026 As TextBox
-    Friend WithEvents txtVal_Elem099Field025 As TextBox
-    Friend WithEvents txtVal_Elem003Field024 As TextBox
+    Friend WithEvents txtFlag130Field076 As TextBox
+    Friend WithEvents txtFlag129Field075 As TextBox
+    Friend WithEvents txtFlag128Field074 As TextBox
+    Friend WithEvents txtFlag126Field073 As TextBox
+    Friend WithEvents txtFlag125Field072 As TextBox
+    Friend WithEvents txtFlag124Field071 As TextBox
+    Friend WithEvents txtFlag118Field067 As TextBox
+    Friend WithEvents txtFlag117Field066 As TextBox
+    Friend WithEvents txtFlag116Field065 As TextBox
+    Friend WithEvents txtFlag002Field060 As TextBox
+    Friend WithEvents txtFlag003Field061 As TextBox
+    Friend WithEvents txtFlag180Field059 As TextBox
+    Friend WithEvents txtFlag179Field058 As TextBox
+    Friend WithEvents txtFlag178Field057 As TextBox
+    Friend WithEvents txtFlag177Field056 As TextBox
+    Friend WithEvents txtFlag193Field055 As TextBox
+    Friend WithEvents txtFlag197Field054 As TextBox
+    Friend WithEvents txtFlag167Field053 As TextBox
+    Friend WithEvents txtFlag122Field070 As TextBox
+    Friend WithEvents txtFlag121Field069 As TextBox
+    Friend WithEvents txtFlag120Field068 As TextBox
+    Friend WithEvents txtFlag104Field052 As TextBox
+    Friend WithEvents txtFlag107Field051 As TextBox
+    Friend WithEvents txtFlag106Field050 As TextBox
+    Friend WithEvents txtFlag105Field049 As TextBox
+    Friend WithEvents txtFlag103Field048 As TextBox
+    Friend WithEvents txtFlag102Field047 As TextBox
+    Friend WithEvents txtFlag101Field046 As TextBox
+    Friend WithEvents txtFlag111Field045 As TextBox
+    Friend WithEvents txtFlag112Field044 As TextBox
+    Friend WithEvents txtFlag114Field043 As TextBox
+    Friend WithEvents txtFlag110Field042 As TextBox
+    Friend WithEvents txtFlag176ield041 As TextBox
+    Friend WithEvents txtVal_Elem130Field040 As TextBox
+    Friend WithEvents txtVal_Elem129Field039 As TextBox
+    Friend WithEvents txtVal_Elem128Field038 As TextBox
+    Friend WithEvents txtVal_Elem126Field037 As TextBox
+    Friend WithEvents txtVal_Elem125Field036 As TextBox
+    Friend WithEvents txtVal_Elem124Field035 As TextBox
+    Friend WithEvents txtVal_Elem118Field031 As TextBox
+    Friend WithEvents txtVal_Elem117Field030 As TextBox
+    Friend WithEvents txtVal_Elem116Field029 As TextBox
+    Friend WithEvents txtVal_Elem002Field024 As TextBox
+    Friend WithEvents txtVal_Elem003Field025 As TextBox
     Friend WithEvents txtVal_Elem180Field023 As TextBox
     Friend WithEvents txtVal_Elem179Field022 As TextBox
     Friend WithEvents txtVal_Elem178Field021 As TextBox
@@ -1432,9 +1526,9 @@ Partial Class formSynopticCaribbean
     Friend WithEvents txtVal_Elem193Field019 As TextBox
     Friend WithEvents txtVal_Elem197Field018 As TextBox
     Friend WithEvents txtVal_Elem167Field017 As TextBox
-    Friend WithEvents txtVal_Elem122Field031 As TextBox
-    Friend WithEvents txtVal_Elem121Field030 As TextBox
-    Friend WithEvents txtVal_Elem120Field029 As TextBox
+    Friend WithEvents txtVal_Elem122Field034 As TextBox
+    Friend WithEvents txtVal_Elem121Field033 As TextBox
+    Friend WithEvents txtVal_Elem120Field032 As TextBox
     Friend WithEvents txtVal_Elem104Field016 As TextBox
     Friend WithEvents txtVal_Elem107Field015 As TextBox
     Friend WithEvents txtVal_Elem106Field014 As TextBox
@@ -1466,4 +1560,10 @@ Partial Class formSynopticCaribbean
     Friend WithEvents recNumberTextBox As TextBox
     Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents txtFlag099Field064 As TextBox
+    Friend WithEvents txtFlag018Field063 As TextBox
+    Friend WithEvents txtVal_Elem099Field028 As TextBox
+    Friend WithEvents txtVal_Elem018Field027 As TextBox
+    Friend WithEvents txtFlag085Field062 As TextBox
+    Friend WithEvents txtVal_Elem085Field026 As TextBox
 End Class

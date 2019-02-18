@@ -52,7 +52,7 @@
 
         'Display observation values in coressponding textboxes
         'Observation values start in column 6 i.e. column index 5, and end in column 39 i.e. column Index 38
-        For m = 5 To 38
+        For m = 5 To 40
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m)) Then
@@ -67,7 +67,7 @@
 
         'Display observation flags in coressponding textboxes
         'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-        For m = 39 To 71
+        For m = 41 To 76
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m)) Then
@@ -151,7 +151,7 @@
 
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 5 To 38
+        For m = 5 To 40
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m) = ctl.Text
@@ -161,7 +161,7 @@
 
         'Update observation flags in database
         'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = 39 To 71
+        For m = 41 To 76
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m) = ctl.Text
@@ -304,7 +304,7 @@
             Dim ctl As Control
             'Clear textboxes for observation values
             'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-            For m = 5 To 38
+            For m = 5 To 40
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -314,7 +314,7 @@
 
             'Clear textboxes for flag values
             'Observation flags range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-            For m = 39 To 71
+            For m = 41 To 76
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -347,8 +347,8 @@
             'The standard level pressure is not recorded in this form
             '----------------------------------------------------------
 
-            ' Set observation time requirements for the daily observation values
-            Daily_Observations()
+            '' Set observation time requirements for the daily observation values
+            'Daily_Observations()
 
 
         Catch ex As Exception
@@ -558,7 +558,7 @@
 
             'Commit observation values to database
             'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-            For m = 5 To 38
+            For m = 5 To 40
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m) = ctl.Text
@@ -567,8 +567,8 @@
             Next m
 
             'Commit observation flags to database
-            'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-            For m = 39 To 71
+            'Observation values range from column 41 i.e. column index 40 to column 77 i.e. column index 76
+            For m = 41 To 76
                 For Each ctl In Me.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m) = ctl.Text
@@ -641,7 +641,7 @@
         obsVal = ""
         obsFlag = ""
         flagtextBoxSuffix = ""
-        flagIndexDiff = 33 '49
+        flagIndexDiff = 36 '33 '49
 
         'Try
         'If {ENTER} key is pressed
@@ -783,7 +783,6 @@
 
     End Sub
 
-
     Private Sub formSynopticCaribbean_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Dim loggedInUser As String
         'loggedInUser = frmLogin.txtUser.Text
@@ -806,25 +805,28 @@
             conn.ConnectionString = myConnectionString
             conn.Open()
 
-            'MsgBox("Connection Successful !", MsgBoxStyle.Information)
-
             sql = "SELECT * FROM form_synoptic2_caribbean"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "form_synoptic2_caribbean")
             conn.Close()
-            ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
-            'FormLaunchPad.Show()
+
         Catch ex As MySql.Data.MySqlClient.MySqlException
             If ex.HResult = -2147467259 Then
                 ' Table does not exit
                 MsgBox("Table will be created. Re-open the form")
-                Create_Caribbean_Synoptic_table()
-                Me.Close()
-                Exit Sub
+                If Create_Caribbean_Synoptic_table("mariadb_climsoft_db_v4") And Create_Caribbean_Synoptic_table("mariadb_climsoft_test_db_v4") Then
+                    ' Grant table access permission to the users for the created table
+                    Grant_Permissions()
+                    'Exit Sub
+                    'Else
+                    '    Me.Close()
+                    '    Exit Sub
+                End If
             Else
                 MessageBox.Show(ex.Message)
             End If
-
+            Me.Close()
+            Exit Sub
         End Try
 
         Try
@@ -870,7 +872,7 @@
 
                 'Initialize textboxes for observation values
                 'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-                For m = 5 To 37
+                For m = 5 To 40
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m)) Then
@@ -882,7 +884,7 @@
 
                 'Initialize textboxes for observation flags
                 'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
-                For m = 38 To 70
+                For m = 41 To 76
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(inc).Item(m)) Then
@@ -943,7 +945,7 @@
 
     End Sub
 
-    Private Sub Val_Elem003TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem125Field033.LostFocus
+    Private Sub Val_Elem003TextBox_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem125Field036.LostFocus
         ''If Val(txtVal_Elem003Field046.Text) > Val(txtVal_Elem002Field045.Text) Then
         ''    txtVal_Elem002Field045.BackColor = Color.Cyan
         ''    txtVal_Elem003Field046.BackColor = Color.Cyan
@@ -963,7 +965,7 @@
         Dim dryBulb, wetBulb, ppp As String ', gpm As String
         'Drybulb is element code 101 and wetbulb is element code 102
         Try
-            If Val(txtVal_Elem102Field011.Text) > Val(txtVal_Elem101Field010.Text) Then
+            If Val(txtVal_Elem102Field011.Text) > Val(txtVal_Elem101Field010.Text) And Len(txtVal_Elem101Field010.Text) <> 0 Then
                 'If wetbulb is greater than dewpoint both elements are flagged because either of them could be wrong.
                 'i.e. wetbulb value could be higher than the correct value or drybulb could be lower than the correct value.
                 txtVal_Elem103Field012.BackColor = Color.Cyan
@@ -979,7 +981,9 @@
                 dryBulb = Val(txtVal_Elem101Field010.Text) / 10
                 wetBulb = Val(txtVal_Elem102Field011.Text) / 10
                 'Remove element scale factor from dewpoint
-                txtVal_Elem103Field012.Text = calculateValue.calculateDewpoint(dryBulb, wetBulb) * 10
+                If Len(txtVal_Elem101Field010.Text) <> 0 And Len(txtVal_Elem102Field011.Text) <> 0 Then
+                    txtVal_Elem103Field012.Text = calculateValue.calculateDewpoint(dryBulb, wetBulb) * 10
+                End If
 
                 stationCode = cboStation.SelectedValue
 
@@ -1019,10 +1023,27 @@
     Private Sub txtVal_Elem103Field012_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem103Field012.LostFocus
         Dim RH As New dataEntryGlobalRoutines
         Dim dryBulb As String, dewPoint As String
-        'Apply element scale factor to drybulb and wetbulb before calling function to calculate RH
-        dryBulb = Val(txtVal_Elem101Field010.Text) / 10
-        dewPoint = Val(txtVal_Elem103Field012.Text) / 10
-        txtVal_Elem105Field013.Text = RH.calculateRH(dewPoint, dryBulb)
+
+        If Val(txtVal_Elem103Field012.Text) > Val(txtVal_Elem102Field011.Text) And Len(txtVal_Elem102Field011.Text) <> 0 Then
+            'If dewpoint is greater than wetbulb both elements are flagged because either of them could be wrong.
+            'i.e. dewpoint value could be higher than the correct value or drybulb could be lower than the correct value.
+            txtVal_Elem103Field012.BackColor = Color.Cyan
+            txtVal_Elem102Field011.BackColor = Color.Cyan
+            txtVal_Elem103Field012.Focus()
+            tabNext = False
+            MsgBox("Wetbulb must be greater or equal to Dewpoint!", MsgBoxStyle.Exclamation)
+        Else
+            txtVal_Elem103Field012.BackColor = Color.White
+            txtVal_Elem102Field011.BackColor = Color.White
+            tabNext = True
+
+            'Apply element scale factor to drybulb and wetbulb before calling function to calculate RH
+            dryBulb = Val(txtVal_Elem101Field010.Text) / 10
+            dewPoint = Val(txtVal_Elem103Field012.Text) / 10
+            If Len(txtVal_Elem101Field010.Text) <> 0 And Len(txtVal_Elem103Field012.Text) <> 0 Then
+                txtVal_Elem105Field013.Text = RH.calculateRH(dewPoint, dryBulb)
+            End If
+        End If
     End Sub
 
     'Private Sub txtVal_Elem101Field012_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem101Field012.LostFocus
@@ -1121,12 +1142,12 @@
                         ' Create the Command for executing query and set its properties
                         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
-                    Try
-                        'Execute query
-                        objCmd.ExecuteNonQuery()
-                    Catch ex As Exception
-                        'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        MsgBox(ex.Message)
+                        Try
+                            'Execute query
+                            objCmd.ExecuteNonQuery()
+                        Catch ex As Exception
+                            'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                            MsgBox(ex.Message)
                         End Try
                     End If
                     'Move to next observation value in current record of the dataset
@@ -1258,9 +1279,6 @@
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synoptic2_caribbean")
     End Sub
 
-    Private Sub cboHour_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboHour.SelectedIndexChanged
-
-    End Sub
 
     Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
         frmSynopTDCF.Show()
@@ -1307,8 +1325,8 @@
 
 
     Private Sub cboHour_TextChanged(sender As Object, e As EventArgs) Handles cboHour.TextChanged
-        ' Set observation time requirements for the daily observation values
-        Daily_Observations()
+        '' Set observation time requirements for the daily observation values
+        'Daily_Observations()
     End Sub
 
     Sub Daily_Observations()
@@ -1329,54 +1347,56 @@
         gminEndMonth = dsReg.Tables("regData").Rows(4).Item("keyValue")
         If tminCheck.checkTminRequired(cboHour.Text, tmin) = True Then
             'Apply required action to Tmin
-            txtVal_Elem003Field024.Enabled = True
-            txtVal_Elem003Field024.BackColor = Color.White
-            txtFlag003Field057.Enabled = True
-            txtFlag003Field057.BackColor = Color.White
+            txtVal_Elem003Field025.Enabled = True
+            txtVal_Elem003Field025.BackColor = Color.White
+            txtFlag003Field061.Enabled = True
+            txtFlag003Field061.BackColor = Color.White
 
-            'Apply same action to 24Hr precip
-            txtVal_Elem104Field016.Enabled = True
-            txtVal_Elem104Field016.BackColor = Color.White
-            txtFlag104Field049.Enabled = True
-            txtFlag104Field049.BackColor = Color.White
+            'Apply same action to Tmax
+            txtVal_Elem002Field024.Enabled = True
+            txtVal_Elem002Field024.BackColor = Color.White
+            txtFlag002Field060.Enabled = True
+            txtFlag002Field060.BackColor = Color.White
         Else
-            txtVal_Elem003Field024.Enabled = False
-            txtVal_Elem003Field024.BackColor = Color.LightGray
-            txtFlag003Field057.Enabled = False
-            txtFlag003Field057.BackColor = Color.LightGray
+            txtVal_Elem003Field025.Enabled = False
+            txtVal_Elem003Field025.BackColor = Color.LightGray
+            txtFlag003Field061.Enabled = False
+            txtFlag003Field061.BackColor = Color.LightGray
 
-            'Apply same action to 24Hr precip
-            txtVal_Elem104Field016.Enabled = False
-            txtVal_Elem104Field016.BackColor = Color.LightGray
-            txtFlag104Field049.Enabled = False
-            txtFlag104Field049.BackColor = Color.LightGray
+            'Apply same action to Tmax
+            txtVal_Elem002Field024.Enabled = False
+            txtVal_Elem002Field024.BackColor = Color.LightGray
+            txtFlag002Field060.Enabled = False
+            txtFlag002Field060.BackColor = Color.LightGray
 
         End If
         'Check if Gmin is required
         Dim gminCheck As New dataEntryGlobalRoutines
         If gminCheck.checkGminRequired(cboMonth.Text, gminStartMonth, gminEndMonth, cboHour.Text) = True Then
-            txtVal_Elem099Field025.Enabled = True
-            txtVal_Elem099Field025.BackColor = Color.White
-            txtFlag099Field058.Enabled = True
-            txtFlag099Field058.BackColor = Color.White
+            txtVal_Elem085Field026.Enabled = True
+            txtVal_Elem085Field026.BackColor = Color.White
+            txtFlag085Field062.Enabled = True
+            txtFlag085Field062.BackColor = Color.White
         Else
-            txtVal_Elem099Field025.Enabled = False
-            txtVal_Elem099Field025.BackColor = Color.LightGray
-            txtFlag099Field058.Enabled = False
-            txtFlag099Field058.BackColor = Color.LightGray
+            txtVal_Elem085Field026.Enabled = False
+            txtVal_Elem085Field026.BackColor = Color.LightGray
+            txtFlag085Field062.Enabled = False
+            txtFlag085Field062.BackColor = Color.LightGray
         End If
     End Sub
 
     Private Sub cboMonth_TextChanged(sender As Object, e As EventArgs) Handles cboMonth.TextChanged
-        ' Set observation time requirements for the daily observation values
-        Daily_Observations()
+        '' Set observation time requirements for the daily observation values
+        'Daily_Observations()
     End Sub
 
-    Sub Create_Caribbean_Synoptic_table()
+    Function Create_Caribbean_Synoptic_table(db As String) As Boolean
         Dim sql As String
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
-        sql = "DROP TABLE IF EXISTS `form_synoptic2_caribbean`;
+        Create_Caribbean_Synoptic_table = False
+
+        sql = "USE `" & db & "`;  
                CREATE TABLE IF NOT EXISTS `form_synoptic2_caribbean` (
               `stationId` varchar(50) NOT NULL DEFAULT '',
               `yyyy` int(11) NOT NULL,
@@ -1402,7 +1422,10 @@
               `Val_Elem178` varchar(6) DEFAULT NULL,
               `Val_Elem179` varchar(6) DEFAULT NULL,
               `Val_Elem180` varchar(6) DEFAULT NULL,
+              `Val_Elem002` varchar(6) DEFAULT NULL,
               `Val_Elem003` varchar(6) DEFAULT NULL,
+              `Val_Elem085` varchar(6) DEFAULT NULL,
+              `Val_Elem018` varchar(6) DEFAULT NULL,
               `Val_Elem099` varchar(6) DEFAULT NULL,
               `Val_Elem116` varchar(6) DEFAULT NULL,
               `Val_Elem117` varchar(6) DEFAULT NULL,
@@ -1435,7 +1458,10 @@
               `Flag178` varchar(1) DEFAULT NULL,
               `Flag179` varchar(1) DEFAULT NULL,
               `Flag180` varchar(1) DEFAULT NULL,
+              `Flag002` varchar(1) DEFAULT NULL,
               `Flag003` varchar(1) DEFAULT NULL,
+              `Flag085` varchar(1) DEFAULT NULL,
+              `Flag018` varchar(1) DEFAULT NULL,
               `Flag099` varchar(1) DEFAULT NULL,
               `Flag116` varchar(1) DEFAULT NULL,
               `Flag117` varchar(1) DEFAULT NULL,
@@ -1455,28 +1481,117 @@
             );"
         Try
             ' Create the table form_synoptic2_caribbean'
-            'conn.Open()
+            'MsgBox(sql)
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
+            Create_Caribbean_Synoptic_table = True
+
+        Catch ex As Exception
+            If ex.HResult = -2147467259 Then
+                MsgBox("You may not have sufficient privileges to create the table 'form_synoptic2_caribbean'. Please restart Climsoft as 'root'")
+            Else
+                MsgBox(ex.Message & " Check user privileges")
+            End If
+        End Try
+
+    End Function
+
+    Sub Grant_Permissions()
+
+        Dim sql, usr, usrl As String
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+            sql = "use mariadb_climsoft_db_v4; SELECT userName, userRole from climsoftusers;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "ClimsoftUsers")
+
+            With ds.Tables("ClimsoftUsers")
+                If .Rows.Count > 0 Then
+                    For i = 0 To .Rows.Count - 1
+
+                        usr = .Rows(i).Item(0)
+                        usrl = .Rows(i).Item(1)
+                        If usrl = "ClimsoftAdmin" Or usrl = "ClimsoftOperator" Or usrl = "ClimsoftRainfall" Or usrl = "ClimsoftOperatorSupervisor" Or usrl = "ClimsoftQC" Then
+
+                            sql = "GRANT DELETE,Select,INSERT,UPDATE, CREATE On mariadb_climsoft_db_v4.form_synoptic2_caribbean To '" & usr & "';"
+                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            'execute command
+                            qry.ExecuteNonQuery()
+
+                            sql = "GRANT DELETE,Select,INSERT,UPDATE On mariadb_climsoft_test_db_v4.form_synoptic2_caribbean To  '" & usr & "';"
+                            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            'execute command
+                            qry.ExecuteNonQuery()
+                        End If
+                    Next
+
+                End If
+            End With
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
 
-    Private Sub txtVal_Elem003Field024_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem003Field024.LostFocus
-        If Val(txtVal_Elem003Field024.Text) > Val(txtVal_Elem101Field010.Text) Then
-            'If Tmin is greater than Drbulb both elements are flagged because either of them could be wrong.
-            'i.e. Tmin value could be higher than the correct value or Drybulb could be lower than the correct value.
-            txtVal_Elem003Field024.BackColor = Color.Cyan
-            txtVal_Elem101Field010.BackColor = Color.Cyan
-            txtVal_Elem003Field024.Focus()
-            tabNext = False
-            MsgBox("Tmin must be lower or equal to Drybulb!", MsgBoxStyle.Exclamation)
-        Else
-            txtVal_Elem003Field024.BackColor = Color.White
-            txtVal_Elem101Field010.BackColor = Color.White
-            tabNext = True
-        End If
+    Private Sub txtVal_Elem003Field025_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem003Field025.LostFocus
+
+        Try
+            If Val(txtVal_Elem003Field025.Text) > Val(txtVal_Elem002Field024.Text) And Len(txtVal_Elem002Field024.Text) <> 0 Then
+                'If Tmin is greater than Tmax both elements are flagged because either of them could be wrong.
+                'i.e. Tmin value could be higher than the correct value or Tmax could be lower than the correct value.
+                txtVal_Elem003Field025.BackColor = Color.Cyan
+                txtVal_Elem002Field024.BackColor = Color.Cyan
+                txtVal_Elem003Field025.Focus()
+                tabNext = False
+                MsgBox("Tmin must be lower or equal to Tmax!", MsgBoxStyle.Exclamation)
+            Else
+                txtVal_Elem003Field025.BackColor = Color.White
+                txtVal_Elem002Field024.BackColor = Color.White
+                tabNext = True
+            End If
+
+            If Val(txtVal_Elem003Field025.Text) > Val(txtVal_Elem101Field010.Text) And Len(txtVal_Elem101Field010.Text) <> 0 Then
+                'If Tmin is greater than Drbulb both elements are flagged because either of them could be wrong.
+                'i.e. Tmin value could be higher than the correct value or Drybulb could be lower than the correct value.
+                txtVal_Elem003Field025.BackColor = Color.Cyan
+                txtVal_Elem101Field010.BackColor = Color.Cyan
+                'txtVal_Elem003Field025.Focus()
+                tabNext = False
+                MsgBox("Tmin must be lower or equal to Drybulb!", MsgBoxStyle.Exclamation)
+            Else
+                txtVal_Elem003Field025.BackColor = Color.White
+                txtVal_Elem101Field010.BackColor = Color.White
+                tabNext = True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
+
+
+    'Private Sub txtVal_Elem002Field024_LostFocus(sender As Object, e As EventArgs) Handles txtVal_Elem002Field024.LostFocus
+
+    '    Try
+    '        If Val(txtVal_Elem002Field024.Text) < Val(txtVal_Elem101Field010.Text) And Len(txtVal_Elem002Field024.Text) <> 0 Then
+    '            'If Tmax is less than Drybulb both elements are flagged because either of them could be wrong.
+    '            'i.e. Tmax value could be lower than the correct value or Drybulb could be higher than the correct value.
+    '            txtVal_Elem002Field024.BackColor = Color.Cyan
+    '            txtVal_Elem101Field010.BackColor = Color.Cyan
+    '            txtVal_Elem002Field024.Focus()
+    '            tabNext = False
+    '            MsgBox("Tmax must be higher or equal to Drybulb!", MsgBoxStyle.Exclamation)
+    '        Else
+    '            txtVal_Elem002Field024.BackColor = Color.White
+    '            txtVal_Elem101Field010.BackColor = Color.White
+    '            tabNext = True
+    '        End If
+    '        Exit Sub
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message)
+    '    End Try
+    'End Sub
+
 End Class
