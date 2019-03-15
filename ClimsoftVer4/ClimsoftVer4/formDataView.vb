@@ -150,6 +150,7 @@ Public Class formDataView
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         ''Added June 2016. ASM
+
         Try
             Dim cellValue As String, cellColName As String, k As Integer
             'MsgBox("Source Table: " & dsSourceTableName)
@@ -189,7 +190,6 @@ Public Class formDataView
                     k = Me.DataGridView.CurrentCell.ColumnIndex
                     cellColName = Me.DataGridView.Columns(k).HeaderText
                     cellValue = Me.DataGridView.CurrentCell.Value
-
                     If k = 1 Then
                         'Check if there is a backslash "\" in the case of folder locations
                         If InStr(cellValue, "\") > 0 Then
@@ -198,9 +198,8 @@ Public Class formDataView
                             cellValue = cellValue.Replace("\", "\\")
                         End If
                         'Generate SQL string for updating the selected value 
-                        Sql = "UPDATE regkeys SET " & cellColName & "='" & cellValue & "' WHERE keyName='" & keyNameValue & "';"
                     End If
-
+                    Sql = "UPDATE regkeys SET " & cellColName & "='" & cellValue & "' WHERE keyName='" & keyNameValue & "';"
                 ' Update metadata tables
                 Case "station"
                     id = Me.DataGridView.CurrentRow.Cells(0).Value
