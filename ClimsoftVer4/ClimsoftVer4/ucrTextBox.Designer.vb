@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrTextBox
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrValueView
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -28,6 +28,7 @@ Partial Class ucrTextBox
         '
         'txtBox
         '
+        Me.txtBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtBox.Location = New System.Drawing.Point(0, 0)
         Me.txtBox.Name = "txtBox"
         Me.txtBox.Size = New System.Drawing.Size(51, 20)

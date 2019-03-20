@@ -64,40 +64,11 @@ Public Class ucrSynopticRA1
 
     Public Overrides Sub PopulateControl()
 
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_synoptic_2_ra1
-
         If Not bFirstLoad Then
-            'TODO. the try catch can be removed later after the table has been fixed
-            Try
-                MyBase.PopulateControl()
-            Catch ex As Exception
-                MessageBox.Show("Error: " & ex.Message, "Populate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetTmaxRequired(IsTmaxRequired())
-                SetTminAndRelatedElementsRequired(IsTminRequired())
-                SetGminRequired(IsGminRequired())
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fs2ra1Record = tempRecord
-            If fs2ra1Record Is Nothing Then
-                fs2ra1Record = New form_synoptic_2_ra1
-                bUpdating = False
-            Else
-                clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'enable or disable textboxes based on year month day
             ValidateDataEntryPermission()
@@ -105,7 +76,7 @@ Public Class ucrSynopticRA1
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                 End If
             Next
 
@@ -123,7 +94,7 @@ Public Class ucrSynopticRA1
                 SetDefaultStandardPressureLevel()
             End If
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
 
         End If
 
@@ -145,7 +116,7 @@ Public Class ucrSynopticRA1
             Dim ucrTextbox As ucrTextBox
             If TypeOf sender Is ucrTextBox Then
                 ucrTextbox = DirectCast(sender, ucrTextBox)
-                CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+                'CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
             End If
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Fields Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -157,7 +128,7 @@ Public Class ucrSynopticRA1
 
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -167,7 +138,7 @@ Public Class ucrSynopticRA1
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         Dim bValidValues As Boolean = True
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue Then
                 bValidValues = False
                 Exit For
@@ -177,10 +148,10 @@ Public Class ucrSynopticRA1
         If bValidValues Then
             'fs2ra1Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                'CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -223,9 +194,7 @@ Public Class ucrSynopticRA1
         Dim dtbl As DataTable
         Dim row As DataRow
         clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"elementId", "lowerLimit", "upperLimit"}))
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -569,18 +538,19 @@ Public Class ucrSynopticRA1
 
         ucrLinkedHour.setDefaultValue(6)
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "=", strLinkedFieldName:="day", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, "hh", "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
-        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedDay)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedHour)
     End Sub
 
     ''' <summary>

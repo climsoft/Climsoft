@@ -2,23 +2,14 @@
 Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
-    'Boolean to check if control is loading for first time
-    Private bFirstLoad As Boolean = True
-    'sets table name assocaited with this user control
-    Private strTableName As String = "form_daily2"
+
+    Dim strTableName As String
     'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private strTotalFieldName As String = "total"
     Private bTotalRequired As Boolean
-    'Stores fields for the value flag and period
-    Private lstFields As New List(Of String)
-    'Stores the record assocaited with this control
-    Public fd2Record As form_daily2
-    'Boolean to check if record is updating
-    'Set to True by default
-    Public bUpdating As Boolean = True
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
 
@@ -32,39 +23,15 @@ Public Class ucrFormDaily2
     Private ucrLinkedElement As ucrElementSelector
 
 
-
     ''' <summary>
     ''' Sets the values of the controls to the coresponding record values in the database with the current key
     ''' </summary>
     Public Overrides Sub PopulateControl()
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_daily2
-
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_daily2.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetValueValidation()
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fd2Record = tempRecord
-            If fd2Record Is Nothing Then
-                fd2Record = New form_daily2
-                bUpdating = False
-            Else
-                'Detach this from the EF context to prevent it from tracking the changes made to it
-                clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'check whether to permit data entry based on date entry values
             ValidateDataEntryPermission()
@@ -75,16 +42,16 @@ Public Class ucrFormDaily2
             'set the values to the input controls
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag), GetValue(strPeriodFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag), GetFieldValue(strPeriodFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
                 End If
             Next
 
             'set values for the units
             If bUpdating Then
                 For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    kvpTemp.Value.SetValue(GetValue(kvpTemp.Key))
+                    kvpTemp.Value.SetValue(GetFieldValue(kvpTemp.Key))
                 Next
             Else
                 For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
@@ -92,7 +59,7 @@ Public Class ucrFormDaily2
                 Next
             End If
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
         End If
 
         ' Set conditions for double key entry
@@ -113,6 +80,7 @@ Public Class ucrFormDaily2
         Dim vfpContextMenuStrip As ContextMenuStrip
 
         If bFirstLoad Then
+
             vfpContextMenuStrip = SetUpContextMenuStrip()
 
             For Each ctr As Control In Me.Controls
@@ -139,13 +107,17 @@ Public Class ucrFormDaily2
                 End If
             Next
 
+            strTableName = "form_daily2"
+            'crTableEntry_Load fills in the lstFields 
+            'SetUpTableEntry()
             SetTableNameAndFields(strTableName, lstFields)
-            bFirstLoad = False
-        End If
 
+            bFirstLoad = False
+
+        End If
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -155,42 +127,27 @@ Public Class ucrFormDaily2
 
     Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
         Dim ucrText As ucrTextBox
-        If fd2Record IsNot Nothing Then
-            If TypeOf sender Is ucrTextBox Then
+        'If fd2Record IsNot Nothing Then
+        If TypeOf sender Is ucrTextBox Then
                 ucrText = DirectCast(sender, ucrTextBox)
-                CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
+                'TODO Replace this with a call to update the datatable
+
+                'CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
             ElseIf TypeOf sender Is ucrDataLinkCombobox Then
                 For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
                     'overwrite the specific unit value
                     If sender Is kvpTemp.Value Then
-                        CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
+                        'TODO Replace this with a call to update the datatable
+
+                        'CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
                         Exit For
                     End If
                 Next
             End If
-        End If
+        'End If
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
-        'Dim ctr As Control
-        'Dim ctrVFP As New ucrValueFlagPeriod
-
-        'If TypeOf sender Is ucrValueFlagPeriod Then
-        '    ctrVFP = sender
-        '    For Each ctr In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            If ctr.Tag = ctrVFP.Tag + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '            If ctrVFP.Tag = iMonthLength Then
-        '                ucrInputTotal.GetFocus()
-        '            End If
-        '        End If
-        '    Next
-        'End If
-
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter  
         e.SuppressKeyPress = True
@@ -213,21 +170,22 @@ Public Class ucrFormDaily2
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked key filter controls
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
-            If Not key.ValidateValue() Then
-                bValidValues = False
-                Exit For
-            End If
-        Next
+        'For Each key As ucrValueView In dctLinkedControlsFilters.Keys
+        ' If Not key.ValidateValue() Then
+        'bValidValues = False
+        'Exit For
+        ' End If
+        'Next
 
         If bValidValues Then
-            'fd2Record = Nothing
-            MyBase.LinkedControls_evtValueChanged()
+            'will populate the datatable based on the new key values
+            'MyBase.LinkedControls_evtValueChanged()
 
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
-            Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+            'TODO Replace this with a call to update the datatable
+            'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            ' Next
+            ' ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -254,24 +212,179 @@ Public Class ucrFormDaily2
     End Sub
 
     Public Sub SaveRecord()
+        'TODO Replace this with a call to update or insert record the datatable and the datasorce
         If bUpdating Then
-            clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Modified
         Else
-            'This is determined by the current user not set from the form
-            fd2Record.signature = frmLogin.txtUsername.Text
-            fd2Record.EntryDatetime = Date.Now()
-            clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Added
         End If
 
-        clsDataConnection.db.SaveChanges()
-        'detach the record to prevent caching of records on the EF
-        clsDataConnection.db.Entry(fd2Record).State = Entity.EntityState.Detached
+        TEMPCODE()
+
+        If 1 = 1 Then
+            Return
+        End If
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+
+        Try
+
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter(
+                "SELECT elementId, elementName FROM obselement", conn)
+
+            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
+           "UPDATE obselement SET elementName = @elementName WHERE elementId = @elementId", conn)
+
+            dataAdpater.UpdateCommand.Parameters.Add("@elementName", MySql.Data.MySqlClient.MySqlDbType.VarChar, 255, "elementName")
+
+
+            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int64, 20)
+            param1.SourceColumn = "elementId"
+            param1.SourceVersion = DataRowVersion.Original
+
+
+            Dim dailyTable As New DataTable
+
+            dataAdpater.Fill(dailyTable)
+
+            Dim row As DataRow
+            row = dailyTable.Rows(0)
+            row("elementName") = "my element"
+
+            dataAdpater.Update(dailyTable)
+
+
+
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+            'MsgBox("Error : " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+
+
+    End Sub
+
+    Private Sub TEMPCODE()
+        Dim conn As MySql.Data.MySqlClient.MySqlConnection
+
+        Try
+
+            conn = clsDataConnection.conn
+
+            'conn.ConnectionString = frmLogin.txtusrpwd.Text
+            'conn.Open()
+
+            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
+
+            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT stationId, elementId, yyyy, mm, hh, day01 FROM form_daily2", conn)
+
+            'setup delete command
+            dataAdpater.DeleteCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "DELETE FROM form_daily2 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
+
+            Dim param11 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
+            param11.SourceColumn = "stationId"
+            param11.SourceVersion = DataRowVersion.Original
+
+            Dim param21 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param21.SourceColumn = "elementId"
+            param21.SourceVersion = DataRowVersion.Original
+
+
+            Dim param31 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param31.SourceColumn = "yyyy"
+            param31.SourceVersion = DataRowVersion.Original
+
+            Dim param41 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param41.SourceColumn = "mm"
+            param41.SourceVersion = DataRowVersion.Original
+
+            Dim param51 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param51.SourceColumn = "hh"
+            param51.SourceVersion = DataRowVersion.Original
+
+            'setup insert command
+            dataAdpater.InsertCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "INSERT INTO form_daily2 (stationId,elementId,yyyy,mm,hh,day01) VALUES (@stationId,@elementId,@yyyy,@mm,@hh,@day01)", conn)
+
+            dataAdpater.InsertCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50, "stationId")
+            dataAdpater.InsertCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "elementId")
+            dataAdpater.InsertCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
+            dataAdpater.InsertCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "mm")
+            dataAdpater.InsertCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "hh")
+            dataAdpater.InsertCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
+
+
+            'set up update command
+            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
+            "UPDATE form_daily2 SET yyyy = @yyyy2 , day01 = @day01 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
+
+
+            dataAdpater.UpdateCommand.Parameters.Add("@yyyy2", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
+            dataAdpater.UpdateCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
+
+
+            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
+            param1.SourceColumn = "stationId"
+            param1.SourceVersion = DataRowVersion.Original
+
+            Dim param2 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param2.SourceColumn = "elementId"
+            param2.SourceVersion = DataRowVersion.Original
+
+
+            Dim param3 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param3.SourceColumn = "yyyy"
+            param3.SourceVersion = DataRowVersion.Original
+
+
+            Dim param4 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param4.SourceColumn = "mm"
+            param4.SourceVersion = DataRowVersion.Original
+
+            Dim param5 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
+            param5.SourceColumn = "hh"
+            param5.SourceVersion = DataRowVersion.Original
+
+            Dim dailyTable As New DataTable
+
+            dataAdpater.Fill(dailyTable)
+
+            Dim row As DataRow
+            row = dailyTable.Rows(0)
+
+            Dim row2 As DataRow
+            row2 = dailyTable.NewRow()
+            row2("stationId") = row("stationId")
+            row2("elementId") = row("elementId")
+            row2("yyyy") = row("yyyy")
+            row2("mm") = row("mm")
+            row2("hh") = row("hh")
+            row2("day01") = "9999"
+
+            dailyTable.Rows(0).Delete()
+            dailyTable.Rows.Add(row2)
+
+
+            dataAdpater.Update(dailyTable)
+
+            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Deleted))
+            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Added))
+        Catch ex As Exception
+            Console.WriteLine("Error: " & ex.Message)
+            'MsgBox("Error : " & ex.Message)
+        Finally
+            'conn.Close()
+        End Try
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_daily2.Attach(fd2Record)
-        clsDataConnection.db.form_daily2.Remove(fd2Record)
-        clsDataConnection.db.SaveChanges()
+        'TODO Replace this with a call to delete the record from the datatable and the datasorce
     End Sub
 
     ''' <summary>
@@ -319,7 +432,7 @@ Public Class ucrFormDaily2
     ''' Returns true if they are all valid and false if any has Invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Overrides Function ValidateValue() As Boolean
+    Public Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
@@ -373,7 +486,7 @@ Public Class ucrFormDaily2
         bTotalRequired = False
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableNameAndFields("obselements", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
+        clsDataDefinition.SetTableNameAndFields("obselement", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", Val(ucrLinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -381,7 +494,7 @@ Public Class ucrFormDaily2
             strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
             'qcTotalRequired is a nullable integer in the EF model
             If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
-                bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+                bTotalRequired = (Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0)
             End If
         End If
 
@@ -425,21 +538,19 @@ Public Class ucrFormDaily2
 
         ucrLinkedHour.setDefaultValue(6)
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedElement, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
         'Sets key controls for the navigation
-        'TODO. EntryDateTime field to be added and sorting field to be set too
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "hh"})))
-        'ucrLinkedNavigation.SetSortBy("entryDatetime")
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("elementId", ucrLinkedElement)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedElement)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedHour)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
 
     End Sub
@@ -553,7 +664,13 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
-                        dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                        Try
+                            dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+
+                        Catch ex As Exception
+                            Dim k = True
+                            Continue For
+                        End Try
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
@@ -641,94 +758,6 @@ Public Class ucrFormDaily2
 
         'TODO? because of the detachment
         'PopulateControl()
-
-    End Sub
-
-    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
-    Public Sub UploadAllRecordsEF()
-        Dim clsAllRecordsCall As New DataCall
-        Dim dtbAllRecords As DataTable
-        Dim rcdObservationInitial As observationinitial
-        Dim strCurrTag As String
-        Dim dtObsDateTime As Date
-        Dim strStationId As String
-        Dim lElementId As Long
-        Dim iPeriod As Integer
-        Dim lstAllFields As New List(Of String)
-        Dim bNewRecord As Boolean
-
-        'get the observation values fields
-        lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
-
-        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        dtbAllRecords = clsAllRecordsCall.GetDataTable()
-
-        For Each row As DataRow In dtbAllRecords.Rows
-            For i As Integer = 1 To 31
-                If i < 10 Then
-                    strCurrTag = "0" & i
-                Else
-                    strCurrTag = i
-                End If
-
-                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
-
-                    strStationId = row.Item("stationId")
-                    dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
-
-                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
-                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
-                    If rcdObservationInitial Is Nothing Then
-                        bNewRecord = True
-                        rcdObservationInitial = New observationinitial
-                    Else
-                        bNewRecord = False
-                    End If
-
-                    rcdObservationInitial.recordedFrom = strStationId
-                    rcdObservationInitial.describedBy = lElementId
-                    rcdObservationInitial.obsDatetime = dtObsDateTime
-                    rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.qcStatus = 0
-                    rcdObservationInitial.acquisitionType = 1
-                    rcdObservationInitial.dataForm = strTableName
-
-                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
-                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
-                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
-                        rcdObservationInitial.period = iPeriod
-                    End If
-
-                    If Not IsDBNull(row.Item("signature")) Then
-                        rcdObservationInitial.capturedBy = row.Item("signature")
-                    End If
-                    If Not IsDBNull(row.Item("temperatureUnits")) Then
-                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
-                    End If
-                    If Not IsDBNull(row.Item("precipUnits")) Then
-                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
-                    End If
-                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
-                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
-                    End If
-                    If Not IsDBNull(row.Item("visUnits")) Then
-                        rcdObservationInitial.visUnits = row.Item("visUnits")
-                    End If
-
-                    If bNewRecord Then
-                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
-                    End If
-                    'save the Observation record
-                    clsDataConnection.db.SaveChanges()
-
-                End If
-            Next
-        Next
-
-        'TODO? because of the detachment
-        PopulateControl()
 
     End Sub
 
