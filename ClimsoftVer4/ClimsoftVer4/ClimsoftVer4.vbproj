@@ -812,6 +812,18 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.Designer.vb">
+      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.Designer.vb">
+      <DependentUpon>ucrAgroMet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1364,6 +1376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFilter.resx">
       <DependentUpon>sdgFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewAgroMet.resx">
+      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrAgroMet.resx">
+      <DependentUpon>ucrAgroMet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
