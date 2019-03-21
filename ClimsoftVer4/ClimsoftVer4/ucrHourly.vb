@@ -28,27 +28,8 @@ Public Class ucrHourly
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_hourly.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetValueValidation()
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fhRecord = tempRecord
-            If fhRecord Is Nothing Then
-                fhRecord = New form_hourly
-                bUpdating = False
-            Else
-                clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'check whether to permit data entry based on date entry values
             ValidateDataEntryPermission()
@@ -58,13 +39,13 @@ Public Class ucrHourly
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
                 End If
             Next
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
 
         End If
 
@@ -114,7 +95,7 @@ Public Class ucrHourly
     End Sub
 
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -126,49 +107,11 @@ Public Class ucrHourly
         Dim ucrText As ucrTextBox
         If TypeOf sender Is ucrTextBox Then
             ucrText = DirectCast(sender, ucrTextBox)
-            CallByName(fhRecord, ucrText.GetField, CallType.Set, ucrText.GetValue)
+            'CallByName(fhRecord, ucrText.GetField, CallType.Set, ucrText.GetValue)
         End If
     End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
-        'Dim ctrVFP As ucrValueFlagPeriod
-
-        'If TypeOf sender Is ucrValueFlagPeriod Then
-        '    ctrVFP = sender
-        '    For Each ctr As Control In Me.Controls
-        '        If TypeOf ctr Is ucrValueFlagPeriod Then
-        '            If ctr.Tag = ctrVFP.Tag + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '        End If
-        '    Next
-        'End If
-        'Dim ctrTemp As Control
-        'Dim i As Integer = 0
-        'ctrTemp = sender
-        'While i < Me.Controls.Count
-        '    ctrTemp = GetNextControl(ctrTemp, True)
-        '    i = i + 1
-        '    If TypeOf ctrTemp Is ucrValueFlagPeriod OrElse TypeOf ctrTemp Is ucrTextBox Then
-        '        If ctrTemp.Enabled Then
-        '            'ctrTemp.Focus()
-        '        Else
-
-        '        End If
-        '        If TypeOf ctrTemp Is ucrValueFlagPeriod Then
-        '            SelectNextControl(ActiveControl, True, True, True, True)
-        '        End If
-        '        Exit While
-        '    End If
-        'End While
-
-        'Dim ctrTemp As Control
-        'Dim i As Integer = 0
-        'ctrTemp = sender
-        'ctrTemp = GetNextControl(ctrTemp, True)
-
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter  
         e.SuppressKeyPress = True
@@ -191,7 +134,7 @@ Public Class ucrHourly
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked controls
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue() Then
                 bValidValues = False
                 Exit For
@@ -201,10 +144,10 @@ Public Class ucrHourly
         If bValidValues Then
             'fhRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                'CallByName(fhRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            ' ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -212,24 +155,24 @@ Public Class ucrHourly
     End Sub
 
     Public Sub SaveRecord()
-        If bUpdating Then
-            clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Modified
-        Else
-            'This is determined by the current user not set from the form
-            fhRecord.signature = frmLogin.txtUsername.Text
-            fhRecord.EntryDatetime = Date.Now()
-            clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Added
-        End If
+        'If bUpdating Then
+        '    clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Modified
+        'Else
+        '    'This is determined by the current user not set from the form
+        '    fhRecord.signature = frmLogin.txtUsername.Text
+        '    fhRecord.EntryDatetime = Date.Now()
+        '    clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Added
+        'End If
 
-        clsDataConnection.db.SaveChanges()
-        'detach the record to prevent caching of records on the EF
-        clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
+        'clsDataConnection.db.SaveChanges()
+        ''detach the record to prevent caching of records on the EF
+        'clsDataConnection.db.Entry(fhRecord).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_hourly.Attach(fhRecord)
-        clsDataConnection.db.form_hourly.Remove(fhRecord)
-        clsDataConnection.db.SaveChanges()
+        'clsDataConnection.db.form_hourly.Attach(fhRecord)
+        'clsDataConnection.db.form_hourly.Remove(fhRecord)
+        'clsDataConnection.db.SaveChanges()
     End Sub
 
     ''' <summary>
@@ -307,7 +250,7 @@ Public Class ucrHourly
         bTotalRequired = False
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", Val(ucrlinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
@@ -317,11 +260,11 @@ Public Class ucrHourly
             strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
             'qcTotalRequired is a nullable integer in the EF model
             If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
-                bTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
+                bTotalRequired = If(Val(dtbl.Rows(0).Item("qcTotalRequired")) <> 0, True, False)
             End If
         End If
 
-            For Each ctr As Control In Me.Controls
+        For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
 
@@ -362,7 +305,7 @@ Public Class ucrHourly
     ''' Returns true if they are all valid and false if any has Invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Overrides Function ValidateValue() As Boolean
+    Public Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
@@ -424,19 +367,20 @@ Public Class ucrHourly
         ucrlinkedElement = ucrElement
         ucrLinkedNavigation = ucrNavigation
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrlinkedElement, "elementId", "==", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrlinkedElement, "elementId", "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "=", strLinkedFieldName:="day", bForceValuesAsString:=False)
 
         'setting the key contols for the Navigation control 
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("elementId", ucrlinkedElement)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "elementId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrlinkedElement)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedDay)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 
