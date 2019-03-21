@@ -55,46 +55,26 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Overrides Sub PopulateControl()
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_hourlywind
 
         If Not bFirstLoad Then
             MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_hourlywind.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fhourlyWindRecord = tempRecord
-            If fhourlyWindRecord Is Nothing Then
-                fhourlyWindRecord = New form_hourlywind
-                bUpdating = False
-            Else
-                clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'enable or disable textboxes based on year month day
             ValidateDataEntryPermission()
 
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrDirectionSpeedFlag Then
-                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetFieldValue(strDirectionFieldName & ctr.Tag), GetFieldValue(strSpeedFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                     'DirectCast(ctr, ucrDirectionSpeedFlag).SetValue(New List(Of Object)({GetValue(strDirectionFieldName & ctr.Tag), GetValue(strSpeedFieldName & ctr.Tag)}))
                 ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetValue(strTotalFieldName))
+                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
                 End If
             Next
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
         End If
 
         ' Set conditions for double key entry
@@ -114,30 +94,11 @@ Public Class ucrHourlyWind
         Dim ucrTextbox As ucrTextBox
         If TypeOf sender Is ucrTextBox Then
             ucrTextbox = DirectCast(sender, ucrTextBox)
-            CallByName(fhourlyWindRecord, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+            'CallByName(fhourlyWindRecord, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
         End If
     End Sub
 
     Private Sub GoToNextDSFControl(sender As Object, e As KeyEventArgs)
-        'TODO 
-        'SHOULD BE ABLE TO IDENTIFY THE PARTICULAR TEXTBOX AS A SENDER
-        'Dim ucrDSF As ucrDirectionSpeedFlag
-
-        'If TypeOf sender Is ucrDirectionSpeedFlag Then
-        '    ucrDSF = DirectCast(sender, ucrDirectionSpeedFlag)
-        '    For Each ctr As Control In Me.Controls
-        '        If TypeOf ctr Is ucrDirectionSpeedFlag Then
-        '            'TODO 
-        '            'needs modification here. for hour selection functionality
-        '            If Val(ctr.Tag) = Val(ucrDSF.Tag) + 1 Then
-        '                If ctr.Enabled Then
-        '                    ctr.Focus()
-        '                End If
-        '            End If
-        '        End If
-        '    Next
-        'End If
-
         SelectNextControl(sender, True, True, True, True)
         'this handles the "noise" on enter key down
         e.SuppressKeyPress = True
@@ -156,7 +117,7 @@ Public Class ucrHourlyWind
         checkSpeedTotal()
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -168,7 +129,7 @@ Public Class ucrHourlyWind
         Dim bValidValues As Boolean = True
 
         'validate the values of the linked controls
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue() Then
                 bValidValues = False
                 Exit For
@@ -178,10 +139,10 @@ Public Class ucrHourlyWind
         If bValidValues Then
             'fhourlyWindRecord = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                'CallByName(fhourlyWindRecord, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. Disable??
             'Me.Enabled = False
@@ -189,24 +150,24 @@ Public Class ucrHourlyWind
     End Sub
 
     Public Sub SaveRecord()
-        If bUpdating Then
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
-        Else
-            'This is determined by the current user not set from the form
-            fhourlyWindRecord.signature = frmLogin.txtUsername.Text
-            fhourlyWindRecord.entryDatetime = Date.Now()
-            clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
-        End If
+        'If bUpdating Then
+        '    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Modified
+        'Else
+        '    'This is determined by the current user not set from the form
+        '    fhourlyWindRecord.signature = frmLogin.txtUsername.Text
+        '    fhourlyWindRecord.entryDatetime = Date.Now()
+        '    clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Added
+        'End If
 
-        clsDataConnection.db.SaveChanges()
-        'detach the record to prevent caching of records on the EF
-        clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
+        'clsDataConnection.db.SaveChanges()
+        ''detach the record to prevent caching of records on the EF
+        'clsDataConnection.db.Entry(fhourlyWindRecord).State = Entity.EntityState.Detached
     End Sub
 
     Public Sub DeleteRecord()
-        clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
-        clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
-        clsDataConnection.db.SaveChanges()
+        'clsDataConnection.db.form_hourlywind.Attach(fhourlyWindRecord)
+        'clsDataConnection.db.form_hourlywind.Remove(fhourlyWindRecord)
+        'clsDataConnection.db.SaveChanges()
     End Sub
 
     Public Overrides Sub Clear()
@@ -279,9 +240,7 @@ Public Class ucrHourlyWind
 
         iDirectionElementId = elementId
         clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit"}))
         clsDataDefinition.SetFilter("elementId", "=", iDirectionElementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
@@ -319,9 +278,7 @@ Public Class ucrHourlyWind
 
         iSpeedElementId = elementId
         clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
         clsDataDefinition.SetFilter("elementId", "=", iSpeedElementId, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
@@ -329,7 +286,7 @@ Public Class ucrHourlyWind
             strLowerLimit = If(IsDBNull(dtbl.Rows(0).Item("lowerLimit")), "", dtbl.Rows(0).Item("lowerLimit"))
             strUpperLimit = If(IsDBNull(dtbl.Rows(0).Item("upperLimit")), "", dtbl.Rows(0).Item("upperLimit"))
             If Not IsDBNull(dtbl.Rows(0).Item("qcTotalRequired")) Then
-                bSpeedTotalRequired = If(dtbl.Rows(0).Item("qcTotalRequired") <> "" AndAlso Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
+                bSpeedTotalRequired = If(Val(dtbl.Rows(0).Item("qcTotalRequired") <> 0), True, False)
             End If
         End If
 
@@ -387,7 +344,7 @@ Public Class ucrHourlyWind
     ''' returns true if all direction values are valid and false if any of them is not valid
     ''' </summary>
     ''' <returns></returns>
-    Public Overrides Function ValidateValue() As Boolean
+    Public Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrDirectionSpeedFlag Then
                 If Not DirectCast(ctr, ucrDirectionSpeedFlag).ValidateValue Then
@@ -449,16 +406,17 @@ Public Class ucrHourlyWind
         ucrLinkedDay = ucrDayControl
         ucrLinkedNavigation = ucrNavigationControl
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "=", strLinkedFieldName:="day", bForceValuesAsString:=False)
 
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedDay)
         ucrLinkedNavigation.SetSortBy("entryDatetime")
     End Sub
 
