@@ -34,19 +34,10 @@ Partial Class form_synopticRA1
         Dim Val_Elem102Label As System.Windows.Forms.Label
         Dim Val_Elem103Label As System.Windows.Forms.Label
         Dim Val_Elem105Label As System.Windows.Forms.Label
-        Dim Val_Elem176Label As System.Windows.Forms.Label
         Dim Val_Elem110Label As System.Windows.Forms.Label
-        Dim Val_Elem114Label As System.Windows.Forms.Label
-        Dim Val_Elem112Label As System.Windows.Forms.Label
-        Dim Val_Elem111Label As System.Windows.Forms.Label
         Dim Val_Elem167Label As System.Windows.Forms.Label
         Dim Val_Elem197Label As System.Windows.Forms.Label
         Dim Val_Elem193Label As System.Windows.Forms.Label
-        Dim Val_Elem115Label As System.Windows.Forms.Label
-        Dim Val_Elem177Label As System.Windows.Forms.Label
-        Dim Val_Elem178Label As System.Windows.Forms.Label
-        Dim Val_Elem179Label As System.Windows.Forms.Label
-        Dim Val_Elem180Label As System.Windows.Forms.Label
         Dim Val_Elem119Label As System.Windows.Forms.Label
         Dim Val_Elem116Label As System.Windows.Forms.Label
         Dim Val_Elem117Label As System.Windows.Forms.Label
@@ -59,18 +50,27 @@ Partial Class form_synopticRA1
         Dim Val_Elem124Label As System.Windows.Forms.Label
         Dim Val_Elem125Label As System.Windows.Forms.Label
         Dim Val_Elem126Label As System.Windows.Forms.Label
-        Dim Val_Elem131Label As System.Windows.Forms.Label
-        Dim Val_Elem128Label As System.Windows.Forms.Label
-        Dim Val_Elem129Label As System.Windows.Forms.Label
-        Dim Val_Elem130Label As System.Windows.Forms.Label
         Dim Val_Elem002Label As System.Windows.Forms.Label
         Dim Val_Elem003Label As System.Windows.Forms.Label
         Dim Val_Elem099Label As System.Windows.Forms.Label
         Dim Val_Elem018Label As System.Windows.Forms.Label
         Dim Val_Elem084Label As System.Windows.Forms.Label
         Dim Val_Elem132Label As System.Windows.Forms.Label
+        Dim Val_Elem112Label As System.Windows.Forms.Label
         Dim Val_Elem005Label As System.Windows.Forms.Label
         Dim Val_Elem174Label As System.Windows.Forms.Label
+        Dim Val_Elem176Label As System.Windows.Forms.Label
+        Dim Val_Elem114Label As System.Windows.Forms.Label
+        Dim Val_Elem111Label As System.Windows.Forms.Label
+        Dim Val_Elem115Label As System.Windows.Forms.Label
+        Dim Val_Elem177Label As System.Windows.Forms.Label
+        Dim Val_Elem178Label As System.Windows.Forms.Label
+        Dim Val_Elem179Label As System.Windows.Forms.Label
+        Dim Val_Elem180Label As System.Windows.Forms.Label
+        Dim Val_Elem131Label As System.Windows.Forms.Label
+        Dim Val_Elem128Label As System.Windows.Forms.Label
+        Dim Val_Elem129Label As System.Windows.Forms.Label
+        Dim Val_Elem130Label As System.Windows.Forms.Label
         Dim Val_Elem046Label As System.Windows.Forms.Label
         Me.txtYear = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem106Field005 = New System.Windows.Forms.TextBox()
@@ -84,19 +84,10 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem102Field013 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem103Field014 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem105Field015 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem192Field016 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem110Field017 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem114Field018 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem112Field019 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem111Field020 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem167Field021 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem197Field022 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem193Field023 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem115Field024 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem168Field025 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem169Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem170Field027 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem171Field028 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem119Field029 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem116Field030 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem117Field031 = New System.Windows.Forms.TextBox()
@@ -109,19 +100,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem124Field038 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem125Field039 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem126Field040 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem131Field041 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem128Field042 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem129Field043 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem130Field044 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem002Field045 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem003Field046 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem099Field047 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem018Field048 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem084Field049 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem132Field050 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem005Field051 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem174Field052 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem046Field053 = New System.Windows.Forms.TextBox()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnCommit = New System.Windows.Forms.Button()
@@ -145,11 +129,7 @@ Partial Class form_synopticRA1
         Me.txtFlag102Field062 = New System.Windows.Forms.TextBox()
         Me.txtFlag103Field063 = New System.Windows.Forms.TextBox()
         Me.txtFlag105Field064 = New System.Windows.Forms.TextBox()
-        Me.txtFlag192Field065 = New System.Windows.Forms.TextBox()
         Me.txtFlag110Field066 = New System.Windows.Forms.TextBox()
-        Me.txtFlag114Field067 = New System.Windows.Forms.TextBox()
-        Me.txtFlag112Field068 = New System.Windows.Forms.TextBox()
-        Me.txtFlag111Field069 = New System.Windows.Forms.TextBox()
         Me.txtFlag122Field085 = New System.Windows.Forms.TextBox()
         Me.txtFlag121Field084 = New System.Windows.Forms.TextBox()
         Me.txtFlag120Field083 = New System.Windows.Forms.TextBox()
@@ -158,30 +138,18 @@ Partial Class form_synopticRA1
         Me.txtFlag117Field080 = New System.Windows.Forms.TextBox()
         Me.txtFlag116Field079 = New System.Windows.Forms.TextBox()
         Me.txtFlag119Field078 = New System.Windows.Forms.TextBox()
-        Me.txtFlag180Field077 = New System.Windows.Forms.TextBox()
-        Me.txtFlag179Field076 = New System.Windows.Forms.TextBox()
-        Me.txtFlag178Field075 = New System.Windows.Forms.TextBox()
-        Me.txtFlag168Field074 = New System.Windows.Forms.TextBox()
-        Me.txtFlag115Field073 = New System.Windows.Forms.TextBox()
         Me.txtFlag197Field071 = New System.Windows.Forms.TextBox()
         Me.txtFlag167Field070 = New System.Windows.Forms.TextBox()
-        Me.txtFlag174Field101 = New System.Windows.Forms.TextBox()
-        Me.txtFlag005Field100 = New System.Windows.Forms.TextBox()
         Me.txtFlag132Field099 = New System.Windows.Forms.TextBox()
         Me.txtFlag084Field098 = New System.Windows.Forms.TextBox()
         Me.txtFlag018Field097 = New System.Windows.Forms.TextBox()
         Me.txtFlag099Field096 = New System.Windows.Forms.TextBox()
         Me.txtFlag003Field095 = New System.Windows.Forms.TextBox()
         Me.txtFlag002Field094 = New System.Windows.Forms.TextBox()
-        Me.txtFlag130Field093 = New System.Windows.Forms.TextBox()
-        Me.txtFlag129Field092 = New System.Windows.Forms.TextBox()
-        Me.txtFlag128Field091 = New System.Windows.Forms.TextBox()
-        Me.txtFlag131Field090 = New System.Windows.Forms.TextBox()
         Me.txtFlag126Field089 = New System.Windows.Forms.TextBox()
         Me.txtFlag125Field088 = New System.Windows.Forms.TextBox()
         Me.txtFlag124Field087 = New System.Windows.Forms.TextBox()
         Me.txtFlag127Field086 = New System.Windows.Forms.TextBox()
-        Me.txtFlag046Field102 = New System.Windows.Forms.TextBox()
         Me.cboHour = New System.Windows.Forms.ComboBox()
         Me.cboDay = New System.Windows.Forms.ComboBox()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
@@ -197,6 +165,38 @@ Partial Class form_synopticRA1
         Me.btnTDCF = New System.Windows.Forms.Button()
         Me.txtFlag193Field072 = New System.Windows.Forms.TextBox()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
+        Me.txtVal_Elem112Field019 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem005Field051 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem174Field052 = New System.Windows.Forms.TextBox()
+        Me.txtFlag112Field068 = New System.Windows.Forms.TextBox()
+        Me.txtFlag005Field100 = New System.Windows.Forms.TextBox()
+        Me.txtFlag174Field101 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem192Field016 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem114Field018 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem111Field020 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem115Field024 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem168Field025 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem169Field026 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem170Field027 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem171Field028 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem131Field041 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem128Field042 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem129Field043 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem130Field044 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem046Field053 = New System.Windows.Forms.TextBox()
+        Me.txtFlag192Field065 = New System.Windows.Forms.TextBox()
+        Me.txtFlag114Field067 = New System.Windows.Forms.TextBox()
+        Me.txtFlag111Field069 = New System.Windows.Forms.TextBox()
+        Me.txtFlag115Field073 = New System.Windows.Forms.TextBox()
+        Me.txtFlag168Field074 = New System.Windows.Forms.TextBox()
+        Me.txtFlag178Field075 = New System.Windows.Forms.TextBox()
+        Me.txtFlag179Field076 = New System.Windows.Forms.TextBox()
+        Me.txtFlag180Field077 = New System.Windows.Forms.TextBox()
+        Me.txtFlag131Field090 = New System.Windows.Forms.TextBox()
+        Me.txtFlag128Field091 = New System.Windows.Forms.TextBox()
+        Me.txtFlag129Field092 = New System.Windows.Forms.TextBox()
+        Me.txtFlag130Field093 = New System.Windows.Forms.TextBox()
+        Me.txtFlag046Field102 = New System.Windows.Forms.TextBox()
         YyyyLabel = New System.Windows.Forms.Label()
         Val_Elem106Label = New System.Windows.Forms.Label()
         Val_Elem107Label = New System.Windows.Forms.Label()
@@ -209,19 +209,10 @@ Partial Class form_synopticRA1
         Val_Elem102Label = New System.Windows.Forms.Label()
         Val_Elem103Label = New System.Windows.Forms.Label()
         Val_Elem105Label = New System.Windows.Forms.Label()
-        Val_Elem176Label = New System.Windows.Forms.Label()
         Val_Elem110Label = New System.Windows.Forms.Label()
-        Val_Elem114Label = New System.Windows.Forms.Label()
-        Val_Elem112Label = New System.Windows.Forms.Label()
-        Val_Elem111Label = New System.Windows.Forms.Label()
         Val_Elem167Label = New System.Windows.Forms.Label()
         Val_Elem197Label = New System.Windows.Forms.Label()
         Val_Elem193Label = New System.Windows.Forms.Label()
-        Val_Elem115Label = New System.Windows.Forms.Label()
-        Val_Elem177Label = New System.Windows.Forms.Label()
-        Val_Elem178Label = New System.Windows.Forms.Label()
-        Val_Elem179Label = New System.Windows.Forms.Label()
-        Val_Elem180Label = New System.Windows.Forms.Label()
         Val_Elem119Label = New System.Windows.Forms.Label()
         Val_Elem116Label = New System.Windows.Forms.Label()
         Val_Elem117Label = New System.Windows.Forms.Label()
@@ -234,18 +225,27 @@ Partial Class form_synopticRA1
         Val_Elem124Label = New System.Windows.Forms.Label()
         Val_Elem125Label = New System.Windows.Forms.Label()
         Val_Elem126Label = New System.Windows.Forms.Label()
-        Val_Elem131Label = New System.Windows.Forms.Label()
-        Val_Elem128Label = New System.Windows.Forms.Label()
-        Val_Elem129Label = New System.Windows.Forms.Label()
-        Val_Elem130Label = New System.Windows.Forms.Label()
         Val_Elem002Label = New System.Windows.Forms.Label()
         Val_Elem003Label = New System.Windows.Forms.Label()
         Val_Elem099Label = New System.Windows.Forms.Label()
         Val_Elem018Label = New System.Windows.Forms.Label()
         Val_Elem084Label = New System.Windows.Forms.Label()
         Val_Elem132Label = New System.Windows.Forms.Label()
+        Val_Elem112Label = New System.Windows.Forms.Label()
         Val_Elem005Label = New System.Windows.Forms.Label()
         Val_Elem174Label = New System.Windows.Forms.Label()
+        Val_Elem176Label = New System.Windows.Forms.Label()
+        Val_Elem114Label = New System.Windows.Forms.Label()
+        Val_Elem111Label = New System.Windows.Forms.Label()
+        Val_Elem115Label = New System.Windows.Forms.Label()
+        Val_Elem177Label = New System.Windows.Forms.Label()
+        Val_Elem178Label = New System.Windows.Forms.Label()
+        Val_Elem179Label = New System.Windows.Forms.Label()
+        Val_Elem180Label = New System.Windows.Forms.Label()
+        Val_Elem131Label = New System.Windows.Forms.Label()
+        Val_Elem128Label = New System.Windows.Forms.Label()
+        Val_Elem129Label = New System.Windows.Forms.Label()
+        Val_Elem130Label = New System.Windows.Forms.Label()
         Val_Elem046Label = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -358,15 +358,6 @@ Partial Class form_synopticRA1
         Val_Elem105Label.TabIndex = 131
         Val_Elem105Label.Text = "Relative Humidity-U"
         '
-        'Val_Elem176Label
-        '
-        Val_Elem176Label.AutoSize = True
-        Val_Elem176Label.Location = New System.Drawing.Point(21, 367)
-        Val_Elem176Label.Name = "Val_Elem176Label"
-        Val_Elem176Label.Size = New System.Drawing.Size(92, 13)
-        Val_Elem176Label.TabIndex = 133
-        Val_Elem176Label.Text = "Low Cloud Hght-h"
-        '
         'Val_Elem110Label
         '
         Val_Elem110Label.AutoSize = True
@@ -375,33 +366,6 @@ Partial Class form_synopticRA1
         Val_Elem110Label.Size = New System.Drawing.Size(110, 13)
         Val_Elem110Label.TabIndex = 90
         Val_Elem110Label.Text = "Horizontal Visibility-VV"
-        '
-        'Val_Elem114Label
-        '
-        Val_Elem114Label.AutoSize = True
-        Val_Elem114Label.Location = New System.Drawing.Point(20, 392)
-        Val_Elem114Label.Name = "Val_Elem114Label"
-        Val_Elem114Label.Size = New System.Drawing.Size(106, 13)
-        Val_Elem114Label.TabIndex = 91
-        Val_Elem114Label.Text = "Total Cloud Cover- N"
-        '
-        'Val_Elem112Label
-        '
-        Val_Elem112Label.AutoSize = True
-        Val_Elem112Label.Location = New System.Drawing.Point(519, 342)
-        Val_Elem112Label.Name = "Val_Elem112Label"
-        Val_Elem112Label.Size = New System.Drawing.Size(92, 13)
-        Val_Elem112Label.TabIndex = 99
-        Val_Elem112Label.Text = "Wind Direction-dd"
-        '
-        'Val_Elem111Label
-        '
-        Val_Elem111Label.AutoSize = True
-        Val_Elem111Label.Location = New System.Drawing.Point(519, 367)
-        Val_Elem111Label.Name = "Val_Elem111Label"
-        Val_Elem111Label.Size = New System.Drawing.Size(84, 13)
-        Val_Elem111Label.TabIndex = 101
-        Val_Elem111Label.Text = "Wind Speed - fff"
         '
         'Val_Elem167Label
         '
@@ -429,51 +393,6 @@ Partial Class form_synopticRA1
         Val_Elem193Label.Size = New System.Drawing.Size(50, 13)
         Val_Elem193Label.TabIndex = 147
         Val_Elem193Label.Text = "PastWx2"
-        '
-        'Val_Elem115Label
-        '
-        Val_Elem115Label.AutoSize = True
-        Val_Elem115Label.Location = New System.Drawing.Point(20, 417)
-        Val_Elem115Label.Name = "Val_Elem115Label"
-        Val_Elem115Label.Size = New System.Drawing.Size(103, 13)
-        Val_Elem115Label.TabIndex = 149
-        Val_Elem115Label.Text = "Vertical Significance"
-        '
-        'Val_Elem177Label
-        '
-        Val_Elem177Label.AutoSize = True
-        Val_Elem177Label.Location = New System.Drawing.Point(20, 442)
-        Val_Elem177Label.Name = "Val_Elem177Label"
-        Val_Elem177Label.Size = New System.Drawing.Size(135, 13)
-        Val_Elem177Label.TabIndex = 151
-        Val_Elem177Label.Text = "Low Lvl Clouds Amount-Nh"
-        '
-        'Val_Elem178Label
-        '
-        Val_Elem178Label.AutoSize = True
-        Val_Elem178Label.Location = New System.Drawing.Point(20, 467)
-        Val_Elem178Label.Name = "Val_Elem178Label"
-        Val_Elem178Label.Size = New System.Drawing.Size(122, 13)
-        Val_Elem178Label.TabIndex = 153
-        Val_Elem178Label.Text = "Low Lvl Clouds Type-CL"
-        '
-        'Val_Elem179Label
-        '
-        Val_Elem179Label.AutoSize = True
-        Val_Elem179Label.Location = New System.Drawing.Point(20, 492)
-        Val_Elem179Label.Name = "Val_Elem179Label"
-        Val_Elem179Label.Size = New System.Drawing.Size(142, 13)
-        Val_Elem179Label.TabIndex = 155
-        Val_Elem179Label.Text = "Medium Lvl Clouds Type-CM"
-        '
-        'Val_Elem180Label
-        '
-        Val_Elem180Label.AutoSize = True
-        Val_Elem180Label.Location = New System.Drawing.Point(20, 517)
-        Val_Elem180Label.Name = "Val_Elem180Label"
-        Val_Elem180Label.Size = New System.Drawing.Size(126, 13)
-        Val_Elem180Label.TabIndex = 157
-        Val_Elem180Label.Text = "High Lvl Clouds Type-CH"
         '
         'Val_Elem119Label
         '
@@ -583,42 +502,6 @@ Partial Class form_synopticRA1
         Val_Elem126Label.TabIndex = 81
         Val_Elem126Label.Text = "Cloud Ht Lvl3-HsHs3"
         '
-        'Val_Elem131Label
-        '
-        Val_Elem131Label.AutoSize = True
-        Val_Elem131Label.Location = New System.Drawing.Point(278, 367)
-        Val_Elem131Label.Name = "Val_Elem131Label"
-        Val_Elem131Label.Size = New System.Drawing.Size(112, 13)
-        Val_Elem131Label.TabIndex = 83
-        Val_Elem131Label.Text = "Vertical Significance 4"
-        '
-        'Val_Elem128Label
-        '
-        Val_Elem128Label.AutoSize = True
-        Val_Elem128Label.Location = New System.Drawing.Point(289, 392)
-        Val_Elem128Label.Name = "Val_Elem128Label"
-        Val_Elem128Label.Size = New System.Drawing.Size(95, 13)
-        Val_Elem128Label.TabIndex = 85
-        Val_Elem128Label.Text = "Cloud Amt Lvl4-N4"
-        '
-        'Val_Elem129Label
-        '
-        Val_Elem129Label.AutoSize = True
-        Val_Elem129Label.Location = New System.Drawing.Point(289, 417)
-        Val_Elem129Label.Name = "Val_Elem129Label"
-        Val_Elem129Label.Size = New System.Drawing.Size(100, 13)
-        Val_Elem129Label.TabIndex = 87
-        Val_Elem129Label.Text = "Cloud Type Lvl4-C4"
-        '
-        'Val_Elem130Label
-        '
-        Val_Elem130Label.AutoSize = True
-        Val_Elem130Label.Location = New System.Drawing.Point(289, 442)
-        Val_Elem130Label.Name = "Val_Elem130Label"
-        Val_Elem130Label.Size = New System.Drawing.Size(104, 13)
-        Val_Elem130Label.TabIndex = 89
-        Val_Elem130Label.Text = "Cloud Ht Lvl4-Hshs4"
-        '
         'Val_Elem002Label
         '
         Val_Elem002Label.AutoSize = True
@@ -672,33 +555,6 @@ Partial Class form_synopticRA1
         Val_Elem132Label.Size = New System.Drawing.Size(48, 13)
         Val_Elem132Label.TabIndex = 101
         Val_Elem132Label.Text = "SSS-1Hr"
-        '
-        'Val_Elem005Label
-        '
-        Val_Elem005Label.AutoSize = True
-        Val_Elem005Label.Location = New System.Drawing.Point(519, 292)
-        Val_Elem005Label.Name = "Val_Elem005Label"
-        Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
-        Val_Elem005Label.TabIndex = 103
-        Val_Elem005Label.Text = "Precip-24Hr"
-        '
-        'Val_Elem174Label
-        '
-        Val_Elem174Label.AutoSize = True
-        Val_Elem174Label.Location = New System.Drawing.Point(519, 317)
-        Val_Elem174Label.Name = "Val_Elem174Label"
-        Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
-        Val_Elem174Label.TabIndex = 105
-        Val_Elem174Label.Text = "Precip-3Hr"
-        '
-        'Val_Elem046Label
-        '
-        Val_Elem046Label.AutoSize = True
-        Val_Elem046Label.Location = New System.Drawing.Point(519, 392)
-        Val_Elem046Label.Name = "Val_Elem046Label"
-        Val_Elem046Label.Size = New System.Drawing.Size(81, 13)
-        Val_Elem046Label.TabIndex = 107
-        Val_Elem046Label.Text = "Insolation - Rad"
         '
         'txtYear
         '
@@ -786,40 +642,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem105Field015.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem105Field015.TabIndex = 15
         '
-        'txtVal_Elem192Field016
-        '
-        Me.txtVal_Elem192Field016.Location = New System.Drawing.Point(165, 363)
-        Me.txtVal_Elem192Field016.Name = "txtVal_Elem192Field016"
-        Me.txtVal_Elem192Field016.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem192Field016.TabIndex = 17
-        '
         'txtVal_Elem110Field017
         '
         Me.txtVal_Elem110Field017.Location = New System.Drawing.Point(164, 338)
         Me.txtVal_Elem110Field017.Name = "txtVal_Elem110Field017"
         Me.txtVal_Elem110Field017.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem110Field017.TabIndex = 16
-        '
-        'txtVal_Elem114Field018
-        '
-        Me.txtVal_Elem114Field018.Location = New System.Drawing.Point(164, 388)
-        Me.txtVal_Elem114Field018.Name = "txtVal_Elem114Field018"
-        Me.txtVal_Elem114Field018.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem114Field018.TabIndex = 18
-        '
-        'txtVal_Elem112Field019
-        '
-        Me.txtVal_Elem112Field019.Location = New System.Drawing.Point(617, 338)
-        Me.txtVal_Elem112Field019.Name = "txtVal_Elem112Field019"
-        Me.txtVal_Elem112Field019.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem112Field019.TabIndex = 52
-        '
-        'txtVal_Elem111Field020
-        '
-        Me.txtVal_Elem111Field020.Location = New System.Drawing.Point(617, 363)
-        Me.txtVal_Elem111Field020.Name = "txtVal_Elem111Field020"
-        Me.txtVal_Elem111Field020.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem111Field020.TabIndex = 53
         '
         'txtVal_Elem167Field021
         '
@@ -841,41 +669,6 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem193Field023.Name = "txtVal_Elem193Field023"
         Me.txtVal_Elem193Field023.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem193Field023.TabIndex = 43
-        '
-        'txtVal_Elem115Field024
-        '
-        Me.txtVal_Elem115Field024.Location = New System.Drawing.Point(165, 413)
-        Me.txtVal_Elem115Field024.Name = "txtVal_Elem115Field024"
-        Me.txtVal_Elem115Field024.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem115Field024.TabIndex = 19
-        '
-        'txtVal_Elem168Field025
-        '
-        Me.txtVal_Elem168Field025.Location = New System.Drawing.Point(165, 438)
-        Me.txtVal_Elem168Field025.Name = "txtVal_Elem168Field025"
-        Me.txtVal_Elem168Field025.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem168Field025.TabIndex = 20
-        '
-        'txtVal_Elem169Field026
-        '
-        Me.txtVal_Elem169Field026.Location = New System.Drawing.Point(165, 463)
-        Me.txtVal_Elem169Field026.Name = "txtVal_Elem169Field026"
-        Me.txtVal_Elem169Field026.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem169Field026.TabIndex = 22
-        '
-        'txtVal_Elem170Field027
-        '
-        Me.txtVal_Elem170Field027.Location = New System.Drawing.Point(165, 488)
-        Me.txtVal_Elem170Field027.Name = "txtVal_Elem170Field027"
-        Me.txtVal_Elem170Field027.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem170Field027.TabIndex = 23
-        '
-        'txtVal_Elem171Field028
-        '
-        Me.txtVal_Elem171Field028.Location = New System.Drawing.Point(165, 513)
-        Me.txtVal_Elem171Field028.Name = "txtVal_Elem171Field028"
-        Me.txtVal_Elem171Field028.Size = New System.Drawing.Size(50, 20)
-        Me.txtVal_Elem171Field028.TabIndex = 24
         '
         'txtVal_Elem119Field029
         '
@@ -961,34 +754,6 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem126Field040.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem126Field040.TabIndex = 36
         '
-        'txtVal_Elem131Field041
-        '
-        Me.txtVal_Elem131Field041.Location = New System.Drawing.Point(396, 363)
-        Me.txtVal_Elem131Field041.Name = "txtVal_Elem131Field041"
-        Me.txtVal_Elem131Field041.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem131Field041.TabIndex = 37
-        '
-        'txtVal_Elem128Field042
-        '
-        Me.txtVal_Elem128Field042.Location = New System.Drawing.Point(396, 388)
-        Me.txtVal_Elem128Field042.Name = "txtVal_Elem128Field042"
-        Me.txtVal_Elem128Field042.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem128Field042.TabIndex = 38
-        '
-        'txtVal_Elem129Field043
-        '
-        Me.txtVal_Elem129Field043.Location = New System.Drawing.Point(396, 413)
-        Me.txtVal_Elem129Field043.Name = "txtVal_Elem129Field043"
-        Me.txtVal_Elem129Field043.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem129Field043.TabIndex = 39
-        '
-        'txtVal_Elem130Field044
-        '
-        Me.txtVal_Elem130Field044.Location = New System.Drawing.Point(396, 438)
-        Me.txtVal_Elem130Field044.Name = "txtVal_Elem130Field044"
-        Me.txtVal_Elem130Field044.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem130Field044.TabIndex = 40
-        '
         'txtVal_Elem002Field045
         '
         Me.txtVal_Elem002Field045.Location = New System.Drawing.Point(617, 138)
@@ -1030,27 +795,6 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem132Field050.Name = "txtVal_Elem132Field050"
         Me.txtVal_Elem132Field050.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem132Field050.TabIndex = 49
-        '
-        'txtVal_Elem005Field051
-        '
-        Me.txtVal_Elem005Field051.Location = New System.Drawing.Point(617, 288)
-        Me.txtVal_Elem005Field051.Name = "txtVal_Elem005Field051"
-        Me.txtVal_Elem005Field051.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem005Field051.TabIndex = 50
-        '
-        'txtVal_Elem174Field052
-        '
-        Me.txtVal_Elem174Field052.Location = New System.Drawing.Point(617, 313)
-        Me.txtVal_Elem174Field052.Name = "txtVal_Elem174Field052"
-        Me.txtVal_Elem174Field052.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem174Field052.TabIndex = 51
-        '
-        'txtVal_Elem046Field053
-        '
-        Me.txtVal_Elem046Field053.Location = New System.Drawing.Point(617, 388)
-        Me.txtVal_Elem046Field053.Name = "txtVal_Elem046Field053"
-        Me.txtVal_Elem046Field053.Size = New System.Drawing.Size(48, 20)
-        Me.txtVal_Elem046Field053.TabIndex = 54
         '
         'btnClose
         '
@@ -1252,14 +996,6 @@ Partial Class form_synopticRA1
         Me.txtFlag105Field064.TabIndex = 141
         Me.txtFlag105Field064.TabStop = False
         '
-        'txtFlag192Field065
-        '
-        Me.txtFlag192Field065.Location = New System.Drawing.Point(221, 363)
-        Me.txtFlag192Field065.Name = "txtFlag192Field065"
-        Me.txtFlag192Field065.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag192Field065.TabIndex = 142
-        Me.txtFlag192Field065.TabStop = False
-        '
         'txtFlag110Field066
         '
         Me.txtFlag110Field066.Location = New System.Drawing.Point(220, 338)
@@ -1267,30 +1003,6 @@ Partial Class form_synopticRA1
         Me.txtFlag110Field066.Size = New System.Drawing.Size(26, 20)
         Me.txtFlag110Field066.TabIndex = 143
         Me.txtFlag110Field066.TabStop = False
-        '
-        'txtFlag114Field067
-        '
-        Me.txtFlag114Field067.Location = New System.Drawing.Point(220, 388)
-        Me.txtFlag114Field067.Name = "txtFlag114Field067"
-        Me.txtFlag114Field067.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag114Field067.TabIndex = 144
-        Me.txtFlag114Field067.TabStop = False
-        '
-        'txtFlag112Field068
-        '
-        Me.txtFlag112Field068.Location = New System.Drawing.Point(671, 338)
-        Me.txtFlag112Field068.Name = "txtFlag112Field068"
-        Me.txtFlag112Field068.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag112Field068.TabIndex = 145
-        Me.txtFlag112Field068.TabStop = False
-        '
-        'txtFlag111Field069
-        '
-        Me.txtFlag111Field069.Location = New System.Drawing.Point(671, 363)
-        Me.txtFlag111Field069.Name = "txtFlag111Field069"
-        Me.txtFlag111Field069.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag111Field069.TabIndex = 146
-        Me.txtFlag111Field069.TabStop = False
         '
         'txtFlag122Field085
         '
@@ -1356,46 +1068,6 @@ Partial Class form_synopticRA1
         Me.txtFlag119Field078.TabIndex = 155
         Me.txtFlag119Field078.TabStop = False
         '
-        'txtFlag180Field077
-        '
-        Me.txtFlag180Field077.Location = New System.Drawing.Point(221, 513)
-        Me.txtFlag180Field077.Name = "txtFlag180Field077"
-        Me.txtFlag180Field077.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag180Field077.TabIndex = 154
-        Me.txtFlag180Field077.TabStop = False
-        '
-        'txtFlag179Field076
-        '
-        Me.txtFlag179Field076.Location = New System.Drawing.Point(221, 488)
-        Me.txtFlag179Field076.Name = "txtFlag179Field076"
-        Me.txtFlag179Field076.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag179Field076.TabIndex = 153
-        Me.txtFlag179Field076.TabStop = False
-        '
-        'txtFlag178Field075
-        '
-        Me.txtFlag178Field075.Location = New System.Drawing.Point(221, 463)
-        Me.txtFlag178Field075.Name = "txtFlag178Field075"
-        Me.txtFlag178Field075.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag178Field075.TabIndex = 152
-        Me.txtFlag178Field075.TabStop = False
-        '
-        'txtFlag168Field074
-        '
-        Me.txtFlag168Field074.Location = New System.Drawing.Point(221, 438)
-        Me.txtFlag168Field074.Name = "txtFlag168Field074"
-        Me.txtFlag168Field074.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag168Field074.TabIndex = 151
-        Me.txtFlag168Field074.TabStop = False
-        '
-        'txtFlag115Field073
-        '
-        Me.txtFlag115Field073.Location = New System.Drawing.Point(221, 413)
-        Me.txtFlag115Field073.Name = "txtFlag115Field073"
-        Me.txtFlag115Field073.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag115Field073.TabIndex = 150
-        Me.txtFlag115Field073.TabStop = False
-        '
         'txtFlag197Field071
         '
         Me.txtFlag197Field071.Location = New System.Drawing.Point(671, 88)
@@ -1411,22 +1083,6 @@ Partial Class form_synopticRA1
         Me.txtFlag167Field070.Size = New System.Drawing.Size(26, 20)
         Me.txtFlag167Field070.TabIndex = 147
         Me.txtFlag167Field070.TabStop = False
-        '
-        'txtFlag174Field101
-        '
-        Me.txtFlag174Field101.Location = New System.Drawing.Point(671, 313)
-        Me.txtFlag174Field101.Name = "txtFlag174Field101"
-        Me.txtFlag174Field101.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag174Field101.TabIndex = 178
-        Me.txtFlag174Field101.TabStop = False
-        '
-        'txtFlag005Field100
-        '
-        Me.txtFlag005Field100.Location = New System.Drawing.Point(671, 288)
-        Me.txtFlag005Field100.Name = "txtFlag005Field100"
-        Me.txtFlag005Field100.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag005Field100.TabIndex = 177
-        Me.txtFlag005Field100.TabStop = False
         '
         'txtFlag132Field099
         '
@@ -1476,38 +1132,6 @@ Partial Class form_synopticRA1
         Me.txtFlag002Field094.TabIndex = 171
         Me.txtFlag002Field094.TabStop = False
         '
-        'txtFlag130Field093
-        '
-        Me.txtFlag130Field093.Location = New System.Drawing.Point(450, 438)
-        Me.txtFlag130Field093.Name = "txtFlag130Field093"
-        Me.txtFlag130Field093.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag130Field093.TabIndex = 170
-        Me.txtFlag130Field093.TabStop = False
-        '
-        'txtFlag129Field092
-        '
-        Me.txtFlag129Field092.Location = New System.Drawing.Point(450, 413)
-        Me.txtFlag129Field092.Name = "txtFlag129Field092"
-        Me.txtFlag129Field092.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag129Field092.TabIndex = 169
-        Me.txtFlag129Field092.TabStop = False
-        '
-        'txtFlag128Field091
-        '
-        Me.txtFlag128Field091.Location = New System.Drawing.Point(450, 388)
-        Me.txtFlag128Field091.Name = "txtFlag128Field091"
-        Me.txtFlag128Field091.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag128Field091.TabIndex = 168
-        Me.txtFlag128Field091.TabStop = False
-        '
-        'txtFlag131Field090
-        '
-        Me.txtFlag131Field090.Location = New System.Drawing.Point(450, 363)
-        Me.txtFlag131Field090.Name = "txtFlag131Field090"
-        Me.txtFlag131Field090.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag131Field090.TabIndex = 167
-        Me.txtFlag131Field090.TabStop = False
-        '
         'txtFlag126Field089
         '
         Me.txtFlag126Field089.Location = New System.Drawing.Point(450, 338)
@@ -1539,14 +1163,6 @@ Partial Class form_synopticRA1
         Me.txtFlag127Field086.Size = New System.Drawing.Size(26, 20)
         Me.txtFlag127Field086.TabIndex = 163
         Me.txtFlag127Field086.TabStop = False
-        '
-        'txtFlag046Field102
-        '
-        Me.txtFlag046Field102.Location = New System.Drawing.Point(671, 388)
-        Me.txtFlag046Field102.Name = "txtFlag046Field102"
-        Me.txtFlag046Field102.Size = New System.Drawing.Size(26, 20)
-        Me.txtFlag046Field102.TabIndex = 179
-        Me.txtFlag046Field102.TabStop = False
         '
         'cboHour
         '
@@ -1682,6 +1298,390 @@ Partial Class form_synopticRA1
         Me.chkRepeatEntry.TabIndex = 663
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
+        'txtVal_Elem112Field019
+        '
+        Me.txtVal_Elem112Field019.Location = New System.Drawing.Point(617, 338)
+        Me.txtVal_Elem112Field019.Name = "txtVal_Elem112Field019"
+        Me.txtVal_Elem112Field019.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem112Field019.TabIndex = 52
+        '
+        'Val_Elem112Label
+        '
+        Val_Elem112Label.AutoSize = True
+        Val_Elem112Label.Location = New System.Drawing.Point(519, 342)
+        Val_Elem112Label.Name = "Val_Elem112Label"
+        Val_Elem112Label.Size = New System.Drawing.Size(92, 13)
+        Val_Elem112Label.TabIndex = 99
+        Val_Elem112Label.Text = "Wind Direction-dd"
+        '
+        'txtVal_Elem005Field051
+        '
+        Me.txtVal_Elem005Field051.Location = New System.Drawing.Point(617, 288)
+        Me.txtVal_Elem005Field051.Name = "txtVal_Elem005Field051"
+        Me.txtVal_Elem005Field051.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem005Field051.TabIndex = 50
+        '
+        'Val_Elem005Label
+        '
+        Val_Elem005Label.AutoSize = True
+        Val_Elem005Label.Location = New System.Drawing.Point(519, 292)
+        Val_Elem005Label.Name = "Val_Elem005Label"
+        Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
+        Val_Elem005Label.TabIndex = 103
+        Val_Elem005Label.Text = "Precip-24Hr"
+        '
+        'txtVal_Elem174Field052
+        '
+        Me.txtVal_Elem174Field052.Location = New System.Drawing.Point(617, 313)
+        Me.txtVal_Elem174Field052.Name = "txtVal_Elem174Field052"
+        Me.txtVal_Elem174Field052.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem174Field052.TabIndex = 51
+        '
+        'Val_Elem174Label
+        '
+        Val_Elem174Label.AutoSize = True
+        Val_Elem174Label.Location = New System.Drawing.Point(519, 317)
+        Val_Elem174Label.Name = "Val_Elem174Label"
+        Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
+        Val_Elem174Label.TabIndex = 105
+        Val_Elem174Label.Text = "Precip-3Hr"
+        '
+        'txtFlag112Field068
+        '
+        Me.txtFlag112Field068.Location = New System.Drawing.Point(671, 338)
+        Me.txtFlag112Field068.Name = "txtFlag112Field068"
+        Me.txtFlag112Field068.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag112Field068.TabIndex = 145
+        Me.txtFlag112Field068.TabStop = False
+        '
+        'txtFlag005Field100
+        '
+        Me.txtFlag005Field100.Location = New System.Drawing.Point(671, 288)
+        Me.txtFlag005Field100.Name = "txtFlag005Field100"
+        Me.txtFlag005Field100.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag005Field100.TabIndex = 177
+        Me.txtFlag005Field100.TabStop = False
+        '
+        'txtFlag174Field101
+        '
+        Me.txtFlag174Field101.Location = New System.Drawing.Point(671, 313)
+        Me.txtFlag174Field101.Name = "txtFlag174Field101"
+        Me.txtFlag174Field101.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag174Field101.TabIndex = 178
+        Me.txtFlag174Field101.TabStop = False
+        '
+        'txtVal_Elem192Field016
+        '
+        Me.txtVal_Elem192Field016.Location = New System.Drawing.Point(165, 363)
+        Me.txtVal_Elem192Field016.Name = "txtVal_Elem192Field016"
+        Me.txtVal_Elem192Field016.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem192Field016.TabIndex = 17
+        '
+        'Val_Elem176Label
+        '
+        Val_Elem176Label.AutoSize = True
+        Val_Elem176Label.Location = New System.Drawing.Point(21, 367)
+        Val_Elem176Label.Name = "Val_Elem176Label"
+        Val_Elem176Label.Size = New System.Drawing.Size(92, 13)
+        Val_Elem176Label.TabIndex = 133
+        Val_Elem176Label.Text = "Low Cloud Hght-h"
+        '
+        'txtVal_Elem114Field018
+        '
+        Me.txtVal_Elem114Field018.Location = New System.Drawing.Point(164, 388)
+        Me.txtVal_Elem114Field018.Name = "txtVal_Elem114Field018"
+        Me.txtVal_Elem114Field018.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem114Field018.TabIndex = 18
+        '
+        'Val_Elem114Label
+        '
+        Val_Elem114Label.AutoSize = True
+        Val_Elem114Label.Location = New System.Drawing.Point(20, 392)
+        Val_Elem114Label.Name = "Val_Elem114Label"
+        Val_Elem114Label.Size = New System.Drawing.Size(106, 13)
+        Val_Elem114Label.TabIndex = 91
+        Val_Elem114Label.Text = "Total Cloud Cover- N"
+        '
+        'txtVal_Elem111Field020
+        '
+        Me.txtVal_Elem111Field020.Location = New System.Drawing.Point(617, 363)
+        Me.txtVal_Elem111Field020.Name = "txtVal_Elem111Field020"
+        Me.txtVal_Elem111Field020.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem111Field020.TabIndex = 53
+        '
+        'Val_Elem111Label
+        '
+        Val_Elem111Label.AutoSize = True
+        Val_Elem111Label.Location = New System.Drawing.Point(519, 367)
+        Val_Elem111Label.Name = "Val_Elem111Label"
+        Val_Elem111Label.Size = New System.Drawing.Size(84, 13)
+        Val_Elem111Label.TabIndex = 101
+        Val_Elem111Label.Text = "Wind Speed - fff"
+        '
+        'txtVal_Elem115Field024
+        '
+        Me.txtVal_Elem115Field024.Location = New System.Drawing.Point(165, 413)
+        Me.txtVal_Elem115Field024.Name = "txtVal_Elem115Field024"
+        Me.txtVal_Elem115Field024.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem115Field024.TabIndex = 19
+        '
+        'Val_Elem115Label
+        '
+        Val_Elem115Label.AutoSize = True
+        Val_Elem115Label.Location = New System.Drawing.Point(20, 417)
+        Val_Elem115Label.Name = "Val_Elem115Label"
+        Val_Elem115Label.Size = New System.Drawing.Size(103, 13)
+        Val_Elem115Label.TabIndex = 149
+        Val_Elem115Label.Text = "Vertical Significance"
+        '
+        'txtVal_Elem168Field025
+        '
+        Me.txtVal_Elem168Field025.Location = New System.Drawing.Point(165, 438)
+        Me.txtVal_Elem168Field025.Name = "txtVal_Elem168Field025"
+        Me.txtVal_Elem168Field025.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem168Field025.TabIndex = 20
+        '
+        'Val_Elem177Label
+        '
+        Val_Elem177Label.AutoSize = True
+        Val_Elem177Label.Location = New System.Drawing.Point(20, 442)
+        Val_Elem177Label.Name = "Val_Elem177Label"
+        Val_Elem177Label.Size = New System.Drawing.Size(135, 13)
+        Val_Elem177Label.TabIndex = 151
+        Val_Elem177Label.Text = "Low Lvl Clouds Amount-Nh"
+        '
+        'txtVal_Elem169Field026
+        '
+        Me.txtVal_Elem169Field026.Location = New System.Drawing.Point(165, 463)
+        Me.txtVal_Elem169Field026.Name = "txtVal_Elem169Field026"
+        Me.txtVal_Elem169Field026.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem169Field026.TabIndex = 22
+        '
+        'Val_Elem178Label
+        '
+        Val_Elem178Label.AutoSize = True
+        Val_Elem178Label.Location = New System.Drawing.Point(20, 467)
+        Val_Elem178Label.Name = "Val_Elem178Label"
+        Val_Elem178Label.Size = New System.Drawing.Size(122, 13)
+        Val_Elem178Label.TabIndex = 153
+        Val_Elem178Label.Text = "Low Lvl Clouds Type-CL"
+        '
+        'txtVal_Elem170Field027
+        '
+        Me.txtVal_Elem170Field027.Location = New System.Drawing.Point(165, 488)
+        Me.txtVal_Elem170Field027.Name = "txtVal_Elem170Field027"
+        Me.txtVal_Elem170Field027.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem170Field027.TabIndex = 23
+        '
+        'Val_Elem179Label
+        '
+        Val_Elem179Label.AutoSize = True
+        Val_Elem179Label.Location = New System.Drawing.Point(20, 492)
+        Val_Elem179Label.Name = "Val_Elem179Label"
+        Val_Elem179Label.Size = New System.Drawing.Size(142, 13)
+        Val_Elem179Label.TabIndex = 155
+        Val_Elem179Label.Text = "Medium Lvl Clouds Type-CM"
+        '
+        'txtVal_Elem171Field028
+        '
+        Me.txtVal_Elem171Field028.Location = New System.Drawing.Point(165, 513)
+        Me.txtVal_Elem171Field028.Name = "txtVal_Elem171Field028"
+        Me.txtVal_Elem171Field028.Size = New System.Drawing.Size(50, 20)
+        Me.txtVal_Elem171Field028.TabIndex = 24
+        '
+        'Val_Elem180Label
+        '
+        Val_Elem180Label.AutoSize = True
+        Val_Elem180Label.Location = New System.Drawing.Point(20, 517)
+        Val_Elem180Label.Name = "Val_Elem180Label"
+        Val_Elem180Label.Size = New System.Drawing.Size(126, 13)
+        Val_Elem180Label.TabIndex = 157
+        Val_Elem180Label.Text = "High Lvl Clouds Type-CH"
+        '
+        'txtVal_Elem131Field041
+        '
+        Me.txtVal_Elem131Field041.Location = New System.Drawing.Point(396, 363)
+        Me.txtVal_Elem131Field041.Name = "txtVal_Elem131Field041"
+        Me.txtVal_Elem131Field041.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem131Field041.TabIndex = 37
+        '
+        'Val_Elem131Label
+        '
+        Val_Elem131Label.AutoSize = True
+        Val_Elem131Label.Location = New System.Drawing.Point(278, 367)
+        Val_Elem131Label.Name = "Val_Elem131Label"
+        Val_Elem131Label.Size = New System.Drawing.Size(112, 13)
+        Val_Elem131Label.TabIndex = 83
+        Val_Elem131Label.Text = "Vertical Significance 4"
+        '
+        'txtVal_Elem128Field042
+        '
+        Me.txtVal_Elem128Field042.Location = New System.Drawing.Point(396, 388)
+        Me.txtVal_Elem128Field042.Name = "txtVal_Elem128Field042"
+        Me.txtVal_Elem128Field042.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem128Field042.TabIndex = 38
+        '
+        'Val_Elem128Label
+        '
+        Val_Elem128Label.AutoSize = True
+        Val_Elem128Label.Location = New System.Drawing.Point(289, 392)
+        Val_Elem128Label.Name = "Val_Elem128Label"
+        Val_Elem128Label.Size = New System.Drawing.Size(95, 13)
+        Val_Elem128Label.TabIndex = 85
+        Val_Elem128Label.Text = "Cloud Amt Lvl4-N4"
+        '
+        'txtVal_Elem129Field043
+        '
+        Me.txtVal_Elem129Field043.Location = New System.Drawing.Point(396, 413)
+        Me.txtVal_Elem129Field043.Name = "txtVal_Elem129Field043"
+        Me.txtVal_Elem129Field043.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem129Field043.TabIndex = 39
+        '
+        'Val_Elem129Label
+        '
+        Val_Elem129Label.AutoSize = True
+        Val_Elem129Label.Location = New System.Drawing.Point(289, 417)
+        Val_Elem129Label.Name = "Val_Elem129Label"
+        Val_Elem129Label.Size = New System.Drawing.Size(100, 13)
+        Val_Elem129Label.TabIndex = 87
+        Val_Elem129Label.Text = "Cloud Type Lvl4-C4"
+        '
+        'txtVal_Elem130Field044
+        '
+        Me.txtVal_Elem130Field044.Location = New System.Drawing.Point(396, 438)
+        Me.txtVal_Elem130Field044.Name = "txtVal_Elem130Field044"
+        Me.txtVal_Elem130Field044.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem130Field044.TabIndex = 40
+        '
+        'Val_Elem130Label
+        '
+        Val_Elem130Label.AutoSize = True
+        Val_Elem130Label.Location = New System.Drawing.Point(289, 442)
+        Val_Elem130Label.Name = "Val_Elem130Label"
+        Val_Elem130Label.Size = New System.Drawing.Size(104, 13)
+        Val_Elem130Label.TabIndex = 89
+        Val_Elem130Label.Text = "Cloud Ht Lvl4-Hshs4"
+        '
+        'txtVal_Elem046Field053
+        '
+        Me.txtVal_Elem046Field053.Location = New System.Drawing.Point(617, 388)
+        Me.txtVal_Elem046Field053.Name = "txtVal_Elem046Field053"
+        Me.txtVal_Elem046Field053.Size = New System.Drawing.Size(48, 20)
+        Me.txtVal_Elem046Field053.TabIndex = 54
+        '
+        'Val_Elem046Label
+        '
+        Val_Elem046Label.AutoSize = True
+        Val_Elem046Label.Location = New System.Drawing.Point(519, 392)
+        Val_Elem046Label.Name = "Val_Elem046Label"
+        Val_Elem046Label.Size = New System.Drawing.Size(81, 13)
+        Val_Elem046Label.TabIndex = 107
+        Val_Elem046Label.Text = "Insolation - Rad"
+        '
+        'txtFlag192Field065
+        '
+        Me.txtFlag192Field065.Location = New System.Drawing.Point(221, 363)
+        Me.txtFlag192Field065.Name = "txtFlag192Field065"
+        Me.txtFlag192Field065.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag192Field065.TabIndex = 142
+        Me.txtFlag192Field065.TabStop = False
+        '
+        'txtFlag114Field067
+        '
+        Me.txtFlag114Field067.Location = New System.Drawing.Point(220, 388)
+        Me.txtFlag114Field067.Name = "txtFlag114Field067"
+        Me.txtFlag114Field067.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag114Field067.TabIndex = 144
+        Me.txtFlag114Field067.TabStop = False
+        '
+        'txtFlag111Field069
+        '
+        Me.txtFlag111Field069.Location = New System.Drawing.Point(671, 363)
+        Me.txtFlag111Field069.Name = "txtFlag111Field069"
+        Me.txtFlag111Field069.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag111Field069.TabIndex = 146
+        Me.txtFlag111Field069.TabStop = False
+        '
+        'txtFlag115Field073
+        '
+        Me.txtFlag115Field073.Location = New System.Drawing.Point(221, 413)
+        Me.txtFlag115Field073.Name = "txtFlag115Field073"
+        Me.txtFlag115Field073.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag115Field073.TabIndex = 150
+        Me.txtFlag115Field073.TabStop = False
+        '
+        'txtFlag168Field074
+        '
+        Me.txtFlag168Field074.Location = New System.Drawing.Point(221, 438)
+        Me.txtFlag168Field074.Name = "txtFlag168Field074"
+        Me.txtFlag168Field074.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag168Field074.TabIndex = 151
+        Me.txtFlag168Field074.TabStop = False
+        '
+        'txtFlag178Field075
+        '
+        Me.txtFlag178Field075.Location = New System.Drawing.Point(221, 463)
+        Me.txtFlag178Field075.Name = "txtFlag178Field075"
+        Me.txtFlag178Field075.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag178Field075.TabIndex = 152
+        Me.txtFlag178Field075.TabStop = False
+        '
+        'txtFlag179Field076
+        '
+        Me.txtFlag179Field076.Location = New System.Drawing.Point(221, 488)
+        Me.txtFlag179Field076.Name = "txtFlag179Field076"
+        Me.txtFlag179Field076.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag179Field076.TabIndex = 153
+        Me.txtFlag179Field076.TabStop = False
+        '
+        'txtFlag180Field077
+        '
+        Me.txtFlag180Field077.Location = New System.Drawing.Point(221, 513)
+        Me.txtFlag180Field077.Name = "txtFlag180Field077"
+        Me.txtFlag180Field077.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag180Field077.TabIndex = 154
+        Me.txtFlag180Field077.TabStop = False
+        '
+        'txtFlag131Field090
+        '
+        Me.txtFlag131Field090.Location = New System.Drawing.Point(450, 363)
+        Me.txtFlag131Field090.Name = "txtFlag131Field090"
+        Me.txtFlag131Field090.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag131Field090.TabIndex = 167
+        Me.txtFlag131Field090.TabStop = False
+        '
+        'txtFlag128Field091
+        '
+        Me.txtFlag128Field091.Location = New System.Drawing.Point(450, 388)
+        Me.txtFlag128Field091.Name = "txtFlag128Field091"
+        Me.txtFlag128Field091.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag128Field091.TabIndex = 168
+        Me.txtFlag128Field091.TabStop = False
+        '
+        'txtFlag129Field092
+        '
+        Me.txtFlag129Field092.Location = New System.Drawing.Point(450, 413)
+        Me.txtFlag129Field092.Name = "txtFlag129Field092"
+        Me.txtFlag129Field092.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag129Field092.TabIndex = 169
+        Me.txtFlag129Field092.TabStop = False
+        '
+        'txtFlag130Field093
+        '
+        Me.txtFlag130Field093.Location = New System.Drawing.Point(450, 438)
+        Me.txtFlag130Field093.Name = "txtFlag130Field093"
+        Me.txtFlag130Field093.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag130Field093.TabIndex = 170
+        Me.txtFlag130Field093.TabStop = False
+        '
+        'txtFlag046Field102
+        '
+        Me.txtFlag046Field102.Location = New System.Drawing.Point(671, 388)
+        Me.txtFlag046Field102.Name = "txtFlag046Field102"
+        Me.txtFlag046Field102.Size = New System.Drawing.Size(26, 20)
+        Me.txtFlag046Field102.TabIndex = 179
+        Me.txtFlag046Field102.TabStop = False
         '
         'form_synopticRA1
         '
@@ -1883,19 +1883,10 @@ Partial Class form_synopticRA1
     Friend WithEvents txtVal_Elem102Field013 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem103Field014 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem105Field015 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem192Field016 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem110Field017 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem114Field018 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem112Field019 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem111Field020 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem167Field021 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem197Field022 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem193Field023 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem115Field024 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem168Field025 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem169Field026 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem170Field027 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem171Field028 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem119Field029 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem116Field030 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem117Field031 As System.Windows.Forms.TextBox
@@ -1908,19 +1899,12 @@ Partial Class form_synopticRA1
     Friend WithEvents txtVal_Elem124Field038 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem125Field039 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem126Field040 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem131Field041 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem128Field042 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem129Field043 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem130Field044 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem002Field045 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem003Field046 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem099Field047 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem018Field048 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem084Field049 As System.Windows.Forms.TextBox
     Friend WithEvents txtVal_Elem132Field050 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem005Field051 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem174Field052 As System.Windows.Forms.TextBox
-    Friend WithEvents txtVal_Elem046Field053 As System.Windows.Forms.TextBox
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnClear As System.Windows.Forms.Button
     Friend WithEvents btnCommit As System.Windows.Forms.Button
@@ -1944,11 +1928,7 @@ Partial Class form_synopticRA1
     Friend WithEvents txtFlag102Field062 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag103Field063 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag105Field064 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag192Field065 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag110Field066 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag114Field067 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag112Field068 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag111Field069 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag122Field085 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag121Field084 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag120Field083 As System.Windows.Forms.TextBox
@@ -1957,30 +1937,18 @@ Partial Class form_synopticRA1
     Friend WithEvents txtFlag117Field080 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag116Field079 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag119Field078 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag180Field077 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag179Field076 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag178Field075 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag168Field074 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag115Field073 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag197Field071 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag167Field070 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag174Field101 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag005Field100 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag132Field099 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag084Field098 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag018Field097 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag099Field096 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag003Field095 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag002Field094 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag130Field093 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag129Field092 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag128Field091 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag131Field090 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag126Field089 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag125Field088 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag124Field087 As System.Windows.Forms.TextBox
     Friend WithEvents txtFlag127Field086 As System.Windows.Forms.TextBox
-    Friend WithEvents txtFlag046Field102 As System.Windows.Forms.TextBox
     Friend WithEvents cboHour As System.Windows.Forms.ComboBox
     Friend WithEvents cboDay As System.Windows.Forms.ComboBox
     Friend WithEvents cboMonth As System.Windows.Forms.ComboBox
@@ -1996,5 +1964,36 @@ Partial Class form_synopticRA1
     Friend WithEvents btnTDCF As System.Windows.Forms.Button
     Friend WithEvents txtFlag193Field072 As System.Windows.Forms.TextBox
     Friend WithEvents chkRepeatEntry As System.Windows.Forms.CheckBox
-
+    Friend WithEvents txtVal_Elem112Field019 As TextBox
+    Friend WithEvents txtVal_Elem005Field051 As TextBox
+    Friend WithEvents txtVal_Elem174Field052 As TextBox
+    Friend WithEvents txtFlag112Field068 As TextBox
+    Friend WithEvents txtFlag005Field100 As TextBox
+    Friend WithEvents txtFlag174Field101 As TextBox
+    Friend WithEvents txtVal_Elem192Field016 As TextBox
+    Friend WithEvents txtVal_Elem114Field018 As TextBox
+    Friend WithEvents txtVal_Elem111Field020 As TextBox
+    Friend WithEvents txtVal_Elem115Field024 As TextBox
+    Friend WithEvents txtVal_Elem168Field025 As TextBox
+    Friend WithEvents txtVal_Elem169Field026 As TextBox
+    Friend WithEvents txtVal_Elem170Field027 As TextBox
+    Friend WithEvents txtVal_Elem171Field028 As TextBox
+    Friend WithEvents txtVal_Elem131Field041 As TextBox
+    Friend WithEvents txtVal_Elem128Field042 As TextBox
+    Friend WithEvents txtVal_Elem129Field043 As TextBox
+    Friend WithEvents txtVal_Elem130Field044 As TextBox
+    Friend WithEvents txtVal_Elem046Field053 As TextBox
+    Friend WithEvents txtFlag192Field065 As TextBox
+    Friend WithEvents txtFlag114Field067 As TextBox
+    Friend WithEvents txtFlag111Field069 As TextBox
+    Friend WithEvents txtFlag115Field073 As TextBox
+    Friend WithEvents txtFlag168Field074 As TextBox
+    Friend WithEvents txtFlag178Field075 As TextBox
+    Friend WithEvents txtFlag179Field076 As TextBox
+    Friend WithEvents txtFlag180Field077 As TextBox
+    Friend WithEvents txtFlag131Field090 As TextBox
+    Friend WithEvents txtFlag128Field091 As TextBox
+    Friend WithEvents txtFlag129Field092 As TextBox
+    Friend WithEvents txtFlag130Field093 As TextBox
+    Friend WithEvents txtFlag046Field102 As TextBox
 End Class

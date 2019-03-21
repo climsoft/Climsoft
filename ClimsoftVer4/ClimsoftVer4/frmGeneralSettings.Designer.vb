@@ -22,6 +22,7 @@ Partial Class frmGeneralSettings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtKeyName = New System.Windows.Forms.TextBox()
         Me.txtKeyValue = New System.Windows.Forms.TextBox()
         Me.txtKeyDescription = New System.Windows.Forms.TextBox()
@@ -42,6 +43,8 @@ Partial Class frmGeneralSettings
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.lblGuidelines = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtKeyName
@@ -225,8 +228,11 @@ Partial Class frmGeneralSettings
         Me.lblGuidelines.Name = "lblGuidelines"
         Me.lblGuidelines.Size = New System.Drawing.Size(619, 34)
         Me.lblGuidelines.TabIndex = 663
-        Me.lblGuidelines.Text = "When updating folder location for QC output, you must use forward slash '/'. For " & _
+        Me.lblGuidelines.Text = "When updating folder location for QC output, you must use forward slash '/'. For " &
     "all other folder locations use backslash '\'."
+        '
+        'BindingSource1
+        '
         '
         'frmGeneralSettings
         '
@@ -257,6 +263,7 @@ Partial Class frmGeneralSettings
         Me.MinimizeBox = False
         Me.Name = "frmGeneralSettings"
         Me.Text = "General Settings"
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -281,4 +288,5 @@ Partial Class frmGeneralSettings
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents lblGuidelines As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class
