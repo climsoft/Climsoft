@@ -824,10 +824,22 @@
     <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.Designer.vb">
+      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.Designer.vb">
       <DependentUpon>ucrAgroMet.vb</DependentUpon>
     </Compile>
     <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.Designer.vb">
+      <DependentUpon>ucrCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="station.vb">
@@ -1467,8 +1479,14 @@
     <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewAgroMet.resx">
       <DependentUpon>frmNewAgroMet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewCaribbean.resx">
+      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrAgroMet.resx">
       <DependentUpon>ucrAgroMet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrCaribbean.resx">
+      <DependentUpon>ucrCaribbean.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
