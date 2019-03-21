@@ -694,7 +694,7 @@ Public Class ucrHourly
             AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName(), "=", strLinkedFieldName:=ucrMonth.FieldName(), bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrDay, ucrDay.FieldName(), "=", strLinkedFieldName:=ucrDay.FieldName(), bForceValuesAsString:=False)
 
-            'TODO Set up the other key controls year, Month, Day and check whether lines 704 to 707 and also the possiblity of having multiple key controls
+            'TODO Set up the other key controls year, Month, Day and check whether lines 697 to 707 and also the possiblity of having multiple key controls
 
             AddKeyField(ucrStationSelector.FieldName)
 
