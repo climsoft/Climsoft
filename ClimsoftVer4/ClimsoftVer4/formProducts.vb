@@ -128,10 +128,6 @@ Public Class frmProducts
     '    Next
     'End Function
 
-    Private Sub lstvProducts_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstvProducts.SelectedIndexChanged
-
-    End Sub
-
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Me.Hide()
     End Sub
@@ -149,6 +145,7 @@ Public Class frmProducts
     End Sub
 
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm")
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#products")
+
     End Sub
 End Class

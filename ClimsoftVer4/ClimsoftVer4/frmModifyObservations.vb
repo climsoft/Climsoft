@@ -3,6 +3,11 @@
     Dim recs As New DataSet
     Dim das As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim dbc As New MySql.Data.MySqlClient.MySqlConnection
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "modifyobservations.htm")
+    End Sub
+
     Dim qry As New MySql.Data.MySqlClient.MySqlCommand
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click
