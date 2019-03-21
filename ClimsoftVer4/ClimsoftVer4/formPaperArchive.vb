@@ -638,6 +638,8 @@ Err:
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "unstructuredfiles.htm")
             Case 2
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "viewimages.htm")
+            Case 3
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "archivelist.htm")
         End Select
 
     End Sub
