@@ -30,7 +30,7 @@ Partial Class ucrHourly
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
-        Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -191,15 +191,15 @@ Partial Class ucrHourly
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
-        'btnCommit
+        'btnSave
         '
-        Me.btnCommit.Location = New System.Drawing.Point(123, 701)
-        Me.btnCommit.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(100, 28)
-        Me.btnCommit.TabIndex = 769
-        Me.btnCommit.Text = "Save"
-        Me.btnCommit.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(123, 701)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(100, 28)
+        Me.btnSave.TabIndex = 769
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -948,7 +948,7 @@ Partial Class ucrHourly
         Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.btnCommit)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
@@ -1040,7 +1040,7 @@ Partial Class ucrHourly
     Friend WithEvents btnUpload As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
-    Friend WithEvents btnCommit As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button

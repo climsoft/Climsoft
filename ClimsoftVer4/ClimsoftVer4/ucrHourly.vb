@@ -47,7 +47,7 @@
         ucrStationSelector.Focus()
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             If Not ValidateValue() Then
                 Exit Sub
@@ -113,7 +113,7 @@
     ''' </summary>
     Private Sub SaveEnable()
         btnAddNew.Enabled = True
-        btnCommit.Enabled = False
+        btnSave.Enabled = False
         btnClear.Enabled = False
         btnDelete.Enabled = False
         btnUpdate.Enabled = False
@@ -123,10 +123,10 @@
             btnClear.Enabled = True
             btnDelete.Enabled = False
             btnUpdate.Enabled = False
-            btnCommit.Enabled = True
+            btnSave.Enabled = True
         ElseIf ucrNavigation.iMaxRows = 0 Then
             btnAddNew.Enabled = False
-            btnCommit.Enabled = True
+            btnSave.Enabled = True
         ElseIf ucrNavigation.iMaxRows > 0 Then
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
