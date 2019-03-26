@@ -30,8 +30,10 @@ Partial Class frmSplashScreen
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lblDescription = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         lblWait = New System.Windows.Forms.Label()
         Me.MainLayoutPanel.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblWait
@@ -85,11 +87,11 @@ Partial Class frmSplashScreen
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(453, 227)
+        Me.lblVersion.Location = New System.Drawing.Point(442, 227)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(76, 27)
+        Me.lblVersion.Size = New System.Drawing.Size(99, 27)
         Me.lblVersion.TabIndex = 6
-        Me.lblVersion.Text = "Version 4.1"
+        Me.lblVersion.Text = "Version 4.1.3"
         '
         'Timer1
         '
@@ -122,6 +124,7 @@ Partial Class frmSplashScreen
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -131,5 +134,5 @@ Partial Class frmSplashScreen
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Public WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lblVersion As System.Windows.Forms.Label
-
+    Friend WithEvents BindingSource1 As BindingSource
 End Class
