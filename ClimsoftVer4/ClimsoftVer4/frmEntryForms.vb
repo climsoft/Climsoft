@@ -260,4 +260,8 @@
             Return False
         End Try
     End Function
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "emptykeyentrytables.htm")
+    End Sub
 End Class

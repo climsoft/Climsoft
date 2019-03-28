@@ -256,6 +256,8 @@ Public Class frmGTSNOAA
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "datatransfers.htm#from_NOAA-NCDC")
+        'Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "datatransfers.htm#from_NOAA-NCDC")
+
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "noaagts.htm")
     End Sub
 End Class

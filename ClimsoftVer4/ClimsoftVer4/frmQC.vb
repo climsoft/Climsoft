@@ -27,9 +27,31 @@ Public Class frmQC
     Dim msgTxtQCReportsOutUpperLimits As String
     Dim msgTxtQCReportsOutInterelement As String
 
+    Private Sub chkAllElements_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllElements.CheckedChanged
 
+    End Sub
+
+    Private Sub BindingSource3_CurrentChanged(sender As Object, e As EventArgs) Handles BindingSource3.CurrentChanged
+
+    End Sub
 
     Public HTMLHelp As New clsHelp
+
+    Private Sub optInterElement_CheckedChanged(sender As Object, e As EventArgs) Handles optInterElement.CheckedChanged
+        ' Disable selection of elements since the list is set in database for the elements to be compared.
+        If optInterElement.Checked = True Then
+            lstViewElements.Enabled = False
+            chkAllElements.Enabled = False
+            chkAllElements.Checked = False
+            For i = 0 To lstViewElements.Items.Count - 1
+                lstViewElements.Items(i).Checked = False
+            Next
+        Else
+            lstViewElements.Enabled = True
+            chkAllElements.Enabled = True
+        End If
+    End Sub
+
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.Close()
     End Sub
@@ -55,6 +77,11 @@ Public Class frmQC
         lstViewElements.Columns.Clear()
         lstViewElements.Columns.Add("Element Code", 100, HorizontalAlignment.Left)
         lstViewElements.Columns.Add("Element Details", 200, HorizontalAlignment.Left)
+        lblDataTransferProgress.Text = ""
+        txtBeginYear.Text = ""
+        txtEndYear.Text = ""
+        chkAllStations.Checked = False
+        chkAllElements.Checked = False
 
         Try
             conns.ConnectionString = frmLogin.txtusrpwd.Text
@@ -206,9 +233,11 @@ Public Class frmQC
                     'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                 End If
             Next
-        Else ' When All stations are selected
+        Else ' When All Elements are selected
             elmselected = True
         End If
+
+        If optInterElement.Checked = True Then elmselected = True
 
         ' Contruct the Stations and Elements selction criteria string
         If Len(stnlist) > 0 Then stnlist = "(" & stnlist & ")"
@@ -304,7 +333,7 @@ Public Class frmQC
         End Try
 
         'Update QC status for selected date range from 0 to 1
-        strSQL = "update observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+        strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
         ' Create the Command for executing query and set its properties
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -356,10 +385,10 @@ Public Class frmQC
             '   "upperLimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT) " & _
             '   "into outfile '" & qcReportsFolderUnix & "/qc_report_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
-            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " & _
-                     "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " & _
-                     "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " & _
-                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " & _
+            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " &
+                     "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
+                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
                      "upperlimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT);"
 
             ''"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -373,7 +402,7 @@ Public Class frmQC
                 ' Output QC Report
                 'OutputQCReport(210, qcReportsFolderWindows & "\qc_values_upperlimit_" & beginYearMonth & "_" & endYearMonth & ".csv")
                 OutputQCReport(210, QcReportFile)
-
+                FileClose(210)
                 'msgTxtQCReportsOutUpperLimits = "QC upper limits report saved to: "
                 'MsgBox(msgTxtQCReportsOutUpperLimits & QcReportFile, MsgBoxStyle.Information)
 
@@ -411,10 +440,10 @@ Public Class frmQC
             '   "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT) " & _
             '   "into outfile '" & qcReportsFolderUnix & "/qc_report_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
-            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " & _
-                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " & _
-                     "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " & _
-                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " & _
+            strSQL = "INSERT IGNORE INTO qcabslimits(StationId,ElementId,DateTime,yyyy,mm,dd,hh,ObsValue,limitValue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm) " &
+                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
+                     "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
+                     "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
                       "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT);"
 
             '"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
@@ -429,7 +458,7 @@ Public Class frmQC
 
                 ' Output QC Report
                 OutputQCReport(211, QcReportFile)
-
+                FileClose(211)
                 'msgTxtQCReportsOutLowerLimits = "QC lower limits report saved to: "
                 ''MsgBox(msgTxtQCReportsOutLowerLimits & qcReportsFolderWindows & "\qc_values_lowerlimit_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
                 'MsgBox(msgTxtQCReportsOutLowerLimits & QcReportFile, MsgBoxStyle.Information)
@@ -445,6 +474,7 @@ Public Class frmQC
 
             'Interelement comparison checks
         ElseIf optInterElement.Checked = True Then
+
             'Loop through the combination of elements in the [qc_interelement_relationship_definition] table
             For m = 0 To n - 1
                 elem1 = ds1.Tables("interElement").Rows(m).Item("elementId_1")
@@ -455,6 +485,11 @@ Public Class frmQC
                 'strSQL = "DELETE from qc_interelement_1"
                 strSQL = "TRUNCATE qc_interelement_1"
 
+                QcReportFile = qcReportsFolderWindows & "\qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv"
+
+                'Delete the Qc report file if already there
+                If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
+
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
@@ -463,7 +498,7 @@ Public Class frmQC
                     objCmd.CommandTimeout = 0
 
                     objCmd.ExecuteNonQuery()
-                    ' MsgBox("Table qc_interelement_1 cleared!")
+                    'MsgBox("Table qc_interelement_1 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
@@ -472,24 +507,32 @@ Public Class frmQC
                     Me.Cursor = Cursors.Default
                 End Try
 
-                strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " & _
-                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " & _
-                    "WHERE describedby=" & elem1 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear & _
+                If stnselected = True Then
+                    strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE obsvalue <> '' and describedby=" & elem1 & " and year(obsdatetime) between " & beginYear & " and " & endYear &
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth
-
+                Else
+                    strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE obsvalue <> '' and describedby=" & elem1 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear &
+                    " and month(obsdatetime) between " & beginMonth & " and " & endMonth
+                End If
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                 Try
                     'Execute query
+
                     objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
-                    'MsgBox("Table qc_interelement_2 cleared!")
+                    'MsgBox("Table qc_interelement_1 created!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
                     ''MsgBox(ex.Message)
+                    'MsgBox(strSQL)
                     Me.Cursor = Cursors.Default
                 End Try
 
@@ -504,27 +547,6 @@ Public Class frmQC
                     'Execute query
                     objCmd.CommandTimeout = 0
                     objCmd.ExecuteNonQuery()
-                    ' MsgBox("Table qc_interelement_1 cleared!")
-                    'Catch ex As MySql.Data.MySqlClient.MySqlException
-                    '    'Ignore expected error i.e. error of Duplicates in MySqlException
-                Catch ex As Exception
-                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                    MsgBox(ex.Message)
-                    Me.Cursor = Cursors.Default
-                End Try
-                '
-                strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " & _
-                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " & _
-                    "WHERE describedby=" & elem2 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear & _
-                    " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
-
-                ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
-                Try
-                    'Execute query
-                    objCmd.CommandTimeout = 0
-                    objCmd.ExecuteNonQuery()
                     'MsgBox("Table qc_interelement_2 cleared!")
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
@@ -533,14 +555,47 @@ Public Class frmQC
                     MsgBox(ex.Message)
                     Me.Cursor = Cursors.Default
                 End Try
+                If stnselected = True Then
+
+                    strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE obsvalue <> '' and describedby=" & elem2 & "  and year(obsdatetime) between " & beginYear & " and " & endYear &
+                    " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
+
+                Else
+                    strSQL = "INSERT IGNORE INTO qc_interelement_2(stationId_2,elementId_2,obsDatetime_2,obsValue_2,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2) " &
+                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE obsvalue <> '' and describedby=" & elem2 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear &
+                    " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
+                End If
+                ' Create the Command for executing query and set its properties
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                Try
+                    'Execute query
+                    objCmd.CommandTimeout = 0
+                    objCmd.ExecuteNonQuery()
+                    'MsgBox("Table qc_interelement_2 created!")
+                    'Catch ex As MySql.Data.MySqlClient.MySqlException
+                    '    'Ignore expected error i.e. error of Duplicates in MySqlException
+                Catch ex As Exception
+                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+
+                    MsgBox(ex.Message)
+                    Me.Cursor = Cursors.Default
+                End Try
 
                 'Carry out interelement comparison
                 If (elem1 = 2 And elem2 = 3) Or (elem1 = 101 And elem2 = 102) Or (elem1 = 102 And elem2 = 103) Then
-                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " & _
+                    'strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
+                    '    "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
+                    '    "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 " &
+                    '    "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
+                    '"'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
+
+                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
                         "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
-                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 " &
-                        "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
-                        "'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
+                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as INT) < cast(obsValue_2 as INT);"
 
                     ' '' Create the Command for executing query and set its properties
                     ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -558,31 +613,40 @@ Public Class frmQC
                     ''End Try
 
                 ElseIf (elem1 = 2 And elem2 = 101) Or (elem1 = 101 And elem2 = 3) Then
-                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime_1','obsDatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " & _
-                        "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
-                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " & _
-                        "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " & _
-                        "and day(obsDatetime_1)=day(obsDatetime_2) " &
-                        "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
-                        "'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
+                    'strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime_1','obsDatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
+                    '    "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
+                    '    "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " &
+                    '    "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " &
+                    '    "and day(obsDatetime_1)=day(obsDatetime_2) " &
+                    '    "and cast(obsValue_1 as INT) < cast(obsValue_2 as INT) into outfile " &
+                    '"'" & qcReportsFolderUnix & "/qc_interelement_" & elem1 & "_" & elem2 & "_" & beginYearMonth & "_" & endYearMonth & ".csv' fields terminated by',';"
 
+                    strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime_1','obsDatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
+                           "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
+                           "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " &
+                           "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " &
+                           "and day(obsDatetime_1)=day(obsDatetime_2) And cast(obsValue_1 As INT) < cast(obsValue_2 As INT);"
                 End If
-                ' Create the Command for executing query and set its properties
-                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                '' Create the Command for executing query and set its properties
+                'objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
 
                 Try
-                    'Execute query
-                    objCmd.CommandTimeout = 0
-                    objCmd.ExecuteNonQuery()
+                    ''Execute query
+                    'objCmd.CommandTimeout = 0
+                    'objCmd.ExecuteNonQuery()
 
-                    'MsgBox("QC inter-element report( send to: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
+                    OutputQcInterElementReport(QcReportFile, strSQL)
 
-                    'MsgBox("Table qc_interelement_2 cleared!")
+
+                    'MsgBox("QC inter-element report( send To: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
+
                     'Catch ex As MySql.Data.MySqlClient.MySqlException
                     '    'Ignore expected error i.e. error of Duplicates in MySqlException
                 Catch ex As Exception
                     'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+
                     MsgBox(ex.Message)
                     Me.Cursor = Cursors.Default
                 End Try
@@ -644,11 +708,41 @@ Public Class frmQC
         CommonModules.ViewFile(fl)
     End Sub
 
-    Private Sub chkAllElements_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllElements.CheckedChanged
+    Sub OutputQcInterElementReport(fl As String, sql1 As String)
+        Dim t As Long
+        Dim dt As String
 
-    End Sub
+        'MsgBox(fl)
 
-    Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+        ds.Clear()
+        da.Fill(ds, "qcInterElements")
+        t = ds.Tables("qcInterElements").Rows.Count
+
+        Try
+            If t > 1 Then
+
+                FileOpen(111, fl, OpenMode.Output)
+                ' Outputv data values
+                For i = 0 To t - 1
+                    dt = ds.Tables("qcInterElements").Rows(i).Item(0)
+                    For j = 1 To ds.Tables("qcInterElements").Columns.Count - 1
+                        dt = dt & "," & ds.Tables("qcInterElements").Rows(i).Item(j)
+                    Next
+                    Print(111, dt)
+                    PrintLine(111)
+                Next
+
+            Else
+                'MsgBox("No QC errors found")
+            End If
+
+            FileClose(111)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(111)
+        End Try
 
     End Sub
 End Class

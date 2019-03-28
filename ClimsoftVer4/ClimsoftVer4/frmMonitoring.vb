@@ -200,7 +200,6 @@
                 kt = kt + kount
                 ' Update user record
                 sql = "UPDATE userrecords set recsdone = " & kount & " where username ='" & cboUser.Items(i) & "';"
-                'MsgBox(sql)
                 qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                 qwry.CommandTimeout = 0
                 qwry.ExecuteNonQuery()
@@ -235,7 +234,13 @@
             For i = 0 To ds.Tables("Performs").Rows.Count - 1
                 Rec(0) = ds.Tables("Performs").Rows(i).Item(0)
                 Rec(1) = ds.Tables("Performs").Rows(i).Item(1)
-                Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
+                ' Get the target value if is set
+                If Not IsDBNull(ds.Tables("Performs").Rows(i).Item(2)) Then
+                    Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
+                Else
+                    MsgBox("Target value not set. Please check the Settings")
+                    Exit For
+                End If
                 Rec(3) = ds.Tables("Performs").Rows(i).Item(3)
 
                 'perf = (ds.Tables("Records").Rows(i).Item(1) / ds.Tables("Records").Rows(i).Item(2)) * 100
@@ -509,6 +514,18 @@
         Me.Close()
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Select Case TabMonitoring.SelectedIndex
+            Case 0
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "userrecords.htm")
+            Case 1
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "performancemonitoring.htm")
+            Case 2
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "doublekeyentryverification.htm")
+            Case 3
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "settings.htm")
+        End Select
+    End Sub
 
     Private Sub optTargets_CheckedChanged(sender As Object, e As EventArgs) Handles optTargets.CheckedChanged
         DataGridSettings.DataSource = ""

@@ -22,6 +22,7 @@ Partial Class frmQC
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
@@ -51,9 +52,17 @@ Partial Class frmQC
         Me.optAbsoluteLimits = New System.Windows.Forms.RadioButton()
         Me.lblStationsElementsList = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource4 = New System.Windows.Forms.BindingSource(Me.components)
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.pnlQCTypes.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -341,6 +350,9 @@ Partial Class frmQC
         Me.Label1.TabIndex = 25
         Me.Label1.Text = "Select Time Range"
         '
+        'BindingSource3
+        '
+        '
         'frmQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,6 +383,10 @@ Partial Class frmQC
         Me.pnlQcStandard.PerformLayout()
         Me.pnlQCTypes.ResumeLayout(False)
         Me.pnlQCTypes.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -404,4 +420,8 @@ Partial Class frmQC
     Friend WithEvents optAbsoluteLimits As System.Windows.Forms.RadioButton
     Friend WithEvents lblStationsElementsList As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents BindingSource2 As BindingSource
+    Friend WithEvents BindingSource3 As BindingSource
+    Friend WithEvents BindingSource4 As BindingSource
 End Class

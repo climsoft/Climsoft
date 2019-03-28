@@ -22,6 +22,7 @@ Partial Class frmModifyObservations
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.DataGridViewObservations = New System.Windows.Forms.DataGridView()
         Me.GrBxSelection = New System.Windows.Forms.GroupBox()
         Me.txtEndHour = New System.Windows.Forms.TextBox()
@@ -54,10 +55,12 @@ Partial Class frmModifyObservations
         Me.optFinal = New System.Windows.Forms.RadioButton()
         Me.optInitial = New System.Windows.Forms.RadioButton()
         Me.lblrecords = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridViewObservations, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrBxSelection.SuspendLayout()
         Me.GrBxCommands.SuspendLayout()
         Me.GrBxDataBase.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridViewObservations
@@ -336,7 +339,7 @@ Partial Class frmModifyObservations
         Me.GrBxDataBase.Size = New System.Drawing.Size(125, 78)
         Me.GrBxDataBase.TabIndex = 6
         Me.GrBxDataBase.TabStop = False
-        Me.GrBxDataBase.Text = "Databases"
+        Me.GrBxDataBase.Text = "Tables"
         '
         'optFinal
         '
@@ -386,6 +389,7 @@ Partial Class frmModifyObservations
         Me.GrBxCommands.ResumeLayout(False)
         Me.GrBxDataBase.ResumeLayout(False)
         Me.GrBxDataBase.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -422,4 +426,5 @@ Partial Class frmModifyObservations
     Friend WithEvents txtStartDay As System.Windows.Forms.TextBox
     Friend WithEvents lblEndDay As System.Windows.Forms.Label
     Friend WithEvents lblStartDay As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

@@ -70,6 +70,7 @@ Public Class formAWSRealTime
         dbconn.Open()
 
         ShowPanel(pnlProcessing, "Process Settings")
+        Me.Text = "AWS Real Time"
         load_PressingParameters("txtlFill")
         load_Indicators(dbconn)
         Timer1.Start()
@@ -3670,6 +3671,8 @@ Err:
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "structuressettings.htm")
             Case "Message Coding Settings"
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "codingsettings.htm")
+            Case "AWS Real Time"
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "awsrealtimeoperations.htm")
         End Select
 
     End Sub
