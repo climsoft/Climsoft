@@ -22,6 +22,7 @@ Partial Class formProductsSelectCriteria
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formProductsSelectCriteria))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,6 +96,7 @@ Partial Class formProductsSelectCriteria
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
@@ -103,6 +105,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -834,6 +837,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip2.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -910,4 +914,5 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents cmdClearStations As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllElements As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllStations As System.Windows.Forms.Button
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

@@ -202,6 +202,12 @@
     <Compile Include="formAgro1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formSynopticCaribbean.Designer.vb">
+      <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynopticCaribbean.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="form_agro1.vb">
       <DependentUpon>Model1.tt</DependentUpon>
       <SubType>Form</SubType>
@@ -812,6 +818,30 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.Designer.vb">
+      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.Designer.vb">
+      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.Designer.vb">
+      <DependentUpon>ucrAgroMet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.Designer.vb">
+      <DependentUpon>ucrCaribbean.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1014,6 +1044,9 @@
   <ItemGroup>
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynopticCaribbean.resx">
+      <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmElementSequencerMonthly.resx">
       <DependentUpon>frmElementSequencerMonthly.vb</DependentUpon>
@@ -1442,6 +1475,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFilter.resx">
       <DependentUpon>sdgFilter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewAgroMet.resx">
+      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewCaribbean.resx">
+      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrAgroMet.resx">
+      <DependentUpon>ucrAgroMet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrCaribbean.resx">
+      <DependentUpon>ucrCaribbean.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>

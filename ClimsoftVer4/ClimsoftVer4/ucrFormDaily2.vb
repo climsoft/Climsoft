@@ -596,6 +596,8 @@ Public Class ucrFormDaily2
         frm.SetHeader("Uploading " & ucrLinkedNavigation.iMaxRows & " records")
         frm.SetProgressMaximum(ucrLinkedNavigation.iMaxRows)
         frm.ShowResultMessage(True)
+        'frm.SetPretextProgress("Uploading")
+        frm.ShowNumbers(True)
         AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
 
         'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
@@ -608,8 +610,8 @@ Public Class ucrFormDaily2
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
-        Dim clsAllRecordsCall As New DataCall
-        Dim dtbAllRecords As DataTable
+        'Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As New DataTable
         Dim strCurrTag As String
         Dim dtObsDateTime As Date
         Dim strStationId As String
@@ -623,36 +625,38 @@ Public Class ucrFormDaily2
         Dim strPrecipUnits As String
         Dim strCloudHeightUnits As String
         Dim strVisUnits As String
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim pos As Integer = 0
-
+        Dim invalidRecord As Boolean = False
+        Dim strResult As String = ""
 
         'get the observation values fields
-        lstAllFields.AddRange(lstFields)
+        'lstAllFields.AddRange(lstFields)
         'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
+        'lstAllFields.AddRange({"signature"})
 
-        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+        'clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        'dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
-        conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
 
             'Temporary.The current connection properties are being stored in control, this line can be removed in future
             conn.ConnectionString = e.Argument
-
             conn.Open()
+            'Get all the records from the table
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
+                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+                    da.Fill(dtbAllRecords)
+                End Using
+            End Using
 
+            'Save the records to observable initial table
             For Each row As DataRow In dtbAllRecords.Rows
-                If backgroundWorker.CancellationPending = True Then
+                If backgroundWorker.CancellationPending Then
+                    e.Result = strResult & "Cancelling upload"
                     e.Cancel = True
                     Exit For
                 End If
-
-                'Display progress of data transfer
-                pos = pos + 1
-                backgroundWorker.ReportProgress(pos)
 
                 For i As Integer = 1 To 31
                     If i < 10 Then
@@ -664,6 +668,7 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
+
                         Try
                             dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
 
@@ -672,19 +677,33 @@ Public Class ucrFormDaily2
                             Continue For
                         End Try
 
-                        'check if record exists
-                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                        Try
+                            dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+                        Catch ex As Exception
+                            'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Hour: " & row.Item("hh") &
+                                ". This row was skipped" & Environment.NewLine
+                            Exit For
+                        End Try
 
                         bUpdateRecord = False
-                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-                            bUpdateRecord = reader.HasRows
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                            cmd.Parameters.AddWithValue("@stationId", strStationId)
+                            cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                            cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                            cmd.Parameters.AddWithValue("@qcStatus", 0)
+                            cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                            cmd.Parameters.AddWithValue("@dataForm", strTableName)
+
+                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                                bUpdateRecord = reader.HasRows
+                            End Using
                         End Using
 
                         iPeriod = 0
@@ -721,33 +740,53 @@ Public Class ucrFormDaily2
                             "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm,@temperatureUnits,@precipUnits,@cloudHeightUnits,@visUnits)"
                         End If
 
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
-                        cmd.Parameters.AddWithValue("@obsVal", row.Item("day" & strCurrTag))
-                        cmd.Parameters.AddWithValue("@obsFlag", row.Item("flag" & strCurrTag))
-                        cmd.Parameters.AddWithValue("@obsPeriod", If(iPeriod > 0, iPeriod, DBNull.Value))
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
-                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
-                        cmd.Parameters.AddWithValue("@temperatureUnits", strTempUnits)
-                        cmd.Parameters.AddWithValue("@precipUnits", strPrecipUnits)
-                        cmd.Parameters.AddWithValue("@cloudHeightUnits", strCloudHeightUnits)
-                        cmd.Parameters.AddWithValue("@visUnits", strVisUnits)
 
-                        'cmd.ExecuteScalar().ToString()
-                        cmd.ExecuteNonQuery()
-
+                        Try
+                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                                'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
+                                cmdSave.Parameters.AddWithValue("@stationId", strStationId)
+                                cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
+                                cmdSave.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                                cmdSave.Parameters.AddWithValue("@obsLevel", "surface")
+                                cmdSave.Parameters.AddWithValue("@obsVal", row.Item("day" & strCurrTag))
+                                cmdSave.Parameters.AddWithValue("@obsFlag", row.Item("flag" & strCurrTag))
+                                cmdSave.Parameters.AddWithValue("@obsPeriod", If(iPeriod > 0, iPeriod, DBNull.Value))
+                                cmdSave.Parameters.AddWithValue("@qcStatus", 0)
+                                cmdSave.Parameters.AddWithValue("@acquisitiontype", 1)
+                                cmdSave.Parameters.AddWithValue("@capturedBy", strSignature)
+                                cmdSave.Parameters.AddWithValue("@dataForm", strTableName)
+                                cmdSave.Parameters.AddWithValue("@temperatureUnits", strTempUnits)
+                                cmdSave.Parameters.AddWithValue("@precipUnits", strPrecipUnits)
+                                cmdSave.Parameters.AddWithValue("@cloudHeightUnits", strCloudHeightUnits)
+                                cmdSave.Parameters.AddWithValue("@visUnits", strVisUnits)
+                                'cmd.ExecuteScalar().ToString()
+                                cmdSave.ExecuteNonQuery()
+                            End Using
+                        Catch ex As Exception
+                            'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Hour: " & row.Item("hh") & ", Date: " & dtObsDateTime &
+                                ". This record was skipped" & Environment.NewLine
+                            Exit For
+                        End Try
 
                     End If
                 Next
+
+                'Display progress of data transfer
+                pos = pos + 1
+                backgroundWorker.ReportProgress(pos)
+
             Next
 
-            e.Result = "Records have been uploaded sucessfully"
+            If Not invalidRecord Then
+                e.Result = "Records have been uploaded sucessfully"
+            Else
+                e.Result = strResult
+            End If
+
         Catch ex As Exception
             e.Result = "Error " & ex.Message
         Finally
@@ -760,6 +799,97 @@ Public Class ucrFormDaily2
         'PopulateControl()
 
     End Sub
+
+
+
+    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
+    Public Sub UploadAllRecordsEF()
+        Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As DataTable
+        Dim rcdObservationInitial As observationinitial
+        Dim strCurrTag As String
+        Dim dtObsDateTime As Date
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim iPeriod As Integer
+        Dim lstAllFields As New List(Of String)
+        Dim bNewRecord As Boolean
+
+        'get the observation values fields
+        lstAllFields.AddRange(lstFields)
+        'TODO "entryDatetime" should be here as well once entity model has been updated.
+        lstAllFields.AddRange({"signature"})
+
+        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+
+        For Each row As DataRow In dtbAllRecords.Rows
+            For i As Integer = 1 To 31
+                If i < 10 Then
+                    strCurrTag = "0" & i
+                Else
+                    strCurrTag = i
+                End If
+
+                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+
+                    strStationId = row.Item("stationId")
+                    dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
+
+                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
+                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
+                    If rcdObservationInitial Is Nothing Then
+                        bNewRecord = True
+                        rcdObservationInitial = New observationinitial
+                    Else
+                        bNewRecord = False
+                    End If
+
+                    rcdObservationInitial.recordedFrom = strStationId
+                    rcdObservationInitial.describedBy = lElementId
+                    rcdObservationInitial.obsDatetime = dtObsDateTime
+                    rcdObservationInitial.obsLevel = "surface"
+                    rcdObservationInitial.qcStatus = 0
+                    rcdObservationInitial.acquisitionType = 1
+                    rcdObservationInitial.dataForm = strTableName
+
+                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
+                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
+                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
+                        rcdObservationInitial.period = iPeriod
+                    End If
+
+                    If Not IsDBNull(row.Item("signature")) Then
+                        rcdObservationInitial.capturedBy = row.Item("signature")
+                    End If
+                    If Not IsDBNull(row.Item("temperatureUnits")) Then
+                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
+                    End If
+                    If Not IsDBNull(row.Item("precipUnits")) Then
+                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
+                    End If
+                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
+                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
+                    End If
+                    If Not IsDBNull(row.Item("visUnits")) Then
+                        rcdObservationInitial.visUnits = row.Item("visUnits")
+                    End If
+
+                    If bNewRecord Then
+                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
+                    End If
+                    'save the Observation record
+                    clsDataConnection.db.SaveChanges()
+
+                End If
+            Next
+        Next
+
+        'TODO? because of the detachment
+        PopulateControl()
+
+    End Sub
+
 
     Private Function SetUpContextMenuStrip() As ContextMenuStrip
         'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.

@@ -207,13 +207,7 @@ Public Class frmMainMenu
 
     End Sub
 
-    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
 
-    End Sub
-
-    Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
-
-    End Sub
 
     Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
         frmDataForms.Show()
