@@ -619,23 +619,23 @@ Partial Class ucrHourly
         '
         'Label12
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(555, 177)
+        Me.Label12.Location = New System.Drawing.Point(529, 177)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(35, 17)
+        Me.Label12.Size = New System.Drawing.Size(76, 17)
         Me.Label12.TabIndex = 738
         Me.Label12.Text = "Flag"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label13
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(478, 177)
+        Me.Label13.Location = New System.Drawing.Point(474, 177)
         Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(44, 17)
+        Me.Label13.Size = New System.Drawing.Size(55, 17)
         Me.Label13.TabIndex = 739
         Me.Label13.Text = "Value"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl12
         '
@@ -869,23 +869,23 @@ Partial Class ucrHourly
         '
         'lblFlag
         '
-        Me.lblFlag.AutoSize = True
-        Me.lblFlag.Location = New System.Drawing.Point(283, 177)
+        Me.lblFlag.Location = New System.Drawing.Point(264, 177)
         Me.lblFlag.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFlag.Name = "lblFlag"
-        Me.lblFlag.Size = New System.Drawing.Size(35, 17)
+        Me.lblFlag.Size = New System.Drawing.Size(76, 17)
         Me.lblFlag.TabIndex = 701
         Me.lblFlag.Text = "Flag"
+        Me.lblFlag.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblValue
         '
-        Me.lblValue.AutoSize = True
-        Me.lblValue.Location = New System.Drawing.Point(206, 177)
+        Me.lblValue.Location = New System.Drawing.Point(208, 177)
         Me.lblValue.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblValue.Name = "lblValue"
-        Me.lblValue.Size = New System.Drawing.Size(44, 17)
+        Me.lblValue.Size = New System.Drawing.Size(52, 17)
         Me.lblValue.TabIndex = 703
         Me.lblValue.Text = "Value"
+        Me.lblValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl00
         '

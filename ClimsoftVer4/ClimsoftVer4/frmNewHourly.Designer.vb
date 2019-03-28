@@ -27,7 +27,7 @@ Partial Class frmNewHourly
         '
         'ucrHourly
         '
-        Me.ucrHourly.Location = New System.Drawing.Point(143, 172)
+        Me.ucrHourly.Location = New System.Drawing.Point(1, 2)
         Me.ucrHourly.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrHourly.Name = "ucrHourly"
         Me.ucrHourly.Size = New System.Drawing.Size(882, 781)
@@ -37,10 +37,10 @@ Partial Class frmNewHourly
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(877, 794)
+        Me.ClientSize = New System.Drawing.Size(885, 794)
         Me.Controls.Add(Me.ucrHourly)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmNewHourly"
         Me.Text = "Hourly Data"
         Me.ResumeLayout(False)
