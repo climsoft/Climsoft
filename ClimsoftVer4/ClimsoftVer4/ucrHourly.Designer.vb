@@ -294,30 +294,33 @@ Partial Class ucrHourly
         '
         'ucrDay
         '
-        Me.ucrDay.FieldName = Nothing
+        Me.ucrDay.FieldName = "dd"
         Me.ucrDay.Location = New System.Drawing.Point(474, 84)
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(56, 26)
         Me.ucrDay.TabIndex = 763
+        Me.ucrDay.Tag = "dd"
         '
         'ucrMonth
         '
-        Me.ucrMonth.FieldName = Nothing
+        Me.ucrMonth.FieldName = "mm"
         Me.ucrMonth.Location = New System.Drawing.Point(284, 84)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(48, 31)
         Me.ucrMonth.TabIndex = 762
+        Me.ucrMonth.Tag = "mm"
         '
         'ucrYearSelector
         '
-        Me.ucrYearSelector.FieldName = Nothing
+        Me.ucrYearSelector.FieldName = "yyyy"
         Me.ucrYearSelector.Location = New System.Drawing.Point(130, 84)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(65, 31)
         Me.ucrYearSelector.TabIndex = 761
+        Me.ucrYearSelector.Tag = "yyyy"
         '
         'lblDay
         '
@@ -361,21 +364,23 @@ Partial Class ucrHourly
         '
         'ucrStationSelector
         '
-        Me.ucrStationSelector.FieldName = Nothing
+        Me.ucrStationSelector.FieldName = "stationId"
         Me.ucrStationSelector.Location = New System.Drawing.Point(130, 27)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(7, 7, 7, 7)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(283, 30)
         Me.ucrStationSelector.TabIndex = 755
+        Me.ucrStationSelector.Tag = "stationId"
         '
         'ucrElementSelector
         '
-        Me.ucrElementSelector.FieldName = Nothing
+        Me.ucrElementSelector.FieldName = "elementId"
         Me.ucrElementSelector.Location = New System.Drawing.Point(523, 26)
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(237, 26)
         Me.ucrElementSelector.TabIndex = 754
+        Me.ucrElementSelector.Tag = "elementId"
         '
         'ucrInputTotal
         '

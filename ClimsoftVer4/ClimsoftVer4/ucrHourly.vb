@@ -5,11 +5,6 @@
 
             SetUpTableEntry("form_hourly")
 
-            ucrStationSelector.SetTableNameAndField("form_hourly", "stationId")
-            ucrStationSelector.PopulateControl()
-            ucrStationSelector.SetDisplayAndValueMember("stationId")
-            ucrStationSelector.SetValidationTypeAsNumeric()
-
             'validations
             ucrYearSelector.SetValidationTypeAsNumeric()
             ucrMonth.SetValidationTypeAsNumeric()
