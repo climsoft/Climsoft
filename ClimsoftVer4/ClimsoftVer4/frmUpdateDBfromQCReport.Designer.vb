@@ -22,6 +22,7 @@ Partial Class frmUpdateDBfromQCReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtQCReportOriginal = New System.Windows.Forms.TextBox()
         Me.lblQCReportOriginal = New System.Windows.Forms.Label()
         Me.txtQCReportUpdated = New System.Windows.Forms.TextBox()
@@ -32,6 +33,8 @@ Partial Class frmUpdateDBfromQCReport
         Me.btnBrowseQCOriginal = New System.Windows.Forms.Button()
         Me.btnQCUpdated = New System.Windows.Forms.Button()
         Me.lblProcessStatus = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtQCReportOriginal
@@ -140,6 +143,7 @@ Partial Class frmUpdateDBfromQCReport
         Me.MinimizeBox = False
         Me.Name = "frmUpdateDBfromQCReport"
         Me.Text = "Update ObservationInitial from QC Report"
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -154,4 +158,5 @@ Partial Class frmUpdateDBfromQCReport
     Friend WithEvents btnBrowseQCOriginal As System.Windows.Forms.Button
     Friend WithEvents btnQCUpdated As System.Windows.Forms.Button
     Friend WithEvents lblProcessStatus As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

@@ -78,7 +78,9 @@ Public Class formProductsSelectCriteria
             conn.ConnectionString = MyConnectionString
             conn.Open()
 
-            sql = "SELECT * FROM station ORDER BY stationName"
+            'sql = "SELECT * FROM station ORDER BY stationName"
+            sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
+
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.Fill(ds, "station")
@@ -98,24 +100,18 @@ Public Class formProductsSelectCriteria
 
         ds.Clear()
 
-        'sql = "SELECT * FROM obselement ORDER BY description"
-        sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
-        'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
+        'sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
+        sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.SelectCommand.CommandTimeout = 0
         da.Fill(ds, "obselement")
-        ' conn.Close()
 
         maxRows = ds.Tables("obselement").Rows.Count
-        'MsgBox(maxRows)
         For kount = 0 To maxRows - 1 Step 1
             cmbElement.Items.Add(ds.Tables("obselement").Rows(kount).Item("description"))
         Next
     End Sub
 
-    Private Sub lstvProducts_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
         Dim prod As String
@@ -463,9 +459,10 @@ Err:
     End Sub
     Sub WRPlot(stns As String, sdt As String, edt As String)
 
-        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath As String
-        Dim pro, datval As Integer
+        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath, datval As String
+        Dim pro As Integer
         Dim ox As Object
+        'Dim WDSP, WDDR As Integer
 
         Try
             WrplotAppPath = ""
@@ -479,9 +476,15 @@ Err:
 
             ' SQL statement for the selecting data for windrose plotting
             'sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
-
-            sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " & _
+            If MsgBox("Is the wind data from AWS?", vbYesNo, "Wind Data Observation Type") = vbYes Then
+                'MsgBox("AWS")
+                sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '895', value, NULL)) AS 'DIR',AVG(IF(describedBy = '897', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
+                "WHERE (RecordedFrom = " & stns & ") AND (describedBy = '897' OR describedBy = '895') and (year(obsDatetime) between '" & Year(sdt) & "' and '" & Year(edt) & "') and (month(obsDatetime) between '" & Month(sdt) & "' and '" & Month(edt) & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
+            Else
+                'MsgBox("Manual")
+                sql = "SELECT recordedFrom as STNID,year(obsDatetime) as YY,month(obsDatetime) as MM,day(obsDatetime) as DD,hour(obsDatetime) as HH,AVG(IF(describedBy = '112', value, NULL)) AS 'DIR',AVG(IF(describedBy = '111', value, NULL)) AS 'WSPD' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
                 "WHERE (RecordedFrom = " & stns & ") AND (describedBy = '111' OR describedBy = '112') and (year(obsDatetime) between '" & Year(sdt) & "' and '" & Year(edt) & "') and (month(obsDatetime) between '" & Month(sdt) & "' and '" & Month(edt) & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY STNID, YY, MM, DD, HH;"
+            End If
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
@@ -504,13 +507,22 @@ Err:
 
             ' Output data values
             For k = 0 To maxRows - 1
+
                 For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
                     If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
-                        datval = Int(ds.Tables("observationfinal").Rows(k).Item(i))
+
+                        datval = ds.Tables("observationfinal").Rows(k).Item(i)
+
+                        ' Round the value to while numbers except the Station ID 
+                        If i > 0 Then
+                            datval = Math.Round(Val(ds.Tables("observationfinal").Rows(k).Item(i)), 0)
+                        End If
+
                         ' Multiply by factor of 10 where wind direction is in 2 digits
                         If i = ds.Tables("observationfinal").Columns.Count - 2 And Int(RegkeyValue("key05")) = 2 Then
-                            datval = datval * 10
+                            datval = Val(datval) * 10
                         End If
+
                         Print(11, datval & Chr(9))
                     End If
                 Next
@@ -1460,7 +1472,5 @@ Err:
         End Try
     End Sub
 
-    Private Sub pnlStationsElements_Paint(sender As Object, e As PaintEventArgs) Handles pnlStationsElements.Paint
 
-    End Sub
 End Class
