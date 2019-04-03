@@ -64,40 +64,11 @@ Public Class ucrSynopticRA1
 
     Public Overrides Sub PopulateControl()
 
-        Dim clsCurrentFilter As TableFilter
-        Dim tempRecord As form_synoptic_2_ra1
-
         If Not bFirstLoad Then
-            'TODO. the try catch can be removed later after the table has been fixed
-            Try
-                MyBase.PopulateControl()
-            Catch ex As Exception
-                MessageBox.Show("Error: " & ex.Message, "Populate Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            MyBase.PopulateControl()
 
-            'try to get the record based on the given filter
-            clsCurrentFilter = GetLinkedControlsFilter()
-            tempRecord = clsDataConnection.db.form_synoptic_2_ra1.Where(clsCurrentFilter.GetLinqExpression()).FirstOrDefault()
-
-            'if this was already a new record (tempFd2Record Is Nothing AndAlso Not bUpdating) 
-            'then just do validation of values based on the new key controls values and exit the sub
-            If tempRecord Is Nothing AndAlso Not bUpdating Then
-                ValidateDataEntryPermission()
-                SetTmaxRequired(IsTmaxRequired())
-                SetTminAndRelatedElementsRequired(IsTminRequired())
-                SetGminRequired(IsGminRequired())
-                ValidateValue()
-                Exit Sub
-            End If
-
-            fs2ra1Record = tempRecord
-            If fs2ra1Record Is Nothing Then
-                fs2ra1Record = New form_synoptic_2_ra1
-                bUpdating = False
-            Else
-                clsDataConnection.db.Entry(fs2ra1Record).State = Entity.EntityState.Detached
-                bUpdating = True
-            End If
+            'TODO. Might not be need anymore
+            bUpdating = dtbRecords.Rows.Count > 0
 
             'enable or disable textboxes based on year month day
             ValidateDataEntryPermission()
@@ -105,7 +76,7 @@ Public Class ucrSynopticRA1
             'set the values for all the value flag period controls
             For Each ctr In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetValue(strValueFieldName & ctr.Tag), GetValue(strFlagFieldName & ctr.Tag)}))
+                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag)}))
                 End If
             Next
 
@@ -123,7 +94,7 @@ Public Class ucrSynopticRA1
                 SetDefaultStandardPressureLevel()
             End If
 
-            OnevtValueChanged(Me, Nothing)
+            'OnevtValueChanged(Me, Nothing)
 
         End If
 
@@ -145,7 +116,7 @@ Public Class ucrSynopticRA1
             Dim ucrTextbox As ucrTextBox
             If TypeOf sender Is ucrTextBox Then
                 ucrTextbox = DirectCast(sender, ucrTextBox)
-                CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
+                'CallByName(fs2ra1Record, ucrTextbox.GetField, CallType.Set, ucrTextbox.GetValue)
             End If
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Fields Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -157,7 +128,7 @@ Public Class ucrSynopticRA1
 
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrBaseDataLink, tblFilter As TableFilter, Optional strFieldName As String = "")
+    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
         MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
         If Not lstFields.Contains(tblFilter.GetField) Then
             lstFields.Add(tblFilter.GetField)
@@ -167,7 +138,7 @@ Public Class ucrSynopticRA1
 
     Protected Overrides Sub LinkedControls_evtValueChanged()
         Dim bValidValues As Boolean = True
-        For Each key As ucrBaseDataLink In dctLinkedControlsFilters.Keys
+        For Each key As ucrValueView In dctLinkedControlsFilters.Keys
             If Not key.ValidateValue Then
                 bValidValues = False
                 Exit For
@@ -177,10 +148,10 @@ Public Class ucrSynopticRA1
         If bValidValues Then
             'fs2ra1Record = Nothing
             MyBase.LinkedControls_evtValueChanged()
-            For Each kvpTemp As KeyValuePair(Of ucrBaseDataLink, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-                CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
+            For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
+                'CallByName(fs2ra1Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
             Next
-            ucrLinkedNavigation.UpdateNavigationByKeyControls()
+            'ucrLinkedNavigation.UpdateNavigationByKeyControls()
         Else
             'TODO. DISABLE??
             'Me.Enabled = False
@@ -223,9 +194,7 @@ Public Class ucrSynopticRA1
         Dim dtbl As DataTable
         Dim row As DataRow
         clsDataDefinition = New DataCall
-        'PLEASE NOTE THIS TABLE IS CALLED obselement IN THE DATABASE BUT
-        'THE GENERATED ENTITY MODEL HAS NAMED IT AS obselements
-        clsDataDefinition.SetTableName("obselements")
+        clsDataDefinition.SetTableName("obselement")
         clsDataDefinition.SetFields(New List(Of String)({"elementId", "lowerLimit", "upperLimit"}))
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -569,18 +538,19 @@ Public Class ucrSynopticRA1
 
         ucrLinkedHour.setDefaultValue(6)
 
-        AddLinkedControlFilters(ucrLinkedStation, "stationId", "==", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "==", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, "mm", "==", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedDay, "dd", "==", strLinkedFieldName:="day", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, "hh", "==", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedStation, "stationId", "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+        AddLinkedControlFilters(ucrLinkedYear, "yyyy", "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedMonth, "mm", "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedDay, "dd", "=", strLinkedFieldName:="day", bForceValuesAsString:=False)
+        AddLinkedControlFilters(ucrLinkedHour, "hh", "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
-        ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
-        ucrLinkedNavigation.SetKeyControls("stationId", ucrLinkedStation)
-        ucrLinkedNavigation.SetKeyControls("yyyy", ucrLinkedYear)
-        ucrLinkedNavigation.SetKeyControls("mm", ucrLinkedMonth)
-        ucrLinkedNavigation.SetKeyControls("dd", ucrLinkedDay)
-        ucrLinkedNavigation.SetKeyControls("hh", ucrLinkedHour)
+        'ucrLinkedNavigation.SetTableNameAndFields(strTableName, (New List(Of String)({"stationId", "yyyy", "mm", "dd", "hh"})))
+        ucrLinkedNavigation.SetTableEntry(Me)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedDay)
+        ucrLinkedNavigation.AddKeyControls(ucrLinkedHour)
     End Sub
 
     ''' <summary>
@@ -624,8 +594,8 @@ Public Class ucrSynopticRA1
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
-        Dim clsAllRecordsCall As New DataCall
-        Dim dtbAllRecords As DataTable
+        ' Dim clsAllRecordsCall As New DataCall
+        Dim dtbAllRecords As New DataTable
         Dim strValueColumn As String
         Dim strFlagColumn As String
         Dim strElementCode As String
@@ -636,32 +606,38 @@ Public Class ucrSynopticRA1
         Dim bUpdateRecord As Boolean
         Dim strSql As String
         Dim strSignature As String
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim pos As Integer = 0
+        Dim invalidRecord As Boolean = False
+        Dim strResult As String = ""
 
         'get the observation values fields
         lstAllFields.AddRange(lstFields)
         'TODO "entryDatetime" should be here as well once entity model has been updated.
         lstAllFields.AddRange({"signature"})
 
-        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        dtbAllRecords = clsAllRecordsCall.GetDataTable()
+        'clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
+        'dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
-        conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
             'Temporary.The current connection properties are being stored in control, this line can be removed in future
             conn.ConnectionString = e.Argument
             conn.Open()
+            'Get all the records from the table
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
+                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+                    da.Fill(dtbAllRecords)
+                End Using
+            End Using
 
+            'Save the records to observable initial table
             For Each row As DataRow In dtbAllRecords.Rows
-                If backgroundWorker.CancellationPending = True Then
+                If backgroundWorker.CancellationPending Then
+                    e.Result = strResult & "Cancelling upload"
                     e.Cancel = True
                     Exit For
                 End If
-                'Display progress of data transfer
-                pos = pos + 1
-                backgroundWorker.ReportProgress(pos)
+
 
                 For Each strFieldName As String In lstFields
                     'if its not an observation value field then skip the loop
@@ -679,21 +655,32 @@ Public Class ucrSynopticRA1
                     If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, lElementId) Then
 
                         strStationId = row.Item("stationId")
-                        dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
 
-                        'check if record exists
-                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                        Try
+                            dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), row.Item("hh"), 0, 0)
+                        Catch ex As Exception
+                            'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Day: " & row.Item("dd") & ", Hour: " & row.Item("hh") &
+                                ". This row will be skipped" & Environment.NewLine
+                            Exit For
+                        End Try
 
                         bUpdateRecord = False
-                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-                            bUpdateRecord = reader.HasRows
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                            cmd.Parameters.AddWithValue("@stationId", strStationId)
+                            cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                            cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                            cmd.Parameters.AddWithValue("@qcStatus", 0)
+                            cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                            cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                                bUpdateRecord = reader.HasRows
+                            End Using
                         End Using
 
                         strSignature = ""
@@ -710,25 +697,43 @@ Public Class ucrSynopticRA1
                             "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
                         End If
 
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
-                        cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
-                        cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
-                        cmd.Parameters.AddWithValue("@dataForm", strTableName)
-
-                        cmd.ExecuteNonQuery()
+                        Try
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                                cmd.Parameters.AddWithValue("@stationId", strStationId)
+                                cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                                cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                                cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                                cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                                cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                                cmd.Parameters.AddWithValue("@qcStatus", 0)
+                                cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                                cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                                cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                                cmd.ExecuteNonQuery()
+                            End Using
+                        Catch ex As Exception
+                            'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Day: " & row.Item("dd") & ", Hour: " & row.Item("hh") & ", Date: " & dtObsDateTime &
+                                ". This record was skipped" & Environment.NewLine
+                            Exit For
+                        End Try
 
                     End If
                 Next
+
+                'Display progress of data transfer
+                pos = pos + 1
+                backgroundWorker.ReportProgress(pos)
             Next
 
-            e.Result = "Records have been uploaded sucessfully"
+            If Not invalidRecord Then
+                e.Result = "Records have been uploaded sucessfully"
+            Else
+                e.Result = strResult
+            End If
         Catch ex As Exception
             e.Result = "Error " & ex.Message
         Finally
