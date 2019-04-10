@@ -256,7 +256,7 @@
 
     End Function
 
-    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrStationSelector.evtKeyDown, ucrElementSelector.evtKeyDown, ucrYearSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrStationSelector.evtKeyDown, ucrElementSelector.evtKeyDown, ucrYearSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrBaseDataLink Then
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
@@ -267,6 +267,19 @@
             End If
         End If
     End Sub
+
+
+    'Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrStationSelector.evtKeyDown, ucrElementSelector.evtKeyDown, ucrYearSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHour.evtKeyDown, ucrFormDaily.evtKeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        If TypeOf sender Is ucrBaseDataLink Then
+    '            If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
+    '                Me.SelectNextControl(sender, True, True, True, True)
+    '            End If
+    '            'this handles the noise on  return key down
+    '            e.SuppressKeyPress = True
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub UnitsControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrTempUnits.evtKeyDown, ucrPrecipUnits.evtKeyDown, ucrCloudheightUnits.evtKeyDown, ucrVisibilityUnits.evtKeyDown
         If e.KeyCode = Keys.Enter Then
@@ -280,17 +293,17 @@
         End If
     End Sub
 
-    Private Sub ucrFormDaily_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFormDaily.evtValueChanged
-        If ucrFormDaily.bUpdating Then
-            SaveEnable()
-        Else
-            btnAddNew.Enabled = False
-            btnClear.Enabled = True
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
-            btnCommit.Enabled = True
-        End If
-    End Sub
+    'Private Sub ucrFormDaily_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFormDaily.evtValueChanged
+    '    If ucrFormDaily.bUpdating Then
+    '        SaveEnable()
+    '    Else
+    '        btnAddNew.Enabled = False
+    '        btnClear.Enabled = True
+    '        btnDelete.Enabled = False
+    '        btnUpdate.Enabled = False
+    '        btnCommit.Enabled = True
+    '    End If
+    'End Sub
 
     Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
         txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")

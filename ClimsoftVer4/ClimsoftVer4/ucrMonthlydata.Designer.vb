@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class ucrMonthlydata
-    Inherits ClimsoftVer4.ucrBaseDataLink
+    Inherits ClimsoftVer4.ucrTableEntry
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _

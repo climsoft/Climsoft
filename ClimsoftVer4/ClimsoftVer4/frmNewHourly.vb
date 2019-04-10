@@ -235,7 +235,7 @@
         Return True
     End Function
 
-    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrHourly.evtKeyDown, ucrElementSelector.evtKeyDown, ucrDay.evtKeyDown
+    Private Sub AllControls_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrYearSelector.evtKeyDown, ucrStationSelector.evtKeyDown, ucrMonth.evtKeyDown, ucrElementSelector.evtKeyDown, ucrDay.evtKeyDown
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrBaseDataLink Then
                 If DirectCast(sender, ucrBaseDataLink).ValidateValue() Then
@@ -253,16 +253,16 @@
         End If
     End Sub
 
-    Private Sub ucrHourly_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourly.evtValueChanged
-        If ucrHourly.bUpdating Then
-            SaveEnable()
-        Else
-            btnAddNew.Enabled = False
-            btnClear.Enabled = True
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
-            btnCommit.Enabled = True
-        End If
-    End Sub
+    'Private Sub ucrHourly_evtValueChanged(sender As Object, e As EventArgs) Handles ucrHourly.evtValueChanged
+    '    If ucrHourly.bUpdating Then
+    '        SaveEnable()
+    '    Else
+    '        btnAddNew.Enabled = False
+    '        btnClear.Enabled = True
+    '        btnDelete.Enabled = False
+    '        btnUpdate.Enabled = False
+    '        btnCommit.Enabled = True
+    '    End If
+    'End Sub
 
 End Class
