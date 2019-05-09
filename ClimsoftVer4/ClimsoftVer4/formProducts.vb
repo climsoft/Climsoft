@@ -109,6 +109,7 @@ Public Class frmProducts
 
         formProductsSelectCriteria.lblProductType.Text = prtyp.ProductType
 
+        'If prtyp.ProductType = "Histograms" Or prtyp.ProductType = "TimeSeires" Then formProductsSelectCriteria.pnlSummary.Enabled = True
 
         formProductsSelectCriteria.Show()
 

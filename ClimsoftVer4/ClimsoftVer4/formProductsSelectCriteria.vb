@@ -307,9 +307,9 @@ Public Class formProductsSelectCriteria
                     'MsgBox(sql)
                     DataProducts(sql, lblProductType.Text)
 
-                Case "Histograms"
-                    Dim myInterface As New clsRInterface()
-                    myInterface.productHistogramExample()
+                'Case "Histograms"
+                '    Dim myInterface As New clsRInterface()
+                '    myInterface.productHistogramExample()
 
                 Case "Monthly"
                     sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, stationName, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
@@ -416,6 +416,28 @@ Public Class formProductsSelectCriteria
 
                 Case "Rclimdex"
                     RclimdexProducts(sdate, edate, lblProductType.Text)
+                Case "TimeSeries"
+                    frmCharts.stns = stnlist
+                    frmCharts.elmlist = elmlist
+                    frmCharts.elmcolmn = elmcolmn
+                    frmCharts.sdt = sdate
+                    frmCharts.edt = edate
+                    frmCharts.SumAvg = SumAvg
+                    frmCharts.SummaryType = SummaryType
+                    frmCharts.graphType = "TimeSeries"
+                    frmCharts.Show()
+                    'MSCharts(stnlist, elmlist, elmcolmn, sdate, edate, SumAvg, SummaryType, "TimeSeries")
+                Case "Histograms"
+                    frmCharts.stns = stnlist
+                    frmCharts.elmlist = elmlist
+                    frmCharts.elmcolmn = elmcolmn
+                    frmCharts.sdt = sdate
+                    frmCharts.edt = edate
+                    frmCharts.SumAvg = SumAvg
+                    frmCharts.SummaryType = SummaryType
+                    frmCharts.graphType = "Histograms"
+                    frmCharts.Show()
+                    'MSCharts(stnlist, elmlist, elmcolmn, sdate, edate, SumAvg, SummaryType, "Histograms")
                 Case Else
                     MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
                     'Me.Cursor = Cursors.Default
@@ -540,6 +562,83 @@ Err:
             'If Err.Number = 5 Then On Error Resume Next
             MsgBox(ex.HResult & " : " & ex.Message)
         End Try
+    End Sub
+    Sub MSCharts(stns As String, elmlist As String, elmcolmn As String, sdt As String, edt As String, SumAvg As String, SummaryType As String, graphType As String)
+        'Dim recmx As Long
+        'Dim flds As Integer
+        'Dim sql1 As New frmCharts
+        ' Daily Summary
+        sql = "SELECT recordedFrom as StationId,stationName as Station_Name,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
+              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
+        'frmCharts.sql = sql
+
+        frmCharts.stns = stns
+        frmCharts.elmlist = elmlist
+        frmCharts.elmcolmn = elmcolmn
+        frmCharts.sdt = sdt
+        frmCharts.edt = stns
+        frmCharts.SumAvg = SumAvg
+        frmCharts.SummaryType = SummaryType
+        frmCharts.graphType = graphType
+        'Try
+        '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        '    ds.Clear()
+        '    da.Fill(ds, "charts")
+        '    recmx = ds.Tables("charts").Rows.Count
+
+        '    'To develop code for determining the data fields
+        '    Dim dcl As Integer
+        '    Dim hdr, hdrs, dttime As String
+
+        '    hdrs = "StationIdStation_NameLatLonElevYearMonthDEKADDayHourMinute"
+        '    dcl = 0
+
+        '    For i = 0 To ds.Tables("charts").Columns.Count - 1
+        '        hdr = ds.Tables("charts").Columns.Item(i).ToString
+
+        '        If InStr(hdrs, hdr) = 0 Then
+        '            dcl = dcl + 1
+        '        End If
+        '    Next
+
+        '    ' Define Series
+        '    frmCharts.MSChart1.Series.Clear()
+        '    flds = ds.Tables("charts").Columns.Count
+
+        '    For i = 1 To dcl
+        '        frmCharts.MSChart1.Series.Add(ds.Tables("charts").Columns.Item(flds - i).ToString).ChartType = DataVisualization.Charting.SeriesChartType.Line
+        '        'frmCharts.MSChart1.Series(ds.Tables("charts").Columns.Item(flds - i).ToString).Color = Color.DarkBlue
+        '    Next
+
+        '    ' Add data to series
+        '    For i = 0 To ds.Tables("charts").Rows.Count - 1
+
+        '        ' Compute datetime value for each record
+        '        dttime = ""
+        '        For j = 0 To ds.Tables("charts").Columns.Count - 1
+        '            If ds.Tables("charts").Columns.Item(j).ToString = "Year" Then dttime = ds.Tables("charts").Rows(i).Item(j)
+
+        '            If InStr("MonthDayHourMinute", ds.Tables("charts").Columns.Item(j).ToString) <> 0 Then
+        '                dttime = dttime & "/" & ds.Tables("charts").Rows(i).Item(j)
+        '            End If
+        '        Next
+
+        '        For j = 1 To dcl
+        '            frmCharts.MSChart1.Series(ds.Tables("charts").Columns.Item(flds - j).ToString).Points.AddXY(dttime, ds.Tables("charts").Rows(i).Item(flds - j))
+        '        Next
+        '    Next
+
+        '    frmCharts.MSChart1.ChartAreas("ChartArea1").AxisX.Title = "Time"
+        '    frmCharts.MSChart1.ChartAreas("ChartArea1").AxisY.Title = "Values"
+        '    frmCharts.MSChart1.Titles.Add("Summary").Alignment = ContentAlignment.TopCenter
+
+        '    frmCharts.Show()
+        '    frmCharts.MSChart1.Show()
+        '    frmCharts.Refresh()
+
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        'End Try
     End Sub
 
     Sub DataProducts(sql As String, typ As String)
@@ -939,7 +1038,7 @@ Err:
         Dim flds1, flds2, flds3 As String
         Dim fl As String
 
-        MsgBox(sql)
+        'MsgBox(sql)
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
@@ -1214,7 +1313,7 @@ Err:
 
     Private Sub lblProductType_TextChanged(sender As Object, e As EventArgs) Handles lblProductType.TextChanged
 
-        If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
+        If lblProductType.Text = "Hourly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Monthly" Or lblProductType.Text = "Annual" Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Or lblProductType.Text = "Histograms" Or lblProductType.Text = "TimeSeries" Then
             optMean.Enabled = True
             optTotal.Enabled = True
         Else

@@ -45,9 +45,10 @@
                 dbstr = txtV3db.Text
 
                 If optEntireDb.Checked = True Then
-                    sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status from observation into outfile '" & bkpfile & "' fields terminated by ',';"
+                    'recorded_from, described_by, recorded_at, made_at, obs_value, flag, period, qc_status, qc_type_log, acquisition_type, data_form, captured_by
+                    sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status,acquisitionType, data_form, captured_by,mark from observation into outfile '" & bkpfile & "' fields terminated by ',';"
                 ElseIf optSeletedRecords.Checked = True Then
-                    sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status from observation where year(recorded_at) between '" & txtByear.Text & "' and '" & txtEyear.Text & "' into outfile '" & bkpfile & "' fields terminated by ',';"
+                    sql_obsv = "use " & dbstr & ";select recorded_from,described_by,recorded_at,made_at,obs_value,flag,period,qc_status,acquisitionType, data_form, captured_by,mark from observation where year(recorded_at) between '" & txtByear.Text & "' and '" & txtEyear.Text & "' into outfile '" & bkpfile & "' fields terminated by ',';"
                 End If
 
                 ' Delete previous backup file
@@ -73,9 +74,10 @@
                     conn.Close()
                     Exit Sub
                 End If
-                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
+                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark);"
             Else
-                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus);"
+                'sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,data_form,captured_by,mark);"
+                sql_obsv = "use " & dbstr & "; SET foreign_key_checks = 0;LOAD DATA LOCAL INFILE '" & bkpfile & "' " & ReplaceIgnore & " INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,qcStatus,qcTypeLog,acquisitionType,dataForm,capturedBy,mark);"
             End If
 
             ' Update station metadata
@@ -86,7 +88,7 @@
             'lstMsgs.Items.Add("Stations Updated")
 
             ' Update elements metadata
-            sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8) set elementId=@col2;"
+            sql_elm = "LOAD DATA LOCAL INFILE '" & bkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (@col1,@col2,@col3,@col4,@col5,@col6,@col7,@col8,@col9,@col10,@col11,@col12,@col13) set elementId=@col2;"
             'MsgBox(sql_elm)
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
             cmd.CommandTimeout = 0
@@ -100,8 +102,10 @@
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
 
-            sql_scale = "UPDATE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark='1' where obsValue <> '' and elementScale > 0 and mark <> '1';"
-            'Execute query for migrating data to V4 db
+            'sql_scale = "UPDATE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark='1' where obsValue <> '' and elementScale > 0 and mark <> '1';"
+            sql_scale = "UPDATE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark='1' where obsValue <> '' and elementScale > 0 and mark = '9';"
+
+            'Execute query for observation vlaues scaling
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_scale, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
@@ -200,10 +204,10 @@
                             dat = dat & "," & rows(0)
                         End If
 
-                        If nums = 7 Then Exit For
+                        If nums = 11 Then Exit For
                         nums = nums + 1
                     Next
-                    Print(1, dat)
+                    Print(1, dat & ",9") ' Set value for the field Mark to 9. This allows selection of values that required requires scaling
                     PrintLine(1)
                 End If
             Loop
