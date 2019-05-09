@@ -103,7 +103,7 @@ Partial Class frmDBUtilities
         '
         Me.CLICOMDailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.SynopToolStripMenuItem, Me.HourlyToolStripMenuItem})
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
-        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM"
         '
         'DailyToolStripMenuItem1
@@ -127,20 +127,20 @@ Partial Class frmDBUtilities
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AWSToolStripMenuItem.Text = "AWS "
         '
         'NOAAGTSToolStripMenuItem
         '
         Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
-        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripHourly, Me.ToolStripDaily, Me.ToolStripSynoptic, Me.MultipleElementColumnsToolStripMenuItem, Me.MonthlyToolStripMenuItem2})
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DailyToolStripMenuItem.Text = "Text Files"
         '
         'ToolStripHourly
@@ -179,7 +179,7 @@ Partial Class frmDBUtilities
         'CLIMSOFTV3ToolStripMenuItem
         '
         Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
-        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CLIMSOFTV3ToolStripMenuItem.Text = "Data Migration"
         '
         'GenerateValuesToolStripMenuItem
