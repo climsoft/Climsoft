@@ -99,6 +99,7 @@ Partial Class formPaperArchive
         Me.lblZoomout = New System.Windows.Forms.Label()
         Me.lblImageRotate = New System.Windows.Forms.Label()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -113,6 +114,7 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.SuspendLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -895,6 +897,7 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.PerformLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -974,4 +977,5 @@ Partial Class formPaperArchive
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
     Friend WithEvents lblImageRotate As System.Windows.Forms.Label
     Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents BindingSource2 As BindingSource
 End Class
