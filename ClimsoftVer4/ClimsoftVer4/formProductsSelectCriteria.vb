@@ -682,6 +682,7 @@ Err:
 
             Exit Sub
 Err:
+        MsgBox(Err.Description)
         If Err.Number = 13 Or Err.Number = 5 Then Resume Next
         MsgBox("No data found. Check and confirm selections")
         'MsgBox(Err.Number & " " & Err.Description)

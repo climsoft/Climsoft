@@ -1,9 +1,13 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+
 Partial Class frmCharts
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+
+    <System.Diagnostics.DebuggerNonUserCode()>
+
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +24,13 @@ Partial Class frmCharts
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+
         Me.Frame6 = New System.Windows.Forms.GroupBox()
         Me.txtchY = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -46,12 +51,17 @@ Partial Class frmCharts
         Me.CmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.dlgChart = New System.Windows.Forms.SaveFileDialog()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+
+    
+        Me.cmdview = New System.Windows.Forms.Button()
+
         Me.Frame6.SuspendLayout()
         CType(Me.MSChart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Frame1.SuspendLayout()
         Me.grpSummary.SuspendLayout()
+
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+
         Me.SuspendLayout()
         '
         'Frame6
@@ -119,19 +129,21 @@ Partial Class frmCharts
         '
         'MSChart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.MSChart1.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.MSChart1.Legends.Add(Legend1)
+
+        ChartArea2.Name = "ChartArea1"
+        Me.MSChart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.MSChart1.Legends.Add(Legend2)
         Me.MSChart1.Location = New System.Drawing.Point(12, 3)
         Me.MSChart1.Name = "MSChart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
-        Series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
-        Me.MSChart1.Series.Add(Series1)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
+        Series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.[Single]
+        Me.MSChart1.Series.Add(Series2)
+
         Me.MSChart1.Size = New System.Drawing.Size(959, 407)
         Me.MSChart1.TabIndex = 0
         Me.MSChart1.Text = "Chart1"
@@ -204,7 +216,9 @@ Partial Class frmCharts
         '
         'cmdPlot
         '
-        Me.cmdPlot.Location = New System.Drawing.Point(274, 557)
+
+        Me.cmdPlot.Location = New System.Drawing.Point(207, 557)
+
         Me.cmdPlot.Name = "cmdPlot"
         Me.cmdPlot.Size = New System.Drawing.Size(56, 24)
         Me.cmdPlot.TabIndex = 3
@@ -213,7 +227,9 @@ Partial Class frmCharts
         '
         'comdSave
         '
-        Me.comdSave.Location = New System.Drawing.Point(363, 557)
+
+        Me.comdSave.Location = New System.Drawing.Point(306, 557)
+
         Me.comdSave.Name = "comdSave"
         Me.comdSave.Size = New System.Drawing.Size(50, 24)
         Me.comdSave.TabIndex = 4
@@ -222,7 +238,9 @@ Partial Class frmCharts
         '
         'cmdPrint
         '
-        Me.cmdPrint.Location = New System.Drawing.Point(446, 557)
+
+        Me.cmdPrint.Location = New System.Drawing.Point(399, 557)
+
         Me.cmdPrint.Name = "cmdPrint"
         Me.cmdPrint.Size = New System.Drawing.Size(50, 24)
         Me.cmdPrint.TabIndex = 5
@@ -231,7 +249,9 @@ Partial Class frmCharts
         '
         'CmdClose
         '
-        Me.CmdClose.Location = New System.Drawing.Point(529, 557)
+
+        Me.CmdClose.Location = New System.Drawing.Point(492, 557)
+
         Me.CmdClose.Name = "CmdClose"
         Me.CmdClose.Size = New System.Drawing.Size(50, 24)
         Me.CmdClose.TabIndex = 6
@@ -240,18 +260,35 @@ Partial Class frmCharts
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(612, 557)
+
+        Me.cmdHelp.Location = New System.Drawing.Point(701, 557)
+
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(50, 24)
         Me.cmdHelp.TabIndex = 7
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+
+        'cmdview
+        '
+        Me.cmdview.Enabled = False
+        Me.cmdview.Location = New System.Drawing.Point(585, 557)
+        Me.cmdview.Name = "cmdview"
+        Me.cmdview.Size = New System.Drawing.Size(73, 24)
+        Me.cmdview.TabIndex = 8
+        Me.cmdview.Text = "Viewd Data"
+        Me.cmdview.UseVisualStyleBackColor = True
+        '
+
         'frmCharts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(983, 590)
+
+        Me.Controls.Add(Me.cmdview)
+
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.CmdClose)
         Me.Controls.Add(Me.cmdPrint)
@@ -267,6 +304,7 @@ Partial Class frmCharts
         Me.Frame1.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
         Me.grpSummary.PerformLayout()
+
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -292,5 +330,7 @@ Partial Class frmCharts
     Friend WithEvents CmdClose As Button
     Friend WithEvents cmdHelp As Button
     Friend WithEvents dlgChart As SaveFileDialog
-    Friend WithEvents BindingSource1 As BindingSource
+
+    Friend WithEvents cmdview As Button
+
 End Class
