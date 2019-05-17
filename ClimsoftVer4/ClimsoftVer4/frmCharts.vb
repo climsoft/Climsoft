@@ -1,11 +1,9 @@
 ﻿Public Class frmCharts
     Public stns, elmlist, elmcolmn, sdt, edt, SumAvg, SummaryType, graphType As String
-
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
     Dim con As New MySql.Data.MySqlClient.MySqlConnection
     Dim sql, MyConnectionString As String
-
 
     Private Sub chtitle_TextChanged(sender As Object, e As EventArgs) Handles txtchtitle.TextChanged
         MSChart1.Titles.Clear()
@@ -99,7 +97,6 @@
         MSChart1.Printing.Print(True)
     End Sub
 
-
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#Charts")
     End Sub
@@ -115,12 +112,6 @@
 
     End Sub
 
-
-    Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
-    Dim ds As New DataSet
-    Dim con As New MySql.Data.MySqlClient.MySqlConnection
-    Dim sql, MyConnectionString As String
-
     Private Sub cmdPlot_Click(sender As Object, e As EventArgs) Handles cmdPlot.Click
         Dim recmx As Long
         Dim flds As Integer
@@ -133,7 +124,6 @@
             con.Open() '
 
             If optDaily.Checked Then
-
                 Sql = "SELECT recordedFrom as StationId,stationName as Station_Name,latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
               "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime);"
                 ChTile = "Daily Summaries"
@@ -147,15 +137,12 @@
                 ChTile = "Monthly Summaries"
             ElseIf optAnnual.Checked Then
                 Sql = "SELECT recordedFrom as StationId, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year," & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
-
                    "WHERE (RecordedFrom = " & stns & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdt & "' And '" & edt & "') ORDER BY recordedFrom, year(obsDatetime)) t GROUP BY StationId,Year;"
                 ChTile = "Annual Summaries"
             End If
 
 
-
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, con)
-
             ds.Clear()
             da.Fill(ds, "charts")
             recmx = ds.Tables("charts").Rows.Count
@@ -222,9 +209,7 @@
 
             Me.Cursor = Cursors.Default
             grpSummary.Enabled = False
-
             cmdview.Enabled = True
-
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
