@@ -326,7 +326,7 @@ Public Class DataCall
                         'get the values of all the needed columns/fields in this row then combine them into the new coulmn
                         lstCombine = New List(Of String)
                         For Each strField As String In lstFields
-                            lstCombine.Add(row.Item(strField))
+                            lstCombine.Add(If(IsDBNull(row.Item(strField)), "", row.Item(strField)))
                         Next
                         'set the column with the combined values
                         row.Item(strFieldDisplay) = String.Join(strSep, lstCombine)

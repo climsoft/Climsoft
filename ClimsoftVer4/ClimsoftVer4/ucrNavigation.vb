@@ -195,24 +195,39 @@ Public Class ucrNavigation
         SetTableName(ucrLinkedTableEntry.GetTableName())
     End Sub
 
+    ''' <summary>
+    ''' this sets the table entry and the key controls(of the tabl entry control) to be controlled by the navigator
+    ''' </summary>
+    ''' <param name="ucrNewLinkedTableEntry"></param>
+    Public Sub SetTableEntryAndKeyControls(ucrNewLinkedTableEntry As ucrTableEntry)
+        'set the table entry control to be used by the navigator
+        SetTableEntry(ucrNewLinkedTableEntry)
+        'get the key controls to be used by the navigator from the table entry  
+        Dim ucrCtrValueView As ucrValueView
+        For Each ctr As Control In ucrNewLinkedTableEntry.Controls
+            If TypeOf ctr Is ucrValueView Then
+                ucrCtrValueView = DirectCast(ctr, ucrValueView)
+                If (ucrCtrValueView.KeyControl) Then
+                    AddKeyControls(ucrCtrValueView)
+                End If
+            End If
+        Next
+    End Sub
     Public Sub ClearKeyControls()
         dctKeyControls.Clear()
     End Sub
 
     Public Sub AddKeyControls(ucrKeyControl As ucrValueView)
-        Dim strFieldName As String
-
-        strFieldName = ucrKeyControl.FieldName
-        If dctKeyControls.ContainsKey(strFieldName) Then
-            If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
+        If dctKeyControls.ContainsKey(ucrKeyControl.FieldName) Then
+            If dctKeyControls.Item(ucrKeyControl.FieldName) Is ucrKeyControl Then
                 MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
                 Exit Sub
             Else
-                dctKeyControls.Item(strFieldName) = ucrKeyControl
+                dctKeyControls.Item(ucrKeyControl.FieldName) = ucrKeyControl
             End If
         Else
-            dctKeyControls.Add(strFieldName, ucrKeyControl)
-            AddField(strFieldName)
+            dctKeyControls.Add(ucrKeyControl.FieldName, ucrKeyControl)
+            AddField(ucrKeyControl.FieldName)
         End If
 
         AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged

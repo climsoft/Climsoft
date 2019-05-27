@@ -23,129 +23,68 @@ Public Class ucrFormDaily2
     Private ucrLinkedElement As ucrElementSelector
 
 
-    ''' <summary>
-    ''' Sets the values of the controls to the coresponding record values in the database with the current key
-    ''' </summary>
-    Public Overrides Sub PopulateControl()
-        If Not bFirstLoad Then
-            MyBase.PopulateControl()
-
-            'TODO. Might not be need anymore
-            bUpdating = dtbRecords.Rows.Count > 0
-
-            'check whether to permit data entry based on date entry values
-            ValidateDataEntryPermission()
-
-            'set the validation of the controls
-            SetValueValidation()
-
-            'set the values to the input controls
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    DirectCast(ctr, ucrValueFlagPeriod).SetValue(New List(Of Object)({GetFieldValue(strValueFieldName & ctr.Tag), GetFieldValue(strFlagFieldName & ctr.Tag), GetFieldValue(strPeriodFieldName & ctr.Tag)}))
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    DirectCast(ctr, ucrTextBox).SetValue(GetFieldValue(strTotalFieldName))
-                End If
-            Next
-
-            'set values for the units
-            If bUpdating Then
-                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    kvpTemp.Value.SetValue(GetFieldValue(kvpTemp.Key))
-                Next
-            Else
-                For Each ucrCombobox As ucrDataLinkCombobox In dctLinkedUnits.Values
-                    ucrCombobox.SelectDefault()
-                Next
-            End If
-
-            'OnevtValueChanged(Me, Nothing)
-        End If
-
-        ' Set conditions for double key entry
-        If frmNewFormDaily2.chkRepeatEntry.Checked Then
-            Me.Clear()
-            ucrValueFlagPeriod1.ucrValue.GetFocus()
-            With frmNewFormDaily2
-                .btnAddNew.Enabled = False
-                .btnCommit.Enabled = False
-                .btnUpdate.Enabled = True
-            End With
-        End If
-    End Sub
-
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim ucrVFP As ucrValueFlagPeriod
-        Dim ucrTotal As ucrTextBox
-        Dim vfpContextMenuStrip As ContextMenuStrip
-
         If bFirstLoad Then
-
-            vfpContextMenuStrip = SetUpContextMenuStrip()
-
+            'set up the value flag peruiod first
+            Dim ucrVFP As ucrValueFlagPeriod
+            Dim vfpContextMenuStrip As ContextMenuStrip = SetUpContextMenuStrip()
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    lstFields.Add(strValueFieldName & ucrVFP.Tag)
-                    lstFields.Add(strFlagFieldName & ucrVFP.Tag)
-                    lstFields.Add(strPeriodFieldName & ucrVFP.Tag)
-
-                    ucrVFP.SetTableNameAndValueFlagPeriodFields(strTableName, strValueFieldName:=strValueFieldName & ucrVFP.Tag, strFlagFieldName:=strFlagFieldName & ucrVFP.Tag, strPeriodFieldName:=strPeriodFieldName & ucrVFP.Tag)
-
-                    AddHandler ucrVFP.ucrValue.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ucrVFP.ucrFlag.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ucrVFP.ucrPeriod.evtValueChanged, AddressOf InnerControlValueChanged
-                    AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-
+                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName, strPeriodFieldName & ucrVFP.FieldName)
+                    'AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
                     ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
-
-                ElseIf TypeOf ctr Is ucrTextBox Then
-                    ucrTotal = DirectCast(ctr, ucrTextBox)
-                    ucrTotal.SetTableNameAndField(strTableName, strTotalFieldName)
-                    lstFields.Add(strTotalFieldName)
-                    AddHandler ucrTotal.evtValueChanged, AddressOf InnerControlValueChanged
                 End If
             Next
 
-            strTableName = "form_daily2"
-            'crTableEntry_Load fills in the lstFields 
-            'SetUpTableEntry()
-            SetTableNameAndFields(strTableName, lstFields)
+            SetUpTableEntry("form_daily2")
+
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrElementSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrHour, ucrHour.FieldName, "=", strLinkedFieldName:="hh", bForceValuesAsString:=False)
+
+            'set up the navigation control
+            ucrDaily2Navigation.SetTableEntryAndKeyControls(Me)
 
             bFirstLoad = False
 
+            'populate the values
+            ucrDaily2Navigation.PopulateControl()
+            SaveEnable()
+        End If
+
+
+
+    End Sub
+
+
+    ''' <summary>
+    ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
+    ''' </summary>
+    Private Sub SaveEnable()
+        btnAddNew.Enabled = True
+        btnSave.Enabled = False
+        btnClear.Enabled = False
+        btnDelete.Enabled = False
+        btnUpdate.Enabled = False
+
+        If ucrDaily2Navigation.iCurrRow = -1 Then
+            btnAddNew.Enabled = False
+            btnClear.Enabled = True
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnSave.Enabled = True
+        ElseIf ucrDaily2Navigation.iMaxRows = 0 Then
+            btnAddNew.Enabled = False
+            btnSave.Enabled = True
+        ElseIf ucrDaily2Navigation.iMaxRows > 0 Then
+            btnDelete.Enabled = True
+            btnUpdate.Enabled = True
         End If
     End Sub
 
-    Public Overrides Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, tblFilter As TableFilter, Optional strFieldName As String = "")
-        MyBase.AddLinkedControlFilters(ucrLinkedDataControl, tblFilter, strFieldName)
-        If Not lstFields.Contains(tblFilter.GetField) Then
-            lstFields.Add(tblFilter.GetField)
-            SetFields(lstFields)
-        End If
-    End Sub
-
-    Private Sub InnerControlValueChanged(sender As Object, e As EventArgs)
-        Dim ucrText As ucrTextBox
-        'If fd2Record IsNot Nothing Then
-        If TypeOf sender Is ucrTextBox Then
-                ucrText = DirectCast(sender, ucrTextBox)
-                'TODO Replace this with a call to update the datatable
-
-                'CallByName(fd2Record, ucrText.GetField, CallType.Set, ucrText.GetValue)
-            ElseIf TypeOf sender Is ucrDataLinkCombobox Then
-                For Each kvpTemp As KeyValuePair(Of String, ucrDataLinkCombobox) In dctLinkedUnits
-                    'overwrite the specific unit value
-                    If sender Is kvpTemp.Value Then
-                        'TODO Replace this with a call to update the datatable
-
-                        'CallByName(fd2Record, kvpTemp.Key, CallType.Set, kvpTemp.Value.GetValue)
-                        Exit For
-                    End If
-                Next
-            End If
-        'End If
-    End Sub
 
     Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
         SelectNextControl(sender, True, True, True, True)
@@ -166,31 +105,6 @@ Public Class ucrFormDaily2
         checkTotal()
     End Sub
 
-    Protected Overrides Sub LinkedControls_evtValueChanged()
-        Dim bValidValues As Boolean = True
-
-        'validate the values of the linked key filter controls
-        'For Each key As ucrValueView In dctLinkedControlsFilters.Keys
-        ' If Not key.ValidateValue() Then
-        'bValidValues = False
-        'Exit For
-        ' End If
-        'Next
-
-        If bValidValues Then
-            'will populate the datatable based on the new key values
-            'MyBase.LinkedControls_evtValueChanged()
-
-            'For Each kvpTemp As KeyValuePair(Of ucrValueView, KeyValuePair(Of String, TableFilter)) In dctLinkedControlsFilters
-            'TODO Replace this with a call to update the datatable
-            'CallByName(fd2Record, kvpTemp.Value.Value.GetField(), CallType.Set, kvpTemp.Key.GetValue)
-            ' Next
-            ' ucrLinkedNavigation.UpdateNavigationByKeyControls()
-        Else
-            'TODO. DISABLE??
-            'Me.Enabled = False
-        End If
-    End Sub
 
     ''' <summary>
     ''' Sets the  filed name and the control for the liked units
@@ -202,7 +116,7 @@ Public Class ucrFormDaily2
             MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
         Else
             dctLinkedUnits.Add(strFieldName, ucrComboBox)
-            AddHandler ucrComboBox.evtValueChanged, AddressOf InnerControlValueChanged
+            'AddHandler ucrComboBox.evtValueChanged, AddressOf InnerControlValueChanged
             'add the field
             If Not lstFields.Contains(strFieldName) Then
                 lstFields.Add(strFieldName)
@@ -432,7 +346,7 @@ Public Class ucrFormDaily2
     ''' Returns true if they are all valid and false if any has Invalid value
     ''' </summary>
     ''' <returns></returns>
-    Public Function ValidateValue() As Boolean
+    Public Overrides Function ValidateValue() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
@@ -896,6 +810,5 @@ Public Class ucrFormDaily2
         Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
         Return New ClsShiftCells(allVFP).GetVFPContextMenu()
     End Function
-
 
 End Class

@@ -3,7 +3,7 @@
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
-    Public strIdentifyField As String
+    'Public strIdentifyField As String
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -98,7 +98,7 @@
         End If
     End Sub
 
-    Public Sub SetBackColor(backColor As Color)
+    Public Overrides Sub SetBackColor(backColor As Color)
         ucrValue.SetBackColor(backColor)
         ucrFlag.SetBackColor(backColor)
         If bIncludePeriod Then
@@ -112,7 +112,13 @@
         'MyBase.SetValue(objNewValue)
         lstValueFlagPeriod = TryCast(objNewValue, List(Of Object))
 
-        If lstValueFlagPeriod.Count = 3 Then
+        If IsNothing(lstValueFlagPeriod) Then
+            SetElementValue(Nothing)
+            SetElementFlagValue(Nothing)
+            If bIncludePeriod Then
+                SetElementPeriodValue(Nothing)
+            End If
+        ElseIf lstValueFlagPeriod.Count = 3 Then
             SetElementValue(lstValueFlagPeriod(0))
             SetElementFlagValue(lstValueFlagPeriod(1))
             If bIncludePeriod Then
@@ -254,7 +260,7 @@
             If sender Is ucrValue Then
 
                 ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
-                Compare_Entry(ucrValue.TextboxValue)
+                'Compare_Entry(ucrValue.TextboxValue)
 
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrValue.IsEmpty Then
@@ -376,140 +382,19 @@
         ucrPeriod.SetContextMenuStrip(contextMenuStrip)
     End Sub
 
-    Sub Compare_Entry(obsv As String)
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim constr As String
-        Dim frm, stn, elm, yy, mm, dd, hh, dttime, obsv1, C1, cpVal As String
-        Dim Conflict As Boolean
 
-        constr = frmLogin.txtusrpwd.Text
-        conn.ConnectionString = constr
-        conn.Open()
-        'MsgBox(CurrentEntryValue)
-
-        'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
-
-        With frmKeyEntry.ListView1
-            For i = 0 To .Items.Count - 1
-                If .Items(i).Selected = True Then
-                    frm = .Items(i).SubItems(0).Text
-                    Exit For
-                End If
-            Next
-
-            'MsgBox(frm)
-            Select Case frm
-                Case "form_synoptic_2_ra1"
-                    Try
-                        With frmNewSynopticRA1
-                            If Not .chkRepeatEntry.Checked Then
-                                Exit Sub
-                            End If
-                            stn = .ucrStationSelector.cboValues.SelectedValue
-                            elm = .ucrSynopticRA1.ActiveControl.Tag
-                            yy = .ucrYearSelector.cboValues.SelectedValue
-                            mm = .ucrMonth.cboValues.SelectedValue
-                            dd = .ucrDay.cboValues.SelectedValue
-                            hh = .ucrHour.cboValues.SelectedValue
-                        End With
-                        If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
-                            MsgBox("Can't Verify: Record does not exist")
-                            Exit Sub
-                        Else
-                            ' Start Verification process
-                            Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
-                        End If
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
-                Case "form_daily2"
-                    Try
-                        With frmNewFormDaily2
-                            If Not .chkRepeatEntry.Checked Then
-                                Exit Sub
-                            End If
-                            stn = .ucrStationSelector.cboValues.SelectedValue
-                            elm = .ucrElementSelector.cboValues.SelectedValue
-                            yy = .ucrYearSelector.cboValues.SelectedValue
-                            mm = .ucrMonth.cboValues.SelectedValue
-                            dd = Mid(.ucrFormDaily.ActiveControl.Name, 19, Len(.ucrFormDaily.ActiveControl.Name) - 18)
-                            hh = .ucrHour.cboValues.SelectedValue
-                        End With
-                        If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
-                            MsgBox("Can't Verify: Record does not exist")
-                            Exit Sub
-                        Else
-                            Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
-                        End If
-                        'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh & " " & obsv1)
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
-                Case "form_hourly"
-                    Try
-                        With frmNewHourly
-                            If Not .chkRepeatEntry.Checked Then
-                                Exit Sub
-                            End If
-                            stn = .ucrStationSelector.cboValues.SelectedValue
-                            elm = .ucrElementSelector.cboValues.SelectedValue
-                            yy = .ucrYearSelector.cboValues.SelectedValue
-                            mm = .ucrMonth.cboValues.SelectedValue
-                            dd = .ucrDay.cboValues.SelectedValue
-                            hh = Strings.Mid(.ucrHourly.ActiveControl.Name, 19, Len(.ucrHourly.ActiveControl.Name) - 18)
-                            'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh)
-                        End With
-
-                        If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
-                            MsgBox("Can't Verify: Record does not exist")
-                            Exit Sub
-                        Else
-                            'MsgBox(obsv1)
-                            Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
-                        End If
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
-                Case "form_monthly"
-            End Select
-        End With
-
-
+    Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        ucrValue.FieldName = strValueFieldName
+        ucrFlag.FieldName = strFlagFieldName
+        ucrPeriod.FieldName = strPeriodFieldName
+        bIncludePeriod = True
     End Sub
-    Sub Validate_Entry(obsv As String, obsv1 As String, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String)
-        Dim Conflict As Boolean
-        Dim C1, cpVal As String
 
-        Conflict = False
-        If obsv <> obsv1 Then
-            MsgBox("Conflicting Values")
-            ucrValue.BackColor = Color.Yellow
-            cpVal = ucrValue.TextboxValue
-            Conflict = True
-            ucrValue.TextboxValue = ""
-
-            Do While Conflict = True
-                C1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
-                If C1 <> cpVal Then
-                    cpVal = C1
-                    Conflict = True
-                    MsgBox("Re Entry Conflict! Try Again")
-                Else
-                    ucrValue.TextboxValue = C1
-                    Conflict = False
-                    'Update database with the verified value
-                    If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
-                        If Not objKeyPress.Db_Update_Conflicts(stnid, elmcode, yy, mm, dd, hh, C1) Then
-                            MsgBox("Update Failure")
-                        End If
-                    Else
-                        MsgBox("Update Cancelled by operator")
-                        ucrValue.TextboxValue = ""
-                    End If
-                    ucrValue.BackColor = Color.White
-                End If
-            Loop
-        End If
+    Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
+        ucrValue.FieldName = strValueFieldName
+        ucrFlag.FieldName = strFlagFieldName
+        ucrPeriod.FieldName = "" 'removes the default period field to avoid addition of it to a list of fields of its table entry control
+        bIncludePeriod = False
     End Sub
 
     Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
@@ -529,29 +414,187 @@
         Dim lstValues As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
         Dim dtbTemp As DataTable
+        Dim strIdentifyField As String = FieldName
 
-        If strIdentifyField = "" OrElse Tag = "" Then
+
+        ucrValue.SetValueFromDataTable(dtbValues)
+        ucrFlag.SetValueFromDataTable(dtbValues)
+        If bIncludePeriod Then
+            ucrPeriod.SetValueFromDataTable(dtbValues)
+        End If
+        'todo.OR??
+        'lstValues.Add(dtbValues.Rows(0).Item(ucrValue.FieldName))
+        'lstValues.Add(dtbValues.Rows(0).Item(ucrFlag.FieldName))
+        'If bIncludePeriod Then
+        '    lstValues.Add(dtbValues.Rows(0).Item(ucrPeriod.FieldName))
+        'End If
+        'SetValue(lstValues)
+
+        If 1 = 1 Then
+            Return
+        End If
+        'the below code is not working with the current model
+
+        If String.IsNullOrEmpty(strIdentifyField) Then
             SetValue(Nothing)
         Else
             dtbTemp = dtbValues.Clone()
             For Each tempRow In dtbValues.Rows
-                If tempRow(strIdentifyField) = Tag Then
+                If tempRow(strIdentifyField) = FieldName Then
                     dtbTemp.Rows.Add(tempRow)
                 End If
             Next
 
             If dtbTemp.Rows.Count = 1 Then
-                lstValues.Add(dtbTemp.Rows(0)(ucrValue.Tag))
-                lstValues.Add(dtbTemp.Rows(0)(ucrFlag.Tag))
-                lstValues.Add(dtbTemp.Rows(0)(ucrPeriod.Tag))
+                lstValues.Add(dtbTemp.Rows(0)(ucrValue.FieldName))
+                lstValues.Add(dtbTemp.Rows(0)(ucrFlag.FieldName))
+                lstValues.Add(dtbTemp.Rows(0)(ucrPeriod.FieldName))
                 SetValue(lstValues)
             ElseIf dtbTemp.Rows.Count = 0 Then
                 SetValue(Nothing)
             Else
                 'TODO Should we give an error in this case?
                 SetValue(Nothing)
+                End If
             End If
-        End If
     End Sub
+
+
+    ''code commented out temprarily
+    'Sub Compare_Entry(obsv As String)
+    '    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+    '    Dim constr As String
+    '    Dim frm, stn, elm, yy, mm, dd, hh, dttime, obsv1, C1, cpVal As String
+    '    Dim Conflict As Boolean
+
+    '    constr = frmLogin.txtusrpwd.Text
+    '    conn.ConnectionString = constr
+    '    conn.Open()
+
+
+    '    With frmKeyEntry.ListView1
+    '        For i = 0 To .Items.Count - 1
+    '            If .Items(i).Selected = True Then
+    '                frm = .Items(i).SubItems(0).Text
+    '                Exit For
+    '            End If
+    '        Next
+
+    '        Select Case frm
+    '            Case "form_synoptic_2_ra1"
+    '                Try
+    '                    With frmNewSynopticRA1
+    '                        If Not .chkRepeatEntry.Checked Then
+    '                            Exit Sub
+    '                        End If
+    '                        stn = .ucrStationSelector.cboValues.SelectedValue
+    '                        elm = .ucrSynopticRA1.ActiveControl.Tag
+    '                        yy = .ucrYearSelector.cboValues.SelectedValue
+    '                        mm = .ucrMonth.cboValues.SelectedValue
+    '                        dd = .ucrDay.cboValues.SelectedValue
+    '                        hh = .ucrHour.cboValues.SelectedValue
+    '                    End With
+    '                    If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+    '                        MsgBox("Can't Verify: Record does not exist")
+    '                        Exit Sub
+    '                    Else
+    '                        ' Start Verification process
+    '                        Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
+    '                    End If
+    '                Catch ex As Exception
+    '                    MsgBox(ex.Message)
+    '                End Try
+    '            Case "form_daily2"
+    '                Try
+    '                    With frmNewFormDaily2
+    '                        If Not .chkRepeatEntry.Checked Then
+    '                            Exit Sub
+    '                        End If
+    '                        stn = .ucrStationSelector.cboValues.SelectedValue
+    '                        elm = .ucrElementSelector.cboValues.SelectedValue
+    '                        yy = .ucrYearSelector.cboValues.SelectedValue
+    '                        mm = .ucrMonth.cboValues.SelectedValue
+    '                        dd = Mid(.ucrFormDaily.ActiveControl.Name, 19, Len(.ucrFormDaily.ActiveControl.Name) - 18)
+    '                        hh = .ucrHour.cboValues.SelectedValue
+    '                    End With
+    '                    If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+    '                        MsgBox("Can't Verify: Record does not exist")
+    '                        Exit Sub
+    '                    Else
+    '                        Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
+    '                    End If
+    '                    'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh & " " & obsv1)
+    '                Catch ex As Exception
+    '                    MsgBox(ex.Message)
+    '                End Try
+    '            Case "form_hourly"
+    '                Try
+    '                    With frmNewHourly
+    '                        If Not .chkRepeatEntry.Checked Then
+    '                            Exit Sub
+    '                        End If
+    '                        stn = .ucrStationSelector.cboValues.SelectedValue
+    '                        elm = .ucrElementSelector.cboValues.SelectedValue
+    '                        yy = .ucrYearSelector.cboValues.SelectedValue
+    '                        mm = .ucrMonth.cboValues.SelectedValue
+    '                        dd = .ucrDay.cboValues.SelectedValue
+    '                        hh = Strings.Mid(.ucrHourly.ActiveControl.Name, 19, Len(.ucrHourly.ActiveControl.Name) - 18)
+    '                        'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh)
+    '                    End With
+
+    '                    If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+    '                        MsgBox("Can't Verify: Record does not exist")
+    '                        Exit Sub
+    '                    Else
+    '                        'MsgBox(obsv1)
+    '                        Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
+    '                    End If
+    '                Catch ex As Exception
+    '                    MsgBox(ex.Message)
+    '                End Try
+    '            Case "form_monthly"
+    '        End Select
+    '    End With
+
+
+    'End Sub
+
+    'commented temporarily
+    'Sub Validate_Entry(obsv As String, obsv1 As String, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String)
+    '    Dim Conflict As Boolean
+    '    Dim C1, cpVal As String
+
+    '    Conflict = False
+    '    If obsv <> obsv1 Then
+    '        MsgBox("Conflicting Values")
+    '        ucrValue.BackColor = Color.Yellow
+    '        cpVal = ucrValue.TextboxValue
+    '        Conflict = True
+    '        ucrValue.TextboxValue = ""
+
+    '        Do While Conflict = True
+    '            C1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
+    '            If C1 <> cpVal Then
+    '                cpVal = C1
+    '                Conflict = True
+    '                MsgBox("Re Entry Conflict! Try Again")
+    '            Else
+    '                ucrValue.TextboxValue = C1
+    '                Conflict = False
+    '                'Update database with the verified value
+    '                If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
+    '                    If Not objKeyPress.Db_Update_Conflicts(stnid, elmcode, yy, mm, dd, hh, C1) Then
+    '                        MsgBox("Update Failure")
+    '                    End If
+    '                Else
+    '                    MsgBox("Update Cancelled by operator")
+    '                    ucrValue.TextboxValue = ""
+    '                End If
+    '                ucrValue.BackColor = Color.White
+    '            End If
+    '        Loop
+    '    End If
+    'End Sub
+
 
 End Class

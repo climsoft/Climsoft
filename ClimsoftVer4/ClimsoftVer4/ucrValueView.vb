@@ -13,6 +13,8 @@
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
     Protected strValidationType As String = "none"
+    Private bKeyControl As Boolean = False
+
 
     Public Property FieldName() As String
         Get
@@ -20,6 +22,15 @@
         End Get
         Set(value As String)
             Me.Tag = value
+        End Set
+    End Property
+
+    Public Property KeyControl() As Boolean
+        Get
+            Return bKeyControl
+        End Get
+        Set(value As Boolean)
+            bKeyControl = value
         End Set
     End Property
 

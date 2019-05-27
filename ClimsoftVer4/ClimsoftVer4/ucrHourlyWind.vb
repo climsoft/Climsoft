@@ -2,31 +2,26 @@
 
 Public Class ucrHourlyWind
 
-    Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
 
             SetUpTableEntry("form_hourlywind")
 
-            'validations
-            ucrYearSelector.SetValidationTypeAsNumeric()
-            ucrMonth.SetValidationTypeAsNumeric()
-            ucrDay.SetValidationTypeAsNumeric()
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
-            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName(), "=", strLinkedFieldName:=ucrStationSelector.FieldName(), bForceValuesAsString:=True)
-            AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName(), "=", strLinkedFieldName:=ucrYearSelector.FieldName(), bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName(), "=", strLinkedFieldName:=ucrMonth.FieldName(), bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrDay, ucrDay.FieldName(), "=", strLinkedFieldName:=ucrDay.FieldName(), bForceValuesAsString:=False)
 
-            'TODO Set up the other key controls year, Month, Day
 
-            AddKeyField(ucrStationSelector.FieldName)
+            'AddKeyField(ucrStationSelector.FieldName)
 
             'set up the navigation control
-            ucrNavigation.SetTableEntry(Me)
-            ucrNavigation.AddKeyControls(ucrStationSelector)
-            ucrNavigation.AddKeyControls(ucrYearSelector)
-            ucrNavigation.AddKeyControls(ucrMonth)
-            ucrNavigation.AddKeyControls(ucrDay)
+            ucrNavigation.SetTableEntryAndKeyControls(Me)
+            'ucrNavigation.AddKeyControls(ucrStationSelector)
+            'ucrNavigation.AddKeyControls(ucrYearSelector)
+            'ucrNavigation.AddKeyControls(ucrMonth)
+            'ucrNavigation.AddKeyControls(ucrDay)
 
             bFirstLoad = False
 

@@ -1,36 +1,36 @@
 ﻿Public Class ucrHourly
+    Private strValueFieldName As String = "hh_"
+    Private strFlagFieldName As String = "flag"
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-
+            'set up the value flag peruiod first
+            Dim ucrVFP As ucrValueFlagPeriod
+            ' Dim vfpContextMenuStrip As  ContextMenuStrip = SetUpContextMenuStrip()
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
+                    'AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
+                    'ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
+                End If
+            Next
             SetUpTableEntry("form_hourly")
 
-            'validations
-            ucrYearSelector.SetValidationTypeAsNumeric()
-            ucrMonth.SetValidationTypeAsNumeric()
-            ucrDay.SetValidationTypeAsNumeric()
+            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
+            AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
-            AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName(), "=", strLinkedFieldName:=ucrStationSelector.FieldName(), bForceValuesAsString:=True)
-            AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName(), "=", strLinkedFieldName:=ucrElementSelector.FieldName(), bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName(), "=", strLinkedFieldName:=ucrYearSelector.FieldName(), bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName(), "=", strLinkedFieldName:=ucrMonth.FieldName(), bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrDay, ucrDay.FieldName(), "=", strLinkedFieldName:=ucrDay.FieldName(), bForceValuesAsString:=False)
-
-            'TODO Set up the other key controls year, Month, Day
-
-            AddKeyField(ucrStationSelector.FieldName)
 
             'set up the navigation control
-            ucrNavigation.SetTableEntry(Me)
-            ucrNavigation.AddKeyControls(ucrStationSelector)
-            ucrNavigation.AddKeyControls(ucrElementSelector)
-            ucrNavigation.AddKeyControls(ucrYearSelector)
-            ucrNavigation.AddKeyControls(ucrMonth)
-            ucrNavigation.AddKeyControls(ucrDay)
+            ucrNavigation.SetTableEntryAndKeyControls(Me)
 
             bFirstLoad = False
 
             'populate the values
+            ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl()
             SaveEnable()
         End If

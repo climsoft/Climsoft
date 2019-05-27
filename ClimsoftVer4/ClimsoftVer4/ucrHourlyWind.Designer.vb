@@ -375,6 +375,7 @@ Partial Class ucrHourlyWind
         'ucrInputTotal
         '
         Me.ucrInputTotal.FieldName = Nothing
+        Me.ucrInputTotal.KeyControl = False
         Me.ucrInputTotal.Location = New System.Drawing.Point(547, 430)
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
@@ -394,6 +395,7 @@ Partial Class ucrHourlyWind
         'ucrDirectionSpeedFlag0
         '
         Me.ucrDirectionSpeedFlag0.FieldName = "00"
+        Me.ucrDirectionSpeedFlag0.KeyControl = False
         Me.ucrDirectionSpeedFlag0.Location = New System.Drawing.Point(38, 103)
         Me.ucrDirectionSpeedFlag0.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDirectionSpeedFlag0.Name = "ucrDirectionSpeedFlag0"
@@ -413,6 +415,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag1
         '
         Me.UcrDirectionSpeedFlag1.FieldName = "01"
+        Me.UcrDirectionSpeedFlag1.KeyControl = False
         Me.UcrDirectionSpeedFlag1.Location = New System.Drawing.Point(38, 133)
         Me.UcrDirectionSpeedFlag1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag1.Name = "UcrDirectionSpeedFlag1"
@@ -423,6 +426,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag2
         '
         Me.UcrDirectionSpeedFlag2.FieldName = "02"
+        Me.UcrDirectionSpeedFlag2.KeyControl = False
         Me.UcrDirectionSpeedFlag2.Location = New System.Drawing.Point(38, 163)
         Me.UcrDirectionSpeedFlag2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag2.Name = "UcrDirectionSpeedFlag2"
@@ -433,6 +437,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag3
         '
         Me.UcrDirectionSpeedFlag3.FieldName = "03"
+        Me.UcrDirectionSpeedFlag3.KeyControl = False
         Me.UcrDirectionSpeedFlag3.Location = New System.Drawing.Point(38, 190)
         Me.UcrDirectionSpeedFlag3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag3.Name = "UcrDirectionSpeedFlag3"
@@ -443,6 +448,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag4
         '
         Me.UcrDirectionSpeedFlag4.FieldName = "04"
+        Me.UcrDirectionSpeedFlag4.KeyControl = False
         Me.UcrDirectionSpeedFlag4.Location = New System.Drawing.Point(38, 220)
         Me.UcrDirectionSpeedFlag4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag4.Name = "UcrDirectionSpeedFlag4"
@@ -453,6 +459,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag5
         '
         Me.UcrDirectionSpeedFlag5.FieldName = "05"
+        Me.UcrDirectionSpeedFlag5.KeyControl = False
         Me.UcrDirectionSpeedFlag5.Location = New System.Drawing.Point(40, 250)
         Me.UcrDirectionSpeedFlag5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag5.Name = "UcrDirectionSpeedFlag5"
@@ -463,6 +470,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag6
         '
         Me.UcrDirectionSpeedFlag6.FieldName = "06"
+        Me.UcrDirectionSpeedFlag6.KeyControl = False
         Me.UcrDirectionSpeedFlag6.Location = New System.Drawing.Point(41, 280)
         Me.UcrDirectionSpeedFlag6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag6.Name = "UcrDirectionSpeedFlag6"
@@ -473,6 +481,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag7
         '
         Me.UcrDirectionSpeedFlag7.FieldName = "07"
+        Me.UcrDirectionSpeedFlag7.KeyControl = False
         Me.UcrDirectionSpeedFlag7.Location = New System.Drawing.Point(41, 311)
         Me.UcrDirectionSpeedFlag7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag7.Name = "UcrDirectionSpeedFlag7"
@@ -483,6 +492,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag8
         '
         Me.UcrDirectionSpeedFlag8.FieldName = "08"
+        Me.UcrDirectionSpeedFlag8.KeyControl = False
         Me.UcrDirectionSpeedFlag8.Location = New System.Drawing.Point(41, 343)
         Me.UcrDirectionSpeedFlag8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag8.Name = "UcrDirectionSpeedFlag8"
@@ -493,6 +503,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag9
         '
         Me.UcrDirectionSpeedFlag9.FieldName = "09"
+        Me.UcrDirectionSpeedFlag9.KeyControl = False
         Me.UcrDirectionSpeedFlag9.Location = New System.Drawing.Point(41, 370)
         Me.UcrDirectionSpeedFlag9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag9.Name = "UcrDirectionSpeedFlag9"
@@ -503,6 +514,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag10
         '
         Me.UcrDirectionSpeedFlag10.FieldName = "10"
+        Me.UcrDirectionSpeedFlag10.KeyControl = False
         Me.UcrDirectionSpeedFlag10.Location = New System.Drawing.Point(41, 400)
         Me.UcrDirectionSpeedFlag10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag10.Name = "UcrDirectionSpeedFlag10"
@@ -513,6 +525,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag11
         '
         Me.UcrDirectionSpeedFlag11.FieldName = "11"
+        Me.UcrDirectionSpeedFlag11.KeyControl = False
         Me.UcrDirectionSpeedFlag11.Location = New System.Drawing.Point(41, 430)
         Me.UcrDirectionSpeedFlag11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag11.Name = "UcrDirectionSpeedFlag11"
@@ -523,6 +536,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag12
         '
         Me.UcrDirectionSpeedFlag12.FieldName = "12"
+        Me.UcrDirectionSpeedFlag12.KeyControl = False
         Me.UcrDirectionSpeedFlag12.Location = New System.Drawing.Point(306, 103)
         Me.UcrDirectionSpeedFlag12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag12.Name = "UcrDirectionSpeedFlag12"
@@ -533,6 +547,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag13
         '
         Me.UcrDirectionSpeedFlag13.FieldName = "13"
+        Me.UcrDirectionSpeedFlag13.KeyControl = False
         Me.UcrDirectionSpeedFlag13.Location = New System.Drawing.Point(307, 133)
         Me.UcrDirectionSpeedFlag13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag13.Name = "UcrDirectionSpeedFlag13"
@@ -543,6 +558,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag14
         '
         Me.UcrDirectionSpeedFlag14.FieldName = "14"
+        Me.UcrDirectionSpeedFlag14.KeyControl = False
         Me.UcrDirectionSpeedFlag14.Location = New System.Drawing.Point(307, 163)
         Me.UcrDirectionSpeedFlag14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag14.Name = "UcrDirectionSpeedFlag14"
@@ -553,6 +569,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag15
         '
         Me.UcrDirectionSpeedFlag15.FieldName = "15"
+        Me.UcrDirectionSpeedFlag15.KeyControl = False
         Me.UcrDirectionSpeedFlag15.Location = New System.Drawing.Point(307, 194)
         Me.UcrDirectionSpeedFlag15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag15.Name = "UcrDirectionSpeedFlag15"
@@ -563,6 +580,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag16
         '
         Me.UcrDirectionSpeedFlag16.FieldName = "16"
+        Me.UcrDirectionSpeedFlag16.KeyControl = False
         Me.UcrDirectionSpeedFlag16.Location = New System.Drawing.Point(306, 220)
         Me.UcrDirectionSpeedFlag16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag16.Name = "UcrDirectionSpeedFlag16"
@@ -573,6 +591,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag17
         '
         Me.UcrDirectionSpeedFlag17.FieldName = "17"
+        Me.UcrDirectionSpeedFlag17.KeyControl = False
         Me.UcrDirectionSpeedFlag17.Location = New System.Drawing.Point(306, 250)
         Me.UcrDirectionSpeedFlag17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag17.Name = "UcrDirectionSpeedFlag17"
@@ -583,6 +602,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag18
         '
         Me.UcrDirectionSpeedFlag18.FieldName = "18"
+        Me.UcrDirectionSpeedFlag18.KeyControl = False
         Me.UcrDirectionSpeedFlag18.Location = New System.Drawing.Point(307, 280)
         Me.UcrDirectionSpeedFlag18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag18.Name = "UcrDirectionSpeedFlag18"
@@ -593,6 +613,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag19
         '
         Me.UcrDirectionSpeedFlag19.FieldName = "19"
+        Me.UcrDirectionSpeedFlag19.KeyControl = False
         Me.UcrDirectionSpeedFlag19.Location = New System.Drawing.Point(307, 311)
         Me.UcrDirectionSpeedFlag19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag19.Name = "UcrDirectionSpeedFlag19"
@@ -603,6 +624,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag20
         '
         Me.UcrDirectionSpeedFlag20.FieldName = "20"
+        Me.UcrDirectionSpeedFlag20.KeyControl = False
         Me.UcrDirectionSpeedFlag20.Location = New System.Drawing.Point(307, 339)
         Me.UcrDirectionSpeedFlag20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag20.Name = "UcrDirectionSpeedFlag20"
@@ -613,6 +635,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag21
         '
         Me.UcrDirectionSpeedFlag21.FieldName = "21"
+        Me.UcrDirectionSpeedFlag21.KeyControl = False
         Me.UcrDirectionSpeedFlag21.Location = New System.Drawing.Point(306, 370)
         Me.UcrDirectionSpeedFlag21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag21.Name = "UcrDirectionSpeedFlag21"
@@ -623,6 +646,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag22
         '
         Me.UcrDirectionSpeedFlag22.FieldName = "22"
+        Me.UcrDirectionSpeedFlag22.KeyControl = False
         Me.UcrDirectionSpeedFlag22.Location = New System.Drawing.Point(307, 400)
         Me.UcrDirectionSpeedFlag22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag22.Name = "UcrDirectionSpeedFlag22"
@@ -633,6 +657,7 @@ Partial Class ucrHourlyWind
         'UcrDirectionSpeedFlag23
         '
         Me.UcrDirectionSpeedFlag23.FieldName = "23"
+        Me.UcrDirectionSpeedFlag23.KeyControl = False
         Me.UcrDirectionSpeedFlag23.Location = New System.Drawing.Point(307, 430)
         Me.UcrDirectionSpeedFlag23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag23.Name = "UcrDirectionSpeedFlag23"
@@ -727,6 +752,7 @@ Partial Class ucrHourlyWind
         'ucrDay
         '
         Me.ucrDay.FieldName = "dd"
+        Me.ucrDay.KeyControl = True
         Me.ucrDay.Location = New System.Drawing.Point(450, 19)
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
@@ -737,6 +763,7 @@ Partial Class ucrHourlyWind
         'ucrMonth
         '
         Me.ucrMonth.FieldName = "mm"
+        Me.ucrMonth.KeyControl = True
         Me.ucrMonth.Location = New System.Drawing.Point(332, 19)
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
@@ -747,6 +774,7 @@ Partial Class ucrHourlyWind
         'ucrYearSelector
         '
         Me.ucrYearSelector.FieldName = "yyyy"
+        Me.ucrYearSelector.KeyControl = True
         Me.ucrYearSelector.Location = New System.Drawing.Point(244, 19)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
@@ -757,6 +785,7 @@ Partial Class ucrHourlyWind
         'ucrStationSelector
         '
         Me.ucrStationSelector.FieldName = "stationId"
+        Me.ucrStationSelector.KeyControl = True
         Me.ucrStationSelector.Location = New System.Drawing.Point(41, 19)
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"

@@ -30,12 +30,15 @@
 
     Protected Overridable Sub SetUpTableEntry(strNewTableName As String)
         Dim ucrCtrValueView As ucrValueView
-
+        lstFields.Clear()
         For Each ctr As Control In Controls
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
                 AddHandler ucrCtrValueView.evtKeyDown, AddressOf GoToNextChildControl
+                If (ucrCtrValueView.KeyControl) Then
+                    AddKeyField(ucrCtrValueView.FieldName)
+                End If
             End If
         Next
         SetTableNameAndFields(strNewTableName, lstFields)
