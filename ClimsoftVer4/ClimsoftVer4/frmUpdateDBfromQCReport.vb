@@ -128,7 +128,6 @@ Public Class frmUpdateDBfromQCReport
                         hh2 = ds1.Tables("QCReportUpdated").Rows(j).Item("hh_1")
                         obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_1")
                         qcStatus2 = ds1.Tables("QCReportUpdated").Rows(j).Item("qcStatus_2")
-
                         If stnId1 = stnId2 And elemId1 = elemId2 And yyyy1 = yyyy2 And mm1 = mm2 And dd1 = dd2 And hh1 = hh2 Then
                             If obsVal1 <> obsVal2 Then
                                 stnId = stnId2
@@ -149,7 +148,7 @@ Public Class frmUpdateDBfromQCReport
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then capturedBy = ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 

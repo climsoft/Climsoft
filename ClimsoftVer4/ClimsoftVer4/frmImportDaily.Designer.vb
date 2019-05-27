@@ -22,6 +22,7 @@ Partial Class frmImportDaily
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.cmdOpenFile = New System.Windows.Forms.Button()
         Me.dlgOpenImportFile = New System.Windows.Forms.OpenFileDialog()
@@ -62,8 +63,10 @@ Partial Class frmImportDaily
         Me.lblElmeror = New System.Windows.Forms.Label()
         Me.lstStations = New System.Windows.Forms.ListBox()
         Me.lstElements = New System.Windows.Forms.ListBox()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -464,6 +467,7 @@ Partial Class frmImportDaily
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeaders.ResumeLayout(False)
         Me.pnlHeaders.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -508,4 +512,5 @@ Partial Class frmImportDaily
     Friend WithEvents lblElmeror As Label
     Friend WithEvents lstStations As ListBox
     Friend WithEvents lstElements As ListBox
+    Friend WithEvents BindingSource1 As BindingSource
 End Class
