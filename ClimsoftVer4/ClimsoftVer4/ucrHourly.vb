@@ -1,6 +1,7 @@
 ﻿Public Class ucrHourly
     Private strValueFieldName As String = "hh_"
     Private strFlagFieldName As String = "flag"
+    Private bCheckTotal As Boolean
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -37,9 +38,14 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
-        ucrNavigation.NewRecord()
-        SaveEnable()
-        ucrStationSelector.Focus()
+        Try
+            ucrNavigation.NewRecord()
+            SaveEnable()
+            ucrStationSelector.Focus()
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -55,6 +61,8 @@
                     ucrNavigation.GoToNewRecord()
                     SaveEnable()
                     MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("Record not Saved", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
         Catch ex As Exception
@@ -71,6 +79,8 @@
             If MessageBox.Show("Are you sure you want to update this record?", "Update Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 If UpdateRecord() Then
                     MessageBox.Show("Record updated successfully!", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("Record not updated", "Update Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
         Catch ex As Exception
@@ -89,6 +99,8 @@
                     ucrNavigation.RemoveRecord()
                     SaveEnable()
                     MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("Record NOT Deleted", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             End If
         Catch ex As Exception
@@ -102,6 +114,47 @@
         'Enable appropriate base buttons
         SaveEnable()
     End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Me.FindForm.Close()
+    End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        dsSourceTableName = "form_hourly"
+        userName = frmLogin.txtUsername.Text
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_hourly ORDER by stationId,elementId,yyyy,mm,dd;"
+        End If
+        viewRecords.viewTableRecords(sql)
+    End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean
+
+        bValid = MyBase.ValidateValue()
+
+        If bValid Then
+            'check computed total vs input total
+            If bCheckTotal AndAlso Not checkTotal() Then
+                ucrInputTotal.Focus()
+                Return False
+            End If
+        End If
+
+        Return bValid
+    End Function
+
+    Public Function checkTotal() As Boolean
+        Return True
+    End Function
 
     ''' <summary>
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
@@ -126,10 +179,6 @@
             btnDelete.Enabled = True
             btnUpdate.Enabled = True
         End If
-    End Sub
-
-    Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles ucrNavigation.evtValueChanged
-
     End Sub
 
 End Class
