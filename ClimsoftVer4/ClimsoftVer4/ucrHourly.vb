@@ -51,8 +51,8 @@
             'Confirm if you want to continue and save data from key-entry form to database table
             If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                 If InsertRecord() Then
-                    ucrStationSelector.PopulateControl()
-                    'ucrStationSelector.GoToNewRecord()
+
+                    ucrNavigation.GoToNewRecord()
                     SaveEnable()
                     MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If

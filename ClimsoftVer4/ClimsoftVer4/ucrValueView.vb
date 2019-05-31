@@ -13,8 +13,8 @@
     Public bValidateSilently As Boolean = True
     Public bValidateEmpty As Boolean = False
     Protected strValidationType As String = "none"
-    Private bKeyControl As Boolean = False
 
+    Public Property KeyControl() As Boolean = False
 
     Public Property FieldName() As String
         Get
@@ -24,16 +24,6 @@
             Me.Tag = value
         End Set
     End Property
-
-    Public Property KeyControl() As Boolean
-        Get
-            Return bKeyControl
-        End Get
-        Set(value As Boolean)
-            bKeyControl = value
-        End Set
-    End Property
-
 
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)
@@ -88,7 +78,12 @@
         Else
             If dtbValues.Rows.Count = 1 Then
                 If ValidateValue() Then
-                    dtbValues.Rows(0).Item(FieldName) = If(IsNothing(GetValue()), DBNull.Value, GetValue())
+                    'dtbValues.Rows(0).Item(FieldName) = If(IsNothing(GetValue()), DBNull.Value, GetValue())
+                    Try
+                        dtbValues.Rows(0).Item(FieldName) = GetValue()
+                    Catch ex As ArgumentException
+                        dtbValues.Rows(0).Item(FieldName) = DBNull.Value
+                    End Try
                 Else
                     dtbValues.Rows(0).Item(FieldName) = DBNull.Value
                 End If

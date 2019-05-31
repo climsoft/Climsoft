@@ -215,7 +215,7 @@ Public Class DataCall
                 strSelectCommand = "SELECT * FROM " & strTable
             End If
 
-            cmdSelect.Connection = clsDataConnection.conn
+            cmdSelect.Connection = clsDataConnection.OpenedConnection
             cmdSelect.CommandText = strSelectCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.SelectCommand = cmdSelect
             If clsCurrentFilter IsNot Nothing Then

@@ -10,6 +10,13 @@
         End If
     End Sub
 
+    Public Shared ReadOnly Property OpenedConnection As MySql.Data.MySqlClient.MySqlConnection
+        Get
+            openConnection()
+            Return conn
+        End Get
+    End Property
+
     Public Shared Sub closeConnection()
         If conn.State = ConnectionState.Open Then
             conn.Close()
