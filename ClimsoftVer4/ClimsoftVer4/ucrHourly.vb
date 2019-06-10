@@ -6,15 +6,18 @@
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            'set up the value flag peruiod first
+            'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+            Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+            Dim shiftCells As New ClsShiftCells()
+            shiftCells.SetUpShiftCellsMenuStrips(New ContextMenuStrip, allVFP)
+
+            'set up the value flag period first
             Dim ucrVFP As ucrValueFlagPeriod
-            ' Dim vfpContextMenuStrip As  ContextMenuStrip = SetUpContextMenuStrip()
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
                     'AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-                    'ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
                 End If
             Next
 
@@ -23,8 +26,8 @@
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrMonthSelector, ucrMonthSelector.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrDaySelector, ucrDaySelector.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
@@ -149,10 +152,48 @@
         Next
     End Sub
 
+    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
+        Dim ctrVFP As ucrValueFlagPeriod
+
+        If btnHourSelection.Text = "Enable all hours" Then
+            btnHourSelection.Text = "Enable synoptic hours only"
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ctrVFP.Enabled = True
+                    ctrVFP.SetBackColor(Color.White)
+                End If
+            Next
+        Else
+            btnHourSelection.Text = "Enable all hours"
+            Dim clsDataDefinition As DataCall
+            Dim dtbl As DataTable
+            Dim iTagVal As Integer
+            Dim row As DataRow
+            clsDataDefinition = New DataCall
+            clsDataDefinition.SetTableNameAndFields("form_hourly_time_selection", {"hh", "hh_selection"})
+            dtbl = clsDataDefinition.GetDataTable()
+            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod Then
+                        ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                        iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
+                        row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
+                        If row IsNot Nothing Then
+                            ctrVFP.Enabled = False
+                            ctrVFP.SetBackColor(Color.LightYellow)
+                        End If
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+
     ''' <summary>
     ''' Sets upper and lower limits validation curent selected element and sets if the checking total is requred
     ''' </summary>
-    Private Sub SetValueValidation()
+    Protected Overrides Sub SetValuesValidation()
         Dim ucrVFP As ucrValueFlagPeriod
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
@@ -194,40 +235,32 @@
         Next
     End Sub
 
-    Private Sub btnHourSelection_Click(sender As Object, e As EventArgs) Handles btnHourSelection.Click
-        Dim ctrVFP As ucrValueFlagPeriod
+    Protected Overrides Sub ValidateDataEntryPermission()
+        Dim bEnabled As Boolean = False
+        'if its an update or any of the linked year,month and day selector is nothing then just enable the control
+        If ucrYearSelector.ValidateValue AndAlso ucrMonthSelector.ValidateValue AndAlso ucrDaySelector.ValidateValue Then
+            Dim todayDate As Date = Date.Now
+            Dim selectedDate As Date
 
-        If btnHourSelection.Text = "Enable all hours" Then
-            btnHourSelection.Text = "Enable synoptic hours only"
+            'initialise the dates with ONLY year month and day values. Neglect the time factor
+            todayDate = New Date(todayDate.Year, todayDate.Month, todayDate.Day)
+            selectedDate = New Date(ucrYearSelector.GetValue, ucrMonthSelector.GetValue, ucrDaySelector.GetValue)
+
+            'if selectedDate is earlier than todayDate (<0) enable control
+            'if it is same time (0) or later than (>0) disable control
+            bEnabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
+
             For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ctrVFP.Enabled = True
-                    ctrVFP.SetBackColor(Color.White)
+                If TypeOf ctr Is ucrValueView Then
+                    If Not DirectCast(ctr, ucrValueView).KeyControl Then
+                        ctr.Enabled = bEnabled
+                    End If
                 End If
             Next
         Else
-            btnHourSelection.Text = "Enable all hours"
-            Dim clsDataDefinition As DataCall
-            Dim dtbl As DataTable
-            Dim iTagVal As Integer
-            Dim row As DataRow
-            clsDataDefinition = New DataCall
-            clsDataDefinition.SetTableNameAndFields("form_hourly_time_selection", {"hh", "hh_selection"})
-            dtbl = clsDataDefinition.GetDataTable()
-            If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
-                For Each ctr As Control In Me.Controls
-                    If TypeOf ctr Is ucrValueFlagPeriod Then
-                        ctrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                        iTagVal = Val(Strings.Right(ctrVFP.Tag, 2))
-                        row = dtbl.Select("hh = '" & iTagVal & "' AND hh_selection = '0'").FirstOrDefault()
-                        If row IsNot Nothing Then
-                            ctrVFP.Enabled = False
-                            ctrVFP.SetBackColor(Color.LightYellow)
-                        End If
-                    End If
-                Next
-            End If
+            Me.Enabled = False
         End If
     End Sub
+
+
 End Class

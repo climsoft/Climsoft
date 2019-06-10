@@ -260,6 +260,9 @@ Public Class ucrBaseDataLink
 
     End Sub
 
+    Public Overridable Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+    End Sub
+
     Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub

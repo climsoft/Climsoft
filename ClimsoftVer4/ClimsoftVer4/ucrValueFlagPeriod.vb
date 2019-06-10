@@ -376,12 +376,11 @@
         ucrPeriod.SetSize(New Size(33, 20))
     End Sub
 
-    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+    Public Overrides Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         ucrValue.SetContextMenuStrip(contextMenuStrip)
         ucrFlag.SetContextMenuStrip(contextMenuStrip)
         ucrPeriod.SetContextMenuStrip(contextMenuStrip)
     End Sub
-
 
     Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
         ucrValue.FieldName = strValueFieldName

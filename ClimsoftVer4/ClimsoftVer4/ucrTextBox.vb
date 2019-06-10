@@ -353,7 +353,7 @@ Public Class ucrTextBox
         Me.Size = New Size(Size)
     End Sub
 
-    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+    Public Overrides Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         txtBox.ContextMenuStrip = contextMenuStrip
     End Sub
 
