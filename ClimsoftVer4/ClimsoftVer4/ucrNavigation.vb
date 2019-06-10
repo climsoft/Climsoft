@@ -375,6 +375,20 @@ Public Class ucrNavigation
         End If
     End Sub
 
+    Public Sub NewSequencerRecord(strSequencer As String, iEnumerableNewFields As IEnumerable(Of String), Optional iEnumerableDateIncrementControls As IEnumerable(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+        Dim dctFields As New Dictionary(Of String, List(Of String))
+        For Each strTemp As String In iEnumerableNewFields
+            dctFields.Add(strTemp, New List(Of String)({strTemp}))
+        Next
+
+        Dim lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing
+        If iEnumerableDateIncrementControls IsNot Nothing Then
+            lstDateIncrementControls = iEnumerableDateIncrementControls.ToList
+        End If
+
+        NewSequencerRecord(strSequencer, dctFields, lstDateIncrementControls, ucrYear)
+
+    End Sub
     Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable

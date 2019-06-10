@@ -62,16 +62,24 @@ Public Class DataCall
         dctFields = dctNewFields
     End Sub
 
-    Public Sub SetFields(lstNewFields As List(Of String))
+    'Public Sub SetFields(lstNewFields As List(Of String))
+    '    Dim dctNewFields As New Dictionary(Of String, List(Of String))
+    '    For Each strTemp As String In lstNewFields
+    '        dctNewFields.Add(strTemp, New List(Of String)({strTemp}))
+    '    Next
+    '    SetFields(dctNewFields:=dctNewFields)
+    'End Sub
+
+    Public Sub SetFields(iEnumerableNewFields As IEnumerable(Of String))
         Dim dctNewFields As New Dictionary(Of String, List(Of String))
-        For Each strTemp As String In lstNewFields
+        For Each strTemp As String In iEnumerableNewFields
             dctNewFields.Add(strTemp, New List(Of String)({strTemp}))
         Next
-        SetFields(dctNewFields:=dctNewFields)
+        SetFields(dctNewFields)
     End Sub
 
     Public Sub SetField(strNewField As String)
-        SetFields(New List(Of String)({strNewField}))
+        SetFields({strNewField})
     End Sub
 
     Public Sub AddField(strNewField As String)
@@ -94,7 +102,7 @@ Public Class DataCall
         SetFields(dctNewFields)
     End Sub
 
-    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As IEnumerable(Of String))
         SetTableName(strNewTable)
         SetFields(lstNewFields)
     End Sub
