@@ -84,18 +84,9 @@ Partial Class ucrAgroMet
         Me.Label53 = New System.Windows.Forms.Label()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.Label45 = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
-        Me.btnView = New System.Windows.Forms.Button()
-        Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
-        Me.btnHelp = New System.Windows.Forms.Button()
-        Me.btnClear = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.ucrAgrometNavigation = New ClimsoftVer4.ucrNavigation()
         Me.UcrValueFlagPeriod31 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.UcrValueFlagPeriod32 = New ClimsoftVer4.ucrValueFlagPeriod()
@@ -135,6 +126,16 @@ Partial Class ucrAgroMet
         Me.ucrAgrometMonthSelector = New ClimsoftVer4.ucrMonth()
         Me.ucrAgrometYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrAgrometStationSelector = New ClimsoftVer4.ucrStationSelector()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnHelp = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -704,15 +705,6 @@ Partial Class ucrAgroMet
         Me.Label45.TabIndex = 1143
         Me.Label45.Text = "Value"
         '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(181, 539)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(64, 23)
-        Me.btnSave.TabIndex = 1154
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
         'chkRepeatEntry
         '
         Me.chkRepeatEntry.AutoSize = True
@@ -723,25 +715,6 @@ Partial Class ucrAgroMet
         Me.chkRepeatEntry.TabIndex = 1165
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
-        '
-        'btnView
-        '
-        Me.btnView.Location = New System.Drawing.Point(525, 539)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(64, 23)
-        Me.btnView.TabIndex = 1159
-        Me.btnView.Text = "View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
-        'btnUpload
-        '
-        Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(688, 577)
-        Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 1164
-        Me.btnUpload.Text = "Upload"
-        Me.btnUpload.UseVisualStyleBackColor = False
         '
         'Label46
         '
@@ -759,61 +732,6 @@ Partial Class ucrAgroMet
         Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
         Me.txtSequencer.TabIndex = 1162
         Me.txtSequencer.Text = "seq_month_day"
-        '
-        'btnHelp
-        '
-        Me.btnHelp.Location = New System.Drawing.Point(697, 539)
-        Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
-        Me.btnHelp.TabIndex = 1160
-        Me.btnHelp.Text = "Help"
-        Me.btnHelp.UseVisualStyleBackColor = True
-        '
-        'btnClear
-        '
-        Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(439, 539)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(64, 23)
-        Me.btnClear.TabIndex = 1158
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(353, 539)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(64, 23)
-        Me.btnDelete.TabIndex = 1157
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Location = New System.Drawing.Point(95, 539)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(64, 23)
-        Me.btnAddNew.TabIndex = 1155
-        Me.btnAddNew.Text = "Add New"
-        Me.btnAddNew.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(267, 539)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
-        Me.btnUpdate.TabIndex = 1156
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnClose
-        '
-        Me.btnClose.Location = New System.Drawing.Point(612, 539)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(64, 23)
-        Me.btnClose.TabIndex = 1161
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'ucrAgrometNavigation
         '
@@ -1237,23 +1155,124 @@ Partial Class ucrAgroMet
         Me.ucrAgrometStationSelector.Size = New System.Drawing.Size(196, 24)
         Me.ucrAgrometStationSelector.TabIndex = 0
         '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(419, 539)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.TabIndex = 1172
+        Me.btnCancel.Tag = "cancel"
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(487, 539)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.TabIndex = 1173
+        Me.btnView.Tag = ""
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Lime
+        Me.Button1.Location = New System.Drawing.Point(608, 569)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 1176
+        Me.Button1.Text = "Upload"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'btnHelp
+        '
+        Me.btnHelp.Location = New System.Drawing.Point(622, 539)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.TabIndex = 1175
+        Me.btnHelp.Tag = ""
+        Me.btnHelp.Text = "Help"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(350, 539)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.TabIndex = 1171
+        Me.btnClear.Tag = "clear"
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(147, 539)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.TabIndex = 1167
+        Me.btnSave.Tag = "save"
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(281, 539)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.TabIndex = 1169
+        Me.btnDelete.Tag = "delete"
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(81, 539)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.TabIndex = 1170
+        Me.btnAddNew.Tag = "add"
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(214, 539)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.TabIndex = 1168
+        Me.btnUpdate.Tag = "update"
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(556, 539)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(60, 23)
+        Me.btnClose.TabIndex = 1174
+        Me.btnClose.Tag = "close"
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
         'ucrAgroMet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrAgrometNavigation)
-        Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.chkRepeatEntry)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnView)
-        Me.Controls.Add(Me.btnUpload)
-        Me.Controls.Add(Me.Label46)
-        Me.Controls.Add(Me.txtSequencer)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
+        Me.Controls.Add(Me.ucrAgrometNavigation)
+        Me.Controls.Add(Me.chkRepeatEntry)
+        Me.Controls.Add(Me.Label46)
+        Me.Controls.Add(Me.txtSequencer)
         Me.Controls.Add(Me.UcrValueFlagPeriod31)
         Me.Controls.Add(Me.UcrValueFlagPeriod32)
         Me.Controls.Add(Me.UcrValueFlagPeriod33)
@@ -1355,7 +1374,7 @@ Partial Class ucrAgroMet
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrAgrometStationSelector)
         Me.Name = "ucrAgroMet"
-        Me.Size = New System.Drawing.Size(870, 601)
+        Me.Size = New System.Drawing.Size(870, 608)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1462,17 +1481,18 @@ Partial Class ucrAgroMet
     Friend WithEvents Label41 As Label
     Friend WithEvents Label45 As Label
     Friend WithEvents UcrValueFlagPeriod34 As ucrValueFlagPeriod
-    Friend WithEvents btnSave As Button
     Friend WithEvents chkRepeatEntry As CheckBox
-    Friend WithEvents btnView As Button
-    Friend WithEvents btnUpload As Button
     Friend WithEvents Label46 As Label
     Friend WithEvents txtSequencer As TextBox
+    Friend WithEvents ucrAgrometNavigation As ucrNavigation
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents Button1 As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents ucrAgrometNavigation As ucrNavigation
 End Class
