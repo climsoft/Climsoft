@@ -1,6 +1,6 @@
 ﻿Public Class ucrDay
     'Private strDaysTableName As String = "days"
-    Private strDay As String = "day"
+    Private strDay As String = "Day"
     'TODO
     'Is it necessary to have 4 datatables for this control?
     Private dtb28 As DataTable
@@ -37,7 +37,10 @@
     End Sub
 
     Public Overrides Sub PopulateControl()
-        'MyBase.PopulateControl()
+        If bFirstLoad Then
+            InitialiseControl()
+        End If
+
         Dim lstShortMonths As New List(Of String)({4, 6, 9, 11})
         Dim iMonth As Integer
 
@@ -95,12 +98,5 @@
         End If
     End Sub
 
-    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            InitialiseControl()
-            PopulateControl()
-            bFirstLoad = False
-        End If
-    End Sub
 
 End Class

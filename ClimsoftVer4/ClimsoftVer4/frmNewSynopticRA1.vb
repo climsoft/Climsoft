@@ -209,7 +209,7 @@
                     Next
                 Else
                     'for the other base controls e.g station, year, month, day, hour slectors
-                    AddHandler DirectCast(formCtr, ucrBaseDataLink).evtKeyDown, AddressOf GoToNextControl
+                    ' AddHandler DirectCast(formCtr, ucrBaseDataLink).evtKeyDown, AddressOf GoToNextControl
                 End If
             End If
         Next
@@ -331,16 +331,16 @@
         End If
     End Sub
 
-    Private Sub ucrSynopticRA1_evtValueChanged(sender As Object, e As EventArgs) Handles ucrSynopticRA1.evtValueChanged
-        If ucrSynopticRA1.bUpdating Then
-            SaveEnable()
-        Else
-            btnAddNew.Enabled = False
-            btnClear.Enabled = True
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
-            btnSave.Enabled = True
-        End If
-    End Sub
+    'Private Sub ucrSynopticRA1_evtValueChanged(sender As Object, e As EventArgs) Handles ucrSynopticRA1.evtValueChanged
+    '    If ucrSynopticRA1.bUpdating Then
+    '        SaveEnable()
+    '    Else
+    '        btnAddNew.Enabled = False
+    '        btnClear.Enabled = True
+    '        btnDelete.Enabled = False
+    '        btnUpdate.Enabled = False
+    '        btnSave.Enabled = True
+    '    End If
+    'End Sub
 
 End Class

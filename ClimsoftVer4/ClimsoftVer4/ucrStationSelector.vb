@@ -1,5 +1,5 @@
 ﻿Public Class ucrStationSelector
-    Private strStationsTableName As String = "stations"
+    Private strStationsTableName As String = "station"
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
@@ -26,16 +26,17 @@
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
-            Dim strCol As String = cboValues.ValueMember
-            For Each rTemp As DataRow In dtbRecords.Rows
-                If rTemp.Item(strCol).ToString = cboValues.Text Then
-                    bValid = True
-                    Exit For
-                End If
-            Next
+            If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
+                For Each rTemp As DataRow In dtbRecords.Rows
+                    If rTemp.Item(cboValues.ValueMember).ToString = cboValues.Text Then
+                        bValid = True
+                        Exit For
+                    End If
+                Next
+            End If
         End If
 
-        SetBackColor(If(bValid, Color.White, Color.Red))
+        SetBackColor(If(bValid, clValidColor, clInValidColor))
         Return bValid
     End Function
 
@@ -75,6 +76,8 @@
             PopulateControl()
             cboValues.ContextMenuStrip = cmsStation
             SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
             bFirstLoad = False
         End If
     End Sub
