@@ -126,10 +126,10 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod13 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.Elem102 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.Elem103 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.UcrValueFlagPeriod3 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.Elem105 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.UcrValueFlagPeriod7 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.UcrValueFlagPeriod6 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.UcrValueFlagPeriod2 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.Elem002 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.Elem101 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrAgrometDaySelector = New ClimsoftVer4.ucrDay()
         Me.ucrAgrometMonthSelector = New ClimsoftVer4.ucrMonth()
@@ -975,193 +975,212 @@ Partial Class ucrAgroMet
         '
         'UcrValueFlagPeriod17
         '
-        Me.UcrValueFlagPeriod17.FieldName = Nothing
+        Me.UcrValueFlagPeriod17.FieldName = "005"
         Me.UcrValueFlagPeriod17.KeyControl = False
         Me.UcrValueFlagPeriod17.Location = New System.Drawing.Point(696, 147)
         Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod17.Name = "UcrValueFlagPeriod17"
         Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod17.TabIndex = 1101
+        Me.UcrValueFlagPeriod17.Tag = "005"
         '
         'UcrValueFlagPeriod18
         '
-        Me.UcrValueFlagPeriod18.FieldName = Nothing
+        Me.UcrValueFlagPeriod18.FieldName = "504"
         Me.UcrValueFlagPeriod18.KeyControl = False
         Me.UcrValueFlagPeriod18.Location = New System.Drawing.Point(696, 175)
         Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod18.Name = "UcrValueFlagPeriod18"
         Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod18.TabIndex = 1100
+        Me.UcrValueFlagPeriod18.Tag = "504"
         '
         'UcrValueFlagPeriod19
         '
-        Me.UcrValueFlagPeriod19.FieldName = Nothing
+        Me.UcrValueFlagPeriod19.FieldName = "513"
         Me.UcrValueFlagPeriod19.KeyControl = False
         Me.UcrValueFlagPeriod19.Location = New System.Drawing.Point(696, 119)
         Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod19.Name = "UcrValueFlagPeriod19"
         Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod19.TabIndex = 1099
+        Me.UcrValueFlagPeriod19.Tag = "513"
         '
         'UcrValueFlagPeriod14
         '
-        Me.UcrValueFlagPeriod14.FieldName = Nothing
+        Me.UcrValueFlagPeriod14.FieldName = "562"
         Me.UcrValueFlagPeriod14.KeyControl = False
         Me.UcrValueFlagPeriod14.Location = New System.Drawing.Point(455, 147)
         Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod14.Name = "UcrValueFlagPeriod14"
         Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod14.TabIndex = 1092
+        Me.UcrValueFlagPeriod14.Tag = "562"
         '
         'UcrValueFlagPeriod15
         '
-        Me.UcrValueFlagPeriod15.FieldName = Nothing
+        Me.UcrValueFlagPeriod15.FieldName = "563"
         Me.UcrValueFlagPeriod15.KeyControl = False
         Me.UcrValueFlagPeriod15.Location = New System.Drawing.Point(455, 175)
         Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod15.Name = "UcrValueFlagPeriod15"
         Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod15.TabIndex = 1091
+        Me.UcrValueFlagPeriod15.Tag = "563"
         '
         'UcrValueFlagPeriod16
         '
-        Me.UcrValueFlagPeriod16.FieldName = Nothing
+        Me.UcrValueFlagPeriod16.FieldName = "561"
         Me.UcrValueFlagPeriod16.KeyControl = False
         Me.UcrValueFlagPeriod16.Location = New System.Drawing.Point(455, 119)
         Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod16.Name = "UcrValueFlagPeriod16"
         Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(184, 23)
         Me.UcrValueFlagPeriod16.TabIndex = 1090
+        Me.UcrValueFlagPeriod16.Tag = "561"
         '
         'UcrValueFlagPeriod8
         '
-        Me.UcrValueFlagPeriod8.FieldName = Nothing
+        Me.UcrValueFlagPeriod8.FieldName = "073"
         Me.UcrValueFlagPeriod8.KeyControl = False
         Me.UcrValueFlagPeriod8.Location = New System.Drawing.Point(280, 147)
         Me.UcrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod8.Name = "UcrValueFlagPeriod8"
         Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod8.TabIndex = 1082
+        Me.UcrValueFlagPeriod8.Tag = "073"
         '
         'UcrValueFlagPeriod9
         '
-        Me.UcrValueFlagPeriod9.FieldName = Nothing
+        Me.UcrValueFlagPeriod9.FieldName = "074"
         Me.UcrValueFlagPeriod9.KeyControl = False
         Me.UcrValueFlagPeriod9.Location = New System.Drawing.Point(280, 175)
         Me.UcrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod9.Name = "UcrValueFlagPeriod9"
         Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod9.TabIndex = 1081
+        Me.UcrValueFlagPeriod9.Tag = "074"
         '
         'UcrValueFlagPeriod10
         '
-        Me.UcrValueFlagPeriod10.FieldName = Nothing
+        Me.UcrValueFlagPeriod10.FieldName = "554"
         Me.UcrValueFlagPeriod10.KeyControl = False
         Me.UcrValueFlagPeriod10.Location = New System.Drawing.Point(280, 203)
         Me.UcrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod10.Name = "UcrValueFlagPeriod10"
         Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod10.TabIndex = 1080
+        Me.UcrValueFlagPeriod10.Tag = "554"
         '
         'UcrValueFlagPeriod11
         '
-        Me.UcrValueFlagPeriod11.FieldName = Nothing
+        Me.UcrValueFlagPeriod11.FieldName = "076"
         Me.UcrValueFlagPeriod11.KeyControl = False
         Me.UcrValueFlagPeriod11.Location = New System.Drawing.Point(280, 259)
         Me.UcrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod11.Name = "UcrValueFlagPeriod11"
         Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod11.TabIndex = 1078
+        Me.UcrValueFlagPeriod11.Tag = "076"
         '
         'UcrValueFlagPeriod12
         '
-        Me.UcrValueFlagPeriod12.FieldName = Nothing
+        Me.UcrValueFlagPeriod12.FieldName = "075"
         Me.UcrValueFlagPeriod12.KeyControl = False
         Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(280, 231)
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
         Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod12.TabIndex = 1079
+        Me.UcrValueFlagPeriod12.Tag = "075"
         '
         'UcrValueFlagPeriod13
         '
-        Me.UcrValueFlagPeriod13.FieldName = Nothing
+        Me.UcrValueFlagPeriod13.FieldName = "072"
         Me.UcrValueFlagPeriod13.KeyControl = False
         Me.UcrValueFlagPeriod13.Location = New System.Drawing.Point(280, 119)
         Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod13.Name = "UcrValueFlagPeriod13"
         Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod13.TabIndex = 1077
+        Me.UcrValueFlagPeriod13.Tag = "072"
         '
         'Elem102
         '
-        Me.Elem102.FieldName = Nothing
+        Me.Elem102.FieldName = "102"
         Me.Elem102.KeyControl = False
         Me.Elem102.Location = New System.Drawing.Point(94, 147)
         Me.Elem102.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem102.Name = "Elem102"
         Me.Elem102.Size = New System.Drawing.Size(130, 23)
         Me.Elem102.TabIndex = 1070
+        Me.Elem102.Tag = "102"
         '
         'Elem103
         '
-        Me.Elem103.FieldName = Nothing
+        Me.Elem103.FieldName = "103"
         Me.Elem103.KeyControl = False
         Me.Elem103.Location = New System.Drawing.Point(94, 175)
         Me.Elem103.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem103.Name = "Elem103"
         Me.Elem103.Size = New System.Drawing.Size(130, 23)
         Me.Elem103.TabIndex = 1069
+        Me.Elem103.Tag = "103"
         '
-        'UcrValueFlagPeriod3
+        'Elem105
         '
-        Me.UcrValueFlagPeriod3.FieldName = Nothing
-        Me.UcrValueFlagPeriod3.KeyControl = False
-        Me.UcrValueFlagPeriod3.Location = New System.Drawing.Point(94, 203)
-        Me.UcrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrValueFlagPeriod3.Name = "UcrValueFlagPeriod3"
-        Me.UcrValueFlagPeriod3.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod3.TabIndex = 1068
+        Me.Elem105.FieldName = "105"
+        Me.Elem105.KeyControl = False
+        Me.Elem105.Location = New System.Drawing.Point(94, 203)
+        Me.Elem105.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.Elem105.Name = "Elem105"
+        Me.Elem105.Size = New System.Drawing.Size(130, 23)
+        Me.Elem105.TabIndex = 1068
+        Me.Elem105.Tag = "105"
         '
         'UcrValueFlagPeriod7
         '
-        Me.UcrValueFlagPeriod7.FieldName = Nothing
+        Me.UcrValueFlagPeriod7.FieldName = "099"
         Me.UcrValueFlagPeriod7.KeyControl = False
         Me.UcrValueFlagPeriod7.Location = New System.Drawing.Point(94, 287)
         Me.UcrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod7.Name = "UcrValueFlagPeriod7"
         Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod7.TabIndex = 1067
+        Me.UcrValueFlagPeriod7.Tag = "099"
         '
         'UcrValueFlagPeriod6
         '
-        Me.UcrValueFlagPeriod6.FieldName = Nothing
+        Me.UcrValueFlagPeriod6.FieldName = "003"
         Me.UcrValueFlagPeriod6.KeyControl = False
         Me.UcrValueFlagPeriod6.Location = New System.Drawing.Point(94, 259)
         Me.UcrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod6.Name = "UcrValueFlagPeriod6"
         Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(130, 23)
         Me.UcrValueFlagPeriod6.TabIndex = 1067
+        Me.UcrValueFlagPeriod6.Tag = "003"
         '
-        'UcrValueFlagPeriod2
+        'Elem002
         '
-        Me.UcrValueFlagPeriod2.FieldName = Nothing
-        Me.UcrValueFlagPeriod2.KeyControl = False
-        Me.UcrValueFlagPeriod2.Location = New System.Drawing.Point(94, 231)
-        Me.UcrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrValueFlagPeriod2.Name = "UcrValueFlagPeriod2"
-        Me.UcrValueFlagPeriod2.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod2.TabIndex = 1067
+        Me.Elem002.FieldName = "002"
+        Me.Elem002.KeyControl = False
+        Me.Elem002.Location = New System.Drawing.Point(94, 231)
+        Me.Elem002.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.Elem002.Name = "Elem002"
+        Me.Elem002.Size = New System.Drawing.Size(130, 23)
+        Me.Elem002.TabIndex = 1067
+        Me.Elem002.Tag = "002"
         '
         'Elem101
         '
-        Me.Elem101.FieldName = Nothing
+        Me.Elem101.FieldName = "101"
         Me.Elem101.KeyControl = False
         Me.Elem101.Location = New System.Drawing.Point(94, 119)
         Me.Elem101.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem101.Name = "Elem101"
         Me.Elem101.Size = New System.Drawing.Size(130, 23)
         Me.Elem101.TabIndex = 1064
+        Me.Elem101.Tag = "101"
         '
         'ucrAgrometDaySelector
         '
@@ -1297,10 +1316,10 @@ Partial Class ucrAgroMet
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Elem102)
         Me.Controls.Add(Me.Elem103)
-        Me.Controls.Add(Me.UcrValueFlagPeriod3)
+        Me.Controls.Add(Me.Elem105)
         Me.Controls.Add(Me.UcrValueFlagPeriod7)
         Me.Controls.Add(Me.UcrValueFlagPeriod6)
-        Me.Controls.Add(Me.UcrValueFlagPeriod2)
+        Me.Controls.Add(Me.Elem002)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Elem101)
@@ -1347,8 +1366,8 @@ Partial Class ucrAgroMet
     Friend WithEvents Elem101 As ucrValueFlagPeriod
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents UcrValueFlagPeriod2 As ucrValueFlagPeriod
-    Friend WithEvents UcrValueFlagPeriod3 As ucrValueFlagPeriod
+    Friend WithEvents Elem002 As ucrValueFlagPeriod
+    Friend WithEvents Elem105 As ucrValueFlagPeriod
     Friend WithEvents Elem103 As ucrValueFlagPeriod
     Friend WithEvents Elem102 As ucrValueFlagPeriod
     Friend WithEvents UcrValueFlagPeriod6 As ucrValueFlagPeriod

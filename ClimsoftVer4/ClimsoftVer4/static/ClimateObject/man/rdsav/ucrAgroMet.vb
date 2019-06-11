@@ -1,5 +1,5 @@
 ﻿Public Class ucrAgroMet
-    Private strValueFieldName As String = "val_"
+    Private strValueFieldName As String = "val_Elem"
     Private strFlagFieldName As String = "flag"
 
     Private Sub ucrAgroMet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -9,7 +9,7 @@
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
+                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & Val(Strings.Right(ucrVFP.FieldName, 3)))
                 End If
             Next
 
