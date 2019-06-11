@@ -34,14 +34,14 @@
 
             'ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl() 'populate the values
-            SaveEnable()
+
         End If
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
-            'ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId", "mm", "dd"}, {ucrDay, ucrMonth}, ucrYearSelector)
-            ucrNavigation.NewRecord() 'temporary
+            ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId", "mm", "dd"}, {ucrDaySelector, ucrMonthSelector}, ucrYearSelector)
+            ' ucrNavigation.NewRecord() 'temporary
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
         Catch ex As Exception

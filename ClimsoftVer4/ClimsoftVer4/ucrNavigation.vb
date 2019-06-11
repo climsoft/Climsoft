@@ -547,6 +547,7 @@ Public Class ucrNavigation
 
         Next
         Try
+            'TODO. Change how this is implemented
             i = 0
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
             If strSortCol <> "" Then
@@ -591,23 +592,4 @@ Public Class ucrNavigation
         'End If
     End Sub
 
-    ' Use these two methods when you need to get a values from a specific row of the table
-    ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords
-    'Private Function GetValueFromRowOLD(iRow As Integer, strField As String) As String
-    '    If iMaxRows = 0 Then
-    '        Return ""
-    '    Else
-    '        Return CallByName(GetRow(iRow), strField, CallType.Get)
-    '    End If
-    'End Function
-
-    'Private Function GetRowOLD(iRow As Integer) As Object
-    '    'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
-    '    'You can only use Skip() if you use an Order function first.
-    '    Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
-    '    x = x.AsNoTracking()
-    '    Dim y = TryCast(x, IQueryable(Of Object))
-    '    ' OrderBy function returns 1 to give a default ordering
-    '    Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
-    'End Function
 End Class

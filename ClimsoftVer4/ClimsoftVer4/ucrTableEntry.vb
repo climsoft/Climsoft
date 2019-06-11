@@ -5,7 +5,7 @@
     Protected lstFields As New List(Of String)
     Public bUpdating As Boolean = True    'Boolean Flag to check if record is updating. Set to True by default
     Public bPopulating As Boolean = False
-    Protected ucrNavigator As ucrNavigation
+    Protected ucrTableEntryNavigator As ucrNavigation
     Protected dctBaseControls As New Dictionary(Of String, Button) 'holds the add,save,update,delete,clear,cancel etc controls
 
     Public Overrides Sub PopulateControl()
@@ -53,7 +53,7 @@
                     AddKeyField(ucrCtrValueView.FieldName)
                 End If
             ElseIf TypeOf ctr Is ucrNavigation Then
-                ucrNavigator = DirectCast(ctr, ucrNavigation)
+                ucrTableEntryNavigator = DirectCast(ctr, ucrNavigation)
             ElseIf TypeOf ctr Is Button Then
                 SetupBaseControl(ctr.Tag, DirectCast(ctr, Button))
             End If
@@ -176,7 +176,7 @@
                                           'Confirm if you want to continue and save data from key-entry form to database table
                                           If MessageBox.Show("Do you want to continue and commit to database table?", "Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                                               If InsertRecord() Then
-                                                  ucrNavigator.GoToNewRecord()
+                                                  ucrTableEntryNavigator.GoToNewRecord()
                                                   SaveEnable()
                                                   MessageBox.Show("New record added to database table!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                                               Else
@@ -220,7 +220,7 @@
 
                                           If MessageBox.Show("Are you sure you want to delete this record?", "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                                               If DeleteRecord() Then
-                                                  ucrNavigator.RemoveRecord()
+                                                  ucrTableEntryNavigator.RemoveRecord()
                                                   SaveEnable()
                                                   MessageBox.Show("Record has been deleted", "Delete Record", MessageBoxButtons.OK, MessageBoxIcon.Information)
                                               Else
@@ -237,7 +237,7 @@
                                   End Sub
         ElseIf strControlName = "cancel" Then
             AddHandler btn.Click, Sub()
-                                      ucrNavigator.MoveFirst()
+                                      ucrTableEntryNavigator.MoveFirst()
                                       SaveEnable()
                                   End Sub
         ElseIf strControlName = "close" Then
@@ -270,17 +270,17 @@
         dctBaseControls.Item("clear").Enabled = False
         dctBaseControls.Item("cancel").Enabled = False
 
-        If ucrNavigator.iCurrRow = -1 Then
+        If ucrTableEntryNavigator.iCurrRow = -1 Then
             dctBaseControls.Item("save").Enabled = True
             dctBaseControls.Item("clear").Enabled = True
             dctBaseControls.Item("add").Enabled = False
             dctBaseControls.Item("cancel").Enabled = True
             dctBaseControls.Item("delete").Enabled = False
             dctBaseControls.Item("update").Enabled = False
-        ElseIf ucrNavigator.iMaxRows = 0 Then
+        ElseIf ucrTableEntryNavigator.iMaxRows = 0 Then
             dctBaseControls.Item("add").Enabled = False
             dctBaseControls.Item("save").Enabled = True
-        ElseIf ucrNavigator.iMaxRows > 0 Then
+        ElseIf ucrTableEntryNavigator.iMaxRows > 0 Then
             dctBaseControls.Item("delete").Enabled = True
             dctBaseControls.Item("update").Enabled = True
         End If

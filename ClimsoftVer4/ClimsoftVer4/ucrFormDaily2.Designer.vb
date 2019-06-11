@@ -106,7 +106,7 @@ Partial Class ucrFormDaily2
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
-        Me.cmdAssignSameValue = New System.Windows.Forms.Button()
+        Me.btnAssignSameValue = New System.Windows.Forms.Button()
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
@@ -129,7 +129,7 @@ Partial Class ucrFormDaily2
         Me.ucrVisibilityUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrCloudheightUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         Me.ucrPrecipUnits = New ClimsoftVer4.ucrDataLinkCombobox()
-        Me.UcrDataLinkCombobox1 = New ClimsoftVer4.ucrDataLinkCombobox()
+        Me.ucrTempUnits = New ClimsoftVer4.ucrDataLinkCombobox()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
@@ -995,15 +995,15 @@ Partial Class ucrFormDaily2
         Me.ucrYearSelector.TabIndex = 691
         Me.ucrYearSelector.Tag = "yyyy"
         '
-        'cmdAssignSameValue
+        'btnAssignSameValue
         '
-        Me.cmdAssignSameValue.ForeColor = System.Drawing.Color.Blue
-        Me.cmdAssignSameValue.Location = New System.Drawing.Point(563, 22)
-        Me.cmdAssignSameValue.Name = "cmdAssignSameValue"
-        Me.cmdAssignSameValue.Size = New System.Drawing.Size(150, 23)
-        Me.cmdAssignSameValue.TabIndex = 697
-        Me.cmdAssignSameValue.Text = "Assign same value to all obs"
-        Me.cmdAssignSameValue.UseVisualStyleBackColor = True
+        Me.btnAssignSameValue.ForeColor = System.Drawing.Color.Blue
+        Me.btnAssignSameValue.Location = New System.Drawing.Point(563, 22)
+        Me.btnAssignSameValue.Name = "btnAssignSameValue"
+        Me.btnAssignSameValue.Size = New System.Drawing.Size(150, 23)
+        Me.btnAssignSameValue.TabIndex = 697
+        Me.btnAssignSameValue.Text = "Assign same value to all obs"
+        Me.btnAssignSameValue.UseVisualStyleBackColor = True
         '
         'chkRepeatEntry
         '
@@ -1029,6 +1029,7 @@ Partial Class ucrFormDaily2
         '
         Me.txtSequencer.Location = New System.Drawing.Point(253, 554)
         Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 708
         Me.txtSequencer.Text = "seq_daily_element"
@@ -1141,7 +1142,7 @@ Partial Class ucrFormDaily2
         Me.grpUnits.Controls.Add(Me.ucrVisibilityUnits)
         Me.grpUnits.Controls.Add(Me.ucrCloudheightUnits)
         Me.grpUnits.Controls.Add(Me.ucrPrecipUnits)
-        Me.grpUnits.Controls.Add(Me.UcrDataLinkCombobox1)
+        Me.grpUnits.Controls.Add(Me.ucrTempUnits)
         Me.grpUnits.Location = New System.Drawing.Point(256, 53)
         Me.grpUnits.Name = "grpUnits"
         Me.grpUnits.Size = New System.Drawing.Size(331, 64)
@@ -1218,16 +1219,16 @@ Partial Class ucrFormDaily2
         Me.ucrPrecipUnits.TabIndex = 21
         Me.ucrPrecipUnits.Tag = "precipUnits"
         '
-        'UcrDataLinkCombobox1
+        'ucrTempUnits
         '
-        Me.UcrDataLinkCombobox1.FieldName = "temperatureUnits"
-        Me.UcrDataLinkCombobox1.KeyControl = False
-        Me.UcrDataLinkCombobox1.Location = New System.Drawing.Point(16, 35)
-        Me.UcrDataLinkCombobox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.UcrDataLinkCombobox1.Name = "UcrDataLinkCombobox1"
-        Me.UcrDataLinkCombobox1.Size = New System.Drawing.Size(62, 21)
-        Me.UcrDataLinkCombobox1.TabIndex = 20
-        Me.UcrDataLinkCombobox1.Tag = "temperatureUnits"
+        Me.ucrTempUnits.FieldName = "temperatureUnits"
+        Me.ucrTempUnits.KeyControl = False
+        Me.ucrTempUnits.Location = New System.Drawing.Point(16, 35)
+        Me.ucrTempUnits.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrTempUnits.Name = "ucrTempUnits"
+        Me.ucrTempUnits.Size = New System.Drawing.Size(62, 21)
+        Me.ucrTempUnits.TabIndex = 20
+        Me.ucrTempUnits.Tag = "temperatureUnits"
         '
         'ucrFormDaily2
         '
@@ -1247,7 +1248,7 @@ Partial Class ucrFormDaily2
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.cmdAssignSameValue)
+        Me.Controls.Add(Me.btnAssignSameValue)
         Me.Controls.Add(Me.ucrHour)
         Me.Controls.Add(Me.ucrMonth)
         Me.Controls.Add(Me.lblHour)
@@ -1336,7 +1337,7 @@ Partial Class ucrFormDaily2
         Me.Controls.Add(Me.ucrValueFlagPeriod2)
         Me.Controls.Add(Me.ucrValueFlagPeriod1)
         Me.Name = "ucrFormDaily2"
-        Me.Size = New System.Drawing.Size(720, 592)
+        Me.Size = New System.Drawing.Size(803, 592)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
@@ -1432,7 +1433,7 @@ Partial Class ucrFormDaily2
     Friend WithEvents lblMonth As Label
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrYearSelector As ucrYearSelector
-    Friend WithEvents cmdAssignSameValue As Button
+    Friend WithEvents btnAssignSameValue As Button
     Friend WithEvents chkRepeatEntry As CheckBox
     Friend WithEvents lblSequencer As Label
     Friend WithEvents txtSequencer As TextBox
@@ -1455,5 +1456,5 @@ Partial Class ucrFormDaily2
     Friend WithEvents ucrVisibilityUnits As ucrDataLinkCombobox
     Friend WithEvents ucrCloudheightUnits As ucrDataLinkCombobox
     Friend WithEvents ucrPrecipUnits As ucrDataLinkCombobox
-    Friend WithEvents UcrDataLinkCombobox1 As ucrDataLinkCombobox
+    Friend WithEvents ucrTempUnits As ucrDataLinkCombobox
 End Class

@@ -13,27 +13,37 @@ Public Class ucrFormDaily2
     'stores a list containing all fields of this control
     Private lstAllFields As New List(Of String)
 
-    'These store instances of linked controls
-    Private ucrLinkedMonth As ucrMonth
-    Private ucrLinkedYear As ucrYearSelector
-    Private dctLinkedUnits As New Dictionary(Of String, ucrDataLinkCombobox)
-    Private ucrLinkedHour As ucrHour
-    Private ucrLinkedNavigation As ucrNavigation
-    Private ucrLinkedStation As ucrStationSelector
-    Private ucrLinkedElement As ucrElementSelector
-
-
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+
+            'Sets values for the units combobox
+            ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
+            ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
+            ucrTempUnits.bValidate = False
+
+            ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"feet", "metres"})
+            ucrCloudheightUnits.SetDisplayAndValueMember("cloudHeightUnits")
+            ucrCloudheightUnits.bValidate = False
+
+            ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
+            ucrPrecipUnits.SetDisplayAndValueMember("precipUnits")
+            ucrPrecipUnits.bValidate = False
+
+            ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
+            ucrVisibilityUnits.SetDisplayAndValueMember("visUnits")
+            ucrVisibilityUnits.bValidate = False
+
+
+            'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+            Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+            Dim shiftCells As New ClsShiftCells()
+            shiftCells.SetUpShiftCellsMenuStrips(New ContextMenuStrip, allVFP)
             'set up the value flag peruiod first
             Dim ucrVFP As ucrValueFlagPeriod
-            Dim vfpContextMenuStrip As ContextMenuStrip = SetUpContextMenuStrip()
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName, strPeriodFieldName & ucrVFP.FieldName)
-                    'AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
-                    ucrVFP.SetContextMenuStrip(vfpContextMenuStrip)
                 End If
             Next
 
@@ -52,282 +62,76 @@ Public Class ucrFormDaily2
 
             'populate the values
             ucrDaily2Navigation.PopulateControl()
+        End If
+
+    End Sub
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        If chkEnableSequencer.Checked Then
+            ' temporary until we know how to get all fields from table without specifying names
+            ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
             SaveEnable()
-        End If
-
-
-
-    End Sub
-
-
-    ''' <summary>
-    ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear and on dialog load
-    ''' </summary>
-    Private Sub SaveEnable()
-        btnAddNew.Enabled = True
-        btnSave.Enabled = False
-        btnClear.Enabled = False
-        btnDelete.Enabled = False
-        btnUpdate.Enabled = False
-
-        If ucrDaily2Navigation.iCurrRow = -1 Then
-            btnAddNew.Enabled = False
-            btnClear.Enabled = True
-            btnDelete.Enabled = False
-            btnUpdate.Enabled = False
-            btnSave.Enabled = True
-        ElseIf ucrDaily2Navigation.iMaxRows = 0 Then
-            btnAddNew.Enabled = False
-            btnSave.Enabled = True
-        ElseIf ucrDaily2Navigation.iMaxRows > 0 Then
-            btnDelete.Enabled = True
-            btnUpdate.Enabled = True
+            ucrValueFlagPeriod1.Focus()
         End If
     End Sub
 
-
-    Private Sub GoToNextVFPControl(sender As Object, e As KeyEventArgs)
-        SelectNextControl(sender, True, True, True, True)
-        'this handles the "noise" on enter  
-        e.SuppressKeyPress = True
-    End Sub
-
-    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        If e.KeyCode = Keys.Enter Then
-            If checkTotal() Then
-                Me.FindForm.SelectNextControl(sender, True, True, True, True)
-                e.SuppressKeyPress = True
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
-        checkTotal()
-    End Sub
-
-
-    ''' <summary>
-    ''' Sets the  filed name and the control for the liked units
-    ''' </summary>
-    ''' <param name="strFieldName"></param>
-    ''' <param name="ucrComboBox"></param>
-    Public Sub AddUnitslink(strFieldName As String, ucrComboBox As ucrDataLinkCombobox)
-        If dctLinkedUnits.ContainsKey(strFieldName) Then
-            MessageBox.Show("Developer error: This field is already linked.", caption:="Developer error")
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_daily2"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_daily2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
         Else
-            dctLinkedUnits.Add(strFieldName, ucrComboBox)
-            'AddHandler ucrComboBox.evtValueChanged, AddressOf InnerControlValueChanged
-            'add the field
-            If Not lstFields.Contains(strFieldName) Then
-                lstFields.Add(strFieldName)
-                SetFields(lstFields)
-            End If
+            sql = "SELECT * FROM form_daily2 ORDER by stationId,elementId,yyyy,mm,hh;"
         End If
+        viewRecords.viewTableRecords(sql)
     End Sub
 
-    Public Sub SaveRecord()
-        'TODO Replace this with a call to update or insert record the datatable and the datasorce
-        If bUpdating Then
-        Else
-        End If
-
-        TEMPCODE()
-
-        If 1 = 1 Then
-            Return
-        End If
-
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-
-        Try
-
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
-            conn.Open()
-
-            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
-
-            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter(
-                "SELECT elementId, elementName FROM obselement", conn)
-
-            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
-           "UPDATE obselement SET elementName = @elementName WHERE elementId = @elementId", conn)
-
-            dataAdpater.UpdateCommand.Parameters.Add("@elementName", MySql.Data.MySqlClient.MySqlDbType.VarChar, 255, "elementName")
-
-
-            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int64, 20)
-            param1.SourceColumn = "elementId"
-            param1.SourceVersion = DataRowVersion.Original
-
-
-            Dim dailyTable As New DataTable
-
-            dataAdpater.Fill(dailyTable)
-
-            Dim row As DataRow
-            row = dailyTable.Rows(0)
-            row("elementName") = "my element"
-
-            dataAdpater.Update(dailyTable)
-
-
-
-        Catch ex As Exception
-            Console.WriteLine("Error: " & ex.Message)
-            'MsgBox("Error : " & ex.Message)
-        Finally
-            conn.Close()
-        End Try
-
-
-
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_daily2")
     End Sub
 
-    Private Sub TEMPCODE()
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
-
-        Try
-
-            conn = clsDataConnection.conn
-
-            'conn.ConnectionString = frmLogin.txtusrpwd.Text
-            'conn.Open()
-
-            Dim dataAdpater As MySql.Data.MySqlClient.MySqlDataAdapter
-
-            dataAdpater = New MySql.Data.MySqlClient.MySqlDataAdapter("SELECT stationId, elementId, yyyy, mm, hh, day01 FROM form_daily2", conn)
-
-            'setup delete command
-            dataAdpater.DeleteCommand = New MySql.Data.MySqlClient.MySqlCommand(
-            "DELETE FROM form_daily2 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
-
-            Dim param11 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
-            param11.SourceColumn = "stationId"
-            param11.SourceVersion = DataRowVersion.Original
-
-            Dim param21 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param21.SourceColumn = "elementId"
-            param21.SourceVersion = DataRowVersion.Original
-
-
-            Dim param31 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param31.SourceColumn = "yyyy"
-            param31.SourceVersion = DataRowVersion.Original
-
-            Dim param41 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param41.SourceColumn = "mm"
-            param41.SourceVersion = DataRowVersion.Original
-
-            Dim param51 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.DeleteCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param51.SourceColumn = "hh"
-            param51.SourceVersion = DataRowVersion.Original
-
-            'setup insert command
-            dataAdpater.InsertCommand = New MySql.Data.MySqlClient.MySqlCommand(
-            "INSERT INTO form_daily2 (stationId,elementId,yyyy,mm,hh,day01) VALUES (@stationId,@elementId,@yyyy,@mm,@hh,@day01)", conn)
-
-            dataAdpater.InsertCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50, "stationId")
-            dataAdpater.InsertCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "elementId")
-            dataAdpater.InsertCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
-            dataAdpater.InsertCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "mm")
-            dataAdpater.InsertCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "hh")
-            dataAdpater.InsertCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
-
-
-            'set up update command
-            dataAdpater.UpdateCommand = New MySql.Data.MySqlClient.MySqlCommand(
-            "UPDATE form_daily2 SET yyyy = @yyyy2 , day01 = @day01 WHERE stationId = @stationId AND elementId = @elementId AND yyyy = @yyyy AND mm = @mm AND hh = @hh", conn)
-
-
-            dataAdpater.UpdateCommand.Parameters.Add("@yyyy2", MySql.Data.MySqlClient.MySqlDbType.Int32, 11, "yyyy")
-            dataAdpater.UpdateCommand.Parameters.Add("@day01", MySql.Data.MySqlClient.MySqlDbType.VarChar, 45, "day01")
-
-
-            Dim param1 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@stationId", MySql.Data.MySqlClient.MySqlDbType.VarChar, 50)
-            param1.SourceColumn = "stationId"
-            param1.SourceVersion = DataRowVersion.Original
-
-            Dim param2 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@elementId", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param2.SourceColumn = "elementId"
-            param2.SourceVersion = DataRowVersion.Original
-
-
-            Dim param3 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@yyyy", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param3.SourceColumn = "yyyy"
-            param3.SourceVersion = DataRowVersion.Original
-
-
-            Dim param4 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@mm", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param4.SourceColumn = "mm"
-            param4.SourceVersion = DataRowVersion.Original
-
-            Dim param5 As MySql.Data.MySqlClient.MySqlParameter = dataAdpater.UpdateCommand.Parameters.Add("@hh", MySql.Data.MySqlClient.MySqlDbType.Int32, 11)
-            param5.SourceColumn = "hh"
-            param5.SourceVersion = DataRowVersion.Original
-
-            Dim dailyTable As New DataTable
-
-            dataAdpater.Fill(dailyTable)
-
-            Dim row As DataRow
-            row = dailyTable.Rows(0)
-
-            Dim row2 As DataRow
-            row2 = dailyTable.NewRow()
-            row2("stationId") = row("stationId")
-            row2("elementId") = row("elementId")
-            row2("yyyy") = row("yyyy")
-            row2("mm") = row("mm")
-            row2("hh") = row("hh")
-            row2("day01") = "9999"
-
-            dailyTable.Rows(0).Delete()
-            dailyTable.Rows.Add(row2)
-
-
-            dataAdpater.Update(dailyTable)
-
-            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Deleted))
-            'dataAdpater.Update(dailyTable.Select(Nothing, Nothing, DataViewRowState.Added))
-        Catch ex As Exception
-            Console.WriteLine("Error: " & ex.Message)
-            'MsgBox("Error : " & ex.Message)
-        Finally
-            'conn.Close()
-        End Try
-    End Sub
-
-    Public Sub DeleteRecord()
-        'TODO Replace this with a call to delete the record from the datatable and the datasorce
-    End Sub
-
-    ''' <summary>
-    ''' Clears all the text In the ucrValueFlagPeriod controls 
-    ''' </summary>
-    Public Overrides Sub Clear()
-        For Each ctr As Control In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                DirectCast(ctr, ucrValueFlagPeriod).Clear()
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                DirectCast(ctr, ucrTextBox).Clear()
-            End If
-        Next
-    End Sub
-
-    Public Sub SetSameValueToAllObsElements(bNewValue As String)
+    Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click
+        'todo a message input box??
+        Dim strNewValue As String = ""
         Dim ucrVFP As ucrValueFlagPeriod
         'Adds values to only enabled controls of the ucrHourly
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If ctr.Enabled Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ucrVFP.SetElementValue(bNewValue)
+                    ucrVFP.SetElementValue(strNewValue)
                     If Not ucrVFP.ValidateValue() Then
                         Exit Sub
                     End If
                 End If
             End If
         Next
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            UploadAllRecords()
+            'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
+        txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Not checkTotal() Then
+                ucrInputTotal.Focus()
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
+        'checkTotal()
     End Sub
 
     Public Function IsValuesEmpty() As Boolean
@@ -347,18 +151,37 @@ Public Class ucrFormDaily2
     ''' </summary>
     ''' <returns></returns>
     Public Overrides Function ValidateValue() As Boolean
-        For Each ctr As Control In Me.Controls
-            If TypeOf ctr Is ucrValueFlagPeriod Then
-                If Not DirectCast(ctr, ucrValueFlagPeriod).ValidateValue Then
-                    ctr.Focus()
-                    Return False
+        Dim bValid As Boolean
+        bValid = MyBase.ValidateValue()
+
+        If bValid Then
+            Dim bValueExists As Boolean = False
+            'Check if all values are empty. There should be atleast one observation value
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod AndAlso Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then
+                    bValueExists = True
+                    Exit For
                 End If
+            Next
+
+            If Not bValueExists Then
+                MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return False
             End If
-        Next
-        Return True
+
+            'check computed total vs input total
+            If Not checkTotal() Then
+                ucrInputTotal.Focus()
+                Return False
+            End If
+
+        End If
+
+        Return bValid
+
     End Function
 
-    Public Function checkTotal() As Boolean
+    Private Function checkTotal() As Boolean
         Dim bValueCorrect As Boolean = False
         Dim elemTotal As Decimal = 0
         Dim expectedTotal As Decimal
@@ -391,7 +214,7 @@ Public Class ucrFormDaily2
     ''' <summary>
     ''' Sets upper and lower limits validation curent element
     ''' </summary>
-    Public Sub SetValueValidation()
+    Protected Overrides Sub SetValuesValidation()
         Dim ucrVFP As ucrValueFlagPeriod
         Dim clsDataDefinition As DataCall
         Dim dtbl As DataTable
@@ -400,8 +223,8 @@ Public Class ucrFormDaily2
         bTotalRequired = False
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableNameAndFields("obselement", New List(Of String)({"lowerLimit", "upperLimit", "qcTotalRequired"}))
-        clsDataDefinition.SetFilter("elementId", "=", Val(ucrLinkedElement.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
+        clsDataDefinition.SetTableNameAndFields("obselement", {"lowerLimit", "upperLimit", "qcTotalRequired"})
+        clsDataDefinition.SetFilter("elementId", "=", Val(ucrElementSelector.GetValue), bIsPositiveCondition:=True, bForceValuesAsString:=False)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
             strLowerLimit = If(IsDBNull(dtbl.Rows(0).Item("lowerLimit")), "", dtbl.Rows(0).Item("lowerLimit"))
@@ -432,59 +255,20 @@ Public Class ucrFormDaily2
         Next
     End Sub
 
-    ''' <summary>
-    ''' Sets the key controls
-    ''' </summary>
-    ''' <param name="ucrNewStation"></param>
-    ''' <param name="ucrNewElement"></param>
-    ''' <param name="ucrNewYear"></param>
-    ''' <param name="ucrNewMonth"></param>
-    ''' <param name="ucrNewHour"></param>
-    ''' <param name="ucrNewNavigation"></param> 
-    ''' 
-    Public Sub SetKeyControls(ucrNewStation As ucrStationSelector, ucrNewElement As ucrElementSelector, ucrNewYear As ucrYearSelector, ucrNewMonth As ucrMonth, ucrNewHour As ucrHour, ucrNewNavigation As ucrNavigation)
-        ucrLinkedStation = ucrNewStation
-        ucrLinkedElement = ucrNewElement
-        ucrLinkedYear = ucrNewYear
-        ucrLinkedMonth = ucrNewMonth
-        ucrLinkedHour = ucrNewHour
-        ucrLinkedNavigation = ucrNewNavigation
-
-        ucrLinkedHour.setDefaultValue(6)
-
-        AddLinkedControlFilters(ucrLinkedStation, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-        AddLinkedControlFilters(ucrLinkedElement, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedYear, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedMonth, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-        AddLinkedControlFilters(ucrLinkedHour, ucrLinkedStation.FieldName, "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
-
-        'Sets key controls for the navigation
-        ucrLinkedNavigation.SetTableEntry(Me)
-        ucrLinkedNavigation.AddKeyControls(ucrLinkedStation)
-        ucrLinkedNavigation.AddKeyControls(ucrLinkedElement)
-        ucrLinkedNavigation.AddKeyControls(ucrLinkedYear)
-        ucrLinkedNavigation.AddKeyControls(ucrLinkedMonth)
-        ucrLinkedNavigation.AddKeyControls(ucrLinkedHour)
-        ucrLinkedNavigation.SetSortBy("entryDatetime")
-
-    End Sub
-
-    Private Sub ValidateDataEntryPermission()
+    Protected Overrides Sub ValidateDataEntryPermission()
         Dim iMonthLength As Integer
         Dim todaysDate As Date
         Dim ctr As Control
 
-        If ucrLinkedYear Is Nothing OrElse ucrLinkedMonth Is Nothing Then
-            Me.Enabled = False
-        ElseIf ucrLinkedYear.ValidateValue AndAlso ucrLinkedMonth.ValidateValue Then
+        If ucrYearSelector.ValidateValue AndAlso ucrMonth.ValidateValue Then
             todaysDate = Date.Now
-            iMonthLength = Date.DaysInMonth(ucrLinkedYear.GetValue, ucrLinkedMonth.GetValue())
+            iMonthLength = Date.DaysInMonth(ucrYearSelector.GetValue, ucrMonth.GetValue())
 
-            If ucrLinkedYear.GetValue > todaysDate.Year OrElse (ucrLinkedYear.GetValue = todaysDate.Year AndAlso ucrLinkedMonth.GetValue > todaysDate.Month) Then
+            If ucrYearSelector.GetValue > todaysDate.Year OrElse (ucrYearSelector.GetValue = todaysDate.Year AndAlso ucrMonth.GetValue > todaysDate.Month) Then
                 Me.Enabled = False
             Else
                 Me.Enabled = True
-                If ucrLinkedYear.GetValue = todaysDate.Year AndAlso ucrLinkedMonth.GetValue = todaysDate.Month Then
+                If ucrYearSelector.GetValue = todaysDate.Year AndAlso ucrMonth.GetValue = todaysDate.Month Then
                     For Each ctr In Me.Controls
                         If TypeOf ctr Is ucrValueFlagPeriod Then
                             ctr.Enabled = If(Val(ctr.Tag) >= todaysDate.Day, False, True)
@@ -505,10 +289,10 @@ Public Class ucrFormDaily2
     End Sub
 
     'upload code in the background thread
-    Public Sub UploadAllRecords()
+    Private Sub UploadAllRecords()
         Dim frm As New frmNewComputationProgress
-        frm.SetHeader("Uploading " & ucrLinkedNavigation.iMaxRows & " records")
-        frm.SetProgressMaximum(ucrLinkedNavigation.iMaxRows)
+        frm.SetHeader("Uploading " & ucrDaily2Navigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrDaily2Navigation.iMaxRows)
         frm.ShowResultMessage(True)
         'frm.SetPretextProgress("Uploading")
         frm.ShowNumbers(True)
@@ -714,101 +498,5 @@ Public Class ucrFormDaily2
 
     End Sub
 
-
-
-    'TODO. Can be used once the issue of ObservationInitial primary keys is fixed
-    Public Sub UploadAllRecordsEF()
-        Dim clsAllRecordsCall As New DataCall
-        Dim dtbAllRecords As DataTable
-        Dim rcdObservationInitial As observationinitial
-        Dim strCurrTag As String
-        Dim dtObsDateTime As Date
-        Dim strStationId As String
-        Dim lElementId As Long
-        Dim iPeriod As Integer
-        Dim lstAllFields As New List(Of String)
-        Dim bNewRecord As Boolean
-
-        'get the observation values fields
-        lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
-
-        clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        dtbAllRecords = clsAllRecordsCall.GetDataTable()
-
-        For Each row As DataRow In dtbAllRecords.Rows
-            For i As Integer = 1 To 31
-                If i < 10 Then
-                    strCurrTag = "0" & i
-                Else
-                    strCurrTag = i
-                End If
-
-                If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
-
-                    strStationId = row.Item("stationId")
-                    dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
-
-                    rcdObservationInitial = clsDataConnection.db.observationinitials.Where("recordedFrom  == @0  And describedBy == @1 AND obsDatetime  == @2  AND qcStatus  == @3 AND acquisitionType  == @4",
-                                                                         {strStationId, lElementId, dtObsDateTime, 0, 1}).FirstOrDefault()
-                    If rcdObservationInitial Is Nothing Then
-                        bNewRecord = True
-                        rcdObservationInitial = New observationinitial
-                    Else
-                        bNewRecord = False
-                    End If
-
-                    rcdObservationInitial.recordedFrom = strStationId
-                    rcdObservationInitial.describedBy = lElementId
-                    rcdObservationInitial.obsDatetime = dtObsDateTime
-                    rcdObservationInitial.obsLevel = "surface"
-                    rcdObservationInitial.qcStatus = 0
-                    rcdObservationInitial.acquisitionType = 1
-                    rcdObservationInitial.dataForm = strTableName
-
-                    rcdObservationInitial.obsValue = row.Item("day" & strCurrTag)
-                    rcdObservationInitial.flag = row.Item("flag" & strCurrTag)
-                    If Integer.TryParse(row.Item("period" & strCurrTag), iPeriod) Then
-                        rcdObservationInitial.period = iPeriod
-                    End If
-
-                    If Not IsDBNull(row.Item("signature")) Then
-                        rcdObservationInitial.capturedBy = row.Item("signature")
-                    End If
-                    If Not IsDBNull(row.Item("temperatureUnits")) Then
-                        rcdObservationInitial.temperatureUnits = row.Item("temperatureUnits")
-                    End If
-                    If Not IsDBNull(row.Item("precipUnits")) Then
-                        rcdObservationInitial.precipitationUnits = row.Item("precipUnits")
-                    End If
-                    If Not IsDBNull(row.Item("cloudHeightUnits")) Then
-                        rcdObservationInitial.cloudHeightUnits = row.Item("cloudHeightUnits")
-                    End If
-                    If Not IsDBNull(row.Item("visUnits")) Then
-                        rcdObservationInitial.visUnits = row.Item("visUnits")
-                    End If
-
-                    If bNewRecord Then
-                        clsDataConnection.db.observationinitials.Add(rcdObservationInitial)
-                    End If
-                    'save the Observation record
-                    clsDataConnection.db.SaveChanges()
-
-                End If
-            Next
-        Next
-
-        'TODO? because of the detachment
-        PopulateControl()
-
-    End Sub
-
-
-    Private Function SetUpContextMenuStrip() As ContextMenuStrip
-        'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
-        Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
-        Return New ClsShiftCells(allVFP).GetVFPContextMenu()
-    End Function
 
 End Class
