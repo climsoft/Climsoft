@@ -9,11 +9,10 @@
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
-                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & Val(Strings.Right(ucrVFP.FieldName, 3)))
+                    ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
                 End If
             Next
-
-            'SetUpTableEntry("form_agro1")
+            SetUpTableEntry("form_agro1")
 
             ucrAgrometStationSelector.SetTableNameAndField("station", "stationId")
             ucrAgrometStationSelector.PopulateControl()
@@ -26,9 +25,7 @@
             AddLinkedControlFilters(ucrAgrometMonthSelector, ucrAgrometMonthSelector.FieldName(), "=", strLinkedFieldName:=ucrAgrometMonthSelector.FieldName(), bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrAgrometDaySelector, ucrAgrometDaySelector.FieldName(), "=", strLinkedFieldName:=ucrAgrometDaySelector.FieldName(), bForceValuesAsString:=False)
 
-
             ucrAgrometNavigation.SetTableEntryAndKeyControls(Me)
-
             bFirstLoad = False
             ucrAgrometNavigation.PopulateControl()
             SaveEnable()
