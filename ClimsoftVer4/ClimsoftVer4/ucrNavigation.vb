@@ -418,8 +418,13 @@ Public Class ucrNavigation
                 strSelectStatement = strSelectStatement & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
             End If
         Next
-        rowsFitered = dtbSequencer.Select(strSelectStatement)
-        If rowsFitered.Count > 0 Then
+        Try
+            rowsFitered = dtbSequencer.Select(strSelectStatement)
+        Catch ex As Exception
+            rowsFitered = Nothing
+        End Try
+
+        If  rowsFitered IsNot Nothing AndAlso rowsFitered.Count > 0 Then
             'TODO take first row or last row?
             iCurrRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
             If iCurrRow < dtbSequencer.Rows.Count - 1 Then

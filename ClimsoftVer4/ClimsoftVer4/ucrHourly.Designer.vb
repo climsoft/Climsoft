@@ -154,7 +154,7 @@ Partial Class ucrHourly
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
         Me.btnView.TabIndex = 44
-        Me.btnView.Tag = "view"
+        Me.btnView.Tag = ""
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -174,7 +174,7 @@ Partial Class ucrHourly
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 46
-        Me.btnHelp.Tag = "help"
+        Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '

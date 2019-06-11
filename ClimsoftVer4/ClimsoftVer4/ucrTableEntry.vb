@@ -61,7 +61,6 @@
         Next
         SetTableNameAndFields(strNewTableName, lstFields)
 
-
     End Sub
 
 

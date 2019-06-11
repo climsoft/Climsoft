@@ -3,15 +3,11 @@ Imports System.Linq.Dynamic
 
 Public Class ucrFormDaily2
 
-    Dim strTableName As String
     'These store field names for value, flag and period
     Private strValueFieldName As String = "day"
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
-    Private strTotalFieldName As String = "total"
     Private bTotalRequired As Boolean
-    'stores a list containing all fields of this control
-    Private lstAllFields As New List(Of String)
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -50,10 +46,10 @@ Public Class ucrFormDaily2
             SetUpTableEntry("form_daily2")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
-            AddLinkedControlFilters(ucrElementSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrHour, ucrHour.FieldName, "=", strLinkedFieldName:="hh", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrHour, ucrHour.FieldName, "=", strLinkedFieldName:="12Hrs", bForceValuesAsString:=False)
 
             'set up the navigation control
             ucrDaily2Navigation.SetTableEntryAndKeyControls(Me)
@@ -342,7 +338,7 @@ Public Class ucrFormDaily2
             conn.ConnectionString = e.Argument
             conn.Open()
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", conn)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -397,7 +393,7 @@ Public Class ucrFormDaily2
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
                             cmd.Parameters.AddWithValue("@qcStatus", 0)
                             cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                            cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                            cmd.Parameters.AddWithValue("@dataForm", GetTableName)
 
                             Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
@@ -452,7 +448,7 @@ Public Class ucrFormDaily2
                                 cmdSave.Parameters.AddWithValue("@qcStatus", 0)
                                 cmdSave.Parameters.AddWithValue("@acquisitiontype", 1)
                                 cmdSave.Parameters.AddWithValue("@capturedBy", strSignature)
-                                cmdSave.Parameters.AddWithValue("@dataForm", strTableName)
+                                cmdSave.Parameters.AddWithValue("@dataForm", GetTableName)
                                 cmdSave.Parameters.AddWithValue("@temperatureUnits", strTempUnits)
                                 cmdSave.Parameters.AddWithValue("@precipUnits", strPrecipUnits)
                                 cmdSave.Parameters.AddWithValue("@cloudHeightUnits", strCloudHeightUnits)

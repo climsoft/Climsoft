@@ -120,7 +120,7 @@ Partial Class ucrFormDaily2
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.grpUnits = New System.Windows.Forms.GroupBox()
         Me.lblVisibility = New System.Windows.Forms.Label()
         Me.LblCloudheight = New System.Windows.Forms.Label()
@@ -1058,6 +1058,7 @@ Partial Class ucrFormDaily2
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
         Me.btnView.TabIndex = 703
+        Me.btnView.Tag = ""
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '
@@ -1067,6 +1068,7 @@ Partial Class ucrFormDaily2
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 705
+        Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
         '
@@ -1076,6 +1078,7 @@ Partial Class ucrFormDaily2
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(60, 23)
         Me.btnClear.TabIndex = 702
+        Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -1085,6 +1088,7 @@ Partial Class ucrFormDaily2
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
         Me.btnSave.TabIndex = 698
+        Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -1094,6 +1098,7 @@ Partial Class ucrFormDaily2
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(60, 23)
         Me.btnDelete.TabIndex = 701
+        Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
@@ -1103,6 +1108,7 @@ Partial Class ucrFormDaily2
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
         Me.btnAddNew.TabIndex = 700
+        Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
@@ -1112,6 +1118,7 @@ Partial Class ucrFormDaily2
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
         Me.btnUpdate.TabIndex = 699
+        Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -1121,17 +1128,19 @@ Partial Class ucrFormDaily2
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 704
+        Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnCancel
         '
-        Me.Button1.Location = New System.Drawing.Point(345, 518)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(60, 23)
-        Me.Button1.TabIndex = 711
-        Me.Button1.Text = "Cancel"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnCancel.Location = New System.Drawing.Point(345, 518)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.TabIndex = 711
+        Me.btnCancel.Tag = "cancel"
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'grpUnits
         '
@@ -1234,7 +1243,7 @@ Partial Class ucrFormDaily2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.grpUnits)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.lblSequencer)
         Me.Controls.Add(Me.txtSequencer)
@@ -1447,7 +1456,7 @@ Partial Class ucrFormDaily2
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnCancel As Button
     Friend WithEvents grpUnits As GroupBox
     Friend WithEvents lblVisibility As Label
     Friend WithEvents LblCloudheight As Label
