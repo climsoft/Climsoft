@@ -126,7 +126,7 @@ Partial Class ucrHourly
         Me.chkRepeatEntry.Location = New System.Drawing.Point(112, 566)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
-        Me.chkRepeatEntry.TabIndex = 780
+        Me.chkRepeatEntry.TabIndex = 48
         Me.chkRepeatEntry.Text = "Repeat Entry"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
@@ -153,7 +153,7 @@ Partial Class ucrHourly
         Me.btnView.Location = New System.Drawing.Point(497, 527)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 774
+        Me.btnView.TabIndex = 44
         Me.btnView.Tag = "view"
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -164,7 +164,7 @@ Partial Class ucrHourly
         Me.btnUpload.Location = New System.Drawing.Point(659, 557)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 777
+        Me.btnUpload.TabIndex = 47
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
@@ -173,7 +173,7 @@ Partial Class ucrHourly
         Me.btnHelp.Location = New System.Drawing.Point(659, 527)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 776
+        Me.btnHelp.TabIndex = 46
         Me.btnHelp.Tag = "help"
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -183,7 +183,7 @@ Partial Class ucrHourly
         Me.btnClear.Location = New System.Drawing.Point(335, 527)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 773
+        Me.btnClear.TabIndex = 42
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -193,7 +193,7 @@ Partial Class ucrHourly
         Me.btnSave.Location = New System.Drawing.Point(92, 527)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 769
+        Me.btnSave.TabIndex = 30
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -203,7 +203,7 @@ Partial Class ucrHourly
         Me.btnDelete.Location = New System.Drawing.Point(254, 527)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 772
+        Me.btnDelete.TabIndex = 40
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -213,7 +213,7 @@ Partial Class ucrHourly
         Me.btnAddNew.Location = New System.Drawing.Point(11, 527)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 771
+        Me.btnAddNew.TabIndex = 41
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -223,7 +223,7 @@ Partial Class ucrHourly
         Me.btnUpdate.Location = New System.Drawing.Point(173, 527)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 770
+        Me.btnUpdate.TabIndex = 31
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -233,7 +233,7 @@ Partial Class ucrHourly
         Me.btnClose.Location = New System.Drawing.Point(578, 527)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 775
+        Me.btnClose.TabIndex = 45
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -295,7 +295,7 @@ Partial Class ucrHourly
         Me.ucrDaySelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrDaySelector.Name = "ucrDaySelector"
         Me.ucrDaySelector.Size = New System.Drawing.Size(42, 21)
-        Me.ucrDaySelector.TabIndex = 763
+        Me.ucrDaySelector.TabIndex = 5
         Me.ucrDaySelector.Tag = "dd"
         '
         'ucrMonthSelector
@@ -306,7 +306,7 @@ Partial Class ucrHourly
         Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrMonthSelector.Name = "ucrMonthSelector"
         Me.ucrMonthSelector.Size = New System.Drawing.Size(36, 25)
-        Me.ucrMonthSelector.TabIndex = 762
+        Me.ucrMonthSelector.TabIndex = 4
         Me.ucrMonthSelector.Tag = "mm"
         '
         'ucrYearSelector
@@ -317,7 +317,7 @@ Partial Class ucrHourly
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(49, 25)
-        Me.ucrYearSelector.TabIndex = 761
+        Me.ucrYearSelector.TabIndex = 3
         Me.ucrYearSelector.Tag = "yyyy"
         '
         'lblDay
@@ -364,7 +364,7 @@ Partial Class ucrHourly
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(212, 24)
-        Me.ucrStationSelector.TabIndex = 755
+        Me.ucrStationSelector.TabIndex = 1
         Me.ucrStationSelector.Tag = "stationId"
         '
         'ucrElementSelector
@@ -375,24 +375,24 @@ Partial Class ucrHourly
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)
-        Me.ucrElementSelector.TabIndex = 754
+        Me.ucrElementSelector.TabIndex = 2
         Me.ucrElementSelector.Tag = "elementId"
         '
         'ucrInputTotal
         '
         Me.ucrInputTotal.FieldName = Nothing
         Me.ucrInputTotal.KeyControl = False
-        Me.ucrInputTotal.Location = New System.Drawing.Point(486, 452)
+        Me.ucrInputTotal.Location = New System.Drawing.Point(500, 452)
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
         Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputTotal.TabIndex = 735
+        Me.ucrInputTotal.TabIndex = 29
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
-        Me.lblTotal.Location = New System.Drawing.Point(483, 434)
+        Me.lblTotal.Location = New System.Drawing.Point(497, 434)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(31, 13)
         Me.lblTotal.TabIndex = 753
@@ -424,7 +424,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod23.Name = "UcrValueFlagPeriod23"
         Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod23.TabIndex = 733
+        Me.UcrValueFlagPeriod23.TabIndex = 28
         Me.UcrValueFlagPeriod23.Tag = "23"
         '
         'UcrValueFlagPeriod22
@@ -435,7 +435,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod22.Name = "UcrValueFlagPeriod22"
         Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod22.TabIndex = 731
+        Me.UcrValueFlagPeriod22.TabIndex = 27
         Me.UcrValueFlagPeriod22.Tag = "22"
         '
         'lbl21
@@ -527,7 +527,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod21.Name = "UcrValueFlagPeriod21"
         Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod21.TabIndex = 729
+        Me.UcrValueFlagPeriod21.TabIndex = 26
         Me.UcrValueFlagPeriod21.Tag = "21"
         '
         'UcrValueFlagPeriod20
@@ -538,7 +538,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod20.Name = "UcrValueFlagPeriod20"
         Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod20.TabIndex = 727
+        Me.UcrValueFlagPeriod20.TabIndex = 25
         Me.UcrValueFlagPeriod20.Tag = "20"
         '
         'UcrValueFlagPeriod19
@@ -560,7 +560,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod18.Name = "UcrValueFlagPeriod18"
         Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod18.TabIndex = 724
+        Me.UcrValueFlagPeriod18.TabIndex = 24
         Me.UcrValueFlagPeriod18.Tag = "18"
         '
         'UcrValueFlagPeriod17
@@ -571,7 +571,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod17.Name = "UcrValueFlagPeriod17"
         Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod17.TabIndex = 722
+        Me.UcrValueFlagPeriod17.TabIndex = 23
         Me.UcrValueFlagPeriod17.Tag = "17"
         '
         'UcrValueFlagPeriod16
@@ -582,7 +582,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod16.Name = "UcrValueFlagPeriod16"
         Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod16.TabIndex = 719
+        Me.UcrValueFlagPeriod16.TabIndex = 22
         Me.UcrValueFlagPeriod16.Tag = "16"
         '
         'UcrValueFlagPeriod15
@@ -593,7 +593,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod15.Name = "UcrValueFlagPeriod15"
         Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod15.TabIndex = 718
+        Me.UcrValueFlagPeriod15.TabIndex = 21
         Me.UcrValueFlagPeriod15.Tag = "15"
         '
         'UcrValueFlagPeriod14
@@ -604,7 +604,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod14.Name = "UcrValueFlagPeriod14"
         Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod14.TabIndex = 717
+        Me.UcrValueFlagPeriod14.TabIndex = 20
         Me.UcrValueFlagPeriod14.Tag = "14"
         '
         'UcrValueFlagPeriod13
@@ -615,7 +615,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod13.Name = "UcrValueFlagPeriod13"
         Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod13.TabIndex = 716
+        Me.UcrValueFlagPeriod13.TabIndex = 19
         Me.UcrValueFlagPeriod13.Tag = "13"
         '
         'Label12
@@ -662,7 +662,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
         Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod12.TabIndex = 715
+        Me.UcrValueFlagPeriod12.TabIndex = 18
         Me.UcrValueFlagPeriod12.Tag = "12"
         '
         'lbl11
@@ -682,7 +682,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod11.Name = "ucrValueFlagPeriod11"
         Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod11.TabIndex = 714
+        Me.ucrValueFlagPeriod11.TabIndex = 17
         Me.ucrValueFlagPeriod11.Tag = "11"
         '
         'lbl10
@@ -774,7 +774,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod10.Name = "ucrValueFlagPeriod10"
         Me.ucrValueFlagPeriod10.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod10.TabIndex = 713
+        Me.ucrValueFlagPeriod10.TabIndex = 16
         Me.ucrValueFlagPeriod10.Tag = "10"
         '
         'ucrValueFlagPeriod9
@@ -785,7 +785,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod9.Name = "ucrValueFlagPeriod9"
         Me.ucrValueFlagPeriod9.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod9.TabIndex = 712
+        Me.ucrValueFlagPeriod9.TabIndex = 15
         Me.ucrValueFlagPeriod9.Tag = "09"
         '
         'ucrValueFlagPeriod8
@@ -796,7 +796,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod8.Name = "ucrValueFlagPeriod8"
         Me.ucrValueFlagPeriod8.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod8.TabIndex = 711
+        Me.ucrValueFlagPeriod8.TabIndex = 14
         Me.ucrValueFlagPeriod8.Tag = "08"
         '
         'ucrValueFlagPeriod7
@@ -807,7 +807,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod7.Name = "ucrValueFlagPeriod7"
         Me.ucrValueFlagPeriod7.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod7.TabIndex = 710
+        Me.ucrValueFlagPeriod7.TabIndex = 13
         Me.ucrValueFlagPeriod7.Tag = "07"
         '
         'ucrValueFlagPeriod6
@@ -818,7 +818,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod6.Name = "ucrValueFlagPeriod6"
         Me.ucrValueFlagPeriod6.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod6.TabIndex = 709
+        Me.ucrValueFlagPeriod6.TabIndex = 12
         Me.ucrValueFlagPeriod6.Tag = "06"
         '
         'ucrValueFlagPeriod5
@@ -829,7 +829,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod5.Name = "ucrValueFlagPeriod5"
         Me.ucrValueFlagPeriod5.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod5.TabIndex = 707
+        Me.ucrValueFlagPeriod5.TabIndex = 11
         Me.ucrValueFlagPeriod5.Tag = "05"
         '
         'ucrValueFlagPeriod4
@@ -840,7 +840,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod4.Name = "ucrValueFlagPeriod4"
         Me.ucrValueFlagPeriod4.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod4.TabIndex = 704
+        Me.ucrValueFlagPeriod4.TabIndex = 10
         Me.ucrValueFlagPeriod4.Tag = "04"
         '
         'ucrValueFlagPeriod3
@@ -851,7 +851,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod3.Name = "ucrValueFlagPeriod3"
         Me.ucrValueFlagPeriod3.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod3.TabIndex = 702
+        Me.ucrValueFlagPeriod3.TabIndex = 9
         Me.ucrValueFlagPeriod3.Tag = "03"
         '
         'ucrValueFlagPeriod2
@@ -862,7 +862,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod2.Name = "ucrValueFlagPeriod2"
         Me.ucrValueFlagPeriod2.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod2.TabIndex = 700
+        Me.ucrValueFlagPeriod2.TabIndex = 8
         Me.ucrValueFlagPeriod2.Tag = "02"
         '
         'lblFlag
@@ -918,7 +918,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod0.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod0.Name = "UcrValueFlagPeriod0"
         Me.UcrValueFlagPeriod0.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod0.TabIndex = 698
+        Me.UcrValueFlagPeriod0.TabIndex = 6
         Me.UcrValueFlagPeriod0.Tag = "00"
         '
         'ucrValueFlagPeriod1
@@ -929,7 +929,7 @@ Partial Class ucrHourly
         Me.ucrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod1.Name = "ucrValueFlagPeriod1"
         Me.ucrValueFlagPeriod1.Size = New System.Drawing.Size(126, 24)
-        Me.ucrValueFlagPeriod1.TabIndex = 699
+        Me.ucrValueFlagPeriod1.TabIndex = 7
         Me.ucrValueFlagPeriod1.Tag = "01"
         '
         'btnCancel
@@ -937,7 +937,7 @@ Partial Class ucrHourly
         Me.btnCancel.Location = New System.Drawing.Point(416, 527)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 781
+        Me.btnCancel.TabIndex = 43
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True

@@ -32,6 +32,10 @@
                     DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
                 End If
             Next
+
+            'change the base buttons state
+            SaveEnable()
+
             bPopulating = False
         End If
     End Sub
@@ -254,6 +258,10 @@
     ''' Enables appropriately the base buttons on Delete, Save, Add New, Clear, Cancel and on dialog load
     ''' </summary>
     Protected Sub SaveEnable()
+
+        If dctBaseControls.Count = 0 Then
+            Exit Sub
+        End If
 
         dctBaseControls.Item("add").Enabled = True
         dctBaseControls.Item("save").Enabled = False

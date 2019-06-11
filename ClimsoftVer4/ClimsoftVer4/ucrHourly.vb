@@ -1,7 +1,6 @@
 ﻿Public Class ucrHourly
     Private strValueFieldName As String = "hh_"
     Private strFlagFieldName As String = "flag"
-    ' Private bCheckTotal As Boolean
     Private bTotalRequired As Boolean
 
     Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -17,7 +16,6 @@
                 If TypeOf ctr Is ucrValueFlagPeriod Then
                     ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
                     ucrVFP.setInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
-                    'AddHandler ucrVFP.evtGoToNextVFPControl, AddressOf GoToNextVFPControl
                 End If
             Next
 
@@ -52,12 +50,6 @@
 
     End Sub
 
-    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
-        If ucrYearSelector.ValidateValue() Then
-            txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
-        End If
-    End Sub
-
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_hourly")
     End Sub
@@ -74,66 +66,6 @@
         End If
         viewRecords.viewTableRecords(sql)
     End Sub
-
-    Public Overrides Function ValidateValue() As Boolean
-        Dim bValid As Boolean
-
-        bValid = MyBase.ValidateValue()
-
-        If bValid Then
-            'Check if all values are empty. There should be atleast one observation value
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    If Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then
-                        MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                        ctr.Focus()
-                        Return False
-                    End If
-                End If
-            Next
-
-            'check computed total vs input total
-            If bTotalRequired AndAlso Not checkTotal() Then
-                ucrInputTotal.Focus()
-                Return False
-            End If
-
-        End If
-
-        Return bValid
-    End Function
-
-    Public Function checkTotal() As Boolean
-        Dim bValueCorrect As Boolean = False
-        Dim elemTotal As Decimal = 0
-        Dim expectedTotal As Decimal
-
-        If bTotalRequired Then
-            If ucrInputTotal.IsEmpty Then
-                MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ucrInputTotal.SetBackColor(Color.Red)
-                bValueCorrect = False
-            Else
-                expectedTotal = Val(ucrInputTotal.GetValue)
-                For Each ctr As Control In Me.Controls
-                    If TypeOf ctr Is ucrValueFlagPeriod Then
-                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrValueFlagPeriod).GetElementValue)
-                    End If
-                Next
-
-                bValueCorrect = (elemTotal = expectedTotal)
-                If Not bValueCorrect Then
-                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    ucrInputTotal.SetBackColor(Color.Red)
-                End If
-
-            End If
-        Else
-            bValueCorrect = True
-        End If
-
-        Return bValueCorrect
-    End Function
 
     Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click
         Dim strNewValue As String = ucrInputSameValue.GetValue
@@ -188,6 +120,84 @@
             End If
         End If
     End Sub
+
+    Private Sub ucrYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrYearSelector.evtValueChanged
+        If ucrYearSelector.ValidateValue() Then
+            txtSequencer.Text = If(ucrYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
+        End If
+    End Sub
+
+    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Not CheckTotal() Then
+                ucrInputTotal.Focus()
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    Public Overrides Function ValidateValue() As Boolean
+        Dim bValid As Boolean
+
+        bValid = MyBase.ValidateValue()
+
+        If bValid Then
+            Dim bValueExists As Boolean = False
+            'Check if all values are empty. There should be atleast one observation value
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod AndAlso Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then
+                    bValueExists = True
+                    Exit For
+                End If
+            Next
+
+            If Not bValueExists Then
+                MessageBox.Show("Insufficient observation data!", "Save Record", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return False
+            End If
+
+            'check computed total vs input total
+            If Not CheckTotal() Then
+                ucrInputTotal.Focus()
+                Return False
+            End If
+
+        End If
+
+        Return bValid
+    End Function
+
+    Private Function CheckTotal() As Boolean
+        Dim bValueCorrect As Boolean = False
+        Dim elemTotal As Decimal = 0
+        Dim expectedTotal As Decimal
+
+        If bTotalRequired Then
+            If ucrInputTotal.IsEmpty Then
+                MessageBox.Show("Please enter the Total Value in the [Total] textbox.", "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ucrInputTotal.SetBackColor(Color.Red)
+                bValueCorrect = False
+            Else
+                expectedTotal = Val(ucrInputTotal.GetValue)
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrValueFlagPeriod Then
+                        elemTotal = elemTotal + Val(DirectCast(ctr, ucrValueFlagPeriod).GetElementValue)
+                    End If
+                Next
+
+                bValueCorrect = (elemTotal = expectedTotal)
+                If Not bValueCorrect Then
+                    MessageBox.Show("Value in [Total] textbox is different from that calculated by computer! The computed total is " & elemTotal, "Error in total", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    ucrInputTotal.SetBackColor(Color.Red)
+                End If
+
+            End If
+        Else
+            bValueCorrect = True
+        End If
+
+        Return bValueCorrect
+    End Function
 
 
     ''' <summary>
@@ -249,18 +259,16 @@
             'if selectedDate is earlier than todayDate (<0) enable control
             'if it is same time (0) or later than (>0) disable control
             bEnabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
-
-            For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueView Then
-                    If Not DirectCast(ctr, ucrValueView).KeyControl Then
-                        ctr.Enabled = bEnabled
-                    End If
-                End If
-            Next
         Else
-            Me.Enabled = False
+            bEnabled = False
         End If
-    End Sub
 
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
+                ctr.Enabled = bEnabled
+            End If
+        Next
+
+    End Sub
 
 End Class
