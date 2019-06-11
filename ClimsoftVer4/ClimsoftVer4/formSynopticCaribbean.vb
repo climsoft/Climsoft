@@ -784,12 +784,15 @@
     End Sub
 
     Private Sub formSynopticCaribbean_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim dbnme As String
+
         'Dim loggedInUser As String
         'loggedInUser = frmLogin.txtUser.Text
 
         'MsgBox(loggedInUser)
 
         'Set TAB next to true
+
         tabNext = True
 
         'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
@@ -814,7 +817,12 @@
             If ex.HResult = -2147467259 Then
                 ' Table does not exit
                 MsgBox("Table will be created. Re-open the form")
-                If Create_Caribbean_Synoptic_table("mariadb_climsoft_db_v4") And Create_Caribbean_Synoptic_table("mariadb_climsoft_test_db_v4") Then
+
+                ' Get the current database
+                frmUserManagement.CurrentDB(myConnectionString, dbnme)
+
+                'If Create_Caribbean_Synoptic_table("mariadb_climsoft_db_v4") And Create_Caribbean_Synoptic_table("mariadb_climsoft_test_db_v4") Then
+                If Create_Caribbean_Synoptic_table(dbnme) And Create_Caribbean_Synoptic_table("mariadb_climsoft_test_db_v4") Then
                     ' Grant table access permission to the users for the created table
                     Grant_Permissions()
                     'Exit Sub
@@ -1105,7 +1113,7 @@
                 frmDataTransferProgress.txtDataTransferProgress1.Refresh()
                 'Loop through all observation fields adding observation records to observationInitial table
 
-                For m = 5 To 37
+                For m = 5 To 40
 
                     stnId = ds.Tables("form_synoptic2_caribbean").Rows(n).Item(0)
                     yyyy = ds.Tables("form_synoptic2_caribbean").Rows(n).Item(1)
@@ -1123,7 +1131,7 @@
                     obsFlag = ""
 
                     If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m)) Then obsVal = ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m)
-                    If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m + 33)) Then obsFlag = ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m + 33)
+                    If Not IsDBNull(ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m + 36)) Then obsFlag = ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m + 36)
                     If ds.Tables("form_synoptic2_caribbean").Rows(n).Item(m) = "" Then obsFlag = "M"
 
                     'Get the element code from the control name corresponding to column index

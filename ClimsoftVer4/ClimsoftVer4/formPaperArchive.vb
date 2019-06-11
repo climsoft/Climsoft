@@ -46,6 +46,7 @@
                 fls = da1.Name
                 'listImages.Items.Add(da1)
                 If InStr("jpgpngtifgifbmpemfpdf", Strings.LCase((Strings.Right(fls, 3)))) > 0 Then lstvFiles.Items.Add(fls)
+                If Strings.Right(fls, 4) = "tiff" Then lstvFiles.Items.Add(fls)
             Next
 
             If lstvFiles.Items.Count > 0 Then
@@ -338,7 +339,7 @@
     Private Sub cmdImageFile_Click(sender As Object, e As EventArgs) Handles cmdImageFile.Click
         Dim img As String
 
-        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.bmp;*.png;*.pdf"
+        OpenFilePaperArchive.Filter = "Image files|*.jpg;*.emf;*.jpeg;*.gif;*.tif;*.tiff;*.bmp;*.png;*.pdf"
         OpenFilePaperArchive.ShowDialog()
         img = OpenFilePaperArchive.FileName
         txtImageFile.Text = img

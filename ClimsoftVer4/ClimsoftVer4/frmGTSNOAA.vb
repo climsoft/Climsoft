@@ -260,4 +260,8 @@ Public Class frmGTSNOAA
 
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "noaagts.htm")
     End Sub
+
+    Private Sub BindingSource1_CurrentChanged(sender As Object, e As EventArgs) Handles BindingSource1.CurrentChanged
+
+    End Sub
 End Class
