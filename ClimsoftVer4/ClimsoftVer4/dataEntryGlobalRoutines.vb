@@ -566,5 +566,40 @@ Public Class dataEntryGlobalRoutines
             cons.Close()
         End Try
     End Function
+    Function GetCurrentStation(frm As String, ByRef stn As String) As Boolean
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, SQL_last_record As String
+        Dim dsLastDataRecord As New DataSet
+        Dim recs As Long
 
+        Try
+            strConnString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = strConnString
+            conn.Open()
+
+            SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            dsLastDataRecord.Clear()
+            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            ' Set to unlimited timeout period
+            daLastDataRecord.SelectCommand.CommandTimeout = 0
+            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+
+            conn.Close()
+
+            recs = dsLastDataRecord.Tables("lastDataRecord").Rows.Count
+
+            If recs > 0 Then
+                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(recs - 1).Item("StationName")
+            Else
+                Return False
+            End If
+
+            GetCurrentStation = True
+        Catch ex As Exception
+            Return False
+            MsgBox(ex.Message)
+        End Try
+
+    End Function
 End Class
