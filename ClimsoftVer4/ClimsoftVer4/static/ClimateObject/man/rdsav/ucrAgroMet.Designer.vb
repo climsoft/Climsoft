@@ -712,7 +712,7 @@ Partial Class ucrAgroMet
         Me.chkRepeatEntry.Location = New System.Drawing.Point(97, 583)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(139, 17)
-        Me.chkRepeatEntry.TabIndex = 1165
+        Me.chkRepeatEntry.TabIndex = 48
         Me.chkRepeatEntry.Text = "Repeat Key Entry Mode"
         Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
@@ -722,7 +722,7 @@ Partial Class ucrAgroMet
         Me.Label46.Location = New System.Drawing.Point(311, 583)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(59, 13)
-        Me.Label46.TabIndex = 1163
+        Me.Label46.TabIndex = 49
         Me.Label46.Text = "Sequencer"
         '
         'txtSequencer
@@ -730,7 +730,7 @@ Partial Class ucrAgroMet
         Me.txtSequencer.Location = New System.Drawing.Point(376, 580)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.Size = New System.Drawing.Size(175, 20)
-        Me.txtSequencer.TabIndex = 1162
+        Me.txtSequencer.TabIndex = 50
         Me.txtSequencer.Text = "seq_month_day"
         '
         'ucrAgrometNavigation
@@ -749,7 +749,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod31.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod31.Name = "UcrValueFlagPeriod31"
         Me.UcrValueFlagPeriod31.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod31.TabIndex = 1147
+        Me.UcrValueFlagPeriod31.TabIndex = 36
         Me.UcrValueFlagPeriod31.Tag = "530"
         '
         'UcrValueFlagPeriod32
@@ -760,7 +760,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod32.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod32.Name = "UcrValueFlagPeriod32"
         Me.UcrValueFlagPeriod32.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod32.TabIndex = 1146
+        Me.UcrValueFlagPeriod32.TabIndex = 37
         Me.UcrValueFlagPeriod32.Tag = "541"
         '
         'UcrValueFlagPeriod33
@@ -771,7 +771,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod33.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod33.Name = "UcrValueFlagPeriod33"
         Me.UcrValueFlagPeriod33.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod33.TabIndex = 1145
+        Me.UcrValueFlagPeriod33.TabIndex = 38
         Me.UcrValueFlagPeriod33.Tag = "547"
         '
         'UcrValueFlagPeriod34
@@ -782,7 +782,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod34.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod34.Name = "UcrValueFlagPeriod34"
         Me.UcrValueFlagPeriod34.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod34.TabIndex = 1142
+        Me.UcrValueFlagPeriod34.TabIndex = 35
         Me.UcrValueFlagPeriod34.Tag = "531"
         '
         'UcrValueFlagPeriod28
@@ -793,7 +793,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod28.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod28.Name = "UcrValueFlagPeriod28"
         Me.UcrValueFlagPeriod28.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod28.TabIndex = 1133
+        Me.UcrValueFlagPeriod28.TabIndex = 33
         Me.UcrValueFlagPeriod28.Tag = "565"
         '
         'UcrValueFlagPeriod29
@@ -804,7 +804,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod29.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod29.Name = "UcrValueFlagPeriod29"
         Me.UcrValueFlagPeriod29.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod29.TabIndex = 1132
+        Me.UcrValueFlagPeriod29.TabIndex = 34
         Me.UcrValueFlagPeriod29.Tag = "566"
         '
         'UcrValueFlagPeriod30
@@ -815,7 +815,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod30.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod30.Name = "UcrValueFlagPeriod30"
         Me.UcrValueFlagPeriod30.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod30.TabIndex = 1129
+        Me.UcrValueFlagPeriod30.TabIndex = 32
         Me.UcrValueFlagPeriod30.Tag = "564"
         '
         'UcrValueFlagPeriod27
@@ -826,7 +826,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod27.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod27.Name = "UcrValueFlagPeriod27"
         Me.UcrValueFlagPeriod27.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod27.TabIndex = 1114
+        Me.UcrValueFlagPeriod27.TabIndex = 29
         Me.UcrValueFlagPeriod27.Tag = "512"
         '
         'UcrValueFlagPeriod26
@@ -837,7 +837,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod26.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod26.Name = "UcrValueFlagPeriod26"
         Me.UcrValueFlagPeriod26.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod26.TabIndex = 1113
+        Me.UcrValueFlagPeriod26.TabIndex = 30
         Me.UcrValueFlagPeriod26.Tag = "503"
         '
         'UcrValueFlagPeriod20
@@ -848,7 +848,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod20.Name = "UcrValueFlagPeriod20"
         Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod20.TabIndex = 1114
+        Me.UcrValueFlagPeriod20.TabIndex = 25
         Me.UcrValueFlagPeriod20.Tag = "137"
         '
         'UcrValueFlagPeriod25
@@ -859,7 +859,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod25.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod25.Name = "UcrValueFlagPeriod25"
         Me.UcrValueFlagPeriod25.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod25.TabIndex = 1112
+        Me.UcrValueFlagPeriod25.TabIndex = 31
         Me.UcrValueFlagPeriod25.Tag = "515"
         '
         'UcrValueFlagPeriod21
@@ -870,7 +870,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod21.Name = "UcrValueFlagPeriod21"
         Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod21.TabIndex = 1113
+        Me.UcrValueFlagPeriod21.TabIndex = 26
         Me.UcrValueFlagPeriod21.Tag = "018"
         '
         'UcrValueFlagPeriod22
@@ -881,7 +881,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod22.Name = "UcrValueFlagPeriod22"
         Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod22.TabIndex = 1112
+        Me.UcrValueFlagPeriod22.TabIndex = 27
         Me.UcrValueFlagPeriod22.Tag = "518"
         '
         'UcrValueFlagPeriod24
@@ -892,7 +892,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod24.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod24.Name = "UcrValueFlagPeriod24"
         Me.UcrValueFlagPeriod24.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod24.TabIndex = 1109
+        Me.UcrValueFlagPeriod24.TabIndex = 28
         Me.UcrValueFlagPeriod24.Tag = "511"
         '
         'UcrValueFlagPeriod23
@@ -903,7 +903,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod23.Name = "UcrValueFlagPeriod23"
         Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod23.TabIndex = 1109
+        Me.UcrValueFlagPeriod23.TabIndex = 24
         Me.UcrValueFlagPeriod23.Tag = "532"
         '
         'UcrValueFlagPeriod17
@@ -914,7 +914,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod17.Name = "UcrValueFlagPeriod17"
         Me.UcrValueFlagPeriod17.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod17.TabIndex = 1101
+        Me.UcrValueFlagPeriod17.TabIndex = 22
         Me.UcrValueFlagPeriod17.Tag = "005"
         '
         'UcrValueFlagPeriod18
@@ -925,7 +925,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod18.Name = "UcrValueFlagPeriod18"
         Me.UcrValueFlagPeriod18.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod18.TabIndex = 1100
+        Me.UcrValueFlagPeriod18.TabIndex = 23
         Me.UcrValueFlagPeriod18.Tag = "504"
         '
         'UcrValueFlagPeriod19
@@ -936,7 +936,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod19.Name = "UcrValueFlagPeriod19"
         Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod19.TabIndex = 1099
+        Me.UcrValueFlagPeriod19.TabIndex = 21
         Me.UcrValueFlagPeriod19.Tag = "513"
         '
         'UcrValueFlagPeriod14
@@ -947,7 +947,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod14.Name = "UcrValueFlagPeriod14"
         Me.UcrValueFlagPeriod14.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod14.TabIndex = 1092
+        Me.UcrValueFlagPeriod14.TabIndex = 18
         Me.UcrValueFlagPeriod14.Tag = "562"
         '
         'UcrValueFlagPeriod15
@@ -958,7 +958,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod15.Name = "UcrValueFlagPeriod15"
         Me.UcrValueFlagPeriod15.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod15.TabIndex = 1091
+        Me.UcrValueFlagPeriod15.TabIndex = 19
         Me.UcrValueFlagPeriod15.Tag = "563"
         '
         'UcrValueFlagPeriod16
@@ -969,7 +969,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod16.Name = "UcrValueFlagPeriod16"
         Me.UcrValueFlagPeriod16.Size = New System.Drawing.Size(184, 23)
-        Me.UcrValueFlagPeriod16.TabIndex = 1090
+        Me.UcrValueFlagPeriod16.TabIndex = 17
         Me.UcrValueFlagPeriod16.Tag = "561"
         '
         'UcrValueFlagPeriod8
@@ -980,7 +980,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod8.Name = "UcrValueFlagPeriod8"
         Me.UcrValueFlagPeriod8.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod8.TabIndex = 1082
+        Me.UcrValueFlagPeriod8.TabIndex = 12
         Me.UcrValueFlagPeriod8.Tag = "073"
         '
         'UcrValueFlagPeriod9
@@ -991,7 +991,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod9.Name = "UcrValueFlagPeriod9"
         Me.UcrValueFlagPeriod9.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod9.TabIndex = 1081
+        Me.UcrValueFlagPeriod9.TabIndex = 13
         Me.UcrValueFlagPeriod9.Tag = "074"
         '
         'UcrValueFlagPeriod10
@@ -1002,7 +1002,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod10.Name = "UcrValueFlagPeriod10"
         Me.UcrValueFlagPeriod10.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod10.TabIndex = 1080
+        Me.UcrValueFlagPeriod10.TabIndex = 14
         Me.UcrValueFlagPeriod10.Tag = "554"
         '
         'UcrValueFlagPeriod11
@@ -1013,7 +1013,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod11.Name = "UcrValueFlagPeriod11"
         Me.UcrValueFlagPeriod11.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod11.TabIndex = 1078
+        Me.UcrValueFlagPeriod11.TabIndex = 16
         Me.UcrValueFlagPeriod11.Tag = "076"
         '
         'UcrValueFlagPeriod12
@@ -1024,7 +1024,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod12.Name = "UcrValueFlagPeriod12"
         Me.UcrValueFlagPeriod12.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod12.TabIndex = 1079
+        Me.UcrValueFlagPeriod12.TabIndex = 15
         Me.UcrValueFlagPeriod12.Tag = "075"
         '
         'UcrValueFlagPeriod13
@@ -1035,7 +1035,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod13.Name = "UcrValueFlagPeriod13"
         Me.UcrValueFlagPeriod13.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod13.TabIndex = 1077
+        Me.UcrValueFlagPeriod13.TabIndex = 11
         Me.UcrValueFlagPeriod13.Tag = "072"
         '
         'Elem102
@@ -1046,7 +1046,7 @@ Partial Class ucrAgroMet
         Me.Elem102.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem102.Name = "Elem102"
         Me.Elem102.Size = New System.Drawing.Size(130, 23)
-        Me.Elem102.TabIndex = 1070
+        Me.Elem102.TabIndex = 5
         Me.Elem102.Tag = "102"
         '
         'Elem103
@@ -1057,7 +1057,7 @@ Partial Class ucrAgroMet
         Me.Elem103.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem103.Name = "Elem103"
         Me.Elem103.Size = New System.Drawing.Size(130, 23)
-        Me.Elem103.TabIndex = 1069
+        Me.Elem103.TabIndex = 6
         Me.Elem103.Tag = "103"
         '
         'Elem105
@@ -1068,7 +1068,7 @@ Partial Class ucrAgroMet
         Me.Elem105.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem105.Name = "Elem105"
         Me.Elem105.Size = New System.Drawing.Size(130, 23)
-        Me.Elem105.TabIndex = 1068
+        Me.Elem105.TabIndex = 7
         Me.Elem105.Tag = "105"
         '
         'UcrValueFlagPeriod7
@@ -1079,7 +1079,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod7.Name = "UcrValueFlagPeriod7"
         Me.UcrValueFlagPeriod7.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod7.TabIndex = 1067
+        Me.UcrValueFlagPeriod7.TabIndex = 10
         Me.UcrValueFlagPeriod7.Tag = "099"
         '
         'UcrValueFlagPeriod6
@@ -1090,7 +1090,7 @@ Partial Class ucrAgroMet
         Me.UcrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod6.Name = "UcrValueFlagPeriod6"
         Me.UcrValueFlagPeriod6.Size = New System.Drawing.Size(130, 23)
-        Me.UcrValueFlagPeriod6.TabIndex = 1067
+        Me.UcrValueFlagPeriod6.TabIndex = 9
         Me.UcrValueFlagPeriod6.Tag = "003"
         '
         'Elem002
@@ -1101,7 +1101,7 @@ Partial Class ucrAgroMet
         Me.Elem002.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem002.Name = "Elem002"
         Me.Elem002.Size = New System.Drawing.Size(130, 23)
-        Me.Elem002.TabIndex = 1067
+        Me.Elem002.TabIndex = 8
         Me.Elem002.Tag = "002"
         '
         'Elem101
@@ -1112,7 +1112,7 @@ Partial Class ucrAgroMet
         Me.Elem101.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Elem101.Name = "Elem101"
         Me.Elem101.Size = New System.Drawing.Size(130, 23)
-        Me.Elem101.TabIndex = 1064
+        Me.Elem101.TabIndex = 4
         Me.Elem101.Tag = "101"
         '
         'ucrAgrometDaySelector
@@ -1123,7 +1123,7 @@ Partial Class ucrAgroMet
         Me.ucrAgrometDaySelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrAgrometDaySelector.Name = "ucrAgrometDaySelector"
         Me.ucrAgrometDaySelector.Size = New System.Drawing.Size(41, 21)
-        Me.ucrAgrometDaySelector.TabIndex = 7
+        Me.ucrAgrometDaySelector.TabIndex = 3
         '
         'ucrAgrometMonthSelector
         '
@@ -1133,7 +1133,7 @@ Partial Class ucrAgroMet
         Me.ucrAgrometMonthSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrAgrometMonthSelector.Name = "ucrAgrometMonthSelector"
         Me.ucrAgrometMonthSelector.Size = New System.Drawing.Size(48, 22)
-        Me.ucrAgrometMonthSelector.TabIndex = 4
+        Me.ucrAgrometMonthSelector.TabIndex = 2
         '
         'ucrAgrometYearSelector
         '
@@ -1143,7 +1143,7 @@ Partial Class ucrAgroMet
         Me.ucrAgrometYearSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrAgrometYearSelector.Name = "ucrAgrometYearSelector"
         Me.ucrAgrometYearSelector.Size = New System.Drawing.Size(59, 25)
-        Me.ucrAgrometYearSelector.TabIndex = 2
+        Me.ucrAgrometYearSelector.TabIndex = 1
         '
         'ucrAgrometStationSelector
         '
@@ -1160,7 +1160,7 @@ Partial Class ucrAgroMet
         Me.btnCancel.Location = New System.Drawing.Point(419, 539)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(60, 23)
-        Me.btnCancel.TabIndex = 1172
+        Me.btnCancel.TabIndex = 44
         Me.btnCancel.Tag = "cancel"
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -1170,7 +1170,7 @@ Partial Class ucrAgroMet
         Me.btnView.Location = New System.Drawing.Point(487, 539)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
-        Me.btnView.TabIndex = 1173
+        Me.btnView.TabIndex = 45
         Me.btnView.Tag = ""
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -1181,7 +1181,7 @@ Partial Class ucrAgroMet
         Me.Button1.Location = New System.Drawing.Point(608, 569)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1176
+        Me.Button1.TabIndex = 51
         Me.Button1.Text = "Upload"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -1190,7 +1190,7 @@ Partial Class ucrAgroMet
         Me.btnHelp.Location = New System.Drawing.Point(622, 539)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
-        Me.btnHelp.TabIndex = 1175
+        Me.btnHelp.TabIndex = 47
         Me.btnHelp.Tag = ""
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -1200,7 +1200,7 @@ Partial Class ucrAgroMet
         Me.btnClear.Location = New System.Drawing.Point(350, 539)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(60, 23)
-        Me.btnClear.TabIndex = 1171
+        Me.btnClear.TabIndex = 43
         Me.btnClear.Tag = "clear"
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
@@ -1210,7 +1210,7 @@ Partial Class ucrAgroMet
         Me.btnSave.Location = New System.Drawing.Point(147, 539)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
-        Me.btnSave.TabIndex = 1167
+        Me.btnSave.TabIndex = 40
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -1220,7 +1220,7 @@ Partial Class ucrAgroMet
         Me.btnDelete.Location = New System.Drawing.Point(281, 539)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(60, 23)
-        Me.btnDelete.TabIndex = 1169
+        Me.btnDelete.TabIndex = 42
         Me.btnDelete.Tag = "delete"
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -1230,7 +1230,7 @@ Partial Class ucrAgroMet
         Me.btnAddNew.Location = New System.Drawing.Point(81, 539)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
-        Me.btnAddNew.TabIndex = 1170
+        Me.btnAddNew.TabIndex = 39
         Me.btnAddNew.Tag = "add"
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -1240,7 +1240,7 @@ Partial Class ucrAgroMet
         Me.btnUpdate.Location = New System.Drawing.Point(214, 539)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
-        Me.btnUpdate.TabIndex = 1168
+        Me.btnUpdate.TabIndex = 41
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -1250,7 +1250,7 @@ Partial Class ucrAgroMet
         Me.btnClose.Location = New System.Drawing.Point(556, 539)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
-        Me.btnClose.TabIndex = 1174
+        Me.btnClose.TabIndex = 46
         Me.btnClose.Tag = "close"
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
