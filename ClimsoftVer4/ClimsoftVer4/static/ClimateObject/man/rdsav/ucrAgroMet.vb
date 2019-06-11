@@ -27,4 +27,28 @@
             SaveEnable()
         End If
     End Sub
+
+    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        Dim viewRecords As New dataEntryGlobalRoutines
+        Dim sql, userName As String
+        userName = frmLogin.txtUsername.Text
+        dsSourceTableName = "form_agro1"
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            sql = "SELECT * FROM form_agro1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+        Else
+            sql = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd"
+        End If
+        viewRecords.viewTableRecords(sql)
+
+    End Sub
+
+    Private Sub ucrAgrometYearSelector_evtValueChanged(sender As Object, e As EventArgs) Handles ucrAgrometYearSelector.evtValueChanged
+        If ucrAgrometYearSelector.ValidateValue() Then
+            txtSequencer.Text = If(ucrAgrometYearSelector.IsLeapYear(), "seq_month_day_element_leap_yr", "seq_month_day_element")
+        End If
+    End Sub
 End Class
