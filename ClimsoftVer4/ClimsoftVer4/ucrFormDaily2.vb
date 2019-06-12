@@ -49,7 +49,7 @@ Public Class ucrFormDaily2
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrMonth, ucrMonth.FieldName, "=", strLinkedFieldName:="MonthId", bForceValuesAsString:=False)
-            AddLinkedControlFilters(ucrHour, ucrHour.FieldName, "=", strLinkedFieldName:="12Hrs", bForceValuesAsString:=False)
+            AddLinkedControlFilters(ucrHour, ucrHour.FieldName, "=", strLinkedFieldName:="24Hrs", bForceValuesAsString:=False)
 
             'set up the navigation control
             ucrDaily2Navigation.SetTableEntryAndKeyControls(Me)
