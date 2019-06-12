@@ -255,6 +255,12 @@
     <Compile Include="frmEntryForms.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewAgrometKenya.Designer.vb">
+      <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewAgrometKenya.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewComputationProgress.Designer.vb">
       <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
     </Compile>
@@ -893,6 +899,12 @@
     <Compile Include="ucrHourly.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrKenyaAgromet.Designer.vb">
+      <DependentUpon>ucrKenyaAgromet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrKenyaAgromet.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataElement.Designer.vb">
       <DependentUpon>ucrMetadataElement.vb</DependentUpon>
     </Compile>
@@ -1062,6 +1074,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntryForms.resx">
       <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewAgrometKenya.resx">
+      <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewComputationProgress.resx">
       <DependentUpon>frmNewComputationProgress.vb</DependentUpon>
@@ -1511,6 +1526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourly.resx">
       <DependentUpon>ucrHourly.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrKenyaAgromet.resx">
+      <DependentUpon>ucrKenyaAgromet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataElement.resx">
       <DependentUpon>ucrMetadataElement.vb</DependentUpon>

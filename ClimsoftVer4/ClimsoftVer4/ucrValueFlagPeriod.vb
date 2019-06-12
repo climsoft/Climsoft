@@ -19,14 +19,14 @@
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
         SetPeriodField(strPeriodFieldName)
-        bIncludePeriod = True
+        SetIncludePeriod(True)
     End Sub
     'added this to set value and flag field
     Public Sub SetValueFlagFields(strValueFieldName As String, strFlagFieldName As String)
         SetFields(New List(Of String)({strValueFieldName, strFlagFieldName}))
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
-        bIncludePeriod = False
+        SetIncludePeriod(False)
     End Sub
 
     Public Sub SetTableNameAndValueFlagPeriodFields(strNewTable As String, strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
@@ -252,6 +252,11 @@
         End If
     End Sub
 
+    Public Sub SetIncludePeriod(bIncludePeriod As Boolean)
+        Me.bIncludePeriod = bIncludePeriod
+        ucrPeriod.Visible = bIncludePeriod
+    End Sub
+
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
         'CurrentEntryValue = ucrValue.TextboxValue
         'MsgBox(CurrentEntryValue & " 0")
@@ -386,14 +391,14 @@
         ucrValue.FieldName = strValueFieldName
         ucrFlag.FieldName = strFlagFieldName
         ucrPeriod.FieldName = strPeriodFieldName
-        bIncludePeriod = True
+        SetIncludePeriod(True)
     End Sub
 
     Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
         ucrValue.FieldName = strValueFieldName
         ucrFlag.FieldName = strFlagFieldName
         ucrPeriod.FieldName = "" 'removes the default period field to avoid addition of it to a list of fields of its table entry control
-        bIncludePeriod = False
+        SetIncludePeriod(False)
     End Sub
 
     Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
