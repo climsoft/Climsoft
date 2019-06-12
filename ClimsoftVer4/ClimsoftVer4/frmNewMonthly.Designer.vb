@@ -22,7 +22,7 @@ Partial Class frmNewMonthly
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrMonthlydata = New ClimsoftVer4.ucrMonthlydata()
+        Me.ucrMonthlydata = New ClimsoftVer4.ucrMonthlyData()
         Me.SuspendLayout()
         '
         'ucrMonthlydata
