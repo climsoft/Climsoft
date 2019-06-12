@@ -293,7 +293,7 @@
             ' load data into observationinitial table
 
             ' Create sql query
-            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period);"
+            sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
             'Execute query
@@ -338,6 +338,7 @@
     Sub Load_Daily2()
 
         Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg As String
+        Dim acquisitiontype As Integer
 
         Me.Cursor = Cursors.WaitCursor
         Try
@@ -355,6 +356,7 @@
                         ' Get the record index
                         col = 0
                         st = txtStn.Text
+                        acquisitiontype = 6
                         h = txtObsHour.Text
                         For Each currentField In currentRow
 
@@ -390,7 +392,7 @@
                                             End If
                                             'If IsDate(dttime) Then Add_Record(st, cod, dttime, dat, flg)
                                             If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
                                             End If
                                         End If
                                     End If
@@ -421,6 +423,7 @@
                 MyReader.SetDelimiters(delimit)
 
                 Dim st, cod, y, m, d, h, dttime, hd, dat, flg As String
+                Dim acquisitiontype As Integer
 
                 Do While MyReader.EndOfData = False
 
@@ -430,6 +433,7 @@
                         col = 0
                         st = txtStn.Text
                         h = txtObsHour.Text
+                        acquisitiontype = 6
 
                         For Each currentField In currentRow
                             hd = DataGridView1.Columns(col).Name
@@ -462,7 +466,7 @@
                                 End If
                                 If IsDate(dttime) And IsDate(DateSerial(y, m, h)) Then
                                     If Station_Element(st, cod) Then
-                                        If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For
+                                        If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For
                                     End If
                                 End If
 
@@ -487,7 +491,7 @@
     Sub Load_Hourly()
         'MsgBox("form_hourly")
         Dim st, cod, y, m, d, dttime, hd, dat, flg As String
-
+        Dim acquisitiontype As Integer
         Try
 
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
@@ -504,6 +508,8 @@
 
                         col = 0
                         st = txtStn.Text
+                        acquisitiontype = 6
+
                         For Each currentField In currentRow
                             hd = DataGridView1.Columns(col).Name()
                             dat = currentField
@@ -531,7 +537,7 @@
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
                                             If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For 'Sub
+                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
                                             End If
                                         End If
                                         End If ' Last DataGridView which is equivalent to End data columns 
@@ -556,6 +562,7 @@
         'MsgBox("Aws")
         Dim st, cod, dttim, d, tt, dt, dat, hd, flg As String
         Dim dt_tm As Boolean
+        Dim acquisitiontype As Integer
 
         Try
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
@@ -570,6 +577,7 @@
                         ' Initialize values
                         col = 0
                         st = txtStn.Text
+                        acquisitiontype = 3
                         dt_tm = False
 
                         'h = txtObsHour.Text
@@ -610,7 +618,7 @@
                                                 dat = ""
                                             End If
 
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg)
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
 
                                         End If
                                     End If
@@ -634,7 +642,7 @@
         'MsgBox(1)
         Dim st, cod, dttim, d, tt, dt, dat, hd, flg As String
         Dim dt_tm As Boolean
-
+        Dim acquisitiontype As Integer
         Try
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
@@ -648,6 +656,7 @@
                         ' Initialize values
                         col = 0
                         st = txtStn.Text
+                        acquisitiontype = 3
                         dt_tm = False
 
                         'h = txtObsHour.Text
@@ -688,7 +697,7 @@
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
 
                                     If Station_Element(st, cod) Then
-                                        If Not Add_Record(st, cod, dttim, dat, flg) Then Exit For
+                                        If Not Add_Record(st, cod, dttim, dat, flg, acquisitiontype) Then Exit For
                                     End If
 
                                 End If
@@ -711,7 +720,7 @@
 
     Sub Load_ColumnElems()
         Dim st, cod, y, m, d, h, dt_tm, hd, dat, dttcom, flg As String
-
+        Dim acquisitiontype As Integer
 
         Try
             Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
@@ -727,6 +736,7 @@
 
                             st = txtStn.Text
                             h = txtObsHour.Text
+                            acquisitiontype = 6
                             dttcom = 0
                             col = 0
                             For Each currentField In currentRow
@@ -769,7 +779,7 @@
                                             Else
                                                 Get_Value_Flag(cod, dat, flg)
                                             End If
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg)
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype)
                                         End If
                                     End If
                                 End With
@@ -790,7 +800,7 @@
     End Sub
 
     Sub Load_CLICOM(typ As String)
-        Dim col As Integer
+        Dim col, acquisitiontype As Integer
         Dim st, cod, dt, tm, dttime, hd, dat, flg As String
         Dim maxrows As Long
 
@@ -845,6 +855,7 @@
                         st = txtStn.Text
                         tm = txtObsHour.Text
                         flg = ""
+                        acquisitiontype = 2
 
                         For Each currentField In currentRow
 
@@ -883,7 +894,7 @@
                                                 End If
                                             End If
                                             If Station_Element(st, cod) And IsDate(dttime) Then ' Exit For
-                                                If Not Add_Record(st, cod, dttime, dat, flg) Then Exit For
+                                                If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For
                                             End If
                                         End If
                                     End If
@@ -1011,17 +1022,17 @@
     End Sub
     Private Sub cmdtest_Click(sender As Object, e As EventArgs) Handles cmdtest.Click
         'Update_database("8535004", "5", "2004-02-01 00:00", "0.1")
-        Add_Record("8535004", "2", "2004-2-1 9:00", "0.1", "")
+        Add_Record("8535004", "2", "2004-2-1 9:00", "0.1", "", "0")
     End Sub
 
 
-    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String) As Boolean
+    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String, acqTyp As Integer) As Boolean
         Dim dat As String
 
         Try
             If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
 
-            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg & ", " & cprd
+            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg & ", " & cprd & ", " & acqTyp
 
             Print(101, dat)
             PrintLine(101)
@@ -1037,6 +1048,10 @@
         End Try
 
     End Function
+
+    Private Sub BindingSource2_CurrentChanged(sender As Object, e As EventArgs)
+
+    End Sub
 
     Private Sub cmbFields_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFields.SelectedIndexChanged
         Dim Colhd As String

@@ -323,9 +323,11 @@ Public Class frmQC
         strSQL = "CREATE TABLE IF NOT EXISTS `qcAbsLimits` (`StationId` varchar(15) NOT NULL,`ElementId` bigint(10) DEFAULT NULL,`Datetime` datetime DEFAULT NULL,`YYYY` int(11),`mm` tinyint(4),`dd` tinyint(4),`hh` tinyint(4),`obsValue` varchar(10),`limitValue` varchar(10),`qcStatus` int(11) DEFAULT NULL,`acquisitionType` int(11) DEFAULT NULL,`obsLevel` varchar(255) DEFAULT NULL,`capturedBy` varchar(255) DEFAULT NULL,`dataForm` varchar(255) DEFAULT NULL,UNIQUE KEY `obsInitialIdentification` (`StationId`,`ElementId`,`Datetime`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
         objCmd.CommandTimeout = 0
 
         Try
+            objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
         Catch ex As Exception
             MsgBox(ex.Message & " Can't create QC Output limits table")
@@ -491,6 +493,7 @@ Public Class frmQC
                 If IO.File.Exists(QcReportFile) Then IO.File.Delete(QcReportFile)
 
                 ' Create the Command for executing query and set its properties
+                objCmd.CommandTimeout = 0
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                 Try
@@ -541,6 +544,7 @@ Public Class frmQC
                 strSQL = "TRUNCATE qc_interelement_2"
 
                 ' Create the Command for executing query and set its properties
+                objCmd.CommandTimeout = 0
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                 Try
@@ -569,6 +573,7 @@ Public Class frmQC
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ""
                 End If
                 ' Create the Command for executing query and set its properties
+                objCmd.CommandTimeout = 0
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                 Try

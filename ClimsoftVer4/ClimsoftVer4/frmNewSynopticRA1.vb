@@ -52,6 +52,10 @@
 
         'Set focus of ucrSynopticRA1 first control 
         ucrSynopticRA1.Focus()
+
+        'Get the Station from the last record by the current login user
+        Dim usrStn As New dataEntryGlobalRoutines
+        usrStn.GetCurrentStation("form_synoptic_2_ra1", ucrStationSelector.cboValues.Text)
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

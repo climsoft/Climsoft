@@ -22,30 +22,27 @@ Partial Class frmNewAgroMet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblStation = New System.Windows.Forms.Label()
+        Me.UcrKenyaAgroMet = New ClimsoftVer4.ucrAgroMet()
         Me.SuspendLayout()
         '
-        'lblStation
+        'UcrKenyaAgroMet
         '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(24, 26)
-        Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(40, 13)
-        Me.lblStation.TabIndex = 0
-        Me.lblStation.Text = "Station"
+        Me.UcrKenyaAgroMet.Location = New System.Drawing.Point(12, 3)
+        Me.UcrKenyaAgroMet.Name = "UcrKenyaAgroMet"
+        Me.UcrKenyaAgroMet.Size = New System.Drawing.Size(870, 601)
+        Me.UcrKenyaAgroMet.TabIndex = 0
         '
         'frmNewAgroMet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Controls.Add(Me.lblStation)
+        Me.ClientSize = New System.Drawing.Size(800, 583)
+        Me.Controls.Add(Me.UcrKenyaAgroMet)
         Me.Name = "frmNewAgroMet"
         Me.Text = "frmNewAgroMet"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents lblStation As Label
+    Friend WithEvents UcrKenyaAgroMet As ucrAgroMet
 End Class

@@ -56,6 +56,7 @@ Partial Class frmQC
         Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.BindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
         Me.BindingSource4 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource5 = New System.Windows.Forms.BindingSource(Me.components)
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.pnlQCTypes.SuspendLayout()
@@ -63,6 +64,7 @@ Partial Class frmQC
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -387,6 +389,7 @@ Partial Class frmQC
         CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -424,4 +427,5 @@ Partial Class frmQC
     Friend WithEvents BindingSource2 As BindingSource
     Friend WithEvents BindingSource3 As BindingSource
     Friend WithEvents BindingSource4 As BindingSource
+    Friend WithEvents BindingSource5 As BindingSource
 End Class
