@@ -545,6 +545,10 @@ Public Class ucrNavigation
             End If
 
             'fetch the row positions
+            'todo. in future a query like this could be used to get the row position instead of the reader
+            'Select Case pos, SteamId FROM ( Select Case (@pos := @pos+1) pos , Map, Time, Date, SteamID
+            'FROM `surf_times` S, (SELECT @pos := 0) p WHERE `Map` = "surf_mesa"  ORDER BY `Time` ) `surf_times` WHERE `SteamID` = "76561198065863390" ORDER BY pos LIMIT 1;
+
             i = 0
             Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                 Using reader As MySql.Data.MySqlClient.MySqlDataReader = Command.ExecuteReader()
@@ -568,6 +572,7 @@ Public Class ucrNavigation
 
                 End Using
             End Using
+
 
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
