@@ -29,7 +29,7 @@ Public Class ucrNavigation
 
         iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
-        posOfcurrentRowData = -1
+        currentRowDataPos = -1
         currentRowData = New Dictionary(Of String, String)
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
@@ -219,12 +219,7 @@ Public Class ucrNavigation
 
     Public Sub AddKeyControls(ucrKeyControl As ucrValueView)
         If dctKeyControls.ContainsKey(ucrKeyControl.FieldName) Then
-            If dctKeyControls.Item(ucrKeyControl.FieldName) Is ucrKeyControl Then
-                MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
-                Exit Sub
-            Else
-                dctKeyControls.Item(ucrKeyControl.FieldName) = ucrKeyControl
-            End If
+            dctKeyControls.Item(ucrKeyControl.FieldName) = ucrKeyControl
         Else
             dctKeyControls.Add(ucrKeyControl.FieldName, ucrKeyControl)
             AddField(ucrKeyControl.FieldName)
@@ -424,7 +419,7 @@ Public Class ucrNavigation
             rowsFitered = Nothing
         End Try
 
-        If  rowsFitered IsNot Nothing AndAlso rowsFitered.Count > 0 Then
+        If rowsFitered IsNot Nothing AndAlso rowsFitered.Count > 0 Then
             'TODO take first row or last row?
             iCurrRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
             If iCurrRow < dtbSequencer.Rows.Count - 1 Then
@@ -467,21 +462,21 @@ Public Class ucrNavigation
 
     'get specific column value
     Private Function GetValueFromRow(iRow As Integer, strField As String) As String
-        If iMaxRows = 0 OrElse iRow < 0 Then
-            Return ""
+        Dim dctRow As Dictionary(Of String, String) = GetRow(iRow)
+        If dctRow.Count > 0 Then
+            Return dctRow.Item(strField)
         Else
-            Return GetRow(iRow).Item(strField)
+            Return Nothing
         End If
     End Function
 
-    Private posOfcurrentRowData As Integer 'TODO probably these 2 can be merged in to key value pair? They have been used as to temporarily implement caching of values of current row.
+    Private currentRowDataPos As Integer 'TODO probably these 2 can be merged in to key value pair? They have been used as to temporarily implement caching of values of current row.
     Private currentRowData As New Dictionary(Of String, String)
-    'Gets the row details as dictionary of column names and value
+
+    'Gets the row details as dictionary of columns(fields) and value
     Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
         'holds column name(as key) and column value(as the value)
         Dim dctRow As New Dictionary(Of String, String)
-        Dim strDBValues As String
-        Dim arrDBValues() As String
         Dim strSql As String
         Dim strFields As String = ""
 
@@ -491,7 +486,7 @@ Public Class ucrNavigation
         End If
 
         'if iRow is still the current row then just return the current row data 
-        If posOfcurrentRowData = iRow AndAlso currentRowData.Count > 0 Then
+        If currentRowDataPos = iRow AndAlso currentRowData.Count > 0 Then
             Return currentRowData
         End If
 
@@ -504,91 +499,81 @@ Public Class ucrNavigation
             End If
         Next
 
-        'construct the necessary sql. Using CONCAT_WS to return a string of values. Probably use a unique separator?
-        strSql = "SELECT CONCAT_WS('+++'," & strFields & ") AS createdcol FROM " & clsDataDefinition.GetTableName()
+        'construct the sql
+        strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
         If strSortCol <> "" Then
             strSql = strSql & " ORDER BY " & strSortCol
         End If
         strSql = strSql & " LIMIT 1 OFFSET " & iRow
 
-        'get the concatenated column's values 
-        strDBValues = clsDataConnection.db.Database.SqlQuery(Of String)(strSql).FirstOrDefault()
 
-        If strDBValues IsNot Nothing Then
-            arrDBValues = strDBValues.Split("+++".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            'arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            'arrange the values to their corresponding column names
-            For i As Integer = 0 To clsDataDefinition.GetFields().Count - 1
-                If i > arrDBValues.Length - 1 Then
-                    dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, Nothing)
-                Else
-                    dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
-                End If
-
+        Dim dtbl As DataTable = clsDataDefinition.GetDataTableFromQuery(strSql)
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each str As String In clsDataDefinition.GetFields().Keys
+                dctRow.Add(str, dtbl.Rows(0).Item(str))
             Next
         End If
-        posOfcurrentRowData = iRow
+
+        currentRowDataPos = iRow
         currentRowData = dctRow
         Return dctRow
     End Function
 
-    'Gets the row position. The parameter is diction of column names and the values to fetch
+    'TODO. Change how this is implemented
+    'Gets the row position. The parameter is dictionary of column names and the values to fetch
     Private Function GetRowPosition(dctFieldvalue As Dictionary(Of String, String)) As Integer
-        Dim rowIndex As Integer = -1
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim command As MySql.Data.MySqlClient.MySqlCommand
-        Dim reader As MySql.Data.MySqlClient.MySqlDataReader
+        Dim rowPosition As Integer = -1 ' default row position
         Dim strSql As String
         Dim strFields As String = ""
         Dim i As Integer
         Dim bIsRowFetched As Boolean
-        'get all the fields and their condition values
-        For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-            If strFields = "" Then
-                strFields = kvp.Key
-            Else
-                strFields = strFields & "," & kvp.Key
-            End If
 
-        Next
         Try
-            'TODO. Change how this is implemented
-            i = 0
+
+            'get all the fields and their condition values
+            For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                If strFields = "" Then
+                    strFields = kvp.Key
+                Else
+                    strFields = strFields & "," & kvp.Key
+                End If
+            Next
+
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
             If strSortCol <> "" Then
                 strSql = strSql & " ORDER BY " & strSortCol
             End If
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
-            command = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-            conn.Open()
-            reader = command.ExecuteReader()
-            If reader.HasRows Then
-                While reader.Read()
-                    bIsRowFetched = True
-                    For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-                        If kvp.Value <> reader.GetString(kvp.Key) Then
-                            bIsRowFetched = False
-                            Exit For
-                        End If
-                    Next
 
-                    If bIsRowFetched Then
-                        rowIndex = i
-                        Exit While
+            'fetch the row positions
+            i = 0
+            Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                Using reader As MySql.Data.MySqlClient.MySqlDataReader = Command.ExecuteReader()
+                    If reader.HasRows Then
+                        While reader.Read()
+                            bIsRowFetched = True
+                            For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                                If kvp.Value <> reader.GetString(kvp.Key) Then
+                                    bIsRowFetched = False
+                                    Exit For
+                                End If
+                            Next
+
+                            If bIsRowFetched Then
+                                rowPosition = i
+                                Exit While
+                            End If
+                            i = i + 1
+                        End While
                     End If
-                    i = i + 1
-                End While
-            End If
 
-            reader.Close()
+                End Using
+            End Using
 
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
-        Finally
-            conn.Close()
         End Try
 
-        Return rowIndex
+        Return rowPosition
     End Function
 
     Public Sub OnevtValueChanged(sender As Object, e As EventArgs)

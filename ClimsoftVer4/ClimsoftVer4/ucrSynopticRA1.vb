@@ -102,29 +102,15 @@ Public Class ucrSynopticRA1
 
             Dim clsDataDefinition As New DataCall
             Dim dtbl As DataTable
-            ' Dim row As DataRow
-            Dim overalControlsFilter As New TableFilter
-
             clsDataDefinition.SetTableNameAndFields("form_synoptic_2_ra1", {"stationId", "yyyy", "mm", "dd", "hh"})
-
-            'Sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & ucrYearSelector.GetValue & "' and mm = '" & ucrMonthSelector.GetValue & "' and dd = '" & ucrDaySelector.GetValue & "' and hh = '" & ucrHourSelector.GetValue & "';"
 
             Dim yearFilter As TableFilter = New TableFilter(strNewField:="yyyy", strNewOperator:="=", objNewValue:=ucrYearSelector.GetValue, bNewIsPositiveCondition:=True, bForceValuesAsString:=True)
             Dim monthFilter As TableFilter = New TableFilter(strNewField:="mm", strNewOperator:="=", objNewValue:=ucrMonthSelector.GetValue, bNewIsPositiveCondition:=True, bForceValuesAsString:=True)
             Dim dayFilter As TableFilter = New TableFilter(strNewField:="dd", strNewOperator:="=", objNewValue:=ucrDaySelector.GetValue, bNewIsPositiveCondition:=True, bForceValuesAsString:=True)
             Dim hourFilter As TableFilter = New TableFilter(strNewField:="hh", strNewOperator:="=", objNewValue:=ucrHourSelector.GetValue, bNewIsPositiveCondition:=True, bForceValuesAsString:=True)
 
-            overalControlsFilter.SetLeftFilter(yearFilter)
-            overalControlsFilter.SetRightFilter(monthFilter)
-            overalControlsFilter.SetOperator("AND")
 
-            overalControlsFilter.SetLeftFilter(overalControlsFilter.Clone())
-            overalControlsFilter.SetRightFilter(dayFilter)
-
-            overalControlsFilter.SetLeftFilter(overalControlsFilter.Clone())
-            overalControlsFilter.SetRightFilter(hourFilter)
-
-            clsDataDefinition.SetFilter(overalControlsFilter)
+            clsDataDefinition.SetFilter(New TableFilter({yearFilter, monthFilter, dayFilter, hourFilter}))
             dtbl = clsDataDefinition.GetDataTable()
 
             frmSynopTDCF.cboStation.Text = ucrStationSelector.GetValue

@@ -117,6 +117,10 @@ Public Class TableFilter
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
     End Sub
 
+    Public Sub New(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
+        SetFilters(lstTblFilters, strOperator:=strOperator)
+    End Sub
+
     Public Sub SetField(strNewField As String)
         strField = strNewField
         bIsCombinedFilter = False
@@ -228,6 +232,32 @@ Public Class TableFilter
     Public Sub SetLeftAndRightFilter(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
         SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
+    End Sub
+
+    ''' <summary>
+    ''' Will combine the list of filters into one filter
+    ''' </summary>
+    ''' <param name="lstTblFilters"></param>
+    ''' <param name="strOperator"></param>
+    Public Sub SetFilters(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
+        Dim max As Integer = lstTblFilters.Count - 1
+        For i As Integer = 0 To max
+            If i = 0 Then
+                Me.SetLeftFilter(lstTblFilters(i))
+            Else
+                Me.SetLeftFilter(Me.Clone())
+            End If
+
+            If i <= max - 1 Then
+                Me.SetRightFilter(lstTblFilters(i + 1))
+                Me.SetOperator(strOperator)
+                If i + 1 = max Then
+                    Exit For
+                End If
+            End If
+
+        Next
+
     End Sub
 
     'Public Function GetLinqExpression() As Func(Of Entity.DbSet, Boolean)
