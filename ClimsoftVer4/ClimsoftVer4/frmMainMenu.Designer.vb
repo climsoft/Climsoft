@@ -27,8 +27,8 @@ Partial Class frmMainMenu
         Me.mnuAccessories = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesDewPointRH = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAccessoriesXMLOutput = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuProducts = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuQC = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuAdministration = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserAdminToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,6 +53,16 @@ Partial Class frmMainMenu
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.btnConsultation = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.btnCarnet = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.btnMicrofiche = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnACMADTCM = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -72,6 +82,8 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.btnSondage = New System.Windows.Forms.Button()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -135,19 +147,19 @@ Partial Class frmMainMenu
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
-        'mnuQC
-        '
-        Me.mnuQC.Name = "mnuQC"
-        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
-        Me.mnuQC.Tag = "QC"
-        Me.mnuQC.Text = "QC"
-        '
         'mnuProducts
         '
         Me.mnuProducts.Name = "mnuProducts"
         Me.mnuProducts.Size = New System.Drawing.Size(75, 23)
         Me.mnuProducts.Tag = "Products"
         Me.mnuProducts.Text = "Products"
+        '
+        'mnuQC
+        '
+        Me.mnuQC.Name = "mnuQC"
+        Me.mnuQC.Size = New System.Drawing.Size(41, 23)
+        Me.mnuQC.Tag = "QC"
+        Me.mnuQC.Text = "QC"
         '
         'mnuAdministration
         '
@@ -305,7 +317,19 @@ Partial Class frmMainMenu
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Linen
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label16)
+        Me.Panel1.Controls.Add(Me.btnSondage)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.btnConsultation)
+        Me.Panel1.Controls.Add(Me.Label14)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.Label13)
+        Me.Panel1.Controls.Add(Me.btnCarnet)
+        Me.Panel1.Controls.Add(Me.Label12)
+        Me.Panel1.Controls.Add(Me.btnMicrofiche)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.btnACMADTCM)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label9)
@@ -325,18 +349,158 @@ Partial Class frmMainMenu
         Me.Panel1.Controls.Add(Me.cmdPaperArchive)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.cmdKeyEntry)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(840, 521)
+        Me.Panel1.Size = New System.Drawing.Size(849, 539)
         Me.Panel1.TabIndex = 10
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(347, 522)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(113, 16)
+        Me.Label15.TabIndex = 46
+        Me.Label15.Tag = "CONSULTATION"
+        Me.Label15.Text = "CONSULTATION"
+        '
+        'btnConsultation
+        '
+        Me.btnConsultation.BackgroundImage = CType(resources.GetObject("btnConsultation.BackgroundImage"), System.Drawing.Image)
+        Me.btnConsultation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnConsultation.FlatAppearance.BorderSize = 4
+        Me.btnConsultation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnConsultation.ForeColor = System.Drawing.Color.Red
+        Me.btnConsultation.Location = New System.Drawing.Point(337, 446)
+        Me.btnConsultation.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnConsultation.Name = "btnConsultation"
+        Me.btnConsultation.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnConsultation.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnConsultation.Size = New System.Drawing.Size(126, 76)
+        Me.btnConsultation.TabIndex = 45
+        Me.btnConsultation.UseCompatibleTextRendering = True
+        Me.btnConsultation.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(315, 431)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(195, 16)
+        Me.Label14.TabIndex = 44
+        Me.Label14.Tag = "DONNEES HYDROLOGIQUES"
+        Me.Label14.Text = "DONNEES HYDROLOGIQUES"
+        '
+        'Button1
+        '
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.FlatAppearance.BorderSize = 4
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.Red
+        Me.Button1.Location = New System.Drawing.Point(337, 355)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Padding = New System.Windows.Forms.Padding(5)
+        Me.Button1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Button1.Size = New System.Drawing.Size(126, 76)
+        Me.Button1.TabIndex = 43
+        Me.Button1.UseCompatibleTextRendering = True
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(315, 113)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(177, 16)
+        Me.Label13.TabIndex = 42
+        Me.Label13.Tag = "CARNET D'OBSERVATION"
+        Me.Label13.Text = "CARNET D'OBSERVATION"
+        '
+        'btnCarnet
+        '
+        Me.btnCarnet.BackgroundImage = CType(resources.GetObject("btnCarnet.BackgroundImage"), System.Drawing.Image)
+        Me.btnCarnet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCarnet.FlatAppearance.BorderSize = 4
+        Me.btnCarnet.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCarnet.ForeColor = System.Drawing.Color.Red
+        Me.btnCarnet.Location = New System.Drawing.Point(337, 37)
+        Me.btnCarnet.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnCarnet.Name = "btnCarnet"
+        Me.btnCarnet.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnCarnet.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnCarnet.Size = New System.Drawing.Size(126, 76)
+        Me.btnCarnet.TabIndex = 41
+        Me.btnCarnet.UseCompatibleTextRendering = True
+        Me.btnCarnet.UseVisualStyleBackColor = True
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(315, 324)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(196, 16)
+        Me.Label12.TabIndex = 40
+        Me.Label12.Tag = "INVENTIARE DE MICROFICHE"
+        Me.Label12.Text = "INVENTIARE DE MICROFICHE"
+        '
+        'btnMicrofiche
+        '
+        Me.btnMicrofiche.BackgroundImage = CType(resources.GetObject("btnMicrofiche.BackgroundImage"), System.Drawing.Image)
+        Me.btnMicrofiche.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMicrofiche.FlatAppearance.BorderSize = 4
+        Me.btnMicrofiche.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMicrofiche.ForeColor = System.Drawing.Color.Red
+        Me.btnMicrofiche.Location = New System.Drawing.Point(337, 248)
+        Me.btnMicrofiche.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMicrofiche.Name = "btnMicrofiche"
+        Me.btnMicrofiche.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMicrofiche.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMicrofiche.Size = New System.Drawing.Size(126, 76)
+        Me.btnMicrofiche.TabIndex = 39
+        Me.btnMicrofiche.UseCompatibleTextRendering = True
+        Me.btnMicrofiche.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(277, 219)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(258, 16)
+        Me.Label10.TabIndex = 38
+        Me.Label10.Tag = "TABLEAU CLIMATOLOGIQUE MENSUEL"
+        Me.Label10.Text = "TABLEAU CLIMATOLOGIQUE MENSUEL"
+        '
+        'btnACMADTCM
+        '
+        Me.btnACMADTCM.BackgroundImage = CType(resources.GetObject("btnACMADTCM.BackgroundImage"), System.Drawing.Image)
+        Me.btnACMADTCM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnACMADTCM.FlatAppearance.BorderSize = 4
+        Me.btnACMADTCM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnACMADTCM.ForeColor = System.Drawing.Color.Red
+        Me.btnACMADTCM.Location = New System.Drawing.Point(337, 143)
+        Me.btnACMADTCM.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnACMADTCM.Name = "btnACMADTCM"
+        Me.btnACMADTCM.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnACMADTCM.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnACMADTCM.Size = New System.Drawing.Size(126, 76)
+        Me.btnACMADTCM.TabIndex = 37
+        Me.btnACMADTCM.UseCompatibleTextRendering = True
+        Me.btnACMADTCM.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(388, 452)
+        Me.Label5.Location = New System.Drawing.Point(180, 517)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 16)
         Me.Label5.TabIndex = 36
@@ -349,11 +513,11 @@ Partial Class frmMainMenu
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(332, 7)
+        Me.Label11.Location = New System.Drawing.Point(273, 4)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(108, 25)
+        Me.Label11.Size = New System.Drawing.Size(238, 25)
         Me.Label11.TabIndex = 35
-        Me.Label11.Text = "Welcome"
+        Me.Label11.Text = "Formulaires de saisie"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label9
@@ -439,7 +603,7 @@ Partial Class frmMainMenu
         Me.cmdRedCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.cmdRedCloseButton.FlatAppearance.BorderSize = 4
         Me.cmdRedCloseButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 393)
+        Me.cmdRedCloseButton.Location = New System.Drawing.Point(160, 458)
         Me.cmdRedCloseButton.Margin = New System.Windows.Forms.Padding(0)
         Me.cmdRedCloseButton.Name = "cmdRedCloseButton"
         Me.cmdRedCloseButton.Padding = New System.Windows.Forms.Padding(5)
@@ -596,10 +760,38 @@ Partial Class frmMainMenu
         Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.cmdKeyEntry.UseVisualStyleBackColor = True
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(564, 525)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(75, 16)
+        Me.Label16.TabIndex = 48
+        Me.Label16.Tag = "SONDAGE"
+        Me.Label16.Text = "SONDAGE"
+        '
+        'btnSondage
+        '
+        Me.btnSondage.BackgroundImage = CType(resources.GetObject("btnSondage.BackgroundImage"), System.Drawing.Image)
+        Me.btnSondage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSondage.FlatAppearance.BorderSize = 4
+        Me.btnSondage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSondage.ForeColor = System.Drawing.Color.Red
+        Me.btnSondage.Location = New System.Drawing.Point(554, 449)
+        Me.btnSondage.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnSondage.Name = "btnSondage"
+        Me.btnSondage.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnSondage.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnSondage.Size = New System.Drawing.Size(126, 76)
+        Me.btnSondage.TabIndex = 47
+        Me.btnSondage.UseCompatibleTextRendering = True
+        Me.btnSondage.UseVisualStyleBackColor = True
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(849, 548)
+        Me.ClientSize = New System.Drawing.Size(849, 566)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -609,6 +801,7 @@ Partial Class frmMainMenu
         Me.Name = "frmMainMenu"
         Me.Tag = "Main_Menu"
         Me.Text = "Main Menu"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Controls.SetChildIndex(Me.MenuStrip2, 0)
         Me.Controls.SetChildIndex(Me.Panel1, 0)
         Me.MenuStrip2.ResumeLayout(False)
@@ -671,4 +864,16 @@ Partial Class frmMainMenu
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents btnACMADTCM As System.Windows.Forms.Button
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents btnMicrofiche As System.Windows.Forms.Button
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents btnCarnet As System.Windows.Forms.Button
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents btnConsultation As System.Windows.Forms.Button
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents btnSondage As System.Windows.Forms.Button
 End Class

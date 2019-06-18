@@ -262,7 +262,7 @@ Err:
             'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
             Dim recCommit As New dataEntryGlobalRoutines
 
-            Me.Cursor = Windows.Forms.Cursors.WaitCursor
+            Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
             fails = 0
             listErrors.Items.Clear()
             Do While MyReader.EndOfData = False
@@ -279,6 +279,11 @@ Err:
 
                             If Len(DataGridView1.Rows(nums - 1).Cells(2).Value) <> 0 And Len(currentField) <> 0 Then
                                 'MsgBox(DataGridView1.Rows(nums - 1).Cells(2).Value & " " & currentField)
+                                'BOUBACAR Bachir added @20170623
+                                If (DataGridView1.Rows(nums - 1).Cells(2).Value = "latitude" Or DataGridView1.Rows(nums - 1).Cells(2).Value = "longitude") Then
+                                    currentField = currentField.Replace(".", ",")
+                                End If
+                                'End BOUBACAR Bachir added
                                 dsNewRow.Item(DataGridView1.Rows(nums - 1).Cells(2).Value) = currentField
                             End If
                             nums = nums + 1
@@ -294,7 +299,7 @@ Err:
                     'If ex.HResult <> -2147467259 Then Exit Do
                 End Try
             Loop
-            Me.Cursor = Windows.Forms.Cursors.Default
+            Me.Cursor = System.Windows.Forms.Cursors.Default
             lblSummary.Text = "Summary: " & lin - fails - 1 & " out of " & lin - 1 & " Records Successfully Imported"
         End Using
         Exit Sub
@@ -307,7 +312,7 @@ Err:
         '    MsgBox(ex.Message)
         '    If ex.HResult = -2147467259 Then Resume Next
         '    MsgBox(ex.HResult)
-        Me.Cursor = Windows.Forms.Cursors.Default
+        Me.Cursor = System.Windows.Forms.Cursors.Default
         '    'If Err.Number = 5 Then Resume Next
         '    'MsgBox(Err.Number & " " & Err.Description)
         'End Try
@@ -371,5 +376,13 @@ Err:
 
     Private Sub cmHelp_Click(sender As Object, e As EventArgs) Handles cmHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "importstations.htm")
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub txtCSV_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCSV.TextChanged
+
     End Sub
 End Class

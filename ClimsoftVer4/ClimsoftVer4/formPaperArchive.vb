@@ -572,7 +572,7 @@ Err:
                 Exit Sub
             End If
 
-            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
+            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.Yes Then
                 stn = ds.Tables("PaperArchive").Rows(rec).Item(0)
                 dt = ds.Tables("PaperArchive").Rows(rec).Item(1)
                 img = ds.Tables("PaperArchive").Rows(rec).Item(2)

@@ -270,4 +270,28 @@ Public Class frmMainMenu
     Private Sub AWSStationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSStationsToolStripMenuItem.Click
         frmAWSstations.Show()
     End Sub
+
+    Private Sub btnMicrofiche_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMicrofiche.Click
+        acmadMicrofiche.ShowDialog()
+    End Sub
+
+    Private Sub btnACMADTCM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnACMADTCM.Click
+        acmadTcmFrm.ShowDialog()
+    End Sub
+
+    Private Sub btnCarnet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCarnet.Click
+        acmadCoFrm.ShowDialog()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        acmadHyFrm.ShowDialog()
+    End Sub
+
+    Private Sub btnConsultation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConsultation.Click
+        acmad_dare_consult.ShowDialog()
+    End Sub
+
+    Private Sub btnSondage_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSondage.Click
+        acmadSondageFrm.ShowDialog()
+    End Sub
 End Class

@@ -69,7 +69,7 @@
         dialog.RootFolder = Environment.SpecialFolder.Desktop
         dialog.SelectedPath = "C:\"
         dialog.Description = "Select Path for backup files"
-        If dialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If dialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             strBackupFolder = dialog.SelectedPath
             txtBackupFolder.Text = strBackupFolder
             'Search and replace backslash "\" in folder path with forward slash "/"

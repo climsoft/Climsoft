@@ -13,6 +13,21 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,17 +66,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamicInterop">
-      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
+      <HintPath>..\..\..\..\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\MySQL\MySQL Connector Net 6.9.5\Assemblies\v4.5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="RDotNet">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
+      <HintPath>..\..\..\..\R.NET.Community.1.6.4\lib\net40\RDotNet.dll</HintPath>
     </Reference>
     <Reference Include="RDotNet.NativeLibrary">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\R.NET.Community.1.6.4\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -88,12 +103,55 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="acmadCoFrm.Designer.vb">
+      <DependentUpon>acmadCoFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmadCoFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acmadHyFrm.Designer.vb">
+      <DependentUpon>acmadHyFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmadHyFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acmadMicrofiche.Designer.vb">
+      <DependentUpon>acmadMicrofiche.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmadMicrofiche.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acmadSondageFrm.Designer.vb">
+      <DependentUpon>acmadSondageFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmadSondageFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acmadTcmFrm.Designer.vb">
+      <DependentUpon>acmadTcmFrm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmadTcmFrm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acmad_dare_consult.Designer.vb">
+      <DependentUpon>acmad_dare_consult.vb</DependentUpon>
+    </Compile>
+    <Compile Include="acmad_dare_consult.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="clsHelp.vb" />
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsRInterface.vb" />
+    <Compile Include="AcmadCrudModule.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formAWSRealTime.Designer.vb">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
     </Compile>
@@ -481,6 +539,27 @@
     <Compile Include="Common.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="acmadCoFrm.resx">
+      <DependentUpon>acmadCoFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acmadHyFrm.resx">
+      <DependentUpon>acmadHyFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acmadMicrofiche.resx">
+      <DependentUpon>acmadMicrofiche.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acmadSondageFrm.resx">
+      <DependentUpon>acmadSondageFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acmadTcmFrm.resx">
+      <DependentUpon>acmadTcmFrm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acmad_dare_consult.resx">
+      <DependentUpon>acmad_dare_consult.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formClimat.de.resx">
       <DependentUpon>formClimat.vb</DependentUpon>
     </EmbeddedResource>
@@ -877,9 +956,22 @@
     <None Include="Resources\navigation-left.jpg" />
     <None Include="Resources\navigation-right.jpg" />
     <None Include="Resources\navigation-last.jpg" />
+    <None Include="Resources\logo.png" />
     <Content Include="static\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
