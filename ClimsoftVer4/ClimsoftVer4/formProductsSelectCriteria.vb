@@ -280,8 +280,8 @@ Public Class formProductsSelectCriteria
                 DataProducts(sql, lblProductType.Text)
 
             Case "Histograms"
-                Dim myInterface As New clsRInterface()
-                myInterface.productHistogramExample()
+                'Dim myInterface As New clsRInterface()
+                'myInterface.productHistogramExample()
 
             Case "Monthly"
                 sql = "SELECT recordedFrom as StationID, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
