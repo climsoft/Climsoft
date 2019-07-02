@@ -308,18 +308,6 @@
         OnevtValueChanged(Me, e) 'this is where there is the problem. Its being called twice
     End Sub
 
-    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
-        If Not bSuppressChangedEvents Then
-            'OnevtValueChanged(Me, e)
-        End If
-    End Sub
-
-    Private Sub ucrPeriod_evtValueChanged(sender As Object, e As EventArgs) Handles ucrPeriod.evtValueChanged
-        If Not bSuppressChangedEvents Then
-            'OnevtValueChanged(Me, e)
-        End If
-    End Sub
-
     Private Function DoQCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean

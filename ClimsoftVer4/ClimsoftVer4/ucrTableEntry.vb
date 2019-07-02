@@ -32,7 +32,9 @@
                 If TypeOf ctr Is ucrValueView Then
                     ucr = DirectCast(ctr, ucrValueView)
                     If Not ucr.KeyControl Then
-                        ucr.SetValueFromDataTable(dtbRecords)
+                        ucr.SetValueFromDataTable(dtbRecords) 'key controls don't need to reread the values from the databale
+                    ElseIf Not bUpdating AndAlso ucr.KeyControl Then
+                        ucr.SetValueToDataTable(dtbRecords) ' For new record then let the key controls write to the new empty datatable
                     End If
 
                 End If
