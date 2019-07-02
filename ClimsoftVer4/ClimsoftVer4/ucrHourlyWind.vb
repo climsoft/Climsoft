@@ -1,9 +1,25 @@
 ﻿Imports System.Linq.Dynamic
 
 Public Class ucrHourlyWind
+    Private strDirectionFieldName As String = "elem_112_"
+    Private strSpeedFieldName As String = "elem_111_"
+    'Private strFlagFieldName As String = "ddflag"
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
+            Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
+            Dim shiftCells As New ClsShiftCells()
+            shiftCells.SetUpShiftCellsMenuStrips(New ContextMenuStrip, allVFP)
+
+            'set up the value flag period first
+            Dim ucrVFP As ucrValueFlagPeriod
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueFlagPeriod Then
+                    ucrVFP = DirectCast(ctr, ucrValueFlagPeriod)
+                    ucrVFP.SetInnerControlsFieldNames(strValueFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName, strPeriodFieldName & ucrVFP.FieldName)
+                End If
+            Next
 
             SetUpTableEntry("form_hourlywind")
 
@@ -13,15 +29,8 @@ Public Class ucrHourlyWind
             AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
 
-
-            'AddKeyField(ucrStationSelector.FieldName)
-
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
-            'ucrNavigation.AddKeyControls(ucrStationSelector)
-            'ucrNavigation.AddKeyControls(ucrYearSelector)
-            'ucrNavigation.AddKeyControls(ucrMonth)
-            'ucrNavigation.AddKeyControls(ucrDay)
 
             bFirstLoad = False
 
@@ -31,13 +40,13 @@ Public Class ucrHourlyWind
         End If
     End Sub
 
-    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs)
         ucrNavigation.NewRecord()
         SaveEnable()
         ucrStationSelector.Focus()
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs)
         Try
             If Not ValidateValue() Then
                 Exit Sub
@@ -57,7 +66,7 @@ Public Class ucrHourlyWind
         End Try
     End Sub
 
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs)
         Try
             If Not ValidateValue() Then
                 Exit Sub
@@ -73,7 +82,7 @@ Public Class ucrHourlyWind
         End Try
     End Sub
 
-    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs)
         Try
             If Not ValidateValue() Then
                 Exit Sub
@@ -91,7 +100,7 @@ Public Class ucrHourlyWind
         End Try
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(sender As Object, e As EventArgs)
         'Move to the first record of datatable
         ucrNavigation.MoveFirst()
         'Enable appropriate base buttons

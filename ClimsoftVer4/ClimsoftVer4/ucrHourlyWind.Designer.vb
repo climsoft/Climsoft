@@ -97,8 +97,10 @@ Partial Class ucrHourlyWind
         Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
-        Me.btnView = New System.Windows.Forms.Button()
         Me.btnUpload = New System.Windows.Forms.Button()
+        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -106,7 +108,6 @@ Partial Class ucrHourlyWind
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -380,7 +381,7 @@ Partial Class ucrHourlyWind
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
         Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputTotal.TabIndex = 24
+        Me.ucrInputTotal.TabIndex = 29
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
@@ -400,7 +401,7 @@ Partial Class ucrHourlyWind
         Me.ucrDirectionSpeedFlag0.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDirectionSpeedFlag0.Name = "ucrDirectionSpeedFlag0"
         Me.ucrDirectionSpeedFlag0.Size = New System.Drawing.Size(236, 26)
-        Me.ucrDirectionSpeedFlag0.TabIndex = 0
+        Me.ucrDirectionSpeedFlag0.TabIndex = 5
         Me.ucrDirectionSpeedFlag0.Tag = "00"
         '
         'lblFF
@@ -420,7 +421,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag1.Name = "UcrDirectionSpeedFlag1"
         Me.UcrDirectionSpeedFlag1.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag1.TabIndex = 1
+        Me.UcrDirectionSpeedFlag1.TabIndex = 6
         Me.UcrDirectionSpeedFlag1.Tag = "01"
         '
         'UcrDirectionSpeedFlag2
@@ -431,7 +432,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag2.Name = "UcrDirectionSpeedFlag2"
         Me.UcrDirectionSpeedFlag2.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag2.TabIndex = 2
+        Me.UcrDirectionSpeedFlag2.TabIndex = 7
         Me.UcrDirectionSpeedFlag2.Tag = "02"
         '
         'UcrDirectionSpeedFlag3
@@ -442,7 +443,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag3.Name = "UcrDirectionSpeedFlag3"
         Me.UcrDirectionSpeedFlag3.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag3.TabIndex = 3
+        Me.UcrDirectionSpeedFlag3.TabIndex = 8
         Me.UcrDirectionSpeedFlag3.Tag = "03"
         '
         'UcrDirectionSpeedFlag4
@@ -453,7 +454,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag4.Name = "UcrDirectionSpeedFlag4"
         Me.UcrDirectionSpeedFlag4.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag4.TabIndex = 4
+        Me.UcrDirectionSpeedFlag4.TabIndex = 9
         Me.UcrDirectionSpeedFlag4.Tag = "04"
         '
         'UcrDirectionSpeedFlag5
@@ -464,7 +465,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag5.Name = "UcrDirectionSpeedFlag5"
         Me.UcrDirectionSpeedFlag5.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag5.TabIndex = 5
+        Me.UcrDirectionSpeedFlag5.TabIndex = 10
         Me.UcrDirectionSpeedFlag5.Tag = "05"
         '
         'UcrDirectionSpeedFlag6
@@ -475,7 +476,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag6.Name = "UcrDirectionSpeedFlag6"
         Me.UcrDirectionSpeedFlag6.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag6.TabIndex = 6
+        Me.UcrDirectionSpeedFlag6.TabIndex = 11
         Me.UcrDirectionSpeedFlag6.Tag = "06"
         '
         'UcrDirectionSpeedFlag7
@@ -486,7 +487,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag7.Name = "UcrDirectionSpeedFlag7"
         Me.UcrDirectionSpeedFlag7.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag7.TabIndex = 7
+        Me.UcrDirectionSpeedFlag7.TabIndex = 12
         Me.UcrDirectionSpeedFlag7.Tag = "07"
         '
         'UcrDirectionSpeedFlag8
@@ -497,7 +498,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag8.Name = "UcrDirectionSpeedFlag8"
         Me.UcrDirectionSpeedFlag8.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag8.TabIndex = 8
+        Me.UcrDirectionSpeedFlag8.TabIndex = 13
         Me.UcrDirectionSpeedFlag8.Tag = "08"
         '
         'UcrDirectionSpeedFlag9
@@ -508,7 +509,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag9.Name = "UcrDirectionSpeedFlag9"
         Me.UcrDirectionSpeedFlag9.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag9.TabIndex = 9
+        Me.UcrDirectionSpeedFlag9.TabIndex = 14
         Me.UcrDirectionSpeedFlag9.Tag = "09"
         '
         'UcrDirectionSpeedFlag10
@@ -519,7 +520,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag10.Name = "UcrDirectionSpeedFlag10"
         Me.UcrDirectionSpeedFlag10.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag10.TabIndex = 10
+        Me.UcrDirectionSpeedFlag10.TabIndex = 15
         Me.UcrDirectionSpeedFlag10.Tag = "10"
         '
         'UcrDirectionSpeedFlag11
@@ -530,7 +531,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag11.Name = "UcrDirectionSpeedFlag11"
         Me.UcrDirectionSpeedFlag11.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag11.TabIndex = 11
+        Me.UcrDirectionSpeedFlag11.TabIndex = 16
         Me.UcrDirectionSpeedFlag11.Tag = "11"
         '
         'UcrDirectionSpeedFlag12
@@ -541,7 +542,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag12.Name = "UcrDirectionSpeedFlag12"
         Me.UcrDirectionSpeedFlag12.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag12.TabIndex = 12
+        Me.UcrDirectionSpeedFlag12.TabIndex = 17
         Me.UcrDirectionSpeedFlag12.Tag = "12"
         '
         'UcrDirectionSpeedFlag13
@@ -552,7 +553,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag13.Name = "UcrDirectionSpeedFlag13"
         Me.UcrDirectionSpeedFlag13.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag13.TabIndex = 13
+        Me.UcrDirectionSpeedFlag13.TabIndex = 18
         Me.UcrDirectionSpeedFlag13.Tag = "13"
         '
         'UcrDirectionSpeedFlag14
@@ -563,7 +564,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag14.Name = "UcrDirectionSpeedFlag14"
         Me.UcrDirectionSpeedFlag14.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag14.TabIndex = 14
+        Me.UcrDirectionSpeedFlag14.TabIndex = 19
         Me.UcrDirectionSpeedFlag14.Tag = "14"
         '
         'UcrDirectionSpeedFlag15
@@ -574,7 +575,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag15.Name = "UcrDirectionSpeedFlag15"
         Me.UcrDirectionSpeedFlag15.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag15.TabIndex = 15
+        Me.UcrDirectionSpeedFlag15.TabIndex = 20
         Me.UcrDirectionSpeedFlag15.Tag = "15"
         '
         'UcrDirectionSpeedFlag16
@@ -585,7 +586,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag16.Name = "UcrDirectionSpeedFlag16"
         Me.UcrDirectionSpeedFlag16.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag16.TabIndex = 16
+        Me.UcrDirectionSpeedFlag16.TabIndex = 21
         Me.UcrDirectionSpeedFlag16.Tag = "16"
         '
         'UcrDirectionSpeedFlag17
@@ -596,7 +597,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag17.Name = "UcrDirectionSpeedFlag17"
         Me.UcrDirectionSpeedFlag17.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag17.TabIndex = 17
+        Me.UcrDirectionSpeedFlag17.TabIndex = 22
         Me.UcrDirectionSpeedFlag17.Tag = "17"
         '
         'UcrDirectionSpeedFlag18
@@ -607,7 +608,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag18.Name = "UcrDirectionSpeedFlag18"
         Me.UcrDirectionSpeedFlag18.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag18.TabIndex = 18
+        Me.UcrDirectionSpeedFlag18.TabIndex = 23
         Me.UcrDirectionSpeedFlag18.Tag = "18"
         '
         'UcrDirectionSpeedFlag19
@@ -618,7 +619,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag19.Name = "UcrDirectionSpeedFlag19"
         Me.UcrDirectionSpeedFlag19.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag19.TabIndex = 19
+        Me.UcrDirectionSpeedFlag19.TabIndex = 24
         Me.UcrDirectionSpeedFlag19.Tag = "19"
         '
         'UcrDirectionSpeedFlag20
@@ -629,7 +630,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag20.Name = "UcrDirectionSpeedFlag20"
         Me.UcrDirectionSpeedFlag20.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag20.TabIndex = 20
+        Me.UcrDirectionSpeedFlag20.TabIndex = 25
         Me.UcrDirectionSpeedFlag20.Tag = "20"
         '
         'UcrDirectionSpeedFlag21
@@ -640,7 +641,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag21.Name = "UcrDirectionSpeedFlag21"
         Me.UcrDirectionSpeedFlag21.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag21.TabIndex = 21
+        Me.UcrDirectionSpeedFlag21.TabIndex = 26
         Me.UcrDirectionSpeedFlag21.Tag = "21"
         '
         'UcrDirectionSpeedFlag22
@@ -651,7 +652,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag22.Name = "UcrDirectionSpeedFlag22"
         Me.UcrDirectionSpeedFlag22.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag22.TabIndex = 22
+        Me.UcrDirectionSpeedFlag22.TabIndex = 27
         Me.UcrDirectionSpeedFlag22.Tag = "22"
         '
         'UcrDirectionSpeedFlag23
@@ -662,7 +663,7 @@ Partial Class ucrHourlyWind
         Me.UcrDirectionSpeedFlag23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrDirectionSpeedFlag23.Name = "UcrDirectionSpeedFlag23"
         Me.UcrDirectionSpeedFlag23.Size = New System.Drawing.Size(236, 26)
-        Me.UcrDirectionSpeedFlag23.TabIndex = 23
+        Me.UcrDirectionSpeedFlag23.TabIndex = 28
         Me.UcrDirectionSpeedFlag23.Tag = "23"
         '
         'Label1
@@ -707,7 +708,7 @@ Partial Class ucrHourlyWind
         Me.txtSpeedDigits.Location = New System.Drawing.Point(534, 49)
         Me.txtSpeedDigits.Name = "txtSpeedDigits"
         Me.txtSpeedDigits.Size = New System.Drawing.Size(29, 20)
-        Me.txtSpeedDigits.TabIndex = 680
+        Me.txtSpeedDigits.TabIndex = 41
         Me.txtSpeedDigits.Text = "2"
         '
         'txtDirectionDigits
@@ -716,7 +717,7 @@ Partial Class ucrHourlyWind
         Me.txtDirectionDigits.Location = New System.Drawing.Point(361, 48)
         Me.txtDirectionDigits.Name = "txtDirectionDigits"
         Me.txtDirectionDigits.Size = New System.Drawing.Size(29, 20)
-        Me.txtDirectionDigits.TabIndex = 679
+        Me.txtDirectionDigits.TabIndex = 40
         Me.txtDirectionDigits.Text = "2"
         '
         'lblSpeedDigits
@@ -745,7 +746,7 @@ Partial Class ucrHourlyWind
         Me.btnHourSelection.Location = New System.Drawing.Point(43, 46)
         Me.btnHourSelection.Name = "btnHourSelection"
         Me.btnHourSelection.Size = New System.Drawing.Size(154, 23)
-        Me.btnHourSelection.TabIndex = 678
+        Me.btnHourSelection.TabIndex = 42
         Me.btnHourSelection.Text = "Enable synoptic hours only"
         Me.btnHourSelection.UseVisualStyleBackColor = True
         '
@@ -757,7 +758,7 @@ Partial Class ucrHourlyWind
         Me.ucrDay.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrDay.Name = "ucrDay"
         Me.ucrDay.Size = New System.Drawing.Size(51, 24)
-        Me.ucrDay.TabIndex = 677
+        Me.ucrDay.TabIndex = 4
         Me.ucrDay.Tag = "dd"
         '
         'ucrMonth
@@ -768,7 +769,7 @@ Partial Class ucrHourlyWind
         Me.ucrMonth.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrMonth.Name = "ucrMonth"
         Me.ucrMonth.Size = New System.Drawing.Size(100, 24)
-        Me.ucrMonth.TabIndex = 676
+        Me.ucrMonth.TabIndex = 3
         Me.ucrMonth.Tag = "mm"
         '
         'ucrYearSelector
@@ -779,7 +780,7 @@ Partial Class ucrHourlyWind
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(69, 24)
-        Me.ucrYearSelector.TabIndex = 675
+        Me.ucrYearSelector.TabIndex = 2
         Me.ucrYearSelector.Tag = "yyyy"
         '
         'ucrStationSelector
@@ -790,7 +791,7 @@ Partial Class ucrHourlyWind
         Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
-        Me.ucrStationSelector.TabIndex = 674
+        Me.ucrStationSelector.TabIndex = 1
         Me.ucrStationSelector.Tag = "stationId"
         '
         'lblStationSelector
@@ -824,7 +825,7 @@ Partial Class ucrHourlyWind
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(35, 538)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(35, 537)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
         Me.chkRepeatEntry.TabIndex = 699
@@ -834,120 +835,135 @@ Partial Class ucrHourlyWind
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(210, 539)
+        Me.lblSequencer.Location = New System.Drawing.Point(210, 540)
         Me.lblSequencer.Name = "lblSequencer"
-        Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
+        Me.lblSequencer.Size = New System.Drawing.Size(62, 13)
         Me.lblSequencer.TabIndex = 698
-        Me.lblSequencer.Text = "Sequencer"
+        Me.lblSequencer.Text = "Sequencer:"
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(275, 536)
+        Me.txtSequencer.Location = New System.Drawing.Point(275, 537)
         Me.txtSequencer.Name = "txtSequencer"
+        Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
         Me.txtSequencer.TabIndex = 697
         Me.txtSequencer.Text = "seq_month_day"
         '
-        'btnView
-        '
-        Me.btnView.Location = New System.Drawing.Point(440, 505)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 23)
-        Me.btnView.TabIndex = 692
-        Me.btnView.Text = "View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
         'btnUpload
         '
         Me.btnUpload.BackColor = System.Drawing.Color.Lime
-        Me.btnUpload.Location = New System.Drawing.Point(599, 529)
+        Me.btnUpload.Location = New System.Drawing.Point(537, 535)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpload.TabIndex = 695
+        Me.btnUpload.TabIndex = 39
         Me.btnUpload.Text = "Upload"
         Me.btnUpload.UseVisualStyleBackColor = False
         '
-        'btnHelp
-        '
-        Me.btnHelp.Location = New System.Drawing.Point(603, 505)
-        Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(75, 23)
-        Me.btnHelp.TabIndex = 694
-        Me.btnHelp.Text = "Help"
-        Me.btnHelp.UseVisualStyleBackColor = True
-        '
-        'btnClear
-        '
-        Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(359, 505)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear.TabIndex = 691
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(116, 505)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 687
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(279, 505)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 690
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnAddNew
-        '
-        Me.btnAddNew.Location = New System.Drawing.Point(35, 505)
-        Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddNew.TabIndex = 689
-        Me.btnAddNew.Text = "Add New"
-        Me.btnAddNew.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(197, 505)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 688
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnClose
-        '
-        Me.btnClose.Location = New System.Drawing.Point(521, 505)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
-        Me.btnClose.TabIndex = 693
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
-        '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(187, 472)
+        Me.ucrNavigation.Location = New System.Drawing.Point(120, 472)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
         Me.ucrNavigation.TabIndex = 696
         '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(349, 505)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(60, 23)
+        Me.btnCancel.TabIndex = 35
+        Me.btnCancel.Tag = "cancel"
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(417, 505)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(60, 23)
+        Me.btnView.TabIndex = 36
+        Me.btnView.Tag = ""
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'btnHelp
+        '
+        Me.btnHelp.Location = New System.Drawing.Point(552, 505)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(60, 23)
+        Me.btnHelp.TabIndex = 38
+        Me.btnHelp.Tag = ""
+        Me.btnHelp.Text = "Help"
+        Me.btnHelp.UseVisualStyleBackColor = True
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(280, 505)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(60, 23)
+        Me.btnClear.TabIndex = 34
+        Me.btnClear.Tag = "clear"
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(77, 505)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(60, 23)
+        Me.btnSave.TabIndex = 30
+        Me.btnSave.Tag = "save"
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(211, 505)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(60, 23)
+        Me.btnDelete.TabIndex = 32
+        Me.btnDelete.Tag = "delete"
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(11, 505)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.TabIndex = 33
+        Me.btnAddNew.Tag = "add"
+        Me.btnAddNew.Text = "Add New"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(144, 505)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
+        Me.btnUpdate.TabIndex = 31
+        Me.btnUpdate.Tag = "update"
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(486, 505)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(60, 23)
+        Me.btnClose.TabIndex = 37
+        Me.btnClose.Tag = "close"
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
         'ucrHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.chkRepeatEntry)
-        Me.Controls.Add(Me.lblSequencer)
-        Me.Controls.Add(Me.txtSequencer)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnView)
-        Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btnSave)
@@ -955,6 +971,10 @@ Partial Class ucrHourlyWind
         Me.Controls.Add(Me.btnAddNew)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
+        Me.Controls.Add(Me.chkRepeatEntry)
+        Me.Controls.Add(Me.lblSequencer)
+        Me.Controls.Add(Me.txtSequencer)
+        Me.Controls.Add(Me.btnUpload)
         Me.Controls.Add(Me.ucrNavigation)
         Me.Controls.Add(Me.txtSpeedDigits)
         Me.Controls.Add(Me.txtDirectionDigits)
@@ -1030,7 +1050,7 @@ Partial Class ucrHourlyWind
         Me.Controls.Add(Me.lblHour)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "ucrHourlyWind"
-        Me.Size = New System.Drawing.Size(682, 579)
+        Me.Size = New System.Drawing.Size(639, 579)
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1111,8 +1131,10 @@ Partial Class ucrHourlyWind
     Friend WithEvents chkRepeatEntry As CheckBox
     Friend WithEvents lblSequencer As Label
     Friend WithEvents txtSequencer As TextBox
-    Friend WithEvents btnView As Button
     Friend WithEvents btnUpload As Button
+    Friend WithEvents ucrNavigation As ucrNavigation
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnView As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents btnClear As Button
     Friend WithEvents btnSave As Button
@@ -1120,5 +1142,4 @@ Partial Class ucrHourlyWind
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents ucrNavigation As ucrNavigation
 End Class
