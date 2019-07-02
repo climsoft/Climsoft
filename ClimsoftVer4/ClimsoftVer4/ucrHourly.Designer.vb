@@ -371,7 +371,7 @@ Partial Class ucrHourly
         '
         Me.ucrElementSelector.FieldName = "elementId"
         Me.ucrElementSelector.KeyControl = True
-        Me.ucrElementSelector.Location = New System.Drawing.Point(245, 30)
+        Me.ucrElementSelector.Location = New System.Drawing.Point(245, 29)
         Me.ucrElementSelector.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrElementSelector.Name = "ucrElementSelector"
         Me.ucrElementSelector.Size = New System.Drawing.Size(178, 21)

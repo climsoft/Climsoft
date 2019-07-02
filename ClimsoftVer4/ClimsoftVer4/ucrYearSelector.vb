@@ -55,9 +55,14 @@
         Return bValid
     End Function
 
-    Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cboValues.ContextMenuStrip = cmsYear
-        strValidationType = "numeric"
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            cboValues.ContextMenuStrip = cmsYear
+            bValidateEmpty = True
+            strValidationType = "numeric"
+            PopulateControl()
+            bFirstLoad = False
+        End If
     End Sub
 
     Public Sub SetViewTypeAsYear()

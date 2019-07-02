@@ -29,6 +29,8 @@
 
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
+            ucrDaySelector.setYearAndMonthLink(ucrYearSelector, ucrMonthSelector)
+
 
             bFirstLoad = False
 

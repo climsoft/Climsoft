@@ -27,9 +27,14 @@
             End If
 
             'set the values to the input controls
+            Dim ucr As ucrValueView
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueView Then
-                    DirectCast(ctr, ucrValueView).SetValueFromDataTable(dtbRecords)
+                    ucr = DirectCast(ctr, ucrValueView)
+                    If Not ucr.KeyControl Then
+                        ucr.SetValueFromDataTable(dtbRecords)
+                    End If
+
                 End If
             Next
 

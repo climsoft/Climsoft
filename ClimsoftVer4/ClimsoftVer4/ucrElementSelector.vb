@@ -70,17 +70,17 @@
         Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
 
+            cboValues.ContextMenuStrip = cmsElement
+            SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
+
             dct.Add(strElementName, New List(Of String)({strElementName}))
             dct.Add(strElementId, New List(Of String)({strElementId}))
             dct.Add(strIDsAndElements, New List(Of String)({strElementId, strElementName}))
             SetTableNameAndFields(strElementTableName, dct)
             SetFilter("selected", "=", "1", bIsPositiveCondition:=True)
-
             PopulateControl()
-            cboValues.ContextMenuStrip = cmsElement
-            SetComboBoxSelectorProperties()
-            bValidateEmpty = True
-            strValidationType = "exists"
             bFirstLoad = False
         End If
     End Sub

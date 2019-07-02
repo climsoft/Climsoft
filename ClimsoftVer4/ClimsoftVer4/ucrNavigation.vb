@@ -243,12 +243,9 @@ Public Class ucrNavigation
             bSuppressKeyControlChanges = True  'switch on suppressing of value changed events from key controls
             If iMaxRows > 0 Then
                 For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
-                    'Suppress events being raised while changing value of each key control
-                    'kvp.Value.bSuppressChangedEvents = True
+
                     ' Use new GetValueFromRow method to get value from specific row since dtbRecords now nothing
                     kvp.Value.SetValue(GetValueFromRow(iCurrRow, kvp.Key))
-                    'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
-                    'kvp.Value.bSuppressChangedEvents = False
                 Next
             Else
                 'To do set the defaults for the controls
@@ -384,6 +381,7 @@ Public Class ucrNavigation
         NewSequencerRecord(strSequencer, dctFields, lstDateIncrementControls, ucrYear)
 
     End Sub
+
     Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
@@ -455,7 +453,7 @@ Public Class ucrNavigation
                 dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
             End If
         Else
-            'First item in sequencer?
+            'First item in sequencer? 
         End If
 
     End Sub

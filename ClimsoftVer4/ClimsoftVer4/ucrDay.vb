@@ -10,7 +10,7 @@
     Private ucrLinkedYear As ucrYearSelector
     Private ucrLinkedMonth As ucrMonth
 
-    Public Sub InitialiseControl()
+    Private Sub InitialiseControl()
         dtb31 = New DataTable
         dtb30 = New DataTable
         dtb29 = New DataTable
@@ -98,5 +98,12 @@
         End If
     End Sub
 
-
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            bValidateEmpty = True
+            strValidationType = "exists"
+            PopulateControl()
+            bFirstLoad = False
+        End If
+    End Sub
 End Class
