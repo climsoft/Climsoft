@@ -3,7 +3,16 @@
     Public Event evtGoToNextVFPControl(sender As Object, e As KeyEventArgs)
     Private bIncludePeriod As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
-    'Public strIdentifyField As String
+
+    Public Property IncludePeriod() As Boolean
+        Get
+            Return bIncludePeriod
+        End Get
+        Set(value As Boolean)
+            bIncludePeriod = value
+            ucrPeriod.Visible = value
+        End Set
+    End Property
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -19,14 +28,14 @@
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
         SetPeriodField(strPeriodFieldName)
-        SetIncludePeriod(True)
+        IncludePeriod = True
     End Sub
     'added this to set value and flag field
     Public Sub SetValueFlagFields(strValueFieldName As String, strFlagFieldName As String)
         SetFields(New List(Of String)({strValueFieldName, strFlagFieldName}))
         SetValueField(strValueFieldName)
         SetFlagField(strFlagFieldName)
-        SetIncludePeriod(False)
+        IncludePeriod = False
     End Sub
 
     Public Sub SetTableNameAndValueFlagPeriodFields(strNewTable As String, strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
@@ -146,6 +155,7 @@
     Public Sub SetElementValue(strValue As String)
         ucrValue.SetValue(strValue)
     End Sub
+
     ''' <summary>
     ''' Gets the value for ucrValue control
     ''' </summary>
@@ -208,11 +218,11 @@
     ''' </summary>
     ''' <returns></returns>
     Public Overrides Function ValidateValue() As Boolean
-        Return IsElementValueValid() AndAlso IsElementFlagValid() AndAlso IsElementPeriodValid()
+        Return IsElementValueValid() AndAlso IsElementPeriodValid() 'ommitted IsElementFlagValid() intentionally
     End Function
 
     Public Function IsElementValueValid() As Boolean
-        Return ucrValue.ValidateValue
+        Return ValidateText(ucrValue.GetValue)
     End Function
 
     Public Function IsElementFlagValid() As Boolean
@@ -236,7 +246,7 @@
     End Function
 
     Public Function IsElementPeriodValid() As Boolean
-        Return If(bIncludePeriod, ucrPeriod.ValidateValue, True)
+        Return If(IncludePeriod, ucrPeriod.ValidateValue, True)
     End Function
 
     Private Sub ucrValueFlagPeriod_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -252,11 +262,6 @@
         End If
     End Sub
 
-    Public Sub SetIncludePeriod(bIncludePeriod As Boolean)
-        Me.bIncludePeriod = bIncludePeriod
-        ucrPeriod.Visible = bIncludePeriod
-    End Sub
-
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
         'CurrentEntryValue = ucrValue.TextboxValue
         'MsgBox(CurrentEntryValue & " 0")
@@ -270,11 +275,11 @@
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrValue.IsEmpty Then
                     ucrFlag.SetValue("M")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
                 ElseIf ValidateText(ucrValue.GetValue) Then
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                    'ElseIf ucrValue.GetValue = "M"
-                    '    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    'ucrValue.OnevtValueChanged(Me, e)
+                    RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
+
                 Else
                     DoQCForValue()
                 End If
@@ -300,13 +305,25 @@
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
         DoQCForValue()
         IsElementFlagValid()
-        OnevtValueChanged(Me, e)
+        OnevtValueChanged(Me, e) 'this is where there is the problem. Its being called twice
+    End Sub
+
+    Private Sub ucrFlag_evtValueChanged(sender As Object, e As EventArgs) Handles ucrFlag.evtValueChanged
+        If Not bSuppressChangedEvents Then
+            'OnevtValueChanged(Me, e)
+        End If
+    End Sub
+
+    Private Sub ucrPeriod_evtValueChanged(sender As Object, e As EventArgs) Handles ucrPeriod.evtValueChanged
+        If Not bSuppressChangedEvents Then
+            'OnevtValueChanged(Me, e)
+        End If
     End Sub
 
     Private Function DoQCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
-        Dim bSuppressChangedEvents As Boolean
+        Dim bNewSuppressChangedEvents As Boolean
 
         If ucrValue.IsEmpty Then
             bValuesCorrect = True
@@ -322,10 +339,10 @@
                 ucrFlag.SetValue(If(Strings.Right(ucrValue.GetValue, 1) = "M", "", Strings.Right(ucrValue.GetValue, 1)))
 
                 'Get the observation value by leaving out the last character  
-                bSuppressChangedEvents = ucrValue.bSuppressChangedEvents
+                bNewSuppressChangedEvents = ucrValue.bSuppressChangedEvents
                 ucrValue.bSuppressChangedEvents = True
                 ucrValue.SetValue(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1))
-                ucrValue.bSuppressChangedEvents = bSuppressChangedEvents
+                ucrValue.bSuppressChangedEvents = bNewSuppressChangedEvents
             Else
                 'if the value is just an M, then interpret it as a user's intention to put missing value
                 'If ucrValue.GetValue = "M" Then
@@ -387,18 +404,18 @@
         ucrPeriod.SetContextMenuStrip(contextMenuStrip)
     End Sub
 
-    Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
         ucrValue.FieldName = strValueFieldName
         ucrFlag.FieldName = strFlagFieldName
         ucrPeriod.FieldName = strPeriodFieldName
-        SetIncludePeriod(True)
+        IncludePeriod = True
     End Sub
 
-    Public Sub setInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
         ucrValue.FieldName = strValueFieldName
         ucrFlag.FieldName = strFlagFieldName
         ucrPeriod.FieldName = "" 'removes the default period field to avoid addition of it to a list of fields of its table entry control
-        SetIncludePeriod(False)
+        IncludePeriod = False
     End Sub
 
     Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
@@ -408,9 +425,11 @@
     End Sub
 
     Public Overrides Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
-        ucrValue.AddEventValueChangedHandle(ehSub)
-        ucrFlag.AddEventValueChangedHandle(ehSub)
-        ucrPeriod.AddEventValueChangedHandle(ehSub)
+        'ucrValue.AddEventValueChangedHandle(ehSub)
+        'ucrFlag.AddEventValueChangedHandle(ehSub)
+        'ucrPeriod.AddEventValueChangedHandle(ehSub)
+        MyBase.AddEventValueChangedHandle(ehSub)
+        ' AddHandler evtValueChanged, ehSub
     End Sub
 
     Public Overrides Sub SetValueFromDataTable(dtbValues As DataTable)
@@ -420,10 +439,9 @@
         Dim dtbTemp As DataTable
         Dim strIdentifyField As String = FieldName
 
-
         ucrValue.SetValueFromDataTable(dtbValues)
         ucrFlag.SetValueFromDataTable(dtbValues)
-        If bIncludePeriod Then
+        If IncludePeriod Then
             ucrPeriod.SetValueFromDataTable(dtbValues)
         End If
         'todo.OR??
@@ -461,6 +479,17 @@
                 SetValue(Nothing)
                 End If
             End If
+    End Sub
+
+    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable)
+        ucrValue.SetValueToDataTable(dtbValues)
+        ucrValue.SetValueToDataTable(dtbValues)
+        ucrFlag.SetValueToDataTable(dtbValues)
+        If IncludePeriod Then
+            ucrPeriod.SetValueToDataTable(dtbValues)
+        End If
+
+
     End Sub
 
 
