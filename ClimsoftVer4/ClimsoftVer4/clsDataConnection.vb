@@ -1,5 +1,4 @@
 ﻿Public Class clsDataConnection
-    Public Shared db As New mariadb_climsoft_test_db_v4Entities
     Private Shared ReadOnly conn As New MySql.Data.MySqlClient.MySqlConnection
     Public Shared databaseName As String = "mariadb_climsoft_test_db_v4"
 

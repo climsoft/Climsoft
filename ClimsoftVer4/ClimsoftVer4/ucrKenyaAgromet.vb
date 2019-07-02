@@ -4,10 +4,6 @@
 
     Private Sub ucrKenyaAgromet_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        If clsDataConnection.IsInDesignMode() Then
-            Exit Sub
-        End If
-
         If bFirstLoad Then
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex

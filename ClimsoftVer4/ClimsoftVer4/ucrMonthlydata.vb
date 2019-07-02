@@ -3,6 +3,7 @@
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private Sub ucrMonthlyData_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         If bFirstLoad Then
 
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.

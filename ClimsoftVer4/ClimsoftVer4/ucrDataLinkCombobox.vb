@@ -169,6 +169,10 @@
     End Sub
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
         If bFirstLoad Then
             bValidateEmpty = True
             strValidationType = "exists"

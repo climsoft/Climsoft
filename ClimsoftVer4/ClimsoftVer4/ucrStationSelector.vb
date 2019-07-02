@@ -65,6 +65,10 @@
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
         Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
             cboValues.ContextMenuStrip = cmsStation
