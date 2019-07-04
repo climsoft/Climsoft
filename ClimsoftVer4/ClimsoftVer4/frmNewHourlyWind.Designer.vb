@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmNewHourlyWind
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmNewHourlyWind
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim lblYear As System.Windows.Forms.Label
         Me.lblStationSelector = New System.Windows.Forms.Label()
@@ -42,13 +42,13 @@ Partial Class frmNewHourlyWind
         Me.btnHourSelection = New System.Windows.Forms.Button()
         Me.lblSequencer = New System.Windows.Forms.Label()
         Me.txtSequencer = New System.Windows.Forms.TextBox()
+        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         Me.ucrHourlyWind = New ClimsoftVer4.ucrHourlyWind()
         Me.ucrNavigation = New ClimsoftVer4.ucrNavigation()
         Me.ucrDay = New ClimsoftVer4.ucrDay()
         Me.ucrMonth = New ClimsoftVer4.ucrMonth()
         Me.ucrYearSelector = New ClimsoftVer4.ucrYearSelector()
         Me.ucrStationSelector = New ClimsoftVer4.ucrStationSelector()
-        Me.chkRepeatEntry = New System.Windows.Forms.CheckBox()
         lblYear = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -236,6 +236,17 @@ Partial Class frmNewHourlyWind
         Me.txtSequencer.TabIndex = 676
         Me.txtSequencer.Text = "seq_month_day"
         '
+        'chkRepeatEntry
+        '
+        Me.chkRepeatEntry.AutoSize = True
+        Me.chkRepeatEntry.Enabled = False
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(5, 541)
+        Me.chkRepeatEntry.Name = "chkRepeatEntry"
+        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
+        Me.chkRepeatEntry.TabIndex = 686
+        Me.chkRepeatEntry.Text = "Repeat Entry"
+        Me.chkRepeatEntry.UseVisualStyleBackColor = True
+        '
         'ucrHourlyWind
         '
         Me.ucrHourlyWind.Location = New System.Drawing.Point(24, 76)
@@ -283,17 +294,6 @@ Partial Class frmNewHourlyWind
         Me.ucrStationSelector.Name = "ucrStationSelector"
         Me.ucrStationSelector.Size = New System.Drawing.Size(184, 24)
         Me.ucrStationSelector.TabIndex = 0
-        '
-        'chkRepeatEntry
-        '
-        Me.chkRepeatEntry.AutoSize = True
-        Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(5, 541)
-        Me.chkRepeatEntry.Name = "chkRepeatEntry"
-        Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
-        Me.chkRepeatEntry.TabIndex = 686
-        Me.chkRepeatEntry.Text = "Repeat Entry"
-        Me.chkRepeatEntry.UseVisualStyleBackColor = True
         '
         'frmNewHourlyWind
         '

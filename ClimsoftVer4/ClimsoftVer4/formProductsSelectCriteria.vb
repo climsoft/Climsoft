@@ -25,6 +25,7 @@ Public Class formProductsSelectCriteria
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
     Dim cmd As MySql.Data.MySqlClient.MySqlCommand
+    Dim ItmExist As Boolean
 
     'Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     '    Dim prtyp As New clsProducts
@@ -78,11 +79,12 @@ Public Class formProductsSelectCriteria
             conn.ConnectionString = MyConnectionString
             conn.Open()
 
-            'sql = "SELECT * FROM station ORDER BY stationName"
-            sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
+            sql = "SELECT * FROM station ORDER BY stationName"
+            'sql = "SELECT recordedFrom, stationName from observationfinal INNER JOIN station ON recordedFrom = stationId group by recordedFrom  ORDER BY stationName;"
 
             'sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "station")
             'conn.Close()
 
@@ -100,8 +102,8 @@ Public Class formProductsSelectCriteria
 
         ds.Clear()
 
-        'sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
-        sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
+        sql = "SELECT * FROM obselement where selected = '1' ORDER BY description"
+        'sql = "select describedBy, description from observationfinal INNER JOIN obselement on describedBy = elementId group by describedBy  order by description;"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.SelectCommand.CommandTimeout = 0
         da.Fill(ds, "obselement")
@@ -133,12 +135,30 @@ Public Class formProductsSelectCriteria
         Dim str(2) As String
         Dim itm = New ListViewItem
 
-        For kount = 0 To maxRows - 1 Step 1
-            str(0) = ds.Tables("station").Rows(kount).Item("stationId")
-            str(1) = ds.Tables("station").Rows(kount).Item("stationName")
-            itm = New ListViewItem(str)
-            lstvStations.Items.Add(itm)
-        Next
+        Try
+            For kount = 0 To maxRows - 1 Step 1
+                str(0) = ds.Tables("station").Rows(kount).Item("stationId")
+                str(1) = ds.Tables("station").Rows(kount).Item("stationName")
+                itm = New ListViewItem(str)
+
+                ItmExist = False
+                If lstvStations.Items.Count = 0 Then ' Alawys add the first selected item 
+                    lstvStations.Items.Add(itm)
+                Else
+                    For j = 0 To lstvStations.Items.Count - 1
+                        ' Check if the item has been added in the list and skip it if so
+                        If str(0) = lstvStations.Items(j).Text Then
+                            ItmExist = True
+                            Exit For
+                        End If
+                    Next
+                    If Not ItmExist Then lstvStations.Items.Add(itm)
+                End If
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cmbElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbElement.SelectedIndexChanged
@@ -169,8 +189,25 @@ Public Class formProductsSelectCriteria
                 str(1) = ds.Tables("obselement").Rows(kount).Item("abbreviation")
                 str(2) = ds.Tables("obselement").Rows(kount).Item("description")
                 itm = New ListViewItem(str)
-                lstvElements.Items.Add(itm)
+
+                ItmExist = False
+                If lstvElements.Items.Count = 0 Then ' Alawys add the first selected item 
+                    lstvElements.Items.Add(itm)
+                Else
+                    For j = 0 To lstvElements.Items.Count - 1
+                        ' Check if the item has been added in the list and skip it if so
+                        If str(0) = lstvElements.Items(j).Text Then
+                            ItmExist = True
+                            Exit For
+                        End If
+                    Next
+                    If Not ItmExist Then lstvElements.Items.Add(itm)
+                End If
             Next
+
+
+            'lstvElements.Items.Add(itm)
+            'Next
         Catch err As Exception
             ' Exit Sub
             'Err:
@@ -191,8 +228,11 @@ Public Class formProductsSelectCriteria
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         'MsgBox(Me.lblProductType.Text)
 
-        Dim ProductsPath, xpivot As String
 
+        Dim ProductsPath, xpivot As String
+        SumAvg = ""
+        SummaryType = ""
+        xpivot = ""
         Me.Cursor = Cursors.WaitCursor
         ' Define the products application path
         Try
@@ -270,7 +310,7 @@ Public Class formProductsSelectCriteria
 
                 Case "Hourly"
 
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour," & elmcolmn & " FROM (SELECT recordedFrom, StationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                            "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime);"
 
                     'Transpose values when the option is selected
@@ -283,6 +323,7 @@ Public Class formProductsSelectCriteria
 
                         sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, Month(obsDatetime) As Day " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
+
                     End If
 
 
@@ -312,7 +353,7 @@ Public Class formProductsSelectCriteria
                 '    myInterface.productHistogramExample()
 
                 Case "Monthly"
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, stationName, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
+                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, stationName, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                            "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Year, Month;"
 
                     ' Transpose products if so selected
@@ -326,6 +367,7 @@ Public Class formProductsSelectCriteria
                         sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as Code, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year" & xpivot & " FROM (SELECT recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                                "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year;"
                     End If
+
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Dekadal"
@@ -359,10 +401,35 @@ Public Class formProductsSelectCriteria
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Means"
+                    'sql = "SELECT recordedFrom as StationID, stationName as Station_Name,latitude as Lat, longitude as Lon, elevation as Elev, month(obsDatetime) as Month, " & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                    ' "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Month;"
+                    'DataProducts(sql, lblProductType.Text)
 
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name,latitude as Lat, longitude as Lon, elevation as Elev, month(obsDatetime) as Month, " & elmcolmn & " FROM (SELECT recordedFrom, stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " & _
-                     "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, Month;"
-                    DataProducts(sql, lblProductType.Text)
+                    'Create output file
+                    Dim fl As String
+
+                    fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\means.csv"
+
+                    ' Clear any existing data in the output file and close it
+                    FileOpen(11, fl, OpenMode.Output)
+                    FileClose(11)
+
+                    ' Re-open the file in Append mode
+                    FileOpen(11, fl, OpenMode.Append)
+
+
+                    For i = 0 To lstvElements.Items.Count - 1
+                        SumAvg = "AVG"
+                        If lstvElements.Items(i).Text = 5 Or lstvElements.Items(i).Text = 18 Then SumAvg = "SUM"
+
+                        sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, describedBy as Code, year(obsDatetime) as Years,month(obsDatetime) as Months, " & SumAvg & "(value) As Value FROM (SELECT recordedFrom, latitude, longitude, elevation,describedBy, stationName, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                          "WHERE  (RecordedFrom = " & stnlist & ") AND (describedBy ='" & lstvElements.Items(i).Text & "') AND (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, year(obsDatetime), month(obsDatetime)) t GROUP BY StationId,Years, Months;"
+                        'MsgBox(sql)
+                        MeansProducts(sql, fl)
+                    Next
+                    FileClose(11)
+                    'CommonModules.ViewFile(fl)
+                    MonthlyNormals()
 
                 Case "Extremes"
 
@@ -379,8 +446,8 @@ Public Class formProductsSelectCriteria
                 Case "GeoCLIM Monthly"
                     GeoCLIMMonthlyProducts(stnlist, sdate, edate)
                 Case "Inventory"
-                    sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
-                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
+                    'sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime)," & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                    '    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
                     'sql = "SELECT recordedFrom as StationID, latitude, longitude, elevation,year(obsDatetime),month(obsDatetime),day(obsDatetime),hour(obsDatetime),describedBy FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime;"
 
@@ -642,53 +709,228 @@ Err:
     End Sub
 
     Sub DataProducts(sql As String, typ As String)
-        On Error GoTo Err
-        Dim flds1, flds2, flds3 As String
+
+        Dim dap As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsp As New DataSet
+        Dim conp As New MySql.Data.MySqlClient.MySqlConnection
         Dim fl As String
 
-        'MsgBox(sql)
+        Try
+            conp.ConnectionString = MyConnectionString
+            conp.Open()
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conp)
+            dap.SelectCommand.CommandTimeout = 0
+            dsp.Clear()
+            dap.Fill(dsp, "observationfinal")
+            conp.Close()
+            'MsgBox(dsp.Tables("observationfinal").Columns.Count)
 
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-        da.Fill(ds, "observationfinal")
-
-            maxRows = ds.Tables("observationfinal").Rows.Count
-
+            maxRows = dsp.Tables("observationfinal").Rows.Count
+            'MsgBox(maxRows)
             ' Create output file
             fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
 
             FileOpen(11, fl, OpenMode.Output)
 
             ' Output the column headers
-            For j = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                Write(11, ds.Tables("observationfinal").Columns(j).ColumnName)
+            For j = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+                Write(11, dsp.Tables("observationfinal").Columns(j).ColumnName)
             Next
 
             PrintLine(11)
 
             ' Output data values
             For k = 0 To maxRows - 1
-                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                    'If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i)
-                    FormattedOutput(11, k, i)
+                For i = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+                    FormattedOutput(11, k, i, dsp)
                 Next
                 PrintLine(11)
             Next
+
             FileClose(11)
             CommonModules.ViewFile(fl)
-            flds1 = """" & lstvElements.Items(0).Text & """"
-            flds2 = """" & lstvElements.Items(1).Text & """"
-            flds3 = """" & lstvElements.Items(2).Text & """"
+            'flds1 = """" & lstvElements.Items(0).Text & """"
+            'flds2 = """" & lstvElements.Items(1).Text & """"
+            'flds3 = """" & lstvElements.Items(2).Text & """"
 
-            Exit Sub
-Err:
-        MsgBox(Err.Description)
-        If Err.Number = 13 Or Err.Number = 5 Then Resume Next
-        MsgBox("No data found. Check and confirm selections")
-        'MsgBox(Err.Number & " " & Err.Description)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'If Err.Number = 13 Or Err.Number = 5 Then Resume Next
+            MsgBox("No data found. Check and confirm selections")
+            FileClose(11)
+            conp.Close()
+        End Try
 
     End Sub
+    Sub MeansProducts(sql As String, fl As String)
+        Dim Kount As Long
 
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "observationfinal")
+
+            Kount = ds.Tables("observationfinal").Rows.Count
+
+            If FileLen(fl) = 0 Then
+                ' Output the column headers
+                For j = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    Write(11, ds.Tables("observationfinal").Columns(j).ColumnName)
+                Next
+                PrintLine(11)
+            End If
+
+            ' Output data values
+            For k = 0 To Kount - 1
+                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                    'If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i)
+                    FormattedOutput(11, k, i, ds)
+                Next
+                PrintLine(11)
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub MonthlyNormals()
+        'strFolderPath = System.IO.Path.GetDirectoryName(txtQCReportOriginal.Text)
+        Dim fld, fl, connString, sql As String
+        Dim dss As New DataSet
+        Dim daa As OleDb.OleDbDataAdapter
+        Dim conn1 As New OleDb.OleDbConnection
+        Dim kount As Long
+
+        fld = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
+        connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & fld & ";Extended Properties=Text;"
+
+
+        Try
+            conn1.ConnectionString = connString
+            conn1.Open()
+
+            'sql = "SELECT * FROM [" & "means.csv" & "]"
+            'sql = "SELECT StationId,Station_Name, Months, AVG(IF(Code = '2', Value, NULL)) AS 'Tmax', AVG(IF(Code ='5', Value, NULL)) AS 'Precip' FROM [" & "means.csv" & "]  GROUP BY StationId, Months;"
+
+            sql = "SELECT StationID,Months,Code,AVG(Value) as MEAN FROM [" & "means.csv" & "] GROUP BY StationId,Months,Code"
+
+            daa = New OleDb.OleDbDataAdapter(sql, conn1)
+            dss.Clear()
+            daa.Fill(dss, "observationfinal")
+            conn1.Close()
+
+            kount = dss.Tables("observationfinal").Rows.Count
+            'MsgBox(kount)
+            ' Create output file
+            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+            FileOpen(101, fl, OpenMode.Output)
+
+            ' Output the column headers
+            For j = 0 To dss.Tables("observationfinal").Columns.Count - 1
+                Write(101, dss.Tables("observationfinal").Columns(j).ColumnName)
+            Next
+
+            PrintLine(101)
+
+            ' Output data values
+            For k = 0 To kount - 1
+                For i = 0 To dss.Tables("observationfinal").Columns.Count - 1
+                    'Write(101, dss.Tables("observationfinal").Rows(k).Item(i))
+
+                    If IsDBNull(dss.Tables("observationfinal").Rows(k).Item(i)) Then
+                        Write(101, "")
+                    ElseIf InStr(dss.Tables("observationfinal").Rows(k).Item(i), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places
+                        Write(101, Format(dss.Tables("observationfinal").Rows(k).Item(i), "0.00"))
+                    Else
+                        Write(101, dss.Tables("observationfinal").Rows(k).Item(i))
+                    End If
+
+                Next
+                PrintLine(101)
+            Next
+
+            FileClose(101)
+            'CommonModules.ViewFile(fl)
+            Normals_Transpose(conn1, daa, dss, connString)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Sub Normals_Transpose(conn1 As OleDb.OleDbConnection, daa As OleDb.OleDbDataAdapter, dss As DataSet, connString As String)
+        Dim fl, hdr As String
+        Dim sql, stnId, stnNm, elm, mn, dat As String
+        Dim kount, tx As Long
+
+
+        Try
+
+            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Normals.csv"
+
+            FileOpen(102, fl, OpenMode.Output)
+
+            sql = "SELECT StationID,Months,Code,MEAN FROM [" & "data_products.csv" & "] ORDER BY StationId,Months" 'GROUP BY StationId,Code,Months, MEAN"
+
+            conn1.Open()
+
+            daa = New OleDb.OleDbDataAdapter(sql, conn1)
+            dss.Clear()
+            daa.Fill(dss, "observationfinal")
+            conn1.Close()
+
+            kount = dss.Tables("observationfinal").Rows.Count
+
+            'MsgBox(kount)
+
+            tx = lstvElements.Items.Count
+            Dim vals(tx) As String
+
+            ' Output Headers
+            hdr = "Station_Id,Station_Name,Month"
+            For i = 0 To lstvElements.Items.Count - 1
+                hdr = hdr & "," & lstvElements.Items(i).SubItems(1).Text
+            Next
+            PrintLine(102, hdr)
+
+            For i = 0 To lstvStations.Items.Count - 1
+                stnId = lstvStations.Items(i).SubItems(0).Text
+                stnNm = lstvStations.Items(i).SubItems(1).Text
+                For m = 1 To 12
+                    ' Initialize Transpose values on every month
+                    For j = 0 To tx - 1
+                        vals(j) = ""
+                    Next
+
+                    ' Get data for every selected element
+                    For j = 0 To lstvElements.Items.Count - 1
+                        elm = lstvElements.Items(j).SubItems(0).Text
+                        With dss.Tables("observationfinal")
+                            For k = 0 To kount - 1
+                                If .Rows(k).Item(0) = stnId And .Rows(k).Item(1) = m And .Rows(k).Item(2) = elm Then
+                                    vals(j) = .Rows(k).Item(3)
+                                End If
+                            Next k
+                        End With
+                    Next j
+                    dat = ""
+                    For j = 0 To tx - 1
+                        dat = dat & ", " & vals(j)
+                    Next j
+
+                    ' Output Normals into text CSV file
+                    PrintLine(102, stnId & "," & stnNm & "," & m & dat)
+                Next m
+            Next i
+            FileClose(102)
+
+            CommonModules.ViewFile(fl)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Sub GeoCLIMMonthlyProducts(stns As String, sdate As String, edate As String)
 
         On Error GoTo Err
@@ -1068,7 +1310,7 @@ Err:
         ' Output data values
         For k = 0 To maxRows - 1
             For i = 2 To ds.Tables("observationfinal").Columns.Count - 1
-                If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i)
+                If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i, ds)
                 'FormattedOutput(11, k, i)
             Next
             PrintLine(11)
@@ -1117,7 +1359,7 @@ Err:
 
                     For k = 0 To maxRows - 1
                         For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                            If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i)
+                            If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i, ds)
                             'FormattedOutput(11, k, i)
                         Next
                         PrintLine(11)
@@ -1262,16 +1504,21 @@ Err:
         MsgBox(Err.Number & " " & Err.Description)
 
     End Sub
-    Sub FormattedOutput(fp As Integer, rw As Long, col As Integer)
+    Sub FormattedOutput(fp As Integer, rw As Long, col As Integer, dsf As DataSet)
+        Try
 
-        'If InStr(ds.Tables("observationfinal").Rows(rw).Item(col), "NULL") <> 0 Then 'Missing Values to be represented as blanks
-        If IsDBNull(ds.Tables("observationfinal").Rows(rw).Item(col)) Then
-            Write(fp, "")
-        ElseIf InStr(ds.Tables("observationfinal").Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places
-            Write(fp, Format(ds.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
-        Else
-            Write(fp, ds.Tables("observationfinal").Rows(rw).Item(col))
-        End If
+            'If InStr(ds.Tables("observationfinal").Rows(rw).Item(col), "NULL") <> 0 Then 'Missing Values to be represented as blanks
+            If IsDBNull(dsf.Tables("observationfinal").Rows(rw).Item(col)) Then
+                Write(fp, "")
+            ElseIf InStr(dsf.Tables("observationfinal").Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places
+                Write(fp, Format(dsf.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
+            Else
+                Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cmdDelStation_Click(sender As Object, e As EventArgs) Handles cmdDelStation.Click
@@ -1389,6 +1636,10 @@ Err:
         End If
     End Sub
 
+    Private Sub pnlStationsElements_Paint(sender As Object, e As PaintEventArgs) Handles pnlStationsElements.Paint
+
+    End Sub
+
     Public Sub findmissing()
         Dim fl As String
 
@@ -1423,7 +1674,7 @@ Err:
 
             PrintLine(11)
 
-            sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " & _
+            sql = "SELECT stationname Station,Latitude,Longitude,Elevation, elementname Element,YEAR(obs_date) 'Year',  MONTH(obs_date) 'Month',Day(obs_date) 'Day','xx.x' Missing " &
                   "FROM(missing_data, station, obselement) WHERE station.stationId = missing_data.STN_ID AND obselement.elementId=missing_data.ELEM"
             Try
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -1572,5 +1823,7 @@ Err:
         End Try
     End Sub
 
+    Private Sub cmdExtract_DragDrop(sender As Object, e As DragEventArgs) Handles cmdExtract.DragDrop
 
+    End Sub
 End Class
