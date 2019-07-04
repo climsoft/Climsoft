@@ -132,9 +132,9 @@ Public Class ucrSynopticRA1
             Me.Clear()
             ucrVFPStationLevelPressure.ucrValue.GetFocus()
             With frmNewSynopticRA1
-                .btnAddNew.Enabled = False
+                .btnAddNew.Enabled = True
                 .btnSave.Enabled = False
-                .btnUpdate.Enabled = True
+                .btnUpdate.Enabled = False
             End With
         End If
 

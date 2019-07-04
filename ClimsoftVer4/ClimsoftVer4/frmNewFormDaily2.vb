@@ -20,6 +20,13 @@
         If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
             chkRepeatEntry.Checked = True
         End If
+
+        'Set Sequencer Status
+        If FldName.Enable_Sequencer(Me.Text) Then
+            chkEnableSequencer.Checked = True
+        Else
+            chkEnableSequencer.Checked = False
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
@@ -63,6 +70,7 @@
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
+        Dim stn As String
 
         btnAddNew.Enabled = False
         btnClear.Enabled = True
@@ -70,18 +78,44 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        If chkEnableSequencer.Checked Then
-            ' temporary until we know how to get all fields from table without specifying names
-            dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
-            ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
-        End If
+        'stn = ucrStationSelector.cboValues.SelectedValue
+
+        'If chkEnableSequencer.Checked Then
+        '    ' temporary until we know how to get all fields from table without specifying names
+        '    dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+        '    ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+        'End If
 
         ucrFormDaily.Focus()
 
-        'Get the Station from the last record by the current login user
-        Dim usrStn As New dataEntryGlobalRoutines
-        usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
+        If chkRepeatEntry.Checked = False Then
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
 
+            If chkEnableSequencer.Checked Then
+                ' temporary until we know how to get all fields from table without specifying names
+                dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+                ucrDaiy2Navigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth}), ucrYear:=ucrYearSelector)
+            End If
+            usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
+        Else
+            Dim recdate As Date
+
+            btnAddNew.Enabled = True
+            btnClear.Enabled = False
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnCommit.Enabled = False
+
+            ' Compute the new header entries for the next record
+            stn = ucrStationSelector.cboValues.SelectedValue
+            recdate = DateSerial(ucrYearSelector.cboValues.Text, ucrMonth.cboValues.Text, 1)
+            recdate = DateAdd("m", 1, recdate)
+
+            ucrStationSelector.cboValues.SelectedValue = stn
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(recdate)
+            ucrMonth.cboValues.Text = DateAndTime.Month(recdate)
+        End If
     End Sub
 
     Private Sub btnCommit_Click(sender As Object, e As EventArgs) Handles btnCommit.Click
@@ -299,7 +333,12 @@
 
     Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
         txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
+
+        ' Update Sequencer status if changed
+        FldName.Update_Sequencer(Me.Text, chkEnableSequencer.Checked)
     End Sub
+
+
 
     'Function GetCurrentStation(frm As String, ByRef stn As String) As Boolean
     '    Dim conn As New MySql.Data.MySqlClient.MySqlConnection

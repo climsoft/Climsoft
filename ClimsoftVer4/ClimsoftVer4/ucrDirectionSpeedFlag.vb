@@ -269,21 +269,23 @@ Public Class ucrDirectionSpeedFlag
             If sender Is ucrDDFF Then
 
                 ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
-                Compare_Entry(ucrDDFF.TextboxValue)
+                If frmNewHourlyWind.chkRepeatEntry.Checked Then
+                    Compare_Entry(ucrDDFF.TextboxValue)
+                End If
 
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrDDFF.IsEmpty Then
-                    ucrFlag.SetValue("M")
-                    RaiseEvent evtGoToNextDSFControl(Me, e)
-                ElseIf ValidateText(ucrDDFF.GetValue) Then
-                    RaiseEvent evtGoToNextDSFControl(Me, e)
-                    'ElseIf ucrDDFF.GetValue = "M"
-                    '    RaiseEvent evtGoToNextDSFControl(Me, e)
-                Else
-                    DoQCForUcrDDFFInput()
+                        ucrFlag.SetValue("M")
+                        RaiseEvent evtGoToNextDSFControl(Me, e)
+                    ElseIf ValidateText(ucrDDFF.GetValue) Then
+                        RaiseEvent evtGoToNextDSFControl(Me, e)
+                        'ElseIf ucrDDFF.GetValue = "M"
+                        '    RaiseEvent evtGoToNextDSFControl(Me, e)
+                    Else
+                        DoQCForUcrDDFFInput()
+                    End If
                 End If
             End If
-        End If
 
         OnevtKeyDown(Me, e)
     End Sub
@@ -413,30 +415,25 @@ Public Class ucrDirectionSpeedFlag
         Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim constr As String
         Dim frm, stn, elm, yy, mm, dd, hh, wdspd, wddir, obsv1 As String
-        'Dim Conflict As Boolean
 
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr
         conn.Open()
-        'MsgBox(CurrentEntryValue)
 
-        'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
-
-        With frmKeyEntry.ListView1
-            For i = 0 To .Items.Count - 1
-                If .Items(i).Selected = True Then
-                    frm = .Items(i).SubItems(0).Text
-                    Exit For
-                End If
-            Next
-        End With
-        'MsgBox(frm & " " & obsv)
+        'With frmKeyEntry.ListView1
+        '    For i = 0 To .Items.Count - 1
+        '        If .Items(i).Selected = True Then
+        '            frm = .Items(i).SubItems(0).Text
+        '            Exit For
+        '        End If
+        '    Next
+        'End With
 
         Try
             With frmNewHourlyWind
-                If Not .chkRepeatEntry.Checked Then
-                    Exit Sub
-                End If
+                'If Not .chkRepeatEntry.Checked Then
+                '    Exit Sub
+                'End If
                 stn = .ucrStationSelector.cboValues.SelectedValue
                 elm = "111"
                 yy = .ucrYearSelector.cboValues.SelectedValue
@@ -467,7 +464,7 @@ Public Class ucrDirectionSpeedFlag
 
             Validate_Entry(obsv, wddir & wdspd, stn, elm, yy, mm, dd, hh)
         Catch ex As Exception
-                MsgBox(ex.Message)
+            MsgBox(ex.Message)
             End Try
 
     End Sub
@@ -477,45 +474,49 @@ Public Class ucrDirectionSpeedFlag
         Dim C1, cpVal, dir, spd As String
 
         Conflict = False
-        If obsv <> obsv1 Then
-            MsgBox("Conflicting Values")
-            ucrDDFF.BackColor = Color.Yellow
-            cpVal = ucrDDFF.TextboxValue
-            Conflict = True
-            ucrDDFF.TextboxValue = ""
+        Try
+            If obsv <> obsv1 Then
+                MsgBox("Conflicting Values")
+                ucrDDFF.BackColor = Color.Yellow
+                cpVal = ucrDDFF.TextboxValue
+                Conflict = True
+                ucrDDFF.TextboxValue = ""
 
-            Do While Conflict = True
-                C1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
-                If C1 <> cpVal Then
-                    cpVal = C1
-                    Conflict = True
-                    MsgBox("Re Entry Conflict! Try Again")
-                Else
-                    ucrDDFF.TextboxValue = C1
-                    Conflict = False
-                    dir = Strings.Left(C1, Int(frmNewHourlyWind.txtDirectionDigits.Text))
-                    spd = Strings.Right(C1, Int(frmNewHourlyWind.txtSpeedDigits.Text))
-
-                    'MsgBox(dir & spd)
-                    'Update database with the verified value
-                    If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
-                        ' Update Direction value
-                        If Not objKeyPress.Db_Update_Conflicts(stnid, 112, yy, mm, dd, hh, dir) Then
-                            MsgBox("Direction Update Failure")
-                        End If
-
-                        ' Update Speed value
-                        If Not objKeyPress.Db_Update_Conflicts(stnid, 111, yy, mm, dd, hh, spd) Then
-                            MsgBox("Direction Update Failure")
-                        End If
+                Do While Conflict = True
+                    C1 = InputBox("Reapeat Entry Please!", "Key Entry Verification")
+                    If C1 <> cpVal Then
+                        cpVal = C1
+                        Conflict = True
+                        MsgBox("Re Entry Conflict! Try Again")
                     Else
-                        MsgBox("Update Cancelled by operator")
-                        ucrDDFF.TextboxValue = ""
+                        ucrDDFF.TextboxValue = C1
+                        Conflict = False
+                        dir = Strings.Left(C1, Int(frmNewHourlyWind.txtDirectionDigits.Text))
+                        spd = Strings.Right(C1, Int(frmNewHourlyWind.txtSpeedDigits.Text))
+
+                        'MsgBox(dir & spd)
+                        'Update database with the verified value
+                        If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
+                            ' Update Direction value
+                            If Not objKeyPress.Db_Update_Conflicts(stnid, 112, yy, mm, dd, hh, dir) Then
+                                MsgBox("Direction Update Failure")
+                            End If
+
+                            ' Update Speed value
+                            If Not objKeyPress.Db_Update_Conflicts(stnid, 111, yy, mm, dd, hh, spd) Then
+                                MsgBox("Direction Update Failure")
+                            End If
+                        Else
+                            MsgBox("Update Cancelled by operator")
+                            ucrDDFF.TextboxValue = ""
+                        End If
+                        ucrDDFF.BackColor = Color.White
                     End If
-                    ucrDDFF.BackColor = Color.White
-                End If
-            Loop
-        End If
+                Loop
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class
 

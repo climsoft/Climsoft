@@ -70,7 +70,7 @@ Partial Class frmMonitoring
         Me.grpSettings = New System.Windows.Forms.GroupBox()
         Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
         Me.lblSingleEntryMode = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.optEntryMode = New System.Windows.Forms.RadioButton()
         Me.optTargets = New System.Windows.Forms.RadioButton()
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdretrieve1 = New System.Windows.Forms.Button()
@@ -80,6 +80,9 @@ Partial Class frmMonitoring
         Me.lblTrecs = New System.Windows.Forms.Label()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.optUsersStatus = New System.Windows.Forms.RadioButton()
         Me.TabMonitoring.SuspendLayout()
         Me.TabUsrRecords.SuspendLayout()
         Me.grpUsers.SuspendLayout()
@@ -103,7 +106,7 @@ Partial Class frmMonitoring
         Me.TabMonitoring.Location = New System.Drawing.Point(9, 12)
         Me.TabMonitoring.Name = "TabMonitoring"
         Me.TabMonitoring.SelectedIndex = 0
-        Me.TabMonitoring.Size = New System.Drawing.Size(673, 200)
+        Me.TabMonitoring.Size = New System.Drawing.Size(673, 255)
         Me.TabMonitoring.TabIndex = 0
         '
         'TabUsrRecords
@@ -366,7 +369,7 @@ Partial Class frmMonitoring
         Me.TabEntryVerify.Location = New System.Drawing.Point(4, 22)
         Me.TabEntryVerify.Name = "TabEntryVerify"
         Me.TabEntryVerify.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabEntryVerify.Size = New System.Drawing.Size(665, 174)
+        Me.TabEntryVerify.Size = New System.Drawing.Size(665, 229)
         Me.TabEntryVerify.TabIndex = 1
         Me.TabEntryVerify.Text = "Double Key Entry Verification"
         Me.TabEntryVerify.UseVisualStyleBackColor = True
@@ -547,16 +550,19 @@ Partial Class frmMonitoring
         Me.TabSettings.Controls.Add(Me.grpSettings)
         Me.TabSettings.Location = New System.Drawing.Point(4, 22)
         Me.TabSettings.Name = "TabSettings"
-        Me.TabSettings.Size = New System.Drawing.Size(665, 174)
+        Me.TabSettings.Size = New System.Drawing.Size(665, 229)
         Me.TabSettings.TabIndex = 3
         Me.TabSettings.Text = "Settings"
         Me.TabSettings.UseVisualStyleBackColor = True
         '
         'grpSettings
         '
+        Me.grpSettings.Controls.Add(Me.Label3)
+        Me.grpSettings.Controls.Add(Me.Label4)
+        Me.grpSettings.Controls.Add(Me.optUsersStatus)
         Me.grpSettings.Controls.Add(Me.lblDoubleEntryMode)
         Me.grpSettings.Controls.Add(Me.lblSingleEntryMode)
-        Me.grpSettings.Controls.Add(Me.RadioButton1)
+        Me.grpSettings.Controls.Add(Me.optEntryMode)
         Me.grpSettings.Controls.Add(Me.optTargets)
         Me.grpSettings.Controls.Add(Me.cmdUpdate)
         Me.grpSettings.Controls.Add(Me.cmdretrieve1)
@@ -564,7 +570,7 @@ Partial Class frmMonitoring
         Me.grpSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSettings.Location = New System.Drawing.Point(8, 3)
         Me.grpSettings.Name = "grpSettings"
-        Me.grpSettings.Size = New System.Drawing.Size(654, 168)
+        Me.grpSettings.Size = New System.Drawing.Size(654, 219)
         Me.grpSettings.TabIndex = 2
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Settings"
@@ -573,7 +579,7 @@ Partial Class frmMonitoring
         '
         Me.lblDoubleEntryMode.AutoSize = True
         Me.lblDoubleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDoubleEntryMode.Location = New System.Drawing.Point(29, 101)
+        Me.lblDoubleEntryMode.Location = New System.Drawing.Point(29, 93)
         Me.lblDoubleEntryMode.Name = "lblDoubleEntryMode"
         Me.lblDoubleEntryMode.Size = New System.Drawing.Size(116, 13)
         Me.lblDoubleEntryMode.TabIndex = 15
@@ -583,21 +589,21 @@ Partial Class frmMonitoring
         '
         Me.lblSingleEntryMode.AutoSize = True
         Me.lblSingleEntryMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSingleEntryMode.Location = New System.Drawing.Point(29, 84)
+        Me.lblSingleEntryMode.Location = New System.Drawing.Point(29, 76)
         Me.lblSingleEntryMode.Name = "lblSingleEntryMode"
         Me.lblSingleEntryMode.Size = New System.Drawing.Size(116, 13)
         Me.lblSingleEntryMode.TabIndex = 14
         Me.lblSingleEntryMode.Text = "0 for Single Data Entry "
         '
-        'RadioButton1
+        'optEntryMode
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(7, 64)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(116, 19)
-        Me.RadioButton1.TabIndex = 6
-        Me.RadioButton1.Text = "Data Entry Mode"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.optEntryMode.AutoSize = True
+        Me.optEntryMode.Location = New System.Drawing.Point(7, 56)
+        Me.optEntryMode.Name = "optEntryMode"
+        Me.optEntryMode.Size = New System.Drawing.Size(116, 19)
+        Me.optEntryMode.TabIndex = 6
+        Me.optEntryMode.Text = "Data Entry Mode"
+        Me.optEntryMode.UseVisualStyleBackColor = True
         '
         'optTargets
         '
@@ -613,7 +619,7 @@ Partial Class frmMonitoring
         '
         'cmdUpdate
         '
-        Me.cmdUpdate.Location = New System.Drawing.Point(98, 136)
+        Me.cmdUpdate.Location = New System.Drawing.Point(98, 186)
         Me.cmdUpdate.Name = "cmdUpdate"
         Me.cmdUpdate.Size = New System.Drawing.Size(56, 25)
         Me.cmdUpdate.TabIndex = 2
@@ -622,7 +628,7 @@ Partial Class frmMonitoring
         '
         'cmdretrieve1
         '
-        Me.cmdretrieve1.Location = New System.Drawing.Point(18, 137)
+        Me.cmdretrieve1.Location = New System.Drawing.Point(18, 187)
         Me.cmdretrieve1.Name = "cmdretrieve1"
         Me.cmdretrieve1.Size = New System.Drawing.Size(56, 25)
         Me.cmdretrieve1.TabIndex = 1
@@ -636,15 +642,15 @@ Partial Class frmMonitoring
         Me.DataGridSettings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.DataGridSettings.Location = New System.Drawing.Point(200, 11)
         Me.DataGridSettings.Name = "DataGridSettings"
-        Me.DataGridSettings.Size = New System.Drawing.Size(448, 151)
+        Me.DataGridSettings.Size = New System.Drawing.Size(448, 200)
         Me.DataGridSettings.TabIndex = 0
         '
         'ListViewRecs
         '
         Me.ListViewRecs.GridLines = True
-        Me.ListViewRecs.Location = New System.Drawing.Point(9, 234)
+        Me.ListViewRecs.Location = New System.Drawing.Point(9, 286)
         Me.ListViewRecs.Name = "ListViewRecs"
-        Me.ListViewRecs.Size = New System.Drawing.Size(670, 321)
+        Me.ListViewRecs.Size = New System.Drawing.Size(670, 282)
         Me.ListViewRecs.TabIndex = 10
         Me.ListViewRecs.UseCompatibleStateImageBehavior = False
         Me.ListViewRecs.View = System.Windows.Forms.View.Details
@@ -652,7 +658,7 @@ Partial Class frmMonitoring
         'lblRecords
         '
         Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(290, 218)
+        Me.lblRecords.Location = New System.Drawing.Point(290, 270)
         Me.lblRecords.Name = "lblRecords"
         Me.lblRecords.Size = New System.Drawing.Size(89, 13)
         Me.lblRecords.TabIndex = 11
@@ -661,7 +667,7 @@ Partial Class frmMonitoring
         'lblTrecs
         '
         Me.lblTrecs.AutoSize = True
-        Me.lblTrecs.Location = New System.Drawing.Point(377, 219)
+        Me.lblTrecs.Location = New System.Drawing.Point(377, 270)
         Me.lblTrecs.Name = "lblTrecs"
         Me.lblTrecs.Size = New System.Drawing.Size(13, 13)
         Me.lblTrecs.TabIndex = 12
@@ -670,7 +676,7 @@ Partial Class frmMonitoring
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(9, 210)
+        Me.cmdClose.Location = New System.Drawing.Point(9, 262)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(78, 23)
         Me.cmdClose.TabIndex = 13
@@ -679,18 +685,48 @@ Partial Class frmMonitoring
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(600, 210)
+        Me.cmdHelp.Location = New System.Drawing.Point(600, 262)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(78, 23)
         Me.cmdHelp.TabIndex = 14
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(28, 152)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(116, 13)
+        Me.Label3.TabIndex = 18
+        Me.Label3.Text = "1 for Double Key Entry "
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(28, 135)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(116, 13)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "0 for Single Data Entry "
+        '
+        'optUsersStatus
+        '
+        Me.optUsersStatus.AutoSize = True
+        Me.optUsersStatus.Location = New System.Drawing.Point(6, 115)
+        Me.optUsersStatus.Name = "optUsersStatus"
+        Me.optUsersStatus.Size = New System.Drawing.Size(124, 19)
+        Me.optUsersStatus.TabIndex = 16
+        Me.optUsersStatus.Text = "Users Entry Status"
+        Me.optUsersStatus.UseVisualStyleBackColor = True
+        '
         'frmMonitoring
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(692, 559)
+        Me.ClientSize = New System.Drawing.Size(692, 583)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.lblTrecs)
@@ -773,9 +809,12 @@ Partial Class frmMonitoring
     Friend WithEvents optVerified As System.Windows.Forms.RadioButton
     Friend WithEvents cmdView As System.Windows.Forms.Button
     Friend WithEvents cmdClose As System.Windows.Forms.Button
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents optEntryMode As System.Windows.Forms.RadioButton
     Friend WithEvents optTargets As System.Windows.Forms.RadioButton
     Friend WithEvents lblDoubleEntryMode As System.Windows.Forms.Label
     Friend WithEvents lblSingleEntryMode As System.Windows.Forms.Label
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents optUsersStatus As RadioButton
 End Class

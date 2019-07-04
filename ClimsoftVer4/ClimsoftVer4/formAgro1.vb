@@ -191,6 +191,9 @@
             btnUpload.Enabled = False
         End If
 
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+
         'Set the record index counter to the first row
         inc = 0
 
@@ -202,6 +205,7 @@
 
             sql = "SELECT * FROM form_agro1"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+
             da.Fill(ds, "form_agro1")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
@@ -245,6 +249,20 @@
                 cboDay.Text = ds.Tables("form_agro1").Rows(inc).Item("dd")
 
                 'Initialize textboxes for observation values
+                ' But not for Repeat Entry mode
+                If chkRepeatEntry.Checked Then
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+                    btnUpdate.Enabled = False
+                    btnDelete.Enabled = False
+                    btnClear.Enabled = False
+                    btnMoveFirst.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMovePrevious.Enabled = False
+                    btnMoveLast.Enabled = False
+                    Exit Sub
+                End If
+
                 'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
                 For m = 4 To 37
                     For Each ctl In Me.Controls
@@ -284,9 +302,9 @@
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
 
-            ' Retrieve Keyentry mode information and mark on the checkbox
-            'MsgBox(FldName.Key_Entry_Mode(Me.Name))
-            If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+            '' Retrieve Keyentry mode information and mark on the checkbox
+            ''MsgBox(FldName.Key_Entry_Mode(Me.Name))
+            'If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -315,24 +333,25 @@
         btnCommit.Enabled = True
 
         Dim dataFormRecCount, seqRecCount As Integer
-        Dim strYear, strMonth, strDay, Sql As String
+        Dim strStation, strYear, strMonth, strDay, Sql As String
 
+        strStation = cboStation.SelectedValue
         Try
             dataFormRecCount = ds.Tables("form_agro1").Rows.Count
 
             If dataFormRecCount > 0 Then
-                cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
-                strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
-                strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
-                strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
-            Else
-                cboStation.SelectedValue = cboStation.SelectedValue
-                strYear = txtYear.Text
-                strMonth = cboMonth.Text
-                strDay = cboDay.Text
-            End If
+                    cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
+                    strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
+                    strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
+                    strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
+                Else
+                    cboStation.SelectedValue = cboStation.SelectedValue
+                    strYear = txtYear.Text
+                    strMonth = cboMonth.Text
+                    strDay = cboDay.Text
+                End If
 
-            Dim ctl As Control
+                Dim ctl As Control
 
             'Clear textboxes for observation values
             'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
@@ -360,12 +379,15 @@
                 ' Enable AddNew button and Diable Save button
                 btnAddNew.Enabled = True
                 btnCommit.Enabled = False
+                btnClear.Enabled = False
                 ' Compute the new header entries for the next record
+                cboStation.SelectedValue = strStation
                 recdate = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
                 recdate = DateAdd("d", 1, recdate)
                 txtYear.Text = DateAndTime.Year(recdate)
                 cboMonth.Text = DateAndTime.Month(recdate)
                 cboDay.Text = DateAndTime.Day(recdate)
+                txtVal_Elem101Field004.Focus()
                 Exit Sub
             End If
 
@@ -883,6 +905,8 @@
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+
+
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")

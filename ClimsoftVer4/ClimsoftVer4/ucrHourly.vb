@@ -73,9 +73,9 @@ Public Class ucrHourly
             Me.Clear()
             Me.UcrValueFlagPeriod0.ucrValue.GetFocus()
             With frmNewHourly
-                .btnAddNew.Enabled = False
+                .btnAddNew.Enabled = True
                 .btnCommit.Enabled = False
-                .btnUpdate.Enabled = True
+                .btnUpdate.Enabled = False
             End With
         End If
     End Sub
@@ -236,11 +236,17 @@ Public Class ucrHourly
     ''' Clears all the text In the ucrValueFlagPeriod controls 
     ''' </summary>
     Public Overrides Sub Clear()
-        For Each ctr As Control In Me.Controls
+        'For Each ctr As Control In Me.Controls
+        '    If TypeOf ctr Is ucrValueFlagPeriod Then
+        '        'DirectCast(ctr, ucrDirectionSpeedFlag).Clear()
+        '    ElseIf TypeOf ctr Is ucrTextBox Then
+        '        DirectCast(ctr, ucrTextBox).Clear()
+        '    End If
+        'Next
+
+        For Each ctr In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
-                'DirectCast(ctr, ucrDirectionSpeedFlag).Clear()
-            ElseIf TypeOf ctr Is ucrTextBox Then
-                DirectCast(ctr, ucrTextBox).Clear()
+                DirectCast(ctr, ucrValueFlagPeriod).Clear()
             End If
         Next
     End Sub
