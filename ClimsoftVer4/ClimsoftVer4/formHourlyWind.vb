@@ -1190,14 +1190,15 @@ Public Class form_hourlywind
         End If
     End Sub
 
+
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
         frmDataTransferProgress.Show()
 
         'Upload data to observationInitial table
-        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
+        Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String,
             dd As String, hh As String, capturedBy As String
-        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String, _
+        Dim stnId As String, elemCode As Integer, obsDatetime As String, obsVal As String, obsFlag As String,
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, dataForm As String
 
         myConnectionString = frmLogin.txtusrpwd.Text
@@ -1239,7 +1240,7 @@ Public Class form_hourlywind
 
                 'Generate SQL string for inserting data into observationinitial table
                 If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                         & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
@@ -1284,7 +1285,7 @@ Public Class form_hourlywind
 
                 'Generate SQL string for inserting data into observationinitial table
                 If Strings.Len(obsVal) > 0 Then
-                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                    strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                         & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 

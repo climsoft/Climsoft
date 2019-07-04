@@ -252,7 +252,7 @@ Partial Class frmCharts
         Me.cmdview.Name = "cmdview"
         Me.cmdview.Size = New System.Drawing.Size(73, 24)
         Me.cmdview.TabIndex = 8
-        Me.cmdview.Text = "Viewd Data"
+        Me.cmdview.Text = "View Data"
         Me.cmdview.UseVisualStyleBackColor = True
         '
         'frmCharts
