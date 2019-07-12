@@ -112,6 +112,8 @@ Public Class formProductsSelectCriteria
         For kount = 0 To maxRows - 1 Step 1
             cmbElement.Items.Add(ds.Tables("obselement").Rows(kount).Item("description"))
         Next
+
+        conn.Close()
     End Sub
 
 
@@ -858,13 +860,13 @@ Err:
             Normals_Transpose(conn1, daa, dss, connString)
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn1.Close()
         End Try
     End Sub
     Sub Normals_Transpose(conn1 As OleDb.OleDbConnection, daa As OleDb.OleDbDataAdapter, dss As DataSet, connString As String)
         Dim fl, hdr As String
         Dim sql, stnId, stnNm, elm, mn, dat As String
         Dim kount, tx As Long
-
 
         Try
 
@@ -925,10 +927,12 @@ Err:
                 Next m
             Next i
             FileClose(102)
-
+            'MsgBox(fl)
             CommonModules.ViewFile(fl)
+
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn1.Close()
         End Try
     End Sub
     Sub GeoCLIMMonthlyProducts(stns As String, sdate As String, edate As String)
