@@ -417,6 +417,7 @@ Public Class ucrValueFlagPeriod
                 Case "form_synoptic_2_ra1"
                     Try
                         With frmNewSynopticRA1
+                            conn.Close()
                             If Not .chkRepeatEntry.Checked Then
                                 Exit Sub
                             End If
@@ -429,19 +430,23 @@ Public Class ucrValueFlagPeriod
                             'MsgBox(stn & elm & yy & mm & dd & hh)
                         End With
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             ' Start Verification process
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
                 Case "form_daily2"
                     Try
                         With frmNewFormDaily2
                             If Not .chkRepeatEntry.Checked Then
+                                conn.Close()
                                 Exit Sub
                             End If
                             stn = .ucrStationSelector.cboValues.SelectedValue
@@ -460,19 +465,23 @@ Public Class ucrValueFlagPeriod
                         End With
 
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
                         'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh & " " & obsv1)
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
                 Case "form_hourly"
                     Try
                         With frmNewHourly
                             If Not .chkRepeatEntry.Checked Then
+                                conn.Close()
                                 Exit Sub
                             End If
                             stn = .ucrStationSelector.cboValues.SelectedValue
@@ -485,19 +494,22 @@ Public Class ucrValueFlagPeriod
                         End With
 
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             'MsgBox(obsv1)
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
             End Select
         End With
 
-
+        conn.Close()
     End Sub
     Sub Validate_Entry(obsv As String, obsv1 As String, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String)
 

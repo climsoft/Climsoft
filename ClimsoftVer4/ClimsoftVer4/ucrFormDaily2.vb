@@ -666,9 +666,10 @@ Public Class ucrFormDaily2
             Else
                 e.Result = strResult
             End If
-
+            conn.Close()
         Catch ex As Exception
             e.Result = "Error " & ex.Message
+            conn.Close()
         Finally
             conn.Close()
         End Try

@@ -445,6 +445,7 @@ Public Class ucrDirectionSpeedFlag
 
             ' Get speed component of the wind wind data entry
             If Not objKeyPress.Entered_Value(conn, stn, 111, yy, mm, dd, hh, obsv1) Then
+                conn.Close()
                 MsgBox("Can't Verify: Wind speed record does not exist")
                 Exit Sub
             Else
@@ -454,6 +455,7 @@ Public Class ucrDirectionSpeedFlag
             ' get direction component of wind data entry
 
             If Not objKeyPress.Entered_Value(conn, stn, 112, yy, mm, dd, hh, obsv1) Then
+                conn.Close()
                 MsgBox("Can't Verify: Wind direction Record does not exist")
                 Exit Sub
             Else
@@ -463,9 +465,11 @@ Public Class ucrDirectionSpeedFlag
             'MsgBox(wddir & wdspd)
 
             Validate_Entry(obsv, wddir & wdspd, stn, elm, yy, mm, dd, hh)
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
-            End Try
+            conn.Close()
+        End Try
 
     End Sub
 
