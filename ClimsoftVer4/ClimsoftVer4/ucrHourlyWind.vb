@@ -3,7 +3,7 @@
 Public Class ucrHourlyWind
     Private strDirectionFieldName As String = "elem_112_"
     Private strSpeedFieldName As String = "elem_111_"
-    'Private strFlagFieldName As String = "ddflag"
+    'Private strFlagFieldName As String = "ddflag"  
 
     Private Sub ucrHourlyWind_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -42,7 +42,7 @@ Public Class ucrHourlyWind
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
-            ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, ucrYear:=ucrYearSelector)
+            ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"mm", "dd"}, {ucrMonth, ucrDay}, ucrYear:=ucrYearSelector)
             'SaveEnable()
             ucrDirectionSpeedFlag0.Focus()
         Catch ex As Exception
