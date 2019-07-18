@@ -18,7 +18,7 @@
         MyBase.SetTableName(strNewTable)
         ucrValue.SetTableName(strNewTable)
         ucrFlag.SetTableName(strNewTable)
-        If bIncludePeriod Then
+        If IncludePeriod Then
             ucrPeriod.SetTableName(strNewTable)
         End If
     End Sub
@@ -383,13 +383,18 @@
     Private Sub SetTextBoxSize()
         ucrValue.SetSize(New Size(51, 20))
         ucrFlag.SetSize(New Size(27, 20))
-        ucrPeriod.SetSize(New Size(33, 20))
+        If IncludePeriod Then
+            ucrPeriod.SetSize(New Size(33, 20))
+        End If
     End Sub
 
     Public Overrides Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         ucrValue.SetContextMenuStrip(contextMenuStrip)
         ucrFlag.SetContextMenuStrip(contextMenuStrip)
-        ucrPeriod.SetContextMenuStrip(contextMenuStrip)
+        If IncludePeriod Then
+            ucrPeriod.SetContextMenuStrip(contextMenuStrip)
+        End If
+
     End Sub
 
     Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
@@ -409,7 +414,10 @@
     Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
         ucrValue.AddFieldstoList(lstFields)
         ucrFlag.AddFieldstoList(lstFields)
-        ucrPeriod.AddFieldstoList(lstFields)
+        If IncludePeriod Then
+            ucrPeriod.AddFieldstoList(lstFields)
+        End If
+
     End Sub
 
     Public Overrides Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
@@ -471,13 +479,10 @@
 
     Public Overrides Sub SetValueToDataTable(dtbValues As DataTable)
         ucrValue.SetValueToDataTable(dtbValues)
-        ucrValue.SetValueToDataTable(dtbValues)
         ucrFlag.SetValueToDataTable(dtbValues)
         If IncludePeriod Then
             ucrPeriod.SetValueToDataTable(dtbValues)
         End If
-
-
     End Sub
 
 

@@ -19,7 +19,18 @@ Public Class ucrDirectionSpeedFlag
     Private iDirectionDigits As Integer
     Private iSpeedDigits As Integer
     Public Event evtGoToNextDSFControl(sender As Object, e As KeyEventArgs)
+    Private bIncludeFlag As Boolean = True
     Public objKeyPress As New dataEntryGlobalRoutines
+
+    Public Property IncludeFlag() As Boolean
+        Get
+            Return bIncludeFlag
+        End Get
+        Set(value As Boolean)
+            bIncludeFlag = value
+            ucrFlag.Visible = value
+        End Set
+    End Property
 
     Public Overrides Sub SetTableName(strNewTable As String)
         MyBase.SetTableName(strNewTable)
@@ -232,7 +243,7 @@ Public Class ucrDirectionSpeedFlag
         ucrFlag.Clear()
     End Sub
 
-    Public Sub SetBackColor(backColor As Color)
+    Public Overrides Sub SetBackColor(backColor As Color)
         ucrDDFF.SetBackColor(backColor)
         ucrDirection.SetBackColor(backColor)
         ucrSpeed.SetBackColor(backColor)
@@ -403,24 +414,46 @@ Public Class ucrDirectionSpeedFlag
         Return bValuesCorrect
     End Function
 
-    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+    Public Overrides Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         ucrDDFF.SetContextMenuStrip(contextMenuStrip)
         ucrDirection.SetContextMenuStrip(contextMenuStrip)
         ucrSpeed.SetContextMenuStrip(contextMenuStrip)
-        ucrFlag.SetContextMenuStrip(contextMenuStrip)
+        If IncludeFlag Then
+            ucrFlag.SetContextMenuStrip(contextMenuStrip)
+        End If
+
+    End Sub
+
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+        ucrDirection.FieldName = strValueFieldName
+        ucrSpeed.FieldName = strPeriodFieldName
+        ucrFlag.FieldName = strFlagFieldName
+        IncludeFlag = True
+    End Sub
+
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
+        ucrDirection.FieldName = strValueFieldName
+        ucrSpeed.FieldName = strFlagFieldName
+        ucrFlag.FieldName = "" 'removes the default period field to avoid addition of it to a list of fields of its table entry control
+        IncludeFlag = False
     End Sub
 
 
     Public Overrides Sub AddFieldstoList(lstFields As List(Of String))
         ucrDirection.AddFieldstoList(lstFields)
         ucrSpeed.AddFieldstoList(lstFields)
-        ucrFlag.AddFieldstoList(lstFields)
+        If IncludeFlag Then
+            ucrFlag.AddFieldstoList(lstFields)
+        End If
     End Sub
 
     Public Overrides Sub AddEventValueChangedHandle(ehSub As evtValueChangedEventHandler)
-        ucrDirection.AddEventValueChangedHandle(ehSub)
-        ucrSpeed.AddEventValueChangedHandle(ehSub)
-        ucrFlag.AddEventValueChangedHandle(ehSub)
+        'ucrDirection.AddEventValueChangedHandle(ehSub)
+        'ucrSpeed.AddEventValueChangedHandle(ehSub)
+        'If bIncludeFlag Then
+        'ucrFlag.AddEventValueChangedHandle(ehSub)
+        'End If
+        MyBase.AddEventValueChangedHandle(ehSub)
     End Sub
 
     Public Overrides Sub SetValueFromDataTable(dtbValues As DataTable)
@@ -429,6 +462,17 @@ Public Class ucrDirectionSpeedFlag
         Dim lstDistinct As New List(Of Object)
         Dim dtbTemp As DataTable
         Dim strIdentifyField As String = FieldName
+
+        ucrDirection.SetValueFromDataTable(dtbValues)
+        ucrSpeed.SetValueFromDataTable(dtbValues)
+        If IncludeFlag Then
+            ucrFlag.SetValueFromDataTable(dtbValues)
+        End If
+
+        If 1 = 1 Then
+            Return
+        End If
+
         If strIdentifyField = "" OrElse Tag = "" Then
             SetValue(Nothing)
         Else
@@ -452,6 +496,15 @@ Public Class ucrDirectionSpeedFlag
             End If
         End If
     End Sub
+
+    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable)
+        ucrDirection.SetValueToDataTable(dtbValues)
+        ucrSpeed.SetValueToDataTable(dtbValues)
+        If IncludeFlag Then
+            ucrFlag.SetValueToDataTable(dtbValues)
+        End If
+    End Sub
+
 
     'Sub Compare_Entry(obsv As String)
     '    Dim conn As New MySql.Data.MySqlClient.MySqlConnection

@@ -37,7 +37,7 @@
         End If
     End Sub
 
-    Private Sub btnAddNew_Click_1(sender As Object, e As EventArgs) Handles btnAddNew.Click
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Try
             ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, ucrYear:=ucrYearSelector)
             'SaveEnable()
@@ -150,6 +150,7 @@
 
 
     End Sub
+
     'upload code in the background thread
     Private Sub UploadAllRecords()
         Dim frm As New frmNewComputationProgress
