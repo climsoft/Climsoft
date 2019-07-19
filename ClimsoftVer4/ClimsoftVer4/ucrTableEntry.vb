@@ -9,6 +9,9 @@
     Protected dctBaseControls As New Dictionary(Of String, Button) 'holds the add,save,update,delete,clear,cancel etc controls
 
     Public Overrides Sub PopulateControl()
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
         If Not bFirstLoad Then
             bPopulating = True
 

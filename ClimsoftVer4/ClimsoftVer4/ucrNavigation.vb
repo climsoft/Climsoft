@@ -24,6 +24,9 @@ Public Class ucrNavigation
     End Sub
 
     Public Overrides Sub PopulateControl()
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
