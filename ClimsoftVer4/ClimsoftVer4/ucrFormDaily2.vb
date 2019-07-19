@@ -130,7 +130,7 @@ Public Class ucrFormDaily2
         'checkTotal()
     End Sub
 
-    Public Function IsValuesEmpty() As Boolean
+    Private Function IsValuesEmpty() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
                 If Not DirectCast(ctr, ucrValueFlagPeriod).IsElementValueEmpty() Then

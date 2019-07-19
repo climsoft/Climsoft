@@ -72,9 +72,6 @@
         End If
     End Sub
 
-    ''' <summary>
-    ''' Sets upper and lower limits validation curent selected element
-    ''' </summary>
     Public Overrides Function ValidateValue() As Boolean
         Dim bValid As Boolean
 
@@ -135,6 +132,7 @@
         Next
     End Sub
 
+    'TODO. Push this to the table entry level
     Protected Overrides Sub ValidateDataEntryPermission()
         Dim bEnabled As Boolean = False
 
