@@ -18,11 +18,11 @@ Public Class ucrHourlyWind
             shiftCells.SetUpShiftCellsMenuStrips(New ContextMenuStrip, allVFP)
 
             'set up the value flag period first
-            Dim ucrVFP As ucrDirectionSpeedFlag
+            Dim ucrDSF As ucrDirectionSpeedFlag
             For Each ctr As Control In Me.Controls
-                If TypeOf ctr Is ucrValueFlagPeriod Then
-                    ucrVFP = DirectCast(ctr, ucrDirectionSpeedFlag)
-                    ucrVFP.SetInnerControlsFieldNames(strDirectionFieldName & ucrVFP.FieldName, strSpeedFieldName & ucrVFP.FieldName, strFlagFieldName & ucrVFP.FieldName)
+                If TypeOf ctr Is ucrDirectionSpeedFlag Then
+                    ucrDSF = DirectCast(ctr, ucrDirectionSpeedFlag)
+                    ucrDSF.SetInnerControlsFieldNames(strDirectionFieldName & ucrDSF.FieldName, strSpeedFieldName & ucrDSF.FieldName, strFlagFieldName & ucrDSF.FieldName)
                 End If
             Next
 

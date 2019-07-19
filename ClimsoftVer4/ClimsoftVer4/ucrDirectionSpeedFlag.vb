@@ -286,13 +286,13 @@ Public Class ucrDirectionSpeedFlag
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
-                    RaiseEvent evtGoToNextDSFControl(Me, e)
+                    'RaiseEvent evtGoToNextDSFControl(Me, e)
                 ElseIf ValidateText(ucrDDFF.GetValue) Then
-                    RaiseEvent evtGoToNextDSFControl(Me, e)
+                    'RaiseEvent evtGoToNextDSFControl(Me, e)
                     'ElseIf ucrDDFF.GetValue = "M"
                     '    RaiseEvent evtGoToNextDSFControl(Me, e)
                 Else
-                    DoQCForUcrDDFFInput()
+                    'DoQCForUcrDDFFInput()
                 End If
             End If
         End If
@@ -358,7 +358,7 @@ Public Class ucrDirectionSpeedFlag
                     ucrSpeed.bValidateSilently = bValidateSilently
 
                     bValuesCorrect = (bDirectionValid AndAlso bSpeedValid)
-                    ucrDDFF.SetBackColor(If(bValuesCorrect, Color.White, Color.Red))
+                    ucrDDFF.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
 
                 Else
                     bValuesCorrect = False
@@ -468,6 +468,11 @@ Public Class ucrDirectionSpeedFlag
         If IncludeFlag Then
             ucrFlag.SetValueFromDataTable(dtbValues)
         End If
+
+        Dim bSuppressChangedEvents As Boolean = ucrDDFF.bSuppressChangedEvents
+        ucrDDFF.bSuppressChangedEvents = True
+        ucrDDFF.SetValue(ucrDirection.GetValue + "" + ucrSpeed.GetValue + "" + ucrFlag.GetValue)
+        ucrDDFF.bSuppressChangedEvents = bSuppressChangedEvents
 
         If 1 = 1 Then
             Return
