@@ -1,8 +1,5 @@
 ﻿
 Public Class ucrTextBox
-
-    Private bToUpper As Boolean = False
-    Private bToLower As Boolean = False
     Private bFirstLoad As Boolean = True
     Protected bIsReadOnly As Boolean = False
 
@@ -33,7 +30,7 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        ChangeCase()
+
     End Sub
 
     Public Overrides Sub PopulateControl()
@@ -85,14 +82,17 @@ Public Class ucrTextBox
     End Property
 
     Public Sub SetTextToUpper()
-        bToUpper = True
-        bToLower = False
+        txtBox.CharacterCasing = CharacterCasing.Upper
     End Sub
 
     Public Sub SetTextToLower()
-        bToLower = True
-        bToUpper = False
+        txtBox.CharacterCasing = CharacterCasing.Lower
     End Sub
+
+    Public Sub SetTextToNormal()
+        txtBox.CharacterCasing = CharacterCasing.Normal
+    End Sub
+
     ''' <summary>
     ''' Sets validation of the textbox to none
     ''' </summary>
@@ -325,18 +325,6 @@ Public Class ucrTextBox
     Public Overrides Sub SetBackColor(backColor As Color)
         txtBox.BackColor = backColor
     End Sub
-
-    ''' <summary>
-    ''' Returns converted text either to lower or upper case
-    ''' </summary>
-    Public Sub ChangeCase()
-        If bToLower Then
-            txtBox.Text = txtBox.Text.ToLower()
-        ElseIf bToUpper Then
-            txtBox.Text = txtBox.Text.ToUpper()
-        End If
-    End Sub
-
 
     ''' <summary>
     '''Sets the textbox as a read only 

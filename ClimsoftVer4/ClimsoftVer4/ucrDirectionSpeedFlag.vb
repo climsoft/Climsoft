@@ -201,6 +201,8 @@ Public Class ucrDirectionSpeedFlag
     ''' </summary>
     ''' <returns></returns>
     Public Overrides Function ValidateValue() As Boolean
+        DoQCForUcrDDFFInput()
+        'Return ValidateText(ucrDDFF.GetValue)
         Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
     End Function
 
@@ -287,15 +289,15 @@ Public Class ucrDirectionSpeedFlag
                 If ucrDDFF.IsEmpty Then
                     ucrFlag.SetValue("M")
                     'RaiseEvent evtGoToNextDSFControl(Me, e)
-                ElseIf ValidateText(ucrDDFF.GetValue) Then
+                    'ElseIf ValidateText(ucrDDFF.GetValue) Then
                     'RaiseEvent evtGoToNextDSFControl(Me, e)
-                    'ElseIf ucrDDFF.GetValue = "M"
+                    'ElseIf ucrDDFF.GetValue = "M" Then
                     '    RaiseEvent evtGoToNextDSFControl(Me, e)
-                Else
+                    'Else
                     'DoQCForUcrDDFFInput()
                 End If
             End If
-        End If
+            End If
 
         OnevtKeyDown(Me, e)
     End Sub
@@ -471,7 +473,11 @@ Public Class ucrDirectionSpeedFlag
 
         Dim bSuppressChangedEvents As Boolean = ucrDDFF.bSuppressChangedEvents
         ucrDDFF.bSuppressChangedEvents = True
-        ucrDDFF.SetValue(ucrDirection.GetValue + "" + ucrSpeed.GetValue + "" + ucrFlag.GetValue)
+        If ucrDirection.IsEmpty AndAlso ucrSpeed.IsEmpty AndAlso ucrFlag.GetValue = "M" Then
+            ucrDDFF.SetValue("")
+        Else
+            ucrDDFF.SetValue(ucrDirection.GetValue + "" + ucrSpeed.GetValue + "" + ucrFlag.GetValue)
+        End If
         ucrDDFF.bSuppressChangedEvents = bSuppressChangedEvents
 
         If 1 = 1 Then

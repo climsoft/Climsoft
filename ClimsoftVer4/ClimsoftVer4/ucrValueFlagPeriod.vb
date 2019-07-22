@@ -30,6 +30,7 @@
         SetPeriodField(strPeriodFieldName)
         IncludePeriod = True
     End Sub
+
     'added this to set value and flag field
     Public Sub SetValueFlagFields(strValueFieldName As String, strFlagFieldName As String)
         SetFields(New List(Of String)({strValueFieldName, strFlagFieldName}))
@@ -267,35 +268,35 @@
         'MsgBox(CurrentEntryValue & " 0")
         'Me.ucrValue.TextboxValue = ""
         If e.KeyCode = Keys.Enter Then
-            If sender Is ucrValue Then
+            'If sender Is ucrValue Then
 
-                ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
-                'Compare_Entry(ucrValue.TextboxValue)
+            '    ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
+            '    'Compare_Entry(ucrValue.TextboxValue)
 
-                'check ucrValue input. if value is empty then set flag as M else remove the M
-                If ucrValue.IsEmpty Then
-                    ucrFlag.SetValue("M")
-                    RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
-                ElseIf ValidateText(ucrValue.GetValue) Then
-                    'ucrValue.OnevtValueChanged(Me, e)
-                    RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
+            '    'check ucrValue input. if value is empty then set flag as M else remove the M
+            If ucrValue.IsEmpty Then
+                ucrFlag.SetValue("M")
+                '        RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
+                '    ElseIf ValidateText(ucrValue.GetValue) Then
+                '        'ucrValue.OnevtValueChanged(Me, e)
+                '        RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
 
-                Else
-                    DoQCForValue()
-                End If
-            ElseIf sender Is ucrFlag Then
-                If IsElementFlagValid() Then
-                    'My.Computer.Keyboard.SendKeys("{TAB}")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                End If
-            ElseIf sender Is ucrPeriod Then
-                If IsElementPeriodValid() Then
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                End If
+                '    Else
+                '        DoQCForValue()
+                '    End If
+                'ElseIf sender Is ucrFlag Then
+                '    If IsElementFlagValid() Then
+                '        'My.Computer.Keyboard.SendKeys("{TAB}")
+                '        RaiseEvent evtGoToNextVFPControl(Me, e)
+                '    End If
+                'ElseIf sender Is ucrPeriod Then
+                '    If IsElementPeriodValid() Then
+                '        RaiseEvent evtGoToNextVFPControl(Me, e)
+                '    End If
             End If
         End If
 
-        OnevtKeyDown(Me, e)
+            OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
