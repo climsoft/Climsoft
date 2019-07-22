@@ -175,7 +175,7 @@ Public Class ucrTextBox
             ElseIf iType = 3 Then
                 SetBackColor(Color.Red)
                 If Not bValidateSilently Then
-                    MessageBox.Show("Correct Flag expected! Flags allowed are M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Correct Flag expected! Flags allowed are: M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
             Return (iType = 0)
@@ -222,7 +222,7 @@ Public Class ucrTextBox
                     Select Case strValidationType
                         Case "flag"
                             If Not bValidateSilently Then
-                                MessageBox.Show("Correct Flag expected! Flags allowed are M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                MessageBox.Show("Correct Flag expected! Flags allowed are: M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                     End Select
             End Select
