@@ -313,8 +313,10 @@ Public Class ucrDirectionSpeedFlag
         Dim bValuesCorrect As Boolean = False
         Dim bValidateSilently As Boolean
         Dim bSuppressChangedEvents As Boolean
+        Dim strDDFF As String
 
-        If ucrDDFF.IsEmpty() Then
+        strDDFF = ucrDDFF.GetValue
+        If String.IsNullOrEmpty(strDDFF) Then
             'empty ucrDDFF is a valid value
             bValuesCorrect = True
             ucrDirection.SetValue("")
@@ -325,29 +327,31 @@ Public Class ucrDirectionSpeedFlag
             End If
         Else
             'check for an observation flag. Must be the last character if it's included
-            If Not IsNumeric(Strings.Right(ucrDDFF.GetValue, 1)) AndAlso IsNumeric(Strings.Left(ucrDDFF.GetValue, Strings.Len(ucrDDFF.GetValue) - 1)) Then
+            If Not IsNumeric(Strings.Right(strDDFF, 1)) AndAlso IsNumeric(Strings.Left(strDDFF, Strings.Len(strDDFF) - 1)) Then
                 'Get observation flag (last character) and set it to ucrFlag
-                ucrFlag.SetValue(If(Strings.Right(ucrDDFF.GetValue, 1) = "M", "", Strings.Right(ucrDDFF.GetValue, 1)))
+                ucrFlag.SetValue(If(Strings.Right(strDDFF, 1) = "M", "", Strings.Right(strDDFF, 1)))
 
                 'Remove the last character and set the result as the new DDFF value 
-                bSuppressChangedEvents = ucrDDFF.bSuppressChangedEvents
-                ucrDDFF.bSuppressChangedEvents = True
-                ucrDDFF.SetValue(Strings.Left(ucrDDFF.GetValue, Strings.Len(ucrDDFF.GetValue) - 1))
-                ucrDDFF.bSuppressChangedEvents = bSuppressChangedEvents
+                'bSuppressChangedEvents = ucrDDFF.bSuppressChangedEvents
+                'ucrDDFF.bSuppressChangedEvents = True
+                'ucrDDFF.SetValue(Strings.Left(strDDFF, Strings.Len(strDDFF) - 1))
+                'ucrDDFF.bSuppressChangedEvents = bSuppressChangedEvents
+
+                strDDFF =Strings.Left(strDDFF, Strings.Len(strDDFF) - 1)
             Else
                 'remove the flag
                 ucrFlag.SetValue("")
             End If
 
-            If IsNumeric(ucrDDFF.GetValue) Then
+            If IsNumeric(strDDFF) Then
                 'check the length of DDFF matches with direction and speed digits
-                If ucrDDFF.GetValue.Length = iDirectionDigits + iSpeedDigits Then
+                If strDDFF.Length = iDirectionDigits + iSpeedDigits Then
                     Dim bDirectionValid As Boolean
                     Dim bSpeedValid As Boolean
 
                     'separate dd and ff 
-                    ucrDirection.SetValue(Strings.Left(ucrDDFF.GetValue, iDirectionDigits))
-                    ucrSpeed.SetValue(Strings.Right(ucrDDFF.GetValue, iSpeedDigits))
+                    ucrDirection.SetValue(Strings.Left(strDDFF, iDirectionDigits))
+                    ucrSpeed.SetValue(Strings.Right(strDDFF, iSpeedDigits))
 
                     'validate the direction and speed values
                     bValidateSilently = ucrDirection.bValidateSilently
@@ -375,10 +379,10 @@ Public Class ucrDirectionSpeedFlag
                     ucrFlag.SetValue("M")
                     ucrDDFF.SetValue("")
                     bValuesCorrect = True
-                    ucrDDFF.SetBackColor(Color.White)
+                    ucrDDFF.SetBackColor(clValidColor)
                 Else
                     bValuesCorrect = False
-                    ucrDDFF.SetBackColor(Color.Red)
+                    ucrDDFF.SetBackColor(clInValidColor)
                     MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
 
