@@ -268,6 +268,7 @@ Public Class ucrDirectionSpeedFlag
             ucrSpeed.SetAsReadOnly()
             ucrSpeed.SetValidColor(SystemColors.Control)
 
+            ucrFlag.SetValidationTypeAsFlag()
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
             ucrFlag.SetValidColor(SystemColors.Control)

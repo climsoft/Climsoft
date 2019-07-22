@@ -100,6 +100,10 @@ Public Class ucrTextBox
         strValidationType = "none"
     End Sub
 
+    Public Sub SetValidationTypeAsFlag()
+        strValidationType = "flag"
+    End Sub
+
     ''' <summary>
     ''' Sets validation of the textbox to numeric
     ''' </summary>
@@ -146,6 +150,8 @@ Public Class ucrTextBox
             End If
 
             iType = GetValidationCode(txtBox.Text)
+
+            'TODO. CHANGE THIS IMPLEMENTATION. THE VALIDATION TYPE SHOULD DICTATE THE VALIDATION CODE. WE NEED TO CHECK ON THE VALIDATION TYPE BEFORE VALIDATION CODE
             If iType = 0 Then
                 SetBackColor(clValidColor)
             ElseIf iType = 1 Then
@@ -165,6 +171,11 @@ Public Class ucrTextBox
                     If Not bValidateSilently Then
                         MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     End If
+                End If
+            ElseIf iType = 3 Then
+                SetBackColor(Color.Red)
+                If Not bValidateSilently Then
+                    MessageBox.Show("Correct Flag expected! Flags allowed are M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
             Return (iType = 0)
@@ -207,6 +218,13 @@ Public Class ucrTextBox
                                 MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                     End Select
+                Case 3
+                    Select Case strValidationType
+                        Case "flag"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Correct Flag expected! Flags allowed are M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                    End Select
             End Select
             Return (iValidationCode = 0)
         Else
@@ -222,6 +240,8 @@ Public Class ucrTextBox
                 iType = 0
             Case "numeric"
                 iType = ValidateNumeric(strText)
+            Case "flag"
+                iType = ValidateFlag(strText)
         End Select
         Return iType
     End Function
@@ -245,6 +265,17 @@ Public Class ucrTextBox
             End If
         Else
             iType = 1
+        End If
+        Return iType
+    End Function
+
+    Private Function ValidateFlag(strText As String) As Integer
+        Dim iType As Integer
+        Dim strNewText As String = strText.ToUpper
+        If strNewText = "M" OrElse strNewText = "T" OrElse strNewText = "E" OrElse strNewText = "G" OrElse strNewText = "D" Then
+            iType = 0
+        Else
+            iType = 3
         End If
         Return iType
     End Function
@@ -276,6 +307,7 @@ Public Class ucrTextBox
         End If
         Return strRange
     End Function
+
     ''' <summary>
     ''' Returns the minimum decimal number for the control
     ''' </summary>
