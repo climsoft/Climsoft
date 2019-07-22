@@ -201,9 +201,9 @@ Public Class ucrDirectionSpeedFlag
     ''' </summary>
     ''' <returns></returns>
     Public Overrides Function ValidateValue() As Boolean
-        DoQCForUcrDDFFInput()
+        Return DoQCForUcrDDFFInput()
         'Return ValidateText(ucrDDFF.GetValue)
-        Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
+        'Return IsElementDirectionValueValid() AndAlso IsElementSpeedValueValid() AndAlso IsElementFlagValueValid()
     End Function
 
     Public Function IsElementDirectionValueValid() As Boolean
@@ -218,7 +218,9 @@ Public Class ucrDirectionSpeedFlag
         Dim bValuesCorrect As Boolean = True
 
         'if any value is empty then set flag as M else remove the M
-        If ucrDirection.IsEmpty OrElse ucrSpeed.IsEmpty Then
+        If Not ucrFlag.ValidateValue Then
+            bValuesCorrect = False
+        ElseIf ucrDirection.IsEmpty OrElse ucrSpeed.IsEmpty Then
             If ucrFlag.GetValue = "M" OrElse ucrFlag.IsEmpty Then
                 bValuesCorrect = True
             Else
@@ -268,6 +270,7 @@ Public Class ucrDirectionSpeedFlag
             ucrSpeed.SetAsReadOnly()
             ucrSpeed.SetValidColor(SystemColors.Control)
 
+            ucrFlag.bValidateSilently = True
             ucrFlag.SetValidationTypeAsFlag()
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
@@ -305,7 +308,7 @@ Public Class ucrDirectionSpeedFlag
 
     Private Sub ucrDDFF_ValueChanged(sender As Object, e As EventArgs) Handles ucrDDFF.evtValueChanged
         DoQCForUcrDDFFInput()
-        IsElementFlagValueValid()
+        'IsElementFlagValueValid()
         OnevtValueChanged(Me, e)
     End Sub
 
@@ -314,6 +317,9 @@ Public Class ucrDirectionSpeedFlag
         Dim bValidateSilently As Boolean
         Dim bSuppressChangedEvents As Boolean
         Dim strDDFF As String
+        Dim bDirectionValid As Boolean
+        Dim bSpeedValid As Boolean
+        Dim bFlagValid As Boolean
 
         strDDFF = ucrDDFF.GetValue
         If String.IsNullOrEmpty(strDDFF) Then
@@ -331,6 +337,7 @@ Public Class ucrDirectionSpeedFlag
                 'Get observation flag (last character) and set it to ucrFlag
                 ucrFlag.SetValue(If(Strings.Right(strDDFF, 1) = "M", "", Strings.Right(strDDFF, 1)))
 
+
                 'Remove the last character and set the result as the new DDFF value 
                 'bSuppressChangedEvents = ucrDDFF.bSuppressChangedEvents
                 'ucrDDFF.bSuppressChangedEvents = True
@@ -343,11 +350,10 @@ Public Class ucrDirectionSpeedFlag
                 ucrFlag.SetValue("")
             End If
 
+
             If IsNumeric(strDDFF) Then
                 'check the length of DDFF matches with direction and speed digits
                 If strDDFF.Length = iDirectionDigits + iSpeedDigits Then
-                    Dim bDirectionValid As Boolean
-                    Dim bSpeedValid As Boolean
 
                     'separate dd and ff 
                     ucrDirection.SetValue(Strings.Left(strDDFF, iDirectionDigits))
@@ -364,7 +370,17 @@ Public Class ucrDirectionSpeedFlag
                     bSpeedValid = ucrSpeed.ValidateValue()
                     ucrSpeed.bValidateSilently = bValidateSilently
 
-                    bValuesCorrect = (bDirectionValid AndAlso bSpeedValid)
+                    bValidateSilently = ucrFlag.bValidateSilently
+                    ucrFlag.bValidateSilently = False
+                    bFlagValid = ucrFlag.ValidateValue()
+                    ucrFlag.bValidateSilently = bValidateSilently
+
+                    If ucrFlag.GetValue = "M" Then
+                        bFlagValid = False
+                        MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+                        ucrFlag.SetBackColor(Color.Cyan)
+                    End If
+                    bValuesCorrect = (bDirectionValid AndAlso bSpeedValid AndAlso bFlagValid)
                     ucrDDFF.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
 
                 Else
@@ -386,9 +402,7 @@ Public Class ucrDirectionSpeedFlag
                     MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End If
 
-                'bValuesCorrect = False
-                'ucrDDFF.SetBackColor(Color.Red)
-                'MessageBox.Show("Number expected!", "DDFF Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
 
             End If
         End If

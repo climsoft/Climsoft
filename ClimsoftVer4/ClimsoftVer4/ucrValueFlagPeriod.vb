@@ -230,7 +230,9 @@
         Dim bValuesCorrect As Boolean = True
 
         'if value is empty then set flag as M else remove the M
-        If ucrValue.IsEmpty Then
+        If Not ucrFlag.ValidateValue Then
+            bValuesCorrect = False
+        ElseIf ucrValue.IsEmpty Then
             If Not ucrFlag.IsEmpty AndAlso ucrFlag.GetValue <> "M" Then
                 MessageBox.Show("M is the expected flag for a missing value", "Flag Entry", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 ucrFlag.SetBackColor(Color.Cyan)
@@ -254,10 +256,12 @@
         If bFirstLoad Then
             ucrValue.bValidateSilently = True
             ucrValue.SetValidationTypeAsNumeric()
+
             ucrFlag.SetTextToUpper()
             ucrFlag.SetAsReadOnly()
-            'ucrFlag being a readonly. This makes its back color to be just like that of readonly when it has a valid value
-            ucrFlag.SetValidColor(SystemColors.Control)
+            ucrFlag.bValidateSilently = True
+            ucrFlag.SetValidationTypeAsFlag()
+            ucrFlag.SetValidColor(SystemColors.Control) 'ucrFlag being a readonly. This makes its back color to be just like that of readonly when it has a valid value
             SetTextBoxSize()
             bFirstLoad = False
         End If
@@ -305,50 +309,61 @@
 
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
         DoQCForValue()
-        IsElementFlagValid()
+        'IsElementFlagValid()
         OnevtValueChanged(Me, e) 'this is where there is the problem. Its being called twice
     End Sub
 
     Private Function DoQCForValue() As Boolean
         Dim bValuesCorrect As Boolean = False
+        Dim bValueValid As Boolean = False
+        Dim bFlagValid As Boolean = False
         Dim bValidateSilently As Boolean
         Dim bNewSuppressChangedEvents As Boolean
-
-        If ucrValue.IsEmpty Then
+        Dim strVF As String
+        strVF = ucrValue.GetValue
+        If String.IsNullOrEmpty(strVF) Then
             bValuesCorrect = True
             If Not ucrFlag.IsEmpty AndAlso ucrFlag.GetValue <> "M" Then
-                'remove the flag
-                ucrFlag.SetValue("")
+                ucrFlag.SetValue("") 'remove the flag
             End If
         Else
             'Check for an observation flag in the ucrValue.
             'If a flag exists then separate and place it in the  ucrValueFlag 
-            If Not IsNumeric(Strings.Right(ucrValue.GetValue, 1)) AndAlso IsNumeric(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1)) Then
+            If Not IsNumeric(Strings.Right(strVF, 1)) AndAlso IsNumeric(Strings.Left(strVF, Strings.Len(strVF) - 1)) Then
                 'Get observation flag from the ucrValue (the last character). If its an "M" just set flag as empty text
                 ucrFlag.SetValue(If(Strings.Right(ucrValue.GetValue, 1) = "M", "", Strings.Right(ucrValue.GetValue, 1)))
 
-                'Get the observation value by leaving out the last character  
-                bNewSuppressChangedEvents = ucrValue.bSuppressChangedEvents
-                ucrValue.bSuppressChangedEvents = True
-                ucrValue.SetValue(Strings.Left(ucrValue.GetValue, Strings.Len(ucrValue.GetValue) - 1))
-                ucrValue.bSuppressChangedEvents = bNewSuppressChangedEvents
+                If ucrFlag.ValidateValue() Then
+                    'Get the observation value by leaving out the last character  
+                    bNewSuppressChangedEvents = ucrValue.bSuppressChangedEvents
+                    ucrValue.bSuppressChangedEvents = True
+                    ucrValue.SetValue(Strings.Left(strVF, Strings.Len(strVF) - 1))
+                    ucrValue.bSuppressChangedEvents = bNewSuppressChangedEvents
+                End If
+
             Else
-                'if the value is just an M, then interpret it as a user's intention to put missing value
-                'If ucrValue.GetValue = "M" Then
-                '    ucrFlag.SetValue("M")
-                '    ucrValue.SetValue("")
-                'Else
-                '    'remove the flag
-                '    ucrFlag.SetValue("")
-                'End If
                 ucrFlag.SetValue("")
             End If
 
-            'validate value loudly  
+            'validate values loudly  
             bValidateSilently = ucrValue.bValidateSilently
             ucrValue.bValidateSilently = False
-            bValuesCorrect = ucrValue.ValidateValue()
+            bValueValid = ucrValue.ValidateValue()
             ucrValue.bValidateSilently = bValidateSilently
+
+
+            bValidateSilently = ucrFlag.bValidateSilently
+            ucrFlag.bValidateSilently = False
+            bFlagValid = ucrFlag.ValidateValue()
+            ucrFlag.bValidateSilently = bValidateSilently
+
+            'If ucrFlag.GetValue = "M" Then
+            '    bFlagValid = False
+            '    MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
+            '    ucrFlag.SetBackColor(Color.Cyan)
+            'End If
+            bValuesCorrect = (bValueValid AndAlso bFlagValid)
+            ucrValue.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
         End If
         Return bValuesCorrect
     End Function
