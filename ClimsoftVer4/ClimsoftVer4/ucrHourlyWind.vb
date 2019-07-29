@@ -102,9 +102,9 @@ Public Class ucrHourlyWind
             Me.Clear()
             Me.ucrDirectionSpeedFlag0.ucrDDFF.GetFocus()
             With frmNewHourlyWind
-                .btnAddNew.Enabled = False
+                .btnAddNew.Enabled = True
                 .btnSave.Enabled = False
-                .btnUpdate.Enabled = True
+                .btnUpdate.Enabled = False
             End With
         End If
 

@@ -273,22 +273,22 @@ Public Class ucrValueFlagPeriod
 
                 'check ucrValue input. if value is empty then set flag as M else remove the M
                 If ucrValue.IsEmpty Then
-                    ucrFlag.SetValue("M")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                ElseIf ValidateText(ucrValue.GetValue) Then
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                    'ElseIf ucrValue.GetValue = "M"
-                    '    RaiseEvent evtGoToNextVFPControl(Me, e)
-                Else
-                    DoQCForValue()
-                End If
-            ElseIf sender Is ucrFlag Then
-                If IsElementFlagValid() Then
-                    'My.Computer.Keyboard.SendKeys("{TAB}")
-                    RaiseEvent evtGoToNextVFPControl(Me, e)
-                End If
-            ElseIf sender Is ucrPeriod Then
-                If IsElementPeriodValid() Then
+                        ucrFlag.SetValue("M")
+                        RaiseEvent evtGoToNextVFPControl(Me, e)
+                    ElseIf ValidateText(ucrValue.GetValue) Then
+                        RaiseEvent evtGoToNextVFPControl(Me, e)
+                        'ElseIf ucrValue.GetValue = "M"
+                        '    RaiseEvent evtGoToNextVFPControl(Me, e)
+                    Else
+                        DoQCForValue()
+                    End If
+                ElseIf sender Is ucrFlag Then
+                    If IsElementFlagValid() Then
+                        'My.Computer.Keyboard.SendKeys("{TAB}")
+                        RaiseEvent evtGoToNextVFPControl(Me, e)
+                    End If
+                ElseIf sender Is ucrPeriod Then
+                    If IsElementPeriodValid() Then
                     RaiseEvent evtGoToNextVFPControl(Me, e)
                 End If
             End If
@@ -392,6 +392,7 @@ Public Class ucrValueFlagPeriod
     End Sub
 
     Sub Compare_Entry(obsv As String)
+
         Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim constr As String
         Dim frm, stn, elm, yy, mm, dd, hh, dttime, obsv1, C1, cpVal As String
@@ -400,70 +401,87 @@ Public Class ucrValueFlagPeriod
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr
         conn.Open()
-        'MsgBox(CurrentEntryValue)
+        'MsgBox("Comparing values")
 
-        'MsgBox(frmNewSynopticRA1.ucrStationSelector.cboValues.SelectedValue)
-
+        ' Get the current form
         With frmKeyEntry.ListView1
-                For i = 0 To .Items.Count - 1
-                    If .Items(i).Selected = True Then
-                        frm = .Items(i).SubItems(0).Text
-                        Exit For
-                    End If
-                Next
+            For i = 0 To .Items.Count - 1
+                If .Items(i).Selected = True Then
+                    frm = .Items(i).SubItems(0).Text
+                    Exit For
+                End If
+            Next
 
             'MsgBox(frm)
             Select Case frm
                 Case "form_synoptic_2_ra1"
                     Try
                         With frmNewSynopticRA1
+                            conn.Close()
                             If Not .chkRepeatEntry.Checked Then
                                 Exit Sub
                             End If
                             stn = .ucrStationSelector.cboValues.SelectedValue
                             elm = .ucrSynopticRA1.ActiveControl.Tag
-                            yy = .ucrYearSelector.cboValues.SelectedValue
-                            mm = .ucrMonth.cboValues.SelectedValue
-                            dd = .ucrDay.cboValues.SelectedValue
-                            hh = .ucrHour.cboValues.SelectedValue
+                            yy = .ucrYearSelector.cboValues.Text
+                            mm = .ucrMonth.cboValues.Text
+                            dd = .ucrDay.cboValues.Text
+                            hh = .ucrHour.cboValues.Text
+                            'MsgBox(stn & elm & yy & mm & dd & hh)
                         End With
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             ' Start Verification process
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
                 Case "form_daily2"
                     Try
                         With frmNewFormDaily2
                             If Not .chkRepeatEntry.Checked Then
+                                conn.Close()
                                 Exit Sub
                             End If
                             stn = .ucrStationSelector.cboValues.SelectedValue
                             elm = .ucrElementSelector.cboValues.SelectedValue
-                            yy = .ucrYearSelector.cboValues.SelectedValue
-                            mm = .ucrMonth.cboValues.SelectedValue
+                            'yy = .ucrYearSelector.cboValues.SelectedValue
+                            'mm = .ucrMonth.cboValues.SelectedValue
+                            'dd = Mid(.ucrFormDaily.ActiveControl.Name, 19, Len(.ucrFormDaily.ActiveControl.Name) - 18)
+                            'hh = .ucrHour.cboValues.SelectedValue
+
+                            'stn = .ucrStationSelector.cboValues.Text
+                            'elm = .ucrElementSelector.cboValues.Text
+                            yy = .ucrYearSelector.cboValues.Text
+                            mm = .ucrMonth.cboValues.Text
                             dd = Mid(.ucrFormDaily.ActiveControl.Name, 19, Len(.ucrFormDaily.ActiveControl.Name) - 18)
-                            hh = .ucrHour.cboValues.SelectedValue
+                            hh = .ucrHour.cboValues.Text
                         End With
+
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
                         'MsgBox(stn & " " & elm & " " & yy & " " & mm & " " & dd & " " & hh & " " & obsv1)
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
                 Case "form_hourly"
                     Try
                         With frmNewHourly
                             If Not .chkRepeatEntry.Checked Then
+                                conn.Close()
                                 Exit Sub
                             End If
                             stn = .ucrStationSelector.cboValues.SelectedValue
@@ -476,22 +494,25 @@ Public Class ucrValueFlagPeriod
                         End With
 
                         If Not objKeyPress.Entered_Value(conn, stn, elm, yy, mm, dd, hh, obsv1) Then
+                            conn.Close()
                             MsgBox("Can't Verify: Record does not exist")
                             Exit Sub
                         Else
                             'MsgBox(obsv1)
                             Validate_Entry(obsv, obsv1, stn, elm, yy, mm, dd, hh)
                         End If
+                        conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message)
+                        conn.Close()
                     End Try
-                Case "form_monthly"
             End Select
         End With
 
-
+        conn.Close()
     End Sub
     Sub Validate_Entry(obsv As String, obsv1 As String, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String)
+
         Dim Conflict As Boolean
         Dim C1, cpVal As String
 

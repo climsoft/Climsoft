@@ -57,6 +57,7 @@
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+
         Dim dctSequencerFields As New Dictionary(Of String, List(Of String))
 
         btnAddNew.Enabled = False
@@ -65,15 +66,44 @@
         btnUpdate.Enabled = False
         btnSave.Enabled = True
 
-        ' temporary until we know how to get all fields from table without specifying names
+        If chkRepeatEntry.Checked = False Then
+            ' temporary until we know how to get all fields from table without specifying names
 
-        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
-        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+            dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+            dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
 
-        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay}), ucrYear:=ucrYearSelector)
+            ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay}), ucrYear:=ucrYearSelector)
 
-        ucrHourlyWind.Focus()
+            ucrHourlyWind.Focus()
 
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourlywind", ucrStationSelector.cboValues.Text)
+
+        Else
+
+
+            Dim stn As String
+            Dim recdate As Date
+
+            btnAddNew.Enabled = True
+            btnClear.Enabled = False
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnSave.Enabled = False
+
+            ' Compute the new header entries for the next record
+            stn = ucrStationSelector.cboValues.SelectedValue
+            recdate = DateSerial(ucrYearSelector.cboValues.Text, ucrMonth.cboValues.Text, ucrDay.cboValues.Text)
+            recdate = DateAdd("d", 1, recdate)
+
+            ucrStationSelector.cboValues.SelectedValue = stn
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(recdate)
+            ucrMonth.cboValues.Text = DateAndTime.Month(recdate)
+            ucrDay.cboValues.Text = DateAndTime.Day(recdate)
+            ucrHourlyWind.Focus()
+
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -288,5 +318,6 @@
             btnSave.Enabled = True
         End If
     End Sub
+
 
 End Class

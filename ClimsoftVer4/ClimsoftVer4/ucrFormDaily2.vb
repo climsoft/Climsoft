@@ -100,9 +100,9 @@ Public Class ucrFormDaily2
             Me.Clear()
             ucrValueFlagPeriod1.ucrValue.GetFocus()
             With frmNewFormDaily2
-                .btnAddNew.Enabled = False
+                .btnAddNew.Enabled = True
                 .btnCommit.Enabled = False
-                .btnUpdate.Enabled = True
+                .btnUpdate.Enabled = False
             End With
         End If
     End Sub
@@ -666,9 +666,10 @@ Public Class ucrFormDaily2
             Else
                 e.Result = strResult
             End If
-
+            conn.Close()
         Catch ex As Exception
             e.Result = "Error " & ex.Message
+            conn.Close()
         Finally
             conn.Close()
         End Try

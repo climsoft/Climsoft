@@ -53,12 +53,45 @@
         btnUpdate.Enabled = False
         btnCommit.Enabled = True
 
-        dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
-        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
-        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
-        ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
-
         ucrHourly.Focus()
+
+        If chkRepeatEntry.Checked = False Then
+            dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+            dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+            dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+            ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+
+            'ucrHourly.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourly", ucrStationSelector.cboValues.Text)
+        Else
+            'ucrHourly.Focus()
+            Dim stn As String
+            Dim recdate As Date
+
+            btnAddNew.Enabled = True
+            btnClear.Enabled = False
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnCommit.Enabled = False
+
+            ucrHourly.Focus()
+            ucrHourly.Clear()
+
+            ' Compute the new header entries for the next record
+            stn = ucrStationSelector.cboValues.SelectedValue
+            recdate = DateSerial(ucrYearSelector.cboValues.Text, ucrMonth.cboValues.Text, ucrDay.cboValues.Text)
+            recdate = DateAdd("d", 1, recdate)
+
+            ucrStationSelector.cboValues.SelectedValue = stn
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(recdate)
+            ucrMonth.cboValues.Text = DateAndTime.Month(recdate)
+            ucrDay.cboValues.Text = DateAndTime.Day(recdate)
+
+
+        End If
 
     End Sub
 

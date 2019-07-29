@@ -18,6 +18,13 @@
         If FldName.Key_Entry_Mode(Me.Text) = "Double" Then
             chkRepeatEntry.Checked = True
         End If
+
+        'Set Sequencer Status
+        If FldName.Enable_Sequencer(Me.Text) Then
+            chkAutoFillValues.Checked = True
+        Else
+            chkAutoFillValues.Checked = False
+        End If
     End Sub
 
     Private Sub InitaliseDialog()
@@ -43,15 +50,52 @@
         btnUpdate.Enabled = False
         btnSave.Enabled = True
 
-        'temporary until we know how to get all fields from table without specifying names
-        dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
-        dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
-        dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
+        If chkRepeatEntry.Checked = False Then
+            'temporary until we know how to get all fields from table without specifying names
+            dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+            dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+            dctSequencerFields.Add("hh", New List(Of String)({"hh"}))
 
-        ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay, ucrHour}), ucrYear:=ucrYearSelector)
+            ucrNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrMonth, ucrDay, ucrHour}), ucrYear:=ucrYearSelector)
 
-        'Set focus of ucrSynopticRA1 first control 
-        ucrSynopticRA1.Focus()
+            'Set focus of ucrSynopticRA1 first control 
+            ucrSynopticRA1.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_synoptic_2_ra1", ucrStationSelector.cboValues.Text)
+        Else
+
+            Dim stn As String
+            Dim recdate As DateTime
+
+            btnAddNew.Enabled = True
+            btnClear.Enabled = False
+            btnDelete.Enabled = False
+            btnUpdate.Enabled = False
+            btnSave.Enabled = False
+
+            'ucrSynopticRA1.Focus()
+            ucrSynopticRA1.Clear()
+
+            ' Compute the new header entries for the next record
+            stn = ucrStationSelector.cboValues.SelectedValue
+            recdate = DateSerial(ucrYearSelector.cboValues.Text, ucrMonth.cboValues.Text, ucrDay.cboValues.Text) & " " & ucrHour.cboValues.Text & ":00"
+            recdate = DateAdd("h", 3, recdate)
+
+            'ucrStationSelector.cboValues.SelectedValue = stn
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(recdate)
+            ucrMonth.cboValues.Text = DateAndTime.Month(recdate)
+            ucrDay.cboValues.Text = DateAndTime.Day(recdate)
+            ucrHour.cboValues.Text = DateAndTime.Hour(recdate)
+
+            'dctSequencerFields.Add("elementId", New List(Of String)({"elementId"}))
+            'dctSequencerFields.Add("mm", New List(Of String)({"mm"}))
+            'dctSequencerFields.Add("dd", New List(Of String)({"dd"}))
+            'ucrHourlyNavigation.NewSequencerRecord(strSequencer:=txtSequencer.Text, dctFields:=dctSequencerFields, lstDateIncrementControls:=New List(Of ucrDataLinkCombobox)({ucrDay, ucrMonth}), ucrYear:=ucrYearSelector)
+
+            'ucrStationSelector.cboValues.SelectedValue = st
+        End If
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -339,4 +383,8 @@
         End If
     End Sub
 
+    Private Sub chkAutoFillValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoFillValues.CheckedChanged
+        'MsgBox(chkAutoFillValues.Checked)
+        FldName.Update_Sequencer(Me.Text, chkAutoFillValues.Checked)
+    End Sub
 End Class
