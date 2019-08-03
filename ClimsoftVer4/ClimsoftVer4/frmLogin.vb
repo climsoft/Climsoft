@@ -86,12 +86,13 @@ Public Class frmLogin
             languageTableInit()
             climsoftuserRoles()
 
-            'Newly added code
-            clsDataConnection.openConnection()
+            clsDataConnection.OpenConnection()
+            conn.Close()
 
         Catch e As Exception
             'MsgBox("Login failure")
             MsgBox(e.Message, MsgBoxStyle.Exclamation)
+            conn.Close()
         End Try
     End Sub
     Sub climsoftuserRoles()
