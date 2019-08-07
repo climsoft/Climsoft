@@ -34,7 +34,7 @@
         Dim bValid As Boolean = False
         Dim strCol As String
         Dim iYear As Integer
-        bValid = MyBase.ValidateValue
+        bValid = MyBase.ValidateValue()
         If Not bValid Then
             strCol = cboValues.DisplayMember
             'check if its an integer first
@@ -49,14 +49,20 @@
                         'check validity of short years
                 End Select
             End If
-            SetBackColor(If(bValid, Color.White, Color.Red))
+            SetBackColor(If(bValid, clValidColor, clInValidColor))
         End If
 
         Return bValid
     End Function
 
-    Private Sub ucrYearSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        cboValues.ContextMenuStrip = cmsYear
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            cboValues.ContextMenuStrip = cmsYear
+            bValidateEmpty = True
+            strValidationType = "numeric"
+            PopulateControl()
+            bFirstLoad = False
+        End If
     End Sub
 
     Public Sub SetViewTypeAsYear()

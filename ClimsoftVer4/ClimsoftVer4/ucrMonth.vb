@@ -62,4 +62,14 @@
         cmsMonthNames.Checked = False
         cmsMonthShortMonthNames.Checked = True
     End Sub
+
+    Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            bValidateEmpty = True
+            strValidationType = "exists"
+            PopulateControl()
+            bFirstLoad = False
+        End If
+    End Sub
+
 End Class

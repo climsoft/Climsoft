@@ -31,7 +31,7 @@ Public Class TableFilter
     Private bValuesFromDataCall As Boolean = False
     Private bArrayOperator As Boolean = False
     Private lstValues As List(Of String)
-    Private strValue As String
+    Private objValue As Object
     Public bValuesAsString As Boolean
     Private clsDataCallValues As DataCall
 
@@ -62,7 +62,7 @@ Public Class TableFilter
                     tblFilter.SetValues(lstValues, bClone:=True)
                 End If
             Else
-                tblFilter.SetValue(strValue)
+                tblFilter.SetValue(objValue)
             End If
         End If
 
@@ -100,8 +100,12 @@ Public Class TableFilter
 
     End Sub
 
+    Public Sub New(strNewField As String, strNewOperator As String, Optional objNewValue As Object = Nothing, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, objNewValue:=objNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+    End Sub
+
     Public Sub New(strNewField As String, strNewOperator As String, Optional strNewValue As String = "", Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
-        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, strNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+        SetFieldCondition(strNewField:=strNewField, strNewOperator:=strNewOperator, objNewValue:=strNewValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
     End Sub
 
     Public Sub New(strNewField As String, strNewOperator As String, Optional lstNewValue As List(Of String) = Nothing, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
@@ -111,6 +115,10 @@ Public Class TableFilter
     Public Sub New(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
         SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
+    End Sub
+
+    Public Sub New(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
+        SetFilters(lstTblFilters, strOperator:=strOperator)
     End Sub
 
     Public Sub SetField(strNewField As String)
@@ -157,8 +165,8 @@ Public Class TableFilter
 
 
 
-    Public Sub SetValue(strNewValue As String)
-        strValue = strNewValue
+    Public Sub SetValue(objNewValue As Object)
+        objValue = objNewValue
         bValuesFromDataCall = False
         bIsCombinedFilter = False
         SetIsArrayOperator(False)
@@ -187,10 +195,10 @@ Public Class TableFilter
         bValuesAsString = bForceValuesAsString
     End Sub
 
-    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, strNewValue As String, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+    Public Sub SetFieldCondition(strNewField As String, strNewOperator As String, objNewValue As Object, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
         SetField(strNewField:=strNewField)
         SetOperator(strNewOperator:=strNewOperator)
-        SetValue(strNewValue:=strNewValue)
+        SetValue(objNewValue:=objNewValue)
         SetIsPositiveCondition(bNewIsPositiveCondition:=bNewIsPositiveCondition)
         bValuesAsString = bForceValuesAsString
     End Sub
@@ -226,6 +234,32 @@ Public Class TableFilter
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
     End Sub
 
+    ''' <summary>
+    ''' Will combine the list of filters into one filter
+    ''' </summary>
+    ''' <param name="lstTblFilters"></param>
+    ''' <param name="strOperator"></param>
+    Public Sub SetFilters(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
+        Dim max As Integer = lstTblFilters.Count - 1
+        For i As Integer = 0 To max
+            If i = 0 Then
+                Me.SetLeftFilter(lstTblFilters(i))
+            Else
+                Me.SetLeftFilter(Me.Clone())
+            End If
+
+            If i <= max - 1 Then
+                Me.SetRightFilter(lstTblFilters(i + 1))
+                Me.SetOperator(strOperator)
+                If i + 1 = max Then
+                    Exit For
+                End If
+            End If
+
+        Next
+
+    End Sub
+
     'Public Function GetLinqExpression() As Func(Of Entity.DbSet, Boolean)
     '    ' e.g. x.stationId = "67774010"
     '    Return Function(x) CallByName(x, "stationId", CallType.Get) = "67774010"
@@ -246,9 +280,9 @@ Public Class TableFilter
                 End If
             Else
                 If bValuesAsString Then
-                    strExpression = strExpression & " " & strOperator & " " & Chr(34) & strValue & Chr(34)
+                    strExpression = strExpression & " " & strOperator & " " & Chr(34) & objValue & Chr(34)
                 Else
-                    strExpression = strExpression & " " & strOperator & " " & strValue
+                    strExpression = strExpression & " " & strOperator & " " & objValue
                 End If
             End If
         End If
@@ -258,4 +292,108 @@ Public Class TableFilter
         End If
         Return strExpression
     End Function
+
+    Public Function GetSqlExpression() As String
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            strExpression = clsLeftFilter.GetSqlExpression() & " " & strOperator & " " & clsRightFilter.GetSqlExpression()
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+                    strExpression = strExpression & " " & strOperator & " '" & objValue & "'"
+                Else
+                    strExpression = strExpression & " " & strOperator & " " & objValue
+                End If
+            End If
+        End If
+        strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            strExpression = "!= " & strExpression
+        End If
+        Return strExpression
+    End Function
+
+    Public Function GetSqlParameterisedExpression() As String
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            strExpression = clsLeftFilter.GetSqlParameterisedExpression() & " " & strOperator & " " & clsRightFilter.GetSqlParameterisedExpression()
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+                    strExpression = strExpression & " " & strOperator & " @" & strExpression
+                Else
+                    strExpression = strExpression & " " & strOperator & " @" & strExpression
+
+                End If
+            End If
+        End If
+        strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            'strExpression = "!= " & strExpression
+        End If
+        Return strExpression
+    End Function
+
+    Public Sub SetParameters(cmd As MySql.Data.MySqlClient.MySqlCommand)
+
+
+        Dim strExpression As String
+
+        If bIsCombinedFilter Then
+            'strExpression = clsLeftFilter.GetLinqExpression() & " " & strOperator & " " & clsRightFilter.GetLinqExpression()
+            clsLeftFilter.SetParameters(cmd)
+            clsRightFilter.SetParameters(cmd)
+        Else
+            strExpression = strField
+            If bArrayOperator Then
+                If bValuesFromDataCall Then
+                    'strExpression = strExpression & "[" & clsDataCallValues.GetValuesAsString() & "]"
+                Else
+                    'strExpression = strExpression & "[" & String.Join(",", lstValues) & "]"
+                End If
+            Else
+                If bValuesAsString Then
+
+                    'TODO. Retain its type
+                    'objValue = strValue
+                    'strExpression = strExpression & " " & strOperator & " @" & strExpression
+                    cmd.Parameters.AddWithValue("@" & strExpression, objValue)
+                Else
+                    'TODO. Retain its type
+                    'objValue = strValue
+                    ' strExpression = strExpression & " " & strOperator & " @" & strExpression
+                    cmd.Parameters.AddWithValue("@" & strExpression, objValue)
+                End If
+
+
+            End If
+        End If
+        ' strExpression = "(" & strExpression & ")"
+        If Not bIsPositiveCondition Then
+            'strExpression = "!= " & strExpression
+        End If
+        'Return strExpression
+    End Sub
+
+    Public Sub AddToSqlcommand(cmd As MySql.Data.MySqlClient.MySqlCommand)
+        cmd.CommandText = cmd.CommandText & " WHERE " & GetSqlParameterisedExpression()
+        SetParameters(cmd)
+    End Sub
+
 End Class

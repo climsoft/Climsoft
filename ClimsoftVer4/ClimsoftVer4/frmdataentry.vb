@@ -157,7 +157,9 @@ Public Class frmKeyEntry
             Case "form_hourlywind"
                 frmNewHourlyWind.Show()
             Case "form_agro1"
-                form_agro1.Show()
+                'form_agro1.Show()
+                'frmNewAgroMet.Show()
+                frmNewAgrometKenya.Show()
             Case "form_synoptic2_caribbean"
                 formSynopticCaribbean.Show()
         End Select
