@@ -46,6 +46,7 @@ Public Class frmLogin
 
     Sub ConfigFile()
         Try
+
             ' Create an instance of StreamReader to read from a file. 
             ' Then open the configuration file
             'MsgBox(Application.StartupPath.Replace("\bin\Debug", "\config.inf"))
@@ -84,7 +85,10 @@ Public Class frmLogin
 
             languageTableInit()
             climsoftuserRoles()
+
+            clsDataConnection.OpenConnection()
             conn.Close()
+
         Catch e As Exception
             'MsgBox("Login failure")
             MsgBox(e.Message, MsgBoxStyle.Exclamation)
