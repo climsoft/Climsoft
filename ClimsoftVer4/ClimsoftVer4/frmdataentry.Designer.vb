@@ -22,129 +22,93 @@ Partial Class frmKeyEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKeyEntry))
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.lstViewForms = New System.Windows.Forms.ListView()
+        Me.formName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.formDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
-        Me.lblDb = New System.Windows.Forms.Label()
-        Me.lblSep1 = New System.Windows.Forms.ToolStripLabel()
-        Me.cmdHelp = New System.Windows.Forms.ToolStripButton()
-        Me.lblSep = New System.Windows.Forms.ToolStripLabel()
-        Me.lblSep2 = New System.Windows.Forms.ToolStripLabel()
-        Me.cmdOk = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.cmdClose = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStrip1.SuspendLayout()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnHelp = New System.Windows.Forms.Button()
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.lblSelection = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'ListView1
+        'lstViewForms
         '
-        Me.ListView1.AllowColumnReorder = True
-        Me.ListView1.AllowDrop = True
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.HideSelection = False
-        Me.ListView1.HoverSelection = True
-        Me.ListView1.LabelEdit = True
-        Me.ListView1.Location = New System.Drawing.Point(0, 28)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.RightToLeftLayout = True
-        Me.ListView1.Size = New System.Drawing.Size(717, 347)
-        Me.ListView1.TabIndex = 0
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.lstViewForms.AllowColumnReorder = True
+        Me.lstViewForms.AllowDrop = True
+        Me.lstViewForms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.formName, Me.formDescription})
+        Me.lstViewForms.FullRowSelect = True
+        Me.lstViewForms.HideSelection = False
+        Me.lstViewForms.HoverSelection = True
+        Me.lstViewForms.Location = New System.Drawing.Point(4, 27)
+        Me.lstViewForms.Name = "lstViewForms"
+        Me.lstViewForms.RightToLeftLayout = True
+        Me.lstViewForms.Size = New System.Drawing.Size(659, 252)
+        Me.lstViewForms.TabIndex = 0
+        Me.lstViewForms.UseCompatibleStateImageBehavior = False
+        Me.lstViewForms.View = System.Windows.Forms.View.Details
+        '
+        'formName
+        '
+        Me.formName.Text = "Form Name"
+        Me.formName.Width = 150
+        '
+        'formDescription
+        '
+        Me.formDescription.Text = "Form Description"
+        Me.formDescription.Width = 500
         '
         'HelpProvider1
         '
         Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
-        'lblDb
+        'btnCancel
         '
-        Me.lblDb.AutoSize = True
-        Me.lblDb.Location = New System.Drawing.Point(3, 3)
-        Me.lblDb.Name = "lblDb"
-        Me.lblDb.Size = New System.Drawing.Size(22, 13)
-        Me.lblDb.TabIndex = 3
-        Me.lblDb.Text = "     "
+        Me.btnCancel.Location = New System.Drawing.Point(521, 284)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(69, 27)
+        Me.btnCancel.TabIndex = 6
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'lblSep1
+        'btnHelp
         '
-        Me.lblSep1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblSep1.Name = "lblSep1"
-        Me.lblSep1.Size = New System.Drawing.Size(16, 22)
-        Me.lblSep1.Text = "   "
+        Me.btnHelp.Location = New System.Drawing.Point(596, 284)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.Size = New System.Drawing.Size(69, 27)
+        Me.btnHelp.TabIndex = 5
+        Me.btnHelp.Text = "Help"
+        Me.btnHelp.UseVisualStyleBackColor = True
         '
-        'cmdHelp
+        'btnOk
         '
-        Me.cmdHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.cmdHelp.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.cmdHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.cmdHelp.Image = CType(resources.GetObject("cmdHelp.Image"), System.Drawing.Image)
-        Me.cmdHelp.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.cmdHelp.Name = "cmdHelp"
-        Me.cmdHelp.Size = New System.Drawing.Size(36, 22)
-        Me.cmdHelp.Text = "&Help"
+        Me.btnOk.Location = New System.Drawing.Point(446, 284)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.Size = New System.Drawing.Size(69, 27)
+        Me.btnOk.TabIndex = 4
+        Me.btnOk.Text = "Open"
+        Me.btnOk.UseVisualStyleBackColor = True
         '
-        'lblSep
+        'lblSelection
         '
-        Me.lblSep.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblSep.Name = "lblSep"
-        Me.lblSep.Size = New System.Drawing.Size(13, 22)
-        Me.lblSep.Text = "  "
-        '
-        'lblSep2
-        '
-        Me.lblSep2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.lblSep2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.lblSep2.Image = CType(resources.GetObject("lblSep2.Image"), System.Drawing.Image)
-        Me.lblSep2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.lblSep2.Name = "lblSep2"
-        Me.lblSep2.Size = New System.Drawing.Size(13, 22)
-        Me.lblSep2.Text = "  "
-        '
-        'cmdOk
-        '
-        Me.cmdOk.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.cmdOk.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.cmdOk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.cmdOk.Image = CType(resources.GetObject("cmdOk.Image"), System.Drawing.Image)
-        Me.cmdOk.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.cmdOk.Name = "cmdOk"
-        Me.cmdOk.Size = New System.Drawing.Size(27, 22)
-        Me.cmdOk.Text = "&OK"
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.BackColor = System.Drawing.SystemColors.MenuHighlight
-        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblSep1, Me.cmdHelp, Me.lblSep, Me.cmdClose, Me.lblSep2, Me.cmdOk})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 378)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(717, 25)
-        Me.ToolStrip1.TabIndex = 2
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'cmdClose
-        '
-        Me.cmdClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.cmdClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.cmdClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.cmdClose.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.cmdClose.Image = CType(resources.GetObject("cmdClose.Image"), System.Drawing.Image)
-        Me.cmdClose.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.cmdClose.Name = "cmdClose"
-        Me.cmdClose.Size = New System.Drawing.Size(47, 22)
-        Me.cmdClose.Text = "&Cancel"
-        Me.cmdClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.cmdClose.ToolTipText = "Cancel"
+        Me.lblSelection.AutoSize = True
+        Me.lblSelection.Location = New System.Drawing.Point(4, 8)
+        Me.lblSelection.Name = "lblSelection"
+        Me.lblSelection.Size = New System.Drawing.Size(146, 13)
+        Me.lblSelection.TabIndex = 7
+        Me.lblSelection.Text = "Select the entry form to open:"
         '
         'frmKeyEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(717, 403)
-        Me.Controls.Add(Me.lblDb)
-        Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.ListView1)
+        Me.ClientSize = New System.Drawing.Size(667, 317)
+        Me.Controls.Add(Me.lblSelection)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnHelp)
+        Me.Controls.Add(Me.btnOk)
+        Me.Controls.Add(Me.lstViewForms)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpProvider1.SetHelpKeyword(Me, "dataentryforms.htm")
         Me.HelpProvider1.SetHelpNavigator(Me, System.Windows.Forms.HelpNavigator.Topic)
         Me.HelpProvider1.SetHelpString(Me, "topic2")
@@ -152,20 +116,16 @@ Partial Class frmKeyEntry
         Me.Name = "frmKeyEntry"
         Me.HelpProvider1.SetShowHelp(Me, True)
         Me.Text = "Data Key Entry Forms"
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Public WithEvents ListView1 As System.Windows.Forms.ListView
+    Public WithEvents lstViewForms As System.Windows.Forms.ListView
     Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
-    Friend WithEvents lblDb As System.Windows.Forms.Label
-    Friend WithEvents lblSep1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents cmdHelp As System.Windows.Forms.ToolStripButton
-    Friend WithEvents lblSep As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents lblSep2 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents cmdOk As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents cmdClose As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnHelp As Button
+    Friend WithEvents btnOk As Button
+    Friend WithEvents formName As ColumnHeader
+    Friend WithEvents formDescription As ColumnHeader
+    Friend WithEvents lblSelection As Label
 End Class
