@@ -1,6 +1,6 @@
 ﻿Public Class frmDataForms
-    Dim dataCall As New DataCall
-    Dim dataTable As DataTable
+    Private dataCall As New DataCall
+    Private dataTable As DataTable
 
     Private Sub frmDataForms_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Dim sql As String
