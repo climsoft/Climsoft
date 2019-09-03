@@ -62,14 +62,6 @@ Public Class DataCall
         dctFields = dctNewFields
     End Sub
 
-    'Public Sub SetFields(lstNewFields As List(Of String))
-    '    Dim dctNewFields As New Dictionary(Of String, List(Of String))
-    '    For Each strTemp As String In lstNewFields
-    '        dctNewFields.Add(strTemp, New List(Of String)({strTemp}))
-    '    Next
-    '    SetFields(dctNewFields:=dctNewFields)
-    'End Sub
-
     Public Sub SetFields(iEnumerableNewFields As IEnumerable(Of String))
         Dim dctNewFields As New Dictionary(Of String, List(Of String))
         For Each strTemp As String In iEnumerableNewFields
@@ -89,8 +81,8 @@ Public Class DataCall
         dctFields.Add(strNewField, New List(Of String)({strNewField}))
     End Sub
 
-    Public Sub SetKeyFields(lstNewKeyFields As List(Of String))
-        lstKeyFieldNames = lstNewKeyFields
+    Public Sub SetKeyFields(iEnumerableNewKeyFields As IEnumerable(Of String))
+        lstKeyFieldNames = iEnumerableNewKeyFields.ToList()
     End Sub
 
     Public Sub AddKeyField(strNewKeyField As String)
@@ -517,8 +509,10 @@ Public Class DataCall
                 type = MySql.Data.MySqlClient.MySqlDbType.Decimal
             Case "char"
                 type = MySql.Data.MySqlClient.MySqlDbType.VarChar 'TODO char is not supported
+            Case "text"
+                type = MySql.Data.MySqlClient.MySqlDbType.Text
 
-                'TODO Add all the other types
+                'TODO. Add all the other types
         End Select
         Return type
     End Function
