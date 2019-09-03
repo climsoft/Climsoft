@@ -37,6 +37,7 @@ Partial Class frmDataForms
         Me.lstViewForms.CheckBoxes = True
         Me.lstViewForms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.formName, Me.formDescription})
         Me.lstViewForms.FullRowSelect = True
+        Me.lstViewForms.GridLines = True
         Me.lstViewForms.HideSelection = False
         Me.lstViewForms.Location = New System.Drawing.Point(4, 27)
         Me.lstViewForms.Name = "lstViewForms"
