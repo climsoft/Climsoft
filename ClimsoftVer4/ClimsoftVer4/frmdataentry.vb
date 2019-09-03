@@ -87,7 +87,7 @@ Public Class frmKeyEntry
     Private Sub OpenSelectedForm()
         If lstViewForms.SelectedItems.Count > 0 Then
             Select Case lstViewForms.SelectedItems.Item(0).Text
-                Case "form_synoptic_2_ra1"
+                Case "formSynoptic2RA1"
                     frmNewSynopticRA1.Show()
                 Case "form_daily1"
                     formDaily1.Show()
