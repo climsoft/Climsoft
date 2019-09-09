@@ -45,6 +45,7 @@ Public Class frmKeyEntry
         Try
             Dim dataCall As New DataCall
             Dim dataTable As DataTable
+            lstViewForms.Items.Clear()
             'set the database name and columns, set the key field for updating, then add the retrieved data to the listview
             dataCall.SetTableNameAndFields("data_forms", {"form_name", "description"})
             DataCall.SetFilter("selected", "=", 1)
