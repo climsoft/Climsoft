@@ -8,5 +8,11 @@
     <Setting Name="defaultRLocation" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Program Files\R\R-3.2.1</Value>
     </Setting>
+    <Setting Name="rememberUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="rememberedUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

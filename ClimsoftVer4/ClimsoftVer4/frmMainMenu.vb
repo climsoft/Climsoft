@@ -247,15 +247,11 @@ Public Class frmMainMenu
         frmChangeOwnPassword.Show()
     End Sub
 
-    Private Sub ConfigureDatabaseConnectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigureDatabaseConnectionToolStripMenuItem.Click
-        frmLogin.Server_db_port(frmLogin.cmbDatabases.Text)
-    End Sub
-
     Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
 
     End Sub
 
-    
+
     Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
         frmLanguageTranslation.Show()
     End Sub
