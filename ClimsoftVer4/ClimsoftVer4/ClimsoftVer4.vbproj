@@ -23,7 +23,6 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>ClimsoftVer4.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -238,12 +237,6 @@
       <DependentUpon>frmCharts.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCharts.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDatabaseConnections.Designer.vb">
-      <DependentUpon>frmDatabaseConnections.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmDatabaseConnections.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmElementSequencerMonthly.Designer.vb">
@@ -1072,9 +1065,6 @@
     <EmbeddedResource Include="frmCharts.resx">
       <DependentUpon>frmCharts.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDatabaseConnections.resx">
-      <DependentUpon>frmDatabaseConnections.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmElementSequencerMonthly.resx">
       <DependentUpon>frmElementSequencerMonthly.vb</DependentUpon>
     </EmbeddedResource>
@@ -1639,6 +1629,9 @@
     <XliffResource Include="MultilingualResources\ClimsoftVer4.fr.xlf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.inf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
