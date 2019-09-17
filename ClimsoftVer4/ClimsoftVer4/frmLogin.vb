@@ -51,22 +51,22 @@ Public Class frmLogin
                     line = r.ReadLine
                 Loop
             End Using
-        Else
+        ElseIf IO.File.Exists("config.inf") Then
             ' In the case where `filePath` does NOT exist, attempt to read legacy connection information
             ' from the folder Climsoft is installed in (in previous versoins this file was also called `config.inf`)
-            If IO.File.Exists("config.inf") Then
-                Using r As IO.StreamReader = New IO.StreamReader("config.inf")
-                    Dim line As String
-                    line = r.ReadLine
-                    Try
-                        builder.ConnectionString = line
-                        connectionDetails.Add("Climsoft4|" & line)
-                    Catch ex As Exception
-                        ' If a line cannot be read for any reason then we skip it. It is invalid, therefore it will
-                        ' not be displayed and it will not be written back to the file.
-                    End Try
-                End Using
-            End If
+            Using r As IO.StreamReader = New IO.StreamReader("config.inf")
+                Dim line As String
+                line = r.ReadLine
+                Try
+                    builder.ConnectionString = line
+                    connectionDetails.Add("Climsoft4|" & line)
+                Catch ex As Exception
+                    ' If a line cannot be read for any reason then we skip it. It is invalid, therefore it will
+                    ' not be displayed and it will not be written back to the file.
+                End Try
+            End Using
+        Else
+            connectionDetails.Add("Default database|" & My.Settings.defaultDatabase)
         End If
     End Sub
 
