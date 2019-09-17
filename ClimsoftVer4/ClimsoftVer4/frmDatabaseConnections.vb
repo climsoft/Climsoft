@@ -1,57 +1,42 @@
-﻿Public Class frmDatabaseConnections
+﻿Imports System.Security.AccessControl
+Imports System.Security.Principal
+
+
+Public Class frmDatabaseConnections
 
     Private Sub frmDatabaseConnections_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim builder As New System.Data.Common.DbConnectionStringBuilder()
         Dim connection As String
         Dim connectionString As String
-        Dim key As Microsoft.Win32.RegistryKey
-        Dim result As Integer
-        Dim row As DataGridViewRow
+        Dim parts As String()
 
         DataGridView1.Rows.Clear()
-        key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\Climsoft4")
 
-        If key IsNot Nothing Then
-            For Each subKey As String In key.GetValueNames
-                If subKey.StartsWith("db_") Then
-                    connectionString = My.Computer.Registry.GetValue(
-                    "HKEY_LOCAL_MACHINE\Software\Climsoft4", subKey, Nothing)
-                    connection = Mid(subKey, 4)
-                    Try
-                        builder.ConnectionString = connectionString
-                        DataGridView1.Rows.Add(connection, builder("server"), builder("database"), builder("port"))
-                    Catch ex As Exception
-                        result = MessageBox.Show(
-                            "Unable to read connection details for """ & connection & """ from the " &
-                            "Windows registry. Would you Like to clear the details for this connection " &
-                            "to resolve the problem (this action cannot be undone)?" &
-                            Environment.NewLine & Environment.NewLine & ex.Message,
-                            "Climsoft Warning", MessageBoxButtons.YesNo)
-                        If result = DialogResult.No Then
-                            Exit Sub
-                        ElseIf result = DialogResult.Yes Then
-                            My.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\Climsoft4", True).DeleteValue(
-                                "db_" & connection)
-                        End If
-                    End Try
-                End If
-            Next
-        End If
+        For Each line As String In frmLogin.connectionDetails
+            parts = line.Split("|")
+            connection = parts(0)
+            Try
+                ' Attempt to offer the second part to the connection string builder
+                connectionString = parts(1)
+                builder.ConnectionString = connectionString
+                DataGridView1.Rows.Add(connection, builder("server"), builder("database"), builder("port"))
+            Catch ex As Exception
+                ' If a line fails for any reason then we skip it. It is invalid, therefore it will
+                ' not be displayed and it will not be written back to the file.
+            End Try
+        Next
     End Sub
 
     Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles cmdOK.Click
-        ' In My Project/Compile, make sure that Target CPU is set to "AnyCPU" and uncheck "Prefer 32-bit"
-        ' Otherwise the registry key can get 'redirected', e.g. into SOFTWARE\Wow6432Node
-        Dim builder As New System.Data.Common.DbConnectionStringBuilder()
+        Dim builder As New Common.DbConnectionStringBuilder()
         Dim connection As String
         Dim connectionString As String
         Dim database As String
-        Dim key As Microsoft.Win32.RegistryKey
         Dim port As String
         Dim server As String
 
         For Each row As DataGridViewRow In DataGridView1.Rows
-            builder = New System.Data.Common.DbConnectionStringBuilder()
+            builder = New Common.DbConnectionStringBuilder()
             connection = row.Cells(0).Value
             server = row.Cells(1).Value
             database = row.Cells(2).Value
@@ -111,52 +96,56 @@
             End If
         Next
 
-        ' All rows have now been validated remove all existing database connection settings from
-        ' the Windows registry
-        key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\Climsoft4")
+        ' All rows have now been validated. 
 
-        If key Is Nothing Then
-            key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey("Software\\Climsoft4")
-        End If
+        ' If `filePath` already exists then Create() will clear the current contents
+        IO.Directory.CreateDirectory(frmLogin.directoryPath)
+        IO.File.Create(frmLogin.filePath).Dispose()
+        ' Grant full access on `filePath` for all users (allows any user to write to file)
+        ' This is currently necessary because some Climsoft installers are not Windows Administrators
+        Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(frmLogin.filePath)
+        Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
+        dSecurity.AddAccessRule(New FileSystemAccessRule(
+            New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
+            FileSystemRights.FullControl,
+            InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
+            PropagationFlags.NoPropagateInherit, AccessControlType.Allow
+        ))
+        dInfo.SetAccessControl(dSecurity)
 
-        For Each subKey As String In key.GetValueNames
-            If subKey.StartsWith("db_") Then
-                My.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\Climsoft4", True).DeleteValue(subKey)
-            End If
-        Next
+        ' Loop over validated rows and add details from each row to `filePath`
+        Using writer As IO.StreamWriter = New IO.StreamWriter(frmLogin.filePath)
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                builder = New Common.DbConnectionStringBuilder()
+                connection = row.Cells(0).Value
+                server = row.Cells(1).Value
+                database = row.Cells(2).Value
+                port = row.Cells(3).Value
 
-        ' Loop over validated rows and add details from each row to the Windows registry
-        For Each row As DataGridViewRow In DataGridView1.Rows
-            builder = New System.Data.Common.DbConnectionStringBuilder()
-            connection = row.Cells(0).Value
-            server = row.Cells(1).Value
-            database = row.Cells(2).Value
-            port = row.Cells(3).Value
+                ' Skip empty rows (and continue to save other rows to registry)
+                If String.IsNullOrEmpty(connection) And String.IsNullOrEmpty(server) And
+                    String.IsNullOrEmpty(database) And String.IsNullOrEmpty(port) Then
+                    Continue For
+                End If
 
-            ' Skip empty rows (and continue to save other rows to registry)
-            If String.IsNullOrEmpty(connection) And String.IsNullOrEmpty(server) And
-                String.IsNullOrEmpty(database) And String.IsNullOrEmpty(port) Then
-                Continue For
-            End If
+                connectionString = "server=" & server & ";database=" & database & ";port=" & port
 
-            connectionString = "server=" & server & ";database=" & database & ";port=" & port
+                ' Check that the connection string is accepted by the connection string builder
+                ' (otherwise warn and continue)
+                Try
+                    builder.ConnectionString = connectionString
+                Catch ex As Exception
+                    MsgBox("Unable to save connection information for connection """ & connection & """" &
+                        Environment.NewLine & Environment.NewLine & ex.Message)
+                    Continue For
+                End Try
 
-            ' Check that the connection string is accepted by the connection string builder (otherwise warn)
-            Try
-                builder.ConnectionString = connectionString
-            Catch ex As Exception
-                MsgBox("Unable to save connection information for connection """ & connection & """" &
-                    Environment.NewLine & Environment.NewLine & ex.Message)
-                Continue For
-            End Try
-
-            ' Only save to registry if the built connection string is not null/empty
-            ' All connection names will have a prefix "db_"
-            If Not String.IsNullOrEmpty(builder.ConnectionString) Then
-                key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey("Software\\Climsoft4")
-                key.SetValue("db_" & connection, connectionString)
-            End If
-        Next
+                ' Only save if the built connection string is not null/empty
+                If Not String.IsNullOrEmpty(builder.ConnectionString) Then
+                    writer.WriteLine(connection & "|" & builder.ConnectionString)
+                End If
+            Next
+        End Using
 
         frmLogin.refreshDatabases()
         Close()
@@ -192,13 +181,6 @@
         Catch ex As Exception
 
         End Try
-
-
-        '        List<MyObj> foo = DGV.DataSource;
-        'Int idx = DGV.SelectedRows[0].Index;
-        'Int value = foo[idx];
-        'foo.Remove(value);
-        'foo.InsertAt(idx+1, value)
     End Sub
 
     Private Sub cmdTest_Click(sender As Object, e As EventArgs) Handles cmdTest.Click
