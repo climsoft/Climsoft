@@ -51,9 +51,6 @@
     <ApplicationIcon>myweat02.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamicInterop">
-      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -69,12 +66,6 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.9.10\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="RDotNet">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="RDotNet.NativeLibrary">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -175,7 +166,6 @@
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
-    <Compile Include="clsRInterface.vb" />
     <Compile Include="clsTableFilter.vb" />
     <Compile Include="code_flag.vb">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -833,30 +823,6 @@
     <Compile Include="seq_month_day_synoptime_leap_yr.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.Designer.vb">
-      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.Designer.vb">
-      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.Designer.vb">
-      <DependentUpon>ucrAgroMet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.Designer.vb">
-      <DependentUpon>ucrCaribbean.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="station.vb">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -1506,18 +1472,6 @@
     <EmbeddedResource Include="sdgFilter.resx">
       <DependentUpon>sdgFilter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewAgroMet.resx">
-      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewCaribbean.resx">
-      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrAgroMet.resx">
-      <DependentUpon>ucrAgroMet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrCaribbean.resx">
-      <DependentUpon>ucrCaribbean.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </EmbeddedResource>
@@ -1656,9 +1610,6 @@
     <None Include="Resources\navigation-left.jpg" />
     <None Include="Resources\navigation-right.jpg" />
     <None Include="Resources\navigation-last.jpg" />
-    <Content Include="static\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
