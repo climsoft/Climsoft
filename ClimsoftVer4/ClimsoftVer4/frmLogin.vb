@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports ClimsoftVer4.Translations
+Imports System.Data.SQLite
+Imports System.Threading
 
 
 Public Class frmLogin
@@ -205,45 +207,8 @@ Public Class frmLogin
     End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        '-------Code for translation added 20160207,ASM
-        'Translate text for controls on login form.
-        'Other Translation after successful login will come from language translation table stored in database
-
-        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
-        msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
-
-        Dim lanCulture As String
-        lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
-        If Strings.Left(lanCulture, 2) = "en" Then
-            ' MsgBox("Current language Is: English-UK")
-            Me.Text = "Login"
-            lblUsername.Text = "User name:"
-            lblPassword.Text = "Password:"
-            'lblDbdetails.Text = "Show and Configure Database Connection....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancel"
-        ElseIf Strings.Left(lanCulture, 2) = "fr" Then
-            Me.Text = "s'identifier"
-            lblUsername.Text = "Nom d'utilisateur:"
-            lblPassword.Text = "Mot de passe:"
-            'lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
-            OK.Text = "OK"
-            Cancel.Text = "Annuler"
-        ElseIf Strings.Left(lanCulture, 2) = "de" Then
-            Me.Text = "Anmeldung"
-            lblUsername.Text = "Benutzername:"
-            lblPassword.Text = "Passwort:"
-            'lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
-            OK.Text = "OK"
-            Cancel.Text = "Stornieren"
-        ElseIf Strings.Left(lanCulture, 2) = "pt" Then
-            Me.Text = "Entrar"
-            lblUsername.Text = "Nome de usuário:"
-            lblPassword.Text = "Senha:"
-            'lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancelar"
-        End If
+        SimpleTranslateTool.translateForm(Me)
+        lblLanguage.Text = My.Settings.currentLanguageCode
 
         If My.Settings.rememberUsername Then
             chkRememberUsername.Checked = True
@@ -252,6 +217,50 @@ Public Class frmLogin
             Me.Show()
             txtPassword.Focus()
         End If
+
+        ' The langaguge translation code below is depreciated and will be removed
+        ' (it's not immediately clear where variables like `msgKeyentryFormsListUpdated`
+        ' are defined And used)
+
+        '-------Code for translation added 20160207,ASM
+        'Translate text for controls on login form.
+        'Other Translation after successful login will come from language translation table stored in database
+
+        msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
+        msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
+
+        'Dim lanCulture As String
+        'lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
+        'If Strings.Left(lanCulture, 2) = "en" Then
+        '    ' MsgBox("Current language Is: English-UK")
+        '    Me.Text = "Login"
+        '    lblUsername.Text = "User name:"
+        '    lblPassword.Text = "Password:"
+        '    'lblDbdetails.Text = "Show and Configure Database Connection....."
+        '    OK.Text = "OK"
+        '    Cancel.Text = "Cancel"
+        'ElseIf Strings.Left(lanCulture, 2) = "fr" Then
+        '    Me.Text = "s'identifier"
+        '    lblUsername.Text = "Nom d'utilisateur:"
+        '    lblPassword.Text = "Mot de passe:"
+        '    'lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
+        '    OK.Text = "OK"
+        '    Cancel.Text = "Annuler"
+        'ElseIf Strings.Left(lanCulture, 2) = "de" Then
+        '    Me.Text = "Anmeldung"
+        '    lblUsername.Text = "Benutzername:"
+        '    lblPassword.Text = "Passwort:"
+        '    'lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
+        '    OK.Text = "OK"
+        '    Cancel.Text = "Stornieren"
+        'ElseIf Strings.Left(lanCulture, 2) = "pt" Then
+        '    Me.Text = "Entrar"
+        '    lblUsername.Text = "Nome de usuário:"
+        '    lblPassword.Text = "Senha:"
+        '    'lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
+        '    OK.Text = "OK"
+        '    Cancel.Text = "Cancelar"
+        'End If
 
         refreshDatabases()
     End Sub
@@ -282,5 +291,9 @@ Public Class frmLogin
             My.Settings.rememberedUsername = ""
             My.Settings.Save()
         End If
+    End Sub
+
+    Private Sub lblLanguage_Click(sender As Object, e As EventArgs) Handles lblLanguage.Click
+        frmLanguage.Show()
     End Sub
 End Class

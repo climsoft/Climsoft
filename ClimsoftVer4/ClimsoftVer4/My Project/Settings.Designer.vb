@@ -95,6 +95,27 @@ Namespace My
                 Me("rememberedUsername") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Climsoft4.ldb")>  _
+        Public ReadOnly Property localDatabase() As String
+            Get
+                Return CType(Me("localDatabase"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("en")>  _
+        Public Property currentLanguageCode() As String
+            Get
+                Return CType(Me("currentLanguageCode"),String)
+            End Get
+            Set
+                Me("currentLanguageCode") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

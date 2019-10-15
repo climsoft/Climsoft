@@ -54,7 +54,6 @@ Partial Class frmMainMenu
         Me.AWSElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSStationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfigurationForTDCFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLanguageTranslation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,7 +87,7 @@ Partial Class frmMainMenu
         '
         Me.MenuStrip2.AllowItemReorder = True
         Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuLanguageTranslation, Me.mnuHelp})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuHelp})
         Me.MenuStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
@@ -131,21 +130,21 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
         'UserRecordsToolStripMenuItem1
         '
         Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
-        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(274, 24)
         Me.UserRecordsToolStripMenuItem1.Text = "User Records"
         '
         'mnuProducts
@@ -173,34 +172,34 @@ Partial Class frmMainMenu
         'UserAdminToolStripMenuItem
         '
         Me.UserAdminToolStripMenuItem.Name = "UserAdminToolStripMenuItem"
-        Me.UserAdminToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.UserAdminToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.UserAdminToolStripMenuItem.Tag = "User_Admin"
         Me.UserAdminToolStripMenuItem.Text = "User Admin"
         '
         'MetadataToolStripMenuItem
         '
         Me.MetadataToolStripMenuItem.Name = "MetadataToolStripMenuItem"
-        Me.MetadataToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.MetadataToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.MetadataToolStripMenuItem.Tag = "Metadata"
         Me.MetadataToolStripMenuItem.Text = "Metadata"
         '
         'PasswordToolStripMenuItem
         '
         Me.PasswordToolStripMenuItem.Name = "PasswordToolStripMenuItem"
-        Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.PasswordToolStripMenuItem.Text = "Change Password"
         '
         'DataFormsToolStripMenuItem
         '
         Me.DataFormsToolStripMenuItem.Name = "DataFormsToolStripMenuItem"
-        Me.DataFormsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.DataFormsToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.DataFormsToolStripMenuItem.Tag = "Data_Forms"
         Me.DataFormsToolStripMenuItem.Text = "Data Forms"
         '
         'UpdateElementsToolStripMenuItem
         '
         Me.UpdateElementsToolStripMenuItem.Name = "UpdateElementsToolStripMenuItem"
-        Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.UpdateElementsToolStripMenuItem.Tag = "Update_Element_Limits"
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
         Me.UpdateElementsToolStripMenuItem.Visible = False
@@ -208,19 +207,19 @@ Partial Class frmMainMenu
         'UpdateObservationsToolStripMenuItem1
         '
         Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
-        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(221, 24)
         Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
         '
         'OpeartionsMonitoringToolStripMenuItem
         '
         Me.OpeartionsMonitoringToolStripMenuItem.Name = "OpeartionsMonitoringToolStripMenuItem"
-        Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.OpeartionsMonitoringToolStripMenuItem.Text = "Operations Monitoring"
         '
         'EmptyKeyEntryTablesToolStripMenuItem
         '
         Me.EmptyKeyEntryTablesToolStripMenuItem.Name = "EmptyKeyEntryTablesToolStripMenuItem"
-        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.EmptyKeyEntryTablesToolStripMenuItem.Text = "Empty Key Entry Forms"
         '
         'ChangeOwnPasswordToolStripMenuItem
@@ -233,7 +232,7 @@ Partial Class frmMainMenu
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
@@ -300,13 +299,13 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem
@@ -314,12 +313,6 @@ Partial Class frmMainMenu
         Me.ConfigurationForTDCFToolStripMenuItem.Name = "ConfigurationForTDCFToolStripMenuItem"
         Me.ConfigurationForTDCFToolStripMenuItem.Size = New System.Drawing.Size(242, 24)
         Me.ConfigurationForTDCFToolStripMenuItem.Text = "TDCF Settings"
-        '
-        'mnuLanguageTranslation
-        '
-        Me.mnuLanguageTranslation.Name = "mnuLanguageTranslation"
-        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(152, 23)
-        Me.mnuLanguageTranslation.Text = "Language Translation"
         '
         'mnuHelp
         '
@@ -332,14 +325,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(152, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '
@@ -708,7 +701,6 @@ Partial Class frmMainMenu
     Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangeOwnPasswordToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuLanguageTranslation As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSStationsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

@@ -105,11 +105,9 @@ Public Class frmMainMenu
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
-        autoTranslate(Me)
+        'autoTranslate(Me)
         HTMLHelp.HelpPage = "welcome.htm"
-
     End Sub
-
 
     Private Sub cmdKeyEntry_Click(sender As Object, e As EventArgs) Handles cmdKeyEntry.Click
         ' The icon has been changed
@@ -195,7 +193,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
-        frmLanguage.ShowDialog()
+        frmLanguage.Show()
         ' When dialog is closed - update language in this window (will any other windows also be open?)
         autoTranslate(Me)
     End Sub
@@ -249,11 +247,6 @@ Public Class frmMainMenu
 
     Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
 
-    End Sub
-
-
-    Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
-        frmLanguageTranslation.Show()
     End Sub
 
     Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click

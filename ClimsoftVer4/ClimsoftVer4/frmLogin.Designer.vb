@@ -46,6 +46,7 @@ Partial Class frmLogin
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
+        Me.lblLanguage = New System.Windows.Forms.Label()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -136,7 +137,6 @@ Partial Class frmLogin
         Me.cmdHelp.TabIndex = 9
         Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "&Help"
-        Me.cmdHelp.Visible = False
         '
         'cmbDatabases
         '
@@ -144,7 +144,7 @@ Partial Class frmLogin
         Me.cmbDatabases.FormattingEnabled = True
         Me.cmbDatabases.Location = New System.Drawing.Point(218, 162)
         Me.cmbDatabases.Name = "cmbDatabases"
-        Me.cmbDatabases.Size = New System.Drawing.Size(222, 21)
+        Me.cmbDatabases.Size = New System.Drawing.Size(294, 21)
         Me.cmbDatabases.TabIndex = 7
         '
         'lblDbdetails
@@ -179,6 +179,16 @@ Partial Class frmLogin
         Me.chkRememberUsername.Text = "Remember username"
         Me.chkRememberUsername.UseVisualStyleBackColor = True
         '
+        'lblLanguage
+        '
+        Me.lblLanguage.AutoSize = True
+        Me.lblLanguage.ForeColor = System.Drawing.Color.Blue
+        Me.lblLanguage.Location = New System.Drawing.Point(491, 187)
+        Me.lblLanguage.Name = "lblLanguage"
+        Me.lblLanguage.Size = New System.Drawing.Size(0, 13)
+        Me.lblLanguage.TabIndex = 12
+        Me.lblLanguage.Tag = ""
+        '
         'frmLogin
         '
         Me.AcceptButton = Me.OK
@@ -186,6 +196,7 @@ Partial Class frmLogin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
         Me.ClientSize = New System.Drawing.Size(539, 251)
+        Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.chkRememberUsername)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdHelp)
@@ -220,4 +231,5 @@ Partial Class frmLogin
     Friend WithEvents lblDbdetails As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents chkRememberUsername As CheckBox
+    Friend WithEvents lblLanguage As Label
 End Class

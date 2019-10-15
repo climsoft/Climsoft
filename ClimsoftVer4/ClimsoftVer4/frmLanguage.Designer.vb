@@ -26,21 +26,22 @@ Partial Class frmLanguage
         Me.lblLanguage = New System.Windows.Forms.Label()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOK = New System.Windows.Forms.Button()
+        Me.cmdApply = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cboLanguage
         '
         Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Items.AddRange(New Object() {"English", "Français", "Deutsch"})
-        Me.cboLanguage.Location = New System.Drawing.Point(226, 52)
+        Me.cboLanguage.Items.AddRange(New Object() {"English"})
+        Me.cboLanguage.Location = New System.Drawing.Point(137, 33)
         Me.cboLanguage.Name = "cboLanguage"
-        Me.cboLanguage.Size = New System.Drawing.Size(196, 21)
+        Me.cboLanguage.Size = New System.Drawing.Size(229, 21)
         Me.cboLanguage.TabIndex = 0
         '
         'lblLanguage
         '
         Me.lblLanguage.AutoSize = True
-        Me.lblLanguage.Location = New System.Drawing.Point(67, 55)
+        Me.lblLanguage.Location = New System.Drawing.Point(29, 36)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(88, 13)
         Me.lblLanguage.TabIndex = 1
@@ -51,27 +52,38 @@ Partial Class frmLanguage
         'cmdCancel
         '
         Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdCancel.Location = New System.Drawing.Point(431, 185)
+        Me.cmdCancel.Location = New System.Drawing.Point(215, 84)
         Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(94, 23)
+        Me.cmdCancel.Size = New System.Drawing.Size(72, 23)
         Me.cmdCancel.TabIndex = 7
         Me.cmdCancel.Tag = "Cancel"
         Me.cmdCancel.Text = "&Cancel"
         '
         'cmdOK
         '
-        Me.cmdOK.Location = New System.Drawing.Point(328, 185)
+        Me.cmdOK.Location = New System.Drawing.Point(137, 84)
         Me.cmdOK.Name = "cmdOK"
-        Me.cmdOK.Size = New System.Drawing.Size(94, 23)
+        Me.cmdOK.Size = New System.Drawing.Size(72, 23)
         Me.cmdOK.TabIndex = 6
         Me.cmdOK.Tag = "OK"
         Me.cmdOK.Text = "&OK"
+        '
+        'cmdApply
+        '
+        Me.cmdApply.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.cmdApply.Location = New System.Drawing.Point(294, 84)
+        Me.cmdApply.Name = "cmdApply"
+        Me.cmdApply.Size = New System.Drawing.Size(72, 23)
+        Me.cmdApply.TabIndex = 8
+        Me.cmdApply.Tag = ""
+        Me.cmdApply.Text = "&Apply"
         '
         'frmLanguage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 220)
+        Me.ClientSize = New System.Drawing.Size(395, 137)
+        Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdOK)
         Me.Controls.Add(Me.lblLanguage)
@@ -88,4 +100,5 @@ Partial Class frmLanguage
     Friend WithEvents lblLanguage As Label
     Friend WithEvents cmdCancel As Button
     Friend WithEvents cmdOK As Button
+    Friend WithEvents cmdApply As Button
 End Class
