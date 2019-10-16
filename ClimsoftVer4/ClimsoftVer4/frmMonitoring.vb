@@ -15,6 +15,8 @@
     End Sub
 
     Private Sub frmMonitoring_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         Dim kount As Long
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr

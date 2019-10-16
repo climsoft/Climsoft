@@ -8,6 +8,8 @@
     Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
     Private Sub frmEntryForms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         Dim col(1) As String
         Dim itm As New ListViewItem
 

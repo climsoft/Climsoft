@@ -6,6 +6,8 @@
 
 
     Private Sub frmElementSequencer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         On Error GoTo Err
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()

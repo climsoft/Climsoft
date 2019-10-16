@@ -57,6 +57,8 @@ Public Class frmQC
     End Sub
 
     Private Sub frmQC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         Dim conns As New MySql.Data.MySqlClient.MySqlConnection
         Dim dss As New DataSet, daa As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim sql As String
@@ -87,7 +89,7 @@ Public Class frmQC
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
-            Sql = "SELECT * FROM station ORDER BY stationId"
+            sql = "SELECT * FROM station ORDER BY stationId"
             daa = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             dss.Clear()
 

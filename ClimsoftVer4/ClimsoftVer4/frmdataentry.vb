@@ -17,6 +17,8 @@
 Public Class frmKeyEntry
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         'Dim sql As String
         'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         'Dim MyConnectionString As String
@@ -48,9 +50,9 @@ Public Class frmKeyEntry
             lstViewForms.Items.Clear()
             'set the database name and columns, set the key field for updating, then add the retrieved data to the listview
             dataCall.SetTableNameAndFields("data_forms", {"form_name", "description"})
-            DataCall.SetFilter("selected", "=", 1)
-            DataTable = DataCall.GetDataTable()
-            For Each row As DataRow In DataTable.Rows
+            dataCall.SetFilter("selected", "=", 1)
+            dataTable = dataCall.GetDataTable()
+            For Each row As DataRow In dataTable.Rows
                 lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), row.Item("description")}))
             Next
         Catch ex As Exception

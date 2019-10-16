@@ -20,6 +20,8 @@ Imports ClimsoftVer4.Translations
 Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         Dim usrName, usrRole As String
         Dim i, maxRows As Integer
         usrRole = ""
@@ -39,7 +41,7 @@ Public Class frmMainMenu
                 If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
+                    'mnuLanguageTranslation.Enabled = False
                     mnuQC.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
@@ -52,7 +54,7 @@ Public Class frmMainMenu
                 ElseIf usrRole = "ClimsoftQC" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
+                    'mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
@@ -65,7 +67,7 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
+                    'mnuLanguageTranslation.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
                     cmdUserManagement.Enabled = False
@@ -78,7 +80,7 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
+                    'mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     cmdDataTransfer.Enabled = False
                     cmdSettingsAWS.Enabled = False
@@ -105,7 +107,7 @@ Public Class frmMainMenu
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
-        'autoTranslate(Me)
+
         HTMLHelp.HelpPage = "welcome.htm"
     End Sub
 
@@ -194,8 +196,6 @@ Public Class frmMainMenu
 
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
         frmLanguage.Show()
-        ' When dialog is closed - update language in this window (will any other windows also be open?)
-        autoTranslate(Me)
     End Sub
 
     ' Help Menu Items

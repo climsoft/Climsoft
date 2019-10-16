@@ -62,6 +62,8 @@ Public Class formAWSRealTime
     End Sub
 
     Private Sub formAWSRealTime_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         pnlProcessing.Dock = DockStyle.Right
         pnlProcessing.Visible = True
         ' database Connect

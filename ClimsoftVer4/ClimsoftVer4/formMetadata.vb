@@ -46,6 +46,8 @@ Public Class formMetadata
     End Sub
 
     Private Sub formMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()

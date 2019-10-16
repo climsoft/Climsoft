@@ -13,6 +13,8 @@
         Me.DataGridView1.DataSource = ds.Tables(0)
     End Sub
     Private Sub frmUserManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         populateDataGrid()

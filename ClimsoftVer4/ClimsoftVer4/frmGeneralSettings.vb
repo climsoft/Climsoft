@@ -49,6 +49,8 @@ Public Class frmGeneralSettings
     End Sub
 
     Private Sub frmGeneralSettings_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SimpleTranslateTool.translateForm(Me)
+
         'Dim loggedInUser As String
         'loggedInUser = frmLogin.txtUser.Text
 

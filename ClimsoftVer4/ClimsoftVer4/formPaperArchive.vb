@@ -259,6 +259,7 @@
     End Sub
 
     Private Sub formPaperArchive_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SimpleTranslateTool.translateForm(Me)
 
         dbConnectionString = frmLogin.txtusrpwd.Text
         dbconn.ConnectionString = dbConnectionString

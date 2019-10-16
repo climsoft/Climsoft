@@ -8,6 +8,10 @@
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "modifyobservations.htm")
     End Sub
 
+    Private Sub frmModifyObservations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+    End Sub
+
     Dim qry As New MySql.Data.MySqlClient.MySqlCommand
 
     Private Sub cmdView_Click(sender As Object, e As EventArgs) Handles cmdView.Click

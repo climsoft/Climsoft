@@ -3,6 +3,8 @@
     Private dataTable As DataTable
 
     Private Sub frmDataForms_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SimpleTranslateTool.translateForm(Me)
+
         'Dim sql As String
         'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         'Dim MyConnectionString As String

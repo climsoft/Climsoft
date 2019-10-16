@@ -10,6 +10,8 @@
     End Sub
 
     Private Sub frmChangeOwnPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SimpleTranslateTool.translateForm(Me)
+
         msgNotYetImplemented = "Not yet implemented!"
         msgWrongPasswordConfirmation = "Wrong confirmation of password!"
         msgPasswordTooShort = "Password length must be >=6 characters!"
