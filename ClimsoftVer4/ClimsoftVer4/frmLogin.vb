@@ -13,21 +13,71 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports ClimsoftVer4.Translations
 
 
 Public Class frmLogin
     Public HTMLHelp As New clsHelp
+    Public connectionDetails As New List(Of String)
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
 
+    ' Get Application Data folder to all users, e.g. C:\ProgramData
+    ' Storing config.inf here ensures that it will still be available when Climsoft is updated
+    Dim commonPath As String = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+    Public directoryPath As String = IO.Path.Combine(commonPath, "Climsoft4")
+    Public filePath As String = IO.Path.Combine(directoryPath, "config.inf")
+
+    Sub readConnectionDetails()
+        Dim builder As New Common.DbConnectionStringBuilder()
+
+        ' Update Me.connectionDetails
+        connectionDetails = New List(Of String)
+        If IO.File.Exists(filePath) Then
+            Using r As IO.StreamReader = New IO.StreamReader(filePath)
+                Dim line As String
+                line = r.ReadLine
+                Do While (Not line Is Nothing)
+                    ' A valid line should contain a connection name, a pipe character `|` and a connection string
+                    Dim parts As String() = line.Split("|")
+                    ' To be here, we know that line is not empty, therefore there must be a part(0)
+                    Try
+                        ' Attempt to offer the second part (if it exists) to a connection string builder
+                        builder.ConnectionString = parts(1)
+                        connectionDetails.Add(line)
+                    Catch ex As Exception
+                        ' If a line cannot be read for any reason then we skip it. It is invalid, therefore it will
+                        ' not be displayed and it will not be written back to the file.
+                    End Try
+                    line = r.ReadLine
+                Loop
+            End Using
+        ElseIf IO.File.Exists("config.inf") Then
+            ' In the case where `filePath` does NOT exist, attempt to read legacy connection information
+            ' from the folder Climsoft is installed in (in previous versoins this file was also called `config.inf`)
+            Using r As IO.StreamReader = New IO.StreamReader("config.inf")
+                Dim line As String
+                line = r.ReadLine
+                Try
+                    builder.ConnectionString = line
+                    connectionDetails.Add("Climsoft4|" & line)
+                Catch ex As Exception
+                    ' If a line cannot be read for any reason then we skip it. It is invalid, therefore it will
+                    ' not be displayed and it will not be written back to the file.
+                End Try
+            End Using
+        Else
+            connectionDetails.Add("Default database|" & My.Settings.defaultDatabase)
+        End If
+    End Sub
+
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-        Dim builder As New System.Data.Common.DbConnectionStringBuilder()
         Dim connectionString As String
+        Dim builder As New Common.DbConnectionStringBuilder()
         Dim dbChoice As String
         Dim password As String
-        Dim subKey As String
         Dim username As String
+
+        Dim parts As String()
 
         username = txtUsername.Text
         password = txtPassword.Text
@@ -41,18 +91,17 @@ Public Class frmLogin
         updateRememberedUsername()
 
         dbChoice = cmbDatabases.SelectedItem
+        connectionString = ""
         If String.IsNullOrEmpty(dbChoice) Then
             MsgBox("Please select a database from the list, or manage database connections")
             Exit Sub
         Else
-            subKey = "db_" & dbChoice
-            connectionString = My.Computer.Registry.GetValue(
-                    "HKEY_LOCAL_MACHINE\Software\Climsoft4", subKey, Nothing)
-            If String.IsNullOrEmpty(connectionString) Then
-                MsgBox("Unable to read connection information. Please select ""Manage database connections"" " &
-                       "to check and amend connection details")
-                Exit Sub
-            End If
+            For Each connection As String In connectionDetails
+                parts = connection.Split("|")
+                If parts(0) = dbChoice Then
+                    connectionString = parts(1)
+                End If
+            Next
         End If
 
         ' Check that the connection string, with username and password is accepted by the
@@ -67,6 +116,7 @@ Public Class frmLogin
             txtusrpwd.Text = builder.ConnectionString & ";Convert Zero Datetime=True"
         Catch ex As Exception
             MsgBox("Login failed: " & ex.Message)
+            Exit Sub
         End Try
 
         conn.ConnectionString = txtusrpwd.Text
@@ -86,6 +136,8 @@ Public Class frmLogin
             End If
 
             Exit Sub
+        Finally
+            conn.Close()
         End Try
 
         regDataInit()
@@ -134,24 +186,22 @@ Public Class frmLogin
     End Sub
 
     Sub refreshDatabases()
-        Dim connection As String
-        Dim key As Microsoft.Win32.RegistryKey
-        Dim remember_username As String
-        Dim username As String
+        Dim parts As String()
 
-        ' Clear and then populate Database combobox
-        cmbDatabases.Items.Clear()
-        key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\Climsoft4")
+        ' Read the configuration file for the latest details
+        readConnectionDetails()
 
-        If key IsNot Nothing Then
-            For Each subKey As String In key.GetValueNames
-                If subKey.StartsWith("db_") Then
-                    connection = Mid(subKey, 4)
-                    cmbDatabases.Items.Add(connection)
-                End If
+        Try
+            ' Clear and then populate Database combobox from connectionDetails
+            cmbDatabases.Items.Clear()
+            For Each line As String In connectionDetails
+                parts = line.Split("|")
+                cmbDatabases.Items.Add(parts(0))
             Next
             cmbDatabases.SelectedIndex = 0
-        End If
+        Catch
+            ' SelectedIndex = 0 will fail if no items are added to cmdDatabases
+        End Try
     End Sub
 
     Private Sub LoginForm_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -211,22 +261,15 @@ Public Class frmLogin
     End Sub
 
     Private Sub lblDbdetails_Click(sender As Object, e As EventArgs) Handles lblDbdetails.Click
-        If Not My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
-            MsgBox("You must be an Administrator in order to manage database connections. When starting the program, right-click on the Climsoft icon and choose ""Run as administrator""")
-            ' It's useful to refresh the databases here so that you don't need to restart if reg has been updated externally
-            refreshDatabases()
-        Else
-            frmDatabaseConnections.ShowDialog()
-        End If
-    End Sub
-
-    Private Sub cmbDatabases_Click(sender As Object, e As EventArgs) Handles cmbDatabases.Click
-
-    End Sub
-
-
-    Private Sub cmbDatabases_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatabases.SelectedIndexChanged
-
+        'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Or My.Computer.Keyboard.CtrlKeyDown Then
+        '    frmDatabaseConnections.ShowDialog()
+        'Else
+        '    MsgBox("You must be an Administrator in order to manage database connections. When starting the program, right-click on the Climsoft icon and choose ""Run as administrator""")
+        '    ' It's useful to refresh the databases here so that you don't need to restart if reg has been updated externally
+        '    refreshDatabases()
+        'End If
+        frmDatabaseConnections.ShowDialog()
+        refreshDatabases()
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click

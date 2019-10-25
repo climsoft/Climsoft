@@ -51,39 +51,15 @@
     <ApplicationIcon>myweat02.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DynamicInterop">
-      <HintPath>..\packages\DynamicInterop.0.7.4\lib\net40\DynamicInterop.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.10\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.9.10\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RDotNet">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="RDotNet.NativeLibrary">
-      <HintPath>..\packages\R.NET.Community.1.6\lib\net40\RDotNet.NativeLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
-    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -108,66 +84,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="abc.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="acquisitiontype.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_basestation.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_elements.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_malawi1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_malawi12.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_mss.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_process_parameters.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_rwanda4.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_sasscal1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_sites.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_stations.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_structures.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_tahmo.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="aws_toa5_mg2.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bufr_crex_data.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bufr_crex_master.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="bufr_indicators.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="climsoftuser.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ClsCloneFunctions.vb" />
     <Compile Include="clsDataCall.vb" />
     <Compile Include="clsDataConnection.vb" />
@@ -175,24 +91,8 @@
     <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
-    <Compile Include="clsRInterface.vb" />
     <Compile Include="clsTableFilter.vb" />
-    <Compile Include="code_flag.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
-    <Compile Include="data_forms.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="featuregeographicalposition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="flag.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="flagtable.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="formAgro1.Designer.vb">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </Compile>
@@ -204,35 +104,6 @@
     </Compile>
     <Compile Include="formSynopticCaribbean.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_agro1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_daily2.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourly.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourlywind.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_hourly_time_selection.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_monthly.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_synoptic2_tdcf.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="form_synoptic_2_ra1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="frmCharts.Designer.vb">
       <DependentUpon>frmCharts.vb</DependentUpon>
@@ -697,33 +568,6 @@
     <Compile Include="frmViewImage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="instrument.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="instrumentfaultreport.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="language_translation.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="missing_stats.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Application1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -733,20 +577,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Resources.de.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.de.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\Resources.fr.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -760,45 +594,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Common.vb" />
-    <Compile Include="obselement.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="observationfinal.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="observationinitial.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="obsscheduleclass.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="paperarchivedefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="physicalfeature.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="physicalfeatureclass.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="qcstatusdefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="qctype.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="qc_interelement_1.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="qc_interelement_2.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="qc_interelement_relationship_definition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="regkey.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="sdgFilter.Designer.vb">
       <DependentUpon>sdgFilter.vb</DependentUpon>
     </Compile>
@@ -806,72 +601,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ClsShiftCells.vb" />
-    <Compile Include="seq_daily_element.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_element.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_monthly_element.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day_element.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day_element_leap_yr.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day_leap_yr.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day_synoptime.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="seq_month_day_synoptime_leap_yr.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.Designer.vb">
-      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewAgroMet.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.Designer.vb">
-      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\frmNewCaribbean.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.Designer.vb">
-      <DependentUpon>ucrAgroMet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrAgroMet.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.Designer.vb">
-      <DependentUpon>ucrCaribbean.vb</DependentUpon>
-    </Compile>
-    <Compile Include="static\ClimateObject\man\rdsav\ucrCaribbean.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="station.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="stationnetworkdefinition.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="synopfeature.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tblproduct.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tm_307091.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="ucrBaseDataLink.Designer.vb">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
     </Compile>
@@ -1058,9 +787,6 @@
     <Compile Include="ucrYearSelector.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="userrecord.vb">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="formAgro1.resx">
@@ -1102,12 +828,6 @@
     <EmbeddedResource Include="frmNewSynopticRA1.resx">
       <DependentUpon>frmNewSynopticRA1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formClimat.de.resx">
-      <DependentUpon>formClimat.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formClimat.fr.resx">
-      <DependentUpon>formClimat.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formAWSRealTime.resx">
       <DependentUpon>formAWSRealTime.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1116,47 +836,17 @@
       <DependentUpon>formClimat.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDaily1.de.resx">
-      <DependentUpon>formDaily1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDaily1.fr.resx">
-      <DependentUpon>formDaily1.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formDaily1.resx">
       <DependentUpon>formDaily1.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDaily2.de.resx">
-      <DependentUpon>formDaily2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDaily2.fr.resx">
-      <DependentUpon>formDaily2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formDaily2.resx">
       <DependentUpon>formDaily2.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDatabaseConnect.de.resx">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formDatabaseConnect.fr.resx">
-      <DependentUpon>formDatabaseConnect.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formDataView.resx">
       <DependentUpon>formDataView.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formElement.de.resx">
-      <DependentUpon>formElement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formElement.fr.resx">
-      <DependentUpon>formElement.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formHourly.de.resx">
-      <DependentUpon>formHourly.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formHourly.fr.resx">
-      <DependentUpon>formHourly.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formHourlyWind.resx">
       <DependentUpon>formHourlyWind.vb</DependentUpon>
@@ -1168,70 +858,8 @@
       <DependentUpon>formMetadata.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formMonthly.de.resx">
-      <DependentUpon>formMonthly.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formMonthly.fr.resx">
-      <DependentUpon>formMonthly.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="formOptions.resx">
       <DependentUpon>formOptions.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProducts.de.resx">
-      <DependentUpon>formProducts.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProducts.fr.resx">
-      <DependentUpon>formProducts.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProductsSelect.de.resx">
-      <DependentUpon>formProductsSelect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProductsSelect.fr.resx">
-      <DependentUpon>formProductsSelect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProductsSelectCriteria.de.resx">
-      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formProductsSelectCriteria.fr.resx">
-      <DependentUpon>formProductsSelectCriteria.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formStation.de.resx">
-      <DependentUpon>formStation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formStation.fr.resx">
-      <DependentUpon>formStation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formSynopRA1.de.resx">
-      <DependentUpon>formSynopRA1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formSynopRA1.fr.resx">
-      <DependentUpon>formSynopRA1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formUpperAir.de.resx">
-      <DependentUpon>formUpperAir.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formUpperAir.fr.resx">
-      <DependentUpon>formUpperAir.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formWindRose.de.resx">
-      <DependentUpon>formWindRose.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="formWindRose.fr.resx">
-      <DependentUpon>formWindRose.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAction.de-DE.resx">
-      <DependentUpon>frmAction.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAction.de.resx">
-      <DependentUpon>frmAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAction.en-GB.resx">
-      <DependentUpon>frmAction.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAction.fr.resx">
-      <DependentUpon>frmAction.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAWSelements.resx">
       <DependentUpon>frmAWSelements.vb</DependentUpon>
@@ -1244,12 +872,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBackupRestore.resx">
       <DependentUpon>frmBackupRestore.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmBUFr.de.resx">
-      <DependentUpon>frmBUFR.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmBUFr.fr.resx">
-      <DependentUpon>frmBUFR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBUFr.resx">
       <DependentUpon>frmBUFR.vb</DependentUpon>
@@ -1269,34 +891,14 @@
     <EmbeddedResource Include="frmCrex.resx">
       <DependentUpon>frmCrex.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDataEntry.de.resx">
-      <DependentUpon>frmDataEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataEntry.fr.resx">
-      <DependentUpon>frmDataEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmDataForms.resx">
       <DependentUpon>frmDataForms.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDataMigration.resx">
       <DependentUpon>frmDataMigration.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDataOutpt.de.resx">
-      <DependentUpon>frmDataOutpt.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDataOutpt.fr.resx">
-      <DependentUpon>frmDataOutpt.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmDataTransferProgress.resx">
       <DependentUpon>frmDataTransferProgress.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDBUtilities.de.resx">
-      <DependentUpon>frmDBUtilities.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDBUtilities.fr.resx">
-      <DependentUpon>frmDBUtilities.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formPaperArchive.resx">
       <DependentUpon>formPaperArchive.vb</DependentUpon>
@@ -1318,14 +920,6 @@
     <EmbeddedResource Include="frmElementSequencerDaily.resx">
       <DependentUpon>frmElementSequencerDaily.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneral.de.resx">
-      <DependentUpon>frmGeneral.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGeneral.fr.resx">
-      <DependentUpon>frmGeneral.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmGeneralSettings.resx">
       <DependentUpon>frmGeneralSettings.vb</DependentUpon>
     </EmbeddedResource>
@@ -1343,12 +937,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportDaily.resx">
       <DependentUpon>frmImportDaily.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLanguage.de.resx">
-      <DependentUpon>frmLanguage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLanguage.fr.resx">
-      <DependentUpon>frmLanguage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLanguage.resx">
       <DependentUpon>frmLanguage.vb</DependentUpon>
@@ -1399,27 +987,8 @@
       <DependentUpon>frmGeneral.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLaunchPad.de.resx">
-      <DependentUpon>frmLaunchPad.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLaunchPad.fr.resx">
-      <DependentUpon>frmLaunchPad.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmLaunchPad.resx">
       <DependentUpon>frmLaunchPad.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.de.resx">
-      <DependentUpon>frmLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.fr.resx">
-      <DependentUpon>frmLogin.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMenu.de.resx">
-      <DependentUpon>frmMainMenu.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMenu.fr.resx">
-      <DependentUpon>frmMainMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
@@ -1436,14 +1005,6 @@
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmQC.de.resx">
-      <DependentUpon>frmQC.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmQC.fr.resx">
-      <DependentUpon>frmQC.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmQC.resx">
       <DependentUpon>frmQC.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1456,12 +1017,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRestore.resx">
       <DependentUpon>frmRestore.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSplashScreen.de.resx">
-      <DependentUpon>frmSplashScreen.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSplashScreen.fr.resx">
-      <DependentUpon>frmSplashScreen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSynopTDCF.resx">
       <DependentUpon>frmSynopTDCF.vb</DependentUpon>
@@ -1481,16 +1036,6 @@
     <EmbeddedResource Include="frmViewImage.resx">
       <DependentUpon>frmViewImage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.de.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmUsers.resx">
       <DependentUpon>frmUsers.vb</DependentUpon>
     </EmbeddedResource>
@@ -1505,18 +1050,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFilter.resx">
       <DependentUpon>sdgFilter.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewAgroMet.resx">
-      <DependentUpon>frmNewAgroMet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\frmNewCaribbean.resx">
-      <DependentUpon>frmNewCaribbean.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrAgroMet.resx">
-      <DependentUpon>ucrAgroMet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="static\ClimateObject\man\rdsav\ucrCaribbean.resx">
-      <DependentUpon>ucrCaribbean.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrBaseDataLink.resx">
       <DependentUpon>ucrBaseDataLink.vb</DependentUpon>
@@ -1608,15 +1141,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ClassDiagram2.cd" />
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application1.Designer.vb</LastGenOutput>
@@ -1631,32 +1155,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\MySql.Data.dll" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\ClimsoftVer4.de.xlf" />
-    <XliffResource Include="MultilingualResources\ClimsoftVer4.fr.xlf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.vb</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.vb</LastGenOutput>
-    </Content>
     <Content Include="myweat02.ico" />
     <None Include="Resources\navigation-first.jpg" />
     <None Include="Resources\navigation-left.jpg" />
     <None Include="Resources\navigation-right.jpg" />
     <None Include="Resources\navigation-last.jpg" />
-    <Content Include="static\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
