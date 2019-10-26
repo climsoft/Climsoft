@@ -1,5 +1,4 @@
-﻿Imports System.Data.Entity
-
+﻿
 Public Class ucrNavigation
     Public Event evtValueChanged(sender As Object, e As EventArgs)
     Private bFirstLoad As Boolean = True
@@ -13,7 +12,6 @@ Public Class ucrNavigation
     Private dctKeyControls As New Dictionary(Of String, ucrValueView)
     Private ucrLinkedTableEntry As ucrTableEntry
     Public bSuppressKeyControlChanges As Boolean = False
-    'Public bNewRecordMode As Boolean = False
 
     Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then

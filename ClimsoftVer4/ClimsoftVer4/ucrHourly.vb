@@ -3,7 +3,7 @@
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
 
-    Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
@@ -34,7 +34,7 @@
 
             bFirstLoad = False
 
-            'ucrNavigation.SetSortBy("entryDatetime")
+            ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl() 'populate the values
 
         End If
