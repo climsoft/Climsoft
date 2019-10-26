@@ -283,7 +283,7 @@
 
         'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
         'Once this is fixed, the argument can be removed
-        frm.backgroundWorker.RunWorkerAsync(frmLogin.txtusrpwd.Text)
+        frm.backgroundWorker.RunWorkerAsync()
 
         frm.Show()
     End Sub
@@ -304,8 +304,6 @@
         Dim lstAllFields As New List(Of String)
         Dim bUpdateRecord As Boolean
         Dim strSql As String
-        Dim strSignature As String
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim pos As Integer = 0
         Dim invalidRecord As Boolean = False
         Dim strResult As String = ""
@@ -323,15 +321,10 @@
 
         Try
             strTableName = GetTableName()
-            'clsDataCall.SetTableNameAndFields("obselement", {"lowerLimit", "upperLimit", "qcTotalRequired"})
-            'dtbl = clsDataDefinition.GetDataTable()
-
 
             'Temporary.The current connection properties are being stored in control, this line can be removed in future
-            conn.ConnectionString = e.Argument
-            conn.Open()
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -378,7 +371,7 @@
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -404,7 +397,7 @@
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -442,14 +435,8 @@
 
         Catch ex As Exception
             e.Result = "Error " & ex.Message
-        Finally
-            conn.Close()
         End Try
 
-
-
-        'TODO? because of the detachment
-        'PopulateControl()
 
     End Sub
 
