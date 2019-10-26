@@ -318,9 +318,11 @@
 
         'Dim clsDataCall As New DataCall
         Dim strTableName As String
+        Dim strSignature As String
 
         Try
             strTableName = GetTableName()
+            strSignature = frmLogin.txtUsername.Text
 
             'Temporary.The current connection properties are being stored in control, this line can be removed in future
             'Get all the records from the table
