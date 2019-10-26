@@ -25,6 +25,7 @@
             'set the validation of the controls
             SetValuesValidation()
 
+            'TODO. What to do if the were already set values if this was already new record
             If Not bUpdating Then
                 dtbRecords.Rows.Add(dtbRecords.NewRow())
             End If

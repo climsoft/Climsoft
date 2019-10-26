@@ -231,7 +231,13 @@ Public Class ucrNavigation
     End Sub
 
     Private Sub KeyControls_evtValueChanged()
-        If Not bSuppressKeyControlChanges AndAlso iCurrRow <> -1 Then
+        'If Not bSuppressKeyControlChanges AndAlso iCurrRow <> -1 Then
+        '    UpdateNavigationByKeyControls()
+        'End If
+
+        'this should always be called. The iCurrRow <> -1 check has been omitted because
+        'of validation reasons. 
+        If Not bSuppressKeyControlChanges Then
             UpdateNavigationByKeyControls()
         End If
     End Sub
