@@ -20,6 +20,8 @@
             Next
 
             SetUpTableEntry("form_hourly")
+            AddField("signature")
+            AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
@@ -49,6 +51,24 @@
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+    Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
+        'Change the signature(user) and the DATETIME first before saving 
+        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+    End Sub
+
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'upload code in the background thread
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrNavigation.iMaxRows)
+        frm.ShowNumbers(True)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        frm.backgroundWorker.RunWorkerAsync()
+        frm.Show()
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
@@ -272,21 +292,7 @@
 
     End Sub
 
-    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        'upload code in the background thread
-        Dim frm As New frmNewComputationProgress
-        frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
-        frm.SetProgressMaximum(ucrNavigation.iMaxRows)
-        frm.ShowNumbers(True)
-        frm.ShowResultMessage(True)
-        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
 
-        'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
-        'Once this is fixed, the argument can be removed
-        frm.backgroundWorker.RunWorkerAsync()
-
-        frm.Show()
-    End Sub
 
 
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
@@ -312,7 +318,6 @@
 
         Try
             strTableName = GetTableName()
-            'strSignature = frmLogin.txtUsername.Text
 
             'Get all the records from the table
             Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
@@ -437,5 +442,6 @@
 
 
     End Sub
+
 
 End Class

@@ -53,6 +53,9 @@ Public Class ucrBaseDataLink
     Public Function GetTableName() As String
         Return strTableName
     End Function
+    Public Function GetTable() As DataTable
+        Return dtbRecords
+    End Function
 
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         CreateDataDefinition()
@@ -143,6 +146,8 @@ Public Class ucrBaseDataLink
             dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
         End If
     End Sub
+
+
 
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
