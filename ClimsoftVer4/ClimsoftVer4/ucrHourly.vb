@@ -292,7 +292,6 @@
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
-        'Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As New DataTable
         Dim strValueColumn As String
         Dim strFlagColumn As String
@@ -301,32 +300,24 @@
         Dim lElementId As Long
         Dim hh As Integer
         Dim dtObsDateTime As Date
-        Dim lstAllFields As New List(Of String)
         Dim bUpdateRecord As Boolean
         Dim strSql As String
         Dim pos As Integer = 0
         Dim invalidRecord As Boolean = False
         Dim strResult As String = ""
-
-        'get the observation values fields
-        lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
-
-        'clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        'dtbAllRecords = clsAllRecordsCall.GetDataTable()
-
-        'Dim clsDataCall As New DataCall
+        Dim iUpdatesNum As Integer = 0
+        Dim iInsertsNum As Integer = 0
         Dim strTableName As String
         Dim strSignature As String
 
         Try
             strTableName = GetTableName()
-            strSignature = frmLogin.txtUsername.Text
+            'strSignature = frmLogin.txtUsername.Text
 
-            'Temporary.The current connection properties are being stored in control, this line can be removed in future
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
+                "Select * FROM " & strTableName & " ORDER BY entryDatetime",
+                clsDataConnection.OpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -412,10 +403,15 @@
                                 cmd.Parameters.AddWithValue("@dataForm", strTableName)
                                 cmd.ExecuteNonQuery()
                             End Using
+                            If bUpdateRecord Then
+                                iUpdatesNum += 1
+                            Else
+                                iInsertsNum += 1
+                            End If
                         Catch ex As Exception
                             'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded" &
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded | " &
                                  " Station: " & strStationId & ", Element: " & lElementId &
                                 ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Date: " & dtObsDateTime &
                                 ". This record was skipped" & Environment.NewLine
@@ -425,15 +421,15 @@
                 Next
 
                 'Display progress of data transfer
-                pos = pos + 1
+                pos += 1
                 backgroundWorker.ReportProgress(pos)
             Next
 
             If Not invalidRecord Then
-                e.Result = "Records have been uploaded sucessfully"
-            Else
-                e.Result = strResult
+                strResult = "All Records have been uploaded sucessfully "
             End If
+
+            e.Result = strResult & Environment.NewLine & "Total New Records: " & iInsertsNum & Environment.NewLine & "Total Updates: " & iUpdatesNum
 
         Catch ex As Exception
             e.Result = "Error " & ex.Message

@@ -390,21 +390,19 @@ Public Class ucrNavigation
         Dim dtbSequencer As DataTable
         Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
         Dim strSelectStatement As String = ""
-        Dim rowsFitered As DataRow()
         Dim iCurrentSequencerRow As Integer
-        Dim rowNext As DataRow
-        Dim ucrTemp As ucrDataLinkCombobox
-        Dim bIncrementYear As Boolean = False
 
         MoveLast()
 
-        If String.IsNullOrEmpty(strSequencer) Then
+        If String.IsNullOrEmpty(strSequencer) OrElse ucrLinkedTableEntry Is Nothing OrElse dctKeyControls.Count < 1 Then
             Exit Sub
         End If
 
+        'fill all the sequencer values from the database
         clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
+        'create the select filter statement to be used against the datatable
         For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
             If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
                 dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
@@ -414,23 +412,16 @@ Public Class ucrNavigation
                 strSelectStatement = strSelectStatement & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
             End If
         Next
-        Try
-            rowsFitered = dtbSequencer.Select(strSelectStatement)
-        Catch ex As Exception
-            rowsFitered = Nothing
-        End Try
 
-        If ucrLinkedTableEntry Is Nothing OrElse dctKeySequencerControls.Count < 1 OrElse rowsFitered Is Nothing OrElse rowsFitered.Count < 1 Then
-            Exit Sub
+        'get the current row index from the seqencer row and if exists then compute the next record
+        iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strSelectStatement).FirstOrDefault)
+        If iCurrentSequencerRow > -1 Then
+            IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
         End If
-
-        'Left here. Test this
-        iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
-        IncrementSequencerValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
     End Sub
 
     'Increments the sequncer values and tries to populate the table entry.
-    Private Sub IncrementSequencerValues(dtbSequencer As DataTable, dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
+    Private Sub IncrementNextSequencerRowValues(dtbSequencer As DataTable, dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
         If iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 Then
             Dim rowNext As DataRow
             rowNext = dtbSequencer.Rows(iSelectedSequencerRow)
@@ -445,7 +436,7 @@ Public Class ucrNavigation
             If ucrLinkedTableEntry.bUpdating Then
                 'go to the next sequncer values
                 iSelectedSequencerRow = iSelectedSequencerRow + 1
-                IncrementSequencerValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+                IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
             End If
         Else
             'try incrementing date values
@@ -456,10 +447,12 @@ Public Class ucrNavigation
                     ucrTemp = lstDateIncrementControls(j)
                     If ucrTemp.cboValues.SelectedIndex < ucrTemp.cboValues.Items.Count - 1 Then
                         'TODO do this through SetValue() instead
-                        ucrTemp.cboValues.SelectedIndex = ucrTemp.cboValues.SelectedIndex + 1
+                        'ucrTemp.cboValues.SelectedIndex = ucrTemp.cboValues.SelectedIndex + 1
+                        ucrTemp.SetValue(ucrTemp.GetValue + 1) ' TODO. Test this 
                         Exit For
                     Else
-                        ucrTemp.cboValues.SelectedIndex = 0
+                        'ucrTemp.cboValues.SelectedIndex = 0
+                        ucrTemp.SetValue(0) ' TODO. Test this 
                         If j = lstDateIncrementControls.Count - 1 Then
                             bIncrementYear = True
                         End If
@@ -470,7 +463,7 @@ Public Class ucrNavigation
                     ucrYear.SetValue(ucrYear.GetValue() + 1)
                 End If
                 If ucrLinkedTableEntry.bUpdating Then
-                    IncrementSequencerValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
                 End If
 
             End If
@@ -478,8 +471,8 @@ Public Class ucrNavigation
 
     End Sub
 
-    'TODO.Remove this later
-    Public Sub NewSequencerRecordOLD(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+    'TODO.Remove this later. Left here for reference
+    Private Sub NewSequencerRecordOLD(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
         Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
