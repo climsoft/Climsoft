@@ -267,19 +267,19 @@ Public Class ucrFormDaily2
     End Sub
 
     Protected Overrides Sub ValidateDataEntryPermission()
-        Dim bEnabled As Boolean
         Dim iMonthLength As Integer
         Dim todaysDate As Date
-        Dim ctr As Control
+        todaysDate = Date.Now
 
         If ucrYearSelector.ValidateValue AndAlso ucrMonth.ValidateValue Then
-            todaysDate = Date.Now
-            iMonthLength = Date.DaysInMonth(ucrYearSelector.GetValue, ucrMonth.GetValue())
-
             If ucrYearSelector.GetValue > todaysDate.Year OrElse (ucrYearSelector.GetValue = todaysDate.Year AndAlso ucrMonth.GetValue > todaysDate.Month) Then
-                Me.Enabled = False
+                For Each ctr As Control In Me.Controls
+                    If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
+                        ctr.Enabled = False
+                    End If
+                Next
+
             Else
-                Me.Enabled = True
                 If ucrYearSelector.GetValue = todaysDate.Year AndAlso ucrMonth.GetValue = todaysDate.Month Then
                     For Each ctr In Me.Controls
                         If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -287,6 +287,7 @@ Public Class ucrFormDaily2
                         End If
                     Next
                 Else
+                    iMonthLength = Date.DaysInMonth(ucrYearSelector.GetValue, ucrMonth.GetValue())
                     For Each ctr In Me.Controls
                         If TypeOf ctr Is ucrValueFlagPeriod Then
                             ctr.Enabled = If(Val(ctr.Tag > iMonthLength), False, True)
@@ -296,7 +297,11 @@ Public Class ucrFormDaily2
 
             End If
         Else
-            bEnabled = False
+            For Each ctr As Control In Me.Controls
+                If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
+                    ctr.Enabled = False
+                End If
+            Next
         End If
 
 
@@ -389,7 +394,10 @@ Public Class ucrFormDaily2
                         strCloudHeightUnits = ""
                         strVisUnits = ""
 
-                        Integer.TryParse(row.Item("period" & strCurrTag), iPeriod)
+                        If Not IsDBNull(row.Item("period" & strCurrTag)) Then
+                            Integer.TryParse(row.Item("period" & strCurrTag), iPeriod)
+                        End If
+
 
                         If Not IsDBNull(row.Item("signature")) Then
                             strSignature = row.Item("signature")
