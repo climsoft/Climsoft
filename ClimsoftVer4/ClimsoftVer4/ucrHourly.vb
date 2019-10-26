@@ -272,4 +272,8 @@
 
     End Sub
 
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'TODO. Left it here
+        'get the code from github
+    End Sub
 End Class

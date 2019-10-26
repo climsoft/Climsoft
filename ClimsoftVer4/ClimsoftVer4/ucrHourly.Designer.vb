@@ -193,7 +193,7 @@ Partial Class ucrHourly
         Me.btnSave.Location = New System.Drawing.Point(77, 527)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
-        Me.btnSave.TabIndex = 30
+        Me.btnSave.TabIndex = 31
         Me.btnSave.Tag = "save"
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -223,7 +223,7 @@ Partial Class ucrHourly
         Me.btnUpdate.Location = New System.Drawing.Point(144, 527)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
-        Me.btnUpdate.TabIndex = 31
+        Me.btnUpdate.TabIndex = 32
         Me.btnUpdate.Tag = "update"
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -386,7 +386,7 @@ Partial Class ucrHourly
         Me.ucrInputTotal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputTotal.Name = "ucrInputTotal"
         Me.ucrInputTotal.Size = New System.Drawing.Size(58, 26)
-        Me.ucrInputTotal.TabIndex = 29
+        Me.ucrInputTotal.TabIndex = 30
         Me.ucrInputTotal.TextboxValue = ""
         '
         'lblTotal
@@ -425,7 +425,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod23.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod23.Name = "UcrValueFlagPeriod23"
         Me.UcrValueFlagPeriod23.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod23.TabIndex = 28
+        Me.UcrValueFlagPeriod23.TabIndex = 29
         Me.UcrValueFlagPeriod23.Tag = "23"
         '
         'UcrValueFlagPeriod22
@@ -437,7 +437,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod22.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod22.Name = "UcrValueFlagPeriod22"
         Me.UcrValueFlagPeriod22.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod22.TabIndex = 27
+        Me.UcrValueFlagPeriod22.TabIndex = 28
         Me.UcrValueFlagPeriod22.Tag = "22"
         '
         'lbl21
@@ -530,7 +530,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod21.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod21.Name = "UcrValueFlagPeriod21"
         Me.UcrValueFlagPeriod21.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod21.TabIndex = 26
+        Me.UcrValueFlagPeriod21.TabIndex = 27
         Me.UcrValueFlagPeriod21.Tag = "21"
         '
         'UcrValueFlagPeriod20
@@ -542,7 +542,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod20.Name = "UcrValueFlagPeriod20"
         Me.UcrValueFlagPeriod20.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod20.TabIndex = 25
+        Me.UcrValueFlagPeriod20.TabIndex = 26
         Me.UcrValueFlagPeriod20.Tag = "20"
         '
         'UcrValueFlagPeriod19
@@ -554,7 +554,7 @@ Partial Class ucrHourly
         Me.UcrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod19.Name = "UcrValueFlagPeriod19"
         Me.UcrValueFlagPeriod19.Size = New System.Drawing.Size(126, 24)
-        Me.UcrValueFlagPeriod19.TabIndex = 726
+        Me.UcrValueFlagPeriod19.TabIndex = 25
         Me.UcrValueFlagPeriod19.Tag = "19"
         '
         'UcrValueFlagPeriod18
