@@ -1,6 +1,4 @@
-﻿Imports System.Data.SqlClient
-Imports System.Linq.Dynamic
-
+﻿
 Public Class ucrFormDaily2
 
     'These store field names for value, flag and period
@@ -44,6 +42,8 @@ Public Class ucrFormDaily2
             Next
 
             SetUpTableEntry("form_daily2")
+            AddField("signature")
+            AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
@@ -57,6 +57,7 @@ Public Class ucrFormDaily2
             bFirstLoad = False
 
             'populate the values
+            ucrDaily2Navigation.SetSortBy("entryDatetime")
             ucrDaily2Navigation.PopulateControl()
         End If
 
@@ -70,7 +71,11 @@ Public Class ucrFormDaily2
             ucrValueFlagPeriod1.Focus()
         End If
     End Sub
-
+    Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
+        'Change the signature(user) and the DATETIME first before saving 
+        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+    End Sub
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql, userName As String
@@ -106,11 +111,17 @@ Public Class ucrFormDaily2
         Next
     End Sub
 
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-            UploadAllRecords()
-            'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'upload code in the background thread
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrDaily2Navigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrDaily2Navigation.iMaxRows)
+        frm.ShowNumbers(True)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        frm.backgroundWorker.RunWorkerAsync()
+        frm.Show()
     End Sub
 
     Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
@@ -119,15 +130,11 @@ Public Class ucrFormDaily2
 
     Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
         If e.KeyCode = Keys.Enter Then
-            If Not checkTotal() Then
+            If Not CheckTotal() Then
                 ucrInputTotal.Focus()
                 e.SuppressKeyPress = True
             End If
         End If
-    End Sub
-
-    Private Sub ucrInputTotal_Leave(sender As Object, e As EventArgs) Handles ucrInputTotal.Leave
-        'checkTotal()
     End Sub
 
     Private Function IsValuesEmpty() As Boolean
@@ -166,7 +173,7 @@ Public Class ucrFormDaily2
             End If
 
             'check computed total vs input total
-            If Not checkTotal() Then
+            If Not CheckTotal() Then
                 ucrInputTotal.Focus()
                 Return False
             End If
@@ -177,8 +184,8 @@ Public Class ucrFormDaily2
 
     End Function
 
-    Private Function checkTotal() As Boolean
-        Dim bValueCorrect As Boolean = False
+    Private Function CheckTotal() As Boolean
+        Dim bValueCorrect As Boolean
         Dim elemTotal As Decimal = 0
         Dim expectedTotal As Decimal
 
@@ -284,34 +291,15 @@ Public Class ucrFormDaily2
         End If
     End Sub
 
-    'upload code in the background thread
-    Private Sub UploadAllRecords()
-        Dim frm As New frmNewComputationProgress
-        frm.SetHeader("Uploading " & ucrDaily2Navigation.iMaxRows & " records")
-        frm.SetProgressMaximum(ucrDaily2Navigation.iMaxRows)
-        frm.ShowResultMessage(True)
-        'frm.SetPretextProgress("Uploading")
-        frm.ShowNumbers(True)
-        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
-
-        'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
-        'Once this is fixed, the argument can be removed
-        frm.backgroundWorker.RunWorkerAsync(frmLogin.txtusrpwd.Text)
-
-        frm.Show()
-    End Sub
-
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
-        'Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As New DataTable
         Dim strCurrTag As String
         Dim dtObsDateTime As Date
         Dim strStationId As String
         Dim lElementId As Long
         Dim iPeriod As Integer
-        Dim lstAllFields As New List(Of String)
         Dim bUpdateRecord As Boolean
         Dim strSql As String
         Dim strSignature As String
@@ -319,26 +307,19 @@ Public Class ucrFormDaily2
         Dim strPrecipUnits As String
         Dim strCloudHeightUnits As String
         Dim strVisUnits As String
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim pos As Integer = 0
+        Dim iUpdatesNum As Integer = 0
+        Dim iInsertsNum As Integer = 0
         Dim invalidRecord As Boolean = False
         Dim strResult As String = ""
-
-        'get the observation values fields
-        'lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        'lstAllFields.AddRange({"signature"})
-
-        'clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        'dtbAllRecords = clsAllRecordsCall.GetDataTable()
+        Dim strTableName As String
 
         Try
 
-            'Temporary.The current connection properties are being stored in control, this line can be removed in future
-            conn.ConnectionString = e.Argument
-            conn.Open()
+            strTableName = GetTableName()
+
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -362,22 +343,12 @@ Public Class ucrFormDaily2
                     If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
-
-                        Try
-                            dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
-
-                        Catch ex As Exception
-                            Dim k = True
-                            Continue For
-                        End Try
-
-
                         Try
                             dtObsDateTime = New Date(year:=row.Item("yyyy"), month:=row.Item("mm"), day:=i, hour:=row.Item("hh"), minute:=0, second:=0)
                         Catch ex As Exception
                             'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
                             invalidRecord = True
-                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record | " &
                                 " Station: " & strStationId & ", Element: " & lElementId &
                                 ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Hour: " & row.Item("hh") &
                                 ". This row was skipped" & Environment.NewLine
@@ -387,13 +358,13 @@ Public Class ucrFormDaily2
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
                             cmd.Parameters.AddWithValue("@qcStatus", 0)
                             cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                            cmd.Parameters.AddWithValue("@dataForm", GetTableName)
+                            cmd.Parameters.AddWithValue("@dataForm", strTableName)
 
                             Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
                                 bUpdateRecord = reader.HasRows
@@ -434,9 +405,8 @@ Public Class ucrFormDaily2
                             "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm,@temperatureUnits,@precipUnits,@cloudHeightUnits,@visUnits)"
                         End If
 
-
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                                 'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
@@ -453,9 +423,13 @@ Public Class ucrFormDaily2
                                 cmdSave.Parameters.AddWithValue("@precipUnits", strPrecipUnits)
                                 cmdSave.Parameters.AddWithValue("@cloudHeightUnits", strCloudHeightUnits)
                                 cmdSave.Parameters.AddWithValue("@visUnits", strVisUnits)
-                                'cmd.ExecuteScalar().ToString()
                                 cmdSave.ExecuteNonQuery()
                             End Using
+                            If bUpdateRecord Then
+                                iUpdatesNum += 1
+                            Else
+                                iInsertsNum += 1
+                            End If
                         Catch ex As Exception
                             'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
                             invalidRecord = True
@@ -470,29 +444,21 @@ Public Class ucrFormDaily2
                 Next
 
                 'Display progress of data transfer
-                pos = pos + 1
+                pos += 1
                 backgroundWorker.ReportProgress(pos)
 
             Next
 
             If Not invalidRecord Then
-                e.Result = "Records have been uploaded sucessfully"
-            Else
-                e.Result = strResult
+                strResult = "All Records have been uploaded sucessfully "
             End If
+
+            e.Result = strResult & Environment.NewLine & "Total New Records: " & iInsertsNum & Environment.NewLine & "Total Updates: " & iUpdatesNum
 
         Catch ex As Exception
             e.Result = "Error " & ex.Message
-        Finally
-            conn.Close()
         End Try
 
-
-
-        'TODO? because of the detachment
-        'PopulateControl()
-
     End Sub
-
 
 End Class
