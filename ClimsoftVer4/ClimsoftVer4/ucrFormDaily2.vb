@@ -94,8 +94,16 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click
-        'todo a message input box??
-        Dim strNewValue As String = ""
+
+        Dim strUserInput As String = InputBox("Enter the value", "Same Value Entry", "")
+        If String.IsNullOrWhiteSpace(strUserInput) Then
+            Exit Sub
+        ElseIf Not IsNumeric(strUserInput) Then
+            MessageBox.Show("Only numerical values allowed", "Same Value Entry", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        Dim strNewValue As String = strUserInput
         Dim ucrVFP As ucrValueFlagPeriod
         'Adds values to only enabled controls of the ucrHourly
         For Each ctr As Control In Me.Controls
@@ -259,6 +267,7 @@ Public Class ucrFormDaily2
     End Sub
 
     Protected Overrides Sub ValidateDataEntryPermission()
+        Dim bEnabled As Boolean
         Dim iMonthLength As Integer
         Dim todaysDate As Date
         Dim ctr As Control
@@ -287,8 +296,10 @@ Public Class ucrFormDaily2
 
             End If
         Else
-            Me.Enabled = False
+            bEnabled = False
         End If
+
+
     End Sub
 
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
