@@ -204,6 +204,7 @@ Public Class ucrHourlyWind
     End Function
 
     Protected Overrides Sub ValidateDataEntryPermission()
+        Dim bEnabled As Boolean
         'if its an update or any of the linked year,month and day selector is nothing then just exit the sub
         If ucrYearSelector.ValidateValue AndAlso ucrMonth.ValidateValue AndAlso ucrDay.ValidateValue Then
             Dim todayDate As Date = Date.Now
@@ -215,12 +216,16 @@ Public Class ucrHourlyWind
 
             'if selectedDate  is earlier than todayDate (<0)  then its a valid date for data entry
             'if it is same time (0) or later than (>0) then its invalid, disable control
-            Me.Enabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
+            bEnabled = If(Date.Compare(selectedDate, todayDate) < 0, True, False)
         Else
-            Me.Enabled = False
+            bEnabled = False
         End If
 
-        'TODO. Enable or Disable the direction speed controls
+        For Each ctr As Control In Me.Controls
+            If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
+                ctr.Enabled = bEnabled
+            End If
+        Next
     End Sub
 
     ''' <summary>
