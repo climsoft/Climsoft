@@ -94,16 +94,7 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub btnAssignSameValue_Click(sender As Object, e As EventArgs) Handles btnAssignSameValue.Click
-
-        Dim strUserInput As String = InputBox("Enter the value", "Same Value Entry", "")
-        If String.IsNullOrWhiteSpace(strUserInput) Then
-            Exit Sub
-        ElseIf Not IsNumeric(strUserInput) Then
-            MessageBox.Show("Only numerical values allowed", "Same Value Entry", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-
-        Dim strNewValue As String = strUserInput
+        Dim strNewValue As String = ucrInputSameValue.GetValue
         Dim ucrVFP As ucrValueFlagPeriod
         'Adds values to only enabled controls of the ucrHourly
         For Each ctr As Control In Me.Controls
