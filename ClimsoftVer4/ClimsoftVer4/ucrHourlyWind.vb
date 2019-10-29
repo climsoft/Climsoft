@@ -1,10 +1,9 @@
-﻿Imports System.Linq.Dynamic
+﻿
 
 Public Class ucrHourlyWind
     Private strDirectionFieldName As String = "elem_112_"
     Private strSpeedFieldName As String = "elem_111_"
     Private strFlagFieldName As String = "ddflag"
-    Private strTotalFieldName As String = "total"
     Private iDirectionElementId As Integer
     Private iSpeedElementId As Integer
     Private bSpeedTotalRequired As Boolean
