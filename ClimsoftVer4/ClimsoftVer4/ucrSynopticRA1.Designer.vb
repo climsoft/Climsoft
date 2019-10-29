@@ -606,6 +606,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPStationLevelPressure
         '
         Me.ucrVFPStationLevelPressure.FieldName = "106"
+        Me.ucrVFPStationLevelPressure.IncludePeriod = True
         Me.ucrVFPStationLevelPressure.KeyControl = False
         Me.ucrVFPStationLevelPressure.Location = New System.Drawing.Point(156, 83)
         Me.ucrVFPStationLevelPressure.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -617,6 +618,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPHighLvlCloudsType
         '
         Me.ucrVFPHighLvlCloudsType.FieldName = "171"
+        Me.ucrVFPHighLvlCloudsType.IncludePeriod = True
         Me.ucrVFPHighLvlCloudsType.KeyControl = False
         Me.ucrVFPHighLvlCloudsType.Location = New System.Drawing.Point(156, 515)
         Me.ucrVFPHighLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -628,6 +630,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPMediumLvlClouds
         '
         Me.ucrVFPMediumLvlClouds.FieldName = "170"
+        Me.ucrVFPMediumLvlClouds.IncludePeriod = True
         Me.ucrVFPMediumLvlClouds.KeyControl = False
         Me.ucrVFPMediumLvlClouds.Location = New System.Drawing.Point(156, 491)
         Me.ucrVFPMediumLvlClouds.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -639,6 +642,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPLowLvlCloudsType
         '
         Me.ucrVFPLowLvlCloudsType.FieldName = "169"
+        Me.ucrVFPLowLvlCloudsType.IncludePeriod = True
         Me.ucrVFPLowLvlCloudsType.KeyControl = False
         Me.ucrVFPLowLvlCloudsType.Location = New System.Drawing.Point(156, 467)
         Me.ucrVFPLowLvlCloudsType.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -650,6 +654,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPLowLvlCloudsAmt
         '
         Me.ucrVFPLowLvlCloudsAmt.FieldName = "168"
+        Me.ucrVFPLowLvlCloudsAmt.IncludePeriod = True
         Me.ucrVFPLowLvlCloudsAmt.KeyControl = False
         Me.ucrVFPLowLvlCloudsAmt.Location = New System.Drawing.Point(156, 443)
         Me.ucrVFPLowLvlCloudsAmt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -661,6 +666,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPVerticalSignificance
         '
         Me.ucrVFPVerticalSignificance.FieldName = "115"
+        Me.ucrVFPVerticalSignificance.IncludePeriod = True
         Me.ucrVFPVerticalSignificance.KeyControl = False
         Me.ucrVFPVerticalSignificance.Location = New System.Drawing.Point(156, 419)
         Me.ucrVFPVerticalSignificance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -672,6 +678,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPTotalCloudCover
         '
         Me.ucrVFPTotalCloudCover.FieldName = "114"
+        Me.ucrVFPTotalCloudCover.IncludePeriod = True
         Me.ucrVFPTotalCloudCover.KeyControl = False
         Me.ucrVFPTotalCloudCover.Location = New System.Drawing.Point(156, 395)
         Me.ucrVFPTotalCloudCover.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -683,6 +690,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPLowCloudHght
         '
         Me.ucrVFPLowCloudHght.FieldName = "192"
+        Me.ucrVFPLowCloudHght.IncludePeriod = True
         Me.ucrVFPLowCloudHght.KeyControl = False
         Me.ucrVFPLowCloudHght.Location = New System.Drawing.Point(156, 371)
         Me.ucrVFPLowCloudHght.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -694,6 +702,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPHorizontalVisibilty
         '
         Me.ucrVFPHorizontalVisibilty.FieldName = "110"
+        Me.ucrVFPHorizontalVisibilty.IncludePeriod = True
         Me.ucrVFPHorizontalVisibilty.KeyControl = False
         Me.ucrVFPHorizontalVisibilty.Location = New System.Drawing.Point(156, 347)
         Me.ucrVFPHorizontalVisibilty.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -705,6 +714,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPRelativeHumidity
         '
         Me.ucrVFPRelativeHumidity.FieldName = "105"
+        Me.ucrVFPRelativeHumidity.IncludePeriod = True
         Me.ucrVFPRelativeHumidity.KeyControl = False
         Me.ucrVFPRelativeHumidity.Location = New System.Drawing.Point(156, 323)
         Me.ucrVFPRelativeHumidity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -716,6 +726,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPDewPointTemp
         '
         Me.ucrVFPDewPointTemp.FieldName = "103"
+        Me.ucrVFPDewPointTemp.IncludePeriod = True
         Me.ucrVFPDewPointTemp.KeyControl = False
         Me.ucrVFPDewPointTemp.Location = New System.Drawing.Point(156, 299)
         Me.ucrVFPDewPointTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -727,6 +738,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPWetBulbTemp
         '
         Me.ucrVFPWetBulbTemp.FieldName = "102"
+        Me.ucrVFPWetBulbTemp.IncludePeriod = True
         Me.ucrVFPWetBulbTemp.KeyControl = False
         Me.ucrVFPWetBulbTemp.Location = New System.Drawing.Point(156, 275)
         Me.ucrVFPWetBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -738,6 +750,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPDryBulbTemp
         '
         Me.ucrVFPDryBulbTemp.FieldName = "101"
+        Me.ucrVFPDryBulbTemp.IncludePeriod = True
         Me.ucrVFPDryBulbTemp.KeyControl = False
         Me.ucrVFPDryBulbTemp.Location = New System.Drawing.Point(156, 251)
         Me.ucrVFPDryBulbTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -749,6 +762,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPGeopotentialHeight
         '
         Me.ucrVFPGeopotentialHeight.FieldName = "185"
+        Me.ucrVFPGeopotentialHeight.IncludePeriod = True
         Me.ucrVFPGeopotentialHeight.KeyControl = False
         Me.ucrVFPGeopotentialHeight.Location = New System.Drawing.Point(156, 227)
         Me.ucrVFPGeopotentialHeight.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -760,6 +774,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPStandardPressureLevel
         '
         Me.ucrVFPStandardPressureLevel.FieldName = "301"
+        Me.ucrVFPStandardPressureLevel.IncludePeriod = True
         Me.ucrVFPStandardPressureLevel.KeyControl = False
         Me.ucrVFPStandardPressureLevel.Location = New System.Drawing.Point(156, 203)
         Me.ucrVFPStandardPressureLevel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -771,6 +786,7 @@ Partial Class ucrSynopticRA1
         'ucrVFP24HrPressureChange
         '
         Me.ucrVFP24HrPressureChange.FieldName = "399"
+        Me.ucrVFP24HrPressureChange.IncludePeriod = True
         Me.ucrVFP24HrPressureChange.KeyControl = False
         Me.ucrVFP24HrPressureChange.Location = New System.Drawing.Point(156, 179)
         Me.ucrVFP24HrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -782,6 +798,7 @@ Partial Class ucrSynopticRA1
         'ucrVFP3hrPressureCharacteristic
         '
         Me.ucrVFP3hrPressureCharacteristic.FieldName = "814"
+        Me.ucrVFP3hrPressureCharacteristic.IncludePeriod = True
         Me.ucrVFP3hrPressureCharacteristic.KeyControl = False
         Me.ucrVFP3hrPressureCharacteristic.Location = New System.Drawing.Point(156, 155)
         Me.ucrVFP3hrPressureCharacteristic.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -793,6 +810,7 @@ Partial Class ucrSynopticRA1
         'ucrVFP3hrPressureChange
         '
         Me.ucrVFP3hrPressureChange.FieldName = "400"
+        Me.ucrVFP3hrPressureChange.IncludePeriod = True
         Me.ucrVFP3hrPressureChange.KeyControl = False
         Me.ucrVFP3hrPressureChange.Location = New System.Drawing.Point(156, 131)
         Me.ucrVFP3hrPressureChange.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -804,6 +822,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPressureReduced
         '
         Me.ucrVFPPressureReduced.FieldName = "107"
+        Me.ucrVFPPressureReduced.IncludePeriod = True
         Me.ucrVFPPressureReduced.KeyControl = False
         Me.ucrVFPPressureReduced.Location = New System.Drawing.Point(156, 107)
         Me.ucrVFPPressureReduced.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -815,6 +834,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudTypeLvlC4
         '
         Me.ucrVFPCloudTypeLvlC4.FieldName = "129"
+        Me.ucrVFPCloudTypeLvlC4.IncludePeriod = True
         Me.ucrVFPCloudTypeLvlC4.KeyControl = False
         Me.ucrVFPCloudTypeLvlC4.Location = New System.Drawing.Point(445, 419)
         Me.ucrVFPCloudTypeLvlC4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -826,6 +846,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudHtLvl4HsHs4
         '
         Me.ucrVFPCloudHtLvl4HsHs4.FieldName = "130"
+        Me.ucrVFPCloudHtLvl4HsHs4.IncludePeriod = True
         Me.ucrVFPCloudHtLvl4HsHs4.KeyControl = False
         Me.ucrVFPCloudHtLvl4HsHs4.Location = New System.Drawing.Point(445, 443)
         Me.ucrVFPCloudHtLvl4HsHs4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -837,6 +858,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPInsolation
         '
         Me.ucrVFPInsolation.FieldName = "046"
+        Me.ucrVFPInsolation.IncludePeriod = True
         Me.ucrVFPInsolation.KeyControl = False
         Me.ucrVFPInsolation.Location = New System.Drawing.Point(705, 395)
         Me.ucrVFPInsolation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -848,6 +870,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPWindSpeedfff
         '
         Me.ucrVFPWindSpeedfff.FieldName = "111"
+        Me.ucrVFPWindSpeedfff.IncludePeriod = True
         Me.ucrVFPWindSpeedfff.KeyControl = False
         Me.ucrVFPWindSpeedfff.Location = New System.Drawing.Point(705, 371)
         Me.ucrVFPWindSpeedfff.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -859,6 +882,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPWindDirectiondd
         '
         Me.ucrVFPWindDirectiondd.FieldName = "112"
+        Me.ucrVFPWindDirectiondd.IncludePeriod = True
         Me.ucrVFPWindDirectiondd.KeyControl = False
         Me.ucrVFPWindDirectiondd.Location = New System.Drawing.Point(705, 347)
         Me.ucrVFPWindDirectiondd.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -870,6 +894,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPrecip3Hr
         '
         Me.ucrVFPPrecip3Hr.FieldName = "174"
+        Me.ucrVFPPrecip3Hr.IncludePeriod = True
         Me.ucrVFPPrecip3Hr.KeyControl = False
         Me.ucrVFPPrecip3Hr.Location = New System.Drawing.Point(705, 323)
         Me.ucrVFPPrecip3Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -881,6 +906,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPrecip24Hr
         '
         Me.ucrVFPPrecip24Hr.FieldName = "005"
+        Me.ucrVFPPrecip24Hr.IncludePeriod = True
         Me.ucrVFPPrecip24Hr.KeyControl = False
         Me.ucrVFPPrecip24Hr.Location = New System.Drawing.Point(705, 299)
         Me.ucrVFPPrecip24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -892,6 +918,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPSss1Hr
         '
         Me.ucrVFPSss1Hr.FieldName = "132"
+        Me.ucrVFPSss1Hr.IncludePeriod = True
         Me.ucrVFPSss1Hr.KeyControl = False
         Me.ucrVFPSss1Hr.Location = New System.Drawing.Point(705, 275)
         Me.ucrVFPSss1Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -903,6 +930,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPSss24Hr
         '
         Me.ucrVFPSss24Hr.FieldName = "084"
+        Me.ucrVFPSss24Hr.IncludePeriod = True
         Me.ucrVFPSss24Hr.KeyControl = False
         Me.ucrVFPSss24Hr.Location = New System.Drawing.Point(705, 251)
         Me.ucrVFPSss24Hr.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -914,6 +942,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPEvaporation
         '
         Me.ucrVFPEvaporation.FieldName = "018"
+        Me.ucrVFPEvaporation.IncludePeriod = True
         Me.ucrVFPEvaporation.KeyControl = False
         Me.ucrVFPEvaporation.Location = New System.Drawing.Point(705, 227)
         Me.ucrVFPEvaporation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -925,6 +954,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPGrassMinTemp
         '
         Me.ucrVFPGrassMinTemp.FieldName = "099"
+        Me.ucrVFPGrassMinTemp.IncludePeriod = True
         Me.ucrVFPGrassMinTemp.KeyControl = False
         Me.ucrVFPGrassMinTemp.Location = New System.Drawing.Point(705, 204)
         Me.ucrVFPGrassMinTemp.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -936,6 +966,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPTmin
         '
         Me.ucrVFPTmin.FieldName = "003"
+        Me.ucrVFPTmin.IncludePeriod = True
         Me.ucrVFPTmin.KeyControl = False
         Me.ucrVFPTmin.Location = New System.Drawing.Point(705, 179)
         Me.ucrVFPTmin.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -947,6 +978,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPTmax
         '
         Me.ucrVFPTmax.FieldName = "002"
+        Me.ucrVFPTmax.IncludePeriod = True
         Me.ucrVFPTmax.KeyControl = False
         Me.ucrVFPTmax.Location = New System.Drawing.Point(705, 155)
         Me.ucrVFPTmax.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -958,6 +990,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPastWx2
         '
         Me.ucrVFPPastWx2.FieldName = "193"
+        Me.ucrVFPPastWx2.IncludePeriod = True
         Me.ucrVFPPastWx2.KeyControl = False
         Me.ucrVFPPastWx2.Location = New System.Drawing.Point(705, 131)
         Me.ucrVFPPastWx2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -969,6 +1002,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPastWx1
         '
         Me.ucrVFPPastWx1.FieldName = "197"
+        Me.ucrVFPPastWx1.IncludePeriod = True
         Me.ucrVFPPastWx1.KeyControl = False
         Me.ucrVFPPastWx1.Location = New System.Drawing.Point(705, 107)
         Me.ucrVFPPastWx1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -980,6 +1014,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPPresentWx
         '
         Me.ucrVFPPresentWx.FieldName = "167"
+        Me.ucrVFPPresentWx.IncludePeriod = True
         Me.ucrVFPPresentWx.KeyControl = False
         Me.ucrVFPPresentWx.Location = New System.Drawing.Point(705, 83)
         Me.ucrVFPPresentWx.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -991,6 +1026,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPVerticalSignificance4
         '
         Me.ucrVFPVerticalSignificance4.FieldName = "131"
+        Me.ucrVFPVerticalSignificance4.IncludePeriod = True
         Me.ucrVFPVerticalSignificance4.KeyControl = False
         Me.ucrVFPVerticalSignificance4.Location = New System.Drawing.Point(445, 371)
         Me.ucrVFPVerticalSignificance4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1002,6 +1038,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudAmtLvl4N4
         '
         Me.ucrVFPCloudAmtLvl4N4.FieldName = "128"
+        Me.ucrVFPCloudAmtLvl4N4.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl4N4.KeyControl = False
         Me.ucrVFPCloudAmtLvl4N4.Location = New System.Drawing.Point(445, 395)
         Me.ucrVFPCloudAmtLvl4N4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1013,6 +1050,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudHtLvl2H2Hs2
         '
         Me.ucrVFPCloudHtLvl2H2Hs2.FieldName = "122"
+        Me.ucrVFPCloudHtLvl2H2Hs2.IncludePeriod = True
         Me.ucrVFPCloudHtLvl2H2Hs2.KeyControl = False
         Me.ucrVFPCloudHtLvl2H2Hs2.Location = New System.Drawing.Point(445, 251)
         Me.ucrVFPCloudHtLvl2H2Hs2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1024,6 +1062,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudTypeLv2C2
         '
         Me.ucrVFPCloudTypeLv2C2.FieldName = "121"
+        Me.ucrVFPCloudTypeLv2C2.IncludePeriod = True
         Me.ucrVFPCloudTypeLv2C2.KeyControl = False
         Me.ucrVFPCloudTypeLv2C2.Location = New System.Drawing.Point(445, 227)
         Me.ucrVFPCloudTypeLv2C2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1035,6 +1074,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudAmtLvl2N2
         '
         Me.ucrVFPCloudAmtLvl2N2.FieldName = "120"
+        Me.ucrVFPCloudAmtLvl2N2.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl2N2.KeyControl = False
         Me.ucrVFPCloudAmtLvl2N2.Location = New System.Drawing.Point(445, 203)
         Me.ucrVFPCloudAmtLvl2N2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1046,6 +1086,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPVerticalSignificance2
         '
         Me.ucrVFPVerticalSignificance2.FieldName = "123"
+        Me.ucrVFPVerticalSignificance2.IncludePeriod = True
         Me.ucrVFPVerticalSignificance2.KeyControl = False
         Me.ucrVFPVerticalSignificance2.Location = New System.Drawing.Point(445, 179)
         Me.ucrVFPVerticalSignificance2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1057,6 +1098,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudHtLvl1HsHs1
         '
         Me.ucrVFPCloudHtLvl1HsHs1.FieldName = "118"
+        Me.ucrVFPCloudHtLvl1HsHs1.IncludePeriod = True
         Me.ucrVFPCloudHtLvl1HsHs1.KeyControl = False
         Me.ucrVFPCloudHtLvl1HsHs1.Location = New System.Drawing.Point(445, 155)
         Me.ucrVFPCloudHtLvl1HsHs1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1068,6 +1110,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudTypeLvl1C1
         '
         Me.ucrVFPCloudTypeLvl1C1.FieldName = "117"
+        Me.ucrVFPCloudTypeLvl1C1.IncludePeriod = True
         Me.ucrVFPCloudTypeLvl1C1.KeyControl = False
         Me.ucrVFPCloudTypeLvl1C1.Location = New System.Drawing.Point(445, 131)
         Me.ucrVFPCloudTypeLvl1C1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1079,6 +1122,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudAmtLvl1N1
         '
         Me.ucrVFPCloudAmtLvl1N1.FieldName = "116"
+        Me.ucrVFPCloudAmtLvl1N1.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl1N1.KeyControl = False
         Me.ucrVFPCloudAmtLvl1N1.Location = New System.Drawing.Point(445, 107)
         Me.ucrVFPCloudAmtLvl1N1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1090,6 +1134,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPVerticalSignificance1
         '
         Me.ucrVFPVerticalSignificance1.FieldName = "119"
+        Me.ucrVFPVerticalSignificance1.IncludePeriod = True
         Me.ucrVFPVerticalSignificance1.KeyControl = False
         Me.ucrVFPVerticalSignificance1.Location = New System.Drawing.Point(445, 83)
         Me.ucrVFPVerticalSignificance1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1101,6 +1146,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudAmtLvl3N3
         '
         Me.ucrVFPCloudAmtLvl3N3.FieldName = "124"
+        Me.ucrVFPCloudAmtLvl3N3.IncludePeriod = True
         Me.ucrVFPCloudAmtLvl3N3.KeyControl = False
         Me.ucrVFPCloudAmtLvl3N3.Location = New System.Drawing.Point(445, 299)
         Me.ucrVFPCloudAmtLvl3N3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1112,6 +1158,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudHtLvlHsHs3
         '
         Me.ucrVFPCloudHtLvlHsHs3.FieldName = "126"
+        Me.ucrVFPCloudHtLvlHsHs3.IncludePeriod = True
         Me.ucrVFPCloudHtLvlHsHs3.KeyControl = False
         Me.ucrVFPCloudHtLvlHsHs3.Location = New System.Drawing.Point(445, 347)
         Me.ucrVFPCloudHtLvlHsHs3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1123,6 +1170,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPVerticalSignificant3
         '
         Me.ucrVFPVerticalSignificant3.FieldName = "127"
+        Me.ucrVFPVerticalSignificant3.IncludePeriod = True
         Me.ucrVFPVerticalSignificant3.KeyControl = False
         Me.ucrVFPVerticalSignificant3.Location = New System.Drawing.Point(445, 274)
         Me.ucrVFPVerticalSignificant3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -1134,6 +1182,7 @@ Partial Class ucrSynopticRA1
         'ucrVFPCloudTypeLvl3C3
         '
         Me.ucrVFPCloudTypeLvl3C3.FieldName = "125"
+        Me.ucrVFPCloudTypeLvl3C3.IncludePeriod = True
         Me.ucrVFPCloudTypeLvl3C3.KeyControl = False
         Me.ucrVFPCloudTypeLvl3C3.Location = New System.Drawing.Point(445, 323)
         Me.ucrVFPCloudTypeLvl3C3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
