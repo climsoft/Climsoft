@@ -206,14 +206,14 @@ Public Class ucrTextBox
                 'this is for none. No validation
                 Case 1
                     Select Case strValidationType
-                        Case "Numeric"
+                        Case "numeric"
                             If Not bValidateSilently Then
                                 MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
                     End Select
                 Case 2
                     Select Case strValidationType
-                        Case "Numeric"
+                        Case "numeric"
                             If Not bValidateSilently Then
                                 MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
