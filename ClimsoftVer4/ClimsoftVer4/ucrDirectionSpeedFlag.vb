@@ -445,16 +445,16 @@ Public Class ucrDirectionSpeedFlag
 
     End Sub
 
-    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String, strPeriodFieldName As String)
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strPeriodFieldName As String, strFlagFieldName As String)
         ucrDirection.FieldName = strValueFieldName
         ucrSpeed.FieldName = strPeriodFieldName
         ucrFlag.FieldName = strFlagFieldName
         IncludeFlag = True
     End Sub
 
-    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strFlagFieldName As String)
+    Public Sub SetInnerControlsFieldNames(strValueFieldName As String, strPeriodFieldName As String)
         ucrDirection.FieldName = strValueFieldName
-        ucrSpeed.FieldName = strFlagFieldName
+        ucrSpeed.FieldName = strPeriodFieldName
         ucrFlag.FieldName = "" 'removes the default period field to avoid addition of it to a list of fields of its table entry control
         IncludeFlag = False
     End Sub

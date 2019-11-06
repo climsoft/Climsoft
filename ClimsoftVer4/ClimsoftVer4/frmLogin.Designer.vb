@@ -40,10 +40,12 @@ Partial Class frmLogin
         Me.OK = New System.Windows.Forms.Button()
         Me.Cancel = New System.Windows.Forms.Button()
         Me.txtusrpwd = New System.Windows.Forms.TextBox()
+        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmbDatabases = New System.Windows.Forms.ComboBox()
         Me.lblDbdetails = New System.Windows.Forms.Label()
-        Me.cmdHelp = New System.Windows.Forms.Button()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -54,7 +56,7 @@ Partial Class frmLogin
         Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
         Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
         Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(178, 224)
+        Me.LogoPictureBox.Size = New System.Drawing.Size(199, 251)
         Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.LogoPictureBox.TabIndex = 0
         Me.LogoPictureBox.TabStop = False
@@ -62,7 +64,7 @@ Partial Class frmLogin
         'lblUsername
         '
         Me.lblUsername.AutoSize = True
-        Me.lblUsername.Location = New System.Drawing.Point(192, 19)
+        Me.lblUsername.Location = New System.Drawing.Point(218, 11)
         Me.lblUsername.Name = "lblUsername"
         Me.lblUsername.Size = New System.Drawing.Size(55, 13)
         Me.lblUsername.TabIndex = 0
@@ -73,7 +75,7 @@ Partial Class frmLogin
         'lblPassword
         '
         Me.lblPassword.AutoSize = True
-        Me.lblPassword.Location = New System.Drawing.Point(192, 76)
+        Me.lblPassword.Location = New System.Drawing.Point(218, 61)
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(53, 13)
         Me.lblPassword.TabIndex = 2
@@ -83,7 +85,7 @@ Partial Class frmLogin
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(194, 39)
+        Me.txtUsername.Location = New System.Drawing.Point(220, 31)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(220, 20)
         Me.txtUsername.TabIndex = 1
@@ -91,7 +93,7 @@ Partial Class frmLogin
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(194, 96)
+        Me.txtPassword.Location = New System.Drawing.Point(220, 81)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(220, 20)
@@ -100,7 +102,7 @@ Partial Class frmLogin
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(239, 187)
+        Me.OK.Location = New System.Drawing.Point(239, 219)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(67, 23)
         Me.OK.TabIndex = 4
@@ -110,7 +112,7 @@ Partial Class frmLogin
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(342, 187)
+        Me.Cancel.Location = New System.Drawing.Point(342, 219)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(67, 23)
         Me.Cancel.TabIndex = 5
@@ -119,42 +121,63 @@ Partial Class frmLogin
         '
         'txtusrpwd
         '
-        Me.txtusrpwd.Location = New System.Drawing.Point(197, 40)
+        Me.txtusrpwd.Location = New System.Drawing.Point(223, 32)
         Me.txtusrpwd.Name = "txtusrpwd"
         Me.txtusrpwd.Size = New System.Drawing.Size(177, 20)
         Me.txtusrpwd.TabIndex = 6
         Me.txtusrpwd.Visible = False
         '
-        'cmbDatabases
-        '
-        Me.cmbDatabases.BackColor = System.Drawing.SystemColors.Menu
-        Me.cmbDatabases.FormattingEnabled = True
-        Me.cmbDatabases.Location = New System.Drawing.Point(194, 143)
-        Me.cmbDatabases.Name = "cmbDatabases"
-        Me.cmbDatabases.Size = New System.Drawing.Size(333, 21)
-        Me.cmbDatabases.TabIndex = 7
-        Me.cmbDatabases.Visible = False
-        '
-        'lblDbdetails
-        '
-        Me.lblDbdetails.AutoSize = True
-        Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
-        Me.lblDbdetails.Location = New System.Drawing.Point(192, 129)
-        Me.lblDbdetails.Name = "lblDbdetails"
-        Me.lblDbdetails.Size = New System.Drawing.Size(233, 13)
-        Me.lblDbdetails.TabIndex = 8
-        Me.lblDbdetails.Tag = "Show_and_Configure_Database_Connection"
-        Me.lblDbdetails.Text = "Show and Configure Database Connection........"
-        '
         'cmdHelp
         '
         Me.cmdHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdHelp.Location = New System.Drawing.Point(445, 187)
+        Me.cmdHelp.Location = New System.Drawing.Point(445, 219)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(67, 23)
         Me.cmdHelp.TabIndex = 9
         Me.cmdHelp.Tag = "Help"
         Me.cmdHelp.Text = "&Help"
+        Me.cmdHelp.Visible = False
+        '
+        'cmbDatabases
+        '
+        Me.cmbDatabases.BackColor = System.Drawing.SystemColors.Menu
+        Me.cmbDatabases.FormattingEnabled = True
+        Me.cmbDatabases.Location = New System.Drawing.Point(218, 162)
+        Me.cmbDatabases.Name = "cmbDatabases"
+        Me.cmbDatabases.Size = New System.Drawing.Size(222, 21)
+        Me.cmbDatabases.TabIndex = 7
+        '
+        'lblDbdetails
+        '
+        Me.lblDbdetails.AutoSize = True
+        Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
+        Me.lblDbdetails.Location = New System.Drawing.Point(218, 187)
+        Me.lblDbdetails.Name = "lblDbdetails"
+        Me.lblDbdetails.Size = New System.Drawing.Size(154, 13)
+        Me.lblDbdetails.TabIndex = 8
+        Me.lblDbdetails.Tag = ""
+        Me.lblDbdetails.Text = "Manage database connections"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(218, 142)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(53, 13)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Tag = "Password"
+        Me.Label1.Text = "&Database"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'chkRememberUsername
+        '
+        Me.chkRememberUsername.AutoSize = True
+        Me.chkRememberUsername.Location = New System.Drawing.Point(220, 113)
+        Me.chkRememberUsername.Name = "chkRememberUsername"
+        Me.chkRememberUsername.Size = New System.Drawing.Size(126, 17)
+        Me.chkRememberUsername.TabIndex = 11
+        Me.chkRememberUsername.Text = "Remember username"
+        Me.chkRememberUsername.UseVisualStyleBackColor = True
         '
         'frmLogin
         '
@@ -162,7 +185,9 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(539, 222)
+        Me.ClientSize = New System.Drawing.Size(539, 251)
+        Me.Controls.Add(Me.chkRememberUsername)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.lblDbdetails)
         Me.Controls.Add(Me.cmbDatabases)
@@ -189,8 +214,10 @@ Partial Class frmLogin
 
     End Sub
     Friend WithEvents txtusrpwd As System.Windows.Forms.TextBox
-    Friend WithEvents cmbDatabases As System.Windows.Forms.ComboBox
-    Friend WithEvents lblDbdetails As System.Windows.Forms.Label
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
     Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents cmbDatabases As ComboBox
+    Friend WithEvents lblDbdetails As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents chkRememberUsername As CheckBox
 End Class

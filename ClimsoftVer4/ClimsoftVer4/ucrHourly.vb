@@ -3,7 +3,7 @@
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
 
-    Private Sub ucrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
@@ -20,6 +20,8 @@
             Next
 
             SetUpTableEntry("form_hourly")
+            AddField("signature")
+            AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
@@ -34,7 +36,7 @@
 
             bFirstLoad = False
 
-            'ucrNavigation.SetSortBy("entryDatetime")
+            ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl() 'populate the values
 
         End If
@@ -49,6 +51,24 @@
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+    Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
+        'Change the signature(user) and the DATETIME first before saving 
+        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+    End Sub
+
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'upload code in the background thread
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrNavigation.iMaxRows)
+        frm.ShowNumbers(True)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        frm.backgroundWorker.RunWorkerAsync()
+        frm.Show()
     End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
@@ -247,7 +267,7 @@
     End Sub
 
     Protected Overrides Sub ValidateDataEntryPermission()
-        Dim bEnabled As Boolean = False
+        Dim bEnabled As Boolean
         'if its an update or any of the linked year,month and day selector is nothing then just enable the control
         If ucrYearSelector.ValidateValue AndAlso ucrMonthSelector.ValidateValue AndAlso ucrDaySelector.ValidateValue Then
             Dim todayDate As Date = Date.Now
@@ -271,5 +291,157 @@
         Next
 
     End Sub
+
+
+
+
+    Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
+        Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
+
+        Dim dtbAllRecords As New DataTable
+        Dim strValueColumn As String
+        Dim strFlagColumn As String
+        Dim strTag As String
+        Dim strStationId As String
+        Dim lElementId As Long
+        Dim hh As Integer
+        Dim dtObsDateTime As Date
+        Dim bUpdateRecord As Boolean
+        Dim strSql As String
+        Dim pos As Integer = 0
+        Dim invalidRecord As Boolean = False
+        Dim strResult As String = ""
+        Dim iUpdatesNum As Integer = 0
+        Dim iInsertsNum As Integer = 0
+        Dim strTableName As String
+        Dim strSignature As String
+
+        Try
+            strTableName = GetTableName()
+
+            'Get all the records from the table
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
+                "Select * FROM " & strTableName & " ORDER BY entryDatetime",
+                clsDataConnection.OpenedConnection)
+                Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
+                    da.Fill(dtbAllRecords)
+                End Using
+            End Using
+
+            'Save the records to observable initial table
+            For Each row As DataRow In dtbAllRecords.Rows
+                If backgroundWorker.CancellationPending Then
+                    e.Result = strResult & "Cancelling upload"
+                    e.Cancel = True
+                    Exit For
+                End If
+
+                For Each strFieldName As String In lstFields
+                    'if its not an observation value field then skip the loop
+                    If Not strFieldName.StartsWith(Me.strValueFieldName) Then
+                        Continue For
+                    End If
+
+                    strValueColumn = strFieldName
+                    'set the record
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+
+                        strStationId = row.Item("stationId")
+                        strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                        strFlagColumn = lstFields.Find(Function(x As String)
+                                                           Return x.Equals(Me.strFlagFieldName & strTag)
+                                                       End Function)
+
+                        hh = Integer.Parse(strTag)
+
+                        Try
+                            dtObsDateTime = New Date(row.Item("yyyy"), row.Item("mm"), row.Item("dd"), hh, 0, 0)
+                        Catch ex As Exception
+                            'MsgBox("Invalid date detected. Record number " & pos & " has invalid record. This row will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid date detected. Record number " & pos & " has invalid record" &
+                                " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Day: " & row.Item("dd") &
+                                ". This row was skipped" & Environment.NewLine
+                            Exit For
+                        End Try
+                        bUpdateRecord = False
+
+                        'check if record exists
+                        strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            cmd.Parameters.AddWithValue("@stationId", strStationId)
+                            cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                            cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                            cmd.Parameters.AddWithValue("@qcStatus", 0)
+                            cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                            cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                                bUpdateRecord = reader.HasRows
+                            End Using
+                        End Using
+
+                        strSignature = ""
+                        If Not IsDBNull(row.Item("signature")) Then
+                            strSignature = row.Item("signature")
+                        End If
+
+                        If bUpdateRecord Then
+                            strSql = "UPDATE observationInitial SET recordedFrom=@stationId,describedBy=@elemCode,obsDatetime=@obsDatetime,obsLevel=@obsLevel,obsValue=@obsVal,flag=@obsFlag,qcStatus=@qcStatus,acquisitionType=@acquisitiontype,capturedBy=@capturedBy,dataForm=@dataForm " &
+                                " WHERE recordedFrom=@stationId And describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
+                        Else
+                            strSql = "INSERT INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
+                            "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
+                        End If
+
+                        Try
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                                cmd.Parameters.AddWithValue("@stationId", strStationId)
+                                cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                                cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                                cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                                cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                                cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                                cmd.Parameters.AddWithValue("@qcStatus", 0)
+                                cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                                cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                                cmd.Parameters.AddWithValue("@dataForm", strTableName)
+                                cmd.ExecuteNonQuery()
+                            End Using
+                            If bUpdateRecord Then
+                                iUpdatesNum += 1
+                            Else
+                                iInsertsNum += 1
+                            End If
+                        Catch ex As Exception
+                            'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
+                            invalidRecord = True
+                            strResult = strResult & "Invalid record detected. Record number " & pos & " could not be uploaded | " &
+                                 " Station: " & strStationId & ", Element: " & lElementId &
+                                ", Year: " & row.Item("yyyy") & ", Month: " & row.Item("mm") & ", Date: " & dtObsDateTime &
+                                ". This record was skipped" & Environment.NewLine
+                            Exit For
+                        End Try
+                    End If
+                Next
+
+                'Display progress of data transfer
+                pos += 1
+                backgroundWorker.ReportProgress(pos)
+            Next
+
+            If Not invalidRecord Then
+                strResult = "All Records have been uploaded sucessfully "
+            End If
+
+            e.Result = strResult & Environment.NewLine & "Total New Records: " & iInsertsNum & Environment.NewLine & "Total Updates: " & iUpdatesNum
+
+        Catch ex As Exception
+            e.Result = "Error " & ex.Message
+        End Try
+
+
+    End Sub
+
 
 End Class

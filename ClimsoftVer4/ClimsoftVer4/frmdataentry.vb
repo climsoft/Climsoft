@@ -17,41 +17,27 @@
 Public Class frmKeyEntry
 
     Private Sub frmKeyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim sql As String
-        'Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        'Dim MyConnectionString As String
-
-        'MyConnectionString = frmLogin.txtusrpwd.Text
-        'conn.ConnectionString = MyConnectionString
-        'Dim qry As MySql.Data.MySqlClient.MySqlCommand
-
-        'Try
-        '    ' Add a record for key entry mode if not exists
-        '    sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
-        '    conn.Open()
-        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-        '    qry.CommandTimeout = 0
-        '    qry.ExecuteNonQuery()
-
-        '    conn.Close()
-        'Catch ex As Exception
-        '    If ex.HResult <> -2147467259 Then 'Existing record
-        '        MsgBox(ex.HResult & " " & ex.Message)
-        '    End If
-        '    conn.Close()
-        'End Try
-
-
         Try
             Dim dataCall As New DataCall
             Dim dataTable As DataTable
+            lstViewForms.Items.Clear()
             'set the database name and columns, set the key field for updating, then add the retrieved data to the listview
             dataCall.SetTableNameAndFields("data_forms", {"form_name", "description"})
-            DataCall.SetFilter("selected", "=", 1)
-            DataTable = DataCall.GetDataTable()
-            For Each row As DataRow In DataTable.Rows
+            dataCall.SetFilter("selected", "=", 1)
+            dataTable = dataCall.GetDataTable()
+            For Each row As DataRow In dataTable.Rows
                 lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), row.Item("description")}))
             Next
+
+            If lstViewForms.Items.Count = 0 Then
+                Exit Sub
+            End If
+
+            'if there are records, then adjust the height of the listview. Done this way because of climsoft operators
+            If lstViewForms.Items.Count > 0 Then
+                lstViewForms.Height = ((lstViewForms.Items.Count + 1) * lstViewForms.Items.Item(0).Bounds.Height) + 30
+            End If
+
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
         End Try
@@ -87,7 +73,7 @@ Public Class frmKeyEntry
     Private Sub OpenSelectedForm()
         If lstViewForms.SelectedItems.Count > 0 Then
             Select Case lstViewForms.SelectedItems.Item(0).Text
-                Case "form_synoptic_2_ra1"
+                Case "formSynoptic2RA1"
                     frmNewSynopticRA1.Show()
                 Case "form_daily1"
                     formDaily1.Show()

@@ -268,39 +268,18 @@
     End Sub
 
     Private Sub ucrValueFlagPeriod_KeyDown(sender As Object, e As KeyEventArgs) Handles ucrValue.evtKeyDown, ucrFlag.evtKeyDown, ucrPeriod.evtKeyDown
-        'CurrentEntryValue = ucrValue.TextboxValue
-        'MsgBox(CurrentEntryValue & " 0")
-        'Me.ucrValue.TextboxValue = ""
         If e.KeyCode = Keys.Enter Then
-            'If sender Is ucrValue Then
-
-            '    ' Check if the opened form is in double key entry mode and compare the current entry with the uploaded one
-            '    'Compare_Entry(ucrValue.TextboxValue)
-
-            '    'check ucrValue input. if value is empty then set flag as M else remove the M
             If ucrValue.IsEmpty Then
                 ucrFlag.SetValue("M")
-                '        RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
-                '    ElseIf ValidateText(ucrValue.GetValue) Then
-                '        'ucrValue.OnevtValueChanged(Me, e)
-                '        RaiseEvent evtGoToNextVFPControl(Me, e) 'TODO remove this later
-
-                '    Else
-                '        DoQCForValue()
-                '    End If
-                'ElseIf sender Is ucrFlag Then
-                '    If IsElementFlagValid() Then
-                '        'My.Computer.Keyboard.SendKeys("{TAB}")
-                '        RaiseEvent evtGoToNextVFPControl(Me, e)
-                '    End If
-                'ElseIf sender Is ucrPeriod Then
-                '    If IsElementPeriodValid() Then
-                '        RaiseEvent evtGoToNextVFPControl(Me, e)
-                '    End If
             End If
+
+            If Not DoQCForValue(False) Then
+                Exit Sub
+            End If
+
         End If
 
-            OnevtKeyDown(Me, e)
+        OnevtKeyDown(Me, e)
     End Sub
 
     Private Sub ucrValue_TextChanged(sender As Object, e As EventArgs) Handles ucrValue.evtTextChanged
@@ -308,12 +287,58 @@
     End Sub
 
     Private Sub ucrValue_evtValueChanged(sender As Object, e As EventArgs) Handles ucrValue.evtValueChanged
-        DoQCForValue()
-        'IsElementFlagValid()
+        ucrValue.bSuppressChangedEvents = True
+        DoQCForValue(True)
+        ucrValue.bSuppressChangedEvents = False
         OnevtValueChanged(Me, e) 'this is where there is the problem. Its being called twice
     End Sub
 
-    Private Function DoQCForValue() As Boolean
+    Private Function DoQCForValue(bSetValuesIfValid As Boolean) As Boolean
+        Dim bValuesCorrect As Boolean
+        Dim bValueValid As Boolean
+        Dim bFlagValid As Boolean
+
+        Dim strValue As String
+        Dim strFlag As String
+
+
+        strValue = ucrValue.GetValue
+        strFlag = ucrFlag.GetValue
+        If String.IsNullOrEmpty(strValue) Then
+            bValuesCorrect = True
+            If Not String.IsNullOrEmpty(strFlag) AndAlso strFlag <> "M" Then
+                strFlag = "" 'remove the flag 
+            End If
+        Else
+            'Check for an observation flag in the ucrValue.
+            'If a flag exists then separate and place it in the  ucrValueFlag 
+            If Not IsNumeric(Strings.Right(strValue, 1)) AndAlso IsNumeric(Strings.Left(strValue, Strings.Len(strValue) - 1)) Then
+                'Get observation flag from the ucrValue (the last character). If its an "M" just set flag as empty text
+                strFlag = If(Strings.Right(strValue, 1) = "M", "", Strings.Right(strValue, 1))
+                If ucrFlag.ValidateText(strFlag, bValidateSilently:=True) Then
+                    'Get the observation value by leaving out the last character   
+                    strValue = Strings.Left(strValue, Strings.Len(strValue) - 1)
+                End If
+
+            Else
+                strFlag = ""
+            End If
+
+            'validate values loudly  
+            bValueValid = ucrValue.ValidateText(strValue, bValidateSilently:=False)
+            bFlagValid = ucrFlag.ValidateText(strFlag, bValidateSilently:=False)
+
+            bValuesCorrect = (bValueValid AndAlso bFlagValid)
+            ucrValue.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
+        End If
+        If bSetValuesIfValid AndAlso bValuesCorrect Then
+            ucrValue.SetValue(strValue)
+            ucrFlag.SetValue(strFlag)
+        End If
+        Return bValuesCorrect
+    End Function
+
+    Private Function DoQCForValueDEPRECATED() As Boolean
         Dim bValuesCorrect As Boolean = False
         Dim bValueValid As Boolean = False
         Dim bFlagValid As Boolean = False
