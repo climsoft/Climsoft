@@ -61,16 +61,16 @@ Partial Class ucrFormDaily2
         Me.lblDay12 = New System.Windows.Forms.Label()
         Me.lblDay11 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.ucrValueFlagPeriod11 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod12 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod13 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod14 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod15 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod16 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod17 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod18 = New ClimsoftVer4.ucrValueFlagPeriod()
-        Me.ucrValueFlagPeriod19 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.ucrValueFlagPeriod20 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod19 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod18 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod17 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod16 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod15 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod14 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod13 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod12 = New ClimsoftVer4.ucrValueFlagPeriod()
+        Me.ucrValueFlagPeriod11 = New ClimsoftVer4.ucrValueFlagPeriod()
         Me.lblPeriod = New System.Windows.Forms.Label()
         Me.lblFlag = New System.Windows.Forms.Label()
         Me.lblValue = New System.Windows.Forms.Label()
@@ -548,125 +548,125 @@ Partial Class ucrFormDaily2
         Me.Label14.TabIndex = 12
         Me.Label14.Text = "Day"
         '
-        'ucrValueFlagPeriod11
-        '
-        Me.ucrValueFlagPeriod11.FieldName = "20"
-        Me.ucrValueFlagPeriod11.IncludePeriod = True
-        Me.ucrValueFlagPeriod11.KeyControl = False
-        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(215, 420)
-        Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod11.Name = "ucrValueFlagPeriod11"
-        Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod11.TabIndex = 25
-        Me.ucrValueFlagPeriod11.Tag = "20"
-        '
-        'ucrValueFlagPeriod12
-        '
-        Me.ucrValueFlagPeriod12.FieldName = "19"
-        Me.ucrValueFlagPeriod12.IncludePeriod = True
-        Me.ucrValueFlagPeriod12.KeyControl = False
-        Me.ucrValueFlagPeriod12.Location = New System.Drawing.Point(215, 391)
-        Me.ucrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod12.Name = "ucrValueFlagPeriod12"
-        Me.ucrValueFlagPeriod12.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod12.TabIndex = 24
-        Me.ucrValueFlagPeriod12.Tag = "19"
-        '
-        'ucrValueFlagPeriod13
-        '
-        Me.ucrValueFlagPeriod13.FieldName = "18"
-        Me.ucrValueFlagPeriod13.IncludePeriod = True
-        Me.ucrValueFlagPeriod13.KeyControl = False
-        Me.ucrValueFlagPeriod13.Location = New System.Drawing.Point(215, 362)
-        Me.ucrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod13.Name = "ucrValueFlagPeriod13"
-        Me.ucrValueFlagPeriod13.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod13.TabIndex = 23
-        Me.ucrValueFlagPeriod13.Tag = "18"
-        '
-        'ucrValueFlagPeriod14
-        '
-        Me.ucrValueFlagPeriod14.FieldName = "17"
-        Me.ucrValueFlagPeriod14.IncludePeriod = True
-        Me.ucrValueFlagPeriod14.KeyControl = False
-        Me.ucrValueFlagPeriod14.Location = New System.Drawing.Point(216, 333)
-        Me.ucrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod14.Name = "ucrValueFlagPeriod14"
-        Me.ucrValueFlagPeriod14.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod14.TabIndex = 22
-        Me.ucrValueFlagPeriod14.Tag = "17"
-        '
-        'ucrValueFlagPeriod15
-        '
-        Me.ucrValueFlagPeriod15.FieldName = "16"
-        Me.ucrValueFlagPeriod15.IncludePeriod = True
-        Me.ucrValueFlagPeriod15.KeyControl = False
-        Me.ucrValueFlagPeriod15.Location = New System.Drawing.Point(215, 304)
-        Me.ucrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod15.Name = "ucrValueFlagPeriod15"
-        Me.ucrValueFlagPeriod15.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod15.TabIndex = 21
-        Me.ucrValueFlagPeriod15.Tag = "16"
-        '
-        'ucrValueFlagPeriod16
-        '
-        Me.ucrValueFlagPeriod16.FieldName = "15"
-        Me.ucrValueFlagPeriod16.IncludePeriod = True
-        Me.ucrValueFlagPeriod16.KeyControl = False
-        Me.ucrValueFlagPeriod16.Location = New System.Drawing.Point(215, 275)
-        Me.ucrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod16.Name = "ucrValueFlagPeriod16"
-        Me.ucrValueFlagPeriod16.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod16.TabIndex = 20
-        Me.ucrValueFlagPeriod16.Tag = "15"
-        '
-        'ucrValueFlagPeriod17
-        '
-        Me.ucrValueFlagPeriod17.FieldName = "14"
-        Me.ucrValueFlagPeriod17.IncludePeriod = True
-        Me.ucrValueFlagPeriod17.KeyControl = False
-        Me.ucrValueFlagPeriod17.Location = New System.Drawing.Point(215, 246)
-        Me.ucrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod17.Name = "ucrValueFlagPeriod17"
-        Me.ucrValueFlagPeriod17.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod17.TabIndex = 19
-        Me.ucrValueFlagPeriod17.Tag = "14"
-        '
-        'ucrValueFlagPeriod18
-        '
-        Me.ucrValueFlagPeriod18.FieldName = "13"
-        Me.ucrValueFlagPeriod18.IncludePeriod = True
-        Me.ucrValueFlagPeriod18.KeyControl = False
-        Me.ucrValueFlagPeriod18.Location = New System.Drawing.Point(215, 217)
-        Me.ucrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod18.Name = "ucrValueFlagPeriod18"
-        Me.ucrValueFlagPeriod18.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod18.TabIndex = 18
-        Me.ucrValueFlagPeriod18.Tag = "13"
-        '
-        'ucrValueFlagPeriod19
-        '
-        Me.ucrValueFlagPeriod19.FieldName = "12"
-        Me.ucrValueFlagPeriod19.IncludePeriod = True
-        Me.ucrValueFlagPeriod19.KeyControl = False
-        Me.ucrValueFlagPeriod19.Location = New System.Drawing.Point(216, 188)
-        Me.ucrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrValueFlagPeriod19.Name = "ucrValueFlagPeriod19"
-        Me.ucrValueFlagPeriod19.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod19.TabIndex = 17
-        Me.ucrValueFlagPeriod19.Tag = "12"
-        '
         'ucrValueFlagPeriod20
         '
-        Me.ucrValueFlagPeriod20.FieldName = "11"
+        Me.ucrValueFlagPeriod20.FieldName = "20"
         Me.ucrValueFlagPeriod20.IncludePeriod = True
         Me.ucrValueFlagPeriod20.KeyControl = False
-        Me.ucrValueFlagPeriod20.Location = New System.Drawing.Point(216, 159)
+        Me.ucrValueFlagPeriod20.Location = New System.Drawing.Point(215, 420)
         Me.ucrValueFlagPeriod20.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrValueFlagPeriod20.Name = "ucrValueFlagPeriod20"
         Me.ucrValueFlagPeriod20.Size = New System.Drawing.Size(127, 23)
-        Me.ucrValueFlagPeriod20.TabIndex = 16
-        Me.ucrValueFlagPeriod20.Tag = "11"
+        Me.ucrValueFlagPeriod20.TabIndex = 25
+        Me.ucrValueFlagPeriod20.Tag = "20"
+        '
+        'ucrValueFlagPeriod19
+        '
+        Me.ucrValueFlagPeriod19.FieldName = "19"
+        Me.ucrValueFlagPeriod19.IncludePeriod = True
+        Me.ucrValueFlagPeriod19.KeyControl = False
+        Me.ucrValueFlagPeriod19.Location = New System.Drawing.Point(215, 391)
+        Me.ucrValueFlagPeriod19.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod19.Name = "ucrValueFlagPeriod19"
+        Me.ucrValueFlagPeriod19.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod19.TabIndex = 24
+        Me.ucrValueFlagPeriod19.Tag = "19"
+        '
+        'ucrValueFlagPeriod18
+        '
+        Me.ucrValueFlagPeriod18.FieldName = "18"
+        Me.ucrValueFlagPeriod18.IncludePeriod = True
+        Me.ucrValueFlagPeriod18.KeyControl = False
+        Me.ucrValueFlagPeriod18.Location = New System.Drawing.Point(215, 362)
+        Me.ucrValueFlagPeriod18.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod18.Name = "ucrValueFlagPeriod18"
+        Me.ucrValueFlagPeriod18.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod18.TabIndex = 23
+        Me.ucrValueFlagPeriod18.Tag = "18"
+        '
+        'ucrValueFlagPeriod17
+        '
+        Me.ucrValueFlagPeriod17.FieldName = "17"
+        Me.ucrValueFlagPeriod17.IncludePeriod = True
+        Me.ucrValueFlagPeriod17.KeyControl = False
+        Me.ucrValueFlagPeriod17.Location = New System.Drawing.Point(216, 333)
+        Me.ucrValueFlagPeriod17.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod17.Name = "ucrValueFlagPeriod17"
+        Me.ucrValueFlagPeriod17.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod17.TabIndex = 22
+        Me.ucrValueFlagPeriod17.Tag = "17"
+        '
+        'ucrValueFlagPeriod16
+        '
+        Me.ucrValueFlagPeriod16.FieldName = "16"
+        Me.ucrValueFlagPeriod16.IncludePeriod = True
+        Me.ucrValueFlagPeriod16.KeyControl = False
+        Me.ucrValueFlagPeriod16.Location = New System.Drawing.Point(215, 304)
+        Me.ucrValueFlagPeriod16.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod16.Name = "ucrValueFlagPeriod16"
+        Me.ucrValueFlagPeriod16.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod16.TabIndex = 21
+        Me.ucrValueFlagPeriod16.Tag = "16"
+        '
+        'ucrValueFlagPeriod15
+        '
+        Me.ucrValueFlagPeriod15.FieldName = "15"
+        Me.ucrValueFlagPeriod15.IncludePeriod = True
+        Me.ucrValueFlagPeriod15.KeyControl = False
+        Me.ucrValueFlagPeriod15.Location = New System.Drawing.Point(215, 275)
+        Me.ucrValueFlagPeriod15.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod15.Name = "ucrValueFlagPeriod15"
+        Me.ucrValueFlagPeriod15.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod15.TabIndex = 20
+        Me.ucrValueFlagPeriod15.Tag = "15"
+        '
+        'ucrValueFlagPeriod14
+        '
+        Me.ucrValueFlagPeriod14.FieldName = "14"
+        Me.ucrValueFlagPeriod14.IncludePeriod = True
+        Me.ucrValueFlagPeriod14.KeyControl = False
+        Me.ucrValueFlagPeriod14.Location = New System.Drawing.Point(215, 246)
+        Me.ucrValueFlagPeriod14.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod14.Name = "ucrValueFlagPeriod14"
+        Me.ucrValueFlagPeriod14.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod14.TabIndex = 19
+        Me.ucrValueFlagPeriod14.Tag = "14"
+        '
+        'ucrValueFlagPeriod13
+        '
+        Me.ucrValueFlagPeriod13.FieldName = "13"
+        Me.ucrValueFlagPeriod13.IncludePeriod = True
+        Me.ucrValueFlagPeriod13.KeyControl = False
+        Me.ucrValueFlagPeriod13.Location = New System.Drawing.Point(215, 217)
+        Me.ucrValueFlagPeriod13.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod13.Name = "ucrValueFlagPeriod13"
+        Me.ucrValueFlagPeriod13.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod13.TabIndex = 18
+        Me.ucrValueFlagPeriod13.Tag = "13"
+        '
+        'ucrValueFlagPeriod12
+        '
+        Me.ucrValueFlagPeriod12.FieldName = "12"
+        Me.ucrValueFlagPeriod12.IncludePeriod = True
+        Me.ucrValueFlagPeriod12.KeyControl = False
+        Me.ucrValueFlagPeriod12.Location = New System.Drawing.Point(216, 188)
+        Me.ucrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod12.Name = "ucrValueFlagPeriod12"
+        Me.ucrValueFlagPeriod12.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod12.TabIndex = 17
+        Me.ucrValueFlagPeriod12.Tag = "12"
+        '
+        'ucrValueFlagPeriod11
+        '
+        Me.ucrValueFlagPeriod11.FieldName = "11"
+        Me.ucrValueFlagPeriod11.IncludePeriod = True
+        Me.ucrValueFlagPeriod11.KeyControl = False
+        Me.ucrValueFlagPeriod11.Location = New System.Drawing.Point(216, 159)
+        Me.ucrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrValueFlagPeriod11.Name = "ucrValueFlagPeriod11"
+        Me.ucrValueFlagPeriod11.Size = New System.Drawing.Size(127, 23)
+        Me.ucrValueFlagPeriod11.TabIndex = 16
+        Me.ucrValueFlagPeriod11.Tag = "11"
         '
         'lblPeriod
         '
@@ -1366,16 +1366,16 @@ Partial Class ucrFormDaily2
         Me.Controls.Add(Me.lblDay12)
         Me.Controls.Add(Me.lblDay11)
         Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.ucrValueFlagPeriod11)
-        Me.Controls.Add(Me.ucrValueFlagPeriod12)
-        Me.Controls.Add(Me.ucrValueFlagPeriod13)
-        Me.Controls.Add(Me.ucrValueFlagPeriod14)
-        Me.Controls.Add(Me.ucrValueFlagPeriod15)
-        Me.Controls.Add(Me.ucrValueFlagPeriod16)
-        Me.Controls.Add(Me.ucrValueFlagPeriod17)
-        Me.Controls.Add(Me.ucrValueFlagPeriod18)
-        Me.Controls.Add(Me.ucrValueFlagPeriod19)
         Me.Controls.Add(Me.ucrValueFlagPeriod20)
+        Me.Controls.Add(Me.ucrValueFlagPeriod19)
+        Me.Controls.Add(Me.ucrValueFlagPeriod18)
+        Me.Controls.Add(Me.ucrValueFlagPeriod17)
+        Me.Controls.Add(Me.ucrValueFlagPeriod16)
+        Me.Controls.Add(Me.ucrValueFlagPeriod15)
+        Me.Controls.Add(Me.ucrValueFlagPeriod14)
+        Me.Controls.Add(Me.ucrValueFlagPeriod13)
+        Me.Controls.Add(Me.ucrValueFlagPeriod12)
+        Me.Controls.Add(Me.ucrValueFlagPeriod11)
         Me.Controls.Add(Me.lblPeriod)
         Me.Controls.Add(Me.lblFlag)
         Me.Controls.Add(Me.lblValue)
@@ -1446,16 +1446,16 @@ Partial Class ucrFormDaily2
     Friend WithEvents lblDay12 As Label
     Friend WithEvents lblDay11 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents ucrValueFlagPeriod11 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod12 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod13 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod14 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod15 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod16 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod17 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod18 As ucrValueFlagPeriod
-    Friend WithEvents ucrValueFlagPeriod19 As ucrValueFlagPeriod
     Friend WithEvents ucrValueFlagPeriod20 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod19 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod18 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod17 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod16 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod15 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod14 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod13 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod12 As ucrValueFlagPeriod
+    Friend WithEvents ucrValueFlagPeriod11 As ucrValueFlagPeriod
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
