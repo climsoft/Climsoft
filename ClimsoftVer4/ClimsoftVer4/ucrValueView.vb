@@ -14,6 +14,7 @@
     Public bValidateEmpty As Boolean = False
     Protected strValidationType As String = "none"
 
+    Protected objDefaultValue As Object = Nothing
     Public Property KeyControl() As Boolean = False
 
     Public Property FieldName() As String
@@ -24,6 +25,21 @@
             Me.Tag = value
         End Set
     End Property
+    Public Overridable Sub SetDefaultValue(objNewValue As Object)
+        objDefaultValue = objNewValue
+    End Sub
+
+    Public Overridable Function GetDefaultValue() As Object
+        Return objDefaultValue
+    End Function
+
+    Public Function HasDefaultValue() As Boolean
+        Return Not IsNothing(GetDefaultValue())
+    End Function
+
+    Public Overridable Sub SelectDefaultValue()
+        SetValue(GetDefaultValue())
+    End Sub
 
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)

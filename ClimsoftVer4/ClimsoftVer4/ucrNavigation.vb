@@ -261,7 +261,7 @@ Public Class ucrNavigation
                         'Suppress events being raised while changing value of each key control
                         'kvp.Value.bSuppressChangedEvents = True
                         'Select the default value if there
-                        DirectCast(kvp.Value, ucrDataLinkCombobox).SelectDefault()
+                        DirectCast(kvp.Value, ucrDataLinkCombobox).SelectDefaultValue()
                         'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
                         'kvp.Value.bSuppressChangedEvents = False
                     End If
