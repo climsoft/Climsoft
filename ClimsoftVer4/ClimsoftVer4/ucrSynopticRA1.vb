@@ -1,6 +1,4 @@
-﻿Imports System.Data.Entity
-Imports System.Linq.Dynamic
-
+﻿
 Public Class ucrSynopticRA1
 
     Private strValueFieldName As String = "Val_Elem"
@@ -35,6 +33,8 @@ Public Class ucrSynopticRA1
             Next
 
             SetUpTableEntry("form_synoptic_2_ra1")
+            AddField("signature")
+            AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
@@ -48,8 +48,9 @@ Public Class ucrSynopticRA1
 
             bFirstLoad = False
 
-            'ucrNavigation.SetSortBy("entryDatetime")
-            ucrNavigation.PopulateControl() 'populate the values
+            'populate the values
+            ucrNavigation.SetSortBy("entryDatetime")
+            ucrNavigation.PopulateControl()
 
         End If
     End Sub
@@ -63,6 +64,11 @@ Public Class ucrSynopticRA1
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+    Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
+        'Change the signature(user) and the DATETIME first before saving 
+        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+        GetTable.Rows(0).Item("entryDatetime") = Date.Now
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -80,6 +86,19 @@ Public Class ucrSynopticRA1
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
+    End Sub
+
+    Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'upload code in the background thread
+        Dim frm As New frmNewComputationProgress
+        frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
+        frm.SetProgressMaximum(ucrNavigation.iMaxRows)
+        frm.ShowNumbers(True)
+        frm.ShowResultMessage(True)
+        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
+
+        frm.backgroundWorker.RunWorkerAsync()
+        frm.Show()
     End Sub
 
     Private Sub chkAutoFillValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoFillValues.CheckedChanged
@@ -410,7 +429,7 @@ Public Class ucrSynopticRA1
         stationId = ucrStationSelector.GetValue()
 
         clsDataDefinition = New DataCall
-        clsDataDefinition.SetTableNameAndFields("stations", {"stationId", "elevation"})
+        clsDataDefinition.SetTableNameAndFields("station", {"stationId", "elevation"})
         clsDataDefinition.SetFilter("stationId", "=", stationId, bIsPositiveCondition:=True, bForceValuesAsString:=True)
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -448,7 +467,7 @@ Public Class ucrSynopticRA1
     ''' this prevents data entry of current and future dates
     ''' </summary>
     Protected Overrides Sub ValidateDataEntryPermission()
-        Dim bEnabled As Boolean = False
+        Dim bEnabled As Boolean
         'if its an update or any of the linked year,month and day selector is nothing then just enable the control
         If ucrYearSelector.ValidateValue AndAlso ucrMonthSelector.ValidateValue AndAlso ucrDaySelector.ValidateValue Then
             Dim todayDate As Date = Date.Now
@@ -471,25 +490,10 @@ Public Class ucrSynopticRA1
         Next
     End Sub
 
-    'upload code in the background thread
-    Public Sub UploadAllRecords()
-        Dim frm As New frmNewComputationProgress
-        frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
-        frm.SetProgressMaximum(ucrNavigation.iMaxRows)
-        frm.ShowResultMessage(True)
-        AddHandler frm.backgroundWorker.DoWork, AddressOf DoUpload
-
-        'TODO. temporary. Pass the connection string . The current connection properties are being stored in control
-        'Once this is fixed, the argument can be removed
-        frm.backgroundWorker.RunWorkerAsync(frmLogin.txtusrpwd.Text)
-
-        frm.Show()
-    End Sub
 
     Private Sub DoUpload(sender As Object, e As System.ComponentModel.DoWorkEventArgs)
         Dim backgroundWorker As System.ComponentModel.BackgroundWorker = DirectCast(sender, System.ComponentModel.BackgroundWorker)
 
-        ' Dim clsAllRecordsCall As New DataCall
         Dim dtbAllRecords As New DataTable
         Dim strValueColumn As String
         Dim strFlagColumn As String
@@ -501,25 +505,19 @@ Public Class ucrSynopticRA1
         Dim bUpdateRecord As Boolean
         Dim strSql As String
         Dim strSignature As String
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
         Dim pos As Integer = 0
+        Dim iUpdatesNum As Integer = 0
+        Dim iInsertsNum As Integer = 0
         Dim invalidRecord As Boolean = False
         Dim strResult As String = ""
-
-        'get the observation values fields
-        lstAllFields.AddRange(lstFields)
-        'TODO "entryDatetime" should be here as well once entity model has been updated.
-        lstAllFields.AddRange({"signature"})
-
-        'clsAllRecordsCall.SetTableNameAndFields(strTableName, lstAllFields)
-        'dtbAllRecords = clsAllRecordsCall.GetDataTable()
+        Dim strTableName As String
 
         Try
-            'Temporary.The current connection properties are being stored in control, this line can be removed in future
-            conn.ConnectionString = e.Argument
-            conn.Open()
+
+            strTableName = GetTableName()
+
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", conn)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -532,7 +530,6 @@ Public Class ucrSynopticRA1
                     e.Cancel = True
                     Exit For
                 End If
-
 
                 For Each strFieldName As String In lstFields
                     'if its not an observation value field then skip the loop
@@ -566,7 +563,7 @@ Public Class ucrSynopticRA1
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -593,7 +590,7 @@ Public Class ucrSynopticRA1
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -606,6 +603,11 @@ Public Class ucrSynopticRA1
                                 cmd.Parameters.AddWithValue("@dataForm", GetTableName)
                                 cmd.ExecuteNonQuery()
                             End Using
+                            If bUpdateRecord Then
+                                iUpdatesNum += 1
+                            Else
+                                iInsertsNum += 1
+                            End If
                         Catch ex As Exception
                             'MsgBox("Invalid record detected. Record number " & pos & " could not be uploaded. This record will be skipped")
                             invalidRecord = True
@@ -620,25 +622,19 @@ Public Class ucrSynopticRA1
                 Next
 
                 'Display progress of data transfer
-                pos = pos + 1
+                pos += 1
                 backgroundWorker.ReportProgress(pos)
             Next
 
             If Not invalidRecord Then
-                e.Result = "Records have been uploaded sucessfully"
-            Else
-                e.Result = strResult
+                strResult = "All Records have been uploaded sucessfully "
             End If
+
+            e.Result = strResult & Environment.NewLine & "Total New Records: " & iInsertsNum & Environment.NewLine & "Total Updates: " & iUpdatesNum
+
         Catch ex As Exception
             e.Result = "Error " & ex.Message
-        Finally
-            conn.Close()
         End Try
-
-
-        'TODO? because of the detachment
-        'PopulateControl()
-
     End Sub
 
 
