@@ -347,7 +347,7 @@ Public Class ucrFormDaily2
                         strCurrTag = i
                     End If
 
-                    If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+                    If ((Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag))) OrElse (Not IsDBNull(row.Item("flag" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("flag" & strCurrTag)))) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
                         Try
