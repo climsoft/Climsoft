@@ -13,18 +13,22 @@ Public Class ucrFormDaily2
             'Sets values for the units combobox
             ucrTempUnits.SetPossibleValues("temperatureUnits", GetType(String), {"Deg C", "Deg F"})
             ucrTempUnits.SetDisplayAndValueMember("temperatureUnits")
+            ucrTempUnits.SetDefaultValue("Deg C")
             ucrTempUnits.bValidate = False
 
             ucrCloudheightUnits.SetPossibleValues("cloudHeightUnits", GetType(String), {"feet", "metres"})
             ucrCloudheightUnits.SetDisplayAndValueMember("cloudHeightUnits")
+            ucrCloudheightUnits.SetDefaultValue("feet")
             ucrCloudheightUnits.bValidate = False
 
             ucrPrecipUnits.SetPossibleValues("precipUnits", GetType(String), {"mm", "inches"})
             ucrPrecipUnits.SetDisplayAndValueMember("precipUnits")
+            ucrPrecipUnits.SetDefaultValue("mm")
             ucrPrecipUnits.bValidate = False
 
             ucrVisibilityUnits.SetPossibleValues("visUnits", GetType(String), {"metres", "yards"})
             ucrVisibilityUnits.SetDisplayAndValueMember("visUnits")
+            ucrVisibilityUnits.SetDefaultValue("metres")
             ucrVisibilityUnits.bValidate = False
 
 
@@ -347,7 +351,7 @@ Public Class ucrFormDaily2
                         strCurrTag = i
                     End If
 
-                    If Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+                    If ((Not IsDBNull(row.Item("day" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("day" & strCurrTag))) OrElse (Not IsDBNull(row.Item("flag" & strCurrTag)) AndAlso Not String.IsNullOrEmpty(row.Item("flag" & strCurrTag)))) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
                         Try

@@ -1,7 +1,7 @@
 ﻿Public Class ucrDataLinkCombobox
     Protected bFirstLoad As Boolean = True
     Public bFillFromDataBase As Boolean = True
-    Private objDefaultValue As Object = Nothing
+
 
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
@@ -91,13 +91,9 @@
         Return cboValues.Text
     End Function
 
-    Public Sub setDefaultValue(objNewValue As Object)
-        objDefaultValue = objNewValue
-    End Sub
-
-    Public Sub SelectDefault()
-        If objDefaultValue IsNot Nothing AndAlso dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
-            SetValue(objDefaultValue)
+    Public Overrides Sub SelectDefaultValue()
+        If HasDefaultValue() AndAlso dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
+            SetValue(GetDefaultValue())
         Else
             SelectFirst()
         End If
