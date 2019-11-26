@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmImportDaily
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmImportDaily
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.cmdOpenFile = New System.Windows.Forms.Button()
@@ -58,6 +58,10 @@ Partial Class frmImportDaily
         Me.lblStn = New System.Windows.Forms.Label()
         Me.lblDefaultObsHour = New System.Windows.Forms.Label()
         Me.lblTRecords = New System.Windows.Forms.Label()
+        Me.lblStnEror = New System.Windows.Forms.Label()
+        Me.lblElmeror = New System.Windows.Forms.Label()
+        Me.lstStations = New System.Windows.Forms.ListBox()
+        Me.lstElements = New System.Windows.Forms.ListBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.SuspendLayout()
@@ -383,11 +387,53 @@ Partial Class frmImportDaily
         Me.lblTRecords.Text = "Total Records"
         Me.lblTRecords.Visible = False
         '
+        'lblStnEror
+        '
+        Me.lblStnEror.AutoSize = True
+        Me.lblStnEror.Location = New System.Drawing.Point(29, 616)
+        Me.lblStnEror.Name = "lblStnEror"
+        Me.lblStnEror.Size = New System.Drawing.Size(70, 13)
+        Me.lblStnEror.TabIndex = 35
+        Me.lblStnEror.Text = "Station Errors"
+        Me.lblStnEror.Visible = False
+        '
+        'lblElmeror
+        '
+        Me.lblElmeror.AutoSize = True
+        Me.lblElmeror.Location = New System.Drawing.Point(293, 618)
+        Me.lblElmeror.Name = "lblElmeror"
+        Me.lblElmeror.Size = New System.Drawing.Size(75, 13)
+        Me.lblElmeror.TabIndex = 36
+        Me.lblElmeror.Text = "Element Errors"
+        Me.lblElmeror.Visible = False
+        '
+        'lstStations
+        '
+        Me.lstStations.FormattingEnabled = True
+        Me.lstStations.Location = New System.Drawing.Point(101, 614)
+        Me.lstStations.Name = "lstStations"
+        Me.lstStations.Size = New System.Drawing.Size(119, 30)
+        Me.lstStations.TabIndex = 37
+        Me.lstStations.Visible = False
+        '
+        'lstElements
+        '
+        Me.lstElements.FormattingEnabled = True
+        Me.lstElements.Location = New System.Drawing.Point(372, 614)
+        Me.lstElements.Name = "lstElements"
+        Me.lstElements.Size = New System.Drawing.Size(106, 30)
+        Me.lstElements.TabIndex = 38
+        Me.lstElements.Visible = False
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(970, 609)
+        Me.ClientSize = New System.Drawing.Size(970, 644)
+        Me.Controls.Add(Me.lstElements)
+        Me.Controls.Add(Me.lstStations)
+        Me.Controls.Add(Me.lblElmeror)
+        Me.Controls.Add(Me.lblStnEror)
         Me.Controls.Add(Me.lblTRecords)
         Me.Controls.Add(Me.lblDefaultObsHour)
         Me.Controls.Add(Me.lblStn)
@@ -458,4 +504,8 @@ Partial Class frmImportDaily
     Friend WithEvents lblStn As System.Windows.Forms.Label
     Friend WithEvents lblDefaultObsHour As System.Windows.Forms.Label
     Friend WithEvents lblTRecords As System.Windows.Forms.Label
+    Friend WithEvents lblStnEror As Label
+    Friend WithEvents lblElmeror As Label
+    Friend WithEvents lstStations As ListBox
+    Friend WithEvents lstElements As ListBox
 End Class

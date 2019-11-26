@@ -1,6 +1,6 @@
-﻿Imports System.Data.Entity
-
+﻿
 Public Class ucrNavigation
+    Public Event evtValueChanged(sender As Object, e As EventArgs)
     Private bFirstLoad As Boolean = True
     'Stores the number of the maximum rows in a data table
     Public iMaxRows As Integer
@@ -9,19 +9,35 @@ Public Class ucrNavigation
     'Stores the sort by querry
     Public strSortCol As String = ""
     'Stors the dictonary of key controls and their fields
-    Private dctKeyControls As Dictionary(Of String, ucrBaseDataLink)
+    Private dctKeyControls As New Dictionary(Of String, ucrValueView)
+    Private ucrLinkedTableEntry As ucrTableEntry
+    Public bSuppressKeyControlChanges As Boolean = False
+
+    Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            txtRecNum.ReadOnly = True
+            txtRecNum.TextAlign = HorizontalAlignment.Center
+            bFirstLoad = False
+        End If
+    End Sub
 
     Public Overrides Sub PopulateControl()
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
         iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
+        currentRowDataPos = -1
+        currentRowData = New Dictionary(Of String, String)
         'If strSortCol <> "" AndAlso dtbRecords.Columns.Contains(strSortCol) Then
         '    dtbRecords.DefaultView.Sort = strSortCol & " ASC"
         'End If
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
     ''' <summary>
     ''' Gets the value of the specified column (strFieldName) at the current row 
@@ -29,7 +45,7 @@ Public Class ucrNavigation
     ''' </summary>
     ''' <param name="strFieldName"></param>
     ''' <returns></returns>
-    Public Overrides Function GetValue(Optional strFieldName As String = "") As Object
+    Public Function GetValue(Optional strFieldName As String = "") As Object
         If strFieldName = "" Then
             Return Nothing
         End If
@@ -70,6 +86,16 @@ Public Class ucrNavigation
 
     End Sub
 
+    ''' <summary>
+    ''' Enables or disables Navigation buttons 
+    ''' </summary>
+    Private Sub EnableNavigationButtons(bEnableState As Boolean)
+        btnMoveFirst.Enabled = bEnableState
+        btnMoveLast.Enabled = bEnableState
+        btnMoveNext.Enabled = bEnableState
+        btnMovePrevious.Enabled = bEnableState
+    End Sub
+
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         MoveFirst()
     End Sub
@@ -80,6 +106,7 @@ Public Class ucrNavigation
         iCurrRow = 0
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
@@ -97,6 +124,7 @@ Public Class ucrNavigation
             iCurrRow = iCurrRow + 1
             displayRecordNumber()
             UpdateKeyControls()
+            OnevtValueChanged(Me, Nothing)
         Else
             MessageBox.Show("No more next record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
@@ -114,6 +142,7 @@ Public Class ucrNavigation
             displayRecordNumber()
             'OnevtValueChanged(sender, e)
             UpdateKeyControls()
+            OnevtValueChanged(Me, Nothing)
         Else
             MessageBox.Show("No more previous record!", "Navigation", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
@@ -126,55 +155,124 @@ Public Class ucrNavigation
         iCurrRow = iMaxRows - 1
         displayRecordNumber()
         UpdateKeyControls()
+        OnevtValueChanged(Me, Nothing)
     End Sub
 
-    Public Sub SetKeyControls(dctNewKeyControls As Dictionary(Of String, ucrBaseDataLink))
-        dctKeyControls = dctNewKeyControls
+
+    Public Sub GoToNewRecord()
+        'We could repopulate entirely or add a the last added record from the datatabase
+        PopulateControl()
+        MoveLast()
+
+
+        'ALTERNATIVELY WE COULD JUST UPDATE THE DATATABLE WITH VALUES
+        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
+        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
+        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
+        'RECORD COUNT ON SAVE
     End Sub
-    'TODO
-    'NOT SURE WHETHER TO CALL THIS AddKeyControls or SetKeyControls
+
+    Public Sub RemoveRecord()
+        PopulateControl()
+
+        'ALTERNATIVELY WE COULD JUST REMOVE RECORD IN THE DATATABLE WITH VALUES
+        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
+        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
+        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
+        'RECORD COUNT ON DELETE
+    End Sub
+
     ''' <summary>
-    ''' Sets the key controls and their key field. 
-    ''' The field must be unique. If the field is found, the old ucrKeyControl is discarded
+    ''' Sets the column to be used in sorting. 
+    ''' The passed column will be sorted in ascending order
     ''' </summary>
-    ''' <param name="strFieldName"></param>
-    ''' <param name="ucrKeyControl"></param>
-    Public Sub SetKeyControls(strFieldName As String, ucrKeyControl As ucrBaseDataLink)
-        If dctKeyControls Is Nothing Then
-            SetKeyControls(New Dictionary(Of String, ucrBaseDataLink))
+    ''' <param name="strNewSortCol"></param>
+    Public Sub SetSortBy(strNewSortCol As String)
+        strSortCol = strNewSortCol
+    End Sub
+
+    Public Sub SetTableEntry(ucrNewLinkedTableEntry As ucrTableEntry)
+        ucrLinkedTableEntry = ucrNewLinkedTableEntry
+        SetTableName(ucrLinkedTableEntry.GetTableName())
+    End Sub
+
+    ''' <summary>
+    ''' this sets the table entry and the key controls(of the tabl entry control) to be controlled by the navigator
+    ''' </summary>
+    ''' <param name="ucrNewLinkedTableEntry"></param>
+    Public Sub SetTableEntryAndKeyControls(ucrNewLinkedTableEntry As ucrTableEntry)
+        'set the table entry control to be used by the navigator
+        SetTableEntry(ucrNewLinkedTableEntry)
+        'get the key controls to be used by the navigator from the table entry  
+        Dim ucrCtrValueView As ucrValueView
+        For Each ctr As Control In ucrNewLinkedTableEntry.Controls
+            If TypeOf ctr Is ucrValueView Then
+                ucrCtrValueView = DirectCast(ctr, ucrValueView)
+                If (ucrCtrValueView.KeyControl) Then
+                    AddKeyControls(ucrCtrValueView)
+                End If
+            End If
+        Next
+    End Sub
+    Public Sub ClearKeyControls()
+        dctKeyControls.Clear()
+    End Sub
+
+    Public Sub AddKeyControls(ucrKeyControl As ucrValueView)
+        If dctKeyControls.ContainsKey(ucrKeyControl.FieldName) Then
+            dctKeyControls.Item(ucrKeyControl.FieldName) = ucrKeyControl
+        Else
+            dctKeyControls.Add(ucrKeyControl.FieldName, ucrKeyControl)
+            AddField(ucrKeyControl.FieldName)
         End If
 
-        If dctKeyControls.ContainsKey(strFieldName) Then
-            If dctKeyControls.Item(strFieldName) Is ucrKeyControl Then
-                MessageBox.Show("Developer error: Attempt to set key control twice detected : " & ucrKeyControl.Name, caption:="Developer error")
-            Else
-                dctKeyControls.Item(strFieldName) = ucrKeyControl
-            End If
-        Else
-            dctKeyControls.Add(strFieldName, ucrKeyControl)
+        AddHandler ucrKeyControl.evtValueChanged, AddressOf KeyControls_evtValueChanged
+
+    End Sub
+
+    Private Sub KeyControls_evtValueChanged()
+        'If Not bSuppressKeyControlChanges AndAlso iCurrRow <> -1 Then
+        '    UpdateNavigationByKeyControls()
+        'End If
+
+        'this should always be called. The iCurrRow <> -1 check has been omitted because
+        'of validation reasons. 
+        If Not bSuppressKeyControlChanges Then
+            UpdateNavigationByKeyControls()
         End If
     End Sub
+
     ''' <summary>
     ''' Updates the key controls by key values of the current record on the navigation
     ''' </summary>
     Private Sub UpdateKeyControls()
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
+            bSuppressKeyControlChanges = True  'switch on suppressing of value changed events from key controls
             If iMaxRows > 0 Then
-                For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
-                    'Suppress events being raised while changing value of each key control
-                    kvp.Value.bSuppressChangedEvents = True
+                For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+
                     ' Use new GetValueFromRow method to get value from specific row since dtbRecords now nothing
                     kvp.Value.SetValue(GetValueFromRow(iCurrRow, kvp.Key))
-                    'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
-                    kvp.Value.bSuppressChangedEvents = False
+                Next
+            Else
+                'To do set the defaults for the controls
+                For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+                    If TypeOf kvp.Value Is ucrDataLinkCombobox Then
+                        'Suppress events being raised while changing value of each key control
+                        'kvp.Value.bSuppressChangedEvents = True
+                        'Select the default value if there
+                        DirectCast(kvp.Value, ucrDataLinkCombobox).SelectDefaultValue()
+                        'kvp.Value.SetValue(dtbRecords.Rows(iCurrRow).Item(kvp.Key))
+                        'kvp.Value.bSuppressChangedEvents = False
+                    End If
                 Next
             End If
 
-            'A key control eventvalue changed should always be raised regardless of whether iMaxRows > 0 or not
-            ' All key controls are linked to the same controls so can just trigger
-            ' events for one control after all updated
-            dctKeyControls.Values(dctKeyControls.Count - 1).OnevtValueChanged(dctKeyControls.Values(dctKeyControls.Count - 1), Nothing)
 
+            'Update the Table entry
+            updateLinkedTableEntry()
+
+            bSuppressKeyControlChanges = False  'switch off suppressing of value changed events from key controls
         End If
     End Sub
 
@@ -182,7 +280,7 @@ Public Class ucrNavigation
     ''' <summary>
     ''' Updates Navigation control to the recored with selected key
     ''' </summary>
-    Public Sub UpdateNavigationByKeyControls()
+    Private Sub UpdateNavigationByKeyControls()
         Dim dctFieldvalue As New Dictionary(Of String, String)
         Dim bRowExists As Boolean
         Dim row As Dictionary(Of String, String)
@@ -191,7 +289,7 @@ Public Class ucrNavigation
             'check if its current row first before fetching from database
             bRowExists = True
             row = GetRow(iCurrRow)
-            For Each kvp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+            For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
                 dctFieldvalue.Add(kvp.Key, kvp.Value.GetValue)
                 If row.Count < 1 OrElse row.Item(kvp.Key) <> kvp.Value.GetValue Then
                     bRowExists = False
@@ -203,11 +301,23 @@ Public Class ucrNavigation
                 'Returns -1 if no row found
                 iCurrRow = GetRowPosition(dctFieldvalue)
             End If
+
+            bSuppressKeyControlChanges = True
+            updateLinkedTableEntry()
+            bSuppressKeyControlChanges = False
             displayRecordNumber()
+
+        End If
+    End Sub
+
+    Private Sub updateLinkedTableEntry()
+        If ucrLinkedTableEntry IsNot Nothing Then
+            ucrLinkedTableEntry.PopulateControl()
         End If
     End Sub
 
 
+    'TODO. Delete this subroutine
     'Public Sub UpdateNavigationByKeyControlsOLD()
     '    Dim dctFieldvalue As New Dictionary(Of String, String)
     '    Dim bRowExists As Boolean
@@ -242,66 +352,137 @@ Public Class ucrNavigation
     'End Sub
 
 
-    Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        'UpdateKeyControls()
-    End Sub
+    'Private Sub ucrNavigation_evtValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
+    '    'UpdateKeyControls()
+    'End Sub
 
-    Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
-        If bFirstLoad Then
-            txtRecNum.ReadOnly = True
-            txtRecNum.TextAlign = HorizontalAlignment.Center
-            bFirstLoad = False
+    Public Sub NewRecord()
+        If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 Then
+            bSuppressKeyControlChanges = True  'switch on suppressing of value changed events from key controls
+            For Each kvp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+                kvp.Value.Clear()
+            Next
+
+            'Update the Table entry
+            updateLinkedTableEntry()
+
+            iCurrRow = -1 'new record
+            displayRecordNumber()
+
+            bSuppressKeyControlChanges = False  'switch off suppressing of value changed events from key controls
+
         End If
     End Sub
 
-    ''' <summary>
-    ''' Enables or disables Navigation buttons 
-    ''' </summary>
-    Private Sub EnableNavigationButtons(bEnableState As Boolean)
-        btnMoveFirst.Enabled = bEnableState
-        btnMoveLast.Enabled = bEnableState
-        btnMoveNext.Enabled = bEnableState
-        btnMovePrevious.Enabled = bEnableState
-    End Sub
+    Public Sub NewSequencerRecord(strSequencer As String, iEnumerableNewFields As IEnumerable(Of String), Optional iEnumerableDateIncrementControls As IEnumerable(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+        Dim dctFields As New Dictionary(Of String, List(Of String))
+        For Each strTemp As String In iEnumerableNewFields
+            dctFields.Add(strTemp, New List(Of String)({strTemp}))
+        Next
 
-    Public Sub GoToNewRecord()
-        'We could repopulate entirely or add a the last added record from the datatabase
-        PopulateControl()
-        MoveLast()
+        Dim lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing
+        If iEnumerableDateIncrementControls IsNot Nothing Then
+            lstDateIncrementControls = iEnumerableDateIncrementControls.ToList
+        End If
 
-        'ALTERNATIVELY WE COULD JUST UPDATE THE DATATABLE WITH VALUES
-        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
-        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
-        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
-        'RECORD COUNT ON SAVE
-    End Sub
+        NewSequencerRecord(strSequencer, dctFields, lstDateIncrementControls, ucrYear)
 
-    Public Sub RemoveRecord()
-        PopulateControl()
-
-        'ALTERNATIVELY WE COULD JUST REMOVE RECORD IN THE DATATABLE WITH VALUES
-        'FROM OUR KEY SELECTORS. HOWEVER, I DIDN'T IMPLEMENT IT THAT
-        'WAY BECAUSE IF DATAENTRY IS BEING DONE BY MORE THAN ONE PERSON
-        'SIMULTANEOUSLY WE MIGHT WANT THEM TO SEE THE CORRECT 
-        'RECORD COUNT ON DELETE
-    End Sub
-
-    ''' <summary>
-    ''' Sets the column to be used in sorting. 
-    ''' The passed column will be sorted in ascending order
-    ''' </summary>
-    ''' <param name="strNewSortCol"></param>
-    Public Sub SetSortBy(strNewSortCol As String)
-        strSortCol = strNewSortCol
     End Sub
 
     Public Sub NewSequencerRecord(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
         Dim clsSeqDataCall As New DataCall
         Dim dtbSequencer As DataTable
-        Dim dctKeySequencerControls As New Dictionary(Of String, ucrBaseDataLink)
+        Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
+        Dim strSelectStatement As String = ""
+        Dim iCurrentSequencerRow As Integer
+
+        MoveLast()
+
+        If String.IsNullOrEmpty(strSequencer) OrElse ucrLinkedTableEntry Is Nothing OrElse dctKeyControls.Count < 1 Then
+            Exit Sub
+        End If
+
+        'fill all the sequencer values from the database
+        clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
+        dtbSequencer = clsSeqDataCall.GetDataTable()
+
+        'create the select filter statement to be used against the datatable
+        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
+            If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
+                dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
+                If strSelectStatement <> "" Then
+                    strSelectStatement = strSelectStatement & " AND "
+                End If
+                strSelectStatement = strSelectStatement & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
+            End If
+        Next
+
+        'get the current row index from the seqencer row and if exists then compute the next record
+        iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(dtbSequencer.Select(strSelectStatement).FirstOrDefault)
+        If iCurrentSequencerRow > -1 Then
+            IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iCurrentSequencerRow + 1, lstDateIncrementControls, ucrYear)
+        End If
+    End Sub
+
+    'Increments the sequncer values and tries to populate the table entry.
+    Private Sub IncrementNextSequencerRowValues(dtbSequencer As DataTable, dctKeySequencerControls As Dictionary(Of String, ucrValueView), iSelectedSequencerRow As Integer, lstDateIncrementControls As List(Of ucrDataLinkCombobox), ucrYear As ucrYearSelector)
+        If iSelectedSequencerRow <= dtbSequencer.Rows.Count - 1 Then
+            Dim rowNext As DataRow
+            rowNext = dtbSequencer.Rows(iSelectedSequencerRow)
+            For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
+                kvpTemp.Value.bSuppressChangedEvents = True
+                kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
+                kvpTemp.Value.bSuppressChangedEvents = False
+            Next
+            'only one control should trigger the event change
+            dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
+
+            If ucrLinkedTableEntry.bUpdating Then
+                'go to the next sequncer values
+                iSelectedSequencerRow = iSelectedSequencerRow + 1
+                IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+            End If
+        Else
+            'try incrementing date values
+            If lstDateIncrementControls IsNot Nothing AndAlso lstDateIncrementControls.Count > 0 Then
+                Dim ucrTemp As ucrDataLinkCombobox
+                Dim bIncrementYear As Boolean = False
+                For j As Integer = 0 To lstDateIncrementControls.Count - 1
+                    ucrTemp = lstDateIncrementControls(j)
+                    If ucrTemp.cboValues.SelectedIndex < ucrTemp.cboValues.Items.Count - 1 Then
+                        'TODO do this through SetValue() instead
+                        'ucrTemp.cboValues.SelectedIndex = ucrTemp.cboValues.SelectedIndex + 1
+                        ucrTemp.SetValue(ucrTemp.GetValue + 1) ' TODO. Test this 
+                        Exit For
+                    Else
+                        'ucrTemp.cboValues.SelectedIndex = 0
+                        ucrTemp.SetValue(0) ' TODO. Test this 
+                        If j = lstDateIncrementControls.Count - 1 Then
+                            bIncrementYear = True
+                        End If
+                    End If
+                Next
+
+                If bIncrementYear Then
+                    ucrYear.SetValue(ucrYear.GetValue() + 1)
+                End If
+                If ucrLinkedTableEntry.bUpdating Then
+                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+                End If
+
+            End If
+        End If
+
+    End Sub
+
+    'TODO.Remove this later. Left here for reference
+    Private Sub NewSequencerRecordOLD(strSequencer As String, dctFields As Dictionary(Of String, List(Of String)), Optional lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing, Optional ucrYear As ucrYearSelector = Nothing)
+        Dim clsSeqDataCall As New DataCall
+        Dim dtbSequencer As DataTable
+        Dim dctKeySequencerControls As New Dictionary(Of String, ucrValueView)
         Dim strSelectStatement As String = ""
         Dim rowsFitered As DataRow()
-        Dim iCurrRow As Integer
+        Dim iCurrentSequencerRow As Integer
         Dim rowNext As DataRow
         Dim ucrTemp As ucrDataLinkCombobox
         Dim bIncrementYear As Boolean = False
@@ -315,7 +496,7 @@ Public Class ucrNavigation
         clsSeqDataCall.SetTableNameAndFields(strSequencer, dctFields)
         dtbSequencer = clsSeqDataCall.GetDataTable()
 
-        For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeyControls
+        For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeyControls
             If dtbSequencer.Columns.Contains(kvpTemp.Key) Then
                 dctKeySequencerControls.Add(kvpTemp.Key, kvpTemp.Value)
                 If strSelectStatement <> "" Then
@@ -324,12 +505,17 @@ Public Class ucrNavigation
                 strSelectStatement = strSelectStatement & kvpTemp.Key & " = " & Chr(39) & kvpTemp.Value.GetValue() & Chr(39)
             End If
         Next
-        rowsFitered = dtbSequencer.Select(strSelectStatement)
-        If rowsFitered.Count > 0 Then
+        Try
+            rowsFitered = dtbSequencer.Select(strSelectStatement)
+        Catch ex As Exception
+            rowsFitered = Nothing
+        End Try
+
+        If rowsFitered IsNot Nothing AndAlso rowsFitered.Count > 0 Then
             'TODO take first row or last row?
-            iCurrRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
-            If iCurrRow < dtbSequencer.Rows.Count - 1 Then
-                rowNext = dtbSequencer.Rows(iCurrRow + 1)
+            iCurrentSequencerRow = dtbSequencer.Rows.IndexOf(rowsFitered(0))
+            If iCurrentSequencerRow < dtbSequencer.Rows.Count - 1 Then
+                rowNext = dtbSequencer.Rows(iCurrentSequencerRow + 1)
             Else
                 rowNext = dtbSequencer.Rows(0)
                 If lstDateIncrementControls IsNot Nothing AndAlso lstDateIncrementControls.Count > 0 Then
@@ -352,37 +538,39 @@ Public Class ucrNavigation
                 End If
             End If
             If dctKeySequencerControls.Count > 0 Then
-                For Each kvpTemp As KeyValuePair(Of String, ucrBaseDataLink) In dctKeySequencerControls
+                For Each kvpTemp As KeyValuePair(Of String, ucrValueView) In dctKeySequencerControls
                     kvpTemp.Value.bSuppressChangedEvents = True
                     kvpTemp.Value.SetValue(rowNext.Item(kvpTemp.Key))
                     kvpTemp.Value.bSuppressChangedEvents = False
                 Next
                 'only one control should trigger the event change
                 dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1).OnevtValueChanged(dctKeySequencerControls.Values(dctKeySequencerControls.Count - 1), Nothing)
+
             End If
         Else
-            'First item in sequencer?
+            'First item in sequencer? 
         End If
 
     End Sub
 
+
     'get specific column value
     Private Function GetValueFromRow(iRow As Integer, strField As String) As String
-        If iMaxRows = 0 OrElse iRow < 0 Then
-            Return ""
+        Dim dctRow As Dictionary(Of String, String) = GetRow(iRow)
+        If dctRow.Count > 0 Then
+            Return dctRow.Item(strField)
         Else
-            Return GetRow(iRow).Item(strField)
+            Return Nothing
         End If
     End Function
 
-    Private posOfcurrentRowData As Integer 'TODO probably these 2 can be merged in to key value pair?
+    Private currentRowDataPos As Integer 'TODO probably these 2 can be merged in to key value pair? They have been used as to temporarily implement caching of values of current row.
     Private currentRowData As New Dictionary(Of String, String)
-    'Gets the row details as dictionary of column names and value
+
+    'Gets the row details as dictionary of columns(fields) and value
     Private Function GetRow(iRow As Integer) As Dictionary(Of String, String)
         'holds column name(as key) and column value(as the value)
         Dim dctRow As New Dictionary(Of String, String)
-        Dim strDBValues As String
-        Dim arrDBValues() As String
         Dim strSql As String
         Dim strFields As String = ""
 
@@ -392,7 +580,7 @@ Public Class ucrNavigation
         End If
 
         'if iRow is still the current row then just return the current row data 
-        If posOfcurrentRowData = iRow AndAlso currentRowData.Count > 0 Then
+        If currentRowDataPos = iRow AndAlso currentRowData.Count > 0 Then
             Return currentRowData
         End If
 
@@ -405,103 +593,92 @@ Public Class ucrNavigation
             End If
         Next
 
-        'construct the necessary sql. Using CONCAT_WS to return a string of values. Probably use a unique separator?
-        strSql = "SELECT CONCAT_WS(' +++ '," & strFields & ") AS createdcol FROM " & clsDataDefinition.GetTableName()
+        'construct the sql
+        strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
         If strSortCol <> "" Then
             strSql = strSql & " ORDER BY " & strSortCol
         End If
         strSql = strSql & " LIMIT 1 OFFSET " & iRow
 
-        'get the concatenated column's values 
-        strDBValues = clsDataConnection.db.Database.SqlQuery(Of String)(strSql).FirstOrDefault()
 
-        If strDBValues IsNot Nothing Then
-            arrDBValues = strDBValues.Split(" +++ ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            'arrange the values to their corresponding column names
-            For i As Integer = 0 To clsDataDefinition.GetFields().Count - 1
-                dctRow.Add(clsDataDefinition.GetFields().ElementAt(i).Key, arrDBValues(i))
+        Dim dtbl As DataTable = clsDataDefinition.GetDataTableFromQuery(strSql)
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            For Each str As String In clsDataDefinition.GetFields().Keys
+                dctRow.Add(str, dtbl.Rows(0).Item(str))
             Next
         End If
-        posOfcurrentRowData = iRow
+
+        currentRowDataPos = iRow
         currentRowData = dctRow
         Return dctRow
     End Function
 
-    'Gets the row position. The parameter is diction of column names and the values to fetch
+    'TODO. Change how this is implemented
+    'Gets the row position. The parameter is dictionary of column names and the values to fetch
     Private Function GetRowPosition(dctFieldvalue As Dictionary(Of String, String)) As Integer
-        Dim rowIndex As Integer = -1
-        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-        Dim command As MySql.Data.MySqlClient.MySqlCommand
-        Dim reader As MySql.Data.MySqlClient.MySqlDataReader
+        Dim rowPosition As Integer = -1 ' default row position
         Dim strSql As String
         Dim strFields As String = ""
         Dim i As Integer
         Dim bIsRowFetched As Boolean
-        'get all the fields and their condition values
-        For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-            If strFields = "" Then
-                strFields = kvp.Key
-            Else
-                strFields = strFields & "," & kvp.Key
-            End If
 
-        Next
         Try
-            i = 0
+
+            'get all the fields and their condition values
+            For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                If strFields = "" Then
+                    strFields = kvp.Key
+                Else
+                    strFields = strFields & "," & kvp.Key
+                End If
+            Next
+
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
             If strSortCol <> "" Then
                 strSql = strSql & " ORDER BY " & strSortCol
             End If
-            conn.ConnectionString = frmLogin.txtusrpwd.Text
-            command = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-            conn.Open()
-            reader = command.ExecuteReader()
-            If reader.HasRows Then
-                While reader.Read()
-                    bIsRowFetched = True
-                    For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
-                        If kvp.Value <> reader.GetString(kvp.Key) Then
-                            bIsRowFetched = False
-                            Exit For
-                        End If
-                    Next
 
-                    If bIsRowFetched Then
-                        rowIndex = i
-                        Exit While
+            'fetch the row positions
+            'todo. in future a query like this could be used to get the row position instead of the reader
+            'Select Case pos, SteamId FROM ( Select Case (@pos := @pos+1) pos , Map, Time, Date, SteamID
+            'FROM `surf_times` S, (SELECT @pos := 0) p WHERE `Map` = "surf_mesa"  ORDER BY `Time` ) `surf_times` WHERE `SteamID` = "76561198065863390" ORDER BY pos LIMIT 1;
+
+            i = 0
+            Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                Using reader As MySql.Data.MySqlClient.MySqlDataReader = Command.ExecuteReader()
+                    If reader.HasRows Then
+                        While reader.Read()
+                            bIsRowFetched = True
+                            For Each kvp As KeyValuePair(Of String, String) In dctFieldvalue
+                                If kvp.Value <> reader.GetString(kvp.Key) Then
+                                    bIsRowFetched = False
+                                    Exit For
+                                End If
+                            Next
+
+                            If bIsRowFetched Then
+                                rowPosition = i
+                                Exit While
+                            End If
+                            i = i + 1
+                        End While
                     End If
-                    i = i + 1
-                End While
-            End If
 
-            reader.Close()
+                End Using
+            End Using
+
 
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
-        Finally
-            conn.Close()
         End Try
 
-        Return rowIndex
+        Return rowPosition
     End Function
 
-    ' Use these two methods when you need to get a values from a specific row of the table
-    ' These should be used in any place where dtbRecords is currently used since we are now not populating dtbRecords
-    'Private Function GetValueFromRowOLD(iRow As Integer, strField As String) As String
-    '    If iMaxRows = 0 Then
-    '        Return ""
-    '    Else
-    '        Return CallByName(GetRow(iRow), strField, CallType.Get)
-    '    End If
-    'End Function
+    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
+        ' If Not bSuppressChangedEvents Then
+        RaiseEvent evtValueChanged(sender, e)
+        'End If
+    End Sub
 
-    'Private Function GetRowOLD(iRow As Integer) As Object
-    '    'Skip() and FirstOrDefault() seems like the way to get the nth row from the table
-    '    'You can only use Skip() if you use an Order function first.
-    '    Dim x = CallByName(clsDataConnection.db, clsDataDefinition.GetTableName(), CallType.Get)
-    '    x = x.AsNoTracking()
-    '    Dim y = TryCast(x, IQueryable(Of Object))
-    '    ' OrderBy function returns 1 to give a default ordering
-    '    Return y.OrderBy(Function(u) 1).Skip(iRow).FirstOrDefault()
-    'End Function
 End Class

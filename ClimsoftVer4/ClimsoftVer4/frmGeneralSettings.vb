@@ -336,13 +336,19 @@ Public Class frmGeneralSettings
         Dim sql, userName As String
         dsSourceTableName = "regkeys"
         userName = frmLogin.txtUsername.Text
+
+        formDataView.grpSearch.Visible = False
         If userGroup = "ClimsoftAdmin" Or userName = "root" Then
             sql = "SELECT * FROM regkeys ORDER by keyName;"
             viewRecords.viewTableRecords(sql)
         Else
             MsgBox("You don't have permission to view the information!", MsgBoxStyle.Exclamation)
         End If
-        MsgBox("When updation folder locations, Please keep forward slash'/' for QC output folder locations " & _
-            "and backslash for other folder locations '\'. ", MsgBoxStyle.Exclamation)
+        MsgBox("When updating folder locations, Please keep forward slash'/' for QC output folder locations " &
+            "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")
+    End Sub
+
+    Private Sub BindingSource1_CurrentChanged(sender As Object, e As EventArgs) Handles BindingSource1.CurrentChanged
+
     End Sub
 End Class

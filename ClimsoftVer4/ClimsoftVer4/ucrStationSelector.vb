@@ -1,5 +1,5 @@
 ﻿Public Class ucrStationSelector
-    Private strStationsTableName As String = "stations"
+    Private strStationsTableName As String = "station"
     Private strStationName As String = "stationName"
     Private strStationId As String = "stationId"
     Private strIDsAndStations As String = "ids_stations"
@@ -26,16 +26,17 @@
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
-            Dim strCol As String = cboValues.ValueMember
-            For Each rTemp As DataRow In dtbRecords.Rows
-                If rTemp.Item(strCol).ToString = cboValues.Text Then
-                    bValid = True
-                    Exit For
-                End If
-            Next
+            If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
+                For Each rTemp As DataRow In dtbRecords.Rows
+                    If rTemp.Item(cboValues.ValueMember).ToString = cboValues.Text Then
+                        bValid = True
+                        Exit For
+                    End If
+                Next
+            End If
         End If
 
-        SetBackColor(If(bValid, Color.White, Color.Red))
+        SetBackColor(If(bValid, clValidColor, clInValidColor))
         Return bValid
     End Function
 
@@ -64,17 +65,24 @@
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim dct As Dictionary(Of String, List(Of String))
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
+        Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
+            cboValues.ContextMenuStrip = cmsStation
+            SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
+
             'SortByStationName()
-            dct = New Dictionary(Of String, List(Of String))
+
             dct.Add(strStationId, New List(Of String)({strStationId}))
             dct.Add(strStationName, New List(Of String)({strStationName}))
             dct.Add(strIDsAndStations, New List(Of String)({strStationId, strStationName}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
-            cboValues.ContextMenuStrip = cmsStation
-            SetComboBoxSelectorProperties()
             bFirstLoad = False
         End If
     End Sub

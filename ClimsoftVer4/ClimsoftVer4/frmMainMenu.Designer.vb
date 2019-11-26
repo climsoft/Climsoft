@@ -19,6 +19,7 @@ Partial Class frmMainMenu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.mnuInput = New System.Windows.Forms.ToolStripMenuItem()
@@ -36,9 +37,9 @@ Partial Class frmMainMenu
         Me.PasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataFormsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConfigureDatabaseConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpeartionsMonitoringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmptyKeyEntryTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeOwnPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,8 +78,10 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip2
@@ -161,7 +164,7 @@ Partial Class frmMainMenu
         '
         'mnuAdministration
         '
-        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.ConfigureDatabaseConnectionToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1, Me.OpeartionsMonitoringToolStripMenuItem})
+        Me.mnuAdministration.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserAdminToolStripMenuItem, Me.MetadataToolStripMenuItem, Me.PasswordToolStripMenuItem, Me.DataFormsToolStripMenuItem, Me.UpdateElementsToolStripMenuItem, Me.UpdateObservationsToolStripMenuItem1, Me.OpeartionsMonitoringToolStripMenuItem, Me.EmptyKeyEntryTablesToolStripMenuItem})
         Me.mnuAdministration.Name = "mnuAdministration"
         Me.mnuAdministration.Size = New System.Drawing.Size(111, 23)
         Me.mnuAdministration.Tag = "Administration"
@@ -202,12 +205,6 @@ Partial Class frmMainMenu
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
         Me.UpdateElementsToolStripMenuItem.Visible = False
         '
-        'ConfigureDatabaseConnectionToolStripMenuItem
-        '
-        Me.ConfigureDatabaseConnectionToolStripMenuItem.Name = "ConfigureDatabaseConnectionToolStripMenuItem"
-        Me.ConfigureDatabaseConnectionToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
-        Me.ConfigureDatabaseConnectionToolStripMenuItem.Text = "Configure Database Connection"
-        '
         'UpdateObservationsToolStripMenuItem1
         '
         Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
@@ -219,6 +216,12 @@ Partial Class frmMainMenu
         Me.OpeartionsMonitoringToolStripMenuItem.Name = "OpeartionsMonitoringToolStripMenuItem"
         Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
         Me.OpeartionsMonitoringToolStripMenuItem.Text = "Operations Monitoring"
+        '
+        'EmptyKeyEntryTablesToolStripMenuItem
+        '
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Name = "EmptyKeyEntryTablesToolStripMenuItem"
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Text = "Empty Key Entry Forms"
         '
         'ChangeOwnPasswordToolStripMenuItem
         '
@@ -265,19 +268,19 @@ Partial Class frmMainMenu
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.HourlyToolStripMenuItem.Text = "Daily"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.DailyToolStripMenuItem.Text = "Hourly"
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
@@ -653,6 +656,7 @@ Partial Class frmMainMenu
         Me.MenuStrip2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -704,7 +708,6 @@ Partial Class frmMainMenu
     Friend WithEvents DailyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FormHourlyTimeSelectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangeOwnPasswordToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ConfigureDatabaseConnectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuLanguageTranslation As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AWSElementsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -714,4 +717,6 @@ Partial Class frmMainMenu
     Friend WithEvents OpeartionsMonitoringToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

@@ -191,6 +191,9 @@
             btnUpload.Enabled = False
         End If
 
+        ' Retrieve Keyentry mode information and mark on the checkbox
+        If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+
         'Set the record index counter to the first row
         inc = 0
 
@@ -202,7 +205,8 @@
 
             sql = "SELECT * FROM form_agro1"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            da.Fill(ds, "formAgro1")
+
+            da.Fill(ds, "form_agro1")
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
@@ -212,7 +216,7 @@
         End Try
 
         Try
-            maxRows = ds.Tables("formAgro1").Rows.Count
+            maxRows = ds.Tables("form_agro1").Rows.Count
 
             '--------------------------------
             'Fill combobox for station identifier with station list from station table
@@ -239,18 +243,32 @@
             'Initialize header information for data-entry form
 
             If maxRows > 0 Then
-                cboStation.SelectedValue = ds.Tables("formAgro1").Rows(inc).Item("stationId")
-                txtYear.Text = ds.Tables("formAgro1").Rows(inc).Item("yyyy")
-                cboMonth.Text = ds.Tables("formAgro1").Rows(inc).Item("mm")
-                cboDay.Text = ds.Tables("formAgro1").Rows(inc).Item("dd")
+                cboStation.SelectedValue = ds.Tables("form_agro1").Rows(inc).Item("stationId")
+                txtYear.Text = ds.Tables("form_agro1").Rows(inc).Item("yyyy")
+                cboMonth.Text = ds.Tables("form_agro1").Rows(inc).Item("mm")
+                cboDay.Text = ds.Tables("form_agro1").Rows(inc).Item("dd")
 
                 'Initialize textboxes for observation values
+                ' But not for Repeat Entry mode
+                If chkRepeatEntry.Checked Then
+                    btnAddNew.Enabled = True
+                    btnCommit.Enabled = False
+                    btnUpdate.Enabled = False
+                    btnDelete.Enabled = False
+                    btnClear.Enabled = False
+                    btnMoveFirst.Enabled = False
+                    btnMoveNext.Enabled = False
+                    btnMovePrevious.Enabled = False
+                    btnMoveLast.Enabled = False
+                    Exit Sub
+                End If
+
                 'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
                 For m = 4 To 37
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(ds.Tables("formAgro1").Rows(inc).Item(m)) Then
-                                ctl.Text = ds.Tables("formAgro1").Rows(inc).Item(m)
+                            If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
                             End If
                         End If
                     Next ctl
@@ -261,8 +279,8 @@
                 For m = 38 To 71
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            If Not IsDBNull(ds.Tables("formAgro1").Rows(inc).Item(m)) Then
-                                ctl.Text = ds.Tables("formAgro1").Rows(inc).Item(m)
+                            If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                                ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
                             End If
                         End If
                     Next ctl
@@ -284,9 +302,9 @@
                 recNumberTextBox.Text = "Record 1 of 1"
             End If
 
-            ' Retrieve Keyentry mode information and mark on the checkbox
-            'MsgBox(FldName.Key_Entry_Mode(Me.Name))
-            If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+            '' Retrieve Keyentry mode information and mark on the checkbox
+            ''MsgBox(FldName.Key_Entry_Mode(Me.Name))
+            'If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -315,24 +333,25 @@
         btnCommit.Enabled = True
 
         Dim dataFormRecCount, seqRecCount As Integer
-        Dim strYear, strMonth, strDay, Sql As String
+        Dim strStation, strYear, strMonth, strDay, Sql As String
 
+        strStation = cboStation.SelectedValue
         Try
-            dataFormRecCount = ds.Tables("formAgro1").Rows.Count
+            dataFormRecCount = ds.Tables("form_agro1").Rows.Count
 
             If dataFormRecCount > 0 Then
-                cboStation.SelectedValue = ds.Tables("formAgro1").Rows(dataFormRecCount - 1).Item("stationId")
-                strYear = ds.Tables("formAgro1").Rows(dataFormRecCount - 1).Item("yyyy")
-                strMonth = ds.Tables("formAgro1").Rows(dataFormRecCount - 1).Item("mm")
-                strDay = ds.Tables("formAgro1").Rows(dataFormRecCount - 1).Item("dd")
-            Else
-                cboStation.SelectedValue = cboStation.SelectedValue
-                strYear = txtYear.Text
-                strMonth = cboMonth.Text
-                strDay = cboDay.Text
-            End If
+                    cboStation.SelectedValue = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("stationId")
+                    strYear = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("yyyy")
+                    strMonth = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("mm")
+                    strDay = ds.Tables("form_agro1").Rows(dataFormRecCount - 1).Item("dd")
+                Else
+                    cboStation.SelectedValue = cboStation.SelectedValue
+                    strYear = txtYear.Text
+                    strMonth = cboMonth.Text
+                    strDay = cboDay.Text
+                End If
 
-            Dim ctl As Control
+                Dim ctl As Control
 
             'Clear textboxes for observation values
             'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
@@ -360,12 +379,15 @@
                 ' Enable AddNew button and Diable Save button
                 btnAddNew.Enabled = True
                 btnCommit.Enabled = False
+                btnClear.Enabled = False
                 ' Compute the new header entries for the next record
+                cboStation.SelectedValue = strStation
                 recdate = DateSerial(txtYear.Text, cboMonth.Text, cboDay.Text)
                 recdate = DateAdd("d", 1, recdate)
                 txtYear.Text = DateAndTime.Year(recdate)
                 cboMonth.Text = DateAndTime.Month(recdate)
                 cboDay.Text = DateAndTime.Day(recdate)
+                txtVal_Elem101Field004.Focus()
                 Exit Sub
             End If
 
@@ -465,15 +487,15 @@
         '--------------------------
         Dim stn As String
         'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("formAgro1").Rows(inc).Item("stationId")
+        stn = ds.Tables("form_agro1").Rows(inc).Item("stationId")
         cboStation.SelectedValue = stn
         '--------------------------
         'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
         'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        txtYear.Text = ds.Tables("formAgro1").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("formAgro1").Rows(inc).Item("mm")
-        cboDay.Text = ds.Tables("formAgro1").Rows(inc).Item("dd")
+        txtYear.Text = ds.Tables("form_agro1").Rows(inc).Item("yyyy")
+        cboMonth.Text = ds.Tables("form_agro1").Rows(inc).Item("mm")
+        cboDay.Text = ds.Tables("form_agro1").Rows(inc).Item("dd")
 
         Dim m As Integer
         Dim ctl As Control
@@ -483,8 +505,8 @@
         For m = 5 To 53
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("formAgro1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("formAgro1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
                     Else
                         ctl.Text = ""
                     End If
@@ -498,8 +520,8 @@
         For m = 54 To 102
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("formAgro1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("formAgro1").Rows(inc).Item(m)
+                    If Not IsDBNull(ds.Tables("form_agro1").Rows(inc).Item(m)) Then
+                        ctl.Text = ds.Tables("form_agro1").Rows(inc).Item(m)
                     Else
                         ctl.Text = ""
                     End If
@@ -694,27 +716,27 @@
                 'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
                 Dim recCommit As New dataEntryGlobalRoutines
                 'Try
-                dsNewRow = ds.Tables("formAgro1").NewRow
+                dsNewRow = ds.Tables("form_agro1").NewRow
                 'Add a new record to the data source table
-                ds.Tables("formAgro1").Rows.Add(dsNewRow)
+                ds.Tables("form_agro1").Rows.Add(dsNewRow)
                 'Commit observation header information to database
-                ds.Tables("formAgro1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-                ds.Tables("formAgro1").Rows(inc).Item("yyyy") = txtYear.Text
-                ds.Tables("formAgro1").Rows(inc).Item("mm") = cboMonth.Text
-                ds.Tables("formAgro1").Rows(inc).Item("dd") = cboDay.Text
+                ds.Tables("form_agro1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+                ds.Tables("form_agro1").Rows(inc).Item("yyyy") = txtYear.Text
+                ds.Tables("form_agro1").Rows(inc).Item("mm") = cboMonth.Text
+                ds.Tables("form_agro1").Rows(inc).Item("dd") = cboDay.Text
 
                 ' txtSignature.Text = frmLogin.txtUser.Text
-                ds.Tables("formAgro1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
+                ds.Tables("form_agro1").Rows(inc).Item("signature") = frmLogin.txtUsername.Text
 
                 'Added field for timestamp to allow recording when data was entered. 20160419, ASM.
-                ds.Tables("formAgro1").Rows(inc).Item("entryDatetime") = Now()
+                ds.Tables("form_agro1").Rows(inc).Item("entryDatetime") = Now()
 
                 'Commit observation values to database
                 'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
                 For m = 4 To 38
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
+                            ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
                         End If
                     Next ctl
                 Next m
@@ -724,12 +746,12 @@
                 For m = 39 To 71
                     For Each ctl In Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                            ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
+                            ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
                         End If
                     Next ctl
                 Next m
 
-                da.Update(ds, "formAgro1")
+                da.Update(ds, "form_agro1")
 
                 ''Display message for successful record commit to table
                 'recCommit.messageBoxCommit()
@@ -749,7 +771,7 @@
                     btnDelete.Enabled = False
                 End If
 
-                maxRows = ds.Tables("formAgro1").Rows.Count
+                maxRows = ds.Tables("form_agro1").Rows.Count
                 inc = maxRows - 1
 
                 'Call subroutine for record navigation
@@ -776,17 +798,17 @@
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recUpdate As New dataEntryGlobalRoutines
         'Update header fields for form in database
-        ds.Tables("formAgro1").Rows(inc).Item("stationId") = cboStation.SelectedValue
-        ds.Tables("formAgro1").Rows(inc).Item("yyyy") = txtYear.Text
-        ds.Tables("formAgro1").Rows(inc).Item("mm") = cboMonth.Text
-        ds.Tables("formAgro1").Rows(inc).Item("dd") = cboDay.Text
+        ds.Tables("form_agro1").Rows(inc).Item("stationId") = cboStation.SelectedValue
+        ds.Tables("form_agro1").Rows(inc).Item("yyyy") = txtYear.Text
+        ds.Tables("form_agro1").Rows(inc).Item("mm") = cboMonth.Text
+        ds.Tables("form_agro1").Rows(inc).Item("dd") = cboDay.Text
 
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
         For m = 5 To 53
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
+                    ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
                 End If
             Next ctl
         Next m
@@ -796,13 +818,13 @@
         For m = 54 To 102
             For Each ctl In Me.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    ds.Tables("formAgro1").Rows(inc).Item(m) = ctl.Text
+                    ds.Tables("form_agro1").Rows(inc).Item(m) = ctl.Text
                 End If
             Next ctl
         Next m
 
         'The data adapter is used to update the record in the data source table
-        da.Update(ds, "formAgro1")
+        da.Update(ds, "form_agro1")
 
         'Show message for successful updating or record.
         recUpdate.messageBoxRecordedUpdated()
@@ -821,8 +843,8 @@
             Exit Sub
         End If
 
-        ds.Tables("formAgro1").Rows(inc).Delete()
-        da.Update(ds, "formAgro1")
+        ds.Tables("form_agro1").Rows(inc).Delete()
+        da.Update(ds, "form_agro1")
         maxRows = maxRows - 1
         inc = 0
 
@@ -884,6 +906,8 @@
         Me.Close()
     End Sub
 
+
+
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
     End Sub
@@ -905,13 +929,13 @@
             conn.Open()
             '
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-            maxRows = ds.Tables("formAgro1").Rows.Count
+            maxRows = ds.Tables("form_agro1").Rows.Count
             qcStatus = 0
             acquisitionType = 1
             obsLevel = "surface"
             obsVal = ""
             obsFlag = ""
-            dataForm = "formAgro1"
+            dataForm = "form_agro1"
 
             'Loop through all records in dataset
             For n = 0 To maxRows - 1
@@ -922,12 +946,12 @@
 
                 For m = 4 To 37
 
-                    stnId = ds.Tables("formAgro1").Rows(n).Item(0)
-                    yyyy = ds.Tables("formAgro1").Rows(n).Item(1)
-                    mm = ds.Tables("formAgro1").Rows(n).Item(2)
-                    dd = ds.Tables("formAgro1").Rows(n).Item(3)
-                    'hh = ds.Tables("formAgro1").Rows(n).Item(4)
-                    If Not IsDBNull(ds.Tables("formAgro1").Rows(n).Item("signature")) Then capturedBy = ds.Tables("formAgro1").Rows(n).Item("signature")
+                    stnId = ds.Tables("form_agro1").Rows(n).Item(0)
+                    yyyy = ds.Tables("form_agro1").Rows(n).Item(1)
+                    mm = ds.Tables("form_agro1").Rows(n).Item(2)
+                    dd = ds.Tables("form_agro1").Rows(n).Item(3)
+                    'hh = ds.Tables("form_agro1").Rows(n).Item(4)
+                    If Not IsDBNull(ds.Tables("form_agro1").Rows(n).Item("signature")) Then capturedBy = ds.Tables("form_agro1").Rows(n).Item("signature")
 
                     If Val(mm) < 10 Then mm = "0" & mm
                     If Val(dd) < 10 Then dd = "0" & dd
@@ -935,8 +959,8 @@
 
                     obsDatetime = yyyy & "-" & mm & "-" & dd & " 06:00:00"
 
-                    If Not IsDBNull(ds.Tables("formAgro1").Rows(n).Item(m)) Then obsVal = ds.Tables("formAgro1").Rows(n).Item(m)
-                    If Not IsDBNull(ds.Tables("formAgro1").Rows(n).Item(m + 34)) Then obsFlag = ds.Tables("formAgro1").Rows(n).Item(m + 34)
+                    If Not IsDBNull(ds.Tables("form_agro1").Rows(n).Item(m)) Then obsVal = ds.Tables("form_agro1").Rows(n).Item(m)
+                    If Not IsDBNull(ds.Tables("form_agro1").Rows(n).Item(m + 34)) Then obsFlag = ds.Tables("form_agro1").Rows(n).Item(m + 34)
                     'Get the element code from the control name corresponding to column index
                     For Each ctl In Me.Controls
                         If Val(Strings.Right(ctl.Name, 3)) = m Then

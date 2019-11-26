@@ -22,6 +22,7 @@ Partial Class frmGTSNOAA
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.btnBrowseDataFile = New System.Windows.Forms.Button()
         Me.lblDataFile = New System.Windows.Forms.Label()
         Me.txtDataFile = New System.Windows.Forms.TextBox()
@@ -29,6 +30,8 @@ Partial Class frmGTSNOAA
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.lblRecordCount = New System.Windows.Forms.Label()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnBrowseDataFile
@@ -92,6 +95,9 @@ Partial Class frmGTSNOAA
         Me.lblRecordCount.Size = New System.Drawing.Size(0, 13)
         Me.lblRecordCount.TabIndex = 28
         '
+        'BindingSource1
+        '
+        '
         'frmGTSNOAA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -106,6 +112,7 @@ Partial Class frmGTSNOAA
         Me.Controls.Add(Me.btnOK)
         Me.Name = "frmGTSNOAA"
         Me.Text = "GTS-NOAA Data"
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -117,4 +124,5 @@ Partial Class frmGTSNOAA
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents lblRecordCount As System.Windows.Forms.Label
+    Friend WithEvents BindingSource1 As BindingSource
 End Class

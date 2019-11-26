@@ -1,52 +1,59 @@
 ﻿Public Class ClsShiftCells
-    Private vfpContextMenuStrip As ContextMenuStrip
-    Private lstOrderedVfpControls As New List(Of ucrBaseDataLink)
+    Private ctrContextMenuStrip As ContextMenuStrip
+    Private lstOrderedControls As New List(Of ucrValueView)
 
-    ''' <summary>
-    ''' initialise the class with controls ordered by tab index
-    ''' </summary>
-    ''' <param name="lstOrderedControls"></param>
-    Public Sub New(lstOrderedControls As IOrderedEnumerable(Of ucrBaseDataLink))
-        For Each ctr As ucrBaseDataLink In lstOrderedControls
-            Me.lstOrderedVfpControls.Add(ctr)
-        Next
-        SetUpContextMenuStrip()
+    Public Sub New()
+
     End Sub
 
-    Public Sub New(lstOrderedControls As List(Of ucrBaseDataLink))
-        For Each ctr As ucrBaseDataLink In lstOrderedControls
-            Me.lstOrderedVfpControls.Add(ctr)
-        Next
-        SetUpContextMenuStrip()
-    End Sub
 
+    'left here temporary
     Public Sub New(lstOrderedControls As IOrderedEnumerable(Of ucrValueFlagPeriod))
+        SetUpContextMenuStrip(New ContextMenuStrip)
         For Each ctr As ucrValueFlagPeriod In lstOrderedControls
-            Me.lstOrderedVfpControls.Add(ctr)
+            Me.lstOrderedControls.Add(ctr)
         Next
-        SetUpContextMenuStrip()
+
     End Sub
 
+    'left here temporary
     Public Sub New(lstOrderedControls As IOrderedEnumerable(Of ucrDirectionSpeedFlag))
+        SetUpContextMenuStrip(New ContextMenuStrip)
         For Each ctr As ucrDirectionSpeedFlag In lstOrderedControls
-            Me.lstOrderedVfpControls.Add(ctr)
+            Me.lstOrderedControls.Add(ctr)
         Next
-        SetUpContextMenuStrip()
     End Sub
 
     Public Function GetVFPContextMenu() As ContextMenuStrip
-        Return vfpContextMenuStrip
+        Return ctrContextMenuStrip
     End Function
 
-    Private Sub SetUpContextMenuStrip()
+    'todo optimise
+    Public Sub SetUpShiftCellsMenuStrips(ctrContextMenuStrip As ContextMenuStrip, lstNewOrderedControls As IOrderedEnumerable(Of ucrValueFlagPeriod))
+        SetUpContextMenuStrip(ctrContextMenuStrip)
+        For Each ctr As ucrValueFlagPeriod In lstNewOrderedControls
+            Me.lstOrderedControls.Add(ctr)
+            ctr.SetContextMenuStrip(ctrContextMenuStrip)
+        Next
+    End Sub
+
+    'todo. optimise
+    Public Sub SetUpShiftCellsMenuStrips(ctrContextMenuStrip As ContextMenuStrip, lstNewOrderedControls As IOrderedEnumerable(Of ucrDirectionSpeedFlag))
+        SetUpContextMenuStrip(ctrContextMenuStrip)
+        For Each ctr As ucrDirectionSpeedFlag In lstNewOrderedControls
+            Me.lstOrderedControls.Add(ctr)
+            ctr.SetContextMenuStrip(Me.ctrContextMenuStrip)
+        Next
+    End Sub
+
+    Private Sub SetUpContextMenuStrip(ctrNewContextMenuStrip As ContextMenuStrip)
         Dim menuItemInsertCell As New ToolStripMenuItem("Insert Cell")
         Dim menuItemDeleteCell As New ToolStripMenuItem("Delete Cell")
 
-        vfpContextMenuStrip = New ContextMenuStrip
+        Me.ctrContextMenuStrip = ctrNewContextMenuStrip
 
-        vfpContextMenuStrip.Items.Add(menuItemInsertCell)
-        vfpContextMenuStrip.Items.Add(menuItemDeleteCell)
-
+        Me.ctrContextMenuStrip.Items.Add(menuItemInsertCell)
+        Me.ctrContextMenuStrip.Items.Add(menuItemDeleteCell)
 
         'Add functionality for ToolStripMenuItem1 (Maximize) click
         AddHandler menuItemDeleteCell.Click, AddressOf menuItemDeleteCell_Click
@@ -57,18 +64,18 @@
     End Sub
 
     Private Sub menuItemInsertCell_Click(ByVal sender As Object, ByVal e As EventArgs)
-        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
+        If TypeOf Me.ctrContextMenuStrip.SourceControl Is TextBox Then
             'for ucrValueFlagPeriod and ucrDirectionSpeedFlag
-            Dim control = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
+            Dim control = Me.ctrContextMenuStrip.SourceControl.Parent.Parent
 
             If (TypeOf control Is ucrValueFlagPeriod) OrElse (TypeOf control Is ucrDirectionSpeedFlag) Then
                 'Start the shifting downwards
                 Dim currentIndex As Integer = control.TabIndex
-                Dim lstControls As New List(Of ucrBaseDataLink)
+                Dim lstControls As New List(Of ucrValueView)
                 Dim lstValues As New List(Of Object)
 
                 'get the values to shift and the respective controls
-                For Each ctr As ucrBaseDataLink In lstOrderedVfpControls
+                For Each ctr As ucrValueView In lstOrderedControls
                     If ctr.TabIndex >= currentIndex AndAlso ctr.Enabled Then
                         lstControls.Add(ctr)
                         lstValues.Add(ctr.GetValue)
@@ -87,18 +94,18 @@
     End Sub
 
     Private Sub menuItemDeleteCell_Click(ByVal sender As Object, ByVal e As EventArgs)
-        If TypeOf Me.vfpContextMenuStrip.SourceControl Is TextBox Then
+        If TypeOf Me.ctrContextMenuStrip.SourceControl Is TextBox Then
             'for ucrValueFlagPeriod and ucrDirectionSpeedFlag
-            Dim control = Me.vfpContextMenuStrip.SourceControl.Parent.Parent
+            Dim control = Me.ctrContextMenuStrip.SourceControl.Parent.Parent
 
             If (TypeOf control Is ucrValueFlagPeriod) OrElse (TypeOf control Is ucrDirectionSpeedFlag) Then
                 'Start the shifting upwards
                 Dim currentIndex As Integer = control.TabIndex
-                Dim lstControls As New List(Of ucrBaseDataLink)
+                Dim lstControls As New List(Of ucrValueView)
                 Dim lstValues As New List(Of Object)
 
                 'get the values to shift and the respective controls
-                For Each ctr As ucrBaseDataLink In lstOrderedVfpControls
+                For Each ctr As ucrValueView In lstOrderedControls
                     If ctr.TabIndex >= currentIndex AndAlso ctr.Enabled Then
                         lstControls.Add(ctr)
                         lstValues.Add(ctr.GetValue)
