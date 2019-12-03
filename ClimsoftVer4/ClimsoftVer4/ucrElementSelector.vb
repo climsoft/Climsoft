@@ -1,5 +1,5 @@
 ﻿Public Class ucrElementSelector
-    Private strElementTableName As String = "obselements"
+    Private strElementTableName As String = "obselement"
     Private strElementName As String = "elementName"
     Private strElementId As String = "elementId"
     Private strIDsAndElements As String = "ids_elements"
@@ -27,15 +27,16 @@
         bValid = MyBase.ValidateValue()
 
         If Not bValid Then
-            Dim strCol As String
-            strCol = cboValues.ValueMember
-            For Each rTemp As DataRow In dtbRecords.Rows
-                If rTemp.Item(strCol).ToString = cboValues.Text Then
-                    bValid = True
-                    Exit For
-                End If
-            Next
-            SetBackColor(If(bValid, Color.White, Color.Red))
+            If Not String.IsNullOrEmpty(cboValues.ValueMember) Then
+                For Each rTemp As DataRow In dtbRecords.Rows
+                    If rTemp.Item(cboValues.ValueMember).ToString = cboValues.Text Then
+                        bValid = True
+                        Exit For
+                    End If
+                Next
+            End If
+
+            SetBackColor(If(bValid, clValidColor, clInValidColor))
         End If
 
         Return bValid
@@ -66,18 +67,24 @@
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
         Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
+
+            cboValues.ContextMenuStrip = cmsElement
+            SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
 
             dct.Add(strElementName, New List(Of String)({strElementName}))
             dct.Add(strElementId, New List(Of String)({strElementId}))
             dct.Add(strIDsAndElements, New List(Of String)({strElementId, strElementName}))
             SetTableNameAndFields(strElementTableName, dct)
             SetFilter("selected", "=", "1", bIsPositiveCondition:=True)
-
             PopulateControl()
-            cboValues.ContextMenuStrip = cmsElement
-            SetComboBoxSelectorProperties()
             bFirstLoad = False
         End If
     End Sub

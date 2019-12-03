@@ -200,7 +200,6 @@
                 kt = kt + kount
                 ' Update user record
                 sql = "UPDATE userrecords set recsdone = " & kount & " where username ='" & cboUser.Items(i) & "';"
-                'MsgBox(sql)
                 qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                 qwry.CommandTimeout = 0
                 qwry.ExecuteNonQuery()
@@ -235,7 +234,13 @@
             For i = 0 To ds.Tables("Performs").Rows.Count - 1
                 Rec(0) = ds.Tables("Performs").Rows(i).Item(0)
                 Rec(1) = ds.Tables("Performs").Rows(i).Item(1)
-                Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
+                ' Get the target value if is set
+                If Not IsDBNull(ds.Tables("Performs").Rows(i).Item(2)) Then
+                    Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
+                Else
+                    MsgBox("Target value not set. Please check the Settings")
+                    Exit For
+                End If
                 Rec(3) = ds.Tables("Performs").Rows(i).Item(3)
 
                 'perf = (ds.Tables("Records").Rows(i).Item(1) / ds.Tables("Records").Rows(i).Item(2)) * 100
@@ -297,13 +302,25 @@
     End Sub
 
     Private Sub cmdretrieve1_Click(sender As Object, e As EventArgs) Handles cmdretrieve1.Click
-
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
         Me.Cursor = Cursors.WaitCursor
 
-        ' Add a record for key entry mode if not exists
         Try
-            Dim qry As MySql.Data.MySqlClient.MySqlCommand
+            ' Add a record for key entry mode if not exists
             sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+        Catch ex As Exception
+            If ex.HResult <> -2147467259 Then 'Existing record
+                MsgBox(ex.HResult & " " & ex.Message)
+            End If
+        End Try
+
+        ' Add a record for users entry status if not exists
+        Try
+            sql = "ALTER TABLE `climsoftusers` ADD COLUMN `entry_status` TINYINT(2) NOT NULL DEFAULT '0' AFTER `userRole`;"
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
@@ -319,14 +336,14 @@
         Try
             If optTargets.Checked Then
                 sql = "SELECT username as User,recsexpt as Target_Records FROM userrecords;"
-               
+
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "settings")
                 DataGridSettings.DataSource = ds.Tables("settings")
                 DataGridSettings.Refresh()
-            Else
+            ElseIf optEntryMode.Checked Then
                 sql = "SELECT form_name,description, entry_mode FROM data_forms where selected ='1';"
 
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -334,6 +351,15 @@
                 ds.Clear()
                 da.Fill(ds, "forms")
                 DataGridSettings.DataSource = ds.Tables("forms")
+                DataGridSettings.Refresh()
+            ElseIf optUsersStatus.Checked Then
+                sql = "SELECT username as User,entry_status as Entry_Status FROM climsoftusers;"
+
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds.Clear()
+                da.Fill(ds, "EntryStatus")
+                DataGridSettings.DataSource = ds.Tables("EntryStatus")
                 DataGridSettings.Refresh()
             End If
             Me.Cursor = Cursors.Default
@@ -346,11 +372,11 @@
 
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         Dim usr, expt As String
-        Dim entrymode As Integer
+        Dim entrymode, entrystatus As Integer
         Try
             With DataGridSettings
                 If .Rows.Count = 0 Then
-                    MsgBox("No ecords retrieved yet!")
+                    MsgBox("No records retrieved yet!. Click View")
                     Exit Sub
                 End If
                 If optTargets.Checked Then ' Targets Settings
@@ -363,7 +389,7 @@
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
                     Next
-                Else    ' Key Entry Mode Settings
+                ElseIf optEntryMode.Checked Then   ' Key Entry Mode Settings
                     For i = 0 To .Rows.Count - 1
                         entrymode = Val(.Rows(i).Cells(2).Value)
                         ' Update user record
@@ -372,6 +398,41 @@
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
                     Next
+
+                ElseIf optUsersStatus.Checked Then   ' Users Key Entry Status
+
+                    Dim getdb As New frmUserManagement
+                    Dim db As String
+
+                    ' Get the current database name
+                    getdb.CurrentDB(constr, db)
+
+                    For i = 0 To .Rows.Count - 1
+                        usr = .Rows(i).Cells(0).Value
+                        entrystatus = Val(.Rows(i).Cells(1).Value)
+                        If entrystatus = 1 Then
+                            sql = "GRANT SELECT,UPDATE ON " & db & ".observationinitial TO '" & usr & "';"
+                        Else
+                            sql = "REVOKE SELECT,UPDATE ON " & db & ".observationinitial FROM '" & usr & "';"
+                        End If
+
+                        'Grant or Revoke Select and Update privileges in observationfinal table for the user
+                        Try
+                            qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                            qwry.CommandTimeout = 0
+                            qwry.ExecuteNonQuery()
+
+                        Catch prvlg As Exception
+                            If prvlg.HResult = -2147467259 Then Continue For
+                        End Try
+
+                        ' Update user entry status
+                        sql = "UPDATE climsoftusers set entry_status = '" & entrystatus & "' where userName ='" & usr & "';"
+                        qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        qwry.CommandTimeout = 0
+                        qwry.ExecuteNonQuery()
+                    Next
+
                 End If
                 MsgBox("Update Successful")
             End With
@@ -509,6 +570,18 @@
         Me.Close()
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Select Case TabMonitoring.SelectedIndex
+            Case 0
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "userrecords.htm")
+            Case 1
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "performancemonitoring.htm")
+            Case 2
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "doublekeyentryverification.htm")
+            Case 3
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "settings.htm")
+        End Select
+    End Sub
 
     Private Sub optTargets_CheckedChanged(sender As Object, e As EventArgs) Handles optTargets.CheckedChanged
         DataGridSettings.DataSource = ""

@@ -207,13 +207,7 @@ Public Class frmMainMenu
 
     End Sub
 
-    Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
 
-    End Sub
-
-    Private Sub cmdKeyEntry_DoubleClick(sender As Object, e As EventArgs) Handles cmdKeyEntry.DoubleClick
-
-    End Sub
 
     Private Sub DataFormsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataFormsToolStripMenuItem.Click
         frmDataForms.Show()
@@ -253,15 +247,11 @@ Public Class frmMainMenu
         frmChangeOwnPassword.Show()
     End Sub
 
-    Private Sub ConfigureDatabaseConnectionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConfigureDatabaseConnectionToolStripMenuItem.Click
-        frmLogin.Server_db_port(frmLogin.cmbDatabases.Text)
-    End Sub
-
     Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
 
     End Sub
 
-    
+
     Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
         frmLanguageTranslation.Show()
     End Sub
@@ -317,6 +307,7 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub frmMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        clsDataConnection.closeConnection()
         End
     End Sub
 

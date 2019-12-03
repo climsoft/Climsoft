@@ -22,12 +22,16 @@ Partial Class frmDBUtilities
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDBUtilities))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ObsInitialToFinalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExternalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CLICOMDailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SynopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HourlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AWSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NOAAGTSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,12 +58,16 @@ Partial Class frmDBUtilities
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
         Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Dbtpanel2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.Dbtpanel1.SuspendLayout()
         Me.grpbxUpload.SuspendLayout()
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -93,9 +101,28 @@ Partial Class frmDBUtilities
         '
         'CLICOMDailyToolStripMenuItem
         '
+        Me.CLICOMDailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.SynopToolStripMenuItem, Me.HourlyToolStripMenuItem})
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
         Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM Daily"
+        Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM"
+        '
+        'DailyToolStripMenuItem1
+        '
+        Me.DailyToolStripMenuItem1.Name = "DailyToolStripMenuItem1"
+        Me.DailyToolStripMenuItem1.Size = New System.Drawing.Size(120, 22)
+        Me.DailyToolStripMenuItem1.Text = "Daily"
+        '
+        'SynopToolStripMenuItem
+        '
+        Me.SynopToolStripMenuItem.Name = "SynopToolStripMenuItem"
+        Me.SynopToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.SynopToolStripMenuItem.Text = "Synoptic"
+        '
+        'HourlyToolStripMenuItem
+        '
+        Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(120, 22)
+        Me.HourlyToolStripMenuItem.Text = "Hourly"
         '
         'AWSToolStripMenuItem
         '
@@ -327,6 +354,8 @@ Partial Class frmDBUtilities
         Me.ToolStrip1.PerformLayout()
         Me.Dbtpanel1.ResumeLayout(False)
         Me.grpbxUpload.ResumeLayout(False)
+        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -362,5 +391,9 @@ Partial Class frmDBUtilities
     Friend WithEvents ToolStripSynoptic As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MultipleElementColumnsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-
+    Friend WithEvents DailyToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents SynopToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HourlyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents BindingSource2 As BindingSource
 End Class
