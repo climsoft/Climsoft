@@ -35,11 +35,30 @@
             For Each ctr As Control In Me.Controls
                 If TypeOf ctr Is ucrValueView Then
                     ucr = DirectCast(ctr, ucrValueView)
-                    If Not ucr.KeyControl Then
-                        ucr.SetValueFromDataTable(dtbRecords) 'key controls don't need to reread the values from the databale
-                    ElseIf Not bUpdating AndAlso ucr.KeyControl Then
-                        ucr.SetValueToDataTable(dtbRecords) ' For new record then let the key controls write to the new empty datatable
+                    If bUpdating Then
+                        'key controls don't need to reread the values from the databale
+                        If Not ucr.KeyControl Then
+                            ucr.SetValueFromDataTable(dtbRecords)
+                        End If
+                    Else
+                        If ucr.KeyControl Then
+                            ucr.SetValueToDataTable(dtbRecords) ' For new record then let the key controls write to the new empty datatable
+                        Else
+                            If ucr.HasDefaultValue() Then
+                                ucr.SelectDefaultValue() 'use the default value for new record
+                                ucr.SetValueToDataTable(dtbRecords)
+                            Else
+                                ucr.SetValueFromDataTable(dtbRecords) 'this just clears the existing value in the control
+                            End If
+                        End If
                     End If
+
+                    'key controls don't need to reread the values from the databale
+                    'If Not ucr.KeyControl Then
+                    '    ucr.SetValueFromDataTable(dtbRecords)
+                    'ElseIf Not bUpdating AndAlso ucr.KeyControl Then
+                    '    ucr.SetValueToDataTable(dtbRecords) ' For new record then let the key controls write to the new empty datatable
+                    'End If
 
                 End If
             Next
