@@ -54,6 +54,69 @@ Public Class formDataView
         da.Fill(ds, "dataView")
         Me.DataGridView.DataSource = ds.Tables(0)
     End Sub
+
+    Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
+        Dim tblhdr, x, importFile As String
+        Try
+            connStr = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = connStr
+            conn.Open()
+
+            Sql = "SELECT * FROM " & dsSourceTableName & ";"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            ds.Clear()
+            da.Fill(ds, "frmtbl")
+
+            With ds.Tables("frmtbl")
+                tblhdr = .Columns.Item(0).Caption
+                For i = 1 To .Columns.Count - 1
+                    tblhdr = tblhdr & "," & .Columns.Item(i).Caption
+                Next
+            End With
+            'MsgBox(tblhdr)
+            dlgImportFile.Filter = "Form Import file|*.*"
+            dlgImportFile.Title = "Open Import File"
+            dlgImportFile.FileName = dsSourceTableName
+            dlgImportFile.ShowDialog()
+            x = dlgImportFile.FileName
+
+            If InStr(x, dsSourceTableName) = 0 Then
+                MsgBox("The selected import file name does not match the opened form: " & dsSourceTableName & ". Please confirm!")
+                FileClose(111)
+                conn.Close()
+                Exit Sub
+            End If
+
+            'Convert Import file path seperators to SQL style
+            importFile = Strings.Left(x, 1)
+            For i = 2 To Len(x) - 1
+                If Strings.Mid(x, i, 1) = "\" Then
+                    importFile = importFile & "/"
+                Else
+                    importFile = importFile & Strings.Mid(x, i, 1)
+                End If
+            Next
+            importFile = importFile & Strings.Right(x, 1)
+
+            'MsgBox(importFile)
+            Sql = "LOAD DATA LOCAL INFILE '" & importFile & "' REPLACE INTO TABLE " & dsSourceTableName & " FIELDS TERMINATED BY ',' (" & tblhdr & ");"
+
+            'Execute SQL command
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            objCmd.ExecuteNonQuery()
+
+            Me.Refresh()
+            DataGridView.Refresh()
+            conn.Close()
+
+            MsgBox("File '" & x & "' Successfully Imported")
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+    End Sub
+
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'Added June 2016. ASM
         userName = frmLogin.txtUsername.Text
@@ -227,7 +290,7 @@ Public Class formDataView
                 '
                 conn.Close()
             Else
-                MsgBox("Updating of value not enabled for selected table datasheet or field, or field is part of a Primary Key!" & _
+                MsgBox("Updating of value not enabled for selected table datasheet or field, or field is part of a Primary Key!" &
                        " You may try updating value in single record review mode after closing datasheet view.", MsgBoxStyle.Exclamation)
             End If
         Catch ex As Exception
@@ -237,7 +300,7 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        Dim hdr, dat As String
+        Dim hdr, dat, exportfile, x As String
         Dim ds1 As New DataSet
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
@@ -246,40 +309,81 @@ Public Class formDataView
             conn.ConnectionString = connStr
             conn.Open()
 
-            hdr = DataGridView.Columns(0).Name
+            'hdr = DataGridView.Columns(0).Name
 
-            For i = 1 To DataGridView.ColumnCount - 1
-                hdr = hdr & "," & DataGridView.Columns(i).Name
+            'For i = 1 To DataGridView.ColumnCount - 1
+            '    hdr = hdr & "," & DataGridView.Columns(i).Name
+            'Next
+
+            'MsgBox(System.IO.Path.GetFullPath(Application.CommonAppDataPath))
+            'exportfile = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & dsSourceTableName & ".csv"
+
+            'exportfile = System.IO.Path.GetFullPath(Application.CommonAppDataPath) & "\" & dsSourceTableName & ".csv"
+
+            dlgExportFile.Filter = "Form Export file|*.csv"
+            dlgExportFile.Title = "Save Export File"
+            dlgExportFile.FileName = dsSourceTableName
+            dlgExportFile.ShowDialog()
+            x = dlgExportFile.FileName
+
+            If InStr(x, dsSourceTableName) = 0 Then
+                MsgBox("Improper filename. It Must contain the phrase: " & dsSourceTableName)
+                'FileClose(111)
+                conn.Close()
+                Exit Sub
+            End If
+
+            'FileOpen(111, exportfile, OpenMode.Output)
+
+            ''PrintLine(111, hdr)
+            'FileClose(111)
+
+            'Sql = "Select * from " & dsSourceTableName & ";"
+
+            'da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+
+            'ds1.Clear()
+            'da1.Fill(ds1, dsSourceTableName)
+
+            'FileOpen(111, exportfile, OpenMode.Append)
+
+            'For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+            '    dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+            '    For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+            '        dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+            '    Next
+
+            '    PrintLine(111, dat)
+            'Next
+            'FileClose(111)
+
+            'Convert Export file path seperators to SQL style
+            exportfile = Strings.Left(x, 1)
+            For i = 2 To Len(x) - 1
+                If Strings.Mid(x, i, 1) = "\" Then
+                    exportfile = exportfile & "/"
+                Else
+                    exportfile = exportfile & Strings.Mid(x, i, 1)
+                End If
             Next
-            FileOpen(111, "dataexport.csv", OpenMode.Output)
+            exportfile = exportfile & Strings.Right(x, 1)
 
-            PrintLine(111, hdr)
-            FileClose(111)
+            'MsgBox(exportfile)
 
-            Sql = "select * from " & dsSourceTableName & ";"
+            Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
 
-            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            'Execute SQL command
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            objCmd.ExecuteNonQuery()
 
-            ds1.Clear()
-            da1.Fill(ds1, dsSourceTableName)
-
-            FileOpen(111, "dataexport.csv", OpenMode.Append)
-
-            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
-                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
-                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
-                    dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
-                Next
-
-                PrintLine(111, dat)
-            Next
-            FileClose(111)
             conn.Close()
-            CommonModules.ViewFile("dataexport.csv")
+
+            MsgBox("File '" & x & "' Successfully Exported")
+            'CommonModules.ViewFile(exportfile)
         Catch ex As Exception
             MsgBox(ex.Message)
             conn.Close()
-            FileClose(111)
+            'FileClose(111)
         End Try
 
     End Sub
@@ -357,4 +461,5 @@ Public Class formDataView
             MsgBox(ex.Message)
         End Try
     End Sub
+
 End Class
