@@ -496,6 +496,12 @@
     <Compile Include="frmMonitoring.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNewUploadSelection.Designer.vb">
+      <DependentUpon>frmNewUploadSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewUploadSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPlotter.designer.vb">
       <DependentUpon>frmPlotter.vb</DependentUpon>
     </Compile>
