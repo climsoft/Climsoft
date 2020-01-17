@@ -65,19 +65,24 @@
     End Sub
 
     Protected Overrides Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim dct As Dictionary(Of String, List(Of String))
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
+        Dim dct As New Dictionary(Of String, List(Of String))
         If bFirstLoad Then
+            cboValues.ContextMenuStrip = cmsStation
+            SetComboBoxSelectorProperties()
+            bValidateEmpty = True
+            strValidationType = "exists"
+
             'SortByStationName()
-            dct = New Dictionary(Of String, List(Of String))
+
             dct.Add(strStationId, New List(Of String)({strStationId}))
             dct.Add(strStationName, New List(Of String)({strStationName}))
             dct.Add(strIDsAndStations, New List(Of String)({strStationId, strStationName}))
             SetTableNameAndFields(strStationsTableName, dct)
             PopulateControl()
-            cboValues.ContextMenuStrip = cmsStation
-            SetComboBoxSelectorProperties()
-            bValidateEmpty = True
-            strValidationType = "exists"
             bFirstLoad = False
         End If
     End Sub

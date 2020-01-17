@@ -62,16 +62,16 @@ Public Class DataCall
         dctFields = dctNewFields
     End Sub
 
-    Public Sub SetFields(lstNewFields As List(Of String))
+    Public Sub SetFields(iEnumerableNewFields As IEnumerable(Of String))
         Dim dctNewFields As New Dictionary(Of String, List(Of String))
-        For Each strTemp As String In lstNewFields
+        For Each strTemp As String In iEnumerableNewFields
             dctNewFields.Add(strTemp, New List(Of String)({strTemp}))
         Next
-        SetFields(dctNewFields:=dctNewFields)
+        SetFields(dctNewFields)
     End Sub
 
     Public Sub SetField(strNewField As String)
-        SetFields(New List(Of String)({strNewField}))
+        SetFields({strNewField})
     End Sub
 
     Public Sub AddField(strNewField As String)
@@ -81,8 +81,8 @@ Public Class DataCall
         dctFields.Add(strNewField, New List(Of String)({strNewField}))
     End Sub
 
-    Public Sub SetKeyFields(lstNewKeyFields As List(Of String))
-        lstKeyFieldNames = lstNewKeyFields
+    Public Sub SetKeyFields(iEnumerableNewKeyFields As IEnumerable(Of String))
+        lstKeyFieldNames = iEnumerableNewKeyFields.ToList()
     End Sub
 
     Public Sub AddKeyField(strNewKeyField As String)
@@ -94,7 +94,7 @@ Public Class DataCall
         SetFields(dctNewFields)
     End Sub
 
-    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As List(Of String))
+    Public Sub SetTableNameAndFields(strNewTable As String, lstNewFields As IEnumerable(Of String))
         SetTableName(strNewTable)
         SetFields(lstNewFields)
     End Sub
@@ -215,7 +215,7 @@ Public Class DataCall
                 strSelectCommand = "SELECT * FROM " & strTable
             End If
 
-            cmdSelect.Connection = clsDataConnection.conn
+            cmdSelect.Connection = clsDataConnection.OpenedConnection
             cmdSelect.CommandText = strSelectCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.SelectCommand = cmdSelect
             If clsCurrentFilter IsNot Nothing Then
@@ -225,7 +225,7 @@ Public Class DataCall
 
             'INSERT statement
             strInsertCommand = "INSERT INTO " & strTable & " (" & strSqlFieldNames & ") " & "VALUES (" & strSqlFieldParameters & ")"
-            cmdInsert.Connection = clsDataConnection.conn
+            cmdInsert.Connection = clsDataConnection.OpenedConnection
             cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.InsertCommand = cmdInsert
 
@@ -274,13 +274,13 @@ Public Class DataCall
 
             'UPDATE statement
             strUpdateCommand = "UPDATE " & strTable & " SET " & strUpdateSetCommand & " WHERE " & strKeysWhereCommand
-            cmdUpdate.Connection = clsDataConnection.conn
+            cmdUpdate.Connection = clsDataConnection.OpenedConnection
             cmdUpdate.CommandText = strUpdateCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.UpdateCommand = cmdUpdate
 
             'DELETE statement
             strDeleteCommand = "DELETE FROM " & strTable & " WHERE " & strKeysWhereCommand
-            cmdDelete.Connection = clsDataConnection.conn
+            cmdDelete.Connection = clsDataConnection.OpenedConnection
             cmdDelete.CommandText = strDeleteCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.DeleteCommand = cmdDelete
 
@@ -326,7 +326,7 @@ Public Class DataCall
                         'get the values of all the needed columns/fields in this row then combine them into the new coulmn
                         lstCombine = New List(Of String)
                         For Each strField As String In lstFields
-                            lstCombine.Add(row.Item(strField))
+                            lstCombine.Add(If(IsDBNull(row.Item(strField)), "", row.Item(strField)))
                         Next
                         'set the column with the combined values
                         row.Item(strFieldDisplay) = String.Join(strSep, lstCombine)
@@ -350,90 +350,90 @@ Public Class DataCall
     End Function
 
     'TODO. Delete this function later
-    Private Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
-        Dim objData As Object
-        Dim dtbFields As DataTable
+    'Private Function GetDataTableOLD(Optional clsAdditionalFilter As TableFilter = Nothing) As DataTable
+    '    Dim objData As Object
+    '    Dim dtbFields As DataTable
 
-        objData = GetDataObject(clsAdditionalFilter)
-        dtbFields = New DataTable()
-        If Not dctFields Is Nothing Then
-            For Each strFieldDisplay As String In dctFields.Keys
-                dtbFields.Columns.Add(strFieldDisplay, GetType(String))
-            Next
-            If objData IsNot Nothing Then
-                For Each Item As Object In objData
-                    dtbFields.Rows.Add(GetFieldsArray(Item))
-                Next
-            End If
-        End If
-        Return dtbFields
-    End Function
+    '    objData = GetDataObject(clsAdditionalFilter)
+    '    dtbFields = New DataTable()
+    '    If Not dctFields Is Nothing Then
+    '        For Each strFieldDisplay As String In dctFields.Keys
+    '            dtbFields.Columns.Add(strFieldDisplay, GetType(String))
+    '        Next
+    '        If objData IsNot Nothing Then
+    '            For Each Item As Object In objData
+    '                dtbFields.Rows.Add(GetFieldsArray(Item))
+    '            Next
+    '        End If
+    '    End If
+    '    Return dtbFields
+    'End Function
 
     'TODO. Delete this fucntion
-    Private Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
-        Dim objFields As New List(Of Object)
-        Dim lstFields As List(Of String)
-        Dim lstCombine As List(Of String)
+    'Private Function GetFieldsArray(Item As Object, Optional strSep As String = " ") As Object()
+    '    Dim objFields As New List(Of Object)
+    '    Dim lstFields As List(Of String)
+    '    Dim lstCombine As List(Of String)
 
-        If Item IsNot Nothing Then
-            For Each strFieldDisplay As String In dctFields.Keys
-                lstFields = dctFields(strFieldDisplay)
-                If lstFields.Count = 1 Then
-                    objFields.Add(CallByName(Item, lstFields(0), CallType.Get))
-                Else
-                    lstCombine = New List(Of String)
-                    For Each strField In lstFields
-                        lstCombine.Add(CallByName(Item, strField, CallType.Get))
-                    Next
-                    objFields.Add(String.Join(strSep, lstCombine))
-                End If
-            Next
-            Return objFields.ToArray()
-        Else
-            Return Nothing
-        End If
-    End Function
+    '    If Item IsNot Nothing Then
+    '        For Each strFieldDisplay As String In dctFields.Keys
+    '            lstFields = dctFields(strFieldDisplay)
+    '            If lstFields.Count = 1 Then
+    '                objFields.Add(CallByName(Item, lstFields(0), CallType.Get))
+    '            Else
+    '                lstCombine = New List(Of String)
+    '                For Each strField In lstFields
+    '                    lstCombine.Add(CallByName(Item, strField, CallType.Get))
+    '                Next
+    '                objFields.Add(String.Join(strSep, lstCombine))
+    '            End If
+    '        Next
+    '        Return objFields.ToArray()
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
 
     'TODO. Delete this function
-    Private Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
-        Dim clsCurrentFilter As TableFilter
+    'Private Function GetDataObject(Optional clsAdditionalFilter As TableFilter = Nothing) As Object
+    '    Dim clsCurrentFilter As TableFilter
 
-        'TODO. This code is repeated somewhere else. Push it to a function
-        If Not IsNothing(clsAdditionalFilter) Then
-            If IsNothing(clsFilter) Then
-                clsCurrentFilter = clsAdditionalFilter
-            Else
-                clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
-            End If
-        Else
-            clsCurrentFilter = clsFilter
-        End If
+    '    'TODO. This code is repeated somewhere else. Push it to a function
+    '    If Not IsNothing(clsAdditionalFilter) Then
+    '        If IsNothing(clsFilter) Then
+    '            clsCurrentFilter = clsAdditionalFilter
+    '        Else
+    '            clsCurrentFilter = New TableFilter(clsFilter, clsAdditionalFilter)
+    '        End If
+    '    Else
+    '        clsCurrentFilter = clsFilter
+    '    End If
 
-        Try
-            If strTable <> "" Then
-                Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
-                Dim y = TryCast(x, IQueryable(Of Object))
+    '    Try
+    '        If strTable <> "" Then
+    '            Dim x = CallByName(clsDataConnection.db, strTable, CallType.Get)
+    '            Dim y = TryCast(x, IQueryable(Of Object))
 
-                If clsCurrentFilter IsNot Nothing Then
-                    y = y.Where(clsCurrentFilter.GetLinqExpression())
-                End If
-                Return y.ToList()
-            Else
-                MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
-                Return Nothing
-            End If
-        Catch ex As Exception
-            Return Nothing
-        End Try
-    End Function
+    '            If clsCurrentFilter IsNot Nothing Then
+    '                y = y.Where(clsCurrentFilter.GetLinqExpression())
+    '            End If
+    '            Return y.ToList()
+    '        Else
+    '            MessageBox.Show("Developer error: Table name must be set before data can be retrieved. No data will be returned.", caption:="Developer error")
+    '            Return Nothing
+    '        End If
+    '    Catch ex As Exception
+    '        Return Nothing
+    '    End Try
+    'End Function
 
     'TODO This should return the Linq expression that goes in the Select method
+
     Public Function GetSelectLinqExpression() As String
         Return ""
     End Function
 
     Public Function TableCount(Optional clsAdditionalFilter As TableFilter = Nothing) As Integer
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         Dim iCount As Integer
         Dim clsCurrentFilter As TableFilter
 
@@ -449,40 +449,29 @@ Public Class DataCall
         End If
 
         Try
-
-            cmd = New MySql.Data.MySqlClient.MySqlCommand()
-            cmd.Connection = clsDataConnection.conn
-            cmd.CommandText = "SELECT COUNT(*) AS num FROM " & strTable
-            If clsCurrentFilter IsNot Nothing Then
-                clsCurrentFilter.AddToSqlcommand(cmd)
-            End If
-
-            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-                If reader.HasRows Then
-                    While reader.Read
-                        iCount = reader.Item("num")
-                    End While
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand("SELECT COUNT(*) AS colnum FROM " & strTable, clsDataConnection.OpenedConnection)
+                If clsCurrentFilter IsNot Nothing Then
+                    clsCurrentFilter.AddToSqlcommand(cmd)
                 End If
+                Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                    If reader.HasRows Then
+                        While reader.Read
+                            iCount = reader.Item("colnum")
+                        End While
+                    End If
+                End Using
             End Using
+
 
         Catch ex As Exception
             MsgBox("Error : " & ex.Message)
-        Finally
-            'conn.Close()
         End Try
 
         Return iCount
     End Function
 
     Private Function GetTableSchema(strSchemaTable As String) As DataTable
-        'Dim daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dtbSchema As New DataTable
-
-        Using daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter(
-            "SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" & strSchemaTable & "' AND TABLE_SCHEMA = '" & clsDataConnection.databaseName & "'", clsDataConnection.conn)
-            daTemp.Fill(dtbSchema)
-        End Using
-        Return dtbSchema
+        Return GetDataTableFromQuery("SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" & strSchemaTable & "' AND TABLE_SCHEMA = '" & clsDataConnection.databaseName & "'")
     End Function
 
     Private Function GetFieldMySqlDbType(strField As String, dtbSchema As DataTable) As MySql.Data.MySqlClient.MySqlDbType
@@ -520,8 +509,10 @@ Public Class DataCall
                 type = MySql.Data.MySqlClient.MySqlDbType.Decimal
             Case "char"
                 type = MySql.Data.MySqlClient.MySqlDbType.VarChar 'TODO char is not supported
+            Case "text"
+                type = MySql.Data.MySqlClient.MySqlDbType.Text
 
-                'TODO Add all the other types
+                'TODO. Add all the other types
         End Select
         Return type
     End Function
@@ -538,4 +529,18 @@ Public Class DataCall
         End If
         Return iLength
     End Function
+
+    ''' <summary>
+    ''' To be used for complex queries
+    ''' </summary>
+    ''' <param name="strSql"></param>
+    ''' <returns></returns>
+    Public Function GetDataTableFromQuery(strSql As String) As DataTable
+        Dim dtb As New DataTable
+        Using daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, clsDataConnection.OpenedConnection)
+            daTemp.Fill(dtb)
+        End Using
+        Return dtb
+    End Function
+
 End Class

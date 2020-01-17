@@ -53,16 +53,19 @@ Public Class ucrBaseDataLink
     Public Function GetTableName() As String
         Return strTableName
     End Function
+    Public Function GetTable() As DataTable
+        Return dtbRecords
+    End Function
 
     Public Sub SetFields(dctNewFields As Dictionary(Of String, List(Of String)))
         CreateDataDefinition()
-        clsDataDefinition.SetFields(dctNewFields:=dctNewFields)
+        clsDataDefinition.SetFields(dctNewFields)
         SetSortByItems()
     End Sub
 
     Public Sub SetFields(lstNewFields As List(Of String))
         CreateDataDefinition()
-        clsDataDefinition.SetFields(lstNewFields:=lstNewFields)
+        clsDataDefinition.SetFields(lstNewFields)
         SetSortByItems()
     End Sub
 
@@ -143,6 +146,8 @@ Public Class ucrBaseDataLink
             dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
         End If
     End Sub
+
+
 
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
@@ -258,6 +263,9 @@ Public Class ucrBaseDataLink
 
     Public Overridable Sub Clear()
 
+    End Sub
+
+    Public Overridable Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
     End Sub
 
     Private Sub ucrBaseDataLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load

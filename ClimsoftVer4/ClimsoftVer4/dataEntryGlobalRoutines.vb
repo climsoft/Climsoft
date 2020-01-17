@@ -435,21 +435,33 @@ Public Class dataEntryGlobalRoutines
         dttime = yy & "-" & mm & "-" & dd & " " & hh & ":00:00"
 
         sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
+
         Try
             d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con)
             ' Set to unlimited timeout period
             d.SelectCommand.CommandTimeout = 0
             d.Fill(s, "obsv_rec")
-
+            con.Close()
             If s.Tables("obsv_rec").Rows.Count = 0 Then
                 Entered_Value = False
             Else
                 obs = s.Tables("obsv_rec").Rows(0).Item("obsValue")
+                'If cod = "112" Then
+                '    s.Clear()
+                '    sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='111' and obsDatetime ='" & dttime & "';"
+                '    d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con)
+                '    ' Set to unlimited timeout period
+                '    d.SelectCommand.CommandTimeout = 0
+                '    s.Clear()
+                '    d.Fill(s, "obsv_rec")
+                '    obs = obs & s.Tables("obsv_rec").Rows(0).Item("obsValue")
+                'End If
             End If
-
+            con.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
             Entered_Value = False
+            con.Close()
         End Try
     End Function
 
@@ -475,6 +487,7 @@ Public Class dataEntryGlobalRoutines
 
         qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
         qry.CommandTimeout = 0
+        con.Close()
         Try
             'Execute query
             qry.ExecuteNonQuery()
@@ -484,20 +497,23 @@ Public Class dataEntryGlobalRoutines
             Db_Update_Conflicts = False
             con.Close()
         End Try
-        con.Close()
+
     End Function
 
     Function Entry_Verification(con As MySql.Data.MySqlClient.MySqlConnection, frm As Object, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String) As Boolean
         Dim obsv1, cpVal, c1 As String
         Dim conflict As Boolean
-
+        'MsgBox("Entry_Verification " & frm & " " & elmcode)
         Entry_Verification = False
+        'MsgBox(elmcode)
         Try
             With frm
                 If Not Entered_Value(con, stnid, elmcode, yy, mm, dd, hh, obsv1) Then
+                    con.Close()
                     MsgBox("Can't Compare. Data not previously uploaded")
                     Exit Function
                 Else
+                    'MsgBox(obsv1)
 
                     If .ActiveControl.Text <> obsv1 Then ' Conflicting values encountered
                         MsgBox("Conflicting Values")
@@ -516,9 +532,11 @@ Public Class dataEntryGlobalRoutines
                                 conflict = False
                                 ' Update database with the verified value
                                 If MsgBox("Update Conflicting Value?", vbYesNo, "Confirm Update") = MsgBoxResult.Yes Then
+                                    'If elmcode <> "112" Then
                                     If Not Db_Update_Conflicts(stnid, elmcode, yy, mm, dd, hh, c1) Then
                                         MsgBox("Update Failure")
                                     End If
+                                    'End If
                                 Else
                                     MsgBox("Update Cancelled by operator")
                                     .ActiveControl.Text = ""
@@ -530,10 +548,12 @@ Public Class dataEntryGlobalRoutines
                 End If
 
             End With
+            con.Close()
             Entry_Verification = True
         Catch ex As Exception
             MsgBox(ex.Message)
             Entry_Verification = False
+            con.Close()
         End Try
     End Function
 
@@ -566,5 +586,165 @@ Public Class dataEntryGlobalRoutines
             cons.Close()
         End Try
     End Function
+    Function GetCurrentStation(frm As String, ByRef stn As String) As Boolean
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim daLastDataRecord As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, SQL_last_record As String
+        Dim dsLastDataRecord As New DataSet
+        Dim recs As Long
 
+        Try
+            strConnString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = strConnString
+            conn.Open()
+
+            SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            dsLastDataRecord.Clear()
+            daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
+            ' Set to unlimited timeout period
+            daLastDataRecord.SelectCommand.CommandTimeout = 0
+            daLastDataRecord.Fill(dsLastDataRecord, "lastDataRecord")
+
+            conn.Close()
+
+            recs = dsLastDataRecord.Tables("lastDataRecord").Rows.Count
+
+            If recs > 0 Then
+                stn = dsLastDataRecord.Tables("lastDataRecord").Rows(recs - 1).Item("StationName")
+            Else
+                Return False
+            End If
+
+            GetCurrentStation = True
+        Catch ex As Exception
+            Return False
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+
+    End Function
+
+    Function Enable_Sequencer(frmtxt As String) As Boolean
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, sql_seq, sts_seq As String
+        Dim ds_seq As New DataSet
+        Dim recs As Long
+
+        Try
+            strConnString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = strConnString
+            conn.Open()
+
+            sql_seq = "select elem_code_location from data_forms where description = '" & frmtxt & "'"
+            ds_seq.Clear()
+            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            ' Set to unlimited timeout period
+            da_seq.SelectCommand.CommandTimeout = 0
+            da_seq.Fill(ds_seq, "SeqStatus")
+
+            conn.Close()
+
+            recs = ds_seq.Tables("SeqStatus").Rows.Count
+
+            If recs > 0 Then
+                sts_seq = ds_seq.Tables("SeqStatus").Rows(0).Item("elem_code_location")
+                'MsgBox(Strings.Right(sts_seq, 1))
+                If Strings.Right(sts_seq, 1) = "0" Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else
+                Return True
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return True
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+
+    End Function
+
+    Sub Update_Sequencer(frmtxt As String, sts As Boolean)
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, sql_seq, sts_seq As String
+        Dim ds_seq As New DataSet
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        Dim recs As Long
+
+
+        strConnString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = strConnString
+        conn.Open()
+        Try
+            sql_seq = "select elem_code_location from data_forms where description = '" & frmtxt & "'"
+            ds_seq.Clear()
+            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            ' Set to unlimited timeout period
+            da_seq.SelectCommand.CommandTimeout = 0
+            da_seq.Fill(ds_seq, "SeqStatus")
+
+            conn.Close()
+
+            recs = ds_seq.Tables("SeqStatus").Rows.Count
+
+            ' Set Sequence Status as required
+            'MsgBox(sts)
+            If recs > 0 Then
+                sts_seq = ds_seq.Tables("SeqStatus").Rows(0).Item("elem_code_location")
+
+                If sts Then
+                    If InStr(sts_seq, "0") > 0 Then
+                        sts_seq = Strings.Left(sts_seq, Len(sts_seq) - 1)
+                    Else
+                        sts_seq = sts_seq
+                    End If
+                Else
+                    If InStr(sts_seq, "0") = 0 Then
+                        sts_seq = sts_seq & "0"
+                    Else
+                        sts_seq = sts_seq
+                    End If
+
+                End If
+            Else
+                sts_seq = ""
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'Return False
+            conn.Close()
+        End Try
+
+        'MsgBox(sts_seq)
+
+        ' Update Sequencer Status
+        Try
+            If Len(sts_seq) > 0 Then
+                sql_seq = "update data_forms set elem_code_location = '" & sts_seq & "' where description ='" & frmtxt & "';"
+                conn.Open()
+                qry = New MySql.Data.MySqlClient.MySqlCommand(sql_seq, conn)
+                qry.CommandTimeout = 0
+                'Execute query
+                qry.ExecuteNonQuery()
+                conn.Close()
+            End If
+
+            'Return True
+        Catch ex As Exception
+            'Return True
+            If ex.HResult = -2147467259 Then
+                'MsgBox("You have no sufficient privileges to update Sequencer status. It will remain changed for this session only")
+            Else
+                MsgBox(ex.HResult & ": " & ex.Message)
+            End If
+            'Return False
+            conn.Close()
+        End Try
+
+    End Sub
 End Class

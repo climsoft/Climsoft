@@ -1,7 +1,7 @@
 ﻿Public Class ucrDataLinkCombobox
     Protected bFirstLoad As Boolean = True
     Public bFillFromDataBase As Boolean = True
-    Private objDefaultValue As Object = Nothing
+
 
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
@@ -33,18 +33,19 @@
     End Sub
 
     Public Overrides Sub SetValue(objNewValue As Object)
-        Dim strCol As String
+        Dim strNewValueToSet As String = ""
         Dim bValueFound As Boolean = False
-        'MyBase.SetValue(objNewValue)
-        strCol = cboValues.ValueMember
+
+
         If IsDBNull(objNewValue) OrElse String.IsNullOrEmpty(objNewValue) Then
-            cboValues.Text = ""
+            strNewValueToSet = ""
         Else
             For Each rTemp As DataRow In dtbRecords.Rows
                 'Calling ToString to prevent invalid casting
-                If rTemp.Item(strCol).ToString = objNewValue.ToString Then
+                If rTemp.Item(cboValues.ValueMember).ToString = objNewValue.ToString Then
                     'set the text using the display column
-                    cboValues.Text = rTemp.Item(cboValues.DisplayMember)
+                    'cboValues.Text = rTemp.Item(cboValues.DisplayMember)
+                    strNewValueToSet =  rTemp.Item(cboValues.DisplayMember)
                     'cboValues.SelectedValue = objNewValue
                     bValueFound = True
                     Exit For
@@ -52,13 +53,17 @@
             Next
 
             If Not bValueFound Then
-                cboValues.Text = objNewValue
+                'cboValues.Text = objNewValue
+                strNewValueToSet = objNewValue
             End If
 
         End If
 
+        If cboValues.Text <> strNewValueToSet Then
+            cboValues.Text = strNewValueToSet
+            OnevtValueChanged(Me, Nothing)
+        End If
 
-        OnevtValueChanged(Me, Nothing)
     End Sub
 
     ''' <summary>
@@ -86,13 +91,9 @@
         Return cboValues.Text
     End Function
 
-    Public Sub setDefaultValue(objNewValue As Object)
-        objDefaultValue = objNewValue
-    End Sub
-
-    Public Sub SelectDefault()
-        If objDefaultValue IsNot Nothing AndAlso dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
-            SetValue(objDefaultValue)
+    Public Overrides Sub SelectDefaultValue()
+        If HasDefaultValue() AndAlso dtbRecords IsNot Nothing AndAlso dtbRecords.Rows.Count > 0 Then
+            SetValue(GetDefaultValue())
         Else
             SelectFirst()
         End If
@@ -164,6 +165,10 @@
     End Sub
 
     Protected Overridable Sub ucrComboBoxSelector_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
+
         If bFirstLoad Then
             bValidateEmpty = True
             strValidationType = "exists"
@@ -243,7 +248,10 @@
                 Return True
             End If
 
-            If strValidationType = "exists" Then
+            If strValidationType = "none" Then
+                bValid = True
+                SetBackColor(clValidColor)
+            ElseIf strValidationType = "exists" Then
                 bValid = False
                 If cboValues.DisplayMember <> "" Then
                     For Each rTemp As DataRow In dtbRecords.Rows

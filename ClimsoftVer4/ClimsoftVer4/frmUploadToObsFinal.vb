@@ -339,13 +339,12 @@
         'lblTableRecords.Refresh()
 
         'Upload data to observationInitial table
-        Dim strSQL As String, stnId As String, elemCode As Integer, obsDate As String, obsVal As String, obsFlag, mark1 As String, _
-            qcStatus As Integer, acquisitionType As Integer, obsLevel As String, yyyy As Integer, mm As String, dd As String, hh As String
+        Dim strSQL, stnId, elemCode, obsVal, obsFlag, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
+        Dim acquisitionType, yyyy As Integer
 
         Dim ds As New DataSet
         Dim maxRows As Integer
         Dim beginYear As Integer, endYear As Integer, beginMonth As Integer, endMonth As Integer
-
 
         Try
 
@@ -482,7 +481,13 @@
 
                 dd = Microsoft.VisualBasic.DateAndTime.Day(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
                 hh = Hour(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
-                obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+                mnt = Minute(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
+                ss = Second(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
+
+                ''obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+
+                ' Code improved to include minutes and seconds in the datetime string
+                obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":" & mnt & ":" & ss
 
                 stnId = ds.Tables("obsInitial").Rows(n).Item("recordedFrom")
                 elemCode = ds.Tables("obsInitial").Rows(n).Item("describedBy")
@@ -605,7 +610,14 @@
                 If Val(hh) < 10 Then hh = "0" & hh
                 dd = Microsoft.VisualBasic.DateAndTime.Day(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
                 hh = Hour(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
-                obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+                mnt = Minute(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
+                ss = Second(ds.Tables("obsInitial").Rows(n).Item("obsDatetime"))
+
+                'obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
+
+                ' Code improved to include minutes and seconds in the datetime string
+                obsDate = yyyy & "-" & mm & "-" & dd & " " & hh & ":" & mnt & ":" & ss
+
                 stnId = ds.Tables("obsInitial").Rows(n).Item("recordedFrom")
                 elemCode = ds.Tables("obsInitial").Rows(n).Item("describedBy")
 

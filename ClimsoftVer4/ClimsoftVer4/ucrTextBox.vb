@@ -1,8 +1,5 @@
 ﻿
 Public Class ucrTextBox
-
-    Private bToUpper As Boolean = False
-    Private bToLower As Boolean = False
     Private bFirstLoad As Boolean = True
     Protected bIsReadOnly As Boolean = False
 
@@ -33,7 +30,7 @@ Public Class ucrTextBox
     End Sub
 
     Private Sub ucrTextBox_ValueChanged(sender As Object, e As EventArgs) Handles Me.evtValueChanged
-        ChangeCase()
+
     End Sub
 
     Public Overrides Sub PopulateControl()
@@ -85,19 +82,26 @@ Public Class ucrTextBox
     End Property
 
     Public Sub SetTextToUpper()
-        bToUpper = True
-        bToLower = False
+        txtBox.CharacterCasing = CharacterCasing.Upper
     End Sub
 
     Public Sub SetTextToLower()
-        bToLower = True
-        bToUpper = False
+        txtBox.CharacterCasing = CharacterCasing.Lower
     End Sub
+
+    Public Sub SetTextToNormal()
+        txtBox.CharacterCasing = CharacterCasing.Normal
+    End Sub
+
     ''' <summary>
     ''' Sets validation of the textbox to none
     ''' </summary>
     Public Sub SetValidationTypeAsNone()
         strValidationType = "none"
+    End Sub
+
+    Public Sub SetValidationTypeAsFlag()
+        strValidationType = "flag"
     End Sub
 
     ''' <summary>
@@ -146,6 +150,8 @@ Public Class ucrTextBox
             End If
 
             iType = GetValidationCode(txtBox.Text)
+
+            'TODO. CHANGE THIS IMPLEMENTATION. THE VALIDATION TYPE SHOULD DICTATE THE VALIDATION CODE. WE NEED TO CHECK ON THE VALIDATION TYPE BEFORE VALIDATION CODE
             If iType = 0 Then
                 SetBackColor(clValidColor)
             ElseIf iType = 1 Then
@@ -165,6 +171,11 @@ Public Class ucrTextBox
                     If Not bValidateSilently Then
                         MessageBox.Show("Value higher than upperlimit of: " & GetDcmMaximum(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     End If
+                End If
+            ElseIf iType = 3 Then
+                SetBackColor(Color.Red)
+                If Not bValidateSilently Then
+                    MessageBox.Show("Correct Flag expected! Flags allowed are: M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
             End If
             Return (iType = 0)
@@ -195,16 +206,23 @@ Public Class ucrTextBox
                 'this is for none. No validation
                 Case 1
                     Select Case strValidationType
-                        Case "Numeric"
+                        Case "numeric"
                             If Not bValidateSilently Then
                                 MessageBox.Show("Entry must be numeric.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             End If
                     End Select
                 Case 2
                     Select Case strValidationType
-                        Case "Numeric"
+                        Case "numeric"
                             If Not bValidateSilently Then
                                 MessageBox.Show("This number must be: " & GetNumericRange(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                            End If
+                    End Select
+                Case 3
+                    Select Case strValidationType
+                        Case "flag"
+                            If Not bValidateSilently Then
+                                MessageBox.Show("Correct Flag expected! Flags allowed are: M (Missing), T (Trace), E (Estimated), G (Generated), D (Dubious)", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             End If
                     End Select
             End Select
@@ -222,6 +240,8 @@ Public Class ucrTextBox
                 iType = 0
             Case "numeric"
                 iType = ValidateNumeric(strText)
+            Case "flag"
+                iType = ValidateFlag(strText)
         End Select
         Return iType
     End Function
@@ -245,6 +265,17 @@ Public Class ucrTextBox
             End If
         Else
             iType = 1
+        End If
+        Return iType
+    End Function
+
+    Private Function ValidateFlag(strText As String) As Integer
+        Dim iType As Integer
+        Dim strNewText As String = strText.ToUpper
+        If strNewText = "M" OrElse strNewText = "T" OrElse strNewText = "E" OrElse strNewText = "G" OrElse strNewText = "D" Then
+            iType = 0
+        Else
+            iType = 3
         End If
         Return iType
     End Function
@@ -276,6 +307,7 @@ Public Class ucrTextBox
         End If
         Return strRange
     End Function
+
     ''' <summary>
     ''' Returns the minimum decimal number for the control
     ''' </summary>
@@ -327,18 +359,6 @@ Public Class ucrTextBox
     End Sub
 
     ''' <summary>
-    ''' Returns converted text either to lower or upper case
-    ''' </summary>
-    Public Sub ChangeCase()
-        If bToLower Then
-            txtBox.Text = txtBox.Text.ToLower()
-        ElseIf bToUpper Then
-            txtBox.Text = txtBox.Text.ToUpper()
-        End If
-    End Sub
-
-
-    ''' <summary>
     '''Sets the textbox as a read only 
     ''' </summary>
     Public Sub SetAsReadOnly()
@@ -353,7 +373,7 @@ Public Class ucrTextBox
         Me.Size = New Size(Size)
     End Sub
 
-    Public Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
+    Public Overrides Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
         txtBox.ContextMenuStrip = contextMenuStrip
     End Sub
 
