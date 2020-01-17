@@ -757,10 +757,10 @@
     <Compile Include="ucrSynopticRA1.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucrForm.Designer.vb">
-      <DependentUpon>ucrForm.vb</DependentUpon>
+    <Compile Include="ucrPage.Designer.vb">
+      <DependentUpon>ucrPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="ucrForm.vb">
+    <Compile Include="ucrPage.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrTableEntry.Designer.vb">
@@ -1173,6 +1173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNavigator.resx">
       <DependentUpon>ucrNavigator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrPage.resx">
+      <DependentUpon>ucrPage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSynopticRA1.resx">
       <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
