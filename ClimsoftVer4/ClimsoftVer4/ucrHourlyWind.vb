@@ -449,7 +449,7 @@ Public Class ucrHourlyWind
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    'set the record
+                    'set the record. Includes even the flag
                     If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
 
                         strStationId = row.Item("stationId")
