@@ -35,7 +35,7 @@ Public Class ucrHourlyWind
             AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
 
-            'set up the navigation control
+            'set up the navigation control of the hourly wind
             ucrNavigation.SetTableEntryAndKeyControls(Me)
 
             bFirstLoad = False
