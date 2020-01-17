@@ -84,7 +84,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="clsAPI.vb" />
     <Compile Include="ClsCloneFunctions.vb" />
     <Compile Include="clsDataCall.vb" />
     <Compile Include="clsDataConnection.vb" />
@@ -93,7 +92,6 @@
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsTableFilter.vb" />
-    <Compile Include="clsDataDefination.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formAgro1.Designer.vb">
       <DependentUpon>formAgro1.vb</DependentUpon>

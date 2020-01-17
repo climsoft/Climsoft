@@ -8,7 +8,7 @@
     Public iCurrRow As Integer
     'Stores the sort by querry
     Public strSortCol As String = ""
-    Public clsapi As New clsAPI
+
 
 
     Private Sub ucrNavigator_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -26,7 +26,7 @@
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
 
-        iMaxRows = clsapi.GetDataStructureRecordsCount()
+        iMaxRows = 0 ' clsapi.GetDataStructureRecordsCount()
         iCurrRow = 0
         'currentRowDataPos = -1
         'currentRowData = New Dictionary(Of String, String)
