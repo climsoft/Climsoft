@@ -64,7 +64,7 @@
         Next
     End Sub
 
-    Public Sub SetDataIdentifier(strDataIdentifier As Object)
+    Public Sub SetDataIdentifier(objDataIdentifier As Object)
         'specifies the identifier that would be usd by the datastructure to get the data 
     End Sub
 
