@@ -106,6 +106,10 @@
         Return True
     End Function
 
+    Public Overridable Function IsValid() As Boolean
+        Return True
+    End Function
+
     Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
         Return Nothing
     End Function
