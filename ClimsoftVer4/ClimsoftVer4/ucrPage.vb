@@ -3,13 +3,13 @@
     Protected lstUcrValues As New List(Of ucrValue)
     Protected ucrNavigator As ucrNavigator
     Protected WithEvents btnAddNew As Button
-    Protected btnSave As Button
-    Protected btnUpdate As Button
-    Protected btnDelete As Button
-    Protected btnClear As Button
-    Protected btnCancel As Button
-    Protected btnView As Button
-    Protected btnUpload As Button
+    Protected WithEvents btnSave As Button
+    Protected WithEvents btnUpdate As Button
+    Protected WithEvents btnDelete As Button
+    Protected WithEvents btnClear As Button
+    Protected WithEvents btnCancel As Button
+    Protected WithEvents btnView As Button
+    Protected WithEvents btnUpload As Button
 
     Private Sub ucrPage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -64,7 +64,7 @@
         Next
     End Sub
 
-    Public Sub SetDataIdentifier(strDataIdentifier As String)
+    Public Sub SetDataIdentifier(strDataIdentifier As Object)
         'specifies the identifier that would be usd by the datastructure to get the data 
     End Sub
 
@@ -122,6 +122,10 @@
         'todo. call the datastructure method
     End Sub
 
+    Public Overridable Sub View()
+        'todo. call the datastructure method
+    End Sub
+
     Private Sub GoToNextChildControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrValue Then
@@ -140,5 +144,31 @@
         AddNewRecord()
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        SaveRecord()
+    End Sub
 
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        UpdateRecord()
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        DeleteRecord()
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        Clear()
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Cancel()
+    End Sub
+
+    Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
+        View()
+    End Sub
+
+    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        Upload()
+    End Sub
 End Class
