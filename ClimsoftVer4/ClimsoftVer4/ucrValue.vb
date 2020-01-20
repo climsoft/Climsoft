@@ -23,9 +23,6 @@
         'the identifier will have a field name
     End Sub
 
-    Public Overridable Sub SetValueFromDataStructure()
-        'todo. reads value from the datastructure
-    End Sub
 
     Public Overridable Sub GetValidationParametersFromDataStructure()
         'todo. gets the validation parameters from the datastructure
@@ -36,11 +33,16 @@
         SetValueFromDataStructure()
     End Sub
 
+    Public Overridable Sub SetValueFromDataStructure()
+        'todo. reads value from the datastructure
+    End Sub
+
     Public Overridable Sub SetValueToDataStructure()
         'todo. writes value to the datastructure
     End Sub
 
     Public Overridable Sub SetValue(objNewValue As Object)
+        'todo. Set the value top the control then write it to the datasctrure
     End Sub
 
     Public Overridable Function GetValue(Optional objSpecification As Object = Nothing) As Object
@@ -91,6 +93,14 @@
     Public Overridable Function IsValid() As Boolean
         Return True
     End Function
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True 'to be overidden by the child controls
+    End Function
+
+    Public Overridable Sub SetAsReadOnly()
+        'set th control to read only
+    End Sub
 
     Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
         RaiseEvent evtKeyDown(sender, e)

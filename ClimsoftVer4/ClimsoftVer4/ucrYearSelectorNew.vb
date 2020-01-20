@@ -57,8 +57,8 @@
     Protected Overrides Sub ucrCombobox_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             cboValues.ContextMenuStrip = cmsYear
-            bValidateEmpty = True
-            strValidationType = "numeric"
+            'bValidateEmpty = True
+            'strValidationType = "numeric"
             PopulateControl()
             bFirstLoad = False
         End If
