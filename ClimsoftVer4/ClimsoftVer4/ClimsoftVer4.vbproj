@@ -619,10 +619,22 @@
     <Compile Include="ucrCheck.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrComboboxNew.Designer.vb">
+      <DependentUpon>ucrComboboxNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrComboboxNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrDatePicker.Designer.vb">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDatePicker.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDaySelectorNew.Designer.vb">
+      <DependentUpon>ucrDaySelectorNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDaySelectorNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrHourlyWind.Designer.vb">
@@ -697,6 +709,12 @@
     <Compile Include="ucrMonthlyData.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMonthSelectorNew.Designer.vb">
+      <DependentUpon>ucrMonthSelectorNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMonthSelectorNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrNavigation.Designer.vb">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
     </Compile>
@@ -733,10 +751,22 @@
     <Compile Include="ucrMetadataStationQualifier.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrNavigator.Designer.vb">
+      <DependentUpon>ucrNavigator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrNavigator.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrSynopticRA1.Designer.vb">
       <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSynopticRA1.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrPage.Designer.vb">
+      <DependentUpon>ucrPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrPage.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrTableEntry.Designer.vb">
@@ -755,6 +785,18 @@
       <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrDirectionSpeedFlag.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrTextBoxNew.Designer.vb">
+      <DependentUpon>ucrTextBoxNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrTextBoxNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrValue.Designer.vb">
+      <DependentUpon>ucrValue.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrValue.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrValueFlagPeriod.Designer.vb">
@@ -791,6 +833,12 @@
       <DependentUpon>ucrYearSelector.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrYearSelector.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrYearSelectorNew.Designer.vb">
+      <DependentUpon>ucrYearSelectorNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrYearSelectorNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -1063,8 +1111,14 @@
     <EmbeddedResource Include="ucrCheck.resx">
       <DependentUpon>ucrCheck.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrComboboxNew.resx">
+      <DependentUpon>ucrComboboxNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDatePicker.resx">
       <DependentUpon>ucrDatePicker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDaySelectorNew.resx">
+      <DependentUpon>ucrDaySelectorNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrHourlyWind.resx">
       <DependentUpon>ucrHourlyWind.vb</DependentUpon>
@@ -1105,6 +1159,9 @@
     <EmbeddedResource Include="ucrMonthlyData.resx">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMonthSelectorNew.resx">
+      <DependentUpon>ucrMonthSelectorNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrNavigation.resx">
       <DependentUpon>ucrNavigation.vb</DependentUpon>
     </EmbeddedResource>
@@ -1120,6 +1177,12 @@
     <EmbeddedResource Include="ucrMonth.resx">
       <DependentUpon>ucrMonth.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrNavigator.resx">
+      <DependentUpon>ucrNavigator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrPage.resx">
+      <DependentUpon>ucrPage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrSynopticRA1.resx">
       <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1129,6 +1192,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDirectionSpeedFlag.resx">
       <DependentUpon>ucrDirectionSpeedFlag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrTextBoxNew.resx">
+      <DependentUpon>ucrTextBoxNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrValue.resx">
+      <DependentUpon>ucrValue.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrValueFlagPeriod.resx">
       <DependentUpon>ucrValueFlagPeriod.vb</DependentUpon>
@@ -1144,6 +1213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrYearSelector.resx">
       <DependentUpon>ucrYearSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrYearSelectorNew.resx">
+      <DependentUpon>ucrYearSelectorNew.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
