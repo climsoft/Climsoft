@@ -34,6 +34,8 @@ Partial Class ucrMetadataElementNew
         Me.lblDescription = New System.Windows.Forms.Label()
         Me.ucrTextBoxScale = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblScale = New System.Windows.Forms.Label()
+        Me.ucrTextBoxUpperLimit = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblUpperlimit = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -148,10 +150,31 @@ Partial Class ucrMetadataElementNew
         Me.lblScale.TabIndex = 35
         Me.lblScale.Text = "Scale"
         '
+        'ucrTextBoxUpperLimit
+        '
+        Me.ucrTextBoxUpperLimit.Location = New System.Drawing.Point(397, 288)
+        Me.ucrTextBoxUpperLimit.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxUpperLimit.Name = "ucrTextBoxUpperLimit"
+        Me.ucrTextBoxUpperLimit.Size = New System.Drawing.Size(237, 25)
+        Me.ucrTextBoxUpperLimit.TabIndex = 36
+        Me.ucrTextBoxUpperLimit.TextboxValue = ""
+        '
+        'lblUpperlimit
+        '
+        Me.lblUpperlimit.AutoSize = True
+        Me.lblUpperlimit.Location = New System.Drawing.Point(268, 294)
+        Me.lblUpperlimit.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblUpperlimit.Name = "lblUpperlimit"
+        Me.lblUpperlimit.Size = New System.Drawing.Size(80, 17)
+        Me.lblUpperlimit.TabIndex = 37
+        Me.lblUpperlimit.Text = "Upper Limit"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblUpperlimit)
+        Me.Controls.Add(Me.ucrTextBoxUpperLimit)
         Me.Controls.Add(Me.lblScale)
         Me.Controls.Add(Me.ucrTextBoxScale)
         Me.Controls.Add(Me.lblDescription)
@@ -184,4 +207,6 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents lblDescription As Label
     Friend WithEvents ucrTextBoxScale As ucrTextBoxNew
     Friend WithEvents lblScale As Label
+    Friend WithEvents ucrTextBoxUpperLimit As ucrTextBoxNew
+    Friend WithEvents lblUpperlimit As Label
 End Class
