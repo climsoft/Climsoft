@@ -3,7 +3,11 @@
         If bFirstLoad Then
 
             SetUpButtonAddNew(btnAddNew)
-            SetUpButtonCancel(btnCancel)
+            SetUpButtonSave(btnSave)
+            SetUpButtonUpdate(btnUpdate)
+            SetUpButtonDelete(btnDelete)
+            SetUpButtonClear(btnClear)
+
         End If
     End Sub
 End Class
