@@ -46,6 +46,15 @@ Partial Class ucrMetadataElementNew
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.ucrCheckBoxTotalRequired = New ClimsoftVer4.ucrCheckboxNew()
         Me.lblTotalRequired = New System.Windows.Forms.Label()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.ucrNavigatorElement = New ClimsoftVer4.ucrNavigator()
+        Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -273,10 +282,96 @@ Partial Class ucrMetadataElementNew
         Me.lblTotalRequired.TabIndex = 47
         Me.lblTotalRequired.Text = "Total Required"
         '
+        'GroupBox13
+        '
+        Me.GroupBox13.Controls.Add(Me.btnClear)
+        Me.GroupBox13.Controls.Add(Me.btnView)
+        Me.GroupBox13.Controls.Add(Me.btnDelete)
+        Me.GroupBox13.Controls.Add(Me.btnUpdate)
+        Me.GroupBox13.Controls.Add(Me.btnSave)
+        Me.GroupBox13.Controls.Add(Me.btnAddNew)
+        Me.GroupBox13.Location = New System.Drawing.Point(23, 482)
+        Me.GroupBox13.Margin = New System.Windows.Forms.Padding(4)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox13.Size = New System.Drawing.Size(775, 42)
+        Me.GroupBox13.TabIndex = 48
+        Me.GroupBox13.TabStop = False
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(523, 6)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(100, 28)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(647, 6)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(100, 28)
+        Me.btnView.TabIndex = 5
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(398, 6)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(100, 28)
+        Me.btnDelete.TabIndex = 3
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(275, 6)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(100, 28)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(151, 6)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(100, 28)
+        Me.btnSave.TabIndex = 1
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(27, 6)
+        Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(100, 28)
+        Me.btnAddNew.TabIndex = 0
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'ucrNavigatorElement
+        '
+        Me.ucrNavigatorElement.Location = New System.Drawing.Point(227, 538)
+        Me.ucrNavigatorElement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrNavigatorElement.Name = "ucrNavigatorElement"
+        Me.ucrNavigatorElement.Size = New System.Drawing.Size(488, 30)
+        Me.ucrNavigatorElement.TabIndex = 49
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNavigatorElement)
+        Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.lblTotalRequired)
         Me.Controls.Add(Me.ucrCheckBoxTotalRequired)
         Me.Controls.Add(Me.lblSelected)
@@ -304,6 +399,7 @@ Partial Class ucrMetadataElementNew
         Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "ucrMetadataElementNew"
         Me.Size = New System.Drawing.Size(901, 592)
+        Me.GroupBox13.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -333,4 +429,12 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents lblSelected As Label
     Friend WithEvents ucrCheckBoxTotalRequired As ucrCheckboxNew
     Friend WithEvents lblTotalRequired As Label
+    Friend WithEvents GroupBox13 As GroupBox
+    Friend WithEvents btnClear As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents ucrNavigatorElement As ucrNavigator
 End Class
