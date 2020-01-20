@@ -35,7 +35,7 @@ Public Class ucrHourlyWind
             AddLinkedControlFilters(ucrDay, ucrDay.FieldName, "=", strLinkedFieldName:="Day", bForceValuesAsString:=False)
 
 
-            'set up the navigation control
+            'set up the navigation control of the hourly wind
             ucrNavigation.SetTableEntryAndKeyControls(Me)
 
             bFirstLoad = False
@@ -449,8 +449,8 @@ Public Class ucrHourlyWind
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    'set the record
-                    If (Not IsDBNull(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item("flag" & strCurrTag))))) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
+                    'set the record. Includes even the flag
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
 
                         strStationId = row.Item("stationId")
                         hh = Integer.Parse(strTag)
