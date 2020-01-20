@@ -7,6 +7,7 @@
             SetUpButtonUpdate(btnUpdate)
             SetUpButtonDelete(btnDelete)
             SetUpButtonClear(btnClear)
+            SetUpButtonView(btnView)
 
         End If
     End Sub
