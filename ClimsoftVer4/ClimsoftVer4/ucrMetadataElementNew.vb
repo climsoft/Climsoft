@@ -12,8 +12,11 @@
             'todo pass in the data identifier here in place of nothing.
             'This will be used by the data definition
             SetDataIdentifier(Nothing)
+            SetValueControlProperties()
+            SetUpValueControls()
+            InitialiseDatastructure()
 
-
+            bFirstLoad = False
         End If
     End Sub
 
