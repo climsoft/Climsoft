@@ -305,7 +305,7 @@ Partial Class form_agro1
         '
         'txtVal_Elem101Field004
         '
-        Me.txtVal_Elem101Field004.Location = New System.Drawing.Point(161, 164)
+        Me.txtVal_Elem101Field004.Location = New System.Drawing.Point(161, 163)
         Me.txtVal_Elem101Field004.Name = "txtVal_Elem101Field004"
         Me.txtVal_Elem101Field004.Size = New System.Drawing.Size(40, 20)
         Me.txtVal_Elem101Field004.TabIndex = 4

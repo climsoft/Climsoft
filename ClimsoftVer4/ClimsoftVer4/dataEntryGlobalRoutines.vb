@@ -433,7 +433,7 @@ Public Class dataEntryGlobalRoutines
 
         Entered_Value = True
         dttime = yy & "-" & mm & "-" & dd & " " & hh & ":00:00"
-
+        'MsgBox(stn & " " & cod & " " & dttime)
         sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
 
         Try
@@ -441,7 +441,7 @@ Public Class dataEntryGlobalRoutines
             ' Set to unlimited timeout period
             d.SelectCommand.CommandTimeout = 0
             d.Fill(s, "obsv_rec")
-            con.Close()
+
             If s.Tables("obsv_rec").Rows.Count = 0 Then
                 Entered_Value = False
             Else
@@ -457,11 +457,10 @@ Public Class dataEntryGlobalRoutines
                 '    obs = obs & s.Tables("obsv_rec").Rows(0).Item("obsValue")
                 'End If
             End If
-            con.Close()
+
         Catch ex As Exception
             MsgBox(ex.Message)
             Entered_Value = False
-            con.Close()
         End Try
     End Function
 
@@ -487,7 +486,7 @@ Public Class dataEntryGlobalRoutines
 
         qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
         qry.CommandTimeout = 0
-        con.Close()
+
         Try
             'Execute query
             qry.ExecuteNonQuery()
@@ -497,7 +496,7 @@ Public Class dataEntryGlobalRoutines
             Db_Update_Conflicts = False
             con.Close()
         End Try
-
+        con.Close()
     End Function
 
     Function Entry_Verification(con As MySql.Data.MySqlClient.MySqlConnection, frm As Object, stnid As String, elmcode As String, yy As String, mm As String, dd As String, hh As String) As Boolean
@@ -509,13 +508,12 @@ Public Class dataEntryGlobalRoutines
         Try
             With frm
                 If Not Entered_Value(con, stnid, elmcode, yy, mm, dd, hh, obsv1) Then
-                    con.Close()
                     MsgBox("Can't Compare. Data not previously uploaded")
                     Exit Function
                 Else
                     'MsgBox(obsv1)
-
-                    If .ActiveControl.Text <> obsv1 Then ' Conflicting values encountered
+                    'MsgBox(Val(.ActiveControl.Text) <> Val(obsv1))
+                    If Val(.ActiveControl.Text) <> Val(obsv1) Then ' Conflicting values encountered
                         MsgBox("Conflicting Values")
                         .ActiveControl.BackColor = Color.Yellow
                         cpVal = .ActiveControl.Text
@@ -548,12 +546,10 @@ Public Class dataEntryGlobalRoutines
                 End If
 
             End With
-            con.Close()
             Entry_Verification = True
         Catch ex As Exception
             MsgBox(ex.Message)
             Entry_Verification = False
-            con.Close()
         End Try
     End Function
 
@@ -619,7 +615,6 @@ Public Class dataEntryGlobalRoutines
         Catch ex As Exception
             Return False
             MsgBox(ex.Message)
-            conn.Close()
         End Try
 
     End Function
@@ -663,7 +658,6 @@ Public Class dataEntryGlobalRoutines
         Catch ex As Exception
             Return True
             MsgBox(ex.Message)
-            conn.Close()
         End Try
 
     End Function
@@ -717,7 +711,6 @@ Public Class dataEntryGlobalRoutines
         Catch ex As Exception
             MsgBox(ex.Message)
             'Return False
-            conn.Close()
         End Try
 
         'MsgBox(sts_seq)
@@ -743,8 +736,41 @@ Public Class dataEntryGlobalRoutines
                 MsgBox(ex.HResult & ": " & ex.Message)
             End If
             'Return False
-            conn.Close()
         End Try
 
     End Sub
+    Function RegkeyValue(keynm As String) As String
+        ' Get the image archiving folder
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsr As New DataSet
+        Dim regmax As Integer
+        Dim sql, dbConnectionString As String
+
+        Try
+            'Dim tblName As String
+            'Dim sql As String
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = dbConnectionString
+            conn.Open()
+            sql = "SELECT * FROM regkeys"
+            dar = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            dar.Fill(dsr, "regkeys")
+
+            regmax = dsr.Tables("regkeys").Rows.Count
+            RegkeyValue = vbNull
+            ' Check for the value for the selected key
+            For i = 0 To regmax - 1
+                If dsr.Tables("regkeys").Rows(i).Item("keyName") = keynm Then
+                    RegkeyValue = dsr.Tables("regkeys").Rows(i).Item("keyValue")
+                    Exit For
+                End If
+            Next
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            RegkeyValue = vbNull
+            conn.Close()
+        End Try
+    End Function
 End Class
