@@ -343,15 +343,14 @@
                     End If
 
                     strValueColumn = strFieldName
+                    strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                    strFlagColumn = lstFields.Find(Function(x As String)
+                                                       Return x.Equals(Me.strFlagFieldName & strTag)
+                                                   End Function)
                     'set the record
-                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
+                    If ((Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strFlagColumn)))) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
                         strStationId = row.Item("stationId")
-                        strTag = strFieldName.Substring(Me.strValueFieldName.Length)
-                        strFlagColumn = lstFields.Find(Function(x As String)
-                                                           Return x.Equals(Me.strFlagFieldName & strTag)
-                                                       End Function)
-
                         hh = Integer.Parse(strTag)
 
                         Try

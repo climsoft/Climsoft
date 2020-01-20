@@ -261,6 +261,9 @@ Public Class frmDBUtilities
             .txtObsHour.Visible = False
             .txtStn.Visible = True
             .lblStn.Visible = True
+            .lblElmCode.Visible = False
+            .txtElmCode.Visible = False
+            .grpSummary.Visible = False
             .Show()
         End With
 
@@ -321,6 +324,9 @@ Public Class frmDBUtilities
             .Text = "Multiple Columns Data Import"
             '.lblType.Visible = False
             .lblType.Text = "Multiple Elements"
+            .optMonthly.Enabled = True
+            .lblElmCode.Visible = False
+            .txtElmCode.Visible = False
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
@@ -346,6 +352,9 @@ Public Class frmDBUtilities
             '.txtObsHour.Visible = False
             '.txtStn.Visible = True
             '.lblStn.Visible = True
+            .lblDefaultObsHour.Visible = False
+            .txtObsHour.Visible = False
+            .grpSummary.Visible = False
             .Show()
         End With
     End Sub
@@ -374,6 +383,9 @@ Public Class frmDBUtilities
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .txtStn.Enabled = False
+            .grpSummary.Visible = False
+            .lblElmCode.Visible = False
+            .txtElmCode.Visible = False
             .Show()
         End With
     End Sub
@@ -385,6 +397,9 @@ Public Class frmDBUtilities
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .txtStn.Enabled = False
+            .grpSummary.Visible = False
+            .lblElmCode.Visible = False
+            .txtElmCode.Visible = False
             .Show()
         End With
     End Sub
@@ -396,6 +411,21 @@ Public Class frmDBUtilities
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .txtStn.Enabled = False
+            .grpSummary.Visible = False
+            .lblElmCode.Visible = False
+            .txtElmCode.Visible = False
+            .Show()
+        End With
+    End Sub
+
+    Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
+        With frmImportDaily
+            .Text = "Monthly"
+            .lblType.Text = "Monthly"
+            .txtStartRow.Text = 1
+            .chkScale.Checked = True
+            .txtStn.Enabled = True
+            .grpSummary.Visible = False
             .Show()
         End With
     End Sub
