@@ -38,6 +38,8 @@ Partial Class ucrMetadataElementNew
         Me.lblUpperlimit = New System.Windows.Forms.Label()
         Me.ucrTextBoxLowerLimit = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblLowerLimit = New System.Windows.Forms.Label()
+        Me.ucrTextBoxUnit = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblUnit = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -190,10 +192,31 @@ Partial Class ucrMetadataElementNew
         Me.lblLowerLimit.TabIndex = 39
         Me.lblLowerLimit.Text = "Lower Limit"
         '
+        'ucrTextBoxUnit
+        '
+        Me.ucrTextBoxUnit.Location = New System.Drawing.Point(397, 352)
+        Me.ucrTextBoxUnit.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxUnit.Name = "ucrTextBoxUnit"
+        Me.ucrTextBoxUnit.Size = New System.Drawing.Size(237, 25)
+        Me.ucrTextBoxUnit.TabIndex = 40
+        Me.ucrTextBoxUnit.TextboxValue = ""
+        '
+        'lblUnit
+        '
+        Me.lblUnit.AutoSize = True
+        Me.lblUnit.Location = New System.Drawing.Point(268, 361)
+        Me.lblUnit.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblUnit.Name = "lblUnit"
+        Me.lblUnit.Size = New System.Drawing.Size(33, 17)
+        Me.lblUnit.TabIndex = 41
+        Me.lblUnit.Text = "Unit"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblUnit)
+        Me.Controls.Add(Me.ucrTextBoxUnit)
         Me.Controls.Add(Me.lblLowerLimit)
         Me.Controls.Add(Me.ucrTextBoxLowerLimit)
         Me.Controls.Add(Me.lblUpperlimit)
@@ -234,4 +257,6 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents lblUpperlimit As Label
     Friend WithEvents ucrTextBoxLowerLimit As ucrTextBoxNew
     Friend WithEvents lblLowerLimit As Label
+    Friend WithEvents ucrTextBoxUnit As ucrTextBoxNew
+    Friend WithEvents lblUnit As Label
 End Class
