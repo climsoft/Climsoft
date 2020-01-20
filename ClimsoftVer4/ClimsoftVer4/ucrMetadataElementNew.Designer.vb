@@ -40,6 +40,10 @@ Partial Class ucrMetadataElementNew
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.ucrTextBoxUnit = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblUnit = New System.Windows.Forms.Label()
+        Me.ucrDataLinkType = New ClimsoftVer4.ucrComboboxNew()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.UcrCheckboxNew1 = New ClimsoftVer4.ucrCheckboxNew()
+        Me.lblSelected = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -211,10 +215,51 @@ Partial Class ucrMetadataElementNew
         Me.lblUnit.TabIndex = 41
         Me.lblUnit.Text = "Unit"
         '
+        'ucrDataLinkType
+        '
+        Me.ucrDataLinkType.Location = New System.Drawing.Point(397, 387)
+        Me.ucrDataLinkType.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrDataLinkType.Name = "ucrDataLinkType"
+        Me.ucrDataLinkType.Size = New System.Drawing.Size(237, 26)
+        Me.ucrDataLinkType.TabIndex = 42
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.Location = New System.Drawing.Point(268, 394)
+        Me.lblType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(40, 17)
+        Me.lblType.TabIndex = 43
+        Me.lblType.Text = "Type"
+        '
+        'UcrCheckboxNew1
+        '
+        Me.UcrCheckboxNew1.CheckBoxText = "CheckBox1"
+        Me.UcrCheckboxNew1.Location = New System.Drawing.Point(396, 417)
+        Me.UcrCheckboxNew1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.UcrCheckboxNew1.Name = "UcrCheckboxNew1"
+        Me.UcrCheckboxNew1.Size = New System.Drawing.Size(238, 30)
+        Me.UcrCheckboxNew1.TabIndex = 44
+        '
+        'lblSelected
+        '
+        Me.lblSelected.AutoSize = True
+        Me.lblSelected.Location = New System.Drawing.Point(268, 425)
+        Me.lblSelected.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSelected.Name = "lblSelected"
+        Me.lblSelected.Size = New System.Drawing.Size(63, 17)
+        Me.lblSelected.TabIndex = 45
+        Me.lblSelected.Text = "Selected"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSelected)
+        Me.Controls.Add(Me.UcrCheckboxNew1)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrDataLinkType)
         Me.Controls.Add(Me.lblUnit)
         Me.Controls.Add(Me.ucrTextBoxUnit)
         Me.Controls.Add(Me.lblLowerLimit)
@@ -259,4 +304,8 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents lblLowerLimit As Label
     Friend WithEvents ucrTextBoxUnit As ucrTextBoxNew
     Friend WithEvents lblUnit As Label
+    Friend WithEvents ucrDataLinkType As ucrComboboxNew
+    Friend WithEvents lblType As Label
+    Friend WithEvents UcrCheckboxNew1 As ucrCheckboxNew
+    Friend WithEvents lblSelected As Label
 End Class
