@@ -101,8 +101,8 @@
 
     Protected Overrides Sub ucrCombobox_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            bValidateEmpty = True
-            strValidationType = "exists"
+            'bValidateEmpty = True
+            'strValidationType = "exists"
             PopulateControl()
             bFirstLoad = False
         End If
