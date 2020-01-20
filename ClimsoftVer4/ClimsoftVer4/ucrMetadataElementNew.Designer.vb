@@ -30,6 +30,8 @@ Partial Class ucrMetadataElementNew
         Me.ucrTextboxAbbreviation = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblName = New System.Windows.Forms.Label()
         Me.ucrTextboxName = New ClimsoftVer4.ucrTextBoxNew()
+        Me.ucrTextboxDescription = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblDescription = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -106,10 +108,31 @@ Partial Class ucrMetadataElementNew
         Me.ucrTextboxName.TabIndex = 31
         Me.ucrTextboxName.TextboxValue = ""
         '
+        'ucrTextboxDescription
+        '
+        Me.ucrTextboxDescription.Location = New System.Drawing.Point(397, 224)
+        Me.ucrTextboxDescription.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextboxDescription.Name = "ucrTextboxDescription"
+        Me.ucrTextboxDescription.Size = New System.Drawing.Size(237, 25)
+        Me.ucrTextboxDescription.TabIndex = 32
+        Me.ucrTextboxDescription.TextboxValue = ""
+        '
+        'lblDescription
+        '
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Location = New System.Drawing.Point(268, 228)
+        Me.lblDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(79, 17)
+        Me.lblDescription.TabIndex = 33
+        Me.lblDescription.Text = "Description"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblDescription)
+        Me.Controls.Add(Me.ucrTextboxDescription)
         Me.Controls.Add(Me.ucrTextboxName)
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.ucrTextboxAbbreviation)
@@ -134,4 +157,6 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents ucrTextboxAbbreviation As ucrTextBoxNew
     Friend WithEvents lblName As Label
     Friend WithEvents ucrTextboxName As ucrTextBoxNew
+    Friend WithEvents ucrTextboxDescription As ucrTextBoxNew
+    Friend WithEvents lblDescription As Label
 End Class
