@@ -32,6 +32,8 @@ Partial Class ucrMetadataElementNew
         Me.ucrTextboxName = New ClimsoftVer4.ucrTextBoxNew()
         Me.ucrTextboxDescription = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblDescription = New System.Windows.Forms.Label()
+        Me.ucrTextBoxScale = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblScale = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrElementSelectorSearch
@@ -127,10 +129,31 @@ Partial Class ucrMetadataElementNew
         Me.lblDescription.TabIndex = 33
         Me.lblDescription.Text = "Description"
         '
+        'ucrTextBoxScale
+        '
+        Me.ucrTextBoxScale.Location = New System.Drawing.Point(397, 256)
+        Me.ucrTextBoxScale.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxScale.Name = "ucrTextBoxScale"
+        Me.ucrTextBoxScale.Size = New System.Drawing.Size(237, 25)
+        Me.ucrTextBoxScale.TabIndex = 34
+        Me.ucrTextBoxScale.TextboxValue = ""
+        '
+        'lblScale
+        '
+        Me.lblScale.AutoSize = True
+        Me.lblScale.Location = New System.Drawing.Point(268, 261)
+        Me.lblScale.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblScale.Name = "lblScale"
+        Me.lblScale.Size = New System.Drawing.Size(43, 17)
+        Me.lblScale.TabIndex = 35
+        Me.lblScale.Text = "Scale"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblScale)
+        Me.Controls.Add(Me.ucrTextBoxScale)
         Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.ucrTextboxDescription)
         Me.Controls.Add(Me.ucrTextboxName)
@@ -159,4 +182,6 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents ucrTextboxName As ucrTextBoxNew
     Friend WithEvents ucrTextboxDescription As ucrTextBoxNew
     Friend WithEvents lblDescription As Label
+    Friend WithEvents ucrTextBoxScale As ucrTextBoxNew
+    Friend WithEvents lblScale As Label
 End Class
