@@ -449,8 +449,7 @@ Public Class ucrHourlyWind
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    'set the record
-                    If (Not IsDBNull(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item("flag" & strCurrTag))))) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
+                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
 
                         strStationId = row.Item("stationId")
                         hh = Integer.Parse(strTag)
