@@ -39,6 +39,11 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewManufacturer = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblUncertainity = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewUncertainity = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblIinstallationDate = New System.Windows.Forms.Label()
+        Me.ucrDatePickerNewInstallationDate = New ClimsoftVer4.ucrDatePickerNew()
+        Me.lblDeinstallationDate = New System.Windows.Forms.Label()
+        Me.ucrDatePickerNewDeinstallationDate = New ClimsoftVer4.ucrDatePickerNew()
+        Me.lblInstalledAt = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -191,10 +196,61 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewUncertainity.TabIndex = 17
         Me.ucrTextBoxNewUncertainity.TextboxValue = ""
         '
+        'lblIinstallationDate
+        '
+        Me.lblIinstallationDate.AutoSize = True
+        Me.lblIinstallationDate.Location = New System.Drawing.Point(39, 342)
+        Me.lblIinstallationDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblIinstallationDate.Name = "lblIinstallationDate"
+        Me.lblIinstallationDate.Size = New System.Drawing.Size(109, 17)
+        Me.lblIinstallationDate.TabIndex = 18
+        Me.lblIinstallationDate.Text = "Installation Date"
+        '
+        'ucrDatePickerNewInstallationDate
+        '
+        Me.ucrDatePickerNewInstallationDate.Location = New System.Drawing.Point(176, 342)
+        Me.ucrDatePickerNewInstallationDate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrDatePickerNewInstallationDate.Name = "ucrDatePickerNewInstallationDate"
+        Me.ucrDatePickerNewInstallationDate.Size = New System.Drawing.Size(185, 28)
+        Me.ucrDatePickerNewInstallationDate.TabIndex = 19
+        '
+        'lblDeinstallationDate
+        '
+        Me.lblDeinstallationDate.AutoSize = True
+        Me.lblDeinstallationDate.Location = New System.Drawing.Point(37, 377)
+        Me.lblDeinstallationDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDeinstallationDate.Name = "lblDeinstallationDate"
+        Me.lblDeinstallationDate.Size = New System.Drawing.Size(127, 17)
+        Me.lblDeinstallationDate.TabIndex = 20
+        Me.lblDeinstallationDate.Text = "Deinstallation Date"
+        '
+        'ucrDatePickerNewDeinstallationDate
+        '
+        Me.ucrDatePickerNewDeinstallationDate.Location = New System.Drawing.Point(173, 373)
+        Me.ucrDatePickerNewDeinstallationDate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrDatePickerNewDeinstallationDate.Name = "ucrDatePickerNewDeinstallationDate"
+        Me.ucrDatePickerNewDeinstallationDate.Size = New System.Drawing.Size(185, 28)
+        Me.ucrDatePickerNewDeinstallationDate.TabIndex = 21
+        '
+        'lblInstalledAt
+        '
+        Me.lblInstalledAt.AutoSize = True
+        Me.lblInstalledAt.Location = New System.Drawing.Point(37, 411)
+        Me.lblInstalledAt.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblInstalledAt.Name = "lblInstalledAt"
+        Me.lblInstalledAt.Size = New System.Drawing.Size(49, 17)
+        Me.lblInstalledAt.TabIndex = 22
+        Me.lblInstalledAt.Text = "Height"
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblInstalledAt)
+        Me.Controls.Add(Me.ucrDatePickerNewDeinstallationDate)
+        Me.Controls.Add(Me.lblDeinstallationDate)
+        Me.Controls.Add(Me.ucrDatePickerNewInstallationDate)
+        Me.Controls.Add(Me.lblIinstallationDate)
         Me.Controls.Add(Me.ucrTextBoxNewUncertainity)
         Me.Controls.Add(Me.lblUncertainity)
         Me.Controls.Add(Me.ucrTextBoxNewManufacturer)
@@ -235,4 +291,9 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrTextBoxNewManufacturer As ucrTextBoxNew
     Friend WithEvents lblUncertainity As Label
     Friend WithEvents ucrTextBoxNewUncertainity As ucrTextBoxNew
+    Friend WithEvents lblIinstallationDate As Label
+    Friend WithEvents ucrDatePickerNewInstallationDate As ucrDatePickerNew
+    Friend WithEvents lblDeinstallationDate As Label
+    Friend WithEvents ucrDatePickerNewDeinstallationDate As ucrDatePickerNew
+    Friend WithEvents lblInstalledAt As Label
 End Class
