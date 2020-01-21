@@ -32,6 +32,8 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrDatePickerNewBeginDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.ucrDatePickerNewEndDate = New ClimsoftVer4.ucrDatePickerNew()
+        Me.lblTimeZone = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewTimeZone = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblStationQualifier
@@ -118,10 +120,31 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrDatePickerNewEndDate.Size = New System.Drawing.Size(207, 26)
         Me.ucrDatePickerNewEndDate.TabIndex = 9
         '
+        'lblTimeZone
+        '
+        Me.lblTimeZone.AutoSize = True
+        Me.lblTimeZone.Location = New System.Drawing.Point(299, 293)
+        Me.lblTimeZone.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblTimeZone.Name = "lblTimeZone"
+        Me.lblTimeZone.Size = New System.Drawing.Size(76, 17)
+        Me.lblTimeZone.TabIndex = 10
+        Me.lblTimeZone.Text = "Time Zone"
+        '
+        'ucrTextBoxNewTimeZone
+        '
+        Me.ucrTextBoxNewTimeZone.Location = New System.Drawing.Point(401, 292)
+        Me.ucrTextBoxNewTimeZone.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewTimeZone.Name = "ucrTextBoxNewTimeZone"
+        Me.ucrTextBoxNewTimeZone.Size = New System.Drawing.Size(205, 25)
+        Me.ucrTextBoxNewTimeZone.TabIndex = 11
+        Me.ucrTextBoxNewTimeZone.TextboxValue = ""
+        '
         'ucrMetadataStationQualifierNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewTimeZone)
+        Me.Controls.Add(Me.lblTimeZone)
         Me.Controls.Add(Me.ucrDatePickerNewEndDate)
         Me.Controls.Add(Me.lblEndDate)
         Me.Controls.Add(Me.ucrDatePickerNewBeginDate)
@@ -148,4 +171,6 @@ Partial Class ucrMetadataStationQualifierNew
     Friend WithEvents ucrDatePickerNewBeginDate As ucrDatePickerNew
     Friend WithEvents lblEndDate As Label
     Friend WithEvents ucrDatePickerNewEndDate As ucrDatePickerNew
+    Friend WithEvents lblTimeZone As Label
+    Friend WithEvents ucrTextBoxNewTimeZone As ucrTextBoxNew
 End Class
