@@ -44,6 +44,7 @@ Partial Class ucrMetadataInstrumentNew
         Me.lblDeinstallationDate = New System.Windows.Forms.Label()
         Me.ucrDatePickerNewDeinstallationDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.lblInstalledAt = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewHeight = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -242,10 +243,20 @@ Partial Class ucrMetadataInstrumentNew
         Me.lblInstalledAt.TabIndex = 22
         Me.lblInstalledAt.Text = "Height"
         '
+        'ucrTextBoxNewHeight
+        '
+        Me.ucrTextBoxNewHeight.Location = New System.Drawing.Point(176, 411)
+        Me.ucrTextBoxNewHeight.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewHeight.Name = "ucrTextBoxNewHeight"
+        Me.ucrTextBoxNewHeight.Size = New System.Drawing.Size(68, 25)
+        Me.ucrTextBoxNewHeight.TabIndex = 23
+        Me.ucrTextBoxNewHeight.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewHeight)
         Me.Controls.Add(Me.lblInstalledAt)
         Me.Controls.Add(Me.ucrDatePickerNewDeinstallationDate)
         Me.Controls.Add(Me.lblDeinstallationDate)
@@ -296,4 +307,5 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents lblDeinstallationDate As Label
     Friend WithEvents ucrDatePickerNewDeinstallationDate As ucrDatePickerNew
     Friend WithEvents lblInstalledAt As Label
+    Friend WithEvents ucrTextBoxNewHeight As ucrTextBoxNew
 End Class
