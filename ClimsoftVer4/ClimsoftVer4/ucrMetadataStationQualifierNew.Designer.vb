@@ -23,16 +23,81 @@ Partial Class ucrMetadataStationQualifierNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.lblStationQualifier = New System.Windows.Forms.Label()
+        Me.lblQualifier = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewQualifier = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblStationID = New System.Windows.Forms.Label()
+        Me.UcrComboboxNew1 = New ClimsoftVer4.ucrComboboxNew()
         Me.SuspendLayout()
+        '
+        'lblStationQualifier
+        '
+        Me.lblStationQualifier.AutoSize = True
+        Me.lblStationQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStationQualifier.Location = New System.Drawing.Point(375, 37)
+        Me.lblStationQualifier.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblStationQualifier.Name = "lblStationQualifier"
+        Me.lblStationQualifier.Size = New System.Drawing.Size(146, 20)
+        Me.lblStationQualifier.TabIndex = 1
+        Me.lblStationQualifier.Text = "Station Qualifier"
+        '
+        'lblQualifier
+        '
+        Me.lblQualifier.AutoSize = True
+        Me.lblQualifier.Location = New System.Drawing.Point(299, 110)
+        Me.lblQualifier.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblQualifier.Name = "lblQualifier"
+        Me.lblQualifier.Size = New System.Drawing.Size(61, 17)
+        Me.lblQualifier.TabIndex = 2
+        Me.lblQualifier.Text = "Qualifier"
+        '
+        'ucrTextBoxNewQualifier
+        '
+        Me.ucrTextBoxNewQualifier.Location = New System.Drawing.Point(401, 110)
+        Me.ucrTextBoxNewQualifier.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewQualifier.Name = "ucrTextBoxNewQualifier"
+        Me.ucrTextBoxNewQualifier.Size = New System.Drawing.Size(205, 25)
+        Me.ucrTextBoxNewQualifier.TabIndex = 3
+        Me.ucrTextBoxNewQualifier.TextboxValue = ""
+        '
+        'lblStationID
+        '
+        Me.lblStationID.AutoSize = True
+        Me.lblStationID.Location = New System.Drawing.Point(299, 155)
+        Me.lblStationID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblStationID.Name = "lblStationID"
+        Me.lblStationID.Size = New System.Drawing.Size(69, 17)
+        Me.lblStationID.TabIndex = 4
+        Me.lblStationID.Text = "Station ID"
+        '
+        'UcrComboboxNew1
+        '
+        Me.UcrComboboxNew1.Location = New System.Drawing.Point(401, 155)
+        Me.UcrComboboxNew1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.UcrComboboxNew1.Name = "UcrComboboxNew1"
+        Me.UcrComboboxNew1.Size = New System.Drawing.Size(207, 30)
+        Me.UcrComboboxNew1.TabIndex = 5
         '
         'ucrMetadataStationQualifierNew
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrComboboxNew1)
+        Me.Controls.Add(Me.lblStationID)
+        Me.Controls.Add(Me.ucrTextBoxNewQualifier)
+        Me.Controls.Add(Me.lblQualifier)
+        Me.Controls.Add(Me.lblStationQualifier)
+        Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.Name = "ucrMetadataStationQualifierNew"
-        Me.Size = New System.Drawing.Size(805, 559)
+        Me.Size = New System.Drawing.Size(907, 495)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
+    Friend WithEvents lblStationQualifier As Label
+    Friend WithEvents lblQualifier As Label
+    Friend WithEvents ucrTextBoxNewQualifier As ucrTextBoxNew
+    Friend WithEvents lblStationID As Label
+    Friend WithEvents UcrComboboxNew1 As ucrComboboxNew
 End Class
