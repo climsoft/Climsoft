@@ -58,6 +58,7 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrNavigatorInstrument = New ClimsoftVer4.ucrNavigator()
         Me.pbInstrument = New System.Windows.Forms.PictureBox()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
+        Me.lblInstruments = New System.Windows.Forms.Label()
         Me.grpCommand2.SuspendLayout()
         CType(Me.pbInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -401,10 +402,22 @@ Partial Class ucrMetadataInstrumentNew
         Me.lblInstrumentPic.TabIndex = 92
         Me.lblInstrumentPic.Text = "Instrument Picture"
         '
+        'lblInstruments
+        '
+        Me.lblInstruments.AutoSize = True
+        Me.lblInstruments.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstruments.Location = New System.Drawing.Point(401, 14)
+        Me.lblInstruments.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblInstruments.Name = "lblInstruments"
+        Me.lblInstruments.Size = New System.Drawing.Size(87, 18)
+        Me.lblInstruments.TabIndex = 93
+        Me.lblInstruments.Text = "Instrument"
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblInstruments)
         Me.Controls.Add(Me.lblInstrumentPic)
         Me.Controls.Add(Me.pbInstrument)
         Me.Controls.Add(Me.ucrNavigatorInstrument)
@@ -479,4 +492,5 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrNavigatorInstrument As ucrNavigator
     Friend WithEvents pbInstrument As PictureBox
     Friend WithEvents lblInstrumentPic As Label
+    Friend WithEvents lblInstruments As Label
 End Class
