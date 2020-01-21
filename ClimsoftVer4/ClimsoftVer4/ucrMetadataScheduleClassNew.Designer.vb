@@ -22,16 +22,81 @@ Partial Class ucrMetadataScheduleClassNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.lblScheduleClass = New System.Windows.Forms.Label()
+        Me.lblClass = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewClass = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblStationID = New System.Windows.Forms.Label()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrComboboxNew()
         Me.SuspendLayout()
+        '
+        'lblScheduleClass
+        '
+        Me.lblScheduleClass.AutoSize = True
+        Me.lblScheduleClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScheduleClass.Location = New System.Drawing.Point(343, 25)
+        Me.lblScheduleClass.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblScheduleClass.Name = "lblScheduleClass"
+        Me.lblScheduleClass.Size = New System.Drawing.Size(140, 20)
+        Me.lblScheduleClass.TabIndex = 1
+        Me.lblScheduleClass.Text = "Schedule Class"
+        '
+        'lblClass
+        '
+        Me.lblClass.AutoSize = True
+        Me.lblClass.Location = New System.Drawing.Point(275, 118)
+        Me.lblClass.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblClass.Name = "lblClass"
+        Me.lblClass.Size = New System.Drawing.Size(42, 17)
+        Me.lblClass.TabIndex = 2
+        Me.lblClass.Text = "Class"
+        '
+        'ucrTextBoxNewClass
+        '
+        Me.ucrTextBoxNewClass.Location = New System.Drawing.Point(360, 118)
+        Me.ucrTextBoxNewClass.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewClass.Name = "ucrTextBoxNewClass"
+        Me.ucrTextBoxNewClass.Size = New System.Drawing.Size(205, 25)
+        Me.ucrTextBoxNewClass.TabIndex = 3
+        Me.ucrTextBoxNewClass.TextboxValue = ""
+        '
+        'lblStationID
+        '
+        Me.lblStationID.AutoSize = True
+        Me.lblStationID.Location = New System.Drawing.Point(275, 164)
+        Me.lblStationID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblStationID.Name = "lblStationID"
+        Me.lblStationID.Size = New System.Drawing.Size(69, 17)
+        Me.lblStationID.TabIndex = 4
+        Me.lblStationID.Text = "Station ID"
+        '
+        'ucrStationSelector
+        '
+        Me.ucrStationSelector.Location = New System.Drawing.Point(360, 164)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(205, 30)
+        Me.ucrStationSelector.TabIndex = 5
         '
         'ucrMetadataScheduleClassNew
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrStationSelector)
+        Me.Controls.Add(Me.lblStationID)
+        Me.Controls.Add(Me.ucrTextBoxNewClass)
+        Me.Controls.Add(Me.lblClass)
+        Me.Controls.Add(Me.lblScheduleClass)
+        Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.Name = "ucrMetadataScheduleClassNew"
-        Me.Size = New System.Drawing.Size(713, 548)
+        Me.Size = New System.Drawing.Size(840, 430)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
+    Friend WithEvents lblScheduleClass As Label
+    Friend WithEvents lblClass As Label
+    Friend WithEvents ucrTextBoxNewClass As ucrTextBoxNew
+    Friend WithEvents lblStationID As Label
+    Friend WithEvents ucrStationSelector As ucrComboboxNew
 End Class
