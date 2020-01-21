@@ -46,7 +46,17 @@ Partial Class ucrMetadataInstrumentNew
         Me.lblInstalledAt = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewHeight = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblImageFile = New System.Windows.Forms.Label()
-        Me.UcrTextBoxNew1 = New ClimsoftVer4.ucrTextBoxNew()
+        Me.ucrTextBoxNewImageFile = New ClimsoftVer4.ucrTextBoxNew()
+        Me.btnOpenFile = New System.Windows.Forms.Button()
+        Me.grpCommand2 = New System.Windows.Forms.GroupBox()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.ucrNavigatorInstrument = New ClimsoftVer4.ucrNavigator()
+        Me.grpCommand2.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -264,20 +274,117 @@ Partial Class ucrMetadataInstrumentNew
         Me.lblImageFile.TabIndex = 24
         Me.lblImageFile.Text = "Image File"
         '
-        'UcrTextBoxNew1
+        'ucrTextBoxNewImageFile
         '
-        Me.UcrTextBoxNew1.Location = New System.Drawing.Point(176, 446)
-        Me.UcrTextBoxNew1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
-        Me.UcrTextBoxNew1.Name = "UcrTextBoxNew1"
-        Me.UcrTextBoxNew1.Size = New System.Drawing.Size(401, 25)
-        Me.UcrTextBoxNew1.TabIndex = 25
-        Me.UcrTextBoxNew1.TextboxValue = ""
+        Me.ucrTextBoxNewImageFile.Location = New System.Drawing.Point(176, 446)
+        Me.ucrTextBoxNewImageFile.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewImageFile.Name = "ucrTextBoxNewImageFile"
+        Me.ucrTextBoxNewImageFile.Size = New System.Drawing.Size(401, 25)
+        Me.ucrTextBoxNewImageFile.TabIndex = 25
+        Me.ucrTextBoxNewImageFile.TextboxValue = ""
+        '
+        'btnOpenFile
+        '
+        Me.btnOpenFile.Location = New System.Drawing.Point(588, 441)
+        Me.btnOpenFile.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnOpenFile.Name = "btnOpenFile"
+        Me.btnOpenFile.Size = New System.Drawing.Size(63, 36)
+        Me.btnOpenFile.TabIndex = 26
+        Me.btnOpenFile.Text = "Open"
+        Me.btnOpenFile.UseVisualStyleBackColor = True
+        '
+        'grpCommand2
+        '
+        Me.grpCommand2.Controls.Add(Me.btnClear)
+        Me.grpCommand2.Controls.Add(Me.btnAddNew)
+        Me.grpCommand2.Controls.Add(Me.btnView)
+        Me.grpCommand2.Controls.Add(Me.btnDelete)
+        Me.grpCommand2.Controls.Add(Me.btnUpdate)
+        Me.grpCommand2.Controls.Add(Me.btnSave)
+        Me.grpCommand2.Location = New System.Drawing.Point(4, 497)
+        Me.grpCommand2.Margin = New System.Windows.Forms.Padding(4)
+        Me.grpCommand2.Name = "grpCommand2"
+        Me.grpCommand2.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpCommand2.Size = New System.Drawing.Size(893, 38)
+        Me.grpCommand2.TabIndex = 28
+        Me.grpCommand2.TabStop = False
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(625, 6)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(100, 28)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
+        'btnAddNew
+        '
+        Me.btnAddNew.Location = New System.Drawing.Point(39, 5)
+        Me.btnAddNew.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAddNew.Name = "btnAddNew"
+        Me.btnAddNew.Size = New System.Drawing.Size(100, 28)
+        Me.btnAddNew.TabIndex = 0
+        Me.btnAddNew.Text = "AddNew"
+        Me.btnAddNew.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Location = New System.Drawing.Point(772, 7)
+        Me.btnView.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(100, 28)
+        Me.btnView.TabIndex = 5
+        Me.btnView.Text = "View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(479, 6)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(100, 28)
+        Me.btnDelete.TabIndex = 3
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(332, 6)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(100, 28)
+        Me.btnUpdate.TabIndex = 2
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(185, 6)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(100, 28)
+        Me.btnSave.TabIndex = 1
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'ucrNavigatorInstrument
+        '
+        Me.ucrNavigatorInstrument.Location = New System.Drawing.Point(227, 546)
+        Me.ucrNavigatorInstrument.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrNavigatorInstrument.Name = "ucrNavigatorInstrument"
+        Me.ucrNavigatorInstrument.Size = New System.Drawing.Size(448, 31)
+        Me.ucrNavigatorInstrument.TabIndex = 29
         '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrTextBoxNew1)
+        Me.Controls.Add(Me.ucrNavigatorInstrument)
+        Me.Controls.Add(Me.grpCommand2)
+        Me.Controls.Add(Me.btnOpenFile)
+        Me.Controls.Add(Me.ucrTextBoxNewImageFile)
         Me.Controls.Add(Me.lblImageFile)
         Me.Controls.Add(Me.ucrTextBoxNewHeight)
         Me.Controls.Add(Me.lblInstalledAt)
@@ -304,6 +411,7 @@ Partial Class ucrMetadataInstrumentNew
         Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.Name = "ucrMetadataInstrumentNew"
         Me.Size = New System.Drawing.Size(901, 588)
+        Me.grpCommand2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -332,5 +440,14 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents lblInstalledAt As Label
     Friend WithEvents ucrTextBoxNewHeight As ucrTextBoxNew
     Friend WithEvents lblImageFile As Label
-    Friend WithEvents UcrTextBoxNew1 As ucrTextBoxNew
+    Friend WithEvents ucrTextBoxNewImageFile As ucrTextBoxNew
+    Friend WithEvents btnOpenFile As Button
+    Friend WithEvents grpCommand2 As GroupBox
+    Friend WithEvents btnClear As Button
+    Friend WithEvents btnAddNew As Button
+    Friend WithEvents btnView As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents ucrNavigatorInstrument As ucrNavigator
 End Class
