@@ -31,6 +31,8 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewAbbreviation = New ClimsoftVer4.ucrTextBoxNew()
         Me.lbStationID = New System.Windows.Forms.Label()
         Me.ucrStationSelector = New ClimsoftVer4.ucrComboboxNew()
+        Me.lblSerialNumber = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewSerialNumber = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -107,10 +109,31 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrStationSelector.Size = New System.Drawing.Size(185, 26)
         Me.ucrStationSelector.TabIndex = 9
         '
+        'lblSerialNumber
+        '
+        Me.lblSerialNumber.AutoSize = True
+        Me.lblSerialNumber.Location = New System.Drawing.Point(39, 204)
+        Me.lblSerialNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSerialNumber.Name = "lblSerialNumber"
+        Me.lblSerialNumber.Size = New System.Drawing.Size(98, 17)
+        Me.lblSerialNumber.TabIndex = 10
+        Me.lblSerialNumber.Text = "Serial Number"
+        '
+        'ucrTextBoxNewSerialNumber
+        '
+        Me.ucrTextBoxNewSerialNumber.Location = New System.Drawing.Point(176, 204)
+        Me.ucrTextBoxNewSerialNumber.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewSerialNumber.Name = "ucrTextBoxNewSerialNumber"
+        Me.ucrTextBoxNewSerialNumber.Size = New System.Drawing.Size(185, 25)
+        Me.ucrTextBoxNewSerialNumber.TabIndex = 11
+        Me.ucrTextBoxNewSerialNumber.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewSerialNumber)
+        Me.Controls.Add(Me.lblSerialNumber)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.lbStationID)
         Me.Controls.Add(Me.ucrTextBoxNewAbbreviation)
@@ -135,4 +158,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrTextBoxNewAbbreviation As ucrTextBoxNew
     Friend WithEvents lbStationID As Label
     Friend WithEvents ucrStationSelector As ucrComboboxNew
+    Friend WithEvents lblSerialNumber As Label
+    Friend WithEvents ucrTextBoxNewSerialNumber As ucrTextBoxNew
 End Class
