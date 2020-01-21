@@ -34,7 +34,7 @@ Partial Class ucrMetadataPaperArchiveNew
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
-        Me.UcrNavigator1 = New ClimsoftVer4.ucrNavigator()
+        Me.ucrNavigatorPaperArchive = New ClimsoftVer4.ucrNavigator()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -163,19 +163,19 @@ Partial Class ucrMetadataPaperArchiveNew
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
-        'UcrNavigator1
+        'ucrNavigatorPaperArchive
         '
-        Me.UcrNavigator1.Location = New System.Drawing.Point(187, 352)
-        Me.UcrNavigator1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.UcrNavigator1.Name = "UcrNavigator1"
-        Me.UcrNavigator1.Size = New System.Drawing.Size(448, 31)
-        Me.UcrNavigator1.TabIndex = 8
+        Me.ucrNavigatorPaperArchive.Location = New System.Drawing.Point(187, 352)
+        Me.ucrNavigatorPaperArchive.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrNavigatorPaperArchive.Name = "ucrNavigatorPaperArchive"
+        Me.ucrNavigatorPaperArchive.Size = New System.Drawing.Size(448, 31)
+        Me.ucrNavigatorPaperArchive.TabIndex = 8
         '
         'ucrMetadataPaperArchiveNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrNavigator1)
+        Me.Controls.Add(Me.ucrNavigatorPaperArchive)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrTextBoxNewDescription)
         Me.Controls.Add(Me.lbldescri)
@@ -203,5 +203,5 @@ Partial Class ucrMetadataPaperArchiveNew
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
-    Friend WithEvents UcrNavigator1 As ucrNavigator
+    Friend WithEvents ucrNavigatorPaperArchive As ucrNavigator
 End Class
