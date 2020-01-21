@@ -30,6 +30,8 @@ Partial Class ucrMetadataStationQualifierNew
         Me.UcrComboboxNew1 = New ClimsoftVer4.ucrComboboxNew()
         Me.lblBeginDate = New System.Windows.Forms.Label()
         Me.ucrDatePickerNewBeginDate = New ClimsoftVer4.ucrDatePickerNew()
+        Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.ucrDatePickerNewEndDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.SuspendLayout()
         '
         'lblStationQualifier
@@ -98,10 +100,30 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrDatePickerNewBeginDate.Size = New System.Drawing.Size(207, 26)
         Me.ucrDatePickerNewBeginDate.TabIndex = 7
         '
+        'lblEndDate
+        '
+        Me.lblEndDate.AutoSize = True
+        Me.lblEndDate.Location = New System.Drawing.Point(299, 247)
+        Me.lblEndDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(67, 17)
+        Me.lblEndDate.TabIndex = 8
+        Me.lblEndDate.Text = "End Date"
+        '
+        'ucrDatePickerNewEndDate
+        '
+        Me.ucrDatePickerNewEndDate.Location = New System.Drawing.Point(401, 241)
+        Me.ucrDatePickerNewEndDate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrDatePickerNewEndDate.Name = "ucrDatePickerNewEndDate"
+        Me.ucrDatePickerNewEndDate.Size = New System.Drawing.Size(207, 26)
+        Me.ucrDatePickerNewEndDate.TabIndex = 9
+        '
         'ucrMetadataStationQualifierNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDatePickerNewEndDate)
+        Me.Controls.Add(Me.lblEndDate)
         Me.Controls.Add(Me.ucrDatePickerNewBeginDate)
         Me.Controls.Add(Me.lblBeginDate)
         Me.Controls.Add(Me.UcrComboboxNew1)
@@ -124,4 +146,6 @@ Partial Class ucrMetadataStationQualifierNew
     Friend WithEvents UcrComboboxNew1 As ucrComboboxNew
     Friend WithEvents lblBeginDate As Label
     Friend WithEvents ucrDatePickerNewBeginDate As ucrDatePickerNew
+    Friend WithEvents lblEndDate As Label
+    Friend WithEvents ucrDatePickerNewEndDate As ucrDatePickerNew
 End Class
