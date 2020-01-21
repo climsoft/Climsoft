@@ -45,6 +45,8 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrDatePickerNewDeinstallationDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.lblInstalledAt = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewHeight = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblImageFile = New System.Windows.Forms.Label()
+        Me.UcrTextBoxNew1 = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -252,10 +254,31 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewHeight.TabIndex = 23
         Me.ucrTextBoxNewHeight.TextboxValue = ""
         '
+        'lblImageFile
+        '
+        Me.lblImageFile.AutoSize = True
+        Me.lblImageFile.Location = New System.Drawing.Point(37, 446)
+        Me.lblImageFile.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblImageFile.Name = "lblImageFile"
+        Me.lblImageFile.Size = New System.Drawing.Size(72, 17)
+        Me.lblImageFile.TabIndex = 24
+        Me.lblImageFile.Text = "Image File"
+        '
+        'UcrTextBoxNew1
+        '
+        Me.UcrTextBoxNew1.Location = New System.Drawing.Point(176, 446)
+        Me.UcrTextBoxNew1.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.UcrTextBoxNew1.Name = "UcrTextBoxNew1"
+        Me.UcrTextBoxNew1.Size = New System.Drawing.Size(401, 25)
+        Me.UcrTextBoxNew1.TabIndex = 25
+        Me.UcrTextBoxNew1.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrTextBoxNew1)
+        Me.Controls.Add(Me.lblImageFile)
         Me.Controls.Add(Me.ucrTextBoxNewHeight)
         Me.Controls.Add(Me.lblInstalledAt)
         Me.Controls.Add(Me.ucrDatePickerNewDeinstallationDate)
@@ -308,4 +331,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrDatePickerNewDeinstallationDate As ucrDatePickerNew
     Friend WithEvents lblInstalledAt As Label
     Friend WithEvents ucrTextBoxNewHeight As ucrTextBoxNew
+    Friend WithEvents lblImageFile As Label
+    Friend WithEvents UcrTextBoxNew1 As ucrTextBoxNew
 End Class
