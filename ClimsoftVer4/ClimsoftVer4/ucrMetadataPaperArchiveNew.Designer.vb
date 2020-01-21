@@ -22,16 +22,82 @@ Partial Class ucrMetadataPaperArchiveNew
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblFormId = New System.Windows.Forms.Label()
+        Me.ucrTextboxNewFormID = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lbldescri = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewDescription = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(299, 21)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(214, 20)
+        Me.Label7.TabIndex = 1
+        Me.Label7.Text = "Paper Archive Definition"
+        '
+        'lblFormId
+        '
+        Me.lblFormId.AutoSize = True
+        Me.lblFormId.Location = New System.Drawing.Point(269, 126)
+        Me.lblFormId.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblFormId.Name = "lblFormId"
+        Me.lblFormId.Size = New System.Drawing.Size(57, 17)
+        Me.lblFormId.TabIndex = 2
+        Me.lblFormId.Text = "Form ID"
+        '
+        'ucrTextboxNewFormID
+        '
+        Me.ucrTextboxNewFormID.Location = New System.Drawing.Point(371, 122)
+        Me.ucrTextboxNewFormID.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextboxNewFormID.Name = "ucrTextboxNewFormID"
+        Me.ucrTextboxNewFormID.Size = New System.Drawing.Size(181, 25)
+        Me.ucrTextboxNewFormID.TabIndex = 3
+        Me.ucrTextboxNewFormID.TextboxValue = ""
+        '
+        'lbldescri
+        '
+        Me.lbldescri.AutoSize = True
+        Me.lbldescri.Location = New System.Drawing.Point(269, 176)
+        Me.lbldescri.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbldescri.Name = "lbldescri"
+        Me.lbldescri.Size = New System.Drawing.Size(79, 17)
+        Me.lbldescri.TabIndex = 4
+        Me.lbldescri.Text = "Description"
+        '
+        'ucrTextBoxNewDescription
+        '
+        Me.ucrTextBoxNewDescription.Location = New System.Drawing.Point(371, 174)
+        Me.ucrTextBoxNewDescription.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewDescription.Name = "ucrTextBoxNewDescription"
+        Me.ucrTextBoxNewDescription.Size = New System.Drawing.Size(181, 25)
+        Me.ucrTextBoxNewDescription.TabIndex = 5
+        Me.ucrTextBoxNewDescription.TextboxValue = ""
         '
         'ucrMetadataPaperArchiveNew
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewDescription)
+        Me.Controls.Add(Me.lbldescri)
+        Me.Controls.Add(Me.ucrTextboxNewFormID)
+        Me.Controls.Add(Me.lblFormId)
+        Me.Controls.Add(Me.Label7)
+        Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
         Me.Name = "ucrMetadataPaperArchiveNew"
-        Me.Size = New System.Drawing.Size(617, 316)
+        Me.Size = New System.Drawing.Size(823, 389)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lblFormId As Label
+    Friend WithEvents ucrTextboxNewFormID As ucrTextBoxNew
+    Friend WithEvents lbldescri As Label
+    Friend WithEvents ucrTextBoxNewDescription As ucrTextBoxNew
 End Class
