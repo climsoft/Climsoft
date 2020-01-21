@@ -29,6 +29,8 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewInstrumentName = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblInstrumentAbbreviation = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewAbbreviation = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lbStationID = New System.Windows.Forms.Label()
+        Me.ucrStationSelector = New ClimsoftVer4.ucrComboboxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -87,10 +89,30 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewAbbreviation.TabIndex = 7
         Me.ucrTextBoxNewAbbreviation.TextboxValue = ""
         '
+        'lbStationID
+        '
+        Me.lbStationID.AutoSize = True
+        Me.lbStationID.Location = New System.Drawing.Point(39, 170)
+        Me.lbStationID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbStationID.Name = "lbStationID"
+        Me.lbStationID.Size = New System.Drawing.Size(69, 17)
+        Me.lbStationID.TabIndex = 8
+        Me.lbStationID.Text = "Station ID"
+        '
+        'ucrStationSelector
+        '
+        Me.ucrStationSelector.Location = New System.Drawing.Point(176, 170)
+        Me.ucrStationSelector.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrStationSelector.Name = "ucrStationSelector"
+        Me.ucrStationSelector.Size = New System.Drawing.Size(185, 26)
+        Me.ucrStationSelector.TabIndex = 9
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrStationSelector)
+        Me.Controls.Add(Me.lbStationID)
         Me.Controls.Add(Me.ucrTextBoxNewAbbreviation)
         Me.Controls.Add(Me.lblInstrumentAbbreviation)
         Me.Controls.Add(Me.ucrTextBoxNewInstrumentName)
@@ -111,4 +133,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrTextBoxNewInstrumentName As ucrTextBoxNew
     Friend WithEvents lblInstrumentAbbreviation As Label
     Friend WithEvents ucrTextBoxNewAbbreviation As ucrTextBoxNew
+    Friend WithEvents lbStationID As Label
+    Friend WithEvents ucrStationSelector As ucrComboboxNew
 End Class
