@@ -54,6 +54,7 @@ Partial Class ucrMetadataElementNew
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.ucrNavigatorElement = New ClimsoftVer4.ucrNavigator()
+        Me.lblElement = New System.Windows.Forms.Label()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -366,10 +367,22 @@ Partial Class ucrMetadataElementNew
         Me.ucrNavigatorElement.Size = New System.Drawing.Size(488, 30)
         Me.ucrNavigatorElement.TabIndex = 49
         '
+        'lblElement
+        '
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblElement.Location = New System.Drawing.Point(416, 16)
+        Me.lblElement.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(69, 18)
+        Me.lblElement.TabIndex = 50
+        Me.lblElement.Text = "Element"
+        '
         'ucrMetadataElementNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrNavigatorElement)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.lblTotalRequired)
@@ -437,4 +450,5 @@ Partial Class ucrMetadataElementNew
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
     Friend WithEvents ucrNavigatorElement As ucrNavigator
+    Friend WithEvents lblElement As Label
 End Class
