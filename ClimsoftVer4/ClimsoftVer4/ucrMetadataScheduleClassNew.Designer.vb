@@ -27,6 +27,8 @@ Partial Class ucrMetadataScheduleClassNew
         Me.ucrTextBoxNewClass = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.ucrStationSelector = New ClimsoftVer4.ucrComboboxNew()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewDescription = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblScheduleClass
@@ -77,10 +79,31 @@ Partial Class ucrMetadataScheduleClassNew
         Me.ucrStationSelector.Size = New System.Drawing.Size(205, 30)
         Me.ucrStationSelector.TabIndex = 5
         '
+        'lblDescription
+        '
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Location = New System.Drawing.Point(275, 217)
+        Me.lblDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(79, 17)
+        Me.lblDescription.TabIndex = 6
+        Me.lblDescription.Text = "Description"
+        '
+        'ucrTextBoxNewDescription
+        '
+        Me.ucrTextBoxNewDescription.Location = New System.Drawing.Point(360, 217)
+        Me.ucrTextBoxNewDescription.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewDescription.Name = "ucrTextBoxNewDescription"
+        Me.ucrTextBoxNewDescription.Size = New System.Drawing.Size(205, 25)
+        Me.ucrTextBoxNewDescription.TabIndex = 7
+        Me.ucrTextBoxNewDescription.TextboxValue = ""
+        '
         'ucrMetadataScheduleClassNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewDescription)
+        Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.ucrStationSelector)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.ucrTextBoxNewClass)
@@ -99,4 +122,6 @@ Partial Class ucrMetadataScheduleClassNew
     Friend WithEvents ucrTextBoxNewClass As ucrTextBoxNew
     Friend WithEvents lblStationID As Label
     Friend WithEvents ucrStationSelector As ucrComboboxNew
+    Friend WithEvents lblDescription As Label
+    Friend WithEvents ucrTextBoxNewDescription As ucrTextBoxNew
 End Class
