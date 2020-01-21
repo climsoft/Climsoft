@@ -14,7 +14,7 @@
     Private Sub ucrPage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetValueControlsList()
-            bFirstLoad = False
+            'bFirstLoad = False
         End If
     End Sub
 

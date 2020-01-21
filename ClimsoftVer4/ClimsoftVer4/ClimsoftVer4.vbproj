@@ -683,10 +683,28 @@
     <Compile Include="ucrMetadataInstrument.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataInstrumentNew.Designer.vb">
+      <DependentUpon>ucrMetadataInstrumentNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataInstrumentNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataInstrumentsNew.Designer.vb">
+      <DependentUpon>ucrMetadataInstrumentsNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataInstrumentsNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataPaperArchive.Designer.vb">
       <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMetadataPaperArchive.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchiveNew.Designer.vb">
+      <DependentUpon>ucrMetadataPaperArchiveNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPaperArchiveNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMetadataPhysicalFeature.Designer.vb">
@@ -695,10 +713,22 @@
     <Compile Include="ucrMetadataPhysicalFeature.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataPhysicalFeatureNew.Designer.vb">
+      <DependentUpon>ucrMetadataPhysicalFeatureNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataPhysicalFeatureNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataScheduleClass.Designer.vb">
       <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMetadataScheduleClass.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClassNew.Designer.vb">
+      <DependentUpon>ucrMetadataScheduleClassNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataScheduleClassNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMetadataStation.Designer.vb">
@@ -713,16 +743,34 @@
     <Compile Include="ucrMetadataStationElement.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataStationElementNew.Designer.vb">
+      <DependentUpon>ucrMetadataStationElementNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationElementNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataStationLocationHistory.Designer.vb">
       <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMetadataStationLocationHistory.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrMetadataStationLocationHistoryNew.Designer.vb">
+      <DependentUpon>ucrMetadataStationLocationHistoryNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationLocationHistoryNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMetadataStationNew.Designer.vb">
       <DependentUpon>ucrMetadataStationNew.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMetadataStationNew.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifierNew.Designer.vb">
+      <DependentUpon>ucrMetadataStationQualifierNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrMetadataStationQualifierNew.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrMonthlyData.Designer.vb">
@@ -1166,20 +1214,38 @@
     <EmbeddedResource Include="ucrMetadataInstrument.resx">
       <DependentUpon>ucrMetadataInstrument.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataInstrumentNew.resx">
+      <DependentUpon>ucrMetadataInstrumentNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataInstrumentsNew.resx">
+      <DependentUpon>ucrMetadataInstrumentsNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataPaperArchive.resx">
       <DependentUpon>ucrMetadataPaperArchive.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPaperArchiveNew.resx">
+      <DependentUpon>ucrMetadataPaperArchiveNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataPhysicalFeature.resx">
       <DependentUpon>ucrMetadataPhysicalFeature.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataPhysicalFeatureNew.resx">
+      <DependentUpon>ucrMetadataPhysicalFeatureNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataScheduleClass.resx">
       <DependentUpon>ucrMetadataScheduleClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataScheduleClassNew.resx">
+      <DependentUpon>ucrMetadataScheduleClassNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStation.resx">
       <DependentUpon>ucrMetadataStation.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStationElement.resx">
       <DependentUpon>ucrMetadataStationElement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationElementNew.resx">
+      <DependentUpon>ucrMetadataStationElementNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStationLocationHistory.resx">
       <DependentUpon>ucrMetadataStationLocationHistory.vb</DependentUpon>
@@ -1189,6 +1255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMetadataStationQualifier.resx">
       <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrMetadataStationQualifierNew.resx">
+      <DependentUpon>ucrMetadataStationQualifierNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMonthlyData.resx">
       <DependentUpon>ucrMonthlyData.vb</DependentUpon>
