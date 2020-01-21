@@ -34,6 +34,8 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrDatePickerNewEndDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.lblTimeZone = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewTimeZone = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblNetworkType = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewNetworkType = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblStationQualifier
@@ -139,10 +141,31 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrTextBoxNewTimeZone.TabIndex = 11
         Me.ucrTextBoxNewTimeZone.TextboxValue = ""
         '
+        'lblNetworkType
+        '
+        Me.lblNetworkType.AutoSize = True
+        Me.lblNetworkType.Location = New System.Drawing.Point(299, 338)
+        Me.lblNetworkType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNetworkType.Name = "lblNetworkType"
+        Me.lblNetworkType.Size = New System.Drawing.Size(95, 17)
+        Me.lblNetworkType.TabIndex = 12
+        Me.lblNetworkType.Text = "Network Type"
+        '
+        'ucrTextBoxNewNetworkType
+        '
+        Me.ucrTextBoxNewNetworkType.Location = New System.Drawing.Point(401, 337)
+        Me.ucrTextBoxNewNetworkType.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewNetworkType.Name = "ucrTextBoxNewNetworkType"
+        Me.ucrTextBoxNewNetworkType.Size = New System.Drawing.Size(205, 25)
+        Me.ucrTextBoxNewNetworkType.TabIndex = 13
+        Me.ucrTextBoxNewNetworkType.TextboxValue = ""
+        '
         'ucrMetadataStationQualifierNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewNetworkType)
+        Me.Controls.Add(Me.lblNetworkType)
         Me.Controls.Add(Me.ucrTextBoxNewTimeZone)
         Me.Controls.Add(Me.lblTimeZone)
         Me.Controls.Add(Me.ucrDatePickerNewEndDate)
@@ -173,4 +196,6 @@ Partial Class ucrMetadataStationQualifierNew
     Friend WithEvents ucrDatePickerNewEndDate As ucrDatePickerNew
     Friend WithEvents lblTimeZone As Label
     Friend WithEvents ucrTextBoxNewTimeZone As ucrTextBoxNew
+    Friend WithEvents lblNetworkType As Label
+    Friend WithEvents ucrTextBoxNewNetworkType As ucrTextBoxNew
 End Class
