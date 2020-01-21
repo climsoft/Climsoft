@@ -33,6 +33,10 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrStationSelector = New ClimsoftVer4.ucrComboboxNew()
         Me.lblSerialNumber = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewSerialNumber = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblModel = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewModel = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblManufacturer = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewManufacturer = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -128,10 +132,52 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewSerialNumber.TabIndex = 11
         Me.ucrTextBoxNewSerialNumber.TextboxValue = ""
         '
+        'lblModel
+        '
+        Me.lblModel.AutoSize = True
+        Me.lblModel.Location = New System.Drawing.Point(39, 239)
+        Me.lblModel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblModel.Name = "lblModel"
+        Me.lblModel.Size = New System.Drawing.Size(46, 17)
+        Me.lblModel.TabIndex = 12
+        Me.lblModel.Text = "Model"
+        '
+        'ucrTextBoxNewModel
+        '
+        Me.ucrTextBoxNewModel.Location = New System.Drawing.Point(176, 239)
+        Me.ucrTextBoxNewModel.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewModel.Name = "ucrTextBoxNewModel"
+        Me.ucrTextBoxNewModel.Size = New System.Drawing.Size(185, 25)
+        Me.ucrTextBoxNewModel.TabIndex = 13
+        Me.ucrTextBoxNewModel.TextboxValue = ""
+        '
+        'lblManufacturer
+        '
+        Me.lblManufacturer.AutoSize = True
+        Me.lblManufacturer.Location = New System.Drawing.Point(39, 273)
+        Me.lblManufacturer.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblManufacturer.Name = "lblManufacturer"
+        Me.lblManufacturer.Size = New System.Drawing.Size(92, 17)
+        Me.lblManufacturer.TabIndex = 14
+        Me.lblManufacturer.Text = "Manufacturer"
+        '
+        'ucrTextBoxNewManufacturer
+        '
+        Me.ucrTextBoxNewManufacturer.Location = New System.Drawing.Point(176, 273)
+        Me.ucrTextBoxNewManufacturer.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewManufacturer.Name = "ucrTextBoxNewManufacturer"
+        Me.ucrTextBoxNewManufacturer.Size = New System.Drawing.Size(185, 25)
+        Me.ucrTextBoxNewManufacturer.TabIndex = 15
+        Me.ucrTextBoxNewManufacturer.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewManufacturer)
+        Me.Controls.Add(Me.lblManufacturer)
+        Me.Controls.Add(Me.ucrTextBoxNewModel)
+        Me.Controls.Add(Me.lblModel)
         Me.Controls.Add(Me.ucrTextBoxNewSerialNumber)
         Me.Controls.Add(Me.lblSerialNumber)
         Me.Controls.Add(Me.ucrStationSelector)
@@ -160,4 +206,8 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrStationSelector As ucrComboboxNew
     Friend WithEvents lblSerialNumber As Label
     Friend WithEvents ucrTextBoxNewSerialNumber As ucrTextBoxNew
+    Friend WithEvents lblModel As Label
+    Friend WithEvents ucrTextBoxNewModel As ucrTextBoxNew
+    Friend WithEvents lblManufacturer As Label
+    Friend WithEvents ucrTextBoxNewManufacturer As ucrTextBoxNew
 End Class
