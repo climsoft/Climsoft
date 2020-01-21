@@ -27,6 +27,8 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrDatalinkInstrument = New ClimsoftVer4.ucrComboboxNew()
         Me.lblInstrumentName = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewInstrumentName = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblInstrumentAbbreviation = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewAbbreviation = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -66,10 +68,31 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewInstrumentName.TabIndex = 5
         Me.ucrTextBoxNewInstrumentName.TextboxValue = ""
         '
+        'lblInstrumentAbbreviation
+        '
+        Me.lblInstrumentAbbreviation.AutoSize = True
+        Me.lblInstrumentAbbreviation.Location = New System.Drawing.Point(39, 135)
+        Me.lblInstrumentAbbreviation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblInstrumentAbbreviation.Name = "lblInstrumentAbbreviation"
+        Me.lblInstrumentAbbreviation.Size = New System.Drawing.Size(87, 17)
+        Me.lblInstrumentAbbreviation.TabIndex = 6
+        Me.lblInstrumentAbbreviation.Text = "Abbreviation"
+        '
+        'ucrTextBoxNewAbbreviation
+        '
+        Me.ucrTextBoxNewAbbreviation.Location = New System.Drawing.Point(176, 133)
+        Me.ucrTextBoxNewAbbreviation.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewAbbreviation.Name = "ucrTextBoxNewAbbreviation"
+        Me.ucrTextBoxNewAbbreviation.Size = New System.Drawing.Size(185, 25)
+        Me.ucrTextBoxNewAbbreviation.TabIndex = 7
+        Me.ucrTextBoxNewAbbreviation.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewAbbreviation)
+        Me.Controls.Add(Me.lblInstrumentAbbreviation)
         Me.Controls.Add(Me.ucrTextBoxNewInstrumentName)
         Me.Controls.Add(Me.lblInstrumentName)
         Me.Controls.Add(Me.ucrDatalinkInstrument)
@@ -86,4 +109,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrDatalinkInstrument As ucrComboboxNew
     Friend WithEvents lblInstrumentName As Label
     Friend WithEvents ucrTextBoxNewInstrumentName As ucrTextBoxNew
+    Friend WithEvents lblInstrumentAbbreviation As Label
+    Friend WithEvents ucrTextBoxNewAbbreviation As ucrTextBoxNew
 End Class
