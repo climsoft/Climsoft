@@ -36,6 +36,7 @@ Partial Class ucrMetadataScheduleClassNew
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnAddNew = New System.Windows.Forms.Button()
+        Me.ucrNavigatorScheduleClass = New ClimsoftVer4.ucrNavigator()
         Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -182,10 +183,19 @@ Partial Class ucrMetadataScheduleClassNew
         Me.btnAddNew.Text = "AddNew"
         Me.btnAddNew.UseVisualStyleBackColor = True
         '
+        'ucrNavigatorScheduleClass
+        '
+        Me.ucrNavigatorScheduleClass.Location = New System.Drawing.Point(196, 393)
+        Me.ucrNavigatorScheduleClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrNavigatorScheduleClass.Name = "ucrNavigatorScheduleClass"
+        Me.ucrNavigatorScheduleClass.Size = New System.Drawing.Size(448, 31)
+        Me.ucrNavigatorScheduleClass.TabIndex = 9
+        '
         'ucrMetadataScheduleClassNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrNavigatorScheduleClass)
         Me.Controls.Add(Me.GroupBox13)
         Me.Controls.Add(Me.ucrTextBoxNewDescription)
         Me.Controls.Add(Me.lblDescription)
@@ -217,4 +227,5 @@ Partial Class ucrMetadataScheduleClassNew
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents btnAddNew As Button
+    Friend WithEvents ucrNavigatorScheduleClass As ucrNavigator
 End Class
