@@ -28,6 +28,8 @@ Partial Class ucrMetadataStationQualifierNew
         Me.ucrTextBoxNewQualifier = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblStationID = New System.Windows.Forms.Label()
         Me.UcrComboboxNew1 = New ClimsoftVer4.ucrComboboxNew()
+        Me.lblBeginDate = New System.Windows.Forms.Label()
+        Me.ucrDatePickerNewBeginDate = New ClimsoftVer4.ucrDatePickerNew()
         Me.SuspendLayout()
         '
         'lblStationQualifier
@@ -78,10 +80,30 @@ Partial Class ucrMetadataStationQualifierNew
         Me.UcrComboboxNew1.Size = New System.Drawing.Size(207, 30)
         Me.UcrComboboxNew1.TabIndex = 5
         '
+        'lblBeginDate
+        '
+        Me.lblBeginDate.AutoSize = True
+        Me.lblBeginDate.Location = New System.Drawing.Point(299, 202)
+        Me.lblBeginDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblBeginDate.Name = "lblBeginDate"
+        Me.lblBeginDate.Size = New System.Drawing.Size(78, 17)
+        Me.lblBeginDate.TabIndex = 6
+        Me.lblBeginDate.Text = "Begin Date"
+        '
+        'ucrDatePickerNewBeginDate
+        '
+        Me.ucrDatePickerNewBeginDate.Location = New System.Drawing.Point(401, 197)
+        Me.ucrDatePickerNewBeginDate.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrDatePickerNewBeginDate.Name = "ucrDatePickerNewBeginDate"
+        Me.ucrDatePickerNewBeginDate.Size = New System.Drawing.Size(207, 26)
+        Me.ucrDatePickerNewBeginDate.TabIndex = 7
+        '
         'ucrMetadataStationQualifierNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrDatePickerNewBeginDate)
+        Me.Controls.Add(Me.lblBeginDate)
         Me.Controls.Add(Me.UcrComboboxNew1)
         Me.Controls.Add(Me.lblStationID)
         Me.Controls.Add(Me.ucrTextBoxNewQualifier)
@@ -100,4 +122,6 @@ Partial Class ucrMetadataStationQualifierNew
     Friend WithEvents ucrTextBoxNewQualifier As ucrTextBoxNew
     Friend WithEvents lblStationID As Label
     Friend WithEvents UcrComboboxNew1 As ucrComboboxNew
+    Friend WithEvents lblBeginDate As Label
+    Friend WithEvents ucrDatePickerNewBeginDate As ucrDatePickerNew
 End Class
