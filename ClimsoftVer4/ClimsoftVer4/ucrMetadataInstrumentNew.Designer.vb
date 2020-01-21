@@ -37,6 +37,8 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewModel = New ClimsoftVer4.ucrTextBoxNew()
         Me.lblManufacturer = New System.Windows.Forms.Label()
         Me.ucrTextBoxNewManufacturer = New ClimsoftVer4.ucrTextBoxNew()
+        Me.lblUncertainity = New System.Windows.Forms.Label()
+        Me.ucrTextBoxNewUncertainity = New ClimsoftVer4.ucrTextBoxNew()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -170,10 +172,31 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrTextBoxNewManufacturer.TabIndex = 15
         Me.ucrTextBoxNewManufacturer.TextboxValue = ""
         '
+        'lblUncertainity
+        '
+        Me.lblUncertainity.AutoSize = True
+        Me.lblUncertainity.Location = New System.Drawing.Point(39, 308)
+        Me.lblUncertainity.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblUncertainity.Name = "lblUncertainity"
+        Me.lblUncertainity.Size = New System.Drawing.Size(83, 17)
+        Me.lblUncertainity.TabIndex = 16
+        Me.lblUncertainity.Text = "Uncertainity"
+        '
+        'ucrTextBoxNewUncertainity
+        '
+        Me.ucrTextBoxNewUncertainity.Location = New System.Drawing.Point(176, 308)
+        Me.ucrTextBoxNewUncertainity.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrTextBoxNewUncertainity.Name = "ucrTextBoxNewUncertainity"
+        Me.ucrTextBoxNewUncertainity.Size = New System.Drawing.Size(185, 25)
+        Me.ucrTextBoxNewUncertainity.TabIndex = 17
+        Me.ucrTextBoxNewUncertainity.TextboxValue = ""
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrTextBoxNewUncertainity)
+        Me.Controls.Add(Me.lblUncertainity)
         Me.Controls.Add(Me.ucrTextBoxNewManufacturer)
         Me.Controls.Add(Me.lblManufacturer)
         Me.Controls.Add(Me.ucrTextBoxNewModel)
@@ -210,4 +233,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents ucrTextBoxNewModel As ucrTextBoxNew
     Friend WithEvents lblManufacturer As Label
     Friend WithEvents ucrTextBoxNewManufacturer As ucrTextBoxNew
+    Friend WithEvents lblUncertainity As Label
+    Friend WithEvents ucrTextBoxNewUncertainity As ucrTextBoxNew
 End Class
