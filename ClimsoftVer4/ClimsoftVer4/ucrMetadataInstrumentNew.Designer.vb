@@ -56,7 +56,10 @@ Partial Class ucrMetadataInstrumentNew
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.ucrNavigatorInstrument = New ClimsoftVer4.ucrNavigator()
+        Me.pbInstrument = New System.Windows.Forms.PictureBox()
+        Me.lblInstrumentPic = New System.Windows.Forms.Label()
         Me.grpCommand2.SuspendLayout()
+        CType(Me.pbInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblInstrumentID
@@ -377,10 +380,33 @@ Partial Class ucrMetadataInstrumentNew
         Me.ucrNavigatorInstrument.Size = New System.Drawing.Size(448, 31)
         Me.ucrNavigatorInstrument.TabIndex = 29
         '
+        'pbInstrument
+        '
+        Me.pbInstrument.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pbInstrument.Location = New System.Drawing.Point(493, 57)
+        Me.pbInstrument.Margin = New System.Windows.Forms.Padding(4)
+        Me.pbInstrument.Name = "pbInstrument"
+        Me.pbInstrument.Size = New System.Drawing.Size(383, 357)
+        Me.pbInstrument.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbInstrument.TabIndex = 91
+        Me.pbInstrument.TabStop = False
+        '
+        'lblInstrumentPic
+        '
+        Me.lblInstrumentPic.AutoSize = True
+        Me.lblInstrumentPic.Location = New System.Drawing.Point(649, 414)
+        Me.lblInstrumentPic.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblInstrumentPic.Name = "lblInstrumentPic"
+        Me.lblInstrumentPic.Size = New System.Drawing.Size(122, 17)
+        Me.lblInstrumentPic.TabIndex = 92
+        Me.lblInstrumentPic.Text = "Instrument Picture"
+        '
         'ucrMetadataInstrumentNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblInstrumentPic)
+        Me.Controls.Add(Me.pbInstrument)
         Me.Controls.Add(Me.ucrNavigatorInstrument)
         Me.Controls.Add(Me.grpCommand2)
         Me.Controls.Add(Me.btnOpenFile)
@@ -412,6 +438,7 @@ Partial Class ucrMetadataInstrumentNew
         Me.Name = "ucrMetadataInstrumentNew"
         Me.Size = New System.Drawing.Size(901, 588)
         Me.grpCommand2.ResumeLayout(False)
+        CType(Me.pbInstrument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -450,4 +477,6 @@ Partial Class ucrMetadataInstrumentNew
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents ucrNavigatorInstrument As ucrNavigator
+    Friend WithEvents pbInstrument As PictureBox
+    Friend WithEvents lblInstrumentPic As Label
 End Class
