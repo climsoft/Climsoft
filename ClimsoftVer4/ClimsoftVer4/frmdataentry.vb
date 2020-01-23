@@ -95,4 +95,7 @@ Public Class frmKeyEntry
         End If
     End Sub
 
+    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
