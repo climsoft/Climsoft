@@ -165,12 +165,15 @@ Public Class frmFormUpload
                         obsVal = dss.Tables(frm_tbl).Rows(n).Item(m)
                         If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
                     Else
-                        'obsVal = ""
+                        obsVal = ""
                         obsFlag = "M"
                     End If
 
-                    If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + flds)) Then obsFlag = dss.Tables(frm_tbl).Rows(n).Item(m + flds)
-
+                    If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + flds)) Then
+                        obsFlag = dss.Tables(frm_tbl).Rows(n).Item(m + flds)
+                    Else
+                        obsFlag = ""
+                    End If
                     'If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
 
                     Select Case dataForm
@@ -194,7 +197,14 @@ Public Class frmFormUpload
                             dd = (m - st) + 1
                             hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
 
-                            If Len(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) > 0 Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                            'If Len(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) > 0 Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
+                                'obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                                If IsNumeric(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                            Else
+                                'obsperiod = ""
+                                'obsFlag = "M"
+                            End If
 
                         Case "form_agro1"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
@@ -218,9 +228,17 @@ Public Class frmFormUpload
 
                             'Get Wind Direction values
                             elemCode = "112"
-                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m)) Then obsVal = dss.Tables(frm_tbl).Rows(n).Item(m)
+                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m)) Then
+                                obsVal = dss.Tables(frm_tbl).Rows(n).Item(m)
+                                If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
+                            Else
+                                obsVal = ""
+                                obsFlag = "M"
+                            End If
+
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + flds)) Then obsFlag = dss.Tables(frm_tbl).Rows(n).Item(m + flds)
-                            If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
+
+                            ''If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -233,8 +251,14 @@ Public Class frmFormUpload
                             End Try
                             'Get Wind Speed values
                             elemCode = "111"
-                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then obsVal = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
-                            If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
+                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
+                                obsVal = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
+                                If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
+                            Else
+                                obsVal = ""
+                                obsFlag = "M"
+                            End If
+                            ''If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -283,7 +307,7 @@ Public Class frmFormUpload
             End If
             conns.Close()
         Catch ex As Exception
-            'MsgBox(ex.Message)
+            MsgBox(ex.Message)
             lblDataTransferProgress.ForeColor = Color.Red
             lblDataTransferProgress.Text = "Data transfer Failure !"
             MsgBox("Check and confirm selections")
@@ -299,6 +323,10 @@ Public Class frmFormUpload
         'If frmUploadgroundWorker.IsBusy Then
         '    frmUploadgroundWorker.CancelAsync()
         'End If
+    End Sub
+
+    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
+
     End Sub
 
     Function Data_Fields(tbl As String, ByRef startFiled As Integer, ByRef endField As Integer, ByRef code_loc As String) As Boolean
