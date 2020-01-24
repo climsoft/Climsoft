@@ -59,6 +59,14 @@
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_hourly"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")

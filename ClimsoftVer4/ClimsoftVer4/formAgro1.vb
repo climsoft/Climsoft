@@ -913,13 +913,15 @@
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+
         'Open form for displaying data transfer progress
-        'frmDataTransferProgress.lblFormName.Text = "form_agro1"
-        'frmDataTransferProgress.Text = frmDataTransferProgress.Text & " for " & frmDataTransferProgress.lblFormName.Text
+        frmFormUpload.lblFormName.Text = "form_agro1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
         frmDataTransferProgress.Show()
-
-        'Exit Sub
-
         'Upload data to observationInitial table
         Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
             dd As String, hh As String, ctl As Control, capturedBy As String
