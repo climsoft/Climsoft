@@ -10,62 +10,46 @@
 
     Protected clValidColor As Color = Color.White 'used to set the default back color to show when the value input is  valid 
     Protected clInValidColor As Color = Color.Red 'used to set the default back color to show when the value input is invalid 
-    Public bValidate As Boolean = True
-    Public bValidateSilently As Boolean = True
-    Public bValidateEmpty As Boolean = False
-    Protected strValidationType As String = "none"
-
-    Protected objDefaultValue As Object = Nothing
-    Public Property KeyControl() As Boolean = False
+    Public bValidate As Boolean = True 'switches the validation on and off
+    Public bValidateSilently As Boolean = True 'this will inhibit showing message boxes when invalid values are written 
 
 
     Private Sub ucrValue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
-
-    Public Overridable Sub SetDefaultValue(objNewValue As Object)
-        objDefaultValue = objNewValue
+    Public Sub SetDataIdentifier(objDataIdentifier As Object)
+        'specifies the identifier that would be usd by the datastructure to get the data 
+        'the identifier will have a field name
     End Sub
 
-    Public Overridable Function GetDefaultValue() As Object
-        Return objDefaultValue
-    End Function
 
-    Public Function HasDefaultValue() As Boolean
-        Return Not IsNothing(GetDefaultValue())
-    End Function
-
-    Public Overridable Sub SelectDefaultValue()
-        SetValue(GetDefaultValue())
+    Public Overridable Sub GetValidationParametersFromDataStructure()
+        'todo. gets the validation parameters from the datastructure
     End Sub
 
-    Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
-        RaiseEvent evtKeyDown(sender, e)
-    End Sub
-
-    Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
-        If Not bSuppressChangedEvents Then
-            RaiseEvent evtTextChanged(sender, e)
-        End If
-    End Sub
-
-    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
-        If Not bSuppressChangedEvents Then
-            RaiseEvent evtValueChanged(sender, e)
-        End If
-    End Sub
-
-    Public Overridable Sub SetValue(objNewValue As Object)
+    'this will be the event handler that listens to changes to record in the datastructure
+    Private Sub ChangesToRecordInDataStructure(sender As Object, e As EventArgs)
+        SetValueFromDataStructure()
     End Sub
 
     Public Overridable Sub SetValueFromDataStructure()
-
+        'todo. reads value from the datastructure
     End Sub
 
-    Public Overridable Sub SetValueToDataStructure(dtbValues As DataTable)
-
+    Public Overridable Sub SetValueToDataStructure()
+        'todo. writes value to the datastructure
     End Sub
+
+    Public Overridable Sub SetValue(objNewValue As Object)
+        'todo. Set the value top the control then write it to the datasctrure
+    End Sub
+
+    Public Overridable Function GetValue(Optional objSpecification As Object = Nothing) As Object
+        'gets the value of the control.
+        'Possibly pass in a parameter that specifies the value to get incase the control has more than one value
+        Return Nothing
+    End Function
 
     Public Overridable Sub SetBackColor(backColor As Color)
     End Sub
@@ -91,7 +75,7 @@
     End Function
 
     Public Overridable Sub SetContextMenuStrip(contextMenuStrip As ContextMenuStrip)
-
+        'sets the context menu of the control
     End Sub
 
     Public Overridable Sub GetFocus()
@@ -106,8 +90,32 @@
         Return True
     End Function
 
-    Public Overridable Function GetValue(Optional strFieldName As String = "") As Object
-        Return Nothing
+    Public Overridable Function IsValid() As Boolean
+        Return True
     End Function
+
+    Public Overridable Function IsEmpty() As Boolean
+        Return True 'to be overidden by the child controls
+    End Function
+
+    Public Overridable Sub SetAsReadOnly()
+        'set th control to read only
+    End Sub
+
+    Public Sub OnevtKeyDown(sender As Object, e As KeyEventArgs)
+        RaiseEvent evtKeyDown(sender, e)
+    End Sub
+
+    Public Sub OnevtTextChanged(sender As Object, e As EventArgs)
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtTextChanged(sender, e)
+        End If
+    End Sub
+
+    Public Sub OnevtValueChanged(sender As Object, e As EventArgs)
+        If Not bSuppressChangedEvents Then
+            RaiseEvent evtValueChanged(sender, e)
+        End If
+    End Sub
 
 End Class

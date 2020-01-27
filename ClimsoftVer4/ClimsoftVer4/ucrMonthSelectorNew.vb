@@ -56,8 +56,8 @@
         cmsMonthNames.Checked = False
 
         If bFirstLoad Then
-            bValidateEmpty = True
-            strValidationType = "exists"
+            'bValidateEmpty = True
+            'strValidationType = "exists"
             PopulateControl()
             bFirstLoad = False
         End If

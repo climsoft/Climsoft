@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class formDataView
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class formDataView
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.DataGridView = New System.Windows.Forms.DataGridView()
         Me.btnHelp = New System.Windows.Forms.Button()
@@ -37,6 +37,9 @@ Partial Class formDataView
         Me.lblYear = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtStn = New System.Windows.Forms.TextBox()
+        Me.cmdImport = New System.Windows.Forms.Button()
+        Me.dlgImportFile = New System.Windows.Forms.OpenFileDialog()
+        Me.dlgExportFile = New System.Windows.Forms.SaveFileDialog()
         CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +55,7 @@ Partial Class formDataView
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(579, 470)
+        Me.btnHelp.Location = New System.Drawing.Point(634, 472)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(58, 23)
         Me.btnHelp.TabIndex = 8
@@ -62,7 +65,7 @@ Partial Class formDataView
         'btnDelete
         '
         Me.btnDelete.Enabled = False
-        Me.btnDelete.Location = New System.Drawing.Point(194, 472)
+        Me.btnDelete.Location = New System.Drawing.Point(146, 472)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(58, 23)
         Me.btnDelete.TabIndex = 7
@@ -72,7 +75,7 @@ Partial Class formDataView
         'btnUpdate
         '
         Me.btnUpdate.Enabled = False
-        Me.btnUpdate.Location = New System.Drawing.Point(274, 472)
+        Me.btnUpdate.Location = New System.Drawing.Point(225, 472)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(58, 23)
         Me.btnUpdate.TabIndex = 6
@@ -81,7 +84,7 @@ Partial Class formDataView
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(496, 472)
+        Me.btnClose.Location = New System.Drawing.Point(555, 472)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(58, 23)
         Me.btnClose.TabIndex = 5
@@ -90,7 +93,7 @@ Partial Class formDataView
         '
         'cmdExport
         '
-        Me.cmdExport.Location = New System.Drawing.Point(354, 472)
+        Me.cmdExport.Location = New System.Drawing.Point(304, 472)
         Me.cmdExport.Name = "cmdExport"
         Me.cmdExport.Size = New System.Drawing.Size(58, 23)
         Me.cmdExport.TabIndex = 9
@@ -99,7 +102,7 @@ Partial Class formDataView
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(418, 472)
+        Me.cmdEdit.Location = New System.Drawing.Point(462, 472)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(72, 23)
         Me.cmdEdit.TabIndex = 10
@@ -178,11 +181,21 @@ Partial Class formDataView
         Me.txtStn.Size = New System.Drawing.Size(83, 20)
         Me.txtStn.TabIndex = 22
         '
+        'cmdImport
+        '
+        Me.cmdImport.Location = New System.Drawing.Point(383, 472)
+        Me.cmdImport.Name = "cmdImport"
+        Me.cmdImport.Size = New System.Drawing.Size(58, 23)
+        Me.cmdImport.TabIndex = 18
+        Me.cmdImport.Text = "Import"
+        Me.cmdImport.UseVisualStyleBackColor = True
+        '
         'formDataView
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(851, 510)
+        Me.Controls.Add(Me.cmdImport)
         Me.Controls.Add(Me.grpSearch)
         Me.Controls.Add(Me.cmdEdit)
         Me.Controls.Add(Me.cmdExport)
@@ -214,4 +227,7 @@ Partial Class formDataView
     Friend WithEvents lblYear As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtStn As System.Windows.Forms.TextBox
+    Friend WithEvents cmdImport As Button
+    Friend WithEvents dlgImportFile As OpenFileDialog
+    Friend WithEvents dlgExportFile As SaveFileDialog
 End Class

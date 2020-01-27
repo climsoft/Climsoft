@@ -58,12 +58,21 @@ Partial Class frmImportDaily
         Me.lblStn = New System.Windows.Forms.Label()
         Me.lblDefaultObsHour = New System.Windows.Forms.Label()
         Me.lblTRecords = New System.Windows.Forms.Label()
-        Me.lblStnEror = New System.Windows.Forms.Label()
-        Me.lblElmeror = New System.Windows.Forms.Label()
-        Me.lstStations = New System.Windows.Forms.ListBox()
+        Me.lblElmCode = New System.Windows.Forms.Label()
+        Me.txtElmCode = New System.Windows.Forms.TextBox()
+        Me.grpSummary = New System.Windows.Forms.GroupBox()
+        Me.optMonthly = New System.Windows.Forms.RadioButton()
+        Me.optDekadal = New System.Windows.Forms.RadioButton()
+        Me.pnlErrors = New System.Windows.Forms.Panel()
+        Me.cmdSaveErrors = New System.Windows.Forms.Button()
         Me.lstElements = New System.Windows.Forms.ListBox()
+        Me.lstStations = New System.Windows.Forms.ListBox()
+        Me.lblElmeror = New System.Windows.Forms.Label()
+        Me.lblStnEror = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
+        Me.grpSummary.SuspendLayout()
+        Me.pnlErrors.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -120,7 +129,7 @@ Partial Class frmImportDaily
         'OptTAB
         '
         Me.OptTAB.AutoSize = True
-        Me.OptTAB.Location = New System.Drawing.Point(174, 41)
+        Me.OptTAB.Location = New System.Drawing.Point(158, 41)
         Me.OptTAB.Name = "OptTAB"
         Me.OptTAB.Size = New System.Drawing.Size(46, 17)
         Me.OptTAB.TabIndex = 5
@@ -130,7 +139,7 @@ Partial Class frmImportDaily
         'OptOthers
         '
         Me.OptOthers.AutoSize = True
-        Me.OptOthers.Location = New System.Drawing.Point(256, 41)
+        Me.OptOthers.Location = New System.Drawing.Point(240, 41)
         Me.OptOthers.Name = "OptOthers"
         Me.OptOthers.Size = New System.Drawing.Size(54, 17)
         Me.OptOthers.TabIndex = 6
@@ -139,7 +148,7 @@ Partial Class frmImportDaily
         '
         'txtOther
         '
-        Me.txtOther.Location = New System.Drawing.Point(309, 39)
+        Me.txtOther.Location = New System.Drawing.Point(293, 39)
         Me.txtOther.Name = "txtOther"
         Me.txtOther.Size = New System.Drawing.Size(24, 20)
         Me.txtOther.TabIndex = 7
@@ -156,7 +165,7 @@ Partial Class frmImportDaily
         'lstColumn
         '
         Me.lstColumn.FormattingEnabled = True
-        Me.lstColumn.Location = New System.Drawing.Point(59, 53)
+        Me.lstColumn.Location = New System.Drawing.Point(51, 53)
         Me.lstColumn.Name = "lstColumn"
         Me.lstColumn.Size = New System.Drawing.Size(86, 30)
         Me.lstColumn.TabIndex = 9
@@ -164,15 +173,15 @@ Partial Class frmImportDaily
         'cmbFields
         '
         Me.cmbFields.FormattingEnabled = True
-        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "value", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cmbFields.Location = New System.Drawing.Point(151, 55)
+        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "value", "NA", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cmbFields.Location = New System.Drawing.Point(143, 55)
         Me.cmbFields.Name = "cmbFields"
         Me.cmbFields.Size = New System.Drawing.Size(147, 21)
         Me.cmbFields.TabIndex = 10
         '
         'cmdRename
         '
-        Me.cmdRename.Location = New System.Drawing.Point(191, 74)
+        Me.cmdRename.Location = New System.Drawing.Point(183, 74)
         Me.cmdRename.Name = "cmdRename"
         Me.cmdRename.Size = New System.Drawing.Size(56, 20)
         Me.cmdRename.TabIndex = 11
@@ -183,7 +192,7 @@ Partial Class frmImportDaily
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(56, 37)
+        Me.lblColumns.Location = New System.Drawing.Point(48, 37)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(92, 13)
         Me.lblColumns.TabIndex = 12
@@ -192,7 +201,7 @@ Partial Class frmImportDaily
         'lblFieldName
         '
         Me.lblFieldName.AutoSize = True
-        Me.lblFieldName.Location = New System.Drawing.Point(171, 37)
+        Me.lblFieldName.Location = New System.Drawing.Point(163, 37)
         Me.lblFieldName.Name = "lblFieldName"
         Me.lblFieldName.Size = New System.Drawing.Size(93, 13)
         Me.lblFieldName.TabIndex = 13
@@ -255,6 +264,8 @@ Partial Class frmImportDaily
         'chkScale
         '
         Me.chkScale.AutoSize = True
+        Me.chkScale.Checked = True
+        Me.chkScale.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkScale.Location = New System.Drawing.Point(27, 105)
         Me.chkScale.Name = "chkScale"
         Me.chkScale.Size = New System.Drawing.Size(104, 17)
@@ -264,7 +275,7 @@ Partial Class frmImportDaily
         '
         'cmdSaveSpecs
         '
-        Me.cmdSaveSpecs.Location = New System.Drawing.Point(49, 103)
+        Me.cmdSaveSpecs.Location = New System.Drawing.Point(41, 103)
         Me.cmdSaveSpecs.Name = "cmdSaveSpecs"
         Me.cmdSaveSpecs.Size = New System.Drawing.Size(111, 25)
         Me.cmdSaveSpecs.TabIndex = 24
@@ -273,7 +284,7 @@ Partial Class frmImportDaily
         '
         'cmdLoadSpecs
         '
-        Me.cmdLoadSpecs.Location = New System.Drawing.Point(176, 103)
+        Me.cmdLoadSpecs.Location = New System.Drawing.Point(168, 103)
         Me.cmdLoadSpecs.Name = "cmdLoadSpecs"
         Me.cmdLoadSpecs.Size = New System.Drawing.Size(111, 25)
         Me.cmdLoadSpecs.TabIndex = 25
@@ -292,17 +303,17 @@ Partial Class frmImportDaily
         Me.pnlHeaders.Controls.Add(Me.lblColumns)
         Me.pnlHeaders.Controls.Add(Me.lblFieldName)
         Me.pnlHeaders.Enabled = False
-        Me.pnlHeaders.Location = New System.Drawing.Point(539, 41)
+        Me.pnlHeaders.Location = New System.Drawing.Point(622, 41)
         Me.pnlHeaders.Name = "pnlHeaders"
         Me.pnlHeaders.Padding = New System.Windows.Forms.Padding(1, 0, 1, 1)
-        Me.pnlHeaders.Size = New System.Drawing.Size(354, 134)
+        Me.pnlHeaders.Size = New System.Drawing.Size(333, 134)
         Me.pnlHeaders.TabIndex = 26
         '
         'lblColumnHeaders
         '
         Me.lblColumnHeaders.AutoSize = True
         Me.lblColumnHeaders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblColumnHeaders.Location = New System.Drawing.Point(125, 1)
+        Me.lblColumnHeaders.Location = New System.Drawing.Point(89, 1)
         Me.lblColumnHeaders.Name = "lblColumnHeaders"
         Me.lblColumnHeaders.Size = New System.Drawing.Size(149, 13)
         Me.lblColumnHeaders.TabIndex = 26
@@ -354,15 +365,15 @@ Partial Class frmImportDaily
         '
         'txtStn
         '
-        Me.txtStn.Location = New System.Drawing.Point(218, 102)
+        Me.txtStn.Location = New System.Drawing.Point(207, 103)
         Me.txtStn.Name = "txtStn"
-        Me.txtStn.Size = New System.Drawing.Size(240, 20)
+        Me.txtStn.Size = New System.Drawing.Size(140, 20)
         Me.txtStn.TabIndex = 31
         '
         'lblStn
         '
         Me.lblStn.AutoSize = True
-        Me.lblStn.Location = New System.Drawing.Point(158, 107)
+        Me.lblStn.Location = New System.Drawing.Point(147, 107)
         Me.lblStn.Name = "lblStn"
         Me.lblStn.Size = New System.Drawing.Size(54, 13)
         Me.lblStn.TabIndex = 32
@@ -387,53 +398,125 @@ Partial Class frmImportDaily
         Me.lblTRecords.Text = "Total Records"
         Me.lblTRecords.Visible = False
         '
-        'lblStnEror
+        'lblElmCode
         '
-        Me.lblStnEror.AutoSize = True
-        Me.lblStnEror.Location = New System.Drawing.Point(29, 616)
-        Me.lblStnEror.Name = "lblStnEror"
-        Me.lblStnEror.Size = New System.Drawing.Size(70, 13)
-        Me.lblStnEror.TabIndex = 35
-        Me.lblStnEror.Text = "Station Errors"
-        Me.lblStnEror.Visible = False
+        Me.lblElmCode.AutoSize = True
+        Me.lblElmCode.Location = New System.Drawing.Point(374, 107)
+        Me.lblElmCode.Name = "lblElmCode"
+        Me.lblElmCode.Size = New System.Drawing.Size(73, 13)
+        Me.lblElmCode.TabIndex = 40
+        Me.lblElmCode.Text = "Element Code"
         '
-        'lblElmeror
+        'txtElmCode
         '
-        Me.lblElmeror.AutoSize = True
-        Me.lblElmeror.Location = New System.Drawing.Point(293, 618)
-        Me.lblElmeror.Name = "lblElmeror"
-        Me.lblElmeror.Size = New System.Drawing.Size(75, 13)
-        Me.lblElmeror.TabIndex = 36
-        Me.lblElmeror.Text = "Element Errors"
-        Me.lblElmeror.Visible = False
+        Me.txtElmCode.Location = New System.Drawing.Point(449, 103)
+        Me.txtElmCode.Name = "txtElmCode"
+        Me.txtElmCode.Size = New System.Drawing.Size(79, 20)
+        Me.txtElmCode.TabIndex = 39
         '
-        'lstStations
+        'grpSummary
         '
-        Me.lstStations.FormattingEnabled = True
-        Me.lstStations.Location = New System.Drawing.Point(101, 614)
-        Me.lstStations.Name = "lstStations"
-        Me.lstStations.Size = New System.Drawing.Size(119, 30)
-        Me.lstStations.TabIndex = 37
-        Me.lstStations.Visible = False
+        Me.grpSummary.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.grpSummary.Controls.Add(Me.optMonthly)
+        Me.grpSummary.Controls.Add(Me.optDekadal)
+        Me.grpSummary.Location = New System.Drawing.Point(342, 36)
+        Me.grpSummary.Name = "grpSummary"
+        Me.grpSummary.Padding = New System.Windows.Forms.Padding(1)
+        Me.grpSummary.Size = New System.Drawing.Size(195, 41)
+        Me.grpSummary.TabIndex = 42
+        Me.grpSummary.TabStop = False
+        Me.grpSummary.Text = "Summarized Data Import"
+        '
+        'optMonthly
+        '
+        Me.optMonthly.AutoSize = True
+        Me.optMonthly.Enabled = False
+        Me.optMonthly.Location = New System.Drawing.Point(122, 18)
+        Me.optMonthly.Name = "optMonthly"
+        Me.optMonthly.Size = New System.Drawing.Size(62, 17)
+        Me.optMonthly.TabIndex = 2
+        Me.optMonthly.Text = "Monthly"
+        Me.optMonthly.UseVisualStyleBackColor = True
+        '
+        'optDekadal
+        '
+        Me.optDekadal.AutoSize = True
+        Me.optDekadal.Location = New System.Drawing.Point(17, 18)
+        Me.optDekadal.Name = "optDekadal"
+        Me.optDekadal.Size = New System.Drawing.Size(65, 17)
+        Me.optDekadal.TabIndex = 1
+        Me.optDekadal.Text = "Dekadal"
+        Me.optDekadal.UseVisualStyleBackColor = True
+        '
+        'pnlErrors
+        '
+        Me.pnlErrors.Controls.Add(Me.cmdSaveErrors)
+        Me.pnlErrors.Controls.Add(Me.lstElements)
+        Me.pnlErrors.Controls.Add(Me.lstStations)
+        Me.pnlErrors.Controls.Add(Me.lblElmeror)
+        Me.pnlErrors.Controls.Add(Me.lblStnEror)
+        Me.pnlErrors.Location = New System.Drawing.Point(15, 610)
+        Me.pnlErrors.Name = "pnlErrors"
+        Me.pnlErrors.Size = New System.Drawing.Size(587, 45)
+        Me.pnlErrors.TabIndex = 44
+        Me.pnlErrors.Visible = False
+        '
+        'cmdSaveErrors
+        '
+        Me.cmdSaveErrors.Location = New System.Drawing.Point(466, 17)
+        Me.cmdSaveErrors.Name = "cmdSaveErrors"
+        Me.cmdSaveErrors.Size = New System.Drawing.Size(105, 25)
+        Me.cmdSaveErrors.TabIndex = 48
+        Me.cmdSaveErrors.Text = "Save Errors to File"
+        Me.cmdSaveErrors.UseVisualStyleBackColor = True
         '
         'lstElements
         '
         Me.lstElements.FormattingEnabled = True
-        Me.lstElements.Location = New System.Drawing.Point(372, 614)
+        Me.lstElements.Location = New System.Drawing.Point(352, 14)
         Me.lstElements.Name = "lstElements"
         Me.lstElements.Size = New System.Drawing.Size(106, 30)
-        Me.lstElements.TabIndex = 38
+        Me.lstElements.TabIndex = 47
         Me.lstElements.Visible = False
+        '
+        'lstStations
+        '
+        Me.lstStations.FormattingEnabled = True
+        Me.lstStations.Location = New System.Drawing.Point(81, 14)
+        Me.lstStations.Name = "lstStations"
+        Me.lstStations.Size = New System.Drawing.Size(119, 30)
+        Me.lstStations.TabIndex = 46
+        Me.lstStations.Visible = False
+        '
+        'lblElmeror
+        '
+        Me.lblElmeror.AutoSize = True
+        Me.lblElmeror.Location = New System.Drawing.Point(273, 18)
+        Me.lblElmeror.Name = "lblElmeror"
+        Me.lblElmeror.Size = New System.Drawing.Size(75, 13)
+        Me.lblElmeror.TabIndex = 45
+        Me.lblElmeror.Text = "Element Errors"
+        Me.lblElmeror.Visible = False
+        '
+        'lblStnEror
+        '
+        Me.lblStnEror.AutoSize = True
+        Me.lblStnEror.Location = New System.Drawing.Point(9, 16)
+        Me.lblStnEror.Name = "lblStnEror"
+        Me.lblStnEror.Size = New System.Drawing.Size(70, 13)
+        Me.lblStnEror.TabIndex = 44
+        Me.lblStnEror.Text = "Station Errors"
+        Me.lblStnEror.Visible = False
         '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(970, 644)
-        Me.Controls.Add(Me.lstElements)
-        Me.Controls.Add(Me.lstStations)
-        Me.Controls.Add(Me.lblElmeror)
-        Me.Controls.Add(Me.lblStnEror)
+        Me.ClientSize = New System.Drawing.Size(970, 663)
+        Me.Controls.Add(Me.pnlErrors)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.lblElmCode)
+        Me.Controls.Add(Me.txtElmCode)
         Me.Controls.Add(Me.lblTRecords)
         Me.Controls.Add(Me.lblDefaultObsHour)
         Me.Controls.Add(Me.lblStn)
@@ -464,6 +547,10 @@ Partial Class frmImportDaily
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeaders.ResumeLayout(False)
         Me.pnlHeaders.PerformLayout()
+        Me.grpSummary.ResumeLayout(False)
+        Me.grpSummary.PerformLayout()
+        Me.pnlErrors.ResumeLayout(False)
+        Me.pnlErrors.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -504,8 +591,15 @@ Partial Class frmImportDaily
     Friend WithEvents lblStn As System.Windows.Forms.Label
     Friend WithEvents lblDefaultObsHour As System.Windows.Forms.Label
     Friend WithEvents lblTRecords As System.Windows.Forms.Label
-    Friend WithEvents lblStnEror As Label
-    Friend WithEvents lblElmeror As Label
-    Friend WithEvents lstStations As ListBox
+    Friend WithEvents lblElmCode As Label
+    Friend WithEvents txtElmCode As TextBox
+    Friend WithEvents grpSummary As GroupBox
+    Friend WithEvents optMonthly As RadioButton
+    Friend WithEvents optDekadal As RadioButton
+    Friend WithEvents pnlErrors As Panel
+    Friend WithEvents cmdSaveErrors As Button
     Friend WithEvents lstElements As ListBox
+    Friend WithEvents lstStations As ListBox
+    Friend WithEvents lblElmeror As Label
+    Friend WithEvents lblStnEror As Label
 End Class

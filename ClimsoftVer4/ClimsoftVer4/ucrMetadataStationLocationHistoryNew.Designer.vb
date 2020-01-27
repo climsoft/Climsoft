@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrForm
-    Inherits System.Windows.Forms.UserControl
+Partial Class ucrMetadataStationLocationHistoryNew
+    Inherits ClimsoftVer4.ucrPage
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _

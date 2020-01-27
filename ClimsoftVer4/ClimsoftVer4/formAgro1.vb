@@ -914,7 +914,11 @@
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
+        'frmDataTransferProgress.lblFormName.Text = "form_agro1"
+        'frmDataTransferProgress.Text = frmDataTransferProgress.Text & " for " & frmDataTransferProgress.lblFormName.Text
         frmDataTransferProgress.Show()
+
+        'Exit Sub
 
         'Upload data to observationInitial table
         Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
