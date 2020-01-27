@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmDBUtilities
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class frmDBUtilities
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDBUtilities))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ImportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,16 +57,12 @@ Partial Class frmDBUtilities
         Me.grpbxUpload = New System.Windows.Forms.GroupBox()
         Me.cmdUpload = New System.Windows.Forms.Button()
         Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Dbtpanel2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.Dbtpanel1.SuspendLayout()
         Me.grpbxUpload.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -103,7 +98,7 @@ Partial Class frmDBUtilities
         '
         Me.CLICOMDailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DailyToolStripMenuItem1, Me.SynopToolStripMenuItem, Me.HourlyToolStripMenuItem})
         Me.CLICOMDailyToolStripMenuItem.Name = "CLICOMDailyToolStripMenuItem"
-        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CLICOMDailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.CLICOMDailyToolStripMenuItem.Text = "CLICOM"
         '
         'DailyToolStripMenuItem1
@@ -127,20 +122,20 @@ Partial Class frmDBUtilities
         'AWSToolStripMenuItem
         '
         Me.AWSToolStripMenuItem.Name = "AWSToolStripMenuItem"
-        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AWSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.AWSToolStripMenuItem.Text = "AWS "
         '
         'NOAAGTSToolStripMenuItem
         '
         Me.NOAAGTSToolStripMenuItem.Name = "NOAAGTSToolStripMenuItem"
-        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.NOAAGTSToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.NOAAGTSToolStripMenuItem.Text = "NOAA GTS"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripHourly, Me.ToolStripDaily, Me.ToolStripSynoptic, Me.MultipleElementColumnsToolStripMenuItem, Me.MonthlyToolStripMenuItem2})
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.DailyToolStripMenuItem.Text = "Text Files"
         '
         'ToolStripHourly
@@ -170,16 +165,14 @@ Partial Class frmDBUtilities
         '
         'MonthlyToolStripMenuItem2
         '
-        Me.MonthlyToolStripMenuItem2.Enabled = False
         Me.MonthlyToolStripMenuItem2.Name = "MonthlyToolStripMenuItem2"
         Me.MonthlyToolStripMenuItem2.Size = New System.Drawing.Size(215, 22)
         Me.MonthlyToolStripMenuItem2.Text = "Monthly"
-        Me.MonthlyToolStripMenuItem2.Visible = False
         '
         'CLIMSOFTV3ToolStripMenuItem
         '
         Me.CLIMSOFTV3ToolStripMenuItem.Name = "CLIMSOFTV3ToolStripMenuItem"
-        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CLIMSOFTV3ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.CLIMSOFTV3ToolStripMenuItem.Text = "Data Migration"
         '
         'GenerateValuesToolStripMenuItem
@@ -354,8 +347,6 @@ Partial Class frmDBUtilities
         Me.ToolStrip1.PerformLayout()
         Me.Dbtpanel1.ResumeLayout(False)
         Me.grpbxUpload.ResumeLayout(False)
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -394,6 +385,4 @@ Partial Class frmDBUtilities
     Friend WithEvents DailyToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents SynopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HourlyToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents BindingSource2 As BindingSource
 End Class

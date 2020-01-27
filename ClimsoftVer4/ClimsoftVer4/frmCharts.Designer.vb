@@ -34,6 +34,8 @@ Partial Class frmCharts
         Me.Label2 = New System.Windows.Forms.Label()
         Me.MSChart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Frame1 = New System.Windows.Forms.GroupBox()
+        Me.grpColors = New System.Windows.Forms.GroupBox()
+        Me.lstSeries = New System.Windows.Forms.ListBox()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
         Me.optAnnual = New System.Windows.Forms.RadioButton()
         Me.optMonthly = New System.Windows.Forms.RadioButton()
@@ -46,9 +48,11 @@ Partial Class frmCharts
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.dlgChart = New System.Windows.Forms.SaveFileDialog()
         Me.cmdview = New System.Windows.Forms.Button()
+        Me.clrdlg = New System.Windows.Forms.ColorDialog()
         Me.Frame6.SuspendLayout()
         CType(Me.MSChart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Frame1.SuspendLayout()
+        Me.grpColors.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,7 +64,7 @@ Partial Class frmCharts
         Me.Frame6.Controls.Add(Me.Label3)
         Me.Frame6.Controls.Add(Me.txtchtitle)
         Me.Frame6.Controls.Add(Me.Label2)
-        Me.Frame6.Location = New System.Drawing.Point(388, 17)
+        Me.Frame6.Location = New System.Drawing.Point(271, 17)
         Me.Frame6.Name = "Frame6"
         Me.Frame6.Size = New System.Drawing.Size(511, 90)
         Me.Frame6.TabIndex = 1
@@ -136,6 +140,7 @@ Partial Class frmCharts
         '
         'Frame1
         '
+        Me.Frame1.Controls.Add(Me.grpColors)
         Me.Frame1.Controls.Add(Me.grpSummary)
         Me.Frame1.Controls.Add(Me.Frame6)
         Me.Frame1.Location = New System.Drawing.Point(12, 423)
@@ -145,6 +150,25 @@ Partial Class frmCharts
         Me.Frame1.TabStop = False
         Me.Frame1.Text = "Chart Options"
         '
+        'grpColors
+        '
+        Me.grpColors.Controls.Add(Me.lstSeries)
+        Me.grpColors.Location = New System.Drawing.Point(800, 17)
+        Me.grpColors.Name = "grpColors"
+        Me.grpColors.Size = New System.Drawing.Size(141, 83)
+        Me.grpColors.TabIndex = 5
+        Me.grpColors.TabStop = False
+        Me.grpColors.Text = "Set Series Colours"
+        Me.grpColors.Visible = False
+        '
+        'lstSeries
+        '
+        Me.lstSeries.FormattingEnabled = True
+        Me.lstSeries.Location = New System.Drawing.Point(20, 24)
+        Me.lstSeries.Name = "lstSeries"
+        Me.lstSeries.Size = New System.Drawing.Size(101, 56)
+        Me.lstSeries.TabIndex = 5
+        '
         'grpSummary
         '
         Me.grpSummary.Controls.Add(Me.optAnnual)
@@ -153,7 +177,7 @@ Partial Class frmCharts
         Me.grpSummary.Controls.Add(Me.optDaily)
         Me.grpSummary.Location = New System.Drawing.Point(47, 24)
         Me.grpSummary.Name = "grpSummary"
-        Me.grpSummary.Size = New System.Drawing.Size(289, 76)
+        Me.grpSummary.Size = New System.Drawing.Size(202, 76)
         Me.grpSummary.TabIndex = 2
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Data Summary Type"
@@ -274,6 +298,7 @@ Partial Class frmCharts
         Me.Frame6.PerformLayout()
         CType(Me.MSChart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Frame1.ResumeLayout(False)
+        Me.grpColors.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
         Me.grpSummary.PerformLayout()
         Me.ResumeLayout(False)
@@ -301,4 +326,7 @@ Partial Class frmCharts
     Friend WithEvents cmdHelp As Button
     Friend WithEvents dlgChart As SaveFileDialog
     Friend WithEvents cmdview As Button
+    Friend WithEvents clrdlg As ColorDialog
+    Friend WithEvents grpColors As GroupBox
+    Friend WithEvents lstSeries As ListBox
 End Class
