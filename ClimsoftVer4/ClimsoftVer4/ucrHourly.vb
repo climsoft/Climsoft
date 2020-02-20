@@ -48,6 +48,10 @@
             ' ucrNavigation.NewRecord() 'temporary
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourly", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

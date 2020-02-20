@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmUpdateDBfromQCReport
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class frmUpdateDBfromQCReport
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.txtQCReportOriginal = New System.Windows.Forms.TextBox()
         Me.lblQCReportOriginal = New System.Windows.Forms.Label()
         Me.txtQCReportUpdated = New System.Windows.Forms.TextBox()
@@ -33,8 +32,6 @@ Partial Class frmUpdateDBfromQCReport
         Me.btnBrowseQCOriginal = New System.Windows.Forms.Button()
         Me.btnQCUpdated = New System.Windows.Forms.Button()
         Me.lblProcessStatus = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtQCReportOriginal
@@ -143,7 +140,6 @@ Partial Class frmUpdateDBfromQCReport
         Me.MinimizeBox = False
         Me.Name = "frmUpdateDBfromQCReport"
         Me.Text = "Update ObservationInitial from QC Report"
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -158,5 +154,4 @@ Partial Class frmUpdateDBfromQCReport
     Friend WithEvents btnBrowseQCOriginal As System.Windows.Forms.Button
     Friend WithEvents btnQCUpdated As System.Windows.Forms.Button
     Friend WithEvents lblProcessStatus As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
 End Class

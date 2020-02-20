@@ -1,4 +1,5 @@
-﻿Public Class frmMonitoring
+﻿
+Public Class frmMonitoring
     Public ds As New DataSet
     Public da As MySql.Data.MySqlClient.MySqlDataAdapter
     Public conn As New MySql.Data.MySqlClient.MySqlConnection
@@ -176,6 +177,7 @@
 
         Try
             kt = 0
+
             For i = 0 To cboUser.Items.Count - 1
                 kount = 0
                 For k = 0 To cboForms.Items.Count - 1
@@ -192,12 +194,16 @@
                     da.Fill(ds, "UserRecords")
                     'MsgBox(ds.Tables("UserRecords").Rows.Count)
                     For j = 0 To ds.Tables("UserRecords").Rows.Count - 1
-                        If ds.Tables("UserRecords").Rows(j).Item(0) = cboUser.Items(i) Then
-                            kount = kount + 1
+                        'MsgBox(ds.Tables("UserRecords").Rows(j).Item(0))
+                        If Not IsDBNull(ds.Tables("UserRecords").Rows(j).Item(0)) Then
+                            If ds.Tables("UserRecords").Rows(j).Item(0) = cboUser.Items(i) Then
+                                kount = kount + 1
+                            End If
                         End If
                     Next j
                 Next k
                 kt = kt + kount
+                'MsgBox(kt)
                 ' Update user record
                 sql = "UPDATE userrecords set recsdone = " & kount & " where username ='" & cboUser.Items(i) & "';"
                 qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -224,7 +230,7 @@
             ListViewRecs.Columns.Add("Performance % ", 150, HorizontalAlignment.Right)
 
             'sql = "Select * from userrecords"
-            sql = "select username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance from userrecords;"
+            sql = "SELECT username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance FROM userrecords WHERE recsexpt IS NOT NULL;"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
@@ -232,16 +238,20 @@
             da.Fill(ds, "Performs")
 
             For i = 0 To ds.Tables("Performs").Rows.Count - 1
+                If IsDBNull(ds.Tables("Performs").Rows(i).Item(0)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(1)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(2)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(3)) Then Continue For
+
                 Rec(0) = ds.Tables("Performs").Rows(i).Item(0)
                 Rec(1) = ds.Tables("Performs").Rows(i).Item(1)
+
                 ' Get the target value if is set
-                If Not IsDBNull(ds.Tables("Performs").Rows(i).Item(2)) Then
-                    Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
-                Else
-                    MsgBox("Target value not set. Please check the Settings")
-                    Exit For
-                End If
+                Rec(2) = ds.Tables("Performs").Rows(i).Item(2)
                 Rec(3) = ds.Tables("Performs").Rows(i).Item(3)
+                'Else
+                'Continue For
+                'MsgBox("Target value not set. Please check the Settings")
+                ''Exit For
+                'End If
+                'If Not IsDBNull(ds.Tables("Performs").Rows(i).Item(3)) Then Rec(3) = ds.Tables("Performs").Rows(i).Item(3)
 
                 'perf = (ds.Tables("Records").Rows(i).Item(1) / ds.Tables("Records").Rows(i).Item(2)) * 100
                 'Rec(3) = Format(perf, "0.0") 'ds.Tables("Records").Rows(i).Item(3)
@@ -249,6 +259,7 @@
                 Dim itms = New ListViewItem(Rec)
                 ListViewRecs.Items.Add(itms)
             Next i
+
             lblTrecs.Text = ds.Tables("Performs").Rows.Count
             Me.Cursor = Cursors.Default
         Catch x As Exception
@@ -382,9 +393,14 @@
                 If optTargets.Checked Then ' Targets Settings
                     For i = 0 To .Rows.Count - 1
                         usr = .Rows(i).Cells(0).Value
-                        expt = .Rows(i).Cells(1).Value
+                        If Not IsDBNull(.Rows(i).Cells(1).Value) And IsNumeric(.Rows(i).Cells(1).Value) Then
+                            expt = .Rows(i).Cells(1).Value
+                            sql = "UPDATE userrecords set recsexpt = '" & Int(expt) & "' where username ='" & usr & "';"
+                        Else
+                            sql = "UPDATE userrecords set recsexpt = NULL where username ='" & usr & "';"
+                        End If
+
                         ' Update user record
-                        sql = "UPDATE userrecords set recsexpt = '" & expt & "' where username ='" & usr & "';"
                         qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                         qwry.CommandTimeout = 0
                         qwry.ExecuteNonQuery()
@@ -457,10 +473,10 @@
             End If
 
             If optKeyEntryForm.Checked Then
-                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
+                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " &
                       "where " & MarkType & " and dataForm ='" & cboForms.Text & "' and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
             Else
-                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " & _
+                sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " &
                       "where " & MarkType & " and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
 
             End If
@@ -522,7 +538,7 @@
         End If
 
         If Not Save_Output("verified", savefile) Then MsgBox("Can't output file")
-        
+
     End Sub
 
     Function Save_Output(tbl As String, flnm As String) As Boolean
@@ -589,3 +605,4 @@
         lblTrecs.Text = 0
     End Sub
 End Class
+

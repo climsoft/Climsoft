@@ -19,7 +19,7 @@
         frmDataTransferProgress.Show()
 
         'Upload data to observationInitial table
-        Dim strSQL As String, stnId As String, elemCode As Integer, obsDate As String, obsVal As String, obsFlag, mark1 As String, _
+        Dim strSQL As String, stnId As String, elemCode As Integer, obsDate As String, obsVal As String, obsFlag, mark1 As String,
             qcStatus As Integer, acquisitionType As Integer, obsLevel As String, yyyy As Integer, mm As String, dd As String, hh As String
 
         Dim ds As New DataSet
@@ -38,8 +38,8 @@
         conn.ConnectionString = MyConnectionString
         conn.Open()
         'First upload records with QC status =1
-        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " & _
-            "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear & _
+        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " &
+            "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
             " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -101,8 +101,8 @@
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
 
                 'Generate SQL string for inserting data into observationFinal table
-                strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,mark) " & _
-                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,mark) " &
+                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                     qcStatus & "," & acquisitionType & "," & mark1 & ")"
 
                 ' Create the Command for executing query and set its properties
@@ -132,8 +132,8 @@
         conn.Open()
 
         'Next upload records with QC status =2
-        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " & _
-            "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear & _
+        sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " &
+            "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
             " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=2"
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -192,8 +192,8 @@
             acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
 
             'Generate SQL string for replacing existing records of same Key with records with qcStatus 2
-            strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+            strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
+                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                 qcStatus & "," & acquisitionType & ")"
 
             ' Create the Command for executing query and set its properties
@@ -339,7 +339,7 @@
         'lblTableRecords.Refresh()
 
         'Upload data to observationInitial table
-        Dim strSQL, stnId, elemCode, obsVal, obsFlag, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
+        Dim strSQL, stnId, elemCode, obsVal, obsFlag, period, mark1, qcStatus, obsLevel, obsDate, mm, dd, hh, mnt, ss As String
         Dim acquisitionType, yyyy As Integer
 
         Dim ds As New DataSet
@@ -399,6 +399,7 @@
 
             ' Set the stations and elements selection conditions
             If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
+                Me.Cursor = Cursors.Default
                 MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
                 Exit Sub
             Else
@@ -415,15 +416,15 @@
 
 
             '------
-            ds.Clear()
+            'ds.Clear()
             MyConnectionString = frmLogin.txtusrpwd.Text
             ' conn.Close()
             conn.ConnectionString = MyConnectionString
             conn.Open()
             'First upload records with QC status =1
 
-            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType,mark " & _
-                "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear & _
+            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType,mark " &
+                "FROM observationInitial WHERE " & stnelm_selected & " year(obsDateTime) between " & beginYear & " AND " & endYear &
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=1;"
 
             'MsgBox(sql)
@@ -434,14 +435,13 @@
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
-
+            ds.Clear()
             da.Fill(ds, "obsInitial")
             ''conn.Close() '
             ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
             'Catch ex As Exception
             '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
             'End Try
-
 
             Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
             maxRows = ds.Tables("obsInitial").Rows.Count
@@ -455,6 +455,7 @@
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da1.SelectCommand.CommandTimeout = 0
+            ds1.Clear()
             da1.Fill(ds1, "elemScale")
 
             elemMaxRows = ds1.Tables("elemScale").Rows.Count
@@ -506,27 +507,44 @@
 
                 obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
 
+                If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then
+                    period = ds.Tables("obsInitial").Rows(n).Item("period")
+                Else
+                    period = "NULL"
+                End If
+
+                'period = ds.Tables("obsInitial").Rows(n).Item("period")
+
                 'Types of bservation values
                 If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
                     obsVal = "NULL"
                     obsFlag = "M"
-                ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Then ' In case of Blanks for obs values
+                ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
                     obsVal = "NULL"
                     obsFlag = "M"
+
                 Else
                     obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
                     obsVal = obsVal * valScale
                 End If
 
+                'If obsFlag = "M" Then Continue For
+
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("flag")) Then obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcStatus")) Then qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
+                'If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then period = ds.Tables("obsInitial").Rows(n).Item("period")
 
                 'Generate SQL string for inserting data into observationFinal table
-
-                strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,mark) " & _
-                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                    qcStatus & "," & acquisitionType & "," & mark1 & ")"
+                If Not chkUpdateRecs.Checked Then
+                    strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark) " &
+                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
+                    period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+                Else
+                    strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period, qcStatus,acquisitionType,mark) " &
+                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
+                     period & "," & qcStatus & "," & acquisitionType & "," & mark1 & ")"
+                End If
 
                 'strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
                 '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
@@ -557,8 +575,8 @@
             conn.Open()
             'Try
             'Next upload records with QC status =2
-            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,qcStatus,acquisitionType " & _
-                "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear & _
+            sql = "SELECT recordedFrom,describedBy,obsdatetime,obsLevel,obsValue,flag,period,qcStatus,acquisitionType " &
+                "FROM observationInitial WHERE year(obsDateTime) between " & beginYear & " AND " & endYear &
                 " AND month(obsDatetime) between " & beginMonth & " AND " & endMonth & " AND qcStatus=2"
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -567,7 +585,6 @@
             da.Fill(ds, "obsInitial")
             ''conn.Close() '
             ' Dim dsObsInitial As New MySql.Data.MySqlClient.MySqlDataAdapter
-
 
             maxRows = ds.Tables("obsInitial").Rows.Count
             Trecs = Trecs + maxRows
@@ -587,6 +604,7 @@
             'End Try
             'MsgBox(7)
             For n = 0 To maxRows - 1
+
                 lblTableRecords.Text = "Uploading records with qcStatus=2"
                 lblTableRecords.Refresh()
 
@@ -626,17 +644,31 @@
                     If elemCode = ds1.Tables("elemScale").Rows(k).Item("elementId") Then valScale = ds1.Tables("elemScale").Rows(k).Item("elementScale")
                 Next k
 
+                'Types of observation values
+                If IsDBNull(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of NULL for obs values
+                    obsVal = "NULL"
+                    obsFlag = "M"
+                ElseIf Len(ds.Tables("obsInitial").Rows(n).Item("obsValue")) = 0 Or Not IsNumeric(ds.Tables("obsInitial").Rows(n).Item("obsValue")) Then ' In case of Blanks for obs values
+                    obsVal = "NULL"
+                    obsFlag = "M"
+                Else
+                    obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
+                    obsVal = obsVal * valScale
+                End If
+
                 obsLevel = ds.Tables("obsInitial").Rows(n).Item("obslevel")
-                obsVal = ds.Tables("obsInitial").Rows(n).Item("obsValue")
-                obsVal = obsVal * valScale
                 obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
-                acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
+
+                ''Generate SQL string for replacing existing records of same Key with records with qcStatus 2
+                'strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType) " &
+                '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "','" & period & "'," &
+                '    qcStatus & "," & acquisitionType & ")"
 
                 'Generate SQL string for replacing existing records of same Key with records with qcStatus 2
-                strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
-                    qcStatus & "," & acquisitionType & ")"
+                ' Modified to only update values in the necessary fields in the record that have been changed 
+                strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag, qcStatus) " &
+                    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & qcStatus & ");"
 
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -652,8 +684,9 @@
                 'End Try
 
                 'Move to next record in dataset
+
             Next n
-            'MsgBox(8)
+
         Catch ex As Exception
             MsgBox(ex.Message)
             lblTableRecords.ForeColor = Color.Red
@@ -681,14 +714,6 @@
     End Sub
 
     Private Sub lblBeginMonth_Click(sender As Object, e As EventArgs) Handles lblBeginMonth.Click
-
-    End Sub
-
-    Private Sub lblBeginYear_Click(sender As Object, e As EventArgs) Handles lblBeginYear.Click
-
-    End Sub
-
-    Private Sub txtBeginYear_TextChanged(sender As Object, e As EventArgs) Handles txtBeginYear.TextChanged
 
     End Sub
 End Class

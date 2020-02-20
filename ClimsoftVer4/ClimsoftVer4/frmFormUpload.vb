@@ -197,6 +197,7 @@ Public Class frmFormUpload
                             dd = (m - st) + 1
                             hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
 
+
                             'If Len(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) > 0 Then obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
                                 'obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
@@ -238,7 +239,11 @@ Public Class frmFormUpload
 
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + flds)) Then obsFlag = dss.Tables(frm_tbl).Rows(n).Item(m + flds)
 
-                            ''If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
+
+                            If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m)) Then
+                                If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
+                            End If
+
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -251,6 +256,7 @@ Public Class frmFormUpload
                             End Try
                             'Get Wind Speed values
                             elemCode = "111"
+
                             If Not IsDBNull(dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))) Then
                                 obsVal = dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2))
                                 If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
@@ -259,6 +265,7 @@ Public Class frmFormUpload
                                 obsFlag = "M"
                             End If
                             ''If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
+
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -291,7 +298,8 @@ Public Class frmFormUpload
                         objCmd.ExecuteNonQuery()
                     Catch x As Exception
                         'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                        MsgBox(x.Message)
+                        'MsgBox(x.Message)
+                        lblDataTransferProgress.Text = "Record No.: " & n + 1 & " skipped due to some errors"
                     End Try
 
                 Next m
@@ -310,7 +318,8 @@ Public Class frmFormUpload
             MsgBox(ex.Message)
             lblDataTransferProgress.ForeColor = Color.Red
             lblDataTransferProgress.Text = "Data transfer Failure !"
-            MsgBox("Check and confirm selections")
+            'MsgBox("Check and confirm selections")
+            MsgBox(ex.Message)
             conns.Close()
         End Try
     End Sub

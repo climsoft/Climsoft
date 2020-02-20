@@ -613,8 +613,9 @@ Public Class dataEntryGlobalRoutines
 
             GetCurrentStation = True
         Catch ex As Exception
-            Return False
             MsgBox(ex.Message)
+            conn.Close()
+            Return False
         End Try
 
     End Function
