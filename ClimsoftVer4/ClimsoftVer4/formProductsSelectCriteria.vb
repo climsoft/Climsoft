@@ -238,7 +238,13 @@ Public Class formProductsSelectCriteria
         Me.Cursor = Cursors.WaitCursor
         ' Define the products application path
         Try
-            ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
+            'MsgBox(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+            'MsgBox(IO.Path.Combine(Application.CommonAppDataPath, "Climsoft4"))
+
+            ProductsPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\"
+            'ProductsPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
 
             If Not IO.Directory.Exists(ProductsPath) Then
                 IO.Directory.CreateDirectory(ProductsPath)
@@ -410,8 +416,9 @@ Public Class formProductsSelectCriteria
                     'Create output file
                     Dim fl As String
 
-                    fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\means.csv"
-
+                    'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\means.csv"
+                    fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\means.csv"
+                    'MsgBox(fl)
                     ' Clear any existing data in the output file and close it
                     FileOpen(11, fl, OpenMode.Output)
                     FileClose(11)
@@ -507,6 +514,16 @@ Public Class formProductsSelectCriteria
                     frmCharts.graphType = "Histograms"
                     frmCharts.Show()
                     'MSCharts(stnlist, elmlist, elmcolmn, sdate, edate, SumAvg, SummaryType, "Histograms")
+                Case "CDT Dekadal"
+                    sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+                    edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+
+                    CDT_Dekadal(sdate, edate)
+                Case "CDT Daily"
+                    sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+                    edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+
+                    CDT_Daily(sdate, edate)
                 Case Else
                     MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
                     'Me.Cursor = Cursors.Default
@@ -730,7 +747,9 @@ Err:
             maxRows = dsp.Tables("observationfinal").Rows.Count
             'MsgBox(maxRows)
             ' Create output file
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
 
             FileOpen(11, fl, OpenMode.Output)
 
@@ -805,7 +824,8 @@ Err:
         Dim conn1 As New OleDb.OleDbConnection
         Dim kount As Long
 
-        fld = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        'fld = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        fld = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
 
         connString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & fld & ";Extended Properties=Text;"
 
@@ -827,7 +847,9 @@ Err:
             kount = dss.Tables("observationfinal").Rows.Count
             'MsgBox(kount)
             ' Create output file
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
 
             FileOpen(101, fl, OpenMode.Output)
 
@@ -870,8 +892,8 @@ Err:
 
         Try
 
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Normals.csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Normals.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Normals.csv"
             FileOpen(102, fl, OpenMode.Output)
 
             sql = "SELECT StationID,Months,Code,MEAN FROM [" & "data_products.csv" & "] ORDER BY StationId,Months" 'GROUP BY StationId,Code,Months, MEAN"
@@ -966,7 +988,8 @@ Err:
 
             maxRows = ds.Tables("observationfinal").Rows.Count
             ' Create a file for each type of observation element
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\GEOCLM-" & abbrev & ".csv"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\GEOCLM-" & abbrev & ".csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\GEOCLM-" & abbrev & ".csv"
 
             FileOpen(11, fl, OpenMode.Output)
 
@@ -1179,7 +1202,8 @@ Err:
                     Exit For
                 End If
                 ' Create a file for each type of observation element
-                fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Instat_" & lstvStations.Items(stn).SubItems(0).Text & "_" & abbrev & ".csv"
+                'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Instat_" & lstvStations.Items(stn).SubItems(0).Text & "_" & abbrev & ".csv"
+                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Instat_" & lstvStations.Items(stn).SubItems(0).Text & "_" & abbrev & ".csv"
 
                 FileOpen(11, fl, OpenMode.Output)
 
@@ -1256,7 +1280,8 @@ Err:
 
             maxRows = ds.Tables("observationfinal").Rows.Count
 
-            f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & lstvStations.Items(stns).SubItems(0).Text & "_Rclimdex.txt"  'data_products.csv"
+            'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & lstvStations.Items(stns).SubItems(0).Text & "_Rclimdex.txt"  'data_products.csv"
+            f1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & lstvStations.Items(stns).SubItems(0).Text & "_Rclimdex.txt"  'data_products.csv"
 
             FileOpen(11, f1, OpenMode.Output)
 
@@ -1294,7 +1319,8 @@ Err:
         maxRows = ds.Tables("observationfinal").Rows.Count
 
         ' Create output file
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+        'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
 
@@ -1336,7 +1362,9 @@ Err:
         Dim stns, elms As Integer
         Try
 
-            f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Xtremes.csv"  'data_products.csv"
+            'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Xtremes.csv"  'data_products.csv"
+            f1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Xtremes.csv"
+
             FileOpen(11, f1, OpenMode.Output)
 
             Write(11, "Station_Id")
@@ -1389,7 +1417,8 @@ Err:
 
         maxRows = ds.Tables("observationfinal").Rows.Count
         'MsgBox(maxRows)
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products.csv"
+        'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products.csv"
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
 
@@ -1470,7 +1499,8 @@ Err:
         maxRows = ds.Tables("observationfinal").Rows.Count
         'MsgBox(maxRows)
 
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+        'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_products.csv"
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
         Write(11, "Station")
@@ -1605,22 +1635,56 @@ Err:
     ' Missing data plotting modules by Victor
 
     Public Sub RefreshStatsCache()
+        Dim constring As String
+
+        constring = frmLogin.txtusrpwd.Text
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        conn.ConnectionString = constring
+        conn.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand
-        cmd.Connection = conn
-        cmd.CommandText = "refresh_stats"
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.ExecuteNonQuery()
+
+        Try
+            cmd.Connection = conn
+            cmd.CommandText = "refresh_stats"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.ExecuteNonQuery()
+            conn.Close()
+        Catch x As Exception
+            MsgBox(x.Message)
+            conn.Close()
+        End Try
+
     End Sub
 
     Public Sub RefreshMissingCache()
-        cmd = New MySql.Data.MySqlClient.MySqlCommand
-        cmd.Connection = conn
-        cmd.CommandText = "REFRESH_data"
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.ExecuteNonQuery()
+        Dim constring As String
+
+        constring = frmLogin.txtusrpwd.Text
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        conn.ConnectionString = conString
+        conn.Open()
+        Try
+            cmd = New MySql.Data.MySqlClient.MySqlCommand
+            cmd.Connection = conn
+            cmd.CommandText = "REFRESH_data"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.ExecuteNonQuery()
+            conn.Close()
+        Catch x As Exception
+            MsgBox(x.Message)
+        conn.Close()
+        End Try
     End Sub
 
     Public Sub GatherStats()
+        Dim constring As String
+
+        constring = frmLogin.txtusrpwd.Text
+        conn = New MySql.Data.MySqlClient.MySqlConnection
+        conn.ConnectionString = constring
+        conn.Open()
+
+
         If lstvStations.Items.Count > 0 And lstvElements.Items.Count > 0 Then
             'MsgBox(lstvStations.Items.Count & " " & lstvElements.Items.Count)
             For i = 0 To lstvStations.Items.Count - 1
@@ -1638,6 +1702,7 @@ Err:
                 Next
             Next
         End If
+        conn.Close()
     End Sub
 
     Private Sub pnlStationsElements_Paint(sender As Object, e As PaintEventArgs) Handles pnlStationsElements.Paint
@@ -1662,7 +1727,8 @@ Err:
                     cmd.ExecuteNonQuery()
                 Next
             Next
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products-missing-records.csv"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products-missing-records.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products-missing-records.csv"
 
             FileOpen(11, fl, OpenMode.Output)
 
@@ -1826,8 +1892,242 @@ Err:
             MsgBox(ex.Message)
         End Try
     End Sub
+    Sub CDT_Dekadal(st As String, ed As String)
+        Dim stnscolmn, f1, stn, lat, lon, elev As String
+        Dim dstn As New DataSet
 
-    Private Sub cmdExtract_DragDrop(sender As Object, e As DragEventArgs) Handles cmdExtract.DragDrop
+        Try
 
+            For k = 0 To lstvElements.Items.Count - 1
+                If lstvElements.Items(k).SubItems(0).Text = 5 Or lstvElements.Items(k).SubItems(0).Text = 18 Or lstvElements.Items(k).SubItems(0).Text = 892 Then
+                    SummaryType = "Sum(obsValue) AS Total"
+                    SumAvg = "SUM"
+                Else ' Avarages for other elements
+                    SummaryType = "Avg(obsValue) AS Mean"
+                    SumAvg = "AVG"
+                End If
+
+                stnlist = ""
+                If lstvStations.Items.Count > 0 Then
+                    stnscolmn = " " & SumAvg & "(IF(recordedFrom = '" & lstvStations.Items(0).SubItems(0).Text & "', value, NULL)) AS '" & lstvStations.Items(0).SubItems(0).Text & "'"
+
+                    For i = 1 To lstvStations.Items.Count - 1
+                        stnscolmn = stnscolmn & ", " & SumAvg & "(IF(recordedFrom = '" & lstvStations.Items(i).SubItems(0).Text & "', value, NULL)) AS '" & lstvStations.Items(i).SubItems(0).Text & "'"
+                    Next
+                End If
+
+                'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\CDT_" & lstvElements.Items(k).SubItems(1).Text & "-" & DateAndTime.Year(st) & "-" & DateAndTime.Year(ed) & ".csv"  'data_products.csv"
+                f1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\CDT_" & lstvElements.Items(k).SubItems(1).Text & "-" & DateAndTime.Year(st) & "-" & DateAndTime.Year(ed) & ".csv"
+
+                FileOpen(11, f1, OpenMode.Output)
+
+                ' Get station locations 
+                sql = "SELECT stationId,longitude,latitude,elevation FROM station"
+
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                dstn.Clear()
+                da.Fill(dstn, "station")
+
+                'For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
+                '    stn = ds.Tables("observationfinal").Columns(i).ColumnName
+                '    For n = 0 To dstn.Tables("station").Rows.Count - 1
+                '        If dstn.Tables("station").Rows(n).Item(0) = stn Then
+
+                ' Print Stations
+                stn = "Stations"
+                lon = "LON"
+                lat = "LAT"
+                elev = "ELEV"
+                For i = 0 To lstvStations.Items.Count - 1
+                    'stn = lstvStations.Items(i).SubItems(0).Text
+                    For j = 0 To dstn.Tables("station").Rows.Count - 1
+                        If dstn.Tables("station").Rows(j).Item(0) = lstvStations.Items(i).SubItems(0).Text Then
+                            stn = stn & "," & dstn.Tables("station").Rows(j).Item(0)
+
+                            ' Stations Longitudes
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(1)) Then
+                                lon = lon & "," & "-9999"
+                            Else
+                                lon = lon & "," & dstn.Tables("station").Rows(j).Item(1)
+                            End If
+                            ' Stations Latitudes
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(2)) Then
+                                lat = lat & "," & "-9999"
+                            Else
+                                lat = lat & "," & dstn.Tables("station").Rows(j).Item(2)
+                            End If
+                            ' Stations Elevations
+
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(3)) Then
+                                elev = elev & "," & "-9999"
+                            Else
+                                elev = elev & "," & dstn.Tables("station").Rows(j).Item(3)
+                            End If
+                            Exit For
+                        End If
+                    Next j
+                Next i
+
+                PrintLine(11, stn)
+                PrintLine(11, lon)
+                PrintLine(11, lat)
+                PrintLine(11, "DEKADAL\" & elev)
+
+
+                sql = "SELECT year(obsDatetime) as YY,month(obsDatetime) as MM, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, " & stnscolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
+                          "WHERE (describedBy = '" & lstvElements.Items(k).SubItems(0).Text & "') and (obsDatetime between '" & st & " ' and '" & ed & "') ORDER BY obsDatetime) t GROUP BY YY, MM,DEKAD;"
+
+                'MsgBox(sql)
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                ds.Clear()
+
+                da.Fill(ds, "observationfinal")
+
+                maxRows = ds.Tables("observationfinal").Rows.Count
+
+                For l = 0 To maxRows - 1
+                    Print(11, ds.Tables("observationfinal").Rows(l).Item(0) & String.Format("{0:00}", ds.Tables("observationfinal").Rows(l).Item(1)) & ds.Tables("observationfinal").Rows(l).Item(2) & ",")
+                    For i = 3 To ds.Tables("observationfinal").Columns.Count - 1
+                        If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
+                            Print(11, "-9999" & ",") 'Chr(9))
+                        Else
+                            Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & ",") 'Chr(9))
+                            'If i = 0 Then 'Year has no decimal point
+                            '    Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & Chr(9))
+                            'Else
+
+                            '    Print(11, String.Format("{0:0.00}", Val(ds.Tables("observationfinal").Rows(l).Item(i))) & Chr(9))
+                            'End If
+                        End If
+
+                    Next
+
+                    PrintLine(11)
+                Next
+
+                FileClose(11)
+                CommonModules.ViewFile(f1)
+
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(11)
+        End Try
+    End Sub
+    Sub CDT_Daily(st As String, ed As String)
+        Dim stnscolmn, f1, stn, lat, lon, elev As String
+        Dim dstn As New DataSet
+
+        Try
+
+            For k = 0 To lstvElements.Items.Count - 1
+                If lstvElements.Items(k).SubItems(0).Text = 5 Or lstvElements.Items(k).SubItems(0).Text = 18 Or lstvElements.Items(k).SubItems(0).Text = 892 Then
+                    SummaryType = "Sum(obsValue) AS Total"
+                    SumAvg = "SUM"
+                Else ' Avarages for other elements
+                    SummaryType = "Avg(obsValue) AS Mean"
+                    SumAvg = "AVG"
+                End If
+
+                stnlist = ""
+                If lstvStations.Items.Count > 0 Then
+                    stnscolmn = " " & SumAvg & "(IF(recordedFrom = '" & lstvStations.Items(0).SubItems(0).Text & "', value, NULL)) AS '" & lstvStations.Items(0).SubItems(0).Text & "'"
+
+                    For i = 1 To lstvStations.Items.Count - 1
+                        stnscolmn = stnscolmn & ", " & SumAvg & "(IF(recordedFrom = '" & lstvStations.Items(i).SubItems(0).Text & "', value, NULL)) AS '" & lstvStations.Items(i).SubItems(0).Text & "'"
+                    Next
+                End If
+
+                'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\CDT_" & lstvElements.Items(k).SubItems(1).Text & "-" & DateAndTime.Year(st) & "-" & DateAndTime.Year(ed) & ".csv"  'data_products.csv"
+                f1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\CDT_" & lstvElements.Items(k).SubItems(1).Text & "-" & DateAndTime.Year(st) & "-" & DateAndTime.Year(ed) & ".csv"
+
+                FileOpen(11, f1, OpenMode.Output)
+
+                ' Get station locations 
+                sql = "SELECT stationId,longitude,latitude,elevation FROM station"
+
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                dstn.Clear()
+                da.Fill(dstn, "station")
+
+                'For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
+                '    stn = ds.Tables("observationfinal").Columns(i).ColumnName
+                '    For n = 0 To dstn.Tables("station").Rows.Count - 1
+                '        If dstn.Tables("station").Rows(n).Item(0) = stn Then
+
+                ' Print Stations
+                stn = "Stations"
+                lon = "LON"
+                lat = "LAT"
+                elev = "ELEV"
+                For i = 0 To lstvStations.Items.Count - 1
+                    'stn = lstvStations.Items(i).SubItems(0).Text
+                    For j = 0 To dstn.Tables("station").Rows.Count - 1
+                        If dstn.Tables("station").Rows(j).Item(0) = lstvStations.Items(i).SubItems(0).Text Then
+                            stn = stn & "," & dstn.Tables("station").Rows(j).Item(0)
+
+                            ' Stations Longitudes
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(1)) Then
+                                lon = lon & "," & "-9999"
+                            Else
+                                lon = lon & "," & dstn.Tables("station").Rows(j).Item(1)
+                            End If
+                            ' Stations Latitudes
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(2)) Then
+                                lat = lat & "," & "-9999"
+                            Else
+                                lat = lat & "," & dstn.Tables("station").Rows(j).Item(2)
+                            End If
+                            ' Stations Elevations
+
+                            If IsDBNull(dstn.Tables("station").Rows(j).Item(3)) Then
+                                elev = elev & "," & "-9999"
+                            Else
+                                elev = elev & "," & dstn.Tables("station").Rows(j).Item(3)
+                            End If
+                            Exit For
+                        End If
+                    Next j
+                Next i
+
+                PrintLine(11, stn)
+                PrintLine(11, lon)
+                PrintLine(11, lat)
+                PrintLine(11, "DAY\" & elev)
+
+
+                sql = "SELECT year(obsDatetime) as YY,month(obsDatetime) as MM, day(obsDatetime) as  DD, " & stnscolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal " &
+                          "WHERE (describedBy = '" & lstvElements.Items(k).SubItems(0).Text & "') and (obsDatetime between '" & st & " ' and '" & ed & "') ORDER BY obsDatetime) t GROUP BY YY, MM,DD;"
+
+                'MsgBox(sql)
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                ds.Clear()
+
+                da.Fill(ds, "observationfinal")
+
+                maxRows = ds.Tables("observationfinal").Rows.Count
+
+                For l = 0 To maxRows - 1
+                    Print(11, ds.Tables("observationfinal").Rows(l).Item(0) & String.Format("{0:00}", ds.Tables("observationfinal").Rows(l).Item(1)) & String.Format("{0:00}", ds.Tables("observationfinal").Rows(l).Item(2)) & ",")
+                    For i = 3 To ds.Tables("observationfinal").Columns.Count - 1
+                        If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
+                            Print(11, "-9999" & ",") 'Chr(9))
+                        Else
+                            Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & ",") 'Chr(9))
+                        End If
+
+                    Next
+
+                    PrintLine(11)
+                Next
+
+                FileClose(11)
+                CommonModules.ViewFile(f1)
+
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(11)
+        End Try
     End Sub
 End Class

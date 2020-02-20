@@ -68,12 +68,17 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim usrStn As New dataEntryGlobalRoutines
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names
             ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
             SaveEnable()
             ucrValueFlagPeriod1.Focus()
+
+            'Get the Station from the last record by the current login user
+            usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
         End If
+
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
         'Change the signature(user) and the DATETIME first before saving 

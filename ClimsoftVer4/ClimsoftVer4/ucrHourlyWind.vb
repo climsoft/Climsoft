@@ -57,6 +57,10 @@ Public Class ucrHourlyWind
             ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"mm", "dd"}, {ucrMonth, ucrDay}, ucrYear:=ucrYearSelector)
             'SaveEnable()
             ucrDirectionSpeedFlag0.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourlywind", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

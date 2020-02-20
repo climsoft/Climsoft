@@ -41,6 +41,7 @@ Partial Class frmUploadToObsFinal
         Me.cmdUploadData = New System.Windows.Forms.Button()
         Me.txtDataTransferProgress = New System.Windows.Forms.TextBox()
         Me.lblTableRecords = New System.Windows.Forms.Label()
+        Me.chkUpdateRecs = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lblProcessingStatus
@@ -225,11 +226,22 @@ Partial Class frmUploadToObsFinal
         Me.lblTableRecords.TabIndex = 32
         Me.lblTableRecords.Text = "Data transfer in progress"
         '
+        'chkUpdateRecs
+        '
+        Me.chkUpdateRecs.AutoSize = True
+        Me.chkUpdateRecs.Location = New System.Drawing.Point(605, 357)
+        Me.chkUpdateRecs.Name = "chkUpdateRecs"
+        Me.chkUpdateRecs.Size = New System.Drawing.Size(137, 17)
+        Me.chkUpdateRecs.TabIndex = 33
+        Me.chkUpdateRecs.Text = "Update existing records"
+        Me.chkUpdateRecs.UseVisualStyleBackColor = True
+        '
         'frmUploadToObsFinal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 463)
+        Me.ClientSize = New System.Drawing.Size(748, 466)
+        Me.Controls.Add(Me.chkUpdateRecs)
         Me.Controls.Add(Me.lblTableRecords)
         Me.Controls.Add(Me.txtDataTransferProgress)
         Me.Controls.Add(Me.cmdUploadData)
@@ -276,4 +288,5 @@ Partial Class frmUploadToObsFinal
     Friend WithEvents cmdUploadData As System.Windows.Forms.Button
     Friend WithEvents txtDataTransferProgress As System.Windows.Forms.TextBox
     Friend WithEvents lblTableRecords As System.Windows.Forms.Label
+    Friend WithEvents chkUpdateRecs As CheckBox
 End Class
