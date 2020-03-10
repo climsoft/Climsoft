@@ -75,6 +75,9 @@ Public Class DataStructure
     ''' </summary>
     Public Event DataChanged()
 
+    Private strVOld As String = ".v_old"
+    Private strUpdateType As String = ".update_type"
+
     ''' <summary>
     ''' Set the name of the table in the database this DataStructure links to.
     ''' </summary>
@@ -103,6 +106,8 @@ Public Class DataStructure
     Private Sub InitialiseWriteTable()
         If dtbReadTable IsNot Nothing Then
             dtbWriteTable = dtbReadTable.Clone()
+            dtbWriteTable.Columns.Add(strVOld, GetType(Integer))
+            dtbWriteTable.Columns.Add(strUpdateType, GetType(Integer))
         End If
     End Sub
 
@@ -209,20 +214,86 @@ Public Class DataStructure
         DataStruct.UpdateTable(iActionTypeID)
     End Sub
 
+    Public Sub TestUpdateTable()
+        dtbReadTable = New DataTable
+        dtbReadTable.Columns.Add(strId, GetType(Integer))
+        dtbReadTable.Columns.Add(strVersionNumber, GetType(Integer))
+        dtbReadTable.Columns.Add("value", GetType(String))
+        dtbReadTable.Columns.Add(strCurrent, GetType(Integer))
+
+        dtbReadTable.Rows.Add(1, 1, "a", 1)
+        dtbReadTable.Rows.Add(2, 1, "b", 1)
+        dtbReadTable.Rows.Add(3, 1, "c", 1)
+        dtbReadTable.Rows.Add(4, 1, "d", 1)
+
+        dtbWriteTable = dtbReadTable.Clone()
+        dtbWriteTable.Columns.Add(strVOld, GetType(Integer))
+        dtbWriteTable.Columns.Add(strUpdateType, GetType(Integer))
+
+        dtbWriteTable.Rows.Add(1, 2, "A", 1, 1, Enumerations.UpdateType.Correction)
+        dtbWriteTable.Rows.Add(3, 1, "c", DBNull.Value, 1, Enumerations.UpdateType.Delete)
+        dtbWriteTable.Rows.Add(4, 2, "dd", 2, 1, Enumerations.UpdateType.EventChange)
+        UpdateTable(1)
+    End Sub
+
     Public Sub UpdateTable(iActionID As Integer)
+        Dim dtbUpdateTable As DataTable
+        Dim dtbAuditTable As DataTable
+        Dim iUpdateType As Integer
+        Dim dtbWriteTableCopy As DataTable
+        Dim rowNewWrite As DataRow
+        Dim strSelectExp As String
+        Dim drowsReadRows() As DataRow
+        Dim rowReadRow As DataRow
+        Dim rowUpdateReadRow As DataRow
+
         ' produce table from the read and write table that will corresponds to the 'add's and 'update's of that table
         ' STEPS
         ' 1. Make the update table as a Clone() of the read table
+        dtbUpdateTable = dtbReadTable.Clone()
+
+        dtbWriteTableCopy = dtbWriteTable.Copy()
+        dtbWriteTableCopy.Columns.Remove(strVOld)
+        dtbWriteTableCopy.Columns.Remove(strUpdateType)
         ' 2. Make a blank audit table to add entries to
+        ' dtbAuditTable = 
         ' 3. Loop through the write table and:
-        '    a) read the update type from the write table
-        '    b) add a row for each row to the update table, (unless update type = delete)
-        '    c) add a row for an edit to the read table if neccessary
-        '    d) produce the audit record to be added to the audit write table
+        For i As Integer = 0 To dtbWriteTable.Rows.Count - 1
+            ' a) read the update type from the write table
+            iUpdateType = dtbWriteTable.Rows(i).Field(Of Integer)(strUpdateType)
+            ' b) add a row for each row to the update table
+            '    (current value should be correct in dtbWriteTable at this point)
+            '    for a delete, current value will be NULL so the "new" row is actually an update to an existing row
+            dtbUpdateTable.ImportRow(dtbWriteTableCopy.Rows(i))
+            rowNewWrite = dtbUpdateTable.Rows(dtbUpdateTable.Rows.Count - 1)
+            ' c) add a row for an edit to the read table if neccessary
+            ' Only a correction needs an edit to the read data (a change for a delete is in the write table already)
+            If iUpdateType = Enumerations.UpdateType.Correction Then
+                strSelectExp = strId & " = " & dtbWriteTable.Rows(i).Field(Of Integer)(strId) & " and " & strVersionNumber & " = " & dtbWriteTable.Rows(i).Field(Of Integer)(strVOld)
+                drowsReadRows = dtbReadTable.Select(strSelectExp)
+                If drowsReadRows.Count = 1 Then
+                    rowReadRow = drowsReadRows(0)
+                    dtbUpdateTable.ImportRow(rowReadRow)
+                    rowUpdateReadRow = dtbUpdateTable.Rows(dtbUpdateTable.Rows.Count - 1)
+                    If iUpdateType = Enumerations.UpdateType.Correction Then
+                        rowUpdateReadRow.Item(strCurrent) = DBNull.Value
+                    ElseIf iUpdateType = Enumerations.UpdateType.EventChange Then
+                        rowUpdateReadRow.Item(strCurrent) = rowUpdateReadRow.Field(Of Integer)(strCurrent) + 1
+                    End If
+                Else
+                    ' Error? Should always be 1 row because id and version number form a key
+                End If
+            End If
+            ' d) produce the audit record to be added to the audit write table
+        Next
+        Console.Write(dtbUpdateTable)
+
         ' 4. Write: update table, audit table, comments table, events table
         ' 5. Call UpdateTable for each lstLinkedDataStructures
+        For Each clsLinkedStruc As DataStructure In lstLinkedDataStructures
+            clsLinkedStruc.UpdateTable(iActionID)
+        Next
     End Sub
-
 
     ' Need function which takes these two tables and generates the 'add' and 'update' tables/commands
     ' When adding, only need to update current field of existing records
