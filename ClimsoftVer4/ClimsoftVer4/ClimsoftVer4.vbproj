@@ -99,7 +99,7 @@
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsTableFilter.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
-    <Compile Include="Enumerations.vb" />
+    <Compile Include="clsGlobalVariables.vb" />
     <Compile Include="formAgro1.Designer.vb">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </Compile>
