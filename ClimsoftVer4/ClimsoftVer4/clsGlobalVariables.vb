@@ -56,18 +56,13 @@ Public Class GlobalVariables
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>   Adds to audit table. </summary>
     '''
-    ''' <remarks>   Danny, 12/03/2020. </remarks>
-    '''
     ''' <param name="dtbAudit">     The dtb audit. </param>
-    ''' <param name="iActionId">    Identifier for the action. </param>
     ''' <param name="strTable">     The table. </param>
     ''' <param name="iEntryId">     Identifier for the entry. </param>
     ''' <param name="iVersionOld">  Zero-based index of the version old. </param>
     ''' <param name="iVersionNew">  Zero-based index of the version new. </param>
-    ''' <param name="iId">          (Optional) Zero-based index of the identifier. </param>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    Public Shared Sub AddToAuditTable(dtbAudit As DataTable, iActionId As Integer, strTable As String, iEntryId As Integer, iVersionOld As Nullable(Of Integer), iVersionNew As Nullable(Of Integer), Optional iId As Nullable(Of Integer) = Nothing)
+    Public Shared Sub AddToAuditTable(dtbAudit As DataTable, iActionID As Integer, strTable As String, iEntryId As Integer, iVersionOld As Nullable(Of Integer), iVersionNew As Nullable(Of Integer))
         Dim dtbAuditSchema As DataTable
         Dim objParams As New List(Of Object)
 
@@ -82,7 +77,8 @@ Public Class GlobalVariables
                 Exit Sub
             End If
         Next
-        objParams.Add(If(iId Is Nothing, DBNull.Value, iId))
+        ' id can be blank since it is unique and can be set to auto increment in the database
+        objParams.Add(DBNull.Value)
         objParams.Add(iActionId)
         objParams.Add(strTable)
         objParams.Add(iEntryId)
@@ -90,4 +86,52 @@ Public Class GlobalVariables
         objParams.Add(If(iVersionNew Is Nothing, DBNull.Value, iVersionNew))
         dtbAudit.Rows.Add(objParams.ToArray)
     End Sub
+
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    ''' <summary>
+    ''' Constructs an SQL query to get only the current versions from a table. (Could be moved to a
+    ''' separate class for query construction)
+    ''' </summary>
+    '''
+    ''' <param name="strTable"> A string, the name of the table to query. </param>
+    '''
+    ''' <returns>   The current versions query. </returns>
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    Private Function GetCurrentVersionsQuery(strTable As String) As String
+        ' From here: https://stackoverflow.com/questions/612231/how-can-i-select-rows-with-maxcolumn-value-distinct-by-another-column-in-sql
+
+        ' Option 1:
+        ' #########
+        ' Select Case m.* From @strTable m
+        ' INNER Join(SELECT id, MAX(@strCurrent) As max_current FROM @strTable GROUP BY id) m_group
+        ' ON m.id=m_group.id
+        ' AND m.@strCurrent=m_group.max_current
+
+        ' Option 2:
+        ' #########
+        ' SELECT m.*
+        ' FROM @strTable m
+        ' LEFT JOIN @strTable b
+        ' ON m.id = b.id
+        ' AND m.@strCurrent < b.@strCurrent
+        ' WHERE b.@strCurrent Is NULL
+    End Function
+
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    ''' <summary>
+    ''' Constructs an SQL query to get only the versions equal to <c>iVersion</c> from a table.
+    ''' (Could be moved to a separate class for query construction)
+    ''' </summary>
+    '''
+    ''' <remarks>   Danny, 12/03/2020. </remarks>
+    '''
+    ''' <param name="strTable"> A string, the name of the table to query. </param>
+    ''' <param name="iVersion"> An integer, the version numbers to extract for each id. </param>
+    '''
+    ''' <returns> An SQL query string. </returns>
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    Private Function GetVersionNumberQuery(strTable As String, iVersion As Integer) As String
+
+    End Function
+
 End Class

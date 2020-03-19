@@ -211,8 +211,6 @@ Public Class frmLogin
 
         Dim datstruct As New DataStructure
 
-        datstruct.TestUpdateTable()
-
         msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
         msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
 

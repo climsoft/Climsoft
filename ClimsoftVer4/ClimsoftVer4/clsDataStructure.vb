@@ -188,53 +188,6 @@ Public Class DataStructure
     End Sub
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    ''' <summary>
-    ''' Constructs an SQL query to get only the current versions from a table. (Could be moved to a
-    ''' separate class for query construction)
-    ''' </summary>
-    '''
-    ''' <param name="strTable"> A string, the name of the table to query. </param>
-    '''
-    ''' <returns>   The current versions query. </returns>
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    Private Function GetCurrentVersionsQuery(strTable As String) As String
-        ' From here: https://stackoverflow.com/questions/612231/how-can-i-select-rows-with-maxcolumn-value-distinct-by-another-column-in-sql
-
-        ' Option 1:
-        ' #########
-        ' Select Case m.* From @strTable m
-        ' INNER Join(SELECT id, MAX(@strCurrent) As max_current FROM @strTable GROUP BY id) m_group
-        ' ON m.id=m_group.id
-        ' AND m.@strCurrent=m_group.max_current
-
-        ' Option 2:
-        ' #########
-        ' SELECT m.*
-        ' FROM @strTable m
-        ' LEFT JOIN @strTable b
-        ' ON m.id = b.id
-        ' AND m.@strCurrent < b.@strCurrent
-        ' WHERE b.@strCurrent Is NULL
-    End Function
-
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    ''' <summary>
-    ''' Constructs an SQL query to get only the versions equal to <c>iVersion</c> from a table.
-    ''' (Could be moved to a separate class for query construction)
-    ''' </summary>
-    '''
-    ''' <remarks>   Danny, 12/03/2020. </remarks>
-    '''
-    ''' <param name="strTable"> A string, the name of the table to query. </param>
-    ''' <param name="iVersion"> An integer, the version numbers to extract for each id. </param>
-    '''
-    ''' <returns> An SQL query string. </returns>
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    Private Function GetVersionNumberQuery(strTable As String, iVersion As Integer) As String
-
-    End Function
-
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary> Creates a new action in the action table and returns its Action ID. </summary>
     '''
     ''' <param name="iActionTypeID">    Identifier for the action type. </param>
@@ -246,6 +199,7 @@ Public Class DataStructure
         Dim iActionID As Integer
         ' create new entry in action table using iActionTypeID, strOperatorID and current date-time
         ' get back action ID for new entry created
+        ' This will be done manually initially: find max ActionId in the action table and increment.
         Return iActionID
     End Function
 
@@ -254,6 +208,11 @@ Public Class DataStructure
     '''             Updates <c>dtbUpdateTable</c> to add a new record to <c>strTableName</c>.
     '''             This is only sent to the database when <c>DoAction</c> is called.
     ''' </summary>
+    ''' 
+    ''' <param name="dctValues"> A dictionary of values for the new record. The keys are the field names.
+    '''                          This does not include the indentifiers and current fields. Their values are
+    '''                          calculated automatically.
+    ''' </param>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     Public Sub DoAddRecord(dctValues As Dictionary(Of String, Object))
         Dim lstValues As New List(Of Object)
@@ -274,8 +233,93 @@ Public Class DataStructure
         ' The order is important.
         ' TODO: If audit table will also use this then it will be to be adapted as it does not have the same id, version number, current
         dtbWriteTable.Rows.Add(DBNull.Value, 1, lstValueFields.ToArray, 1, DBNull.Value, GlobalVariables.UpdateType.NewRecord)
-        'TODO Need to get back ID added for audit table then correct it in dtbWriteTable
-        ' Possible using IDENTITY https://www.sqlservertutorial.net/sql-server-basics/sql-server-identity/
+    End Sub
+
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    ''' <summary>   
+    '''             Adds two rows to <c>dtbUpdateTable</c> to indicate a correction to a record.
+    '''             One row is to modify the current of the existing row. The other is the new row for the
+    '''             correction.
+    '''             This is only sent to the database when <c>DoAction</c> is called.
+    ''' </summary>
+    ''' <param name="rcEventChanges">A collection of <c>DataRow</c>s for all event changes. These rows should
+    '''                              have the same structure as <c>dtbReadTable</c>. 
+    '''                              This may be nothing if there are no event changes.
+    '''                              </param>
+    ''' <param name="rowEventNew">A <c>DataRow</c> for a new event. This row should have the same structure 
+    '''                           as <c>dtbReadTable</c>.This may be nothing if there is no new event.
+    '''                           </param>
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    Public Sub DoEvent(Optional rcEventChanges As DataRowCollection = Nothing, Optional rowEventNew As DataRow = Nothing)
+        Dim rowNew As DataRow
+
+        ' Add the rows for the event changes.
+        If rcEventChanges IsNot Nothing Then
+            For Each rowCurrent As DataRow In rcEventChanges
+                rowNew = dtbWriteTable.NewRow()
+                For i = 0 To rowCurrent.ItemArray.Count - 1
+                    rowNew.Item(i) = rowCurrent.ItemArray(i)
+                Next
+                rowNew.Item(strVOld) = DBNull.Value
+                rowNew.Item(strUpdateType) = GlobalVariables.UpdateType.EventChange
+            Next
+        End If
+
+        ' Add a row for the new event
+        If rowEventNew IsNot Nothing Then
+            rowNew = dtbWriteTable.NewRow()
+            For i = 0 To rowEventNew.ItemArray.Count - 1
+                rowNew.Item(i) = rowEventNew.ItemArray(i)
+            Next
+            rowNew.Item(strVOld) = DBNull.Value
+            rowNew.Item(strUpdateType) = GlobalVariables.UpdateType.EventNew
+        End If
+    End Sub
+
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    ''' <summary>   
+    '''             Adds two rows to <c>dtbUpdateTable</c> to indicate a correction to a record.
+    '''             One row is to modify the current of the existing row. The other is the new row for the
+    '''             correction.
+    '''             This is only sent to the database when <c>DoAction</c> is called.
+    ''' </summary>
+    ''' <param name="rowCurrent">The <c>DataRow</c> to be corrected.</param>
+    ''' <param name="dctValues"> A dictionary of values for the correction. The keys are the field names.</param>
+    '''////////////////////////////////////////////////////////////////////////////////////////////////////
+    Public Sub DoCorrectionToRecord(rowCurrent As DataRow, dctValues As Dictionary(Of String, Object))
+        Dim lstValues As New List(Of Object)
+        Dim objTemp As Object = Nothing
+        Dim rowCurrentUpdate As DataRow
+
+        ' Add the row for the correction to the existing row. The only change is current set to NULL.
+        rowCurrentUpdate = dtbWriteTable.NewRow()
+        For i = 0 To rowCurrent.ItemArray.Count - 1
+            rowCurrentUpdate.Item(i) = rowCurrent.ItemArray(i)
+        Next
+        rowCurrentUpdate.Item(strCurrent) = DBNull.Value
+        rowCurrentUpdate.Item(strVOld) = rowCurrentUpdate.Item(GlobalVariables.strVersionNumber)
+        rowCurrentUpdate.Item(strUpdateType) = GlobalVariables.UpdateType.Correction
+
+        ' TODO Should be moved to separate function as duplicated.
+        For Each strField As String In lstValueFields
+            If dctValues.TryGetValue(strField, objTemp) Then
+                lstValues.Add(objTemp)
+            Else
+                MsgBox("Developer error in clsDataStructure:DoAddRecord. No value specified for field: " & strField & " when attempting to add a record.")
+                Exit Sub
+            End If
+        Next
+
+        ' This adds a row for the correction.
+        ' The fields are named: 
+        ' strId, strVersionNumber, lstValueFields, strCurrent, strVOld, strUpdateType
+        ' strId is the same as in rowCurrent.
+        ' strVersionNumber is the existing version number + 1
+        ' strCurrent is the existing current
+        ' strVOld is the existing version number
+        ' strUpdateType is Correction
+        ' The order is important.
+        dtbWriteTable.Rows.Add(rowCurrent.Field(Of Integer)(strId), rowCurrent.Field(Of Integer)(GlobalVariables.strVersionNumber) + 1, lstValueFields.ToArray, rowCurrent.Field(Of Integer)(strCurrent), rowCurrent.Field(Of Integer)(GlobalVariables.strVersionNumber), GlobalVariables.UpdateType.Correction)
     End Sub
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -295,37 +339,6 @@ Public Class DataStructure
         ' create comment for action comment and add to comment table
 
         DataStruct.UpdateTable(iActionTypeID)
-    End Sub
-
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    ''' <summary>   Test for update table. </summary>
-    '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    Public Sub TestUpdateTable()
-        dtbReadTable = New DataTable
-        dtbReadTable.Columns.Add(strId, GetType(Integer))
-        dtbReadTable.Columns.Add(GlobalVariables.strVersionNumber, GetType(Integer))
-        dtbReadTable.Columns.Add("value", GetType(String))
-        dtbReadTable.Columns.Add(strCurrent, GetType(Integer))
-
-        dtbReadTable.Rows.Add(1, 1, "a", 1)
-        dtbReadTable.Rows.Add(2, 1, "b", 1)
-        dtbReadTable.Rows.Add(3, 1, "c", 1)
-        dtbReadTable.Rows.Add(4, 1, "dd", 1)
-        dtbReadTable.Rows.Add(4, 2, "ddd", 2)
-        dtbReadTable.Rows.Add(5, 1, "e", 1)
-
-        dtbWriteTable = dtbReadTable.Clone()
-        dtbWriteTable.Columns.Add(strVOld, GetType(Integer))
-        dtbWriteTable.Columns.Add(strUpdateType, GetType(Integer))
-
-        dtbWriteTable.Rows.Add(1, 1, "a", DBNull.Value, 1, GlobalVariables.UpdateType.Correction)
-        dtbWriteTable.Rows.Add(1, 2, "A", 1, 1, GlobalVariables.UpdateType.Correction)
-        dtbWriteTable.Rows.Add(2, 2, "bb", 2, 1, GlobalVariables.UpdateType.EventChange)
-        dtbWriteTable.Rows.Add(3, 1, "c", DBNull.Value, 1, GlobalVariables.UpdateType.Delete)
-        dtbWriteTable.Rows.Add(4, 3, "d", 1, DBNull.Value, GlobalVariables.UpdateType.EventChange)
-        dtbWriteTable.Rows.Add(4, 1, "dd", 2, 1, GlobalVariables.UpdateType.EventChange)
-        dtbWriteTable.Rows.Add(4, 2, "ddd", 3, 1, GlobalVariables.UpdateType.EventChange)
-        UpdateTable(1)
     End Sub
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -367,8 +380,8 @@ Public Class DataStructure
             ' (a change for a delete is in the write table already)
             Select Case iUpdateType
                 Case GlobalVariables.UpdateType.NewRecord
-                    'TODO How will we know the "id" of a new record
-                    GlobalVariables.AddToAuditTable(dtbAuditTable, iActionID, strTableName, , Nothing, 1)
+                    'TODO Need to get the entry "id" of the new record to be added
+                    'GlobalVariables.AddToAuditTable(dtbAuditTable, iActionID, strTableName, , Nothing, 1)
                 Case GlobalVariables.UpdateType.Correction, GlobalVariables.UpdateType.EventChange
                     strSelectExp = strId & " = " & dtbWriteTable.Rows(i).Field(Of Integer)(strId) & " and " & GlobalVariables.strVersionNumber & " = " & dtbWriteTable.Rows(i).Field(Of Integer)(strVOld)
                     drowsReadRows = dtbReadTable.Select(strSelectExp)
@@ -399,17 +412,33 @@ Public Class DataStructure
     End Sub
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    ''' <summary>
-    ''' Takes <c>dtbReadTable</c> and <c>dtbWriteTable</c> and produces a <c>DataTable</c> with the
-    ''' correct updates and inserts to be added to the database.
-    ''' </summary>
-    '''
-    ''' <returns> A <c>DataTable</c> with. </returns>
+    ''' <summary>   Test for update table. </summary>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    Private Function GenerateTableForUpdate() As DataTable
+    Public Sub TestUpdateTable()
+        dtbReadTable = New DataTable
+        dtbReadTable.Columns.Add(strId, GetType(Integer))
+        dtbReadTable.Columns.Add(GlobalVariables.strVersionNumber, GetType(Integer))
+        dtbReadTable.Columns.Add("value", GetType(String))
+        dtbReadTable.Columns.Add(strCurrent, GetType(Integer))
 
-    End Function
+        dtbReadTable.Rows.Add(1, 1, "a", 1)
+        dtbReadTable.Rows.Add(2, 1, "b", 1)
+        dtbReadTable.Rows.Add(3, 1, "c", 1)
+        dtbReadTable.Rows.Add(4, 1, "dd", 1)
+        dtbReadTable.Rows.Add(4, 2, "ddd", 2)
+        dtbReadTable.Rows.Add(5, 1, "e", 1)
 
-    ' UpdateData() adds, updates and deletes data
+        dtbWriteTable = dtbReadTable.Clone()
+        dtbWriteTable.Columns.Add(strVOld, GetType(Integer))
+        dtbWriteTable.Columns.Add(strUpdateType, GetType(Integer))
 
+        dtbWriteTable.Rows.Add(1, 1, "a", DBNull.Value, 1, GlobalVariables.UpdateType.Correction)
+        dtbWriteTable.Rows.Add(1, 2, "A", 1, 1, GlobalVariables.UpdateType.Correction)
+        dtbWriteTable.Rows.Add(2, 2, "bb", 2, 1, GlobalVariables.UpdateType.EventChange)
+        dtbWriteTable.Rows.Add(3, 1, "c", DBNull.Value, 1, GlobalVariables.UpdateType.Delete)
+        dtbWriteTable.Rows.Add(4, 3, "d", 1, DBNull.Value, GlobalVariables.UpdateType.EventChange)
+        dtbWriteTable.Rows.Add(4, 1, "dd", 2, 1, GlobalVariables.UpdateType.EventChange)
+        dtbWriteTable.Rows.Add(4, 2, "ddd", 3, 1, GlobalVariables.UpdateType.EventChange)
+        UpdateTable(1)
+    End Sub
 End Class
