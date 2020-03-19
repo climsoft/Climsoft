@@ -23,8 +23,10 @@ Public Class GlobalVariables
     Public Enum UpdateType
         ''' <summary>   An enum constant representing the new record option. When a new record is added. </summary>
         NewRecord
-        ''' <summary>   An enum constant representing the correction option. When a correction is made to an existing record. </summary>
-        Correction
+        ''' <summary>   An enum constant representing the correction old option. When a correction is made to an existing record, this is the existing version. </summary>
+        CorrectionOld
+        ''' <summary>   An enum constant representing the correction option. When a correction is made to an existing record, this is the new version. </summary>
+        CorrectionNew
         ''' <summary>   An enum constant representing the event change option. When a change is made to an event that is not a correction e.g. another event is added before this resulting in a change to its current. </summary>
         EventChange
         ''' <summary>   An enum constant representing the event new option. When a new value is added to an existing record corresponding to a new event. </summary>

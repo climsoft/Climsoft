@@ -209,8 +209,6 @@ Public Class frmLogin
         'Translate text for controls on login form.
         'Other Translation after successful login will come from language translation table stored in database
 
-        Dim datstruct As New DataStructure
-
         msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
         msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
 
