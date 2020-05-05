@@ -319,7 +319,7 @@ Public Class frmFormUpload
             lblDataTransferProgress.ForeColor = Color.Red
             lblDataTransferProgress.Text = "Data transfer Failure !"
             'MsgBox("Check and confirm selections")
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
             conns.Close()
         End Try
     End Sub

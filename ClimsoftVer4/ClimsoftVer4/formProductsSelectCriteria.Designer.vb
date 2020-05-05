@@ -342,7 +342,7 @@ Partial Class formProductsSelectCriteria
         Me.cmdDelStation.Name = "cmdDelStation"
         Me.cmdDelStation.Size = New System.Drawing.Size(127, 23)
         Me.cmdDelStation.TabIndex = 22
-        Me.cmdDelStation.Text = "Delete Selected Station"
+        Me.cmdDelStation.Text = "Clear Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
@@ -351,7 +351,7 @@ Partial Class formProductsSelectCriteria
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(139, 23)
         Me.cmdDelElement.TabIndex = 21
-        Me.cmdDelElement.Text = "Delete Selected Elements"
+        Me.cmdDelElement.Text = "Clear Selected Elements"
         Me.cmdDelElement.UseVisualStyleBackColor = True
         '
         'lblProductType

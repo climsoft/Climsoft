@@ -1076,8 +1076,7 @@ Err:
         Dim errdir, errfile As String
 
         'Get full path for the errors output file
-        'errdir = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-        errdir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+        errdir = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
 
         ' Create the directory if not existing
         If Not Directory.Exists(errdir) Then
@@ -1124,6 +1123,8 @@ Err:
         txtOutputFolder.Text = ""
         txtOutputFolder.Refresh()
 
+
+
         process_input_data()
         Next_Encoding_Time()
     End Sub
@@ -1152,6 +1153,7 @@ Err:
         Dim chr As String
         Dim dTable As DataTable
 
+
         ' Open the data set for the AWS sites and stations
         SetDataSet("aws_sites")
 
@@ -1159,8 +1161,9 @@ Err:
             Log_Errors("No AWS sites defined. Refer to the Manuals then use the Tab 'Sites' to define the installed AWS sites")
             Me.Cursor = Cursors.Default
             optStop.Checked = True
-            'Exit Sub
+            Exit Sub
         End If
+
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
 
@@ -1171,19 +1174,20 @@ Err:
         End If
         Bufr_Subst = 0
         BUFR_Subsets_Data = ""
+
         'Get full path for the Subsets Output file file and create the file
-        Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
-        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
+        Refresh_Folder(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\")
+        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
 
         'WriteLine(1, "Testing")
         'FileClose(1)
 
+
         Dim i As Integer
 
         With ds.Tables("aws_sites")
-
             For i = 0 To .Rows.Count - 1 'Kount - 1
 
                 If IsDBNull(.Rows(i).Item("InputFile")) Or .Rows(i).Item("OperationalStatus") = 0 Then Continue For ' Data for site not in a state to be process
@@ -1233,6 +1237,7 @@ Err:
                 txtStatus.Refresh()
 
                 If Not FTP_Call(infile, "get") Then
+
                     Log_Errors("Can't retrieve data from input file " & infile)
                     Continue For ' If FTP call failed
                 End If
@@ -1250,7 +1255,7 @@ Err:
                 txtStatus.Text = "Organising the input file"
 
                 ' Assign a variable to an output file without header rows
-                aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+                aws_input_file_flds = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
 
                 FileOpen(10, aws_input_file, OpenMode.Input)
                 FileOpen(11, aws_input_file_flds, OpenMode.Output)
@@ -1270,104 +1275,78 @@ Err:
 
                 FileClose(10)
                 FileClose(11)
-                Dim colmn, dtCol As Integer
+                Dim colmn As Integer
                 Dim rws As Long
-                Dim x, dtFmt As String
+                Dim x As String
+
                 'ChrW(delimiter_ascii)
                 dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
 
-                '' Get date and time row from the data structure table
-                'Get_Datetime(AWSsite, dtCol, dtFmt)
-
                 For k = 0 To rws - 2
-                    'MsgBox(Get_DateStamp(AWSsite, dTable, k))
-                    datestring = Get_DateStamp(AWSsite, dTable, k)
 
-                    'Continue For
-                    ''Skip older records
-                    'datestring = dTable.Rows(k).Item(dtCol)
-                    ''MsgBox(datestring
-
-                    'datestring = Format_Datetime(datestring, dtFmt)
-
-                    ''MsgBox(datestring)
-
-                    ''datestring = dTable.Rows(k).Item(0)
-
+                    'Skip older records
+                    datestring = dTable.Rows(k).Item(0)
                     If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
-
+                    'MsgBox(datestring)
                     If IsDate(datestring) Then
+
                         'If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+
                         ' Compare current time with time stamp on hourly basis
 
-                        'Log_Errors(DateDiff("h", datestring, Now()) & " " & Val(txtPeriod.Text))
-
                         If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
-                        'If DateDiff("h", datestring, Now()) > Val(txtPeriod.Text) Then Continue For
 
                         Process_Status("Processing AWS Record " & k & " of " & rws)
 
-                            For j = 0 To colmn - 1
-                                'Log_Errors(j)
-                                If Not IsDBNull(dTable.Rows(k).Item(j)) Then
-                                    x = dTable.Rows(k).Item(j)
-                                    If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                                        x = Strings.Mid(x, 2, Len(x) - 2)
-                                    End If
-                                    AwsRecord_Update(x, j, flg, AWSsite)
-                                Else
-                                    Continue For
-                                End If
-                                'Log_Errors(x & " " & j & " " & flg & " " & AWSsite)
-                            Next j
-
-                        'Log_Errors(1)
+                        For j = 0 To colmn - 1
+                            x = dTable.Rows(k).Item(j)
+                            If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+                                x = Strings.Mid(x, 2, Len(x) - 2)
+                            End If
+                            'MsgBox(x)
+                            AwsRecord_Update(x, j, flg, AWSsite)
+                        Next j
 
                         ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
                         Dim sqlv As String
                         sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
-                            rs = GetDataSet(AWSsite, sqlv)
+                        rs = GetDataSet(AWSsite, sqlv)
 
-                        ''Get the date value
-                        'datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
-                        'Log_Errors(Len(datestring))
+                        'Get the date value
+                        datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
 
-                        ''Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
-                        'If Len(datestring) < 12 Then
-                        '    'datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
-                        '    datestring = dTable.Rows(k).Item(dtCol) & " " & dTable.Rows(k).Item(dtCol + 1)
-                        'End If
-
+                        'Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
+                        If Len(datestring) < 12 Then
+                            datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
+                        End If
 
                         'Don't process the record if having invalid datestamp
-                        If IsDate(datestring) Then
-                            'If IsDate(datestring) Then
-                            '    Log_Errors(datestring)
-                            '    Continue For
-                            'End If
+                        'If Not IsDate(datestring) Then
+                        'If IsDate(datestring) Then
+                        '    Log_Errors(datestring)
+                        '    Continue For
+                        'End If
 
-                            'Update the record into the database
-                            If Val(txtPeriod.Text) = 999 Then
-
-                                ' Process the entire input file irespective of time difference
-                                Process_Input_Record(AWSsite, datestring)
-                            Else
-                                'Process_Input_Record(AWSsite, datestring)
-                                If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                                    Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
-                                End If
+                        'Update the record into the database
+                        If Val(txtPeriod.Text) = 999 Then
+                            ' Process the entire input file irespective of time difference
+                            Process_Input_Record(AWSsite, datestring)
+                        Else
+                            'Process_Input_Record(AWSsite, datestring)
+                            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+                                Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
                             End If
                         End If
+
+                        'End If
                     End If
                 Next k
-                'Log_Errors("Start Encoding")
+
                 ' Delete input file from base station server if so selected
                 If chkDeleteFile.Checked Then
-                    If Not FTP_Delete_InputFile(infile) Then
-                        Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
-                    End If
+                    If Not FTP_Delete_InputFile(infile) Then Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
                 End If
-                'Log_Errors(i)
+
             Next i
         End With
 
@@ -1444,9 +1423,8 @@ Err:
         'If Err.Number = 9 Then Resume Next
         ''MsgBox(datt & " " & datestring)
         'If Err.Number = 13 Then Resume Next
-        'If Err.Number = 62 Or Err.Number = 9 Then
-        If Err.Number = 62 Then
-            Log_Errors(Err.Description & " Can't retrieve data from " & infile)
+        If Err.Number = 62 Or Err.Number = 9 Then
+            Log_Errors("Can't retrieve data from " & infile)
             'list_errors.Refresh()
 
             'GoTo Continues
@@ -1455,7 +1433,7 @@ Err:
         'If Err.Number = 3349 Then Resume Next
         ''   MsgBox Err.Number & " " & Err.description
         'MsgBox("Process_input_data")
-        'Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
+        Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
         FileClose(1)
         FileClose(10)
@@ -1494,7 +1472,7 @@ Err:
 
         maxrecs = dr.Tables("tm_307091").Rows.Count
         Seq_Desc = ""
-        descrfil = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\descriptors.txt"
+        descrfil = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\descriptors.txt"
         Dim DscriptorFile As System.IO.TextWriter = New StreamWriter(descrfil)
 
         For i = 0 To maxrecs - 1
@@ -1620,9 +1598,17 @@ Err:
             End If
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
             FileClose(1)
-            local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+            'local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
+            local_folder = System.IO.Path.GetFullPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) & "\Climsoft4\data"
+            If Not Directory.Exists(local_folder) Then
+                Directory.CreateDirectory(local_folder)
+            End If
+
             'Refresh_Folder(local_folder)
-            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            'Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_aws.txt"
 
@@ -1852,7 +1838,7 @@ Err:
         Dim rf As DataSet
 
         Try
-            Lflder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+            Lflder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
             Drv = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drv = Strings.Left(Drv, Len(Drv) - 1)
 
@@ -2290,7 +2276,7 @@ Err:
                 QC_Limits = True
                 Dim errdata, limittype As String
                 'Get full path for the Subsets Output file file and create the file
-                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_qc_errors.csv"
+                fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_qc_errors.csv"
                 FileOpen(21, fl, OpenMode.Append)
 
                 If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
@@ -2908,8 +2894,8 @@ Err:
         FileClose(1) ' Close the file if ever it exist
 
         ' Define the file and path
-        local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
-        backup_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\backup"
+        local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        backup_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup"
 
         Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
         ftpscript = local_folder & "\ftp_file_delete.txt"
@@ -3190,7 +3176,7 @@ Err:
 
         'Delete the file to get rid of the previous data
         'If fso.FileExists(fso.GetParentFolderName(App.Path) & "\data\bufr.txt") Then fso.DeleteFile(fso.GetParentFolderName(App.Path) & "\data\bufr.txt")
-        brfile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.txt"
+        brfile = System.IO.Path.GetFullPath(Application.StartupPath & "\data\bufr.txt")
 
         If File.Exists(brfile) Then File.Delete(brfile)
 
@@ -3220,8 +3206,8 @@ Err:
         ValidFile = False
 
         'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
-        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
-        BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
+        AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
+        BUFR_octet_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\bufr_octets.txt")
 
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
@@ -3833,144 +3819,6 @@ Err:
 
     '    stn1 = txtSiteID.Text
     'End Sub
-
-    Function Get_DateStamp(AWSsite As String, dattable As DataTable, rw As Long) As String
-
-        Dim dt, Date_s, Time_s, yyyy, mm, dd, nn, hh, ss As String
-
-        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dsstr As New DataSet
-        Dim sqlstr As String
-
-        Try
-            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
-            dbstr.Open()
-
-            sqlstr = "SELECT * FROM " & AWSsite
-
-            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
-            ' Remove timeout requirement
-            dastr.SelectCommand.CommandTimeout = 0
-
-            dsstr.Clear()
-            dastr.Fill(dsstr, "struct")
-            Date_s = ""
-            Time_s = ""
-            yyyy = ""
-            mm = ""
-            dd = ""
-            hh = ""
-            nn = ""
-
-            With dsstr.Tables("struct")
-                For i = 0 To .Rows.Count - 1
-                    dt = dattable.Rows(rw).Item(i)
-                    'Log_Errors(.Rows(i).Item("Element_abbreviation") & " " & dt)
-
-                    Select Case .Rows(i).Item("Element_abbreviation")
-                        Case "Date/time"
-                            Return dt
-                        Case "yyyymmddhhmm"
-                            Return DateSerial(Strings.Left(dt, 4), Strings.Mid(dt, 5, 2), Strings.Mid(dt, 7, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")
-                        Case "ddmmyyyyhhmm"
-                            Return DateSerial(Strings.Mid(dt, 5, 4), Strings.Mid(dt, 3, 2), Strings.Left(dt, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")
-                        Case "Date"
-                            Date_s = dt
-                        Case "Time"
-                            Time_s = dt
-                        Case "yyyy"
-                            yyyy = dt
-                        Case "mm"
-                            mm = dt
-                        Case "dd"
-                            dd = dt
-                        Case "hh"
-                            hh = dt
-                        Case "nn"
-                            nn = dt
-                    End Select
-                Next
-
-                If IsDate(Date_s) And Time_s <> "" Then
-                    Return Date_s & " " & Time_s
-                End If
-
-                If IsDate(DateSerial(yyyy, mm, dd)) And hh <> "" And nn <> "" Then
-                    Return DateSerial(yyyy, mm, dd) & " " & TimeSerial(hh, nn, "00")
-                End If
-            End With
-
-            dbstr.Close()
-            Return ""
-        Catch ex As Exception
-            Log_Errors(ex.Message & " at Get_DateStamp")
-            dbstr.Close()
-        End Try
-        Return ""
-
-    End Function
-
-    Sub Get_Datetime(AWSsite As String, ByRef dtCol As Integer, ByRef dtFmt As String)
-
-        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
-        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
-        Dim dsstr As New DataSet
-        Dim sqlstr As String
-
-        Try
-            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
-            dbstr.Open()
-
-            sqlstr = "SELECT * FROM " & AWSsite
-
-            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
-            ' Remove timeout requirement
-            dastr.SelectCommand.CommandTimeout = 0
-
-            dsstr.Clear()
-            dastr.Fill(dsstr, "struct")
-
-            With dsstr.Tables("struct")
-                For i = 0 To .Rows.Count - 1
-                    If .Rows(i).Item("Element_abbreviation") = "Date/time" Then
-                        dtCol = i
-                        dtFmt = .Rows(i).Item("Element_Name")
-                        Exit For
-                    End If
-                Next
-            End With
-            dbstr.Close()
-
-        Catch ex As Exception
-            Log_Errors(ex.Message & " at Get_Datetime")
-            dbstr.Close()
-        End Try
-
-    End Sub
-
-    Function Format_Datetime(dt As String, fmt As String) As String
-        Dim ty, tm, td, tH, tmi As String
-
-        Try
-            Select Case fmt
-                Case "yyyyMMddHHmm"
-                    '201708110830
-                    ty = Strings.Left(dt, 4)
-                    tm = Strings.Mid(dt, 5, 2)
-                    td = Strings.Mid(dt, 7, 2)
-                    tH = Strings.Mid(dt, 9, 2)
-                    tmi = Strings.Mid(dt, 11, 2)
-                    Format_Datetime = DateSerial(ty, tm, td) & " " & TimeSerial(tH, tmi, "00")
-                Case Else
-                    Return dt
-            End Select
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-            Return dt
-        End Try
-    End Function
 End Class
 
 Public Class FTP

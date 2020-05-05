@@ -36,7 +36,8 @@ Public Class frmLaunchPad
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Try
-            Dim configFilename As String = Application.StartupPath & "\config.inf"
+            'Dim configFilename As String = Application.StartupPath & "\config.inf"
+            Dim configFilename As String = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\config.inf"
             Dim dbconnectstr As String
             'MsgBox(configFilename)
             FileOpen(12, configFilename, OpenMode.Output)
