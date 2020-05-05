@@ -274,8 +274,8 @@ Public Class frmMonitoring
         Me.Cursor = Cursors.WaitCursor
 
         Try
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Performance.csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Performance.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Performance.csv"
             FileOpen(11, fl, OpenMode.Output)
 
             ' Print Header Rows
@@ -546,8 +546,8 @@ Public Class frmMonitoring
         Dim fl, datarow, datahdr As String
 
         Try
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & flnm & ".csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & flnm & ".csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & flnm & ".csv"
             FileOpen(11, fl, OpenMode.Output)
 
             ' Print Header Row

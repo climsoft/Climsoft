@@ -39,9 +39,10 @@
                 'Get the connection string for V3 Mysql db
 
                 ' Get a string for the full path for backup file and restructure it according the mysql path formart
-                tmpbkpfile = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup.csv"
-                bkpfile = Mysql_FilePath(tmpbkpfile)
+                'tmpbkpfile = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup.csv"
+                tmpbkpfile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\backup.csv"
 
+                bkpfile = Mysql_FilePath(tmpbkpfile)
                 dbstr = txtV3db.Text
 
                 If optEntireDb.Checked = True Then
@@ -148,7 +149,8 @@
         Dim currentRow As String()
         Me.Cursor = Cursors.WaitCursor
         ' Define the text files application path
-        DataPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        'DataPath = IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        DataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
         If Not IO.Directory.Exists(DataPath) Then
             IO.Directory.CreateDirectory(DataPath)
         End If

@@ -217,8 +217,8 @@
 
             da.SelectCommand = cmd
             da.Fill(ds, "Miss")
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.csv"
             FileOpen(1, fl, OpenMode.Output)
 
             Write(1, "Station")
@@ -249,7 +249,8 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim img As String
 
-        img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        'img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
         'img = "C:\Users\UNDP\Desktop\Gaps.Png"
 
         With invChart
