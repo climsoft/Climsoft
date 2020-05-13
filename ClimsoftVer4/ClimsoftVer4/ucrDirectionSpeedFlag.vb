@@ -527,7 +527,7 @@ Public Class ucrDirectionSpeedFlag
         End If
     End Sub
 
-    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable)
+    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable, Optional bValidateValue As Boolean = True)
         ucrDirection.SetValueToDataTable(dtbValues)
         ucrSpeed.SetValueToDataTable(dtbValues)
         If IncludeFlag Then
