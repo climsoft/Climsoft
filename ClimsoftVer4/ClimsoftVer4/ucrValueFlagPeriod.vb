@@ -325,11 +325,19 @@
             End If
 
             'validate values loudly  
-            bValueValid = ucrValue.ValidateText(strValue, bValidateSilently:=False)
+
+            bValueValid = ValidateText(strValue) OrElse ucrValue.ValidateText(strValue, bValidateSilently:=False)
             bFlagValid = ucrFlag.ValidateText(strFlag, bValidateSilently:=False)
 
             bValuesCorrect = (bValueValid AndAlso bFlagValid)
+
             ucrValue.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
+
+            'todo. temporary addition to fix limits violations
+            If ucrValue.GetValidationCode(strValue) = 2 Then
+                ucrValue.SetBackColor(Color.Cyan)
+            End If
+
         End If
         If bSetValuesIfValid AndAlso bValuesCorrect Then
             ucrValue.SetValue(strValue)
@@ -417,6 +425,13 @@
 
             'check if the result is a valid value 
             bValuesCorrect = ucrValue.ValidateText(strValue)
+
+            'todo. temporary addition to fix limits violations. todo. use validateNumeric
+            'just set the invalid colours for limits violation but assume it's a valid value
+            If Not bValuesCorrect AndAlso ucrValue.GetValidationCode(strValue) = 2 Then
+                bValuesCorrect = True
+            End If
+
         End If
         Return bValuesCorrect
     End Function
