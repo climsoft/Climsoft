@@ -46,8 +46,13 @@
         Me.Cursor = Cursors.Default
     End Sub
 
+
     Private Sub CmdClose_Click(sender As Object, e As EventArgs) Handles CmdClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub lstSeries_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSeries.SelectedIndexChanged
+
     End Sub
 
     Private Sub txtFootNote_TextChanged(sender As Object, e As EventArgs)
@@ -205,15 +210,34 @@
 
             MSChart1.ChartAreas("ChartArea1").AxisX.MinorGrid.Enabled = True
             MSChart1.ChartAreas("ChartArea1").AxisY.MajorGrid.Enabled = True
+
             MSChart1.Show()
+
+            'MsgBox(MSChart1.Legends(0).ForeColor)
 
             Me.Cursor = Cursors.Default
             grpSummary.Enabled = False
             cmdview.Enabled = True
 
+            With lstSeries
+                .Items.Clear()
+                For i = 0 To MSChart1.Series.Count - 1
+                    .Items.Add(MSChart1.Series(i).Name)
+                Next
+            End With
+            grpColors.Visible = True
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             MsgBox("Can't Plot Chart. Check data selections")
         End Try
+    End Sub
+
+    Private Sub lstSeries_Click(sender As Object, e As EventArgs) Handles lstSeries.Click
+        Dim cl As Color
+
+        clrdlg.ShowDialog()
+        cl = clrdlg.Color
+        MSChart1.Series(lstSeries.SelectedIndex).Color = cl
     End Sub
 End Class
