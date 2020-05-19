@@ -46,6 +46,15 @@ Public Class ucrFormDaily2
             Next
 
             SetUpTableEntry("form_daily2")
+            AddHandler ucrInputTotal.evtKeyDown, Sub(sender1 As Object, e1 As KeyEventArgs)
+                                                     If e1.KeyCode = Keys.Enter Then
+                                                         If Not CheckTotal() Then
+                                                             ucrInputTotal.Focus()
+                                                             e1.SuppressKeyPress = True
+                                                         End If
+                                                     End If
+                                                 End Sub
+
             AddField("signature")
             AddField("entryDatetime")
 
@@ -144,14 +153,14 @@ Public Class ucrFormDaily2
         txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
     End Sub
 
-    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Not CheckTotal() Then
-                ucrInputTotal.Focus()
-                e.SuppressKeyPress = True
-            End If
-        End If
-    End Sub
+    'Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        If Not CheckTotal() Then
+    '            ucrInputTotal.Focus()
+    '            e.SuppressKeyPress = True
+    '        End If
+    '    End If
+    'End Sub
 
     Private Function IsValuesEmpty() As Boolean
         For Each ctr As Control In Me.Controls

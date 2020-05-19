@@ -337,6 +337,9 @@
             'todo. temporary addition to fix limits violations
             If ucrValue.GetValidationCode(strValue) = 2 Then
                 ucrValue.SetBackColor(Color.Cyan)
+                If Not bSetValuesIfValid Then
+                    bValuesCorrect = True
+                End If
             End If
 
         End If
