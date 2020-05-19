@@ -48,6 +48,10 @@
             ' ucrNavigation.NewRecord() 'temporary
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourly", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -59,6 +63,14 @@
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_hourly"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")

@@ -82,6 +82,7 @@
         Dim SQLDataString, SQLElementString As String
 
         conString = frmLogin.txtusrpwd.Text
+        'MsgBox(conString)
 
         SQLElementString = "SELECT DISTINCT elementname, elementid FROM obselement, missing_stats WHERE obselement.elementId = missing_stats.ELEM"
 
@@ -89,9 +90,10 @@
 
         conn = New MySql.Data.MySqlClient.MySqlConnection
         conn.ConnectionString = conString
+        conn.Open()
 
         Try
-            conn.Open()
+            'conn.Open()
             Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
             Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
             Dim ds As New System.Data.DataSet
@@ -142,8 +144,10 @@
             For i = 0 To ds.Tables("MissingData").Rows.Count - 1
                 invChart.Series(ds.Tables("MissingData").Rows(i).Item(1).ToString).Points.AddXY(ds.Tables("MissingData").Rows(i).Item(0).ToString, ds.Tables("MissingData").Rows(i).Item(2).ToString)
             Next i
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn.Close()
         End Try
     End Sub
 
@@ -213,8 +217,8 @@
 
             da.SelectCommand = cmd
             da.Fill(ds, "Miss")
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.csv"
             FileOpen(1, fl, OpenMode.Output)
 
             Write(1, "Station")
@@ -245,7 +249,8 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim img As String
 
-        img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        'img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
         'img = "C:\Users\UNDP\Desktop\Gaps.Png"
 
         With invChart

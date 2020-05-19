@@ -277,12 +277,16 @@
             'MsgBox("Total subsets = " & substs & " > " & subsets)
             sss = subsets 'Format(substs, "000")
 
-            If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
-                IO.Directory.CreateDirectory(System.IO.Path.GetFullPath(Application.StartupPath) & "\data")
+            'If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
+            '    IO.Directory.CreateDirectory(System.IO.Path.GetFullPath(Application.StartupPath) & "\data")
+            'End If
+
+            If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data") Then
+                IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data")
             End If
 
-            fl2 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.txt"
-
+            'fl2 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.txt"
+            fl2 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.txt"
             FileOpen(20, fl2, OpenMode.Output)
 
             'Loop through the subsets
@@ -751,7 +755,9 @@
 
         ' Output expanded decsriptors into a CSV file
 
-        descriptors_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv"
+        'descriptors_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv"
+
+        descriptors_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv"
         FileOpen(2, descriptors_file, OpenMode.Append)
 
         Dim counts As Integer
@@ -797,8 +803,12 @@
         Try
 
             ' Initialize files by deleted output files used in previous sessions
-            If IO.File.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv") Then
-                IO.File.Delete(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv")
+            'If IO.File.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv") Then
+            '    IO.File.Delete(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv")
+
+            'End If
+            If IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.csv") Then
+                IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.csv")
             End If
 
             sql = "Select * from bufr_crex_data"
@@ -1690,7 +1700,8 @@
             ' Output to text files
             Dim txtbufr, octsfl, bufr_file As String
 
-            txtbufr = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.txt"
+            'txtbufr = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.txt"
+            txtbufr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.txt"
             FileOpen(2, txtbufr, OpenMode.Output)
 
             Print(2, BUFR_Message) ' Put the BUFR binary digit message into a text file
@@ -1698,10 +1709,12 @@
             FileClose(2)
 
             'Construct and open Bufr output text file based on the message header
-            bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
+            'bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
+            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\" & msg_file & ".f"
             FileOpen(2, bufr_file, OpenMode.Binary)
 
-            octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
+            'octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
+            octsfl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr_octets.txt"
             FileOpen(1, octsfl, OpenMode.Output)
 
             'Output BUFR data into a binary and a text file
@@ -1855,8 +1868,12 @@
 
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
 
-            local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            'local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data"
+
+            'Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_bufr.txt"
             FileOpen(1, ftpscript, OpenMode.Output)

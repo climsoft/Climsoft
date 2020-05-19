@@ -570,6 +570,8 @@ Public Class formMetadata
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         Dim oper As Integer
+        Dim lat, lon As String
+
         If txtStationOperation.Checked Then
             oper = 1
         Else
@@ -579,19 +581,29 @@ Public Class formMetadata
         If txtstationId.Text = "" Then
             MsgBox("No record Selected")
         Else
+            ' Set blank numerical values to NULL
+            lat = txtLatitude.Text
+            If Not IsNumeric(txtLatitude.Text) Then lat = "NULL"
+
+            lon = txtLongitude.Text
+            If Not IsNumeric(txtLongitude.Text) Then lon = "NULL"
+
             'TableUpdate(rec, "update")
 
-            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-                ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', qualifier = '" & txtStationType.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
+            'sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
+            '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
+
+            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & txtStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
+                ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
-                MsgBox("Update Failed")
-            Else
-                MsgBox("Update Successful")
-            End If
+                    MsgBox("Update Failed")
+                Else
+                    MsgBox("Update Successful")
+                End If
 
-        End If
+            End If
 
 
     End Sub

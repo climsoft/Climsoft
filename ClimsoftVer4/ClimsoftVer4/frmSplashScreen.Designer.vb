@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmSplashScreen
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmSplashScreen
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim lblWait As System.Windows.Forms.Label
@@ -30,10 +30,8 @@ Partial Class frmSplashScreen
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.lblDescription = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         lblWait = New System.Windows.Forms.Label()
         Me.MainLayoutPanel.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblWait
@@ -41,7 +39,7 @@ Partial Class frmSplashScreen
         lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
         lblWait.BackColor = System.Drawing.Color.Transparent
         lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        lblWait.Location = New System.Drawing.Point(430, 440)
+        lblWait.Location = New System.Drawing.Point(433, 443)
         lblWait.Name = "lblWait"
         lblWait.Size = New System.Drawing.Size(122, 19)
         lblWait.TabIndex = 7
@@ -53,6 +51,7 @@ Partial Class frmSplashScreen
         Me.MainLayoutPanel.BackColor = System.Drawing.Color.Transparent
         Me.MainLayoutPanel.BackgroundImage = CType(resources.GetObject("MainLayoutPanel.BackgroundImage"), System.Drawing.Image)
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.MainLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.MainLayoutPanel.ColumnCount = 1
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 983.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
@@ -75,7 +74,7 @@ Partial Class frmSplashScreen
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.Location = New System.Drawing.Point(355, 61)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(358, 64)
         Me.ApplicationTitle.Name = "ApplicationTitle"
         Me.ApplicationTitle.Size = New System.Drawing.Size(272, 65)
         Me.ApplicationTitle.TabIndex = 0
@@ -87,11 +86,11 @@ Partial Class frmSplashScreen
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(442, 227)
+        Me.lblVersion.Location = New System.Drawing.Point(445, 233)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(99, 27)
         Me.lblVersion.TabIndex = 6
-        Me.lblVersion.Text = "Version 4.1.4"
+        Me.lblVersion.Text = "Version 4.1.6"
         '
         'Timer1
         '
@@ -124,7 +123,6 @@ Partial Class frmSplashScreen
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -134,5 +132,4 @@ Partial Class frmSplashScreen
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Public WithEvents MainLayoutPanel As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lblVersion As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
 End Class

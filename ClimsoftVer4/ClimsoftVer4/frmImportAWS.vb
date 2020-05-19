@@ -36,7 +36,8 @@ Public Class frmImportAWS
             obsVal = ""
             obsFlag = ""
 
-            AWSPath = IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_data"
+            'AWSPath = IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_data"
+            AWSPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_data"
 
             If Not IO.Directory.Exists(AWSPath) Then
                 IO.Directory.CreateDirectory(AWSPath)

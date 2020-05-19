@@ -31,7 +31,7 @@ Public Class frmQC
 
     End Sub
 
-    Private Sub BindingSource3_CurrentChanged(sender As Object, e As EventArgs) Handles BindingSource3.CurrentChanged
+    Private Sub BindingSource3_CurrentChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -252,7 +252,12 @@ Public Class frmQC
             If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = elmlist & " and "
             If chkAllElements.Checked = True And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and "
             If chkAllElements.Checked = True And chkAllStations.Checked = True Then stnelm_selected = ""
-            If chkAllElements.Checked = False And chkAllStations.Checked = False Then stnelm_selected = stnlist & " and " & elmlist & " and "
+            If chkAllElements.Checked = False And chkAllStations.Checked = False Then
+                stnelm_selected = stnlist & " and " & elmlist & " and "
+                If optInterElement.Checked = True Then stnelm_selected = stnlist & " and "
+            End If
+            'If chkAllElements.Checked = False And chkAllStations.Checked = True Then stnelm_selected = ""
+
         End If
 
         myConnectionString = frmLogin.txtusrpwd.Text
@@ -270,6 +275,7 @@ Public Class frmQC
             'Get required data for QC interelement comparison
             sql1 = "SELECT * from qc_interelement_relationship_definition"
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+
             ' Set timeout period to unlimited
             da1.SelectCommand.CommandTimeout = 0
 
@@ -334,9 +340,13 @@ Public Class frmQC
             Me.Cursor = Cursors.Default
         End Try
 
-        'Update QC status for selected date range from 0 to 1
-        strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+        'Update QC status for selected date range from 0 to 1 for Absolute Limits check
+        If optAbsoluteLimits.Checked = True Then
+            strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnelm_selected & " year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
 
+        End If
+
+        'MsgBox(strSQL)
         ' Create the Command for executing query and set its properties
         objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
@@ -345,9 +355,9 @@ Public Class frmQC
             'Execute query
             objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
             objCmd.ExecuteNonQuery()
-            ' MsgBox("QC status updated!", MsgBoxStyle.Information)
-            'Catch ex As MySql.Data.MySqlClient.MySqlException
-            '    'Ignore expected error i.e. error of Duplicates in MySqlException
+            'MsgBox("QC status updated!", MsgBoxStyle.Information)
+        Catch ex As MySql.Data.MySqlClient.MySqlException
+            'Ignore expected error i.e. error of Duplicates in MySqlException
 
         Catch ex As Exception
             'Dispaly error message if it is different from the one trapped in 'Catch' execption above
@@ -477,11 +487,36 @@ Public Class frmQC
             'Interelement comparison checks
         ElseIf optInterElement.Checked = True Then
 
+            'MsgBox(strSQL)
+            ' Create the Command for executing query and set its properties
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+
             'Loop through the combination of elements in the [qc_interelement_relationship_definition] table
             For m = 0 To n - 1
                 elem1 = ds1.Tables("interElement").Rows(m).Item("elementId_1")
                 elem2 = ds1.Tables("interElement").Rows(m).Item("elementId_2")
                 'MsgBox("Element1=" & elem1 & "  Element2=" & elem2)
+
+                'Update QC status for selected date range from 0 to 1 for InterElement check
+                'strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnlist & " and describedBy = " & Year(obsdatetime) between " & beginYear & " And " & endYear & " And month(obsdatetime) between " & beginMonth & " And " & endMonth & ";"
+                strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where " & stnlist & " and (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+                If chkAllStations.Checked Then strSQL = "UPDATE IGNORE observationinitial set qcstatus=1 where (describedBy = '" & elem1 & "' or describedBy = '" & elem2 & "' ) and Year(obsdatetime) between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & ";"
+
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
+
+                Try
+                    objCmd.CommandTimeout = 0 'Assign sufficient time out period to allow execution the update query to completion
+                    objCmd.ExecuteNonQuery()
+                Catch x As Exception
+                    If x.HResult = "-2147467259" Then
+                        'MsgBox("Repeat QC encountered on some records")
+                    Else
+                        MsgBox(x.Message)
+                        Me.Cursor = Cursors.Default
+                    End If
+                End Try
+
 
                 'Select element 1 for inter-eleent comparison
                 'strSQL = "DELETE from qc_interelement_1"
@@ -512,9 +547,18 @@ Public Class frmQC
 
                 If stnselected = True Then
                     strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
-                    "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
-                    "WHERE obsvalue <> '' and describedby=" & elem1 & " and year(obsdatetime) between " & beginYear & " and " & endYear &
+                    "Select recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                    "WHERE obsvalue <> '' and describedby=" & elem1 & " and " & stnlist & " and year(obsdatetime) between " & beginYear & " and " & endYear &
                     " and month(obsdatetime) between " & beginMonth & " and " & endMonth
+
+                    ' When all stations are selected, stations list will not be appear in the query so as to include all of them
+                    If chkAllStations.Checked = True Then
+                        strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
+                        "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
+                        "WHERE obsvalue <> '' and describedby=" & elem1 & " and year(obsdatetime) between " & beginYear & " and " & endYear &
+                        " and month(obsdatetime) between " & beginMonth & " and " & endMonth
+                    End If
+
                 Else
                     strSQL = "INSERT IGNORE INTO qc_interelement_1(stationId_1,elementId_1,obsDatetime_1,obsValue_1,qcStatus_1,acquisitionType_1,obsLevel_1,capturedBy_1,dataForm_1) " &
                     "SELECT recordedfrom,describedby,obsdatetime,obsvalue,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm FROM observationinitial " &
@@ -642,7 +686,7 @@ Public Class frmQC
                     'objCmd.CommandTimeout = 0
                     'objCmd.ExecuteNonQuery()
 
-                    OutputQcInterElementReport(QcReportFile, strSQL)
+                    OutputQcInterElementReport(QcReportFile, strSQL, elem1, elem2)
 
 
                     'MsgBox("QC inter-element report( send To: d:/data/qc_values_interelement_set2_" & beginYearMonth & "_" & endYearMonth & ".csv'", MsgBoxStyle.Information)
@@ -658,8 +702,8 @@ Public Class frmQC
 
             Next m
 
-            msgTxtQCReportsOutInterelement = "Inter-element reports sent to "
-            MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
+            'msgTxtQCReportsOutInterelement = "Inter-element reports sent to "
+            'MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
         End If
         lblDataTransferProgress.Text = "Processing complete!"
         Me.Cursor = Cursors.Default
@@ -677,6 +721,7 @@ Public Class frmQC
             sql = "SELECT * FROM qcabslimits;"
             ds.Clear()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "qcabslimits")
             x = ds.Tables("qcabslimits").Rows.Count
 
@@ -713,13 +758,14 @@ Public Class frmQC
         CommonModules.ViewFile(fl)
     End Sub
 
-    Sub OutputQcInterElementReport(fl As String, sql1 As String)
+    Sub OutputQcInterElementReport(fl As String, sql1 As String, elm1 As String, elm2 As String)
         Dim t As Long
         Dim dt As String
 
         'MsgBox(fl)
 
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, conn)
+        da.SelectCommand.CommandTimeout = 0
         ds.Clear()
         da.Fill(ds, "qcInterElements")
         t = ds.Tables("qcInterElements").Rows.Count
@@ -737,9 +783,10 @@ Public Class frmQC
                     Print(111, dt)
                     PrintLine(111)
                 Next
-
+                msgTxtQCReportsOutInterelement = "QC report for comparison of Elements " & elm1 & " and " & elm2 & " sent to "
+                MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
             Else
-                'MsgBox("No QC errors found")
+                MsgBox("No QC errors found for comparison of Elements " & elm1 & " and " & elm2)
             End If
 
             FileClose(111)

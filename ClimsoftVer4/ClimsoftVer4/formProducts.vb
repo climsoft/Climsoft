@@ -28,10 +28,12 @@ Public Class frmProducts
 
         'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
         MyConnectionString = frmLogin.txtusrpwd.Text
+
         Try
             conn.ConnectionString = MyConnectionString
             conn.Open()
 
+            ProductsTable_Update()
             'sql = "SELECT * FROM tblproducts"
             sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -63,15 +65,12 @@ Public Class frmProducts
 
     End Sub
 
-    Private Sub cmbProductsCategory_Click(sender As Object, e As EventArgs) Handles cmbProductsCategory.Click
-
-    End Sub
-
     Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProductsCategory.SelectedIndexChanged
         Dim prod As String
 
         prod = cmbProductsCategory.Text
-
+        'If prod = "Rain Days" Then ProductsTable_Update()
+        'ProductsTable_Update()
         lstvProducts.Clear()
         lstvProducts.Columns.Clear()
         lstvProducts.Columns.Add("Products Name", 100, HorizontalAlignment.Left)
@@ -141,5 +140,24 @@ Public Class frmProducts
     Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#products")
 
+    End Sub
+
+    Sub ProductsTable_Update()
+        Dim currDB, sql0 As String
+        Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
+
+        frmUserManagement.CurrentDB(MyConnectionString, currDB)
+
+        sql0 = "USE `" & currDB & "`;
+               INSERT IGNORE INTO `tblproducts` (`productId`, `productName`, `prDetails`, `prCategory`) VALUES ('24', 'Dekadal Counts', 'Dekadal Rain Days', 'Rain Days');
+               INSERT IGNORE INTO `tblproducts` (`productId`, `productName`, `prDetails`, `prCategory`) VALUES ('25', 'Monthly Counts', 'Monthly Rain Days', 'Rain Days');               INSERT IGNORE INTO `tblproducts` (`productId`, `productName`, `prDetails`, `prCategory`) VALUES ('26', 'Annual Counts', 'Annual Rain Days', 'Rain Days');"
+        Try
+            qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, conn)
+            qry0.CommandTimeout = 0
+            qry0.ExecuteNonQuery()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

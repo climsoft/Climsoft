@@ -1598,9 +1598,17 @@ Err:
             End If
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
             FileClose(1)
-            local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            'local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+
+            local_folder = System.IO.Path.GetFullPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) & "\Climsoft4\data"
+            If Not Directory.Exists(local_folder) Then
+                Directory.CreateDirectory(local_folder)
+            End If
+
             'Refresh_Folder(local_folder)
-            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            'Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_aws.txt"
 

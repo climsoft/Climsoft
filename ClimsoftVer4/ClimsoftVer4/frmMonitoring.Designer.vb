@@ -68,6 +68,9 @@ Partial Class frmMonitoring
         Me.cboForms = New System.Windows.Forms.ComboBox()
         Me.TabSettings = New System.Windows.Forms.TabPage()
         Me.grpSettings = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.optUsersStatus = New System.Windows.Forms.RadioButton()
         Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
         Me.lblSingleEntryMode = New System.Windows.Forms.Label()
         Me.optEntryMode = New System.Windows.Forms.RadioButton()
@@ -80,9 +83,6 @@ Partial Class frmMonitoring
         Me.lblTrecs = New System.Windows.Forms.Label()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.optUsersStatus = New System.Windows.Forms.RadioButton()
         Me.TabMonitoring.SuspendLayout()
         Me.TabUsrRecords.SuspendLayout()
         Me.grpUsers.SuspendLayout()
@@ -115,7 +115,7 @@ Partial Class frmMonitoring
         Me.TabUsrRecords.Location = New System.Drawing.Point(4, 22)
         Me.TabUsrRecords.Name = "TabUsrRecords"
         Me.TabUsrRecords.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabUsrRecords.Size = New System.Drawing.Size(665, 174)
+        Me.TabUsrRecords.Size = New System.Drawing.Size(665, 229)
         Me.TabUsrRecords.TabIndex = 0
         Me.TabUsrRecords.Text = "Users Records"
         Me.TabUsrRecords.UseVisualStyleBackColor = True
@@ -216,7 +216,7 @@ Partial Class frmMonitoring
         Me.TabPerformance.Controls.Add(Me.grpPerformance)
         Me.TabPerformance.Location = New System.Drawing.Point(4, 22)
         Me.TabPerformance.Name = "TabPerformance"
-        Me.TabPerformance.Size = New System.Drawing.Size(665, 174)
+        Me.TabPerformance.Size = New System.Drawing.Size(665, 229)
         Me.TabPerformance.TabIndex = 2
         Me.TabPerformance.Text = "Performance Monitoring"
         Me.TabPerformance.UseVisualStyleBackColor = True
@@ -575,6 +575,36 @@ Partial Class frmMonitoring
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Settings"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(28, 152)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(116, 13)
+        Me.Label3.TabIndex = 18
+        Me.Label3.Text = "1 for Double Key Entry "
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(28, 135)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(116, 13)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "0 for Single Data Entry "
+        '
+        'optUsersStatus
+        '
+        Me.optUsersStatus.AutoSize = True
+        Me.optUsersStatus.Location = New System.Drawing.Point(6, 115)
+        Me.optUsersStatus.Name = "optUsersStatus"
+        Me.optUsersStatus.Size = New System.Drawing.Size(124, 19)
+        Me.optUsersStatus.TabIndex = 16
+        Me.optUsersStatus.Text = "Users Entry Status"
+        Me.optUsersStatus.UseVisualStyleBackColor = True
+        '
         'lblDoubleEntryMode
         '
         Me.lblDoubleEntryMode.AutoSize = True
@@ -691,36 +721,6 @@ Partial Class frmMonitoring
         Me.cmdHelp.TabIndex = 14
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(28, 152)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(116, 13)
-        Me.Label3.TabIndex = 18
-        Me.Label3.Text = "1 for Double Key Entry "
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(28, 135)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(116, 13)
-        Me.Label4.TabIndex = 17
-        Me.Label4.Text = "0 for Single Data Entry "
-        '
-        'optUsersStatus
-        '
-        Me.optUsersStatus.AutoSize = True
-        Me.optUsersStatus.Location = New System.Drawing.Point(6, 115)
-        Me.optUsersStatus.Name = "optUsersStatus"
-        Me.optUsersStatus.Size = New System.Drawing.Size(124, 19)
-        Me.optUsersStatus.TabIndex = 16
-        Me.optUsersStatus.Text = "Users Entry Status"
-        Me.optUsersStatus.UseVisualStyleBackColor = True
         '
         'frmMonitoring
         '
