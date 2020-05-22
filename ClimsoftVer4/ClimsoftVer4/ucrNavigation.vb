@@ -302,12 +302,12 @@ Public Class ucrNavigation
                 iCurrRow = GetRowPosition(dctFieldvalue)
             End If
 
-            bSuppressKeyControlChanges = True
-            updateLinkedTableEntry()
-            bSuppressKeyControlChanges = False
-            displayRecordNumber()
-
         End If
+
+        bSuppressKeyControlChanges = True
+        updateLinkedTableEntry()
+        bSuppressKeyControlChanges = False
+        displayRecordNumber()
     End Sub
 
     Private Sub updateLinkedTableEntry()

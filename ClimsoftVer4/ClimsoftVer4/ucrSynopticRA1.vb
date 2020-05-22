@@ -14,6 +14,8 @@ Public Class ucrSynopticRA1
     Private iGminEndMonth As Integer
     'Stores default Geopotential standard pressure level
     Private iStandardPressureLevel As Integer
+    'stores the default value for the hour selector
+    Private iDefaultHourValue As Integer
     Private bAutoFillValues As Boolean = True
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -32,6 +34,9 @@ Public Class ucrSynopticRA1
                 End If
             Next
 
+            GetRegKeys()
+            ucrHourSelector.SetDefaultValue(iDefaultHourValue)
+
             SetUpTableEntry("form_synoptic_2_ra1")
             AddField("signature")
             AddField("entryDatetime")
@@ -44,7 +49,7 @@ Public Class ucrSynopticRA1
 
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
-            GetRegKeys()
+
 
             bFirstLoad = False
 
@@ -216,11 +221,10 @@ Public Class ucrSynopticRA1
     ''' by getting the values from the regkeys database table
     ''' </summary>
     Private Sub GetRegKeys()
-        Dim clsDataDefinition As DataCall
+        Dim clsDataDefinition As New DataCall
         Dim dtbl As DataTable
         Dim row As DataRow
 
-        clsDataDefinition = New DataCall
         clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -243,6 +247,9 @@ Public Class ucrSynopticRA1
             'Get the month for ending record of Gmin
             row = dtbl.Select("keyName = 'key04'").FirstOrDefault()
             iGminEndMonth = If(row IsNot Nothing, Val(row.Item("keyValue")), 0)
+
+            row = dtbl.Select("keyName = 'key01'").FirstOrDefault()
+            iDefaultHourValue = If(row IsNot Nothing, Val(row.Item("keyValue")), 0)
         End If
     End Sub
 
