@@ -32,6 +32,10 @@ Public Class ucrFormDaily2
             ucrVisibilityUnits.bValidate = False
 
 
+
+            ucrHour.SetDefaultValue(GetDefaultHourValue())
+
+
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -46,6 +50,17 @@ Public Class ucrFormDaily2
             Next
 
             SetUpTableEntry("form_daily2")
+
+            'this is placed here to add onto the keydown event set in the SetUpTableEntry() subroutine
+            AddHandler ucrInputTotal.evtKeyDown, Sub(sender1 As Object, e1 As KeyEventArgs)
+                                                     If e1.KeyCode = Keys.Enter Then
+                                                         If Not CheckTotal() Then
+                                                             ucrInputTotal.Focus()
+                                                             e1.SuppressKeyPress = True
+                                                         End If
+                                                     End If
+                                                 End Sub
+
             AddField("signature")
             AddField("entryDatetime")
 
@@ -144,15 +159,6 @@ Public Class ucrFormDaily2
         txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
     End Sub
 
-    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Not CheckTotal() Then
-                ucrInputTotal.Focus()
-                e.SuppressKeyPress = True
-            End If
-        End If
-    End Sub
-
     Private Function IsValuesEmpty() As Boolean
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueFlagPeriod Then
@@ -228,6 +234,23 @@ Public Class ucrFormDaily2
         End If
 
         Return bValueCorrect
+    End Function
+
+    'Get the default hour settings from the database
+    Private Function GetDefaultHourValue() As Integer
+        Dim iDefaultHourValue As Integer = 0
+        Dim clsDataDefinition As New DataCall
+        Dim dtbl As DataTable
+
+        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
+        clsDataDefinition.SetFilter("keyName", "=", "key01", bIsPositiveCondition:=True, bForceValuesAsString:=True)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            Integer.TryParse(dtbl.Rows(0).Item("keyValue"), iDefaultHourValue)
+        End If
+
+        Return iDefaultHourValue
+
     End Function
 
     ''' <summary>

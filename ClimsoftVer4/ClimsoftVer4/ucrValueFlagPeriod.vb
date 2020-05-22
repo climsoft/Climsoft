@@ -325,70 +325,27 @@
             End If
 
             'validate values loudly  
-            bValueValid = ucrValue.ValidateText(strValue, bValidateSilently:=False)
-            bFlagValid = ucrFlag.ValidateText(strFlag, bValidateSilently:=False)
+            Dim bValidateSilently As Boolean = bSetValuesIfValid
+            bValueValid = ucrValue.ValidateText(strValue, bValidateSilently:=bValidateSilently)
+            bFlagValid = ucrFlag.ValidateText(strFlag, bValidateSilently:=bValidateSilently)
+
 
             bValuesCorrect = (bValueValid AndAlso bFlagValid)
+
             ucrValue.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
+
+            'todo. temporary addition to fix limits violations
+            If ucrValue.GetValidationCode(strValue) = 2 Then
+                ucrValue.SetBackColor(Color.Cyan)
+                If Not bSetValuesIfValid Then
+                    bValuesCorrect = True
+                End If
+            End If
+
         End If
         If bSetValuesIfValid AndAlso bValuesCorrect Then
             ucrValue.SetValue(strValue)
             ucrFlag.SetValue(strFlag)
-        End If
-        Return bValuesCorrect
-    End Function
-
-    Private Function DoQCForValueDEPRECATED() As Boolean
-        Dim bValuesCorrect As Boolean = False
-        Dim bValueValid As Boolean = False
-        Dim bFlagValid As Boolean = False
-        Dim bValidateSilently As Boolean
-        Dim bNewSuppressChangedEvents As Boolean
-        Dim strVF As String
-        strVF = ucrValue.GetValue
-        If String.IsNullOrEmpty(strVF) Then
-            bValuesCorrect = True
-            If Not ucrFlag.IsEmpty AndAlso ucrFlag.GetValue <> "M" Then
-                ucrFlag.SetValue("") 'remove the flag
-            End If
-        Else
-            'Check for an observation flag in the ucrValue.
-            'If a flag exists then separate and place it in the  ucrValueFlag 
-            If Not IsNumeric(Strings.Right(strVF, 1)) AndAlso IsNumeric(Strings.Left(strVF, Strings.Len(strVF) - 1)) Then
-                'Get observation flag from the ucrValue (the last character). If its an "M" just set flag as empty text
-                ucrFlag.SetValue(If(Strings.Right(ucrValue.GetValue, 1) = "M", "", Strings.Right(ucrValue.GetValue, 1)))
-
-                If ucrFlag.ValidateValue() Then
-                    'Get the observation value by leaving out the last character  
-                    bNewSuppressChangedEvents = ucrValue.bSuppressChangedEvents
-                    ucrValue.bSuppressChangedEvents = True
-                    ucrValue.SetValue(Strings.Left(strVF, Strings.Len(strVF) - 1))
-                    ucrValue.bSuppressChangedEvents = bNewSuppressChangedEvents
-                End If
-
-            Else
-                ucrFlag.SetValue("")
-            End If
-
-            'validate values loudly  
-            bValidateSilently = ucrValue.bValidateSilently
-            ucrValue.bValidateSilently = False
-            bValueValid = ucrValue.ValidateValue()
-            ucrValue.bValidateSilently = bValidateSilently
-
-
-            bValidateSilently = ucrFlag.bValidateSilently
-            ucrFlag.bValidateSilently = False
-            bFlagValid = ucrFlag.ValidateValue()
-            ucrFlag.bValidateSilently = bValidateSilently
-
-            'If ucrFlag.GetValue = "M" Then
-            '    bFlagValid = False
-            '    MsgBox("M is the expected flag for a missing value", MsgBoxStyle.Critical)
-            '    ucrFlag.SetBackColor(Color.Cyan)
-            'End If
-            bValuesCorrect = (bValueValid AndAlso bFlagValid)
-            ucrValue.SetBackColor(If(bValuesCorrect, clValidColor, clInValidColor))
         End If
         Return bValuesCorrect
     End Function
@@ -417,6 +374,13 @@
 
             'check if the result is a valid value 
             bValuesCorrect = ucrValue.ValidateText(strValue)
+
+            'todo. temporary addition to fix limits violations. todo. use validateNumeric
+            'just set the invalid colours for limits violation but assume it's a valid value
+            If Not bValuesCorrect AndAlso ucrValue.GetValidationCode(strValue) = 2 Then
+                bValuesCorrect = True
+            End If
+
         End If
         Return bValuesCorrect
     End Function
@@ -518,12 +482,15 @@
             End If
     End Sub
 
-    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable)
-        ucrValue.SetValueToDataTable(dtbValues)
-        ucrFlag.SetValueToDataTable(dtbValues)
-        If IncludePeriod Then
-            ucrPeriod.SetValueToDataTable(dtbValues)
+    Public Overrides Sub SetValueToDataTable(dtbValues As DataTable, Optional bValidateValue As Boolean = True)
+        If ValidateValue() Then
+            ucrValue.SetValueToDataTable(dtbValues, False)
+            ucrFlag.SetValueToDataTable(dtbValues, False)
+            If IncludePeriod Then
+                ucrPeriod.SetValueToDataTable(dtbValues, False)
+            End If
         End If
+
     End Sub
 
 

@@ -302,12 +302,12 @@ Public Class ucrNavigation
                 iCurrRow = GetRowPosition(dctFieldvalue)
             End If
 
-            bSuppressKeyControlChanges = True
-            updateLinkedTableEntry()
-            bSuppressKeyControlChanges = False
-            displayRecordNumber()
-
         End If
+
+        bSuppressKeyControlChanges = True
+        updateLinkedTableEntry()
+        bSuppressKeyControlChanges = False
+        displayRecordNumber()
     End Sub
 
     Private Sub updateLinkedTableEntry()
@@ -456,7 +456,7 @@ Public Class ucrNavigation
                         Exit For
                     Else
                         'ucrTemp.cboValues.SelectedIndex = 0
-                        ucrTemp.SetValue(0) ' TODO. Test this 
+                        ucrTemp.SelectDefaultValue() ' TODO. Test this 
                         If j = lstDateIncrementControls.Count - 1 Then
                             bIncrementYear = True
                         End If
@@ -466,8 +466,14 @@ Public Class ucrNavigation
                 If bIncrementYear Then
                     ucrYear.SetValue(ucrYear.GetValue() + 1)
                 End If
+
                 If ucrLinkedTableEntry.bUpdating Then
+                    'go to the next sequncer value
+                    iSelectedSequencerRow = iSelectedSequencerRow + 1
                     IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+                Else
+                    'go to the first sequencer value
+                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
                 End If
 
             End If
