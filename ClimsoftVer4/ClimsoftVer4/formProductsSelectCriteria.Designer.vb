@@ -95,6 +95,7 @@ Partial Class formProductsSelectCriteria
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
@@ -910,4 +911,5 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents cmdClearStations As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllElements As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllStations As System.Windows.Forms.Button
+    Friend WithEvents FontDialog1 As FontDialog
 End Class

@@ -255,7 +255,6 @@
             'Execute query
             objCmd.ExecuteNonQuery()
 
-
             Bufr_Crex_Initialize(dbconn)  'Set all values to missing
 
             'Set data set
@@ -289,13 +288,17 @@
             fl2 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.txt"
             FileOpen(20, fl2, OpenMode.Output)
 
+            descriptors_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv"
+            FileOpen(111, descriptors_file, OpenMode.Output)
+
+            FileClose(111)
+
             'Loop through the subsets
             Data_Description_Section = ""
+            'MsgBox(cboStation.Items.Count)
             For i = 0 To cboStation.Items.Count - 1
-
                 ' Set the replicated elements according to observations per subset
                 Set_Replications(dbconn, cboStation.Items(i))
-
                 Update_Station_Details(dbconn, cboStation.Items(i))
                 Update_Instruments_Details(dbconn, cboStation.Items(i))
                 Update_Time_Periods(dbconn)
@@ -320,12 +323,12 @@
             'MsgBox(msg_header & " " & msg_file)
 
             If Int(sss) > 0 Then
-                If Not BUFR_Code(dbconn, Data_Description_Section, substs) Then
+                If Not BUFR_Code(dbconn, Data_Description_Section, sss) Then
                     MsgBox("Encoding Error")
                 End If
             End If
 
-
+            dbconn.Close()
 
             '' Update with entered observations for each subset
 
@@ -744,6 +747,7 @@
             FileClose(20)
             MsgBox("Finished Encoding")
         Catch ex As Exception
+            dbconn.Close()
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
             FileClose(20)
@@ -807,8 +811,8 @@
             '    IO.File.Delete(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv")
 
             'End If
-            If IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.csv") Then
-                IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.csv")
+            If IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv") Then
+                IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv")
             End If
 
             sql = "Select * from bufr_crex_data"
@@ -882,7 +886,7 @@
         sql = "Select * from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
 
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
-
+        'MsgBox(sql)
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
@@ -899,10 +903,17 @@
             'For i = 0 To Kount - 1
 
             ' Replications for clounds above the station
-            If Len(.Rows(0).Item("Val_Elem119")) > 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem123")) > 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem127")) > 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem131")) > 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem119")) Then Select_Descriptor(conn1, "119", "cloud_rep1")
+
+            'If Len(.Rows(0).Item("Val_Elem123")) > 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem123")) Then Select_Descriptor(conn1, "123", "cloud_rep1")
+
+            'If Len(.Rows(0).Item("Val_Elem127")) > 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem127")) Then Select_Descriptor(conn1, "127", "cloud_rep1")
+
+            'If Len(.Rows(0).Item("Val_Elem131")) > 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem131")) Then Select_Descriptor(conn1, "131", "cloud_rep1")
+
             ' Replications for clounds below the station
             ' These observations are not recorded in this form. Hence the associated elements have been commented
             ' However the replication factor is set to Zero but Selected so that the decoders can retrieve the replication factor
@@ -912,6 +923,7 @@
             'If Len(.Rows(i).Item("Val_Elem631")) > 0 Then Select_Descriptor(conn1, "631", "cloud_rep2")
             'If Len(.Rows(i).Item("Val_Elem641")) > 0 Then Select_Descriptor(conn1, "641", "cloud_rep2")
             'Next
+
         End With
     End Sub
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
@@ -1063,6 +1075,7 @@
         Dim fld, dat, ChrR, N, CL, CM, CH As String
         Dim code, rep1, rep2 As Integer
         sql = "select * from form_synoptic_2_ra1 where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
+        'MsgBox(sql)
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
@@ -1074,12 +1087,16 @@
                 rep1 = 0
                 rep2 = 0
                 With ds.Tables("synoptic")
-                    For i = 0 To .Columns.Count - 1
-                        fld = .Columns(i).ColumnName
 
+                    For i = 0 To .Columns.Count - 1
+                        dat = ""
+                        fld = .Columns(i).ColumnName
+                        'MsgBox(2 & " _" & fld)
                         If Len(fld) = 11 Then
                             code = Int(Strings.Mid(fld, 9, 3))
-                            dat = .Rows(0).Item(i)
+                            'MsgBox(code)
+                            If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
+                            'MsgBox(dat)
                             If Len(dat) <> 0 Then
                                 ' Compute observations with special conditions
                                 If code = 46 Then ' Scale Radiation and Pressure 
@@ -1093,6 +1110,7 @@
                                 ElseIf code = "84" Then ' Convert hours of Sunshine to minutes
                                     dat = CLng(dat) * 60
                                 End If
+
                                 Update_Observation(conn1, dat, code)
 
                                 ' Compute cloud layers replications
@@ -1133,20 +1151,21 @@
 
                         ' Compute Character and Intensity of precipitation
                         If fld = "Val_Elem005" Then
-                            ChrR = Precip_Characteristic(.Rows(0).Item(i))
+                            If Not IsDBNull(.Rows(0).Item(i)) Then ChrR = Precip_Characteristic(.Rows(0).Item(i))
                             Update_Observation(conn1, ChrR, "505")
                             Update_Observation(conn1, "9", "50")
                         End If
 
                     Next
+
                     ' Update Cloud Replications
                     Update_Observation(conn1, rep1, "cloud_rep1")
                     Update_Observation(conn1, rep2, "cloud_rep2")
-
                 End With
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            'MsgBox(sql)
         End Try
     End Sub
     Function Precip_Characteristic(dat As String) As String
@@ -1166,8 +1185,10 @@
     End Function
 
     Sub Update_Observation(conn1 As MySql.Data.MySqlClient.MySqlConnection, data As String, element As String)
+
         sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
         ' Create the Command for executing query and set its properties
+        'MsgBox(sql)
         Try
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
             'Execute query
@@ -1701,7 +1722,7 @@
             Dim txtbufr, octsfl, bufr_file As String
 
             'txtbufr = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.txt"
-            txtbufr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr.txt"
+            txtbufr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.txt"
             FileOpen(2, txtbufr, OpenMode.Output)
 
             Print(2, BUFR_Message) ' Put the BUFR binary digit message into a text file
@@ -1710,11 +1731,11 @@
 
             'Construct and open Bufr output text file based on the message header
             'bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
-            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\" & msg_file & ".f"
+            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
             FileOpen(2, bufr_file, OpenMode.Binary)
 
             'octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
-            octsfl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data\bufr_octets.txt"
+            octsfl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
             FileOpen(1, octsfl, OpenMode.Output)
 
             'Output BUFR data into a binary and a text file
