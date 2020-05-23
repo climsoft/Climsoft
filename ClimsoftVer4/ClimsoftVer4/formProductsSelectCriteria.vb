@@ -73,7 +73,19 @@ Public Class formProductsSelectCriteria
     'End Sub
 
     Private Sub formProducts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'MyConnectionString = "server=127.0.0.1; uid=root; pwd=admin; database=mysql_climsoft_db_v4"
+
+        'Set Header for Elements list view
+        lstvStations.Columns.Clear()
+        lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
+        lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
+
+        'Set Header for Stations list view
+        lstvElements.Columns.Clear()
+        lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
+        lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
+        lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
+
+
         MyConnectionString = frmLogin.txtusrpwd.Text
         Try
             conn.ConnectionString = MyConnectionString
@@ -123,17 +135,21 @@ Public Class formProductsSelectCriteria
         prod = cmbstation.Text
 
         'lstvStations.Clear()
-        lstvStations.Columns.Clear()
-        lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
-        lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
+        'lstvStations.Columns.Clear()
+        'lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
+        'lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
         'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
-        sql = "SELECT stationId, stationName FROM station WHERE stationName=""" & prod & """"
+        'sql = "SELECT stationId, stationName FROM station WHERE stationName=""" & prod & """"
+        sql = "SELECT stationId, stationName FROM station WHERE stationName='" & prod & "';"
+
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
         maxRows = (ds.Tables("station").Rows.Count)
+        If maxRows > 0 Then cmbstation.BackColor = Color.White
+
         Dim str(2) As String
         Dim itm = New ListViewItem
 
@@ -168,21 +184,23 @@ Public Class formProductsSelectCriteria
         'On Error GoTo Err
         Try
             prod = cmbElement.Text
-            ' MsgBox(prod)
-            lstvElements.Columns.Clear()
-            lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
-            lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
-            lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
+
+            'lstvElements.Columns.Clear()
+            'lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
+            'lstvElements.Columns.Add("Element Abbrev", 100, HorizontalAlignment.Left)
+            'lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
             'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
+            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
+            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description='" & prod & "';"
 
-            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
-            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
             maxRows = (ds.Tables("obselement").Rows.Count)
+            If maxRows > 0 Then cmbElement.BackColor = Color.White
+
             Dim str(3) As String
             Dim itm = New ListViewItem
 
@@ -231,7 +249,7 @@ Public Class formProductsSelectCriteria
         'MsgBox(Me.lblProductType.Text)
 
 
-        Dim ProductsPath, xpivot As String
+        Dim ProductsPath, xpivot, threshValue As String
         SumAvg = ""
         SummaryType = ""
         xpivot = ""
@@ -524,6 +542,33 @@ Public Class formProductsSelectCriteria
                     edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
                     CDT_Daily(sdate, edate)
+                Case "Dekadal Counts"
+                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Dekadal Rainy Days", "0.03")
+                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as DEKAD, count(round(day(obsDatetime)/10.5 + 0.5,0)) AS Days
+                          from station INNER JOIN observationfinal ON stationId = recordedFrom
+                          where describedBy= '5'  and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                          Group by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0)
+                          Order by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0);"
+
+                    DataProducts(sql, lblProductType.Text)
+                Case "Monthly Counts"
+                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Monthly Rainy Days", "0.03")
+                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, Count(month(obsDatetime)) as Days
+                           from station INNER JOIN observationfinal ON stationId = recordedFrom
+                           where describedBy= '5' and obsValue >= " & threshValue & " and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                           Group by recordedFrom, year(obsDatetime), month(obsDatetime)
+                           Order by recordedFrom, year(obsDatetime), month(obsDatetime);"
+
+                    DataProducts(sql, lblProductType.Text)
+                Case "Annual Counts"
+                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Annual Rainy Days", "0.03")
+                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Count(year(obsDatetime)) as Days
+                           from station INNER JOIN observationfinal ON stationId = recordedFrom
+                           where describedBy= '5' and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
+                           Group by recordedFrom, year(obsDatetime)
+                           Order by recordedFrom, year(obsDatetime);"
+
+                    DataProducts(sql, lblProductType.Text)
                 Case Else
                     MsgBox("No Product found for Selection made", MsgBoxStyle.Information)
                     'Me.Cursor = Cursors.Default
@@ -605,7 +650,8 @@ Err:
             End If
 
             ' Create output file
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Wrose.txt"
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Wrose.txt"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Wrose.txt"
 
             FileOpen(11, fl, OpenMode.Output)
 
@@ -1078,7 +1124,8 @@ Err:
 
             maxRows = ds.Tables("observationfinal").Rows.Count
 
-            f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\CPT-" & lstvElements.Items(k).SubItems(1).Text & "-" & MonthName(Int(st), True) & "-" & MonthName(Int(ed), True) & ".txt"  'data_products.csv"
+            'f1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\CPT-" & lstvElements.Items(k).SubItems(1).Text & "-" & MonthName(Int(st), True) & "-" & MonthName(Int(ed), True) & ".txt"  'data_products.csv"
+            f1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\CPT-" & lstvElements.Items(k).SubItems(1).Text & "-" & MonthName(Int(st), True) & "-" & MonthName(Int(ed), True) & ".txt"
 
             FileOpen(11, f1, OpenMode.Output)
 
@@ -1621,6 +1668,27 @@ Err:
         Else
             chkTranspose.Visible = False
         End If
+
+        If lblProductType.Text = "Dekadal Counts" Or lblProductType.Text = "Monthly Counts" Or lblProductType.Text = "Annual Counts" Then
+            Dim str(3) As String
+            Dim itm = New ListViewItem
+
+            ' Add Precipitation details in the Elements list view 
+            str(0) = "5"
+            str(1) = "PRECIP"
+            str(2) = "Precipitation daily total"
+            itm = New ListViewItem(str)
+            lstvElements.Items.Add(itm)
+
+            ' Set the relevant controls appropriately
+            cmbElement.Enabled = False
+            lstvElements.Enabled = False
+            pnlSummary.Visible = False
+            cmdDelElement.Enabled = False
+            cmdSelectAllElements.Enabled = False
+            cmdClearElements.Enabled = False
+
+        End If
     End Sub
 
 
@@ -1819,18 +1887,14 @@ Err:
     End Sub
 
     Private Sub cmdClearElements_Click(sender As Object, e As EventArgs) Handles cmdClearElements.Click
-        lstvElements.Clear()
+        lstvElements.Items.Clear()
     End Sub
 
 
     Private Sub cmdClearStations_Click(sender As Object, e As EventArgs) Handles cmdClearStations.Click
-        lstvStations.Clear()
+        lstvStations.Items.Clear()
     End Sub
 
-
-    Private Sub dateTo_ValueChanged(sender As Object, e As EventArgs) Handles dateTo.ValueChanged
-
-    End Sub
 
     Private Sub cmdSelectAllStations_Click(sender As Object, e As EventArgs) Handles cmdSelectAllStations.Click
         Try
@@ -2128,6 +2192,110 @@ Err:
         Catch ex As Exception
             MsgBox(ex.Message)
             FileClose(11)
+        End Try
+    End Sub
+
+    Private Sub cmbstation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbstation.KeyPress
+        If Asc(e.KeyChar) = 13 Then add_Station(cmbstation.Text)
+
+    End Sub
+    Sub add_Station(id As String)
+        Dim str(2) As String
+        Dim itm = New ListViewItem
+
+        Try
+            sql = "SELECT stationId, stationName FROM station WHERE stationId= '" & id & "';"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "station")
+
+            maxRows = (ds.Tables("station").Rows.Count)
+            'MsgBox(maxRows)
+            If maxRows > 0 Then
+                cmbstation.Text = ""
+                cmbstation.BackColor = Color.White
+            Else
+                cmbstation.BackColor = Color.Red
+                Exit Sub
+            End If
+
+            str(0) = ds.Tables("station").Rows(0).Item("stationId")
+            str(1) = ds.Tables("station").Rows(0).Item("stationName")
+
+                itm = New ListViewItem(str)
+
+                ItmExist = False
+                If lstvStations.Items.Count = 0 Then ' Alawys add the first selected item 
+                    lstvStations.Items.Add(itm)
+                Else
+                    For j = 0 To lstvStations.Items.Count - 1
+                        ' Check if the item has been added in the list and skip it if so
+                        If str(0) = lstvStations.Items(j).Text Then
+                            ItmExist = True
+                            Exit For
+                        End If
+                    Next
+                    If Not ItmExist Then lstvStations.Items.Add(itm)
+                End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
+        If Asc(e.KeyChar) = 13 Then add_Element(cmbElement.Text)
+
+    End Sub
+
+    Sub add_Element(id As String)
+        Dim str(3) As String
+        Dim itm = New ListViewItem
+
+        Try
+
+            'sql = "SELECT SELECT elementId, abbreviation, description FROM obselement WHERE elementId = '" & id & "';"
+            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected = '1' and elementId = '" & id & "';"
+
+            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "obselement")
+
+            maxRows = (ds.Tables("obselement").Rows.Count)
+            'MsgBox(maxRows)
+            If maxRows > 0 Then
+                cmbElement.Text = ""
+                cmbElement.BackColor = Color.White
+            Else
+                cmbElement.BackColor = Color.Red
+                Exit Sub
+            End If
+
+            'For kount = 0 To maxRows - 1 Step 1
+
+            str(0) = ds.Tables("obselement").Rows(0).Item("elementId")
+            str(1) = ds.Tables("obselement").Rows(0).Item("abbreviation")
+            str(2) = ds.Tables("obselement").Rows(0).Item("description")
+
+            itm = New ListViewItem(str)
+
+            ItmExist = False
+            If lstvElements.Items.Count = 0 Then ' Alawys add the first selected item 
+                lstvElements.Items.Add(itm)
+            Else
+                For j = 0 To lstvElements.Items.Count - 1
+                    ' Check if the item has been added in the list and skip it if so
+                    If str(0) = lstvElements.Items(j).Text Then
+                        ItmExist = True
+                        Exit For
+                    End If
+                Next
+                If Not ItmExist Then lstvElements.Items.Add(itm)
+            End If
+            'Next
+        Catch err As Exception
+            MsgBox(err.Message, MsgBoxStyle.Exclamation)
         End Try
     End Sub
 End Class

@@ -674,8 +674,14 @@ Public Class formMetadata
         DeleteRecord = True
         Try
             'MsgBox(ds.Tables(tbl).Rows(recs).Item("drainageBasin"))
-            ds.Tables(tbl).Rows(recs).Delete()
-            da.Update(ds, tbl)
+            If MsgBox("Please Confirm. Undelete Not Possible!!", vbYesNo, "Delete Record") = vbYes Then
+                ds.Tables(tbl).Rows(recs).Delete()
+                da.Update(ds, tbl)
+
+                MsgBox("Record Successfully Deleted")
+            Else
+                MsgBox("Delete Cancelled")
+            End If
 
             'If rec < Kount - 1 Then
             '    populateStations("station", rec + 1, Kount)

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMainMenu
     Inherits ClimsoftVer4.frmGeneral
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing AndAlso components IsNot Nothing Then
             components.Dispose()
@@ -17,9 +17,8 @@ Partial Class frmMainMenu
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
         Me.mnuInput = New System.Windows.Forms.ToolStripMenuItem()
@@ -78,10 +77,8 @@ Partial Class frmMainMenu
         Me.cmdPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdKeyEntry = New System.Windows.Forms.Button()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.MenuStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip2
@@ -173,34 +170,34 @@ Partial Class frmMainMenu
         'UserAdminToolStripMenuItem
         '
         Me.UserAdminToolStripMenuItem.Name = "UserAdminToolStripMenuItem"
-        Me.UserAdminToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.UserAdminToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.UserAdminToolStripMenuItem.Tag = "User_Admin"
         Me.UserAdminToolStripMenuItem.Text = "User Admin"
         '
         'MetadataToolStripMenuItem
         '
         Me.MetadataToolStripMenuItem.Name = "MetadataToolStripMenuItem"
-        Me.MetadataToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.MetadataToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.MetadataToolStripMenuItem.Tag = "Metadata"
         Me.MetadataToolStripMenuItem.Text = "Metadata"
         '
         'PasswordToolStripMenuItem
         '
         Me.PasswordToolStripMenuItem.Name = "PasswordToolStripMenuItem"
-        Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.PasswordToolStripMenuItem.Text = "Change Password"
         '
         'DataFormsToolStripMenuItem
         '
         Me.DataFormsToolStripMenuItem.Name = "DataFormsToolStripMenuItem"
-        Me.DataFormsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.DataFormsToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.DataFormsToolStripMenuItem.Tag = "Data_Forms"
         Me.DataFormsToolStripMenuItem.Text = "Data Forms"
         '
         'UpdateElementsToolStripMenuItem
         '
         Me.UpdateElementsToolStripMenuItem.Name = "UpdateElementsToolStripMenuItem"
-        Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateElementsToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.UpdateElementsToolStripMenuItem.Tag = "Update_Element_Limits"
         Me.UpdateElementsToolStripMenuItem.Text = "Update Element Limits"
         Me.UpdateElementsToolStripMenuItem.Visible = False
@@ -208,19 +205,19 @@ Partial Class frmMainMenu
         'UpdateObservationsToolStripMenuItem1
         '
         Me.UpdateObservationsToolStripMenuItem1.Name = "UpdateObservationsToolStripMenuItem1"
-        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(273, 24)
+        Me.UpdateObservationsToolStripMenuItem1.Size = New System.Drawing.Size(221, 24)
         Me.UpdateObservationsToolStripMenuItem1.Text = "Update Observations"
         '
         'OpeartionsMonitoringToolStripMenuItem
         '
         Me.OpeartionsMonitoringToolStripMenuItem.Name = "OpeartionsMonitoringToolStripMenuItem"
-        Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.OpeartionsMonitoringToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.OpeartionsMonitoringToolStripMenuItem.Text = "Operations Monitoring"
         '
         'EmptyKeyEntryTablesToolStripMenuItem
         '
         Me.EmptyKeyEntryTablesToolStripMenuItem.Name = "EmptyKeyEntryTablesToolStripMenuItem"
-        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(273, 24)
+        Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(221, 24)
         Me.EmptyKeyEntryTablesToolStripMenuItem.Text = "Empty Key Entry Forms"
         '
         'ChangeOwnPasswordToolStripMenuItem
@@ -656,7 +653,6 @@ Partial Class frmMainMenu
         Me.MenuStrip2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -718,5 +714,4 @@ Partial Class frmMainMenu
     Friend WithEvents UserRecordsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents BindingSource1 As BindingSource
 End Class
