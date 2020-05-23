@@ -41,7 +41,7 @@ Partial Class frmSplashScreen
         lblWait.Anchor = System.Windows.Forms.AnchorStyles.None
         lblWait.BackColor = System.Drawing.Color.Transparent
         lblWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        lblWait.Location = New System.Drawing.Point(430, 440)
+        lblWait.Location = New System.Drawing.Point(433, 443)
         lblWait.Name = "lblWait"
         lblWait.Size = New System.Drawing.Size(122, 19)
         lblWait.TabIndex = 7
@@ -53,6 +53,7 @@ Partial Class frmSplashScreen
         Me.MainLayoutPanel.BackColor = System.Drawing.Color.Transparent
         Me.MainLayoutPanel.BackgroundImage = CType(resources.GetObject("MainLayoutPanel.BackgroundImage"), System.Drawing.Image)
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.MainLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.OutsetDouble
         Me.MainLayoutPanel.ColumnCount = 1
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 983.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
@@ -75,7 +76,7 @@ Partial Class frmSplashScreen
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.Location = New System.Drawing.Point(355, 61)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(358, 64)
         Me.ApplicationTitle.Name = "ApplicationTitle"
         Me.ApplicationTitle.Size = New System.Drawing.Size(272, 65)
         Me.ApplicationTitle.TabIndex = 0
@@ -87,7 +88,7 @@ Partial Class frmSplashScreen
         Me.lblVersion.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblVersion.BackColor = System.Drawing.Color.Transparent
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(442, 227)
+        Me.lblVersion.Location = New System.Drawing.Point(445, 233)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(99, 27)
         Me.lblVersion.TabIndex = 6

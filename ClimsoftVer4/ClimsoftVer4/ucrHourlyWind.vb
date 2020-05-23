@@ -1,5 +1,4 @@
 ﻿
-
 Public Class ucrHourlyWind
     Private strDirectionFieldName As String = "elem_112_"
     Private strSpeedFieldName As String = "elem_111_"
@@ -462,7 +461,11 @@ Public Class ucrHourlyWind
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
+                    If strFieldName = "elem_112_01" Then
+                        Dim jjj As Integer = 0
+                    End If
+
+                    If (Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strFlagColumn))) Then
 
                         strStationId = row.Item("stationId")
                         hh = Integer.Parse(strTag)

@@ -243,7 +243,7 @@
             AddHandler btn.Click, Sub()
                                       Try
 
-                                          If Not ValidateValue() Then
+                                          If ucrTableEntryNavigator.iCurrRow < 0 OrElse ucrTableEntryNavigator.iMaxRows < 1 Then
                                               Exit Sub
                                           End If
 
