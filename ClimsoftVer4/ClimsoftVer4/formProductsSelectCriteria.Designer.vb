@@ -95,6 +95,7 @@ Partial Class formProductsSelectCriteria
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.HelpToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
@@ -342,7 +343,7 @@ Partial Class formProductsSelectCriteria
         Me.cmdDelStation.Name = "cmdDelStation"
         Me.cmdDelStation.Size = New System.Drawing.Size(127, 23)
         Me.cmdDelStation.TabIndex = 22
-        Me.cmdDelStation.Text = "Delete Selected Station"
+        Me.cmdDelStation.Text = "Clear Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
@@ -351,7 +352,7 @@ Partial Class formProductsSelectCriteria
         Me.cmdDelElement.Name = "cmdDelElement"
         Me.cmdDelElement.Size = New System.Drawing.Size(139, 23)
         Me.cmdDelElement.TabIndex = 21
-        Me.cmdDelElement.Text = "Delete Selected Elements"
+        Me.cmdDelElement.Text = "Clear Selected Elements"
         Me.cmdDelElement.UseVisualStyleBackColor = True
         '
         'lblProductType
@@ -910,4 +911,5 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents cmdClearStations As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllElements As System.Windows.Forms.Button
     Friend WithEvents cmdSelectAllStations As System.Windows.Forms.Button
+    Friend WithEvents FontDialog1 As FontDialog
 End Class
