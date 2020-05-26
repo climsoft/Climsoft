@@ -140,12 +140,16 @@ Public Class formProductsSelectCriteria
         'lstvStations.Columns.Add("Station Name", 400, HorizontalAlignment.Left)
 
         'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
-        sql = "SELECT stationId, stationName FROM station WHERE stationName=""" & prod & """"
+        'sql = "SELECT stationId, stationName FROM station WHERE stationName=""" & prod & """"
+        sql = "SELECT stationId, stationName FROM station WHERE stationName='" & prod & "';"
+
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "station")
 
         maxRows = (ds.Tables("station").Rows.Count)
+        If maxRows > 0 Then cmbstation.BackColor = Color.White
+
         Dim str(2) As String
         Dim itm = New ListViewItem
 
@@ -187,14 +191,16 @@ Public Class formProductsSelectCriteria
             'lstvElements.Columns.Add("Element Details", 400, HorizontalAlignment.Left)
 
             'sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
+            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
+            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description='" & prod & "';"
 
-            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE description=""" & prod & """"
-            'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
             maxRows = (ds.Tables("obselement").Rows.Count)
+            If maxRows > 0 Then cmbElement.BackColor = Color.White
+
             Dim str(3) As String
             Dim itm = New ListViewItem
 
@@ -1881,18 +1887,14 @@ Err:
     End Sub
 
     Private Sub cmdClearElements_Click(sender As Object, e As EventArgs) Handles cmdClearElements.Click
-        lstvElements.Clear()
+        lstvElements.Items.Clear()
     End Sub
 
 
     Private Sub cmdClearStations_Click(sender As Object, e As EventArgs) Handles cmdClearStations.Click
-        lstvStations.Clear()
+        lstvStations.Items.Clear()
     End Sub
 
-
-    Private Sub dateTo_ValueChanged(sender As Object, e As EventArgs) Handles dateTo.ValueChanged
-
-    End Sub
 
     Private Sub cmdSelectAllStations_Click(sender As Object, e As EventArgs) Handles cmdSelectAllStations.Click
         Try
@@ -2195,22 +2197,32 @@ Err:
 
     Private Sub cmbstation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbstation.KeyPress
         If Asc(e.KeyChar) = 13 Then add_Station(cmbstation.Text)
+
     End Sub
     Sub add_Station(id As String)
-
-        sql = "SELECT stationId, stationName FROM station WHERE stationId= " & id & ";"
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-        ds.Clear()
-        da.Fill(ds, "station")
-
-        maxRows = (ds.Tables("station").Rows.Count)
         Dim str(2) As String
         Dim itm = New ListViewItem
 
         Try
-            For kount = 0 To maxRows - 1 Step 1
-                str(0) = ds.Tables("station").Rows(kount).Item("stationId")
-                str(1) = ds.Tables("station").Rows(kount).Item("stationName")
+            sql = "SELECT stationId, stationName FROM station WHERE stationId= '" & id & "';"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "station")
+
+            maxRows = (ds.Tables("station").Rows.Count)
+            'MsgBox(maxRows)
+            If maxRows > 0 Then
+                cmbstation.Text = ""
+                cmbstation.BackColor = Color.White
+            Else
+                cmbstation.BackColor = Color.Red
+                Exit Sub
+            End If
+
+            str(0) = ds.Tables("station").Rows(0).Item("stationId")
+            str(1) = ds.Tables("station").Rows(0).Item("stationName")
+
                 itm = New ListViewItem(str)
 
                 ItmExist = False
@@ -2226,7 +2238,6 @@ Err:
                     Next
                     If Not ItmExist Then lstvStations.Items.Add(itm)
                 End If
-            Next
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -2234,42 +2245,55 @@ Err:
     End Sub
     Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
         If Asc(e.KeyChar) = 13 Then add_Element(cmbElement.Text)
+
     End Sub
 
     Sub add_Element(id As String)
+        Dim str(3) As String
+        Dim itm = New ListViewItem
 
         Try
 
-            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE elementId=" & id & ";"
+            'sql = "SELECT SELECT elementId, abbreviation, description FROM obselement WHERE elementId = '" & id & "';"
+            sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected = '1' and elementId = '" & id & "';"
+
             'sql = "SELECT elementId, abbreviation, description FROM obselement WHERE selected ='1' and description=""" & prod & """"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "obselement")
 
             maxRows = (ds.Tables("obselement").Rows.Count)
-            Dim str(3) As String
-            Dim itm = New ListViewItem
+            'MsgBox(maxRows)
+            If maxRows > 0 Then
+                cmbElement.Text = ""
+                cmbElement.BackColor = Color.White
+            Else
+                cmbElement.BackColor = Color.Red
+                Exit Sub
+            End If
 
-            For kount = 0 To maxRows - 1 Step 1
-                str(0) = ds.Tables("obselement").Rows(kount).Item("elementId")
-                str(1) = ds.Tables("obselement").Rows(kount).Item("abbreviation")
-                str(2) = ds.Tables("obselement").Rows(kount).Item("description")
-                itm = New ListViewItem(str)
+            'For kount = 0 To maxRows - 1 Step 1
 
-                ItmExist = False
-                If lstvElements.Items.Count = 0 Then ' Alawys add the first selected item 
-                    lstvElements.Items.Add(itm)
-                Else
-                    For j = 0 To lstvElements.Items.Count - 1
-                        ' Check if the item has been added in the list and skip it if so
-                        If str(0) = lstvElements.Items(j).Text Then
-                            ItmExist = True
-                            Exit For
-                        End If
-                    Next
-                    If Not ItmExist Then lstvElements.Items.Add(itm)
-                End If
-            Next
+            str(0) = ds.Tables("obselement").Rows(0).Item("elementId")
+            str(1) = ds.Tables("obselement").Rows(0).Item("abbreviation")
+            str(2) = ds.Tables("obselement").Rows(0).Item("description")
+
+            itm = New ListViewItem(str)
+
+            ItmExist = False
+            If lstvElements.Items.Count = 0 Then ' Alawys add the first selected item 
+                lstvElements.Items.Add(itm)
+            Else
+                For j = 0 To lstvElements.Items.Count - 1
+                    ' Check if the item has been added in the list and skip it if so
+                    If str(0) = lstvElements.Items(j).Text Then
+                        ItmExist = True
+                        Exit For
+                    End If
+                Next
+                If Not ItmExist Then lstvElements.Items.Add(itm)
+            End If
+            'Next
         Catch err As Exception
             MsgBox(err.Message, MsgBoxStyle.Exclamation)
         End Try

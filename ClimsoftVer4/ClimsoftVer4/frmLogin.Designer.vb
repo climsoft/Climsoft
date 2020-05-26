@@ -30,7 +30,6 @@ Partial Class frmLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
         Me.lblUsername = New System.Windows.Forms.Label()
@@ -43,11 +42,9 @@ Partial Class frmLogin
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmbDatabases = New System.Windows.Forms.ComboBox()
         Me.lblDbdetails = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LogoPictureBox
@@ -208,14 +205,12 @@ Partial Class frmLogin
         Me.Tag = "Login"
         Me.Text = "Login"
         CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents txtusrpwd As System.Windows.Forms.TextBox
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
-    Friend WithEvents BindingSource1 As BindingSource
     Friend WithEvents cmbDatabases As ComboBox
     Friend WithEvents lblDbdetails As Label
     Friend WithEvents Label1 As Label
