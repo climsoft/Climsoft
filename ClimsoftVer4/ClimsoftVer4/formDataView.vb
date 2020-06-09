@@ -333,48 +333,48 @@ Public Class formDataView
                 Exit Sub
             End If
 
-            'FileOpen(111, exportfile, OpenMode.Output)
+            FileOpen(111, x, OpenMode.Output)
 
             ''PrintLine(111, hdr)
             'FileClose(111)
 
-            'Sql = "Select * from " & dsSourceTableName & ";"
+            Sql = "Select * from " & dsSourceTableName & ";"
 
-            'da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
 
-            'ds1.Clear()
-            'da1.Fill(ds1, dsSourceTableName)
+            ds1.Clear()
+            da1.Fill(ds1, dsSourceTableName)
 
             'FileOpen(111, exportfile, OpenMode.Append)
 
-            'For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
-            '    dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
-            '    For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
-            '        dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
-            '    Next
+            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+                    dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                Next
 
-            '    PrintLine(111, dat)
-            'Next
-            'FileClose(111)
-
-            'Convert Export file path seperators to SQL style
-            exportfile = Strings.Left(x, 1)
-            For i = 2 To Len(x) - 1
-                If Strings.Mid(x, i, 1) = "\" Then
-                    exportfile = exportfile & "/"
-                Else
-                    exportfile = exportfile & Strings.Mid(x, i, 1)
-                End If
+                PrintLine(111, dat)
             Next
-            exportfile = exportfile & Strings.Right(x, 1)
+            FileClose(111)
 
-            'MsgBox(exportfile)
+            ''Convert Export file path seperators to SQL style
+            'exportfile = Strings.Left(x, 1)
+            'For i = 2 To Len(x) - 1
+            '    If Strings.Mid(x, i, 1) = "\" Then
+            '        exportfile = exportfile & "/"
+            '    Else
+            '        exportfile = exportfile & Strings.Mid(x, i, 1)
+            '    End If
+            'Next
+            'exportfile = exportfile & Strings.Right(x, 1)
 
-            Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
+            ''MsgBox(exportfile)
 
-            'Execute SQL command
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            objCmd.ExecuteNonQuery()
+            'Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
+
+            ''Execute SQL command
+            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'objCmd.ExecuteNonQuery()
 
             conn.Close()
 
@@ -383,7 +383,7 @@ Public Class formDataView
         Catch ex As Exception
             MsgBox(ex.Message)
             conn.Close()
-            'FileClose(111)
+            FileClose(111)
         End Try
 
     End Sub
