@@ -155,7 +155,7 @@ Public Class formDataView
                 ' 
             Case "form_synoptic_2_ra1"
                 Sql = "DELETE FROM form_synoptic_2_ra1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
-                MsgBox(Sql)
+                'MsgBox(Sql)
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
                 Else
@@ -300,7 +300,7 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        Dim hdr, dat, exportfile, x As String
+        Dim hdr, dat, exportfile, x, CellValue As String
         Dim ds1 As New DataSet
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
@@ -350,7 +350,16 @@ Public Class formDataView
             For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
                 dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
                 For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
-                    dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                    If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
+                        CellValue = ""
+                    Else
+                        CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                        If IsDate(CellValue) Then
+                            CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
+                            'MsgBox(CellValue)
+                        End If
+                    End If
+                    dat = dat & "," & CellValue
                 Next
 
                 PrintLine(111, dat)
