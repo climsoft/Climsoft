@@ -1076,7 +1076,8 @@ Err:
         Dim errdir, errfile As String
 
         'Get full path for the errors output file
-        errdir = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        'errdir = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+        errdir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
 
         ' Create the directory if not existing
         If Not Directory.Exists(errdir) Then
@@ -1123,8 +1124,6 @@ Err:
         txtOutputFolder.Text = ""
         txtOutputFolder.Refresh()
 
-
-
         process_input_data()
         Next_Encoding_Time()
     End Sub
@@ -1153,7 +1152,6 @@ Err:
         Dim chr As String
         Dim dTable As DataTable
 
-
         ' Open the data set for the AWS sites and stations
         SetDataSet("aws_sites")
 
@@ -1161,9 +1159,8 @@ Err:
             Log_Errors("No AWS sites defined. Refer to the Manuals then use the Tab 'Sites' to define the installed AWS sites")
             Me.Cursor = Cursors.Default
             optStop.Checked = True
-            Exit Sub
+            'Exit Sub
         End If
-
         '  Locate and processs aws input data files
         Me.Cursor = Cursors.WaitCursor
 
@@ -1174,20 +1171,19 @@ Err:
         End If
         Bufr_Subst = 0
         BUFR_Subsets_Data = ""
-
         'Get full path for the Subsets Output file file and create the file
-        Refresh_Folder(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\")
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
+        Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
 
         'WriteLine(1, "Testing")
         'FileClose(1)
 
-
         Dim i As Integer
 
         With ds.Tables("aws_sites")
+
             For i = 0 To .Rows.Count - 1 'Kount - 1
 
                 If IsDBNull(.Rows(i).Item("InputFile")) Or .Rows(i).Item("OperationalStatus") = 0 Then Continue For ' Data for site not in a state to be process
@@ -1237,7 +1233,6 @@ Err:
                 txtStatus.Refresh()
 
                 If Not FTP_Call(infile, "get") Then
-
                     Log_Errors("Can't retrieve data from input file " & infile)
                     Continue For ' If FTP call failed
                 End If
@@ -1255,7 +1250,7 @@ Err:
                 txtStatus.Text = "Organising the input file"
 
                 ' Assign a variable to an output file without header rows
-                aws_input_file_flds = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+                aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
 
                 FileOpen(10, aws_input_file, OpenMode.Input)
                 FileOpen(11, aws_input_file_flds, OpenMode.Output)
@@ -1275,36 +1270,38 @@ Err:
 
                 FileClose(10)
                 FileClose(11)
-                Dim colmn As Integer
+                Dim colmn, dtCol As Integer
                 Dim rws As Long
-                Dim x As String
-
+                Dim x, dtFmt As String
                 'ChrW(delimiter_ascii)
                 dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
 
                 For k = 0 To rws - 2
+                    ' Get date and time for the current record
+                    datestring = Get_DateStamp(AWSsite, dTable, k)
 
                     'Skip older records
-                    datestring = dTable.Rows(k).Item(0)
                     If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
-                    'MsgBox(datestring)
+
+                    'Skip records with invalid date stamp
                     If IsDate(datestring) Then
 
-                        'If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
-
-                        ' Compare current time with time stamp on hourly basis
-
+                        ' Compare current time with time stamp on hourly basis. Skip records outside the time range
                         If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
 
-                        Process_Status("Processing AWS Record " & k & " of " & rws)
+                        Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
 
+                        ' Update obsv value column in the data structure
                         For j = 0 To colmn - 1
-                            x = dTable.Rows(k).Item(j)
-                            If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                                x = Strings.Mid(x, 2, Len(x) - 2)
+                            If Not IsDBNull(dTable.Rows(k).Item(j)) Then
+                                x = dTable.Rows(k).Item(j)
+                                If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+                                    x = Strings.Mid(x, 2, Len(x) - 2)
+                                End If
+                                AwsRecord_Update(x, j, flg, AWSsite)
+                            Else
+                                Continue For
                             End If
-                            'MsgBox(x)
-                            AwsRecord_Update(x, j, flg, AWSsite)
                         Next j
 
                         ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
@@ -1312,39 +1309,29 @@ Err:
                         sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
                         rs = GetDataSet(AWSsite, sqlv)
 
-                        'Get the date value
-                        datestring = rs.Tables(AWSsite).Rows(0).Item("obsv")
-
-                        'Sametimes Date and Time values are separately listed in the 1st and 2nd fields respectively. In such cases they are combined
-                        If Len(datestring) < 12 Then
-                            datestring = rs.Tables(AWSsite).Rows(0).Item("obsv") & " " & rs.Tables(AWSsite).Rows(1).Item("obsv")
-                        End If
-
                         'Don't process the record if having invalid datestamp
-                        'If Not IsDate(datestring) Then
                         'If IsDate(datestring) Then
-                        '    Log_Errors(datestring)
-                        '    Continue For
-                        'End If
 
                         'Update the record into the database
                         If Val(txtPeriod.Text) = 999 Then
+
                             ' Process the entire input file irespective of time difference
                             Process_Input_Record(AWSsite, datestring)
                         Else
-                            'Process_Input_Record(AWSsite, datestring)
+                            ' Process records for the last selected hours
                             If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                                Process_Input_Record(AWSsite, datestring) 'Process_Input_Record(datestring)
+                                Process_Input_Record(AWSsite, datestring)
                             End If
                         End If
-
                         'End If
                     End If
                 Next k
 
                 ' Delete input file from base station server if so selected
                 If chkDeleteFile.Checked Then
-                    If Not FTP_Delete_InputFile(infile) Then Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
+                    If Not FTP_Delete_InputFile(infile) Then
+                        Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
+                    End If
                 End If
 
             Next i
@@ -1354,7 +1341,7 @@ Err:
         FileClose(30)
 
         ' Open the output file containing the encoded BUFR Subsets data
-        fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.csv"
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Input)
 
@@ -1423,8 +1410,9 @@ Err:
         'If Err.Number = 9 Then Resume Next
         ''MsgBox(datt & " " & datestring)
         'If Err.Number = 13 Then Resume Next
-        If Err.Number = 62 Or Err.Number = 9 Then
-            Log_Errors("Can't retrieve data from " & infile)
+        'If Err.Number = 62 Or Err.Number = 9 Then
+        If Err.Number = 62 Then
+            Log_Errors(Err.Description & " Can't retrieve data from " & infile)
             'list_errors.Refresh()
 
             'GoTo Continues
@@ -1433,7 +1421,7 @@ Err:
         'If Err.Number = 3349 Then Resume Next
         ''   MsgBox Err.Number & " " & Err.description
         'MsgBox("Process_input_data")
-        Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
+        'Log_Errors(Err.Number & ": " & Err.Description & " at process_input_data")
         Me.Cursor = Cursors.Default
         FileClose(1)
         FileClose(10)
@@ -1472,7 +1460,7 @@ Err:
 
         maxrecs = dr.Tables("tm_307091").Rows.Count
         Seq_Desc = ""
-        descrfil = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\descriptors.txt"
+        descrfil = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\descriptors.txt"
         Dim DscriptorFile As System.IO.TextWriter = New StreamWriter(descrfil)
 
         For i = 0 To maxrecs - 1
@@ -1598,17 +1586,9 @@ Err:
             End If
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
             FileClose(1)
-            'local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-
-            local_folder = System.IO.Path.GetFullPath(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) & "\Climsoft4\data"
-            If Not Directory.Exists(local_folder) Then
-                Directory.CreateDirectory(local_folder)
-            End If
-
+            local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
             'Refresh_Folder(local_folder)
-            'Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
-            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
-
+            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_aws.txt"
 
@@ -1838,7 +1818,7 @@ Err:
         Dim rf As DataSet
 
         Try
-            Lflder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            Lflder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
             Drv = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drv = Strings.Left(Drv, Len(Drv) - 1)
 
@@ -1936,82 +1916,72 @@ Err:
     End Function
     Sub Process_Input_Record(aws_rs As String, datestring As String)
 
-        On Error GoTo Err
         Dim str As DataSet
         Dim sql2 As String
 
+        Try
+            'sql2 = "SELECT * FROM station"
+            sql2 = "select * from station where stationId = '" & nat_id & "';"
 
-        sql2 = "SELECT * FROM station"
+            str = GetDataSet("station", sql2)
 
-        str = GetDataSet("station", sql2)
-        'Log_Errors(str.Tables("station").Rows(0).Item("stationId"))
-        With str.Tables("station")
-            For i = 0 To .Rows.Count - 1
-                If .Rows(i).Item("stationId") = nat_id Then
-                    '    wmo_id = .Fields("wmo_id")
-                    If Not IsDBNull(.Rows(i).Item("stationName")) Then stn_name = .Rows(i).Item("stationName")
-                    If Not IsDBNull(.Rows(i).Item("latitude")) Then lat = .Rows(i).Item("latitude")
-                    If Not IsDBNull(.Rows(i).Item("longitude")) Then lon = .Rows(i).Item("longitude")
-                    If Not IsDBNull(.Rows(i).Item("elevation")) Then elv = .Rows(i).Item("elevation")
-                    If Not IsDBNull(.Rows(i).Item("wmoid")) Then wmo_id = .Rows(i).Item("wmoid")
-                    Exit For
+            'Log_Errors(str.Tables("station").Rows(0).Item("stationId"))
+            With str.Tables("station")
+                If .Rows.Count <> 0 Then
+                    If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
+                    If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
+                    If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
+                    If Not IsDBNull(.Rows(0).Item("elevation")) Then elv = .Rows(0).Item("elevation")
+                    If Not IsDBNull(.Rows(0).Item("wmoid")) Then wmo_id = .Rows(0).Item("wmoid")
+                Else
+                    Log_Errors(nat_id & " ot found in Stations metadata")
                 End If
-            Next
-        End With
-        'Log_Errors(nat_id & " " & stn_name & " " & lat & " " & lon & " " & elv)
+            End With
 
-        'Process_Status(" Processing input record")
+            update_main_db(aws_rs, datestring, nat_id)
 
-        ''  The code below can be skipped if updating to Climsoft main database update is not necessary but TDCF required
+            ' Check if encoding time has been reached
+            If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
+                Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
+                Exit Sub
+            End If
 
-        update_main_db(aws_rs, datestring, nat_id)
+            Dim ET As Double
 
-        ' Check if encoding time has been reached
-        If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
-            Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
+            ' Compute Encoding time
+            ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
+
+            If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
+
+            If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
+
+            If IsDate(datestring) Then
+
+                ' Update the Template Table and Process the messages for transmission at the scheduled time
+                update_tbltemplate(aws_rs, datestring)
+
+            End If
+            txtLastProcess.Text = datestring
+
             Exit Sub
-        End If
-
-        Dim ET As Double
-        ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
-
-        If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
-
-        If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
-
-        If IsDate(datestring) Then
-
-            ' Process the messages for transmission at the scheduled time
-            ' Temporarily suspended
-            update_tbltemplate(aws_rs, datestring)
-
-        End If
-        txtLastProcess.Text = datestring
-        'End If
-        Exit Sub
-Err:
-        'If Err.Number = 94 Then Resume Next
-        'MsgBox "Processing input record"
-        'MsgBox("Process_input_record")
-        Log_Errors(Err.Number & ": " & Err.Description & " at Process_Input_Record")
+        Catch Err As Exception
+            Log_Errors(Err.HResult & ": " & Err.Message & " at Process_Input_Record")
+        End Try
     End Sub
     Function GTSEncode(nat_id As String) As Boolean
         Dim grs As DataSet
         GTSEncode = False
         Try
-            sql = "Select * from aws_sites"
+            sql = "Select * from aws_sites where siteID ='" & nat_id & "';"
             grs = GetDataSet("aws_sites", sql)
-
             With grs.Tables("aws_sites")
-                For i = 0 To .Rows.Count - 1
-                    If .Rows(i).Item("siteID") = nat_id Then
-                        If .Rows(i).Item("GTSEncode") = 1 Then GTSEncode = True
-                        Exit For
-                    End If
-                Next
+                If .Rows.Count <> 0 Then
+                    If .Rows(0).Item("GTSEncode") = 1 Or .Rows(0).Item("GTSEncode") Then Return True
+                End If
             End With
         Catch ex As Exception
             Log_Errors(ex.Message)
+            Return False
         End Try
     End Function
     Sub AwsRecord_Update(datastring As String, rec As Integer, flg As String, aws_struc As String)
@@ -2276,7 +2246,7 @@ Err:
                 QC_Limits = True
                 Dim errdata, limittype As String
                 'Get full path for the Subsets Output file file and create the file
-                fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\aws_qc_errors.csv"
+                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_qc_errors.csv"
                 FileOpen(21, fl, OpenMode.Append)
 
                 If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
@@ -2301,7 +2271,7 @@ Err:
     End Function
     Sub update_tbltemplate(aws_struct As String, Date_Time As String)
 
-        On Error GoTo Err
+        'On Error GoTo Err
 
         Dim trs As DataSet
         Dim sql As String
@@ -2315,122 +2285,146 @@ Err:
         Dim stn_typ As Integer
 
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
-        cmd.Connection = dbconn
 
-        tt_aws = txtTemplate.Text
-        sql = "SELECT * FROM " & tt_aws & " ORDER BY Rec"
-        trs = GetDataSet(tt_aws, sql)
+        Try
+            cmd.Connection = dbconn
 
-        '    With trs
-        '        '  .MoveFirst
-        yy = DateAndTime.Year(Date_Time)
-        mm = DateAndTime.Month(Date_Time)
-        dd = DateAndTime.Day(Date_Time)
-        hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
-        min = DateAndTime.Minute(Date_Time)
-        ss = DateAndTime.Second(Date_Time)
-        stn_typ = 0 ' Code for AWS
-        'wmo_id = 63999
-        'MsgBox(stn_typ.ToString("D2"))
+            tt_aws = txtTemplate.Text
+            sql = "SELECT * FROM " & tt_aws & " ORDER BY Rec"
+            trs = GetDataSet(tt_aws, sql)
 
-        'msg_header = txtMsgHeader.Text
+            '    With trs
+            '        '  .MoveFirst
+            yy = DateAndTime.Year(Date_Time)
+            mm = DateAndTime.Month(Date_Time)
+            dd = DateAndTime.Day(Date_Time)
+            hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
+            min = DateAndTime.Minute(Date_Time)
+            ss = DateAndTime.Second(Date_Time)
+            stn_typ = 0 ' Code for AWS
+            'wmo_id = 63999
+            'MsgBox(stn_typ.ToString("D2"))
 
-
-        'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
-        BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
-
-        Process_Status("Updating TDCF Template with observations ")
-
-        'Initialize with missing values
-
-        Seq_Desc = ""
-
-        With trs.Tables(tt_aws)
-
-            For i = 0 To .Rows.Count - 1
-                ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
-                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
-
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
-                Dim recUpdate As New dataEntryGlobalRoutines
-
-                If Strings.Left(.Rows(i).Item("Bufr_Element"), 1) = 0 And .Rows(i).Item("Bufr_Element") <> "031000" And .Rows(i).Item("Bufr_Element") <> "004025" Then ' Element Descriptors only but not Delayed factor. It is preset
-                    InitValue = "1"
-                    For j = 2 To Val(.Rows(i).Item("Bufr_DataWidth_Bits"))
-                        InitValue = InitValue & "1"
-                    Next j
-                    .Rows(i).Item("Bufr_Data") = InitValue
-
-                End If
-                'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
-
-                If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
-                If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
-                If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
-                If .Rows(i).Item("Bufr_Element") = "002001" Then .Rows(i).Item("Observation") = stn_typ
-                If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
-                If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
-                If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
-                If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
-                If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
-                If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
-                If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
-                If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
-
-                'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
-                da.Update(trs, tt_aws)
-
-            Next i
-        End With
-
-        ' Initialize Code and Flag Tables
-        Initialize_CodeFlag(trs, tt_aws)
-
-        ' Update Template with AWS observation values
-        sql = "UPDATE " & aws_struct & " INNER JOIN " & tt_aws & " ON " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element SET " & tt_aws & ".Observation = " & aws_struct & ".obsv;"
-
-        cmd.CommandText = sql
-        cmd.ExecuteNonQuery()
+            'msg_header = txtMsgHeader.Text
 
 
-        '    ' Update Template with Replicated Values
-        Replicate_SoilTemp(trs, aws_struct, tt_aws)
-        Replicate_MaxGust(trs, aws_struct, tt_aws)
+            'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
+            BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
 
-        '    ' Encode observations in the template into TDCF-BUFR
-        TDCF_Encode(trs, tt_aws)
+            Process_Status("Updating TDCF Template with observations ")
 
-        ' Compose data for BUFR Section 4 - Data Section
-        sql = "SELECT TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " & _
-              "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.Rec;"
-        'MsgBox(sql)
-        BufrSection4 = ""
-        If Not AWS_Bufr_Section4(sql, BufrSection4, tt_aws) Then
-            Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
-        Else
-            ' Update Subset Number
-            Bufr_Subst = Bufr_Subst + 1
-            ' Append Data in Section 4 with the data computed from current subset
-            BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
-            ' Output substet binary data
-            'MsgBox(BUFR_Subsets_Data)
-            'Write(30, Date_Time, BufrSection4 & Chr(13) & Chr(10))
-            PrintLine(30, Date_Time & "," & BufrSection4)
-        End If
+            Seq_Desc = ""
 
-        ' ' Compose the complete AWS BUFR message
-        ' Below code has been commented so that encoding is not done on individual stations but as a bulletin handle at the end of function process_input_data
-        'If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
-        'Log_Errors(Len(BufrSection4))
-        Exit Sub
-Err:
+            With trs.Tables(tt_aws)
 
-        Log_Errors(Err.Description)
+                ''Initialize with missing values
+                'For i = 0 To .Rows.Count - 1
+                '    Initialize_Template(tt_aws)
+                'Next
 
-        ' list_errors.AddItem txttime & "  " & Err.description
-        ' MsgBox Err.Number & ": " & Err.description
+                For i = 0 To .Rows.Count - 1
+                    ' If Len(.Fields("Sequence_Descriptor1")) <> 0 Then Seq_Desc = Seq_Desc & .Fields("Sequence_Descriptor1")
+                    'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+                    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                    Dim recUpdate As New dataEntryGlobalRoutines
+
+                    If Strings.Left(.Rows(i).Item("Bufr_Element"), 1) = 0 And .Rows(i).Item("Bufr_Element") <> "031000" And .Rows(i).Item("Bufr_Element") <> "004025" Then ' Element Descriptors only but not Delayed factor. It is preset
+                        InitValue = "1"
+                        For j = 2 To Val(.Rows(i).Item("Bufr_DataWidth_Bits"))
+                            InitValue = InitValue & "1"
+                        Next j
+                        .Rows(i).Item("Bufr_Data") = InitValue
+
+                    End If
+                    'If Len(Initialize_CodeFlag(trs, i)) <> 0 Then MsgBox(Initialize_CodeFlag(trs, i))
+
+                    If .Rows(i).Item("Bufr_Element") = "001001" Then .Rows(i).Item("Observation") = Strings.Left(wmo_id, 2)
+                    If .Rows(i).Item("Bufr_Element") = "001002" Then .Rows(i).Item("Observation") = Strings.Right(wmo_id, 3)
+                    If .Rows(i).Item("Bufr_Element") = "001015" Then .Rows(i).Item("Observation") = stn_name
+                    If .Rows(i).Item("Bufr_Element") = "002001" Then .Rows(i).Item("Observation") = stn_typ
+                    If .Rows(i).Item("Bufr_Element") = "005001" Then .Rows(i).Item("Observation") = lat
+                    If .Rows(i).Item("Bufr_Element") = "006001" Then .Rows(i).Item("Observation") = lon
+                    If .Rows(i).Item("Bufr_Element") = "007030" Then .Rows(i).Item("Observation") = elv
+                    If .Rows(i).Item("Bufr_Element") = "004001" Then .Rows(i).Item("Observation") = yy 'obsv = yy
+                    If .Rows(i).Item("Bufr_Element") = "004002" Then .Rows(i).Item("Observation") = mm 'obsv = mm
+                    If .Rows(i).Item("Bufr_Element") = "004003" Then .Rows(i).Item("Observation") = dd 'obsv = dd
+                    If .Rows(i).Item("Bufr_Element") = "004004" Then .Rows(i).Item("Observation") = hh 'obsv = hh
+                    If .Rows(i).Item("Bufr_Element") = "004005" Then .Rows(i).Item("Observation") = min 'obsv = min
+
+                    'MsgBox(.Rows(i).Item("Bufr_Data") & " " & .Rows(i).Item("Bufr_Element"))
+                    da.Update(trs, tt_aws)
+
+                Next i
+            End With
+
+            ' Initialize Code and Flag Tables
+            Initialize_CodeFlag(trs, tt_aws)
+
+            ' Update Template with AWS observation values
+            sql = "UPDATE " & aws_struct & " INNER JOIN " & tt_aws & " ON " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element SET " & tt_aws & ".Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = " & tt_aws & ".Bufr_Element;"
+
+            cmd.CommandText = sql
+            cmd.ExecuteNonQuery()
+
+            '    ' Update Template with Replicated Values
+            Replicate_SoilTemp(trs, aws_struct, tt_aws)
+            Replicate_MaxGust(trs, aws_struct, tt_aws)
+
+            '    ' Encode observations in the template into TDCF-BUFR
+            TDCF_Encode(trs, tt_aws)
+
+            ' Compose data for BUFR Section 4 - Data Section
+            sql = "Select TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " &
+                  "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.Rec;"
+            'MsgBox(sql)
+            BufrSection4 = ""
+            If Not AWS_Bufr_Section4(sql, BufrSection4, tt_aws) Then
+                Log_Errors("Cant' Compute Bufr Data Section")  'MsgBox "Cant' Compute Bufr Data Section"
+            Else
+                ' Update Subset Number
+                Bufr_Subst = Bufr_Subst + 1
+                ' Append Data in Section 4 with the data computed from current subset
+                BUFR_Subsets_Data = BUFR_Subsets_Data + BufrSection4
+                ' Output substet binary data
+                'MsgBox(BUFR_Subsets_Data)
+                'Write(30, Date_Time, BufrSection4 & Chr(13) & Chr(10))
+                PrintLine(30, Date_Time & "," & BufrSection4)
+            End If
+
+            ' ' Compose the complete AWS BUFR message
+            ' Below code has been commented so that encoding is not done on individual stations but as a bulletin handle at the end of function process_input_data
+            'If Not AWS_BUFR_Code(msg_header, yy, mm, dd, hh, min, ss, BufrSection4) Then Log_Errors("Can't Encode Data") ' MsgBox "Can't Encode Data"
+            'Log_Errors(Len(BufrSection4))
+
+        Catch Err As Exception
+
+            Log_Errors(Err.Message)
+
+            ' list_errors.AddItem txttime & "  " & Err.description
+            ' MsgBox Err.Number & ": " & Err.description
+        End Try
     End Sub
+    Sub Initialize_Template(ttb As String)
+        Dim sql1 As String
+        Dim con1 As New MySql.Data.MySqlClient.MySqlConnection
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
+        Try
+            con1.ConnectionString = frmLogin.txtusrpwd.Text
+            con1.Open()
+
+            sql1 = "update " & ttb & " set observation = '', Bufr_Data = '', Crex_Data ='' where observation is not NULL;"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql1, con1)
+            'Execute query
+            qry.ExecuteNonQuery()
+            con1.Close()
+
+        Catch ex As Exception
+            con1.Close()
+            Log_Errors(ex.Message)
+        End Try
+    End Sub
     Function Compute_Header(hdr As String, hh As String) As String
 
         Select Case Val(hh) Mod 6
@@ -2894,8 +2888,8 @@ Err:
         FileClose(1) ' Close the file if ever it exist
 
         ' Define the file and path
-        local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-        backup_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\backup"
+        local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+        backup_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\backup"
 
         Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
         ftpscript = local_folder & "\ftp_file_delete.txt"
@@ -3176,7 +3170,7 @@ Err:
 
         'Delete the file to get rid of the previous data
         'If fso.FileExists(fso.GetParentFolderName(App.Path) & "\data\bufr.txt") Then fso.DeleteFile(fso.GetParentFolderName(App.Path) & "\data\bufr.txt")
-        brfile = System.IO.Path.GetFullPath(Application.StartupPath & "\data\bufr.txt")
+        brfile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.txt"
 
         If File.Exists(brfile) Then File.Delete(brfile)
 
@@ -3206,8 +3200,8 @@ Err:
         ValidFile = False
 
         'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
-        AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
-        BUFR_octet_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\bufr_octets.txt")
+        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+        BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
 
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
@@ -3819,6 +3813,144 @@ Err:
 
     '    stn1 = txtSiteID.Text
     'End Sub
+
+    Function Get_DateStamp(AWSsite As String, dattable As DataTable, rw As Long) As String
+
+        Dim dt, Date_s, Time_s, yyyy, mm, dd, nn, hh, ss As String
+
+        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsstr As New DataSet
+        Dim sqlstr As String
+
+        Try
+            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
+            dbstr.Open()
+
+            sqlstr = "SELECT * FROM " & AWSsite
+
+            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
+            ' Remove timeout requirement
+            dastr.SelectCommand.CommandTimeout = 0
+
+            dsstr.Clear()
+            dastr.Fill(dsstr, "struct")
+            Date_s = ""
+            Time_s = ""
+            yyyy = ""
+            mm = ""
+            dd = ""
+            hh = ""
+            nn = ""
+
+            With dsstr.Tables("struct")
+                For i = 0 To .Rows.Count - 1
+                    dt = dattable.Rows(rw).Item(i)
+                    'Log_Errors(.Rows(i).Item("Element_abbreviation") & " " & dt)
+
+                    Select Case .Rows(i).Item("Element_abbreviation")
+                        Case "Date/time"
+                            Return dt
+                        Case "yyyymmddhhmm"
+                            Return DateSerial(Strings.Left(dt, 4), Strings.Mid(dt, 5, 2), Strings.Mid(dt, 7, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")
+                        Case "ddmmyyyyhhmm"
+                            Return DateSerial(Strings.Mid(dt, 5, 4), Strings.Mid(dt, 3, 2), Strings.Left(dt, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")
+                        Case "Date"
+                            Date_s = dt
+                        Case "Time"
+                            Time_s = dt
+                        Case "yyyy"
+                            yyyy = dt
+                        Case "mm"
+                            mm = dt
+                        Case "dd"
+                            dd = dt
+                        Case "hh"
+                            hh = dt
+                        Case "nn"
+                            nn = dt
+                    End Select
+                Next
+
+                If IsDate(Date_s) And Time_s <> "" Then
+                    Return Date_s & " " & Time_s
+                End If
+
+                If IsDate(DateSerial(yyyy, mm, dd)) And hh <> "" And nn <> "" Then
+                    Return DateSerial(yyyy, mm, dd) & " " & TimeSerial(hh, nn, "00")
+                End If
+            End With
+
+            dbstr.Close()
+            Return ""
+        Catch ex As Exception
+            Log_Errors(ex.Message & " at Get_DateStamp")
+            dbstr.Close()
+        End Try
+        Return ""
+
+    End Function
+
+    Sub Get_Datetime(AWSsite As String, ByRef dtCol As Integer, ByRef dtFmt As String)
+
+        Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dastr As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsstr As New DataSet
+        Dim sqlstr As String
+
+        Try
+            dbstr.ConnectionString = frmLogin.txtusrpwd.Text
+            dbstr.Open()
+
+            sqlstr = "SELECT * FROM " & AWSsite
+
+            dastr = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlstr, dbstr)
+            ' Remove timeout requirement
+            dastr.SelectCommand.CommandTimeout = 0
+
+            dsstr.Clear()
+            dastr.Fill(dsstr, "struct")
+
+            With dsstr.Tables("struct")
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("Element_abbreviation") = "Date/time" Then
+                        dtCol = i
+                        dtFmt = .Rows(i).Item("Element_Name")
+                        Exit For
+                    End If
+                Next
+            End With
+            dbstr.Close()
+
+        Catch ex As Exception
+            Log_Errors(ex.Message & " at Get_Datetime")
+            dbstr.Close()
+        End Try
+
+    End Sub
+
+    Function Format_Datetime(dt As String, fmt As String) As String
+        Dim ty, tm, td, tH, tmi As String
+
+        Try
+            Select Case fmt
+                Case "yyyyMMddHHmm"
+                    '201708110830
+                    ty = Strings.Left(dt, 4)
+                    tm = Strings.Mid(dt, 5, 2)
+                    td = Strings.Mid(dt, 7, 2)
+                    tH = Strings.Mid(dt, 9, 2)
+                    tmi = Strings.Mid(dt, 11, 2)
+                    Format_Datetime = DateSerial(ty, tm, td) & " " & TimeSerial(tH, tmi, "00")
+                Case Else
+                    Return dt
+            End Select
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return dt
+        End Try
+    End Function
 End Class
 
 Public Class FTP
