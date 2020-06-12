@@ -293,6 +293,10 @@
         OnevtValueChanged(Me, e) 'this is where there is the problem. Its being called twice
     End Sub
 
+    Private Sub ucrPeriod_evtValueChanged(sender As Object, e As EventArgs) Handles ucrPeriod.evtValueChanged
+        OnevtValueChanged(Me, e)
+    End Sub
+
     Private Function DoQCForValue(bSetValuesIfValid As Boolean) As Boolean
         Dim bValuesCorrect As Boolean
         Dim bValueValid As Boolean
