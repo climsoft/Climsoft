@@ -467,6 +467,7 @@ Public Class ucrNavigation
                     ucrYear.SetValue(ucrYear.GetValue() + 1)
                 End If
 
+                'if year is incremented the this will be false. TODO. then just check on bIncrementYear
                 If ucrLinkedTableEntry.bUpdating Then
                     'go to the next sequncer value
                     iSelectedSequencerRow = iSelectedSequencerRow + 1
@@ -475,6 +476,10 @@ Public Class ucrNavigation
                     'go to the first sequencer value
                     IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
                 End If
+            ElseIf ucrYear IsNot Nothing Then
+                ucrYear.SetValue(ucrYear.GetValue() + 1)
+                'go to the first sequencer value
+                IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
 
             End If
         End If

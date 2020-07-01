@@ -134,18 +134,23 @@
 
     'TODO. Push this to the table entry level
     Protected Overrides Sub ValidateDataEntryPermission()
-        Dim bEnabled As Boolean = False
-
-        If ucrYearSelector.ValidateValue Then
-            bEnabled = (ucrYearSelector.GetValue <= Date.Now.Year)
-        End If
+        Dim iSelectedYear As Integer = If(ucrYearSelector.ValidateValue, ucrYearSelector.GetValue, -1)
+        Dim iCurrentYear As Integer = Date.Now.Year
+        Dim iCurrentMonth As Integer = Date.Now.Month
 
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
-                ctr.Enabled = bEnabled
+                If iSelectedYear = -1 Then
+                    ctr.Enabled = False
+                ElseIf iSelectedYear < iCurrentYear Then
+                    ctr.Enabled = True
+                ElseIf iSelectedYear = iCurrentYear AndAlso IsNumeric(ctr.Tag) Then
+                    ctr.Enabled = If(Integer.Parse(ctr.Tag) <= iCurrentMonth, True, False)
+                Else
+                    ctr.Enabled = False
+                End If
             End If
         Next
-
 
     End Sub
 
