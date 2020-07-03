@@ -154,6 +154,16 @@
 
     End Sub
 
+    Private Sub ucrMonthlyData_GoingToNextChildControl(sender As Object) Handles Me.GoingToNextChildControl
+        'set the number of days in the month as the period if the following conditions are true
+        If TypeOf sender Is ucrValueFlagPeriod AndAlso ucrYearSelector.ValidateValue Then
+            Dim ucr As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+            If IsNumeric(ucr.Tag) Then
+                ucr.SetElementPeriodValue(Date.DaysInMonth(ucrYearSelector.GetValue, Integer.Parse(ucr.Tag)))
+            End If
+        End If
+    End Sub
+
     'upload code in the background thread
     Private Sub UploadAllRecords()
         Dim frm As New frmNewComputationProgress
@@ -227,7 +237,8 @@
                                                              Return x.Equals(Me.strPeriodFieldName & strTag)
                                                          End Function)
 
-                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), 1, 6, 0, 0)
+
+                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), Date.DaysInMonth(row.Item("yyyy"), Integer.Parse(Val(strTag))), 6, 0, 0)
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
