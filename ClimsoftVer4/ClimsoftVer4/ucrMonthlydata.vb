@@ -154,6 +154,16 @@
 
     End Sub
 
+    Private Sub ucrMonthlyData_GoingToNextChildControl(sender As Object) Handles Me.GoingToNextChildControl
+        'set the number of days in the month as the period if the following conditions are true
+        If TypeOf sender Is ucrValueFlagPeriod AndAlso ucrYearSelector.ValidateValue Then
+            Dim ucr As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+            If IsNumeric(ucr.Tag) Then
+                ucr.SetElementPeriodValue(Date.DaysInMonth(ucrYearSelector.GetValue, Integer.Parse(ucr.Tag)))
+            End If
+        End If
+    End Sub
+
     'upload code in the background thread
     Private Sub UploadAllRecords()
         Dim frm As New frmNewComputationProgress
