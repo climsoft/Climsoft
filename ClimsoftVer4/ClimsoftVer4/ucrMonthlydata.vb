@@ -237,7 +237,8 @@
                                                              Return x.Equals(Me.strPeriodFieldName & strTag)
                                                          End Function)
 
-                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), 1, 6, 0, 0)
+
+                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), Date.DaysInMonth(row.Item("yyyy"), Integer.Parse(Val(strTag))), 6, 0, 0)
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
