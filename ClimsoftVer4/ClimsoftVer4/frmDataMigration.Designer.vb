@@ -147,13 +147,13 @@ Partial Class frmDataMigration
         Me.optSeletedRecords.Name = "optSeletedRecords"
         Me.optSeletedRecords.Size = New System.Drawing.Size(113, 17)
         Me.optSeletedRecords.TabIndex = 9
-        Me.optSeletedRecords.TabStop = True
         Me.optSeletedRecords.Text = "Selected Records:"
         Me.optSeletedRecords.UseVisualStyleBackColor = True
         '
         'optEntireDb
         '
         Me.optEntireDb.AutoSize = True
+        Me.optEntireDb.Checked = True
         Me.optEntireDb.Location = New System.Drawing.Point(33, 76)
         Me.optEntireDb.Name = "optEntireDb"
         Me.optEntireDb.Size = New System.Drawing.Size(101, 17)
@@ -254,22 +254,22 @@ Partial Class frmDataMigration
         'optV3MysqlDb
         '
         Me.optV3MysqlDb.AutoSize = True
-        Me.optV3MysqlDb.Checked = True
         Me.optV3MysqlDb.Location = New System.Drawing.Point(25, 23)
         Me.optV3MysqlDb.Name = "optV3MysqlDb"
         Me.optV3MysqlDb.Size = New System.Drawing.Size(301, 17)
         Me.optV3MysqlDb.TabIndex = 6
-        Me.optV3MysqlDb.TabStop = True
         Me.optV3MysqlDb.Text = "CLIMSOFT V3 MySQL Database - Within the same server)"
         Me.optV3MysqlDb.UseVisualStyleBackColor = True
         '
         'optV3Backup
         '
         Me.optV3Backup.AutoSize = True
+        Me.optV3Backup.Checked = True
         Me.optV3Backup.Location = New System.Drawing.Point(24, 213)
         Me.optV3Backup.Name = "optV3Backup"
         Me.optV3Backup.Size = New System.Drawing.Size(134, 17)
         Me.optV3Backup.TabIndex = 7
+        Me.optV3Backup.TabStop = True
         Me.optV3Backup.Text = "CLIMSOFT V3 Backup"
         Me.optV3Backup.UseVisualStyleBackColor = True
         '
