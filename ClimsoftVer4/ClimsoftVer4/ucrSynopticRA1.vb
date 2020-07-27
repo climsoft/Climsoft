@@ -538,7 +538,7 @@ Public Class ucrSynopticRA1
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -584,7 +584,7 @@ Public Class ucrSynopticRA1
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -611,7 +611,7 @@ Public Class ucrSynopticRA1
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

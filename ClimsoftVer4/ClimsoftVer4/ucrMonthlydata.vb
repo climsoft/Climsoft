@@ -261,7 +261,7 @@
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -288,7 +288,7 @@
                             "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
                         End If
 
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

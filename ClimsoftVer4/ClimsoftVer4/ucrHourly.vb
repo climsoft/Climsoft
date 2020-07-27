@@ -338,7 +338,7 @@
             'Get all the records from the table
             Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
                 "Select * FROM " & strTableName & " ORDER BY entryDatetime",
-                clsDataConnection.OpenedConnection)
+                clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -384,7 +384,7 @@
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -410,7 +410,7 @@
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
