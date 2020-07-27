@@ -144,7 +144,7 @@ Public Class frmLogin
 
         regDataInit()
         languageTableInit()
-        clsDataConnection.OpenConnection()
+        clsDataConnection.OpenConnection(txtusrpwd.Text) 'todo. the connection string should come from somewhere else
         climsoftuserRoles()
         Path_Security()
         frmSplashScreen.Show()

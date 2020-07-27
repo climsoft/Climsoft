@@ -1,19 +1,20 @@
 ﻿Public Class clsDataConnection
     Private Shared ReadOnly conn As New MySql.Data.MySqlClient.MySqlConnection
-    Public Shared databaseName As String = "mariadb_climsoft_test_db_v4"
 
-    Public Shared ReadOnly Property OpenedConnection As MySql.Data.MySqlClient.MySqlConnection
-        Get
-            OpenConnection()
-            Return conn
-        End Get
-    End Property
-
-    Public Shared Sub OpenConnection()
-        If Not (conn.State = ConnectionState.Open) Then
-            conn.ConnectionString = frmLogin.txtusrpwd.Text 'temporary connection string. This should come from somewhere else
+    Public Shared Function GetOpenedConnection() As MySql.Data.MySqlClient.MySqlConnection
+        If conn.State <> ConnectionState.Open Then
             conn.Open()
         End If
+        Return conn
+    End Function
+
+    Public Shared Function GetDatabaseName() As String
+        Return conn.Database
+    End Function
+
+    Public Shared Sub OpenConnection(ConnectionString As String)
+        conn.ConnectionString = ConnectionString
+        conn.Open()
     End Sub
 
     Public Shared Sub closeConnection()
@@ -23,7 +24,7 @@
     End Sub
 
     Public Shared Function GetConnectionString() As String
-        Return OpenedConnection.ConnectionString
+        Return conn.ConnectionString
     End Function
 
     'temporary code for visual studio design time
