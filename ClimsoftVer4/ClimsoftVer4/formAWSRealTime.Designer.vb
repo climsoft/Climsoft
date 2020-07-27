@@ -84,6 +84,24 @@ Partial Class formAWSRealTime
         Me.lblInputData = New System.Windows.Forms.Label()
         Me.lblInformation = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.pnlDataStructures = New System.Windows.Forms.Panel()
+        Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
+        Me.grpStructures1 = New System.Windows.Forms.GroupBox()
+        Me.lblStructure = New System.Windows.Forms.Label()
+        Me.grpStructures = New System.Windows.Forms.GroupBox()
+        Me.lblRecords = New System.Windows.Forms.Label()
+        Me.txtDelimiter = New System.Windows.Forms.ComboBox()
+        Me.txtQualifier = New System.Windows.Forms.TextBox()
+        Me.txtHeaders = New System.Windows.Forms.TextBox()
+        Me.txtStrName = New System.Windows.Forms.TextBox()
+        Me.cmdDelete = New System.Windows.Forms.Button()
+        Me.cmdUpdate = New System.Windows.Forms.Button()
+        Me.cmdCreate = New System.Windows.Forms.Button()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblStrName = New System.Windows.Forms.Label()
+        Me.cmbExistingStructures = New System.Windows.Forms.ComboBox()
         Me.pnlSites = New System.Windows.Forms.Panel()
         Me.grpSites = New System.Windows.Forms.GroupBox()
         Me.DataGridViewSites = New System.Windows.Forms.DataGridView()
@@ -116,24 +134,6 @@ Partial Class formAWSRealTime
         Me.lblInfile = New System.Windows.Forms.Label()
         Me.txtSiteID = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.pnlDataStructures = New System.Windows.Forms.Panel()
-        Me.DataGridViewStructures = New System.Windows.Forms.DataGridView()
-        Me.grpStructures1 = New System.Windows.Forms.GroupBox()
-        Me.lblStructure = New System.Windows.Forms.Label()
-        Me.grpStructures = New System.Windows.Forms.GroupBox()
-        Me.lblRecords = New System.Windows.Forms.Label()
-        Me.txtDelimiter = New System.Windows.Forms.ComboBox()
-        Me.txtQualifier = New System.Windows.Forms.TextBox()
-        Me.txtHeaders = New System.Windows.Forms.TextBox()
-        Me.txtStrName = New System.Windows.Forms.TextBox()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdUpdate = New System.Windows.Forms.Button()
-        Me.cmdCreate = New System.Windows.Forms.Button()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.lblStrName = New System.Windows.Forms.Label()
-        Me.cmbExistingStructures = New System.Windows.Forms.ComboBox()
         Me.pnlServers = New System.Windows.Forms.Panel()
         Me.pnlBaseStation = New System.Windows.Forms.Panel()
         Me.cmdBstAddNew = New System.Windows.Forms.Button()
@@ -192,12 +192,16 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.dgrdCodeFlag = New System.Windows.Forms.DataGridView()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.grpIndicators = New System.Windows.Forms.GroupBox()
+        Me.cmdDefault = New System.Windows.Forms.Button()
+        Me.cmdSaves = New System.Windows.Forms.Button()
+        Me.cmdUpadate = New System.Windows.Forms.Button()
+        Me.cmdNew = New System.Windows.Forms.Button()
         Me.chkOptionalSection = New System.Windows.Forms.CheckBox()
-        Me.LocaltableVersion = New System.Windows.Forms.TextBox()
-        Me.MastertableVersion = New System.Windows.Forms.TextBox()
-        Me.LocalSubcategory = New System.Windows.Forms.TextBox()
-        Me.InternationalSubcategory = New System.Windows.Forms.TextBox()
+        Me.txtLocaltableVersion = New System.Windows.Forms.TextBox()
+        Me.txtMastertableVersion = New System.Windows.Forms.TextBox()
+        Me.txtLocalSubcategory = New System.Windows.Forms.TextBox()
+        Me.txtInternationalSubcategory = New System.Windows.Forms.TextBox()
         Me.txtDataCategory = New System.Windows.Forms.TextBox()
         Me.txtUpdateSequence = New System.Windows.Forms.TextBox()
         Me.txtOriginatingSubcentre = New System.Windows.Forms.TextBox()
@@ -208,9 +212,9 @@ Partial Class formAWSRealTime
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
+        Me.txtUpdateSequenceNumber = New System.Windows.Forms.Label()
+        Me.txtOriginatingGeneratingSubCentre = New System.Windows.Forms.Label()
+        Me.txtOriginatingGeneratingCentre = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.txtTemplate = New System.Windows.Forms.ComboBox()
@@ -226,13 +230,13 @@ Partial Class formAWSRealTime
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.pnlSites.SuspendLayout()
-        Me.grpSites.SuspendLayout()
-        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDataStructures.SuspendLayout()
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStructures1.SuspendLayout()
         Me.grpStructures.SuspendLayout()
+        Me.pnlSites.SuspendLayout()
+        Me.grpSites.SuspendLayout()
+        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlServers.SuspendLayout()
         Me.pnlBaseStation.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -241,7 +245,7 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.dgrdCodeFlag, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox7.SuspendLayout()
+        Me.grpIndicators.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -258,7 +262,7 @@ Partial Class formAWSRealTime
         Me.pnlControl.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlControl.Location = New System.Drawing.Point(0, 0)
         Me.pnlControl.Name = "pnlControl"
-        Me.pnlControl.Size = New System.Drawing.Size(191, 572)
+        Me.pnlControl.Size = New System.Drawing.Size(191, 615)
         Me.pnlControl.TabIndex = 0
         '
         'cmdHelp
@@ -348,9 +352,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(194, 12)
+        Me.pnlProcessing.Location = New System.Drawing.Point(194, 5)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(757, 204)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 280)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -870,16 +874,191 @@ Partial Class formAWSRealTime
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements View/Update"
         '
+        'pnlDataStructures
+        '
+        Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
+        Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
+        Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
+        Me.pnlDataStructures.Location = New System.Drawing.Point(195, 322)
+        Me.pnlDataStructures.Name = "pnlDataStructures"
+        Me.pnlDataStructures.Size = New System.Drawing.Size(756, 38)
+        Me.pnlDataStructures.TabIndex = 5
+        Me.pnlDataStructures.Visible = False
+        '
+        'DataGridViewStructures
+        '
+        Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewStructures.Location = New System.Drawing.Point(3, 242)
+        Me.DataGridViewStructures.Name = "DataGridViewStructures"
+        Me.DataGridViewStructures.Size = New System.Drawing.Size(749, 118)
+        Me.DataGridViewStructures.TabIndex = 2
+        Me.DataGridViewStructures.Visible = False
+        '
+        'grpStructures1
+        '
+        Me.grpStructures1.Controls.Add(Me.lblStructure)
+        Me.grpStructures1.Controls.Add(Me.grpStructures)
+        Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
+        Me.grpStructures1.Location = New System.Drawing.Point(192, 12)
+        Me.grpStructures1.Name = "grpStructures1"
+        Me.grpStructures1.Size = New System.Drawing.Size(327, 219)
+        Me.grpStructures1.TabIndex = 1
+        Me.grpStructures1.TabStop = False
+        Me.grpStructures1.Text = "Data Structures"
+        '
+        'lblStructure
+        '
+        Me.lblStructure.AutoSize = True
+        Me.lblStructure.Location = New System.Drawing.Point(11, 29)
+        Me.lblStructure.Name = "lblStructure"
+        Me.lblStructure.Size = New System.Drawing.Size(146, 13)
+        Me.lblStructure.TabIndex = 8
+        Me.lblStructure.Text = "Select Existing Data structure"
+        '
+        'grpStructures
+        '
+        Me.grpStructures.Controls.Add(Me.lblRecords)
+        Me.grpStructures.Controls.Add(Me.txtDelimiter)
+        Me.grpStructures.Controls.Add(Me.txtQualifier)
+        Me.grpStructures.Controls.Add(Me.txtHeaders)
+        Me.grpStructures.Controls.Add(Me.txtStrName)
+        Me.grpStructures.Controls.Add(Me.cmdDelete)
+        Me.grpStructures.Controls.Add(Me.cmdUpdate)
+        Me.grpStructures.Controls.Add(Me.cmdCreate)
+        Me.grpStructures.Controls.Add(Me.Label21)
+        Me.grpStructures.Controls.Add(Me.Label20)
+        Me.grpStructures.Controls.Add(Me.Label19)
+        Me.grpStructures.Controls.Add(Me.lblStrName)
+        Me.grpStructures.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.grpStructures.Location = New System.Drawing.Point(13, 62)
+        Me.grpStructures.Name = "grpStructures"
+        Me.grpStructures.Size = New System.Drawing.Size(296, 149)
+        Me.grpStructures.TabIndex = 7
+        Me.grpStructures.TabStop = False
+        '
+        'lblRecords
+        '
+        Me.lblRecords.AutoSize = True
+        Me.lblRecords.Location = New System.Drawing.Point(168, 98)
+        Me.lblRecords.Name = "lblRecords"
+        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
+        Me.lblRecords.TabIndex = 20
+        Me.lblRecords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtDelimiter
+        '
+        Me.txtDelimiter.FormattingEnabled = True
+        Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "space"})
+        Me.txtDelimiter.Location = New System.Drawing.Point(119, 31)
+        Me.txtDelimiter.Name = "txtDelimiter"
+        Me.txtDelimiter.Size = New System.Drawing.Size(135, 21)
+        Me.txtDelimiter.TabIndex = 18
+        '
+        'txtQualifier
+        '
+        Me.txtQualifier.Location = New System.Drawing.Point(119, 72)
+        Me.txtQualifier.Name = "txtQualifier"
+        Me.txtQualifier.Size = New System.Drawing.Size(135, 20)
+        Me.txtQualifier.TabIndex = 17
+        '
+        'txtHeaders
+        '
+        Me.txtHeaders.Location = New System.Drawing.Point(119, 52)
+        Me.txtHeaders.Name = "txtHeaders"
+        Me.txtHeaders.Size = New System.Drawing.Size(135, 20)
+        Me.txtHeaders.TabIndex = 16
+        '
+        'txtStrName
+        '
+        Me.txtStrName.Location = New System.Drawing.Point(119, 11)
+        Me.txtStrName.Name = "txtStrName"
+        Me.txtStrName.Size = New System.Drawing.Size(135, 20)
+        Me.txtStrName.TabIndex = 14
+        '
+        'cmdDelete
+        '
+        Me.cmdDelete.Location = New System.Drawing.Point(200, 118)
+        Me.cmdDelete.Name = "cmdDelete"
+        Me.cmdDelete.Size = New System.Drawing.Size(62, 23)
+        Me.cmdDelete.TabIndex = 13
+        Me.cmdDelete.Text = "Delete"
+        Me.cmdDelete.UseVisualStyleBackColor = True
+        '
+        'cmdUpdate
+        '
+        Me.cmdUpdate.Location = New System.Drawing.Point(117, 118)
+        Me.cmdUpdate.Name = "cmdUpdate"
+        Me.cmdUpdate.Size = New System.Drawing.Size(62, 23)
+        Me.cmdUpdate.TabIndex = 12
+        Me.cmdUpdate.Text = "Update"
+        Me.cmdUpdate.UseVisualStyleBackColor = True
+        '
+        'cmdCreate
+        '
+        Me.cmdCreate.Location = New System.Drawing.Point(34, 118)
+        Me.cmdCreate.Name = "cmdCreate"
+        Me.cmdCreate.Size = New System.Drawing.Size(62, 23)
+        Me.cmdCreate.TabIndex = 11
+        Me.cmdCreate.Text = "Create"
+        Me.cmdCreate.UseVisualStyleBackColor = True
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(7, 78)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(112, 13)
+        Me.Label21.TabIndex = 10
+        Me.Label21.Text = "Text Qulifier Character"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(9, 57)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(99, 13)
+        Me.Label20.TabIndex = 9
+        Me.Label20.Text = "Total Header Rows"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(7, 36)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(74, 13)
+        Me.Label19.TabIndex = 8
+        Me.Label19.Text = "Delimiter Type"
+        '
+        'lblStrName
+        '
+        Me.lblStrName.AutoSize = True
+        Me.lblStrName.Location = New System.Drawing.Point(6, 15)
+        Me.lblStrName.Name = "lblStrName"
+        Me.lblStrName.Size = New System.Drawing.Size(81, 13)
+        Me.lblStrName.TabIndex = 7
+        Me.lblStrName.Text = "Structure Name"
+        '
+        'cmbExistingStructures
+        '
+        Me.cmbExistingStructures.FormattingEnabled = True
+        Me.cmbExistingStructures.Location = New System.Drawing.Point(163, 25)
+        Me.cmbExistingStructures.Name = "cmbExistingStructures"
+        Me.cmbExistingStructures.Size = New System.Drawing.Size(146, 21)
+        Me.cmbExistingStructures.TabIndex = 1
+        '
         'pnlSites
         '
         Me.pnlSites.AllowDrop = True
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(194, 220)
+        Me.pnlSites.Location = New System.Drawing.Point(194, 422)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.pnlSites.Size = New System.Drawing.Size(757, 667)
+        Me.pnlSites.Size = New System.Drawing.Size(757, 576)
         Me.pnlSites.TabIndex = 3
         '
         'grpSites
@@ -1204,181 +1383,6 @@ Partial Class formAWSRealTime
         Me.Label15.TabIndex = 67
         Me.Label15.Text = "Site ID"
         '
-        'pnlDataStructures
-        '
-        Me.pnlDataStructures.BackColor = System.Drawing.Color.BurlyWood
-        Me.pnlDataStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlDataStructures.Controls.Add(Me.DataGridViewStructures)
-        Me.pnlDataStructures.Controls.Add(Me.grpStructures1)
-        Me.pnlDataStructures.Location = New System.Drawing.Point(195, 209)
-        Me.pnlDataStructures.Name = "pnlDataStructures"
-        Me.pnlDataStructures.Size = New System.Drawing.Size(756, 38)
-        Me.pnlDataStructures.TabIndex = 5
-        Me.pnlDataStructures.Visible = False
-        '
-        'DataGridViewStructures
-        '
-        Me.DataGridViewStructures.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.DataGridViewStructures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewStructures.Location = New System.Drawing.Point(3, 242)
-        Me.DataGridViewStructures.Name = "DataGridViewStructures"
-        Me.DataGridViewStructures.Size = New System.Drawing.Size(749, 118)
-        Me.DataGridViewStructures.TabIndex = 2
-        Me.DataGridViewStructures.Visible = False
-        '
-        'grpStructures1
-        '
-        Me.grpStructures1.Controls.Add(Me.lblStructure)
-        Me.grpStructures1.Controls.Add(Me.grpStructures)
-        Me.grpStructures1.Controls.Add(Me.cmbExistingStructures)
-        Me.grpStructures1.Location = New System.Drawing.Point(192, 12)
-        Me.grpStructures1.Name = "grpStructures1"
-        Me.grpStructures1.Size = New System.Drawing.Size(327, 219)
-        Me.grpStructures1.TabIndex = 1
-        Me.grpStructures1.TabStop = False
-        Me.grpStructures1.Text = "Data Structures"
-        '
-        'lblStructure
-        '
-        Me.lblStructure.AutoSize = True
-        Me.lblStructure.Location = New System.Drawing.Point(11, 29)
-        Me.lblStructure.Name = "lblStructure"
-        Me.lblStructure.Size = New System.Drawing.Size(146, 13)
-        Me.lblStructure.TabIndex = 8
-        Me.lblStructure.Text = "Select Existing Data structure"
-        '
-        'grpStructures
-        '
-        Me.grpStructures.Controls.Add(Me.lblRecords)
-        Me.grpStructures.Controls.Add(Me.txtDelimiter)
-        Me.grpStructures.Controls.Add(Me.txtQualifier)
-        Me.grpStructures.Controls.Add(Me.txtHeaders)
-        Me.grpStructures.Controls.Add(Me.txtStrName)
-        Me.grpStructures.Controls.Add(Me.cmdDelete)
-        Me.grpStructures.Controls.Add(Me.cmdUpdate)
-        Me.grpStructures.Controls.Add(Me.cmdCreate)
-        Me.grpStructures.Controls.Add(Me.Label21)
-        Me.grpStructures.Controls.Add(Me.Label20)
-        Me.grpStructures.Controls.Add(Me.Label19)
-        Me.grpStructures.Controls.Add(Me.lblStrName)
-        Me.grpStructures.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.grpStructures.Location = New System.Drawing.Point(13, 62)
-        Me.grpStructures.Name = "grpStructures"
-        Me.grpStructures.Size = New System.Drawing.Size(296, 149)
-        Me.grpStructures.TabIndex = 7
-        Me.grpStructures.TabStop = False
-        '
-        'lblRecords
-        '
-        Me.lblRecords.AutoSize = True
-        Me.lblRecords.Location = New System.Drawing.Point(168, 98)
-        Me.lblRecords.Name = "lblRecords"
-        Me.lblRecords.Size = New System.Drawing.Size(0, 13)
-        Me.lblRecords.TabIndex = 20
-        Me.lblRecords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtDelimiter
-        '
-        Me.txtDelimiter.FormattingEnabled = True
-        Me.txtDelimiter.Items.AddRange(New Object() {"comma", "tab", "space"})
-        Me.txtDelimiter.Location = New System.Drawing.Point(119, 31)
-        Me.txtDelimiter.Name = "txtDelimiter"
-        Me.txtDelimiter.Size = New System.Drawing.Size(135, 21)
-        Me.txtDelimiter.TabIndex = 18
-        '
-        'txtQualifier
-        '
-        Me.txtQualifier.Location = New System.Drawing.Point(119, 72)
-        Me.txtQualifier.Name = "txtQualifier"
-        Me.txtQualifier.Size = New System.Drawing.Size(135, 20)
-        Me.txtQualifier.TabIndex = 17
-        '
-        'txtHeaders
-        '
-        Me.txtHeaders.Location = New System.Drawing.Point(119, 52)
-        Me.txtHeaders.Name = "txtHeaders"
-        Me.txtHeaders.Size = New System.Drawing.Size(135, 20)
-        Me.txtHeaders.TabIndex = 16
-        '
-        'txtStrName
-        '
-        Me.txtStrName.Location = New System.Drawing.Point(119, 11)
-        Me.txtStrName.Name = "txtStrName"
-        Me.txtStrName.Size = New System.Drawing.Size(135, 20)
-        Me.txtStrName.TabIndex = 14
-        '
-        'cmdDelete
-        '
-        Me.cmdDelete.Location = New System.Drawing.Point(200, 118)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(62, 23)
-        Me.cmdDelete.TabIndex = 13
-        Me.cmdDelete.Text = "Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
-        '
-        'cmdUpdate
-        '
-        Me.cmdUpdate.Location = New System.Drawing.Point(117, 118)
-        Me.cmdUpdate.Name = "cmdUpdate"
-        Me.cmdUpdate.Size = New System.Drawing.Size(62, 23)
-        Me.cmdUpdate.TabIndex = 12
-        Me.cmdUpdate.Text = "Update"
-        Me.cmdUpdate.UseVisualStyleBackColor = True
-        '
-        'cmdCreate
-        '
-        Me.cmdCreate.Location = New System.Drawing.Point(34, 118)
-        Me.cmdCreate.Name = "cmdCreate"
-        Me.cmdCreate.Size = New System.Drawing.Size(62, 23)
-        Me.cmdCreate.TabIndex = 11
-        Me.cmdCreate.Text = "Create"
-        Me.cmdCreate.UseVisualStyleBackColor = True
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(7, 78)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(112, 13)
-        Me.Label21.TabIndex = 10
-        Me.Label21.Text = "Text Qulifier Character"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(9, 57)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(99, 13)
-        Me.Label20.TabIndex = 9
-        Me.Label20.Text = "Total Header Rows"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(7, 36)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(74, 13)
-        Me.Label19.TabIndex = 8
-        Me.Label19.Text = "Delimiter Type"
-        '
-        'lblStrName
-        '
-        Me.lblStrName.AutoSize = True
-        Me.lblStrName.Location = New System.Drawing.Point(6, 15)
-        Me.lblStrName.Name = "lblStrName"
-        Me.lblStrName.Size = New System.Drawing.Size(81, 13)
-        Me.lblStrName.TabIndex = 7
-        Me.lblStrName.Text = "Structure Name"
-        '
-        'cmbExistingStructures
-        '
-        Me.cmbExistingStructures.FormattingEnabled = True
-        Me.cmbExistingStructures.Location = New System.Drawing.Point(163, 25)
-        Me.cmbExistingStructures.Name = "cmbExistingStructures"
-        Me.cmbExistingStructures.Size = New System.Drawing.Size(146, 21)
-        Me.cmbExistingStructures.TabIndex = 1
-        '
         'pnlServers
         '
         Me.pnlServers.BackColor = System.Drawing.Color.PeachPuff
@@ -1388,10 +1392,11 @@ Partial Class formAWSRealTime
         Me.pnlServers.Controls.Add(Me.lblServerSettings)
         Me.pnlServers.Controls.Add(Me.cmdMSS)
         Me.pnlServers.Controls.Add(Me.cmdBaseStation)
-        Me.pnlServers.Location = New System.Drawing.Point(193, 36)
+        Me.pnlServers.Location = New System.Drawing.Point(195, 279)
         Me.pnlServers.Name = "pnlServers"
-        Me.pnlServers.Size = New System.Drawing.Size(758, 360)
+        Me.pnlServers.Size = New System.Drawing.Size(753, 39)
         Me.pnlServers.TabIndex = 2
+        Me.pnlServers.Visible = False
         '
         'pnlBaseStation
         '
@@ -1932,11 +1937,11 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.BackColor = System.Drawing.Color.Linen
         Me.pnlMsgEncoding.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox6)
-        Me.pnlMsgEncoding.Controls.Add(Me.GroupBox7)
+        Me.pnlMsgEncoding.Controls.Add(Me.grpIndicators)
         Me.pnlMsgEncoding.Controls.Add(Me.GroupBox5)
-        Me.pnlMsgEncoding.Location = New System.Drawing.Point(201, 153)
+        Me.pnlMsgEncoding.Location = New System.Drawing.Point(197, 364)
         Me.pnlMsgEncoding.Name = "pnlMsgEncoding"
-        Me.pnlMsgEncoding.Size = New System.Drawing.Size(725, 28)
+        Me.pnlMsgEncoding.Size = New System.Drawing.Size(726, 49)
         Me.pnlMsgEncoding.TabIndex = 4
         Me.pnlMsgEncoding.Visible = False
         '
@@ -1960,33 +1965,73 @@ Partial Class formAWSRealTime
         Me.dgrdCodeFlag.Size = New System.Drawing.Size(407, 447)
         Me.dgrdCodeFlag.TabIndex = 0
         '
-        'GroupBox7
+        'grpIndicators
         '
-        Me.GroupBox7.Controls.Add(Me.chkOptionalSection)
-        Me.GroupBox7.Controls.Add(Me.LocaltableVersion)
-        Me.GroupBox7.Controls.Add(Me.MastertableVersion)
-        Me.GroupBox7.Controls.Add(Me.LocalSubcategory)
-        Me.GroupBox7.Controls.Add(Me.InternationalSubcategory)
-        Me.GroupBox7.Controls.Add(Me.txtDataCategory)
-        Me.GroupBox7.Controls.Add(Me.txtUpdateSequence)
-        Me.GroupBox7.Controls.Add(Me.txtOriginatingSubcentre)
-        Me.GroupBox7.Controls.Add(Me.txtOriginatingCentre)
-        Me.GroupBox7.Controls.Add(Me.txtBufrEdition)
-        Me.GroupBox7.Controls.Add(Me.Label25)
-        Me.GroupBox7.Controls.Add(Me.Label26)
-        Me.GroupBox7.Controls.Add(Me.Label27)
-        Me.GroupBox7.Controls.Add(Me.Label28)
-        Me.GroupBox7.Controls.Add(Me.Label29)
-        Me.GroupBox7.Controls.Add(Me.Label30)
-        Me.GroupBox7.Controls.Add(Me.Label32)
-        Me.GroupBox7.Controls.Add(Me.Label33)
-        Me.GroupBox7.Controls.Add(Me.Label34)
-        Me.GroupBox7.Location = New System.Drawing.Point(9, 200)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(296, 286)
-        Me.GroupBox7.TabIndex = 1
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "BUFR Section 2"
+        Me.grpIndicators.Controls.Add(Me.cmdDefault)
+        Me.grpIndicators.Controls.Add(Me.cmdSaves)
+        Me.grpIndicators.Controls.Add(Me.cmdUpadate)
+        Me.grpIndicators.Controls.Add(Me.cmdNew)
+        Me.grpIndicators.Controls.Add(Me.chkOptionalSection)
+        Me.grpIndicators.Controls.Add(Me.txtLocaltableVersion)
+        Me.grpIndicators.Controls.Add(Me.txtMastertableVersion)
+        Me.grpIndicators.Controls.Add(Me.txtLocalSubcategory)
+        Me.grpIndicators.Controls.Add(Me.txtInternationalSubcategory)
+        Me.grpIndicators.Controls.Add(Me.txtDataCategory)
+        Me.grpIndicators.Controls.Add(Me.txtUpdateSequence)
+        Me.grpIndicators.Controls.Add(Me.txtOriginatingSubcentre)
+        Me.grpIndicators.Controls.Add(Me.txtOriginatingCentre)
+        Me.grpIndicators.Controls.Add(Me.txtBufrEdition)
+        Me.grpIndicators.Controls.Add(Me.Label25)
+        Me.grpIndicators.Controls.Add(Me.Label26)
+        Me.grpIndicators.Controls.Add(Me.Label27)
+        Me.grpIndicators.Controls.Add(Me.Label28)
+        Me.grpIndicators.Controls.Add(Me.Label29)
+        Me.grpIndicators.Controls.Add(Me.txtUpdateSequenceNumber)
+        Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingSubCentre)
+        Me.grpIndicators.Controls.Add(Me.txtOriginatingGeneratingCentre)
+        Me.grpIndicators.Controls.Add(Me.Label34)
+        Me.grpIndicators.Location = New System.Drawing.Point(9, 159)
+        Me.grpIndicators.Name = "grpIndicators"
+        Me.grpIndicators.Size = New System.Drawing.Size(296, 323)
+        Me.grpIndicators.TabIndex = 1
+        Me.grpIndicators.TabStop = False
+        Me.grpIndicators.Text = "BUFR Section 2"
+        '
+        'cmdDefault
+        '
+        Me.cmdDefault.Location = New System.Drawing.Point(213, 291)
+        Me.cmdDefault.Name = "cmdDefault"
+        Me.cmdDefault.Size = New System.Drawing.Size(75, 20)
+        Me.cmdDefault.TabIndex = 24
+        Me.cmdDefault.Text = "Set Default"
+        Me.cmdDefault.UseVisualStyleBackColor = True
+        '
+        'cmdSaves
+        '
+        Me.cmdSaves.Location = New System.Drawing.Point(75, 291)
+        Me.cmdSaves.Name = "cmdSaves"
+        Me.cmdSaves.Size = New System.Drawing.Size(59, 20)
+        Me.cmdSaves.TabIndex = 23
+        Me.cmdSaves.Text = "Save"
+        Me.cmdSaves.UseVisualStyleBackColor = True
+        '
+        'cmdUpadate
+        '
+        Me.cmdUpadate.Location = New System.Drawing.Point(142, 291)
+        Me.cmdUpadate.Name = "cmdUpadate"
+        Me.cmdUpadate.Size = New System.Drawing.Size(63, 20)
+        Me.cmdUpadate.TabIndex = 22
+        Me.cmdUpadate.Text = "Update"
+        Me.cmdUpadate.UseVisualStyleBackColor = True
+        '
+        'cmdNew
+        '
+        Me.cmdNew.Location = New System.Drawing.Point(8, 291)
+        Me.cmdNew.Name = "cmdNew"
+        Me.cmdNew.Size = New System.Drawing.Size(59, 20)
+        Me.cmdNew.TabIndex = 21
+        Me.cmdNew.Text = "AddNew"
+        Me.cmdNew.UseVisualStyleBackColor = True
         '
         'chkOptionalSection
         '
@@ -2000,33 +2045,33 @@ Partial Class formAWSRealTime
         Me.chkOptionalSection.Text = "Option Section Inclusion                     "
         Me.chkOptionalSection.UseVisualStyleBackColor = True
         '
-        'LocaltableVersion
+        'txtLocaltableVersion
         '
-        Me.LocaltableVersion.Location = New System.Drawing.Point(204, 225)
-        Me.LocaltableVersion.Name = "LocaltableVersion"
-        Me.LocaltableVersion.Size = New System.Drawing.Size(60, 20)
-        Me.LocaltableVersion.TabIndex = 19
+        Me.txtLocaltableVersion.Location = New System.Drawing.Point(204, 225)
+        Me.txtLocaltableVersion.Name = "txtLocaltableVersion"
+        Me.txtLocaltableVersion.Size = New System.Drawing.Size(60, 20)
+        Me.txtLocaltableVersion.TabIndex = 19
         '
-        'MastertableVersion
+        'txtMastertableVersion
         '
-        Me.MastertableVersion.Location = New System.Drawing.Point(204, 204)
-        Me.MastertableVersion.Name = "MastertableVersion"
-        Me.MastertableVersion.Size = New System.Drawing.Size(60, 20)
-        Me.MastertableVersion.TabIndex = 18
+        Me.txtMastertableVersion.Location = New System.Drawing.Point(204, 204)
+        Me.txtMastertableVersion.Name = "txtMastertableVersion"
+        Me.txtMastertableVersion.Size = New System.Drawing.Size(60, 20)
+        Me.txtMastertableVersion.TabIndex = 18
         '
-        'LocalSubcategory
+        'txtLocalSubcategory
         '
-        Me.LocalSubcategory.Location = New System.Drawing.Point(204, 183)
-        Me.LocalSubcategory.Name = "LocalSubcategory"
-        Me.LocalSubcategory.Size = New System.Drawing.Size(60, 20)
-        Me.LocalSubcategory.TabIndex = 17
+        Me.txtLocalSubcategory.Location = New System.Drawing.Point(204, 183)
+        Me.txtLocalSubcategory.Name = "txtLocalSubcategory"
+        Me.txtLocalSubcategory.Size = New System.Drawing.Size(60, 20)
+        Me.txtLocalSubcategory.TabIndex = 17
         '
-        'InternationalSubcategory
+        'txtInternationalSubcategory
         '
-        Me.InternationalSubcategory.Location = New System.Drawing.Point(204, 162)
-        Me.InternationalSubcategory.Name = "InternationalSubcategory"
-        Me.InternationalSubcategory.Size = New System.Drawing.Size(60, 20)
-        Me.InternationalSubcategory.TabIndex = 16
+        Me.txtInternationalSubcategory.Location = New System.Drawing.Point(204, 162)
+        Me.txtInternationalSubcategory.Name = "txtInternationalSubcategory"
+        Me.txtInternationalSubcategory.Size = New System.Drawing.Size(60, 20)
+        Me.txtInternationalSubcategory.TabIndex = 16
         '
         'txtDataCategory
         '
@@ -2108,32 +2153,32 @@ Partial Class formAWSRealTime
         Me.Label29.TabIndex = 5
         Me.Label29.Text = "Data Category"
         '
-        'Label30
+        'txtUpdateSequenceNumber
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(15, 103)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(114, 13)
-        Me.Label30.TabIndex = 3
-        Me.Label30.Text = "Update Sequence No."
+        Me.txtUpdateSequenceNumber.AutoSize = True
+        Me.txtUpdateSequenceNumber.Location = New System.Drawing.Point(15, 103)
+        Me.txtUpdateSequenceNumber.Name = "txtUpdateSequenceNumber"
+        Me.txtUpdateSequenceNumber.Size = New System.Drawing.Size(114, 13)
+        Me.txtUpdateSequenceNumber.TabIndex = 3
+        Me.txtUpdateSequenceNumber.Text = "Update Sequence No."
         '
-        'Label32
+        'txtOriginatingGeneratingSubCentre
         '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(15, 82)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(170, 13)
-        Me.Label32.TabIndex = 2
-        Me.Label32.Text = "Originating/Generating Sub-Centre"
+        Me.txtOriginatingGeneratingSubCentre.AutoSize = True
+        Me.txtOriginatingGeneratingSubCentre.Location = New System.Drawing.Point(15, 82)
+        Me.txtOriginatingGeneratingSubCentre.Name = "txtOriginatingGeneratingSubCentre"
+        Me.txtOriginatingGeneratingSubCentre.Size = New System.Drawing.Size(170, 13)
+        Me.txtOriginatingGeneratingSubCentre.TabIndex = 2
+        Me.txtOriginatingGeneratingSubCentre.Text = "Originating/Generating Sub-Centre"
         '
-        'Label33
+        'txtOriginatingGeneratingCentre
         '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(15, 61)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(148, 13)
-        Me.Label33.TabIndex = 1
-        Me.Label33.Text = "Originating/Generating Centre"
+        Me.txtOriginatingGeneratingCentre.AutoSize = True
+        Me.txtOriginatingGeneratingCentre.Location = New System.Drawing.Point(15, 61)
+        Me.txtOriginatingGeneratingCentre.Name = "txtOriginatingGeneratingCentre"
+        Me.txtOriginatingGeneratingCentre.Size = New System.Drawing.Size(148, 13)
+        Me.txtOriginatingGeneratingCentre.TabIndex = 1
+        Me.txtOriginatingGeneratingCentre.Text = "Originating/Generating Centre"
         '
         'Label34
         '
@@ -2203,13 +2248,13 @@ Partial Class formAWSRealTime
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(960, 572)
-        Me.Controls.Add(Me.pnlProcessing)
-        Me.Controls.Add(Me.pnlSites)
-        Me.Controls.Add(Me.pnlDataStructures)
-        Me.Controls.Add(Me.pnlServers)
-        Me.Controls.Add(Me.pnlControl)
+        Me.ClientSize = New System.Drawing.Size(960, 615)
         Me.Controls.Add(Me.pnlMsgEncoding)
+        Me.Controls.Add(Me.pnlProcessing)
+        Me.Controls.Add(Me.pnlControl)
+        Me.Controls.Add(Me.pnlSites)
+        Me.Controls.Add(Me.pnlServers)
+        Me.Controls.Add(Me.pnlDataStructures)
         Me.KeyPreview = True
         Me.Name = "formAWSRealTime"
         Me.Text = "AWS Real Time"
@@ -2226,16 +2271,16 @@ Partial Class formAWSRealTime
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.pnlSites.ResumeLayout(False)
-        Me.grpSites.ResumeLayout(False)
-        Me.grpSites.PerformLayout()
-        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlDataStructures.ResumeLayout(False)
         CType(Me.DataGridViewStructures, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStructures1.ResumeLayout(False)
         Me.grpStructures1.PerformLayout()
         Me.grpStructures.ResumeLayout(False)
         Me.grpStructures.PerformLayout()
+        Me.pnlSites.ResumeLayout(False)
+        Me.grpSites.ResumeLayout(False)
+        Me.grpSites.PerformLayout()
+        CType(Me.DataGridViewSites, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlServers.ResumeLayout(False)
         Me.pnlServers.PerformLayout()
         Me.pnlBaseStation.ResumeLayout(False)
@@ -2249,8 +2294,8 @@ Partial Class formAWSRealTime
         Me.pnlMsgEncoding.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.dgrdCodeFlag, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
+        Me.grpIndicators.ResumeLayout(False)
+        Me.grpIndicators.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
@@ -2346,12 +2391,12 @@ Partial Class formAWSRealTime
     Friend WithEvents grpElements As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents dgrdCodeFlag As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpIndicators As System.Windows.Forms.GroupBox
     Friend WithEvents chkOptionalSection As System.Windows.Forms.CheckBox
-    Friend WithEvents LocaltableVersion As System.Windows.Forms.TextBox
-    Friend WithEvents MastertableVersion As System.Windows.Forms.TextBox
-    Friend WithEvents LocalSubcategory As System.Windows.Forms.TextBox
-    Friend WithEvents InternationalSubcategory As System.Windows.Forms.TextBox
+    Friend WithEvents txtLocaltableVersion As System.Windows.Forms.TextBox
+    Friend WithEvents txtMastertableVersion As System.Windows.Forms.TextBox
+    Friend WithEvents txtLocalSubcategory As System.Windows.Forms.TextBox
+    Friend WithEvents txtInternationalSubcategory As System.Windows.Forms.TextBox
     Friend WithEvents txtDataCategory As System.Windows.Forms.TextBox
     Friend WithEvents txtUpdateSequence As System.Windows.Forms.TextBox
     Friend WithEvents txtOriginatingSubcentre As System.Windows.Forms.TextBox
@@ -2361,9 +2406,9 @@ Partial Class formAWSRealTime
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents Label32 As System.Windows.Forms.Label
-    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents txtUpdateSequenceNumber As System.Windows.Forms.Label
+    Friend WithEvents txtOriginatingGeneratingSubCentre As System.Windows.Forms.Label
+    Friend WithEvents txtOriginatingGeneratingCentre As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents txtTemplate As System.Windows.Forms.ComboBox
@@ -2452,4 +2497,8 @@ Partial Class formAWSRealTime
     Friend WithEvents chkPrefix As System.Windows.Forms.CheckBox
     Friend WithEvents txtQC As System.Windows.Forms.TextBox
     Friend WithEvents cmdBstAddNew As Button
+    Friend WithEvents cmdDefault As Button
+    Friend WithEvents cmdSaves As Button
+    Friend WithEvents cmdUpadate As Button
+    Friend WithEvents cmdNew As Button
 End Class

@@ -106,12 +106,20 @@ Public Class frmFormUpload
                     'stnlist = stnlist & " or recordedFrom = " & LstViewStations.Items(i).SubItems(0).Text
                 End If
             Next
-            sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            If frm_tbl = "form_monthly" Then
+                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "')"
+            Else
+                sql = "select * from " & frm_tbl & " where (" & stnlist & ") and (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            End If
         Else ' When All stations are selected
             stnselected = True
-            sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            If frm_tbl = "form_monthly" Then
+                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "');"
+            Else
+                sql = "select * from " & frm_tbl & " where (yyyy between '" & txtBeginYear.Text & "' and '" & txtEndYear.Text & "') and (mm between '" & txtBeginMonth.Text & "' and '" & txtEndMonth.Text & "');"
+            End If
         End If
-        Try
+            Try
             conns.ConnectionString = frmLogin.txtusrpwd.Text
             conns.Open()
 
@@ -219,6 +227,13 @@ Public Class frmFormUpload
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
                             dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
                             hh = (m - st)
+
+                        Case "form_monthly"
+                            yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
+                            mm = m - 2
+                            dd = dss.Tables(frm_tbl).Rows(n).Item(m + 24)
+                            hh = rgKey.RegkeyValue("key01")
+                            obsperiod = dss.Tables(frm_tbl).Rows(n).Item(m + 24)
 
                         Case "form_hourlywind"
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")

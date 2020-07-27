@@ -70,10 +70,12 @@ Public Class formAWSRealTime
         dbconn.ConnectionString = dbConnectionString
         dbconn.Open()
 
+        'Indicators_Populate(dbconn)
+
         ShowPanel(pnlProcessing, "Process Settings")
         Me.Text = "AWS Real Time"
         load_PressingParameters("txtlFill")
-        load_Indicators(dbconn)
+        load_Indicators()
         Timer1.Start()
         'Timer2.Start()
 
@@ -973,32 +975,46 @@ Err:
         'MsgBox(Err.Description)
         Log_Errors(Err.Description)
     End Sub
-    Sub load_Indicators(iconn As MySql.Data.MySqlClient.MySqlConnection)
+    Sub load_Indicators(Optional Tmpt As String = "")
+
+        Dim iconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dai As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dsi As New DataSet
         Try
+
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            iconn.ConnectionString = dbConnectionString
+            iconn.Open()
+
             ' Populate Template Combo box
             sql = "SELECT * FROM bufr_indicators;"
             dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, iconn)
             ' Remove timeout requirement
             dai.SelectCommand.CommandTimeout = 0
-
             dsi.Clear()
             dai.Fill(dsi, "indicators")
+            iconn.Close()
 
             With dsi.Tables("indicators")
+                txtTemplate.Items.Clear()
                 For i = 0 To .Rows.Count - 1
                     txtTemplate.Items.Add(.Rows(i).Item("Tmplate"))
                 Next
 
                 ' Populate with AWS Template TM_307091
-                sql = "SELECT * FROM bufr_indicators where Tmplate = 'TM_307091';"
+                'sql = "SELECT * FROM bufr_indicators where Tmplate = 'TM_307091';"
+                If Len(Tmpt) = 0 Then
+                    sql = "SELECT * FROM bufr_indicators where defaultTemplate = True;"
+                Else
+                    sql = "SELECT * FROM bufr_indicators where Tmplate = '" & Tmpt & "';"
+                End If
                 dai = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
                 ' Remove timeout requirement
                 dai.SelectCommand.CommandTimeout = 0
 
                 dsi.Clear()
                 dai.Fill(dsi, "indicators")
+
                 If dsi.Tables("indicators").Rows.Count > 0 Then
                     txtTemplate.Text = .Rows(0).Item("Tmplate")
                     txtMsgHeader.Text = .Rows(0).Item("Msg_Header")
@@ -1008,10 +1024,15 @@ Err:
                     txtUpdateSequence.Text = .Rows(0).Item("Update_Sequence")
                     chkOptionalSection.Checked = .Rows(0).Item("Optional_Section")
                     txtDataCategory.Text = .Rows(0).Item("Data_Category")
-                    InternationalSubcategory.Text = .Rows(0).Item("Intenational_Data_SubCategory")
-                    LocalSubcategory.Text = .Rows(0).Item("Local_Data_SubCategory")
-                    MastertableVersion.Text = .Rows(0).Item("Master_table")
-                    LocaltableVersion.Text = .Rows(0).Item("Local_Table")
+                    txtInternationalSubcategory.Text = .Rows(0).Item("Intenational_Data_SubCategory")
+                    txtLocalSubcategory.Text = .Rows(0).Item("Local_Data_SubCategory")
+                    txtMastertableVersion.Text = .Rows(0).Item("Master_table")
+                    txtLocaltableVersion.Text = .Rows(0).Item("Local_Table")
+                    If .Rows(0).Item("Optional_Section") = 0 Then
+                        chkOptionalSection.Checked = False
+                    Else
+                        chkOptionalSection.Checked = True
+                    End If
                 End If
             End With
 
@@ -1025,6 +1046,7 @@ Err:
             dai.Fill(dsi, "code_flag")
             dgrdCodeFlag.DataSource = dsi.Tables("code_flag")
         Catch ex As Exception
+            iconn.Close()
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -1040,19 +1062,22 @@ Err:
         On Error GoTo Err
 
 
-        Ltime.Text = Now
+        Ltime.Text = Now()
         txtDateTime.Text = Ltime.Text
 
+        txtDateTime.Refresh()
         ' Set the next encoding time
-        If Len(txtNxtProcess.Text) = 0 Then
-            'MsgBox(0)
-            txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
-            'optStart.Checked = True
-        End If
+        'If Len(txtNxtProcess.Text) = 0 Then
+        '    'MsgBox(0)
+        '    txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Ltime.Text)), Ltime.Text)
+        '    'txtNxtProcess.Text = DateAdd("n", Val(txtOffset.Text) - Val(Minute(Now())), Now())
+        '    'optStart.Checked = True
+        'End If
 
         If optStart.Checked = True Then
             'Log_Errors(DateDiff("n", txtDateTime.Text, txtNxtProcess.Text))
-            If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
+            'If DateDiff("n", txtDateTime.Text, txtNxtProcess.Text) <= 0 Then
+            If DateDiff("n", Now(), txtNxtProcess.Text) <= 0 Then
                 Start_Process()
             End If
         End If
@@ -1216,7 +1241,10 @@ Err:
                 flprefix = ""
                 'MsgBox(.Rows(i).Item("chkPrefix"))
                 If Not IsDBNull(.Rows(i).Item("FilePrefix")) And .Rows(i).Item("chkPrefix") = True Then
-                    flprefix = .Rows(i).Item("FilePrefix")
+                    flprefix = .Rows(i).Item("FilePrefix") '
+                    If Len(flprefix) > 0 Then
+                        flprefix = Compute_Prefix(flprefix)
+                    End If
                 End If
 
                 ' Compute Delimiter ascii value
@@ -1307,6 +1335,7 @@ Err:
                                 If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
                                     x = Strings.Mid(x, 2, Len(x) - 2)
                                 End If
+
                                 AwsRecord_Update(x, j, flg, AWSsite)
                             Else
                                 Continue For
@@ -1354,12 +1383,7 @@ Err:
 
         FileOpen(30, fl, OpenMode.Input)
 
-        Dim dts(1000) As String
-        Dim subs(1000) As String
-        Dim Tsubs As Integer
-        'Dim kount As Integer
-        Dim Tdone As String
-        Dim subst As String
+        Dim dts(1000), subs(1000), Tdone, Tsubs, subst, yy, mm, dd, hh,mn As String
 
         ' Load the subsets records from an output file into arrays
         Kount = 0
@@ -1370,8 +1394,16 @@ Err:
             Kount = Kount + 1
         Loop
 
+        'Log_Errors(msg_header)
+
+
         If Kount = 1 Then ' Only one substest existing
-            If Len(subs(0)) <> 0 Then
+            If Len(subs(0)) <> 0 Then  'Check whether encoded data exists
+                yy = DateAndTime.Day(dts(0))
+                mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
+                dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
+                hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
+                mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
                 'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(0)), "00") & Format(DateAndTime.Hour(dts(0)), "00") & Format(DateAndTime.Minute(dts(0)), "00") '& " " & txtBBB
                 BUFR_header = msg_header & " " & DateAndTime.Day(dts(0)) & DateAndTime.Hour(dts(0)) & DateAndTime.Minute(dts(0)) '& " " & txtBBB
 
@@ -1396,10 +1428,15 @@ Err:
                     End If
                 Next
 
-                msg_header = txtMsgHeader.Text ' National Message Header
+                'msg_header = txtMsgHeader.Text ' National Message Header
 
                 ' Compile a bulletin for the located same hour subsets
                 If Len(subst) <> 0 Then
+                    yy = DateAndTime.Day(dts(0))
+                    mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
+                    dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
+                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
+                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
                     'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(i)), "00") & Format(DateAndTime.Hour(dts(i)), "00") & Format(DateAndTime.Minute(dts(i)), "00") '& " " & txtBBB
                     BUFR_header = msg_header & " " & DateAndTime.Day(dts(i)) & DateAndTime.Hour(dts(i)) & DateAndTime.Minute(dts(i)) '& " " & txtBBB
                     AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst)
@@ -1640,19 +1677,19 @@ Err:
                     Print(1, "bye" & Chr(13) & Chr(10))
                     FileClose(1)
                 Case "put"
-                    'FileClose(1)
-                    'FileOpen(2, ftpscript, OpenMode.Output)
-                    'If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
-                    'If ftpmode = "FTP" Then
-                    '    Print(2, "open " & ftp_host & Chr(13) & Chr(10))
-                    '    Print(2, usr & Chr(13) & Chr(10))
-                    '    Print(2, pwd & Chr(13) & Chr(10))
-                    '    Print(2, "cd " & flder & Chr(13) & Chr(10))
-                    '    Print(2, "bin" & Chr(13) & Chr(10))
-                    'End If
-                    'Print(2, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
-                    'Print(2, "bye" & Chr(13) & Chr(10))
-                    'FileClose(2)
+                    FileClose(1)
+                    FileOpen(2, ftpscript, OpenMode.Output)
+                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
+                    If ftpmode = "FTP" Then
+                        Print(2, "open " & ftp_host & Chr(13) & Chr(10))
+                        Print(2, usr & Chr(13) & Chr(10))
+                        Print(2, pwd & Chr(13) & Chr(10))
+                        Print(2, "cd " & flder & Chr(13) & Chr(10))
+                        Print(2, "bin" & Chr(13) & Chr(10))
+                    End If
+                    Print(2, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    Print(2, "bye" & Chr(13) & Chr(10))
+                    FileClose(2)
             End Select
             FileClose(1)
             FileClose(3)
@@ -1708,6 +1745,7 @@ Err:
                 If Len(flprefix) > 0 Then
                     'Dim fcopy As String
                     'fcopy = local_folder & "\filcopy.bat"
+
                     'Log_Errors(fcopy)
                     'FileOpen(33, fcopy, OpenMode.Output)
 
@@ -1728,28 +1766,18 @@ Err:
 
                     FileOpen(100, txtinputfile, OpenMode.Output)
                     For Each fl In aryFl
-                        'Log_Errors(fl.FullName)
                         If InStr(fl.Name, flprefix) > 0 Then
-                            'Log_Errors(fl.Name & " " & flprefix)
-                            'If IO.File.Exists(local_folder & "\" & fl.Name) Then
-                            '    'MsgBox(local_folder & "\" & fl.Name)
-                            '    File.Delete(local_folder & "\" & fl.Name)
-                            'End If
-
                             FileOpen(200, local_folder & "\" & fl.Name, OpenMode.Input)
                             Do While EOF(200) = False
                                 dat = LineInput(200)
                                 PrintLine(100, dat)
-                                'Log_Errors(fl.Name & " " & dat)
                             Loop
                             FileClose(200)
                             File.Delete(local_folder & "\" & fl.Name)
-                            ''File.Move(local_folder & "\" & fl.Name, local_folder & "\backup")
-
                         End If
                     Next fl
                     FileClose(100)
-                    ''FileOpen(33, fcopy, OpenMode.Output)
+                    'FileOpen(33, fcopy, OpenMode.Output)
                     'Print(33, "echo off" & Chr(13) & Chr(10))
                     'Print(33, "copy *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
                     ''Print(33, "del *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
@@ -1956,10 +1984,10 @@ Err:
 
     End Function
     Sub Process_Input_Record(aws_rs As String, datestring As String)
-
         Dim str As DataSet
         Dim sql2 As String
-
+        Dim GMTDiff As Integer
+        Dim Date_Time As Date
         Try
             'sql2 = "SELECT * FROM station"
             sql2 = "select * from station where stationId = '" & nat_id & "';"
@@ -1981,26 +2009,30 @@ Err:
 
             update_main_db(aws_rs, datestring, nat_id)
 
-            ' Check if encoding time has been reached
-            If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
-                Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
-                Exit Sub
-            End If
+            'If Val(txtInterval.Text) = 0 Or Val(txtInterval.Text) > 60 Then ' Not a valid Encoding interval set
+            '    Log_Errors(txtInterval.Text & " Not a valid Encoding time interval")
+            '    Exit Sub
+            'End If
 
-            Dim ET As Double
+            Dim ET, Rmd As Integer
 
-            ' Compute Encoding time
-            ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
-
-            If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
+            '' Compute Encoding time
+            'ET = CDbl(Minute(datestring)) / CDbl(Val(txtInterval.Text))
+            'If ET <> 0 And ET <> 1 Then Exit Sub ' Not an encoding time interval
 
             If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
 
             If IsDate(datestring) Then
+                ' Convert time to UTC
+                GMTDiff = CDbl(txtGMTDiff.Text)
+                Date_Time = DateAdd("h", -1 * GMTDiff, datestring)
+
+                ' Compute Encoding interval hours 
+                ET = Math.Round(Val(txtInterval.Text) / 60)
+                Rmd = DateAndTime.Hour(Date_Time) Mod ET
 
                 ' Update the Template Table and Process the messages for transmission at the scheduled time
-                update_tbltemplate(aws_rs, datestring)
-
+                If Val(DateAndTime.Hour(Date_Time)) Mod ET = 0 Then update_tbltemplate(aws_rs, Date_Time)
             End If
             txtLastProcess.Text = datestring
 
@@ -2159,6 +2191,7 @@ Err:
 
     Private Sub optStart_Click(sender As Object, e As EventArgs) Handles optStart.Click
         'If optStart.Checked = True Then Start_Process()
+
         Start_Process()
     End Sub
     Sub Process_Status(msg As String)
@@ -2274,15 +2307,9 @@ Err:
         Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
 
         Dim trs As New DataSet
-        Dim sql As String
-        Dim yy, mm, dd, hh, min, ss As String
-        Dim Seq_Desc As String
-        Dim tt_aws As String
-        Dim obsv As String
-        Dim InitValue As String
-        'Dim BufrSection4 As String
-        Dim hdr As String
+        Dim sql, yy, mm, dd, hh, min, ss, Seq_Desc, tt_aws, InitValue As String
         Dim stn_typ As Integer
+        'Dim obsv, hdr As String
 
         Try
             'cmd.Connection = Dim dbconw
@@ -2316,22 +2343,17 @@ Err:
 
             trs.Clear()
             da.Fill(trs, tt_aws)
-            'MsgBox(trs.Tables("bufr_crex_data").Rows.Count)
 
-            '    With trs
-            '        '  .MoveFirst
             yy = DateAndTime.Year(Date_Time)
             mm = DateAndTime.Month(Date_Time)
             dd = DateAndTime.Day(Date_Time)
-            hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
+            hh = DateAndTime.Hour(Date_Time)
+            'hh = Val(DateAndTime.Hour(Date_Time)) - Int(txtGMTDiff.Text)
             min = DateAndTime.Minute(Date_Time)
             ss = DateAndTime.Second(Date_Time)
             stn_typ = 0 ' Code for AWS
-            'wmo_id = 63999
-            'MsgBox(stn_typ.ToString("D2"))
 
-            'msg_header = txtMsgHeader.Text
-
+            'msg_header = MsgHeaber_ByHour(hh)
 
             'BUFR_header = msg_header & " " & Format(dd, "00") & Format(hh, "00") & Format(min, "00") '& " " & txtBBB
             BUFR_header = msg_header & " " & dd & hh & min '& " " & txtBBB
@@ -2425,6 +2447,7 @@ Err:
                 'sql = "Select TM_307091.Rec, TM_307091.Bufr_Template, TM_307091.CREX_Template, TM_307091.Sequence_Descriptor1, TM_307091.Sequence_Descriptor0, TM_307091.Bufr_Element, TM_307091.Crex_Element, TM_307091.Climsoft_Element, TM_307091.Element_Name, TM_307091.Crex_Unit, TM_307091.Crex_Scale, TM_307091.Crex_DataWidth, TM_307091.Bufr_Unit, TM_307091.Bufr_Scale, TM_307091.Bufr_RefValue, TM_307091.Bufr_DataWidth_Bits, TM_307091.Selected, TM_307091.Observation, TM_307091.Crex_Data, TM_307091.Bufr_Data " &
                 '      "From TM_307091 Where (((TM_307091.Selected) = True)) ORDER BY TM_307091.Rec;"
             End If
+
             sql = "Select bufr_crex_data.Nos, bufr_crex_data.Bufr_Template, bufr_crex_data.CREX_Template, bufr_crex_data.Sequence_Descriptor1, bufr_crex_data.Sequence_Descriptor0, bufr_crex_data.Bufr_Element, bufr_crex_data.Crex_Element, bufr_crex_data.Climsoft_Element, bufr_crex_data.Element_Name, bufr_crex_data.Crex_Unit, bufr_crex_data.Crex_Scale, bufr_crex_data.Crex_DataWidth, bufr_crex_data.Bufr_Unit, bufr_crex_data.Bufr_Scale, bufr_crex_data.Bufr_RefValue, bufr_crex_data.Bufr_DataWidth_Bits, bufr_crex_data.Selected, bufr_crex_data.Observation, bufr_crex_data.Crex_Data, bufr_crex_data.Bufr_Data " &
                   "From bufr_crex_data Where (((bufr_crex_data.Selected) = True)) ORDER BY bufr_crex_data.Nos;"
 
@@ -2513,6 +2536,7 @@ Err:
     Sub Update_observations(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, aws_struct As String)
         ' Update Template with AWS observation values
         sql = "UPDATE " & aws_struct & " INNER JOIN bufr_crex_data ON " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = " & aws_struct & ".obsv where " & aws_struct & ".Bufr_Element = bufr_crex_data.Bufr_Element;"
+        'sql = "update aws_inam1 INNER JOIN bufr_crex_data ON aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element SET bufr_crex_data.Observation = aws_inam1.obsv where aws_inam1.Bufr_Element = bufr_crex_data.Bufr_Element;"
         qry.Connection = conw
         qry.CommandText = sql
         qry.ExecuteNonQuery()
@@ -3076,6 +3100,20 @@ Err:
     End Function
 
     Function AWS_BUFR_Code(message_header As String, yy As String, mm As String, dd As String, hh As String, min As String, ss As String, binary_data As String) As Boolean
+
+        ' Set message header according to the hour category 
+        If Val(hh) Mod 6 = 0 Then
+            Mid(message_header, 3, 1) = "M"
+        ElseIf Val(hh) Mod 6 = 3 Then
+            Mid(message_header, 3, 1) = "I"
+        Else
+            Mid(message_header, 3, 1) = "N"
+        End If
+
+        'msg_header = MsgHeaber_ByHour(hh)
+
+        'Log_Errors(message_header & " " & hh)
+
         AWS_BUFR_Code = False
         'Log_Errors(binary_data)
         On Error GoTo Err
@@ -3141,13 +3179,13 @@ Err:
         ' Octet 11. Data category
         section1 = section1 & Decimal_Binary(Val(txtDataCategory.Text), 8)
         ' Octet 12. International data sub-category (defined in table C-13)
-        section1 = section1 & Decimal_Binary(Val(InternationalSubcategory.Text), 8)
+        section1 = section1 & Decimal_Binary(Val(txtInternationalSubcategory.Text), 8)
         ' Octet 13. Local data sub-category (defined locally by ADP centers)
-        section1 = section1 & Decimal_Binary(Val(LocalSubcategory.Text), 8)
+        section1 = section1 & Decimal_Binary(Val(txtLocalSubcategory.Text), 8)
         ' Octet 14. Version number of master table currently (Currently 12 for WMO BUFR FM 94 BUFR tables)
-        section1 = section1 & Decimal_Binary(Val(MastertableVersion.Text), 8)
+        section1 = section1 & Decimal_Binary(Val(txtMastertableVersion.Text), 8)
         ' Octet 15. Version number of local tables used to augment master table in use
-        section1 = section1 & Decimal_Binary(Val(LocaltableVersion.Text), 8)
+        section1 = section1 & Decimal_Binary(Val(txtLocaltableVersion.Text), 8)
         ' Octet 16 - 17. Year (4 digits)
 
         section1 = section1 & Decimal_Binary(yy, 16)
@@ -3551,12 +3589,14 @@ Err:
     Function Next_Encoding_Time() As Boolean
         Next_Encoding_Time = True
         On Error GoTo Err
-        Dim mnt As Integer
-        Dim ss As Integer
+        Dim mnt, ss, EnInterval As Integer
 
-        txtNxtProcess.Text = Ltime.Text
-        txtNxtProcess.Text = DateAdd("h", 1, txtNxtProcess.Text)
+        txtNxtProcess.Text = DateAdd("n", CLng(txtInterval.Text), Now())
 
+        'txtNxtProcess.Text = Ltime.Text
+        'txtNxtProcess.Text = DateAdd("h", 1, txtNxtProcess.Text)
+
+        ' Set next encoding time with zero minute and zero second
         mnt = CInt(DateAndTime.Minute(txtNxtProcess.Text))
         ss = CInt(DateAndTime.Second(txtNxtProcess.Text))
         mnt = -1 * mnt
@@ -3953,6 +3993,8 @@ Err:
 
     End Sub
 
+
+
     'Private Sub txtSiteID_GotFocus(sender As Object, e As EventArgs) Handles txtSiteID.GotFocus
 
     '    stn1 = txtSiteID.Text
@@ -4037,6 +4079,107 @@ Err:
 
     End Function
 
+    Private Sub cmdNew_Click(sender As Object, e As EventArgs) Handles cmdNew.Click
+        Dim ctl As Control
+
+        txtTemplate.Text = ""
+        txtMsgHeader.Text = ""
+        chkOptionalSection.Checked = False
+        For Each ctl In Me.grpIndicators.Controls
+            If Strings.Left(ctl.Name, 3) = "txt" Then ctl.Text = ""
+        Next
+        txtTemplate.Select()
+    End Sub
+
+    Private Sub cmdSaves_Click(sender As Object, e As EventArgs) Handles cmdSaves.Click
+        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim optsection As Integer
+
+        Try
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            sconn.ConnectionString = dbConnectionString
+            sconn.Open()
+
+            ' set value for the optional section
+            If chkOptionalSection.Checked() = True Then
+                optsection = 1
+            Else
+                optsection = 0
+            End If
+
+            sql = "INSERT IGNORE INTO bufr_indicators (Tmplate,Msg_Header,BUFR_Edition,Originating_Centre,Originating_SubCentre,Update_Sequence,Optional_Section,Data_Category,Intenational_Data_SubCategory,Local_Data_SubCategory,Master_table,Local_Table) VALUES('" & txtTemplate.Text & "','" & txtMsgHeader.Text & "','" & txtBufrEdition.Text & "','" & txtOriginatingCentre.Text & "','" & txtOriginatingSubcentre.Text & "','" & txtUpdateSequence.Text & "','" & optsection & "','" & txtDataCategory.Text & "','" & txtInternationalSubcategory.Text & "','" & txtLocalSubcategory.Text & "','" & txtMastertableVersion.Text & "','" & txtLocaltableVersion.Text & "');"
+
+            ' Create the Command for executing query and set its properties
+            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+
+            'Execute query
+            cmd.ExecuteNonQuery()
+            sconn.Close()
+            MsgBox("New Record added")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            sconn.Close()
+        End Try
+    End Sub
+
+    Private Sub cmdDefault_Click(sender As Object, e As EventArgs) Handles cmdDefault.Click
+        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+
+        Try
+
+            sconn.ConnectionString = dbConnectionString
+            sconn.Open()
+
+            ' Select default Template
+            sql = "Update bufr_indicators set defaultTemplate = 1 where Tmplate= '" & txtTemplate.Text & "';"
+            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd.ExecuteNonQuery()
+
+            ' Deselect default Template from any other
+            sql = "Update bufr_indicators set defaultTemplate = 0 where Tmplate != '" & txtTemplate.Text & "';"
+            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+            cmd.ExecuteNonQuery()
+
+            sconn.Close()
+            MsgBox(txtTemplate.Text & " Set to default")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            sconn.Close()
+        End Try
+    End Sub
+
+    Private Sub cmdUpadate_Click(sender As Object, e As EventArgs) Handles cmdUpadate.Click
+        Dim sconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim optsection As Integer
+
+        Try
+
+            sconn.ConnectionString = dbConnectionString
+            sconn.Open()
+
+            ' set value for the optional section
+            If chkOptionalSection.Checked() = True Then
+                optsection = 1
+            Else
+                optsection = 0
+            End If
+
+            sql = "Update bufr_indicators set Msg_Header= '" & txtMsgHeader.Text & "',BUFR_Edition= '" & txtBufrEdition.Text & "',Originating_Centre= '" & txtOriginatingCentre.Text & "',Originating_SubCentre= '" & txtOriginatingSubcentre.Text & "',Update_Sequence= '" & txtUpdateSequence.Text & "',Optional_Section= '" & optsection & "',Data_Category= '" & txtDataCategory.Text & "',Intenational_Data_SubCategory= '" & txtInternationalSubcategory.Text & "',Local_Data_SubCategory= '" & txtLocalSubcategory.Text & "',Master_table= '" & txtMastertableVersion.Text & "',Local_Table= '" & txtLocaltableVersion.Text &
+                "' where tmplate= '" & txtTemplate.Text & "';"
+
+            ' Create the Command for executing query and set its properties
+            cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, sconn)
+
+            'Execute query
+            cmd.ExecuteNonQuery()
+            sconn.Close()
+            MsgBox("Record updated")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            sconn.Close()
+        End Try
+    End Sub
+
     Sub Get_Datetime(AWSsite As String, ByRef dtCol As Integer, ByRef dtFmt As String)
 
         Dim dbstr As New MySql.Data.MySqlClient.MySqlConnection
@@ -4095,6 +4238,67 @@ Err:
         Catch ex As Exception
             MsgBox(ex.Message)
             Return dt
+        End Try
+    End Function
+
+    Private Sub txtTemplate_Click(sender As Object, e As EventArgs) Handles txtTemplate.Click
+        load_Indicators(txtTemplate.Text)
+    End Sub
+
+    Function Compute_Prefix(Prfx As String) As String
+        Dim yyyy, mm, dd As String
+
+        Try
+            dd = String.Format("{0:00}", DateAndTime.Day(Now()))
+            mm = String.Format("{0:00}", DateAndTime.Month(Now()))
+            yyyy = DateAndTime.Year(Now())
+
+            ' Compute Time bound prefixes
+            Select Case Prfx
+                Case "yyyymmdd"
+                    Return yyyy & mm & dd
+                Case "yyyy-mm-dd"
+                    Return yyyy & "-" & mm & "-" & dd
+                Case "ddmmyyyy"
+                    Return dd & mm & yyyy
+                Case "dd-mm-yyyy"
+                    Return dd & "-" & mm & "-" & yyyy
+                Case "yyyymm"
+                    Return yyyy & mm
+                Case "ddmm"
+                    Return dd & mm
+                Case "yyyy-mm"
+                    Return yyyy & "-" & mm
+                Case "mm-yyyy"
+                    Return mm & "-" & yyyy
+                Case Else ' Non Time bound
+                    Return Prfx
+            End Select
+
+        Catch ex As Exception
+            Log_Errors(ex.Message)
+            Return Prfx
+        End Try
+    End Function
+    Function MsgHeaber_ByHour(hh) As String
+        Dim hr As Integer
+        Dim hdr As String
+        hr = Val(hh)
+        hdr = txtMsgHeader.Text
+        Try
+            Select Case hr Mod 6
+                Case 0
+                    Mid(hdr, 3, 1) = "M"
+                Case 3
+                    Mid(hdr, 3, 1) = "I"
+                Case Else
+                    Mid(hdr, 3, 1) = "N"
+            End Select
+            'Log_Errors(hdr & " " & hh & "-" & hr Mod 6)
+            MsgHeaber_ByHour = hdr
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return hdr
         End Try
     End Function
 End Class

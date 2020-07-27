@@ -80,6 +80,12 @@
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            ' Upload through a dialog that allows records selection
+            frmFormUpload.lblFormName.Text = "form_monthly"
+            frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+            frmFormUpload.Show()
+
+            Exit Sub
             UploadAllRecords()
             'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
