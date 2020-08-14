@@ -461,60 +461,54 @@ Err:
         End Select
     End Sub
 
-    Private Sub cmdmssReset_Click(sender As Object, e As EventArgs) Handles cmdmssReset.Click
+    Private Sub cmdmssReset_Click(sender As Object, e As EventArgs) Handles cmdMssReset.Click
         FormReset("mss")
     End Sub
 
-    Private Sub cmdMSSAddNew_Click(sender As Object, e As EventArgs) Handles cmdMSSAddNew.Click
-        On Error GoTo Err
+    Private Sub cmdMSSAddNew_Click(sender As Object, e As EventArgs) Handles cmdMssSave.Click
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
+        Try
+            dsNewRow = ds.Tables("aws_mss").NewRow
+            dsNewRow.Item("ftpId") = txtMSSAddress.Text
+            dsNewRow.Item("inputFolder") = txtMSSFolder.Text
+            dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
+            dsNewRow.Item("userName") = txtmssUser.Text
+            dsNewRow.Item("password") = txtMSSPW.Text
 
-        dsNewRow = ds.Tables("aws_mss").NewRow
-        dsNewRow.Item("ftpId") = txtMSSAddress.Text
-        dsNewRow.Item("inputFolder") = txtMSSFolder.Text
-        dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
-        dsNewRow.Item("userName") = txtmssUser.Text
-        dsNewRow.Item("password") = txtMSSPW.Text
+            ' Confirm Password
+            If txtMSSPW.Text <> txtMSSConfirm.Text Then
 
-        ' Confirm Password
-        If txtMSSPW.Text <> txtMSSConfirm.Text Then
+                MsgBox("Confirm Password" & " " & txtMSSConfirm.Text)
+                'txtMSSConfirm.Clear()
+                'txtMSSPW.Clear()
+                Exit Sub
+            End If
 
-            MsgBox("Confirm Password" & " " & txtMSSConfirm.Text)
-            'txtMSSConfirm.Clear()
-            'txtMSSPW.Clear()
-            Exit Sub
-        End If
+            'Add a new record to the data source table
+            ds.Tables("aws_mss").Rows.Add(dsNewRow)
+            da.Update(ds, "aws_mss")
+            MsgBox("Server Record Added")
 
-        'Add a new record to the data source table
-        ds.Tables("aws_mss").Rows.Add(dsNewRow)
-        da.Update(ds, "aws_mss")
-        MsgBox("Server Record Added")
+            FormReset("mss")
 
-        FormReset("mss")
+        Catch Err As Exception
+            MsgBox(Err.Message)
+            'MsgBox(Err.Number & " : " & Err.Description)
+        End Try
 
-        ''Clear TextBoxes
-        'txtMSSAddress.Clear()
-        'txtMSSFolder.Clear()
-        'txtBasestationFTPMode.Clear()
-        'txtmssUser.Clear()
-        'txtMSSPW.Clear()
-        'txtMSSConfirm.Clear()
-
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
-    Private Sub cmdMSSUpdate_Click(sender As Object, e As EventArgs) Handles cmdMSSUpdate.Click
+    Private Sub cmdMSSUpdate_Click(sender As Object, e As EventArgs) Handles cmdMssUpdate.Click
         RecordUpdate("aws_mss", "mss", rec, "update")
     End Sub
 
-    Private Sub cmdmssRefresh_Click(sender As Object, e As EventArgs) Handles cmdmssRefresh.Click
+    Private Sub cmdmssRefresh_Click(sender As Object, e As EventArgs) Handles cmdMssRefresh.Click
         SetDataSet("aws_mss")
         rec = 0
         PopulateForm("mss", txtmssNavigator, rec)
@@ -531,7 +525,7 @@ Err:
         End If
     End Sub
 
-    Private Sub cmdMSSDelete_Click(sender As Object, e As EventArgs) Handles cmdMSSDelete.Click
+    Private Sub cmdMSSDelete_Click(sender As Object, e As EventArgs) Handles cmdMssDelete.Click
         DeleteRecord("aws_mss", "mss", txtmssNavigator)
     End Sub
 
@@ -4216,6 +4210,14 @@ Err:
             dbstr.Close()
         End Try
 
+    End Sub
+
+    Private Sub cmdMssAddNew_Click_1(sender As Object, e As EventArgs) Handles cmdMssAddNew.Click
+        txtMSSAddress.Text = ""
+        txtMSSFolder.Text = ""
+        txtmssFTPMode.Text = ""
+        txtmssUser.Text = ""
+        txtMSSPW.Text = ""
     End Sub
 
     Function Format_Datetime(dt As String, fmt As String) As String

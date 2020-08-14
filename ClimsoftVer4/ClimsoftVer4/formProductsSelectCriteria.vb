@@ -485,12 +485,16 @@ Public Class formProductsSelectCriteria
                         xpivot = xpivot & "," & SumAvg & "(IF(day(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
                     Next
 
+                    sql = "DROP TABLE IF EXISTS inventory_output; CREATE TABLE inventory_output Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As YYYY, Month(obsDatetime) As MM " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                          "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,YYYY,MM;"
+
+                    Inventory_Table(sql)
+
                     sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
                           "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month;"
 
-                    'MsgBox(sql)
 
-                    InventoryProducts(sql, "Inventory")
+                    'InventoryProducts(sql, "Inventory")
                 Case "CPT"
                     'Dim myInterface As New clsRInterface()
                     'myInterface.productCDTExample()
@@ -1453,8 +1457,8 @@ Err:
     End Sub
     Sub InventoryProducts(sql As String, typ As String)
 
-        Dim flds1, flds2, flds3 As String
-        Dim fl As String
+        Dim fl, flds1, flds2, flds3, datesr, hdr, dat As String
+        Dim X, M As Integer
 
         On Error GoTo Err
         Me.Cursor = Cursors.WaitCursor
@@ -1463,56 +1467,76 @@ Err:
         da.Fill(ds, "observationfinal")
 
         maxRows = ds.Tables("observationfinal").Rows.Count
-        'MsgBox(maxRows)
+        'MsgBox("Inventory Products to output file")
         'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\inventory-products.csv"
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
 
         FileOpen(11, fl, OpenMode.Output)
 
-        ' Write Column Headers
-        Write(11, "Station_ID")
-        Write(11, "Station_Name")
-        Write(11, "Element_Code")
-        Write(11, "Lat")
-        Write(11, "Lon")
-        Write(11, "Elev")
+        '' Write Column Headers
+        'Write(11, "Station_ID")
+        'Write(11, "Station_Name")
+        'Write(11, "Element_Code")
+        'Write(11, "Lat")
+        'Write(11, "Lon")
+        'Write(11, "Elev")
 
-        Write(11, "Year")
-        Write(11, "Month")
-        'Write(11, "Day")
-        'Write(11, "Hour")
+        'Write(11, "Year")
+        'Write(11, "Month")
 
-
-        '' Column headers from table field names
-        'For j = 0 To lstvElements.Items.Count - 1
-        '    Write(11, lstvElements.Items(j).SubItems(1).Text)
-        'Next
-
+        ' Column headers from table field names
+        hdr = "Station_ID" & "," & "Station_Name" & "," & "Element_Code" & "," & "Lat" & "," & "Lon" & "," & "Elev" & "," & "Year" & "," & "Month"
+        Print(11, hdr & ",")
         ' Daily headers 
         For j = 1 To 31
             Write(11, j)
         Next
-
+        PrintLine(11, "Available" & "," & "Missing")
+        'Write(11, "X")
+        'Write(11, "M")
         ' End header row
-        PrintLine(11)
+        'PrintLine(11)
         With ds.Tables("observationfinal")
             For k = 0 To maxRows - 1
-
+                X = 0
+                M = 0
+                dat = ""
                 For i = 0 To .Columns.Count - 1
                     ' Write the row headers befor the Invetory descriptors
                     If i < 8 Then
-                        Write(11, .Rows(k).Item(i))
+                        'Write(11, .Rows(k).Item(i))
+                        If i = 0 Then
+                            dat = .Rows(k).Item(0)
+                        Else
+                            dat = dat & "," & .Rows(k).Item(i)
+                        End If
                     Else
                         If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
-                            Write(11, "M")
+                            'datesr = DateSerial(.Rows(k).Item(6), .Rows(k).Item(7), i - 7)
+                            datesr = i - 7 & "/" & .Rows(k).Item(7) & "/" & .Rows(k).Item(6)
+                            If IsDate(datesr) Then
+                                M = M + 1
+                                'Write(11, "M")
+                                dat = dat & ",M"
+                            Else ' Output Non date cell
+                                'MsgBox(datesr)
+                                'Write(11, "")
+                                dat = dat & ","
+                            End If
                         Else
-                            Write(11, "X")  'Available observations to be represented as "X"
+                            X = X + 1
+                            'Write(11, "X")  'Available observations to be represented as "X"
+                            dat = dat & ",X"
                         End If
 
                     End If
                 Next
-                ' New line for another record
-                PrintLine(11)
+                PrintLine(11, dat & "," & X & "," & M)
+                'Write(11, X)
+                'Write(11, M)
+                '' New line for another record
+                'PrintLine(11)
+
             Next
         End With
         FileClose(11)
@@ -2176,6 +2200,7 @@ Err:
                     For i = 3 To ds.Tables("observationfinal").Columns.Count - 1
                         If IsDBNull(ds.Tables("observationfinal").Rows(l).Item(i)) Then
                             Print(11, "-9999" & ",") 'Chr(9))
+
                         Else
                             Print(11, ds.Tables("observationfinal").Rows(l).Item(i) & ",") 'Chr(9))
                         End If
@@ -2184,7 +2209,7 @@ Err:
 
                     PrintLine(11)
                 Next
-
+                ' Fill missing years
                 FileClose(11)
                 CommonModules.ViewFile(f1)
 
@@ -2296,6 +2321,107 @@ Err:
             'Next
         Catch err As Exception
             MsgBox(err.Message, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Sub Inventory_Table(sql As String)
+        Dim con As New MySql.Data.MySqlClient.MySqlConnection
+        Dim constr As String
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+        'MsgBox("Create Inventory Table")
+        Try
+            constr = frmLogin.txtusrpwd.Text
+            con.ConnectionString = constr
+            con.Open()
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
+            qry.CommandTimeout = 0
+
+            qry.ExecuteNonQuery()
+            'MsgBox("inventory Table with Missing data created")
+            Intialize_Inventory_Table(con)
+            con.Close()
+
+        Catch ex As Exception
+            MsgBox(ex.Message) '& ": Update Failure!")
+            con.Close()
+        End Try
+
+    End Sub
+
+    Sub Intialize_Inventory_Table(cons As MySql.Data.MySqlClient.MySqlConnection)
+        Dim sql0, stid, stnNm, elm, lat, lon, elev, fi, dat As String
+        Dim yy, mm As Long
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
+
+        Try
+
+            ' Modify inventory table for unique records and character fields for Latitude and Longitude to allow blank values
+            'sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Lat` `Lat` VARCHAR(50) NULL DEFAULT NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) NULL DEFAULT NULL AFTER `Lat`, ADD UNIQUE INDEX `idx` (`StationID`, `Code`, `YYYY`, `MM`);"
+
+            sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Station_Name` `Station_Name` VARCHAR(255) NULL DEFAULT NULL AFTER `StationID`, CHANGE COLUMN `Lat` `Lat` VARCHAR(50) Not NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) Not NULL AFTER `Lat`, ADD PRIMARY KEY (`StationID`, `Code`, `YYYY`, `MM`);"
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            fi = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-table.csv"
+            FileOpen(110, fi, OpenMode.Output)
+
+            For s = 0 To lstvStations.Items.Count - 1
+                stid = lstvStations.Items(s).SubItems(0).Text
+                stnNm = lstvStations.Items(s).SubItems(1).Text
+                Get_LatLon(cons, stid, lat, lon, elev)
+                For e = 0 To lstvElements.Items.Count - 1
+                    elm = lstvElements.Items(e).SubItems(0).Text
+                    For y = Year(dateFrom.Text) To Year(dateTo.Text)
+                        yy = y
+                        For m = 1 To 12
+                            mm = m
+                            If DateSerial(yy, mm, 1) > Now() Or DateSerial(yy, mm, 1) > dateTo.Text Then Exit For
+                            dat = stid & "," & stnNm & "," & elm & "," & lat & "," & lon & "," & elev & "," & yy & "," & mm
+                            Print(110, dat)
+                            PrintLine(110)
+                        Next m
+                    Next y
+                Next e
+            Next s
+            FileClose(110)
+
+            fi = Strings.Replace(fi, "\", "/") ' Convert file path to sql structure
+            sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            sql0 = "select * from inventory_output order by stationID, Code, YYYY, MM;"
+            InventoryProducts(sql0, "Inventory")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Sub Get_LatLon(conns As MySql.Data.MySqlClient.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
+
+        sql = "SELECT stationId, latitude, longitude, elevation FROM station WHERE stationId = '" & id & "';"
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            ds.Clear()
+            da.Fill(ds, "station")
+
+            With ds.Tables("station")
+                lat = ""
+                lon = ""
+                elev = ""
+                If .Rows.Count > 0 Then
+                    If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
+                    If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
+                    If Not IsDBNull(.Rows(0).Item("elevation")) Then elev = .Rows(0).Item("elevation")
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message)
         End Try
     End Sub
 End Class
