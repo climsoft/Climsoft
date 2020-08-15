@@ -12,7 +12,6 @@ Public Class GlobalVariables
 
     ''' <summary>
     ''' A string, how the "version number" column is stored in the database in all tables it appears in.
-    ''' This could be moved to a separate class of constants.
     ''' </summary>
     Public Shared ReadOnly strVersionNumber As String = "version_number"
 
@@ -91,13 +90,11 @@ Public Class GlobalVariables
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>
-    ''' Constructs an SQL query to get only the current versions from a table. (Could be moved to a
-    ''' separate class for query construction)
+    ''' Constructs an SQL query to get only the current versions from a table. 
+    ''' Could be moved to a separate class for query construction
     ''' </summary>
     '''
     ''' <param name="strTable"> A string, the name of the table to query. </param>
-    '''
-    ''' <returns>   The current versions query. </returns>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     Private Function GetCurrentVersionsQuery(strTable As String) As String
         ' From here: https://stackoverflow.com/questions/612231/how-can-i-select-rows-with-maxcolumn-value-distinct-by-another-column-in-sql
@@ -124,8 +121,6 @@ Public Class GlobalVariables
     ''' Constructs an SQL query to get only the versions equal to <c>iVersion</c> from a table.
     ''' (Could be moved to a separate class for query construction)
     ''' </summary>
-    '''
-    ''' <remarks>   Danny, 12/03/2020. </remarks>
     '''
     ''' <param name="strTable"> A string, the name of the table to query. </param>
     ''' <param name="iVersion"> An integer, the version numbers to extract for each id. </param>

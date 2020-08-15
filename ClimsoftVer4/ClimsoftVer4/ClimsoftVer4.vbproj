@@ -98,6 +98,7 @@
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsTableFilter.vb" />
+    <Compile Include="clsTests.vb" />
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="clsGlobalVariables.vb" />
     <Compile Include="formAgro1.Designer.vb">

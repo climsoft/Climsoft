@@ -8,7 +8,6 @@ Public Class DataStructure
     ' 1. Do we allow choice of fields to get? If writing then all fields needed,
     '    but reading only may not need all fields.
     '    Most tables have few fields so might not be needed.
-    ' 2. Where should SQL statement construction functions live?
 
     ''' <summary>
     ''' A string, the name of the table in the database this DataStructure links.
@@ -19,27 +18,31 @@ Public Class DataStructure
     ''' A string, how the "id" column is stored in the database in all tables it appears in.
     ''' This could be moved to a separate class of constants.
     ''' </summary>
-    Private strId As String = "id"
+    Protected strId As String = "id"
 
     ''' <summary>
-    ''' A string, how the "current/current best" column is stored in <c>strTableName</c>.
-    ''' This is "current_best" by default and can either be "current" or "current_best".
+    ''' A string, how the "current"/"current best" column is stored in <c>strTableName</c>.
+    ''' This is "current_best" by default and expected to be either be "current" or "current_best".
     ''' </summary>
     Private strCurrent As String = "current_best"
 
     ''' <summary>
     ''' A list of strings, the names of the fields in <c>strTableName</c> which uniquely define a row.
-    ''' In most tables and by default this is <c>{strId, strVersionNumber}</c> but it is not in all and can be changed.
+    ''' In most tables and by default this is <c>{strId, GlobalVariables.strVersionNumber}</c> but it is not in all and can be changed.
     ''' </summary>
     Private lstKeyFieldNames As List(Of String) = New List(Of String)({strId, GlobalVariables.strVersionNumber})
 
     ''' <summary>
-    ''' A list of strings, the names of the fields in <c>strTableName</c> which do not relate to primary key of auditting i.e. all columns apart from: <c>strID</c>, <c>GlobalVariables.strVersionNumber</c> and <c>strCurrent</c>.
+    ''' A list of strings, the names of the fields in <c>strTableName</c> which do not relate to primary key or auditting 
+    ''' i.e. in most cases all columns apart from: <c>strID</c>, <c>GlobalVariables.strVersionNumber</c> and <c>strCurrent</c>.
     ''' </summary>
     ''' <remarks>
     ''' This is used when adding a new record. To add a new record, a value must be specified for each of <c>lstValueFields</c>.
     ''' </remarks>
     Private lstValueFields As List(Of String)
+
+    ' A TableFilter object which defines the rows in the table the values will be from
+    Private clsFilter As TableFilter
 
     ''' <summary>
     ''' A <c>DataTable</c> storing the data read from the database.
@@ -84,6 +87,14 @@ Public Class DataStructure
     ''' <summary>Field name for "update type" when constructing <c>dtbUpdateTable</c>.</summary>
     Private strUpdateType As String = ".update_type"
 
+    Public Sub New()
+
+    End Sub
+
+    Public Sub New(strNewTableName As String)
+        SetTableName(strTableName)
+    End Sub
+
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>   Set the name of the table in the database this DataStructure links to. </summary>
     '''
@@ -95,8 +106,9 @@ Public Class DataStructure
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>
-    ''' Set the names of the fields in <c>strTableName</c> which do not relate to primary key of auditting 
-    ''' i.e. all columns apart from: <c>strID</c>, <c>GlobalVariables.strVersionNumber</c> and <c>strCurrent</c>.
+    ''' Set the names of the fields in <c>strTableName</c> which uniquely define a row. This is
+    ''' needed when updating records. In most tables and by default this is <c>{strId,
+    ''' strVersionNumber}</c>. This method should only be used if it is different to the default.
     ''' </summary>
     '''
     ''' <param name="iEnumerableNewKeyFields">  The list of names of the key fields for <c>strTableName</c>.</param>
@@ -107,9 +119,8 @@ Public Class DataStructure
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>
-    ''' Set the names of the fields in <c>strTableName</c> which uniquely define a row. This is
-    ''' needed when updating records. In most tables and by default this is <c>{strId,
-    ''' strVersionNumber}</c>. This method should only be used if it is different to the default.
+    ''' Set the names of the fields in <c>strTableName</c> which do not relate to primary key of auditting 
+    ''' i.e. in most cases all columns apart from: <c>strID</c>, <c>GlobalVariables.strVersionNumber</c> and <c>strCurrent</c>.
     ''' </summary>
     '''
     ''' <param name="iEnumerableNewValueFields">  The list of names of the value fields for <c>strTableName</c>.</param>
@@ -118,10 +129,40 @@ Public Class DataStructure
         lstValueFields = iEnumerableNewValueFields.ToList()
     End Sub
 
+    ' Set the TableFilter
+    Public Sub SetFilter(clsNewFilter As TableFilter)
+        clsFilter = clsNewFilter
+    End Sub
+
+    ' Alternative method to set the TableFilter
+    Public Sub SetFilter(strField As String, strOperator As String, strValue As String, Optional bIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        Dim clsNewFilter As New TableFilter
+
+        clsNewFilter.SetFieldCondition(strNewField:=strField, strNewOperator:=strOperator, objNewValue:=strValue, bNewIsPositiveCondition:=bIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+        SetFilter(clsNewFilter:=clsNewFilter)
+    End Sub
+
+    ' Gets the data from database for strTableName and fills in dtbReadTable
+    ' bIncludedLinked - should linked DataStructure's also update their dtbReadTable?
+    Public Sub UpdateReadTable(Optional bIncludedLinked As Boolean = False)
+        'TODO suspect this will be similar to DataCall.GetDataTable()
+
+        If bIncludedLinked Then
+            For Each clsLinkedStruc As DataStructure In lstLinkedDataStructures
+                clsLinkedStruc.UpdateReadTable(bIncludedLinked)
+            Next
+        End If
+    End Sub
+
+    ' Returns dtbReadTable
+    Public Function GetReadTable() As DataTable
+        Return dtbReadTable
+    End Function
+
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary>
     ''' Initialises <c>dtbUpdateTable</c> as a clone of <c>dtbReadTable</c> with two extra columns. 
-    ''' This should be called once <c>dtbReadTable</c> has been set.
+    ''' This should be called after <c>UpdateReadTable()</c> has been called.
     ''' </summary>
     '''
     ''' <remarks> <c>.Clone</c> copies the structure but not the data of a <c>DataTable</c>. </remarks>
@@ -140,7 +181,7 @@ Public Class DataStructure
     ''' This may be called when getting the main data, or may only be called on demand.
     ''' </summary>
     '''
-    ''' <param name="bAllVersions"> (Optional) Boolean, if  <c>True</c> all versions returned, if
+    ''' <param name="bAllVersions"> (Optional) Boolean, if <c>True</c> all versions returned, if
     '''                             <c>False</c> only the current comment for each id is returned. </param>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     Private Sub SetCommentsTable(Optional bAllVersions As Boolean = False)
@@ -188,6 +229,12 @@ Public Class DataStructure
         ' ON e_e.event_id=e.id
     End Sub
 
+    ' Sets the lstLinkedDataStructures list
+    ' TODO Are there more useful ways to set this instead of passing in a list directly?
+    Public Sub SetLinkedDataStructures(lstNewListedDataStructures As List(Of DataStructure))
+
+    End Sub
+
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     ''' <summary> Creates a new action in the action table and returns its Action ID. </summary>
     '''
@@ -228,11 +275,11 @@ Public Class DataStructure
             End If
         Next
 
-        ' This adds a row for the fields named: 
-        ' strId, strVersionNumber, lstValueFields, strCurrent, strVOld, strUpdateType
+        ' This adds a row for the fields: 
+        ' strId, strVersionNumber, lstValueFields(), strCurrent, strVOld, strUpdateType
         ' The value for strId is DBNull.Value since this will be auto incremented in the database.
         ' The order is important.
-        ' TODO: If audit table will also use this then it will be to be adapted as it does not have the same id, version number, current
+        ' TODO: If this method will also be used for adding to the audit table then it will need to be adapted as it does not have the same id, version number, current structure
         dtbUpdateTable.Rows.Add(DBNull.Value, 1, lstValueFields.ToArray, 1, DBNull.Value, GlobalVariables.UpdateType.NewRecord)
     End Sub
 
@@ -247,7 +294,7 @@ Public Class DataStructure
     '''                              This may be nothing if there are no event changes.
     '''                              </param>
     ''' <param name="rowEventNew">A <c>DataRow</c> for a new event. This row should have the same structure 
-    '''                           as <c>dtbReadTable</c>.This may be nothing if there is no new event.
+    '''                           as <c>dtbReadTable</c>. This may be nothing if there is no new event.
     '''                           </param>
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
     Public Sub DoEvent(Optional rcEventChanges() As DataRow = Nothing, Optional rowEventNew As DataRow = Nothing)
@@ -304,7 +351,7 @@ Public Class DataStructure
         rowCurrentUpdate.Item(strUpdateType) = GlobalVariables.UpdateType.CorrectionOld
         dtbUpdateTable.Rows.Add(rowCurrentUpdate)
 
-        ' TODO Should be moved to separate function as duplicated.
+        ' TODO Should be moved to separate function as duplicated elsewhere.
         For Each strField As String In lstValueFields
             If dctValues.TryGetValue(strField, objTemp) Then
                 lstValues.Add(objTemp)
@@ -355,7 +402,7 @@ Public Class DataStructure
     End Sub
 
     '''////////////////////////////////////////////////////////////////////////////////////////////////////
-    ''' <summary>   Executes the action operation. </summary>
+    ''' <summary> Executes the action operation. </summary>
     ''' 
     ''' <remarks>This could be moved to a separate class?</remarks>
     '''
@@ -397,6 +444,7 @@ Public Class DataStructure
         ' Make a blank audit table to add entries to
         dtbAuditTable = GlobalVariables.dtbEmptyAuditTable
 
+        ' Construct the audit table
         For i As Integer = 0 To Me.dtbUpdateTable.Rows.Count - 1
             iUpdateType = dtbUpdateTable.Rows(i).Field(Of Integer)(strUpdateType)
             Select Case iUpdateType
