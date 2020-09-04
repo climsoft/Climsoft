@@ -1585,6 +1585,8 @@ Err:
         maxRows = ds.Tables("observationfinal").Rows.Count
 
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
+
+        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
         FileOpen(11, fl, OpenMode.Output)
 
         ' Column headers from table field names
@@ -1604,6 +1606,7 @@ Err:
                 For i = 0 To .Columns.Count - 1
                     ' Write the row headers befor the Invetory descriptors
                     If i < 8 Then
+
                         If i = 0 Then
                             dat = .Rows(k).Item(0)
                         Else
@@ -1611,6 +1614,7 @@ Err:
                         End If
                     Else
                         If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
+
                             datesr = i - 7 & "/" & .Rows(k).Item(7) & "/" & .Rows(k).Item(6)
                             If IsDate(datesr) Then
                                 M = M + 1
@@ -1627,7 +1631,6 @@ Err:
                     End If
                 Next
                 PrintLine(11, dat & "," & X & "," & M)
-
             Next
         End With
         FileClose(11)
@@ -2421,7 +2424,6 @@ Err:
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
             qry.CommandTimeout = 0
 
-            'Execute query
             qry.ExecuteNonQuery()
             'MsgBox("inventory Table with Missing data created")
             Intialize_Inventory_Table(con)
@@ -2435,7 +2437,7 @@ Err:
     End Sub
 
     Sub Intialize_Inventory_Table(cons As MySql.Data.MySqlClient.MySqlConnection)
-        Dim sql0, stid, stnNm, elm, fi, dat As String
+Dim sql0, stid, stnNm, elm, fi, dat As String
         Dim yy, mm As Long
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
         'MsgBox("Initialize Invenrory Table")
@@ -2481,7 +2483,27 @@ Err:
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-
     End Sub
 
+    Sub Get_LatLon(conns As MySql.Data.MySqlClient.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
+
+        sql = "SELECT stationId, latitude, longitude, elevation FROM station WHERE stationId = '" & id & "';"
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
+            ds.Clear()
+            da.Fill(ds, "station")
+            With ds.Tables("station")
+                lat = ""
+                lon = ""
+                elev = ""
+                If .Rows.Count > 0 Then
+                    If Not IsDBNull(.Rows(0).Item("latitude")) Then lat = .Rows(0).Item("latitude")
+                    If Not IsDBNull(.Rows(0).Item("longitude")) Then lon = .Rows(0).Item("longitude")
+                    If Not IsDBNull(.Rows(0).Item("elevation")) Then elev = .Rows(0).Item("elevation")
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class
