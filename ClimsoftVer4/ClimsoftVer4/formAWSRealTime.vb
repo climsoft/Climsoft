@@ -1662,10 +1662,12 @@ Err:
                         'fldr = (IO.Path.GetDirectoryName(fldr))
 
                         fldr = (IO.Path.GetDirectoryName(ftpfile))
-                        'MsgBox(fldr)
+                        fldr = FTP_FilePath(fldr)
+                        'Log_Errors(fldr)
                         'Log_Errors(txtfilePrefix.Text)
                         Print(1, "cd " & fldr & Chr(13) & Chr(10))
                         'Print(1, "mget *" & flprefix & "*.*" & Chr(13) & Chr(10))
+                        Print(1, "quote PASV" & Chr(13) & Chr(10))
                         Print(1, "mget *" & flprefix & "*" & Chr(13) & Chr(10))
                     End If
                     Print(1, "bye" & Chr(13) & Chr(10))
@@ -1681,6 +1683,7 @@ Err:
                         Print(2, "cd " & flder & Chr(13) & Chr(10))
                         Print(2, "bin" & Chr(13) & Chr(10))
                     End If
+                    Print(2, "quote PASV" & Chr(13) & Chr(10))
                     Print(2, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Print(2, "bye" & Chr(13) & Chr(10))
                     FileClose(2)
@@ -1710,49 +1713,37 @@ Err:
             FileClose(3)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
-            Shell(ftpbatch, vbMinimizedNoFocus)
+            Dim Twait As Long
+
+            If txtTimeout.Text = "999" Then
+                Twait = -1 ' No timeout period
+            Else
+                Twait = Val(txtTimeout.Text) * 1000 ' Time out period in millisecond
+            End If
+            'Shell(ftpbatch, vbMinimizedNoFocus)
+            Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True, Timeout:=Twait)
 
             If ftpmethod = "get" Then
-                ' Cause some delay to allow ftp file transfer before the processing starts.
-                Dim Cdate1 As Date
-                Dim tot As Integer
-                Dim timeout As Integer
+                '' Cause some delay to allow ftp file transfer before the processing starts.
+                'Dim Cdate1 As Date
+                'Dim tot As Integer
+                'Dim timeout As Integer
                 Dim dat As String
 
-                Cdate1 = Now() '& " " & Time
-                tot = 0
-                timeout = CLng(txtTimeout.Text)
-                With ProgressBar1
-                    .Visible = True
-                    .Maximum = timeout ' 60
-                    Do While tot < timeout
-                        tot = DateDiff("s", Cdate1, Now())
-                        .Value = tot
-                    Loop
-                    .Visible = False
-                End With
-
-                'MsgBox(txtinputfile)
-                'MsgBox(flprefix)
-                ' Where file prefix is used
+                'Cdate1 = Now() '& " " & Time
+                'tot = 0
+                'timeout = CLng(txtTimeout.Text)
+                'With ProgressBar1
+                '    .Visible = True
+                '    .Maximum = timeout ' 60
+                '    Do While tot < timeout
+                '        tot = DateDiff("s", Cdate1, Now())
+                '        .Value = tot
+                '    Loop
+                '    .Visible = False
+                'End With
 
                 If Len(flprefix) > 0 Then
-                    'Dim fcopy As String
-                    'fcopy = local_folder & "\filcopy.bat"
-
-                    'Log_Errors(fcopy)
-                    'FileOpen(33, fcopy, OpenMode.Output)
-
-                    'Print(33, "echo off" & Chr(13) & Chr(10))
-                    'Print(33, "copy *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "del *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "echo on" & Chr(13) & Chr(10))
-                    'Print(33, "EXIT" & Chr(13) & Chr(10))
-                    'FileClose(33)
-
-                    '' Execute the batch file to combine downloaded file
-                    'Shell(fcopy, vbMinimizedNoFocus)
-
 
                     Dim fd As New DirectoryInfo(local_folder)
                     Dim aryFl As FileInfo() = fd.GetFiles("*.*")
@@ -1771,14 +1762,6 @@ Err:
                         End If
                     Next fl
                     FileClose(100)
-                    'FileOpen(33, fcopy, OpenMode.Output)
-                    'Print(33, "echo off" & Chr(13) & Chr(10))
-                    'Print(33, "copy *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    ''Print(33, "del *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "echo on" & Chr(13) & Chr(10))
-                    'Print(33, "EXIT" & Chr(13) & Chr(10))
-                    'FileClose(33)
-                    'Shell(fcopy, vbMinimizedNoFocus)
 
                 End If
 
@@ -1913,6 +1896,7 @@ Err:
                 Print(111, "cd " & Rflder & Chr(13) & Chr(10))
                 Print(111, "bin" & Chr(13) & Chr(10))
             End If
+            Print(111, "quote PASV" & Chr(13) & Chr(10))
             Print(111, "put" & " " & fl & Chr(13) & Chr(10))
             Print(111, "bye" & Chr(13) & Chr(10))
             FileClose(111)
@@ -1933,7 +1917,8 @@ Err:
             FileClose(112)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
-            Shell(ftpbatch, vbMinimizedNoFocus)
+            'Shell(ftpbatch, vbMinimizedNoFocus)
+            Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True)
 
             txtOutputServer.Text = ftp_host
             txtOutputFolder.Text = Rflder
@@ -1988,7 +1973,13 @@ Err:
 
             str = GetDataSet("station", sql2)
 
-            'Log_Errors(str.Tables("station").Rows(0).Item("stationId"))
+            'Initialize station details with blanks
+            stn_name = ""
+            lat = ""
+            lon = ""
+            elv = ""
+            wmo_id = ""
+
             With str.Tables("station")
                 If .Rows.Count <> 0 Then
                     If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
@@ -3085,6 +3076,7 @@ Err:
 
         ' Execute the batch file to delete the input file
         Shell(ftpbatch, vbMinimizedNoFocus)
+        Interaction.Shell(ftpbatch, vbMinimizedNoFocus)
 
         FTP_Delete_InputFile = True
 
@@ -4302,6 +4294,16 @@ Err:
             MsgBox(ex.Message)
             Return hdr
         End Try
+    End Function
+    Function FTP_FilePath(flpath As String) As String
+        Dim fchar As String
+
+        FTP_FilePath = ""
+        For i = 1 To Len(flpath)
+            fchar = Strings.Mid(flpath, i, 1)
+            If fchar = "\" Then fchar = "/"
+            FTP_FilePath = FTP_FilePath & fchar
+        Next
     End Function
 End Class
 
