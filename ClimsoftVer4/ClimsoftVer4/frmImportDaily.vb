@@ -1042,7 +1042,9 @@
                                             ' Construct the datetime string according to CLICOM data type
                                             Select Case typ
                                                 Case "daily"
+
                                                     'dttime = dt & "-" & hd & " " & txtObsHour.Text & ":00"
+
                                                     dttime = Strings.Left(dt, 4) & "-" & Strings.Right(dt, 2) & "-" & hd & " " & txtObsHour.Text & ":00"
                                                 Case "synop"
                                                     dttime = dt & " " & hd & ":00"

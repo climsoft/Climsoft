@@ -1669,8 +1669,10 @@ Err:
                         'fldr = (IO.Path.GetDirectoryName(fldr))
 
                         fldr = (IO.Path.GetDirectoryName(ftpfile))
+
                         fldr = Strings.Replace(fldr, "\", "/") ' Convert file path dlimiters to FTP structure
                         'fldr = FTP_FilePath(fldr)
+
                         'Log_Errors(fldr)
                         'Log_Errors(txtfilePrefix.Text)
                         Print(1, "cd " & fldr & Chr(13) & Chr(10))
@@ -4406,6 +4408,7 @@ Err:
             Return hdr
         End Try
     End Function
+
     'Function FTP_FilePath(flpath As String) As String
     '    'Dim fchar As String
     '    FTP_FilePath = Strings.Replace(flpath, "\", "/")
@@ -4416,6 +4419,7 @@ Err:
     '    '    FTP_FilePath = FTP_FilePath & fchar
     '    'Next
     'End Function
+
 End Class
 
 Public Class FTP
