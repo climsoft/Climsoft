@@ -351,17 +351,18 @@ Public Class formDataView
                 dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
                 For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
                     If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
-                        CellValue = ""
+                        CellValue = "\N" '""
+                        'dat = dat & "," & "\N"
                     Else
                         CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
-                        If IsDate(CellValue) Then
+                        If IsDate(CellValue) And InStr(CellValue, ".") = 0 Then
                             CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
                             'MsgBox(CellValue)
                         End If
+                        'dat = dat & "," & CellValue
                     End If
                     dat = dat & "," & CellValue
                 Next
-
                 PrintLine(111, dat)
             Next
             FileClose(111)

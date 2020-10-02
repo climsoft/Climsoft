@@ -69,6 +69,8 @@ Partial Class frmImportDaily
         Me.lstStations = New System.Windows.Forms.ListBox()
         Me.lblElmeror = New System.Windows.Forms.Label()
         Me.lblStnEror = New System.Windows.Forms.Label()
+        Me.txtMissingFlag = New System.Windows.Forms.TextBox()
+        Me.lblMissingFlag = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
@@ -79,7 +81,7 @@ Partial Class frmImportDaily
         '
         Me.DataGridView1.AllowUserToOrderColumns = True
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(10, 181)
+        Me.DataGridView1.Location = New System.Drawing.Point(15, 192)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(948, 405)
         Me.DataGridView1.TabIndex = 0
@@ -107,9 +109,9 @@ Partial Class frmImportDaily
         'cmdView
         '
         Me.cmdView.Enabled = False
-        Me.cmdView.Location = New System.Drawing.Point(12, 146)
+        Me.cmdView.Location = New System.Drawing.Point(14, 159)
         Me.cmdView.Name = "cmdView"
-        Me.cmdView.Size = New System.Drawing.Size(69, 29)
+        Me.cmdView.Size = New System.Drawing.Size(69, 27)
         Me.cmdView.TabIndex = 3
         Me.cmdView.Text = "View Data"
         Me.cmdView.UseVisualStyleBackColor = True
@@ -155,7 +157,7 @@ Partial Class frmImportDaily
         '
         'cmdClear
         '
-        Me.cmdClear.Location = New System.Drawing.Point(215, 148)
+        Me.cmdClear.Location = New System.Drawing.Point(217, 159)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(62, 29)
         Me.cmdClear.TabIndex = 8
@@ -219,7 +221,7 @@ Partial Class frmImportDaily
         'cmdLoadData
         '
         Me.cmdLoadData.Enabled = False
-        Me.cmdLoadData.Location = New System.Drawing.Point(115, 148)
+        Me.cmdLoadData.Location = New System.Drawing.Point(117, 159)
         Me.cmdLoadData.Name = "cmdLoadData"
         Me.cmdLoadData.Size = New System.Drawing.Size(69, 29)
         Me.cmdLoadData.TabIndex = 16
@@ -328,7 +330,7 @@ Partial Class frmImportDaily
         '
         'cmdClose
         '
-        Me.cmdClose.Location = New System.Drawing.Point(308, 148)
+        Me.cmdClose.Location = New System.Drawing.Point(310, 159)
         Me.cmdClose.Name = "cmdClose"
         Me.cmdClose.Size = New System.Drawing.Size(57, 29)
         Me.cmdClose.TabIndex = 27
@@ -337,7 +339,7 @@ Partial Class frmImportDaily
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(396, 148)
+        Me.cmdHelp.Location = New System.Drawing.Point(398, 159)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(62, 29)
         Me.cmdHelp.TabIndex = 28
@@ -508,11 +510,29 @@ Partial Class frmImportDaily
         Me.lblStnEror.Text = "Station Errors"
         Me.lblStnEror.Visible = False
         '
+        'txtMissingFlag
+        '
+        Me.txtMissingFlag.Location = New System.Drawing.Point(128, 132)
+        Me.txtMissingFlag.Name = "txtMissingFlag"
+        Me.txtMissingFlag.Size = New System.Drawing.Size(58, 20)
+        Me.txtMissingFlag.TabIndex = 45
+        '
+        'lblMissingFlag
+        '
+        Me.lblMissingFlag.AutoSize = True
+        Me.lblMissingFlag.Location = New System.Drawing.Point(29, 136)
+        Me.lblMissingFlag.Name = "lblMissingFlag"
+        Me.lblMissingFlag.Size = New System.Drawing.Size(91, 13)
+        Me.lblMissingFlag.TabIndex = 46
+        Me.lblMissingFlag.Text = "Missing Data Flag"
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 663)
+        Me.Controls.Add(Me.lblMissingFlag)
+        Me.Controls.Add(Me.txtMissingFlag)
         Me.Controls.Add(Me.pnlErrors)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElmCode)
@@ -602,4 +622,6 @@ Partial Class frmImportDaily
     Friend WithEvents lstStations As ListBox
     Friend WithEvents lblElmeror As Label
     Friend WithEvents lblStnEror As Label
+    Friend WithEvents txtMissingFlag As TextBox
+    Friend WithEvents lblMissingFlag As Label
 End Class

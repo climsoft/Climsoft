@@ -332,6 +332,17 @@ Public Class formProductsSelectCriteria
                     sql = "SELECT recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) As Month,day(obsDatetime) as Day,hour(obsDatetime) as Hour,minute(obsDatetime) as Minute," & elmcolmn & " FROM (SELECT recordedFrom,stationName, latitude, longitude, elevation, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
                            "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime), hour(obsDatetime), minute(obsDatetime);"
 
+                    'Transpose values when the option is selected
+                    If chkTranspose.Checked = True Then
+                        xpivot = SumAvg
+                        For i = 0 To 59
+                            If i = 0 Then xpivot = ""
+                            xpivot = xpivot & "," & SumAvg & "(IF(minute(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                        Next
+
+                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, day(obsDatetime) As Day, Hour(obsDatetime) As Hour " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
+                    End If
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Hourly"
@@ -347,7 +358,7 @@ Public Class formProductsSelectCriteria
                             xpivot = xpivot & "," & SumAvg & "(IF(hour(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
                         Next
 
-                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, Month(obsDatetime) As Day " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                        sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As Year, Month(obsDatetime) As Month, day(obsDatetime) As Day " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
                               "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month, Day;"
 
                     End If
@@ -1584,7 +1595,6 @@ Err:
 
         maxRows = ds.Tables("observationfinal").Rows.Count
 
-        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
 
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
         FileOpen(11, fl, OpenMode.Output)
@@ -1631,6 +1641,7 @@ Err:
                     End If
                 Next
                 PrintLine(11, dat & "," & X & "," & M)
+
             Next
         End With
         FileClose(11)
@@ -1774,7 +1785,7 @@ Err:
             pnlSummary.Visible = True
         End If
 
-        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Hourly" Then 'Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
+        If lblProductType.Text = "Monthly" Or lblProductType.Text = "Daily" Or lblProductType.Text = "Hourly" Or lblProductType.Text = "Minutes" Then 'Or lblProductType.Text = "Pentad" Or lblProductType.Text = "Dekadal" Then
             chkTranspose.Visible = True
         Else
             chkTranspose.Visible = False
@@ -2424,6 +2435,9 @@ Err:
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
             qry.CommandTimeout = 0
 
+
+            'Execute query
+
             qry.ExecuteNonQuery()
             'MsgBox("inventory Table with Missing data created")
             Intialize_Inventory_Table(con)
@@ -2437,13 +2451,18 @@ Err:
     End Sub
 
     Sub Intialize_Inventory_Table(cons As MySql.Data.MySqlClient.MySqlConnection)
-Dim sql0, stid, stnNm, elm, fi, dat As String
+
+        Dim sql0, stid, stnNm, elm, lat, lon, elev, fi, dat As String
         Dim yy, mm As Long
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
-        'MsgBox("Initialize Invenrory Table")
+
         Try
 
-            sql0 = "ALTER TABLE inventory_output ADD UNIQUE INDEX idx (`StationID`, `Code`, `YYYY`, `MM`);"
+            ' Modify inventory table for unique records and character fields for Latitude and Longitude to allow blank values
+            'sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Lat` `Lat` VARCHAR(50) NULL DEFAULT NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) NULL DEFAULT NULL AFTER `Lat`, ADD UNIQUE INDEX `idx` (`StationID`, `Code`, `YYYY`, `MM`);"
+
+            sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Station_Name` `Station_Name` VARCHAR(255) NULL DEFAULT NULL AFTER `StationID`, CHANGE COLUMN `Lat` `Lat` VARCHAR(50) Not NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) Not NULL AFTER `Lat`, ADD PRIMARY KEY (`StationID`, `Code`, `YYYY`, `MM`);"
+
 
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
@@ -2455,6 +2474,9 @@ Dim sql0, stid, stnNm, elm, fi, dat As String
             For s = 0 To lstvStations.Items.Count - 1
                 stid = lstvStations.Items(s).SubItems(0).Text
                 stnNm = lstvStations.Items(s).SubItems(1).Text
+
+                Get_LatLon(cons, stid, lat, lon, elev)
+
                 For e = 0 To lstvElements.Items.Count - 1
                     elm = lstvElements.Items(e).SubItems(0).Text
                     For y = Year(dateFrom.Text) To Year(dateTo.Text)
@@ -2462,7 +2484,9 @@ Dim sql0, stid, stnNm, elm, fi, dat As String
                         For m = 1 To 12
                             mm = m
                             If DateSerial(yy, mm, 1) > Now() Or DateSerial(yy, mm, 1) > dateTo.Text Then Exit For
-                            dat = stid & "," & stnNm & "," & elm & "," & yy & "," & mm
+
+                            dat = stid & "," & stnNm & "," & elm & "," & lat & "," & lon & "," & elev & "," & yy & "," & mm
+
                             Print(110, dat)
                             PrintLine(110)
                         Next m
@@ -2472,17 +2496,21 @@ Dim sql0, stid, stnNm, elm, fi, dat As String
             FileClose(110)
 
             fi = Strings.Replace(fi, "\", "/") ' Convert file path to sql structure
-            sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, YYYY, MM)"
+<
+            sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
-            'MsgBox("Invenrory Table initialized")
+
 
             sql0 = "select * from inventory_output order by stationID, Code, YYYY, MM;"
             InventoryProducts(sql0, "Inventory")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+
+
     End Sub
 
     Sub Get_LatLon(conns As MySql.Data.MySqlClient.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
@@ -2492,6 +2520,9 @@ Dim sql0, stid, stnNm, elm, fi, dat As String
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ds.Clear()
             da.Fill(ds, "station")
+
+
+
             With ds.Tables("station")
                 lat = ""
                 lon = ""
@@ -2506,4 +2537,7 @@ Dim sql0, stid, stnNm, elm, fi, dat As String
             MsgBox(ex.Message)
         End Try
     End Sub
+
+
+
 End Class
