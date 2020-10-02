@@ -258,6 +258,8 @@
             Bufr_Crex_Initialize(dbconn)  'Set all values to missing
 
             'Set data set
+            sql = "Select * from bufr_crex_data"
+
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
@@ -486,13 +488,13 @@
             'For i = 0 To Kount - 1
 
             ' Replications for clounds above the station
-            If Not IsDBNull(.Rows(0).Item("Val_Elem119")) Then Select_Descriptor(conn1, "119", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem119")) And Len(.Rows(0).Item("Val_Elem119")) <> 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem123")) Then Select_Descriptor(conn1, "123", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem123")) And Len(.Rows(0).Item("Val_Elem123")) <> 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem127")) Then Select_Descriptor(conn1, "127", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem127")) And Len(.Rows(0).Item("Val_Elem127")) <> 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
 
-            If Not IsDBNull(.Rows(0).Item("Val_Elem131")) Then Select_Descriptor(conn1, "131", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem131")) And Len(.Rows(0).Item("Val_Elem131")) <> 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
 
             ' Replications for clounds below the station
             ' These observations are not recorded in this form. Hence the associated elements have been commented
@@ -672,14 +674,15 @@
                         dat = ""
                         fld = .Columns(i).ColumnName
                         'MsgBox(2 & " _" & fld)
-                        If Len(fld) = 11 Then
+                        If Len(fld) = 11 Then ' Fields for data values
                             code = Int(Strings.Mid(fld, 9, 3))
                             'MsgBox(code)
                             If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
                             'MsgBox(dat)
                             If Len(dat) <> 0 Then
                                 ' Compute observations with special conditions
-                                If code = 46 Then ' Scale Radiation and Pressure 
+                                ' Scale Radiation and Pressure
+                                If code = 46 Then
                                     dat = dat & "000000"
                                 ElseIf code = 106 Or code = 107 Or code = 399 Or code = 301 Or code = 400 Then ' Scale Pressure
                                     dat = CLng(dat) * 100
@@ -831,18 +834,39 @@
 
         ' Initialize cloud layers by setting them to FALSE so that they are not selected if observations not made
 
-        For i = 0 To Kount - 1
-            If dsa.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
-                For j = i + 3 To i + 3 + (rep_factor * 4) '17
-                    sql = "update bufr_crex_data set selected = '0' where nos = '" & j & "';"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
-                    'Execute query
-                    objCmd.ExecuteNonQuery()
-                Next
-                Exit For
-            End If
-        Next
+        'For i = 0 To Kount - 1
+        '    If dsa.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
+        '        For j = i + 3 To i + 3 + (rep_factor * 4) '17
+        '            sql = "update bufr_crex_data set selected = '0' where nos = '" & j & "';"
+        '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+        '            'Execute query
+        '            objCmd.ExecuteNonQuery()
+        '        Next
+        '        Exit For
+        '    End If
+        'Next
 
+        Dim RecNo As Integer
+
+        With dsa
+
+            For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+                If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
+                    RecNo = .Tables("bufr_crex_data").Rows(i).Item("Nos")
+                    For j = RecNo To (RecNo + rep_factor * 4)
+                        If j = RecNo Then
+                            sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+                        Else
+                            sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+                        End If
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                        objCmd.ExecuteNonQuery()
+                    Next
+                    Exit For
+                End If
+            Next
+        End With
+        'MsgBox("Cloud Replication Initialized")
     End Sub
 
     Private Sub cboHour_TextChanged(sender As Object, e As EventArgs) Handles cboHour.TextChanged

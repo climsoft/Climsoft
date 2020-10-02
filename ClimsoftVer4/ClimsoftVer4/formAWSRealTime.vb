@@ -461,60 +461,54 @@ Err:
         End Select
     End Sub
 
-    Private Sub cmdmssReset_Click(sender As Object, e As EventArgs) Handles cmdmssReset.Click
+    Private Sub cmdmssReset_Click(sender As Object, e As EventArgs) Handles cmdMssReset.Click
         FormReset("mss")
     End Sub
 
-    Private Sub cmdMSSAddNew_Click(sender As Object, e As EventArgs) Handles cmdMSSAddNew.Click
-        On Error GoTo Err
+    Private Sub cmdMSSAddNew_Click(sender As Object, e As EventArgs) Handles cmdMssSave.Click
+
         'The CommandBuilder providers the imbedded command for updating the record in the record source table. So the CommandBuilder
         'must be declared for the Update method to work.
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Dim dsNewRow As DataRow
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
         Dim recCommit As New dataEntryGlobalRoutines
+        Try
+            dsNewRow = ds.Tables("aws_mss").NewRow
+            dsNewRow.Item("ftpId") = txtMSSAddress.Text
+            dsNewRow.Item("inputFolder") = txtMSSFolder.Text
+            dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
+            dsNewRow.Item("userName") = txtmssUser.Text
+            dsNewRow.Item("password") = txtMSSPW.Text
 
-        dsNewRow = ds.Tables("aws_mss").NewRow
-        dsNewRow.Item("ftpId") = txtMSSAddress.Text
-        dsNewRow.Item("inputFolder") = txtMSSFolder.Text
-        dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
-        dsNewRow.Item("userName") = txtmssUser.Text
-        dsNewRow.Item("password") = txtMSSPW.Text
+            ' Confirm Password
+            If txtMSSPW.Text <> txtMSSConfirm.Text Then
 
-        ' Confirm Password
-        If txtMSSPW.Text <> txtMSSConfirm.Text Then
+                MsgBox("Confirm Password" & " " & txtMSSConfirm.Text)
+                'txtMSSConfirm.Clear()
+                'txtMSSPW.Clear()
+                Exit Sub
+            End If
 
-            MsgBox("Confirm Password" & " " & txtMSSConfirm.Text)
-            'txtMSSConfirm.Clear()
-            'txtMSSPW.Clear()
-            Exit Sub
-        End If
+            'Add a new record to the data source table
+            ds.Tables("aws_mss").Rows.Add(dsNewRow)
+            da.Update(ds, "aws_mss")
+            MsgBox("Server Record Added")
 
-        'Add a new record to the data source table
-        ds.Tables("aws_mss").Rows.Add(dsNewRow)
-        da.Update(ds, "aws_mss")
-        MsgBox("Server Record Added")
+            FormReset("mss")
 
-        FormReset("mss")
+        Catch Err As Exception
+            MsgBox(Err.Message)
+            'MsgBox(Err.Number & " : " & Err.Description)
+        End Try
 
-        ''Clear TextBoxes
-        'txtMSSAddress.Clear()
-        'txtMSSFolder.Clear()
-        'txtBasestationFTPMode.Clear()
-        'txtmssUser.Clear()
-        'txtMSSPW.Clear()
-        'txtMSSConfirm.Clear()
-
-        Exit Sub
-Err:
-        MsgBox(Err.Number & " : " & Err.Description)
     End Sub
 
-    Private Sub cmdMSSUpdate_Click(sender As Object, e As EventArgs) Handles cmdMSSUpdate.Click
+    Private Sub cmdMSSUpdate_Click(sender As Object, e As EventArgs) Handles cmdMssUpdate.Click
         RecordUpdate("aws_mss", "mss", rec, "update")
     End Sub
 
-    Private Sub cmdmssRefresh_Click(sender As Object, e As EventArgs) Handles cmdmssRefresh.Click
+    Private Sub cmdmssRefresh_Click(sender As Object, e As EventArgs) Handles cmdMssRefresh.Click
         SetDataSet("aws_mss")
         rec = 0
         PopulateForm("mss", txtmssNavigator, rec)
@@ -531,7 +525,7 @@ Err:
         End If
     End Sub
 
-    Private Sub cmdMSSDelete_Click(sender As Object, e As EventArgs) Handles cmdMSSDelete.Click
+    Private Sub cmdMSSDelete_Click(sender As Object, e As EventArgs) Handles cmdMssDelete.Click
         DeleteRecord("aws_mss", "mss", txtmssNavigator)
     End Sub
 
@@ -1394,19 +1388,24 @@ Err:
             Kount = Kount + 1
         Loop
 
-        'Log_Errors(msg_header)
+        'Compute the UTC datetime for YYGGgg
 
+        'Dim YYGGgg As Date
+        'YYGGgg = DateAndTime.DateAdd("h", -1 * CDbl(txtGMTDiff.Text), Now())
+        'yy = String.Format("{0:00}", DateAndTime.Year(YYGGgg))
+        'mm = String.Format("{0:00}", DateAndTime.Month(YYGGgg))
+        'dd = String.Format("{0:00}", DateAndTime.Day(YYGGgg))
+        'hh = String.Format("{0:00}", DateAndTime.Hour(YYGGgg))
+        'mn = "00"
 
         If Kount = 1 Then ' Only one substest existing
             If Len(subs(0)) <> 0 Then  'Check whether encoded data exists
-                yy = DateAndTime.Day(dts(0))
+                yy = String.Format("{0:00}", DateAndTime.Year(dts(0)))
                 mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
                 dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
                 hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
                 mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
-                'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(0)), "00") & Format(DateAndTime.Hour(dts(0)), "00") & Format(DateAndTime.Minute(dts(0)), "00") '& " " & txtBBB
-                BUFR_header = msg_header & " " & DateAndTime.Day(dts(0)) & DateAndTime.Hour(dts(0)) & DateAndTime.Minute(dts(0)) '& " " & txtBBB
-
+                BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
                 AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(0)), DateAndTime.Month(dts(0)), DateAndTime.Day(dts(0)), DateAndTime.Hour(dts(0)), DateAndTime.Minute(dts(0)), DateAndTime.Second(dts(0)), subs(0))
             End If
         End If
@@ -1432,13 +1431,15 @@ Err:
 
                 ' Compile a bulletin for the located same hour subsets
                 If Len(subst) <> 0 Then
-                    yy = DateAndTime.Day(dts(0))
-                    mm = String.Format("{0:00}", DateAndTime.Month(dts(0)))
-                    dd = String.Format("{0:00}", DateAndTime.Day(dts(0)))
-                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(0)))
-                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(0)))
-                    'BUFR_header = msg_header & " " & Format(DateAndTime.Day(dts(i)), "00") & Format(DateAndTime.Hour(dts(i)), "00") & Format(DateAndTime.Minute(dts(i)), "00") '& " " & txtBBB
-                    BUFR_header = msg_header & " " & DateAndTime.Day(dts(i)) & DateAndTime.Hour(dts(i)) & DateAndTime.Minute(dts(i)) '& " " & txtBBB
+                    'Compute the observation datetime in UTC
+                    yy = String.Format("{0:00}", DateAndTime.Year(dts(i)))
+                    mm = String.Format("{0:00}", DateAndTime.Month(dts(i)))
+                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                    dd = String.Format("{0:00}", DateAndTime.Day(dts(i)))
+                    hh = String.Format("{0:00}", DateAndTime.Hour(dts(i)))
+                    mn = String.Format("{0:00}", DateAndTime.Minute(dts(i)))
+
+                    BUFR_header = msg_header & " " & dd & hh & mn '& " " & txtBBB
                     AWS_BUFR_Code(BUFR_header, DateAndTime.Year(dts(i)), DateAndTime.Month(dts(i)), DateAndTime.Day(dts(i)), DateAndTime.Hour(dts(i)), DateAndTime.Minute(dts(i)), DateAndTime.Second(dts(i)), subst)
 
                 End If
@@ -1668,10 +1669,13 @@ Err:
                         'fldr = (IO.Path.GetDirectoryName(fldr))
 
                         fldr = (IO.Path.GetDirectoryName(ftpfile))
-                        'MsgBox(fldr)
+                        fldr = Strings.Replace(fldr, "\", "/") ' Convert file path dlimiters to FTP structure
+                        'fldr = FTP_FilePath(fldr)
+                        'Log_Errors(fldr)
                         'Log_Errors(txtfilePrefix.Text)
                         Print(1, "cd " & fldr & Chr(13) & Chr(10))
                         'Print(1, "mget *" & flprefix & "*.*" & Chr(13) & Chr(10))
+                        Print(1, "quote PASV" & Chr(13) & Chr(10))
                         Print(1, "mget *" & flprefix & "*" & Chr(13) & Chr(10))
                     End If
                     Print(1, "bye" & Chr(13) & Chr(10))
@@ -1687,6 +1691,7 @@ Err:
                         Print(2, "cd " & flder & Chr(13) & Chr(10))
                         Print(2, "bin" & Chr(13) & Chr(10))
                     End If
+                    Print(2, "quote PASV" & Chr(13) & Chr(10))
                     Print(2, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
                     Print(2, "bye" & Chr(13) & Chr(10))
                     FileClose(2)
@@ -1716,49 +1721,37 @@ Err:
             FileClose(3)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
-            Shell(ftpbatch, vbMinimizedNoFocus)
+            Dim Twait As Long
+
+            If txtTimeout.Text = "999" Then
+                Twait = -1 ' No timeout period
+            Else
+                Twait = Val(txtTimeout.Text) * 1000 ' Time out period in millisecond
+            End If
+            'Shell(ftpbatch, vbMinimizedNoFocus)
+            Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True, Timeout:=Twait)
 
             If ftpmethod = "get" Then
-                ' Cause some delay to allow ftp file transfer before the processing starts.
-                Dim Cdate1 As Date
-                Dim tot As Integer
-                Dim timeout As Integer
+                '' Cause some delay to allow ftp file transfer before the processing starts.
+                'Dim Cdate1 As Date
+                'Dim tot As Integer
+                'Dim timeout As Integer
                 Dim dat As String
 
-                Cdate1 = Now() '& " " & Time
-                tot = 0
-                timeout = CLng(txtTimeout.Text)
-                With ProgressBar1
-                    .Visible = True
-                    .Maximum = timeout ' 60
-                    Do While tot < timeout
-                        tot = DateDiff("s", Cdate1, Now())
-                        .Value = tot
-                    Loop
-                    .Visible = False
-                End With
-
-                'MsgBox(txtinputfile)
-                'MsgBox(flprefix)
-                ' Where file prefix is used
+                'Cdate1 = Now() '& " " & Time
+                'tot = 0
+                'timeout = CLng(txtTimeout.Text)
+                'With ProgressBar1
+                '    .Visible = True
+                '    .Maximum = timeout ' 60
+                '    Do While tot < timeout
+                '        tot = DateDiff("s", Cdate1, Now())
+                '        .Value = tot
+                '    Loop
+                '    .Visible = False
+                'End With
 
                 If Len(flprefix) > 0 Then
-                    'Dim fcopy As String
-                    'fcopy = local_folder & "\filcopy.bat"
-
-                    'Log_Errors(fcopy)
-                    'FileOpen(33, fcopy, OpenMode.Output)
-
-                    'Print(33, "echo off" & Chr(13) & Chr(10))
-                    'Print(33, "copy *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "del *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "echo on" & Chr(13) & Chr(10))
-                    'Print(33, "EXIT" & Chr(13) & Chr(10))
-                    'FileClose(33)
-
-                    '' Execute the batch file to combine downloaded file
-                    'Shell(fcopy, vbMinimizedNoFocus)
-
 
                     Dim fd As New DirectoryInfo(local_folder)
                     Dim aryFl As FileInfo() = fd.GetFiles("*.*")
@@ -1777,14 +1770,6 @@ Err:
                         End If
                     Next fl
                     FileClose(100)
-                    'FileOpen(33, fcopy, OpenMode.Output)
-                    'Print(33, "echo off" & Chr(13) & Chr(10))
-                    'Print(33, "copy *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    ''Print(33, "del *" & flprefix & "* " & txtinputfile & Chr(13) & Chr(10))
-                    'Print(33, "echo on" & Chr(13) & Chr(10))
-                    'Print(33, "EXIT" & Chr(13) & Chr(10))
-                    'FileClose(33)
-                    'Shell(fcopy, vbMinimizedNoFocus)
 
                 End If
 
@@ -1919,6 +1904,7 @@ Err:
                 Print(111, "cd " & Rflder & Chr(13) & Chr(10))
                 Print(111, "bin" & Chr(13) & Chr(10))
             End If
+            Print(111, "quote PASV" & Chr(13) & Chr(10))
             Print(111, "put" & " " & fl & Chr(13) & Chr(10))
             Print(111, "bye" & Chr(13) & Chr(10))
             FileClose(111)
@@ -1939,7 +1925,8 @@ Err:
             FileClose(112)
 
             ' Execute the batch file to transfer the aws data file from aws server to a local folder
-            Shell(ftpbatch, vbMinimizedNoFocus)
+            'Shell(ftpbatch, vbMinimizedNoFocus)
+            Interaction.Shell(ftpbatch, vbMinimizedNoFocus, Wait:=True)
 
             txtOutputServer.Text = ftp_host
             txtOutputFolder.Text = Rflder
@@ -1994,7 +1981,13 @@ Err:
 
             str = GetDataSet("station", sql2)
 
-            'Log_Errors(str.Tables("station").Rows(0).Item("stationId"))
+            'Initialize station details with blanks
+            stn_name = ""
+            lat = ""
+            lon = ""
+            elv = ""
+            wmo_id = ""
+
             With str.Tables("station")
                 If .Rows.Count <> 0 Then
                     If Not IsDBNull(.Rows(0).Item("stationName")) Then stn_name = .Rows(0).Item("stationName")
@@ -2418,6 +2411,15 @@ Err:
                 'Update_Instruments_Details()
                 Update_Time_Periods(dbconw, qry, hh)
                 Update_observations(dbconw, qry, aws_struct)
+                ' Update with accumulated observations
+                ' Precipitation accumulation
+                'Select recordedFrom As ID, sum(obsValue) As Total from observationfinal where recordedFrom ='GZ008074' and describedBy='892' and (obsdatetime between '2020-09-10 08:01:00' and '2020-09-11 08:00:00') group by ID;
+
+                Update_specificPeriod_Observations(dbconw, Date_Time, nat_id)
+                'Log_Errors("Start Encoding")
+                ' 3 Hour observations
+                ' Tmax and Tmin values
+
                 TDCF_Encode(dbconw, qry, trs, tt_aws)
 
                 'Output_Data_Code(dbconn, i + 1)
@@ -2494,30 +2496,32 @@ Err:
     End Sub
     Sub Update_Time_Periods(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, hr As String)
         Dim Tprd As String
-
-        If CLng(hr) Mod 6 = 0 Then
-            Tprd = "-6"
-        Else
-            Tprd = "-3"
-        End If
-        Update_data(conw, qry, Tprd, "ww_TP") ' Time Period for Past and Present Weather
-        Update_data(conw, qry, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
-        Update_data(conw, qry, hr, "tR_TP") ' Time Period for precipitation replication 1
-        Update_data(conw, qry, "-3", "tR_TP") ' Time Period for precipitation replication 2
-        Update_data(conw, qry, "-24", "evap_TP") ' Time Period for evaporation
-        Update_data(conw, qry, "-24", "SSS_TP") ' Time Period for sunshine replication 1
-        Update_data(conw, qry, "-1", "SS_TP") ' Time Period for sunshine replication 2
-        Update_data(conw, qry, "-12", "xt_TP") ' Time Period for maximum temperature
-        Update_data(conw, qry, "0", "xt0_TP") ' Time Period for maximum temperature ending at nominal time of the report
-        Update_data(conw, qry, "-12", "nt_TP") ' Time Period for minimum teperature
-        Update_data(conw, qry, "-0", "nt0_TP") ' Time Period for minimum teperature ending at nominal time of the report
-        Update_data(conw, qry, "2", "w_TS") ' Time Significance for wind
-        Update_data(conw, qry, "-10", "w_TP") ' Time Period for wind
-        Update_data(conw, qry, "-10", "w1_TP") ' Time Period for wind gust
-        Update_data(conw, qry, "-10", "w2_TP") ' Time Period for wind gust
-        Update_data(conw, qry, "-1", "rad1_TP") ' Time Period for radiation replication 1
-        Update_data(conw, qry, "-24", "rad2_TP") ' Time Period for radiation replication 2
-
+        Try
+            If CLng(hr) Mod 6 = 0 Then
+                Tprd = "-6"
+            Else
+                Tprd = "-3"
+            End If
+            Update_data(conw, qry, Tprd, "ww_TP") ' Time Period for Past and Present Weather
+            Update_data(conw, qry, Tprd, "tempc_t")  ' Time Period for Past and Present Weather 2
+            Update_data(conw, qry, "-6", "tR_TP1") ' Time Period for precipitation replication 1
+            Update_data(conw, qry, "-1", "tR_TP2") ' Time Period for precipitation replication 2
+            Update_data(conw, qry, "-24", "evap_TP") ' Time Period for evaporation
+            Update_data(conw, qry, "-24", "SSS_TP") ' Time Period for sunshine replication 1
+            Update_data(conw, qry, "-1", "SS_TP") ' Time Period for sunshine replication 2
+            Update_data(conw, qry, "-12", "xt_TP") ' Time Period for maximum temperature
+            Update_data(conw, qry, "0", "xt0_TP") ' Time Period for maximum temperature ending at nominal time of the report
+            Update_data(conw, qry, "-12", "nt_TP") ' Time Period for minimum teperature
+            Update_data(conw, qry, "0", "nt0_TP") ' Time Period for minimum teperature ending at nominal time of the report
+            Update_data(conw, qry, "2", "w_TS") ' Time Significance for wind
+            Update_data(conw, qry, "-10", "w_TP") ' Time Period for wind
+            Update_data(conw, qry, "-10", "w1_TP") ' Time Period for wind gust
+            Update_data(conw, qry, "-10", "w2_TP") ' Time Period for wind gust
+            Update_data(conw, qry, "-1", "rad1_TP") ' Time Period for radiation replication 1
+            Update_data(conw, qry, "-24", "rad2_TP") ' Time Period for radiation replication 2
+        Catch ex As Exception
+            MsgBox(ex.Message & " at Update_Time_Periods")
+        End Try
     End Sub
     Sub Update_data(conw As MySql.Data.MySqlClient.MySqlConnection, qry As MySql.Data.MySqlClient.MySqlCommand, data As String, element As String)
 
@@ -2541,6 +2545,94 @@ Err:
         qry.CommandText = sql
         qry.ExecuteNonQuery()
     End Sub
+    Sub Update_specificPeriod_Observations(conw As MySql.Data.MySqlClient.MySqlConnection, Date_Time As String, nat_id As String)
+
+        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+        Dim dap As New MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim drp As New DataSet
+
+        Dim DTfrom, DTto As Date
+        Dim obsv As Double
+        Dim stPD, endPD As String
+
+        Try
+            ' Update Template with 24HR pricipitation total
+            DTto = Date_Time
+
+            ' Convert from GMT to local observation time
+            DTto = DateAdd("h", Val(txtGMTDiff.Text), DTto)
+            DTfrom = DateAdd("h", -24, DTto)
+
+            ' Convert Dates to SQL struncture
+            endPD = DateAndTime.Year(DTto) & "-" & Format(DateAndTime.Month(DTto), "00") & "-" & Format(DateAndTime.Day(DTto), "00") & " " & Format(DateAndTime.Hour(DTto), "00") & ":" & Format(DateAndTime.Minute(DTto), "00") & ":00"
+            stPD = DateAndTime.Year(DTfrom) & "-" & Format(DateAndTime.Month(DTfrom), "00") & "-" & Format(DateAndTime.Day(DTfrom), "00") & " " & Format(DateAndTime.Hour(DTfrom), "00") & ":" & Format(DateAndTime.Minute(DTfrom), "00") & ":00"
+
+            sql = "Select sum(obsValue) As Total from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='892' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+            dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+            ' Remove timeout requirement
+            dap.SelectCommand.CommandTimeout = 0
+            drp.Clear()
+            dap.Fill(drp, "Tprecip")
+            'Log_Errors(sql)
+            obsv = 0
+            If Not IsDBNull(drp.Tables("Tprecip").Rows(0).Item(0)) Then obsv = drp.Tables("Tprecip").Rows(0).Item(0)
+            sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = 013023;"
+            comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+            'Execute query
+            comm.ExecuteNonQuery()
+
+            ' Update Template with Regional agreed period
+            ' Cancel by setting value for first replication to ''
+            sql = "update bufr_crex_data set observation = '' where Bufr_Element = 013011 and Climsoft_Element <> '174';"
+            comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+            'Execute query
+            comm.ExecuteNonQuery()
+
+            ' Update Xtreme temperatures
+            DTfrom = DateAdd("h", -12, DTto)
+            stPD = SQL_Datetime(DTfrom)
+
+            Select Case Int(Hour(Date_Time))
+                Case 18 ' Update Tmax
+                    sql = "Select Max(obsValue) As Tmax from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+                    drp.Clear()
+                    dap.Fill(drp, "Tmax")
+                    obsv = 0
+                    If Not IsDBNull(drp.Tables("Tmax").Rows(0).Item(0)) Then obsv = drp.Tables("Tmax").Rows(0).Item(0)
+                    sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012111';"
+                    comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+                    comm.ExecuteNonQuery()
+                    'Log_Errors(sql)
+                Case 6 ' Update Tmin
+                    sql = "Select Min(obsValue) As Tmin from observationfinal where recordedFrom = '" & nat_id & "' and describedBy='881' and (obsdatetime between '" & stPD & "' and '" & endPD & "');"
+                    dap = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conw)
+                    drp.Clear()
+                    dap.Fill(drp, "Tmin")
+                    obsv = 0
+                    If Not IsDBNull(drp.Tables("Tmin").Rows(0).Item(0)) Then obsv = drp.Tables("Tmin").Rows(0).Item(0)
+                    sql = "Update bufr_crex_data set observation = " & obsv & " where Bufr_Element = '012112';"
+                    comm = New MySql.Data.MySqlClient.MySqlCommand(sql, conw)
+                    comm.ExecuteNonQuery()
+
+                    'Log_Errors(sql)
+            End Select
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " Update_Precip")
+        End Try
+    End Sub
+
+    Function SQL_Datetime(dtt As String) As String
+        Try
+            Return DateAndTime.Year(dtt) & "-" & Format(DateAndTime.Month(dtt), "00") & "-" & Format(DateAndTime.Day(dtt), "00") & " " & Format(DateAndTime.Hour(dtt), "00") & ":" & Format(DateAndTime.Minute(dtt), "00") & ":00"
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return dtt
+        End Try
+
+    End Function
 
     Sub Initialize_Template(ttb As String)
         Dim sql1 As String
@@ -2880,7 +2972,7 @@ Err:
         trs.Clear()
         da.Fill(trs, tt_aws)
         qry.Connection = dbconn
-
+        'Log_Errors(1)
         Try
 
             With trs.Tables(tt_aws)
@@ -2897,8 +2989,8 @@ Err:
                         End If
                     End If
                 Next
-
             End With
+            'Log_Errors(2)
         Catch Err As Exception
             Log_Errors(Err.Message)
         End Try
@@ -3091,6 +3183,7 @@ Err:
 
         ' Execute the batch file to delete the input file
         Shell(ftpbatch, vbMinimizedNoFocus)
+        Interaction.Shell(ftpbatch, vbMinimizedNoFocus)
 
         FTP_Delete_InputFile = True
 
@@ -3338,14 +3431,18 @@ Err:
         Dim comms_header As String
         Dim message_length As String
         Dim Bufr_Message_With_Controls As String
-
+        'Log_Errors(message_header)
         comms_header = CCITT_Binary(rs1, message_header, Len(message_header) * 8)
-
+        'Log_Errors(comms_header)
         'Case where Format Identifier 00 is used
         BUFR_Message = section0 & section1 & section2 & section3 & section4 & section5
         Bufr_Message_With_Controls = SOH & CR & CR & LF & nnn & CR & CR & LF & comms_header & CR & CR & LF & BUFR_Message & CR & CR & LF & ETX
 
         message_length = Format(Str(Len(Bufr_Message_With_Controls) / 8), "00000000")
+        'Log_Errors("Old " & message_length)
+        'mm = String.Format("{0:00}", DateAndTime.Month(Now()))
+        message_length = String.Format("{0:00000000}", Strings.Len(Bufr_Message_With_Controls) / 8)
+        'Log_Errors("New " & message_length)
         BUFR_Message = CCITT_Binary(rs1, message_length, 64) & Format_Id0 & Bufr_Message_With_Controls & dummy_msg
         'Log_Errors(BUFR_Message)
 
@@ -4218,6 +4315,14 @@ Err:
 
     End Sub
 
+    Private Sub cmdMssAddNew_Click_1(sender As Object, e As EventArgs) Handles cmdMssAddNew.Click
+        txtMSSAddress.Text = ""
+        txtMSSFolder.Text = ""
+        txtmssFTPMode.Text = ""
+        txtmssUser.Text = ""
+        txtMSSPW.Text = ""
+    End Sub
+
     Function Format_Datetime(dt As String, fmt As String) As String
         Dim ty, tm, td, tH, tmi As String
 
@@ -4301,6 +4406,16 @@ Err:
             Return hdr
         End Try
     End Function
+    'Function FTP_FilePath(flpath As String) As String
+    '    'Dim fchar As String
+    '    FTP_FilePath = Strings.Replace(flpath, "\", "/")
+    '    'FTP_FilePath = ""
+    '    'For i = 1 To Len(flpath)
+    '    '    fchar = Strings.Mid(flpath, i, 1)
+    '    '    If fchar = "\" Then fchar = "/"
+    '    '    FTP_FilePath = FTP_FilePath & fchar
+    '    'Next
+    'End Function
 End Class
 
 Public Class FTP
