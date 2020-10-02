@@ -1616,7 +1616,6 @@ Err:
                 For i = 0 To .Columns.Count - 1
                     ' Write the row headers befor the Invetory descriptors
                     If i < 8 Then
-
                         If i = 0 Then
                             dat = .Rows(k).Item(0)
                         Else
@@ -1624,7 +1623,6 @@ Err:
                         End If
                     Else
                         If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
-
                             datesr = i - 7 & "/" & .Rows(k).Item(7) & "/" & .Rows(k).Item(6)
                             If IsDate(datesr) Then
                                 M = M + 1
@@ -2435,7 +2433,6 @@ Err:
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
             qry.CommandTimeout = 0
 
-
             'Execute query
 
             qry.ExecuteNonQuery()
@@ -2496,7 +2493,7 @@ Err:
             FileClose(110)
 
             fi = Strings.Replace(fi, "\", "/") ' Convert file path to sql structure
-<
+
             sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
@@ -2510,7 +2507,6 @@ Err:
         End Try
 
 
-
     End Sub
 
     Sub Get_LatLon(conns As MySql.Data.MySqlClient.MySqlConnection, id As String, ByRef lat As String, ByRef lon As String, ByRef elev As String)
@@ -2520,7 +2516,6 @@ Err:
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ds.Clear()
             da.Fill(ds, "station")
-
 
 
             With ds.Tables("station")
@@ -2537,7 +2532,5 @@ Err:
             MsgBox(ex.Message)
         End Try
     End Sub
-
-
 
 End Class
