@@ -1595,6 +1595,7 @@ Err:
 
         maxRows = ds.Tables("observationfinal").Rows.Count
 
+
         fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\inventory-products.csv"
         FileOpen(11, fl, OpenMode.Output)
 
@@ -1615,6 +1616,7 @@ Err:
                 For i = 0 To .Columns.Count - 1
                     ' Write the row headers befor the Invetory descriptors
                     If i < 8 Then
+
                         If i = 0 Then
                             dat = .Rows(k).Item(0)
                         Else
@@ -1622,6 +1624,7 @@ Err:
                         End If
                     Else
                         If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
+
                             datesr = i - 7 & "/" & .Rows(k).Item(7) & "/" & .Rows(k).Item(6)
                             If IsDate(datesr) Then
                                 M = M + 1
@@ -2432,7 +2435,9 @@ Err:
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, con)
             qry.CommandTimeout = 0
 
+
             'Execute query
+
             qry.ExecuteNonQuery()
             'MsgBox("inventory Table with Missing data created")
             Intialize_Inventory_Table(con)
@@ -2446,6 +2451,7 @@ Err:
     End Sub
 
     Sub Intialize_Inventory_Table(cons As MySql.Data.MySqlClient.MySqlConnection)
+
         Dim sql0, stid, stnNm, elm, lat, lon, elev, fi, dat As String
         Dim yy, mm As Long
         Dim qry As MySql.Data.MySqlClient.MySqlCommand
@@ -2457,6 +2463,7 @@ Err:
 
             sql0 = "ALTER TABLE `inventory_output` CHANGE COLUMN `Station_Name` `Station_Name` VARCHAR(255) NULL DEFAULT NULL AFTER `StationID`, CHANGE COLUMN `Lat` `Lat` VARCHAR(50) Not NULL AFTER `Code`, CHANGE COLUMN `Lon` `Lon` VARCHAR(50) Not NULL AFTER `Lat`, ADD PRIMARY KEY (`StationID`, `Code`, `YYYY`, `MM`);"
 
+
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
@@ -2467,7 +2474,9 @@ Err:
             For s = 0 To lstvStations.Items.Count - 1
                 stid = lstvStations.Items(s).SubItems(0).Text
                 stnNm = lstvStations.Items(s).SubItems(1).Text
+
                 Get_LatLon(cons, stid, lat, lon, elev)
+
                 For e = 0 To lstvElements.Items.Count - 1
                     elm = lstvElements.Items(e).SubItems(0).Text
                     For y = Year(dateFrom.Text) To Year(dateTo.Text)
@@ -2475,7 +2484,9 @@ Err:
                         For m = 1 To 12
                             mm = m
                             If DateSerial(yy, mm, 1) > Now() Or DateSerial(yy, mm, 1) > dateTo.Text Then Exit For
+
                             dat = stid & "," & stnNm & "," & elm & "," & lat & "," & lon & "," & elev & "," & yy & "," & mm
+
                             Print(110, dat)
                             PrintLine(110)
                         Next m
@@ -2485,16 +2496,20 @@ Err:
             FileClose(110)
 
             fi = Strings.Replace(fi, "\", "/") ' Convert file path to sql structure
+<
             sql0 = "LOAD DATA local INFILE 'C:/ProgramData/Climsoft4/data/inventory-table.csv' IGNORE INTO TABLE inventory_output FIELDS TERMINATED BY ',' (StationID, Station_Name, Code, Lat, Lon, Elev, YYYY, MM)"
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql0, cons)
             qry.CommandTimeout = 0
             qry.ExecuteNonQuery()
+
 
             sql0 = "select * from inventory_output order by stationID, Code, YYYY, MM;"
             InventoryProducts(sql0, "Inventory")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+
 
     End Sub
 
@@ -2505,6 +2520,8 @@ Err:
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conns)
             ds.Clear()
             da.Fill(ds, "station")
+
+
 
             With ds.Tables("station")
                 lat = ""
@@ -2520,5 +2537,7 @@ Err:
             MsgBox(ex.Message)
         End Try
     End Sub
+
+
 
 End Class
