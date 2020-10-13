@@ -100,6 +100,8 @@
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("qcStatus")) Then qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
 
+                obsFlag = Strings.Replace(obsFlag, "\", "")
+
                 'Generate SQL string for inserting data into observationFinal table
                 strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,mark) " &
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
@@ -190,6 +192,8 @@
             obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
             qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
             acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
+
+            obsFlag = Strings.Replace(obsFlag, "\", "")
 
             'Generate SQL string for replacing existing records of same Key with records with qcStatus 2
             strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
@@ -309,7 +313,7 @@
                 LstViewStations.Items(i).Checked = True
             Next
             chkAllStations.Text = "Unselect All Stations"
-            LstViewStations.Enabled = False
+            'LstViewStations.Enabled = False
         End If
     End Sub
 
@@ -325,7 +329,7 @@
                 lstViewElements.Items(i).Checked = True
             Next
             chkAllElements.Text = "Unselect All Elements"
-            lstViewElements.Enabled = False
+            'lstViewElements.Enabled = False
         End If
     End Sub
 
@@ -535,6 +539,8 @@
                 If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("acquisitionType")) Then acquisitionType = ds.Tables("obsInitial").Rows(n).Item("acquisitionType")
                 'If Not IsDBNull(ds.Tables("obsInitial").Rows(n).Item("period")) Then period = ds.Tables("obsInitial").Rows(n).Item("period")
 
+                obsFlag = Strings.Replace(obsFlag, "\", "")
+
                 'Generate SQL string for inserting data into observationFinal table
                 If Not chkUpdateRecs.Checked Then
                     strSQL = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,mark) " &
@@ -660,6 +666,8 @@
                 obsFlag = ds.Tables("obsInitial").Rows(n).Item("flag")
                 qcStatus = ds.Tables("obsInitial").Rows(n).Item("qcStatus")
 
+                obsFlag = Strings.Replace(obsFlag, "\", "")
+
                 ''Generate SQL string for replacing existing records of same Key with records with qcStatus 2
                 'strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType) " &
                 '    "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "','" & period & "'," &
@@ -709,11 +717,5 @@
         Me.Cursor = Cursors.Default
     End Sub
 
-    Private Sub txtBeginMonth_TextChanged(sender As Object, e As EventArgs) Handles txtBeginMonth.TextChanged
 
-    End Sub
-
-    Private Sub lblBeginMonth_Click(sender As Object, e As EventArgs) Handles lblBeginMonth.Click
-
-    End Sub
 End Class

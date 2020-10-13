@@ -1871,7 +1871,7 @@ Err:
     End Function
 
     Function FTP_Put(fl As String) As Boolean
-        Dim Lflder, Rflder, Drv, ftpmode, usr, pwd, ftpscript, ftpbatch As String
+        Dim Lflder, Rflder, Drv, ftpmode, usr, pwd, ftpscript, ftpbatch, binFile As String
         Dim rf As DataSet
 
         Try
@@ -1896,7 +1896,7 @@ Err:
                     pwd = .Rows(0).Item("password")
                 End With
             End If
-
+            binFile = Strings.Replace(fl, "tmp", "f") ' Create temporary binary file for convinience of uploading to MSS
             FileOpen(111, ftpscript, OpenMode.Output)
             If ftpmode = "psftp" Then Print(2, "cd " & Rflder & Chr(13) & Chr(10))
             If ftpmode = "FTP" Then
@@ -1907,7 +1907,9 @@ Err:
                 Print(111, "bin" & Chr(13) & Chr(10))
             End If
             Print(111, "quote PASV" & Chr(13) & Chr(10))
+            'Print(111, "put" & " " & tmp & Chr(13) & Chr(10))
             Print(111, "put" & " " & fl & Chr(13) & Chr(10))
+            Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
             Print(111, "bye" & Chr(13) & Chr(10))
             FileClose(111)
 
@@ -1934,7 +1936,8 @@ Err:
             txtOutputFolder.Text = Rflder
 
             ' List the processed output file
-            lstOutputFiles.Items.Add(System.IO.Path.GetFileName(fl))
+            'lstOutputFiles.Items.Add(System.IO.Path.GetFileName(fl))
+            lstOutputFiles.Items.Add(System.IO.Path.GetFileName(binFile))
             txtOutputServer.Refresh()
             txtOutputFolder.Refresh()
             lstOutputFiles.Refresh()
@@ -3481,7 +3484,9 @@ Err:
         ValidFile = False
 
         'AWS_BUFR_File = System.IO.Path.GetFullPath(Application.StartupPath & "\data\" & msg_file & Format(1, "0000") & ".f")
-        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+        'AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
+        AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
+
         BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
 
         'Open fso.GetParentFolderName(App.Path) & "\data\bufr_octets.txt" For Output As #1
