@@ -589,21 +589,21 @@ Public Class formProductsSelectCriteria
 
                     DataProducts(sql, lblProductType.Text)
                 Case "Daily Extremes"
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev,latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, day(obsDatetime) as Day, Min(obsValue) as Lowest, Max(obsValue) as Highest " &
+                    sql = "SELECT recordedFrom as StnID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev,latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, day(obsDatetime) as Day, Min(obsValue) as Lowest, Max(obsValue) as Highest " &
                            "FROM  station INNER JOIN observationfinal ON stationId = recordedFrom INNER JOIN obselement ON elementId = describedBy " &
-                           "WHERE  (RecordedFrom = " & stnlist & ") And (describedBy =" & elmlist & ") And (obsDatetime between '" & sdate & "' and '" & edate & "') Group by CODE, Year, Month, Day Order by StationID,CODE,Year,Month,Day;"
+                           "WHERE  (RecordedFrom = " & stnlist & ") And (describedBy =" & elmlist & ") And (obsDatetime between '" & sdate & "' and '" & edate & "') Group by StnID, Year, Month, Day,CODE;" 'Order by StnID,CODE,Year,Month,Day;"
 
                     DataProducts(sql, Me.lblProductType.Text)
                 Case "Monthly Extremes"
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev,latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month, Min(obsValue) as Lowest, Max(obsValue) as Highest " &
+                    sql = "SELECT recordedFrom as StnID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev,latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month, Min(obsValue) as Lowest, Max(obsValue) as Highest " &
                            "FROM  station INNER JOIN observationfinal ON stationId = recordedFrom INNER JOIN obselement ON elementId = describedBy " &
-                           "WHERE  (RecordedFrom = " & stnlist & ") And (describedBy =" & elmlist & ") And (obsDatetime between '" & sdate & "' and '" & edate & "') Group by CODE, Year, Month Order by StationID,CODE,Year,Month;"
+                           "WHERE  (RecordedFrom = " & stnlist & ") And (describedBy =" & elmlist & ") And (obsDatetime between '" & sdate & "' and '" & edate & "') Group by StnID, Year, Month,CODE;"
 
                     DataProducts(sql, Me.lblProductType.Text)
                 Case "Annual Extremes"
-                    sql = "SELECT recordedFrom as StationID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Min(obsValue) as Lowest, Max(obsValue) as Highest" & "
+                    sql = "SELECT recordedFrom as StnID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Min(obsValue) as Lowest, Max(obsValue) as Highest" & "
                           FROM  station INNER JOIN observationfinal ON stationId = recordedFrom INNER JOIN obselement ON elementId = describedBy  
-                          WHERE  (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') Group by CODE, Year Order by StationID,CODE,Year;"
+                          WHERE  (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') Group by StnID,Year,CODE;" ' Order by StnID,CODE,Year;"
 
                     DataProducts(sql, Me.lblProductType.Text)
                 Case Else
@@ -649,7 +649,7 @@ Err:
     End Sub
     Sub WRPlot(stns As String, sdt As String, edt As String)
 
-        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath, datval As String
+        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath, dat, datval As String
         Dim pro As Integer
         Dim ox As Object
         'Dim WDSP, WDDR As Integer
@@ -698,26 +698,27 @@ Err:
 
             ' Output data values
             For k = 0 To maxRows - 1
-
-                For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
+                datval = ds.Tables("observationfinal").Rows(k).Item(0)
+                For i = 1 To ds.Tables("observationfinal").Columns.Count - 1
                     If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
-
-                        datval = ds.Tables("observationfinal").Rows(k).Item(i)
+                        dat = ds.Tables("observationfinal").Rows(k).Item(i)
 
                         ' Round the value to while numbers except the Station ID 
                         If i > 0 Then
-                            datval = Math.Round(Val(ds.Tables("observationfinal").Rows(k).Item(i)), 0)
+                            dat = Math.Round(Val(ds.Tables("observationfinal").Rows(k).Item(i)), 0)
                         End If
 
                         ' Multiply by factor of 10 where wind direction is in 2 digits
                         If i = ds.Tables("observationfinal").Columns.Count - 2 And Int(RegkeyValue("key05")) = 2 Then
-                            datval = Val(datval) * 10
+                            dat = Val(dat) * 10
                         End If
-
-                        Print(11, datval & Chr(9))
+                        datval = datval & Chr(9) & dat
+                    Else
+                        datval = ""
+                        Exit For
                     End If
                 Next
-                PrintLine(11)
+                If datval <> "" Then PrintLine(11, datval)
             Next
             FileClose(11)
 
@@ -730,6 +731,7 @@ Err:
         Catch ex As Exception
             'If Err.Number = 5 Then On Error Resume Next
             MsgBox(ex.HResult & " : " & ex.Message)
+            FileClose(11)
         End Try
     End Sub
     Sub MSCharts(stns As String, elmlist As String, elmcolmn As String, sdt As String, edt As String, SumAvg As String, SummaryType As String, graphType As String)
@@ -1712,9 +1714,14 @@ Err:
             If IsDBNull(dsf.Tables("observationfinal").Rows(rw).Item(col)) Then
                 Write(fp, "")
             ElseIf InStr(dsf.Tables("observationfinal").Rows(rw).Item(col), ".") <> 0 Then ' Decimal values to be rounded to 2 decimal places
-                Write(fp, Format(dsf.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
+                If IsNumeric(dsf.Tables("observationfinal").Rows(rw).Item(col)) Then
+                    Write(fp, Strings.Format(dsf.Tables("observationfinal").Rows(rw).Item(col), "0.00"))
+                Else
+                    Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
+                End If
+
             Else
-                Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
+                    Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
             End If
 
         Catch ex As Exception

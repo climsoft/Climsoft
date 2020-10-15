@@ -1668,5 +1668,10 @@
 
     Private Sub frmImportDaily_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Len(recCommit.RegkeyValue("key01")) <> 0 Then txtObsHour.Text = recCommit.RegkeyValue("key01")
+
+        If Text = "CLICOM Daily" Or Text = "CLICOM Synop" Or Text = "CLICOM Hourly" Then
+            lblMissingFlag.Visible = False
+            txtMissingFlag.Visible = False
+        End If
     End Sub
 End Class
