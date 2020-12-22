@@ -698,6 +698,7 @@ Public Class formProductsSelectCriteria
                            Group by recordedFrom, year(obsDatetime)
                            Order by recordedFrom, year(obsDatetime);"
 
+
                             DataProducts(sql, lblProductType.Text)
                         Case "Daily Extremes"
                             sql = "SELECT recordedFrom as StnID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev,latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, day(obsDatetime) as Day, Min(obsValue) as Lowest, Max(obsValue) as Highest " &
@@ -713,6 +714,7 @@ Public Class formProductsSelectCriteria
                             DataProducts(sql, Me.lblProductType.Text)
                         Case "Annual Extremes"
                             sql = "SELECT recordedFrom as StnID, stationName as Station_Name, describedBy as CODE, abbreviation as Abbrev, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Min(obsValue) as Lowest, Max(obsValue) as Highest" & "
+
                           FROM  station INNER JOIN observationfinal ON stationId = recordedFrom INNER JOIN obselement ON elementId = describedBy  
                           WHERE  (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') Group by StnID,Year,CODE;" ' Order by StnID,CODE,Year;"
 

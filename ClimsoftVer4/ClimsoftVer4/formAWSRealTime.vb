@@ -3461,11 +3461,13 @@ Err:
         fserial = 0
         ValidFile = False
 
+
         'AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
         ' Above code was modified below to all full transmission of binary data before the message switch start process the file for GTS.
         ' The binary file with be renamed with extension f throught FTP command.
 
         AWS_BUFR_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".tmp"
+
         BUFR_octet_File = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
 
         FileOpen(1, BUFR_octet_File, OpenMode.Output)
