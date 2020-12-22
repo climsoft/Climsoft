@@ -27,15 +27,6 @@ Public Class frmQC
     Dim msgTxtQCReportsOutUpperLimits As String
     Dim msgTxtQCReportsOutInterelement As String
 
-    Private Sub chkAllElements_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllElements.CheckedChanged
-
-    End Sub
-
-    Private Sub BindingSource3_CurrentChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Public HTMLHelp As New clsHelp
 
     Private Sub optInterElement_CheckedChanged(sender As Object, e As EventArgs) Handles optInterElement.CheckedChanged
         ' Disable selection of elements since the list is set in database for the elements to be compared.
@@ -162,8 +153,10 @@ Public Class frmQC
                 LstViewStations.Items(i).Checked = True
             Next
             chkAllStations.Text = "Unselect All Stations"
-            LstViewStations.Enabled = False
+            chkAllStations.Checked = True
+            'LstViewStations.Enabled = False
         End If
+
     End Sub
 
 
@@ -180,7 +173,8 @@ Public Class frmQC
                 lstViewElements.Items(i).Checked = True
             Next
             chkAllElements.Text = "Unselect All Elements"
-            lstViewElements.Enabled = False
+            chkAllElements.Checked = True
+            'lstViewElements.Enabled = False
         End If
     End Sub
 
@@ -796,5 +790,35 @@ Public Class frmQC
             FileClose(111)
         End Try
 
+    End Sub
+
+    Private Sub lstViewElements_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles lstViewElements.ItemChecked
+        'If lstViewElements.CheckedItems.Count < lstViewElements.Items.Count Then
+        '    chkAllElements.Checked = False
+        '    chkAllElements.Text = "Select All Elements"
+        'Else
+        '    chkAllElements.Checked = True
+        '    chkAllElements.Text = "Unselect All Elements"
+        'End If
+    End Sub
+
+    Private Sub LstViewStations_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles LstViewStations.ItemChecked
+        '    If LstViewStations.CheckedItems.Count < LstViewStations.Items.Count Then
+        '        chkAllStations.Checked = False
+        '        chkAllStations.Text = "Select All Stations"
+        '    Else
+        '        chkAllStations.Checked = True
+        '        chkAllStations.Text = "Unselect All Stations"
+        '    End If
+    End Sub
+
+    Private Sub LstViewStations_Click(sender As Object, e As EventArgs) Handles LstViewStations.Click
+        'If LstViewStations.CheckedItems.Count < LstViewStations.Items.Count Then
+        '    chkAllStations.Checked = False
+        '    chkAllStations.Text = "Select All Stations"
+        'Else
+        '    chkAllStations.Checked = True
+        '    chkAllStations.Text = "Unselect All Stations"
+        'End If
     End Sub
 End Class

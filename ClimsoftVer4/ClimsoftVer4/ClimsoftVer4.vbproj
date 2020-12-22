@@ -141,6 +141,12 @@
     <Compile Include="frmFormUpload.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmInventoryChart.Designer.vb">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventoryChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewAgrometKenya.Designer.vb">
       <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
     </Compile>
@@ -827,6 +833,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFormUpload.resx">
       <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventoryChart.resx">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewAgrometKenya.resx">
       <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>
