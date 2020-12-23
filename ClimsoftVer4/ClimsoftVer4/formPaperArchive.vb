@@ -1,4 +1,6 @@
-﻿Public Class formPaperArchive
+﻿Imports System.ComponentModel
+
+Public Class formPaperArchive
     Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -113,7 +115,6 @@
         Me.Cursor = Cursors.WaitCursor
 
         Try
-
             'Create the images folder if it does not exist
             imageFolder = lblArhiveFolder.Text
             If Not IO.Directory.Exists(imageFolder) Then
@@ -124,19 +125,19 @@
             For i = 0 To lstvFiles.Items.Count - 1
                 imgFile = txtSelectedFolder.Text & "\" & lstvFiles.Items(i).Text
                 If lstvFiles.Items(i).Checked Then
-                    IO.File.Copy(imgFile, imageFolder & "\" & lstvFiles.Items(i).Text, True)
-                    'MsgBox(txtSelectedFolder.Text & " " & lstvFiles.Items(i).Text)
-                    If UpdateArchive(lblArhiveFolder.Text, lstvFiles.Items(i).Text) Then lstMessages.Items.Add(lstvFiles.Items(i).Text & " " & "Archived")
-                End If
 
+                    'MsgBox(txtSelectedFolder.Text & " " & lstvFiles.Items(i).Text)
+                    If UpdateArchive(lblArhiveFolder.Text, lstvFiles.Items(i).Text) Then
+                        lstMessages.Items.Add(lstvFiles.Items(i).Text & " " & "Archived")
+                        IO.File.Copy(imgFile, imageFolder & "\" & lstvFiles.Items(i).Text, True)
+                    Else
+                        Continue For
+                    End If
+                End If
             Next
-            'MsgBox("Archiving Completed")
-            'lstMessages.Items.Add("Archiving Completed")
+            ' Check for errors and list the associated messages
         Catch ex As Exception
-            'MsgBox(ex.Message)
             lstMessages.Items.Add(ex.Message)
-            ' Set busy Cursor pointer
-            Me.Cursor = Cursors.Default
         End Try
         Me.Cursor = Cursors.Default
     End Sub
@@ -181,19 +182,22 @@
                     hh = Mid(dt, 9, 2)
                     datetim = yy & "/" & mm & "/" & dd & " " & hh & ":00:00"
                     'MsgBox(datetim)
+
                     If IsDate(datetim) Then
                         'ArchiveRecord(stn, frm, yy, mm, dd, hh, imgfile)
                         If Not ArchiveRecord(stn, frm, datetim, imgfile) Then UpdateArchive = False
+
                     Else
                         'MsgBox("Incorrect Datetime Structure")
                         lstMessages.Items.Add(FileNm & " Incorrect Datetime Structure. Not archived ")
                         UpdateArchive = False
                     End If
                     Exit For
+
                 End If
             Next
         Catch ex As Exception
-            lstMessages.Items.Add(ex.Message)
+            lstMessages.Items.Add(ex.Message & " at Updatearchive")
             UpdateArchive = False
         End Try
     End Function
@@ -218,6 +222,8 @@
         ArchiveRecord = True
         Dim recCommit As New dataEntryGlobalRoutines
         Try
+            ds.Clear()
+
             dsNewRow = ds.Tables("paperarchive").NewRow
 
             dsNewRow.Item("belongsTo") = stn
@@ -232,7 +238,7 @@
             'Exit Function
         Catch ex As Exception
             'MsgBox(Err.Number & " : " & Err.Description)
-            lstMessages.Items.Add(ex.Message)
+            lstMessages.Items.Add(ex.Message & " at ArchiveRecord")
             ArchiveRecord = False
         End Try
 
@@ -294,7 +300,7 @@
                     lblArhiveFolder.Text = ImagesPath & "\images"
                     lblArhiveFolder.ForeColor = Color.Red
                     lblArhiveFolder.Font.Bold.Equals(True)
-                    txtDefaultFolder.Text = "Default folder for image archiving is being used. " & _
+                    txtDefaultFolder.Text = "Default folder for image archiving is being used. " &
                                             "You may go to Tools -> General Settings and choose a convinient folder for good management of image files archiving"
                 Else
                     lblArhiveFolder.Text = dsr.Tables("regkeys").Rows(i).Item("keyValue")
@@ -302,7 +308,6 @@
                 Exit For
             End If
         Next
-
 
     End Sub
 
@@ -534,14 +539,21 @@
         Dim stn, frm, imgfl, img As String
         Dim num, mxrows As Integer
 
-        imgfl = txtStation.Text & "-" & txtForm.Text & "-" & txtYY.Text & Format(Val(txtMM.Text), "00") & Format(Val(txtDD.Text), "00") & Format(Val(txtHH.Text), "00")
+        imgfl = txtStation.Text & "-" & txtForm.Text & "-" & txtYY.Text & txtMM.Text.PadLeft(2, "0"c) & txtDD.Text.PadLeft(2, "0"c) & txtHH.Text.PadLeft(2, "0"c)
+        'MsgBox(imgfl)
+
         mxrows = ds.Tables("paperarchive").Rows.Count
 
         For num = 0 To mxrows
             stn = ds.Tables("paperarchive").Rows(num).Item("belongsTo")
             frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
             img = ds.Tables("paperarchive").Rows(num).Item("image")
+
+            img = IO.Path.GetFileName(img)
+            'MsgBox(img)
             If InStr(img, imgfl) > 0 Then
+                img = lblArhiveFolder.Text & "\" & img
+                'MsgBox(img)
                 If Strings.UCase(Strings.Right(img, 3)) = "PDF" Then
                     ShowImage(img)
                 Else
@@ -685,9 +697,14 @@ Err:
 
                 comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
                 sql0 = "DELETE FROM `paperarchive` WHERE  `belongsTo`='" & stn & "' AND `formDatetime`='" & dt & "' AND `image`='" & img & "' AND `classifiedInto`='" & frm & "' LIMIT 1;"
-                MsgBox(sql0)
+
                 comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
                 comm.ExecuteNonQuery()   ' Execute the query
+
+                ' Delete the image file from the storage folder
+                img = Strings.Replace(img, "\\", "\")
+                IO.File.Delete(img)
+                MsgBox("Image deleted")
 
                 ds.Clear()
                 da.Fill(ds, "paperarchive")
@@ -702,34 +719,10 @@ Err:
                 PicForm.ImageLocation = Nothing
                 PicForm.Refresh()
             End If
+
         Catch ex As Exception
             MsgBox(ex.HResult & " " & ex.Message)
         End Try
-
-
-
-        '    'Display message to show that delete operation has been cancelled
-        '    recDelete.messageBoxOperationCancelled()
-        '    Exit Sub
-        'End If
-        'Try
-        '    'MsgBox(rec)
-        '    MsgBox(ds.Tables("paperarchive").Rows(rec).Item(2))
-        '    ds.Tables("paperarchive").Rows(rec).Delete()
-        '    da.Update(ds, "paperarchive")
-        '    Kount = Kount - 1
-        '    'inc = 0
-
-        '    ''Call subroutine for record navigation
-        '    'navigateRecords()
-        'Catch ex As Exception
-        '    MsgBox(ex.Message)
-        'End Try
-
-        'If DeleteRecord("paperarchive", rec) Then
-
-
-        'End If
 
     End Sub
 
@@ -786,11 +779,11 @@ Err:
     Private Sub cmdList_Click(sender As Object, e As EventArgs) Handles cmdList.Click
 
         lstArchival.Columns.Clear()
-        dbconn.Close()
+        'dbconn.Close()
 
         Try
-            dbconn.ConnectionString = frmLogin.txtusrpwd.Text
-            dbconn.Open()
+            'dbconn.ConnectionString = frmLogin.txtusrpwd.Text
+            'dbconn.Open()
             lstArchival.Clear()
             sql = "SELECT * FROM paperarchive ORDER BY belongsTo"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
@@ -819,9 +812,9 @@ Err:
             Next
         Catch ex As Exception
             MsgBox(ex.Message)
-            dbconn.Close()
+            'dbconn.Close()
         End Try
-        dbconn.Close()
+        'dbconn.Close()
     End Sub
 
     Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
@@ -877,6 +870,10 @@ Err:
         'MsgBox(lstArchival.FocusedItem.SubItems(3).Text)
         Dim SelectedImage As String
         SelectedImage = lstArchival.FocusedItem.SubItems(3).Text
+
+        SelectedImage = IO.Path.GetFileName(SelectedImage)
+        SelectedImage = lblArhiveFolder.Text & "\" & SelectedImage
+
         If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
             ShowImage(SelectedImage)
         Else
@@ -892,25 +889,41 @@ Err:
             MsgBox("Can't Update. No Image Retrieved")
             Exit Sub
         End If
+
+        Dim dt, imgFile0, imgFile1, imgFile2, ext, sql0 As String
+        Dim comm As New MySql.Data.MySqlClient.MySqlCommand
+
         Try
-            If MessageBox.Show("Do you really want to Delete this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
-                Dim dt, img, sql0 As String
-                Dim comm As New MySql.Data.MySqlClient.MySqlCommand
 
-                img = PicForm.ImageLocation
+            If MessageBox.Show("Do you really want to Update this Record?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.Yes Then
 
-                ' Change the path character to mysql format
-                img = Strings.Replace(img, "\", "\\")
+                imgFile0 = IO.Path.GetFileName(PicForm.ImageLocation)
+                ext = IO.Path.GetExtension(imgFile0)
+
+                ' Full path for the source file
+                imgFile1 = lblArhiveFolder.Text & "\" & imgFile0
+
+                ' Create a string for the name of image file to update to according to the changed details
+                imgFile2 = lblArhiveFolder.Text & "\" & txtStation.Text & "-" & txtForm.Text & "-" & txtYY.Text & txtMM.Text.PadLeft(2, "0"c) & txtDD.Text.PadLeft(2, "0"c) & txtHH.Text.PadLeft(2, "0"c) & ext
+
+                ' Change the path character to mysql style
+                imgFile2 = Strings.Replace(imgFile2, "\", "\\")
+
                 dt = txtYY.Text & "-" & txtMM.Text & "-" & txtDD.Text & " " & txtHH.Text & ":00:00"
-
                 comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
 
-                sql0 = "update paperarchive set belongsTo = '" & txtStation.Text & "', formDatetime='" & dt & "', classifiedInto='" & txtForm.Text & "' " & _
-                       "where image ='" & img & "';"
+                ' Create SQL statement to update the details in the database
+                sql0 = "update paperarchive set belongsTo = '" & txtStation.Text & "', formDatetime='" & dt & "', classifiedInto='" & txtForm.Text & "', image ='" & imgFile2 & "' " &
+                        "where instr(image,'" & imgFile0 & "') > 0;"
 
-                'MsgBox(sql0)
                 comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
                 comm.ExecuteNonQuery()   ' Execute the query
+
+                ' Change the path character to Winds style
+                imgFile2 = Strings.Replace(imgFile2, "\\", "\")
+                FileSystem.Rename(imgFile1, imgFile2)
+
+                MsgBox("Update Successful")
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -936,8 +949,7 @@ Err:
         PicForm.Refresh()
     End Sub
 
-
-    Private Sub lstArchival_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstArchival.SelectedIndexChanged
-
+    Private Sub formPaperArchive_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        dbconn.Close()
     End Sub
 End Class

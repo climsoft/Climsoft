@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class formPaperArchive
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class formPaperArchive
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formPaperArchive))
         Me.tabImageArchives = New System.Windows.Forms.TabControl()
         Me.tabStructured = New System.Windows.Forms.TabPage()
@@ -98,8 +97,7 @@ Partial Class formPaperArchive
         Me.PicForm = New System.Windows.Forms.PictureBox()
         Me.lblZoomout = New System.Windows.Forms.Label()
         Me.lblImageRotate = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -113,8 +111,6 @@ Partial Class formPaperArchive
         Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -467,6 +463,7 @@ Partial Class formPaperArchive
         '
         'TabViewArchive
         '
+        Me.TabViewArchive.Controls.Add(Me.TextBox1)
         Me.TabViewArchive.Controls.Add(Me.grpImage)
         Me.TabViewArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabViewArchive.Name = "TabViewArchive"
@@ -857,6 +854,13 @@ Partial Class formPaperArchive
         Me.lblImageRotate.Text = "Rotate Image"
         Me.lblImageRotate.Visible = False
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(21, 404)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(496, 20)
+        Me.TextBox1.TabIndex = 1
+        '
         'formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -887,6 +891,7 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.ResumeLayout(False)
         Me.pnlUnstructuredNames.PerformLayout()
         Me.TabViewArchive.ResumeLayout(False)
+        Me.TabViewArchive.PerformLayout()
         Me.grpImage.ResumeLayout(False)
         Me.grpImage.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -896,8 +901,6 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -976,6 +979,5 @@ Partial Class formPaperArchive
     Friend WithEvents lblZoomout As System.Windows.Forms.Label
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
     Friend WithEvents lblImageRotate As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents BindingSource2 As BindingSource
+    Friend WithEvents TextBox1 As TextBox
 End Class

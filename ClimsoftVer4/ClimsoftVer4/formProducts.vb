@@ -69,6 +69,7 @@ Public Class frmProducts
         Dim prod As String
 
         prod = cmbProductsCategory.Text
+
         'If prod = "Rain Days" Then ProductsTable_Update()
         'ProductsTable_Update()
         lstvProducts.Clear()
@@ -105,6 +106,12 @@ Public Class frmProducts
                 Exit For
             End If
         Next
+
+        If prtyp.ProductType = "Stations Records" Then
+            frmInventoryChart.Show()
+            Exit Sub
+        End If
+
 
         formProductsSelectCriteria.lblProductType.Text = prtyp.ProductType
 
@@ -179,7 +186,10 @@ Public Class frmProducts
                ('26', 'Annual Counts', 'Annual Rain Days', 'Rain Days'),
                ('27', 'Daily Extremes', 'Daily Lowest and Highest values', 'Data'),
                ('28', 'Monthly Extremes', 'Monthly Lowest and Highest daily values', 'Data'),
-               ('29', 'Annual Extremes', 'Annual Lowest and Highest daily values', 'Data')"
+               ('29', 'Annual Extremes', 'Annual Lowest and Highest daily values', 'Data'),
+               ('30', 'Stations Records', 'Time Series Chart for Observing Stations', 'Inventory'),
+               ('31', 'Yearly Elements Observed', 'Yearly Time Series Chart per Station', 'Inventory'),
+               ('32', 'Monthly Elements Observed', 'Monthly Time Series Chart per Station', 'Inventory');"
         Try
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, conn)
             qry0.CommandTimeout = 0

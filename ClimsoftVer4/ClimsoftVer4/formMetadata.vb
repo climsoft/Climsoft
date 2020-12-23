@@ -401,10 +401,11 @@ Public Class formMetadata
             If IsNumeric(txtElevation.Text) Then dsNewRow.Item("elevation") = Val(txtElevation.Text)
             dsNewRow.Item("adminRegion") = txtAdminRegion.Text
             dsNewRow.Item("drainageBasin") = txtDrainageBasin.Text
+            dsNewRow.Item("qualifier") = txtStationType.Text
             dsNewRow.Item("authority") = txtAuthority.Text
+            dsNewRow.Item("geolocationMethod") = txtgeoMethod.Text
+            'If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
             If IsNumeric(txtgeoAccuracy.Text) Then dsNewRow.Item("geolocationAccuracy") = Val(txtgeoAccuracy.Text)
-            If IsNumeric(txtgeoMethod.Text) Then dsNewRow.Item("geolocationMethod") = Val(txtgeoMethod.Text)
-
             dsNewRow.Item("openingDatetime") = txtOpeningDate.Text
             dsNewRow.Item("closingDatetime") = txtClosingDate.Text
 
@@ -570,41 +571,40 @@ Public Class formMetadata
     End Sub
     Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
         Dim oper As Integer
-        Dim lat, lon As String
+        Dim lat, lon, geoAccu As String
+        Try
+            If txtStationOperation.Checked Then
+                oper = 1
+            Else
+                oper = 0
+            End If
 
-        If txtStationOperation.Checked Then
-            oper = 1
-        Else
-            oper = 0
-        End If
+            If txtstationId.Text = "" Then
+                MsgBox("No record Selected")
+            Else
+                ' Set blank numerical values to NULL
+                lat = txtLatitude.Text
+                If Not IsNumeric(txtLatitude.Text) Then lat = "NULL"
 
-        If txtstationId.Text = "" Then
-            MsgBox("No record Selected")
-        Else
-            ' Set blank numerical values to NULL
-            lat = txtLatitude.Text
-            If Not IsNumeric(txtLatitude.Text) Then lat = "NULL"
+                lon = txtLongitude.Text
+                If Not IsNumeric(txtLongitude.Text) Then lon = "NULL"
 
-            lon = txtLongitude.Text
-            If Not IsNumeric(txtLongitude.Text) Then lon = "NULL"
+                geoAccu = txtgeoAccuracy.Text
+                If Not IsNumeric(txtgeoAccuracy.Text) Then geoAccu = "NULL"
 
-            'TableUpdate(rec, "update")
-
-            'sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = '" & txtLatitude.Text & "', qualifier = '" & txtStationType.Text & "', longitude = '" & txtLongitude.Text & "', elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-            '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
-
-            sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & txtStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
+                sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & txtStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = " & geoAccu & ", openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
                 ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
-            'MsgBox(sql)
-            If Not Update_Rec(sql) Then
+                If Not Update_Rec(sql) Then
                     MsgBox("Update Failed")
                 Else
                     MsgBox("Update Successful")
                 End If
 
             End If
-
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
     Function TableUpdate(recs As Integer, cmdtype As String) As Boolean
@@ -679,6 +679,7 @@ Public Class formMetadata
                 da.Update(ds, tbl)
 
                 MsgBox("Record Successfully Deleted")
+                ClearStationForm()
             Else
                 MsgBox("Delete Cancelled")
             End If
