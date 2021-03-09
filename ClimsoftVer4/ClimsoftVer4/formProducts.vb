@@ -110,9 +110,11 @@ Public Class frmProducts
         If prtyp.ProductType = "Stations Records" Then
             frmInventoryChart.Show()
             Exit Sub
+
         ElseIf prtyp.ProductType = "CLIMAT" Then
             frmCLIMAT.Show()
             Exit Sub
+
         End If
 
 
@@ -204,6 +206,7 @@ Public Class frmProducts
                ('32', 'Daily Levels', 'Daily Observations', 'Upper Air'),
                ('33', 'Monthly Levels', 'Monthly Summeries', 'Upper Air'),
                ('34', 'Annual Levels', 'Annual Summeries', 'Upper Air');"
+
         Try
             Me.Cursor = Cursors.WaitCursor
             qry0 = New MySql.Data.MySqlClient.MySqlCommand(sql0, conn)

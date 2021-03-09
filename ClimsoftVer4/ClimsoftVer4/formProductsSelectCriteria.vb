@@ -490,6 +490,7 @@ Public Class formProductsSelectCriteria
                     cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
                     cmd.CommandTimeout = 0
 
+
                     'Execute query
                     cmd.ExecuteNonQuery()
                     conn.Close()
@@ -511,22 +512,52 @@ Public Class formProductsSelectCriteria
                         DataProducts(sql, Me.lblProductType.Text)
                     End If
 
+                    'Execute query
+                    cmd.ExecuteNonQuery()
+                    conn.Close()
+
+                    ' Create SQL statement for the means output and call the function for creating the output file and display results.
+                    If lstvElements.Items.Count > 0 Then
+                        For i = 0 To lstvElements.Items.Count - 1
+                            SumAvg = "AVG"
+                            If i = 0 Then
+                                elmcolmn = " " & SumAvg & "(" & lstvElements.Items(0).SubItems(1).Text & ") as " & lstvElements.Items(0).SubItems(1).Text
+                            Else
+                                elmcolmn = elmcolmn & ", " & SumAvg & "(" & lstvElements.Items(i).SubItems(1).Text & ") as " & lstvElements.Items(i).SubItems(1).Text
+                            End If
+                        Next
+
+                        sql = "select stationID, Station_Name, Lat, Lon, Elev, Months, " & elmcolmn & " from Lmeans " &
+                          "Group by stationID,Months;"
+
+                        DataProducts(sql, Me.lblProductType.Text)
+                    End If
+
+                    'sql = "select stationID, Station_Name, Lat, Lon, Elev, Months, AVG(TMPMAX) as TMPMAX,AVG(TMPMIN) as TMPMIN,AVG(PRECIP) as PRECIP from Lmeans " &
+                    '      "Group by stationID,Months;"
+
+                    ''MsgBox(sql)
+                    ''MeansProducts(sql, fl)
+                    ''Next
+                    ''FileClose(11)
+                    'CommonModules.ViewFile(fl)
+                    ''MonthlyNormals()
+                    'DataProducts(sql, Me.lblProductType.Text)
                 Case "Extremes"
 
                     If btnLowHigh.Checked = True Then
-                        sql = "DROP TABLE IF EXISTS obs_selected;
+                                sql = "DROP TABLE IF EXISTS obs_selected;
                                CREATE TABLE obs_selected
                                SELECT RecordedFrom as StationId, stationName, describedBy as elementId, abbreviation, obsDatetime, latitude, longitude, elevation, obsValue FROM observationfinal INNER JOIN obselement ON elementId = describedBy INNER JOIN station ON stationId = recordedFrom
                                Where ((RecordedFrom=" & stnlist & ") AND (describedBy=" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "'));"
-                        XtremesWithoutDates(sql)
-                    ElseIf btnMaxDate.Checked = True Then
-                        'XtremesWithDates("MaxValue", "max", sdate, edate)
-                        XtremesWithDates("MaxValue", "max")
-                    ElseIf btnMinDate.Checked = True Then
-                        'XtremesWithDates("MinValue", "min", sdate, edate)
-                        XtremesWithDates("MinValue", "min")
-                    End If
-
+                                XtremesWithoutDates(sql)
+                            ElseIf btnMaxDate.Checked = True Then
+                                'XtremesWithDates("MaxValue", "max", sdate, edate)
+                                XtremesWithDates("MaxValue", "max")
+                            ElseIf btnMinDate.Checked = True Then
+                                'XtremesWithDates("MinValue", "min", sdate, edate)
+                                XtremesWithDates("MinValue", "min")
+                            End If
                 Case "GeoCLIM Monthly"
                     GeoCLIMMonthlyProducts(stnlist, sdate, edate)
                 Case "Inventory"
@@ -540,8 +571,26 @@ Public Class formProductsSelectCriteria
                     sql = "DROP TABLE IF EXISTS inventory_output; CREATE TABLE inventory_output Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As YYYY, Month(obsDatetime) As MM " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
                                   "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,YYYY,MM;"
 
-                    Inventory_Table(sql)
+                            Inventory_Table(sql)
 
+                Case "Yearly Elements Observed"
+
+                    elmcolmn = ""
+
+                    If lstvElements.Items.Count > 0 Then
+                        elmcolmn = " " & "Count(IF(Code = '" & lstvElements.Items(0).Text & "', Code, NULL)) AS '" & lstvElements.Items(0).SubItems(1).Text & "'"
+                        For i = 1 To lstvElements.Items.Count - 1
+                            elmcolmn = elmcolmn & ", " & "Count(IF(Code = '" & lstvElements.Items(i).Text & "', Code, NULL)) AS '" & lstvElements.Items(i).SubItems(1).Text & "'"
+                        Next
+                    End If
+             '      "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,Year,Month;"
+
+                    sql = "select STN,YY, " & elmcolmn & " from (select recordedFrom as STN, year(obsDatetime) as YY, Month(ObsDatetime) as MM, describedBy as Code, obsvalue from observationfinal
+                           WHERE (recordedFrom = '" & lstvStations.Items(0).Text & "') AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and (obsvalue is not NULL) order by STN,YY,MM,Code) as RR
+                           group by STN,YY;"
+
+
+                    'InventoryProducts(sql, "Inventory")
                 Case "Yearly Elements Observed"
 
                     elmcolmn = ""
@@ -581,78 +630,85 @@ Public Class formProductsSelectCriteria
                     'myInterface.productCDTExample()
                     frmCPTSeason.ShowDialog()
 
-                    If Len(CPTstart) > 0 And Len(CPTend) > 0 Then CPTProducts(CPTstart, CPTend)
-                Case "Instat"
-                    'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
+
                     'DataProducts(sql, lblProductType.Text)
-                    InstatProduct(sdate, edate, lblProductType.Text)
-                Case "Missing Data"
-                    'RefreshStatsCache()
-                    RefreshMissingCache()
-                    GatherStats()
-                    'findmissing()
-                    frmPlotter.Show()
+                    Inventory_Chart(sql, lblProductType.Text)
+                Case "CPT"
+                            'Dim myInterface As New clsRInterface()
+                            'myInterface.productCDTExample()
+                            frmCPTSeason.ShowDialog()
 
-                Case "Rclimdex"
-                    RclimdexProducts(sdate, edate, lblProductType.Text)
-                Case "TimeSeries"
-                    frmCharts.stns = stnlist
-                    frmCharts.elmlist = elmlist
-                    frmCharts.elmcolmn = elmcolmn
-                    frmCharts.sdt = sdate
-                    frmCharts.edt = edate
-                    frmCharts.SumAvg = SumAvg
-                    frmCharts.SummaryType = SummaryType
-                    frmCharts.graphType = "TimeSeries"
-                    frmCharts.Show()
+                            If Len(CPTstart) > 0 And Len(CPTend) > 0 Then CPTProducts(CPTstart, CPTend)
+                        Case "Instat"
+                            'sql = "SELECT recordedFrom as StationId,dayofyear(obsdatetime) as YearDay,SUM(IF(year(obsDatetime) ='2000', value, NULL)) AS '2000', SUM(IF(year(obsDatetime) ='2009', value, NULL)) AS '2009' FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, YearDay;"
+                            'DataProducts(sql, lblProductType.Text)
+                            InstatProduct(sdate, edate, lblProductType.Text)
+                        Case "Missing Data"
+                            'RefreshStatsCache()
+                            RefreshMissingCache()
+                            GatherStats()
+                            'findmissing()
+                            frmPlotter.Show()
+
+                        Case "Rclimdex"
+                            RclimdexProducts(sdate, edate, lblProductType.Text)
+                        Case "TimeSeries"
+                            frmCharts.stns = stnlist
+                            frmCharts.elmlist = elmlist
+                            frmCharts.elmcolmn = elmcolmn
+                            frmCharts.sdt = sdate
+                            frmCharts.edt = edate
+                            frmCharts.SumAvg = SumAvg
+                            frmCharts.SummaryType = SummaryType
+                            frmCharts.graphType = "TimeSeries"
+                            frmCharts.Show()
                     'MSCharts(stnlist, elmlist, elmcolmn, sdate, edate, SumAvg, SummaryType, "TimeSeries")
-                Case "Histograms"
-                    frmCharts.stns = stnlist
-                    frmCharts.elmlist = elmlist
-                    frmCharts.elmcolmn = elmcolmn
-                    frmCharts.sdt = sdate
-                    frmCharts.edt = edate
-                    frmCharts.SumAvg = SumAvg
-                    frmCharts.SummaryType = SummaryType
-                    frmCharts.graphType = "Histograms"
-                    frmCharts.Show()
+                        Case "Histograms"
+                            frmCharts.stns = stnlist
+                            frmCharts.elmlist = elmlist
+                            frmCharts.elmcolmn = elmcolmn
+                            frmCharts.sdt = sdate
+                            frmCharts.edt = edate
+                            frmCharts.SumAvg = SumAvg
+                            frmCharts.SummaryType = SummaryType
+                            frmCharts.graphType = "Histograms"
+                            frmCharts.Show()
                     'MSCharts(stnlist, elmlist, elmcolmn, sdate, edate, SumAvg, SummaryType, "Histograms")
-                Case "CDT Dekadal"
-                    sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-                    edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+                        Case "CDT Dekadal"
+                            sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+                            edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
-                    CDT_Dekadal(sdate, edate)
-                Case "CDT Daily"
-                    sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-                    edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+                            CDT_Dekadal(sdate, edate)
+                        Case "CDT Daily"
+                            sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & "01" & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
+                            edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & "31" & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
 
-                    CDT_Daily(sdate, edate)
-                Case "Dekadal Counts"
-                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Dekadal Rainy Days", "0.03")
-                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as DEKAD, count(round(day(obsDatetime)/10.5 + 0.5,0)) AS Days
+                            CDT_Daily(sdate, edate)
+                        Case "Dekadal Counts"
+                            threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Dekadal Rainy Days", "0.03")
+                            sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as DEKAD, count(round(day(obsDatetime)/10.5 + 0.5,0)) AS Days
                           from station INNER JOIN observationfinal ON stationId = recordedFrom
                           where describedBy= '5'  and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                           Group by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0)
                           Order by recordedFrom, year(obsDatetime), Month(obsDatetime), round(day(obsDatetime)/10.5 + 0.5,0);"
 
-                    DataProducts(sql, lblProductType.Text)
-                Case "Monthly Counts"
-                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Monthly Rainy Days", "0.03")
-                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, Count(month(obsDatetime)) as Days
+                            DataProducts(sql, lblProductType.Text)
+                        Case "Monthly Counts"
+                            threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Monthly Rainy Days", "0.03")
+                            sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, month(obsDatetime) as Month, Count(month(obsDatetime)) as Days
                            from station INNER JOIN observationfinal ON stationId = recordedFrom
                            where describedBy= '5' and obsValue >= " & threshValue & " and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            Group by recordedFrom, year(obsDatetime), month(obsDatetime)
                            Order by recordedFrom, year(obsDatetime), month(obsDatetime);"
 
-                    DataProducts(sql, lblProductType.Text)
-                Case "Annual Counts"
-                    threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Annual Rainy Days", "0.03")
-                    sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Count(year(obsDatetime)) as Days
+                            DataProducts(sql, lblProductType.Text)
+                        Case "Annual Counts"
+                            threshValue = InputBox("Enter Threshold value in mm", "Threshold amount for Annual Rainy Days", "0.03")
+                            sql = "select recordedFrom as StationID, stationName as Station_Name, latitude as Lat, longitude as Lon, elevation as Elev, year(obsDatetime) as Year, Count(year(obsDatetime)) as Days
                            from station INNER JOIN observationfinal ON stationId = recordedFrom
                            where describedBy= '5' and obsValue >= " & threshValue & "  and (recordedFrom = " & stnlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
                            Group by recordedFrom, year(obsDatetime)
                            Order by recordedFrom, year(obsDatetime);"
-
 
                     DataProducts(sql, lblProductType.Text)
                 Case "Daily Extremes"
@@ -719,7 +775,7 @@ Public Class formProductsSelectCriteria
 
             End Select
 
-            Me.Cursor = Cursors.Default
+                    Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
@@ -2706,7 +2762,9 @@ Err:
             MsgBox(ex.Message & " Attribute Get_LatLon")
         End Try
     End Sub
+
     Sub TmpTable(stns As String, elms As String, sdt As String, edt As String, summry As String, Optional Levels As String = "")
+
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         sql = "drop table if exists tmpproducts; " &
               "create table tmpproducts Select  recordedFrom, describedBy, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & summry & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF " &
@@ -2714,6 +2772,7 @@ Err:
               "Where (RecordedFrom = " & stns & ") AND (describedBy =" & elms & ") and (obsDatetime between '" & sdt & "' and '" & edt & "') " &
               "group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime) " &
               "Order By recordedFrom, describedBy, YY, MM;"
+
 
         If Levels <> "" Then
             sql = "drop table if exists tmpproducts; " &
@@ -2723,7 +2782,6 @@ Err:
                  "group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel " &
                  "Order By recordedFrom, describedBy, YY, MM;"
         End If
-
 
         'MsgBox(sql)
         conn.ConnectionString = frmLogin.txtusrpwd.Text
@@ -2735,7 +2793,9 @@ Err:
         cmd.ExecuteNonQuery()
         conn.Close()
     End Sub
+
     Sub TypTable(summry As String, Optional levels As String = "")
+
         Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         sql = "drop table if exists typroducts; " &
               "create table typroducts select recordedFrom, describedBy, YY, " & summry & "(Value) As value, SUM(DF) DDF from tmpproducts " &
@@ -2746,6 +2806,7 @@ Err:
               "create table typroducts select recordedFrom, describedBy, obsLevel,YY, " & summry & "(Value) As value, SUM(DF) DDF from tmpproducts " &
               "group by recordedFrom, describedBy, YY, obsLevel order by recordedFrom, describedBy, YY;"
         End If
+
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         cmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -2918,4 +2979,86 @@ Err:
 
     End Sub
 
+    Sub Inventory_Chart(sqc As String, prdType As String)
+        Dim Xaxis, XTitle, ChTitle As String
+        Dim series1 As Integer
+
+        Select Case prdType
+            Case "Yearly Elements Observed"
+                series1 = 2
+                ChTitle = "Yearly Observed Elements for " & lstvStations.Items(0).SubItems(1).Text
+                XTitle = "Years"
+            Case "Monthly Elements Observed"
+                series1 = 3
+                ChTitle = "Monthly Observed Elements for " & lstvStations.Items(0).SubItems(1).Text
+                XTitle = "Months"
+        End Select
+
+        Try
+
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sqc, conn)
+            ds.Clear()
+            da.Fill(ds, "chart")
+
+
+            ' Add data to series
+
+            frmInventoryChart.Show()
+            frmInventoryChart.chartInventory.Series.Clear()
+
+            With frmInventoryChart.chartInventory
+
+                'Define Series
+
+
+                For i = series1 To ds.Tables("chart").Columns.Count - 1
+                    '.Series.Add(ds.Tables("inventory").Columns.Item(i).ToString).ChartType = DataVisualization.Charting.SeriesChartType.Line
+                    .Series.Add(ds.Tables("chart").Columns.Item(i).ToString).ChartType = DataVisualization.Charting.SeriesChartType.Line
+                Next
+
+                For i = 0 To ds.Tables("chart").Rows.Count - 1
+                    For j = series1 To ds.Tables("chart").Columns.Count - 1
+                        '.Series(ds.Tables("chart").Columns.Item(j).ToString).Points.AddXY(ds.Tables("chart").Rows(i).Item(1), ds.Tables("chart").Rows(i).Item(j))
+                        If prdType = "Yearly Elements Observed" Then
+                            Xaxis = ds.Tables("chart").Rows(i).Item(1)
+                        Else
+                            Xaxis = ds.Tables("chart").Rows(i).Item(1) & ds.Tables("chart").Rows(i).Item(2).ToString.PadLeft(2, "0"c).ToString
+                            'min.PadLeft(2, "0"c)
+                        End If
+
+                        .Series(ds.Tables("chart").Columns.Item(j).ToString).Points.AddXY(Xaxis, ds.Tables("chart").Rows(i).Item(j))
+                    Next
+                Next
+
+                .ChartAreas("ChartArea1").AxisX.Interval = 1
+                '.ChartAreas("ChartArea1").AxisY.Interval = 30
+                '.ChartAreas("ChartArea1").AxisX.MinorGrid.Enabled = True
+                .ChartAreas("ChartArea1").AxisY.MajorGrid.Enabled = True
+
+                ' Add titles
+                .Titles.Clear()
+                .Titles.Add(ChTitle).Alignment = ContentAlignment.TopCenter
+                .ChartAreas("ChartArea1").AxisX.Title = XTitle
+                .ChartAreas("ChartArea1").AxisY.Title = "Total Observations"
+
+
+                With frmInventoryChart
+                    '.chartInventory.Show()
+                    .lstSeries.Items.Clear()
+                    For i = 0 To .chartInventory.Series.Count - 1
+                        .lstSeries.Items.Add(.chartInventory.Series(i).Name)
+                    Next
+                End With
+
+                '.Show()
+            End With
+
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+
+    End Sub
 End Class

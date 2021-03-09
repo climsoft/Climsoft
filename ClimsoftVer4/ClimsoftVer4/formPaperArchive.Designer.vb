@@ -462,6 +462,7 @@ Partial Class formPaperArchive
         '
         'TabViewArchive
         '
+        Me.TabViewArchive.Controls.Add(Me.TextBox1)
         Me.TabViewArchive.Controls.Add(Me.grpImage)
         Me.TabViewArchive.Location = New System.Drawing.Point(4, 22)
         Me.TabViewArchive.Name = "TabViewArchive"
@@ -852,6 +853,13 @@ Partial Class formPaperArchive
         Me.lblImageRotate.Text = "Rotate Image"
         Me.lblImageRotate.Visible = False
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(21, 404)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(496, 20)
+        Me.TextBox1.TabIndex = 1
+        '
         'formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -882,6 +890,7 @@ Partial Class formPaperArchive
         Me.pnlUnstructuredNames.ResumeLayout(False)
         Me.pnlUnstructuredNames.PerformLayout()
         Me.TabViewArchive.ResumeLayout(False)
+        Me.TabViewArchive.PerformLayout()
         Me.grpImage.ResumeLayout(False)
         Me.grpImage.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)

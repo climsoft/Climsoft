@@ -251,16 +251,54 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim img As String
+        ' Victor's code is modified to allow user to select own  suitable filename and graphic foemat
+        Dim imgFile, imgFormat As String
+        Try
+            With frmCharts
+                .dlgChart.FilterIndex = 2
+                .dlgChart.Filter = "PNG|*.png|JPEG|*.jpeg|JIF|*.gif|TIF|*.tif|BMP|*.bmp|WMF|*.wmf"
+                .dlgChart.AddExtension = True
+                .dlgChart.Title = "Save Chart"
+                .dlgChart.ShowDialog()
+                imgFile = .dlgChart.FileName
+            End With
 
-        'img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
-        img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
-        'img = "C:\Users\UNDP\Desktop\Gaps.Png"
 
-        With invChart
-            .Dock = DockStyle.None
-            .SaveImage(img, System.Drawing.Imaging.ImageFormat.Png)
-        End With
+            imgFormat = IO.Path.GetExtension(imgFile).ToLower
+
+            ' Set the image file format according to the selection made
+            With invChart
+                Select Case imgFormat
+                    Case ".png"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Png)
+                    Case ".jpeg"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    Case ".gif"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Gif)
+                    Case ".tif"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Tiff)
+                    Case ".bmp"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Bmp)
+                    Case ".wmf"
+                        .SaveImage(imgFile, System.Drawing.Imaging.ImageFormat.Wmf)
+                End Select
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        ' Following code has been commented because the modified code above is now used
+
+        'Dim img As String
+
+        ''img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        'img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
+        ''img = "C:\Users\UNDP\Desktop\Gaps.Png"
+
+        'With invChart
+        '    .Dock = DockStyle.None
+        '    .SaveImage(img, System.Drawing.Imaging.ImageFormat.Png)
+        'End With
     End Sub
 
     Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)

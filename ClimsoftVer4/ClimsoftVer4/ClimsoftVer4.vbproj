@@ -153,7 +153,9 @@
     <Compile Include="frmFormUpload.vb">
       <SubType>Form</SubType>
     </Compile>
+
     <Compile Include="frmInventoryChart.designer.vb">
+
       <DependentUpon>frmInventoryChart.vb</DependentUpon>
     </Compile>
     <Compile Include="frmInventoryChart.vb">
