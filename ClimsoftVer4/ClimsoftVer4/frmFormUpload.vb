@@ -141,6 +141,7 @@ Public Class frmFormUpload
 
             If Not Data_Fields(dataForm, st, ed, code_loc) Then Exit Sub
             'conns.Close()
+            'MsgBox(st & " " & ed & " " & code_loc)
             flds = (ed - st) + 1 ' Total fields for the observation values
 
             'Loop through all records in dataset
@@ -216,6 +217,22 @@ Public Class frmFormUpload
                             End If
 
                         Case "form_agro1"
+                            elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
+                            yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
+                            mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
+                            dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
+                            hh = rgKey.RegkeyValue("key01")
+
+                        Case "form_upperair1"
+                            elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
+                            'MsgBox(m & " " & elemCode)
+                            yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
+                            mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
+                            dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
+                            hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
+                            obsLevel = dss.Tables(frm_tbl).Rows(n).Item("levelName")
+
+                        Case "form_daily1"
                             elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")

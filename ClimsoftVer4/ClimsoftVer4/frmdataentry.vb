@@ -71,31 +71,62 @@ Public Class frmKeyEntry
     End Sub
 
     Private Sub OpenSelectedForm()
-        If lstViewForms.SelectedItems.Count > 0 Then
-            Select Case lstViewForms.SelectedItems.Item(0).Text
-                Case "formSynoptic2RA1"
-                    frmNewSynopticRA1.Show()
-                Case "form_daily1"
-                    formDaily1.Show()
-                Case "form_daily2"
-                    frmNewFormDaily2.Show()
-                Case "form_hourly"
-                    frmNewHourly.Show()
-                Case "form_monthly"
-                    frmNewMonthly.Show()
-                Case "form_upperair1"
-                    form_upperair1.Show()
-                Case "form_hourlywind"
-                    frmNewHourlyWind.Show()
-                Case "form_agro1"
-                    form_agro1.Show()
-                Case "form_synoptic2_caribbean"
-                    formSynopticCaribbean.Show()
-            End Select
-        End If
+        Dim idx As Integer
+        Dim frm As String
+
+        Try
+            If lstViewForms.SelectedItems.Count > 0 Then
+                Select Case lstViewForms.SelectedItems.Item(0).Text
+                    Case "formSynoptic2RA1"
+                        frmNewSynopticRA1.Show()
+                    Case "form_daily1"
+                        formDaily1.Show()
+                    Case "form_daily2"
+                        frmNewFormDaily2.Show()
+                    Case "form_hourly"
+                        frmNewHourly.Show()
+                    Case "form_monthly"
+                        frmNewMonthly.Show()
+                    Case "form_upperair1"
+                        form_upperair1.Show()
+                    Case "form_hourlywind"
+                        frmNewHourlyWind.Show()
+                    Case "form_agro1"
+                        form_agro1.Show()
+                    Case "form_synoptic2_caribbean"
+                        formSynopticCaribbean.Show()
+                    Case "form_upperair1"
+                        form_upperair1.Show()
+                    Case Else
+                        frm = lstViewForms.SelectedItems.Item(0).Text
+                        MsgBox("Form " & frm & " not yet implemented")
+                        idx = lstViewForms.SelectedItems.Item(0).Index
+                        lstViewForms.Items(idx).Remove()
+                        formUnselect(frm)
+                End Select
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
-    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
+    Sub formUnselect(frm As String)
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim sql As String
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
+        Try
+            conn.ConnectionString = frmLogin.txtusrpwd.Text
+            conn.Open()
+
+            sql = "update data_forms set selected = 0  where form_name = '" & frm & "';"
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

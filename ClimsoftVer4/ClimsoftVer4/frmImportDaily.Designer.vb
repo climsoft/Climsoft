@@ -71,10 +71,13 @@ Partial Class frmImportDaily
         Me.lblStnEror = New System.Windows.Forms.Label()
         Me.txtMissingFlag = New System.Windows.Forms.TextBox()
         Me.lblMissingFlag = New System.Windows.Forms.Label()
+        Me.grpUpperAir = New System.Windows.Forms.GroupBox()
+        Me.chkUpperAir = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.pnlErrors.SuspendLayout()
+        Me.grpUpperAir.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -167,7 +170,7 @@ Partial Class frmImportDaily
         'lstColumn
         '
         Me.lstColumn.FormattingEnabled = True
-        Me.lstColumn.Location = New System.Drawing.Point(51, 53)
+        Me.lstColumn.Location = New System.Drawing.Point(32, 53)
         Me.lstColumn.Name = "lstColumn"
         Me.lstColumn.Size = New System.Drawing.Size(86, 30)
         Me.lstColumn.TabIndex = 9
@@ -175,15 +178,15 @@ Partial Class frmImportDaily
         'cmbFields
         '
         Me.cmbFields.FormattingEnabled = True
-        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "value", "NA", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
-        Me.cmbFields.Location = New System.Drawing.Point(143, 55)
+        Me.cmbFields.Items.AddRange(New Object() {"station_id", "element_code", "date_time", "time", "yyyy", "mm", "dd", "hh", "level", "value", "NA", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"})
+        Me.cmbFields.Location = New System.Drawing.Point(124, 55)
         Me.cmbFields.Name = "cmbFields"
         Me.cmbFields.Size = New System.Drawing.Size(147, 21)
         Me.cmbFields.TabIndex = 10
         '
         'cmdRename
         '
-        Me.cmdRename.Location = New System.Drawing.Point(183, 74)
+        Me.cmdRename.Location = New System.Drawing.Point(164, 74)
         Me.cmdRename.Name = "cmdRename"
         Me.cmdRename.Size = New System.Drawing.Size(56, 20)
         Me.cmdRename.TabIndex = 11
@@ -194,7 +197,7 @@ Partial Class frmImportDaily
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(48, 37)
+        Me.lblColumns.Location = New System.Drawing.Point(29, 37)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(92, 13)
         Me.lblColumns.TabIndex = 12
@@ -203,7 +206,7 @@ Partial Class frmImportDaily
         'lblFieldName
         '
         Me.lblFieldName.AutoSize = True
-        Me.lblFieldName.Location = New System.Drawing.Point(163, 37)
+        Me.lblFieldName.Location = New System.Drawing.Point(144, 37)
         Me.lblFieldName.Name = "lblFieldName"
         Me.lblFieldName.Size = New System.Drawing.Size(93, 13)
         Me.lblFieldName.TabIndex = 13
@@ -277,7 +280,7 @@ Partial Class frmImportDaily
         '
         'cmdSaveSpecs
         '
-        Me.cmdSaveSpecs.Location = New System.Drawing.Point(41, 103)
+        Me.cmdSaveSpecs.Location = New System.Drawing.Point(22, 103)
         Me.cmdSaveSpecs.Name = "cmdSaveSpecs"
         Me.cmdSaveSpecs.Size = New System.Drawing.Size(111, 25)
         Me.cmdSaveSpecs.TabIndex = 24
@@ -286,7 +289,7 @@ Partial Class frmImportDaily
         '
         'cmdLoadSpecs
         '
-        Me.cmdLoadSpecs.Location = New System.Drawing.Point(168, 103)
+        Me.cmdLoadSpecs.Location = New System.Drawing.Point(149, 103)
         Me.cmdLoadSpecs.Name = "cmdLoadSpecs"
         Me.cmdLoadSpecs.Size = New System.Drawing.Size(111, 25)
         Me.cmdLoadSpecs.TabIndex = 25
@@ -305,17 +308,17 @@ Partial Class frmImportDaily
         Me.pnlHeaders.Controls.Add(Me.lblColumns)
         Me.pnlHeaders.Controls.Add(Me.lblFieldName)
         Me.pnlHeaders.Enabled = False
-        Me.pnlHeaders.Location = New System.Drawing.Point(622, 41)
+        Me.pnlHeaders.Location = New System.Drawing.Point(649, 36)
         Me.pnlHeaders.Name = "pnlHeaders"
         Me.pnlHeaders.Padding = New System.Windows.Forms.Padding(1, 0, 1, 1)
-        Me.pnlHeaders.Size = New System.Drawing.Size(333, 134)
+        Me.pnlHeaders.Size = New System.Drawing.Size(306, 134)
         Me.pnlHeaders.TabIndex = 26
         '
         'lblColumnHeaders
         '
         Me.lblColumnHeaders.AutoSize = True
         Me.lblColumnHeaders.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblColumnHeaders.Location = New System.Drawing.Point(89, 1)
+        Me.lblColumnHeaders.Location = New System.Drawing.Point(70, 1)
         Me.lblColumnHeaders.Name = "lblColumnHeaders"
         Me.lblColumnHeaders.Size = New System.Drawing.Size(149, 13)
         Me.lblColumnHeaders.TabIndex = 26
@@ -421,10 +424,10 @@ Partial Class frmImportDaily
         Me.grpSummary.BackColor = System.Drawing.SystemColors.ControlLight
         Me.grpSummary.Controls.Add(Me.optMonthly)
         Me.grpSummary.Controls.Add(Me.optDekadal)
-        Me.grpSummary.Location = New System.Drawing.Point(342, 36)
+        Me.grpSummary.Location = New System.Drawing.Point(331, 36)
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.Padding = New System.Windows.Forms.Padding(1)
-        Me.grpSummary.Size = New System.Drawing.Size(195, 41)
+        Me.grpSummary.Size = New System.Drawing.Size(183, 41)
         Me.grpSummary.TabIndex = 42
         Me.grpSummary.TabStop = False
         Me.grpSummary.Text = "Summarized Data Import"
@@ -433,7 +436,7 @@ Partial Class frmImportDaily
         '
         Me.optMonthly.AutoSize = True
         Me.optMonthly.Enabled = False
-        Me.optMonthly.Location = New System.Drawing.Point(122, 18)
+        Me.optMonthly.Location = New System.Drawing.Point(114, 18)
         Me.optMonthly.Name = "optMonthly"
         Me.optMonthly.Size = New System.Drawing.Size(62, 17)
         Me.optMonthly.TabIndex = 2
@@ -443,7 +446,7 @@ Partial Class frmImportDaily
         'optDekadal
         '
         Me.optDekadal.AutoSize = True
-        Me.optDekadal.Location = New System.Drawing.Point(17, 18)
+        Me.optDekadal.Location = New System.Drawing.Point(9, 18)
         Me.optDekadal.Name = "optDekadal"
         Me.optDekadal.Size = New System.Drawing.Size(65, 17)
         Me.optDekadal.TabIndex = 1
@@ -526,11 +529,32 @@ Partial Class frmImportDaily
         Me.lblMissingFlag.TabIndex = 46
         Me.lblMissingFlag.Text = "Missing Data Flag"
         '
+        'grpUpperAir
+        '
+        Me.grpUpperAir.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.grpUpperAir.Controls.Add(Me.chkUpperAir)
+        Me.grpUpperAir.Location = New System.Drawing.Point(526, 36)
+        Me.grpUpperAir.Name = "grpUpperAir"
+        Me.grpUpperAir.Size = New System.Drawing.Size(117, 42)
+        Me.grpUpperAir.TabIndex = 47
+        Me.grpUpperAir.TabStop = False
+        '
+        'chkUpperAir
+        '
+        Me.chkUpperAir.AutoSize = True
+        Me.chkUpperAir.Location = New System.Drawing.Point(9, 14)
+        Me.chkUpperAir.Name = "chkUpperAir"
+        Me.chkUpperAir.Size = New System.Drawing.Size(96, 17)
+        Me.chkUpperAir.TabIndex = 3
+        Me.chkUpperAir.Text = "Upper Air Data"
+        Me.chkUpperAir.UseVisualStyleBackColor = True
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 663)
+        Me.Controls.Add(Me.grpUpperAir)
         Me.Controls.Add(Me.lblMissingFlag)
         Me.Controls.Add(Me.txtMissingFlag)
         Me.Controls.Add(Me.pnlErrors)
@@ -571,6 +595,8 @@ Partial Class frmImportDaily
         Me.grpSummary.PerformLayout()
         Me.pnlErrors.ResumeLayout(False)
         Me.pnlErrors.PerformLayout()
+        Me.grpUpperAir.ResumeLayout(False)
+        Me.grpUpperAir.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -624,4 +650,6 @@ Partial Class frmImportDaily
     Friend WithEvents lblStnEror As Label
     Friend WithEvents txtMissingFlag As TextBox
     Friend WithEvents lblMissingFlag As Label
+    Friend WithEvents grpUpperAir As GroupBox
+    Friend WithEvents chkUpperAir As CheckBox
 End Class

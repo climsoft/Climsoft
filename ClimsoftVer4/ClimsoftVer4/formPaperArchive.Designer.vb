@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class formPaperArchive
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class formPaperArchive
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formPaperArchive))
         Me.tabImageArchives = New System.Windows.Forms.TabControl()
         Me.tabStructured = New System.Windows.Forms.TabPage()
@@ -98,8 +97,6 @@ Partial Class formPaperArchive
         Me.PicForm = New System.Windows.Forms.PictureBox()
         Me.lblZoomout = New System.Windows.Forms.Label()
         Me.lblImageRotate = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.BindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tabImageArchives.SuspendLayout()
         Me.tabStructured.SuspendLayout()
         Me.grpInformation.SuspendLayout()
@@ -113,8 +110,6 @@ Partial Class formPaperArchive
         Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -807,10 +802,10 @@ Partial Class formPaperArchive
         '
         Me.txtDefaultFolder.BackColor = System.Drawing.SystemColors.Control
         Me.txtDefaultFolder.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDefaultFolder.Location = New System.Drawing.Point(232, 536)
+        Me.txtDefaultFolder.Location = New System.Drawing.Point(15, 536)
         Me.txtDefaultFolder.Multiline = True
         Me.txtDefaultFolder.Name = "txtDefaultFolder"
-        Me.txtDefaultFolder.Size = New System.Drawing.Size(293, 23)
+        Me.txtDefaultFolder.Size = New System.Drawing.Size(526, 34)
         Me.txtDefaultFolder.TabIndex = 28
         '
         'cmdClear
@@ -861,7 +856,7 @@ Partial Class formPaperArchive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1108, 571)
+        Me.ClientSize = New System.Drawing.Size(1108, 582)
         Me.Controls.Add(Me.lblImageRotate)
         Me.Controls.Add(Me.lblZoomout)
         Me.Controls.Add(Me.PicForm)
@@ -896,8 +891,6 @@ Partial Class formPaperArchive
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
         CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -976,6 +969,4 @@ Partial Class formPaperArchive
     Friend WithEvents lblZoomout As System.Windows.Forms.Label
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
     Friend WithEvents lblImageRotate As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
-    Friend WithEvents BindingSource2 As BindingSource
 End Class
