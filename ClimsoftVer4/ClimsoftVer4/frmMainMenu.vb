@@ -318,4 +318,8 @@ Public Class frmMainMenu
     Private Sub EmptyKeyEntryTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmptyKeyEntryTablesToolStripMenuItem.Click
         frmEntryForms.Show()
     End Sub
+
+    Private Sub CreateModifyKeyEntryFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateModifyKeyEntryFormToolStripMenuItem.Click
+        frmCreateEntryForm.Show()
+    End Sub
 End Class

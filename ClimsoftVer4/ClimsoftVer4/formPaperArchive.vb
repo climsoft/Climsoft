@@ -5,7 +5,7 @@ Public Class formPaperArchive
     Dim dbConnectionString As String
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim sql As String
+    Dim sql, ImagesPath As String
     Dim rec As Integer
     Dim Kount As Integer
     Dim FileNm As String
@@ -279,35 +279,33 @@ Public Class formPaperArchive
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         da.Fill(ds, "paperarchive")
 
-        ' Get the image archiving folder
+        ' Get the image archiving folder details
         Dim dar As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim dsr As New DataSet
         Dim regmax As Integer
-        Dim appath As String
         Dim ImagesPath As String
 
-        sql = "SELECT * FROM regkeys"
+        sql = "SELECT * FROM regkeys where KeyName='key12';"
+
         dar = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
         dar.Fill(dsr, "regkeys")
         regmax = dsr.Tables("regkeys").Rows.Count
 
         ' Check for the settings for the image files archive folder and display the details to the user
-        For i = 0 To regmax - 1
-            If dsr.Tables("regkeys").Rows(i).Item("keyName") = "key12" Then
-                If IsDBNull(dsr.Tables("regkeys").Rows(i).Item("keyValue")) Or dsr.Tables("regkeys").Rows(i).Item("keyValue") = "" Then
-                    appath = IO.Directory.GetParent(Application.StartupPath).FullName
-                    ImagesPath = IO.Directory.GetParent(appath).FullName
-                    lblArhiveFolder.Text = ImagesPath & "\images"
-                    lblArhiveFolder.ForeColor = Color.Red
-                    lblArhiveFolder.Font.Bold.Equals(True)
-                    txtDefaultFolder.Text = "Default folder for image archiving is being used. " &
-                                            "You may go to Tools -> General Settings and choose a convinient folder for good management of image files archiving"
-                Else
-                    lblArhiveFolder.Text = dsr.Tables("regkeys").Rows(i).Item("keyValue")
-                End If
-                Exit For
+
+        If regmax > 0 Then
+            If IsDBNull(dsr.Tables("regkeys").Rows(0).Item("keyValue")) Or dsr.Tables("regkeys").Rows(0).Item("keyValue") = "" Then
+                ImagesPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
+                lblArhiveFolder.Text = ImagesPath & "\images"
+                lblArhiveFolder.ForeColor = Color.Red
+                lblArhiveFolder.Font.Bold.Equals(True)
+                txtDefaultFolder.Text = "Default folder for image archiving is being used. You may go to Tools -> General Settings and choose a convinient folder for good management of image files archiving."
+            Else
+                lblArhiveFolder.Text = dsr.Tables("regkeys").Rows(0).Item("keyValue")
             End If
-        Next
+        Else
+            MsgBox("Paper archiving registry key missing. Contact Administrator")
+        End If
 
     End Sub
 
@@ -549,20 +547,15 @@ Public Class formPaperArchive
             frm = ds.Tables("paperarchive").Rows(num).Item("classifiedInto")
             img = ds.Tables("paperarchive").Rows(num).Item("image")
 
-            img = IO.Path.GetFileName(img)
-            'MsgBox(img)
             If InStr(img, imgfl) > 0 Then
-                img = lblArhiveFolder.Text & "\" & img
-                'MsgBox(img)
+                img = lblArhiveFolder.Text & "\" & IO.Path.GetFileName(img)
+
                 If Strings.UCase(Strings.Right(img, 3)) = "PDF" Then
                     ShowImage(img)
                 Else
                     PicForm.ImageLocation = img
                     PicForm.Refresh()
                 End If
-                ''ShowImage(img)
-                'PicForm.ImageLocation = img
-                'PicForm.Refresh()
                 Exit For
             End If
         Next
@@ -869,18 +862,23 @@ Err:
     Private Sub lstArchival_Click(sender As Object, e As EventArgs) Handles lstArchival.Click
         'MsgBox(lstArchival.FocusedItem.SubItems(3).Text)
         Dim SelectedImage As String
-        SelectedImage = lstArchival.FocusedItem.SubItems(3).Text
 
-        SelectedImage = IO.Path.GetFileName(SelectedImage)
-        SelectedImage = lblArhiveFolder.Text & "\" & SelectedImage
+        Try
+            SelectedImage = lstArchival.FocusedItem.SubItems(3).Text
 
-        If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
-            ShowImage(SelectedImage)
-        Else
-            PicForm.ImageLocation = SelectedImage
-            PicForm.Refresh()
-        End If
-        'PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
+            ' Get the current full path for the image
+            SelectedImage = lblArhiveFolder.Text & "\" & IO.Path.GetFileName(SelectedImage)
+            If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
+                ShowImage(SelectedImage)
+            Else
+                PicForm.ImageLocation = SelectedImage
+                PicForm.Refresh()
+            End If
+            'PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
 
@@ -912,9 +910,8 @@ Err:
                 dt = txtYY.Text & "-" & txtMM.Text & "-" & txtDD.Text & " " & txtHH.Text & ":00:00"
                 comm.Connection = dbconn  ' Assign the already defined and asigned connection string to the Mysql command variable
 
-                ' Create SQL statement to update the details in the database
-                sql0 = "update paperarchive set belongsTo = '" & txtStation.Text & "', formDatetime='" & dt & "', classifiedInto='" & txtForm.Text & "', image ='" & imgFile2 & "' " &
-                        "where instr(image,'" & imgFile0 & "') > 0;"
+                sql0 = "update paperarchive set belongsTo = '" & txtStation.Text & "', formDatetime='" & dt & "', classifiedInto='" & txtForm.Text & "' " &
+                       "where image ='" & img & "';"
 
                 comm.CommandText = sql0  ' Assign the SQL statement to the Mysql command variable
                 comm.ExecuteNonQuery()   ' Execute the query
@@ -949,7 +946,5 @@ Err:
         PicForm.Refresh()
     End Sub
 
-    Private Sub formPaperArchive_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        dbconn.Close()
-    End Sub
+
 End Class

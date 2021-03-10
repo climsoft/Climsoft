@@ -288,8 +288,6 @@ Public Class form_daily2
         'Dim loggedInUser As String
         'loggedInUser = frmLogin.txtUser.Text
 
-        'MsgBox(loggedInUser)
-
         'Set TAB next to true
         tabNext = True
         'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
@@ -297,6 +295,7 @@ Public Class form_daily2
             btnDelete.Enabled = False
             btnUpload.Enabled = False
         End If
+
         'Set the record index counter to the first row
         inc = 0
 

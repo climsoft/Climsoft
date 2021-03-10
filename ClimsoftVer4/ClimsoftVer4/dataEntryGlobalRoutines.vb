@@ -594,7 +594,8 @@ Public Class dataEntryGlobalRoutines
             conn.ConnectionString = strConnString
             conn.Open()
 
-            SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            'SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            SQL_last_record = "select " & frm & ".stationId, stationName, entryDatetime from " & frm & " INNER JOIN station ON " & frm & ".stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
             dsLastDataRecord.Clear()
             daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
             ' Set to unlimited timeout period
