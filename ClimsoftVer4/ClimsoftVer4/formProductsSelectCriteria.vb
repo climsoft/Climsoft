@@ -556,6 +556,7 @@ Public Class formProductsSelectCriteria
                 Case "Extremes"
 
                     If btnLowHigh.Checked = True Then
+
                         'sql = "DROP TABLE IF EXISTS obs_selected;
                         '       CREATE TABLE obs_selected
                         '       SELECT RecordedFrom as StationId, stationName, describedBy as elementId, abbreviation, obsDatetime, latitude, longitude, elevation, obsValue FROM observationfinal INNER JOIN obselement ON elementId = describedBy INNER JOIN station ON stationId = recordedFrom
@@ -592,8 +593,6 @@ Public Class formProductsSelectCriteria
                     Inventory_Table(sql)
 
                 Case "Yearly Elements Observed"
-
-                    elmcolmn = ""
 
                     If lstvElements.Items.Count > 0 Then
                         elmcolmn = " " & "Count(IF(Code = '" & lstvElements.Items(0).Text & "', Code, NULL)) AS '" & lstvElements.Items(0).SubItems(1).Text & "'"
