@@ -92,6 +92,7 @@ Public Class frmQC
                 stn(0) = dss.Tables("station").Rows(i).Item("stationId") '"0123456789"
                 If Not IsDBNull(dss.Tables("station").Rows(i).Item("stationName")) Then
                     stn(1) = dss.Tables("station").Rows(i).Item("stationName")
+                    cmbstation.Items.Add(stn(1))
                 Else
                     stn(1) = ""
                 End If
@@ -99,6 +100,7 @@ Public Class frmQC
                 itms = New ListViewItem(stn)
 
                 LstViewStations.Items.Add(itms)
+
             Next
 
             sql = "SELECT * FROM obselement ORDER BY elementId"
@@ -110,6 +112,7 @@ Public Class frmQC
                 elm(0) = dss.Tables("element").Rows(i).Item("elementId")
                 If Not IsDBNull(dss.Tables("element").Rows(i).Item("description")) Then
                     elm(1) = dss.Tables("element").Rows(i).Item("description")
+                    cmbElement.Items.Add(elm(1))
                 Else ' When Elent Description is empty
                     elm(1) = ""
                 End If
@@ -123,6 +126,17 @@ Public Class frmQC
             conns.Close()
         End Try
         conns.Close()
+    End Sub
+
+    Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
+        'MsgBox(LstViewStations.Items(0).SubItems(1).Text & " " & cmbstation.Text)
+
+        'For i = 0 To LstViewStations.Items.Count - 1
+        '    If LstViewStations.Items(i).SubItems(1).Text = cmbstation.Text Then
+        '        LstViewStations.Items(i).Checked = True
+        '    End If
+
+        'Next
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
@@ -736,6 +750,9 @@ Public Class frmQC
             ' Outputv data values
             For i = 0 To x - 1
                 dat = ds.Tables("qcabslimits").Rows(i).Item(0)
+
+                ' Insert text qualifier ito the stationid field to ensure that it is saves as a character string in QC output text file
+                dat = """" & dat & """"
                 For j = 1 To ds.Tables("qcabslimits").Columns.Count - 1
                     dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
                 Next
@@ -820,5 +837,47 @@ Public Class frmQC
         '    chkAllStations.Checked = True
         '    chkAllStations.Text = "Unselect All Stations"
         'End If
+    End Sub
+
+    Private Sub cmbstation_Click(sender As Object, e As EventArgs) Handles cmbstation.Click
+        For i = 0 To LstViewStations.Items.Count - 1
+            If LstViewStations.Items(i).SubItems(1).Text = cmbstation.Text Then
+                LstViewStations.Items(i).Checked = True
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub cmbstation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbstation.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            For i = 0 To LstViewStations.Items.Count - 1
+                If LstViewStations.Items(i).SubItems(0).Text = cmbstation.Text Then
+                    LstViewStations.Items(i).Checked = True
+                    cmbstation.Text = ""
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub cmbElement_Click(sender As Object, e As EventArgs) Handles cmbElement.Click
+        For i = 0 To lstViewElements.Items.Count - 1
+            If lstViewElements.Items(i).SubItems(1).Text = cmbElement.Text Then
+                lstViewElements.Items(i).Checked = True
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            For i = 0 To lstViewElements.Items.Count - 1
+                If lstViewElements.Items(i).SubItems(0).Text = cmbElement.Text Then
+                    lstViewElements.Items(i).Checked = True
+                    cmbElement.Text = ""
+                    Exit For
+                End If
+            Next
+        End If
     End Sub
 End Class

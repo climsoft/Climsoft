@@ -50,6 +50,10 @@ Partial Class frmQC
         Me.optAbsoluteLimits = New System.Windows.Forms.RadioButton()
         Me.lblStationsElementsList = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.cmbstation = New System.Windows.Forms.ComboBox()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.pnlAdvanced.SuspendLayout()
         Me.pnlQcStandard.SuspendLayout()
         Me.pnlQCTypes.SuspendLayout()
@@ -214,11 +218,11 @@ Partial Class frmQC
         Me.LstViewStations.CheckBoxes = True
         Me.LstViewStations.FullRowSelect = True
         Me.LstViewStations.GridLines = True
-        Me.LstViewStations.Location = New System.Drawing.Point(264, 27)
+        Me.LstViewStations.Location = New System.Drawing.Point(264, 57)
         Me.LstViewStations.Name = "LstViewStations"
         Me.LstViewStations.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.LstViewStations.RightToLeftLayout = True
-        Me.LstViewStations.Size = New System.Drawing.Size(295, 357)
+        Me.LstViewStations.Size = New System.Drawing.Size(295, 323)
         Me.LstViewStations.TabIndex = 14
         Me.LstViewStations.UseCompatibleStateImageBehavior = False
         Me.LstViewStations.View = System.Windows.Forms.View.Details
@@ -228,11 +232,11 @@ Partial Class frmQC
         Me.lstViewElements.CheckBoxes = True
         Me.lstViewElements.FullRowSelect = True
         Me.lstViewElements.GridLines = True
-        Me.lstViewElements.Location = New System.Drawing.Point(565, 25)
+        Me.lstViewElements.Location = New System.Drawing.Point(565, 55)
         Me.lstViewElements.Name = "lstViewElements"
         Me.lstViewElements.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.lstViewElements.RightToLeftLayout = True
-        Me.lstViewElements.Size = New System.Drawing.Size(276, 359)
+        Me.lstViewElements.Size = New System.Drawing.Size(276, 326)
         Me.lstViewElements.TabIndex = 15
         Me.lstViewElements.UseCompatibleStateImageBehavior = False
         Me.lstViewElements.View = System.Windows.Forms.View.Details
@@ -340,11 +344,51 @@ Partial Class frmQC
         Me.Label1.TabIndex = 25
         Me.Label1.Text = "Select Time Range"
         '
+        'lblStation
+        '
+        Me.lblStation.AutoSize = True
+        Me.lblStation.Location = New System.Drawing.Point(264, 35)
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Size = New System.Drawing.Size(73, 13)
+        Me.lblStation.TabIndex = 27
+        Me.lblStation.Text = "Select Station"
+        '
+        'cmbstation
+        '
+        Me.cmbstation.FormattingEnabled = True
+        Me.cmbstation.ItemHeight = 13
+        Me.cmbstation.Location = New System.Drawing.Point(338, 31)
+        Me.cmbstation.Name = "cmbstation"
+        Me.cmbstation.Size = New System.Drawing.Size(221, 21)
+        Me.cmbstation.TabIndex = 26
+        '
+        'lblElement
+        '
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(562, 35)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(78, 13)
+        Me.lblElement.TabIndex = 29
+        Me.lblElement.Text = "Select Element"
+        '
+        'cmbElement
+        '
+        Me.cmbElement.FormattingEnabled = True
+        Me.cmbElement.ItemHeight = 13
+        Me.cmbElement.Location = New System.Drawing.Point(641, 31)
+        Me.cmbElement.Name = "cmbElement"
+        Me.cmbElement.Size = New System.Drawing.Size(200, 21)
+        Me.cmbElement.TabIndex = 28
+        '
         'frmQC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(848, 461)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.cmbElement)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.cmbstation)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblStationsElementsList)
         Me.Controls.Add(Me.pnlQCTypes)
@@ -402,4 +446,8 @@ Partial Class frmQC
     Friend WithEvents optAbsoluteLimits As System.Windows.Forms.RadioButton
     Friend WithEvents lblStationsElementsList As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents lblStation As Label
+    Friend WithEvents cmbstation As ComboBox
+    Friend WithEvents lblElement As Label
+    Friend WithEvents cmbElement As ComboBox
 End Class

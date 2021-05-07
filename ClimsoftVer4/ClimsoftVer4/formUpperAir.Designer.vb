@@ -36,31 +36,31 @@ Partial Class form_upperair1
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lbStation = New System.Windows.Forms.Label()
         Me.grpData = New System.Windows.Forms.GroupBox()
-        Me.txtFlag312Field029 = New System.Windows.Forms.TextBox()
-        Me.txtFlag308Field028 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem308Field016 = New System.Windows.Forms.TextBox()
-        Me.txtFlag307Field027 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem307Field015 = New System.Windows.Forms.TextBox()
-        Me.txtFlag306Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem306Field014 = New System.Windows.Forms.TextBox()
-        Me.txtFlag305Field025 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem305Field013 = New System.Windows.Forms.TextBox()
-        Me.txtFlag304Field024 = New System.Windows.Forms.TextBox()
+        Me.txtFlag312Field031 = New System.Windows.Forms.TextBox()
+        Me.txtFlag308Field030 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem308Field017 = New System.Windows.Forms.TextBox()
+        Me.txtFlag307Field029 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem307Field016 = New System.Windows.Forms.TextBox()
+        Me.txtFlag306Field028 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem306Field015 = New System.Windows.Forms.TextBox()
+        Me.txtFlag305Field027 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem305Field014 = New System.Windows.Forms.TextBox()
+        Me.txtFlag304Field025 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem304Field012 = New System.Windows.Forms.TextBox()
-        Me.txtFlag303Field023 = New System.Windows.Forms.TextBox()
+        Me.txtFlag303Field024 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem303Field011 = New System.Windows.Forms.TextBox()
-        Me.txtFlag302Field022 = New System.Windows.Forms.TextBox()
+        Me.txtFlag302Field023 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem302Field010 = New System.Windows.Forms.TextBox()
-        Me.txtFlag301Field021 = New System.Windows.Forms.TextBox()
+        Me.txtFlag301Field022 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem301Field009 = New System.Windows.Forms.TextBox()
-        Me.txtFlag310Field020 = New System.Windows.Forms.TextBox()
+        Me.txtFlag310Field021 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem310Field008 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem312Field017 = New System.Windows.Forms.TextBox()
-        Me.txtFlag309Field019 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem312Field018 = New System.Windows.Forms.TextBox()
+        Me.txtFlag309Field020 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem309Field007 = New System.Windows.Forms.TextBox()
         Me.lblFlag = New System.Windows.Forms.Label()
         Me.lblValue = New System.Windows.Forms.Label()
-        Me.txtFlag311Field018 = New System.Windows.Forms.TextBox()
+        Me.txtFlag311Field019 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem311Field006 = New System.Windows.Forms.TextBox()
         Me.lblVerSig = New System.Windows.Forms.Label()
         Me.lblWindShrA = New System.Windows.Forms.Label()
@@ -92,6 +92,9 @@ Partial Class form_upperair1
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.txtFlag313Field026 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem313Field013 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpHeaders.SuspendLayout()
         Me.grpData.SuspendLayout()
         Me.pnlConmmand.SuspendLayout()
@@ -226,31 +229,34 @@ Partial Class form_upperair1
         '
         'grpData
         '
-        Me.grpData.Controls.Add(Me.txtFlag312Field029)
-        Me.grpData.Controls.Add(Me.txtFlag308Field028)
-        Me.grpData.Controls.Add(Me.txtVal_Elem308Field016)
-        Me.grpData.Controls.Add(Me.txtFlag307Field027)
-        Me.grpData.Controls.Add(Me.txtVal_Elem307Field015)
-        Me.grpData.Controls.Add(Me.txtFlag306Field026)
-        Me.grpData.Controls.Add(Me.txtVal_Elem306Field014)
-        Me.grpData.Controls.Add(Me.txtFlag305Field025)
-        Me.grpData.Controls.Add(Me.txtVal_Elem305Field013)
-        Me.grpData.Controls.Add(Me.txtFlag304Field024)
+        Me.grpData.Controls.Add(Me.txtFlag313Field026)
+        Me.grpData.Controls.Add(Me.txtVal_Elem313Field013)
+        Me.grpData.Controls.Add(Me.Label1)
+        Me.grpData.Controls.Add(Me.txtFlag312Field031)
+        Me.grpData.Controls.Add(Me.txtFlag308Field030)
+        Me.grpData.Controls.Add(Me.txtVal_Elem308Field017)
+        Me.grpData.Controls.Add(Me.txtFlag307Field029)
+        Me.grpData.Controls.Add(Me.txtVal_Elem307Field016)
+        Me.grpData.Controls.Add(Me.txtFlag306Field028)
+        Me.grpData.Controls.Add(Me.txtVal_Elem306Field015)
+        Me.grpData.Controls.Add(Me.txtFlag305Field027)
+        Me.grpData.Controls.Add(Me.txtVal_Elem305Field014)
+        Me.grpData.Controls.Add(Me.txtFlag304Field025)
         Me.grpData.Controls.Add(Me.txtVal_Elem304Field012)
-        Me.grpData.Controls.Add(Me.txtFlag303Field023)
+        Me.grpData.Controls.Add(Me.txtFlag303Field024)
         Me.grpData.Controls.Add(Me.txtVal_Elem303Field011)
-        Me.grpData.Controls.Add(Me.txtFlag302Field022)
+        Me.grpData.Controls.Add(Me.txtFlag302Field023)
         Me.grpData.Controls.Add(Me.txtVal_Elem302Field010)
-        Me.grpData.Controls.Add(Me.txtFlag301Field021)
+        Me.grpData.Controls.Add(Me.txtFlag301Field022)
         Me.grpData.Controls.Add(Me.txtVal_Elem301Field009)
-        Me.grpData.Controls.Add(Me.txtFlag310Field020)
+        Me.grpData.Controls.Add(Me.txtFlag310Field021)
         Me.grpData.Controls.Add(Me.txtVal_Elem310Field008)
-        Me.grpData.Controls.Add(Me.txtVal_Elem312Field017)
-        Me.grpData.Controls.Add(Me.txtFlag309Field019)
+        Me.grpData.Controls.Add(Me.txtVal_Elem312Field018)
+        Me.grpData.Controls.Add(Me.txtFlag309Field020)
         Me.grpData.Controls.Add(Me.txtVal_Elem309Field007)
         Me.grpData.Controls.Add(Me.lblFlag)
         Me.grpData.Controls.Add(Me.lblValue)
-        Me.grpData.Controls.Add(Me.txtFlag311Field018)
+        Me.grpData.Controls.Add(Me.txtFlag311Field019)
         Me.grpData.Controls.Add(Me.txtVal_Elem311Field006)
         Me.grpData.Controls.Add(Me.lblVerSig)
         Me.grpData.Controls.Add(Me.lblWindShrA)
@@ -266,85 +272,85 @@ Partial Class form_upperair1
         Me.grpData.Controls.Add(Me.lblTimeDisp)
         Me.grpData.Location = New System.Drawing.Point(103, 124)
         Me.grpData.Name = "grpData"
-        Me.grpData.Size = New System.Drawing.Size(419, 362)
+        Me.grpData.Size = New System.Drawing.Size(419, 377)
         Me.grpData.TabIndex = 1
         Me.grpData.TabStop = False
         '
-        'txtFlag312Field029
+        'txtFlag312Field031
         '
-        Me.txtFlag312Field029.Location = New System.Drawing.Point(304, 318)
-        Me.txtFlag312Field029.Name = "txtFlag312Field029"
-        Me.txtFlag312Field029.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag312Field029.TabIndex = 42
-        Me.txtFlag312Field029.TabStop = False
+        Me.txtFlag312Field031.Location = New System.Drawing.Point(304, 344)
+        Me.txtFlag312Field031.Name = "txtFlag312Field031"
+        Me.txtFlag312Field031.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag312Field031.TabIndex = 43
+        Me.txtFlag312Field031.TabStop = False
         '
-        'txtFlag308Field028
+        'txtFlag308Field030
         '
-        Me.txtFlag308Field028.Location = New System.Drawing.Point(304, 292)
-        Me.txtFlag308Field028.Name = "txtFlag308Field028"
-        Me.txtFlag308Field028.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag308Field028.TabIndex = 41
-        Me.txtFlag308Field028.TabStop = False
+        Me.txtFlag308Field030.Location = New System.Drawing.Point(304, 318)
+        Me.txtFlag308Field030.Name = "txtFlag308Field030"
+        Me.txtFlag308Field030.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag308Field030.TabIndex = 42
+        Me.txtFlag308Field030.TabStop = False
         '
-        'txtVal_Elem308Field016
+        'txtVal_Elem308Field017
         '
-        Me.txtVal_Elem308Field016.Location = New System.Drawing.Point(241, 292)
-        Me.txtVal_Elem308Field016.Name = "txtVal_Elem308Field016"
-        Me.txtVal_Elem308Field016.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem308Field016.TabIndex = 16
+        Me.txtVal_Elem308Field017.Location = New System.Drawing.Point(241, 318)
+        Me.txtVal_Elem308Field017.Name = "txtVal_Elem308Field017"
+        Me.txtVal_Elem308Field017.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem308Field017.TabIndex = 17
         '
-        'txtFlag307Field027
+        'txtFlag307Field029
         '
-        Me.txtFlag307Field027.Location = New System.Drawing.Point(304, 266)
-        Me.txtFlag307Field027.Name = "txtFlag307Field027"
-        Me.txtFlag307Field027.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag307Field027.TabIndex = 40
-        Me.txtFlag307Field027.TabStop = False
+        Me.txtFlag307Field029.Location = New System.Drawing.Point(304, 292)
+        Me.txtFlag307Field029.Name = "txtFlag307Field029"
+        Me.txtFlag307Field029.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag307Field029.TabIndex = 41
+        Me.txtFlag307Field029.TabStop = False
         '
-        'txtVal_Elem307Field015
+        'txtVal_Elem307Field016
         '
-        Me.txtVal_Elem307Field015.Location = New System.Drawing.Point(241, 266)
-        Me.txtVal_Elem307Field015.Name = "txtVal_Elem307Field015"
-        Me.txtVal_Elem307Field015.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem307Field015.TabIndex = 15
+        Me.txtVal_Elem307Field016.Location = New System.Drawing.Point(241, 292)
+        Me.txtVal_Elem307Field016.Name = "txtVal_Elem307Field016"
+        Me.txtVal_Elem307Field016.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem307Field016.TabIndex = 16
         '
-        'txtFlag306Field026
+        'txtFlag306Field028
         '
-        Me.txtFlag306Field026.Location = New System.Drawing.Point(304, 240)
-        Me.txtFlag306Field026.Name = "txtFlag306Field026"
-        Me.txtFlag306Field026.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag306Field026.TabIndex = 39
-        Me.txtFlag306Field026.TabStop = False
+        Me.txtFlag306Field028.Location = New System.Drawing.Point(304, 266)
+        Me.txtFlag306Field028.Name = "txtFlag306Field028"
+        Me.txtFlag306Field028.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag306Field028.TabIndex = 40
+        Me.txtFlag306Field028.TabStop = False
         '
-        'txtVal_Elem306Field014
+        'txtVal_Elem306Field015
         '
-        Me.txtVal_Elem306Field014.Location = New System.Drawing.Point(241, 240)
-        Me.txtVal_Elem306Field014.Name = "txtVal_Elem306Field014"
-        Me.txtVal_Elem306Field014.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem306Field014.TabIndex = 14
+        Me.txtVal_Elem306Field015.Location = New System.Drawing.Point(241, 266)
+        Me.txtVal_Elem306Field015.Name = "txtVal_Elem306Field015"
+        Me.txtVal_Elem306Field015.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem306Field015.TabIndex = 15
         '
-        'txtFlag305Field025
+        'txtFlag305Field027
         '
-        Me.txtFlag305Field025.Location = New System.Drawing.Point(304, 214)
-        Me.txtFlag305Field025.Name = "txtFlag305Field025"
-        Me.txtFlag305Field025.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag305Field025.TabIndex = 38
-        Me.txtFlag305Field025.TabStop = False
+        Me.txtFlag305Field027.Location = New System.Drawing.Point(304, 240)
+        Me.txtFlag305Field027.Name = "txtFlag305Field027"
+        Me.txtFlag305Field027.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag305Field027.TabIndex = 39
+        Me.txtFlag305Field027.TabStop = False
         '
-        'txtVal_Elem305Field013
+        'txtVal_Elem305Field014
         '
-        Me.txtVal_Elem305Field013.Location = New System.Drawing.Point(241, 214)
-        Me.txtVal_Elem305Field013.Name = "txtVal_Elem305Field013"
-        Me.txtVal_Elem305Field013.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem305Field013.TabIndex = 13
+        Me.txtVal_Elem305Field014.Location = New System.Drawing.Point(241, 240)
+        Me.txtVal_Elem305Field014.Name = "txtVal_Elem305Field014"
+        Me.txtVal_Elem305Field014.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem305Field014.TabIndex = 14
         '
-        'txtFlag304Field024
+        'txtFlag304Field025
         '
-        Me.txtFlag304Field024.Location = New System.Drawing.Point(304, 188)
-        Me.txtFlag304Field024.Name = "txtFlag304Field024"
-        Me.txtFlag304Field024.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag304Field024.TabIndex = 37
-        Me.txtFlag304Field024.TabStop = False
+        Me.txtFlag304Field025.Location = New System.Drawing.Point(304, 188)
+        Me.txtFlag304Field025.Name = "txtFlag304Field025"
+        Me.txtFlag304Field025.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag304Field025.TabIndex = 37
+        Me.txtFlag304Field025.TabStop = False
         '
         'txtVal_Elem304Field012
         '
@@ -353,13 +359,13 @@ Partial Class form_upperair1
         Me.txtVal_Elem304Field012.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem304Field012.TabIndex = 12
         '
-        'txtFlag303Field023
+        'txtFlag303Field024
         '
-        Me.txtFlag303Field023.Location = New System.Drawing.Point(304, 162)
-        Me.txtFlag303Field023.Name = "txtFlag303Field023"
-        Me.txtFlag303Field023.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag303Field023.TabIndex = 36
-        Me.txtFlag303Field023.TabStop = False
+        Me.txtFlag303Field024.Location = New System.Drawing.Point(304, 162)
+        Me.txtFlag303Field024.Name = "txtFlag303Field024"
+        Me.txtFlag303Field024.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag303Field024.TabIndex = 36
+        Me.txtFlag303Field024.TabStop = False
         '
         'txtVal_Elem303Field011
         '
@@ -368,13 +374,13 @@ Partial Class form_upperair1
         Me.txtVal_Elem303Field011.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem303Field011.TabIndex = 11
         '
-        'txtFlag302Field022
+        'txtFlag302Field023
         '
-        Me.txtFlag302Field022.Location = New System.Drawing.Point(304, 136)
-        Me.txtFlag302Field022.Name = "txtFlag302Field022"
-        Me.txtFlag302Field022.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag302Field022.TabIndex = 35
-        Me.txtFlag302Field022.TabStop = False
+        Me.txtFlag302Field023.Location = New System.Drawing.Point(304, 136)
+        Me.txtFlag302Field023.Name = "txtFlag302Field023"
+        Me.txtFlag302Field023.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag302Field023.TabIndex = 35
+        Me.txtFlag302Field023.TabStop = False
         '
         'txtVal_Elem302Field010
         '
@@ -383,13 +389,13 @@ Partial Class form_upperair1
         Me.txtVal_Elem302Field010.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem302Field010.TabIndex = 10
         '
-        'txtFlag301Field021
+        'txtFlag301Field022
         '
-        Me.txtFlag301Field021.Location = New System.Drawing.Point(304, 110)
-        Me.txtFlag301Field021.Name = "txtFlag301Field021"
-        Me.txtFlag301Field021.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag301Field021.TabIndex = 34
-        Me.txtFlag301Field021.TabStop = False
+        Me.txtFlag301Field022.Location = New System.Drawing.Point(304, 110)
+        Me.txtFlag301Field022.Name = "txtFlag301Field022"
+        Me.txtFlag301Field022.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag301Field022.TabIndex = 34
+        Me.txtFlag301Field022.TabStop = False
         '
         'txtVal_Elem301Field009
         '
@@ -398,13 +404,13 @@ Partial Class form_upperair1
         Me.txtVal_Elem301Field009.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem301Field009.TabIndex = 9
         '
-        'txtFlag310Field020
+        'txtFlag310Field021
         '
-        Me.txtFlag310Field020.Location = New System.Drawing.Point(304, 84)
-        Me.txtFlag310Field020.Name = "txtFlag310Field020"
-        Me.txtFlag310Field020.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag310Field020.TabIndex = 33
-        Me.txtFlag310Field020.TabStop = False
+        Me.txtFlag310Field021.Location = New System.Drawing.Point(304, 84)
+        Me.txtFlag310Field021.Name = "txtFlag310Field021"
+        Me.txtFlag310Field021.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag310Field021.TabIndex = 33
+        Me.txtFlag310Field021.TabStop = False
         '
         'txtVal_Elem310Field008
         '
@@ -413,20 +419,20 @@ Partial Class form_upperair1
         Me.txtVal_Elem310Field008.Size = New System.Drawing.Size(56, 20)
         Me.txtVal_Elem310Field008.TabIndex = 8
         '
-        'txtVal_Elem312Field017
+        'txtVal_Elem312Field018
         '
-        Me.txtVal_Elem312Field017.Location = New System.Drawing.Point(241, 318)
-        Me.txtVal_Elem312Field017.Name = "txtVal_Elem312Field017"
-        Me.txtVal_Elem312Field017.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem312Field017.TabIndex = 17
+        Me.txtVal_Elem312Field018.Location = New System.Drawing.Point(241, 344)
+        Me.txtVal_Elem312Field018.Name = "txtVal_Elem312Field018"
+        Me.txtVal_Elem312Field018.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem312Field018.TabIndex = 18
         '
-        'txtFlag309Field019
+        'txtFlag309Field020
         '
-        Me.txtFlag309Field019.Location = New System.Drawing.Point(304, 58)
-        Me.txtFlag309Field019.Name = "txtFlag309Field019"
-        Me.txtFlag309Field019.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag309Field019.TabIndex = 32
-        Me.txtFlag309Field019.TabStop = False
+        Me.txtFlag309Field020.Location = New System.Drawing.Point(304, 58)
+        Me.txtFlag309Field020.Name = "txtFlag309Field020"
+        Me.txtFlag309Field020.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag309Field020.TabIndex = 32
+        Me.txtFlag309Field020.TabStop = False
         '
         'txtVal_Elem309Field007
         '
@@ -453,13 +459,13 @@ Partial Class form_upperair1
         Me.lblValue.TabIndex = 14
         Me.lblValue.Text = "Value"
         '
-        'txtFlag311Field018
+        'txtFlag311Field019
         '
-        Me.txtFlag311Field018.Location = New System.Drawing.Point(304, 32)
-        Me.txtFlag311Field018.Name = "txtFlag311Field018"
-        Me.txtFlag311Field018.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag311Field018.TabIndex = 31
-        Me.txtFlag311Field018.TabStop = False
+        Me.txtFlag311Field019.Location = New System.Drawing.Point(304, 32)
+        Me.txtFlag311Field019.Name = "txtFlag311Field019"
+        Me.txtFlag311Field019.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag311Field019.TabIndex = 31
+        Me.txtFlag311Field019.TabStop = False
         '
         'txtVal_Elem311Field006
         '
@@ -471,7 +477,7 @@ Partial Class form_upperair1
         'lblVerSig
         '
         Me.lblVerSig.AutoSize = True
-        Me.lblVerSig.Location = New System.Drawing.Point(58, 322)
+        Me.lblVerSig.Location = New System.Drawing.Point(58, 348)
         Me.lblVerSig.Name = "lblVerSig"
         Me.lblVerSig.Size = New System.Drawing.Size(136, 13)
         Me.lblVerSig.TabIndex = 11
@@ -480,7 +486,7 @@ Partial Class form_upperair1
         'lblWindShrA
         '
         Me.lblWindShrA.AutoSize = True
-        Me.lblWindShrA.Location = New System.Drawing.Point(58, 296)
+        Me.lblWindShrA.Location = New System.Drawing.Point(58, 322)
         Me.lblWindShrA.Name = "lblWindShrA"
         Me.lblWindShrA.Size = New System.Drawing.Size(147, 13)
         Me.lblWindShrA.TabIndex = 10
@@ -489,7 +495,7 @@ Partial Class form_upperair1
         'lblWindShrB
         '
         Me.lblWindShrB.AutoSize = True
-        Me.lblWindShrB.Location = New System.Drawing.Point(58, 270)
+        Me.lblWindShrB.Location = New System.Drawing.Point(58, 296)
         Me.lblWindShrB.Name = "lblWindShrB"
         Me.lblWindShrB.Size = New System.Drawing.Size(145, 13)
         Me.lblWindShrB.TabIndex = 9
@@ -498,7 +504,7 @@ Partial Class form_upperair1
         'lblWindspd
         '
         Me.lblWindspd.AutoSize = True
-        Me.lblWindspd.Location = New System.Drawing.Point(58, 244)
+        Me.lblWindspd.Location = New System.Drawing.Point(58, 270)
         Me.lblWindspd.Name = "lblWindspd"
         Me.lblWindspd.Size = New System.Drawing.Size(66, 13)
         Me.lblWindspd.TabIndex = 8
@@ -507,7 +513,7 @@ Partial Class form_upperair1
         'lblWinddir
         '
         Me.lblWinddir.AutoSize = True
-        Me.lblWinddir.Location = New System.Drawing.Point(58, 218)
+        Me.lblWinddir.Location = New System.Drawing.Point(58, 244)
         Me.lblWinddir.Name = "lblWinddir"
         Me.lblWinddir.Size = New System.Drawing.Size(77, 13)
         Me.lblWinddir.TabIndex = 7
@@ -762,6 +768,30 @@ Partial Class form_upperair1
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'txtFlag313Field026
+        '
+        Me.txtFlag313Field026.Location = New System.Drawing.Point(304, 214)
+        Me.txtFlag313Field026.Name = "txtFlag313Field026"
+        Me.txtFlag313Field026.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag313Field026.TabIndex = 38
+        Me.txtFlag313Field026.TabStop = False
+        '
+        'txtVal_Elem313Field013
+        '
+        Me.txtVal_Elem313Field013.Location = New System.Drawing.Point(241, 214)
+        Me.txtVal_Elem313Field013.Name = "txtVal_Elem313Field013"
+        Me.txtVal_Elem313Field013.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem313Field013.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(58, 218)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(89, 13)
+        Me.Label1.TabIndex = 43
+        Me.Label1.Text = "Relative Humidity"
+        '
         'form_upperair1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -826,31 +856,34 @@ Partial Class form_upperair1
     Friend WithEvents lblLonDisp As Label
     Friend WithEvents lblLatdisp As Label
     Friend WithEvents lblTimeDisp As Label
-    Friend WithEvents txtFlag309Field019 As TextBox
+    Friend WithEvents txtFlag309Field020 As TextBox
     Friend WithEvents txtVal_Elem309Field007 As TextBox
     Friend WithEvents lblFlag As Label
     Friend WithEvents lblValue As Label
-    Friend WithEvents txtFlag311Field018 As TextBox
+    Friend WithEvents txtFlag311Field019 As TextBox
     Friend WithEvents txtVal_Elem311Field006 As TextBox
-    Friend WithEvents txtVal_Elem312Field017 As TextBox
-    Friend WithEvents txtFlag312Field029 As TextBox
-    Friend WithEvents txtFlag308Field028 As TextBox
-    Friend WithEvents txtVal_Elem308Field016 As TextBox
-    Friend WithEvents txtFlag307Field027 As TextBox
-    Friend WithEvents txtVal_Elem307Field015 As TextBox
-    Friend WithEvents txtFlag306Field026 As TextBox
-    Friend WithEvents txtVal_Elem306Field014 As TextBox
-    Friend WithEvents txtFlag305Field025 As TextBox
-    Friend WithEvents txtVal_Elem305Field013 As TextBox
-    Friend WithEvents txtFlag304Field024 As TextBox
+    Friend WithEvents txtVal_Elem312Field018 As TextBox
+    Friend WithEvents txtFlag312Field031 As TextBox
+    Friend WithEvents txtFlag308Field030 As TextBox
+    Friend WithEvents txtVal_Elem308Field017 As TextBox
+    Friend WithEvents txtFlag307Field029 As TextBox
+    Friend WithEvents txtVal_Elem307Field016 As TextBox
+    Friend WithEvents txtFlag306Field028 As TextBox
+    Friend WithEvents txtVal_Elem306Field015 As TextBox
+    Friend WithEvents txtFlag305Field027 As TextBox
+    Friend WithEvents txtVal_Elem305Field014 As TextBox
+    Friend WithEvents txtFlag304Field025 As TextBox
     Friend WithEvents txtVal_Elem304Field012 As TextBox
-    Friend WithEvents txtFlag303Field023 As TextBox
+    Friend WithEvents txtFlag303Field024 As TextBox
     Friend WithEvents txtVal_Elem303Field011 As TextBox
-    Friend WithEvents txtFlag302Field022 As TextBox
+    Friend WithEvents txtFlag302Field023 As TextBox
     Friend WithEvents txtVal_Elem302Field010 As TextBox
-    Friend WithEvents txtFlag301Field021 As TextBox
+    Friend WithEvents txtFlag301Field022 As TextBox
     Friend WithEvents txtVal_Elem301Field009 As TextBox
-    Friend WithEvents txtFlag310Field020 As TextBox
+    Friend WithEvents txtFlag310Field021 As TextBox
     Friend WithEvents txtVal_Elem310Field008 As TextBox
     Friend WithEvents cboStation As ComboBox
+    Friend WithEvents txtFlag313Field026 As TextBox
+    Friend WithEvents txtVal_Elem313Field013 As TextBox
+    Friend WithEvents Label1 As Label
 End Class

@@ -8,10 +8,8 @@
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
 
-
-
     Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
-        dlgOpenImportFile.Filter = "Comma Delimited|*.csv;*.txt"
+        dlgOpenImportFile.Filter = "Comma Delimited|*.csv;*.txt;*.*"
         dlgOpenImportFile.Title = "Open Import Text File"
         dlgOpenImportFile.ShowDialog()
 
@@ -633,6 +631,7 @@
     Sub Load_Hourly()
         'MsgBox("form_hourly")
         Dim st, cod, y, m, d, dttime, hd, dat, flg, lvl As String
+        Dim nextDay As Date
         Dim acquisitiontype As Integer
         Try
 
@@ -678,6 +677,13 @@
                                             'h = hd
                                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
 
+                                            If hd = 24 Then
+                                                hd = "00"
+                                                dttime = y & "-" & m & "-" & d & " " & hd & ":00"
+                                                nextDay = DateAdd("d", 1, dttime)
+                                                dttime = DateAndTime.Year(nextDay) & "-" & DateAndTime.Month(nextDay) & "-" & DateAndTime.Day(nextDay) & " " & hd & ":00"
+                                            End If
+
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
 
@@ -688,18 +694,18 @@
                                                     col = col + 1
                                                 End If
                                                 Continue For
-                                            End If
+                                                End If
 
-                                            flg = ""
-                                            If IsNumeric(dat) Then
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                Get_Value_Flag(cod, dat, flg)
+                                                flg = ""
+                                                If IsNumeric(dat) Then
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    Get_Value_Flag(cod, dat, flg)
+                                                End If
+                                                If Station_Element(st, cod) Then
+                                                    If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
+                                                End If
                                             End If
-                                            If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
-                                            End If
-                                        End If
                                         End If ' Last DataGridView which is equivalent to End data columns 
 
                                     ' Show upload progress
@@ -920,7 +926,7 @@
                         If MyReader.LineNumber > Val(txtStartRow.Text) Then
 
                             st = txtStn.Text
-                            h = txtObsHour.Text
+                            h = Val(txtObsHour.Text)
                             cod = txtElmCode.Text
                             acquisitiontype = 6
                             dttcom = 0
@@ -937,6 +943,8 @@
                                             st = dat
                                         ElseIf .Columns(col).Name = "date_time" Then  ' Year column found
                                             dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
+                                        ElseIf .Columns(col).Name = "date" Then  ' Year column found
+                                            dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & h & ":00:00"
                                         ElseIf .Columns(col).Name = "yyyy" Then  ' Year column found
                                             y = dat
                                             dttcom = dttcom + 1
@@ -1634,7 +1642,7 @@
 
     Private Sub cmdLoadSpecs_Click(sender As Object, e As EventArgs) Handles cmdLoadSpecs.Click
         Dim sch, hdr() As String
-        dlgOpenImportFile.Filter = "Schema Files|*.sch"
+        dlgOpenImportFile.Filter = "Schema Files|*.sch;*.*"
         dlgOpenImportFile.Title = "Schema File"
         dlgOpenImportFile.ShowDialog()
         sch = dlgOpenImportFile.FileName

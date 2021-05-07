@@ -47,6 +47,7 @@ Public Class form_upperair1
         End If
         'Set the record index counter to the first row
         inc = 0
+
         Try
             myConnectionString = frmLogin.txtusrpwd.Text
 
@@ -77,6 +78,7 @@ Public Class form_upperair1
                 MessageBox.Show(ex.Message)
             End If
             Me.Close()
+
             Exit Sub
 
             MessageBox.Show(ex.Message)
@@ -120,7 +122,7 @@ Public Class form_upperair1
                 cboLevel.Text = ds.Tables("form_upperair1").Rows(inc).Item("levelName")
                 'Initialize textboxes for observation values
                 'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-                For m = 6 To 17
+                For m = 6 To 18
                     For Each ctl In grpData.Controls 'Me.Controls
                         'MsgBox(ctl.Name)
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
@@ -133,7 +135,7 @@ Public Class form_upperair1
 
                 'Initialize textboxes for observation flags
                 'Observation flags range from column 54 i.e. column index 5 to column 103 i.e. column index 102
-                For m = 18 To 29
+                For m = 19 To 31
                     For Each ctl In grpData.Controls ' Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             If Not IsDBNull(ds.Tables("form_upperair1").Rows(inc).Item(m)) Then
@@ -169,6 +171,7 @@ Public Class form_upperair1
                 MessageBox.Show(ex.Message)
             End If
         End Try
+        conn.Close()
     End Sub
 
     Private Sub form_upperair1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
@@ -182,7 +185,7 @@ Public Class form_upperair1
         obsVal = ""
         obsFlag = ""
         flagtextBoxSuffix = ""
-        flagIndexDiff = 12
+        flagIndexDiff = 13
 
         Try
 
@@ -355,6 +358,7 @@ Public Class form_upperair1
               `Val_Elem302` varchar(6) DEFAULT NULL,
               `Val_Elem303` varchar(6) DEFAULT NULL,
               `Val_Elem304` varchar(6) DEFAULT NULL,
+              `Val_Elem313` varchar(6) DEFAULT NULL,
               `Val_Elem305` varchar(6) DEFAULT NULL,
               `Val_Elem306` varchar(6) DEFAULT NULL,
               `Val_Elem307` varchar(6) DEFAULT NULL,
@@ -367,6 +371,7 @@ Public Class form_upperair1
               `Flag302` varchar(1) DEFAULT NULL,
               `Flag303` varchar(1) DEFAULT NULL,
               `Flag304` varchar(1) DEFAULT NULL,
+              `Flag313` varchar(1) DEFAULT NULL,
               `Flag305` varchar(1) DEFAULT NULL,
               `Flag306` varchar(1) DEFAULT NULL,
               `Flag307` varchar(1) DEFAULT NULL,
@@ -426,38 +431,76 @@ Public Class form_upperair1
             'Return False
         End Try
 
-        ' Modify in test database
-        sql = "USE `mariadb_climsoft_test_db_v4`;
-                   ALTER TABLE `observationinitial`
-	               DROP INDEX `obsInitialIdentification`,
-	               ADD UNIQUE INDEX `obsInitialIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
-        Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-            qry.CommandTimeout = 0
-            qry.ExecuteNonQuery()
+        '' Modify in test database
+        'sql = "USE `mariadb_climsoft_test_db_v4`;
+        '           ALTER TABLE `observationinitial`
+        '        DROP INDEX `obsInitialIdentification`,
+        '        ADD UNIQUE INDEX `obsInitialIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
+        'Try
+        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry.CommandTimeout = 0
+        '    qry.ExecuteNonQuery()
 
-        Catch ex As Exception
-            MsgBox(ex.Message & ". Failed to include obsLevel in the index in observationinitial of test database. You may do it manually ")
-            Me.Cursor = Cursors.Default
-            'Return False
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & ". Failed to include obsLevel in the index in observationinitial of test database. You may do it manually ")
+        '    Me.Cursor = Cursors.Default
+        '    'Return False
+        'End Try
 
-        ' Modify in observationinitial table of current database
-        sql = "USE `mariadb_climsoft_test_db_v4`;
-                   ALTER TABLE `observationfinal`
-	               DROP INDEX `obsFinalIdentification`,
-	               ADD UNIQUE INDEX `obsFinalIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
-        Try
-            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-            qry.CommandTimeout = 0
-            qry.ExecuteNonQuery()
+        '' Modify in observationinitial table of current database
+        'sql = "USE `mariadb_climsoft_test_db_v4`;
+        '           ALTER TABLE `observationfinal`
+        '        DROP INDEX `obsFinalIdentification`,
+        '        ADD UNIQUE INDEX `obsFinalIdentification` (`recordedFrom`, `describedBy`, `obsDatetime`, `qcStatus`, `acquisitionType`, `obsLevel`);"
+        'Try
+        '    qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        '    qry.CommandTimeout = 0
+        '    qry.ExecuteNonQuery()
 
-        Catch ex As Exception
-            MsgBox(ex.Message & ". Failed to include obsLevel in the index of observationfinal of test database. You may do it manually")
-            Me.Cursor = Cursors.Default
-            'Return False
-        End Try
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & ". Failed to include obsLevel in the index of observationfinal of test database. You may do it manually")
+        '    Me.Cursor = Cursors.Default
+        '    'Return False
+        'End Try
         Me.Cursor = Cursors.Default
+
+        ' Update table data_forms
+        Dim stVal, edVal As Integer
+        Try
+            sql = "select * from form_upperair1"
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            da.Fill(ds, "frmupperair1")
+
+            stVal = 0
+            edVal = 0
+            With ds.Tables("frmupperair1")
+                ' get start field for data
+                For i = 0 To .Columns.Count - 1
+                    If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
+                        stVal = i
+                        Exit For
+                    End If
+                Next
+                ' get end field for data
+                For i = 0 To .Columns.Count - 1
+                    If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
+                        edVal = i
+                    End If
+                Next
+            End With
+
+            If stVal > 0 And edVal > 0 Then
+                sql = "UPDATE `data_forms` SET `val_start_position`= " & stVal & ", `val_end_position`= " & edVal & ", `elem_code_location` = 'Horizontal' WHERE `form_name`='form_upperair1';"
+
+                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry.CommandTimeout = 0
+                qry.ExecuteNonQuery()
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
         Return True
     End Function
@@ -516,53 +559,59 @@ Public Class form_upperair1
 
         '--------------------------
         Dim stn As String
-        'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
-        stn = ds.Tables("form_upperair1").Rows(inc).Item("stationId")
-        cboStation.SelectedValue = stn
-        '--------------------------
-        'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
-        'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        txtYear.Text = ds.Tables("form_upperair1").Rows(inc).Item("yyyy")
-        cboMonth.Text = ds.Tables("form_upperair1").Rows(inc).Item("mm")
-        cboDay.Text = ds.Tables("form_upperair1").Rows(inc).Item("dd")
-        cboHour.Text = ds.Tables("form_upperair1").Rows(inc).Item("hh")
-        cboLevel.Text = ds.Tables("form_upperair1").Rows(inc).Item("levelName")
+        Try
+            'cboStation.Text = ds.Tables("form_daily2").Rows(inc).Item("stationId")
+            stn = ds.Tables("form_upperair1").Rows(inc).Item("stationId")
+            cboStation.SelectedValue = stn
+            '--------------------------
+            'No need to assign text value to station combobox after assigning the "SelectedValue as above. This way, the displayed value
+            'will be the station name according to the "DisplayMember in the texbox attribute, hence the line below has been commented out."
 
-        Dim m As Integer
-        Dim ctl As Control
+            txtYear.Text = ds.Tables("form_upperair1").Rows(inc).Item("yyyy")
+            cboMonth.Text = ds.Tables("form_upperair1").Rows(inc).Item("mm")
+            cboDay.Text = ds.Tables("form_upperair1").Rows(inc).Item("dd")
+            cboHour.Text = ds.Tables("form_upperair1").Rows(inc).Item("hh")
+            cboLevel.Text = ds.Tables("form_upperair1").Rows(inc).Item("levelName")
 
-        'Display observation values in coressponding textboxes
-        'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
-        For m = 6 To 17
-            For Each ctl In grpData.Controls ' Me.Controls
-                If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_upperair1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_upperair1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
+            Dim m As Integer
+            Dim ctl As Control
+
+            'Display observation values in coressponding textboxes
+            'Observation values start in column 6 i.e. column index 5, and end in column 54 i.e. column Index 53
+            For m = 6 To 18
+                For Each ctl In grpData.Controls ' Me.Controls
+                    If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_upperair1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_upperair1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
+
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
+            'Display observation flags in coressponding textboxes
+            'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
+            For m = 19 To 31
+                For Each ctl In grpData.Controls ' Me.Controls
+                    If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
+                        If Not IsDBNull(ds.Tables("form_upperair1").Rows(inc).Item(m)) Then
+                            ctl.Text = ds.Tables("form_upperair1").Rows(inc).Item(m)
+                        Else
+                            ctl.Text = ""
+                        End If
 
-        'Display observation flags in coressponding textboxes
-        'Observation values start in column 55 i.e. column index 54, and end in column 103 i.e. column Index 102
-        For m = 18 To 29
-            For Each ctl In grpData.Controls ' Me.Controls
-                If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
-                    If Not IsDBNull(ds.Tables("form_upperair1").Rows(inc).Item(m)) Then
-                        ctl.Text = ds.Tables("form_upperair1").Rows(inc).Item(m)
-                    Else
-                        ctl.Text = ""
                     End If
+                Next ctl
+            Next m
 
-                End If
-            Next ctl
-        Next m
+            displayRecordNumber()
 
-        displayRecordNumber()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnMovePrevious_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
@@ -630,7 +679,7 @@ Public Class form_upperair1
 
             'Clear textboxes for observation values
             'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
-            For m = 6 To 17
+            For m = 6 To 18
                 For Each ctl In grpData.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -640,7 +689,7 @@ Public Class form_upperair1
 
             'Clear textboxes for observation values
             'Observation flags range from column 39 i.e. column index 38 to column 73 i.e. column index 72
-            For m = 18 To 29
+            For m = 19 To 31
                 For Each ctl In grpData.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -716,7 +765,7 @@ Public Class form_upperair1
 
             'Clear textboxes for observation values
             'Observation values range from column 6 i.e. column index 5 to column 29 i.e. column index 28
-            For m = 6 To 17
+            For m = 6 To 18
                 For Each ctl In grpData.Controls
                     If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -726,7 +775,7 @@ Public Class form_upperair1
 
             'Clear textboxes for observation flags
             'Observation flags range from column 30 i.e. column index 29 to column 53 i.e. column index 52
-            For m = 18 To 29
+            For m = 19 To 31
                 For Each ctl In grpData.Controls
                     If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                         ctl.Text = ""
@@ -773,7 +822,7 @@ Public Class form_upperair1
 
         'Update observation values in database
         'Observation values range from column 6 i.e. column index 5 to column 54 i.e. column index 53
-        For m = 6 To 17
+        For m = 6 To 18
             For Each ctl In grpData.Controls
                 If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_upperair1").Rows(inc).Item(m) = ctl.Text
@@ -783,8 +832,8 @@ Public Class form_upperair1
 
         'Update observation flags in database
         'Observation values range from column 55 i.e. column index 54 to column 103 i.e. column index 102
-        For m = 18 To 29
-            For Each ctl In Me.Controls
+        For m = 19 To 31
+            For Each ctl In grpData.Controls
                 If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                     ds.Tables("form_upperair1").Rows(inc).Item(m) = ctl.Text
                 End If
@@ -1041,7 +1090,7 @@ Public Class form_upperair1
 
                 'Commit observation values to database
                 'Observation values range from column 5 i.e. column index 4 to column 38 i.e. column index 37
-                For m = 6 To 17
+                For m = 6 To 18
                     For Each ctl In grpData.Controls 'Me.Controls
                         If Strings.Left(ctl.Name, 6) = "txtVal" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("form_upperair1").Rows(inc).Item(m) = ctl.Text
@@ -1051,7 +1100,7 @@ Public Class form_upperair1
 
                 'Commit observation flags to database
                 'Observation Flags range from column 39 i.e. column index 38 to column 72 i.e. column index 71
-                For m = 18 To 29
+                For m = 19 To 31
                     For Each ctl In grpData.Controls ' Me.Controls
                         If Strings.Left(ctl.Name, 7) = "txtFlag" And Val(Strings.Right(ctl.Name, 3)) = m Then
                             ds.Tables("form_upperair1").Rows(inc).Item(m) = ctl.Text
