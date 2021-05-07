@@ -123,6 +123,12 @@
     <Compile Include="frmCLIMAT.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmClimatSettings.Designer.vb">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClimatSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmCreateEntryForm.Designer.vb">
       <DependentUpon>frmCreateEntryForm.vb</DependentUpon>
     </Compile>
@@ -836,6 +842,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCLIMAT.resx">
       <DependentUpon>frmCLIMAT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClimatSettings.resx">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCreateEntryForm.resx">
       <DependentUpon>frmCreateEntryForm.vb</DependentUpon>

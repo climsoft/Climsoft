@@ -6,6 +6,7 @@
     Dim ds As New DataSet
     Dim sql As String
     Dim frm As String
+    Dim PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VAPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL As Integer
     Private Sub butClose_Click(sender As Object, e As EventArgs) Handles butClose.Click
         Me.Close()
     End Sub
@@ -28,7 +29,6 @@
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "station")
-            conn.Close()
 
             For kount = 0 To ds.Tables("station").Rows.Count - 1
                 cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
@@ -41,11 +41,66 @@
             txtMonth.Text = DateAndTime.Month(dateCLIMAT)
             txtBeginYear.Text = 1961
             txtEndYear.Text = 1990
-
         Catch ex As Exception
             MsgBox(ex.Message)
-            conn.Close()
         End Try
+
+        ' Assign parameter codes from database
+        Try
+
+            sql = "select * from climat_parameters order by Nos;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "parameters")
+
+            ' PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL
+            Dim Abbrev, Ecode As String
+            With ds.Tables("parameters")
+                For i = 0 To .Rows.Count - 1
+                    Abbrev = .Rows(i).Item("Element_Abbreviation")
+                    Ecode = .Rows(i).Item("Element_Code")
+                    Select Case Abbrev
+                        Case "PRESST"
+                            PRESST = Ecode
+                        Case "PRESSL"
+                            PRESSL = Ecode
+                        Case "GPM"
+                            GPM = Ecode
+                        Case "TMPMN"
+                            TMPMN = Ecode
+                        Case "TMPMAX"
+                            TMPMAX = Ecode
+                        Case "TMPMIN"
+                            TMPMIN = Ecode
+                        Case "VAPPSR"
+                            VAPPSR = Ecode
+                        Case "PRECIP"
+                            PRECIP = Ecode
+                        Case "SUNSHN"
+                            SUNSHN = Ecode
+                        Case "SNWDEP"
+                            SNWDEP = Ecode
+                        Case "WNDSPD"
+                            WNDSPD = Ecode
+                        Case "VISBY"
+                            VISBY = Ecode
+                        Case "DYTHND"
+                            DYTHND = Ecode
+                        Case "DYHAIL"
+                            DYHAIL = Ecode
+                    End Select
+                Next
+            End With
+        Catch ex As Exception
+            'MsgBox(ex.HResult & " " & ex.Message)
+            If ex.HResult = -2147467259 Then
+                frmClimatSettings.Create_ParametersTable()
+            Else
+                MsgBox(ex.Message)
+            End If
+
+        End Try
+        conn.Close()
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
@@ -134,8 +189,14 @@
                AVG(IF(mm = 1, TOT, NULL)) AS '1', AVG(IF(mm = 2, TOT, NULL)) AS '2', AVG(IF(mm = 3, TOT, NULL)) AS '3',AVG(IF(mm = 4, TOT, NULL)) AS '4', AVG(IF(mm = 5, TOT, NULL)) AS '5', AVG(IF(mm = 6, TOT, NULL)) AS '6', AVG(IF(mm = 7, TOT, NULL)) AS '7',
                AVG(IF(mm = 8, TOT, NULL)) AS '8', AVG(IF(mm = 9, TOT, NULL)) AS '9', AVG(IF(mm = 10, TOT, NULL)) AS '10', AVG(IF(mm = 11, TOT, NULL)) AS '11',AVG(IF(mm = 12, TOT, NULL)) AS '12'
                from (select recordedFrom as stn, describedBy as code, year(obsDatetime) as yy, month(obsDatetime) as mm, sum(obsValue) as TOT from observationfinal
-               where (describedBy = '5' or describedBy = '84') and (" & lst & ") and (year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & ") Group by yy,mm,code) as TT
+               where (describedBy = '" & PRECIP & "' or describedBy = '" & SUNSHN & "') and (" & lst & ") and (year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & ") Group by yy,mm,code) as TT
                Group by stn,code;"
+        'sql ="select stn,code,Abbrev,
+        'AVG(If(mm = 1, TOT, NULL)) As '1', AVG(IF(mm = 2, TOT, NULL)) AS '2', AVG(IF(mm = 3, TOT, NULL)) AS '3',AVG(IF(mm = 4, TOT, NULL)) AS '4', AVG(IF(mm = 5, TOT, NULL)) AS '5', AVG(IF(mm = 6, TOT, NULL)) AS '6', AVG(IF(mm = 7, TOT, NULL)) AS '7',
+        'AVG(If(mm = 8, TOT, NULL)) As '8', AVG(IF(mm = 9, TOT, NULL)) AS '9', AVG(IF(mm = 10, TOT, NULL)) AS '10', AVG(IF(mm = 11, TOT, NULL)) AS '11',AVG(IF(mm = 12, TOT, NULL)) AS '12'
+        'from(select recordedFrom as stn, describedBy As code, Element_Abbreviation As Abbrev, Year(obsDatetime) As yy, Month(obsDatetime) As mm, sum(obsValue) as TOT from observationfinal inner join climat_parameters on describedBy = Element_Code 
+        'where(describedBy = '892' or describedBy = '881') and (recordedFrom = 'SF006085' ) and (year(obsDatetime) between 1992 and 2021) Group by yy,mm,code) as TT
+        'Group by stn, code;"
 
         Try
             conn.Open()
@@ -145,8 +206,8 @@
             'Execute query
             qry.ExecuteNonQuery()
             conn.Close()
-            'MsgBox("Normals for Precipitations and Sunshine hrs computed")
-            lstMessages.Items.Add("Normals for Precipitations and Sunshine hrs computed")
+            'MsgBox("Normals for Precipitations And Sunshine hrs computed")
+            lstMessages.Items.Add("Normals for Precipitations And Sunshine hrs computed")
             lstMessages.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -159,8 +220,9 @@
                 AVG(IF(month(obsDatetime) = 1, obsvalue, NULL)) AS '1', AVG(IF(month(obsDatetime) = 2, obsvalue, NULL)) AS '2', AVG(IF(month(obsDatetime) = 3, obsvalue, NULL)) AS '3',AVG(IF(month(obsDatetime) = 4, obsvalue, NULL)) AS '4', AVG(IF(month(obsDatetime) = 5, obsvalue, NULL)) AS '5', AVG(IF(month(obsDatetime) = 6, obsvalue, NULL)) AS '6',
                 AVG(IF(month(obsDatetime) = 7, obsvalue, NULL)) AS '7',AVG(IF(month(obsDatetime) = 8, obsvalue, NULL)) AS '8', AVG(IF(month(obsDatetime) = 9, obsvalue, NULL)) AS '9', AVG(IF(month(obsDatetime) = 10, obsvalue, NULL)) AS '10', AVG(IF(month(obsDatetime) = 11, obsvalue, NULL)) AS '11',AVG(IF(month(obsDatetime) = 12, obsvalue, NULL)) AS '12'
                 from observationfinal
-                where (describedBy = '2' or describedBy = '3' or describedBy = '4' or describedBy = '106' or describedBy = '166' or describedBy = '107' or describedBy = '478') and (" & lst & ") and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " 
+                where (describedBy = '" & TMPMAX & "' or describedBy = '" & TMPMIN & "' or describedBy = '" & TMPMN & "' or describedBy = '" & PRESST & "' or describedBy = '" & VAPPSR & "' or describedBy = '" & PRESSL & "' or describedBy = '" & GPM & "') and (" & lst & ") and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " 
                 Group by stn,code;"
+        'MsgBox(sql)
         Try
             conn.Open()
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -182,8 +244,8 @@
             sql = "DROP TABLE IF EXISTS PrecipQuintiles;
                    CREATE TABLE PrecipQuintiles Select stn,mm,Total
                    From (select recordedFrom as stn, year(obsDatetime) as yy, month(obsDatetime) as mm,SUM(obsvalue) as Total from observationfinal
-                   where (" & lst & ") and describedBy = 5 and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " group by stn,yy,mm order by stn,mm) as TT Order by stn, mm,Total;"
-
+                   where (" & lst & ") and describedBy = '" & PRECIP & "' and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " group by stn,yy,mm order by stn,mm) as TT Order by stn, mm,Total;"
+            'MsgBox(sql)
             conn.Open()
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
@@ -295,6 +357,7 @@
             End If
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return ""
         End Try
@@ -304,17 +367,30 @@
     Sub Section1(stn As String, ByRef dat As String)
         Dim Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9 As String
         Try
+            '            sql = "SELECT recordedFrom as StationId,year(obsDatetime) as YY,month(obsDatetime) as MM,
+            'AVG(IF(describedBy = '4', value, NULL)) AS 'Tmn', COUNT(IF(describedBy = '4', value, NULL)) AS 'DysTmn', STD(IF(describedBy = '4', value, NULL)) AS 'STDTmn',
+            'AVG(IF(describedBy = '2', value, NULL)) AS 'Tmax', COUNT(IF(describedBy = '2', value, NULL)) AS 'DysTmax',
+            'AVG(IF(describedBy ='3', value, NULL)) AS 'Tmin', COUNT(IF(describedBy = '3', value, NULL)) AS 'DysTmin',
+            'AVG(IF(describedBy ='106', value, NULL)) AS 'STPres', COUNT(IF(describedBy = '106', value, NULL)) AS 'DysPres',
+            'AVG(IF(describedBy ='107', value, NULL)) AS 'MSL', AVG(IF(describedBy = '478', value, NULL)) AS 'GPM',
+            'AVG(IF(describedBy ='166', value, NULL)) AS 'VPres', COUNT(IF(describedBy = '166', value, NULL)) AS 'DysVpres',
+            'SUM(IF(describedBy ='5', value, NULL)) AS 'Precip', COUNT(IF(describedBy = '5', value, NULL)) AS 'DysPrecip',
+            'SUM(IF(describedBy ='84', value, NULL)) AS 'SNHRS', COUNT(IF(describedBy = '84', value, NULL)) AS 'DysSNHRS'
+            'FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal
+            'WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='4' OR describedBy ='2' OR describedBy ='3' OR describedBy ='5' OR describedBy ='84' OR describedBy ='106' OR describedBy ='107' OR describedBy ='166') and (year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ") ORDER BY recordedFrom, obsDatetime) as tt 
+            'GROUP BY StationId, MM;"
+
             sql = "SELECT recordedFrom as StationId,year(obsDatetime) as YY,month(obsDatetime) as MM,
-AVG(IF(describedBy = '4', value, NULL)) AS 'Tmn', COUNT(IF(describedBy = '4', value, NULL)) AS 'DysTmn', STD(IF(describedBy = '4', value, NULL)) AS 'STDTmn',
-AVG(IF(describedBy = '2', value, NULL)) AS 'Tmax', COUNT(IF(describedBy = '2', value, NULL)) AS 'DysTmax',
-AVG(IF(describedBy ='3', value, NULL)) AS 'Tmin', COUNT(IF(describedBy = '3', value, NULL)) AS 'DysTmin',
-AVG(IF(describedBy ='106', value, NULL)) AS 'STPres', COUNT(IF(describedBy = '106', value, NULL)) AS 'DysPres',
-AVG(IF(describedBy ='107', value, NULL)) AS 'MSL', AVG(IF(describedBy = '478', value, NULL)) AS 'GPM',
-AVG(IF(describedBy ='166', value, NULL)) AS 'VPres', COUNT(IF(describedBy = '166', value, NULL)) AS 'DysVpres',
-SUM(IF(describedBy ='5', value, NULL)) AS 'Precip', COUNT(IF(describedBy = '5', value, NULL)) AS 'DysPrecip',
-SUM(IF(describedBy ='84', value, NULL)) AS 'SNHRS', COUNT(IF(describedBy = '84', value, NULL)) AS 'DysSNHRS'
+AVG(IF(describedBy = '" & TMPMN & "', value, NULL)) AS 'Tmn', COUNT(IF(describedBy = '" & TMPMN & "', value, NULL)) AS 'DysTmn', STD(IF(describedBy = '" & TMPMN & "', value, NULL)) AS 'STDTmn',
+AVG(IF(describedBy = '" & TMPMAX & "', value, NULL)) AS 'Tmax', COUNT(IF(describedBy = '" & TMPMAX & "', value, NULL)) AS 'DysTmax',
+AVG(IF(describedBy = '" & TMPMIN & "', value, NULL)) AS 'Tmin', COUNT(IF(describedBy = '" & TMPMIN & "', value, NULL)) AS 'DysTmin',
+AVG(IF(describedBy = '" & PRESST & "', value, NULL)) AS 'STPres', COUNT(IF(describedBy = '" & PRESSL & "', value, NULL)) AS 'DysPres',
+AVG(IF(describedBy = '" & PRESSL & "', value, NULL)) AS 'MSL', AVG(IF(describedBy = '" & GPM & "', value, NULL)) AS 'GPM',
+AVG(IF(describedBy = '" & VAPPSR & "', value, NULL)) AS 'VPres', COUNT(IF(describedBy = '" & VAPPSR & "', value, NULL)) AS 'DysVpres',
+SUM(IF(describedBy = '" & PRECIP & "', value, NULL)) AS 'Precip', COUNT(IF(describedBy = '" & PRECIP & "', value, NULL)) AS 'DysPrecip',
+SUM(IF(describedBy = '" & SUNSHN & "', value, NULL)) AS 'SNHRS', COUNT(IF(describedBy = '" & SUNSHN & "', value, NULL)) AS 'DysSNHRS'
 FROM (SELECT recordedFrom, describedBy, obsDatetime, obsValue value FROM observationfinal
-WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='4' OR describedBy ='2' OR describedBy ='3' OR describedBy ='5' OR describedBy ='84' OR describedBy ='106' OR describedBy ='107' OR describedBy ='166') and (year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ") ORDER BY recordedFrom, obsDatetime) as tt 
+WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='" & TMPMN & "' OR describedBy ='" & TMPMAX & "' OR describedBy ='" & TMPMIN & "' OR describedBy ='" & PRECIP & "' OR describedBy ='" & SUNSHN & "' OR describedBy ='" & PRESST & "' OR describedBy ='" & PRESSL & "' OR describedBy ='" & VAPPSR & "') and (year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ") ORDER BY recordedFrom, obsDatetime) as tt 
 GROUP BY StationId, MM;"
 
             conn.Open()
@@ -323,7 +399,8 @@ GROUP BY StationId, MM;"
             ds.Clear()
             da.Fill(ds, "values")
             conn.Close()
-
+            'MsgBox(sql)
+            'MsgBox(ds.Tables("values").Rows.Count)
             dat = ""
             Group1 = "111" & Section1_Group1(ds) ' Compute data for Group1
             Group2 = Section1_Group2(ds)
@@ -497,7 +574,7 @@ GROUP BY StationId, MM;"
         Try
             ' Compute Precipitation equivalent for the month
             sql = "Select recordedFrom As stn, year(obsDatetime) As yy, month(obsDatetime) As mm, SUM(obsvalue) As Total from observationfinal
-               where(recordedFrom = '" & stn & "') and describedBy = 5 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy;"
+               where(recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy;"
 
             conn.Open()
             da6 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -549,7 +626,7 @@ GROUP BY StationId, MM;"
 
             ' Compute number of days with precipitation ≥1.0 mm
             sql = "select recordedFrom as stn, year(obsDatetime) as yy, month(obsDatetime) as mm, COUNT(obsvalue) as Days from observationfinal
-               where (recordedFrom = '" & stn & "') and describedBy = 5 and obsvalue >= 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy,mm;"
+               where (recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and obsvalue >= 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & " group by yy,mm;"
 
             conn.Open()
             da6 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -567,6 +644,7 @@ GROUP BY StationId, MM;"
 
             Return " 6" & Total & Quintile & dys
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return ""
         End Try
@@ -596,50 +674,26 @@ GROUP BY StationId, MM;"
         End Try
     End Function
     Function Section1_Group8(stn As String, rs As DataSet) As String
-        Dim Press, Tmean, Tmax, Tmin, NA As String
+        Dim Press, Tmean, Tmax, Tmin As String
 
         ' Compute Missing days for Pressure, Tmean, Tmax, Tmin
-        Press = "//"
-        Tmean = "//"
-        Tmax = "/"
-        Tmin = "/"
+        'Press = "//"
+        'Tmean = "//"
+        'Tmax = "/"
+        'Tmin = "/"
 
         Try
 
-            With rs.Tables("values")
-                If .Rows.Count > 0 Then
-                    DaysMissHlyObs(stn, Press, NA)
+            Press = DaysMissing(DaysAvailable(stn, PRESST))
+            Tmean = DaysMissing(DaysAvailable(stn, TMPMN))
+            Tmax = DaysMissing(DaysAvailable(stn, TMPMAX))
+            Tmin = DaysMissing(DaysAvailable(stn, TMPMIN))
 
-                    ' Compute available days
-                    If Not IsDBNull(.Rows(0).Item("DysTmn")) Then
-                        Tmean = DaysMissing(CInt(.Rows(0).Item("DysTmn")))
-                    Else
-                        Tmean = DaysMissing(0)
-                    End If
-                    Tmean = Tmean.PadLeft(2, "0")
+            If Val(Tmax) > 8 Then Tmax = 9
+            If Val(Tmin) > 8 Then Tmin = 9
 
-                    If Not IsDBNull(.Rows(0).Item("DysTmax")) Then
-                        'Tmax = .Rows(0).Item("DysTmax")
-                        Tmax = DaysMissing(CInt(.Rows(0).Item("DysTmax")))
-                    Else
-                        Tmax = DaysMissing(0)
-                    End If
-
-                    If Not IsDBNull(.Rows(0).Item("DysTmin")) Then
-                        Tmin = DaysMissing(CInt(.Rows(0).Item("DysTmin")))
-                    Else
-                        Tmin = DaysMissing(0)
-                    End If
-
-                    ' Code 9 used if missing days for Maximum and Minimum temperature are 9 or more
-                    If Val(Tmax) > 8 Then Tmax = 9
-                    If Val(Tmin) > 8 Then Tmin = 9
-
-                End If
-
-                If Press = "//" And Tmean = "//" And Tmax = "/" And Tmin = "/" Then Return ""
-                Return " 8" & Press & Tmean & Tmax & Tmin
-            End With
+            'If Press = "//" And Tmean = "//" And Tmax = "//" And Tmin = "//" Then Return ""
+            Return " 8" & Press & Tmean & Tmax & Tmin
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -647,41 +701,19 @@ GROUP BY StationId, MM;"
         End Try
     End Function
     Function Section1_Group9(stn As String, rs As DataSet) As String
-        Dim VPress, Precip, SunHrs, NA As String
+        Dim VPress, Precp, SunHrs As String
 
         ' Compute Missing days for Vapour Pressure, Tmean, Tmax, Tmin
-        VPress = "//"
-        Precip = "//"
-        SunHrs = "//"
-
+        'VPress = "//"
+        'Precip = "//"
+        'SunHrs = "//"
         Try
-            With rs.Tables("values")
-                If .Rows.Count > 0 Then
-                    DaysMissHlyObs(stn, NA, VPress)
-                    'If Not IsDBNull(.Rows(0).Item("DysVPres")) Then
-                    '    VPress = .Rows(0).Item("DysVPres")
-                    '    VPress = DaysMissing(CInt(VPress)).ToString.PadLeft(2, "0")
-                    'Else
-                    '    VPress = DaysMissing(0).ToString.PadLeft(2, "0")
-                    'End If
+            VPress = DaysMissing(DaysAvailable(stn, VAPPSR))
+            Precp = DaysMissing(DaysAvailable(stn, PRECIP))
+            SunHrs = DaysMissing(DaysAvailable(stn, SUNSHN))
 
-                    If Not IsDBNull(.Rows(0).Item("DysPrecip")) Then
-                        Precip = .Rows(0).Item("DysPrecip")
-                        Precip = DaysMissing(CInt(Precip)).ToString.PadLeft(2, "0")
-                    Else
-                        Precip = DaysMissing(0).ToString.PadLeft(2, "0")
-                    End If
-
-                    If Not IsDBNull(.Rows(0).Item("DysSNHRS")) Then
-                        SunHrs = .Rows(0).Item("DysSNHRS")
-                        SunHrs = DaysMissing(CInt(SunHrs)).ToString.PadLeft(2, "0")
-                    Else
-                        SunHrs = DaysMissing(0).ToString.PadLeft(2, "0")
-                    End If
-                End If
-                If VPress = "//" And Precip = "//" And SunHrs = "//" Then Return ""
-                Return " 9" & VPress & Precip & SunHrs
-            End With
+            'If VPress = "//" And Precp = "//" And SunHrs = "//" Then Return ""
+            Return " 9" & VPress & Precp & SunHrs
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -695,7 +727,7 @@ GROUP BY StationId, MM;"
         Dim Nhrs As String
 
         Try
-            sql = "select * from normals_Totals where code = 84;"
+            sql = "select * from normals_Totals where code = " & SUNSHN & ";"
 
             conn.Open()
             da7 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -720,11 +752,44 @@ GROUP BY StationId, MM;"
             End With
             Return True
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return False
         End Try
 
     End Function
+    Function DaysAvailable(stn As String, code As Integer) As Integer
+        Dim daDys As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsDys As New DataSet
+
+        sql = "Select stn,describedBy,yy,mm, COUNT(IF(describedBy = '" & code & "', value, NULL)) AS 'Dys'
+                   From (SELECT recordedFrom as stn, describedBy, year(obsDatetime) as yy, month(obsDatetime) as mm, day(obsDatetime) as dd, AVG(obsValue) as value
+                   FROM observationfinal
+                   WHERE (RecordedFrom = '" & stn & "') AND describedBy ='" & code & "' and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & "
+                   group by yy,describedBy,mm,dd) as TT
+                   Group by yy, mm;"
+        Try
+            conn.Open()
+            daDys = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            daDys.SelectCommand.CommandTimeout = 0
+            dsDys.Clear()
+            daDys.Fill(dsDys, "AvlDys")
+            conn.Close()
+
+            With dsDys.Tables("AvlDys")
+                If .Rows.Count > 0 Then
+                    Return .Rows(0).Item("Dys")
+                Else
+                    Return 0
+                End If
+            End With
+
+        Catch ex As Exception
+            Return 0
+        End Try
+
+    End Function
+
     Function DaysMissing(AvalDays As Integer) As Integer
         Dim Tmissing As Integer
         Tmissing = 0
@@ -732,6 +797,7 @@ GROUP BY StationId, MM;"
         Try
             Tmissing = DateTime.DaysInMonth(CInt(txtYear.Text), CInt(txtMonth.Text)) - AvalDays
             Return Tmissing
+
         Catch ex As Exception
             MsgBox(ex.Message)
             Return Tmissing
@@ -743,11 +809,11 @@ GROUP BY StationId, MM;"
         Dim ds0 As New DataSet
 
         sql = "Select stn, yy,mm,
-                COUNT(IF(describedBy = '106', value, NULL)) AS 'DysPres', 
-                COUNT(IF(describedBy = '166', value, NULL)) AS 'DysVpres'
+                COUNT(IF(describedBy = '" & PRESST & "', value, NULL)) AS 'DysPres', 
+                COUNT(IF(describedBy = '" & VAPPSR & "', value, NULL)) AS 'DysVpres'
                 From (SELECT recordedFrom as stn, describedBy, year(obsDatetime) as yy, month(obsDatetime) as mm, day(obsDatetime) as dd, AVG(obsValue) as value
                 FROM observationfinal
-                WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='106' OR describedBy ='166') and year(obsDatetime) = " & Val(txtYear.Text) & " and month(obsDatetime) = " & Val(txtMonth.Text) & " 
+                WHERE (RecordedFrom = '" & stn & "') AND (describedBy ='" & PRESST & "' OR describedBy ='" & VAPPSR & "') and year(obsDatetime) = " & Val(txtYear.Text) & " and month(obsDatetime) = " & Val(txtMonth.Text) & " 
                 group by yy,describedBy,mm,dd) as TT
                 Group by yy, mm;"
 
@@ -781,6 +847,7 @@ GROUP BY StationId, MM;"
 
             Return True
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message & " at DaysMissHlyObs")
             Return False
         End Try
@@ -792,7 +859,7 @@ GROUP BY StationId, MM;"
         Dim yrs As Integer
 
         'Section2_data = ""
-        mm = CInt(txtMonth.Text) + 1
+        mm = CInt(txtMonth.Text) '+ 1
         yrs = Val(txtEndYear.Text) - Val(txtBeginYear.Text) + 1
         nPress = "////"
         nMSL = "////"
@@ -808,10 +875,11 @@ GROUP BY StationId, MM;"
             Return ""
         End If
 
-        Try
-            ' Get Normals for those values that are averaged namely Pressure, Temperatures and Standard deviation
-            sql = "select * from normals_averages where stn = '" & stn & "';"
 
+        ' Get Normals for those values that are averaged namely Pressure, Temperatures and Standard deviation
+        sql = "select * from normals_averages where stn = '" & stn & "';"
+
+        Try
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
@@ -823,12 +891,12 @@ GROUP BY StationId, MM;"
                 For i = 0 To .Rows.Count - 1
                     If IsDBNull(.Rows(i).Item(mm)) Then Exit For
                     dat = .Rows(i).Item(mm)
-                    If .Rows(i).Item("code") = 106 Then nPress = dat
-                    If .Rows(i).Item("code") = 107 Then nMSL = dat
-                    If .Rows(i).Item("code") = 166 Then nVPress = dat
-                    If .Rows(i).Item("code") = 4 Then nTmn = dat
-                    If .Rows(i).Item("code") = 2 Then nTmax = dat
-                    If .Rows(i).Item("code") = 3 Then nTmin = dat
+                    If .Rows(i).Item("code") = PRESST Then nPress = dat
+                    If .Rows(i).Item("code") = PRESSL Then nMSL = dat
+                    If .Rows(i).Item("code") = VAPPSR Then nVPress = dat
+                    If .Rows(i).Item("code") = TMPMN Then nTmn = dat
+                    If .Rows(i).Item("code") = TMPMAX Then nTmax = dat
+                    If .Rows(i).Item("code") = TMPMIN Then nTmin = dat
                 Next
             End With
 
@@ -845,15 +913,15 @@ GROUP BY StationId, MM;"
                 For i = 0 To .Rows.Count - 1
                     If IsDBNull(.Rows(i).Item(mm)) Then Exit For
                     dat = .Rows(i).Item(mm)
-                    If .Rows(i).Item("code") = 5 Then nPrecip = dat
-                    If .Rows(i).Item("code") = 84 Then nSUNhrs = dat
+                    If .Rows(i).Item("code") = PRECIP Then nPrecip = dat
+                    If .Rows(i).Item("code") = SUNSHN Then nSUNhrs = dat
                 Next
             End With
 
             'Get Normal Number of days per month with precipitation           '
             sql = "Select stn,mm, AVG(Days) As Total from
                     (select recordedFrom as stn, year(obsDatetime) as yy, month(obsDatetime) as mm, COUNT(obsvalue) as Days from observationfinal
-                    where (recordedFrom = '" & stn & "') and describedBy = 5 and obsvalue >= 1 and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " and month(obsDatetime)= " & txtMonth.Text & " group by stn,yy,mm) as TT
+                    where (recordedFrom = '" & stn & "') and describedBy = '" & PRECIP & "' and obsvalue >= 1 and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " and month(obsDatetime)= " & txtMonth.Text & " group by stn,yy,mm) as TT
                     group by stn,mm;"
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -872,11 +940,11 @@ GROUP BY StationId, MM;"
 
             ' Get Years in Normal computations
             sql = "Select stn,
-                    COUNT(IF(code = 4, code, NULL)) AS 'yrsTmn',COUNT(IF(code = 2, code, NULL)) AS 'yrsXTemp',
-                    COUNT(IF(code = 106, code, NULL)) AS 'yrsPress', COUNT(IF(code = 166, code, NULL)) AS 'yrsVPress',
-                    COUNT(IF(code = 5, code, NULL)) AS 'YrsPrecip', COUNT(IF(code = 84, code, NULL)) AS 'yrsSUNhrs'
+                    COUNT(IF(code = " & TMPMN & ", code, NULL)) AS 'yrsTmn',COUNT(IF(code = " & TMPMAX & ", code, NULL)) AS 'yrsXTemp',
+                    COUNT(IF(code = " & PRESST & ", code, NULL)) AS 'yrsPress', COUNT(IF(code = " & VAPPSR & ", code, NULL)) AS 'yrsVPress',
+                    COUNT(IF(code = " & PRECIP & ", code, NULL)) AS 'YrsPrecip', COUNT(IF(code = " & SUNSHN & ", code, NULL)) AS 'yrsSUNhrs'
                     from (select recordedFrom as stn,describedBy as code,year(obsDatetime) as yy,month(obsDatetime) as mm from observationfinal
-                    where (describedBy = '2' or describedBy = '4' or describedBy = '106' or describedBy = '166' or describedBy = '5' or describedBy = '84') and recordedFrom ='" & stn & "'
+                    where (describedBy = '" & TMPMAX & "' or describedBy = '" & TMPMN & "' or describedBy = '" & PRESST & "' or describedBy = '" & VAPPSR & "' or describedBy = '" & PRECIP & "' or describedBy = '" & SUNSHN & "') and recordedFrom ='" & stn & "'
                     and month(obsDatetime) = " & txtMonth.Text & " and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & " group by stn,code, yy) as TT
                     group by stn;"
 
@@ -907,7 +975,7 @@ GROUP BY StationId, MM;"
 
             ' Get standard deviation for mean temperature
             sql = "Select recordedFrom As stn, describedBy As code,  month(obsDatetime) as mm, STD(If(describedBy = 4, obsvalue, NULL)) As stdev from observationfinal
-                    where (recordedFrom ='" & stn & "') and describedBy = 4 and month(obsDatetime)= " & txtMonth.Text & " and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & "
+                    where (recordedFrom ='" & stn & "') and describedBy = '" & TMPMN & "' and month(obsDatetime)= " & txtMonth.Text & " and year(obsDatetime) between " & txtBeginYear.Text & " and " & txtEndYear.Text & "
                     group by stn, code,mm;"
 
             conn.Open()
@@ -1029,6 +1097,7 @@ GROUP BY StationId, MM;"
             Return dat
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return ""
         End Try
@@ -1038,51 +1107,52 @@ GROUP BY StationId, MM;"
         Dim dat, Group0, Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9 As String
         dat = ""
         Try
-            Group0 = Days4ParamentersBeyond(stn, 2, ">= 25")
-            Group0 = Group0 & Days4ParamentersBeyond(stn, 2, ">= 30")
+            Group0 = Days4ParamentersBeyond(stn, TMPMAX, ">= 25")
+            Group0 = Group0 & Days4ParamentersBeyond(stn, TMPMAX, ">= 30")
             If Group0 <> "0000" Then dat = dat & " 0" & Group0
 
-            Group1 = Days4ParamentersBeyond(stn, 2, ">= 35")
-            Group1 = Group1 & Days4ParamentersBeyond(stn, 2, ">= 40")
+            Group1 = Days4ParamentersBeyond(stn, TMPMAX, ">= 35")
+            Group1 = Group1 & Days4ParamentersBeyond(stn, TMPMAX, ">= 40")
             If Group1 <> "0000" Then dat = dat & " 1" & Group1
 
-            Group2 = Days4ParamentersBeyond(stn, 2, "< 0")
-            Group2 = Group2 & Days4ParamentersBeyond(stn, 3, "< 0")
+            Group2 = Days4ParamentersBeyond(stn, TMPMAX, "< 0")
+            Group2 = Group2 & Days4ParamentersBeyond(stn, TMPMIN, "< 0")
             If Group2 <> "0000" Then dat = dat & " 3" & Group2
 
-            Group3 = Days4ParamentersBeyond(stn, 5, ">= 1")
-            Group3 = Group3 & Days4ParamentersBeyond(stn, 5, ">= 5")
+            Group3 = Days4ParamentersBeyond(stn, PRECIP, ">= 1")
+            Group3 = Group3 & Days4ParamentersBeyond(stn, PRECIP, ">= 5")
             If Group3 <> "0000" Then dat = dat & " 3" & Group3
 
-            Group4 = Days4ParamentersBeyond(stn, 5, ">= 10")
-            Group4 = Group4 & Days4ParamentersBeyond(stn, 5, ">= 50")
+            Group4 = Days4ParamentersBeyond(stn, PRECIP, ">= 10")
+            Group4 = Group4 & Days4ParamentersBeyond(stn, PRECIP, ">= 50")
             If Group4 <> "0000" Then dat = dat & " 4" & Group4
 
-            Group5 = Days4ParamentersBeyond(stn, 5, ">= 100")
-            Group5 = Group5 & Days4ParamentersBeyond(stn, 5, ">= 150")
+            Group5 = Days4ParamentersBeyond(stn, PRECIP, ">= 100")
+            Group5 = Group5 & Days4ParamentersBeyond(stn, PRECIP, ">= 150")
             If Group5 <> "0000" Then dat = dat & " 5" & Group5
 
-            Group6 = Days4ParamentersBeyond(stn, 50, "> 0")
-            Group6 = Group6 & Days4ParamentersBeyond(stn, 50, ">= 1")
+            Group6 = Days4ParamentersBeyond(stn, SNWDEP, "> 0")
+            Group6 = Group6 & Days4ParamentersBeyond(stn, SNWDEP, ">= 1")
             If Group6 <> "0000" Then dat = dat & " 6" & Group6
 
-            Group7 = Days4ParamentersBeyond(stn, 50, ">= 10")
-            Group7 = Group7 & Days4ParamentersBeyond(stn, 50, ">= 50")
+            Group7 = Days4ParamentersBeyond(stn, SNWDEP, ">= 10")
+            Group7 = Group7 & Days4ParamentersBeyond(stn, SNWDEP, ">= 50")
             If Group7 <> "0000" Then dat = dat & " 7" & Group7
 
-            Group8 = Days4ParamentersBeyond(stn, 111, ">= 10")
-            Group8 = Group8 & Days4ParamentersBeyond(stn, 111, ">= 20")
-            Group8 = Group8 & Days4ParamentersBeyond(stn, 111, ">= 30")
+            Group8 = Days4ParamentersBeyond(stn, WNDSPD, ">= 10")
+            Group8 = Group8 & Days4ParamentersBeyond(stn, WNDSPD, ">= 20")
+            Group8 = Group8 & Days4ParamentersBeyond(stn, WNDSPD, ">= 30")
             If Group8 <> "000000" Then dat = dat & " 8" & Group8
 
-            Group9 = Days4ParamentersBeyond(stn, 110, "< 50")
-            Group9 = Group9 & Days4ParamentersBeyond(stn, 110, "< 100")
-            Group9 = Group9 & Days4ParamentersBeyond(stn, 110, "< 1000")
+            Group9 = Days4ParamentersBeyond(stn, VISBY, "< 50")
+            Group9 = Group9 & Days4ParamentersBeyond(stn, VISBY, "< 100")
+            Group9 = Group9 & Days4ParamentersBeyond(stn, VISBY, "< 1000")
             If Group9 <> "000000" Then dat = dat & " 9" & Group9
 
             Return dat '" 0" & Group0 & " 1" & Group1
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return dat
         End Try
@@ -1097,7 +1167,7 @@ GROUP BY StationId, MM;"
             ' Compute Group0
             Group0 = ""
             sgn = 0
-            If ValAndDay(stn, "desc", 4, xtval, dys) Then
+            If ValAndDay(stn, "desc", TMPMIN, xtval, dys) Then
                 If Val(xtval) < 0 Then sgn = 1
                 xtval = xtval.PadLeft(3, "0")
                 Group0 = sgn & xtval & dys
@@ -1109,7 +1179,7 @@ GROUP BY StationId, MM;"
             ' Compute Group1
             Group1 = ""
             sgn = 0
-            If ValAndDay(stn, "asc", 4, xtval, dys) Then
+            If ValAndDay(stn, "asc", TMPMIN, xtval, dys) Then
                 If Val(xtval) < 0 Then sgn = 1
                 xtval = xtval.PadLeft(3, "0")
                 Group1 = sgn & xtval & dys
@@ -1121,7 +1191,7 @@ GROUP BY StationId, MM;"
             ' Compute Group2
             Group2 = ""
             sgn = 0
-            If ValAndDay(stn, "desc", 2, xtval, dys) Then
+            If ValAndDay(stn, "desc", TMPMAX, xtval, dys) Then
                 If Val(xtval) < 0 Then sgn = 1
                 xtval = xtval.PadLeft(3, "0")
                 Group2 = sgn & xtval & dys
@@ -1133,7 +1203,7 @@ GROUP BY StationId, MM;"
             ' Compute Group1
             Group3 = ""
             sgn = 0
-            If ValAndDay(stn, "asc", 3, xtval, dys) Then
+            If ValAndDay(stn, "asc", TMPMIN, xtval, dys) Then
                 If Val(xtval) < 0 Then sgn = 1
                 xtval = xtval.PadLeft(3, "0")
                 Group3 = sgn & xtval & dys
@@ -1144,7 +1214,7 @@ GROUP BY StationId, MM;"
 
             ' Compute Group4
             Group4 = ""
-            If ValAndDay(stn, "desc", 5, xtval, dys) Then
+            If ValAndDay(stn, "desc", PRECIP, xtval, dys) Then
                 'MsgBox(sql)
                 xtval = xtval.PadLeft(4, "0")
                 Group4 = xtval & dys
@@ -1155,7 +1225,7 @@ GROUP BY StationId, MM;"
 
             ' Compute Group5
             Group5 = ""
-            If ValAndDay(stn, "desc", 111, xtval, dys) Then
+            If ValAndDay(stn, "desc", WNDSPD, xtval, dys) Then
                 xtval = xtval.PadLeft(3, "0")
                 Group5 = xtval & dys
             Else
@@ -1200,6 +1270,7 @@ GROUP BY StationId, MM;"
             Return dys.PadLeft(2, "0")
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return dys
         End Try
@@ -1223,7 +1294,7 @@ GROUP BY StationId, MM;"
                     xtVal = .Rows(0).Item("value")
                     dy = .Rows(0).Item("dd")
                     If .Rows(1).Item("value") = xtVal Then dy = Val(dy) + 50
-                    If code = 5 And Val(xtVal) = 0 Then dy = "0"
+                    If code = PRECIP And Val(xtVal) = 0 Then dy = "0"
 
                     xtVal = Math.Round(Val(xtVal) * 10, 0)
                     dy = dy.PadLeft(2, "0")
@@ -1236,6 +1307,7 @@ GROUP BY StationId, MM;"
 
             Return True
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return False
         End Try
@@ -1247,7 +1319,7 @@ GROUP BY StationId, MM;"
         info = "/"
 
         Try
-            sql = "select units from obselement where elementId = '111';"
+            sql = "select units from obselement where elementId = '" & WNDSPD & "';"
 
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -1264,6 +1336,7 @@ GROUP BY StationId, MM;"
 
             Return info
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return info
         End Try
@@ -1274,8 +1347,8 @@ GROUP BY StationId, MM;"
 
         dat = "////"
         Try
-            sql = "select COUNT(IF(describedBy = '30', obsvalue, NULL)) AS 'THND', COUNT(IF(describedBy = '31', obsvalue, NULL)) AS 'HAIL' from observationfinal
-                   where recordedFrom = '" & stn & "' and (describedBy=30 or describedBy=31) and obsvalue = 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ";"
+            sql = "select COUNT(IF(describedBy = '" & DYTHND & "', obsvalue, NULL)) AS 'THND', COUNT(IF(describedBy = '" & DYHAIL & "', obsvalue, NULL)) AS 'HAIL' from observationfinal
+                   where recordedFrom = '" & stn & "' and (describedBy= '" & DYTHND & "' or describedBy = '" & DYHAIL & "') and obsvalue = 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ";"
 
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -1296,6 +1369,7 @@ GROUP BY StationId, MM;"
             Return dat
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return dat
         End Try
@@ -1339,6 +1413,7 @@ GROUP BY StationId, MM;"
             Return dat
 
         Catch ex As Exception
+            conn.Close()
             MsgBox(ex.Message)
             Return ""
         End Try
@@ -1355,5 +1430,51 @@ GROUP BY StationId, MM;"
                 chk222.Checked = True
             End If
         End If
+    End Sub
+
+    Private Sub butHelp_Click(sender As Object, e As EventArgs) Handles butHelp.Click
+        Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "climateproducts.htm#CLIMAT")
+    End Sub
+
+    Private Sub ParametersToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+        sql = "select * from climat_parameters order by Nos;"
+
+        Dim climatds As New DataSet
+        Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dbconn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim dbConnectionString As String
+
+        Try
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = dbConnectionString
+            conn.Open()
+
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            climatds.Clear()
+            da.Fill(climatds, "climat_parameters")
+            conn.Close()
+
+            formDataView.Show()
+            formDataView.DataGridView.DataSource = climatds.Tables(0)
+            formDataView.DataGridView.Refresh()
+
+            'formDataView.DataGridView.Dock = DockStyle.Top
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub butSetting_Click(sender As Object, e As EventArgs) Handles butSetting.Click
+        Try
+            frmClimatSettings.Show()
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " " & ex.HResult)
+        End Try
     End Sub
 End Class

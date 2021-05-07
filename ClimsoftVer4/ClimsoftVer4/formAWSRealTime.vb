@@ -1316,7 +1316,7 @@ Err:
 
                     'Skip records with invalid date stamp
                     If IsDate(datestring) Then
-
+                        'Log_Errors(datestring)
                         ' Compare current time with time stamp on hourly basis. Skip records outside the time range
                         If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
 
@@ -1326,6 +1326,7 @@ Err:
                         For j = 0 To colmn - 1
                             If Not IsDBNull(dTable.Rows(k).Item(j)) Then
                                 x = dTable.Rows(k).Item(j)
+                                'Log_Errors(x)
                                 If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
                                     x = Strings.Mid(x, 2, Len(x) - 2)
                                 End If

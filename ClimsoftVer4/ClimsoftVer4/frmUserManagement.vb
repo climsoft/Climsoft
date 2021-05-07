@@ -890,9 +890,13 @@
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
+                        Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE,DROP ON " & dbnme & ".qcabslimits TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
 
-                            'Privileges on operational CLIMSOFT V4 test database
-                            Sql = "GRANT FILE ON *.* TO '" & txtUserName.Text & "';"
+                        'Privileges on operational CLIMSOFT V4 test database
+                        Sql = "GRANT FILE ON *.* TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -1017,6 +1021,10 @@
                         objCmd.ExecuteNonQuery()
                         Sql = "GRANT DELETE,SELECT,INSERT,UPDATE,CREATE ON mariadb_climsoft_test_db_v4.userrecords TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+                        Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE,DROP ON mariadb_climsoft_test_db_v4.qcabslimits TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                         'execute command
                         objCmd.ExecuteNonQuery()
 
@@ -1213,11 +1221,17 @@
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
-                            Sql = "GRANT SELECT ON " & dbnme & ".tblproducts TO '" & txtUserName.Text & "';"
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                            'execute command
-                            objCmd.ExecuteNonQuery()
-                            Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".paperarchive TO '" & txtUserName.Text & "';"
+                        '    Sql = "GRANT SELECT ON " & dbnme & ".tblproducts TO '" & txtUserName.Text & "';"
+                        '    objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        ''execute command
+                        'objCmd.ExecuteNonQuery()
+
+                        Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".tblproducts TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
+
+                        Sql = "GRANT DELETE,SELECT,INSERT,UPDATE ON " & dbnme & ".paperarchive TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
@@ -1266,9 +1280,13 @@
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
                             'execute command
                             objCmd.ExecuteNonQuery()
+                        Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.tblproducts TO '" & txtUserName.Text & "';"
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                        'execute command
+                        objCmd.ExecuteNonQuery()
 
-                            '8. Developer
-                        ElseIf cboUserRole.Text = "ClimsoftDeveloper" Then
+                        '8. Developer
+                    ElseIf cboUserRole.Text = "ClimsoftDeveloper" Then
                             'Privileges on operational CLIMSOFT V4 database
                             Sql = "GRANT SHOW DATABASES ON *.* TO '" & txtUserName.Text & "';"
                             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
@@ -1495,6 +1513,9 @@
         'Open connection to database
         conn.Open()
         Dim usrName As String
+        Dim dbnme As String
+        CurrentDB(connStr, dbnme)
+
         Try
             usrName = Me.DataGridView1.CurrentCell.Value
 
@@ -1506,8 +1527,13 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             objCmd.ExecuteNonQuery()
 
-            'Delete user from [climsoftusers] table
-            Sql = "DELETE FROM climsoftusers where userName='" & usrName & "';"
+            'Delete user from [climsoftusers] table of current database
+            Sql = "DELETE FROM " & dbnme & ".climsoftusers where userName='" & usrName & "';"
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            objCmd.ExecuteNonQuery()
+
+            'Delete user from [climsoftusers] table of test database
+            Sql = "DELETE FROM mariadb_climsoft_test_db_v4.climsoftusers where userName='" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             objCmd.ExecuteNonQuery()
 

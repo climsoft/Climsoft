@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmCLIMAT
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmCLIMAT
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lstvStations = New System.Windows.Forms.ListView()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
@@ -49,6 +49,7 @@ Partial Class frmCLIMAT
         Me.txtCLIMAT = New System.Windows.Forms.TextBox()
         Me.butSend = New System.Windows.Forms.Button()
         Me.butSetting = New System.Windows.Forms.Button()
+        Me.butHelp = New System.Windows.Forms.Button()
         Me.grpOptions.SuspendLayout()
         Me.grpStatistics.SuspendLayout()
         Me.grpCLIMATMonth.SuspendLayout()
@@ -63,7 +64,7 @@ Partial Class frmCLIMAT
         Me.lstvStations.HideSelection = False
         Me.lstvStations.HoverSelection = True
         Me.lstvStations.LabelEdit = True
-        Me.lstvStations.Location = New System.Drawing.Point(32, 40)
+        Me.lstvStations.Location = New System.Drawing.Point(32, 68)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
         Me.lstvStations.Size = New System.Drawing.Size(354, 134)
@@ -75,7 +76,7 @@ Partial Class frmCLIMAT
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(105, 13)
+        Me.cmbstation.Location = New System.Drawing.Point(105, 41)
         Me.cmbstation.Name = "cmbstation"
         Me.cmbstation.Size = New System.Drawing.Size(281, 21)
         Me.cmbstation.TabIndex = 18
@@ -83,7 +84,7 @@ Partial Class frmCLIMAT
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(26, 16)
+        Me.lblStation.Location = New System.Drawing.Point(26, 44)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(73, 13)
         Me.lblStation.TabIndex = 20
@@ -94,9 +95,9 @@ Partial Class frmCLIMAT
         Me.grpOptions.Controls.Add(Me.chk444)
         Me.grpOptions.Controls.Add(Me.chk333)
         Me.grpOptions.Controls.Add(Me.chk222)
-        Me.grpOptions.Location = New System.Drawing.Point(29, 199)
+        Me.grpOptions.Location = New System.Drawing.Point(29, 238)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(345, 123)
+        Me.grpOptions.Size = New System.Drawing.Size(345, 106)
         Me.grpOptions.TabIndex = 25
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Include Optional Sections - If sufficient climate statistics are available "
@@ -104,7 +105,7 @@ Partial Class frmCLIMAT
         'chk444
         '
         Me.chk444.AutoSize = True
-        Me.chk444.Location = New System.Drawing.Point(14, 87)
+        Me.chk444.Location = New System.Drawing.Point(14, 81)
         Me.chk444.Name = "chk444"
         Me.chk444.Size = New System.Drawing.Size(204, 17)
         Me.chk444.TabIndex = 2
@@ -114,7 +115,7 @@ Partial Class frmCLIMAT
         'chk333
         '
         Me.chk333.AutoSize = True
-        Me.chk333.Location = New System.Drawing.Point(14, 64)
+        Me.chk333.Location = New System.Drawing.Point(14, 58)
         Me.chk333.Name = "chk333"
         Me.chk333.Size = New System.Drawing.Size(278, 17)
         Me.chk333.TabIndex = 1
@@ -124,7 +125,7 @@ Partial Class frmCLIMAT
         'chk222
         '
         Me.chk222.AutoSize = True
-        Me.chk222.Location = New System.Drawing.Point(14, 41)
+        Me.chk222.Location = New System.Drawing.Point(14, 35)
         Me.chk222.Name = "chk222"
         Me.chk222.Size = New System.Drawing.Size(128, 17)
         Me.chk222.TabIndex = 0
@@ -139,16 +140,16 @@ Partial Class frmCLIMAT
         Me.grpStatistics.Controls.Add(Me.txtBeginYear)
         Me.grpStatistics.Controls.Add(Me.lblBeginYear)
         Me.grpStatistics.Controls.Add(Me.lblPeriod)
-        Me.grpStatistics.Location = New System.Drawing.Point(380, 199)
+        Me.grpStatistics.Location = New System.Drawing.Point(380, 229)
         Me.grpStatistics.Name = "grpStatistics"
-        Me.grpStatistics.Size = New System.Drawing.Size(274, 123)
+        Me.grpStatistics.Size = New System.Drawing.Size(274, 115)
         Me.grpStatistics.TabIndex = 26
         Me.grpStatistics.TabStop = False
         Me.grpStatistics.Text = "Generate long term statistics for CLIMAT message"
         '
         'butStatistics
         '
-        Me.butStatistics.Location = New System.Drawing.Point(182, 75)
+        Me.butStatistics.Location = New System.Drawing.Point(182, 72)
         Me.butStatistics.Name = "butStatistics"
         Me.butStatistics.Size = New System.Drawing.Size(35, 22)
         Me.butStatistics.TabIndex = 29
@@ -157,7 +158,7 @@ Partial Class frmCLIMAT
         '
         'txtEndYear
         '
-        Me.txtEndYear.Location = New System.Drawing.Point(92, 90)
+        Me.txtEndYear.Location = New System.Drawing.Point(92, 87)
         Me.txtEndYear.Name = "txtEndYear"
         Me.txtEndYear.Size = New System.Drawing.Size(40, 20)
         Me.txtEndYear.TabIndex = 28
@@ -165,7 +166,7 @@ Partial Class frmCLIMAT
         'lblEndYear
         '
         Me.lblEndYear.AutoSize = True
-        Me.lblEndYear.Location = New System.Drawing.Point(24, 97)
+        Me.lblEndYear.Location = New System.Drawing.Point(24, 94)
         Me.lblEndYear.Name = "lblEndYear"
         Me.lblEndYear.Size = New System.Drawing.Size(51, 13)
         Me.lblEndYear.TabIndex = 27
@@ -173,7 +174,7 @@ Partial Class frmCLIMAT
         '
         'txtBeginYear
         '
-        Me.txtBeginYear.Location = New System.Drawing.Point(92, 64)
+        Me.txtBeginYear.Location = New System.Drawing.Point(92, 61)
         Me.txtBeginYear.Name = "txtBeginYear"
         Me.txtBeginYear.Size = New System.Drawing.Size(40, 20)
         Me.txtBeginYear.TabIndex = 26
@@ -181,7 +182,7 @@ Partial Class frmCLIMAT
         'lblBeginYear
         '
         Me.lblBeginYear.AutoSize = True
-        Me.lblBeginYear.Location = New System.Drawing.Point(24, 68)
+        Me.lblBeginYear.Location = New System.Drawing.Point(24, 65)
         Me.lblBeginYear.Name = "lblBeginYear"
         Me.lblBeginYear.Size = New System.Drawing.Size(59, 13)
         Me.lblBeginYear.TabIndex = 25
@@ -198,7 +199,7 @@ Partial Class frmCLIMAT
         '
         'butEncode
         '
-        Me.butEncode.Location = New System.Drawing.Point(30, 328)
+        Me.butEncode.Location = New System.Drawing.Point(30, 350)
         Me.butEncode.Name = "butEncode"
         Me.butEncode.Size = New System.Drawing.Size(97, 22)
         Me.butEncode.TabIndex = 30
@@ -207,7 +208,7 @@ Partial Class frmCLIMAT
         '
         'butClose
         '
-        Me.butClose.Location = New System.Drawing.Point(233, 328)
+        Me.butClose.Location = New System.Drawing.Point(233, 350)
         Me.butClose.Name = "butClose"
         Me.butClose.Size = New System.Drawing.Size(51, 22)
         Me.butClose.TabIndex = 31
@@ -217,7 +218,7 @@ Partial Class frmCLIMAT
         'lstMessages
         '
         Me.lstMessages.FormattingEnabled = True
-        Me.lstMessages.Location = New System.Drawing.Point(8, 356)
+        Me.lstMessages.Location = New System.Drawing.Point(8, 378)
         Me.lstMessages.Name = "lstMessages"
         Me.lstMessages.Size = New System.Drawing.Size(646, 108)
         Me.lstMessages.TabIndex = 32
@@ -228,7 +229,7 @@ Partial Class frmCLIMAT
         Me.grpCLIMATMonth.Controls.Add(Me.lblMonth)
         Me.grpCLIMATMonth.Controls.Add(Me.txtYear)
         Me.grpCLIMATMonth.Controls.Add(Me.lblYear)
-        Me.grpCLIMATMonth.Location = New System.Drawing.Point(407, 53)
+        Me.grpCLIMATMonth.Location = New System.Drawing.Point(407, 75)
         Me.grpCLIMATMonth.Name = "grpCLIMATMonth"
         Me.grpCLIMATMonth.Size = New System.Drawing.Size(244, 58)
         Me.grpCLIMATMonth.TabIndex = 33
@@ -269,7 +270,7 @@ Partial Class frmCLIMAT
         '
         'butClear
         '
-        Me.butClear.Location = New System.Drawing.Point(157, 328)
+        Me.butClear.Location = New System.Drawing.Point(157, 350)
         Me.butClear.Name = "butClear"
         Me.butClear.Size = New System.Drawing.Size(51, 22)
         Me.butClear.TabIndex = 34
@@ -279,7 +280,7 @@ Partial Class frmCLIMAT
         'lblCLIMATmsg
         '
         Me.lblCLIMATmsg.AutoSize = True
-        Me.lblCLIMATmsg.Location = New System.Drawing.Point(5, 478)
+        Me.lblCLIMATmsg.Location = New System.Drawing.Point(5, 500)
         Me.lblCLIMATmsg.Name = "lblCLIMATmsg"
         Me.lblCLIMATmsg.Size = New System.Drawing.Size(111, 13)
         Me.lblCLIMATmsg.TabIndex = 35
@@ -287,14 +288,14 @@ Partial Class frmCLIMAT
         '
         'txtCLIMAT
         '
-        Me.txtCLIMAT.Location = New System.Drawing.Point(122, 474)
+        Me.txtCLIMAT.Location = New System.Drawing.Point(122, 496)
         Me.txtCLIMAT.Name = "txtCLIMAT"
         Me.txtCLIMAT.Size = New System.Drawing.Size(475, 20)
         Me.txtCLIMAT.TabIndex = 36
         '
         'butSend
         '
-        Me.butSend.Location = New System.Drawing.Point(600, 474)
+        Me.butSend.Location = New System.Drawing.Point(600, 496)
         Me.butSend.Name = "butSend"
         Me.butSend.Size = New System.Drawing.Size(51, 21)
         Me.butSend.TabIndex = 37
@@ -304,19 +305,28 @@ Partial Class frmCLIMAT
         '
         'butSetting
         '
-        Me.butSetting.Location = New System.Drawing.Point(600, 328)
+        Me.butSetting.Location = New System.Drawing.Point(591, 350)
         Me.butSetting.Name = "butSetting"
-        Me.butSetting.Size = New System.Drawing.Size(51, 22)
+        Me.butSetting.Size = New System.Drawing.Size(62, 22)
         Me.butSetting.TabIndex = 38
         Me.butSetting.Text = "Settings"
         Me.butSetting.UseVisualStyleBackColor = True
-        Me.butSetting.Visible = False
+        '
+        'butHelp
+        '
+        Me.butHelp.Location = New System.Drawing.Point(303, 350)
+        Me.butHelp.Name = "butHelp"
+        Me.butHelp.Size = New System.Drawing.Size(51, 22)
+        Me.butHelp.TabIndex = 39
+        Me.butHelp.Text = "Help"
+        Me.butHelp.UseVisualStyleBackColor = True
         '
         'frmCLIMAT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(666, 504)
+        Me.ClientSize = New System.Drawing.Size(666, 524)
+        Me.Controls.Add(Me.butHelp)
         Me.Controls.Add(Me.butSetting)
         Me.Controls.Add(Me.butSend)
         Me.Controls.Add(Me.txtCLIMAT)
@@ -371,4 +381,5 @@ Partial Class frmCLIMAT
     Friend WithEvents txtCLIMAT As TextBox
     Friend WithEvents butSend As Button
     Friend WithEvents butSetting As Button
+    Friend WithEvents butHelp As Button
 End Class
