@@ -557,6 +557,7 @@ Public Class formProductsSelectCriteria
 
                     If btnLowHigh.Checked = True Then
 
+
                         'sql = "DROP TABLE IF EXISTS obs_selected;
                         '       CREATE TABLE obs_selected
                         '       SELECT RecordedFrom as StationId, stationName, describedBy as elementId, abbreviation, obsDatetime, latitude, longitude, elevation, obsValue FROM observationfinal INNER JOIN obselement ON elementId = describedBy INNER JOIN station ON stationId = recordedFrom
