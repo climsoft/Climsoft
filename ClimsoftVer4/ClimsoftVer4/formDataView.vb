@@ -118,7 +118,7 @@ Public Class formDataView
             DataGridView.Refresh()
             conn.Close()
 
-            MsgBox("File '" & x & "' Successfully Imported")
+                MsgBox("File '" & x & "' Successfully Imported")
 
         Catch ex As Exception
             MsgBox(ex.Message)
