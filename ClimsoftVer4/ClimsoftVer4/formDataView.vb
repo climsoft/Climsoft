@@ -88,27 +88,40 @@ Public Class formDataView
             End If
 
             'Convert Import file path seperators to SQL style
-            importFile = Strings.Replace(x, "\", "/")
-            'FileClose(111)
-            ExecuteSqlFile(importFile, tblhdr, dsSourceTableName)
+            importFile = Strings.Left(x, 1)
+            For i = 2 To Len(x) - 1
+                If Strings.Mid(x, i, 1) = "\" Then
+                    importFile = importFile & "/"
+                Else
+                    importFile = importFile & Strings.Mid(x, i, 1)
+                End If
+            Next
+            importFile = importFile & Strings.Right(x, 1)
+
+            'MsgBox(importFile)
+            Sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                   /*!40101 SET NAMES utf8mb4 */;
+                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+                   /*!40000 ALTER TABLE `" & dsSourceTableName & "` DISABLE KEYS */;
+                   LOAD DATA LOCAL INFILE '" & importFile & "' REPLACE INTO TABLE " & dsSourceTableName & " FIELDS TERMINATED BY ',' (" & tblhdr & ");
+                   /*!40000 ALTER TABLE `" & dsSourceTableName & "` ENABLE KEYS */;
+                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+
+            'Execute SQL command
+            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            objCmd.ExecuteNonQuery()
+
+            Me.Refresh()
+            DataGridView.Refresh()
             conn.Close()
 
-            ''MsgBox(importFile)
-            'Sql = "LOAD DATA LOCAL INFILE '" & importFile & "' REPLACE INTO TABLE " & dsSourceTableName & " FIELDS TERMINATED BY ',' (" & tblhdr & ");"
-            ''MsgBox(Sql)
-            ''Execute SQL command
-            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            'objCmd.ExecuteNonQuery()
-
-            'Me.Refresh()
-            'DataGridView.Refresh()
-            'conn.Close()
-
-            'MsgBox("File '" & x & "' Successfully Imported")
+            MsgBox("File '" & x & "' Successfully Imported")
 
         Catch ex As Exception
             MsgBox(ex.Message)
-            'ExecuteSqlFile(importFile, tblhdr)
             conn.Close()
         End Try
     End Sub
@@ -296,8 +309,7 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        'Dim hdr, dat, exportfile, x, CellValue As String
-        Dim dat, x, CellValue As String
+        Dim hdr, dat, exportfile, x, CellValue As String
         Dim ds1 As New DataSet
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
@@ -468,70 +480,5 @@ Public Class formDataView
             MsgBox(ex.Message)
         End Try
     End Sub
-    Sub ExecuteSqlFile(txtFile As String, hdr As String, tbl As String)
-        Dim sqlFile, sqlhdr, currentField, dat As String
-        Dim currentRow As String()
 
-        Try
-            ' Create text to hold the SQL sripts
-            sqlFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\imports.sql"
-            FileOpen(200, sqlFile, OpenMode.Output)
-
-            ' Output commands for disabling foreign referential checks to allow updates even for foreign key fields 
-            PrintLine(200, "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;")
-            PrintLine(200, "/*!40000 ALTER TABLE `" & tbl & "` DISABLE KEYS */;")
-
-            ' Create SQL commands required for fields headers
-            hdr = Strings.Replace(hdr, ",", "`,`")
-            sqlhdr = "REPLACE INTO `" & tbl & "` (`" & hdr & "`) VALUES"
-            PrintLine(200, sqlhdr)
-
-            ' Read rows(records) from the export text file and convert them into SQL commands for data import 
-            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtFile)
-                MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters(",")
-
-                Do While MyReader.EndOfData = False
-                    currentRow = MyReader.ReadFields()
-                    dat = ""
-                    For Each currentField In currentRow
-                        If InStr(currentField, "'") > 0 Then
-                            currentField = Strings.Replace(currentField, "'", "\'")
-                        End If
-                        If currentField = "\N" Then
-                            dat = dat & "NULL,"
-                        Else
-                            dat = dat & "'" & currentField & "',"
-                        End If
-                    Next
-                    dat = Strings.Left(dat, Len(dat) - 1)
-                    ' Check the last field to enter SQL terminater character for the records SQL statements
-                    If MyReader.LineNumber() = -1 Then
-                        PrintLine(200, "(" & dat & ");")
-                    Else
-                        PrintLine(200, "(" & dat & "),")
-                    End If
-                Loop
-
-                ' Output commands for enforcing foreign referential checks 
-                PrintLine(200, "/*!40000 ALTER TABLE `" & tbl & "` ENABLE KEYS */;")
-                PrintLine(200, "/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;")
-            End Using
-
-            FileClose(200)
-
-            'Read the entire script file for execution
-            Dim sqlText = IO.File.ReadAllText(sqlFile)
-
-            ' Execute the SQL scripts from the file containing them
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sqlText, conn)
-            objCmd.ExecuteNonQuery()
-
-            MsgBox("File '" & txtFile & "' Successfully Imported")
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
-    End Sub
 End Class

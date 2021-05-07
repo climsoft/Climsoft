@@ -27,7 +27,7 @@ Partial Class formMetadata
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
-        Me.txtStationType = New System.Windows.Forms.TextBox()
+        Me.txtStationType = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
         Me.lblEW = New System.Windows.Forms.Label()
@@ -495,9 +495,11 @@ Partial Class formMetadata
         '
         'txtStationType
         '
+        Me.txtStationType.FormattingEnabled = True
+        Me.txtStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
         Me.txtStationType.Location = New System.Drawing.Point(518, 171)
         Me.txtStationType.Name = "txtStationType"
-        Me.txtStationType.Size = New System.Drawing.Size(162, 20)
+        Me.txtStationType.Size = New System.Drawing.Size(180, 21)
         Me.txtStationType.TabIndex = 11
         '
         'Label24
@@ -4112,6 +4114,6 @@ Partial Class formMetadata
     Friend WithEvents txtInstrumentPicFile As System.Windows.Forms.TextBox
     Friend WithEvents lblimgFile As System.Windows.Forms.Label
     Friend WithEvents lblPercent As System.Windows.Forms.Label
-    Friend WithEvents txtStationType As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents txtStationType As ComboBox
 End Class

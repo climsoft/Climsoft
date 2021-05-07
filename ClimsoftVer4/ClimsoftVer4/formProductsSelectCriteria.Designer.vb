@@ -70,6 +70,9 @@ Partial Class formProductsSelectCriteria
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPeriod = New System.Windows.Forms.Label()
         Me.pnlStation = New System.Windows.Forms.Panel()
+        Me.butFill = New System.Windows.Forms.Button()
+        Me.lstQualifier = New System.Windows.Forms.ListBox()
+        Me.optqualifier = New System.Windows.Forms.RadioButton()
         Me.lblRadius = New System.Windows.Forms.Label()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.txtRadius = New System.Windows.Forms.TextBox()
@@ -77,10 +80,10 @@ Partial Class formProductsSelectCriteria
         Me.txtLatitude = New System.Windows.Forms.TextBox()
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.OptGeography = New System.Windows.Forms.RadioButton()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.lstBasin = New System.Windows.Forms.ListBox()
         Me.optBasin = New System.Windows.Forms.RadioButton()
         Me.lstRegion = New System.Windows.Forms.ListBox()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.optRegion = New System.Windows.Forms.RadioButton()
         Me.lstAuthority = New System.Windows.Forms.ListBox()
         Me.optAuthority = New System.Windows.Forms.RadioButton()
         Me.lblStations = New System.Windows.Forms.Label()
@@ -192,7 +195,7 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.pnlLevels)
         Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(961, 395)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(961, 413)
         Me.pnlStationsElements.TabIndex = 4
         '
         'cmdSelectAllElements
@@ -374,11 +377,10 @@ Partial Class formProductsSelectCriteria
         Me.chkAdvancedSelection.AutoSize = True
         Me.chkAdvancedSelection.Location = New System.Drawing.Point(615, 194)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
-        Me.chkAdvancedSelection.Size = New System.Drawing.Size(122, 17)
+        Me.chkAdvancedSelection.Size = New System.Drawing.Size(167, 17)
         Me.chkAdvancedSelection.TabIndex = 19
-        Me.chkAdvancedSelection.Text = "Advanced Selection"
+        Me.chkAdvancedSelection.Text = "Advanced Products Selection"
         Me.chkAdvancedSelection.UseVisualStyleBackColor = True
-        Me.chkAdvancedSelection.Visible = False
         '
         'lstvElements
         '
@@ -578,6 +580,9 @@ Partial Class formProductsSelectCriteria
         'pnlStation
         '
         Me.pnlStation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlStation.Controls.Add(Me.butFill)
+        Me.pnlStation.Controls.Add(Me.lstQualifier)
+        Me.pnlStation.Controls.Add(Me.optqualifier)
         Me.pnlStation.Controls.Add(Me.lblRadius)
         Me.pnlStation.Controls.Add(Me.lblLongitude)
         Me.pnlStation.Controls.Add(Me.txtRadius)
@@ -585,32 +590,60 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.txtLatitude)
         Me.pnlStation.Controls.Add(Me.lblLatitude)
         Me.pnlStation.Controls.Add(Me.OptGeography)
-        Me.pnlStation.Controls.Add(Me.ListBox1)
+        Me.pnlStation.Controls.Add(Me.lstBasin)
         Me.pnlStation.Controls.Add(Me.optBasin)
         Me.pnlStation.Controls.Add(Me.lstRegion)
-        Me.pnlStation.Controls.Add(Me.RadioButton1)
+        Me.pnlStation.Controls.Add(Me.optRegion)
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
         Me.pnlStation.Location = New System.Drawing.Point(615, 224)
         Me.pnlStation.Name = "pnlStation"
-        Me.pnlStation.Size = New System.Drawing.Size(330, 152)
+        Me.pnlStation.Size = New System.Drawing.Size(339, 170)
         Me.pnlStation.TabIndex = 6
         Me.pnlStation.Visible = False
+        '
+        'butFill
+        '
+        Me.butFill.Location = New System.Drawing.Point(275, 138)
+        Me.butFill.Name = "butFill"
+        Me.butFill.Size = New System.Drawing.Size(59, 21)
+        Me.butFill.TabIndex = 16
+        Me.butFill.Text = "compute"
+        Me.butFill.UseVisualStyleBackColor = True
+        '
+        'lstQualifier
+        '
+        Me.lstQualifier.FormattingEnabled = True
+        Me.lstQualifier.Location = New System.Drawing.Point(122, 24)
+        Me.lstQualifier.Name = "lstQualifier"
+        Me.lstQualifier.Size = New System.Drawing.Size(158, 17)
+        Me.lstQualifier.TabIndex = 15
+        '
+        'optqualifier
+        '
+        Me.optqualifier.AutoSize = True
+        Me.optqualifier.Location = New System.Drawing.Point(28, 24)
+        Me.optqualifier.Name = "optqualifier"
+        Me.optqualifier.Size = New System.Drawing.Size(63, 17)
+        Me.optqualifier.TabIndex = 14
+        Me.optqualifier.TabStop = True
+        Me.optqualifier.Text = "Qualifier"
+        Me.optqualifier.UseVisualStyleBackColor = True
         '
         'lblRadius
         '
         Me.lblRadius.AutoSize = True
-        Me.lblRadius.Location = New System.Drawing.Point(203, 101)
+        Me.lblRadius.Location = New System.Drawing.Point(228, 123)
         Me.lblRadius.Name = "lblRadius"
-        Me.lblRadius.Size = New System.Drawing.Size(69, 13)
+        Me.lblRadius.Size = New System.Drawing.Size(63, 13)
         Me.lblRadius.TabIndex = 13
-        Me.lblRadius.Text = "Radiuds (km)"
+        Me.lblRadius.Text = "Radius (km)"
         '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(146, 101)
+        Me.lblLongitude.Location = New System.Drawing.Point(171, 123)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
         Me.lblLongitude.TabIndex = 12
@@ -618,29 +651,32 @@ Partial Class formProductsSelectCriteria
         '
         'txtRadius
         '
-        Me.txtRadius.Location = New System.Drawing.Point(212, 116)
+        Me.txtRadius.Enabled = False
+        Me.txtRadius.Location = New System.Drawing.Point(234, 138)
         Me.txtRadius.Name = "txtRadius"
-        Me.txtRadius.Size = New System.Drawing.Size(53, 20)
+        Me.txtRadius.Size = New System.Drawing.Size(35, 20)
         Me.txtRadius.TabIndex = 11
         '
         'TxtLongitude
         '
-        Me.TxtLongitude.Location = New System.Drawing.Point(152, 116)
+        Me.TxtLongitude.Enabled = False
+        Me.TxtLongitude.Location = New System.Drawing.Point(177, 138)
         Me.TxtLongitude.Name = "TxtLongitude"
-        Me.TxtLongitude.Size = New System.Drawing.Size(53, 20)
+        Me.TxtLongitude.Size = New System.Drawing.Size(48, 20)
         Me.TxtLongitude.TabIndex = 10
         '
         'txtLatitude
         '
-        Me.txtLatitude.Location = New System.Drawing.Point(92, 116)
+        Me.txtLatitude.Enabled = False
+        Me.txtLatitude.Location = New System.Drawing.Point(117, 138)
         Me.txtLatitude.Name = "txtLatitude"
-        Me.txtLatitude.Size = New System.Drawing.Size(53, 20)
+        Me.txtLatitude.Size = New System.Drawing.Size(44, 20)
         Me.txtLatitude.TabIndex = 9
         '
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(91, 101)
+        Me.lblLatitude.Location = New System.Drawing.Point(116, 123)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
         Me.lblLatitude.TabIndex = 8
@@ -649,7 +685,7 @@ Partial Class formProductsSelectCriteria
         'OptGeography
         '
         Me.OptGeography.AutoSize = True
-        Me.OptGeography.Location = New System.Drawing.Point(3, 97)
+        Me.OptGeography.Location = New System.Drawing.Point(28, 119)
         Me.OptGeography.Name = "OptGeography"
         Me.OptGeography.Size = New System.Drawing.Size(88, 17)
         Me.OptGeography.TabIndex = 7
@@ -657,18 +693,18 @@ Partial Class formProductsSelectCriteria
         Me.OptGeography.Text = "Geographical"
         Me.OptGeography.UseVisualStyleBackColor = True
         '
-        'ListBox1
+        'lstBasin
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(97, 74)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(158, 17)
-        Me.ListBox1.TabIndex = 6
+        Me.lstBasin.FormattingEnabled = True
+        Me.lstBasin.Location = New System.Drawing.Point(122, 94)
+        Me.lstBasin.Name = "lstBasin"
+        Me.lstBasin.Size = New System.Drawing.Size(158, 17)
+        Me.lstBasin.TabIndex = 6
         '
         'optBasin
         '
         Me.optBasin.AutoSize = True
-        Me.optBasin.Location = New System.Drawing.Point(3, 74)
+        Me.optBasin.Location = New System.Drawing.Point(28, 94)
         Me.optBasin.Name = "optBasin"
         Me.optBasin.Size = New System.Drawing.Size(97, 17)
         Me.optBasin.TabIndex = 5
@@ -679,26 +715,26 @@ Partial Class formProductsSelectCriteria
         'lstRegion
         '
         Me.lstRegion.FormattingEnabled = True
-        Me.lstRegion.Location = New System.Drawing.Point(97, 51)
+        Me.lstRegion.Location = New System.Drawing.Point(122, 71)
         Me.lstRegion.Name = "lstRegion"
         Me.lstRegion.Size = New System.Drawing.Size(158, 17)
         Me.lstRegion.TabIndex = 4
         '
-        'RadioButton1
+        'optRegion
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(3, 51)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(59, 17)
-        Me.RadioButton1.TabIndex = 3
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Region"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.optRegion.AutoSize = True
+        Me.optRegion.Location = New System.Drawing.Point(28, 71)
+        Me.optRegion.Name = "optRegion"
+        Me.optRegion.Size = New System.Drawing.Size(59, 17)
+        Me.optRegion.TabIndex = 3
+        Me.optRegion.TabStop = True
+        Me.optRegion.Text = "Region"
+        Me.optRegion.UseVisualStyleBackColor = True
         '
         'lstAuthority
         '
         Me.lstAuthority.FormattingEnabled = True
-        Me.lstAuthority.Location = New System.Drawing.Point(97, 28)
+        Me.lstAuthority.Location = New System.Drawing.Point(122, 48)
         Me.lstAuthority.Name = "lstAuthority"
         Me.lstAuthority.Size = New System.Drawing.Size(158, 17)
         Me.lstAuthority.TabIndex = 2
@@ -706,7 +742,7 @@ Partial Class formProductsSelectCriteria
         'optAuthority
         '
         Me.optAuthority.AutoSize = True
-        Me.optAuthority.Location = New System.Drawing.Point(3, 28)
+        Me.optAuthority.Location = New System.Drawing.Point(28, 48)
         Me.optAuthority.Name = "optAuthority"
         Me.optAuthority.Size = New System.Drawing.Size(66, 17)
         Me.optAuthority.TabIndex = 1
@@ -721,9 +757,9 @@ Partial Class formProductsSelectCriteria
         Me.lblStations.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStations.Location = New System.Drawing.Point(0, 0)
         Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(121, 13)
+        Me.lblStations.Size = New System.Drawing.Size(152, 13)
         Me.lblStations.TabIndex = 0
-        Me.lblStations.Text = "Advanced Selection"
+        Me.lblStations.Text = "Group Stations Selection "
         '
         'cmbElement
         '
@@ -786,7 +822,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.cmdExtract, Me.prgrbProducts, Me.cmdCancel})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 458)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 460)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.Size = New System.Drawing.Size(988, 25)
         Me.ToolStrip2.TabIndex = 9
@@ -854,7 +890,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(988, 483)
+        Me.ClientSize = New System.Drawing.Size(988, 485)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
@@ -910,10 +946,10 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents txtLatitude As System.Windows.Forms.TextBox
     Friend WithEvents lblLatitude As System.Windows.Forms.Label
     Friend WithEvents OptGeography As System.Windows.Forms.RadioButton
-    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents lstBasin As System.Windows.Forms.ListBox
     Friend WithEvents optBasin As System.Windows.Forms.RadioButton
     Friend WithEvents lstRegion As System.Windows.Forms.ListBox
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents optRegion As System.Windows.Forms.RadioButton
     Friend WithEvents lstAuthority As System.Windows.Forms.ListBox
     Friend WithEvents optAuthority As System.Windows.Forms.RadioButton
     Friend WithEvents lblStations As System.Windows.Forms.Label
@@ -959,4 +995,7 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents pnlLevels As Panel
     Public WithEvents lstvLevels As ListView
     Friend WithEvents lblLevels As Label
+    Friend WithEvents lstQualifier As ListBox
+    Friend WithEvents optqualifier As RadioButton
+    Friend WithEvents butFill As Button
 End Class

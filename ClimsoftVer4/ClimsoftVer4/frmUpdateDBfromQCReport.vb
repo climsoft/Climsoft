@@ -16,19 +16,14 @@
 
 Public Class frmUpdateDBfromQCReport
     Dim msgTxtUpdatedQCReportFileName As String
-    Dim msgTxtQCReportsMismatch As String
+    Dim msgTxtQCReportsMismatch, stnId1, stnId2 As String
     Dim strFolderPath As String, strFileName1 As String, strFileName2 As String, rec As Integer
     Dim sql As String, sql1 As String, strConnString As String
     Dim ds As New DataSet(), ds1 As New DataSet()
     Dim da As OleDb.OleDbDataAdapter, da1 As OleDb.OleDbDataAdapter
     Dim fd As OpenFileDialog = New OpenFileDialog()
-    Dim stnId1 As String, elemId1 As Integer, yyyy1 As String, mm1 As String, dd1 As String, hh1 As String, obsVal1 As String, qcStatus1 As String
-
-    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Dim stnId2 As String, elemId2 As Integer, yyyy2 As String, mm2 As String, dd2 As String, hh2 As String, obsVal2 As String, qcStatus2 As String
+    Dim elemId1 As Integer, yyyy1 As String, mm1 As String, dd1 As String, hh1 As String, obsVal1 As String, qcStatus1 As String
+    Dim elemId2 As Integer, yyyy2 As String, mm2 As String, dd2 As String, hh2 As String, obsVal2 As String, qcStatus2 As String
     Dim m As Integer, n As Integer, obsValue As String, qcStatus As Integer
     Dim strSQL As String, stnId As String, elemCode As String, obsDatetime As String, obsLevel As String, obsVal As String, obsFlag As String, _
         acquisitionType As String, capturedBy As String, dataForm As String
