@@ -6,8 +6,10 @@ Public Class ucrFormDaily2
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private bTotalRequired As Boolean
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         If bFirstLoad Then
 
             'Sets values for the units combobox
@@ -78,20 +80,34 @@ Public Class ucrFormDaily2
             'populate the values
             ucrDaily2Navigation.SetSortBy("entryDatetime")
             ucrDaily2Navigation.PopulateControl()
+
+            ' Check for key entry mode and indicate on the form
+            If FldName.Key_Entry_Mode(frmNewFormDaily2.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
 
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim usrStn As New dataEntryGlobalRoutines
+        Dim txtElementCode As String
+
+        txtElementCode = ucrElementSelector.cboValues.SelectedValue
+
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names
-            ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
+
+            ' The following code has been disabled because it is found not to work well
+            'ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
             SaveEnable()
             ucrValueFlagPeriod1.Focus()
 
             'Get the Station from the last record by the current login user
             usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
+
+            ' Sequence the element the date
+            Seq_Element(txtElementCode)
+            ucrElementSelector.cboValues.SelectedValue = txtElementCode
+
         End If
 
     End Sub
@@ -514,5 +530,124 @@ Public Class ucrFormDaily2
         End Try
 
     End Sub
+
+    Function Seq_Element(ByRef eCode As String) As Boolean
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, sql_seq, elm As String
+        Dim ds_seq As New DataSet
+        Dim kount As Integer
+        Dim yy, mm, dt As String
+
+        Try
+            strConnString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = strConnString
+            conn.Open()
+
+            sql_seq = "select elementId from seq_daily_element order by seq;"
+
+            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            ds_seq.Clear()
+            da_seq.SelectCommand.CommandTimeout = 0
+            da_seq.Fill(ds_seq, "Sequence")
+
+            'conn.Close()
+
+            With ds_seq.Tables("Sequence")
+
+                If .Rows.Count > 0 Then
+                    kount = 0
+                    elm = .Rows(0).Item("elementId")
+                    For i = 0 To .Rows.Count - 1
+                        If eCode = .Rows(i).Item("elementId") Then
+                            If i < .Rows.Count - 1 Then
+                                elm = .Rows(i + 1).Item("elementId")
+                            Else
+                                If seqDate() Then eCode = .Rows(0).Item("elementId")
+                            End If
+                            Exit For
+                        End If
+                        kount = kount + 1
+                    Next
+
+                    eCode = elm
+
+                    ' Check for months to record GrassMin Temp
+                    If eCode = 99 And skipGroundMin(conn) Then
+                        If kount < .Rows.Count - 2 Then
+                            eCode = .Rows(kount + 2).Item("elementId")
+                        ElseIf kount = .Rows.Count - 2 Then
+                            If seqDate() Then eCode = .Rows(0).Item("elementId")
+                        ElseIf kount = .Rows.Count - 1 Then
+                            eCode = .Rows(1).Item("elementId")
+                        End If
+                    End If
+                End If
+            End With
+            conn.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+            Return False
+        End Try
+    End Function
+    Function seqDate() As Boolean
+        Dim yy, mm, dt As String
+        Try
+            'sequence the date by 1 month increment
+            yy = ucrYearSelector.cboValues.Text
+            mm = ucrMonth.cboValues.Text
+            dt = DateSerial(yy, mm, 1)
+            dt = DateAdd("m", 1, dt)
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(dt)
+            ucrMonth.cboValues.Text = DateAndTime.Month(dt)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    Function skipGroundMin(conn As MySql.Data.MySqlClient.MySqlConnection) As Boolean
+        Dim daq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsq As New DataSet
+        Dim sql As String
+        Dim st_month, ed_month, rec_month As Integer
+
+        sql = "select keyName,keyValue from regkeys where keyName = 'key03' or keyName = 'key04';"
+        Try
+            daq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsq.Clear()
+            daq.SelectCommand.CommandTimeout = 0
+            daq.Fill(dsq, "months")
+
+            rec_month = CInt(ucrMonth.cboValues.Text)
+
+            With dsq.Tables("months")
+                If .Rows.Count < 2 Then Return False ' Period not defined in Registry
+                st_month = .Rows(0).Item("keyValue")
+                ed_month = .Rows(1).Item("keyValue")
+            End With
+
+            If ed_month > st_month Then ' Period within same year
+                If rec_month >= st_month And rec_month <= ed_month Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else ' Period crosses the year
+                If (rec_month >= st_month And rec_month <= 12) Or (rec_month >= 1 And rec_month <= ed_month) Then
+                    Return False
+                Else
+                    Return True
+                End If
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return True
+        End Try
+    End Function
 
 End Class

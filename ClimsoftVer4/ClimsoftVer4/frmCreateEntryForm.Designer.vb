@@ -83,7 +83,7 @@ Partial Class frmCreateEntryForm
         Me.cmdFinish.Name = "cmdFinish"
         Me.cmdFinish.Size = New System.Drawing.Size(45, 24)
         Me.cmdFinish.TabIndex = 6
-        Me.cmdFinish.Text = "Finish"
+        Me.cmdFinish.Text = "Save"
         Me.cmdFinish.UseVisualStyleBackColor = True
         '
         'cmdClose

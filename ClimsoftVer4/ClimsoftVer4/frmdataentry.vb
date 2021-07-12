@@ -97,6 +97,8 @@ Public Class frmKeyEntry
                         formSynopticCaribbean.Show()
                     Case "form_upperair1"
                         form_upperair1.Show()
+                    Case "form_synoptic2_TDCF"
+                        formSynoptic2.Show()
                     Case Else
                         frm = lstViewForms.SelectedItems.Item(0).Text
                         MsgBox("Form " & frm & " not yet implemented")

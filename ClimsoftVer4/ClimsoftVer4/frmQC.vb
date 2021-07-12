@@ -751,8 +751,9 @@ Public Class frmQC
             For i = 0 To x - 1
                 dat = ds.Tables("qcabslimits").Rows(i).Item(0)
 
-                ' Insert text qualifier ito the stationid field to ensure that it is saves as a character string in QC output text file
-                dat = """" & dat & """"
+                '' Insert text qualifier ito the stationid field to ensure that it is saved as a character string in QC output text file
+                'dat = """" & dat & """"
+
                 For j = 1 To ds.Tables("qcabslimits").Columns.Count - 1
                     dat = dat & "," & ds.Tables("qcabslimits").Rows(i).Item(j)
                 Next

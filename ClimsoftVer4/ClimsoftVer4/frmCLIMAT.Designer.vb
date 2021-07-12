@@ -50,6 +50,7 @@ Partial Class frmCLIMAT
         Me.butSend = New System.Windows.Forms.Button()
         Me.butSetting = New System.Windows.Forms.Button()
         Me.butHelp = New System.Windows.Forms.Button()
+        Me.btnSend = New System.Windows.Forms.Button()
         Me.grpOptions.SuspendLayout()
         Me.grpStatistics.SuspendLayout()
         Me.grpCLIMATMonth.SuspendLayout()
@@ -208,7 +209,7 @@ Partial Class frmCLIMAT
         '
         'butClose
         '
-        Me.butClose.Location = New System.Drawing.Point(233, 350)
+        Me.butClose.Location = New System.Drawing.Point(228, 350)
         Me.butClose.Name = "butClose"
         Me.butClose.Size = New System.Drawing.Size(51, 22)
         Me.butClose.TabIndex = 31
@@ -270,7 +271,7 @@ Partial Class frmCLIMAT
         '
         'butClear
         '
-        Me.butClear.Location = New System.Drawing.Point(157, 350)
+        Me.butClear.Location = New System.Drawing.Point(152, 350)
         Me.butClear.Name = "butClear"
         Me.butClear.Size = New System.Drawing.Size(51, 22)
         Me.butClear.TabIndex = 34
@@ -314,18 +315,28 @@ Partial Class frmCLIMAT
         '
         'butHelp
         '
-        Me.butHelp.Location = New System.Drawing.Point(303, 350)
+        Me.butHelp.Location = New System.Drawing.Point(380, 350)
         Me.butHelp.Name = "butHelp"
         Me.butHelp.Size = New System.Drawing.Size(51, 22)
         Me.butHelp.TabIndex = 39
         Me.butHelp.Text = "Help"
         Me.butHelp.UseVisualStyleBackColor = True
         '
+        'btnSend
+        '
+        Me.btnSend.Location = New System.Drawing.Point(304, 350)
+        Me.btnSend.Name = "btnSend"
+        Me.btnSend.Size = New System.Drawing.Size(51, 22)
+        Me.btnSend.TabIndex = 40
+        Me.btnSend.Text = "Send"
+        Me.btnSend.UseVisualStyleBackColor = True
+        '
         'frmCLIMAT
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(666, 524)
+        Me.Controls.Add(Me.btnSend)
         Me.Controls.Add(Me.butHelp)
         Me.Controls.Add(Me.butSetting)
         Me.Controls.Add(Me.butSend)
@@ -382,4 +393,5 @@ Partial Class frmCLIMAT
     Friend WithEvents butSend As Button
     Friend WithEvents butSetting As Button
     Friend WithEvents butHelp As Button
+    Friend WithEvents btnSend As Button
 End Class

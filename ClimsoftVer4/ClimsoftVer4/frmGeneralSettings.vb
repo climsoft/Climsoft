@@ -90,7 +90,12 @@ Public Class frmGeneralSettings
             sql = "SELECT * FROM regkeys"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
             da.Fill(ds, "regkeys")
+
+            ' Update Registry with the new values if not yet done as on 28/06/2021
+            If ds.Tables("regkeys").Rows.Count < 15 Then UpdateRegistry()
+
             conn.Close()
             ' MsgBox("Dataset Field !", MsgBoxStyle.Information)
 
@@ -101,7 +106,6 @@ Public Class frmGeneralSettings
         End Try
 
         maxRows = ds.Tables("regkeys").Rows.Count
-
 
         If maxRows > 0 Then
             txtKeyName.Text = ds.Tables("regkeys").Rows(inc).Item("keyName")
@@ -348,7 +352,61 @@ Public Class frmGeneralSettings
             "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")
     End Sub
 
-    Private Sub BindingSource1_CurrentChanged(sender As Object, e As EventArgs) Handles BindingSource1.CurrentChanged
+    Sub UpdateRegistry()
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
 
+        sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Dumping structure for table mariadb_climsoft_test_db_v4.regkeys
+DROP TABLE IF EXISTS `regkeys`;
+CREATE TABLE IF NOT EXISTS `regkeys` (
+  `keyName` varchar(255) NOT NULL DEFAULT '',
+  `keyValue` varchar(255) DEFAULT NULL,
+  `keyDescription` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`keyName`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table mariadb_climsoft_test_db_v4.regkeys: ~15 rows (approximately)
+/*!40000 ALTER TABLE `regkeys` DISABLE KEYS */;
+INSERT INTO `regkeys` (`keyName`, `keyValue`, `keyDescription`) VALUES
+	('key00', '850', 'Geopotential standard pressure level'),
+	('key01', '6', 'Morning time for recording tmax,tmin,precip'),
+	('key02', '18', 'Afternoon time for recording tmax'),
+	('key03', '1', 'Month for starting recording of Gmin'),
+	('key04', '12', 'Month for ending recording Gmin'),
+	('key05', '3', 'Number of digits for wind direction'),
+	('key06', '3', 'Number of digits for wind speed'),
+	('key07', 'C:\\data\\QC', 'Folder for QC Reports for QC updates (Windows style)'),
+	('key08', 'C:/data/QC', 'Folder for QC Reports for MariaDB output (Unix style)'),
+	('key09', 'mm', 'Units for Precipitation'),
+	('key10', 'Deg C', 'Units for Temperature'),
+	('key11', 'feet', 'Units for Cloud hight'),
+	('key12', 'C:\\images', 'Folder for Paper Archive image files'),
+	('key13', 'knots', 'Units for Wind Speed'),
+	('key14', 'metres', 'Units for Visibility');
+/*!40000 ALTER TABLE `regkeys` ENABLE KEYS */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+
+        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+        qry.CommandTimeout = 0
+
+        Try
+            'Execute query
+            qry.ExecuteNonQuery()
+
+            ' Refresh the dataset with the updated data
+            sql = "SELECT * FROM regkeys"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.SelectCommand.CommandTimeout = 0
+            da.Fill(ds, "regkeys")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

@@ -237,6 +237,7 @@
                                   End Sub
         ElseIf strControlName = "delete" Then
             'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
+
             If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
                 btn.Enabled = False
             End If

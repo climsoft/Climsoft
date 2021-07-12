@@ -6,28 +6,35 @@
     Dim sql As String
     Dim dbConnectionString As String
 
-    Private Sub frmClimatSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim climatds As New DataSet
+    Private Sub frmClimatSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dsp As New DataSet
 
         Try
             dbConnectionString = frmLogin.txtusrpwd.Text
             conn.ConnectionString = dbConnectionString
-            conn.Open()
 
             sql = "select * from climat_parameters order by Nos;"
-
+            conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
-            climatds.Clear()
-            da.Fill(climatds, "climat_parameters")
+            dsp.Clear()
+            da.Fill(dsp, "climat_parameters")
             conn.Close()
+            'MsgBox(11)
+            'MsgBox(ds.Tables("climat_parameters").Rows.Count)
+
+            If dsp.Tables("climat_parameters").Rows.Count < 15 Then
+                ' Add header information
+                HeaderDetails()
+            End If
 
         Catch ex As Exception
             If ex.HResult = -2147467259 Then  ' Table does not exist
+                MsgBox(ex.Message)
                 ' Create table for CLIMAT parameters because it does not exist in the current datbase schema
-                conn.Close()
+                'conn.Close()
                 Create_ParametersTable()
                 'da.Fill(climatds, "climat_parameters")
             Else
@@ -38,21 +45,26 @@
                 Exit Sub
             End If
         End Try
+        'MsgBox(3)
 
         Try
+            'MsgBox(dsp.Tables("climat_parameters").Rows.Count)
+            ' Data set must be local!
             With DataGridViewParameters
                 .Show()
-                .DataSource = climatds.Tables(0)
+                .DataSource = dsp.Tables(0)
                 .Columns(0).Width = 30
                 .Columns(1).Width = 220
                 .Columns(2).Width = 140
                 .Refresh()
             End With
         Catch ex As Exception
-            'MsgBox(ex.Message)
-            MsgBox("Cannot show parameters")
-            Me.Close()
+            MsgBox(ex.Message)
+            MsgBox("Cannot show CLIMAT parameters")
+            'Me.Close()
         End Try
+        PopulateForms()
+        'conn.Close()
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs)
@@ -60,8 +72,8 @@
         'Dim recUpdate As New dataEntryGlobalRoutines
 
         Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = dbConnectionString
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            'conn.ConnectionString = dbConnectionString
             conn.Open()
 
             sql = "select * from climat_parameters order by Nos;"
@@ -81,7 +93,7 @@
                 MsgBox("Update Successful")
             End With
         Catch ex As Exception
-            conn.Close()
+            'conn.Close()
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -128,8 +140,8 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
 
         Me.Cursor = Cursors.WaitCursor
-        dbConnectionString = frmLogin.txtusrpwd.Text
-        conn.ConnectionString = dbConnectionString
+        'dbConnectionString = frmLogin.txtusrpwd.Text
+        'conn.ConnectionString = dbConnectionString
         conn.Open()
 
         Try
@@ -143,13 +155,13 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Catch ex As Exception
             Me.Cursor = Cursors.Default
             MsgBox("Can't create CLIMAT parameters. Contact Administrator to start the operation, open settings and grant permissions")
-
+            conn.Close()
             Me.Close()
             Exit Sub
         End Try
 
         Me.Cursor = Cursors.Default
-        conn.Close()
+        'conn.Close()
         UserPermissions()
     End Sub
 
@@ -163,9 +175,9 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         'Dim recUpdate As New dataEntryGlobalRoutines
 
         Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = dbConnectionString
-            conn.Open()
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            'conn.ConnectionString = dbConnectionString
+            'conn.Open()
 
             sql = "select * from climat_parameters order by Nos;"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -176,7 +188,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
             With DataGridViewParameters
                 For i = 0 To .Rows.Count - 1
-                    For j = 3 To .Columns.Count - 1
+                    For j = 2 To .Columns.Count - 1
                         ds.Tables("parameters").Rows(i).Item(j) = .Rows(i).Cells(j).Value
                     Next
                     da.Update(ds, "parameters")
@@ -184,7 +196,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 MsgBox("Update Successful")
             End With
         Catch ex As Exception
-            conn.Close()
+            'conn.Close()
             MsgBox(ex.Message)
         End Try
     End Sub
@@ -232,8 +244,8 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         sql = "select * from climsoftusers;"
         Try
 
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = dbConnectionString
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            'conn.ConnectionString = dbConnectionString
             conn.Open()
 
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
@@ -291,9 +303,268 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 Next
             End With
             MsgBox("User permissions successfully granted")
+            conn.Close()
+
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn.Close()
         End Try
-        conn.Close()
     End Sub
+
+    Sub PopulateForms()
+        Dim kount As Integer
+
+        Try
+
+            ' Populate with MSS details
+            sql = "SELECT * FROM aws_mss"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "aws_mss")
+            conn.Close()
+
+            kount = ds.Tables("aws_mss").Rows.Count
+            For i = 0 To kount - 1
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("ftpId")) Then txtServer.Text = ds.Tables("aws_mss").Rows(i).Item("ftpId")
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("ftpMode")) Then cboFTP.Text = ds.Tables("aws_mss").Rows(i).Item("ftpMode")
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtFolder.Text = ds.Tables("aws_mss").Rows(i).Item("inputFolder")
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtLogin.Text = ds.Tables("aws_mss").Rows(i).Item("userName")
+                If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("password")) Then txtPassword.Text = ds.Tables("aws_mss").Rows(i).Item("password")
+            Next
+
+            ' Populate with Header
+            sql = "select Element_Abbreviation, Element_Code from climat_parameters where Element_Name = 'Message Header';"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "message_header")
+            conn.Close()
+            If ds.Tables("message_header").Rows.Count > 0 Then
+                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item(0)) Then txtMsgHeader.Text = ds.Tables("message_header").Rows(0).Item(0)
+                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item(1)) Then txtGTSdiff.Text = ds.Tables("message_header").Rows(0).Item(1)
+            End If
+            'conn.Close()
+
+        Catch ex As Exception
+            MsgBox(ex.Message & " at PopulateForms")
+        End Try
+
+    End Sub
+
+    Private Sub TabParameters_Click(sender As Object, e As EventArgs) Handles TabParameters.Click
+        btnAddNew.Visible = False
+        If TabParameters.SelectedTab.Name = "FTP" Then
+            sql = "SELECT * FROM aws_mss"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "aws_mss")
+            conn.Close()
+            If ds.Tables("aws_mss").Rows.Count = 0 Then btnAddNew.Visible = True
+        End If
+    End Sub
+
+    Sub HeaderDetails()
+
+        sql = "INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`) VALUES (15, 'Message Header', 'CSNM40 FYWW');"
+        conn.Open()
+
+        Try
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            'Execute query
+            qry.ExecuteNonQuery()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message & " at Header Details")
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub cmdUpdate_Click(sender As Object, e As EventArgs) Handles cmdUpdate.Click
+        ' Update message header
+        Try
+            sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
+
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            ' Update server details
+            sql = "select * from aws_mss;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "mss")
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+            With ds.Tables("mss")
+                .Rows(0).Item("ftpId") = txtServer.Text
+                .Rows(0).Item("ftpMode") = cboFTP.Text
+                .Rows(0).Item("inputFolder") = txtFolder.Text
+                .Rows(0).Item("userName") = txtLogin.Text
+                .Rows(0).Item("password") = txtPassword.Text
+            End With
+            da.Update(ds, "mss")
+            MsgBox("Update successful")
+            'conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message & " at cmdUpdate_Click")
+        End Try
+
+    End Sub
+
+    Private Sub btnUpdates_Click(sender As Object, e As EventArgs) Handles btnUpdates.Click
+        'MsgBox(TabParameters.SelectedTab.Name)
+        If TabParameters.SelectedTab.Name = "Parameters" Then
+            Try
+                sql = "select * from climat_parameters order by Nos;"
+                conn.Open()
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                ds.Clear()
+                da.Fill(ds, "parameters")
+                conn.Close()
+
+                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                With DataGridViewParameters
+                    For i = 0 To .Rows.Count - 1
+                        For j = 2 To .Columns.Count - 1
+                            ds.Tables("parameters").Rows(i).Item(j) = .Rows(i).Cells(j).Value
+                        Next
+                        da.Update(ds, "parameters")
+                    Next
+                    MsgBox("Update Successful")
+                End With
+            Catch ex As Exception
+                conn.Close()
+                MsgBox(ex.Message & " at cmdUpdates_Parameters")
+            End Try
+        ElseIf TabParameters.SelectedTab.Name = "FTP" Then
+            Try
+                sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
+                conn.Open()
+                qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                qry.CommandTimeout = 0
+                qry.ExecuteNonQuery()
+
+                ' Update server details
+                sql = "select * from aws_mss;"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                ds.Clear()
+                da.Fill(ds, "mss")
+                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+                With ds.Tables("mss")
+                    .Rows(0).Item("ftpId") = txtServer.Text
+                    .Rows(0).Item("ftpMode") = cboFTP.Text
+                    .Rows(0).Item("inputFolder") = txtFolder.Text
+                    .Rows(0).Item("userName") = txtLogin.Text
+                    .Rows(0).Item("password") = txtPassword.Text
+                End With
+                da.Update(ds, "mss")
+                MsgBox("Update successful")
+                conn.Close()
+            Catch ex As Exception
+                conn.Close()
+                MsgBox(ex.Message & " at cmdUpdates_FTP")
+            End Try
+        End If
+    End Sub
+
+    Private Sub txtConfirmPassword_LostFocus(sender As Object, e As EventArgs) Handles txtConfirmPassword.LostFocus
+        If txtPassword.Text <> txtConfirmPassword.Text Then
+            MsgBox("Password not confirmed")
+            txtConfirmPassword.Text = ""
+            'txtConfirmPassword.Focus()
+        End If
+    End Sub
+
+
+    Private Sub txtServer_KeyDown(sender As Object, e As KeyEventArgs) Handles txtServer.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Sub Nextbox(e As KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            My.Computer.Keyboard.SendKeys("{TAB}")
+        End If
+    End Sub
+
+    Private Sub cboFTP_KeyDown(sender As Object, e As KeyEventArgs) Handles cboFTP.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Private Sub txtFolder_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFolder.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Private Sub txtLogin_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLogin.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Private Sub txtPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Private Sub txtConfirmPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtConfirmPassword.KeyDown
+        Nextbox(e)
+    End Sub
+
+    Function confirmPassword() As Boolean
+        Try
+            If txtPassword.Text <> txtConfirmPassword.Text Then
+                MsgBox("Password not confirmed")
+                txtConfirmPassword.Text = ""
+                'txtConfirmPassword.Focus()
+            End If
+            Return False
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        'If TabParameters.SelectedTab.Name = "FTP" Then
+        'btnAddNew.Visible = True
+        Dim dsNewRow As DataRow
+        Try
+            sql = "update climat_parameters set Element_Abbreviation = '" & txtMsgHeader.Text & "', Element_Code = '" & txtGTSdiff.Text & "' where Element_Name = 'Message Header';"
+            conn.Open()
+            qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+            qry.CommandTimeout = 0
+            qry.ExecuteNonQuery()
+
+            ' Update server details
+            sql = "select * from aws_mss;"
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ds.Clear()
+            da.Fill(ds, "mss")
+            conn.Close()
+
+            Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
+
+            With ds.Tables("mss")
+                dsNewRow = .NewRow
+                'Add a new record to the data source table
+                .Rows.Add(dsNewRow)
+                .Rows(0).Item("ftpId") = txtServer.Text
+                .Rows(0).Item("ftpMode") = cboFTP.Text
+                .Rows(0).Item("inputFolder") = txtFolder.Text
+                .Rows(0).Item("userName") = txtLogin.Text
+                .Rows(0).Item("password") = txtPassword.Text
+            End With
+            da.Update(ds, "mss")
+            MsgBox("New Recorded Added")
+            btnAddNew.Visible = False
+        Catch ex As Exception
+            conn.Close()
+            MsgBox(ex.Message & " at cmdAddNew_FTP")
+        End Try
+    End Sub
+
 End Class

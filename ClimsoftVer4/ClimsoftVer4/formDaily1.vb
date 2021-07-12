@@ -175,6 +175,8 @@ Public Class formDaily1
                 cboHour.Text = dsrg.Tables("Keys").Rows(0).Item(0)
             End If
 
+            Me.CenterToScreen()
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try

@@ -488,6 +488,7 @@
                                         If IsNumeric(hd) Then
 
                                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
+                                            'dttime = DateAdd("h", 2, dttime)
 
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
@@ -509,13 +510,13 @@
                                                     Get_Value_Flag(cod, dat, flg)
                                                 End If
 
-                                                ' Process Dekadal data if any
-                                                If optDekadal.Checked = True Then
-                                                    cprd = GetDekadPeriod(dttime)
-                                                    If IsNumeric(dat) Then flg = "C"
-                                                End If
+                                            ' Process Dekadal data if any
+                                            If optDekadal.Checked = True Then
+                                                cprd = GetDekadPeriod(dttime)
+                                                If IsNumeric(dat) Then flg = "C"
+                                            End If
 
-                                                If Station_Element(st, cod) Then
+                                            If Station_Element(st, cod) Then
                                                 If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
                                             End If
                                             End If
@@ -560,6 +561,7 @@
                         cod = txtElmCode.Text
                         lvl = "surface"
                         acquisitiontype = 6
+                        dttime = ""
 
                         For Each currentField In currentRow
                             hd = DataGridView1.Columns(col).Name
@@ -570,6 +572,8 @@
                                         st = dat
                                     ElseIf .Columns(col).Name = "element_code" Then
                                         cod = dat
+                                    ElseIf .Columns(col).Name = "date_time" Then  ' Year column found
+                                        dttime = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
                                     ElseIf .Columns(col).Name = "level" Then
                                         lvl = dat
                                     ElseIf .Columns(col).Name = "yyyy" Then
@@ -585,8 +589,15 @@
                             End With
 
                             If hd = "value" Then
+                                'MsgBox(dttime)
                                 flg = "" ' Initialize the flag
-                                dttime = y & "-" & m & "-" & d & " " & h & ":00"
+
+                                If dttime = "" Then
+                                    dttime = y & "-" & m & "-" & d & " " & h & ":00"
+                                End If
+                                'MsgBox(dttime)
+                                'dttime = y & "-" & m & "-" & d & " " & h & ":00"
+
 
                                 ' Check for missing flag data values 
                                 If dat = txtMissingFlag.Text Then
@@ -630,7 +641,7 @@
 
     Sub Load_Hourly()
         'MsgBox("form_hourly")
-        Dim st, cod, y, m, d, dttime, hd, dat, flg, lvl As String
+        Dim st, cod, y, m, d, dttime, UTC_dt, hd, dat, flg, lvl As String
         Dim nextDay As Date
         Dim acquisitiontype As Integer
         Try
@@ -688,7 +699,14 @@
                                             If dat = txtMissingFlag.Text Then
 
                                                 If IsDate(dttime) Then
-                                                    If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    If chkUTC.Checked Then
+                                                        UTC_dt = UTC_Convert(dttime)
+                                                        If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    Else
+                                                        If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    End If
+
+                                                    'If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
                                                     lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                     lblRecords.Refresh()
                                                     col = col + 1
@@ -703,9 +721,20 @@
                                                     Get_Value_Flag(cod, dat, flg)
                                                 End If
                                                 If Station_Element(st, cod) Then
-                                                    If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
+                                                If IsDate(dttime) Then
+
+                                                    If chkUTC.Checked Then
+                                                        UTC_dt = UTC_Convert(dttime)
+                                                        If Not Add_Record(st, cod, UTC_dt, dat, flg, acquisitiontype, lvl) Then Exit For
+                                                    Else
+                                                        If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For
+                                                    End If
+
+                                                    'If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
                                                 End If
+
                                             End If
+                                        End If
                                         End If ' Last DataGridView which is equivalent to End data columns 
 
                                     ' Show upload progress
@@ -1011,9 +1040,16 @@
                                                 If IsNumeric(dat) Then flg = "C"
                                             End If
 
+                                            ''MsgBox(dt_tm & " " & DateAdd("h", -1 * Val(txtTdiff.Text), dt_tm))
+                                            'If chkUTC.Checked Then
+                                            '    UTC_dt = UTC_Convert(dt_tm)
+                                            '    If Station_Element(st, cod) Then Add_Record(st, cod, UTC_dt, dat, flg, acquisitiontype, lvl)
+                                            'Else
+                                            '    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
+                                            'End If
                                             If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
 
-                                            End If
+                                        End If
                                         End If
                                 End With
 
@@ -1493,6 +1529,16 @@
         If chkUpperAir.Checked Then List_UpperAirFields()
     End Sub
 
+    Private Sub chkUTC_CheckedChanged(sender As Object, e As EventArgs) Handles chkUTC.CheckedChanged
+        If chkUTC.Checked Then
+            txtTdiff.Visible = True
+            lblDiff.Visible = True
+        Else
+            txtTdiff.Visible = False
+            lblDiff.Visible = False
+        End If
+    End Sub
+
     Function Station_Element(stn_id As String, elm_code As String) As Boolean
         Dim stn, elm, itm As Boolean
 
@@ -1742,4 +1788,16 @@
             txtMissingFlag.Visible = False
         End If
     End Sub
+
+    Function UTC_Convert(dttime As String) As String
+        Dim UTC_dt As String
+        Try
+
+            UTC_dt = DateAdd("h", -1 * Val(txtTdiff.Text), dttime)
+            UTC_dt = DateAndTime.Year(UTC_dt) & "-" & DateAndTime.Month(UTC_dt) & "-" & DateAndTime.Day(UTC_dt) & " " & DateAndTime.Hour(UTC_dt) & ":" & DateAndTime.Minute(UTC_dt) & ":" & DateAndTime.Second(UTC_dt)
+            Return UTC_dt
+        Catch ex As Exception
+            Return dttime
+        End Try
+    End Function
 End Class

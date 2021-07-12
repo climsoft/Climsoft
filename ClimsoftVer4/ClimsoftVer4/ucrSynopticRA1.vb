@@ -17,6 +17,7 @@ Public Class ucrSynopticRA1
     'stores the default value for the hour selector
     Private iDefaultHourValue As Integer
     Private bAutoFillValues As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -57,6 +58,8 @@ Public Class ucrSynopticRA1
             ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl()
 
+            ' Check for key entry mode and indicate on the form
+            If FldName.Key_Entry_Mode(frmNewSynopticRA1.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
     End Sub
 
@@ -133,7 +136,8 @@ Public Class ucrSynopticRA1
     Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
         Try
             frmSynopTDCF.Show()
-            frmSynopTDCF.cboTemplate.Text = "TM_307081"
+            frmSynopTDCF.srcTable.Text = "form_synoptic_2_ra1"
+            'frmSynopTDCF.cboTemplate.Text = "TM_307081"
             ' Subset Observations
             'TODO. Copied from Samuel's code
 

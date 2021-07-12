@@ -105,6 +105,12 @@
     <Compile Include="formAgro1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formSynoptic2.Designer.vb">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynoptic2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formSynopticCaribbean.Designer.vb">
       <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
     </Compile>
@@ -833,6 +839,9 @@
   <ItemGroup>
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formSynoptic2.resx">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formSynopticCaribbean.resx">
       <DependentUpon>formSynopticCaribbean.vb</DependentUpon>

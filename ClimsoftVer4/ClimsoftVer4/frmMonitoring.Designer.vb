@@ -25,6 +25,7 @@ Partial Class frmMonitoring
         Me.TabMonitoring = New System.Windows.Forms.TabControl()
         Me.TabUsrRecords = New System.Windows.Forms.TabPage()
         Me.grpUsers = New System.Windows.Forms.GroupBox()
+        Me.cmdSave2 = New System.Windows.Forms.Button()
         Me.cmdView = New System.Windows.Forms.Button()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
@@ -122,6 +123,7 @@ Partial Class frmMonitoring
         '
         'grpUsers
         '
+        Me.grpUsers.Controls.Add(Me.cmdSave2)
         Me.grpUsers.Controls.Add(Me.cmdView)
         Me.grpUsers.Controls.Add(Me.lblEndDate)
         Me.grpUsers.Controls.Add(Me.lblStartDate)
@@ -138,11 +140,21 @@ Partial Class frmMonitoring
         Me.grpUsers.TabStop = False
         Me.grpUsers.Text = "Users Records"
         '
+        'cmdSave2
+        '
+        Me.cmdSave2.Enabled = False
+        Me.cmdSave2.Location = New System.Drawing.Point(296, 108)
+        Me.cmdSave2.Name = "cmdSave2"
+        Me.cmdSave2.Size = New System.Drawing.Size(94, 28)
+        Me.cmdSave2.TabIndex = 21
+        Me.cmdSave2.Text = "Save Output"
+        Me.cmdSave2.UseVisualStyleBackColor = True
+        '
         'cmdView
         '
         Me.cmdView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdView.ForeColor = System.Drawing.Color.Black
-        Me.cmdView.Location = New System.Drawing.Point(252, 108)
+        Me.cmdView.Location = New System.Drawing.Point(118, 108)
         Me.cmdView.Name = "cmdView"
         Me.cmdView.Size = New System.Drawing.Size(103, 28)
         Me.cmdView.TabIndex = 10
@@ -817,4 +829,5 @@ Partial Class frmMonitoring
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents optUsersStatus As RadioButton
+    Friend WithEvents cmdSave2 As Button
 End Class

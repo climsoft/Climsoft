@@ -594,17 +594,16 @@ Public Class formMetadata
             '    ", adminRegion = '" & txtAuthority.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
             sql = "UPDATE station SET stationId = '" & txtstationId.Text & "', stationName = '" & txtStationName.Text & "',wmoid = '" & txtwmoid.Text & "', icaoid = '" & txticaoid.Text & "', latitude = " & lat & ", qualifier = '" & txtStationType.Text & "', longitude = " & lon & " , elevation = '" & txtElevation.Text & "', geoLocationMethod = '" & txtgeoMethod.Text & "', geoLocationAccuracy = '" & Val(txtgeoAccuracy.Text) & "', openingDatetime = '" & txtOpeningDate.Text & "', closingDatetime = '" & txtClosingDate.Text & "', country = '" & txtCountry.Text & "', authority = '" & txtAuthority.Text & "'" &
-
                 ", adminRegion = '" & txtAdminRegion.Text & "', drainageBasin = '" & txtDrainageBasin.Text & "', stationOperational = '" & oper & "' where stationId = '" & txtstationId.Text & "';"
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
-                    MsgBox("Update Failed")
-                Else
-                    MsgBox("Update Successful")
-                End If
-
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
             End If
+
+        End If
 
     End Sub
     Function TableUpdate(recs As Integer, cmdtype As String) As Boolean
@@ -2228,7 +2227,6 @@ Err:
         picInstrument.ImageLocation = txtInstrumentPicFile.Text
         picInstrument.Refresh()
     End Sub
-
 
 End Class
 Class MetadataVariables
