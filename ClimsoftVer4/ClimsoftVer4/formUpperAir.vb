@@ -163,7 +163,7 @@ Public Class form_upperair1
             ' Retrieve Keyentry mode information and mark on the checkbox
             'MsgBox(Me.Name)
             If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
-
+            Me.CenterToScreen()
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 'MsgBox("No Element Selected!   >>> Select them at the Metadata form")

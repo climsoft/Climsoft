@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmGeneralSettings
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class frmGeneralSettings
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.txtKeyName = New System.Windows.Forms.TextBox()
         Me.txtKeyValue = New System.Windows.Forms.TextBox()
         Me.txtKeyDescription = New System.Windows.Forms.TextBox()
@@ -43,8 +42,6 @@ Partial Class frmGeneralSettings
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.lblGuidelines = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtKeyName
@@ -231,9 +228,6 @@ Partial Class frmGeneralSettings
         Me.lblGuidelines.Text = "When updating folder location for QC output, you must use forward slash '/'. For " &
     "all other folder locations use backslash '\'."
         '
-        'BindingSource1
-        '
-        '
         'frmGeneralSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -263,7 +257,6 @@ Partial Class frmGeneralSettings
         Me.MinimizeBox = False
         Me.Name = "frmGeneralSettings"
         Me.Text = "General Settings"
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -288,5 +281,4 @@ Partial Class frmGeneralSettings
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents lblGuidelines As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
 End Class

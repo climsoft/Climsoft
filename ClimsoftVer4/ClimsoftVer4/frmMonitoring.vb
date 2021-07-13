@@ -19,16 +19,16 @@ Public Class frmMonitoring
         Dim kount As Long
         constr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = constr
-        conn.Open()
+
         Try
             ' Get Users
             sql = "Select * from climsoftusers;"
-
+            conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Users")
-
+            'conn.Close()
             For kount = 0 To ds.Tables("Users").Rows.Count - 1
                 cboUser.Items.Add(ds.Tables("Users").Rows(kount).Item(0))
             Next
@@ -37,7 +37,7 @@ Public Class frmMonitoring
 
             ' Get Key Entry forms
             sql = "Select * from data_forms where selected =1;"
-
+            'conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
@@ -72,12 +72,13 @@ Public Class frmMonitoring
             qwry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qwry.CommandTimeout = 0
             qwry.ExecuteNonQuery()
-
+            conn.Close()
         Catch ex As Exception
+            conn.Close()
             If ex.HResult = -2147467259 Then
                 Me.Close()
             Else
-                MsgBox(ex.Message)
+                MsgBox(ex.Message & " at frmMonitoring Load")
             End If
         End Try
     End Sub
@@ -113,6 +114,14 @@ Public Class frmMonitoring
                         "HAVING signature= '" & cboUser.Text & "' AND entryDatetime Between '" & dts & "' And '" & dte & "' " &
                         "ORDER BY entryDatetime;"
 
+                    '' form_daily2 handled separately so as to include Element Id
+                    'If cboForms.Items(i) = "form_daily2" Then
+                    '    sql = "SELECT signature as Login, stationId, elementId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                    '     "GROUP BY signature, stationId, yyyy, mm, entryDatetime " &
+                    '    "HAVING signature= '" & cboUser.Text & "' AND entryDatetime Between '" & dts & "' And '" & dte & "' " &
+                    '    "ORDER BY entryDatetime;"
+                    'End If
+
                     ' form_monthly is a pecial case since it has no mm field
                     If cboForms.Items(i) = "form_monthly" Then
                         sql = "SELECT signature as Login, stationId, yyyy as Year, elementId as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
@@ -128,6 +137,14 @@ Public Class frmMonitoring
                        "HAVING entryDatetime Between '" & dts & "' And '" & dte & "' " &
                        "ORDER BY entryDatetime;"
 
+                    '' form_monthly is a pecial case since it has no mm field
+                    'If cboForms.Items(i) = "form_daily2" Then
+                    '    sql = "SELECT signature as Login, stationId, elementId, yyyy as Year, mm as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
+                    '   "GROUP BY signature, stationId, yyyy, mm, entryDatetime " &
+                    '   "HAVING entryDatetime Between '" & dts & "' And '" & dte & "' " &
+                    '   "ORDER BY entryDatetime;"
+                    'End If
+
                     ' form_monthly is a pecial case since it has no mm field
                     If cboForms.Items(i) = "form_monthly" Then
                         sql = "SELECT signature as Login, stationId, yyyy as Year, elementId as Month, entryDatetime as Entry_DateTime FROM " & cboForms.Items(i) & " " &
@@ -138,10 +155,12 @@ Public Class frmMonitoring
 
                 End If
 
+                conn.Open()
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
                 da.SelectCommand.CommandTimeout = 0
                 ds.Clear()
                 da.Fill(ds, "Records")
+                conn.Close()
 
                 For kount = 0 To ds.Tables("Records").Rows.Count - 1
                     Rec(0) = ds.Tables("Records").Rows(kount).Item("Login")
@@ -155,12 +174,19 @@ Public Class frmMonitoring
                     ListViewRecs.Items.Add(itms)
                 Next kount
             Next i
+
             lblTrecs.Text = ListViewRecs.Items.Count
             lblTrecs.Refresh()
+            If Val(lblTrecs.Text) > 0 Then
+                cmdSave2.Enabled = True
+            Else
+                cmdSave2.Enabled = False
+            End If
             Me.Cursor = Cursors.Default
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
+            conn.Close()
         End Try
     End Sub
 
@@ -177,7 +203,7 @@ Public Class frmMonitoring
 
         Try
             kt = 0
-
+            conn.Open()
             For i = 0 To cboUser.Items.Count - 1
                 kount = 0
                 For k = 0 To cboForms.Items.Count - 1
@@ -192,6 +218,7 @@ Public Class frmMonitoring
                     da.SelectCommand.CommandTimeout = 0
                     ds.Clear()
                     da.Fill(ds, "UserRecords")
+
                     'MsgBox(ds.Tables("UserRecords").Rows.Count)
                     For j = 0 To ds.Tables("UserRecords").Rows.Count - 1
                         'MsgBox(ds.Tables("UserRecords").Rows(j).Item(0))
@@ -211,10 +238,11 @@ Public Class frmMonitoring
                 qwry.ExecuteNonQuery()
             Next i
             lblTrecs.Text = kt 'kount()
-
+            conn.Close()
         Catch x As Exception
             MsgBox(x.Message)
             Me.Cursor = Cursors.Default
+            conn.Close()
         End Try
 
         Dim Rec(4) As String
@@ -231,12 +259,12 @@ Public Class frmMonitoring
 
             'sql = "Select * from userrecords"
             sql = "SELECT username as Login, recsdone as Records,recsexpt as Target, round(recsdone/recsexpt * 100, 1) as performance FROM userrecords WHERE recsexpt IS NOT NULL;"
-
+            conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "Performs")
-
+            conn.Close()
             For i = 0 To ds.Tables("Performs").Rows.Count - 1
                 If IsDBNull(ds.Tables("Performs").Rows(i).Item(0)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(1)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(2)) Or IsDBNull(ds.Tables("Performs").Rows(i).Item(3)) Then Continue For
 
@@ -263,7 +291,7 @@ Public Class frmMonitoring
             lblTrecs.Text = ds.Tables("Performs").Rows.Count
             Me.Cursor = Cursors.Default
         Catch x As Exception
-            MsgBox(x.Message)
+            MsgBox(x.Message & " at cmdRetrieve Click")
             Me.Cursor = Cursors.Default
         End Try
     End Sub
@@ -317,6 +345,7 @@ Public Class frmMonitoring
         Me.Cursor = Cursors.WaitCursor
 
         Try
+            conn.Open()
             ' Add a record for key entry mode if not exists
             sql = "ALTER TABLE `data_forms` ADD COLUMN `entry_mode` TINYINT(2) NOT NULL DEFAULT '0' AFTER `sequencer`;"
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -375,9 +404,11 @@ Public Class frmMonitoring
             End If
             Me.Cursor = Cursors.Default
             lblTrecs.Text = DataGridSettings.Rows.Count
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
+            conn.Close()
         End Try
     End Sub
 
@@ -385,6 +416,8 @@ Public Class frmMonitoring
         Dim usr, expt As String
         Dim entrymode, entrystatus As Integer
         Try
+            conn.Open()
+
             With DataGridSettings
                 If .Rows.Count = 0 Then
                     MsgBox("No records retrieved yet!. Click View")
@@ -452,8 +485,10 @@ Public Class frmMonitoring
                 End If
                 MsgBox("Update Successful")
             End With
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn.Close()
         End Try
     End Sub
 
@@ -482,6 +517,7 @@ Public Class frmMonitoring
             End If
 
             ' Extract data
+            conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
@@ -521,9 +557,12 @@ Public Class frmMonitoring
             Next i
             lblTrecs.Text = ListViewRecs.Items.Count
             Me.Cursor = Cursors.Default
+            conn.Close()
+
         Catch ex As Exception
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
+            conn.Close()
         End Try
     End Sub
 
@@ -566,6 +605,7 @@ Public Class frmMonitoring
                 PrintLine(11, datarow)
             Next i
             FileClose(11)
+            MsgBox("Output save in " & fl)
             If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
             Return True
 
@@ -597,6 +637,43 @@ Public Class frmMonitoring
             Case 3
                 Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "settings.htm")
         End Select
+    End Sub
+
+    Private Sub cmdSave2_Click(sender As Object, e As EventArgs) Handles cmdSave2.Click
+        Dim fl, datarow, datahdr As String
+        Me.Cursor = Cursors.WaitCursor
+
+        Try
+
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\userRecord.csv"
+            FileOpen(21, fl, OpenMode.Output)
+            With ListViewRecs
+                ' Output headers titls
+                datahdr = .Columns(0).Text
+                For j = 1 To .Columns.Count - 1
+                    datahdr = datahdr & "," & .Columns(j).Text
+                Next
+                PrintLine(21, datahdr)
+
+                ' Output user records
+                For i = 0 To .Items.Count - 1
+                    datarow = .Items(i).SubItems(0).Text
+                    For j = 1 To .Columns.Count - 1
+                        datarow = datarow & "," & .Items(i).SubItems(j).Text
+                    Next
+                    PrintLine(21, datarow)
+                Next
+
+            End With
+            FileClose(21)
+            If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(21)
+            Me.Cursor = Cursors.Default
+        End Try
     End Sub
 
     Private Sub optTargets_CheckedChanged(sender As Object, e As EventArgs) Handles optTargets.CheckedChanged

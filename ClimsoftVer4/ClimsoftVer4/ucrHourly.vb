@@ -2,6 +2,7 @@
     Private strValueFieldName As String = "hh_"
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -39,6 +40,7 @@
             ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl() 'populate the values
 
+            If FldName.Key_Entry_Mode(frmNewHourly.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
     End Sub
 

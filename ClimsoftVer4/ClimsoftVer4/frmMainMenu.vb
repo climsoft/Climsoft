@@ -102,6 +102,8 @@ Public Class frmMainMenu
                     cmdMetadata.Enabled = False
                 End If
             End If
+
+            Me.CenterToScreen()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try

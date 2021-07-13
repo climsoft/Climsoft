@@ -73,6 +73,9 @@ Partial Class frmImportDaily
         Me.lblMissingFlag = New System.Windows.Forms.Label()
         Me.grpUpperAir = New System.Windows.Forms.GroupBox()
         Me.chkUpperAir = New System.Windows.Forms.CheckBox()
+        Me.lblDiff = New System.Windows.Forms.Label()
+        Me.txtTdiff = New System.Windows.Forms.TextBox()
+        Me.chkUTC = New System.Windows.Forms.CheckBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
@@ -549,11 +552,47 @@ Partial Class frmImportDaily
         Me.chkUpperAir.Text = "Upper Air Data"
         Me.chkUpperAir.UseVisualStyleBackColor = True
         '
+        'lblDiff
+        '
+        Me.lblDiff.AutoSize = True
+        Me.lblDiff.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiff.Location = New System.Drawing.Point(834, 7)
+        Me.lblDiff.Name = "lblDiff"
+        Me.lblDiff.Size = New System.Drawing.Size(117, 13)
+        Me.lblDiff.TabIndex = 50
+        Me.lblDiff.Text = "Time difference (Hours)"
+        Me.lblDiff.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblDiff.Visible = False
+        '
+        'txtTdiff
+        '
+        Me.txtTdiff.Location = New System.Drawing.Point(805, 3)
+        Me.txtTdiff.Name = "txtTdiff"
+        Me.txtTdiff.Size = New System.Drawing.Size(26, 20)
+        Me.txtTdiff.TabIndex = 49
+        Me.txtTdiff.Text = "0"
+        Me.txtTdiff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtTdiff.Visible = False
+        '
+        'chkUTC
+        '
+        Me.chkUTC.AutoSize = True
+        Me.chkUTC.Location = New System.Drawing.Point(700, 6)
+        Me.chkUTC.Name = "chkUTC"
+        Me.chkUTC.Size = New System.Drawing.Size(100, 17)
+        Me.chkUTC.TabIndex = 48
+        Me.chkUTC.Text = "Convert to UTC"
+        Me.chkUTC.UseVisualStyleBackColor = True
+        Me.chkUTC.Visible = False
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 663)
+        Me.Controls.Add(Me.lblDiff)
+        Me.Controls.Add(Me.txtTdiff)
+        Me.Controls.Add(Me.chkUTC)
         Me.Controls.Add(Me.grpUpperAir)
         Me.Controls.Add(Me.lblMissingFlag)
         Me.Controls.Add(Me.txtMissingFlag)
@@ -652,4 +691,7 @@ Partial Class frmImportDaily
     Friend WithEvents lblMissingFlag As Label
     Friend WithEvents grpUpperAir As GroupBox
     Friend WithEvents chkUpperAir As CheckBox
+    Friend WithEvents lblDiff As Label
+    Friend WithEvents txtTdiff As TextBox
+    Friend WithEvents chkUTC As CheckBox
 End Class

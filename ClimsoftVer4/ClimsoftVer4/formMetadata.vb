@@ -598,12 +598,12 @@ Public Class formMetadata
 
             'MsgBox(sql)
             If Not Update_Rec(sql) Then
-                    MsgBox("Update Failed")
-                Else
-                    MsgBox("Update Successful")
-                End If
-
+                MsgBox("Update Failed")
+            Else
+                MsgBox("Update Successful")
             End If
+
+        End If
 
     End Sub
     Function TableUpdate(recs As Integer, cmdtype As String) As Boolean
@@ -2227,7 +2227,6 @@ Err:
         picInstrument.ImageLocation = txtInstrumentPicFile.Text
         picInstrument.Refresh()
     End Sub
-
 
 End Class
 Class MetadataVariables

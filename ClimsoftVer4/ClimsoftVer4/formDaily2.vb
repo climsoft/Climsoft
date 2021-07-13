@@ -447,6 +447,7 @@ Public Class form_daily2
             ' Retrieve Keyentry mode information and mark on the checkbox
             If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
 
+            Me.CenterToScreen()
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")

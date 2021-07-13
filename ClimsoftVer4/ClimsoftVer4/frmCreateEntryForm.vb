@@ -6,7 +6,7 @@
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
     Dim sql As String
-    Dim frm As String
+    Dim frm, tbl As String
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         conn.Close()
@@ -22,7 +22,7 @@
             conn.Open()
 
             ' load forms
-            sql = "SELECT form_name, description FROM data_forms where form_name = 'form_daily1';"
+            sql = "SELECT form_name, description FROM data_forms where form_name = 'form_daily1' or form_name = 'form_synoptic2_TDCF';"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "data_forms")
@@ -50,7 +50,7 @@
             lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
             lstvElements.Columns.Add("Element Description", 500, HorizontalAlignment.Left)
 
-
+            'conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
             conn.Close()
@@ -67,7 +67,9 @@
     Sub add_Element(idType As String, dat As String)
         Dim maxRows As Integer
         Dim ItmExist As Boolean
-
+        Dim dae As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dse As New DataSet
+        Dim j As Integer
         Try
             Select Case idType
             '    Case "Name"
@@ -82,11 +84,11 @@
                     sql = "SELECT elementId, description FROM obselement WHERE elementId ='" & dat & "';"
             End Select
 
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ds.Clear()
-            da.Fill(ds, "obselement")
+            dae = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dse.Clear()
+            dae.Fill(dse, "obselement")
 
-            maxRows = (ds.Tables("obselement").Rows.Count)
+            maxRows = (dse.Tables("obselement").Rows.Count)
 
             If maxRows > 0 Then cboElements.BackColor = Color.White
 
@@ -94,13 +96,15 @@
             Dim itm = New ListViewItem
 
             'For i = 0 To maxRows - 1
-            str(0) = ds.Tables("obselement").Rows(0).Item("elementId")
-            str(1) = ds.Tables("obselement").Rows(0).Item("description")
+
+            str(0) = dse.Tables("obselement").Rows(0).Item("elementId")
+            str(1) = dse.Tables("obselement").Rows(0).Item("description")
             itm = New ListViewItem(str)
 
             ItmExist = False
             If lstvElements.Items.Count = 0 Then ' Always add the first selected item 
                 lstvElements.Items.Add(itm)
+                'lstvElements.Items.Insert(1, itm)
             Else
                 For j = 0 To lstvElements.Items.Count - 1
                     ' Check if the item has been added in the list and skip it if so
@@ -109,11 +113,14 @@
                         Exit For
                     End If
                 Next
-                If Not ItmExist Then lstvElements.Items.Add(itm)
+                ''If Not ItmExist Then lstvElements.Items.Add(itm)
+                ''If lstvElements.Items(j).Selected = True Then MsgBox(lstvElements.Items(j).SubItems(1).Text)
+                If Not ItmExist Then InsertItem(itm)
+                'If Not ItmExist Then lstvElements.Items.Insert(j, itm)
             End If
 
         Catch err As Exception
-            MsgBox(err.Message, MsgBoxStyle.Exclamation)
+            MsgBox(err.Message)
         End Try
     End Sub
 
@@ -138,13 +145,25 @@
     End Sub
 
     Private Sub cmdFinish_Click(sender As Object, e As EventArgs) Handles cmdFinish.Click
-
+        'Dim tbl As String
+        'MsgBox(lstForms.SelectedItem)
+        If Not TableName(tbl) Then Exit Sub
+        'MsgBox(tbl)
+        'Exit Sub
 
         Dim sql, tblSQL, idxSQL, valSQL, flgSQL, xtSQL, pryKySQL As String
 
-        tblSQL = "DROP TABLE IF EXISTS `form_daily1`; CREATE TABLE IF NOT EXISTS `form_daily1` ( "
+        'Select Case tbl
+        '    Case "form_daily1"
+
+        'tblSQL = "DROP TABLE IF EXISTS `form_daily1`; CREATE TABLE IF NOT EXISTS `form_daily1` ( "
+        '        idxSQL = "`stationId` varchar(50) NOT NULL DEFAULT '', `yyyy` int(11) NOT NULL, `mm` int(11) NOT NULL, `dd` int(11) NOT NULL, `hh` int(11) NOT NULL, "
+        '        xtSQL = "`signature` varchar(45) DEFAULT NULL, `entryDatetime` datetime DEFAULT NULL, "
+        '        pryKySQL = "PRIMARY KEY (`stationId`,`yyyy`,`mm`,`dd`,`hh`));"
+
+        tblSQL = "DROP TABLE IF EXISTS `" & tbl & "`; CREATE TABLE IF NOT EXISTS `" & tbl & "` ( "
         idxSQL = "`stationId` varchar(50) NOT NULL DEFAULT '', `yyyy` int(11) NOT NULL, `mm` int(11) NOT NULL, `dd` int(11) NOT NULL, `hh` int(11) NOT NULL, "
-        xtSQL = "`signature` varchar(45) DEFAULT NULL, `entryDatetime` datetime DEFAULT NULL, "
+        xtSQL = "`signature` varchar(45) DEFAULT NULL, `entryDatetime` datetime DEFAULT NULL, `temperatureUnits` varchar(45) DEFAULT NULL,`precipUnits` varchar(45) DEFAULT NULL,`cloudHeightUnits` varchar(45) DEFAULT NULL,`visUnits` varchar(45) DEFAULT NULL,`windspdUnits` varchar(45) DEFAULT NULL, "
         pryKySQL = "PRIMARY KEY (`stationId`,`yyyy`,`mm`,`dd`,`hh`));"
 
         With lstvElements
@@ -156,6 +175,8 @@
             Next
         End With
 
+        '    Case "form_synoptic2_TDCF"
+        'End Select
         sql = tblSQL & idxSQL & valSQL & flgSQL & xtSQL & pryKySQL
 
         If Not Update_DataForms() Then Exit Sub
@@ -180,6 +201,9 @@
     Private Sub lstForms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstForms.SelectedIndexChanged
         Dim col As String
 
+        'MsgBox(lstForms.SelectedItem)
+        'Clear_lstElements()
+
         sql = "SELECT form_name, description FROM data_forms where description = '" & lstForms.SelectedItem & "';"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
@@ -193,7 +217,7 @@
             da.Fill(ds, "frm")
         Catch x As Exception
             If x.HResult = -2147467259 Then
-                MsgBox("Table for the selected form does not exist. Create the table by selecting the observation elements required for the form from the Elements list box. Click 'Finish' when done.")
+                MsgBox("Table for the selected form does not exist. Create the table by selecting the observation elements required for the form from the Elements list box. Click 'Save' when done.")
                 cboElements.Focus()
                 Exit Sub
             End If
@@ -202,6 +226,8 @@
 
         Try
             With ds.Tables("frm")
+                lstvElements.Items.Clear()
+                'MsgBox("cleared")
                 For i = 0 To .Columns.Count - 1
                     col = .Columns(i).ColumnName
                     If Strings.Left(col, 3) = "Val" Then
@@ -221,7 +247,7 @@
 
         stat = 5
         ed = stat + lstvElements.Items.Count - 1
-        sql = "update data_forms set val_start_position = " & stat & ", val_end_position =  " & ed & " where form_name = 'form_daily1';"
+        sql = "update data_forms set val_start_position = " & stat & ", val_end_position =  " & ed & " where form_name = '" & tbl & "';"
         Try
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
@@ -234,5 +260,60 @@
         End Try
 
     End Function
+    Function TableName(ByRef tbl As String) As Boolean
+
+        sql = "SELECT table_name FROM data_forms where description = '" & lstForms.SelectedItem & "';"
+        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+        ds.Clear()
+        da.Fill(ds, "tblNm")
+
+        If ds.Tables("tblNm").Rows.Count > 0 Then
+            tbl = ds.Tables("tblNm").Rows(0).Item("table_name")
+        Else
+            Return False
+        End If
+
+        Try
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Sub Clear_lstElements()
+        Try
+            With lstvElements
+                If .Items.Count > 0 Then
+                    .Items.Clear()
+                    'MsgBox("Cleared")
+                    'For i = 1 To .Items.Count - 1
+                    '    .Items(i - 1).Remove()
+                    'Next
+                End If
+            End With
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Sub InsertItem(itms As ListViewItem)
+        Dim k As Integer
+        Dim insrt As Boolean
+
+        insrt = False
+        For k = 0 To lstvElements.Items.Count - 1
+            If lstvElements.Items(k).Selected Then
+                insrt = True
+                Exit For
+            End If
+        Next
+
+        If insrt = True Then
+            lstvElements.Items.Insert(k, itms)
+        Else
+            lstvElements.Items.Add(itms)
+        End If
+
+    End Sub
 
 End Class

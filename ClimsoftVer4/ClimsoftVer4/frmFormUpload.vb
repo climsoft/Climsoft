@@ -239,6 +239,13 @@ Public Class frmFormUpload
                             dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
                             hh = rgKey.RegkeyValue("key01")
 
+                        Case "form_synoptic2_tdcf"
+                            elemCode = Strings.Right(dss.Tables(frm_tbl).Columns(m).ColumnName, 3)
+                            yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
+                            mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
+                            dd = dss.Tables(frm_tbl).Rows(n).Item("dd")
+                            hh = dss.Tables(frm_tbl).Rows(n).Item("hh")
+
                         Case "form_hourly"
                             yyyy = dss.Tables(frm_tbl).Rows(n).Item("yyyy")
                             mm = dss.Tables(frm_tbl).Rows(n).Item("mm")
@@ -276,6 +283,7 @@ Public Class frmFormUpload
                                 If dss.Tables(frm_tbl).Rows(n).Item(m) = "" Then obsFlag = "M"
                             End If
 
+                            datetimeGTS(obsDatetime)
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -298,6 +306,7 @@ Public Class frmFormUpload
                             End If
                             ''If dss.Tables(frm_tbl).Rows(n).Item(m + (flds * 2)) = "" Then obsFlag = "M"
 
+                            datetimeGTS(obsDatetime)
 
                             strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                      "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
@@ -317,7 +326,9 @@ Public Class frmFormUpload
                     End Select
 
                     obsDatetime = yyyy & "-" & mm & "-" & dd & " " & hh & ":00:00"
-                    'MsgBox(obsDatetime)
+
+                    datetimeGTS(obsDatetime)
+
                     'Generate SQL string for inserting data into observationinitial table
                     strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,period,qcStatus,acquisitionType,capturedBy,dataForm) " &
                         "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," & obsperiod & "," _
@@ -402,4 +413,37 @@ Public Class frmFormUpload
         End Try
     End Function
 
+    Private Sub chkUTC_CheckedChanged(sender As Object, e As EventArgs) Handles chkUTC.CheckedChanged
+        If chkUTC.Checked Then
+            txtTdiff.Visible = True
+            lblDiff.Visible = True
+        Else
+            txtTdiff.Visible = False
+            lblDiff.Visible = False
+        End If
+    End Sub
+
+    Private Sub lblDiff_Click(sender As Object, e As EventArgs) Handles lblDiff.Click
+
+    End Sub
+
+    Private Sub txtTdiff_TextChanged(sender As Object, e As EventArgs) Handles txtTdiff.TextChanged
+
+    End Sub
+
+    Function datetimeGTS(ByRef dttime As String) As Boolean
+        Dim diff As Integer
+
+        diff = Val(txtTdiff.Text)
+        diff = -1 * diff
+        Try
+            dttime = DateAdd("h", diff, dttime)
+            dttime = DateAndTime.Year(dttime) & "-" & DateAndTime.Month(dttime) & "-" & DateAndTime.Day(dttime) & " " & DateAndTime.Hour(dttime) & ":00:00"
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+
+    End Function
 End Class

@@ -355,6 +355,7 @@ Public Class frmDBUtilities
             .lblDefaultObsHour.Visible = False
             .txtObsHour.Visible = False
             .grpSummary.Visible = False
+            .chkUTC.Visible = True
             .Show()
         End With
     End Sub

@@ -556,6 +556,150 @@ Partial Class form_synopticRA1
         Val_Elem132Label.TabIndex = 101
         Val_Elem132Label.Text = "SSS-1Hr"
         '
+        'Val_Elem112Label
+        '
+        Val_Elem112Label.AutoSize = True
+        Val_Elem112Label.Location = New System.Drawing.Point(519, 342)
+        Val_Elem112Label.Name = "Val_Elem112Label"
+        Val_Elem112Label.Size = New System.Drawing.Size(92, 13)
+        Val_Elem112Label.TabIndex = 99
+        Val_Elem112Label.Text = "Wind Direction-dd"
+        '
+        'Val_Elem005Label
+        '
+        Val_Elem005Label.AutoSize = True
+        Val_Elem005Label.Location = New System.Drawing.Point(519, 292)
+        Val_Elem005Label.Name = "Val_Elem005Label"
+        Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
+        Val_Elem005Label.TabIndex = 103
+        Val_Elem005Label.Text = "Precip-24Hr"
+        '
+        'Val_Elem174Label
+        '
+        Val_Elem174Label.AutoSize = True
+        Val_Elem174Label.Location = New System.Drawing.Point(519, 317)
+        Val_Elem174Label.Name = "Val_Elem174Label"
+        Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
+        Val_Elem174Label.TabIndex = 105
+        Val_Elem174Label.Text = "Precip-3Hr"
+        '
+        'Val_Elem176Label
+        '
+        Val_Elem176Label.AutoSize = True
+        Val_Elem176Label.Location = New System.Drawing.Point(21, 367)
+        Val_Elem176Label.Name = "Val_Elem176Label"
+        Val_Elem176Label.Size = New System.Drawing.Size(92, 13)
+        Val_Elem176Label.TabIndex = 133
+        Val_Elem176Label.Text = "Low Cloud Hght-h"
+        '
+        'Val_Elem114Label
+        '
+        Val_Elem114Label.AutoSize = True
+        Val_Elem114Label.Location = New System.Drawing.Point(20, 392)
+        Val_Elem114Label.Name = "Val_Elem114Label"
+        Val_Elem114Label.Size = New System.Drawing.Size(106, 13)
+        Val_Elem114Label.TabIndex = 91
+        Val_Elem114Label.Text = "Total Cloud Cover- N"
+        '
+        'Val_Elem111Label
+        '
+        Val_Elem111Label.AutoSize = True
+        Val_Elem111Label.Location = New System.Drawing.Point(519, 367)
+        Val_Elem111Label.Name = "Val_Elem111Label"
+        Val_Elem111Label.Size = New System.Drawing.Size(84, 13)
+        Val_Elem111Label.TabIndex = 101
+        Val_Elem111Label.Text = "Wind Speed - fff"
+        '
+        'Val_Elem115Label
+        '
+        Val_Elem115Label.AutoSize = True
+        Val_Elem115Label.Location = New System.Drawing.Point(20, 417)
+        Val_Elem115Label.Name = "Val_Elem115Label"
+        Val_Elem115Label.Size = New System.Drawing.Size(103, 13)
+        Val_Elem115Label.TabIndex = 149
+        Val_Elem115Label.Text = "Vertical Significance"
+        '
+        'Val_Elem177Label
+        '
+        Val_Elem177Label.AutoSize = True
+        Val_Elem177Label.Location = New System.Drawing.Point(20, 442)
+        Val_Elem177Label.Name = "Val_Elem177Label"
+        Val_Elem177Label.Size = New System.Drawing.Size(135, 13)
+        Val_Elem177Label.TabIndex = 151
+        Val_Elem177Label.Text = "Low Lvl Clouds Amount-Nh"
+        '
+        'Val_Elem178Label
+        '
+        Val_Elem178Label.AutoSize = True
+        Val_Elem178Label.Location = New System.Drawing.Point(20, 467)
+        Val_Elem178Label.Name = "Val_Elem178Label"
+        Val_Elem178Label.Size = New System.Drawing.Size(122, 13)
+        Val_Elem178Label.TabIndex = 153
+        Val_Elem178Label.Text = "Low Lvl Clouds Type-CL"
+        '
+        'Val_Elem179Label
+        '
+        Val_Elem179Label.AutoSize = True
+        Val_Elem179Label.Location = New System.Drawing.Point(20, 492)
+        Val_Elem179Label.Name = "Val_Elem179Label"
+        Val_Elem179Label.Size = New System.Drawing.Size(142, 13)
+        Val_Elem179Label.TabIndex = 155
+        Val_Elem179Label.Text = "Medium Lvl Clouds Type-CM"
+        '
+        'Val_Elem180Label
+        '
+        Val_Elem180Label.AutoSize = True
+        Val_Elem180Label.Location = New System.Drawing.Point(20, 517)
+        Val_Elem180Label.Name = "Val_Elem180Label"
+        Val_Elem180Label.Size = New System.Drawing.Size(126, 13)
+        Val_Elem180Label.TabIndex = 157
+        Val_Elem180Label.Text = "High Lvl Clouds Type-CH"
+        '
+        'Val_Elem131Label
+        '
+        Val_Elem131Label.AutoSize = True
+        Val_Elem131Label.Location = New System.Drawing.Point(278, 367)
+        Val_Elem131Label.Name = "Val_Elem131Label"
+        Val_Elem131Label.Size = New System.Drawing.Size(112, 13)
+        Val_Elem131Label.TabIndex = 83
+        Val_Elem131Label.Text = "Vertical Significance 4"
+        '
+        'Val_Elem128Label
+        '
+        Val_Elem128Label.AutoSize = True
+        Val_Elem128Label.Location = New System.Drawing.Point(289, 392)
+        Val_Elem128Label.Name = "Val_Elem128Label"
+        Val_Elem128Label.Size = New System.Drawing.Size(95, 13)
+        Val_Elem128Label.TabIndex = 85
+        Val_Elem128Label.Text = "Cloud Amt Lvl4-N4"
+        '
+        'Val_Elem129Label
+        '
+        Val_Elem129Label.AutoSize = True
+        Val_Elem129Label.Location = New System.Drawing.Point(289, 417)
+        Val_Elem129Label.Name = "Val_Elem129Label"
+        Val_Elem129Label.Size = New System.Drawing.Size(100, 13)
+        Val_Elem129Label.TabIndex = 87
+        Val_Elem129Label.Text = "Cloud Type Lvl4-C4"
+        '
+        'Val_Elem130Label
+        '
+        Val_Elem130Label.AutoSize = True
+        Val_Elem130Label.Location = New System.Drawing.Point(289, 442)
+        Val_Elem130Label.Name = "Val_Elem130Label"
+        Val_Elem130Label.Size = New System.Drawing.Size(104, 13)
+        Val_Elem130Label.TabIndex = 89
+        Val_Elem130Label.Text = "Cloud Ht Lvl4-Hshs4"
+        '
+        'Val_Elem046Label
+        '
+        Val_Elem046Label.AutoSize = True
+        Val_Elem046Label.Location = New System.Drawing.Point(519, 392)
+        Val_Elem046Label.Name = "Val_Elem046Label"
+        Val_Elem046Label.Size = New System.Drawing.Size(81, 13)
+        Val_Elem046Label.TabIndex = 107
+        Val_Elem046Label.Text = "Insolation - Rad"
+        '
         'txtYear
         '
         Me.txtYear.Location = New System.Drawing.Point(386, 24)
@@ -1306,15 +1450,6 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem112Field019.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem112Field019.TabIndex = 52
         '
-        'Val_Elem112Label
-        '
-        Val_Elem112Label.AutoSize = True
-        Val_Elem112Label.Location = New System.Drawing.Point(519, 342)
-        Val_Elem112Label.Name = "Val_Elem112Label"
-        Val_Elem112Label.Size = New System.Drawing.Size(92, 13)
-        Val_Elem112Label.TabIndex = 99
-        Val_Elem112Label.Text = "Wind Direction-dd"
-        '
         'txtVal_Elem005Field051
         '
         Me.txtVal_Elem005Field051.Location = New System.Drawing.Point(617, 288)
@@ -1322,30 +1457,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem005Field051.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem005Field051.TabIndex = 50
         '
-        'Val_Elem005Label
-        '
-        Val_Elem005Label.AutoSize = True
-        Val_Elem005Label.Location = New System.Drawing.Point(519, 292)
-        Val_Elem005Label.Name = "Val_Elem005Label"
-        Val_Elem005Label.Size = New System.Drawing.Size(63, 13)
-        Val_Elem005Label.TabIndex = 103
-        Val_Elem005Label.Text = "Precip-24Hr"
-        '
         'txtVal_Elem174Field052
         '
         Me.txtVal_Elem174Field052.Location = New System.Drawing.Point(617, 313)
         Me.txtVal_Elem174Field052.Name = "txtVal_Elem174Field052"
         Me.txtVal_Elem174Field052.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem174Field052.TabIndex = 51
-        '
-        'Val_Elem174Label
-        '
-        Val_Elem174Label.AutoSize = True
-        Val_Elem174Label.Location = New System.Drawing.Point(519, 317)
-        Val_Elem174Label.Name = "Val_Elem174Label"
-        Val_Elem174Label.Size = New System.Drawing.Size(57, 13)
-        Val_Elem174Label.TabIndex = 105
-        Val_Elem174Label.Text = "Precip-3Hr"
         '
         'txtFlag112Field068
         '
@@ -1378,30 +1495,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem192Field016.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem192Field016.TabIndex = 17
         '
-        'Val_Elem176Label
-        '
-        Val_Elem176Label.AutoSize = True
-        Val_Elem176Label.Location = New System.Drawing.Point(21, 367)
-        Val_Elem176Label.Name = "Val_Elem176Label"
-        Val_Elem176Label.Size = New System.Drawing.Size(92, 13)
-        Val_Elem176Label.TabIndex = 133
-        Val_Elem176Label.Text = "Low Cloud Hght-h"
-        '
         'txtVal_Elem114Field018
         '
         Me.txtVal_Elem114Field018.Location = New System.Drawing.Point(164, 388)
         Me.txtVal_Elem114Field018.Name = "txtVal_Elem114Field018"
         Me.txtVal_Elem114Field018.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem114Field018.TabIndex = 18
-        '
-        'Val_Elem114Label
-        '
-        Val_Elem114Label.AutoSize = True
-        Val_Elem114Label.Location = New System.Drawing.Point(20, 392)
-        Val_Elem114Label.Name = "Val_Elem114Label"
-        Val_Elem114Label.Size = New System.Drawing.Size(106, 13)
-        Val_Elem114Label.TabIndex = 91
-        Val_Elem114Label.Text = "Total Cloud Cover- N"
         '
         'txtVal_Elem111Field020
         '
@@ -1410,30 +1509,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem111Field020.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem111Field020.TabIndex = 53
         '
-        'Val_Elem111Label
-        '
-        Val_Elem111Label.AutoSize = True
-        Val_Elem111Label.Location = New System.Drawing.Point(519, 367)
-        Val_Elem111Label.Name = "Val_Elem111Label"
-        Val_Elem111Label.Size = New System.Drawing.Size(84, 13)
-        Val_Elem111Label.TabIndex = 101
-        Val_Elem111Label.Text = "Wind Speed - fff"
-        '
         'txtVal_Elem115Field024
         '
         Me.txtVal_Elem115Field024.Location = New System.Drawing.Point(165, 413)
         Me.txtVal_Elem115Field024.Name = "txtVal_Elem115Field024"
         Me.txtVal_Elem115Field024.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem115Field024.TabIndex = 19
-        '
-        'Val_Elem115Label
-        '
-        Val_Elem115Label.AutoSize = True
-        Val_Elem115Label.Location = New System.Drawing.Point(20, 417)
-        Val_Elem115Label.Name = "Val_Elem115Label"
-        Val_Elem115Label.Size = New System.Drawing.Size(103, 13)
-        Val_Elem115Label.TabIndex = 149
-        Val_Elem115Label.Text = "Vertical Significance"
         '
         'txtVal_Elem168Field025
         '
@@ -1442,30 +1523,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem168Field025.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem168Field025.TabIndex = 20
         '
-        'Val_Elem177Label
-        '
-        Val_Elem177Label.AutoSize = True
-        Val_Elem177Label.Location = New System.Drawing.Point(20, 442)
-        Val_Elem177Label.Name = "Val_Elem177Label"
-        Val_Elem177Label.Size = New System.Drawing.Size(135, 13)
-        Val_Elem177Label.TabIndex = 151
-        Val_Elem177Label.Text = "Low Lvl Clouds Amount-Nh"
-        '
         'txtVal_Elem169Field026
         '
         Me.txtVal_Elem169Field026.Location = New System.Drawing.Point(165, 463)
         Me.txtVal_Elem169Field026.Name = "txtVal_Elem169Field026"
         Me.txtVal_Elem169Field026.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem169Field026.TabIndex = 22
-        '
-        'Val_Elem178Label
-        '
-        Val_Elem178Label.AutoSize = True
-        Val_Elem178Label.Location = New System.Drawing.Point(20, 467)
-        Val_Elem178Label.Name = "Val_Elem178Label"
-        Val_Elem178Label.Size = New System.Drawing.Size(122, 13)
-        Val_Elem178Label.TabIndex = 153
-        Val_Elem178Label.Text = "Low Lvl Clouds Type-CL"
         '
         'txtVal_Elem170Field027
         '
@@ -1474,30 +1537,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem170Field027.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem170Field027.TabIndex = 23
         '
-        'Val_Elem179Label
-        '
-        Val_Elem179Label.AutoSize = True
-        Val_Elem179Label.Location = New System.Drawing.Point(20, 492)
-        Val_Elem179Label.Name = "Val_Elem179Label"
-        Val_Elem179Label.Size = New System.Drawing.Size(142, 13)
-        Val_Elem179Label.TabIndex = 155
-        Val_Elem179Label.Text = "Medium Lvl Clouds Type-CM"
-        '
         'txtVal_Elem171Field028
         '
-        Me.txtVal_Elem171Field028.Location = New System.Drawing.Point(165, 513)
+        Me.txtVal_Elem171Field028.Location = New System.Drawing.Point(165, 512)
         Me.txtVal_Elem171Field028.Name = "txtVal_Elem171Field028"
         Me.txtVal_Elem171Field028.Size = New System.Drawing.Size(50, 20)
         Me.txtVal_Elem171Field028.TabIndex = 24
-        '
-        'Val_Elem180Label
-        '
-        Val_Elem180Label.AutoSize = True
-        Val_Elem180Label.Location = New System.Drawing.Point(20, 517)
-        Val_Elem180Label.Name = "Val_Elem180Label"
-        Val_Elem180Label.Size = New System.Drawing.Size(126, 13)
-        Val_Elem180Label.TabIndex = 157
-        Val_Elem180Label.Text = "High Lvl Clouds Type-CH"
         '
         'txtVal_Elem131Field041
         '
@@ -1506,30 +1551,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem131Field041.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem131Field041.TabIndex = 37
         '
-        'Val_Elem131Label
-        '
-        Val_Elem131Label.AutoSize = True
-        Val_Elem131Label.Location = New System.Drawing.Point(278, 367)
-        Val_Elem131Label.Name = "Val_Elem131Label"
-        Val_Elem131Label.Size = New System.Drawing.Size(112, 13)
-        Val_Elem131Label.TabIndex = 83
-        Val_Elem131Label.Text = "Vertical Significance 4"
-        '
         'txtVal_Elem128Field042
         '
         Me.txtVal_Elem128Field042.Location = New System.Drawing.Point(396, 388)
         Me.txtVal_Elem128Field042.Name = "txtVal_Elem128Field042"
         Me.txtVal_Elem128Field042.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem128Field042.TabIndex = 38
-        '
-        'Val_Elem128Label
-        '
-        Val_Elem128Label.AutoSize = True
-        Val_Elem128Label.Location = New System.Drawing.Point(289, 392)
-        Val_Elem128Label.Name = "Val_Elem128Label"
-        Val_Elem128Label.Size = New System.Drawing.Size(95, 13)
-        Val_Elem128Label.TabIndex = 85
-        Val_Elem128Label.Text = "Cloud Amt Lvl4-N4"
         '
         'txtVal_Elem129Field043
         '
@@ -1538,15 +1565,6 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem129Field043.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem129Field043.TabIndex = 39
         '
-        'Val_Elem129Label
-        '
-        Val_Elem129Label.AutoSize = True
-        Val_Elem129Label.Location = New System.Drawing.Point(289, 417)
-        Val_Elem129Label.Name = "Val_Elem129Label"
-        Val_Elem129Label.Size = New System.Drawing.Size(100, 13)
-        Val_Elem129Label.TabIndex = 87
-        Val_Elem129Label.Text = "Cloud Type Lvl4-C4"
-        '
         'txtVal_Elem130Field044
         '
         Me.txtVal_Elem130Field044.Location = New System.Drawing.Point(396, 438)
@@ -1554,30 +1572,12 @@ Partial Class form_synopticRA1
         Me.txtVal_Elem130Field044.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem130Field044.TabIndex = 40
         '
-        'Val_Elem130Label
-        '
-        Val_Elem130Label.AutoSize = True
-        Val_Elem130Label.Location = New System.Drawing.Point(289, 442)
-        Val_Elem130Label.Name = "Val_Elem130Label"
-        Val_Elem130Label.Size = New System.Drawing.Size(104, 13)
-        Val_Elem130Label.TabIndex = 89
-        Val_Elem130Label.Text = "Cloud Ht Lvl4-Hshs4"
-        '
         'txtVal_Elem046Field053
         '
         Me.txtVal_Elem046Field053.Location = New System.Drawing.Point(617, 388)
         Me.txtVal_Elem046Field053.Name = "txtVal_Elem046Field053"
         Me.txtVal_Elem046Field053.Size = New System.Drawing.Size(48, 20)
         Me.txtVal_Elem046Field053.TabIndex = 54
-        '
-        'Val_Elem046Label
-        '
-        Val_Elem046Label.AutoSize = True
-        Val_Elem046Label.Location = New System.Drawing.Point(519, 392)
-        Val_Elem046Label.Name = "Val_Elem046Label"
-        Val_Elem046Label.Size = New System.Drawing.Size(81, 13)
-        Val_Elem046Label.TabIndex = 107
-        Val_Elem046Label.Text = "Insolation - Rad"
         '
         'txtFlag192Field065
         '

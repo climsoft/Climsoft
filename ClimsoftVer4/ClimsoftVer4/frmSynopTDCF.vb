@@ -59,6 +59,15 @@
                 End If
             Next
 
+            ' Select the default Template
+            For i = 0 To Kount - 1
+                If ds.Tables("bufr_indicators").Rows(i).Item("defaultTemplate") = 1 Then
+                    cboTemplate.Text = ds.Tables("bufr_indicators").Rows(i).Item("Tmplate")
+                    Exit For
+                End If
+
+            Next
+
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
@@ -134,7 +143,7 @@
 
     Private Sub TabProcessing_Click(sender As Object, e As EventArgs) Handles TabProcessing.Click
         If TabProcessing.SelectedTab.Name = "TabSettings" Then
-            PopulateForms()
+            'PopulateForms()
         End If
 
     End Sub
@@ -294,14 +303,16 @@
 
             'Loop through the subsets
             Data_Description_Section = ""
-
+            'MsgBox(cboStation.Items.Count)
             For i = 0 To cboStation.Items.Count - 1
                 ' Set the replicated elements according to observations per subset
                 Set_Replications(dbconn, cboStation.Items(i))
                 Update_Station_Details(dbconn, cboStation.Items(i))
                 Update_Instruments_Details(dbconn, cboStation.Items(i))
                 Update_Time_Periods(dbconn)
+                'MsgBox(4)
                 Update_Observation_data(dbconn, cboStation.Items(i), txtYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
+                'MsgBox("Observation Data Updated")
                 Encode_Bufr(dbconn)
                 Output_Data_Code(dbconn, i + 1)
                 Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
@@ -468,7 +479,7 @@
         ' Set the replicated cloud layers to TRUE if observations made
         Dim flds As Integer
 
-        sql = "Select * from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
+        sql = "Select * from " & srcTable.Text & " where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
 
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
         'MsgBox(sql)
@@ -656,7 +667,7 @@
     Sub Update_Observation_data(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String, yr As String, mm As String, dd As String, hh As String)
         Dim fld, dat, ChrR, N, CL, CM, CH As String
         Dim code, rep1, rep2 As Integer
-        sql = "select * from form_synoptic_2_ra1 where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
+        sql = "select * from " & srcTable.Text & " where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
         'MsgBox(sql)
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
@@ -682,18 +693,39 @@
                             If Len(dat) <> 0 Then
                                 ' Compute observations with special conditions
                                 ' Scale Radiation and Pressure
-                                If code = 46 Then
-                                    dat = dat & "000000"
+                                If code = 133 Then
+                                    dat = dat & "0000"
                                 ElseIf code = 106 Or code = 107 Or code = 399 Or code = 301 Or code = 400 Then ' Scale Pressure
                                     dat = CLng(dat) * 100
                                     'ElseIf code = "506" Then ' Time of beginning or end of precipitation
                                     '    dat = 9
-                                ElseIf code = "114" Then ' Convert OKTAS to %
+                                ElseIf code = 114 Then ' Convert OKTAS to %
                                     dat = CLng(dat) * 12.5
-                                ElseIf code = "84" Then ' Convert hours of Sunshine to minutes
+                                ElseIf code = 132 Then ' Convert hours of Sunshine to minutes
                                     dat = CLng(dat) * 60
                                 End If
 
+                                ' Convert Non SI units observation from formSynoptic2
+                                With formSynoptic2
+                                    If .cboCloudheightUnits.Text = "feet" And (code = 192 Or code = 118 Or code = 122 Or code = 126 Or code = 130) Then
+                                        dat = CLng(dat) * 0.3048
+                                    End If
+
+                                    If .cboWindSpdUnits.Text = "knots" And code = 111 Then
+                                        dat = CLng(dat) * 0.51
+                                    End If
+
+                                    If .cboPrecipUnits.Text = "inches" And code = 5 Then
+                                        dat = CLng(dat) * 25.4
+                                    End If
+
+                                    If .cboTempUnits.Text = "Deg F" And (code = 2 Or code = 3 Or code = 99 Or code = 101 Or code = 102) Then
+                                        'dat = CLng(dat) * 0.3048
+                                        dat = (CLng(dat) - 32) * (5 / 9)
+                                    End If
+                                End With
+
+                                'If code = 814 Then MsgBox(dat)
                                 Update_Observation(conn1, dat, code)
 
                                 ' Compute cloud layers replications
@@ -753,7 +785,7 @@
                 End With
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            If ex.HResult <> -2147467262 Then MsgBox(ex.Message & " Update_Observation_data")
             'MsgBox(sql)
         End Try
     End Sub
@@ -919,9 +951,9 @@
                 If Len(.Item("observation")) <> 0 Then
 
                     climsoft_element_scale = ScaleFactor(conn1, .Item("climsoft_element"))
-
+                    'MsgBox(1 & " - " & climsoft_element_scale)
                     bufr_str = Bufr_Data(conn1, .Item("Bufr_Unit"), .Item("Bufr_Scale"), .Item("Bufr_RefValue"), .Item("Bufr_DataWidth_Bits"), .Item("observation"), climsoft_element_scale)
-
+                    'MsgBox(2 & " - " & .Item("climsoft_element"))
                     'MsgBox(bufr_str & " " & .Item("Bufr_Unit") & " " & .Item("Bufr_Scale") & " " & .Item("observation") & " " & climsoft_element_scale)
 
                 Else ' Compute binary stream for missing data
@@ -968,7 +1000,7 @@
             End If
             'If Not IsNumeric(ScaleFactor) = 1 Then MsgBox(code)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Scale Factor")
         End Try
     End Function
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
@@ -986,7 +1018,7 @@
             'Dim apd As String
             Dim datstr As String
             'Dim count As Integer
-
+            'MsgBox(0)
             Bufr_Data = ""
             If Bufr_Unit = "CCITT IA5" Then
 
@@ -994,7 +1026,7 @@
 
                 Exit Function
             End If
-
+            'MsgBox(1)
             If IsNumeric(dat) Then
 
                 ' Apply the scaling for both Climsoft and Bufr
@@ -1012,7 +1044,7 @@
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Bufr_Data")
 
             Bufr_Data = ""
         End Try
@@ -1027,7 +1059,7 @@
         Decimal_Binary = "0"
         Try
 
-            For i = 2 To bts
+        For i = 2 To bts
                 Decimal_Binary = Decimal_Binary & "0"
             Next
 
@@ -1048,7 +1080,8 @@
             Return Decimal_Binary
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Decimal_Binary")
+            'MsgBox(DecN & " " & bts & " " & Decimal_Binary)
             Return Decimal_Binary
         End Try
 
@@ -1143,10 +1176,11 @@
    
             CCITT_Binary = binstr
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at CCITT_Binary")
             CCITT_Binary = ""
         End Try
     End Function
+
 
     Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer) As Boolean
         'MsgBox(subsets)
@@ -1586,7 +1620,7 @@
     '    If Len(cboTemplate.Text) > 0 Then
     '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
     '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-    
+
     '        ds.Clear()
     '        da.Fill(ds, "bufr_indicators")
 
@@ -1609,9 +1643,7 @@
     '    End If
     'End Sub
 
-    Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
 
-    End Sub
 
     Private Sub cboTemplate_TextChanged1(sender As Object, e As EventArgs) Handles cboTemplate.TextChanged
 
@@ -1652,4 +1684,7 @@
         End With
     End Sub
 
+    Private Sub cmdEncode_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles cmdEncode.ContextMenuStripChanged
+
+    End Sub
 End Class

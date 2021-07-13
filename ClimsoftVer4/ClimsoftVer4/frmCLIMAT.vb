@@ -15,7 +15,6 @@
 
         myConnectionString = frmLogin.txtusrpwd.Text
         conn.ConnectionString = myConnectionString
-        conn.Open()
 
         Try
             'Set Header for Stations list view
@@ -25,10 +24,12 @@
 
             sql = "select stationName from station where wmoid  <> '' and wmoid is not null;"
 
+            conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             da.SelectCommand.CommandTimeout = 0
             ds.Clear()
             da.Fill(ds, "station")
+            conn.Close()
 
             For kount = 0 To ds.Tables("station").Rows.Count - 1
                 cmbstation.Items.Add(ds.Tables("station").Rows(kount).Item("stationName"))
@@ -55,10 +56,14 @@
 
             ' PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL
             Dim Abbrev, Ecode As String
+            Abbrev = ""
+            Ecode = ""
+
             With ds.Tables("parameters")
                 For i = 0 To .Rows.Count - 1
-                    Abbrev = .Rows(i).Item("Element_Abbreviation")
-                    Ecode = .Rows(i).Item("Element_Code")
+                    If Not IsDBNull(.Rows(i).Item("Element_Abbreviation")) Then Abbrev = .Rows(i).Item("Element_Abbreviation")
+                    If Not IsDBNull(.Rows(i).Item("Element_Code")) Then Ecode = .Rows(i).Item("Element_Code")
+
                     Select Case Abbrev
                         Case "PRESST"
                             PRESST = Ecode
@@ -207,7 +212,7 @@
             qry.ExecuteNonQuery()
             conn.Close()
             'MsgBox("Normals for Precipitations And Sunshine hrs computed")
-            lstMessages.Items.Add("Normals for Precipitations And Sunshine hrs computed")
+            lstMessages.Items.Add("Normals for Precipitations and Sunshine hrs computed")
             lstMessages.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -280,7 +285,7 @@
             'lstMessages.Items.Add("Total years for Normals computed")
             'lstMessages.Refresh()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Compute_Normals")
             conn.Close()
         End Try
 
@@ -288,8 +293,8 @@
     End Sub
 
     Private Sub butEncode_Click(sender As Object, e As EventArgs) Handles butEncode.Click
-        Dim stn, Section0, Section1_data, Section2_data, Section3_data, Section4_data As String
-
+        Dim stn, Section0, Section1_data, Section2_data, Section3_data, Section4_data, msg As String
+        Dim Fl As String
         ' Ensure all input is ok
         If txtMonth.Text = "" Or txtYear.Text = "" Or lstvStations.Items.Count = 0 Then
             MsgBox("All required input not provided")
@@ -298,42 +303,89 @@
 
         Me.Cursor = Cursors.WaitCursor
 
+
         Try
-            lstMessages.Items.Clear()
+            Fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\climat" & txtMonth.Text.PadLeft(2, "0") & txtYear.Text & ".a"
+            FileOpen(5, Fl, OpenMode.Output)
+
+            'lstMessages.Items.Clear()
             With lstvStations
+                'lstMessages.Items.Add(headerCLIMAT)
+                PrintLine(5, headerCLIMAT)
                 Section0 = "CLIMAT " & txtMonth.Text.PadLeft(2, "0") & Strings.Right(txtYear.Text, 3)
-                lstMessages.Items.Add(Section0)
+                'lstMessages.Items.Add(Section0)
+                PrintLine(5, Section0)
                 For i = 0 To .Items.Count - 1
+                    Section2_data = ""
+                    Section3_data = ""
+                    Section4_data = ""
+
                     stn = .Items(i).SubItems(0).Text
 
                     Section1(stn, Section1_data)
-                    lstMessages.Items.Add(wmoId(stn) & " " & Section1_data)
+
+                    Section1_data = wmoId(stn) & " " & Section1_data
+                    'PrintLine(5, Section1_data)
+                    'lstMessages.Items.Add(wmoId(stn) & " " & Section1_data)
 
                     If Section1_data = "NIL" Then Continue For ' Exclude all other sections when there's no data for Section 1 in missing in the same stion
-                    Section2_data = Section2(stn)
-                    Section3_data = Section3(stn)
-                    Section4_data = Section4(stn)
-                    If chk222.Checked And Section2_data <> "" Then lstMessages.Items.Add(Section2_data)
-                    If chk333.Checked And Section3_data <> "" Then lstMessages.Items.Add("333" & Section3_data)
-                    If chk444.Checked And Section4_data <> "" Then lstMessages.Items.Add("444" & Section4_data)
-                Next
-                lstMessages.Items.Add("=")
+                    'Section2_data = Section2(stn)
+                    'Section3_data = Section3(stn)
+                    'Section4_data = Section4(stn)
+                    If chk222.Checked Then
+                        Section2_data = Section2(stn)
+                        'If Section2_data <> "" Then lstMessages.Items.Add(Section2_data)
+                    End If
+                    If chk333.Checked Then
+                        Section3_data = Section3(stn)
+                        'If Section3_data <> "" Then lstMessages.Items.Add("333" & Section3_data)
+                    End If
+                    If chk444.Checked Then
+                        Section4_data = Section4(stn)
+                        'If Section4_data <> "" Then lstMessages.Items.Add("444" & Section4_data)
+                    End If
+                    'lstMessages.Items.Add("=")
+                    msg = Section1_data
+                    If Section2_data <> "" Then msg = msg & Chr(10) & Section2_data
+                    If Section3_data <> "" Then msg = msg & Chr(10) & Section3_data
+                    If Section4_data <> "" Then msg = msg & Chr(10) & Section4_data
+                    msg = msg & "="
+                    PrintLine(5, msg)
 
-                ' output the message to a file
-                Dim Fl As String
-                Fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\climat" & txtMonth.Text.PadLeft(2, "0") & txtYear.Text & ".a"
-                FileOpen(5, Fl, OpenMode.Output)
-                For i = 0 To lstMessages.Items.Count - 1
-                    PrintLine(5, lstMessages.Items(i))
+                    'lstMessages.Items.Add(Section0)
+                    'lstMessages.Items.Add(msg)
+
+
                 Next
+                'lstMessages.Items.Add("=")
+
+                '' output the message to a file
+                'Dim Fl As String
+                'Fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\climat" & txtMonth.Text.PadLeft(2, "0") & txtYear.Text & ".a"
+                'FileOpen(5, Fl, OpenMode.Output)
+                'For i = 0 To lstMessages.Items.Count - 1
+                '    PrintLine(5, lstMessages.Items(i))
+                'Next
+
                 FileClose(5)
+                Fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\climat" & txtMonth.Text.PadLeft(2, "0") & txtYear.Text & ".a"
+                FileOpen(5, Fl, OpenMode.Input)
+
+                ' Display the message in the list box
+                lstMessages.Items.Clear()
+                Do While EOF(5) = False
+                    lstMessages.Items.Add(LineInput(5))
+                Loop
+                FileClose(5)
+
                 txtCLIMAT.Text = Fl
             End With
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at butEncode_Click")
             Me.Cursor = Cursors.Default
+            FileClose(5)
         End Try
     End Sub
 
@@ -351,14 +403,14 @@
             conn.Close()
 
             If ds.Tables("stnId").Rows.Count > 0 Then
-                Return ds.Tables("stnId").Rows(0).Item("wmoId")
-            Else
-                Return ""
+                If Not IsDBNull(ds.Tables("stnId").Rows(0).Item("wmoId")) Then Return ds.Tables("stnId").Rows(0).Item("wmoId")
             End If
+
+            Return ""
 
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at wmoId")
             Return ""
         End Try
 
@@ -415,7 +467,7 @@ GROUP BY StationId, MM;"
 
             If dat = "111" Then dat = "NIL"
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1")
             conn.Close()
         End Try
     End Sub
@@ -440,7 +492,7 @@ GROUP BY StationId, MM;"
             If stnPRESS = "" Then Return ""
             Return " 1" & stnPRESS
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1_Group1")
             Return ""
         End Try
     End Function
@@ -466,7 +518,7 @@ GROUP BY StationId, MM;"
             If dat = "" Then Return ""
             Return " 2" & dat
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1_Group2")
             Return ""
         End Try
     End Function
@@ -484,8 +536,8 @@ GROUP BY StationId, MM;"
                     If Not IsDBNull(.Rows(0).Item("Tmn")) Then
                         Tmean = Math.Round(Val(.Rows(0).Item("Tmn")), 1) * 10
                         Tmean = Tmean.PadLeft(3, "0")
-                        If Val(Tmean) < 0 Then sign = "1"
-                        Tmean = sign & Tmean
+                        If Val(Tmean) <0 Then sign="1"
+                                          Tmean= sign & Tmean
                     End If
                     If Not IsDBNull(.Rows(0).Item("STDTmn")) Then
                         STDEV = Math.Round(Val(.Rows(0).Item("STDTmn")), 1) * 10
@@ -497,7 +549,7 @@ GROUP BY StationId, MM;"
             If Tmean = "///" And STDEV = "///" Then Return ""
             Return " 3" & Tmean & STDEV
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1_Group3")
             Return ""
         End Try
     End Function
@@ -540,7 +592,7 @@ GROUP BY StationId, MM;"
             If Tmax = "///" And Tmin = "///" Then Return ""
             Return " 4" & Tmax & Tmin
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1_Group4")
             Return ""
         End Try
     End Function
@@ -561,7 +613,7 @@ GROUP BY StationId, MM;"
             If VPRESS = "" Then Return ""
             Return " 5" & VPRESS
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Section1_Group5")
             Return ""
         End Try
     End Function
@@ -635,17 +687,18 @@ GROUP BY StationId, MM;"
             da6.Fill(ds6, "Dys")
             conn.Close()
 
+            dys = "00"
             If ds6.Tables("Dys").Rows.Count > 0 Then
-                dys = ds6.Tables("Dys").Rows(0).Item("Days")
-                dys = dys.PadLeft(2, "0")
-            Else
-                dys = "00"
+                If Not IsDBNull(ds6.Tables("Dys").Rows(0).Item("Days")) Then
+                    dys = ds6.Tables("Dys").Rows(0).Item("Days")
+                    dys = dys.PadLeft(2, "0")
+                End If
             End If
 
             Return " 6" & Total & Quintile & dys
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Section1_Group6")
             Return ""
         End Try
     End Function
@@ -669,7 +722,7 @@ GROUP BY StationId, MM;"
             SNHRPercent(SUNhrs, Perctg)
             Return " 7" & SUNhrs & Perctg
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Section1_Group7")
             Return "" '& SUNhrs & Perctg
         End Try
     End Function
@@ -693,7 +746,7 @@ GROUP BY StationId, MM;"
             If Val(Tmin) > 8 Then Tmin = 9
 
             'If Press = "//" And Tmean = "//" And Tmax = "//" And Tmin = "//" Then Return ""
-            Return " 8" & Press & Tmean & Tmax & Tmin
+            Return " 8" & Press.PadLeft(2, "0") & Tmean.PadLeft(2, "0") & Tmax & Tmin
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -713,7 +766,7 @@ GROUP BY StationId, MM;"
             SunHrs = DaysMissing(DaysAvailable(stn, SUNSHN))
 
             'If VPress = "//" And Precp = "//" And SunHrs = "//" Then Return ""
-            Return " 9" & VPress & Precp & SunHrs
+            Return " 9" & VPress.PadLeft(2, "0") & Precp.PadLeft(2, "0") & SunHrs.PadLeft(2, "0")
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -753,7 +806,7 @@ GROUP BY StationId, MM;"
             Return True
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " SNHRPercent")
             Return False
         End Try
 
@@ -778,13 +831,18 @@ GROUP BY StationId, MM;"
 
             With dsDys.Tables("AvlDys")
                 If .Rows.Count > 0 Then
-                    Return .Rows(0).Item("Dys")
+                    If Not IsDBNull(.Rows(0).Item("Dys")) Then
+                        Return .Rows(0).Item("Dys")
+                    Else
+                        Return 0
+                    End If
                 Else
                     Return 0
                 End If
             End With
 
         Catch ex As Exception
+            MsgBox(ex.Message & " DaysAvailable")
             Return 0
         End Try
 
@@ -803,6 +861,53 @@ GROUP BY StationId, MM;"
             Return Tmissing
         End Try
     End Function
+
+    Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
+        Dim kount As Integer
+        Me.Cursor = Cursors.WaitCursor
+        ' Get server details
+        Try
+            'dbConnectionString = frmLogin.txtusrpwd.Text
+            'dbconn.ConnectionString = dbConnectionString
+            'dbconn.Open()
+
+            sql = "SELECT * FROM aws_mss"
+
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "server")
+            conn.Close()
+
+            kount = ds.Tables("server").Rows.Count
+            'MsgBox(Kount)
+            If Kount = 0 Then
+                MsgBox("No server located")
+                Exit Sub
+            Else
+                Dim msg_file, url, login, pwd, foldr, ftpmode As String
+                msg_file = txtCLIMAT.Text
+                url = ds.Tables("server").Rows(0).Item("ftpId")
+                login = ds.Tables("server").Rows(0).Item("userName")
+                pwd = ds.Tables("server").Rows(0).Item("password")
+                foldr = ds.Tables("server").Rows(0).Item("inputFolder")
+                ftpmode = ds.Tables("server").Rows(0).Item("ftpMode")
+
+                If Not FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
+                    MsgBox("FTP Failure")
+                Else
+                    MsgBox("File Sent")
+                End If
+
+            End If
+            Me.Cursor = Cursors.Default
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Me.Cursor = Cursors.Default
+        End Try
+    End Sub
 
     Function DaysMissHlyObs(stn As String, ByRef Press As String, ByRef Vpress As String) As Boolean
         Dim da0 As MySql.Data.MySqlClient.MySqlDataAdapter
@@ -931,10 +1036,9 @@ GROUP BY StationId, MM;"
             conn.Close()
 
             With ds.Tables("nDysPrecip")
+                nDysPrecip = "//"
                 If .Rows.Count > 0 Then
-                    nDysPrecip = .Rows(0).Item("Total")
-                Else
-                    nDysPrecip = "//"
+                    If Not IsDBNull(.Rows(0).Item("Total")) Then nDysPrecip = .Rows(0).Item("Total")
                 End If
             End With
 
@@ -1098,7 +1202,7 @@ GROUP BY StationId, MM;"
 
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Section2")
             Return ""
         End Try
     End Function
@@ -1149,7 +1253,8 @@ GROUP BY StationId, MM;"
             Group9 = Group9 & Days4ParamentersBeyond(stn, VISBY, "< 1000")
             If Group9 <> "000000" Then dat = dat & " 9" & Group9
 
-            Return dat '" 0" & Group0 & " 1" & Group1
+            If dat = "" Then Return ""
+            Return "333" & dat '" 0" & Group0 & " 1" & Group1
 
         Catch ex As Exception
             conn.Close()
@@ -1241,7 +1346,8 @@ GROUP BY StationId, MM;"
             Group7 = StnType(stn)
             If Group7 <> "" Then dat = dat & " 7" & Group7
 
-            Return dat
+            If dat = "" Then Return ""
+            Return "444" & dat
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -1266,7 +1372,10 @@ GROUP BY StationId, MM;"
             da.Fill(ds, "Tdays")
             conn.Close()
 
-            dys = ds.Tables("Tdays").Rows(0).Item("Days")
+            If ds.Tables("Tdays").Rows.Count > 0 Then
+                If Not IsDBNull(ds.Tables("Tdays").Rows(0).Item("Days")) Then dys = ds.Tables("Tdays").Rows(0).Item("Days")
+            End If
+
             Return dys.PadLeft(2, "0")
 
         Catch ex As Exception
@@ -1291,16 +1400,20 @@ GROUP BY StationId, MM;"
 
             With ds.Tables("XTvalues")
                 If .Rows.Count > 0 Then
-                    xtVal = .Rows(0).Item("value")
-                    dy = .Rows(0).Item("dd")
-                    If .Rows(1).Item("value") = xtVal Then dy = Val(dy) + 50
-                    If code = PRECIP And Val(xtVal) = 0 Then dy = "0"
+                    If Not IsDBNull(.Rows(0).Item("value")) And Not IsDBNull(.Rows(0).Item("dd")) Then
+                        xtVal = .Rows(0).Item("value")
+                        dy = .Rows(0).Item("dd")
 
-                    xtVal = Math.Round(Val(xtVal) * 10, 0)
-                    dy = dy.PadLeft(2, "0")
+                        If .Rows(1).Item("value") = xtVal Then dy = Val(dy) + 50
+                        If code = PRECIP And Val(xtVal) = 0 Then dy = "0"
 
+                        xtVal = Math.Round(Val(xtVal) * 10, 0)
+                        dy = dy.PadLeft(2, "0")
+                    Else
+                        Return False
+                    End If
                 Else
-                    Return False
+                        Return False
                 End If
 
             End With
@@ -1308,7 +1421,7 @@ GROUP BY StationId, MM;"
             Return True
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & "ValAndDay")
             Return False
         End Try
     End Function
@@ -1329,15 +1442,17 @@ GROUP BY StationId, MM;"
             conn.Close()
 
             If ds.Tables("Source").Rows.Count > 0 Then
-                dat = Strings.LCase(ds.Tables("Source").Rows(0).Item(0))
-                If InStr("m/s", dat) > 0 Then info = "1"
-                If InStr(dat, "knots") > 0 Then info = "4"
+                If Not IsDBNull(ds.Tables("Source").Rows(0).Item(0)) Then
+                    dat = Strings.LCase(ds.Tables("Source").Rows(0).Item(0))
+                    If InStr("m/s", dat) > 0 Then info = "1"
+                    If InStr(dat, "knots") > 0 Then info = "4"
+                End If
             End If
 
-            Return info
+                Return info
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at InforSourceIndicator")
             Return info
         End Try
     End Function
@@ -1346,6 +1461,8 @@ GROUP BY StationId, MM;"
         Dim dat, thnd, hail As String
 
         dat = "////"
+        thnd = "//"
+        hail = "//"
         Try
             sql = "select COUNT(IF(describedBy = '" & DYTHND & "', obsvalue, NULL)) AS 'THND', COUNT(IF(describedBy = '" & DYHAIL & "', obsvalue, NULL)) AS 'HAIL' from observationfinal
                    where recordedFrom = '" & stn & "' and (describedBy= '" & DYTHND & "' or describedBy = '" & DYHAIL & "') and obsvalue = 1 and year(obsDatetime) = " & txtYear.Text & " and month(obsDatetime) = " & txtMonth.Text & ";"
@@ -1359,9 +1476,8 @@ GROUP BY StationId, MM;"
 
             With ds.Tables("ThunderHail")
                 If .Rows.Count > 0 Then
-                    thnd = .Rows(0).Item("THND")
-                    hail = .Rows(0).Item("HAIL")
-
+                    If Not IsDBNull(.Rows(0).Item("THND")) Then thnd = .Rows(0).Item("THND")
+                    If Not IsDBNull(.Rows(0).Item("HAIL")) Then hail = .Rows(0).Item("HAIL")
                     dat = thnd.PadLeft(2, "0") & hail.PadLeft(2, "0")
                 End If
             End With
@@ -1370,7 +1486,7 @@ GROUP BY StationId, MM;"
 
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " ThunderHail")
             Return dat
         End Try
     End Function
@@ -1404,8 +1520,8 @@ GROUP BY StationId, MM;"
             conn.Close()
 
             If ds.Tables("dysTxn").Rows.Count > 0 Then
-                TMx = ds.Tables("dysTxn").Rows(0).Item("Tmax")
-                TMn = ds.Tables("dysTxn").Rows(0).Item("Tmin")
+                If Not IsDBNull(ds.Tables("dysTxn").Rows(0).Item("Tmax")) Then TMx = ds.Tables("dysTxn").Rows(0).Item("Tmax")
+                If Not IsDBNull(ds.Tables("dysTxn").Rows(0).Item("Tmin")) Then TMn = ds.Tables("dysTxn").Rows(0).Item("Tmin")
             End If
             If TMx & TMn = "////" Then Return ""
             dat = typ & TMx.PadLeft(2, "0") & TMn.PadLeft(2, "0")
@@ -1414,7 +1530,7 @@ GROUP BY StationId, MM;"
 
         Catch ex As Exception
             conn.Close()
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at StnType")
             Return ""
         End Try
     End Function
@@ -1477,4 +1593,122 @@ GROUP BY StationId, MM;"
             MsgBox(ex.Message & " " & ex.HResult)
         End Try
     End Sub
+
+    Function FTP_Execute(ftpfile As String, ftp_host As String, usr As String, pwd As String, flder As String, ftpmode As String, ftpmethod As String) As Boolean
+
+        FTP_Execute = True
+
+        Dim ftpscript As String
+        Dim txtinputfile, ftpbatch As String
+        Dim Drive1 As String
+        Dim local_folder As String
+        Me.Cursor = Cursors.WaitCursor
+        Try
+
+            local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
+            Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
+            ftpscript = local_folder & "\ftp_climat.txt"
+            FileOpen(1, ftpscript, OpenMode.Output)
+
+            Select Case ftpmethod
+                Case "get"
+
+                    'txtinputfile = local_folder & "\" & System.IO.Path.GetFileName(ftpfile)
+
+                    ''MsgBox(ftpmode & " " & txtinputfile)
+
+                    'If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
+
+                    'If ftpmode = "FTP" Then
+                    '    Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                    '    Print(1, usr & Chr(13) & Chr(10))
+                    '    Print(1, pwd & Chr(13) & Chr(10))
+                    '    Print(1, "cd " & flder & Chr(13) & Chr(10))
+                    '    Print(1, "bin" & Chr(13) & Chr(10))
+                    'End If
+                    'Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
+                    'Print(1, "bye" & Chr(13) & Chr(10))
+                Case "put"
+                    txtinputfile = System.IO.Path.GetFileName(ftpfile)
+                    If ftpmode = "psftp" Then Print(2, "cd " & flder & Chr(13) & Chr(10))
+                    If ftpmode = "FTP" Then
+                        Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                        Print(1, usr & Chr(13) & Chr(10))
+                        Print(1, pwd & Chr(13) & Chr(10))
+                        Print(1, "cd " & flder & Chr(13) & Chr(10))
+                        Print(1, "asc" & Chr(13) & Chr(10))
+                    End If
+                    Print(1, ftpmethod & " " & txtinputfile & Chr(13) & Chr(10))
+                    Print(1, "bye" & Chr(13) & Chr(10))
+            End Select
+            FileClose(1)
+            ftpbatch = local_folder & "\ftp_climat.bat"
+
+            FileOpen(1, ftpbatch, OpenMode.Output)
+
+            Print(1, "echo off" & Chr(13) & Chr(10))
+            Print(1, Drive1 & Chr(13) & Chr(10))
+            Print(1, "CD " & local_folder & Chr(13) & Chr(10))
+
+            If ftpmethod = "get" Then
+                'If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_bufr.txt" & Chr(13) & Chr(10))
+                ''If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
+            Else
+                If ftpmode = "FTP" Then Print(1, ftpmode & " -v -s:ftp_climat.txt" & Chr(13) & Chr(10))
+                If ftpmode = "PSFTP" Then Print(1, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_bufr.txt" & Chr(13) & Chr(10))
+            End If
+
+            Print(1, "echo on" & Chr(13) & Chr(10))
+            Print(1, "EXIT" & Chr(13) & Chr(10))
+            FileClose(1)
+
+            ' Execute the batch file to transfer the aws data file from aws server to a local folder
+            Shell(ftpbatch, vbMinimizedNoFocus)
+            Me.Cursor = Cursors.Default
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FTP_Execute = False
+            Me.Cursor = Cursors.Default
+        End Try
+    End Function
+    Function headerCLIMAT() As String
+        Dim T1T2A1A2ii, YY, GG, gg1, GTSdiff As String
+        Dim UTC As Date
+        T1T2A1A2ii = ""
+        GTSdiff = 0
+        'CSNM40 FYWW 281750
+        Try
+            sql = "select Element_Abbreviation,Element_Code from climat_parameters where Element_Name = 'Message Header';"
+            conn.Open()
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            ' Set to unlimited timeout period
+            da.SelectCommand.CommandTimeout = 0
+            ds.Clear()
+            da.Fill(ds, "message_header")
+            conn.Close()
+
+            If ds.Tables("message_header").Rows.Count > 0 Then
+                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item("Element_Abbreviation")) Then T1T2A1A2ii = ds.Tables("message_header").Rows(0).Item(0)
+                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item(0)) Then GTSdiff = ds.Tables("message_header").Rows(0).Item(1)
+            End If
+
+            UTC = DateAdd("h", Val(GTSdiff) * -1, Now())
+            YY = DateAndTime.Day(UTC)
+            GG = DateAndTime.Hour(UTC)
+            gg1 = DateAndTime.Minute(UTC)
+
+            T1T2A1A2ii = T1T2A1A2ii & " " & YY.PadLeft(2, "0") & GG.PadLeft(2, "0") & gg1.PadLeft(2, "0")
+
+            'MsgBox(T1T2A1A2ii)
+            Return T1T2A1A2ii
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return T1T2A1A2ii
+        End Try
+    End Function
 End Class

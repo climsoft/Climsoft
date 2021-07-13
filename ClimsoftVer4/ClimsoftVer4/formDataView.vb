@@ -22,6 +22,14 @@ Public Class formDataView
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            cmdExport.Enabled = False
+            cmdImport.Enabled = False
+        Else
+            cmdExport.Enabled = True
+            cmdImport.Enabled = True
+        End If
         'DataGridView.Top = 300
         'MsgBox(dsSourceTableName)
     End Sub

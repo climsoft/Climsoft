@@ -920,6 +920,7 @@
             ' Retrieve Keyentry mode information and mark on the checkbox
             'MsgBox(Me.Name)
             If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+            Me.CenterToScreen()
 
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
@@ -1000,7 +1001,7 @@
                 ' Geopotential is not handled in Caribben
                 'gpm = txtVal_Elem101Field010.Text
 
-                sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid=" & stationCode
+                sqlStationElevation = "SELECT stationid,elevation from station WHERE stationid = '" & stationCode & "';"
                 daStationElevation = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlStationElevation, conn)
                 'Clear all rows in dataset before filling dataset with new row record for active station
                 dsStationElevation.Clear()
