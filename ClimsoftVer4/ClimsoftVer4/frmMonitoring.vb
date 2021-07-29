@@ -302,7 +302,12 @@ Public Class frmMonitoring
         Me.Cursor = Cursors.WaitCursor
 
         Try
-            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Performance.csv"
+            ' Create output path if it is not there
+            If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
+                IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
+            End If
+
+            ' Open output file
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Performance.csv"
             FileOpen(11, fl, OpenMode.Output)
 
@@ -500,6 +505,13 @@ Public Class frmMonitoring
             ListViewRecs.Clear()
             lblTrecs.Text = 0
 
+            If optNotEntered.Checked Then
+                'MsgBox(1)
+                skippedRecords()
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
             'Set selections
             If optVerified.Checked Then
                 MarkType = "mark = 1"
@@ -510,10 +522,14 @@ Public Class frmMonitoring
             If optKeyEntryForm.Checked Then
                 sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " &
                       "where " & MarkType & " and dataForm ='" & cboForms.Text & "' and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
-            Else
+            ElseIf optVerified.Checked Then
                 sql = "select recordedFrom as StationID, DescribedBy As Code, Year(obsDatetime) As Year, month(obsDatetime) as Month, dataForm as Form, capturedBy as Login from observationinitial " &
                       "where " & MarkType & " and Year(obsDatetime) between '" & Val(txtYear1.Text) & "' and '" & Val(txtYear2.Text) & "' and Month(obsDatetime) between '" & Val(txtMonth1.Text) & "' and '" & txtMonth2.Text & "';"
-
+            ElseIf optNotEntered.Checked Then
+                'MsgBox(1)
+                'skippedRecords()
+                'Me.Cursor = Cursors.Default
+                'Exit Sub
             End If
 
             ' Extract data
@@ -568,45 +584,52 @@ Public Class frmMonitoring
 
 
     Private Sub cmdSave_Click(sender As Object, e As EventArgs) Handles cmdSave.Click
-        Dim savefile As String
 
-        If optVerified.Checked Then
-            savefile = "Verified_records"
-        Else
-            savefile = "Unverified_records"
-        End If
+        If Not Save_Output1() Then MsgBox("Can't output file")
 
-        If Not Save_Output("verified", savefile) Then MsgBox("Can't output file")
+        'Dim savefile As String
+
+        'If optVerified.Checked Then
+        '    savefile = "Verified_records"
+        'Else
+        '    savefile = "Unverified_records"
+        'End If
+
+        'If Not Save_Output("verified", savefile) Then MsgBox("Can't output file")
 
     End Sub
 
-    Function Save_Output(tbl As String, flnm As String) As Boolean
+    Function Save_Output1() As Boolean
 
         Dim fl, datarow, datahdr As String
 
         Try
-            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & flnm & ".csv"
-            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & flnm & ".csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\RecordsNotEntered.csv"
             FileOpen(11, fl, OpenMode.Output)
 
-            ' Print Header Row
-            datahdr = ds.Tables(tbl).Columns(0).ColumnName
-            For k = 1 To ds.Tables(tbl).Columns.Count - 1
-                datahdr = datahdr & "," & ds.Tables(tbl).Columns(k).ColumnName
-            Next
-            PrintLine(11, datahdr)
+            If ListViewRecs.Items.Count > 0 Then
 
-            ' Output data records
-            For i = 0 To ds.Tables(tbl).Rows.Count - 1
-                datarow = ds.Tables(tbl).Rows(i).Item(0)
-                For j = 1 To ds.Tables(tbl).Columns.Count - 1
-                    datarow = datarow & "," & ds.Tables(tbl).Rows(i).Item(j)
-                Next j
-                PrintLine(11, datarow)
-            Next i
-            FileClose(11)
-            MsgBox("Output save in " & fl)
-            If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+                ' Get and print Header Row
+                datahdr = ListViewRecs.Columns(0).Text
+                For k = 1 To ListViewRecs.Columns.Count - 1
+                    datahdr = datahdr & "," & ListViewRecs.Columns(k).Text
+                Next
+                PrintLine(11, datahdr)
+
+                ' Output data records
+                For i = 0 To ListViewRecs.Items.Count - 1
+                    datarow = ListViewRecs.Items(i).SubItems(0).Text
+                    For j = 1 To ListViewRecs.Columns.Count - 1
+                        datarow = datarow & "," & ListViewRecs.Items(i).SubItems(j).Text
+                    Next
+                    PrintLine(11, datarow)
+                Next
+
+                FileClose(11)
+                MsgBox("Output saved in " & fl)
+                If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+            End If
+
             Return True
 
         Catch ex As Exception
@@ -616,7 +639,66 @@ Public Class frmMonitoring
         End Try
 
     End Function
+    Function Save_Output(tbl As String, flnm As String) As Boolean
 
+
+        Dim fl, datarow, datahdr As String
+
+        Try
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & flnm & ".csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & flnm & ".csv"
+            FileOpen(11, fl, OpenMode.Output)
+
+            If ListViewRecs.Items.Count > 0 Then
+
+                ' Get and print Header Row
+                datahdr = ListViewRecs.Columns(0).Name
+                For k = 1 To ListViewRecs.Columns.Count - 1
+                    datahdr = datahdr & "," & ListViewRecs.Columns(k).Name
+                Next
+                PrintLine(11, datahdr)
+
+                ' Output data records
+                For i = 0 To ListViewRecs.Items.Count - 1
+                    datarow = ListViewRecs.Items(i).SubItems(0).Text
+                    For j = 1 To ListViewRecs.Columns.Count - 1
+                        datarow = datarow & "," & ListViewRecs.Items(i).SubItems(j).Text
+                    Next
+                    PrintLine(11, datarow)
+                Next
+
+                FileClose(11)
+                MsgBox("Output save in " & fl)
+                If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+            End If
+
+            '    ' Print Header Row
+            '    datahdr = ds.Tables(tbl).Columns(0).ColumnName
+            '    For k = 1 To ds.Tables(tbl).Columns.Count - 1
+            '        datahdr = datahdr & "," & ds.Tables(tbl).Columns(k).ColumnName
+            '    Next
+            '    PrintLine(11, datahdr)
+
+            '    ' Output data records
+            '    For i = 0 To ds.Tables(tbl).Rows.Count - 1
+            '        datarow = ds.Tables(tbl).Rows(i).Item(0)
+            '        For j = 1 To ds.Tables(tbl).Columns.Count - 1
+            '            datarow = datarow & "," & ds.Tables(tbl).Rows(i).Item(j)
+            '        Next j
+            '        PrintLine(11, datarow)
+            '    Next i
+            '    FileClose(11)
+            '    MsgBox("Output save in " & fl)
+            '    If Not CommonModules.ViewFile(fl) Then MsgBox("Can't Open File")
+            Return True
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(11)
+            Return False
+        End Try
+
+    End Function
 
     Private Sub cmdSave0_Click(sender As Object, e As EventArgs)
         Save_Output("Records", "Users Records")
@@ -644,7 +726,12 @@ Public Class frmMonitoring
         Me.Cursor = Cursors.WaitCursor
 
         Try
+            ' Create output path if it is not there
+            If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
+                IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
+            End If
 
+            'Open the output file
             fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\userRecord.csv"
             FileOpen(21, fl, OpenMode.Output)
             With ListViewRecs
@@ -680,6 +767,230 @@ Public Class frmMonitoring
         DataGridSettings.DataSource = ""
         DataGridSettings.Refresh()
         lblTrecs.Text = 0
+    End Sub
+
+    Private Sub optAllForms_CheckedChanged(sender As Object, e As EventArgs) Handles optAllForms.CheckedChanged
+        If optAllForms.Checked Then
+            optNotEntered.Enabled = False
+        Else
+            optNotEntered.Enabled = True
+        End If
+    End Sub
+
+    Sub skippedRecords()
+        Dim stn, elm, fl As String
+        Dim ds1 As New DataSet
+
+        Try
+            'fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\MissingRecords.csv"
+            'FileOpen(44, fl, OpenMode.Output)
+
+            If cboForms.Text = "" Then
+                MsgBox("A key entry form must be selected")
+                Exit Sub
+            ElseIf cboForms.Text = "form_daily2" Then
+                ' Initialize List View
+                Dim Rec(4) As String
+                ListViewRecs.Clear()
+                ListViewRecs.Columns.Clear()
+                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+
+                conn.Open()
+                sql = "select stationId, elementId from form_daily2 group by stationId, elementId;"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds1.Clear()
+                da.Fill(ds1, "GrpRecords")
+
+                With ds1.Tables("GrpRecords")
+                    'PrintLine(44, "StationId" & "," & "ElementCode" & "," & "Year" & "," & "Month")
+                    For i = 0 To .Rows.Count - 1
+                        stn = .Rows(i).Item(0)
+                        elm = .Rows(i).Item(1)
+                        For j = Val(txtYear1.Text) To Val(txtYear2.Text)
+                            For k = 1 To 12
+                                sql = "select stationId, elementid, yyyy,mm from (select stationId, elementId, yyyy, mm from form_daily2 where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
+                                       where stationId = '" & stn & "' and elementId = '" & elm & "' and yyyy = " & j & " and mm = " & k & ";"
+                                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                da.SelectCommand.CommandTimeout = 0
+                                ds.Clear()
+                                da.Fill(ds, "MissRecords")
+                                If ds.Tables("MissRecords").Rows.Count = 0 Then
+                                    'PrintLine(44, stn & "," & elm & "," & j & "," & k)
+                                    Rec(0) = stn
+                                    Rec(1) = elm
+                                    Rec(2) = j
+                                    Rec(3) = k
+
+                                    Dim itms = New ListViewItem(Rec)
+                                    ListViewRecs.Items.Add(itms)
+                                    lblTrecs.Text = ListViewRecs.Items.Count
+                                End If
+                            Next
+                        Next
+                    Next
+                End With
+            ElseIf cboForms.Text = "form_hourly" Then
+                ' Initialize List View
+                Dim Rec(5) As String
+                ListViewRecs.Clear()
+                ListViewRecs.Columns.Clear()
+                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Element", 50, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+
+                conn.Open()
+                sql = "select stationId, elementId from form_hourly group by stationId, elementId;"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds1.Clear()
+                da.Fill(ds1, "GrpRecords")
+
+                With ds1.Tables("GrpRecords")
+                    'PrintLine(44, "StationId" & "," & "ElementCode" & "," & "Year" & "," & "Month" & "," & "Day")
+                    For i = 0 To .Rows.Count - 1
+                        stn = .Rows(i).Item(0)
+                        elm = .Rows(i).Item(1)
+                        For j = Val(txtYear1.Text) To Val(txtYear2.Text)
+                            For k = 1 To 12
+                                For l = 1 To 31
+                                    If Not IsDate(l & "/" & k & "/" & j) Then Continue For
+                                    sql = "select stationId, elementid, yyyy,mm, dd from (select stationId, elementId, yyyy, mm, dd from form_hourly where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
+                                               where stationId = '" & stn & "' and elementId = '" & elm & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & ";"
+                                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                    da.SelectCommand.CommandTimeout = 0
+                                    ds.Clear()
+                                    da.Fill(ds, "MissRecords")
+                                    If ds.Tables("MissRecords").Rows.Count = 0 Then
+                                        'PrintLine(44, stn & "," & elm & "," & j & "," & k & "," & l)
+                                        Rec(0) = stn
+                                        Rec(1) = elm
+                                        Rec(2) = j
+                                        Rec(3) = k
+                                        Rec(4) = l
+
+                                        Dim itms = New ListViewItem(Rec)
+                                        ListViewRecs.Items.Add(itms)
+                                        lblTrecs.Text = ListViewRecs.Items.Count
+                                    End If
+                                Next
+                            Next
+                        Next
+                    Next
+                End With
+            ElseIf cboForms.Text = "form_agro1" Or cboForms.Text = "form_daily1" Or cboForms.Text = "form_hourlywind" Then
+                ' Initialize List View
+                Dim Rec(4) As String
+                ListViewRecs.Clear()
+                ListViewRecs.Columns.Clear()
+                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+
+                conn.Open()
+                sql = "select stationId from " & cboForms.Text & " group by stationId;"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds1.Clear()
+                da.Fill(ds1, "GrpRecords")
+
+                With ds1.Tables("GrpRecords")
+                    'PrintLine(44, "StationId" & "," & "Year" & "," & "Month" & "," & "Day")
+                    For i = 0 To .Rows.Count - 1
+                        stn = .Rows(i).Item(0)
+                        For j = Val(txtYear1.Text) To Val(txtYear2.Text)
+                            For k = 1 To 12
+                                For l = 1 To 31
+                                    If Not IsDate(l & "/" & k & "/" & j) Then Continue For
+                                    sql = "select stationId, yyyy,mm, dd from (select stationId, yyyy, mm, dd from " & cboForms.Text & " where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
+                                               where stationId = '" & stn & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & ";"
+                                    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                    da.SelectCommand.CommandTimeout = 0
+                                    ds.Clear()
+                                    da.Fill(ds, "MissRecords")
+                                    If ds.Tables("MissRecords").Rows.Count = 0 Then
+                                        'PrintLine(44, stn & "," & j & "," & k & "," & l)
+                                        Rec(0) = stn
+                                        Rec(1) = j
+                                        Rec(2) = k
+                                        Rec(3) = l
+
+                                        Dim itms = New ListViewItem(Rec)
+                                        ListViewRecs.Items.Add(itms)
+                                        lblTrecs.Text = ListViewRecs.Items.Count
+                                    End If
+                                Next
+                            Next
+                        Next
+                    Next
+                End With
+            ElseIf cboForms.Text = "form_synoptic_2_ra1" Or cboForms.Text = "form_synoptic2_TDCF" Or cboForms.Text = "form_synoptic2_caribbean" Then
+                ' Initialize List View
+                Dim Rec(4) As String
+                ListViewRecs.Clear()
+                ListViewRecs.Columns.Clear()
+                ListViewRecs.Columns.Add("Station", 120, HorizontalAlignment.Left)
+                ListViewRecs.Columns.Add("Year", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Month", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Day", 50, HorizontalAlignment.Right)
+                ListViewRecs.Columns.Add("Hour", 50, HorizontalAlignment.Right)
+
+                conn.Open()
+                sql = "select stationId from " & cboForms.Text & " group by stationId;"
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                da.SelectCommand.CommandTimeout = 0
+                ds1.Clear()
+                da.Fill(ds1, "GrpRecords")
+
+                With ds1.Tables("GrpRecords")
+                    'PrintLine(44, "StationId" & "," & "Year" & "," & "Month" & "," & "Day" & "," & "Hour")
+                    For i = 0 To .Rows.Count - 1
+                        stn = .Rows(i).Item(0)
+                        For j = Val(txtYear1.Text) To Val(txtYear2.Text)
+                            For k = 1 To 12
+                                For l = 1 To 31
+                                    If Not IsDate(l & "/" & k & "/" & j) Then Continue For
+                                    For m = 0 To 21 Step 3
+                                        sql = "select stationId, yyyy,mm, dd, hh from (select stationId, yyyy, mm, dd, hh from " & cboForms.Text & " where (yyyy between " & Val(txtYear1.Text) & " and  " & Val(txtYear2.Text) & " ) and (mm between 1 and 12)) t
+                                               where stationId = '" & stn & "' and yyyy = " & j & " and mm = " & k & " and dd = " & l & " and hh = " & m & ";"
+                                        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                                        da.SelectCommand.CommandTimeout = 0
+                                        ds.Clear()
+                                        da.Fill(ds, "MissRecords")
+                                        If ds.Tables("MissRecords").Rows.Count = 0 Then
+                                            'PrintLine(44, stn & "," & j & "," & k & "," & l & "," & m)
+                                            Rec(0) = stn
+                                            Rec(1) = j
+                                            Rec(2) = k
+                                            Rec(3) = l
+                                            Rec(4) = m
+
+                                            Dim itms = New ListViewItem(Rec)
+                                            ListViewRecs.Items.Add(itms)
+                                            lblTrecs.Text = ListViewRecs.Items.Count
+                                        End If
+                                    Next
+                                Next
+                            Next
+                        Next
+                    Next
+                End With
+            Else
+                MsgBox("Form " & cboForms.Text & " not implemented")
+            End If
+            conn.Close()
+            'FileClose(44)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+            'FileClose(44)
+        End Try
     End Sub
 End Class
 

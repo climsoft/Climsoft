@@ -29,7 +29,6 @@
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
 
-
         connStr = frmLogin.txtusrpwd.Text
         conn.ConnectionString = connStr
         'Open connection to database
@@ -1548,6 +1547,65 @@
             conn.Close()
         End Try
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        Dim usrName As String
+
+        connStr = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = connStr
+        conn.Open()
+
+        usrName = Me.DataGridView1.CurrentCell.Value
+
+        ' Update Password
+        Try
+            If Strings.Len(txtPassword.Text) >= 6 And txtPassword.Text = txtConfirmPassword.Text Then
+
+                Sql = "SET PASSWORD FOR '" & usrName & "'@'localhost' = PASSWORD('" & txtPassword.Text & "');"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+
+                Sql = "SET PASSWORD FOR '" & usrName & "'@'%' = PASSWORD('" & txtPassword.Text & "');"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+
+                MsgBox("Pasword updated!", MsgBoxStyle.Information)
+            Else
+                MsgBox("Password not updated", MsgBoxStyle.Information)
+            End If
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+        End Try
+
+        ' Update User Role
+        Try
+            If Len(cboUserRole.Text) > 0 Then
+
+                conn.Open()
+                'Modify user details in [climsoftusers] table in operational databases
+                Sql = "Update climsoftusers SET userRole ='" & cboUserRole.Text & "' WHERE userName LIKE '" & usrName & "';"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+
+                'Modify user details in [climsoftusers] table in test database
+                Sql = "USE mariadb_climsoft_test_db_v4; UPDATE climsoftusers set userRole ='" & cboUserRole.Text & "' WHERE userName LIKE '" & usrName & "';"
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
+                MsgBox("User Role updated!", MsgBoxStyle.Information)
+            Else
+                MsgBox("User Role not updated!", MsgBoxStyle.Information)
+            End If
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'If ex.HResult <> -2147467259 Then MsgBox(ex.Message)
+            conn.Close()
+        End Try
+    End Sub
+
     Sub CurrentDB(connstr As String, ByRef dbnme As String)
         Dim Ssvr, Esvr, Sdb, Edb As Integer
         Dim svrstr, portstr As String

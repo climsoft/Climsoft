@@ -9,10 +9,10 @@
 
     Private Sub frmClimatSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dsp As New DataSet
+        dbConnectionString = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = dbConnectionString
 
         Try
-            dbConnectionString = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = dbConnectionString
 
             sql = "select * from climat_parameters order by Nos;"
             conn.Open()
@@ -32,9 +32,9 @@
 
         Catch ex As Exception
             If ex.HResult = -2147467259 Then  ' Table does not exist
-                MsgBox(ex.Message)
+                'MsgBox(ex.Message & " at load ")
                 ' Create table for CLIMAT parameters because it does not exist in the current datbase schema
-                'conn.Close()
+                conn.Close()
                 Create_ParametersTable()
                 'da.Fill(climatds, "climat_parameters")
             Else
@@ -50,6 +50,7 @@
         Try
             'MsgBox(dsp.Tables("climat_parameters").Rows.Count)
             ' Data set must be local!
+
             With DataGridViewParameters
                 .Show()
                 .DataSource = dsp.Tables(0)
@@ -59,9 +60,10 @@
                 .Refresh()
             End With
         Catch ex As Exception
-            MsgBox(ex.Message)
-            MsgBox("Cannot show CLIMAT parameters")
-            'Me.Close()
+            conn.Close()
+            'MsgBox(ex.Message & " at show grid table")
+            MsgBox("Can't show CLIMAT parameters! Retry")
+            Me.Close()
         End Try
         PopulateForms()
         'conn.Close()
@@ -142,9 +144,10 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Me.Cursor = Cursors.WaitCursor
         'dbConnectionString = frmLogin.txtusrpwd.Text
         'conn.ConnectionString = dbConnectionString
-        conn.Open()
 
         Try
+
+            conn.Open()
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
             qry.CommandTimeout = 0
 
@@ -152,9 +155,12 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             qry.ExecuteNonQuery()
             conn.Close()
 
+            UserPermissions()
+
         Catch ex As Exception
             Me.Cursor = Cursors.Default
-            MsgBox("Can't create CLIMAT parameters. Contact Administrator to start the operation, open settings and grant permissions")
+            'MsgBox(ex.Message)
+            'MsgBox("Access permissions required. In the next dialog the Administrator should open Settings and then Click on Grant Permissions")
             conn.Close()
             Me.Close()
             Exit Sub
@@ -162,7 +168,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
 
         Me.Cursor = Cursors.Default
         'conn.Close()
-        UserPermissions()
+
     End Sub
 
     Private Sub btnClose_Click_1(sender As Object, e As EventArgs)
@@ -301,14 +307,25 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                         qry.ExecuteNonQuery()
                     End If
                 Next
+
+                ' Grant Permissions to table aws_mss to enable sending messages to GTS
+                For i = 0 To .Rows.Count - 1
+                    If .Rows(i).Item("userRole") = "ClimsoftProducts" Or .Rows(i).Item("userRole") = "ClimsoftQC" Then
+                        sql = "GRANT SELECT ON aws_mss TO '" & .Rows(i).Item("userName") & "';"
+                        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                        'execute command
+                        qry.ExecuteNonQuery()
+                    End If
+                Next
+
             End With
             MsgBox("User permissions successfully granted")
-            conn.Close()
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at User Permissions")
             conn.Close()
         End Try
+        conn.Close()
     End Sub
 
     Sub PopulateForms()
@@ -358,17 +375,21 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
 
     Private Sub TabParameters_Click(sender As Object, e As EventArgs) Handles TabParameters.Click
         btnAddNew.Visible = False
-        If TabParameters.SelectedTab.Name = "FTP" Then
-            sql = "SELECT * FROM aws_mss"
-            conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ' Set to unlimited timeout period
-            da.SelectCommand.CommandTimeout = 0
-            ds.Clear()
-            da.Fill(ds, "aws_mss")
-            conn.Close()
-            If ds.Tables("aws_mss").Rows.Count = 0 Then btnAddNew.Visible = True
-        End If
+        Try
+            If TabParameters.SelectedTab.Name = "FTP" Then
+                sql = "SELECT * FROM aws_mss"
+                'conn.Open()
+                da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+                ' Set to unlimited timeout period
+                da.SelectCommand.CommandTimeout = 0
+                ds.Clear()
+                da.Fill(ds, "aws_mss")
+                'conn.Close()
+                If ds.Tables("aws_mss").Rows.Count = 0 Then btnAddNew.Visible = True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message & " at TabParameters")
+        End Try
     End Sub
 
     Sub HeaderDetails()
@@ -566,5 +587,4 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             MsgBox(ex.Message & " at cmdAddNew_FTP")
         End Try
     End Sub
-
 End Class

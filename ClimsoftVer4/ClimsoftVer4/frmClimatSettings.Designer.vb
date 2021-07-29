@@ -99,16 +99,16 @@ Partial Class frmClimatSettings
         '
         'butGrant
         '
-        Me.butGrant.Location = New System.Drawing.Point(245, 5)
+        Me.butGrant.Location = New System.Drawing.Point(317, 5)
         Me.butGrant.Name = "butGrant"
-        Me.butGrant.Size = New System.Drawing.Size(239, 23)
+        Me.butGrant.Size = New System.Drawing.Size(131, 23)
         Me.butGrant.TabIndex = 16
-        Me.butGrant.Text = "Grant User Permissions to upadte parameters"
+        Me.butGrant.Text = "Grant User Permissions "
         Me.butGrant.UseVisualStyleBackColor = True
         '
         'butUpdate
         '
-        Me.butUpdate.Location = New System.Drawing.Point(153, 4)
+        Me.butUpdate.Location = New System.Drawing.Point(189, 5)
         Me.butUpdate.Name = "butUpdate"
         Me.butUpdate.Size = New System.Drawing.Size(58, 23)
         Me.butUpdate.TabIndex = 0

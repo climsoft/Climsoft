@@ -170,10 +170,15 @@ Public Class frmLogin
     End Sub
 
     Sub regDataInit()
-        'Set SQL string for populating "regData" dataset
-        regSQL = "SELECT keyName,keyValue FROM regkeys"     '
-        daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
-        daReg.Fill(dsReg, "regData")
+        Try
+            'Set SQL string for populating "regData" dataset
+            regSQL = "SELECT keyName,keyValue FROM regkeys"     '
+            daReg = New MySql.Data.MySqlClient.MySqlDataAdapter(regSQL, conn)
+            daReg.Fill(dsReg, "regData")
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub updateRememberedUsername()
