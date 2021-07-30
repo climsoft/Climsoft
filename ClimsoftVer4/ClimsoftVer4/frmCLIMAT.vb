@@ -4,19 +4,22 @@
     Dim qry As MySql.Data.MySqlClient.MySqlCommand
     Dim da As MySql.Data.MySqlClient.MySqlDataAdapter
     Dim ds As New DataSet
-    Dim sql As String
-    Dim frm As String
-    Dim PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VAPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL As Integer
+    Dim sql, frm As String
+    Dim PRESST, PRESSL, GPM, TMPMN, TMPMAX, TMPMIN, VAPPSR, PRECIP, SUNSHN, SNWDEP, WNDSPD, VISBY, DYTHND, DYHAIL, serNum As Integer
     Private Sub butClose_Click(sender As Object, e As EventArgs) Handles butClose.Click
         Me.Close()
     End Sub
 
     Private Sub frmCLIMAT_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Me.Cursor = Cursors.WaitCursor
 
         myConnectionString = frmLogin.txtusrpwd.Text
         conn.ConnectionString = myConnectionString
 
         Try
+            'initialize the message serial number
+            serNum = 1
+
             'Set Header for Stations list view
             lstvStations.Columns.Clear()
             lstvStations.Columns.Add("Station Id", 80, HorizontalAlignment.Left)
@@ -98,14 +101,16 @@
             End With
         Catch ex As Exception
             'MsgBox(ex.HResult & " " & ex.Message)
+            conn.Close()
             If ex.HResult = -2147467259 Then
                 frmClimatSettings.Create_ParametersTable()
             Else
                 MsgBox(ex.Message)
             End If
-
         End Try
+
         conn.Close()
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
@@ -293,7 +298,7 @@
     End Sub
 
     Private Sub butEncode_Click(sender As Object, e As EventArgs) Handles butEncode.Click
-        Dim stn, Section0, Section1_data, Section2_data, Section3_data, Section4_data, msg As String
+        Dim stn, hdr, Section0, Section1_data, Section2_data, Section3_data, Section4_data, msg As String
         Dim Fl As String
         ' Ensure all input is ok
         If txtMonth.Text = "" Or txtYear.Text = "" Or lstvStations.Items.Count = 0 Then
@@ -311,7 +316,15 @@
             'lstMessages.Items.Clear()
             With lstvStations
                 'lstMessages.Items.Add(headerCLIMAT)
-                PrintLine(5, headerCLIMAT)
+                hdr = headerCLIMAT()
+
+                If Len(hdr) = 0 Then
+                    MsgBox("Message Header not set. Administrator should open the Setting and set the header")
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
+                PrintLine(5, Format(serNum, "000"))
+                PrintLine(5, hdr)
                 Section0 = "CLIMAT " & txtMonth.Text.PadLeft(2, "0") & Strings.Right(txtYear.Text, 3)
                 'lstMessages.Items.Add(Section0)
                 PrintLine(5, Section0)
@@ -383,7 +396,7 @@
             Me.Cursor = Cursors.Default
 
         Catch ex As Exception
-            MsgBox(ex.Message & " at butEncode_Click")
+            MsgBox(ex.HResult & " at butEncode_Click")
             Me.Cursor = Cursors.Default
             FileClose(5)
         End Try
@@ -863,6 +876,12 @@ GROUP BY StationId, MM;"
     End Function
 
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
+
+        If lstMessages.Items.Count = 0 Then
+            MsgBox("No CLIMAT message encoded")
+            Exit Sub
+        End If
+
         Dim kount As Integer
         Me.Cursor = Cursors.WaitCursor
         ' Get server details
@@ -898,15 +917,20 @@ GROUP BY StationId, MM;"
                 If Not FTP_Execute(msg_file, url, login, pwd, foldr, ftpmode, "put") Then
                     MsgBox("FTP Failure")
                 Else
-                    MsgBox("File Sent")
+                    MsgBox("Message File Sent")
+                    serNum = serNum + 1
                 End If
 
             End If
-            Me.Cursor = Cursors.Default
+
         Catch ex As Exception
-            MsgBox(ex.Message)
-            Me.Cursor = Cursors.Default
+            If ex.HResult = -2147467259 Then
+                MsgBox("Permission to Send not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'.")
+            Else
+                MsgBox(ex.Message)
+            End If
         End Try
+        Me.Cursor = Cursors.Default
     End Sub
 
     Function DaysMissHlyObs(stn As String, ByRef Press As String, ByRef Vpress As String) As Boolean
@@ -1586,12 +1610,18 @@ GROUP BY StationId, MM;"
     End Sub
 
     Private Sub butSetting_Click(sender As Object, e As EventArgs) Handles butSetting.Click
-        Try
-            frmClimatSettings.Show()
 
+        If mainModule.userGroup = "ClimsoftAdmin" Or frmLogin.txtUsername.Text = "root" Then
+            frmClimatSettings.Show()
+        Else
+            MsgBox("Can't access Settings. No sufficient rights")
+        End If
+
+        Try
         Catch ex As Exception
             MsgBox(ex.Message & " " & ex.HResult)
         End Try
+
     End Sub
 
     Function FTP_Execute(ftpfile As String, ftp_host As String, usr As String, pwd As String, flder As String, ftpmode As String, ftpmethod As String) As Boolean
@@ -1693,7 +1723,7 @@ GROUP BY StationId, MM;"
 
             If ds.Tables("message_header").Rows.Count > 0 Then
                 If Not IsDBNull(ds.Tables("message_header").Rows(0).Item("Element_Abbreviation")) Then T1T2A1A2ii = ds.Tables("message_header").Rows(0).Item(0)
-                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item(0)) Then GTSdiff = ds.Tables("message_header").Rows(0).Item(1)
+                If Not IsDBNull(ds.Tables("message_header").Rows(0).Item("Element_Code")) Then GTSdiff = ds.Tables("message_header").Rows(0).Item(1)
             End If
 
             UTC = DateAdd("h", Val(GTSdiff) * -1, Now())
@@ -1707,8 +1737,15 @@ GROUP BY StationId, MM;"
             Return T1T2A1A2ii
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            conn.Close()
+            If ex.HResult = -2147467259 Then
+                MsgBox("User Permissions not set! Administrator should start CLIMAT opeartion, open Setting then Click on 'Grant User Permissions'")
+            Else
+                MsgBox(ex.Message & " at headerCLIMAT")
+            End If
             Return T1T2A1A2ii
         End Try
     End Function
+
+
 End Class
