@@ -1757,14 +1757,13 @@ Err:
                             dat = dat & "," & .Rows(k).Item(i)
                             statis = dat
                         End If
-                    Else
-                        If InStr(.Rows(k).Item(i), "NULL") <> 0 Then 'Missing observation to be represented as "M"
-                            datesr = i - 7 & "/" & .Rows(k).Item(7) & "/" & .Rows(k).Item(6)
-                            If IsDate(datesr) Then
+                    Else 'Missing observation to be represented as "M" and cell for non existent date to be blank
+                        If InStr(.Rows(k).Item(i), "NULL") <> 0 Then
+
+                            If i - 7 <= Date.DaysInMonth(.Rows(k).Item(6), .Rows(k).Item(7)) Then
                                 M = M + 1
-                                'Write(11, "M")
                                 dat = dat & ",M"
-                            Else ' Output Non date cell
+                            Else   ' Output blank for non existent date
                                 dat = dat & ","
                             End If
                         Else
