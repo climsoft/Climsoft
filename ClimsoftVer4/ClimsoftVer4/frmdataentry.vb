@@ -32,7 +32,6 @@ Public Class frmKeyEntry
             If lstViewForms.Items.Count = 0 Then
                 Exit Sub
             End If
-
             'if there are records, then adjust the height of the listview. Done this way because of climsoft operators
             If lstViewForms.Items.Count > 0 Then
                 lstViewForms.Height = ((lstViewForms.Items.Count + 1) * lstViewForms.Items.Item(0).Bounds.Height) + 30
