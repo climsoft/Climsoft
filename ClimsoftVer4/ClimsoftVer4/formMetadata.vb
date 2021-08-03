@@ -848,15 +848,21 @@ Err:
         Dim dstn As New DataSet
         Dim sql As String
         sql = "SELECT * FROM  " & tbl
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-        dstn.Clear()
-        da.Fill(dstn, tbl)
 
-        lst.Items.Clear()
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
+            dstn.Clear()
+            da.Fill(dstn, tbl)
 
-        For i = 0 To dstn.Tables(tbl).Rows.Count - 1
-            lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
-        Next
+            lst.Items.Clear()
+
+            For i = 0 To dstn.Tables(tbl).Rows.Count - 1
+                lst.Items.Add(dstn.Tables(tbl).Rows(i).Item(idxfld))
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 
 
