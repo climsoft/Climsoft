@@ -288,8 +288,6 @@ Public Class form_daily2
         'Dim loggedInUser As String
         'loggedInUser = frmLogin.txtUser.Text
 
-        'MsgBox(loggedInUser)
-
         'Set TAB next to true
         tabNext = True
         'Disable Delete button for ClimsoftOperator and ClimsoftRainfall
@@ -297,6 +295,7 @@ Public Class form_daily2
             btnDelete.Enabled = False
             btnUpload.Enabled = False
         End If
+
         'Set the record index counter to the first row
         inc = 0
 
@@ -448,6 +447,7 @@ Public Class form_daily2
             ' Retrieve Keyentry mode information and mark on the checkbox
             If FldName.Key_Entry_Mode(Me.Name) = "Double" Then chkRepeatEntry.Checked = True
 
+            Me.CenterToScreen()
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")
@@ -1477,6 +1477,12 @@ Public Class form_daily2
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_agro1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
         frmDataTransferProgress.Show()
 
         'Upload data to observationInitial table

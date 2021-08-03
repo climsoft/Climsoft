@@ -11,7 +11,7 @@
         dtbRecords.Columns.Add(strYear, GetType(Integer))
         dtbRecords.Columns.Add(strShortYear, GetType(Integer))
 
-        For i As Integer = endYear To endYear - 5 Step -1
+        For i As Integer = endYear To endYear - 9 Step -1
             dtbRecords.Rows.Add(i, CInt(Strings.Right(i, 2)))
         Next
 
@@ -84,4 +84,11 @@
         cmsYearViewShortYear.Checked = True
         cmsYearViewLongYear.Checked = False
     End Sub
+
+    Private Sub ucrYearSelector_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+        If Len(cboValues.Text) <> 4 Then
+            MsgBox("Invalid Year. Enter the correct value in the Year box")
+        End If
+    End Sub
+
 End Class

@@ -1,5 +1,4 @@
 ﻿
-
 Public Class ucrHourlyWind
     Private strDirectionFieldName As String = "elem_112_"
     Private strSpeedFieldName As String = "elem_111_"
@@ -57,14 +56,22 @@ Public Class ucrHourlyWind
             ucrNavigation.NewSequencerRecord(txtSequencer.Text, {"mm", "dd"}, {ucrMonth, ucrDay}, ucrYear:=ucrYearSelector)
             'SaveEnable()
             ucrDirectionSpeedFlag0.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourlywind", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
-        'Change the signature(user) and the DATETIME first before saving 
-        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
-        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Try
+            'Change the signature(user) and the DATETIME first before saving 
+            GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+            GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -86,6 +93,15 @@ Public Class ucrHourlyWind
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_hourlywind"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
+
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
@@ -417,7 +433,7 @@ Public Class ucrHourlyWind
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -449,7 +465,11 @@ Public Class ucrHourlyWind
                                                        Return x.Equals(Me.strFlagFieldName & strTag)
                                                    End Function)
 
-                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) Then
+                    If strFieldName = "elem_112_01" Then
+                        Dim jjj As Integer = 0
+                    End If
+
+                    If (Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strFlagColumn))) Then
 
                         strStationId = row.Item("stationId")
                         hh = Integer.Parse(strTag)
@@ -468,7 +488,7 @@ Public Class ucrHourlyWind
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -496,7 +516,7 @@ Public Class ucrHourlyWind
                                 "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
                         End If
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmdSave.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

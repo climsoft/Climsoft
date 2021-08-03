@@ -14,7 +14,10 @@ Public Class ucrSynopticRA1
     Private iGminEndMonth As Integer
     'Stores default Geopotential standard pressure level
     Private iStandardPressureLevel As Integer
+    'stores the default value for the hour selector
+    Private iDefaultHourValue As Integer
     Private bAutoFillValues As Boolean = True
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub ucrSynopticRA1_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -32,6 +35,9 @@ Public Class ucrSynopticRA1
                 End If
             Next
 
+            GetRegKeys()
+            ucrHourSelector.SetDefaultValue(iDefaultHourValue)
+
             SetUpTableEntry("form_synoptic_2_ra1")
             AddField("signature")
             AddField("entryDatetime")
@@ -44,7 +50,7 @@ Public Class ucrSynopticRA1
 
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
-            GetRegKeys()
+
 
             bFirstLoad = False
 
@@ -52,6 +58,8 @@ Public Class ucrSynopticRA1
             ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl()
 
+            ' Check for key entry mode and indicate on the form
+            If FldName.Key_Entry_Mode(frmNewSynopticRA1.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
     End Sub
 
@@ -61,14 +69,21 @@ Public Class ucrSynopticRA1
             ' ucrNavigation.NewRecord() 'temporary
             'SaveEnable()
             ucrVFPStationLevelPressure.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_synoptic_2_ra1", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
-        'Change the signature(user) and the DATETIME first before saving 
-        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
-        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Try  'Change the signature(user) and the DATETIME first before saving 
+            GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+            GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
@@ -89,6 +104,13 @@ Public Class ucrSynopticRA1
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_synoptic_2_ra1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
@@ -114,7 +136,8 @@ Public Class ucrSynopticRA1
     Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
         Try
             frmSynopTDCF.Show()
-            frmSynopTDCF.cboTemplate.Text = "TM_307081"
+            frmSynopTDCF.srcTable.Text = "form_synoptic_2_ra1"
+            'frmSynopTDCF.cboTemplate.Text = "TM_307081"
             ' Subset Observations
             'TODO. Copied from Samuel's code
 
@@ -205,11 +228,10 @@ Public Class ucrSynopticRA1
     ''' by getting the values from the regkeys database table
     ''' </summary>
     Private Sub GetRegKeys()
-        Dim clsDataDefinition As DataCall
+        Dim clsDataDefinition As New DataCall
         Dim dtbl As DataTable
         Dim row As DataRow
 
-        clsDataDefinition = New DataCall
         clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
         dtbl = clsDataDefinition.GetDataTable()
         If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
@@ -232,6 +254,9 @@ Public Class ucrSynopticRA1
             'Get the month for ending record of Gmin
             row = dtbl.Select("keyName = 'key04'").FirstOrDefault()
             iGminEndMonth = If(row IsNot Nothing, Val(row.Item("keyValue")), 0)
+
+            row = dtbl.Select("keyName = 'key01'").FirstOrDefault()
+            iDefaultHourValue = If(row IsNot Nothing, Val(row.Item("keyValue")), 0)
         End If
     End Sub
 
@@ -517,7 +542,7 @@ Public Class ucrSynopticRA1
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & GetTableName() & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -544,7 +569,7 @@ Public Class ucrSynopticRA1
                                                    End Function)
 
                     'set the record
-                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(strElementCode, lElementId) Then
+                    If ((Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn))) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strFlagColumn)))) AndAlso Long.TryParse(strElementCode, lElementId) Then
 
                         strStationId = row.Item("stationId")
 
@@ -563,7 +588,7 @@ Public Class ucrSynopticRA1
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -590,7 +615,7 @@ Public Class ucrSynopticRA1
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)

@@ -6,8 +6,10 @@ Public Class ucrFormDaily2
     Private strFlagFieldName As String = "flag"
     Private strPeriodFieldName As String = "period"
     Private bTotalRequired As Boolean
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub ucrFormDaily2_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         If bFirstLoad Then
 
             'Sets values for the units combobox
@@ -32,6 +34,10 @@ Public Class ucrFormDaily2
             ucrVisibilityUnits.bValidate = False
 
 
+
+            ucrHour.SetDefaultValue(GetDefaultHourValue())
+
+
             'the alternative of this would be to select the first control (in the designer), click Send to Back, and repeat.
             Dim allVFP = From vfp In Me.Controls.OfType(Of ucrValueFlagPeriod)() Order By vfp.TabIndex
             Dim shiftCells As New ClsShiftCells()
@@ -46,6 +52,17 @@ Public Class ucrFormDaily2
             Next
 
             SetUpTableEntry("form_daily2")
+
+            'this is placed here to add onto the keydown event set in the SetUpTableEntry() subroutine
+            AddHandler ucrInputTotal.evtKeyDown, Sub(sender1 As Object, e1 As KeyEventArgs)
+                                                     If e1.KeyCode = Keys.Enter Then
+                                                         If Not CheckTotal() Then
+                                                             ucrInputTotal.Focus()
+                                                             e1.SuppressKeyPress = True
+                                                         End If
+                                                     End If
+                                                 End Sub
+
             AddField("signature")
             AddField("entryDatetime")
 
@@ -63,22 +80,45 @@ Public Class ucrFormDaily2
             'populate the values
             ucrDaily2Navigation.SetSortBy("entryDatetime")
             ucrDaily2Navigation.PopulateControl()
+
+            ' Check for key entry mode and indicate on the form
+            If FldName.Key_Entry_Mode(frmNewFormDaily2.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
 
     End Sub
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
+        Dim usrStn As New dataEntryGlobalRoutines
+        Dim txtElementCode As String
+
+        txtElementCode = ucrElementSelector.cboValues.SelectedValue
+
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names
-            ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
+
+            ' The following code has been disabled because it is found not to work well
+            'ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
             SaveEnable()
             ucrValueFlagPeriod1.Focus()
+
+            'Get the Station from the last record by the current login user
+            usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
+
+            ' Sequence the element the date
+            Seq_Element(txtElementCode)
+            ucrElementSelector.cboValues.SelectedValue = txtElementCode
+
         End If
+
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
-        'Change the signature(user) and the DATETIME first before saving 
-        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
-        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Try
+            'Change the signature(user) and the DATETIME first before saving 
+            GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+            GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
@@ -115,6 +155,14 @@ Public Class ucrFormDaily2
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_daily2"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrDaily2Navigation.iMaxRows & " records")
@@ -129,15 +177,6 @@ Public Class ucrFormDaily2
 
     Private Sub chkEnableSequencer_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSequencer.CheckedChanged
         txtSequencer.Text = If(chkEnableSequencer.Checked, "seq_daily_element", "")
-    End Sub
-
-    Private Sub ucrInputTotal_evtKeyDown(sender As Object, e As KeyEventArgs) Handles ucrInputTotal.evtKeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Not CheckTotal() Then
-                ucrInputTotal.Focus()
-                e.SuppressKeyPress = True
-            End If
-        End If
     End Sub
 
     Private Function IsValuesEmpty() As Boolean
@@ -215,6 +254,23 @@ Public Class ucrFormDaily2
         End If
 
         Return bValueCorrect
+    End Function
+
+    'Get the default hour settings from the database
+    Private Function GetDefaultHourValue() As Integer
+        Dim iDefaultHourValue As Integer = 0
+        Dim clsDataDefinition As New DataCall
+        Dim dtbl As DataTable
+
+        clsDataDefinition.SetTableNameAndFields("regkeys", {"keyName", "keyValue"})
+        clsDataDefinition.SetFilter("keyName", "=", "key01", bIsPositiveCondition:=True, bForceValuesAsString:=True)
+        dtbl = clsDataDefinition.GetDataTable()
+        If dtbl IsNot Nothing AndAlso dtbl.Rows.Count > 0 Then
+            Integer.TryParse(dtbl.Rows(0).Item("keyValue"), iDefaultHourValue)
+        End If
+
+        Return iDefaultHourValue
+
     End Function
 
     ''' <summary>
@@ -330,7 +386,7 @@ Public Class ucrFormDaily2
             strTableName = GetTableName()
 
             'Get all the records from the table
-            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.OpenedConnection)
+            Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand("Select * FROM " & strTableName & " ORDER BY entryDatetime", clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -369,7 +425,7 @@ Public Class ucrFormDaily2
                         bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -420,7 +476,7 @@ Public Class ucrFormDaily2
                         End If
 
                         Try
-                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmdSave As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 'cmd.Parameters.Add("@stationId", SqlDbType.VarChar, 255).Value = strStationId
                                 cmdSave.Parameters.AddWithValue("@stationId", strStationId)
                                 cmdSave.Parameters.AddWithValue("@elemCode", lElementId)
@@ -474,5 +530,124 @@ Public Class ucrFormDaily2
         End Try
 
     End Sub
+
+    Function Seq_Element(ByRef eCode As String) As Boolean
+
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim da_seq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim strConnString, sql_seq, elm As String
+        Dim ds_seq As New DataSet
+        Dim kount As Integer
+        Dim yy, mm, dt As String
+
+        Try
+            strConnString = frmLogin.txtusrpwd.Text
+            conn.ConnectionString = strConnString
+            conn.Open()
+
+            sql_seq = "select elementId from seq_daily_element order by seq;"
+
+            da_seq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql_seq, conn)
+            ds_seq.Clear()
+            da_seq.SelectCommand.CommandTimeout = 0
+            da_seq.Fill(ds_seq, "Sequence")
+
+            'conn.Close()
+
+            With ds_seq.Tables("Sequence")
+
+                If .Rows.Count > 0 Then
+                    kount = 0
+                    elm = .Rows(0).Item("elementId")
+                    For i = 0 To .Rows.Count - 1
+                        If eCode = .Rows(i).Item("elementId") Then
+                            If i < .Rows.Count - 1 Then
+                                elm = .Rows(i + 1).Item("elementId")
+                            Else
+                                If seqDate() Then eCode = .Rows(0).Item("elementId")
+                            End If
+                            Exit For
+                        End If
+                        kount = kount + 1
+                    Next
+
+                    eCode = elm
+
+                    ' Check for months to record GrassMin Temp
+                    If eCode = 99 And skipGroundMin(conn) Then
+                        If kount < .Rows.Count - 2 Then
+                            eCode = .Rows(kount + 2).Item("elementId")
+                        ElseIf kount = .Rows.Count - 2 Then
+                            If seqDate() Then eCode = .Rows(0).Item("elementId")
+                        ElseIf kount = .Rows.Count - 1 Then
+                            eCode = .Rows(1).Item("elementId")
+                        End If
+                    End If
+                End If
+            End With
+            conn.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            conn.Close()
+            Return False
+        End Try
+    End Function
+    Function seqDate() As Boolean
+        Dim yy, mm, dt As String
+        Try
+            'sequence the date by 1 month increment
+            yy = ucrYearSelector.cboValues.Text
+            mm = ucrMonth.cboValues.Text
+            dt = DateSerial(yy, mm, 1)
+            dt = DateAdd("m", 1, dt)
+            ucrYearSelector.cboValues.Text = DateAndTime.Year(dt)
+            ucrMonth.cboValues.Text = DateAndTime.Month(dt)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    Function skipGroundMin(conn As MySql.Data.MySqlClient.MySqlConnection) As Boolean
+        Dim daq As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsq As New DataSet
+        Dim sql As String
+        Dim st_month, ed_month, rec_month As Integer
+
+        sql = "select keyName,keyValue from regkeys where keyName = 'key03' or keyName = 'key04';"
+        Try
+            daq = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsq.Clear()
+            daq.SelectCommand.CommandTimeout = 0
+            daq.Fill(dsq, "months")
+
+            rec_month = CInt(ucrMonth.cboValues.Text)
+
+            With dsq.Tables("months")
+                If .Rows.Count < 2 Then Return False ' Period not defined in Registry
+                st_month = .Rows(0).Item("keyValue")
+                ed_month = .Rows(1).Item("keyValue")
+            End With
+
+            If ed_month > st_month Then ' Period within same year
+                If rec_month >= st_month And rec_month <= ed_month Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else ' Period crosses the year
+                If (rec_month >= st_month And rec_month <= 12) Or (rec_month >= 1 And rec_month <= ed_month) Then
+                    Return False
+                Else
+                    Return True
+                End If
+            End If
+
+            Return True
+        Catch ex As Exception
+            Return True
+        End Try
+    End Function
 
 End Class

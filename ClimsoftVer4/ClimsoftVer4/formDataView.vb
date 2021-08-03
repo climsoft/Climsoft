@@ -22,6 +22,14 @@ Public Class formDataView
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
 
     Private Sub formDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+            cmdExport.Enabled = False
+            cmdImport.Enabled = False
+        Else
+            cmdExport.Enabled = True
+            cmdImport.Enabled = True
+        End If
         'DataGridView.Top = 300
         'MsgBox(dsSourceTableName)
     End Sub
@@ -99,7 +107,16 @@ Public Class formDataView
             importFile = importFile & Strings.Right(x, 1)
 
             'MsgBox(importFile)
-            Sql = "LOAD DATA LOCAL INFILE '" & importFile & "' REPLACE INTO TABLE " & dsSourceTableName & " FIELDS TERMINATED BY ',' (" & tblhdr & ");"
+            Sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+                   /*!40101 SET NAMES utf8mb4 */;
+                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+                   /*!40000 ALTER TABLE `" & dsSourceTableName & "` DISABLE KEYS */;
+                   LOAD DATA LOCAL INFILE '" & importFile & "' REPLACE INTO TABLE " & dsSourceTableName & " FIELDS TERMINATED BY ',' (" & tblhdr & ");
+                   /*!40000 ALTER TABLE `" & dsSourceTableName & "` ENABLE KEYS */;
+                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
 
             'Execute SQL command
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
@@ -109,7 +126,7 @@ Public Class formDataView
             DataGridView.Refresh()
             conn.Close()
 
-            MsgBox("File '" & x & "' Successfully Imported")
+                MsgBox("File '" & x & "' Successfully Imported")
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -155,7 +172,7 @@ Public Class formDataView
                 ' 
             Case "form_synoptic_2_ra1"
                 Sql = "DELETE FROM form_synoptic_2_ra1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
-                MsgBox(Sql)
+                'MsgBox(Sql)
                 If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
                     Sql2 = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
                 Else
@@ -300,7 +317,7 @@ Public Class formDataView
     End Sub
 
     Private Sub cmdExport_Click(sender As Object, e As EventArgs) Handles cmdExport.Click
-        Dim hdr, dat, exportfile, x As String
+        Dim hdr, dat, exportfile, x, CellValue As String
         Dim ds1 As New DataSet
         Dim da1 As MySql.Data.MySqlClient.MySqlDataAdapter
 
@@ -333,48 +350,58 @@ Public Class formDataView
                 Exit Sub
             End If
 
-            'FileOpen(111, exportfile, OpenMode.Output)
+            FileOpen(111, x, OpenMode.Output)
 
             ''PrintLine(111, hdr)
             'FileClose(111)
 
-            'Sql = "Select * from " & dsSourceTableName & ";"
+            Sql = "Select * from " & dsSourceTableName & ";"
 
-            'da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(Sql, conn)
 
-            'ds1.Clear()
-            'da1.Fill(ds1, dsSourceTableName)
+            ds1.Clear()
+            da1.Fill(ds1, dsSourceTableName)
 
             'FileOpen(111, exportfile, OpenMode.Append)
 
-            'For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
-            '    dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
-            '    For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
-            '        dat = dat & "," & ds1.Tables(dsSourceTableName).Rows(i).Item(j)
-            '    Next
-
-            '    PrintLine(111, dat)
-            'Next
-            'FileClose(111)
-
-            'Convert Export file path seperators to SQL style
-            exportfile = Strings.Left(x, 1)
-            For i = 2 To Len(x) - 1
-                If Strings.Mid(x, i, 1) = "\" Then
-                    exportfile = exportfile & "/"
-                Else
-                    exportfile = exportfile & Strings.Mid(x, i, 1)
-                End If
+            For i = 0 To ds1.Tables(dsSourceTableName).Rows.Count - 1
+                dat = ds1.Tables(dsSourceTableName).Rows(i).Item(0)
+                For j = 1 To ds1.Tables(dsSourceTableName).Columns.Count - 1
+                    If IsDBNull(ds1.Tables(dsSourceTableName).Rows(i).Item(j)) Then
+                        CellValue = "\N" '""
+                        'dat = dat & "," & "\N"
+                    Else
+                        CellValue = ds1.Tables(dsSourceTableName).Rows(i).Item(j)
+                        If IsDate(CellValue) And InStr(CellValue, ".") = 0 Then
+                            CellValue = DateAndTime.Year(CellValue) & "-" & DateAndTime.Month(CellValue) & "-" & DateAndTime.Day(CellValue) & " " & DateAndTime.Hour(CellValue) & ":" & DateAndTime.Minute(CellValue) & ":" & DateAndTime.Second(CellValue)
+                            'MsgBox(CellValue)
+                        End If
+                        'dat = dat & "," & CellValue
+                    End If
+                    dat = dat & "," & CellValue
+                Next
+                PrintLine(111, dat)
             Next
-            exportfile = exportfile & Strings.Right(x, 1)
+            FileClose(111)
 
-            'MsgBox(exportfile)
+            ''Convert Export file path seperators to SQL style
+            'exportfile = Strings.Left(x, 1)
+            'For i = 2 To Len(x) - 1
+            '    If Strings.Mid(x, i, 1) = "\" Then
+            '        exportfile = exportfile & "/"
+            '    Else
+            '        exportfile = exportfile & Strings.Mid(x, i, 1)
+            '    End If
+            'Next
+            'exportfile = exportfile & Strings.Right(x, 1)
 
-            Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
+            ''MsgBox(exportfile)
 
-            'Execute SQL command
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            objCmd.ExecuteNonQuery()
+            'Sql = "select * from " & dsSourceTableName & " into outfile '" & exportfile & "' fields terminated by ',';"
+
+            ''Execute SQL command
+            'objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+            'objCmd.ExecuteNonQuery()
 
             conn.Close()
 
@@ -383,7 +410,7 @@ Public Class formDataView
         Catch ex As Exception
             MsgBox(ex.Message)
             conn.Close()
-            'FileClose(111)
+            FileClose(111)
         End Try
 
     End Sub

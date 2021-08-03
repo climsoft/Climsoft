@@ -51,9 +51,7 @@
         Me.Close()
     End Sub
 
-    Private Sub lstSeries_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSeries.SelectedIndexChanged
 
-    End Sub
 
     Private Sub txtFootNote_TextChanged(sender As Object, e As EventArgs)
         'create the header And footer titles
@@ -63,39 +61,8 @@
     End Sub
 
     Private Sub comdSave_Click(sender As Object, e As EventArgs) Handles comdSave.Click
-        Dim Chartfile, ChartfileExt As String
-        dlgChart.FilterIndex = 2
-        dlgChart.Filter = "PNG|*.png|JPEG|*.jpeg|JIF|*.gif|TIF|*.tif|BMP|*.bmp|WMF|*.wmf"
+        SaveImageFormat(MSChart1)
 
-        dlgChart.AddExtension = True
-        'dlgChart.CheckFileExists = True
-
-        dlgChart.Title = "Save Chart"
-        dlgChart.ShowDialog()
-
-        Chartfile = dlgChart.FileName
-        ChartfileExt = IO.Path.GetExtension(Chartfile).ToLower
-        Try
-
-            ' Set the image file format according to fileextension selected
-            Select Case ChartfileExt
-                Case ".png"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Png)
-                Case ".jpeg"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Jpeg)
-                Case ".gif"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Gif)
-                Case ".tif"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Tiff)
-                Case ".bmp"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Bmp)
-                Case ".wmf"
-                    MSChart1.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Wmf)
-            End Select
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-        'MSChart1.SaveImage("C:\data\Charts.png", System.Drawing.Imaging.ImageFormat.Png)
     End Sub
 
     Private Sub cmdPrint_Click(sender As Object, e As EventArgs) Handles cmdPrint.Click
@@ -239,5 +206,40 @@
         clrdlg.ShowDialog()
         cl = clrdlg.Color
         MSChart1.Series(lstSeries.SelectedIndex).Color = cl
+    End Sub
+
+    Sub SaveImageFormat(Charts As Object)
+        Dim Chartfile, ChartfileExt As String
+        dlgChart.FilterIndex = 2
+        dlgChart.Filter = "PNG|*.png|JPEG|*.jpeg|JIF|*.gif|TIF|*.tif|BMP|*.bmp|WMF|*.wmf"
+
+        dlgChart.AddExtension = True
+
+        dlgChart.Title = "Save Chart"
+        dlgChart.ShowDialog()
+
+        Chartfile = dlgChart.FileName
+        ChartfileExt = IO.Path.GetExtension(Chartfile).ToLower
+        Try
+
+            ' Set the image file format according to fileextension selected
+            Select Case ChartfileExt
+                Case ".png"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Png)
+                Case ".jpeg"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Jpeg)
+                Case ".gif"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Gif)
+                Case ".tif"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Tiff)
+                Case ".bmp"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Bmp)
+                Case ".wmf"
+                    Charts.SaveImage(Chartfile, System.Drawing.Imaging.ImageFormat.Wmf)
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
     End Sub
 End Class

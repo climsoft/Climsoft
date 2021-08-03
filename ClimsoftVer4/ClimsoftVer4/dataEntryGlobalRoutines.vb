@@ -215,9 +215,9 @@ Public Class dataEntryGlobalRoutines
         End If
     End Function
     Public Function checkValidDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
-        'If IsDate(dd & "/" & mm & "/" & yyyy) Then
-        'Updated 20160309 to accommodate date formats for different Locales. ASM
-        If IsDate(DateSerial(yyyy, mm, dd)) Then
+        If IsDate(dd & "/" & mm & "/" & yyyy) Then
+            'Updated 20160309 to accommodate date formats for different Locales. ASM
+            'If IsDate(DateSerial(yyyy, mm, dd)) Then
             checkValidDate = True
             ctl.BackColor = Color.White
             'My.Computer.Keyboard.SendKeys("{TAB}")
@@ -233,18 +233,22 @@ Public Class dataEntryGlobalRoutines
     Public Function checkFutureDate(ByVal dd As String, ByVal mm As String, ByVal yyyy As String, ctl As Control) As Boolean
         'If DateValue(dd & "/" & mm & "/" & yyyy) <= Now() Then
         'Updated 20160309 to accommodate date formats for different Locales. ASM
-        If DateSerial(yyyy, mm, dd) <= DateSerial(Year(Now()), Month(Now()), DateAndTime.Day(Now())) Then
-            checkFutureDate = True
-            ctl.BackColor = Color.White
-            ' My.Computer.Keyboard.SendKeys("{TAB}")
-            tabNext = True
-        Else
-            checkFutureDate = False
-            ctl.BackColor = Color.Red
-            ctl.Focus()
-            tabNext = False
-            MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
-        End If
+        Try
+            If DateSerial(yyyy, mm, dd) <= DateSerial(Year(Now()), Month(Now()), DateAndTime.Day(Now())) Then
+                checkFutureDate = True
+                ctl.BackColor = Color.White
+                ' My.Computer.Keyboard.SendKeys("{TAB}")
+                tabNext = True
+            Else
+                checkFutureDate = False
+                ctl.BackColor = Color.Red
+                ctl.Focus()
+                tabNext = False
+                MsgBox("Evaluated observation date [ " & DateSerial(yyyy, mm, dd) & "]. Dates greater than today not accepted!", MsgBoxStyle.Critical)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Function
     Public Function checkExists(ByVal itemFound As Boolean, ctl As Control) As Boolean
         If itemFound = True Then
@@ -426,7 +430,9 @@ Public Class dataEntryGlobalRoutines
 
     'End Sub
 
-    Public Function Entered_Value(con As MySql.Data.MySqlClient.MySqlConnection, stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, ByRef obs As String) As Boolean
+    Public Function Entered_Value(stn As String, cod As Integer, yy As Integer, mm As Integer, dd As Integer, hh As Integer, ByRef obs As String) As Boolean
+        Dim conn As New MySql.Data.MySqlClient.MySqlConnection
+        Dim constr As String
         Dim d As MySql.Data.MySqlClient.MySqlDataAdapter
         Dim s As New DataSet
         Dim dttime, sql As String
@@ -434,14 +440,21 @@ Public Class dataEntryGlobalRoutines
         Entered_Value = True
         dttime = yy & "-" & mm & "-" & dd & " " & hh & ":00:00"
         'MsgBox(stn & " " & cod & " " & dttime)
-        sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
 
+        constr = frmLogin.txtusrpwd.Text
+        conn.ConnectionString = constr
+        conn.Open()
+
+        sql = "select obsValue from observationinitial where recordedFrom ='" & stn & "' and describedBy ='" & cod & "' and obsDatetime ='" & dttime & "';"
+        'MsgBox(sql)
         Try
-            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, con)
+            d = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
             d.SelectCommand.CommandTimeout = 0
             d.Fill(s, "obsv_rec")
 
+            conn.Close()
+            'MsgBox(s.Tables("obsv_rec").Rows.Count)
             If s.Tables("obsv_rec").Rows.Count = 0 Then
                 Entered_Value = False
             Else
@@ -507,7 +520,7 @@ Public Class dataEntryGlobalRoutines
         'MsgBox(elmcode)
         Try
             With frm
-                If Not Entered_Value(con, stnid, elmcode, yy, mm, dd, hh, obsv1) Then
+                If Not Entered_Value(stnid, elmcode, yy, mm, dd, hh, obsv1) Then
                     MsgBox("Can't Compare. Data not previously uploaded")
                     Exit Function
                 Else
@@ -594,7 +607,8 @@ Public Class dataEntryGlobalRoutines
             conn.ConnectionString = strConnString
             conn.Open()
 
-            SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            'SQL_last_record = "select form_daily2.stationId,stationName, entryDatetime from " & frm & " form_daily2 INNER JOIN station ON form_daily2.stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
+            SQL_last_record = "select " & frm & ".stationId, stationName, entryDatetime from " & frm & " INNER JOIN station ON " & frm & ".stationId = station.stationId where signature ='" & frmLogin.txtUsername.Text & "' order by entryDatetime;"
             dsLastDataRecord.Clear()
             daLastDataRecord = New MySql.Data.MySqlClient.MySqlDataAdapter(SQL_last_record, conn)
             ' Set to unlimited timeout period
@@ -613,8 +627,9 @@ Public Class dataEntryGlobalRoutines
 
             GetCurrentStation = True
         Catch ex As Exception
-            Return False
             MsgBox(ex.Message)
+            conn.Close()
+            Return False
         End Try
 
     End Function

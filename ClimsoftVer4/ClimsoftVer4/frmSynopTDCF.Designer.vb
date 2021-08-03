@@ -30,6 +30,7 @@ Partial Class frmSynopTDCF
         Me.grpBinaryMessage = New System.Windows.Forms.GroupBox()
         Me.txtEncoded = New System.Windows.Forms.TextBox()
         Me.grpObsHeaders = New System.Windows.Forms.GroupBox()
+        Me.srcTable = New System.Windows.Forms.Label()
         Me.lblBBB = New System.Windows.Forms.Label()
         Me.cboBBB = New System.Windows.Forms.ComboBox()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -183,6 +184,7 @@ Partial Class frmSynopTDCF
         'grpObsHeaders
         '
         Me.grpObsHeaders.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpObsHeaders.Controls.Add(Me.srcTable)
         Me.grpObsHeaders.Controls.Add(Me.lblBBB)
         Me.grpObsHeaders.Controls.Add(Me.cboBBB)
         Me.grpObsHeaders.Controls.Add(Me.lblStation)
@@ -202,6 +204,15 @@ Partial Class frmSynopTDCF
         Me.grpObsHeaders.TabIndex = 7
         Me.grpObsHeaders.TabStop = False
         Me.grpObsHeaders.Text = "Observation Headers"
+        '
+        'srcTable
+        '
+        Me.srcTable.AutoSize = True
+        Me.srcTable.Location = New System.Drawing.Point(686, 31)
+        Me.srcTable.Name = "srcTable"
+        Me.srcTable.Size = New System.Drawing.Size(0, 13)
+        Me.srcTable.TabIndex = 217
+        Me.srcTable.Visible = False
         '
         'lblBBB
         '
@@ -937,4 +948,5 @@ Partial Class frmSynopTDCF
     Friend WithEvents lblBBB As System.Windows.Forms.Label
     Friend WithEvents cboBBB As System.Windows.Forms.ComboBox
     Friend WithEvents txtEncoded As System.Windows.Forms.TextBox
+    Friend WithEvents srcTable As Label
 End Class

@@ -102,6 +102,8 @@ Public Class frmMainMenu
                     cmdMetadata.Enabled = False
                 End If
             End If
+
+            Me.CenterToScreen()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation)
         End Try
@@ -317,5 +319,9 @@ Public Class frmMainMenu
 
     Private Sub EmptyKeyEntryTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmptyKeyEntryTablesToolStripMenuItem.Click
         frmEntryForms.Show()
+    End Sub
+
+    Private Sub CreateModifyKeyEntryFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateModifyKeyEntryFormToolStripMenuItem.Click
+        frmCreateEntryForm.Show()
     End Sub
 End Class

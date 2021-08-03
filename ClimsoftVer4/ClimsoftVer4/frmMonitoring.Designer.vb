@@ -25,6 +25,7 @@ Partial Class frmMonitoring
         Me.TabMonitoring = New System.Windows.Forms.TabControl()
         Me.TabUsrRecords = New System.Windows.Forms.TabPage()
         Me.grpUsers = New System.Windows.Forms.GroupBox()
+        Me.cmdSave2 = New System.Windows.Forms.Button()
         Me.cmdView = New System.Windows.Forms.Button()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
@@ -51,6 +52,7 @@ Partial Class frmMonitoring
         Me.TabEntryVerify = New System.Windows.Forms.TabPage()
         Me.grpVerify = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.optNotEntered = New System.Windows.Forms.RadioButton()
         Me.optNotVerified = New System.Windows.Forms.RadioButton()
         Me.optVerified = New System.Windows.Forms.RadioButton()
         Me.cmdSave = New System.Windows.Forms.Button()
@@ -68,6 +70,9 @@ Partial Class frmMonitoring
         Me.cboForms = New System.Windows.Forms.ComboBox()
         Me.TabSettings = New System.Windows.Forms.TabPage()
         Me.grpSettings = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.optUsersStatus = New System.Windows.Forms.RadioButton()
         Me.lblDoubleEntryMode = New System.Windows.Forms.Label()
         Me.lblSingleEntryMode = New System.Windows.Forms.Label()
         Me.optEntryMode = New System.Windows.Forms.RadioButton()
@@ -80,9 +85,6 @@ Partial Class frmMonitoring
         Me.lblTrecs = New System.Windows.Forms.Label()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.optUsersStatus = New System.Windows.Forms.RadioButton()
         Me.TabMonitoring.SuspendLayout()
         Me.TabUsrRecords.SuspendLayout()
         Me.grpUsers.SuspendLayout()
@@ -115,13 +117,14 @@ Partial Class frmMonitoring
         Me.TabUsrRecords.Location = New System.Drawing.Point(4, 22)
         Me.TabUsrRecords.Name = "TabUsrRecords"
         Me.TabUsrRecords.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabUsrRecords.Size = New System.Drawing.Size(665, 174)
+        Me.TabUsrRecords.Size = New System.Drawing.Size(665, 229)
         Me.TabUsrRecords.TabIndex = 0
         Me.TabUsrRecords.Text = "Users Records"
         Me.TabUsrRecords.UseVisualStyleBackColor = True
         '
         'grpUsers
         '
+        Me.grpUsers.Controls.Add(Me.cmdSave2)
         Me.grpUsers.Controls.Add(Me.cmdView)
         Me.grpUsers.Controls.Add(Me.lblEndDate)
         Me.grpUsers.Controls.Add(Me.lblStartDate)
@@ -138,11 +141,21 @@ Partial Class frmMonitoring
         Me.grpUsers.TabStop = False
         Me.grpUsers.Text = "Users Records"
         '
+        'cmdSave2
+        '
+        Me.cmdSave2.Enabled = False
+        Me.cmdSave2.Location = New System.Drawing.Point(296, 108)
+        Me.cmdSave2.Name = "cmdSave2"
+        Me.cmdSave2.Size = New System.Drawing.Size(94, 28)
+        Me.cmdSave2.TabIndex = 21
+        Me.cmdSave2.Text = "Save Output"
+        Me.cmdSave2.UseVisualStyleBackColor = True
+        '
         'cmdView
         '
         Me.cmdView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdView.ForeColor = System.Drawing.Color.Black
-        Me.cmdView.Location = New System.Drawing.Point(252, 108)
+        Me.cmdView.Location = New System.Drawing.Point(118, 108)
         Me.cmdView.Name = "cmdView"
         Me.cmdView.Size = New System.Drawing.Size(103, 28)
         Me.cmdView.TabIndex = 10
@@ -216,7 +229,7 @@ Partial Class frmMonitoring
         Me.TabPerformance.Controls.Add(Me.grpPerformance)
         Me.TabPerformance.Location = New System.Drawing.Point(4, 22)
         Me.TabPerformance.Name = "TabPerformance"
-        Me.TabPerformance.Size = New System.Drawing.Size(665, 174)
+        Me.TabPerformance.Size = New System.Drawing.Size(665, 229)
         Me.TabPerformance.TabIndex = 2
         Me.TabPerformance.Text = "Performance Monitoring"
         Me.TabPerformance.UseVisualStyleBackColor = True
@@ -371,7 +384,7 @@ Partial Class frmMonitoring
         Me.TabEntryVerify.Padding = New System.Windows.Forms.Padding(3)
         Me.TabEntryVerify.Size = New System.Drawing.Size(665, 229)
         Me.TabEntryVerify.TabIndex = 1
-        Me.TabEntryVerify.Text = "Double Key Entry Verification"
+        Me.TabEntryVerify.Text = "Key Entry Monitoring"
         Me.TabEntryVerify.UseVisualStyleBackColor = True
         '
         'grpVerify
@@ -393,38 +406,50 @@ Partial Class frmMonitoring
         Me.grpVerify.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpVerify.Location = New System.Drawing.Point(9, 20)
         Me.grpVerify.Name = "grpVerify"
-        Me.grpVerify.Size = New System.Drawing.Size(641, 148)
+        Me.grpVerify.Size = New System.Drawing.Size(641, 163)
         Me.grpVerify.TabIndex = 1
         Me.grpVerify.TabStop = False
-        Me.grpVerify.Text = "Double Key Entry Verification"
+        Me.grpVerify.Text = "Monitoring Options"
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.optNotEntered)
         Me.GroupBox2.Controls.Add(Me.optNotVerified)
         Me.GroupBox2.Controls.Add(Me.optVerified)
         Me.GroupBox2.Location = New System.Drawing.Point(438, 15)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(176, 81)
+        Me.GroupBox2.Size = New System.Drawing.Size(176, 94)
         Me.GroupBox2.TabIndex = 33
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Selection Type"
+        Me.GroupBox2.Text = "Records Status"
+        '
+        'optNotEntered
+        '
+        Me.optNotEntered.AutoSize = True
+        Me.optNotEntered.Location = New System.Drawing.Point(10, 69)
+        Me.optNotEntered.Name = "optNotEntered"
+        Me.optNotEntered.Size = New System.Drawing.Size(144, 20)
+        Me.optNotEntered.TabIndex = 2
+        Me.optNotEntered.Text = "Records NOT Entered"
+        Me.optNotEntered.UseCompatibleTextRendering = True
+        Me.optNotEntered.UseVisualStyleBackColor = True
         '
         'optNotVerified
         '
         Me.optNotVerified.AutoSize = True
         Me.optNotVerified.Checked = True
-        Me.optNotVerified.Location = New System.Drawing.Point(10, 22)
+        Me.optNotVerified.Location = New System.Drawing.Point(10, 21)
         Me.optNotVerified.Name = "optNotVerified"
-        Me.optNotVerified.Size = New System.Drawing.Size(143, 19)
+        Me.optNotVerified.Size = New System.Drawing.Size(146, 19)
         Me.optNotVerified.TabIndex = 1
         Me.optNotVerified.TabStop = True
-        Me.optNotVerified.Text = "NOT Verified Records"
+        Me.optNotVerified.Text = "Records NOT Verified "
         Me.optNotVerified.UseVisualStyleBackColor = True
         '
         'optVerified
         '
         Me.optVerified.AutoSize = True
-        Me.optVerified.Location = New System.Drawing.Point(10, 47)
+        Me.optVerified.Location = New System.Drawing.Point(10, 45)
         Me.optVerified.Name = "optVerified"
         Me.optVerified.Size = New System.Drawing.Size(115, 19)
         Me.optVerified.TabIndex = 0
@@ -433,7 +458,7 @@ Partial Class frmMonitoring
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(552, 114)
+        Me.cmdSave.Location = New System.Drawing.Point(546, 122)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(63, 25)
         Me.cmdSave.TabIndex = 32
@@ -442,7 +467,7 @@ Partial Class frmMonitoring
         '
         'cmdExtarct
         '
-        Me.cmdExtarct.Location = New System.Drawing.Point(453, 114)
+        Me.cmdExtarct.Location = New System.Drawing.Point(447, 122)
         Me.cmdExtarct.Name = "cmdExtarct"
         Me.cmdExtarct.Size = New System.Drawing.Size(63, 25)
         Me.cmdExtarct.TabIndex = 31
@@ -575,6 +600,36 @@ Partial Class frmMonitoring
         Me.grpSettings.TabStop = False
         Me.grpSettings.Text = "Settings"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(28, 152)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(116, 13)
+        Me.Label3.TabIndex = 18
+        Me.Label3.Text = "1 for Double Key Entry "
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(28, 135)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(116, 13)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "0 for Single Data Entry "
+        '
+        'optUsersStatus
+        '
+        Me.optUsersStatus.AutoSize = True
+        Me.optUsersStatus.Location = New System.Drawing.Point(6, 115)
+        Me.optUsersStatus.Name = "optUsersStatus"
+        Me.optUsersStatus.Size = New System.Drawing.Size(124, 19)
+        Me.optUsersStatus.TabIndex = 16
+        Me.optUsersStatus.Text = "Users Entry Status"
+        Me.optUsersStatus.UseVisualStyleBackColor = True
+        '
         'lblDoubleEntryMode
         '
         Me.lblDoubleEntryMode.AutoSize = True
@@ -692,36 +747,6 @@ Partial Class frmMonitoring
         Me.cmdHelp.Text = "Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(28, 152)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(116, 13)
-        Me.Label3.TabIndex = 18
-        Me.Label3.Text = "1 for Double Key Entry "
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(28, 135)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(116, 13)
-        Me.Label4.TabIndex = 17
-        Me.Label4.Text = "0 for Single Data Entry "
-        '
-        'optUsersStatus
-        '
-        Me.optUsersStatus.AutoSize = True
-        Me.optUsersStatus.Location = New System.Drawing.Point(6, 115)
-        Me.optUsersStatus.Name = "optUsersStatus"
-        Me.optUsersStatus.Size = New System.Drawing.Size(124, 19)
-        Me.optUsersStatus.TabIndex = 16
-        Me.optUsersStatus.Text = "Users Entry Status"
-        Me.optUsersStatus.UseVisualStyleBackColor = True
-        '
         'frmMonitoring
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -817,4 +842,6 @@ Partial Class frmMonitoring
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents optUsersStatus As RadioButton
+    Friend WithEvents cmdSave2 As Button
+    Friend WithEvents optNotEntered As RadioButton
 End Class

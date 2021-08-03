@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class formMetadata
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,14 @@ Partial Class formMetadata
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formMetadata))
         Me.TabMetadata = New System.Windows.Forms.TabControl()
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
-        Me.txtStationType = New System.Windows.Forms.TextBox()
+        Me.txtStationType = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
         Me.lblEW = New System.Windows.Forms.Label()
@@ -361,7 +360,6 @@ Partial Class formMetadata
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetadataFileDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.TabMetadata.SuspendLayout()
         Me.TabStation.SuspendLayout()
         Me.grpStation.SuspendLayout()
@@ -403,7 +401,6 @@ Partial Class formMetadata
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
         Me.MenuMetadata.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabMetadata
@@ -498,9 +495,11 @@ Partial Class formMetadata
         '
         'txtStationType
         '
+        Me.txtStationType.FormattingEnabled = True
+        Me.txtStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
         Me.txtStationType.Location = New System.Drawing.Point(518, 171)
         Me.txtStationType.Name = "txtStationType"
-        Me.txtStationType.Size = New System.Drawing.Size(162, 20)
+        Me.txtStationType.Size = New System.Drawing.Size(180, 21)
         Me.txtStationType.TabIndex = 11
         '
         'Label24
@@ -3774,7 +3773,6 @@ Partial Class formMetadata
         Me.GroupBox19.PerformLayout()
         Me.MenuMetadata.ResumeLayout(False)
         Me.MenuMetadata.PerformLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4116,7 +4114,6 @@ Partial Class formMetadata
     Friend WithEvents txtInstrumentPicFile As System.Windows.Forms.TextBox
     Friend WithEvents lblimgFile As System.Windows.Forms.Label
     Friend WithEvents lblPercent As System.Windows.Forms.Label
-    Friend WithEvents txtStationType As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents txtStationType As ComboBox
 End Class

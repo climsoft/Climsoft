@@ -7,7 +7,7 @@
     Public bPopulating As Boolean = False
     Protected ucrTableEntryNavigator As ucrNavigation
     Protected dctBaseControls As New Dictionary(Of String, Button) 'holds the add,save,update,delete,clear,cancel etc controls
-
+    Public Event GoingToNextChildControl(sender As Object)
     Public Overrides Sub PopulateControl()
         If clsDataConnection.IsInDesignMode() Then
             Exit Sub ' temporary code to remove the bugs thrown during design time
@@ -78,7 +78,7 @@
             If TypeOf ctr Is ucrValueView Then
                 ucrCtrValueView = DirectCast(ctr, ucrValueView)
                 ucrCtrValueView.SetUpControlInParent(lstFields, AddressOf InnerControlValueChanged)
-                AddHandler ucrCtrValueView.evtKeyDown, AddressOf GoToNextChildControl
+                AddHandler ucrCtrValueView.evtKeyDown, AddressOf OnGoToNextChildControl
                 If ucrCtrValueView.KeyControl Then
                     AddKeyField(ucrCtrValueView.FieldName)
                 End If
@@ -113,11 +113,12 @@
         'Do nothing. Overriden to prevent any default action from being taken by the parent
     End Sub
 
-    Private Sub GoToNextChildControl(sender As Object, e As KeyEventArgs)
+    Private Sub OnGoToNextChildControl(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             If TypeOf sender Is ucrValueView Then
                 'on enter only go next if what has been typed in is valid
                 If DirectCast(sender, ucrValueView).ValidateValue() Then
+                    RaiseEvent GoingToNextChildControl(sender)
                     Me.SelectNextControl(sender, True, True, True, True)
                 End If
                 'this handles the "noise" on  return key down
@@ -236,6 +237,7 @@
                                   End Sub
         ElseIf strControlName = "delete" Then
             'Disable Delete & upload button for ClimsoftOperator and ClimsoftRainfall
+
             If userGroup = "ClimsoftOperator" OrElse userGroup = "ClimsoftRainfall" Then
                 btn.Enabled = False
             End If
@@ -243,7 +245,7 @@
             AddHandler btn.Click, Sub()
                                       Try
 
-                                          If Not ValidateValue() Then
+                                          If ucrTableEntryNavigator.iCurrRow < 0 OrElse ucrTableEntryNavigator.iMaxRows < 1 Then
                                               Exit Sub
                                           End If
 

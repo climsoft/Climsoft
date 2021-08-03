@@ -8,10 +8,8 @@
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
 
-
-
     Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
-        dlgOpenImportFile.Filter = "Comma Delimited|*.csv;*.txt"
+        dlgOpenImportFile.Filter = "Comma Delimited|*.csv;*.txt;*.*"
         dlgOpenImportFile.Title = "Open Import Text File"
         dlgOpenImportFile.ShowDialog()
 
@@ -161,6 +159,50 @@
         End Try
         dbcon.Close()
     End Sub
+    Sub List_UpperAirFields()
+
+        Try
+
+            cmbFields.Items.Clear()
+            ' Add station, date and time headers whichever exist
+            cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("element_code")
+            cmbFields.Items.Add("level")
+            cmbFields.Items.Add("date_time")
+            cmbFields.Items.Add("date")
+            cmbFields.Items.Add("time")
+            cmbFields.Items.Add("yyyy")
+            cmbFields.Items.Add("mm")
+            cmbFields.Items.Add("dd")
+            cmbFields.Items.Add("hh")
+            cmbFields.Items.Add("value")
+            cmbFields.Items.Add("NA")
+            ' Add the AWS element codes existing in obselement table
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            sql = "select elementId, abbreviation from obselement where elementtype = 'Upper Air';"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            kount = ds1.Tables("obselement").Rows.Count
+
+            If kount = 0 Then Exit Sub
+
+            For i = 0 To kount - 1
+                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId") & "-" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbcon.Close()
+        End Try
+        dbcon.Close()
+    End Sub
     Sub List_ObsFields()
 
         Try
@@ -230,12 +272,13 @@
             ' Set busy Cursor pointer
             Me.Cursor = Cursors.WaitCursor
             lblRecords.Text = ""
-            If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
-                IO.Directory.CreateDirectory(Application.StartupPath & "\data")
-
+            'If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
+            If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
+                'IO.Directory.CreateDirectory(Application.StartupPath & "\data")
+                IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
             End If
-            fl1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_sql.csv"
-
+            'fl1 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\data_sql.csv"
+            fl1 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\data_sql.csv"
             FileOpen(101, fl1, OpenMode.Output)
 
             dbConnectionString = frmLogin.txtusrpwd.Text
@@ -250,7 +293,7 @@
                 fl2 = fl2 & cr
             Next
 
-            ' AWS data category
+            ' Determine data category from selected menu
             If lblType.Text = "AWS" Then
                 DataCat = "AWS"
             ElseIf lblType.Text = "Multiple Elements" Then
@@ -272,16 +315,33 @@
                 'DataCat = Get_DataCat()
             End If
 
-            ' Check for Daily1 file type
+            ' Check for Daily1, Hourly1 and AWS_special file type
+            'For i = 0 To DataGridView1.Columns.Count - 1
+            '    If DataGridView1.Columns(i).Name = "value" And lblType.Text = "Daily" Then
+            '        DataCat = "Daily1"
+            '        Exit For
+            '    ElseIf DataGridView1.Columns(i).Name = "value" And lblType.Text = "AWS" Then
+            '        DataCat = "AWS_special"
+            '        Exit For
+            '    End If
+            'Next
+
+            ' Determine special data categories from files header
+            ' Check for Daily1, Hourly1 and AWS_special file types
             For i = 0 To DataGridView1.Columns.Count - 1
-                If DataGridView1.Columns(i).Name = "value" And lblType.Text = "Daily" Then
-                    DataCat = "Daily1"
-                    Exit For
-                ElseIf DataGridView1.Columns(i).Name = "value" And lblType.Text = "AWS" Then
-                    DataCat = "AWS_special"
+                If DataGridView1.Columns(i).Name = "value" Then
+                    Select Case lblType.Text
+                        Case "Daily"
+                            DataCat = "Daily1"
+                        Case "Hourly"
+                            DataCat = "Daily1"
+                        Case "AWS"
+                            DataCat = "AWS_special"
+                    End Select
                     Exit For
                 End If
             Next
+
 
             lblRecords.Text = ""
             'MsgBox(DataCat)
@@ -375,7 +435,7 @@
 
     Sub Load_Daily2()
 
-        Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg As String
+        Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg, lvl As String
         Dim acquisitiontype As Integer
 
         Me.Cursor = Cursors.WaitCursor
@@ -397,6 +457,8 @@
                         acquisitiontype = 6
                         h = txtObsHour.Text
                         cod = txtElmCode.Text
+                        lvl = "surface"
+
                         For Each currentField In currentRow
 
                             hd = DataGridView1.Columns(col).Name
@@ -409,6 +471,8 @@
                                         st = dat
                                     ElseIf .Columns(col).Name = "element_code" Then
                                         cod = dat
+                                    ElseIf .Columns(col).Name = "level" Then
+                                        lvl = dat
                                     ElseIf .Columns(col).Name = "yyyy" Then
                                         y = dat
                                     ElseIf .Columns(col).Name = "mm" Then
@@ -424,13 +488,27 @@
                                         If IsNumeric(hd) Then
 
                                             dttime = y & "-" & m & "-" & hd & " " & h & ":00"
+                                            'dttime = DateAdd("h", 2, dttime)
+
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+
+                                                If IsDate(dttime) Then
+                                                    If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Refresh()
+                                                    col = col + 1
+                                                End If
+                                                Continue For
+                                            End If
+
 
                                             If IsNumeric(dat) Then
-                                                prd = 0 ' initialize data period counter
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                Get_Value_Flag(cod, dat, flg)
-                                            End If
+                                                    prd = 0 ' initialize data period counter
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    Get_Value_Flag(cod, dat, flg)
+                                                End If
 
                                             ' Process Dekadal data if any
                                             If optDekadal.Checked = True Then
@@ -439,10 +517,10 @@
                                             End If
 
                                             If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
+                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
+                                            End If
                                             End If
                                         End If
-                                    End If
                                     ' Show upload progress
                                     lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
@@ -469,7 +547,7 @@
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
                 MyReader.SetDelimiters(delimit)
 
-                Dim st, cod, y, m, d, h, dttime, hd, dat, flg As String
+                Dim st, cod, y, m, d, h, dttime, hd, dat, flg, lvl As String
                 Dim acquisitiontype As Integer
 
                 Do While MyReader.EndOfData = False
@@ -481,8 +559,9 @@
                         st = txtStn.Text
                         h = txtObsHour.Text
                         cod = txtElmCode.Text
-
+                        lvl = "surface"
                         acquisitiontype = 6
+                        dttime = ""
 
                         For Each currentField In currentRow
                             hd = DataGridView1.Columns(col).Name
@@ -493,6 +572,10 @@
                                         st = dat
                                     ElseIf .Columns(col).Name = "element_code" Then
                                         cod = dat
+                                    ElseIf .Columns(col).Name = "date_time" Then  ' Year column found
+                                        dttime = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
+                                    ElseIf .Columns(col).Name = "level" Then
+                                        lvl = dat
                                     ElseIf .Columns(col).Name = "yyyy" Then
                                         y = dat
                                     ElseIf .Columns(col).Name = "mm" Then
@@ -506,8 +589,27 @@
                             End With
 
                             If hd = "value" Then
+                                'MsgBox(dttime)
                                 flg = "" ' Initialize the flag
-                                dttime = y & "-" & m & "-" & d & " " & h & ":00"
+
+                                If dttime = "" Then
+                                    dttime = y & "-" & m & "-" & d & " " & h & ":00"
+                                End If
+                                'MsgBox(dttime)
+                                'dttime = y & "-" & m & "-" & d & " " & h & ":00"
+
+
+                                ' Check for missing flag data values 
+                                If dat = txtMissingFlag.Text Then
+                                    If IsDate(dttime) Then
+                                        If Station_Element(st, cod) Then Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
+                                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                        lblRecords.Refresh()
+                                        col = col + 1
+                                    End If
+                                    Continue For
+                                End If
+
                                 If IsNumeric(dat) Then
                                     If chkScale.Checked = True Then Scale_Data(cod, dat)
                                 Else
@@ -515,7 +617,7 @@
                                 End If
                                 If IsDate(dttime) And IsDate(DateSerial(y, m, h)) Then
                                     If Station_Element(st, cod) Then
-                                        If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For
+                                        If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For
                                     End If
                                 End If
 
@@ -539,7 +641,8 @@
 
     Sub Load_Hourly()
         'MsgBox("form_hourly")
-        Dim st, cod, y, m, d, dttime, hd, dat, flg As String
+        Dim st, cod, y, m, d, dttime, UTC_dt, hd, dat, flg, lvl As String
+        Dim nextDay As Date
         Dim acquisitiontype As Integer
         Try
 
@@ -559,7 +662,7 @@
                         st = txtStn.Text
                         cod = txtElmCode.Text
                         acquisitiontype = 6
-
+                        lvl = "surface"
                         For Each currentField In currentRow
                             hd = DataGridView1.Columns(col).Name()
                             dat = currentField
@@ -569,6 +672,8 @@
                                         st = dat
                                     ElseIf .Columns(col).Name = "element_code" Then
                                         cod = dat
+                                    ElseIf .Columns(col).Name = "level" Then
+                                        lvl = dat
                                     ElseIf .Columns(col).Name = "yyyy" Then
                                         y = dat
                                     ElseIf .Columns(col).Name = "mm" Then
@@ -582,14 +687,52 @@
                                         If IsNumeric(hd) Then
                                             'h = hd
                                             dttime = y & "-" & m & "-" & d & " " & hd & ":00"
-                                            flg = ""
-                                            If IsNumeric(dat) Then
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                Get_Value_Flag(cod, dat, flg)
+
+                                            If hd = 24 Then
+                                                hd = "00"
+                                                dttime = y & "-" & m & "-" & d & " " & hd & ":00"
+                                                nextDay = DateAdd("d", 1, dttime)
+                                                dttime = DateAndTime.Year(nextDay) & "-" & DateAndTime.Month(nextDay) & "-" & DateAndTime.Day(nextDay) & " " & hd & ":00"
                                             End If
-                                            If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
+
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+
+                                                If IsDate(dttime) Then
+                                                    If chkUTC.Checked Then
+                                                        UTC_dt = UTC_Convert(dttime)
+                                                        If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    Else
+                                                        If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    End If
+
+                                                    'If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
+                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Refresh()
+                                                    col = col + 1
+                                                End If
+                                                Continue For
+                                                End If
+
+                                                flg = ""
+                                                If IsNumeric(dat) Then
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    Get_Value_Flag(cod, dat, flg)
+                                                End If
+                                                If Station_Element(st, cod) Then
+                                                If IsDate(dttime) Then
+
+                                                    If chkUTC.Checked Then
+                                                        UTC_dt = UTC_Convert(dttime)
+                                                        If Not Add_Record(st, cod, UTC_dt, dat, flg, acquisitiontype, lvl) Then Exit For
+                                                    Else
+                                                        If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For
+                                                    End If
+
+                                                    'If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype, lvl) Then Exit For 'Sub
+                                                End If
+
                                             End If
                                         End If
                                         End If ' Last DataGridView which is equivalent to End data columns 
@@ -660,6 +803,18 @@
                                         If IsDate(dttim) Then
 
                                             dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
+
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+
+                                                If IsDate(dttim) Then
+                                                    If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
+                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Refresh()
+                                                    col = col + 1
+                                                End If
+                                                Continue For
+                                            End If
 
                                             flg = ""
                                             If IsNumeric(dat) Then
@@ -749,6 +904,18 @@
                                 If IsDate(dttim) Then
                                     dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
 
+                                    ' Check for missing flag data values 
+                                    If dat = txtMissingFlag.Text Then
+
+                                        If IsDate(dttim) Then
+                                            If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
+                                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                            lblRecords.Refresh()
+                                            col = col + 1
+                                        End If
+                                        Continue For
+                                    End If
+
                                     If Station_Element(st, cod) Then
                                         If Not Add_Record(st, cod, dttim, dat, flg, acquisitiontype) Then Exit For
                                     End If
@@ -772,7 +939,7 @@
     End Sub
 
     Sub Load_ColumnElems()
-        Dim st, cod, y, m, d, h, dt_tm, hd, dat, dttcom, flg As String
+        Dim st, cod, y, m, d, h, dt_tm, hd, dat, dttcom, flg, lvl As String
         Dim acquisitiontype As Integer
 
         Try
@@ -788,11 +955,14 @@
                         If MyReader.LineNumber > Val(txtStartRow.Text) Then
 
                             st = txtStn.Text
-                            h = txtObsHour.Text
+                            h = Val(txtObsHour.Text)
                             cod = txtElmCode.Text
                             acquisitiontype = 6
                             dttcom = 0
                             col = 0
+                            lvl = "surface"
+                            dt_tm = ""
+
                             For Each currentField In currentRow
                                 hd = DataGridView1.Columns(col).Name
                                 dat = currentField
@@ -800,6 +970,10 @@
                                     If col < .ColumnCount Then
                                         If .Columns(col).Name = "station_id" Then ' Station column found
                                             st = dat
+                                        ElseIf .Columns(col).Name = "date_time" Then  ' Year column found
+                                            dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & DateAndTime.Hour(dat) & ":" & DateAndTime.Minute(dat) & ":" & DateAndTime.Second(dat)
+                                        ElseIf .Columns(col).Name = "date" Then  ' Year column found
+                                            dt_tm = DateAndTime.Year(dat) & "-" & DateAndTime.Month(dat) & "-" & DateAndTime.Day(dat) & " " & h & ":00:00"
                                         ElseIf .Columns(col).Name = "yyyy" Then  ' Year column found
                                             y = dat
                                             dttcom = dttcom + 1
@@ -811,6 +985,8 @@
                                             dttcom = dttcom + 1
                                         ElseIf .Columns(col).Name = "hh" Then ' Hour column found
                                             h = dat
+                                        ElseIf .Columns(col).Name = "level" Then ' Hour column found
+                                            lvl = dat
                                         ElseIf .Columns(col).Name = "NA" Then ' Not Required
                                             'Column labeled NA will be skipped
                                         Else
@@ -820,31 +996,43 @@
                                             ' Days For Monthly accumulated data if any
                                             If optMonthly.Checked = True Then d = DateTime.DaysInMonth(y, m)
 
-
-                                            If dttcom <> 3 And optMonthly.Checked = False Then
-                                                MsgBox("Column headers yyyy, mm, dd Not found")
-                                                Exit Sub
-                                            Else 'compute datetime value
-                                                dt_tm = y & "-" & m & "-" & d & " " & h & ":00:00"
+                                            If Not IsDate(dt_tm) Then
+                                                If dttcom <> 3 And optMonthly.Checked = False Then
+                                                    MsgBox("Column headers yyyy, mm, dd Not found")
+                                                    Exit Sub
+                                                Else 'compute datetime value
+                                                    dt_tm = y & "-" & m & "-" & d & " " & h & ":00:00"
+                                                End If
                                             End If
 
-                                            ' Process data
-                                            cod = hd
-                                            dat = currentField
-                                            flg = ""
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+                                                    If IsDate(dt_tm) Then
+                                                        If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
+                                                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                        lblRecords.Refresh()
+                                                        col = col + 1
+                                                    End If
+                                                    Continue For
+                                                End If
 
-                                            If IsNumeric(dat) Then
-                                                prd = 0
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                Get_Value_Flag(cod, dat, flg)
-                                            End If
+                                                ' Process data
+                                                cod = hd
+                                                dat = currentField
+                                                flg = ""
 
-                                            ' Process Dekadal data if any
-                                            If optDekadal.Checked = True Then
-                                                cprd = GetDekadPeriod(dt_tm)
-                                                If IsNumeric(dat) Then flg = "C"
-                                            End If
+                                                If IsNumeric(dat) Then
+                                                    prd = 0
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    Get_Value_Flag(cod, dat, flg)
+                                                End If
+
+                                                ' Process Dekadal data if any
+                                                If optDekadal.Checked = True Then
+                                                    cprd = GetDekadPeriod(dt_tm)
+                                                    If IsNumeric(dat) Then flg = "C"
+                                                End If
 
                                             ' Period and Flag Days For Monthly accumulated data if any
                                             If optMonthly.Checked = True Then
@@ -852,9 +1040,17 @@
                                                 If IsNumeric(dat) Then flg = "C"
                                             End If
 
-                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype)
+                                            ''MsgBox(dt_tm & " " & DateAdd("h", -1 * Val(txtTdiff.Text), dt_tm))
+                                            'If chkUTC.Checked Then
+                                            '    UTC_dt = UTC_Convert(dt_tm)
+                                            '    If Station_Element(st, cod) Then Add_Record(st, cod, UTC_dt, dat, flg, acquisitiontype, lvl)
+                                            'Else
+                                            '    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
+                                            'End If
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, dat, flg, acquisitiontype, lvl)
+
                                         End If
-                                    End If
+                                        End If
                                 End With
 
                                 ' Show upload progress
@@ -874,7 +1070,7 @@
 
     Sub Load_CLICOM(typ As String)
         Dim col, acquisitiontype As Integer
-        Dim st, cod, dt, tm, dttime, hd, dat, flg As String
+        Dim st, cod, dt, tm, dttime, hd, obsv, dat, flg As String
         Dim maxrows As Long
 
         ' Populate Gridview with column headers
@@ -927,7 +1123,7 @@
                         col = 0
                         st = txtStn.Text
                         tm = txtObsHour.Text
-                        flg = ""
+                        'flg = ""
                         acquisitiontype = 2
 
                         For Each currentField In currentRow
@@ -946,11 +1142,14 @@
                                     Else ' Data or Flag column encountered
 
                                         If IsNumeric(hd) Then ' Data column only
-
+                                            obsv = dat
                                             ' Construct the datetime string according to CLICOM data type
                                             Select Case typ
                                                 Case "daily"
-                                                    dttime = dt & "-" & hd & " " & txtObsHour.Text & ":00"
+
+                                                    'dttime = dt & "-" & hd & " " & txtObsHour.Text & ":00"
+
+                                                    dttime = Strings.Left(dt, 4) & "-" & Strings.Right(dt, 2) & "-" & hd & " " & txtObsHour.Text & ":00"
                                                 Case "synop"
                                                     dttime = dt & " " & hd & ":00"
                                                 Case "hourly"
@@ -959,15 +1158,17 @@
 
                                             If IsNumeric(dat) Then
                                                 If dat = -99999 Then
-                                                    dat = ""
-                                                    flg = "M"
+                                                    obsv = ""
                                                 Else
-                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                                    flg = ""
+                                                    If chkScale.Checked = True Then Scale_Data(cod, obsv)
                                                 End If
                                             End If
-                                            If Station_Element(st, cod) And IsDate(dttime) Then ' Exit For
-                                                If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For
+                                        Else
+                                            If hd = "FLAG" Then
+                                                flg = dat
+                                                If Station_Element(st, cod) And IsDate(dttime) Then ' Exit For
+                                                    If Not Add_Record(st, cod, dttime, obsv, flg, acquisitiontype) Then Exit For
+                                                End If
                                             End If
                                         End If
                                     End If
@@ -979,11 +1180,8 @@
                         lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text
                         lblRecords.Refresh()
                     End If
-
                 Loop
-
             End Using
-
         Catch ex As Exception
             If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         End Try
@@ -1034,21 +1232,33 @@
                                         If IsNumeric(hd) Then
                                             d = DateTime.DaysInMonth(y, hd)
                                             dttime = y & "-" & hd & "-" & d & " " & h & ":00"
-                                            cprd = d
-                                            flg = "C"
 
-                                            If IsNumeric(dat) Then
-                                                'prd = 0 ' initialize data period counter
-                                                If chkScale.Checked = True Then Scale_Data(cod, dat)
-                                            Else
-                                                Get_Value_Flag(cod, dat, flg)
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+                                                If IsDate(dttime) Then
+                                                    If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype) Then Exit For
+                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Refresh()
+                                                    col = col + 1
+                                                End If
+                                                Continue For
                                             End If
 
-                                            If Station_Element(st, cod) Then
-                                                If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
+                                                cprd = d
+                                                flg = "C"
+
+                                                If IsNumeric(dat) Then
+                                                    'prd = 0 ' initialize data period counter
+                                                    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                Else
+                                                    Get_Value_Flag(cod, dat, flg)
+                                                End If
+
+                                                If Station_Element(st, cod) Then
+                                                    If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
+                                                End If
                                             End If
                                         End If
-                                    End If
                                     ' Show upload progress
                                     lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
@@ -1070,31 +1280,34 @@
     Sub Get_Value_Flag(code As String, ByRef dat As String, ByRef flg As String)
         'MsgBox("Flag")
         Dim datstr, flgchr As String
+        Try
 
-        If Len(dat) = 0 Then
-            dat = ""
-            flg = "M"
-            prd = prd + 1 ' Update observation period counter
-        Else
-            datstr = Strings.Left(dat, Len(dat) - 1)
-            flgchr = Strings.Right(dat, 1)
-            If Not IsNumeric(datstr) Or IsNumeric(flgchr) Then
+            If Len(dat) = 0 Then
                 dat = ""
                 flg = "M"
+                prd = prd + 1 ' Update observation period counter
             Else
-                If Strings.UCase(flgchr) = "C" Then
-                    'Compute Total period for accummulated data
-                    cprd = prd + 1
-                    prd = 0
-                    flgchr = ""
+                datstr = Strings.Left(dat, Len(dat) - 1)
+                flgchr = Strings.Right(dat, 1)
+                If Not IsNumeric(datstr) Or IsNumeric(flgchr) Then
+                    dat = ""
+                    flg = "M"
+                Else
+                    If Strings.UCase(flgchr) = "C" Then
+                        'Compute Total period for accummulated data
+                        cprd = prd + 1
+                        prd = 0
+                        flgchr = ""
+                    End If
+
+                    dat = datstr
+                    If chkScale.Checked = True Then Scale_Data(code, dat)
+                    flg = Strings.UCase(flgchr)
                 End If
-
-                dat = datstr
-                If chkScale.Checked = True Then Scale_Data(code, dat)
-                flg = Strings.UCase(flgchr)
             End If
-        End If
-
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
     'Function Get_Station(rw As Long) As String
@@ -1197,13 +1410,13 @@
     End Sub
 
 
-    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String, acqTyp As Integer) As Boolean
+    Function Add_Record(stn As String, code As String, datetime As String, obsVal As String, flg As String, acqTyp As Integer, Optional levels As String = "surface") As Boolean
         Dim dat As String
 
         Try
             If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
 
-            dat = stn & ", " & code & ", " & datetime & ", surface ," & obsVal & ", " & flg & ", " & cprd & ", " & acqTyp
+            dat = stn & ", " & code & ", " & datetime & ", " & levels & " ," & obsVal & ", " & flg & ", " & cprd & ", " & acqTyp
 
             Print(101, dat)
             PrintLine(101)
@@ -1312,8 +1525,18 @@
 
     End Sub
 
-    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
+    Private Sub chkUpperAir_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpperAir.CheckedChanged
+        If chkUpperAir.Checked Then List_UpperAirFields()
+    End Sub
 
+    Private Sub chkUTC_CheckedChanged(sender As Object, e As EventArgs) Handles chkUTC.CheckedChanged
+        If chkUTC.Checked Then
+            txtTdiff.Visible = True
+            lblDiff.Visible = True
+        Else
+            txtTdiff.Visible = False
+            lblDiff.Visible = False
+        End If
     End Sub
 
     Function Station_Element(stn_id As String, elm_code As String) As Boolean
@@ -1425,7 +1648,7 @@
 
     End Function
     Private Sub cmdSaveSpecs_Click(sender As Object, e As EventArgs) Handles cmdSaveSpecs.Click
-        Dim hdr, schemafile, dlt, strw, obshr, scal, id, code As String
+        Dim hdr, schemafile, dlt, strw, obshr, scal, id, code, flg As String
         'Dim configFilename As String = Application.StartupPath & "\schema.sch"
         Try
             dlgSaveSchema.Filter = "Schema file|*.sch"
@@ -1455,7 +1678,8 @@
             scal = chkScale.Checked
             id = txtStn.Text
             code = txtElmCode.Text
-            PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code)
+            flg = txtMissingFlag.Text
+            PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code & "," & flg)
         Catch ex As Exception
             FileClose(100)
         End Try
@@ -1464,7 +1688,7 @@
 
     Private Sub cmdLoadSpecs_Click(sender As Object, e As EventArgs) Handles cmdLoadSpecs.Click
         Dim sch, hdr() As String
-        dlgOpenImportFile.Filter = "Schema Files|*.sch"
+        dlgOpenImportFile.Filter = "Schema Files|*.sch;*.*"
         dlgOpenImportFile.Title = "Schema File"
         dlgOpenImportFile.ShowDialog()
         sch = dlgOpenImportFile.FileName
@@ -1508,6 +1732,12 @@
                     chkScale.Checked = hdr(3)
                     txtStn.Text = hdr(4)
                     txtElmCode.Text = hdr(5)
+                    ' The following code added to cater for the added object for missing data flag text box
+                    If hdr.Count > 6 Then
+                        txtMissingFlag.Text = hdr(6)
+                    Else
+                        txtMissingFlag.Text = ""
+                    End If
                 End If
             End Using
         Catch ex As Exception
@@ -1552,5 +1782,22 @@
 
     Private Sub frmImportDaily_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Len(recCommit.RegkeyValue("key01")) <> 0 Then txtObsHour.Text = recCommit.RegkeyValue("key01")
+
+        If Text = "CLICOM Daily" Or Text = "CLICOM Synop" Or Text = "CLICOM Hourly" Then
+            lblMissingFlag.Visible = False
+            txtMissingFlag.Visible = False
+        End If
     End Sub
+
+    Function UTC_Convert(dttime As String) As String
+        Dim UTC_dt As String
+        Try
+
+            UTC_dt = DateAdd("h", -1 * Val(txtTdiff.Text), dttime)
+            UTC_dt = DateAndTime.Year(UTC_dt) & "-" & DateAndTime.Month(UTC_dt) & "-" & DateAndTime.Day(UTC_dt) & " " & DateAndTime.Hour(UTC_dt) & ":" & DateAndTime.Minute(UTC_dt) & ":" & DateAndTime.Second(UTC_dt)
+            Return UTC_dt
+        Catch ex As Exception
+            Return dttime
+        End Try
+    End Function
 End Class

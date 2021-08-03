@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -92,11 +92,23 @@
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsTableFilter.vb" />
+    <Compile Include="Component1.Designer.vb">
+      <DependentUpon>Component1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Component1.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="dataEntryGlobalRoutines.vb" />
     <Compile Include="formAgro1.Designer.vb">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </Compile>
     <Compile Include="formAgro1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formSynoptic2.Designer.vb">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formSynoptic2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formSynopticCaribbean.Designer.vb">
@@ -109,6 +121,24 @@
       <DependentUpon>frmCharts.vb</DependentUpon>
     </Compile>
     <Compile Include="frmCharts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCLIMAT.Designer.vb">
+      <DependentUpon>frmCLIMAT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCLIMAT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClimatSettings.Designer.vb">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmClimatSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateEntryForm.Designer.vb">
+      <DependentUpon>frmCreateEntryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateEntryForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmDatabaseConnections.Designer.vb">
@@ -127,6 +157,18 @@
       <DependentUpon>frmEntryForms.vb</DependentUpon>
     </Compile>
     <Compile Include="frmEntryForms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFormUpload.Designer.vb">
+      <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFormUpload.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventoryChart.designer.vb">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventoryChart.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewAgrometKenya.Designer.vb">
@@ -798,11 +840,23 @@
     <EmbeddedResource Include="formAgro1.resx">
       <DependentUpon>formAgro1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formSynoptic2.resx">
+      <DependentUpon>formSynoptic2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formSynopticCaribbean.resx">
       <DependentUpon>formSynopticCaribbean.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCharts.resx">
       <DependentUpon>frmCharts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCLIMAT.resx">
+      <DependentUpon>frmCLIMAT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClimatSettings.resx">
+      <DependentUpon>frmClimatSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateEntryForm.resx">
+      <DependentUpon>frmCreateEntryForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDatabaseConnections.resx">
       <DependentUpon>frmDatabaseConnections.vb</DependentUpon>
@@ -812,6 +866,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEntryForms.resx">
       <DependentUpon>frmEntryForms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFormUpload.resx">
+      <DependentUpon>frmFormUpload.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventoryChart.resx">
+      <DependentUpon>frmInventoryChart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewAgrometKenya.resx">
       <DependentUpon>frmNewAgrometKenya.vb</DependentUpon>

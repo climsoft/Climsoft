@@ -59,6 +59,15 @@
                 End If
             Next
 
+            ' Select the default Template
+            For i = 0 To Kount - 1
+                If ds.Tables("bufr_indicators").Rows(i).Item("defaultTemplate") = 1 Then
+                    cboTemplate.Text = ds.Tables("bufr_indicators").Rows(i).Item("Tmplate")
+                    Exit For
+                End If
+
+            Next
+
             ' Populate with MSS details
             sql = "SELECT * FROM aws_mss"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
@@ -134,7 +143,7 @@
 
     Private Sub TabProcessing_Click(sender As Object, e As EventArgs) Handles TabProcessing.Click
         If TabProcessing.SelectedTab.Name = "TabSettings" Then
-            PopulateForms()
+            'PopulateForms()
         End If
 
     End Sub
@@ -244,7 +253,7 @@
             End If
 
             tmplate = cboTemplate.Text
-            sql = "DROP TABLE IF EXISTS bufr_crex_data; CREATE TABLE bufr_crex_data AS SELECT " & tmplate & ".nos, " & tmplate & ".Bufr_Template, " & tmplate & ".Crex_Template, " & tmplate & ".Sequence_Descriptor1," & tmplate & ".Sequence_Descriptor0," & tmplate & ".Bufr_Element, " & tmplate & ".Crex_Element, " & tmplate & ".Climsoft_Element, " & tmplate & ".Element_Name, bufr_crex_master.Crex_Unit, bufr_crex_master.Crex_Scale, bufr_crex_master.Crex_DataWidth, bufr_crex_master.Bufr_Unit, bufr_crex_master.Bufr_Scale, bufr_crex_master.Bufr_RefValue, bufr_crex_master.Bufr_DataWidth_Bits, " & tmplate & ".selected, bufr_crex_master.Observation, bufr_crex_master.Crex_Data, bufr_crex_master.Bufr_Data FROM " & tmplate & " INNER JOIN bufr_crex_master ON " & tmplate & ".Bufr_Element = bufr_crex_master.Bufr_FXY ORDER BY " & tmplate & ".nos;"
+            sql = "DROP TABLE IF EXISTS bufr_crex_data; CREATE TABLE bufr_crex_data AS SELECT " & tmplate & ".nos, " & tmplate & ".Bufr_Template, " & tmplate & ".Crex_Template, " & tmplate & ".Sequence_Descriptor1," & tmplate & ".Sequence_Descriptor0," & tmplate & ".Bufr_Element, " & tmplate & ".Crex_Element, " & tmplate & ".Climsoft_Element, " & tmplate & ".Element_Name, bufr_crex_master.Crex_Unit, bufr_crex_master.Crex_Scale, bufr_crex_master.Crex_DataWidth, bufr_crex_master.Bufr_Unit, bufr_crex_master.Bufr_Scale, bufr_crex_master.Bufr_RefValue, bufr_crex_master.Bufr_DataWidth_Bits, " & tmplate & ".selected, bufr_crex_master.Observation, bufr_crex_master.Crex_Data, bufr_crex_master.Bufr_Data FROM " & tmplate & " INNER JOIN bufr_crex_master ON " & tmplate & ".Bufr_Element = bufr_crex_master.Bufr_FXY ORDER BY " & tmplate & ".Nos;"
 
             ' Create query Command for creating a new table 'bufr_crex_data'
             dbConnectionString = frmLogin.txtusrpwd.Text
@@ -255,10 +264,11 @@
             'Execute query
             objCmd.ExecuteNonQuery()
 
-
             Bufr_Crex_Initialize(dbconn)  'Set all values to missing
 
             'Set data set
+            sql = "Select * from bufr_crex_data"
+
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
             ' Set to unlimited timeout period
             da.SelectCommand.CommandTimeout = 0
@@ -267,7 +277,6 @@
             da.Fill(ds, "bufr_crex_data")
 
             ' Get the number of subsets
-
             Dim substs As Integer
             Dim subsets, sss, fl2 As String
 
@@ -277,25 +286,33 @@
             'MsgBox("Total subsets = " & substs & " > " & subsets)
             sss = subsets 'Format(substs, "000")
 
-            If Not IO.Directory.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data") Then
-                IO.Directory.CreateDirectory(System.IO.Path.GetFullPath(Application.StartupPath) & "\data")
+            ' Create folder for output files if not there
+            If Not IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data") Then
+                IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data")
             End If
 
-            fl2 = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_subsets.txt"
-
+            'Create file for subset's data
+            fl2 = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.txt"
             FileOpen(20, fl2, OpenMode.Output)
+
+            'Create file to output observations and their encoded binary data
+            descriptors_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv"
+            FileOpen(111, descriptors_file, OpenMode.Output)
+
+            FileClose(111)
 
             'Loop through the subsets
             Data_Description_Section = ""
+            'MsgBox(cboStation.Items.Count)
             For i = 0 To cboStation.Items.Count - 1
-
                 ' Set the replicated elements according to observations per subset
                 Set_Replications(dbconn, cboStation.Items(i))
-
                 Update_Station_Details(dbconn, cboStation.Items(i))
                 Update_Instruments_Details(dbconn, cboStation.Items(i))
                 Update_Time_Periods(dbconn)
+                'MsgBox(4)
                 Update_Observation_data(dbconn, cboStation.Items(i), txtYear.Text, cboMonth.Text, cboDay.Text, cboHour.Text)
+                'MsgBox("Observation Data Updated")
                 Encode_Bufr(dbconn)
                 Output_Data_Code(dbconn, i + 1)
                 Data_Description_Section = Data_Description_Section & Bufr_Section4(dbconn)
@@ -316,430 +333,17 @@
             'MsgBox(msg_header & " " & msg_file)
 
             If Int(sss) > 0 Then
-                If Not BUFR_Code(dbconn, Data_Description_Section, substs) Then
+                If Not BUFR_Code(dbconn, Data_Description_Section, sss) Then
                     MsgBox("Encoding Error")
                 End If
             End If
 
-
-
-            '' Update with entered observations for each subset
-
-
-            ''            sql = "SELECT lookup_station.id, lookup_station.station_name AS observation, Left([id_alias],2) AS block, Right([id_alias],3) AS [number], IIf([qualifier]=""AUTOMATIC"",2 Or [qualifier]<>""AUTOMATIC"",1) AS type, lookup_location.latitude AS lat, lookup_location.longitude AS lon, lookup_location.elevation AS height FROM (lookup_station INNER JOIN lookup_stationid_alias ON lookup_station.id = lookup_stationid_alias.refers_to) INNER JOIN lookup_location ON lookup_station.id = lookup_location.occupied_by " & _
-            ''                  "WHERE (((lookup_station.station_name)=""" & rs.Fields("station_name") & """) AND ((lookup_stationid_alias.belongs_to)=""wmo_id""));"
-
-            ''            If clicom.query_exist("qry_crex_location", dbase) Then db.QueryDefs.Delete("qry_crex_location")
-            ''            qry = db.CreateQueryDef("qry_crex_location", sql)
-
-            ''            ' Set the recordset to the location query
-            ''            rsbx1 = db.OpenRecordset("qry_crex_location")
-
-            ''            'The following statement helps to skip a record without location. But it has been found to work similarly with resume next on empty record error
-            ''            'If rsbx1.RecordCount = 0 Then GoTo NextSubset
-
-            ''            ' Determine whether it a is sysnoptic station
-            ''            If IsNull(rsbx1.Fields("block")) Then
-            ''                MsgBox("Can't Code. WMO Station Number not found")
-            ''                Exit Sub
-            ''                ' If MsgBox("Not a Synoptic station. Continue?", vbYesNo, "Synop Crex") = vbNo Then Exit Sub
-            ''            End If
-
-
-            ''            'Update Data with the synop_crex form
-            ''            With rsbx
-            ''                .MoveFirst()
-            ''                Do While .EOF = False
-            ''                    ' Update Station Name, Observation times and Instrument parameters from the synop interface form
-            ''                    .Edit()
-            ''                    Select Case .Fields("Climsoft_Element")
-            ''                        '        Case "station_WMO_bloc"
-            ''                        '           .Fields("Observation") = rsbx1.Fields("bloc")
-            ''                        '        Case "station_WMO_number"
-            ''                        '           .Fields("Observation") = rsbx1.Fields("number")
-            ''                        Case "station_name"
-            ''                            .Fields("Observation") = rs.Fields("station_name") 'txtstation
-            ''                        Case "datetime_year"
-            ''                            .Fields("observation") = Format(rs.Fields("yyyy"), "0000") 'Format(txtyear, "0000")
-            ''                        Case "datetime_month"
-            ''                            .Fields("observation") = Format(rs.Fields("mm"), "00") 'Format(txtmonth, "00")
-            ''                        Case "datetime_day"
-            ''                            .Fields("observation") = Format(rs.Fields("dd"), "00") 'Format(txtday, "00")
-            ''                        Case "datetime_hour"
-            ''                            .Fields("observation") = Format(rs.Fields("hh"), "00") 'Format(txthour, "00")
-            ''                        Case "datetime_minute"
-            ''                            .Fields("observation") = Format(txtminute, "00")
-            ''                            '        Case "5"
-            ''                        Case "Temp_SH" ' Sensor height for temperature measurement
-            ''                            If txtth = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level")  'txtth
-            ''                            End If
-            ''                        Case "Vis_SH" ' Sensor height for visibility measurement
-            ''                            If txtvh = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "VISIB_I", "instal_level") 'txtvh
-            ''                            End If
-            ''                        Case "R24_SH" ' Sensor height for precipitation measurement
-            ''                            If txtrh = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "PRECIP_I", "instal_level") 'txtrh
-            ''                            End If
-            ''                        Case "xt_SH" ' Sensor height for extreme temperature measurement
-            ''                            If txtth = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "TEMP_I", "instal_level") 'txtth
-            ''                            End If
-            ''                        Case "w_SH" ' Sensor height for wind measurement
-            ''                            If txtwh = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "WIND_I", "instal_level") 'txtwh
-            ''                            End If
-            ''                        Case "ww_TP" ' Time Period for Past and Present Weather
-            ''                            If CLng(Hour(txthour)) Mod 6 = 0 Then
-            ''                                .Fields("observation") = -6
-            ''                            Else
-            ''                                .Fields("observation") = -3
-            ''                            End If
-            ''                        Case "tR_TP" ' Time Period for precipitation replication 1
-            ''                            .Fields("observation") = Rain_Diplacement(CInt(Left(txthour, 2))) '-24
-            ''                        Case "tr_TP"  ' Time Period for precipitation replication 2
-            ''                            .Fields("observation") = -3
-            ''                        Case "evap_TP" ' Time Period for evaporation
-            ''                            .Fields("observation") = -24
-            ''                        Case "evap_I"
-            ''                            .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "EVAP_I", "instrument_type") 'txtit
-            ''                        Case "SSS_TP" ' Time Period for sunshine replication 1
-            ''                            .Fields("observation") = -24
-            ''                        Case "SS_TP" ' Time Period for sunshine replication 2
-            ''                            .Fields("observation") = -1
-            ''                        Case "RR_SH" ' Sensor height for precipitation for the replications
-            ''                            If txtrh = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "PRECIP_I", "instal_level") 'txtrh
-            ''                            End If
-            ''                            '        Case "w_SH"
-            ''                            '           .Fields("observation") = txtwh
-            ''                        Case "w_I"
-            ''                            .Fields("observation") = Get_Instrument("station_instrument", rs.Fields("station_id"), "WIND_I", "instrument_type") ' txtwi  Get_Instrument("station_instrument", rs, "BARO_I", "instal_level")
-            ''                        Case "xt_TP" ' Time Period for maximum temperature
-            ''                            .Fields("observation") = -12
-            ''                        Case "xt0_TP" ' Time Period for maximum temperature ending at nominal time of the report
-            ''                            .Fields("observation") = 0
-            ''                        Case "nt_TP" ' Time Period for minimum teperature
-            ''                            .Fields("observation") = -12
-            ''                        Case "nt0_TP" ' Time Period for minimum teperature ending at nominal time of the report
-            ''                            .Fields("observation") = -0
-            ''                        Case "w_TS" ' Time Significance for wind
-            ''                            .Fields("observation") = 2
-            ''                        Case "w_TP" ' Time Period for wind
-            ''                            .Fields("observation") = -10
-            ''                        Case "evap_SH" ' Sensor height for Evaporation/Evatranspiration
-            ''                            If txtrh = "" Then
-            ''                                .Fields("observation") = "/"
-            ''                            Else
-            ''                                .Fields("observation") = txtrh
-            ''                            End If
-            ''                        Case "rad1_TP"
-            ''                            .Fields("observation") = -1
-            ''                        Case "rad2_TP"
-            ''                            .Fields("observation") = -24
-            ''                        Case "tempc_t" ' Time Period for Past and Present Weather
-            ''                            If CLng(Hour(txthour)) Mod 6 = 0 Then
-            ''                                .Fields("observation") = -6
-            ''                            Else
-            ''                                .Fields("observation") = -3
-            ''                            End If
-            ''                    End Select
-            ''                    .Update()
-
-            ''                    ' Update with entered observations for each subset
-            ''                    For i = 0 To rs.Fields.count - 1
-            ''                        obsv = ""
-            ''                        If rs.Fields(i).name = rsbx.Fields("Climsoft_Element") Then
-            ''                            obsv = rs.Fields(i)
-
-            ''                            ' Scaling pressure and Radiation values
-            ''                            If rs.Fields(i).name = "137" And obsv <> "" Then obsv = obsv & "000000"
-            ''                            If rs.Fields(i).name = "106" Or rs.Fields(i).name = "107" Or rs.Fields(i).name = "399" Or rs.Fields(i).name = "301" Or rs.Fields(i).name = "400" Then
-            ''                                If obsv <> "" Then
-            ''                                    obsv = CLng(rs.Fields(i)) * 100
-            ''                                End If
-            ''                            End If
-
-            ''                            .Edit()
-            ''                            .Fields("observation") = obsv
-            ''                            .Update()
-            ''                        End If
-            ''Nexxt:
-            ''                    Next i
-
-            ''                    .MoveNext()
-            ''                Loop
-
-            ''                ' Compute cloud layers replication factor
-            ''                rep1 = 0
-            ''                rp2 = 0
-            ''                .MoveFirst()
-            ''                Do While .EOF = False
-            ''                    Select Case .Fields("Climsoft_Element")
-            ''                        ' Cloud layers above station level
-            ''                        Case "116"  'Cloud amount; first layer present
-            ''                            If .Fields("observation") <> "" Then rep1 = rep1 + 1
-            ''                        Case "120"  'Cloud amount; second second layer present
-            ''                            If .Fields("observation") <> "" Then rep1 = rep1 + 1
-            ''                        Case "124"  'Cloud amount; third layer present
-            ''                            If .Fields("observation") <> "" Then rep1 = rep1 + 1
-            ''                        Case "128"  'Cloud amount; fourth layer present
-            ''                            If .Fields("observation") <> "" Then rep1 = rep1 + 1
-
-            ''                            ' Cloud layers below station level
-            ''                        Case "612"  'Cloud amount; first layer present
-            ''                            If .Fields("observation") <> "" Then rep2 = rep2 + 1
-            ''                        Case "622"  'Cloud amount; second second layer present
-            ''                            If .Fields("observation") <> "" Then rep2 = rep2 + 1
-            ''                        Case "632"  'Cloud amount; third layer present
-            ''                            If .Fields("observation") <> "" Then rep2 = rep2 + 1
-            ''                        Case "642"  'Cloud amount; fourth layer present
-            ''                            If .Fields("observation") <> "" Then rep2 = rep2 + 1
-            ''                    End Select
-            ''                    .MoveNext()
-            ''                Loop
-
-            ''                ' Update station location, elevation, pressure change characteristic and clouds replication factors
-            ''                Dim vertical_sig As String
-            ''                .MoveFirst()
-            ''                rsbx1.MoveFirst()
-            ''                Do While .EOF = False
-            ''                    vertical_sig = ""
-            ''                    .Edit()
-            ''                    Select Case .Fields("Climsoft_Element")
-            ''                        Case "station_WMO_bloc"
-            ''                            .Fields("observation") = rsbx1.Fields("block")
-            ''                        Case "station_WMO_number"
-            ''                            .Fields("observation") = rsbx1.Fields("number")
-            ''                        Case "station_qualifier"
-            ''                            .Fields("observation") = rsbx1.Fields("type")
-            ''                        Case "station_deglatitude"
-            ''                            .Fields("observation") = rsbx1.Fields("lat")
-            ''                        Case "station_deglongitude"
-            ''                            .Fields("observation") = rsbx1.Fields("lon")
-            ''                        Case "station_elevation"
-            ''                            .Fields("observation") = rsbx1.Fields("height")
-            ''                        Case "station_pressure_height"
-            ''                            .Fields("observation") = Val(rsbx1.Fields("height")) + Val(Get_Instrument("station_instrument", rs.Fields("station_id"), "BARO_I", "instal_level")) 'CInt(txtbr)
-            ''                        Case "cloud_rep1"
-            ''                            .Fields("observation") = rep1
-            ''                        Case "cloud_rep2"
-            ''                            .Fields("observation") = rep2
-            ''                        Case "532"
-            ''                            If Not IsNull(.Fields("observation")) Then .Fields("observation") = CInt(.Fields("observation")) * 60 'Sunshine minutes
-            ''                        Case "114"
-            ''                            If Not IsNull(.Fields("observation")) Then .Fields("observation") = Val(.Fields("observation")) * 12.5 'Total Cloud Cover
-            ''                    End Select
-            ''                    .Update()
-            ''                    .MoveNext()
-            ''                Loop
-
-            ''                ' Format for Trace rainfall if it exist
-
-            ''                ' Trace for 24 Hour Precipation
-            ''                .MoveFirst()
-            ''                Do While .EOF = False
-            ''                    If .Fields("Climsoft_Element") = "5" And Trace24hr = True Then
-            ''                        .Edit()
-            ''                        .Fields("observation") = -1
-            ''                        .Update()
-            ''                    End If
-            ''                    .MoveNext()
-            ''                Loop
-
-            ''                ' Trace for 3 Hour Precipation
-            ''                .MoveFirst()
-            ''                Do While .EOF = False
-            ''                    If .Fields("Climsoft_Element") = "174" And Trace3hr = True Then
-            ''                        .Edit()
-            ''                        .Fields("observation") = -1
-            ''                        .Update()
-            ''                    End If
-            ''                    .MoveNext()
-            ''                Loop
-
-            ''                ' Update Precipitation characteristic
-            ''                Dim ChrR As String
-
-            ''                ChrR = Precip_Char(rsbx)
-            ''                .MoveFirst()
-            ''                Do While .EOF = False
-            ''                    .Edit()
-            ''                    If .Fields("Climsoft_Element") = "505" Then
-            ''                        .Fields("observation") = ChrR
-            ''                        .Update()
-            ''                    ElseIf .Fields("Climsoft_Element") = "506" Then
-            ''                        .Fields("observation") = 9
-            ''                        .Update()
-            ''                    End If
-            ''                    .MoveNext()
-            ''                Loop
-
-            ' '' Encode data ////////////////////////////////////////////////
-
-            ''.MoveFirst()
-
-            ''Dim miss As Boolean
-            ''Dim dats As String
-
-
-            ''Do While .EOF = False
-            ''    If .Fields("observation") <> "" Then
-            ''        .Edit()
-            '        .Fields("Crex_Data") = Crex_Data(.Fields("Crex_Scale"), .Fields("Crex_DataWidth"), .Fields("Observation"), ScaleFactor(.Fields("Climsoft_Element"), db))
-            ''        .Fields("Bufr_Data") = Bufr_Data(.Fields("Bufr_Unit"), .Fields("Bufr_Scale"), .Fields("Bufr_RefValue"), .Fields("Bufr_DataWidth_Bits"), .Fields("Observation"), ScaleFactor(.Fields("Climsoft_Element"), db), db)
-            ''        .Update()
-            ''    End If
-            ''    .MoveNext()
-            ''Loop
-
-            ''                ' Convert Special Cloud data to CREX code
-            ''                .MoveFirst()
-
-            ''                Dim N As String
-            ''                Dim cl As String
-            ''                Dim CM As String
-            ''                Dim CH As String
-
-            ''                Do While .EOF = False
-            ''                    .Edit()
-            ''                    Select Case .Fields("Climsoft_Element")
-            ''                        '    Case "114" ' N
-            ''                        '      If .Fields("observation") <> "" Then N = .Fields("observation")
-            ''                        '      If .Fields("observation") <> "/" And .Fields("observation") <> "" Then .Fields("Crex_Data") = Crex_Data(.Fields("Crex_Scale"), .Fields("Crex_DataWidth"), CDbl(.Fields("observation")) * 12.5, ScaleFactor(.Fields("Climsoft_Element"), db))  'val (.Fields("observation")) * 12.5
-            ''                        Case "169" 'Cloud type CL
-            ''                            If .Fields("observation") <> "" Then
-            ''                                cl = .Fields("observation")
-            ''                                If N = "0" Then
-            ''                                    cl = 30
-            ''                                ElseIf N = "9" Or N = "/" Or cl = "/" Or cl = "" Then
-            ''                                    cl = 62
-            ''                                Else 'ElseIf CH <> "/" And CH <> "" Then
-            ''                                    cl = CDbl(.Fields("observation")) ' + 30
-            ''                                End If
-            '                                .Fields("Crex_Data") = Crex_Data(.Fields("Crex_Scale"), .Fields("Crex_DataWidth"), cl, ScaleFactor(.Fields("Climsoft_Element"), db))
-            ''                                .Fields("Bufr_Data") = Bufr_Data(.Fields("Bufr_Unit"), .Fields("Bufr_Scale"), .Fields("Bufr_RefValue"), .Fields("Bufr_DataWidth_Bits"), cl, ScaleFactor(.Fields("Climsoft_Element"), db), db)
-            ''                            End If
-            ''                        Case "170" 'Cloud type CM
-            ''                            If .Fields("observation") <> "" Then
-            ''                                CM = .Fields("observation")
-            ''                                If N = "0" Then
-            ''                                    CM = 20
-            ''                                ElseIf N = "9" Or N = "/" Or CM = "/" Or CM = "" Then
-            ''                                    CM = 61
-            ''                                Else 'ElseIf CH <> "/" And CH <> "" Then
-            ''                                    CM = CDbl(.Fields("observation")) '+ 20
-            ''                                End If
-            '                                .Fields("Crex_Data") = Crex_Data(.Fields("Crex_Scale"), .Fields("Crex_DataWidth"), CM, ScaleFactor(.Fields("Climsoft_Element"), db))
-            ''                                .Fields("Bufr_Data") = Bufr_Data(.Fields("Bufr_Unit"), .Fields("Bufr_Scale"), .Fields("Bufr_RefValue"), .Fields("Bufr_DataWidth_Bits"), CM, ScaleFactor(.Fields("Climsoft_Element"), db), db)
-            ''                            End If
-            ''                        Case "171" 'Cloud type CH
-            ''                            If .Fields("observation") <> "" Then
-            ''                                CH = .Fields("observation")
-            ''                                If N = "0" Then
-            ''                                    CH = 10
-            ''                                ElseIf N = "9" Or N = "/" Or CH = "/" Or CH = "" Then
-            ''                                    CH = 60
-            ''                                Else 'ElseIf CH <> "/" And CH <> "" Then
-            ''                                    CH = CDbl(.Fields("observation")) ' + 10
-            ''                                End If
-            ''                                .Fields("Crex_Data") = Crex_Data(.Fields("Crex_Scale"), .Fields("Crex_DataWidth"), CH, ScaleFactor(.Fields("Climsoft_Element"), db))
-            ''                                .Fields("Bufr_Data") = Bufr_Data(.Fields("Bufr_Unit"), .Fields("Bufr_Scale"), .Fields("Bufr_RefValue"), .Fields("Bufr_DataWidth_Bits"), CH, ScaleFactor(.Fields("Climsoft_Element"), db), db)
-            ''                            End If
-            ''                    End Select
-            ''                    .Update()
-            ''                    .MoveNext()
-            ''                Loop
-            ''            End With
-
-            ''            ' Coded message output
-
-            'Dim message_header As String
-
-            ''            sql = "SELECT bufr_crex_data.order, bufr_crex_data.Bufr_Template, bufr_crex_data.Crex_Template, bufr_crex_data.Sequence_Descriptor1, bufr_crex_data.Sequence_Descriptor0, bufr_crex_data.Bufr_Element, bufr_crex_data.Crex_Element, bufr_crex_data.Climsoft_Element, bufr_crex_data.Element_Name, bufr_crex_data.Crex_Unit, bufr_crex_data.Crex_Scale, bufr_crex_data.Crex_DataWidth, bufr_crex_data.Bufr_Unit, bufr_crex_data.Bufr_Scale, bufr_crex_data.Bufr_RefValue, bufr_crex_data.Bufr_DataWidth_Bits, bufr_crex_data.selected, bufr_crex_data.Observation, bufr_crex_data.Crex_Data, bufr_crex_data.Bufr_Data FROM bufr_crex_data " & _
-            ''                  "WHERE ((bufr_crex_data.selected)=True) ORDER BY bufr_crex_data.order;"
-
-            ''            message_header = msg_header & " " & Format(txtday, "00") & Format(txthour, "00") & Format(txtminute, "00")  '& Format(Hour(Time) & "00") & "00" ' & Format(Minute(Time), "00")  'Format(txtday, "00") & Left(txthour, 2) & Right(txthour, 2)
-
-            ''            ' Include BBB if present
-            ''            If txtBBB <> "" Then message_header = msg_header & " " & Format(txtday, "00") & Format(txthour, "00") & Format(txtminute, "00") & " " & txtBBB '& Format(Hour(Time) & "00") & "00" ' & Format(Minute(Time), "00")  'Format(txtday, "00") & Left(txthour, 2) & Right(txthour, 2)
-
-            ''            ' Structure the output file name in format CCCCNNNNNNNN.ext
-            ''            msg_file = Right(msg_header, 4) & Format(txtday, "00") & Format(txthour, "00") & Format(txtminute, "00") & Format(txtsecond, "00")
-
-            ''            Select Case Me.Caption
-            ''                Case "CREX Synop"
-            '                    If Not CREX_Code(sql, message_header, crex_indicators, check_digit.value, substs) Then MsgBox("CREX Coding error")
-            ''                Case "BUFR Synop"
-            ''                    If Not Bufr_Section4(sql, Bufr_DataSection) Then MsgBox("Error in encoding Data Section")
-            ''            End Select
-
-
-            ''                ' Coded message output
-
-            ''                Dim message_header As String
-            ''                
-            ''                sql = "SELECT bufr_crex_data.order, bufr_crex_data.Bufr_Template, bufr_crex_data.Crex_Template, bufr_crex_data.Sequence_Descriptor1, bufr_crex_data.Sequence_Descriptor0, bufr_crex_data.Bufr_Element, bufr_crex_data.Crex_Element, bufr_crex_data.Climsoft_Element, bufr_crex_data.Element_Name, bufr_crex_data.Crex_Unit, bufr_crex_data.Crex_Scale, bufr_crex_data.Crex_DataWidth, bufr_crex_data.Bufr_Unit, bufr_crex_data.Bufr_Scale, bufr_crex_data.Bufr_RefValue, bufr_crex_data.Bufr_DataWidth_Bits, bufr_crex_data.selected, bufr_crex_data.Observation, bufr_crex_data.Crex_Data, bufr_crex_data.Bufr_Data FROM bufr_crex_data " & _
-            ''                      "WHERE ((bufr_crex_data.selected)=True) ORDER BY bufr_crex_data.order;"
-            ''                
-            ''                message_header = msg_header & " " & Format(day(Date), "00") & Format(txthour, "00") & Format(txtminute, "00") & " " & txtBBB '& Format(Hour(Time) & "00") & "00" ' & Format(Minute(Time), "00")  'Format(txtday, "00") & Left(txthour, 2) & Right(txthour, 2)
-            ''                
-            ''                Select Case Me.Caption
-            ''                 Case "CREX Synop"
-            '                    If Not CREX_Code(sql, message_header, crex_indicators, check_digit.value, substs) Then MsgBox "CREX Coding error"
-            ''                 Case "BUFR Synop"
-            ''                   If Not Bufr_Section4(sql, Bufr_DataSection) Then MsgBox "Error in encoding Data Section"
-            ''                End Select
-            ''                
-            ''NextSubset:
-            ''                rs.MoveNext()
-            ''                        Loop
-
-
-
-
-
-            '        ' Show encoded message
-            '        Select Case Me.Caption
-            '            Case "CREX Synop"
-            '                Dim msg As String
-            '                msg = ""
-            '                '   MsgBox msg_file
-            '   Open msg_file For Input As #1
-
-            '                Do While EOF(1) = False
-            '     Input #1, msg
-            '                    txt_message = txt_message & msg & Chr(13) & Chr(10)
-            '                Loop
-            '                output_file = msg_file
-            '   Close #1
-            '            Case "BUFR Synop"
-
-            '                If bufr_edition = 3 Then ' BUFR up to edition 3
-            '                    If Not BUFR_Code_ver3(sql, message_header, Me, db, Bufr_DataSection) Then MsgBox("BUFR Coding error")
-            '                Else ' BUFR up to edition 4
-            'If Not BUFR_Code(dbconn, sql, message_header, Bufr_DataSection, substs) Then MsgBox("BUFR Coding error")
-            '                End If
-            '        End Select
-
-            'Close #10
+            dbconn.Close()
 
             FileClose(20)
             MsgBox("Finished Encoding")
         Catch ex As Exception
+            dbconn.Close()
             MsgBox(ex.Message)
             Me.Cursor = Cursors.Default
             FileClose(20)
@@ -751,7 +355,9 @@
 
         ' Output expanded decsriptors into a CSV file
 
-        descriptors_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv"
+        'descriptors_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv"
+
+        descriptors_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv"
         FileOpen(2, descriptors_file, OpenMode.Append)
 
         Dim counts As Integer
@@ -797,8 +403,12 @@
         Try
 
             ' Initialize files by deleted output files used in previous sessions
-            If IO.File.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv") Then
-                IO.File.Delete(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv")
+            'If IO.File.Exists(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv") Then
+            '    IO.File.Delete(System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.csv")
+
+            'End If
+            If IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv") Then
+                IO.File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.csv")
             End If
 
             sql = "Select * from bufr_crex_data"
@@ -869,10 +479,10 @@
         ' Set the replicated cloud layers to TRUE if observations made
         Dim flds As Integer
 
-        sql = "Select * from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
+        sql = "Select * from " & srcTable.Text & " where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "' and stationId = '" & stn & "';"
 
         'sql = "SELECT stationId, yyyy, mm, dd, hh from form_synoptic_2_ra1 where yyyy = '" & txtYear.Text & "' and mm = '" & cboMonth.Text & "' and dd = '" & cboDay.Text & "' and hh = '" & cboHour.Text & "';"
-
+        'MsgBox(sql)
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
         ' Set to unlimited timeout period
         da.SelectCommand.CommandTimeout = 0
@@ -889,10 +499,14 @@
             'For i = 0 To Kount - 1
 
             ' Replications for clounds above the station
-            If Len(.Rows(0).Item("Val_Elem119")) > 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem123")) > 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem127")) > 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
-            If Len(.Rows(0).Item("Val_Elem131")) > 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
+            If Not IsDBNull(.Rows(0).Item("Val_Elem119")) And Len(.Rows(0).Item("Val_Elem119")) <> 0 Then Select_Descriptor(conn1, "119", "cloud_rep1")
+
+            If Not IsDBNull(.Rows(0).Item("Val_Elem123")) And Len(.Rows(0).Item("Val_Elem123")) <> 0 Then Select_Descriptor(conn1, "123", "cloud_rep1")
+
+            If Not IsDBNull(.Rows(0).Item("Val_Elem127")) And Len(.Rows(0).Item("Val_Elem127")) <> 0 Then Select_Descriptor(conn1, "127", "cloud_rep1")
+
+            If Not IsDBNull(.Rows(0).Item("Val_Elem131")) And Len(.Rows(0).Item("Val_Elem131")) <> 0 Then Select_Descriptor(conn1, "131", "cloud_rep1")
+
             ' Replications for clounds below the station
             ' These observations are not recorded in this form. Hence the associated elements have been commented
             ' However the replication factor is set to Zero but Selected so that the decoders can retrieve the replication factor
@@ -902,6 +516,7 @@
             'If Len(.Rows(i).Item("Val_Elem631")) > 0 Then Select_Descriptor(conn1, "631", "cloud_rep2")
             'If Len(.Rows(i).Item("Val_Elem641")) > 0 Then Select_Descriptor(conn1, "641", "cloud_rep2")
             'Next
+
         End With
     End Sub
     Sub Update_Station_Details(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String)
@@ -1052,7 +667,8 @@
     Sub Update_Observation_data(conn1 As MySql.Data.MySqlClient.MySqlConnection, stn As String, yr As String, mm As String, dd As String, hh As String)
         Dim fld, dat, ChrR, N, CL, CM, CH As String
         Dim code, rep1, rep2 As Integer
-        sql = "select * from form_synoptic_2_ra1 where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
+        sql = "select * from " & srcTable.Text & " where stationid = '" & stn & " ' and yyyy= '" & yr & " ' and mm = '" & mm & " ' and dd= '" & dd & " '  and hh = '" & hh & "';"
+        'MsgBox(sql)
         Try
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn1)
             ' Set to unlimited timeout period
@@ -1064,25 +680,52 @@
                 rep1 = 0
                 rep2 = 0
                 With ds.Tables("synoptic")
-                    For i = 0 To .Columns.Count - 1
-                        fld = .Columns(i).ColumnName
 
-                        If Len(fld) = 11 Then
+                    For i = 0 To .Columns.Count - 1
+                        dat = ""
+                        fld = .Columns(i).ColumnName
+                        'MsgBox(2 & " _" & fld)
+                        If Len(fld) = 11 Then ' Fields for data values
                             code = Int(Strings.Mid(fld, 9, 3))
-                            dat = .Rows(0).Item(i)
+                            'MsgBox(code)
+                            If Not IsDBNull(.Rows(0).Item(i)) Then dat = .Rows(0).Item(i)
+                            'MsgBox(dat)
                             If Len(dat) <> 0 Then
                                 ' Compute observations with special conditions
-                                If code = 46 Then ' Scale Radiation and Pressure 
-                                    dat = dat & "000000"
+                                ' Scale Radiation and Pressure
+                                If code = 133 Then
+                                    dat = dat & "0000"
                                 ElseIf code = 106 Or code = 107 Or code = 399 Or code = 301 Or code = 400 Then ' Scale Pressure
                                     dat = CLng(dat) * 100
-                                ElseIf code = "506" Then ' Time of beginning or end of precipitation
-                                    dat = 9
-                                ElseIf code = "114" Then ' Convert OKTAS to %
+                                    'ElseIf code = "506" Then ' Time of beginning or end of precipitation
+                                    '    dat = 9
+                                ElseIf code = 114 Then ' Convert OKTAS to %
                                     dat = CLng(dat) * 12.5
-                                ElseIf code = "84" Then ' Convert hours of Sunshine to minutes
+                                ElseIf code = 132 Then ' Convert hours of Sunshine to minutes
                                     dat = CLng(dat) * 60
                                 End If
+
+                                ' Convert Non SI units observation from formSynoptic2
+                                With formSynoptic2
+                                    If .cboCloudheightUnits.Text = "feet" And (code = 192 Or code = 118 Or code = 122 Or code = 126 Or code = 130) Then
+                                        dat = CLng(dat) * 0.3048
+                                    End If
+
+                                    If .cboWindSpdUnits.Text = "knots" And code = 111 Then
+                                        dat = CLng(dat) * 0.51
+                                    End If
+
+                                    If .cboPrecipUnits.Text = "inches" And code = 5 Then
+                                        dat = CLng(dat) * 25.4
+                                    End If
+
+                                    If .cboTempUnits.Text = "Deg F" And (code = 2 Or code = 3 Or code = 99 Or code = 101 Or code = 102) Then
+                                        'dat = CLng(dat) * 0.3048
+                                        dat = (CLng(dat) - 32) * (5 / 9)
+                                    End If
+                                End With
+
+                                'If code = 814 Then MsgBox(dat)
                                 Update_Observation(conn1, dat, code)
 
                                 ' Compute cloud layers replications
@@ -1121,22 +764,29 @@
                             If .Rows(0).Item(i) = "T" Then Update_Observation(conn1, -1, 174) '24Hr Precipitation
                         End If
 
-                        ' Compute Character and Intensity of precipitation
-                        If fld = "Val_Elem005" Then
-                            ChrR = Precip_Characteristic(.Rows(0).Item(i))
-                            Update_Observation(conn1, ChrR, "505")
-                            Update_Observation(conn1, "9", "50")
+                        '' Compute Character and Intensity of precipitation in Templat TM307081
+                        If cboTemplate.Text = "TM_307081" Then
+                            If fld = "Val_Elem005" Then
+                                If Not IsDBNull(.Rows(0).Item(i)) Then
+                                    ChrR = Precip_Characteristic(.Rows(0).Item(i))
+                                Else
+                                    ChrR = "15"
+                                End If
+                                Update_Observation(conn1, ChrR, "506")
+                                Update_Observation(conn1, "15", "507") ' Time of beginning or end of precipitation - Set to missing
+                            End If
                         End If
 
                     Next
+
                     ' Update Cloud Replications
                     Update_Observation(conn1, rep1, "cloud_rep1")
                     Update_Observation(conn1, rep2, "cloud_rep2")
-
                 End With
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            If ex.HResult <> -2147467262 Then MsgBox(ex.Message & " Update_Observation_data")
+            'MsgBox(sql)
         End Try
     End Sub
     Function Precip_Characteristic(dat As String) As String
@@ -1156,8 +806,10 @@
     End Function
 
     Sub Update_Observation(conn1 As MySql.Data.MySqlClient.MySqlConnection, data As String, element As String)
+
         sql = "update bufr_crex_data set observation = '" & data & "' where Climsoft_Element='" & element & "';"
         ' Create the Command for executing query and set its properties
+        'MsgBox(sql)
         Try
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
             'Execute query
@@ -1214,18 +866,39 @@
 
         ' Initialize cloud layers by setting them to FALSE so that they are not selected if observations not made
 
-        For i = 0 To Kount - 1
-            If dsa.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
-                For j = i + 3 To i + 3 + (rep_factor * 4) '17
-                    sql = "update bufr_crex_data set selected = '0' where nos = '" & j & "';"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
-                    'Execute query
-                    objCmd.ExecuteNonQuery()
-                Next
-                Exit For
-            End If
-        Next
+        'For i = 0 To Kount - 1
+        '    If dsa.Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
+        '        For j = i + 3 To i + 3 + (rep_factor * 4) '17
+        '            sql = "update bufr_crex_data set selected = '0' where nos = '" & j & "';"
+        '            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+        '            'Execute query
+        '            objCmd.ExecuteNonQuery()
+        '        Next
+        '        Exit For
+        '    End If
+        'Next
 
+        Dim RecNo As Integer
+
+        With dsa
+
+            For i = 0 To .Tables("bufr_crex_data").Rows.Count - 1
+                If .Tables("bufr_crex_data").Rows(i).Item("Climsoft_Element") = rep_type Then
+                    RecNo = .Tables("bufr_crex_data").Rows(i).Item("Nos")
+                    For j = RecNo To (RecNo + rep_factor * 4)
+                        If j = RecNo Then
+                            sql = "update bufr_crex_data set Observation ='0', selected = '1' where Nos = '" & j & "';"
+                        Else
+                            sql = "update bufr_crex_data set selected = '0' where Nos = '" & j & "';"
+                        End If
+                        objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn1)
+                        objCmd.ExecuteNonQuery()
+                    Next
+                    Exit For
+                End If
+            Next
+        End With
+        'MsgBox("Cloud Replication Initialized")
     End Sub
 
     Private Sub cboHour_TextChanged(sender As Object, e As EventArgs) Handles cboHour.TextChanged
@@ -1278,9 +951,9 @@
                 If Len(.Item("observation")) <> 0 Then
 
                     climsoft_element_scale = ScaleFactor(conn1, .Item("climsoft_element"))
-
+                    'MsgBox(1 & " - " & climsoft_element_scale)
                     bufr_str = Bufr_Data(conn1, .Item("Bufr_Unit"), .Item("Bufr_Scale"), .Item("Bufr_RefValue"), .Item("Bufr_DataWidth_Bits"), .Item("observation"), climsoft_element_scale)
-
+                    'MsgBox(2 & " - " & .Item("climsoft_element"))
                     'MsgBox(bufr_str & " " & .Item("Bufr_Unit") & " " & .Item("Bufr_Scale") & " " & .Item("observation") & " " & climsoft_element_scale)
 
                 Else ' Compute binary stream for missing data
@@ -1327,7 +1000,7 @@
             End If
             'If Not IsNumeric(ScaleFactor) = 1 Then MsgBox(code)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Scale Factor")
         End Try
     End Function
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
@@ -1345,7 +1018,7 @@
             'Dim apd As String
             Dim datstr As String
             'Dim count As Integer
-
+            'MsgBox(0)
             Bufr_Data = ""
             If Bufr_Unit = "CCITT IA5" Then
 
@@ -1353,7 +1026,7 @@
 
                 Exit Function
             End If
-
+            'MsgBox(1)
             If IsNumeric(dat) Then
 
                 ' Apply the scaling for both Climsoft and Bufr
@@ -1371,7 +1044,7 @@
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at Bufr_Data")
 
             Bufr_Data = ""
         End Try
@@ -1386,7 +1059,7 @@
         Decimal_Binary = "0"
         Try
 
-            For i = 2 To bts
+        For i = 2 To bts
                 Decimal_Binary = Decimal_Binary & "0"
             Next
 
@@ -1407,7 +1080,8 @@
             Return Decimal_Binary
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " Decimal_Binary")
+            'MsgBox(DecN & " " & bts & " " & Decimal_Binary)
             Return Decimal_Binary
         End Try
 
@@ -1502,10 +1176,11 @@
    
             CCITT_Binary = binstr
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at CCITT_Binary")
             CCITT_Binary = ""
         End Try
     End Function
+
 
     Function BUFR_Code(conn1 As MySql.Data.MySqlClient.MySqlConnection, binary_data As String, subsets As Integer) As Boolean
         'MsgBox(subsets)
@@ -1690,7 +1365,8 @@
             ' Output to text files
             Dim txtbufr, octsfl, bufr_file As String
 
-            txtbufr = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.txt"
+            'txtbufr = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr.txt"
+            txtbufr = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr.txt"
             FileOpen(2, txtbufr, OpenMode.Output)
 
             Print(2, BUFR_Message) ' Put the BUFR binary digit message into a text file
@@ -1698,10 +1374,12 @@
             FileClose(2)
 
             'Construct and open Bufr output text file based on the message header
-            bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
+            'bufr_file = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\" & msg_file & ".f"
+            bufr_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & msg_file & ".f"
             FileOpen(2, bufr_file, OpenMode.Binary)
 
-            octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
+            'octsfl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\bufr_octets.txt"
+            octsfl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_octets.txt"
             FileOpen(1, octsfl, OpenMode.Output)
 
             'Output BUFR data into a binary and a text file
@@ -1855,8 +1533,12 @@
 
             'MsgBox(ftpmethod & " " & ftp_host & " " & flder & " " & ftpmode & " " & usr & " " & pwd)
 
-            local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
-            Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            'local_folder = System.IO.Path.GetFullPath(Application.StartupPath) & "\data"
+            local_folder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\data"
+
+            'Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
+            Drive1 = System.IO.Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData))
+
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
             ftpscript = local_folder & "\ftp_bufr.txt"
             FileOpen(1, ftpscript, OpenMode.Output)
@@ -1938,7 +1620,7 @@
     '    If Len(cboTemplate.Text) > 0 Then
     '        sql = "SELECT * FROM bufr_indicators where Tmplate = '" & cboTemplate.Text & "';"
     '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
-    
+
     '        ds.Clear()
     '        da.Fill(ds, "bufr_indicators")
 
@@ -1961,9 +1643,7 @@
     '    End If
     'End Sub
 
-    Private Sub cboTemplate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTemplate.SelectedIndexChanged
 
-    End Sub
 
     Private Sub cboTemplate_TextChanged1(sender As Object, e As EventArgs) Handles cboTemplate.TextChanged
 
@@ -2002,5 +1682,9 @@
             End If
 
         End With
+    End Sub
+
+    Private Sub cmdEncode_ContextMenuStripChanged(sender As Object, e As EventArgs) Handles cmdEncode.ContextMenuStripChanged
+
     End Sub
 End Class

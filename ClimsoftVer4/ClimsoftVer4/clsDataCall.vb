@@ -13,9 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports System.Data.Entity
-Imports System.Linq.Dynamic
-
 Public Class DataCall
 
     'Data Adapater to retrieve data from the database
@@ -215,7 +212,7 @@ Public Class DataCall
                 strSelectCommand = "SELECT * FROM " & strTable
             End If
 
-            cmdSelect.Connection = clsDataConnection.OpenedConnection
+            cmdSelect.Connection = clsDataConnection.GetOpenedConnection
             cmdSelect.CommandText = strSelectCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.SelectCommand = cmdSelect
             If clsCurrentFilter IsNot Nothing Then
@@ -225,7 +222,7 @@ Public Class DataCall
 
             'INSERT statement
             strInsertCommand = "INSERT INTO " & strTable & " (" & strSqlFieldNames & ") " & "VALUES (" & strSqlFieldParameters & ")"
-            cmdInsert.Connection = clsDataConnection.OpenedConnection
+            cmdInsert.Connection = clsDataConnection.GetOpenedConnection
             cmdInsert.CommandText = strInsertCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.InsertCommand = cmdInsert
 
@@ -274,13 +271,13 @@ Public Class DataCall
 
             'UPDATE statement
             strUpdateCommand = "UPDATE " & strTable & " SET " & strUpdateSetCommand & " WHERE " & strKeysWhereCommand
-            cmdUpdate.Connection = clsDataConnection.OpenedConnection
+            cmdUpdate.Connection = clsDataConnection.GetOpenedConnection
             cmdUpdate.CommandText = strUpdateCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.UpdateCommand = cmdUpdate
 
             'DELETE statement
             strDeleteCommand = "DELETE FROM " & strTable & " WHERE " & strKeysWhereCommand
-            cmdDelete.Connection = clsDataConnection.OpenedConnection
+            cmdDelete.Connection = clsDataConnection.GetOpenedConnection
             cmdDelete.CommandText = strDeleteCommand 'To confirm that this is the best approach to creating the paramatised Querie
             da.DeleteCommand = cmdDelete
 
@@ -449,7 +446,7 @@ Public Class DataCall
         End If
 
         Try
-            Using cmd As New MySql.Data.MySqlClient.MySqlCommand("SELECT COUNT(*) AS colnum FROM " & strTable, clsDataConnection.OpenedConnection)
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand("SELECT COUNT(*) AS colnum FROM " & strTable, clsDataConnection.GetOpenedConnection)
                 If clsCurrentFilter IsNot Nothing Then
                     clsCurrentFilter.AddToSqlcommand(cmd)
                 End If
@@ -471,7 +468,7 @@ Public Class DataCall
     End Function
 
     Private Function GetTableSchema(strSchemaTable As String) As DataTable
-        Return GetDataTableFromQuery("SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" & strSchemaTable & "' AND TABLE_SCHEMA = '" & clsDataConnection.databaseName & "'")
+        Return GetDataTableFromQuery("SELECT COLUMN_NAME, COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" & strSchemaTable & "' AND TABLE_SCHEMA = '" & clsDataConnection.GetDatabaseName & "'")
     End Function
 
     Private Function GetFieldMySqlDbType(strField As String, dtbSchema As DataTable) As MySql.Data.MySqlClient.MySqlDbType
@@ -537,7 +534,7 @@ Public Class DataCall
     ''' <returns></returns>
     Public Function GetDataTableFromQuery(strSql As String) As DataTable
         Dim dtb As New DataTable
-        Using daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, clsDataConnection.OpenedConnection)
+        Using daTemp As New MySql.Data.MySqlClient.MySqlDataAdapter(strSql, clsDataConnection.GetOpenedConnection)
             daTemp.Fill(dtb)
         End Using
         Return dtb

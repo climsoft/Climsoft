@@ -1183,6 +1183,12 @@ Public Class form_synopticRA1
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_agro1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
         frmDataTransferProgress.Show()
 
         'Upload data to observationInitial table
@@ -1392,8 +1398,12 @@ Public Class form_synopticRA1
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_synopticRA1")
     End Sub
 
+
     Private Sub btnTDCF_Click(sender As Object, e As EventArgs) Handles btnTDCF.Click
+        MsgBox(1)
         frmSynopTDCF.Show()
+        frmSynopTDCF.srcTable.Text = "form_synoptic_2_ra1"
+
         frmSynopTDCF.cboTemplate.Text = "TM_307081"
         ' Subset Observations
         SubsetObservations()

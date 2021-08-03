@@ -22,6 +22,9 @@
 
             SetUpTableEntry("form_monthly")
 
+            AddField("signature")
+            AddField("entryDatetime")
+
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
             AddLinkedControlFilters(ucrElementSelector, ucrElementSelector.FieldName, "=", strLinkedFieldName:="elementId", bForceValuesAsString:=False)
             AddLinkedControlFilters(ucrYearSelector, ucrYearSelector.FieldName, "=", strLinkedFieldName:="Year", bForceValuesAsString:=False)
@@ -47,6 +50,16 @@
         End Try
     End Sub
 
+    Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
+        Try
+            'Change the signature(user) and the DATETIME first before saving 
+            GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+            GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     Private Sub btnView_Click(sender As Object, e As EventArgs) Handles btnView.Click
         Dim viewRecords As New dataEntryGlobalRoutines
         Dim sql As String
@@ -67,6 +80,12 @@
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         If MessageBox.Show("Are you sure you want to upload these records?", "Upload Records", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            ' Upload through a dialog that allows records selection
+            frmFormUpload.lblFormName.Text = "form_monthly"
+            frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+            frmFormUpload.Show()
+
+            Exit Sub
             UploadAllRecords()
             'MessageBox.Show("Records have been uploaded sucessfully", "Upload Records", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
@@ -134,19 +153,34 @@
 
     'TODO. Push this to the table entry level
     Protected Overrides Sub ValidateDataEntryPermission()
-        Dim bEnabled As Boolean = False
-
-        If ucrYearSelector.ValidateValue Then
-            bEnabled = (ucrYearSelector.GetValue <= Date.Now.Year)
-        End If
+        Dim iSelectedYear As Integer = If(ucrYearSelector.ValidateValue, ucrYearSelector.GetValue, -1)
+        Dim iCurrentYear As Integer = Date.Now.Year
+        Dim iCurrentMonth As Integer = Date.Now.Month
 
         For Each ctr As Control In Me.Controls
             If TypeOf ctr Is ucrValueView AndAlso Not DirectCast(ctr, ucrValueView).KeyControl Then
-                ctr.Enabled = bEnabled
+                If iSelectedYear = -1 Then
+                    ctr.Enabled = False
+                ElseIf iSelectedYear < iCurrentYear Then
+                    ctr.Enabled = True
+                ElseIf iSelectedYear = iCurrentYear AndAlso IsNumeric(ctr.Tag) Then
+                    ctr.Enabled = If(Integer.Parse(ctr.Tag) <= iCurrentMonth, True, False)
+                Else
+                    ctr.Enabled = False
+                End If
             End If
         Next
 
+    End Sub
 
+    Private Sub ucrMonthlyData_GoingToNextChildControl(sender As Object) Handles Me.GoingToNextChildControl
+        'set the number of days in the month as the period if the following conditions are true
+        If TypeOf sender Is ucrValueFlagPeriod AndAlso ucrYearSelector.ValidateValue Then
+            Dim ucr As ucrValueFlagPeriod = DirectCast(sender, ucrValueFlagPeriod)
+            If IsNumeric(ucr.Tag) Then
+                ucr.SetElementPeriodValue(Date.DaysInMonth(ucrYearSelector.GetValue, Integer.Parse(ucr.Tag)))
+            End If
+        End If
     End Sub
 
     'upload code in the background thread
@@ -181,8 +215,6 @@
         Dim bUpdateRecord As Boolean
         Dim strSql As String
         Dim strSignature As String
-        Dim conn As MySql.Data.MySqlClient.MySqlConnection
-        Dim cmd As MySql.Data.MySqlClient.MySqlCommand
         Dim pos As Integer = 0
 
         'get the observation values fields
@@ -193,11 +225,7 @@
         clsAllRecordsCall.SetTableNameAndFields(GetTableName, lstAllFields)
         dtbAllRecords = clsAllRecordsCall.GetDataTable()
 
-        conn = New MySql.Data.MySqlClient.MySqlConnection
         Try
-            'Temporary.The current connection properties are being stored in control, this line can be removed in future
-            conn.ConnectionString = e.Argument
-            conn.Open()
 
             For Each row As DataRow In dtbAllRecords.Rows
                 If backgroundWorker.CancellationPending = True Then
@@ -216,41 +244,41 @@
                     End If
 
                     strValueColumn = strFieldName
-                    'set the record
-                    If Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
 
+                    strTag = strFieldName.Substring(Me.strValueFieldName.Length)
+                    strFlagColumn = lstFields.Find(Function(x As String)
+                                                       Return x.Equals(Me.strFlagFieldName & strTag)
+                                                   End Function)
+                    'set the record
+                    If (Not IsDBNull(row.Item(strValueColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strValueColumn)) OrElse (Not IsDBNull(row.Item(strFlagColumn)) AndAlso Not String.IsNullOrEmpty(row.Item(strFlagColumn)))) AndAlso Long.TryParse(row.Item("elementId"), lElementId) Then
                         strStationId = row.Item("stationId")
-                        strTag = strFieldName.Substring(Me.strValueFieldName.Length)
-                        strFlagColumn = lstFields.Find(Function(x As String)
-                                                           Return x.Equals(Me.strFlagFieldName & strTag)
-                                                       End Function)
                         strPeriodColumn = lstFields.Find(Function(x As String)
                                                              Return x.Equals(Me.strPeriodFieldName & strTag)
                                                          End Function)
-                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), 1, 6, 0, 0)
 
+
+                        dtObsDateTime = New Date(row.Item("yyyy"), Val(strTag), Date.DaysInMonth(row.Item("yyyy"), Integer.Parse(Val(strTag))), 6, 0, 0)
+                        bUpdateRecord = False
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@dataForm", GetTableName)
-
-                        bUpdateRecord = False
-                        Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
-                            bUpdateRecord = reader.HasRows
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            cmd.Parameters.AddWithValue("@stationId", strStationId)
+                            cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                            cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                            cmd.Parameters.AddWithValue("@qcStatus", 0)
+                            cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                            cmd.Parameters.AddWithValue("@dataForm", GetTableName)
+                            Using reader As MySql.Data.MySqlClient.MySqlDataReader = cmd.ExecuteReader()
+                                bUpdateRecord = reader.HasRows
+                            End Using
                         End Using
 
-                        Integer.TryParse(row.Item(strPeriodColumn), iPeriod)
-
-                        strSignature = ""
-
-                        If Not IsDBNull(row.Item("signature")) Then
-                            strSignature = row.Item("signature")
+                        iPeriod = 0 'reinitialise period. Then try to set if valid value is present
+                        If Not IsDBNull(row.Item(strPeriodColumn)) Then
+                            Integer.TryParse(row.Item(strPeriodColumn), iPeriod)
                         End If
+
+                        strSignature = If(IsDBNull(row.Item("signature")), "", row.Item("signature"))
 
                         If bUpdateRecord Then
                             strSql = "UPDATE observationInitial SET recordedFrom=@stationId,describedBy=@elemCode,obsDatetime=@obsDatetime,obsLevel=@obsLevel,obsValue=@obsVal,flag=@obsFlag,period=@obsPeriod,qcStatus=@qcStatus,acquisitionType=@acquisitiontype,capturedBy=@capturedBy,dataForm=@dataForm " &
@@ -260,21 +288,20 @@
                             "VALUES (@stationId,@elemCode,@obsDatetime,@obsLevel,@obsVal,@obsFlag,@obsPeriod,@qcStatus,@acquisitiontype,@capturedBy,@dataForm)"
                         End If
 
-                        cmd = New MySql.Data.MySqlClient.MySqlCommand(strSql, conn)
-                        cmd.Parameters.AddWithValue("@stationId", strStationId)
-                        cmd.Parameters.AddWithValue("@elemCode", lElementId)
-                        cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
-                        cmd.Parameters.AddWithValue("@obsLevel", "surface")
-                        cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
-                        cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
-                        cmd.Parameters.AddWithValue("@obsPeriod", If(iPeriod > 0, iPeriod, DBNull.Value))
-                        cmd.Parameters.AddWithValue("@qcStatus", 0)
-                        cmd.Parameters.AddWithValue("@acquisitiontype", 1)
-                        cmd.Parameters.AddWithValue("@capturedBy", strSignature)
-                        cmd.Parameters.AddWithValue("@dataForm", GetTableName)
-
-                        cmd.ExecuteNonQuery()
-
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
+                            cmd.Parameters.AddWithValue("@stationId", strStationId)
+                            cmd.Parameters.AddWithValue("@elemCode", lElementId)
+                            cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
+                            cmd.Parameters.AddWithValue("@obsLevel", "surface")
+                            cmd.Parameters.AddWithValue("@obsVal", row.Item(strValueColumn))
+                            cmd.Parameters.AddWithValue("@obsFlag", row.Item(strFlagColumn))
+                            cmd.Parameters.AddWithValue("@obsPeriod", If(iPeriod > 0, iPeriod, DBNull.Value))
+                            cmd.Parameters.AddWithValue("@qcStatus", 0)
+                            cmd.Parameters.AddWithValue("@acquisitiontype", 1)
+                            cmd.Parameters.AddWithValue("@capturedBy", strSignature)
+                            cmd.Parameters.AddWithValue("@dataForm", GetTableName)
+                            cmd.ExecuteNonQuery()
+                        End Using
                     End If
                 Next
             Next
@@ -282,8 +309,6 @@
             e.Result = "Records have been uploaded sucessfully"
         Catch ex As Exception
             e.Result = "Error " & ex.Message
-        Finally
-            conn.Close()
         End Try
 
 

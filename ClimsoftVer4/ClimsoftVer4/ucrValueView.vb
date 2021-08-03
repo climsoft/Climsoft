@@ -85,7 +85,7 @@
         End If
     End Sub
 
-    Public Overridable Sub SetValueToDataTable(dtbValues As DataTable)
+    Public Overridable Sub SetValueToDataTable(dtbValues As DataTable, Optional bValidateValue As Boolean = True)
         Dim lstTemp As New List(Of Object)
         Dim lstDistinct As New List(Of Object)
 
@@ -93,16 +93,17 @@
             'TODO?
         Else
             If dtbValues.Rows.Count = 1 Then
-                If ValidateValue() Then
-                    'dtbValues.Rows(0).Item(FieldName) = If(IsNothing(GetValue()), DBNull.Value, GetValue())
-                    Try
-                        dtbValues.Rows(0).Item(FieldName) = GetValue()
-                    Catch ex As ArgumentException
+                If bValidateValue Then
+                    If Not ValidateValue() Then
                         dtbValues.Rows(0).Item(FieldName) = DBNull.Value
-                    End Try
-                Else
-                    dtbValues.Rows(0).Item(FieldName) = DBNull.Value
+                    End If
                 End If
+                'dtbValues.Rows(0).Item(FieldName) = If(IsNothing(GetValue()), DBNull.Value, GetValue())
+                Try
+                    dtbValues.Rows(0).Item(FieldName) = GetValue()
+                Catch ex As ArgumentException
+                    dtbValues.Rows(0).Item(FieldName) = DBNull.Value
+                End Try
             ElseIf dtbValues.Rows.Count > 1 Then
                 'TODO
             Else

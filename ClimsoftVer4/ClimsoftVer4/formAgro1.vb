@@ -305,7 +305,7 @@
             '' Retrieve Keyentry mode information and mark on the checkbox
             ''MsgBox(FldName.Key_Entry_Mode(Me.Name))
             'If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
-
+            Me.CenterToScreen()
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them at the Metadata form")
@@ -907,19 +907,20 @@
     End Sub
 
 
-
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
     End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+
         'Open form for displaying data transfer progress
-        'frmDataTransferProgress.lblFormName.Text = "form_agro1"
-        'frmDataTransferProgress.Text = frmDataTransferProgress.Text & " for " & frmDataTransferProgress.lblFormName.Text
+        frmFormUpload.lblFormName.Text = "form_agro1"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
         frmDataTransferProgress.Show()
-
-        'Exit Sub
-
         'Upload data to observationInitial table
         Dim strSQL As String, m As Integer, n As Integer, maxRows As Integer, yyyy As String, mm As String, _
             dd As String, hh As String, ctl As Control, capturedBy As String

@@ -5,9 +5,9 @@
     Friend WithEvents invChart As DataVisualization.Charting.Chart
 
     Private Sub InitializeComponent()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.invChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -17,16 +17,16 @@
         '
         'invChart
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.invChart.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.invChart.Legends.Add(Legend1)
+        ChartArea2.Name = "ChartArea1"
+        Me.invChart.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.invChart.Legends.Add(Legend2)
         Me.invChart.Location = New System.Drawing.Point(12, 12)
         Me.invChart.Name = "invChart"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.invChart.Series.Add(Series1)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.invChart.Series.Add(Series2)
         Me.invChart.Size = New System.Drawing.Size(757, 353)
         Me.invChart.TabIndex = 0
         Me.invChart.Text = "Chart1"
@@ -82,6 +82,7 @@
         Dim SQLDataString, SQLElementString As String
 
         conString = frmLogin.txtusrpwd.Text
+        'MsgBox(conString)
 
         SQLElementString = "SELECT DISTINCT elementname, elementid FROM obselement, missing_stats WHERE obselement.elementId = missing_stats.ELEM"
 
@@ -89,9 +90,10 @@
 
         conn = New MySql.Data.MySqlClient.MySqlConnection
         conn.ConnectionString = conString
+        conn.Open()
 
         Try
-            conn.Open()
+            'conn.Open()
             Dim cmd As New MySql.Data.MySqlClient.MySqlCommand
             Dim da As New MySql.Data.MySqlClient.MySqlDataAdapter
             Dim ds As New System.Data.DataSet
@@ -142,8 +144,10 @@
             For i = 0 To ds.Tables("MissingData").Rows.Count - 1
                 invChart.Series(ds.Tables("MissingData").Rows(i).Item(1).ToString).Points.AddXY(ds.Tables("MissingData").Rows(i).Item(0).ToString, ds.Tables("MissingData").Rows(i).Item(2).ToString)
             Next i
+            conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
+            conn.Close()
         End Try
     End Sub
 
@@ -154,7 +158,7 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim conn As MySql.Data.MySqlClient.MySqlConnection
         Dim conString As String
-        Dim SQLDataString, SQLGAPSDATA, SQLGAPS As String
+        Dim SQLDataString, SQLGAPSDATA, SQLGAPS, Opdate, Cldate As String
 
         Button2.Enabled = False
 
@@ -197,8 +201,12 @@
                 new_cmd.CommandTimeout = 0
                 new_cmd.Parameters.AddWithValue("Stn", ds.Tables("Gaps").Rows(i).Item(0).ToString)
                 new_cmd.Parameters.AddWithValue("Elm", ds.Tables("Gaps").Rows(i).Item(1).ToString)
-                new_cmd.Parameters.AddWithValue("Opening_Date", ds.Tables("Gaps").Rows(i).Item(2).ToString)
-                new_cmd.Parameters.AddWithValue("Closing_Date", ds.Tables("Gaps").Rows(i).Item(3).ToString)
+                Opdate = ds.Tables("Gaps").Rows(i).Item(2)
+                Cldate = ds.Tables("Gaps").Rows(i).Item(3)
+                Opdate = DateAndTime.Year(Opdate) & "-" & DateAndTime.Month(Opdate) & "-" & DateAndTime.Day(Opdate)
+                Cldate = DateAndTime.Year(Cldate) & "-" & DateAndTime.Month(Cldate) & "-" & DateAndTime.Day(Opdate)
+                new_cmd.Parameters.AddWithValue("Opening_Date", Opdate.ToString)
+                new_cmd.Parameters.AddWithValue("Closing_Date", Cldate.ToString)
                 new_cmd.ExecuteNonQuery()
                 'MsgBox(Format(ds.Tables("Gaps").Rows(i).Item(2).ToString, "yyyy-mm-dd"))
             Next i
@@ -213,8 +221,8 @@
 
             da.SelectCommand = cmd
             da.Fill(ds, "Miss")
-            fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
-
+            'fl = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.csv"
+            fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.csv"
             FileOpen(1, fl, OpenMode.Output)
 
             Write(1, "Station")
@@ -245,12 +253,17 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim img As String
 
-        img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        'img = System.IO.Path.GetFullPath(Application.StartupPath) & "\data\Gaps.Png"
+        img = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\Gaps.Png"
         'img = "C:\Users\UNDP\Desktop\Gaps.Png"
 
         With invChart
             .Dock = DockStyle.None
             .SaveImage(img, System.Drawing.Imaging.ImageFormat.Png)
         End With
+    End Sub
+
+    Private Sub FontDialog1_Apply(sender As Object, e As EventArgs)
+
     End Sub
 End Class

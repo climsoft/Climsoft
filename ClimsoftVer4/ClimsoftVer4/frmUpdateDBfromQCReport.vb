@@ -16,14 +16,14 @@
 
 Public Class frmUpdateDBfromQCReport
     Dim msgTxtUpdatedQCReportFileName As String
-    Dim msgTxtQCReportsMismatch As String
+    Dim msgTxtQCReportsMismatch, stnId1, stnId2 As String
     Dim strFolderPath As String, strFileName1 As String, strFileName2 As String, rec As Integer
     Dim sql As String, sql1 As String, strConnString As String
     Dim ds As New DataSet(), ds1 As New DataSet()
     Dim da As OleDb.OleDbDataAdapter, da1 As OleDb.OleDbDataAdapter
     Dim fd As OpenFileDialog = New OpenFileDialog()
-    Dim stnId1 As String, elemId1 As Integer, yyyy1 As String, mm1 As String, dd1 As String, hh1 As String, obsVal1 As String, qcStatus1 As String
-    Dim stnId2 As String, elemId2 As Integer, yyyy2 As String, mm2 As String, dd2 As String, hh2 As String, obsVal2 As String, qcStatus2 As String
+    Dim elemId1 As Integer, yyyy1 As String, mm1 As String, dd1 As String, hh1 As String, obsVal1 As String, qcStatus1 As String
+    Dim elemId2 As Integer, yyyy2 As String, mm2 As String, dd2 As String, hh2 As String, obsVal2 As String, qcStatus2 As String
     Dim m As Integer, n As Integer, obsValue As String, qcStatus As Integer
     Dim strSQL As String, stnId As String, elemCode As String, obsDatetime As String, obsLevel As String, obsVal As String, obsFlag As String, _
         acquisitionType As String, capturedBy As String, dataForm As String
@@ -58,6 +58,7 @@ Public Class frmUpdateDBfromQCReport
             sql = "SELECT * FROM [" & strFileName1 & "]"
 
             da = New OleDb.OleDbDataAdapter(sql, conn1)
+            da.SelectCommand.CommandTimeout = 0
             da.Fill(ds, "QCReportOriginal")
 
             sql1 = "SELECT * FROM [" & strFileName2 & "]"
@@ -92,7 +93,7 @@ Public Class frmUpdateDBfromQCReport
             lblProcessStatus.Text = "Wrong file name...uploading aborted"
             Exit Sub
         End If
-        If Strings.Left(txtQCReportOriginal.Text, Len(txtQCReportOriginal.Text) - 4) <> _
+        If Strings.Left(txtQCReportOriginal.Text, Len(txtQCReportOriginal.Text) - 4) <>
             Strings.Left(txtQCReportUpdated.Text, Len(txtQCReportUpdated.Text) - 12) Then
             MsgBox(msgTxtQCReportsMismatch, MsgBoxStyle.Exclamation)
             lblProcessStatus.Text = "Wrong file name...uploading aborted"
@@ -116,8 +117,15 @@ Public Class frmUpdateDBfromQCReport
                     mm1 = ds.Tables("QCReportOriginal").Rows(i).Item("mm")
                     dd1 = ds.Tables("QCReportOriginal").Rows(i).Item("dd")
                     hh1 = ds.Tables("QCReportOriginal").Rows(i).Item("hh_1")
-                    obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_1")
-                    '
+
+                    'obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_1")
+                    'MsgBox(obsVal1)
+                    If Not IsDBNull(ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_1")) Then
+                        obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_1")
+                    Else
+                        obsVal1 = ""
+                    End If
+
                     'Loop through all records on dataset [QCReportUpdated]
                     For j = 0 To n
                         stnId2 = ds1.Tables("QCReportUpdated").Rows(j).Item("StationId")
@@ -126,10 +134,21 @@ Public Class frmUpdateDBfromQCReport
                         mm2 = ds1.Tables("QCReportUpdated").Rows(j).Item("mm")
                         dd2 = ds1.Tables("QCReportUpdated").Rows(j).Item("dd")
                         hh2 = ds1.Tables("QCReportUpdated").Rows(j).Item("hh_1")
-                        obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_1")
+
+                        'obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_1")
+
+                        If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_1")) Then
+                            obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_1")
+                        Else
+                            obsVal2 = ""
+                            obsFlag = "M"
+                        End If
+
                         qcStatus2 = ds1.Tables("QCReportUpdated").Rows(j).Item("qcStatus_2")
                         If stnId1 = stnId2 And elemId1 = elemId2 And yyyy1 = yyyy2 And mm1 = mm2 And dd1 = dd2 And hh1 = hh2 Then
+
                             If obsVal1 <> obsVal2 Then
+
                                 stnId = stnId2
                                 elemCode = elemId2
                                 If Strings.Len(mm2) = 1 Then mm2 = "0" & mm2
@@ -139,7 +158,8 @@ Public Class frmUpdateDBfromQCReport
                                 obsLevel = ds1.Tables("QCReportUpdated").Rows(j).Item("obsLevel_2")
                                 'Get "obsVal2" as updated value for appending to obsvertionInitial table
                                 obsVal = obsVal2
-                                obsFlag = ""
+
+                                'obsFlag = ""
                                 'Increment "qcStatus2" by 1
 
                                 qcStatus = qcStatus2 + 1
@@ -156,8 +176,6 @@ Public Class frmUpdateDBfromQCReport
                                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
 
                                 Try
-                                    'MsgBox(strSQL)
-
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
                                     'Catch ex As MySql.Data.MySqlClient.MySqlException
@@ -170,6 +188,7 @@ Public Class frmUpdateDBfromQCReport
                                     Me.Cursor = Cursors.Default
                                 End Try
                             End If
+
                         End If
                     Next j
                 Next i
@@ -184,7 +203,14 @@ Public Class frmUpdateDBfromQCReport
                     mm1 = ds.Tables("QCReportOriginal").Rows(i).Item("mm")
                     dd1 = ds.Tables("QCReportOriginal").Rows(i).Item("dd")
                     hh1 = ds.Tables("QCReportOriginal").Rows(i).Item("hh_2")
-                    obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_2")
+
+                    'obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_2")
+
+                    If Not IsDBNull(ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_2")) Then
+                        obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue_2")
+                    Else
+                        obsVal1 = ""
+                    End If
 
                     'Loop through all records on dataset [QCReportUpdated]
                     For j = 0 To n
@@ -194,8 +220,17 @@ Public Class frmUpdateDBfromQCReport
                         mm2 = ds1.Tables("QCReportUpdated").Rows(j).Item("mm")
                         dd2 = ds1.Tables("QCReportUpdated").Rows(j).Item("dd")
                         hh2 = ds1.Tables("QCReportUpdated").Rows(j).Item("hh_2")
-                        obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_2")
                         qcStatus2 = ds1.Tables("QCReportUpdated").Rows(j).Item("qcStatus_2")
+
+                        'obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_2")
+                        ' Set NULL values to missing data
+                        If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_2")) Then
+                            obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue_2")
+                            obsFlag = ""
+                        Else
+                            obsVal2 = ""
+                            obsFlag = "M"
+                        End If
 
                         If stnId1 = stnId2 And elemId1 = elemId2 And yyyy1 = yyyy2 And mm1 = mm2 And dd1 = dd2 And hh1 = hh2 Then
                             If obsVal1 <> obsVal2 Then
@@ -210,14 +245,15 @@ Public Class frmUpdateDBfromQCReport
 
                                 'Get "obsVal2" as updated value for appending to obsvertionInitial table
                                 obsVal = obsVal2
-                                obsFlag = ""
+                                'obsFlag = ""
+
                                 'Increment "qcStatus" by 1
                                 qcStatus = qcStatus2 + 1
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("acquisitionType_2")) Then acquisitionType = ds1.Tables("QCReportUpdated").Rows(j).Item("acquisitionType_2")
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")) Then capturedBy = ds1.Tables("QCReportUpdated").Rows(i).Item("capturedBy_2")
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(i).Item("dataForm_2")
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
@@ -262,7 +298,13 @@ Public Class frmUpdateDBfromQCReport
                     mm1 = ds.Tables("QCReportOriginal").Rows(i).Item("mm")
                     dd1 = ds.Tables("QCReportOriginal").Rows(i).Item("dd")
                     hh1 = ds.Tables("QCReportOriginal").Rows(i).Item("hh")
-                    obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue")
+
+                    If Not IsDBNull(ds.Tables("QCReportOriginal").Rows(i).Item("obsValue")) Then
+                        obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue")
+                    Else
+                        obsVal1 = ""
+                    End If
+                    'obsVal1 = ds.Tables("QCReportOriginal").Rows(i).Item("obsValue")
 
                     'Loop through all records on dataset [QCReportUpdated]
                     For j = 0 To n
@@ -272,7 +314,16 @@ Public Class frmUpdateDBfromQCReport
                         mm2 = ds1.Tables("QCReportUpdated").Rows(j).Item("mm")
                         dd2 = ds1.Tables("QCReportUpdated").Rows(j).Item("dd")
                         hh2 = ds1.Tables("QCReportUpdated").Rows(j).Item("hh")
-                        obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue")
+
+                        'obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue")
+                        ' Set NULL values to missing data
+                        If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue")) Then
+                            obsVal2 = ds1.Tables("QCReportUpdated").Rows(j).Item("obsValue")
+                            obsFlag = ""
+                        Else
+                            obsVal2 = ""
+                            obsFlag = "M"
+                        End If
                         'qcStatus2 = ds1.Tables("QCReportUpdated").Rows(j).Item("qcStatus_2")
 
                         If stnId1 = stnId2 And elemId1 = elemId2 And yyyy1 = yyyy2 And mm1 = mm2 And dd1 = dd2 And hh1 = hh2 Then
@@ -286,7 +337,7 @@ Public Class frmUpdateDBfromQCReport
                                 obsLevel = ds1.Tables("QCReportUpdated").Rows(j).Item("obsLevel")
                                 'Get "obsVal2" as updated value for appending to obsvertionInitial table
                                 obsVal = obsVal2
-                                obsFlag = ""
+                                'obsFlag = ""
                                 'Increment "qcStatus" by 1
                                 qcStatus = 2
 
@@ -296,13 +347,13 @@ Public Class frmUpdateDBfromQCReport
                                 If Not IsDBNull(ds1.Tables("QCReportUpdated").Rows(j).Item("dataForm")) Then dataForm = ds1.Tables("QCReportUpdated").Rows(j).Item("dataForm")
 
                                 'Generate new SQL string for appending modified record to observationInitial table
-                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " & _
+                                strSQL = "INSERT IGNORE INTO observationInitial(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType,capturedBy,dataForm) " &
                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDatetime & "','" & obsLevel & "','" & obsVal & "','" & obsFlag & "'," _
                                & qcStatus & "," & acquisitionType & ",'" & capturedBy & "','" & dataForm & "')"
 
                                 ' Create the Command for executing query and set its properties
                                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
-
+                                objCmd.CommandTimeout = 0
                                 Try
                                     'Execute query
                                     objCmd.ExecuteNonQuery()
@@ -333,6 +384,7 @@ Public Class frmUpdateDBfromQCReport
         Me.Cursor = Cursors.Default
 
     End Sub
+
 
     Private Sub btnBrowseQCOriginal_Click(sender As Object, e As EventArgs) Handles btnBrowseQCOriginal.Click
         '

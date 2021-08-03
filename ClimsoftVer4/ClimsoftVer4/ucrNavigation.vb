@@ -302,12 +302,12 @@ Public Class ucrNavigation
                 iCurrRow = GetRowPosition(dctFieldvalue)
             End If
 
-            bSuppressKeyControlChanges = True
-            updateLinkedTableEntry()
-            bSuppressKeyControlChanges = False
-            displayRecordNumber()
-
         End If
+
+        bSuppressKeyControlChanges = True
+        updateLinkedTableEntry()
+        bSuppressKeyControlChanges = False
+        displayRecordNumber()
     End Sub
 
     Private Sub updateLinkedTableEntry()
@@ -456,7 +456,7 @@ Public Class ucrNavigation
                         Exit For
                     Else
                         'ucrTemp.cboValues.SelectedIndex = 0
-                        ucrTemp.SetValue(0) ' TODO. Test this 
+                        ucrTemp.SelectDefaultValue() ' TODO. Test this 
                         If j = lstDateIncrementControls.Count - 1 Then
                             bIncrementYear = True
                         End If
@@ -466,9 +466,20 @@ Public Class ucrNavigation
                 If bIncrementYear Then
                     ucrYear.SetValue(ucrYear.GetValue() + 1)
                 End If
+
+                'if year is incremented the this will be false. TODO. then just check on bIncrementYear
                 If ucrLinkedTableEntry.bUpdating Then
+                    'go to the next sequncer value
+                    iSelectedSequencerRow = iSelectedSequencerRow + 1
                     IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, iSelectedSequencerRow, lstDateIncrementControls, ucrYear)
+                Else
+                    'go to the first sequencer value
+                    IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
                 End If
+            ElseIf ucrYear IsNot Nothing Then
+                ucrYear.SetValue(ucrYear.GetValue() + 1)
+                'go to the first sequencer value
+                IncrementNextSequencerRowValues(dtbSequencer, dctKeySequencerControls, 0, lstDateIncrementControls, ucrYear)
 
             End If
         End If
@@ -644,7 +655,7 @@ Public Class ucrNavigation
             'FROM `surf_times` S, (SELECT @pos := 0) p WHERE `Map` = "surf_mesa"  ORDER BY `Time` ) `surf_times` WHERE `SteamID` = "76561198065863390" ORDER BY pos LIMIT 1;
 
             i = 0
-            Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+            Using Command As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                 Using reader As MySql.Data.MySqlClient.MySqlDataReader = Command.ExecuteReader()
                     If reader.HasRows Then
                         While reader.Read()

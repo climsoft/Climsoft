@@ -2,6 +2,7 @@
     Private strValueFieldName As String = "hh_"
     Private strFlagFieldName As String = "flag"
     Private bTotalRequired As Boolean
+    Dim FldName As New dataEntryGlobalRoutines
 
     Private Sub UcrHourly_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -39,6 +40,7 @@
             ucrNavigation.SetSortBy("entryDatetime")
             ucrNavigation.PopulateControl() 'populate the values
 
+            If FldName.Key_Entry_Mode(frmNewHourly.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If
     End Sub
 
@@ -48,17 +50,33 @@
             ' ucrNavigation.NewRecord() 'temporary
             SaveEnable()
             UcrValueFlagPeriod0.Focus()
+
+            'Get the Station from the last record by the current login user
+            Dim usrStn As New dataEntryGlobalRoutines
+            usrStn.GetCurrentStation("form_hourly", ucrStationSelector.cboValues.Text)
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message, "Add New Record", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub BtnSaveAndUpdate_Click(sender As Object, e As EventArgs) Handles btnSave.Click, btnUpdate.Click
-        'Change the signature(user) and the DATETIME first before saving 
-        GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
-        GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Try
+            'Change the signature(user) and the DATETIME first before saving 
+            GetTable.Rows(0).Item("signature") = frmLogin.txtUsername.Text
+            GetTable.Rows(0).Item("entryDatetime") = Date.Now
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message, "Saving", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub BtnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
+        'Open form for displaying data transfer progress
+        frmFormUpload.lblFormName.Text = "form_hourly"
+        frmFormUpload.Text = frmFormUpload.Text & " for " & frmFormUpload.lblFormName.Text
+
+        frmFormUpload.Show()
+        Exit Sub
+
+
         'upload code in the background thread
         Dim frm As New frmNewComputationProgress
         frm.SetHeader("Uploading " & ucrNavigation.iMaxRows & " records")
@@ -322,7 +340,7 @@
             'Get all the records from the table
             Using cmdSelect As New MySql.Data.MySqlClient.MySqlCommand(
                 "Select * FROM " & strTableName & " ORDER BY entryDatetime",
-                clsDataConnection.OpenedConnection)
+                clsDataConnection.GetOpenedConnection)
                 Using da As New MySql.Data.MySqlClient.MySqlDataAdapter(cmdSelect)
                     da.Fill(dtbAllRecords)
                 End Using
@@ -368,7 +386,7 @@
 
                         'check if record exists
                         strSql = "SELECT * FROM observationInitial WHERE recordedFrom=@stationId AND describedBy=@elemCode AND obsDatetime=@obsDatetime AND qcStatus=@qcStatus AND acquisitionType=@acquisitiontype AND dataForm=@dataForm"
-                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                        Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                             cmd.Parameters.AddWithValue("@stationId", strStationId)
                             cmd.Parameters.AddWithValue("@elemCode", lElementId)
                             cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
@@ -394,7 +412,7 @@
                         End If
 
                         Try
-                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.OpenedConnection)
+                            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(strSql, clsDataConnection.GetOpenedConnection)
                                 cmd.Parameters.AddWithValue("@stationId", strStationId)
                                 cmd.Parameters.AddWithValue("@elemCode", lElementId)
                                 cmd.Parameters.AddWithValue("@obsDatetime", dtObsDateTime)
