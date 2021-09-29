@@ -154,7 +154,7 @@ Partial Class frmDBUtilities
         '
         Me.ToolStripSynoptic.Name = "ToolStripSynoptic"
         Me.ToolStripSynoptic.Size = New System.Drawing.Size(215, 22)
-        Me.ToolStripSynoptic.Text = "Synoptic"
+        Me.ToolStripSynoptic.Text = "Dekadal"
         Me.ToolStripSynoptic.Visible = False
         '
         'MultipleElementColumnsToolStripMenuItem
