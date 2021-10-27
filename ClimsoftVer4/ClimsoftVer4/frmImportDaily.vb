@@ -965,6 +965,7 @@
 
                             For Each currentField In currentRow
                                 hd = DataGridView1.Columns(col).Name
+                                'MsgBox(hd)
                                 dat = currentField
                                 With DataGridView1
                                     If col < .ColumnCount Then
@@ -990,9 +991,8 @@
                                         ElseIf .Columns(col).Name = "NA" Then ' Not Required
                                             'Column labeled NA will be skipped
                                         Else
-
                                             ' Data column follows
-
+                                            cod = hd
                                             ' Days For Monthly accumulated data if any
                                             If optMonthly.Checked = True Then d = DateTime.DaysInMonth(y, m)
 
@@ -1007,18 +1007,20 @@
 
                                             ' Check for missing flag data values 
                                             If dat = txtMissingFlag.Text Then
-                                                    If IsDate(dt_tm) Then
-                                                        If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
-                                                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
-                                                        lblRecords.Refresh()
-                                                        col = col + 1
-                                                    End If
-                                                    Continue For
+                                                'MsgBox(hd & " " & dt_tm)
+                                                If IsDate(dt_tm) Then
+                                                    'MsgBox(st & " " & cod)
+                                                    If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype)
+                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Refresh()
+                                                    col = col + 1
                                                 End If
+                                                Continue For
+                                            End If
 
-                                                ' Process data
-                                                cod = hd
-                                                dat = currentField
+                                            ' Process data
+
+                                            dat = currentField
                                                 flg = ""
 
                                                 If IsNumeric(dat) Then
@@ -1028,11 +1030,12 @@
                                                     Get_Value_Flag(cod, dat, flg)
                                                 End If
 
-                                                ' Process Dekadal data if any
-                                                If optDekadal.Checked = True Then
-                                                    cprd = GetDekadPeriod(dt_tm)
-                                                    If IsNumeric(dat) Then flg = "C"
-                                                End If
+                                            ' Process Dekadal data if any
+                                            If optDekadal.Checked = True Then
+                                                dt_tm = y & "-" & m & "-" & d & " " & h & ":00:00"
+                                                cprd = GetDekadPeriod(dt_tm)
+                                                If IsNumeric(dat) Then flg = "C"
+                                            End If
 
                                             ' Period and Flag Days For Monthly accumulated data if any
                                             If optMonthly.Checked = True Then
@@ -1416,7 +1419,7 @@
         Try
             If Val(cprd) < 1 Then cprd = "NULL" ' No cummulative values
 
-            dat = stn & ", " & code & ", " & datetime & ", " & levels & " ," & obsVal & ", " & flg & ", " & cprd & ", " & acqTyp
+            dat = stn & "," & code & "," & datetime & "," & levels & "," & obsVal & "," & flg & "," & cprd & "," & acqTyp
 
             Print(101, dat)
             PrintLine(101)

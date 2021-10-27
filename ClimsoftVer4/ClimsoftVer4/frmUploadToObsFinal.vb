@@ -609,6 +609,8 @@
             '    If ex.HResult <> -2147024882 Then MsgBox(ex.Message)
             'End Try
             'MsgBox(7)
+
+            'MsgBox("Uploading records with qcStatus=2")
             For n = 0 To maxRows - 1
 
                 lblTableRecords.Text = "Uploading records with qcStatus=2"
@@ -675,9 +677,10 @@
 
                 'Generate SQL string for replacing existing records of same Key with records with qcStatus 2
                 ' Modified to only update values in the necessary fields in the record that have been changed 
+
                 strSQL = "REPLACE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag, qcStatus) " &
                     "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & qcStatus & ");"
-
+                'MsgBox(strSQL)
                 ' Create the Command for executing query and set its properties
                 objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
                 objCmd.CommandTimeout = 0

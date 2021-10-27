@@ -1693,7 +1693,8 @@ Err:
                     For k = 0 To maxRows - 1
 
                         For i = 0 To ds.Tables("observationfinal").Columns.Count - 1
-                            If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i, ds)
+                            'If Not IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then FormattedOutput(11, k, i, ds)
+                            FormattedOutput(11, k, i, ds)
                         Next
                         PrintLine(11)
                     Next
