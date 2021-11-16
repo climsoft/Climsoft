@@ -300,9 +300,14 @@ Public Class formProductsSelectCriteria
             For i = 0 To lstvLevels.Items.Count - 1
                 If lstvLevels.Items(i).Checked Then
                     If levlist = "" Then
-                        levlist = "'" & lstvLevels.Items(i).Text & "'"
+                        If lstvLevels.Items(i).Text = "surface" Then
+                            levlist = "'" & lstvLevels.Items(i).Text & "'"
+                        Else
+                            levlist = lstvLevels.Items(i).Text
+                        End If
                     Else
-                        levlist = levlist & " OR obsLevel = " & "'" & lstvLevels.Items(i).Text & "'"
+                        'levlist = levlist & " OR obsLevel = " & "'" & lstvLevels.Items(i).Text & "'"
+                        levlist = levlist & " OR obsLevel = " & lstvLevels.Items(i).Text
                     End If
                 End If
             Next
@@ -507,7 +512,7 @@ Public Class formProductsSelectCriteria
                     elmcolmn = ""
                     If lstvElements.Items.Count > 0 Then
                         elmcolmn = " " & SumAvg & "(IF(describedBy = '" & lstvElements.Items(0).Text & "', value, NULL)) AS '" & lstvElements.Items(0).SubItems(1).Text & "'"
-                    For i = 0 To lstvElements.Items.Count - 1
+                        For i = 0 To lstvElements.Items.Count - 1
                             SumAvg = "AVG"
                             If lstvElements.Items(i).Text = 5 Or lstvElements.Items(i).Text = 18 Then SumAvg = "SUM"
                             If i = 0 Then
@@ -730,9 +735,13 @@ Public Class formProductsSelectCriteria
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
-                    sql = "SELECT recordedFrom as StationId,stationName as Station_Name, obsLevel as Levels, latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, obsLevel, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
-                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and (obsLevel = " & levlist & ") ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime),obsLevel;"
+                    'sql = "SELECT recordedFrom as StationId,stationName as Station_Name, obsLevel as Levels, latitude as Lat, longitude as Lon,elevation as Elev, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day," & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, obsLevel, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                    '"WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and (obsLevel = " & levlist & ") ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, year(obsDatetime), month(obsDatetime), day(obsDatetime),obsLevel;"
 
+                    sql = "SELECT recordedFrom as StationId,stationName as Station_Name, latitude as Lat, longitude as Lon,elevation as Elev, obsLevel as Level, year(obsDatetime) as Year,month(obsDatetime) as Month,day(obsDatetime) as Day,CAST(time(obsDatetime) as CHAR) as Time, " & elmcolmn & " FROM (SELECT recordedFrom, describedBy, obsDatetime, StationName, obsLevel, latitude, longitude,elevation, obsValue value FROM station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                    "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') and (obsLevel = " & levlist & ") ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId, obsDatetime,obsLevel;"
+
+                    'MsgBox(sql)
                     DataProducts(sql, lblProductType.Text)
 
                 Case "Monthly Levels"
@@ -741,25 +750,47 @@ Public Class formProductsSelectCriteria
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
-                    TmpTable(stnlist, elmlist, sdate, edate, SumAvg, levlist)
-                    sql = "Select recordedFrom As StationID, stationName As Station_Name, obsLevel, latitude As Lat, longitude As Lon, elevation As Elev, YY, MM, " & elmcolmn & " FROM(SELECT recordedFrom, latitude, longitude, elevation, describedBy, stationName, obsLevel, YY, MM, value, DF " &
-                          "From station INNER Join tmpproducts On stationId = recordedFrom " &
-                          "Where DF = 0 Order By recordedFrom, YY, MM) t GROUP BY StationId,YY, MM, obsLevel;"
+                    ' Compute for complete months only
+                    'sql = "Select recordedFrom As StationID, stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, YY, MM, Level, " & elmcolmn & " FROM(SELECT recordedFrom, latitude, longitude, elevation, describedBy, stationName, CAST(obsLevel as CHAR) as Level, YY, MM, value, DF 
+                    '      From station INNER Join (Select  recordedFrom, describedBy, obsLevel,Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF From observationfinal 
+                    '      Where (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') AND (obsLevel =" & levlist & ") 
+                    '      group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel) t
+                    '      On stationId = recordedFrom) tt
+                    '      Where DF =0
+                    '      GROUP BY StationId,YY, MM, Level Order By recordedFrom, YY, MM, Level DESC;"
+
+                    ' Compute even for non complete months
+                    sql = "Select recordedFrom As StationID, stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, YY, MM, Level, " & elmcolmn & " FROM (SELECT recordedFrom, latitude, longitude, elevation, describedBy, stationName, CAST(obsLevel as INT) as Level, YY, MM, value, DF 
+                          From station INNER Join (Select  recordedFrom, describedBy, obsLevel,Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF From observationfinal 
+                          Where (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' and '" & edate & "') AND (obsLevel =" & levlist & ") 
+                          group by recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel) t
+                          On stationId = recordedFrom) tt
+                          GROUP BY StationId,YY, MM, Level Order By recordedFrom, YY, MM, Level DESC;"
 
                     DataProducts(sql, lblProductType.Text)
-
+                    'cmbElement.Text = sql
                 Case "Annual Levels"
                     If levlist = "" Then
                         MsgBox("No Level Selected")
                         Me.Cursor = Cursors.Default
                         Exit Sub
                     End If
-                    TmpTable(stnlist, elmlist, sdate, edate, SumAvg, levlist)
-                    TypTable(SumAvg, levlist)
 
-                    sql = "Select recordedFrom As StationID, stationName As Station_Name, obsLevel, latitude As Lat, longitude As Lon, elevation As Elev, YY, " & elmcolmn & " FROM(SELECT recordedFrom, describedBy, stationName, obsLevel, latitude, longitude, elevation, YY, value, DDF " &
-                          "From station INNER Join typroducts On stationId = recordedFrom " &
-                          "Where DDF = 0 Order By recordedFrom, YY) t GROUP BY StationId,YY,obsLevel;"
+                    ' Compute for complete months only (i.e. DF=0)
+                    'sql = "Select recordedFrom As StationID, stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, YY, Level, " & elmcolmn & " 
+                    '      FROM (SELECT recordedFrom, describedBy, stationName, CAST(obsLevel as CHAR) as Level, latitude, longitude, elevation, YY, value 
+                    '      FROM station INNER Join (select recordedFrom, describedBy, obsLevel,YY, " & SumAvg & "(Value) As value, SUM(DF) DDF from (Select  recordedFrom, describedBy, obsLevel,Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF 
+                    '      FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' AND '" & edate & "') AND (obsLevel =" & levlist & ") GROUP BY recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel ORDER BY recordedFrom, describedBy, YY, MM) t
+                    '      WHERE DF=0 GROUP BY recordedFrom, describedBy, YY, obsLevel order by recordedFrom, describedBy, YY) tt ON stationId = recordedFrom) ttt                        
+                    '      GROUP BY StationId,YY,Level ORDER BY recordedFrom, YY, Level DESC;"
+
+                    ' Compute even for non complete month
+                    sql = "Select recordedFrom As StationID, stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, YY, Level, " & elmcolmn & " 
+                          FROM (SELECT recordedFrom, describedBy, stationName, CAST(obsLevel as INT) as Level, latitude, longitude, elevation, YY, value 
+                          FROM station INNER Join (select recordedFrom, describedBy, obsLevel,YY, " & SumAvg & "(Value) As value, SUM(DF) DDF from (Select  recordedFrom, describedBy, obsLevel,Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF 
+                          FROM observationfinal WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") AND (obsDatetime between '" & sdate & "' AND '" & edate & "') AND (obsLevel =" & levlist & ") GROUP BY recordedFrom, describedBy,year(obsDatetime),month(obsDatetime), obsLevel ORDER BY recordedFrom, describedBy, YY, MM) t
+                          GROUP BY recordedFrom, describedBy, YY, obsLevel order by recordedFrom, describedBy, YY) tt ON stationId = recordedFrom) ttt                        
+                          GROUP BY StationId,YY,Level ORDER BY recordedFrom, YY, Level DESC;"
 
                     DataProducts(sql, lblProductType.Text)
 
@@ -805,9 +836,9 @@ Err:
     End Sub
     Sub WRPlot(stns As String, sdt As String, edt As String)
 
-        Dim fl, WRpro, wl, WrplotAPP, WrplotAppPath, dat, datval As String
-        Dim pro As Integer
-        Dim ox As Object
+        Dim fl, WRpro, WrplotAPP, WrplotAppPath, dat, datval As String
+        'Dim pro As Integer
+        'Dim ox As Object
         'Dim WDSP, WDDR As Integer
 
         Try
@@ -1004,6 +1035,7 @@ Err:
             ' Output data values
             For k = 0 To maxRows - 1
                 For i = 0 To dsp.Tables("observationfinal").Columns.Count - 1
+                    'MsgBox(dsp.Tables("observationfinal").Rows(k).Item(i))
                     FormattedOutput(11, k, i, dsp)
                 Next
                 PrintLine(11)
@@ -1870,7 +1902,7 @@ Err:
             End If
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox(ex.Message & " at  FormattedOutput")
         End Try
     End Sub
 
@@ -1944,7 +1976,7 @@ Err:
             lstvLevels.Columns.Clear()
 
             lstvLevels.Columns.Add("Levels", 130, HorizontalAlignment.Left)
-            lstvLevels.Items.Add("Surface")
+            lstvLevels.Items.Add("surface")
             lstvLevels.Items.Add("1000")
             lstvLevels.Items.Add("925")
             lstvLevels.Items.Add("850")
@@ -2612,7 +2644,7 @@ Err:
     Private Sub lstAuthority_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAuthority.SelectedIndexChanged
         'If lstAuthority.SelectedItem <> "" Then
         sql = "select stationId, stationName from station where authority = '" & lstAuthority.SelectedItem & "';"
-            Populate_StationsListView(sql)
+        Populate_StationsListView(sql)
         'End If
     End Sub
 
@@ -2728,6 +2760,9 @@ Err:
         End If
     End Sub
 
+    Private Sub ToolStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip1.ItemClicked
+
+    End Sub
 
     Private Sub cmbElement_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbElement.KeyPress
         If Asc(e.KeyChar) = 13 Then add_Element(cmbElement.Text)

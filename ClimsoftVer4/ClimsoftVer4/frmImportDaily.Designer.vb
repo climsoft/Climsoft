@@ -76,11 +76,15 @@ Partial Class frmImportDaily
         Me.lblDiff = New System.Windows.Forms.Label()
         Me.txtTdiff = New System.Windows.Forms.TextBox()
         Me.chkUTC = New System.Windows.Forms.CheckBox()
+        Me.grpLaunched = New System.Windows.Forms.GroupBox()
+        Me.lblLaunched = New System.Windows.Forms.Label()
+        Me.txtDatetime = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeaders.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.pnlErrors.SuspendLayout()
         Me.grpUpperAir.SuspendLayout()
+        Me.grpLaunched.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -409,7 +413,7 @@ Partial Class frmImportDaily
         'lblElmCode
         '
         Me.lblElmCode.AutoSize = True
-        Me.lblElmCode.Location = New System.Drawing.Point(374, 107)
+        Me.lblElmCode.Location = New System.Drawing.Point(361, 107)
         Me.lblElmCode.Name = "lblElmCode"
         Me.lblElmCode.Size = New System.Drawing.Size(73, 13)
         Me.lblElmCode.TabIndex = 40
@@ -417,7 +421,7 @@ Partial Class frmImportDaily
         '
         'txtElmCode
         '
-        Me.txtElmCode.Location = New System.Drawing.Point(449, 103)
+        Me.txtElmCode.Location = New System.Drawing.Point(436, 103)
         Me.txtElmCode.Name = "txtElmCode"
         Me.txtElmCode.Size = New System.Drawing.Size(79, 20)
         Me.txtElmCode.TabIndex = 39
@@ -538,14 +542,15 @@ Partial Class frmImportDaily
         Me.grpUpperAir.Controls.Add(Me.chkUpperAir)
         Me.grpUpperAir.Location = New System.Drawing.Point(526, 36)
         Me.grpUpperAir.Name = "grpUpperAir"
-        Me.grpUpperAir.Size = New System.Drawing.Size(117, 42)
+        Me.grpUpperAir.Size = New System.Drawing.Size(117, 35)
         Me.grpUpperAir.TabIndex = 47
         Me.grpUpperAir.TabStop = False
+        Me.grpUpperAir.Visible = False
         '
         'chkUpperAir
         '
         Me.chkUpperAir.AutoSize = True
-        Me.chkUpperAir.Location = New System.Drawing.Point(9, 14)
+        Me.chkUpperAir.Location = New System.Drawing.Point(9, 9)
         Me.chkUpperAir.Name = "chkUpperAir"
         Me.chkUpperAir.Size = New System.Drawing.Size(96, 17)
         Me.chkUpperAir.TabIndex = 3
@@ -585,11 +590,41 @@ Partial Class frmImportDaily
         Me.chkUTC.UseVisualStyleBackColor = True
         Me.chkUTC.Visible = False
         '
+        'grpLaunched
+        '
+        Me.grpLaunched.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.grpLaunched.Controls.Add(Me.lblLaunched)
+        Me.grpLaunched.Controls.Add(Me.txtDatetime)
+        Me.grpLaunched.Location = New System.Drawing.Point(445, 79)
+        Me.grpLaunched.Name = "grpLaunched"
+        Me.grpLaunched.Size = New System.Drawing.Size(201, 44)
+        Me.grpLaunched.TabIndex = 51
+        Me.grpLaunched.TabStop = False
+        Me.grpLaunched.Text = "DateAndTime (dd/mm/yyyy hh:nn:ss)"
+        Me.grpLaunched.Visible = False
+        '
+        'lblLaunched
+        '
+        Me.lblLaunched.AutoSize = True
+        Me.lblLaunched.Location = New System.Drawing.Point(8, 21)
+        Me.lblLaunched.Name = "lblLaunched"
+        Me.lblLaunched.Size = New System.Drawing.Size(55, 13)
+        Me.lblLaunched.TabIndex = 1
+        Me.lblLaunched.Text = "Launched"
+        '
+        'txtDatetime
+        '
+        Me.txtDatetime.Location = New System.Drawing.Point(67, 16)
+        Me.txtDatetime.Name = "txtDatetime"
+        Me.txtDatetime.Size = New System.Drawing.Size(114, 20)
+        Me.txtDatetime.TabIndex = 0
+        '
         'frmImportDaily
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(970, 663)
+        Me.Controls.Add(Me.grpLaunched)
         Me.Controls.Add(Me.lblDiff)
         Me.Controls.Add(Me.txtTdiff)
         Me.Controls.Add(Me.chkUTC)
@@ -636,6 +671,8 @@ Partial Class frmImportDaily
         Me.pnlErrors.PerformLayout()
         Me.grpUpperAir.ResumeLayout(False)
         Me.grpUpperAir.PerformLayout()
+        Me.grpLaunched.ResumeLayout(False)
+        Me.grpLaunched.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -694,4 +731,7 @@ Partial Class frmImportDaily
     Friend WithEvents lblDiff As Label
     Friend WithEvents txtTdiff As TextBox
     Friend WithEvents chkUTC As CheckBox
+    Friend WithEvents grpLaunched As GroupBox
+    Friend WithEvents txtDatetime As TextBox
+    Friend WithEvents lblLaunched As Label
 End Class
