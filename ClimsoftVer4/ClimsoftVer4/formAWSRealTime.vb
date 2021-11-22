@@ -1310,7 +1310,7 @@ Err:
                     Process_Status("Processing input record " & k + 1 & " of " & rws)
                     ' Get date and time for the current record
                     datestring = Get_DateStamp(AWSsite, dTable, k)
-
+                    'MsgBox(datestring)
                     'Skip older records
                     If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
@@ -4142,6 +4142,8 @@ Err:
 
                     Select Case .Rows(i).Item("Element_abbreviation")
                         Case "Date/time"
+                            Return dt
+                        Case "date/time"
                             Return dt
                         Case "yyyymmddhhmm"
                             Return DateSerial(Strings.Left(dt, 4), Strings.Mid(dt, 5, 2), Strings.Mid(dt, 7, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")
