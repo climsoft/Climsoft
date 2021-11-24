@@ -27,8 +27,12 @@ Public Class ucrNavigation
         End If
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
+        If ucrLinkedTableEntry IsNot Nothing AndAlso ucrLinkedTableEntry.GetDataDefinition.GetFilter IsNot Nothing Then
+            iMaxRows = clsDataDefinition.TableCount(ucrLinkedTableEntry.GetDataDefinition.GetFilter.Clone)
+        Else
+            iMaxRows = clsDataDefinition.TableCount()
+        End If
 
-        iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
         currentRowDataPos = -1
         currentRowData = New Dictionary(Of String, String)
