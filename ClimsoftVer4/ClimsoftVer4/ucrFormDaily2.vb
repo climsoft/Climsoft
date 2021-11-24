@@ -107,7 +107,7 @@ Public Class ucrFormDaily2
             ucrValueFlagPeriod1.Focus()
 
 
-            'Dim newSstrStationValue = ucrStationSelector.GetValue
+            Dim newSstrStationValue = ucrStationSelector.GetValue
 
 
             'ucrStationSelector.SetValue(strStationValue)
