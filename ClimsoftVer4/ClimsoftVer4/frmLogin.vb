@@ -156,10 +156,14 @@ Public Class frmLogin
     End Sub
 
     Sub climsoftuserRoles()
-        'Set SQL for populating user roles
-        rolesSQL = "SELECT * from climsoftusers"
-        daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
-        daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
+        Try
+            'Set SQL for populating user roles
+            rolesSQL = "SELECT * from climsoftusers"
+            daClimsoftUserRoles = New MySql.Data.MySqlClient.MySqlDataAdapter(rolesSQL, conn)
+            daClimsoftUserRoles.Fill(dsClimsoftUserRoles, "userRoles")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Sub languageTableInit()

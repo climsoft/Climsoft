@@ -259,6 +259,7 @@ Err:
                 txtmssFTPMode.Text = ds.Tables("aws_mss").Rows(num).Item("ftpMode")
                 txtmssUser.Text = ds.Tables("aws_mss").Rows(num).Item("userName")
                 txtMSSPW.Text = ds.Tables("aws_mss").Rows(num).Item("password")
+                lstFolders.SelectedItem = ds.Tables("aws_mss").Rows(num).Item("foldertype")
 
             Case "sites"
                 txtSiteID.Text = ds.Tables("aws_sites").Rows(num).Item("SiteID")
@@ -317,6 +318,7 @@ Err:
                 ds.Tables(tbl).Rows(num).Item("ftpMode") = txtmssFTPMode.Text
                 ds.Tables(tbl).Rows(num).Item("userName") = txtmssUser.Text
                 ds.Tables(tbl).Rows(num).Item("password") = txtMSSPW.Text
+                ds.Tables(tbl).Rows(num).Item("foldertype") = lstFolders.SelectedItem
 
             Case "pnlDataStructures"
                 'ds.Tables(tbl).Rows(num).Item("strName") = txtStrName.Text
@@ -480,6 +482,7 @@ Err:
             dsNewRow.Item("ftpMode") = txtBasestationFTPMode.Text
             dsNewRow.Item("userName") = txtmssUser.Text
             dsNewRow.Item("password") = txtMSSPW.Text
+            dsNewRow.Item("foldertype") = lstFolders.SelectedItem
 
             ' Confirm Password
             If txtMSSPW.Text <> txtMSSConfirm.Text Then
@@ -918,56 +921,70 @@ Err:
     End Sub
 
     Sub load_PressingParameters(LoadType As String)
-        On Error GoTo Err
+        'On Error GoTo Err
         Dim dbpconn As New MySql.Data.MySqlClient.MySqlConnection
         Dim dpa As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim qry As MySql.Data.MySqlClient.MySqlCommand
         Dim dps As New DataSet
         Dim sqlp As String
 
         Dim recUpdate As New dataEntryGlobalRoutines
 
-        sqlp = "SELECT * FROM aws_process_parameters"
-        dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
-        ' Remove timeout requirement
-        dpa.SelectCommand.CommandTimeout = 0
+        Try
 
-        dps.Clear()
-        dpa.Fill(dps, "aws_process_parameters")
+            sqlp = "SELECT * FROM aws_process_parameters"
+            dpa = New MySql.Data.MySqlClient.MySqlDataAdapter(sqlp, dbconn)
+            ' Remove timeout requirement
+            dpa.SelectCommand.CommandTimeout = 0
 
+            dps.Clear()
+            dpa.Fill(dps, "aws_process_parameters")
 
-        Select Case LoadType
-            Case "txtlFill"
-                txtInterval.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval")
-                txtOffset.Text = dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset")
-                txtPeriod.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod")
-                txtTimeout.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout")
-                txtGMTDiff.Text = dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff")
-                chkDeleteFile.Checked = dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile")
+            '' Insert default values if table is empty
+            'If dps.Tables("aws_process_parameters").Rows.Count = 0 Then
+            '    sqlp = "INSERT INTO `" & mndb & "`.`aws_process_parameters` (`RetrievePeriod`, `RetrieveTimeout`, `DelinputFile`, `UTCDiff`) VALUES (2, 10, 0, 0);"
 
-            Case "dpupdate"
-                Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dpa)
+            '    qry = New MySql.Data.MySqlClient.MySqlCommand(sqlp, dbconn)
+            '    'Execute query
+            '    qry.ExecuteNonQuery()
+            'End If
 
-                dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval") = txtInterval.Text
-                dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset") = txtOffset.Text
-                dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod") = txtPeriod.Text
-                dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout") = txtTimeout.Text
-                dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff") = txtGMTDiff.Text
+            Select Case LoadType
+                Case "txtlFill"
+                    txtInterval.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval")
+                    txtOffset.Text = dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset")
+                    txtPeriod.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod")
+                    txtTimeout.Text = dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout")
+                    txtGMTDiff.Text = dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff")
+                    chkDeleteFile.Checked = dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile")
 
-                If chkDeleteFile.Checked = True Then
-                    dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 1
-                Else
-                    dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 0
-                End If
+                Case "dpupdate"
+                    Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(dpa)
 
-                dpa.Update(dps, "aws_process_parameters")
+                    dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveInterval") = txtInterval.Text
+                    dps.Tables("aws_process_parameters").Rows(0).Item("HourOffset") = txtOffset.Text
+                    dps.Tables("aws_process_parameters").Rows(0).Item("RetrievePeriod") = txtPeriod.Text
+                    dps.Tables("aws_process_parameters").Rows(0).Item("RetrieveTimeout") = txtTimeout.Text
+                    dps.Tables("aws_process_parameters").Rows(0).Item("UTCDiff") = txtGMTDiff.Text
 
-                recUpdate.messageBoxRecordedUpdated()
+                    If chkDeleteFile.Checked = True Then
+                        dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 1
+                    Else
+                        dps.Tables("aws_process_parameters").Rows(0).Item("DelinputFile") = 0
+                    End If
 
-        End Select
-        Exit Sub
-Err:
-        'MsgBox(Err.Description)
-        Log_Errors(Err.Description)
+                    dpa.Update(dps, "aws_process_parameters")
+
+                    recUpdate.messageBoxRecordedUpdated()
+
+            End Select
+        Catch ex As Exception
+            'Exit Sub
+            'Err:
+            'MsgBox(Err.Description)
+            'Log_Errors(Err.Description)
+            Log_Errors(ex.Message)
+        End Try
     End Sub
     Sub load_Indicators(Optional Tmpt As String = "")
 
@@ -1310,7 +1327,7 @@ Err:
                     Process_Status("Processing input record " & k + 1 & " of " & rws)
                     ' Get date and time for the current record
                     datestring = Get_DateStamp(AWSsite, dTable, k)
-
+                    'MsgBox(datestring)
                     'Skip older records
                     If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
@@ -1832,6 +1849,7 @@ Err:
             Select Case ftpmethod
                 Case "get"
                     sql = "SELECT * FROM aws_basestation"
+
                     rf = GetDataSet("aws_basestation", sql)
 
                     num = rf.Tables("aws_basestation").Rows.Count
@@ -1848,18 +1866,24 @@ Err:
                         End With
                     Next
                 Case "put"
-                    sql = "SELECT * FROM aws_mss"
+                    'sql = "SELECT * FROM aws_mss"
+
+                    ' Code changed to allow inclusion separate folders for binary and alphanumeric data
+                    sql = "SELECT * FROM aws_mss where foldertype = 'binary';"
+
                     rf = GetDataSet("aws_mss", sql)
                     If rf.Tables("aws_mss").Rows.Count = 0 Then
                         Log_Errors("No Message Switch available")
                         Return False
                     Else
                         With rf.Tables("aws_mss") ' Only one message switch. Get its details
+
                             ftp_host = .Rows(0).Item("ftpId")
                             flder = .Rows(0).Item("inputFolder")
                             ftpmode = .Rows(0).Item("ftpMode")
                             usr = .Rows(0).Item("userName")
                             pwd = .Rows(0).Item("password")
+                            'Log_Errors(flder)
                         End With
                     End If
             End Select
@@ -1883,7 +1907,9 @@ Err:
             ftpscript = Lflder & "\ftp_put.txt"
             'ftpscript = "ftp_put.txt"
 
-            sql = "SELECT * FROM aws_mss"
+            'sql = "SELECT * FROM aws_mss"
+            sql = "SELECT * FROM aws_mss where foldertype = 'binary';"
+
             rf = GetDataSet("aws_mss", sql)
             If rf.Tables("aws_mss").Rows.Count = 0 Then
                 Log_Errors("No Message Switch available")
@@ -4142,6 +4168,8 @@ Err:
 
                     Select Case .Rows(i).Item("Element_abbreviation")
                         Case "Date/time"
+                            Return dt
+                        Case "date/time"
                             Return dt
                         Case "yyyymmddhhmm"
                             Return DateSerial(Strings.Left(dt, 4), Strings.Mid(dt, 5, 2), Strings.Mid(dt, 7, 2)) & " " & TimeSerial(Strings.Mid(dt, 9, 2), Strings.Mid(dt, 11, 2), "00")

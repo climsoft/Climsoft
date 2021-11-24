@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmModifyObservations
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,8 @@ Partial Class frmModifyObservations
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.DataGridViewObservations = New System.Windows.Forms.DataGridView()
         Me.GrBxSelection = New System.Windows.Forms.GroupBox()
         Me.txtEndHour = New System.Windows.Forms.TextBox()
@@ -55,12 +54,10 @@ Partial Class frmModifyObservations
         Me.optFinal = New System.Windows.Forms.RadioButton()
         Me.optInitial = New System.Windows.Forms.RadioButton()
         Me.lblrecords = New System.Windows.Forms.Label()
-        Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.DataGridViewObservations, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrBxSelection.SuspendLayout()
         Me.GrBxCommands.SuspendLayout()
         Me.GrBxDataBase.SuspendLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridViewObservations
@@ -71,7 +68,7 @@ Partial Class frmModifyObservations
         Me.DataGridViewObservations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewObservations.Location = New System.Drawing.Point(12, 108)
         Me.DataGridViewObservations.Name = "DataGridViewObservations"
-        Me.DataGridViewObservations.Size = New System.Drawing.Size(1137, 468)
+        Me.DataGridViewObservations.Size = New System.Drawing.Size(1137, 501)
         Me.DataGridViewObservations.TabIndex = 0
         '
         'GrBxSelection
@@ -375,7 +372,7 @@ Partial Class frmModifyObservations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1161, 588)
+        Me.ClientSize = New System.Drawing.Size(1161, 611)
         Me.Controls.Add(Me.lblrecords)
         Me.Controls.Add(Me.GrBxDataBase)
         Me.Controls.Add(Me.GrBxCommands)
@@ -389,7 +386,6 @@ Partial Class frmModifyObservations
         Me.GrBxCommands.ResumeLayout(False)
         Me.GrBxDataBase.ResumeLayout(False)
         Me.GrBxDataBase.PerformLayout()
-        CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -426,5 +422,4 @@ Partial Class frmModifyObservations
     Friend WithEvents txtStartDay As System.Windows.Forms.TextBox
     Friend WithEvents lblEndDay As System.Windows.Forms.Label
     Friend WithEvents lblStartDay As System.Windows.Forms.Label
-    Friend WithEvents BindingSource1 As BindingSource
 End Class

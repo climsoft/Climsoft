@@ -60,6 +60,14 @@
 
     End Sub
 
+    Private Sub butXinterval_Click(sender As Object, e As EventArgs) Handles butXinterval.Click
+        If Val(txtXinterval.Text) <> 0 Then MSChart1.ChartAreas("ChartArea1").AxisX.Interval = CInt(txtXinterval.Text)
+    End Sub
+
+    Private Sub butYinterval_Click(sender As Object, e As EventArgs) Handles butYinterval.Click
+        If Val(txtYinterval.Text) <> 0 Then MSChart1.ChartAreas("ChartArea1").AxisY.Interval = CInt(txtYinterval.Text)
+    End Sub
+
     Private Sub comdSave_Click(sender As Object, e As EventArgs) Handles comdSave.Click
         SaveImageFormat(MSChart1)
 
@@ -193,6 +201,7 @@
                 Next
             End With
             grpColors.Visible = True
+            grpXYintervals.Visible = True
 
         Catch ex As Exception
             Me.Cursor = Cursors.Default

@@ -66,10 +66,9 @@
             das = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbc)
             ' Set to unlimited timeout period
             das.SelectCommand.CommandTimeout = 0
-
             recs.Clear()
-
             das.Fill(recs, "obsvs")
+
             If recs.Tables("obsvs").Rows.Count = 0 Then
                 MsgBox("Not data found. Check Selections")
                 lblrecords.Text = recs.Tables("obsvs").Rows.Count & " Records Selected"

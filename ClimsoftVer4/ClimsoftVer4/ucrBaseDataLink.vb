@@ -18,6 +18,7 @@ Public Class ucrBaseDataLink
     Protected dtbRecords As New DataTable
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrValueView, KeyValuePair(Of String, TableFilter))
     Private strTableName As String
+    Protected lstExtraTableFilters As New List(Of TableFilter)
 
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
@@ -161,6 +162,10 @@ Public Class ucrBaseDataLink
         Return True
     End Function
 
+    Public Sub AddExtraFilters(strNewFieldName As String, objFieldValue As Object, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        lstExtraTableFilters.Add(New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=objFieldValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString))
+    End Sub
+
     Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
 
         Dim temp As Object
@@ -231,27 +236,41 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
+    ''' <summary>
+    ''' gets the filter object from the key controls and the extra filters
+    ''' </summary>
+    ''' <returns></returns>
     Public Function GetLinkedControlsFilter() As Object
-        Dim clsOveralControlsFilter As TableFilter
+        Dim clsOveralControlsFilter As TableFilter = Nothing
+        Dim lstAllPassedTableFilters As New List(Of TableFilter)
+
 
         UpdateDctLinkedControlsFilters()
 
-        If dctLinkedControlsFilters.Count = 0 Then
-            Return Nothing
-        ElseIf dctLinkedControlsFilters.Count > 1 Then
+        'get all the table filters; from the key controls and extra passed filters
+        For i = 0 To dctLinkedControlsFilters.Count - 1
+            lstAllPassedTableFilters.Add(dctLinkedControlsFilters.Values(i).Value.Clone())
+        Next
+
+        For i = 0 To lstExtraTableFilters.Count - 1
+            lstAllPassedTableFilters.Add(lstExtraTableFilters(i).Clone())
+        Next
+
+
+        If lstAllPassedTableFilters.Count = 1 Then
+            clsOveralControlsFilter = lstAllPassedTableFilters(0)
+        ElseIf lstExtraTableFilters.Count > 1 Then
             clsOveralControlsFilter = New TableFilter
-            For i = 0 To dctLinkedControlsFilters.Count - 2
+            For i = 0 To lstExtraTableFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
+                    clsOveralControlsFilter.SetLeftFilter(lstExtraTableFilters(i))
+                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
                     clsOveralControlsFilter.SetOperator("AND")
                 Else
-                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
+                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter)
+                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
                 End If
             Next
-        Else
-            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
         End If
         Return clsOveralControlsFilter
     End Function

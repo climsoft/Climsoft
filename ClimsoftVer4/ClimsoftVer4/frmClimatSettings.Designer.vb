@@ -381,7 +381,7 @@ Partial Class frmClimatSettings
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(176, 407)
+        Me.btnAddNew.Location = New System.Drawing.Point(171, 407)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(58, 23)
         Me.btnAddNew.TabIndex = 11

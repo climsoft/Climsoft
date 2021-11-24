@@ -327,6 +327,7 @@ Public Class frmDBUtilities
             .optMonthly.Enabled = True
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
+            .grpUpperAir.Visible = True
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
