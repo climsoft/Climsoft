@@ -63,7 +63,7 @@ Public Class ucrFormDaily2
                                                      End If
                                                  End Sub
 
-            AddField("signature")
+            'AddField("signature")
             AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
@@ -79,7 +79,7 @@ Public Class ucrFormDaily2
 
             'populate the values 
             If Not userGroup = "ClimsoftAdmin" Then
-                AddExtraFilters("root", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=False)
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=False)
             End If
 
             ucrDaily2Navigation.SetSortBy("entryDatetime")
@@ -107,7 +107,7 @@ Public Class ucrFormDaily2
             ucrValueFlagPeriod1.Focus()
 
 
-            Dim newSstrStationValue = ucrStationSelector.GetValue
+            'Dim newSstrStationValue = ucrStationSelector.GetValue
 
 
             'ucrStationSelector.SetValue(strStationValue)

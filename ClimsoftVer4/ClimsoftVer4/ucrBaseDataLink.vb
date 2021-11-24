@@ -244,7 +244,6 @@ Public Class ucrBaseDataLink
         Dim clsOveralControlsFilter As TableFilter = Nothing
         Dim lstAllPassedTableFilters As New List(Of TableFilter)
 
-
         UpdateDctLinkedControlsFilters()
 
         'get all the table filters; from the key controls and extra passed filters
@@ -259,16 +258,16 @@ Public Class ucrBaseDataLink
 
         If lstAllPassedTableFilters.Count = 1 Then
             clsOveralControlsFilter = lstAllPassedTableFilters(0)
-        ElseIf lstExtraTableFilters.Count > 1 Then
+        ElseIf lstAllPassedTableFilters.Count > 1 Then
             clsOveralControlsFilter = New TableFilter
-            For i = 0 To lstExtraTableFilters.Count - 2
+            For i = 0 To lstAllPassedTableFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(lstExtraTableFilters(i))
-                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
+                    clsOveralControlsFilter.SetLeftFilter(lstAllPassedTableFilters(i))
+                    clsOveralControlsFilter.SetRightFilter(lstAllPassedTableFilters(i + 1))
                     clsOveralControlsFilter.SetOperator("AND")
                 Else
                     clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter)
-                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
+                    clsOveralControlsFilter.SetRightFilter(lstAllPassedTableFilters(i + 1))
                 End If
             Next
         End If
