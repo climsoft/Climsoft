@@ -2125,8 +2125,8 @@ Err:
         'awsr.Clear()
         ''Log_Errors(rec)
         Exit Sub
-
 Err:
+        If Err.Number = 5 Then Exit Sub
         Log_Errors(Err.Number & " " & Err.Description & " at AwsRecord_Update")
     End Sub
 

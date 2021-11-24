@@ -363,9 +363,10 @@ Public Class frmDBUtilities
 
     Private Sub ToolStripSynoptic_Click(sender As Object, e As EventArgs) Handles ToolStripSynoptic.Click
         With frmImportDaily
-            .Text = "Synoptic Data Import"
+            .Text = "Dekadal Data Import"
             '.lblType.Visible = False
-            .lblType.Text = "Synoptic"
+            .lblType.Text = "Dekadal"
+            .optDekadal.Checked = True
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
@@ -423,7 +424,7 @@ Public Class frmDBUtilities
     Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
         With frmImportDaily
             .Text = "Monthly"
-            .lblType.Text = "Monthly"
+            .lblType.Text = "3"
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .txtStn.Enabled = True

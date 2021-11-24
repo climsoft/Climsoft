@@ -37,6 +37,7 @@ Partial Class frmUserManagement
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblFrmUserManagementGuidelines = New System.Windows.Forms.Label()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnPrivilges = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -75,9 +76,9 @@ Partial Class frmUserManagement
         'btnAddNew
         '
         Me.btnAddNew.Enabled = False
-        Me.btnAddNew.Location = New System.Drawing.Point(12, 220)
+        Me.btnAddNew.Location = New System.Drawing.Point(38, 220)
         Me.btnAddNew.Name = "btnAddNew"
-        Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
+        Me.btnAddNew.Size = New System.Drawing.Size(59, 23)
         Me.btnAddNew.TabIndex = 4
         Me.btnAddNew.Text = "Add New"
         Me.btnAddNew.UseVisualStyleBackColor = True
@@ -95,7 +96,7 @@ Partial Class frmUserManagement
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(305, 220)
+        Me.btnHelp.Location = New System.Drawing.Point(278, 220)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(52, 23)
         Me.btnHelp.TabIndex = 6
@@ -106,7 +107,7 @@ Partial Class frmUserManagement
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ControlLight
         Me.btnDelete.ForeColor = System.Drawing.Color.Red
-        Me.btnDelete.Location = New System.Drawing.Point(164, 220)
+        Me.btnDelete.Location = New System.Drawing.Point(163, 220)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(53, 23)
         Me.btnDelete.TabIndex = 7
@@ -151,7 +152,7 @@ Partial Class frmUserManagement
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(233, 220)
+        Me.btnClose.Location = New System.Drawing.Point(219, 220)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(56, 23)
         Me.btnClose.TabIndex = 5
@@ -172,18 +173,28 @@ Partial Class frmUserManagement
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(88, 220)
+        Me.btnUpdate.Location = New System.Drawing.Point(100, 220)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
         Me.btnUpdate.TabIndex = 13
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
+        'btnPrivilges
+        '
+        Me.btnPrivilges.Location = New System.Drawing.Point(461, 242)
+        Me.btnPrivilges.Name = "btnPrivilges"
+        Me.btnPrivilges.Size = New System.Drawing.Size(118, 23)
+        Me.btnPrivilges.TabIndex = 14
+        Me.btnPrivilges.Text = "Refresh Privileges"
+        Me.btnPrivilges.UseVisualStyleBackColor = True
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 266)
+        Me.Controls.Add(Me.btnPrivilges)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.lblFrmUserManagementGuidelines)
         Me.Controls.Add(Me.btnClose)
@@ -223,4 +234,5 @@ Partial Class frmUserManagement
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lblFrmUserManagementGuidelines As System.Windows.Forms.Label
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnPrivilges As Button
 End Class
