@@ -379,7 +379,7 @@ Public Class ucrNavigation
         For Each strTemp As String In iEnumerableNewFields
             dctFields.Add(strTemp, New List(Of String)({strTemp}))
         Next
-
+        'get the date controls; month and day
         Dim lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing
         If iEnumerableDateIncrementControls IsNot Nothing Then
             lstDateIncrementControls = iEnumerableDateIncrementControls.ToList
@@ -396,7 +396,7 @@ Public Class ucrNavigation
         Dim strSelectStatement As String = ""
         Dim iCurrentSequencerRow As Integer
 
-        MoveLast()
+        'MoveLast()
 
         If String.IsNullOrEmpty(strSequencer) OrElse ucrLinkedTableEntry Is Nothing OrElse dctKeyControls.Count < 1 Then
             Exit Sub

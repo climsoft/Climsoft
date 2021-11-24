@@ -77,7 +77,11 @@ Public Class ucrFormDaily2
 
             bFirstLoad = False
 
-            'populate the values
+            'populate the values 
+            If Not userGroup = "ClimsoftAdmin" Then
+                AddExtraFilters("root", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=False)
+            End If
+
             ucrDaily2Navigation.SetSortBy("entryDatetime")
             ucrDaily2Navigation.PopulateControl()
 
@@ -89,24 +93,35 @@ Public Class ucrFormDaily2
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim usrStn As New dataEntryGlobalRoutines
-        Dim txtElementCode As String
+        Dim txtElementCode, stn As String
 
         txtElementCode = ucrElementSelector.cboValues.SelectedValue
 
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names
+            'Dim strStationValue = ucrStationSelector.GetValue
 
             ' The following code has been disabled because it is found not to work well
-            'ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
+            ucrDaily2Navigation.NewSequencerRecord(txtSequencer.Text, {"elementId"}, {ucrMonth}, ucrYearSelector)
             SaveEnable()
             ucrValueFlagPeriod1.Focus()
 
-            'Get the Station from the last record by the current login user
-            usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
 
-            ' Sequence the element the date
-            Seq_Element(txtElementCode)
-            ucrElementSelector.cboValues.SelectedValue = txtElementCode
+            Dim newSstrStationValue = ucrStationSelector.GetValue
+
+
+            'ucrStationSelector.SetValue(strStationValue)
+
+            ''Get the Station from the last record by the current login user
+            'stn = ucrStationSelector.cboValues.Text
+            'usrStn.GetCurrentStation("form_daily2", stn)
+
+            'usrStn.GetCurrentStation("form_daily2", ucrStationSelector.cboValues.Text)
+            'ucrStationSelector.cboValues.Text = stn
+
+            '' Sequence the element the date
+            ' Seq_Element(txtElementCode)
+            'ucrElementSelector.cboValues.SelectedValue = txtElementCode
 
         End If
 
