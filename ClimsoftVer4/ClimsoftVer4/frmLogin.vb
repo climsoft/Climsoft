@@ -262,6 +262,8 @@ Public Class frmLogin
         End If
 
         refreshDatabases()
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub LoginForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
