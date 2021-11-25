@@ -147,8 +147,6 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-
-
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
     End Sub
@@ -169,9 +167,6 @@ Public Class ucrBaseDataLink
         If oldTableFilter IsNot Nothing Then
             'important to clone the old filter
             clsOverallFilter = New TableFilter(oldTableFilter.Clone(), newTableFilter)
-            'clsOverallFilter.SetLeftFilter(oldTableFilter.Clone())
-            'clsOverallFilter.SetRightFilter(newTableFilter)
-            'clsOverallFilter.SetOperator("AND")
         Else
             clsOverallFilter = newTableFilter
         End If
