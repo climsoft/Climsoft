@@ -63,7 +63,7 @@ Public Class ucrFormDaily2
                                                      End If
                                                  End Sub
 
-            'AddField("signature")
+            AddField("signature")
             AddField("entryDatetime")
 
             AddLinkedControlFilters(ucrStationSelector, ucrStationSelector.FieldName, "=", strLinkedFieldName:="stationId", bForceValuesAsString:=True)
