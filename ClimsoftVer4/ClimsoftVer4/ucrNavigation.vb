@@ -655,6 +655,11 @@ Public Class ucrNavigation
             Next
 
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
+
+            If ucrLinkedTableEntry IsNot Nothing AndAlso ucrLinkedTableEntry.GetDataDefinition.GetFilter IsNot Nothing Then
+                strSql = strSql & " WHERE " & ucrLinkedTableEntry.GetDataDefinition.GetFilter.Clone.GetSqlExpression
+            End If
+
             If strSortCol <> "" Then
                 strSql = strSql & " ORDER BY " & strSortCol
             End If
