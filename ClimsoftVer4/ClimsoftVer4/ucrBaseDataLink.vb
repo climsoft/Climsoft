@@ -244,7 +244,7 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Private Function GetLinkedControlsFilter() As TableFilter
+    Public Function GetLinkedControlsFilter() As TableFilter
         Dim clsOverallControlsFilter As TableFilter = Nothing
 
         UpdateDctLinkedControlsFilters()
