@@ -79,7 +79,7 @@ Public Class ucrFormDaily2
 
             'populate the values 
             If Not userGroup = "ClimsoftAdmin" Then
-                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=False)
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
             End If
 
             ucrDaily2Navigation.SetSortBy("entryDatetime")
