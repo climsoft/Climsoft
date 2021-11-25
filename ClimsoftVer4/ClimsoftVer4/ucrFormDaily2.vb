@@ -93,9 +93,9 @@ Public Class ucrFormDaily2
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim usrStn As New dataEntryGlobalRoutines
-        Dim txtElementCode, stn As String
+        'Dim txtElementCode, stn As String
 
-        txtElementCode = ucrElementSelector.cboValues.SelectedValue
+        'txtElementCode = ucrElementSelector.cboValues.SelectedValue
 
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names

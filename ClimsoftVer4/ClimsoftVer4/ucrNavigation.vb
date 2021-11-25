@@ -400,7 +400,7 @@ Public Class ucrNavigation
         Dim strSelectStatement As String = ""
         Dim iCurrentSequencerRow As Integer
 
-        'MoveLast()
+        MoveLast()
 
         If String.IsNullOrEmpty(strSequencer) OrElse ucrLinkedTableEntry Is Nothing OrElse dctKeyControls.Count < 1 Then
             Exit Sub
