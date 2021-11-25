@@ -18,7 +18,6 @@ Public Class ucrBaseDataLink
     Protected dtbRecords As New DataTable
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrValueView, KeyValuePair(Of String, TableFilter))
     Private strTableName As String
-    Protected lstExtraTableFilters As New List(Of TableFilter)
 
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
@@ -144,7 +143,7 @@ Public Class ucrBaseDataLink
 
     Public Sub UpdateDataTable()
         If Not IsNothing(clsDataDefinition) Then
-            dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsAndExtraFilter())
+            dtbRecords = clsDataDefinition.GetDataTable(GetLinkedControlsFilter())
         End If
     End Sub
 
@@ -168,19 +167,16 @@ Public Class ucrBaseDataLink
 
         Dim clsOverallFilter As TableFilter
         If oldTableFilter IsNot Nothing Then
-            clsOverallFilter = New TableFilter
-            clsOverallFilter.SetLeftFilter(oldTableFilter.Clone()) 'important to clone
-            clsOverallFilter.SetRightFilter(newTableFilter)
-            clsOverallFilter.SetOperator("AND")
+            'important to clone the old filter
+            clsOverallFilter = New TableFilter(oldTableFilter.Clone(), newTableFilter)
+            'clsOverallFilter.SetLeftFilter(oldTableFilter.Clone())
+            'clsOverallFilter.SetRightFilter(newTableFilter)
+            'clsOverallFilter.SetOperator("AND")
         Else
             clsOverallFilter = newTableFilter
         End If
 
         clsDataDefinition.SetFilter(clsOverallFilter)
-
-
-
-        'lstExtraTableFilters.Add(New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=objFieldValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString))
     End Sub
 
     Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
@@ -275,47 +271,6 @@ Public Class ucrBaseDataLink
         End If
         Return clsOverallControlsFilter
     End Function
-
-    Public Function GetExtraTableFilter() As TableFilter
-        Dim clsOverallControlsFilter As TableFilter = Nothing
-
-        If lstExtraTableFilters.Count = 1 Then
-            clsOverallControlsFilter = lstExtraTableFilters(0).Clone()
-        ElseIf lstExtraTableFilters.Count > 1 Then
-            clsOverallControlsFilter = New TableFilter
-            For i = 0 To lstExtraTableFilters.Count - 2
-                If i = 0 Then
-                    clsOverallControlsFilter.SetLeftFilter(lstExtraTableFilters(i).Clone())
-                    clsOverallControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1).Clone())
-                    clsOverallControlsFilter.SetOperator("AND")
-                Else
-                    clsOverallControlsFilter.SetLeftFilter(clsOverallControlsFilter.Clone())
-                    clsOverallControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1).Clone())
-                End If
-            Next
-        End If
-        Return clsOverallControlsFilter
-    End Function
-
-    Public Function GetLinkedControlsAndExtraFilter() As TableFilter
-        Dim clsOverallControlsFilter As TableFilter = Nothing
-        Dim clsControlsFilter As TableFilter = GetLinkedControlsFilter()
-        Dim clsExtraFilter As TableFilter = GetExtraTableFilter()
-
-        'combine or get the filter available
-        If clsControlsFilter IsNot Nothing AndAlso clsExtraFilter IsNot Nothing Then
-            clsOverallControlsFilter = New TableFilter
-            clsOverallControlsFilter.SetLeftFilter(clsControlsFilter.Clone())
-            clsOverallControlsFilter.SetRightFilter(clsExtraFilter.Clone())
-        ElseIf clsControlsFilter IsNot Nothing Then
-            clsOverallControlsFilter = clsControlsFilter.Clone()
-        ElseIf clsExtraFilter IsNot Nothing Then
-            clsOverallControlsFilter = clsExtraFilter.Clone()
-        End If
-
-        Return clsOverallControlsFilter
-    End Function
-
 
     Public Overridable Function GetLinkingDataCall() As DataCall
         MessageBox.Show("Developer error: The Linking Datacall of " & Me.Name & " has not been overriden ", caption:="Developer error")
