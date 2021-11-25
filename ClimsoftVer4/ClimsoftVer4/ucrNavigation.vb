@@ -71,7 +71,12 @@ Public Class ucrNavigation
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
         If iCurrRow = -1 Then
-            txtRecNum.Text = "New Record"
+            If CheckIfRowExistsInDb() Then
+                txtRecNum.Text = "Record Exists"
+            Else
+                txtRecNum.Text = "New Record"
+            End If
+
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iMaxRows = 0 Then
@@ -290,6 +295,7 @@ Public Class ucrNavigation
         Dim row As Dictionary(Of String, String)
 
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
+
             'check if its current row first before fetching from database
             bRowExists = True
             row = GetRow(iCurrRow)
@@ -304,6 +310,12 @@ Public Class ucrNavigation
             If Not bRowExists Then
                 'Returns -1 if no row found
                 iCurrRow = GetRowPosition(dctFieldvalue)
+            End If
+
+            'if row already exists then try to notify the user
+            If iCurrRow = -1 AndAlso CheckIfRowExistsInDb() Then
+                'MsgBox("Record already entered. Saving it will not be permitted")
+                MessageBox.Show(Me, "This record already exists. Saving it will not be permitted")
             End If
 
         End If
@@ -633,6 +645,19 @@ Public Class ucrNavigation
         currentRowData = dctRow
         Return dctRow
     End Function
+
+
+    Private Function CheckIfRowExistsInDb() As Boolean
+        Dim iRowsFound As Integer = -1
+        Dim clsOverallControlsFilter As TableFilter = ucrLinkedTableEntry.GetLinkedControlsFilter
+
+        If clsOverallControlsFilter IsNot Nothing Then
+            iRowsFound = clsDataDefinition.TableCount(clsOverallControlsFilter.Clone)
+        End If
+
+        Return iRowsFound > 0
+    End Function
+
 
     'TODO. Change how this is implemented
     'Gets the row position. The parameter is dictionary of column names and the values to fetch
