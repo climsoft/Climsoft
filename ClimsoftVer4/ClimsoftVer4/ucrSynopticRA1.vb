@@ -51,11 +51,15 @@ Public Class ucrSynopticRA1
             'set up the navigation control
             ucrNavigation.SetTableEntryAndKeyControls(Me)
 
-
             bFirstLoad = False
 
-            'populate the values
+            'add extra filters for none admin users
+            If Not userGroup = "ClimsoftAdmin" Then
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
+            End If
+
             ucrNavigation.SetSortBy("entryDatetime")
+            'populate the values
             ucrNavigation.PopulateControl()
 
             ' Check for key entry mode and indicate on the form

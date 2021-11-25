@@ -77,7 +77,8 @@ Public Class ucrFormDaily2
 
             bFirstLoad = False
 
-            'populate the values 
+
+            'add extra filters for none admin users
             If Not userGroup = "ClimsoftAdmin" Then
                 AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
             End If
