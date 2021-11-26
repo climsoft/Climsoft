@@ -34,6 +34,12 @@
 
             bFirstLoad = False
 
+            'add extra filters for none admin users
+            If Not userGroup = "ClimsoftAdmin" Then
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
+            End If
+
+            ucrNavigation.SetSortBy("entryDatetime")
             'populate the values
             ucrNavigation.PopulateControl()
 
