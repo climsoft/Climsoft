@@ -890,7 +890,8 @@ GROUP BY StationId, MM;"
             'dbconn.ConnectionString = dbConnectionString
             'dbconn.Open()
 
-            sql = "SELECT * FROM aws_mss"
+            'sql = "SELECT * FROM aws_mss"
+            sql = "SELECT * FROM aws_mss where foldertype = 'ASC';"
 
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)

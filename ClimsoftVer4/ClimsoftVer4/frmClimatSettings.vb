@@ -334,7 +334,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         Try
 
             ' Populate with MSS details
-            sql = "SELECT * FROM aws_mss"
+            sql = "SELECT * FROM aws_mss where foldertype = 'ASC'"
             conn.Open()
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ' Set to unlimited timeout period
@@ -350,6 +350,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtFolder.Text = ds.Tables("aws_mss").Rows(i).Item("inputFolder")
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("inputFolder")) Then txtLogin.Text = ds.Tables("aws_mss").Rows(i).Item("userName")
                 If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("password")) Then txtPassword.Text = ds.Tables("aws_mss").Rows(i).Item("password")
+                'If Not IsDBNull(ds.Tables("aws_mss").Rows(i).Item("foldertype")) Then lsFfolders.selecteditem = ds.Tables("aws_mss").Rows(i).Item("foldertype")
             Next
 
             ' Populate with Header
@@ -377,7 +378,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
         btnAddNew.Visible = False
         Try
             If TabParameters.SelectedTab.Name = "FTP" Then
-                sql = "SELECT * FROM aws_mss"
+                sql = "SELECT * FROM aws_mss where foldertype = 'ASC'"
                 'conn.Open()
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
                 ' Set to unlimited timeout period
@@ -474,7 +475,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 qry.ExecuteNonQuery()
 
                 ' Update server details
-                sql = "select * from aws_mss;"
+                sql = "select * from aws_mss where foldertype = 'ASC';"
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
                 ds.Clear()
                 da.Fill(ds, "mss")
@@ -561,7 +562,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
             qry.ExecuteNonQuery()
 
             ' Update server details
-            sql = "select * from aws_mss;"
+            sql = "select * from aws_mss where foldertype = 'ASC';"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
             da.Fill(ds, "mss")
@@ -578,6 +579,7 @@ INSERT INTO `climat_parameters` (`Nos`, `Element_Name`, `Element_Abbreviation`, 
                 .Rows(0).Item("inputFolder") = txtFolder.Text
                 .Rows(0).Item("userName") = txtLogin.Text
                 .Rows(0).Item("password") = txtPassword.Text
+                .Rows(0).Item("foldertype") = "ASC"
             End With
             da.Update(ds, "mss")
             MsgBox("New Recorded Added")

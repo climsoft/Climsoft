@@ -37,8 +37,14 @@
 
             bFirstLoad = False
 
+            'add extra filters for none admin users
+            If Not userGroup = "ClimsoftAdmin" Then
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
+            End If
+
             ucrNavigation.SetSortBy("entryDatetime")
-            ucrNavigation.PopulateControl() 'populate the values
+            'populate the values
+            ucrNavigation.PopulateControl()
 
             If FldName.Key_Entry_Mode(frmNewHourly.Text) = "Double" Then chkRepeatEntry.Checked = True
         End If

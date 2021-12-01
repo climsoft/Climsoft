@@ -147,8 +147,6 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-
-
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
     End Sub
@@ -160,6 +158,21 @@ Public Class ucrBaseDataLink
     Public Overridable Function ValidateValue() As Boolean
         Return True
     End Function
+
+    Public Sub AddExtraFilters(strNewFieldName As String, objFieldValue As Object, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
+        Dim oldTableFilter As TableFilter = clsDataDefinition.GetFilter
+        Dim newTableFilter As New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=objFieldValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+
+        Dim clsOverallFilter As TableFilter
+        If oldTableFilter IsNot Nothing Then
+            'important to clone the old filter
+            clsOverallFilter = New TableFilter(oldTableFilter.Clone(), newTableFilter)
+        Else
+            clsOverallFilter = newTableFilter
+        End If
+
+        clsDataDefinition.SetFilter(clsOverallFilter)
+    End Sub
 
     Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
 
@@ -231,29 +244,27 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    Public Function GetLinkedControlsFilter() As Object
-        Dim clsOveralControlsFilter As TableFilter
+    Public Function GetLinkedControlsFilter() As TableFilter
+        Dim clsOverallControlsFilter As TableFilter = Nothing
 
         UpdateDctLinkedControlsFilters()
 
-        If dctLinkedControlsFilters.Count = 0 Then
-            Return Nothing
+        If dctLinkedControlsFilters.Count = 1 Then
+            clsOverallControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
         ElseIf dctLinkedControlsFilters.Count > 1 Then
-            clsOveralControlsFilter = New TableFilter
+            clsOverallControlsFilter = New TableFilter
             For i = 0 To dctLinkedControlsFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
-                    clsOveralControlsFilter.SetOperator("AND")
+                    clsOverallControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
+                    clsOverallControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
+                    clsOverallControlsFilter.SetOperator("AND")
                 Else
-                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter.Clone())
-                    clsOveralControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
+                    clsOverallControlsFilter.SetLeftFilter(clsOverallControlsFilter.Clone())
+                    clsOverallControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                 End If
             Next
-        Else
-            clsOveralControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
         End If
-        Return clsOveralControlsFilter
+        Return clsOverallControlsFilter
     End Function
 
     Public Overridable Function GetLinkingDataCall() As DataCall

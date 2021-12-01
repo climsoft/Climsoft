@@ -27,8 +27,12 @@ Public Class ucrNavigation
         End If
         ' This is the cause of slow loading - getting all records into dtbRecords is slow.
         'MyBase.PopulateControl()
+        If ucrLinkedTableEntry IsNot Nothing AndAlso ucrLinkedTableEntry.GetDataDefinition.GetFilter IsNot Nothing Then
+            iMaxRows = clsDataDefinition.TableCount(ucrLinkedTableEntry.GetDataDefinition.GetFilter.Clone)
+        Else
+            iMaxRows = clsDataDefinition.TableCount()
+        End If
 
-        iMaxRows = clsDataDefinition.TableCount()
         iCurrRow = 0
         currentRowDataPos = -1
         currentRowData = New Dictionary(Of String, String)
@@ -67,7 +71,12 @@ Public Class ucrNavigation
     Private Sub displayRecordNumber()
         'Display the record number in the data navigation Textbox
         If iCurrRow = -1 Then
-            txtRecNum.Text = "New Record"
+            If CheckIfRowExistsInDb() Then
+                txtRecNum.Text = "Record Exists"
+            Else
+                txtRecNum.Text = "New Record"
+            End If
+
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iMaxRows = 0 Then
@@ -286,6 +295,7 @@ Public Class ucrNavigation
         Dim row As Dictionary(Of String, String)
 
         If dctKeyControls IsNot Nothing AndAlso dctKeyControls.Count > 0 AndAlso iMaxRows > 0 Then
+
             'check if its current row first before fetching from database
             bRowExists = True
             row = GetRow(iCurrRow)
@@ -300,6 +310,12 @@ Public Class ucrNavigation
             If Not bRowExists Then
                 'Returns -1 if no row found
                 iCurrRow = GetRowPosition(dctFieldvalue)
+            End If
+
+            'if row already exists then try to notify the user
+            If iCurrRow = -1 AndAlso CheckIfRowExistsInDb() Then
+                'MsgBox("Record already entered. Saving it will not be permitted")
+                MessageBox.Show(Me, "This record already exists. Saving it will not be permitted")
             End If
 
         End If
@@ -379,7 +395,7 @@ Public Class ucrNavigation
         For Each strTemp As String In iEnumerableNewFields
             dctFields.Add(strTemp, New List(Of String)({strTemp}))
         Next
-
+        'get the date controls; month and day
         Dim lstDateIncrementControls As List(Of ucrDataLinkCombobox) = Nothing
         If iEnumerableDateIncrementControls IsNot Nothing Then
             lstDateIncrementControls = iEnumerableDateIncrementControls.ToList
@@ -606,6 +622,12 @@ Public Class ucrNavigation
 
         'construct the sql
         strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
+
+        If ucrLinkedTableEntry IsNot Nothing AndAlso ucrLinkedTableEntry.GetDataDefinition.GetFilter IsNot Nothing Then
+            strSql = strSql & " WHERE " & ucrLinkedTableEntry.GetDataDefinition.GetFilter.Clone.GetSqlExpression
+        End If
+
+
         If strSortCol <> "" Then
             strSql = strSql & " ORDER BY " & strSortCol
         End If
@@ -623,6 +645,19 @@ Public Class ucrNavigation
         currentRowData = dctRow
         Return dctRow
     End Function
+
+
+    Private Function CheckIfRowExistsInDb() As Boolean
+        Dim iRowsFound As Integer = -1
+        Dim clsOverallControlsFilter As TableFilter = ucrLinkedTableEntry.GetLinkedControlsFilter
+
+        If clsOverallControlsFilter IsNot Nothing Then
+            iRowsFound = clsDataDefinition.TableCount(clsOverallControlsFilter.Clone)
+        End If
+
+        Return iRowsFound > 0
+    End Function
+
 
     'TODO. Change how this is implemented
     'Gets the row position. The parameter is dictionary of column names and the values to fetch
@@ -645,6 +680,11 @@ Public Class ucrNavigation
             Next
 
             strSql = "SELECT " & strFields & " FROM " & clsDataDefinition.GetTableName()
+
+            If ucrLinkedTableEntry IsNot Nothing AndAlso ucrLinkedTableEntry.GetDataDefinition.GetFilter IsNot Nothing Then
+                strSql = strSql & " WHERE " & ucrLinkedTableEntry.GetDataDefinition.GetFilter.Clone.GetSqlExpression
+            End If
+
             If strSortCol <> "" Then
                 strSql = strSql & " ORDER BY " & strSortCol
             End If
