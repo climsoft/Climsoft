@@ -1254,6 +1254,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="translations\climsofttranslations.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
