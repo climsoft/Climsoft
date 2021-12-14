@@ -110,6 +110,8 @@ Public Class frmMainMenu
         autoTranslate(Me)
         HTMLHelp.HelpPage = "welcome.htm"
 
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
 
