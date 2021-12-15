@@ -85,105 +85,6 @@ Public Class ClsTranslations
         Return strDbPath
     End Function
 
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   
-    '''    Writes a CSV file that can be imported into the `TranslateWinForm` library database. 
-    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
-    '''    database contains all the translatable text for the new release.
-    '''    <para>
-    '''    The CSV file contains the identifiers and associated text of each form, control and menu 
-    '''    item in the application.     Please note that `ucrCheck` and `ucrInput` controls are 
-    '''    specifically excluded. This is because the text for these controls is set dynamically 
-    '''    at runtime.
-    '''    </para><para>
-    '''    This sub uses the `Reflection` package to automatically identify and traverse all the 
-    '''    forms, menus and controls in the current release. This information can also be found by 
-    '''    parsing the application source code files (e.g. the `resx` or `xlf` files). However, 
-    '''    we considered the `Reflection` package to be a simpler and less error-prone solution.
-    '''    </para>
-    ''' </summary>
-    '''--------------------------------------------------------------------------------------------
-    Private Shared Sub WriteCsvFile()
-
-        'Get list of all form classes in the application 
-        '    (specifically, a list of 'Type' objects, each 'Type' object contains details about 
-        '    a class)
-        Dim clsAssembly As Assembly = Assembly.GetExecutingAssembly()
-        Dim lstFormClasses As List(Of Type) = clsAssembly.GetTypes().Where(Function(t) t.BaseType = GetType(Form)).ToList()
-
-        'Populate the csv string for each form in the project
-        'Note: We know the name of each form class (see list above). We also know that 
-        '      the 'My.Forms' object contains an object for each form class.
-        '      Conveniently, the name of each object in 'My.Forms' is the same as the name of 
-        '      the object's class. 
-        '      Therefore we can use the class name as the object name in 'CallByName'.
-        Dim strControlsAsCsv As String = ""
-        For Each typFormClass As Type In lstFormClasses
-            Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
-            Dim strTemp = TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
-
-            'Special case for radio buttons in panels: 
-            '  Before the dialog is shown, each radio button is a direct child of the dialog 
-            '  (e.g. 'dlg_Augment_rdoNewDataframe'). After the dialog is shown, the raio button becomes 
-            '  a direct child of its parent panel.
-            '  Therefore, we need to show the dialog before we traverse the dialog's control hierarchy.
-            '  Unfortunately showing the dialog means that it has to be manually closed. So we only 
-            '  show the dialog for this special case to save the developer from having to manually 
-            '  close too many dialogs.
-            '  TODO: launch each dialog in a new thread to avoid need for manual close?
-            If strTemp.ToLower().Contains("pnl") AndAlso strTemp.ToLower().Contains("rdo") Then
-                'frmTemp.ShowDialog()
-                frmTemp.Show()
-                strTemp = TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
-                frmTemp.Close()
-            End If
-
-            strControlsAsCsv &= strTemp
-        Next
-
-        'The right mouse button menus for the 6 output windows are not accessible via 
-        '    the control lists. Therefore, add these manually to the CSV file
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrOutput, frmMain.ucrOutput.UcrOutputPages.tsButtons.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrColumnMeta, frmMain.ucrColumnMeta.cellContextMenuStrip.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrColumnMeta, frmMain.ucrColumnMeta.columnContextMenuStrip.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrColumnMeta, frmMain.ucrColumnMeta.statusColumnMenu.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataFrameMeta, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataFrameMeta, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrLogWindow, frmMain.ucrLogWindow.mnuContextLogFile.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrScriptWindow, frmMain.ucrScriptWindow.mnuContextScript.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.RowContextMenu.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.ColumnContextMenu.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.CellContextMenu.Items)
-        'strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetMenuItemsAsCsv(frmMain.ucrDataViewer, frmMain.ucrDataViewer.SheetTabContextMenu.Items)
-
-        'Write the csv file
-        'Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        'Dim strFileName As String = "form_controls.csv"
-        'Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
-
-
-
-        Dim strDesktopPath As String = String.Concat(Application.StartupPath, "\translations")
-        Dim strFileName As String = "form_controls.csv"
-        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
-
-
-        Using sw As New System.IO.StreamWriter(strPath)
-            Console.WriteLine(strControlsAsCsv)
-            sw.WriteLine(strControlsAsCsv)
-            sw.Flush()
-            sw.Close()
-        End Using
-
-        'This sub should only be used by developers to create the translation export files.
-        'Therefore, exit the application with a message to ensure that this sub is not run 
-        'accidentally in the release version. 
-        MsgBox("The form controls' translation text was written to: " & strPath &
-               ". The application will now exit.", MsgBoxStyle.Exclamation)
-        System.Windows.Forms.Application.Exit()
-    End Sub
-
     Private Shared Sub UpdateTranslationsDB()
 
         'update the forms_controls tables
@@ -208,6 +109,8 @@ Public Class ClsTranslations
         Application.Exit()
     End Sub
 
+
+    'some parts could be pushed to the translations library
     ''' <summary>
     ''' returns a datatable with all form controls texts to be translated
     ''' </summary>
@@ -276,7 +179,7 @@ Public Class ClsTranslations
 
     End Sub
 
-    'todo. needs to be changed
+    'todo. can probably be improved futher to include "DoNotTranslate". Should be pushed to the translations library
     Private Shared Function GetActualTranslationText(strText As String) As String
         If String.IsNullOrEmpty(strText) OrElse
             strText.Contains(vbCr) OrElse    'multiline text
@@ -290,6 +193,8 @@ Public Class ClsTranslations
         Return strText
     End Function
 
+
+    'todo.  Should be pushed to the translate library
     ''' <summary>
     ''' gets the translation texts from the datatable that has the forms controls texts
     ''' </summary>
@@ -312,27 +217,17 @@ Public Class ClsTranslations
         Return datatableTranslations
     End Function
 
-    'todo. pending implementation
+    'todo. pending implementation. Should be pushed to translations library
     Private Shared Function GetTranslationTextsTableFromCrowdInJSONFile(strFilePath) As DataTable
-
-        'todo. left here
-
-
         'Fill translations table from the form controls table
         Dim datatableTranslations As New DataTable
-        ' Create 3 columns in the DataTable.
-        datatableTranslations.Columns.Add("id_text", GetType(String))
-        datatableTranslations.Columns.Add("language_code", GetType(String))
-        datatableTranslations.Columns.Add("translation", GetType(String))
-        'For Each row As DataRow In datatableControls.Rows
-        '    'add id_text, language_code, translation
-        '    datatableTranslations.Rows.Add(row.Field(Of String)(2), "en", row.Field(Of String)(2))
-        '    'todo. remove line below. Dummy french translation
-        '    datatableTranslations.Rows.Add(row.Field(Of String)(2), "fr", "fr_" & row.Field(Of String)(2))
-        'Next
+
+        'todo add implementation
         Return datatableTranslations
     End Function
 
+
+    'todo.  Should be pushed to the translate library
     ''' <summary>
     ''' saves the datatable that has 3 columns; form_name, control_name,id_text .
     ''' to the form_controls table
@@ -380,6 +275,9 @@ Public Class ClsTranslations
 
                 clsConnection.Close()
             End Using
+
+            'called to update the controls that should not be updated
+            SetTranslateIgnore()
         Catch e As Exception
             MsgBox(e.Message)
         End Try
@@ -387,6 +285,7 @@ Public Class ClsTranslations
         Return iRowsUpdated
     End Function
 
+    'todo.  Should be pushed to the translate library
     ''' <summary>
     ''' saves the datatable that has 3 columns; id_text, language_code,translation.
     ''' to the translations table
@@ -442,7 +341,7 @@ Public Class ClsTranslations
     End Function
 
 
-    'todo. probably delete this later
+    'todo. probably delete this later. Should be pushed to the translate library
     Private Shared Sub GetDctComponentsFromControl(clsControl As Control,
                                                    ByRef dctComponents As Dictionary(Of String, Component),
                                                    Optional strParentName As String = "")
@@ -475,7 +374,7 @@ Public Class ClsTranslations
         Next
     End Sub
 
-    'todo. probably delete this later
+    'todo. probably delete this later. Should be pushed to the translate library
     Private Shared Sub GetDctComponentsFromMenuItems(clsMenuItems As ToolStripItemCollection, ByRef dctComponents As Dictionary(Of String, Component))
         If IsNothing(clsMenuItems) OrElse IsNothing(dctComponents) Then
             Exit Sub
@@ -511,8 +410,7 @@ Public Class ClsTranslations
     End Sub
 
 
-    'todo. left at looking the code below
-
+    'todo. the SetTranslateIgnore() can be improved
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
@@ -534,7 +432,7 @@ Public Class ClsTranslations
 
         'For each line in the ignore file
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim strFileName As String = "translateIgnore.txt"
+        Dim strFileName As String = "translate_ignore.txt"
         Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
         Using clsReader As New StreamReader(strPath)
             Do While clsReader.Peek() >= 0
@@ -560,7 +458,7 @@ Public Class ClsTranslations
         If lstIgnore.Count <= 0 AndAlso lstIgnoreNegations.Count <= 0 Then
             MsgBox("The " & strPath & " ignore file was processed. No ignore specifications were found. " &
                    "The database was not updated. The application will now exit.", MsgBoxStyle.Exclamation)
-            Application.Exit()
+            'Application.Exit()
         End If
 
         'create the SQL command to update the database
@@ -591,7 +489,7 @@ Public Class ClsTranslations
             Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
             strDbPath = Directory.GetParent(strDbPath).FullName
             strDbPath = Path.Combine(strDbPath, "translations")
-            strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
+            strDbPath = Path.Combine(strDbPath, "climsofttranslations.db")
 
             'connect to the database and execute the SQL command
             Dim clsBuilder As New SQLiteConnectionStringBuilder With {
@@ -615,7 +513,7 @@ Public Class ClsTranslations
         'This sub should only be used by developers to process the translation ignore file.
         'Therefore, exit the application with a message to ensure that this sub is not run 
         'accidentally in the release version. 
-        Application.Exit()
+        'Application.Exit()
     End Sub
 
 
