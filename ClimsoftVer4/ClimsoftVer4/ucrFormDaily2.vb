@@ -77,9 +77,10 @@ Public Class ucrFormDaily2
 
             bFirstLoad = False
 
-            'populate the values 
+
+            'add extra filters for none admin users
             If Not userGroup = "ClimsoftAdmin" Then
-                AddExtraFilters("root", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=False)
+                AddExtraFilters("signature", frmLogin.txtUsername.Text, "=", bForceValuesAsString:=True)
             End If
 
             ucrDaily2Navigation.SetSortBy("entryDatetime")
@@ -93,9 +94,9 @@ Public Class ucrFormDaily2
 
     Private Sub btnAddNew_Click(sender As Object, e As EventArgs) Handles btnAddNew.Click
         Dim usrStn As New dataEntryGlobalRoutines
-        Dim txtElementCode, stn As String
+        'Dim txtElementCode, stn As String
 
-        txtElementCode = ucrElementSelector.cboValues.SelectedValue
+        'txtElementCode = ucrElementSelector.cboValues.SelectedValue
 
         If chkEnableSequencer.Checked Then
             ' temporary until we know how to get all fields from table without specifying names
@@ -107,7 +108,7 @@ Public Class ucrFormDaily2
             ucrValueFlagPeriod1.Focus()
 
 
-            Dim newSstrStationValue = ucrStationSelector.GetValue
+            'Dim newSstrStationValue = ucrStationSelector.GetValue
 
 
             'ucrStationSelector.SetValue(strStationValue)

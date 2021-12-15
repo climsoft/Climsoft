@@ -18,7 +18,6 @@ Public Class ucrBaseDataLink
     Protected dtbRecords As New DataTable
     Protected dctLinkedControlsFilters As New Dictionary(Of ucrValueView, KeyValuePair(Of String, TableFilter))
     Private strTableName As String
-    Protected lstExtraTableFilters As New List(Of TableFilter)
 
 
     ' ucrBaseDataLink is a base control for a control to connect to the database
@@ -148,8 +147,6 @@ Public Class ucrBaseDataLink
         End If
     End Sub
 
-
-
     Public Overridable Sub PopulateControl()
         UpdateDataTable()
     End Sub
@@ -163,7 +160,18 @@ Public Class ucrBaseDataLink
     End Function
 
     Public Sub AddExtraFilters(strNewFieldName As String, objFieldValue As Object, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional bForceValuesAsString As Boolean = False)
-        lstExtraTableFilters.Add(New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=objFieldValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString))
+        Dim oldTableFilter As TableFilter = clsDataDefinition.GetFilter
+        Dim newTableFilter As New TableFilter(strNewField:=strNewFieldName, strNewOperator:=strNewOperator, objNewValue:=objFieldValue, bNewIsPositiveCondition:=bNewIsPositiveCondition, bForceValuesAsString:=bForceValuesAsString)
+
+        Dim clsOverallFilter As TableFilter
+        If oldTableFilter IsNot Nothing Then
+            'important to clone the old filter
+            clsOverallFilter = New TableFilter(oldTableFilter.Clone(), newTableFilter)
+        Else
+            clsOverallFilter = newTableFilter
+        End If
+
+        clsDataDefinition.SetFilter(clsOverallFilter)
     End Sub
 
     Public Sub AddLinkedControlFilters(ucrLinkedDataControl As ucrValueView, strNewFieldName As String, strNewOperator As String, Optional bNewIsPositiveCondition As Boolean = True, Optional strLinkedFieldName As String = "", Optional bForceValuesAsString As Boolean = False)
@@ -236,43 +244,27 @@ Public Class ucrBaseDataLink
         Next
     End Sub
 
-    ''' <summary>
-    ''' gets the filter object from the key controls and the extra filters
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function GetLinkedControlsFilter() As Object
-        Dim clsOveralControlsFilter As TableFilter = Nothing
-        Dim lstAllPassedTableFilters As New List(Of TableFilter)
-
+    Public Function GetLinkedControlsFilter() As TableFilter
+        Dim clsOverallControlsFilter As TableFilter = Nothing
 
         UpdateDctLinkedControlsFilters()
 
-        'get all the table filters; from the key controls and extra passed filters
-        For i = 0 To dctLinkedControlsFilters.Count - 1
-            lstAllPassedTableFilters.Add(dctLinkedControlsFilters.Values(i).Value.Clone())
-        Next
-
-        For i = 0 To lstExtraTableFilters.Count - 1
-            lstAllPassedTableFilters.Add(lstExtraTableFilters(i).Clone())
-        Next
-
-
-        If lstAllPassedTableFilters.Count = 1 Then
-            clsOveralControlsFilter = lstAllPassedTableFilters(0)
-        ElseIf lstExtraTableFilters.Count > 1 Then
-            clsOveralControlsFilter = New TableFilter
-            For i = 0 To lstExtraTableFilters.Count - 2
+        If dctLinkedControlsFilters.Count = 1 Then
+            clsOverallControlsFilter = dctLinkedControlsFilters.Values(0).Value.Clone()
+        ElseIf dctLinkedControlsFilters.Count > 1 Then
+            clsOverallControlsFilter = New TableFilter
+            For i = 0 To dctLinkedControlsFilters.Count - 2
                 If i = 0 Then
-                    clsOveralControlsFilter.SetLeftFilter(lstExtraTableFilters(i))
-                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
-                    clsOveralControlsFilter.SetOperator("AND")
+                    clsOverallControlsFilter.SetLeftFilter(dctLinkedControlsFilters.Values(i).Value.Clone())
+                    clsOverallControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
+                    clsOverallControlsFilter.SetOperator("AND")
                 Else
-                    clsOveralControlsFilter.SetLeftFilter(clsOveralControlsFilter)
-                    clsOveralControlsFilter.SetRightFilter(lstExtraTableFilters(i + 1))
+                    clsOverallControlsFilter.SetLeftFilter(clsOverallControlsFilter.Clone())
+                    clsOverallControlsFilter.SetRightFilter(dctLinkedControlsFilters.Values(i + 1).Value.Clone())
                 End If
             Next
         End If
-        Return clsOveralControlsFilter
+        Return clsOverallControlsFilter
     End Function
 
     Public Overridable Function GetLinkingDataCall() As DataCall

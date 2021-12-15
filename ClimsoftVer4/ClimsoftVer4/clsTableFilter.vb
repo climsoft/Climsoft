@@ -115,6 +115,7 @@ Public Class TableFilter
     Public Sub New(clsNewLeftFilter As TableFilter, clsNewRightFilter As TableFilter)
         SetLeftFilter(clsNewLeftFilter:=clsNewLeftFilter)
         SetRightFilter(clsNewRightFilter:=clsNewRightFilter)
+        SetOperator("AND")
     End Sub
 
     Public Sub New(lstTblFilters As IEnumerable(Of TableFilter), Optional strOperator As String = "AND")
