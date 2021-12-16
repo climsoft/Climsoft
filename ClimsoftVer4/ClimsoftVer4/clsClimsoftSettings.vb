@@ -16,6 +16,8 @@
 
 Imports System.IO
 
+'TODO. As of 16/12/2021.
+'This file contains code that is redundant, should be deleted once it has 0 references.
 
 Public Class Translations
     Public Shared Function translate(tag As String) As String

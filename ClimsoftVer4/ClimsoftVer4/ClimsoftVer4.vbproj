@@ -569,10 +569,10 @@
     <Compile Include="frmNewUploadSelection.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmObsViw.Designer.vb">
-      <DependentUpon>frmObsViw.vb</DependentUpon>
+    <Compile Include="frmObsView.Designer.vb">
+      <DependentUpon>frmObsView.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmObsViw.vb">
+    <Compile Include="frmObsView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPlotter.designer.vb">
@@ -1100,8 +1100,8 @@
     <EmbeddedResource Include="frmMonitoring.resx">
       <DependentUpon>frmMonitoring.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmObsViw.resx">
-      <DependentUpon>frmObsViw.vb</DependentUpon>
+    <EmbeddedResource Include="frmObsView.resx">
+      <DependentUpon>frmObsView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlotter.resx">
       <DependentUpon>frmPlotter.vb</DependentUpon>

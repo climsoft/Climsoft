@@ -59,10 +59,10 @@ Partial Class formPaperArchive
         Me.TabViewArchive = New System.Windows.Forms.TabPage()
         Me.grpImage = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cmdleft = New System.Windows.Forms.Button()
-        Me.cmdfirst = New System.Windows.Forms.Button()
-        Me.cmdlast = New System.Windows.Forms.Button()
-        Me.cmdright = New System.Windows.Forms.Button()
+        Me.btnMovePrevious = New System.Windows.Forms.Button()
+        Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnLast = New System.Windows.Forms.Button()
+        Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.txtRec = New System.Windows.Forms.TextBox()
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
         Me.cmdView = New System.Windows.Forms.Button()
@@ -94,7 +94,7 @@ Partial Class formPaperArchive
         Me.lblMessages = New System.Windows.Forms.Label()
         Me.txtDefaultFolder = New System.Windows.Forms.TextBox()
         Me.cmdClear = New System.Windows.Forms.Button()
-        Me.PicForm = New System.Windows.Forms.PictureBox()
+        Me.pictureBoxForm = New System.Windows.Forms.PictureBox()
         Me.lblZoomout = New System.Windows.Forms.Label()
         Me.lblImageRotate = New System.Windows.Forms.Label()
         Me.tabImageArchives.SuspendLayout()
@@ -109,7 +109,7 @@ Partial Class formPaperArchive
         Me.GroupBox18.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.MenuPaperArchive.SuspendLayout()
-        CType(Me.PicForm, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictureBoxForm, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabImageArchives
@@ -496,10 +496,10 @@ Partial Class formPaperArchive
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.cmdleft)
-        Me.GroupBox1.Controls.Add(Me.cmdfirst)
-        Me.GroupBox1.Controls.Add(Me.cmdlast)
-        Me.GroupBox1.Controls.Add(Me.cmdright)
+        Me.GroupBox1.Controls.Add(Me.btnMovePrevious)
+        Me.GroupBox1.Controls.Add(Me.btnMoveFirst)
+        Me.GroupBox1.Controls.Add(Me.btnLast)
+        Me.GroupBox1.Controls.Add(Me.btnMoveNext)
         Me.GroupBox1.Controls.Add(Me.txtRec)
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox1.Location = New System.Drawing.Point(3, 259)
@@ -508,45 +508,45 @@ Partial Class formPaperArchive
         Me.GroupBox1.TabIndex = 70
         Me.GroupBox1.TabStop = False
         '
-        'cmdleft
+        'btnMovePrevious
         '
-        Me.cmdleft.BackgroundImage = CType(resources.GetObject("cmdleft.BackgroundImage"), System.Drawing.Image)
-        Me.cmdleft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdleft.Location = New System.Drawing.Point(34, 6)
-        Me.cmdleft.Name = "cmdleft"
-        Me.cmdleft.Size = New System.Drawing.Size(36, 24)
-        Me.cmdleft.TabIndex = 4
-        Me.cmdleft.UseVisualStyleBackColor = True
+        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevious.Location = New System.Drawing.Point(34, 6)
+        Me.btnMovePrevious.Name = "btnMovePrevious"
+        Me.btnMovePrevious.Size = New System.Drawing.Size(36, 24)
+        Me.btnMovePrevious.TabIndex = 4
+        Me.btnMovePrevious.UseVisualStyleBackColor = True
         '
-        'cmdfirst
+        'btnMoveFirst
         '
-        Me.cmdfirst.BackgroundImage = CType(resources.GetObject("cmdfirst.BackgroundImage"), System.Drawing.Image)
-        Me.cmdfirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdfirst.Location = New System.Drawing.Point(0, 6)
-        Me.cmdfirst.Name = "cmdfirst"
-        Me.cmdfirst.Size = New System.Drawing.Size(35, 24)
-        Me.cmdfirst.TabIndex = 3
-        Me.cmdfirst.UseVisualStyleBackColor = True
+        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirst.Location = New System.Drawing.Point(0, 6)
+        Me.btnMoveFirst.Name = "btnMoveFirst"
+        Me.btnMoveFirst.Size = New System.Drawing.Size(35, 24)
+        Me.btnMoveFirst.TabIndex = 3
+        Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
-        'cmdlast
+        'btnLast
         '
-        Me.cmdlast.BackgroundImage = CType(resources.GetObject("cmdlast.BackgroundImage"), System.Drawing.Image)
-        Me.cmdlast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdlast.Location = New System.Drawing.Point(456, 6)
-        Me.cmdlast.Name = "cmdlast"
-        Me.cmdlast.Size = New System.Drawing.Size(36, 24)
-        Me.cmdlast.TabIndex = 2
-        Me.cmdlast.UseVisualStyleBackColor = True
+        Me.btnLast.BackgroundImage = CType(resources.GetObject("btnLast.BackgroundImage"), System.Drawing.Image)
+        Me.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnLast.Location = New System.Drawing.Point(456, 6)
+        Me.btnLast.Name = "btnLast"
+        Me.btnLast.Size = New System.Drawing.Size(36, 24)
+        Me.btnLast.TabIndex = 2
+        Me.btnLast.UseVisualStyleBackColor = True
         '
-        'cmdright
+        'btnMoveNext
         '
-        Me.cmdright.BackgroundImage = CType(resources.GetObject("cmdright.BackgroundImage"), System.Drawing.Image)
-        Me.cmdright.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdright.Location = New System.Drawing.Point(421, 6)
-        Me.cmdright.Name = "cmdright"
-        Me.cmdright.Size = New System.Drawing.Size(36, 24)
-        Me.cmdright.TabIndex = 1
-        Me.cmdright.UseVisualStyleBackColor = True
+        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNext.Location = New System.Drawing.Point(421, 6)
+        Me.btnMoveNext.Name = "btnMoveNext"
+        Me.btnMoveNext.Size = New System.Drawing.Size(36, 24)
+        Me.btnMoveNext.TabIndex = 1
+        Me.btnMoveNext.UseVisualStyleBackColor = True
         '
         'txtRec
         '
@@ -817,20 +817,20 @@ Partial Class formPaperArchive
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
-        'PicForm
+        'pictureBoxForm
         '
-        Me.PicForm.AccessibleRole = System.Windows.Forms.AccessibleRole.Window
-        Me.PicForm.BackColor = System.Drawing.SystemColors.Control
-        Me.PicForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PicForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PicForm.ErrorImage = Nothing
-        Me.PicForm.Location = New System.Drawing.Point(557, 43)
-        Me.PicForm.Name = "PicForm"
-        Me.PicForm.Size = New System.Drawing.Size(535, 523)
-        Me.PicForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PicForm.TabIndex = 30
-        Me.PicForm.TabStop = False
-        Me.PicForm.Visible = False
+        Me.pictureBoxForm.AccessibleRole = System.Windows.Forms.AccessibleRole.Window
+        Me.pictureBoxForm.BackColor = System.Drawing.SystemColors.Control
+        Me.pictureBoxForm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pictureBoxForm.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pictureBoxForm.ErrorImage = Nothing
+        Me.pictureBoxForm.Location = New System.Drawing.Point(557, 43)
+        Me.pictureBoxForm.Name = "pictureBoxForm"
+        Me.pictureBoxForm.Size = New System.Drawing.Size(535, 523)
+        Me.pictureBoxForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pictureBoxForm.TabIndex = 30
+        Me.pictureBoxForm.TabStop = False
+        Me.pictureBoxForm.Visible = False
         '
         'lblZoomout
         '
@@ -859,7 +859,7 @@ Partial Class formPaperArchive
         Me.ClientSize = New System.Drawing.Size(1108, 582)
         Me.Controls.Add(Me.lblImageRotate)
         Me.Controls.Add(Me.lblZoomout)
-        Me.Controls.Add(Me.PicForm)
+        Me.Controls.Add(Me.pictureBoxForm)
         Me.Controls.Add(Me.cmdClear)
         Me.Controls.Add(Me.txtDefaultFolder)
         Me.Controls.Add(Me.lblMessages)
@@ -890,7 +890,7 @@ Partial Class formPaperArchive
         Me.TabPage1.ResumeLayout(False)
         Me.MenuPaperArchive.ResumeLayout(False)
         Me.MenuPaperArchive.PerformLayout()
-        CType(Me.PicForm, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictureBoxForm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -951,10 +951,10 @@ Partial Class formPaperArchive
     Friend WithEvents cmdUpdateArchiveDef As System.Windows.Forms.Button
     Friend WithEvents cmdView As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdleft As System.Windows.Forms.Button
-    Friend WithEvents cmdfirst As System.Windows.Forms.Button
-    Friend WithEvents cmdlast As System.Windows.Forms.Button
-    Friend WithEvents cmdright As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevious As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
+    Friend WithEvents btnLast As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNext As System.Windows.Forms.Button
     Friend WithEvents txtRec As System.Windows.Forms.TextBox
     Friend WithEvents lblImagesAt As System.Windows.Forms.Label
     Friend WithEvents lblArhiveFolder As System.Windows.Forms.Label
@@ -965,7 +965,7 @@ Partial Class formPaperArchive
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents lstArchival As System.Windows.Forms.ListView
     Friend WithEvents cmdList As System.Windows.Forms.Button
-    Friend WithEvents PicForm As System.Windows.Forms.PictureBox
+    Friend WithEvents pictureBoxForm As System.Windows.Forms.PictureBox
     Friend WithEvents lblZoomout As System.Windows.Forms.Label
     Friend WithEvents lblArchiveMsg As System.Windows.Forms.Label
     Friend WithEvents lblImageRotate As System.Windows.Forms.Label

@@ -96,12 +96,12 @@ Public Class ClsTranslations
         End If
 
         'update the translations table
-        'Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
-        'If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
-        '    MsgBox("The id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
-        'Else
-        '    MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
-        'End If
+        Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
+        If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
+            MsgBox("The id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
+        Else
+            MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
+        End If
 
         'This sub should only be used by developers to create the translation export files.
         'Therefore, exit the application with a message to ensure that this sub is not run 
@@ -135,10 +135,6 @@ Public Class ClsTranslations
             '      the object's class. 
             '      Therefore we can use the class name as the object name in 'CallByName'.
             Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
-
-            If frmTemp.Text = "Main Menu" Then
-                Dim K = True
-            End If
             FillControlsToTable(frmTemp, datatableControls)
         Next
         Return datatableControls
@@ -213,10 +209,14 @@ Public Class ClsTranslations
         datatableTranslations.Columns.Add("language_code", GetType(String))
         datatableTranslations.Columns.Add("translation", GetType(String))
         For Each row As DataRow In datatableControls.Rows
+            'ignore "ReplaceWithDynamicTranslation" id text
+            If row.Field(Of String)(2) = "ReplaceWithDynamicTranslation" Then
+                Continue For
+            End If
             'add id_text, language_code, translation
             datatableTranslations.Rows.Add(row.Field(Of String)(2), langCode, row.Field(Of String)(2))
             'todo. remove line below. Dummy french translation
-            datatableTranslations.Rows.Add(row.Field(Of String)(2), "fr", "fr_" & row.Field(Of String)(2))
+            'datatableTranslations.Rows.Add(row.Field(Of String)(2), "fr", "fr_" & row.Field(Of String)(2))
         Next
         Return datatableTranslations
     End Function

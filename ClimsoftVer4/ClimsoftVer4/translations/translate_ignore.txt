@@ -60,15 +60,28 @@
 # 
 ####################################################################################################
 
-# Textboxes,comboboxes normally contain values from the database, and these should not be translated
+# Textboxes,comboboxes,datepickers normally contain values from the database
+# They should not be translated
 %_txt%
 %_cbo%
+%_dtp%
+%_lstView%
+%_listBox%
+%_dataGrid%
 
 # Logos contain photos, should not be translated
-%_Logo%
+%_pictureBox%
 
 # Navigation buttons contain symbols only, should not be translated
 %_btnMove%
+
+# In the 'Database Connections' form, the connection examples labels are literals.
+# They should not be translated
+frmDatabaseConnections_%_lblExample%
+
+# In the 'Main Menu' form, the menu buttons have logos.
+# They should not be translated
+frmMainMenu_btnMain%
 
 # In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.

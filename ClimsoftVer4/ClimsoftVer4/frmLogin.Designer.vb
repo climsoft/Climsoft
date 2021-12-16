@@ -14,7 +14,7 @@ Partial Class frmLogin
             MyBase.Dispose(disposing)
         End Try
     End Sub
-    Friend WithEvents LogoPictureBox As System.Windows.Forms.PictureBox
+    Friend WithEvents pictureBoxLogo As System.Windows.Forms.PictureBox
     Friend WithEvents lblUsername As System.Windows.Forms.Label
     Friend WithEvents lblPassword As System.Windows.Forms.Label
     Friend WithEvents txtUsername As System.Windows.Forms.TextBox
@@ -31,7 +31,7 @@ Partial Class frmLogin
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
-        Me.LogoPictureBox = New System.Windows.Forms.PictureBox()
+        Me.pictureBoxLogo = New System.Windows.Forms.PictureBox()
         Me.lblUsername = New System.Windows.Forms.Label()
         Me.lblPassword = New System.Windows.Forms.Label()
         Me.txtUsername = New System.Windows.Forms.TextBox()
@@ -40,23 +40,23 @@ Partial Class frmLogin
         Me.Cancel = New System.Windows.Forms.Button()
         Me.txtusrpwd = New System.Windows.Forms.TextBox()
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.cmbDatabases = New System.Windows.Forms.ComboBox()
+        Me.cboDatabases = New System.Windows.Forms.ComboBox()
         Me.lblDbdetails = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictureBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'LogoPictureBox
+        'pictureBoxLogo
         '
-        Me.LogoPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.LogoPictureBox.Image = CType(resources.GetObject("LogoPictureBox.Image"), System.Drawing.Image)
-        Me.LogoPictureBox.Location = New System.Drawing.Point(0, 0)
-        Me.LogoPictureBox.Name = "LogoPictureBox"
-        Me.LogoPictureBox.Size = New System.Drawing.Size(199, 251)
-        Me.LogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.LogoPictureBox.TabIndex = 0
-        Me.LogoPictureBox.TabStop = False
+        Me.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pictureBoxLogo.Image = CType(resources.GetObject("pictureBoxLogo.Image"), System.Drawing.Image)
+        Me.pictureBoxLogo.Location = New System.Drawing.Point(0, 0)
+        Me.pictureBoxLogo.Name = "pictureBoxLogo"
+        Me.pictureBoxLogo.Size = New System.Drawing.Size(199, 251)
+        Me.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pictureBoxLogo.TabIndex = 0
+        Me.pictureBoxLogo.TabStop = False
         '
         'lblUsername
         '
@@ -135,14 +135,14 @@ Partial Class frmLogin
         Me.cmdHelp.Text = "&Help"
         Me.cmdHelp.Visible = False
         '
-        'cmbDatabases
+        'cboDatabases
         '
-        Me.cmbDatabases.BackColor = System.Drawing.SystemColors.Menu
-        Me.cmbDatabases.FormattingEnabled = True
-        Me.cmbDatabases.Location = New System.Drawing.Point(218, 162)
-        Me.cmbDatabases.Name = "cmbDatabases"
-        Me.cmbDatabases.Size = New System.Drawing.Size(222, 21)
-        Me.cmbDatabases.TabIndex = 7
+        Me.cboDatabases.BackColor = System.Drawing.SystemColors.Menu
+        Me.cboDatabases.FormattingEnabled = True
+        Me.cboDatabases.Location = New System.Drawing.Point(218, 162)
+        Me.cboDatabases.Name = "cboDatabases"
+        Me.cboDatabases.Size = New System.Drawing.Size(222, 21)
+        Me.cboDatabases.TabIndex = 7
         '
         'lblDbdetails
         '
@@ -187,14 +187,14 @@ Partial Class frmLogin
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.lblDbdetails)
-        Me.Controls.Add(Me.cmbDatabases)
+        Me.Controls.Add(Me.cboDatabases)
         Me.Controls.Add(Me.Cancel)
         Me.Controls.Add(Me.OK)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUsername)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.lblUsername)
-        Me.Controls.Add(Me.LogoPictureBox)
+        Me.Controls.Add(Me.pictureBoxLogo)
         Me.Controls.Add(Me.txtusrpwd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -204,14 +204,14 @@ Partial Class frmLogin
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Login"
         Me.Text = "Login"
-        CType(Me.LogoPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictureBoxLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents txtusrpwd As System.Windows.Forms.TextBox
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
-    Friend WithEvents cmbDatabases As ComboBox
+    Friend WithEvents cboDatabases As ComboBox
     Friend WithEvents lblDbdetails As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents chkRememberUsername As CheckBox

@@ -775,6 +775,8 @@
             ''MsgBox(FldName.Key_Entry_Mode(Me.Name))
             'If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
 
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As Exception
             If ex.HResult = "-2146233086" Then
                 MsgBox("No Element Selected!   >>> Select them from Metadata form")

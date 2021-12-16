@@ -70,6 +70,7 @@
         populateForms()
         conn.Close()
 
+        ClsTranslations.TranslateForm(Me)
     End Sub
     Sub populateForms()
         sql = "select table_name from data_forms where selected =1;"
@@ -81,9 +82,9 @@
             da.Fill(ds, "forms")
 
             With ds.Tables("forms")
-                lstForms.Items.Clear()
+                lstBoxForms.Items.Clear()
                 For kount = 0 To .Rows.Count - 1
-                    lstForms.Items.Add(.Rows(kount).Item(0))
+                    lstBoxForms.Items.Add(.Rows(kount).Item(0))
                 Next
             End With
 
@@ -102,9 +103,9 @@
             da.Fill(ds, "flags")
 
             With ds.Tables("flags")
-                lstFlags.Items.Clear()
+                lstBoxFlags.Items.Clear()
                 For kount = 0 To .Rows.Count - 1
-                    lstFlags.Items.Add(.Rows(kount).Item(0) & " " & .Rows(kount).Item(1))
+                    lstBoxFlags.Items.Add(.Rows(kount).Item(0) & " " & .Rows(kount).Item(1))
                 Next
             End With
 
@@ -287,10 +288,10 @@
         Try
             Me.Cursor = Cursors.WaitCursor
             conn.Open()
-            DataGridView.CurrentRow.Selected = True
+            dataGridViewRecord.CurrentRow.Selected = True
             'MsgBox(rw & " " & stn & " " & elm & " " & dt)
 
-            With DataGridView
+            With dataGridViewRecord
                 'MsgBox(.Rows(rw).Cells(5).Value.ToString)
                 'dt = DateAndTime.Year(.Rows(rw).Cells(2).Value) & "-" & DateAndTime.Month(.Rows(rw).Cells(2).Value) & "-" & DateAndTime.Day(.Rows(rw).Cells(2).Value) & " " & DateAndTime.TimeValue(.Rows(rw).Cells(2).Value)
                 dt = .Rows(rw).Cells(2).Value & "-" & .Rows(rw).Cells(3).Value & "-" & .Rows(rw).Cells(4).Value & " " & .Rows(rw).Cells(5).Value.ToString
@@ -333,9 +334,9 @@
         Try
             Me.Cursor = Cursors.WaitCursor
             conn.Open()
-            DataGridView.CurrentRow.Selected = True
+            dataGridViewRecord.CurrentRow.Selected = True
 
-            With DataGridView
+            With dataGridViewRecord
 
                 sql = "DELETE FROM " & tblName & " Where " & stnlist & " And " & elmlist & " And " & dttPeriod & advcSelect & ";"
 
@@ -369,7 +370,7 @@
 
             FileOpen(101, fl, OpenMode.Output)
 
-            With DataGridView
+            With dataGridViewRecord
                 hdr = .Columns(0).Name
                 For i = 1 To .Columns.Count - 1
                     hdr = hdr & "," & .Columns(i).Name
@@ -406,9 +407,9 @@
 
     Private Sub chkForms_CheckedChanged(sender As Object, e As EventArgs) Handles chkForms.CheckedChanged
         If chkForms.Checked Then
-            lstForms.Enabled = True
+            lstBoxForms.Enabled = True
         Else
-            lstForms.Enabled = False
+            lstBoxForms.Enabled = False
         End If
     End Sub
 
@@ -426,26 +427,26 @@
 
     Private Sub chkQCStatus_CheckedChanged(sender As Object, e As EventArgs) Handles chkQCStatus.CheckedChanged
         If chkQCStatus.Checked Then
-            lstQC.Enabled = True
+            lstBoxQC.Enabled = True
         Else
-            lstQC.Enabled = False
+            lstBoxQC.Enabled = False
         End If
     End Sub
 
     Private Sub chkFlags_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlags.CheckedChanged
         If chkFlags.Checked Then
-            lstFlags.Enabled = True
+            lstBoxFlags.Enabled = True
         Else
-            lstFlags.Enabled = False
+            lstBoxFlags.Enabled = False
         End If
     End Sub
 
 
     Private Sub chkAcquisitionType_CheckedChanged(sender As Object, e As EventArgs) Handles chkAcquisitionType.CheckedChanged
         If chkAcquisitionType.Checked Then
-            lstAcquition.Enabled = True
+            lstBoxAcquition.Enabled = True
         Else
-            lstAcquition.Enabled = False
+            lstBoxAcquition.Enabled = False
         End If
     End Sub
 
@@ -581,8 +582,8 @@
         With TabObservations.SelectedTab
             If .TabIndex = 1 Then
 
-                sdate = Year(dateFrom.Text) & "-" & Month(dateFrom.Text) & "-" & DateAndTime.Day(dateFrom.Text) & " " & txtHourStart.Text & ":" & txtMinuteStart.Text & ":00"
-                edate = Year(dateTo.Text) & "-" & Month(dateTo.Text) & "-" & DateAndTime.Day(dateTo.Text) & " " & txtHourEnd.Text & ":" & txtMinuteEnd.Text & ":00"
+                sdate = Year(dtpDateFrom.Text) & "-" & Month(dtpDateFrom.Text) & "-" & DateAndTime.Day(dtpDateFrom.Text) & " " & cboHourStart.Text & ":" & cboMinuteStart.Text & ":00"
+                edate = Year(dtpDateTo.Text) & "-" & Month(dtpDateTo.Text) & "-" & DateAndTime.Day(dtpDateTo.Text) & " " & cboHourEnd.Text & ":" & cboMinuteEnd.Text & ":00"
 
 
                 stnlist = ""
@@ -668,9 +669,9 @@
                 Return False
             End If
 
-            DataGridView.DataMember = "records"
-            DataGridView.DataSource = ds
-            DataGridView.Refresh()
+            dataGridViewRecord.DataMember = "records"
+            dataGridViewRecord.DataSource = ds
+            dataGridViewRecord.Refresh()
             Me.Cursor = Cursors.Default
             Return True
         Catch ex As Exception
@@ -684,7 +685,7 @@
     Function setQCstatus(ByRef qcStts As Integer) As Boolean
         Try
             If chkQCStatus.Checked Then
-                qcStts = lstQC.SelectedItem
+                qcStts = lstBoxQC.SelectedItem
                 'MsgBox(qcStts)
                 Return True
             End If
@@ -698,7 +699,7 @@
     Function setAQstatus(ByRef acqStts As Integer) As Boolean
         Try
             If chkAcquisitionType.Checked Then
-                acqStts = lstAcquition.SelectedIndex
+                acqStts = lstBoxAcquition.SelectedIndex
                 'MsgBox(acqStts)
                 Return True
             End If
@@ -727,7 +728,7 @@
                 If Len(txtOtherflag.Text) > 0 Then
                     flg = txtOtherflag.Text
                 Else
-                    flg = "'" & Strings.Left(lstFlags.SelectedItem, 1) & "'"
+                    flg = "'" & Strings.Left(lstBoxFlags.SelectedItem, 1) & "'"
                     'MsgBox(flg)
                 End If
                 Return True
@@ -743,7 +744,7 @@
     Function selectForm(ByRef frm As String) As Boolean
         Try
             If chkForms.Checked Then
-                frm = "'" & lstForms.SelectedItem & "'"
+                frm = "'" & lstBoxForms.SelectedItem & "'"
                 'MsgBox(flg)
                 Return True
             End If
@@ -755,9 +756,9 @@
         End Try
     End Function
 
-    Private Sub DataGridView_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridView.CellBeginEdit
+    Private Sub DataGridView_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dataGridViewRecord.CellBeginEdit
         ' Capture the inique fields value for the current record. The will be used in identify the required record for updating
-        With DataGridView.CurrentRow
+        With dataGridViewRecord.CurrentRow
             'MsgBox(rw)
             'If rw = "" Then
 

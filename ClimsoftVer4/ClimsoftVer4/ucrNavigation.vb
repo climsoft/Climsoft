@@ -15,8 +15,8 @@ Public Class ucrNavigation
 
     Private Sub ucrNavigation_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            txtRecNum.ReadOnly = True
-            txtRecNum.TextAlign = HorizontalAlignment.Center
+            txtRecordNum.ReadOnly = True
+            txtRecordNum.TextAlign = HorizontalAlignment.Center
             bFirstLoad = False
         End If
     End Sub
@@ -72,23 +72,23 @@ Public Class ucrNavigation
         'Display the record number in the data navigation Textbox
         If iCurrRow = -1 Then
             If CheckIfRowExistsInDb() Then
-                txtRecNum.Text = "Record Exists"
+                txtRecordNum.Text = "Record Exists"
             Else
-                txtRecNum.Text = "New Record"
+                txtRecordNum.Text = "New Record"
             End If
 
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iMaxRows = 0 Then
-            txtRecNum.Text = "No Records"
+            txtRecordNum.Text = "No Records"
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iCurrRow >= 0 AndAlso iCurrRow < iMaxRows Then
-            txtRecNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
+            txtRecordNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
             'enable navigation buttons
             EnableNavigationButtons(True)
         Else
-            txtRecNum.Text = "New Record"
+            txtRecordNum.Text = "New Record"
             'disable navigation buttons
             EnableNavigationButtons(False)
         End If

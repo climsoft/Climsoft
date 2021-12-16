@@ -5,25 +5,26 @@
     Dim sql As String
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Me.DataGridView1.Rows.Remove(DataGridView1.SelectedRows(0))
+        Me.dataGridView1.Rows.Remove(dataGridView1.SelectedRows(0))
         Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
         Try
             da.Update(ds, "seqMonthlyElement")
             MsgBox("Record Deleted!", MsgBoxStyle.Information)
-            DataGridView1.Refresh()
+            dataGridView1.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
 
     End Sub
 
-    Private Sub frmElementSequencerDaily_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmElementSequencerMonthly_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         conn.ConnectionString = frmLogin.txtusrpwd.Text
         conn.Open()
         sql = "select * from seq_monthly_element"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "seqMonthlyElement")
-        Me.DataGridView1.DataSource = ds.Tables(0)
+        Me.dataGridView1.DataSource = ds.Tables(0)
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -35,7 +36,7 @@
         Try
             da.Update(ds, "seqMonthlyElement")
             MsgBox("Sequencer table updated successfully!", MsgBoxStyle.Information)
-            Me.DataGridView1.Refresh()
+            Me.dataGridView1.Refresh()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

@@ -22,7 +22,7 @@ Partial Class frmDatabaseConnections
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dataGridViewConnections = New System.Windows.Forms.DataGridView()
         Me.connection = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.server = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.database = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -32,33 +32,33 @@ Partial Class frmDatabaseConnections
         Me.cmdMakeDefault = New System.Windows.Forms.Button()
         Me.cmdTest = New System.Windows.Forms.Button()
         Me.cmdRemove = New System.Windows.Forms.Button()
-        Me.grpDefaults = New System.Windows.Forms.GroupBox()
+        Me.grpConnectionExamples = New System.Windows.Forms.GroupBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblExamplePort3308 = New System.Windows.Forms.Label()
+        Me.lblExampleDabaseName2 = New System.Windows.Forms.Label()
+        Me.lblExamplePort3306 = New System.Windows.Forms.Label()
+        Me.lblExampleDabaseName1 = New System.Windows.Forms.Label()
+        Me.lblExampleServerAddress = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmdOK = New System.Windows.Forms.Button()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dataGridViewConnections, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCurrentSelection.SuspendLayout()
-        Me.grpDefaults.SuspendLayout()
+        Me.grpConnectionExamples.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'dataGridViewConnections
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.connection, Me.server, Me.database, Me.port})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 12)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.DataGridView1.Size = New System.Drawing.Size(627, 208)
-        Me.DataGridView1.TabIndex = 0
+        Me.dataGridViewConnections.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridViewConnections.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.connection, Me.server, Me.database, Me.port})
+        Me.dataGridViewConnections.Location = New System.Drawing.Point(12, 12)
+        Me.dataGridViewConnections.MultiSelect = False
+        Me.dataGridViewConnections.Name = "dataGridViewConnections"
+        Me.dataGridViewConnections.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dataGridViewConnections.Size = New System.Drawing.Size(627, 208)
+        Me.dataGridViewConnections.TabIndex = 0
         '
         'connection
         '
@@ -138,25 +138,25 @@ Partial Class frmDatabaseConnections
         Me.cmdRemove.Text = "Remove connection"
         Me.cmdRemove.UseVisualStyleBackColor = True
         '
-        'grpDefaults
+        'grpConnectionExamples
         '
-        Me.grpDefaults.Controls.Add(Me.Label10)
-        Me.grpDefaults.Controls.Add(Me.Label9)
-        Me.grpDefaults.Controls.Add(Me.Label8)
-        Me.grpDefaults.Controls.Add(Me.Label7)
-        Me.grpDefaults.Controls.Add(Me.Label4)
-        Me.grpDefaults.Controls.Add(Me.Label5)
-        Me.grpDefaults.Controls.Add(Me.Label6)
-        Me.grpDefaults.Controls.Add(Me.Label3)
-        Me.grpDefaults.Controls.Add(Me.Label2)
-        Me.grpDefaults.Controls.Add(Me.Label1)
-        Me.grpDefaults.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpDefaults.Location = New System.Drawing.Point(12, 239)
-        Me.grpDefaults.Name = "grpDefaults"
-        Me.grpDefaults.Size = New System.Drawing.Size(465, 144)
-        Me.grpDefaults.TabIndex = 7
-        Me.grpDefaults.TabStop = False
-        Me.grpDefaults.Text = "Example connections"
+        Me.grpConnectionExamples.Controls.Add(Me.Label10)
+        Me.grpConnectionExamples.Controls.Add(Me.Label9)
+        Me.grpConnectionExamples.Controls.Add(Me.lblExamplePort3308)
+        Me.grpConnectionExamples.Controls.Add(Me.lblExampleDabaseName2)
+        Me.grpConnectionExamples.Controls.Add(Me.lblExamplePort3306)
+        Me.grpConnectionExamples.Controls.Add(Me.lblExampleDabaseName1)
+        Me.grpConnectionExamples.Controls.Add(Me.lblExampleServerAddress)
+        Me.grpConnectionExamples.Controls.Add(Me.Label3)
+        Me.grpConnectionExamples.Controls.Add(Me.Label2)
+        Me.grpConnectionExamples.Controls.Add(Me.Label1)
+        Me.grpConnectionExamples.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpConnectionExamples.Location = New System.Drawing.Point(12, 239)
+        Me.grpConnectionExamples.Name = "grpConnectionExamples"
+        Me.grpConnectionExamples.Size = New System.Drawing.Size(465, 144)
+        Me.grpConnectionExamples.TabIndex = 7
+        Me.grpConnectionExamples.TabStop = False
+        Me.grpConnectionExamples.Text = "Example connections"
         '
         'Label10
         '
@@ -178,50 +178,50 @@ Partial Class frmDatabaseConnections
         Me.Label9.TabIndex = 8
         Me.Label9.Text = "MySQL default"
         '
-        'Label8
+        'lblExamplePort3308
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(121, 120)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(35, 13)
-        Me.Label8.TabIndex = 7
-        Me.Label8.Text = "3308"
+        Me.lblExamplePort3308.AutoSize = True
+        Me.lblExamplePort3308.Location = New System.Drawing.Point(121, 120)
+        Me.lblExamplePort3308.Name = "lblExamplePort3308"
+        Me.lblExamplePort3308.Size = New System.Drawing.Size(35, 13)
+        Me.lblExamplePort3308.TabIndex = 7
+        Me.lblExamplePort3308.Text = "3308"
         '
-        'Label7
+        'lblExampleDabaseName2
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(121, 74)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(171, 13)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "mariadb_climsoft_test_db_v4"
+        Me.lblExampleDabaseName2.AutoSize = True
+        Me.lblExampleDabaseName2.Location = New System.Drawing.Point(121, 74)
+        Me.lblExampleDabaseName2.Name = "lblExampleDabaseName2"
+        Me.lblExampleDabaseName2.Size = New System.Drawing.Size(171, 13)
+        Me.lblExampleDabaseName2.TabIndex = 6
+        Me.lblExampleDabaseName2.Text = "mariadb_climsoft_test_db_v4"
         '
-        'Label4
+        'lblExamplePort3306
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(121, 105)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "3306"
+        Me.lblExamplePort3306.AutoSize = True
+        Me.lblExamplePort3306.Location = New System.Drawing.Point(121, 105)
+        Me.lblExamplePort3306.Name = "lblExamplePort3306"
+        Me.lblExamplePort3306.Size = New System.Drawing.Size(35, 13)
+        Me.lblExamplePort3306.TabIndex = 5
+        Me.lblExamplePort3306.Text = "3306"
         '
-        'Label5
+        'lblExampleDabaseName1
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(121, 57)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(143, 13)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "mariadb_climsoft_db_v4"
+        Me.lblExampleDabaseName1.AutoSize = True
+        Me.lblExampleDabaseName1.Location = New System.Drawing.Point(121, 57)
+        Me.lblExampleDabaseName1.Name = "lblExampleDabaseName1"
+        Me.lblExampleDabaseName1.Size = New System.Drawing.Size(143, 13)
+        Me.lblExampleDabaseName1.TabIndex = 4
+        Me.lblExampleDabaseName1.Text = "mariadb_climsoft_db_v4"
         '
-        'Label6
+        'lblExampleServerAddress
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(121, 29)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(61, 13)
-        Me.Label6.TabIndex = 3
-        Me.Label6.Text = "127.0.0.1"
+        Me.lblExampleServerAddress.AutoSize = True
+        Me.lblExampleServerAddress.Location = New System.Drawing.Point(121, 29)
+        Me.lblExampleServerAddress.Name = "lblExampleServerAddress"
+        Me.lblExampleServerAddress.Size = New System.Drawing.Size(61, 13)
+        Me.lblExampleServerAddress.TabIndex = 3
+        Me.lblExampleServerAddress.Text = "127.0.0.1"
         '
         'Label3
         '
@@ -269,20 +269,20 @@ Partial Class frmDatabaseConnections
         Me.ClientSize = New System.Drawing.Size(651, 395)
         Me.Controls.Add(Me.cmdOK)
         Me.Controls.Add(Me.grpCurrentSelection)
-        Me.Controls.Add(Me.grpDefaults)
+        Me.Controls.Add(Me.grpConnectionExamples)
         Me.Controls.Add(Me.cmdCancel)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dataGridViewConnections)
         Me.Name = "frmDatabaseConnections"
         Me.Text = "Database Connections"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dataGridViewConnections, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCurrentSelection.ResumeLayout(False)
-        Me.grpDefaults.ResumeLayout(False)
-        Me.grpDefaults.PerformLayout()
+        Me.grpConnectionExamples.ResumeLayout(False)
+        Me.grpConnectionExamples.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dataGridViewConnections As DataGridView
     Friend WithEvents cmdCancel As Button
     Friend WithEvents connection As DataGridViewTextBoxColumn
     Friend WithEvents server As DataGridViewTextBoxColumn
@@ -291,17 +291,17 @@ Partial Class frmDatabaseConnections
     Friend WithEvents grpCurrentSelection As GroupBox
     Friend WithEvents cmdTest As Button
     Friend WithEvents cmdRemove As Button
-    Friend WithEvents grpDefaults As GroupBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents grpConnectionExamples As GroupBox
+    Friend WithEvents lblExamplePort3306 As Label
+    Friend WithEvents lblExampleDabaseName1 As Label
+    Friend WithEvents lblExampleServerAddress As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblExamplePort3308 As Label
+    Friend WithEvents lblExampleDabaseName2 As Label
     Friend WithEvents cmdOK As Button
     Friend WithEvents cmdMakeDefault As Button
 End Class

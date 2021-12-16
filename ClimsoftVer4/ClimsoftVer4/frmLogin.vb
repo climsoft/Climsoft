@@ -92,7 +92,7 @@ Public Class frmLogin
 
         updateRememberedUsername()
 
-        dbChoice = cmbDatabases.SelectedItem
+        dbChoice = cboDatabases.SelectedItem
         connectionString = ""
         If String.IsNullOrEmpty(dbChoice) Then
             MsgBox("Please select a database from the list, or manage database connections")
@@ -205,12 +205,12 @@ Public Class frmLogin
 
         Try
             ' Clear and then populate Database combobox from connectionDetails
-            cmbDatabases.Items.Clear()
+            cboDatabases.Items.Clear()
             For Each line As String In connectionDetails
                 parts = line.Split("|")
-                cmbDatabases.Items.Add(parts(0))
+                cboDatabases.Items.Add(parts(0))
             Next
-            cmbDatabases.SelectedIndex = 0
+            cboDatabases.SelectedIndex = 0
         Catch
             ' SelectedIndex = 0 will fail if no items are added to cmdDatabases
         End Try

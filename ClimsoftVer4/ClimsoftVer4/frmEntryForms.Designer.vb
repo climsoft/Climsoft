@@ -23,7 +23,7 @@ Partial Class frmEntryForms
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEntryForms))
-        Me.lstvForms = New System.Windows.Forms.ListView()
+        Me.lstViewForms = New System.Windows.Forms.ListView()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStriptxtSpace = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripApply = New System.Windows.Forms.ToolStripButton()
@@ -54,21 +54,22 @@ Partial Class frmEntryForms
         Me.GroupSelections.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lstvForms
+        'lstViewForms
         '
-        Me.lstvForms.AllowColumnReorder = True
-        Me.lstvForms.AllowDrop = True
-        Me.lstvForms.CheckBoxes = True
-        Me.lstvForms.FullRowSelect = True
-        Me.lstvForms.GridLines = True
-        Me.lstvForms.LabelEdit = True
-        Me.lstvForms.Location = New System.Drawing.Point(14, 12)
-        Me.lstvForms.Name = "lstvForms"
-        Me.lstvForms.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.lstvForms.Size = New System.Drawing.Size(503, 237)
-        Me.lstvForms.TabIndex = 4
-        Me.lstvForms.UseCompatibleStateImageBehavior = False
-        Me.lstvForms.View = System.Windows.Forms.View.Details
+        Me.lstViewForms.AllowColumnReorder = True
+        Me.lstViewForms.AllowDrop = True
+        Me.lstViewForms.CheckBoxes = True
+        Me.lstViewForms.FullRowSelect = True
+        Me.lstViewForms.GridLines = True
+        Me.lstViewForms.HideSelection = False
+        Me.lstViewForms.LabelEdit = True
+        Me.lstViewForms.Location = New System.Drawing.Point(14, 12)
+        Me.lstViewForms.Name = "lstViewForms"
+        Me.lstViewForms.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.lstViewForms.Size = New System.Drawing.Size(503, 237)
+        Me.lstViewForms.TabIndex = 4
+        Me.lstViewForms.UseCompatibleStateImageBehavior = False
+        Me.lstViewForms.View = System.Windows.Forms.View.Details
         '
         'ToolStrip1
         '
@@ -301,7 +302,7 @@ Partial Class frmEntryForms
         Me.ClientSize = New System.Drawing.Size(537, 461)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.lstvForms)
+        Me.Controls.Add(Me.lstViewForms)
         Me.Name = "frmEntryForms"
         Me.Text = "Empty Key Entry Forms"
         Me.ToolStrip1.ResumeLayout(False)
@@ -314,7 +315,7 @@ Partial Class frmEntryForms
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lstvForms As ListView
+    Friend WithEvents lstViewForms As ListView
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripApply As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator

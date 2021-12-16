@@ -38,21 +38,23 @@ Public Class frmProducts
             sql = "SELECT prCategory FROM tblProducts GROUP BY prCategory"
             da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
             ds.Clear()
-            cmbProductsCategory.Items.Clear()
-            lstvProducts.Clear()
+            cboProductsCategory.Items.Clear()
+            lstViewProducts.Clear()
             da.Fill(ds, "tblproducts")
             conn.Close()
             '------MaxRows assignment statement and [kount loop] below moved from position below [End Try] block
             maxRows = ds.Tables("tblproducts").Rows.Count
             For kount = 0 To maxRows - 1 Step 1
 
-                cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
+                cboProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
 
             Next
             '--------------
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
+
+        ClsTranslations.TranslateForm(Me)
 
         '' maxRows = ds.Tables("tblproducts").Rows.Count
         'MsgBox(maxRows)
@@ -65,17 +67,17 @@ Public Class frmProducts
 
     End Sub
 
-    Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProductsCategory.SelectedIndexChanged
+    Private Sub cmbProductsCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProductsCategory.SelectedIndexChanged
         Dim prod As String
 
-        prod = cmbProductsCategory.Text
+        prod = cboProductsCategory.Text
 
         'If prod = "Rain Days" Then ProductsTable_Update()
         'ProductsTable_Update()
-        lstvProducts.Clear()
-        lstvProducts.Columns.Clear()
-        lstvProducts.Columns.Add("Products Name", 100, HorizontalAlignment.Left)
-        lstvProducts.Columns.Add("Products Details", 500, HorizontalAlignment.Left)
+        lstViewProducts.Clear()
+        lstViewProducts.Columns.Clear()
+        lstViewProducts.Columns.Add("Products Name", 100, HorizontalAlignment.Left)
+        lstViewProducts.Columns.Add("Products Details", 500, HorizontalAlignment.Left)
 
         sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
 
@@ -92,17 +94,17 @@ Public Class frmProducts
             str(0) = ds.Tables("tblProducts").Rows(kount).Item("productName")
             str(1) = ds.Tables("tblProducts").Rows(kount).Item("prDetails")
             itm = New ListViewItem(str)
-            lstvProducts.Items.Add(itm)
+            lstViewProducts.Items.Add(itm)
         Next
     End Sub
 
-    Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstvProducts.Click
+    Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
         Dim prtyp As New clsHelp
         'Dim formcaption As String
 
-        For i = 0 To lstvProducts.Items.Count - 1
-            If (lstvProducts.Items(i).Selected) Then
-                prtyp.ProductType = lstvProducts.Items(i).Text
+        For i = 0 To lstViewProducts.Items.Count - 1
+            If (lstViewProducts.Items(i).Selected) Then
+                prtyp.ProductType = lstViewProducts.Items(i).Text
                 Exit For
             End If
         Next

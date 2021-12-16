@@ -15,10 +15,10 @@
         conn.ConnectionString = MyConnectionString
 
 
-        lstvForms.Clear()
-        lstvForms.Columns.Clear()
+        lstViewForms.Clear()
+        lstViewForms.Columns.Clear()
 
-        lstvForms.Columns.Add("Check to select  forms to emepty", 503, HorizontalAlignment.Left)
+        lstViewForms.Columns.Add("Check to select  forms to emepty", 503, HorizontalAlignment.Left)
 
         Try
 
@@ -33,8 +33,11 @@
             For i = 0 To ds.Tables("data_forms").Rows.Count - 1
                 col(0) = ds.Tables("data_forms").Rows(i).Item(2)
                 itm = New ListViewItem(col)
-                lstvForms.Items.Add(itm)
+                lstViewForms.Items.Add(itm)
             Next
+
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As MySql.Data.MySqlClient.MySqlException
             MessageBox.Show(ex.Message)
         End Try
@@ -63,20 +66,20 @@
         chkSkipUploaded.Checked = True
 
         ' Unselect all forms
-        For i = 0 To lstvForms.Items.Count - 1
-            lstvForms.Items(i).Checked = False
-            lstvForms.Items(i).Selected = False
+        For i = 0 To lstViewForms.Items.Count - 1
+            lstViewForms.Items(i).Checked = False
+            lstViewForms.Items(i).Selected = False
         Next
     End Sub
 
     Private Sub ToolStripApply_Click(sender As Object, e As EventArgs) Handles ToolStripApply.Click
-        For i = 0 To lstvForms.Items.Count - 1
-            If lstvForms.Items(i).Checked = True Then
+        For i = 0 To lstViewForms.Items.Count - 1
+            If lstViewForms.Items(i).Checked = True Then
 
-                If Empty_Table(Table_Name(lstvForms.Items(i).Text)) = False Then
-                    MsgBox("Table " & lstvForms.Items(i).Text & " not deleted!")
+                If Empty_Table(Table_Name(lstViewForms.Items(i).Text)) = False Then
+                    MsgBox("Table " & lstViewForms.Items(i).Text & " not deleted!")
                 Else
-                    MsgBox(lstvForms.Items(i).Text & " <---- Done")
+                    MsgBox(lstViewForms.Items(i).Text & " <---- Done")
                 End If
             End If
         Next

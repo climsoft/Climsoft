@@ -126,6 +126,8 @@ Public Class frmQC
             conns.Close()
         End Try
         conns.Close()
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged

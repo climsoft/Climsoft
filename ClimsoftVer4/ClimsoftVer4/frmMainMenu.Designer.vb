@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMainMenu
-    Inherits ClimsoftVer4.frmGeneral
+    Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -20,7 +20,7 @@ Partial Class frmMainMenu
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
+        Me.menuStripMain = New System.Windows.Forms.MenuStrip()
         Me.mnuInput = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInputKeyEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInputPaperArchive = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,6 +39,7 @@ Partial Class frmMainMenu
         Me.UpdateObservationsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpeartionsMonitoringToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmptyKeyEntryTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CreateModifyKeyEntryFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeOwnPasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsModifyForms = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,33 +68,32 @@ Partial Class frmMainMenu
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.cmdRedCloseButton = New System.Windows.Forms.Button()
-        Me.cmdSettingsAWS = New System.Windows.Forms.Button()
-        Me.cmdMetadata = New System.Windows.Forms.Button()
-        Me.cmdUserManagement = New System.Windows.Forms.Button()
-        Me.cmdProducts = New System.Windows.Forms.Button()
-        Me.cmdQC = New System.Windows.Forms.Button()
-        Me.cmdDataTransfer = New System.Windows.Forms.Button()
-        Me.cmdPaperArchive = New System.Windows.Forms.Button()
+        Me.btnMainClose = New System.Windows.Forms.Button()
+        Me.btnMainSettingsAWS = New System.Windows.Forms.Button()
+        Me.btnMainMetadata = New System.Windows.Forms.Button()
+        Me.btnMainUserManagement = New System.Windows.Forms.Button()
+        Me.btnMainProducts = New System.Windows.Forms.Button()
+        Me.btnMainQC = New System.Windows.Forms.Button()
+        Me.btnMainDataTransfer = New System.Windows.Forms.Button()
+        Me.btnMainPaperArchive = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmdKeyEntry = New System.Windows.Forms.Button()
-        Me.CreateModifyKeyEntryFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStrip2.SuspendLayout()
+        Me.btnMainDataEntry = New System.Windows.Forms.Button()
+        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
+        Me.menuStripMain.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'MenuStrip2
+        'menuStripMain
         '
-        Me.MenuStrip2.AllowItemReorder = True
-        Me.MenuStrip2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuLanguageTranslation, Me.mnuHelp})
-        Me.MenuStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip2.Name = "MenuStrip2"
-        Me.MenuStrip2.ShowItemToolTips = True
-        Me.MenuStrip2.Size = New System.Drawing.Size(849, 27)
-        Me.MenuStrip2.TabIndex = 7
-        Me.MenuStrip2.Text = "MenuStrip2"
+        Me.menuStripMain.AllowItemReorder = True
+        Me.menuStripMain.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.menuStripMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuInput, Me.mnuAccessories, Me.mnuProducts, Me.mnuQC, Me.mnuAdministration, Me.ChangeOwnPasswordToolStripMenuItem, Me.mnuTools, Me.mnuLanguageTranslation, Me.mnuHelp})
+        Me.menuStripMain.Location = New System.Drawing.Point(0, 0)
+        Me.menuStripMain.Name = "menuStripMain"
+        Me.menuStripMain.ShowItemToolTips = True
+        Me.menuStripMain.Size = New System.Drawing.Size(931, 27)
+        Me.menuStripMain.TabIndex = 7
+        Me.menuStripMain.Text = "Main Menu"
         '
         'mnuInput
         '
@@ -129,21 +129,21 @@ Partial Class frmMainMenu
         'mnuAccessoriesDewPointRH
         '
         Me.mnuAccessoriesDewPointRH.Name = "mnuAccessoriesDewPointRH"
-        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesDewPointRH.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesDewPointRH.Tag = "Calculation_of_dew_Point_and_RH"
         Me.mnuAccessoriesDewPointRH.Text = "Calculation of dew Point and RH"
         '
         'mnuAccessoriesXMLOutput
         '
         Me.mnuAccessoriesXMLOutput.Name = "mnuAccessoriesXMLOutput"
-        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(275, 24)
+        Me.mnuAccessoriesXMLOutput.Size = New System.Drawing.Size(274, 24)
         Me.mnuAccessoriesXMLOutput.Tag = "Generate_XML_Output"
         Me.mnuAccessoriesXMLOutput.Text = "Generate XML Output"
         '
         'UserRecordsToolStripMenuItem1
         '
         Me.UserRecordsToolStripMenuItem1.Name = "UserRecordsToolStripMenuItem1"
-        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(275, 24)
+        Me.UserRecordsToolStripMenuItem1.Size = New System.Drawing.Size(274, 24)
         Me.UserRecordsToolStripMenuItem1.Text = "User Records"
         '
         'mnuProducts
@@ -221,6 +221,12 @@ Partial Class frmMainMenu
         Me.EmptyKeyEntryTablesToolStripMenuItem.Size = New System.Drawing.Size(264, 24)
         Me.EmptyKeyEntryTablesToolStripMenuItem.Text = "Empty Key Entry Forms"
         '
+        'CreateModifyKeyEntryFormToolStripMenuItem
+        '
+        Me.CreateModifyKeyEntryFormToolStripMenuItem.Name = "CreateModifyKeyEntryFormToolStripMenuItem"
+        Me.CreateModifyKeyEntryFormToolStripMenuItem.Size = New System.Drawing.Size(264, 24)
+        Me.CreateModifyKeyEntryFormToolStripMenuItem.Text = "Create/Modify Key Entry Form"
+        '
         'ChangeOwnPasswordToolStripMenuItem
         '
         Me.ChangeOwnPasswordToolStripMenuItem.Name = "ChangeOwnPasswordToolStripMenuItem"
@@ -231,7 +237,7 @@ Partial Class frmMainMenu
         '
         Me.mnuTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsModifyForms, Me.SelectLanguageToolStripMenuItem, Me.GenerlSettingsToolStripMenuItem, Me.SequencerConfigurationToolStripMenuItem, Me.FormHourlyTimeSelectionToolStripMenuItem, Me.AWSToolStripMenuItem, Me.ConfigurationForTDCFToolStripMenuItem})
         Me.mnuTools.Name = "mnuTools"
-        Me.mnuTools.Size = New System.Drawing.Size(53, 23)
+        Me.mnuTools.Size = New System.Drawing.Size(52, 23)
         Me.mnuTools.Tag = "Tools"
         Me.mnuTools.Text = "Tools"
         '
@@ -266,19 +272,19 @@ Partial Class frmMainMenu
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.HourlyToolStripMenuItem.Text = "Daily"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.DailyToolStripMenuItem.Text = "Hourly"
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
@@ -298,13 +304,13 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(166, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem
@@ -316,7 +322,7 @@ Partial Class frmMainMenu
         'mnuLanguageTranslation
         '
         Me.mnuLanguageTranslation.Name = "mnuLanguageTranslation"
-        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(152, 23)
+        Me.mnuLanguageTranslation.Size = New System.Drawing.Size(151, 23)
         Me.mnuLanguageTranslation.Text = "Language Translation"
         '
         'mnuHelp
@@ -343,6 +349,9 @@ Partial Class frmMainMenu
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.Linen
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label11)
@@ -353,21 +362,20 @@ Partial Class frmMainMenu
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.cmdRedCloseButton)
-        Me.Panel1.Controls.Add(Me.cmdSettingsAWS)
-        Me.Panel1.Controls.Add(Me.cmdMetadata)
-        Me.Panel1.Controls.Add(Me.cmdUserManagement)
-        Me.Panel1.Controls.Add(Me.cmdProducts)
-        Me.Panel1.Controls.Add(Me.cmdQC)
-        Me.Panel1.Controls.Add(Me.cmdDataTransfer)
-        Me.Panel1.Controls.Add(Me.cmdPaperArchive)
+        Me.Panel1.Controls.Add(Me.btnMainClose)
+        Me.Panel1.Controls.Add(Me.btnMainSettingsAWS)
+        Me.Panel1.Controls.Add(Me.btnMainMetadata)
+        Me.Panel1.Controls.Add(Me.btnMainUserManagement)
+        Me.Panel1.Controls.Add(Me.btnMainProducts)
+        Me.Panel1.Controls.Add(Me.btnMainQC)
+        Me.Panel1.Controls.Add(Me.btnMainDataTransfer)
+        Me.Panel1.Controls.Add(Me.btnMainPaperArchive)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.cmdKeyEntry)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel1.Controls.Add(Me.btnMainDataEntry)
         Me.Panel1.Location = New System.Drawing.Point(0, 27)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0, 3, 3, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(840, 521)
+        Me.Panel1.Size = New System.Drawing.Size(931, 521)
         Me.Panel1.TabIndex = 10
         '
         'Label5
@@ -375,7 +383,7 @@ Partial Class frmMainMenu
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(393, 436)
+        Me.Label5.Location = New System.Drawing.Point(444, 436)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 16)
         Me.Label5.TabIndex = 36
@@ -388,7 +396,7 @@ Partial Class frmMainMenu
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(332, 7)
+        Me.Label11.Location = New System.Drawing.Point(400, 7)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(108, 25)
         Me.Label11.TabIndex = 35
@@ -399,7 +407,7 @@ Partial Class frmMainMenu
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(110, 436)
+        Me.Label9.Location = New System.Drawing.Point(162, 436)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(176, 16)
         Me.Label9.TabIndex = 33
@@ -410,7 +418,7 @@ Partial Class frmMainMenu
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(555, 436)
+        Me.Label8.Location = New System.Drawing.Point(612, 436)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(133, 16)
         Me.Label8.TabIndex = 32
@@ -421,7 +429,7 @@ Partial Class frmMainMenu
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(133, 324)
+        Me.Label7.Location = New System.Drawing.Point(185, 324)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(131, 16)
         Me.Label7.TabIndex = 31
@@ -432,7 +440,7 @@ Partial Class frmMainMenu
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(566, 323)
+        Me.Label6.Location = New System.Drawing.Point(618, 323)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(109, 16)
         Me.Label6.TabIndex = 30
@@ -443,7 +451,7 @@ Partial Class frmMainMenu
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(551, 217)
+        Me.Label4.Location = New System.Drawing.Point(603, 217)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 16)
         Me.Label4.TabIndex = 28
@@ -454,7 +462,7 @@ Partial Class frmMainMenu
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(153, 219)
+        Me.Label3.Location = New System.Drawing.Point(205, 219)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(90, 16)
         Me.Label3.TabIndex = 27
@@ -465,206 +473,201 @@ Partial Class frmMainMenu
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(556, 104)
+        Me.Label2.Location = New System.Drawing.Point(608, 104)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(134, 16)
         Me.Label2.TabIndex = 26
         Me.Label2.Tag = "Archive_Paper_Image"
         Me.Label2.Text = "Archive Paper Image"
         '
-        'cmdRedCloseButton
+        'btnMainClose
         '
-        Me.cmdRedCloseButton.BackgroundImage = CType(resources.GetObject("cmdRedCloseButton.BackgroundImage"), System.Drawing.Image)
-        Me.cmdRedCloseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdRedCloseButton.FlatAppearance.BorderSize = 4
-        Me.cmdRedCloseButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdRedCloseButton.Location = New System.Drawing.Point(368, 364)
-        Me.cmdRedCloseButton.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdRedCloseButton.Name = "cmdRedCloseButton"
-        Me.cmdRedCloseButton.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdRedCloseButton.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdRedCloseButton.Size = New System.Drawing.Size(96, 69)
-        Me.cmdRedCloseButton.TabIndex = 25
-        Me.cmdRedCloseButton.UseCompatibleTextRendering = True
-        Me.cmdRedCloseButton.UseVisualStyleBackColor = True
+        Me.btnMainClose.BackgroundImage = CType(resources.GetObject("btnMainClose.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainClose.FlatAppearance.BorderSize = 4
+        Me.btnMainClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainClose.Location = New System.Drawing.Point(420, 364)
+        Me.btnMainClose.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainClose.Name = "btnMainClose"
+        Me.btnMainClose.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainClose.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainClose.Size = New System.Drawing.Size(96, 69)
+        Me.btnMainClose.TabIndex = 25
+        Me.btnMainClose.UseCompatibleTextRendering = True
+        Me.btnMainClose.UseVisualStyleBackColor = True
         '
-        'cmdSettingsAWS
+        'btnMainSettingsAWS
         '
-        Me.cmdSettingsAWS.BackgroundImage = CType(resources.GetObject("cmdSettingsAWS.BackgroundImage"), System.Drawing.Image)
-        Me.cmdSettingsAWS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdSettingsAWS.FlatAppearance.BorderSize = 4
-        Me.cmdSettingsAWS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSettingsAWS.ForeColor = System.Drawing.Color.Red
-        Me.cmdSettingsAWS.Location = New System.Drawing.Point(135, 360)
-        Me.cmdSettingsAWS.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdSettingsAWS.Name = "cmdSettingsAWS"
-        Me.cmdSettingsAWS.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdSettingsAWS.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdSettingsAWS.Size = New System.Drawing.Size(126, 76)
-        Me.cmdSettingsAWS.TabIndex = 24
-        Me.cmdSettingsAWS.UseCompatibleTextRendering = True
-        Me.cmdSettingsAWS.UseVisualStyleBackColor = True
+        Me.btnMainSettingsAWS.BackgroundImage = CType(resources.GetObject("btnMainSettingsAWS.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainSettingsAWS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainSettingsAWS.FlatAppearance.BorderSize = 4
+        Me.btnMainSettingsAWS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainSettingsAWS.ForeColor = System.Drawing.Color.Red
+        Me.btnMainSettingsAWS.Location = New System.Drawing.Point(187, 360)
+        Me.btnMainSettingsAWS.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainSettingsAWS.Name = "btnMainSettingsAWS"
+        Me.btnMainSettingsAWS.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainSettingsAWS.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainSettingsAWS.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainSettingsAWS.TabIndex = 24
+        Me.btnMainSettingsAWS.UseCompatibleTextRendering = True
+        Me.btnMainSettingsAWS.UseVisualStyleBackColor = True
         '
-        'cmdMetadata
+        'btnMainMetadata
         '
-        Me.cmdMetadata.BackgroundImage = CType(resources.GetObject("cmdMetadata.BackgroundImage"), System.Drawing.Image)
-        Me.cmdMetadata.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdMetadata.FlatAppearance.BorderSize = 4
-        Me.cmdMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdMetadata.ForeColor = System.Drawing.Color.Red
-        Me.cmdMetadata.Location = New System.Drawing.Point(558, 360)
-        Me.cmdMetadata.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdMetadata.Name = "cmdMetadata"
-        Me.cmdMetadata.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdMetadata.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdMetadata.Size = New System.Drawing.Size(126, 76)
-        Me.cmdMetadata.TabIndex = 23
-        Me.cmdMetadata.UseCompatibleTextRendering = True
-        Me.cmdMetadata.UseVisualStyleBackColor = True
+        Me.btnMainMetadata.BackgroundImage = CType(resources.GetObject("btnMainMetadata.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainMetadata.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainMetadata.FlatAppearance.BorderSize = 4
+        Me.btnMainMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainMetadata.ForeColor = System.Drawing.Color.Red
+        Me.btnMainMetadata.Location = New System.Drawing.Point(610, 360)
+        Me.btnMainMetadata.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainMetadata.Name = "btnMainMetadata"
+        Me.btnMainMetadata.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainMetadata.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainMetadata.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainMetadata.TabIndex = 23
+        Me.btnMainMetadata.UseCompatibleTextRendering = True
+        Me.btnMainMetadata.UseVisualStyleBackColor = True
         '
-        'cmdUserManagement
+        'btnMainUserManagement
         '
-        Me.cmdUserManagement.BackgroundImage = CType(resources.GetObject("cmdUserManagement.BackgroundImage"), System.Drawing.Image)
-        Me.cmdUserManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdUserManagement.FlatAppearance.BorderSize = 4
-        Me.cmdUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdUserManagement.ForeColor = System.Drawing.Color.Red
-        Me.cmdUserManagement.Location = New System.Drawing.Point(135, 248)
-        Me.cmdUserManagement.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdUserManagement.Name = "cmdUserManagement"
-        Me.cmdUserManagement.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdUserManagement.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdUserManagement.Size = New System.Drawing.Size(126, 76)
-        Me.cmdUserManagement.TabIndex = 22
-        Me.cmdUserManagement.UseCompatibleTextRendering = True
-        Me.cmdUserManagement.UseVisualStyleBackColor = True
+        Me.btnMainUserManagement.BackgroundImage = CType(resources.GetObject("btnMainUserManagement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainUserManagement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainUserManagement.FlatAppearance.BorderSize = 4
+        Me.btnMainUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainUserManagement.ForeColor = System.Drawing.Color.Red
+        Me.btnMainUserManagement.Location = New System.Drawing.Point(187, 248)
+        Me.btnMainUserManagement.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainUserManagement.Name = "btnMainUserManagement"
+        Me.btnMainUserManagement.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainUserManagement.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainUserManagement.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainUserManagement.TabIndex = 22
+        Me.btnMainUserManagement.UseCompatibleTextRendering = True
+        Me.btnMainUserManagement.UseVisualStyleBackColor = True
         '
-        'cmdProducts
+        'btnMainProducts
         '
-        Me.cmdProducts.BackgroundImage = CType(resources.GetObject("cmdProducts.BackgroundImage"), System.Drawing.Image)
-        Me.cmdProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdProducts.FlatAppearance.BorderSize = 4
-        Me.cmdProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdProducts.ForeColor = System.Drawing.Color.Red
-        Me.cmdProducts.Location = New System.Drawing.Point(558, 247)
-        Me.cmdProducts.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdProducts.Name = "cmdProducts"
-        Me.cmdProducts.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdProducts.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdProducts.Size = New System.Drawing.Size(126, 76)
-        Me.cmdProducts.TabIndex = 21
-        Me.cmdProducts.UseCompatibleTextRendering = True
-        Me.cmdProducts.UseVisualStyleBackColor = True
+        Me.btnMainProducts.BackgroundImage = CType(resources.GetObject("btnMainProducts.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainProducts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainProducts.FlatAppearance.BorderSize = 4
+        Me.btnMainProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainProducts.ForeColor = System.Drawing.Color.Red
+        Me.btnMainProducts.Location = New System.Drawing.Point(610, 247)
+        Me.btnMainProducts.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainProducts.Name = "btnMainProducts"
+        Me.btnMainProducts.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainProducts.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainProducts.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainProducts.TabIndex = 21
+        Me.btnMainProducts.UseCompatibleTextRendering = True
+        Me.btnMainProducts.UseVisualStyleBackColor = True
         '
-        'cmdQC
+        'btnMainQC
         '
-        Me.cmdQC.BackgroundImage = CType(resources.GetObject("cmdQC.BackgroundImage"), System.Drawing.Image)
-        Me.cmdQC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdQC.FlatAppearance.BorderSize = 4
-        Me.cmdQC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQC.ForeColor = System.Drawing.Color.Red
-        Me.cmdQC.Location = New System.Drawing.Point(559, 143)
-        Me.cmdQC.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdQC.Name = "cmdQC"
-        Me.cmdQC.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdQC.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdQC.Size = New System.Drawing.Size(126, 76)
-        Me.cmdQC.TabIndex = 20
-        Me.cmdQC.UseCompatibleTextRendering = True
-        Me.cmdQC.UseVisualStyleBackColor = True
+        Me.btnMainQC.BackgroundImage = CType(resources.GetObject("btnMainQC.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainQC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainQC.FlatAppearance.BorderSize = 4
+        Me.btnMainQC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainQC.ForeColor = System.Drawing.Color.Red
+        Me.btnMainQC.Location = New System.Drawing.Point(611, 143)
+        Me.btnMainQC.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainQC.Name = "btnMainQC"
+        Me.btnMainQC.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainQC.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainQC.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainQC.TabIndex = 20
+        Me.btnMainQC.UseCompatibleTextRendering = True
+        Me.btnMainQC.UseVisualStyleBackColor = True
         '
-        'cmdDataTransfer
+        'btnMainDataTransfer
         '
-        Me.cmdDataTransfer.BackgroundImage = CType(resources.GetObject("cmdDataTransfer.BackgroundImage"), System.Drawing.Image)
-        Me.cmdDataTransfer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdDataTransfer.FlatAppearance.BorderSize = 4
-        Me.cmdDataTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdDataTransfer.ForeColor = System.Drawing.Color.Red
-        Me.cmdDataTransfer.Location = New System.Drawing.Point(135, 143)
-        Me.cmdDataTransfer.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdDataTransfer.Name = "cmdDataTransfer"
-        Me.cmdDataTransfer.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdDataTransfer.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdDataTransfer.Size = New System.Drawing.Size(126, 76)
-        Me.cmdDataTransfer.TabIndex = 19
-        Me.cmdDataTransfer.UseCompatibleTextRendering = True
-        Me.cmdDataTransfer.UseVisualStyleBackColor = True
+        Me.btnMainDataTransfer.BackgroundImage = CType(resources.GetObject("btnMainDataTransfer.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainDataTransfer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainDataTransfer.FlatAppearance.BorderSize = 4
+        Me.btnMainDataTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainDataTransfer.ForeColor = System.Drawing.Color.Red
+        Me.btnMainDataTransfer.Location = New System.Drawing.Point(187, 143)
+        Me.btnMainDataTransfer.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainDataTransfer.Name = "btnMainDataTransfer"
+        Me.btnMainDataTransfer.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainDataTransfer.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainDataTransfer.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainDataTransfer.TabIndex = 19
+        Me.btnMainDataTransfer.UseCompatibleTextRendering = True
+        Me.btnMainDataTransfer.UseVisualStyleBackColor = True
         '
-        'cmdPaperArchive
+        'btnMainPaperArchive
         '
-        Me.cmdPaperArchive.BackgroundImage = CType(resources.GetObject("cmdPaperArchive.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPaperArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPaperArchive.FlatAppearance.BorderSize = 4
-        Me.cmdPaperArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPaperArchive.ForeColor = System.Drawing.Color.Red
-        Me.cmdPaperArchive.Location = New System.Drawing.Point(559, 28)
-        Me.cmdPaperArchive.Margin = New System.Windows.Forms.Padding(0)
-        Me.cmdPaperArchive.Name = "cmdPaperArchive"
-        Me.cmdPaperArchive.Padding = New System.Windows.Forms.Padding(5)
-        Me.cmdPaperArchive.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.cmdPaperArchive.Size = New System.Drawing.Size(126, 76)
-        Me.cmdPaperArchive.TabIndex = 5
-        Me.cmdPaperArchive.UseCompatibleTextRendering = True
-        Me.cmdPaperArchive.UseVisualStyleBackColor = True
+        Me.btnMainPaperArchive.BackgroundImage = CType(resources.GetObject("btnMainPaperArchive.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainPaperArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainPaperArchive.FlatAppearance.BorderSize = 4
+        Me.btnMainPaperArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainPaperArchive.ForeColor = System.Drawing.Color.Red
+        Me.btnMainPaperArchive.Location = New System.Drawing.Point(611, 28)
+        Me.btnMainPaperArchive.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnMainPaperArchive.Name = "btnMainPaperArchive"
+        Me.btnMainPaperArchive.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnMainPaperArchive.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.btnMainPaperArchive.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainPaperArchive.TabIndex = 5
+        Me.btnMainPaperArchive.UseCompatibleTextRendering = True
+        Me.btnMainPaperArchive.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(163, 113)
+        Me.Label1.Location = New System.Drawing.Point(215, 113)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 16)
         Me.Label1.TabIndex = 4
         Me.Label1.Tag = "Data_Entry"
         Me.Label1.Text = "Data Entry"
         '
-        'cmdKeyEntry
+        'btnMainDataEntry
         '
-        Me.cmdKeyEntry.AutoEllipsis = True
-        Me.cmdKeyEntry.BackgroundImage = CType(resources.GetObject("cmdKeyEntry.BackgroundImage"), System.Drawing.Image)
-        Me.cmdKeyEntry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdKeyEntry.FlatAppearance.BorderSize = 10
-        Me.cmdKeyEntry.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cmdKeyEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdKeyEntry.ForeColor = System.Drawing.Color.Red
-        Me.cmdKeyEntry.Location = New System.Drawing.Point(135, 37)
-        Me.cmdKeyEntry.Name = "cmdKeyEntry"
-        Me.cmdKeyEntry.Size = New System.Drawing.Size(126, 76)
-        Me.cmdKeyEntry.TabIndex = 3
-        Me.cmdKeyEntry.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.cmdKeyEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.cmdKeyEntry.UseVisualStyleBackColor = True
+        Me.btnMainDataEntry.AutoEllipsis = True
+        Me.btnMainDataEntry.BackgroundImage = CType(resources.GetObject("btnMainDataEntry.BackgroundImage"), System.Drawing.Image)
+        Me.btnMainDataEntry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMainDataEntry.FlatAppearance.BorderSize = 10
+        Me.btnMainDataEntry.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnMainDataEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainDataEntry.ForeColor = System.Drawing.Color.Red
+        Me.btnMainDataEntry.Location = New System.Drawing.Point(187, 37)
+        Me.btnMainDataEntry.Name = "btnMainDataEntry"
+        Me.btnMainDataEntry.Size = New System.Drawing.Size(126, 76)
+        Me.btnMainDataEntry.TabIndex = 3
+        Me.btnMainDataEntry.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnMainDataEntry.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.btnMainDataEntry.UseVisualStyleBackColor = True
         '
-        'CreateModifyKeyEntryFormToolStripMenuItem
+        'HelpProvider1
         '
-        Me.CreateModifyKeyEntryFormToolStripMenuItem.Name = "CreateModifyKeyEntryFormToolStripMenuItem"
-        Me.CreateModifyKeyEntryFormToolStripMenuItem.Size = New System.Drawing.Size(264, 24)
-        Me.CreateModifyKeyEntryFormToolStripMenuItem.Text = "Create/Modify Key Entry Form"
+        Me.HelpProvider1.HelpNamespace = "climsoft4.chm"
         '
         'frmMainMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.ClientSize = New System.Drawing.Size(849, 548)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(931, 548)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.MenuStrip2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Controls.Add(Me.menuStripMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.IsMdiContainer = True
         Me.Name = "frmMainMenu"
         Me.Tag = "Main_Menu"
         Me.Text = "Main Menu"
-        Me.Controls.SetChildIndex(Me.MenuStrip2, 0)
-        Me.Controls.SetChildIndex(Me.Panel1, 0)
-        Me.MenuStrip2.ResumeLayout(False)
-        Me.MenuStrip2.PerformLayout()
+        Me.menuStripMain.ResumeLayout(False)
+        Me.menuStripMain.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
+    Friend WithEvents menuStripMain As System.Windows.Forms.MenuStrip
     Friend WithEvents mnuInput As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuInputKeyEntry As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuInputPaperArchive As System.Windows.Forms.ToolStripMenuItem
@@ -694,16 +697,16 @@ Partial Class frmMainMenu
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents cmdRedCloseButton As System.Windows.Forms.Button
-    Friend WithEvents cmdSettingsAWS As System.Windows.Forms.Button
-    Friend WithEvents cmdMetadata As System.Windows.Forms.Button
-    Friend WithEvents cmdUserManagement As System.Windows.Forms.Button
-    Friend WithEvents cmdProducts As System.Windows.Forms.Button
-    Friend WithEvents cmdQC As System.Windows.Forms.Button
-    Friend WithEvents cmdDataTransfer As System.Windows.Forms.Button
-    Friend WithEvents cmdPaperArchive As System.Windows.Forms.Button
+    Friend WithEvents btnMainClose As System.Windows.Forms.Button
+    Friend WithEvents btnMainSettingsAWS As System.Windows.Forms.Button
+    Friend WithEvents btnMainMetadata As System.Windows.Forms.Button
+    Friend WithEvents btnMainUserManagement As System.Windows.Forms.Button
+    Friend WithEvents btnMainProducts As System.Windows.Forms.Button
+    Friend WithEvents btnMainQC As System.Windows.Forms.Button
+    Friend WithEvents btnMainDataTransfer As System.Windows.Forms.Button
+    Friend WithEvents btnMainPaperArchive As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents cmdKeyEntry As System.Windows.Forms.Button
+    Friend WithEvents btnMainDataEntry As System.Windows.Forms.Button
     Friend WithEvents SelectLanguageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GenerlSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SequencerConfigurationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -722,4 +725,5 @@ Partial Class frmMainMenu
     Friend WithEvents MonthlyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmptyKeyEntryTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateModifyKeyEntryFormToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpProvider1 As HelpProvider
 End Class

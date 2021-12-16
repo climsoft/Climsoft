@@ -42,34 +42,34 @@ Partial Class frmObsView
         Me.lblStation = New System.Windows.Forms.Label()
         Me.pnlPeriod = New System.Windows.Forms.Panel()
         Me.lblProducts = New System.Windows.Forms.Label()
-        Me.txtMinuteEnd = New System.Windows.Forms.ComboBox()
-        Me.txtMinuteStart = New System.Windows.Forms.ComboBox()
-        Me.txtHourEnd = New System.Windows.Forms.ComboBox()
-        Me.txtHourStart = New System.Windows.Forms.ComboBox()
+        Me.cboMinuteEnd = New System.Windows.Forms.ComboBox()
+        Me.cboMinuteStart = New System.Windows.Forms.ComboBox()
+        Me.cboHourEnd = New System.Windows.Forms.ComboBox()
+        Me.cboHourStart = New System.Windows.Forms.ComboBox()
         Me.txtSminute = New System.Windows.Forms.Label()
         Me.lblHourEnd = New System.Windows.Forms.Label()
         Me.lblHourBegin = New System.Windows.Forms.Label()
-        Me.dateTo = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateTo = New System.Windows.Forms.DateTimePicker()
         Me.lblTo = New System.Windows.Forms.Label()
-        Me.dateFrom = New System.Windows.Forms.DateTimePicker()
+        Me.dtpDateFrom = New System.Windows.Forms.DateTimePicker()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPeriod = New System.Windows.Forms.Label()
         Me.pnlAdanced = New System.Windows.Forms.Panel()
         Me.txtOtherflag = New System.Windows.Forms.TextBox()
         Me.lblOtherFlags = New System.Windows.Forms.Label()
         Me.chkForms = New System.Windows.Forms.CheckBox()
-        Me.lstForms = New System.Windows.Forms.ListBox()
+        Me.lstBoxForms = New System.Windows.Forms.ListBox()
         Me.chkAcquisitionType = New System.Windows.Forms.CheckBox()
         Me.chkFlags = New System.Windows.Forms.CheckBox()
         Me.chkQCStatus = New System.Windows.Forms.CheckBox()
-        Me.lstQC = New System.Windows.Forms.ListBox()
-        Me.lstAcquition = New System.Windows.Forms.ListBox()
-        Me.lstFlags = New System.Windows.Forms.ListBox()
+        Me.lstBoxQC = New System.Windows.Forms.ListBox()
+        Me.lstBoxAcquition = New System.Windows.Forms.ListBox()
+        Me.lstBoxFlags = New System.Windows.Forms.ListBox()
         Me.lblStations = New System.Windows.Forms.Label()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
         Me.tabView = New System.Windows.Forms.TabPage()
-        Me.DataGridView = New System.Windows.Forms.DataGridView()
+        Me.dataGridViewRecord = New System.Windows.Forms.DataGridView()
         Me.grpButtons = New System.Windows.Forms.GroupBox()
         Me.btnExpot = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -84,7 +84,7 @@ Partial Class frmObsView
         Me.pnlPeriod.SuspendLayout()
         Me.pnlAdanced.SuspendLayout()
         Me.tabView.SuspendLayout()
-        CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dataGridViewRecord, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpButtons.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -298,16 +298,16 @@ Partial Class frmObsView
         '
         Me.pnlPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlPeriod.Controls.Add(Me.lblProducts)
-        Me.pnlPeriod.Controls.Add(Me.txtMinuteEnd)
-        Me.pnlPeriod.Controls.Add(Me.txtMinuteStart)
-        Me.pnlPeriod.Controls.Add(Me.txtHourEnd)
-        Me.pnlPeriod.Controls.Add(Me.txtHourStart)
+        Me.pnlPeriod.Controls.Add(Me.cboMinuteEnd)
+        Me.pnlPeriod.Controls.Add(Me.cboMinuteStart)
+        Me.pnlPeriod.Controls.Add(Me.cboHourEnd)
+        Me.pnlPeriod.Controls.Add(Me.cboHourStart)
         Me.pnlPeriod.Controls.Add(Me.txtSminute)
         Me.pnlPeriod.Controls.Add(Me.lblHourEnd)
         Me.pnlPeriod.Controls.Add(Me.lblHourBegin)
-        Me.pnlPeriod.Controls.Add(Me.dateTo)
+        Me.pnlPeriod.Controls.Add(Me.dtpDateTo)
         Me.pnlPeriod.Controls.Add(Me.lblTo)
-        Me.pnlPeriod.Controls.Add(Me.dateFrom)
+        Me.pnlPeriod.Controls.Add(Me.dtpDateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
         Me.pnlPeriod.Location = New System.Drawing.Point(743, 73)
@@ -326,45 +326,45 @@ Partial Class frmObsView
         Me.lblProducts.TabIndex = 8
         Me.lblProducts.Text = "   "
         '
-        'txtMinuteEnd
+        'cboMinuteEnd
         '
-        Me.txtMinuteEnd.FormattingEnabled = True
-        Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(279, 67)
-        Me.txtMinuteEnd.Name = "txtMinuteEnd"
-        Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
-        Me.txtMinuteEnd.TabIndex = 15
-        Me.txtMinuteEnd.Text = "00"
+        Me.cboMinuteEnd.FormattingEnabled = True
+        Me.cboMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
+        Me.cboMinuteEnd.Location = New System.Drawing.Point(279, 67)
+        Me.cboMinuteEnd.Name = "cboMinuteEnd"
+        Me.cboMinuteEnd.Size = New System.Drawing.Size(40, 21)
+        Me.cboMinuteEnd.TabIndex = 15
+        Me.cboMinuteEnd.Text = "00"
         '
-        'txtMinuteStart
+        'cboMinuteStart
         '
-        Me.txtMinuteStart.FormattingEnabled = True
-        Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
-        Me.txtMinuteStart.Location = New System.Drawing.Point(279, 33)
-        Me.txtMinuteStart.Name = "txtMinuteStart"
-        Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
-        Me.txtMinuteStart.TabIndex = 14
-        Me.txtMinuteStart.Text = "00"
+        Me.cboMinuteStart.FormattingEnabled = True
+        Me.cboMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
+        Me.cboMinuteStart.Location = New System.Drawing.Point(279, 33)
+        Me.cboMinuteStart.Name = "cboMinuteStart"
+        Me.cboMinuteStart.Size = New System.Drawing.Size(40, 21)
+        Me.cboMinuteStart.TabIndex = 14
+        Me.cboMinuteStart.Text = "00"
         '
-        'txtHourEnd
+        'cboHourEnd
         '
-        Me.txtHourEnd.FormattingEnabled = True
-        Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
-        Me.txtHourEnd.Name = "txtHourEnd"
-        Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
-        Me.txtHourEnd.TabIndex = 13
-        Me.txtHourEnd.Text = "23"
+        Me.cboHourEnd.FormattingEnabled = True
+        Me.cboHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboHourEnd.Location = New System.Drawing.Point(233, 68)
+        Me.cboHourEnd.Name = "cboHourEnd"
+        Me.cboHourEnd.Size = New System.Drawing.Size(40, 21)
+        Me.cboHourEnd.TabIndex = 13
+        Me.cboHourEnd.Text = "23"
         '
-        'txtHourStart
+        'cboHourStart
         '
-        Me.txtHourStart.FormattingEnabled = True
-        Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourStart.Location = New System.Drawing.Point(233, 34)
-        Me.txtHourStart.Name = "txtHourStart"
-        Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
-        Me.txtHourStart.TabIndex = 12
-        Me.txtHourStart.Text = "00"
+        Me.cboHourStart.FormattingEnabled = True
+        Me.cboHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.cboHourStart.Location = New System.Drawing.Point(233, 34)
+        Me.cboHourStart.Name = "cboHourStart"
+        Me.cboHourStart.Size = New System.Drawing.Size(40, 21)
+        Me.cboHourStart.TabIndex = 12
+        Me.cboHourStart.Text = "00"
         '
         'txtSminute
         '
@@ -393,12 +393,12 @@ Partial Class frmObsView
         Me.lblHourBegin.TabIndex = 5
         Me.lblHourBegin.Text = "Date"
         '
-        'dateTo
+        'dtpDateTo
         '
-        Me.dateTo.Location = New System.Drawing.Point(63, 68)
-        Me.dateTo.Name = "dateTo"
-        Me.dateTo.Size = New System.Drawing.Size(164, 20)
-        Me.dateTo.TabIndex = 4
+        Me.dtpDateTo.Location = New System.Drawing.Point(63, 68)
+        Me.dtpDateTo.Name = "dtpDateTo"
+        Me.dtpDateTo.Size = New System.Drawing.Size(164, 20)
+        Me.dtpDateTo.TabIndex = 4
         '
         'lblTo
         '
@@ -409,13 +409,13 @@ Partial Class frmObsView
         Me.lblTo.TabIndex = 3
         Me.lblTo.Text = "End Date"
         '
-        'dateFrom
+        'dtpDateFrom
         '
-        Me.dateFrom.Location = New System.Drawing.Point(63, 33)
-        Me.dateFrom.Name = "dateFrom"
-        Me.dateFrom.Size = New System.Drawing.Size(164, 20)
-        Me.dateFrom.TabIndex = 2
-        Me.dateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
+        Me.dtpDateFrom.Location = New System.Drawing.Point(63, 33)
+        Me.dtpDateFrom.Name = "dtpDateFrom"
+        Me.dtpDateFrom.Size = New System.Drawing.Size(164, 20)
+        Me.dtpDateFrom.TabIndex = 2
+        Me.dtpDateFrom.Value = New Date(2000, 1, 1, 0, 0, 0, 0)
         '
         'lblFrom
         '
@@ -443,13 +443,13 @@ Partial Class frmObsView
         Me.pnlAdanced.Controls.Add(Me.txtOtherflag)
         Me.pnlAdanced.Controls.Add(Me.lblOtherFlags)
         Me.pnlAdanced.Controls.Add(Me.chkForms)
-        Me.pnlAdanced.Controls.Add(Me.lstForms)
+        Me.pnlAdanced.Controls.Add(Me.lstBoxForms)
         Me.pnlAdanced.Controls.Add(Me.chkAcquisitionType)
         Me.pnlAdanced.Controls.Add(Me.chkFlags)
         Me.pnlAdanced.Controls.Add(Me.chkQCStatus)
-        Me.pnlAdanced.Controls.Add(Me.lstQC)
-        Me.pnlAdanced.Controls.Add(Me.lstAcquition)
-        Me.pnlAdanced.Controls.Add(Me.lstFlags)
+        Me.pnlAdanced.Controls.Add(Me.lstBoxQC)
+        Me.pnlAdanced.Controls.Add(Me.lstBoxAcquition)
+        Me.pnlAdanced.Controls.Add(Me.lstBoxFlags)
         Me.pnlAdanced.Controls.Add(Me.lblStations)
         Me.pnlAdanced.Location = New System.Drawing.Point(743, 200)
         Me.pnlAdanced.Name = "pnlAdanced"
@@ -483,14 +483,14 @@ Partial Class frmObsView
         Me.chkForms.Text = "Key Entry Forms"
         Me.chkForms.UseVisualStyleBackColor = True
         '
-        'lstForms
+        'lstBoxForms
         '
-        Me.lstForms.Enabled = False
-        Me.lstForms.FormattingEnabled = True
-        Me.lstForms.Location = New System.Drawing.Point(122, 158)
-        Me.lstForms.Name = "lstForms"
-        Me.lstForms.Size = New System.Drawing.Size(185, 43)
-        Me.lstForms.TabIndex = 20
+        Me.lstBoxForms.Enabled = False
+        Me.lstBoxForms.FormattingEnabled = True
+        Me.lstBoxForms.Location = New System.Drawing.Point(122, 158)
+        Me.lstBoxForms.Name = "lstBoxForms"
+        Me.lstBoxForms.Size = New System.Drawing.Size(185, 43)
+        Me.lstBoxForms.TabIndex = 20
         '
         'chkAcquisitionType
         '
@@ -522,35 +522,35 @@ Partial Class frmObsView
         Me.chkQCStatus.Text = "QC Satus"
         Me.chkQCStatus.UseVisualStyleBackColor = True
         '
-        'lstQC
+        'lstBoxQC
         '
-        Me.lstQC.Enabled = False
-        Me.lstQC.FormattingEnabled = True
-        Me.lstQC.Items.AddRange(New Object() {"0", "1", "2"})
-        Me.lstQC.Location = New System.Drawing.Point(122, 8)
-        Me.lstQC.Name = "lstQC"
-        Me.lstQC.Size = New System.Drawing.Size(66, 30)
-        Me.lstQC.TabIndex = 15
+        Me.lstBoxQC.Enabled = False
+        Me.lstBoxQC.FormattingEnabled = True
+        Me.lstBoxQC.Items.AddRange(New Object() {"0", "1", "2"})
+        Me.lstBoxQC.Location = New System.Drawing.Point(122, 8)
+        Me.lstBoxQC.Name = "lstBoxQC"
+        Me.lstBoxQC.Size = New System.Drawing.Size(66, 30)
+        Me.lstBoxQC.TabIndex = 15
         '
-        'lstAcquition
+        'lstBoxAcquition
         '
-        Me.lstAcquition.Enabled = False
-        Me.lstAcquition.FormattingEnabled = True
-        Me.lstAcquition.Items.AddRange(New Object() {"Unknown", "Key Entry Forms", "CLICOM", "Climsoft V3", "AWS", "GTS", "Text Files"})
-        Me.lstAcquition.Location = New System.Drawing.Point(122, 109)
-        Me.lstAcquition.Name = "lstAcquition"
-        Me.lstAcquition.Size = New System.Drawing.Size(185, 43)
-        Me.lstAcquition.TabIndex = 4
+        Me.lstBoxAcquition.Enabled = False
+        Me.lstBoxAcquition.FormattingEnabled = True
+        Me.lstBoxAcquition.Items.AddRange(New Object() {"Unknown", "Key Entry Forms", "CLICOM", "Climsoft V3", "AWS", "GTS", "Text Files"})
+        Me.lstBoxAcquition.Location = New System.Drawing.Point(122, 109)
+        Me.lstBoxAcquition.Name = "lstBoxAcquition"
+        Me.lstBoxAcquition.Size = New System.Drawing.Size(185, 43)
+        Me.lstBoxAcquition.TabIndex = 4
         '
-        'lstFlags
+        'lstBoxFlags
         '
-        Me.lstFlags.Enabled = False
-        Me.lstFlags.FormattingEnabled = True
-        Me.lstFlags.Items.AddRange(New Object() {"M Missing Data", "T Trace Rainfall", "E Estimated Value", "D Dubious or Suspect data", "G Generated or Calculated Value", "C Cummulated Data"})
-        Me.lstFlags.Location = New System.Drawing.Point(122, 44)
-        Me.lstFlags.Name = "lstFlags"
-        Me.lstFlags.Size = New System.Drawing.Size(185, 43)
-        Me.lstFlags.TabIndex = 2
+        Me.lstBoxFlags.Enabled = False
+        Me.lstBoxFlags.FormattingEnabled = True
+        Me.lstBoxFlags.Items.AddRange(New Object() {"M Missing Data", "T Trace Rainfall", "E Estimated Value", "D Dubious or Suspect data", "G Generated or Calculated Value", "C Cummulated Data"})
+        Me.lstBoxFlags.Location = New System.Drawing.Point(122, 44)
+        Me.lstBoxFlags.Name = "lstBoxFlags"
+        Me.lstBoxFlags.Size = New System.Drawing.Size(185, 43)
+        Me.lstBoxFlags.TabIndex = 2
         '
         'lblStations
         '
@@ -582,7 +582,7 @@ Partial Class frmObsView
         '
         'tabView
         '
-        Me.tabView.Controls.Add(Me.DataGridView)
+        Me.tabView.Controls.Add(Me.dataGridViewRecord)
         Me.tabView.Controls.Add(Me.grpButtons)
         Me.tabView.Location = New System.Drawing.Point(4, 22)
         Me.tabView.Name = "tabView"
@@ -592,16 +592,16 @@ Partial Class frmObsView
         Me.tabView.Text = "View Records"
         Me.tabView.UseVisualStyleBackColor = True
         '
-        'DataGridView
+        'dataGridViewRecord
         '
-        Me.DataGridView.AllowDrop = True
-        Me.DataGridView.AllowUserToAddRows = False
-        Me.DataGridView.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridView.Name = "DataGridView"
-        Me.DataGridView.Size = New System.Drawing.Size(1107, 451)
-        Me.DataGridView.TabIndex = 1
+        Me.dataGridViewRecord.AllowDrop = True
+        Me.dataGridViewRecord.AllowUserToAddRows = False
+        Me.dataGridViewRecord.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dataGridViewRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridViewRecord.Location = New System.Drawing.Point(3, 3)
+        Me.dataGridViewRecord.Name = "dataGridViewRecord"
+        Me.dataGridViewRecord.Size = New System.Drawing.Size(1107, 451)
+        Me.dataGridViewRecord.TabIndex = 1
         '
         'grpButtons
         '
@@ -694,7 +694,7 @@ Partial Class frmObsView
         Me.pnlAdanced.ResumeLayout(False)
         Me.pnlAdanced.PerformLayout()
         Me.tabView.ResumeLayout(False)
-        CType(Me.DataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dataGridViewRecord, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpButtons.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -725,34 +725,34 @@ Partial Class frmObsView
     Friend WithEvents lblStation As Label
     Friend WithEvents pnlPeriod As Panel
     Friend WithEvents lblProducts As Label
-    Friend WithEvents txtMinuteEnd As ComboBox
-    Friend WithEvents txtMinuteStart As ComboBox
-    Friend WithEvents txtHourEnd As ComboBox
-    Friend WithEvents txtHourStart As ComboBox
+    Friend WithEvents cboMinuteEnd As ComboBox
+    Friend WithEvents cboMinuteStart As ComboBox
+    Friend WithEvents cboHourEnd As ComboBox
+    Friend WithEvents cboHourStart As ComboBox
     Friend WithEvents txtSminute As Label
     Friend WithEvents lblHourEnd As Label
     Friend WithEvents lblHourBegin As Label
-    Friend WithEvents dateTo As DateTimePicker
+    Friend WithEvents dtpDateTo As DateTimePicker
     Friend WithEvents lblTo As Label
-    Friend WithEvents dateFrom As DateTimePicker
+    Friend WithEvents dtpDateFrom As DateTimePicker
     Friend WithEvents lblFrom As Label
     Friend WithEvents lblPeriod As Label
     Friend WithEvents pnlAdanced As Panel
-    Friend WithEvents lstQC As ListBox
-    Friend WithEvents lstAcquition As ListBox
+    Friend WithEvents lstBoxQC As ListBox
+    Friend WithEvents lstBoxAcquition As ListBox
     Friend WithEvents lblStations As Label
     Friend WithEvents cmbElement As ComboBox
     Friend WithEvents cmbstation As ComboBox
     Friend WithEvents chkFlags As CheckBox
     Friend WithEvents chkQCStatus As CheckBox
     Friend WithEvents chkAcquisitionType As CheckBox
-    Friend WithEvents DataGridView As DataGridView
+    Friend WithEvents dataGridViewRecord As DataGridView
     Friend WithEvents btnClose As Button
     Friend WithEvents btnHelp As Button
     Friend WithEvents chkForms As CheckBox
-    Friend WithEvents lstForms As ListBox
+    Friend WithEvents lstBoxForms As ListBox
     Friend WithEvents txtOtherflag As TextBox
     Friend WithEvents lblOtherFlags As Label
-    Friend WithEvents lstFlags As ListBox
+    Friend WithEvents lstBoxFlags As ListBox
     Friend WithEvents btnView As Button
 End Class

@@ -181,6 +181,9 @@ Public Class formDaily1
             MessageBox.Show(ex.Message)
         End Try
         conn.Close()
+
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Function load_Controls() As Boolean

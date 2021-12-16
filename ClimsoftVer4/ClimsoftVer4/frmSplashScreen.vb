@@ -29,7 +29,7 @@ Public NotInheritable Class frmSplashScreen
 
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        autoTranslate(Me)
+
         'Set up the dialog text at runtime according to the application's assembly information.  
 
         'TODO: Customize the application's assembly information in the "Application" pane of the project 
@@ -43,6 +43,8 @@ Public NotInheritable Class frmSplashScreen
             'If the application title is missing, use the application name, without the extension
             ' ApplicationTitle.Text = System.IO.Path.GetFileNameWithoutExtension(My.Application.Info.AssemblyName)
         End If
+
+        ClsTranslations.TranslateForm(Me)
 
         Timer1.Start()
 

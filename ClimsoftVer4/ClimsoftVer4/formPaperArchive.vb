@@ -300,6 +300,7 @@
             MsgBox("Paper archiving registry key missing. Contact Administrator")
         End If
 
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     '    Private Sub cmdView_Click(sender As Object, e As EventArgs)
@@ -454,7 +455,7 @@
             Case 0 ' Structured Image Filename
                 txtSelectedFolder.Text = ""
                 lstvFiles.Clear()
-                PicForm.Visible = False
+                pictureBoxForm.Visible = False
                 lstMessages.Visible = True
                 lblZoomout.Visible = False
                 lblImageRotate.Visible = False
@@ -471,11 +472,11 @@
                 lblZoomout.Visible = True
                 lblImageRotate.Visible = True
                 lblMessages.Visible = False
-                PicForm.Visible = True
+                pictureBoxForm.Visible = True
                 lstMessages.Visible = False
                 ' Set Image box to Nothing
-                PicForm.ImageLocation = Nothing
-                PicForm.Refresh()
+                pictureBoxForm.ImageLocation = Nothing
+                pictureBoxForm.Refresh()
             Case 2 ' Retrieve Archived Images
                 ''Clear Tab
                 'txtStation.Text = ""
@@ -487,11 +488,11 @@
                 lblZoomout.Visible = True
                 lblImageRotate.Visible = True
                 lblMessages.Visible = False
-                PicForm.Visible = True
+                pictureBoxForm.Visible = True
                 lstMessages.Visible = False
                 ' Set Image box to Nothing
-                PicForm.ImageLocation = Nothing
-                PicForm.Refresh()
+                pictureBoxForm.ImageLocation = Nothing
+                pictureBoxForm.Refresh()
 
                 sql = "SELECT * FROM  paperarchive"
                 da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbconn)
@@ -507,11 +508,11 @@
                 lblZoomout.Visible = True
                 lblImageRotate.Visible = True
                 lblMessages.Visible = False
-                PicForm.Visible = True
+                pictureBoxForm.Visible = True
                 lstMessages.Visible = False
                 ' Set Image box to Nothing
-                PicForm.ImageLocation = Nothing
-                PicForm.Refresh()
+                pictureBoxForm.ImageLocation = Nothing
+                pictureBoxForm.Refresh()
         End Select
     End Sub
 
@@ -543,8 +544,8 @@
                 If Strings.UCase(Strings.Right(img, 3)) = "PDF" Then
                     ShowImage(img)
                 Else
-                    PicForm.ImageLocation = img
-                    PicForm.Refresh()
+                    pictureBoxForm.ImageLocation = img
+                    pictureBoxForm.Refresh()
                 End If
                 Exit For
             End If
@@ -558,7 +559,7 @@ Err:
         MsgBox(Err.Number & ": " & Err.Description)
     End Sub
 
-    Private Sub cmdleft_Click(sender As Object, e As EventArgs) Handles cmdleft.Click
+    Private Sub cmdleft_Click(sender As Object, e As EventArgs) Handles btnMovePrevious.Click
 
         If rec > 0 Then
             rec = rec - 1
@@ -599,19 +600,19 @@ Err:
         txtRec.Text = 0 & " of " & 0
     End Sub
 
-    Private Sub cmdright_Click(sender As Object, e As EventArgs) Handles cmdright.Click
+    Private Sub cmdright_Click(sender As Object, e As EventArgs) Handles btnMoveNext.Click
         If rec < Kount - 1 Then
             rec = rec + 1
             ViewImage(rec)
         End If
     End Sub
 
-    Private Sub cmdfirst_Click(sender As Object, e As EventArgs) Handles cmdfirst.Click
+    Private Sub cmdfirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
         rec = 0
         ViewImage(rec)
     End Sub
 
-    Private Sub cmdlast_Click(sender As Object, e As EventArgs) Handles cmdlast.Click
+    Private Sub cmdlast_Click(sender As Object, e As EventArgs) Handles btnLast.Click
         rec = Kount - 1
         ViewImage(rec)
     End Sub
@@ -652,7 +653,7 @@ Err:
         Dim stn, dt, img, frm As String
 
         Try
-            If PicForm.ImageLocation = "" Then
+            If pictureBoxForm.ImageLocation = "" Then
                 MsgBox("Can't Delete. No Image Retrieved")
                 Exit Sub
             End If
@@ -694,8 +695,8 @@ Err:
                     ResetForm()
                 End If
                 ' Set Image location to nothin
-                PicForm.ImageLocation = Nothing
-                PicForm.Refresh()
+                pictureBoxForm.ImageLocation = Nothing
+                pictureBoxForm.Refresh()
             End If
         Catch ex As Exception
             MsgBox(ex.HResult & " " & ex.Message)
@@ -821,14 +822,14 @@ Err:
 
     Private Sub txtImageFile_TextChanged(sender As Object, e As EventArgs) Handles txtImageFile.TextChanged
         Try
-            PicForm.ImageLocation = txtImageFile.Text
+            pictureBoxForm.ImageLocation = txtImageFile.Text
 
             'lblArchiveMsg.Text = ""
 
             If Strings.UCase(Strings.Right(txtImageFile.Text, 3)) = "PDF" Then
                 ShowImage(txtImageFile.Text)
             Else
-                PicForm.Refresh()
+                pictureBoxForm.Refresh()
             End If
             'PicForm.Visible = True
             'lstMessages.Visible = False
@@ -850,7 +851,7 @@ Err:
         'frmViewImage.picView.ImageLocation = txtImageFile.Text
         'frmViewImage.picView.Refresh()
         'frmViewImage.Show()
-        ShowImage(PicForm.ImageLocation)
+        ShowImage(pictureBoxForm.ImageLocation)
         'ImageZoom(PicForm.ImageLocation)
     End Sub
 
@@ -880,8 +881,8 @@ Err:
             If Strings.UCase(Strings.Right(SelectedImage, 3)) = "PDF" Then
                 ShowImage(SelectedImage)
             Else
-                PicForm.ImageLocation = SelectedImage
-                PicForm.Refresh()
+                pictureBoxForm.ImageLocation = SelectedImage
+                pictureBoxForm.Refresh()
             End If
             'PicForm.ImageLocation = lstArchival.FocusedItem.SubItems(3).Text
         Catch ex As Exception
@@ -891,7 +892,7 @@ Err:
 
 
     Private Sub cmdUpdateArchiveDef_Click(sender As Object, e As EventArgs) Handles cmdUpdateArchiveDef.Click
-        If PicForm.ImageLocation = "" Then
+        If pictureBoxForm.ImageLocation = "" Then
             MsgBox("Can't Update. No Image Retrieved")
             Exit Sub
         End If
@@ -900,7 +901,7 @@ Err:
                 Dim dt, img, sql0 As String
                 Dim comm As New MySql.Data.MySqlClient.MySqlCommand
 
-                img = PicForm.ImageLocation
+                img = pictureBoxForm.ImageLocation
 
                 ' Change the path character to mysql format
                 img = Strings.Replace(img, "\", "\\")
@@ -920,7 +921,7 @@ Err:
         End Try
     End Sub
 
-    Private Sub PicForm_MouseHover(sender As Object, e As EventArgs) Handles PicForm.MouseHover
+    Private Sub PicForm_MouseHover(sender As Object, e As EventArgs) Handles pictureBoxForm.MouseHover
 
     End Sub
 
@@ -935,8 +936,8 @@ Err:
 
 
     Private Sub lblImageRotate_Click(sender As Object, e As EventArgs) Handles lblImageRotate.Click
-        PicForm.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
-        PicForm.Refresh()
+        pictureBoxForm.Image.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        pictureBoxForm.Refresh()
     End Sub
 
 End Class

@@ -43,7 +43,7 @@ Public Class frmDBUtilities
     End Sub
 
     Private Sub formDbUtilities_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
