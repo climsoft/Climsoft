@@ -1266,6 +1266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="myweat02.ico" />
+    <Content Include="translations\translate_ignore.txt" />
     <None Include="Resources\navigation-first.jpg" />
     <None Include="Resources\navigation-left.jpg" />
     <None Include="Resources\navigation-right.jpg" />

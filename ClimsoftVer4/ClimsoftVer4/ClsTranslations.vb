@@ -96,12 +96,12 @@ Public Class ClsTranslations
         End If
 
         'update the translations table
-        Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
-        If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
-            MsgBox("The form id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
-        Else
-            MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
-        End If
+        'Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
+        'If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
+        '    MsgBox("The id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
+        'Else
+        '    MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
+        'End If
 
         'This sub should only be used by developers to create the translation export files.
         'Therefore, exit the application with a message to ensure that this sub is not run 
@@ -135,6 +135,10 @@ Public Class ClsTranslations
             '      the object's class. 
             '      Therefore we can use the class name as the object name in 'CallByName'.
             Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
+
+            If frmTemp.Text = "Main Menu" Then
+                Dim K = True
+            End If
             FillControlsToTable(frmTemp, datatableControls)
         Next
         Return datatableControls
@@ -248,7 +252,7 @@ Public Class ClsTranslations
                     .DataSource = strDbPath}
             Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
                 clsConnection.Open()
-
+                'todo. do batch execution for optimal performance
                 For Each row As DataRow In datatableControls.Rows
 
                     Dim paramFormName As New SQLiteParameter("form_name", row.Field(Of String)(0))
@@ -307,6 +311,7 @@ Public Class ClsTranslations
             Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
                 clsConnection.Open()
 
+                'todo. do batch execution for optimal performance
                 For Each row As DataRow In datatableTranslations.Rows
 
                     Dim paramIdText As New SQLiteParameter("id_text", row.Field(Of String)(0))
@@ -431,9 +436,10 @@ Public Class ClsTranslations
         Dim lstIgnoreNegations As New List(Of String)
 
         'For each line in the ignore file
-        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim strFileName As String = "translate_ignore.txt"
-        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
+        Dim strPath As String
+        strPath = Directory.GetParent(Application.StartupPath).FullName
+        strPath = Directory.GetParent(strPath).FullName
+        strPath = Path.Combine(strPath, "translations", "translate_ignore.txt")
         Using clsReader As New StreamReader(strPath)
             Do While clsReader.Peek() >= 0
                 Dim strIgnoreFileLine = clsReader.ReadLine().Trim()
@@ -501,8 +507,7 @@ Public Class ClsTranslations
                     Dim iRowsUpdated As Integer = clsSqliteCmd.ExecuteNonQuery()
                     clsConnection.Close()
                     MsgBox("The " & strPath & " ignore file was processed. " &
-                           iRowsUpdated & " database rows were updated. " &
-                           "The application will now exit.", MsgBoxStyle.Exclamation)
+                           iRowsUpdated & " database rows were updated. ", MsgBoxStyle.Exclamation)
                 End Using
             End Using
         Catch e As Exception

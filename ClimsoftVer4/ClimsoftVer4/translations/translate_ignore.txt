@@ -60,22 +60,28 @@
 # 
 ####################################################################################################
 
-# Single receivers normally contain column names, and these should not be translated
-# Fixes issue 6519
-%_txtReceiverSingle
+# Textboxes,comboboxes normally contain values from the database, and these should not be translated
+%_txt%
+%_cbo%
+
+# Logos contain photos, should not be translated
+%_Logo%
+
+# Navigation buttons contain symbols only, should not be translated
+%_btnMove%
 
 # In the 'New data Frame' dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.
 # Fixes issue #6581
 # TODO Can we assume that the name the user specifies for saving should never be translated 
 #      in any dialog (e.g. '%_ucrInputTextSave%')?
-dlgNewDataFrame_%_ucrInputTextSave%
+#dlgNewDataFrame_%_ucrInputTextSave%
 
 # In the 'Split Text' dialog, the user may specify how to split the column (by space, comma, 
 # period etc.). This string should not be translated.
 # Fixes issue #6532
-dlgSplitText_ucrInputPattern%
+#dlgSplitText_ucrInputPattern%
 
 # In the 'Filter' dialog, the 'Selected Filter Preview' should not be translated.
 # Fixes issue #6949, related to PR #6956
-dlgRestrict_ucrInputFilterPreview
+#dlgRestrict_ucrInputFilterPreview
