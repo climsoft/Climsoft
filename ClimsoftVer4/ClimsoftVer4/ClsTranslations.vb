@@ -96,12 +96,12 @@ Public Class ClsTranslations
         End If
 
         'update the translations table
-        Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
-        If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
-            MsgBox("The id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
-        Else
-            MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
-        End If
+        'Dim datatableTranslations As DataTable = GetTranslationTextsTableFromControlsTable(datatableControls)
+        'If SaveTranslationsTableToDB(datatableTranslations) = datatableTranslations.Rows.Count Then
+        '    MsgBox("The id texts have been saved to the translations table. The application will now exit.", MsgBoxStyle.Exclamation)
+        'Else
+        '    MsgBox("Developer Error: Could NOT save all form id texts to the translations table. The application will now exit.", MsgBoxStyle.Critical)
+        'End If
 
         'This sub should only be used by developers to create the translation export files.
         'Therefore, exit the application with a message to ensure that this sub is not run 
