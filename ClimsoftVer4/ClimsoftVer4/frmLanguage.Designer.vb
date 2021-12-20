@@ -32,7 +32,6 @@ Partial Class frmLanguage
         '
         Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Items.AddRange(New Object() {"English", "Français", "Portuguese"})
         Me.cboLanguage.Location = New System.Drawing.Point(167, 30)
         Me.cboLanguage.Name = "cboLanguage"
         Me.cboLanguage.Size = New System.Drawing.Size(196, 21)

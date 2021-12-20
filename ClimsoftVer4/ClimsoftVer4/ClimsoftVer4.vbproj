@@ -112,7 +112,6 @@
     <Compile Include="clsDataCall.vb" />
     <Compile Include="clsDataConnection.vb" />
     <Compile Include="clsHelp.vb" />
-    <Compile Include="clsClimsoftSettings.vb" />
     <Compile Include="clsLanguageTranslation.vb" />
     <Compile Include="clsProducts.vb" />
     <Compile Include="clsTableFilter.vb" />

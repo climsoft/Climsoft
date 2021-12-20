@@ -32,22 +32,21 @@
 Public Class frmLanguage
 
     Private Sub frmLanguage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cboLanguage.SelectedItem = My.Settings.languageName
+        Dim dctLanguages As New Dictionary(Of String, String)
+        dctLanguages.Add("en", "English")
+        dctLanguages.Add("fr", "Français")
+        dctLanguages.Add("pt", "Portuguese")
+
+        cboLanguage.DataSource = New BindingSource(dctLanguages, Nothing)
+        cboLanguage.ValueMember = "Key"
+        cboLanguage.DisplayMember = "Value"
+
+        cboLanguage.SelectedValue = My.Settings.languageCode
         ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        Select Case cboLanguage.Text
-            Case "English"
-                My.Settings.languageCode = "en"
-            Case "Français"
-                My.Settings.languageCode = "fr"
-            Case "Portuguese"
-                My.Settings.languageCode = "pt"
-            Case "Deutsch"
-                My.Settings.languageCode = "de"
-        End Select
-
+        My.Settings.languageCode = cboLanguage.SelectedValue
         My.Settings.languageName = cboLanguage.Text
         My.Settings.Save()
         Me.Close()
