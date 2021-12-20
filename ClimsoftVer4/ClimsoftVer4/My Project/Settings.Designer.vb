@@ -95,6 +95,30 @@ Namespace My
                 Me("rememberedUsername") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("en")>  _
+        Public Property languageCode() As String
+            Get
+                Return CType(Me("languageCode"),String)
+            End Get
+            Set
+                Me("languageCode") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("English")>  _
+        Public Property languageName() As String
+            Get
+                Return CType(Me("languageName"),String)
+            End Get
+            Set
+                Me("languageName") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

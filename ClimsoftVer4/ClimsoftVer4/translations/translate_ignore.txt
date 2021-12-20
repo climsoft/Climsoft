@@ -75,6 +75,9 @@
 # Navigation buttons contain symbols only, should not be translated
 %_btnMove%
 
+# In the 'Login' form, the language label should not be translated
+frmLogin_linkLabelLanguage
+
 # In the 'Database Connections' form, the connection examples labels are literals.
 # They should not be translated
 frmDatabaseConnections_%_lblExample%

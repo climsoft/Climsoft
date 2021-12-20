@@ -17,7 +17,6 @@ Public Class ClsTranslations
     ''' <param name="clsForm">    The WinForm control to translate. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub TranslateForm(clsForm As Form)
-        'UpdateTranslationsDB()
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(clsForm, GetDbPath(), GetLanguageCode()))
     End Sub
 
@@ -62,15 +61,7 @@ Public Class ClsTranslations
     '''             English, 'fr' for French etc.). </returns>
     '''--------------------------------------------------------------------------------------------
     Private Shared Function GetLanguageCode() As String
-        'If IsNothing(frmMain) OrElse IsNothing(frmMain.clsInstatOptions) OrElse
-        '        IsNothing(frmMain.clsInstatOptions.strLanguageCultureCode) Then
-        '    Return "en"
-        'End If
-        'Dim arrLanguageCodes As String() = frmMain.clsInstatOptions.strLanguageCultureCode.Split(New Char() {"-"c})
-        'Return arrLanguageCodes(0)
-
-        'todo. this should come from a configuration file.
-        Return "fr"
+        Return If(String.IsNullOrEmpty(My.Settings.languageCode), "en", My.Settings.languageCode)
     End Function
 
     '''--------------------------------------------------------------------------------------------

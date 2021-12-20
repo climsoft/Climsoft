@@ -272,19 +272,19 @@ Partial Class frmMainMenu
         'HourlyToolStripMenuItem
         '
         Me.HourlyToolStripMenuItem.Name = "HourlyToolStripMenuItem"
-        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.HourlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.HourlyToolStripMenuItem.Text = "Daily"
         '
         'DailyToolStripMenuItem
         '
         Me.DailyToolStripMenuItem.Name = "DailyToolStripMenuItem"
-        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.DailyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.DailyToolStripMenuItem.Text = "Hourly"
         '
         'MonthlyToolStripMenuItem
         '
         Me.MonthlyToolStripMenuItem.Name = "MonthlyToolStripMenuItem"
-        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.MonthlyToolStripMenuItem.Size = New System.Drawing.Size(130, 24)
         Me.MonthlyToolStripMenuItem.Text = "Monthly"
         '
         'FormHourlyTimeSelectionToolStripMenuItem
@@ -304,13 +304,13 @@ Partial Class frmMainMenu
         'AWSElementsToolStripMenuItem
         '
         Me.AWSElementsToolStripMenuItem.Name = "AWSElementsToolStripMenuItem"
-        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.AWSElementsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSElementsToolStripMenuItem.Text = "AWS Elements"
         '
         'AWSStationsToolStripMenuItem
         '
         Me.AWSStationsToolStripMenuItem.Name = "AWSStationsToolStripMenuItem"
-        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(180, 24)
+        Me.AWSStationsToolStripMenuItem.Size = New System.Drawing.Size(165, 24)
         Me.AWSStationsToolStripMenuItem.Text = "AWS Stations"
         '
         'ConfigurationForTDCFToolStripMenuItem

@@ -273,6 +273,7 @@ Partial Class frmDatabaseConnections
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.dataGridViewConnections)
         Me.Name = "frmDatabaseConnections"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Database Connections"
         CType(Me.dataGridViewConnections, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCurrentSelection.ResumeLayout(False)

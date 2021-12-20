@@ -24,15 +24,16 @@ Partial Class frmLanguage
     Private Sub InitializeComponent()
         Me.cboLanguage = New System.Windows.Forms.ComboBox()
         Me.lblLanguage = New System.Windows.Forms.Label()
-        Me.cmdCancel = New System.Windows.Forms.Button()
-        Me.cmdOK = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cboLanguage
         '
+        Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Items.AddRange(New Object() {"English", "Français", "Deutsch"})
-        Me.cboLanguage.Location = New System.Drawing.Point(226, 52)
+        Me.cboLanguage.Items.AddRange(New Object() {"English", "Français", "Portuguese"})
+        Me.cboLanguage.Location = New System.Drawing.Point(167, 30)
         Me.cboLanguage.Name = "cboLanguage"
         Me.cboLanguage.Size = New System.Drawing.Size(196, 21)
         Me.cboLanguage.TabIndex = 0
@@ -40,7 +41,7 @@ Partial Class frmLanguage
         'lblLanguage
         '
         Me.lblLanguage.AutoSize = True
-        Me.lblLanguage.Location = New System.Drawing.Point(67, 55)
+        Me.lblLanguage.Location = New System.Drawing.Point(3, 33)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(88, 13)
         Me.lblLanguage.TabIndex = 1
@@ -48,35 +49,36 @@ Partial Class frmLanguage
         Me.lblLanguage.Text = "Select Language"
         Me.lblLanguage.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
-        'cmdCancel
+        'btnCancel
         '
-        Me.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdCancel.Location = New System.Drawing.Point(431, 185)
-        Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(94, 23)
-        Me.cmdCancel.TabIndex = 7
-        Me.cmdCancel.Tag = "Cancel"
-        Me.cmdCancel.Text = "&Cancel"
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(270, 84)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(94, 23)
+        Me.btnCancel.TabIndex = 7
+        Me.btnCancel.Tag = "Cancel"
+        Me.btnCancel.Text = "&Cancel"
         '
-        'cmdOK
+        'btnOK
         '
-        Me.cmdOK.Location = New System.Drawing.Point(328, 185)
-        Me.cmdOK.Name = "cmdOK"
-        Me.cmdOK.Size = New System.Drawing.Size(94, 23)
-        Me.cmdOK.TabIndex = 6
-        Me.cmdOK.Tag = "OK"
-        Me.cmdOK.Text = "&OK"
+        Me.btnOK.Location = New System.Drawing.Point(167, 84)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(94, 23)
+        Me.btnOK.TabIndex = 6
+        Me.btnOK.Tag = "OK"
+        Me.btnOK.Text = "&OK"
         '
         'frmLanguage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(537, 220)
-        Me.Controls.Add(Me.cmdCancel)
-        Me.Controls.Add(Me.cmdOK)
+        Me.ClientSize = New System.Drawing.Size(368, 120)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.cboLanguage)
         Me.Name = "frmLanguage"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Select_Language"
         Me.Text = "Select Language"
         Me.ResumeLayout(False)
@@ -86,6 +88,6 @@ Partial Class frmLanguage
 
     Friend WithEvents cboLanguage As ComboBox
     Friend WithEvents lblLanguage As Label
-    Friend WithEvents cmdCancel As Button
-    Friend WithEvents cmdOK As Button
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnOK As Button
 End Class

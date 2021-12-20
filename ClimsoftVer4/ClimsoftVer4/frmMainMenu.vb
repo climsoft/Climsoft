@@ -200,7 +200,7 @@ Public Class frmMainMenu
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
         frmLanguage.ShowDialog()
         ' When dialog is closed - update language in this window (will any other windows also be open?)
-        autoTranslate(Me)
+        'autoTranslate(Me)
     End Sub
 
     ' Help Menu Items

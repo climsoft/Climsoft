@@ -44,6 +44,7 @@ Partial Class frmLogin
         Me.lblDbdetails = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
+        Me.linkLabelLanguage = New System.Windows.Forms.Label()
         CType(Me.pictureBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -99,7 +100,7 @@ Partial Class frmLogin
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(239, 219)
+        Me.OK.Location = New System.Drawing.Point(219, 242)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(67, 23)
         Me.OK.TabIndex = 4
@@ -109,7 +110,7 @@ Partial Class frmLogin
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(342, 219)
+        Me.Cancel.Location = New System.Drawing.Point(322, 242)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(67, 23)
         Me.Cancel.TabIndex = 5
@@ -127,7 +128,7 @@ Partial Class frmLogin
         'cmdHelp
         '
         Me.cmdHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdHelp.Location = New System.Drawing.Point(445, 219)
+        Me.cmdHelp.Location = New System.Drawing.Point(425, 242)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(67, 23)
         Me.cmdHelp.TabIndex = 9
@@ -147,6 +148,7 @@ Partial Class frmLogin
         'lblDbdetails
         '
         Me.lblDbdetails.AutoSize = True
+        Me.lblDbdetails.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lblDbdetails.ForeColor = System.Drawing.Color.Blue
         Me.lblDbdetails.Location = New System.Drawing.Point(218, 187)
         Me.lblDbdetails.Name = "lblDbdetails"
@@ -176,13 +178,26 @@ Partial Class frmLogin
         Me.chkRememberUsername.Text = "Remember username"
         Me.chkRememberUsername.UseVisualStyleBackColor = True
         '
+        'linkLabelLanguage
+        '
+        Me.linkLabelLanguage.AutoSize = True
+        Me.linkLabelLanguage.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
+        Me.linkLabelLanguage.Location = New System.Drawing.Point(219, 213)
+        Me.linkLabelLanguage.Name = "linkLabelLanguage"
+        Me.linkLabelLanguage.Size = New System.Drawing.Size(55, 13)
+        Me.linkLabelLanguage.TabIndex = 12
+        Me.linkLabelLanguage.Tag = ""
+        Me.linkLabelLanguage.Text = "Language"
+        '
         'frmLogin
         '
         Me.AcceptButton = Me.OK
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(539, 251)
+        Me.ClientSize = New System.Drawing.Size(539, 271)
+        Me.Controls.Add(Me.linkLabelLanguage)
         Me.Controls.Add(Me.chkRememberUsername)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cmdHelp)
@@ -215,4 +230,5 @@ Partial Class frmLogin
     Friend WithEvents lblDbdetails As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents chkRememberUsername As CheckBox
+    Friend WithEvents linkLabelLanguage As Label
 End Class
