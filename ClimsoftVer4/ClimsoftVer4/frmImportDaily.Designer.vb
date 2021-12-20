@@ -494,7 +494,7 @@ Partial Class frmImportDaily
         'lstStations
         '
         Me.lstStations.FormattingEnabled = True
-        Me.lstStations.Location = New System.Drawing.Point(81, 14)
+        Me.lstStations.Location = New System.Drawing.Point(98, 14)
         Me.lstStations.Name = "lstStations"
         Me.lstStations.Size = New System.Drawing.Size(119, 30)
         Me.lstStations.TabIndex = 46
@@ -503,7 +503,7 @@ Partial Class frmImportDaily
         'lblElmeror
         '
         Me.lblElmeror.AutoSize = True
-        Me.lblElmeror.Location = New System.Drawing.Point(273, 18)
+        Me.lblElmeror.Location = New System.Drawing.Point(261, 18)
         Me.lblElmeror.Name = "lblElmeror"
         Me.lblElmeror.Size = New System.Drawing.Size(75, 13)
         Me.lblElmeror.TabIndex = 45

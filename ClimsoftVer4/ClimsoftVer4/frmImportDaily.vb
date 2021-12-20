@@ -1917,6 +1917,8 @@
             lblMissingFlag.Visible = False
             txtMissingFlag.Visible = False
         End If
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Function UTC_Convert(dttime As String) As String

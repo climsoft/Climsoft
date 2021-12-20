@@ -1,7 +1,7 @@
 ﻿Public Class frmBackup
     Dim strBackupFolder As String, strBackupFolderUnixStyle As String
     Private Sub frmBackup_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-       
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
@@ -39,7 +39,7 @@
             ' Create the Command for executing query and set its properties
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql2, conn)
             Try
-                lblBackupProgress.Text = "Backing up observation data for station [" & stnId & "]"
+                lblBackupProgress.Text = ClsTranslations.GetTranslation("Backing up observation data for station") & " [" & stnId & "]"
                 lblBackupProgress.Refresh()
                 'Execute query
                 objCmd.ExecuteNonQuery()
@@ -51,7 +51,7 @@
                 MsgBox(ex.Message)
             End Try
         Next i
-        MsgBox("Data exported successfully!", MsgBoxStyle.Information)
+        MsgBox(ClsTranslations.GetTranslation("Data exported successfully!"), MsgBoxStyle.Information)
         conn.Close()
     End Sub
 
@@ -59,7 +59,7 @@
         Dim dialog As New FolderBrowserDialog()
         dialog.RootFolder = Environment.SpecialFolder.Desktop
         dialog.SelectedPath = "C:\"
-        dialog.Description = "Select Path for backup files"
+        dialog.Description = ClsTranslations.GetTranslation("Select Path for backup files")
         If dialog.ShowDialog() = Windows.Forms.DialogResult.OK Then
             strBackupFolder = dialog.SelectedPath
             txtBackupFolder.Text = strBackupFolder

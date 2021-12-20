@@ -298,6 +298,8 @@
             conns.Close()
         End Try
         conns.Close()
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
 

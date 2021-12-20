@@ -91,7 +91,7 @@ Partial Class frmDBUtilities
         '
         Me.ExternalDataToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CLICOMDailyToolStripMenuItem, Me.AWSToolStripMenuItem, Me.NOAAGTSToolStripMenuItem, Me.DailyToolStripMenuItem, Me.CLIMSOFTV3ToolStripMenuItem})
         Me.ExternalDataToolStripMenuItem.Name = "ExternalDataToolStripMenuItem"
-        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
+        Me.ExternalDataToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
         Me.ExternalDataToolStripMenuItem.Text = "External Data"
         '
         'CLICOMDailyToolStripMenuItem
@@ -178,7 +178,7 @@ Partial Class frmDBUtilities
         'GenerateValuesToolStripMenuItem
         '
         Me.GenerateValuesToolStripMenuItem.Name = "GenerateValuesToolStripMenuItem"
-        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(103, 20)
+        Me.GenerateValuesToolStripMenuItem.Size = New System.Drawing.Size(102, 20)
         Me.GenerateValuesToolStripMenuItem.Text = "Generate Values"
         Me.GenerateValuesToolStripMenuItem.Visible = False
         '
@@ -296,9 +296,9 @@ Partial Class frmDBUtilities
         '
         'cmdUpload
         '
-        Me.cmdUpload.Location = New System.Drawing.Point(167, 6)
+        Me.cmdUpload.Location = New System.Drawing.Point(152, 6)
         Me.cmdUpload.Name = "cmdUpload"
-        Me.cmdUpload.Size = New System.Drawing.Size(87, 19)
+        Me.cmdUpload.Size = New System.Drawing.Size(148, 21)
         Me.cmdUpload.TabIndex = 7
         Me.cmdUpload.Text = "Start Upload"
         Me.cmdUpload.UseVisualStyleBackColor = True
@@ -310,6 +310,7 @@ Partial Class frmDBUtilities
         Me.ListView1.AllowDrop = True
         Me.ListView1.CheckBoxes = True
         Me.ListView1.GridLines = True
+        Me.ListView1.HideSelection = False
         Me.ListView1.LabelEdit = True
         Me.ListView1.Location = New System.Drawing.Point(0, -313)
         Me.ListView1.Name = "ListView1"
