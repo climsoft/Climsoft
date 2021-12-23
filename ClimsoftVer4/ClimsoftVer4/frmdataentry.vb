@@ -26,7 +26,7 @@ Public Class frmDataEntry
             dataCall.SetFilter("selected", "=", 1)
             dataTable = dataCall.GetDataTable()
             For Each row As DataRow In dataTable.Rows
-                lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), row.Item("description")}))
+                lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), ClsTranslations.GetTranslation(row.Item("description"))}))
             Next
 
             If lstViewForms.Items.Count = 0 Then
@@ -100,7 +100,7 @@ Public Class frmDataEntry
                         formSynoptic2.Show()
                     Case Else
                         frm = lstViewForms.SelectedItems.Item(0).Text
-                        MsgBox("Form " & frm & " not yet implemented")
+                        MsgBox(ClsTranslations.GetTranslation("Form") & " " & frm & " " & ClsTranslations.GetTranslation("not yet implemented"))
                         idx = lstViewForms.SelectedItems.Item(0).Index
                         lstViewForms.Items(idx).Remove()
                         formUnselect(frm)

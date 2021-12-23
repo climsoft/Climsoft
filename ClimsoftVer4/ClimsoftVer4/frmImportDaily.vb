@@ -88,8 +88,8 @@
 
 
             ' In case of AWS files
-            If Text = "AWS Data Import" Then List_AWSFields()
-            If Text = "Multiple Columns Data Import" Then
+            If Text = ClsTranslations.GetTranslation("AWS Data Import") Then List_AWSFields()
+            If Text = ClsTranslations.GetTranslation("Multiple Columns Data Import") Then
                 If chkUpperAir.Checked Then
                     List_UpperAirFields()
                 Else
@@ -115,7 +115,7 @@
             cmdLoadData.Enabled = True
 
             ' CLICOM imports have fixed structure hence the panel for header specifications should not be used hence it's not enabled
-            If InStr(Text, "CLICOM") < 1 Then pnlHeaders.Enabled = True
+            If InStr(Text, ClsTranslations.GetTranslation("CLICOM")) < 1 Then pnlHeaders.Enabled = True
         Else
             cmdLoadData.Enabled = False
             pnlHeaders.Enabled = False
@@ -300,21 +300,21 @@
             Next
 
             ' Determine data category from selected menu
-            If lblType.Text = "AWS" Then
+            If lblType.Text = ClsTranslations.GetTranslation("AWS") Then
                 DataCat = "AWS"
             ElseIf lblType.Text = "Multiple Elements" Then
                 DataCat = "ColElms"
-            ElseIf lblType.Text = "Hourly" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("Hourly") Then
                 DataCat = "Hourly"
-            ElseIf lblType.Text = "Daily" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("Daily") Then
                 DataCat = "Daily2"
-            ElseIf lblType.Text = "CLICOMdaily" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMdaily") Then
                 DataCat = "CLICOMDLY"
-            ElseIf lblType.Text = "CLICOMsynop" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMsynop") Then
                 DataCat = "CLICOMSYP"
-            ElseIf lblType.Text = "CLICOMhourly" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMhourly") Then
                 DataCat = "CLICOMHLY"
-            ElseIf lblType.Text = "Monthly" Then
+            ElseIf lblType.Text = ClsTranslations.GetTranslation("Monthly") Then
                 DataCat = "Monthly"
             Else
                 ' Other future data categories
@@ -505,7 +505,7 @@
 
                                                 If IsDate(dttime) Then
                                                     If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
-                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                     lblRecords.Refresh()
                                                     col = col + 1
                                                 End If
@@ -532,7 +532,7 @@
                                             End If
                                         End If
                                     ' Show upload progress
-                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
                                     col = col + 1
                                 End If
@@ -613,7 +613,7 @@
                                 If dat = txtMissingFlag.Text Then
                                     If IsDate(dttime) Then
                                         If Station_Element(st, cod) Then Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl)
-                                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                        lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                         lblRecords.Refresh()
                                         col = col + 1
                                     End If
@@ -632,7 +632,7 @@
                                 End If
 
                                 ' Show upload progress
-                                lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                                 lblRecords.Refresh()
 
                             End If
@@ -717,7 +717,7 @@
                                                     End If
 
                                                     'If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype, lvl) Then Exit For
-                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                     lblRecords.Refresh()
                                                     col = col + 1
                                                 End If
@@ -748,7 +748,7 @@
                                         End If ' Last DataGridView which is equivalent to End data columns 
 
                                     ' Show upload progress
-                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
                                     col = col + 1
                                 End If ' DatagridView1 column condition
@@ -819,7 +819,7 @@
 
                                                 If IsDate(dttim) Then
                                                     If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
-                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                     lblRecords.Refresh()
                                                     col = col + 1
                                                 End If
@@ -844,7 +844,7 @@
 
                             col = col + 1
                             ' Show upload progress
-                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                             lblRecords.Refresh()
 
                         Next
@@ -919,7 +919,7 @@
 
                                         If IsDate(dttim) Then
                                             If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
-                                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                             lblRecords.Refresh()
                                             col = col + 1
                                         End If
@@ -933,7 +933,7 @@
                                 End If
 
                                 ' Show upload progress
-                                lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                                 lblRecords.Refresh()
 
                             End If
@@ -1067,7 +1067,7 @@
                                 End With
 
                                 ' Show upload progress
-                                lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                                lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                                 lblRecords.Refresh()
                                 col = col + 1
                             Next
@@ -1190,7 +1190,7 @@
                             End With
                         Next
                         ' Show upload progress
-                        lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text
+                        lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text
                         lblRecords.Refresh()
                     End If
                 Loop
@@ -1250,7 +1250,7 @@
                                             If dat = txtMissingFlag.Text Then
                                                 If IsDate(dttime) Then
                                                     If Not Add_Record(st, cod, dttime, "", "M", acquisitiontype) Then Exit For
-                                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                                     lblRecords.Refresh()
                                                     col = col + 1
                                                 End If
@@ -1273,7 +1273,7 @@
                                         End If
                                     End If
                                     ' Show upload progress
-                                    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                    lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                     lblRecords.Refresh()
                                     col = col + 1
                                 End If
@@ -1347,7 +1347,7 @@
                                         If dat = txtMissingFlag.Text Then
                                             'If IsDate(dt_tm) Then
                                             If Station_Element(st, cod) Then Add_Record(st, cod, dt_tm, "", "M", acquisitiontype, lvl)
-                                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
                                             lblRecords.Refresh()
                                             col = col + 1
                                             'End If
@@ -1371,7 +1371,7 @@
                             End With
 
                             ' Show upload progress
-                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & ClsTranslations.GetTranslation(" of ") & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                             lblRecords.Refresh()
                             col = col + 1
                         Next
@@ -1620,15 +1620,15 @@
     Private Sub cmdSaveErrors_Click(sender As Object, e As EventArgs)
         Dim errfile As String
         Try
-            dlgSaveSchema.Filter = "Errors file|*.txt"
-            dlgSaveSchema.Title = "Upload Errors"
+            dlgSaveSchema.Filter = ClsTranslations.GetTranslation("Errors file|*.txt")
+            dlgSaveSchema.Title = ClsTranslations.GetTranslation("Upload Errors")
             dlgSaveSchema.ShowDialog()
 
             errfile = dlgSaveSchema.FileName
             FileOpen(111, errfile, OpenMode.Output)
 
             If lstStations.Items.Count Then
-                PrintLine(111, "Station Errors")
+                PrintLine(111, ClsTranslations.GetTranslation("Station Errors"))
                 For i = 0 To lstStations.Items.Count - 1
                     PrintLine(111, lstStations.Items(i))
                 Next
@@ -1636,7 +1636,7 @@
             PrintLine(111)
 
             If lstElements.Items.Count Then
-                PrintLine(111, "Elements Errors")
+                PrintLine(111, ClsTranslations.GetTranslation("Elements Errors"))
                 For i = 0 To lstElements.Items.Count - 1
                     PrintLine(111, lstElements.Items(i))
                 Next
@@ -1781,8 +1781,8 @@
         Dim hdr, schemafile, dlt, strw, obshr, scal, id, code, flg As String
         'Dim configFilename As String = Application.StartupPath & "\schema.sch"
         Try
-            dlgSaveSchema.Filter = "Schema file|*.sch"
-            dlgSaveSchema.Title = "Save Schema"
+            dlgSaveSchema.Filter = ClsTranslations.GetTranslation("Schema file|*.sch")
+            dlgSaveSchema.Title = ClsTranslations.GetTranslation("Save Schema")
             dlgSaveSchema.ShowDialog()
             schemafile = dlgSaveSchema.FileName
             FileOpen(100, schemafile, OpenMode.Output)
@@ -1818,7 +1818,7 @@
 
     Private Sub cmdLoadSpecs_Click(sender As Object, e As EventArgs) Handles cmdLoadSpecs.Click
         Dim sch, hdr() As String
-        dlgOpenImportFile.Filter = "Schema Files|*.sch;*.*"
+        dlgOpenImportFile.Filter = ClsTranslations.GetTranslation("Schema Files|*.sch;*.*")
         dlgOpenImportFile.Title = "Schema File"
         dlgOpenImportFile.ShowDialog()
         sch = dlgOpenImportFile.FileName
@@ -1833,7 +1833,7 @@
                 hdr = MyReader.ReadFields()
 
                 If hdr.Count <> DataGridView1.Columns.Count Then
-                    MsgBox("Header Specs don't match data columms. Selected specs file not loaded")
+                    MsgBox(ClsTranslations.GetTranslation("Header Specs don't match data columms. Selected specs file not loaded"))
                     Exit Sub
                 End If
 
@@ -1895,11 +1895,11 @@
 
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        If Text = "AWS Data Import" Then
+        If Text = ClsTranslations.GetTranslation("AWS Data Import") Then
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aws.htm")
-        ElseIf Text = "CLICOM Daily" Or Text = "CLICOM Synop" Or Text = "CLICOM Hourly" Then
+        ElseIf Text = ClsTranslations.GetTranslation("CLICOM Daily") Or Text = ClsTranslations.GetTranslation("CLICOM Synop") Or Text = ClsTranslations.GetTranslation("CLICOM Hourly") Then
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "clicom.htm")
-        ElseIf Text = "Hourly Data Import" Or Text = "Daily Data Import" Or Text = "Multiple Columns Data Import" Then
+        ElseIf Text = ClsTranslations.GetTranslation("Hourly Data Import") Or Text = ClsTranslations.GetTranslation("Daily Data Import") Or Text = ClsTranslations.GetTranslation("Multiple Columns Data Import") Then
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#DailyHourly")
         Else
             Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
@@ -1913,7 +1913,7 @@
     Private Sub frmImportDaily_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Len(recCommit.RegkeyValue("key01")) <> 0 Then txtObsHour.Text = recCommit.RegkeyValue("key01")
 
-        If Text = "CLICOM Daily" Or Text = "CLICOM Synop" Or Text = "CLICOM Hourly" Then
+        If Text = ClsTranslations.GetTranslation("CLICOM Daily") Or Text = ClsTranslations.GetTranslation("CLICOM Synop") Or Text = ClsTranslations.GetTranslation("CLICOM Hourly") Then
             lblMissingFlag.Visible = False
             txtMissingFlag.Visible = False
         End If

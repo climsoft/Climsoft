@@ -89,21 +89,21 @@
                 cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_stn, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
-                lstMsgs.Items.Add("Station metadata updated")
+                lstMsgs.Items.Add(ClsTranslations.GetTranslation("Station metadata updated"))
 
                 ' Update elements metadata
                 sql_elm = "use " & dbstr4 & ";LOAD DATA LOCAL INFILE '" & elm_tmpbkpfile & "' IGNORE INTO TABLE obselement FIELDS TERMINATED BY ',' (elementId,abbreviation,elementName,description,elementScale,upperLimit,lowerLimit,units,elementtype,qcTotalRequired,selected);"
                 cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_elm, conn)
                 cmd.CommandTimeout = 0
                 cmd.ExecuteNonQuery()
-                lstMsgs.Items.Add("Element metadata updated")
+                lstMsgs.Items.Add(ClsTranslations.GetTranslation("Element metadata updated"))
             End If
 
             ' Import from CLIMSOFT V3 backup file to CLIMSOFT V4 db
             If optV3Backup.Checked = True Then
 
                 If Len(txtBkpFile.Text) = 0 Then
-                    lstMsgs.Items.Add("No backup fle selected")
+                    lstMsgs.Items.Add(ClsTranslations.GetTranslation("No backup fle selected"))
                     Me.Cursor = Cursors.Default
                     conn.Close()
                     Exit Sub
@@ -133,7 +133,7 @@
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_obsv, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
-            lstMsgs.Items.Add("Observations updated")
+            lstMsgs.Items.Add(ClsTranslations.GetTranslation("Observations updated"))
 
             sql_scale = "UPDATE IGNORE observationinitial INNER JOIN obselement ON describedBy = elementId SET obsValue = obsValue/elementScale, mark =71 where obsValue <> '' and elementScale > 0 and (mark is null or mark <> 71);"
 
@@ -141,9 +141,9 @@
             cmd = New MySql.Data.MySqlClient.MySqlCommand(sql_scale, conn)
             cmd.CommandTimeout = 0
             cmd.ExecuteNonQuery()
-            lstMsgs.Items.Add("Observations scaling removed")
+            lstMsgs.Items.Add(ClsTranslations.GetTranslation("Observations scaling removed"))
 
-            lstMsgs.Items.Add("CLIMSOFT V3 migration completed")
+            lstMsgs.Items.Add(ClsTranslations.GetTranslation("CLIMSOFT V3 migration completed"))
             Me.Cursor = Cursors.Default
             conn.Close()
         Catch ex As Exception
@@ -190,8 +190,8 @@
                 IO.Directory.CreateDirectory(DataPath)
             End If
 
-            OpenFileBackup.Filter = "Comma Delimited|*.csv"
-            OpenFileBackup.Title = "Open Import Text File"
+            OpenFileBackup.Filter = ClsTranslations.GetTranslation("Comma Delimited") & "|*.csv"
+            OpenFileBackup.Title = ClsTranslations.GetTranslation("Open Import Text File")
             OpenFileBackup.ShowDialog()
 
             bkpfile = OpenFileBackup.FileName
@@ -252,7 +252,7 @@
 
             FileClose(1)
             Me.Cursor = Cursors.Default
-            lstMsgs.Items.Add("CLIMSOFT 3 Backup converted to CLIMSOFT 4 Structure")
+            lstMsgs.Items.Add(ClsTranslations.GetTranslation("CLIMSOFT 3 Backup converted to CLIMSOFT 4 Structure"))
 
             Me.Cursor = Cursors.Default
             'Exit Sub
@@ -274,6 +274,10 @@
         Next
     End Function
 
+    Private Sub lblV3_Click(sender As Object, e As EventArgs) Handles lblV3.Click
+
+    End Sub
+
     Private Sub frmDataMigration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtV4db.Text = frmDBUtilities.Current_db
         txtEyear.Text = DateAndTime.Year(Now())
@@ -286,6 +290,8 @@
         da1.Fill(ds1, "station")
 
         conn1.Close()
+
+        ClsTranslations.TranslateForm(Me)
 
     End Sub
 
@@ -320,7 +326,7 @@
                 End If
             Loop
             'MsgBox("V4 Backup Made")
-            lstMsgs.Items.Add("CLIMSOFT 3 Backup converted to CLIMSOFT 4 Structure")
+            lstMsgs.Items.Add(ClsTranslations.GetTranslation("CLIMSOFT 3 Backup converted to CLIMSOFT 4 Structure"))
         End Using
         FileClose(10)
         Exit Sub

@@ -61,13 +61,13 @@ Public Class frmQC
         'Initialize Stations List Views
         LstViewStations.Columns.Clear()
 
-        LstViewStations.Columns.Add("Station Id", 100, HorizontalAlignment.Left)
-        LstViewStations.Columns.Add("Station Name", 200, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Id"), 100, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Name"), 200, HorizontalAlignment.Left)
 
         'Initialize Elements List Views
         lstViewElements.Columns.Clear()
-        lstViewElements.Columns.Add("Element Code", 100, HorizontalAlignment.Left)
-        lstViewElements.Columns.Add("Element Details", 200, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Code"), 100, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Details"), 200, HorizontalAlignment.Left)
         lblDataTransferProgress.Text = ""
         txtBeginYear.Text = ""
         txtEndYear.Text = ""
@@ -175,20 +175,18 @@ Public Class frmQC
 
     End Sub
 
-
-
     Private Sub chkAllElements_Click(sender As Object, e As EventArgs) Handles chkAllElements.Click
         If chkAllElements.Checked = False Then
             For i = 0 To lstViewElements.Items.Count - 1
                 lstViewElements.Items(i).Checked = False
             Next
-            chkAllElements.Text = "Select All Elements"
+            chkAllElements.Text = ClsTranslations.GetTranslation("Select All Elements")
             lstViewElements.Enabled = True
         Else
             For i = 0 To lstViewElements.Items.Count - 1
                 lstViewElements.Items(i).Checked = True
             Next
-            chkAllElements.Text = "Unselect All Elements"
+            chkAllElements.Text = ClsTranslations.GetTranslation("Unselect All Elements")
             chkAllElements.Checked = True
             'lstViewElements.Enabled = False
         End If
@@ -202,7 +200,7 @@ Public Class frmQC
 
         Me.Cursor = Cursors.WaitCursor
 
-        lblDataTransferProgress.Text = "Processing....Please wait!"
+        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing....Please wait!")
 
         ' List the selected stations
         stnlist = ""
@@ -255,7 +253,7 @@ Public Class frmQC
 
         ' Set the stations and elements selection conditions
         If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
-            MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
+            MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
             Me.Cursor = Cursors.Default
             Exit Sub
         Else
@@ -346,7 +344,7 @@ Public Class frmQC
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
         Catch ex As Exception
-            MsgBox(ex.Message & " Can't create QC Output limits table")
+            MsgBox(ex.Message & ClsTranslations.GetTranslation(" Can't create QC Output limits table"))
             Me.Cursor = Cursors.Default
         End Try
 
@@ -715,7 +713,7 @@ Public Class frmQC
             'msgTxtQCReportsOutInterelement = "Inter-element reports sent to "
             'MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
         End If
-        lblDataTransferProgress.Text = "Processing complete!"
+        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing complete!")
         Me.Cursor = Cursors.Default
         conn.Close()
     End Sub
@@ -737,7 +735,7 @@ Public Class frmQC
 
             ' Not to proceed if no QC data to output
             If x = 0 Then
-                MsgBox("No QC errors found")
+                MsgBox(ClsTranslations.GetTranslation("No QC errors found"))
                 Exit Sub
             End If
 
@@ -797,10 +795,10 @@ Public Class frmQC
                     Print(111, dt)
                     PrintLine(111)
                 Next
-                msgTxtQCReportsOutInterelement = "QC report for comparison of Elements " & elm1 & " and " & elm2 & " sent to "
+                msgTxtQCReportsOutInterelement = ClsTranslations.GetTranslation("QC report for comparison of Elements") & " " & elm1 & ClsTranslations.GetTranslation("and") & " " & elm2 & " " & ClsTranslations.GetTranslation("sent to")
                 MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
             Else
-                MsgBox("No QC errors found for comparison of Elements " & elm1 & " and " & elm2)
+                MsgBox(ClsTranslations.GetTranslation("No QC errors found for comparison of Elements") & " " & elm1 & " " & ClsTranslations.GetTranslation("and") & " " & elm2)
             End If
 
             FileClose(111)

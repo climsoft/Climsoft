@@ -71,7 +71,7 @@ Public Class frmGTSNOAA
                     currentRow = Reader.ReadFields()
                     i = i + 1
                     'Display progress of data transfer
-                    frmDataTransferProgress.txtDataTransferProgress1.Text = " Transferring record: " & i & " of " & maxRows
+                    frmDataTransferProgress.txtDataTransferProgress1.Text = ClsTranslations.GetTranslation(" Transferring record: ") & i & ClsTranslations.GetTranslation(" of ") & maxRows
                     frmDataTransferProgress.txtDataTransferProgress1.Refresh()
                     'MsgBox("Row :" & i)
                     j = 0
@@ -221,23 +221,23 @@ Public Class frmGTSNOAA
                         'MsgBox(currentField)
                     Next
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox("Line " & ex.Message & _
-                    "is not valid and will be skipped.")
+                    MsgBox(ClsTranslations.GetTranslation("Line ") & ex.Message &
+                  ClsTranslations.GetTranslation("is not valid and will be skipped."))
                 End Try
             End While
         End Using
         frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-        frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
+        frmDataTransferProgress.lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Data transfer complete !")
 
         conn.Close()
     End Sub
 
     Private Sub btnBrowseDataFile_Click(sender As Object, e As EventArgs) Handles btnBrowseDataFile.Click
         '
-        fd.Title = "Open File Dialog"
+        fd.Title = ClsTranslations.GetTranslation("Open File Dialog")
         fd.InitialDirectory = "C\*.*"
         'fd.InitialDirectory = dsReg.Tables("regData").Rows(7).Item("keyValue")
-        fd.Filter = "Text files (*.txt)|*.txt|Text files (*.txt)|*.txt"
+        fd.Filter = ClsTranslations.GetTranslation("Text files") & " (*.txt)|*.txt"
         fd.FilterIndex = 2
         fd.RestoreDirectory = True
         '
