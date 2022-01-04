@@ -8,10 +8,6 @@
         Return conn
     End Function
 
-    Public Shared Function GetDatabaseName() As String
-        Return conn.Database
-    End Function
-
     Public Shared Sub OpenConnection(ConnectionString As String)
         conn.ConnectionString = ConnectionString
         conn.Open()
@@ -25,6 +21,17 @@
 
     Public Shared Function GetConnectionString() As String
         Return conn.ConnectionString
+    End Function
+
+    Public Shared Function GetDatabaseName() As String
+        Return conn.Database
+    End Function
+
+    Public Shared Function GetUserName() As String
+        Dim builder As New Common.DbConnectionStringBuilder With {
+            .ConnectionString = GetConnectionString()
+        }
+        Return builder("user id")
     End Function
 
     'temporary code for visual studio design time

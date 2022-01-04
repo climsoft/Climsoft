@@ -1,56 +1,53 @@
 ﻿Public Class frmChangeOwnPassword
-    Dim conn As New MySql.Data.MySqlClient.MySqlConnection
-    Dim connStr As String, Sql As String
-    Dim objCmd As MySql.Data.MySqlClient.MySqlCommand
-    Dim msgNotYetImplemented As String
-    Dim msgWrongPasswordConfirmation As String
-    Dim msgPasswordTooShort As String
+
+    Private Sub frmChangeOwnPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnSave.Enabled = False
+        ucrPasswordNew.SetValidPasswordLength(6)
+        ucrPasswordNew.SetErorMessage("Password length must be >=6 characters!")
+        ucrPasswordConfirm.SetErorMessage("Password must match!")
+
+        ClsTranslations.TranslateForm(Me)
+    End Sub
+
+    Private Sub ucrPassword_evtPasswordTextChanged(sender As Object, e As EventArgs) Handles ucrPasswordNew.evtPasswordTextChanged, ucrPasswordConfirm.evtPasswordTextChanged
+        If sender Is ucrPasswordNew Then
+            ucrPasswordConfirm.SetValidPasswordText(ucrPasswordNew.GetPasswordText)
+        End If
+        btnSave.Enabled = ucrPasswordNew.ValidPassword AndAlso ucrPasswordConfirm.ValidPassword
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            If DialogResult.Yes = MessageBox.Show(Me,
+                               ClsTranslations.GetTranslation("Your current password will be changed to the new password entered, do you still wish to proceed"),
+                               ClsTranslations.GetTranslation("Password Change"),
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                'Set new password
+                Dim sqlCommand As String = "SET PASSWORD FOR '" & clsDataConnection.GetUserName & "'@'%' = '" & ucrPasswordNew.GetPasswordText & "'"
+                Using objCmd As New MySql.Data.MySqlClient.MySqlCommand(sqlCommand, clsDataConnection.GetOpenedConnection)
+                    objCmd.ExecuteNonQuery()
+                End Using
+
+                MessageBox.Show(Me, ClsTranslations.GetTranslation("Your new password has been set!"),
+                                   ClsTranslations.GetTranslation("Password Change"),
+                                   MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(Me, ClsTranslations.GetTranslation("Error") & ": " & ex.Message,
+                            ClsTranslations.GetTranslation("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
-    Private Sub frmChangeOwnPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        msgNotYetImplemented = "Not yet implemented!"
-        msgWrongPasswordConfirmation = "Wrong confirmation of password!"
-        msgPasswordTooShort = "Password length must be >=6 characters!"
-        ClsTranslations.TranslateForm(Me)
-    End Sub
-
-    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-        connStr = frmLogin.txtusrpwd.Text
-        conn.ConnectionString = connStr
-        'Open connection to database
-        conn.Open()
-        If Strings.Len(txtNewPassword.Text) >= 6 Then
-            If txtNewPassword.Text = txtConfirmPassword.Text Then
-                Try
-                    'Set new password
-                    Sql = "SET PASSWORD  = PASSWORD('" & txtNewPassword.Text & "');"
-                    objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                    objCmd.ExecuteNonQuery()
-                    MsgBox("Your new password has been set!", MsgBoxStyle.Information)
-                Catch ex As Exception
-                    ''Dispaly Exception error message 
-                    MsgBox(ex.Message)
-                    conn.Close()
-                End Try
-            Else
-                MsgBox(msgWrongPasswordConfirmation, MsgBoxStyle.Information)
-            End If
-        Else
-            MsgBox(msgPasswordTooShort, MsgBoxStyle.Information)
-        End If
-        'Close connection
-        conn.Close()
-    End Sub
-
-    Private Sub txtConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txtConfirmPassword.TextChanged
-        If Strings.Len(txtConfirmPassword.Text) > 0 And Strings.Len(txtNewPassword.Text) > 0 Then
-            btnOK.Enabled = True
-        End If
-    End Sub
-
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "changepassword.htm#ownpassword")
+    End Sub
+
+    Private Sub ucrPasswordNew_evtPasswordTextChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class
