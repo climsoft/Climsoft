@@ -543,6 +543,7 @@ Public Class formDaily1
         'If Len(cboDay.Text) > 0 Then formPopulate()
     End Sub
 
+
     Private Sub formDaily1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         'If e.KeyCode = Keys.Enter Then My.Computer.Keyboard.SendKeys("{TAB}")
 

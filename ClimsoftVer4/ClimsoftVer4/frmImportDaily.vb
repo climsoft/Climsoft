@@ -87,8 +87,10 @@
             End Using
 
 
-            ' In case of AWS files
+            ' Special file structures
             If Text = "AWS Data Import" Then List_AWSFields()
+            If Text = "NOAA GTS Data Import" Then List_NOAAGTSFields()
+            If Text = "Monthly Data" Then List_Monthly()
             If Text = "Multiple Columns Data Import" Then
                 If chkUpperAir.Checked Then
                     List_UpperAirFields()
@@ -96,6 +98,7 @@
                     List_ObsFields()
                 End If
             End If
+
             ''Populate the datagridview with data from the file
             'For Each THisLine In My.Computer.FileSystem.ReadAllText(txtImportFile.Text).Split(Environment.NewLine)
             '    DataGridView1.Rows.Add(THisLine.Split(delimit))
@@ -247,7 +250,47 @@
         End Try
         dbcon.Close()
     End Sub
+    Sub List_Monthly()
 
+        Try
+
+            cmbFields.Items.Clear()
+            ' Add station, date and time headers whichever exist
+            cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("element_code")
+            cmbFields.Items.Add("yyyy")
+            'cmbFields.Items.Add("value")
+            cmbFields.Items.Add("NA")
+            ' Add the AWS element codes existing in obselement table
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            For i = 1 To 12
+                cmbFields.Items.Add(i)
+            Next
+
+            'sql = "select elementId, abbreviation from obselement where elementId > 880 ;"
+
+            'da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            'ds1.Clear()
+            'da1.Fill(ds1, "obselement")
+
+            'kount = ds1.Tables("obselement").Rows.Count
+
+            'If kount = 0 Then Exit Sub
+
+            'For i = 0 To kount - 1
+            '    cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId") & "-" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+            'Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbcon.Close()
+        End Try
+        dbcon.Close()
+    End Sub
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         'DataGridView1.Rows.Clear()
         DataGridView1.Columns.Clear()
@@ -316,6 +359,8 @@
                 DataCat = "CLICOMHLY"
             ElseIf lblType.Text = "Monthly" Then
                 DataCat = "Monthly"
+            ElseIf lblType.Text = "NOAA_GTS" Then
+                DataCat = "NOAAGTS"
             Else
                 ' Other future data categories
                 'DataCat = Get_DataCat()
@@ -348,9 +393,7 @@
                 End If
             Next
 
-
             lblRecords.Text = ""
-            'MsgBox(DataCat)
             Select Case DataCat
                 Case "Daily1"
                     Load_Daily1()
@@ -376,6 +419,8 @@
                     Load_CLICOM("hourly")
                 Case "Monthly"
                     Load_Monthly()
+                Case "NOAAGTS"
+                    Load_NOAAGTS()
             End Select
 
             FileClose(101)
@@ -383,6 +428,8 @@
 
             ' Create sql query
             sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationinitial FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+            If DataCat = "NOAAGTS" Then sql0 = "LOAD DATA local INFILE '" & fl2 & "' IGNORE INTO TABLE observationfinal FIELDS TERMINATED BY ',' (recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,flag,period,acquisitionType);"
+
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql0, dbcon)
 
             'Execute query
@@ -463,10 +510,12 @@
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
                         ' Get the record index
                         col = 0
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
                         acquisitiontype = 6
                         h = txtObsHour.Text
-                        cod = txtElmCode.Text
+                        'cod = txtElmCode.Text
+                        cod = cboElement.SelectedValue
                         lvl = "surface"
 
                         For Each currentField In currentRow
@@ -566,9 +615,12 @@
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
                         ' Initialize values
                         col = 0
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
+
                         h = txtObsHour.Text
                         cod = txtElmCode.Text
+                        cod = cboElement.SelectedValue
                         lvl = "surface"
                         acquisitiontype = 6
                         dttime = ""
@@ -669,8 +721,10 @@
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
 
                         col = 0
-                        st = txtStn.Text
-                        cod = txtElmCode.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
+                        'cod = txtElmCode.Text
+                        cod = cboElement.SelectedValue
                         acquisitiontype = 6
                         lvl = "surface"
                         For Each currentField In currentRow
@@ -781,7 +835,9 @@
 
                         ' Initialize values
                         col = 0
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
+                        'MsgBox(st)
                         acquisitiontype = 3
                         dt_tm = False
 
@@ -872,8 +928,10 @@
 
                         ' Initialize values
                         col = 0
-                        st = txtStn.Text
-                        cod = txtElmCode.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
+                        'cod = txtElmCode.Text
+                        cod = cboElement.SelectedValue
                         acquisitiontype = 3
                         dt_tm = False
 
@@ -964,9 +1022,11 @@
 
                         If MyReader.LineNumber > Val(txtStartRow.Text) Then
 
-                            st = txtStn.Text
+                            'st = txtStn.Text
+                            st = cboStns.SelectedValue
                             h = Val(txtObsHour.Text)
-                            cod = txtElmCode.Text
+                            'cod = txtElmCode.Text
+                            cod = cboElement.SelectedValue
                             acquisitiontype = 6
                             dttcom = 0
                             col = 0
@@ -1134,7 +1194,8 @@
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
                         ' Get the record index
                         col = 0
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
                         tm = txtObsHour.Text
                         'flg = ""
                         acquisitiontype = 2
@@ -1201,7 +1262,8 @@
 
     End Sub
     Sub Load_Monthly()
-
+        'MsgBox(1)
+        'MsgBox(cboElement.SelectedValue)
         Dim dt, st, cod, y, m, d, h, dttime, hd, dat, flg As String
         Dim acquisitiontype As Integer
 
@@ -1220,10 +1282,13 @@
                     If MyReader.LineNumber > Val(txtStartRow.Text) Then
                         ' Get the record index
                         col = 0
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
                         acquisitiontype = 6
                         h = txtObsHour.Text
-                        cod = txtElmCode.Text
+                        'cod = txtElmCode.Text
+                        cod = cboElement.SelectedValue
+
                         For Each currentField In currentRow
 
                             hd = DataGridView1.Columns(col).Name
@@ -1242,6 +1307,7 @@
                                     Else ' Data column encountered
 
                                         flg = ""
+
                                         If IsNumeric(hd) Then
                                             d = DateTime.DaysInMonth(y, hd)
                                             dttime = y & "-" & hd & "-" & d & " " & h & ":00"
@@ -1270,7 +1336,9 @@
                                             If Station_Element(st, cod) Then
                                                 If IsDate(dttime) Then If Not Add_Record(st, cod, dttime, dat, flg, acquisitiontype) Then Exit For 'Sub
                                             End If
+
                                         End If
+
                                     End If
                                     ' Show upload progress
                                     lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
@@ -1286,7 +1354,7 @@
             End Using
 
         Catch ex As Exception
-            If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
+        If MsgBox(ex.HResult & " " & ex.Message, MsgBoxStyle.OkCancel) = vbCancel Then Exit Sub
         End Try
     End Sub
 
@@ -1321,7 +1389,8 @@
                         dt_tm = y & "-" & m & "-" & d & " " & h & ":" & n & ":" & s
                         'MsgBox(dt_tm & " " & lvl)
 
-                        st = txtStn.Text
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
                         acquisitiontype = 6
                         dttcom = 0
                         col = 0
@@ -1384,7 +1453,147 @@
         End Try
 
     End Sub
+    Sub List_NOAAGTSFields()
 
+        Try
+
+            cmbFields.Items.Clear()
+            ' Add station, date and time headers whichever exist
+            cmbFields.Items.Add("station_id")
+            cmbFields.Items.Add("date")
+            cmbFields.Items.Add("date_time")
+            'cmbFields.Items.Add("value")
+            cmbFields.Items.Add("NA")
+            ' Add the AWS element codes existing in obselement table
+
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            sql = "select elementId, abbreviation from obselement where elementId < 881 ;"
+
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "obselement")
+
+            kount = ds1.Tables("obselement").Rows.Count
+
+            If kount = 0 Then Exit Sub
+
+            For i = 0 To kount - 1
+                cmbFields.Items.Add(ds1.Tables("obselement").Rows(i).Item("elementId") & "-" & ds1.Tables("obselement").Rows(i).Item("abbreviation"))
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            dbcon.Close()
+        End Try
+        dbcon.Close()
+    End Sub
+    Sub Load_NOAAGTS()
+        'MsgBox("Aws")
+        Dim st, cod, dttim, y, m, d, h, tt, dt, dat, hd, flg As String
+        Dim dt_tm As Boolean
+        Dim acquisitiontype As Integer
+
+        Try
+            Using MyReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(txtImportFile.Text)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(delimit)
+
+                Do While MyReader.EndOfData = False
+
+                    currentRow = MyReader.ReadFields()
+                    If MyReader.LineNumber > Val(txtStartRow.Text) Then
+
+                        ' Initialize values
+                        col = 0
+                        'st = txtStn.Text
+                        st = cboStns.SelectedValue
+                        acquisitiontype = 3
+                        dt_tm = False
+                        dt = ""
+                        dttim = ""
+                        h = txtObsHour.Text
+
+                        For Each currentField In currentRow
+                            hd = DataGridView1.Columns(col).Name
+                            dat = currentField
+
+                            With DataGridView1
+                                If col < .ColumnCount Then
+                                    If .Columns(col).Name = "station_id" Then ' Station column found
+                                        st = dat
+                                    ElseIf .Columns(col).Name = "date_time" Then ' Combined Date and Timme column found
+                                        dttim = dat
+                                        dt_tm = True
+                                    ElseIf .Columns(col).Name = "date" Then ' Separate Date column found 
+                                        dt = dat
+                                    ElseIf .Columns(col).Name = "NA" Then ' Not Required
+                                        'Do nothing
+                                    Else ' Data Column found
+                                        'MsgBox(st)
+                                        cod = .Columns(col).Name
+                                        '    dat = .Rows(i).Cells(j).Value
+                                        If dt_tm = False Then dttim = dt & " " & h & ":00"
+
+                                        dttim = DateAndTime.Year(dttim) & "-" & DateAndTime.Month(dttim) & "-" & DateAndTime.Day(dttim) & " " & Format(DateAndTime.Hour(dttim), "00") & ":" & Format(DateAndTime.Minute(dttim), "00") & ":" & Format(DateAndTime.Second(dttim), "00")
+
+                                        If IsDate(dttim) Then
+
+                                            ' Check for missing flag data values 
+                                            If dat = txtMissingFlag.Text Then
+                                                ' Skip Uploading Missing data
+
+                                                'If IsDate(dttim) Then
+                                                '    If Not Add_Record(st, cod, dttim, "", "M", acquisitiontype) Then Exit For
+                                                '    lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text ' & " " & '.RowCount - Val(txtStartRow.Text) '1
+                                                '    lblRecords.Refresh()
+
+                                                'End If
+                                                col = col + 1
+                                                Continue For
+                                            End If
+
+                                            'flg = ""
+                                            If IsNumeric(dat) Then
+                                                '    If chkScale.Checked = True Then Scale_Data(cod, dat)
+                                                'Else
+                                                ' Treat string data values as missing data
+                                                'flg = "M"
+                                                'dat = ""
+                                                ' Units coversions
+                                                If cod = 2 Or cod = 3 Or cod = 4 Or cod = 101 Or cod = 102 Or cod = 103 Then ' Temperatures - Fahreheit to Celsius
+                                                    dat = 5 / 9 * (Val(dat) - 32)
+                                                ElseIf cod = 5 Or cod = 50 Then ' Precipitation/Snow Depth - inches to mm
+                                                    dat = Val(dat) * 25.4
+                                                ElseIf cod = 110 Then ' Visibility - Miles to Metres
+                                                    dat = Val(dat) * 1609.34
+                                                ElseIf cod = 58 Or cod = 60 Or cod = 111 Then ' Wind Speed - Knots to M/s
+                                                    dat = Val(dat) * 0.514444
+                                                End If
+                                            End If
+
+                                            If Station_Element(st, cod) Then Add_Record(st, cod, dttim, dat, flg, acquisitiontype)
+
+                                        End If
+                                    End If
+                                End If
+                            End With
+
+                            col = col + 1
+                            ' Show upload progress
+                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                            lblRecords.Refresh()
+
+                        Next
+                    End If
+                Loop
+            End Using
+        Catch ex As Exception
+            MsgBox(ex.HResult & " " & ex.Message)
+        End Try
+    End Sub
     Function Get_DateTime(datRow() As String, ByRef dtt As Date, ByRef lvl As String) As Boolean
         Dim datValue As String
         Dim itm As Integer
@@ -1458,7 +1667,8 @@
         Get_RecordIdx = True
         Try
             With DataGridView1
-                stn = txtStn.Text
+                'stn = txtStn.Text
+                stn = cboStns.SelectedValue
                 hh = txtObsHour.Text
                 For i = 0 To .Columns.Count - 1
                     If .Columns(i).Name = "station_id" Then
@@ -1599,7 +1809,7 @@
 
         Try
             sql = "select elementId, elementScale from obselement where elementId like " & code & ";"
-            'MsgBox(sql)
+
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()
             da1.Fill(ds1, "obselement")
@@ -1676,7 +1886,7 @@
         elm = True
         Station_Element = True
         Try
-            ' Check if Station exist
+            'Check If Station exist
             sql = "select stationId from station where stationId like '" & stn_id & "';"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
@@ -1724,11 +1934,14 @@
                 Return True
 
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
 
     End Function
+
+
 
     Function Get_Code_Scale(code As String, ByRef obsv As String) As Boolean
         'MsgBox(code & " " & obsv)
@@ -1806,8 +2019,10 @@
             strw = txtStartRow.Text
             obshr = txtObsHour.Text
             scal = chkScale.Checked
-            id = txtStn.Text
-            code = txtElmCode.Text
+            'id = txtStn.Text
+            id = cboStns.SelectedValue
+            'code = txtElmCode.Text
+            code = cboElement.SelectedValue
             flg = txtMissingFlag.Text
             PrintLine(100, dlt & "," & strw & "," & obshr & "," & scal & "," & id & "," & code & "," & flg)
         Catch ex As Exception
@@ -1818,6 +2033,8 @@
 
     Private Sub cmdLoadSpecs_Click(sender As Object, e As EventArgs) Handles cmdLoadSpecs.Click
         Dim sch, hdr() As String
+        Dim Recs As New dataEntryGlobalRoutines
+
         dlgOpenImportFile.Filter = "Schema Files|*.sch;*.*"
         dlgOpenImportFile.Title = "Schema File"
         dlgOpenImportFile.ShowDialog()
@@ -1860,8 +2077,12 @@
                     txtStartRow.Text = hdr(1)
                     txtObsHour.Text = hdr(2)
                     chkScale.Checked = hdr(3)
-                    txtStn.Text = hdr(4)
-                    txtElmCode.Text = hdr(5)
+                    'txtStn.Text = hdr(4)
+                    cboStns.Text = hdr(4)
+                    Recs.Valid_Stn(cboStns)
+                    'txtElmCode.Text = hdr(5)
+                    cboElement.Text = hdr(5)
+                    Recs.Valid_Elm(cboElement)
                     ' The following code added to cater for the added object for missing data flag text box
                     If hdr.Count > 6 Then
                         txtMissingFlag.Text = hdr(6)
@@ -1917,6 +2138,52 @@
             lblMissingFlag.Visible = False
             txtMissingFlag.Visible = False
         End If
+
+        Dim ds1, ds2 As New DataSet
+        Dim sql1 As String
+        Dim da1, da11 As MySql.Data.MySqlClient.MySqlDataAdapter
+        Try
+            dbConnectionString = frmLogin.txtusrpwd.Text
+            dbcon.ConnectionString = dbConnectionString
+            dbcon.Open()
+
+            ' Populate Stations
+            sql1 = "SELECT stationId,stationName FROM station"
+            da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            ds1.Clear()
+            da1.Fill(ds1, "station")
+
+            If ds1.Tables("station").Rows.Count > 0 Then
+                With cboStns
+                    .DataSource = ds1.Tables("station")
+                    .DisplayMember = "stationName"
+                    .ValueMember = "stationId"
+                    .SelectedIndex = -1
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
+
+            ' Populate elements
+            sql1 = "SELECT elementId,elementName FROM obselement"
+            da11 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql1, dbcon)
+            ds2.Clear()
+            da11.Fill(ds2, "element")
+
+            If ds2.Tables("element").Rows.Count > 0 Then
+                With cboElement
+                    .DataSource = ds2.Tables("element")
+                    .DisplayMember = "elementName"
+                    .ValueMember = "elementId"
+                    .SelectedIndex = -1
+                End With
+            Else
+                MsgBox(msgStationInformationNotFound, MsgBoxStyle.Exclamation)
+            End If
+            dbcon.Close()
+        Catch ex As Exception
+            dbcon.Close()
+        End Try
     End Sub
 
     Function UTC_Convert(dttime As String) As String
@@ -1930,4 +2197,59 @@
             Return dttime
         End Try
     End Function
+
+    Private Sub txtStns_KeyDown(sender As Object, e As KeyEventArgs) Handles cboStns.KeyDown
+        Dim Recs As New dataEntryGlobalRoutines
+
+        If e.KeyValue = 13 Then
+            'MsgBox(txtStns.SelectedValue)
+            'txtStns.Text = txtStns.SelectedValue
+            Recs.Valid_Stn(cboStns)
+        End If
+    End Sub
+
+    Private Sub txtStns_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboStns.SelectedValueChanged
+        'Try
+        '    'MsgBox(txtStns.SelectedValue)
+        '    txtStns.Text = txtStns.SelectedValue
+        'Catch ex As Exception
+
+        'End Try
+    End Sub
+
+    'Private Sub txtStns_TextChanged(sender As Object, e As EventArgs) Handles txtStns.TextChanged
+    '    Try
+
+    '        txtStns.Text = txtStns.SelectedValue
+    '    Catch ex As Exception
+
+    '    End Try
+    'End Sub
+
+    Private Sub txtStns_Click(sender As Object, e As EventArgs) Handles cboStns.Click
+        'Try
+
+        '    txtStns.Text = txtStns.SelectedValue
+        'Catch ex As Exception
+
+        'End Try
+    End Sub
+
+    Private Sub cboElement_KeyDown(sender As Object, e As KeyEventArgs) Handles cboElement.KeyDown
+        Dim Recs As New dataEntryGlobalRoutines
+
+        If e.KeyValue = 13 Then
+            Recs.Valid_Elm(cboElement)
+        End If
+    End Sub
+
+    'Private Sub txtStns_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtStns.SelectedIndexChanged
+    '    Try
+    '        MsgBox(txtStns.SelectedValue)
+    '        txtStns.Text = ""
+    '        'txtStns.Text = txtStns.SelectedValue
+    '    Catch ex As Exception
+
+    '    End Try
+    'End Sub
 End Class
