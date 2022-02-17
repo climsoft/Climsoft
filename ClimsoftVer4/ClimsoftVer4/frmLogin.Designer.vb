@@ -45,6 +45,7 @@ Partial Class frmLogin
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkRememberUsername = New System.Windows.Forms.CheckBox()
         Me.linkLabelLanguage = New System.Windows.Forms.Label()
+        Me.lblLanguage = New System.Windows.Forms.Label()
         CType(Me.pictureBoxLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -52,7 +53,7 @@ Partial Class frmLogin
         '
         Me.pictureBoxLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.pictureBoxLogo.Image = CType(resources.GetObject("pictureBoxLogo.Image"), System.Drawing.Image)
-        Me.pictureBoxLogo.Location = New System.Drawing.Point(0, 0)
+        Me.pictureBoxLogo.Location = New System.Drawing.Point(0, 17)
         Me.pictureBoxLogo.Name = "pictureBoxLogo"
         Me.pictureBoxLogo.Size = New System.Drawing.Size(199, 251)
         Me.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -100,7 +101,7 @@ Partial Class frmLogin
         '
         'OK
         '
-        Me.OK.Location = New System.Drawing.Point(219, 242)
+        Me.OK.Location = New System.Drawing.Point(219, 254)
         Me.OK.Name = "OK"
         Me.OK.Size = New System.Drawing.Size(67, 23)
         Me.OK.TabIndex = 4
@@ -110,7 +111,7 @@ Partial Class frmLogin
         'Cancel
         '
         Me.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel.Location = New System.Drawing.Point(322, 242)
+        Me.Cancel.Location = New System.Drawing.Point(322, 254)
         Me.Cancel.Name = "Cancel"
         Me.Cancel.Size = New System.Drawing.Size(67, 23)
         Me.Cancel.TabIndex = 5
@@ -128,7 +129,7 @@ Partial Class frmLogin
         'cmdHelp
         '
         Me.cmdHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.cmdHelp.Location = New System.Drawing.Point(425, 242)
+        Me.cmdHelp.Location = New System.Drawing.Point(425, 254)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(67, 23)
         Me.cmdHelp.TabIndex = 9
@@ -183,12 +184,23 @@ Partial Class frmLogin
         Me.linkLabelLanguage.AutoSize = True
         Me.linkLabelLanguage.Cursor = System.Windows.Forms.Cursors.Hand
         Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
-        Me.linkLabelLanguage.Location = New System.Drawing.Point(219, 213)
+        Me.linkLabelLanguage.Location = New System.Drawing.Point(220, 233)
         Me.linkLabelLanguage.Name = "linkLabelLanguage"
         Me.linkLabelLanguage.Size = New System.Drawing.Size(55, 13)
         Me.linkLabelLanguage.TabIndex = 12
         Me.linkLabelLanguage.Tag = ""
         Me.linkLabelLanguage.Text = "Language"
+        '
+        'lblLanguage
+        '
+        Me.lblLanguage.AutoSize = True
+        Me.lblLanguage.Location = New System.Drawing.Point(218, 214)
+        Me.lblLanguage.Name = "lblLanguage"
+        Me.lblLanguage.Size = New System.Drawing.Size(91, 13)
+        Me.lblLanguage.TabIndex = 13
+        Me.lblLanguage.Tag = "Password"
+        Me.lblLanguage.Text = "Change language"
+        Me.lblLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frmLogin
         '
@@ -196,7 +208,8 @@ Partial Class frmLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel
-        Me.ClientSize = New System.Drawing.Size(539, 271)
+        Me.ClientSize = New System.Drawing.Size(539, 287)
+        Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.linkLabelLanguage)
         Me.Controls.Add(Me.chkRememberUsername)
         Me.Controls.Add(Me.Label1)
@@ -231,4 +244,5 @@ Partial Class frmLogin
     Friend WithEvents Label1 As Label
     Friend WithEvents chkRememberUsername As CheckBox
     Friend WithEvents linkLabelLanguage As Label
+    Friend WithEvents lblLanguage As Label
 End Class

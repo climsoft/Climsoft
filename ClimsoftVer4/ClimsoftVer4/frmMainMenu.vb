@@ -41,7 +41,6 @@ Public Class frmMainMenu
                 If usrRole = "ClimsoftOperator" Or usrRole = "ClimsoftOperatorSupervisor" Or usrRole = "ClimsoftRainfall" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuQC.Enabled = False
                     mnuProducts.Enabled = False
                     btnMainDataTransfer.Enabled = False
@@ -54,7 +53,6 @@ Public Class frmMainMenu
                 ElseIf usrRole = "ClimsoftQC" Then
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     btnMainDataTransfer.Enabled = False
                     btnMainSettingsAWS.Enabled = False
@@ -67,7 +65,6 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     btnMainDataTransfer.Enabled = False
                     btnMainSettingsAWS.Enabled = False
                     btnMainUserManagement.Enabled = False
@@ -80,7 +77,6 @@ Public Class frmMainMenu
                     mnuAdministration.Enabled = False
                     mnuTools.Enabled = False
                     mnuQC.Enabled = False
-                    mnuLanguageTranslation.Enabled = False
                     mnuProducts.Enabled = False
                     btnMainDataTransfer.Enabled = False
                     btnMainSettingsAWS.Enabled = False
@@ -199,8 +195,8 @@ Public Class frmMainMenu
 
     Private Sub SelectLanguageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelectLanguageToolStripMenuItem.Click
         frmLanguage.ShowDialog()
-        ' When dialog is closed - update language in this window (will any other windows also be open?)
-        'autoTranslate(Me)
+        'When dialog is closed - update language in this window (will any other windows also be open?)
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     ' Help Menu Items
@@ -245,11 +241,6 @@ Public Class frmMainMenu
 
     Private Sub mnuTools_Click(sender As Object, e As EventArgs) Handles mnuTools.Click
 
-    End Sub
-
-
-    Private Sub mnuLanguageTranslation_Click(sender As Object, e As EventArgs) Handles mnuLanguageTranslation.Click
-        frmLanguageTranslation.Show()
     End Sub
 
     Private Sub UserAdminToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAdminToolStripMenuItem.Click

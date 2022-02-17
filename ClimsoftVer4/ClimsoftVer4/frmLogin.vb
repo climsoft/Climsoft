@@ -224,39 +224,6 @@ Public Class frmLogin
         msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
         msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
 
-        Dim lanCulture As String
-        lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
-        If Strings.Left(lanCulture, 2) = "en" Then
-            ' MsgBox("Current language Is: English-UK")
-            Me.Text = "Login"
-            lblUsername.Text = "User name:"
-            lblPassword.Text = "Password:"
-            'lblDbdetails.Text = "Show and Configure Database Connection....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancel"
-        ElseIf Strings.Left(lanCulture, 2) = "fr" Then
-            Me.Text = "s'identifier"
-            lblUsername.Text = "Nom d'utilisateur:"
-            lblPassword.Text = "Mot de passe:"
-            'lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
-            OK.Text = "OK"
-            Cancel.Text = "Annuler"
-        ElseIf Strings.Left(lanCulture, 2) = "de" Then
-            Me.Text = "Anmeldung"
-            lblUsername.Text = "Benutzername:"
-            lblPassword.Text = "Passwort:"
-            'lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
-            OK.Text = "OK"
-            Cancel.Text = "Stornieren"
-        ElseIf Strings.Left(lanCulture, 2) = "pt" Then
-            Me.Text = "Entrar"
-            lblUsername.Text = "Nome de usuário:"
-            lblPassword.Text = "Senha:"
-            'lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancelar"
-        End If
-
         If My.Settings.rememberUsername Then
             chkRememberUsername.Checked = True
             txtUsername.Text = My.Settings.rememberedUsername
