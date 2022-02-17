@@ -68,7 +68,7 @@ Public Class frmLogin
                 End Try
             End Using
         Else
-            connectionDetails.Add("Default database|" & My.Settings.defaultDatabase)
+            connectionDetails.Add("Default_database|" & My.Settings.defaultDatabase)
         End If
     End Sub
 

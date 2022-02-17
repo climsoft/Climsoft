@@ -195,7 +195,26 @@ Public Class frmDBUtilities
     'End Sub
 
     Private Sub NOAAGTSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NOAAGTSToolStripMenuItem.Click
-        frmGTSNOAA.Show()
+        'frmGTSNOAA.Show()
+
+        With frmImportDaily
+            .Text = "NOAA GTS Data Import"
+            .lblType.Visible = False
+            .lblType.Text = "NOAA_GTS"
+            .lblDefaultObsHour.Visible = False
+            .txtObsHour.Visible = False
+            .lblDefaultObsHour.Visible = True
+            '.lblStartRow.Visible = False
+            .chkScale.Enabled = False
+            .chkScale.Checked = True
+            '.txtStartRow.Visible = False
+            .txtObsHour.Visible = True
+            .lblStn.Visible = True
+            .lblElmCode.Visible = False
+            .cboElement.Visible = False
+            .grpSummary.Visible = False
+            .Show()
+        End With
     End Sub
 
     Private Sub CLIMSOFTV3ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CLIMSOFTV3ToolStripMenuItem.Click
@@ -259,10 +278,11 @@ Public Class frmDBUtilities
             .chkScale.Checked = True
             '.txtStartRow.Visible = False
             .txtObsHour.Visible = False
-            .txtStn.Visible = True
+            '.txtStn.Visible = True
             .lblStn.Visible = True
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
+            .cboElement.Visible = False
             .grpSummary.Visible = False
             .Show()
         End With
@@ -321,6 +341,7 @@ Public Class frmDBUtilities
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
             .grpUpperAir.Visible = True
+            .cboElement.Visible = False
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
@@ -378,10 +399,11 @@ Public Class frmDBUtilities
             .lblType.Text = ClsTranslations.GetTranslation("CLICOMdaily")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
-            .txtStn.Enabled = False
+            .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
+            .cboElement.Visible = False
             .Show()
         End With
     End Sub
@@ -392,10 +414,11 @@ Public Class frmDBUtilities
             .lblType.Text = ClsTranslations.GetTranslation("CLICOMsynop")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
-            .txtStn.Enabled = False
+            .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
+            .cboElement.Visible = False
             .Show()
         End With
     End Sub
@@ -406,21 +429,22 @@ Public Class frmDBUtilities
             .lblType.Text = ClsTranslations.GetTranslation("CLICOMhourly")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
-            .txtStn.Enabled = False
+            .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
             .txtElmCode.Visible = False
+            .cboElement.Visible = False
             .Show()
         End With
     End Sub
 
     Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MonthlyToolStripMenuItem2.Click
         With frmImportDaily
-            .Text = ClsTranslations.GetTranslation("Monthly")
-            .lblType.Text = "3"
-            .txtStartRow.Text = 1
+            .Text = "Monthly Data"
+            .lblType.Text = "Monthly"
+            .txtStartRow.Text = 2
             .chkScale.Checked = True
-            .txtStn.Enabled = True
+            .cboStns.Enabled = True
             .grpSummary.Visible = False
             .Show()
         End With
