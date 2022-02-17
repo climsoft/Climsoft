@@ -221,19 +221,22 @@ Public Class frmGTSNOAA
 
                             ' MsgBox("Valid data record")
 
-                        '--------------------------
-                        'MsgBox(currentField)
-                    Next
-                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox(ClsTranslations.GetTranslation("Line ") & ex.Message &
-                  ClsTranslations.GetTranslation("is not valid and will be skipped."))
-                End Try
-            End While
-        End Using
-        frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-        frmDataTransferProgress.lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Data transfer complete !")
+                            '--------------------------
+                            'MsgBox(currentField)
+                        Next
+                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                        MsgBox(ClsTranslations.GetTranslation("Line ") & ex.Message &
+                      ClsTranslations.GetTranslation("is not valid and will be skipped."))
+                    End Try
+                End While
+            End Using
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Data transfer complete !")
 
-        conn.Close()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnBrowseDataFile_Click(sender As Object, e As EventArgs) Handles btnBrowseDataFile.Click
