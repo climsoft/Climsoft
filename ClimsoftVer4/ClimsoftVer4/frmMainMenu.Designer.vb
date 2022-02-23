@@ -329,14 +329,14 @@ Partial Class frmMainMenu
         'mnuHelpContents
         '
         Me.mnuHelpContents.Name = "mnuHelpContents"
-        Me.mnuHelpContents.Size = New System.Drawing.Size(180, 24)
+        Me.mnuHelpContents.Size = New System.Drawing.Size(134, 24)
         Me.mnuHelpContents.Tag = "Contents"
         Me.mnuHelpContents.Text = "Contents"
         '
         'mnuHelpAbout
         '
         Me.mnuHelpAbout.Name = "mnuHelpAbout"
-        Me.mnuHelpAbout.Size = New System.Drawing.Size(180, 24)
+        Me.mnuHelpAbout.Size = New System.Drawing.Size(134, 24)
         Me.mnuHelpAbout.Tag = "About"
         Me.mnuHelpAbout.Text = "About"
         '
@@ -373,16 +373,15 @@ Partial Class frmMainMenu
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(444, 436)
+        Me.Label5.Location = New System.Drawing.Point(381, 471)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(43, 16)
+        Me.Label5.Size = New System.Drawing.Size(176, 40)
         Me.Label5.TabIndex = 36
         Me.Label5.Tag = "Close"
         Me.Label5.Text = "Close"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label11
         '
@@ -398,80 +397,80 @@ Partial Class frmMainMenu
         '
         'Label9
         '
-        Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(162, 436)
+        Me.Label9.Location = New System.Drawing.Point(162, 471)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(176, 16)
+        Me.Label9.Size = New System.Drawing.Size(176, 40)
         Me.Label9.TabIndex = 33
         Me.Label9.Tag = "AWS_Real_Time_Processing"
         Me.Label9.Text = "AWS Real Time Processing"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label8
         '
-        Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(612, 436)
+        Me.Label8.Location = New System.Drawing.Point(588, 471)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(133, 16)
+        Me.Label8.Size = New System.Drawing.Size(176, 40)
         Me.Label8.TabIndex = 32
         Me.Label8.Tag = "Metadata_Information"
         Me.Label8.Text = "Metadata Information"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label7
         '
-        Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(185, 324)
+        Me.Label7.Location = New System.Drawing.Point(162, 350)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(131, 16)
+        Me.Label7.Size = New System.Drawing.Size(176, 40)
         Me.Label7.TabIndex = 31
         Me.Label7.Tag = "Users_Administration"
         Me.Label7.Text = "Users Administration"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(618, 323)
+        Me.Label6.Location = New System.Drawing.Point(588, 349)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(109, 16)
+        Me.Label6.Size = New System.Drawing.Size(176, 40)
         Me.Label6.TabIndex = 30
         Me.Label6.Tag = "Climate_Products"
         Me.Label6.Text = "Climate Products"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(603, 217)
+        Me.Label4.Location = New System.Drawing.Point(588, 226)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(142, 16)
+        Me.Label4.Size = New System.Drawing.Size(176, 40)
         Me.Label4.TabIndex = 28
         Me.Label4.Tag = "Quality_Control_Checks"
         Me.Label4.Text = "Quality Control Checks"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(205, 219)
+        Me.Label3.Location = New System.Drawing.Point(162, 228)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(90, 16)
+        Me.Label3.Size = New System.Drawing.Size(176, 40)
         Me.Label3.TabIndex = 27
         Me.Label3.Tag = "Data_Transfer"
         Me.Label3.Text = "Data Transfer"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(608, 104)
+        Me.Label2.Location = New System.Drawing.Point(588, 101)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(134, 16)
+        Me.Label2.Size = New System.Drawing.Size(176, 40)
         Me.Label2.TabIndex = 26
         Me.Label2.Tag = "Archive_Paper_Image"
         Me.Label2.Text = "Archive Paper Image"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'btnMainClose
         '
@@ -479,7 +478,7 @@ Partial Class frmMainMenu
         Me.btnMainClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnMainClose.FlatAppearance.BorderSize = 4
         Me.btnMainClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMainClose.Location = New System.Drawing.Point(420, 364)
+        Me.btnMainClose.Location = New System.Drawing.Point(420, 399)
         Me.btnMainClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainClose.Name = "btnMainClose"
         Me.btnMainClose.Padding = New System.Windows.Forms.Padding(5)
@@ -496,7 +495,7 @@ Partial Class frmMainMenu
         Me.btnMainSettingsAWS.FlatAppearance.BorderSize = 4
         Me.btnMainSettingsAWS.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainSettingsAWS.ForeColor = System.Drawing.Color.Red
-        Me.btnMainSettingsAWS.Location = New System.Drawing.Point(187, 360)
+        Me.btnMainSettingsAWS.Location = New System.Drawing.Point(187, 395)
         Me.btnMainSettingsAWS.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainSettingsAWS.Name = "btnMainSettingsAWS"
         Me.btnMainSettingsAWS.Padding = New System.Windows.Forms.Padding(5)
@@ -513,7 +512,7 @@ Partial Class frmMainMenu
         Me.btnMainMetadata.FlatAppearance.BorderSize = 4
         Me.btnMainMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainMetadata.ForeColor = System.Drawing.Color.Red
-        Me.btnMainMetadata.Location = New System.Drawing.Point(610, 360)
+        Me.btnMainMetadata.Location = New System.Drawing.Point(610, 395)
         Me.btnMainMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainMetadata.Name = "btnMainMetadata"
         Me.btnMainMetadata.Padding = New System.Windows.Forms.Padding(5)
@@ -530,7 +529,7 @@ Partial Class frmMainMenu
         Me.btnMainUserManagement.FlatAppearance.BorderSize = 4
         Me.btnMainUserManagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainUserManagement.ForeColor = System.Drawing.Color.Red
-        Me.btnMainUserManagement.Location = New System.Drawing.Point(187, 248)
+        Me.btnMainUserManagement.Location = New System.Drawing.Point(187, 274)
         Me.btnMainUserManagement.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainUserManagement.Name = "btnMainUserManagement"
         Me.btnMainUserManagement.Padding = New System.Windows.Forms.Padding(5)
@@ -547,7 +546,7 @@ Partial Class frmMainMenu
         Me.btnMainProducts.FlatAppearance.BorderSize = 4
         Me.btnMainProducts.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainProducts.ForeColor = System.Drawing.Color.Red
-        Me.btnMainProducts.Location = New System.Drawing.Point(610, 247)
+        Me.btnMainProducts.Location = New System.Drawing.Point(610, 273)
         Me.btnMainProducts.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainProducts.Name = "btnMainProducts"
         Me.btnMainProducts.Padding = New System.Windows.Forms.Padding(5)
@@ -564,7 +563,7 @@ Partial Class frmMainMenu
         Me.btnMainQC.FlatAppearance.BorderSize = 4
         Me.btnMainQC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainQC.ForeColor = System.Drawing.Color.Red
-        Me.btnMainQC.Location = New System.Drawing.Point(611, 143)
+        Me.btnMainQC.Location = New System.Drawing.Point(611, 152)
         Me.btnMainQC.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainQC.Name = "btnMainQC"
         Me.btnMainQC.Padding = New System.Windows.Forms.Padding(5)
@@ -581,7 +580,7 @@ Partial Class frmMainMenu
         Me.btnMainDataTransfer.FlatAppearance.BorderSize = 4
         Me.btnMainDataTransfer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainDataTransfer.ForeColor = System.Drawing.Color.Red
-        Me.btnMainDataTransfer.Location = New System.Drawing.Point(187, 143)
+        Me.btnMainDataTransfer.Location = New System.Drawing.Point(187, 152)
         Me.btnMainDataTransfer.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainDataTransfer.Name = "btnMainDataTransfer"
         Me.btnMainDataTransfer.Padding = New System.Windows.Forms.Padding(5)
@@ -598,7 +597,7 @@ Partial Class frmMainMenu
         Me.btnMainPaperArchive.FlatAppearance.BorderSize = 4
         Me.btnMainPaperArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainPaperArchive.ForeColor = System.Drawing.Color.Red
-        Me.btnMainPaperArchive.Location = New System.Drawing.Point(611, 28)
+        Me.btnMainPaperArchive.Location = New System.Drawing.Point(611, 25)
         Me.btnMainPaperArchive.Margin = New System.Windows.Forms.Padding(0)
         Me.btnMainPaperArchive.Name = "btnMainPaperArchive"
         Me.btnMainPaperArchive.Padding = New System.Windows.Forms.Padding(5)
@@ -610,14 +609,14 @@ Partial Class frmMainMenu
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(215, 113)
+        Me.Label1.Location = New System.Drawing.Point(162, 104)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(70, 16)
+        Me.Label1.Size = New System.Drawing.Size(176, 40)
         Me.Label1.TabIndex = 4
         Me.Label1.Tag = "Data_Entry"
         Me.Label1.Text = "Data Entry"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'btnMainDataEntry
         '
@@ -628,7 +627,7 @@ Partial Class frmMainMenu
         Me.btnMainDataEntry.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnMainDataEntry.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMainDataEntry.ForeColor = System.Drawing.Color.Red
-        Me.btnMainDataEntry.Location = New System.Drawing.Point(187, 37)
+        Me.btnMainDataEntry.Location = New System.Drawing.Point(187, 25)
         Me.btnMainDataEntry.Name = "btnMainDataEntry"
         Me.btnMainDataEntry.Size = New System.Drawing.Size(126, 76)
         Me.btnMainDataEntry.TabIndex = 3

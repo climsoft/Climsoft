@@ -32,7 +32,7 @@ Partial Class frmLanguage
         '
         Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Location = New System.Drawing.Point(167, 30)
+        Me.cboLanguage.Location = New System.Drawing.Point(28, 30)
         Me.cboLanguage.Name = "cboLanguage"
         Me.cboLanguage.Size = New System.Drawing.Size(196, 21)
         Me.cboLanguage.TabIndex = 0
@@ -40,7 +40,7 @@ Partial Class frmLanguage
         'lblLanguage
         '
         Me.lblLanguage.AutoSize = True
-        Me.lblLanguage.Location = New System.Drawing.Point(3, 33)
+        Me.lblLanguage.Location = New System.Drawing.Point(25, 9)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(88, 13)
         Me.lblLanguage.TabIndex = 1
@@ -51,7 +51,7 @@ Partial Class frmLanguage
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(270, 84)
+        Me.btnCancel.Location = New System.Drawing.Point(164, 86)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 7
@@ -60,7 +60,7 @@ Partial Class frmLanguage
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(167, 84)
+        Me.btnOK.Location = New System.Drawing.Point(61, 86)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(94, 23)
         Me.btnOK.TabIndex = 6
@@ -71,11 +71,12 @@ Partial Class frmLanguage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(368, 120)
+        Me.ClientSize = New System.Drawing.Size(280, 120)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblLanguage)
         Me.Controls.Add(Me.cboLanguage)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmLanguage"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Select_Language"
