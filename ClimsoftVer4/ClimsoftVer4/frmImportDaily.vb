@@ -619,7 +619,7 @@
                         st = cboStns.SelectedValue
 
                         h = txtObsHour.Text
-                        'cod = txtElmCode.Text
+                        cod = txtElmCode.Text
                         cod = cboElement.SelectedValue
                         lvl = "surface"
                         acquisitiontype = 6
@@ -1569,8 +1569,8 @@
                                                     dat = Val(dat) * 25.4
                                                 ElseIf cod = 110 Then ' Visibility - Miles to Metres
                                                     dat = Val(dat) * 1609.34
-                                                    'ElseIf cod = 58 Or cod = 60 Or cod = 111 Then ' Wind Speed - Knots to M/s
-                                                    '    dat = Val(dat) * 0.514444
+                                                ElseIf cod = 58 Or cod = 60 Or cod = 111 Then ' Wind Speed - Knots to M/s
+                                                    dat = Val(dat) * 0.514444
                                                 End If
                                             End If
 

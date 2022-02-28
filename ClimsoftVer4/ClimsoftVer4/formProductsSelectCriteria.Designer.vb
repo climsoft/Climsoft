@@ -33,7 +33,6 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
-        Me.txttest = New System.Windows.Forms.TextBox()
         Me.cmdSelectAllElements = New System.Windows.Forms.Button()
         Me.cmdSelectAllStations = New System.Windows.Forms.Button()
         Me.cmdClearStations = New System.Windows.Forms.Button()
@@ -174,7 +173,6 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.pnlStationsElements.Controls.Add(Me.txttest)
         Me.pnlStationsElements.Controls.Add(Me.cmdSelectAllElements)
         Me.pnlStationsElements.Controls.Add(Me.cmdSelectAllStations)
         Me.pnlStationsElements.Controls.Add(Me.cmdClearStations)
@@ -199,14 +197,6 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Name = "pnlStationsElements"
         Me.pnlStationsElements.Size = New System.Drawing.Size(961, 413)
         Me.pnlStationsElements.TabIndex = 4
-        '
-        'txttest
-        '
-        Me.txttest.Location = New System.Drawing.Point(5, 379)
-        Me.txttest.Name = "txttest"
-        Me.txttest.Size = New System.Drawing.Size(592, 20)
-        Me.txttest.TabIndex = 31
-        Me.txttest.Visible = False
         '
         'cmdSelectAllElements
         '
@@ -1008,5 +998,4 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents lstQualifier As ListBox
     Friend WithEvents optqualifier As RadioButton
     Friend WithEvents butFill As Button
-    Friend WithEvents txttest As TextBox
 End Class

@@ -353,9 +353,9 @@ Partial Class formAWSRealTime
         Me.pnlProcessing.Controls.Add(Me.lblErrors)
         Me.pnlProcessing.Controls.Add(Me.Panel1)
         Me.pnlProcessing.Controls.Add(Me.grpElements)
-        Me.pnlProcessing.Location = New System.Drawing.Point(199, 5)
+        Me.pnlProcessing.Location = New System.Drawing.Point(194, 5)
         Me.pnlProcessing.Name = "pnlProcessing"
-        Me.pnlProcessing.Size = New System.Drawing.Size(752, 154)
+        Me.pnlProcessing.Size = New System.Drawing.Size(757, 222)
         Me.pnlProcessing.TabIndex = 1
         Me.pnlProcessing.Visible = False
         '
@@ -543,7 +543,7 @@ Partial Class formAWSRealTime
         '
         Me.Ltime.AutoSize = True
         Me.Ltime.BackColor = System.Drawing.Color.SeaShell
-        Me.Ltime.Location = New System.Drawing.Point(368, 546)
+        Me.Ltime.Location = New System.Drawing.Point(165, 541)
         Me.Ltime.Name = "Ltime"
         Me.Ltime.Size = New System.Drawing.Size(16, 13)
         Me.Ltime.TabIndex = 7
@@ -862,9 +862,9 @@ Partial Class formAWSRealTime
         Me.lblInformation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInformation.Location = New System.Drawing.Point(149, 0)
         Me.lblInformation.Name = "lblInformation"
-        Me.lblInformation.Size = New System.Drawing.Size(155, 15)
+        Me.lblInformation.Size = New System.Drawing.Size(151, 15)
         Me.lblInformation.TabIndex = 0
-        Me.lblInformation.Text = "Processing Information"
+        Me.lblInformation.Text = "Processinf Information"
         '
         'grpElements
         '

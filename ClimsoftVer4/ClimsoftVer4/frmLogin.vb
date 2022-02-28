@@ -141,6 +141,7 @@ Public Class frmLogin
         Finally
             conn.Close()
         End Try
+
         regDataInit()
         languageTableInit()
         clsDataConnection.OpenConnection(txtusrpwd.Text) 'todo. the connection string should come from somewhere else
@@ -320,26 +321,18 @@ Public Class frmLogin
     End Sub
     Sub Path_Security()
         Dim dtpath As String
-
-        dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
-        ' Create the path if it is not there
-        If IO.Directory.Exists(dtpath) = False Then
-            IO.Directory.CreateDirectory(dtpath & "\data")
-        End If
-
         ' Grant full access on `filePath` for all users (allows any user to write to file)
         ' This is currently necessary because some Climsoft installers are not Windows Administrators
+        dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
         Try
             Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(dtpath)
             Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
-
             dSecurity.AddAccessRule(New FileSystemAccessRule(
                 New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
                 FileSystemRights.FullControl,
                 InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
                 PropagationFlags.NoPropagateInherit, AccessControlType.Allow
             ))
-
             dInfo.SetAccessControl(dSecurity)
 
             ''Also Grant full access on `filePath` for all users (allows any user to write to file)

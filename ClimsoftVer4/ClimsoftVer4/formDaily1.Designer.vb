@@ -50,7 +50,6 @@ Partial Class formDaily1
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.lblInsDel = New System.Windows.Forms.Label()
         Me.GroupBoxCommands.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -326,22 +325,11 @@ Partial Class formDaily1
         Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
         '
-        'lblInsDel
-        '
-        Me.lblInsDel.AutoSize = True
-        Me.lblInsDel.ForeColor = System.Drawing.Color.Blue
-        Me.lblInsDel.Location = New System.Drawing.Point(360, 94)
-        Me.lblInsDel.Name = "lblInsDel"
-        Me.lblInsDel.Size = New System.Drawing.Size(241, 13)
-        Me.lblInsDel.TabIndex = 1172
-        Me.lblInsDel.Text = "Press Pg Down to Insert Cell and Pg Up to Delete"
-        '
         'formDaily1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(624, 479)
-        Me.Controls.Add(Me.lblInsDel)
         Me.Controls.Add(Me.GroupBoxCommands)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cboHour)
@@ -391,5 +379,4 @@ Partial Class formDaily1
     Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents btnMoveFirst As Button
-    Friend WithEvents lblInsDel As Label
 End Class

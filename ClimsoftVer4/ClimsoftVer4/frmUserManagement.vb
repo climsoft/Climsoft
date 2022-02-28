@@ -1692,7 +1692,7 @@
 
                     Sql = "REVOKE ALL PRIVILEGES, GRANT OPTION FROM '" & usrName & "'@'localhost'; FLUSH PRIVILEGES;"
                     objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-                    conn.Close()
+                    'conn.Close()
                     ' Set new privileges according to the new roles
                     If Not SetPrivileges(usrName, usrRole) Then Continue For
                 Next
@@ -2925,10 +2925,6 @@
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
-            Sql = "GRANT ALL PRIVILEGES ON " & dbnme & ".inventory_output TO '" & usrName & "';"
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            'execute command
-            objCmd.ExecuteNonQuery()
 
             'Privileges on operational CLIMSOFT V4 test database
             Sql = "GRANT FILE ON *.* TO '" & usrName & "';"
@@ -3003,10 +2999,6 @@
             'execute command
             objCmd.ExecuteNonQuery()
             Sql = "GRANT CREATE,DELETE,SELECT,INSERT,UPDATE ON mariadb_climsoft_test_db_v4.tblproducts TO '" & usrName & "';"
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            'execute command
-            objCmd.ExecuteNonQuery()
-            Sql = "GRANT ALL PRIVILEGES ON mariadb_climsoft_test_db_v4.inventory_output TO '" & usrName & "';"
             objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
             'execute command
             objCmd.ExecuteNonQuery()
