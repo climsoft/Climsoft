@@ -54,12 +54,10 @@ Partial Class frmImportDaily
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.lblRecords = New System.Windows.Forms.Label()
         Me.lblType = New System.Windows.Forms.Label()
-        Me.txtStn = New System.Windows.Forms.TextBox()
         Me.lblStn = New System.Windows.Forms.Label()
         Me.lblDefaultObsHour = New System.Windows.Forms.Label()
         Me.lblTRecords = New System.Windows.Forms.Label()
         Me.lblElmCode = New System.Windows.Forms.Label()
-        Me.txtElmCode = New System.Windows.Forms.TextBox()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
         Me.optMonthly = New System.Windows.Forms.RadioButton()
         Me.optDekadal = New System.Windows.Forms.RadioButton()
@@ -100,9 +98,9 @@ Partial Class frmImportDaily
         '
         'cmdOpenFile
         '
-        Me.cmdOpenFile.Location = New System.Drawing.Point(468, 0)
+        Me.cmdOpenFile.Location = New System.Drawing.Point(461, 1)
         Me.cmdOpenFile.Name = "cmdOpenFile"
-        Me.cmdOpenFile.Size = New System.Drawing.Size(69, 23)
+        Me.cmdOpenFile.Size = New System.Drawing.Size(69, 22)
         Me.cmdOpenFile.TabIndex = 1
         Me.cmdOpenFile.Text = "Open File"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
@@ -113,7 +111,7 @@ Partial Class frmImportDaily
         '
         'txtImportFile
         '
-        Me.txtImportFile.Location = New System.Drawing.Point(4, 3)
+        Me.txtImportFile.Location = New System.Drawing.Point(-2, 2)
         Me.txtImportFile.Name = "txtImportFile"
         Me.txtImportFile.Size = New System.Drawing.Size(464, 20)
         Me.txtImportFile.TabIndex = 2
@@ -377,14 +375,6 @@ Partial Class frmImportDaily
         Me.lblType.TabIndex = 30
         Me.lblType.Visible = False
         '
-        'txtStn
-        '
-        Me.txtStn.Location = New System.Drawing.Point(486, 199)
-        Me.txtStn.Name = "txtStn"
-        Me.txtStn.Size = New System.Drawing.Size(140, 20)
-        Me.txtStn.TabIndex = 31
-        Me.txtStn.Visible = False
-        '
         'lblStn
         '
         Me.lblStn.AutoSize = True
@@ -421,14 +411,6 @@ Partial Class frmImportDaily
         Me.lblElmCode.Size = New System.Drawing.Size(45, 13)
         Me.lblElmCode.TabIndex = 40
         Me.lblElmCode.Text = "Element"
-        '
-        'txtElmCode
-        '
-        Me.txtElmCode.Location = New System.Drawing.Point(632, 199)
-        Me.txtElmCode.Name = "txtElmCode"
-        Me.txtElmCode.Size = New System.Drawing.Size(124, 20)
-        Me.txtElmCode.TabIndex = 39
-        Me.txtElmCode.Visible = False
         '
         'grpSummary
         '
@@ -656,11 +638,9 @@ Partial Class frmImportDaily
         Me.Controls.Add(Me.pnlErrors)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblElmCode)
-        Me.Controls.Add(Me.txtElmCode)
         Me.Controls.Add(Me.lblTRecords)
         Me.Controls.Add(Me.lblDefaultObsHour)
         Me.Controls.Add(Me.lblStn)
-        Me.Controls.Add(Me.txtStn)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblRecords)
         Me.Controls.Add(Me.cmdHelp)
@@ -731,12 +711,10 @@ Partial Class frmImportDaily
     Friend WithEvents cmdHelp As System.Windows.Forms.Button
     Friend WithEvents lblRecords As System.Windows.Forms.Label
     Friend WithEvents lblType As System.Windows.Forms.Label
-    Friend WithEvents txtStn As System.Windows.Forms.TextBox
     Friend WithEvents lblStn As System.Windows.Forms.Label
     Friend WithEvents lblDefaultObsHour As System.Windows.Forms.Label
     Friend WithEvents lblTRecords As System.Windows.Forms.Label
     Friend WithEvents lblElmCode As Label
-    Friend WithEvents txtElmCode As TextBox
     Friend WithEvents grpSummary As GroupBox
     Friend WithEvents optMonthly As RadioButton
     Friend WithEvents optDekadal As RadioButton

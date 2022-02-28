@@ -281,7 +281,7 @@ Public Class frmDBUtilities
             '.txtStn.Visible = True
             .lblStn.Visible = True
             .lblElmCode.Visible = False
-            .txtElmCode.Visible = False
+            '.txtElmCode.Visible = False
             .cboElement.Visible = False
             .grpSummary.Visible = False
             .Show()
@@ -346,7 +346,7 @@ Public Class frmDBUtilities
             .lblType.Text = "Multiple Elements"
             .optMonthly.Enabled = True
             .lblElmCode.Visible = False
-            .txtElmCode.Visible = False
+            '.txtElmCode.Visible = False
             .grpUpperAir.Visible = True
             .cboElement.Visible = False
             '.chkObsHour.Visible = False
@@ -409,7 +409,7 @@ Public Class frmDBUtilities
             .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
-            .txtElmCode.Visible = False
+            '.txtElmCode.Visible = False
             .cboElement.Visible = False
             .Show()
         End With
@@ -424,7 +424,7 @@ Public Class frmDBUtilities
             .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
-            .txtElmCode.Visible = False
+            '.txtElmCode.Visible = False
             .cboElement.Visible = False
             .Show()
         End With
@@ -439,7 +439,7 @@ Public Class frmDBUtilities
             .cboStns.Enabled = False
             .grpSummary.Visible = False
             .lblElmCode.Visible = False
-            .txtElmCode.Visible = False
+            '.txtElmCode.Visible = False
             .cboElement.Visible = False
             .Show()
         End With
