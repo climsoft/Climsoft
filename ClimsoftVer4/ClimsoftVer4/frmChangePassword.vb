@@ -47,6 +47,7 @@
         msgNotYetImplemented = "Not yet implemented!"
         msgWrongPasswordConfirmation = "Wrong confirmation of password!"
         msgPasswordTooShort = "Password length must be >=6 characters!"
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub txtConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txtConfirmPassword.TextChanged

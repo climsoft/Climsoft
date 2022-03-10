@@ -920,6 +920,9 @@
             ' Retrieve Keyentry mode information and mark on the checkbox
             'MsgBox(Me.Name)
             If FldName.Key_Entry_Mode(Me.Text) = "Double" Then chkRepeatEntry.Checked = True
+
+            ClsTranslations.TranslateForm(Me)
+
             Me.CenterToScreen()
 
         Catch ex As Exception

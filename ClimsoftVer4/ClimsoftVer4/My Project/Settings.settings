@@ -14,5 +14,11 @@
     <Setting Name="rememberedUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="languageCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">en</Value>
+    </Setting>
+    <Setting Name="languageName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">English</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

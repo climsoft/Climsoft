@@ -43,7 +43,7 @@ Public Class frmDBUtilities
     End Sub
 
     Private Sub formDbUtilities_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
@@ -268,7 +268,7 @@ Public Class frmDBUtilities
     Private Sub AWSToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AWSToolStripMenuItem.Click
         'frmImportAWS.Show()
         With frmImportDaily
-            .Text = "AWS Data Import"
+            .Text = ClsTranslations.GetTranslation("AWS Data Import")
             .lblType.Visible = False
             .lblType.Text = "AWS"
             .lblDefaultObsHour.Visible = False
@@ -312,20 +312,13 @@ Public Class frmDBUtilities
         Me.Close()
     End Sub
 
-    Private Sub GenerateValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateValuesToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripDaily.Click
         'frmImportDaily.Show()
         With frmImportDaily
-            .Text = "Daily Data Import"
+            .Text = ClsTranslations.GetTranslation("Daily Data Import")
             '.lblType.Visible = False
-            .lblType.Text = "Daily"
+            .lblType.Text = ClsTranslations.GetTranslation("Daily")
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
@@ -341,9 +334,9 @@ Public Class frmDBUtilities
 
     Private Sub MultipleElementColumnsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MultipleElementColumnsToolStripMenuItem.Click
         With frmImportDaily
-            .Text = "Multiple Columns Data Import"
+            .Text = ClsTranslations.GetTranslation("Multiple Columns Data Import")
             '.lblType.Visible = False
-            .lblType.Text = "Multiple Elements"
+            .lblType.Text = ClsTranslations.GetTranslation("Multiple Elements")
             .optMonthly.Enabled = True
             .lblElmCode.Visible = False
             '.txtElmCode.Visible = False
@@ -363,9 +356,9 @@ Public Class frmDBUtilities
 
     Private Sub DailyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripHourly.Click
         With frmImportDaily
-            .Text = "Hourly Data Import"
+            .Text = ClsTranslations.GetTranslation("Hourly Data Import")
             '.lblType.Visible = False
-            .lblType.Text = "Hourly"
+            .lblType.Text = ClsTranslations.GetTranslation("Hourly")
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
             '.chkScale.Visible = True
@@ -384,9 +377,9 @@ Public Class frmDBUtilities
 
     Private Sub ToolStripSynoptic_Click(sender As Object, e As EventArgs) Handles ToolStripSynoptic.Click
         With frmImportDaily
-            .Text = "Dekadal Data Import"
+            .Text = ClsTranslations.GetTranslation("Dekadal Data Import")
             '.lblType.Visible = False
-            .lblType.Text = "Dekadal"
+            .lblType.Text = ClsTranslations.GetTranslation("Dekadal")
             .optDekadal.Checked = True
             '.chkObsHour.Visible = False
             ''.lblStartRow.Visible = False
@@ -402,8 +395,8 @@ Public Class frmDBUtilities
 
     Private Sub DailyToolStripMenuItem1_Click_1(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem1.Click
         With frmImportDaily
-            .Text = "CLICOM Daily"
-            .lblType.Text = "CLICOMdaily"
+            .Text = ClsTranslations.GetTranslation("CLICOM Daily")
+            .lblType.Text = ClsTranslations.GetTranslation("CLICOMdaily")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .cboStns.Enabled = False
@@ -417,8 +410,8 @@ Public Class frmDBUtilities
 
     Private Sub SynopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynopToolStripMenuItem.Click
         With frmImportDaily
-            .Text = "CLICOM Synop"
-            .lblType.Text = "CLICOMsynop"
+            .Text = ClsTranslations.GetTranslation("CLICOM Synop")
+            .lblType.Text = ClsTranslations.GetTranslation("CLICOMsynop")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .cboStns.Enabled = False
@@ -432,8 +425,8 @@ Public Class frmDBUtilities
 
     Private Sub HourlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem.Click
         With frmImportDaily
-            .Text = "CLICOM Hourly"
-            .lblType.Text = "CLICOMhourly"
+            .Text = ClsTranslations.GetTranslation("CLICOM Hourly")
+            .lblType.Text = ClsTranslations.GetTranslation("CLICOMhourly")
             .txtStartRow.Text = 1
             .chkScale.Checked = True
             .cboStns.Enabled = False
@@ -457,50 +450,4 @@ Public Class frmDBUtilities
         End With
     End Sub
 
-    Private Sub ExternalDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExternalDataToolStripMenuItem.Click
-
-    End Sub
-
-    'Private Sub DailyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles DailyToolStripMenuItem2.Click
-
-    '    With frmImportDaily
-    '        .Text = "NOAA GTS Daily Data Import"
-    '        .lblType.Visible = False
-    '        .lblType.Text = "DlyNOAA_GTS"
-    '        .lblDefaultObsHour.Visible = False
-    '        .txtObsHour.Visible = False
-    '        '.lblStartRow.Visible = False
-    '        .chkScale.Enabled = False
-    '        .chkScale.Checked = True
-    '        '.txtStartRow.Visible = False
-    '        .txtObsHour.Visible = False
-    '        .txtStn.Visible = True
-    '        .lblStn.Visible = True
-    '        .lblElmCode.Visible = False
-    '        .txtElmCode.Visible = False
-    '        .grpSummary.Visible = False
-    '        .Show()
-    '    End With
-    'End Sub
-
-    'Private Sub HourlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles HourlyToolStripMenuItem1.Click
-    '    With frmImportDaily
-    '        .Text = "NOAA GTS Hourly Daily Data Import"
-    '        .lblType.Visible = False
-    '        .lblType.Text = "HlyNOAA_GTS"
-    '        .lblDefaultObsHour.Visible = False
-    '        .txtObsHour.Visible = False
-    '        '.lblStartRow.Visible = False
-    '        .chkScale.Enabled = False
-    '        .chkScale.Checked = True
-    '        '.txtStartRow.Visible = False
-    '        .txtObsHour.Visible = False
-    '        .txtStn.Visible = True
-    '        .lblStn.Visible = True
-    '        .lblElmCode.Visible = False
-    '        .txtElmCode.Visible = False
-    '        .grpSummary.Visible = False
-    '        .Show()
-    '    End With
-    'End Sub
 End Class

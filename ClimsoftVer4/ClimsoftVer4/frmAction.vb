@@ -24,7 +24,7 @@ Public Class frmAction
     End Sub
 
     Private Sub frmAction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click

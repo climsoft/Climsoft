@@ -18,6 +18,8 @@
         conn.Open()
         populateDataGrid()
         conn.Close()
+
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -72,7 +74,7 @@
 
                     ' The following 3 lines of code will be anabled after thorough testing
                     If SetPrivileges(txtUserName.Text, cboUserRole.Text) Then
-                        MsgBox("New user created successfully!", MsgBoxStyle.Information)
+                        MsgBox(ClsTranslations.GetTranslation("New user created successfully!"), MsgBoxStyle.Information)
                     End If
                     populateDataGrid()
                     conn.Close()

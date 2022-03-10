@@ -128,6 +128,8 @@ Public Class frmGeneralSettings
             recNumberTextBox.Text = "Record 1 of 1"
         End If
 
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class form_upperair1
+Partial Class formUpperAir
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -36,6 +36,9 @@ Partial Class form_upperair1
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lbStation = New System.Windows.Forms.Label()
         Me.grpData = New System.Windows.Forms.GroupBox()
+        Me.txtFlag313Field026 = New System.Windows.Forms.TextBox()
+        Me.txtVal_Elem313Field013 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.txtFlag312Field031 = New System.Windows.Forms.TextBox()
         Me.txtFlag308Field030 = New System.Windows.Forms.TextBox()
         Me.txtVal_Elem308Field017 = New System.Windows.Forms.TextBox()
@@ -92,9 +95,6 @@ Partial Class form_upperair1
         Me.recNumberTextBox = New System.Windows.Forms.TextBox()
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.txtFlag313Field026 = New System.Windows.Forms.TextBox()
-        Me.txtVal_Elem313Field013 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpHeaders.SuspendLayout()
         Me.grpData.SuspendLayout()
         Me.pnlConmmand.SuspendLayout()
@@ -275,6 +275,30 @@ Partial Class form_upperair1
         Me.grpData.Size = New System.Drawing.Size(419, 377)
         Me.grpData.TabIndex = 1
         Me.grpData.TabStop = False
+        '
+        'txtFlag313Field026
+        '
+        Me.txtFlag313Field026.Location = New System.Drawing.Point(304, 214)
+        Me.txtFlag313Field026.Name = "txtFlag313Field026"
+        Me.txtFlag313Field026.Size = New System.Drawing.Size(36, 20)
+        Me.txtFlag313Field026.TabIndex = 38
+        Me.txtFlag313Field026.TabStop = False
+        '
+        'txtVal_Elem313Field013
+        '
+        Me.txtVal_Elem313Field013.Location = New System.Drawing.Point(241, 214)
+        Me.txtVal_Elem313Field013.Name = "txtVal_Elem313Field013"
+        Me.txtVal_Elem313Field013.Size = New System.Drawing.Size(56, 20)
+        Me.txtVal_Elem313Field013.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(58, 218)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(89, 13)
+        Me.Label1.TabIndex = 43
+        Me.Label1.Text = "Relative Humidity"
         '
         'txtFlag312Field031
         '
@@ -768,31 +792,7 @@ Partial Class form_upperair1
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'txtFlag313Field026
-        '
-        Me.txtFlag313Field026.Location = New System.Drawing.Point(304, 214)
-        Me.txtFlag313Field026.Name = "txtFlag313Field026"
-        Me.txtFlag313Field026.Size = New System.Drawing.Size(36, 20)
-        Me.txtFlag313Field026.TabIndex = 38
-        Me.txtFlag313Field026.TabStop = False
-        '
-        'txtVal_Elem313Field013
-        '
-        Me.txtVal_Elem313Field013.Location = New System.Drawing.Point(241, 214)
-        Me.txtVal_Elem313Field013.Name = "txtVal_Elem313Field013"
-        Me.txtVal_Elem313Field013.Size = New System.Drawing.Size(56, 20)
-        Me.txtVal_Elem313Field013.TabIndex = 13
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(58, 218)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(89, 13)
-        Me.Label1.TabIndex = 43
-        Me.Label1.Text = "Relative Humidity"
-        '
-        'form_upperair1
+        'formUpperAir
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -801,7 +801,7 @@ Partial Class form_upperair1
         Me.Controls.Add(Me.grpData)
         Me.Controls.Add(Me.grpHeaders)
         Me.KeyPreview = True
-        Me.Name = "form_upperair1"
+        Me.Name = "formUpperAir"
         Me.Text = "Upper air Observations"
         Me.grpHeaders.ResumeLayout(False)
         Me.grpHeaders.PerformLayout()
