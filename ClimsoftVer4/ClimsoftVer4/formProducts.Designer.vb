@@ -38,9 +38,9 @@ Partial Class frmProducts
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cmbProductsCategory = New System.Windows.Forms.ComboBox()
+        Me.cboProductsCategory = New System.Windows.Forms.ComboBox()
         Me.lblProductsCategory = New System.Windows.Forms.Label()
-        Me.lstvProducts = New System.Windows.Forms.ListView()
+        Me.lstViewProducts = New System.Windows.Forms.ListView()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -153,23 +153,23 @@ Partial Class frmProducts
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.cmbProductsCategory)
+        Me.Panel1.Controls.Add(Me.cboProductsCategory)
         Me.Panel1.Controls.Add(Me.lblProductsCategory)
-        Me.Panel1.Controls.Add(Me.lstvProducts)
+        Me.Panel1.Controls.Add(Me.lstViewProducts)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 49)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(503, 380)
         Me.Panel1.TabIndex = 17
         '
-        'cmbProductsCategory
+        'cboProductsCategory
         '
-        Me.cmbProductsCategory.FormattingEnabled = True
-        Me.cmbProductsCategory.ItemHeight = 13
-        Me.cmbProductsCategory.Location = New System.Drawing.Point(21, 12)
-        Me.cmbProductsCategory.Name = "cmbProductsCategory"
-        Me.cmbProductsCategory.Size = New System.Drawing.Size(217, 21)
-        Me.cmbProductsCategory.TabIndex = 18
+        Me.cboProductsCategory.FormattingEnabled = True
+        Me.cboProductsCategory.ItemHeight = 13
+        Me.cboProductsCategory.Location = New System.Drawing.Point(21, 12)
+        Me.cboProductsCategory.Name = "cboProductsCategory"
+        Me.cboProductsCategory.Size = New System.Drawing.Size(217, 21)
+        Me.cboProductsCategory.TabIndex = 18
         '
         'lblProductsCategory
         '
@@ -181,22 +181,22 @@ Partial Class frmProducts
         Me.lblProductsCategory.TabIndex = 17
         Me.lblProductsCategory.Text = "Select Product category"
         '
-        'lstvProducts
+        'lstViewProducts
         '
-        Me.lstvProducts.AllowColumnReorder = True
-        Me.lstvProducts.AllowDrop = True
-        Me.lstvProducts.FullRowSelect = True
-        Me.lstvProducts.GridLines = True
-        Me.lstvProducts.HideSelection = False
-        Me.lstvProducts.HoverSelection = True
-        Me.lstvProducts.LabelEdit = True
-        Me.lstvProducts.Location = New System.Drawing.Point(21, 41)
-        Me.lstvProducts.Name = "lstvProducts"
-        Me.lstvProducts.RightToLeftLayout = True
-        Me.lstvProducts.Size = New System.Drawing.Size(461, 320)
-        Me.lstvProducts.TabIndex = 16
-        Me.lstvProducts.UseCompatibleStateImageBehavior = False
-        Me.lstvProducts.View = System.Windows.Forms.View.Details
+        Me.lstViewProducts.AllowColumnReorder = True
+        Me.lstViewProducts.AllowDrop = True
+        Me.lstViewProducts.FullRowSelect = True
+        Me.lstViewProducts.GridLines = True
+        Me.lstViewProducts.HideSelection = False
+        Me.lstViewProducts.HoverSelection = True
+        Me.lstViewProducts.LabelEdit = True
+        Me.lstViewProducts.Location = New System.Drawing.Point(21, 41)
+        Me.lstViewProducts.Name = "lstViewProducts"
+        Me.lstViewProducts.RightToLeftLayout = True
+        Me.lstViewProducts.Size = New System.Drawing.Size(461, 320)
+        Me.lstViewProducts.TabIndex = 16
+        Me.lstViewProducts.UseCompatibleStateImageBehavior = False
+        Me.lstViewProducts.View = System.Windows.Forms.View.Details
         '
         'frmProducts
         '
@@ -235,7 +235,7 @@ Partial Class frmProducts
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Public WithEvents lstvProducts As System.Windows.Forms.ListView
+    Public WithEvents lstViewProducts As System.Windows.Forms.ListView
     Friend WithEvents lblProductsCategory As System.Windows.Forms.Label
-    Friend WithEvents cmbProductsCategory As System.Windows.Forms.ComboBox
+    Friend WithEvents cboProductsCategory As System.Windows.Forms.ComboBox
 End Class

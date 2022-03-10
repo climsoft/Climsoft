@@ -29,8 +29,8 @@ Partial Class frmMonitoring
         Me.cmdView = New System.Windows.Forms.Button()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.DateTimeEnd = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimeStart = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
         Me.cboUser = New System.Windows.Forms.ComboBox()
         Me.optAll = New System.Windows.Forms.RadioButton()
         Me.optUsers = New System.Windows.Forms.RadioButton()
@@ -44,8 +44,8 @@ Partial Class frmMonitoring
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblTo1 = New System.Windows.Forms.Label()
         Me.lblFrom1 = New System.Windows.Forms.Label()
-        Me.dtTo = New System.Windows.Forms.DateTimePicker()
-        Me.dtFrom = New System.Windows.Forms.DateTimePicker()
+        Me.dtpTo = New System.Windows.Forms.DateTimePicker()
+        Me.dtpFrom = New System.Windows.Forms.DateTimePicker()
         Me.cboMonth = New System.Windows.Forms.ComboBox()
         Me.optRange = New System.Windows.Forms.RadioButton()
         Me.OptMonthly = New System.Windows.Forms.RadioButton()
@@ -79,8 +79,8 @@ Partial Class frmMonitoring
         Me.optTargets = New System.Windows.Forms.RadioButton()
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdretrieve1 = New System.Windows.Forms.Button()
-        Me.DataGridSettings = New System.Windows.Forms.DataGridView()
-        Me.ListViewRecs = New System.Windows.Forms.ListView()
+        Me.dataGridSettings = New System.Windows.Forms.DataGridView()
+        Me.listViewRecs = New System.Windows.Forms.ListView()
         Me.lblRecords = New System.Windows.Forms.Label()
         Me.lblTrecs = New System.Windows.Forms.Label()
         Me.cmdClose = New System.Windows.Forms.Button()
@@ -96,7 +96,7 @@ Partial Class frmMonitoring
         Me.GroupBox2.SuspendLayout()
         Me.TabSettings.SuspendLayout()
         Me.grpSettings.SuspendLayout()
-        CType(Me.DataGridSettings, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dataGridSettings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabMonitoring
@@ -128,8 +128,8 @@ Partial Class frmMonitoring
         Me.grpUsers.Controls.Add(Me.cmdView)
         Me.grpUsers.Controls.Add(Me.lblEndDate)
         Me.grpUsers.Controls.Add(Me.lblStartDate)
-        Me.grpUsers.Controls.Add(Me.DateTimeEnd)
-        Me.grpUsers.Controls.Add(Me.DateTimeStart)
+        Me.grpUsers.Controls.Add(Me.dtpEndDate)
+        Me.grpUsers.Controls.Add(Me.dtpStartDate)
         Me.grpUsers.Controls.Add(Me.cboUser)
         Me.grpUsers.Controls.Add(Me.optAll)
         Me.grpUsers.Controls.Add(Me.optUsers)
@@ -180,19 +180,19 @@ Partial Class frmMonitoring
         Me.lblStartDate.TabIndex = 6
         Me.lblStartDate.Text = "Start Date"
         '
-        'DateTimeEnd
+        'dtpEndDate
         '
-        Me.DateTimeEnd.Location = New System.Drawing.Point(434, 65)
-        Me.DateTimeEnd.Name = "DateTimeEnd"
-        Me.DateTimeEnd.Size = New System.Drawing.Size(155, 21)
-        Me.DateTimeEnd.TabIndex = 5
+        Me.dtpEndDate.Location = New System.Drawing.Point(434, 65)
+        Me.dtpEndDate.Name = "dtpEndDate"
+        Me.dtpEndDate.Size = New System.Drawing.Size(155, 21)
+        Me.dtpEndDate.TabIndex = 5
         '
-        'DateTimeStart
+        'dtpStartDate
         '
-        Me.DateTimeStart.Location = New System.Drawing.Point(434, 24)
-        Me.DateTimeStart.Name = "DateTimeStart"
-        Me.DateTimeStart.Size = New System.Drawing.Size(155, 21)
-        Me.DateTimeStart.TabIndex = 4
+        Me.dtpStartDate.Location = New System.Drawing.Point(434, 24)
+        Me.dtpStartDate.Name = "dtpStartDate"
+        Me.dtpStartDate.Size = New System.Drawing.Size(155, 21)
+        Me.dtpStartDate.TabIndex = 4
         '
         'cboUser
         '
@@ -244,8 +244,8 @@ Partial Class frmMonitoring
         Me.grpPerformance.Controls.Add(Me.lblMonth)
         Me.grpPerformance.Controls.Add(Me.lblTo1)
         Me.grpPerformance.Controls.Add(Me.lblFrom1)
-        Me.grpPerformance.Controls.Add(Me.dtTo)
-        Me.grpPerformance.Controls.Add(Me.dtFrom)
+        Me.grpPerformance.Controls.Add(Me.dtpTo)
+        Me.grpPerformance.Controls.Add(Me.dtpFrom)
         Me.grpPerformance.Controls.Add(Me.cboMonth)
         Me.grpPerformance.Controls.Add(Me.optRange)
         Me.grpPerformance.Controls.Add(Me.OptMonthly)
@@ -330,20 +330,20 @@ Partial Class frmMonitoring
         Me.lblFrom1.TabIndex = 13
         Me.lblFrom1.Text = "From"
         '
-        'dtTo
+        'dtpTo
         '
-        Me.dtTo.Location = New System.Drawing.Point(380, 77)
-        Me.dtTo.Name = "dtTo"
-        Me.dtTo.Size = New System.Drawing.Size(158, 21)
-        Me.dtTo.TabIndex = 12
+        Me.dtpTo.Location = New System.Drawing.Point(380, 77)
+        Me.dtpTo.Name = "dtpTo"
+        Me.dtpTo.Size = New System.Drawing.Size(158, 21)
+        Me.dtpTo.TabIndex = 12
         '
-        'dtFrom
+        'dtpFrom
         '
-        Me.dtFrom.Location = New System.Drawing.Point(168, 74)
-        Me.dtFrom.Name = "dtFrom"
-        Me.dtFrom.Size = New System.Drawing.Size(158, 21)
-        Me.dtFrom.TabIndex = 11
-        Me.dtFrom.Value = New Date(2018, 6, 21, 16, 47, 50, 0)
+        Me.dtpFrom.Location = New System.Drawing.Point(168, 74)
+        Me.dtpFrom.Name = "dtpFrom"
+        Me.dtpFrom.Size = New System.Drawing.Size(158, 21)
+        Me.dtpFrom.TabIndex = 11
+        Me.dtpFrom.Value = New Date(2018, 6, 21, 16, 47, 50, 0)
         '
         'cboMonth
         '
@@ -591,7 +591,7 @@ Partial Class frmMonitoring
         Me.grpSettings.Controls.Add(Me.optTargets)
         Me.grpSettings.Controls.Add(Me.cmdUpdate)
         Me.grpSettings.Controls.Add(Me.cmdretrieve1)
-        Me.grpSettings.Controls.Add(Me.DataGridSettings)
+        Me.grpSettings.Controls.Add(Me.dataGridSettings)
         Me.grpSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSettings.Location = New System.Drawing.Point(8, 3)
         Me.grpSettings.Name = "grpSettings"
@@ -690,25 +690,26 @@ Partial Class frmMonitoring
         Me.cmdretrieve1.Text = "View"
         Me.cmdretrieve1.UseVisualStyleBackColor = True
         '
-        'DataGridSettings
+        'dataGridSettings
         '
-        Me.DataGridSettings.AllowUserToOrderColumns = True
-        Me.DataGridSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridSettings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DataGridSettings.Location = New System.Drawing.Point(200, 11)
-        Me.DataGridSettings.Name = "DataGridSettings"
-        Me.DataGridSettings.Size = New System.Drawing.Size(448, 200)
-        Me.DataGridSettings.TabIndex = 0
+        Me.dataGridSettings.AllowUserToOrderColumns = True
+        Me.dataGridSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridSettings.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+        Me.dataGridSettings.Location = New System.Drawing.Point(200, 11)
+        Me.dataGridSettings.Name = "dataGridSettings"
+        Me.dataGridSettings.Size = New System.Drawing.Size(448, 200)
+        Me.dataGridSettings.TabIndex = 0
         '
-        'ListViewRecs
+        'listViewRecs
         '
-        Me.ListViewRecs.GridLines = True
-        Me.ListViewRecs.Location = New System.Drawing.Point(9, 286)
-        Me.ListViewRecs.Name = "ListViewRecs"
-        Me.ListViewRecs.Size = New System.Drawing.Size(670, 282)
-        Me.ListViewRecs.TabIndex = 10
-        Me.ListViewRecs.UseCompatibleStateImageBehavior = False
-        Me.ListViewRecs.View = System.Windows.Forms.View.Details
+        Me.listViewRecs.GridLines = True
+        Me.listViewRecs.HideSelection = False
+        Me.listViewRecs.Location = New System.Drawing.Point(9, 286)
+        Me.listViewRecs.Name = "listViewRecs"
+        Me.listViewRecs.Size = New System.Drawing.Size(670, 282)
+        Me.listViewRecs.TabIndex = 10
+        Me.listViewRecs.UseCompatibleStateImageBehavior = False
+        Me.listViewRecs.View = System.Windows.Forms.View.Details
         '
         'lblRecords
         '
@@ -756,7 +757,7 @@ Partial Class frmMonitoring
         Me.Controls.Add(Me.cmdClose)
         Me.Controls.Add(Me.lblTrecs)
         Me.Controls.Add(Me.lblRecords)
-        Me.Controls.Add(Me.ListViewRecs)
+        Me.Controls.Add(Me.listViewRecs)
         Me.Controls.Add(Me.TabMonitoring)
         Me.Name = "frmMonitoring"
         Me.Text = "Operations Monitoring"
@@ -776,7 +777,7 @@ Partial Class frmMonitoring
         Me.TabSettings.ResumeLayout(False)
         Me.grpSettings.ResumeLayout(False)
         Me.grpSettings.PerformLayout()
-        CType(Me.DataGridSettings, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dataGridSettings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -790,8 +791,8 @@ Partial Class frmMonitoring
     Friend WithEvents grpPerformance As System.Windows.Forms.GroupBox
     Friend WithEvents lblEndDate As System.Windows.Forms.Label
     Friend WithEvents lblStartDate As System.Windows.Forms.Label
-    Friend WithEvents DateTimeEnd As System.Windows.Forms.DateTimePicker
-    Friend WithEvents DateTimeStart As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpEndDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpStartDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents cboUser As System.Windows.Forms.ComboBox
     Friend WithEvents optAll As System.Windows.Forms.RadioButton
     Friend WithEvents optUsers As System.Windows.Forms.RadioButton
@@ -800,8 +801,8 @@ Partial Class frmMonitoring
     Friend WithEvents lblMonth As System.Windows.Forms.Label
     Friend WithEvents lblTo1 As System.Windows.Forms.Label
     Friend WithEvents lblFrom1 As System.Windows.Forms.Label
-    Friend WithEvents dtTo As System.Windows.Forms.DateTimePicker
-    Friend WithEvents dtFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents cboMonth As System.Windows.Forms.ComboBox
     Friend WithEvents optRange As System.Windows.Forms.RadioButton
     Friend WithEvents OptMonthly As System.Windows.Forms.RadioButton
@@ -810,14 +811,14 @@ Partial Class frmMonitoring
     Friend WithEvents cboForms As System.Windows.Forms.ComboBox
     Friend WithEvents TabSettings As System.Windows.Forms.TabPage
     Friend WithEvents grpSettings As System.Windows.Forms.GroupBox
-    Friend WithEvents ListViewRecs As System.Windows.Forms.ListView
+    Friend WithEvents listViewRecs As System.Windows.Forms.ListView
     Friend WithEvents lblRecords As System.Windows.Forms.Label
     Friend WithEvents lblTrecs As System.Windows.Forms.Label
     Friend WithEvents cmdRetrieve As System.Windows.Forms.Button
     Friend WithEvents DataGridPerform As System.Windows.Forms.DataGridView
     Friend WithEvents cmdSave1 As System.Windows.Forms.Button
     Friend WithEvents cmdretrieve1 As System.Windows.Forms.Button
-    Friend WithEvents DataGridSettings As System.Windows.Forms.DataGridView
+    Friend WithEvents dataGridSettings As System.Windows.Forms.DataGridView
     Friend WithEvents cmdUpdate As System.Windows.Forms.Button
     Friend WithEvents cmdSave As System.Windows.Forms.Button
     Friend WithEvents cmdExtarct As System.Windows.Forms.Button

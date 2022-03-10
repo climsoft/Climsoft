@@ -12,9 +12,12 @@
         sql = "select * from seq_element"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         da.Fill(ds, "seqElement")
-        Me.DataGridView1.DataSource = ds.Tables(0)
+        Me.dataGridView1.DataSource = ds.Tables(0)
         'Me.DataGridView1.
         Exit Sub
+
+        ClsTranslations.TranslateForm(Me)
+
 Err:
         MsgBox(Err.Description)
     End Sub
@@ -105,7 +108,7 @@ Err:
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            Me.DataGridView1.Rows.Remove(DataGridView1.SelectedRows(0))
+            Me.dataGridView1.Rows.Remove(dataGridView1.SelectedRows(0))
             Dim cb As New MySql.Data.MySqlClient.MySqlCommandBuilder(da)
 
             da.Update(ds, "seqElement")
@@ -120,7 +123,7 @@ Err:
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "hourlydata.htm")
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView1.CellContentClick
 
     End Sub
 End Class

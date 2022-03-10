@@ -514,7 +514,7 @@
 
 
         'With frmKeyEntry.ListView1
-        With frmKeyEntry.lstViewForms
+        With frmDataEntry.lstViewForms
             For i = 0 To .Items.Count - 1
                 If .Items(i).Selected = True Then
                     frm = .Items(i).SubItems(0).Text

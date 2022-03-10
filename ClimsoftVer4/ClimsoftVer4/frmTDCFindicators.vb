@@ -119,6 +119,8 @@
 
             dbconn.Close()
 
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As Exception
             MsgBox(ex.Message)
             dbconn.Close()

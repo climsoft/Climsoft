@@ -58,9 +58,13 @@ Public Class formDataView
     End Sub
 
     Private Sub populateDataGrid(strSQL As String)
-        da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, conn)
-        da.Fill(ds, "dataView")
-        Me.DataGridView.DataSource = ds.Tables(0)
+        Try
+            da = New MySql.Data.MySqlClient.MySqlDataAdapter(strSQL, conn)
+            da.Fill(ds, "dataView")
+            Me.DataGridView.DataSource = ds.Tables(0)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub cmdImport_Click(sender As Object, e As EventArgs) Handles cmdImport.Click
@@ -139,93 +143,115 @@ Public Class formDataView
         userName = frmLogin.txtUsername.Text
         Sql = ""
         'MsgBox(dsSourceTableName)
-        Select Case dsSourceTableName
-            Case "form_hourly"
-                Sql = "DELETE FROM form_hourly where stationId='" & id & "' AND elementId=" & cd &
+        Try
+            Select Case dsSourceTableName
+                Case "form_hourly"
+                    Sql = "DELETE FROM form_hourly where stationId='" & id & "' AND elementId=" & cd &
                     " AND yyyy=" & yr & " AND mm= " & mn & " AND dd=" & dy & ";"
-                '
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
-                Else
-                    Sql2 = "SELECT * FROM form_hourly ORDER by stationId,elementId,yyyy,mm,dd;"
-                End If
-                ' 
-            Case "form_daily2"
-                Sql = "DELETE FROM form_daily2 where stationId='" & id & "' AND elementId=" & cd &
-                    " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
-                '
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_daily2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
-                Else
-                    Sql2 = "SELECT * FROM form_daily2 ORDER by stationId,elementId,yyyy,mm,hh;"
-                End If
-                ' 
-            Case "form_hourlywind"
-                Sql = "DELETE FROM form_hourlywind where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
-                    mn & " AND dd=" & dy & ";"
-                '
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
-                Else
-                    Sql2 = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
-                End If
-                ' 
-            Case "form_synoptic_2_ra1"
-                Sql = "DELETE FROM form_synoptic_2_ra1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
-                'MsgBox(Sql)
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
-                Else
-                    Sql2 = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
-                End If
-                ' 
-            Case "form_monthly"
-                Sql = "DELETE FROM form_monthly where stationId='" & id & "' AND elementId=" & cd &
-                    " AND yyyy=" & yr & ";"
-                '
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
-                Else
-                    Sql2 = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
-                End If
-            Case "form_agro1"
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_hourly where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,dd;"
+                    Else
+                        Sql2 = "SELECT * FROM form_hourly ORDER by stationId,elementId,yyyy,mm,dd;"
+                    End If
 
-                Sql = "DELETE FROM form_agro1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
+                Case "form_daily1"
+                    Sql = "DELETE FROM form_daily1 where stationId = '" & id & "'" & " AND yyyy = " & yr & " AND mm = " & mn & " AND dd = " & dy & ";"
+
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_daily where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+                    Else
+                        Sql2 = "SELECT * FROM form_daily1 ORDER by stationId,yyyy,mm,dd;"
+                    End If
+                     ' 
+                Case "form_daily2"
+                    Sql = "DELETE FROM form_daily2 where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_daily2 where signature ='" & userName & "' ORDER by stationId,elementId,yyyy,mm,hh;"
+                    Else
+                        Sql2 = "SELECT * FROM form_daily2 ORDER by stationId,elementId,yyyy,mm,hh;"
+                    End If
+                ' 
+                Case "form_hourlywind"
+                    Sql = "DELETE FROM form_hourlywind where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
                     mn & " AND dd=" & dy & ";"
-                '
-                If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-                    Sql2 = "SELECT * FROM form_agro1 where signature ='" & userName & "' ORDER by stationId,yyy,mm,dd;"
-                Else
-                    Sql2 = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd;"
-                End If
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_hourlywind where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+                    Else
+                        Sql2 = "SELECT * FROM form_hourlywind ORDER by stationId,yyyy,mm,dd;"
+                    End If
+                ' 
+                Case "form_synoptic_2_ra1"
+                    Sql = "DELETE FROM form_synoptic_2_ra1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+                    'MsgBox(Sql)
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_synoptic_2_ra1 where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+                    Else
+                        Sql2 = "SELECT * FROM form_synoptic_2_ra1 ORDER by stationId,yyyy,mm,dd,hh;"
+                    End If
+
+                Case "form_synoptic2_tdcf"
+                    Sql = "DELETE FROM form_synoptic2_tdcf where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+                    'MsgBox(Sql)
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_synoptic2_tdcf where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
+                    Else
+                        Sql2 = "SELECT * FROM form_synoptic2_tdcf ORDER by stationId,yyyy,mm,dd,hh;"
+                    End If
+                    ' 
+                Case "form_monthly"
+                    Sql = "DELETE FROM form_monthly where stationId='" & id & "' AND elementId=" & cd &
+                    " AND yyyy=" & yr & ";"
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_monthly where signature ='" & userName & "' ORDER by stationId,elementId,yyy;"
+                    Else
+                        Sql2 = "SELECT * FROM form_monthly ORDER by stationId,elementId,yyyy;"
+                    End If
+                Case "form_agro1"
+
+                    Sql = "DELETE FROM form_agro1 where stationId='" & id & "' AND yyyy=" & yr & " AND mm= " &
+                    mn & " AND dd=" & dy & ";"
+                    '
+                    If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
+                        Sql2 = "SELECT * FROM form_agro1 where signature ='" & userName & "' ORDER by stationId,yyy,mm,dd;"
+                    Else
+                        Sql2 = "SELECT * FROM form_agro1 ORDER by stationId,yyyy,mm,dd;"
+                    End If
 
             'Update metadata tables
-            Case "station"
-                Sql = "DELETE FROM station where stationId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
-                Sql2 = "SELECT * FROM station ORDER by stationId;"
+                Case "station"
+                    Sql = "DELETE FROM station where stationId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
+                    Sql2 = "SELECT * FROM station ORDER by stationId;"
 
-            Case "obselement"
-                Sql = "DELETE FROM obselement where elementId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
-                Sql2 = "SELECT * FROM obselement ORDER by elementId;"
-        End Select
+                Case "obselement"
+                    Sql = "DELETE FROM obselement where elementId ='" & Me.DataGridView.CurrentRow.Cells(0).Value & "';"
+                    Sql2 = "SELECT * FROM obselement ORDER by elementId;"
+            End Select
 
-        If Strings.Len(Sql) > 0 Then
-            connStr = frmLogin.txtusrpwd.Text
-            conn.ConnectionString = connStr
-            'Open connection to database
-            conn.Open()
+            If Strings.Len(Sql) > 0 Then
+                connStr = frmLogin.txtusrpwd.Text
+                conn.ConnectionString = connStr
+                'Open connection to database
+                conn.Open()
 
-            'Execute SQL command
-            objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
-            objCmd.ExecuteNonQuery()
+                'Execute SQL command
+                objCmd = New MySql.Data.MySqlClient.MySqlCommand(Sql, conn)
+                objCmd.ExecuteNonQuery()
 
-            MsgBox("Selected record has been deleted!", MsgBoxStyle.Information)
+                MsgBox("Selected record has been deleted!", MsgBoxStyle.Information)
 
-            populateDataGrid(Sql2)
-            conn.Close()
-        Else
-            MsgBox("Deleting records not enabled for selected table datasheet!", MsgBoxStyle.Exclamation)
-        End If
+                populateDataGrid(Sql2)
+                conn.Close()
+            Else
+                MsgBox("Deleting records not enabled for selected table datasheet!", MsgBoxStyle.Exclamation)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
@@ -249,12 +275,20 @@ Public Class formDataView
                 Case "form_hourlywind"
                     Sql = "UPDATE form_hourlywind SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy='" & yr & "' AND mm= '" & mn & "' AND dd='" & dy & "';"
 
+                Case "form_daily1"
+                    Sql = "update form_daily1 set " & cellColName & " = '" & cellValue & "' where stationId = '" & id &
+                        "' and yyyy = '" & yr & "' and mm = '" & mn & "' and dd = '" & dy & "';"
+
                 Case "form_daily2"
                     Sql = "UPDATE form_daily2 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND elementId=" & cd &
                        " AND yyyy=" & yr & " AND mm= " & mn & " AND hh=" & hr & ";"
 
                 Case "form_synoptic_2_ra1"
                     Sql = "UPDATE form_synoptic_2_ra1 SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
+                        " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
+
+                Case "form_synoptic2_tdcf"
+                    Sql = "UPDATE form_synoptic2_tdcf SET " & cellColName & "='" & cellValue & "' WHERE stationId='" & id & "' AND yyyy=" & yr &
                         " AND mm= " & mn & " AND dd= " & dy & " AND hh=" & hr & ";"
 
                 Case "form_monthly"
@@ -448,8 +482,15 @@ Public Class formDataView
     End Sub
     Sub Get_RecordIdx(tbl As String)
         'MsgBox(tbl & " " & DataGridView.CurrentRow.Cells(0).Value)
+        'MsgBox(tbl)
         Try
             Select Case tbl
+
+                Case "form_daily1"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(3).Value
                 Case "form_daily2"
                     id = Me.DataGridView.CurrentRow.Cells(0).Value
                     cd = Me.DataGridView.CurrentRow.Cells(1).Value
@@ -468,6 +509,12 @@ Public Class formDataView
                     mn = Me.DataGridView.CurrentRow.Cells(2).Value
                     dy = Me.DataGridView.CurrentRow.Cells(3).Value
                 Case "form_synoptic_2_ra1"
+                    id = Me.DataGridView.CurrentRow.Cells(0).Value
+                    yr = Me.DataGridView.CurrentRow.Cells(1).Value
+                    mn = Me.DataGridView.CurrentRow.Cells(2).Value
+                    dy = Me.DataGridView.CurrentRow.Cells(3).Value
+                    hr = Me.DataGridView.CurrentRow.Cells(4).Value
+                Case "form_synoptic2_tdcf"
                     id = Me.DataGridView.CurrentRow.Cells(0).Value
                     yr = Me.DataGridView.CurrentRow.Cells(1).Value
                     mn = Me.DataGridView.CurrentRow.Cells(2).Value

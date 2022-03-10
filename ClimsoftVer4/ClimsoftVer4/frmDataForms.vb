@@ -41,6 +41,9 @@
                     itm.Checked = True
                 End If
             Next
+
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
         End Try

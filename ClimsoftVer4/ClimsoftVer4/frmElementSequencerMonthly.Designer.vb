@@ -28,8 +28,8 @@ Partial Class frmElementSequencerMonthly
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dataGridView1 = New System.Windows.Forms.DataGridView()
+        CType(Me.dataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblSequencerGuidelines
@@ -77,14 +77,14 @@ Partial Class frmElementSequencerMonthly
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'dataGridView1
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(67, 78)
-        Me.DataGridView1.MultiSelect = False
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(358, 215)
-        Me.DataGridView1.TabIndex = 11
+        Me.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridView1.Location = New System.Drawing.Point(67, 78)
+        Me.dataGridView1.MultiSelect = False
+        Me.dataGridView1.Name = "dataGridView1"
+        Me.dataGridView1.Size = New System.Drawing.Size(358, 215)
+        Me.dataGridView1.TabIndex = 11
         '
         'frmElementSequencerMonthly
         '
@@ -96,10 +96,10 @@ Partial Class frmElementSequencerMonthly
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dataGridView1)
         Me.Name = "frmElementSequencerMonthly"
         Me.Text = "Sequencer for Entering Monthly Data on FormMonthly"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -109,5 +109,5 @@ Partial Class frmElementSequencerMonthly
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dataGridView1 As DataGridView
 End Class

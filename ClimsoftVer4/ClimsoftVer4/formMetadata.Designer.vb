@@ -27,7 +27,7 @@ Partial Class formMetadata
         Me.TabStation = New System.Windows.Forms.TabPage()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpStation = New System.Windows.Forms.GroupBox()
-        Me.txtStationType = New System.Windows.Forms.ComboBox()
+        Me.cboStationType = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.grpComputationDD = New System.Windows.Forms.GroupBox()
         Me.lblEW = New System.Windows.Forms.Label()
@@ -52,9 +52,9 @@ Partial Class formMetadata
         Me.txtwmoid = New System.Windows.Forms.TextBox()
         Me.lblICAOid = New System.Windows.Forms.Label()
         Me.lblWMOid = New System.Windows.Forms.Label()
-        Me.txtstationId = New System.Windows.Forms.ComboBox()
+        Me.cboStationId = New System.Windows.Forms.ComboBox()
         Me.lblSearchStation = New System.Windows.Forms.Label()
-        Me.combSearchStation = New System.Windows.Forms.ComboBox()
+        Me.cboSearchStation = New System.Windows.Forms.ComboBox()
         Me.txtStationOperation = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdImport = New System.Windows.Forms.Button()
@@ -64,11 +64,11 @@ Partial Class formMetadata
         Me.cmdUpdate = New System.Windows.Forms.Button()
         Me.cmdAddNew = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnMovePrevious = New System.Windows.Forms.Button()
-        Me.btnMoveFirst = New System.Windows.Forms.Button()
-        Me.btnMoveLast = New System.Windows.Forms.Button()
+        Me.btnMovePreviousStation = New System.Windows.Forms.Button()
+        Me.btnMoveFirstStation = New System.Windows.Forms.Button()
+        Me.btnMoveLastStation = New System.Windows.Forms.Button()
         Me.txtRecNumber = New System.Windows.Forms.TextBox()
-        Me.btnMoveNext = New System.Windows.Forms.Button()
+        Me.btnMoveNextStation = New System.Windows.Forms.Button()
         Me.ClosingDate = New System.Windows.Forms.DateTimePicker()
         Me.OpenDate = New System.Windows.Forms.DateTimePicker()
         Me.txtgeoAccuracy = New System.Windows.Forms.TextBox()
@@ -101,9 +101,9 @@ Partial Class formMetadata
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkESelected = New System.Windows.Forms.CheckBox()
         Me.chkSelected = New System.Windows.Forms.Label()
-        Me.txtId = New System.Windows.Forms.ComboBox()
+        Me.cboElementId = New System.Windows.Forms.ComboBox()
         Me.lblSerachElement = New System.Windows.Forms.Label()
-        Me.combSearchElement = New System.Windows.Forms.ComboBox()
+        Me.cboSearchElement = New System.Windows.Forms.ComboBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.cmdClearElement = New System.Windows.Forms.Button()
         Me.cmdViewElements = New System.Windows.Forms.Button()
@@ -111,12 +111,12 @@ Partial Class formMetadata
         Me.cmdUpdateElement = New System.Windows.Forms.Button()
         Me.cmdAddElement = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrevoius = New System.Windows.Forms.Button()
-        Me.cmdFirstRecord = New System.Windows.Forms.Button()
-        Me.cmdLastRecord = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnMovePreviousElement = New System.Windows.Forms.Button()
+        Me.btnMoveFirstElement = New System.Windows.Forms.Button()
+        Me.btnMoveLastElement = New System.Windows.Forms.Button()
+        Me.btnMoveNextElement = New System.Windows.Forms.Button()
         Me.txtElementNavigator = New System.Windows.Forms.TextBox()
-        Me.txtType = New System.Windows.Forms.ComboBox()
+        Me.cboType = New System.Windows.Forms.ComboBox()
         Me.txtUnit = New System.Windows.Forms.TextBox()
         Me.txtLowerLimit = New System.Windows.Forms.TextBox()
         Me.txtUpperLimit = New System.Windows.Forms.TextBox()
@@ -139,7 +139,7 @@ Partial Class formMetadata
         Me.lblInstrumentCode = New System.Windows.Forms.Label()
         Me.txtInstrumentCode = New System.Windows.Forms.TextBox()
         Me.lblInstumentType = New System.Windows.Forms.Label()
-        Me.txtScheduleClass = New System.Windows.Forms.ComboBox()
+        Me.cboScheduleClass = New System.Windows.Forms.ComboBox()
         Me.txtEndate = New System.Windows.Forms.TextBox()
         Me.txtBeginDate = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
@@ -149,14 +149,14 @@ Partial Class formMetadata
         Me.cmdUpdateStElement = New System.Windows.Forms.Button()
         Me.cmdAddStElement = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrev1 = New System.Windows.Forms.Button()
-        Me.cmdfiratRec1 = New System.Windows.Forms.Button()
-        Me.cmdLast1 = New System.Windows.Forms.Button()
-        Me.cmdNext1 = New System.Windows.Forms.Button()
+        Me.btnMovePrevStationElement = New System.Windows.Forms.Button()
+        Me.btnMoveFirstStationElement = New System.Windows.Forms.Button()
+        Me.btnMoveLastStationElement = New System.Windows.Forms.Button()
+        Me.btnMoveNextStationElement = New System.Windows.Forms.Button()
         Me.txtNavigator1 = New System.Windows.Forms.TextBox()
-        Me.txtInstrument = New System.Windows.Forms.ComboBox()
+        Me.cboInstrument = New System.Windows.Forms.ComboBox()
         Me.txtElement = New System.Windows.Forms.ComboBox()
-        Me.txtStation = New System.Windows.Forms.ComboBox()
+        Me.cboStation = New System.Windows.Forms.ComboBox()
         Me.Endate = New System.Windows.Forms.DateTimePicker()
         Me.BeginDate = New System.Windows.Forms.DateTimePicker()
         Me.txtHeight = New System.Windows.Forms.TextBox()
@@ -173,7 +173,7 @@ Partial Class formMetadata
         Me.cmdInstrument = New System.Windows.Forms.Button()
         Me.txtInstrumentPicFile = New System.Windows.Forms.TextBox()
         Me.lblimgFile = New System.Windows.Forms.Label()
-        Me.txtInstrStn = New System.Windows.Forms.ComboBox()
+        Me.cboInstrStn = New System.Windows.Forms.ComboBox()
         Me.lbStationID = New System.Windows.Forms.Label()
         Me.txtDeinstallDate = New System.Windows.Forms.TextBox()
         Me.txtInstallDate = New System.Windows.Forms.TextBox()
@@ -184,13 +184,13 @@ Partial Class formMetadata
         Me.cmdUpdateInstrument = New System.Windows.Forms.Button()
         Me.cmdAddInstrument = New System.Windows.Forms.Button()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrev2 = New System.Windows.Forms.Button()
-        Me.cmdFirst1 = New System.Windows.Forms.Button()
-        Me.cmdLast2 = New System.Windows.Forms.Button()
-        Me.cmdNext2 = New System.Windows.Forms.Button()
+        Me.btnMovePrevInstrument = New System.Windows.Forms.Button()
+        Me.btnMoveFirstInstrument = New System.Windows.Forms.Button()
+        Me.btnMoveLastInstrument = New System.Windows.Forms.Button()
+        Me.btnMoveNextInstrument = New System.Windows.Forms.Button()
         Me.txtNavigator2 = New System.Windows.Forms.TextBox()
         Me.lblInstrumentPic = New System.Windows.Forms.Label()
-        Me.picInstrument = New System.Windows.Forms.PictureBox()
+        Me.pictureBoxInstrument = New System.Windows.Forms.PictureBox()
         Me.txthgt = New System.Windows.Forms.TextBox()
         Me.DeinstallDate = New System.Windows.Forms.DateTimePicker()
         Me.InstallDate = New System.Windows.Forms.DateTimePicker()
@@ -209,7 +209,7 @@ Partial Class formMetadata
         Me.lblInstAbbrev = New System.Windows.Forms.Label()
         Me.lblUncertainity = New System.Windows.Forms.Label()
         Me.lblManufacturer = New System.Windows.Forms.Label()
-        Me.txtInstrumentName = New System.Windows.Forms.Label()
+        Me.lblInstrumentName = New System.Windows.Forms.Label()
         Me.lblInstId = New System.Windows.Forms.Label()
         Me.lblInstruments = New System.Windows.Forms.Label()
         Me.TabStationLocationHistory = New System.Windows.Forms.TabPage()
@@ -223,10 +223,10 @@ Partial Class formMetadata
         Me.cmdAddHistory = New System.Windows.Forms.Button()
         Me.cmdClearHistory = New System.Windows.Forms.Button()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.cmdprev3 = New System.Windows.Forms.Button()
-        Me.cmdfirst3 = New System.Windows.Forms.Button()
-        Me.cmdLast3 = New System.Windows.Forms.Button()
-        Me.cmdNext3 = New System.Windows.Forms.Button()
+        Me.btnMovePrevLocation = New System.Windows.Forms.Button()
+        Me.btnMoveFirstLocation = New System.Windows.Forms.Button()
+        Me.btnMoveLastLocation = New System.Windows.Forms.Button()
+        Me.btnMoveNextLocation = New System.Windows.Forms.Button()
         Me.txtNav2 = New System.Windows.Forms.TextBox()
         Me.txtDrgBasin = New System.Windows.Forms.TextBox()
         Me.txtdClosDate = New System.Windows.Forms.DateTimePicker()
@@ -234,7 +234,7 @@ Partial Class formMetadata
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtlocStn = New System.Windows.Forms.ComboBox()
+        Me.cboStn = New System.Windows.Forms.ComboBox()
         Me.txtElev = New System.Windows.Forms.TextBox()
         Me.txtLon = New System.Windows.Forms.TextBox()
         Me.txtLat = New System.Windows.Forms.TextBox()
@@ -265,14 +265,14 @@ Partial Class formMetadata
         Me.cmdAddQualier = New System.Windows.Forms.Button()
         Me.cmdClearQualifier = New System.Windows.Forms.Button()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrev4 = New System.Windows.Forms.Button()
-        Me.cmdFirst4 = New System.Windows.Forms.Button()
-        Me.cmdLast4 = New System.Windows.Forms.Button()
-        Me.cmdNext4 = New System.Windows.Forms.Button()
+        Me.btnMovePrevQualifier = New System.Windows.Forms.Button()
+        Me.btnMoveFirstQualifier = New System.Windows.Forms.Button()
+        Me.btnMoveLastQualifier = New System.Windows.Forms.Button()
+        Me.btnMoveNextQualifier = New System.Windows.Forms.Button()
         Me.txtNav4 = New System.Windows.Forms.TextBox()
         Me.txtdEndDate = New System.Windows.Forms.DateTimePicker()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.txtQualifierStation = New System.Windows.Forms.ComboBox()
+        Me.cboQualifierStation = New System.Windows.Forms.ComboBox()
         Me.txtdBDate = New System.Windows.Forms.DateTimePicker()
         Me.txtNetwork = New System.Windows.Forms.TextBox()
         Me.txtTZone = New System.Windows.Forms.TextBox()
@@ -292,13 +292,13 @@ Partial Class formMetadata
         Me.cmdAddScheduleClass = New System.Windows.Forms.Button()
         Me.cmdClearClass = New System.Windows.Forms.Button()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrev5 = New System.Windows.Forms.Button()
-        Me.cmdFirst5 = New System.Windows.Forms.Button()
-        Me.cmdLast5 = New System.Windows.Forms.Button()
-        Me.cmdNext5 = New System.Windows.Forms.Button()
+        Me.btnMovePrevClass = New System.Windows.Forms.Button()
+        Me.btnMoveFirstClass = New System.Windows.Forms.Button()
+        Me.btnMoveLastClass = New System.Windows.Forms.Button()
+        Me.btnMoveNextClass = New System.Windows.Forms.Button()
         Me.txtNav5 = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
-        Me.txtClassStation = New System.Windows.Forms.ComboBox()
+        Me.cboClassStation = New System.Windows.Forms.ComboBox()
         Me.txtClassDescription = New System.Windows.Forms.TextBox()
         Me.txtClass = New System.Windows.Forms.TextBox()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -321,15 +321,15 @@ Partial Class formMetadata
         Me.cmdAddFeature = New System.Windows.Forms.Button()
         Me.cmdClearFeature = New System.Windows.Forms.Button()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-        Me.cmdPrev6 = New System.Windows.Forms.Button()
-        Me.cmdFirst6 = New System.Windows.Forms.Button()
-        Me.cmdLast6 = New System.Windows.Forms.Button()
-        Me.cmdNext6 = New System.Windows.Forms.Button()
+        Me.btnMovePrevFeature = New System.Windows.Forms.Button()
+        Me.btnMoveFirstFeature = New System.Windows.Forms.Button()
+        Me.btnMoveLastFeature = New System.Windows.Forms.Button()
+        Me.btnMoveNextFeature = New System.Windows.Forms.Button()
         Me.txtNav6 = New System.Windows.Forms.TextBox()
-        Me.txtfeaturepic = New System.Windows.Forms.PictureBox()
+        Me.pictureBoxFeaturepic = New System.Windows.Forms.PictureBox()
         Me.txtFeaturedEdate = New System.Windows.Forms.DateTimePicker()
         Me.lblStnId = New System.Windows.Forms.Label()
-        Me.txtFeatureStation = New System.Windows.Forms.ComboBox()
+        Me.cboFeatureStation = New System.Windows.Forms.ComboBox()
         Me.txtFeaturedBdate = New System.Windows.Forms.DateTimePicker()
         Me.txtFeatureDescription = New System.Windows.Forms.TextBox()
         Me.txtFeatureClass = New System.Windows.Forms.TextBox()
@@ -347,11 +347,11 @@ Partial Class formMetadata
         Me.cmdUpdateArchiveDef = New System.Windows.Forms.Button()
         Me.cmdAddArchiveDef = New System.Windows.Forms.Button()
         Me.GroupBox19 = New System.Windows.Forms.GroupBox()
-        Me.nav8Left = New System.Windows.Forms.Button()
-        Me.nav8First = New System.Windows.Forms.Button()
-        Me.nav8Last = New System.Windows.Forms.Button()
-        Me.nav8Right = New System.Windows.Forms.Button()
-        Me.PaperArchiveNavigation = New System.Windows.Forms.TextBox()
+        Me.btnMovePrevArchive = New System.Windows.Forms.Button()
+        Me.btnMoveFirstArchive = New System.Windows.Forms.Button()
+        Me.btnMoveLastArchive = New System.Windows.Forms.Button()
+        Me.btnMoveNextArchive = New System.Windows.Forms.Button()
+        Me.txtRecordNumArchive = New System.Windows.Forms.TextBox()
         Me.txtFormDescription = New System.Windows.Forms.TextBox()
         Me.txtFormId = New System.Windows.Forms.TextBox()
         Me.lbldescri = New System.Windows.Forms.Label()
@@ -378,7 +378,7 @@ Partial Class formMetadata
         Me.grpInstrument.SuspendLayout()
         Me.grpCommand2.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictureBoxInstrument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabStationLocationHistory.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -395,7 +395,7 @@ Partial Class formMetadata
         Me.grpPhysicalFeature.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
-        CType(Me.txtfeaturepic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pictureBoxFeaturepic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPaperArchive.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -445,7 +445,7 @@ Partial Class formMetadata
         '
         'grpStation
         '
-        Me.grpStation.Controls.Add(Me.txtStationType)
+        Me.grpStation.Controls.Add(Me.cboStationType)
         Me.grpStation.Controls.Add(Me.Label24)
         Me.grpStation.Controls.Add(Me.grpComputationDD)
         Me.grpStation.Controls.Add(Me.txtClosingDate)
@@ -454,9 +454,9 @@ Partial Class formMetadata
         Me.grpStation.Controls.Add(Me.txtwmoid)
         Me.grpStation.Controls.Add(Me.lblICAOid)
         Me.grpStation.Controls.Add(Me.lblWMOid)
-        Me.grpStation.Controls.Add(Me.txtstationId)
+        Me.grpStation.Controls.Add(Me.cboStationId)
         Me.grpStation.Controls.Add(Me.lblSearchStation)
-        Me.grpStation.Controls.Add(Me.combSearchStation)
+        Me.grpStation.Controls.Add(Me.cboSearchStation)
         Me.grpStation.Controls.Add(Me.txtStationOperation)
         Me.grpStation.Controls.Add(Me.Panel2)
         Me.grpStation.Controls.Add(Me.Panel1)
@@ -493,14 +493,14 @@ Partial Class formMetadata
         Me.grpStation.TabStop = False
         Me.grpStation.Text = "Station Details"
         '
-        'txtStationType
+        'cboStationType
         '
-        Me.txtStationType.FormattingEnabled = True
-        Me.txtStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
-        Me.txtStationType.Location = New System.Drawing.Point(518, 171)
-        Me.txtStationType.Name = "txtStationType"
-        Me.txtStationType.Size = New System.Drawing.Size(180, 21)
-        Me.txtStationType.TabIndex = 11
+        Me.cboStationType.FormattingEnabled = True
+        Me.cboStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
+        Me.cboStationType.Location = New System.Drawing.Point(518, 171)
+        Me.cboStationType.Name = "cboStationType"
+        Me.cboStationType.Size = New System.Drawing.Size(180, 21)
+        Me.cboStationType.TabIndex = 11
         '
         'Label24
         '
@@ -715,13 +715,13 @@ Partial Class formMetadata
         Me.lblWMOid.TabIndex = 54
         Me.lblWMOid.Text = "WMO Id"
         '
-        'txtstationId
+        'cboStationId
         '
-        Me.txtstationId.FormattingEnabled = True
-        Me.txtstationId.Location = New System.Drawing.Point(116, 19)
-        Me.txtstationId.Name = "txtstationId"
-        Me.txtstationId.Size = New System.Drawing.Size(139, 21)
-        Me.txtstationId.TabIndex = 0
+        Me.cboStationId.FormattingEnabled = True
+        Me.cboStationId.Location = New System.Drawing.Point(116, 19)
+        Me.cboStationId.Name = "cboStationId"
+        Me.cboStationId.Size = New System.Drawing.Size(139, 21)
+        Me.cboStationId.TabIndex = 0
         '
         'lblSearchStation
         '
@@ -732,13 +732,13 @@ Partial Class formMetadata
         Me.lblSearchStation.TabIndex = 39
         Me.lblSearchStation.Text = "Search Station Name"
         '
-        'combSearchStation
+        'cboSearchStation
         '
-        Me.combSearchStation.FormattingEnabled = True
-        Me.combSearchStation.Location = New System.Drawing.Point(471, 12)
-        Me.combSearchStation.Name = "combSearchStation"
-        Me.combSearchStation.Size = New System.Drawing.Size(228, 21)
-        Me.combSearchStation.TabIndex = 38
+        Me.cboSearchStation.FormattingEnabled = True
+        Me.cboSearchStation.Location = New System.Drawing.Point(471, 12)
+        Me.cboSearchStation.Name = "cboSearchStation"
+        Me.cboSearchStation.Size = New System.Drawing.Size(228, 21)
+        Me.cboSearchStation.TabIndex = 38
         '
         'txtStationOperation
         '
@@ -824,49 +824,49 @@ Partial Class formMetadata
         '
         Me.Panel1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.btnMovePrevious)
-        Me.Panel1.Controls.Add(Me.btnMoveFirst)
-        Me.Panel1.Controls.Add(Me.btnMoveLast)
+        Me.Panel1.Controls.Add(Me.btnMovePreviousStation)
+        Me.Panel1.Controls.Add(Me.btnMoveFirstStation)
+        Me.Panel1.Controls.Add(Me.btnMoveLastStation)
         Me.Panel1.Controls.Add(Me.txtRecNumber)
-        Me.Panel1.Controls.Add(Me.btnMoveNext)
+        Me.Panel1.Controls.Add(Me.btnMoveNextStation)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(3, 366)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(721, 23)
         Me.Panel1.TabIndex = 51
         '
-        'btnMovePrevious
+        'btnMovePreviousStation
         '
-        Me.btnMovePrevious.BackgroundImage = CType(resources.GetObject("btnMovePrevious.BackgroundImage"), System.Drawing.Image)
-        Me.btnMovePrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMovePrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMovePrevious.Location = New System.Drawing.Point(38, -1)
-        Me.btnMovePrevious.Name = "btnMovePrevious"
-        Me.btnMovePrevious.Size = New System.Drawing.Size(41, 23)
-        Me.btnMovePrevious.TabIndex = 43
-        Me.btnMovePrevious.UseVisualStyleBackColor = True
+        Me.btnMovePreviousStation.BackgroundImage = CType(resources.GetObject("btnMovePreviousStation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePreviousStation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePreviousStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePreviousStation.Location = New System.Drawing.Point(38, -1)
+        Me.btnMovePreviousStation.Name = "btnMovePreviousStation"
+        Me.btnMovePreviousStation.Size = New System.Drawing.Size(41, 23)
+        Me.btnMovePreviousStation.TabIndex = 43
+        Me.btnMovePreviousStation.UseVisualStyleBackColor = True
         '
-        'btnMoveFirst
+        'btnMoveFirstStation
         '
-        Me.btnMoveFirst.BackgroundImage = CType(resources.GetObject("btnMoveFirst.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveFirst.Location = New System.Drawing.Point(-1, -1)
-        Me.btnMoveFirst.Name = "btnMoveFirst"
-        Me.btnMoveFirst.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveFirst.TabIndex = 42
-        Me.btnMoveFirst.UseVisualStyleBackColor = True
+        Me.btnMoveFirstStation.BackgroundImage = CType(resources.GetObject("btnMoveFirstStation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstStation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstStation.Location = New System.Drawing.Point(-1, -1)
+        Me.btnMoveFirstStation.Name = "btnMoveFirstStation"
+        Me.btnMoveFirstStation.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveFirstStation.TabIndex = 42
+        Me.btnMoveFirstStation.UseVisualStyleBackColor = True
         '
-        'btnMoveLast
+        'btnMoveLastStation
         '
-        Me.btnMoveLast.BackgroundImage = CType(resources.GetObject("btnMoveLast.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveLast.Location = New System.Drawing.Point(655, -1)
-        Me.btnMoveLast.Name = "btnMoveLast"
-        Me.btnMoveLast.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveLast.TabIndex = 41
-        Me.btnMoveLast.UseVisualStyleBackColor = True
+        Me.btnMoveLastStation.BackgroundImage = CType(resources.GetObject("btnMoveLastStation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastStation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastStation.Location = New System.Drawing.Point(655, -1)
+        Me.btnMoveLastStation.Name = "btnMoveLastStation"
+        Me.btnMoveLastStation.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveLastStation.TabIndex = 41
+        Me.btnMoveLastStation.UseVisualStyleBackColor = True
         '
         'txtRecNumber
         '
@@ -876,16 +876,16 @@ Partial Class formMetadata
         Me.txtRecNumber.TabIndex = 40
         Me.txtRecNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'btnMoveNext
+        'btnMoveNextStation
         '
-        Me.btnMoveNext.BackgroundImage = CType(resources.GetObject("btnMoveNext.BackgroundImage"), System.Drawing.Image)
-        Me.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMoveNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMoveNext.Location = New System.Drawing.Point(620, -1)
-        Me.btnMoveNext.Name = "btnMoveNext"
-        Me.btnMoveNext.Size = New System.Drawing.Size(41, 23)
-        Me.btnMoveNext.TabIndex = 39
-        Me.btnMoveNext.UseVisualStyleBackColor = True
+        Me.btnMoveNextStation.BackgroundImage = CType(resources.GetObject("btnMoveNextStation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextStation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextStation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextStation.Location = New System.Drawing.Point(620, -1)
+        Me.btnMoveNextStation.Name = "btnMoveNextStation"
+        Me.btnMoveNextStation.Size = New System.Drawing.Size(41, 23)
+        Me.btnMoveNextStation.TabIndex = 39
+        Me.btnMoveNextStation.UseVisualStyleBackColor = True
         '
         'ClosingDate
         '
@@ -1117,12 +1117,12 @@ Partial Class formMetadata
         Me.grpObservationElement.Controls.Add(Me.Label1)
         Me.grpObservationElement.Controls.Add(Me.chkESelected)
         Me.grpObservationElement.Controls.Add(Me.chkSelected)
-        Me.grpObservationElement.Controls.Add(Me.txtId)
+        Me.grpObservationElement.Controls.Add(Me.cboElementId)
         Me.grpObservationElement.Controls.Add(Me.lblSerachElement)
-        Me.grpObservationElement.Controls.Add(Me.combSearchElement)
+        Me.grpObservationElement.Controls.Add(Me.cboSearchElement)
         Me.grpObservationElement.Controls.Add(Me.GroupBox5)
         Me.grpObservationElement.Controls.Add(Me.GroupBox2)
-        Me.grpObservationElement.Controls.Add(Me.txtType)
+        Me.grpObservationElement.Controls.Add(Me.cboType)
         Me.grpObservationElement.Controls.Add(Me.txtUnit)
         Me.grpObservationElement.Controls.Add(Me.txtLowerLimit)
         Me.grpObservationElement.Controls.Add(Me.txtUpperLimit)
@@ -1183,13 +1183,13 @@ Partial Class formMetadata
         Me.chkSelected.TabIndex = 52
         Me.chkSelected.Text = "Selected"
         '
-        'txtId
+        'cboElementId
         '
-        Me.txtId.FormattingEnabled = True
-        Me.txtId.Location = New System.Drawing.Point(152, 48)
-        Me.txtId.Name = "txtId"
-        Me.txtId.Size = New System.Drawing.Size(124, 21)
-        Me.txtId.TabIndex = 0
+        Me.cboElementId.FormattingEnabled = True
+        Me.cboElementId.Location = New System.Drawing.Point(152, 48)
+        Me.cboElementId.Name = "cboElementId"
+        Me.cboElementId.Size = New System.Drawing.Size(124, 21)
+        Me.cboElementId.TabIndex = 0
         '
         'lblSerachElement
         '
@@ -1200,13 +1200,13 @@ Partial Class formMetadata
         Me.lblSerachElement.TabIndex = 41
         Me.lblSerachElement.Text = "Search Element"
         '
-        'combSearchElement
+        'cboSearchElement
         '
-        Me.combSearchElement.FormattingEnabled = True
-        Me.combSearchElement.Location = New System.Drawing.Point(380, 13)
-        Me.combSearchElement.Name = "combSearchElement"
-        Me.combSearchElement.Size = New System.Drawing.Size(202, 21)
-        Me.combSearchElement.TabIndex = 40
+        Me.cboSearchElement.FormattingEnabled = True
+        Me.cboSearchElement.Location = New System.Drawing.Point(380, 13)
+        Me.cboSearchElement.Name = "cboSearchElement"
+        Me.cboSearchElement.Size = New System.Drawing.Size(202, 21)
+        Me.cboSearchElement.TabIndex = 40
         '
         'GroupBox5
         '
@@ -1269,10 +1269,10 @@ Partial Class formMetadata
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.cmdPrevoius)
-        Me.GroupBox2.Controls.Add(Me.cmdFirstRecord)
-        Me.GroupBox2.Controls.Add(Me.cmdLastRecord)
-        Me.GroupBox2.Controls.Add(Me.Button4)
+        Me.GroupBox2.Controls.Add(Me.btnMovePreviousElement)
+        Me.GroupBox2.Controls.Add(Me.btnMoveFirstElement)
+        Me.GroupBox2.Controls.Add(Me.btnMoveLastElement)
+        Me.GroupBox2.Controls.Add(Me.btnMoveNextElement)
         Me.GroupBox2.Controls.Add(Me.txtElementNavigator)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox2.Location = New System.Drawing.Point(3, 378)
@@ -1281,49 +1281,49 @@ Partial Class formMetadata
         Me.GroupBox2.TabIndex = 33
         Me.GroupBox2.TabStop = False
         '
-        'cmdPrevoius
+        'btnMovePreviousElement
         '
-        Me.cmdPrevoius.BackgroundImage = CType(resources.GetObject("cmdPrevoius.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrevoius.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrevoius.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrevoius.Location = New System.Drawing.Point(39, 19)
-        Me.cmdPrevoius.Name = "cmdPrevoius"
-        Me.cmdPrevoius.Size = New System.Drawing.Size(40, 26)
-        Me.cmdPrevoius.TabIndex = 50
-        Me.cmdPrevoius.UseVisualStyleBackColor = True
+        Me.btnMovePreviousElement.BackgroundImage = CType(resources.GetObject("btnMovePreviousElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePreviousElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePreviousElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePreviousElement.Location = New System.Drawing.Point(39, 19)
+        Me.btnMovePreviousElement.Name = "btnMovePreviousElement"
+        Me.btnMovePreviousElement.Size = New System.Drawing.Size(40, 26)
+        Me.btnMovePreviousElement.TabIndex = 50
+        Me.btnMovePreviousElement.UseVisualStyleBackColor = True
         '
-        'cmdFirstRecord
+        'btnMoveFirstElement
         '
-        Me.cmdFirstRecord.BackgroundImage = CType(resources.GetObject("cmdFirstRecord.BackgroundImage"), System.Drawing.Image)
-        Me.cmdFirstRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFirstRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirstRecord.Location = New System.Drawing.Point(0, 19)
-        Me.cmdFirstRecord.Name = "cmdFirstRecord"
-        Me.cmdFirstRecord.Size = New System.Drawing.Size(40, 26)
-        Me.cmdFirstRecord.TabIndex = 49
-        Me.cmdFirstRecord.UseVisualStyleBackColor = True
+        Me.btnMoveFirstElement.BackgroundImage = CType(resources.GetObject("btnMoveFirstElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstElement.Location = New System.Drawing.Point(0, 19)
+        Me.btnMoveFirstElement.Name = "btnMoveFirstElement"
+        Me.btnMoveFirstElement.Size = New System.Drawing.Size(40, 26)
+        Me.btnMoveFirstElement.TabIndex = 49
+        Me.btnMoveFirstElement.UseVisualStyleBackColor = True
         '
-        'cmdLastRecord
+        'btnMoveLastElement
         '
-        Me.cmdLastRecord.BackgroundImage = CType(resources.GetObject("cmdLastRecord.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLastRecord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLastRecord.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLastRecord.Location = New System.Drawing.Point(542, 19)
-        Me.cmdLastRecord.Name = "cmdLastRecord"
-        Me.cmdLastRecord.Size = New System.Drawing.Size(40, 26)
-        Me.cmdLastRecord.TabIndex = 48
-        Me.cmdLastRecord.UseVisualStyleBackColor = True
+        Me.btnMoveLastElement.BackgroundImage = CType(resources.GetObject("btnMoveLastElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastElement.Location = New System.Drawing.Point(542, 19)
+        Me.btnMoveLastElement.Name = "btnMoveLastElement"
+        Me.btnMoveLastElement.Size = New System.Drawing.Size(40, 26)
+        Me.btnMoveLastElement.TabIndex = 48
+        Me.btnMoveLastElement.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnMoveNextElement
         '
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(505, 19)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(40, 26)
-        Me.Button4.TabIndex = 47
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnMoveNextElement.BackgroundImage = CType(resources.GetObject("btnMoveNextElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextElement.Location = New System.Drawing.Point(505, 19)
+        Me.btnMoveNextElement.Name = "btnMoveNextElement"
+        Me.btnMoveNextElement.Size = New System.Drawing.Size(40, 26)
+        Me.btnMoveNextElement.TabIndex = 47
+        Me.btnMoveNextElement.UseVisualStyleBackColor = True
         '
         'txtElementNavigator
         '
@@ -1333,14 +1333,14 @@ Partial Class formMetadata
         Me.txtElementNavigator.TabIndex = 46
         Me.txtElementNavigator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtType
+        'cboType
         '
-        Me.txtType.FormattingEnabled = True
-        Me.txtType.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtType.Location = New System.Drawing.Point(153, 265)
-        Me.txtType.Name = "txtType"
-        Me.txtType.Size = New System.Drawing.Size(121, 21)
-        Me.txtType.TabIndex = 8
+        Me.cboType.FormattingEnabled = True
+        Me.cboType.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
+        Me.cboType.Location = New System.Drawing.Point(153, 265)
+        Me.cboType.Name = "cboType"
+        Me.cboType.Size = New System.Drawing.Size(121, 21)
+        Me.cboType.TabIndex = 8
         '
         'txtUnit
         '
@@ -1499,14 +1499,14 @@ Partial Class formMetadata
         Me.grpStationElement.Controls.Add(Me.lblInstrumentCode)
         Me.grpStationElement.Controls.Add(Me.txtInstrumentCode)
         Me.grpStationElement.Controls.Add(Me.lblInstumentType)
-        Me.grpStationElement.Controls.Add(Me.txtScheduleClass)
+        Me.grpStationElement.Controls.Add(Me.cboScheduleClass)
         Me.grpStationElement.Controls.Add(Me.txtEndate)
         Me.grpStationElement.Controls.Add(Me.txtBeginDate)
         Me.grpStationElement.Controls.Add(Me.GroupBox7)
         Me.grpStationElement.Controls.Add(Me.GroupBox6)
-        Me.grpStationElement.Controls.Add(Me.txtInstrument)
+        Me.grpStationElement.Controls.Add(Me.cboInstrument)
         Me.grpStationElement.Controls.Add(Me.txtElement)
-        Me.grpStationElement.Controls.Add(Me.txtStation)
+        Me.grpStationElement.Controls.Add(Me.cboStation)
         Me.grpStationElement.Controls.Add(Me.Endate)
         Me.grpStationElement.Controls.Add(Me.BeginDate)
         Me.grpStationElement.Controls.Add(Me.txtHeight)
@@ -1549,13 +1549,13 @@ Partial Class formMetadata
         Me.lblInstumentType.TabIndex = 42
         Me.lblInstumentType.Text = "Instrument Type"
         '
-        'txtScheduleClass
+        'cboScheduleClass
         '
-        Me.txtScheduleClass.FormattingEnabled = True
-        Me.txtScheduleClass.Location = New System.Drawing.Point(229, 165)
-        Me.txtScheduleClass.Name = "txtScheduleClass"
-        Me.txtScheduleClass.Size = New System.Drawing.Size(157, 21)
-        Me.txtScheduleClass.TabIndex = 40
+        Me.cboScheduleClass.FormattingEnabled = True
+        Me.cboScheduleClass.Location = New System.Drawing.Point(229, 165)
+        Me.cboScheduleClass.Name = "cboScheduleClass"
+        Me.cboScheduleClass.Size = New System.Drawing.Size(157, 21)
+        Me.cboScheduleClass.TabIndex = 40
         '
         'txtEndate
         '
@@ -1632,10 +1632,10 @@ Partial Class formMetadata
         '
         'GroupBox6
         '
-        Me.GroupBox6.Controls.Add(Me.cmdPrev1)
-        Me.GroupBox6.Controls.Add(Me.cmdfiratRec1)
-        Me.GroupBox6.Controls.Add(Me.cmdLast1)
-        Me.GroupBox6.Controls.Add(Me.cmdNext1)
+        Me.GroupBox6.Controls.Add(Me.btnMovePrevStationElement)
+        Me.GroupBox6.Controls.Add(Me.btnMoveFirstStationElement)
+        Me.GroupBox6.Controls.Add(Me.btnMoveLastStationElement)
+        Me.GroupBox6.Controls.Add(Me.btnMoveNextStationElement)
         Me.GroupBox6.Controls.Add(Me.txtNavigator1)
         Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox6.Location = New System.Drawing.Point(3, 333)
@@ -1644,49 +1644,49 @@ Partial Class formMetadata
         Me.GroupBox6.TabIndex = 37
         Me.GroupBox6.TabStop = False
         '
-        'cmdPrev1
+        'btnMovePrevStationElement
         '
-        Me.cmdPrev1.BackgroundImage = CType(resources.GetObject("cmdPrev1.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrev1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrev1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrev1.Location = New System.Drawing.Point(39, 10)
-        Me.cmdPrev1.Name = "cmdPrev1"
-        Me.cmdPrev1.Size = New System.Drawing.Size(40, 23)
-        Me.cmdPrev1.TabIndex = 50
-        Me.cmdPrev1.UseVisualStyleBackColor = True
+        Me.btnMovePrevStationElement.BackgroundImage = CType(resources.GetObject("btnMovePrevStationElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevStationElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevStationElement.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevStationElement.Name = "btnMovePrevStationElement"
+        Me.btnMovePrevStationElement.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevStationElement.TabIndex = 50
+        Me.btnMovePrevStationElement.UseVisualStyleBackColor = True
         '
-        'cmdfiratRec1
+        'btnMoveFirstStationElement
         '
-        Me.cmdfiratRec1.BackgroundImage = CType(resources.GetObject("cmdfiratRec1.BackgroundImage"), System.Drawing.Image)
-        Me.cmdfiratRec1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdfiratRec1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdfiratRec1.Location = New System.Drawing.Point(1, 10)
-        Me.cmdfiratRec1.Name = "cmdfiratRec1"
-        Me.cmdfiratRec1.Size = New System.Drawing.Size(40, 23)
-        Me.cmdfiratRec1.TabIndex = 49
-        Me.cmdfiratRec1.UseVisualStyleBackColor = True
+        Me.btnMoveFirstStationElement.BackgroundImage = CType(resources.GetObject("btnMoveFirstStationElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstStationElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstStationElement.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstStationElement.Name = "btnMoveFirstStationElement"
+        Me.btnMoveFirstStationElement.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstStationElement.TabIndex = 49
+        Me.btnMoveFirstStationElement.UseVisualStyleBackColor = True
         '
-        'cmdLast1
+        'btnMoveLastStationElement
         '
-        Me.cmdLast1.BackgroundImage = CType(resources.GetObject("cmdLast1.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast1.Location = New System.Drawing.Point(541, 10)
-        Me.cmdLast1.Name = "cmdLast1"
-        Me.cmdLast1.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast1.TabIndex = 48
-        Me.cmdLast1.UseVisualStyleBackColor = True
+        Me.btnMoveLastStationElement.BackgroundImage = CType(resources.GetObject("btnMoveLastStationElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastStationElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastStationElement.Location = New System.Drawing.Point(541, 10)
+        Me.btnMoveLastStationElement.Name = "btnMoveLastStationElement"
+        Me.btnMoveLastStationElement.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastStationElement.TabIndex = 48
+        Me.btnMoveLastStationElement.UseVisualStyleBackColor = True
         '
-        'cmdNext1
+        'btnMoveNextStationElement
         '
-        Me.cmdNext1.BackgroundImage = CType(resources.GetObject("cmdNext1.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext1.Location = New System.Drawing.Point(505, 10)
-        Me.cmdNext1.Name = "cmdNext1"
-        Me.cmdNext1.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext1.TabIndex = 47
-        Me.cmdNext1.UseVisualStyleBackColor = True
+        Me.btnMoveNextStationElement.BackgroundImage = CType(resources.GetObject("btnMoveNextStationElement.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextStationElement.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextStationElement.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextStationElement.Location = New System.Drawing.Point(505, 10)
+        Me.btnMoveNextStationElement.Name = "btnMoveNextStationElement"
+        Me.btnMoveNextStationElement.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextStationElement.TabIndex = 47
+        Me.btnMoveNextStationElement.UseVisualStyleBackColor = True
         '
         'txtNavigator1
         '
@@ -1696,13 +1696,13 @@ Partial Class formMetadata
         Me.txtNavigator1.TabIndex = 46
         Me.txtNavigator1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtInstrument
+        'cboInstrument
         '
-        Me.txtInstrument.FormattingEnabled = True
-        Me.txtInstrument.Location = New System.Drawing.Point(228, 106)
-        Me.txtInstrument.Name = "txtInstrument"
-        Me.txtInstrument.Size = New System.Drawing.Size(157, 21)
-        Me.txtInstrument.TabIndex = 2
+        Me.cboInstrument.FormattingEnabled = True
+        Me.cboInstrument.Location = New System.Drawing.Point(228, 106)
+        Me.cboInstrument.Name = "cboInstrument"
+        Me.cboInstrument.Size = New System.Drawing.Size(157, 21)
+        Me.cboInstrument.TabIndex = 2
         '
         'txtElement
         '
@@ -1712,13 +1712,13 @@ Partial Class formMetadata
         Me.txtElement.Size = New System.Drawing.Size(157, 21)
         Me.txtElement.TabIndex = 1
         '
-        'txtStation
+        'cboStation
         '
-        Me.txtStation.FormattingEnabled = True
-        Me.txtStation.Location = New System.Drawing.Point(227, 42)
-        Me.txtStation.Name = "txtStation"
-        Me.txtStation.Size = New System.Drawing.Size(157, 21)
-        Me.txtStation.TabIndex = 0
+        Me.cboStation.FormattingEnabled = True
+        Me.cboStation.Location = New System.Drawing.Point(227, 42)
+        Me.cboStation.Name = "cboStation"
+        Me.cboStation.Size = New System.Drawing.Size(157, 21)
+        Me.cboStation.TabIndex = 0
         '
         'Endate
         '
@@ -1824,14 +1824,14 @@ Partial Class formMetadata
         Me.grpInstrument.Controls.Add(Me.cmdInstrument)
         Me.grpInstrument.Controls.Add(Me.txtInstrumentPicFile)
         Me.grpInstrument.Controls.Add(Me.lblimgFile)
-        Me.grpInstrument.Controls.Add(Me.txtInstrStn)
+        Me.grpInstrument.Controls.Add(Me.cboInstrStn)
         Me.grpInstrument.Controls.Add(Me.lbStationID)
         Me.grpInstrument.Controls.Add(Me.txtDeinstallDate)
         Me.grpInstrument.Controls.Add(Me.txtInstallDate)
         Me.grpInstrument.Controls.Add(Me.grpCommand2)
         Me.grpInstrument.Controls.Add(Me.GroupBox8)
         Me.grpInstrument.Controls.Add(Me.lblInstrumentPic)
-        Me.grpInstrument.Controls.Add(Me.picInstrument)
+        Me.grpInstrument.Controls.Add(Me.pictureBoxInstrument)
         Me.grpInstrument.Controls.Add(Me.txthgt)
         Me.grpInstrument.Controls.Add(Me.DeinstallDate)
         Me.grpInstrument.Controls.Add(Me.InstallDate)
@@ -1850,7 +1850,7 @@ Partial Class formMetadata
         Me.grpInstrument.Controls.Add(Me.lblInstAbbrev)
         Me.grpInstrument.Controls.Add(Me.lblUncertainity)
         Me.grpInstrument.Controls.Add(Me.lblManufacturer)
-        Me.grpInstrument.Controls.Add(Me.txtInstrumentName)
+        Me.grpInstrument.Controls.Add(Me.lblInstrumentName)
         Me.grpInstrument.Controls.Add(Me.lblInstId)
         Me.grpInstrument.Location = New System.Drawing.Point(16, 26)
         Me.grpInstrument.Name = "grpInstrument"
@@ -1872,7 +1872,7 @@ Partial Class formMetadata
         '
         Me.cmdInstrument.Location = New System.Drawing.Point(465, 334)
         Me.cmdInstrument.Name = "cmdInstrument"
-        Me.cmdInstrument.Size = New System.Drawing.Size(47, 19)
+        Me.cmdInstrument.Size = New System.Drawing.Size(47, 22)
         Me.cmdInstrument.TabIndex = 64
         Me.cmdInstrument.Text = "Open"
         Me.cmdInstrument.UseVisualStyleBackColor = True
@@ -1893,13 +1893,13 @@ Partial Class formMetadata
         Me.lblimgFile.TabIndex = 63
         Me.lblimgFile.Text = "Image File"
         '
-        'txtInstrStn
+        'cboInstrStn
         '
-        Me.txtInstrStn.FormattingEnabled = True
-        Me.txtInstrStn.Location = New System.Drawing.Point(164, 105)
-        Me.txtInstrStn.Name = "txtInstrStn"
-        Me.txtInstrStn.Size = New System.Drawing.Size(138, 21)
-        Me.txtInstrStn.TabIndex = 61
+        Me.cboInstrStn.FormattingEnabled = True
+        Me.cboInstrStn.Location = New System.Drawing.Point(164, 105)
+        Me.cboInstrStn.Name = "cboInstrStn"
+        Me.cboInstrStn.Size = New System.Drawing.Size(138, 21)
+        Me.cboInstrStn.TabIndex = 61
         '
         'lbStationID
         '
@@ -1985,10 +1985,10 @@ Partial Class formMetadata
         '
         'GroupBox8
         '
-        Me.GroupBox8.Controls.Add(Me.cmdPrev2)
-        Me.GroupBox8.Controls.Add(Me.cmdFirst1)
-        Me.GroupBox8.Controls.Add(Me.cmdLast2)
-        Me.GroupBox8.Controls.Add(Me.cmdNext2)
+        Me.GroupBox8.Controls.Add(Me.btnMovePrevInstrument)
+        Me.GroupBox8.Controls.Add(Me.btnMoveFirstInstrument)
+        Me.GroupBox8.Controls.Add(Me.btnMoveLastInstrument)
+        Me.GroupBox8.Controls.Add(Me.btnMoveNextInstrument)
         Me.GroupBox8.Controls.Add(Me.txtNavigator2)
         Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox8.Location = New System.Drawing.Point(3, 392)
@@ -1997,49 +1997,49 @@ Partial Class formMetadata
         Me.GroupBox8.TabIndex = 56
         Me.GroupBox8.TabStop = False
         '
-        'cmdPrev2
+        'btnMovePrevInstrument
         '
-        Me.cmdPrev2.BackgroundImage = CType(resources.GetObject("cmdPrev2.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrev2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrev2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrev2.Location = New System.Drawing.Point(39, 10)
-        Me.cmdPrev2.Name = "cmdPrev2"
-        Me.cmdPrev2.Size = New System.Drawing.Size(40, 23)
-        Me.cmdPrev2.TabIndex = 50
-        Me.cmdPrev2.UseVisualStyleBackColor = True
+        Me.btnMovePrevInstrument.BackgroundImage = CType(resources.GetObject("btnMovePrevInstrument.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevInstrument.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevInstrument.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevInstrument.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevInstrument.Name = "btnMovePrevInstrument"
+        Me.btnMovePrevInstrument.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevInstrument.TabIndex = 50
+        Me.btnMovePrevInstrument.UseVisualStyleBackColor = True
         '
-        'cmdFirst1
+        'btnMoveFirstInstrument
         '
-        Me.cmdFirst1.BackgroundImage = CType(resources.GetObject("cmdFirst1.BackgroundImage"), System.Drawing.Image)
-        Me.cmdFirst1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFirst1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirst1.Location = New System.Drawing.Point(1, 10)
-        Me.cmdFirst1.Name = "cmdFirst1"
-        Me.cmdFirst1.Size = New System.Drawing.Size(40, 23)
-        Me.cmdFirst1.TabIndex = 49
-        Me.cmdFirst1.UseVisualStyleBackColor = True
+        Me.btnMoveFirstInstrument.BackgroundImage = CType(resources.GetObject("btnMoveFirstInstrument.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstInstrument.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstInstrument.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstInstrument.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstInstrument.Name = "btnMoveFirstInstrument"
+        Me.btnMoveFirstInstrument.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstInstrument.TabIndex = 49
+        Me.btnMoveFirstInstrument.UseVisualStyleBackColor = True
         '
-        'cmdLast2
+        'btnMoveLastInstrument
         '
-        Me.cmdLast2.BackgroundImage = CType(resources.GetObject("cmdLast2.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast2.Location = New System.Drawing.Point(686, 10)
-        Me.cmdLast2.Name = "cmdLast2"
-        Me.cmdLast2.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast2.TabIndex = 48
-        Me.cmdLast2.UseVisualStyleBackColor = True
+        Me.btnMoveLastInstrument.BackgroundImage = CType(resources.GetObject("btnMoveLastInstrument.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastInstrument.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastInstrument.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastInstrument.Location = New System.Drawing.Point(686, 10)
+        Me.btnMoveLastInstrument.Name = "btnMoveLastInstrument"
+        Me.btnMoveLastInstrument.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastInstrument.TabIndex = 48
+        Me.btnMoveLastInstrument.UseVisualStyleBackColor = True
         '
-        'cmdNext2
+        'btnMoveNextInstrument
         '
-        Me.cmdNext2.BackgroundImage = CType(resources.GetObject("cmdNext2.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext2.Location = New System.Drawing.Point(650, 10)
-        Me.cmdNext2.Name = "cmdNext2"
-        Me.cmdNext2.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext2.TabIndex = 47
-        Me.cmdNext2.UseVisualStyleBackColor = True
+        Me.btnMoveNextInstrument.BackgroundImage = CType(resources.GetObject("btnMoveNextInstrument.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextInstrument.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextInstrument.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextInstrument.Location = New System.Drawing.Point(650, 10)
+        Me.btnMoveNextInstrument.Name = "btnMoveNextInstrument"
+        Me.btnMoveNextInstrument.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextInstrument.TabIndex = 47
+        Me.btnMoveNextInstrument.UseVisualStyleBackColor = True
         '
         'txtNavigator2
         '
@@ -2058,15 +2058,15 @@ Partial Class formMetadata
         Me.lblInstrumentPic.TabIndex = 40
         Me.lblInstrumentPic.Text = "Instrument Picture"
         '
-        'picInstrument
+        'pictureBoxInstrument
         '
-        Me.picInstrument.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.picInstrument.Location = New System.Drawing.Point(379, 18)
-        Me.picInstrument.Name = "picInstrument"
-        Me.picInstrument.Size = New System.Drawing.Size(288, 291)
-        Me.picInstrument.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picInstrument.TabIndex = 39
-        Me.picInstrument.TabStop = False
+        Me.pictureBoxInstrument.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pictureBoxInstrument.Location = New System.Drawing.Point(379, 18)
+        Me.pictureBoxInstrument.Name = "pictureBoxInstrument"
+        Me.pictureBoxInstrument.Size = New System.Drawing.Size(288, 291)
+        Me.pictureBoxInstrument.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pictureBoxInstrument.TabIndex = 39
+        Me.pictureBoxInstrument.TabStop = False
         '
         'txthgt
         '
@@ -2213,14 +2213,14 @@ Partial Class formMetadata
         Me.lblManufacturer.TabIndex = 36
         Me.lblManufacturer.Text = "Manufacturer"
         '
-        'txtInstrumentName
+        'lblInstrumentName
         '
-        Me.txtInstrumentName.AutoSize = True
-        Me.txtInstrumentName.Location = New System.Drawing.Point(67, 51)
-        Me.txtInstrumentName.Name = "txtInstrumentName"
-        Me.txtInstrumentName.Size = New System.Drawing.Size(35, 13)
-        Me.txtInstrumentName.TabIndex = 31
-        Me.txtInstrumentName.Text = "Name"
+        Me.lblInstrumentName.AutoSize = True
+        Me.lblInstrumentName.Location = New System.Drawing.Point(67, 51)
+        Me.lblInstrumentName.Name = "lblInstrumentName"
+        Me.lblInstrumentName.Size = New System.Drawing.Size(35, 13)
+        Me.lblInstrumentName.TabIndex = 31
+        Me.lblInstrumentName.Text = "Name"
         '
         'lblInstId
         '
@@ -2265,7 +2265,7 @@ Partial Class formMetadata
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label8)
-        Me.GroupBox1.Controls.Add(Me.txtlocStn)
+        Me.GroupBox1.Controls.Add(Me.cboStn)
         Me.GroupBox1.Controls.Add(Me.txtElev)
         Me.GroupBox1.Controls.Add(Me.txtLon)
         Me.GroupBox1.Controls.Add(Me.txtLat)
@@ -2365,10 +2365,10 @@ Partial Class formMetadata
         '
         'GroupBox9
         '
-        Me.GroupBox9.Controls.Add(Me.cmdprev3)
-        Me.GroupBox9.Controls.Add(Me.cmdfirst3)
-        Me.GroupBox9.Controls.Add(Me.cmdLast3)
-        Me.GroupBox9.Controls.Add(Me.cmdNext3)
+        Me.GroupBox9.Controls.Add(Me.btnMovePrevLocation)
+        Me.GroupBox9.Controls.Add(Me.btnMoveFirstLocation)
+        Me.GroupBox9.Controls.Add(Me.btnMoveLastLocation)
+        Me.GroupBox9.Controls.Add(Me.btnMoveNextLocation)
         Me.GroupBox9.Controls.Add(Me.txtNav2)
         Me.GroupBox9.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox9.Location = New System.Drawing.Point(3, 392)
@@ -2377,49 +2377,49 @@ Partial Class formMetadata
         Me.GroupBox9.TabIndex = 57
         Me.GroupBox9.TabStop = False
         '
-        'cmdprev3
+        'btnMovePrevLocation
         '
-        Me.cmdprev3.BackgroundImage = CType(resources.GetObject("cmdprev3.BackgroundImage"), System.Drawing.Image)
-        Me.cmdprev3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdprev3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdprev3.Location = New System.Drawing.Point(39, 10)
-        Me.cmdprev3.Name = "cmdprev3"
-        Me.cmdprev3.Size = New System.Drawing.Size(40, 23)
-        Me.cmdprev3.TabIndex = 50
-        Me.cmdprev3.UseVisualStyleBackColor = True
+        Me.btnMovePrevLocation.BackgroundImage = CType(resources.GetObject("btnMovePrevLocation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevLocation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevLocation.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevLocation.Name = "btnMovePrevLocation"
+        Me.btnMovePrevLocation.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevLocation.TabIndex = 50
+        Me.btnMovePrevLocation.UseVisualStyleBackColor = True
         '
-        'cmdfirst3
+        'btnMoveFirstLocation
         '
-        Me.cmdfirst3.BackgroundImage = CType(resources.GetObject("cmdfirst3.BackgroundImage"), System.Drawing.Image)
-        Me.cmdfirst3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdfirst3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdfirst3.Location = New System.Drawing.Point(1, 10)
-        Me.cmdfirst3.Name = "cmdfirst3"
-        Me.cmdfirst3.Size = New System.Drawing.Size(40, 23)
-        Me.cmdfirst3.TabIndex = 49
-        Me.cmdfirst3.UseVisualStyleBackColor = True
+        Me.btnMoveFirstLocation.BackgroundImage = CType(resources.GetObject("btnMoveFirstLocation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstLocation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstLocation.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstLocation.Name = "btnMoveFirstLocation"
+        Me.btnMoveFirstLocation.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstLocation.TabIndex = 49
+        Me.btnMoveFirstLocation.UseVisualStyleBackColor = True
         '
-        'cmdLast3
+        'btnMoveLastLocation
         '
-        Me.cmdLast3.BackgroundImage = CType(resources.GetObject("cmdLast3.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast3.Location = New System.Drawing.Point(589, 10)
-        Me.cmdLast3.Name = "cmdLast3"
-        Me.cmdLast3.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast3.TabIndex = 48
-        Me.cmdLast3.UseVisualStyleBackColor = True
+        Me.btnMoveLastLocation.BackgroundImage = CType(resources.GetObject("btnMoveLastLocation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastLocation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastLocation.Location = New System.Drawing.Point(589, 10)
+        Me.btnMoveLastLocation.Name = "btnMoveLastLocation"
+        Me.btnMoveLastLocation.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastLocation.TabIndex = 48
+        Me.btnMoveLastLocation.UseVisualStyleBackColor = True
         '
-        'cmdNext3
+        'btnMoveNextLocation
         '
-        Me.cmdNext3.BackgroundImage = CType(resources.GetObject("cmdNext3.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext3.Location = New System.Drawing.Point(553, 10)
-        Me.cmdNext3.Name = "cmdNext3"
-        Me.cmdNext3.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext3.TabIndex = 47
-        Me.cmdNext3.UseVisualStyleBackColor = True
+        Me.btnMoveNextLocation.BackgroundImage = CType(resources.GetObject("btnMoveNextLocation.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextLocation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextLocation.Location = New System.Drawing.Point(553, 10)
+        Me.btnMoveNextLocation.Name = "btnMoveNextLocation"
+        Me.btnMoveNextLocation.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextLocation.TabIndex = 47
+        Me.btnMoveNextLocation.UseVisualStyleBackColor = True
         '
         'txtNav2
         '
@@ -2479,14 +2479,14 @@ Partial Class formMetadata
         Me.Label8.TabIndex = 40
         Me.Label8.Text = "Closing Date"
         '
-        'txtlocStn
+        'cboStn
         '
-        Me.txtlocStn.FormattingEnabled = True
-        Me.txtlocStn.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
-        Me.txtlocStn.Location = New System.Drawing.Point(252, 27)
-        Me.txtlocStn.Name = "txtlocStn"
-        Me.txtlocStn.Size = New System.Drawing.Size(138, 21)
-        Me.txtlocStn.TabIndex = 0
+        Me.cboStn.FormattingEnabled = True
+        Me.cboStn.Items.AddRange(New Object() {"Daily", "Hourly", "Monthly", "AWS"})
+        Me.cboStn.Location = New System.Drawing.Point(252, 27)
+        Me.cboStn.Name = "cboStn"
+        Me.cboStn.Size = New System.Drawing.Size(138, 21)
+        Me.cboStn.TabIndex = 0
         '
         'txtElev
         '
@@ -2665,7 +2665,7 @@ Partial Class formMetadata
         Me.GroupBox3.Controls.Add(Me.GroupBox11)
         Me.GroupBox3.Controls.Add(Me.txtdEndDate)
         Me.GroupBox3.Controls.Add(Me.Label20)
-        Me.GroupBox3.Controls.Add(Me.txtQualifierStation)
+        Me.GroupBox3.Controls.Add(Me.cboQualifierStation)
         Me.GroupBox3.Controls.Add(Me.txtdBDate)
         Me.GroupBox3.Controls.Add(Me.txtNetwork)
         Me.GroupBox3.Controls.Add(Me.txtTZone)
@@ -2757,10 +2757,10 @@ Partial Class formMetadata
         '
         'GroupBox11
         '
-        Me.GroupBox11.Controls.Add(Me.cmdPrev4)
-        Me.GroupBox11.Controls.Add(Me.cmdFirst4)
-        Me.GroupBox11.Controls.Add(Me.cmdLast4)
-        Me.GroupBox11.Controls.Add(Me.cmdNext4)
+        Me.GroupBox11.Controls.Add(Me.btnMovePrevQualifier)
+        Me.GroupBox11.Controls.Add(Me.btnMoveFirstQualifier)
+        Me.GroupBox11.Controls.Add(Me.btnMoveLastQualifier)
+        Me.GroupBox11.Controls.Add(Me.btnMoveNextQualifier)
         Me.GroupBox11.Controls.Add(Me.txtNav4)
         Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox11.Location = New System.Drawing.Point(3, 319)
@@ -2769,49 +2769,49 @@ Partial Class formMetadata
         Me.GroupBox11.TabIndex = 58
         Me.GroupBox11.TabStop = False
         '
-        'cmdPrev4
+        'btnMovePrevQualifier
         '
-        Me.cmdPrev4.BackgroundImage = CType(resources.GetObject("cmdPrev4.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrev4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrev4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrev4.Location = New System.Drawing.Point(39, 10)
-        Me.cmdPrev4.Name = "cmdPrev4"
-        Me.cmdPrev4.Size = New System.Drawing.Size(40, 23)
-        Me.cmdPrev4.TabIndex = 50
-        Me.cmdPrev4.UseVisualStyleBackColor = True
+        Me.btnMovePrevQualifier.BackgroundImage = CType(resources.GetObject("btnMovePrevQualifier.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevQualifier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevQualifier.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevQualifier.Name = "btnMovePrevQualifier"
+        Me.btnMovePrevQualifier.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevQualifier.TabIndex = 50
+        Me.btnMovePrevQualifier.UseVisualStyleBackColor = True
         '
-        'cmdFirst4
+        'btnMoveFirstQualifier
         '
-        Me.cmdFirst4.BackgroundImage = CType(resources.GetObject("cmdFirst4.BackgroundImage"), System.Drawing.Image)
-        Me.cmdFirst4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFirst4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirst4.Location = New System.Drawing.Point(1, 10)
-        Me.cmdFirst4.Name = "cmdFirst4"
-        Me.cmdFirst4.Size = New System.Drawing.Size(40, 23)
-        Me.cmdFirst4.TabIndex = 49
-        Me.cmdFirst4.UseVisualStyleBackColor = True
+        Me.btnMoveFirstQualifier.BackgroundImage = CType(resources.GetObject("btnMoveFirstQualifier.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstQualifier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstQualifier.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstQualifier.Name = "btnMoveFirstQualifier"
+        Me.btnMoveFirstQualifier.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstQualifier.TabIndex = 49
+        Me.btnMoveFirstQualifier.UseVisualStyleBackColor = True
         '
-        'cmdLast4
+        'btnMoveLastQualifier
         '
-        Me.cmdLast4.BackgroundImage = CType(resources.GetObject("cmdLast4.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast4.Location = New System.Drawing.Point(556, 10)
-        Me.cmdLast4.Name = "cmdLast4"
-        Me.cmdLast4.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast4.TabIndex = 48
-        Me.cmdLast4.UseVisualStyleBackColor = True
+        Me.btnMoveLastQualifier.BackgroundImage = CType(resources.GetObject("btnMoveLastQualifier.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastQualifier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastQualifier.Location = New System.Drawing.Point(556, 10)
+        Me.btnMoveLastQualifier.Name = "btnMoveLastQualifier"
+        Me.btnMoveLastQualifier.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastQualifier.TabIndex = 48
+        Me.btnMoveLastQualifier.UseVisualStyleBackColor = True
         '
-        'cmdNext4
+        'btnMoveNextQualifier
         '
-        Me.cmdNext4.BackgroundImage = CType(resources.GetObject("cmdNext4.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext4.Location = New System.Drawing.Point(520, 10)
-        Me.cmdNext4.Name = "cmdNext4"
-        Me.cmdNext4.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext4.TabIndex = 47
-        Me.cmdNext4.UseVisualStyleBackColor = True
+        Me.btnMoveNextQualifier.BackgroundImage = CType(resources.GetObject("btnMoveNextQualifier.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextQualifier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextQualifier.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextQualifier.Location = New System.Drawing.Point(520, 10)
+        Me.btnMoveNextQualifier.Name = "btnMoveNextQualifier"
+        Me.btnMoveNextQualifier.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextQualifier.TabIndex = 47
+        Me.btnMoveNextQualifier.UseVisualStyleBackColor = True
         '
         'txtNav4
         '
@@ -2838,13 +2838,13 @@ Partial Class formMetadata
         Me.Label20.TabIndex = 41
         Me.Label20.Text = "Station ID"
         '
-        'txtQualifierStation
+        'cboQualifierStation
         '
-        Me.txtQualifierStation.FormattingEnabled = True
-        Me.txtQualifierStation.Location = New System.Drawing.Point(243, 71)
-        Me.txtQualifierStation.Name = "txtQualifierStation"
-        Me.txtQualifierStation.Size = New System.Drawing.Size(121, 21)
-        Me.txtQualifierStation.TabIndex = 1
+        Me.cboQualifierStation.FormattingEnabled = True
+        Me.cboQualifierStation.Location = New System.Drawing.Point(243, 71)
+        Me.cboQualifierStation.Name = "cboQualifierStation"
+        Me.cboQualifierStation.Size = New System.Drawing.Size(121, 21)
+        Me.cboQualifierStation.TabIndex = 1
         '
         'txtdBDate
         '
@@ -2947,7 +2947,7 @@ Partial Class formMetadata
         Me.GroupBox4.Controls.Add(Me.GroupBox13)
         Me.GroupBox4.Controls.Add(Me.GroupBox14)
         Me.GroupBox4.Controls.Add(Me.Label27)
-        Me.GroupBox4.Controls.Add(Me.txtClassStation)
+        Me.GroupBox4.Controls.Add(Me.cboClassStation)
         Me.GroupBox4.Controls.Add(Me.txtClassDescription)
         Me.GroupBox4.Controls.Add(Me.txtClass)
         Me.GroupBox4.Controls.Add(Me.Label28)
@@ -3020,10 +3020,10 @@ Partial Class formMetadata
         '
         'GroupBox14
         '
-        Me.GroupBox14.Controls.Add(Me.cmdPrev5)
-        Me.GroupBox14.Controls.Add(Me.cmdFirst5)
-        Me.GroupBox14.Controls.Add(Me.cmdLast5)
-        Me.GroupBox14.Controls.Add(Me.cmdNext5)
+        Me.GroupBox14.Controls.Add(Me.btnMovePrevClass)
+        Me.GroupBox14.Controls.Add(Me.btnMoveFirstClass)
+        Me.GroupBox14.Controls.Add(Me.btnMoveLastClass)
+        Me.GroupBox14.Controls.Add(Me.btnMoveNextClass)
         Me.GroupBox14.Controls.Add(Me.txtNav5)
         Me.GroupBox14.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox14.Location = New System.Drawing.Point(3, 289)
@@ -3032,49 +3032,49 @@ Partial Class formMetadata
         Me.GroupBox14.TabIndex = 62
         Me.GroupBox14.TabStop = False
         '
-        'cmdPrev5
+        'btnMovePrevClass
         '
-        Me.cmdPrev5.BackgroundImage = CType(resources.GetObject("cmdPrev5.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrev5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrev5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrev5.Location = New System.Drawing.Point(39, 10)
-        Me.cmdPrev5.Name = "cmdPrev5"
-        Me.cmdPrev5.Size = New System.Drawing.Size(40, 23)
-        Me.cmdPrev5.TabIndex = 50
-        Me.cmdPrev5.UseVisualStyleBackColor = True
+        Me.btnMovePrevClass.BackgroundImage = CType(resources.GetObject("btnMovePrevClass.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevClass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevClass.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevClass.Name = "btnMovePrevClass"
+        Me.btnMovePrevClass.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevClass.TabIndex = 50
+        Me.btnMovePrevClass.UseVisualStyleBackColor = True
         '
-        'cmdFirst5
+        'btnMoveFirstClass
         '
-        Me.cmdFirst5.BackgroundImage = CType(resources.GetObject("cmdFirst5.BackgroundImage"), System.Drawing.Image)
-        Me.cmdFirst5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFirst5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirst5.Location = New System.Drawing.Point(1, 10)
-        Me.cmdFirst5.Name = "cmdFirst5"
-        Me.cmdFirst5.Size = New System.Drawing.Size(40, 23)
-        Me.cmdFirst5.TabIndex = 49
-        Me.cmdFirst5.UseVisualStyleBackColor = True
+        Me.btnMoveFirstClass.BackgroundImage = CType(resources.GetObject("btnMoveFirstClass.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstClass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstClass.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstClass.Name = "btnMoveFirstClass"
+        Me.btnMoveFirstClass.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstClass.TabIndex = 49
+        Me.btnMoveFirstClass.UseVisualStyleBackColor = True
         '
-        'cmdLast5
+        'btnMoveLastClass
         '
-        Me.cmdLast5.BackgroundImage = CType(resources.GetObject("cmdLast5.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast5.Location = New System.Drawing.Point(479, 10)
-        Me.cmdLast5.Name = "cmdLast5"
-        Me.cmdLast5.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast5.TabIndex = 48
-        Me.cmdLast5.UseVisualStyleBackColor = True
+        Me.btnMoveLastClass.BackgroundImage = CType(resources.GetObject("btnMoveLastClass.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastClass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastClass.Location = New System.Drawing.Point(479, 10)
+        Me.btnMoveLastClass.Name = "btnMoveLastClass"
+        Me.btnMoveLastClass.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastClass.TabIndex = 48
+        Me.btnMoveLastClass.UseVisualStyleBackColor = True
         '
-        'cmdNext5
+        'btnMoveNextClass
         '
-        Me.cmdNext5.BackgroundImage = CType(resources.GetObject("cmdNext5.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext5.Location = New System.Drawing.Point(441, 10)
-        Me.cmdNext5.Name = "cmdNext5"
-        Me.cmdNext5.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext5.TabIndex = 47
-        Me.cmdNext5.UseVisualStyleBackColor = True
+        Me.btnMoveNextClass.BackgroundImage = CType(resources.GetObject("btnMoveNextClass.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextClass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextClass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextClass.Location = New System.Drawing.Point(441, 10)
+        Me.btnMoveNextClass.Name = "btnMoveNextClass"
+        Me.btnMoveNextClass.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextClass.TabIndex = 47
+        Me.btnMoveNextClass.UseVisualStyleBackColor = True
         '
         'txtNav5
         '
@@ -3093,13 +3093,13 @@ Partial Class formMetadata
         Me.Label27.TabIndex = 10
         Me.Label27.Text = "Station ID"
         '
-        'txtClassStation
+        'cboClassStation
         '
-        Me.txtClassStation.FormattingEnabled = True
-        Me.txtClassStation.Location = New System.Drawing.Point(204, 112)
-        Me.txtClassStation.Name = "txtClassStation"
-        Me.txtClassStation.Size = New System.Drawing.Size(121, 21)
-        Me.txtClassStation.TabIndex = 1
+        Me.cboClassStation.FormattingEnabled = True
+        Me.cboClassStation.Location = New System.Drawing.Point(204, 112)
+        Me.cboClassStation.Name = "cboClassStation"
+        Me.cboClassStation.Size = New System.Drawing.Size(121, 21)
+        Me.cboClassStation.TabIndex = 1
         '
         'txtClassDescription
         '
@@ -3167,10 +3167,10 @@ Partial Class formMetadata
         Me.grpPhysicalFeature.Controls.Add(Me.lblFeaturePic)
         Me.grpPhysicalFeature.Controls.Add(Me.GroupBox15)
         Me.grpPhysicalFeature.Controls.Add(Me.GroupBox16)
-        Me.grpPhysicalFeature.Controls.Add(Me.txtfeaturepic)
+        Me.grpPhysicalFeature.Controls.Add(Me.pictureBoxFeaturepic)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeaturedEdate)
         Me.grpPhysicalFeature.Controls.Add(Me.lblStnId)
-        Me.grpPhysicalFeature.Controls.Add(Me.txtFeatureStation)
+        Me.grpPhysicalFeature.Controls.Add(Me.cboFeatureStation)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeaturedBdate)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeatureDescription)
         Me.grpPhysicalFeature.Controls.Add(Me.txtFeatureClass)
@@ -3187,9 +3187,9 @@ Partial Class formMetadata
         '
         'cmdOpenFile
         '
-        Me.cmdOpenFile.Location = New System.Drawing.Point(298, 236)
+        Me.cmdOpenFile.Location = New System.Drawing.Point(305, 236)
         Me.cmdOpenFile.Name = "cmdOpenFile"
-        Me.cmdOpenFile.Size = New System.Drawing.Size(49, 20)
+        Me.cmdOpenFile.Size = New System.Drawing.Size(49, 22)
         Me.cmdOpenFile.TabIndex = 67
         Me.cmdOpenFile.Text = "Open"
         Me.cmdOpenFile.UseVisualStyleBackColor = True
@@ -3310,10 +3310,10 @@ Partial Class formMetadata
         '
         'GroupBox16
         '
-        Me.GroupBox16.Controls.Add(Me.cmdPrev6)
-        Me.GroupBox16.Controls.Add(Me.cmdFirst6)
-        Me.GroupBox16.Controls.Add(Me.cmdLast6)
-        Me.GroupBox16.Controls.Add(Me.cmdNext6)
+        Me.GroupBox16.Controls.Add(Me.btnMovePrevFeature)
+        Me.GroupBox16.Controls.Add(Me.btnMoveFirstFeature)
+        Me.GroupBox16.Controls.Add(Me.btnMoveLastFeature)
+        Me.GroupBox16.Controls.Add(Me.btnMoveNextFeature)
         Me.GroupBox16.Controls.Add(Me.txtNav6)
         Me.GroupBox16.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox16.Location = New System.Drawing.Point(3, 336)
@@ -3322,49 +3322,49 @@ Partial Class formMetadata
         Me.GroupBox16.TabIndex = 60
         Me.GroupBox16.TabStop = False
         '
-        'cmdPrev6
+        'btnMovePrevFeature
         '
-        Me.cmdPrev6.BackgroundImage = CType(resources.GetObject("cmdPrev6.BackgroundImage"), System.Drawing.Image)
-        Me.cmdPrev6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdPrev6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdPrev6.Location = New System.Drawing.Point(39, 10)
-        Me.cmdPrev6.Name = "cmdPrev6"
-        Me.cmdPrev6.Size = New System.Drawing.Size(40, 23)
-        Me.cmdPrev6.TabIndex = 50
-        Me.cmdPrev6.UseVisualStyleBackColor = True
+        Me.btnMovePrevFeature.BackgroundImage = CType(resources.GetObject("btnMovePrevFeature.BackgroundImage"), System.Drawing.Image)
+        Me.btnMovePrevFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevFeature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevFeature.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevFeature.Name = "btnMovePrevFeature"
+        Me.btnMovePrevFeature.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevFeature.TabIndex = 50
+        Me.btnMovePrevFeature.UseVisualStyleBackColor = True
         '
-        'cmdFirst6
+        'btnMoveFirstFeature
         '
-        Me.cmdFirst6.BackgroundImage = CType(resources.GetObject("cmdFirst6.BackgroundImage"), System.Drawing.Image)
-        Me.cmdFirst6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdFirst6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdFirst6.Location = New System.Drawing.Point(1, 10)
-        Me.cmdFirst6.Name = "cmdFirst6"
-        Me.cmdFirst6.Size = New System.Drawing.Size(40, 23)
-        Me.cmdFirst6.TabIndex = 49
-        Me.cmdFirst6.UseVisualStyleBackColor = True
+        Me.btnMoveFirstFeature.BackgroundImage = CType(resources.GetObject("btnMoveFirstFeature.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveFirstFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstFeature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstFeature.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstFeature.Name = "btnMoveFirstFeature"
+        Me.btnMoveFirstFeature.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstFeature.TabIndex = 49
+        Me.btnMoveFirstFeature.UseVisualStyleBackColor = True
         '
-        'cmdLast6
+        'btnMoveLastFeature
         '
-        Me.cmdLast6.BackgroundImage = CType(resources.GetObject("cmdLast6.BackgroundImage"), System.Drawing.Image)
-        Me.cmdLast6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdLast6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdLast6.Location = New System.Drawing.Point(531, 10)
-        Me.cmdLast6.Name = "cmdLast6"
-        Me.cmdLast6.Size = New System.Drawing.Size(40, 23)
-        Me.cmdLast6.TabIndex = 48
-        Me.cmdLast6.UseVisualStyleBackColor = True
+        Me.btnMoveLastFeature.BackgroundImage = CType(resources.GetObject("btnMoveLastFeature.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveLastFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastFeature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastFeature.Location = New System.Drawing.Point(531, 10)
+        Me.btnMoveLastFeature.Name = "btnMoveLastFeature"
+        Me.btnMoveLastFeature.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastFeature.TabIndex = 48
+        Me.btnMoveLastFeature.UseVisualStyleBackColor = True
         '
-        'cmdNext6
+        'btnMoveNextFeature
         '
-        Me.cmdNext6.BackgroundImage = CType(resources.GetObject("cmdNext6.BackgroundImage"), System.Drawing.Image)
-        Me.cmdNext6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.cmdNext6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdNext6.Location = New System.Drawing.Point(495, 10)
-        Me.cmdNext6.Name = "cmdNext6"
-        Me.cmdNext6.Size = New System.Drawing.Size(40, 23)
-        Me.cmdNext6.TabIndex = 47
-        Me.cmdNext6.UseVisualStyleBackColor = True
+        Me.btnMoveNextFeature.BackgroundImage = CType(resources.GetObject("btnMoveNextFeature.BackgroundImage"), System.Drawing.Image)
+        Me.btnMoveNextFeature.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextFeature.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextFeature.Location = New System.Drawing.Point(495, 10)
+        Me.btnMoveNextFeature.Name = "btnMoveNextFeature"
+        Me.btnMoveNextFeature.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextFeature.TabIndex = 47
+        Me.btnMoveNextFeature.UseVisualStyleBackColor = True
         '
         'txtNav6
         '
@@ -3374,22 +3374,22 @@ Partial Class formMetadata
         Me.txtNav6.TabIndex = 46
         Me.txtNav6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtfeaturepic
+        'pictureBoxFeaturepic
         '
-        Me.txtfeaturepic.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.pictureBoxFeaturepic.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtfeaturepic.BackColor = System.Drawing.Color.Ivory
-        Me.txtfeaturepic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.txtfeaturepic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.txtfeaturepic.ImageLocation = ""
-        Me.txtfeaturepic.InitialImage = Nothing
-        Me.txtfeaturepic.Location = New System.Drawing.Point(347, 29)
-        Me.txtfeaturepic.Name = "txtfeaturepic"
-        Me.txtfeaturepic.Size = New System.Drawing.Size(258, 227)
-        Me.txtfeaturepic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.txtfeaturepic.TabIndex = 47
-        Me.txtfeaturepic.TabStop = False
+        Me.pictureBoxFeaturepic.BackColor = System.Drawing.Color.Ivory
+        Me.pictureBoxFeaturepic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pictureBoxFeaturepic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pictureBoxFeaturepic.ImageLocation = ""
+        Me.pictureBoxFeaturepic.InitialImage = Nothing
+        Me.pictureBoxFeaturepic.Location = New System.Drawing.Point(368, 29)
+        Me.pictureBoxFeaturepic.Name = "pictureBoxFeaturepic"
+        Me.pictureBoxFeaturepic.Size = New System.Drawing.Size(258, 227)
+        Me.pictureBoxFeaturepic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pictureBoxFeaturepic.TabIndex = 47
+        Me.pictureBoxFeaturepic.TabStop = False
         '
         'txtFeaturedEdate
         '
@@ -3408,13 +3408,13 @@ Partial Class formMetadata
         Me.lblStnId.TabIndex = 12
         Me.lblStnId.Text = "Station ID"
         '
-        'txtFeatureStation
+        'cboFeatureStation
         '
-        Me.txtFeatureStation.FormattingEnabled = True
-        Me.txtFeatureStation.Location = New System.Drawing.Point(118, 49)
-        Me.txtFeatureStation.Name = "txtFeatureStation"
-        Me.txtFeatureStation.Size = New System.Drawing.Size(151, 21)
-        Me.txtFeatureStation.TabIndex = 0
+        Me.cboFeatureStation.FormattingEnabled = True
+        Me.cboFeatureStation.Location = New System.Drawing.Point(118, 49)
+        Me.cboFeatureStation.Name = "cboFeatureStation"
+        Me.cboFeatureStation.Size = New System.Drawing.Size(151, 21)
+        Me.cboFeatureStation.TabIndex = 0
         '
         'txtFeaturedBdate
         '
@@ -3572,11 +3572,11 @@ Partial Class formMetadata
         '
         'GroupBox19
         '
-        Me.GroupBox19.Controls.Add(Me.nav8Left)
-        Me.GroupBox19.Controls.Add(Me.nav8First)
-        Me.GroupBox19.Controls.Add(Me.nav8Last)
-        Me.GroupBox19.Controls.Add(Me.nav8Right)
-        Me.GroupBox19.Controls.Add(Me.PaperArchiveNavigation)
+        Me.GroupBox19.Controls.Add(Me.btnMovePrevArchive)
+        Me.GroupBox19.Controls.Add(Me.btnMoveFirstArchive)
+        Me.GroupBox19.Controls.Add(Me.btnMoveLastArchive)
+        Me.GroupBox19.Controls.Add(Me.btnMoveNextArchive)
+        Me.GroupBox19.Controls.Add(Me.txtRecordNumArchive)
         Me.GroupBox19.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GroupBox19.Location = New System.Drawing.Point(3, 227)
         Me.GroupBox19.Name = "GroupBox19"
@@ -3584,57 +3584,57 @@ Partial Class formMetadata
         Me.GroupBox19.TabIndex = 62
         Me.GroupBox19.TabStop = False
         '
-        'nav8Left
+        'btnMovePrevArchive
         '
-        Me.nav8Left.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_left
-        Me.nav8Left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.nav8Left.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nav8Left.Location = New System.Drawing.Point(39, 10)
-        Me.nav8Left.Name = "nav8Left"
-        Me.nav8Left.Size = New System.Drawing.Size(40, 23)
-        Me.nav8Left.TabIndex = 50
-        Me.nav8Left.UseVisualStyleBackColor = True
+        Me.btnMovePrevArchive.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_left
+        Me.btnMovePrevArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMovePrevArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMovePrevArchive.Location = New System.Drawing.Point(39, 10)
+        Me.btnMovePrevArchive.Name = "btnMovePrevArchive"
+        Me.btnMovePrevArchive.Size = New System.Drawing.Size(40, 23)
+        Me.btnMovePrevArchive.TabIndex = 50
+        Me.btnMovePrevArchive.UseVisualStyleBackColor = True
         '
-        'nav8First
+        'btnMoveFirstArchive
         '
-        Me.nav8First.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_first
-        Me.nav8First.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.nav8First.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nav8First.Location = New System.Drawing.Point(1, 10)
-        Me.nav8First.Name = "nav8First"
-        Me.nav8First.Size = New System.Drawing.Size(40, 23)
-        Me.nav8First.TabIndex = 49
-        Me.nav8First.UseVisualStyleBackColor = True
+        Me.btnMoveFirstArchive.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_first
+        Me.btnMoveFirstArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveFirstArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveFirstArchive.Location = New System.Drawing.Point(1, 10)
+        Me.btnMoveFirstArchive.Name = "btnMoveFirstArchive"
+        Me.btnMoveFirstArchive.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveFirstArchive.TabIndex = 49
+        Me.btnMoveFirstArchive.UseVisualStyleBackColor = True
         '
-        'nav8Last
+        'btnMoveLastArchive
         '
-        Me.nav8Last.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_last
-        Me.nav8Last.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.nav8Last.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nav8Last.Location = New System.Drawing.Point(479, 10)
-        Me.nav8Last.Name = "nav8Last"
-        Me.nav8Last.Size = New System.Drawing.Size(40, 23)
-        Me.nav8Last.TabIndex = 48
-        Me.nav8Last.UseVisualStyleBackColor = True
+        Me.btnMoveLastArchive.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_last
+        Me.btnMoveLastArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveLastArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveLastArchive.Location = New System.Drawing.Point(479, 10)
+        Me.btnMoveLastArchive.Name = "btnMoveLastArchive"
+        Me.btnMoveLastArchive.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveLastArchive.TabIndex = 48
+        Me.btnMoveLastArchive.UseVisualStyleBackColor = True
         '
-        'nav8Right
+        'btnMoveNextArchive
         '
-        Me.nav8Right.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_right
-        Me.nav8Right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.nav8Right.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nav8Right.Location = New System.Drawing.Point(441, 10)
-        Me.nav8Right.Name = "nav8Right"
-        Me.nav8Right.Size = New System.Drawing.Size(40, 23)
-        Me.nav8Right.TabIndex = 47
-        Me.nav8Right.UseVisualStyleBackColor = True
+        Me.btnMoveNextArchive.BackgroundImage = Global.ClimsoftVer4.My.Resources.Resources.navigation_right
+        Me.btnMoveNextArchive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMoveNextArchive.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMoveNextArchive.Location = New System.Drawing.Point(441, 10)
+        Me.btnMoveNextArchive.Name = "btnMoveNextArchive"
+        Me.btnMoveNextArchive.Size = New System.Drawing.Size(40, 23)
+        Me.btnMoveNextArchive.TabIndex = 47
+        Me.btnMoveNextArchive.UseVisualStyleBackColor = True
         '
-        'PaperArchiveNavigation
+        'txtRecordNumArchive
         '
-        Me.PaperArchiveNavigation.Location = New System.Drawing.Point(77, 11)
-        Me.PaperArchiveNavigation.Name = "PaperArchiveNavigation"
-        Me.PaperArchiveNavigation.Size = New System.Drawing.Size(365, 20)
-        Me.PaperArchiveNavigation.TabIndex = 46
-        Me.PaperArchiveNavigation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtRecordNumArchive.Location = New System.Drawing.Point(77, 11)
+        Me.txtRecordNumArchive.Name = "txtRecordNumArchive"
+        Me.txtRecordNumArchive.Size = New System.Drawing.Size(365, 20)
+        Me.txtRecordNumArchive.TabIndex = 46
+        Me.txtRecordNumArchive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtFormDescription
         '
@@ -3734,7 +3734,7 @@ Partial Class formMetadata
         Me.grpCommand2.ResumeLayout(False)
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
-        CType(Me.picInstrument, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictureBoxInstrument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabStationLocationHistory.ResumeLayout(False)
         Me.TabStationLocationHistory.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -3763,7 +3763,7 @@ Partial Class formMetadata
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
-        CType(Me.txtfeaturepic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pictureBoxFeaturepic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPaperArchive.ResumeLayout(False)
         Me.TabPaperArchive.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
@@ -3816,7 +3816,7 @@ Partial Class formMetadata
     Friend WithEvents txtAuthority As System.Windows.Forms.TextBox
     Friend WithEvents txtCountry As System.Windows.Forms.TextBox
     Friend WithEvents grpObservationElement As System.Windows.Forms.GroupBox
-    Friend WithEvents txtType As System.Windows.Forms.ComboBox
+    Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents txtUnit As System.Windows.Forms.TextBox
     Friend WithEvents txtLowerLimit As System.Windows.Forms.TextBox
     Friend WithEvents txtUpperLimit As System.Windows.Forms.TextBox
@@ -3857,11 +3857,11 @@ Partial Class formMetadata
     Friend WithEvents lblInstAbbrev As System.Windows.Forms.Label
     Friend WithEvents lblUncertainity As System.Windows.Forms.Label
     Friend WithEvents lblManufacturer As System.Windows.Forms.Label
-    Friend WithEvents txtInstrumentName As System.Windows.Forms.Label
+    Friend WithEvents lblInstrumentName As System.Windows.Forms.Label
     Friend WithEvents lblInstId As System.Windows.Forms.Label
     Friend WithEvents lblInstruments As System.Windows.Forms.Label
     Friend WithEvents lblInstrumentPic As System.Windows.Forms.Label
-    Friend WithEvents picInstrument As System.Windows.Forms.PictureBox
+    Friend WithEvents pictureBoxInstrument As System.Windows.Forms.PictureBox
     Friend WithEvents DeinstallDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents InstallDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblDeinstalDate As System.Windows.Forms.Label
@@ -3872,7 +3872,7 @@ Partial Class formMetadata
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtlocStn As System.Windows.Forms.ComboBox
+    Friend WithEvents cboStn As System.Windows.Forms.ComboBox
     Friend WithEvents txtElev As System.Windows.Forms.TextBox
     Friend WithEvents txtLon As System.Windows.Forms.TextBox
     Friend WithEvents txtLat As System.Windows.Forms.TextBox
@@ -3891,16 +3891,16 @@ Partial Class formMetadata
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents txtInstrument As System.Windows.Forms.ComboBox
+    Friend WithEvents cboInstrument As System.Windows.Forms.ComboBox
     Friend WithEvents txtElement As System.Windows.Forms.ComboBox
-    Friend WithEvents txtStation As System.Windows.Forms.ComboBox
+    Friend WithEvents cboStation As System.Windows.Forms.ComboBox
     Friend WithEvents Endate As System.Windows.Forms.DateTimePicker
     Friend WithEvents BeginDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents txtdEndDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents txtQualifierStation As System.Windows.Forms.ComboBox
+    Friend WithEvents cboQualifierStation As System.Windows.Forms.ComboBox
     Friend WithEvents txtdBDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtNetwork As System.Windows.Forms.TextBox
     Friend WithEvents txtTZone As System.Windows.Forms.TextBox
@@ -3913,17 +3913,17 @@ Partial Class formMetadata
     Friend WithEvents lblScheduleClass As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents txtClassStation As System.Windows.Forms.ComboBox
+    Friend WithEvents cboClassStation As System.Windows.Forms.ComboBox
     Friend WithEvents txtClassDescription As System.Windows.Forms.TextBox
     Friend WithEvents txtClass As System.Windows.Forms.TextBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents lblClass As System.Windows.Forms.Label
     Friend WithEvents lblPhysicalFeature As System.Windows.Forms.Label
     Friend WithEvents grpPhysicalFeature As System.Windows.Forms.GroupBox
-    Friend WithEvents txtfeaturepic As System.Windows.Forms.PictureBox
+    Friend WithEvents pictureBoxFeaturepic As System.Windows.Forms.PictureBox
     Friend WithEvents txtFeaturedEdate As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblStnId As System.Windows.Forms.Label
-    Friend WithEvents txtFeatureStation As System.Windows.Forms.ComboBox
+    Friend WithEvents cboFeatureStation As System.Windows.Forms.ComboBox
     Friend WithEvents txtFeaturedBdate As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtFeatureDescription As System.Windows.Forms.TextBox
     Friend WithEvents txtFeatureClass As System.Windows.Forms.TextBox
@@ -3939,11 +3939,11 @@ Partial Class formMetadata
     Friend WithEvents cmdDelete As System.Windows.Forms.Button
     Friend WithEvents cmdUpdate As System.Windows.Forms.Button
     Friend WithEvents cmdAddNew As System.Windows.Forms.Button
-    Friend WithEvents btnMovePrevious As System.Windows.Forms.Button
-    Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
-    Friend WithEvents btnMoveLast As System.Windows.Forms.Button
+    Friend WithEvents btnMovePreviousStation As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstStation As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastStation As System.Windows.Forms.Button
     Friend WithEvents txtRecNumber As System.Windows.Forms.TextBox
-    Friend WithEvents btnMoveNext As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextStation As System.Windows.Forms.Button
     Friend WithEvents txtStationOperation As System.Windows.Forms.CheckBox
     Friend WithEvents cmdClear As System.Windows.Forms.Button
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
@@ -3952,10 +3952,10 @@ Partial Class formMetadata
     Friend WithEvents cmdUpdateElement As System.Windows.Forms.Button
     Friend WithEvents cmdAddElement As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrevoius As System.Windows.Forms.Button
-    Friend WithEvents cmdFirstRecord As System.Windows.Forms.Button
-    Friend WithEvents cmdLastRecord As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePreviousElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextElement As System.Windows.Forms.Button
     Friend WithEvents txtElementNavigator As System.Windows.Forms.TextBox
     Friend WithEvents cmdClearElement As System.Windows.Forms.Button
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
@@ -3965,10 +3965,10 @@ Partial Class formMetadata
     Friend WithEvents cmdUpdateStElement As System.Windows.Forms.Button
     Friend WithEvents cmdAddStElement As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrev1 As System.Windows.Forms.Button
-    Friend WithEvents cmdfiratRec1 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast1 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext1 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevStationElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstStationElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastStationElement As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextStationElement As System.Windows.Forms.Button
     Friend WithEvents txtNavigator1 As System.Windows.Forms.TextBox
     Friend WithEvents grpCommand2 As System.Windows.Forms.GroupBox
     Friend WithEvents cmdClear2 As System.Windows.Forms.Button
@@ -3977,10 +3977,10 @@ Partial Class formMetadata
     Friend WithEvents cmdUpdateInstrument As System.Windows.Forms.Button
     Friend WithEvents cmdAddInstrument As System.Windows.Forms.Button
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrev2 As System.Windows.Forms.Button
-    Friend WithEvents cmdFirst1 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast2 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext2 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevInstrument As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstInstrument As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastInstrument As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextInstrument As System.Windows.Forms.Button
     Friend WithEvents txtNavigator2 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents cmdViewHistory As System.Windows.Forms.Button
@@ -3989,10 +3989,10 @@ Partial Class formMetadata
     Friend WithEvents cmdAddHistory As System.Windows.Forms.Button
     Friend WithEvents cmdClearHistory As System.Windows.Forms.Button
     Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdprev3 As System.Windows.Forms.Button
-    Friend WithEvents cmdfirst3 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast3 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext3 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevLocation As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstLocation As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastLocation As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextLocation As System.Windows.Forms.Button
     Friend WithEvents txtNav2 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox12 As System.Windows.Forms.GroupBox
     Friend WithEvents cmdDeleteView As System.Windows.Forms.Button
@@ -4001,10 +4001,10 @@ Partial Class formMetadata
     Friend WithEvents cmdAddQualier As System.Windows.Forms.Button
     Friend WithEvents cmdClearQualifier As System.Windows.Forms.Button
     Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrev4 As System.Windows.Forms.Button
-    Friend WithEvents cmdFirst4 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast4 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext4 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevQualifier As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstQualifier As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastQualifier As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextQualifier As System.Windows.Forms.Button
     Friend WithEvents txtNav4 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
     Friend WithEvents cmdViewScheduleClass As System.Windows.Forms.Button
@@ -4013,10 +4013,10 @@ Partial Class formMetadata
     Friend WithEvents cmdAddScheduleClass As System.Windows.Forms.Button
     Friend WithEvents cmdClearClass As System.Windows.Forms.Button
     Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrev5 As System.Windows.Forms.Button
-    Friend WithEvents cmdFirst5 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast5 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext5 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevClass As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstClass As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastClass As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextClass As System.Windows.Forms.Button
     Friend WithEvents txtNav5 As System.Windows.Forms.TextBox
     Friend WithEvents lblFeaturePic As System.Windows.Forms.Label
     Friend WithEvents GroupBox15 As System.Windows.Forms.GroupBox
@@ -4026,10 +4026,10 @@ Partial Class formMetadata
     Friend WithEvents cmdAddFeature As System.Windows.Forms.Button
     Friend WithEvents cmdClearFeature As System.Windows.Forms.Button
     Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox
-    Friend WithEvents cmdPrev6 As System.Windows.Forms.Button
-    Friend WithEvents cmdFirst6 As System.Windows.Forms.Button
-    Friend WithEvents cmdLast6 As System.Windows.Forms.Button
-    Friend WithEvents cmdNext6 As System.Windows.Forms.Button
+    Friend WithEvents btnMovePrevFeature As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstFeature As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastFeature As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextFeature As System.Windows.Forms.Button
     Friend WithEvents txtNav6 As System.Windows.Forms.TextBox
     Friend WithEvents TabPaperArchive As System.Windows.Forms.TabPage
     Friend WithEvents Label7 As System.Windows.Forms.Label
@@ -4039,11 +4039,11 @@ Partial Class formMetadata
     Friend WithEvents cmdUpdateArchiveDef As System.Windows.Forms.Button
     Friend WithEvents cmdAddArchiveDef As System.Windows.Forms.Button
     Friend WithEvents GroupBox19 As System.Windows.Forms.GroupBox
-    Friend WithEvents nav8Left As System.Windows.Forms.Button
-    Friend WithEvents nav8First As System.Windows.Forms.Button
-    Friend WithEvents nav8Last As System.Windows.Forms.Button
-    Friend WithEvents nav8Right As System.Windows.Forms.Button
-    Friend WithEvents PaperArchiveNavigation As System.Windows.Forms.TextBox
+    Friend WithEvents btnMovePrevArchive As System.Windows.Forms.Button
+    Friend WithEvents btnMoveFirstArchive As System.Windows.Forms.Button
+    Friend WithEvents btnMoveLastArchive As System.Windows.Forms.Button
+    Friend WithEvents btnMoveNextArchive As System.Windows.Forms.Button
+    Friend WithEvents txtRecordNumArchive As System.Windows.Forms.TextBox
     Friend WithEvents txtFormDescription As System.Windows.Forms.TextBox
     Friend WithEvents lbldescri As System.Windows.Forms.Label
     Friend WithEvents txtFormId As System.Windows.Forms.TextBox
@@ -4051,11 +4051,11 @@ Partial Class formMetadata
     Friend WithEvents cmdImport As System.Windows.Forms.Button
     Friend WithEvents cmdViewPaperArchive As System.Windows.Forms.Button
     Friend WithEvents lblSearchStation As System.Windows.Forms.Label
-    Friend WithEvents combSearchStation As System.Windows.Forms.ComboBox
-    Friend WithEvents txtstationId As System.Windows.Forms.ComboBox
+    Friend WithEvents cboSearchStation As System.Windows.Forms.ComboBox
+    Friend WithEvents cboStationId As System.Windows.Forms.ComboBox
     Friend WithEvents lblSerachElement As System.Windows.Forms.Label
-    Friend WithEvents combSearchElement As System.Windows.Forms.ComboBox
-    Friend WithEvents txtId As System.Windows.Forms.ComboBox
+    Friend WithEvents cboSearchElement As System.Windows.Forms.ComboBox
+    Friend WithEvents cboElementId As System.Windows.Forms.ComboBox
     Friend WithEvents cmdReset As System.Windows.Forms.Button
     Friend WithEvents txthgt As System.Windows.Forms.TextBox
     Friend WithEvents lblInstalledAt As System.Windows.Forms.Label
@@ -4092,10 +4092,10 @@ Partial Class formMetadata
     Friend WithEvents txtInstallDate As System.Windows.Forms.TextBox
     Friend WithEvents txtDeinstallDate As System.Windows.Forms.TextBox
     Friend WithEvents lbStationID As System.Windows.Forms.Label
-    Friend WithEvents txtInstrStn As System.Windows.Forms.ComboBox
+    Friend WithEvents cboInstrStn As System.Windows.Forms.ComboBox
     Friend WithEvents txtBeginDate As System.Windows.Forms.TextBox
     Friend WithEvents txtEndate As System.Windows.Forms.TextBox
-    Friend WithEvents txtScheduleClass As System.Windows.Forms.ComboBox
+    Friend WithEvents cboScheduleClass As System.Windows.Forms.ComboBox
 
     Friend WithEvents txtInstrumentCode As System.Windows.Forms.TextBox
     Friend WithEvents lblInstumentType As System.Windows.Forms.Label
@@ -4115,5 +4115,5 @@ Partial Class formMetadata
     Friend WithEvents lblimgFile As System.Windows.Forms.Label
     Friend WithEvents lblPercent As System.Windows.Forms.Label
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents txtStationType As ComboBox
+    Friend WithEvents cboStationType As ComboBox
 End Class

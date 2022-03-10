@@ -298,6 +298,11 @@
             conns.Close()
         End Try
         conns.Close()
+
+        ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(LstViewStations, True)
+        ClsTranslations.TranslateComponent(lstViewElements, True)
     End Sub
 
 

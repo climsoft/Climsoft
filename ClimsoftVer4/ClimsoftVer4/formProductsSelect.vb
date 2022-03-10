@@ -43,7 +43,7 @@ Public Class frmProductsSelect
         'MsgBox(maxRows)
         For kount = 0 To maxRows - 1 Step 1
 
-            cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
+            cmbProductsCategory.Items.Add(ClsTranslations.GetTranslation(ds.Tables("tblproducts").Rows(kount).Item("prCategory")))
 
         Next
     End Sub

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class form_agro1
+Partial Class formAgro1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -1445,7 +1445,7 @@ Partial Class form_agro1
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
-        'form_agro1
+        'formAgro1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -1602,7 +1602,7 @@ Partial Class form_agro1
         Me.Controls.Add(Me.cboDay)
         Me.Controls.Add(Me.txtYear)
         Me.KeyPreview = True
-        Me.Name = "form_agro1"
+        Me.Name = "formAgro1"
         Me.Text = "Kenya Agromet data"
         Me.ResumeLayout(False)
         Me.PerformLayout()

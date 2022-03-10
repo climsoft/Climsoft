@@ -126,6 +126,11 @@ Public Class frmQC
             conns.Close()
         End Try
         conns.Close()
+
+        ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(LstViewStations, True)
+        ClsTranslations.TranslateComponent(lstViewElements, True)
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
@@ -173,20 +178,18 @@ Public Class frmQC
 
     End Sub
 
-
-
     Private Sub chkAllElements_Click(sender As Object, e As EventArgs) Handles chkAllElements.Click
         If chkAllElements.Checked = False Then
             For i = 0 To lstViewElements.Items.Count - 1
                 lstViewElements.Items(i).Checked = False
             Next
-            chkAllElements.Text = "Select All Elements"
+            chkAllElements.Text = ClsTranslations.GetTranslation("Select All Elements")
             lstViewElements.Enabled = True
         Else
             For i = 0 To lstViewElements.Items.Count - 1
                 lstViewElements.Items(i).Checked = True
             Next
-            chkAllElements.Text = "Unselect All Elements"
+            chkAllElements.Text = ClsTranslations.GetTranslation("Unselect All Elements")
             chkAllElements.Checked = True
             'lstViewElements.Enabled = False
         End If
@@ -200,7 +203,7 @@ Public Class frmQC
 
         Me.Cursor = Cursors.WaitCursor
 
-        lblDataTransferProgress.Text = "Processing....Please wait!"
+        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing....Please wait!")
 
         ' List the selected stations
         stnlist = ""
@@ -253,7 +256,7 @@ Public Class frmQC
 
         ' Set the stations and elements selection conditions
         If stnselected = False Or elmselected = False Or Len(txtBeginYear.Text) <> 4 Or Len(txtEndYear.Text) <> 4 Then
-            MsgBox(" Selections not properly done. Check values!", MsgBoxStyle.Exclamation, "Selection Error")
+            MsgBox(ClsTranslations.GetTranslation(" Selections not properly done. Check values!"), MsgBoxStyle.Exclamation, ClsTranslations.GetTranslation("Selection Error"))
             Me.Cursor = Cursors.Default
             Exit Sub
         Else
@@ -344,7 +347,7 @@ Public Class frmQC
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
         Catch ex As Exception
-            MsgBox(ex.Message & " Can't create QC Output limits table")
+            MsgBox(ex.Message & ClsTranslations.GetTranslation(" Can't create QC Output limits table"))
             Me.Cursor = Cursors.Default
         End Try
 
@@ -409,7 +412,7 @@ Public Class frmQC
                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
                      "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
                      "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
-                     "upperlimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT);"
+                     "upperlimit <> '' and cast(obsValue as SIGNED) > cast(upperlimit as SIGNED);"
 
             ''"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
@@ -464,7 +467,7 @@ Public Class frmQC
                       "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
                      "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
                      "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
-                      "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT);"
+                      "lowerLimit <> '' and cast(obsValue as SIGNED) < cast(lowerlimit as SIGNED);"
 
             '"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
@@ -652,7 +655,7 @@ Public Class frmQC
 
                     strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
                         "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
-                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as INT) < cast(obsValue_2 as INT);"
+                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as SIGNED) < cast(obsValue_2 as SIGNED);"
 
                     ' '' Create the Command for executing query and set its properties
                     ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -682,7 +685,7 @@ Public Class frmQC
                            "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
                            "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " &
                            "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " &
-                           "and day(obsDatetime_1)=day(obsDatetime_2) And cast(obsValue_1 As INT) < cast(obsValue_2 As INT);"
+                           "and day(obsDatetime_1)=day(obsDatetime_2) And cast(obsValue_1 As SIGNED) < cast(obsValue_2 As SIGNED);"
                 End If
 
                 '' Create the Command for executing query and set its properties
@@ -713,7 +716,7 @@ Public Class frmQC
             'msgTxtQCReportsOutInterelement = "Inter-element reports sent to "
             'MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
         End If
-        lblDataTransferProgress.Text = "Processing complete!"
+        lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Processing complete!")
         Me.Cursor = Cursors.Default
         conn.Close()
     End Sub
@@ -735,7 +738,7 @@ Public Class frmQC
 
             ' Not to proceed if no QC data to output
             If x = 0 Then
-                MsgBox("No QC errors found")
+                MsgBox(ClsTranslations.GetTranslation("No QC errors found"))
                 Exit Sub
             End If
 
@@ -795,10 +798,10 @@ Public Class frmQC
                     Print(111, dt)
                     PrintLine(111)
                 Next
-                msgTxtQCReportsOutInterelement = "QC report for comparison of Elements " & elm1 & " and " & elm2 & " sent to "
+                msgTxtQCReportsOutInterelement = ClsTranslations.GetTranslation("QC report for comparison of Elements") & " " & elm1 & ClsTranslations.GetTranslation("and") & " " & elm2 & " " & ClsTranslations.GetTranslation("sent to")
                 MsgBox(msgTxtQCReportsOutInterelement & qcReportsFolderWindows, MsgBoxStyle.Information)
             Else
-                MsgBox("No QC errors found for comparison of Elements " & elm1 & " and " & elm2)
+                MsgBox(ClsTranslations.GetTranslation("No QC errors found for comparison of Elements") & " " & elm1 & " " & ClsTranslations.GetTranslation("and") & " " & elm2)
             End If
 
             FileClose(111)

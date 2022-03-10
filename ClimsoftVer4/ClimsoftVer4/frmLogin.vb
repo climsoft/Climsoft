@@ -68,7 +68,7 @@ Public Class frmLogin
                 End Try
             End Using
         Else
-            connectionDetails.Add("Default database|" & My.Settings.defaultDatabase)
+            connectionDetails.Add("Default_database|" & My.Settings.defaultDatabase)
         End If
     End Sub
 
@@ -92,7 +92,7 @@ Public Class frmLogin
 
         updateRememberedUsername()
 
-        dbChoice = cmbDatabases.SelectedItem
+        dbChoice = cboDatabases.SelectedItem
         connectionString = ""
         If String.IsNullOrEmpty(dbChoice) Then
             MsgBox("Please select a database from the list, or manage database connections")
@@ -141,7 +141,6 @@ Public Class frmLogin
         Finally
             conn.Close()
         End Try
-
         regDataInit()
         languageTableInit()
         clsDataConnection.OpenConnection(txtusrpwd.Text) 'todo. the connection string should come from somewhere else
@@ -205,12 +204,12 @@ Public Class frmLogin
 
         Try
             ' Clear and then populate Database combobox from connectionDetails
-            cmbDatabases.Items.Clear()
+            cboDatabases.Items.Clear()
             For Each line As String In connectionDetails
                 parts = line.Split("|")
-                cmbDatabases.Items.Add(parts(0))
+                cboDatabases.Items.Add(parts(0))
             Next
-            cmbDatabases.SelectedIndex = 0
+            cboDatabases.SelectedIndex = 0
         Catch
             ' SelectedIndex = 0 will fail if no items are added to cmdDatabases
         End Try
@@ -224,39 +223,6 @@ Public Class frmLogin
         msgKeyentryFormsListUpdated = "List of key-entry forms updated!"
         msgStationInformationNotFound = "Station information Not found. Please add station information And try again!"
 
-        Dim lanCulture As String
-        lanCulture = System.Globalization.CultureInfo.CurrentCulture.Name
-        If Strings.Left(lanCulture, 2) = "en" Then
-            ' MsgBox("Current language Is: English-UK")
-            Me.Text = "Login"
-            lblUsername.Text = "User name:"
-            lblPassword.Text = "Password:"
-            'lblDbdetails.Text = "Show and Configure Database Connection....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancel"
-        ElseIf Strings.Left(lanCulture, 2) = "fr" Then
-            Me.Text = "s'identifier"
-            lblUsername.Text = "Nom d'utilisateur:"
-            lblPassword.Text = "Mot de passe:"
-            'lblDbdetails.Text = "Afficher et configurer la base de données de connexion....."
-            OK.Text = "OK"
-            Cancel.Text = "Annuler"
-        ElseIf Strings.Left(lanCulture, 2) = "de" Then
-            Me.Text = "Anmeldung"
-            lblUsername.Text = "Benutzername:"
-            lblPassword.Text = "Passwort:"
-            'lblDbdetails.Text = "Anzeige und Konfiguration der Verbindungsdatenbank....."
-            OK.Text = "OK"
-            Cancel.Text = "Stornieren"
-        ElseIf Strings.Left(lanCulture, 2) = "pt" Then
-            Me.Text = "Entrar"
-            lblUsername.Text = "Nome de usuário:"
-            lblPassword.Text = "Senha:"
-            'lblDbdetails.Text = "Mostrar e configurar o banco de dados de conexão....."
-            OK.Text = "OK"
-            Cancel.Text = "Cancelar"
-        End If
-
         If My.Settings.rememberUsername Then
             chkRememberUsername.Checked = True
             txtUsername.Text = My.Settings.rememberedUsername
@@ -266,6 +232,9 @@ Public Class frmLogin
         End If
 
         refreshDatabases()
+
+        linkLabelLanguage.Text = My.Settings.languageName
+        ClsTranslations.TranslateForm(Me)
     End Sub
 
     Private Sub LoginForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -321,18 +290,26 @@ Public Class frmLogin
     End Sub
     Sub Path_Security()
         Dim dtpath As String
+
+        dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
+        ' Create the path if it is not there
+        If IO.Directory.Exists(dtpath) = False Then
+            IO.Directory.CreateDirectory(dtpath & "\data")
+        End If
+
         ' Grant full access on `filePath` for all users (allows any user to write to file)
         ' This is currently necessary because some Climsoft installers are not Windows Administrators
-        dtpath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4"
         Try
             Dim dInfo As IO.DirectoryInfo = New IO.DirectoryInfo(dtpath)
             Dim dSecurity As DirectorySecurity = dInfo.GetAccessControl()
+
             dSecurity.AddAccessRule(New FileSystemAccessRule(
                 New SecurityIdentifier(WellKnownSidType.WorldSid, Nothing),
                 FileSystemRights.FullControl,
                 InheritanceFlags.ObjectInherit Or InheritanceFlags.ContainerInherit,
                 PropagationFlags.NoPropagateInherit, AccessControlType.Allow
             ))
+
             dInfo.SetAccessControl(dSecurity)
 
             ''Also Grant full access on `filePath` for all users (allows any user to write to file)
@@ -365,5 +342,11 @@ Public Class frmLogin
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub linkLabelLanguage_Click(sender As Object, e As EventArgs) Handles linkLabelLanguage.Click
+        frmLanguage.ShowDialog()
+        linkLabelLanguage.Text = My.Settings.languageName
+        ClsTranslations.TranslateForm(Me)
     End Sub
 End Class

@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class form_upperair1
+Public Class formUpperAir
 
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim myConnectionString As String
@@ -35,7 +35,7 @@ Public Class form_upperair1
         Me.Close()
     End Sub
 
-    Private Sub form_upperair1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub formUpperair1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dbnme As String
 
         tabNext = True
@@ -172,6 +172,9 @@ Public Class form_upperair1
             End If
         End Try
         conn.Close()
+
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Private Sub form_upperair1_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown

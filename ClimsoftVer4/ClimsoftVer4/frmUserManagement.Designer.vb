@@ -164,12 +164,11 @@ Partial Class frmUserManagement
         Me.lblFrmUserManagementGuidelines.AutoSize = True
         Me.lblFrmUserManagementGuidelines.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFrmUserManagementGuidelines.ForeColor = System.Drawing.Color.Red
-        Me.lblFrmUserManagementGuidelines.Location = New System.Drawing.Point(32, 18)
+        Me.lblFrmUserManagementGuidelines.Location = New System.Drawing.Point(125, 16)
         Me.lblFrmUserManagementGuidelines.Name = "lblFrmUserManagementGuidelines"
-        Me.lblFrmUserManagementGuidelines.Size = New System.Drawing.Size(561, 16)
+        Me.lblFrmUserManagementGuidelines.Size = New System.Drawing.Size(466, 16)
         Me.lblFrmUserManagementGuidelines.TabIndex = 12
-        Me.lblFrmUserManagementGuidelines.Text = "To remove a user account, select the username on the grid display and click on De" &
-    "lete button."
+        Me.lblFrmUserManagementGuidelines.Text = "To delete or update user account, first select the username on the grid display"
         '
         'btnUpdate
         '

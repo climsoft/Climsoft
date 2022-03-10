@@ -29,7 +29,7 @@
 
             With ds.Tables("data_forms")
                 For i = 0 To .Rows.Count - 1
-                    lstForms.Items.Add(.Rows(i).Item("description"))
+                    lstBoxForms.Items.Add(.Rows(i).Item("description"))
                 Next
             End With
 
@@ -46,11 +46,14 @@
             End With
 
             'Set Header for Elements list view
-            lstvElements.Columns.Clear()
-            lstvElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
-            lstvElements.Columns.Add("Element Description", 500, HorizontalAlignment.Left)
+            lstViewElements.Columns.Clear()
+            lstViewElements.Columns.Add("Element Id", 80, HorizontalAlignment.Left)
+            lstViewElements.Columns.Add("Element Description", 500, HorizontalAlignment.Left)
 
             'conn.Close()
+
+            ClsTranslations.TranslateForm(Me)
+
         Catch ex As Exception
             MsgBox(ex.Message)
             conn.Close()
@@ -102,13 +105,13 @@
             itm = New ListViewItem(str)
 
             ItmExist = False
-            If lstvElements.Items.Count = 0 Then ' Always add the first selected item 
-                lstvElements.Items.Add(itm)
+            If lstViewElements.Items.Count = 0 Then ' Always add the first selected item 
+                lstViewElements.Items.Add(itm)
                 'lstvElements.Items.Insert(1, itm)
             Else
-                For j = 0 To lstvElements.Items.Count - 1
+                For j = 0 To lstViewElements.Items.Count - 1
                     ' Check if the item has been added in the list and skip it if so
-                    If str(0) = lstvElements.Items(j).Text Then
+                    If str(0) = lstViewElements.Items(j).Text Then
                         ItmExist = True
                         Exit For
                     End If
@@ -131,13 +134,13 @@
         End If
     End Sub
 
-    Private Sub lstvElements_KeyDown(sender As Object, e As KeyEventArgs) Handles lstvElements.KeyDown
+    Private Sub lstvElements_KeyDown(sender As Object, e As KeyEventArgs) Handles lstViewElements.KeyDown
         If e.KeyCode = 46 Then
             'lstvElements.SelectedItems.Clear()
             'lstvElements.Refresh()
-            For i = 0 To lstvElements.Items.Count - 1
-                If lstvElements.Items(i).Selected Then
-                    lstvElements.Items(i).Remove()
+            For i = 0 To lstViewElements.Items.Count - 1
+                If lstViewElements.Items(i).Selected Then
+                    lstViewElements.Items(i).Remove()
                     Exit For
                 End If
             Next
@@ -166,7 +169,7 @@
         xtSQL = "`signature` varchar(45) DEFAULT NULL, `entryDatetime` datetime DEFAULT NULL, `temperatureUnits` varchar(45) DEFAULT NULL,`precipUnits` varchar(45) DEFAULT NULL,`cloudHeightUnits` varchar(45) DEFAULT NULL,`visUnits` varchar(45) DEFAULT NULL,`windspdUnits` varchar(45) DEFAULT NULL, "
         pryKySQL = "PRIMARY KEY (`stationId`,`yyyy`,`mm`,`dd`,`hh`));"
 
-        With lstvElements
+        With lstViewElements
             valSQL = ""
             flgSQL = ""
             For i = 0 To .Items.Count - 1
@@ -195,16 +198,16 @@
     End Sub
 
     Private Sub butClear_Click(sender As Object, e As EventArgs) Handles butClear.Click
-        lstvElements.Items.Clear()
+        lstViewElements.Items.Clear()
     End Sub
 
-    Private Sub lstForms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstForms.SelectedIndexChanged
+    Private Sub lstForms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstBoxForms.SelectedIndexChanged
         Dim col As String
 
         'MsgBox(lstForms.SelectedItem)
         'Clear_lstElements()
 
-        sql = "SELECT form_name, description FROM data_forms where description = '" & lstForms.SelectedItem & "';"
+        sql = "SELECT form_name, description FROM data_forms where description = '" & lstBoxForms.SelectedItem & "';"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "forms")
@@ -226,7 +229,7 @@
 
         Try
             With ds.Tables("frm")
-                lstvElements.Items.Clear()
+                lstViewElements.Items.Clear()
                 'MsgBox("cleared")
                 For i = 0 To .Columns.Count - 1
                     col = .Columns(i).ColumnName
@@ -246,7 +249,7 @@
         Dim stat, ed As Integer
 
         stat = 5
-        ed = stat + lstvElements.Items.Count - 1
+        ed = stat + lstViewElements.Items.Count - 1
         sql = "update data_forms set val_start_position = " & stat & ", val_end_position =  " & ed & " where form_name = '" & tbl & "';"
         Try
             qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
@@ -262,7 +265,7 @@
     End Function
     Function TableName(ByRef tbl As String) As Boolean
 
-        sql = "SELECT table_name FROM data_forms where description = '" & lstForms.SelectedItem & "';"
+        sql = "SELECT table_name FROM data_forms where description = '" & lstBoxForms.SelectedItem & "';"
         da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
         ds.Clear()
         da.Fill(ds, "tblNm")
@@ -282,7 +285,7 @@
 
     Sub Clear_lstElements()
         Try
-            With lstvElements
+            With lstViewElements
                 If .Items.Count > 0 Then
                     .Items.Clear()
                     'MsgBox("Cleared")
@@ -301,17 +304,17 @@
         Dim insrt As Boolean
 
         insrt = False
-        For k = 0 To lstvElements.Items.Count - 1
-            If lstvElements.Items(k).Selected Then
+        For k = 0 To lstViewElements.Items.Count - 1
+            If lstViewElements.Items(k).Selected Then
                 insrt = True
                 Exit For
             End If
         Next
 
         If insrt = True Then
-            lstvElements.Items.Insert(k, itms)
+            lstViewElements.Items.Insert(k, itms)
         Else
-            lstvElements.Items.Add(itms)
+            lstViewElements.Items.Add(itms)
         End If
 
     End Sub

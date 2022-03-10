@@ -128,6 +128,8 @@ Public Class frmGeneralSettings
             recNumberTextBox.Text = "Record 1 of 1"
         End If
 
+        ClsTranslations.TranslateForm(Me)
+
     End Sub
 
     Private Sub btnMoveFirst_Click(sender As Object, e As EventArgs) Handles btnMoveFirst.Click
@@ -348,8 +350,8 @@ Public Class frmGeneralSettings
         Else
             MsgBox("You don't have permission to view the information!", MsgBoxStyle.Exclamation)
         End If
-        MsgBox("When updating folder locations, Please keep forward slash'/' for QC output folder locations " &
-            "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")
+        'MsgBox("When updating folder locations, Please keep forward slash'/' for QC output folder locations " &
+        '    "and backslash for other folder locations '\'. ", MsgBoxStyle.Information, "Folder Locations")
     End Sub
 
     Sub UpdateRegistry()

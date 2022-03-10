@@ -10,7 +10,7 @@ Public Class frmDatabaseConnections
         Dim connectionString As String
         Dim parts As String()
 
-        DataGridView1.Rows.Clear()
+        dataGridViewConnections.Rows.Clear()
 
         For Each line As String In frmLogin.connectionDetails
             parts = line.Split("|")
@@ -19,12 +19,17 @@ Public Class frmDatabaseConnections
                 ' Attempt to offer the second part to the connection string builder
                 connectionString = parts(1)
                 builder.ConnectionString = connectionString
-                DataGridView1.Rows.Add(connection, builder("server"), builder("database"), builder("port"))
+                dataGridViewConnections.Rows.Add(connection, builder("server"), builder("database"), builder("port"))
             Catch ex As Exception
                 ' If a line fails for any reason then we skip it. It is invalid, therefore it will
                 ' not be displayed and it will not be written back to the file.
             End Try
         Next
+
+        ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(dataGridViewConnections, True)
+
     End Sub
 
     Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles cmdOK.Click
@@ -35,7 +40,7 @@ Public Class frmDatabaseConnections
         Dim port As String
         Dim server As String
 
-        For Each row As DataGridViewRow In DataGridView1.Rows
+        For Each row As DataGridViewRow In dataGridViewConnections.Rows
             builder = New Common.DbConnectionStringBuilder()
             connection = row.Cells(0).Value
             server = row.Cells(1).Value
@@ -115,7 +120,7 @@ Public Class frmDatabaseConnections
 
         ' Loop over validated rows and add details from each row to `filePath`
         Using writer As IO.StreamWriter = New IO.StreamWriter(frmLogin.filePath)
-            For Each row As DataGridViewRow In DataGridView1.Rows
+            For Each row As DataGridViewRow In dataGridViewConnections.Rows
                 builder = New Common.DbConnectionStringBuilder()
                 connection = row.Cells(0).Value
                 server = row.Cells(1).Value
@@ -155,9 +160,9 @@ Public Class frmDatabaseConnections
         Close()
     End Sub
 
-    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles dataGridViewConnections.SelectionChanged
         Try
-            If DataGridView1.CurrentCell.RowIndex + 1 = DataGridView1.Rows.Count Then
+            If dataGridViewConnections.CurrentCell.RowIndex + 1 = dataGridViewConnections.Rows.Count Then
                 grpCurrentSelection.Enabled = False
             Else
                 grpCurrentSelection.Enabled = True
@@ -171,13 +176,13 @@ Public Class frmDatabaseConnections
         Dim colIndex As Integer
         Dim row As DataGridViewRow
         Try
-            colIndex = DataGridView1.SelectedCells(0).OwningColumn.Index
-            row = DataGridView1.Rows(DataGridView1.CurrentCell.RowIndex)
-            DataGridView1.Rows.Remove(row)
-            DataGridView1.Rows.Insert(0, row)
-            DataGridView1.Refresh()
-            DataGridView1.ClearSelection()
-            DataGridView1.Rows(0).Cells(colIndex).Selected = True
+            colIndex = dataGridViewConnections.SelectedCells(0).OwningColumn.Index
+            row = dataGridViewConnections.Rows(dataGridViewConnections.CurrentCell.RowIndex)
+            dataGridViewConnections.Rows.Remove(row)
+            dataGridViewConnections.Rows.Insert(0, row)
+            dataGridViewConnections.Refresh()
+            dataGridViewConnections.ClearSelection()
+            dataGridViewConnections.Rows(0).Cells(colIndex).Selected = True
         Catch ex As Exception
 
         End Try
@@ -189,8 +194,8 @@ Public Class frmDatabaseConnections
 
     Private Sub cmdRemove_Click(sender As Object, e As EventArgs) Handles cmdRemove.Click
         Try
-            DataGridView1.Rows.RemoveAt(DataGridView1.CurrentCell.RowIndex)
-            DataGridView1.Refresh()
+            dataGridViewConnections.Rows.RemoveAt(dataGridViewConnections.CurrentCell.RowIndex)
+            dataGridViewConnections.Refresh()
         Catch ex As Exception
 
         End Try
