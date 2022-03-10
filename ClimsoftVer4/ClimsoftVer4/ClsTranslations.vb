@@ -67,6 +67,7 @@ Public Class ClsTranslations
         Return TranslateWinForm.clsTranslateWinForm.GetTranslation(strText, GetDbPath(), GetLanguageCode())
     End Function
 
+    'todo. later to be pushed to the translation library
     Public Shared Sub TranslateComponent(dataGrid As DataGridView, Optional bHeaderOnly As Boolean = True)
         For iColumnIndex As Integer = 0 To dataGrid.Columns.Count - 1
             dataGrid.Columns(iColumnIndex).HeaderText = GetTranslation(dataGrid.Columns(iColumnIndex).HeaderText)
@@ -81,6 +82,7 @@ Public Class ClsTranslations
         End If
     End Sub
 
+    'todo. later to be pushed to the translation library
     Public Shared Sub TranslateComponent(listView As ListView, Optional bHeaderOnly As Boolean = True)
 
         For iColumnIndex As Integer = 0 To listView.Columns.Count - 1
