@@ -24,16 +24,16 @@ Partial Class frmChangeOwnPassword
     Private Sub InitializeComponent()
         Me.btnHelp = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnOK = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.lblConfirmNewPassword = New System.Windows.Forms.Label()
-        Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.lblNewPassword = New System.Windows.Forms.Label()
-        Me.txtNewPassword = New System.Windows.Forms.TextBox()
+        Me.ucrPasswordNew = New ClimsoftVer4.ucrPassword()
+        Me.ucrPasswordConfirm = New ClimsoftVer4.ucrPassword()
         Me.SuspendLayout()
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(290, 131)
+        Me.btnHelp.Location = New System.Drawing.Point(298, 139)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(66, 23)
         Me.btnHelp.TabIndex = 17
@@ -42,72 +42,77 @@ Partial Class frmChangeOwnPassword
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(218, 131)
+        Me.btnCancel.Location = New System.Drawing.Point(226, 139)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(66, 23)
         Me.btnCancel.TabIndex = 16
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'btnOK
+        'btnSave
         '
-        Me.btnOK.Enabled = False
-        Me.btnOK.Location = New System.Drawing.Point(146, 131)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(66, 23)
-        Me.btnOK.TabIndex = 15
-        Me.btnOK.Text = "OK"
-        Me.btnOK.UseVisualStyleBackColor = True
+        Me.btnSave.Enabled = False
+        Me.btnSave.Location = New System.Drawing.Point(154, 139)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(66, 23)
+        Me.btnSave.TabIndex = 15
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'lblConfirmNewPassword
         '
         Me.lblConfirmNewPassword.AutoSize = True
-        Me.lblConfirmNewPassword.Location = New System.Drawing.Point(44, 97)
+        Me.lblConfirmNewPassword.Location = New System.Drawing.Point(40, 80)
         Me.lblConfirmNewPassword.Name = "lblConfirmNewPassword"
-        Me.lblConfirmNewPassword.Size = New System.Drawing.Size(122, 13)
+        Me.lblConfirmNewPassword.Size = New System.Drawing.Size(94, 13)
         Me.lblConfirmNewPassword.TabIndex = 14
-        Me.lblConfirmNewPassword.Text = "Re-enter New Password"
-        '
-        'txtConfirmPassword
-        '
-        Me.txtConfirmPassword.Location = New System.Drawing.Point(189, 94)
-        Me.txtConfirmPassword.Name = "txtConfirmPassword"
-        Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtConfirmPassword.Size = New System.Drawing.Size(164, 20)
-        Me.txtConfirmPassword.TabIndex = 13
+        Me.lblConfirmNewPassword.Text = "Confirm Password:"
         '
         'lblNewPassword
         '
         Me.lblNewPassword.AutoSize = True
-        Me.lblNewPassword.Location = New System.Drawing.Point(44, 53)
+        Me.lblNewPassword.Location = New System.Drawing.Point(40, 26)
         Me.lblNewPassword.Name = "lblNewPassword"
-        Me.lblNewPassword.Size = New System.Drawing.Size(78, 13)
+        Me.lblNewPassword.Size = New System.Drawing.Size(81, 13)
         Me.lblNewPassword.TabIndex = 12
-        Me.lblNewPassword.Text = "New Password"
+        Me.lblNewPassword.Text = "New Password:"
         '
-        'txtNewPassword
+        'ucrPasswordNew
         '
-        Me.txtNewPassword.Location = New System.Drawing.Point(189, 50)
-        Me.txtNewPassword.Name = "txtNewPassword"
-        Me.txtNewPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtNewPassword.Size = New System.Drawing.Size(164, 20)
-        Me.txtNewPassword.TabIndex = 11
+        Me.ucrPasswordNew.FieldName = Nothing
+        Me.ucrPasswordNew.KeyControl = False
+        Me.ucrPasswordNew.Location = New System.Drawing.Point(165, 7)
+        Me.ucrPasswordNew.Name = "ucrPasswordNew"
+        Me.ucrPasswordNew.Size = New System.Drawing.Size(207, 35)
+        Me.ucrPasswordNew.TabIndex = 20
+        Me.ucrPasswordNew.ValidPassword = False
+        '
+        'ucrPasswordConfirm
+        '
+        Me.ucrPasswordConfirm.FieldName = Nothing
+        Me.ucrPasswordConfirm.KeyControl = False
+        Me.ucrPasswordConfirm.Location = New System.Drawing.Point(167, 61)
+        Me.ucrPasswordConfirm.Name = "ucrPasswordConfirm"
+        Me.ucrPasswordConfirm.Size = New System.Drawing.Size(207, 35)
+        Me.ucrPasswordConfirm.TabIndex = 21
+        Me.ucrPasswordConfirm.ValidPassword = False
         '
         'frmChangeOwnPassword
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(399, 188)
+        Me.ClientSize = New System.Drawing.Size(379, 172)
+        Me.Controls.Add(Me.ucrPasswordConfirm)
+        Me.Controls.Add(Me.ucrPasswordNew)
         Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOK)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lblConfirmNewPassword)
-        Me.Controls.Add(Me.txtConfirmPassword)
         Me.Controls.Add(Me.lblNewPassword)
-        Me.Controls.Add(Me.txtNewPassword)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmChangeOwnPassword"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Change your own password"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -115,9 +120,9 @@ Partial Class frmChangeOwnPassword
     End Sub
     Friend WithEvents btnHelp As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents btnOK As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents lblConfirmNewPassword As System.Windows.Forms.Label
-    Friend WithEvents txtConfirmPassword As System.Windows.Forms.TextBox
     Friend WithEvents lblNewPassword As System.Windows.Forms.Label
-    Friend WithEvents txtNewPassword As System.Windows.Forms.TextBox
+    Friend WithEvents ucrPasswordNew As ucrPassword
+    Friend WithEvents ucrPasswordConfirm As ucrPassword
 End Class

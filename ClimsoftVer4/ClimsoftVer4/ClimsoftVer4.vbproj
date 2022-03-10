@@ -628,6 +628,12 @@
     <Compile Include="frmUploadToObsFinal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmUser.Designer.vb">
+      <DependentUpon>frmUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUserManagement.Designer.vb">
       <DependentUpon>frmUserManagement.vb</DependentUpon>
     </Compile>
@@ -804,6 +810,12 @@
       <DependentUpon>ucrMetadataStationQualifier.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrMetadataStationQualifier.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrPassword.Designer.vb">
+      <DependentUpon>ucrPassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrPassword.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrSynopticRA1.Designer.vb">
@@ -1130,6 +1142,9 @@
     <EmbeddedResource Include="frmUploadToObsFinal.resx">
       <DependentUpon>frmUploadToObsFinal.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmUser.resx">
+      <DependentUpon>frmUser.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUserManagement.resx">
       <DependentUpon>frmUserManagement.vb</DependentUpon>
     </EmbeddedResource>
@@ -1213,6 +1228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrMonth.resx">
       <DependentUpon>ucrMonth.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrPassword.resx">
+      <DependentUpon>ucrPassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSynopticRA1.resx">
       <DependentUpon>ucrSynopticRA1.vb</DependentUpon>
