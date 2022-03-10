@@ -72,23 +72,23 @@ Public Class ucrNavigation
         'Display the record number in the data navigation Textbox
         If iCurrRow = -1 Then
             If CheckIfRowExistsInDb() Then
-                txtRecordNum.Text = "Record Exists"
+                txtRecordNum.Text = ClsTranslations.GetTranslation("Record Exists")
             Else
-                txtRecordNum.Text = "New Record"
+                txtRecordNum.Text = ClsTranslations.GetTranslation("New Record")
             End If
 
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iMaxRows = 0 Then
-            txtRecordNum.Text = "No Records"
+            txtRecordNum.Text = ClsTranslations.GetTranslation("No Records")
             'disable navigation buttons
             EnableNavigationButtons(False)
         ElseIf iCurrRow >= 0 AndAlso iCurrRow < iMaxRows Then
-            txtRecordNum.Text = "Record " & iCurrRow + 1 & " of " & iMaxRows
+            txtRecordNum.Text = ClsTranslations.GetTranslation("Record") & " " & iCurrRow + 1 & " " & ClsTranslations.GetTranslation("of") & " " & iMaxRows
             'enable navigation buttons
             EnableNavigationButtons(True)
         Else
-            txtRecordNum.Text = "New Record"
+            txtRecordNum.Text = ClsTranslations.GetTranslation("New Record")
             'disable navigation buttons
             EnableNavigationButtons(False)
         End If

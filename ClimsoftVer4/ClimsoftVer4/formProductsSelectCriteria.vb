@@ -20,8 +20,8 @@ Public Class formProductsSelectCriteria
     Dim maxRows, maxColumns As Integer
     Dim conn As New MySql.Data.MySqlClient.MySqlConnection
     Dim MyConnectionString As String
-    Dim kounts As Integer
-    Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, sql As String
+    Dim kounts, code As Integer
+    Dim stnlist, elmlist, levlist, elmcolmn, sdate, edate, sql,abbrev As String
     Dim SumAvg, SummaryType As String
     Public CPTstart, CPTend As String
     Dim cmd As MySql.Data.MySqlClient.MySqlCommand
@@ -247,7 +247,6 @@ Public Class formProductsSelectCriteria
     Private Sub cmdExtract_Click(sender As Object, e As EventArgs) Handles cmdExtract.Click
         'MsgBox(Me.lblProductType.Text)
 
-
         Dim ProductsPath, xpivot, threshValue As String
         SumAvg = ""
         SummaryType = ""
@@ -417,7 +416,7 @@ Public Class formProductsSelectCriteria
                            Order By recordedFrom, describedBy, YY, MM) As tt
                            where DF >= 0 group by YY, MM;"
 
-                    ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                    '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "select StationID,station_Name,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
@@ -442,7 +441,7 @@ Public Class formProductsSelectCriteria
                            group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF >= 0 
                            group by StationID, Element_Code, YY order by StationID, Element_Code, YY;"
 
-                        ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                        '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                         'sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy as Element_Code, latitude As Lat, longitude As Lon, elevation As Elev, YY" & xpivot & " from (Select recordedFrom, describedBy,stationName, latitude, longitude, elevation, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                         '   From observationfinal inner Join station On stationId = recordedFrom
                         '   Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
@@ -495,7 +494,7 @@ Public Class formProductsSelectCriteria
                            group by StationID, describedBy, YY) as ttt
                            where TM = 12 Group by StationID, YY;"
 
-                    ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                    '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "Select StationID,Station_Name,Lat, Lon, Elev, YY, " & elmcolmn & " from(select StationID, Station_Name, describedBy, Lat, Lon, Elev, YY, Count(YY) As TM, " & SumAvg & "(value) As value from (Select StationID, Station_Name, describedBy, Lat, Lon, Elev, YY, MM, Value from (Select recordedFrom As StationID, stationName As Station_Name, describedBy, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
@@ -582,6 +581,30 @@ Public Class formProductsSelectCriteria
 
                 Case "GeoCLIM Monthly"
                     GeoCLIMMonthlyProducts(stnlist, sdate, edate)
+
+                Case "GeoCLIM Dekadal"
+
+                    For elems = 0 To lstvElements.Items.Count - 1
+                        code = lstvElements.Items(elems).SubItems(0).Text
+                        abbrev = lstvElements.Items(elems).SubItems(1).Text
+                        GeoCLIMDekadalProducts(stnlist, code, abbrev, sdate, edate)
+                    Next
+                Case "GeoCLIM Daily"
+
+                    ' Organise the daily values in horizontal structure i.e. 1..31
+                    xpivot = SumAvg
+                    For i = 1 To 31
+                        If i = 1 Then xpivot = ""
+                        xpivot = xpivot & "," & SumAvg & "(IF(day(obsDatetime) = '" & i & "', value, NULL)) AS '" & i & "'"
+                    Next
+
+                    ' Each element selected will be in a separate file with a prefix of element abbreviation
+                    For elems = 0 To lstvElements.Items.Count - 1
+                        code = lstvElements.Items(elems).SubItems(0).Text
+                        abbrev = lstvElements.Items(elems).SubItems(1).Text
+                        GeoCLIMDailyProducts(stnlist, code, abbrev, sdate, edate, xpivot)
+                    Next
+
                 Case "Inventory"
 
                     xpivot = SumAvg
@@ -592,9 +615,6 @@ Public Class formProductsSelectCriteria
 
                     sql = "DROP TABLE IF EXISTS inventory_output; CREATE TABLE inventory_output Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As YYYY, Month(obsDatetime) As MM " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
                                   "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,YYYY,MM;"
-
-                    'sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy As Code, latitude As Lat, longitude As Lon, elevation As Elev, year(obsDatetime) As YYYY, Month(obsDatetime) As MM " & xpivot & " FROM(Select recordedFrom, describedBy, stationName, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom
-                    '       WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Code,YYYY,MM"
 
                     Inventory_Table(sql)
 
@@ -1279,7 +1299,8 @@ Err:
                     If IsDBNull(ds.Tables("observationfinal").Rows(k).Item(i)) Then
                         Write(11, "-999")
                     Else
-                        Write(11, Format("{0:0.00}", ds.Tables("observationfinal").Rows(k).Item(i)))
+                        'Write(11, Format("{0:0.00}", ds.Tables("observationfinal").Rows(k).Item(i)))
+                        Write(11, Strings.Format(ds.Tables("observationfinal").Rows(k).Item(i), "0.00"))
                     End If
                 Next
                 PrintLine(11)
@@ -1296,6 +1317,174 @@ Err:
 
     End Sub
 
+    Sub GeoCLIMDekadalProducts(stnlist As String, codes As Integer, abbrev As String, sdate As String, edate As String)
+
+        Dim dad As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsd As New DataSet
+        Dim fl, yy, hdr, dat1, dat2, tst As String
+        Dim k As Long
+        Dim mm, mm1 As Integer
+
+        sql = "SELECT country as Country,stationName as Station,authority as Source,latitude as LAT,longitude as LON, elevation as Elevation,wmoid as ID,year(obsDatetime) as Year,month(obsDatetime) as Month, round(day(obsDatetime)/10.5 + 0.5,0) as  DEKAD, AVG(IF(describedBy = " & codes & ", value, NULL)) AS '" & abbrev & "' FROM (SELECT country, stationName,authority, latitude, longitude,elevation,recordedFrom, wmoid, describedBy, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal ON stationId = recordedFrom " &
+                        "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & codes & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY ID,Year,Month,DEKAD;"
+
+            conn.Open()
+        Try
+            dad = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsd.Clear()
+            dad.Fill(dsd, "geodekadal")
+            conn.Close()
+
+            With dsd.Tables("geodekadal")
+                yy = .Rows(0).Item(7)
+                mm = .Rows(0).Item(8)
+                mm1 = mm
+
+                ' Create a file for each type of observation element
+
+                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\GEOCLMdekadal_" & abbrev & ".csv"
+
+                FileOpen(11, fl, OpenMode.Output)
+
+                ' Write the metadata headers
+                hdr = .Columns.Item(0).ColumnName
+                For kount = 1 To 7
+                    hdr = hdr & "," & .Columns.Item(kount).ColumnName
+                Next
+                ' Write the dekadal headers
+                For kount = 1 To 36
+                    hdr = hdr & ",D" & kount
+                Next
+                PrintLine(11, hdr)
+
+                k = 0
+                Do While k < .Rows.Count - 1
+
+                    mm = .Rows(k).Item(8)
+                    mm1 = mm
+                    dat1 = .Rows(k).Item(0)
+
+                    For i = 1 To 7
+                        dat1 = dat1 & "," & .Rows(k).Item(i)
+                    Next
+
+                    ' Dekadal values
+
+                    ' If data months does not start in January
+                    If mm > 1 Then
+                        For i = 1 To mm - 1
+                            mm1 = i
+                            For j = 1 To 3
+                                dat1 = dat1 & ",-9999"
+                            Next
+                        Next
+                    End If
+                    dat2 = dat1
+
+                    Do While mm <= 12
+                        For i = 1 To 3
+                            Try ' Test if selected Data months is upto year end and fill the remaining months with missing data flags
+                                tst = .Rows(k).Item(8)
+                            Catch ex As Exception
+                                If ex.HResult = -2146233080 Then
+                                    For j = i To 3
+                                        dat2 = dat2 & ",-9999"
+                                    Next j
+                                    mm = mm + 1
+                                    Continue Do
+                                End If
+                            End Try
+
+                            If .Rows(k).Item(8) = mm Then
+                                If IsDBNull(.Rows(k).Item(10)) Then
+                                    dat2 = dat2 & ",-9999"
+                                Else
+                                    dat2 = dat2 & "," & Strings.Format(.Rows(k).Item(10), "0.00")
+                                End If
+                                k = k + 1
+                            Else ' Some data dekads missing
+                                For j = i To 3
+                                    dat2 = dat2 & ",-9999"
+                                Next j
+                                mm = mm + 1
+                                Continue Do
+                            End If
+                        Next i
+                        mm = mm + 1
+                    Loop
+                    PrintLine(11, dat2)
+                Loop
+
+            End With
+            FileClose(11)
+            CommonModules.ViewFile(fl)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            FileClose(11)
+        End Try
+    End Sub
+    Sub GeoCLIMDailyProducts(stnlist As String, codes As Integer, abbrev As String, sdate As String, edate As String, xpivot As String)
+
+        Dim dad As MySql.Data.MySqlClient.MySqlDataAdapter
+        Dim dsd As New DataSet
+        Dim fl As String
+        Dim k As Long
+        Dim dat As String
+
+        sql = "SELECT country as Country,stationName as Station,authority as Source,latitude as LAT,longitude as LON, elevation as Elevation,wmoid as ID, year(obsDatetime) As Year, Month(obsDatetime) As Month " & xpivot & " FROM(Select recordedFrom, describedBy, stationId, stationName, country, authority, wmoid, latitude, longitude, elevation, obsDatetime, obsValue value FROM  station INNER JOIN observationfinal On stationId = recordedFrom " &
+                              "WHERE (RecordedFrom = " & stnlist & ") AND (describedBy =" & codes & ") and (obsDatetime between '" & sdate & "' and '" & edate & "') ORDER BY recordedFrom, obsDatetime) t GROUP BY StationId,Year,Month;"
+
+        Try
+            conn.Open()
+            dad = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+            dsd.Clear()
+            dad.Fill(dsd, "Geoclimdly")
+            conn.Close()
+
+        With dsd.Tables("Geoclimdly")
+
+                ' Create a file for each type of observation element
+                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\GEOCLMdaily_" & abbrev & ".csv"
+
+                FileOpen(11, fl, OpenMode.Output)
+
+                ' Output the column headers
+                dat = .Columns(0).ColumnName
+                For j = 1 To .Columns.Count - 1
+                    dat = dat & "," & .Columns(j).ColumnName
+                Next
+
+                PrintLine(11, dat)
+
+                ' Output data values
+                For k = 0 To .Rows.Count - 1
+                    dat = .Rows(k).Item(0)
+                    For i = 1 To .Columns.Count - 1
+
+                        ' Assign a flag to missing data
+                        If IsDBNull(.Rows(k).Item(i)) Then
+                            dat = dat & "," & "-9999"
+                        Else
+                            ' Round the observation values to 2 decimal places
+                            If IsNumeric(.Rows(k).Item(i)) And i > 8 Then
+                                dat = dat & "," & Strings.Format(.Rows(k).Item(i), "0.00")
+                            Else
+                                dat = dat & "," & .Rows(k).Item(i)
+                            End If
+                        End If
+                    Next
+                    PrintLine(11, dat)
+                Next
+            End With
+        FileClose(11)
+            CommonModules.ViewFile(fl)
+
+        Catch ex As Exception
+        MsgBox(ex.Message)
+        FileClose(11)
+        End Try
+    End Sub
     Sub CPTProducts(st As String, ed As String)
         Dim stnscolmn, f1, sql1, stn As String
         Dim dstn As New DataSet
@@ -1897,7 +2086,6 @@ Err:
                 Else
                     Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
                 End If
-
             Else
                 Write(fp, dsf.Tables("observationfinal").Rows(rw).Item(col))
             End If

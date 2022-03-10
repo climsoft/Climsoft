@@ -61,13 +61,13 @@ Public Class frmQC
         'Initialize Stations List Views
         LstViewStations.Columns.Clear()
 
-        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Id"), 100, HorizontalAlignment.Left)
-        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Name"), 200, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add("Station Id", 100, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add("Station Name", 200, HorizontalAlignment.Left)
 
         'Initialize Elements List Views
         lstViewElements.Columns.Clear()
-        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Code"), 100, HorizontalAlignment.Left)
-        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Details"), 200, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add("Element Code", 100, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add("Element Details", 200, HorizontalAlignment.Left)
         lblDataTransferProgress.Text = ""
         txtBeginYear.Text = ""
         txtEndYear.Text = ""
@@ -128,6 +128,9 @@ Public Class frmQC
         conns.Close()
 
         ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(LstViewStations, True)
+        ClsTranslations.TranslateComponent(lstViewElements, True)
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
@@ -409,7 +412,7 @@ Public Class frmQC
                      "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,upperlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
                      "from observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
                      "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
-                     "upperlimit <> '' and cast(obsValue as INT) > cast(upperlimit as INT);"
+                     "upperlimit <> '' and cast(obsValue as SIGNED) > cast(upperlimit as SIGNED);"
 
             ''"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','upperlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
@@ -464,7 +467,7 @@ Public Class frmQC
                       "select recordedfrom,describedby,obsdatetime,year(obsdatetime) as yyyy, month(obsdatetime) as mm,day(obsdatetime) as dd, hour(obsdatetime) as hh,obsvalue,lowerlimit,qcStatus,acquisitionType,obsLevel,capturedBy,dataForm " &
                      "From observationinitial,obselement where describedBy=elementId and " & stnelm_selected & " year(obsdatetime) " &
                      "between " & beginYear & " and " & endYear & " and month(obsdatetime) between " & beginMonth & " and " & endMonth & " and  " &
-                      "lowerLimit <> '' and cast(obsValue as INT) < cast(lowerlimit as INT);"
+                      "lowerLimit <> '' and cast(obsValue as SIGNED) < cast(lowerlimit as SIGNED);"
 
             '"union all select 'StationId','ElementId','DateTime','yyyy','mm','dd','hh','ObsValue','lowerlimit','qcStatus','acquisitionType','obsLevel','capturedBy','dataForm' " & _
 
@@ -652,7 +655,7 @@ Public Class frmQC
 
                     strSQL = "SELECT 'stationId','elementId_1','elementId_2','obsDatetime1','obsdatetime_2','yyyy','mm','dd','hh_1','hh_2','obsValue_1','obsValue_2','qcStatus_1','qcStatus_2','acquisitionType_2','obsLevel_2','capturedBy_2','dataForm_2' " &
                         "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
-                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as INT) < cast(obsValue_2 as INT);"
+                        "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and obsDatetime_1=obsDatetime_2 and cast(obsValue_1 as SIGNED) < cast(obsValue_2 as SIGNED);"
 
                     ' '' Create the Command for executing query and set its properties
                     ''objCmd = New MySql.Data.MySqlClient.MySqlCommand(strSQL, conn)
@@ -682,7 +685,7 @@ Public Class frmQC
                            "union all SELECT stationId_1,elementId_1,elementId_2,obsDatetime_1,obsDatetime_2,year(obsDatetime_1) as yyyy, month(obsDatetime_1) as mm, day(obsDatetime_1) as dd, hour(obsDatetime_1) as hh_1, hour(obsDatetime_2) as hh_2,obsValue_1,obsValue_2,qcStatus_1,qcStatus_2,acquisitionType_2,obsLevel_2,capturedBy_2,dataForm_2 " &
                            "from qc_interelement_1,qc_interelement_2 WHERE stationId_1=stationId_2 and " &
                            "year(obsDatetime_1)=year(obsDatetime_2) and month(obsDatetime_1)=month(obsDatetime_2) " &
-                           "and day(obsDatetime_1)=day(obsDatetime_2) And cast(obsValue_1 As INT) < cast(obsValue_2 As INT);"
+                           "and day(obsDatetime_1)=day(obsDatetime_2) And cast(obsValue_1 As SIGNED) < cast(obsValue_2 As SIGNED);"
                 End If
 
                 '' Create the Command for executing query and set its properties

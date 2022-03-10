@@ -458,9 +458,9 @@
         userName = frmLogin.txtUsername.Text
         dsSourceTableName = "form_synoptic2_tdcf"
         If userGroup = "ClimsoftOperator" Or userGroup = "ClimsoftRainfall" Then
-            sql = "SELECT * FROM form_synoptic2_tdcf where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd;"
+            sql = "SELECT * FROM form_synoptic2_tdcf where signature ='" & userName & "' ORDER by stationId,yyyy,mm,dd,hh;"
         Else
-            sql = "SELECT * FROM form_synoptic2_tdcf ORDER by stationId,yyyy,mm,dd"
+            sql = "SELECT * FROM form_synoptic2_tdcf ORDER by stationId,yyyy,mm,dd,hh"
         End If
         viewRecords.viewTableRecords(sql)
     End Sub
@@ -998,7 +998,8 @@
                     End If
                 End If
             ElseIf (e.KeyCode = 33 Or e.KeyCode = 34) And Strings.Left(Me.ActiveControl.Name, 6) = "txtVal" Then
-                shiftEntries(e.KeyCode)
+                'shiftEntries(e.KeyCode)
+                FldName.shiftEntries(e.KeyCode, Me, "form_synoptic2_tdcf")
             End If
         Catch ex As Exception
 
@@ -1578,137 +1579,137 @@
         Next ctl
     End Sub
 
-    Sub shiftEntries(kycode As Integer)
-        Select Case kycode
-            Case 34 ' Insert
-                insertValues()
-                shiftFlags()
-            Case 33 ' Delete
-                deleteValues()
-                shiftFlags()
-        End Select
-
-    End Sub
-    Sub shiftFlags()
-        Dim flagIndexDiff As Integer
-        Dim ctls As Control
-        Dim txt, flg As String
-
-        If Not totalCTLS(flagIndexDiff) Then Exit Sub
-        For Each ctls In Me.Controls
-            If Strings.Left(ctls.Name, 6) = "txtVal" Then
-                txt = ctls.Text
-                flg = "txt" & "Flag" & Strings.Mid(ctls.Name, 12, 3) & "Field" & Format(Val(Strings.Right(ctls.Name, 3)) + flagIndexDiff, "000")
-                FlagValue(ctls, txt, flg)
-            End If
-        Next
-    End Sub
-
-    Sub FlagValue(txtCTL As Control, txt As String, flg As String)
-        Dim flgCTL As Control
-
-        For Each flgCTL In Me.Controls
-            If flgCTL.Name = flg Then
-                If txt = "" Then
-                    If txtCTL.Enabled Then flgCTL.Text = "M"
-                Else
-                    flgCTL.Text = ""
-                End If
-            End If
-        Next
-
-    End Sub
-    'Sub NextBox(bx As String, ByRef nxtbox As String)
-    '    Dim kount As Integer
-    '    sql = "select * from form_synoptic2_tdcf;"
-
-    '    conn.Open()
-    '    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-    '    ds.Clear()
-    '    da.Fill(ds, "flds")
-    '    conn.Close()
-
-    '    With ds.Tables("flds")
-    '        For kount = 5 To .Columns.Count - 1
-    '            If .Columns(kount).ColumnName = bx Then
-    '                nxtbox = .Columns(kount + 1).ColumnName
-    '                nxtbox = "txt" & nxtbox & "Field" & Strings.Format(kount + 1, "000")
-    '                Exit For
-    '            End If
-    '        Next
-
-    '    End With
+    'Sub shiftEntries(kycode As Integer)
+    '    Select Case kycode
+    '        Case 34 ' Insert
+    '            insertValues()
+    '            shiftFlags()
+    '        Case 33 ' Delete
+    '            deleteValues()
+    '            shiftFlags()
+    '    End Select
 
     'End Sub
+    'Sub shiftFlags()
+    '    Dim flagIndexDiff As Integer
+    '    Dim ctls As Control
+    '    Dim txt, flg As String
 
-    Sub insertValues()
-        Dim ActvCTL, nxtCTL As Control
-        Dim kount As Integer
-        Dim txt1, txt2 As String
+    '    If Not totalCTLS(flagIndexDiff) Then Exit Sub
+    '    For Each ctls In Me.Controls
+    '        If Strings.Left(ctls.Name, 6) = "txtVal" Then
+    '            txt = ctls.Text
+    '            flg = "txt" & "Flag" & Strings.Mid(ctls.Name, 12, 3) & "Field" & Format(Val(Strings.Right(ctls.Name, 3)) + flagIndexDiff, "000")
+    '            FlagValue(ctls, txt, flg)
+    '        End If
+    '    Next
+    'End Sub
 
-        ActvCTL = Me.ActiveControl
-        txt1 = ActvCTL.Text
-        If totalCTLS(kount) Then
-            ActvCTL.Text = ""
-            For i = 0 To kount - 2
-                nxtCTL = GetNextControl(ActvCTL, True)
-                If nxtCTL.Enabled = True Then
-                    txt2 = nxtCTL.Text
-                    nxtCTL.Text = txt1
-                    If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then Exit For
-                    txt1 = txt2
-                End If
-                'MsgBox(nxtCTL.Name)
-                ActvCTL = nxtCTL
-            Next
-        End If
-    End Sub
-    Sub deleteValues()
-        Dim ActvCTL, nxtCTL As Control
-        Dim kount As Integer
+    'Sub FlagValue(txtCTL As Control, txt As String, flg As String)
+    '    Dim flgCTL As Control
 
-        ActvCTL = Me.ActiveControl
+    '    For Each flgCTL In Me.Controls
+    '        If flgCTL.Name = flg Then
+    '            If txt = "" Then
+    '                If txtCTL.Enabled Then flgCTL.Text = "M"
+    '            Else
+    '                flgCTL.Text = ""
+    '            End If
+    '        End If
+    '    Next
 
-        If totalCTLS(kount) Then
-            For i = 0 To kount - 1
-                nxtCTL = GetNextControl(ActvCTL, True)
-                Do While nxtCTL.Enabled = False
-                    nxtCTL = GetNextControl(nxtCTL, True)
-                Loop
+    'End Sub
+    ''Sub NextBox(bx As String, ByRef nxtbox As String)
+    ''    Dim kount As Integer
+    ''    sql = "select * from form_synoptic2_tdcf;"
 
-                If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then
-                    ActvCTL.Text = ""
-                    Exit For
-                Else
-                    ActvCTL.Text = nxtCTL.Text
-                    ActvCTL = nxtCTL
-                End If
+    ''    conn.Open()
+    ''    da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    ''    ds.Clear()
+    ''    da.Fill(ds, "flds")
+    ''    conn.Close()
 
-            Next
-        End If
-    End Sub
-    Function totalCTLS(ByRef kount As Integer) As Boolean
-        kount = 0
+    ''    With ds.Tables("flds")
+    ''        For kount = 5 To .Columns.Count - 1
+    ''            If .Columns(kount).ColumnName = bx Then
+    ''                nxtbox = .Columns(kount + 1).ColumnName
+    ''                nxtbox = "txt" & nxtbox & "Field" & Strings.Format(kount + 1, "000")
+    ''                Exit For
+    ''            End If
+    ''        Next
 
-        sql = "select * from form_synoptic2_tdcf;"
+    ''    End With
 
-        Try
-            conn.Open()
-            da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
-            ds.Clear()
-            da.Fill(ds, "flds")
-            conn.Close()
+    ''End Sub
 
-            With ds.Tables("flds")
-                For i = 5 To .Columns.Count - 1
-                    If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
-                        kount = kount + 1
-                    End If
-                Next
-            End With
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
+    'Sub insertValues()
+    '    Dim ActvCTL, nxtCTL As Control
+    '    Dim kount As Integer
+    '    Dim txt1, txt2 As String
+
+    '    ActvCTL = Me.ActiveControl
+    '    txt1 = ActvCTL.Text
+    '    If totalCTLS(kount) Then
+    '        ActvCTL.Text = ""
+    '        For i = 0 To kount - 2
+    '            nxtCTL = GetNextControl(ActvCTL, True)
+    '            If nxtCTL.Enabled = True Then
+    '                txt2 = nxtCTL.Text
+    '                nxtCTL.Text = txt1
+    '                If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then Exit For
+    '                txt1 = txt2
+    '            End If
+    '            'MsgBox(nxtCTL.Name)
+    '            ActvCTL = nxtCTL
+    '        Next
+    '    End If
+    'End Sub
+    'Sub deleteValues()
+    '    Dim ActvCTL, nxtCTL As Control
+    '    Dim kount As Integer
+
+    '    ActvCTL = Me.ActiveControl
+
+    '    If totalCTLS(kount) Then
+    '        For i = 0 To kount - 1
+    '            nxtCTL = GetNextControl(ActvCTL, True)
+    '            Do While nxtCTL.Enabled = False
+    '                nxtCTL = GetNextControl(nxtCTL, True)
+    '            Loop
+
+    '            If Strings.Left(nxtCTL.Name, 6) <> "txtVal" Then
+    '                ActvCTL.Text = ""
+    '                Exit For
+    '            Else
+    '                ActvCTL.Text = nxtCTL.Text
+    '                ActvCTL = nxtCTL
+    '            End If
+
+    '        Next
+    '    End If
+    'End Sub
+    'Function totalCTLS(ByRef kount As Integer) As Boolean
+    '    kount = 0
+
+    '    sql = "select * from form_synoptic2_tdcf;"
+
+    '    Try
+    '        conn.Open()
+    '        da = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn)
+    '        ds.Clear()
+    '        da.Fill(ds, "flds")
+    '        conn.Close()
+
+    '        With ds.Tables("flds")
+    '            For i = 5 To .Columns.Count - 1
+    '                If Strings.Left(.Columns(i).ColumnName, 8) = "Val_Elem" Then
+    '                    kount = kount + 1
+    '                End If
+    '            Next
+    '        End With
+    '        Return True
+    '    Catch ex As Exception
+    '        Return False
+    '    End Try
+    'End Function
 End Class

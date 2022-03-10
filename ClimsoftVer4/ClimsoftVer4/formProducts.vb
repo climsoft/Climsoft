@@ -46,7 +46,7 @@ Public Class frmProducts
             maxRows = ds.Tables("tblproducts").Rows.Count
             For kount = 0 To maxRows - 1 Step 1
 
-                cboProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
+                cboProductsCategory.Items.Add(ClsTranslations.GetTranslation(ds.Tables("tblproducts").Rows(kount).Item("prCategory")))
 
             Next
             '--------------
@@ -54,7 +54,6 @@ Public Class frmProducts
             MessageBox.Show(ex.Message)
         End Try
 
-        ClsTranslations.TranslateForm(Me)
 
         '' maxRows = ds.Tables("tblproducts").Rows.Count
         'MsgBox(maxRows)
@@ -63,6 +62,10 @@ Public Class frmProducts
         ''    cmbProductsCategory.Items.Add(ds.Tables("tblproducts").Rows(kount).Item("prCategory"))
 
         ''Next
+
+        ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(lstViewProducts, True)
         Exit Sub
 
     End Sub
@@ -76,8 +79,8 @@ Public Class frmProducts
         'ProductsTable_Update()
         lstViewProducts.Clear()
         lstViewProducts.Columns.Clear()
-        lstViewProducts.Columns.Add(ClsTranslations.GetTranslation("Products Name"), 100, HorizontalAlignment.Left)
-        lstViewProducts.Columns.Add(ClsTranslations.GetTranslation("Products Details"), 500, HorizontalAlignment.Left)
+        lstViewProducts.Columns.Add("Products Name", 100, HorizontalAlignment.Left)
+        lstViewProducts.Columns.Add("Products Details", 500, HorizontalAlignment.Left)
 
         sql = "SELECT productName, prDetails FROM tblProducts WHERE prCategory=""" & prod & """"
 
@@ -91,14 +94,19 @@ Public Class frmProducts
         Dim itm = New ListViewItem
 
         For kount = 0 To maxRows - 1 Step 1
-            str(0) = ClsTranslations.GetTranslation(ds.Tables("tblProducts").Rows(kount).Item("productName"))
-            str(1) = ClsTranslations.GetTranslation(ds.Tables("tblProducts").Rows(kount).Item("prDetails"))
+            str(0) = ds.Tables("tblProducts").Rows(kount).Item("productName")
+            str(1) = ds.Tables("tblProducts").Rows(kount).Item("prDetails")
             itm = New ListViewItem(str)
             lstViewProducts.Items.Add(itm)
         Next
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(lstViewProducts, False)
     End Sub
 
     Private Sub lstvProducts_Click(sender As Object, e As EventArgs) Handles lstViewProducts.Click
+
+        'todo. this code needs to be refactored urgent, the product names could have been translated
+
         Dim prtyp As New clsHelp
         'Dim formcaption As String
 

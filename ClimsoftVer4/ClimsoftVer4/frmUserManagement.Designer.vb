@@ -32,6 +32,7 @@ Partial Class frmUserManagement
         Me.linkClose = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout()
         '
+
         'linkAddNewUser
         '
         Me.linkAddNewUser.AutoSize = True
@@ -108,6 +109,7 @@ Partial Class frmUserManagement
         Me.linkClose.TabIndex = 21
         Me.linkClose.TabStop = True
         Me.linkClose.Text = "Close"
+
         '
         'frmUserManagement
         '

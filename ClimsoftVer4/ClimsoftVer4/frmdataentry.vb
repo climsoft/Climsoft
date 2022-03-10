@@ -26,7 +26,8 @@ Public Class frmDataEntry
             dataCall.SetFilter("selected", "=", 1)
             dataTable = dataCall.GetDataTable()
             For Each row As DataRow In dataTable.Rows
-                lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), ClsTranslations.GetTranslation(row.Item("description"))}))
+                'lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), ClsTranslations.GetTranslation(row.Item("description"))}))
+                lstViewForms.Items.Add(New ListViewItem({row.Item("form_name"), row.Item("description")}))
             Next
 
             If lstViewForms.Items.Count = 0 Then
@@ -38,6 +39,8 @@ Public Class frmDataEntry
             End If
 
             ClsTranslations.TranslateForm(Me)
+            'todo in future this will be done automatically by TranslateForms(Me)
+            ClsTranslations.TranslateComponent(lstViewForms, False)
 
         Catch ex As Exception
             MessageBox.Show("Error : " & ex.Message)
@@ -76,6 +79,7 @@ Public Class frmDataEntry
         Dim frm As String
 
         Try
+            'todo. code needs to be changed. texts in the list view may be translated
             If lstViewForms.SelectedItems.Count > 0 Then
                 Select Case lstViewForms.SelectedItems.Item(0).Text
                     Case "formSynoptic2RA1"

@@ -35,7 +35,9 @@ Public Class frmGTSNOAA
 
         strDataFile = strGTSDataFolder & "\noaa_gts.txt"
 
+        'strDataFile = "C:\ProgramData\Climsoft4\gts_noaa_gsod"
 
+        MsgBox(txtDataFile.Text)
         'Copy Data file to CLICOM folder and rename the files to [clicom_daily.csv] and [schema.ini] and overwrite existing file
         My.Computer.FileSystem.CopyFile(txtDataFile.Text, strDataFile, True)
 
@@ -48,188 +50,193 @@ Public Class frmGTSNOAA
         conn.ConnectionString = connStr
         conn.Open()
 
+        Try
 
-        Using Reader As New  _
+            Using Reader As New _
         Microsoft.VisualBasic.FileIO.TextFieldParser(strGTSDataFolder & "\noaa_gts.txt")
-            Reader.TextFieldType = _
-            Microsoft.VisualBasic.FileIO.FieldType.FixedWidth
-            Reader.SetFieldWidths(7, 7, 8, 12, 10, 11, 11, 10, 10, 8, 8, 7, 8, 7, 8, 6)
-            Dim currentRow As String()
+                Reader.TextFieldType =
+                Microsoft.VisualBasic.FileIO.FieldType.FixedWidth
+                Reader.SetFieldWidths(7, 7, 8, 12, 10, 11, 11, 10, 10, 8, 8, 7, 8, 7, 8, 6)
+                Dim currentRow As String()
 
-            '-------------
-            Dim lines As String() = IO.File.ReadAllLines(strGTSDataFolder & "\noaa_gts.txt")
+                '-------------
+                Dim lines As String() = IO.File.ReadAllLines(strGTSDataFolder & "\noaa_gts.txt")
 
-            'MessageBox.Show("The file had " & lines.Length & " lines.")
-            maxRows = lines.Length
-            'MsgBox("Number of rows= " & maxRows)
-            '--------------
+                'MessageBox.Show("The file had " & lines.Length & " lines.")
+                maxRows = lines.Length
+                'MsgBox("Number of rows= " & maxRows)
+                '--------------
 
-            frmDataTransferProgress.Show()
+                frmDataTransferProgress.Show()
 
-            While Not Reader.EndOfData
-                Try
-                    currentRow = Reader.ReadFields()
-                    i = i + 1
-                    'Display progress of data transfer
-                    frmDataTransferProgress.txtDataTransferProgress1.Text = ClsTranslations.GetTranslation(" Transferring record: ") & i & ClsTranslations.GetTranslation(" of ") & maxRows
-                    frmDataTransferProgress.txtDataTransferProgress1.Refresh()
-                    'MsgBox("Row :" & i)
-                    j = 0
-                    stnId = ""
-                    elemCode = 0
-                    obsDate = ""
-                    obsLevel = "surface"
-                    obsVal = ""
-                    obsFlag = ""
-                    qcStatus = 1
-                    acquisitionType = 4
-                    sql = ""
-                    Dim currentField As String
-                    For Each currentField In currentRow
-                        j = j + 1
-                        ' MsgBox("Row " & i & "field " & j & "Value: " & currentField)
-                        If j = 1 And IsNumeric(currentField) Then
+                While Not Reader.EndOfData
+                    Try
+                        currentRow = Reader.ReadFields()
+                        i = i + 1
+                        'Display progress of data transfer
+                        frmDataTransferProgress.txtDataTransferProgress1.Text = " Transferring record: " & i & " of " & maxRows
+                        frmDataTransferProgress.txtDataTransferProgress1.Refresh()
+                        'MsgBox("Row :" & i)
+                        j = 0
+                        stnId = ""
+                        elemCode = 0
+                        obsDate = ""
+                        obsLevel = "surface"
+                        obsVal = ""
+                        obsFlag = ""
+                        'qcStatus = 1
+                        acquisitionType = 4
+                        sql = ""
+                        Dim currentField As String
+                        For Each currentField In currentRow
 
-                            station = currentField
-                            stnId = Strings.Left(station, 5)
-                        ElseIf j = 3 Then
-                            yyyymmdd = currentField
-                            yyyy = Strings.Left(yyyymmdd, 4)
-                            mm = Strings.Mid(yyyymmdd, 5, 2)
-                            dd = Strings.Mid(yyyymmdd, 7, 2)
+                            j = j + 1
+                            ' MsgBox("Row " & i & "field " & j & "Value: " & currentField)
+                            If j = 1 And IsNumeric(currentField) Then
+
+                                station = currentField
+                                stnId = Strings.Left(station, 5)
+                            ElseIf j = 3 Then
+                                yyyymmdd = currentField
+                                yyyy = Strings.Left(yyyymmdd, 4)
+                                mm = Strings.Mid(yyyymmdd, 5, 2)
+                                dd = Strings.Mid(yyyymmdd, 7, 2)
 
 
-                            obsDate = yyyy & "-" & mm & "-" & dd & " 06:00:00"
+                                obsDate = yyyy & "-" & mm & "-" & dd & " 06:00:00"
 
-                            ' MsgBox("Date=" & obsDate)
+                                ' MsgBox("Date=" & obsDate)
 
-                        ElseIf j = 4 And IsDate(obsDate) Then
-                            TmeanAndCount = currentField
-                            Tmean = Val(Strings.Mid(TmeanAndCount, 1, 5))
-                            TmeanFlag = Strings.Mid(TmeanAndCount, 6, 2)
-                            elemCode = 4
-                            obsVal = 5 / 9 * (Val(Tmean) - 32)
-                            obsFlag = TmeanFlag
+                            ElseIf j = 4 And IsDate(obsDate) Then
+                                TmeanAndCount = currentField
+                                Tmean = Val(Strings.Mid(TmeanAndCount, 1, 5))
+                                TmeanFlag = Strings.Mid(TmeanAndCount, 6, 2)
+                                elemCode = 4
+                                obsVal = 5 / 9 * (Val(Tmean) - 32)
+                                obsFlag = TmeanFlag
 
-                            'Generate SQL string for inserting data into observationinitial table
-                            sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                                'Generate SQL string for inserting data into observationinitial table
+                                sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
+                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                                 qcStatus & "," & acquisitionType & ")"
 
-                            ' MsgBox(sql)
+                                ' MsgBox(sql)
 
-                            ' Create the Command for executing query and set its properties
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                            Try
-                                'Execute query
-                                objCmd.ExecuteNonQuery()
-                                ' Catch ex As MySql.Data.MySqlClient.MySqlException
-                                'Ignore expected error i.e. error of Duplicates in MySqlException
-                            Catch ex As Exception
-                                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                                MsgBox(ex.Message)
-                            End Try
+                                ' Create the Command for executing query and set its properties
+                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                Try
+                                    'Execute query
+                                    objCmd.ExecuteNonQuery()
+                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                Catch ex As Exception
+                                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                                    MsgBox(ex.Message)
+                                End Try
 
 
-                        ElseIf j = 12 And IsDate(obsDate) Then
-                            TmaxAndFlag = currentField
-                            Tmax = Val(Strings.Mid(TmaxAndFlag, 1, 6))
-                            TmaxFlag = Strings.Mid(TmaxAndFlag, 5, 1)
-                            elemCode = 2
-                            obsVal = 5 / 9 * (Val(Tmax) - 32)
-                            obsFlag = TmaxFlag
+                            ElseIf j = 12 And IsDate(obsDate) Then
+                                TmaxAndFlag = currentField
+                                Tmax = Val(Strings.Mid(TmaxAndFlag, 1, 6))
+                                TmaxFlag = Strings.Mid(TmaxAndFlag, 5, 1)
+                                elemCode = 2
+                                obsVal = 5 / 9 * (Val(Tmax) - 32)
+                                obsFlag = TmaxFlag
 
-                            'Generate SQL string for inserting data into observationinitial table
-                            sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                                'Generate SQL string for inserting data into observationinitial table
+                                sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
+                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                                 qcStatus & "," & acquisitionType & ")"
 
-                            ' Create the Command for executing query and set its properties
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                            Try
-                                'Execute query
-                                objCmd.ExecuteNonQuery()
-                                ' Catch ex As MySql.Data.MySqlClient.MySqlException
-                                'Ignore expected error i.e. error of Duplicates in MySqlException
-                            Catch ex As Exception
-                                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                                MsgBox(ex.Message)
-                            End Try
+                                ' Create the Command for executing query and set its properties
+                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                Try
+                                    'Execute query
+                                    objCmd.ExecuteNonQuery()
+                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                Catch ex As Exception
+                                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                                    MsgBox(ex.Message)
+                                End Try
 
-                            ' MsgBox(sql)
+                                ' MsgBox(sql)
 
-                        ElseIf j = 13 And IsDate(obsDate) Then
-                            TminAndFlag = currentField
-                            Tmin = Val(Strings.Mid(TminAndFlag, 1, 6))
-                            TminFlag = Strings.Mid(TminAndFlag, 5, 1)
-                            elemCode = 3
-                            obsVal = 5 / 9 * (Val(Tmin) - 32)
-                            obsFlag = TminFlag
+                            ElseIf j = 13 And IsDate(obsDate) Then
+                                TminAndFlag = currentField
+                                Tmin = Val(Strings.Mid(TminAndFlag, 1, 6))
+                                TminFlag = Strings.Mid(TminAndFlag, 5, 1)
+                                elemCode = 3
+                                obsVal = 5 / 9 * (Val(Tmin) - 32)
+                                obsFlag = TminFlag
 
-                            'Generate SQL string for inserting data into observationinitial table
-                            sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                                'Generate SQL string for inserting data into observationinitial table
+                                sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
+                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                                 qcStatus & "," & acquisitionType & ")"
 
-                            ' Create the Command for executing query and set its properties
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                            Try
-                                'Execute query
-                                objCmd.ExecuteNonQuery()
-                                ' Catch ex As MySql.Data.MySqlClient.MySqlException
-                                'Ignore expected error i.e. error of Duplicates in MySqlException
-                            Catch ex As Exception
-                                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                                MsgBox(ex.Message)
-                            End Try
+                                ' Create the Command for executing query and set its properties
+                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                Try
+                                    'Execute query
+                                    objCmd.ExecuteNonQuery()
+                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                Catch ex As Exception
+                                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                                    MsgBox(ex.Message)
+                                End Try
 
-                            ' MsgBox(sql)
+                                ' MsgBox(sql)
 
-                        ElseIf j = 14 And IsDate(obsDate) Then
-                            PrecipAndFlag = currentField
-                            Precip = Val(Strings.Mid(PrecipAndFlag, 1, 5))
-                            PrecipFlag = Strings.Mid(PrecipAndFlag, 5, 1)
-                            elemCode = 5
-                            obsVal = 25.4 * Val(Precip)
-                            obsFlag = PrecipFlag
-                            'Generate SQL string for inserting data into observationinitial table
-                            sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " & _
-                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," & _
+                            ElseIf j = 14 And IsDate(obsDate) Then
+                                PrecipAndFlag = currentField
+                                Precip = Val(Strings.Mid(PrecipAndFlag, 1, 5))
+                                PrecipFlag = Strings.Mid(PrecipAndFlag, 5, 1)
+                                elemCode = 5
+                                obsVal = 25.4 * Val(Precip)
+                                obsFlag = PrecipFlag
+                                'Generate SQL string for inserting data into observationinitial table
+                                sql = "INSERT IGNORE INTO observationFinal(recordedFrom,describedBy,obsDatetime,obsLevel,obsValue,Flag,qcStatus,acquisitionType) " &
+                                "VALUES ('" & stnId & "'," & elemCode & ",'" & obsDate & "','" & obsLevel & "'," & obsVal & ",'" & obsFlag & "'," &
                                 qcStatus & "," & acquisitionType & ")"
 
-                            ' Create the Command for executing query and set its properties
-                            objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
-                            Try
-                                'Execute query
-                                objCmd.ExecuteNonQuery()
-                                ' Catch ex As MySql.Data.MySqlClient.MySqlException
-                                'Ignore expected error i.e. error of Duplicates in MySqlException
-                            Catch ex As Exception
-                                'Dispaly error message if it is different from the one trapped in 'Catch' execption above
-                                MsgBox(ex.Message)
-                            End Try
+                                ' Create the Command for executing query and set its properties
+                                objCmd = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+                                Try
+                                    'Execute query
+                                    objCmd.ExecuteNonQuery()
+                                    ' Catch ex As MySql.Data.MySqlClient.MySqlException
+                                    'Ignore expected error i.e. error of Duplicates in MySqlException
+                                Catch ex As Exception
+                                    'Dispaly error message if it is different from the one trapped in 'Catch' execption above
+                                    MsgBox(ex.Message)
+                                End Try
 
-                            ' MsgBox(sql)
+                                ' MsgBox(sql)
 
-                        End If
-                        '------------------------
+                            End If
+                            '------------------------
 
 
-                        ' MsgBox("Valid data record")
+                            ' MsgBox("Valid data record")
 
-                        '--------------------------
-                        'MsgBox(currentField)
-                    Next
-                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
-                    MsgBox(ClsTranslations.GetTranslation("Line ") & ex.Message &
-                  ClsTranslations.GetTranslation("is not valid and will be skipped."))
-                End Try
-            End While
-        End Using
-        frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
-        frmDataTransferProgress.lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Data transfer complete !")
+                            '--------------------------
+                            'MsgBox(currentField)
+                        Next
+                    Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                        MsgBox(ClsTranslations.GetTranslation("Line ") & ex.Message &
+                      ClsTranslations.GetTranslation("is not valid and will be skipped."))
+                    End Try
+                End While
+            End Using
+            frmDataTransferProgress.lblDataTransferProgress.ForeColor = Color.Red
+            frmDataTransferProgress.lblDataTransferProgress.Text = ClsTranslations.GetTranslation("Data transfer complete !")
 
-        conn.Close()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnBrowseDataFile_Click(sender As Object, e As EventArgs) Handles btnBrowseDataFile.Click
@@ -239,7 +246,7 @@ Public Class frmGTSNOAA
         'fd.InitialDirectory = dsReg.Tables("regData").Rows(7).Item("keyValue")
         fd.Filter = ClsTranslations.GetTranslation("Text files") & " (*.txt)|*.txt"
         fd.FilterIndex = 2
-        fd.RestoreDirectory = True
+        'fd.RestoreDirectory = True
         '
         If fd.ShowDialog() = DialogResult.OK Then
             txtDataFile.Text = fd.FileName
@@ -248,7 +255,8 @@ Public Class frmGTSNOAA
     End Sub
 
     Private Sub frmGTSNOAA_Load(sender As Object, e As EventArgs) Handles Me.Load
-        strGTSDataFolder = dsReg.Tables("regData").Rows(11).Item("keyValue")
+        'strGTSDataFolder = dsReg.Tables("regData").Rows(11).Item("keyValue")
+        strGTSDataFolder = "C:\ProgramData\Climsoft4\data"
     End Sub
 
     Private Sub txtDataFile_TextChanged(sender As Object, e As EventArgs) Handles txtDataFile.TextChanged

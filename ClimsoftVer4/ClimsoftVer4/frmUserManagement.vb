@@ -104,5 +104,4 @@
 
         'Svr_db_port = svrstr & "\\" & dbstr
     End Sub
-
 End Class
