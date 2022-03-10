@@ -27,6 +27,9 @@ Public Class frmDatabaseConnections
         Next
 
         ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(dataGridViewConnections, True)
+
     End Sub
 
     Private Sub cmdOK_Click(sender As Object, e As EventArgs) Handles cmdOK.Click

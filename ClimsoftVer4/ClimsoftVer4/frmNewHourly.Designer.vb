@@ -28,7 +28,7 @@ Partial Class frmNewHourly
         'ucrHourly
         '
         Me.ucrHourly.Location = New System.Drawing.Point(1, 2)
-        Me.ucrHourly.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrHourly.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrHourly.Name = "ucrHourly"
         Me.ucrHourly.Size = New System.Drawing.Size(662, 635)
         Me.ucrHourly.TabIndex = 5

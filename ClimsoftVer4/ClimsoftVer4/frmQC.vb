@@ -61,13 +61,13 @@ Public Class frmQC
         'Initialize Stations List Views
         LstViewStations.Columns.Clear()
 
-        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Id"), 100, HorizontalAlignment.Left)
-        LstViewStations.Columns.Add(ClsTranslations.GetTranslation("Station Name"), 200, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add("Station Id", 100, HorizontalAlignment.Left)
+        LstViewStations.Columns.Add("Station Name", 200, HorizontalAlignment.Left)
 
         'Initialize Elements List Views
         lstViewElements.Columns.Clear()
-        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Code"), 100, HorizontalAlignment.Left)
-        lstViewElements.Columns.Add(ClsTranslations.GetTranslation("Element Details"), 200, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add("Element Code", 100, HorizontalAlignment.Left)
+        lstViewElements.Columns.Add("Element Details", 200, HorizontalAlignment.Left)
         lblDataTransferProgress.Text = ""
         txtBeginYear.Text = ""
         txtEndYear.Text = ""
@@ -128,6 +128,9 @@ Public Class frmQC
         conns.Close()
 
         ClsTranslations.TranslateForm(Me)
+        'todo in future this will be done automatically by TranslateForms(Me)
+        ClsTranslations.TranslateComponent(LstViewStations, True)
+        ClsTranslations.TranslateComponent(lstViewElements, True)
     End Sub
 
     Private Sub cmbstation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbstation.SelectedIndexChanged
