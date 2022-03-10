@@ -184,7 +184,7 @@ Partial Class frmLogin
         Me.linkLabelLanguage.AutoSize = True
         Me.linkLabelLanguage.Cursor = System.Windows.Forms.Cursors.Hand
         Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
-        Me.linkLabelLanguage.Location = New System.Drawing.Point(220, 233)
+        Me.linkLabelLanguage.Location = New System.Drawing.Point(361, 214)
         Me.linkLabelLanguage.Name = "linkLabelLanguage"
         Me.linkLabelLanguage.Size = New System.Drawing.Size(55, 13)
         Me.linkLabelLanguage.TabIndex = 12
