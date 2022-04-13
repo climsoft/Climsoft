@@ -1271,15 +1271,6 @@ Err:
         Locate_Station("stationId", cboStationId.Text)
     End Sub
 
-
-    Private Sub combSearchStation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearchStation.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub combSearchElement_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboSearchElement.SelectedIndexChanged
-
-    End Sub
-
     Private Sub combSearchElement_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSearchElement.SelectedValueChanged
         Locate_Element("Nm", cboSearchElement.Text)
     End Sub

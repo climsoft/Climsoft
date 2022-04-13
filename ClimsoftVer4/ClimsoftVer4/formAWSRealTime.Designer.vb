@@ -386,7 +386,7 @@ Partial Class formAWSRealTime
         'optStart
         '
         Me.optStart.AutoSize = True
-        Me.optStart.Location = New System.Drawing.Point(47, 26)
+        Me.optStart.Location = New System.Drawing.Point(10, 26)
         Me.optStart.Name = "optStart"
         Me.optStart.Size = New System.Drawing.Size(59, 17)
         Me.optStart.TabIndex = 0
@@ -453,7 +453,7 @@ Partial Class formAWSRealTime
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(48, 96)
+        Me.Label10.Location = New System.Drawing.Point(11, 96)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(129, 13)
         Me.Label10.TabIndex = 9
@@ -462,7 +462,7 @@ Partial Class formAWSRealTime
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(507, 62)
+        Me.Label11.Location = New System.Drawing.Point(605, 62)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(30, 13)
         Me.Label11.TabIndex = 8
@@ -470,7 +470,7 @@ Partial Class formAWSRealTime
         '
         'txtPeriod
         '
-        Me.txtPeriod.Location = New System.Drawing.Point(473, 58)
+        Me.txtPeriod.Location = New System.Drawing.Point(571, 58)
         Me.txtPeriod.Name = "txtPeriod"
         Me.txtPeriod.Size = New System.Drawing.Size(33, 20)
         Me.txtPeriod.TabIndex = 7
@@ -479,7 +479,7 @@ Partial Class formAWSRealTime
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(402, 62)
+        Me.Label12.Location = New System.Drawing.Point(463, 62)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(70, 13)
         Me.Label12.TabIndex = 6
@@ -487,7 +487,7 @@ Partial Class formAWSRealTime
         '
         'txtOffset
         '
-        Me.txtOffset.Location = New System.Drawing.Point(344, 58)
+        Me.txtOffset.Location = New System.Drawing.Point(394, 58)
         Me.txtOffset.Name = "txtOffset"
         Me.txtOffset.Size = New System.Drawing.Size(33, 20)
         Me.txtOffset.TabIndex = 5
@@ -496,7 +496,7 @@ Partial Class formAWSRealTime
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(234, 62)
+        Me.Label13.Location = New System.Drawing.Point(248, 62)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(107, 13)
         Me.Label13.TabIndex = 4
@@ -513,7 +513,7 @@ Partial Class formAWSRealTime
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(48, 62)
+        Me.Label14.Location = New System.Drawing.Point(11, 62)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(133, 13)
         Me.Label14.TabIndex = 2
@@ -523,7 +523,7 @@ Partial Class formAWSRealTime
         '
         Me.optStop.AutoSize = True
         Me.optStop.Checked = True
-        Me.optStop.Location = New System.Drawing.Point(121, 26)
+        Me.optStop.Location = New System.Drawing.Point(139, 26)
         Me.optStop.Name = "optStop"
         Me.optStop.Size = New System.Drawing.Size(47, 17)
         Me.optStop.TabIndex = 1
