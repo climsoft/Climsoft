@@ -46,6 +46,9 @@ Public Class ClsTranslations
     ''' <param name="clsForm">    The WinForm control to translate. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub TranslateForm(clsForm As Form)
+        If clsDataConnection.IsInDesignMode() Then
+            Exit Sub ' temporary code to remove the bugs thrown during design time
+        End If
         HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(clsForm, GetDbPath(), GetLanguageCode()))
     End Sub
 
@@ -60,6 +63,10 @@ Public Class ClsTranslations
     '''             </returns>
     '''--------------------------------------------------------------------------------------------
     Public Shared Function GetTranslation(strText As String) As String
+        If clsDataConnection.IsInDesignMode() Then
+            Return "" ' temporary code to remove the bugs thrown during design time
+        End If
+
         If String.IsNullOrEmpty(strText) Then
             Return ""
         End If

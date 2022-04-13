@@ -287,9 +287,9 @@ Partial Class frmDBUtilities
         '
         Me.grpbxUpload.Controls.Add(Me.cmdUpload)
         Me.grpbxUpload.Controls.Add(Me.ListView1)
-        Me.grpbxUpload.Location = New System.Drawing.Point(2, 311)
+        Me.grpbxUpload.Location = New System.Drawing.Point(2, 302)
         Me.grpbxUpload.Name = "grpbxUpload"
-        Me.grpbxUpload.Size = New System.Drawing.Size(421, 24)
+        Me.grpbxUpload.Size = New System.Drawing.Size(421, 33)
         Me.grpbxUpload.TabIndex = 7
         Me.grpbxUpload.TabStop = False
         Me.grpbxUpload.Visible = False

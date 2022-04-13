@@ -1051,7 +1051,7 @@ Partial Class ucrFormDaily2
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(188, 557)
+        Me.lblSequencer.Location = New System.Drawing.Point(167, 557)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(59, 13)
         Me.lblSequencer.TabIndex = 709
@@ -1068,7 +1068,7 @@ Partial Class ucrFormDaily2
         '
         'ucrDaily2Navigation
         '
-        Me.ucrDaily2Navigation.Location = New System.Drawing.Point(155, 486)
+        Me.ucrDaily2Navigation.Location = New System.Drawing.Point(124, 486)
         Me.ucrDaily2Navigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrDaily2Navigation.Name = "ucrDaily2Navigation"
         Me.ucrDaily2Navigation.Size = New System.Drawing.Size(336, 25)
@@ -1268,10 +1268,10 @@ Partial Class ucrFormDaily2
         '
         Me.ucrInputSameValue.FieldName = Nothing
         Me.ucrInputSameValue.KeyControl = False
-        Me.ucrInputSameValue.Location = New System.Drawing.Point(597, 33)
+        Me.ucrInputSameValue.Location = New System.Drawing.Point(608, 33)
         Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
-        Me.ucrInputSameValue.Size = New System.Drawing.Size(58, 26)
+        Me.ucrInputSameValue.Size = New System.Drawing.Size(47, 26)
         Me.ucrInputSameValue.TabIndex = 769
         Me.ucrInputSameValue.TextboxValue = ""
         '

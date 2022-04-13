@@ -82,17 +82,19 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod1
         '
         Me.UcrValueFlagPeriod1.FieldName = "01"
+        Me.UcrValueFlagPeriod1.IncludePeriod = True
         Me.UcrValueFlagPeriod1.KeyControl = False
         Me.UcrValueFlagPeriod1.Location = New System.Drawing.Point(232, 91)
         Me.UcrValueFlagPeriod1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.UcrValueFlagPeriod1.Name = "UcrValueFlagPeriod1"
-        Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(127, 28)
+        Me.UcrValueFlagPeriod1.Size = New System.Drawing.Size(137, 28)
         Me.UcrValueFlagPeriod1.TabIndex = 4
         Me.UcrValueFlagPeriod1.Tag = "01"
         '
         'UcrValueFlagPeriod5
         '
         Me.UcrValueFlagPeriod5.FieldName = "05"
+        Me.UcrValueFlagPeriod5.IncludePeriod = True
         Me.UcrValueFlagPeriod5.KeyControl = False
         Me.UcrValueFlagPeriod5.Location = New System.Drawing.Point(232, 208)
         Me.UcrValueFlagPeriod5.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -104,6 +106,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod6
         '
         Me.UcrValueFlagPeriod6.FieldName = "06"
+        Me.UcrValueFlagPeriod6.IncludePeriod = True
         Me.UcrValueFlagPeriod6.KeyControl = False
         Me.UcrValueFlagPeriod6.Location = New System.Drawing.Point(232, 238)
         Me.UcrValueFlagPeriod6.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -115,6 +118,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod12
         '
         Me.UcrValueFlagPeriod12.FieldName = "12"
+        Me.UcrValueFlagPeriod12.IncludePeriod = True
         Me.UcrValueFlagPeriod12.KeyControl = False
         Me.UcrValueFlagPeriod12.Location = New System.Drawing.Point(232, 416)
         Me.UcrValueFlagPeriod12.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -126,6 +130,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod11
         '
         Me.UcrValueFlagPeriod11.FieldName = "11"
+        Me.UcrValueFlagPeriod11.IncludePeriod = True
         Me.UcrValueFlagPeriod11.KeyControl = False
         Me.UcrValueFlagPeriod11.Location = New System.Drawing.Point(232, 387)
         Me.UcrValueFlagPeriod11.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -137,6 +142,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod10
         '
         Me.UcrValueFlagPeriod10.FieldName = "10"
+        Me.UcrValueFlagPeriod10.IncludePeriod = True
         Me.UcrValueFlagPeriod10.KeyControl = False
         Me.UcrValueFlagPeriod10.Location = New System.Drawing.Point(232, 357)
         Me.UcrValueFlagPeriod10.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -148,6 +154,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod7
         '
         Me.UcrValueFlagPeriod7.FieldName = "07"
+        Me.UcrValueFlagPeriod7.IncludePeriod = True
         Me.UcrValueFlagPeriod7.KeyControl = False
         Me.UcrValueFlagPeriod7.Location = New System.Drawing.Point(232, 269)
         Me.UcrValueFlagPeriod7.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -159,6 +166,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod8
         '
         Me.UcrValueFlagPeriod8.FieldName = "08"
+        Me.UcrValueFlagPeriod8.IncludePeriod = True
         Me.UcrValueFlagPeriod8.KeyControl = False
         Me.UcrValueFlagPeriod8.Location = New System.Drawing.Point(232, 297)
         Me.UcrValueFlagPeriod8.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -170,6 +178,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod9
         '
         Me.UcrValueFlagPeriod9.FieldName = "09"
+        Me.UcrValueFlagPeriod9.IncludePeriod = True
         Me.UcrValueFlagPeriod9.KeyControl = False
         Me.UcrValueFlagPeriod9.Location = New System.Drawing.Point(232, 327)
         Me.UcrValueFlagPeriod9.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -181,6 +190,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod4
         '
         Me.UcrValueFlagPeriod4.FieldName = "04"
+        Me.UcrValueFlagPeriod4.IncludePeriod = True
         Me.UcrValueFlagPeriod4.KeyControl = False
         Me.UcrValueFlagPeriod4.Location = New System.Drawing.Point(232, 179)
         Me.UcrValueFlagPeriod4.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -192,6 +202,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod3
         '
         Me.UcrValueFlagPeriod3.FieldName = "03"
+        Me.UcrValueFlagPeriod3.IncludePeriod = True
         Me.UcrValueFlagPeriod3.KeyControl = False
         Me.UcrValueFlagPeriod3.Location = New System.Drawing.Point(232, 152)
         Me.UcrValueFlagPeriod3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -203,6 +214,7 @@ Partial Class ucrMonthlyData
         'UcrValueFlagPeriod2
         '
         Me.UcrValueFlagPeriod2.FieldName = "02"
+        Me.UcrValueFlagPeriod2.IncludePeriod = True
         Me.UcrValueFlagPeriod2.KeyControl = False
         Me.UcrValueFlagPeriod2.Location = New System.Drawing.Point(232, 121)
         Me.UcrValueFlagPeriod2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -349,7 +361,7 @@ Partial Class ucrMonthlyData
         'lblPeriod
         '
         Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(322, 76)
+        Me.lblPeriod.Location = New System.Drawing.Point(332, 76)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(37, 13)
         Me.lblPeriod.TabIndex = 585
@@ -419,7 +431,7 @@ Partial Class ucrMonthlyData
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(168, 547)
+        Me.Label5.Location = New System.Drawing.Point(148, 547)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 13)
         Me.Label5.TabIndex = 687

@@ -82,7 +82,7 @@ Partial Class frmRestore
         '
         'txtBackupFolder
         '
-        Me.txtBackupFolder.Location = New System.Drawing.Point(126, 83)
+        Me.txtBackupFolder.Location = New System.Drawing.Point(132, 83)
         Me.txtBackupFolder.Name = "txtBackupFolder"
         Me.txtBackupFolder.Size = New System.Drawing.Size(266, 20)
         Me.txtBackupFolder.TabIndex = 10

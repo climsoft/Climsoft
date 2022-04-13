@@ -8,9 +8,119 @@
     Dim sql, currentRow(), delimit, cprd As String
     Dim lin, rec, col, kount, prd As Integer
 
+    Public Enum ImportType
+        Hourly
+        Daily
+        Monthly
+        MultipleElements
+        ClicomDaily
+        ClicomSynop
+        ClicomHourly
+        Dekadal
+        AWSData
+        NOAAGTS
+    End Enum
+
+    Private _enumImportType As ImportType = ImportType.Daily
+
+    Public Sub Setup(enumImportType As ImportType)
+        Me._enumImportType = enumImportType
+        Select Case _enumImportType
+            Case ImportType.Hourly
+                Text = ClsTranslations.GetTranslation("Hourly Data Import")
+                lblType.Text = ClsTranslations.GetTranslation("Hourly")
+                lblDefaultObsHour.Visible = False
+                txtObsHour.Visible = False
+                grpSummary.Visible = False
+                chkUTC.Visible = True
+            Case ImportType.Daily
+                Text = ClsTranslations.GetTranslation("Daily Data Import")
+                lblType.Text = ClsTranslations.GetTranslation("Daily")
+            Case ImportType.Monthly
+                Text = ClsTranslations.GetTranslation("Monthly Data")
+                lblType.Text = ClsTranslations.GetTranslation("Monthly")
+                txtStartRow.Text = 2
+                chkScale.Checked = True
+                cboStns.Enabled = True
+                grpSummary.Visible = False
+            Case ImportType.MultipleElements
+                Text = ClsTranslations.GetTranslation("Multiple Columns Data Import")
+                lblType.Text = ClsTranslations.GetTranslation("Multiple Elements")
+                optMonthly.Enabled = True
+                lblElmCode.Visible = False
+                grpUpperAir.Visible = True
+                cboElement.Visible = False
+            Case ImportType.ClicomDaily
+                Text = ClsTranslations.GetTranslation("CLICOM Daily")
+                lblType.Text = ClsTranslations.GetTranslation("CLICOMdaily")
+                txtStartRow.Text = 1
+                chkScale.Checked = True
+                cboStns.Enabled = False
+                grpSummary.Visible = False
+                lblElmCode.Visible = False
+                cboElement.Visible = False
+                lblMissingFlag.Visible = False
+                txtMissingFlag.Visible = False
+            Case ImportType.ClicomHourly
+                Text = ClsTranslations.GetTranslation("CLICOM Hourly")
+                lblType.Text = ClsTranslations.GetTranslation("CLICOMhourly")
+                txtStartRow.Text = 1
+                chkScale.Checked = True
+                cboStns.Enabled = False
+                grpSummary.Visible = False
+                lblElmCode.Visible = False
+                cboElement.Visible = False
+                lblMissingFlag.Visible = False
+                txtMissingFlag.Visible = False
+            Case ImportType.ClicomSynop
+                Text = ClsTranslations.GetTranslation("CLICOM Synop")
+                lblType.Text = ClsTranslations.GetTranslation("CLICOMsynop")
+                txtStartRow.Text = 1
+                chkScale.Checked = True
+                cboStns.Enabled = False
+                grpSummary.Visible = False
+                lblElmCode.Visible = False
+                cboElement.Visible = False
+                lblMissingFlag.Visible = False
+                txtMissingFlag.Visible = False
+            Case ImportType.Dekadal
+                Text = ClsTranslations.GetTranslation("Dekadal Data Import")
+                lblType.Text = ClsTranslations.GetTranslation("Dekadal")
+                optDekadal.Checked = True
+            Case ImportType.AWSData
+                Text = ClsTranslations.GetTranslation("AWS Data Import")
+                lblType.Visible = False
+                lblType.Text = "AWS"
+                lblDefaultObsHour.Visible = False
+                txtObsHour.Visible = False
+                chkScale.Visible = True
+                chkScale.Checked = True
+                txtObsHour.Visible = False
+                lblStn.Visible = True
+                lblElmCode.Visible = False
+                cboElement.Visible = False
+                grpSummary.Visible = False
+            Case ImportType.NOAAGTS
+                Text = ClsTranslations.GetTranslation("NOAA GTS Data Import")
+                lblType.Visible = False
+                lblType.Text = "NOAA_GTS"
+                lblDefaultObsHour.Visible = False
+                txtObsHour.Visible = False
+                lblDefaultObsHour.Visible = True
+                chkScale.Enabled = False
+                chkScale.Checked = True
+                txtObsHour.Visible = True
+                lblStn.Visible = True
+                lblElmCode.Visible = False
+                cboElement.Visible = False
+                grpSummary.Visible = False
+        End Select
+    End Sub
+
+
     Private Sub cmdOpenFile_Click(sender As Object, e As EventArgs) Handles cmdOpenFile.Click
         dlgOpenImportFile.Filter = "Comma Delimited|*.csv;*.txt;*.*"
-        dlgOpenImportFile.Title = "Open Import Text File"
+        dlgOpenImportFile.Title = ClsTranslations.GetTranslation("Open Import Text File")
         dlgOpenImportFile.ShowDialog()
 
         txtImportFile.Text = dlgOpenImportFile.FileName
@@ -87,16 +197,20 @@
             End Using
 
             ' Special file structures
-            If Text = "AWS Data Import" Then List_AWSFields()
-            If Text = "NOAA GTS Data Import" Then List_NOAAGTSFields()
-            If Text = "Monthly Data" Then List_Monthly()
-            If Text = "Multiple Columns Data Import" Then
-                If chkUpperAir.Checked Then
-                    List_UpperAirFields()
-                Else
-                    List_ObsFields()
-                End If
-            End If
+            Select Case _enumImportType
+                Case ImportType.AWSData
+                    List_AWSFields()
+                Case ImportType.NOAAGTS
+                    List_NOAAGTSFields()
+                Case ImportType.Monthly
+                    List_Monthly()
+                Case ImportType.MultipleElements
+                    If chkUpperAir.Checked Then
+                        List_UpperAirFields()
+                    Else
+                        List_ObsFields()
+                    End If
+            End Select
 
             ''Populate the datagridview with data from the file
             'For Each THisLine In My.Computer.FileSystem.ReadAllText(txtImportFile.Text).Split(Environment.NewLine)
@@ -342,28 +456,28 @@
             Next
 
             ' Determine data category from selected menu
-            If lblType.Text = ClsTranslations.GetTranslation("AWS") Then
-                DataCat = "AWS"
-            ElseIf lblType.Text = "Multiple Elements" Then
-                DataCat = "ColElms"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("Hourly") Then
-                DataCat = "Hourly"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("Daily") Then
-                DataCat = "Daily2"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMdaily") Then
-                DataCat = "CLICOMDLY"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMsynop") Then
-                DataCat = "CLICOMSYP"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("CLICOMhourly") Then
-                DataCat = "CLICOMHLY"
-            ElseIf lblType.Text = ClsTranslations.GetTranslation("Monthly") Then
-                DataCat = "Monthly"
-            ElseIf lblType.Text = "NOAA_GTS" Then
-                DataCat = "NOAAGTS"
-            Else
-                ' Other future data categories
-                'DataCat = Get_DataCat()
-            End If
+            Select Case _enumImportType
+                Case ImportType.Hourly
+                    DataCat = "Hourly"
+                Case ImportType.Daily
+                    DataCat = "Daily2"
+                Case ImportType.Monthly
+                    DataCat = "Monthly"
+                Case ImportType.MultipleElements
+                    DataCat = "ColElms"
+                Case ImportType.ClicomDaily
+                    DataCat = "CLICOMDLY"
+                Case ImportType.ClicomHourly
+                    DataCat = "CLICOMHLY"
+                Case ImportType.ClicomSynop
+                    DataCat = "CLICOMSYP"
+                Case ImportType.AWSData
+                    DataCat = "AWS"
+                Case ImportType.NOAAGTS
+                    DataCat = "NOAAGTS"
+                Case Else
+                    DataCat = ""
+            End Select
 
             ' Check for Daily1, Hourly1 and AWS_special file type
             'For i = 0 To DataGridView1.Columns.Count - 1
@@ -380,12 +494,12 @@
             ' Check for Daily1, Hourly1 and AWS_special file types
             For i = 0 To DataGridView1.Columns.Count - 1
                 If DataGridView1.Columns(i).Name = "value" Then
-                    Select Case lblType.Text
-                        Case "Daily"
+                    Select Case _enumImportType
+                        Case ImportType.Daily
                             DataCat = "Daily1"
-                        Case "Hourly"
+                        Case ImportType.Hourly
                             DataCat = "Daily1"
-                        Case "AWS"
+                        Case ImportType.AWSData
                             DataCat = "AWS_special"
                     End Select
                     Exit For
@@ -435,14 +549,13 @@
             objCmd.CommandTimeout = 0
             objCmd.ExecuteNonQuery()
 
-            lblRecords.Text = "Data import process completed"
+            lblRecords.Text = ClsTranslations.GetTranslation("Data import process completed")
 
             dbcon.Close()
             Me.Cursor = Cursors.Default
 
             ' Output stations and elements errors into a file
             'pnlErrors.Visible = False
-
 
             If lstStations.Items.Count > 0 Then
                 pnlErrors.Visible = True
@@ -460,7 +573,7 @@
 
         Catch ex As Exception
             MsgBox(ex.Message)
-            lblRecords.Text = "Data Import Failed!, Check if the Staion Id exists in metadata"
+            lblRecords.Text = ClsTranslations.GetTranslation("Data Import Failed! Check if the Staion Id exists in metadata")
             dbcon.Close()
             FileClose(101)
             Me.Cursor = Cursors.Default
@@ -1582,7 +1695,7 @@
 
                             col = col + 1
                             ' Show upload progress
-                            lblRecords.Text = "Loading: " & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
+                            lblRecords.Text = ClsTranslations.GetTranslation("Loading: ") & MyReader.LineNumber - 1 & " of " & lblTRecords.Text '.RowCount - Val(txtStartRow.Text) '1
                             lblRecords.Refresh()
 
                         Next
@@ -2106,7 +2219,13 @@
 
     End Sub
 
+    Private Sub lblColumns_Click(sender As Object, e As EventArgs) Handles lblColumns.Click
 
+    End Sub
+
+    Private Sub lstColumn_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstColumn.SelectedIndexChanged
+
+    End Sub
 
     Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
         Me.Close()
@@ -2114,15 +2233,16 @@
 
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        If Text = ClsTranslations.GetTranslation("AWS Data Import") Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aws.htm")
-        ElseIf Text = ClsTranslations.GetTranslation("CLICOM Daily") Or Text = ClsTranslations.GetTranslation("CLICOM Synop") Or Text = ClsTranslations.GetTranslation("CLICOM Hourly") Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "clicom.htm")
-        ElseIf Text = ClsTranslations.GetTranslation("Hourly Data Import") Or Text = ClsTranslations.GetTranslation("Daily Data Import") Or Text = ClsTranslations.GetTranslation("Multiple Columns Data Import") Then
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#DailyHourly")
-        Else
-            Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
-        End If
+        Select Case _enumImportType
+            Case ImportType.Hourly, ImportType.Daily, ImportType.MultipleElements
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#DailyHourly")
+            Case ImportType.ClicomHourly, ImportType.ClicomDaily, ImportType.ClicomSynop
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "clicom.htm")
+            Case ImportType.AWSData
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "aws.htm")
+            Case Else
+                Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "textfileimport.htm#procedures")
+        End Select
     End Sub
 
     Private Sub txtOther_GotFocus(sender As Object, e As EventArgs) Handles txtOther.GotFocus
@@ -2132,10 +2252,7 @@
     Private Sub frmImportDaily_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Len(recCommit.RegkeyValue("key01")) <> 0 Then txtObsHour.Text = recCommit.RegkeyValue("key01")
 
-        If Text = ClsTranslations.GetTranslation("CLICOM Daily") Or Text = ClsTranslations.GetTranslation("CLICOM Synop") Or Text = ClsTranslations.GetTranslation("CLICOM Hourly") Then
-            lblMissingFlag.Visible = False
-            txtMissingFlag.Visible = False
-        End If
+
 
         ClsTranslations.TranslateForm(Me)
 

@@ -113,7 +113,7 @@ Partial Class ucrHourly
         'lblYear
         '
         lblYear.AutoSize = True
-        lblYear.Location = New System.Drawing.Point(429, 8)
+        lblYear.Location = New System.Drawing.Point(433, 9)
         lblYear.Name = "lblYear"
         lblYear.Size = New System.Drawing.Size(32, 13)
         lblYear.TabIndex = 758
@@ -123,7 +123,7 @@ Partial Class ucrHourly
         '
         Me.chkRepeatEntry.AutoSize = True
         Me.chkRepeatEntry.Enabled = False
-        Me.chkRepeatEntry.Location = New System.Drawing.Point(84, 564)
+        Me.chkRepeatEntry.Location = New System.Drawing.Point(56, 564)
         Me.chkRepeatEntry.Name = "chkRepeatEntry"
         Me.chkRepeatEntry.Size = New System.Drawing.Size(88, 17)
         Me.chkRepeatEntry.TabIndex = 48
@@ -133,7 +133,7 @@ Partial Class ucrHourly
         'lblSequencer
         '
         Me.lblSequencer.AutoSize = True
-        Me.lblSequencer.Location = New System.Drawing.Point(196, 565)
+        Me.lblSequencer.Location = New System.Drawing.Point(185, 565)
         Me.lblSequencer.Name = "lblSequencer"
         Me.lblSequencer.Size = New System.Drawing.Size(62, 13)
         Me.lblSequencer.TabIndex = 779
@@ -141,7 +141,7 @@ Partial Class ucrHourly
         '
         'txtSequencer
         '
-        Me.txtSequencer.Location = New System.Drawing.Point(261, 562)
+        Me.txtSequencer.Location = New System.Drawing.Point(271, 562)
         Me.txtSequencer.Name = "txtSequencer"
         Me.txtSequencer.ReadOnly = True
         Me.txtSequencer.Size = New System.Drawing.Size(200, 20)
@@ -262,7 +262,7 @@ Partial Class ucrHourly
         '
         Me.ucrInputSameValue.FieldName = Nothing
         Me.ucrInputSameValue.KeyControl = False
-        Me.ucrInputSameValue.Location = New System.Drawing.Point(432, 63)
+        Me.ucrInputSameValue.Location = New System.Drawing.Point(450, 63)
         Me.ucrInputSameValue.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrInputSameValue.Name = "ucrInputSameValue"
         Me.ucrInputSameValue.Size = New System.Drawing.Size(58, 26)
@@ -281,7 +281,7 @@ Partial Class ucrHourly
         '
         'ucrNavigation
         '
-        Me.ucrNavigation.Location = New System.Drawing.Point(129, 494)
+        Me.ucrNavigation.Location = New System.Drawing.Point(113, 494)
         Me.ucrNavigation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrNavigation.Name = "ucrNavigation"
         Me.ucrNavigation.Size = New System.Drawing.Size(336, 25)
@@ -291,7 +291,7 @@ Partial Class ucrHourly
         '
         Me.ucrDaySelector.FieldName = "dd"
         Me.ucrDaySelector.KeyControl = True
-        Me.ucrDaySelector.Location = New System.Drawing.Point(544, 28)
+        Me.ucrDaySelector.Location = New System.Drawing.Point(557, 28)
         Me.ucrDaySelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrDaySelector.Name = "ucrDaySelector"
         Me.ucrDaySelector.Size = New System.Drawing.Size(42, 21)
@@ -302,7 +302,7 @@ Partial Class ucrHourly
         '
         Me.ucrMonthSelector.FieldName = "mm"
         Me.ucrMonthSelector.KeyControl = True
-        Me.ucrMonthSelector.Location = New System.Drawing.Point(493, 28)
+        Me.ucrMonthSelector.Location = New System.Drawing.Point(502, 28)
         Me.ucrMonthSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrMonthSelector.Name = "ucrMonthSelector"
         Me.ucrMonthSelector.Size = New System.Drawing.Size(36, 25)
@@ -313,7 +313,7 @@ Partial Class ucrHourly
         '
         Me.ucrYearSelector.FieldName = "yyyy"
         Me.ucrYearSelector.KeyControl = True
-        Me.ucrYearSelector.Location = New System.Drawing.Point(432, 28)
+        Me.ucrYearSelector.Location = New System.Drawing.Point(436, 28)
         Me.ucrYearSelector.Margin = New System.Windows.Forms.Padding(5, 6, 5, 6)
         Me.ucrYearSelector.Name = "ucrYearSelector"
         Me.ucrYearSelector.Size = New System.Drawing.Size(49, 25)
@@ -323,7 +323,7 @@ Partial Class ucrHourly
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(541, 10)
+        Me.lblDay.Location = New System.Drawing.Point(554, 9)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 760
@@ -332,7 +332,7 @@ Partial Class ucrHourly
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(490, 8)
+        Me.lblMonth.Location = New System.Drawing.Point(499, 9)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 759

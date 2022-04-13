@@ -41,7 +41,7 @@ Partial Class frmBackup
         'lblBackupFolder
         '
         Me.lblBackupFolder.AutoSize = True
-        Me.lblBackupFolder.Location = New System.Drawing.Point(11, 80)
+        Me.lblBackupFolder.Location = New System.Drawing.Point(9, 82)
         Me.lblBackupFolder.Name = "lblBackupFolder"
         Me.lblBackupFolder.Size = New System.Drawing.Size(79, 13)
         Me.lblBackupFolder.TabIndex = 1
