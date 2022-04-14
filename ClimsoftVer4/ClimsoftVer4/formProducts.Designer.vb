@@ -41,6 +41,8 @@ Partial Class frmProducts
         Me.cboProductsCategory = New System.Windows.Forms.ComboBox()
         Me.lblProductsCategory = New System.Windows.Forms.Label()
         Me.lstViewProducts = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -166,7 +168,7 @@ Partial Class frmProducts
         '
         Me.cboProductsCategory.FormattingEnabled = True
         Me.cboProductsCategory.ItemHeight = 13
-        Me.cboProductsCategory.Location = New System.Drawing.Point(21, 12)
+        Me.cboProductsCategory.Location = New System.Drawing.Point(238, 14)
         Me.cboProductsCategory.Name = "cboProductsCategory"
         Me.cboProductsCategory.Size = New System.Drawing.Size(217, 21)
         Me.cboProductsCategory.TabIndex = 18
@@ -175,7 +177,7 @@ Partial Class frmProducts
         '
         Me.lblProductsCategory.AutoSize = True
         Me.lblProductsCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProductsCategory.Location = New System.Drawing.Point(244, 17)
+        Me.lblProductsCategory.Location = New System.Drawing.Point(18, 19)
         Me.lblProductsCategory.Name = "lblProductsCategory"
         Me.lblProductsCategory.Size = New System.Drawing.Size(151, 16)
         Me.lblProductsCategory.TabIndex = 17
@@ -185,18 +187,30 @@ Partial Class frmProducts
         '
         Me.lstViewProducts.AllowColumnReorder = True
         Me.lstViewProducts.AllowDrop = True
+        Me.lstViewProducts.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.lstViewProducts.FullRowSelect = True
         Me.lstViewProducts.GridLines = True
         Me.lstViewProducts.HideSelection = False
         Me.lstViewProducts.HoverSelection = True
         Me.lstViewProducts.LabelEdit = True
         Me.lstViewProducts.Location = New System.Drawing.Point(21, 41)
+        Me.lstViewProducts.MultiSelect = False
         Me.lstViewProducts.Name = "lstViewProducts"
         Me.lstViewProducts.RightToLeftLayout = True
         Me.lstViewProducts.Size = New System.Drawing.Size(461, 320)
         Me.lstViewProducts.TabIndex = 16
         Me.lstViewProducts.UseCompatibleStateImageBehavior = False
         Me.lstViewProducts.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Product Name"
+        Me.ColumnHeader1.Width = 100
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Product Details"
+        Me.ColumnHeader2.Width = 500
         '
         'frmProducts
         '
@@ -238,4 +252,6 @@ Partial Class frmProducts
     Public WithEvents lstViewProducts As System.Windows.Forms.ListView
     Friend WithEvents lblProductsCategory As System.Windows.Forms.Label
     Friend WithEvents cboProductsCategory As System.Windows.Forms.ComboBox
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
 End Class
