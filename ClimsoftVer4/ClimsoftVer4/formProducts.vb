@@ -16,9 +16,8 @@
 
 Public Class frmProducts
     'Public xy As String
-
-
     Private dataTable As DataTable
+
     Private Sub formProductsSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'todo. this function is meant to update the products table everytime it's run
         'ProductsTable_Update()
@@ -41,8 +40,10 @@ Public Class frmProducts
         Next
 
         'initialise DisplayMember and ValueMember of the combobox to be filled with dictionary values
-        cboProductsCategory.DisplayMember = "Key"
-        cboProductsCategory.ValueMember = "Value"
+        'set the untranslated product category as the display member
+        cboProductsCategory.ValueMember = "Key"
+        'set the translated product category as the display member
+        cboProductsCategory.DisplayMember = "Value"
 
         'bind the combobox to dictionary 
         cboProductsCategory.DataSource = New BindingSource(dctProductCategories, Nothing)
@@ -67,6 +68,7 @@ Public Class frmProducts
 
         'add them to the list view
         For Each row As DataRow In dataTable.Rows
+            'add product and prodcut details. List view has 2 columns
             lstViewProducts.Items.Add(New ListViewItem({row.Field(Of String)("productName"),
                                                        row.Field(Of String)("prDetails")}))
         Next
@@ -88,17 +90,14 @@ Public Class frmProducts
             Case "CLIMAT"
                 frmCLIMAT.Show()
             Case Else
-                'todo
+                'todo. refactor formProductsSelectCriteria to not use product type label
+                'the label should show translated text
                 formProductsSelectCriteria.lblProductType.Text = selectedProductName
                 formProductsSelectCriteria.Show()
         End Select
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Me.Hide()
-    End Sub
-
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+    Private Sub Close_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click, ToolStripButton1.Click
         Me.Close()
     End Sub
 
@@ -108,7 +107,7 @@ Public Class frmProducts
 
     'todo. should this always be called?? and is this the right place to call it
     'this should be done as part of the scripts update
-    Sub ProductsTable_Update()
+    Private Sub ProductsTable_Update()
         Dim currDB As String = ""
         Dim sql0 As String
         Dim qry0 As MySql.Data.MySqlClient.MySqlCommand
@@ -173,4 +172,5 @@ Public Class frmProducts
             Me.Cursor = Cursors.Default
         End Try
     End Sub
+
 End Class

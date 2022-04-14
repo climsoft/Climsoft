@@ -33,6 +33,14 @@ Partial Class formProductsSelectCriteria
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pnlStationsElements = New System.Windows.Forms.Panel()
+        Me.pnlExtremes = New System.Windows.Forms.Panel()
+        Me.btnMinDate = New System.Windows.Forms.RadioButton()
+        Me.btnMaxDate = New System.Windows.Forms.RadioButton()
+        Me.btnLowHigh = New System.Windows.Forms.RadioButton()
+        Me.lblXtyp = New System.Windows.Forms.Label()
+        Me.pnlLevels = New System.Windows.Forms.Panel()
+        Me.lblLevels = New System.Windows.Forms.Label()
+        Me.lstvLevels = New System.Windows.Forms.ListView()
         Me.txttest = New System.Windows.Forms.TextBox()
         Me.cmdSelectAllElements = New System.Windows.Forms.Button()
         Me.cmdSelectAllStations = New System.Windows.Forms.Button()
@@ -43,17 +51,17 @@ Partial Class formProductsSelectCriteria
         Me.optTotal = New System.Windows.Forms.RadioButton()
         Me.optMean = New System.Windows.Forms.RadioButton()
         Me.lblSummary = New System.Windows.Forms.Label()
-        Me.pnlExtremes = New System.Windows.Forms.Panel()
-        Me.btnMinDate = New System.Windows.Forms.RadioButton()
-        Me.btnMaxDate = New System.Windows.Forms.RadioButton()
-        Me.btnLowHigh = New System.Windows.Forms.RadioButton()
-        Me.lblXtyp = New System.Windows.Forms.Label()
         Me.cmdDelStation = New System.Windows.Forms.Button()
         Me.cmdDelElement = New System.Windows.Forms.Button()
         Me.lblProductType = New System.Windows.Forms.Label()
         Me.chkAdvancedSelection = New System.Windows.Forms.CheckBox()
         Me.lstvElements = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lstvStations = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.pnlPeriod = New System.Windows.Forms.Panel()
@@ -90,9 +98,6 @@ Partial Class formProductsSelectCriteria
         Me.lblStations = New System.Windows.Forms.Label()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.cmbstation = New System.Windows.Forms.ComboBox()
-        Me.pnlLevels = New System.Windows.Forms.Panel()
-        Me.lblLevels = New System.Windows.Forms.Label()
-        Me.lstvLevels = New System.Windows.Forms.ListView()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.cmdExtract = New System.Windows.Forms.ToolStripButton()
@@ -104,11 +109,11 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.MenuStrip1.SuspendLayout()
         Me.pnlStationsElements.SuspendLayout()
-        Me.pnlSummary.SuspendLayout()
         Me.pnlExtremes.SuspendLayout()
+        Me.pnlLevels.SuspendLayout()
+        Me.pnlSummary.SuspendLayout()
         Me.pnlPeriod.SuspendLayout()
         Me.pnlStation.SuspendLayout()
-        Me.pnlLevels.SuspendLayout()
         Me.ToolStrip2.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -118,7 +123,7 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(988, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1058, 24)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -174,6 +179,8 @@ Partial Class formProductsSelectCriteria
         '
         Me.pnlStationsElements.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pnlStationsElements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnlStationsElements.Controls.Add(Me.pnlExtremes)
+        Me.pnlStationsElements.Controls.Add(Me.pnlLevels)
         Me.pnlStationsElements.Controls.Add(Me.txttest)
         Me.pnlStationsElements.Controls.Add(Me.cmdSelectAllElements)
         Me.pnlStationsElements.Controls.Add(Me.cmdSelectAllStations)
@@ -181,7 +188,6 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.cmdClearElements)
         Me.pnlStationsElements.Controls.Add(Me.chkTranspose)
         Me.pnlStationsElements.Controls.Add(Me.pnlSummary)
-        Me.pnlStationsElements.Controls.Add(Me.pnlExtremes)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelStation)
         Me.pnlStationsElements.Controls.Add(Me.cmdDelElement)
         Me.pnlStationsElements.Controls.Add(Me.lblProductType)
@@ -194,15 +200,106 @@ Partial Class formProductsSelectCriteria
         Me.pnlStationsElements.Controls.Add(Me.pnlStation)
         Me.pnlStationsElements.Controls.Add(Me.cmbElement)
         Me.pnlStationsElements.Controls.Add(Me.cmbstation)
-        Me.pnlStationsElements.Controls.Add(Me.pnlLevels)
         Me.pnlStationsElements.Location = New System.Drawing.Point(0, 52)
         Me.pnlStationsElements.Name = "pnlStationsElements"
-        Me.pnlStationsElements.Size = New System.Drawing.Size(961, 413)
+        Me.pnlStationsElements.Size = New System.Drawing.Size(1058, 429)
         Me.pnlStationsElements.TabIndex = 4
+        '
+        'pnlExtremes
+        '
+        Me.pnlExtremes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlExtremes.Controls.Add(Me.btnMinDate)
+        Me.pnlExtremes.Controls.Add(Me.btnMaxDate)
+        Me.pnlExtremes.Controls.Add(Me.btnLowHigh)
+        Me.pnlExtremes.Controls.Add(Me.lblXtyp)
+        Me.pnlExtremes.Location = New System.Drawing.Point(648, 7)
+        Me.pnlExtremes.Name = "pnlExtremes"
+        Me.pnlExtremes.Size = New System.Drawing.Size(403, 61)
+        Me.pnlExtremes.TabIndex = 24
+        Me.pnlExtremes.Visible = False
+        '
+        'btnMinDate
+        '
+        Me.btnMinDate.Location = New System.Drawing.Point(286, 20)
+        Me.btnMinDate.Name = "btnMinDate"
+        Me.btnMinDate.Size = New System.Drawing.Size(104, 36)
+        Me.btnMinDate.TabIndex = 3
+        Me.btnMinDate.Text = "Lowest and date"
+        Me.btnMinDate.UseVisualStyleBackColor = True
+        '
+        'btnMaxDate
+        '
+        Me.btnMaxDate.Location = New System.Drawing.Point(154, 20)
+        Me.btnMaxDate.Name = "btnMaxDate"
+        Me.btnMaxDate.Size = New System.Drawing.Size(100, 36)
+        Me.btnMaxDate.TabIndex = 2
+        Me.btnMaxDate.Text = "Higest and date"
+        Me.btnMaxDate.UseVisualStyleBackColor = True
+        '
+        'btnLowHigh
+        '
+        Me.btnLowHigh.Checked = True
+        Me.btnLowHigh.Location = New System.Drawing.Point(3, 20)
+        Me.btnLowHigh.Name = "btnLowHigh"
+        Me.btnLowHigh.Size = New System.Drawing.Size(131, 36)
+        Me.btnLowHigh.TabIndex = 1
+        Me.btnLowHigh.TabStop = True
+        Me.btnLowHigh.Text = "Higest and Lowest"
+        Me.btnLowHigh.UseVisualStyleBackColor = True
+        '
+        'lblXtyp
+        '
+        Me.lblXtyp.AutoSize = True
+        Me.lblXtyp.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblXtyp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblXtyp.Location = New System.Drawing.Point(0, 0)
+        Me.lblXtyp.Name = "lblXtyp"
+        Me.lblXtyp.Size = New System.Drawing.Size(84, 13)
+        Me.lblXtyp.TabIndex = 0
+        Me.lblXtyp.Text = "Extreme Type"
+        '
+        'pnlLevels
+        '
+        Me.pnlLevels.Controls.Add(Me.lblLevels)
+        Me.pnlLevels.Controls.Add(Me.lstvLevels)
+        Me.pnlLevels.Location = New System.Drawing.Point(654, 3)
+        Me.pnlLevels.Name = "pnlLevels"
+        Me.pnlLevels.Size = New System.Drawing.Size(397, 68)
+        Me.pnlLevels.TabIndex = 30
+        Me.pnlLevels.Visible = False
+        '
+        'lblLevels
+        '
+        Me.lblLevels.AutoSize = True
+        Me.lblLevels.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLevels.Location = New System.Drawing.Point(20, 24)
+        Me.lblLevels.Name = "lblLevels"
+        Me.lblLevels.Size = New System.Drawing.Size(139, 15)
+        Me.lblLevels.TabIndex = 8
+        Me.lblLevels.Text = "Select Levels (Click box)"
+        '
+        'lstvLevels
+        '
+        Me.lstvLevels.AllowColumnReorder = True
+        Me.lstvLevels.AllowDrop = True
+        Me.lstvLevels.CheckBoxes = True
+        Me.lstvLevels.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstvLevels.FullRowSelect = True
+        Me.lstvLevels.GridLines = True
+        Me.lstvLevels.HideSelection = False
+        Me.lstvLevels.HoverSelection = True
+        Me.lstvLevels.LabelEdit = True
+        Me.lstvLevels.Location = New System.Drawing.Point(172, -5)
+        Me.lstvLevels.Name = "lstvLevels"
+        Me.lstvLevels.RightToLeftLayout = True
+        Me.lstvLevels.Size = New System.Drawing.Size(156, 73)
+        Me.lstvLevels.TabIndex = 7
+        Me.lstvLevels.UseCompatibleStateImageBehavior = False
+        Me.lstvLevels.View = System.Windows.Forms.View.Details
         '
         'txttest
         '
-        Me.txttest.Location = New System.Drawing.Point(5, 379)
+        Me.txttest.Location = New System.Drawing.Point(5, 396)
         Me.txttest.Name = "txttest"
         Me.txttest.Size = New System.Drawing.Size(592, 20)
         Me.txttest.TabIndex = 31
@@ -210,36 +307,36 @@ Partial Class formProductsSelectCriteria
         '
         'cmdSelectAllElements
         '
-        Me.cmdSelectAllElements.Location = New System.Drawing.Point(452, 344)
+        Me.cmdSelectAllElements.Location = New System.Drawing.Point(463, 346)
         Me.cmdSelectAllElements.Name = "cmdSelectAllElements"
-        Me.cmdSelectAllElements.Size = New System.Drawing.Size(59, 23)
+        Me.cmdSelectAllElements.Size = New System.Drawing.Size(90, 36)
         Me.cmdSelectAllElements.TabIndex = 29
         Me.cmdSelectAllElements.Text = "Select All"
         Me.cmdSelectAllElements.UseVisualStyleBackColor = True
         '
         'cmdSelectAllStations
         '
-        Me.cmdSelectAllStations.Location = New System.Drawing.Point(142, 344)
+        Me.cmdSelectAllStations.Location = New System.Drawing.Point(144, 346)
         Me.cmdSelectAllStations.Name = "cmdSelectAllStations"
-        Me.cmdSelectAllStations.Size = New System.Drawing.Size(59, 23)
+        Me.cmdSelectAllStations.Size = New System.Drawing.Size(90, 36)
         Me.cmdSelectAllStations.TabIndex = 28
         Me.cmdSelectAllStations.Text = "Select All"
         Me.cmdSelectAllStations.UseVisualStyleBackColor = True
         '
         'cmdClearStations
         '
-        Me.cmdClearStations.Location = New System.Drawing.Point(208, 344)
+        Me.cmdClearStations.Location = New System.Drawing.Point(238, 347)
         Me.cmdClearStations.Name = "cmdClearStations"
-        Me.cmdClearStations.Size = New System.Drawing.Size(58, 23)
+        Me.cmdClearStations.Size = New System.Drawing.Size(70, 36)
         Me.cmdClearStations.TabIndex = 27
         Me.cmdClearStations.Text = "Clear List"
         Me.cmdClearStations.UseVisualStyleBackColor = True
         '
         'cmdClearElements
         '
-        Me.cmdClearElements.Location = New System.Drawing.Point(511, 344)
+        Me.cmdClearElements.Location = New System.Drawing.Point(570, 346)
         Me.cmdClearElements.Name = "cmdClearElements"
-        Me.cmdClearElements.Size = New System.Drawing.Size(58, 23)
+        Me.cmdClearElements.Size = New System.Drawing.Size(70, 36)
         Me.cmdClearElements.TabIndex = 26
         Me.cmdClearElements.Text = "Clear List"
         Me.cmdClearElements.UseVisualStyleBackColor = True
@@ -247,7 +344,7 @@ Partial Class formProductsSelectCriteria
         'chkTranspose
         '
         Me.chkTranspose.AutoSize = True
-        Me.chkTranspose.Location = New System.Drawing.Point(615, 176)
+        Me.chkTranspose.Location = New System.Drawing.Point(658, 182)
         Me.chkTranspose.Name = "chkTranspose"
         Me.chkTranspose.Size = New System.Drawing.Size(111, 17)
         Me.chkTranspose.TabIndex = 25
@@ -260,9 +357,9 @@ Partial Class formProductsSelectCriteria
         Me.pnlSummary.Controls.Add(Me.optTotal)
         Me.pnlSummary.Controls.Add(Me.optMean)
         Me.pnlSummary.Controls.Add(Me.lblSummary)
-        Me.pnlSummary.Location = New System.Drawing.Point(614, 5)
+        Me.pnlSummary.Location = New System.Drawing.Point(653, 5)
         Me.pnlSummary.Name = "pnlSummary"
-        Me.pnlSummary.Size = New System.Drawing.Size(329, 48)
+        Me.pnlSummary.Size = New System.Drawing.Size(398, 48)
         Me.pnlSummary.TabIndex = 23
         '
         'optTotal
@@ -298,76 +395,20 @@ Partial Class formProductsSelectCriteria
         Me.lblSummary.TabIndex = 0
         Me.lblSummary.Text = "Summary Type"
         '
-        'pnlExtremes
-        '
-        Me.pnlExtremes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlExtremes.Controls.Add(Me.btnMinDate)
-        Me.pnlExtremes.Controls.Add(Me.btnMaxDate)
-        Me.pnlExtremes.Controls.Add(Me.btnLowHigh)
-        Me.pnlExtremes.Controls.Add(Me.lblXtyp)
-        Me.pnlExtremes.Location = New System.Drawing.Point(616, 7)
-        Me.pnlExtremes.Name = "pnlExtremes"
-        Me.pnlExtremes.Size = New System.Drawing.Size(323, 48)
-        Me.pnlExtremes.TabIndex = 24
-        Me.pnlExtremes.Visible = False
-        '
-        'btnMinDate
-        '
-        Me.btnMinDate.AutoSize = True
-        Me.btnMinDate.Location = New System.Drawing.Point(222, 26)
-        Me.btnMinDate.Name = "btnMinDate"
-        Me.btnMinDate.Size = New System.Drawing.Size(104, 17)
-        Me.btnMinDate.TabIndex = 3
-        Me.btnMinDate.Text = "Lowest and date"
-        Me.btnMinDate.UseVisualStyleBackColor = True
-        '
-        'btnMaxDate
-        '
-        Me.btnMaxDate.AutoSize = True
-        Me.btnMaxDate.Location = New System.Drawing.Point(116, 26)
-        Me.btnMaxDate.Name = "btnMaxDate"
-        Me.btnMaxDate.Size = New System.Drawing.Size(100, 17)
-        Me.btnMaxDate.TabIndex = 2
-        Me.btnMaxDate.Text = "Higest and date"
-        Me.btnMaxDate.UseVisualStyleBackColor = True
-        '
-        'btnLowHigh
-        '
-        Me.btnLowHigh.AutoSize = True
-        Me.btnLowHigh.Checked = True
-        Me.btnLowHigh.Location = New System.Drawing.Point(3, 26)
-        Me.btnLowHigh.Name = "btnLowHigh"
-        Me.btnLowHigh.Size = New System.Drawing.Size(113, 17)
-        Me.btnLowHigh.TabIndex = 1
-        Me.btnLowHigh.TabStop = True
-        Me.btnLowHigh.Text = "Higest and Lowest"
-        Me.btnLowHigh.UseVisualStyleBackColor = True
-        '
-        'lblXtyp
-        '
-        Me.lblXtyp.AutoSize = True
-        Me.lblXtyp.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lblXtyp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblXtyp.Location = New System.Drawing.Point(0, 0)
-        Me.lblXtyp.Name = "lblXtyp"
-        Me.lblXtyp.Size = New System.Drawing.Size(84, 13)
-        Me.lblXtyp.TabIndex = 0
-        Me.lblXtyp.Text = "Extreme Type"
-        '
         'cmdDelStation
         '
-        Me.cmdDelStation.Location = New System.Drawing.Point(8, 344)
+        Me.cmdDelStation.Location = New System.Drawing.Point(4, 347)
         Me.cmdDelStation.Name = "cmdDelStation"
-        Me.cmdDelStation.Size = New System.Drawing.Size(127, 23)
+        Me.cmdDelStation.Size = New System.Drawing.Size(139, 36)
         Me.cmdDelStation.TabIndex = 22
         Me.cmdDelStation.Text = "Clear Selected Station"
         Me.cmdDelStation.UseVisualStyleBackColor = True
         '
         'cmdDelElement
         '
-        Me.cmdDelElement.Location = New System.Drawing.Point(307, 344)
+        Me.cmdDelElement.Location = New System.Drawing.Point(317, 347)
         Me.cmdDelElement.Name = "cmdDelElement"
-        Me.cmdDelElement.Size = New System.Drawing.Size(139, 23)
+        Me.cmdDelElement.Size = New System.Drawing.Size(139, 35)
         Me.cmdDelElement.TabIndex = 21
         Me.cmdDelElement.Text = "Clear Selected Elements"
         Me.cmdDelElement.UseVisualStyleBackColor = True
@@ -378,14 +419,14 @@ Partial Class formProductsSelectCriteria
         Me.lblProductType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProductType.Location = New System.Drawing.Point(254, 7)
         Me.lblProductType.Name = "lblProductType"
-        Me.lblProductType.Size = New System.Drawing.Size(31, 15)
+        Me.lblProductType.Size = New System.Drawing.Size(90, 15)
         Me.lblProductType.TabIndex = 20
-        Me.lblProductType.Text = "      "
+        Me.lblProductType.Text = "Product Type"
         '
         'chkAdvancedSelection
         '
         Me.chkAdvancedSelection.AutoSize = True
-        Me.chkAdvancedSelection.Location = New System.Drawing.Point(615, 194)
+        Me.chkAdvancedSelection.Location = New System.Drawing.Point(658, 207)
         Me.chkAdvancedSelection.Name = "chkAdvancedSelection"
         Me.chkAdvancedSelection.Size = New System.Drawing.Size(167, 17)
         Me.chkAdvancedSelection.TabIndex = 19
@@ -396,23 +437,40 @@ Partial Class formProductsSelectCriteria
         '
         Me.lstvElements.AllowColumnReorder = True
         Me.lstvElements.AllowDrop = True
+        Me.lstvElements.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lstvElements.FullRowSelect = True
         Me.lstvElements.GridLines = True
         Me.lstvElements.HideSelection = False
         Me.lstvElements.HoverSelection = True
         Me.lstvElements.LabelEdit = True
-        Me.lstvElements.Location = New System.Drawing.Point(284, 57)
+        Me.lstvElements.Location = New System.Drawing.Point(314, 57)
         Me.lstvElements.Name = "lstvElements"
         Me.lstvElements.RightToLeftLayout = True
-        Me.lstvElements.Size = New System.Drawing.Size(314, 289)
+        Me.lstvElements.Size = New System.Drawing.Size(335, 289)
         Me.lstvElements.TabIndex = 18
         Me.lstvElements.UseCompatibleStateImageBehavior = False
         Me.lstvElements.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Element Id"
+        Me.ColumnHeader3.Width = 80
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Element Abbreviation"
+        Me.ColumnHeader4.Width = 100
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Element Name"
+        Me.ColumnHeader5.Width = 400
         '
         'lstvStations
         '
         Me.lstvStations.AllowColumnReorder = True
         Me.lstvStations.AllowDrop = True
+        Me.lstvStations.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.lstvStations.FullRowSelect = True
         Me.lstvStations.GridLines = True
         Me.lstvStations.HideSelection = False
@@ -421,15 +479,25 @@ Partial Class formProductsSelectCriteria
         Me.lstvStations.Location = New System.Drawing.Point(5, 57)
         Me.lstvStations.Name = "lstvStations"
         Me.lstvStations.RightToLeftLayout = True
-        Me.lstvStations.Size = New System.Drawing.Size(267, 289)
+        Me.lstvStations.Size = New System.Drawing.Size(303, 289)
         Me.lstvStations.TabIndex = 17
         Me.lstvStations.UseCompatibleStateImageBehavior = False
         Me.lstvStations.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Station Id"
+        Me.ColumnHeader1.Width = 80
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Station Name"
+        Me.ColumnHeader2.Width = 400
+        '
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(331, 34)
+        Me.lblElement.Location = New System.Drawing.Point(317, 37)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(78, 13)
         Me.lblElement.TabIndex = 9
@@ -460,9 +528,9 @@ Partial Class formProductsSelectCriteria
         Me.pnlPeriod.Controls.Add(Me.dateFrom)
         Me.pnlPeriod.Controls.Add(Me.lblFrom)
         Me.pnlPeriod.Controls.Add(Me.lblPeriod)
-        Me.pnlPeriod.Location = New System.Drawing.Point(615, 73)
+        Me.pnlPeriod.Location = New System.Drawing.Point(655, 76)
         Me.pnlPeriod.Name = "pnlPeriod"
-        Me.pnlPeriod.Size = New System.Drawing.Size(330, 97)
+        Me.pnlPeriod.Size = New System.Drawing.Size(396, 97)
         Me.pnlPeriod.TabIndex = 7
         '
         'lblProducts
@@ -480,7 +548,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtMinuteEnd.FormattingEnabled = True
         Me.txtMinuteEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59"})
-        Me.txtMinuteEnd.Location = New System.Drawing.Point(279, 67)
+        Me.txtMinuteEnd.Location = New System.Drawing.Point(324, 67)
         Me.txtMinuteEnd.Name = "txtMinuteEnd"
         Me.txtMinuteEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteEnd.TabIndex = 15
@@ -490,7 +558,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtMinuteStart.FormattingEnabled = True
         Me.txtMinuteStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "67", "58", "59", "60"})
-        Me.txtMinuteStart.Location = New System.Drawing.Point(279, 33)
+        Me.txtMinuteStart.Location = New System.Drawing.Point(324, 33)
         Me.txtMinuteStart.Name = "txtMinuteStart"
         Me.txtMinuteStart.Size = New System.Drawing.Size(40, 21)
         Me.txtMinuteStart.TabIndex = 14
@@ -500,7 +568,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourEnd.FormattingEnabled = True
         Me.txtHourEnd.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourEnd.Location = New System.Drawing.Point(233, 68)
+        Me.txtHourEnd.Location = New System.Drawing.Point(278, 68)
         Me.txtHourEnd.Name = "txtHourEnd"
         Me.txtHourEnd.Size = New System.Drawing.Size(40, 21)
         Me.txtHourEnd.TabIndex = 13
@@ -510,7 +578,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.txtHourStart.FormattingEnabled = True
         Me.txtHourStart.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
-        Me.txtHourStart.Location = New System.Drawing.Point(233, 34)
+        Me.txtHourStart.Location = New System.Drawing.Point(278, 34)
         Me.txtHourStart.Name = "txtHourStart"
         Me.txtHourStart.Size = New System.Drawing.Size(40, 21)
         Me.txtHourStart.TabIndex = 12
@@ -519,7 +587,7 @@ Partial Class formProductsSelectCriteria
         'txtSminute
         '
         Me.txtSminute.AutoSize = True
-        Me.txtSminute.Location = New System.Drawing.Point(280, 18)
+        Me.txtSminute.Location = New System.Drawing.Point(324, 18)
         Me.txtSminute.Name = "txtSminute"
         Me.txtSminute.Size = New System.Drawing.Size(39, 13)
         Me.txtSminute.TabIndex = 9
@@ -528,7 +596,7 @@ Partial Class formProductsSelectCriteria
         'lblHourEnd
         '
         Me.lblHourEnd.AutoSize = True
-        Me.lblHourEnd.Location = New System.Drawing.Point(236, 18)
+        Me.lblHourEnd.Location = New System.Drawing.Point(278, 18)
         Me.lblHourEnd.Name = "lblHourEnd"
         Me.lblHourEnd.Size = New System.Drawing.Size(30, 13)
         Me.lblHourEnd.TabIndex = 7
@@ -537,7 +605,7 @@ Partial Class formProductsSelectCriteria
         'lblHourBegin
         '
         Me.lblHourBegin.AutoSize = True
-        Me.lblHourBegin.Location = New System.Drawing.Point(89, 18)
+        Me.lblHourBegin.Location = New System.Drawing.Point(108, 17)
         Me.lblHourBegin.Name = "lblHourBegin"
         Me.lblHourBegin.Size = New System.Drawing.Size(30, 13)
         Me.lblHourBegin.TabIndex = 5
@@ -545,7 +613,7 @@ Partial Class formProductsSelectCriteria
         '
         'dateTo
         '
-        Me.dateTo.Location = New System.Drawing.Point(63, 68)
+        Me.dateTo.Location = New System.Drawing.Point(108, 68)
         Me.dateTo.Name = "dateTo"
         Me.dateTo.Size = New System.Drawing.Size(164, 20)
         Me.dateTo.TabIndex = 4
@@ -561,7 +629,7 @@ Partial Class formProductsSelectCriteria
         '
         'dateFrom
         '
-        Me.dateFrom.Location = New System.Drawing.Point(63, 33)
+        Me.dateFrom.Location = New System.Drawing.Point(108, 33)
         Me.dateFrom.Name = "dateFrom"
         Me.dateFrom.Size = New System.Drawing.Size(164, 20)
         Me.dateFrom.TabIndex = 2
@@ -607,15 +675,15 @@ Partial Class formProductsSelectCriteria
         Me.pnlStation.Controls.Add(Me.lstAuthority)
         Me.pnlStation.Controls.Add(Me.optAuthority)
         Me.pnlStation.Controls.Add(Me.lblStations)
-        Me.pnlStation.Location = New System.Drawing.Point(615, 224)
+        Me.pnlStation.Location = New System.Drawing.Point(655, 234)
         Me.pnlStation.Name = "pnlStation"
-        Me.pnlStation.Size = New System.Drawing.Size(339, 170)
+        Me.pnlStation.Size = New System.Drawing.Size(396, 170)
         Me.pnlStation.TabIndex = 6
         Me.pnlStation.Visible = False
         '
         'butFill
         '
-        Me.butFill.Location = New System.Drawing.Point(275, 138)
+        Me.butFill.Location = New System.Drawing.Point(329, 138)
         Me.butFill.Name = "butFill"
         Me.butFill.Size = New System.Drawing.Size(59, 21)
         Me.butFill.TabIndex = 16
@@ -625,7 +693,7 @@ Partial Class formProductsSelectCriteria
         'lstQualifier
         '
         Me.lstQualifier.FormattingEnabled = True
-        Me.lstQualifier.Location = New System.Drawing.Point(122, 24)
+        Me.lstQualifier.Location = New System.Drawing.Point(148, 24)
         Me.lstQualifier.Name = "lstQualifier"
         Me.lstQualifier.Size = New System.Drawing.Size(158, 17)
         Me.lstQualifier.TabIndex = 15
@@ -633,7 +701,7 @@ Partial Class formProductsSelectCriteria
         'optqualifier
         '
         Me.optqualifier.AutoSize = True
-        Me.optqualifier.Location = New System.Drawing.Point(28, 24)
+        Me.optqualifier.Location = New System.Drawing.Point(7, 24)
         Me.optqualifier.Name = "optqualifier"
         Me.optqualifier.Size = New System.Drawing.Size(63, 17)
         Me.optqualifier.TabIndex = 14
@@ -644,7 +712,7 @@ Partial Class formProductsSelectCriteria
         'lblRadius
         '
         Me.lblRadius.AutoSize = True
-        Me.lblRadius.Location = New System.Drawing.Point(228, 123)
+        Me.lblRadius.Location = New System.Drawing.Point(282, 123)
         Me.lblRadius.Name = "lblRadius"
         Me.lblRadius.Size = New System.Drawing.Size(63, 13)
         Me.lblRadius.TabIndex = 13
@@ -653,7 +721,7 @@ Partial Class formProductsSelectCriteria
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(171, 123)
+        Me.lblLongitude.Location = New System.Drawing.Point(216, 123)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(54, 13)
         Me.lblLongitude.TabIndex = 12
@@ -662,7 +730,7 @@ Partial Class formProductsSelectCriteria
         'txtRadius
         '
         Me.txtRadius.Enabled = False
-        Me.txtRadius.Location = New System.Drawing.Point(234, 138)
+        Me.txtRadius.Location = New System.Drawing.Point(288, 138)
         Me.txtRadius.Name = "txtRadius"
         Me.txtRadius.Size = New System.Drawing.Size(35, 20)
         Me.txtRadius.TabIndex = 11
@@ -670,7 +738,7 @@ Partial Class formProductsSelectCriteria
         'TxtLongitude
         '
         Me.TxtLongitude.Enabled = False
-        Me.TxtLongitude.Location = New System.Drawing.Point(177, 138)
+        Me.TxtLongitude.Location = New System.Drawing.Point(222, 138)
         Me.TxtLongitude.Name = "TxtLongitude"
         Me.TxtLongitude.Size = New System.Drawing.Size(48, 20)
         Me.TxtLongitude.TabIndex = 10
@@ -678,7 +746,7 @@ Partial Class formProductsSelectCriteria
         'txtLatitude
         '
         Me.txtLatitude.Enabled = False
-        Me.txtLatitude.Location = New System.Drawing.Point(117, 138)
+        Me.txtLatitude.Location = New System.Drawing.Point(152, 138)
         Me.txtLatitude.Name = "txtLatitude"
         Me.txtLatitude.Size = New System.Drawing.Size(44, 20)
         Me.txtLatitude.TabIndex = 9
@@ -686,7 +754,7 @@ Partial Class formProductsSelectCriteria
         'lblLatitude
         '
         Me.lblLatitude.AutoSize = True
-        Me.lblLatitude.Location = New System.Drawing.Point(116, 123)
+        Me.lblLatitude.Location = New System.Drawing.Point(151, 123)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(45, 13)
         Me.lblLatitude.TabIndex = 8
@@ -695,7 +763,7 @@ Partial Class formProductsSelectCriteria
         'OptGeography
         '
         Me.OptGeography.AutoSize = True
-        Me.OptGeography.Location = New System.Drawing.Point(28, 119)
+        Me.OptGeography.Location = New System.Drawing.Point(7, 119)
         Me.OptGeography.Name = "OptGeography"
         Me.OptGeography.Size = New System.Drawing.Size(88, 17)
         Me.OptGeography.TabIndex = 7
@@ -706,7 +774,7 @@ Partial Class formProductsSelectCriteria
         'lstBasin
         '
         Me.lstBasin.FormattingEnabled = True
-        Me.lstBasin.Location = New System.Drawing.Point(122, 94)
+        Me.lstBasin.Location = New System.Drawing.Point(148, 94)
         Me.lstBasin.Name = "lstBasin"
         Me.lstBasin.Size = New System.Drawing.Size(158, 17)
         Me.lstBasin.TabIndex = 6
@@ -714,7 +782,7 @@ Partial Class formProductsSelectCriteria
         'optBasin
         '
         Me.optBasin.AutoSize = True
-        Me.optBasin.Location = New System.Drawing.Point(28, 94)
+        Me.optBasin.Location = New System.Drawing.Point(7, 94)
         Me.optBasin.Name = "optBasin"
         Me.optBasin.Size = New System.Drawing.Size(97, 17)
         Me.optBasin.TabIndex = 5
@@ -725,7 +793,7 @@ Partial Class formProductsSelectCriteria
         'lstRegion
         '
         Me.lstRegion.FormattingEnabled = True
-        Me.lstRegion.Location = New System.Drawing.Point(122, 71)
+        Me.lstRegion.Location = New System.Drawing.Point(148, 71)
         Me.lstRegion.Name = "lstRegion"
         Me.lstRegion.Size = New System.Drawing.Size(158, 17)
         Me.lstRegion.TabIndex = 4
@@ -733,7 +801,7 @@ Partial Class formProductsSelectCriteria
         'optRegion
         '
         Me.optRegion.AutoSize = True
-        Me.optRegion.Location = New System.Drawing.Point(28, 71)
+        Me.optRegion.Location = New System.Drawing.Point(7, 71)
         Me.optRegion.Name = "optRegion"
         Me.optRegion.Size = New System.Drawing.Size(59, 17)
         Me.optRegion.TabIndex = 3
@@ -744,7 +812,7 @@ Partial Class formProductsSelectCriteria
         'lstAuthority
         '
         Me.lstAuthority.FormattingEnabled = True
-        Me.lstAuthority.Location = New System.Drawing.Point(122, 48)
+        Me.lstAuthority.Location = New System.Drawing.Point(148, 48)
         Me.lstAuthority.Name = "lstAuthority"
         Me.lstAuthority.Size = New System.Drawing.Size(158, 17)
         Me.lstAuthority.TabIndex = 2
@@ -752,7 +820,7 @@ Partial Class formProductsSelectCriteria
         'optAuthority
         '
         Me.optAuthority.AutoSize = True
-        Me.optAuthority.Location = New System.Drawing.Point(28, 48)
+        Me.optAuthority.Location = New System.Drawing.Point(7, 48)
         Me.optAuthority.Name = "optAuthority"
         Me.optAuthority.Size = New System.Drawing.Size(66, 17)
         Me.optAuthority.TabIndex = 1
@@ -775,66 +843,27 @@ Partial Class formProductsSelectCriteria
         '
         Me.cmbElement.FormattingEnabled = True
         Me.cmbElement.ItemHeight = 13
-        Me.cmbElement.Location = New System.Drawing.Point(410, 30)
+        Me.cmbElement.Location = New System.Drawing.Point(463, 32)
         Me.cmbElement.Name = "cmbElement"
-        Me.cmbElement.Size = New System.Drawing.Size(182, 21)
+        Me.cmbElement.Size = New System.Drawing.Size(143, 21)
         Me.cmbElement.TabIndex = 3
         '
         'cmbstation
         '
         Me.cmbstation.FormattingEnabled = True
         Me.cmbstation.ItemHeight = 13
-        Me.cmbstation.Location = New System.Drawing.Point(81, 30)
+        Me.cmbstation.Location = New System.Drawing.Point(130, 30)
         Me.cmbstation.Name = "cmbstation"
-        Me.cmbstation.Size = New System.Drawing.Size(191, 21)
+        Me.cmbstation.Size = New System.Drawing.Size(150, 21)
         Me.cmbstation.TabIndex = 1
-        '
-        'pnlLevels
-        '
-        Me.pnlLevels.Controls.Add(Me.lblLevels)
-        Me.pnlLevels.Controls.Add(Me.lstvLevels)
-        Me.pnlLevels.Location = New System.Drawing.Point(615, 3)
-        Me.pnlLevels.Name = "pnlLevels"
-        Me.pnlLevels.Size = New System.Drawing.Size(328, 68)
-        Me.pnlLevels.TabIndex = 30
-        Me.pnlLevels.Visible = False
-        '
-        'lblLevels
-        '
-        Me.lblLevels.AutoSize = True
-        Me.lblLevels.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLevels.Location = New System.Drawing.Point(20, 24)
-        Me.lblLevels.Name = "lblLevels"
-        Me.lblLevels.Size = New System.Drawing.Size(139, 15)
-        Me.lblLevels.TabIndex = 8
-        Me.lblLevels.Text = "Select Levels (Click box)"
-        '
-        'lstvLevels
-        '
-        Me.lstvLevels.AllowColumnReorder = True
-        Me.lstvLevels.AllowDrop = True
-        Me.lstvLevels.CheckBoxes = True
-        Me.lstvLevels.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstvLevels.FullRowSelect = True
-        Me.lstvLevels.GridLines = True
-        Me.lstvLevels.HideSelection = False
-        Me.lstvLevels.HoverSelection = True
-        Me.lstvLevels.LabelEdit = True
-        Me.lstvLevels.Location = New System.Drawing.Point(172, -5)
-        Me.lstvLevels.Name = "lstvLevels"
-        Me.lstvLevels.RightToLeftLayout = True
-        Me.lstvLevels.Size = New System.Drawing.Size(156, 73)
-        Me.lstvLevels.TabIndex = 7
-        Me.lstvLevels.UseCompatibleStateImageBehavior = False
-        Me.lstvLevels.View = System.Windows.Forms.View.Details
         '
         'ToolStrip2
         '
         Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator2, Me.cmdExtract, Me.prgrbProducts, Me.cmdCancel})
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 460)
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 482)
         Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(988, 25)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1058, 25)
         Me.ToolStrip2.TabIndex = 9
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -892,7 +921,7 @@ Partial Class formProductsSelectCriteria
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolStripSeparator, Me.toolStripSeparator1, Me.HelpToolStripButton})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 24)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(988, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(1058, 25)
         Me.ToolStrip1.TabIndex = 1
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -900,7 +929,7 @@ Partial Class formProductsSelectCriteria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(988, 485)
+        Me.ClientSize = New System.Drawing.Size(1058, 507)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlStationsElements)
         Me.Controls.Add(Me.ToolStrip1)
@@ -912,16 +941,16 @@ Partial Class formProductsSelectCriteria
         Me.MenuStrip1.PerformLayout()
         Me.pnlStationsElements.ResumeLayout(False)
         Me.pnlStationsElements.PerformLayout()
-        Me.pnlSummary.ResumeLayout(False)
-        Me.pnlSummary.PerformLayout()
         Me.pnlExtremes.ResumeLayout(False)
         Me.pnlExtremes.PerformLayout()
+        Me.pnlLevels.ResumeLayout(False)
+        Me.pnlLevels.PerformLayout()
+        Me.pnlSummary.ResumeLayout(False)
+        Me.pnlSummary.PerformLayout()
         Me.pnlPeriod.ResumeLayout(False)
         Me.pnlPeriod.PerformLayout()
         Me.pnlStation.ResumeLayout(False)
         Me.pnlStation.PerformLayout()
-        Me.pnlLevels.ResumeLayout(False)
-        Me.pnlLevels.PerformLayout()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
@@ -1009,4 +1038,9 @@ Partial Class formProductsSelectCriteria
     Friend WithEvents optqualifier As RadioButton
     Friend WithEvents butFill As Button
     Friend WithEvents txttest As TextBox
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents ColumnHeader5 As ColumnHeader
 End Class
