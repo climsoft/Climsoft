@@ -173,6 +173,7 @@ Partial Class form_agro1
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
         Me.btnCommit = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label62
@@ -1300,7 +1301,7 @@ Partial Class form_agro1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(497, 556)
+        Me.btnView.Location = New System.Drawing.Point(477, 556)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(64, 23)
         Me.btnView.TabIndex = 43
@@ -1336,7 +1337,7 @@ Partial Class form_agro1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(669, 556)
+        Me.btnHelp.Location = New System.Drawing.Point(710, 556)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(64, 23)
         Me.btnHelp.TabIndex = 44
@@ -1346,7 +1347,7 @@ Partial Class form_agro1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(411, 556)
+        Me.btnClear.Location = New System.Drawing.Point(395, 556)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(64, 23)
         Me.btnClear.TabIndex = 42
@@ -1355,7 +1356,7 @@ Partial Class form_agro1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(325, 556)
+        Me.btnDelete.Location = New System.Drawing.Point(313, 556)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(64, 23)
         Me.btnDelete.TabIndex = 41
@@ -1383,7 +1384,7 @@ Partial Class form_agro1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(239, 556)
+        Me.btnUpdate.Location = New System.Drawing.Point(231, 556)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
         Me.btnUpdate.TabIndex = 40
@@ -1419,7 +1420,7 @@ Partial Class form_agro1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(584, 556)
+        Me.btnClose.Location = New System.Drawing.Point(628, 556)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(64, 23)
         Me.btnClose.TabIndex = 45
@@ -1438,18 +1439,28 @@ Partial Class form_agro1
         '
         'btnCommit
         '
-        Me.btnCommit.Location = New System.Drawing.Point(153, 556)
+        Me.btnCommit.Location = New System.Drawing.Point(149, 556)
         Me.btnCommit.Name = "btnCommit"
         Me.btnCommit.Size = New System.Drawing.Size(64, 23)
         Me.btnCommit.TabIndex = 38
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(559, 556)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1154
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'form_agro1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(827, 644)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCommit)
         Me.Controls.Add(Me.chkRepeatEntry)
         Me.Controls.Add(Me.btnView)
@@ -1759,4 +1770,5 @@ Partial Class form_agro1
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnMoveFirst As System.Windows.Forms.Button
     Friend WithEvents btnCommit As System.Windows.Forms.Button
+    Friend WithEvents btnPush As Button
 End Class

@@ -1167,28 +1167,11 @@ Err:
 
     Sub process_input_data()
         On Error GoTo Err
-        Dim datestring As String
-        Dim Tlag As Integer
-        Dim aws_input_file As String
-        Dim aws_input_file_flds As String
-        Dim infile As String
-        Dim delmtr As String
-        Dim delimiter_ascii As String
-        Dim hdrows As Integer
-        Dim fldsrow As Integer
-        Dim txtqlfr As String
-        Dim flg As String
-        Dim rs As New DataSet
-        Dim rss As New DataSet
-        Dim dt As DateTime
-        Dim fls As String
-        Dim aws_data As String
-        Dim siz As Integer
-        Dim strRec As Integer
-        Dim AWSsite As String
-        Dim chr As String
-        Dim dTable As DataTable
 
+        Dim strRecmn, siz, Tlag As Integer
+        Dim aws_input_file, aws_input_file_flds, infile, fls, aws_data, AWSsite As String
+        Dim rs, rss As New DataSet
+        Dim dt As DateTime
 
         ' Open the data set for the AWS sites and stations
         SetDataSet("aws_sites")
@@ -1210,9 +1193,16 @@ Err:
         Bufr_Subst = 0
         BUFR_Subsets_Data = ""
         BufrSection4 = ""
-        'Get full path for the Subsets Output file file and create the file
-        Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
-        fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
+
+        'Get full path for the Subsets Output file nd create folder if not existing
+        Dim Dir_outFiles As String
+        Dir_outFiles = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+        If Not Directory.Exists(Dir_outFiles) Then Directory.CreateDirectory(Dir_outFiles)
+
+        ' Prepare the folder for new outfiles
+        Refresh_Folder(Dir_outFiles)
+        'Refresh_Folder(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\")
+        fl = Dir_outFiles & "\bufr_subsets.csv" 'Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\bufr_subsets.csv"
 
         FileOpen(30, fl, OpenMode.Output)
         FileClose(30)
@@ -1229,48 +1219,57 @@ Err:
                 If IsDBNull(.Rows(i).Item("InputFile")) Or .Rows(i).Item("OperationalStatus") = 0 Then Continue For ' Data for site not in a state to be processed
                 'Log_Errors(.Rows(i).Item("FilePrefix"))
                 ' Get station data details
-                nat_id = .Rows(i).Item("SiteID")
+                'nat_id = .Rows(i).Item("SiteID")
 
-                ' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
-                If Not IsDBNull(.Rows(i).Item("GTSHeader")) And Len(.Rows(i).Item("GTSHeader")) = 11 Then
-                    msg_header = .Rows(i).Item("GTSHeader")
-                Else
-                    msg_header = txtMsgHeader.Text
-                End If
+                '' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
+                'If Not IsDBNull(.Rows(i).Item("GTSHeader")) And Len(.Rows(i).Item("GTSHeader")) = 11 Then
+                '    msg_header = .Rows(i).Item("GTSHeader")
+                'Else
+                '    msg_header = txtMsgHeader.Text
+                'End If
 
-                flg = ""
-                If Not IsDBNull(.Rows(i).Item("MissingDataFlag")) Then
-                    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag") 'Get the missing data flag
-                End If
+                'flg = ""
+                'If Not IsDBNull(.Rows(i).Item("MissingDataFlag")) Then
+                '    If Len(.Rows(i).Item("MissingDataFlag")) <> 0 Then flg = .Rows(i).Item("MissingDataFlag") 'Get the missing data flag
+                'End If
 
-                AWSsite = .Rows(i).Item("DataStructure")
-                Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
+                'AWSsite = .Rows(i).Item("DataStructure")
+                'Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
 
                 ftp_host = .Rows(i).Item("awsServerIp")
 
                 ' Get files prefix status
+                Dim sep As Integer
+                Dim flprefix1, flprefix2 As String
                 flprefix = ""
-                'MsgBox(.Rows(i).Item("chkPrefix"))
                 If Not IsDBNull(.Rows(i).Item("FilePrefix")) And .Rows(i).Item("chkPrefix") = True Then
                     flprefix = .Rows(i).Item("FilePrefix") '
                     If Len(flprefix) > 0 Then
-                        flprefix = Compute_Prefix(flprefix)
+                        sep = InStr(flprefix, ",") ' Combined prefixes
+                        If sep > 0 Then
+                            flprefix1 = Strings.Left(flprefix, sep - 1)
+                            flprefix2 = Strings.Mid(flprefix, sep + 1, Len(flprefix) - 1)
+                            flprefix = flprefix1 & Compute_Prefix(flprefix2)
+                        Else
+                            flprefix = Compute_Prefix(flprefix)
+                        End If
+                        'Log_Errors(flprefix) 
                     End If
                 End If
 
-                ' Compute Delimiter ascii value
-                Select Case delmtr
-                    Case "tab"
-                        delimiter_ascii = 9
-                    Case "comma"
-                        delimiter_ascii = 44
-                    Case "space"
-                        delimiter_ascii = 32
-                    Case "semicolon"
-                        delimiter_ascii = 59
-                    Case Else
-                        delimiter_ascii = Asc(delmtr)
-                End Select
+                '' Compute Delimiter ascii value
+                'Select Case delmtr
+                '    Case "tab"
+                '        delimiter_ascii = 9
+                '    Case "comma"
+                '        delimiter_ascii = 44
+                '    Case "space"
+                '        delimiter_ascii = 32
+                '    Case "semicolon"
+                '        delimiter_ascii = 59
+                '    Case Else
+                '        delimiter_ascii = Asc(delmtr)
+                'End Select
 
                 infile = .Rows(i).Item("InputFile")
                 'MsgBox(i & infile)
@@ -1283,108 +1282,113 @@ Err:
                 End If
 
                 ' Assign a variable to an input file with header rows. txtinputfile  variable has been assisgned at FTP_Call function
-                aws_input_file = txtinputfile
 
-                ' Check if the input data file was retrieved
-                If Not File.Exists(aws_input_file) Then
-                    Log_Errors(" Could not find " & aws_input_file)
-                    Continue For
-                End If
+                'Process_InputFiles(rs)
 
-                FileClose(1)
-                txtStatus.Text = "Organising the input file"
+                'aws_input_file = txtinputfile
 
-                ' Assign a variable to an output file without header rows
-                aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+                '' Check if the input data file was retrieved
+                'If Not File.Exists(aws_input_file) Then
+                '    Log_Errors(" Could not find " & aws_input_file)
+                '    Continue For
+                'End If
 
-                FileOpen(10, aws_input_file, OpenMode.Input)
-                FileOpen(11, aws_input_file_flds, OpenMode.Output)
+                'FileClose(1)
+                'txtStatus.Text = "Organising the input file"
 
-                ' Skip header Records if present
-                If Val(hdrows) > 0 Then 'Retrieve header rows from station parameters
-                    For j = 0 To Val(hdrows) - 1
-                        aws_data = LineInput(10)
-                    Next
-                End If
+                '' Assign a variable to an output file without header rows
+                'aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
 
-                ' Output the data rows
-                Do While EOF(10) = False
-                    aws_data = LineInput(10)
-                    PrintLine(11, aws_data)
-                Loop
+                'FileOpen(10, aws_input_file, OpenMode.Input)
+                'FileOpen(11, aws_input_file_flds, OpenMode.Output)
 
-                FileClose(10)
-                FileClose(11)
-                Dim colmn, dtCol As Integer
-                Dim rws As Long
-                Dim x, dtFmt As String
-                'ChrW(delimiter_ascii)
+                '' Skip header Records if present
+                'If Val(hdrows) > 0 Then 'Retrieve header rows from station parameters
+                '    For j = 0 To Val(hdrows) - 1
+                '        aws_data = LineInput(10)
+                '    Next
+                'End If
 
-                ' Convert the input file to a data table for ease of referencing the records therein.
-                dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
+                '' Output the data rows
+                'Do While EOF(10) = False
+                '    aws_data = LineInput(10)
+                '    PrintLine(11, aws_data)
+                'Loop
 
-                For k = 0 To rws - 2
-                    Process_Status("Processing input record " & k + 1 & " of " & rws)
-                    ' Get date and time for the current record
-                    datestring = Get_DateStamp(AWSsite, dTable, k)
-                    'MsgBox(datestring)
-                    'Skip older records
-                    If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+                'FileClose(10)
+                'FileClose(11)
+                'Dim colmn, dtCol As Integer
+                'Dim rws As Long
+                'Dim x, dtFmt As String
+                ''ChrW(delimiter_ascii)
 
-                    'Skip records with invalid date stamp
-                    If IsDate(datestring) Then
-                        'Log_Errors(datestring)
-                        ' Compare current time with time stamp on hourly basis. Skip records outside the time range
-                        If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+                '' Convert the input file to a data table for ease of referencing the records therein.
+                'dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
 
-                        Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
+                'For k = 0 To rws - 2
+                '    Process_Status("Processing input record " & k + 1 & " of " & rws)
+                '    ' Get date and time for the current record
+                '    datestring = Get_DateStamp(AWSsite, dTable, k)
+                '    'MsgBox(datestring)
+                '    'Skip older records
+                '    If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
 
-                        ' Update obsv value column in the data structure
-                        For j = 0 To colmn - 1
-                            If Not IsDBNull(dTable.Rows(k).Item(j)) Then
-                                x = dTable.Rows(k).Item(j)
-                                'Log_Errors(x)
-                                If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
-                                    x = Strings.Mid(x, 2, Len(x) - 2)
-                                End If
+                '    'Skip records with invalid date stamp
+                '    If IsDate(datestring) Then
+                '        'Log_Errors(datestring)
+                '        ' Compare current time with time stamp on hourly basis. Skip records outside the time range
+                '        If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
 
-                                AwsRecord_Update(x, j, flg, AWSsite)
-                            Else
-                                Continue For
-                            End If
-                        Next j
+                '        Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
 
-                        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
-                        Dim sqlv As String
-                        sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
-                        rs = GetDataSet(AWSsite, sqlv)
+                '        ' Update obsv value column in the data structure
+                '        For j = 0 To colmn - 1
+                '            If Not IsDBNull(dTable.Rows(k).Item(j)) Then
+                '                x = dTable.Rows(k).Item(j)
+                '                'Log_Errors(x)
+                '                If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+                '                    x = Strings.Mid(x, 2, Len(x) - 2)
+                '                End If
 
-                        'Don't process the record if having invalid datestamp
-                        'If IsDate(datestring) Then
+                '                AwsRecord_Update(x, j, flg, AWSsite)
+                '            Else
+                '                Continue For
+                '            End If
+                '        Next j
 
-                        'Update the record into the database
-                        If Val(txtPeriod.Text) = 999 Then
+                '        ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+                '        Dim sqlv As String
+                '        sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+                '        rs = GetDataSet(AWSsite, sqlv)
 
-                            ' Process the entire input file irespective of time difference
-                            Process_Input_Record(AWSsite, datestring)
-                        Else
-                            ' Process records for the last selected hours
-                            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
-                                Process_Input_Record(AWSsite, datestring)
-                            End If
-                        End If
-                        'End If
-                    End If
-                Next k
+                '        'Don't process the record if having invalid datestamp
+                '        'If IsDate(datestring) Then
 
-                ' Delete input file from base station server if so selected
-                If chkDeleteFile.Checked Then
-                    If Not FTP_Delete_InputFile(infile) Then
-                        Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
-                    End If
-                End If
+                '        'Update the record into the database
+                '        If Val(txtPeriod.Text) = 999 Then
+
+                '            ' Process the entire input file irespective of time difference
+                '            Process_Input_Record(AWSsite, datestring)
+                '        Else
+                '            ' Process records for the last selected hours
+                '            If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+                '                Process_Input_Record(AWSsite, datestring)
+                '            End If
+                '        End If
+                '        'End If
+                '    End If
+                'Next k
+
+                '' Delete input file from base station server if so selected
+                'If chkDeleteFile.Checked Then
+                '    If Not FTP_Delete_InputFile(infile) Then
+                '        Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
+                '    End If
+                'End If
 
             Next i
+            Process_InputFiles(ds)
+            'Exit Sub
         End With
 
         ' Encode and compose the BUFR Bulletins
@@ -1632,8 +1636,7 @@ Err:
         Log_Errors(Err.Number & ":" & Err.Description)
     End Sub
     Function FTP_Call(ftpfile As String, ftpmethod As String) As Boolean
-        'Log_Errors(ftpfile & " " & ftpmethod)
-        'MsgBox(ftpfile & " " & ftpmethod)
+
         FTP_Call = True
 
         Dim ftpscript As String
@@ -1645,7 +1648,7 @@ Err:
         Dim usr As String
         Dim pwd As String
         Dim flder, fldr As String
-        Dim ftpmode As String
+        Dim ftpmode, quot As String
 
         Try
             If Not Get_ftp_details(ftpmethod, ftp_host, flder, ftpmode, usr, pwd) Then
@@ -1658,7 +1661,8 @@ Err:
             'Refresh_Folder(local_folder)
             Drive1 = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drive1 = Strings.Left(Drive1, Len(Drive1) - 1)
-            ftpscript = local_folder & "\ftp_aws.txt"
+            'ftpscript = local_folder & "\ftp_aws.txt"
+            ftpscript = local_folder & "\ftp_getFiles.txt"
 
             'FileOpen(1, ftpscript, OpenMode.Output)
             ftpfile = flder & ftpfile
@@ -1666,17 +1670,30 @@ Err:
             Select Case ftpmethod
                 Case "get"
 
-                    'MsgBox(ftpmode & " " & txtinputfile)
                     FileClose(1)
                     FileOpen(1, ftpscript, OpenMode.Output)
                     If ftpmode = "psftp" Then Print(1, "cd " & flder & Chr(13) & Chr(10)) 'Print #1, "cd " & in_folder
+
                     If ftpmode = "FTP" Then
-                        Print(1, "open " & ftp_host & Chr(13) & Chr(10))
-                        Print(1, usr & Chr(13) & Chr(10))
-                        Print(1, pwd & Chr(13) & Chr(10))
+                        'Print(1, "open " & ftp_host & Chr(13) & Chr(10))
+                        'Print(1, usr & Chr(13) & Chr(10))
+                        'Print(1, pwd & Chr(13) & Chr(10))
+                        'Print(1, "cd " & flder & Chr(13) & Chr(10))
+                        'Print(1, "asc" & Chr(13) & Chr(10))
+
+                        ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+                        Print(1, "open FTP://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
                         Print(1, "cd " & flder & Chr(13) & Chr(10))
-                        Print(1, "asc" & Chr(13) & Chr(10))
+                        'Print(1, "asc" & Chr(13) & Chr(10))
+
+                        ' open FTP: //awsinam:aws#99@aws.inam.gov.mz
+                        'cd /
+                        'cd / Mapulanguene
+                        'get *20220530*
+                        'Close()
+                        'Exit
                     End If
+
                     ' Where file prefix is used
                     If Len(flprefix) = 0 Then
                         Print(1, ftpmethod & " " & ftpfile & Chr(13) & Chr(10))
@@ -1687,18 +1704,21 @@ Err:
                         'fldr = (IO.Path.GetDirectoryName(fldr))
 
                         fldr = (IO.Path.GetDirectoryName(ftpfile))
-
                         fldr = Strings.Replace(fldr, "\", "/") ' Convert file path dlimiters to FTP structure
-                        'fldr = FTP_FilePath(fldr)
-
-                        'Log_Errors(fldr)
-                        'Log_Errors(txtfilePrefix.Text)
                         Print(1, "cd " & fldr & Chr(13) & Chr(10))
-                        'Print(1, "mget *" & flprefix & "*.*" & Chr(13) & Chr(10))
-                        Print(1, "quote PASV" & Chr(13) & Chr(10))
-                        Print(1, "mget *" & flprefix & "*" & Chr(13) & Chr(10))
+
+                        'Print(1, "quote PASV" & Chr(13) & Chr(10))
+                        'Print(1, "mget *" & flprefix & "*" & Chr(13) & Chr(10))
+
+                        ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+                        Print(1, "get *" & flprefix & "*" & Chr(13) & Chr(10))
+
                     End If
-                    Print(1, "bye" & Chr(13) & Chr(10))
+                    'Print(1, "bye" & Chr(13) & Chr(10))
+
+                    ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+                    Print(1, "Close" & Chr(13) & Chr(10))
+                    Print(1, "Exit" & Chr(13) & Chr(10))
                     FileClose(1)
                 Case "put"
                     FileClose(1)
@@ -1718,22 +1738,32 @@ Err:
             End Select
             FileClose(1)
             FileClose(3)
-            '        ' Create batch file to execute FTP script
-            ftpbatch = local_folder & "\ftp_tdcf.bat"
+
+            ' Create batch file to execute FTP script
+            'ftpbatch = local_folder & "\ftp_tdcf.bat"
+            ftpbatch = local_folder & "\ftp_getFiles.bat"
 
             FileOpen(3, ftpbatch, OpenMode.Output)
-
             Print(3, "echo off" & Chr(13) & Chr(10))
             Print(3, Drive1 & Chr(13) & Chr(10))
             Print(3, "CD " & local_folder & Chr(13) & Chr(10))
+            Print(3, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
 
-            If ftpmethod = "get" Then
-                If ftpmode = "FTP" Then Print(3, ftpmode & " -i -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+            ' Improved FTP method that uses WinSCP commands and works even in Filezilla servers
+            ' echo off
+            'C:
+            ' CD C: \ProgramData\Climsoft4\data1
+            '"C:\Program Files (x86)\ClimsoftV4\Bin\WinSCP.com" /ini=nul /script=ftp_getFiles.txt
+
+            'Print(3, System.IO.Path.GetFullPath(Application.StartupPath & "\WinSCP.com /ini=nul /script=" & ftpscript & Chr(13) & Chr(10)))
+
+            If ftpmethod = "Get" Then
+                'If ftpmode = "FTP" Then Print(3, ftpmode & " -i -s: ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             Else
                 'If ftpmode = "FTP" Then Print(3, ftpmode & " -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                ''If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
-                'If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
+                'If ftpmode = "FTP" Then Print(1, ftpmode & "s -a -v -s:ftp_aws.txt" & Chr(13) & Chr(10))
+                If ftpmode = "PSFTP" Then Print(3, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_aws.txt" & Chr(13) & Chr(10))
             End If
 
             Print(3, "echo on" & Chr(13) & Chr(10))
@@ -1904,7 +1934,7 @@ Err:
             Drv = System.IO.Path.GetPathRoot(Application.StartupPath)
             Drv = Strings.Left(Drv, Len(Drv) - 1)
 
-            ftpscript = Lflder & "\ftp_put.txt"
+            ftpscript = Lflder & "\ftp_putFiles.txt"
             'ftpscript = "ftp_put.txt"
 
             'sql = "SELECT * FROM aws_mss"
@@ -1925,33 +1955,42 @@ Err:
             End If
             binFile = Strings.Replace(fl, "tmp", "f") ' Create temporary binary file for convinience of uploading to MSS
             FileOpen(111, ftpscript, OpenMode.Output)
-            If ftpmode = "psftp" Then Print(2, "cd " & Rflder & Chr(13) & Chr(10))
+            'If ftpmode = "psftp" Then Print(2, "cd " & Rflder & Chr(13) & Chr(10))
             If ftpmode = "FTP" Then
-                Print(111, "open " & ftp_host & Chr(13) & Chr(10))
-                Print(111, usr & Chr(13) & Chr(10))
-                Print(111, pwd & Chr(13) & Chr(10))
-                Print(111, "cd " & Rflder & Chr(13) & Chr(10))
-                Print(111, "bin" & Chr(13) & Chr(10))
+                'Print(111, "open " & ftp_host & Chr(13) & Chr(10))
+                Print(111, "open ftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
+                'Print(111, usr & Chr(13) & Chr(10))
+                'Print(111, pwd & Chr(13) & Chr(10))
+            ElseIf ftpmode = "SFTP" Then
+                Print(111, "open sftp://" & usr & ":" & pwd & "@" & ftp_host & Chr(13) & Chr(10))
             End If
-            Print(111, "quote PASV" & Chr(13) & Chr(10))
-            'Print(111, "put" & " " & tmp & Chr(13) & Chr(10))
+            Print(111, "cd " & Rflder & Chr(13) & Chr(10))
+            Print(111, "bin" & Chr(13) & Chr(10))
+            'Print(111, "quote PASV" & Chr(13) & Chr(10))
             Print(111, "put" & " " & fl & Chr(13) & Chr(10))
-            Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
-            Print(111, "bye" & Chr(13) & Chr(10))
+            'Print(111, "rename" & " " & fl & " " & binFile & Chr(13) & Chr(10))
+            Print(111, "mv" & " " & fl & " " & binFile & Chr(13) & Chr(10))
+            'Print(111, "bye" & Chr(13) & Chr(10))
+            Print(111, "close" & Chr(13) & Chr(10))
+            Print(111, "exit" & Chr(13) & Chr(10))
             FileClose(111)
 
             '        ' Create batch file to execute FTP script
-            ftpbatch = Lflder & "\ftp_put.bat"
+            ftpbatch = Lflder & "\ftp_putFiles.bat"
 
             FileOpen(112, ftpbatch, OpenMode.Output)
 
             Print(112, "echo off" & Chr(13) & Chr(10))
             Print(112, Drv & Chr(13) & Chr(10))
             Print(112, "CD " & Lflder & Chr(13) & Chr(10))
-            If ftpmode = "FTP" Then Print(112, ftpmode & " -v -s:ftp_put.txt" & Chr(13) & Chr(10))
-            If ftpmode = "PSFTP" Then Print(112, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_put.txt" & Chr(13) & Chr(10))
+            'If ftpmode = "FTP" Then Print(112, ftpmode & " -v -s:ftp_put.txt" & Chr(13) & Chr(10))
+            'If ftpmode = "PSFTP" Then Print(112, ftpmode & " " & usr & "@" & ftp_host & " -pw " & pwd & " -b ftp_put.txt" & Chr(13) & Chr(10))
+            'Print(112, "echo on" & Chr(13) & Chr(10))
+            'Print(112, "EXIT" & Chr(13) & Chr(10))
+            Print(112, Chr(34) & Path.GetFullPath(Application.StartupPath) & "\WinSCP.com" & Chr(34) & " /ini=nul /script=" & Path.GetFileName(ftpscript) & Chr(13) & Chr(10))
             Print(112, "echo on" & Chr(13) & Chr(10))
-            Print(112, "EXIT" & Chr(13) & Chr(10))
+            Print(112, "close" & Chr(13) & Chr(10))
+            Print(112, "exit" & Chr(13) & Chr(10))
 
             FileClose(112)
 
@@ -2003,6 +2042,7 @@ Err:
 
     End Function
     Sub Process_Input_Record(aws_rs As String, datestring As String)
+
         Dim str As DataSet
         Dim sql2 As String
         Dim GMTDiff As Integer
@@ -2047,7 +2087,14 @@ Err:
 
             If Val(txtPeriod.Text) = 999 Or Not GTSEncode(nat_id) Then Exit Sub ' No processing of messages if entire file processing is selected or the site is NOT set for encoding GTS message
 
+            ' If Val(txtPeriod.Text) > 12 Then Exit Sub ' Not to encode messages over 12 hours old
+
             If IsDate(datestring) Then
+
+                ''Do not encode old observations even if a longer retrieval period is selected. 3 hours late has been set
+                Date_Time = datestring
+                If CLng(txtPeriod.Text) - DateDiff(DateInterval.Hour, Date_Time, Now()) > 3 Then Exit Sub
+
                 ' Convert time to UTC
                 GMTDiff = CDbl(txtGMTDiff.Text)
                 Date_Time = DateAdd("h", -1 * GMTDiff, datestring)
@@ -2232,6 +2279,7 @@ Err:
     End Sub
 
     Sub update_main_db(rs_aws As String, datestr As String, stn As String)
+
         On Error GoTo Err
 
         'Instantiate the "dataEntryGlobalRoutines" in order to access its methods.
@@ -2275,12 +2323,12 @@ Err:
                     End If
 
                     sql = "INSERT INTO observationfinal " &
-                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag) " &
-                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "','" & flgs & "';"
+                        "(recordedFrom, describedBy, obsDatetime, obsLevel, obsValue,flag, qcStatus) " &
+                        "SELECT '" & stn & "', '" & .Rows(i).Item("Climsoft_Element") & "', '" & mysqldate & "','surface','" & obs & "','" & flgs & "','1'" & ";"
 
                     'Log_Errors(sql)
                     cmd.CommandText = sql
-                    cmd.ExecuteNonQuery()
+                    cmd.ExecuteNonQuery() '
 
                 End If
             Next
@@ -2296,33 +2344,43 @@ Err:
         Log_Errors(Err.Number & ":" & Err.Description & "  at Update_main_db")
     End Sub
     Function QC_Limits(stn As String, elms As String, dts As String, obs As String, L_limit As String, U_limit As String) As Boolean
+        If Len(L_limit) = 0 Or Len(U_limit) = 0 Then Return False
         QC_Limits = False
+
         Try
+
 
             If Val(obs) < Val(L_limit) Or Val(obs) > U_limit Then
                 QC_Limits = True
-                Dim errdata, limittype As String
-                'Get full path for the Subsets Output file file and create the file
-                fl = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_qc_errors.csv"
+                Dim QC_Err, errdata, limittype As String
+
+                'Get full path for the QC directory
+                QC_Err = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\QC"
+
+                ' Create the QC Directory if not existing and define the QC errors output file
+                If Not Directory.Exists(QC_Err) Then Directory.CreateDirectory(QC_Err)
+
+                fl = QC_Err & "\aws_qc_errors.csv"
+
                 FileOpen(21, fl, OpenMode.Append)
 
-                If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
-                If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
+                    If Val(obs) < Val(L_limit) Then limittype = "Lower Limit"
+                    If Val(obs) > Val(U_limit) Then limittype = "Upper Limit"
 
-                errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
+                    errdata = stn & "," & elms & "," & dts & "," & obs & "," & limittype
 
-                PrintLine(21, errdata)
-                FileClose(21)
+                    PrintLine(21, errdata)
+                    FileClose(21)
 
-                txtQC.Text = "QC Errors saved in file: " & fl
-                txtQC.Refresh()
+                    txtQC.Text = "QC Errors saved In file: " & fl
+                    txtQC.Refresh()
 
-                'Log_Errors("QC Errors saved in file: " & fl)
-            End If
+                    'Log_Errors("QC Errors saved in file: " & fl)
+                End If
             'End If
         Catch ex As Exception
             FileClose(21)
-            'Log_Errors(ex.HResult & ":" & ex.Message & "  at QC_Limits")
+            Log_Errors(ex.HResult & ":" & ex.Message & "  at QC_Limits")
         End Try
 
     End Function
@@ -3944,14 +4002,16 @@ Err:
             Dim rows() As String = source.Split({Environment.NewLine}, StringSplitOptions.None)
 
             For i As Integer = 0 To rows(0).Split(delimitter).Length - 1
+
                 Dim column As String = rows(0).Split(delimitter)(i)
                 dt.Columns.Add(If(False, column, "column" & i + 1))
             Next
-            'MsgBox(hdrs)
+
             For i As Integer = If(False, 1, 0) To rows.Length - 1
                 Dim dr As DataRow = dt.NewRow
 
                 For x As Integer = hdrs To rows(i).Split(delimitter).Length - 1
+
                     If x <= dt.Columns.Count - 1 Then
                         dr(x) = rows(i).Split(delimitter)(x)
                     Else
@@ -3964,9 +4024,9 @@ Err:
             flds = dt.Columns.Count
             recs = dt.Rows.Count
             Text_To_DataTable = dt
-            'MsgBox(dt.Rows(0).Item)
+
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Log_Errors(ex.Message)
             Text_To_DataTable = dt
         End Try
     End Function
@@ -4164,7 +4224,6 @@ Err:
                 For i = 0 To .Rows.Count - 1
                     If IsDBNull(dattable.Rows(rw).Item(i)) Then Continue For
                     dt = dattable.Rows(rw).Item(i)
-                    'Log_Errors(.Rows(i).Item("Element_abbreviation") & " " & dt)
 
                     Select Case .Rows(i).Item("Element_abbreviation")
                         Case "Date/time"
@@ -4193,6 +4252,7 @@ Err:
                 Next
 
                 If IsDate(Date_s) And Time_s <> "" Then
+                    'Log_Errors(Date_s & " " & Time_s)
                     Return Date_s & " " & Time_s
                 End If
 
@@ -4395,23 +4455,34 @@ Err:
             yyyy = DateAndTime.Year(Now())
 
             ' Compute Time bound prefixes
+
             Select Case Prfx
                 Case "yyyymmdd"
                     Return yyyy & mm & dd
                 Case "yyyy-mm-dd"
                     Return yyyy & "-" & mm & "-" & dd
+                Case "yyyy_mm_dd"
+                    Return yyyy & "_" & mm & "_" & dd
                 Case "ddmmyyyy"
                     Return dd & mm & yyyy
                 Case "dd-mm-yyyy"
                     Return dd & "-" & mm & "-" & yyyy
+                Case "dd_mm_yyyy"
+                    Return dd & "_" & mm & "_" & yyyy
                 Case "yyyymm"
                     Return yyyy & mm
+                Case "yyyy"
+                    Return yyyy
                 Case "ddmm"
                     Return dd & mm
                 Case "yyyy-mm"
                     Return yyyy & "-" & mm
+                Case "yyyy_mm"
+                    Return yyyy & "_" & mm
                 Case "mm-yyyy"
                     Return mm & "-" & yyyy
+                Case "mm_yyyy"
+                    Return mm & "_" & yyyy
                 Case Else ' Non Time bound
                     Return Prfx
             End Select
@@ -4453,6 +4524,182 @@ Err:
     '    '    FTP_FilePath = FTP_FilePath & fchar
     '    'Next
     'End Function
+
+    Function Process_InputFiles(dts As DataSet) As Boolean
+        Dim hdrows As Integer
+        Dim rs As New DataSet
+        Dim dTable As DataTable
+        Dim datestring, infile, delmtr, delimiter_ascii, txtqlfr, flg, aws_data, AWSsite, fls, aws_input_file, aws_input_file_flds As String
+
+        'Try
+
+        With dts.Tables("aws_sites")
+
+                For n = 0 To .Rows.Count - 1
+                Try
+                    If IsDBNull(.Rows(n).Item("InputFile")) Or .Rows(n).Item("OperationalStatus") = 0 Then Continue For
+                    fls = Path.GetFileName(.Rows(n).Item("InputFile"))
+                    aws_input_file = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\" & fls
+                    'Log_Errors(fls)
+
+                    'End If
+
+                    ' Check if the input data file was retrieved
+                    If Not File.Exists(aws_input_file) Then
+                        Log_Errors(" Could not find " & aws_input_file)
+                        Continue For
+                    End If
+
+                    nat_id = .Rows(n).Item("SiteID")
+
+                    ' Get message header for the station if exist. It has 11 characters. Otherwise use National bulletin header
+                    If Not IsDBNull(.Rows(n).Item("GTSHeader")) And Len(.Rows(n).Item("GTSHeader")) = 11 Then
+                        msg_header = .Rows(n).Item("GTSHeader")
+                    Else
+                        msg_header = txtMsgHeader.Text
+                    End If
+
+                    flg = ""
+                    If Not IsDBNull(.Rows(n).Item("MissingDataFlag")) Then
+                        If Len(.Rows(n).Item("MissingDataFlag")) <> 0 Then flg = .Rows(n).Item("MissingDataFlag") 'Get the missing data flag
+                    End If
+
+                    AWSsite = .Rows(n).Item("DataStructure")
+                    Get_Station_Settings(AWSsite, delmtr, hdrows, txtqlfr, rs)
+
+                    ' Compute Delimiter ascii value
+                    Select Case delmtr
+                        Case "tab"
+                            delimiter_ascii = 9
+                        Case "comma"
+                            delimiter_ascii = 44
+                        Case "space"
+                            delimiter_ascii = 32
+                        Case "semicolon"
+                            delimiter_ascii = 59
+                        Case Else
+                            delimiter_ascii = Asc(delmtr)
+                    End Select
+
+                    txtStatus.Text = "Organising the input file"
+
+                    ' Assign a variable to an output file without header rows
+                    aws_input_file_flds = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data\aws_input.txt" 'fso.GetParentFolderName(App.Path) & "\data\aws_input.txt"
+
+                    FileOpen(10, aws_input_file, OpenMode.Input)
+                    FileOpen(11, aws_input_file_flds, OpenMode.Output)
+
+                    ' Skip input file if it is empty to avoid causing EOF errors
+                    If EOF(10) Then
+                        FileClose(10)
+                        FileClose(11)
+                        Continue For
+                    End If
+
+                    ' Skip header Records if present
+                    If Val(hdrows) > 0 Then 'Retrieve header rows from station parameters
+                        For j = 0 To Val(hdrows) - 1
+                            aws_data = LineInput(10)
+                        Next
+                    End If
+
+                    ' Output the data rows into a file without headers
+                    Do While EOF(10) = False
+                        aws_data = LineInput(10)
+                        If InStr(aws_data, Chr(delimiter_ascii)) > 0 Then PrintLine(11, aws_data)
+                    Loop
+
+                    FileClose(10)
+                    FileClose(11)
+
+                    Dim colmn, dtCol As Integer
+                    Dim rws As Long
+                    Dim x, dtFmt As String
+
+                    ' Convert the input file to a data table for ease of referencing the records therein.
+                    dTable = Text_To_DataTable(aws_input_file_flds, ChrW(delimiter_ascii), 0, colmn, rws)
+
+                    For k = 0 To rws - 2
+
+                        Process_Status("Processing input record " & k + 1 & " of " & rws)
+                        ' Get date and time for the current record
+                        datestring = Get_DateStamp(AWSsite, dTable, k)
+
+                        'If datestring = "" Then Continue For
+
+                        'Skip older records
+                        If InStr(datestring, txtqlfr) > 0 And Len(txtqlfr) > 0 Then datestring = Strings.Mid(datestring, 2, Len(datestring) - 2) ' Text qualifier character exits. It must be excluded from the time stamp data
+
+                        'Skip records with invalid date stamp
+                        If IsDate(datestring) Then
+
+                            ' Compare current time with time stamp on hourly basis. Skip records outside the time range
+                            If DateDiff("h", datestring, txtDateTime.Text) > Val(txtPeriod.Text) And Val(txtPeriod.Text) <> 999 Then Continue For
+
+                            Process_Status("Processing AWS Record " & k + 1 & " of " & rws - 1)
+
+                            ' Update obsv value column in the data structure
+                            For j = 0 To colmn - 1
+                                If Not IsDBNull(dTable.Rows(k).Item(j)) Then
+                                    x = dTable.Rows(k).Item(j)
+
+                                    If InStr(x, txtqlfr) > 0 And Len(txtqlfr) > 0 Then
+                                        x = Strings.Mid(x, 2, Len(x) - 2)
+                                    End If
+
+                                    AwsRecord_Update(x, j, flg, AWSsite)
+                                Else
+                                    Continue For
+                                End If
+                            Next j
+
+                            ' Analyse the datetime string and process the data if the encoding time interval matches datetime value
+                            Dim sqlv As String
+                            sqlv = "SELECT * FROM " & AWSsite & " order by Cols"
+                            rs = GetDataSet(AWSsite, sqlv)
+
+                            'Don't process the record if having invalid datestamp
+                            'If IsDate(datestring) Then
+
+                            'Update the record into the database
+                            If Val(txtPeriod.Text) = 999 Then
+
+                                ' Process the entire input file irespective of time difference
+                                Process_Input_Record(AWSsite, datestring)
+                            Else
+                                ' Process records for the last selected hours
+                                If DateDiff("h", datestring, txtDateTime.Text) <= Val(txtPeriod.Text - 1) Then
+                                    Process_Input_Record(AWSsite, datestring)
+                                End If
+                            End If
+                            'End If
+                        End If
+
+                    Next k
+
+                    ' Delete input file from base station server if so selected
+                    If chkDeleteFile.Checked Then
+                        If Not FTP_Delete_InputFile(infile) Then
+                            Log_Errors("Can't Delete Input File") 'MsgBox "Can't Delete Input File"
+                        End If
+                    End If
+
+                Catch ex As Exception
+                    Me.Cursor = Cursors.Default
+                    Log_Errors(ex.Message & " at Process_InputFiles")
+                    'Return False
+                End Try
+            Next
+
+        End With
+            Me.Cursor = Cursors.Default
+            Return True
+        'Catch ex As Exception
+        'Me.Cursor = Cursors.Default
+        'Log_Errors(ex.Message & " at Process_InputFiles")
+        'Return False
+        'End Try
+    End Function
 
 End Class
 

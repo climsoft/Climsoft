@@ -148,6 +148,7 @@ Partial Class ucrSynopticRA1
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblHour = New System.Windows.Forms.Label()
         Me.btnTDCF = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -1247,7 +1248,7 @@ Partial Class ucrSynopticRA1
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(461, 589)
+        Me.btnCancel.Location = New System.Drawing.Point(391, 589)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(60, 23)
         Me.btnCancel.TabIndex = 59
@@ -1277,7 +1278,7 @@ Partial Class ucrSynopticRA1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(529, 589)
+        Me.btnView.Location = New System.Drawing.Point(463, 589)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
         Me.btnView.TabIndex = 61
@@ -1297,7 +1298,7 @@ Partial Class ucrSynopticRA1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(733, 589)
+        Me.btnHelp.Location = New System.Drawing.Point(751, 589)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 64
@@ -1307,7 +1308,7 @@ Partial Class ucrSynopticRA1
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(392, 589)
+        Me.btnClear.Location = New System.Drawing.Point(319, 589)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(60, 23)
         Me.btnClear.TabIndex = 58
@@ -1317,7 +1318,7 @@ Partial Class ucrSynopticRA1
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(189, 589)
+        Me.btnSave.Location = New System.Drawing.Point(103, 589)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
         Me.btnSave.TabIndex = 55
@@ -1327,7 +1328,7 @@ Partial Class ucrSynopticRA1
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(323, 589)
+        Me.btnDelete.Location = New System.Drawing.Point(247, 589)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(60, 23)
         Me.btnDelete.TabIndex = 57
@@ -1337,7 +1338,7 @@ Partial Class ucrSynopticRA1
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(123, 589)
+        Me.btnAddNew.Location = New System.Drawing.Point(31, 589)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
         Me.btnAddNew.TabIndex = 60
@@ -1347,7 +1348,7 @@ Partial Class ucrSynopticRA1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(256, 589)
+        Me.btnUpdate.Location = New System.Drawing.Point(175, 589)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
         Me.btnUpdate.TabIndex = 56
@@ -1357,7 +1358,7 @@ Partial Class ucrSynopticRA1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(666, 589)
+        Me.btnClose.Location = New System.Drawing.Point(679, 589)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 63
@@ -1479,7 +1480,7 @@ Partial Class ucrSynopticRA1
         '
         'btnTDCF
         '
-        Me.btnTDCF.Location = New System.Drawing.Point(598, 589)
+        Me.btnTDCF.Location = New System.Drawing.Point(535, 589)
         Me.btnTDCF.Name = "btnTDCF"
         Me.btnTDCF.Size = New System.Drawing.Size(60, 23)
         Me.btnTDCF.TabIndex = 62
@@ -1487,9 +1488,19 @@ Partial Class ucrSynopticRA1
         Me.btnTDCF.Text = "TDCF"
         Me.btnTDCF.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(607, 589)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(60, 23)
+        Me.btnPush.TabIndex = 852
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'ucrSynopticRA1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnTDCF)
         Me.Controls.Add(Me.lblHour)
         Me.Controls.Add(Me.chkAutoFillValues)
@@ -1756,4 +1767,5 @@ Partial Class ucrSynopticRA1
     Friend WithEvents lblMonth As Label
     Friend WithEvents lblHour As Label
     Friend WithEvents btnTDCF As Button
+    Friend WithEvents btnPush As Button
 End Class

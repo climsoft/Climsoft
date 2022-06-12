@@ -148,7 +148,7 @@
             dbcon.ConnectionString = dbConnectionString
             dbcon.Open()
 
-            sql = "select elementId, abbreviation from obselement where elementId > 880 ;"
+            sql = "select elementId, abbreviation from obselement;" ' where elementId > 880 ;"
 
             da1 = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, dbcon)
             ds1.Clear()

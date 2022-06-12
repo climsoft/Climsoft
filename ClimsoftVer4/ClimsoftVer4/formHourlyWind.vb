@@ -1190,6 +1190,13 @@ Public Class form_hourlywind
         End If
     End Sub
 
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_hourlywind") Then
+            MsgBox("Data Pushed to remote server successfully")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 
     Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
         'Open form for displaying data transfer progress

@@ -417,7 +417,7 @@ Public Class formProductsSelectCriteria
                            Order By recordedFrom, describedBy, YY, MM) As tt
                            where DF >= 0 group by YY, MM;"
 
-                    ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                    '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "select StationID,station_Name,Lat, Lon, Elev,YY,MM," & elmcolmn & " from (Select recordedFrom As StationID, describedBy,stationName As Station_Name, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
@@ -442,7 +442,7 @@ Public Class formProductsSelectCriteria
                            group by StationID, describedBy,year(obsDatetime),month(obsDatetime)) as t Where DF >= 0 
                            group by StationID, Element_Code, YY order by StationID, Element_Code, YY;"
 
-                        ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                        '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                         'sql = "Select recordedFrom As StationID, stationName As Station_Name, describedBy as Element_Code, latitude As Lat, longitude As Lon, elevation As Elev, YY" & xpivot & " from (Select recordedFrom, describedBy,stationName, latitude, longitude, elevation, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                         '   From observationfinal inner Join station On stationId = recordedFrom
                         '   Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')
@@ -495,7 +495,7 @@ Public Class formProductsSelectCriteria
                            group by StationID, describedBy, YY) as ttt
                            where TM = 12 Group by StationID, YY;"
 
-                    ' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
+                    '' The following code is special for KMD since most of the data doesn't have full month days hence may be unable to produce suffient summaries
                     'sql = "Select StationID,Station_Name,Lat, Lon, Elev, YY, " & elmcolmn & " from(select StationID, Station_Name, describedBy, Lat, Lon, Elev, YY, Count(YY) As TM, " & SumAvg & "(value) As value from (Select StationID, Station_Name, describedBy, Lat, Lon, Elev, YY, MM, Value from (Select recordedFrom As StationID, stationName As Station_Name, describedBy, latitude As Lat, longitude As Lon, elevation As Elev, Year(obsDatetime) As YY, Month(obsDatetime) As MM, " & SumAvg & "(obsvalue) As value, Count(obsValue) As Days, Count(obsValue) - Day(Last_Day(obsDatetime)) as DF
                     '       From observationfinal inner Join station On stationId = recordedFrom
                     '       Where (RecordedFrom = " & stnlist & ") AND (describedBy = " & elmlist & ") and (obsDatetime between '" & sdate & "' and '" & edate & "')

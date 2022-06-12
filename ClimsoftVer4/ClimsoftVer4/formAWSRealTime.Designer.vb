@@ -862,9 +862,9 @@ Partial Class formAWSRealTime
         Me.lblInformation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInformation.Location = New System.Drawing.Point(149, 0)
         Me.lblInformation.Name = "lblInformation"
-        Me.lblInformation.Size = New System.Drawing.Size(151, 15)
+        Me.lblInformation.Size = New System.Drawing.Size(155, 15)
         Me.lblInformation.TabIndex = 0
-        Me.lblInformation.Text = "Processinf Information"
+        Me.lblInformation.Text = "Processing Information"
         '
         'grpElements
         '
@@ -1056,7 +1056,7 @@ Partial Class formAWSRealTime
         Me.pnlSites.AutoSize = True
         Me.pnlSites.BackColor = System.Drawing.Color.Linen
         Me.pnlSites.Controls.Add(Me.grpSites)
-        Me.pnlSites.Location = New System.Drawing.Point(199, 498)
+        Me.pnlSites.Location = New System.Drawing.Point(197, 447)
         Me.pnlSites.Name = "pnlSites"
         Me.pnlSites.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.pnlSites.Size = New System.Drawing.Size(757, 468)
@@ -2259,10 +2259,10 @@ Partial Class formAWSRealTime
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(960, 615)
+        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlProcessing)
         Me.Controls.Add(Me.pnlMsgEncoding)
         Me.Controls.Add(Me.pnlControl)
-        Me.Controls.Add(Me.pnlSites)
         Me.Controls.Add(Me.pnlServers)
         Me.Controls.Add(Me.pnlDataStructures)
         Me.KeyPreview = True

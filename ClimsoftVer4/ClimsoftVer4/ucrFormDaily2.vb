@@ -666,4 +666,11 @@ Public Class ucrFormDaily2
         End Try
     End Function
 
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_daily2") Then
+            MsgBox("Data Pushed to remote server successfully")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

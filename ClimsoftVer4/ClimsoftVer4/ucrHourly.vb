@@ -466,5 +466,13 @@
 
     End Sub
 
-
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_hourly") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 End Class

@@ -906,6 +906,15 @@
         Me.Close()
     End Sub
 
+    Private Sub btnPush_Click(sender As Object, e As EventArgs) Handles btnPush.Click
+        Me.Cursor = Cursors.WaitCursor
+        If FldName.DataPush("form_agro1") Then
+            MsgBox("Data Pushed to remote server successfully")
+        Else
+            MsgBox("Data Push Failed!")
+        End If
+        Me.Cursor = Cursors.Default
+    End Sub
 
     Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
         Help.ShowHelp(Me, Application.StartupPath & "\climsoft4.chm", "keyentryoperations.htm#form_agro1")
@@ -1006,6 +1015,98 @@
         frmDataTransferProgress.lblDataTransferProgress.Text = "Data transfer complete !"
     End Sub
 
+    'Function DataPushs(tbl As String) As Boolean
+    '    Dim outDataDir, outDataFile, connstr, flds As String
+    '    Dim conn0 As New MySql.Data.MySqlClient.MySqlConnection
+    '    Dim a As MySql.Data.MySqlClient.MySqlDataAdapter
+    '    Dim s As New DataSet
+    '    Dim qry As MySql.Data.MySqlClient.MySqlCommand
+    '    Dim builder As New Common.DbConnectionStringBuilder()
 
+    '    ' Backup the form data into text file
+    '    Try
+    '        outDataDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\Climsoft4\data"
+
+    '        ' Create the directory if not existing
+    '        If Not IO.Directory.Exists(outDataDir) Then
+    '            IO.Directory.CreateDirectory(outDataDir)
+    '        End If
+    '        outDataFile = outDataDir & "\" & tbl & ".csv"
+
+    '        If IO.File.Exists(outDataFile) Then
+    '            IO.File.Delete(outDataFile)
+    '        End If
+    '        outDataFile = Strings.Replace(outDataFile, "\", "/")
+
+    '        sql = "select * from " & tbl & " into outfile '" & outDataFile & "' fields terminated by ',';"
+
+    '        conn.ConnectionString = frmLogin.txtusrpwd.Text
+
+    '        conn.Open()
+    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn)
+    '        qry.CommandTimeout = 0
+
+    '        'Execute query
+    '        qry.ExecuteNonQuery()
+    '        conn.Close()
+
+    '    Catch ex As Exception
+    '        conn.Close()
+    '        MsgBox(ex.Message)
+    '        Return False
+    '    End Try
+
+    '    ' Push data to the server
+    '    Try
+
+    '        builder.ConnectionString = "" 'frmLogin.txtusrpwd.Text
+    '        builder("server") = "localhost"
+    '        builder("database") = "mariadb_climsoft_db_v4"
+    '        builder("port") = "3308"
+    '        builder("uid") = frmLogin.txtUsername.Text
+    '        builder("pwd") = frmLogin.txtPassword.Text
+
+    '        connstr = builder.ConnectionString & ";Convert Zero Datetime=True"
+    '        conn0.ConnectionString = connstr
+    '        conn0.Open()
+
+    '        sql = "SELECT * FROM " & tbl & ";"
+    '        a = New MySql.Data.MySqlClient.MySqlDataAdapter(sql, conn0)
+    '        s.Clear()
+    '        a.Fill(s, "frmtbl")
+
+    '        With s.Tables("frmtbl")
+    '            flds = .Columns.Item(0).Caption
+    '            For i = 1 To .Columns.Count - 1
+    '                flds = flds & "," & .Columns.Item(i).Caption
+    '            Next
+    '        End With
+
+    '        sql = "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+    '                   /*!40101 SET NAMES utf8mb4 */;
+    '                   /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+    '                   /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+    '                   /*!40000 ALTER TABLE `" & tbl & "` DISABLE KEYS */;
+    '                   LOAD DATA LOCAL INFILE '" & outDataFile & "' REPLACE INTO TABLE " & tbl & " FIELDS TERMINATED BY ',' (" & flds & ");
+    '                   /*!40000 ALTER TABLE `" & tbl & "` ENABLE KEYS */;
+    '                   /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+    '                   /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+    '                   /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;"
+
+    '        qry = New MySql.Data.MySqlClient.MySqlCommand(sql, conn0)
+    '        qry.CommandTimeout = 0
+
+    '        'Execute query
+    '        qry.ExecuteNonQuery()
+    '        conn0.Close()
+
+
+    '    Catch ex As Exception
+    '        conn0.Close()
+    '        MsgBox(ex.Message)
+    '        Return False
+    '    End Try
+    '    Return True
+    'End Function
 
 End Class

@@ -50,6 +50,7 @@ Partial Class formDaily1
         Me.btnMoveNext = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnMoveFirst = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         Me.GroupBoxCommands.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -142,6 +143,7 @@ Partial Class formDaily1
         '
         'GroupBoxCommands
         '
+        Me.GroupBoxCommands.Controls.Add(Me.btnPush)
         Me.GroupBoxCommands.Controls.Add(Me.btnCommit)
         Me.GroupBoxCommands.Controls.Add(Me.chkRepeatEntry)
         Me.GroupBoxCommands.Controls.Add(Me.btnView)
@@ -169,9 +171,9 @@ Partial Class formDaily1
         'btnCommit
         '
         Me.btnCommit.Enabled = False
-        Me.btnCommit.Location = New System.Drawing.Point(86, 45)
+        Me.btnCommit.Location = New System.Drawing.Point(84, 45)
         Me.btnCommit.Name = "btnCommit"
-        Me.btnCommit.Size = New System.Drawing.Size(64, 23)
+        Me.btnCommit.Size = New System.Drawing.Size(55, 23)
         Me.btnCommit.TabIndex = 1171
         Me.btnCommit.Text = "Save"
         Me.btnCommit.UseVisualStyleBackColor = True
@@ -189,9 +191,9 @@ Partial Class formDaily1
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(398, 45)
+        Me.btnView.Location = New System.Drawing.Point(352, 45)
         Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(64, 23)
+        Me.btnView.Size = New System.Drawing.Size(55, 23)
         Me.btnView.TabIndex = 1176
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
@@ -225,9 +227,9 @@ Partial Class formDaily1
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(554, 45)
+        Me.btnHelp.Location = New System.Drawing.Point(549, 45)
         Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(64, 23)
+        Me.btnHelp.Size = New System.Drawing.Size(55, 23)
         Me.btnHelp.TabIndex = 1177
         Me.btnHelp.Text = "Help"
         Me.btnHelp.UseVisualStyleBackColor = True
@@ -235,18 +237,18 @@ Partial Class formDaily1
         'btnClear
         '
         Me.btnClear.Enabled = False
-        Me.btnClear.Location = New System.Drawing.Point(320, 45)
+        Me.btnClear.Location = New System.Drawing.Point(285, 45)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(64, 23)
+        Me.btnClear.Size = New System.Drawing.Size(55, 23)
         Me.btnClear.TabIndex = 1175
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(242, 45)
+        Me.btnDelete.Location = New System.Drawing.Point(218, 45)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(64, 23)
+        Me.btnDelete.Size = New System.Drawing.Size(55, 23)
         Me.btnDelete.TabIndex = 1174
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -272,9 +274,9 @@ Partial Class formDaily1
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(164, 45)
+        Me.btnUpdate.Location = New System.Drawing.Point(151, 45)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(64, 23)
+        Me.btnUpdate.Size = New System.Drawing.Size(55, 23)
         Me.btnUpdate.TabIndex = 1173
         Me.btnUpdate.Text = "Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
@@ -308,9 +310,9 @@ Partial Class formDaily1
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(476, 45)
+        Me.btnClose.Location = New System.Drawing.Point(482, 45)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(64, 23)
+        Me.btnClose.Size = New System.Drawing.Size(55, 23)
         Me.btnClose.TabIndex = 1178
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
@@ -324,6 +326,15 @@ Partial Class formDaily1
         Me.btnMoveFirst.TabIndex = 1182
         Me.btnMoveFirst.Text = "|<<"
         Me.btnMoveFirst.UseVisualStyleBackColor = True
+        '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(419, 45)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1188
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
         '
         'formDaily1
         '
@@ -379,4 +390,5 @@ Partial Class formDaily1
     Friend WithEvents btnMoveNext As Button
     Friend WithEvents btnClose As Button
     Friend WithEvents btnMoveFirst As Button
+    Friend WithEvents btnPush As Button
 End Class

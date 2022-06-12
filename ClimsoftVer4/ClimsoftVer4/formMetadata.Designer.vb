@@ -496,7 +496,7 @@ Partial Class formMetadata
         'txtStationType
         '
         Me.txtStationType.FormattingEnabled = True
-        Me.txtStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR", ""})
+        Me.txtStationType.Items.AddRange(New Object() {"AGROMET", "CLIMATE", "SYNOPTIC", "RAINFALL", "UPPER AIR"})
         Me.txtStationType.Location = New System.Drawing.Point(518, 171)
         Me.txtStationType.Name = "txtStationType"
         Me.txtStationType.Size = New System.Drawing.Size(180, 21)

@@ -108,6 +108,7 @@ Partial Class ucrHourlyWind
         Me.btnAddNew = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnPush = New System.Windows.Forms.Button()
         lblYear = New System.Windows.Forms.Label()
         CType(Me.dtbRecords, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -895,7 +896,7 @@ Partial Class ucrHourlyWind
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(349, 505)
+        Me.btnCancel.Location = New System.Drawing.Point(316, 505)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(60, 23)
         Me.btnCancel.TabIndex = 35
@@ -905,7 +906,7 @@ Partial Class ucrHourlyWind
         '
         'btnView
         '
-        Me.btnView.Location = New System.Drawing.Point(417, 505)
+        Me.btnView.Location = New System.Drawing.Point(379, 505)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(60, 23)
         Me.btnView.TabIndex = 36
@@ -915,7 +916,7 @@ Partial Class ucrHourlyWind
         '
         'btnHelp
         '
-        Me.btnHelp.Location = New System.Drawing.Point(552, 505)
+        Me.btnHelp.Location = New System.Drawing.Point(559, 505)
         Me.btnHelp.Name = "btnHelp"
         Me.btnHelp.Size = New System.Drawing.Size(60, 23)
         Me.btnHelp.TabIndex = 38
@@ -925,7 +926,7 @@ Partial Class ucrHourlyWind
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(280, 505)
+        Me.btnClear.Location = New System.Drawing.Point(253, 505)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(60, 23)
         Me.btnClear.TabIndex = 34
@@ -935,7 +936,7 @@ Partial Class ucrHourlyWind
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(77, 505)
+        Me.btnSave.Location = New System.Drawing.Point(64, 505)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(60, 23)
         Me.btnSave.TabIndex = 30
@@ -945,7 +946,7 @@ Partial Class ucrHourlyWind
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(211, 505)
+        Me.btnDelete.Location = New System.Drawing.Point(190, 505)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(60, 23)
         Me.btnDelete.TabIndex = 32
@@ -955,7 +956,7 @@ Partial Class ucrHourlyWind
         '
         'btnAddNew
         '
-        Me.btnAddNew.Location = New System.Drawing.Point(11, 505)
+        Me.btnAddNew.Location = New System.Drawing.Point(1, 505)
         Me.btnAddNew.Name = "btnAddNew"
         Me.btnAddNew.Size = New System.Drawing.Size(60, 23)
         Me.btnAddNew.TabIndex = 33
@@ -965,7 +966,7 @@ Partial Class ucrHourlyWind
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(144, 505)
+        Me.btnUpdate.Location = New System.Drawing.Point(127, 505)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(60, 23)
         Me.btnUpdate.TabIndex = 31
@@ -975,7 +976,7 @@ Partial Class ucrHourlyWind
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(486, 505)
+        Me.btnClose.Location = New System.Drawing.Point(496, 505)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(60, 23)
         Me.btnClose.TabIndex = 37
@@ -983,10 +984,20 @@ Partial Class ucrHourlyWind
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnPush
+        '
+        Me.btnPush.Location = New System.Drawing.Point(442, 505)
+        Me.btnPush.Name = "btnPush"
+        Me.btnPush.Size = New System.Drawing.Size(51, 23)
+        Me.btnPush.TabIndex = 1156
+        Me.btnPush.Text = "Push"
+        Me.btnPush.UseVisualStyleBackColor = True
+        '
         'ucrHourlyWind
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnPush)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnHelp)
@@ -1167,4 +1178,5 @@ Partial Class ucrHourlyWind
     Friend WithEvents btnAddNew As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnClose As Button
+    Friend WithEvents btnPush As Button
 End Class
