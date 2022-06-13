@@ -48,6 +48,8 @@ Public Class frmProducts
         'bind the combobox to dictionary 
         cboProductsCategory.DataSource = New BindingSource(dctProductCategories, Nothing)
 
+        cboProductsCategory.SelectedIndex = -1
+
         'translate form controls
         ClsTranslations.TranslateForm(Me)
         'todo in future this will be done automatically by TranslateForms(Me)
