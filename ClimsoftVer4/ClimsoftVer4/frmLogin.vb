@@ -233,7 +233,7 @@ Public Class frmLogin
 
         refreshDatabases()
 
-        linkLabelLanguage.Text = My.Settings.languageName
+        lblLanguage.Text = My.Settings.languageName
         ClsTranslations.TranslateForm(Me)
     End Sub
 
@@ -346,7 +346,7 @@ Public Class frmLogin
 
     Private Sub linkLabelLanguage_Click(sender As Object, e As EventArgs) Handles linkLabelLanguage.Click
         frmLanguage.ShowDialog()
-        linkLabelLanguage.Text = My.Settings.languageName
+        lblLanguage.Text = My.Settings.languageName
         ClsTranslations.TranslateForm(Me)
     End Sub
 End Class

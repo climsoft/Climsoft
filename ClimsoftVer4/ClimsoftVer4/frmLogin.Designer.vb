@@ -181,24 +181,23 @@ Partial Class frmLogin
         '
         'linkLabelLanguage
         '
-        Me.linkLabelLanguage.AutoSize = True
         Me.linkLabelLanguage.Cursor = System.Windows.Forms.Cursors.Hand
         Me.linkLabelLanguage.ForeColor = System.Drawing.Color.Blue
-        Me.linkLabelLanguage.Location = New System.Drawing.Point(329, 214)
+        Me.linkLabelLanguage.Location = New System.Drawing.Point(218, 214)
         Me.linkLabelLanguage.Name = "linkLabelLanguage"
-        Me.linkLabelLanguage.Size = New System.Drawing.Size(55, 13)
+        Me.linkLabelLanguage.Size = New System.Drawing.Size(98, 28)
         Me.linkLabelLanguage.TabIndex = 12
         Me.linkLabelLanguage.Tag = ""
-        Me.linkLabelLanguage.Text = "Language"
+        Me.linkLabelLanguage.Text = "Change language:"
         '
         'lblLanguage
         '
-        Me.lblLanguage.Location = New System.Drawing.Point(218, 214)
+        Me.lblLanguage.Location = New System.Drawing.Point(335, 214)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(105, 28)
         Me.lblLanguage.TabIndex = 13
         Me.lblLanguage.Tag = "Password"
-        Me.lblLanguage.Text = "Change language"
+        Me.lblLanguage.Text = "language"
         '
         'frmLogin
         '
